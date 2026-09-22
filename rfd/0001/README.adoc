@@ -1,0 +1,141 @@
+:authors: Darwin D Wu <darwin67@users.noreply.github.com>
+:state: prediscussion
+:discussion:
+:labels: product, maps, visualization, interaction, accessibility
+
+= RFD 1 Historical exploration and visual interactions
+
+== Goal
+
+Lekishi is a passion project for exploring what happened across the world and
+how people, societies, and institutions interacted over time. It should be
+engaging to explore, not merely a database of pins. Begin in the browser while
+keeping native devices and native applications open as future delivery options.
+
+== Established direction
+
+Start with a globe and narrow continuously into regional and local exploration.
+Use a maps-application layout with Civilization-inspired readable terrain,
+symbolic settlements, and visible interactions. Globe and local views are scales
+of one experience, not competing designs or unrelated modes.
+
+War is one interaction among many. Trade, diplomacy, missions, learning,
+religious transmission and division, institutional development, and local
+adaptation matter equally. States, cultures, religions, and companies are not
+interchangeable entities or mutually exclusive territorial categories.
+
+The Civilization reference describes clarity, discovery, and the pleasure of
+following interactions. It does not request a playable strategy simulation,
+resource economy, alternate-history engine, or invented historical certainty.
+
+== Proposed experience
+
+=== Globe to region to event
+
+At globe scale, display a sparse selection of events or clusters in a selected
+time window. Reveal places, relief, routes, and individual events with zoom.
+At closer scales, introduce symbolic landmarks without implying that the
+landscape is an archaeological reconstruction. Preserve real geographic
+positions and distances rather than arranging cities like board-game pieces.
+
+Keep the time window and selection stable across zoom changes. A selected event
+opens its story, participants, sources, nearby events, and connected events.
+Nearby does not mean related; connected events can be geographically distant.
+Following a link can move the camera, but should offer an explicit time change
+when the destination falls outside the current window.
+
+Prefer a full-screen map, floating search and layer controls, persistent time
+controls, and a selection drawer. On smaller screens the drawer can become a
+bottom sheet. A flat or low-tilt view remains an option for geographic reading.
+
+=== A visual language for different relationships
+
+[cols="1,2,2",options="header"]
+|===
+|Subject |Visual form |Meaning to preserve
+|Campaigns and war |Directional campaign segments, battle markers, control snapshots |A schematic campaign is not an exact marching itinerary.
+|Trade |Networks of ports, cities, and route segments |The Silk Road is not one timeless road; a network does not prove a particular shipment.
+|Missions and learning |Selected journeys within wider networks, outbound and return stages |Travel, encounters, and subsequent adaptation are separate claims.
+|Religion |Community markers and journeys linked to a relationship timeline |Spread is not territorial ownership; divisions develop over time.
+|Companies and institutions |Selectable organizations, changing roles, places and relationships |The British East India Company's commerce, diplomacy, and coercion need distinct treatment.
+|Diplomacy |Selected alliances, agreements, and dated links |Connections can change, overlap, or be disputed.
+|===
+
+Use symbols, line patterns, and labels as well as color. Reveal relevant
+connections on selection or within a focused story layer rather than drawing
+every relationship at once. Relationship timelines supplement the map when
+geography alone cannot explain institutional or religious change.
+
+=== Playback and evidence
+
+Offer scrubbing, play/pause, event stepping, speed control, and optional camera
+following. Time resolution must fit the story: centuries for a broad network,
+years for a campaign overview, and finer dates only where evidence supports
+them. Exact playback and uncertainty contracts belong to link:../0002/README.adoc[RFD 2].
+
+Show supported boundary snapshots rather than smoothly inventing intermediate
+front lines. Label illustrative motion and schematic routes. Selecting a link
+must expose what is asserted and its sources, not leave an arrow to imply
+causation. Do not assign numerical confidence percentages without a meaningful
+methodology.
+
+Keyboard navigation, touch controls, reduced-motion behavior, readable labels,
+and a non-map event list should let users explore without relying on animation,
+precise pointer input, or color discrimination.
+
+== Candidate stories, not a committed launch dataset
+
+* Qin's conquests of the rival Warring States: campaigns, battles, chronology,
+  and political change. Do not equate the resulting domain with modern China.
+* Alexander's campaigns: movement, selected milestones, and consequences.
+* World War II: a later stress case for simultaneous theaters and dense dates,
+  rather than the default first dataset.
+* Silk Road networks and the British East India Company: changing commercial
+  connections and organizations, not only military states.
+* Japanese missions to Tang China: people, learning, return journeys, and local
+  adaptation, situated within wider East Asian networks.
+* Christianity's spread and divisions: communities, councils, contested
+  reception, and changing relationships rather than a single clean split.
+
+The proposed first build is one small, sourced chapter plus a few contrasting
+examples that exercise conflict, exchange, and institutional change. The chapter
+and coverage limits remain open; these examples are not all MVP commitments.
+
+== Visual references
+
+The https://ampcode.com/threads/T-01a0ca04-003d-7398-a8c8-2516cb38414a[founding discussion]
+contains the design progression and the owner's responses. Generated concepts:
+
+* https://ampcode.com/user-content/attachments/deb8320dde1ce642c7c30c2e5cdbad5e1a0dc6339fb3ee0f5437e465a7c33f75-file.png[Globe-to-region progression]
+* https://ampcode.com/user-content/attachments/027a5e274ea3f34e6c44bc9cd5fda29f8d63247ea25ccf1789b2dc5801565c3f-file.png[Campaign playback]
+* https://ampcode.com/user-content/attachments/9afe132a3422541b233d1a78e0670306755697b173f7c35e9298cede2c4f6828-file.png[Communities and divisions]
+* https://ampcode.com/user-content/attachments/9e9c0e520c66b9c3563848844829e2fd998913fce3a3079aff475baa631a5752-file.png[Trade and learning]
+
+These are external design references, not validated datasets, implemented UI,
+or proof of rendering feasibility. Known defects include misplaced locations,
+anachronistic imagery, a mission arrow opposing its caption, and oversimplified
+religious categories. Earlier concepts also showed Cairo before its founding
+and Baghdad as a capital before its founding. Do not transcribe their claims,
+routes, source counts, or boundaries into content. Attachment access may depend
+on Amp; the requirements above remain understandable without the images.
+
+== Alternatives and trade-offs
+
+A pin-only atlas is simpler but misses the central interaction experience.
+A game simulation would be engaging but invent outcomes beyond the evidence.
+A purely photorealistic globe risks modern-looking scenery and weak historical
+readability; a heavily illustrated local world risks inaccurate scale and costly
+reconstruction. Prefer geographic continuity with restrained symbolic detail.
+
+== Open questions
+
+* Which chapter offers a manageable research scope and compelling first loop?
+* How much local detail is useful before symbols imply unsupported reconstruction?
+* Which desktop and physical touch devices define the first performance targets?
+* How should simultaneous stories and contested interpretations be compared?
+
+== Implementation
+
+See link:IMPLEMENTATION.adoc[RFD 1 implementation checklist].
+link:../0002/README.adoc[RFD 2] owns historical meaning and evidence;
+link:../0003/README.adoc[RFD 3] owns rendering and platform feasibility.

@@ -1,0 +1,27 @@
+= RFD 0001 implementation checklist
+
+Implements link:README.adoc[RFD 1: Historical exploration and visual interactions].
+All work below is proposed; the concept images are not implementation evidence.
+
+== Phase 0 — Scope and interaction proof
+
+- [ ] Choose one sourced chapter and contrasting relationship examples with RFD 2.
+- [ ] Define target desktop and touch devices with RFD 3.
+- [ ] Prototype globe-to-region navigation with persistent time and selection.
+- [ ] Validate distinct visual forms for campaigns, trade, journeys, and divisions.
+
+== Phase 1 — Complete exploration loop
+
+- [ ] Add search, layer controls, event details, sources, and separate nearby/connected lists.
+- [ ] Implement scrubbing, event stepping, playback, and optional camera following.
+- [ ] Explain and confirm navigation to related events outside the selected time window.
+- [ ] Connect a relationship timeline to map selection without assigning religion to territory.
+- [ ] Make uncertainty, schematic motion, and supported boundary snapshots visible.
+
+== Acceptance evidence
+
+- [ ] Inspect rendered globe, region, selected-event, and connection states on desktop and touch layouts.
+- [ ] Verify keyboard access, reduced motion, non-color cues, and a readable event list.
+- [ ] Demonstrate a nonmilitary story is as navigable as a campaign.
+- [ ] Confirm labels and scene geometry against reviewed data, not generated mockups.
+- [ ] Record measured performance and remaining limitations with RFD 3.

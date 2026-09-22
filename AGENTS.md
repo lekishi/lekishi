@@ -1,9 +1,53 @@
-This is a web application written using the Phoenix web framework.
+# Lekishi agent guidance
+
+Lekishi is a historical atlas for exploring events and relationships across
+places and time. This repository currently contains a Phoenix application.
+
+Project workflow conventions are adapted from
+[Lecinote's AGENTS.md](https://github.com/chaba-dev/lecinote/blob/main/AGENTS.md).
+This file is the local authority: do not assume Lecinote's authentication,
+helper scripts, or application features exist here. Preserve the Phoenix rules
+below when updating project-specific guidance.
+
+## Product and design records
+
+- Read the relevant [RFDs](rfd/README.md) before changing product or architecture behavior. Respect each document's state; drafts are proposals, not implemented features or final stack decisions.
+- Keep implementation progress in `rfd/NNNN/IMPLEMENTATION.adoc`, using AsciiDoc checklists and reciprocal links to `README.adoc`. Preserve task completion states when reorganizing plans.
+- The current backend is Phoenix/Ecto/PostgreSQL. Svelte, Cesium, Vite, and PostGIS remain proposed in RFD 3; do not describe them as installed or add them merely because an RFD mentions them.
+- Keep native delivery open. Historical data and behavior contracts must not depend on browser UI or renderer objects.
+- Treat trade, learning, religion, diplomacy, and institutional change as first-class interactions alongside war. Distinguish states, cultures, communities, and companies.
+- Preserve historical sources, uncertainty, calendar/precision information, and the distinction between contact and inferred influence. Generated visual concepts are design references, never historical evidence.
+
+## Development environment
+
+- Use the pinned `flake.nix` environment: `nix develop`, or `nix develop --command <command>` from the repository root. It includes Elixir, Erlang, pnpm, PostgreSQL, and Jujutsu.
+- Use the existing Makefile and Mix aliases rather than inventing parallel setup workflows. In an Amp orb, use `amp orb services ensure` for the services declared in `.amp/services.yaml`.
+- If a required tool or service is unavailable, report the blocked check explicitly; do not claim verification succeeded.
 
 ## Project guidelines
 
 - Use `mix precommit` alias when you are done with all changes and fix any pending issues
+- Use Conventional Commits for pull request titles (`type(optional-scope): description`), for example `feat(atlas): add event selection` or `docs(rfd): document historical time semantics`.
 - Use the already included and available `:req` (`Req`) library for HTTP requests, **avoid** `:httpoison`, `:tesla`, and `:httpc`. Req is included by default and is the preferred HTTP client for Phoenix apps
+- Add intent-focused comments around domain rules, imports, authorization, normalization, persistence invariants, and non-obvious UI state. Explain why the choice exists and what must not regress; avoid restating the next line of code.
+
+### Version control guidelines
+
+- Prefer `jj` (Jujutsu) for status, history, commits, rebases, and pushes. Use the pinned Nix environment if it is not on the shell's PATH.
+- For a Git-only checkout without `.jj`, initialize with `jj git init --colocate` from the repository root before using Jujutsu. Lekishi does not currently provide Lecinote's `.agents/jj-init` helper. Preserve existing work; do not delete or recreate an existing `.jj` directory to work around errors.
+- In a colocated checkout, do not use Git commands that rewrite the working copy or refs (`checkout`, `reset`, `commit`, `rebase`, `merge`, or `stash`). Use Jujutsu equivalents. Read-only Git inspection is an acceptable fallback when Jujutsu is unavailable; report the limitation before version-control mutations.
+- Rebase onto `main@origin` rather than merging. Verify revision selections before rebasing, and do not rewrite published history without authorization.
+- Track remote bookmarks you intend to work on with `jj bookmark track <name> --remote=origin`; inspect tracking and immutable revisions if a rebase is refused rather than overriding protections blindly.
+- Resolve conflicts at their originating revision: inspect `jj log -r 'conflicts()'`, edit the appropriate revision, and let Jujutsu propagate the resolution to descendants.
+- When authorized to push, use `jj git push --bookmark <name>` for the intended bookmark rather than pushing every bookmark. These workflow instructions do not authorize pushing, opening PRs, or deploying.
+- Before committing, verify Jujutsu's author identity. If needed, set repository-local `user.name` and `user.email` with `jj config set --repo` to the user's established identity. Do not invent an identity or assume `.agents/setup` configures one.
+
+### Authentication boundaries
+
+- Lekishi does not yet have generated authentication. Inspect `lib/lekishi_web/router.ex` before assuming that auth plugs, scopes, or `LekishiWeb.UserAuth` exist.
+- When authentication is introduced, enforce it at router and LiveView mount boundaries and explain the chosen pipeline, scope, and `live_session` when adding routes.
+- With Phoenix's generated scope-based authentication, use `current_scope` and `current_scope.user`, not an assumed `current_user` assign. Pass the scope to authorization-sensitive contexts and constrain queries to the permitted records.
+- Reuse the appropriate generated authenticated or optional-authentication `live_session`; never duplicate session names. Public routes must handle an absent authenticated user explicitly.
 
 ### Phoenix v1.8 guidelines
 

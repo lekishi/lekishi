@@ -1,0 +1,180 @@
+:authors: Darwin D Wu <darwin67@users.noreply.github.com>
+:state: prediscussion
+:discussion:
+:labels: architecture, phoenix, svelte, rendering, native, geospatial
+
+= RFD 3 Browser architecture and native options
+
+== Goal
+
+Deliver link:../0001/README.adoc[RFD 1]'s interactive atlas in the browser while
+preserving a credible path to native experiences. Keep historical semantics
+independent of a UI framework, network transport, and graphics engine.
+
+== Current baseline and decision status
+
+At drafting, Lekishi contains a Phoenix 1.8 application, Ecto/Postgrex, LiveView,
+Tailwind, esbuild asset tasks, and a pinned Nix development environment. Svelte,
+Vite, Cesium, and PostGIS are not configured. This documentation does not install
+them, replace the scaffold, or claim that an atlas exists.
+
+The discussion first suggested React as a familiar default. The owner raised
+Svelte and Phoenix with Svelte; React was not established as a requirement.
+The revised recommendation is Svelte + TypeScript with CesiumJS, using Phoenix
+for server responsibilities. These remain proposals, not a final stack approval.
+Browser-first delivery and keeping native open are established requirements.
+
+== Proposed responsibilities
+
+Phoenix:: Published content, queries, permissions, future editorial workflows,
+  and imports. Ecto and PostgreSQL are already available. Add PostGIS when
+  spatial query requirements justify it, using reviewed local migrations first.
+Svelte and TypeScript:: Search, filters, drawers, timeline controls, selection,
+  responsive layouts, and application interaction state.
+Historical logic:: Renderer-independent time filtering, event stepping,
+  navigation, and conversion of RFD 2 records into a visible scene. Browser
+  playback runs locally, not through a server round trip per frame.
+CesiumJS, provisionally:: Globe, terrain, camera, geographic picking, and map
+  primitives/models. Renderer objects remain outside published historical records.
+
+Serve the application from one origin where practical. Start with HTTP content
+loading; Phoenix Channels/PubSub are optional for future shared exploration or
+collaboration, not prerequisites for local playback. Oban is a candidate for
+durable import jobs once such work exists, not an initial dependency requirement.
+
+Keep frame-by-frame changes in the playback/rendering code instead of refreshing
+the entire Svelte component tree. Dispose map resources on navigation and avoid
+multiple owners for the selected time, event, or camera-follow state.
+
+== Frontend integration alternatives
+
+=== Svelte with Phoenix
+
+Prefer a Svelte-owned atlas workspace with Phoenix as its server boundary.
+Vite is a proposed frontend build tool; its integration must explicitly replace
+or coordinate with the existing esbuild entrypoints, asset watching, static paths,
+and release digesting. Do not assume the generated Phoenix app already supports
+this combination. Retain the existing CSS conventions unless deliberately revised.
+
+=== React
+
+React remains technically viable and has a broad ecosystem. Cesium draws the
+map independently of React or Svelte, so framework choice alone does not predict
+map performance. React Native is a possible future UI path, not sufficient
+reason to choose React today or a promise to reuse web rendering unchanged.
+
+=== SvelteKit with Phoenix
+
+Consider SvelteKit if server-rendered articles, public discovery pages, or its
+routing model provide a concrete benefit. A separate SvelteKit server beside
+Phoenix adds another server-side application boundary; it is not currently needed
+to establish the atlas experience.
+
+=== LiveView with Svelte islands
+
+Suitable for server-driven pages with isolated interactive components, and
+potentially useful for editorial screens. For the central atlas, shared ownership
+of navigation, selection, and time introduces unnecessary synchronization.
+If a LiveView hook hosts the client, it must respect the repository's ignored-DOM
+and lifecycle conventions and leave the atlas state with one client owner.
+
+== Rendering candidates
+
+CesiumJS is the preferred evaluation candidate because globe-to-local navigation,
+terrain, geographically positioned glTF models, and time-dynamic visualization
+are central. Its engine is Apache-2.0 licensed; hosted imagery, terrain, and
+Cesium ion services have separate licenses, costs, and access requirements.
+The engine can use sources other than ion; provider selection remains open.
+
+MapLibre GL JS is a credible alternative for highly styled maps, labels, globe,
+terrain, and custom 3D layers. MapLibre Native is a possible future native map
+renderer, not automatic portability of web custom layers. If deck.gl is considered
+for dense overlays, validate its exact globe/terrain/depth integration rather
+than assuming every layer works in every projection.
+
+Do not build a production dual-renderer framework merely to preserve options.
+Run a bounded Cesium prototype first, comparing MapLibre if the visual styling,
+interaction, device performance, licensing, or delivery constraints remain
+unsatisfied. Preserve domain contracts rather than abstracting every renderer API.
+
+Neither engine produces the concept art automatically. Terrain styling, camera
+behavior, symbol hierarchy, routes, labels, and restrained models create the
+Civilization-inspired experience. A custom Three.js world or game engine would
+add globe precision, terrain streaming, picking, and geographic infrastructure
+work; defer it unless established engines fail a concrete requirement.
+
+== Supporting stack and delivery
+
+Use SVG and selected D3 utilities for timelines and relationship diagrams before
+adding another large rendering system. Begin with RFD 2's validated content files;
+adopt PostgreSQL/PostGIS as the authoritative content store when querying and
+editing require it. Relationships can use ordinary relational tables; graph
+visualization does not require a graph database.
+
+Static assets and published content can use a CDN and object storage when useful,
+with Phoenix deployed as an application server. Hosting vendors, map providers,
+cache policy, and budgets remain undecided. Track tile bandwidth, terrain/model
+payloads, licensing, attribution, and provider limits separately from application
+hosting. Do not promise offline maps without checking provider caching rights.
+
+Use ExUnit for server contracts, TypeScript unit tests (Vitest is a candidate)
+for date/filter/playback behavior, and browser tests plus inspected screenshots
+for interaction and appearance. Define scene and payload budgets from measured
+target devices, not from generated images.
+
+== Native remains an open implementation choice
+
+Keep versioned data formats, portable identifiers, and behavior fixtures independent
+of browser APIs. A native client should be able to retrieve published history
+without reproducing a LiveView session protocol. Share TypeScript logic where
+the runtime supports it; Swift/Kotlin clients may instead reuse contracts and
+test vectors with their own implementation.
+
+Possible delivery paths:
+
+* An installable web app: least additional work, still a browser experience.
+* A native shell, such as Capacitor on mobile or an appropriate desktop host:
+  retains web rendering while enabling selected platform integrations. It does
+  not prove native performance, accessibility, lifecycle, or offline behavior.
+* A fully native client using a suitable platform renderer and UI toolkit:
+  shares backend and historical meaning but requires rendering and UI work.
+  React Native, Swift/Kotlin, and other native options are not selected here.
+
+No path is ruled out or mandated by Svelte. Before selecting one, test graphics,
+touch, memory, battery, suspend/resume, accessibility, and packaging on real
+devices. Desktop browser device emulation is not proof of native mobile support.
+
+== Proposed first build and decision gate
+
+Use one small curated chapter and contrasting interaction fixtures to exercise
+globe-to-region navigation, selected-event evidence, a campaign, an exchange,
+and a branching institutional relationship. Do not make all candidate historical
+periods launch requirements or add accounts/collaboration before they are useful.
+
+Validate pointer and touch input, time/selection persistence, local scrubbing,
+label clarity, uncertainty display, and realistic asset loading. Measure frame
+time, loading, and memory on agreed hardware. Then record whether Cesium and
+the Svelte/Phoenix integration satisfy the requirements before promoting this
+RFD to project direction.
+
+== Open questions
+
+* Is Svelte + Phoenix approved, and should the first spike integrate Vite now?
+* Does Cesium meet the desired styling and touch behavior on target hardware?
+* Which imagery and terrain providers meet visual, licensing, and cost needs?
+* When does curated file content need database editing and spatial queries?
+* Which native devices and experiences justify a shell or dedicated client?
+
+== References
+
+* https://cesium.com/platform/cesiumjs/[CesiumJS capabilities and engine license]
+* https://cesium.com/learn/cesiumjs-learn/cesiumjs-terrain/[Cesium terrain and imagery separation]
+* https://maplibre.org/maplibre-gl-js/docs/[MapLibre GL JS documentation]
+* https://deck.gl/docs/developer-guide/base-maps/using-with-maplibre[deck.gl and MapLibre integration]
+* https://ampcode.com/threads/T-01a0ca04-003d-7398-a8c8-2516cb38414a[Founding product and stack discussion]
+
+== Implementation
+
+See link:IMPLEMENTATION.adoc[RFD 3 implementation checklist]. No production
+deployment, native-platform commitment, or shared database migration is
+authorized by this proposal.

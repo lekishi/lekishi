@@ -1,0 +1,148 @@
+:authors: Darwin D Wu <darwin67@users.noreply.github.com>
+:state: prediscussion
+:discussion:
+:labels: history, data, provenance, time, geography, editorial
+
+= RFD 2 Historical data, time, and evidence
+
+== Goal
+
+Represent historical events and relationships with enough temporal, geographic,
+and evidentiary context to support link:../0001/README.adoc[RFD 1] without turning
+visual convenience into historical certainty. Support small curated chapters
+first and eventual contributions from researchers, professors, and other editors.
+
+== Context
+
+The owner's illustrated history books are useful high-level references, but
+will not supply every date, route, interaction, or competing interpretation.
+Public datasets, papers, and specialist contributors will be necessary. No
+single dataset is expected to provide a reliable global history of influence.
+
+== Proposed domain model
+
+This is a conceptual model, not an approved database schema.
+
+Places:: Stable identities with historical names, source-backed locations,
+  geometry validity periods, and spatial precision or uncertainty. A changing
+  name must not silently create a new place or imply that identities never change.
+Actors:: Distinguish people, states, communities, companies, religious bodies,
+  and other institutions. Membership and roles can vary over time. Cultures
+  are not assumed to occupy exclusive, sharply bounded polygons.
+Events:: Occurrences or processes with temporal bounds, participants and roles,
+  locations, and links to a broader campaign, mission, or sequence.
+Relationships:: Typed connections among actors, places, and events: trade,
+  travel, conflict, diplomacy, transmission, institutional change, or proposed
+  influence. Direction and temporal validity are explicit where meaningful;
+  not every relationship is directional or causal.
+Claims and sources:: Attach assertions to citations, locators such as page or
+  section, provenance, review status, uncertainty, and supporting or conflicting
+  interpretations. One source need not support every field of an event.
+Stories:: Curated selections and navigation sequences over the historical
+  records, not separate copies of those records or the only possible interpretation.
+
+Use portable identifiers and retain external dataset identifiers at import.
+Keep presentation colors, viewport coordinates, and Cesium objects out of the
+historical source of truth. Geometries can use GeoJSON where suitable, accompanied
+by explicit temporal and evidentiary metadata.
+
+== Time and space contracts
+
+Historical dates are not ordinary application timestamps. Preserve the source's
+date expression, calendar where known, precision, and uncertainty separately
+from normalized values used to sort and filter. Distinguish an event that lasted
+several years from an event whose exact date is only known to fall in that range.
+
+Before durable storage, specify BCE/CE conversion and the treatment of year zero,
+calendar conversion, open-ended intervals, overlapping events, and inclusion at
+window boundaries. Civil BCE/CE display has no year zero; internal astronomical
+numbering is a possible representation, not yet a decision. JavaScript Date and
+the renderer's clock must not be the authoritative historical model.
+
+Playback can use a derived numeric coordinate. Derivation must not convert a
+year-only claim into an asserted January 1 date. Preserve partial ordering when
+the evidence does not establish which event happened first.
+
+Locations likewise need precision and interpretation. A point may represent an
+approximate site or a label anchor, not a surveyed location. A route may be an
+attested itinerary, a reconstructed route, or a schematic link. Record the
+difference. Political control, religious presence, and cultural influence are
+different relationships and must not share one generic territorial meaning.
+
+Modern terrain is geographic context, not historical reconstruction. Rivers,
+coastlines, settlements, and borders can change; historical geometry overrides
+need their own sources and validity ranges.
+
+== Claims drive visualization
+
+Documented contact does not establish influence; influence does not imply
+unchanged adoption. Trade networks do not prove particular voyages. A religious
+council does not cause an instantaneous, geographically uniform division.
+
+Store competing accounts without averaging them into false precision. Prefer
+descriptive uncertainty and review states over invented confidence percentages.
+Publication and historical certainty are separate: a reviewed account can
+explicitly describe a disputed claim.
+
+Only interpolate movement when the chosen presentation is justified or clearly
+labelled illustrative. Use dated political-control snapshots rather than
+invented continuously moving boundaries. Where location or date is unknown,
+retain the record in the narrative/list rather than assigning arbitrary map
+coordinates or dates merely to make it visible.
+
+== Acquisition and publication
+
+Begin with versioned, schema-validated JSON/GeoJSON and citations for one chapter.
+Imports are candidates for review, not automatically published facts. Once
+editing and queries require a database, migrate the curated records into the
+storage proposed in link:../0003/README.adoc[RFD 3] with stable identities and
+provenance. Do not maintain files and database as competing writable authorities.
+
+Candidate sources include:
+
+* https://www.wikidata.org/wiki/Wikidata:Licensing[Wikidata]: identifiers and
+  structured candidate facts; structured data is CC0, not a guarantee of accuracy.
+* https://pleiades.stoa.org/[Pleiades]: ancient-place information useful for
+  selected ancient-world chapters, not complete world coverage.
+* https://whgazetteer.org/[World Historical Gazetteer]: historical place names,
+  temporal context, and linked datasets with uneven coverage and dataset-specific
+  reuse terms.
+* Scholarly books, papers, primary-source editions, and specialist review for
+  relationships and interpretations that gazetteers do not supply.
+
+Record licenses and attribution requirements for each dataset and media asset.
+Open access is not the same as unrestricted redistribution. Owning a book does
+not grant permission to reproduce its maps or illustrations. Cite and summarize
+appropriately; do not copy imagery or substantial text without suitable rights.
+
+Initially, contributors can propose content-file changes for review. A later
+editorial UI can support draft, source review, and publication, with revisions,
+attribution, corrections, and disagreement retained. Define review authority
+before inviting open publication; credentials alone do not substitute for sources.
+
+AI may assist extraction, normalization suggestions, and missing-field checks.
+Its output remains a candidate with a traceable source, never an automatic
+historical authority or a reason to invent missing evidence.
+
+== Alternatives and trade-offs
+
+Live queries against public knowledge services avoid an import pipeline but
+introduce availability, consistency, and review problems; prefer curated releases.
+A universal event table with one year and coordinate is simple but cannot
+represent uncertainty or relationships. A full scholarly ontology before the
+first chapter is costly; begin with the smallest explicit model that preserves
+the distinctions above and version its interchange format.
+
+== Open questions
+
+* Which chapter, sources, and reviewers define the first curated release?
+* What exact date normalization and interval semantics should be standardized?
+* Which spatial uncertainty representations are useful to users?
+* How are competing interpretations selected and compared in the interface?
+* What publication permissions and revision policy suit external contributors?
+
+== Implementation
+
+See link:IMPLEMENTATION.adoc[RFD 2 implementation checklist]. This RFD defines
+the evidence and domain requirements; it does not assert that a dataset, schema,
+importer, or editorial workflow already exists.

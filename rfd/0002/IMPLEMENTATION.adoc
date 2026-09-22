@@ -1,0 +1,32 @@
+= RFD 0002 implementation checklist
+
+Implements link:README.adoc[RFD 2: Historical data, time, and evidence].
+
+== Phase 0 — Content and contracts
+
+- [ ] Select the first chapter, source bibliography, coverage limits, and review owner.
+- [ ] Define portable identifiers, claim citations, source locators, and reuse metadata.
+- [ ] Specify BCE/CE, calendars, precision, uncertainty, and interval boundary semantics.
+- [ ] Distinguish event duration from uncertain occurrence and define partial ordering.
+- [ ] Define geometry validity, approximate locations, and route interpretation metadata.
+
+== Phase 1 — Curated records
+
+- [ ] Add schema-validated content covering a campaign, exchange, and institutional relationship.
+- [ ] Review imported candidates and preserve their external identifiers and licenses.
+- [ ] Represent contradictory accounts and records lacking exact dates or map positions.
+- [ ] Verify each displayed relationship has supporting evidence or an explicit interpretive label.
+
+== Phase 2 — Persistence and contributions
+
+- [ ] Move to the RFD 3 store when needed without creating two writable sources of truth.
+- [ ] Define reviewer permissions, revisions, corrections, and publication transitions.
+- [ ] Add editorial tools only after the content-file workflow reveals concrete needs.
+
+== Acceptance evidence
+
+- [ ] Test BCE/CE boundary cases, uncertain dates, calendar conversions, and range endpoints.
+- [ ] Test asymmetric overlapping intervals and events with only partial ordering.
+- [ ] Verify publication status does not erase historical uncertainty or disagreement.
+- [ ] Confirm no route animation or territory interpolation asserts unsupported history.
+- [ ] Audit source locators, attribution, and media redistribution rights for the first release.

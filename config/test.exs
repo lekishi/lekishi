@@ -8,7 +8,7 @@ import Config
 config :lekishi, Lekishi.Repo,
   username: "postgres",
   password: "postgres",
-  socket_dir: Path.expand("../.dev/postgres/socket", __DIR__),
+  hostname: "localhost",
   database: "lekishi_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: System.schedulers_online() * 2

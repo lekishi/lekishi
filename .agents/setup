@@ -57,24 +57,17 @@ step "Installing Phoenix dependencies and preparing the database"
     mix local.hex --force
   fi
 
-  postgres_dir="$PWD/.nix/postgres"
-  mkdir -p "$postgres_dir"
-  if [[ ! -s "$postgres_dir/PG_VERSION" ]]; then
-    initdb --pgdata="$postgres_dir" --username=postgres --auth-local=trust \
-      --auth-host=trust --encoding=UTF8 --no-locale
-  fi
-
   started_postgres=0
   stop_postgres() {
     if [[ "$started_postgres" == 1 ]]; then
-      pg_ctl --pgdata="$postgres_dir" --mode=fast --wait stop
+      make down
     fi
   }
   trap stop_postgres EXIT
 
-  if ! pg_isready --host=127.0.0.1 --port=5432 --username=postgres >/dev/null 2>&1; then
-    pg_ctl --pgdata="$postgres_dir" \
-      --options="-h 127.0.0.1 -k $postgres_dir -p 5432" --wait start
+  if ! pg_isready --host="$PWD/.dev/postgres/socket" --port=5432 \
+    --username=postgres >/dev/null 2>&1; then
+    make up
     started_postgres=1
   fi
 

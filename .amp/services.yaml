@@ -1,12 +1,13 @@
 services:
   postgres:
-    command: exec postgres -D "$PWD/.nix/postgres" -k "$PWD/.nix/postgres" -p "$PORT"
+    command: exec make postgres
     port: 5432
     platforms: [linux]
   web:
     command: >-
-      until pg_isready -h 127.0.0.1 -p 5432 -U postgres; do sleep 0.2; done;
-      exec mix phx.server
+      until pg_isready -h "$PWD/.dev/postgres/socket" -p 5432 -U postgres;
+      do sleep 0.2; done;
+      exec make dev
     port: 4000
     health: /
     portal:

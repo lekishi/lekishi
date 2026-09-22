@@ -4,7 +4,7 @@ import Config
 config :lekishi, Lekishi.Repo,
   username: "postgres",
   password: "postgres",
-  hostname: "localhost",
+  socket_dir: Path.expand("../.dev/postgres/socket", __DIR__),
   database: "lekishi_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,

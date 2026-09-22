@@ -5,23 +5,23 @@ All work below is proposed; the concept images are not implementation evidence.
 
 == Phase 0 — Scope and interaction proof
 
-- [ ] Choose one sourced chapter and contrasting relationship examples with RFD 2.
-- [ ] Define target desktop and touch devices with RFD 3.
-- [ ] Prototype globe-to-region navigation with persistent time and selection.
+- [ ] Bound the Japanese missions to Tang China chapter to one source-checked mission and selected learning/adaptation links with RFD 2; define small contrasting test examples rather than additional launch chapters.
+- [ ] Select representative desktop/laptop and physical iPad-class tablet hardware and browsers within RFD 3's primary device scope; define phone responsive-layout checks without requiring full exploration parity.
+- [ ] In later separate implementation threads, compare geographic/symbolic and illustrated local-detail treatments for both a Tang mission and a bounded Qin-conquest episode, preserving time and selection through globe-to-local navigation.
 - [ ] Validate distinct visual forms for campaigns, trade, journeys, and divisions.
 
 == Phase 1 — Complete exploration loop
 
-- [ ] Add search, layer controls, event details, sources, and separate nearby/connected lists.
-- [ ] Implement scrubbing, event stepping, playback, and optional camera following.
-- [ ] Explain and confirm navigation to related events outside the selected time window.
+- [ ] Add search, layer controls, event details, sources, and separate nearby/connected lists; provide chapter/region/period coverage guidance and verify distinct uncovered, filtered-empty, and unestablished-coverage states without implying historical inactivity or comprehensive coverage.
+- [ ] Implement scrubbing, chronological event stepping, playback, and optional camera following; verify playback advances a playhead within a fixed exploration window and stops at its end, distinguishes contextual events from current activity without inventing certainty, and does not mark selections outside-time merely as the playhead moves; provide separate curated "Next in story" navigation with explicit time jumps, without implying a known chronological order for uncertain dates.
+- [ ] Explain and confirm navigation to related events outside the selected time window; preserve excluded selections in the detail panel with an outside-time notice and explicit return-to-time action, without retaining their map markers or misclassifying uncertain possible matches.
 - [ ] Connect a relationship timeline to map selection without assigning religion to territory.
 - [ ] Make uncertainty, schematic motion, and supported boundary snapshots visible.
 
 == Acceptance evidence
 
-- [ ] Inspect rendered globe, region, selected-event, and connection states on desktop and touch layouts.
+- [ ] Inspect rendered globe, region, selected-event, and connection states on desktop and touch layouts; verify manual pan/zoom stops camera following without pausing time, following stays off until explicitly resumed at the current playback position, and programmatic camera movement does not cancel following.
 - [ ] Verify keyboard access, reduced motion, non-color cues, and a readable event list.
-- [ ] Demonstrate a nonmilitary story is as navigable as a campaign.
+- [ ] Demonstrate a nonmilitary story is as navigable as a campaign; verify simultaneous story layers share one map, time window, and playhead, identify memberships without color alone, preserve shared events without duplication, and imply no unsupported cross-story relationship.
 - [ ] Confirm labels and scene geometry against reviewed data, not generated mockups.
 - [ ] Record measured performance and remaining limitations with RFD 3.

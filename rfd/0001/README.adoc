@@ -48,6 +48,31 @@ Prefer a full-screen map, floating search and layer controls, persistent time
 controls, and a selection drawer. On smaller screens the drawer can become a
 bottom sheet. A flat or low-tilt view remains an option for geographic reading.
 
+Place labels lead with historical names and include their source-supported local
+script alongside romanization or translation, following RFD 2's naming policy.
+Use fonts with appropriate script coverage and keep paired labels readable on
+desktop and tablet. Modern names and alternate spellings belong in details and
+search rather than replacing the historical label.
+
+=== Decision: retain details when time filtering excludes the selection
+
+Changing the selected time window does not close the selected event's detail
+panel. If the event no longer matches, keep its story and sources available,
+visibly mark it as "outside selected time", and offer "Return to event's time".
+The return action explicitly changes the time window; retaining the panel does
+not silently undo the user's time change.
+
+Exclude the event from ordinary map results and do not keep an out-of-window
+marker merely because it is selected. The open panel preserves reading context,
+not an exception to temporal filtering. For example, a selected event from
+762 CE remains readable after moving the window to 700 CE, but its event marker
+does not remain visible on that basis.
+
+Apply RFD 2's possible-match policy before classifying an event as outside the
+window: a bounded uncertain occurrence that overlaps still qualifies as a
+visibly uncertain possible match. The return action must respect date precision
+and uncertainty rather than invent an exact date for an uncertain event.
+
 === A visual language for different relationships
 
 [cols="1,2,2",options="header"]
@@ -66,12 +91,71 @@ connections on selection or within a focused story layer rather than drawing
 every relationship at once. Relationship timelines supplement the map when
 geography alone cannot explain institutional or religious change.
 
+=== Decision: compare stories on a shared map and timeline
+
+Allow multiple stories to be selected as layers on one map, sharing the selected
+time window and playhead. Identify each story's events and connections through
+labels or other non-color-only cues. Showing events together establishes neither
+contact nor causation; cross-story relationships require their own cited evidence.
+
+Stories reference the same underlying records. An event belonging to multiple
+selected stories remains one event with visible story memberships, not duplicate
+historical occurrences. Keep relationship-type symbols meaningful while identifying
+story membership. Contested interpretations still follow RFD 2's main-account and
+cited-alternatives policy, not interchangeable story layers.
+
+Side-by-side maps with independent cameras are deferred. This comparison behavior
+does not expand the first public chapter into multiple full launch chapters;
+small contrasting examples can verify it during implementation.
+
 === Playback and evidence
 
 Offer scrubbing, play/pause, event stepping, speed control, and optional camera
 following. Time resolution must fit the story: centuries for a broad network,
 years for a campaign overview, and finer dates only where evidence supports
 them. Exact playback and uncertainty contracts belong to link:../0002/README.adoc[RFD 2].
+
+==== Decision: fixed exploration window with a moving playhead
+
+Playback moves a playhead within the selected time window without moving or
+expanding that window. The window filters the exploration context; the playhead
+highlights the current moment within it. For example, playing a 700–800 CE
+window retains that context while the playhead advances and stops at its end,
+without automatically looping or continuing into a new window. A rolling-window
+playback mode is deferred.
+
+Distinguish contextual events from those supported as occurring at the playhead;
+remaining visible in the window does not mean an event is currently active.
+Keep uncertain occurrences visibly uncertain, following RFD 2, rather than
+highlighting them as definite activity throughout their possible date range.
+Playhead movement alone does not exclude the selected event from the window or
+trigger the outside-selected-time notice.
+
+==== Decision: chronological controls and separate story navigation
+
+Time controls step through dated events chronologically by default. Curated
+chapters provide a separate "Next in story" action for editorial sequences that
+may revisit earlier context or jump ahead to consequences. Do not silently
+replace chronological stepping with narrative order when entering a chapter.
+
+Make story-related time jumps explicit, retaining the existing confirmation
+behavior when the destination is outside the selected window. A position in a
+story sequence describes presentation order, not evidence that one event preceded
+or caused another. Where uncertain dates do not establish a chronological order,
+preserve and communicate that ambiguity rather than fabricating an exact date
+or presenting an arbitrary tie-break as known historical order.
+
+==== Decision: manual camera control stops following, not playback
+
+When the user manually pans or zooms during camera-follow playback, stop camera
+following while time continues playing at the selected speed. Leave the camera
+under the user's control and expose an explicit "Resume following" action.
+Do not automatically return to following after a delay or at the next event.
+Resuming follows the current playback position rather than rewinding time to
+where the user left follow mode. Programmatic camera movement is not manual
+input and must not itself cancel following.
+
+==== Evidence and accessibility
 
 Show supported boundary snapshots rather than smoothly inventing intermediate
 front lines. Label illustrative motion and schematic routes. Selecting a link
@@ -97,9 +181,82 @@ precise pointer input, or color discrimination.
 * Christianity's spread and divisions: communities, councils, contested
   reception, and changing relationships rather than a single clean split.
 
-The proposed first build is one small, sourced chapter plus a few contrasting
-examples that exercise conflict, exchange, and institutional change. The chapter
-and coverage limits remain open; these examples are not all MVP commitments.
+=== Decision: first public chapter
+
+Start with Japanese missions to Tang China, bounded to one mission and selected
+learning/adaptation links rather than the entire history of the missions. Choose
+the specific mission, people, dates, and links after checking source availability
+and reuse rights under RFD 2. This selects the chapter direction, not a researched
+itinerary or an assertion that a journey caused a particular cultural change.
+
+The first public chapter should make travel, encounters, and subsequent adaptation
+explorable as distinct, sourced relationships. A small set of contrasting test
+examples can exercise campaigns and institutional change without becoming
+additional full launch chapters. The other stories above remain future candidates;
+the precise content inventory and research budget remain open.
+
+=== Decision: source feasibility before selecting the mission
+
+Before selecting the exact Tang mission, run a bounded source-feasibility pass
+over up to three missions in one initial desk-research pass. Use accessible
+sources and references supplied by the owner. Return findings and gaps for review
+before deeper research, purchases, or outreach; this pass authorizes none of those
+follow-on activities. This bounds the initial scope without setting a numerical
+time or spending budget. Compare reliable source availability, reuse rights, geographic
+detail, and evidence for travel, encounters, and subsequent learning/adaptation
+as separate claims. Reference books can inform the shortlist without being its
+only evidence base.
+
+The pass should recommend one mission with a concrete proposed inventory of
+events, places, actors, and relationships, a source bibliography, coverage limits,
+and remaining evidence or rights gaps. Identify where optional specialist review
+would help. If no candidate is sufficiently supported within this initial pass, report
+that outcome and propose a narrower scope rather than filling gaps speculatively
+or continuing research without a bound.
+
+This selects the research approach, not the mission or its historical claims,
+and does not launch the feasibility research or implementation now.
+
+=== Decision: explicit coverage guidance and distinct empty states
+
+Keep globe exploration available while clearly identifying the chapters, regions,
+and periods included in the published content. Describe this as curated coverage,
+not a claim that every event within those bounds has been documented.
+
+Distinguish "not yet covered" from "no results with these filters" using the
+declared content scope, not an empty query result alone. Offer available chapters
+for uncovered areas and relevant filter adjustments for filtered results. Where
+coverage is not established, say so rather than imply completeness. An empty map
+never establishes that nothing happened there; missing historical knowledge and
+missing atlas content are different limitations.
+
+Provide this guidance without requiring a geographic coverage overlay for the
+first release. A dedicated coverage overlay is deferred, not a prerequisite for
+unrestricted globe exploration.
+
+=== Decision: compare local-detail approaches through later implementation
+
+Keep the local-detail choice open until runnable implementations can be compared.
+Use separate implementation threads later, not additional image-generation
+threads now. Evaluate two scenarios: the bounded Japanese mission to Tang China
+and a bounded episode from Qin's conquest. Qin is a comparative prototype scenario,
+not a replacement for the first public chapter or a second full launch chapter.
+The specific Qin episode remains to be selected and source-checked.
+
+For each scenario, compare both approaches:
+
+* Geographic detail with symbolic landmarks: terrain, rivers, historical labels,
+  selected sites, and route/event markers without city reconstruction.
+* An illustrated local historical scene: restrained buildings and scenery that
+  provide context, explicitly distinguished from researched reconstruction.
+
+Keep scenario content, controls, selection, and time behavior comparable between
+the two treatments so differences in features do not obscure the visual trade-off.
+Compare globe-to-local continuity, readability, interaction, performance, asset
+and research effort, and the risk of implying unsupported historical detail.
+Generated images can inform styling but cannot settle implementation feasibility.
+This records future comparative work; it does not launch implementation now or
+select either treatment as the production default.
 
 == Visual references
 
@@ -129,10 +286,9 @@ reconstruction. Prefer geographic continuity with restrained symbolic detail.
 
 == Open questions
 
-* Which chapter offers a manageable research scope and compelling first loop?
-* How much local detail is useful before symbols imply unsupported reconstruction?
-* Which desktop and physical touch devices define the first performance targets?
-* How should simultaneous stories and contested interpretations be compared?
+* Which mission and learning/adaptation links offer a manageable, well-sourced first chapter, and what content inventory and research budget bound it?
+* Which local-detail treatment should become the default after the Tang-mission and Qin-conquest implementation comparisons?
+* Which representative desktop/laptop and physical iPad-class tablet devices define the first performance targets within RFD 3's selected browser scope?
 
 == Implementation
 

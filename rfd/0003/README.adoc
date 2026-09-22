@@ -20,8 +20,10 @@ them, replace the scaffold, or claim that an atlas exists.
 
 The discussion first suggested React as a familiar default. The owner raised
 Svelte and Phoenix with Svelte; React was not established as a requirement.
-The revised recommendation is Svelte + TypeScript with CesiumJS, using Phoenix
-for server responsibilities. These remain proposals, not a final stack approval.
+The owner has approved Phoenix + Svelte/TypeScript + Vite for the later
+implementation experiments, with CesiumJS as the first renderer to evaluate.
+This is an experiment direction, not an irreversible production stack decision
+or a request to launch implementation threads now.
 Browser-first delivery and keeping native open are established requirements.
 
 == Proposed responsibilities
@@ -50,11 +52,16 @@ multiple owners for the selected time, event, or camera-follow state.
 
 === Svelte with Phoenix
 
-Prefer a Svelte-owned atlas workspace with Phoenix as its server boundary.
-Vite is a proposed frontend build tool; its integration must explicitly replace
+Use a Svelte-owned atlas workspace with Phoenix as its server boundary for the
+approved experiments. Vite's integration must explicitly replace
 or coordinate with the existing esbuild entrypoints, asset watching, static paths,
 and release digesting. Do not assume the generated Phoenix app already supports
 this combination. Retain the existing CSS conventions unless deliberately revised.
+
+Prove production-mode asset delivery as well as development-server behavior
+before accepting the integration. Verify entrypoints and static paths, including
+Cesium workers, styles, runtime resources, and models, without depending on the
+Vite development server. Keep existing Phoenix pages working during integration.
 
 === React
 
@@ -106,10 +113,28 @@ work; defer it unless established engines fail a concrete requirement.
 == Supporting stack and delivery
 
 Use SVG and selected D3 utilities for timelines and relationship diagrams before
-adding another large rendering system. Begin with RFD 2's validated content files;
-adopt PostgreSQL/PostGIS as the authoritative content store when querying and
-editing require it. Relationships can use ordinary relational tables; graph
-visualization does not require a graph database.
+adding another large rendering system. Relationships can use ordinary relational
+tables; graph visualization does not require a graph database.
+
+=== Decision: adopt content storage capabilities when demonstrated needs justify them
+
+Begin with RFD 2's versioned, validated content files. Move historical content to
+PostgreSQL when a demonstrated editing or query requirement justifies the added
+storage and migration work. Record that requirement and verify the proposed
+database workflow or query addresses it. Database-backed historical content is
+neither a prerequisite for the first chapter nor prohibited before its release.
+The existing Phoenix database scaffold does not itself establish this need.
+
+Evaluate PostGIS separately: adopt it only when demonstrated spatial queries
+warrant its capabilities. Displaying points, routes, or GeoJSON on a map does
+not by itself require PostGIS. PostgreSQL adoption does not automatically select
+the extension.
+
+When migrating, preserve stable identifiers, citations, published revisions, and
+editorial approval metadata under RFD 2. Establish one writable content authority;
+files may remain imports or exports, but not a competing editable source of truth.
+
+=== Delivery and verification
 
 Static assets and published content can use a CDN and object storage when useful,
 with Phoenix deployed as an application server. Hosting vendors, map providers,
@@ -136,6 +161,9 @@ Possible delivery paths:
 * A native shell, such as Capacitor on mobile or an appropriate desktop host:
   retains web rendering while enabling selected platform integrations. It does
   not prove native performance, accessibility, lifecycle, or offline behavior.
+* A cross-platform client using Flutter: an option for native delivery whose
+  globe/map rendering integration, platform behavior, and reuse boundaries must
+  be evaluated rather than assumed. It is not a stack commitment.
 * A fully native client using a suitable platform renderer and UI toolkit:
   shares backend and historical meaning but requires rendering and UI work.
   React Native, Swift/Kotlin, and other native options are not selected here.
@@ -144,11 +172,64 @@ No path is ruled out or mandated by Svelte. Before selecting one, test graphics,
 touch, memory, battery, suspend/resume, accessibility, and packaging on real
 devices. Desktop browser device emulation is not proof of native mobile support.
 
+=== Decision: experience-first native delivery
+
+A native shell is acceptable if it delivers good interaction, performance,
+accessibility, lifecycle behavior, and the device integrations the product needs.
+Being installable alone does not satisfy the native experience requirement.
+Dedicated native UI and rendering remain options if the web-rendered approach
+cannot meet that quality bar; neither is an eventual requirement by itself.
+
+Browser-first development continues, with portable data contracts and historical
+behavior fixtures established during the initial client/content work rather
+than postponed until a native implementation starts. Do not build two renderers
+in anticipation of a problem that has not been demonstrated. Target devices,
+specific integrations, and measurable quality thresholds remain open decisions.
+
+=== Decision: evaluate native delivery after the browser exploration loop
+
+After the first complete browser exploration loop, test it on a physical iPad
+and assess native delivery options against observed interaction, performance,
+accessibility, lifecycle, and integration needs. This is an evaluation checkpoint,
+not a requirement to ship the public browser release first or start a parallel
+native implementation now.
+
+Consider installable web, native shells, Flutter, and dedicated platform clients.
+Use concrete shortcomings and product needs to decide which candidates warrant
+prototypes; do not require implementing every candidate. Evaluate any proposed
+globe/map rendering integration on real hardware rather than assuming it can
+reuse Cesium or the Svelte UI. Preserve the experience-first quality bar and
+portable contracts regardless of the delivery choice.
+
+== Decision: initial browser device scope
+
+Desktop/laptop browsers and iPad-class tablets are the primary targets for the
+first prototype. Mouse/keyboard and touch exploration are first-class evaluation
+paths for both scenarios and both local-detail treatments. Phones receive a
+usable responsive layout, but matching the full exploration experience on phones
+is not an initial acceptance requirement.
+
+This selects browser-testing scope, not a native implementation or an exclusive
+commitment to one tablet platform. Representative hardware, operating systems,
+browsers, and measurable performance limits remain to be chosen based on devices
+available for testing. Validate tablet interaction and performance on physical
+hardware; desktop viewport/touch emulation alone does not establish tablet
+feasibility. Native-shell or dedicated-client validation remains a separate gate.
+
 == Proposed first build and decision gate
 
-Use one small curated chapter and contrasting interaction fixtures to exercise
-globe-to-region navigation, selected-event evidence, a campaign, an exchange,
-and a branching institutional relationship. Do not make all candidate historical
+Use RFD 1's Japanese missions to Tang China chapter, bounded to one mission and
+selected learning/adaptation links after source review. Follow RFD 1's decision
+to compare geographic/symbolic and illustrated local-detail implementations in
+later separate threads, using both the Tang mission and a bounded Qin-conquest
+episode. These are two visual treatments across two scenarios, not a requirement
+for two rendering engines. Coordinate a common code baseline and comparable
+content and controls before separating implementation work; record measured
+results before choosing the local-detail default.
+
+Small contrasting fixtures, including Qin and institutional relationships, do
+not become additional full public launch chapters. Together the prototypes should
+exercise globe-to-local navigation and selected-event evidence. Do not make all candidate historical
 periods launch requirements or add accounts/collaboration before they are useful.
 
 Validate pointer and touch input, time/selection persistence, local scrubbing,
@@ -157,13 +238,31 @@ time, loading, and memory on agreed hardware. Then record whether Cesium and
 the Svelte/Phoenix integration satisfy the requirements before promoting this
 RFD to project direction.
 
+== Decision: resolve remaining technical contracts during implementation
+
+Prepare concrete proposals with worked examples and tests for remaining technical
+details during implementation, including date normalization, interval boundaries,
+and device-specific performance thresholds. Use the relevant RFD as the source
+of product and historical requirements, and record resolved contracts there with
+their supporting evidence. Do not require the owner to decide routine low-level
+mechanics individually or require all contracts to be finalized in advance.
+
+Bring choices that materially affect the user experience or historical meaning
+back to the owner before adopting them. Implementation discretion does not
+authorize changing settled decisions. Define contracts before dependent storage
+or behavior becomes durable, and choose measurable acceptance criteria before
+claiming implementation success rather than adjusting them to fit results.
+
+Open questions below and in RFD 2 remain work to resolve, not implicit approval
+of a particular answer. This records how future implementation should proceed;
+it does not start implementation or the deferred comparison threads now.
+
 == Open questions
 
-* Is Svelte + Phoenix approved, and should the first spike integrate Vite now?
+* Which available desktop/laptop and physical iPad-class tablet hardware, browsers, and performance limits should define the initial browser test matrix?
 * Does Cesium meet the desired styling and touch behavior on target hardware?
 * Which imagery and terrain providers meet visual, licensing, and cost needs?
-* When does curated file content need database editing and spatial queries?
-* Which native devices and experiences justify a shell or dedicated client?
+* Which additional native devices, integrations, and quality thresholds should guide the experience-first delivery choice at the post-browser-loop checkpoint?
 
 == References
 

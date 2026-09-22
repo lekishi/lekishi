@@ -1,36 +1,42 @@
 = RFD 0003 implementation checklist
 
 Implements link:README.adoc[RFD 3: Browser architecture and native options].
-The Phoenix scaffold exists; the proposed atlas stack is not implemented.
+The Phoenix scaffold exists; the approved experiment stack is not implemented.
+
+Resolve remaining technical contracts during implementation using concrete
+proposals, worked examples, and tests, and record the evidence in the owning RFD.
+Bring choices materially affecting experience or historical meaning back to the
+owner before adopting them; preserve settled decisions. Establish contracts and
+acceptance criteria before dependent work and completion claims, respectively.
 
 == Phase 0 — Architecture and rendering evaluation
 
-- [ ] Confirm frontend integration choice and target desktop/touch hardware.
+- [ ] Select available desktop/laptop and physical iPad-class tablet hardware, browsers, and performance limits for the approved Phoenix/Svelte/TypeScript/Vite experiment with Cesium evaluated first.
+- [ ] Integrate Svelte/TypeScript and Vite with Phoenix assets and releases; verify production-mode entrypoints, Cesium workers/styles/resources/models, and retained Phoenix pages without the Vite development server.
 - [ ] Prototype Cesium globe, terrain, routes, picking, and symbolic landmarks.
-- [ ] Test labels, geographic scale, local playback, and selection across zoom levels.
+- [ ] Compare labels, geographic scale, local playback, selection, and measured rendering behavior across zoom levels for RFD 1's two local-detail treatments and two scenarios, using later separate implementation threads with a common baseline.
 - [ ] Compare MapLibre if Cesium fails a specific visual, device, or delivery requirement.
 - [ ] Record provider rights, attribution, costs, payload sizes, and measured performance.
 - [ ] Resolve the rendering choice without introducing a speculative dual-renderer framework.
 
 == Phase 1 — Browser vertical slice
 
-- [ ] Integrate Svelte/TypeScript and the chosen build tool with Phoenix assets and releases if approved.
 - [ ] Implement renderer-independent RFD 2 time/filter/navigation logic and unit tests.
+- [ ] Preserve versioned API/data contracts and portable historical behavior fixtures.
 - [ ] Load reviewed content and complete the RFD 1 exploration loop.
 - [ ] Verify resource disposal, responsive layout, loading failures, and local scrubbing.
 - [ ] Run ExUnit, relevant client tests, browser interactions, and inspected visual checks.
 
 == Phase 2 — Persistent editorial capabilities when needed
 
-- [ ] Define and test local PostgreSQL/PostGIS migrations and bounded geographic/time queries.
-- [ ] Establish one content authority and preserve provenance during import.
+- [ ] Record the demonstrated editing/query need before adopting PostgreSQL for historical content; define and test local migrations and required queries, adding PostGIS only for separately justified spatial-query needs.
+- [ ] Establish one writable content authority and verify stable identifiers, citations, published revision history, and approval metadata survive migration; retained files are imports or exports, not a competing editable authority.
 - [ ] Add permissions and editorial transitions before opening contributor publication.
 - [ ] Introduce background jobs or realtime channels only for demonstrated workflows.
 
-== Native feasibility gate — timing and platform remain open
+== Native feasibility gate — after the first complete browser exploration loop
 
-- [ ] Preserve versioned API/data contracts and portable historical behavior fixtures.
-- [ ] Compare installable web, native shell, and dedicated native options against actual needs.
-- [ ] Test on physical target devices: input, memory, graphics, battery, lifecycle, and accessibility.
+- [ ] Compare installable web, native shell, Flutter, and dedicated platform options against the agreed experience quality bar and observed browser shortcomings; prototype candidates only where warranted, accept a shell only if it meets that bar, and do not treat installability as sufficient.
+- [ ] Test the completed browser exploration loop on a physical iPad at the checkpoint and validate any native candidates on physical target devices: input, memory, graphics, battery, lifecycle, and accessibility.
 - [ ] Review offline data and map caching rights before promising offline support.
 - [ ] Record what is shared and what must be rewritten before selecting a native implementation.

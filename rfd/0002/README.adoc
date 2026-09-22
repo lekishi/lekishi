@@ -46,6 +46,29 @@ Keep presentation colors, viewport coordinates, and Cesium objects out of the
 historical source of truth. Geometries can use GeoJSON where suitable, accompanied
 by explicit temporal and evidentiary metadata.
 
+== Decision: historical names with local-script forms
+
+Use the period-appropriate historical name as the primary place label, paired
+with its local-language/script form where supported by sources. Include Japanese
+kanji, Chinese hanzi, and equivalent writing systems for other places rather than
+displaying only romanized or English names. A label can pair a readable
+romanization with local script, such as "Chang'an · 長安"; the example does not
+establish a universal transliteration convention or assert historical pronunciation.
+
+Retain the name's language, script, historical validity, and source, including
+the relationship between a local-script form and a romanization or translation.
+Do not infer language or pronunciation from shared characters alone. Prefer
+source-supported period-appropriate forms; do not silently substitute modern
+orthography or fabricate a historical spelling when evidence is unavailable.
+Document missing or uncertain forms and distinguish editorial transliteration
+from original-script evidence. Multiple attested local names may coexist.
+
+Modern equivalents and alternate spellings remain available in details and
+search, including local-script and romanized queries. Preserve original display
+forms when normalizing search text. Explain relationships to modern places:
+renaming, relocation, successor settlements, and changed boundaries are not
+automatically aliases of an identical place.
+
 == Time and space contracts
 
 Historical dates are not ordinary application timestamps. Preserve the source's
@@ -73,6 +96,57 @@ Modern terrain is geographic context, not historical reconstruction. Rivers,
 coastlines, settlements, and borders can change; historical geometry overrides
 need their own sources and validity ranges.
 
+== Decision: readable, explicitly approximate locations
+
+Include approximate locations on the map using clearly marked approximate points
+or source-supported areas. Use labels or symbols as well as color to distinguish
+them from precise locations, and explain the location claim, its uncertainty,
+and supporting sources in details.
+
+Do not invent an uncertainty radius or precise boundary when the evidence supplies
+none. If a point anchors the label for a broadly located event, identify it as a
+display anchor rather than an asserted event coordinate. A source-supported area
+does not imply uniform probability or political control. Keep the default map
+readable rather than requiring prominent uncertainty areas for every event.
+
+When there is no usable geographic placement, retain the record in lists and
+details without manufacturing a map position. Approximate placement is distinct
+from wholly unknown location and is not grounds for excluding a supported event
+from the map.
+
+== Decision: possible temporal matches are included by default
+
+Time filtering includes events whose supported possible occurrence range
+overlaps the selected window, even when occurrence within that window is not
+certain. Visibly distinguish these possible matches from definite matches and
+expose the source date expression and uncertainty in the event details. The cue
+must not depend on color alone.
+
+For example, an event known only to have happened sometime between 730 and 760 CE
+appears as a possible match in a 740–750 CE window. This does not assert that it
+happened in those years, lasted thirty years, or occurred at the range midpoint.
+An occurrence range entirely outside the window does not match on this basis.
+Playback must preserve the distinction between uncertain occurrence and duration;
+it must not invent an exact event date or animate continuous activity throughout
+the uncertainty range.
+
+This decides the inclusion default for bounded uncertain occurrences, not all
+temporal mechanics. Exact endpoint conventions, calendar normalization, uncertain
+duration endpoints remain to be specified.
+
+== Decision: undated events remain discoverable outside temporal results
+
+Events with no usable date remain accessible through search, connected events,
+and a clearly labelled "Date unknown" list. Exclude them from time-filtered map
+results, chronological stepping, and playback; do not assign a placeholder date
+or treat a missing date as matching every time window. This differs from a
+bounded uncertain occurrence, which follows the possible-match policy above.
+
+Opening an undated event exposes its details and sources without changing the
+time window or inventing a playhead position. Mark its date as unknown, not
+"outside selected time": there is no evidence that it falls outside the window
+either. A connection to a dated event does not by itself establish its date.
+
 == Claims drive visualization
 
 Documented contact does not establish influence; influence does not imply
@@ -89,6 +163,42 @@ labelled illustrative. Use dated political-control snapshots rather than
 invented continuously moving boundaries. Where location or date is unknown,
 retain the record in the narrative/list rather than assigning arbitrary map
 coordinates or dates merely to make it visible.
+
+== Decision: first-release interpretation policy
+
+The first public release includes directly attested claims and interpretations
+already advanced in cited scholarship. Clearly distinguish the two and attribute
+interpretations to their sources. Attestation records what a source reports;
+it does not by itself establish that the report is undisputed or accurate.
+
+Original contributor hypotheses remain unpublished research notes, not public
+atlas content or a separate experimental public layer. This limits the initial
+review burden without excluding scholarly disagreement. Whether to publish
+original hypotheses in a later release requires a separate policy decision.
+
+Every published relationship requires a cited evidentiary basis. An interpretive
+label never substitutes for evidence. Label schematic route geometry separately
+from the historical claim: a sourced connection does not establish an exact
+itinerary. Generated illustrations and AI suggestions do not supply evidence.
+
+=== Decision: present an attributed main account with cited alternatives
+
+For the first release, present one clearly attributed main account with a visible
+indication when it is disputed. Explain the disagreement and make alternative
+scholarly accounts available in the detail panel, citing each account. Choosing
+the main account is an editorial presentation choice, not a declaration that
+the disagreement is settled or that alternatives have equal evidentiary support.
+
+Preserve distinct claims and their sources rather than merging conflicting dates,
+locations, or interpretations into a supposedly definitive record. A map depiction
+based on the main account must not conceal material disagreement behind an
+unqualified visual assertion. The detail panel should explain what differs and
+which account informs the depiction.
+
+Selectable interpretations that change the map and simultaneous competing map
+overlays are deferred beyond the first release. Disputed relationships need not
+be excluded solely because scholars disagree; they still must satisfy the cited
+evidence and publication policies above.
 
 == Acquisition and publication
 
@@ -117,12 +227,62 @@ appropriately; do not copy imagery or substantial text without suitable rights.
 
 Initially, contributors can propose content-file changes for review. A later
 editorial UI can support draft, source review, and publication, with revisions,
-attribution, corrections, and disagreement retained. Define review authority
-before inviting open publication; credentials alone do not substitute for sources.
+attribution, corrections, and disagreement retained. Apply the initial editorial
+authority below; credentials alone do not substitute for sources.
 
 AI may assist extraction, normalization suggestions, and missing-field checks.
 Its output remains a candidate with a traceable source, never an automatic
 historical authority or a reason to invent missing evidence.
+
+=== Decision: owner-led initial editorial review
+
+Darwin, the project owner, is the initial editor and may approve his own sourced
+work for the first public release. A second reviewer or specialist is not a
+mandatory publication gate. Invite specialist review when available and useful,
+without describing self-reviewed material as independently or expertly reviewed.
+
+Require citations and a documented review checklist before publication, including
+checks for source support, attribution, date/location uncertainty, the distinction
+between attestation and scholarly interpretation, and reuse rights. Record the
+reviewer and the content revision approved, including when author and reviewer
+are the same person. This applies to the initial content-file workflow, not only
+to a future editorial application.
+
+Self-review does not permit unsupported claims or original contributor hypotheses
+in public content. External contributors can propose changes, but publication
+requires the initial editor's approval; broader delegation remains to be defined.
+AI assistance does not constitute editorial approval.
+
+=== Decision: stable records with reviewed revisions and public correction history
+
+An event, relationship, or other historical record has a stable identity across
+multiple revisions. Its normal URL shows the latest published revision, not an
+unreviewed draft. Preserve published revisions and expose a reader-facing history
+of what changed, why, and the supporting sources; readers need not understand Git
+commits to follow corrections.
+
+Each revision preserves its content, citations, author, and change explanation.
+Publication records the approving editor, the exact revision approved, and when
+approval and publication occurred. A draft correction leaves the previous
+published revision visible until the correction is approved and published.
+Publish related changes as a consistent set of record revisions so an event and
+its relationships do not expose incompatible intermediate updates.
+
+For the initial file-based workflow, use Git history with explicit editorial
+metadata alongside the content. A commit alone is not editorial approval or
+publication. Retain the history needed to serve prior published revisions and
+their correction explanations. This does not require readers to select numbered
+chapter editions or require a custom branching-and-merging system.
+
+Corrections are distinct from scholarly disagreement: if competing claims remain
+supported, preserve them in the current revision under the main-account and
+cited-alternatives policy rather than hiding one in an older revision.
+
+If editing later moves into PostgreSQL, preserve these semantics with immutable
+revision records and a reference to the current published revision, retaining
+consistent publication across related records. The migration must preserve
+stable identities, published history, and approval metadata without introducing
+two writable authorities.
 
 == Alternatives and trade-offs
 
@@ -135,11 +295,9 @@ the distinctions above and version its interchange format.
 
 == Open questions
 
-* Which chapter, sources, and reviewers define the first curated release?
+* Which specific Japanese mission to Tang China, sources, and learning/adaptation links define the first curated release selected in RFD 1, and where would optional specialist review be most useful?
 * What exact date normalization and interval semantics should be standardized?
-* Which spatial uncertainty representations are useful to users?
-* How are competing interpretations selected and compared in the interface?
-* What publication permissions and revision policy suit external contributors?
+* What future delegation of publication authority suits external contributors beyond the initial owner-led review?
 
 == Implementation
 

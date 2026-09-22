@@ -45,6 +45,7 @@
 
               # Tools
               watchman
+              inotify-tools
               docker-compose
               yamllint
               shfmt
@@ -57,7 +58,7 @@
             # These packages are Linux-only in nixpkgs. Keeping Chromium and
             # ChromeDriver from the same revision prevents Wallaby's browser
             # protocol from drifting when a host browser auto-updates.
-            ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
+            ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isLinux [
               pkgs.watchexec
               pkgs.chromium
               pkgs.chromedriver
@@ -68,7 +69,7 @@
             export HEX_HOME="$PWD/.nix/hex"
             export REBAR_CACHE_DIR="$PWD/.nix/rebar3"
             export ERL_AFLAGS="-kernel shell_history enabled"
-            ${pkgs.lib.optionalString pkgs.stdenv.isLinux ''
+            ${pkgs.lib.optionalString pkgs.stdenv.hostPlatform.isLinux ''
               export CHROME_BIN="${pkgs.chromium}/bin/chromium"
               export CHROMEDRIVER_BIN="${pkgs.chromedriver}/bin/chromedriver"
             ''}

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Nix is installed as a system service. Repair its socket after an orb wake if
+# systemd has not already restored it.
+if [[ -x /nix/var/nix/profiles/default/bin/nix ]] &&
+	! systemctl is-active --quiet nix-daemon.socket; then
+	sudo systemctl start nix-daemon.socket
+fi

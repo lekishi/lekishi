@@ -1,0 +1,16 @@
+services:
+  postgres:
+    command: exec postgres -D "$PWD/.nix/postgres" -k "$PWD/.nix/postgres" -p "$PORT"
+    port: 5432
+    platforms: [linux]
+  web:
+    command: >-
+      until pg_isready -h 127.0.0.1 -p 5432 -U postgres; do sleep 0.2; done;
+      exec mix phx.server
+    port: 4000
+    health: /
+    portal:
+      title: Lekishi
+      description: Phoenix development server
+    agent: control
+    platforms: [linux]

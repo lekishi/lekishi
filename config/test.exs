@@ -1,5 +1,12 @@
 import Config
 
+database_connection =
+  if System.get_env("CI") do
+    [hostname: "localhost"]
+  else
+    [socket_dir: Path.expand("../.dev/postgres/socket", __DIR__)]
+  end
+
 # Configure your database
 #
 # The MIX_TEST_PARTITION environment variable can be used
@@ -8,10 +15,11 @@ import Config
 config :lekishi, Lekishi.Repo,
   username: "postgres",
   password: "postgres",
-  hostname: "localhost",
   database: "lekishi_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: System.schedulers_online() * 2
+
+config :lekishi, Lekishi.Repo, database_connection
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.

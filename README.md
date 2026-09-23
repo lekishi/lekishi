@@ -2,7 +2,7 @@
 
 An interactive historical atlas for exploring events and connections across
 places and time. Product and architecture proposals live in the
-[Requests for Discussion](rfd/README.md).
+[Requests for Discussion](rfd/README.adoc).
 
 To start your Phoenix server:
 

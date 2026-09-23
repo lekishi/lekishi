@@ -1,28 +1,31 @@
-# Lekishi Requests for Discussion
+= Lekishi Requests for Discussion
 
 RFDs preserve product intent, alternatives, and the reasoning behind proposals.
 Their existence does not imply approval or implementation; read their `state`
 and distinguish established requirements from proposed technical choices.
 
-| RFD | Topic |
-|---|---|
-| [1: Historical exploration and visual interactions](0001/README.adoc) | Globe-to-local exploration, playback, trade, learning, religion, conflict, and the first experience |
-| [2: Historical data, time, and evidence](0002/README.adoc) | Places, actors, relationships, uncertain dates, citations, acquisition, and editorial review |
-| [3: Browser architecture and native options](0003/README.adoc) | Phoenix baseline, proposed Svelte/Cesium client, rendering evaluation, persistence, and native boundaries |
+[cols="1,2",options="header"]
+|===
+|RFD |Topic
+|link:0001/README.adoc[1: Historical exploration and visual interactions] |Globe-to-local exploration, playback, trade, learning, religion, conflict, and the first experience
+|link:0002/README.adoc[2: Historical data, time, and evidence] |Places, actors, relationships, uncertain dates, citations, acquisition, and editorial review
+|link:0003/README.adoc[3: Browser architecture and native options] |Phoenix baseline, proposed Svelte/Cesium client, rendering evaluation, persistence, and native boundaries
+|===
 
-## Format and lifecycle
+== Format and lifecycle
 
-Following [Shosai's RFD format](https://github.com/chaba-dev/shosai/tree/main/rfd),
+Following https://github.com/chaba-dev/shosai/tree/main/rfd[Shosai's RFD format],
 each proposal lives at `rfd/NNNN/README.adoc` and begins with:
 
-```asciidoc
+[source,asciidoc]
+----
 :authors: Name <contact>
 :state: prediscussion
 :discussion:
 :labels: topic, another-topic
 
 = RFD 1 Example title
-```
+----
 
 Authors are semicolon-separated, labels comma-separated, and the title uses an
 unpadded number. Metadata lives only in the RFD, not duplicated in this index.

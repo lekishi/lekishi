@@ -2,6 +2,8 @@
 
 Implements link:README.adoc[RFD 1: Historical exploration and visual interactions].
 All work below is proposed; the concept images are not implementation evidence.
+link:../0004/README.adoc[RFD 4] plans this implementation and owns the
+release-level acceptance criteria; the items here own the interaction work.
 
 == Phase 0 — Scope and interaction proof
 
@@ -25,3 +27,4 @@ All work below is proposed; the concept images are not implementation evidence.
 - [ ] Demonstrate a nonmilitary story is as navigable as a campaign; verify simultaneous story layers share one map, time window, and playhead, identify memberships without color alone, preserve shared events without duplication, and imply no unsupported cross-story relationship.
 - [ ] Confirm labels and scene geometry against reviewed data, not generated mockups.
 - [ ] Record measured performance and remaining limitations with RFD 3.
+- [ ] Re-verify the exploration loop, device layouts, keyboard access, reduced motion, non-color cues, and event list on the RFD 4 release build, recording the results as release evidence (RFD 4 AC3, AC5, AC6).

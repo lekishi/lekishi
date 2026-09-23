@@ -1,0 +1,60 @@
+= RFD 0004 implementation checklist
+
+Implements link:README.adoc[RFD 4: Public PoC release charter].
+Release-level criteria live in RFD 4; the per-RFD tasks stay in the
+link:../0001/IMPLEMENTATION.adoc[RFD 1],
+link:../0002/IMPLEMENTATION.adoc[RFD 2], and
+link:../0003/IMPLEMENTATION.adoc[RFD 3] checklists and are referenced here
+rather than restated. No account creation, purchase, or external deployment
+occurs before the authorization item below.
+
+== Wave 1 — Parallel foundations
+
+- [ ] A. Complete RFD 2's bounded source-feasibility pass over up to three Tang missions and return findings for owner review (RFD 2 Phase 0).
+- [ ] B. Define the RFD 2 data, time, and geometry contracts the first chapter depends on (RFD 2 Phase 0).
+- [ ] C. Establish the approved Phoenix + Svelte/TypeScript + Vite + Cesium production-build foundation (RFD 3 Phase 0).
+- [ ] D. Evaluate hosting, map/imagery/terrain providers, device targets, performance limits, and delivery options; record rights, costs, payloads, and measured behavior (RFD 3 Phase 0).
+
+== Gate 1 — Foundations frozen
+
+- [ ] Owner reviews the Wave 1 findings, selects the launch mission from the feasibility recommendation, and accepts the delivery approach before Wave 2 starts.
+
+== Wave 2 — Reviewed fixtures and shared baseline
+
+- [ ] Publish the reviewed Tang fixture for the selected mission (RFD 1 Phase 0, RFD 2 Phase 1).
+- [ ] Source-check the bounded Qin-conquest comparison fixture and keep it comparison-only (RFD 1 Phase 0).
+- [ ] Prepare the release artifact and deployment packaging without deploying (RFD 3 release preparation).
+- [ ] Build the shared comparison harness and baseline content, controls, and time behavior (RFD 3 Phase 0 comparison item).
+
+== Gate 2 — Common runnable baseline
+
+- [ ] Both scenarios run on the shared baseline with comparable content, controls, selection, and time behavior; the treatment comparison does not start before this gate.
+
+== Treatment comparison and Gate 3
+
+- [ ] Compare geographic/symbolic and illustrated-local treatments across the Tang and Qin scenarios, recording measured results and unsupported-detail risks (RFD 1 Phase 0, RFD 3 Phase 0).
+- [ ] Gate 3: the owner selects the local-detail treatment, and the experiment's renderer is resolved — Cesium confirmed, or the bounded MapLibre comparison completed and reviewed because Cesium failed a named visual, device, or delivery requirement (RFD 3 Phase 0).
+
+== Complete the exploration loop
+
+- [ ] Implement and verify the RFD 1 Phase 1 loop with RFD 2 time semantics, including the AC3 behaviors in link:README.adoc[RFD 4].
+
+== Release verification
+
+- [ ] AC1 predeployment rehearsal: verify HTTPS redirect, certificate, routes, and the health endpoint on the release artifact; AC1 is complete only after authorized deployment (outside-host check below).
+- [ ] AC2: verify reviewed launch content, citations, the approval record, and visible uncertainty.
+- [ ] AC4: verify production-built Vite assets and the selected renderer's resources with no Vite development server.
+- [ ] AC5: record desktop/laptop and physical-iPad results, phone-layout usability, and measured performance against the agreed matrix and thresholds.
+- [ ] AC6: verify keyboard access, touch, reduced motion, non-color cues, and the non-map event list.
+- [ ] AC7: verify attribution, licenses, reuse terms, and provider compliance.
+- [ ] AC8: verify CI, error visibility, documented deployment steps, and an exercised rollback or recovery path.
+- [ ] Record the release evidence, remaining limitations, and any criterion met with exceptions for owner review.
+
+== Physical iPad acceptance
+
+- [ ] Run the release build on the physical iPad and verify touch interaction, performance, accessibility, and lifecycle; record the measured results.
+
+== Public launch (owner-authorized)
+
+- [ ] Obtain explicit owner authorization for external deployment, provider accounts, purchases, and the domain.
+- [ ] Deploy the release build and verify AC1 from outside the host.

@@ -10,6 +10,7 @@ and distinguish established requirements from proposed technical choices.
 |link:0001/README.adoc[1: Historical exploration and visual interactions] |Globe-to-local exploration, playback, trade, learning, religion, conflict, and the first experience
 |link:0002/README.adoc[2: Historical data, time, and evidence] |Places, actors, relationships, uncertain dates, citations, acquisition, and editorial review
 |link:0003/README.adoc[3: Browser architecture and native options] |Phoenix baseline, proposed Svelte/Cesium client, rendering evaluation, persistence, and native boundaries
+|link:0004/README.adoc[4: Public PoC release charter] |Public-PoC acceptance criteria, non-goals, owner gates, and dependency order
 |===
 
 == Format and lifecycle
@@ -48,6 +49,9 @@ exists, to `published` when agreed, and to `committed` only after implementation
 Checklist completion does not automatically change state. Material changes to
 published decisions need review and a new RFD when superseding the decision.
 
-These initial drafts capture the founding discussion, not authorization to
-install their proposed stack or implement their checklists. Lekishi does not
-yet have Shosai's `make check-rfds` automation.
+These initial drafts capture the founding discussion. RFD 4 records the owner's
+decision that implementation toward a publicly accessible PoC is now planned and
+owns the release acceptance criteria; installing the approved experiment stack is
+part of that planned implementation, while external accounts, purchases, and
+deployment still require explicit owner authorization. Lekishi does not yet have
+Shosai's `make check-rfds` automation.

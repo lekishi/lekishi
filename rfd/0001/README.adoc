@@ -214,8 +214,10 @@ would help. If no candidate is sufficiently supported within this initial pass, 
 that outcome and propose a narrower scope rather than filling gaps speculatively
 or continuing research without a bound.
 
-This selects the research approach, not the mission or its historical claims,
-and does not launch the feasibility research or implementation now.
+This selects the research approach, not the mission or its historical claims.
+The feasibility pass and implementation are now planned under
+link:../0004/README.adoc[RFD 4]; the mission remains an owner decision after the
+pass returns.
 
 === Decision: explicit coverage guidance and distinct empty states
 
@@ -255,8 +257,9 @@ the two treatments so differences in features do not obscure the visual trade-of
 Compare globe-to-local continuity, readability, interaction, performance, asset
 and research effort, and the risk of implying unsupported historical detail.
 Generated images can inform styling but cannot settle implementation feasibility.
-This records future comparative work; it does not launch implementation now or
-select either treatment as the production default.
+This comparative work is now planned under link:../0004/README.adoc[RFD 4] and
+begins only after RFD 4's Gate 2; it still does not select either treatment as
+the production default.
 
 == Visual references
 
@@ -295,3 +298,5 @@ reconstruction. Prefer geographic continuity with restrained symbolic detail.
 See link:IMPLEMENTATION.adoc[RFD 1 implementation checklist].
 link:../0002/README.adoc[RFD 2] owns historical meaning and evidence;
 link:../0003/README.adoc[RFD 3] owns rendering and platform feasibility.
+link:../0004/README.adoc[RFD 4] owns the public-PoC release criteria that this
+RFD's exploration loop must satisfy.

@@ -22,8 +22,10 @@ The discussion first suggested React as a familiar default. The owner raised
 Svelte and Phoenix with Svelte; React was not established as a requirement.
 The owner has approved Phoenix + Svelte/TypeScript + Vite for the later
 implementation experiments, with CesiumJS as the first renderer to evaluate.
-This is an experiment direction, not an irreversible production stack decision
-or a request to launch implementation threads now.
+This is an experiment direction, not an irreversible production stack decision.
+link:../0004/README.adoc[RFD 4] now plans that implementation toward a publicly
+accessible PoC; the experiment's measured results still determine whether the
+stack is promoted.
 Browser-first delivery and keeping native open are established requirements.
 
 == Proposed responsibilities
@@ -254,8 +256,9 @@ or behavior becomes durable, and choose measurable acceptance criteria before
 claiming implementation success rather than adjusting them to fit results.
 
 Open questions below and in RFD 2 remain work to resolve, not implicit approval
-of a particular answer. This records how future implementation should proceed;
-it does not start implementation or the deferred comparison threads now.
+of a particular answer. This records how implementation should proceed;
+link:../0004/README.adoc[RFD 4] now plans that implementation and gates the
+deferred comparison threads at its Gate 2.
 
 == Open questions
 
@@ -274,6 +277,8 @@ it does not start implementation or the deferred comparison threads now.
 
 == Implementation
 
-See link:IMPLEMENTATION.adoc[RFD 3 implementation checklist]. No production
-deployment, native-platform commitment, or shared database migration is
-authorized by this proposal.
+See link:IMPLEMENTATION.adoc[RFD 3 implementation checklist].
+link:../0004/README.adoc[RFD 4] defines the public-PoC release criteria and
+plans this implementation; external deployment still requires explicit owner
+authorization. No production deployment, native-platform commitment, or shared
+database migration is authorized by this proposal.

@@ -1,7 +1,8 @@
 = RFD 0003 implementation checklist
 
 Implements link:README.adoc[RFD 3: Browser architecture and native options].
-The Phoenix scaffold exists; the approved experiment stack is not implemented.
+The Phoenix scaffold exists; the approved experiment stack is not implemented yet
+and is now planned under link:../0004/README.adoc[RFD 4].
 
 Resolve remaining technical contracts during implementation using concrete
 proposals, worked examples, and tests, and record the evidence in the owning RFD.
@@ -26,6 +27,17 @@ acceptance criteria before dependent work and completion claims, respectively.
 - [ ] Load reviewed content and complete the RFD 1 exploration loop.
 - [ ] Verify resource disposal, responsive layout, loading failures, and local scrubbing.
 - [ ] Run ExUnit, relevant client tests, browser interactions, and inspected visual checks.
+
+== Public PoC release preparation (RFD 4)
+
+link:../0004/README.adoc[RFD 4] owns the release acceptance criteria; this
+section covers the delivery work that satisfies them. It does not depend on
+Phase 2, which remains conditional.
+
+- [ ] Produce the release artifact from a clean checkout with the Vite production build, digested static assets, and the selected renderer's resources; verify it serves without the Vite development server (RFD 4 AC4).
+- [ ] Expose and document a health endpoint and configure error visibility the owner can review (RFD 4 AC1, AC8).
+- [ ] Document repeatable deployment steps and a rollback or recovery path, and exercise the recovery path (RFD 4 AC8).
+- [ ] Verify HTTPS redirect, certificate, and route behavior on the release artifact before public launch (RFD 4 AC1).
 
 == Phase 2 — Persistent editorial capabilities when needed
 

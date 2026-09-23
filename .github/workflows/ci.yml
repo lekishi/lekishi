@@ -11,6 +11,7 @@ env:
 
   OTP_VERSION: "28.5"
   ELIXIR_VERSION: "1.20"
+  NODE_VERSION: "24"
 
 jobs:
   lint:
@@ -91,7 +92,7 @@ jobs:
         image: postgres:18-alpine
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_PASSWORD: [REDACTED:password]
           POSTGRES_DB: lekishi_test
         ports:
           - 5432:5432
@@ -110,6 +111,21 @@ jobs:
         with:
           otp-version: ${{ env.OTP_VERSION }}
           elixir-version: ${{ env.ELIXIR_VERSION }}
+
+      # pnpm first: setup-node resolves the pnpm store path for its cache, so the
+      # package manager has to be on PATH. The pin lives in the frontend workspace's
+      # `packageManager` field.
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          package_json_file: assets/package.json
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+          cache-dependency-path: assets/pnpm-lock.yaml
 
       - name: Cache Mix dependencies
         uses: actions/cache@v4
@@ -141,5 +157,83 @@ jobs:
           mix assets.setup
           mix assets.build
 
+      # svelte-check and Vitest for the frontend workspace. They run here, after
+      # `mix assets.setup` installed the workspace, instead of in a Node-only job:
+      # `assets/package.json` links phoenix, phoenix_html, and phoenix_live_view
+      # from `deps/`, so a frontend job cannot install without Elixir dependencies.
+      - name: Check frontend types and unit tests
+        run: mix assets.check
+
       - name: Run tests
         run: mix test
+
+  e2e:
+    # Builds the production artifact (Vite build, digested static assets, Mix
+    # release) and runs the atlas browser checks against it with no Vite
+    # development server (RFD 4 AC4).
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+    env:
+      MIX_ENV: prod
+      LEKISHI_SKIP_BUILD: "1"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: ${{ env.OTP_VERSION }}
+          elixir-version: ${{ env.ELIXIR_VERSION }}
+
+      # pnpm first: setup-node resolves the pnpm store path for its cache, so the
+      # package manager has to be on PATH. The pin lives in the frontend workspace's
+      # `packageManager` field.
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          package_json_file: assets/package.json
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+          cache-dependency-path: assets/pnpm-lock.yaml
+
+      - name: Cache Mix dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            deps
+            _build
+          key: mix-e2e-${{ runner.os }}-${{ hashFiles('mix.lock') }}
+          restore-keys: |
+            mix-e2e-${{ runner.os }}-
+            mix-${{ runner.os }}-
+
+      - name: Install Hex and Rebar
+        run: |
+          mix local.hex --force
+          mix local.rebar --force
+
+      - name: Install dependencies
+        run: mix deps.get
+
+      - name: Install frontend dependencies
+        run: pnpm install --frozen-lockfile
+        working-directory: assets
+
+      - name: Install browser
+        run: pnpm exec playwright install --with-deps chromium
+        working-directory: assets
+
+      - name: Build production assets and verify them
+        run: mix assets.deploy
+
+      - name: Build release
+        run: mix release --overwrite
+
+      - name: Browser checks against the release
+        run: pnpm e2e
+        working-directory: assets

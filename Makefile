@@ -9,7 +9,7 @@ POSTGRES_DATA := $(POSTGRES_DIR)/data
 POSTGRES_SOCKET := $(POSTGRES_DIR)/socket
 POSTGRES_LOG := $(POSTGRES_DIR)/postgres.log
 
-.PHONY: dev up down migration postgres init-postgres psql
+.PHONY: dev up down migration postgres init-postgres psql release check-release
 
 dev:
 	mix phx.server
@@ -49,3 +49,14 @@ postgres: init-postgres
 psql: up
 	psql --host="$(POSTGRES_SOCKET)" --port="$(POSTGRES_PORT)" \
 		--username=postgres --dbname=postgres
+
+# Production artifact without deploying it: minified Tailwind, Vite production
+# build, digested static assets, and the asset check.
+release:
+	MIX_ENV=prod mix assets.deploy
+
+# Build the release, then run the browser checks against it with no Vite
+# development server (LEKISHI_SKIP_BUILD=1 reuses the artifact `release` built).
+check-release: release
+	MIX_ENV=prod mix release --overwrite
+	cd assets && LEKISHI_SKIP_BUILD=1 pnpm e2e

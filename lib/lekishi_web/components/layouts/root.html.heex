@@ -6,7 +6,14 @@
     <meta name="csrf-token" content={get_csrf_token()} />
     <.live_title default="Lekishi" suffix=" · Phoenix Framework" phx-no-format>{assigns[:page_title]}</.live_title>
     <link phx-track-static rel="stylesheet" href={~p"/assets/css/app.css"} />
-    <script defer phx-track-static type="text/javascript" src={~p"/assets/js/app.js"}>
+    <%!--
+      The Phoenix bundle is an ES module: LiveView relies on `import.meta`.
+      Module scripts are deferred, so the load order relative to the page is
+      unchanged. The atlas workspace is a separate entry, loaded only by the atlas
+      page (see `Layouts.atlas`) in addition to this bundle, so this bundle never
+      downloads Cesium and the two entries cannot import each other.
+    --%>
+    <script phx-track-static type="module" src={~p"/assets/js/app.js"}>
     </script>
     <script>
       (() => {

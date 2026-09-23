@@ -25,8 +25,11 @@ config :lekishi, LekishiWeb.Endpoint,
   debug_errors: true,
   secret_key_base: "iybrfZWia5JsSm3+BxTh34mEQDHVFSNGSTpazu80BNkKzAd19ZuTLKp9RqUbyzlh",
   watchers: [
-    esbuild: {Esbuild, :install_and_run, [:lekishi, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:lekishi, ~w(--watch)]}
+    tailwind: {Tailwind, :install_and_run, [:lekishi, ~w(--watch)]},
+    # Vite builds the TypeScript/Svelte bundle into priv/static/assets on change,
+    # exactly where production serves it from. One origin, one static path, and
+    # no second dev server that production would not have.
+    pnpm: ["run", "dev", cd: Path.expand("../assets", __DIR__)]
   ]
 
 # ## SSL Support

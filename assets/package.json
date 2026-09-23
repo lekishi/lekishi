@@ -1,0 +1,32 @@
+{
+  "name": "lekishi-assets",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.3.4",
+  "description": "Lekishi frontend workspace: TypeScript + Svelte + Vite build for the Phoenix application.",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch --mode development",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "e2e": "playwright test"
+  },
+  "dependencies": {
+    "cesium": "1.145.0",
+    "phoenix": "link:../deps/phoenix",
+    "phoenix_html": "link:../deps/phoenix_html",
+    "phoenix_live_view": "link:../deps/phoenix_live_view",
+    "svelte": "^5.57.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@sveltejs/vite-plugin-svelte": "^7.3.0",
+    "@types/node": "^26.6.2",
+    "jsdom": "^30.1.1",
+    "svelte-check": "^4.7.6",
+    "typescript": "^5.9.0",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.1"
+  }
+}

@@ -35,6 +35,71 @@ defmodule LekishiWeb.Layouts do
 
   def app(assigns) do
     ~H"""
+    <.site_header />
+
+    <main class="px-4 py-20 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl space-y-4">
+        {render_slot(@inner_block)}
+      </div>
+    </main>
+
+    <.flash_group flash={@flash} />
+    """
+  end
+
+  @doc """
+  Renders the full-viewport shell used by the atlas workspace.
+
+  The atlas is a dark, map-first surface rather than a reading page, so it gets
+  its own shell instead of the constrained documentation layout. The workspace
+  inside it is owned by the client.
+  """
+  attr :flash, :map, required: true, doc: "the map of flash messages"
+  slot :inner_block, required: true
+
+  def atlas(assigns) do
+    ~H"""
+    <%!--
+      The atlas workspace is its own Vite entry (`assets/js/atlas/entry.ts`), and
+      it is the only thing that mounts the workspace: this page adds the workspace
+      bundle on top of the Phoenix bundle the root layout loads. It is a separate
+      entry rather than a chunk of the Phoenix bundle because Phoenix rewrites the
+      script URL to its digested name in production while Vite's chunk imports
+      reference an entry by its unhashed name: an entry that a chunk imports would
+      be fetched and evaluated twice.
+    --%>
+    <script type="module" src={~p"/assets/js/atlas.js"}>
+    </script>
+
+    <div class="flex h-dvh min-h-0 flex-col bg-slate-950">
+      <header class="flex items-center justify-between gap-4 border-b border-slate-800 bg-slate-950 px-4 py-2.5">
+        <a href="/" class="flex items-center gap-2.5">
+          <img src={~p"/images/logo.svg"} width="24" alt="" />
+          <span class="text-sm font-semibold tracking-tight text-slate-100">Lekishi</span>
+          <span class="rounded-full border border-amber-300/50 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-amber-300">
+            Atlas foundation
+          </span>
+        </a>
+        <nav class="flex items-center gap-4 text-xs">
+          <a href="/" class="text-slate-300 transition hover:text-white">Phoenix home</a>
+        </nav>
+      </header>
+
+      <main class="relative min-h-0 flex-1">{render_slot(@inner_block)}</main>
+    </div>
+
+    <.flash_group flash={@flash} />
+    """
+  end
+
+  @doc """
+  Renders the shared application header.
+
+  Named `site_header` because `CoreComponents.header/1` is the section heading
+  component imported by `use LekishiWeb, :html`.
+  """
+  def site_header(assigns) do
+    ~H"""
     <header class="navbar px-4 sm:px-6 lg:px-8">
       <div class="flex-1">
         <a href="/" class="flex-1 flex w-fit items-center gap-2">
@@ -61,14 +126,6 @@ defmodule LekishiWeb.Layouts do
         </ul>
       </div>
     </header>
-
-    <main class="px-4 py-20 sm:px-6 lg:px-8">
-      <div class="mx-auto max-w-2xl space-y-4">
-        {render_slot(@inner_block)}
-      </div>
-    </main>
-
-    <.flash_group flash={@flash} />
     """
   end
 

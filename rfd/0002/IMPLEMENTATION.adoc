@@ -1,0 +1,32 @@
+= RFD 0002 implementation checklist
+
+Implements link:README.adoc[RFD 2: Historical data, time, and evidence].
+
+== Phase 0 — Content and contracts
+
+- [ ] Compare up to three Tang missions in one initial desk-research pass using accessible sources and owner-supplied references under RFD 1; return findings before deeper research, purchases, or outreach, recommending a concrete content inventory with bibliography, coverage limits, evidence/rights gaps, and optional specialist-review needs, or reporting that no candidate is sufficiently supported; document the initial editor's review checklist and approval record, permitting self-review without implying independent specialist review.
+- [ ] Define portable identifiers, claim citations, source locators, and reuse metadata, including historical names with sourced language/script forms, temporal validity, and explicit romanization/translation relationships.
+- [ ] Specify BCE/CE, calendars, precision, uncertainty, and interval boundary semantics.
+- [ ] Distinguish event duration from uncertain occurrence and define partial ordering.
+- [ ] Define geometry validity, approximate locations, and route interpretation metadata.
+
+== Phase 1 — Curated records
+
+- [ ] Implement stable record revisions, reviewer permissions, and draft-to-publication transitions using Git history and explicit editorial metadata; expose the latest published revision and readable correction history, publishing related record changes consistently.
+- [ ] Add schema-validated content covering a campaign, exchange, and institutional relationship.
+- [ ] Review imported candidates and preserve their external identifiers and licenses; verify historical/local-script labels and local-script/romanized search aliases without conflating successor places, and record the initial editor's approval of the published content revision in the file-based workflow.
+- [ ] Represent contradictory accounts and records lacking exact dates or map positions; present an attributed main account with a visible dispute indication and cited alternatives in the detail panel, without merging competing claims or requiring switchable map interpretations.
+- [ ] Verify every published relationship has a cited evidentiary basis; distinguish attested claims from cited scholarly interpretations, label schematic geometry separately, and exclude original contributor hypotheses from public content.
+
+== Phase 2 — Persistence and contributions
+
+- [ ] Move to the RFD 3 store when needed without creating two writable sources of truth.
+- [ ] Add editorial tools only after the content-file workflow reveals concrete needs.
+
+== Acceptance evidence
+
+- [ ] Test BCE/CE boundary cases, uncertain dates, calendar conversions, and range endpoints; verify wholly undated events remain discoverable through search, connections, and a "Date unknown" list but are absent from time-filtered map results, chronological stepping, and playback, and opening them does not change time or mislabel them as outside the window.
+- [ ] Test asymmetric overlapping intervals and events with only partial ordering; verify the default includes a 730–760 CE uncertain occurrence as a visibly uncertain possible match for 740–750 CE, excludes disjoint ranges, and does not invent an exact date or duration during playback.
+- [ ] Verify a draft correction leaves the published version visible, publication updates the stable URL while retaining prior published revisions and approval metadata, related changes appear consistently, and correction history does not replace current historical uncertainty or disagreement.
+- [ ] Confirm no route animation or territory interpolation asserts unsupported history; verify approximate points and source-supported areas carry non-color-only uncertainty cues and source explanations, display anchors are not asserted coordinates, no unsupported radius or boundary is generated, and wholly unlocated records remain accessible without fabricated map positions.
+- [ ] Audit source locators, attribution, and media redistribution rights for the first release.

@@ -1,0 +1,24 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "source",
+  "source_id": "lks:source:example-chronicle-a",
+  "source_hash": "sha256:b009755e237ca35b5c206212b928aade377729f67f8d867e701c21857f298a45",
+  "kind": "primary",
+  "title": "Example chronicle (synthetic contract example, not historical content)",
+  "edition": "Synthetic edition used only to exercise the v0 contract",
+  "author": "Example Chronicler (synthetic)",
+  "issued": {"year": 1900, "era": "ce"},
+  "language": "en",
+  "identifiers": [{"system": "other", "value": "example-chronicle-a"}],
+  "license": {
+    "status": "recorded",
+    "license_id": "public-domain",
+    "attribution_text": "Example chronicle (synthetic contract example)",
+    "redistribution": "permitted",
+    "quotation_permitted": true,
+    "reviewed_by": "Contract example",
+    "reviewed_at": "2026-01-01T00:00:00Z",
+    "notes": "Synthetic example. The v0 contract records reuse terms per source; this fixture is not a real work."
+  },
+  "notes": "Synthetic fixture: it asserts nothing about the past and must never be imported as content."
+}

@@ -50,7 +50,6 @@ defmodule Lekishi.MixProject do
       {:lazy_html, ">= 0.1.0", only: :test},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:phoenix_live_dashboard, "~> 0.8.3"},
-      {:esbuild, "~> 0.10", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.5", runtime: Mix.env() == :dev},
       {:heroicons,
        github: "tailwindlabs/heroicons",
@@ -89,14 +88,27 @@ defmodule Lekishi.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["compile", "tailwind lekishi", "esbuild lekishi"],
-      "assets.deploy": [
-        "tailwind lekishi --minify",
-        "esbuild lekishi --minify",
-        "phx.digest"
+      # Frontend assets are built by Vite from the assets/ workspace; see README.md.
+      "assets.setup": [
+        "tailwind.install --if-missing",
+        "cmd --cd assets pnpm install --frozen-lockfile"
       ],
-      precommit: ["compile --warnings-as-errors", "deps.unlock --unused", "format", "test"]
+      "assets.check": ["cmd --cd assets pnpm run check", "cmd --cd assets pnpm test"],
+      "assets.build": ["compile", "tailwind lekishi", "cmd --cd assets pnpm run build"],
+      "assets.deploy": [
+        "compile",
+        "tailwind lekishi --minify",
+        "cmd --cd assets pnpm run build",
+        "phx.digest",
+        "lekishi.assets.check"
+      ],
+      precommit: [
+        "compile --warnings-as-errors",
+        "deps.unlock --unused",
+        "format",
+        "test",
+        "assets.check"
+      ]
     ]
   end
 end

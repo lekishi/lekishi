@@ -27,14 +27,27 @@ lecinote-*.tar
 
 # Ignore assets that are produced by build tools.
 /priv/static/assets/
+/priv/static/cesium/
 /priv/static/uploads/
 
 # Ignore digested assets cache.
 /priv/static/cache_manifest.json
 
+# Digested copies and their gzip variants are produced by "mix phx.digest"
+# during a release build ("make release"); the un-digested files are the sources.
+/priv/static/**/*.gz
+/priv/static/**/*-????????????????????????????????.*
+
 # In case you use Node.js/npm, you want to ignore these.
 npm-debug.log
 /assets/node_modules/
+
+# Frontend build and browser-test output.
+/assets/test-results/
+/assets/playwright-report/
+
+# Local review artifacts (screenshots, recordings) are never committed.
+/.amp/in/
 
 /.direnv/
 /.dev/

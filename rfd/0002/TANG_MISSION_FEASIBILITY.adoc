@@ -1,0 +1,996 @@
+= Tang mission source-feasibility pass (Wave 1A)
+:state: Wave 1A desk-research report — findings for Gate 1 owner review; not published atlas content, not an RFD decision
+:prepared-from: origin/main @ 8134297
+:research-window: single bounded pass, 2026-09-23
+:toc:
+:toclevels: 2
+
+This report answers link:../0001/README.adoc[RFD 1]'s "source feasibility before
+selecting the mission" decision and link:../0002/README.adoc[RFD 2]'s Phase 0
+checklist item: compare up to three Japanese missions to Tang China in one initial
+desk-research pass using accessible sources and owner-supplied references, and
+return findings before deeper research, purchases, or outreach. It is a
+feasibility report, not a selection: the mission choice is
+link:../0004/README.adoc[RFD 4]'s Gate 1 owner decision.
+
+Nothing in this report is published atlas content. Where it states historical
+facts it cites a source and a locator; where it describes identifications,
+reconstructions, or scholarly readings it says so. It asserts no route, no
+causation, and no adaptation beyond what its cited sources state.
+
+For the recommended mission the coverage model is: *primary mission window
+750–754; included coda nodes outside that window at 758, 759, 763, and 779; the
+outbound voyage of 752 is excluded* (<<coverage-model>>). This one model is used
+without variation in the recommendation, the comparison, the coverage model, the
+coverage exclusions, and the Gate 1 decision.
+
+== Purpose, scope, and method
+
+Scope performed in this pass:
+
+* Read `AGENTS.md`, RFD 1, RFD 2, RFD 4, their implementation checklists, and the
+  founding discussion linked from RFD 1.
+* Inspected the two owner-supplied photographs attached in the founding
+  discussion (see <<owner-inputs>>).
+* Shortlisted three missions and read their principal primary sources in
+  accessible digital editions, recording locators (volume and entry).
+* Checked access status and reuse terms for each candidate's sources, for
+  candidate image material, and for candidate structured-data sources.
+* Checked every URL cited below with an HTTP request on 2026-09-23 (see
+  <<verification>>).
+
+Scope explicitly not performed, per the pass's bounds: no purchases, no account
+creation, no specialist contact, no archival or library visit, no
+interlibrary-loan request, no route reconstruction, no new research beyond the
+shortlist, and no editorial approval of any content.
+
+Method notes that matter for reading the findings:
+
+* "Accessible" means reachable in this orb without payment, login, or
+  institutional affiliation. Paywalled or print-only works are recorded as
+  bibliography candidates with their access limitation stated.
+* Digital transcriptions of classical texts (Wikisource, university sites) are
+  convenient surrogates, not critical editions. Locators below were verified in
+  the transcription named; before publication, each locator must be re-checked
+  against a critical edition, because these transcriptions are unproofread and
+  use placeholders (`■`) for damaged or unavailable characters.
+* A source that reports an event is evidence that the report exists; it is not
+  by itself proof that the event occurred as reported. Reports written long
+  after the event, self-reports, and hagiographic biographies are labelled as
+  such below (RFD 2's attestation rule).
+
+=== Owner-supplied references
+
+[[owner-inputs]]
+The founding discussion attaches two photographs of the owner's shelf. The
+visible works are illustrated reference atlases: DK/Smithsonian *History Map by
+Map*, *Battles Map by Map*, *Battles That Changed History*, *Great Maps*,
+National Geographic *Ultimate Visual History of the World*, and
+*Timeline of World History* (Imperial War Museums). No title, author, or page
+reference for the Tang missions was supplied in text.
+
+Finding: none of these works is a research source for a single mission at the
+level the chapter requires, and this pass could not locate chapter-level
+coverage of any of the three candidates in them. This confirms RFD 2's own
+assumption that the owner's illustrated books are "useful high-level references,
+but will not supply every date, route, interaction, or competing
+interpretation." They can inform visual register and orientation only; they
+supply no claim, locator, or citation for the launch chapter.
+
+[[source-classes]]
+== Source classes and shared access findings
+
+=== Primary sources (near-contemporaneous or official compilations)
+
+[cols="1,2,1,1",options="header"]
+|===
+|Work |What it is |Access in this pass |Reuse
+|*續日本紀* (797, official chronicle, 697–791)
+|Court-ordered chronicle; records appointments, edicts, embassies, returns, and
+death notices with day-level dates.
+|Free full text: link:https://zh.wikisource.org/wiki/%E7%BA%8C%E6%97%A5%E6%9C%AC%E7%B4%80[Wikisource 續日本紀].
+Unproofread transcription.
+|Text public domain. Wikisource page text additionally CC BY-SA 4.0; cite the
+work and the edition, not the wiki page.
+|*唐大和上東征傳* (779, biography of Jianzhen)
+|Hagiographic biography by 淡海三船 (真人元開); the only continuous narrative of
+the 753 return voyage.
+|Free full text: link:https://zh.wikisource.org/wiki/%E5%94%90%E5%A4%A7%E5%92%8C%E4%B8%8A%E6%9D%B1%E5%BE%81%E5%82%B3[Wikisource]. Taishō canon text (T.2089, 遊方記抄) via link:https://cbetaonline.dila.edu.tw/zh/T2089[CBETA].
+|Text public domain. A revised open PDF of an English translation exists
+(<<bib-bingenheimer>>).
+|*舊唐書* (945) 卷199上, *新唐書* (1060) 卷220
+|Tang-court-centred notices of Japanese embassies; name individual envoys.
+|Free full text: link:https://zh.wikisource.org/wiki/%E8%88%8A%E5%94%90%E6%9B%B8/%E5%8D%B7199%E4%B8%8A[舊唐書] and link:https://zh.wikisource.org/wiki/%E6%96%B0%E5%94%90%E6%9B%B8/%E5%8D%B7220[新唐書].
+|Public domain.
+|*日本後紀* (840) 卷第十二–第十三
+|Official chronicle, 792–833; survives only in part, and the 804 mission's
+entries appear in a text labelled 逸文 (reconstructed fragments).
+|Free full text: link:https://zh.wikisource.org/wiki/%E6%97%A5%E6%9C%AC%E5%BE%8C%E7%B4%80/%E5%8D%B7%E7%AC%AC%E5%8D%81%E4%BA%8C[卷第十二] and link:https://zh.wikisource.org/wiki/%E6%97%A5%E6%9C%AC%E5%BE%8C%E7%B4%80/%E5%8D%B7%E7%AC%AC%E5%8D%81%E4%B8%89[卷第十三].
+|Public domain; reconstruction status must be declared.
+|*御請来目録* (806, Kūkai's catalogue of texts brought back)
+|The traveller's own itemized record, dated 大同元年十月廿二日.
+|Taishō text T55n2161: link:https://cbetaonline.dila.edu.tw/zh/T2161[CBETA]; a
+慶長–元和-period printed copy with free image reuse (attribution required):
+link:https://rmda.kulib.kyoto-u.ac.jp/item/rb00012887[Kyoto University Library].
+|Text public domain; Kyoto copy's images reusable with credit.
+|*叡山大師伝* (919, biography of Saichō)
+|Biography used for Saichō's 804 study and return.
+|Free full text: link:https://ja.wikisource.org/wiki/%E5%8F%A1%E5%B1%B1%E5%A4%A7%E5%B8%AB%E4%BC%9D[Wikisource 叡山大師伝]
+(based on 近藤瓶城『史籍集覧』, 1902).
+|Public domain.
+|*井真成墓誌* (734, excavated epitaph)
+|Only known Tang-era epitaph of a Japanese student; oldest extant stone text
+using the name 日本.
+|Discovery report: link:https://www.chinanews.com.cn/news/2004/2004-10-12/26/493191.shtml[中國新聞網, 2004-10-12].
+Object held by 西北大学博物館.
+|Text public domain; *object photography rights are not established* (see
+<<gaps-rights>>).
+|===
+
+=== Scholarly interpretations
+
+* Douglas Sherwin Fuqua, *The Japanese Missions to Tang China and Maritime
+  Exchange in East Asia, 7th–9th Centuries* (PhD diss., University of Hawai'i at
+  Mānoa, 2004) — open access in ScholarSpace
+  (link:https://scholarspace.manoa.hawaii.edu/items/9f0726cc-f7ad-4316-aee8-c39b5e6c8d9e[item page]).
+  This is the only substantial English-language study found in this pass that is
+  both citable and freely readable; it treats the missions within a maritime
+  trade-network frame. Reuse terms are not stated on the item page and must be
+  confirmed before quotation.
+* Marcus Bingenheimer, "A Translation of the Tōdaiwajō tōseiden 唐大和上東征傳"
+  (Parts 1–2), *Indian International Journal of Buddhist Studies* 4 (2003) and
+  5 (2004); a revised PDF of Part 2 is hosted by the author
+  (<<bib-bingenheimer>>). Freely readable; redistribution terms must be
+  confirmed with author/journal.
+* Japanese monographs and article literature (for example the studies cited in
+  the reference works below) are copyright-protected and mostly print or
+  paywalled. They are legitimate citation targets for RFD 2's "cited scholarly
+  interpretations," but their verification requires purchase or library access —
+  an owner decision (<<gate1>>), not something this pass could do.
+
+=== Reference works
+
+* Japanese, Chinese, and English Wikipedia articles on the missions and
+  individuals are CC BY-SA 4.0, useful for orientation and for locating
+  literature, and unsuitable as the evidentiary basis for published claims.
+* 日本歴史地名大系 (via kotobank.jp) and 琉球新報『沖縄大百科事典』 are
+  copyrighted reference works; they were used here only to record that place
+  identifications are *scholarly proposals*, not source statements.
+* 国文学研究資料館 国書データベース records provide bibliographic control for
+  pre-modern editions.
+
+=== Candidate structured data
+
+[cols="1,2,1",options="header"]
+|===
+|Source |Suitability |Terms
+|link:https://www.wikidata.org/wiki/Wikidata:Licensing[Wikidata]
+|Identifiers and links for the mission, people, and places; CC0, no accuracy
+guarantee. Example items found in this pass: 遣唐使 Q262529, 鑑真 Q714061,
+阿倍仲麻呂 Q479788, 藤原清河 Q845311, 大伴古麻呂 Q11432332, 吉備真備 Q1063276,
+唐招提寺 Q973175, 東大寺 Q460367.
+|CC0 for structured data.
+|link:https://chgis.fas.harvard.edu/data/chgis/v5/[CHGIS]
+|Tang-era administrative places and historical place names for Chinese
+locations.
+|*Restrictive:* "free for academic research, no commercial use, resale, or
+redistribution permitted." Not usable in a public release as-is.
+|link:https://cbdb.hsites.harvard.edu/[CBDB]
+|Tang-era biographical records for Chinese actors.
+|Site and data marked CC BY-NC-SA 4.0 (non-commercial, share-alike); the site
+returned HTTP 403 to this pass's automated request, so terms were read from the
+site's published notice via search results. Requires owner review before use.
+|Pleiades
+|Ancient Mediterranean gazetteer; *no coverage* of Tang China or Japan.
+|Not applicable.
+|World Historical Gazetteer
+|Historical place names with dataset-specific terms and uneven East Asian
+coverage.
+|Per-dataset review required if used.
+|GeoNames / OpenStreetMap / Natural Earth
+|Modern base geography for anchors and the map base only; never a historical
+claim.
+|CC BY 4.0 / ODbL / public domain respectively.
+|===
+
+[NOTE]
+====
+No place coordinate is asserted anywhere in this report. RFD 2 requires each
+location claim to carry its own source, precision, and interpretation label;
+that work belongs to the reviewed content, not to this feasibility pass.
+====
+
+== Candidate A — the 717–718 embassy (押使 多治比縣守)
+
+=== Sources, availability, and access
+
+Two independent court traditions plus one archaeological object:
+
+* *續日本紀* — appointment (霊亀二年八月癸亥), substitution of the ambassador
+  (同年九月丙子), 節刀 (養老元年三月己酉), tax relief for the mission's sailors
+  (同年十一月甲辰), report of return (養老二年十月庚辰) and formal return
+  (同年十二月壬申–甲戌).
+  link:https://zh.wikisource.org/wiki/%E7%BA%8C%E6%97%A5%E6%9C%AC%E7%B4%80/%E5%8D%B7%E7%AC%AC%E4%B8%83[卷第七] and
+  link:https://zh.wikisource.org/wiki/%E7%BA%8C%E6%97%A5%E6%9C%AC%E7%B4%80/%E5%8D%B7%E7%AC%AC%E5%85%AB[卷第八].
+* *續日本紀* — the return of the students' transmission: 天平七年四月辛亥 lists
+  what 下道朝臣眞備 (吉備真備) presented
+  (link:https://zh.wikisource.org/wiki/%E7%BA%8C%E6%97%A5%E6%9C%AC%E7%B4%80/%E5%8D%B7%E7%AC%AC%E5%8D%81%E4%BA%8C[卷第十二]).
+* *舊唐書* / *新唐書* — the Tang-side notice, including the request for teachers
+  of the classics and the purchase of books.
+* *井真成墓誌* (734) — an excavated dated epitaph of a Japanese student who died
+  in Tang.
+
+Availability is good: all texts are public domain and readable free of charge;
+the chronicle entries are day-dated and the object is dated by its own text.
+
+=== Reuse rights
+
+Texts: public domain (see <<source-classes>>). The epitaph's *text* is public
+domain and published; its *photographs* are held with the object by 西北大学博物館
+and no reuse licence was found. Two further rights questions arise only if the
+chapter illustrates this candidate: the museum object and the illustrated
+portraits in 菊池容斎『前賢故実』 (1868; public domain; verify per file before use)
+— the latter are 19th-century imaginings and must be labelled as such.
+
+=== Supported dates and geographic detail
+
+Day-level dates are available for court events in Japan (appointment, 節刀,
+return) and for the student's death and burial in Tang (開元廿二年正月 death;
+二月四日 burial at 萬年縣滻水原). The embassy's own sea route and landing place
+are *not* documented in the accessible sources: the chronicle records departure
+preparations and the return, not the voyage. Modern summaries that place the
+landfall near the Yangzi mouth or Hangzhou present it explicitly as an inference
+(for example the reference-work article 多治比県守,
+link:https://ja.wikipedia.org/wiki/%E5%A4%9A%E6%B2%BB%E6%AF%94%E7%9C%8C%E5%AE%88[ja.wikipedia]).
+The
+chapter could therefore show dated events in Japan and in the Tang capital, but
+must not draw an outbound route.
+
+=== Identifiable people and places
+
+People (documented): 多治比縣守 (押使), 阿倍安麻呂 (appointed 大使, replaced),
+大伴山守 (大使), 藤原馬養 (副使), 吉備真備, 阿倍仲麻呂, 玄昉 (monk), 井真成
+(student), 坂合部大分 (earlier ambassador who returned with this mission).
+Places (documented): the Japanese court and Nara-area sites, 蓋山 (rite before
+departure), the Tang court and capital (the 鴻臚寺 teaching and 仲滿's stay in
+京師), 萬年縣滻水原 (burial place of 井真成).
+
+=== Evidence: travel, encounters, learning/adaptation (separately)
+
+*Travel* — attested at the level of departure and return only; no voyage
+itinerary. The chronicle adds a striking negative fact: on the return it records
+"this time the envoys suffered no losses" (此度使人略無闕亡), together with the
+return of 坂合部大分.
+
+*Encounters* — attested, but briefly, and with a source conflict to resolve.
+舊唐書 places a request for scholars to lecture on the classics in the early
+Kaiyuan period (開元初), with 四門助教趙玄默 ordered to teach at 鴻臚寺, and adds that
+the envoys spent their gifts on books to carry home and that 朝臣仲滿 (阿倍仲麻呂)
+stayed. 新唐書 repeats the request and the book purchase but attributes that
+embassy to 粟田真人, whose embassy belongs to 701–704 — which conflicts with the
+Japanese record naming 多治比縣守 for 717. The association of the 趙玄默 episode with
+the 717 mission is therefore a scholarly reading, not a settled attribution. No
+dated audience protocol survives.
+
+*Learning/transmission* — the strongest single item in this candidate. 續日本紀
+天平七年四月辛亥 lists what 吉備真備 presented on return: 唐禮 130 volumes,
+大衍暦經 1 volume and 大衍暦立成 12 volumes, a shadow-measuring iron rule, a
+bronze pitch-pipe, 樂書要録 10 volumes, and bows and arrows. 續日本紀 also records
+that in the following month "the returning envoys and Tang men performed Tang and
+Silla music and spear-play" at court, and that an envoy presented a six-volume
+record of questions and answers (請益秦大麻呂問答).
+
+*Adaptation* — a separately dated later event, not an inference from the mission:
+續日本紀 天平寶字七年八月戊子 records "the Gihō calendar was abolished and the
+Dayan calendar first used" (廢儀鳳暦始用大衍暦) — 28 years after the calendar text
+arrived. This is exactly the kind of separately sourced adaptation claim RFD 1
+asks for, but it is one node, not a chain.
+
+=== Disputes and uncertainty
+
+* 井真成's status is disputed: whether he held office in Tang (the 贈尚衣奉御
+  title), whether the epitaph's drafting involved a Japanese hand, and whether
+  阿倍仲麻呂's circle arranged the honours. These are scholarly arguments
+  reported in the literature (the 専修大学・西北大学 joint-project volume, 2005, print;
+  summary in the reference-work article
+  link:https://ja.wikipedia.org/wiki/%E4%BA%95%E7%9C%9F%E6%88%90[井真成]), not
+  settled facts.
+* Widely repeated figures for the mission's size (for example 557 people in four
+  ships) could *not* be verified in the accessible primary text in this pass;
+  續日本紀 records the tax relief but not a headcount. Treat such numbers as
+  unverified until a scholarly edition supplies them.
+* 吉備真備 attracts legendary attributions (the game of go, military texts,
+  divination) that the sources do not support and that must be excluded.
+
+=== Coverage model, gaps, and specialist review
+
+A workable coverage model would be the embassy as a *transmission* story: 716–719
+departure and return, the students' long stay, the 735 return with an itemized
+list, and the 763 calendar change as a labelled coda node. Chief
+gaps: no voyage documentation, no dated encounter protocol, and dependence on a
+single chronicle for the item list. Optional specialist review: a Japanese
+ancient-historian for the 735 list's interpretation (what the items imply and
+what they do not), and a scholar of Tang ritual and calendar history for the 763
+change.
+
+== Candidate B — the 752–754 embassy (大使 藤原清河)
+
+=== Sources, availability, and access
+
+The best-corroborated of the three:
+
+* *續日本紀* — appointment (天平勝寶二年九月己酉), audience and 節刀 with
+  promotions including the student 藤原刷雄 (天平勝寶四年三月庚辰, 閏三月丙辰),
+  the return reports (天平勝寶六年正月: 大伴古麻呂's return with 鑒眞・法進 and
+  eight others; the report on 吉備真備's ship; 古麻呂's own report of the Tang
+  New Year audience), the rewards and the fourth ship's arrival (天平勝寶六年四月
+  壬申・癸未), and the later fates (寶龜十年二月乙亥; 五月丙寅).
+  link:https://zh.wikisource.org/wiki/%E7%BA%8C%E6%97%A5%E6%9C%AC%E7%B4%80/%E5%8D%B7%E7%AC%AC%E5%8D%81%E5%85%AB[卷第十八],
+  link:https://zh.wikisource.org/wiki/%E7%BA%8C%E6%97%A5%E6%9C%AC%E7%B4%80/%E5%8D%B7%E7%AC%AC%E5%8D%81%E4%B9%9D[卷第十九],
+  link:https://zh.wikisource.org/wiki/%E7%BA%8C%E6%97%A5%E6%9C%AC%E7%B4%80/%E5%8D%B7%E7%AC%AC%E5%8D%85%E4%BA%94[卷第三十五].
+* *唐大和上東征傳* — the continuous voyage narrative and the transmission list
+  (<<bib-toseiden>>).
+* *續日本紀* 卷第廿一 and 卷第廿四 — the 758 title and precept-study order, and
+  the 763 death notice with a biographical summary of 鑒眞's crossing.
+* *舊唐書* / *新唐書* — the Tang-side notices: 舊唐書 records that "in the twelfth
+  year of Tianbao they again sent tribute," while 新唐書 records 朝衡's return to
+  court that year; both give 朝衡's career in outline.
+
+=== Reuse rights
+
+Texts are public domain, and — unusually for this period — so are relevant
+images: the 13th-century illustrated scroll *東征伝絵巻* is available on Wikimedia
+Commons as public-domain files
+(link:https://commons.wikimedia.org/wiki/Category:T%C5%8Dseiden_Emaki[category];
+for example link:https://commons.wikimedia.org/wiki/File:Tosei_Eden_(Toshodaiji).jpg[Tosei Eden (Toshodaiji)]),
+and a 1949 photograph of the 鑒眞 portrait statue is also marked public domain
+(link:https://commons.wikimedia.org/wiki/File:Ganjin_wajyo_portrait.JPG[Commons file]).
+Two cautions: the scroll is a *later illustrated copy* and is a design reference,
+not evidence of the 8th-century events; and any modern reconstruction map, such
+as link:https://commons.wikimedia.org/wiki/File:Travels_of_Jianzhen.png[Travels of Jianzhen]
+(CC BY-SA 4.0), is a Wikimedian's reconstruction that must not be presented as a
+sourced route. The 唐招提寺 statue itself is a National Treasure whose own
+photography may be restricted; museum photographs need per-file clearance.
+
+=== Supported dates and geographic detail
+
+This candidate has by far the richest dated geography. From the 東征傳's voyage
+passage: the envoys visit 鑒眞 at 延光寺 in 揚州 on 天寶十二載十月十五日; 鑒眞 leaves
+龍興寺 on the 19th; the four ships sail on 十一月十五日 from 蘇州黃泗浦; ships 1 and 2
+reach 阿兒奈波島 on the 21st; on 十二月六日 ship 1 is aground and ship 2 heads for
+多禰島; on the 7th ship 2 reaches 益救島; it leaves on the 18th and lands at 薩摩國
+阿多郡秋妻屋浦 on the 20th, entering 大宰府 on the 26th. The chronicle adds
+吉備真備's ship reaching 益久嶋 on 天平勝寶五年十二月七日 and drifting to 紀伊國牟漏埼,
+the fourth ship's arrival at 薩摩國石籬浦 (判官 布勢人主), and 清河's ship drifting to
+驩州 on Tang's southern frontier. On the Tang side, 古麻呂's report places the
+New Year audience at 蓬萊宮含元殿 on the first day of the first month of 天寶十二載.
+
+The modern identifications of 阿兒奈波島 (Okinawa Island), 多禰島 (Tanegashima),
+益救島 (Yakushima) and 秋妻屋浦 (Ata district, Satsuma; proposed as 坊津) come from
+reference works and research articles, not from the sources, and must be labelled
+as identifications (<<bib-places>>).
+
+=== Identifiable people and places
+
+People: 藤原清河 (ambassador), 大伴古麻呂 and 吉備真備 (vice-envoys), 藤原刷雄
+(student), 阿倍仲麻呂 (in Tang; joined the return), 布勢人主 (fourth ship's
+判官), 川部酒麻呂 (fourth ship's helmsman, in the chronicle's account of a
+shipboard fire), 鑒眞 with 法進 and 思託, 榮叡 and 普照 (monks who had sought a
+precept master), the Tang emperor and general 呉懷實, and 王維, whose parting poem
+for 晁衡 (阿倍仲麻呂) is part of the literary record (poem text not verified in this
+pass). Places: 難波, 大宰府,
+益救島/益久嶋, 多禰島, 阿兒奈波島, 秋妻屋浦, 石籬浦, 紀伊國牟漏埼, 揚州, 蘇州黃泗浦,
+驩州, 長安/蓬萊宮含元殿, 東大寺, 唐招提寺.
+
+=== Evidence: travel, encounters, learning/adaptation (separately)
+
+*Travel* — attested with dated legs and named landfalls (above). The voyage
+narrative rests on the 東征傳, a single near-contemporary biography; the court
+chronicle independently corroborates the return of the ships and the fact of
+divergent landfalls, not the day-by-day sequence.
+
+*Encounters* — two kinds, both dated. (1) The envoys' invitation to 鑒眞 at
+延光寺 in 揚州 (東征傳). (2) The Tang New Year audience at 含元殿, reported to the
+Japanese court by 古麻呂 himself, including the seating-order dispute with the
+Silla envoy and its resolution by 呉懷實. The second is a self-report and should
+be labelled as such; it is also unusually concrete (date, hall, seating,
+intervention).
+
+*Learning/transmission* — the 東征傳 lists the items 鑒眞 brought: "forty-eight
+items" (合四十八部), including the *Tiantai zhiguan famen* in forty scrolls,
+Xuanzang's *Xiyu ji* in twelve scrolls, and calligraphy by 王羲之 and 王獻之, as
+well as images and ritual objects. This is an itemized transmission list of the
+same kind as Candidate A's, but attached to the same voyage as the travel and
+encounter evidence.
+
+*Adaptation* — separately dated, later, and partly independently corroborated:
+the 東征傳 describes a precepts platform (戒壇) at the 盧遮那殿 in the fourth month
+of 754, imperial ordinations, 440-odd ordinations of novices, and 80-odd senior
+monks re-ordaining; 續日本紀 (卷第廿一, 天平寶字二年) independently records that
+鑒眞 was given the title 大和上 and that monks wishing to study the precepts were
+ordered to study under him; the 東征傳 dates the founding of 唐招提寺 to 寶字三年
+八月一日 and 鑒眞's death to 寶字七年五月六日. Note the chronicle's death notice
+says he was 77, while the biography says 76 — a documented discrepancy to publish
+as such.
+
+=== Disputes and uncertainty
+
+* The ordination events of 754 are recorded in the biography but *not* in the
+  court chronicle's accessible text, which this pass checked for the relevant
+  terms. They are attested, but single-source.
+* The voyage sequence is single-source; the number of ships and personnel is
+  partly reconstructed. The chronicle's own figure of "222 persons below the
+  envoys" receiving rewards is a rare documented headcount for this mission.
+* Textual variants across editions should be expected: 益救島/益久嶋 and
+  胡麿/古麻呂; and the day of 古麻呂's report appears as 正月十一日 in the Wikisource
+  transcription and as 正月十二日 in the searchable preview of the 専修大学 PDF, so
+  the date must be fixed against a critical edition.
+* 清河's fate rests on a report made 25 years later (779); 阿倍仲麻呂's death is
+  reported to the Japanese court in 779, and the accessible Chinese chronicles do
+  not state a death year in the passages checked.
+
+=== Coverage model, gaps, and specialist review
+
+Coverage model for this candidate if selected: 750–754 primary mission window
+(appointment, dispatch, audience, return voyage, arrival, ordination); included
+coda nodes outside that window at 758, 759, 763, and 779; the outbound voyage of
+752 excluded. Chief gaps: the *outbound* voyage of 752 is undocumented in these
+sources; the 754 ordinations lack an independent court record; the place
+identifications are scholarly proposals. Optional specialist review: a maritime
+or ancient historian for the return-voyage landfalls and for what can and cannot
+be drawn as a route; a Buddhist-studies specialist for the ordination and lineage
+claims and the biography's hagiographic layers; a Tang historian for the 含元殿
+audience and court protocol.
+
+== Candidate C — the 804–805 embassy (大使 藤原葛野麻呂)
+
+=== Sources, availability, and access
+
+* *日本後紀* 卷第十二–第十三 — the mission's appointment, audience, 節刀, the
+  report that the four ships put to sea in the seventh month of the previous
+  year (延暦23年), with two ships driven back and two unaccounted for, prompting an
+  inquiry sent to Silla, and the 805 return of 葛野麻呂 and 最澄's court
+  appearances. Crucially, these volumes are labelled *逸文* (reconstructed
+  fragments), not the original chronicle.
+* *御請来目録* (806) — Kūkai's own catalogue, available as a free Taishō text
+  (T55n2161) and as a Kyoto University printed copy whose images may be reused
+  with attribution.
+* *叡山大師伝* (919) — Saichō's biography, public domain on Wikisource.
+* *舊唐書* / *新唐書* — both name 橘逸勢 (舊唐書: 橘免勢) and 空海 as students who
+  stayed, and record the later request that they return.
+
+Accessibility is good — arguably better than expected — but the Japanese court
+record is a reconstruction.
+
+=== Reuse rights
+
+Texts are public domain; the Kyoto University copy explicitly permits image reuse
+with a credit line. Later hagiographic portraits and temple photographs need
+per-file checking; the standard English monographs on Saichō and Kūkai are
+copyright-protected and usable only as citations.
+
+=== Supported dates and geographic detail
+
+Documented: the 804 dispatch and the ships' divergent landfalls (the chronicle
+reports two ships driven back and two unaccounted for, with an inquiry sent to
+Silla); Kūkai's own catalogue is dated 大同元年十月廿二日; the Tang chronicle names
+the students. Detailed
+geography — which ship reached 福州長渓県, which reached 明州, and the overland
+movements — comes from the travellers' own records and later biographies rather
+than from the court chronicle, and this pass did not verify those itineraries in
+their primary texts.
+
+=== Identifiable people and places
+
+People: 藤原葛野麻呂 (ambassador), 石川道益 (vice-envoy, died at 明州 per the
+chronicle), 最澄, 空海, 橘逸勢, 恵果 (Kūkai's Tang master), and the emperor 桓武.
+Places: 肥前国松浦郡 (departure area), 福州, 明州, 長安, 天台山, and on return
+大宰府 and the capital.
+
+=== Evidence: travel, encounters, learning/adaptation (separately)
+
+*Travel* — attested at the level of ship departures and divergent landfalls, with
+the chronicle's own note that two ships were driven back; detailed itineraries
+rest on the travellers' records and later biographies, which this pass did not
+verify.
+
+*Encounters* — the transmission accounts are largely self-reported: Kūkai's
+catalogue and later biography describe his study under 恵果; Saichō's biography
+describes his study and his return. No independent dated encounter record
+comparable to Candidate B's audience report was located in this pass.
+
+*Learning* — the catalogues are strong itemized evidence of what was brought
+back, and Kūkai's is dated by its own colophon.
+
+*Adaptation* — the strongest long-run institutional record of the three
+(Tendai and Shingon foundations, ordination platforms, temple foundations), but
+the relevant records are later, spread over decades, and require their own
+sources; they are adaptation nodes far downstream of the voyage.
+
+=== Disputes and uncertainty
+
+* The Japanese court record survives only as 逸文; its entry placement and
+  wording must be checked against a critical edition before citation.
+* The learning accounts are self-reported and later hagiography accreted around
+  both figures.
+* Mission ordinals are inconsistent across references (this pass saw the same
+  mission called the 16th, 17th, and 18th), so identifiers should use years, not
+  numbers.
+
+=== Coverage model, gaps, and specialist review
+
+A chapter here would need a coverage model far wider than the voyage (for example
+804–823) to reach the adaptation claims, and would rest its most vivid material
+on self-reports. Chief gaps: fragmentary court record, unverified itineraries in
+primary texts, and heavy reliance on later biographies. Optional specialist
+review: a historian of Japanese Buddhism for the transmission and lineage claims,
+and a scholar of Heian court records for the 逸文 reconstruction.
+
+== Also considered, not advanced
+
+The 838–847 embassy (大使 藤原常嗣) with the monk 圓仁 was considered and not
+advanced as one of the three. 圓仁's *入唐求法巡礼行記* is the single richest
+travel and encounter source of the whole period and is freely readable (text via
+link:https://cbetaonline.dila.edu.tw/zh/B0095_001[CBETA, B18n0095]; the standard
+English translation by Reischauer is copyright-protected), but it documents nine
+years and hundreds of places — far beyond one bounded mission — and the mission's
+own learning/adaptation links to Japan are diffuse and later. It is a strong
+candidate for a *later* chapter, and its diary is a candidate source for any
+chapter's travel methodology.
+
+== Comparison
+
+[cols="1,3,3,3",options="header"]
+|===
+|Criterion |A: 717–718 |B: 752–754 |C: 804–805
+|Accessible primary sources
+|Two court traditions plus an excavated epitaph; all free.
+|Court chronicle plus a near-contemporary voyage biography plus the Tang
+chronicle; all free.
+|Fragmented court chronicle (逸文) plus the travellers' own catalogues and a
+later biography; all free.
+|Reuse rights
+|Texts public domain; epitaph photographs not cleared; Commons portraits usable
+with labelling.
+|Texts public domain; *public-domain illustrated scroll and statue photographs
+available*; modern maps must be labelled reconstructions.
+|Texts public domain; Kyoto catalogue images reusable with credit; later
+portraits need checking.
+|Dated travel evidence
+|Departure and return only; no route.
+|Dated legs and named landfalls, single-source; court record corroborates
+divergent landfalls.
+|Ship departures and divergent landfalls; detailed itineraries unverified.
+|Encounter evidence
+|Brief Tang notice (teachers requested at 鴻臚寺; books bought).
+|Dated invitation scene plus a dated court audience with a protocol dispute
+(self-reported).
+|Self-reported study accounts.
+|Learning/transmission evidence
+|Itemized 735 list of books, instruments, and calendars.
+|Itemized 754 transmission list, including Buddhist texts and calligraphy.
+|Dated catalogues (806, 805) of texts brought back.
+|Later adaptation evidence
+|One dated coda node (763 calendar change).
+|Included coda nodes 758 (court-recorded title and precept-study order), 759
+(唐招提寺 founding), 763 (death, with a documented age discrepancy), and 779
+(reported fates).
+|Decades of institutional records, downstream of the voyage.
+|Geographic precision
+|Weak (inferred landfall).
+|Strong (multiple named landfalls and a dated audience hall).
+|Moderate (named cities; itineraries unverified).
+|Rights to illustrate
+|Portraits only (PD, but 19th-century imaginings).
+|Scroll and statue images public domain; modern reconstructions label as such.
+|Later portraits and temple photographs; per-file checks.
+|Main risk
+|Thin travel and encounter record.
+|Voyage detail is single-source and partly hagiographic.
+|Fragmentary court record and self-reported learning.
+|===
+
+== Recommendation
+
+**Recommend Candidate B, the 752–754 embassy of 藤原清河, with the coverage model:
+primary mission window 750–754; included coda nodes outside that window at 758,
+759, 763, and 779; the outbound voyage of 752 is excluded (see
+<<coverage-model>>).**
+
+Rationale against RFD 1's requirement that travel, encounters, and subsequent
+adaptation each be explorable as separate, sourced relationships:
+
+* It is the only candidate whose *travel* record carries dated legs and named
+  landfalls, and whose landfall evidence is corroborated at the fact level by the
+  court chronicle (the ships returned separately; the fourth ship reached
+  Satsuma; 清河's ship was lost to the south).
+* It is the only candidate with a *dated, placed encounter*: the Tang New Year
+  audience at 含元殿, reported by a named envoy, including a protocol dispute.
+  Candidate A's encounter evidence is a brief notice; Candidate C's is
+  self-reported study.
+* Its *transmission* evidence is itemized (the 48 items), and its *adaptation*
+  evidence is separately dated and partly independent of the biography (the 758
+  court order, an included coda node outside the primary window).
+* It has the best reuse position: the texts are public domain, and the
+  illustrated scroll images are public domain, so the chapter can be illustrated
+  without a rights purchase — subject to labelling the scroll as a later copy.
+* Its risks are nameable and bounded: single-source voyage detail, one
+  single-source ordination episode, and scholarly (not source-stated) place
+  identifications.
+
+Candidate A remains a legitimate choice if the owner decides the launch chapter
+should foreground *learning and adaptation* over travel; its transmission and
+calendar evidence is precise, and its excavated epitaph gives the chapter a human
+anchor. Its weakness is that the voyage and encounter layers would be thin, and
+the chapter would lean on one chronicle entry.
+
+Candidate C is not recommended for the launch chapter: its court record is a
+reconstruction, its most vivid material is self-reported, and its adaptation
+claims lie decades downstream.
+
+=== Proposed bounded inventory for the recommended mission
+
+Everything below is a *candidate* for review; each item names its evidence class.
+No item asserts a route, a cause, or an adaptation that its source does not
+state. The single coverage model that governs this inventory is stated first in
+<<coverage-model>> and is used unchanged in the recommendation, the comparison,
+the coverage exclusions, and the Gate 1 decision.
+
+[[coverage-model]]
+==== Coverage model
+
+The chapter uses one coverage model, stated here once and repeated unchanged in
+the recommendation, the comparison, the coverage exclusions, and the Gate 1
+decision:
+
+* *Primary mission window (main timeline): 750–754* — appointment (750), dispatch,
+  the Tang audience (753), the return voyage (753–754), and arrival and the 754
+  ordinations. Events in this window form the chapter's main timeline.
+* *Included coda nodes (chapter events outside the primary window): 758, 759, 763,
+  and 779.* These are published as chapter events, each individually dated and
+  visibly labelled as a coda node outside the primary window; they are not part of
+  the main timeline and do not extend it. 758: the 大和上 title and precept-study
+  order. 759: the 唐招提寺 founding. 763: 鑒眞's death. 779: the reported fates and
+  honours of 藤原清河 and 阿倍仲麻呂.
+* *Chapter timeline as a whole: 750–779*, consisting of the primary window plus the
+  four coda nodes.
+* *Excluded: the outbound voyage of 752* (undocumented in the sources checked).
+  The full exclusion list is in <<coverage-exclusions>>.
+
+==== Candidate events: primary mission window (750–754)
+
+[cols="2,2,3,1",options="header"]
+|===
+|Candidate event |Date |Source and locator |Evidence class
+|Appointment of the embassy
+|天平勝寶二年九月己酉 (750)
+|續日本紀 卷第十八
+|Primary, court record
+|Court audience and 節刀, with the student 藤原刷雄 promoted
+|天平勝寶四年三月庚辰, 閏三月丙辰 (752)
+|續日本紀 卷第十八
+|Primary, court record
+|The envoys invite 鑒眞 at 延光寺 in 揚州
+|天寶十二載十月十五日
+|唐大和上東征傳
+|Primary, biography
+|Four ships sail from 蘇州黃泗浦
+|天寶十二載十一月十五日
+|唐大和上東征傳
+|Primary, biography (single source)
+|Ships 1–2 reach 阿兒奈波島; ship 3 already there
+|十一月廿一日
+|唐大和上東征傳
+|Primary, biography (single source)
+|Ship 1 aground; ship 2 to 多禰島, then 益救島
+|十二月六日–七日
+|唐大和上東征傳
+|Primary, biography (single source)
+|Ship 2 lands at 薩摩國阿多郡秋妻屋浦; enters 大宰府
+|十二月廿日–廿六日
+|唐大和上東征傳
+|Primary, biography (single source)
+|吉備真備's ship reaches 益久嶋, then drifts to 紀伊國牟漏埼
+|天平勝寶五年十二月七日 onward
+|續日本紀 卷第十九
+|Primary, court record (quoting 大宰府)
+|Fourth ship reaches 薩摩國石籬浦 (判官 布勢人主)
+|天平勝寶六年四月癸未 (754)
+|續日本紀 卷第十九
+|Primary, court record
+|Return of 大伴古麻呂 with 鑒眞, 法進 and eight others
+|天平勝寶六年正月 (754)
+|續日本紀 卷第十九
+|Primary, court record
+|Tang New Year audience at 蓬萊宮含元殿; seating dispute with Silla; 呉懷實
+reorders it
+|天寶十二載正月朔 (753), reported 天平勝寶六年正月丙寅
+|續日本紀 卷第十九 (古麻呂's report)
+|Primary, self-report to court
+|Rewards to the envoys, two judges, and "222 persons below the envoys"
+|天平勝寶六年四月壬申
+|續日本紀 卷第十九
+|Primary, court record
+|Precepts platform, imperial and mass ordinations at 東大寺
+|754, fourth month
+|唐大和上東征傳
+|Primary, biography (single source)
+|===
+
+==== Candidate events: coda nodes (758, 759, 763, 779)
+
+Each row below is a chapter event outside the primary mission window. Each is
+published with a visible coda label and its own date, and none of them extends
+the main timeline.
+
+[cols="2,2,3,1",options="header"]
+|===
+|Coda event |Date |Source and locator |Evidence class
+|鑒眞 given the title 大和上; monks ordered to study the precepts under him
+|天平寶字二年 (758)
+|續日本紀 卷第廿一
+|Primary, court record
+|Founding of 唐招提寺
+|寶字三年八月一日 (759)
+|唐大和上東征傳
+|Primary, biography
+|鑒眞's death (age 76 in the biography; 77 in the chronicle)
+|寶字七年五月 (763)
+|唐大和上東征傳; 續日本紀 卷第廿四
+|Primary, two sources in disagreement
+|清河's ship drifts to 驩州; he remains in Tang and dies there; posthumous honour
+|reported 寶龜十年二月乙亥 (779)
+|續日本紀 卷第三十五
+|Primary, late report
+|阿倍仲麻呂's death reported; court grants to his family
+|寶龜十年五月丙寅 (779)
+|續日本紀 卷第三十五
+|Primary, late report
+|===
+
+==== Candidate places
+
+[cols="2,2,2",options="header"]
+|===
+|Place (source form) |Source |Status
+|難波; 大宰府
+|東征傳; 續日本紀
+|Attested, identified with modern sites (Osaka, Dazaifu).
+|多禰島; 益救島 (chronicle: 益久嶋); 阿兒奈波島
+|東征傳; 續日本紀
+|Attested names; modern identifications (Tanegashima, Yakushima, Okinawa Island)
+are scholarly proposals — label as identifications.
+|秋妻屋浦 (薩摩國阿多郡)
+|東征傳
+|Attested name; proposed identification 坊津 — label as a proposal.
+|石籬浦 (薩摩國)
+|續日本紀
+|Attested name; identification to be sourced before mapping.
+|紀伊國牟漏埼
+|續日本紀
+|Attested name; identification to be sourced.
+|揚州 (延光寺, 龍興寺); 蘇州黃泗浦
+|東征傳
+|Attested; modern Yangzhou, Suzhou.
+|蓬萊宮含元殿
+|續日本紀 (古麻呂's report)
+|Attested; the 大明宮 含元殿 site in modern Xi'an.
+|驩州
+|續日本紀
+|Attested name for Tang's southern frontier; modern identification to be sourced.
+|東大寺; 唐招提寺
+|東征傳; 續日本紀
+|Attested; existing sites in Nara.
+|===
+
+==== Candidate actors
+
+藤原清河 (ambassador, remained in Tang), 大伴古麻呂 (vice-envoy, carried 鑒眞,
+reported the audience), 吉備真備 (vice-envoy), 藤原刷雄 (student), 阿倍仲麻呂
+(in Tang), 布勢人主 (judge of the fourth ship), 川部酒麻呂 (helmsman),
+鑒眞, 法進, 思託, 榮叡, 普照, 呉懷實 (Tang general), 王維 (poet), and the court
+figures 孝謙天皇, 藤原仲麻呂, 良弁, 安宿王. Each needs a source-backed role
+statement and a date range before publication; membership in the embassy is
+itself a sourced claim per person.
+
+==== Candidate relationships (typed, each requiring its own citation)
+
+* diplomatic mission (Japan → Tang): appointment, dispatch, audience, return.
+* travel: documented ship movements only; no interpolated voyage line.
+* encounter: envoys ↔ 鑒眞 at 延光寺; envoys ↔ Tang court at 含元殿.
+* transmission: the 48 items brought by 鑒眞; the ordination lineage.
+* institutional adaptation (coda nodes 758, 759): 758 title and precept-study
+  order; 759 唐招提寺 — labelled as included coda nodes outside the primary
+  mission window, separately sourced, not as mission effects.
+* posthumous commemoration (coda node 779): 779 honours for 清河 and grants for
+  仲麻呂's family.
+* Explicitly excluded relationship types: any causal link from the mission to
+  later Japanese institutions; any route geometry beyond documented landfalls.
+
+[[coverage-exclusions]]
+==== Coverage exclusions
+
+* The outbound voyage of 752: no content, no route, no map geometry
+  (undocumented in the sources checked). This is the coverage model's single
+  timeline exclusion.
+* 吉備真備's 717–735 study and his 735 book list (Candidate A's evidence); his
+  752–754 role only.
+* 阿倍仲麻呂's 717–752 career in Tang, except as needed for the return episode.
+* The 761–762 follow-up missions and the cancelled embassies.
+* The 733 embassy that dispatched 榮叡 and 普照 (background only, no events).
+* The general history of the missions, and all other missions.
+* Any interpolated sea route; any continuous boundary or territory geometry.
+* Legendary material: 吉備真備 attributions; hagiographic miracle stories in the
+  東征傳; modern reconstruction maps as evidence.
+* 井真成墓誌 (Candidate A's evidence) unless the owner selects A.
+
+==== Bibliography for the chapter (with access and rights notes)
+
+Primary, public domain and free to read:
+
+. 續日本紀, link:https://zh.wikisource.org/wiki/%E7%BA%8C%E6%97%A5%E6%9C%AC%E7%B4%80[Wikisource] —
+   volumes 第十八, 第十九, 第廿一, 第廿四, 第卅五; check locators against
+   新訂増補国史大系 (吉川弘文館) or 新日本古典文学大系 (岩波).
+. 唐大和上東征傳, link:https://zh.wikisource.org/wiki/%E5%94%90%E5%A4%A7%E5%92%8C%E4%B8%8A%E6%9D%B1%E5%BE%81%E5%82%B3[Wikisource] and
+   Taishō T.2089 (link:https://cbetaonline.dila.edu.tw/zh/T2089[CBETA]).
+. 舊唐書 卷199上 and 新唐書 卷220,
+   link:https://zh.wikisource.org/wiki/%E8%88%8A%E5%94%90%E6%9B%B8/%E5%8D%B7199%E4%B8%8A[舊唐書],
+   link:https://zh.wikisource.org/wiki/%E6%96%B0%E5%94%90%E6%9B%B8/%E5%8D%B7220[新唐書].
+. 王維's parting poem for 晁衡 and 阿倍仲麻呂's return poem — reported in reference
+   works as being preserved in 全唐詩 卷732 and related collections; *not verified
+   in this pass*. By contrast, the 東征傳's own poem appendix *is* verified here: it
+   carries memorial verses by 思託, 石上宅嗣, 法進, 藤原刷雄, and the Tang officer
+   高鶴林.
+
+Secondary and reference (cite; do not reproduce):
+
+. Douglas S. Fuqua, *The Japanese Missions to Tang China and Maritime Exchange
+   in East Asia, 7th–9th Centuries*, PhD diss., University of Hawai'i at Mānoa,
+   2004 (link:https://scholarspace.manoa.hawaii.edu/items/9f0726cc-f7ad-4316-aee8-c39b5e6c8d9e[open access]).
+. Marcus Bingenheimer, "A Translation of the Tōdaiwajō tōseiden 唐大和上東征傳,"
+   *Indian International Journal of Buddhist Studies* 4 (2003), 5 (2004)
+   (revised PDF: link:https://mbingenheimer.net/publications/bingenheimer.ganjin2.pdf[author's site]).
+. 専修大学 annotated 唐大和上東征傳 PDF
+   (link:https://www.senshu-u.ac.jp/eurasia/database-n/tou-doukyou-1.pdf[university site]);
+   reuse terms unstated — verify before quoting.
+. 日本歴史地名大系「阿多郡」(via link:https://kotobank.jp/word/%E9%98%BF%E5%A4%9A%E9%83%A1-3105892[kotobank])
+   and 琉球新報『沖縄大百科事典』「阿児奈波島」
+   (link:https://ryukyushimpo.jp/okinawa-dic/prentry-40063.html[ryukyushimpo.jp])
+   for place identifications.
+. 琉球大学学術リポジトリ article on the island route
+   (link:https://u-ryukyu.repo.nii.ac.jp/record/2004430/files/13410100-2.pdf[open access PDF]).
+. Japanese Wikipedia articles on 遣唐使 and the individuals involved
+   (link:https://ja.wikipedia.org/wiki/%E9%81%A3%E5%94%90%E4%BD%BF[遣唐使]);
+   CC BY-SA 4.0; orientation and literature-locating only.
+
+==== Image candidates (rights-checked in this pass)
+
+* 東征伝絵巻 scroll images — public domain on Wikimedia Commons
+  (link:https://commons.wikimedia.org/wiki/Category:T%C5%8Dseiden_Emaki[category]);
+  label as a 13th-century illustrated copy, not as 8th-century evidence.
+* 鑒眞 statue photograph (1949) — marked public domain on Commons; verify the
+  underlying object's photography policy before publication.
+* 菊池容斎『前賢故実』 portraits — public domain; label as 19th-century
+  imaginings; verify per file before use.
+* Modern reconstruction maps — usable only with an explicit "modern
+  reconstruction, not a sourced route" label, and preferably not at all.
+
+=== Evidence gaps that remain
+
+* The 752 outbound voyage is undocumented in the sources checked; the chapter
+  cannot depict it.
+* The 754 ordinations rest on one biography; no independent court record was
+  found.
+* Place identifications for the return-voyage landfalls are scholarly proposals
+  requiring their own sources and uncertainty labels.
+* Personnel totals for the mission are partly reconstructed; only the 222-person
+  reward figure is documented in the chronicle.
+* 阿倍仲麻呂's and 藤原清河's death years rest on late reports and (for
+  Nakamaro) on scholarship not verified here.
+
+[[gaps-rights]]
+=== Rights gaps that remain
+
+* No licence found for photographs of the 井真成墓誌 (relevant only if Candidate A
+  is chosen).
+* Museum photographs of the 唐招提寺 鑒眞 statue may be restricted; per-file
+  clearance needed.
+* CHGIS and CBDB terms (non-commercial / share-alike) need an owner decision
+  before any use in a public release.
+* The Bingenheimer translation and the Fuqua dissertation are freely readable but
+  their redistribution terms are not stated; use as citations only unless the
+  owner obtains permission.
+* Modern Japanese scholarship on the mission is copyright-protected and
+  paywalled or print-only; verifying interpretations requires purchase or
+  library access.
+
+=== Optional specialist review
+
+Not mandatory under RFD 2's owner-led review, and not a gate. Where it would add
+most value, in order: (1) a maritime or ancient historian for the return-voyage
+landfalls, what may be drawn as a route, and the reconstruction of the four
+ships' courses; (2) a Buddhist-studies specialist for the ordination, lineage,
+and transmission claims and for separating hagiography from record; (3) a Tang
+court historian for the 含元殿 audience and protocol; (4) a philologist to fix
+the 東征傳 and 續日本紀 editions and the textual variants before content freeze.
+
+[[gate1]]
+== Gate 1 owner decisions requested
+
+. Select the launch mission: Candidate B as recommended, Candidate A if the
+  chapter should foreground learning/adaptation, or a narrower scope if neither
+  is accepted.
+. Accept or amend the coverage model: primary mission window 750–754; included
+  coda nodes outside that window at 758, 759, 763, and 779; the outbound voyage of
+  752 excluded (<<coverage-model>>, <<coverage-exclusions>>).
+. Decide whether the remaining evidence gaps require purchased or library-only
+  scholarship, and authorise (or defer) that access.
+. Decide the rights approach for images and for CHGIS/CBDB-class structured data.
+. Decide whether to seek optional specialist review, and in which of the four
+  areas above.
+
+[[verification]]
+== Verification performed
+
+* All URLs cited in this report were requested on 2026-09-23; every one returned
+  HTTP 200 except the CBDB site, which returned 403 to automated requests and was
+  therefore characterised from its published terms as reported in search results.
+* Locators were verified against the digital transcriptions named; the
+  transcriptions themselves are unproofread, and this limitation is stated in
+  <<source-classes>>.
+* The report was rendered with Asciidoctor (`npx @asciidoctor/cli`) to HTML with
+  no errors, no unresolved internal cross-references, and 7 tables rendered; the
+  pass's build output was inspected for structure.
+* Unsupported-assertion check: every historical statement above is tied to a
+  named source and locator, or is explicitly labelled as an identification, a
+  reconstruction, a self-report, or an open question. No route, causal, or
+  adaptation claim is made beyond what a cited source states.
+
+[[bib-toseiden]]
+[bibliography]
+== Bibliography of works consulted in this pass
+
+* 續日本紀 (797). Wikisource transcription:
+  link:https://zh.wikisource.org/wiki/%E7%BA%8C%E6%97%A5%E6%9C%AC%E7%B4%80[full text];
+  volumes 第七, 第八, 第十二, 第十八, 第十九, 第廿一, 第廿四, 第卅三, 第卅五.
+* 唐大和上東征傳 (779, 淡海三船 / 真人元開).
+  link:https://zh.wikisource.org/wiki/%E5%94%90%E5%A4%A7%E5%92%8C%E4%B8%8A%E6%9D%B1%E5%BE%81%E5%82%B3[Wikisource];
+  Taishō T.2089 (link:https://cbetaonline.dila.edu.tw/zh/T2089[CBETA]);
+  manuscript record link:https://kokusho.nijl.ac.jp/biblio/100150123[国書データベース].
+* 舊唐書 卷199上 東夷 日本國.
+  link:https://zh.wikisource.org/wiki/%E8%88%8A%E5%94%90%E6%9B%B8/%E5%8D%B7199%E4%B8%8A[Wikisource].
+* 新唐書 卷220 東夷 日本.
+  link:https://zh.wikisource.org/wiki/%E6%96%B0%E5%94%90%E6%9B%B8/%E5%8D%B7220[Wikisource].
+* 日本後紀 卷第十二, 卷第十三 (逸文).
+  link:https://zh.wikisource.org/wiki/%E6%97%A5%E6%9C%AC%E5%BE%8C%E7%B4%80/%E5%8D%B7%E7%AC%AC%E5%8D%81%E4%BA%8C[卷第十二],
+  link:https://zh.wikisource.org/wiki/%E6%97%A5%E6%9C%AC%E5%BE%8C%E7%B4%80/%E5%8D%B7%E7%AC%AC%E5%8D%81%E4%B8%89[卷第十三].
+* 御請来目録 (806, 空海). Taishō T55n2161
+  (link:https://cbetaonline.dila.edu.tw/zh/T2161[CBETA]);
+  Kyoto University Library copy
+  (link:https://rmda.kulib.kyoto-u.ac.jp/item/rb00012887[rmda.kulib.kyoto-u.ac.jp]).
+* 叡山大師伝 (919). link:https://ja.wikisource.org/wiki/%E5%8F%A1%E5%B1%B1%E5%A4%A7%E5%B8%AB%E4%BC%9D[Wikisource];
+  base text 近藤瓶城『史籍集覧』12 (1902),
+  link:https://dl.ndl.go.jp/pid/1920329[NDL Digital Collections].
+* 井真成墓誌 (734). Discovery report, 中國新聞網, 2004-10-12:
+  link:https://www.chinanews.com.cn/news/2004/2004-10-12/26/493191.shtml[chinanews.com.cn].
+* Fuqua, Douglas Sherwin. *The Japanese Missions to Tang China and Maritime
+  Exchange in East Asia, 7th–9th Centuries*. PhD diss., University of Hawai'i at
+  Mānoa, 2004.
+  link:https://scholarspace.manoa.hawaii.edu/items/9f0726cc-f7ad-4316-aee8-c39b5e6c8d9e[ScholarSpace].
+[[bib-bingenheimer]]
+* Bingenheimer, Marcus. "A Translation of the Tōdaiwajō tōseiden 唐大和上東征傳."
+  *Indian International Journal of Buddhist Studies* 4 (2003): 168–189; 5
+  (2004): 142–181. Revised PDF:
+  link:https://mbingenheimer.net/publications/bingenheimer.ganjin2.pdf[author's site].
+[[bib-places]]
+* 日本歴史地名大系「阿多郡」. link:https://kotobank.jp/word/%E9%98%BF%E5%A4%9A%E9%83%A1-3105892[kotobank.jp].
+* 琉球新報『沖縄大百科事典』「阿児奈波島」.
+  link:https://ryukyushimpo.jp/okinawa-dic/prentry-40063.html[ryukyushimpo.jp].
+* 琉球大学学術リポジトリ, article on the island route.
+  link:https://u-ryukyu.repo.nii.ac.jp/record/2004430/files/13410100-2.pdf[PDF].
+* Wikimedia Commons, 東征伝絵巻 files.
+  link:https://commons.wikimedia.org/wiki/Category:T%C5%8Dseiden_Emaki[category].
+* Wikidata licensing. link:https://www.wikidata.org/wiki/Wikidata:Licensing[Wikidata:Licensing].
+* CHGIS V5 publication and licence note.
+  link:https://chgis.fas.harvard.edu/data/chgis/v5/[chgis.fas.harvard.edu].
+* China Biographical Database. link:https://cbdb.hsites.harvard.edu/[cbdb.hsites.harvard.edu].

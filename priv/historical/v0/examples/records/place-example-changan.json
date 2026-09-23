@@ -1,0 +1,79 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "place",
+  "record_id": "lks:place:example-changan",
+  "created_at": "2026-01-02T00:00:00Z",
+  "external_ids": [{"system": "wikidata", "id": "Q0000000", "note": "synthetic placeholder identifier"}],
+  "revisions": [
+    {
+      "revision_id": "lks:rev:example-changan-1",
+      "created_at": "2026-01-02T00:00:00Z",
+      "author": {"name": "Contract example"},
+      "change_explanation": "Initial synthetic example of a local-script name with an editorial romanization.",
+      "content": {
+        "summary": "Synthetic contract example using RFD 2's illustrative label pairing. Not historical content.",
+        "names": [
+          {
+            "form": "長安",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "primary",
+            "romanization": {
+              "value": "Chang'an",
+              "scheme": "pinyin",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:example-changan-name",
+            "note": "editorial reading aid; not evidence of historical pronunciation"
+          }
+        ],
+        "place_types": ["capital"],
+        "geometry": [
+          {
+            "claim_id": "lks:claim:example-changan-location",
+            "interpretation": "approximate_point",
+            "geojson": {"type": "Point", "coordinates": [108.9, 34.27]},
+            "precision": "locality",
+            "notes": "synthetic example: a broadly located site rather than a surveyed position"
+          }
+        ],
+        "modern_equivalents": [
+          {
+            "form": "Xi'an",
+            "language": "en",
+            "note": "synthetic example of a modern reference kept out of the historical label list; identity is not asserted"
+          }
+        ],
+        "editorial_notes": "Synthetic contract example. It demonstrates the naming and geometry shape of the v0 contract and must never be published as historical content."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:example-changan-name",
+          "statement": "The source writes the name in Han script for this period.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [{"source_id": "lks:source:example-chronicle-a", "locator": {"kind": "page", "value": "12"}}]
+        },
+        {
+          "claim_id": "lks:claim:example-changan-location",
+          "statement": "The source places the site in this locality without a surveyed position.",
+          "asserts": "/geometry/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [{"source_id": "lks:source:example-chronicle-a", "locator": {"kind": "map", "value": "plate 3"}}]
+        }
+      ],
+      "revision_hash": "sha256:212794b66985e20fb9410f65a04cb223f076e2ab09df66a1672d21ae1ba03179"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:example-changan-1",
+    "published_revision_hash": "sha256:212794b66985e20fb9410f65a04cb223f076e2ab09df66a1672d21ae1ba03179",
+    "set_id": "lks:set:example-contract-v1",
+    "published_at": "2026-01-06T00:00:00Z",
+    "published_by": {"name": "Contract example"}
+  }
+}

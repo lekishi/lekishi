@@ -1,0 +1,483 @@
+= RFD 2 historical data, time, and geometry contracts (v0)
+
+:state: proposed contract with a reference implementation, awaiting owner review
+:contract-version: lekishi-historical-contract/v0
+
+This document records the smallest portable contract that link:README.adoc[RFD 2]
+needs before durable fixtures or UI behavior: identities, revisions and
+publication, claims and reuse, names and romanization, time and uncertainty,
+geometry, and stories. It is the human-readable rationale for the machine-readable
+schemas and vectors under `priv/historical/v0/`, and for the reference semantics
+used to validate them. It does not select the launch mission, does not add
+PostGIS, does not move historical content into PostgreSQL, and does not depend on
+a browser or renderer.
+
+The contract is an interchange format, not a database design and not a universal
+ontology. Vocabularies are small and chapter-oriented, every list has an `other`
+escape hatch that must be explained in `editorial_notes`, and extending a
+vocabulary requires a new contract version.
+
+== Where the contract lives
+
+[cols="1,3",options="header"]
+|===
+|Path |Contents
+|`priv/historical/v0/schema/*.json` |JSON Schema (2020-12 subset) documents for records, sources, publication sets, and shared definitions
+|`priv/historical/v0/examples/**` |A synthetic, self-consistent content tree that validates as a whole
+|`priv/historical/v0/vectors/*.json` |Machine-readable boundary vectors with the expected result of each case
+|`test/support/lekishi/historical/contract/*.ex` |Reference semantics and the minimal JSON Schema validator used by the tests
+|`test/historical/contract/*_test.exs` |Focused contract validation
+|===
+
+The reference semantics are test-only modules so that Wave 1B does not modify
+shared application files. They are the executable definition of the rules below;
+when a consumer exists (an importer, a query layer, or the renderer's data
+access), they should move into `lib/` unchanged in behavior.
+
+== Decision: stable identities, immutable revisions, one published revision
+
+* A record has a stable identity `lks:<kind>:<slug>` where `kind` is `place`,
+  `actor`, `event`, `relationship`, or `story`. The id carries its kind and never
+  changes with a rename, a corrected date, or a new revision.
+* A record document holds an ordered list of immutable revisions. Each revision
+  carries `revision_id`, `created_at`, `author`, `change_explanation`, its
+  content, its claims, and `revision_hash`.
+* `revision_hash` is a SHA-256 over the canonical JSON encoding of the revision
+  body without its own hash. Canonical encoding sorts object keys recursively, so
+  the hash does not depend on formatting or key order.
+* `publication` on a record mirrors the newest published revision: revision id,
+  revision hash, publication set, and publication time. The mirror is verified
+  against the publication sets rather than trusted, so a hand-edited file is
+  caught.
+* A revision carrying `research_notes` is never publishable. Original
+  contributor hypotheses live there; the claim vocabulary has no
+  hypothesis basis at all, so a hypothesis cannot be published as a claim.
+
+== Decision: publication sets are the atomic visibility unit
+
+A publication set names one revision of every record that becomes visible
+together, the reviewer, the review checklist, the approval time, and the
+publication time. Related changes are published as one set, so an event never
+appears updated while the relationships it participates in are stale.
+
+Rules enforced by the reference semantics:
+
+* every member revision exists and its hash still matches the approved hash;
+* the review checklist (source support, attribution, date/location uncertainty,
+  attestation versus interpretation, reuse rights) is complete;
+* publication does not precede review or the creation of the revision it
+  publishes;
+* self-review is labelled as self-review when the reviewer authored a member
+  revision, and `self_review` requires the reviewer to be an author of one;
+* a record appears at most once per set, and two sets publishing the same record
+  at the same time are rejected as ambiguous;
+* the newest published set containing a record defines its current published
+  revision, and the record's mirror must match it.
+
+Correction history is derived, never stored twice: `Publication.history/2`
+returns published revisions per record in publication order with their change
+explanations, authors, dispute status, and approving review. A draft correction
+therefore leaves the previous published revision current. A correction is not a
+way to hide disagreement: if competing claims remain supported, they stay in the
+current revision under the main-account and cited-alternatives policy.
+
+=== Decision: approved source metadata is immutable
+
+A publication set also pins `{source_id, source_hash}` for every source cited by
+a published member revision, and the pin list must be complete: a cited source
+that is not pinned fails validation. Each source document carries a
+`source_hash` over its own canonical encoding, so an edit to a title, edition,
+author, or license field is caught twice over: once by the document check, and
+again by the set pin, which keeps the hash recorded at approval. Resealing the
+source document fixes only the first: the set pin still disagrees, because the
+metadata that was reviewed is what the pin preserves.
+
+The correction path preserves history rather than overwriting it. To correct an
+approved source, publish a new source document with a new `source_id` (and an
+optional `supersedes_source_id` naming the earlier one), cite it from new record
+revisions, and publish a new set that pins it. The earlier source document stays
+in the tree unchanged, so the metadata that was reviewed remains available and
+the earlier set still validates. A source document is therefore immutable once
+pinned, and its identity is per approved metadata version rather than a mutable
+work record; nothing is silently rewritten.
+
+== Decision: claims carry the evidence, and reuse terms gate publication
+
+Each claim states what is asserted, the content field it supports (`asserts`, a
+JSON Pointer into the revision content, `""` for the whole content), its basis,
+its role, and at least one citation. A citation names a source and a locator
+(page, section, entry, inscription, map, dataset row, and so on) and may carry
+short quoted text.
+
+* `basis: attested` records what a source reports. It does not by itself make the
+  report undisputed or accurate.
+* `basis: cited_interpretation` is an interpretation advanced in cited
+  scholarship and must name who advances it (`attributed_to`).
+* `role: main` is the presented account for that pointer; at most one main claim
+  may assert the same pointer. `supporting`, `alternative`, and `conflicting`
+  claims carry the rest.
+* Alternative or conflicting claims require `dispute.status: "disputed"` with a
+  summary, and a dispute requires at least one such claim. An undisputed record
+  may not carry an alternative account.
+* Every published place, actor, event, and relationship needs at least one claim
+  with a citation. Stories are curation and carry no such requirement.
+* Sources record their reuse terms. A cited source whose license status is not
+  `recorded` blocks publication of that content, and quoted text additionally
+  requires recorded permission to quote. This encodes RFD 2's rule that open
+  access is not unrestricted redistribution.
+* A publication set pins the approved `source_hash` of every source cited by a
+  published revision, and the coverage is complete. Source metadata is part of
+  what review approves, so it cannot be rewritten afterwards without detection,
+  and correcting it means publishing a new source document rather than editing an
+  approved one.
+
+`asserts` also answers RFD 2's note that one source need not support every field:
+a reviewer can see which fields have supporting claims, and geometry entries are
+required to be supported by a claim that asserts that entry.
+
+== Decision: names lead with source-supported period forms
+
+* `names` holds historical forms with `form`, `script` (ISO 15924), `language`
+  (BCP 47), `role` (`primary` or `alternate`), optional `validity`, optional
+  evidence (`claim_id`), and optional `romanization` or `translation`.
+* Exactly one primary form labels the map. A published primary form requires
+  cited support for the period-appropriate form, so a modern spelling cannot be
+  substituted silently.
+* A romanization is a modern reading aid: `origin: editorial` forbids a
+  `claim_id`, `origin: source_attested` requires one, and every romanization must
+  set `pronunciation_claim: false`. A romanization is never evidence of
+  historical pronunciation, and a romanized string may not be recorded with a
+  non-Latin script.
+* Modern names live in `modern_equivalents` with an explanatory note, never as
+  the historical label. Renaming, relocation, successor settlements, and changed
+  boundaries are relationship records (`renamed_to`, `relocated_to`,
+  `successor_of`, `changed_boundaries`) with their own cited evidence, so they are
+  never silently treated as aliases of one place.
+
+The map label is derived, not stored: `Names.map_label/1` pairs the primary form
+with its romanization when one exists, following RFD 2's "Chang'an · 長安" example.
+
+== Decision: time is a support interval with an explicit mode
+
+=== Civil era years and no year zero
+
+An era year is `{year, era}` with `era` in `bce`/`ce` and `year` a positive
+integer. Civil BCE/CE numbering has no year zero, so `year: 0` is invalid in both
+eras, and the era boundary spans exactly one ordinal step:
+
+[cols="1,1,1",options="header"]
+|===
+|Civil year |Astronomical ordinal (derived, comparison only) |Note
+|2 BCE |-1 |
+|1 BCE |0 |The ordinal is never stored, displayed, or shown to readers
+|1 CE |1 |1 BCE immediately precedes 1 CE
+|===
+
+Coarser precisions are aligned by convention and checked: the 730s CE is
+730–739 CE, the 730s BCE is 739–730 BCE, the 8th century CE is 701–800 CE, and
+the 1st century BCE is 100–1 BCE. A decade or century that would straddle the era
+boundary is rejected rather than normalized into a 101-year span.
+
+=== Source expression, calendar, and precision
+
+Every time keeps the source's own expression (`source_expression`) next to the
+normalized interval. `calendar` records the source calendar (`julian`,
+`gregorian`, `islamic`, `chinese_lunisolar`, `regnal`, or `unknown`), and
+`precision` is `day`, `month`, `year`, `decade`, `century`, or `unspecified`.
+Precision constrains the endpoints: a year-precision claim may not carry a month
+or day, month precision requires a month and forbids a day, and day precision
+requires both. A year-only claim therefore never becomes January 1, and no
+derived playback coordinate invents a finer resolution than the evidence.
+
+Comparisons are made at year granularity in v0. Sub-year ordering is out of
+scope: two records whose supports share a year are never ordered, even when their
+day-precision dates differ, and a declared `before`/`after` between them is
+rejected. Day- and month-precision comparisons report a
+`year_granularity_comparison` caveat instead of pretending to day-level accuracy,
+and a cross-calendar comparison reports `cross_calendar_approximation` because
+the year boundary can shift by a year. Both caveats are part of the contract
+surface, not hidden behavior. Year granularity applies to ordering *between*
+records; a single interval whose own endpoints run backwards is still a data
+error and is rejected at day precision.
+
+=== Explicit endpoint semantics
+
+* The normalized interval is a *support* interval: every value the evidence
+  permits lies inside it.
+* Every closed boundary is inclusive. `boundary` must be `inclusive`; a source
+  statement such as "until 740 CE" is normalized to an inclusive bound at its
+  precision (740, not 741, and not half-open).
+* `bounds` is `two_sided`, `lower_only`, or `upper_only` and must agree with
+  which endpoints are present, so an unbounded range cannot masquerade as a
+  bounded one.
+* An `instant` is two-sided with equal endpoints; a one-sided or unequal pair is
+  an occurrence window or duration instead.
+
+Worked asymmetry (all inclusive, year precision):
+
+[cols="2,2,1,3",options="header"]
+|===
+|Record interval |Window |Result |Why
+|730–740 CE |740–750 CE |possible |The shared boundary year 740 is inclusive
+|730–739 CE |740–750 CE |outside |Half-open or exclusive readings would wrongly include this
+|730–760 CE |740–750 CE |possible |RFD 2's uncertain occurrence inside a narrower window
+|730–760 CE |700–800 CE |definite |The whole support lies inside the window, so occurrence is certain even though the year is not
+|700–720 CE |740–750 CE |outside |Disjoint ranges do not match on the possible-match policy
+|===
+
+=== Duration versus uncertain occurrence
+
+`mode` is what the interval means, and it is the difference between a supported
+duration and an unknown date:
+
+* `duration` — activity supported across the interval. Continuous presentation
+  is justified, and the playhead reports `active` inside the interval.
+* `occurrence_window` — one occurrence at an unknown point inside the interval.
+  It is `possible` inside the interval and never `active`, never continuous, and
+  never anchored at the midpoint. Two records with the same span but different
+  modes are not the same claim.
+* `instant` — a single (precision-limited) occurrence; `active` only at that
+  point.
+* `unknown` — a source expression exists but no usable interval does. It behaves
+  exactly like an undated record.
+
+Endpoint certainty (`exact`, `approximate`, `bounded`) is descriptive metadata.
+It does not shrink or widen the support, so "about 630–632 CE" is still ordered
+before an occurrence window that starts in 633, while an interval that reaches
+into the next range is never ordered before it.
+
+=== Partial ordering
+
+An event's time may declare `ordering` entries against other records:
+`before`, `after`, `concurrent`, or `undetermined`. A declared relation is
+checked against the supports, so an editor cannot assert an order the evidence
+does not establish:
+
+* `before` requires the other record's support to start after this one ends
+  (strictly, at year granularity); `after` is the mirror; `concurrent` requires
+  the supports to be able to overlap.
+* `undetermined` records that the evidence was examined and does not order the
+  two records. It is always consistent, and it is not the absence of an
+  assertion.
+* A record with no usable date cannot be ordered at all: declaring `before`
+  against it is rejected, while `undetermined` is accepted.
+* Ordering graphs are checked for cycles, including self-loops and edges
+  expressed as `after`; `part_of` chains are checked for cycles too.
+* A published ordering assertion needs a cited claim, and a published ordering
+  target is resolved to the target's published revision.
+
+Consumers must not present `overlaps`, `undetermined`, or a sort key as
+established historical order. `Time.chronological_key/1` gives a stepping key,
+and events whose supports overlap are unordered.
+
+=== Possible matches, undated records, and playback
+
+`Time.temporal_match/3` classifies a record against an inclusive window:
+
+* `definite` — the whole support lies inside the window;
+* `possible` — the supports intersect without containment, which is the default
+  inclusion policy for bounded uncertain occurrences;
+* `outside` — the supports are disjoint;
+* `undated` — no usable date. An undated record matches no window, not even one
+  covering all years, and is excluded from chronological stepping and playback
+  while remaining discoverable in lists, search, and connections.
+
+A playhead is a civil era year and is validated as one: it must state `bce` or
+`ce` and a positive year. A missing era is rejected rather than read as CE, which
+would silently move a BCE date by two thousand years, and year 0 is rejected
+because civil BCE/CE has no year zero. A BCE playhead is otherwise ordinary, so
+BCE content stays playable.
+
+=== Open-ended bounds
+
+A source statement such as "after 700 CE" normalizes to a `lower_only` interval:
+the known bound is preserved without inventing an upper one. It is a possible
+match for any later window, is never a definite match (a finite window cannot
+contain an unbounded support), and cannot be declared `before` another record
+because its end is unknown. `upper_only` behaves symmetrically.
+
+== Decision: geometry says what the evidence supports and what the atlas asserts
+
+A geometry entry links to a claim that asserts it and records:
+
+* `interpretation` — `approximate_point`, `source_supported_area`,
+  `display_anchor`, `unknown`, `attested_itinerary`, `reconstructed_route`, or
+  `schematic_link`;
+* `geojson` — GeoJSON with WGS84 positions, or null when there is no placement;
+* `precision` — `site`, `locality`, `region`, or `unspecified`;
+* optional `uncertainty`, `validity`, `waypoints`, and `notes`.
+
+Rules that separate the plausible wrong reading from the contract:
+
+* An `unknown` placement has no coordinates, no implied precision, and an
+  explanation. A wholly unlocated record stays in lists and details.
+* A `display_anchor` is explicitly not an asserted coordinate: it needs an
+  explanation and may not carry a locational precision. A label anchor for a
+  broadly located event is not the event's coordinate.
+* An asserted location needs a geometry type matching its interpretation
+  (`approximate_point` is a Point, `source_supported_area` a Polygon or
+  MultiPolygon, routes a LineString or MultiLineString), recorded precision, and
+  cited support.
+* An `attested_itinerary` must rest on attestation; a `reconstructed_route` must
+  be a cited scholarly interpretation with an explanation; a `schematic_link`
+  must be labelled as schematic and is not an itinerary. Waypoints belong to
+  routes only.
+* Extent is recorded only when the source states it:
+  `uncertainty.kind: source_stated_extent` requires both an extent and the
+  source's own wording, and `kind: none` forbids an extent. The contract has no
+  field for an invented radius, and invented-precision keys (`radius`,
+  `confidence`, `probability`, and similar) are rejected wherever they appear.
+* GeoJSON structure is checked: positions are longitude/latitude in range, lines
+  need two positions, and polygon rings must close.
+
+Renderer and presentation keys (`color`, `opacity`, `camera`, `viewport`,
+playhead state, and similar) are rejected anywhere in a document, and record
+content objects are closed: unknown fields fail schema validation. Presentation
+state therefore cannot enter the historical source of truth, and native or
+non-browser delivery stays possible.
+
+== Decision: stories are navigation over records
+
+A story carries a title, summary, an inclusive exploration `window`, a coverage
+note, and an ordered list of steps that reference records. Steps may revisit a
+record, because presentation order is not a claim about precedence, and a step
+cannot embed a copy of a record: stories are selections over the same records,
+not parallel content.
+
+== Error codes as contract surface
+
+The reference semantics report named codes so a wrong interpretation is
+distinguishable from a typo. The complete list is exposed by
+`Documents.codes/0`, `Time.codes/0`, and `Publication.codes/0`, and the tests
+assert that every code a vector expects is documented. Representative codes:
+
+[cols="2,3",options="header"]
+|===
+|Code |Meaning
+|civil_year_zero |A civil era year was 0; civil BCE/CE has no year zero
+|playhead_must_be_era_year |A playhead did not state a bce or ce era, so it cannot be placed on the historical scale
+|playhead_year_must_be_positive |A playhead year was 0 or negative
+|year_precision_has_month_or_day |A year-precision claim carried a month or day, inventing precision
+|boundary_not_inclusive |An endpoint convention other than inclusive was used
+|bounds_mismatch |Declared bounds disagree with which endpoints are present
+|decade_span_mismatch, century_span_mismatch |A named decade or century is not aligned, or straddles the era boundary
+|declared_order_not_supported |A declared ordering is not established by the supports, including a day-level order inside one year
+|order_with_undated_record |An order was declared against a record with no usable date
+|invalid_timestamp |An editorial timestamp matches the shape but is not a real UTC instant, so it cannot order revisions or publications
+|geometry_unknown_has_geojson |An unknown placement carried coordinates
+|display_anchor_with_precision |A label anchor was given a locational precision
+|uncertainty_without_source_expression |An extent was recorded without the source's own statement
+|invented_precision_field |A radius, confidence, or probability was invented
+|presentation_field_in_content |Renderer or presentation state entered historical content
+|primary_name_without_claim |A published primary label has no cited support
+|script_form_mismatch |A romanized form was recorded as a local-script form
+|editorial_romanization_has_claim |An editorial reading aid was presented as source evidence
+|claim_pointer_unresolved |A claim points at a field that does not exist
+|interpretation_missing_attribution |A cited interpretation does not name who advances it
+|claim_without_dispute, dispute_summary_missing |A competing account is not visibly disputed
+|published_record_without_citation |A published place, actor, event, or relationship has no cited claim
+|unrecorded_source_license |A cited source has no recorded reuse terms
+|quotation_not_permitted |Quoted text lacks recorded permission to quote
+|member_hash_mismatch, revision_hash_mismatch |An approved revision changed after sealing
+|source_hash_mismatch |A source document was edited after sealing
+|pinned_source_hash_mismatch |The approved metadata of a pinned source changed after approval, even if the source was resealed
+|source_not_pinned |A published revision cites a source the set does not pin
+|pinned_source_unknown |A set pins metadata for a source that is not in the content tree
+|publication_mirror_mismatch, publication_without_set |A record's published revision disagrees with the publication sets
+|self_review_mislabelled |Owner self-review was labelled independent or specialist
+|ordering_cycle, part_of_cycle |The declared relations contain a cycle
+|===
+
+== Worked examples and test vectors
+
+`priv/historical/v0/examples/` contains a synthetic content tree — two places,
+two actors, two events, two relationships, one story, two sources, and one
+publication set — that validates as a whole. It exists to exercise the contract
+shape (a disputed location, an uncertain occurrence beside a duration, an
+attested itinerary, a proposed influence, a self-reviewed publication set) and
+asserts nothing about the past. Example ids contain `example-`, their
+`editorial_notes` say they are synthetic, and they must never be imported as
+content.
+
+`priv/historical/v0/vectors/` contains the boundary cases as data, each with the
+plausible wrong interpretation it separates from the contract. The vectors cover:
+BCE/CE boundaries and no year zero, precision and endpoint combinations,
+inclusive window boundaries, duration versus uncertain occurrence, playback
+states and playhead validation, undated exclusion, open-ended bounds, partial
+ordering and ordering graphs (including day-precision records inside one year),
+name and romanization rules, geometry interpretation and invented precision,
+renderer independence, claim evidence and disputes, license and quotation gates,
+source sealing and set pins, editorial timestamp validation, and publication,
+mirror, and correction-history behavior.
+
+== Validation
+
+[source,bash]
+----
+mix test test/historical                  # the contract vectors and examples
+MIX_ENV=test mix run --no-start -e 'Lekishi.Historical.Contract.Seal.seal_all!()'
+----
+
+The second command reseals the worked examples after editing their content: it
+rewrites each source document's `source_hash`, each revision's `revision_hash`,
+the record's publication mirror, and the publication set's member and source
+pins. Replacement is positional, so it works whether a file still carries an
+author's placeholder (`sha256:000...001`) or a stale hash, and it preserves the
+hand-written formatting. Editing an approved source or revision without
+resealing fails the tests, and resealing an approved source still fails the set
+pin, which is how the file-based workflow keeps published history and reviewed
+metadata intact.
+
+The schemas are real JSON Schema documents, but the repository has no JSON Schema
+dependency and this work does not add one, so validation uses a small keyword
+subset (`test/support/.../json_schema.ex`). Any keyword outside that subset
+raises instead of being ignored, and a schema self-check walks every subschema, so
+the schemas cannot silently under-validate. A standard validator can replace it
+without changing the schema files.
+
+== What v0 deliberately does not do
+
+* It does not select the launch mission, mission dates, or any historical claim;
+  the examples are synthetic fixtures.
+* It does not define a universal ontology: vocabularies are small, closed, and
+  versioned, with an explained `other` escape hatch.
+* It does not store presentation, camera, or playback state, and it does not
+  derive an uncertainty radius, a confidence percentage, or a midpoint date.
+* It does not implement day-level calendar conversion, sub-year ordering, or
+  cross-calendar day comparison; those are flagged rather than approximated
+  silently.
+* It does not migrate content to PostgreSQL or adopt PostGIS, and it does not
+  require a browser or renderer.
+
+== Open owner decisions
+
+These are the questions this contract answers provisionally. The reference
+semantics and vectors encode the current answer, so changing one means changing
+both.
+
+. *Astronomical ordinals.* Comparison derives an astronomical ordinal (1 BCE is
+  0). RFD 2 leaves internal astronomical numbering as a possible representation,
+  not a decision. The contract keeps it out of the schema and out of display; the
+  owner should confirm that a derived-only ordinal is acceptable, or choose a
+  different comparison representation.
+. *Calendar normalization.* v0 compares year spans in the source calendar and
+  flags cross-calendar comparisons instead of converting. Day-level conversion
+  (Julian to Gregorian, lunisolar to civil) remains open, and the launch chapter's
+  dates will need a decision on which calendar the exploration window uses.
+. *Sub-year ordering.* v0 does not order day- or month-precision records that
+  share a year; a year boundary still orders them. A chapter with dense sub-year
+  chronology would need finer semantics.
+. *Open-ended bounds in matching.* v0 includes a `lower_only` occurrence in every
+  later window as a possible match. The owner may prefer a narrower default for
+  map readability once real content exists.
+. *Contribution and review delegation.* This contract records self-review
+  explicitly and requires a complete checklist, but the delegation of publication
+  authority beyond the owner remains an RFD 2 open question.
+. *Where the reference semantics live.* They are test-only modules today; moving
+  them into `lib/` should happen when the first consumer exists, so the behavior
+  is defined once.
+. *Source identity model.* v0 treats a source document as immutable per approved
+  metadata version, so correcting a title or a license means a new `source_id`
+  with `supersedes_source_id`. The owner should confirm that per-version source
+  identity is acceptable for the launch chapter, or ask for a stable work identity
+  with versioned metadata instead.

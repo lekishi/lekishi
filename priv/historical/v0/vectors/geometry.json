@@ -1,0 +1,670 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "test_vectors",
+  "area": "geometry",
+  "description": "Geometry vectors: what the evidence supports versus what the atlas asserts, approximate points, source-supported areas, display anchors, unknown placement, route interpretation, and the refusal to invent a radius or confidence value. Every geometry entry must be backed by a claim that asserts it.",
+  "vectors": [
+    {
+      "id": "geometry/approximate-point-is-valid",
+      "why": "An approximate point with recorded precision and cited support is the ordinary case for a broadly located site.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "place",
+            "published": true,
+            "content": {
+              "summary": "A broadly located site.",
+              "place_types": ["settlement"],
+              "names": [],
+              "geometry": [
+                {"claim_id": "lks:claim:vector-1", "interpretation": "approximate_point", "geojson": {"type": "Point", "coordinates": [108.9, 34.3]}, "precision": "locality", "notes": "the source places the site in this locality without a surveyed position"}
+              ]
+            },
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source places the site in this locality.", "asserts": "/geometry/0", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "map", "value": "plate 3"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": true}
+    },
+    {
+      "id": "geometry/source-supported-area-is-valid",
+      "why": "A source-supported area records the extent a source depicts without implying uniform probability or political control.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "place",
+            "published": true,
+            "content": {
+              "summary": "A region whose extent comes from a cited reconstruction.",
+              "place_types": ["region"],
+              "names": [],
+              "geometry": [
+                {"claim_id": "lks:claim:vector-1", "interpretation": "source_supported_area", "geojson": {"type": "Polygon", "coordinates": [[[108.9, 34.3], [110.1, 34.3], [110.1, 35.0], [108.9, 34.3]]]}, "precision": "region", "notes": "boundary as depicted by the cited reconstruction, not a surveyed limit"}
+              ]
+            },
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The reconstruction depicts this extent.", "asserts": "/geometry/0", "basis": "cited_interpretation", "role": "main", "attributed_to": "Example Study B", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "map", "value": "figure 4"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": true}
+    },
+    {
+      "id": "geometry/unknown-location-is-valid-without-coordinates",
+      "why": "A record with no usable placement stays in lists and details without a fabricated map position.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "place",
+            "published": true,
+            "content": {
+              "summary": "A site mentioned in the source without a usable placement.",
+              "place_types": ["settlement"],
+              "names": [],
+              "geometry": [
+                {"claim_id": "lks:claim:vector-1", "interpretation": "unknown", "geojson": null, "precision": "unspecified", "notes": "the source names the site but gives no usable position"}
+              ]
+            },
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source names the site without a position.", "asserts": "/geometry/0", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "44"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": true}
+    },
+    {
+      "id": "geometry/unknown-location-with-coordinates-rejected",
+      "why": "An unknown placement must not carry coordinates that a renderer would draw as an asserted position.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "place",
+            "published": true,
+            "content": {
+              "summary": "An unknown placement with coordinates.",
+              "place_types": ["settlement"],
+              "names": [],
+              "geometry": [
+                {"claim_id": "lks:claim:vector-1", "interpretation": "unknown", "geojson": {"type": "Point", "coordinates": [108.9, 34.3]}, "precision": "unspecified", "notes": "no usable position"}
+              ]
+            },
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source names the site without a position.", "asserts": "/geometry/0", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "44"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["geometry_unknown_has_geojson"]}
+    },
+    {
+      "id": "geometry/unknown-location-needs-an-explanation",
+      "why": "A missing placement must be documented as missing evidence rather than left unexplained.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "content": {
+              "summary": "An unexplained missing placement.",
+              "place_types": ["settlement"],
+              "names": [],
+              "geometry": [{"claim_id": "lks:claim:vector-1", "interpretation": "unknown", "geojson": null, "precision": "unspecified"}]
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["geometry_unknown_without_notes"]}
+    },
+    {
+      "id": "geometry/display-anchor-is-valid-and-not-a-coordinate",
+      "why": "A label anchor for a broadly located event is explicitly not an asserted event coordinate.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "place",
+            "published": true,
+            "content": {
+              "summary": "A broadly located event place whose marker is a label anchor.",
+              "place_types": ["region"],
+              "names": [],
+              "geometry": [
+                {"claim_id": "lks:claim:vector-1", "interpretation": "display_anchor", "geojson": {"type": "Point", "coordinates": [108.9, 34.3]}, "precision": "unspecified", "notes": "label anchor only; the source does not assert this coordinate"}
+              ]
+            },
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source locates the event only in this broad region.", "asserts": "/geometry/0", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "12"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": true}
+    },
+    {
+      "id": "geometry/display-anchor-with-precision-rejected",
+      "why": "Giving an anchor a locational precision would present it as an asserted coordinate.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "place",
+            "published": true,
+            "content": {
+              "summary": "An anchor with a claimed precision.",
+              "place_types": ["region"],
+              "names": [],
+              "geometry": [
+                {"claim_id": "lks:claim:vector-1", "interpretation": "display_anchor", "geojson": {"type": "Point", "coordinates": [108.9, 34.3]}, "precision": "site", "notes": "label anchor"}
+              ]
+            },
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source locates the event only in this broad region.", "asserts": "/geometry/0", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "12"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["display_anchor_with_precision"]}
+    },
+    {
+      "id": "geometry/display-anchor-needs-an-explanation",
+      "why": "An anchor without an explanation can be mistaken for an asserted position.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "content": {
+              "summary": "An unexplained anchor.",
+              "place_types": ["region"],
+              "names": [],
+              "geometry": [{"claim_id": "lks:claim:vector-1", "interpretation": "display_anchor", "geojson": {"type": "Point", "coordinates": [108.9, 34.3]}, "precision": "unspecified"}]
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["display_anchor_without_notes"]}
+    },
+    {
+      "id": "geometry/invented-radius-is-rejected",
+      "why": "RFD 2: do not invent an uncertainty radius when the evidence supplies none.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "content": {
+              "summary": "A location with an invented uncertainty radius.",
+              "place_types": ["settlement"],
+              "names": [],
+              "geometry": [
+                {"claim_id": "lks:claim:vector-1", "interpretation": "approximate_point", "geojson": {"type": "Point", "coordinates": [108.9, 34.3]}, "precision": "locality", "uncertainty_radius": 5000}
+              ]
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["invented_precision_field"]}
+    },
+    {
+      "id": "geometry/invented-confidence-is-rejected",
+      "why": "RFD 2: prefer descriptive uncertainty over invented confidence percentages.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "content": {
+              "summary": "A location with an invented confidence value.",
+              "place_types": ["settlement"],
+              "names": [],
+              "geometry": [
+                {"claim_id": "lks:claim:vector-1", "interpretation": "approximate_point", "geojson": {"type": "Point", "coordinates": [108.9, 34.3]}, "precision": "locality", "confidence": 0.82}
+              ]
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["invented_precision_field"]}
+    },
+    {
+      "id": "geometry/uncertainty-none-cannot-carry-an-extent",
+      "why": "A claimed absence of extent must not also record one.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "content": {
+              "summary": "A location claiming no extent while recording one.",
+              "place_types": ["settlement"],
+              "names": [],
+              "geometry": [
+                {"claim_id": "lks:claim:vector-1", "interpretation": "approximate_point", "geojson": {"type": "Point", "coordinates": [108.9, 34.3]}, "precision": "locality", "uncertainty": {"kind": "none", "extent_m": 500}}
+              ]
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["uncertainty_none_has_extent"]}
+    },
+    {
+      "id": "geometry/source-stated-extent-needs-the-source-statement",
+      "why": "An extent is only acceptable when the source states it, so the source's own expression is required.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "content": {
+              "summary": "An extent without the source's statement.",
+              "place_types": ["settlement"],
+              "names": [],
+              "geometry": [
+                {"claim_id": "lks:claim:vector-1", "interpretation": "approximate_point", "geojson": {"type": "Point", "coordinates": [108.9, 34.3]}, "precision": "locality", "uncertainty": {"kind": "source_stated_extent", "extent_m": 5000}}
+              ]
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["uncertainty_without_source_expression"]}
+    },
+    {
+      "id": "geometry/source-stated-extent-is-valid-with-the-statement",
+      "why": "When the source itself states an extent, recording it with the source's wording is supported.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "place",
+            "published": true,
+            "content": {
+              "summary": "An extent the source itself states.",
+              "place_types": ["settlement"],
+              "names": [],
+              "geometry": [
+                {"claim_id": "lks:claim:vector-1", "interpretation": "approximate_point", "geojson": {"type": "Point", "coordinates": [108.9, 34.3]}, "precision": "locality", "uncertainty": {"kind": "source_stated_extent", "extent_m": 5000, "source_expression": "within five kilometres of the modern village"}}
+              ]
+            },
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source states the extent in these terms.", "asserts": "/geometry/0", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "18"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": true}
+    },
+    {
+      "id": "geometry/reconstructed-route-is-a-cited-interpretation",
+      "why": "A reconstructed route is a scholarly interpretation, not a reported itinerary.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "relationship",
+            "published": true,
+            "content": {
+              "summary": "A travel relationship with a reconstructed route.",
+              "relationship_types": ["travel"],
+              "from": "lks:place:vector-a",
+              "to": "lks:place:vector-b",
+              "directionality": "directed",
+              "causality": "not_asserted",
+              "geometry": [
+                {"claim_id": "lks:claim:vector-1", "interpretation": "reconstructed_route", "geojson": {"type": "LineString", "coordinates": [[108.9, 34.3], [110.1, 35.0]]}, "precision": "region", "notes": "route as reconstructed by the cited study"}
+              ]
+            },
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The study reconstructs this route.", "asserts": "/geometry/0", "basis": "cited_interpretation", "role": "main", "attributed_to": "Example Study B", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "map", "value": "figure 2"}}]}
+            ]
+          },
+          {"kind": "place", "record_id": "lks:place:vector-a", "content": {"summary": "Start place.", "place_types": ["settlement"], "names": [], "geometry": []}},
+          {"kind": "place", "record_id": "lks:place:vector-b", "content": {"summary": "End place.", "place_types": ["settlement"], "names": [], "geometry": []}}
+        ]
+      },
+      "expect": {"valid": true}
+    },
+    {
+      "id": "geometry/reconstructed-route-cannot-rest-on-attestation",
+      "why": "Recording a reconstruction as attested would present an interpretation as a reported itinerary.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "relationship",
+            "published": true,
+            "content": {
+              "summary": "A reconstructed route recorded as attested.",
+              "relationship_types": ["travel"],
+              "from": "lks:place:vector-a",
+              "to": "lks:place:vector-b",
+              "directionality": "directed",
+              "causality": "not_asserted",
+              "geometry": [
+                {"claim_id": "lks:claim:vector-1", "interpretation": "reconstructed_route", "geojson": {"type": "LineString", "coordinates": [[108.9, 34.3], [110.1, 35.0]]}, "precision": "region", "notes": "route as reconstructed"}
+              ]
+            },
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source reports the journey.", "asserts": "/geometry/0", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "30"}}]}
+            ]
+          },
+          {"kind": "place", "record_id": "lks:place:vector-a", "content": {"summary": "Start place.", "place_types": ["settlement"], "names": [], "geometry": []}},
+          {"kind": "place", "record_id": "lks:place:vector-b", "content": {"summary": "End place.", "place_types": ["settlement"], "names": [], "geometry": []}}
+        ]
+      },
+      "expect": {"valid": false, "codes": ["reconstructed_route_not_interpretation"]}
+    },
+    {
+      "id": "geometry/reconstructed-route-needs-notes",
+      "why": "A reconstructed route must be labelled as a reconstruction rather than left to look like an itinerary.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "relationship",
+            "content": {
+              "summary": "A reconstructed route without a label.",
+              "relationship_types": ["travel"],
+              "from": "lks:place:vector-a",
+              "to": "lks:place:vector-b",
+              "directionality": "directed",
+              "causality": "not_asserted",
+              "geometry": [{"claim_id": "lks:claim:vector-1", "interpretation": "reconstructed_route", "geojson": {"type": "LineString", "coordinates": [[108.9, 34.3], [110.1, 35.0]]}, "precision": "region"}]
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["route_without_notes"]}
+    },
+    {
+      "id": "geometry/attested-itinerary-must-rest-on-attestation",
+      "why": "An attested itinerary requires a source that reports the itinerary, not a reconstruction.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "relationship",
+            "published": true,
+            "content": {
+              "summary": "An itinerary claim resting on a reconstruction.",
+              "relationship_types": ["travel"],
+              "from": "lks:place:vector-a",
+              "to": "lks:place:vector-b",
+              "directionality": "directed",
+              "causality": "not_asserted",
+              "geometry": [
+                {"claim_id": "lks:claim:vector-1", "interpretation": "attested_itinerary", "geojson": {"type": "LineString", "coordinates": [[108.9, 34.3], [110.1, 35.0]]}, "precision": "region", "notes": "itinerary as reported"}
+              ]
+            },
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The study proposes this itinerary.", "asserts": "/geometry/0", "basis": "cited_interpretation", "role": "main", "attributed_to": "Example Study B", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "31"}}]}
+            ]
+          },
+          {"kind": "place", "record_id": "lks:place:vector-a", "content": {"summary": "Start place.", "place_types": ["settlement"], "names": [], "geometry": []}},
+          {"kind": "place", "record_id": "lks:place:vector-b", "content": {"summary": "End place.", "place_types": ["settlement"], "names": [], "geometry": []}}
+        ]
+      },
+      "expect": {"valid": false, "codes": ["attested_itinerary_not_attested"]}
+    },
+    {
+      "id": "geometry/schematic-link-is-valid-when-labelled",
+      "why": "A schematic link keeps a sourced connection visible without claiming an exact itinerary.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "relationship",
+            "published": true,
+            "content": {
+              "summary": "A trade connection drawn schematically.",
+              "relationship_types": ["trade"],
+              "from": "lks:place:vector-a",
+              "to": "lks:place:vector-b",
+              "directionality": "undirected",
+              "causality": "not_asserted",
+              "geometry": [
+                {"claim_id": "lks:claim:vector-1", "interpretation": "schematic_link", "geojson": {"type": "LineString", "coordinates": [[108.9, 34.3], [110.1, 35.0]]}, "precision": "region", "notes": "schematic link between two attested nodes; not an itinerary"}
+              ]
+            },
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source attests exchange between the two places.", "asserts": "/geometry/0", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "55"}}]}
+            ]
+          },
+          {"kind": "place", "record_id": "lks:place:vector-a", "content": {"summary": "Start place.", "place_types": ["port"], "names": [], "geometry": []}},
+          {"kind": "place", "record_id": "lks:place:vector-b", "content": {"summary": "End place.", "place_types": ["port"], "names": [], "geometry": []}}
+        ]
+      },
+      "expect": {"valid": true}
+    },
+    {
+      "id": "geometry/approximate-point-must-be-a-point",
+      "why": "Geometry type must match the interpretation, so a point claim cannot hide a line.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "content": {
+              "summary": "An approximate point recorded as a line.",
+              "place_types": ["settlement"],
+              "names": [],
+              "geometry": [
+                {"claim_id": "lks:claim:vector-1", "interpretation": "approximate_point", "geojson": {"type": "LineString", "coordinates": [[108.9, 34.3], [110.1, 35.0]]}, "precision": "locality"}
+              ]
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["geometry_wrong_type"]}
+    },
+    {
+      "id": "geometry/source-supported-area-must-be-a-polygon",
+      "why": "An area claim must be an area, not a point that implies precision.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "content": {
+              "summary": "An area recorded as a point.",
+              "place_types": ["region"],
+              "names": [],
+              "geometry": [
+                {"claim_id": "lks:claim:vector-1", "interpretation": "source_supported_area", "geojson": {"type": "Point", "coordinates": [108.9, 34.3]}, "precision": "region"}
+              ]
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["geometry_wrong_type"]}
+    },
+    {
+      "id": "geometry/asserted-location-needs-precision",
+      "why": "An asserted location without precision hides how precise the claim is.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "content": {
+              "summary": "An asserted point without recorded precision.",
+              "place_types": ["settlement"],
+              "names": [],
+              "geometry": [{"claim_id": "lks:claim:vector-1", "interpretation": "approximate_point", "geojson": {"type": "Point", "coordinates": [108.9, 34.3]}, "precision": "unspecified"}]
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["geometry_missing_precision"]}
+    },
+    {
+      "id": "geometry/unclosed-polygon-ring-rejected",
+      "why": "A GeoJSON polygon ring must close, or the depicted area is undefined.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "content": {
+              "summary": "An area with an unclosed ring.",
+              "place_types": ["region"],
+              "names": [],
+              "geometry": [
+                {"claim_id": "lks:claim:vector-1", "interpretation": "source_supported_area", "geojson": {"type": "Polygon", "coordinates": [[[108.9, 34.3], [110.1, 34.3], [110.1, 35.0], [108.9, 34.4]]]}, "precision": "region"}
+              ]
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["geojson_ring_not_closed"]}
+    },
+    {
+      "id": "geometry/coordinate-out-of-range-rejected",
+      "why": "Positions are WGS84 longitude and latitude, so a longitude of 200 is a data error.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "content": {
+              "summary": "A point outside the coordinate range.",
+              "place_types": ["settlement"],
+              "names": [],
+              "geometry": [
+                {"claim_id": "lks:claim:vector-1", "interpretation": "approximate_point", "geojson": {"type": "Point", "coordinates": [200.0, 34.3]}, "precision": "locality"}
+              ]
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["geojson_coordinate_out_of_range"]}
+    },
+    {
+      "id": "geometry/line-needs-two-positions",
+      "why": "A route needs at least two positions to be a line.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "relationship",
+            "content": {
+              "summary": "A route with a single position.",
+              "relationship_types": ["travel"],
+              "from": "lks:place:vector-a",
+              "to": "lks:place:vector-b",
+              "directionality": "directed",
+              "causality": "not_asserted",
+              "geometry": [
+                {"claim_id": "lks:claim:vector-1", "interpretation": "schematic_link", "geojson": {"type": "LineString", "coordinates": [[108.9, 34.3]]}, "precision": "region", "notes": "schematic"}
+              ]
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["geojson_too_few_positions"]}
+    },
+    {
+      "id": "geometry/geometry-must-be-asserted-by-its-claim",
+      "why": "A geometry entry must be supported by a claim that asserts that entry, so evidence cannot be attached to the wrong field.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "place",
+            "published": true,
+            "content": {
+              "summary": "A geometry entry whose claim asserts a different field.",
+              "place_types": ["settlement"],
+              "names": [],
+              "geometry": [
+                {"claim_id": "lks:claim:vector-1", "interpretation": "approximate_point", "geojson": {"type": "Point", "coordinates": [108.9, 34.3]}, "precision": "locality"}
+              ]
+            },
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source describes the place in general terms.", "asserts": "/summary", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "9"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["geometry_claim_pointer_mismatch"]}
+    },
+    {
+      "id": "geometry/geometry-must-reference-a-claim",
+      "why": "Geometry without a linked claim has no evidentiary basis.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "content": {
+              "summary": "A geometry entry citing a claim that does not exist.",
+              "place_types": ["settlement"],
+              "names": [],
+              "geometry": [{"claim_id": "lks:claim:missing", "interpretation": "approximate_point", "geojson": {"type": "Point", "coordinates": [108.9, 34.3]}, "precision": "locality"}]
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["unresolved_claim_reference"]}
+    },
+    {
+      "id": "geometry/waypoints-belong-to-a-route",
+      "why": "Waypoints describe a route; attaching them to a point claim would imply unsupported detail.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "content": {
+              "summary": "A point claim carrying route waypoints.",
+              "place_types": ["settlement"],
+              "names": [],
+              "geometry": [
+                {"claim_id": "lks:claim:vector-1", "interpretation": "approximate_point", "geojson": {"type": "Point", "coordinates": [108.9, 34.3]}, "precision": "locality", "waypoints": [{"geojson": {"type": "Point", "coordinates": [109.0, 34.4]}}]}
+              ]
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["waypoints_not_route"]}
+    },
+    {
+      "id": "geometry/actor-cannot-carry-geometry",
+      "why": "Cultures and other actors are not assumed to occupy exclusive, sharply bounded polygons, so actor content rejects territory geometry outright.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "actor",
+            "content": {
+              "summary": "A culture with a boundary.",
+              "actor_types": ["culture"],
+              "names": [],
+              "geometry": [{"claim_id": "lks:claim:vector-1", "interpretation": "source_supported_area", "geojson": {"type": "Polygon", "coordinates": [[[108.9, 34.3], [110.1, 34.3], [110.1, 35.0], [108.9, 34.3]]]}, "precision": "region"}]
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["schema_violation"]}
+    }
+  ]
+}

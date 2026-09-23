@@ -3,6 +3,10 @@
 
 @import "tailwindcss" source(none);
 @import "phoenix-colocated/lekishi/colocated.css";
+/* Cesium's widget styles are part of the renderer, but Phoenix ships one CSS
+   bundle. Importing them here keeps `app.css` authoritative instead of adding a
+   second stylesheet the layout would have to know about. */
+@import "cesium/Build/Cesium/Widgets/widgets.css";
 @source "../css";
 @source "../js";
 @source "../../lib/lekishi_web";

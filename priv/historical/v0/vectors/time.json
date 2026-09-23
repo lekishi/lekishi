@@ -1,0 +1,1240 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "test_vectors",
+  "area": "time",
+  "description": "Boundary vectors for the v0 time contract: BCE/CE with no civil year zero, precision, inclusive endpoints, duration versus uncertain occurrence, open-ended bounds, undated exclusion, and calendar caveats. Each vector names the plausible wrong interpretation it separates from the contract.",
+  "vectors": [
+    {
+      "id": "time/bce/civil-year-zero-rejected",
+      "why": "Civil BCE/CE numbering has no year zero, so year 0 is not a valid era year.",
+      "op": "normalize_interval",
+      "input": {
+        "time": {
+          "source_expression": "year 0",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 0, "era": "bce"},
+            "end": {"year": 1, "era": "ce"}
+          }
+        }
+      },
+      "expect": {"error": "civil_year_zero"}
+    },
+    {
+      "id": "time/bce/negative-year-rejected",
+      "why": "Signs belong to the era field, not the year, so a negative year is a data error rather than -221 BCE.",
+      "op": "normalize_interval",
+      "input": {
+        "time": {
+          "source_expression": "-221",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": -221, "era": "ce"},
+            "end": {"year": -221, "era": "ce"}
+          }
+        }
+      },
+      "expect": {"error": "year_must_be_positive"}
+    },
+    {
+      "id": "time/bce/no-year-zero-between-eras",
+      "why": "1 BCE derives to astronomical 0 and 1 CE to 1, so the era boundary spans one ordinal step, not two.",
+      "op": "normalize_interval",
+      "input": {
+        "time": {
+          "source_expression": "1 BCE to 1 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 1, "era": "bce"},
+            "end": {"year": 1, "era": "ce"}
+          }
+        }
+      },
+      "expect": {"interval": {"start_astro": 0, "end_astro": 1, "mode": "occurrence_window"}}
+    },
+    {
+      "id": "time/bce/one-bce-precedes-one-ce",
+      "why": "The era boundary must not be read as a single year or as 1 CE preceding 1 BCE.",
+      "op": "relation",
+      "input": {
+        "a": {
+          "source_expression": "1 BCE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 1, "era": "bce"},
+            "end": {"year": 1, "era": "bce"}
+          }
+        },
+        "b": {
+          "source_expression": "1 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 1, "era": "ce"},
+            "end": {"year": 1, "era": "ce"}
+          }
+        }
+      },
+      "expect": {"result": "before"}
+    },
+    {
+      "id": "time/precision/year-only-no-january-first",
+      "why": "A year-only claim keeps year granularity; deriving a coordinate must not invent January 1.",
+      "op": "normalize_interval",
+      "input": {
+        "time": {
+          "source_expression": "630 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 630, "era": "ce"},
+            "end": {"year": 630, "era": "ce"}
+          }
+        }
+      },
+      "expect": {
+        "interval": {"start_astro": 630, "end_astro": 630, "start_month": null, "start_day": null, "mode": "instant"}
+      }
+    },
+    {
+      "id": "time/precision/year-with-month-rejected",
+      "why": "January 1 must not be attached to a year-precision claim to make it look exact.",
+      "op": "normalize_interval",
+      "input": {
+        "time": {
+          "source_expression": "630 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 630, "era": "ce", "month": 1, "day": 1},
+            "end": {"year": 630, "era": "ce", "month": 1, "day": 1}
+          }
+        }
+      },
+      "expect": {"error": "year_precision_has_month_or_day"}
+    },
+    {
+      "id": "time/precision/day-requires-month-and-day",
+      "why": "Day precision without a month or day is an incomplete date, not a year.",
+      "op": "normalize_interval",
+      "input": {
+        "time": {
+          "source_expression": "630 CE",
+          "calendar": "julian",
+          "precision": "day",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 630, "era": "ce"},
+            "end": {"year": 630, "era": "ce"}
+          }
+        }
+      },
+      "expect": {"error": "day_precision_requires_month_and_day"}
+    },
+    {
+      "id": "time/precision/month-forbids-day",
+      "why": "Month precision must not carry a day that the evidence does not support.",
+      "op": "normalize_interval",
+      "input": {
+        "time": {
+          "source_expression": "the fifth month of 630 CE",
+          "calendar": "julian",
+          "precision": "month",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 630, "era": "ce", "month": 5, "day": 1},
+            "end": {"year": 630, "era": "ce", "month": 5, "day": 30}
+          }
+        }
+      },
+      "expect": {"error": "month_precision_forbids_day"}
+    },
+    {
+      "id": "time/precision/unspecified-requires-unknown-mode",
+      "why": "A dated mode needs a precision; unspecified precision means the record is undated.",
+      "op": "normalize_interval",
+      "input": {
+        "time": {
+          "source_expression": "unknown",
+          "calendar": "unknown",
+          "precision": "unspecified",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 730, "era": "ce"},
+            "end": {"year": 760, "era": "ce"}
+          }
+        }
+      },
+      "expect": {"error": "dated_mode_requires_precision"}
+    },
+    {
+      "id": "time/precision/unknown-mode-with-interval-rejected",
+      "why": "An unusable date must not keep an interval that a consumer could treat as a match.",
+      "op": "normalize_interval",
+      "input": {
+        "time": {
+          "source_expression": "sometime in the eighth century, unverified",
+          "calendar": "unknown",
+          "precision": "unspecified",
+          "mode": "unknown",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 730, "era": "ce"},
+            "end": {"year": 760, "era": "ce"}
+          }
+        }
+      },
+      "expect": {"error": "unknown_mode_has_interval"}
+    },
+    {
+      "id": "time/century/eighth-century-ce",
+      "why": "The 8th century CE is 701-800, not 700-799.",
+      "op": "normalize_interval",
+      "input": {
+        "time": {
+          "source_expression": "8th century CE",
+          "calendar": "julian",
+          "precision": "century",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 701, "era": "ce"},
+            "end": {"year": 800, "era": "ce"}
+          }
+        }
+      },
+      "expect": {"interval": {"start_astro": 701, "end_astro": 800}}
+    },
+    {
+      "id": "time/century/first-century-bce",
+      "why": "The 1st century BCE is 100 BCE to 1 BCE and crosses no year zero.",
+      "op": "normalize_interval",
+      "input": {
+        "time": {
+          "source_expression": "1st century BCE",
+          "calendar": "julian",
+          "precision": "century",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 100, "era": "bce"},
+            "end": {"year": 1, "era": "bce"}
+          }
+        }
+      },
+      "expect": {"interval": {"start_astro": -99, "end_astro": 0}}
+    },
+    {
+      "id": "time/century/era-flip-is-not-a-century",
+      "why": "Reading the 1st century BCE as 1 BCE to 100 CE would straddle the era boundary and invent a 101-year span.",
+      "op": "normalize_interval",
+      "input": {
+        "time": {
+          "source_expression": "1st century BCE",
+          "calendar": "julian",
+          "precision": "century",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 1, "era": "bce"},
+            "end": {"year": 100, "era": "ce"}
+          }
+        }
+      },
+      "expect": {"error": "century_span_mismatch"}
+    },
+    {
+      "id": "time/decade/730s-ce",
+      "why": "A decade in CE runs from the aligned year to nine years later.",
+      "op": "normalize_interval",
+      "input": {
+        "time": {
+          "source_expression": "the 730s CE",
+          "calendar": "julian",
+          "precision": "decade",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 730, "era": "ce"},
+            "end": {"year": 739, "era": "ce"}
+          }
+        }
+      },
+      "expect": {"interval": {"start_astro": 730, "end_astro": 739}}
+    },
+    {
+      "id": "time/decade/730s-bce",
+      "why": "A decade in BCE runs forward in time from the higher BCE year to the lower one.",
+      "op": "normalize_interval",
+      "input": {
+        "time": {
+          "source_expression": "the 730s BCE",
+          "calendar": "julian",
+          "precision": "decade",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 739, "era": "bce"},
+            "end": {"year": 730, "era": "bce"}
+          }
+        }
+      },
+      "expect": {"interval": {"start_astro": -738, "end_astro": -729}}
+    },
+    {
+      "id": "time/decade/unaligned-span-rejected",
+      "why": "A named decade is aligned; an arbitrary ten-year span is a year-precision range instead.",
+      "op": "normalize_interval",
+      "input": {
+        "time": {
+          "source_expression": "725 to 734",
+          "calendar": "julian",
+          "precision": "decade",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 725, "era": "ce"},
+            "end": {"year": 734, "era": "ce"}
+          }
+        }
+      },
+      "expect": {"error": "decade_span_mismatch"}
+    },
+    {
+      "id": "time/boundary/inclusive-shared-endpoint",
+      "why": "A support interval ending in 740 shares the inclusive boundary year with a window starting in 740.",
+      "op": "temporal_match",
+      "input": {
+        "time": {
+          "source_expression": "730 to 740 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 730, "era": "ce"},
+            "end": {"year": 740, "era": "ce"}
+          }
+        },
+        "window": {"start": {"year": 740, "era": "ce"}, "end": {"year": 750, "era": "ce"}}
+      },
+      "expect": {"result": "possible"}
+    },
+    {
+      "id": "time/boundary/one-year-short-is-outside",
+      "why": "Half-open or exclusive endpoint readings would wrongly include this; the interval stops in 739.",
+      "op": "temporal_match",
+      "input": {
+        "time": {
+          "source_expression": "730 to 739 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 730, "era": "ce"},
+            "end": {"year": 739, "era": "ce"}
+          }
+        },
+        "window": {"start": {"year": 740, "era": "ce"}, "end": {"year": 750, "era": "ce"}}
+      },
+      "expect": {"result": "outside"}
+    },
+    {
+      "id": "time/boundary/bounded-uncertainty-is-a-possible-match",
+      "why": "RFD 2's example: an occurrence known only to fall between 730 and 760 CE is a possible match for 740-750 CE, not an assertion that it happened then.",
+      "op": "temporal_match",
+      "input": {
+        "time": {
+          "source_expression": "sometime between 730 and 760 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 730, "era": "ce"},
+            "end": {"year": 760, "era": "ce"}
+          }
+        },
+        "window": {"start": {"year": 740, "era": "ce"}, "end": {"year": 750, "era": "ce"}}
+      },
+      "expect": {"result": "possible"}
+    },
+    {
+      "id": "time/boundary/contained-uncertainty-is-definite",
+      "why": "Possible means it might fall outside the window; a window containing the whole support interval is a definite match even when the exact year is unknown.",
+      "op": "temporal_match",
+      "input": {
+        "time": {
+          "source_expression": "sometime between 730 and 760 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 730, "era": "ce"},
+            "end": {"year": 760, "era": "ce"}
+          }
+        },
+        "window": {"start": {"year": 700, "era": "ce"}, "end": {"year": 800, "era": "ce"}}
+      },
+      "expect": {"result": "definite"}
+    },
+    {
+      "id": "time/boundary/disjoint-range-is-outside",
+      "why": "An occurrence range entirely before the window does not match on the possible-match policy.",
+      "op": "temporal_match",
+      "input": {
+        "time": {
+          "source_expression": "700 to 720 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 700, "era": "ce"},
+            "end": {"year": 720, "era": "ce"}
+          }
+        },
+        "window": {"start": {"year": 740, "era": "ce"}, "end": {"year": 750, "era": "ce"}}
+      },
+      "expect": {"result": "outside"}
+    },
+    {
+      "id": "time/boundary/day-precision-flags-year-granularity",
+      "why": "v0 compares year spans; a day-precision comparison must say so instead of implying day-level matching.",
+      "op": "temporal_match",
+      "input": {
+        "time": {
+          "source_expression": "the third day of the third month, 740 CE",
+          "calendar": "julian",
+          "precision": "day",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 740, "era": "ce", "month": 3, "day": 3},
+            "end": {"year": 740, "era": "ce", "month": 3, "day": 3}
+          }
+        },
+        "window": {"start": {"year": 740, "era": "ce"}, "end": {"year": 750, "era": "ce"}}
+      },
+      "expect": {"result": "definite", "caveats": ["year_granularity_comparison"]}
+    },
+    {
+      "id": "time/boundary/cross-calendar-comparison-is-flagged",
+      "why": "A Julian year and a Gregorian window can differ by a year at the boundary; the comparison must be flagged rather than presented as exact.",
+      "op": "temporal_match",
+      "input": {
+        "time": {
+          "source_expression": "sometime between 730 and 760 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 730, "era": "ce"},
+            "end": {"year": 760, "era": "ce"}
+          }
+        },
+        "window": {"start": {"year": 740, "era": "ce"}, "end": {"year": 750, "era": "ce"}}
+      },
+      "expect": {"result": "possible", "caveats": ["cross_calendar_approximation"]}
+    },
+    {
+      "id": "time/undated/null-never-matches-any-window",
+      "why": "A record with no date information must not be treated as matching every window, including a window covering all years.",
+      "op": "temporal_match",
+      "input": {
+        "time": null,
+        "window": {"start": {"year": 1, "era": "ce"}, "end": {"year": 9999, "era": "ce"}}
+      },
+      "expect": {"result": "undated"}
+    },
+    {
+      "id": "time/undated/unknown-mode-never-matches",
+      "why": "A preserved source expression without a usable interval is undated, not a possible match.",
+      "op": "temporal_match",
+      "input": {
+        "time": {
+          "source_expression": "undated inscription, formerly read as 740",
+          "calendar": "unknown",
+          "precision": "unspecified",
+          "mode": "unknown",
+          "interval": null
+        },
+        "window": {"start": {"year": 700, "era": "ce"}, "end": {"year": 800, "era": "ce"}}
+      },
+      "expect": {"result": "undated"}
+    },
+    {
+      "id": "time/undated/not-steppable",
+      "why": "Undated records are excluded from chronological stepping instead of receiving a placeholder date.",
+      "op": "steppable",
+      "input": {"time": null},
+      "expect": {"result": false}
+    },
+    {
+      "id": "time/undated/has-no-chronological-key",
+      "why": "Playback and stepping need no key for an undated record, and none may be invented.",
+      "op": "chronological_key",
+      "input": {"time": null},
+      "expect": {"key": null}
+    },
+    {
+      "id": "time/undated/not-continuous-activity",
+      "why": "An undated record must not be animated as activity.",
+      "op": "continuous_activity",
+      "input": {"time": null},
+      "expect": {"result": false}
+    },
+    {
+      "id": "time/duration/continuous-activity-supported",
+      "why": "A duration is activity supported across the interval, so continuous presentation is justified.",
+      "op": "continuous_activity",
+      "input": {
+        "time": {
+          "source_expression": "630 to 632 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "duration",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 630, "era": "ce"},
+            "end": {"year": 632, "era": "ce"}
+          }
+        }
+      },
+      "expect": {"result": true}
+    },
+    {
+      "id": "time/occurrence_window/no-continuous-activity",
+      "why": "RFD 2: an uncertain occurrence must not be animated as continuous activity throughout its uncertainty range.",
+      "op": "continuous_activity",
+      "input": {
+        "time": {
+          "source_expression": "sometime between 730 and 760 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 730, "era": "ce"},
+            "end": {"year": 760, "era": "ce"}
+          }
+        }
+      },
+      "expect": {"result": false}
+    },
+    {
+      "id": "time/playback/duration-active-at-playhead",
+      "why": "The playhead is inside a supported duration, so the record is active rather than merely contextual.",
+      "op": "playback_state",
+      "input": {
+        "time": {
+          "source_expression": "630 to 632 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "duration",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 630, "era": "ce"},
+            "end": {"year": 632, "era": "ce"}
+          }
+        },
+        "playhead": {"year": 631, "era": "ce"}
+      },
+      "expect": {"result": "active"}
+    },
+    {
+      "id": "time/playback/occurrence-is-only-possible",
+      "why": "Inside its uncertainty range an occurrence is possibly happening; presenting it as active would assert an unknown date.",
+      "op": "playback_state",
+      "input": {
+        "time": {
+          "source_expression": "sometime between 730 and 760 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 730, "era": "ce"},
+            "end": {"year": 760, "era": "ce"}
+          }
+        },
+        "playhead": {"year": 745, "era": "ce"}
+      },
+      "expect": {"result": "possible"}
+    },
+    {
+      "id": "time/playback/occurrence-inactive-outside-range",
+      "why": "Outside its range an uncertain occurrence is contextual only, not possible and not active.",
+      "op": "playback_state",
+      "input": {
+        "time": {
+          "source_expression": "sometime between 730 and 760 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 730, "era": "ce"},
+            "end": {"year": 760, "era": "ce"}
+          }
+        },
+        "playhead": {"year": 700, "era": "ce"}
+      },
+      "expect": {"result": "inactive"}
+    },
+    {
+      "id": "time/playback/instant-active-exactly-at-year",
+      "why": "A year-precision instant is active only in its supported year.",
+      "op": "playback_state",
+      "input": {
+        "time": {
+          "source_expression": "630 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 630, "era": "ce"},
+            "end": {"year": 630, "era": "ce"}
+          }
+        },
+        "playhead": {"year": 630, "era": "ce"}
+      },
+      "expect": {"result": "active"}
+    },
+    {
+      "id": "time/playback/instant-inactive-elsewhere",
+      "why": "A year-precision instant must not stay active across neighbouring years.",
+      "op": "playback_state",
+      "input": {
+        "time": {
+          "source_expression": "630 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 630, "era": "ce"},
+            "end": {"year": 630, "era": "ce"}
+          }
+        },
+        "playhead": {"year": 631, "era": "ce"}
+      },
+      "expect": {"result": "inactive"}
+    },
+    {
+      "id": "time/instant/start-end-mismatch-rejected",
+      "why": "An instant with two different endpoints is an occurrence window, not an instant.",
+      "op": "normalize_interval",
+      "input": {
+        "time": {
+          "source_expression": "630 to 631 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 630, "era": "ce"},
+            "end": {"year": 631, "era": "ce"}
+          }
+        }
+      },
+      "expect": {"error": "instant_start_end_mismatch"}
+    },
+    {
+      "id": "time/instant/open-ended-rejected",
+      "why": "An instant has two bounds; a one-sided bound is an open-ended occurrence, not an instant.",
+      "op": "normalize_interval",
+      "input": {
+        "time": {
+          "source_expression": "after 630 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "instant",
+          "interval": {
+            "bounds": "lower_only",
+            "boundary": "inclusive",
+            "start": {"year": 630, "era": "ce"},
+            "end": null
+          }
+        }
+      },
+      "expect": {"error": "instant_requires_two_sided"}
+    },
+    {
+      "id": "time/interval/start-after-end-rejected",
+      "why": "A normalized support interval cannot start after it ends.",
+      "op": "normalize_interval",
+      "input": {
+        "time": {
+          "source_expression": "760 to 730 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 760, "era": "ce"},
+            "end": {"year": 730, "era": "ce"}
+          }
+        }
+      },
+      "expect": {"error": "interval_start_after_end"}
+    },
+    {
+      "id": "time/interval/bounds-must-match-endpoints",
+      "why": "A two-sided interval with a missing endpoint hides an unbounded range; the open side must be declared.",
+      "op": "normalize_interval",
+      "input": {
+        "time": {
+          "source_expression": "after 730 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 730, "era": "ce"},
+            "end": null
+          }
+        }
+      },
+      "expect": {"error": "bounds_mismatch"}
+    },
+    {
+      "id": "time/interval/boundary-must-be-inclusive",
+      "why": "v0 has one endpoint convention; exclusive source statements are normalized to an inclusive bound at their precision.",
+      "op": "normalize_interval",
+      "input": {
+        "time": {
+          "source_expression": "until 740 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "half_open_end",
+            "start": {"year": 730, "era": "ce"},
+            "end": {"year": 740, "era": "ce"}
+          }
+        }
+      },
+      "expect": {"error": "boundary_not_inclusive"}
+    },
+    {
+      "id": "time/interval/missing-interval-rejected",
+      "why": "A dated mode without an interval is not normalizable and must not silently become undated.",
+      "op": "normalize_interval",
+      "input": {
+        "time": {
+          "source_expression": "630 to 632 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "duration",
+          "interval": null
+        }
+      },
+      "expect": {"error": "missing_interval"}
+    },
+    {
+      "id": "time/open-ended/lower-only-matches-later-window",
+      "why": "A source statement such as after 700 CE supports a possible match in any later window without inventing an upper bound.",
+      "op": "temporal_match",
+      "input": {
+        "time": {
+          "source_expression": "after 700 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "lower_only",
+            "boundary": "inclusive",
+            "start": {"year": 700, "era": "ce"},
+            "end": null
+          }
+        },
+        "window": {"start": {"year": 750, "era": "ce"}, "end": {"year": 760, "era": "ce"}}
+      },
+      "expect": {"result": "possible"}
+    },
+    {
+      "id": "time/open-ended/lower-only-excludes-earlier-window",
+      "why": "An open-ended lower bound still excludes windows that end before it starts.",
+      "op": "temporal_match",
+      "input": {
+        "time": {
+          "source_expression": "after 700 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "lower_only",
+            "boundary": "inclusive",
+            "start": {"year": 700, "era": "ce"},
+            "end": null
+          }
+        },
+        "window": {"start": {"year": 600, "era": "ce"}, "end": {"year": 699, "era": "ce"}}
+      },
+      "expect": {"result": "outside"}
+    },
+    {
+      "id": "time/open-ended/never-definite",
+      "why": "An open-ended occurrence cannot be certainly inside a finite window, so it is never a definite match.",
+      "op": "temporal_match",
+      "input": {
+        "time": {
+          "source_expression": "after 700 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "lower_only",
+            "boundary": "inclusive",
+            "start": {"year": 700, "era": "ce"},
+            "end": null
+          }
+        },
+        "window": {"start": {"year": 700, "era": "ce"}, "end": {"year": 9999, "era": "ce"}}
+      },
+      "expect": {"result": "possible"}
+    },
+    {
+      "id": "time/relation/identical-support-is-same",
+      "why": "Identical supports and modes are the same claim, not an ordering.",
+      "op": "relation",
+      "input": {
+        "a": {
+          "source_expression": "630 to 632 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "duration",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 630, "era": "ce"},
+            "end": {"year": 632, "era": "ce"}
+          }
+        },
+        "b": {
+          "source_expression": "630 to 632 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "duration",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 630, "era": "ce"},
+            "end": {"year": 632, "era": "ce"}
+          }
+        }
+      },
+      "expect": {"result": "same"}
+    },
+    {
+      "id": "time/relation/duration-and-occurrence-are-not-same",
+      "why": "The same span read as a duration and as an uncertain occurrence is not the same claim.",
+      "op": "relation",
+      "input": {
+        "a": {
+          "source_expression": "630 to 632 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "duration",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 630, "era": "ce"},
+            "end": {"year": 632, "era": "ce"}
+          }
+        },
+        "b": {
+          "source_expression": "sometime between 630 and 632 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 630, "era": "ce"},
+            "end": {"year": 632, "era": "ce"}
+          }
+        }
+      },
+      "expect": {"result": "overlaps"}
+    },
+    {
+      "id": "time/relation/uncertain-overlap-blocks-a-false-order",
+      "why": "An interval reaching into the next range must not be ordered before it.",
+      "op": "relation",
+      "input": {
+        "a": {
+          "source_expression": "630 to 632 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "duration",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 630, "era": "ce"},
+            "end": {"year": 632, "era": "ce"}
+          }
+        },
+        "b": {
+          "source_expression": "sometime between 631 and 633 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 631, "era": "ce"},
+            "end": {"year": 633, "era": "ce"}
+          }
+        }
+      },
+      "expect": {"result": "overlaps"}
+    },
+    {
+      "id": "time/relation/approximate-endpoints-do-not-change-the-support",
+      "why": "Endpoint certainty is descriptive; the support interval still establishes a strict order when it does not touch.",
+      "op": "relation",
+      "input": {
+        "a": {
+          "source_expression": "about 630 to 632 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "duration",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 630, "era": "ce", "endpoint_certainty": "approximate"},
+            "end": {"year": 632, "era": "ce", "endpoint_certainty": "approximate"}
+          }
+        },
+        "b": {
+          "source_expression": "sometime between 633 and 635 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 633, "era": "ce"},
+            "end": {"year": 635, "era": "ce"}
+          }
+        }
+      },
+      "expect": {"result": "before"}
+    },
+    {
+      "id": "time/relation/day-precision-cross-calendar-is-flagged",
+      "why": "Day-precision comparison across calendars cannot be presented as exact; it is reported with both caveats.",
+      "op": "relation",
+      "input": {
+        "a": {
+          "source_expression": "3 March 740 CE (Julian)",
+          "calendar": "julian",
+          "precision": "day",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 740, "era": "ce", "month": 3, "day": 3},
+            "end": {"year": 740, "era": "ce", "month": 3, "day": 3}
+          }
+        },
+        "b": {
+          "source_expression": "3 March 740 CE (Gregorian)",
+          "calendar": "gregorian",
+          "precision": "day",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 740, "era": "ce", "month": 3, "day": 3},
+            "end": {"year": 740, "era": "ce", "month": 3, "day": 3}
+          }
+        }
+      },
+      "expect": {"result": "overlaps", "caveats": ["cross_calendar_approximation", "year_granularity_comparison"]}
+    },
+    {
+      "id": "time/relation/undated-participant-is-undetermined",
+      "why": "A connection to a dated event does not date an undated record, and no order may be asserted.",
+      "op": "relation",
+      "input": {
+        "a": null,
+        "b": {
+          "source_expression": "630 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 630, "era": "ce"},
+            "end": {"year": 630, "era": "ce"}
+          }
+        }
+      },
+      "expect": {"result": "undetermined", "caveats": ["undated_record"]}
+    },
+    {
+      "id": "time/relation/day-precision-same-year-stays-unordered",
+      "why": "v0 compares at year granularity, so two day-precision instants inside one year are never ordered even though their dates differ; reporting before here would invent day-level ordering.",
+      "op": "relation",
+      "input": {
+        "a": {
+          "source_expression": "3 March 740 CE",
+          "calendar": "julian",
+          "precision": "day",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 740, "era": "ce", "month": 3, "day": 3},
+            "end": {"year": 740, "era": "ce", "month": 3, "day": 3}
+          }
+        },
+        "b": {
+          "source_expression": "4 March 740 CE",
+          "calendar": "julian",
+          "precision": "day",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 740, "era": "ce", "month": 3, "day": 4},
+            "end": {"year": 740, "era": "ce", "month": 3, "day": 4}
+          }
+        }
+      },
+      "expect": {"result": "overlaps", "caveats": ["year_granularity_comparison"]}
+    },
+    {
+      "id": "time/relation/day-precision-adjacent-years-are-ordered",
+      "why": "Year granularity still orders records whose years differ, so the boundary is a year boundary and not a blanket refusal to compare dated records.",
+      "op": "relation",
+      "input": {
+        "a": {
+          "source_expression": "31 December 740 CE",
+          "calendar": "julian",
+          "precision": "day",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 740, "era": "ce", "month": 12, "day": 31},
+            "end": {"year": 740, "era": "ce", "month": 12, "day": 31}
+          }
+        },
+        "b": {
+          "source_expression": "1 January 741 CE",
+          "calendar": "julian",
+          "precision": "day",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 741, "era": "ce", "month": 1, "day": 1},
+            "end": {"year": 741, "era": "ce", "month": 1, "day": 1}
+          }
+        }
+      },
+      "expect": {"result": "before", "caveats": ["year_granularity_comparison"]}
+    },
+    {
+      "id": "time/relation/same-day-instants-are-same",
+      "why": "Equality of supports is still reported, so year granularity does not collapse identical day-precision claims into an overlap.",
+      "op": "relation",
+      "input": {
+        "a": {
+          "source_expression": "3 March 740 CE",
+          "calendar": "julian",
+          "precision": "day",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 740, "era": "ce", "month": 3, "day": 3},
+            "end": {"year": 740, "era": "ce", "month": 3, "day": 3}
+          }
+        },
+        "b": {
+          "source_expression": "3 March 740 CE",
+          "calendar": "julian",
+          "precision": "day",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 740, "era": "ce", "month": 3, "day": 3},
+            "end": {"year": 740, "era": "ce", "month": 3, "day": 3}
+          }
+        }
+      },
+      "expect": {"result": "same", "caveats": ["year_granularity_comparison"]}
+    },
+    {
+      "id": "time/interval/reversed-days-within-one-interval-rejected",
+      "why": "A single interval whose own endpoints run backwards is a data error even though cross-record ordering is year-granular.",
+      "op": "normalize_interval",
+      "input": {
+        "time": {
+          "source_expression": "5 to 3 March 740 CE",
+          "calendar": "julian",
+          "precision": "day",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 740, "era": "ce", "month": 3, "day": 5},
+            "end": {"year": 740, "era": "ce", "month": 3, "day": 3}
+          }
+        }
+      },
+      "expect": {"error": "interval_start_after_end"}
+    },
+    {
+      "id": "time/playback/playhead-missing-era-rejected",
+      "why": "A playhead without an era must be rejected rather than silently read as CE, which would move a BCE date by two thousand years.",
+      "op": "playback_state",
+      "input": {
+        "time": {
+          "source_expression": "sometime between 730 and 760 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 730, "era": "ce"},
+            "end": {"year": 760, "era": "ce"}
+          }
+        },
+        "playhead": {"year": 740}
+      },
+      "expect": {"error": "playhead_must_be_era_year"}
+    },
+    {
+      "id": "time/playback/playhead-invalid-era-rejected",
+      "why": "An era outside bce and ce is not a civil era year.",
+      "op": "playback_state",
+      "input": {
+        "time": {
+          "source_expression": "sometime between 730 and 760 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 730, "era": "ce"},
+            "end": {"year": 760, "era": "ce"}
+          }
+        },
+        "playhead": {"year": 740, "era": "ad"}
+      },
+      "expect": {"error": "playhead_must_be_era_year"}
+    },
+    {
+      "id": "time/playback/playhead-year-zero-rejected",
+      "why": "Civil BCE/CE has no year zero, so year 0 is not a valid playhead position.",
+      "op": "playback_state",
+      "input": {
+        "time": {
+          "source_expression": "sometime between 730 and 760 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 730, "era": "ce"},
+            "end": {"year": 760, "era": "ce"}
+          }
+        },
+        "playhead": {"year": 0, "era": "ce"}
+      },
+      "expect": {"error": "playhead_year_must_be_positive"}
+    },
+    {
+      "id": "time/playback/bce-playhead-is-valid",
+      "why": "A BCE playhead is a valid civil era year and reaches a BCE occurrence window; rejecting it would make BCE content unplayable.",
+      "op": "playback_state",
+      "input": {
+        "time": {
+          "source_expression": "sometime between 740 and 730 BCE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 740, "era": "bce"},
+            "end": {"year": 730, "era": "bce"}
+          }
+        },
+        "playhead": {"year": 735, "era": "bce"}
+      },
+      "expect": {"result": "possible"}
+    }
+  ]
+}

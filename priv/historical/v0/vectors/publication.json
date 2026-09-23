@@ -1,0 +1,673 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "test_vectors",
+  "area": "publication",
+  "description": "Publication vectors: records versus immutable revisions, the current published revision, related changes published as one set, approval metadata, correction history, and the checks that detect an edited approved revision or a hand-edited mirror. Set member hashes are filled from the built documents unless a vector supplies one to test tampering.",
+  "vectors": [
+    {
+      "id": "publication/draft-correction-leaves-the-published-revision-current",
+      "why": "A draft correction must not become visible before it is approved and published.",
+      "op": "publication_state",
+      "input": {
+        "documents": [
+          {
+            "kind": "event",
+            "revisions": [
+              {"content": {"summary": "First published account.", "event_types": ["occurrence"], "time": null}},
+              {"content": {"summary": "Draft correction not yet published.", "event_types": ["occurrence"], "time": null}}
+            ]
+          }
+        ],
+        "sets": [
+          {
+            "set_id": "lks:set:vector-1",
+            "members": [{"record_id": "lks:event:vector-example", "revision_id": "lks:rev:vector-1"}],
+            "published_at": "2026-01-06T00:00:00Z"
+          }
+        ]
+      },
+      "expect": {
+        "current_published": {"lks:event:vector-example": "lks:rev:vector-1"},
+        "published_revisions": {"lks:event:vector-example": ["lks:rev:vector-1"]}
+      }
+    },
+    {
+      "id": "publication/publishing-a-correction-updates-the-current-revision-and-keeps-history",
+      "why": "Publication updates the stable record while prior published revisions remain available with their change explanations.",
+      "op": "publication_state",
+      "input": {
+        "documents": [
+          {
+            "kind": "event",
+            "revisions": [
+              {"content": {"summary": "First published account.", "event_types": ["occurrence"], "time": null}},
+              {"content": {"summary": "Corrected account.", "event_types": ["occurrence"], "time": null}, "change_explanation": "Corrected the date after reviewing the second source."}
+            ]
+          }
+        ],
+        "sets": [
+          {
+            "set_id": "lks:set:vector-1",
+            "members": [{"record_id": "lks:event:vector-example", "revision_id": "lks:rev:vector-1"}],
+            "published_at": "2026-01-06T00:00:00Z"
+          },
+          {
+            "set_id": "lks:set:vector-2",
+            "members": [{"record_id": "lks:event:vector-example", "revision_id": "lks:rev:vector-2"}],
+            "published_at": "2026-01-08T00:00:00Z",
+            "supersedes": "lks:set:vector-1",
+            "correction_of_revision": "lks:rev:vector-1"
+          }
+        ]
+      },
+      "expect": {
+        "current_published": {"lks:event:vector-example": "lks:rev:vector-2"},
+        "published_revisions": {"lks:event:vector-example": ["lks:rev:vector-1", "lks:rev:vector-2"]},
+        "history": {"lks:event:vector-example": [{"change_explanation": "vector revision 1", "independence": "self_review"}]}
+      }
+    },
+    {
+      "id": "publication/related-records-publish-as-one-set",
+      "why": "An event and the relationship it participates in become visible together, so readers never see incompatible intermediate updates.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {"kind": "place", "record_id": "lks:place:vector-a", "content": {"summary": "A port.", "place_types": ["port"], "names": [], "geometry": []}},
+          {"kind": "place", "record_id": "lks:place:vector-b", "content": {"summary": "Another port.", "place_types": ["port"], "names": [], "geometry": []}},
+          {
+            "kind": "event",
+            "content": {"summary": "A voyage.", "event_types": ["journey"], "time": null},
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source reports the voyage.", "asserts": "", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "4"}}]}
+            ]
+          },
+          {
+            "kind": "relationship",
+            "record_id": "lks:relationship:vector-example",
+            "content": {"summary": "Trade between the ports.", "relationship_types": ["trade"], "from": "lks:place:vector-a", "to": "lks:place:vector-b", "directionality": "undirected", "causality": "not_asserted"},
+            "claims": [
+              {"claim_id": "lks:claim:vector-2", "statement": "The source attests exchange between the ports.", "asserts": "", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "9"}}]}
+            ]
+          }
+        ],
+        "sets": [
+          {
+            "set_id": "lks:set:vector-1",
+            "members": [
+              {"record_id": "lks:event:vector-example", "revision_id": "lks:rev:vector-1"},
+              {"record_id": "lks:relationship:vector-example", "revision_id": "lks:rev:vector-1"}
+            ],
+            "published_at": "2026-01-06T00:00:00Z"
+          }
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "current_published": {
+          "lks:event:vector-example": "lks:rev:vector-1",
+          "lks:relationship:vector-example": "lks:rev:vector-1"
+        }
+      }
+    },
+    {
+      "id": "publication/mirror-must-match-the-newest-published-set",
+      "why": "A hand-edited record must not claim a published revision that no set published.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "event",
+            "publication": {
+              "published_revision_id": "lks:rev:vector-1",
+              "published_revision_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000009",
+              "set_id": "lks:set:vector-9",
+              "published_at": "2026-01-01T00:00:00Z",
+              "published_by": {"name": "Vector Author"}
+            },
+            "content": {"summary": "An event with a stale publication mirror.", "event_types": ["occurrence"], "time": null}
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["publication_without_set"]}
+    },
+    {
+      "id": "publication/published-record-needs-a-set",
+      "why": "Publication happens through a set, not by marking a record directly.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "event",
+            "content": {"summary": "A published event without a set.", "event_types": ["occurrence"], "time": null},
+            "publication": {
+              "published_revision_id": "lks:rev:vector-1",
+              "published_revision_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000009",
+              "set_id": "lks:set:vector-9",
+              "published_at": "2026-01-06T00:00:00Z",
+              "published_by": {"name": "Vector Author"}
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["publication_without_set"]}
+    },
+    {
+      "id": "publication/set-member-must-be-a-known-revision",
+      "why": "A set cannot publish a revision that does not exist.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"kind": "event", "content": {"summary": "An event.", "event_types": ["occurrence"], "time": null}}
+        ],
+        "sets": [
+          {
+            "set_id": "lks:set:vector-1",
+            "members": [{"record_id": "lks:event:vector-example", "revision_id": "lks:rev:missing"}],
+            "published_at": "2026-01-06T00:00:00Z"
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["member_revision_unknown"]}
+    },
+    {
+      "id": "publication/set-member-must-be-a-known-record",
+      "why": "A set cannot publish a record that is not in the content tree.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"kind": "event", "content": {"summary": "An event.", "event_types": ["occurrence"], "time": null}}
+        ],
+        "sets": [
+          {
+            "set_id": "lks:set:vector-1",
+            "members": [{"record_id": "lks:event:missing", "revision_id": "lks:rev:vector-1"}],
+            "published_at": "2026-01-06T00:00:00Z"
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["member_record_unknown"]}
+    },
+    {
+      "id": "publication/approved-revision-hash-detects-a-later-edit",
+      "why": "The set records the exact revision approved, so editing that revision afterwards is detected.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"kind": "event", "content": {"summary": "An event.", "event_types": ["occurrence"], "time": null}}
+        ],
+        "sets": [
+          {
+            "set_id": "lks:set:vector-1",
+            "members": [
+              {
+                "record_id": "lks:event:vector-example",
+                "revision_id": "lks:rev:vector-1",
+                "revision_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000001"
+              }
+            ],
+            "published_at": "2026-01-06T00:00:00Z"
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["member_hash_mismatch"]}
+    },
+    {
+      "id": "publication/incomplete-review-checklist-blocks-publication",
+      "why": "Publication requires a documented review checklist covering sources, attribution, uncertainty, attestation versus interpretation, and reuse rights.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"kind": "event", "content": {"summary": "An event.", "event_types": ["occurrence"], "time": null}}
+        ],
+        "sets": [
+          {
+            "set_id": "lks:set:vector-1",
+            "members": [{"record_id": "lks:event:vector-example", "revision_id": "lks:rev:vector-1"}],
+            "published_at": "2026-01-06T00:00:00Z",
+            "review": {
+              "reviewed_at": "2026-01-05T00:00:00Z",
+              "reviewer": {"name": "Vector Author"},
+              "independence": "self_review",
+              "checklist": {"source_support": false, "attribution": true, "date_location_uncertainty": true, "attestation_vs_interpretation": true, "reuse_rights": true}
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["checklist_incomplete"]}
+    },
+    {
+      "id": "publication/self-review-must-not-be-labelled-independent",
+      "why": "Owner self-review is permitted but must never be described as independent or specialist review.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"kind": "event", "content": {"summary": "An event.", "event_types": ["occurrence"], "time": null}}
+        ],
+        "sets": [
+          {
+            "set_id": "lks:set:vector-1",
+            "members": [{"record_id": "lks:event:vector-example", "revision_id": "lks:rev:vector-1"}],
+            "published_at": "2026-01-06T00:00:00Z",
+            "review": {
+              "reviewed_at": "2026-01-05T00:00:00Z",
+              "reviewer": {"name": "Vector Author"},
+              "independence": "independent_review",
+              "checklist": {"source_support": true, "attribution": true, "date_location_uncertainty": true, "attestation_vs_interpretation": true, "reuse_rights": true}
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["self_review_mislabelled"]}
+    },
+    {
+      "id": "publication/self-review-needs-a-matching-author",
+      "why": "Self-review describes the reviewer's own work; a different reviewer must be recorded as independent review.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"kind": "event", "content": {"summary": "An event.", "event_types": ["occurrence"], "time": null}}
+        ],
+        "sets": [
+          {
+            "set_id": "lks:set:vector-1",
+            "members": [{"record_id": "lks:event:vector-example", "revision_id": "lks:rev:vector-1"}],
+            "published_at": "2026-01-06T00:00:00Z",
+            "review": {
+              "reviewed_at": "2026-01-05T00:00:00Z",
+              "reviewer": {"name": "Some Other Reviewer"},
+              "independence": "self_review",
+              "checklist": {"source_support": true, "attribution": true, "date_location_uncertainty": true, "attestation_vs_interpretation": true, "reuse_rights": true}
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["self_review_without_matching_author"]}
+    },
+    {
+      "id": "publication/cannot-publish-before-review",
+      "why": "Publication records when approval and publication occurred; publication cannot precede approval.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"kind": "event", "content": {"summary": "An event.", "event_types": ["occurrence"], "time": null}}
+        ],
+        "sets": [
+          {
+            "set_id": "lks:set:vector-1",
+            "members": [{"record_id": "lks:event:vector-example", "revision_id": "lks:rev:vector-1"}],
+            "published_at": "2026-01-01T00:00:00Z",
+            "review": {
+              "reviewed_at": "2026-01-05T00:00:00Z",
+              "reviewer": {"name": "Vector Author"},
+              "independence": "self_review",
+              "checklist": {"source_support": true, "attribution": true, "date_location_uncertainty": true, "attestation_vs_interpretation": true, "reuse_rights": true}
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["published_before_approved"]}
+    },
+    {
+      "id": "publication/cannot-publish-before-the-revision-exists",
+      "why": "A set cannot publish a revision created after the publication time.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "event",
+            "revisions": [
+              {"created_at": "2026-01-03T00:00:00Z", "content": {"summary": "An event.", "event_types": ["occurrence"], "time": null}}
+            ]
+          }
+        ],
+        "sets": [
+          {
+            "set_id": "lks:set:vector-1",
+            "members": [{"record_id": "lks:event:vector-example", "revision_id": "lks:rev:vector-1"}],
+            "published_at": "2026-01-02T00:00:00Z",
+            "review": {
+              "reviewed_at": "2026-01-04T00:00:00Z",
+              "reviewer": {"name": "Vector Author"},
+              "independence": "self_review",
+              "checklist": {"source_support": true, "attribution": true, "date_location_uncertainty": true, "attestation_vs_interpretation": true, "reuse_rights": true}
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["published_before_revision_created"]}
+    },
+    {
+      "id": "publication/ambiguous-publication-order-rejected",
+      "why": "Two sets publishing the same record at the same time leave no defined current revision.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "event",
+            "revisions": [
+              {"content": {"summary": "First.", "event_types": ["occurrence"], "time": null}},
+              {"content": {"summary": "Second.", "event_types": ["occurrence"], "time": null}}
+            ]
+          }
+        ],
+        "sets": [
+          {
+            "set_id": "lks:set:vector-1",
+            "members": [{"record_id": "lks:event:vector-example", "revision_id": "lks:rev:vector-1"}],
+            "published_at": "2026-01-06T00:00:00Z"
+          },
+          {
+            "set_id": "lks:set:vector-2",
+            "members": [{"record_id": "lks:event:vector-example", "revision_id": "lks:rev:vector-2"}],
+            "published_at": "2026-01-06T00:00:00Z"
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["ambiguous_publication_order"]}
+    },
+    {
+      "id": "publication/a-record-appears-at-most-once-per-set",
+      "why": "A set names one revision per record, so related changes stay unambiguous.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"kind": "event", "content": {"summary": "An event.", "event_types": ["occurrence"], "time": null}}
+        ],
+        "sets": [
+          {
+            "set_id": "lks:set:vector-1",
+            "members": [
+              {"record_id": "lks:event:vector-example", "revision_id": "lks:rev:vector-1"},
+              {"record_id": "lks:event:vector-example", "revision_id": "lks:rev:vector-1"}
+            ],
+            "published_at": "2026-01-06T00:00:00Z"
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["duplicate_set_member"]}
+    },
+    {
+      "id": "publication/declared-order-must-match-the-published-intervals",
+      "why": "A published ordering assertion is checked against the intervals it orders, so a declared order the supports do not establish is rejected.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-a",
+            "content": {
+              "summary": "An event that claims to precede an overlapping event.",
+              "event_types": ["occurrence"],
+              "time": {"source_expression": "735 to 745 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 735, "era": "ce"}, "end": {"year": 745, "era": "ce"}}, "ordering": [{"relation": "before", "record_id": "lks:event:vector-b", "claim_id": "lks:claim:vector-1"}]}
+            },
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source places this event before the other.", "asserts": "/time", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "5"}}]}
+            ]
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-b",
+            "content": {
+              "summary": "An overlapping event.",
+              "event_types": ["occurrence"],
+              "time": {"source_expression": "740 to 750 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 740, "era": "ce"}, "end": {"year": 750, "era": "ce"}}}
+            },
+            "claims": [
+              {"claim_id": "lks:claim:vector-2", "statement": "The source dates the second event.", "asserts": "/time", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "6"}}]}
+            ]
+          }
+        ],
+        "sets": [
+          {
+            "set_id": "lks:set:vector-1",
+            "members": [
+              {"record_id": "lks:event:vector-a", "revision_id": "lks:rev:vector-1"},
+              {"record_id": "lks:event:vector-b", "revision_id": "lks:rev:vector-1"}
+            ],
+            "published_at": "2026-01-06T00:00:00Z"
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["declared_order_not_supported"]}
+    },
+    {
+      "id": "publication/ordering-cycle-across-published-events-rejected",
+      "why": "Two events cannot each be established before the other.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-a",
+            "content": {
+              "summary": "An event ordering the other before itself.",
+              "event_types": ["occurrence"],
+              "time": {"source_expression": "730 to 739 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 730, "era": "ce"}, "end": {"year": 739, "era": "ce"}}, "ordering": [{"relation": "before", "record_id": "lks:event:vector-b", "claim_id": "lks:claim:vector-1"}]}
+            },
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source places this event first.", "asserts": "/time", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "5"}}]}
+            ]
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-b",
+            "content": {
+              "summary": "An event ordering the other before itself.",
+              "event_types": ["occurrence"],
+              "time": {"source_expression": "740 to 750 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 740, "era": "ce"}, "end": {"year": 750, "era": "ce"}}, "ordering": [{"relation": "before", "record_id": "lks:event:vector-a", "claim_id": "lks:claim:vector-2"}]}
+            },
+            "claims": [
+              {"claim_id": "lks:claim:vector-2", "statement": "The source places this event first.", "asserts": "/time", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "6"}}]}
+            ]
+          }
+        ],
+        "sets": [
+          {
+            "set_id": "lks:set:vector-1",
+            "members": [
+              {"record_id": "lks:event:vector-a", "revision_id": "lks:rev:vector-1"},
+              {"record_id": "lks:event:vector-b", "revision_id": "lks:rev:vector-1"}
+            ],
+            "published_at": "2026-01-06T00:00:00Z"
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["ordering_cycle"]}
+    },
+    {
+      "id": "publication/part-of-cycle-rejected",
+      "why": "Two events cannot each be part of the other.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "event",
+            "content": {"summary": "A campaign that is part of its own component.", "event_types": ["campaign"], "time": null, "part_of": [{"event_id": "lks:event:vector-b"}]}
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-b",
+            "content": {"summary": "A component that is part of its own campaign.", "event_types": ["journey"], "time": null, "part_of": [{"event_id": "lks:event:vector-example"}]}
+          }
+        ],
+        "sets": [
+          {
+            "set_id": "lks:set:vector-1",
+            "members": [
+              {"record_id": "lks:event:vector-example", "revision_id": "lks:rev:vector-1"},
+              {"record_id": "lks:event:vector-b", "revision_id": "lks:rev:vector-1"}
+            ],
+            "published_at": "2026-01-06T00:00:00Z"
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["part_of_cycle"]}
+    },
+    {
+      "id": "publication/pinned-source-hash-detects-a-later-edit",
+      "why": "The set pins the source metadata that was reviewed, so an edit to a cited source is detected even though the citation ids are unchanged.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "event",
+            "published": true,
+            "content": {"summary": "An event citing a source whose approved metadata changed.", "event_types": ["occurrence"], "time": null},
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source reports the event.", "asserts": "", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "2"}}]}
+            ]
+          }
+        ],
+        "sets": [
+          {
+            "set_id": "lks:set:vector-1",
+            "members": [{"record_id": "lks:event:vector-example", "revision_id": "lks:rev:vector-1"}],
+            "sources": [
+              {
+                "source_id": "lks:source:vector-a",
+                "source_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000001"
+              }
+            ],
+            "published_at": "2026-01-06T00:00:00Z"
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["pinned_source_hash_mismatch"]}
+    },
+    {
+      "id": "publication/published-citation-must-pin-its-source",
+      "why": "A published revision cites a source whose approved metadata must be pinned by the same set; an empty pin list leaves reuse terms unaudited.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "event",
+            "published": true,
+            "content": {"summary": "An event whose cited source is not pinned.", "event_types": ["occurrence"], "time": null},
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source reports the event.", "asserts": "", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "2"}}]}
+            ]
+          }
+        ],
+        "sets": [
+          {
+            "set_id": "lks:set:vector-1",
+            "members": [{"record_id": "lks:event:vector-example", "revision_id": "lks:rev:vector-1"}],
+            "sources": [],
+            "published_at": "2026-01-06T00:00:00Z"
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["source_not_pinned"]}
+    },
+    {
+      "id": "publication/pinned-source-must-exist",
+      "why": "A set cannot pin metadata for a source that is not in the content tree.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"kind": "event", "content": {"summary": "An event.", "event_types": ["occurrence"], "time": null}}
+        ],
+        "sets": [
+          {
+            "set_id": "lks:set:vector-1",
+            "members": [{"record_id": "lks:event:vector-example", "revision_id": "lks:rev:vector-1"}],
+            "sources": [
+              {
+                "source_id": "lks:source:missing",
+                "source_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000001"
+              }
+            ],
+            "published_at": "2026-01-06T00:00:00Z"
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["pinned_source_unknown"]}
+    },
+    {
+      "id": "publication/invalid-timestamp-cannot-win-publication-order",
+      "why": "A set whose published_at only looks like a timestamp would sort after a real one by string comparison; it must be rejected instead of silently becoming the current revision.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "event",
+            "revisions": [
+              {"content": {"summary": "First.", "event_types": ["occurrence"], "time": null}},
+              {"content": {"summary": "Second.", "event_types": ["occurrence"], "time": null}}
+            ]
+          }
+        ],
+        "sets": [
+          {
+            "set_id": "lks:set:vector-1",
+            "members": [{"record_id": "lks:event:vector-example", "revision_id": "lks:rev:vector-1"}],
+            "sources": [],
+            "published_at": "2026-01-06T00:00:00Z"
+          },
+          {
+            "set_id": "lks:set:vector-2",
+            "members": [{"record_id": "lks:event:vector-example", "revision_id": "lks:rev:vector-2"}],
+            "sources": [],
+            "published_at": "2026-99-99T99:99:99Z"
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["invalid_timestamp"]}
+    },
+    {
+      "id": "publication/source-correction-uses-a-new-source-document",
+      "why": "Correcting approved source metadata means publishing a new source document and republishing the citing record, so the earlier approved metadata stays in the tree and the earlier set still validates.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-old", "kind": "scholarly", "title": "First edition of the cited study"},
+          {"source_id": "lks:source:vector-new", "kind": "scholarly", "title": "Corrected attribution for the cited study", "supersedes_source_id": "lks:source:vector-old"},
+          {
+            "kind": "event",
+            "revisions": [
+              {
+                "content": {"summary": "First published account.", "event_types": ["occurrence"], "time": null},
+                "claims": [
+                  {"claim_id": "lks:claim:vector-1", "statement": "The first edition reports the event.", "asserts": "", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-old", "locator": {"kind": "page", "value": "2"}}]}
+                ]
+              },
+              {
+                "content": {"summary": "Republished with the corrected source attribution.", "event_types": ["occurrence"], "time": null},
+                "change_explanation": "Republished against the corrected source attribution.",
+                "claims": [
+                  {"claim_id": "lks:claim:vector-2", "statement": "The corrected edition reports the event.", "asserts": "", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-new", "locator": {"kind": "page", "value": "2"}}]}
+                ]
+              }
+            ]
+          }
+        ],
+        "sets": [
+          {
+            "set_id": "lks:set:vector-1",
+            "members": [{"record_id": "lks:event:vector-example", "revision_id": "lks:rev:vector-1"}],
+            "sources": [{"source_id": "lks:source:vector-old"}],
+            "published_at": "2026-01-06T00:00:00Z"
+          },
+          {
+            "set_id": "lks:set:vector-2",
+            "members": [{"record_id": "lks:event:vector-example", "revision_id": "lks:rev:vector-2"}],
+            "sources": [{"source_id": "lks:source:vector-new"}],
+            "published_at": "2026-01-08T00:00:00Z",
+            "supersedes": "lks:set:vector-1",
+            "correction_of_revision": "lks:rev:vector-1"
+          }
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "current_published": {"lks:event:vector-example": "lks:rev:vector-2"}
+      }
+    }
+  ]
+}

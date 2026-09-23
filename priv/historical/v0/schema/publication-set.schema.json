@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lekishi/lekishi/schema/v0/publication-set.schema.json",
+  "title": "Lekishi historical contract v0: publication set",
+  "description": "The atomic publication unit. Related record revisions become visible together; readers never see an event updated while the relationships it participates in are stale. The set records the approving editor, the exact approved revision of every member, and when approval and publication occurred. It also pins the source_hash of every source cited by a published member revision, so the metadata and reuse terms that were reviewed cannot be edited afterwards without detection.",
+  "type": "object",
+  "required": ["contract", "document", "set_id", "title", "change_explanation", "members", "sources", "review", "published_at", "published_by"],
+  "additionalProperties": false,
+  "properties": {
+    "contract": {"$ref": "common.schema.json#/$defs/contract"},
+    "document": {"const": "publication_set"},
+    "set_id": {"$ref": "common.schema.json#/$defs/set_id"},
+    "title": {"type": "string", "minLength": 1, "maxLength": 300},
+    "change_explanation": {"type": "string", "minLength": 1, "maxLength": 2000},
+    "members": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 500,
+      "items": {
+        "type": "object",
+        "required": ["record_id", "revision_id", "revision_hash"],
+        "additionalProperties": false,
+        "properties": {
+          "record_id": {"$ref": "common.schema.json#/$defs/record_id"},
+          "revision_id": {"$ref": "common.schema.json#/$defs/revision_id"},
+          "revision_hash": {"$ref": "common.schema.json#/$defs/hash"}
+        }
+      }
+    },
+    "sources": {
+      "description": "The approved metadata of every source cited by a published member revision. Complete coverage is required: a cited source that is not pinned fails validation.",
+      "type": "array",
+      "maxItems": 500,
+      "items": {
+        "type": "object",
+        "required": ["source_id", "source_hash"],
+        "additionalProperties": false,
+        "properties": {
+          "source_id": {"$ref": "common.schema.json#/$defs/source_id"},
+          "source_hash": {"$ref": "common.schema.json#/$defs/hash"}
+        }
+      }
+    },
+    "review": {"$ref": "common.schema.json#/$defs/review"},
+    "published_at": {"$ref": "common.schema.json#/$defs/timestamp"},
+    "published_by": {"$ref": "common.schema.json#/$defs/person"},
+    "supersedes": {"anyOf": [{"$ref": "common.schema.json#/$defs/set_id"}, {"type": "null"}]},
+    "correction_of_revision": {"anyOf": [{"$ref": "common.schema.json#/$defs/revision_id"}, {"type": "null"}]}
+  }
+}

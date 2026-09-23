@@ -1,12 +1,17 @@
 services:
   postgres:
-    command: exec make postgres
+    # The orb service environment does not inherit the pinned Nix shell, so each
+    # service enters it explicitly instead of relying on PATH.
+    command: >-
+      export PATH="/nix/var/nix/profiles/default/bin:$PATH";
+      export PORT=5432;
+      exec nix develop --command make postgres
     platforms: [linux]
   web:
     command: >-
-      until pg_isready -h "$PWD/.dev/postgres/socket" -p 5432 -U postgres;
-      do sleep 0.2; done;
-      exec make dev
+      export PATH="/nix/var/nix/profiles/default/bin:$PATH";
+      until [ -S "$PWD/.dev/postgres/socket/.s.PGSQL.5432" ]; do sleep 0.5; done;
+      exec nix develop --command make dev
     port: 4000
     health: /
     portal:

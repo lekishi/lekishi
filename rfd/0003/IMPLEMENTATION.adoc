@@ -34,7 +34,7 @@ link:../0004/README.adoc[RFD 4] owns the release acceptance criteria; this
 section covers the delivery work that satisfies them. It does not depend on
 Phase 2, which remains conditional.
 
-- [ ] Produce the release artifact from a clean checkout with the Vite production build, digested static assets, and Cesium resources; verify it serves without the Vite development server (RFD 4 AC4).
+- [ ] Produce the release artifact from a clean checkout with the Vite production build, digested static assets, and the selected renderer's resources; verify it serves without the Vite development server (RFD 4 AC4).
 - [ ] Expose and document a health endpoint and configure error visibility the owner can review (RFD 4 AC1, AC8).
 - [ ] Document repeatable deployment steps and a rollback or recovery path, and exercise the recovery path (RFD 4 AC8).
 - [ ] Verify HTTPS redirect, certificate, and route behavior on the release artifact before public launch (RFD 4 AC1).

@@ -50,9 +50,9 @@ Checklist completion does not automatically change state. Material changes to
 published decisions need review and a new RFD when superseding the decision.
 
 These initial drafts capture the founding discussion, not authorization to
-install their proposed stack or implement their checklists. RFD 4 records the
-owner's decision that implementation toward a publicly accessible PoC is now
-planned and owns the release acceptance criteria; installing the approved
-experiment stack and performing the external deployment still require explicit
-owner authorization. Lekishi does not yet have Shosai's `make check-rfds`
-automation.
+implement their checklists. RFD 4 records the owner's decision that
+implementation toward a publicly accessible PoC is now planned and owns the
+release acceptance criteria; installing the approved experiment stack is part
+of that planned implementation, while external accounts, purchases, and
+deployment still require explicit owner authorization. Lekishi does not yet
+have Shosai's `make check-rfds` automation.

@@ -33,7 +33,7 @@ occurs before the authorization item below.
 == Treatment comparison and Gate 3
 
 - [ ] Compare geographic/symbolic and illustrated-local treatments across the Tang and Qin scenarios, recording measured results and unsupported-detail risks (RFD 1 Phase 0, RFD 3 Phase 0).
-- [ ] Gate 3: the owner selects the local-detail treatment, and Cesium is confirmed or the bounded MapLibre comparison is triggered because Cesium failed a named visual, device, or delivery requirement (RFD 3 Phase 0).
+- [ ] Gate 3: the owner selects the local-detail treatment, and the experiment's renderer is resolved — Cesium confirmed, or the bounded MapLibre comparison completed and reviewed because Cesium failed a named visual, device, or delivery requirement (RFD 3 Phase 0).
 
 == Complete the exploration loop
 
@@ -41,10 +41,10 @@ occurs before the authorization item below.
 
 == Release verification
 
-- [ ] AC1: verify HTTPS redirect, certificate, routes, and the health endpoint on the release artifact.
+- [ ] AC1 predeployment rehearsal: verify HTTPS redirect, certificate, routes, and the health endpoint on the release artifact; AC1 is complete only after authorized deployment (outside-host check below).
 - [ ] AC2: verify reviewed launch content, citations, the approval record, and visible uncertainty.
-- [ ] AC4: verify production-built Vite/Cesium assets with no Vite development server.
-- [ ] AC5: record desktop/laptop and physical-iPad results, phone-layout usability, and measured performance.
+- [ ] AC4: verify production-built Vite assets and the selected renderer's resources with no Vite development server.
+- [ ] AC5: record desktop/laptop and physical-iPad results, phone-layout usability, and measured performance against the agreed matrix and thresholds.
 - [ ] AC6: verify keyboard access, touch, reduced motion, non-color cues, and the non-map event list.
 - [ ] AC7: verify attribution, licenses, reuse terms, and provider compliance.
 - [ ] AC8: verify CI, error visibility, documented deployment steps, and an exercised rollback or recovery path.

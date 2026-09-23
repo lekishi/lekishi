@@ -1,0 +1,1191 @@
+:authors: Darwin D Wu <darwin67@users.noreply.github.com>
+:state: discussion
+:discussion:
+:labels: delivery, hosting, geospatial, licensing, performance, poc
+
+= RFD 3 Wave 1D delivery evaluation
+
+Provenance: prepared for link:README.adoc[RFD 3] Phase 0 item D (Wave 1 of
+link:../0004/README.adoc[RFD 4]'s dependency order) with agent assistance.
+Provider facts and prices were checked on 2026-09-23 from the sources in
+<<Sources>>; repository facts were checked against `origin/main` at commit
+`8134297`. The owner reviews and accepts or amends this record at Gate 1.
+Nothing here authorizes account creation, purchases, a domain registration,
+secret configuration, or deployment, and nothing here changes a decision owned
+by RFD 1, RFD 2, or RFD 3.
+
+== Reading conventions
+
+[cols="1,4",options="header"]
+|===
+|Tag |Meaning
+
+|`[verified]`
+|Checked on 2026-09-23 against the cited source or against the repository at
+`8134297`. Provider prices, quotas, and licenses change; they are current only
+as of that access date.
+
+|`[recommendation]`
+|This evaluation's proposed choice. Recommendations become decisions only when
+the owner records them at Gate 1.
+
+|`[estimate]`
+|Time-sensitive or workload-dependent figure derived here. Not a vendor quote,
+not a measurement, and not a commitment.
+|===
+
+This document proposes thresholds (<<Performance budget>>) that must be frozen
+before the comparative measurements. Thresholds change only through an explicit
+dated decision recorded in this document or its successor and referenced from the
+owning checklist, never by adjusting them to match results.
+
+=== Summary for Gate 1 review
+
+Verified facts (2026-09-23, cited in <<Sources>>): the repository's production
+configuration, CI, and missing release/health pieces; every platform, provider,
+and license figure quoted in the comparison tables; the per-source commercial-use
+status in <<commercial-use-status>>; the measured CesiumJS 1.145.0
+artifact sizes; and the browser WebGL2 support floor.
+
+Recommendations (owner decisions at Gate 1): Render as the default host with
+Fly.io as the fallback; MapTiler's free plan as the development provider path;
+a public-release provider path chosen by commercial status and imagery needs,
+where paying is not the only commercially usable option (NASA GIBS, Esri's
+free-tier basemaps, EOX's 2016 layer subject to confirmation, and the AWS
+terrain tiles under their per-source terms); Sentry's free plan for error
+visibility; and the device matrix and performance budget below.
+
+Estimates and uncertainties: monthly costs, per-session payload, and egress
+volumes are workload-dependent `[estimate]`; every provider price, quota, and
+license is time-sensitive and must be re-checked before purchase; the EOX 2016
+commercial reading and the per-source terrain licenses need confirmation for the
+intended use; the OSM tile service is policy-permitted for interactive viewing
+but not recommended for a reliable public release; and no performance
+measurement exists yet, because the production build that Wave 1C is creating
+does not exist at the time of writing. RFD 3 Phase 0's "measured performance"
+recording therefore remains outstanding and is gated on that build.
+
+== Scope and method
+
+Evaluated here, per RFD 4 checklist item D and RFD 3 Phase 0:
+
+* Phoenix hosting and the PostgreSQL runtime the current scaffold requires.
+* Public HTTPS, health checks, log and error visibility, repeatable deploys,
+  rollback and recovery, regions, operational burden, and plausible PoC costs.
+* Cesium-compatible imagery and terrain that require no unsupported caching or
+  offline promise, including attribution, accounts, pricing and limits, payload
+  implications, and a no-paid-account development path.
+* Domain and DNS implications without selecting or purchasing a domain.
+* Representative desktop browsers, physical iPad-class testing, phone responsive
+  checks, and a measurable performance budget.
+
+Read as inputs: `AGENTS.md`, RFD 3 and its checklist, RFD 4 and its checklist,
+RFD 1 and RFD 2 where they constrain delivery, `mix.exs`, `config/config.exs`,
+`config/dev.exs`, `config/prod.exs`, `config/runtime.exs`,
+`lib/lekishi_web/router.ex`, `.github/workflows/ci.yml`, `Makefile`,
+`.amp/services.yaml`, `flake.nix`, and `assets/`.
+
+Not in scope: the Svelte/Vite/Cesium build integration (Wave 1C), historical
+content, PostGIS, database-backed content migration, native delivery, and any
+deployment action. No account was created, no purchase was made, no secret was
+configured, and no external state was changed for this evaluation.
+
+== Verified current state and delivery gaps
+
+[cols="1,3",options="header"]
+|===
+|Repository fact `[verified]` |Delivery consequence
+
+|Phoenix 1.8.14, Ecto/Postgrex, Bandit, LiveView, esbuild and Tailwind tasks,
+Elixir `~> 1.17`; CI pins OTP 28.5 and Elixir 1.20 and runs
+`mix compile --warnings-as-errors`, Credo, `mix format --check-formatted`,
+`mix deps.unlock --check-unused`, and `mix test`.
+|AC8's CI requirement is largely met for lint/format/compile/test. The release
+must also build production assets (below).
+
+|Production boot requires `DATABASE_URL` and `SECRET_KEY_BASE`; `PHX_SERVER`
+enables the server; `PORT` defaults to 4000; `PHX_HOST` defaults to
+`example.com`; the endpoint URL is configured as `https` on port 443.
+|Any host must provide a PostgreSQL URL and secrets. `PHX_HOST` must be set to
+the public host or asset/redirect URLs are wrong.
+
+|`config/prod.exs` enables `force_ssl` with `rewrite_on: [:x_forwarded_proto]`
+and excludes `localhost`/`127.0.0.1`; the `paths: ["/health"]` exclusion exists
+but is commented out.
+|HTTPS redirect and HSTS depend on the platform forwarding
+`X-Forwarded-Proto`. If a health endpoint must answer over plain HTTP, the
+documented exclusion has to be enabled deliberately.
+
+|`cache_static_manifest` points at `priv/static/cache_manifest.json`; the
+`assets.deploy` alias runs Tailwind and esbuild with `--minify` plus
+`phx.digest`, but CI runs only `assets.build` (no minify, no digest).
+|AC4's digested production assets and AC8's production asset build in CI are
+not yet satisfied; this is release-preparation work, not Wave 1C integration.
+
+|`lib/lekishi_web/router.ex` exposes only `get "/"` to `PageController`;
+LiveDashboard and the Swoosh mailbox preview are gated behind `dev_routes` and
+are therefore absent in production. No authentication exists.
+|AC1's "documented health endpoint" does not exist yet and must be added during
+release preparation. Production error visibility cannot rely on LiveDashboard.
+
+|`priv/repo/migrations/` contains no migrations; `priv/repo/structure.sql`
+exists from `mix ecto.dump`. Historical content stays file-based per RFD 3.
+|PostgreSQL is a boot-time scaffold dependency, not yet a content store. A
+small instance and a small pool are sufficient for the PoC.
+
+|No `rel/`, no `Dockerfile`, no `bin/server`, no platform deploy configuration,
+and no deployment job in CI.
+|Repeatable deploy, rollback, and recovery (AC8) require release packaging
+first. This is Wave 2 release-preparation work.
+
+|Local development uses the Makefile's `.dev/postgres` PostgreSQL 18 instance
+and `.amp/services.yaml`; CI uses `postgres:18-alpine`.
+|Match PostgreSQL 18 (or a compatible managed version) in the PoC environment.
+|===
+
+== Delivery requirements distilled from RFD 4
+
+The PoC needs: a stable public HTTPS URL with a valid certificate and no
+mixed content (AC1); a documented health endpoint (AC1); CI passing on the
+released commit including a production asset build (AC8); application errors
+recorded where the owner can review them (AC8); documented and repeatable
+deploys plus an exercised rollback or recovery path (AC8); production-built
+assets served without the Vite development server (AC4); provider terms and
+attribution satisfied with no offline promise (AC7); and measured desktop,
+physical-iPad, and phone-layout results against agreed thresholds (AC5, AC6).
+
+Historical content remains file-based, so no database content, spatial query, or
+PostGIS requirement enters this evaluation.
+
+== Hosting and PostgreSQL runtime
+
+=== Shortlist and criteria
+
+Shortlisted because each supports Elixir/Phoenix releases, managed PostgreSQL,
+automatic TLS, health checks, and a documented rollback path: Fly.io, Render,
+Gigalixir, Railway, and Heroku. Excluded from the shortlist: raw VPS or
+self-managed Kubernetes (high operational burden for a PoC), serverless
+function platforms without long-lived WebSocket/Phoenix support, and providers
+that require a paid plan before any evaluation is possible.
+
+=== Verified platform facts
+
+[cols="2,3,3,3,3,3",options="header"]
+|===
+| |Fly.io |Render |Gigalixir |Railway |Heroku
+
+|Smallest usable app compute
+|`shared-cpu-1x` 512 MB: about $3.19–$4.18/month depending on region; 1 GB about
+$5.70–$7.45/month. All organizations require a card on file.
+|Free: 512 MB / 0.1 CPU (spins down, see below). Starter: $7/month, 512 MB /
+0.5 CPU. Standard: $25/month, 2 GB / 1 CPU.
+|Free tier: one replica up to 0.5 GB, sleeps after 30 days without a deploy.
+Standard: $0.05 per MB per month (500 MB = $25/month). A card is required at
+signup but not charged on the free tier.
+|Free: $1/month of included usage (1 vCPU / 0.5 GB per service). Hobby:
+$5/month including $5 of usage.
+|Eco: $5/month flat for 1,000 pooled dyno hours, sleeps after 30 minutes idle.
+Basic: up to $7/month, always on.
+
+|PostgreSQL
+|Managed Postgres: Basic $38/month (shared-2x, 1 GB) plus $0.28 per GB of
+provisioned storage per 30 days. Unmanaged single-node Fly Postgres is about
+$2/month and is documented as unsupported.
+|Free: 256 MB, 1 GB storage, 30-day expiry, no backups. Basic-256mb: $6/month.
+Storage $0.30 per GB. Point-in-time recovery on paid plans.
+|Free tier database: 10,000 rows, 2 concurrent connections, no backups.
+Standard-tier databases are provisioned and priced separately.
+|PostgreSQL runs as a service in the project and is billed as usage alongside
+the app.
+|Essential-0: $5/month, 1 GB storage.
+
+|Free-tier caveats
+|No free app tier; card required for every organization.
+|Free web services spin down after 15 minutes without traffic and take about a
+minute to wake; 750 free instance hours per workspace per month; free Postgres
+expires 30 days after creation (1 GB, no backups, one per workspace).
+|Free apps scale to zero after 30 days without a deploy; free database is
+shared, limited, and not for production.
+|Free plan is limited to $1 of usage; Hobby image retention for rollback is
+72 hours.
+|No free tier remains; Eco dynos sleep.
+
+|HTTPS/TLS
+|Let's Encrypt; single-hostname certificates $0.10/month after the first 10
+free per organization; wildcard $1/month; free `*.fly.dev` hostname.
+|Automatic TLS for all custom domains, HTTP redirected to HTTPS, certificates
+included.
+|Automatic TLS including on custom domains on the free tier.
+|Automatic TLS.
+|Free SSL on custom domains.
+
+|Health checks
+|The `http_service.checks` block (path, interval, timeout, grace period) plus
+deploy-time machine checks that can halt or roll back a bad release;
+`fly checks list` reports status.
+|Configurable health-check path; Render restarts unresponsive instances and
+gates traffic to a new deploy on readiness.
+|Documented health checks; zero-downtime deploys.
+|Platform health checks and deployment gating.
+|Platform health checks.
+
+|Rollback
+|Redeploy an earlier image: `fly releases --image`, then
+`fly deploy --image <tag>`. Config, secrets, and `fly.toml` are not rolled back.
+|Instant rollback; Hobby retains 5 builds, Pro 15, Scale 30.
+|`gigalixir releases:rollback [--version=N]`; releases kept for one year.
+|Rollback to a removed deployment within the image-retention window (72 hours
+on Hobby) restores image, settings, and variables.
+|`heroku rollback vNN`.
+
+|Logs and metrics
+|Live `fly logs`; searchable logs and metrics in the managed Grafana
+(7-day log search retention); export to an external sink with the Fly Log
+Shipper.
+|Log retention 7 days (Hobby), 14 days (Pro); log streams; HTTP request logs on
+Pro and above.
+|Log aggregation and tailing included on both tiers.
+|Logs and metrics in the dashboard.
+|Unified logs.
+
+|Regions
+|Many regions including `lax`, `sjc`, `ewr`, `iad`, `ord`, `dfw`, `ams`, `fra`,
+`lhr`, `cdg`, `nrt`, `sin`, `syd`, `yyz`, `gru`, `bom`, `jnb`, `arn`.
+|Oregon, Ohio, Virginia, Frankfurt, Singapore. A service's region cannot be
+changed after creation.
+|Multiple AWS regions (not enumerated here).
+|Multiple regions.
+|US and EU regions.
+
+|Deploy mechanics
+|Docker image (for example from `mix phx.gen.release --docker`), optional
+`release_command` for migrations that fails the deploy on error.
+|Native Elixir build or Docker; 500 build-pipeline minutes included per month
+on Hobby (then $5 per 1,000).
+|Elixir buildpacks, no Dockerfile required; zero-downtime deploys.
+|Nixpacks or Docker.
+|Buildpacks.
+
+|Egress pricing
+|$0.02 per GB to the public internet in North America and Europe; $0.04 in
+Asia Pacific, Oceania, and South America.
+|5 GB included per month on Hobby, then $0.15 per GB.
+|1 TB/month bandwidth listed as an account limit.
+|Usage-based.
+|Not billed per GB for common dyno usage.
+|===
+
+=== Recommendation: default and fallback `[recommendation]`
+
+Default: Render — one web service on the Starter plan plus a Basic-256mb
+PostgreSQL database, in the region closest to the owner and reviewers.
+
+* No Dockerfile is required (native Elixir build), which keeps Wave 2 release
+  preparation small.
+* Health checks gate a new deploy on readiness, and instant rollback retains
+  five builds on Hobby, which maps directly onto AC8's rollback requirement.
+* Managed PostgreSQL at $6/month, with point-in-time recovery on paid
+  instances, is the cheapest *supported* managed database of the shortlist;
+  Fly's managed Postgres starts at $38/month and its cheaper unmanaged Postgres
+  is documented as unsupported.
+* HTTPS, two custom domains, 7-day log retention, and region choice are
+  included on the Hobby workspace without extra metering.
+* Expected cost for the PoC: about $13/month `[estimate]` (Starter $7 +
+  Basic-256mb $6), plus bandwidth only above 5 GB/month.
+
+Fallback: Fly.io — one `shared-cpu-1x` Machine with 512 MB or 1 GB in the region
+closest to reviewers, with Fly Managed Postgres if the owner wants a managed
+database from the same vendor, or an external managed PostgreSQL otherwise.
+
+* Lower compute cost (about $3.19–$4.18/month for 512 MB `[verified]`) and
+  fine-grained regional placement.
+* Requires a Dockerfile and more machine, volume, IP, and certificate
+  management; every organization needs a card on file; rollback redeploys an
+  image but does not restore configuration or secrets.
+* The managed database is the expensive part; the cheap path is explicitly
+  unsupported for production, so the owner must accept that trade-off.
+
+Also acceptable for a zero-spend start: Gigalixir's free tier (one 0.5 GB
+replica, free PostgreSQL limited to 10,000 rows and 2 connections, custom
+domains with TLS, zero-downtime deploys, `releases:rollback`) `[verified]`. Its
+database limits make it a development or demo host rather than the public PoC
+host unless the owner accepts them; the Standard tier costs $25/month for
+0.5 GB.
+
+Railway and Heroku remain viable (Railway Hobby $5/month including $5 usage;
+Heroku Eco $5/month plus Essential-0 Postgres $5/month) but add no capability
+this PoC needs over Render or Fly.
+
+=== Required PostgreSQL runtime
+
+* PostgreSQL 18 is what CI and local development use `[verified]`; a managed
+  PostgreSQL 16–18 service is acceptable `[recommendation]`.
+* The PoC stores no historical content, so a 256 MB–1 GB instance with 1 GB
+  storage is enough `[recommendation]`.
+* Set `POOL_SIZE` deliberately: the default pool of 10 fits Render's
+  Basic-256mb, but must be lowered to 2 on Gigalixir's free database and kept
+  below the chosen plan's connection limit otherwise `[recommendation]`.
+* Run `mix ecto.migrate` as a release step (Render pre-deploy, Fly
+  `release_command`, or the platform's release phase) so a failed migration
+  stops the deploy `[recommendation]`.
+* Required environment: `DATABASE_URL`, `SECRET_KEY_BASE`, `PHX_HOST`, and
+  `PHX_SERVER=true`; `PORT` is supplied by the platform `[verified]` against
+  `config/runtime.exs`.
+
+=== Error visibility
+
+* Sentry's free Developer plan (one user, 5,000 errors per month, 30-day
+  lookback, email alerts) `[verified]`, with the official Elixir SDK
+  (`sentry` 13.5.1, published 2026-09-02, with Phoenix and LiveView
+  integrations) `[verified]`, is the recommended error-visibility mechanism for
+  AC8 `[recommendation]`.
+* Platform logs alone are a fallback: Render retains 7 days on Hobby `[verified]`;
+  Fly provides live tail plus 7-day searchable logs in Grafana `[verified]`.
+* LiveDashboard is not a production option here: it is gated behind
+  `dev_routes` and would need authentication before production use
+  `[verified]`.
+
+=== Operational burden and cost `[estimate]`
+
+[cols="1,2,2,2",options="header"]
+|===
+|Scenario |Monthly cost |Setup burden |Notes
+
+|Development, no spend
+|$0
+|Low on Render/Gigalixir free tiers
+|Render's free web service sleeps and its free database expires after 30 days;
+Gigalixir's free database has 10,000-row and 2-connection limits. Neither is a
+public-PoC host.
+
+|Recommended PoC
+|About $13 (Render Starter + Basic-256mb)
+|Low: release packaging, health endpoint, environment variables, one deploy
+|Adds about $0.15 per GB above 5 GB egress.
+
+|Fly.io variant
+|About $3–$4 compute + $38 managed Postgres, or about $2 unsupported Postgres
+|Medium: Dockerfile, machine/volume/certificate management
+|The managed database dominates the cost.
+
+|Heroku/Railway variant
+|About $10–$12
+|Low
+|Equivalent capability for this PoC.
+|===
+
+Costs above exclude map/imagery/terrain providers, which are evaluated
+separately and can exceed hosting cost if a paid provider path is chosen.
+
+=== Release-preparation gaps this evaluation flags (not Wave 1C work)
+
+* Add a health endpoint and document it (AC1).
+* Add a production asset build (`assets.deploy` plus `phx.digest`) to the
+  released commit's CI run (AC4, AC8).
+* Add release packaging (`mix phx.gen.release --docker` or the platform's
+  native build) and a documented deploy and rollback procedure (AC8).
+* Exercise the rollback or recovery path once before public launch (AC8).
+
+== Imagery, terrain, and provider rights
+
+=== Constraints
+
+* Cesium-compatible sources, with the renderer's resources served from the
+  release artifact (AC4).
+* Public reviewers need no personal token or per-reviewer setup (AC1), so any
+  provider key must be held by the application and protected, never entered by
+  the reviewer.
+* No offline promise and no caching that provider terms forbid (AC7, RFD 4
+  non-goals).
+* Attribution, license, and reuse terms must be recordable in the release
+  (AC7).
+* Historical content must not depend on renderer or provider objects (RFD 2,
+  RFD 3).
+
+=== Imagery candidates `[verified]` on 2026-09-23
+
+[cols="2,2,2,2,2",options="header"]
+|===
+|Source |Access and account |Free/dev terms |Paid path |Rights notes
+
+|MapTiler Cloud (OSM-based styles, satellite-style and terrain tilesets)
+|API key; free plan requires no billing information
+|Free: 5,000 map sessions and 100,000 API requests per month, 5 GB storage
+(one file); service pauses at quota; MapTiler logo required; non-commercial
+use and commercial R&D only
+|Flex $30/month: 25,000 sessions, 500,000 requests, commercial use, logo
+optional except 3D sessions
+|Attribution and logo conditions differ per plan; key protection is documented
+
+|Cesium ion Global Imagery (Bing Maps, Google Maps; Azure Maps in technology
+preview)
+|ion account and access token
+|Community (free): 1,000 global-imagery sessions per month, personal and
+non-commercial use, evaluation of commercial projects
+|Commercial $149/month (individual) or $524/month (team): 5,000 sessions
+|Terms of Service §2.2.2 forbids storing Cesium Data Output for offline or
+disconnected use; general client/proxy caching is allowed only as a
+non-Cesium-specific performance mechanism
+
+|Esri ArcGIS Location Platform basemaps
+|ArcGIS account and API key
+|2,000,000 basemap tiles free, then $0.15 per 1,000 tiles; 1,000 basemap
+sessions free, then $4 per 1,000; billing occurs only above the free tier
+|Pay-as-you-go above the free tier
+|Subscription includes a commercial deployment license; commercial and
+revenue-generating applications are permitted. "Powered by Esri" and data
+source attribution are required and cannot be removed
+
+|NASA GIBS
+|No account, no key
+|Free and open; WMTS/REST/WMS and generic XYZ access
+|Not applicable
+|NASA data are available "fully, openly, and without restrictions", so
+commercial use is permitted; acknowledgement of GIBS/ESDIS is required and
+NASA material must not imply NASA endorsement of a commercial product. Imagery
+is Earth-observation products (MODIS, VIIRS, and similar) suited to globe-scale
+views, not local city detail
+
+|EOX Sentinel-2 cloudless (s2maps/EOxCloudless)
+|No account for the public WMTS/WMS endpoints
+|2016 layer: CC BY 4.0, which permits commercial use with attribution.
+2018–2025 layers: CC BY-NC-SA 4.0, non-commercial only, with per-year
+attribution strings; requests capped at 4096 px
+|Commercial license purchased from EOX for the 2018–2025 layers
+|The year-specific license page assigns CC BY 4.0 to 2016, while EOX's general
+license summary frames commercial use of EOxCloudless as requiring an EOX
+commercial license; confirm with EOX before relying on the 2016 layer
+commercially. The 2016 mosaic also shows 2016-era imagery
+
+|OpenStreetMap tiles (`tile.openstreetmap.org`)
+|No account
+|Free subject to the tile usage policy: correct URL, visible attribution, valid
+HTTP Referer from web pages (a restrictive Referrer-Policy is prohibited),
+cache tiles per HTTP headers or at least 7 days, no bulk download, prefetch, or
+offline use, no no-cache headers, no masquerading or library-default
+User-Agent. Normal interactive human viewing that requests only the tiles for
+the current viewport is explicitly permitted
+|Use a provider instead
+|Availability is best-effort with no SLA, and access may be blocked without
+notice if usage degrades the service; the policy warns commercial services
+that access may be withdrawn at any point. OSM *data* is separate: it is
+licensed under ODbL 1.0, which permits commercial use with attribution and
+share-alike obligations for derived databases, and can be served through a
+provider or self-hosted
+|===
+
+Excluded from the shortlist: Mapbox and direct Bing/Azure Maps imagery
+(provider account plus billing method required, and their terms were not
+reviewed in this pass). They can be reconsidered if a shortlisted source fails a
+named requirement.
+
+=== Terrain candidates `[verified]` on 2026-09-23
+
+[cols="2,2,2,2",options="header"]
+|===
+|Source |Cesium integration |Terms |Payload and integration cost
+
+|Cesium World Terrain (Cesium ion)
+|First-class: `createWorldTerrainAsync` returns a `CesiumTerrainProvider`;
+supports vertex normals and water mask
+|Same ion account and plan as ion imagery; Community free plan is
+non-commercial; offline storage prohibited by the terms
+|Smallest integration effort; tiles stream as quantized mesh; requires an ion
+token in the deployed app
+
+|MapTiler Terrain (Terrain RGB and "Terrain 3D" quantized mesh for CesiumJS)
+|Documented CesiumJS integration; quantized-mesh tileset is Cesium-native;
+Terrain RGB is Terrarium-encoded, zoom 0–14, about 30 m globally (5 m in some
+areas)
+|Covered by the MapTiler plan and its API-request quota; free plan is
+non-commercial
+|Low integration effort with the quantized-mesh tileset; Terrarium would need a
+custom heightmap decoder
+
+|AWS Open Data Terrain Tiles (Mapzen/Tilezen joerd)
+|Requires a custom decoder feeding `CustomHeightmapTerrainProvider` (present in
+CesiumJS 1.145) or a third-party provider
+|S3 buckets `elevation-tiles-prod` (us-east-1) and `elevation-tiles-prod-eu`;
+no AWS account required; no SLA. The joerd project is licensed CC BY 4.0
+(Mapzen), and the tiles combine per-source datasets under their own terms:
+public domain (USGS 3DEP, SRTM, GMTED2010, NOAA ETOPO1), CC BY 3.0 NZ (LINZ),
+UK Open Government Licence v3 (Environment Agency LIDAR), CC BY 3.0 AT
+(Austria DGM), CC BY 4.0 (Kartverket Norway, Geoscience Australia), OGL Canada,
+INEGI Mexico free use, and ArcticDEM (an unlicensed product that may be used,
+distributed, and modified without permission). Commercial reuse is permitted
+for these sources with their required attribution strings, but each source's
+terms must be verified for a commercial release
+|No account and no fee, but the decoder, tile caching policy, and missing water
+mask are implementation work
+
+|No terrain (`EllipsoidTerrainProvider`)
+|Built in
+|None
+|Lowest payload; loses relief, which RFD 1's readable-terrain direction wants
+|===
+
+[[commercial-use-status]]
+=== Commercial-use status by source `[verified]` on 2026-09-23
+
+[cols="2,1,3",options="header"]
+|===
+|Source |Commercial use |Basis and conditions
+
+|MapTiler Cloud free plan
+|No
+|The Cloud terms limit the Free plan to non-commercial use and research and
+development for commercial products.
+
+|MapTiler Cloud Flex ($30/month)
+|Yes
+|Paid plan permits commercial use; the MapTiler logo is required only for 3D
+sessions.
+
+|Cesium ion Community (free)
+|No
+|Personal and non-commercial use, or evaluation of commercial projects.
+
+|Cesium ion Commercial ($149/month individual)
+|Yes
+|Commercial use within the organization; integration licensing for solutions
+distributed to other organizations is separate.
+
+|Esri ArcGIS Location Platform free tier
+|Yes
+|The subscription includes a commercial deployment license, and billing occurs
+only above the free tier; Esri and data-source attribution is required.
+
+|NASA GIBS
+|Yes
+|NASA data are available fully, openly, and without restrictions; acknowledge
+GIBS/ESDIS and do not imply NASA endorsement.
+
+|EOX Sentinel-2 cloudless 2016
+|Yes, subject to EOX confirmation
+|CC BY 4.0 per the year-specific license page, which permits commercial use
+with attribution; EOX's general license summary frames commercial use as
+requiring their license, so confirm before relying on it.
+
+|EOX Sentinel-2 cloudless 2018–2025
+|No
+|CC BY-NC-SA 4.0; commercial use requires an EOX commercial license.
+
+|AWS Open Data terrain tiles
+|Yes, subject to per-source terms
+|Per-source licenses (public domain, CC BY, OGL, and the unlicensed ArcticDEM
+product) permit reuse with the required attribution strings; verify each
+source's terms before a commercial release.
+
+|OpenStreetMap tiles (`tile.openstreetmap.org`)
+|Not a rights restriction
+|The data is ODbL-licensed and commercially usable; the tile service is
+best-effort, may be withdrawn without notice, and is not recommended as the
+release source.
+
+|OpenStreetMap data through a provider or self-hosting
+|Yes
+|ODbL 1.0 with attribution; derived databases must be shared under ODbL.
+
+|Stadia Maps free tier
+|No
+|Commercial use requires a paid plan (from about $20/month).
+|===
+
+The measured CesiumJS 1.145.0 package (see <<payload-implications>>) confirms
+the terrain and imagery provider classes this evaluation assumes, including
+`CesiumTerrainProvider`, `CustomHeightmapTerrainProvider`,
+`ArcGISTiledElevationTerrainProvider`, `IonImageryProvider`,
+`UrlTemplateImageryProvider`, `WebMapTileServiceImageryProvider`,
+`TileMapServiceImageryProvider`, and `OpenStreetMapImageryProvider`.
+
+=== Development path with no paid account `[recommendation]`
+
+Use MapTiler Cloud's free plan as the development provider: an account is
+required but no billing information is, and the same key serves OSM-based
+imagery plus quantized-mesh terrain, so the Cesium integration developed during
+Wave 1C and Wave 2 carries over to the release. Accept the free-plan conditions
+knowingly: non-commercial use, the MapTiler logo on the map, quota pausing, and
+key protection.
+
+Zero-account alternative, if the owner prefers no provider account at all:
+NASA GIBS imagery plus AWS Open Data terrain tiles. This path costs no money and
+needs no account, but requires a custom heightmap decoder and offers only
+coarse-resolution imagery for local detail `[recommendation]`.
+
+OpenStreetMap's own tile service is not categorically prohibited for a
+low-traffic public PoC: the policy explicitly permits normal interactive human
+viewing that requests only the tiles for the current viewport, provided the
+requirements above are met. It is still not recommended as the release source,
+because availability is best-effort with no SLA, access may be blocked without
+notice, and the policy warns commercial services that access may be withdrawn at
+any point `[verified]`. The scaffold's default
+`referrer-policy: strict-origin-when-cross-origin` still sends a Referer header
+on cross-origin tile requests, so it does not violate the policy; the release
+must not switch to `no-referrer` or strip Referer through a proxy `[verified]`.
+The strict User-Agent requirements target applications and SDKs; browsers send
+their own default User-Agent, which the policy accepts for web pages
+`[verified]`.
+
+[[public-release-provider-decision]]
+=== Public-release provider decision `[recommendation]`
+
+The decision depends on two owner inputs that this evaluation cannot settle:
+whether the public PoC counts as non-commercial under each provider's terms, and
+whether the chapter needs satellite-style imagery with local detail. A
+commercially usable path does not require paying: NASA GIBS, Esri's free-tier
+basemaps, EOX's 2016 layer, and the AWS terrain tiles are all commercially
+usable under their own conditions (<<commercial-use-status>>).
+
+[cols="2,2,2",options="header"]
+|===
+|If the PoC is… |Recommended provider path |Approximate cost `[estimate]`
+
+|Non-commercial, OSM-styled, modest traffic
+|MapTiler free plan, or Stadia Maps' free tier (no payment method required)
+|$0, with logo/attribution conditions
+
+|Non-commercial but satellite imagery or Cesium World Terrain is required
+|Cesium ion Community for terrain and ion imagery, or MapTiler free for imagery
+with AWS terrain tiles
+|$0, non-commercial only
+
+|Commercial, OSM-styled
+|MapTiler Flex $30/month (imagery and quantized-mesh terrain) or Stadia Maps
+from about $20/month
+|$20–$30/month
+
+|Commercial, satellite imagery with local detail
+|Esri ArcGIS Location Platform free tier (commercial deployment license
+included, 2,000,000 basemap tiles/month free, then $0.15 per 1,000), adding
+Cesium ion Commercial $149/month only if Bing/Google imagery or Cesium World
+Terrain is specifically required
+|$0 up to 2,000,000 tiles/month; $149/month for ion imagery or terrain
+
+|Commercial, open-data only
+|NASA GIBS imagery with AWS Open Data terrain tiles (per-source attribution,
+custom decoder), or EOX's 2016 CC BY 4.0 layer subject to EOX confirmation
+|$0 plus implementation work
+
+|Traffic grows well beyond PoC levels
+|Self-host open data (AWS terrain tiles, permissively licensed imagery) or a
+custom MapTiler/EOX contract
+|Provider quote; higher operational burden
+|===
+
+Share-alike obligations follow the license, not the price: EOX's 2018–2025
+layers (CC BY-NC-SA) and ODbL-derived OSM databases must be shared under the
+same terms, so a closed commercial dataset should prefer the CC BY, OGL, public
+domain, and Esri options. Keeping the development key and the release key in
+separate provider accounts or projects is recommended so that quota consumption
+and terms stay separable `[recommendation]`.
+
+[[payload-implications]]
+=== Payload implications `[verified]` unless marked otherwise
+
+Measured from the published `cesium` 1.145.0 package (Apache-2.0, published
+2026-09-01):
+
+[cols="2,2",options="header"]
+|===
+|Artifact |Size
+
+|`Build/Cesium/Cesium.js` (minified bundle)
+|6,018,837 bytes raw; 1,758,194 bytes gzip
+
+|`Build/Cesium/index.js` (ESM bundle)
+|4,754,311 bytes raw
+
+|`Build/Cesium/Workers`
+|1,112,519 bytes
+
+|`Build/Cesium/ThirdParty`
+|1,102,190 bytes
+
+|`Build/Cesium/Assets`
+|4,398,005 bytes (textures, IAU data, `approximateTerrainHeights.json`)
+
+|`Build/Cesium/Widgets`
+|532,583 bytes (CSS and widget assets)
+
+|`Build/Cesium` total
+|22,731,335 bytes
+|===
+
+* The Vite production build must copy `ThirdParty`, `Workers`, `Assets`, and
+  `Widgets` as static files and set the Cesium base URL so the workers and
+  assets resolve without the development server (Cesium's own Vite guidance and
+  the `CesiumGS/cesium-vite-example` repository) `[verified]`. This is Wave 1C's
+  integration work; it is recorded here because it dominates the payload budget.
+* Serve `Workers`, `ThirdParty`, and `Widgets` JavaScript with compression;
+  `Assets` is mostly binary and does not compress further `[verified]`.
+* Tile payloads are provider- and zoom-dependent: 256×256 raster tiles are
+  typically tens of kilobytes each, 512×512 tiles count as four MapTiler
+  requests, and quantized-mesh or Terrarium terrain tiles are comparable per
+  tile `[estimate]`.
+* Estimated per-visit transfer for the AC3 loop, cold cache: about 3–5 MB of
+  application and renderer assets plus about 5–20 MB of imagery and terrain,
+  depending on how deep the local exploration goes `[estimate]`. Hosting egress
+  at 100 sessions/month is about 2.5 GB (inside Render's included 5 GB) and
+  about 25 GB at 1,000 sessions (about $3.75 at Render's $0.15 per GB, or about
+  $0.50 at Fly's $0.02 per GB) `[estimate]`.
+* Bound client caches explicitly: Cesium exposes memory limits such as
+  `maximumMemoryUsage` (256 MB default for point clouds) and
+  `Scene.requestRenderMode` for on-demand rendering `[verified]`; the
+  performance budget requires the measured heap to stay inside a fixed ceiling.
+
+=== Attribution obligations to record in the release (AC7) `[verified]`
+
+* OpenStreetMap-derived imagery: "© OpenStreetMap contributors" plus the
+  provider's required credit (MapTiler logo on the free plan; Stadia
+  attribution per its attribution guide); derived databases carry ODbL
+  share-alike obligations.
+* Cesium ion imagery or terrain: Cesium ion attribution and the underlying data
+  provider credits (for example Bing Maps or Google Maps) as required by the
+  ion terms.
+* Esri basemaps: the required "Powered by Esri" credit plus data-source
+  attribution, which may not be removed.
+* NASA GIBS: acknowledgement of NASA GIBS/ESDIS, without implying NASA
+  endorsement of the application.
+* EOxCloudless/Sentinel-2 cloudless: the per-year attribution string including
+  the EOX link and "Contains modified Copernicus Sentinel data <year>".
+* AWS terrain tiles: the per-source attribution strings from the Tilezen
+  attribution document (USGS 3DEP, SRTM, GMTED2010, NOAA ETOPO1, LINZ,
+  Environment Agency, Austria DGM, Kartverket, Geoscience Australia, OGL Canada,
+  INEGI, and the ArcticDEM citation), each of which must appear where the
+  imagery is used.
+* CesiumJS itself: Apache-2.0, with the license and notices retained in the
+  release artifact.
+
+Rights status, source by source (<<commercial-use-status>>): the free
+tiers of MapTiler, Cesium ion, and Stadia Maps are non-commercial, and EOX's
+2018–2025 layers are non-commercial and share-alike. Commercially usable
+options do exist without paying: NASA GIBS imagery, Esri's free-tier basemaps
+(commercial deployment license included, metered above 2,000,000 tiles/month),
+EOX's 2016 CC BY 4.0 layer subject to EOX confirmation, and the AWS terrain
+tiles under their per-source licenses. The OpenStreetMap tile service is not a
+rights gap but an availability and policy-compliance risk: it is not
+categorically prohibited, and it is not recommended as the release source.
+Choosing among these, and confirming each source's terms for the intended use,
+is a Gate 1 decision rather than an implementation detail.
+
+== Domain and DNS implications
+
+* AC1 does not require a custom domain: a platform hostname
+  (`+*.onrender.com+` or `+*.fly.dev+`) provides stable public HTTPS with a
+  valid certificate and no reviewer setup `[verified]`. Using it keeps the
+  domain decision open past Gate 1 at no cost.
+* If the owner later adds a custom domain, no application change is needed
+  beyond setting `PHX_HOST` and re-checking `force_ssl` and
+  `check_origin` `[recommendation]`.
+* Record types differ by platform `[verified]`:
+  ** Render: an A record for the apex (Render uses IPv4; remove AAAA records),
+     a CNAME for subdomains, automatic TLS via Let's Encrypt and Google Trust
+     Services, and CAA records that include both authorities if CAA is defined.
+     Adding `www` makes Render add the apex and redirect it to `www`.
+  ** Fly.io: A and AAAA records are recommended for the apex, a CNAME for
+     subdomains, plus `+_fly-ownership+` TXT or `+_acme-challenge+` CNAME for
+     verification and wildcard certificates; Let's Encrypt certificates cost
+     $0.10/month per single hostname after the first 10 free.
+* Apex CNAME records are problematic without provider CNAME flattening; use
+  A/AAAA or ALIAS/ANAME where available `[verified]`.
+* Choose one canonical host (apex or `www`) and redirect the other; Render's
+  behavior is automatic, Fly requires both certificates and an explicit
+  redirect `[recommendation]`.
+* Domain registration is estimated at $10–20 per year for a typical `.com`
+  `[estimate]`. No domain is selected, checked for availability, or purchased
+  here, and no registrar or DNS provider is recommended.
+* Nothing in the PoC requires email, so MX/DKIM/SPF setup is out of scope
+  `[recommendation]`.
+
+== Device targets and test matrix `[recommendation]`
+
+Desktop and laptop browsers are primary; a physical iPad-class tablet is
+primary for touch; phones get responsive usability checks without claiming full
+exploration parity (RFD 3's device scope and AC5, AC6).
+
+[cols="1,2,2,2",options="header"]
+|===
+|Class |Representative target |Why |Checks
+
+|Desktop/laptop
+|Current stable Chrome, Firefox, and Edge on Windows or Linux, and Safari on
+macOS, on a machine with a discrete or modern integrated GPU
+|Covers all three engine families and the owner's actual working machine
+|Full AC3 loop with mouse and keyboard; keyboard-only pass for AC6; the
+performance budget's desktop thresholds
+
+|Tablet (physical)
+|Current-generation iPad or iPad Air (11-inch class) on iPadOS 15 or later,
+Safari
+|WebGL2 is supported from Safari/iPadOS 15 `[verified]`, and CesiumJS needs
+WebGL2 (billboards and labels require WebGL2 or WebGL1 with specific
+extensions) `[verified]`
+|Touch exploration, selection, timeline scrubbing, reduced motion, and the
+tablet thresholds; the owner must name the exact model and iPadOS version
+
+|Phone (responsive only)
+|iPhone-class 390×844 CSS pixels (Safari) and Android-class 360×800 CSS pixels
+(Chrome)
+|Verifies the responsive layout is usable for navigation, selection, and
+details
+|Layout and usability checks; emulation is acceptable here, a physical device is
+preferred
+|===
+
+Browser version floors implied by WebGL2 support: Chrome/Edge 56+, Firefox
+51+, Safari 15+ `[verified]`. Measure on current stable versions rather than
+these floors, and record exact versions with the results.
+
+Hardware that this evaluation cannot select: the physical iPad model, the
+desktop/laptop used for measurement, and any phone used for responsive checks.
+Those require the owner's device inventory at Gate 1.
+
+== Performance budget
+
+These thresholds are proposed for Gate 1 approval and must be frozen before the
+comparative measurements (AC5). They are deliberately stated as budgets, not
+observations: no measurement has been taken yet, and no threshold here may be
+adjusted to match a later result. A change requires a dated decision recorded in
+this document (or its successor) and referenced from the owning checklist.
+
+Measurement protocol `[recommendation]`: cold cache for every load measurement;
+five runs per device, reporting the median and the worst run; record device,
+OS, browser version, and network profile; desktop measured on an unthrottled
+connection of at least 50 Mbps, tablet measured on Wi-Fi and additionally on a
+throttled 4G profile; use Chrome DevTools Performance, Memory, and Network
+panels for desktop, and Safari Web Inspector on a Mac attached to the iPad
+(Timelines, Network, and the memory or JavaScript-allocation instruments
+available in the installed Safari version) for iPadOS. Record which
+instruments were used. Safari's Memory and JavaScript Allocations timelines are
+disabled by default and must be enabled in the Timelines tab, and enabling them
+affects the inspected page's performance, so memory runs are recorded separately
+from the frame-rate and latency runs. `performance.measureUserAgentSpecificMemory`
+is Chromium-only, is listed by MDN as experimental and not Baseline, and requires
+a cross-origin-isolated document, so it is unavailable on Safari/iPadOS and,
+without COOP/COEP headers, in the PoC's Chrome sessions; it must not be assumed
+available `[verified]`. Record payload bytes from the Network panel rather than
+estimating them.
+
+[cols="1,2,2",options="header"]
+|===
+|ID |Budget |Measurement
+
+|PB1
+|First-load application transfer (HTML, CSS, JS, renderer assets; cold cache,
+excluding map tiles) ≤ 3.5 MB compressed on desktop and tablet
+|Network panel total transferred bytes for the initial document and its
+subresources until the globe is interactive
+
+|PB2
+|Initial chapter view imagery and terrain ≤ 6 MB compressed (cold), and ≤ 250 KB
+per pan/zoom gesture in the chapter area once loaded
+|Network panel, filtered to tile requests
+
+|PB3
+|Whole AC3 loop (globe to local, selection, playback, connections) ≤ 25 MB
+transferred on desktop, ≤ 20 MB on tablet
+|Network panel total for a scripted loop run
+
+|LT1
+|Time to first rendered globe frame ≤ 4.0 s desktop, ≤ 8.0 s tablet
+|Performance timeline: navigation start to first globe frame
+
+|LT2
+|Globe interactive (pan/zoom responds without jank) ≤ 6.0 s desktop, ≤ 10 s
+tablet
+|First input delay after load plus a manual interaction check
+
+|LT3
+|Chapter local view loaded (terrain and imagery for the mission area)
+≤ 12 s desktop, ≤ 20 s tablet
+|Timeline from navigation start to the local view's last required tile
+
+|LT4
+|No single main-thread task during load > 250 ms; total blocking time ≤ 2.0 s
+desktop, ≤ 4.0 s tablet
+|Performance timeline long tasks
+
+|FR1
+|Median frame rate during playback with camera following and ≤ 50 visible
+entities ≥ 55 fps desktop at 1920×1080, ≥ 30 fps tablet at native CSS resolution
+|Frames-per-second sampling during a fixed 30-second playback
+
+|FR2
+|95th-percentile frame time ≤ 33 ms desktop, ≤ 66 ms tablet during interaction
+and playback
+|Timeline frame statistics
+
+|FR3
+|No stall longer than 500 ms desktop or 1000 ms tablet during playback or
+scrubbing
+|Timeline longest task during playback and scrubbing
+
+|FR4
+|Camera fly-to a selected event completes in ≤ 3.0 s with no single visible
+freeze longer than 300 ms
+|Timeline around a recorded fly-to
+
+|MM1
+|Steady-state JS heap after a 10-minute loop ≤ 400 MB desktop, ≤ 300 MB tablet
+|Desktop: Chrome DevTools Memory panel, JS heap read after a forced collection.
+Tablet: Safari Web Inspector on the attached iPad, Timelines → Memory timeline
+(enabled in the Timelines tab) read at the same checkpoint, or the live JS heap
+size reported by a JavaScript Allocations snapshot.
+`performance.measureUserAgentSpecificMemory` is unavailable on Safari/iPadOS and
+is not used
+
+|MM2a (desktop)
+|Heap growth over three consecutive loop repetitions ≤ 10% after forced garbage
+collection, demonstrating disposal of renderer resources
+|Chrome or Firefox heap snapshot before and after the repetitions, with garbage
+collection forced through the browser's own collection control (for example
+Chrome DevTools "Collect garbage"); record that the control was used
+
+|MM2b (iPad, physical)
+|Live JS heap at the identical checkpoint state after the third repetition is
+≤ 10% above the first repetition's value, with no monotonic growth across the
+three checkpoints, and per-repetition transferred bytes differ by ≤ 10%. A
+single transient spike is allowed if it is recorded
+|Safari Web Inspector on a Mac attached to the iPad, JavaScript Allocations
+timeline: at each checkpoint (same camera, selection closed, back at the globe)
+take a heap snapshot with the timeline's "Take snapshot" control or
+`console.takeHeapSnapshot("<label>")`, then compare the first and third
+snapshots with the timeline's Compare view. A snapshot performs a full garbage
+collection before recording live objects, so this is the iPad equivalent of the
+desktop forced-collection checkpoint rather than a raw reading. If the installed
+Safari/Web Inspector combination cannot produce or compare snapshots for the
+attached iPad, record that as a limitation and fall back to the per-repetition
+transferred bytes plus the MM3 lifecycle checks
+
+|MM3
+|No WebGL context loss and no tab reload during the 10-minute tablet loop
+|Observed session plus the Web Inspector console
+
+|IL1
+|Selection to visible details panel ≤ 200 ms with local data, ≤ 600 ms when the
+content requires a fetch
+|Interaction trace
+
+|IL2
+|Search keystroke to updated results ≤ 150 ms locally, ≤ 400 ms with a server
+round trip
+|Interaction trace
+
+|IL3
+|Timeline scrub to updated playhead and map state within one animation frame
+(≤ 50 ms)
+|Interaction trace
+
+|IL4
+|Layer or filter toggle to visible change ≤ 300 ms
+|Interaction trace
+
+|IL5
+|"Next in story" navigation to the new selection with camera move ≤ 1.5 s
+|Interaction trace
+|===
+
+Additional acceptance rules for AC5 `[recommendation]`:
+
+* Record results per device with the exact browser and OS versions; a median
+  that passes while the worst run fails FR1 or FR3 is a recorded limitation, not
+  a pass.
+* Desktop viewport or touch emulation may be used for phone-layout checks only;
+  it is never tablet evidence.
+* Report remaining limitations explicitly, including any provider quota reached
+  during measurement and any cache-eviction or context-loss event.
+* If a threshold is not met, the fix is a change to the implementation or an
+  explicitly recorded threshold decision, in that order.
+
+== Gate 1 decisions required from the owner
+
+1. Accept the delivery approach and authorize the account and spend: the
+   recommended Render configuration (about $13/month `[estimate]`) or the
+   Fly.io fallback; no account creation or purchase happens before this
+   authorization.
+2. Confirm whether the public PoC is non-commercial for provider-license
+   purposes. This decides MapTiler free versus Flex, Cesium ion Community
+   versus Commercial, and EOX's 2018–2025 layers. Commercially usable options
+   exist without paying (NASA GIBS, Esri's free-tier basemaps, EOX's 2016 layer
+   subject to EOX confirmation, and the AWS terrain tiles under their
+   per-source terms), so the choice is not "pay or nothing"
+   (<<commercial-use-status>>).
+3. Choose the imagery and terrain provider path for the public release from
+   <<public-release-provider-decision>>: OSM-styled or satellite-styled, whether
+   satellite imagery with local detail and Cesium World Terrain are required,
+   and whether OSM's own tile service is confined to development checks.
+4. Decide the domain question: use the platform hostname for the PoC, or
+   approve a domain purchase and name the DNS provider. Either way, name the
+   canonical host.
+5. Name the physical test hardware: the iPad model and iPadOS version, the
+   desktop/laptop used for measurement, and the phone models used for
+   responsive checks.
+6. Approve or amend the <<Performance budget>> thresholds and freeze them
+   before the comparative measurements.
+7. Approve the error-visibility mechanism (recommended: Sentry's free
+   Developer plan) or accept platform logs alone.
+8. Confirm the acceptable monthly cost ceiling, including the map-provider
+   range of $0 to about $179/month `[estimate]` depending on decision 3.
+9. Approve or defer the release-preparation gaps listed in
+   <<Release-preparation gaps this evaluation flags (not Wave 1C work)>> as
+   Wave 2 work.
+
+== Verification performed for this document
+
+* Rendered the document with Asciidoctor.js 4.1.0 (Asciidoctor 2.0.26) at
+  `--failure-level=WARN` and inspected the output for errors, unresolved
+  attributes, and stray block anchors.
+* Checked that every relative `link:` target in this document resolves to an
+  existing file in the repository.
+* Verified repository facts against `origin/main` at commit `8134297` with a
+  clean working tree apart from this new file, including the scaffold's default
+  `referrer-policy: strict-origin-when-cross-origin` in
+  `deps/phoenix/lib/phoenix/controller.ex`.
+* Measured the CesiumJS artifact sizes from the published `cesium` 1.145.0
+  package rather than from documentation.
+* Re-verified the license and policy claims for this revision from the primary
+  sources rather than from summaries: the OSM tile usage policy text, the
+  Tilezen/joerd `LICENSE.md` and `attribution.md` per-source licenses, the
+  year-specific EOX license page, NASA's data-use guidance, Esri's licensing and
+  attribution page, MDN's `measureUserAgentSpecificMemory` page, and the WebKit
+  and Apple documentation for Web Inspector memory timelines, JavaScript
+  Allocations snapshots, and inspecting an iPad from a connected Mac.
+* No build, test, or deployment command was run, and no external state was
+  changed. Provider facts are as of the access date 2026-09-23 and must be
+  re-checked before any purchase.
+
+== Sources
+
+All URLs accessed 2026-09-23.
+
+[cols="1,2",options="header"]
+|===
+|Topic |Source
+
+|CesiumJS engine license and package
+|https://registry.npmjs.org/cesium ; https://cesium.com/platform/cesiumjs/
+
+|Cesium ion plans, quotas, and non-commercial limits
+|https://cesium.com/platform/cesium-ion/pricing
+
+|Cesium ion terms (offline use, caching, sublicensing)
+|https://cesium.com/legal/terms-of-service
+
+|CesiumJS with Vite: static asset directories and base URL
+|https://cesium.com/blog/2024/02/13/configuring-vite-or-webpack-for-cesiumjs ;
+https://github.com/CesiumGS/cesium-vite-example
+
+|Cesium rendering performance (`requestRenderMode`)
+|https://cesium.com/blog/2018/01/24/cesium-scene-rendering-performance
+
+|Fly.io pricing (machines, certificates, egress, unmanaged Postgres)
+|https://fly.io/docs/about/pricing/
+
+|Fly.io Managed Postgres plans
+|https://fly.io/docs/mpg/
+
+|Fly.io health checks
+|https://fly.io/docs/reference/health-checks
+
+|Fly.io rollback guide
+|https://fly.io/docs/blueprints/rollback-guide
+
+|Fly.io custom domains and DNS records
+|https://fly.io/docs/networking/custom-domain
+
+|Fly.io logging and log search retention
+|https://fly.io/docs/monitoring/logging-overview/ ;
+https://fly.io/docs/metrics-and-logs/exporting-logs
+
+|Render pricing (web services, Postgres, bandwidth, rollback, logs)
+|https://render.com/pricing
+
+|Render free-tier limits (spin-down, 750 hours, Postgres expiry)
+|https://render.com/docs/free
+
+|Render health checks
+|https://render.com/docs/health-checks
+
+|Render custom domains and DNS
+|https://render.com/docs/custom-domains
+
+|Render outbound bandwidth
+|https://render.com/docs/outbound-bandwidth
+
+|Render regions
+|https://render.com/docs/regions
+
+|Gigalixir tiers, free-tier limits, and database limits
+|https://docs.gigalixir.com/tiers-pricing ;
+https://docs.gigalixir.com/database/free-tier
+
+|Gigalixir rollback
+|https://docs.gigalixir.com/deploy
+
+|Railway plans, usage, and image retention
+|https://docs.railway.com/pricing/plans
+
+|Heroku dyno and Postgres pricing
+|https://www.heroku.com/pricing ;
+https://www.heroku.com/blog/new-low-cost-plans/
+
+|Heroku releases and rollback
+|https://www.heroku.com/blog/releases-and-rollbacks/
+
+|Sentry plans and Elixir SDK
+|https://sentry.io/pricing/ ; https://hex.pm/api/packages/sentry
+
+|OpenStreetMap tile usage policy
+|https://operations.osmfoundation.org/policies/tiles
+
+|OpenStreetMap data licence (ODbL)
+|https://www.openstreetmap.org/copyright ; https://opendatacommons.org/licenses/odbl/
+
+|Tilezen/joerd terrain tile licences and per-source attribution
+|https://github.com/tilezen/joerd/blob/master/docs/LICENSE.md ;
+https://github.com/tilezen/joerd/blob/master/docs/attribution.md ;
+https://github.com/tilezen/joerd/blob/master/docs/data-sources.md
+
+|NASA Earthdata data use, citation, and commercial-use guidance
+|https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance ;
+https://www.earthdata.nasa.gov/news/feature-articles/nasa-earth-science-data-yours-use-fully-without-restrictions
+
+|Esri licensing, commercial deployment, and attribution
+|https://location.arcgis.com/help/licensing-and-attribution ;
+https://location.arcgis.com/help ;
+https://developers.arcgis.com/rest/static-basemap-tiles/
+
+|Memory API availability and requirements
+|https://developer.mozilla.org/en-US/docs/Web/API/Performance/measureUserAgentSpecificMemory
+
+|Safari Web Inspector memory tooling and iPad inspection
+|https://webkit.org/blog/6425/memory-debugging-with-web-inspector ;
+https://webkit.org/web-inspector/timelines-tab ;
+https://developer.apple.com/documentation/safari-developer-tools/inspecting-ios
+
+|MapTiler Cloud pricing, free-plan terms, and terrain
+|https://www.maptiler.com/cloud/pricing/ ; https://www.maptiler.com/terms/cloud/ ;
+https://docs.maptiler.com/cesium/ ;
+https://docs.maptiler.com/guides/map-tiling-hosting/data-hosting/rgb-terrain-by-maptiler
+
+|Stadia Maps free tier and commercial-use definition
+|https://stadiamaps.com/faqs ; https://stadiamaps.com/pricing
+
+|NASA GIBS access and acknowledgement
+|https://www.earthdata.nasa.gov/engage/open-data-services-software/earthdata-developer-portal/gibs-api ;
+https://nasa-gibs.github.io/gibs-api-docs/access-basics
+
+|EOX Sentinel-2 cloudless licenses and attribution
+|https://cloudless.eox.at/license-non-commercial ;
+https://cloudless.eox.at/documentation/license ; https://eox.at/2025/03/sentinel-2-cloudless-2024
+
+|Esri ArcGIS Location Platform basemap tiles and pricing
+|https://developers.arcgis.com/rest/static-basemap-tiles/ ;
+https://location.arcgis.com/pricing
+
+|AWS Open Data terrain tiles
+|https://registry.opendata.aws/terrain-tiles
+
+|WebGL2 browser support
+|https://caniuse.com/webgl2
+|===

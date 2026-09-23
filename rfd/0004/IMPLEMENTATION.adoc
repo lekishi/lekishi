@@ -10,10 +10,10 @@ occurs before the authorization item below.
 
 == Wave 1 — Parallel foundations
 
-- [ ] A. Complete RFD 2's bounded source-feasibility pass over up to three Tang missions and return findings for owner review (RFD 2 Phase 0).
-- [ ] B. Define the RFD 2 data, time, and geometry contracts the first chapter depends on (RFD 2 Phase 0).
-- [ ] C. Establish the approved Phoenix + Svelte/TypeScript + Vite + Cesium production-build foundation (RFD 3 Phase 0).
-- [ ] D. Evaluate hosting, map/imagery/terrain providers, device targets, performance limits, and delivery options; record rights, costs, payloads, and measured behavior (RFD 3 Phase 0).
+- [x] A. Complete RFD 2's bounded source-feasibility pass over up to three Tang missions and return findings for owner review (RFD 2 Phase 0). See link:../0002/TANG_MISSION_FEASIBILITY.adoc[the Wave 1A feasibility report].
+- [x] B. Define the RFD 2 data, time, and geometry contracts the first chapter depends on (RFD 2 Phase 0). See link:../0002/CONTRACTS.adoc[the Wave 1B contract record] and the versioned schemas, examples, and adversarial vectors under `priv/historical/v0`.
+- [x] C. Establish the approved Phoenix + Svelte/TypeScript + Vite + Cesium production-build foundation (RFD 3 Phase 0). The root link:../../README.md[README] records the ownership and build boundaries; production and development browser suites verify one workspace mount, lifecycle disposal, digested Vite/Cesium assets, responsive layouts, and the renderer-independent state boundary.
+- [x] D. Evaluate hosting, map/imagery/terrain providers, device targets, performance limits, and delivery options; record rights, costs, payloads, and measured behavior (RFD 3 Phase 0). See link:../0003/DELIVERY_EVALUATION.adoc[the Wave 1D delivery evaluation]; device performance measurements remain dependent on Wave 2 and release evidence, as the report states.
 
 == Gate 1 — Foundations frozen
 

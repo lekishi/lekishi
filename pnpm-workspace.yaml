@@ -1,0 +1,7 @@
+# pnpm 12 gates a newly published package until it has been available for a
+# while. The two packages below are pinned in package.json and were newer than
+# that window when the lockfile was created, so they are excluded explicitly;
+# everything else resolves normally. Keep this list in step with pnpm-lock.yaml.
+minimumReleaseAgeExclude:
+  - "@sveltejs/vite-plugin-svelte@7.3.1"
+  - prettier@3.9.9

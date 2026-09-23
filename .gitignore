@@ -1,59 +1,28 @@
-# The directory Mix will write compiled artifacts to.
-/_build/
+# Dependencies.
+/node_modules/
 
-# If you run "mix test --cover", coverage assets end up here.
-/cover/
+# Generated build output. `pnpm build` writes the deployable artifact to
+# `build/`; `.svelte-kit/` is SvelteKit's generated types and intermediate
+# output. Neither is committed, and neither is required for a clean build.
+/build/
+/.svelte-kit/
 
-# The directory Mix downloads your dependencies sources to.
-/deps/
+# The Cesium runtime (Workers, Assets, Widgets, ThirdParty) is copied out of the
+# npm package by `pnpm sync:cesium` before a dev server or build starts, and
+# SvelteKit copies it into `build/`. It is generated, not source.
+/static/cesium/
 
-# Where 3rd-party dependencies like ExDoc output generated docs.
-/doc/
-
-# Ignore .fetch files in case you like to edit your project deps locally.
-/.fetch
-
-# If the VM crashes, it generates a dump, let's ignore it too.
-erl_crash.dump
-
-# Also ignore archive artifacts (built via "mix archive.build").
-*.ez
-
-# Temporary files, for example, from tests.
-/tmp/
-
-# Ignore package tarball (built via "mix hex.build").
-lecinote-*.tar
-
-# Ignore assets that are produced by build tools.
-/priv/static/assets/
-/priv/static/cesium/
-/priv/static/uploads/
-
-# Ignore digested assets cache.
-/priv/static/cache_manifest.json
-
-# Digested copies and their gzip variants are produced by "mix phx.digest"
-# during a release build ("make release"); the un-digested files are the sources.
-/priv/static/**/*.gz
-/priv/static/**/*-????????????????????????????????.*
-
-# In case you use Node.js/npm, you want to ignore these.
-npm-debug.log
-/assets/node_modules/
-
-# Frontend build and browser-test output.
-/assets/test-results/
-/assets/playwright-report/
+# Browser-test output.
+/test-results/
+/playwright-report/
 
 # Local review artifacts (screenshots, recordings) are never committed.
 /.amp/in/
 
 /.direnv/
-/.dev/
 /.nix/
 /.amp/portals/
 /.jj-quarantine/
 /dbg/
-
 .env
+npm-debug.log

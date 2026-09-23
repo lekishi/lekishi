@@ -22,61 +22,30 @@
         };
       in
       {
+        # The site is a statically built SvelteKit project: Node and pnpm are the
+        # whole toolchain. Node matches the version CI runs (`NODE_VERSION: 24`).
         devShells.default = pkgs.mkShell {
-          packages =
-            (with pkgs; [
-              pnpm
+          packages = with pkgs; [
+            nodejs_24
+            pnpm
 
-              # Elixir
-              beam.packages.erlang_28.elixir_1_20
-              beam.packages.erlang_28.rebar3
-              beam28Packages.erlang
+            # Version control and repository hygiene.
+            git
+            jujutsu
 
-              # LSPs
-              beamPackages.expert
-              erlang-language-platform
-              yaml-language-server
-              vscode-json-languageserver
+            # Shell and data checks used by the repository scripts.
+            shellcheck
+            shfmt
+            yamllint
 
-              # Website
-              hugo
-              pagefind
-              go
-
-              # Tools
-              watchman
-              inotify-tools
-              docker-compose
-              yamllint
-              shfmt
-              shellcheck
-              git
-              git-cliff
-              jujutsu
-              postgresql_18
-            ])
-            # These packages are Linux-only in nixpkgs. Keeping Chromium and
-            # ChromeDriver from the same revision prevents Wallaby's browser
-            # protocol from drifting when a host browser auto-updates.
-            ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isLinux [
-              pkgs.watchexec
-              pkgs.chromium
-              pkgs.chromedriver
-            ];
+            # Editors and language servers.
+            vscode-json-languageserver
+            yaml-language-server
+          ];
 
           shellHook = ''
-            export MIX_HOME="$PWD/.nix/mix"
-            export HEX_HOME="$PWD/.nix/hex"
-            export REBAR_CACHE_DIR="$PWD/.nix/rebar3"
-            export ERL_AFLAGS="-kernel shell_history enabled"
-            ${pkgs.lib.optionalString pkgs.stdenv.hostPlatform.isLinux ''
-              export CHROME_BIN="${pkgs.chromium}/bin/chromium"
-              export CHROMEDRIVER_BIN="${pkgs.chromedriver}/bin/chromedriver"
-            ''}
-
-            mkdir -p "$MIX_HOME" "$HEX_HOME" "$REBAR_CACHE_DIR"
+            echo "Lekishi: pnpm dev (5173) · pnpm build · pnpm verify"
           '';
-
         };
       }
     );

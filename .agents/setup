@@ -47,31 +47,13 @@ fi
 step "Realizing the pinned development toolchain"
 "$nix_bin" develop "$repo_root" --command true
 
-step "Installing Phoenix dependencies and preparing the database"
-# The single-quoted script is intentionally expanded by the child shell.
-# shellcheck disable=SC2016
-"$nix_bin" develop "$repo_root" --command bash -c '
-  set -euo pipefail
+step "Installing the frontend workspace from the lockfile"
+"$nix_bin" develop "$repo_root" --command pnpm install --frozen-lockfile
 
-  if [[ "$(mix archive)" != *hex-* ]]; then
-    mix local.hex --force
-  fi
+step "Copying the Cesium runtime into static/cesium"
+"$nix_bin" develop "$repo_root" --command pnpm sync:cesium
 
-  started_postgres=0
-  stop_postgres() {
-    if [[ "$started_postgres" == 1 ]]; then
-      make down
-    fi
-  }
-  trap stop_postgres EXIT
-
-  if ! pg_isready --host="$PWD/.dev/postgres/socket" --port=5432 \
-    --username=postgres >/dev/null 2>&1; then
-    make up
-    started_postgres=1
-  fi
-
-  mix setup
-'
+step "Installing the browser the end-to-end checks use"
+"$nix_bin" develop "$repo_root" --command pnpm exec playwright install --with-deps chromium
 
 step "Orb setup complete"

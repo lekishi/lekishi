@@ -27,7 +27,7 @@ below when updating project-specific guidance.
 ## Project guidelines
 
 - Use `mix precommit` alias when you are done with all changes and fix any pending issues
-- Use Conventional Commits for pull request titles (`type(optional-scope): description`), for example `feat(atlas): add event selection` or `docs(rfd): document historical time semantics`.
+- Use Conventional Commits for commit messages and pull request titles (`type(optional-scope): description`), for example `feat(atlas): add event selection` or `docs(rfd): document historical time semantics`.
 - Use the already included and available `:req` (`Req`) library for HTTP requests, **avoid** `:httpoison`, `:tesla`, and `:httpc`. Req is included by default and is the preferred HTTP client for Phoenix apps
 - Add intent-focused comments around domain rules, imports, authorization, normalization, persistence invariants, and non-obvious UI state. Explain why the choice exists and what must not regress; avoid restating the next line of code.
 

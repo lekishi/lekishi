@@ -1,7 +1,6 @@
 services:
   postgres:
     command: exec make postgres
-    port: 5432
     platforms: [linux]
   web:
     command: >-

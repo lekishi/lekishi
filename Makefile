@@ -9,7 +9,7 @@ POSTGRES_DATA := $(POSTGRES_DIR)/data
 POSTGRES_SOCKET := $(POSTGRES_DIR)/socket
 POSTGRES_LOG := $(POSTGRES_DIR)/postgres.log
 
-.PHONY: dev up down migration postgres init-postgres
+.PHONY: dev up down migration postgres init-postgres psql
 
 dev:
 	mix phx.server
@@ -19,7 +19,7 @@ up: init-postgres
 		echo "PostgreSQL is already running"; \
 	else \
 		pg_ctl --pgdata="$(POSTGRES_DATA)" --log="$(POSTGRES_LOG)" \
-			--options='-h 127.0.0.1 -k "$(POSTGRES_SOCKET)" -p $(POSTGRES_PORT)' \
+			--options='-h "" -k "$(POSTGRES_SOCKET)" -p $(POSTGRES_PORT)' \
 			--wait start; \
 	fi
 
@@ -43,5 +43,9 @@ init-postgres:
 	fi
 
 postgres: init-postgres
-	exec postgres -D "$(POSTGRES_DATA)" -h 127.0.0.1 -k "$(POSTGRES_SOCKET)" \
+	exec postgres -D "$(POSTGRES_DATA)" -h "" -k "$(POSTGRES_SOCKET)" \
 		-p "$${PORT:-$(POSTGRES_PORT)}"
+
+psql: up
+	psql --host="$(POSTGRES_SOCKET)" --port="$(POSTGRES_PORT)" \
+		--username=postgres --dbname=postgres

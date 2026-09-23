@@ -1,0 +1,210 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "test_vectors",
+  "area": "ordering",
+  "description": "Partial-ordering vectors: a declared order is only consistent when the supports establish it, open-ended bounds cannot be ordered by assumption, undated records are never ordered, and ordering graphs must stay acyclic. Time objects are written compactly; each is an inclusive year-granularity support in the Julian calendar.",
+  "vectors": [
+    {
+      "id": "ordering/before-supported-by-disjoint-ranges",
+      "why": "Disjoint supports establish the order, so the declared before relation is consistent.",
+      "op": "ordering_check",
+      "input": {
+        "a": {"source_expression": "730 to 739 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 730, "era": "ce"}, "end": {"year": 739, "era": "ce"}}},
+        "b": {"source_expression": "740 to 750 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 740, "era": "ce"}, "end": {"year": 750, "era": "ce"}}},
+        "declared": "before"
+      },
+      "expect": {"consistent": true}
+    },
+    {
+      "id": "ordering/before-contradicted-by-overlap",
+      "why": "Overlapping supports do not establish an order, so an editor may not declare one.",
+      "op": "ordering_check",
+      "input": {
+        "a": {"source_expression": "735 to 745 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 735, "era": "ce"}, "end": {"year": 745, "era": "ce"}}},
+        "b": {"source_expression": "740 to 750 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 740, "era": "ce"}, "end": {"year": 750, "era": "ce"}}},
+        "declared": "before"
+      },
+      "expect": {"consistent": false, "error": "declared_order_not_supported"}
+    },
+    {
+      "id": "ordering/concurrent-supported-by-overlap",
+      "why": "Overlapping supports do establish that the two could be contemporary, which is weaker than an order.",
+      "op": "ordering_check",
+      "input": {
+        "a": {"source_expression": "735 to 745 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 735, "era": "ce"}, "end": {"year": 745, "era": "ce"}}},
+        "b": {"source_expression": "740 to 750 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 740, "era": "ce"}, "end": {"year": 750, "era": "ce"}}},
+        "declared": "concurrent"
+      },
+      "expect": {"consistent": true}
+    },
+    {
+      "id": "ordering/concurrent-contradicted-by-disjoint-ranges",
+      "why": "Disjoint supports cannot be concurrent.",
+      "op": "ordering_check",
+      "input": {
+        "a": {"source_expression": "700 to 720 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 700, "era": "ce"}, "end": {"year": 720, "era": "ce"}}},
+        "b": {"source_expression": "740 to 750 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 740, "era": "ce"}, "end": {"year": 750, "era": "ce"}}},
+        "declared": "concurrent"
+      },
+      "expect": {"consistent": false, "error": "declared_order_not_supported"}
+    },
+    {
+      "id": "ordering/after-is-the-mirror-of-before",
+      "why": "A declared after relation is checked against the reversed supports, not accepted on trust.",
+      "op": "ordering_check",
+      "input": {
+        "a": {"source_expression": "740 to 750 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 740, "era": "ce"}, "end": {"year": 750, "era": "ce"}}},
+        "b": {"source_expression": "730 to 739 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 730, "era": "ce"}, "end": {"year": 739, "era": "ce"}}},
+        "declared": "after"
+      },
+      "expect": {"consistent": true}
+    },
+    {
+      "id": "ordering/undetermined-is-always-consistent",
+      "why": "Recording that the evidence was examined and does not order two events is always acceptable.",
+      "op": "ordering_check",
+      "input": {
+        "a": {"source_expression": "735 to 745 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 735, "era": "ce"}, "end": {"year": 745, "era": "ce"}}},
+        "b": {"source_expression": "740 to 750 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 740, "era": "ce"}, "end": {"year": 750, "era": "ce"}}},
+        "declared": "undetermined"
+      },
+      "expect": {"consistent": true}
+    },
+    {
+      "id": "ordering/undated-record-cannot-be-ordered",
+      "why": "A connection to a dated event does not date an undated record, so no order may be declared.",
+      "op": "ordering_check",
+      "input": {
+        "a": null,
+        "b": {"source_expression": "740 to 750 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 740, "era": "ce"}, "end": {"year": 750, "era": "ce"}}},
+        "declared": "before"
+      },
+      "expect": {"consistent": false, "error": "order_with_undated_record"}
+    },
+    {
+      "id": "ordering/undated-record-undetermined-is-allowed",
+      "why": "An undated record may record an undetermined relation explicitly.",
+      "op": "ordering_check",
+      "input": {
+        "a": null,
+        "b": {"source_expression": "740 to 750 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 740, "era": "ce"}, "end": {"year": 750, "era": "ce"}}},
+        "declared": "undetermined"
+      },
+      "expect": {"consistent": true}
+    },
+    {
+      "id": "ordering/open-ended-lower-bound-cannot-be-ordered-before",
+      "why": "An occurrence that could continue past the other interval cannot be declared before it.",
+      "op": "ordering_check",
+      "input": {
+        "a": {"source_expression": "after 700 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "lower_only", "boundary": "inclusive", "start": {"year": 700, "era": "ce"}, "end": null}},
+        "b": {"source_expression": "740 to 750 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 740, "era": "ce"}, "end": {"year": 750, "era": "ce"}}},
+        "declared": "before"
+      },
+      "expect": {"consistent": false, "error": "declared_order_not_supported"}
+    },
+    {
+      "id": "ordering/open-ended-lower-bound-may-be-concurrent",
+      "why": "An open-ended occurrence that starts before another interval can overlap it.",
+      "op": "ordering_check",
+      "input": {
+        "a": {"source_expression": "after 700 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "lower_only", "boundary": "inclusive", "start": {"year": 700, "era": "ce"}, "end": null}},
+        "b": {"source_expression": "740 to 750 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 740, "era": "ce"}, "end": {"year": 750, "era": "ce"}}},
+        "declared": "concurrent"
+      },
+      "expect": {"consistent": true}
+    },
+    {
+      "id": "ordering/open-ended-upper-bound-may-be-ordered-before",
+      "why": "A known upper bound before the other interval's start does establish the order.",
+      "op": "ordering_check",
+      "input": {
+        "a": {"source_expression": "before 740 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "upper_only", "boundary": "inclusive", "start": null, "end": {"year": 739, "era": "ce"}}},
+        "b": {"source_expression": "740 to 750 CE", "calendar": "julian", "precision": "year", "mode": "occurrence_window", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 740, "era": "ce"}, "end": {"year": 750, "era": "ce"}}},
+        "declared": "before"
+      },
+      "expect": {"consistent": true}
+    },
+    {
+      "id": "ordering/graph-chain-is-acyclic",
+      "why": "A chain of before relations is a valid partial order.",
+      "op": "ordering_graph",
+      "input": {
+        "edges": [
+          {"from": "lks:event:vector-a", "to": "lks:event:vector-b", "relation": "before"},
+          {"from": "lks:event:vector-b", "to": "lks:event:vector-c", "relation": "before"}
+        ]
+      },
+      "expect": {"has_cycle": false}
+    },
+    {
+      "id": "ordering/graph-cycle-is-rejected",
+      "why": "A cycle would claim each event precedes the previous one.",
+      "op": "ordering_graph",
+      "input": {
+        "edges": [
+          {"from": "lks:event:vector-a", "to": "lks:event:vector-b", "relation": "before"},
+          {"from": "lks:event:vector-b", "to": "lks:event:vector-c", "relation": "before"},
+          {"from": "lks:event:vector-c", "to": "lks:event:vector-a", "relation": "before"}
+        ]
+      },
+      "expect": {"has_cycle": true}
+    },
+    {
+      "id": "ordering/graph-self-loop-is-a-cycle",
+      "why": "An event cannot precede itself.",
+      "op": "ordering_graph",
+      "input": {
+        "edges": [{"from": "lks:event:vector-a", "to": "lks:event:vector-a", "relation": "before"}]
+      },
+      "expect": {"has_cycle": true}
+    },
+    {
+      "id": "ordering/graph-after-edges-normalize-to-directed-edges",
+      "why": "An after relation is the same edge reversed, so a mixed cycle is still a cycle.",
+      "op": "ordering_graph",
+      "input": {
+        "edges": [
+          {"from": "lks:event:vector-a", "to": "lks:event:vector-b", "relation": "after"},
+          {"from": "lks:event:vector-b", "to": "lks:event:vector-c", "relation": "after"},
+          {"from": "lks:event:vector-c", "to": "lks:event:vector-a", "relation": "after"}
+        ]
+      },
+      "expect": {"has_cycle": true}
+    },
+    {
+      "id": "ordering/graph-undetermined-edges-do-not-order",
+      "why": "Concurrent and undetermined relations are not precedence edges.",
+      "op": "ordering_graph",
+      "input": {
+        "edges": [
+          {"from": "lks:event:vector-a", "to": "lks:event:vector-b", "relation": "undetermined"},
+          {"from": "lks:event:vector-b", "to": "lks:event:vector-c", "relation": "concurrent"}
+        ]
+      },
+      "expect": {"has_cycle": false}
+    },
+    {
+      "id": "ordering/day-precision-same-year-cannot-be-declared-before",
+      "why": "Ordering is year-granular, so two day-precision records inside one year cannot be declared before each other even when one date is earlier.",
+      "op": "ordering_check",
+      "input": {
+        "a": {"source_expression": "3 March 740 CE", "calendar": "julian", "precision": "day", "mode": "instant", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 740, "era": "ce", "month": 3, "day": 3}, "end": {"year": 740, "era": "ce", "month": 3, "day": 3}}},
+        "b": {"source_expression": "4 March 740 CE", "calendar": "julian", "precision": "day", "mode": "instant", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 740, "era": "ce", "month": 3, "day": 4}, "end": {"year": 740, "era": "ce", "month": 3, "day": 4}}},
+        "declared": "before"
+      },
+      "expect": {"consistent": false, "error": "declared_order_not_supported"}
+    },
+    {
+      "id": "ordering/day-precision-adjacent-years-can-be-declared-before",
+      "why": "A year boundary still establishes the order, so the granularity rule does not block ordering dated records outright.",
+      "op": "ordering_check",
+      "input": {
+        "a": {"source_expression": "31 December 740 CE", "calendar": "julian", "precision": "day", "mode": "instant", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 740, "era": "ce", "month": 12, "day": 31}, "end": {"year": 740, "era": "ce", "month": 12, "day": 31}}},
+        "b": {"source_expression": "1 January 741 CE", "calendar": "julian", "precision": "day", "mode": "instant", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 741, "era": "ce", "month": 1, "day": 1}, "end": {"year": 741, "era": "ce", "month": 1, "day": 1}}},
+        "declared": "before"
+      },
+      "expect": {"consistent": true}
+    }
+  ]
+}

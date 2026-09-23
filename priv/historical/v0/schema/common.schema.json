@@ -1,0 +1,303 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lekishi/lekishi/schema/v0/common.schema.json",
+  "title": "Lekishi historical contract v0: shared definitions",
+  "description": "Shared definitions for the Lekishi historical interchange contract v0. Vocabulary lists are deliberately small and chapter-oriented; they are not a universal historical ontology. Unknown fields are rejected so presentation, renderer, and invented-precision state cannot enter the historical source of truth. Extending a vocabulary requires a new contract version.",
+  "$defs": {
+    "contract": {
+      "const": "lekishi-historical-contract/v0"
+    },
+    "record_id": {
+      "type": "string",
+      "pattern": "^lks:(place|actor|event|relationship|story):[a-z0-9][a-z0-9-]{0,62}$"
+    },
+    "source_id": {
+      "type": "string",
+      "pattern": "^lks:source:[a-z0-9][a-z0-9-]{0,62}$"
+    },
+    "claim_id": {
+      "type": "string",
+      "pattern": "^lks:claim:[a-z0-9][a-z0-9-]{0,62}$"
+    },
+    "revision_id": {
+      "type": "string",
+      "pattern": "^lks:rev:[a-z0-9][a-z0-9-]{0,62}$"
+    },
+    "set_id": {
+      "type": "string",
+      "pattern": "^lks:set:[a-z0-9][a-z0-9-]{0,62}$"
+    },
+    "hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "timestamp": {
+      "description": "Real-world editorial metadata timestamp in UTC. Never used as a historical date.",
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+    },
+    "person": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {"type": "string", "minLength": 1, "maxLength": 200},
+        "role": {"type": "string", "maxLength": 200}
+      }
+    },
+    "era_year": {
+      "description": "Civil era year with no year zero. Year 1 BCE precedes year 1 CE. An astronomical ordinal is derived for comparison only and is never stored or displayed as a historical year.",
+      "type": "object",
+      "required": ["year", "era"],
+      "additionalProperties": false,
+      "properties": {
+        "year": {"type": "integer"},
+        "era": {"enum": ["bce", "ce"]},
+        "month": {"type": "integer", "minimum": 1, "maximum": 12},
+        "day": {"type": "integer", "minimum": 1, "maximum": 31},
+        "endpoint_certainty": {"enum": ["exact", "approximate", "bounded"]}
+      }
+    },
+    "interval": {
+      "description": "Normalized support interval. Bounds always enclose every value the evidence permits; boundary is inclusive on every closed side. A null side carries no supported bound and must be declared through bounds.",
+      "type": "object",
+      "required": ["bounds", "boundary", "start", "end"],
+      "additionalProperties": false,
+      "properties": {
+        "bounds": {"enum": ["two_sided", "lower_only", "upper_only"]},
+        "boundary": {"enum": ["inclusive", "half_open_end", "exclusive_end"]},
+        "start": {"anyOf": [{"$ref": "#/$defs/era_year"}, {"type": "null"}]},
+        "end": {"anyOf": [{"$ref": "#/$defs/era_year"}, {"type": "null"}]}
+      }
+    },
+    "ordering": {
+      "description": "Partial ordering relative to another record, usually an event. undetermined records that the evidence was examined and does not establish an order; it is not the absence of an assertion.",
+      "type": "object",
+      "required": ["relation", "record_id"],
+      "additionalProperties": false,
+      "properties": {
+        "relation": {"enum": ["before", "after", "concurrent", "undetermined"]},
+        "record_id": {"$ref": "#/$defs/record_id"},
+        "claim_id": {"$ref": "#/$defs/claim_id"},
+        "note": {"type": "string", "maxLength": 500}
+      }
+    },
+    "time": {
+      "description": "Source date expression plus a normalized interval. mode separates an uncertain occurrence from a duration. time may be null when no date information exists at all.",
+      "type": ["object", "null"],
+      "required": ["source_expression", "calendar", "precision", "mode"],
+      "additionalProperties": false,
+      "properties": {
+        "source_expression": {"type": ["string", "null"], "maxLength": 500},
+        "calendar": {"enum": ["julian", "gregorian", "islamic", "chinese_lunisolar", "regnal", "unknown"]},
+        "precision": {"enum": ["day", "month", "year", "decade", "century", "unspecified"]},
+        "mode": {"enum": ["instant", "occurrence_window", "duration", "unknown"]},
+        "interval": {"anyOf": [{"$ref": "#/$defs/interval"}, {"type": "null"}]},
+        "ordering": {"type": "array", "maxItems": 20, "items": {"$ref": "#/$defs/ordering"}}
+      }
+    },
+    "locator": {
+      "type": "object",
+      "required": ["kind", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "page", "page_range", "chapter", "section", "entry", "verse", "line",
+            "folio", "plate", "map", "inscription", "catalogue_number",
+            "dataset_row", "url_fragment", "other"
+          ]
+        },
+        "value": {"type": "string", "minLength": 1, "maxLength": 300}
+      }
+    },
+    "citation": {
+      "type": "object",
+      "required": ["source_id", "locator"],
+      "additionalProperties": false,
+      "properties": {
+        "source_id": {"$ref": "#/$defs/source_id"},
+        "locator": {"$ref": "#/$defs/locator"},
+        "quoted_text": {"type": ["string", "null"], "maxLength": 600}
+      }
+    },
+    "claim": {
+      "description": "An assertion with its evidentiary basis. attested records what a source reports; cited_interpretation is an interpretation advanced in cited scholarship and must name who advances it. asserts is a JSON Pointer into this revision's content (empty string for the whole content) naming the field the claim supports, so one source need not support every field.",
+      "type": "object",
+      "required": ["claim_id", "statement", "asserts", "basis", "role", "citations"],
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": {"$ref": "#/$defs/claim_id"},
+        "statement": {"type": "string", "minLength": 1, "maxLength": 2000},
+        "asserts": {"type": "string", "pattern": "^(|/.*)$", "maxLength": 200},
+        "basis": {"enum": ["attested", "cited_interpretation"]},
+        "role": {"enum": ["main", "supporting", "alternative", "conflicting"]},
+        "attributed_to": {"type": ["string", "null"], "maxLength": 300},
+        "citations": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/citation"}}
+      }
+    },
+    "romanization": {
+      "description": "A modern reading aid for a non-Latin name form. It is never evidence of historical pronunciation and never a substitute for the local-script form.",
+      "type": "object",
+      "required": ["value", "scheme", "origin", "pronunciation_claim"],
+      "additionalProperties": false,
+      "properties": {
+        "value": {"type": "string", "minLength": 1, "maxLength": 300},
+        "scheme": {"enum": ["pinyin", "hepburn", "revised-hepburn", "wade-giles", "on-yomi", "other", "unspecified-editorial"]},
+        "origin": {"enum": ["source_attested", "editorial"]},
+        "pronunciation_claim": {"type": "boolean"},
+        "claim_id": {"$ref": "#/$defs/claim_id"}
+      }
+    },
+    "translation": {
+      "type": "object",
+      "required": ["value", "language", "origin"],
+      "additionalProperties": false,
+      "properties": {
+        "value": {"type": "string", "minLength": 1, "maxLength": 300},
+        "language": {"type": "string", "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$"},
+        "origin": {"enum": ["source_attested", "editorial"]},
+        "claim_id": {"$ref": "#/$defs/claim_id"}
+      }
+    },
+    "name": {
+      "type": "object",
+      "required": ["form", "script", "language", "role"],
+      "additionalProperties": false,
+      "properties": {
+        "form": {"type": "string", "minLength": 1, "maxLength": 300},
+        "script": {"type": "string", "pattern": "^[A-Z][a-z]{3}$"},
+        "language": {"type": "string", "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$"},
+        "role": {"enum": ["primary", "alternate"]},
+        "validity": {"$ref": "#/$defs/time"},
+        "romanization": {"$ref": "#/$defs/romanization"},
+        "translation": {"$ref": "#/$defs/translation"},
+        "claim_id": {"$ref": "#/$defs/claim_id"},
+        "note": {"type": "string", "maxLength": 500}
+      }
+    },
+    "modern_equivalent": {
+      "description": "A modern place reference kept out of the historical name list. It never replaces the historical label and never asserts identity.",
+      "type": "object",
+      "required": ["form", "language", "note"],
+      "additionalProperties": false,
+      "properties": {
+        "form": {"type": "string", "minLength": 1, "maxLength": 300},
+        "language": {"type": "string", "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$"},
+        "script": {"type": "string", "pattern": "^[A-Z][a-z]{3}$"},
+        "note": {"type": "string", "minLength": 1, "maxLength": 500}
+      }
+    },
+    "geojson": {
+      "description": "GeoJSON geometry with WGS84 longitude/latitude positions. Coordinate and ring validity is checked by the contract semantics, not by this schema.",
+      "type": "object",
+      "required": ["type", "coordinates"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {"enum": ["Point", "MultiPoint", "LineString", "MultiLineString", "Polygon", "MultiPolygon"]},
+        "coordinates": {}
+      }
+    },
+    "uncertainty": {
+      "description": "Extent information only when the source states it. The contract has no field for an invented radius.",
+      "type": "object",
+      "required": ["kind"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {"enum": ["none", "source_stated_extent"]},
+        "extent_m": {"type": "number"},
+        "source_expression": {"type": "string", "maxLength": 300}
+      }
+    },
+    "geometry": {
+      "description": "One locational assertion. interpretation says what the evidence supports; display_anchor and unknown say the atlas asserts no coordinate.",
+      "type": "object",
+      "required": ["claim_id", "interpretation", "geojson", "precision"],
+      "additionalProperties": false,
+      "properties": {
+        "claim_id": {"$ref": "#/$defs/claim_id"},
+        "interpretation": {
+          "enum": [
+            "approximate_point", "source_supported_area", "display_anchor", "unknown",
+            "attested_itinerary", "reconstructed_route", "schematic_link"
+          ]
+        },
+        "geojson": {"anyOf": [{"$ref": "#/$defs/geojson"}, {"type": "null"}]},
+        "precision": {"enum": ["site", "locality", "region", "unspecified"]},
+        "uncertainty": {"$ref": "#/$defs/uncertainty"},
+        "validity": {"$ref": "#/$defs/time"},
+        "waypoints": {
+          "type": "array",
+          "maxItems": 200,
+          "items": {
+            "type": "object",
+            "required": ["geojson"],
+            "additionalProperties": false,
+            "properties": {
+              "geojson": {"$ref": "#/$defs/geojson"},
+              "place_id": {"$ref": "#/$defs/record_id"},
+              "time": {"$ref": "#/$defs/time"}
+            }
+          }
+        },
+        "notes": {"type": "string", "maxLength": 1000}
+      }
+    },
+    "external_id": {
+      "type": "object",
+      "required": ["system", "id"],
+      "additionalProperties": false,
+      "properties": {
+        "system": {"enum": ["wikidata", "pleiades", "whg", "geonames", "tgn", "viaf", "other"]},
+        "id": {"type": "string", "minLength": 1, "maxLength": 200},
+        "url": {"type": "string", "maxLength": 500},
+        "license": {"type": "string", "maxLength": 200},
+        "note": {"type": "string", "maxLength": 300}
+      }
+    },
+    "license": {
+      "description": "Reuse terms for a source, dataset, or media asset. status unknown blocks publication of claims that cite it.",
+      "type": "object",
+      "required": ["status"],
+      "additionalProperties": false,
+      "properties": {
+        "status": {"enum": ["recorded", "unknown"]},
+        "license_id": {"enum": ["CC0-1.0", "CC-BY-4.0", "CC-BY-SA-4.0", "public-domain", "all-rights-reserved", "other"]},
+        "license_url": {"type": "string", "maxLength": 500},
+        "attribution_text": {"type": "string", "maxLength": 500},
+        "redistribution": {"enum": ["permitted", "permitted_with_attribution", "not_permitted", "unknown"]},
+        "quotation_permitted": {"enum": [true, false, "unknown"]},
+        "reviewed_by": {"type": "string", "maxLength": 200},
+        "reviewed_at": {"$ref": "#/$defs/timestamp"},
+        "notes": {"type": "string", "maxLength": 1000}
+      }
+    },
+    "review": {
+      "description": "Publication review record. self_review is recorded explicitly and must not be described as independent or specialist review.",
+      "type": "object",
+      "required": ["reviewed_at", "reviewer", "independence", "checklist"],
+      "additionalProperties": false,
+      "properties": {
+        "reviewed_at": {"$ref": "#/$defs/timestamp"},
+        "reviewer": {"$ref": "#/$defs/person"},
+        "independence": {"enum": ["self_review", "independent_review", "specialist_review"]},
+        "checklist": {
+          "type": "object",
+          "required": [
+            "source_support", "attribution", "date_location_uncertainty",
+            "attestation_vs_interpretation", "reuse_rights"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "source_support": {"type": "boolean"},
+            "attribution": {"type": "boolean"},
+            "date_location_uncertainty": {"type": "boolean"},
+            "attestation_vs_interpretation": {"type": "boolean"},
+            "reuse_rights": {"type": "boolean"}
+          }
+        },
+        "notes": {"type": "string", "maxLength": 2000}
+      }
+    }
+  }
+}

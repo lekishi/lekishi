@@ -1,0 +1,71 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "relationship",
+  "record_id": "lks:relationship:example-trade",
+  "created_at": "2026-01-02T00:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:example-trade-1",
+      "created_at": "2026-01-02T00:00:00Z",
+      "author": {"name": "Contract example"},
+      "change_explanation": "Initial synthetic example of an undirected exchange with an attested itinerary kept separate from the connection.",
+      "content": {
+        "summary": "Synthetic contract example of exchange between two places, with route geometry that the source reports. Not historical content.",
+        "relationship_types": ["trade"],
+        "from": "lks:place:example-harbour",
+        "to": "lks:place:example-changan",
+        "directionality": "undirected",
+        "causality": "not_asserted",
+        "validity": {
+          "source_expression": "attested from 730 to 762 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 730, "era": "ce"},
+            "end": {"year": 762, "era": "ce"}
+          }
+        },
+        "geometry": [
+          {
+            "claim_id": "lks:claim:example-trade-route",
+            "interpretation": "attested_itinerary",
+            "geojson": {"type": "LineString", "coordinates": [[121.5, 31.2], [117.2, 32.5], [108.9, 34.27]]},
+            "precision": "region",
+            "notes": "synthetic example: an itinerary the source reports, not a surveyed track"
+          }
+        ],
+        "editorial_notes": "Synthetic contract example: an undirected connection draws no arrow, and the reported itinerary is a separate claim from the exchange itself."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:example-trade",
+          "statement": "The source attests exchange between the two places.",
+          "asserts": "",
+          "basis": "attested",
+          "role": "main",
+          "citations": [{"source_id": "lks:source:example-chronicle-a", "locator": {"kind": "page", "value": "55"}}]
+        },
+        {
+          "claim_id": "lks:claim:example-trade-route",
+          "statement": "The source reports travel between the two places along this sequence of stops.",
+          "asserts": "/geometry/0",
+          "basis": "attested",
+          "role": "supporting",
+          "citations": [{"source_id": "lks:source:example-chronicle-a", "locator": {"kind": "page", "value": "56"}}]
+        }
+      ],
+      "revision_hash": "sha256:9051cf467a57922a3ae385928ef65a4ce288e2e0d952d06ec5588da67547db4b"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:example-trade-1",
+    "published_revision_hash": "sha256:9051cf467a57922a3ae385928ef65a4ce288e2e0d952d06ec5588da67547db4b",
+    "set_id": "lks:set:example-contract-v1",
+    "published_at": "2026-01-06T00:00:00Z",
+    "published_by": {"name": "Contract example"}
+  }
+}

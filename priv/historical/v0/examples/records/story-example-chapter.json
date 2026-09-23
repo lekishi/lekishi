@@ -1,0 +1,41 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "story",
+  "record_id": "lks:story:example-chapter",
+  "created_at": "2026-01-02T00:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:example-chapter-1",
+      "created_at": "2026-01-02T00:00:00Z",
+      "author": {"name": "Contract example"},
+      "change_explanation": "Initial synthetic example of a curated story that references records instead of copying them.",
+      "content": {
+        "summary": "Synthetic contract example of a story: an exploration window plus a presentation order over existing records. Not historical content.",
+        "window": {
+          "start": {"year": 700, "era": "ce"},
+          "end": {"year": 800, "era": "ce"},
+          "boundary": "inclusive"
+        },
+        "steps": [
+          {"record_id": "lks:place:example-changan", "role": "start", "caption": "synthetic example: the destination"},
+          {"record_id": "lks:event:example-uncertain-arrival", "role": "step", "caption": "synthetic example: an uncertain occurrence"},
+          {"record_id": "lks:event:example-departure", "role": "step", "caption": "synthetic example: a supported journey"},
+          {"record_id": "lks:relationship:example-influence", "role": "step", "caption": "synthetic example: a proposed influence"},
+          {"record_id": "lks:place:example-changan", "role": "step", "caption": "synthetic example: revisiting the destination is presentation order, not a second event"}
+        ],
+        "coverage_note": "Synthetic contract example. Story order describes presentation, not evidence that one event preceded or caused another.",
+        "editorial_notes": "Synthetic contract example: story steps are references, so one event can belong to several stories without duplication."
+      },
+      "claims": [],
+      "revision_hash": "sha256:848add6f2bc08bfff60366ed0ef3a1b564bda372f382f5ac7a4395b7e2e7e628"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:example-chapter-1",
+    "published_revision_hash": "sha256:848add6f2bc08bfff60366ed0ef3a1b564bda372f382f5ac7a4395b7e2e7e628",
+    "set_id": "lks:set:example-contract-v1",
+    "published_at": "2026-01-06T00:00:00Z",
+    "published_by": {"name": "Contract example"}
+  }
+}

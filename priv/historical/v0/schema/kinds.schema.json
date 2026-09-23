@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lekishi/lekishi/schema/v0/kinds.schema.json",
+  "title": "Lekishi historical contract v0: record content per kind",
+  "description": "Content schemas for the five historical record kinds. Each content object is closed: unknown fields, including presentation or renderer state, are rejected. Vocabularies include other with an explanatory editorial note rather than claiming to be complete.",
+  "$defs": {
+    "place_content": {
+      "type": "object",
+      "required": ["summary", "names", "place_types", "geometry"],
+      "additionalProperties": false,
+      "properties": {
+        "summary": {"type": "string", "minLength": 1, "maxLength": 2000},
+        "names": {"type": "array", "maxItems": 50, "items": {"$ref": "common.schema.json#/$defs/name"}},
+        "place_types": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "enum": ["settlement", "capital", "port", "region", "landform", "religious_site", "fortification", "route_node", "other"]
+          }
+        },
+        "geometry": {"type": "array", "maxItems": 50, "items": {"$ref": "common.schema.json#/$defs/geometry"}},
+        "modern_equivalents": {"type": "array", "maxItems": 20, "items": {"$ref": "common.schema.json#/$defs/modern_equivalent"}},
+        "external_ids": {"type": "array", "maxItems": 30, "items": {"$ref": "common.schema.json#/$defs/external_id"}},
+        "editorial_notes": {"type": "string", "maxLength": 2000}
+      }
+    },
+    "actor_content": {
+      "type": "object",
+      "required": ["summary", "names", "actor_types"],
+      "additionalProperties": false,
+      "properties": {
+        "summary": {"type": "string", "minLength": 1, "maxLength": 2000},
+        "names": {"type": "array", "maxItems": 50, "items": {"$ref": "common.schema.json#/$defs/name"}},
+        "actor_types": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "enum": ["person", "state", "dynasty", "community", "religious_body", "company", "institution", "culture", "other"]
+          }
+        },
+        "existence": {"$ref": "common.schema.json#/$defs/time"},
+        "roles": {
+          "type": "array",
+          "maxItems": 30,
+          "items": {
+            "type": "object",
+            "required": ["role"],
+            "additionalProperties": false,
+            "properties": {
+              "role": {
+                "enum": ["ruler", "official", "envoy", "monk", "scholar", "merchant", "soldier", "artisan", "member", "other"]
+              },
+              "validity": {"$ref": "common.schema.json#/$defs/time"},
+              "note": {"type": "string", "maxLength": 500}
+            }
+          }
+        },
+        "external_ids": {"type": "array", "maxItems": 30, "items": {"$ref": "common.schema.json#/$defs/external_id"}},
+        "editorial_notes": {"type": "string", "maxLength": 2000}
+      }
+    },
+    "event_content": {
+      "type": "object",
+      "required": ["summary", "event_types", "time"],
+      "additionalProperties": false,
+      "properties": {
+        "summary": {"type": "string", "minLength": 1, "maxLength": 2000},
+        "event_types": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "enum": ["occurrence", "process", "journey", "campaign", "mission", "council", "founding", "exchange", "other"]
+          }
+        },
+        "time": {"$ref": "common.schema.json#/$defs/time"},
+        "places": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "type": "object",
+            "required": ["place_id", "role"],
+            "additionalProperties": false,
+            "properties": {
+              "place_id": {"$ref": "common.schema.json#/$defs/record_id"},
+              "role": {"enum": ["start", "end", "waypoint", "site", "context", "other"]},
+              "note": {"type": "string", "maxLength": 500}
+            }
+          }
+        },
+        "participants": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "type": "object",
+            "required": ["actor_id", "role"],
+            "additionalProperties": false,
+            "properties": {
+              "actor_id": {"$ref": "common.schema.json#/$defs/record_id"},
+              "role": {"enum": ["participant", "leader", "host", "guest", "witness", "subject", "other"]},
+              "note": {"type": "string", "maxLength": 500}
+            }
+          }
+        },
+        "part_of": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "object",
+            "required": ["event_id"],
+            "additionalProperties": false,
+            "properties": {"event_id": {"$ref": "common.schema.json#/$defs/record_id"}}
+          }
+        },
+        "geometry": {"type": "array", "maxItems": 50, "items": {"$ref": "common.schema.json#/$defs/geometry"}},
+        "editorial_notes": {"type": "string", "maxLength": 2000}
+      }
+    },
+    "relationship_content": {
+      "type": "object",
+      "required": ["summary", "relationship_types", "from", "to", "directionality", "causality"],
+      "additionalProperties": false,
+      "properties": {
+        "summary": {"type": "string", "minLength": 1, "maxLength": 2000},
+        "relationship_types": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "enum": [
+              "trade", "travel", "conflict", "diplomacy", "transmission", "institutional_change",
+              "contact", "proposed_influence", "membership", "rulership", "alliance",
+              "renamed_to", "relocated_to", "successor_of", "changed_boundaries", "other"
+            ]
+          }
+        },
+        "from": {"$ref": "common.schema.json#/$defs/record_id"},
+        "to": {"$ref": "common.schema.json#/$defs/record_id"},
+        "directionality": {"enum": ["directed", "undirected", "mutual"]},
+        "causality": {"enum": ["asserted", "not_asserted"]},
+        "validity": {"$ref": "common.schema.json#/$defs/time"},
+        "geometry": {"type": "array", "maxItems": 50, "items": {"$ref": "common.schema.json#/$defs/geometry"}},
+        "editorial_notes": {"type": "string", "maxLength": 2000}
+      }
+    },
+    "story_content": {
+      "type": "object",
+      "required": ["summary", "window", "steps"],
+      "additionalProperties": false,
+      "properties": {
+        "summary": {"type": "string", "minLength": 1, "maxLength": 2000},
+        "window": {
+          "type": "object",
+          "required": ["start", "end", "boundary"],
+          "additionalProperties": false,
+          "properties": {
+            "start": {"$ref": "common.schema.json#/$defs/era_year"},
+            "end": {"$ref": "common.schema.json#/$defs/era_year"},
+            "boundary": {"enum": ["inclusive", "half_open_end", "exclusive_end"]}
+          }
+        },
+        "steps": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 200,
+          "items": {
+            "type": "object",
+            "required": ["record_id", "role"],
+            "additionalProperties": false,
+            "properties": {
+              "record_id": {"$ref": "common.schema.json#/$defs/record_id"},
+              "role": {"enum": ["start", "step"]},
+              "caption": {"type": "string", "maxLength": 500}
+            }
+          }
+        },
+        "coverage_note": {"type": "string", "maxLength": 2000},
+        "editorial_notes": {"type": "string", "maxLength": 2000}
+      }
+    }
+  }
+}

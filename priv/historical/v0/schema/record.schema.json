@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lekishi/lekishi/schema/v0/record.schema.json",
+  "title": "Lekishi historical contract v0: record document",
+  "description": "A record document holds one stable identity and its ordered immutable revisions. Revisions are append-only; the publication block mirrors the newest publication set that contains the record and is verified against the sets.",
+  "type": "object",
+  "required": ["contract", "document", "kind", "record_id", "revisions", "publication"],
+  "additionalProperties": false,
+  "properties": {
+    "contract": {"$ref": "common.schema.json#/$defs/contract"},
+    "document": {"const": "record"},
+    "kind": {"enum": ["place", "actor", "event", "relationship", "story"]},
+    "record_id": {"$ref": "common.schema.json#/$defs/record_id"},
+    "created_at": {"$ref": "common.schema.json#/$defs/timestamp"},
+    "external_ids": {"type": "array", "maxItems": 30, "items": {"$ref": "common.schema.json#/$defs/external_id"}},
+    "revisions": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/revision"}},
+    "publication": {"anyOf": [{"$ref": "#/$defs/publication_mirror"}, {"type": "null"}]}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"kind": {"const": "place"}}},
+      "then": {"properties": {"revisions": {"items": {"properties": {"content": {"$ref": "kinds.schema.json#/$defs/place_content"}}}}}}
+    },
+    {
+      "if": {"properties": {"kind": {"const": "actor"}}},
+      "then": {"properties": {"revisions": {"items": {"properties": {"content": {"$ref": "kinds.schema.json#/$defs/actor_content"}}}}}}
+    },
+    {
+      "if": {"properties": {"kind": {"const": "event"}}},
+      "then": {"properties": {"revisions": {"items": {"properties": {"content": {"$ref": "kinds.schema.json#/$defs/event_content"}}}}}}
+    },
+    {
+      "if": {"properties": {"kind": {"const": "relationship"}}},
+      "then": {"properties": {"revisions": {"items": {"properties": {"content": {"$ref": "kinds.schema.json#/$defs/relationship_content"}}}}}}
+    },
+    {
+      "if": {"properties": {"kind": {"const": "story"}}},
+      "then": {"properties": {"revisions": {"items": {"properties": {"content": {"$ref": "kinds.schema.json#/$defs/story_content"}}}}}}
+    }
+  ],
+  "$defs": {
+    "revision": {
+      "type": "object",
+      "required": [
+        "revision_id", "created_at", "author", "change_explanation",
+        "content", "claims", "revision_hash"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "revision_id": {"$ref": "common.schema.json#/$defs/revision_id"},
+        "created_at": {"$ref": "common.schema.json#/$defs/timestamp"},
+        "author": {"$ref": "common.schema.json#/$defs/person"},
+        "change_explanation": {"type": "string", "minLength": 1, "maxLength": 2000},
+        "content": {"type": "object"},
+        "claims": {"type": "array", "maxItems": 200, "items": {"$ref": "common.schema.json#/$defs/claim"}},
+        "dispute": {"$ref": "#/$defs/dispute"},
+        "research_notes": {"type": "array", "maxItems": 50, "items": {"$ref": "#/$defs/research_note"}},
+        "revision_hash": {"$ref": "common.schema.json#/$defs/hash"}
+      }
+    },
+    "dispute": {
+      "type": "object",
+      "required": ["status"],
+      "additionalProperties": false,
+      "properties": {
+        "status": {"enum": ["undisputed", "disputed"]},
+        "summary": {"type": ["string", "null"], "maxLength": 2000}
+      }
+    },
+    "research_note": {
+      "description": "Unpublished research note. A revision carrying notes is never publishable, and notes are never public content.",
+      "type": "object",
+      "required": ["note", "basis"],
+      "additionalProperties": false,
+      "properties": {
+        "note": {"type": "string", "minLength": 1, "maxLength": 2000},
+        "basis": {"const": "contributor_hypothesis"}
+      }
+    },
+    "publication_mirror": {
+      "description": "Derived view of the newest published revision. It must equal the newest publication set member for this record.",
+      "type": "object",
+      "required": ["published_revision_id", "published_revision_hash", "set_id", "published_at", "published_by"],
+      "additionalProperties": false,
+      "properties": {
+        "published_revision_id": {"$ref": "common.schema.json#/$defs/revision_id"},
+        "published_revision_hash": {"$ref": "common.schema.json#/$defs/hash"},
+        "set_id": {"$ref": "common.schema.json#/$defs/set_id"},
+        "published_at": {"$ref": "common.schema.json#/$defs/timestamp"},
+        "published_by": {"$ref": "common.schema.json#/$defs/person"}
+      }
+    }
+  }
+}

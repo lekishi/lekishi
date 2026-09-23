@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lekishi/lekishi/schema/v0/source.schema.json",
+  "title": "Lekishi historical contract v0: source document",
+  "description": "A cited work, dataset, or media asset with its reuse terms. Publication requires recorded licenses for every cited source; an unrecorded license blocks publication rather than assuming reuse is permitted. A source document is immutable once a publication set pins it: correcting metadata means publishing a new source document (with a new source_id and an optional supersedes_source_id) and republishing the citing records, so the previously approved metadata is preserved rather than overwritten.",
+  "type": "object",
+  "required": ["contract", "document", "source_id", "source_hash", "kind", "title", "license"],
+  "additionalProperties": false,
+  "properties": {
+    "contract": {"$ref": "common.schema.json#/$defs/contract"},
+    "document": {"const": "source"},
+    "source_id": {"$ref": "common.schema.json#/$defs/source_id"},
+    "source_hash": {
+      "description": "SHA-256 over the canonical encoding of this document without source_hash. Publication sets pin this value.",
+      "$ref": "common.schema.json#/$defs/hash"
+    },
+    "supersedes_source_id": {
+      "description": "Set on a new source document that replaces an earlier one, so the identity relationship is explicit rather than implied by a similar title.",
+      "anyOf": [{"$ref": "common.schema.json#/$defs/source_id"}, {"type": "null"}]
+    },
+    "kind": {"enum": ["primary", "scholarly", "reference", "dataset", "gazetteer", "media"]},
+    "title": {"type": "string", "minLength": 1, "maxLength": 500},
+    "edition": {"type": "string", "maxLength": 300},
+    "author": {"type": "string", "maxLength": 300},
+    "issued": {"$ref": "common.schema.json#/$defs/era_year"},
+    "language": {"type": "string", "pattern": "^[a-z]{2,3}(-[A-Za-z0-9]{2,8})*$"},
+    "identifiers": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "required": ["system", "value"],
+        "additionalProperties": false,
+        "properties": {
+          "system": {"enum": ["isbn", "doi", "url", "wikidata", "pleiades", "whg", "other"]},
+          "value": {"type": "string", "minLength": 1, "maxLength": 500}
+        }
+      }
+    },
+    "license": {"$ref": "common.schema.json#/$defs/license"},
+    "notes": {"type": "string", "maxLength": 2000}
+  }
+}

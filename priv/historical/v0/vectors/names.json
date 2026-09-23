@@ -1,0 +1,360 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "test_vectors",
+  "area": "names",
+  "description": "Name, script, and romanization vectors: the map label leads with the source-supported period-appropriate form, romanization is a modern reading aid that is never recorded as the local-script form, and modern equivalents never replace the historical label. Published records use a generated publication set, so evidence rules apply.",
+  "vectors": [
+    {
+      "id": "names/local-script-with-editorial-romanization-is-valid",
+      "why": "RFD 2's label pairing: a period-appropriate local-script form with an editorial reading aid, cited to a source, is valid.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "place",
+            "published": true,
+            "content": {
+              "summary": "A capital city used to exercise the naming contract.",
+              "place_types": ["capital"],
+              "names": [
+                {
+                  "form": "長安",
+                  "script": "Hani",
+                  "language": "lzh",
+                  "role": "primary",
+                  "romanization": {"value": "Chang'an", "scheme": "pinyin", "origin": "editorial", "pronunciation_claim": false},
+                  "claim_id": "lks:claim:vector-1"
+                }
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source writes the name in Han script.", "asserts": "/names/0", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "12"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": true}
+    },
+    {
+      "id": "names/map-label-pairs-local-script-and-romanization",
+      "why": "The reader-facing label pairs the local-script form with its romanization.",
+      "op": "map_label",
+      "input": {
+        "names": [
+          {"form": "長安", "script": "Hani", "language": "lzh", "role": "primary", "romanization": {"value": "Chang'an", "scheme": "pinyin", "origin": "editorial", "pronunciation_claim": false}}
+        ]
+      },
+      "expect": {"label": "長安 · Chang'an"}
+    },
+    {
+      "id": "names/map-label-ignores-alternates",
+      "why": "Only the primary form labels the map; alternates stay in details and search.",
+      "op": "map_label",
+      "input": {
+        "names": [
+          {"form": "長安", "script": "Hani", "language": "lzh", "role": "primary"},
+          {"form": "Chang'an", "script": "Latn", "language": "en", "role": "alternate", "note": "modern romanized form for search"}
+        ]
+      },
+      "expect": {"label": "長安"}
+    },
+    {
+      "id": "names/map-label-without-primary-is-nil",
+      "why": "With no source-supported period form there is no historical label, and the modern equivalent must not become one.",
+      "op": "map_label",
+      "input": {"names": []},
+      "expect": {"label": null}
+    },
+    {
+      "id": "names/latin-script-primary-needs-no-romanization",
+      "why": "A Latin-script historical form labels the map directly.",
+      "op": "map_label",
+      "input": {"names": [{"form": "Roma", "script": "Latn", "language": "la", "role": "primary"}]},
+      "expect": {"label": "Roma"}
+    },
+    {
+      "id": "names/modern-equivalent-does-not-become-a-label",
+      "why": "A modern equivalent is a search and details reference, not the historical label.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "content": {
+              "summary": "A place whose historical name is not yet supported.",
+              "place_types": ["settlement"],
+              "names": [],
+              "modern_equivalents": [{"form": "Xi'an", "language": "en", "note": "modern city near the historical site; identity is not asserted"}],
+              "geometry": []
+            }
+          }
+        ]
+      },
+      "expect": {"valid": true}
+    },
+    {
+      "id": "names/romanization-on-latin-script-rejected",
+      "why": "A Latin-script form is already in Latin script; recording a romanization for it confuses normalization with romanization.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "content": {
+              "summary": "A Latin-script name.",
+              "place_types": ["settlement"],
+              "names": [
+                {"form": "Roma", "script": "Latn", "language": "la", "role": "primary", "romanization": {"value": "Roma", "scheme": "other", "origin": "editorial", "pronunciation_claim": false}}
+              ],
+              "geometry": []
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["romanization_on_latin_script"]}
+    },
+    {
+      "id": "names/romanization-must-not-claim-pronunciation",
+      "why": "A romanization is a modern reading aid, never evidence of historical pronunciation.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "content": {
+              "summary": "A name with a pronunciation claim attached to its romanization.",
+              "place_types": ["settlement"],
+              "names": [
+                {"form": "長安", "script": "Hani", "language": "lzh", "role": "primary", "romanization": {"value": "Chang'an", "scheme": "pinyin", "origin": "editorial", "pronunciation_claim": true}}
+              ],
+              "geometry": []
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["romanization_pronunciation_claim"]}
+    },
+    {
+      "id": "names/attested-romanization-needs-a-claim",
+      "why": "A romanization recorded as source-attested must cite the form it comes from.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "content": {
+              "summary": "A source-attested romanization without evidence.",
+              "place_types": ["settlement"],
+              "names": [
+                {"form": "長安", "script": "Hani", "language": "lzh", "role": "primary", "romanization": {"value": "Ch'ang-an", "scheme": "wade-giles", "origin": "source_attested", "pronunciation_claim": false}}
+              ],
+              "geometry": []
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["attested_romanization_without_claim"]}
+    },
+    {
+      "id": "names/editorial-romanization-must-not-cite-a-claim",
+      "why": "An editorial reading aid must not be presented as if a source attested it.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "place",
+            "content": {
+              "summary": "An editorial romanization carrying a citation.",
+              "place_types": ["settlement"],
+              "names": [
+                {"form": "長安", "script": "Hani", "language": "lzh", "role": "primary", "romanization": {"value": "Chang'an", "scheme": "pinyin", "origin": "editorial", "pronunciation_claim": false, "claim_id": "lks:claim:vector-1"}}
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source writes the name in Han script.", "asserts": "/names/0", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "12"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["editorial_romanization_has_claim"]}
+    },
+    {
+      "id": "names/romanized-form-must-not-be-recorded-as-local-script",
+      "why": "A romanized string recorded with a non-Latin script would fabricate a local-script form.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "content": {
+              "summary": "A romanization recorded as a Han-script form.",
+              "place_types": ["settlement"],
+              "names": [{"form": "Chang'an", "script": "Hani", "language": "lzh", "role": "primary"}],
+              "geometry": []
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["script_form_mismatch"]}
+    },
+    {
+      "id": "names/primary-label-needs-cited-support-when-published",
+      "why": "A published map label must rest on a source-supported period-appropriate form rather than a silently substituted modern spelling.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "published": true,
+            "content": {
+              "summary": "A published record whose primary label has no cited support.",
+              "place_types": ["settlement"],
+              "names": [{"form": "Example Harbour", "script": "Latn", "language": "en", "role": "primary"}],
+              "geometry": []
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["primary_name_without_claim", "published_record_without_citation"]}
+    },
+    {
+      "id": "names/names-without-a-primary-form-rejected",
+      "why": "When name forms exist, exactly one must be the primary label.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "content": {
+              "summary": "Only an alternate form is recorded.",
+              "place_types": ["settlement"],
+              "names": [{"form": "Chang'an", "script": "Latn", "language": "en", "role": "alternate"}],
+              "geometry": []
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["no_primary_name"]}
+    },
+    {
+      "id": "names/multiple-primary-forms-rejected",
+      "why": "Two primary forms would make the map label ambiguous.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "content": {
+              "summary": "Two competing primary labels.",
+              "place_types": ["settlement"],
+              "names": [
+                {"form": "長安", "script": "Hani", "language": "lzh", "role": "primary"},
+                {"form": "京兆", "script": "Hani", "language": "lzh", "role": "primary"}
+              ],
+              "geometry": []
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["multiple_primary_names"]}
+    },
+    {
+      "id": "names/translation-is-not-a-primary-label",
+      "why": "A translation accompanies a label; it does not replace the period-appropriate historical form.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "content": {
+              "summary": "A translation used as the primary label.",
+              "place_types": ["settlement"],
+              "names": [
+                {"form": "長安", "script": "Hani", "language": "lzh", "role": "primary", "translation": {"value": "Perpetual Peace", "language": "en", "origin": "editorial"}}
+              ],
+              "geometry": []
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["translation_as_primary"]}
+    },
+    {
+      "id": "names/modern-alternate-is-allowed-beside-the-primary",
+      "why": "Modern spellings remain available in details and search without replacing the historical label.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "place",
+            "published": true,
+            "content": {
+              "summary": "A historical label with a modern alternate spelling.",
+              "place_types": ["settlement"],
+              "names": [
+                {"form": "長安", "script": "Hani", "language": "lzh", "role": "primary", "claim_id": "lks:claim:vector-1"},
+                {"form": "Chang'an", "script": "Latn", "language": "en", "role": "alternate", "note": "modern romanized form for search"}
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source writes the name in Han script.", "asserts": "/names/0", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "12"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": true}
+    },
+    {
+      "id": "names/name-validity-uses-the-time-contract",
+      "why": "A name's historical validity is a time expression and is validated the same way as an event date.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "content": {
+              "summary": "A name whose validity window is not normalizable.",
+              "place_types": ["settlement"],
+              "names": [
+                {
+                  "form": "長安",
+                  "script": "Hani",
+                  "language": "lzh",
+                  "role": "primary",
+                  "validity": {"source_expression": "during the eighth century", "calendar": "unknown", "precision": "unspecified", "mode": "duration", "interval": null}
+                }
+              ],
+              "geometry": []
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["dated_mode_requires_precision"]}
+    },
+    {
+      "id": "names/unresolved-claim-reference-rejected",
+      "why": "Name evidence must point at a claim in the same revision.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "place",
+            "content": {
+              "summary": "A name citing a claim that does not exist.",
+              "place_types": ["settlement"],
+              "names": [{"form": "長安", "script": "Hani", "language": "lzh", "role": "primary", "claim_id": "lks:claim:missing"}],
+              "geometry": []
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["unresolved_claim_reference"]}
+    }
+  ]
+}

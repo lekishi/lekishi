@@ -1,0 +1,721 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "test_vectors",
+  "area": "documents",
+  "description": "Record-document vectors: presentation state never enters historical content, claims carry citations and point at the fields they support, attestation is separated from cited interpretation, disputes stay visible, references resolve, and draft research notes are never published.",
+  "vectors": [
+    {
+      "id": "documents/color-is-rejected",
+      "why": "Presentation color must not enter the historical source of truth; consumers derive display from the contract.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"kind": "place", "content": {"summary": "A place with a color.", "place_types": ["settlement"], "names": [], "geometry": [], "color": "#ff0000"}}
+        ]
+      },
+      "expect": {"valid": false, "codes": ["presentation_field_in_content"]}
+    },
+    {
+      "id": "documents/camera-state-is-rejected",
+      "why": "Camera and viewport state belong to the renderer, not to a historical event.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"kind": "event", "content": {"summary": "An event with camera state.", "event_types": ["occurrence"], "time": null, "camera": {"zoom": 4}}}
+        ]
+      },
+      "expect": {"valid": false, "codes": ["presentation_field_in_content"]}
+    },
+    {
+      "id": "documents/playhead-state-is-rejected",
+      "why": "Playback state is derived at presentation time and is never stored on a record.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"kind": "event", "content": {"summary": "An event with a stored playhead.", "event_types": ["occurrence"], "time": null, "playhead": {"year": 740}}}
+        ]
+      },
+      "expect": {"valid": false, "codes": ["presentation_field_in_content"]}
+    },
+    {
+      "id": "documents/published-record-needs-a-cited-claim",
+      "why": "Every published event, place, actor, and relationship needs at least one claim with a citation.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"kind": "event", "published": true, "content": {"summary": "A published event without evidence.", "event_types": ["occurrence"], "time": null}, "claims": []}
+        ]
+      },
+      "expect": {"valid": false, "codes": ["published_record_without_citation"]}
+    },
+    {
+      "id": "documents/claim-pointer-must-resolve",
+      "why": "One source need not support every field, so each claim names the field it supports and that pointer must resolve.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "place",
+            "content": {"summary": "A place whose claim points at a field that does not exist.", "place_types": ["settlement"], "names": [], "geometry": []},
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source dates the site.", "asserts": "/time", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "3"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["claim_pointer_unresolved"]}
+    },
+    {
+      "id": "documents/cited-interpretation-must-name-its-advocate",
+      "why": "A cited scholarly interpretation is attributed to whoever advances it, unlike an attestation of what a source reports.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "event",
+            "content": {"summary": "An event with an unattributed interpretation.", "event_types": ["occurrence"], "time": null},
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The mission changed a later practice.", "asserts": "", "basis": "cited_interpretation", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "77"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["interpretation_missing_attribution"]}
+    },
+    {
+      "id": "documents/alternative-claim-needs-a-visible-dispute",
+      "why": "A competing account must be visible as a dispute rather than recorded as undisputed.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "event",
+            "content": {"summary": "An event with a hidden alternative account.", "event_types": ["occurrence"], "time": null},
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The event is dated 740.", "asserts": "/time", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "5"}}]},
+              {"claim_id": "lks:claim:vector-2", "statement": "Another reading dates the event 745.", "asserts": "/time", "basis": "cited_interpretation", "role": "alternative", "attributed_to": "Example Study B", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "6"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["claim_without_dispute"]}
+    },
+    {
+      "id": "documents/dispute-needs-a-summary",
+      "why": "A visible dispute indication must explain what differs, not just flag disagreement.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "event",
+            "content": {"summary": "A disputed event without an explanation.", "event_types": ["occurrence"], "time": null},
+            "dispute": {"status": "disputed", "summary": null},
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The event is dated 740.", "asserts": "/time", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "5"}}]},
+              {"claim_id": "lks:claim:vector-2", "statement": "Another reading dates the event 745.", "asserts": "/time", "basis": "cited_interpretation", "role": "conflicting", "attributed_to": "Example Study B", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "6"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["dispute_summary_missing"]}
+    },
+    {
+      "id": "documents/dispute-needs-a-cited-alternative",
+      "why": "A dispute indication without a cited alternative would hide the disagreement instead of presenting it.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "event",
+            "content": {"summary": "A dispute without an alternative account.", "event_types": ["occurrence"], "time": null},
+            "dispute": {"status": "disputed", "summary": "Sources disagree on the year."},
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The event is dated 740.", "asserts": "/time", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "5"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["dispute_without_alternative_claim"]}
+    },
+    {
+      "id": "documents/undisputed-record-cannot-hide-an-alternative",
+      "why": "Marking a record undisputed while carrying a conflicting claim would conceal material disagreement.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "event",
+            "content": {"summary": "An undisputed record with a conflicting account.", "event_types": ["occurrence"], "time": null},
+            "dispute": {"status": "undisputed", "summary": null},
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The event is dated 740.", "asserts": "/time", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "5"}}]},
+              {"claim_id": "lks:claim:vector-2", "statement": "Another reading dates the event 745.", "asserts": "/time", "basis": "cited_interpretation", "role": "conflicting", "attributed_to": "Example Study B", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "6"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["undisputed_with_alternative_claim"]}
+    },
+    {
+      "id": "documents/disputed-record-with-cited-alternative-is-valid",
+      "why": "The main-account-with-cited-alternatives policy: one attributed main account, a visible dispute, and a cited alternative.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "event",
+            "published": true,
+            "content": {"summary": "A disputed event presented with its alternatives.", "event_types": ["occurrence"], "time": null},
+            "dispute": {"status": "disputed", "summary": "The two cited studies place the event three years apart."},
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The event is dated 740.", "asserts": "/time", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "5"}}]},
+              {"claim_id": "lks:claim:vector-2", "statement": "Another reading dates the event 745.", "asserts": "/time", "basis": "cited_interpretation", "role": "alternative", "attributed_to": "Example Study B", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "6"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": true}
+    },
+    {
+      "id": "documents/two-main-claims-for-one-field-rejected",
+      "why": "A field has one main account; a second main claim for the same field would present both as the main account.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "event",
+            "content": {"summary": "Two main accounts for one field.", "event_types": ["occurrence"], "time": null},
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The event is dated 740.", "asserts": "/time", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "5"}}]},
+              {"claim_id": "lks:claim:vector-2", "statement": "The event is dated 745.", "asserts": "/time", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "6"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["multiple_main_claims_for_pointer"]}
+    },
+    {
+      "id": "documents/research-notes-are-not-publishable",
+      "why": "Original contributor hypotheses remain unpublished research notes, never public content.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "event",
+            "published": true,
+            "content": {"summary": "A published event carrying a hypothesis.", "event_types": ["occurrence"], "time": null},
+            "research_notes": [{"note": "I suspect the mission also carried a physician.", "basis": "contributor_hypothesis"}]
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["research_notes_in_published_revision"]}
+    },
+    {
+      "id": "documents/draft-revision-may-hold-research-notes",
+      "why": "Drafts are where unpublished hypotheses live; only publication is blocked.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "event",
+            "content": {"summary": "A draft event carrying a hypothesis.", "event_types": ["occurrence"], "time": null},
+            "research_notes": [{"note": "I suspect the mission also carried a physician.", "basis": "contributor_hypothesis"}]
+          }
+        ]
+      },
+      "expect": {"valid": true}
+    },
+    {
+      "id": "documents/hypothesis-is-not-a-claim-basis",
+      "why": "A claim basis vocabulary of attested and cited_interpretation leaves no way to publish an original hypothesis as a claim.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "event",
+            "content": {"summary": "A claim recorded as a hypothesis.", "event_types": ["occurrence"], "time": null},
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The mission caused a later reform.", "asserts": "", "basis": "contributor_hypothesis", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "1"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["schema_violation"]}
+    },
+    {
+      "id": "documents/relationship-needs-cited-evidence",
+      "why": "Every published relationship requires a cited evidentiary basis.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"kind": "place", "content": {"summary": "Start place.", "place_types": ["port"], "names": [], "geometry": []}},
+          {"kind": "place", "record_id": "lks:place:vector-b", "content": {"summary": "End place.", "place_types": ["port"], "names": [], "geometry": []}},
+          {
+            "kind": "relationship",
+            "published": true,
+            "content": {"summary": "An unevidenced trade connection.", "relationship_types": ["trade"], "from": "lks:place:vector-a", "to": "lks:place:vector-b", "directionality": "undirected", "causality": "not_asserted"},
+            "claims": []
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["published_record_without_citation"]}
+    },
+    {
+      "id": "documents/relationship-cannot-join-a-record-to-itself",
+      "why": "A relationship needs two distinct ends.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"kind": "place", "content": {"summary": "A place.", "place_types": ["port"], "names": [], "geometry": []}},
+          {
+            "kind": "relationship",
+            "content": {"summary": "A self-relationship.", "relationship_types": ["trade"], "from": "lks:place:vector-a", "to": "lks:place:vector-a", "directionality": "undirected", "causality": "not_asserted"}
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["relationship_self_reference"]}
+    },
+    {
+      "id": "documents/causality-needs-a-cited-interpretation",
+      "why": "Documented contact does not establish influence, so causation is only recorded as a cited interpretation.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {"kind": "event", "record_id": "lks:event:vector-a", "content": {"summary": "An earlier event.", "event_types": ["occurrence"], "time": null}},
+          {"kind": "event", "record_id": "lks:event:vector-b", "content": {"summary": "A later event.", "event_types": ["occurrence"], "time": null}},
+          {
+            "kind": "relationship",
+            "published": true,
+            "content": {"summary": "A causal claim resting on attestation only.", "relationship_types": ["transmission"], "from": "lks:event:vector-a", "to": "lks:event:vector-b", "directionality": "directed", "causality": "asserted"},
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source reports both events.", "asserts": "", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "8"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["causality_without_interpretation"]}
+    },
+    {
+      "id": "documents/proposed-influence-must-be-an-interpretation",
+      "why": "A proposed influence is not attested contact and must be presented as a cited interpretation.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {"kind": "event", "record_id": "lks:event:vector-a", "content": {"summary": "An earlier event.", "event_types": ["occurrence"], "time": null}},
+          {"kind": "event", "record_id": "lks:event:vector-b", "content": {"summary": "A later event.", "event_types": ["occurrence"], "time": null}},
+          {
+            "kind": "relationship",
+            "published": true,
+            "content": {"summary": "An influence claim resting on attestation only.", "relationship_types": ["proposed_influence"], "from": "lks:event:vector-a", "to": "lks:event:vector-b", "directionality": "directed", "causality": "not_asserted"},
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source reports both events.", "asserts": "", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "8"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["influence_without_interpretation"]}
+    },
+    {
+      "id": "documents/proposed-influence-with-attributed-interpretation-is-valid",
+      "why": "A disputed or proposed influence may be published when it is attributed to cited scholarship.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {"kind": "event", "record_id": "lks:event:vector-a", "content": {"summary": "An earlier event.", "event_types": ["occurrence"], "time": null}},
+          {"kind": "event", "record_id": "lks:event:vector-b", "content": {"summary": "A later event.", "event_types": ["occurrence"], "time": null}},
+          {
+            "kind": "relationship",
+            "published": true,
+            "content": {"summary": "A proposed influence with attributed scholarship.", "relationship_types": ["proposed_influence"], "from": "lks:event:vector-a", "to": "lks:event:vector-b", "directionality": "directed", "causality": "asserted"},
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The cited study proposes this influence.", "asserts": "", "basis": "cited_interpretation", "role": "main", "attributed_to": "Example Study B", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "8"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": true}
+    },
+    {
+      "id": "documents/event-cannot-be-part-of-itself",
+      "why": "A broader campaign relationship must not loop back to the event itself.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "event",
+            "content": {"summary": "An event that is part of itself.", "event_types": ["journey"], "time": null, "part_of": [{"event_id": "lks:event:vector-example"}]}
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["part_of_self_reference"]}
+    },
+    {
+      "id": "documents/event-cannot-order-itself",
+      "why": "A record must not declare an ordering relation with itself.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "event",
+            "content": {
+              "summary": "An event ordering itself.",
+              "event_types": ["occurrence"],
+              "time": {"source_expression": "740 CE", "calendar": "julian", "precision": "year", "mode": "instant", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 740, "era": "ce"}, "end": {"year": 740, "era": "ce"}}, "ordering": [{"relation": "before", "record_id": "lks:event:vector-example"}]}
+            },
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source dates the event.", "asserts": "/time", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "5"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["ordering_self_reference"]}
+    },
+    {
+      "id": "documents/published-ordering-needs-evidence",
+      "why": "A published ordering assertion is an assertion about the evidence and needs a cited claim.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "event",
+            "published": true,
+            "content": {
+              "summary": "An ordering assertion without evidence.",
+              "event_types": ["occurrence"],
+              "time": {"source_expression": "740 CE", "calendar": "julian", "precision": "year", "mode": "instant", "interval": {"bounds": "two_sided", "boundary": "inclusive", "start": {"year": 740, "era": "ce"}, "end": {"year": 740, "era": "ce"}}, "ordering": [{"relation": "before", "record_id": "lks:event:vector-b"}]}
+            },
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source dates the event.", "asserts": "/time", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "5"}}]}
+            ]
+          },
+          {"kind": "event", "record_id": "lks:event:vector-b", "content": {"summary": "A later event.", "event_types": ["occurrence"], "time": null}}
+        ]
+      },
+      "expect": {"valid": false, "codes": ["ordering_without_evidence"]}
+    },
+    {
+      "id": "documents/event-participants-must-resolve",
+      "why": "A participant reference that resolves to nothing would leave an unattributed event.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "event",
+            "content": {"summary": "An event with a missing participant.", "event_types": ["journey"], "time": null, "participants": [{"actor_id": "lks:actor:missing", "role": "leader"}]}
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["unresolved_reference"]}
+    },
+    {
+      "id": "documents/reference-kind-must-match",
+      "why": "A place field must reference a place, not an actor or an event.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"kind": "actor", "content": {"summary": "An actor.", "actor_types": ["person"], "names": []}},
+          {
+            "kind": "event",
+            "content": {"summary": "An event whose place reference is an actor.", "event_types": ["journey"], "time": null, "places": [{"place_id": "lks:actor:vector-example", "role": "start"}]}
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["reference_kind_mismatch"]}
+    },
+    {
+      "id": "documents/story-steps-must-reference-records",
+      "why": "Stories are navigation over records; a step pointing at nothing is not a story.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "story",
+            "content": {
+              "summary": "A story with a dangling step.",
+              "window": {"start": {"year": 700, "era": "ce"}, "end": {"year": 800, "era": "ce"}, "boundary": "inclusive"},
+              "steps": [{"record_id": "lks:event:missing", "role": "start"}]
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["unresolved_reference"]}
+    },
+    {
+      "id": "documents/story-first-step-must-be-the-entry-point",
+      "why": "A story needs a defined entry point before its sequence begins.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"kind": "event", "content": {"summary": "An event.", "event_types": ["occurrence"], "time": null}},
+          {
+            "kind": "story",
+            "content": {
+              "summary": "A story without an entry point.",
+              "window": {"start": {"year": 700, "era": "ce"}, "end": {"year": 800, "era": "ce"}, "boundary": "inclusive"},
+              "steps": [{"record_id": "lks:event:vector-example", "role": "step"}]
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["story_first_step_not_start"]}
+    },
+    {
+      "id": "documents/story-window-must-not-invert",
+      "why": "An exploration window that ends before it starts cannot filter anything.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"kind": "event", "content": {"summary": "An event.", "event_types": ["occurrence"], "time": null}},
+          {
+            "kind": "story",
+            "content": {
+              "summary": "An inverted window.",
+              "window": {"start": {"year": 800, "era": "ce"}, "end": {"year": 700, "era": "ce"}, "boundary": "inclusive"},
+              "steps": [{"record_id": "lks:event:vector-example", "role": "start"}]
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["story_window_start_after_end"]}
+    },
+    {
+      "id": "documents/story-step-cannot-embed-a-record-copy",
+      "why": "A story references the same underlying records rather than copying them, so an embedded copy is rejected.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"kind": "event", "content": {"summary": "An event.", "event_types": ["occurrence"], "time": null}},
+          {
+            "kind": "story",
+            "content": {
+              "summary": "A story with an embedded event copy.",
+              "window": {"start": {"year": 700, "era": "ce"}, "end": {"year": 800, "era": "ce"}, "boundary": "inclusive"},
+              "steps": [{"record_id": "lks:event:vector-example", "role": "start", "content": {"summary": "A copied event"}}]
+            }
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["schema_violation"]}
+    },
+    {
+      "id": "documents/other-type-needs-an-explanation",
+      "why": "The v0 vocabularies are deliberately small; an other type must be explained rather than silently extending them.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"kind": "event", "content": {"summary": "An unexplained other event type.", "event_types": ["other"], "time": null}}
+        ]
+      },
+      "expect": {"valid": false, "codes": ["other_type_without_note"]}
+    },
+    {
+      "id": "documents/other-type-with-a-note-is-valid",
+      "why": "An explained extension is allowed without pretending the vocabulary is complete.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "event",
+            "content": {"summary": "An explained other event type.", "event_types": ["other"], "time": null, "editorial_notes": "A ritual assembly that is neither a council nor an exchange."}
+          }
+        ]
+      },
+      "expect": {"valid": true}
+    },
+    {
+      "id": "documents/duplicate-revision-ids-rejected",
+      "why": "Revision identities are unique and never reused.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "event",
+            "revisions": [
+              {"revision_id": "lks:rev:vector-1", "created_at": "2026-01-01T00:00:00Z", "content": {"summary": "First.", "event_types": ["occurrence"], "time": null}},
+              {"revision_id": "lks:rev:vector-1", "created_at": "2026-01-02T00:00:00Z", "content": {"summary": "Second.", "event_types": ["occurrence"], "time": null}}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["duplicate_revision_id"]}
+    },
+    {
+      "id": "documents/edited-revision-is-detected-by-its-hash",
+      "why": "A published revision body that changed after sealing is detected instead of silently rewriting history.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "event",
+            "revision_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000001",
+            "content": {"summary": "An event whose stored hash does not match its content.", "event_types": ["occurrence"], "time": null}
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["revision_hash_mismatch"]}
+    },
+    {
+      "id": "documents/revisions-are-appended-oldest-first",
+      "why": "Revisions are an ordered append-only list; a decreasing creation time means the list was reordered or rewritten.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "event",
+            "revisions": [
+              {"revision_id": "lks:rev:vector-1", "created_at": "2026-01-05T00:00:00Z", "content": {"summary": "First.", "event_types": ["occurrence"], "time": null}},
+              {"revision_id": "lks:rev:vector-2", "created_at": "2026-01-01T00:00:00Z", "content": {"summary": "Second.", "event_types": ["occurrence"], "time": null}}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["revision_order_not_increasing"]}
+    },
+    {
+      "id": "documents/record-id-kind-must-match-the-record",
+      "why": "A stable record id carries its kind; changing it would break the stable identity of a record.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"kind": "place", "record_id": "lks:event:vector-example", "content": {"summary": "A place with an event id.", "place_types": ["settlement"], "names": [], "geometry": []}}
+        ]
+      },
+      "expect": {"valid": false, "codes": ["record_id_kind_mismatch"]}
+    },
+    {
+      "id": "documents/undated-event-is-valid",
+      "why": "A supported event with no usable date remains a valid record; it is excluded from temporal results by the time contract, not by the document schema.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly"},
+          {
+            "kind": "event",
+            "published": true,
+            "content": {"summary": "An undated event.", "event_types": ["occurrence"], "time": null},
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source mentions the event without a date.", "asserts": "", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "2"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": true}
+    },
+    {
+      "id": "documents/unrecorded-license-blocks-publication",
+      "why": "Open access is not the same as unrestricted redistribution, so a cited source with unrecorded terms blocks publication.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly", "license": {"status": "unknown"}},
+          {
+            "kind": "event",
+            "published": true,
+            "content": {"summary": "An event citing a source with unrecorded terms.", "event_types": ["occurrence"], "time": null},
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source reports the event.", "asserts": "", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "2"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["unrecorded_source_license"]}
+    },
+    {
+      "id": "documents/quoted-text-needs-quotation-rights",
+      "why": "Quoting a source requires recorded permission to quote, not just a citation.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly", "license": {"status": "recorded", "license_id": "all-rights-reserved", "attribution_text": "Example Study B", "redistribution": "not_permitted", "quotation_permitted": "unknown"}},
+          {
+            "kind": "event",
+            "published": true,
+            "content": {"summary": "An event quoting a source without permission.", "event_types": ["occurrence"], "time": null},
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source reports the event.", "asserts": "", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:vector-a", "locator": {"kind": "page", "value": "2"}, "quoted_text": "the envoys reached the court in that year"}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["quotation_not_permitted"]}
+    },
+    {
+      "id": "documents/recorded-license-needs-its-terms",
+      "why": "A license recorded as known must state the identifier, attribution, redistribution, and quotation terms.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {"source_id": "lks:source:vector-a", "kind": "scholarly", "license": {"status": "recorded", "license_id": "CC-BY-4.0", "redistribution": "permitted_with_attribution", "quotation_permitted": true}}
+        ]
+      },
+      "expect": {"valid": false, "codes": ["license_incomplete"]}
+    },
+    {
+      "id": "documents/claim-citations-must-resolve-to-a-source",
+      "why": "A citation that resolves to nothing is not an evidentiary basis.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "event",
+            "published": true,
+            "content": {"summary": "An event citing a source outside the content tree.", "event_types": ["occurrence"], "time": null},
+            "claims": [
+              {"claim_id": "lks:claim:vector-1", "statement": "The source reports the event.", "asserts": "", "basis": "attested", "role": "main", "citations": [{"source_id": "lks:source:missing", "locator": {"kind": "page", "value": "2"}}]}
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["unresolved_reference"]}
+    },
+    {
+      "id": "documents/invalid-timestamp-rejected",
+      "why": "An editorial timestamp whose shape looks right but which is not a real UTC instant must be rejected before it can affect revision ordering.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "kind": "event",
+            "revisions": [
+              {
+                "created_at": "2026-99-99T99:99:99Z",
+                "content": {"summary": "An event with an impossible revision timestamp.", "event_types": ["occurrence"], "time": null}
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["invalid_timestamp"]}
+    },
+    {
+      "id": "documents/source-edit-detected-by-its-hash",
+      "why": "A source document whose metadata was edited after sealing is detected instead of silently changing what review approved.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-a",
+            "kind": "scholarly",
+            "source_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000001",
+            "title": "An edited source title"
+          }
+        ]
+      },
+      "expect": {"valid": false, "codes": ["source_hash_mismatch"]}
+    }
+  ]
+}

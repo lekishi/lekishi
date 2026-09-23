@@ -1,0 +1,84 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "actor",
+  "record_id": "lks:actor:example-envoy",
+  "created_at": "2026-01-02T00:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:example-envoy-1",
+      "created_at": "2026-01-02T00:00:00Z",
+      "author": {"name": "Contract example"},
+      "change_explanation": "Initial synthetic example of a person actor with attested existence.",
+      "content": {
+        "summary": "Synthetic contract example of a person actor. Not historical content.",
+        "names": [
+          {
+            "form": "Example Envoy",
+            "script": "Latn",
+            "language": "en",
+            "role": "primary",
+            "claim_id": "lks:claim:example-envoy-name"
+          }
+        ],
+        "actor_types": ["person"],
+        "existence": {
+          "source_expression": "attested between 730 and 760 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "duration",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 730, "era": "ce", "endpoint_certainty": "approximate"},
+            "end": {"year": 760, "era": "ce", "endpoint_certainty": "approximate"}
+          }
+        },
+        "roles": [
+          {
+            "role": "envoy",
+            "validity": {
+              "source_expression": "during the mission",
+              "calendar": "julian",
+              "precision": "year",
+              "mode": "duration",
+              "interval": {
+                "bounds": "two_sided",
+                "boundary": "inclusive",
+                "start": {"year": 750, "era": "ce"},
+                "end": {"year": 755, "era": "ce"}
+              }
+            }
+          }
+        ],
+        "editorial_notes": "Synthetic contract example showing that an actor's existence and roles are separate, time-bounded claims."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:example-envoy-name",
+          "statement": "The source names this person.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [{"source_id": "lks:source:example-chronicle-a", "locator": {"kind": "entry", "value": "envoy"}}]
+        },
+        {
+          "claim_id": "lks:claim:example-envoy-existence",
+          "statement": "The source mentions this person only within this range of years.",
+          "asserts": "/existence",
+          "basis": "attested",
+          "role": "main",
+          "citations": [{"source_id": "lks:source:example-chronicle-a", "locator": {"kind": "entry", "value": "envoy"}}]
+        }
+      ],
+      "revision_hash": "sha256:b638e2b0fee4f79989de3f5694113dc6acc94e46ec273de21a84270f1c9f0690"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:example-envoy-1",
+    "published_revision_hash": "sha256:b638e2b0fee4f79989de3f5694113dc6acc94e46ec273de21a84270f1c9f0690",
+    "set_id": "lks:set:example-contract-v1",
+    "published_at": "2026-01-06T00:00:00Z",
+    "published_by": {"name": "Contract example"}
+  }
+}

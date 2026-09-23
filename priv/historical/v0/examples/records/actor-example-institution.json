@@ -1,0 +1,73 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "actor",
+  "record_id": "lks:actor:example-institution",
+  "created_at": "2026-01-02T00:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:example-institution-1",
+      "created_at": "2026-01-02T00:00:00Z",
+      "author": {"name": "Contract example"},
+      "change_explanation": "Initial synthetic example of an institution with a changing role.",
+      "content": {
+        "summary": "Synthetic contract example of an institution whose role changes over time. Not historical content.",
+        "names": [
+          {
+            "form": "Example Institution",
+            "script": "Latn",
+            "language": "en",
+            "role": "primary",
+            "claim_id": "lks:claim:example-institution-name"
+          }
+        ],
+        "actor_types": ["institution", "religious_body"],
+        "roles": [
+          {
+            "role": "member",
+            "validity": {
+              "source_expression": "from 760 CE onward",
+              "calendar": "julian",
+              "precision": "year",
+              "mode": "duration",
+              "interval": {
+                "bounds": "lower_only",
+                "boundary": "inclusive",
+                "start": {"year": 760, "era": "ce"},
+                "end": null
+              }
+            },
+            "note": "synthetic example: an open-ended role the source supports only from this year"
+          }
+        ],
+        "editorial_notes": "Synthetic contract example: institutions are not states or cultures, and a role may be open-ended."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:example-institution-name",
+          "statement": "The source names this institution.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [{"source_id": "lks:source:example-chronicle-a", "locator": {"kind": "page", "value": "61"}}]
+        },
+        {
+          "claim_id": "lks:claim:example-institution-role",
+          "statement": "The source reports the institution's role only from this year onward.",
+          "asserts": "/roles/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [{"source_id": "lks:source:example-chronicle-a", "locator": {"kind": "page", "value": "61"}}]
+        }
+      ],
+      "revision_hash": "sha256:30dac91263d1f73b89315603b84d7f9f90e8a8dfdec7f4289504d61f1e22f0e5"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:example-institution-1",
+    "published_revision_hash": "sha256:30dac91263d1f73b89315603b84d7f9f90e8a8dfdec7f4289504d61f1e22f0e5",
+    "set_id": "lks:set:example-contract-v1",
+    "published_at": "2026-01-06T00:00:00Z",
+    "published_by": {"name": "Contract example"}
+  }
+}

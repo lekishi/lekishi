@@ -1,0 +1,24 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "source",
+  "source_id": "lks:source:example-study-b",
+  "source_hash": "sha256:447b718b5fd36101dd9c3bf6bd73c8252d25eeb2653ed725eee90433415ae7ff",
+  "kind": "scholarly",
+  "title": "Example study (synthetic contract example, not historical content)",
+  "edition": "Synthetic edition used only to exercise the v0 contract",
+  "author": "Example Study B (synthetic)",
+  "issued": {"year": 1955, "era": "ce"},
+  "language": "en",
+  "identifiers": [{"system": "other", "value": "example-study-b"}],
+  "license": {
+    "status": "recorded",
+    "license_id": "all-rights-reserved",
+    "attribution_text": "Example Study B (synthetic contract example)",
+    "redistribution": "not_permitted",
+    "quotation_permitted": true,
+    "reviewed_by": "Contract example",
+    "reviewed_at": "2026-01-01T00:00:00Z",
+    "notes": "Synthetic example of a work whose redistribution is not permitted while short quotation is."
+  },
+  "notes": "Synthetic fixture: it asserts nothing about the past and must never be imported as content."
+}

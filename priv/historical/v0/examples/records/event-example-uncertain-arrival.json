@@ -1,0 +1,68 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "event",
+  "record_id": "lks:event:example-uncertain-arrival",
+  "created_at": "2026-01-02T00:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:example-uncertain-arrival-1",
+      "created_at": "2026-01-02T00:00:00Z",
+      "author": {"name": "Contract example"},
+      "change_explanation": "Initial synthetic example of an uncertain occurrence with an ordering assertion.",
+      "content": {
+        "summary": "Synthetic contract example of an event known only to have happened between 730 and 760 CE. Not historical content.",
+        "event_types": ["occurrence"],
+        "time": {
+          "source_expression": "sometime between 730 and 760 CE",
+          "calendar": "julian",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 730, "era": "ce"},
+            "end": {"year": 760, "era": "ce"}
+          },
+          "ordering": [
+            {
+              "relation": "before",
+              "record_id": "lks:event:example-departure",
+              "claim_id": "lks:claim:example-arrival-order",
+              "note": "synthetic example: the source places this event before the departure"
+            }
+          ]
+        },
+        "places": [{"place_id": "lks:place:example-changan", "role": "site"}],
+        "participants": [{"actor_id": "lks:actor:example-envoy", "role": "participant"}],
+        "editorial_notes": "Synthetic contract example: an uncertain occurrence is a possible match, never a duration and never a midpoint date."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:example-arrival-time",
+          "statement": "The source dates the event only to this range of years.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "main",
+          "citations": [{"source_id": "lks:source:example-chronicle-a", "locator": {"kind": "page", "value": "44"}}]
+        },
+        {
+          "claim_id": "lks:claim:example-arrival-order",
+          "statement": "The source places this event before the departure event.",
+          "asserts": "/time/ordering/0",
+          "basis": "attested",
+          "role": "supporting",
+          "citations": [{"source_id": "lks:source:example-chronicle-a", "locator": {"kind": "page", "value": "45"}}]
+        }
+      ],
+      "revision_hash": "sha256:ce190d557fc17c71d763e54a5a54202dc24e1b38ee57b8a864b91bc90a82fb76"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:example-uncertain-arrival-1",
+    "published_revision_hash": "sha256:ce190d557fc17c71d763e54a5a54202dc24e1b38ee57b8a864b91bc90a82fb76",
+    "set_id": "lks:set:example-contract-v1",
+    "published_at": "2026-01-06T00:00:00Z",
+    "published_by": {"name": "Contract example"}
+  }
+}

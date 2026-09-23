@@ -11,9 +11,9 @@ below when updating project-specific guidance.
 
 ## Product and design records
 
-- Read the relevant [RFDs](rfd/README.adoc) before changing product or architecture behavior. Respect each document's state; drafts are proposals, not implemented features or final stack decisions.
+- Read the relevant [RFDs](rfd/README.adoc) before changing product or architecture behavior. Respect each document's state; drafts are proposals, not implemented features or final stack decisions. [RFD 4](rfd/0004/README.adoc) defines the publicly accessible PoC's acceptance criteria and non-goals; treat them as the release scope.
 - Keep implementation progress in `rfd/NNNN/IMPLEMENTATION.adoc`, using AsciiDoc checklists and reciprocal links to `README.adoc`. Preserve task completion states when reorganizing plans.
-- The current backend is Phoenix/Ecto/PostgreSQL. RFD 3 approves Phoenix + Svelte/TypeScript + Vite for later implementation experiments, evaluating Cesium first; this is not a final production decision or an immediate implementation launch. These frontend additions are not installed, and PostGIS remains proposed. Follow explicit decisions within the RFDs rather than treating every proposal as approved.
+- The current backend is Phoenix/Ecto/PostgreSQL. RFD 3 approves Phoenix + Svelte/TypeScript + Vite for implementation experiments, evaluating Cesium first, and RFD 4 records the owner's goal of a publicly accessible PoC with implementation now planned. The frontend additions are not installed yet, the stack remains an experiment rather than a final production decision, external deployment and paid providers require explicit owner authorization, and PostGIS remains proposed. Follow explicit decisions within the RFDs rather than treating every proposal as approved.
 - Keep native delivery open. Historical data and behavior contracts must not depend on browser UI or renderer objects.
 - Treat trade, learning, religion, diplomacy, and institutional change as first-class interactions alongside war. Distinguish states, cultures, communities, and companies.
 - Preserve historical sources, uncertainty, calendar/precision information, and the distinction between contact and inferred influence. Generated visual concepts are design references, never historical evidence.

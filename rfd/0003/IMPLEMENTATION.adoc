@@ -1,8 +1,11 @@
 = RFD 0003 implementation checklist
 
 Implements link:README.adoc[RFD 3: Browser architecture and native options].
-The Phoenix scaffold exists; the approved experiment stack is not implemented yet
-and is now planned under link:../0004/README.adoc[RFD 4].
+The Phoenix scaffold was removed: link:STATIC_ARCHITECTURE.adoc[the static
+architecture decision] supersedes the experimental Phoenix runtime, and the site
+is now a statically built SvelteKit project with the approved Svelte/TypeScript
+and Cesium direction. The approved experiment stack is installed; the stack
+remains an experiment rather than a final production decision.
 
 Resolve remaining technical contracts during implementation using concrete
 proposals, worked examples, and tests, and record the evidence in the owning RFD.
@@ -12,8 +15,9 @@ acceptance criteria before dependent work and completion claims, respectively.
 
 == Phase 0 — Architecture and rendering evaluation
 
-- [ ] Select available desktop/laptop and physical iPad-class tablet hardware, browsers, and performance limits for the approved Phoenix/Svelte/TypeScript/Vite experiment with Cesium evaluated first.
-- [x] Integrate Svelte/TypeScript and Vite with Phoenix assets and releases; verify production-mode entrypoints, Cesium workers/styles/resources/models, and retained Phoenix pages without the Vite development server. Evidence: the root link:../../README.md[README], `mix lekishi.assets.check`, and the production Playwright suite.
+- [ ] Select available desktop/laptop and physical iPad-class tablet hardware, browsers, and performance limits for the approved static SvelteKit/TypeScript build with Cesium evaluated first.
+- [x] Integrate Svelte/TypeScript and the static build; verify production entrypoints, Cesium workers/styles/resources, direct `/atlas` navigation, and the prerendered pages with no development server. Evidence: the root link:../../README.md[README], `scripts/check-static-build.mjs`, and the browser suites against the built artifact.
+- [x] Remove the superseded Phoenix/Elixir/Ecto/PostgreSQL runtime and record the measured decision. Evidence: link:STATIC_ARCHITECTURE.adoc[the static architecture decision].
 - [ ] Prototype Cesium globe, terrain, routes, picking, and symbolic landmarks.
 - [ ] Compare labels, geographic scale, local playback, selection, and measured rendering behavior across zoom levels for RFD 1's two local-detail treatments and two scenarios, using later separate implementation threads with a common baseline.
 - [ ] Compare MapLibre if Cesium fails a specific visual, device, or delivery requirement.
@@ -34,8 +38,8 @@ link:../0004/README.adoc[RFD 4] owns the release acceptance criteria; this
 section covers the delivery work that satisfies them. It does not depend on
 Phase 2, which remains conditional.
 
-- [ ] Produce the release artifact from a clean checkout with the Vite production build, digested static assets, and the selected renderer's resources; verify it serves without the Vite development server (RFD 4 AC4).
-- [ ] Expose and document a health endpoint and configure error visibility the owner can review (RFD 4 AC1, AC8).
+- [ ] Produce the release artifact from a clean checkout with the static SvelteKit build and the selected renderer's resources; verify it serves without a development server (RFD 4 AC4). The static architecture decision (link:../0003/STATIC_ARCHITECTURE.adoc[RFD 3]) records the measured build, the artifact contents, and the build invariant.
+- [ ] Expose and document a health endpoint and configure error visibility the owner can review (RFD 4 AC1, AC8). A static host answers a health path with a static file; the mechanism is a step 3 owner decision.
 - [ ] Document repeatable deployment steps and a rollback or recovery path, and exercise the recovery path (RFD 4 AC8).
 - [ ] Verify HTTPS redirect, certificate, and route behavior on the release artifact before public launch (RFD 4 AC1).
 

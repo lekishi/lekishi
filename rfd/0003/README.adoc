@@ -28,6 +28,13 @@ accessible PoC; the experiment's measured results still determine whether the
 stack is promoted.
 Browser-first delivery and keeping native open are established requirements.
 
+The runtime baseline above was superseded on 2026-09-23: the project is now a
+statically built SvelteKit site, with the approved Svelte/TypeScript and Cesium
+direction intact and no Phoenix, Ecto, or PostgreSQL runtime. See
+link:STATIC_ARCHITECTURE.adoc[the static architecture decision]. The rest of this
+document, including the responsibility split for historical logic and the
+renderer, still describes the architecture.
+
 == Proposed responsibilities
 
 Phoenix:: Published content, queries, permissions, future editorial workflows,

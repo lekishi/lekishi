@@ -14,6 +14,14 @@ Nothing here authorizes account creation, purchases, a domain registration,
 secret configuration, or deployment, and nothing here changes a decision owned
 by RFD 1, RFD 2, or RFD 3.
 
+Superseded in part, 2026-09-23: the owner directed the project to a statically
+built SvelteKit site, so the Phoenix hosting, PostgreSQL runtime, and release
+packaging findings below no longer describe the artifact. See
+link:STATIC_ARCHITECTURE.adoc[the static architecture decision] for the runtime
+that replaced them. This document remains the record of what was evaluated on its
+access date, and its device matrix, performance thresholds, provider findings,
+and owner decisions still apply.
+
 == Reading conventions
 
 [cols="1,4",options="header"]

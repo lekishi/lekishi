@@ -2,61 +2,54 @@ SHELL := /bin/bash
 .SHELLFLAGS := -euo pipefail -c
 .DEFAULT_GOAL := dev
 
-POSTGRES_PORT ?= 5432
-DEV_DIR := $(CURDIR)/.dev
-POSTGRES_DIR := $(DEV_DIR)/postgres
-POSTGRES_DATA := $(POSTGRES_DIR)/data
-POSTGRES_SOCKET := $(POSTGRES_DIR)/socket
-POSTGRES_LOG := $(POSTGRES_DIR)/postgres.log
+.PHONY: dev build preview check test lint format seal screenshots e2e e2e-dev verify clean
 
-.PHONY: dev up down migration postgres init-postgres psql release check-release
-
+# Development server (SvelteKit + Vite) at http://localhost:5173. It serves the
+# same static/cesium runtime the built artifact ships.
 dev:
-	mix phx.server
+	pnpm dev
 
-up: init-postgres
-	@if pg_ctl --pgdata="$(POSTGRES_DATA)" status >/dev/null 2>&1; then \
-		echo "PostgreSQL is already running"; \
-	else \
-		pg_ctl --pgdata="$(POSTGRES_DATA)" --log="$(POSTGRES_LOG)" \
-			--options='-h "" -k "$(POSTGRES_SOCKET)" -p $(POSTGRES_PORT)' \
-			--wait start; \
-	fi
+# The deployable artifact: prerendered HTML, hashed bundles, and the Cesium
+# runtime in build/. `pnpm build` also runs the build invariant.
+build:
+	pnpm build
 
-down:
-	@if [[ -s "$(POSTGRES_DATA)/PG_VERSION" ]] && \
-		pg_ctl --pgdata="$(POSTGRES_DATA)" status >/dev/null 2>&1; then \
-		pg_ctl --pgdata="$(POSTGRES_DATA)" --mode=fast --wait stop; \
-	else \
-		echo "PostgreSQL is not running"; \
-	fi
+# Serve build/ the way a static host does, including extension-less /atlas.
+preview:
+	pnpm preview
 
-migration:
-	mix ecto.migrate
-	mix ecto.dump
+check:
+	pnpm check
 
-init-postgres:
-	@mkdir -p "$(POSTGRES_DATA)" "$(POSTGRES_SOCKET)"
-	@if [[ ! -s "$(POSTGRES_DATA)/PG_VERSION" ]]; then \
-		initdb --pgdata="$(POSTGRES_DATA)" --username=postgres --auth-local=trust \
-			--auth-host=trust --encoding=UTF8 --no-locale; \
-	fi
+test:
+	pnpm test
 
-postgres: init-postgres
-	exec postgres -D "$(POSTGRES_DATA)" -h "" -k "$(POSTGRES_SOCKET)" \
-		-p "$${PORT:-$(POSTGRES_PORT)}"
+lint:
+	pnpm lint
 
-psql: up
-	psql --host="$(POSTGRES_SOCKET)" --port="$(POSTGRES_PORT)" \
-		--username=postgres --dbname=postgres
+format:
+	pnpm format
 
-# Production artifact without deploying it: minified Tailwind, Vite production
-# build, digested static assets, and the asset check.
-release:
-	MIX_ENV=prod mix assets.deploy
+# Reseal the worked examples after editing content (see historical/README.md).
+seal:
+	pnpm seal
 
-# Build the release, then run the browser checks against it with no Vite
-# development server (LEKISHI_SKIP_BUILD=1 reuses the artifact `release` built).
-check-release: release
-	MIX_ENV=prod mix release --overwrite
-	cd assets && LEKISHI_SKIP_BUILD=1 pnpm e2e
+# Capture the rendered states a reviewer needs from a running server.
+screenshots:
+	pnpm screenshots
+
+# Browser checks against the built artifact (the default e2e mode).
+e2e:
+	pnpm e2e
+
+# Browser checks against the development server.
+e2e-dev:
+	pnpm e2e:dev
+
+# Everything CI runs: format check, type/Svelte check, unit and contract tests,
+# then the static build with its invariant.
+verify:
+	pnpm verify
+
+clean:
+	rm -rf build .svelte-kit static/cesium

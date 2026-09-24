@@ -1,21 +1,30 @@
 services:
-  postgres:
-    # The orb service environment does not inherit the pinned Nix shell, so each
-    # service enters it explicitly instead of relying on PATH.
-    command: >-
-      export PATH="/nix/var/nix/profiles/default/bin:$PATH";
-      export PORT=5432;
-      exec nix develop --command make postgres
-    platforms: [linux]
+  # The SvelteKit development server. It serves the same static tree the built
+  # artifact ships (`static/cesium` included), so development and production
+  # differ only in bundling and prerendering.
   web:
     command: >-
       export PATH="/nix/var/nix/profiles/default/bin:$PATH";
-      until [ -S "$PWD/.dev/postgres/socket/.s.PGSQL.5432" ]; do sleep 0.5; done;
-      exec nix develop --command make dev
-    port: 4000
-    health: /
+      exec nix develop --command pnpm dev --host 0.0.0.0 --port 5173
+    port: 5173
+    health: /atlas
     portal:
       title: Lekishi
-      description: Phoenix development server
+      description: SvelteKit development server
     agent: control
+    platforms: [linux]
+
+  # The deployable artifact, built and served as plain static files by the
+  # file-only server (`scripts/serve-static.mjs`). No SSR runtime and no
+  # `.svelte-kit` access: this is what Cloudflare Pages (or any static host)
+  # serves, and no application server runs.
+  static:
+    command: >-
+      export PATH="/nix/var/nix/profiles/default/bin:$PATH";
+      exec nix develop --command bash -c "pnpm build && node scripts/serve-static.mjs --directory build --port 4173 --host 0.0.0.0"
+    port: 4173
+    health: /atlas
+    portal:
+      title: Lekishi (static build)
+      description: The built static artifact served as files
     platforms: [linux]

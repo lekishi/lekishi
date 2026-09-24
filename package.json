@@ -1,0 +1,48 @@
+{
+  "name": "lekishi",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.3.4",
+  "description": "Lekishi historical atlas: a statically built SvelteKit site with a bundled Cesium globe.",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "sync:cesium": "node scripts/sync-cesium-runtime.mjs",
+    "dev": "node scripts/sync-cesium-runtime.mjs && vite dev",
+    "build": "node scripts/sync-cesium-runtime.mjs && vite build && node scripts/check-static-build.mjs",
+    "preview": "node scripts/serve-static.mjs --directory build",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "prettier --check .",
+    "format": "prettier --write .",
+    "screenshots": "node scripts/capture-review-screenshots.mjs",
+    "seal": "LEKISHI_SEAL=1 vitest run src/lib/historical/contract/seal.maintenance.test.ts",
+    "e2e": "playwright test",
+    "e2e:dev": "LEKISHI_E2E_MODE=dev playwright test",
+    "e2e:static": "LEKISHI_E2E_MODE=static playwright test",
+    "verify": "pnpm lint && pnpm check && pnpm test && pnpm build",
+    "prepare": "svelte-kit sync"
+  },
+  "dependencies": {
+    "cesium": "1.145.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@sveltejs/adapter-static": "^3.0.10",
+    "@sveltejs/kit": "^2.70.3",
+    "@sveltejs/vite-plugin-svelte": "^7.3.1",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^26.6.2",
+    "jsdom": "^30.1.1",
+    "prettier": "^3.9.9",
+    "prettier-plugin-svelte": "^4.1.1",
+    "svelte": "^5.57.1",
+    "svelte-check": "^4.7.6",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.0",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.1"
+  }
+}

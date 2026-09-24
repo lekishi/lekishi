@@ -1,0 +1,81 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "publication_set",
+  "set_id": "lks:set:example-contract-v1",
+  "title": "Synthetic contract example set",
+  "change_explanation": "Initial synthetic example used to exercise the v0 publication contract. It publishes no historical content.",
+  "members": [
+    {
+      "record_id": "lks:place:example-changan",
+      "revision_id": "lks:rev:example-changan-1",
+      "revision_hash": "sha256:212794b66985e20fb9410f65a04cb223f076e2ab09df66a1672d21ae1ba03179"
+    },
+    {
+      "record_id": "lks:place:example-harbour",
+      "revision_id": "lks:rev:example-harbour-1",
+      "revision_hash": "sha256:118fc8d2ef550c6d3ca0db201987920adda45cf20c68f738c2f6a2325604216d"
+    },
+    {
+      "record_id": "lks:actor:example-envoy",
+      "revision_id": "lks:rev:example-envoy-1",
+      "revision_hash": "sha256:b638e2b0fee4f79989de3f5694113dc6acc94e46ec273de21a84270f1c9f0690"
+    },
+    {
+      "record_id": "lks:actor:example-institution",
+      "revision_id": "lks:rev:example-institution-1",
+      "revision_hash": "sha256:30dac91263d1f73b89315603b84d7f9f90e8a8dfdec7f4289504d61f1e22f0e5"
+    },
+    {
+      "record_id": "lks:event:example-uncertain-arrival",
+      "revision_id": "lks:rev:example-uncertain-arrival-1",
+      "revision_hash": "sha256:ce190d557fc17c71d763e54a5a54202dc24e1b38ee57b8a864b91bc90a82fb76"
+    },
+    {
+      "record_id": "lks:event:example-departure",
+      "revision_id": "lks:rev:example-departure-1",
+      "revision_hash": "sha256:caa5a0712bc85ff63212f1d1bb6ae56bb3c07ab8f8dd386cebd2114e8f9b23d4"
+    },
+    {
+      "record_id": "lks:relationship:example-trade",
+      "revision_id": "lks:rev:example-trade-1",
+      "revision_hash": "sha256:9051cf467a57922a3ae385928ef65a4ce288e2e0d952d06ec5588da67547db4b"
+    },
+    {
+      "record_id": "lks:relationship:example-influence",
+      "revision_id": "lks:rev:example-influence-1",
+      "revision_hash": "sha256:45dbb58e86b54cc7a5ba72aadca08638264a50d87dfc611f5750ec7f961381c9"
+    },
+    {
+      "record_id": "lks:story:example-chapter",
+      "revision_id": "lks:rev:example-chapter-1",
+      "revision_hash": "sha256:848add6f2bc08bfff60366ed0ef3a1b564bda372f382f5ac7a4395b7e2e7e628"
+    }
+  ],
+  "sources": [
+    {
+      "source_id": "lks:source:example-chronicle-a",
+      "source_hash": "sha256:b009755e237ca35b5c206212b928aade377729f67f8d867e701c21857f298a45"
+    },
+    {
+      "source_id": "lks:source:example-study-b",
+      "source_hash": "sha256:447b718b5fd36101dd9c3bf6bd73c8252d25eeb2653ed725eee90433415ae7ff"
+    }
+  ],
+  "review": {
+    "reviewed_at": "2026-01-05T00:00:00Z",
+    "reviewer": {"name": "Contract example", "role": "owner editor"},
+    "independence": "self_review",
+    "checklist": {
+      "source_support": true,
+      "attribution": true,
+      "date_location_uncertainty": true,
+      "attestation_vs_interpretation": true,
+      "reuse_rights": true
+    },
+    "notes": "Synthetic example. In the file-based workflow this record is where the approving editor, the exact approved revision of every member, and the review checklist are kept. Self-review is recorded explicitly and is never described as independent or specialist review."
+  },
+  "published_at": "2026-01-06T00:00:00Z",
+  "published_by": {"name": "Contract example", "role": "owner editor"},
+  "supersedes": null,
+  "correction_of_revision": null
+}

@@ -1,0 +1,244 @@
+:authors: Darwin D Wu <darwin67@users.noreply.github.com>
+:state: published
+:labels: architecture, static, sveltekit, cesium, delivery, poc
+
+= RFD 3 static architecture decision
+
+== Provenance and supersession
+
+The owner directed step 2 of the PoC plan: convert the project from the
+Phoenix/Elixir/Ecto/PostgreSQL runtime that Wave 1 delivered into a statically
+built site, with SvelteKit and static generation as the agreed direction. This
+record is that decision, taken on 2026-09-23 from the measurement in
+<<Measured evidence>>.
+
+It supersedes, for the runtime and hosting question only:
+
+* the "Current baseline and decision status" and the Phoenix responsibility in
+  link:README.adoc[RFD 3]'s proposed-responsibilities table, and
+* the Phoenix hosting, PostgreSQL runtime, and release-packaging parts of
+  link:DELIVERY_EVALUATION.adoc[the Wave 1D delivery evaluation].
+
+Both documents stay readable as the record of what was evaluated and why; they
+are not rewritten to match this decision. What stands unchanged: RFD 3 owns
+browser architecture and delivery, the browser-first requirement, keeping native
+delivery open, the requirement that historical semantics stay independent of the
+UI framework and the renderer, and Cesium being evaluated first. RFD 4 still owns
+the release acceptance criteria, and no account, purchase, domain, secret, or
+deployment is authorized by this record.
+
+== Decision
+
+The deployable Lekishi artifact is a statically built SvelteKit site. Every route
+is prerendered at build time by `@sveltejs/adapter-static`; the output directory
+is a tree of plain files with no application server, no database, and no BEAM
+runtime. Cesium remains the renderer, and the atlas workspace keeps its
+renderer-independent state and scene logic.
+
+The alternative considered and rejected was keeping Phoenix as the shell while
+removing only the database: it would retain a runtime, a release pipeline, and a
+second asset pipeline for a site whose routes are two prerendered pages, and it
+would keep the Phoenix digest step whose second URL for the workspace entry
+caused the duplicate-mount bug that Wave 1 had to work around.
+
+== What changed
+
+[cols="1,2",options="header"]
+|===
+|Area |Change
+
+|Runtime and build
+|Removed Phoenix, Elixir, Ecto, PostgreSQL, Mix, Bandit, LiveView, esbuild and
+Tailwind Mix tasks, the release scripts, and every BEAM dependency. Added
+SvelteKit 2 with `@sveltejs/adapter-static`, Tailwind v4 through
+`@tailwindcss/vite`, and a single `pnpm`-driven build.
+
+|Source layout
+|`lib/`, `config/`, `test/`, `priv/`, `mix.exs`, `mix.lock`, and the `assets/`
+workspace are gone. The atlas workspace moved to `src/lib/atlas`, routes to
+`src/routes`, browser checks to `e2e/`, and the historical contract to
+`historical/v0` with its TypeScript reference semantics in
+`src/lib/historical/contract`.
+
+|Historical contract
+|The schemas, worked examples, publication sets, and all 187 adversarial vectors
+are unchanged. The Elixir reference semantics and ExUnit suite were ported to
+TypeScript and Vitest; the same rules, codes, caveats, and containment matcher
+are exercised by the same vectors.
+
+|Assets
+|Vite bundles and hashes JS/CSS into `build/_app/immutable`. The Cesium runtime
+(Workers, Assets including Natural Earth II, Widgets, ThirdParty) is copied into
+`static/cesium` by `scripts/sync-cesium-runtime.mjs` and shipped unchanged in the
+artifact. Phoenix digesting is gone; content hashing is Vite's.
+
+|Build invariant
+|`scripts/check-static-build.mjs` replaces `mix lekishi.assets.check`: it fails
+the build if the prerendered pages, the hashed bundles, the single stylesheet
+with the Cesium widget styles, or the Cesium runtime directories are missing, if
+the atlas page does not have exactly one `#atlas-workspace` mount point, or if
+the artifact contains a server runtime.
+
+|Routing
+|`/` and `/atlas` are prerendered to `index.html` and `atlas.html`, so a direct
+request or refresh works with no server. `static/404.html` is the static-host
+fallback, and `static/_redirects` states the `/atlas` rewrite explicitly for
+hosts that need it. The useful URL `/atlas` is preserved.
+
+|Static serving
+|`scripts/serve-static.mjs` serves the artifact as files and nothing else: only
+paths under `build/`, clean URLs (`/atlas` serves `atlas.html`), a trailing slash
+redirecting to the clean URL (serving the same file at `/atlas/` would resolve
+the page's relative asset references under `/atlas/` and load nothing), the
+artifact's own `404.html` with a 404 status for anything else, a 400 for a
+malformed request target instead of a crash, and no access to `.svelte-kit`, the
+module graph, or an SSR runtime. The browser checks and the orb's static service
+use it, so the checks prove the artifact is deployable as plain files instead of
+proving that a preview server works. `pnpm preview` runs the same server.
+
+|Mount ownership
+|The single-owner rule is unchanged and now simpler: `src/lib/atlas/entry.ts` is
+the only module that mounts the workspace, it refuses to mount a second one, it
+releases on `pagehide`, and it restores one on `pageshow`. The route mounts and
+releases it from `onMount`, so the prerender pass never touches the DOM. The
+duplicate-mount regression coverage runs against the static artifact.
+
+|CI and environment
+|CI is Node-only: `pnpm install --frozen-lockfile`, format check, `svelte-check`,
+Vitest, the static build with its invariant, and the browser checks against the
+artifact. There is no PostgreSQL service container and no Mix cache. `flake.nix`
+provides Node 24 and pnpm; `.amp/services.yaml` serves the development server and
+the built artifact; `.agents/setup` installs from the lockfile.
+|===
+
+== Measured evidence
+
+Measured on 2026-09-23 in the pinned Nix environment, from the converted tree:
+
+[cols="1,3",options="header"]
+|===
+|Check |Result
+
+|Clean install
+|`pnpm install --frozen-lockfile` from a tree without `node_modules`, `build`, or
+`static/cesium`: 157 packages, lockfile unchanged.
+
+|Static checks
+|`pnpm lint` (Prettier) and `pnpm check` (`svelte-check`): 0 errors, 0 warnings.
+
+|Unit and contract tests
+|`pnpm test`: 284 passed, 1 skipped (the maintenance entry point that `pnpm seal`
+runs). The skipped case is the reseal action, skipped on purpose so an unsealed
+edit fails the suite instead of being silently repaired.
+
+|Adversarial vectors
+|187 vector cases pass across `time` (58), `documents` (42), `geometry` (28),
+`publication` (23), `names` (18), and `ordering` (18). The suite pins each file's
+case count and the 187 total, so a case cannot be dropped silently.
+
+|Static build
+|`pnpm build`: prerendered `index.html` and `atlas.html`, 410 files, 12 MB total
+(7.6 MB Cesium runtime, 4.1 MB app JS, 52 KB CSS, 42 Natural Earth II tiles,
+110 worker scripts). The build invariant passes and reports no server runtime.
+
+|Direct navigation
+|Served by the file-only server: `/atlas` and `/atlas.html` answer HTTP 200 with
+the prerendered shell, and a reload keeps one workspace. `/atlas/` answers 308 to
+`/atlas` (preserving a query string), and a browser navigation through it mounts
+the workspace with no failed asset request; serving the file in place would have
+resolved `./_app/...` under `/atlas/`. `/` serves the overview page with its link
+into the atlas. An unknown path answers 404 with a body byte-identical to
+`build/404.html` (no app shell, no client entry); build inputs
+(`/.svelte-kit/tsconfig.json`, `/package.json`, `/src/app.html`) and an escaping
+path (`/%2e%2e%2fpackage.json`) are all 404; and a malformed request target (`//`
+sent raw) answers 400 with the server still serving afterwards.
+
+|Browser checks
+|`pnpm e2e` against the static artifact, with `.svelte-kit` moved out of the tree
+so only `build/` is available: desktop 17 passed / 1 skipped, tablet 17 passed /
+1 skipped, phone 17 passed / 1 skipped. The skipped case is the touch-only tap
+check on the non-touch desktop project (and the desktop-only drag check on the
+touch projects). They cover one workspace and one canvas per page,
+a single fetch per client module, selection and time-window behavior, playback
+stopping at the window end, camera-follow rules, keyboard access, disposal,
+`pagehide`/`pageshow` restore, the phone layouts at 390 px and 320 px, and the
+Firefox/Linux Ctrl-wheel pinch amplification measured in the browser.
+
+|No provider
+|No request to `cesium.com`, `api.cesium`, or `ion.cesium` in any browser run;
+the renderer clears the bundled ion token and credit, uses the packaged Natural
+Earth II imagery and the ellipsoid terrain provider, and shows attribution.
+|===
+
+== Historical contract port
+
+The port is rule-for-rule: `time`, `documents`, `publication`, `canonical`,
+`json-schema`, `names`, `timestamps`, `vectors`, and `seal` in
+`src/lib/historical/contract`, with the same codes, caveats, error accumulation,
+and containment matcher, verified by the unchanged vectors and examples. The
+contract version stays `lekishi-historical-contract/v0`.
+
+Prototype-named JSON keys are treated as ordinary keys: `__proto__`,
+`constructor`, and `toString` are own properties of a parsed object, so
+membership and pointer traversal use own-property checks, and the canonical
+encoder accumulates into a null-prototype object. Without that, an undeclared
+field of those names would pass `additionalProperties`, an edited `__proto__`
+field would keep the same revision hash, and an absent evidence pointer such as
+`/constructor` would resolve. `prototype-safety.test.ts` pins all three with
+regressions built from `JSON.parse`.
+
+One representation changed, and it is recorded here rather than hidden: the
+canonical encoder is now TypeScript, and it writes a JSON number in its shortest
+form, so a value spelled `31.0` in a source file encodes as `31`. The retired
+Elixir encoder preserved the source spelling because Erlang distinguishes an
+integer from a float while JavaScript does not. No rule, schema, or vector
+depends on that spelling, but the stored hashes do, so the worked examples were
+resealed with `pnpm seal` and the seal, pin, and tamper-detection tests verify the
+new hashes. `historical/README.md` documents the encoding and the reseal step.
+
+== Delivery consequences for step 3
+
+The artifact is ready to be connected to a static host; the connection itself is
+step 3 and needs separate owner authorization. For Cloudflare Pages:
+
+* Build command `pnpm build`, output directory `build`, Node 24, no environment
+  variables, no server process.
+* Cloudflare Pages resolves `/atlas` to `atlas.html` through its default clean-URL
+  behavior, and `static/_redirects` states that rewrite explicitly so direct
+  navigation does not depend on host-specific path resolution.
+* A path outside the artifact is answered from `404.html`.
+* Nothing in the artifact references a provider account, a database, or a secret.
+
+Owner decisions that remain open before step 3, unchanged by this record: the
+canonical host and domain, the imagery and terrain provider path for the public
+release, error visibility, and the physical iPad used for the acceptance run.
+The Wave 1D hosting evaluation's Phoenix-specific recommendations are superseded
+by this decision; its device matrix, performance thresholds, and provider
+findings still apply.
+
+== Limitations recorded
+
+* The bundled Natural Earth II imagery is intentionally low resolution; this step
+  introduces no provider and no higher-detail imagery.
+* The workspace attribution line is part of the wide layout (from the `lg`
+  breakpoint). The overview page carries the same attribution at every width, so
+  a phone viewport still reaches it, but the atlas page itself shows it only from
+  the `lg` breakpoint. Changing that is a design decision, not a build detail.
+* Tablet evidence is Chromium touch emulation, not a physical iPad. Physical
+  device acceptance stays a separate gate under RFD 4.
+* The measured performance thresholds from Wave 1D are not re-measured here; this
+  record measures build, correctness, and browser behavior, not frame timings on
+  target hardware.
+
+== Verification performed for this document
+
+* Ran the clean install, format check, `svelte-check`, the full Vitest suite
+  including all 187 vectors, the static build with its invariant, and the
+  Playwright suites against both the development server and the built artifact.
+* Inspected the artifact directly: prerendered HTML for both routes, the Cesium
+  runtime directories, the single stylesheet, the 404 fallback, and the absence of
+  a server runtime.
+* Re-checked that no removed runtime remains: no `mix.exs`, `mix.lock`, `lib/`,
+  `config/`, `test/`, `priv/`, `deps/`, `_build/`, `assets/`, Elixir, PostgreSQL,
+  or Mix reference exists in the tree, CI, the Makefile, the flake, the service
+  definitions, or the setup script.

@@ -7,7 +7,7 @@ This document records the smallest portable contract that link:README.adoc[RFD 2
 needs before durable fixtures or UI behavior: identities, revisions and
 publication, claims and reuse, names and romanization, time and uncertainty,
 geometry, and stories. It is the human-readable rationale for the machine-readable
-schemas and vectors under `priv/historical/v0/`, and for the reference semantics
+schemas and vectors under `historical/v0/`, and for the reference semantics
 used to validate them. It does not select the launch mission, does not add
 PostGIS, does not move historical content into PostgreSQL, and does not depend on
 a browser or renderer.
@@ -22,9 +22,9 @@ vocabulary requires a new contract version.
 [cols="1,3",options="header"]
 |===
 |Path |Contents
-|`priv/historical/v0/schema/*.json` |JSON Schema (2020-12 subset) documents for records, sources, publication sets, and shared definitions
-|`priv/historical/v0/examples/**` |A synthetic, self-consistent content tree that validates as a whole
-|`priv/historical/v0/vectors/*.json` |Machine-readable boundary vectors with the expected result of each case
+|`historical/v0/schema/*.json` |JSON Schema (2020-12 subset) documents for records, sources, publication sets, and shared definitions
+|`historical/v0/examples/**` |A synthetic, self-consistent content tree that validates as a whole
+|`historical/v0/vectors/*.json` |Machine-readable boundary vectors with the expected result of each case
 |`test/support/lekishi/historical/contract/*.ex` |Reference semantics and the minimal JSON Schema validator used by the tests
 |`test/historical/contract/*_test.exs` |Focused contract validation
 |===
@@ -390,7 +390,7 @@ assert that every code a vector expects is documented. Representative codes:
 
 == Worked examples and test vectors
 
-`priv/historical/v0/examples/` contains a synthetic content tree — two places,
+`historical/v0/examples/` contains a synthetic content tree — two places,
 two actors, two events, two relationships, one story, two sources, and one
 publication set — that validates as a whole. It exists to exercise the contract
 shape (a disputed location, an uncertain occurrence beside a duration, an
@@ -399,7 +399,7 @@ asserts nothing about the past. Example ids contain `example-`, their
 `editorial_notes` say they are synthetic, and they must never be imported as
 content.
 
-`priv/historical/v0/vectors/` contains the boundary cases as data, each with the
+`historical/v0/vectors/` contains the boundary cases as data, each with the
 plausible wrong interpretation it separates from the contract. The vectors cover:
 BCE/CE boundaries and no year zero, precision and endpoint combinations,
 inclusive window boundaries, duration versus uncertain occurrence, playback

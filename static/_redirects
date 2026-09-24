@@ -1,0 +1,11 @@
+# Static-host routing for the Lekishi artifact.
+#
+# Both routes are prerendered, so `/atlas` is served from `atlas.html`. Cloudflare
+# Pages resolves that automatically ("clean URLs"); this rewrite states it
+# explicitly, so a direct request or a refresh never depends on host-specific path
+# resolution.
+/atlas /atlas.html 200
+# A trailing slash redirects to the clean URL rather than rewriting to the same
+# file: the prerendered page references its assets relatively, so serving it at
+# /atlas/ would resolve them under /atlas/ and the page would not load.
+/atlas/ /atlas 308

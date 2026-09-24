@@ -1,0 +1,21 @@
+# Generated or hand-formatted content that Prettier must not rewrite.
+
+# Build output and SvelteKit intermediates.
+build/
+.svelte-kit/
+
+# Dependencies.
+node_modules/
+
+# The Cesium runtime, copied from the npm package.
+static/cesium/
+
+# The historical contract keeps its hand-written formatting: the seal utility
+# rewrites hash fields positionally and the tests compare the stored hashes with
+# the content as written.
+historical/v0/
+
+# Lockfile and browser-test output.
+pnpm-lock.yaml
+test-results/
+playwright-report/

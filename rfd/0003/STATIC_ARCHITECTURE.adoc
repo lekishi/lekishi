@@ -82,8 +82,8 @@ the artifact contains a server runtime.
 |Routing
 |`/` and `/atlas` are prerendered to `index.html` and `atlas.html`, so a direct
 request or refresh works with no server. `static/404.html` is the static-host
-fallback, and `static/_redirects` states the `/atlas` rewrite explicitly for
-hosts that need it. The useful URL `/atlas` is preserved.
+fallback, and `static/_redirects` redirects `/atlas/` to the useful clean URL
+`/atlas`.
 
 |Static serving
 |`scripts/serve-static.mjs` serves the artifact as files and nothing else: only
@@ -204,17 +204,24 @@ step 3 and needs separate owner authorization. For Cloudflare Pages:
 * Build command `pnpm build`, output directory `build`, Node 24, no environment
   variables, no server process.
 * Cloudflare Pages resolves `/atlas` to `atlas.html` through its default clean-URL
-  behavior, and `static/_redirects` states that rewrite explicitly so direct
-  navigation does not depend on host-specific path resolution.
+  behavior. `static/_redirects` must not restate that rewrite: Pages redirects
+  `/atlas.html` back to `/atlas`, which would form a loop. It only redirects the
+  trailing-slash form to the clean URL.
 * A path outside the artifact is answered from `404.html`.
 * Nothing in the artifact references a provider account, a database, or a secret.
 
-Owner decisions that remain open before step 3, unchanged by this record: the
-canonical host and domain, the imagery and terrain provider path for the public
-release, error visibility, and the physical iPad used for the acceptance run.
+On 2026-09-24, the first Pages deployment measured the interaction between clean
+URLs and `_redirects`: an explicit `/atlas /atlas.html 200` rule produced a 308
+self-redirect at `/atlas`. Removing that redundant rule made Pages' clean-URL
+resolution authoritative while preserving the explicit trailing-slash redirect.
+The owner authorized the GitHub-connected project and its generated
+`lekishi.pages.dev` hostname; no custom domain, provider, or secret was added.
+
+The imagery and terrain provider path for the public release, error visibility,
+any custom domain, and the physical iPad used for the acceptance run remain open.
 The Wave 1D hosting evaluation's Phoenix-specific recommendations are superseded
-by this decision; its device matrix, performance thresholds, and provider
-findings still apply.
+by this decision; its device matrix, performance thresholds, and provider findings
+still apply.
 
 == Limitations recorded
 

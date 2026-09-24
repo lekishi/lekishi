@@ -21,6 +21,13 @@ import { expect, test, type Page } from "@playwright/test"
 /** Which server the checks run against; the development server reloads modules. */
 const mode = process.env.LEKISHI_E2E_MODE ?? "static"
 
+/**
+ * True when the suite starts the server itself. The raw-socket regression below
+ * speaks plaintext HTTP to the managed local file server, so an external
+ * `LEKISHI_E2E_BASE_URL` target (possibly HTTPS, another host) is out of scope.
+ */
+const managedServer = process.env.LEKISHI_E2E_BASE_URL === undefined
+
 function collectProblems(page: Page): string[] {
   const problems: string[] = []
 
@@ -245,6 +252,16 @@ test("serves the artifact as plain files, with clean URLs and a real 404 page", 
   expect(trailing.status()).toBe(308)
   expect(trailing.headers()["location"]).toBe("/atlas")
 
+  // The redirect is built from the matched file, never from the request path. A
+  // decoded path can hold a control character (which would throw when it reached
+  // a header) or start with `//` (which a browser reads as another origin).
+  for (const target of ["/%0a%2f..%2fatlas/", "/%2fattacker.example%2f..%2fatlas/"]) {
+    const encoded = await request.get(target, { maxRedirects: 0 })
+
+    expect(encoded.status(), target).toBe(308)
+    expect(encoded.headers()["location"], target).toBe("/atlas")
+  }
+
   const missing = await request.get("/no-such-page-in-the-atlas")
 
   expect(missing.status()).toBe(404)
@@ -290,7 +307,7 @@ test("answers a malformed request target instead of ending the server", async ({
   request,
   baseURL,
 }) => {
-  test.skip(mode === "dev", "the file-only server is the static target")
+  test.skip(!managedServer || mode === "dev", "targets the managed local file server")
 
   const port = Number(new URL(baseURL ?? "").port)
   const response = await rawRequest(port, "//")

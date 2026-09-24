@@ -96,6 +96,15 @@ function fileWithinRoot(candidate) {
   return existsSync(resolved) && statSync(resolved).isFile() ? resolved : null
 }
 
+/** The clean URL of an `.html` file in the artifact: no extension, one leading slash. */
+function cleanUrlFor(file) {
+  const relative = path.relative(root, file).split(path.sep).join("/")
+  const withoutExtension = relative.slice(0, -".html".length)
+  const encoded = withoutExtension.split("/").map(encodeURIComponent).join("/")
+
+  return `/${encoded}`
+}
+
 /** The file a static host would serve for a request path, or a redirect, or null. */
 function resolveRequest(pathname) {
   if (pathname.endsWith("/")) {
@@ -109,10 +118,13 @@ function resolveRequest(pathname) {
     // serving the sibling `.html` in place. The prerendered page references its
     // assets relatively (`./_app/...`), so serving it at `/atlas/` would resolve
     // them under `/atlas/` and the page would load neither its stylesheet nor
-    // its client entry.
+    // its client entry. The redirect carries the matched file, never the request
+    // path: a decoded path may hold a control character (which would throw when
+    // it reaches a header) or start with `//` (which a browser reads as another
+    // origin).
     const clean = fileWithinRoot(path.join(root, `${pathname.slice(0, -1)}.html`))
 
-    return clean === null ? null : { redirect: pathname.slice(0, -1) }
+    return clean === null ? null : { redirect: clean }
   }
 
   const direct = fileWithinRoot(path.join(root, pathname))
@@ -185,7 +197,7 @@ const server = createServer((request, response) => {
 
   if (resolution !== null && "redirect" in resolution) {
     response.writeHead(308, {
-      location: `${resolution.redirect}${search}`,
+      location: `${cleanUrlFor(resolution.redirect)}${search}`,
       "cache-control": "no-store",
     })
     response.end()

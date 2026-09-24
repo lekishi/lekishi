@@ -158,15 +158,15 @@ own contract test are unchanged.
 
 |Browser checks
 |`pnpm e2e` against the built artifact, one worker, three projects: desktop
- 20 passed / 1 skipped, tablet-touch 20 passed / 1 skipped, phone 20 passed /
- 1 skipped (60 passed, 3 skipped, 16.8 minutes). The skipped case is the
+20 passed / 1 skipped, tablet-touch 20 passed / 1 skipped, phone 20 passed /
+1 skipped (60 passed, 3 skipped, 16.8 minutes). The skipped case is the
  touch-only tap check on the non-touch desktop project, and the desktop-only drag
  check on the touch projects. The checks cover the reviewed chapter's title and
  notice, the 24 in-window events, the unplaced events, the coda window, an
  uncertain occurrence staying a possible match at the playhead, selection and
  outside-window details, playback, camera-follow rules, keyboard access, disposal,
- `pagehide`/`pageshow` restore, the event list as the panel's scroll container, and
- the phone layouts at 390 px and 320 px.
+`pagehide`/`pageshow` restore, the event list as the panel's scroll container, and
+the phone layouts at 390 px and 320 px.
 |===
 
 == Consequences

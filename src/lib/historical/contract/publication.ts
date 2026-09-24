@@ -68,7 +68,11 @@ export type HistoryEntry = {
 // The "which revision is current" rule lives in `publication-order.ts`, which a
 // browser can also run: the atlas projects reviewed records with the same
 // function this validator checks them against.
-export { currentPublished, currentPublishedObject, type CurrentPublished } from "./publication-order"
+export {
+  currentPublished,
+  currentPublishedObject,
+  type CurrentPublished,
+} from "./publication-order"
 
 export type PublicationCheck =
   | { ok: true; currentPublished: Record<string, CurrentPublished>; warnings: string[] }

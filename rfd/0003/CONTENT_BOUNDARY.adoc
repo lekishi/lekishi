@@ -119,12 +119,15 @@ if v1 alone had been published.
 
 |Map and list counts
 |29 published events: 24 in the primary 750–754 window and 5 coda nodes outside
-it. Of the 24 in-window events, 20 resolve to a point and 4 do not (3 name a
-place with `unknown` geometry and 1 names a place only as context). Three places
-carry no sourced position: 驩州, 石籬浦, and 紀伊國牟漏埼. Ten of the twenty are
-court acts whose entries name no place: they point at 平城宮, the court's seat,
-as a `display_anchor` (owner-accepted on 2026-09-24), so the atlas shows them
-labelled "display anchor only" and asserts no coordinate for them.
+it. Of the 24 in-window events, 22 resolve to a point and 2 do not: 驩州 names a
+place with `unknown` geometry, and 多禰島 is named only as context. Ten of the
+twenty-two are court acts whose entries name no place: they point at 平城宮, the
+court's seat, as a `display_anchor` (owner-accepted on 2026-09-24), so the atlas
+shows them labelled "display anchor only" and asserts no coordinate for them.
+Two more are the identifications the owner asked to chase: 紀伊國牟漏埼 at the
+modern town of 太地 and 石籬浦 at the former town of 頴娃, both approximate
+locality-level placements labelled as modern proposals (比定), not source
+statements.
 
 |Build gate
 |A module-scope projection failure fails `pnpm build`: the prerender reports the
@@ -205,6 +208,12 @@ the phone layouts at 390 px and 320 px.
   at both ends, so the projection fails on a wholly undated event or an
   `lower_only`/`upper_only` interval rather than guessing. RFD 4 AC3's
   "undated events stay discoverable" behavior is not implemented.
+* **驩州 stays unplaced.** The chronicle places it on Tang's southern frontier
+  and the primary sources give its seat county, but no source in the chapter's
+  set identifies the site; the chase for an identification found only modern
+  statements that do not meet the chapter's sourcing bar, so the place keeps
+  `unknown` geometry and its event stays listable without a coordinate. A
+  gazetteer source is the path to placing it.
 * **Areas and routes are rejected.** The atlas domain draws points; a
   `source_supported_area`, an itinerary, or a reconstructed route fails the
   projection. The chapter asserts no route, so this is a future-content gap.

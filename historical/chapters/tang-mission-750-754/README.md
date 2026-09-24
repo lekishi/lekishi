@@ -44,6 +44,16 @@ Selected by the owner on 2026-09-24 from
   with an explanation because no identification is sourced here. The other
   places carry `display_anchor` geometry only, which is explicitly not an
   asserted historical coordinate.
+- **Two place identifications are published as proposals.** `紀伊國牟漏埼` is
+  placed at the modern town of 太地 (`approximate_point`, locality precision)
+  because the cited prefectural record reports that 紀州藩's 紀伊続風土記
+  identified 牟漏崎 with 太地の燈明崎; `石籬浦` is placed at the former town of
+  頴娃 (locality precision) because the cited prefectural record names 石垣 in
+  present-day 南九州市穎娃町 as the drift place. Both are labelled as modern
+  identifications (比定), not source statements, and neither asserts a landing
+  site. `驩州` keeps `unknown` geometry: the primary sources give its seat
+  county but no source in this set identifies the site, so no coordinate is
+  manufactured.
 - **Court acts are anchored, not placed.** The entries that record the court's
   appointment of the embassy, the 節刀 grant, the audiences and reports, the
   rewards, and the 758 and 779 court acts name no place (the 節刀 entry names
@@ -90,7 +100,7 @@ Tang court history for the audience, and a philologist for the editions) have
 not been performed.
 
 A third set, `lks:set:tang-mission-750-754-court-anchors`, publishes the court
-placements the owner accepted on 2026-09-24 (see
+placements and the two place identifications the owner accepted on 2026-09-24 (see
 [`rfd/0002/PUBLICATION_APPROVAL.adoc`](../../../rfd/0002/PUBLICATION_APPROVAL.adoc)).
 Its ledger row records an `owner decided` decision — the owner decided that this
 content may be published — while the set itself keeps the preparing editor's

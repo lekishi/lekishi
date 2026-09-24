@@ -68,7 +68,7 @@ build/
   index.html              prerendered overview page
   atlas.html              prerendered atlas shell (direct /atlas loads)
   404.html                fallback for a path that is not in the artifact
-  _redirects              explicit /atlas → /atlas.html rewrite for static hosts
+  _redirects              explicit /atlas/ → /atlas redirect
   favicon.ico  robots.txt  images/
   _app/immutable/...      hashed JS and CSS
   cesium/                 Workers, Assets (Natural Earth II), Widgets, ThirdParty
@@ -81,11 +81,9 @@ widget styles, or the Cesium runtime directories are missing, if the atlas page
 does not have exactly one mount point, or if the artifact contains a server
 runtime.
 
-### Cloudflare Pages readiness (step 3, not done here)
+### Cloudflare Pages
 
-The artifact is ready to be connected to a static host; no project, account,
-domain, secret, or deployment exists yet, and creating them is a separate,
-owner-authorized step.
+The site is deployed from the `main` branch at <https://lekishi.pages.dev>.
 
 - Build command: `pnpm build`
 - Output directory: `build`
@@ -93,9 +91,10 @@ owner-authorized step.
 - Environment variables: none
 
 Cloudflare Pages resolves `/atlas` to `atlas.html` with its default clean-URL
-behavior, and `static/_redirects` states that rewrite explicitly. A path that is
-not in the artifact is answered from `404.html`, which static hosts serve by
-convention.
+behavior. `static/_redirects` only normalizes `/atlas/` to `/atlas`; rewriting
+`/atlas` to `/atlas.html` would loop because Pages redirects the file back to its
+clean URL. A path that is not in the artifact is answered from `404.html`, which
+static hosts serve by convention.
 
 ### Cesium without a provider account
 

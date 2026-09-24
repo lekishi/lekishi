@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs"
+import { createConnection } from "node:net"
 import { fileURLToPath } from "node:url"
 import { expect, test, type Page } from "@playwright/test"
 
@@ -100,6 +101,29 @@ async function openEventList(page: Page): Promise<void> {
     await toggle.click()
     await expect(page.getByTestId("atlas-event-item").first()).toBeVisible()
   }
+}
+
+/** Sends one raw request line and returns the status line and body. */
+function rawRequest(port: number, target: string): Promise<{ status: string; body: string }> {
+  return new Promise((resolve, reject) => {
+    const socket = createConnection({ host: "127.0.0.1", port }, () => {
+      socket.write(`GET ${target} HTTP/1.1\r\nHost: 127.0.0.1\r\nConnection: close\r\n\r\n`)
+    })
+
+    let data = ""
+    socket.setEncoding("utf8")
+    socket.on("data", (chunk: string) => (data += chunk))
+    socket.on("end", () => {
+      const [head = "", ...rest] = data.split("\r\n\r\n")
+
+      resolve({ status: head.split("\r\n")[0] ?? "", body: rest.join("\r\n\r\n") })
+    })
+    socket.on("error", reject)
+    socket.setTimeout(5_000, () => {
+      socket.destroy()
+      reject(new Error(`raw request to ${target} timed out`))
+    })
+  })
 }
 
 async function mountAtlas(page: Page): Promise<string[]> {
@@ -206,12 +230,20 @@ test("serves the artifact as plain files, with clean URLs and a real 404 page", 
   // the check is static-only.
   test.skip(mode === "dev", "the file-only server is the static target")
 
-  for (const path of ["/atlas", "/atlas/", "/atlas.html"]) {
+  for (const path of ["/atlas", "/atlas.html"]) {
     const response = await request.get(path)
 
     expect(response.status(), `${path} should be served from the artifact`).toBe(200)
     expect(await response.text()).toContain('id="atlas-workspace"')
   }
+
+  // A trailing slash on the clean URL redirects to the slashless form instead of
+  // serving the sibling `.html` in place: the page references its assets
+  // relatively (`./_app/...`), so `/atlas/` would resolve them under `/atlas/`.
+  const trailing = await request.get("/atlas/", { maxRedirects: 0 })
+
+  expect(trailing.status()).toBe(308)
+  expect(trailing.headers()["location"]).toBe("/atlas")
 
   const missing = await request.get("/no-such-page-in-the-atlas")
 
@@ -237,6 +269,36 @@ test("serves the artifact as plain files, with clean URLs and a real 404 page", 
   ]) {
     expect((await request.get(outside)).status(), `${outside} must not be served`).toBe(404)
   }
+})
+
+test("mounts the workspace through the trailing-slash redirect", async ({ page }) => {
+  test.skip(mode === "dev", "the redirect is the file-only server's clean-URL behavior")
+
+  const problems = collectProblems(page)
+
+  await page.goto("/atlas/")
+  await expect(page.locator("#atlas-workspace canvas").first()).toBeVisible({ timeout: 30_000 })
+  await expect(page.getByTestId("atlas-event-item")).toHaveCount(5)
+
+  // The browser ends on the clean URL, which is what makes the page's relative
+  // asset references resolve.
+  expect(new URL(page.url()).pathname).toBe("/atlas")
+  expect(problems).toEqual([])
+})
+
+test("answers a malformed request target instead of ending the server", async ({
+  request,
+  baseURL,
+}) => {
+  test.skip(mode === "dev", "the file-only server is the static target")
+
+  const port = Number(new URL(baseURL ?? "").port)
+  const response = await rawRequest(port, "//")
+
+  expect(response.status).toContain("400")
+
+  // The server is still serving: the malformed target is a response, not a crash.
+  expect((await request.get("/atlas")).status()).toBe(200)
 })
 
 test("serves built assets and the Cesium runtime without Cesium ion", async ({ page, request }) => {

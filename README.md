@@ -48,11 +48,12 @@ Rules that keep the boundary intact:
 | `pnpm verify`                  | Everything CI runs: format check, type check, tests, then the build with its invariant.                                |
 
 `pnpm preview` serves the artifact with `scripts/serve-static.mjs`: a file-only
-server rooted at `build/` with clean-URL handling (`/atlas` and `/atlas/` resolve
-to `atlas.html`), the artifact's own `404.html` for anything else, and no access
-to `.svelte-kit`, the module graph, or an SSR runtime. That is what the browser
-checks run against, so the suite proves the artifact is deployable as plain files
-rather than proving a preview server works.
+server rooted at `build/` with clean-URL handling (`/atlas` serves `atlas.html`;
+`/atlas/` redirects to `/atlas`, because the page references its assets
+relatively), the artifact's own `404.html` for anything else, a 400 for a
+malformed request target, and no access to `.svelte-kit`, the module graph, or an
+SSR runtime. That is what the browser checks run against, so the suite proves the
+artifact is deployable as plain files rather than proving a preview server works.
 
 `pnpm dev` and `pnpm build` first run `pnpm sync:cesium`, which copies the Cesium
 runtime (Workers, Assets, Widgets, ThirdParty) from the npm package into

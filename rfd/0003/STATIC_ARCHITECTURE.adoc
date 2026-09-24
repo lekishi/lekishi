@@ -87,12 +87,14 @@ hosts that need it. The useful URL `/atlas` is preserved.
 
 |Static serving
 |`scripts/serve-static.mjs` serves the artifact as files and nothing else: only
-paths under `build/`, clean URLs (`/atlas` and `/atlas/` resolve to
-`atlas.html`), the artifact's own `404.html` with a 404 status for anything
-else, and no access to `.svelte-kit`, the module graph, or an SSR runtime. The
-browser checks and the orb's static service use it, so the checks prove the
-artifact is deployable as plain files instead of proving that a preview server
-works. `pnpm preview` runs the same server.
+paths under `build/`, clean URLs (`/atlas` serves `atlas.html`), a trailing slash
+redirecting to the clean URL (serving the same file at `/atlas/` would resolve
+the page's relative asset references under `/atlas/` and load nothing), the
+artifact's own `404.html` with a 404 status for anything else, a 400 for a
+malformed request target instead of a crash, and no access to `.svelte-kit`, the
+module graph, or an SSR runtime. The browser checks and the orb's static service
+use it, so the checks prove the artifact is deployable as plain files instead of
+proving that a preview server works. `pnpm preview` runs the same server.
 
 |Mount ownership
 |The single-owner rule is unchanged and now simpler: `src/lib/atlas/entry.ts` is
@@ -140,17 +142,21 @@ case count and the 187 total, so a case cannot be dropped silently.
 110 worker scripts). The build invariant passes and reports no server runtime.
 
 |Direct navigation
-|Served by the file-only server: `/atlas`, `/atlas/`, and `/atlas.html` all answer
-HTTP 200 with the prerendered shell, and a reload keeps one workspace. `/` serves
-the overview page with its link into the atlas. An unknown path answers 404 with
-a body byte-identical to `build/404.html` (no app shell, no client entry), and
-build inputs (`/.svelte-kit/tsconfig.json`, `/package.json`, `/src/app.html`) and
-an escaping path (`/%2e%2e%2fpackage.json`) are all 404.
+|Served by the file-only server: `/atlas` and `/atlas.html` answer HTTP 200 with
+the prerendered shell, and a reload keeps one workspace. `/atlas/` answers 308 to
+`/atlas` (preserving a query string), and a browser navigation through it mounts
+the workspace with no failed asset request; serving the file in place would have
+resolved `./_app/...` under `/atlas/`. `/` serves the overview page with its link
+into the atlas. An unknown path answers 404 with a body byte-identical to
+`build/404.html` (no app shell, no client entry); build inputs
+(`/.svelte-kit/tsconfig.json`, `/package.json`, `/src/app.html`) and an escaping
+path (`/%2e%2e%2fpackage.json`) are all 404; and a malformed request target (`//`
+sent raw) answers 400 with the server still serving afterwards.
 
 |Browser checks
 |`pnpm e2e` against the static artifact, with `.svelte-kit` moved out of the tree
-so only `build/` is available: desktop 15 passed / 1 skipped, tablet 15 passed /
-1 skipped, phone 15 passed / 1 skipped. The skipped case is the touch-only tap
+so only `build/` is available: desktop 17 passed / 1 skipped, tablet 17 passed /
+1 skipped, phone 17 passed / 1 skipped. The skipped case is the touch-only tap
 check on the non-touch desktop project (and the desktop-only drag check on the
 touch projects). They cover one workspace and one canvas per page,
 a single fetch per client module, selection and time-window behavior, playback

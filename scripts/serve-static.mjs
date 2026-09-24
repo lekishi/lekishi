@@ -12,7 +12,9 @@
  *   * a request without an extension resolves to `<path>.html` (clean URLs; the
  *     same rule `static/_redirects` states explicitly for `/atlas`),
  *   * a request for a directory or a trailing slash resolves to its `index.html`,
- *     and otherwise to the clean URL of the directory,
+ *     and a trailing slash on a clean URL redirects to the slashless form: the
+ *     artifact's asset references are relative, so serving `atlas.html` at
+ *     `/atlas/` would resolve them under `/atlas/` and load nothing,
  *   * anything else is answered from `404.html` with a 404 status,
  *   * there is no module graph, no server-side rendering, and no access to
  *     `.svelte-kit` or any other build input.
@@ -94,28 +96,42 @@ function fileWithinRoot(candidate) {
   return existsSync(resolved) && statSync(resolved).isFile() ? resolved : null
 }
 
-/** The file a static host would serve for a request path, or null. */
+/** The file a static host would serve for a request path, or a redirect, or null. */
 function resolveRequest(pathname) {
-  const candidates = []
-
   if (pathname.endsWith("/")) {
-    candidates.push(path.join(root, pathname, "index.html"))
-    // `/atlas/` is the trailing-slash form of the clean URL `/atlas`.
-    candidates.push(path.join(root, `${pathname.slice(0, -1)}.html`))
-  } else {
-    candidates.push(path.join(root, pathname))
+    const index = fileWithinRoot(path.join(root, pathname, "index.html"))
 
-    if (path.extname(pathname) === "") {
-      candidates.push(path.join(root, `${pathname}.html`))
-      candidates.push(path.join(root, pathname, "index.html"))
+    if (index !== null) {
+      return { file: index }
     }
+
+    // A trailing slash on a clean URL redirects to the slashless form instead of
+    // serving the sibling `.html` in place. The prerendered page references its
+    // assets relatively (`./_app/...`), so serving it at `/atlas/` would resolve
+    // them under `/atlas/` and the page would load neither its stylesheet nor
+    // its client entry.
+    const clean = fileWithinRoot(path.join(root, `${pathname.slice(0, -1)}.html`))
+
+    return clean === null ? null : { redirect: pathname.slice(0, -1) }
   }
 
-  for (const candidate of candidates) {
-    const file = fileWithinRoot(candidate)
+  const direct = fileWithinRoot(path.join(root, pathname))
 
-    if (file !== null) {
-      return file
+  if (direct !== null) {
+    return { file: direct }
+  }
+
+  if (path.extname(pathname) === "") {
+    const clean = fileWithinRoot(path.join(root, `${pathname}.html`))
+
+    if (clean !== null) {
+      return { file: clean }
+    }
+
+    const index = fileWithinRoot(path.join(root, pathname, "index.html"))
+
+    if (index !== null) {
+      return { file: index }
     }
   }
 
@@ -140,21 +156,39 @@ function send(response, status, file, { head = false } = {}) {
 
 const server = createServer((request, response) => {
   const head = request.method === "HEAD"
-  const url = new URL(request.url ?? "/", `http://${request.headers.host ?? "localhost"}`)
   let pathname
+  let search
 
   try {
+    // A fixed base: only the path is needed, and the request's own target can be
+    // malformed (`//`, or an absolute form with no host), which must be answered
+    // rather than thrown out of the request callback.
+    const url = new URL(request.url ?? "/", "http://static.invalid")
+
     pathname = decodeURIComponent(url.pathname)
+    search = url.search
   } catch {
-    response.writeHead(400, { "content-type": "text/plain; charset=utf-8" })
+    response.writeHead(400, {
+      "content-type": "text/plain; charset=utf-8",
+      "cache-control": "no-store",
+    })
     response.end("Bad request")
     return
   }
 
-  const file = resolveRequest(pathname)
+  const resolution = resolveRequest(pathname)
 
-  if (file !== null) {
-    send(response, 200, file, { head })
+  if (resolution !== null && "file" in resolution) {
+    send(response, 200, resolution.file, { head })
+    return
+  }
+
+  if (resolution !== null && "redirect" in resolution) {
+    response.writeHead(308, {
+      location: `${resolution.redirect}${search}`,
+      "cache-control": "no-store",
+    })
+    response.end()
     return
   }
 

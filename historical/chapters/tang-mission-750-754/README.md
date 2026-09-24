@@ -44,11 +44,17 @@ Selected by the owner on 2026-09-24 from
   with an explanation because no identification is sourced here. The other
   places carry `display_anchor` geometry only, which is explicitly not an
   asserted historical coordinate.
+- `多禰島` is published only as the second ship's intended destination: the
+  biography names it as the course the second ship set out on and then records
+  the arrival at `益救島`, so the separation event carries it as a qualified
+  contextual place and no landing there is asserted.
 - Textual variants are kept rather than normalized away: `益救島`/`益久嶋`,
-  `胡麿`/`古麻呂`, and the sources' disagreement about the day of 古麻呂's
-  return report and 鑒眞's age at death. Where the day is a sexagenary day, or
-  where the sources disagree, the chapter publishes month precision and keeps
-  the source's own expression.
+  `胡麿`/`古麻呂`, and the day expressions the sources use for 古麻呂's return
+  and report. Where the source gives only a sexagenary day, or where the chapter
+  does not establish that two notices describe one occasion, it publishes month
+  precision and keeps the source's own expression. 鑒眞's age at death is
+  published as an explicit dispute, because the two sources give different
+  figures.
 - The 754 ordinations rest on the biography alone; the chronicle's later notice
   of 聖武皇帝 receiving the precepts is recorded as a supporting claim without
   resolving who the biography's `天皇` is. The biography's hagiographic material
@@ -59,7 +65,14 @@ Selected by the owner on 2026-09-24 from
 
 ## Review status
 
-The publication set records the **preparing editor's self-review**
+Two publication sets are in the tree. `lks:set:tang-mission-750-754-v1`
+publishes the first prepared revision of every record; the corrections the first
+review cycle produced are appended as new revisions of the affected records and
+published by `lks:set:tang-mission-750-754-v2`. The earlier revisions and their
+pins stay in the tree, so `Publication.history` shows the content that was
+published first and the correction beside it.
+
+Both sets record the **preparing editor's self-review**
 (`self_review`, reviewer = an author of the member revisions). This is not owner
 review, not independent review, and not specialist review. The owner's editorial
 approval under RFD 2 — and therefore RFD 4's AC2 — is **still pending**, and the
@@ -98,7 +111,8 @@ Do not run `pnpm seal` over this directory. That command is deliberately limited
 to the synthetic worked examples. Correcting chapter content requires a new
 revision or source document and a new publication set, preserving the hashes and
 review metadata that approved the existing publication. An in-place edit to an
-approved revision or source must fail validation rather than being resealed.
+approved revision or source must fail validation rather than being resealed; the
+correction set above is the worked example of that path.
 
 ## Limitations that must be stated wherever this content appears
 

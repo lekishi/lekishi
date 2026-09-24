@@ -392,7 +392,7 @@ describe("the Tang chapter fixture", () => {
     expect(Object.keys(result.currentPublished)).toHaveLength(65)
   })
 
-  it("keeps the expected inventory and publishes each record exactly once", () => {
+  it("keeps the expected inventory and publishes each record once in the first set", () => {
     const chapter = tree()
     const counts = {
       place: recordsOfKind(chapter, "place").length,
@@ -407,12 +407,68 @@ describe("the Tang chapter fixture", () => {
       9,
     )
 
-    const memberIds = chapter.sets.flatMap((set) =>
-      listOf(set["members"]).map((member) => String(objectOf(member)["record_id"])),
+    const first = objectOf(chapter.sets[0])
+    const memberIds = listOf(first["members"]).map((member) =>
+      String(objectOf(member)["record_id"]),
     )
 
+    expect(first["set_id"]).toBe("lks:set:tang-mission-750-754-v1")
     expect(memberIds).toHaveLength(65)
     expect(new Set(memberIds).size).toBe(memberIds.length)
+    expect(Publication.currentPublished(chapter.documents, chapter.sets).size).toBe(65)
+  })
+
+  it("publishes the review corrections as a second set over retained earlier revisions", () => {
+    const chapter = tree()
+    const first = objectOf(chapter.sets[0])
+    const correction = objectOf(chapter.sets[1])
+    const correctedIds = listOf(correction["members"]).map((member) =>
+      String(objectOf(member)["record_id"]),
+    )
+    const current = Publication.currentPublished(chapter.documents, chapter.sets)
+    const history = Publication.history(chapter.documents, chapter.sets)
+
+    expect(correction["set_id"]).toBe("lks:set:tang-mission-750-754-v2")
+    expect(correction["supersedes"]).toBe(first["set_id"])
+    expect(correctedIds.sort()).toEqual([
+      "lks:actor:abe-no-nakamaro",
+      "lks:actor:jianzhen",
+      "lks:event:jianzhen-death-763",
+      "lks:event:return-report-754",
+      "lks:event:return-voyage-753",
+      "lks:event:ships-separate-753",
+      "lks:event:yaku-arrival-753",
+      "lks:place:dazaifu",
+    ])
+
+    // The first set keeps pinning what it published. A correction appends a
+    // revision instead of rewriting the one the earlier review approved, so the
+    // previous content stays readable in the tree and in the derived history.
+    for (const member of listOf(first["members"])) {
+      const entry = objectOf(member)
+      const record = recordById(chapter, String(entry["record_id"]))
+      const revision = listOf(record["revisions"]).find(
+        (candidate) => objectOf(candidate)["revision_id"] === entry["revision_id"],
+      )
+
+      expect(revisionHash(objectOf(revision)), String(entry["record_id"])).toBe(
+        entry["revision_hash"],
+      )
+    }
+
+    for (const recordId of correctedIds) {
+      const revisions = listOf(recordById(chapter, recordId)["revisions"]).map((revision) =>
+        objectOf(revision),
+      )
+
+      expect(revisions, recordId).toHaveLength(2)
+      expect(revisions[1]["revision_id"], recordId).toBe(current.get(recordId)?.revision_id)
+      expect(
+        history[recordId]?.map((entry) => entry.revision_id),
+        recordId,
+      ).toEqual([revisions[0]["revision_id"], revisions[1]["revision_id"]])
+      expect(String(revisions[1]["change_explanation"]), recordId).toContain("after review")
+    }
   })
 
   it("is sealed, so an edit to approved content is detected", () => {
@@ -556,10 +612,9 @@ describe("the Tang chapter fixture", () => {
     expect(time["precision"]).toBe("month")
     expect(String(time["source_expression"])).toContain("壬子")
     expect(editorialNotes(returnReport)).toContain("正月十一日丁未")
-    expect(editorialNotes(returnReport)).toContain("正月十二日")
 
     for (const recordId of [
-      "lks:event:return-report-754",
+      "lks:actor:jianzhen",
       "lks:event:jianzhen-death-763",
       "lks:event:yaku-arrival-753",
     ]) {
@@ -574,14 +629,30 @@ describe("the Tang chapter fixture", () => {
       )
     }
 
+    // The chronicle's return notice and the biography's report are not established
+    // as one occasion, so the record states both without claiming a dispute over a
+    // single day, and the disputed records above stay disputed in the history.
+    expect(objectOf(publishedRevision(returnReport)["dispute"])["status"]).toBeUndefined()
+    expect(editorialNotes(returnReport)).toContain("same occasion")
+
     const history = Publication.history(chapter.documents, chapter.sets)
 
-    expect(history["lks:event:return-report-754"]?.[0]?.dispute_status).toBe("disputed")
-    expect(history["lks:event:jianzhen-death-763"]?.[0]?.dispute_status).toBe("disputed")
-    expect(history["lks:event:yaku-arrival-753"]?.[0]?.dispute_status).toBe("disputed")
+    for (const recordId of [
+      "lks:actor:jianzhen",
+      "lks:event:jianzhen-death-763",
+      "lks:event:yaku-arrival-753",
+    ]) {
+      expect(history[recordId]?.at(-1)?.dispute_status, recordId).toBe("disputed")
+    }
   })
 
   it("does not turn Nakamaro's 779 death report into continuous role validity", () => {
+    const record = recordById(tree(), "lks:actor:abe-no-nakamaro")
+
+    // The cited evidence supports a 753 appearance and a 779 report that he had
+    // died, not activity across the interval, so the fixture publishes no
+    // structured role for him at all.
+    expect(listOf(contentOf(record)["roles"])).toEqual([])
     expect(nakamaroRoleViolations(tree())).toEqual([])
   })
 
@@ -609,17 +680,21 @@ describe("the Tang chapter fixture", () => {
 
   it("records self-review, not owner, independent, or specialist review", () => {
     const chapter = tree()
-    const set = objectOf(chapter.sets[0])
-    const review = objectOf(set["review"])
-    const notes = String(review["notes"])
 
-    expect(review["independence"]).toBe("self_review")
-    expect(objectOf(review["reviewer"])["name"]).toBe("Lekishi editorial preparation")
-    expect(objectOf(set["published_by"])["name"]).toBe("Lekishi editorial preparation")
-    expect(notes).toContain("not owner review")
-    expect(notes).toContain("still pending")
-    expect(notes).not.toContain("independent review is recorded")
-    expect(Object.values(objectOf(review["checklist"]))).toEqual([true, true, true, true, true])
+    expect(chapter.sets.length).toBeGreaterThan(0)
+
+    for (const set of chapter.sets) {
+      const review = objectOf(objectOf(set)["review"])
+      const notes = String(review["notes"])
+
+      expect(review["independence"], String(objectOf(set)["set_id"])).toBe("self_review")
+      expect(objectOf(review["reviewer"])["name"]).toBe("Lekishi editorial preparation")
+      expect(objectOf(objectOf(set)["published_by"])["name"]).toBe("Lekishi editorial preparation")
+      expect(notes).toContain("not owner review")
+      expect(notes).toContain("still pending")
+      expect(notes).not.toContain("independent review is recorded")
+      expect(Object.values(objectOf(review["checklist"]))).toEqual([true, true, true, true, true])
+    }
   })
 })
 
@@ -736,6 +811,27 @@ describe("adversarial readings of the Tang chapter", () => {
 
     if (!result.ok) {
       expect(result.errors.map((error) => error.code)).toContain("revision_hash_mismatch")
+    }
+  })
+
+  it("detects an edit to an earlier revision that a correction superseded", () => {
+    const chapter = cloneTree(tree())
+    const record = recordById(chapter, "lks:place:dazaifu")
+    const superseded = objectOf(listOf(record["revisions"])[0])
+
+    objectOf(superseded["content"])["summary"] = "Edited after the correction was published"
+
+    const result = Publication.checkAll(chapter.documents, chapter.sets)
+
+    expect(result.ok).toBe(false)
+
+    if (!result.ok) {
+      const codes = result.errors.map((error) => error.code)
+
+      // Both the revision's own hash and the first set's pin still describe the
+      // content that review approved, so a correction cannot be used to rewrite it.
+      expect(codes).toContain("revision_hash_mismatch")
+      expect(codes).toContain("member_hash_mismatch")
     }
   })
 

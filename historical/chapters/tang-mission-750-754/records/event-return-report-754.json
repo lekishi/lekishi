@@ -11,7 +11,7 @@
       "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
       "change_explanation": "Initial chapter event: 古麻呂's return with 鑒眞 and 法進, with the sources' differing day expressions kept in the notes.",
       "content": {
-        "summary": "大伴古麻呂 returns to court in 天平勝寶六年正月 (754), with eight people including 鑒眞 and 法進 coming back with him. The biography separately records his report that 鑒眞 reached 大宰府.",
+        "summary": "大伴古麻呂 returns to court in 天平勝寶六年正月 (754), with 鑒眞, 法進, and eight others coming back with him. The biography separately records his report that 鑒眞 reached 大宰府.",
         "event_types": ["mission"],
         "time": {
           "source_expression": "天平勝寶六年正月壬子 入唐副使從四位上大伴宿祢古麻呂來歸",
@@ -35,7 +35,7 @@
       "claims": [
         {
           "claim_id": "lks:claim:return-report-time",
-          "statement": "The chronicle records 大伴宿祢古麻呂 returning on 天平勝寶六年正月壬子 with eight people including 鑒眞 and 法進.",
+          "statement": "The chronicle records 大伴宿祢古麻呂 returning on 天平勝寶六年正月壬子 with 鑒眞, 法進, and eight others.",
           "asserts": "/time",
           "basis": "attested",
           "role": "main",
@@ -52,7 +52,7 @@
           "statement": "The biography records 古麻呂 reporting on 天平勝寶六年正月十一日丁未 that 鑒眞 had reached 大宰府; a variant transcription reads 十二日, so no day is published.",
           "asserts": "/time",
           "basis": "attested",
-          "role": "conflicting",
+          "role": "supporting",
           "citations": [
             {
               "source_id": "lks:source:toseiden",
@@ -74,18 +74,85 @@
           ]
         }
       ],
-      "dispute": {
-        "status": "disputed",
-        "summary": "The chronicle and biography give different day expressions for 古麻呂's return report, and another transcription of the biography differs by one day. The chapter publishes month precision rather than choosing among them."
+      "revision_hash": "sha256:247d2d33fb1984b9e104ce9b7bcec54b4cb2294e82e2e82d9c845dd42490b34f"
+    },
+    {
+      "revision_id": "lks:rev:return-report-754-2",
+      "created_at": "2026-09-24T08:30:00Z",
+      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "change_explanation": "Corrected chapter event after review: the count is eight people including 鑒眞 and 法進, and the biography's report is published as its own statement rather than as a conflicting day for the same occasion.",
+      "content": {
+        "summary": "大伴古麻呂 returns to court in 天平勝寶六年正月 (754), with eight people including 鑒眞 and 法進 coming back with him. The biography separately records his report that 鑒眞 reached 大宰府; whether that report and the chronicle's return notice describe the same occasion is not established.",
+        "event_types": ["mission"],
+        "time": {
+          "source_expression": "天平勝寶六年正月壬子 入唐副使從四位上大伴宿祢古麻呂來歸",
+          "calendar": "regnal",
+          "precision": "month",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 754, "era": "ce", "month": 1},
+            "end": {"year": 754, "era": "ce", "month": 1}
+          }
+        },
+        "participants": [
+          {"actor_id": "lks:actor:otomo-no-komaro", "role": "leader"},
+          {"actor_id": "lks:actor:jianzhen", "role": "participant"},
+          {"actor_id": "lks:actor:fajin", "role": "participant"}
+        ],
+        "editorial_notes": "The chronicle gives 正月壬子 for 古麻呂's return and the biography records a 奏 on 正月十一日丁未 that 鑒眞 had reached 大宰府; the cited passages do not establish that these are the same occasion, so the chapter keeps them as separate statements and publishes the month only. The Wave 1A pass also notes 正月十二日 for the biography's report in a different edition's searchable preview; that reading is not in the transcription cited here, so it stays a re-check item for a critical edition rather than published evidence."
       },
-      "revision_hash": "sha256:d3ea319668f6b69fe91a955d4026402a84e98f9c33ffa91f6fe7bee094456b7e"
+      "claims": [
+        {
+          "claim_id": "lks:claim:return-report-time",
+          "statement": "The chronicle records 大伴宿祢古麻呂 returning on 天平勝寶六年正月壬子 with eight people including 鑒眞 and 法進.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年正月壬子"},
+              "quoted_text": "入唐副使從四位上大伴宿祢古麻呂來歸。唐僧鑒眞。法進等八人隨而歸朝。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:return-report-biography",
+          "statement": "The biography records 古麻呂 reporting on 天平勝寶六年正月十一日丁未 that 鑒眞 had reached 大宰府. The chapter does not publish a day for it, and the cited passages do not establish that this report is the same occasion as the chronicle's return notice.",
+          "asserts": "/summary",
+          "basis": "attested",
+          "role": "supporting",
+          "citations": [
+            {
+              "source_id": "lks:source:toseiden",
+              "locator": {"kind": "entry", "value": "天平勝寶六年甲午，正月十一日丁未，副使從四位上大伴宿禰胡麿奏：大和上到筑志［太］宰府"}
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:return-report-participants",
+          "statement": "The chronicle names 鑒眞 and 法進 among the eight who returned with 古麻呂.",
+          "asserts": "/participants",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年正月壬子"}
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:36668f38171bc6e07481edb4b6a1fff240e70b4c01d8bf53f2d2337fb59e49f1"
     }
   ],
   "publication": {
-    "published_revision_id": "lks:rev:return-report-754-1",
-    "published_revision_hash": "sha256:d3ea319668f6b69fe91a955d4026402a84e98f9c33ffa91f6fe7bee094456b7e",
-    "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
+    "published_revision_id": "lks:rev:return-report-754-2",
+    "published_revision_hash": "sha256:36668f38171bc6e07481edb4b6a1fff240e70b4c01d8bf53f2d2337fb59e49f1",
+    "set_id": "lks:set:tang-mission-750-754-v2",
+    "published_at": "2026-09-24T09:00:00Z",
     "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
   }
 }

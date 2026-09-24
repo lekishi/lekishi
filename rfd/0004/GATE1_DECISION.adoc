@@ -120,8 +120,9 @@ still requiring explicit owner authorization.
 
 * The chapter fixture: `historical/chapters/tang-mission-750-754/` — 14 places,
 12 actors, 29 events, 9 relationships, 1 story, and 9 sources, published as one
-publication set. Its README records the inventory, the evidence, the uncertainty
-handling, the deferrals, and the limitations.
+publication set with the corrections from the first review cycle published as a
+second set over eight appended revisions. Its README records the inventory, the
+evidence, the uncertainty handling, the deferrals, and the limitations.
 * Validation: `src/lib/historical/contract/tang-chapter.test.ts` validates the
 tree with the contract's own semantics, checks the seal and publication rules,
 and exercises the chapter's coverage model — the primary window, the coda years
@@ -133,7 +134,9 @@ dependency.
 * Sealing: the prepared fixture carries sealed hashes and publication pins, but
   `pnpm seal` remains limited to synthetic examples. Corrections to reviewed
   chapter content require a new revision or source and publication set;
-  `pnpm verify` detects in-place edits.
+  `pnpm verify` detects in-place edits. The fixture's second set is the first
+  such correction: eight revisions are appended, and the revisions, pins, and
+  review metadata published by the first set stay in the tree unchanged.
 
 == Open items carried forward
 

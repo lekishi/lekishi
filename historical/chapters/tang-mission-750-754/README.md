@@ -29,7 +29,7 @@ Selected by the owner on 2026-09-24 from
 | Events | 29 | 24 inside 750–754 and 5 coda events across the four coda years (779 has two) |
 | Relationships | 9 | diplomacy, travel, two contacts, transmission, two institutional changes, and two 779 commemorations |
 | Stories | 1 | The mission in presentation order, with the coda steps labelled |
-| Sources | 9 | Four primary works, four reference or scholarly works, and Wikidata |
+| Sources | 11 | Four primary works, six reference works, and Wikidata |
 
 ## Evidence and uncertainty
 
@@ -83,36 +83,29 @@ Selected by the owner on 2026-09-24 from
 
 ## Review status
 
-Two publication sets are in the tree. `lks:set:tang-mission-750-754-v1`
-publishes the first prepared revision of every record; the corrections the first
-review cycle produced are appended as new revisions of the affected records and
-published by `lks:set:tang-mission-750-754-v2`. The earlier revisions and their
-pins stay in the tree, so `Publication.history` shows the content that was
-published first and the correction beside it.
+One publication set is in the tree, `lks:set:tang-mission-750-754-v1`, and it
+publishes every record with exactly one revision each. The preparation history
+was flattened on the owner's instruction of 2026-09-24: the earlier preparation
+revisions and their review corrections are folded into that single revision, and
+each record's change explanation still says where a review correction, an
+owner-accepted court-act placement, or an owner-accepted identification shaped
+the content. `lks:set:tang-mission-750-754-v2` and the placement set no longer
+exist.
 
-Both sets record the **preparing editor's self-review**
-(`self_review`, reviewer = an author of the member revisions). This is not owner
-review, not independent review, and not specialist review. The owner's editorial
-approval under RFD 2 — and therefore RFD 4's AC2 — is **still pending**, and the
-specialist reviews the feasibility report identified (maritime history for the
-return-voyage landfalls, Buddhist studies for the ordination and lineage claims,
-Tang court history for the audience, and a philologist for the editions) have
-not been performed.
+The set records the **preparing editor's self-review** (`self_review`, reviewer =
+an author of the member revisions). This is not owner review, not independent
+review, and not specialist review. The owner's editorial approval under RFD 2 —
+and therefore RFD 4's AC2 — is **still pending**, and the specialist reviews the
+feasibility report identified (maritime history for the return-voyage landfalls,
+Buddhist studies for the ordination and lineage claims, Tang court history for the
+audience, and a philologist for the editions) have not been performed.
 
-A third set, `lks:set:tang-mission-750-754-court-anchors`, publishes the court
-placements and the two place identifications the owner accepted on 2026-09-24 (see
-[`rfd/0002/PUBLICATION_APPROVAL.adoc`](../../../rfd/0002/PUBLICATION_APPROVAL.adoc)).
-Its ledger row records an `owner decided` decision — the owner decided that this
-content may be published — while the set itself keeps the preparing editor's
-`self_review`; it is not the owner's editorial approval under RFD 2.
-
-Neither set is an official publication. In the contract's vocabulary
-"published" means *named by a publication set* — the atomic unit the atlas
-reads — not *approved for release*. The owner's decisions are recorded in
+The set is not an official publication. In the contract's vocabulary
+"published" means *named by a publication set* — the atomic unit the atlas reads
+— not *approved for release*. The owner's decisions are recorded in
 [`rfd/0002/PUBLICATION_APPROVAL.adoc`](../../../rfd/0002/PUBLICATION_APPROVAL.adoc):
-a set may exist only when that ledger names it. The two preparation sets are
-recorded there as **preparation snapshots** created under the owner's
-instruction, and the placement set as an **owner decided** publication. The
+a set may exist only when that ledger names it, and the ledger records this one
+as **owner decided** — the owner decided that this content may be published. The
 first `owner approved` row will be the owner's editorial approval of this
 chapter.
 

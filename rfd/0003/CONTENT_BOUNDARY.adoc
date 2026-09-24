@@ -57,9 +57,9 @@ that boundary is the only path chapter content takes into the app.
 
 These are contract-with-the-reader rules, not implementation details:
 
-* The newest published revision wins. A retained earlier revision — v1 beside the
-  v2 corrections — can never reach the atlas, and a mirror that disagrees with the
-  newest set fails the projection.
+* The newest published revision wins. The atlas never shows a revision the sets
+  do not name, and a mirror that disagrees with the newest set fails the
+  projection.
 * An event keeps its whole support interval. An event with no published map
   position (no place named, no sourced identification, or a place named only as
   context) stays in the non-map list with no coordinate.
@@ -113,9 +113,9 @@ from its published story summary: "The 750–754 embassy of 藤原朝臣清河".
 
 |Selected revision
 |The atlas shows the newest published revision of every record: the correction set
-`lks:set:tang-mission-750-754-v2` decides the shown revisions and the review
-statement, and the v1-era content is reproduced only when the tree is rebuilt as
-if v1 alone had been published.
+`lks:set:tang-mission-750-754-v1` decides the shown revisions and the review
+statement: the preparation history was flattened on the owner's instruction, so
+every record carries one revision and the set publishes all of them.
 
 |Map and list counts
 |29 published events: 24 in the primary 750–754 window and 5 coda nodes outside
@@ -222,10 +222,6 @@ the phone layouts at 390 px and 320 px.
   and the Chinese coast, so labels overlap until the camera moves in. Cesium's
   entity API in this version exposes no label collision detection, so decluttering
   is a renderer decision rather than a content one.
-* **Superseded revisions ship in the bundle.** The retained v1 revisions are part
-  of the reviewed tree, so the client chunk carries them; the rendered view is the
-  published revision only, and the retained history is what a future correction
-  view needs.
 * **Tablet evidence is Chromium touch emulation, not a physical iPad.** Physical
   device acceptance remains a separate gate under RFD 4.
 

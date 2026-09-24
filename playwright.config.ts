@@ -5,9 +5,10 @@ import { defineConfig, devices } from "@playwright/test"
  *
  * Two modes, both of which serve the real application:
  *
- * * `static` (default) builds the static artifact and serves it with the
- *   SvelteKit preview server: prerendered HTML, hashed bundles, the copied
- *   Cesium runtime, and no development server (RFD 4 AC4).
+ * * `static` (default) builds the static artifact and serves it with
+ *   `scripts/serve-static.mjs`, a file-only server rooted at `build/`: no SSR
+ *   runtime, no `.svelte-kit` access, clean URLs, and a real 404 page. This is
+ *   what a static host does, which is what the checks have to prove (RFD 4 AC4).
  * * `dev` runs the Vite development server, which is what `pnpm dev` starts.
  *
  * `LEKISHI_E2E_BASE_URL` points the checks at an already-running server and
@@ -22,7 +23,7 @@ const build = process.env.LEKISHI_SKIP_BUILD === "1" ? "" : "pnpm build && "
 const serve =
   mode === "dev"
     ? `pnpm sync:cesium && pnpm exec vite dev --port ${port} --strictPort --host 127.0.0.1`
-    : `${build}pnpm exec vite preview --port ${port} --strictPort --host 127.0.0.1`
+    : `${build}node scripts/serve-static.mjs --directory build --port ${port} --host 127.0.0.1`
 
 export default defineConfig({
   testDir: "./e2e",

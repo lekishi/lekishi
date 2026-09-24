@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs"
+import { fileURLToPath } from "node:url"
 import { expect, test, type Page } from "@playwright/test"
 
 /**
@@ -194,20 +196,47 @@ test("serves the root page with navigation into the atlas", async ({ page }) => 
   expect(problems).toEqual([])
 })
 
-test("answers an unknown path with 404 and serves the static fallback page", async ({
+test("serves the artifact as plain files, with clean URLs and a real 404 page", async ({
   request,
 }) => {
+  // The static target is a file-only server rooted at `build/`, so this test is
+  // about the deployment: extension-less paths resolve to their `.html` file
+  // (the rule `static/_redirects` states for `/atlas`), and every other path is
+  // the artifact's own 404 page. The development server renders its own 404, so
+  // the check is static-only.
+  test.skip(mode === "dev", "the file-only server is the static target")
+
+  for (const path of ["/atlas", "/atlas/", "/atlas.html"]) {
+    const response = await request.get(path)
+
+    expect(response.status(), `${path} should be served from the artifact`).toBe(200)
+    expect(await response.text()).toContain('id="atlas-workspace"')
+  }
+
   const missing = await request.get("/no-such-page-in-the-atlas")
 
   expect(missing.status()).toBe(404)
 
-  // Static hosts serve `404.html` for a path that is not in the artifact
-  // (Cloudflare Pages does this by default), so the fallback has to exist and
-  // point a reader back into the site.
-  const fallback = await request.get("/404.html")
+  // The 404 body is the artifact's own `404.html`, byte for byte: no server
+  // runtime rendered it, and it links a reader back into the site.
+  const body = await missing.text()
 
-  expect(fallback.status()).toBe(200)
-  expect(await fallback.text()).toContain('href="/atlas"')
+  expect(body).toBe(
+    readFileSync(fileURLToPath(new URL("../build/404.html", import.meta.url)), "utf8"),
+  )
+  expect(body).toContain('href="/atlas"')
+  expect(body).not.toContain("_app/immutable")
+
+  // Only `build/` is served. Build inputs and repository files are not part of
+  // the artifact, and a path that tries to escape it is refused.
+  for (const outside of [
+    "/.svelte-kit/tsconfig.json",
+    "/package.json",
+    "/src/app.html",
+    "/%2e%2e%2fpackage.json",
+  ]) {
+    expect((await request.get(outside)).status(), `${outside} must not be served`).toBe(404)
+  }
 })
 
 test("serves built assets and the Cesium runtime without Cesium ion", async ({ page, request }) => {

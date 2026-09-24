@@ -190,7 +190,7 @@ function typeViolations(schema: JsonObject, instance: unknown, instancePath: str
 }
 
 function constViolations(schema: JsonObject, instance: unknown, instancePath: string): Violation[] {
-  if (!("const" in schema)) {
+  if (!Object.hasOwn(schema, "const")) {
     return []
   }
 
@@ -335,12 +335,15 @@ function objectViolations(
   const properties = isObject(schema["properties"]) ? schema["properties"] : {}
   const required = listOf(schema["required"])
 
+  // Only own properties count. `key in object` also matches Object.prototype
+  // members, so a document field named `constructor` or `toString` would look
+  // like a declared property and slip past `additionalProperties`.
   const missing = required
-    .filter((key) => typeof key === "string" && !(key in instance))
+    .filter((key) => typeof key === "string" && !Object.hasOwn(instance, key))
     .map((key) => violation("required", instancePath, String(key)))
 
   const propertyViolations = Object.entries(instance)
-    .filter(([key]) => key in properties)
+    .filter(([key]) => Object.hasOwn(properties, key))
     .flatMap(([key, value]) => check(properties[key], value, `${instancePath}/${key}`, context))
 
   return [
@@ -361,14 +364,14 @@ function additionalViolations(
 
   if (additional === false) {
     return Object.keys(instance)
-      .filter((key) => !(key in properties))
+      .filter((key) => !Object.hasOwn(properties, key))
       .sort()
       .map((key) => violation("additionalProperties", instancePath, key))
   }
 
   if (isObject(additional)) {
     return Object.entries(instance)
-      .filter(([key]) => !(key in properties))
+      .filter(([key]) => !Object.hasOwn(properties, key))
       .flatMap(([key, value]) => check(additional, value, `${instancePath}/${key}`, context))
   }
 
@@ -521,7 +524,7 @@ function fetchPointer(schema: JsonValue, pointer: string, reference: string): Js
   for (const rawToken of pointer.split("/").slice(1)) {
     const token = rawToken.replaceAll("~1", "/").replaceAll("~0", "~")
 
-    if (isObject(current) && token in current) {
+    if (isObject(current) && Object.hasOwn(current, token)) {
       current = current[token]
       continue
     }
@@ -646,7 +649,9 @@ function deepEqual(a: unknown, b: unknown): boolean {
 
 function sortForComparison(value: unknown): JsonValue {
   if (isObject(value)) {
-    const sorted: JsonObject = {}
+    // Null prototype for the same reason as the canonical encoder: assigning
+    // `__proto__` on an ordinary object would drop the key instead of copying it.
+    const sorted = Object.create(null) as JsonObject
 
     for (const key of Object.keys(value).sort()) {
       sorted[key] = sortForComparison(value[key])

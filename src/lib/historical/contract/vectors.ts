@@ -190,7 +190,7 @@ export function buildTree(input: JsonObject): { documents: JsonObject[]; sets: J
 
   let sets: JsonObject[]
 
-  if ("sets" in input) {
+  if (Object.hasOwn(input, "sets")) {
     sets = listOf(input["sets"]).map((set) => completeSet(objectOf(set), documents))
   } else if (autoPublish.length > 0) {
     sets = [autoSet(documents, autoPublish)]
@@ -213,18 +213,18 @@ type ExpandedDocument = {
 }
 
 function expandDocument(stub: JsonObject): ExpandedDocument {
-  if ("document" in stub) {
+  if (Object.hasOwn(stub, "document")) {
     return { document: stub, published: false, explicitPublication: true }
   }
 
-  if ("source_id" in stub) {
+  if (Object.hasOwn(stub, "source_id")) {
     const document: JsonObject = { ...stub }
 
-    if (!("title" in document)) {
+    if (!Object.hasOwn(document, "title")) {
       document["title"] = "Vector source"
     }
 
-    if (!("license" in document)) {
+    if (!Object.hasOwn(document, "license")) {
       document["license"] = completeLicense()
     }
 
@@ -233,7 +233,7 @@ function expandDocument(stub: JsonObject): ExpandedDocument {
 
     // A source stub may pin its own hash explicitly to test tamper detection;
     // otherwise the hash of the stub as written is used.
-    if (!("source_hash" in document)) {
+    if (!Object.hasOwn(document, "source_hash")) {
       document["source_hash"] = sourceHash(document)
     }
 
@@ -244,7 +244,7 @@ function expandDocument(stub: JsonObject): ExpandedDocument {
   const recordId = isString(stub["record_id"])
     ? stub["record_id"]
     : `lks:${String(kind)}:vector-example`
-  const revisionStubs = "revisions" in stub ? listOf(stub["revisions"]) : [stub]
+  const revisionStubs = Object.hasOwn(stub, "revisions") ? listOf(stub["revisions"]) : [stub]
   const revisions = revisionStubs.map((revisionStub, index) =>
     buildRevision(objectOf(revisionStub), index),
   )
@@ -256,13 +256,13 @@ function expandDocument(stub: JsonObject): ExpandedDocument {
     record_id: recordId,
     created_at: isString(stub["created_at"]) ? stub["created_at"] : "2026-01-01T00:00:00Z",
     revisions,
-    publication: "publication" in stub ? stub["publication"] : null,
+    publication: Object.hasOwn(stub, "publication") ? stub["publication"] : null,
   }
 
   return {
     document,
     published: stub["published"] === true,
-    explicitPublication: "publication" in stub,
+    explicitPublication: Object.hasOwn(stub, "publication"),
   }
 }
 
@@ -313,7 +313,9 @@ function completeSet(set: JsonObject, documents: JsonObject[]): JsonObject {
 // A vector that tests pinning supplies its own `sources` array, including an
 // empty one, or an explicit wrong hash.
 function fillSourcePins(set: JsonObject, documents: JsonObject[]): JsonObject {
-  const pins = "sources" in set ? listOf(set["sources"]) : derivedSourcePins(set, documents)
+  const pins = Object.hasOwn(set, "sources")
+    ? listOf(set["sources"])
+    : derivedSourcePins(set, documents)
 
   return { ...set, sources: fillPinHashes(pins, documents) }
 }
@@ -517,7 +519,7 @@ function putOptional(map: JsonObject, key: string, value: JsonValue | undefined)
 }
 
 function putNew(map: JsonObject, key: string, value: JsonValue): void {
-  if (!(key in map)) {
+  if (!Object.hasOwn(map, key)) {
     map[key] = value
   }
 }
@@ -525,8 +527,10 @@ function putNew(map: JsonObject, key: string, value: JsonValue): void {
 /** Containment matcher used for vector expectations. */
 export function matches(expect: JsonValue | undefined, actual: unknown): boolean {
   if (isObject(expect) && isObject(actual)) {
+    // Only own properties count, so an expectation can never be satisfied by an
+    // inherited Object.prototype member.
     return Object.entries(expect).every(
-      ([key, value]) => key in actual && matches(value, actual[key]),
+      ([key, value]) => Object.hasOwn(actual, key) && matches(value, actual[key]),
     )
   }
 

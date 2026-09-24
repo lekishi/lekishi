@@ -185,7 +185,10 @@ export function history(records: JsonValue[], sets: JsonValue[]): Record<string,
     grouped.set(event.recordId, [...(grouped.get(event.recordId) ?? []), event])
   }
 
-  const result: Record<string, HistoryEntry[]> = {}
+  // Built as a Map and converted with `Object.fromEntries`, which defines own
+  // properties: assigning a `__proto__` key on an ordinary object would drop the
+  // entry instead of recording it.
+  const result = new Map<string, HistoryEntry[]>()
 
   for (const [recordId, events] of grouped) {
     const record = recordsById.get(recordId)
@@ -194,27 +197,30 @@ export function history(records: JsonValue[], sets: JsonValue[]): Record<string,
       continue
     }
 
-    result[recordId] = events.map((event) => {
-      const revision =
-        listOf(record["revisions"]).find(
-          (candidate) => isObject(candidate) && candidate["revision_id"] === event.revisionId,
-        ) ?? {}
-      const revisionObject = objectOf(revision)
+    result.set(
+      recordId,
+      events.map((event) => {
+        const revision =
+          listOf(record["revisions"]).find(
+            (candidate) => isObject(candidate) && candidate["revision_id"] === event.revisionId,
+          ) ?? {}
+        const revisionObject = objectOf(revision)
 
-      return {
-        revision_id: event.revisionId,
-        set_id: event.setId,
-        published_at: event.publishedAt,
-        change_explanation: revisionObject["change_explanation"] ?? null,
-        author: revisionObject["author"] ?? null,
-        dispute_status: getIn(revisionObject, ["dispute", "status"]) ?? "undisputed",
-        independence: event.independence ?? null,
-        reviewer: event.reviewer ?? null,
-      }
-    })
+        return {
+          revision_id: event.revisionId,
+          set_id: event.setId,
+          published_at: event.publishedAt,
+          change_explanation: revisionObject["change_explanation"] ?? null,
+          author: revisionObject["author"] ?? null,
+          dispute_status: getIn(revisionObject, ["dispute", "status"]) ?? "undisputed",
+          independence: event.independence ?? null,
+          reviewer: event.reviewer ?? null,
+        }
+      }),
+    )
   }
 
-  return result
+  return Object.fromEntries(result)
 }
 
 function compareSortKeys(a: JsonValue, b: JsonValue): number {

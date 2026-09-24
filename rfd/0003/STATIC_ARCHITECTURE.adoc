@@ -85,6 +85,15 @@ request or refresh works with no server. `static/404.html` is the static-host
 fallback, and `static/_redirects` states the `/atlas` rewrite explicitly for
 hosts that need it. The useful URL `/atlas` is preserved.
 
+|Static serving
+|`scripts/serve-static.mjs` serves the artifact as files and nothing else: only
+paths under `build/`, clean URLs (`/atlas` and `/atlas/` resolve to
+`atlas.html`), the artifact's own `404.html` with a 404 status for anything
+else, and no access to `.svelte-kit`, the module graph, or an SSR runtime. The
+browser checks and the orb's static service use it, so the checks prove the
+artifact is deployable as plain files instead of proving that a preview server
+works. `pnpm preview` runs the same server.
+
 |Mount ownership
 |The single-owner rule is unchanged and now simpler: `src/lib/atlas/entry.ts` is
 the only module that mounts the workspace, it refuses to mount a second one, it
@@ -131,16 +140,19 @@ case count and the 187 total, so a case cannot be dropped silently.
 110 worker scripts). The build invariant passes and reports no server runtime.
 
 |Direct navigation
-|The built artifact serves `/atlas` with HTTP 200 and the prerendered shell, also
-after a reload; `/` serves the overview page with its link into the atlas; an
-unknown path answers 404 and `/404.html` is the fallback that links back into the
-site.
+|Served by the file-only server: `/atlas`, `/atlas/`, and `/atlas.html` all answer
+HTTP 200 with the prerendered shell, and a reload keeps one workspace. `/` serves
+the overview page with its link into the atlas. An unknown path answers 404 with
+a body byte-identical to `build/404.html` (no app shell, no client entry), and
+build inputs (`/.svelte-kit/tsconfig.json`, `/package.json`, `/src/app.html`) and
+an escaping path (`/%2e%2e%2fpackage.json`) are all 404.
 
 |Browser checks
-|`pnpm e2e` against the static artifact: desktop 14 passed / 1 skipped, tablet 14
-passed / 1 skipped, phone 14 passed / 1 skipped. The skipped case is the
-touch-only tap check on the non-touch desktop project (and the desktop-only drag
-check on the touch projects). They cover one workspace and one canvas per page,
+|`pnpm e2e` against the static artifact, with `.svelte-kit` moved out of the tree
+so only `build/` is available: desktop 15 passed / 1 skipped, tablet 15 passed /
+1 skipped, phone 15 passed / 1 skipped. The skipped case is the touch-only tap
+check on the non-touch desktop project (and the desktop-only drag check on the
+touch projects). They cover one workspace and one canvas per page,
 a single fetch per client module, selection and time-window behavior, playback
 stopping at the window end, camera-follow rules, keyboard access, disposal,
 `pagehide`/`pageshow` restore, the phone layouts at 390 px and 320 px, and the
@@ -159,6 +171,15 @@ The port is rule-for-rule: `time`, `documents`, `publication`, `canonical`,
 `src/lib/historical/contract`, with the same codes, caveats, error accumulation,
 and containment matcher, verified by the unchanged vectors and examples. The
 contract version stays `lekishi-historical-contract/v0`.
+
+Prototype-named JSON keys are treated as ordinary keys: `__proto__`,
+`constructor`, and `toString` are own properties of a parsed object, so
+membership and pointer traversal use own-property checks, and the canonical
+encoder accumulates into a null-prototype object. Without that, an undeclared
+field of those names would pass `additionalProperties`, an edited `__proto__`
+field would keep the same revision hash, and an absent evidence pointer such as
+`/constructor` would resolve. `prototype-safety.test.ts` pins all three with
+regressions built from `JSON.parse`.
 
 One representation changed, and it is recorded here rather than hidden: the
 canonical encoder is now TypeScript, and it writes a JSON number in its shortest

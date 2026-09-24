@@ -1447,7 +1447,7 @@ function pointerResolves(content: JsonObject, pointer: unknown): boolean {
   for (const rawToken of pointer.split("/").slice(1)) {
     const token = rawToken.replaceAll("~1", "/").replaceAll("~0", "~")
 
-    if (isObject(current) && token in current) {
+    if (isObject(current) && Object.hasOwn(current, token)) {
       current = current[token]
       continue
     }

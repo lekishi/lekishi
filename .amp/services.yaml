@@ -14,12 +14,14 @@ services:
     agent: control
     platforms: [linux]
 
-  # The deployable artifact, built and served as plain static files. This is what
-  # Cloudflare Pages (or any static host) serves; no application server runs.
+  # The deployable artifact, built and served as plain static files by the
+  # file-only server (`scripts/serve-static.mjs`). No SSR runtime and no
+  # `.svelte-kit` access: this is what Cloudflare Pages (or any static host)
+  # serves, and no application server runs.
   static:
     command: >-
       export PATH="/nix/var/nix/profiles/default/bin:$PATH";
-      exec nix develop --command bash -c "pnpm build && pnpm preview --host 0.0.0.0 --port 4173 --strictPort"
+      exec nix develop --command bash -c "pnpm build && node scripts/serve-static.mjs --directory build --port 4173 --host 0.0.0.0"
     port: 4173
     health: /atlas
     portal:

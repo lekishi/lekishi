@@ -39,13 +39,20 @@ Rules that keep the boundary intact:
 | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------- |
 | `pnpm dev` (or `make dev`)     | Development server at [`localhost:5173`](http://localhost:5173).                                                       |
 | `pnpm build` (or `make build`) | Build the static artifact into `build/` and run the build invariant.                                                   |
-| `pnpm preview`                 | Serve `build/` as a static host would, including extension-less `/atlas`.                                              |
+| `pnpm preview`                 | Serve `build/` with `scripts/serve-static.mjs`, a file-only server: clean URLs, a real 404 page, no SSR.               |
 | `pnpm check`                   | `svelte-check` over the Svelte components and TypeScript.                                                              |
 | `pnpm test`                    | Vitest: the atlas workspace unit tests and the whole historical contract suite, including all 187 adversarial vectors. |
 | `pnpm lint` / `pnpm format`    | Prettier check / rewrite.                                                                                              |
 | `pnpm e2e`                     | Browser checks against the built artifact (`LEKISHI_E2E_MODE=dev` runs them against the development server).           |
 | `pnpm screenshots`             | Capture the desktop, tablet, and phone rendered states for review into `.amp/in/artifacts/`.                           |
 | `pnpm verify`                  | Everything CI runs: format check, type check, tests, then the build with its invariant.                                |
+
+`pnpm preview` serves the artifact with `scripts/serve-static.mjs`: a file-only
+server rooted at `build/` with clean-URL handling (`/atlas` and `/atlas/` resolve
+to `atlas.html`), the artifact's own `404.html` for anything else, and no access
+to `.svelte-kit`, the module graph, or an SSR runtime. That is what the browser
+checks run against, so the suite proves the artifact is deployable as plain files
+rather than proving a preview server works.
 
 `pnpm dev` and `pnpm build` first run `pnpm sync:cesium`, which copies the Cesium
 runtime (Workers, Assets, Widgets, ThirdParty) from the npm package into

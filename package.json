@@ -11,7 +11,7 @@
     "sync:cesium": "node scripts/sync-cesium-runtime.mjs",
     "dev": "node scripts/sync-cesium-runtime.mjs && vite dev",
     "build": "node scripts/sync-cesium-runtime.mjs && vite build && node scripts/check-static-build.mjs",
-    "preview": "vite preview",
+    "preview": "node scripts/serve-static.mjs --directory build",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "test": "vitest run",
     "test:watch": "vitest",

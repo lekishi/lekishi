@@ -28,7 +28,11 @@ function compareKeys(a: string, b: string): number {
 
 export function canonical(value: unknown): JsonValue {
   if (isObject(value)) {
-    const sorted: JsonObject = {}
+    // A null-prototype accumulator. Assigning `__proto__` on an ordinary object
+    // runs the inherited setter instead of creating an own property, which would
+    // silently drop that key from the canonical encoding and therefore from the
+    // hash: an edited `__proto__` field would keep the same revision hash.
+    const sorted = Object.create(null) as JsonObject
 
     for (const key of Object.keys(value).sort(compareKeys)) {
       sorted[key] = canonical(value[key])

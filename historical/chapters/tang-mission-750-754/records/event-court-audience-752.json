@@ -8,11 +8,16 @@
     {
       "revision_id": "lks:rev:court-audience-752-1",
       "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter event: the envoys' court audience in 752, the first half of the report's audience-and-節刀 pair.",
       "content": {
         "summary": "The envoys pay court (拜朝) in the third month of 天平勝寶四年, before the 節刀 grant of the following leap month.",
-        "event_types": ["mission"],
+        "event_types": [
+          "mission"
+        ],
         "time": {
           "source_expression": "天平勝寶四年三月庚辰",
           "calendar": "regnal",
@@ -21,14 +26,31 @@
           "interval": {
             "bounds": "two_sided",
             "boundary": "inclusive",
-            "start": {"year": 752, "era": "ce", "month": 3},
-            "end": {"year": 752, "era": "ce", "month": 3}
+            "start": {
+              "year": 752,
+              "era": "ce",
+              "month": 3
+            },
+            "end": {
+              "year": 752,
+              "era": "ce",
+              "month": 3
+            }
           }
         },
         "participants": [
-          {"actor_id": "lks:actor:fujiwara-no-kiyokawa", "role": "leader"},
-          {"actor_id": "lks:actor:otomo-no-komaro", "role": "participant"},
-          {"actor_id": "lks:actor:kibi-no-makibi", "role": "participant"}
+          {
+            "actor_id": "lks:actor:fujiwara-no-kiyokawa",
+            "role": "leader"
+          },
+          {
+            "actor_id": "lks:actor:otomo-no-komaro",
+            "role": "participant"
+          },
+          {
+            "actor_id": "lks:actor:kibi-no-makibi",
+            "role": "participant"
+          }
         ],
         "editorial_notes": "The entry names the envoys collectively (遣唐使等); the participant list follows the appointment entries and is not an independent naming in this entry."
       },
@@ -42,7 +64,10 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十八 天平勝寶四年三月庚辰"},
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十八 天平勝寶四年三月庚辰"
+              },
               "quoted_text": "三月庚辰。遣唐使等拜朝。"
             }
           ]
@@ -56,23 +81,163 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十八 天平勝寶四年三月庚辰"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十八 天平勝寶四年三月庚辰"
+              }
             },
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十八 天平勝寶二年九月己酉; 卷第十八 天平勝寶三年十一月丙戌"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十八 天平勝寶二年九月己酉; 卷第十八 天平勝寶三年十一月丙戌"
+              }
             }
           ]
         }
       ],
       "revision_hash": "sha256:9f2ec8e1c2ed48a2fc809f383d619850374158dda33ede40976aca98c980059e"
+    },
+    {
+      "revision_id": "lks:rev:court-audience-752-2",
+      "created_at": "2026-09-24T21:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Owner-accepted placement: the entry names no place, so the court act is anchored at the court's seat (平城宮, the palace of 平城京) as a display anchor, with the palace's attestation cited on the place record and the modern site's coordinate from Wikidata. No coordinate is asserted.",
+      "content": {
+        "summary": "The envoys pay court (拜朝) in the third month of 天平勝寶四年, before the 節刀 grant of the following leap month. The entry names no place; the record anchors the act at the court's seat, 平城宮, as a display anchor.",
+        "event_types": [
+          "mission"
+        ],
+        "time": {
+          "source_expression": "天平勝寶四年三月庚辰",
+          "calendar": "regnal",
+          "precision": "month",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {
+              "year": 752,
+              "era": "ce",
+              "month": 3
+            },
+            "end": {
+              "year": 752,
+              "era": "ce",
+              "month": 3
+            }
+          }
+        },
+        "participants": [
+          {
+            "actor_id": "lks:actor:fujiwara-no-kiyokawa",
+            "role": "leader"
+          },
+          {
+            "actor_id": "lks:actor:otomo-no-komaro",
+            "role": "participant"
+          },
+          {
+            "actor_id": "lks:actor:kibi-no-makibi",
+            "role": "participant"
+          }
+        ],
+        "editorial_notes": "The entry names the envoys collectively (遣唐使等); the participant list follows the appointment entries and is not an independent naming in this entry.",
+        "places": [
+          {
+            "place_id": "lks:place:heijo-palace",
+            "role": "site",
+            "note": "The entry names no place. A court act happens at the court, whose seat in this period is 平城宮 (the palace of 平城京); the record anchors it there for map readability, not as a source-named site."
+          }
+        ]
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:court-audience-752-time",
+          "statement": "The chronicle records the envoys paying court on 天平勝寶四年三月庚辰.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十八 天平勝寶四年三月庚辰"
+              },
+              "quoted_text": "三月庚辰。遣唐使等拜朝。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:court-audience-752-participants",
+          "statement": "The entry names the envoys collectively; the three named participants are the appointees of the 750 and 751 entries.",
+          "asserts": "/participants",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十八 天平勝寶四年三月庚辰"
+              }
+            },
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十八 天平勝寶二年九月己酉; 卷第十八 天平勝寶三年十一月丙戌"
+              }
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:court-audience-752-place",
+          "statement": "The entry records a court act and names no place; the chapter places the act at the court's seat, 平城宮 (the palace of 平城京), as a display anchor and asserts no coordinate.",
+          "asserts": "/places/0",
+          "basis": "cited_interpretation",
+          "role": "main",
+          "attributed_to": "Lekishi editorial preparation",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十八 天平勝寶四年三月庚辰"
+              }
+            },
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十八 天平勝寶四年閏三月丙辰"
+              }
+            },
+            {
+              "source_id": "lks:source:wikidata",
+              "locator": {
+                "kind": "dataset_row",
+                "value": "Q211585 (P625)"
+              }
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:b6901e6156019b6f48277541c623b16ca9b1c0e60f89f46f29e3742234e36540"
     }
   ],
   "publication": {
-    "published_revision_id": "lks:rev:court-audience-752-1",
-    "published_revision_hash": "sha256:9f2ec8e1c2ed48a2fc809f383d619850374158dda33ede40976aca98c980059e",
-    "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_revision_id": "lks:rev:court-audience-752-2",
+    "published_revision_hash": "sha256:b6901e6156019b6f48277541c623b16ca9b1c0e60f89f46f29e3742234e36540",
+    "set_id": "lks:set:tang-mission-750-754-court-anchors",
+    "published_at": "2026-09-24T22:00:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

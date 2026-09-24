@@ -81,11 +81,6 @@ function errorCodes(result: ProjectionResult): string[] {
   return result.ok ? [] : result.errors
 }
 
-/** Reads a placement's place id, for assertions that only care about which place was chosen. */
-function placementPlaceId(placement: EventPlacement): string | null {
-  return placement.placeId
-}
-
 /**
  * Rebuilds the tree as if only one publication set had ever existed: every
  * mirror is rewritten to that set's member, so "the newest published revision"
@@ -126,7 +121,7 @@ describe("projecting the reviewed Tang chapter", () => {
     expect(chapter.id).toBe(CHAPTER)
     expect(chapter.title).toBe("The 750–754 embassy of 藤原朝臣清河")
     expect(chapter.summary).toContain("coda nodes of 758, 759, 763, and 779")
-    expect(chapter.places).toHaveLength(14)
+    expect(chapter.places).toHaveLength(15)
     expect(chapter.events).toHaveLength(29)
     expect(chapter.events.filter((event) => event.coda)).toHaveLength(5)
     expect(chapter.defaultWindow).toEqual({ start: 750, end: 754 })
@@ -141,9 +136,11 @@ describe("projecting the reviewed Tang chapter", () => {
   it("selects the newest published revision per record, not the first revision in the file", () => {
     const chapter = project()
 
-    // The correction set is newer, and every shown revision is published by it
-    // or by the first set; the newest one decides the review statement.
+    // The placement set is newest, then the correction set, then the first set;
+    // every shown revision is published by one of them, and the newest set
+    // decides the review statement.
     expect(chapter.publication.setIds).toEqual([
+      "lks:set:tang-mission-750-754-court-anchors",
       "lks:set:tang-mission-750-754-v2",
       "lks:set:tang-mission-750-754-v1",
     ])
@@ -183,13 +180,22 @@ describe("projecting the reviewed Tang chapter", () => {
     const unplaced = inWindow.filter((event) => event.placement.kind === "none")
 
     expect(inWindow).toHaveLength(24)
-    expect(placed).toHaveLength(13)
-    expect(unplaced).toHaveLength(11)
+    expect(placed).toHaveLength(20)
+    expect(unplaced).toHaveLength(4)
 
-    // A record with no place reference at all, a record whose place has unknown
-    // geometry, and a record whose only reference is context: all three stay in
-    // the list, and none of them carries a coordinate.
-    expect(placementPlaceId(eventById(chapter, "lks:event:appointment-750").placement)).toBeNull()
+    // A court act whose entry names no place is anchored at the court's seat as
+    // a display anchor: the record asserts no coordinate and the basis stays
+    // visible to the surfaces.
+    expect(eventById(chapter, "lks:event:appointment-750").placement).toMatchObject({
+      kind: "point",
+      placeId: "lks:place:heijo-palace",
+      label: "平城宮",
+      basis: "display-anchor",
+      precision: "unspecified",
+    })
+
+    // The entries that name a place the chapter cannot identify, and the one that
+    // names a place only as context, stay in the list with no coordinate.
     expect(eventById(chapter, "lks:event:kiyokawa-drift-753").placement).toEqual({
       kind: "none",
       placeId: "lks:place:huanzhou",
@@ -201,6 +207,18 @@ describe("projecting the reviewed Tang chapter", () => {
       placeId: "lks:place:ishigaki",
       label: "石籬浦",
       reason: "no-position",
+    })
+    expect(eventById(chapter, "lks:event:kibi-drift-753").placement).toEqual({
+      kind: "none",
+      placeId: "lks:place:murozaki",
+      label: "紀伊國牟漏埼",
+      reason: "no-position",
+    })
+    expect(eventById(chapter, "lks:event:ships-separate-753").placement).toEqual({
+      kind: "none",
+      placeId: "lks:place:tane",
+      label: "多禰島",
+      reason: "context-only",
     })
 
     for (const event of unplaced) {
@@ -225,6 +243,7 @@ describe("projecting the reviewed Tang chapter", () => {
     const chapter = project()
     const dazaifu = chapter.places.find((place) => place.id === "lks:place:dazaifu")
     const yaku = chapter.places.find((place) => place.id === "lks:place:yaku")
+    const palace = chapter.places.find((place) => place.id === "lks:place:heijo-palace")
 
     expect(dazaifu).toEqual({
       id: "lks:place:dazaifu",
@@ -232,6 +251,15 @@ describe("projecting the reviewed Tang chapter", () => {
       placement: "display-anchor",
       precision: "unspecified",
       position: { lon: 130.5151, lat: 33.5145 },
+    })
+    // The court's seat is the same kind of placement: a modern label anchor, not
+    // a coordinate the review asserted for any of the ten court acts.
+    expect(palace).toEqual({
+      id: "lks:place:heijo-palace",
+      label: "平城宮",
+      placement: "display-anchor",
+      precision: "unspecified",
+      position: { lon: 135.79555556, lat: 34.69111111 },
     })
     // The cited identification keeps its own precision; nothing upgrades it.
     expect(yaku).toEqual({
@@ -386,7 +414,11 @@ describe("adversarial readings of the chapter", () => {
     const chapter = cloneTree(tree())
     const record = recordById(chapter, "lks:place:naniwa")
     const mirror = objectOf(record["publication"])
-    const member = listOf(objectOf(chapter.sets[0])["members"])
+    const member = listOf(
+      objectOf(
+        chapter.sets.find((set) => objectOf(set)["set_id"] === "lks:set:tang-mission-750-754-v1"),
+      )["members"],
+    )
       .map(objectOf)
       .find((candidate) => candidate["record_id"] === "lks:place:naniwa")
 

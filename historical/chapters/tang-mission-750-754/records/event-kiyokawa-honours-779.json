@@ -8,11 +8,16 @@
     {
       "revision_id": "lks:rev:kiyokawa-honours-779-1",
       "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter coda event: the 779 posthumous honours and the biographical notice they carry.",
       "content": {
         "summary": "The court raises the late ambassador 藤原朝臣清河 from 從三位 to 從二位 in 寶龜十年二月 (779), in a notice that also records his drift to 驩州, his survival, and his death in Tang.",
-        "event_types": ["occurrence"],
+        "event_types": [
+          "occurrence"
+        ],
         "time": {
           "source_expression": "寶龜十年二月乙亥 贈故入唐大使從三位藤原朝臣清河從二位",
           "calendar": "regnal",
@@ -21,12 +26,23 @@
           "interval": {
             "bounds": "two_sided",
             "boundary": "inclusive",
-            "start": {"year": 779, "era": "ce", "month": 2},
-            "end": {"year": 779, "era": "ce", "month": 2}
+            "start": {
+              "year": 779,
+              "era": "ce",
+              "month": 2
+            },
+            "end": {
+              "year": 779,
+              "era": "ce",
+              "month": 2
+            }
           }
         },
         "participants": [
-          {"actor_id": "lks:actor:fujiwara-no-kiyokawa", "role": "subject"}
+          {
+            "actor_id": "lks:actor:fujiwara-no-kiyokawa",
+            "role": "subject"
+          }
         ],
         "editorial_notes": "Coda node (outside the primary 750–754 mission window). The honours are the court's act; the voyage and death details in the same notice are cited on the drift event and on the actor, not restated as mission effects."
       },
@@ -40,7 +56,10 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第卅五 寶龜十年二月乙亥"},
+              "locator": {
+                "kind": "entry",
+                "value": "卷第卅五 寶龜十年二月乙亥"
+              },
               "quoted_text": "乙亥。贈故入唐大使從三位藤原朝臣清河從二位。"
             }
           ]
@@ -54,19 +73,141 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第卅五 寶龜十年二月乙亥"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第卅五 寶龜十年二月乙亥"
+              }
             }
           ]
         }
       ],
       "revision_hash": "sha256:543c95c5ce640d11faa5abce444b9c5a20b1c664c7c03b234bb8b97e922f620a"
+    },
+    {
+      "revision_id": "lks:rev:kiyokawa-honours-779-2",
+      "created_at": "2026-09-24T21:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Owner-accepted placement: the entry names no place, so the court act is anchored at the court's seat (平城宮, the palace of 平城京) as a display anchor, with the palace's attestation cited on the place record and the modern site's coordinate from Wikidata. No coordinate is asserted.",
+      "content": {
+        "summary": "The court raises the late ambassador 藤原朝臣清河 from 從三位 to 從二位 in 寶龜十年二月 (779), in a notice that also records his drift to 驩州, his survival, and his death in Tang. The entry names no place; the record anchors the act at the court's seat, 平城宮, as a display anchor.",
+        "event_types": [
+          "occurrence"
+        ],
+        "time": {
+          "source_expression": "寶龜十年二月乙亥 贈故入唐大使從三位藤原朝臣清河從二位",
+          "calendar": "regnal",
+          "precision": "month",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {
+              "year": 779,
+              "era": "ce",
+              "month": 2
+            },
+            "end": {
+              "year": 779,
+              "era": "ce",
+              "month": 2
+            }
+          }
+        },
+        "participants": [
+          {
+            "actor_id": "lks:actor:fujiwara-no-kiyokawa",
+            "role": "subject"
+          }
+        ],
+        "editorial_notes": "Coda node (outside the primary 750–754 mission window). The honours are the court's act; the voyage and death details in the same notice are cited on the drift event and on the actor, not restated as mission effects.",
+        "places": [
+          {
+            "place_id": "lks:place:heijo-palace",
+            "role": "site",
+            "note": "The entry names no place. A court act happens at the court, whose seat in this period is 平城宮 (the palace of 平城京); the record anchors it there for map readability, not as a source-named site."
+          }
+        ]
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:kiyokawa-honours-time",
+          "statement": "The chronicle records the posthumous promotion of 藤原朝臣清河 from 從三位 to 從二位 on 寶龜十年二月乙亥.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {
+                "kind": "entry",
+                "value": "卷第卅五 寶龜十年二月乙亥"
+              },
+              "quoted_text": "乙亥。贈故入唐大使從三位藤原朝臣清河從二位。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:kiyokawa-honours-subject",
+          "statement": "The entry names 清河 as the recipient of the posthumous rank.",
+          "asserts": "/participants",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {
+                "kind": "entry",
+                "value": "卷第卅五 寶龜十年二月乙亥"
+              }
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:kiyokawa-honours-779-place",
+          "statement": "The entry records a court act and names no place; the chapter places the act at the court's seat, 平城宮 (the palace of 平城京), as a display anchor and asserts no coordinate.",
+          "asserts": "/places/0",
+          "basis": "cited_interpretation",
+          "role": "main",
+          "attributed_to": "Lekishi editorial preparation",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {
+                "kind": "entry",
+                "value": "卷第卅五 寶龜十年二月乙亥"
+              }
+            },
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {
+                "kind": "entry",
+                "value": "卷第卅五 寶龜九年正月戊申朔"
+              }
+            },
+            {
+              "source_id": "lks:source:wikidata",
+              "locator": {
+                "kind": "dataset_row",
+                "value": "Q211585 (P625)"
+              }
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:92479348889597ee1b99d6f5939ff68f74980b94aed606c17a0c28e2d457ec1b"
     }
   ],
   "publication": {
-    "published_revision_id": "lks:rev:kiyokawa-honours-779-1",
-    "published_revision_hash": "sha256:543c95c5ce640d11faa5abce444b9c5a20b1c664c7c03b234bb8b97e922f620a",
-    "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_revision_id": "lks:rev:kiyokawa-honours-779-2",
+    "published_revision_hash": "sha256:92479348889597ee1b99d6f5939ff68f74980b94aed606c17a0c28e2d457ec1b",
+    "set_id": "lks:set:tang-mission-750-754-court-anchors",
+    "published_at": "2026-09-24T22:00:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

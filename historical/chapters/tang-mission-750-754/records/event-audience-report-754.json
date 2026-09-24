@@ -8,11 +8,16 @@
     {
       "revision_id": "lks:rev:audience-report-754-1",
       "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter event: 古麻呂's report of the Tang New Year audience to the Japanese court, recorded separately from the audience itself.",
       "content": {
         "summary": "大伴古麻呂 comes from Tang and reports to the court the New Year audience at 蓬萊宮含元殿 and the seating-order dispute, in 天平勝寶六年正月 (754).",
-        "event_types": ["mission"],
+        "event_types": [
+          "mission"
+        ],
         "time": {
           "source_expression": "天平勝寶六年正月丙寅 副使大伴宿祢古麻呂自唐國至",
           "calendar": "regnal",
@@ -21,12 +26,23 @@
           "interval": {
             "bounds": "two_sided",
             "boundary": "inclusive",
-            "start": {"year": 754, "era": "ce", "month": 1},
-            "end": {"year": 754, "era": "ce", "month": 1}
+            "start": {
+              "year": 754,
+              "era": "ce",
+              "month": 1
+            },
+            "end": {
+              "year": 754,
+              "era": "ce",
+              "month": 1
+            }
           }
         },
         "participants": [
-          {"actor_id": "lks:actor:otomo-no-komaro", "role": "leader"}
+          {
+            "actor_id": "lks:actor:otomo-no-komaro",
+            "role": "leader"
+          }
         ],
         "editorial_notes": "This is the court-side report event, distinct from the audience it describes; the report is the chapter's only account of the audience and is labelled as a self-report there. The day is a sexagenary day (丙寅) and is normalized to the month."
       },
@@ -40,7 +56,10 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年正月丙寅"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年正月丙寅"
+              }
             }
           ]
         },
@@ -53,19 +72,140 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年正月丙寅"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年正月丙寅"
+              }
             }
           ]
         }
       ],
       "revision_hash": "sha256:b6f75bb5402f1d1367963e05b8b76f95a50aed7d23b46e69185c9a972063b6a3"
+    },
+    {
+      "revision_id": "lks:rev:audience-report-754-2",
+      "created_at": "2026-09-24T21:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Owner-accepted placement: the entry names no place, so the court act is anchored at the court's seat (平城宮, the palace of 平城京) as a display anchor, with the palace's attestation cited on the place record and the modern site's coordinate from Wikidata. No coordinate is asserted.",
+      "content": {
+        "summary": "大伴古麻呂 comes from Tang and reports to the court the New Year audience at 蓬萊宮含元殿 and the seating-order dispute, in 天平勝寶六年正月 (754). The entry names no place; the record anchors the act at the court's seat, 平城宮, as a display anchor.",
+        "event_types": [
+          "mission"
+        ],
+        "time": {
+          "source_expression": "天平勝寶六年正月丙寅 副使大伴宿祢古麻呂自唐國至",
+          "calendar": "regnal",
+          "precision": "month",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {
+              "year": 754,
+              "era": "ce",
+              "month": 1
+            },
+            "end": {
+              "year": 754,
+              "era": "ce",
+              "month": 1
+            }
+          }
+        },
+        "participants": [
+          {
+            "actor_id": "lks:actor:otomo-no-komaro",
+            "role": "leader"
+          }
+        ],
+        "editorial_notes": "This is the court-side report event, distinct from the audience it describes; the report is the chapter's only account of the audience and is labelled as a self-report there. The day is a sexagenary day (丙寅) and is normalized to the month.",
+        "places": [
+          {
+            "place_id": "lks:place:heijo-palace",
+            "role": "site",
+            "note": "The entry names no place. A court act happens at the court, whose seat in this period is 平城宮 (the palace of 平城京); the record anchors it there for map readability, not as a source-named site."
+          }
+        ]
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:audience-report-time",
+          "statement": "The chronicle records 大伴宿祢古麻呂 coming from Tang and reporting the New Year audience on 天平勝寶六年正月丙寅.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年正月丙寅"
+              }
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:audience-report-participant",
+          "statement": "The entry names 古麻呂 as the reporting envoy.",
+          "asserts": "/participants",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年正月丙寅"
+              }
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:audience-report-754-place",
+          "statement": "The entry records a court act and names no place; the chapter places the act at the court's seat, 平城宮 (the palace of 平城京), as a display anchor and asserts no coordinate.",
+          "asserts": "/places/0",
+          "basis": "cited_interpretation",
+          "role": "main",
+          "attributed_to": "Lekishi editorial preparation",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年正月丙寅"
+              }
+            },
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年正月丁酉朔"
+              }
+            },
+            {
+              "source_id": "lks:source:wikidata",
+              "locator": {
+                "kind": "dataset_row",
+                "value": "Q211585 (P625)"
+              }
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:2fe8aa9fadefa8ac201050d8dbe554331693bea8dcd614cf42d8d3e43cc92f1c"
     }
   ],
   "publication": {
-    "published_revision_id": "lks:rev:audience-report-754-1",
-    "published_revision_hash": "sha256:b6f75bb5402f1d1367963e05b8b76f95a50aed7d23b46e69185c9a972063b6a3",
-    "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_revision_id": "lks:rev:audience-report-754-2",
+    "published_revision_hash": "sha256:2fe8aa9fadefa8ac201050d8dbe554331693bea8dcd614cf42d8d3e43cc92f1c",
+    "set_id": "lks:set:tang-mission-750-754-court-anchors",
+    "published_at": "2026-09-24T22:00:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

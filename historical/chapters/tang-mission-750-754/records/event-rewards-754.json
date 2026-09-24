@@ -8,11 +8,16 @@
     {
       "revision_id": "lks:rev:rewards-754-1",
       "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter event: the mission's rewards, including the chronicle's 222-person figure.",
       "content": {
         "summary": "The court promotes the returning envoys 大伴古麻呂 and 吉備真備 to 正四位下, promotes the judges, and rewards the 222 persons below the envoys, in 天平勝寶六年四月 (754).",
-        "event_types": ["mission"],
+        "event_types": [
+          "mission"
+        ],
         "time": {
           "source_expression": "天平勝寶六年四月壬申 入唐廻使從四位上大伴宿祢古麻呂。吉備朝臣眞備並授正四位下",
           "calendar": "regnal",
@@ -21,13 +26,27 @@
           "interval": {
             "bounds": "two_sided",
             "boundary": "inclusive",
-            "start": {"year": 754, "era": "ce", "month": 4},
-            "end": {"year": 754, "era": "ce", "month": 4}
+            "start": {
+              "year": 754,
+              "era": "ce",
+              "month": 4
+            },
+            "end": {
+              "year": 754,
+              "era": "ce",
+              "month": 4
+            }
           }
         },
         "participants": [
-          {"actor_id": "lks:actor:otomo-no-komaro", "role": "leader"},
-          {"actor_id": "lks:actor:kibi-no-makibi", "role": "participant"}
+          {
+            "actor_id": "lks:actor:otomo-no-komaro",
+            "role": "leader"
+          },
+          {
+            "actor_id": "lks:actor:kibi-no-makibi",
+            "role": "participant"
+          }
         ],
         "editorial_notes": "The 222-person figure is the only documented headcount for the mission in the sources checked; the chapter publishes it as the entry states it and does not use it as the mission's total size."
       },
@@ -41,7 +60,10 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年四月壬申"},
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年四月壬申"
+              },
               "quoted_text": "壬申。入唐廻使從四位上大伴宿祢古麻呂。吉備朝臣眞備並授正四位下。判官正六位上大伴宿祢御笠。巨萬朝臣大山並從五位下。自餘使下二百廿二人亦各有差。"
             }
           ]
@@ -55,19 +77,145 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年四月壬申"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年四月壬申"
+              }
             }
           ]
         }
       ],
       "revision_hash": "sha256:3104f5c930fd6c6f74868da4501dedce9a191e3c1a9c086a01c205c478fae6b2"
+    },
+    {
+      "revision_id": "lks:rev:rewards-754-2",
+      "created_at": "2026-09-24T21:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Owner-accepted placement: the entry names no place, so the court act is anchored at the court's seat (平城宮, the palace of 平城京) as a display anchor, with the palace's attestation cited on the place record and the modern site's coordinate from Wikidata. No coordinate is asserted.",
+      "content": {
+        "summary": "The court promotes the returning envoys 大伴古麻呂 and 吉備真備 to 正四位下, promotes the judges, and rewards the 222 persons below the envoys, in 天平勝寶六年四月 (754). The entry names no place; the record anchors the act at the court's seat, 平城宮, as a display anchor.",
+        "event_types": [
+          "mission"
+        ],
+        "time": {
+          "source_expression": "天平勝寶六年四月壬申 入唐廻使從四位上大伴宿祢古麻呂。吉備朝臣眞備並授正四位下",
+          "calendar": "regnal",
+          "precision": "month",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {
+              "year": 754,
+              "era": "ce",
+              "month": 4
+            },
+            "end": {
+              "year": 754,
+              "era": "ce",
+              "month": 4
+            }
+          }
+        },
+        "participants": [
+          {
+            "actor_id": "lks:actor:otomo-no-komaro",
+            "role": "leader"
+          },
+          {
+            "actor_id": "lks:actor:kibi-no-makibi",
+            "role": "participant"
+          }
+        ],
+        "editorial_notes": "The 222-person figure is the only documented headcount for the mission in the sources checked; the chapter publishes it as the entry states it and does not use it as the mission's total size.",
+        "places": [
+          {
+            "place_id": "lks:place:heijo-palace",
+            "role": "site",
+            "note": "The entry names no place. A court act happens at the court, whose seat in this period is 平城宮 (the palace of 平城京); the record anchors it there for map readability, not as a source-named site."
+          }
+        ]
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:rewards-time",
+          "statement": "The chronicle records the promotions and rewards of 天平勝寶六年四月壬申, including 222 persons below the envoys.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年四月壬申"
+              },
+              "quoted_text": "壬申。入唐廻使從四位上大伴宿祢古麻呂。吉備朝臣眞備並授正四位下。判官正六位上大伴宿祢御笠。巨萬朝臣大山並從五位下。自餘使下二百廿二人亦各有差。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:rewards-participants",
+          "statement": "The entry names 古麻呂 and 吉備真備 as the promoted envoys.",
+          "asserts": "/participants",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年四月壬申"
+              }
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:rewards-754-place",
+          "statement": "The entry records a court act and names no place; the chapter places the act at the court's seat, 平城宮 (the palace of 平城京), as a display anchor and asserts no coordinate.",
+          "asserts": "/places/0",
+          "basis": "cited_interpretation",
+          "role": "main",
+          "attributed_to": "Lekishi editorial preparation",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年四月壬申"
+              }
+            },
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年正月丁酉朔"
+              }
+            },
+            {
+              "source_id": "lks:source:wikidata",
+              "locator": {
+                "kind": "dataset_row",
+                "value": "Q211585 (P625)"
+              }
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:7d922ac46ab4d9f79844318b457fbd051cbe9424cb020134a86cd84fb57e7a37"
     }
   ],
   "publication": {
-    "published_revision_id": "lks:rev:rewards-754-1",
-    "published_revision_hash": "sha256:3104f5c930fd6c6f74868da4501dedce9a191e3c1a9c086a01c205c478fae6b2",
-    "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_revision_id": "lks:rev:rewards-754-2",
+    "published_revision_hash": "sha256:7d922ac46ab4d9f79844318b457fbd051cbe9424cb020134a86cd84fb57e7a37",
+    "set_id": "lks:set:tang-mission-750-754-court-anchors",
+    "published_at": "2026-09-24T22:00:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

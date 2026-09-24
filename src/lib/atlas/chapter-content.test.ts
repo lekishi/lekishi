@@ -28,9 +28,9 @@ describe("the bundled chapter content", () => {
     expect(CHAPTER.id).toBe("tang-mission-750-754")
     expect(CHAPTER.title).toBe("The 750–754 embassy of 藤原朝臣清河")
     expect(CHAPTER.events).toHaveLength(29)
-    expect(CHAPTER.places).toHaveLength(14)
+    expect(CHAPTER.places).toHaveLength(15)
     expect(CHAPTER.defaultWindow).toEqual({ start: 750, end: 754 })
-    expect(CHAPTER.publication.setIds[0]).toBe("lks:set:tang-mission-750-754-v2")
+    expect(CHAPTER.publication.setIds[0]).toBe("lks:set:tang-mission-750-754-court-anchors")
 
     const serialized = JSON.stringify(CHAPTER)
 

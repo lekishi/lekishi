@@ -37,21 +37,29 @@ Publication is a decision, not an agent action.
   current, so content can be prepared and reviewed without the atlas changing.
 * **The ledger records the decision, not the review.** A row says who decided
   that this version of the content may exist and when; the set's own `review`
-  block still records the review independence of the content, and a
-  `self_review` set must be recorded as a preparation snapshot rather than as an
-  approved release.
-* **An owner-approved publication is recorded here first.** Until a row says
-  `owner approved`, no set may claim the owner's approval, and RFD 4's AC2 stays
-  unsatisfied.
+  block still records the review independence of the content.
+* **Three decisions are recorded.** `preparation snapshot` means the owner did
+  not decide this content — it exists because preparation was instructed — and
+  such a set must carry the preparing editor's `self_review`. `owner decided`
+  means the owner decided that this specific content may be published while AC2
+  and the specialist reviews stay open. `owner approved` means the owner's
+  editorial approval under RFD 2, which is what RFD 4's AC2 asks for.
+* **Nothing is an official publication until an `owner approved` row exists.**
+  RFD 4's AC2 stays unsatisfied until then, and no set may claim the owner's
+  approval without that row.
 
 The gate is enforced by
 `src/lib/historical/contract/publication-approval.test.ts`, which runs in
 `pnpm build` through `scripts/check-chapter.mjs`. It reads this record and the
 chapter's sets and fails on any of: a set with no ledger row, a ledger row for a
-set that does not exist, a row whose decision is not one of the two recorded
-kinds, or a set whose review independence disagrees with its row. So an agent
-cannot mint a version of the content that no decision covers, and cannot label a
-preparation snapshot as approved.
+set that does not exist, a decision the gate does not know, a duplicated row, a
+`preparation snapshot` that claims independent or specialist review, a set whose
+review independence has no owner decision behind it, or an owner decision whose
+row does not name the owner as the decider. So an agent cannot mint a version of
+the content that no decision covers, and cannot label a preparation snapshot as
+reviewed. The gate checks the shape of the record; whether a decision is truly
+the owner's is the owner's row to write, which is why the ledger names the
+decider in every row.
 
 == Ledger
 
@@ -76,12 +84,21 @@ preparing editor's `self_review`, and RFD 4's AC2 is not satisfied by it.
 |The first review cycle's corrections, appended as new revisions of the affected
 records so the v1 revisions and pins stay readable. Also a preparation snapshot
 with `self_review`; also not an approved release.
+
+|`lks:set:tang-mission-750-754-court-anchors`
+|owner decided
+|owner (accepted the placement recommendation, 2026-09-24)
+|The owner's decision that the court-act placements may be published: one new
+place record for the court's seat (平城宮) and corrected revisions of the ten
+events whose entries name no place or name 内裏, each anchored as a display
+anchor with no asserted coordinate. The set keeps the preparing editor's
+`self_review`; this decision is not the owner's editorial approval under RFD 2,
+so RFD 4's AC2 stays open and the specialist reviews remain outstanding.
 |===
 
 No `owner approved` row exists yet. The first one will be the owner's editorial
 approval of the chapter under RFD 2, and it is what RFD 4's AC2 asks for; it is
-expected to name the set that publishes the then-current revisions, including
-any placement corrections prepared in the meantime.
+expected to name the set that publishes the then-current revisions.
 
 == Consequences
 

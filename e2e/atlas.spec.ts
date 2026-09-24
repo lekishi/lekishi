@@ -596,11 +596,34 @@ test("keeps events the chapter cannot place in the list without a map position",
   )
   await expect(page.locator("#atlas-follow-toggle")).toBeDisabled()
 
-  // The same holds for an event whose record names no place at all.
+  // 多禰島 is named only as the second ship's intended destination, so the event
+  // keeps no position either.
+  await selectEvent(page, "lks:event:ships-separate-753")
+
+  await expect(page.getByTestId("atlas-unplaced")).toContainText("named only as context")
+  await expect(page.locator("#atlas-follow-toggle")).toBeDisabled()
+})
+
+test("anchors a court act at the court's seat without asserting a coordinate", async ({ page }) => {
+  await mountAtlas(page)
+
+  // The entry names no place, so the record anchors the act at the court's seat
+  // (平城宮) as a display anchor: the row says which kind of placement it is, the
+  // details surface names the place, and the map may show it.
+  const row = page.locator('[data-event-id="lks:event:appointment-750"]')
+
+  await expect(row).toContainText("平城宮 · display anchor only")
+
   await selectEvent(page, "lks:event:appointment-750")
 
-  await expect(page.getByTestId("atlas-unplaced")).toContainText("names no place for this event")
-  await expect(page.locator("#atlas-follow-toggle")).toBeDisabled()
+  await expect(page.getByTestId("atlas-selection")).toContainText("平城宮 · display anchor only")
+  await expect(page.getByTestId("atlas-unplaced")).toHaveCount(0)
+  await expect(page.locator("#atlas-follow-toggle")).toBeEnabled()
+
+  // The entry itself names 内裏, the inner palace, and the record says so.
+  await selectEvent(page, "lks:event:sekito-752")
+
+  await expect(page.getByTestId("atlas-selection")).toContainText("内裏")
 })
 
 test("keeps the coda nodes outside the primary window until it is widened", async ({ page }) => {

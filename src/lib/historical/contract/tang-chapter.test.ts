@@ -58,6 +58,21 @@ function recordById(chapter: ChapterTree, recordId: string): JsonObject {
   return record
 }
 
+/**
+ * Sets are loaded in file order, which is not publication order: the projection
+ * and the validator order them by `published_at`. Tests that care about one set
+ * look it up by id so a new file cannot silently change which set they inspect.
+ */
+function setById(chapter: ChapterTree, setId: string): JsonObject {
+  const set = chapter.sets.find((candidate) => objectOf(candidate)["set_id"] === setId)
+
+  if (set === undefined) {
+    throw new Error(`${setId} is not in the chapter tree`)
+  }
+
+  return objectOf(set)
+}
+
 function publishedRevision(record: JsonObject): JsonObject {
   const mirror = objectOf(record["publication"])
   const revision = listOf(record["revisions"]).find(
@@ -389,7 +404,7 @@ describe("the Tang chapter fixture", () => {
     }
 
     expect(chapterDirectory(CHAPTER)).toContain("historical/chapters/tang-mission-750-754")
-    expect(Object.keys(result.currentPublished)).toHaveLength(65)
+    expect(Object.keys(result.currentPublished)).toHaveLength(66)
   })
 
   it("keeps the expected inventory and publishes each record once in the first set", () => {
@@ -402,33 +417,31 @@ describe("the Tang chapter fixture", () => {
       story: recordsOfKind(chapter, "story").length,
     }
 
-    expect(counts).toEqual({ place: 14, actor: 12, event: 29, relationship: 9, story: 1 })
+    expect(counts).toEqual({ place: 15, actor: 12, event: 29, relationship: 9, story: 1 })
     expect(chapter.documents.filter((document) => document["document"] === "source")).toHaveLength(
       9,
     )
 
-    const first = objectOf(chapter.sets[0])
+    const first = setById(chapter, "lks:set:tang-mission-750-754-v1")
     const memberIds = listOf(first["members"]).map((member) =>
       String(objectOf(member)["record_id"]),
     )
 
-    expect(first["set_id"]).toBe("lks:set:tang-mission-750-754-v1")
     expect(memberIds).toHaveLength(65)
     expect(new Set(memberIds).size).toBe(memberIds.length)
-    expect(Publication.currentPublished(chapter.documents, chapter.sets).size).toBe(65)
+    expect(Publication.currentPublished(chapter.documents, chapter.sets).size).toBe(66)
   })
 
   it("publishes the review corrections as a second set over retained earlier revisions", () => {
     const chapter = tree()
-    const first = objectOf(chapter.sets[0])
-    const correction = objectOf(chapter.sets[1])
+    const first = setById(chapter, "lks:set:tang-mission-750-754-v1")
+    const correction = setById(chapter, "lks:set:tang-mission-750-754-v2")
     const correctedIds = listOf(correction["members"]).map((member) =>
       String(objectOf(member)["record_id"]),
     )
     const current = Publication.currentPublished(chapter.documents, chapter.sets)
     const history = Publication.history(chapter.documents, chapter.sets)
 
-    expect(correction["set_id"]).toBe("lks:set:tang-mission-750-754-v2")
     expect(correction["supersedes"]).toBe(first["set_id"])
     expect(correctedIds.sort()).toEqual([
       "lks:actor:abe-no-nakamaro",
@@ -460,15 +473,99 @@ describe("the Tang chapter fixture", () => {
       const revisions = listOf(recordById(chapter, recordId)["revisions"]).map((revision) =>
         objectOf(revision),
       )
+      const corrected = revisions.find(
+        (revision) =>
+          revision["revision_id"] ===
+          objectOf(
+            listOf(correction["members"]).find(
+              (member) => objectOf(member)["record_id"] === recordId,
+            ),
+          )["revision_id"],
+      )
 
-      expect(revisions, recordId).toHaveLength(2)
-      expect(revisions[1]["revision_id"], recordId).toBe(current.get(recordId)?.revision_id)
+      // The correction is still in the tree and still in the derived history; a
+      // later set may publish a further revision of the same record (the court
+      // placements do for return-report-754), which leaves the v2 revision in
+      // place rather than replacing it.
+      expect(corrected, recordId).toBeDefined()
+      expect(String(corrected?.["change_explanation"]), recordId).toContain("after review")
       expect(
         history[recordId]?.map((entry) => entry.revision_id),
         recordId,
-      ).toEqual([revisions[0]["revision_id"], revisions[1]["revision_id"]])
-      expect(String(revisions[1]["change_explanation"]), recordId).toContain("after review")
+      ).toContain(corrected?.["revision_id"])
+      expect(current.get(recordId)?.revision_id, recordId).toBe(
+        revisions[revisions.length - 1]?.["revision_id"],
+      )
     }
+  })
+
+  it("publishes the owner-accepted court placements as a third set", () => {
+    const chapter = tree()
+    const placement = setById(chapter, "lks:set:tang-mission-750-754-court-anchors")
+    const memberIds = listOf(placement["members"]).map((member) =>
+      String(objectOf(member)["record_id"]),
+    )
+    const current = Publication.currentPublished(chapter.documents, chapter.sets)
+    const history = Publication.history(chapter.documents, chapter.sets)
+
+    expect(placement["supersedes"]).toBe("lks:set:tang-mission-750-754-v2")
+    expect(memberIds.sort()).toEqual(
+      [
+        "lks:place:heijo-palace",
+        "lks:event:appointment-750",
+        "lks:event:kibi-appointment-751",
+        "lks:event:court-audience-752",
+        "lks:event:sekito-752",
+        "lks:event:audience-report-754",
+        "lks:event:return-report-754",
+        "lks:event:rewards-754",
+        "lks:event:daikasho-title-758",
+        "lks:event:kiyokawa-honours-779",
+        "lks:event:nakamaro-death-779",
+      ].sort(),
+    )
+
+    // The new place is the court's seat, anchored and never asserted, and every
+    // court act points at it with a cited interpretation that names the editor.
+    const palace = recordById(chapter, "lks:place:heijo-palace")
+    const palaceRevision = objectOf(
+      listOf(palace["revisions"]).find(
+        (revision) =>
+          objectOf(revision)["revision_id"] ===
+          String(objectOf(palace["publication"])["published_revision_id"]),
+      ),
+    )
+    const geometry = objectOf(listOf(objectOf(palaceRevision["content"])["geometry"])[0])
+
+    expect(geometry["interpretation"]).toBe("display_anchor")
+    expect(geometry["precision"]).toBe("unspecified")
+
+    for (const recordId of memberIds.filter((id) => id.startsWith("lks:event:"))) {
+      const record = recordById(chapter, recordId)
+      const revision = objectOf(
+        listOf(record["revisions"]).find(
+          (candidate) =>
+            objectOf(candidate)["revision_id"] === String(current.get(recordId)?.revision_id),
+        ),
+      )
+      const places = listOf(objectOf(revision["content"])["places"]).map(objectOf)
+      const claims = listOf(revision["claims"]).map(objectOf)
+
+      expect(places, recordId).toHaveLength(1)
+      expect(places[0]?.["place_id"], recordId).toBe("lks:place:heijo-palace")
+      expect(places[0]?.["role"], recordId).toBe("site")
+
+      const placeClaim = claims.find((claim) => claim["asserts"] === "/places/0")
+
+      expect(placeClaim, recordId).toBeDefined()
+      expect(placeClaim?.["basis"], recordId).toBe("cited_interpretation")
+      expect(placeClaim?.["attributed_to"], recordId).toBe("Lekishi editorial preparation")
+      expect(history[recordId]?.length, recordId).toBeGreaterThanOrEqual(2)
+    }
+
+    // Nothing here is an owner approval: the ledger records the decision to
+    // publish, and RFD 4's AC2 stays open.
+    expect(String(objectOf(placement["review"])["independence"])).toBe("self_review")
   })
 
   it("is sealed, so an edit to approved content is detected", () => {
@@ -876,7 +973,7 @@ describe("adversarial readings of the Tang chapter", () => {
 
   it("rejects relabelling the self-review as independent review", () => {
     const chapter = cloneTree(tree())
-    const set = objectOf(chapter.sets[0])
+    const set = setById(chapter, "lks:set:tang-mission-750-754-v1")
     objectOf(set["review"])["independence"] = "independent_review"
 
     const result = Publication.checkAll(chapter.documents, chapter.sets)

@@ -618,6 +618,82 @@ test("keeps the coda nodes outside the primary window until it is widened", asyn
   await expect(page.getByTestId("atlas-event-list").getByText("coda node")).toHaveCount(5)
 })
 
+test("scrolls the event list inside its panel instead of spilling over the controls", async ({
+  page,
+}) => {
+  await mountAtlas(page)
+  await openEventList(page)
+
+  // Software WebGL makes every Playwright round trip cost seconds, so the
+  // measurement and the interaction happen in one evaluate: this is the same
+  // layout and the same click handler the user gets.
+  const state = await page.evaluate(async () => {
+    const panel = document.querySelector("#atlas-event-panel")!
+    const list = document.querySelector('[data-testid="atlas-event-list"]')!
+    const controls = document.querySelector('[data-testid="atlas-time-controls"]')!
+    const items = Array.from(
+      document.querySelectorAll<HTMLElement>('[data-testid="atlas-event-item"]'),
+    )
+    const last = items.at(-1)!
+    const before = list.scrollTop
+    const metrics = {
+      overflowY: getComputedStyle(list).overflowY,
+      clientHeight: list.clientHeight,
+      scrollHeight: list.scrollHeight,
+      panelBottom: panel.getBoundingClientRect().bottom,
+      controlsTop: controls.getBoundingClientRect().top,
+    }
+
+    list.scrollTop = list.scrollHeight
+
+    // Read the scrolled state before the click: selecting closes the phone drawer,
+    // and a hidden element reports zero for its scroll offsets.
+    const after = list.scrollTop
+    const lastRect = last.getBoundingClientRect()
+    const hit = document.elementFromPoint(
+      lastRect.left + lastRect.width / 2,
+      lastRect.top + lastRect.height / 2,
+    )
+
+    last.click()
+    // The selection is a Svelte state update; let its DOM land before reading it.
+    await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+
+    const selection = document.querySelector("#atlas-selection")
+
+    return {
+      ...metrics,
+      before,
+      after,
+      lastInViewport: lastRect.top >= 0 && lastRect.bottom <= window.innerHeight,
+      hitIsLastRow: hit === last || last.contains(hit),
+      lastId: last.dataset.eventId,
+      selectionVisible: selection !== null && selection.getBoundingClientRect().height > 0,
+      currentIds: Array.from(document.querySelectorAll('[data-event-id][aria-current="true"]')).map(
+        (element) => element.getAttribute("data-event-id"),
+      ),
+    }
+  })
+
+  // The list is the scroll container: 24 rows do not fit at any supported size, so
+  // a list that cannot scroll hides every event below the fold.
+  expect(state.overflowY).toBe("auto")
+  expect(state.scrollHeight).toBeGreaterThan(state.clientHeight + 1)
+
+  // The panel ends above the time controls, so no row is painted under them.
+  expect(state.panelBottom).toBeLessThanOrEqual(state.controlsTop + 1)
+
+  // Scrolling reaches the last published event, the row is on top, and selecting it
+  // works from there.
+  expect(state.before).toBe(0)
+  expect(state.after).toBeGreaterThan(0)
+  expect(state.lastInViewport).toBe(true)
+  expect(state.hitIsLastRow).toBe(true)
+  expect(state.lastId).toBe("lks:event:naniwa-754")
+  expect(state.selectionVisible).toBe(true)
+  expect(state.currentIds).toEqual(["lks:event:naniwa-754"])
+})
+
 test("reaches the controls with the keyboard", async ({ page }) => {
   await mountAtlas(page)
 

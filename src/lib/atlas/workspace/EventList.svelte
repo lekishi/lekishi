@@ -13,7 +13,13 @@
   } = $props()
 </script>
 
-<div class="flex h-full flex-col gap-2">
+<!--
+  The list is the panel's scroll container, so every level between the panel and
+  the rows has to be shrinkable (`min-h-0`). Without it a 24-row window pushes
+  the rows out of the panel and under the time controls instead of scrolling
+  them, and the events below the fold are unreachable.
+-->
+<div class="flex min-h-0 flex-1 flex-col gap-2">
   <div class="flex items-baseline justify-between gap-2">
     <h2 class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
       Events in window
@@ -21,7 +27,10 @@
     <span class="text-xs text-slate-500" data-testid="atlas-event-count">{events.length}</span>
   </div>
 
-  <ul class="flex flex-col gap-1 overflow-y-auto pr-1" data-testid="atlas-event-list">
+  <ul
+    class="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto pr-1"
+    data-testid="atlas-event-list"
+  >
     {#if events.length === 0}
       <li class="rounded-lg border border-dashed border-slate-700 px-3 py-4 text-xs text-slate-400">
         No published events overlap this window. Widen it to bring the chapter's events back into

@@ -87,12 +87,11 @@
     laid out in flow, so they can never overlap each other. At phone widths the
     notice takes the full width, the buttons wrap below it, the event list keeps
     a usable minimum height, and the details panel scrolls in what is left; from
-    `md` up the column is content-sized and each panel keeps its own corner of
-    the viewport.
+    `md` up the column is bounded above the time controls and the event list
+    shrinks to fit it, so a long window scrolls inside the panel instead of
+    running under the controls.
   -->
-  <div
-    class="pointer-events-none absolute inset-x-3 bottom-36 top-3 z-20 flex flex-col gap-2 md:bottom-auto"
-  >
+  <div class="pointer-events-none absolute inset-x-3 bottom-36 top-3 z-20 flex flex-col gap-2">
     <div class="flex shrink-0 flex-wrap items-start justify-between gap-2">
       <div
         id="atlas-notice"
@@ -157,7 +156,7 @@
     <div
       id="atlas-event-panel"
       class={[
-        "pointer-events-auto min-h-[8rem] w-[17rem] max-w-full flex-1 flex-col rounded-2xl border border-slate-700/70 bg-slate-950/85 px-3 py-3 shadow-xl shadow-slate-950/50 backdrop-blur md:max-h-[calc(100dvh-13rem)] md:min-h-0 md:flex-none",
+        "pointer-events-auto min-h-[8rem] w-[17rem] max-w-full flex-1 flex-col overflow-hidden rounded-2xl border border-slate-700/70 bg-slate-950/85 px-3 py-3 shadow-xl shadow-slate-950/50 backdrop-blur md:min-h-0 md:flex-initial",
         listOpen ? "flex" : "hidden md:flex",
       ]}
     >

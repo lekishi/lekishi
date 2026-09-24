@@ -1,0 +1,89 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "actor",
+  "record_id": "lks:actor:koken-tenno",
+  "created_at": "2026-09-24T05:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:koken-1",
+      "created_at": "2026-09-24T05:00:00Z",
+      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "change_explanation": "Initial chapter actor: the sovereign whose reign covers the mission's court records, with the reign span bounded to the cited volumes.",
+      "content": {
+        "summary": "孝謙天皇, the sovereign under whose reign the chronicle's mission records fall: the 750 appointment, the 752 節刀, and the 754 return reports and rewards. The cited volumes are headed 孝謙天皇 from 天平勝寶二年正月 and record her abdication in 天平寶字二年八月 (758).",
+        "names": [
+          {
+            "form": "孝謙天皇",
+            "script": "Hani",
+            "language": "ja",
+            "role": "primary",
+            "romanization": {
+              "value": "Kōken Tennō",
+              "scheme": "hepburn",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:koken-name"
+          }
+        ],
+        "actor_types": ["person"],
+        "roles": [
+          {
+            "role": "ruler",
+            "validity": {
+              "source_expression": "卷第十八・卷第十九・卷第廿一 起天平勝寶二年正月、盡天平寶字二年十二月",
+              "calendar": "regnal",
+              "precision": "year",
+              "mode": "duration",
+              "interval": {
+                "bounds": "two_sided",
+                "boundary": "inclusive",
+                "start": {"year": 750, "era": "ce"},
+                "end": {"year": 758, "era": "ce"}
+              }
+            },
+            "note": "The span is bounded by the cited volumes, not by the accession: 天平寶字二年八月 records the abdication, and the accession (749) is outside the cited span."
+          }
+        ],
+        "editorial_notes": "The court acts through her reign in the cited entries, but the entries rarely name her personally, so the chapter records the reign span and does not attribute individual acts to her beyond what the entries state."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:koken-name",
+          "statement": "The cited volumes are headed 孝謙天皇 and cover 天平勝寶二年正月 to 天平寶字二年十二月.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "chapter", "value": "卷第十八 起天平勝寶二年正月; 卷第十九 起天平勝寶五年正月; 卷第廿一 起天平寶字二年八月"}
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:koken-role",
+          "statement": "The 天平寶字二年八月庚子朔 entry records the sovereign handing the throne to the crown prince, which bounds the reign span used here.",
+          "asserts": "/roles/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第廿一 天平寶字二年八月庚子朔"}
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:ef5acdcbad97c8648630015c77ddbf2f2b48baf9eca40b17c75c4544b8d37679"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:koken-1",
+    "published_revision_hash": "sha256:ef5acdcbad97c8648630015c77ddbf2f2b48baf9eca40b17c75c4544b8d37679",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T08:00:00Z",
+    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+  }
+}

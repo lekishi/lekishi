@@ -1,0 +1,93 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "place",
+  "record_id": "lks:place:ajinawa",
+  "created_at": "2026-09-24T05:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:ajinawa-1",
+      "created_at": "2026-09-24T05:00:00Z",
+      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "change_explanation": "Initial chapter place: the attested island name with the cited modern identification recorded as a cited interpretation and a region-level approximate point.",
+      "content": {
+        "summary": "阿兒奈波島, the island the biography records the first and second ships reaching on 天寶十二載十一月廿一日 (753), in the passage that places it south-west of 多禰島.",
+        "names": [
+          {
+            "form": "阿兒奈波島",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "primary",
+            "romanization": {
+              "value": "Akonahajima",
+              "scheme": "hepburn",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:ajinawa-name"
+          }
+        ],
+        "place_types": ["landform"],
+        "geometry": [
+          {
+            "claim_id": "lks:claim:ajinawa-identification",
+            "interpretation": "approximate_point",
+            "geojson": {"type": "Point", "coordinates": [127.95, 26.4833]},
+            "precision": "region",
+            "notes": "An approximate, region-level placement at the island the cited reference work identifies with 阿兒奈波島. It is an identification, not a source statement of the eighth century, and no landing site is asserted."
+          }
+        ],
+        "modern_equivalents": [
+          {
+            "form": "沖縄島",
+            "language": "ja",
+            "script": "Hani",
+            "note": "The cited reference work identifies 阿兒奈波島 with 沖縄島; recorded as a scholarly identification."
+          }
+        ],
+        "editorial_notes": "The island name is source-attested; the modern identification is a cited interpretation and is labelled as one. The island's own coordinate comes from Wikidata and is a modern reference point, not a historical location."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:ajinawa-name",
+          "statement": "The biography names 阿兒奈波島 as the island the first and second ships reached on 天寶十二載十一月廿一日, south-west of 多禰島.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:toseiden",
+              "locator": {"kind": "entry", "value": "廿一日戊午，第一、第二兩舟同到阿兒奈波島，在多禰島西南"}
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:ajinawa-identification",
+          "statement": "The cited reference work identifies 阿兒奈波島 with 沖縄島; the point is placed at that island's modern coordinate from Wikidata (CC0) as an approximate region-level placement.",
+          "asserts": "/geometry/0",
+          "basis": "cited_interpretation",
+          "role": "main",
+          "attributed_to": "琉球新報『沖縄大百科事典』「阿児奈波島」",
+          "citations": [
+            {
+              "source_id": "lks:source:okinawa-daihyakka-ajinawa",
+              "locator": {"kind": "entry", "value": "阿児奈波島"}
+            },
+            {
+              "source_id": "lks:source:wikidata",
+              "locator": {"kind": "dataset_row", "value": "Q600614 (P625)"}
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:b5a960828cf77454a5aff5dcfe037a77fa68daee31d7e157165f597b9dd974a0"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:ajinawa-1",
+    "published_revision_hash": "sha256:b5a960828cf77454a5aff5dcfe037a77fa68daee31d7e157165f597b9dd974a0",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T08:00:00Z",
+    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+  }
+}

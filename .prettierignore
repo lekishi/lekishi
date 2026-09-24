@@ -12,8 +12,11 @@ static/cesium/
 
 # The historical contract keeps its hand-written formatting: the seal utility
 # rewrites hash fields positionally and the tests compare the stored hashes with
-# the content as written.
+# the content as written. Reviewed chapter content under `historical/chapters/`
+# keeps its formatting for the same reason, but the seal utility refuses chapter
+# directories: chapter corrections are appended as new revisions instead.
 historical/v0/
+historical/chapters/
 
 # Lockfile and browser-test output.
 pnpm-lock.yaml

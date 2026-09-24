@@ -1,0 +1,78 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "event",
+  "record_id": "lks:event:court-audience-752",
+  "created_at": "2026-09-24T05:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:court-audience-752-1",
+      "created_at": "2026-09-24T05:00:00Z",
+      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "change_explanation": "Initial chapter event: the envoys' court audience in 752, the first half of the report's audience-and-節刀 pair.",
+      "content": {
+        "summary": "The envoys pay court (拜朝) in the third month of 天平勝寶四年, before the 節刀 grant of the following leap month.",
+        "event_types": ["mission"],
+        "time": {
+          "source_expression": "天平勝寶四年三月庚辰",
+          "calendar": "regnal",
+          "precision": "month",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 752, "era": "ce", "month": 3},
+            "end": {"year": 752, "era": "ce", "month": 3}
+          }
+        },
+        "participants": [
+          {"actor_id": "lks:actor:fujiwara-no-kiyokawa", "role": "leader"},
+          {"actor_id": "lks:actor:otomo-no-komaro", "role": "participant"},
+          {"actor_id": "lks:actor:kibi-no-makibi", "role": "participant"}
+        ],
+        "editorial_notes": "The entry names the envoys collectively (遣唐使等); the participant list follows the appointment entries and is not an independent naming in this entry."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:court-audience-752-time",
+          "statement": "The chronicle records the envoys paying court on 天平勝寶四年三月庚辰.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第十八 天平勝寶四年三月庚辰"},
+              "quoted_text": "三月庚辰。遣唐使等拜朝。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:court-audience-752-participants",
+          "statement": "The entry names the envoys collectively; the three named participants are the appointees of the 750 and 751 entries.",
+          "asserts": "/participants",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第十八 天平勝寶四年三月庚辰"}
+            },
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第十八 天平勝寶二年九月己酉; 卷第十八 天平勝寶三年十一月丙戌"}
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:9f2ec8e1c2ed48a2fc809f383d619850374158dda33ede40976aca98c980059e"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:court-audience-752-1",
+    "published_revision_hash": "sha256:9f2ec8e1c2ed48a2fc809f383d619850374158dda33ede40976aca98c980059e",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T08:00:00Z",
+    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+  }
+}

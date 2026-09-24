@@ -18,6 +18,20 @@ Implements link:README.adoc[RFD 2: Historical data, time, and evidence].
 - [ ] Represent contradictory accounts and records lacking exact dates or map positions; present an attributed main account with a visible dispute indication and cited alternatives in the detail panel, without merging competing claims or requiring switchable map interpretations.
 - [ ] Verify every published relationship has a cited evidentiary basis; distinguish attested claims from cited scholarly interpretations, label schematic geometry separately, and exclude original contributor hypotheses from public content.
 
+[NOTE]
+====
+The Tang chapter fixture (`historical/chapters/tang-mission-750-754/`) now
+exercises the file-based workflow for one chapter: stable identities, sealed
+revisions, publication sets that record self-review and a complete review
+checklist, cited claims on every published place, actor, event, and relationship,
+and readable correction history through `Publication.history/2`. Every Phase 1
+item above stays open: they also cover the bounded Qin comparison fixture, the
+owner's recorded approval of the published revision, and the detail-panel
+dispute and alternative behavior that only exists once the exploration loop is
+implemented. The Gate 1 mission and coverage decision is in
+link:../0004/GATE1_DECISION.adoc[RFD 4's Gate 1 decision record].
+====
+
 == Phase 2 — Persistence and contributions
 
 - [ ] Move to the RFD 3 store when needed without creating two writable sources of truth.

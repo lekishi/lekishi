@@ -1,0 +1,89 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "place",
+  "record_id": "lks:place:todaiji",
+  "created_at": "2026-09-24T05:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:todaiji-1",
+      "created_at": "2026-09-24T05:00:00Z",
+      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "change_explanation": "Initial chapter place: the temple where 鑒眞 was installed, with a display anchor at the existing site.",
+      "content": {
+        "summary": "東大寺, the Nara temple where the biography records 鑒眞 being installed on 天平勝寶六年二月四日 (754), and where the chronicle's later notice places the transmission and the precept study.",
+        "names": [
+          {
+            "form": "東大寺",
+            "script": "Hani",
+            "language": "ja",
+            "role": "primary",
+            "romanization": {
+              "value": "Tōdai-ji",
+              "scheme": "hepburn",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:todaiji-name"
+          }
+        ],
+        "place_types": ["religious_site"],
+        "geometry": [
+          {
+            "claim_id": "lks:claim:todaiji-anchor",
+            "interpretation": "display_anchor",
+            "geojson": {"type": "Point", "coordinates": [135.8397, 34.6892]},
+            "precision": "unspecified",
+            "notes": "Label anchor at the temple site recorded in Wikidata (Q460367). It is not an asserted historical coordinate; the temple is an existing site and the anchor only places the label."
+          }
+        ],
+        "external_ids": [
+          {
+            "system": "wikidata",
+            "id": "Q460367",
+            "url": "https://www.wikidata.org/wiki/Q460367",
+            "license": "CC0-1.0",
+            "note": "External identifier found in the Wave 1A feasibility pass."
+          }
+        ],
+        "editorial_notes": "The place is a named site in the cited passages; the anchor is a label placement, not a surveyed reconstruction of the eighth-century precinct."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:todaiji-name",
+          "statement": "The biography names 東大寺 as the temple where 鑒眞 was installed on 天平勝寶六年二月四日.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:toseiden",
+              "locator": {"kind": "entry", "value": "天平勝寶六年甲午 二月四日，入京…引入東大寺安置"}
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:todaiji-anchor",
+          "statement": "The label anchor is placed at the temple site's coordinate recorded in Wikidata (CC0); no historical coordinate is asserted.",
+          "asserts": "/geometry/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:wikidata",
+              "locator": {"kind": "dataset_row", "value": "Q460367 (P625)"}
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:0bb509b2342332660aa729ef88a32e2a2a07c4f8c56a1ec83885dda15005a996"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:todaiji-1",
+    "published_revision_hash": "sha256:0bb509b2342332660aa729ef88a32e2a2a07c4f8c56a1ec83885dda15005a996",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T08:00:00Z",
+    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+  }
+}

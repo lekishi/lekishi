@@ -1,0 +1,88 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "place",
+  "record_id": "lks:place:hanyuan-hall",
+  "created_at": "2026-09-24T05:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:hanyuan-hall-1",
+      "created_at": "2026-09-24T05:00:00Z",
+      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "change_explanation": "Initial chapter place: the hall named in 古麻呂's report, with a display anchor at the modern palace site only.",
+      "content": {
+        "summary": "蓬萊宮含元殿, the hall in the Tang capital where 大伴古麻呂 reported that the New Year audience was held on 天寶十二載正月朔 (753).",
+        "names": [
+          {
+            "form": "蓬萊宮含元殿",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "primary",
+            "romanization": {
+              "value": "Penglai gong Hanyuan dian",
+              "scheme": "pinyin",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:hanyuan-hall-name"
+          }
+        ],
+        "place_types": ["other"],
+        "geometry": [
+          {
+            "claim_id": "lks:claim:hanyuan-hall-anchor",
+            "interpretation": "display_anchor",
+            "geojson": {"type": "Point", "coordinates": [108.9594, 34.2914]},
+            "precision": "unspecified",
+            "notes": "Label anchor at the modern 大明宮 palace site (Wikidata Q1158530) in Xi'an. It is not an asserted historical coordinate and does not place the hall itself."
+          }
+        ],
+        "modern_equivalents": [
+          {
+            "form": "西安市",
+            "language": "zh-Hans",
+            "script": "Hani",
+            "note": "Modern city recorded for orientation; the 大明宮 site is within it."
+          }
+        ],
+        "editorial_notes": "The vocabulary has no palace-hall type, so the place uses other and explains it here. The report's place list groups 長安 with this hall; the chapter records the attested hall name only."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:hanyuan-hall-name",
+          "statement": "古麻呂's report to the court names 蓬萊宮含元殿 as the hall where the New Year audience was held on 大唐天寶十二載正月朔.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年正月丙寅"}
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:hanyuan-hall-anchor",
+          "statement": "The label anchor is placed at the modern palace site's coordinate recorded in Wikidata (CC0); no historical coordinate is asserted.",
+          "asserts": "/geometry/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:wikidata",
+              "locator": {"kind": "dataset_row", "value": "Q1158530 (P625)"}
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:122f52a10506c109cf51ab096935673071be8e8eedae4a2796a60a586945892a"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:hanyuan-hall-1",
+    "published_revision_hash": "sha256:122f52a10506c109cf51ab096935673071be8e8eedae4a2796a60a586945892a",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T08:00:00Z",
+    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "place",
+  "record_id": "lks:place:akimeya",
+  "created_at": "2026-09-24T05:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:akimeya-1",
+      "created_at": "2026-09-24T05:00:00Z",
+      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "change_explanation": "Initial chapter place: the attested landing place with the cited proposal for its modern identification recorded as a cited interpretation.",
+      "content": {
+        "summary": "秋妻屋浦, in 薩摩國阿多郡, where the biography records the second ship landing on 天寶十二載十二月廿日 (753).",
+        "names": [
+          {
+            "form": "秋妻屋浦",
+            "script": "Hani",
+            "language": "ja",
+            "role": "primary",
+            "romanization": {
+              "value": "Akimeya no ura",
+              "scheme": "hepburn",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:akimeya-name"
+          }
+        ],
+        "place_types": ["port"],
+        "geometry": [
+          {
+            "claim_id": "lks:claim:akimeya-identification",
+            "interpretation": "approximate_point",
+            "geojson": {"type": "Point", "coordinates": [130.2269, 31.2672]},
+            "precision": "locality",
+            "notes": "An approximate placement at 坊津, the identification the cited reference work proposes. The identification is a modern scholarly proposal (比定), not a source statement, and the exact landing site is not asserted."
+          }
+        ],
+        "modern_equivalents": [
+          {
+            "form": "坊津",
+            "language": "ja",
+            "script": "Hani",
+            "note": "The cited reference work proposes the identification with present-day 坊津; recorded as a scholarly proposal."
+          }
+        ],
+        "editorial_notes": "The source places the landing in 薩摩國阿多郡; the modern identification is a proposal and is labelled as one."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:akimeya-name",
+          "statement": "The biography names 薩摩國阿多郡秋妻屋浦 as the place the second ship landed on 天寶十二載十二月廿日.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:toseiden",
+              "locator": {"kind": "entry", "value": "廿日乙酉午時，第二舟著薩摩國阿多郡秋妻屋浦"}
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:akimeya-identification",
+          "statement": "The cited reference work proposes identifying 秋妻屋浦 with present-day 坊津 (比定); the point is placed at 坊津's modern coordinate from Wikidata (CC0) as an approximate locality-level placement.",
+          "asserts": "/geometry/0",
+          "basis": "cited_interpretation",
+          "role": "main",
+          "attributed_to": "平凡社「日本歴史地名大系」「阿多郡」",
+          "citations": [
+            {
+              "source_id": "lks:source:chimei-taikei-ata",
+              "locator": {"kind": "entry", "value": "阿多郡"}
+            },
+            {
+              "source_id": "lks:source:wikidata",
+              "locator": {"kind": "dataset_row", "value": "Q10928536 (P625)"}
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:49c075fc963cd478494304448dd5c3df10e852961365d212cbd6c98e8a015387"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:akimeya-1",
+    "published_revision_hash": "sha256:49c075fc963cd478494304448dd5c3df10e852961365d212cbd6c98e8a015387",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T08:00:00Z",
+    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+  }
+}

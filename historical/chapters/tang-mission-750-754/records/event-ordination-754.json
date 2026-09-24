@@ -1,0 +1,87 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "event",
+  "record_id": "lks:event:ordination-754",
+  "created_at": "2026-09-24T05:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:ordination-754-1",
+      "created_at": "2026-09-24T05:00:00Z",
+      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "change_explanation": "Initial chapter event: the precepts platform and ordinations, single-source and labelled, with the chronicle's related notice as support.",
+      "content": {
+        "summary": "In the fourth month of 天平勝寶六年 (754) a precepts platform is erected in front of the 盧遮那殿; the biography records the emperor first receiving the bodhisattva precepts, then the empress and crown prince, more than 440 novices being ordained, and more than 80 senior monks re-ordaining.",
+        "event_types": ["process", "exchange"],
+        "time": {
+          "source_expression": "天平勝寶六年甲午 四月初，於盧遮那殿前立戒壇",
+          "calendar": "chinese_lunisolar",
+          "precision": "month",
+          "mode": "duration",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 754, "era": "ce", "month": 4},
+            "end": {"year": 754, "era": "ce", "month": 4}
+          }
+        },
+        "places": [
+          {"place_id": "lks:place:todaiji", "role": "site", "note": "The biography places the platform at the 盧遮那殿, where 鑒眞 had been installed."}
+        ],
+        "participants": [
+          {"actor_id": "lks:actor:jianzhen", "role": "leader"}
+        ],
+        "editorial_notes": "The ordination account rests on the biography alone; the chronicle's accessible text does not record the 754 ordinations. The passage says 天皇 without naming the sovereign, and the chronicle's later notice says 聖武皇帝 received the precepts from 鑒眞 without a date, so the chapter names no individual as ordained. The biography's miracle material is excluded."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:ordination-time",
+          "statement": "The biography records a precepts platform at the 盧遮那殿 in the fourth month of 754, imperial ordinations, more than 440 novices ordained, and more than 80 senior monks re-ordaining.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:toseiden",
+              "locator": {"kind": "entry", "value": "其年四月初，於盧遮那殿前立戒壇…尋爲沙彌澄修等四百四十餘人授戒。又舊大僧…等八十餘人僧，捨舊戒、重受和上所授之戒"}
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:ordination-imperial-support",
+          "statement": "The chronicle's notice of 鑒眞's death states that 聖武皇帝 received the precepts from him, without a date in that passage.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "supporting",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第廿四 天平寶字七年五月戊申（聖武皇帝師之受戒焉）"}
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:ordination-participant",
+          "statement": "The biography places 鑒眞 at the platform as the precept master.",
+          "asserts": "/participants",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:toseiden",
+              "locator": {"kind": "entry", "value": "其年四月初，於盧遮那殿前立戒壇"}
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:201774af758d4b2f7ee1c1aaf0e54990633d473f459910ff01af479d317ebd9c"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:ordination-754-1",
+    "published_revision_hash": "sha256:201774af758d4b2f7ee1c1aaf0e54990633d473f459910ff01af479d317ebd9c",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T08:00:00Z",
+    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+  }
+}

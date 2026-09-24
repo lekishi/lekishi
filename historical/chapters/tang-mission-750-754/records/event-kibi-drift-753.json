@@ -1,0 +1,75 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "event",
+  "record_id": "lks:event:kibi-drift-753",
+  "created_at": "2026-09-24T05:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:kibi-drift-753-1",
+      "created_at": "2026-09-24T05:00:00Z",
+      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "change_explanation": "Initial chapter event: 吉備真備's ship drifting to 紀伊國牟漏埼, dated only as an uncertain occurrence after the island landfall.",
+      "content": {
+        "summary": "After leaving 益久嶋, 吉備真備's ship drifts and reaches 紀伊國牟漏埼, as the 大宰府 reported to the court in 天平勝寶六年正月 (754).",
+        "event_types": ["journey"],
+        "time": {
+          "source_expression": "自是之後。自益久嶋進發。漂蕩着紀伊國牟漏埼（天平勝寶六年正月癸丑 大宰府奏）",
+          "calendar": "regnal",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 753, "era": "ce"},
+            "end": {"year": 754, "era": "ce"}
+          }
+        },
+        "places": [
+          {"place_id": "lks:place:murozaki", "role": "site"}
+        ],
+        "participants": [
+          {"actor_id": "lks:actor:kibi-no-makibi", "role": "leader"}
+        ],
+        "editorial_notes": "The report says the ship left 益久嶋 and afterwards drifted to 牟漏埼; it does not date the drift, so the event is an occurrence window between the landfall (753) and the report (754)."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:kibi-drift-time",
+          "statement": "The chronicle's report records that after leaving 益久嶋, 吉備真備's ship drifted to 紀伊國牟漏埼.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年正月癸丑"},
+              "quoted_text": "癸丑。大宰府奏。入唐副使從四位上吉備朝臣眞備船。以去年十二月七日。來着益久嶋。自是之後。自益久嶋進發。漂蕩着紀伊國牟漏埼。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:kibi-drift-place",
+          "statement": "The report names 紀伊國牟漏埼 as the place the ship reached.",
+          "asserts": "/places",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年正月癸丑"}
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:fea238c3725f13429bd3d4c8be36192b2ddfea414d44978e10f7002175a03680"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:kibi-drift-753-1",
+    "published_revision_hash": "sha256:fea238c3725f13429bd3d4c8be36192b2ddfea414d44978e10f7002175a03680",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T08:00:00Z",
+    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+  }
+}

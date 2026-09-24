@@ -1,0 +1,63 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "relationship",
+  "record_id": "lks:relationship:jianzhen-transmission",
+  "created_at": "2026-09-24T05:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:jianzhen-transmission-1",
+      "created_at": "2026-09-24T05:00:00Z",
+      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "change_explanation": "Initial chapter relationship: the itemized transmission 鑒眞 brought, recorded as a documented transfer, not as doctrinal influence.",
+      "content": {
+        "summary": "The transmission the biography itemizes: forty-eight items of texts, images, and ritual objects brought by 鑒眞, including the Tiantai texts, Xuanzang's 西域記, and calligraphy by 王羲之 and 王獻之, together with the precept lineage he established. The relationship records a documented transfer, not an assessment of its later influence.",
+        "relationship_types": ["transmission"],
+        "from": "lks:actor:jianzhen",
+        "to": "lks:place:todaiji",
+        "directionality": "directed",
+        "causality": "not_asserted",
+        "validity": {
+          "source_expression": "合四十八部; 天平勝寶六年二月四日 引入東大寺安置",
+          "calendar": "chinese_lunisolar",
+          "precision": "year",
+          "mode": "duration",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 753, "era": "ce"},
+            "end": {"year": 754, "era": "ce"}
+          }
+        },
+        "editorial_notes": "The list is itemized in the biography and is published as the biography states it. The chapter does not claim that the items changed Japanese practice, and it does not reproduce the list in full."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:jianzhen-transmission-basis",
+          "statement": "The biography itemizes the texts, images, and objects 鑒眞 brought, under the heading 合四十八部, and records his installation at 東大寺.",
+          "asserts": "",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:toseiden",
+              "locator": {"kind": "entry", "value": "所將如來肉舍利三千粒…《天台止觀法門》…玄奘法師《西域記》…合四十八部"}
+            },
+            {
+              "source_id": "lks:source:toseiden",
+              "locator": {"kind": "entry", "value": "天平勝寶六年甲午，二月四日…引入東大寺安置"}
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:223b243f9e1c27603c8080a1e6faec2339965f987f531569551275ee87d74d91"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:jianzhen-transmission-1",
+    "published_revision_hash": "sha256:223b243f9e1c27603c8080a1e6faec2339965f987f531569551275ee87d74d91",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T08:00:00Z",
+    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+  }
+}

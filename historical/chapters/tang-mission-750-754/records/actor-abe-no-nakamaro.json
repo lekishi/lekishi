@@ -1,0 +1,223 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "actor",
+  "record_id": "lks:actor:abe-no-nakamaro",
+  "created_at": "2026-09-24T05:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:nakamaro-1",
+      "created_at": "2026-09-24T05:00:00Z",
+      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "change_explanation": "Initial chapter actor: the student who stayed in Tang and joined the return, with his three attested name forms and the 779 report of his death.",
+      "content": {
+        "summary": "阿倍朝臣仲麻呂, a student who remained in Tang and is named in the biography among the envoys who came to 鑒眞 in 揚州 in 天寶十二載 (753). The Tang histories name him by his adopted name 朝衡; the chronicle's 寶龜十年 (779) notice records that he died in Tang and that the court gave funeral gifts to his household.",
+        "names": [
+          {
+            "form": "阿倍朝臣仲麻呂",
+            "script": "Hani",
+            "language": "ja",
+            "role": "primary",
+            "romanization": {
+              "value": "Abe no Nakamaro",
+              "scheme": "hepburn",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:nakamaro-name"
+          },
+          {
+            "form": "朝臣仲滿",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "alternate",
+            "claim_id": "lks:claim:nakamaro-tang-name"
+          },
+          {
+            "form": "朝衡",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "alternate",
+            "claim_id": "lks:claim:nakamaro-tang-name"
+          }
+        ],
+        "actor_types": ["person"],
+        "roles": [
+          {
+            "role": "scholar",
+            "validity": {
+              "source_expression": "天寶十二載十月十五日壬午 安倍朝臣朝衡; 寶龜十年五月丙寅 前學生阿倍朝臣仲麻呂",
+              "calendar": "regnal",
+              "precision": "year",
+              "mode": "duration",
+              "interval": {
+                "bounds": "two_sided",
+                "boundary": "inclusive",
+                "start": {"year": 753, "era": "ce"},
+                "end": {"year": 779, "era": "ce"}
+              }
+            },
+            "note": "Named among the envoys in 753 and called 前學生 (former student) in the 779 notice; his earlier career is outside this chapter's coverage."
+          }
+        ],
+        "external_ids": [
+          {
+            "system": "wikidata",
+            "id": "Q479788",
+            "url": "https://www.wikidata.org/wiki/Q479788",
+            "license": "CC0-1.0",
+            "note": "External identifier found in the Wave 1A feasibility pass."
+          }
+        ],
+        "editorial_notes": "His 717–752 career in Tang is not published except as it appears in the return episode, per the coverage model. No death year is asserted: the chronicle reports the death in 779 without a date, and the Chinese passages checked give no death year."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:nakamaro-name",
+          "statement": "The biography names 安倍朝臣朝衡 among the envoys who came to 鑒眞 in 揚州 in 天寶十二載; the chronicle's 779 notice names him 阿倍朝臣仲麻呂.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:toseiden",
+              "locator": {"kind": "entry", "value": "天寶十二載 十月十五日壬午"}
+            },
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第卅五 寶龜十年五月丙寅"}
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nakamaro-tang-name",
+          "statement": "The Tang histories record that the student 朝臣仲滿 changed his name to 朝衡 and stayed in Tang, and that 朝衡 returned to court in 天寶十二載.",
+          "asserts": "/names/1",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:jiu-tangshu",
+              "locator": {"kind": "chapter", "value": "卷199上 東夷 日本國"}
+            },
+            {
+              "source_id": "lks:source:xin-tangshu",
+              "locator": {"kind": "chapter", "value": "卷220 東夷 日本"}
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nakamaro-role",
+          "statement": "The biography names 安倍朝臣朝衡 among the envoys in 753, and the chronicle's 寶龜十年五月 notice records that the former student 阿倍朝臣仲麻呂 died in Tang and that funeral gifts were granted to his household.",
+          "asserts": "/roles/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:toseiden",
+              "locator": {"kind": "entry", "value": "天寶十二載 十月十五日壬午"}
+            },
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第卅五 寶龜十年五月丙寅"}
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:fc6c67979c87fa6886f61d40c020901fa2198a0255ee4d572dafed4b1083744a"
+    },
+    {
+      "revision_id": "lks:rev:nakamaro-2",
+      "created_at": "2026-09-24T08:30:00Z",
+      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "change_explanation": "Corrected chapter actor after review: the 753 appearance and the 779 death report no longer carry a continuous scholar role, because the cited evidence supports the two mentions and not activity across the interval.",
+      "content": {
+        "summary": "阿倍朝臣仲麻呂, a student who remained in Tang and is named in the biography among the envoys who came to 鑒眞 in 揚州 in 天寶十二載 (753). The Tang histories name him by his adopted name 朝衡; the chronicle's 寶龜十年 (779) notice records that he died in Tang and that the court gave funeral gifts to his household.",
+        "names": [
+          {
+            "form": "阿倍朝臣仲麻呂",
+            "script": "Hani",
+            "language": "ja",
+            "role": "primary",
+            "romanization": {
+              "value": "Abe no Nakamaro",
+              "scheme": "hepburn",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:nakamaro-name"
+          },
+          {
+            "form": "朝臣仲滿",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "alternate",
+            "claim_id": "lks:claim:nakamaro-tang-name"
+          },
+          {
+            "form": "朝衡",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "alternate",
+            "claim_id": "lks:claim:nakamaro-tang-name"
+          }
+        ],
+        "actor_types": ["person"],
+        "external_ids": [
+          {
+            "system": "wikidata",
+            "id": "Q479788",
+            "url": "https://www.wikidata.org/wiki/Q479788",
+            "license": "CC0-1.0",
+            "note": "External identifier found in the Wave 1A feasibility pass."
+          }
+        ],
+        "editorial_notes": "His 717–752 career in Tang is not published except as it appears in the return episode, per the coverage model. No death year is asserted: the chronicle reports the death in 779 without a date, and the Chinese passages checked give no death year."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:nakamaro-name",
+          "statement": "The biography names 安倍朝臣朝衡 among the envoys who came to 鑒眞 in 揚州 in 天寶十二載; the chronicle's 779 notice names him 阿倍朝臣仲麻呂.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:toseiden",
+              "locator": {"kind": "entry", "value": "天寶十二載 十月十五日壬午"}
+            },
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第卅五 寶龜十年五月丙寅"}
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nakamaro-tang-name",
+          "statement": "The Tang histories record that the student 朝臣仲滿 changed his name to 朝衡 and stayed in Tang, and that 朝衡 returned to court in 天寶十二載.",
+          "asserts": "/names/1",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:jiu-tangshu",
+              "locator": {"kind": "chapter", "value": "卷199上 東夷 日本國"}
+            },
+            {
+              "source_id": "lks:source:xin-tangshu",
+              "locator": {"kind": "chapter", "value": "卷220 東夷 日本"}
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:d576ec7f11322e929ebd26da98afdfb721264153d70b18b65eef863be784ca05"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:nakamaro-2",
+    "published_revision_hash": "sha256:d576ec7f11322e929ebd26da98afdfb721264153d70b18b65eef863be784ca05",
+    "set_id": "lks:set:tang-mission-750-754-v2",
+    "published_at": "2026-09-24T09:00:00Z",
+    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+  }
+}

@@ -17,11 +17,12 @@ occurs before the authorization item below.
 
 == Gate 1 — Foundations frozen
 
-- [ ] Owner reviews the Wave 1 findings, selects the launch mission from the feasibility recommendation, and accepts the delivery approach before Wave 2 starts.
+- [x] Owner reviews the Wave 1 findings, selects the launch mission from the feasibility recommendation, and accepts the delivery approach before Wave 2 starts. Recorded 2026-09-24: the owner selected Candidate B (the 752–754 embassy of 藤原清河) and accepted its coverage model, and the delivery approach is link:../0003/STATIC_ARCHITECTURE.adoc[the static architecture decision]. See link:GATE1_DECISION.adoc[the Gate 1 decision record] for what the decision covers and what it leaves open.
 
 == Wave 2 — Reviewed fixtures and shared baseline
 
 - [ ] Publish the reviewed Tang fixture for the selected mission (RFD 1 Phase 0, RFD 2 Phase 1).
+  - Prepared and self-reviewed: `historical/chapters/tang-mission-750-754/`, validated by `src/lib/historical/contract/tang-chapter.test.ts`. The item stays open because the owner's editorial approval of the published revision (AC2) is still pending and because the specialist reviews the feasibility report identifies have not been performed.
 - [ ] Source-check the bounded Qin-conquest comparison fixture and keep it comparison-only (RFD 1 Phase 0).
 - [ ] Prepare the release artifact and deployment packaging without deploying (RFD 3 release preparation).
 - [ ] Build the shared comparison harness and baseline content, controls, and time behavior (RFD 3 Phase 0 comparison item).

@@ -1,0 +1,149 @@
+:authors: Darwin D Wu <darwin67@users.noreply.github.com>
+:state: Gate 1 owner decision record — reviewed content, not a deployment authorization
+:date: 2026-09-24
+:prepared-from: origin/main @ 0e06c4f
+:labels: release, content, historical, gate-1, poc
+
+= RFD 4 Gate 1 decision: the Tang launch mission and its coverage model
+
+== Provenance
+
+This record answers link:README.adoc[RFD 4]'s Gate 1: the owner reviewed the
+Wave 1 findings, selected the launch mission from
+link:../0002/TANG_MISSION_FEASIBILITY.adoc[the Wave 1A feasibility
+recommendation], and accepted the delivery approach. It records the decision and
+its bounds; it does not rewrite the feasibility report, the contract record, or
+the delivery evaluation, which stay readable as the evidence they are.
+
+The decision was relayed for implementation on 2026-09-24 with these settled
+working assumptions: select Candidate B as recommended; accept the coverage
+model; defer purchases, library-only sources, specialist outreach, and
+restricted or non-commercial CHGIS/CBDB data; use only sources and media whose
+publication rights are already suitable; and keep this work to reviewed content
+rather than deployment, merging, or provider changes.
+
+== Decision
+
+=== The launch mission
+
+The first public chapter is *Candidate B, the 752–754 embassy of 藤原清河
+(Fujiwara no Kiyokawa)*, as the feasibility report recommends. The report's
+comparison found it the best-corroborated candidate: a court chronicle plus a
+near-contemporary voyage biography plus the Tang histories, all public domain and
+free to read, with dated geography and public-domain image candidates.
+
+=== The coverage model
+
+Accepted without variation, as the feasibility report states it once and uses
+throughout:
+
+* *primary mission window 750–754* — appointment, dispatch, the Tang New Year
+  audience, the return voyage, the return reports, the rewards, and the 754
+  ordinations;
+* *included coda nodes outside that window at 758, 759, 763, and 779*, each
+  separately sourced and labelled as a coda node rather than as a mission effect;
+* *the outbound voyage of 752 is excluded* — it is undocumented in the sources
+  checked, so the chapter carries no content, no route, and no map geometry for
+  it.
+
+=== The delivery approach
+
+The delivery approach accepted at Gate 1 is the one already recorded in
+link:../0003/STATIC_ARCHITECTURE.adoc[the static architecture decision]: a
+statically built SvelteKit site with Cesium, no application server, no database,
+and historical content that stays renderer-independent. This record adds no
+account, purchase, provider, domain, or deployment authorization.
+
+== What each part of this record rests on
+
+The decision deliberately separates four kinds of statement, because RFD 2
+requires attestation, interpretation, and review status to stay distinguishable:
+
+[cols="1,2,2",options="header"]
+|===
+|Kind |What it covers here |Where it is recorded
+
+|Owner-selected scope
+|The mission, the coverage model, the deferrals, and the acceptance of the
+delivery approach.
+|This record.
+
+|Desk-research evidence
+|Source availability and reuse rights, dated geography, the candidate inventory,
+and the evidence and rights gaps.
+|link:../0002/TANG_MISSION_FEASIBILITY.adoc[Wave 1A feasibility report], with
+locators re-checked against the cited digital transcriptions on 2026-09-24.
+
+|Contract and content semantics
+|Identities, revisions, publication, claims, names, time, geometry, and stories;
+the rules the fixture is validated against.
+|link:../0002/CONTRACTS.adoc[Wave 1B contract record] and `historical/v0`.
+
+|Editorial self-review
+|The chapter fixture's own review record: prepared and self-reviewed by the
+preparing editor, with a complete review checklist.
+|The fixture's publication set
+(`historical/chapters/tang-mission-750-754/publication-sets/`), labelled
+`self_review`.
+
+|Unresolved specialist review
+|Maritime or ancient history for the return-voyage landfalls and what may be
+drawn as a route; Buddhist studies for the ordination and lineage claims; Tang
+court history for the 含元殿 audience; a philologist for the editions.
+|Not performed. The feasibility report calls this optional and not a gate; it
+remains open.
+|===
+
+Nothing in this record claims that the editorial self-review is owner review,
+independent review, or specialist review. RFD 4's AC2 stays open until the owner
+records editorial approval for a published revision, and RFD 2's rule that AI
+assistance is not editorial approval applies to the fixture as prepared.
+
+== What this record does not decide
+
+* *Owner editorial approval of the fixture.* The fixture is prepared for review;
+its publication set records self-review only. AC2 is not satisfied by this
+record.
+* *Gate 2 and the treatment comparison.* The Qin comparison fixture, the shared
+baseline, and the geographic/illustrated treatment comparison remain Wave 2 and
+later work.
+* *Purchases, library access, specialist outreach, and CHGIS/CBDB use.* Deferred
+as stated; the fixture uses no restricted dataset, which is why several places
+carry no asserted coordinates.
+* *Media rights.* No image or media asset is published. The public-domain
+東征伝絵巻 scroll and the 鑒真 statue photograph remain candidates needing
+per-file clearance and a "later illustrated copy, not evidence" label.
+* *Deployment, provider accounts, domains, or external release.* Unchanged and
+still requiring explicit owner authorization.
+
+== Evidence recorded with this decision
+
+* The chapter fixture: `historical/chapters/tang-mission-750-754/` — 14 places,
+12 actors, 29 events, 9 relationships, 1 story, and 9 sources, published as one
+publication set with the corrections from the first review cycle published as a
+second set over eight appended revisions. Its README records the inventory, the
+evidence, the uncertainty handling, the deferrals, and the limitations.
+* Validation: `src/lib/historical/contract/tang-chapter.test.ts` validates the
+tree with the contract's own semantics, checks the seal and publication rules,
+and exercises the chapter's coverage model — the primary window, the coda years
+and their labels, the 752 outbound exclusion, the no-route-geometry rule, the
+kept textual variants, and adversarial readings that must be rejected.
+* Loading boundary: `src/lib/historical/chapter.ts`, so the chapter is loadable
+through the existing contract without a second validator and without a renderer
+dependency.
+* Sealing: the prepared fixture carries sealed hashes and publication pins, but
+  `pnpm seal` remains limited to synthetic examples. Corrections to reviewed
+  chapter content require a new revision or source and publication set;
+  `pnpm verify` detects in-place edits. The fixture's second set is the first
+  such correction: eight revisions are appended, and the revisions, pins, and
+  review metadata published by the first set stay in the tree unchanged.
+
+== Open items carried forward
+
+. Owner review and editorial approval of the fixture's published revision (AC2),
+   and the corrections that review produces.
+. Critical-edition re-checking of every locator before content freeze, because
+   the accessible transcriptions are unproofread and mark damaged characters.
+. Optional specialist review, in the order the feasibility report gives it.
+. The deferred actors, places, and media listed in the chapter README.
+. The Qin comparison fixture, the shared baseline, and Gate 2.

@@ -1,0 +1,45 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "publication_set",
+  "set_id": "lks:set:tang-mission-750-754-v2",
+  "title": "Tang mission 750–754 chapter, first review corrections",
+  "change_explanation": "Publishes corrected revisions of the eight records the first review cycle corrected: the 多禰島 intended destination, the 大宰府 arrival date, the return report's participant count and day handling, 鑒眞's death-age disagreement, the 阿倍仲麻呂 role, and the cited 七日 reading dispute. The revisions and pins published by lks:set:tang-mission-750-754-v1 stay in the tree unchanged, so Publication.history shows the earlier published content and this correction side by side. The set records the preparing editor's self-review; the owner's editorial approval under RFD 2 is still pending and is not implied by this set.",
+  "members": [
+    {"record_id": "lks:place:dazaifu", "revision_id": "lks:rev:dazaifu-2", "revision_hash": "sha256:67c09b03efb9678192f79c4ebfdd3bcc734a98587573770288af0c1062171e37"},
+    {"record_id": "lks:actor:abe-no-nakamaro", "revision_id": "lks:rev:nakamaro-2", "revision_hash": "sha256:d576ec7f11322e929ebd26da98afdfb721264153d70b18b65eef863be784ca05"},
+    {"record_id": "lks:actor:jianzhen", "revision_id": "lks:rev:jianzhen-2", "revision_hash": "sha256:d623a647fa4c710b722e39956180858609023ff4ec7147ce49dfef171c3ae9e6"},
+    {"record_id": "lks:event:return-voyage-753", "revision_id": "lks:rev:return-voyage-753-2", "revision_hash": "sha256:bf49e4c6001141759175c8f3604faeb7351d444b86325a6147bcd41202fc4fa5"},
+    {"record_id": "lks:event:ships-separate-753", "revision_id": "lks:rev:ships-separate-753-2", "revision_hash": "sha256:a91556aa58a73041db1e4630609ab894f4a6fb431ff096e47f9fa84166c7771f"},
+    {"record_id": "lks:event:yaku-arrival-753", "revision_id": "lks:rev:yaku-arrival-753-2", "revision_hash": "sha256:c0f1bee88dc3d3dfcfe69bb0731df759cd544f9661a42852836f4a6ca40b4019"},
+    {"record_id": "lks:event:return-report-754", "revision_id": "lks:rev:return-report-754-2", "revision_hash": "sha256:36668f38171bc6e07481edb4b6a1fff240e70b4c01d8bf53f2d2337fb59e49f1"},
+    {"record_id": "lks:event:jianzhen-death-763", "revision_id": "lks:rev:jianzhen-death-763-2", "revision_hash": "sha256:1a1c9e8e8f17759e8a69d67d4fdd7092a750b233be2a2dcd86afc26e3cc30f29"}
+  ],
+  "sources": [
+    {"source_id": "lks:source:shoku-nihongi", "source_hash": "sha256:e263132f5953555ac8cfefaed3a20047dbe2675a3cb043e72b96ab8be1b7f89d"},
+    {"source_id": "lks:source:toseiden", "source_hash": "sha256:f21eecdcc1405410e364d34ac509180e4ce6e51541535fe734e70b34e213a5dc"},
+    {"source_id": "lks:source:jiu-tangshu", "source_hash": "sha256:b02e0b9bb6bbf60dfbcdcc8fbf130e2dee0818d51a0c8281119a898ab8108196"},
+    {"source_id": "lks:source:xin-tangshu", "source_hash": "sha256:8a900104e3397bfc7098d8610f812c2d76ee8e892133bf761cfae4d958b110bc"},
+    {"source_id": "lks:source:chimei-taikei-ata", "source_hash": "sha256:bc6f40711fc771c6bd69865a3414f2e8b07b9ac41ca7a768d84a27faa9719484"},
+    {"source_id": "lks:source:okinawa-daihyakka-ajinawa", "source_hash": "sha256:9a1a4778786333f5d2af7cd6592c96a3886525810dd86a4b7d8c08642851e70f"},
+    {"source_id": "lks:source:yamakawa-nihonshi-tane", "source_hash": "sha256:cebeab68f061b6a5168e208fbc4210cba3164cbf9ad244fd61278616dbd65960"},
+    {"source_id": "lks:source:ryukyu-university-tokara", "source_hash": "sha256:8fde307becb3df9b777351b9bece7bd9da8076c966e6c6e8b90b45da76adbb0b"},
+    {"source_id": "lks:source:wikidata", "source_hash": "sha256:f809e6af1b93dc1610af78d2e96d927d490335cc6089f36702e6f2b1c913761a"}
+  ],
+  "review": {
+    "reviewed_at": "2026-09-24T08:40:00Z",
+    "reviewer": {"name": "Lekishi editorial preparation", "role": "preparing editor (self-review)"},
+    "independence": "self_review",
+    "checklist": {
+      "source_support": true,
+      "attribution": true,
+      "date_location_uncertainty": true,
+      "attestation_vs_interpretation": true,
+      "reuse_rights": true
+    },
+    "notes": "Self-review of the correction cycle, recorded explicitly. This is not owner review, not independent review, and not specialist review: the owner's editorial approval under RFD 2 is still pending, so RFD 4 AC2 is not satisfied by this set. The corrected claims were re-checked against the cited digital transcriptions on 2026-09-24; the transcriptions are unproofread and must be re-checked against critical editions before content freeze."
+  },
+  "published_at": "2026-09-24T09:00:00Z",
+  "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+  "supersedes": "lks:set:tang-mission-750-754-v1",
+  "correction_of_revision": null
+}

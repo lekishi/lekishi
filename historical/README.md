@@ -28,16 +28,28 @@ historical/v0/
     publication-sets/           one set publishing every example revision and pinning both sources
   vectors/             machine-readable boundary vectors with expected results
     time.json ordering.json names.json geometry.json documents.json publication.json
+historical/chapters/
+  tang-mission-750-754/  the reviewed first chapter (see its README)
+    records/                    the chapter's places, actors, events, relationships, story
+    sources/                    the cited works and datasets, with reuse terms
+    publication-sets/           the set that publishes the chapter and pins its sources
 ```
 
 The contract version string is `lekishi-historical-contract/v0`. Every document
 carries it, and extending a vocabulary or a rule requires a new version.
 
-## Examples are synthetic
+## Examples are synthetic, chapters are reviewed content
 
 Every file under `examples/` is a fixture for the contract, not historical
 content. Example ids contain `example-`, their `editorial_notes` say they are
 synthetic, and they must never be imported as atlas content or cited as evidence.
+
+Reviewed chapter content lives under `historical/chapters/<name>/` in the same
+tree shape and is loaded through the content boundary in
+`src/lib/historical/chapter.ts`, which hands it to the contract's own
+`Publication.checkAll`. The first chapter is
+`historical/chapters/tang-mission-750-754/`; its README records the coverage
+model, the inventory, the evidence, and the review status.
 
 ## Validate
 
@@ -47,13 +59,16 @@ pnpm test
 
 The suite validates the examples as one content tree, runs every vector (187
 cases across `time`, `ordering`, `names`, `geometry`, `documents`, and
-`publication`), and checks that every code and caveat the vectors expect is
-documented by the reference semantics. `pnpm verify` runs the full check.
+`publication`), checks that every code and caveat the vectors expect is
+documented by the reference semantics, and validates the reviewed Tang chapter
+with its own coverage, coda, and exclusion checks. `pnpm verify` runs the full
+check.
 
-## Reseal the examples after editing content
+## Reseal after editing content
 
 Hashes are the anchor that keeps approved content from being rewritten silently.
-After editing an example revision or a source document, recompute them:
+After editing an example revision, a source document, or chapter content,
+recompute them:
 
 ```bash
 pnpm seal
@@ -61,11 +76,12 @@ pnpm seal
 
 Sealing rewrites each source document's `source_hash`, each revision's
 `revision_hash`, the record's publication mirror, and the publication set's
-member and source pins. Replacement is positional, so an author's placeholder
-(`sha256:000...001`) or a stale hash is replaced either way and the
-hand-written formatting is preserved. The tests fail if a revision or source no
-longer matches its stored hash, or if a publication set pin no longer matches the
-content it approved.
+member and source pins, for the synthetic examples and for
+`historical/chapters/tang-mission-750-754`. Replacement is positional, so an
+author's placeholder (`sha256:000...001`) or a stale hash is replaced either way
+and the hand-written formatting is preserved. The tests fail if a revision or
+source no longer matches its stored hash, or if a publication set pin no longer
+matches the content it approved.
 
 Approved source metadata is immutable: correcting a title or a license means
 adding a new source document (new `source_id`, optional `supersedes_source_id`),

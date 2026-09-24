@@ -1,0 +1,89 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "actor",
+  "record_id": "lks:actor:wu-huaishi",
+  "created_at": "2026-09-24T05:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:huaishi-1",
+      "created_at": "2026-09-24T05:00:00Z",
+      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "change_explanation": "Initial chapter actor: the Tang officer named in 古麻呂's report of the audience seating dispute.",
+      "content": {
+        "summary": "呉懷實, the Tang general named in 大伴古麻呂's report of the 天寶十二載 (753) New Year audience as the officer who moved the Silla envoy's seat after 古麻呂 objected to the seating order.",
+        "names": [
+          {
+            "form": "呉懷實",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "primary",
+            "romanization": {
+              "value": "Wu Huaishi",
+              "scheme": "pinyin",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:huaishi-name"
+          }
+        ],
+        "actor_types": ["person"],
+        "roles": [
+          {
+            "role": "soldier",
+            "validity": {
+              "source_expression": "大唐天寶十二載正月朔 時將軍呉懷實見知古麻呂不肯色",
+              "calendar": "chinese_lunisolar",
+              "precision": "year",
+              "mode": "instant",
+              "interval": {
+                "bounds": "two_sided",
+                "boundary": "inclusive",
+                "start": {"year": 753, "era": "ce"},
+                "end": {"year": 753, "era": "ce"}
+              }
+            },
+            "note": "Recorded as 將軍 (general) only at this audience; nothing further is published."
+          }
+        ],
+        "editorial_notes": "He appears only inside 古麻呂's self-report, which is labelled as a self-report on the audience event. The record therefore asserts only what that report names."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:huaishi-name",
+          "statement": "古麻呂's report names 呉懷實 as the general who, seeing 古麻呂's displeasure, moved the Silla envoy and placed the Japanese envoy above him.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年正月丙寅"}
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:huaishi-role",
+          "statement": "The same report records his office as 將軍 (general) and his intervention at the audience.",
+          "asserts": "/roles/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年正月丙寅"}
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:b03af50041ebf8767f315a34e8c71eb98be0b2396d8f7455e00e86545b935b40"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:huaishi-1",
+    "published_revision_hash": "sha256:b03af50041ebf8767f315a34e8c71eb98be0b2396d8f7455e00e86545b935b40",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T08:00:00Z",
+    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+  }
+}

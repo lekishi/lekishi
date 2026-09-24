@@ -1,0 +1,69 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "actor",
+  "record_id": "lks:actor:tang-dynasty",
+  "created_at": "2026-09-24T05:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:tang-dynasty-1",
+      "created_at": "2026-09-24T05:00:00Z",
+      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "change_explanation": "Initial chapter actor: the receiving court as the sources name it, for the diplomacy and audience relationships.",
+      "content": {
+        "summary": "唐 (大唐), the receiving court in the cited sources. The chapter uses this actor for the embassy's diplomacy and for the New Year audience at 蓬萊宮含元殿, which 古麻呂 reported.",
+        "names": [
+          {
+            "form": "唐",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "primary",
+            "romanization": {
+              "value": "Tang",
+              "scheme": "pinyin",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:tang-dynasty-name"
+          },
+          {
+            "form": "大唐",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "alternate",
+            "claim_id": "lks:claim:tang-dynasty-name"
+          }
+        ],
+        "actor_types": ["dynasty"],
+        "editorial_notes": "The state actor carries no roles: the role vocabulary is person-oriented. The court's acts are recorded on the events and relationships that cite the entries."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:tang-dynasty-name",
+          "statement": "The sources name the receiving court 唐 (大唐), and 古麻呂's report records the New Year audience at 蓬萊宮含元殿.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年正月丙寅"}
+            },
+            {
+              "source_id": "lks:source:toseiden",
+              "locator": {"kind": "entry", "value": "天寶十二載 十月十五日壬午"}
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:9e750ff6b1cf9d3191433606f032101a83d660c3a84673d321338cbe6a1c5bbb"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:tang-dynasty-1",
+    "published_revision_hash": "sha256:9e750ff6b1cf9d3191433606f032101a83d660c3a84673d321338cbe6a1c5bbb",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T08:00:00Z",
+    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+  }
+}

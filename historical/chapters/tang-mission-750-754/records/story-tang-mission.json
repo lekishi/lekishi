@@ -1,0 +1,73 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "story",
+  "record_id": "lks:story:tang-mission-750-779",
+  "created_at": "2026-09-24T05:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:tang-mission-story-1",
+      "created_at": "2026-09-24T05:00:00Z",
+      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "change_explanation": "Initial chapter story: the mission in presentation order, with the included coda nodes labelled and the outbound voyage absent.",
+      "content": {
+        "summary": "The 750–754 embassy of 藤原朝臣清河, from appointment through the return voyage and the 754 ordinations, with the included coda nodes of 758, 759, 763, and 779 presented after it.",
+        "window": {
+          "start": {"year": 750, "era": "ce"},
+          "end": {"year": 779, "era": "ce"},
+          "boundary": "inclusive"
+        },
+        "steps": [
+          {"record_id": "lks:event:appointment-750", "role": "start", "caption": "The court appoints the embassy, 750"},
+          {"record_id": "lks:relationship:japan-tang-embassy", "role": "step", "caption": "The diplomatic mission from Japan to Tang"},
+          {"record_id": "lks:event:kibi-appointment-751", "role": "step", "caption": "吉備真備 is appointed vice-envoy, 751"},
+          {"record_id": "lks:event:court-audience-752", "role": "step", "caption": "The envoys pay court, 752"},
+          {"record_id": "lks:event:sekito-752", "role": "step", "caption": "The 節刀 grant and promotions, 752"},
+          {"record_id": "lks:event:tang-new-year-audience-753", "role": "step", "caption": "The Tang New Year audience at 蓬萊宮含元殿, 753"},
+          {"record_id": "lks:event:yangzhou-invitation-753", "role": "step", "caption": "The envoys invite 鑒眞 at 延光寺, 753"},
+          {"record_id": "lks:relationship:kiyokawa-jianzhen-contact", "role": "step", "caption": "The encounter at 延光寺"},
+          {"record_id": "lks:event:longxing-departure-753", "role": "step", "caption": "鑒眞 leaves 龍興寺, 753"},
+          {"record_id": "lks:event:return-voyage-753", "role": "step", "caption": "The return voyage, 753: documented landfalls only, no route drawn"},
+          {"record_id": "lks:event:ajinawa-arrival-753", "role": "step", "caption": "The first and second ships reach 阿兒奈波島"},
+          {"record_id": "lks:event:ships-separate-753", "role": "step", "caption": "The ships separate: the first aground, the second for 多禰島"},
+          {"record_id": "lks:event:yaku-arrival-753", "role": "step", "caption": "The second ship reaches 益救島 (biography)"},
+          {"record_id": "lks:event:kibi-yaku-arrival-753", "role": "step", "caption": "吉備真備's ship reaches 益久嶋 (chronicle); the sources are not merged"},
+          {"record_id": "lks:event:yaku-departure-753", "role": "step", "caption": "The second ship leaves 益救島"},
+          {"record_id": "lks:event:akimeya-landfall-753", "role": "step", "caption": "The landfall at 秋妻屋浦"},
+          {"record_id": "lks:event:dazaifu-entry-753", "role": "step", "caption": "鑒眞 enters 大宰府"},
+          {"record_id": "lks:event:kiyokawa-drift-753", "role": "step", "caption": "藤原清河's ship is driven to 驩州; an uncertain occurrence"},
+          {"record_id": "lks:event:kibi-drift-753", "role": "step", "caption": "吉備真備's ship drifts to 紀伊國牟漏埼"},
+          {"record_id": "lks:event:return-report-754", "role": "step", "caption": "古麻呂 returns with 鑒眞 and 法進, 754"},
+          {"record_id": "lks:event:audience-report-754", "role": "step", "caption": "古麻呂 reports the audience to the court"},
+          {"record_id": "lks:event:naniwa-754", "role": "step", "caption": "鑒眞 reaches 難波"},
+          {"record_id": "lks:event:todaiji-installation-754", "role": "step", "caption": "鑒眞 enters the capital and is installed at 東大寺"},
+          {"record_id": "lks:relationship:jianzhen-travel", "role": "step", "caption": "鑒眞's documented travel to Japan"},
+          {"record_id": "lks:event:rewards-754", "role": "step", "caption": "The mission's rewards, including the 222-person figure"},
+          {"record_id": "lks:event:fourth-ship-754", "role": "step", "caption": "The fourth ship arrives at 石籬浦"},
+          {"record_id": "lks:event:ordination-754", "role": "step", "caption": "The precepts platform and the 754 ordinations"},
+          {"record_id": "lks:relationship:jianzhen-transmission", "role": "step", "caption": "The itemized transmission: 48 items"},
+          {"record_id": "lks:event:daikasho-title-758", "role": "step", "caption": "Coda — 758: the title 大和上 and the precept-study order"},
+          {"record_id": "lks:relationship:precept-study-order", "role": "step", "caption": "Coda — the 758 court act toward 鑒眞"},
+          {"record_id": "lks:event:toshodaiji-founding-759", "role": "step", "caption": "Coda — 759: the 唐招提寺 name is established"},
+          {"record_id": "lks:relationship:toshodaiji-foundation", "role": "step", "caption": "Coda — the 759 temple foundation"},
+          {"record_id": "lks:event:jianzhen-death-763", "role": "step", "caption": "Coda — 763: 鑒眞's death, with the sources' age variant"},
+          {"record_id": "lks:event:kiyokawa-honours-779", "role": "step", "caption": "Coda — 779: posthumous honours for 藤原清河"},
+          {"record_id": "lks:relationship:kiyokawa-commemoration", "role": "step", "caption": "Coda — the 779 commemoration of 清河"},
+          {"record_id": "lks:event:nakamaro-death-779", "role": "step", "caption": "Coda — 779: the report of 阿倍仲麻呂's death and the funeral grants"},
+          {"record_id": "lks:relationship:nakamaro-commemoration", "role": "step", "caption": "Coda — the 779 grants to 仲麻呂's household"}
+        ],
+        "coverage_note": "Primary mission window 750–754; included coda nodes outside it at 758, 759, 763, and 779, separately sourced and labelled; the outbound voyage of 752 is excluded, so no outward leg or route geometry exists in this chapter.",
+        "editorial_notes": "Step order is presentation order, not a claim that one event preceded or caused another. Uncertain occurrences (the two drifts) are not presented as continuous activity. The coda steps are labelled in their captions and in the records' editorial notes."
+      },
+      "claims": [],
+      "revision_hash": "sha256:770b5f3bf41dc2970a76d7c02077aac63c330319ce3afa4c7861ee1829d6fd82"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:tang-mission-story-1",
+    "published_revision_hash": "sha256:770b5f3bf41dc2970a76d7c02077aac63c330319ce3afa4c7861ee1829d6fd82",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T08:00:00Z",
+    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+  }
+}

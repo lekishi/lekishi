@@ -1,0 +1,59 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "relationship",
+  "record_id": "lks:relationship:jianzhen-travel",
+  "created_at": "2026-09-24T05:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:jianzhen-travel-1",
+      "created_at": "2026-09-24T05:00:00Z",
+      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "change_explanation": "Initial chapter relationship: 鑒眞's travel to Japan with the returning embassy, documented at its landfalls only.",
+      "content": {
+        "summary": "鑒眞 travels from 揚州 with the returning embassy, landing at 秋妻屋浦 and reaching 東大寺 in 754. The relationship records documented movement only and draws no route.",
+        "relationship_types": ["travel"],
+        "from": "lks:actor:jianzhen",
+        "to": "lks:place:todaiji",
+        "directionality": "directed",
+        "causality": "not_asserted",
+        "validity": {
+          "source_expression": "天寶十二載十月十九日 從龍興寺出 — 天平勝寶六年二月四日 引入東大寺安置",
+          "calendar": "chinese_lunisolar",
+          "precision": "year",
+          "mode": "duration",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 753, "era": "ce"},
+            "end": {"year": 754, "era": "ce"}
+          }
+        },
+        "editorial_notes": "No geometry is attached: the documented movements are the dated events and the named places, and the report excludes any interpolated sea route."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:jianzhen-travel-basis",
+          "statement": "The biography records 鑒眞 leaving 龍興寺, sailing with the returning embassy, landing at 秋妻屋浦, and being installed at 東大寺.",
+          "asserts": "",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:toseiden",
+              "locator": {"kind": "entry", "value": "天寶十二載十月［十］九日戌時; 廿日乙酉午時，第二舟著薩摩國阿多郡秋妻屋浦; 天平勝寶六年甲午，二月四日…引入東大寺安置"}
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:39ed46a712d824533034928432b3a9311873036d75ed732ec74b7240f92e26a6"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:jianzhen-travel-1",
+    "published_revision_hash": "sha256:39ed46a712d824533034928432b3a9311873036d75ed732ec74b7240f92e26a6",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T08:00:00Z",
+    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+  }
+}

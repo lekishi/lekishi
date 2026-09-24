@@ -1,0 +1,122 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "actor",
+  "record_id": "lks:actor:fujiwara-no-kiyokawa",
+  "created_at": "2026-09-24T05:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:kiyokawa-1",
+      "created_at": "2026-09-24T05:00:00Z",
+      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "change_explanation": "Initial chapter actor: the ambassador, his documented role span, and the later notice of his fate.",
+      "content": {
+        "summary": "藤原朝臣清河, appointed ambassador (大使) of the embassy in 天平勝寶二年九月 (750). The chronicle's 寶龜十年 (779) notice records that on the return voyage his ship was driven to 驩州 on Tang's southern frontier, that he alone survived, and that he remained in Tang and died there more than ten years later.",
+        "names": [
+          {
+            "form": "藤原朝臣清河",
+            "script": "Hani",
+            "language": "ja",
+            "role": "primary",
+            "romanization": {
+              "value": "Fujiwara no Kiyokawa",
+              "scheme": "hepburn",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:kiyokawa-name"
+          },
+          {
+            "form": "藤原清河",
+            "script": "Hani",
+            "language": "ja",
+            "role": "alternate",
+            "claim_id": "lks:claim:kiyokawa-name"
+          }
+        ],
+        "actor_types": ["person"],
+        "roles": [
+          {
+            "role": "envoy",
+            "validity": {
+              "source_expression": "天平勝寶二年九月己酉 大使; 天平勝寶六年正月・四月 歸朝記録",
+              "calendar": "regnal",
+              "precision": "year",
+              "mode": "duration",
+              "interval": {
+                "bounds": "two_sided",
+                "boundary": "inclusive",
+                "start": {"year": 750, "era": "ce"},
+                "end": {"year": 754, "era": "ce"}
+              }
+            },
+            "note": "Ambassador from the 750 appointment; the return-voyage reports and the 754 rewards place the mission's span through 754."
+          }
+        ],
+        "external_ids": [
+          {
+            "system": "wikidata",
+            "id": "Q845311",
+            "url": "https://www.wikidata.org/wiki/Q845311",
+            "license": "CC0-1.0",
+            "note": "External identifier found in the Wave 1A feasibility pass."
+          }
+        ],
+        "editorial_notes": "The 779 notice is a report made about twenty-five years after the voyage and is published as such. No birth or death year is asserted; the notice only says he died in Tang after more than ten years."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:kiyokawa-name",
+          "statement": "The chronicle names 藤原朝臣清河 as ambassador (大使) of the embassy appointed on 天平勝寶二年九月己酉.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第十八 天平勝寶二年九月己酉"}
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:kiyokawa-role",
+          "statement": "The chronicle records 藤原朝臣清河 as ambassador at the appointment and at the 節刀 grant of 天平勝寶四年閏三月, and the 754 return reports and rewards continue the mission's record through 天平勝寶六年四月.",
+          "asserts": "/roles/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第十八 天平勝寶二年九月己酉; 卷第十八 天平勝寶四年閏三月丙辰"}
+            },
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年四月壬申"}
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:kiyokawa-fate",
+          "statement": "The chronicle's 寶龜十年二月 notice records that 清河's ship was driven to 驩州 on the return, that he alone survived, and that he remained in Tang and died there more than ten years later.",
+          "asserts": "/summary",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第卅五 寶龜十年二月乙亥"}
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:ebda18fb2e8a4eeb09c4f03597641fb76bbcd05d68f7541974c62e1f6b52074c"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:kiyokawa-1",
+    "published_revision_hash": "sha256:ebda18fb2e8a4eeb09c4f03597641fb76bbcd05d68f7541974c62e1f6b52074c",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T08:00:00Z",
+    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "place",
+  "record_id": "lks:place:huanzhou",
+  "created_at": "2026-09-24T05:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:huanzhou-1",
+      "created_at": "2026-09-24T05:00:00Z",
+      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "change_explanation": "Initial chapter place: the attested frontier place kept without a map placement because no identification is sourced in this fixture.",
+      "content": {
+        "summary": "驩州, on Tang's southern frontier, where the chronicle's 寶龜十年 (779) notice records 藤原清河's ship being driven on the return voyage.",
+        "names": [
+          {
+            "form": "驩州",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "primary",
+            "romanization": {
+              "value": "Huanzhou",
+              "scheme": "pinyin",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:huanzhou-name"
+          }
+        ],
+        "place_types": ["region"],
+        "geometry": [
+          {
+            "claim_id": "lks:claim:huanzhou-location",
+            "interpretation": "unknown",
+            "geojson": null,
+            "precision": "unspecified",
+            "notes": "The chronicle places 驩州 on Tang's southern frontier but no modern identification is sourced in this fixture, so no coordinates are asserted."
+          }
+        ],
+        "editorial_notes": "The notice that records the drift is a report made about twenty-five years later; the chapter publishes the place name and the report without a map position."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:huanzhou-name",
+          "statement": "The chronicle's notice records 藤原清河's ship being driven to 驩州 on Tang's southern frontier on the return voyage.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第卅五 寶龜十年二月乙亥"}
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:huanzhou-location",
+          "statement": "No modern identification of 驩州 is sourced in this fixture, so the record carries no coordinates.",
+          "asserts": "/geometry/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第卅五 寶龜十年二月乙亥"}
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:55f29fc9fd1e96787e2cb7e379e9c0b494897cccd8d4e2b3f3614b305690bc88"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:huanzhou-1",
+    "published_revision_hash": "sha256:55f29fc9fd1e96787e2cb7e379e9c0b494897cccd8d4e2b3f3614b305690bc88",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T08:00:00Z",
+    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+  }
+}

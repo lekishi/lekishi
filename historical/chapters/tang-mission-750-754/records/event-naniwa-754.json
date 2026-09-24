@@ -1,0 +1,74 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "event",
+  "record_id": "lks:event:naniwa-754",
+  "created_at": "2026-09-24T05:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:naniwa-754-1",
+      "created_at": "2026-09-24T05:00:00Z",
+      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "change_explanation": "Initial chapter event: 鑒眞's arrival at 難波 on the way to the capital.",
+      "content": {
+        "summary": "鑒眞's party reaches 難波 on 天平勝寶六年二月一日 (754), on the way from 大宰府 to the capital.",
+        "event_types": ["journey"],
+        "time": {
+          "source_expression": "天平勝寶六年甲午 二月一日到難波",
+          "calendar": "chinese_lunisolar",
+          "precision": "day",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 754, "era": "ce", "month": 2, "day": 1},
+            "end": {"year": 754, "era": "ce", "month": 2, "day": 1}
+          }
+        },
+        "places": [
+          {"place_id": "lks:place:naniwa", "role": "site"}
+        ],
+        "participants": [
+          {"actor_id": "lks:actor:jianzhen", "role": "leader"}
+        ],
+        "editorial_notes": "The biography dates this leg in the 天平勝寶六年 year but with a lunisolar month and day; the calendar field records that, and the normalized year is the source's year."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:naniwa-time",
+          "statement": "The biography records the party reaching 難波 on 天平勝寶六年二月一日.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:toseiden",
+              "locator": {"kind": "entry", "value": "天平勝寶六年甲午，二月一日到難波"}
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:naniwa-place",
+          "statement": "The passage names 難波 as the place reached.",
+          "asserts": "/places",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:toseiden",
+              "locator": {"kind": "entry", "value": "二月一日到難波"}
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:716410da766b7e37f0f86a4ddff9b974161dee77402e30f97760c157a1528a4b"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:naniwa-754-1",
+    "published_revision_hash": "sha256:716410da766b7e37f0f86a4ddff9b974161dee77402e30f97760c157a1528a4b",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T08:00:00Z",
+    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "event",
+  "record_id": "lks:event:nakamaro-death-779",
+  "created_at": "2026-09-24T05:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:nakamaro-death-779-1",
+      "created_at": "2026-09-24T05:00:00Z",
+      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "change_explanation": "Initial chapter coda event: the 779 report of 阿倍仲麻呂's death and the funeral grants.",
+      "content": {
+        "summary": "The court learns that the former student 阿倍朝臣仲麻呂 has died in Tang and grants funeral goods to his household in 寶龜十年五月 (779).",
+        "event_types": ["occurrence"],
+        "time": {
+          "source_expression": "寶龜十年五月丙寅 前學生阿倍朝臣仲麻呂在唐而亡",
+          "calendar": "regnal",
+          "precision": "month",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {"year": 779, "era": "ce", "month": 5},
+            "end": {"year": 779, "era": "ce", "month": 5}
+          }
+        },
+        "participants": [
+          {"actor_id": "lks:actor:abe-no-nakamaro", "role": "subject"}
+        ],
+        "editorial_notes": "Coda node (outside the primary 750–754 mission window). The entry reports a death that happened in Tang; it gives no death date, so the chapter publishes the report's month and no death year."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:nakamaro-death-time",
+          "statement": "The chronicle records on 寶龜十年五月丙寅 that the former student 阿倍朝臣仲麻呂 died in Tang and that funeral goods were granted to his household.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第卅五 寶龜十年五月丙寅"},
+              "quoted_text": "丙寅。前學生阿倍朝臣仲麻呂在唐而亡。家口偏乏。葬礼有闕。勅賜東■一百疋。白綿三百屯。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nakamaro-death-subject",
+          "statement": "The entry names 仲麻呂 as the deceased former student.",
+          "asserts": "/participants",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shoku-nihongi",
+              "locator": {"kind": "entry", "value": "卷第卅五 寶龜十年五月丙寅"}
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:3692fb8f380a6e93141e1d0657482e32b1c1d35d5b39ded8ac8b88ff0cc039b3"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:nakamaro-death-779-1",
+    "published_revision_hash": "sha256:3692fb8f380a6e93141e1d0657482e32b1c1d35d5b39ded8ac8b88ff0cc039b3",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T08:00:00Z",
+    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+  }
+}

@@ -24,7 +24,7 @@ Selected by the owner on 2026-09-24 from
 
 | Kind | Count | Notes |
 | --- | --- | --- |
-| Places | 14 | `難波`, `大宰府`, `揚州`, `蘇州黃泗浦`, `阿兒奈波島`, `多禰島`, `益救島`, `秋妻屋浦`, `石籬浦`, `紀伊國牟漏埼`, `驩州`, `蓬萊宮含元殿`, `東大寺`, `唐招提寺` |
+| Places | 15 | `難波`, `大宰府`, `平城宮`, `揚州`, `蘇州黃泗浦`, `阿兒奈波島`, `多禰島`, `益救島`, `秋妻屋浦`, `石籬浦`, `紀伊國牟漏埼`, `驩州`, `蓬萊宮含元殿`, `東大寺`, `唐招提寺` |
 | Actors | 12 | The mission principals, 鑒眞 and 法進, the Tang general 呉懷實, the sovereign 孝謙天皇, and the two state actors 日本國 and 唐 |
 | Events | 29 | 24 inside 750–754 and 5 coda events across the four coda years (779 has two) |
 | Relationships | 9 | diplomacy, travel, two contacts, transmission, two institutional changes, and two 779 commemorations |
@@ -44,6 +44,14 @@ Selected by the owner on 2026-09-24 from
   with an explanation because no identification is sourced here. The other
   places carry `display_anchor` geometry only, which is explicitly not an
   asserted historical coordinate.
+- **Court acts are anchored, not placed.** The entries that record the court's
+  appointment of the embassy, the 節刀 grant, the audiences and reports, the
+  rewards, and the 758 and 779 court acts name no place (the 節刀 entry names
+  `内裏`). Each of those ten events points at `平城宮` — the court's seat, whose
+  record carries the chronicle's own naming of the palace and the inner precinct
+  — as a `display_anchor`, with a `cited_interpretation` claim attributed to the
+  editorial preparation. The atlas therefore shows them, labelled "display
+  anchor only", and asserts no coordinate for any of them.
 - `多禰島` is published only as the second ship's intended destination: the
   biography names it as the course the second ship set out on and then records
   the arrival at `益救島`, so the separation event carries it as a qualified
@@ -81,13 +89,22 @@ return-voyage landfalls, Buddhist studies for the ordination and lineage claims,
 Tang court history for the audience, and a philologist for the editions) have
 not been performed.
 
+A third set, `lks:set:tang-mission-750-754-court-anchors`, publishes the court
+placements the owner accepted on 2026-09-24 (see
+[`rfd/0002/PUBLICATION_APPROVAL.adoc`](../../../rfd/0002/PUBLICATION_APPROVAL.adoc)).
+Its ledger row records an `owner decided` decision — the owner decided that this
+content may be published — while the set itself keeps the preparing editor's
+`self_review`; it is not the owner's editorial approval under RFD 2.
+
 Neither set is an official publication. In the contract's vocabulary
 "published" means *named by a publication set* — the atomic unit the atlas
 reads — not *approved for release*. The owner's decisions are recorded in
 [`rfd/0002/PUBLICATION_APPROVAL.adoc`](../../../rfd/0002/PUBLICATION_APPROVAL.adoc):
-a set may exist only when that ledger names it, and both sets are recorded there
-as **preparation snapshots** created under the owner's instruction. The first
-`owner approved` row will be the owner's editorial approval of this chapter.
+a set may exist only when that ledger names it. The two preparation sets are
+recorded there as **preparation snapshots** created under the owner's
+instruction, and the placement set as an **owner decided** publication. The
+first `owner approved` row will be the owner's editorial approval of this
+chapter.
 
 ## What is deferred, and why
 

@@ -119,10 +119,12 @@ if v1 alone had been published.
 
 |Map and list counts
 |29 published events: 24 in the primary 750–754 window and 5 coda nodes outside
-it. Of the 24 in-window events, 13 have a published place reference that resolves
-to a point and 11 do not (7 name no place, 3 name a place with `unknown`
-geometry, 1 names a place only as context). Three places carry no sourced
-position: 驩州, 石籬浦, and 紀伊國牟漏埼.
+it. Of the 24 in-window events, 20 resolve to a point and 4 do not (3 name a
+place with `unknown` geometry and 1 names a place only as context). Three places
+carry no sourced position: 驩州, 石籬浦, and 紀伊國牟漏埼. Ten of the twenty are
+court acts whose entries name no place: they point at 平城宮, the court's seat,
+as a `display_anchor` (owner-accepted on 2026-09-24), so the atlas shows them
+labelled "display anchor only" and asserts no coordinate for them.
 
 |Build gate
 |A module-scope projection failure fails `pnpm build`: the prerender reports the
@@ -179,6 +181,11 @@ the phone layouts at 390 px and 320 px.
 * The event list is the panel's scroll container, and the overlay column is
   bounded above the time controls at every width, so a window longer than the
   panel scrolls instead of running under the controls.
+* Court acts whose entries name no place are anchored at the court's seat
+  (平城宮), and the anchor is labelled as one: the atlas shows the event without
+  asserting a coordinate for it. The owner's decision to publish that placement
+  is recorded in link:../0002/PUBLICATION_APPROVAL.adoc[the publication approval
+  gate].
 * Adding or changing a chapter is now a content decision with a code path that
   fails loudly, rather than a fixture edit.
 * No server, database, provider account, or secret is introduced; the artifact

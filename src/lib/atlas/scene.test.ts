@@ -37,9 +37,19 @@ describe("buildScene", () => {
 
   it("marks the events at the playhead as active", () => {
     const scene = buildScene(setPlayhead(initial, chapter, 1219), chapter)
-    const active = scene.events.filter((event) => event.active).map((event) => event.id)
+    const atPlayhead = scene.events
+      .filter((event) => event.playback !== "inactive")
+      .map((event) => ({ id: event.id, playback: event.playback }))
 
-    expect(active).toEqual(["event-coastal-crossing"])
+    // The fixture's crossing is an uncertain occurrence window, so the playhead
+    // makes it possible, never active.
+    expect(atPlayhead).toEqual([{ id: "event-coastal-crossing", playback: "possible" }])
+
+    const onADuration = buildScene(setPlayhead(initial, chapter, 1230), chapter)
+
+    expect(
+      onADuration.events.filter((event) => event.playback === "active").map((event) => event.id),
+    ).toEqual(["event-plain-workshop"])
   })
 
   it("excludes outside-window events from the scene while keeping the selection", () => {

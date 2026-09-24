@@ -1,5 +1,11 @@
 import type { Chapter, HistoricalEvent, TimeWindow } from "./domain"
-import { clampToWindow, eventsInWindow, stepToEventBoundary } from "./time"
+import {
+  clampToWindow,
+  eventsInWindow,
+  playbackStateAt,
+  stepToEventBoundary,
+  type PlaybackState,
+} from "./time"
 
 /**
  * The single owner of atlas interaction state.
@@ -224,4 +230,13 @@ export function selectionTimeStatus(
 
 export function isEventActive(state: AtlasState, event: HistoricalEvent): boolean {
   return state.playhead >= event.occurrence.startYear && state.playhead <= event.occurrence.endYear
+}
+
+/**
+ * The playhead's relation to an event: `active` for a supported instant or
+ * duration, `possible` for an uncertain occurrence window the playhead falls
+ * inside, `inactive` otherwise. The renderer-independent rule lives in `time.ts`.
+ */
+export function playbackState(state: AtlasState, event: HistoricalEvent): PlaybackState {
+  return playbackStateAt(event.occurrence, state.playhead)
 }

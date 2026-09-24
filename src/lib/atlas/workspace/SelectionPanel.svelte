@@ -1,6 +1,12 @@
 <script lang="ts">
   import type { HistoricalEvent } from "../domain"
-  import { occurrenceLabel, placementLabel, reviewLabel, unplacedNote } from "../labels"
+  import {
+    occurrenceLabel,
+    occurrenceModeNote,
+    placementLabel,
+    reviewLabel,
+    unplacedNote,
+  } from "../labels"
   import type { SelectionTimeStatus } from "../state"
 
   let {
@@ -67,6 +73,10 @@
         <dd class="text-slate-100">{event.occurrence.sourceExpression}</dd>
       {/if}
     </dl>
+
+    {#if occurrenceModeNote(event.occurrence)}
+      <p class="text-xs leading-snug text-slate-400">{occurrenceModeNote(event.occurrence)}</p>
+    {/if}
 
     {#if unplaced}
       <p

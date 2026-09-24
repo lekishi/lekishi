@@ -17,6 +17,12 @@ export type OccurrenceRelation =
   /** The span does not touch the window. */
   | "outside"
 
+/**
+ * How the playhead relates to an occurrence. `possible` is an uncertain
+ * occurrence window the playhead falls inside; it is never continuous activity.
+ */
+export type PlaybackState = "active" | "possible" | "inactive"
+
 export function overlapsWindow(occurrence: Occurrence, window: TimeWindow): boolean {
   return occurrence.startYear <= window.end && occurrence.endYear >= window.start
 }
@@ -32,6 +38,27 @@ export function relationToWindow(occurrence: Occurrence, window: TimeWindow): Oc
 /** True when the playhead sits inside the supported occurrence span. */
 export function occursAtPlayhead(occurrence: Occurrence, playhead: number): boolean {
   return playhead >= occurrence.startYear && playhead <= occurrence.endYear
+}
+
+/**
+ * How the playhead relates to an occurrence, mirroring the contract's
+ * `playbackState` at year granularity.
+ *
+ * A duration is `active` while the playhead is inside its support, an instant is
+ * active on its own year, and an uncertain occurrence window is only ever
+ * `possible`: it is one occurrence at an unknown point inside the span, so the
+ * atlas must not animate it as continuous activity. `inactive` is the contextual
+ * state for an event that stays visible in the window but is not supported at the
+ * playhead.
+ */
+export function playbackStateAt(occurrence: Occurrence, playhead: number): PlaybackState {
+  const inside = occursAtPlayhead(occurrence, playhead)
+
+  if (occurrence.mode === "occurrence_window") {
+    return inside ? "possible" : "inactive"
+  }
+
+  return inside ? "active" : "inactive"
 }
 
 export function clampToWindow(year: number, window: TimeWindow): number {

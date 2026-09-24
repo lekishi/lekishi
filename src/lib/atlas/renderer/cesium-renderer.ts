@@ -338,7 +338,7 @@ function pointStyle(event: SceneEvent): {
   const selected = event.selected
 
   return {
-    pixelSize: selected ? 16 : event.active ? 12 : 9,
+    pixelSize: selected ? 16 : event.playback === "active" ? 12 : 9,
     color: (baseColor ?? Color.WHITE).withAlpha(event.relation === "possible" ? 0.55 : 0.95),
     outlineColor: selected
       ? (SELECTED_OUTLINE ?? Color.WHITE)

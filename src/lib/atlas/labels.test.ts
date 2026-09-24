@@ -1,6 +1,13 @@
 import { describe, expect, it } from "vitest"
 import type { EventPlacement, Occurrence } from "./domain"
-import { occurrenceLabel, placementLabel, reviewLabel, unplacedNote } from "./labels"
+import {
+  occurrenceLabel,
+  occurrenceModeNote,
+  playbackLabel,
+  placementLabel,
+  reviewLabel,
+  unplacedNote,
+} from "./labels"
 
 /**
  * Display text is where historical semantics become visible or disappear. These
@@ -88,10 +95,34 @@ describe("occurrenceLabel", () => {
   it("keeps the span and states the precision instead of rounding it away", () => {
     expect(occurrenceLabel(occurrence(753, 753, "day", "instant"))).toBe("753 · day precision")
     expect(occurrenceLabel(occurrence(750, 750, "month", "instant"))).toBe("750 · month precision")
-    expect(occurrenceLabel(occurrence(753, 754, "year", "occurrence_window"))).toBe(
-      "753–754 · year precision",
-    )
     expect(occurrenceLabel(occurrence(753, 753, "year", "instant"))).toBe("753")
+  })
+
+  it("distinguishes a duration from an uncertain occurrence window", () => {
+    expect(occurrenceLabel(occurrence(753, 754, "year", "occurrence_window"))).toBe(
+      "753–754 · year precision · uncertain span",
+    )
+    expect(occurrenceLabel(occurrence(753, 754, "day", "duration"))).toBe(
+      "753–754 · day precision · duration",
+    )
+  })
+})
+
+describe("playbackLabel and occurrenceModeNote", () => {
+  it("labels the playhead relation without implying certainty", () => {
+    expect(playbackLabel("active")).toBe("at playhead")
+    expect(playbackLabel("possible")).toBe("possible at playhead")
+    expect(playbackLabel("inactive")).toBeNull()
+  })
+
+  it("explains what the mode means", () => {
+    expect(occurrenceModeNote(occurrence(753, 754, "year", "occurrence_window"))).toContain(
+      "does not treat the span as continuous activity",
+    )
+    expect(occurrenceModeNote(occurrence(753, 754, "day", "duration"))).toContain(
+      "Activity supported across this span",
+    )
+    expect(occurrenceModeNote(occurrence(753, 753, "day", "instant"))).toBeNull()
   })
 })
 

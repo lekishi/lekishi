@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { SceneEvent } from "../scene"
-  import { occurrenceLabel, placementLabel } from "../labels"
+  import { occurrenceLabel, playbackLabel, placementLabel } from "../labels"
 
   let {
     events,
@@ -46,11 +46,16 @@
         >
           <span class="flex items-center justify-between gap-2">
             <span class="text-sm font-medium text-slate-100">{event.title}</span>
-            {#if event.active}
+            {#if playbackLabel(event.playback)}
               <span
-                class="shrink-0 rounded-full bg-emerald-400/15 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-emerald-300"
+                class={[
+                  "shrink-0 rounded-full px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide",
+                  event.playback === "active"
+                    ? "bg-emerald-400/15 text-emerald-300"
+                    : "border border-amber-300/60 text-amber-200",
+                ]}
               >
-                at playhead
+                {playbackLabel(event.playback)}
               </span>
             {/if}
           </span>

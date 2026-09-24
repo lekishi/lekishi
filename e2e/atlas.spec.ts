@@ -465,6 +465,42 @@ test("keeps a selection readable when the time window excludes it", async ({ pag
   await expect(page.locator("#atlas-window-start")).not.toHaveValue("753")
 })
 
+test("keeps an uncertain occurrence a possible match, never continuous activity", async ({
+  page,
+}) => {
+  await mountAtlas(page)
+
+  // The 753–754 drifts are occurrence windows: one occurrence at an unknown point
+  // inside the span, so the atlas must not present them as activity across it.
+  await selectEvent(page, "lks:event:kiyokawa-drift-753")
+
+  await expect(page.getByTestId("atlas-selection")).toContainText(
+    "753–754 · year precision · uncertain span",
+  )
+  await expect(page.getByTestId("atlas-selection")).toContainText(
+    "does not treat the span as continuous activity",
+  )
+
+  // Move the playhead into the span with the keyboard, so the check also covers
+  // real key input on the timeline.
+  await page.locator("#atlas-playhead").focus()
+
+  for (let year = 750; year < 753; year += 1) {
+    await page.keyboard.press("ArrowRight")
+  }
+
+  await expect(page.locator("#atlas-playhead-value")).toHaveText("753")
+
+  const driftRow = page.locator('[data-event-id="lks:event:kiyokawa-drift-753"]')
+  const durationRow = page.locator('[data-event-id="lks:event:return-voyage-753"]')
+
+  // The uncertain span is a possible match at the playhead; the duration that
+  // contains the same year is active. The two do not read alike.
+  await expect(driftRow).toContainText("possible at playhead")
+  await expect(durationRow).toContainText("at playhead")
+  await expect(durationRow).not.toContainText("possible")
+})
+
 test("steps chronologically and plays to the end of the window", async ({ page }) => {
   await mountAtlas(page)
 

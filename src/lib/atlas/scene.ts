@@ -1,7 +1,7 @@
 import type { Chapter, EventPlacement, GeoPoint, Occurrence } from "./domain"
 import type { AtlasState, CameraFocusRequest } from "./state"
-import { findEvent, isEventActive, selectionTimeStatus } from "./state"
-import { relationToWindow, type OccurrenceRelation } from "./time"
+import { findEvent, playbackState, selectionTimeStatus } from "./state"
+import { relationToWindow, type OccurrenceRelation, type PlaybackState } from "./time"
 
 /**
  * The renderer-facing view of the atlas.
@@ -22,7 +22,8 @@ export type SceneEvent = {
   readonly occurrence: Occurrence
   /** `definite` or `possible` inside the window; outside-window events are excluded. */
   readonly relation: Exclude<OccurrenceRelation, "outside">
-  readonly active: boolean
+  /** `active` at the playhead, `possible` for an uncertain occurrence window, or `inactive`. */
+  readonly playback: PlaybackState
   readonly selected: boolean
   /** A coda node of the chapter, outside the primary mission window. */
   readonly coda: boolean
@@ -64,7 +65,7 @@ export function buildScene(state: AtlasState, chapter: Chapter): AtlasScene {
       placement: event.placement,
       occurrence: event.occurrence,
       relation,
-      active: isEventActive(state, event),
+      playback: playbackState(state, event),
       selected: state.selectedEventId === event.id,
       coda: event.coda,
     })

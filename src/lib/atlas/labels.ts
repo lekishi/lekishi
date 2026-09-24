@@ -1,4 +1,5 @@
 import type { EventPlacement, Occurrence } from "./domain"
+import type { PlaybackState } from "./time"
 
 /**
  * Display text for the atlas surfaces.
@@ -16,10 +17,44 @@ export function occurrenceLabel(occurrence: Occurrence): string {
     occurrence.startYear === occurrence.endYear
       ? `${occurrence.startYear}`
       : `${occurrence.startYear}–${occurrence.endYear}`
+  const stated =
+    occurrence.precision === "year" && occurrence.mode === "instant"
+      ? span
+      : `${span} · ${occurrence.precision} precision`
 
-  return occurrence.precision === "year" && occurrence.mode === "instant"
-    ? span
-    : `${span} · ${occurrence.precision} precision`
+  // The mode is not decoration: an occurrence window is one occurrence at an
+  // unknown point inside the span, and a duration is supported activity. Saying
+  // which one it is keeps the two from reading alike.
+  if (occurrence.mode === "occurrence_window") {
+    return `${stated} · uncertain span`
+  }
+
+  return occurrence.mode === "duration" ? `${stated} · duration` : stated
+}
+
+/** The playhead badge text, or null when the event is not supported at the playhead. */
+export function playbackLabel(playback: PlaybackState): string | null {
+  if (playback === "active") {
+    return "at playhead"
+  }
+
+  return playback === "possible" ? "possible at playhead" : null
+}
+
+/**
+ * What the occurrence's mode means, for the details surface. An uncertain
+ * occurrence window must not be read as activity across the whole span.
+ */
+export function occurrenceModeNote(occurrence: Occurrence): string | null {
+  if (occurrence.mode === "occurrence_window") {
+    return "One occurrence somewhere inside this span; the atlas does not treat the span as continuous activity."
+  }
+
+  if (occurrence.mode === "duration") {
+    return "Activity supported across this span, not a single dated moment."
+  }
+
+  return null
 }
 
 /** The event's place, or the place the record names without placing the event. */

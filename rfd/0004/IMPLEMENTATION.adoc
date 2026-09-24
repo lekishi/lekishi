@@ -23,6 +23,7 @@ occurs before the authorization item below.
 
 - [ ] Publish the reviewed Tang fixture for the selected mission (RFD 1 Phase 0, RFD 2 Phase 1).
   - Prepared and self-reviewed: `historical/chapters/tang-mission-750-754/`, validated by `src/lib/historical/contract/tang-chapter.test.ts`. The item stays open because the owner's editorial approval of the published revision (AC2) is still pending and because the specialist reviews the feasibility report identifies have not been performed.
+  - The browser atlas now renders that chapter instead of the synthetic foundation fixture, through the browser-safe boundary in `src/lib/atlas/chapter-content.ts` and `projection.ts` (link:../0003/CONTENT_BOUNDARY.adoc[the chapter content boundary decision]): 29 published events (24 in the primary 750–754 window, 5 coda nodes outside it), 14 places, 13 of the 24 in-window events placed from a published place reference, and 11 kept in the non-map list with no invented coordinate. AC2 is not satisfied by this: the content still carries the preparing editor's self-review only.
 - [ ] Source-check the bounded Qin-conquest comparison fixture and keep it comparison-only (RFD 1 Phase 0).
 - [ ] Prepare the release artifact and deployment packaging without deploying (RFD 3 release preparation).
 - [ ] Build the shared comparison harness and baseline content, controls, and time behavior (RFD 3 Phase 0 comparison item).

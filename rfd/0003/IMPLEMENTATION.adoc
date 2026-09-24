@@ -27,8 +27,11 @@ acceptance criteria before dependent work and completion claims, respectively.
 == Phase 1 — Browser vertical slice
 
 - [ ] Implement renderer-independent RFD 2 time/filter/navigation logic and unit tests.
+  - The projection from published contract records into the atlas domain is implemented and tested (`src/lib/atlas/projection.ts`, `projection.test.ts`): it selects the newest published revision per record through the contract's own ordering, keeps date precision and bounded occurrences, and refuses to invent a position, a year, or a route. See link:CONTENT_BOUNDARY.adoc[the chapter content boundary decision].
 - [ ] Preserve versioned API/data contracts and portable historical behavior fixtures.
+  - The browser boundary bundles the chapter's own records and publication sets rather than a second copy, and `src/lib/historical/chapter.ts` keeps loading the same tree for the contract tests. The retained v1/v2 revision history stays in the source files.
 - [ ] Load reviewed content and complete the RFD 1 exploration loop.
+  - Reviewed content loads: the atlas renders the published Tang chapter through `src/lib/atlas/chapter-content.ts` and shows its real titles, dates, places, and coda nodes (link:CONTENT_BOUNDARY.adoc[content boundary decision]). The loop itself stays open: there is no search, sources, story navigation, or layer control, the coda nodes need a window change to reach, and the owner's editorial approval is still pending.
 - [ ] Verify resource disposal, responsive layout, loading failures, and local scrubbing.
 - [ ] Run ExUnit, relevant client tests, browser interactions, and inspected visual checks.
 

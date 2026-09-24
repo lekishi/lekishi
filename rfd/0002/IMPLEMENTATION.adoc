@@ -24,11 +24,17 @@ The Tang chapter fixture (`historical/chapters/tang-mission-750-754/`) now
 exercises the file-based workflow for one chapter: stable identities, sealed
 revisions, publication sets that record self-review and a complete review
 checklist, cited claims on every published place, actor, event, and relationship,
-and readable correction history through `Publication.history/2`. Every Phase 1
-item above stays open: they also cover the bounded Qin comparison fixture, the
-owner's recorded approval of the published revision, and the detail-panel
-dispute and alternative behavior that only exists once the exploration loop is
-implemented. The Gate 1 mission and coverage decision is in
+and readable correction history through `Publication.history/2`. The browser
+atlas renders the newest published revision of that chapter through the
+browser-safe boundary in `src/lib/atlas/chapter-content.ts` and
+`projection.ts`: records with no sourced map position stay listable and
+unmarked, a display anchor is never shown as an asserted location, and an
+undated or open-ended occurrence fails the projection instead of being guessed
+(link:../0003/CONTENT_BOUNDARY.adoc[the chapter content boundary decision]).
+Every Phase 1 item above stays open: they also cover the bounded Qin comparison
+fixture, the owner's recorded approval of the published revision, and the
+detail-panel dispute and alternative behavior that only exists once the
+exploration loop is implemented. The Gate 1 mission and coverage decision is in
 link:../0004/GATE1_DECISION.adoc[RFD 4's Gate 1 decision record].
 ====
 

@@ -110,6 +110,17 @@ async function openEventList(page: Page): Promise<void> {
   }
 }
 
+/**
+ * Selects one published event by its record id. The checks assert on records the
+ * chapter names, not on list positions, so a content correction cannot silently
+ * point a check at a different event.
+ */
+async function selectEvent(page: Page, eventId: string): Promise<void> {
+  await openEventList(page)
+  await page.locator(`[data-event-id="${eventId}"]`).click()
+  await expect(page.getByTestId("atlas-selection")).toBeVisible()
+}
+
 /** Sends one raw request line and returns the status line and body. */
 function rawRequest(port: number, target: string): Promise<{ status: string; body: string }> {
   return new Promise((resolve, reject) => {
@@ -154,7 +165,11 @@ test("serves a prerendered shell at /atlas before any script runs", async ({ req
   // Real HTML, not an empty SPA shell: the route, the mount point, and the
   // header are in the document a static host returns.
   expect(html.match(/id="atlas-workspace"/g)).toHaveLength(1)
-  expect(html).toContain("Atlas foundation")
+  expect(html).toContain("Reviewed chapter")
+  expect(html).toContain("The 750–754 embassy of 藤原朝臣清河")
+  // The deployed shell is the reviewed chapter, not the retired synthetic
+  // foundation fixture.
+  expect(html).not.toContain("Synthetic")
   // The client bootstrap is inlined and imports the client entry. The built
   // artifact serves that entry under a hashed `_app/immutable` path, which is
   // what the deployment depends on; the development server imports the kit
@@ -176,8 +191,13 @@ test("mounts one workspace from the built artifact", async ({ page }) => {
 
   const problems = await mountAtlas(page)
 
-  await expect(page.getByText("Synthetic fixture", { exact: false }).first()).toBeVisible()
-  await expect(page.getByTestId("atlas-event-item")).toHaveCount(5)
+  // The reviewed chapter, not a synthetic fixture: the notice names the chapter
+  // and its recorded review status, and the list holds its in-window events.
+  await expect(page.locator("#atlas-notice")).toContainText("Reviewed chapter")
+  await expect(page.locator("#atlas-notice")).toContainText("The 750–754 embassy of 藤原朝臣清河")
+  await expect(page.locator("#atlas-notice")).toContainText("Reviewed chapter · Self-review only")
+  await expect(page.getByTestId("atlas-event-item")).toHaveCount(24)
+  await expect(page.getByText("Synthetic", { exact: false })).toHaveCount(0)
   await expect(page.getByTestId("atlas-time-controls")).toBeVisible()
   await expect(page.getByTestId("atlas-globe")).toBeVisible()
 
@@ -208,7 +228,7 @@ test("loads /atlas directly and survives a reload", async ({ page }) => {
   await expect(page.locator("#atlas-workspace canvas").first()).toBeVisible({ timeout: 30_000 })
   await expect(page.getByTestId("atlas-workspace")).toHaveCount(1)
   await expect(page.locator("#atlas-workspace canvas")).toHaveCount(1)
-  await expect(page.getByTestId("atlas-event-item")).toHaveCount(5)
+  await expect(page.getByTestId("atlas-event-item")).toHaveCount(24)
 
   expect(problems).toEqual([])
 })
@@ -295,7 +315,7 @@ test("mounts the workspace through the trailing-slash redirect", async ({ page }
 
   await page.goto("/atlas/")
   await expect(page.locator("#atlas-workspace canvas").first()).toBeVisible({ timeout: 30_000 })
-  await expect(page.getByTestId("atlas-event-item")).toHaveCount(5)
+  await expect(page.getByTestId("atlas-event-item")).toHaveCount(24)
 
   // The browser ends on the clean URL, which is what makes the page's relative
   // asset references resolve.
@@ -428,37 +448,37 @@ test("amplifies only the Firefox/Linux Ctrl-wheel trackpad pinch", async ({ page
 test("keeps a selection readable when the time window excludes it", async ({ page }) => {
   await mountAtlas(page)
 
-  await openEventList(page)
-  await page.getByTestId("atlas-event-item").first().click()
-  await expect(page.getByTestId("atlas-selection")).toBeVisible()
-  await expect(page.getByTestId("atlas-selection")).toContainText("Fixture assembly")
+  await selectEvent(page, "lks:event:appointment-750")
+  await expect(page.getByTestId("atlas-selection")).toContainText("The court appoints the embassy")
   await expect(page.getByTestId("atlas-outside-time")).toHaveCount(0)
 
   // Move the window past the selected event: details stay, the map marker does not.
-  await page.locator("#atlas-window-start").fill("1230")
+  await page.locator("#atlas-window-start").fill("753")
   await expect(page.getByTestId("atlas-outside-time")).toBeVisible()
-  await expect(page.getByTestId("atlas-selection")).toContainText("Fixture assembly")
-  await expect(page.getByTestId("atlas-event-list")).not.toContainText("Fixture assembly")
+  await expect(page.getByTestId("atlas-selection")).toContainText("The court appoints the embassy")
+  await expect(page.getByTestId("atlas-event-list")).not.toContainText(
+    "The court appoints the embassy",
+  )
 
   await page.locator("#atlas-return-to-time").click()
   await expect(page.getByTestId("atlas-outside-time")).toHaveCount(0)
-  await expect(page.locator("#atlas-window-start")).not.toHaveValue("1230")
+  await expect(page.locator("#atlas-window-start")).not.toHaveValue("753")
 })
 
 test("steps chronologically and plays to the end of the window", async ({ page }) => {
   await mountAtlas(page)
 
   await page.locator("#atlas-step-forward").click()
-  await expect(page.locator("#atlas-playhead-value")).toHaveText("1204")
+  await expect(page.locator("#atlas-playhead-value")).toHaveText("751")
 
-  await page.locator("#atlas-window-end").fill("1210")
+  await page.locator("#atlas-window-end").fill("752")
   await page.locator("#atlas-play-toggle").click()
 
-  // Playback advances the playhead from 1204 and stops at the window end instead
+  // Playback advances the playhead from 751 and stops at the window end instead
   // of looping into a new window. Software WebGL makes one interaction take
   // seconds, so this asserts the lasting outcome rather than the transient
-  // "Pause" label: the fixture plays four years per second.
-  await expect(page.locator("#atlas-playhead-value")).toHaveText("1210", { timeout: 30_000 })
+  // "Pause" label: the chapter plays four years per second.
+  await expect(page.locator("#atlas-playhead-value")).toHaveText("752", { timeout: 30_000 })
   await expect(page.locator("#atlas-play-toggle")).toHaveText("Play")
 })
 
@@ -467,10 +487,14 @@ test("stops camera following on manual input without pausing playback", async ({
   hasTouch,
 }) => {
   test.skip(hasTouch, "Desktop pointer drag; the touch project covers taps.")
+  // Software WebGL makes each interaction take seconds and the drag has to
+  // outlast a playback window, so this check needs more than the default budget.
+  test.setTimeout(120_000)
 
   await mountAtlas(page)
 
-  await page.getByTestId("atlas-event-item").first().click()
+  // A placed event: following a selection the map cannot show has no target.
+  await selectEvent(page, "lks:event:tang-new-year-audience-753")
   await page.locator("#atlas-follow-toggle").click()
   await expect(page.locator("#atlas-follow-toggle")).toHaveAttribute("aria-pressed", "true")
 
@@ -479,8 +503,9 @@ test("stops camera following on manual input without pausing playback", async ({
   await expect(page.locator("#atlas-follow-toggle")).toHaveAttribute("aria-pressed", "true")
 
   // Widen the window so playback outlasts the interactions below: software WebGL
-  // makes one click take seconds, and the default window plays for twelve.
-  await page.locator("#atlas-window-end").fill("1400")
+  // makes one click take seconds, and a delayed tick advances the playhead by the
+  // wall-clock time it missed. The chapter's default window plays for one second.
+  await page.locator("#atlas-window-end").fill("2500")
   await page.locator("#atlas-play-toggle").click()
   await expect(page.locator("#atlas-play-toggle")).toHaveText("Pause")
 
@@ -490,7 +515,7 @@ test("stops camera following on manual input without pausing playback", async ({
 
   await page.mouse.move(box.x + box.width * 0.6, box.y + box.height * 0.55)
   await page.mouse.down()
-  await page.mouse.move(box.x + box.width * 0.75, box.y + box.height * 0.68, { steps: 8 })
+  await page.mouse.move(box.x + box.width * 0.75, box.y + box.height * 0.68, { steps: 4 })
   await page.mouse.up()
 
   await expect(page.locator("#atlas-follow-toggle")).toHaveAttribute("aria-pressed", "false")
@@ -515,9 +540,46 @@ test("selects events by tap on touch input", async ({ page, hasTouch }) => {
     await page.locator("#atlas-list-toggle").tap()
   }
 
-  await page.getByTestId("atlas-event-item").nth(3).tap()
+  await page.locator('[data-event-id="lks:event:yaku-arrival-753"]').tap()
   await expect(page.getByTestId("atlas-selection")).toBeVisible()
-  await expect(page.getByTestId("atlas-selection")).toContainText("Fixture landfall")
+  await expect(page.getByTestId("atlas-selection")).toContainText("益救島")
+})
+
+test("keeps events the chapter cannot place in the list without a map position", async ({
+  page,
+}) => {
+  await mountAtlas(page)
+
+  // 驩州 is named by the published record, but no identification is sourced, so
+  // the event is listable and unplaced.
+  await selectEvent(page, "lks:event:kiyokawa-drift-753")
+
+  await expect(page.getByTestId("atlas-selection")).toContainText("驩州")
+  await expect(page.getByTestId("atlas-unplaced")).toContainText(
+    "no identification is sourced for it",
+  )
+  await expect(page.locator("#atlas-follow-toggle")).toBeDisabled()
+
+  // The same holds for an event whose record names no place at all.
+  await selectEvent(page, "lks:event:appointment-750")
+
+  await expect(page.getByTestId("atlas-unplaced")).toContainText("names no place for this event")
+  await expect(page.locator("#atlas-follow-toggle")).toBeDisabled()
+})
+
+test("keeps the coda nodes outside the primary window until it is widened", async ({ page }) => {
+  await mountAtlas(page)
+
+  // The chapter's default window is the primary 750–754 mission window: the five
+  // coda nodes are outside it and must not be folded in. The list is the surface
+  // under test, so the notice panel's own coverage sentence is out of scope.
+  await expect(page.getByTestId("atlas-event-item")).toHaveCount(24)
+  await expect(page.getByTestId("atlas-event-list").getByText("coda node")).toHaveCount(0)
+
+  await page.locator("#atlas-window-end").fill("779")
+
+  await expect(page.getByTestId("atlas-event-item")).toHaveCount(29)
+  await expect(page.getByTestId("atlas-event-list").getByText("coda node")).toHaveCount(5)
 })
 
 test("reaches the controls with the keyboard", async ({ page }) => {
@@ -525,15 +587,15 @@ test("reaches the controls with the keyboard", async ({ page }) => {
 
   await page.locator("#atlas-step-forward").focus()
   await page.keyboard.press("Enter")
-  await expect(page.locator("#atlas-playhead-value")).toHaveText("1204")
+  await expect(page.locator("#atlas-playhead-value")).toHaveText("751")
 
   await page.locator("#atlas-step-back").focus()
   await page.keyboard.press("Enter")
-  await expect(page.locator("#atlas-playhead-value")).toHaveText("1204")
+  await expect(page.locator("#atlas-playhead-value")).toHaveText("750")
 
   await page.locator("#atlas-window-end").focus()
   await page.keyboard.press("ArrowUp")
-  await expect(page.locator("#atlas-window-end")).toHaveValue("1251")
+  await expect(page.locator("#atlas-window-end")).toHaveValue("755")
 })
 
 test("disposes the globe when the workspace is torn down", async ({ page }) => {
@@ -552,6 +614,10 @@ test("disposes the globe when the workspace is torn down", async ({ page }) => {
 })
 
 test("keeps the phone layout free of overlapping panels", async ({ page }) => {
+  // Two viewports, four overlay states each, and software WebGL: every click and
+  // every resize costs seconds, so this check needs more than the default budget.
+  test.setTimeout(120_000)
+
   await mountAtlas(page)
 
   // The two phone widths the responsive layout has to hold at: a large phone and a
@@ -598,5 +664,5 @@ test("restores exactly one workspace after a page transition", async ({ page }) 
   await expect(page.locator("#atlas-workspace canvas").first()).toBeVisible({ timeout: 30_000 })
   await expect(page.getByTestId("atlas-workspace")).toHaveCount(1)
   await expect(page.locator("#atlas-workspace canvas")).toHaveCount(1)
-  await expect(page.getByTestId("atlas-event-item")).toHaveCount(5)
+  await expect(page.getByTestId("atlas-event-item")).toHaveCount(24)
 })

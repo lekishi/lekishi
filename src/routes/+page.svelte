@@ -1,7 +1,12 @@
 <script lang="ts">
+  import { CHAPTER } from "$lib/atlas/chapter-content"
+  import { reviewLabel } from "$lib/atlas/labels"
+
   // The static root page: navigation into the atlas, and the project's
-  // non-negotiables stated where a reviewer will actually read them. It carries
-  // no application state, so it is prerendered exactly as written.
+  // non-negotiables stated where a reviewer will actually read them. The chapter
+  // facts come from the same projection the atlas renders, so this page cannot
+  // describe content the atlas does not show. It carries no application state,
+  // so it is prerendered exactly as written.
   const capabilities = [
     {
       title: "Globe first",
@@ -16,13 +21,23 @@
       body: "The versioned historical contract keeps citations, uncertainty, calendar precision, and reuse terms with the record they describe.",
     },
   ]
+
+  const chapterFacts = [
+    { label: "Events", value: `${CHAPTER.events.length}` },
+    { label: "Places", value: `${CHAPTER.places.length}` },
+    { label: "Coda nodes", value: `${CHAPTER.events.filter((event) => event.coda).length}` },
+    {
+      label: "No sourced map position",
+      value: `${CHAPTER.events.filter((event) => event.placement.kind === "none").length} of ${CHAPTER.events.length} events`,
+    },
+  ]
 </script>
 
 <svelte:head>
   <title>Lekishi · Historical atlas</title>
   <meta
     name="description"
-    content="Lekishi is an interactive historical atlas for exploring events and connections across places and time."
+    content="Lekishi is an interactive historical atlas for exploring events and connections across places and time. It currently ships the reviewed {CHAPTER.title}."
   />
 </svelte:head>
 
@@ -50,9 +65,13 @@
         Explore events and connections across places and time
       </h1>
       <p class="text-base leading-relaxed text-slate-300">
-        Lekishi is a browser atlas for reading history in place. The current build is the technical
-        foundation: the globe, selection, timeline, and responsive workspace are complete, and the
-        historical contract that reviewed content will arrive through is versioned and tested.
+        Lekishi is a browser atlas for reading history in place. The atlas now renders the first
+        reviewed chapter — {CHAPTER.title} — from the versioned
+        <code class="rounded bg-slate-900/80 px-1.5 py-0.5 text-[0.8em] text-slate-200"
+          >lekishi-historical-contract/v0</code
+        >
+        records: real titles, dates, and places, with the uncertainty and the places it cannot locate
+        stated rather than filled in. Search, sources, and story navigation are still being built.
       </p>
       <div class="flex flex-wrap items-center gap-3">
         <a
@@ -76,15 +95,32 @@
 
     <section class="rounded-2xl border border-amber-300/30 bg-amber-300/5 p-5">
       <h2 class="text-sm font-semibold uppercase tracking-[0.18em] text-amber-300">
-        Synthetic fixture
+        Reviewed chapter
       </h2>
+      <p class="mt-2 max-w-3xl text-sm leading-relaxed text-slate-300">{CHAPTER.summary}</p>
       <p class="mt-2 max-w-3xl text-sm leading-relaxed text-slate-300">
-        The atlas currently renders placeholder events used to exercise selection, time filtering,
-        camera following, and the responsive layout. They are not historical content and must not be
-        cited as evidence. Reviewed content arrives through the versioned
-        <code class="rounded bg-slate-900/80 px-1.5 py-0.5 text-[0.8em] text-slate-200"
-          >lekishi-historical-contract/v0</code
-        > schemas, examples, and adversarial vectors.
+        {CHAPTER.publication.coverageNote}
+      </p>
+
+      <dl class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {#each chapterFacts as fact (fact.label)}
+          <div class="rounded-xl border border-slate-800 bg-slate-950/60 px-3 py-2">
+            <dt class="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-slate-400">
+              {fact.label}
+            </dt>
+            <dd class="mt-0.5 text-sm font-semibold tabular-nums text-slate-100">{fact.value}</dd>
+          </div>
+        {/each}
+      </dl>
+
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300">
+        {reviewLabel(CHAPTER.publication.independence, CHAPTER.publication.reviewer)}
+        {CHAPTER.publication.reviewNotes}
+      </p>
+      <p class="mt-2 text-xs text-slate-400">
+        Published by {CHAPTER.publication.setIds.join(", ")}. Owner editorial approval under RFD 2
+        and the specialist reviews are still pending, so this is not a claim of complete coverage or
+        of independent review.
       </p>
     </section>
   </main>

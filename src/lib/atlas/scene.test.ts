@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { FIXTURE_CHAPTER } from "./fixtures"
-import { buildScene } from "./scene"
+import { buildScene, placementPoint } from "./scene"
 import {
   createAtlasState,
   resumeCameraFollow,
@@ -71,5 +71,29 @@ describe("buildScene", () => {
 
     expect(roundTripped).toEqual(scene)
     expect(Object.getPrototypeOf(roundTripped)).toBe(Object.prototype)
+  })
+
+  it("keeps a list-only event in the scene without a map position", () => {
+    const scene = buildScene(initial, chapter)
+    const landfall = scene.events.find((event) => event.id === "event-island-landfall")
+
+    expect(landfall?.placement).toEqual({
+      kind: "none",
+      placeId: "place-island-stop",
+      label: "Sample island",
+      reason: "no-position",
+    })
+    expect(placementPoint(landfall!.placement)).toBeNull()
+  })
+
+  it("follows only a selection the map can show", () => {
+    const following = resumeCameraFollow(initial, chapter)
+    const placed = selectEvent(following, chapter, "event-harbor-assembly")
+    const unplaced = selectEvent(following, chapter, "event-island-landfall")
+
+    expect(buildScene(placed, chapter).cameraTarget).toEqual({ lon: 129.9, lat: 32.8 })
+    // Following an event with no published position would have to invent one.
+    expect(buildScene(unplaced, chapter).cameraTarget).toBeNull()
+    expect(buildScene(unplaced, chapter).selectedEventId).toBe("event-island-landfall")
   })
 })

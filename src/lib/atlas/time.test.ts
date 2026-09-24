@@ -9,8 +9,9 @@ function occurrence(
   startYear: number,
   endYear: number,
   precision: Occurrence["precision"] = "year",
+  mode: Occurrence["mode"] = startYear === endYear ? "instant" : "occurrence_window",
 ): Occurrence {
-  return { startYear, endYear, precision }
+  return { startYear, endYear, precision, mode, sourceExpression: null }
 }
 
 describe("relationToWindow", () => {

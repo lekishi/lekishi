@@ -110,9 +110,10 @@
           {review.coverageNote}
         </p>
         <p class="mt-1 text-[0.65rem] leading-snug text-amber-200/80">
-          {CHAPTER.defaultWindow.start}–{CHAPTER.defaultWindow.end} with {codaEvents} coda nodes outside
-          it; {unplacedInWindow} of {inWindowEvents.length} in-window events and {unlocatedPlaces}
-          places carry no sourced map position.
+          {CHAPTER.defaultWindow.start}–{CHAPTER.defaultWindow.end} with {codaEvents} coda
+          {codaEvents === 1 ? "node" : "nodes"} outside it; {unplacedInWindow} of {inWindowEvents.length}
+          in-window events and {unlocatedPlaces} of {CHAPTER.places.length} places without a sourced map
+          position.
         </p>
       </div>
 

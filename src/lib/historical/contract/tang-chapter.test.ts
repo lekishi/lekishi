@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest"
 import { chapterDirectory, loadChapter, type ChapterTree } from "../chapter"
 import { revisionHash, sourceHash } from "./canonical"
 import * as Publication from "./publication"
+import { sealAll } from "./seal"
 import * as Time from "./time"
 import { isObject, listOf, objectOf, type JsonObject, type JsonValue } from "./types"
 
@@ -220,9 +221,17 @@ function variantViolations(chapter: ChapterTree): string[] {
   const violations: string[] = []
   const biographyArrival = recordById(chapter, "lks:event:yaku-arrival-753")
   const chronicleArrival = recordById(chapter, "lks:event:kibi-yaku-arrival-753")
+  const biographyMainClaims = claimsOf(biographyArrival).filter((claim) => claim["role"] === "main")
+  const biographyMainSources = [
+    ...new Set(
+      biographyMainClaims.flatMap((claim) =>
+        listOf(claim["citations"]).map((citation) => String(objectOf(citation)["source_id"])),
+      ),
+    ),
+  ].sort()
 
-  if (citedSourceIds(biographyArrival).join() !== "lks:source:toseiden") {
-    violations.push("the biography's island arrival must cite the biography alone")
+  if (biographyMainSources.join() !== "lks:source:toseiden") {
+    violations.push("the biography's island-arrival facts must cite the biography alone")
   }
 
   if (citedSourceIds(chronicleArrival).join() !== "lks:source:shoku-nihongi") {
@@ -240,6 +249,22 @@ function variantViolations(chapter: ChapterTree): string[] {
   }
 
   return violations
+}
+
+/** The cited chapter evidence does not establish one continuous Nakamaro role through 779. */
+function nakamaroRoleViolations(chapter: ChapterTree): string[] {
+  const record = recordById(chapter, "lks:actor:abe-no-nakamaro")
+
+  return listOf(contentOf(record)["roles"]).flatMap((roleValue) => {
+    const validity = objectOf(objectOf(roleValue)["validity"])
+    const interval = objectOf(validity["interval"])
+    const start = objectOf(interval["start"])
+    const end = objectOf(interval["end"])
+
+    return validity["mode"] === "duration" && start["year"] === 753 && end["year"] === 779
+      ? ["Abe no Nakamaro has an unsupported continuous role from 753 through the 779 report"]
+      : []
+  })
 }
 
 /** Coda nodes are labelled in the story as well as in their own records. */
@@ -497,10 +522,16 @@ describe("the Tang chapter fixture", () => {
     expect(places).toEqual([
       "lks:place:huangsipu",
       "lks:place:ajinawa",
-      "lks:place:tane",
       "lks:place:yaku",
       "lks:place:akimeya",
     ])
+
+    const separation = recordById(chapter, "lks:event:ships-separate-753")
+
+    expect(String(contentOf(separation)["summary"])).toContain("sets out for 多禰島")
+    expect(listOf(contentOf(voyage)["places"])).not.toContainEqual(
+      expect.objectContaining({ place_id: "lks:place:tane" }),
+    )
   })
 
   it("keeps the island-name variant and the two island arrivals separate", () => {
@@ -526,6 +557,38 @@ describe("the Tang chapter fixture", () => {
     expect(String(time["source_expression"])).toContain("壬子")
     expect(editorialNotes(returnReport)).toContain("正月十一日丁未")
     expect(editorialNotes(returnReport)).toContain("正月十二日")
+
+    for (const recordId of [
+      "lks:event:return-report-754",
+      "lks:event:jianzhen-death-763",
+      "lks:event:yaku-arrival-753",
+    ]) {
+      const record = recordById(chapter, recordId)
+      const revision = publishedRevision(record)
+      const dispute = objectOf(revision["dispute"])
+      const competingRoles = claimsOf(record).map((claim) => claim["role"])
+
+      expect(dispute["status"], recordId).toBe("disputed")
+      expect(competingRoles, recordId).toEqual(
+        expect.arrayContaining([expect.stringMatching(/alternative|conflicting/)]),
+      )
+    }
+
+    const history = Publication.history(chapter.documents, chapter.sets)
+
+    expect(history["lks:event:return-report-754"]?.[0]?.dispute_status).toBe("disputed")
+    expect(history["lks:event:jianzhen-death-763"]?.[0]?.dispute_status).toBe("disputed")
+    expect(history["lks:event:yaku-arrival-753"]?.[0]?.dispute_status).toBe("disputed")
+  })
+
+  it("does not turn Nakamaro's 779 death report into continuous role validity", () => {
+    expect(nakamaroRoleViolations(tree())).toEqual([])
+  })
+
+  it("refuses to reseal published chapter history", () => {
+    expect(() => sealAll(chapterDirectory(CHAPTER))).toThrow(
+      "published chapter content requires a new revision and publication set",
+    )
   })
 
   it("carries citations and explicit uncertainty on every published record", () => {
@@ -593,6 +656,32 @@ describe("adversarial readings of the Tang chapter", () => {
     }
 
     expect(routeViolations(chapter)).not.toEqual([])
+  })
+
+  it("rejects treating Nakamaro's death-report year as continuous role validity", () => {
+    const chapter = cloneTree(tree())
+    const record = recordById(chapter, "lks:actor:abe-no-nakamaro")
+    const content = objectOf(publishedRevision(record)["content"])
+
+    content["roles"] = [
+      {
+        role: "scholar",
+        validity: {
+          source_expression: "753 appearance; 779 death report",
+          calendar: "regnal",
+          precision: "year",
+          mode: "duration",
+          interval: {
+            bounds: "two_sided",
+            boundary: "inclusive",
+            start: { year: 753, era: "ce" },
+            end: { year: 779, era: "ce" },
+          },
+        },
+      },
+    ]
+
+    expect(nakamaroRoleViolations(chapter)).not.toEqual([])
   })
 
   it("rejects a published day for the return report the sources disagree on", () => {

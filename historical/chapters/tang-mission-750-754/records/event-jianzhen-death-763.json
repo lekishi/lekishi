@@ -49,7 +49,7 @@
           "statement": "The chronicle's notice records his death on 天平寶字七年五月戊申 at age 77.",
           "asserts": "/time",
           "basis": "attested",
-          "role": "supporting",
+          "role": "conflicting",
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
@@ -58,12 +58,16 @@
           ]
         }
       ],
-      "revision_hash": "sha256:887f1d407d85b543094e6e2045d54ed5fab73b93f31a3335f23f5c886382829c"
+      "dispute": {
+        "status": "disputed",
+        "summary": "The biography gives age 76 and the chronicle gives age 77; they also express the day differently. The chapter publishes month precision and does not resolve either difference."
+      },
+      "revision_hash": "sha256:6ebff3e47bf013b1068d646fb02caa4aa89af3f276d62ffdb040f895a8c18041"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:jianzhen-death-763-1",
-    "published_revision_hash": "sha256:887f1d407d85b543094e6e2045d54ed5fab73b93f31a3335f23f5c886382829c",
+    "published_revision_hash": "sha256:6ebff3e47bf013b1068d646fb02caa4aa89af3f276d62ffdb040f895a8c18041",
     "set_id": "lks:set:tang-mission-750-754-v1",
     "published_at": "2026-09-24T08:00:00Z",
     "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}

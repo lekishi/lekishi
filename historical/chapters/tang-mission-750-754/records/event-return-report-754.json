@@ -11,7 +11,7 @@
       "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
       "change_explanation": "Initial chapter event: 古麻呂's return with 鑒眞 and 法進, with the sources' differing day expressions kept in the notes.",
       "content": {
-        "summary": "大伴古麻呂 returns to court in 天平勝寶六年正月 (754), with 鑒眞, 法進, and eight others coming back with him. The biography separately records his report that 鑒眞 reached 大宰府.",
+        "summary": "大伴古麻呂 returns to court in 天平勝寶六年正月 (754), with eight people including 鑒眞 and 法進 coming back with him. The biography separately records his report that 鑒眞 reached 大宰府.",
         "event_types": ["mission"],
         "time": {
           "source_expression": "天平勝寶六年正月壬子 入唐副使從四位上大伴宿祢古麻呂來歸",
@@ -35,7 +35,7 @@
       "claims": [
         {
           "claim_id": "lks:claim:return-report-time",
-          "statement": "The chronicle records 大伴宿祢古麻呂 returning on 天平勝寶六年正月壬子 with 鑒眞, 法進, and eight others.",
+          "statement": "The chronicle records 大伴宿祢古麻呂 returning on 天平勝寶六年正月壬子 with eight people including 鑒眞 and 法進.",
           "asserts": "/time",
           "basis": "attested",
           "role": "main",
@@ -52,7 +52,7 @@
           "statement": "The biography records 古麻呂 reporting on 天平勝寶六年正月十一日丁未 that 鑒眞 had reached 大宰府; a variant transcription reads 十二日, so no day is published.",
           "asserts": "/time",
           "basis": "attested",
-          "role": "supporting",
+          "role": "conflicting",
           "citations": [
             {
               "source_id": "lks:source:toseiden",
@@ -74,12 +74,16 @@
           ]
         }
       ],
-      "revision_hash": "sha256:247d2d33fb1984b9e104ce9b7bcec54b4cb2294e82e2e82d9c845dd42490b34f"
+      "dispute": {
+        "status": "disputed",
+        "summary": "The chronicle and biography give different day expressions for 古麻呂's return report, and another transcription of the biography differs by one day. The chapter publishes month precision rather than choosing among them."
+      },
+      "revision_hash": "sha256:d3ea319668f6b69fe91a955d4026402a84e98f9c33ffa91f6fe7bee094456b7e"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:return-report-754-1",
-    "published_revision_hash": "sha256:247d2d33fb1984b9e104ce9b7bcec54b4cb2294e82e2e82d9c845dd42490b34f",
+    "published_revision_hash": "sha256:d3ea319668f6b69fe91a955d4026402a84e98f9c33ffa91f6fe7bee094456b7e",
     "set_id": "lks:set:tang-mission-750-754-v1",
     "published_at": "2026-09-24T08:00:00Z",
     "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}

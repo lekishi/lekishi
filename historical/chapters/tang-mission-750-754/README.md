@@ -94,10 +94,11 @@ The chapter is loaded through the content boundary in
 pnpm test        # includes src/lib/historical/contract/tang-chapter.test.ts
 ```
 
-After editing any file here, reseal the hashes with `pnpm seal` (it seals the
-worked examples and this chapter), then review the change as a new revision or a
-new source document — an edited approved revision or source must fail the tests
-until it is republished.
+Do not run `pnpm seal` over this directory. That command is deliberately limited
+to the synthetic worked examples. Correcting chapter content requires a new
+revision or source document and a new publication set, preserving the hashes and
+review metadata that approved the existing publication. An in-place edit to an
+approved revision or source must fail validation rather than being resealed.
 
 ## Limitations that must be stated wherever this content appears
 

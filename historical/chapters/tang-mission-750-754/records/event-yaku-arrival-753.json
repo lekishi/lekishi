@@ -29,7 +29,7 @@
           {"place_id": "lks:place:yaku", "role": "site"}
         ],
         "part_of": [{"event_id": "lks:event:return-voyage-753"}],
-        "editorial_notes": "This event and the chronicle's report of 吉備真備's ship are kept as two records: the cited passages do not state that they describe the same ship, and the chapter does not decide that question."
+        "editorial_notes": "This event and the chronicle's report of 吉備真備's ship are kept as two records: the cited passages do not state that they describe the same ship, and the chapter does not decide that question. The cited study also records a scholarly disagreement over whether 七日 means the seventh day or seven days elapsed, so the source reading remains visibly disputed."
       },
       "claims": [
         {
@@ -57,14 +57,32 @@
               "locator": {"kind": "entry", "value": "七日，至益救島"}
             }
           ]
+        },
+        {
+          "claim_id": "lks:claim:yaku-arrival-day-reading",
+          "statement": "The cited study records competing readings of 七日 as the seventh day and as seven days elapsed; the chapter does not resolve that interpretation.",
+          "asserts": "/time",
+          "basis": "cited_interpretation",
+          "role": "alternative",
+          "attributed_to": "高良倉吉・山里純一ほか (2009)",
+          "citations": [
+            {
+              "source_id": "lks:source:ryukyu-university-tokara",
+              "locator": {"kind": "page", "value": "24"}
+            }
+          ]
         }
       ],
-      "revision_hash": "sha256:df608abdb6a49f7fc3e320ee4248f7742fc58aabbfed8723c0f63782c96f8a5c"
+      "dispute": {
+        "status": "disputed",
+        "summary": "A cited study records competing readings of the biography's 七日 as a calendar day or elapsed duration. The chapter retains the transcription's day expression and exposes the alternative without resolving it."
+      },
+      "revision_hash": "sha256:a8edb822124304bb92c0f76777bf0546fdb6354aa300e5bccd0c043ce4e59f61"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:yaku-arrival-753-1",
-    "published_revision_hash": "sha256:df608abdb6a49f7fc3e320ee4248f7742fc58aabbfed8723c0f63782c96f8a5c",
+    "published_revision_hash": "sha256:a8edb822124304bb92c0f76777bf0546fdb6354aa300e5bccd0c043ce4e59f61",
     "set_id": "lks:set:tang-mission-750-754-v1",
     "published_at": "2026-09-24T08:00:00Z",
     "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}

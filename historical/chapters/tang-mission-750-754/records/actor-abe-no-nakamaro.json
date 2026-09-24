@@ -42,24 +42,6 @@
           }
         ],
         "actor_types": ["person"],
-        "roles": [
-          {
-            "role": "scholar",
-            "validity": {
-              "source_expression": "天寶十二載十月十五日壬午 安倍朝臣朝衡; 寶龜十年五月丙寅 前學生阿倍朝臣仲麻呂",
-              "calendar": "regnal",
-              "precision": "year",
-              "mode": "duration",
-              "interval": {
-                "bounds": "two_sided",
-                "boundary": "inclusive",
-                "start": {"year": 753, "era": "ce"},
-                "end": {"year": 779, "era": "ce"}
-              }
-            },
-            "note": "Named among the envoys in 753 and called 前學生 (former student) in the 779 notice; his earlier career is outside this chapter's coverage."
-          }
-        ],
         "external_ids": [
           {
             "system": "wikidata",
@@ -105,31 +87,14 @@
               "locator": {"kind": "chapter", "value": "卷220 東夷 日本"}
             }
           ]
-        },
-        {
-          "claim_id": "lks:claim:nakamaro-role",
-          "statement": "The biography names 安倍朝臣朝衡 among the envoys in 753, and the chronicle's 寶龜十年五月 notice records that the former student 阿倍朝臣仲麻呂 died in Tang and that funeral gifts were granted to his household.",
-          "asserts": "/roles/0",
-          "basis": "attested",
-          "role": "main",
-          "citations": [
-            {
-              "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "天寶十二載 十月十五日壬午"}
-            },
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第卅五 寶龜十年五月丙寅"}
-            }
-          ]
         }
       ],
-      "revision_hash": "sha256:fc6c67979c87fa6886f61d40c020901fa2198a0255ee4d572dafed4b1083744a"
+      "revision_hash": "sha256:e47461c529ee3e8cb682ca3ad43d29921ee943a32924febb0ae04cbe2e1eaed0"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:nakamaro-1",
-    "published_revision_hash": "sha256:fc6c67979c87fa6886f61d40c020901fa2198a0255ee4d572dafed4b1083744a",
+    "published_revision_hash": "sha256:e47461c529ee3e8cb682ca3ad43d29921ee943a32924febb0ae04cbe2e1eaed0",
     "set_id": "lks:set:tang-mission-750-754-v1",
     "published_at": "2026-09-24T08:00:00Z",
     "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}

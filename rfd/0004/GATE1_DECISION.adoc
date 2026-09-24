@@ -130,8 +130,10 @@ kept textual variants, and adversarial readings that must be rejected.
 * Loading boundary: `src/lib/historical/chapter.ts`, so the chapter is loadable
 through the existing contract without a second validator and without a renderer
 dependency.
-* Sealing: `pnpm seal` now reseals the worked examples and this chapter;
-`pnpm verify` is the full check.
+* Sealing: the prepared fixture carries sealed hashes and publication pins, but
+  `pnpm seal` remains limited to synthetic examples. Corrections to reviewed
+  chapter content require a new revision or source and publication set;
+  `pnpm verify` detects in-place edits.
 
 == Open items carried forward
 

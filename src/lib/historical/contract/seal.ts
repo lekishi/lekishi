@@ -32,6 +32,18 @@ export function examplesDirectory(): string {
 }
 
 export function sealAll(directory: string = examplesDirectory()): void {
+  const chaptersDirectory = path.resolve(examplesDirectory(), "..", "..", "chapters")
+  const targetDirectory = path.resolve(directory)
+
+  if (
+    targetDirectory === chaptersDirectory ||
+    targetDirectory.startsWith(`${chaptersDirectory}${path.sep}`)
+  ) {
+    throw new Error(
+      "sealAll only reseals the synthetic worked examples; published chapter content requires a new revision and publication set",
+    )
+  }
+
   const sourceHashes = sealSources(directory)
   const recordHashes = sealRecords(directory)
 

@@ -64,24 +64,25 @@ documented by the reference semantics, and validates the reviewed Tang chapter
 with its own coverage, coda, and exclusion checks. `pnpm verify` runs the full
 check.
 
-## Reseal after editing content
+## Reseal synthetic examples after editing them
 
 Hashes are the anchor that keeps approved content from being rewritten silently.
-After editing an example revision, a source document, or chapter content,
-recompute them:
+After editing a synthetic example revision or source document, recompute it:
 
 ```bash
 pnpm seal
 ```
 
-Sealing rewrites each source document's `source_hash`, each revision's
+Sealing rewrites each synthetic source document's `source_hash`, each revision's
 `revision_hash`, the record's publication mirror, and the publication set's
-member and source pins, for the synthetic examples and for
-`historical/chapters/tang-mission-750-754`. Replacement is positional, so an
-author's placeholder (`sha256:000...001`) or a stale hash is replaced either way
-and the hand-written formatting is preserved. The tests fail if a revision or
-source no longer matches its stored hash, or if a publication set pin no longer
-matches the content it approved.
+member and source pins. Replacement is positional, so an author's placeholder
+(`sha256:000...001`) or a stale hash is replaced either way and the hand-written
+formatting is preserved.
+
+`pnpm seal` refuses reviewed chapter directories. Chapter corrections require a
+new revision or source document and a new publication set; the existing hashes
+and review metadata remain immutable. Tests fail if an approved revision or
+source no longer matches its stored hash or publication pin.
 
 Approved source metadata is immutable: correcting a title or a license means
 adding a new source document (new `source_id`, optional `supersedes_source_id`),

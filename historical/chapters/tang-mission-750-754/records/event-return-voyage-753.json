@@ -28,7 +28,6 @@
         "places": [
           {"place_id": "lks:place:huangsipu", "role": "start"},
           {"place_id": "lks:place:ajinawa", "role": "waypoint"},
-          {"place_id": "lks:place:tane", "role": "waypoint"},
           {"place_id": "lks:place:yaku", "role": "waypoint"},
           {"place_id": "lks:place:akimeya", "role": "end"}
         ],
@@ -59,7 +58,7 @@
         },
         {
           "claim_id": "lks:claim:return-voyage-places",
-          "statement": "The biography names the landfalls along the return: 阿兒奈波島, 多禰島, 益救島, and 薩摩國阿多郡秋妻屋浦.",
+          "statement": "The biography names the attested landfalls along the return as 阿兒奈波島, 益救島, and 薩摩國阿多郡秋妻屋浦; it names 多禰島 only as the second ship's intended destination.",
           "asserts": "/places",
           "basis": "attested",
           "role": "main",
@@ -84,12 +83,12 @@
           ]
         }
       ],
-      "revision_hash": "sha256:4ab7250008e000110e3d110bcb0c523b59797662fd3147f4806689acf1ab2250"
+      "revision_hash": "sha256:e223963e2a2ce989b17d13f43ac210c8a723dac851eb034b7f015a0ff2b45a3b"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:return-voyage-753-1",
-    "published_revision_hash": "sha256:4ab7250008e000110e3d110bcb0c523b59797662fd3147f4806689acf1ab2250",
+    "published_revision_hash": "sha256:e223963e2a2ce989b17d13f43ac210c8a723dac851eb034b7f015a0ff2b45a3b",
     "set_id": "lks:set:tang-mission-750-754-v1",
     "published_at": "2026-09-24T08:00:00Z",
     "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}

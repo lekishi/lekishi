@@ -139,6 +139,37 @@ if (!scriptText.includes("/cesium/")) {
   fail("no built script sets the /cesium/ base URL the renderer needs at runtime")
 }
 
+// --- reviewed chapter content --------------------------------------------------
+
+// The atlas renders the reviewed chapter, and its content boundary throws at
+// module scope when the chapter cannot be projected, so a build that got this
+// far has a valid chapter. These checks are about what the artifact contains.
+// The markers are the chapter's own id and a published record id — and, in the
+// prerendered shell, the chapter title a reader sees — so replacing or renaming
+// the chapter fails this check until the invariant is updated with it.
+for (const marker of ["tang-mission-750-754", "lks:event:appointment-750"]) {
+  if (!scriptText.includes(marker)) {
+    fail(`the built scripts do not carry the reviewed chapter: ${marker} is missing`)
+  }
+}
+
+for (const marker of [
+  "Synthetic foundation fixture",
+  "Fixture assembly",
+  "Sample harbor",
+  "event-harbor-assembly",
+]) {
+  if (scriptText.includes(marker)) {
+    fail(`the built scripts still carry synthetic fixture content: ${marker}`)
+  }
+}
+
+// The prerendered shell names the chapter it renders, so a direct request for
+// /atlas is already about the reviewed content before any script runs.
+if (!atlasHtml.includes("The 750–754 embassy of 藤原朝臣清河")) {
+  fail("atlas.html does not name the reviewed chapter the atlas renders")
+}
+
 // --- Cesium runtime -----------------------------------------------------------
 
 requireFile(path.join(buildDirectory, "cesium", "Workers", "createTaskProcessorWorker.js"))

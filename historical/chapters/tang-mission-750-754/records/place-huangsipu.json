@@ -7,8 +7,11 @@
   "revisions": [
     {
       "revision_id": "lks:rev:huangsipu-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter place: the departure point named in the biography, with a city-level display anchor only.",
       "content": {
         "summary": "蘇州黃泗浦, the place from which the four ships put to sea on 天寶十二載十一月十五日 (753), named in the biography as 蘇州黃泗浦. The exact landing is not identified, so the anchor marks the modern prefecture city only.",
@@ -34,12 +37,20 @@
             "claim_id": "lks:claim:huangsipu-name"
           }
         ],
-        "place_types": ["port"],
+        "place_types": [
+          "port"
+        ],
         "geometry": [
           {
             "claim_id": "lks:claim:huangsipu-anchor",
             "interpretation": "display_anchor",
-            "geojson": {"type": "Point", "coordinates": [120.6194, 31.3]},
+            "geojson": {
+              "type": "Point",
+              "coordinates": [
+                120.6194,
+                31.3
+              ]
+            },
             "precision": "unspecified",
             "notes": "Label anchor at the modern city of Suzhou (Wikidata Q42622). It is not an asserted historical coordinate and does not place the 浦, whose exact location is not identified here."
           }
@@ -64,7 +75,10 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "十一月十五日壬子，四舟同發"}
+              "locator": {
+                "kind": "entry",
+                "value": "十一月十五日壬子，四舟同發"
+              }
             }
           ]
         },
@@ -77,19 +91,25 @@
           "citations": [
             {
               "source_id": "lks:source:wikidata",
-              "locator": {"kind": "dataset_row", "value": "Q42622 (P625)"}
+              "locator": {
+                "kind": "dataset_row",
+                "value": "Q42622 (P625)"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:5bea9d3531be329fa50e384d58e4e62f5747286d524457e4d2746241bf1d37e8"
+      "revision_hash": "sha256:b4726801c9eedb4df1ce3b88e55de77674d982670f32636234bb87f033f36efc"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:huangsipu-1",
-    "published_revision_hash": "sha256:5bea9d3531be329fa50e384d58e4e62f5747286d524457e4d2746241bf1d37e8",
+    "published_revision_hash": "sha256:b4726801c9eedb4df1ce3b88e55de77674d982670f32636234bb87f033f36efc",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

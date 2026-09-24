@@ -7,12 +7,17 @@
   "revisions": [
     {
       "revision_id": "lks:rev:jianzhen-transmission-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter relationship: the itemized transmission 鑒眞 brought, recorded as a documented transfer, not as doctrinal influence.",
       "content": {
         "summary": "The transmission the biography itemizes: forty-eight items of texts, images, and ritual objects brought by 鑒眞, including the Tiantai texts, Xuanzang's 西域記, and calligraphy by 王羲之 and 王獻之, together with the precept lineage he established. The relationship records a documented transfer, not an assessment of its later influence.",
-        "relationship_types": ["transmission"],
+        "relationship_types": [
+          "transmission"
+        ],
         "from": "lks:actor:jianzhen",
         "to": "lks:place:todaiji",
         "directionality": "directed",
@@ -25,8 +30,14 @@
           "interval": {
             "bounds": "two_sided",
             "boundary": "inclusive",
-            "start": {"year": 753, "era": "ce"},
-            "end": {"year": 754, "era": "ce"}
+            "start": {
+              "year": 753,
+              "era": "ce"
+            },
+            "end": {
+              "year": 754,
+              "era": "ce"
+            }
           }
         },
         "editorial_notes": "The list is itemized in the biography and is published as the biography states it. The chapter does not claim that the items changed Japanese practice, and it does not reproduce the list in full."
@@ -41,23 +52,32 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "所將如來肉舍利三千粒…《天台止觀法門》…玄奘法師《西域記》…合四十八部"}
+              "locator": {
+                "kind": "entry",
+                "value": "所將如來肉舍利三千粒…《天台止觀法門》…玄奘法師《西域記》…合四十八部"
+              }
             },
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "天平勝寶六年甲午，二月四日…引入東大寺安置"}
+              "locator": {
+                "kind": "entry",
+                "value": "天平勝寶六年甲午，二月四日…引入東大寺安置"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:223b243f9e1c27603c8080a1e6faec2339965f987f531569551275ee87d74d91"
+      "revision_hash": "sha256:5461670c84605c204c99dd1b135e153a7c8c1226a34eee44d215b1f150b7e251"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:jianzhen-transmission-1",
-    "published_revision_hash": "sha256:223b243f9e1c27603c8080a1e6faec2339965f987f531569551275ee87d74d91",
+    "published_revision_hash": "sha256:5461670c84605c204c99dd1b135e153a7c8c1226a34eee44d215b1f150b7e251",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

@@ -7,76 +7,7 @@
   "revisions": [
     {
       "revision_id": "lks:rev:ishigaki-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {
-        "name": "Lekishi editorial preparation",
-        "role": "preparing editor (owner-instructed)"
-      },
-      "change_explanation": "Initial chapter place: the attested landing name kept without a map placement because no identification is sourced in this fixture.",
-      "content": {
-        "summary": "石籬浦, in 薩摩國, where the chronicle records the fourth ship's judge 布勢人主 and his party arriving on 天平勝寶六年四月癸未 (754).",
-        "names": [
-          {
-            "form": "石籬浦",
-            "script": "Hani",
-            "language": "ja",
-            "role": "primary",
-            "claim_id": "lks:claim:ishigaki-name"
-          }
-        ],
-        "place_types": [
-          "port"
-        ],
-        "geometry": [
-          {
-            "claim_id": "lks:claim:ishigaki-location",
-            "interpretation": "unknown",
-            "geojson": null,
-            "precision": "unspecified",
-            "notes": "The name is source-attested but no modern identification is sourced in this fixture, so no map position is manufactured. The record stays readable in lists and details."
-          }
-        ],
-        "editorial_notes": "The Wave 1A report records the identification as still to be sourced; the fixture publishes the attested name and the dated arrival without a placement."
-      },
-      "claims": [
-        {
-          "claim_id": "lks:claim:ishigaki-name",
-          "statement": "The chronicle records the fourth ship's judge 布勢人主 arriving at 薩摩國石籬浦 on 天平勝寶六年四月癸未.",
-          "asserts": "/names/0",
-          "basis": "attested",
-          "role": "main",
-          "citations": [
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {
-                "kind": "entry",
-                "value": "卷第十九 天平勝寶六年四月癸未"
-              }
-            }
-          ]
-        },
-        {
-          "claim_id": "lks:claim:ishigaki-location",
-          "statement": "No modern identification of 石籬浦 is sourced in this fixture, so the record carries no coordinates.",
-          "asserts": "/geometry/0",
-          "basis": "attested",
-          "role": "main",
-          "citations": [
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {
-                "kind": "entry",
-                "value": "卷第十九 天平勝寶六年四月癸未"
-              }
-            }
-          ]
-        }
-      ],
-      "revision_hash": "sha256:4bbfed4aee865bfe847e06a07dfd0d3059ed0af6d6373da15c6db9912bb6f15b"
-    },
-    {
-      "revision_id": "lks:rev:ishigaki-2",
-      "created_at": "2026-09-24T22:30:00Z",
+      "created_at": "2026-09-24T23:30:00Z",
       "author": {
         "name": "Lekishi editorial preparation",
         "role": "preparing editor (owner-instructed)"
@@ -155,14 +86,14 @@
           ]
         }
       ],
-      "revision_hash": "sha256:8f2a48bf6438e61bd9b70515e6f145db67f0e767213dfa18984398be86910837"
+      "revision_hash": "sha256:a54544da505f667fdd6c4086f9faa259695ecd0408eea5406c47f32372a7ce7a"
     }
   ],
   "publication": {
-    "published_revision_id": "lks:rev:ishigaki-2",
-    "published_revision_hash": "sha256:8f2a48bf6438e61bd9b70515e6f145db67f0e767213dfa18984398be86910837",
-    "set_id": "lks:set:tang-mission-750-754-court-anchors",
-    "published_at": "2026-09-24T23:00:00Z",
+    "published_revision_id": "lks:rev:ishigaki-1",
+    "published_revision_hash": "sha256:a54544da505f667fdd6c4086f9faa259695ecd0408eea5406c47f32372a7ce7a",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T23:45:00Z",
     "published_by": {
       "name": "Lekishi editorial preparation",
       "role": "preparing editor (owner-instructed)"

@@ -7,93 +7,18 @@
   "revisions": [
     {
       "revision_id": "lks:rev:return-voyage-753-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
-      "change_explanation": "Initial chapter event: the return voyage as a duration over its documented landfalls, with no route geometry asserted.",
-      "content": {
-        "summary": "The return voyage of the four ships, from leaving 蘇州黃泗浦 on 天寶十二載十一月十五日 (753) to 鑒眞 entering 大宰府 on 十二月廿六日. The documented landfalls are separate dated events; this event carries the span and the named places and asserts no continuous route.",
-        "event_types": ["journey", "mission"],
-        "time": {
-          "source_expression": "天寶十二載十一月十五日壬子 四舟同發 — 十二月廿六日辛卯 入［太］宰府",
-          "calendar": "chinese_lunisolar",
-          "precision": "day",
-          "mode": "duration",
-          "interval": {
-            "bounds": "two_sided",
-            "boundary": "inclusive",
-            "start": {"year": 753, "era": "ce", "month": 11, "day": 15},
-            "end": {"year": 753, "era": "ce", "month": 12, "day": 26}
-          }
-        },
-        "places": [
-          {"place_id": "lks:place:huangsipu", "role": "start"},
-          {"place_id": "lks:place:ajinawa", "role": "waypoint"},
-          {"place_id": "lks:place:tane", "role": "waypoint"},
-          {"place_id": "lks:place:yaku", "role": "waypoint"},
-          {"place_id": "lks:place:akimeya", "role": "end"}
-        ],
-        "geometry": [
-          {
-            "claim_id": "lks:claim:return-voyage-no-route",
-            "interpretation": "unknown",
-            "geojson": null,
-            "precision": "unspecified",
-            "notes": "No route geometry is asserted. The documented movements are the dated landfall events and the named places on this record; the outbound voyage of 752 is excluded from the chapter."
-          }
-        ],
-        "editorial_notes": "The voyage sequence rests on the biography, a single near-contemporary account; the chronicle independently corroborates the ships' returns and divergent landfalls, not the day-by-day sequence. The coverage model excludes the outbound voyage of 752, so no outward leg or interpolated line exists anywhere in the chapter."
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
       },
-      "claims": [
-        {
-          "claim_id": "lks:claim:return-voyage-time",
-          "statement": "The biography records the four ships leaving 蘇州黃泗浦 on 天寶十二載十一月十五日 and 鑒眞 entering 大宰府 on 十二月廿六日.",
-          "asserts": "/time",
-          "basis": "attested",
-          "role": "main",
-          "citations": [
-            {
-              "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "十五日壬子，四舟同發; 廿六日辛卯，延慶師引和上入［太］宰府"}
-            }
-          ]
-        },
-        {
-          "claim_id": "lks:claim:return-voyage-places",
-          "statement": "The biography names the landfalls along the return: 阿兒奈波島, 多禰島, 益救島, and 薩摩國阿多郡秋妻屋浦.",
-          "asserts": "/places",
-          "basis": "attested",
-          "role": "main",
-          "citations": [
-            {
-              "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "廿一日戊午，第一、第二兩舟同到阿兒奈波島; 十二月六日…第二舟發向多禰去; 七日，至益救島; 廿日乙酉午時，第二舟著薩摩國阿多郡秋妻屋浦"}
-            }
-          ]
-        },
-        {
-          "claim_id": "lks:claim:return-voyage-no-route",
-          "statement": "The chapter asserts no route geometry: the voyage is recorded as its dated landfalls and named places, and the outbound voyage of 752 is excluded.",
-          "asserts": "/geometry/0",
-          "basis": "attested",
-          "role": "main",
-          "citations": [
-            {
-              "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "十五日壬子，四舟同發; 廿一日戊午…; 十二月六日…; 七日…; 廿日…"}
-            }
-          ]
-        }
-      ],
-      "revision_hash": "sha256:4ab7250008e000110e3d110bcb0c523b59797662fd3147f4806689acf1ab2250"
-    },
-    {
-      "revision_id": "lks:rev:return-voyage-753-2",
-      "created_at": "2026-09-24T08:30:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
       "change_explanation": "Corrected chapter event after review: 多禰島 is removed from the voyage's attested places, and the claim states it only as the second ship's intended destination.",
       "content": {
         "summary": "The return voyage of the four ships, from leaving 蘇州黃泗浦 on 天寶十二載十一月十五日 (753) to 鑒眞 entering 大宰府 on 十二月廿六日. The documented landfalls are separate dated events; this event carries the span and the named places and asserts no continuous route.",
-        "event_types": ["journey", "mission"],
+        "event_types": [
+          "journey",
+          "mission"
+        ],
         "time": {
           "source_expression": "天寶十二載十一月十五日壬子 四舟同發 — 十二月廿六日辛卯 入［太］宰府",
           "calendar": "chinese_lunisolar",
@@ -102,15 +27,37 @@
           "interval": {
             "bounds": "two_sided",
             "boundary": "inclusive",
-            "start": {"year": 753, "era": "ce", "month": 11, "day": 15},
-            "end": {"year": 753, "era": "ce", "month": 12, "day": 26}
+            "start": {
+              "year": 753,
+              "era": "ce",
+              "month": 11,
+              "day": 15
+            },
+            "end": {
+              "year": 753,
+              "era": "ce",
+              "month": 12,
+              "day": 26
+            }
           }
         },
         "places": [
-          {"place_id": "lks:place:huangsipu", "role": "start"},
-          {"place_id": "lks:place:ajinawa", "role": "waypoint"},
-          {"place_id": "lks:place:yaku", "role": "waypoint"},
-          {"place_id": "lks:place:akimeya", "role": "end"}
+          {
+            "place_id": "lks:place:huangsipu",
+            "role": "start"
+          },
+          {
+            "place_id": "lks:place:ajinawa",
+            "role": "waypoint"
+          },
+          {
+            "place_id": "lks:place:yaku",
+            "role": "waypoint"
+          },
+          {
+            "place_id": "lks:place:akimeya",
+            "role": "end"
+          }
         ],
         "geometry": [
           {
@@ -133,7 +80,10 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "十五日壬子，四舟同發; 廿六日辛卯，延慶師引和上入［太］宰府"}
+              "locator": {
+                "kind": "entry",
+                "value": "十五日壬子，四舟同發; 廿六日辛卯，延慶師引和上入［太］宰府"
+              }
             }
           ]
         },
@@ -146,7 +96,10 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "廿一日戊午，第一、第二兩舟同到阿兒奈波島; 十二月六日…第二舟發向多禰去; 七日，至益救島; 廿日乙酉午時，第二舟著薩摩國阿多郡秋妻屋浦"}
+              "locator": {
+                "kind": "entry",
+                "value": "廿一日戊午，第一、第二兩舟同到阿兒奈波島; 十二月六日…第二舟發向多禰去; 七日，至益救島; 廿日乙酉午時，第二舟著薩摩國阿多郡秋妻屋浦"
+              }
             }
           ]
         },
@@ -159,19 +112,25 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "十五日壬子，四舟同發; 廿一日戊午…; 十二月六日…; 七日…; 廿日…"}
+              "locator": {
+                "kind": "entry",
+                "value": "十五日壬子，四舟同發; 廿一日戊午…; 十二月六日…; 七日…; 廿日…"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:bf49e4c6001141759175c8f3604faeb7351d444b86325a6147bcd41202fc4fa5"
+      "revision_hash": "sha256:f75722ed0e839905ddc74f41c367674eb8d37d2e6bcd9173e9f3ec44eab30a38"
     }
   ],
   "publication": {
-    "published_revision_id": "lks:rev:return-voyage-753-2",
-    "published_revision_hash": "sha256:bf49e4c6001141759175c8f3604faeb7351d444b86325a6147bcd41202fc4fa5",
-    "set_id": "lks:set:tang-mission-750-754-v2",
-    "published_at": "2026-09-24T09:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_revision_id": "lks:rev:return-voyage-753-1",
+    "published_revision_hash": "sha256:f75722ed0e839905ddc74f41c367674eb8d37d2e6bcd9173e9f3ec44eab30a38",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

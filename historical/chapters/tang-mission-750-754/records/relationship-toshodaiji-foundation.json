@@ -7,12 +7,17 @@
   "revisions": [
     {
       "revision_id": "lks:rev:toshodaiji-foundation-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter coda relationship: the 759 temple foundation, separately sourced and not presented as a mission effect.",
       "content": {
         "summary": "鑒眞's cloister at 唐招提寺, whose name the biography records being established on 寶字三年八月一日 (759). The relationship is a later institutional change, recorded with its own source.",
-        "relationship_types": ["institutional_change"],
+        "relationship_types": [
+          "institutional_change"
+        ],
         "from": "lks:actor:jianzhen",
         "to": "lks:place:toshodaiji",
         "directionality": "directed",
@@ -25,8 +30,18 @@
           "interval": {
             "bounds": "two_sided",
             "boundary": "inclusive",
-            "start": {"year": 759, "era": "ce", "month": 8, "day": 1},
-            "end": {"year": 759, "era": "ce", "month": 8, "day": 1}
+            "start": {
+              "year": 759,
+              "era": "ce",
+              "month": 8,
+              "day": 1
+            },
+            "end": {
+              "year": 759,
+              "era": "ce",
+              "month": 8,
+              "day": 1
+            }
           }
         },
         "editorial_notes": "Coda node (outside the primary 750–754 mission window): the foundation is separately dated and sourced, and the relationship asserts no causal link from the mission to the temple."
@@ -41,23 +56,32 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "寶字三年八月一日，私立唐律招提名，後請官額，依此爲定"}
+              "locator": {
+                "kind": "entry",
+                "value": "寶字三年八月一日，私立唐律招提名，後請官額，依此爲定"
+              }
             },
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第廿四 天平寶字七年五月戊申（今招提寺是也）"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第廿四 天平寶字七年五月戊申（今招提寺是也）"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:213b9419c1023de354d4a21a003e6ece36b53309effbb7978aa9e7d30f694581"
+      "revision_hash": "sha256:a1a56270970187b651582790e9ef8c196449312730f1d229c8c9b7a2ca861f96"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:toshodaiji-foundation-1",
-    "published_revision_hash": "sha256:213b9419c1023de354d4a21a003e6ece36b53309effbb7978aa9e7d30f694581",
+    "published_revision_hash": "sha256:a1a56270970187b651582790e9ef8c196449312730f1d229c8c9b7a2ca861f96",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

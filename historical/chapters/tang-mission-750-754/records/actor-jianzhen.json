@@ -7,120 +7,11 @@
   "revisions": [
     {
       "revision_id": "lks:rev:jianzhen-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
-      "change_explanation": "Initial chapter actor: the precept master, his invitation, arrival, ordinations, title, temple, and death, with the chronicle's age variant preserved.",
-      "content": {
-        "summary": "鑒眞, the Yangzhou precept master whom the envoys invited at 延光寺 in 天寶十二載 (753) and who sailed with the returning embassy, reaching 大宰府 in 753 and 東大寺 in 754. The biography records a precepts platform and imperial ordinations in the fourth month of 754, the title 大和上 and the founding of 唐招提寺 in the coda years, and his death in 寶字七年 (763) at 76; the chronicle's death notice gives 77.",
-        "names": [
-          {
-            "form": "鑒眞",
-            "script": "Hani",
-            "language": "lzh",
-            "role": "primary",
-            "romanization": {
-              "value": "Jianzhen",
-              "scheme": "pinyin",
-              "origin": "editorial",
-              "pronunciation_claim": false
-            },
-            "note": "Chinese reading recorded as an editorial aid; the Japanese reading Ganjin is not a separate name form.",
-            "claim_id": "lks:claim:jianzhen-name"
-          },
-          {
-            "form": "大和上",
-            "script": "Hani",
-            "language": "lzh",
-            "role": "alternate",
-            "note": "Title granted by the court in 天平寶字二年 (758), recorded as an alternate form for search rather than a second person.",
-            "claim_id": "lks:claim:jianzhen-title"
-          }
-        ],
-        "actor_types": ["person"],
-        "roles": [
-          {
-            "role": "monk",
-            "validity": {
-              "source_expression": "天寶十二載十月十五日壬午 揚州延光寺; 寶字七年五月 物化",
-              "calendar": "chinese_lunisolar",
-              "precision": "year",
-              "mode": "duration",
-              "interval": {
-                "bounds": "two_sided",
-                "boundary": "inclusive",
-                "start": {"year": 753, "era": "ce"},
-                "end": {"year": 763, "era": "ce"}
-              }
-            },
-            "note": "The chapter documents his mission role from the 753 invitation to the 763 death notice."
-          }
-        ],
-        "external_ids": [
-          {
-            "system": "wikidata",
-            "id": "Q714061",
-            "url": "https://www.wikidata.org/wiki/Q714061",
-            "license": "CC0-1.0",
-            "note": "External identifier found in the Wave 1A feasibility pass."
-          }
-        ],
-        "editorial_notes": "The biography is hagiographic and single-source for the ordinations; the chapter labels its claims accordingly and keeps the chronicle's independent title notice and age variant. He is recorded as a person; the temple he founded is a place record and the coda relationships point at it."
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
       },
-      "claims": [
-        {
-          "claim_id": "lks:claim:jianzhen-name",
-          "statement": "The chronicle names 鑒眞 as the Tang monk who returned with 古麻呂 in 天平勝寶六年正月 and later received the title 大和上.",
-          "asserts": "/names/0",
-          "basis": "attested",
-          "role": "main",
-          "citations": [
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年正月壬子"}
-            },
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第廿一 天平寶字二年八月庚子朔"}
-            }
-          ]
-        },
-        {
-          "claim_id": "lks:claim:jianzhen-title",
-          "statement": "The chronicle's 天平寶字二年 entry records the court giving him the title 大和上 and ordering monks who wished to study the precepts to study under him.",
-          "asserts": "/names/1",
-          "basis": "attested",
-          "role": "main",
-          "citations": [
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第廿一 天平寶字二年八月庚子朔"}
-            }
-          ]
-        },
-        {
-          "claim_id": "lks:claim:jianzhen-role",
-          "statement": "The biography records the envoys' visit to him at 延光寺 in 753, his voyage with the returning embassy, the 754 precepts platform and ordinations, and his death in 寶字七年; the chronicle's death notice gives his age as 77 where the biography gives 76.",
-          "asserts": "/roles/0",
-          "basis": "attested",
-          "role": "main",
-          "citations": [
-            {
-              "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "天寶十二載十月十五日壬午; 天平勝寶六年甲午 四月初; 寶字七年五月六日"}
-            },
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第廿四 天平寶字七年五月戊申"}
-            }
-          ]
-        }
-      ],
-      "revision_hash": "sha256:cfaee8f48edcbd7946ca3bdc8e52b28d87ca151858c69eb38c8fc972f5cddcf7"
-    },
-    {
-      "revision_id": "lks:rev:jianzhen-2",
-      "created_at": "2026-09-24T08:30:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
       "change_explanation": "Corrected chapter actor after review: the biography's and the chronicle's death ages are published as their own claims on the summary with an explicit dispute, instead of the age disagreement sitting inside the role claim.",
       "content": {
         "summary": "鑒眞, the Yangzhou precept master whom the envoys invited at 延光寺 in 天寶十二載 (753) and who sailed with the returning embassy, reaching 大宰府 in 753 and 東大寺 in 754. The biography records a precepts platform and imperial ordinations in the fourth month of 754, the title 大和上 and the founding of 唐招提寺 in the coda years, and his death in 寶字七年 (763) at 76; the chronicle's death notice gives 77.",
@@ -148,7 +39,9 @@
             "claim_id": "lks:claim:jianzhen-title"
           }
         ],
-        "actor_types": ["person"],
+        "actor_types": [
+          "person"
+        ],
         "roles": [
           {
             "role": "monk",
@@ -160,8 +53,14 @@
               "interval": {
                 "bounds": "two_sided",
                 "boundary": "inclusive",
-                "start": {"year": 753, "era": "ce"},
-                "end": {"year": 763, "era": "ce"}
+                "start": {
+                  "year": 753,
+                  "era": "ce"
+                },
+                "end": {
+                  "year": 763,
+                  "era": "ce"
+                }
               }
             },
             "note": "The chapter documents his mission role from the 753 invitation to the 763 death notice."
@@ -188,11 +87,17 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年正月壬子"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年正月壬子"
+              }
             },
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第廿一 天平寶字二年八月庚子朔"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第廿一 天平寶字二年八月庚子朔"
+              }
             }
           ]
         },
@@ -205,7 +110,10 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第廿一 天平寶字二年八月庚子朔"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第廿一 天平寶字二年八月庚子朔"
+              }
             }
           ]
         },
@@ -218,11 +126,17 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "天寶十二載十月十五日壬午; 天平勝寶六年甲午 四月初; 寶字七年五月六日"}
+              "locator": {
+                "kind": "entry",
+                "value": "天寶十二載十月十五日壬午; 天平勝寶六年甲午 四月初; 寶字七年五月六日"
+              }
             },
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第廿四 天平寶字七年五月戊申"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第廿四 天平寶字七年五月戊申"
+              }
             }
           ]
         },
@@ -235,7 +149,10 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "是歲五月六日，結跏趺座，面西化，春秋七十六"}
+              "locator": {
+                "kind": "entry",
+                "value": "是歲五月六日，結跏趺座，面西化，春秋七十六"
+              }
             }
           ]
         },
@@ -248,7 +165,10 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第廿四 天平寶字七年五月戊申"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第廿四 天平寶字七年五月戊申"
+              }
             }
           ]
         }
@@ -257,14 +177,17 @@
         "status": "disputed",
         "summary": "The biography gives his age at death as 76 and the chronicle's notice gives 77. The chapter publishes both ages and does not choose between them."
       },
-      "revision_hash": "sha256:d623a647fa4c710b722e39956180858609023ff4ec7147ce49dfef171c3ae9e6"
+      "revision_hash": "sha256:e6ff5dcf73980372e6fcefa068a625b63915e066ace3238db608e1f11572a5b7"
     }
   ],
   "publication": {
-    "published_revision_id": "lks:rev:jianzhen-2",
-    "published_revision_hash": "sha256:d623a647fa4c710b722e39956180858609023ff4ec7147ce49dfef171c3ae9e6",
-    "set_id": "lks:set:tang-mission-750-754-v2",
-    "published_at": "2026-09-24T09:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_revision_id": "lks:rev:jianzhen-1",
+    "published_revision_hash": "sha256:e6ff5dcf73980372e6fcefa068a625b63915e066ace3238db608e1f11572a5b7",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

@@ -7,98 +7,7 @@
   "revisions": [
     {
       "revision_id": "lks:rev:sekito-752-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {
-        "name": "Lekishi editorial preparation",
-        "role": "preparing editor (owner-instructed)"
-      },
-      "change_explanation": "Initial chapter event: the 節刀 grant and promotions, the last documented court event before the excluded outbound voyage.",
-      "content": {
-        "summary": "The court summons the envoys to the inner palace, grants the 節刀, and promotes the ambassador 藤原朝臣清河 to 正四位下, the vice-envoy 大伴宿祢古麻呂 to 從四位上, and the student 藤原朝臣刷雄 to 從五位下.",
-        "event_types": [
-          "mission"
-        ],
-        "time": {
-          "source_expression": "天平勝寶四年閏三月丙辰",
-          "calendar": "regnal",
-          "precision": "month",
-          "mode": "instant",
-          "interval": {
-            "bounds": "two_sided",
-            "boundary": "inclusive",
-            "start": {
-              "year": 752,
-              "era": "ce",
-              "month": 3
-            },
-            "end": {
-              "year": 752,
-              "era": "ce",
-              "month": 3
-            }
-          }
-        },
-        "participants": [
-          {
-            "actor_id": "lks:actor:koken-tenno",
-            "role": "host",
-            "note": "The entry records an imperial decree (詔) at the inner palace; the sovereign is implicit and is recorded through her reign span."
-          },
-          {
-            "actor_id": "lks:actor:fujiwara-no-kiyokawa",
-            "role": "guest"
-          },
-          {
-            "actor_id": "lks:actor:otomo-no-komaro",
-            "role": "guest"
-          },
-          {
-            "actor_id": "lks:actor:fujiwara-student",
-            "role": "guest"
-          }
-        ],
-        "editorial_notes": "The entry is dated 閏三月 (a leap third month); v0 records the month only and keeps 閏三月 in source_expression. This event is the coverage model's last dated court event before the excluded outbound voyage of 752."
-      },
-      "claims": [
-        {
-          "claim_id": "lks:claim:sekito-752-time",
-          "statement": "The chronicle records the envoys being summoned and the 節刀 granted on 天平勝寶四年閏三月丙辰.",
-          "asserts": "/time",
-          "basis": "attested",
-          "role": "main",
-          "citations": [
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {
-                "kind": "entry",
-                "value": "卷第十八 天平勝寶四年閏三月丙辰"
-              },
-              "quoted_text": "閏三月丙辰。召遣唐使副使已上於内裏。詔給節刀。仍授大使從四位上藤原朝臣清河正四位下。副使從五位上大伴宿祢古麻呂從四位上。留學生无位藤原朝臣刷雄從五位下。"
-            }
-          ]
-        },
-        {
-          "claim_id": "lks:claim:sekito-752-participants",
-          "statement": "The entry records the 節刀 grant by decree at the inner palace and the promotions of 清河, 古麻呂, and the student 刷雄.",
-          "asserts": "/participants",
-          "basis": "attested",
-          "role": "main",
-          "citations": [
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {
-                "kind": "entry",
-                "value": "卷第十八 天平勝寶四年閏三月丙辰"
-              }
-            }
-          ]
-        }
-      ],
-      "revision_hash": "sha256:087b9a966911e522a5a5f2eb5f0445b4bd6de010fd1b2276ce68327b6bdb489f"
-    },
-    {
-      "revision_id": "lks:rev:sekito-752-2",
-      "created_at": "2026-09-24T21:30:00Z",
+      "created_at": "2026-09-24T23:30:00Z",
       "author": {
         "name": "Lekishi editorial preparation",
         "role": "preparing editor (owner-instructed)"
@@ -223,14 +132,14 @@
           ]
         }
       ],
-      "revision_hash": "sha256:d3af6cf3770187ce13f6057b5ff3b3c13fb63693f522045d72a6089910d27f03"
+      "revision_hash": "sha256:09026f8273c598fd81dea4a428c8a66e0116ac048066bc41ccb3fd6d5c3d5452"
     }
   ],
   "publication": {
-    "published_revision_id": "lks:rev:sekito-752-2",
-    "published_revision_hash": "sha256:d3af6cf3770187ce13f6057b5ff3b3c13fb63693f522045d72a6089910d27f03",
-    "set_id": "lks:set:tang-mission-750-754-court-anchors",
-    "published_at": "2026-09-24T23:00:00Z",
+    "published_revision_id": "lks:rev:sekito-752-1",
+    "published_revision_hash": "sha256:09026f8273c598fd81dea4a428c8a66e0116ac048066bc41ccb3fd6d5c3d5452",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T23:45:00Z",
     "published_by": {
       "name": "Lekishi editorial preparation",
       "role": "preparing editor (owner-instructed)"

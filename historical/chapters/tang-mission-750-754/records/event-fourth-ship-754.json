@@ -7,12 +7,17 @@
   "revisions": [
     {
       "revision_id": "lks:rev:fourth-ship-754-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter event: the fourth ship's arrival at 石籬浦, reported by the 大宰府.",
       "content": {
         "summary": "The 大宰府 reports that the fourth ship's judge 布勢朝臣人主 and his party have arrived at 薩摩國石籬浦, in 天平勝寶六年四月 (754).",
-        "event_types": ["journey"],
+        "event_types": [
+          "journey"
+        ],
         "time": {
           "source_expression": "天平勝寶六年四月癸未 大宰府言。入唐第四船判官正六位上布勢朝臣人主等來泊薩摩國石籬浦",
           "calendar": "regnal",
@@ -21,15 +26,29 @@
           "interval": {
             "bounds": "two_sided",
             "boundary": "inclusive",
-            "start": {"year": 754, "era": "ce", "month": 4},
-            "end": {"year": 754, "era": "ce", "month": 4}
+            "start": {
+              "year": 754,
+              "era": "ce",
+              "month": 4
+            },
+            "end": {
+              "year": 754,
+              "era": "ce",
+              "month": 4
+            }
           }
         },
         "places": [
-          {"place_id": "lks:place:ishigaki", "role": "site"}
+          {
+            "place_id": "lks:place:ishigaki",
+            "role": "site"
+          }
         ],
         "participants": [
-          {"actor_id": "lks:actor:fuse-no-hitonushi", "role": "leader"}
+          {
+            "actor_id": "lks:actor:fuse-no-hitonushi",
+            "role": "leader"
+          }
         ],
         "editorial_notes": "The report records the arrival, not the ship's earlier course, so the chapter draws no route for the fourth ship."
       },
@@ -43,7 +62,10 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年四月癸未"},
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年四月癸未"
+              },
               "quoted_text": "癸未。大宰府言。入唐第四船判官正六位上布勢朝臣人主等來泊薩摩國石籬浦。"
             }
           ]
@@ -57,19 +79,25 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年四月癸未"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年四月癸未"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:e02c416b05e09b804caf026ec3556c77a313e33c8dd574cb8768356038d80adf"
+      "revision_hash": "sha256:198fc94cf3fde9a51d42aa66fc92a07fc4251f8ab9b80eda2f0f8923abc2a5e9"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:fourth-ship-754-1",
-    "published_revision_hash": "sha256:e02c416b05e09b804caf026ec3556c77a313e33c8dd574cb8768356038d80adf",
+    "published_revision_hash": "sha256:198fc94cf3fde9a51d42aa66fc92a07fc4251f8ab9b80eda2f0f8923abc2a5e9",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

@@ -7,83 +7,7 @@
   "revisions": [
     {
       "revision_id": "lks:rev:murozaki-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {
-        "name": "Lekishi editorial preparation",
-        "role": "preparing editor (owner-instructed)"
-      },
-      "change_explanation": "Initial chapter place: the attested drifting place kept without a map placement because no identification is sourced in this fixture.",
-      "content": {
-        "summary": "紀伊國牟漏埼, the place in 紀伊國 where the chronicle reports 吉備真備's ship drifting after leaving 益久嶋, in the 大宰府's report of 天平勝寶六年正月 (754).",
-        "names": [
-          {
-            "form": "紀伊國牟漏埼",
-            "script": "Hani",
-            "language": "ja",
-            "role": "primary",
-            "claim_id": "lks:claim:murozaki-name"
-          },
-          {
-            "form": "牟漏埼",
-            "script": "Hani",
-            "language": "ja",
-            "role": "alternate",
-            "claim_id": "lks:claim:murozaki-name"
-          }
-        ],
-        "place_types": [
-          "landform"
-        ],
-        "geometry": [
-          {
-            "claim_id": "lks:claim:murozaki-location",
-            "interpretation": "unknown",
-            "geojson": null,
-            "precision": "unspecified",
-            "notes": "The name is source-attested but its modern identification is not sourced in this fixture, so no map position is manufactured."
-          }
-        ],
-        "editorial_notes": "The report lists the identification as still to be sourced; the fixture keeps the attested name and the report that places it in 紀伊國."
-      },
-      "claims": [
-        {
-          "claim_id": "lks:claim:murozaki-name",
-          "statement": "The chronicle records that 吉備真備's ship, after reaching 益久嶋, drifted to 紀伊國牟漏埼.",
-          "asserts": "/names/0",
-          "basis": "attested",
-          "role": "main",
-          "citations": [
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {
-                "kind": "entry",
-                "value": "卷第十九 天平勝寶六年正月癸丑"
-              }
-            }
-          ]
-        },
-        {
-          "claim_id": "lks:claim:murozaki-location",
-          "statement": "No modern identification of 紀伊國牟漏埼 is sourced in this fixture, so the record carries no coordinates.",
-          "asserts": "/geometry/0",
-          "basis": "attested",
-          "role": "main",
-          "citations": [
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {
-                "kind": "entry",
-                "value": "卷第十九 天平勝寶六年正月癸丑"
-              }
-            }
-          ]
-        }
-      ],
-      "revision_hash": "sha256:0cdf293282fc27e7ca8acf3d808f645b4f47d14c8154a0087d32d1eb76f68d24"
-    },
-    {
-      "revision_id": "lks:rev:murozaki-2",
-      "created_at": "2026-09-24T22:30:00Z",
+      "created_at": "2026-09-24T23:30:00Z",
       "author": {
         "name": "Lekishi editorial preparation",
         "role": "preparing editor (owner-instructed)"
@@ -169,14 +93,14 @@
           ]
         }
       ],
-      "revision_hash": "sha256:e37605aadde11af06252742a05a3d142f9644e311f28278c54954e39ca1c6b24"
+      "revision_hash": "sha256:7dcd1beff46b8ad01999c9c4f23bda2af5a3dde98671f8a0e948054217e33abf"
     }
   ],
   "publication": {
-    "published_revision_id": "lks:rev:murozaki-2",
-    "published_revision_hash": "sha256:e37605aadde11af06252742a05a3d142f9644e311f28278c54954e39ca1c6b24",
-    "set_id": "lks:set:tang-mission-750-754-court-anchors",
-    "published_at": "2026-09-24T23:00:00Z",
+    "published_revision_id": "lks:rev:murozaki-1",
+    "published_revision_hash": "sha256:7dcd1beff46b8ad01999c9c4f23bda2af5a3dde98671f8a0e948054217e33abf",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T23:45:00Z",
     "published_by": {
       "name": "Lekishi editorial preparation",
       "role": "preparing editor (owner-instructed)"

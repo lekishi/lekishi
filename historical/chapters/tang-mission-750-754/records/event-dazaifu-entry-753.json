@@ -7,12 +7,17 @@
   "revisions": [
     {
       "revision_id": "lks:rev:dazaifu-entry-753-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter event: 鑒眞 entering 大宰府, closing the return voyage.",
       "content": {
         "summary": "鑒眞 enters 大宰府 on 天寶十二載十二月廿六日, guided by 延慶師.",
-        "event_types": ["journey"],
+        "event_types": [
+          "journey"
+        ],
         "time": {
           "source_expression": "廿六日辛卯",
           "calendar": "chinese_lunisolar",
@@ -21,17 +26,37 @@
           "interval": {
             "bounds": "two_sided",
             "boundary": "inclusive",
-            "start": {"year": 753, "era": "ce", "month": 12, "day": 26},
-            "end": {"year": 753, "era": "ce", "month": 12, "day": 26}
+            "start": {
+              "year": 753,
+              "era": "ce",
+              "month": 12,
+              "day": 26
+            },
+            "end": {
+              "year": 753,
+              "era": "ce",
+              "month": 12,
+              "day": 26
+            }
           }
         },
         "places": [
-          {"place_id": "lks:place:dazaifu", "role": "site"}
+          {
+            "place_id": "lks:place:dazaifu",
+            "role": "site"
+          }
         ],
         "participants": [
-          {"actor_id": "lks:actor:jianzhen", "role": "leader"}
+          {
+            "actor_id": "lks:actor:jianzhen",
+            "role": "leader"
+          }
         ],
-        "part_of": [{"event_id": "lks:event:return-voyage-753"}],
+        "part_of": [
+          {
+            "event_id": "lks:event:return-voyage-753"
+          }
+        ],
         "editorial_notes": "延慶師, who guided him, has no actor record in this fixture because the report does not list him and the chapter keeps the actor set bounded."
       },
       "claims": [
@@ -44,7 +69,10 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "廿六日辛卯，延慶師引和上入［太］宰府"}
+              "locator": {
+                "kind": "entry",
+                "value": "廿六日辛卯，延慶師引和上入［太］宰府"
+              }
             }
           ]
         },
@@ -57,19 +85,25 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "廿六日辛卯，延慶師引和上入［太］宰府"}
+              "locator": {
+                "kind": "entry",
+                "value": "廿六日辛卯，延慶師引和上入［太］宰府"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:d3cf0dbc2bd58388d9ae50fd6cb7983d5ea8a1d2eb9517e9afe1a09c60e9dc7d"
+      "revision_hash": "sha256:fccac33efcbaafedc54199e625d85671fa3d1ed1d5f02f81060321f76f9cfefd"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:dazaifu-entry-753-1",
-    "published_revision_hash": "sha256:d3cf0dbc2bd58388d9ae50fd6cb7983d5ea8a1d2eb9517e9afe1a09c60e9dc7d",
+    "published_revision_hash": "sha256:fccac33efcbaafedc54199e625d85671fa3d1ed1d5f02f81060321f76f9cfefd",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

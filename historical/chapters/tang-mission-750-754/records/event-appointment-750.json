@@ -7,91 +7,7 @@
   "revisions": [
     {
       "revision_id": "lks:rev:appointment-750-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {
-        "name": "Lekishi editorial preparation",
-        "role": "preparing editor (owner-instructed)"
-      },
-      "change_explanation": "Initial chapter event: the embassy's appointment, opening the primary 750–754 window.",
-      "content": {
-        "summary": "The court appoints the embassy: 藤原朝臣清河 as ambassador and 大伴宿祢古麻呂 as vice-envoy, with four judges and four scribes.",
-        "event_types": [
-          "mission"
-        ],
-        "time": {
-          "source_expression": "天平勝寶二年九月己酉",
-          "calendar": "regnal",
-          "precision": "month",
-          "mode": "instant",
-          "interval": {
-            "bounds": "two_sided",
-            "boundary": "inclusive",
-            "start": {
-              "year": 750,
-              "era": "ce",
-              "month": 9
-            },
-            "end": {
-              "year": 750,
-              "era": "ce",
-              "month": 9
-            }
-          }
-        },
-        "participants": [
-          {
-            "actor_id": "lks:actor:fujiwara-no-kiyokawa",
-            "role": "leader",
-            "note": "Appointed 大使."
-          },
-          {
-            "actor_id": "lks:actor:otomo-no-komaro",
-            "role": "participant",
-            "note": "Appointed 副使."
-          }
-        ],
-        "editorial_notes": "The entry gives a sexagenary day (己酉); v0 normalizes it to the month and keeps the day in source_expression. No place is named in the entry, so the event carries no map position."
-      },
-      "claims": [
-        {
-          "claim_id": "lks:claim:appointment-750-time",
-          "statement": "The chronicle records the embassy's appointment on 天平勝寶二年九月己酉.",
-          "asserts": "/time",
-          "basis": "attested",
-          "role": "main",
-          "citations": [
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {
-                "kind": "entry",
-                "value": "卷第十八 天平勝寶二年九月己酉"
-              },
-              "quoted_text": "己酉。任遣唐使。以從四位下藤原朝臣清河爲大使。從五位下大伴宿祢古麻呂爲副使。判官主典各四人。"
-            }
-          ]
-        },
-        {
-          "claim_id": "lks:claim:appointment-750-participants",
-          "statement": "The same entry names 藤原朝臣清河 as ambassador and 大伴宿祢古麻呂 as vice-envoy.",
-          "asserts": "/participants",
-          "basis": "attested",
-          "role": "main",
-          "citations": [
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {
-                "kind": "entry",
-                "value": "卷第十八 天平勝寶二年九月己酉"
-              }
-            }
-          ]
-        }
-      ],
-      "revision_hash": "sha256:901940315c881d9d0feea2353376e173a57fe30771c749fce0ca3384512131ac"
-    },
-    {
-      "revision_id": "lks:rev:appointment-750-2",
-      "created_at": "2026-09-24T21:30:00Z",
+      "created_at": "2026-09-24T23:30:00Z",
       "author": {
         "name": "Lekishi editorial preparation",
         "role": "preparing editor (owner-instructed)"
@@ -209,14 +125,14 @@
           ]
         }
       ],
-      "revision_hash": "sha256:6a47f0901932bf40f4abdc51f3ca4a951d622b3677436264215b82a5bacba31b"
+      "revision_hash": "sha256:090a348500cdfdc0f022f15ea57b743687ddaccbb8ef2cf63978fadbc4953e78"
     }
   ],
   "publication": {
-    "published_revision_id": "lks:rev:appointment-750-2",
-    "published_revision_hash": "sha256:6a47f0901932bf40f4abdc51f3ca4a951d622b3677436264215b82a5bacba31b",
-    "set_id": "lks:set:tang-mission-750-754-court-anchors",
-    "published_at": "2026-09-24T23:00:00Z",
+    "published_revision_id": "lks:rev:appointment-750-1",
+    "published_revision_hash": "sha256:090a348500cdfdc0f022f15ea57b743687ddaccbb8ef2cf63978fadbc4953e78",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T23:45:00Z",
     "published_by": {
       "name": "Lekishi editorial preparation",
       "role": "preparing editor (owner-instructed)"

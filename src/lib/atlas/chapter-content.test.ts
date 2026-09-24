@@ -30,7 +30,7 @@ describe("the bundled chapter content", () => {
     expect(CHAPTER.events).toHaveLength(29)
     expect(CHAPTER.places).toHaveLength(15)
     expect(CHAPTER.defaultWindow).toEqual({ start: 750, end: 754 })
-    expect(CHAPTER.publication.setIds[0]).toBe("lks:set:tang-mission-750-754-court-anchors")
+    expect(CHAPTER.publication.setIds[0]).toBe("lks:set:tang-mission-750-754-v1")
 
     const serialized = JSON.stringify(CHAPTER)
 

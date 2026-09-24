@@ -7,8 +7,11 @@
   "revisions": [
     {
       "revision_id": "lks:rev:kiyokawa-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter actor: the ambassador, his documented role span, and the later notice of his fate.",
       "content": {
         "summary": "藤原朝臣清河, appointed ambassador (大使) of the embassy in 天平勝寶二年九月 (750). The chronicle's 寶龜十年 (779) notice records that on the return voyage his ship was driven to 驩州 on Tang's southern frontier, that he alone survived, and that he remained in Tang and died there more than ten years later.",
@@ -34,7 +37,9 @@
             "claim_id": "lks:claim:kiyokawa-name"
           }
         ],
-        "actor_types": ["person"],
+        "actor_types": [
+          "person"
+        ],
         "roles": [
           {
             "role": "envoy",
@@ -46,8 +51,14 @@
               "interval": {
                 "bounds": "two_sided",
                 "boundary": "inclusive",
-                "start": {"year": 750, "era": "ce"},
-                "end": {"year": 754, "era": "ce"}
+                "start": {
+                  "year": 750,
+                  "era": "ce"
+                },
+                "end": {
+                  "year": 754,
+                  "era": "ce"
+                }
               }
             },
             "note": "Ambassador from the 750 appointment; the return-voyage reports and the 754 rewards place the mission's span through 754."
@@ -74,7 +85,10 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十八 天平勝寶二年九月己酉"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十八 天平勝寶二年九月己酉"
+              }
             }
           ]
         },
@@ -87,11 +101,17 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十八 天平勝寶二年九月己酉; 卷第十八 天平勝寶四年閏三月丙辰"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十八 天平勝寶二年九月己酉; 卷第十八 天平勝寶四年閏三月丙辰"
+              }
             },
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年四月壬申"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年四月壬申"
+              }
             }
           ]
         },
@@ -104,19 +124,25 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第卅五 寶龜十年二月乙亥"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第卅五 寶龜十年二月乙亥"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:ebda18fb2e8a4eeb09c4f03597641fb76bbcd05d68f7541974c62e1f6b52074c"
+      "revision_hash": "sha256:ff17e71d105436de97576c2f5e4395ce6c97ed09786b1da0ebe07a5f94072600"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:kiyokawa-1",
-    "published_revision_hash": "sha256:ebda18fb2e8a4eeb09c4f03597641fb76bbcd05d68f7541974c62e1f6b52074c",
+    "published_revision_hash": "sha256:ff17e71d105436de97576c2f5e4395ce6c97ed09786b1da0ebe07a5f94072600",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

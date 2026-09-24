@@ -81,39 +81,6 @@ function errorCodes(result: ProjectionResult): string[] {
   return result.ok ? [] : result.errors
 }
 
-/**
- * Rebuilds the tree as if only one publication set had ever existed: every
- * mirror is rewritten to that set's member, so "the newest published revision"
- * is unambiguous and the other set's corrections are unpublished.
- */
-function withOnlySet(chapter: ChapterTree, setId: string): ChapterTree {
-  const only = objectOf(chapter.sets.find((set) => objectOf(set)["set_id"] === setId))
-  const publishedAt = only["published_at"]
-
-  for (const document of chapter.documents) {
-    if (!isObject(document) || document["document"] !== "record") {
-      continue
-    }
-
-    const member = listOf(only["members"])
-      .map(objectOf)
-      .find((candidate) => candidate["record_id"] === document["record_id"])
-
-    document["publication"] =
-      member === undefined
-        ? null
-        : {
-            published_revision_id: member["revision_id"],
-            published_revision_hash: member["revision_hash"],
-            set_id: only["set_id"],
-            published_at: publishedAt,
-            published_by: objectOf(only["published_by"]),
-          }
-  }
-
-  return { name: chapter.name, documents: chapter.documents, sets: [only] }
-}
-
 describe("projecting the reviewed Tang chapter", () => {
   it("projects the published chapter with its real title, places, and events", () => {
     const chapter = project()
@@ -136,14 +103,9 @@ describe("projecting the reviewed Tang chapter", () => {
   it("selects the newest published revision per record, not the first revision in the file", () => {
     const chapter = project()
 
-    // The placement set is newest, then the correction set, then the first set;
-    // every shown revision is published by one of them, and the newest set
-    // decides the review statement.
-    expect(chapter.publication.setIds).toEqual([
-      "lks:set:tang-mission-750-754-court-anchors",
-      "lks:set:tang-mission-750-754-v2",
-      "lks:set:tang-mission-750-754-v1",
-    ])
+    // The preparation history was flattened on the owner's instruction: one set
+    // publishes every record, and it decides the review statement.
+    expect(chapter.publication.setIds).toEqual(["lks:set:tang-mission-750-754-v1"])
 
     // The corrections this projection can show are visible: v1 attached no place
     // to the ships' separation, and v2 added 多禰島 as a context reference.
@@ -157,20 +119,16 @@ describe("projecting the reviewed Tang chapter", () => {
     })
   })
 
-  it("projects the v1-era content when only the first set had been published", () => {
-    const stale = project(withOnlySet(cloneTree(tree()), "lks:set:tang-mission-750-754-v1"))
-    const separation = eventById(stale, "lks:event:ships-separate-753")
+  it("shows nothing when no set publishes the chapter", () => {
+    const unpublished = attempt({ ...tree(), sets: [] })
 
-    // Under v1 alone the separation names no place at all. Projecting v2's
-    // context reference here would mean the projection read a revision the
-    // publication sets do not publish.
-    expect(separation.placement).toEqual({
-      kind: "none",
-      placeId: null,
-      label: null,
-      reason: "no-place",
-    })
-    expect(stale.publication.setIds).toEqual(["lks:set:tang-mission-750-754-v1"])
+    // The projection reads set-named revisions only. With no set in the tree
+    // there is no published revision to project, so it fails instead of falling
+    // back to a revision file or to synthetic content.
+    expect(unpublished.ok).toBe(false)
+    expect(errorCodes(unpublished).join("\n")).toContain(
+      "carries a publication mirror that no publication set publishes",
+    )
   })
 
   it("keeps every in-window event, including the ones with no published map position", () => {

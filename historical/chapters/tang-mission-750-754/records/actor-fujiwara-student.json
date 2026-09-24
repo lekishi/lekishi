@@ -7,8 +7,11 @@
   "revisions": [
     {
       "revision_id": "lks:rev:fujiwara-student-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter actor: the student named in the 752 節刀 entry, with the reading recorded as an editorial aid.",
       "content": {
         "summary": "藤原朝臣刷雄, recorded in the chronicle's 節刀 entry of 天平勝寶四年閏三月 (752) as a student (留學生) receiving 從五位下. The chapter records only that documented promotion.",
@@ -35,7 +38,9 @@
             "claim_id": "lks:claim:fujiwara-student-name"
           }
         ],
-        "actor_types": ["person"],
+        "actor_types": [
+          "person"
+        ],
         "roles": [
           {
             "role": "scholar",
@@ -47,8 +52,14 @@
               "interval": {
                 "bounds": "two_sided",
                 "boundary": "inclusive",
-                "start": {"year": 752, "era": "ce"},
-                "end": {"year": 752, "era": "ce"}
+                "start": {
+                  "year": 752,
+                  "era": "ce"
+                },
+                "end": {
+                  "year": 752,
+                  "era": "ce"
+                }
               }
             },
             "note": "Recorded as a student at the 節刀 grant; no other role is asserted in this fixture."
@@ -66,7 +77,10 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十八 天平勝寶四年閏三月丙辰"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十八 天平勝寶四年閏三月丙辰"
+              }
             }
           ]
         },
@@ -79,19 +93,25 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十八 天平勝寶四年閏三月丙辰"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十八 天平勝寶四年閏三月丙辰"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:afdccb84364f834f981455ffaf7c84eb97c0b6d682e1313bebec77c9a512062d"
+      "revision_hash": "sha256:8d099ca880b4f65642be17ac1349b0f0214dd210cdb321430891dc4094bbfcc2"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:fujiwara-student-1",
-    "published_revision_hash": "sha256:afdccb84364f834f981455ffaf7c84eb97c0b6d682e1313bebec77c9a512062d",
+    "published_revision_hash": "sha256:8d099ca880b4f65642be17ac1349b0f0214dd210cdb321430891dc4094bbfcc2",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

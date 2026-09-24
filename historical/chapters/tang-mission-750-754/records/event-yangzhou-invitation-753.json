@@ -7,12 +7,18 @@
   "revisions": [
     {
       "revision_id": "lks:rev:yangzhou-invitation-753-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter event: the envoys' visit to 鑒眞 at 延光寺, the encounter the biography describes.",
       "content": {
         "summary": "The envoys 藤原朝臣清河, 大伴宿禰胡麿, 吉備朝臣真備, and 安倍朝臣朝衡 come to 鑒眞 at 延光寺 in 揚州 and ask him to carry the precepts to Japan; the biography records his consent.",
-        "event_types": ["mission", "exchange"],
+        "event_types": [
+          "mission",
+          "exchange"
+        ],
         "time": {
           "source_expression": "天寶十二載十月十五日壬午",
           "calendar": "chinese_lunisolar",
@@ -21,19 +27,49 @@
           "interval": {
             "bounds": "two_sided",
             "boundary": "inclusive",
-            "start": {"year": 753, "era": "ce", "month": 10, "day": 15},
-            "end": {"year": 753, "era": "ce", "month": 10, "day": 15}
+            "start": {
+              "year": 753,
+              "era": "ce",
+              "month": 10,
+              "day": 15
+            },
+            "end": {
+              "year": 753,
+              "era": "ce",
+              "month": 10,
+              "day": 15
+            }
           }
         },
         "places": [
-          {"place_id": "lks:place:yangzhou", "role": "site", "note": "The biography names 延光寺 within 揚州."}
+          {
+            "place_id": "lks:place:yangzhou",
+            "role": "site",
+            "note": "The biography names 延光寺 within 揚州."
+          }
         ],
         "participants": [
-          {"actor_id": "lks:actor:jianzhen", "role": "host"},
-          {"actor_id": "lks:actor:fujiwara-no-kiyokawa", "role": "leader"},
-          {"actor_id": "lks:actor:otomo-no-komaro", "role": "participant"},
-          {"actor_id": "lks:actor:kibi-no-makibi", "role": "participant"},
-          {"actor_id": "lks:actor:abe-no-nakamaro", "role": "participant", "note": "Named in the biography by his adopted name 安倍朝臣朝衡."}
+          {
+            "actor_id": "lks:actor:jianzhen",
+            "role": "host"
+          },
+          {
+            "actor_id": "lks:actor:fujiwara-no-kiyokawa",
+            "role": "leader"
+          },
+          {
+            "actor_id": "lks:actor:otomo-no-komaro",
+            "role": "participant"
+          },
+          {
+            "actor_id": "lks:actor:kibi-no-makibi",
+            "role": "participant"
+          },
+          {
+            "actor_id": "lks:actor:abe-no-nakamaro",
+            "role": "participant",
+            "note": "Named in the biography by his adopted name 安倍朝臣朝衡."
+          }
         ],
         "editorial_notes": "The passage names the envoys with Tang titles and is the chapter's clearest documented encounter. The biography is a later, commemorative account; the encounter is published as what it reports."
       },
@@ -47,7 +83,10 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "天寶十二載，歲次癸巳，十月十五日壬午"}
+              "locator": {
+                "kind": "entry",
+                "value": "天寶十二載，歲次癸巳，十月十五日壬午"
+              }
             }
           ]
         },
@@ -60,19 +99,25 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "天寶十二載，歲次癸巳，十月十五日壬午"}
+              "locator": {
+                "kind": "entry",
+                "value": "天寶十二載，歲次癸巳，十月十五日壬午"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:bcc513d72e49e16c5a1dddabd3eeff5c4a764c13515b052055a95c16dabf70d0"
+      "revision_hash": "sha256:1f33edc2d9815d1828559033b8d09d2e22ecc2097dd28d5e339a5b82f4b5016b"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:yangzhou-invitation-753-1",
-    "published_revision_hash": "sha256:bcc513d72e49e16c5a1dddabd3eeff5c4a764c13515b052055a95c16dabf70d0",
+    "published_revision_hash": "sha256:1f33edc2d9815d1828559033b8d09d2e22ecc2097dd28d5e339a5b82f4b5016b",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

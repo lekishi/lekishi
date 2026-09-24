@@ -7,85 +7,7 @@
   "revisions": [
     {
       "revision_id": "lks:rev:kiyokawa-honours-779-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {
-        "name": "Lekishi editorial preparation",
-        "role": "preparing editor (owner-instructed)"
-      },
-      "change_explanation": "Initial chapter coda event: the 779 posthumous honours and the biographical notice they carry.",
-      "content": {
-        "summary": "The court raises the late ambassador 藤原朝臣清河 from 從三位 to 從二位 in 寶龜十年二月 (779), in a notice that also records his drift to 驩州, his survival, and his death in Tang.",
-        "event_types": [
-          "occurrence"
-        ],
-        "time": {
-          "source_expression": "寶龜十年二月乙亥 贈故入唐大使從三位藤原朝臣清河從二位",
-          "calendar": "regnal",
-          "precision": "month",
-          "mode": "instant",
-          "interval": {
-            "bounds": "two_sided",
-            "boundary": "inclusive",
-            "start": {
-              "year": 779,
-              "era": "ce",
-              "month": 2
-            },
-            "end": {
-              "year": 779,
-              "era": "ce",
-              "month": 2
-            }
-          }
-        },
-        "participants": [
-          {
-            "actor_id": "lks:actor:fujiwara-no-kiyokawa",
-            "role": "subject"
-          }
-        ],
-        "editorial_notes": "Coda node (outside the primary 750–754 mission window). The honours are the court's act; the voyage and death details in the same notice are cited on the drift event and on the actor, not restated as mission effects."
-      },
-      "claims": [
-        {
-          "claim_id": "lks:claim:kiyokawa-honours-time",
-          "statement": "The chronicle records the posthumous promotion of 藤原朝臣清河 from 從三位 to 從二位 on 寶龜十年二月乙亥.",
-          "asserts": "/time",
-          "basis": "attested",
-          "role": "main",
-          "citations": [
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {
-                "kind": "entry",
-                "value": "卷第卅五 寶龜十年二月乙亥"
-              },
-              "quoted_text": "乙亥。贈故入唐大使從三位藤原朝臣清河從二位。"
-            }
-          ]
-        },
-        {
-          "claim_id": "lks:claim:kiyokawa-honours-subject",
-          "statement": "The entry names 清河 as the recipient of the posthumous rank.",
-          "asserts": "/participants",
-          "basis": "attested",
-          "role": "main",
-          "citations": [
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {
-                "kind": "entry",
-                "value": "卷第卅五 寶龜十年二月乙亥"
-              }
-            }
-          ]
-        }
-      ],
-      "revision_hash": "sha256:543c95c5ce640d11faa5abce444b9c5a20b1c664c7c03b234bb8b97e922f620a"
-    },
-    {
-      "revision_id": "lks:rev:kiyokawa-honours-779-2",
-      "created_at": "2026-09-24T21:30:00Z",
+      "created_at": "2026-09-24T23:30:00Z",
       "author": {
         "name": "Lekishi editorial preparation",
         "role": "preparing editor (owner-instructed)"
@@ -197,14 +119,14 @@
           ]
         }
       ],
-      "revision_hash": "sha256:92479348889597ee1b99d6f5939ff68f74980b94aed606c17a0c28e2d457ec1b"
+      "revision_hash": "sha256:2a4da61282a1f932b38041180ea67df44496ec7548b06a126680971118100f5b"
     }
   ],
   "publication": {
-    "published_revision_id": "lks:rev:kiyokawa-honours-779-2",
-    "published_revision_hash": "sha256:92479348889597ee1b99d6f5939ff68f74980b94aed606c17a0c28e2d457ec1b",
-    "set_id": "lks:set:tang-mission-750-754-court-anchors",
-    "published_at": "2026-09-24T23:00:00Z",
+    "published_revision_id": "lks:rev:kiyokawa-honours-779-1",
+    "published_revision_hash": "sha256:2a4da61282a1f932b38041180ea67df44496ec7548b06a126680971118100f5b",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T23:45:00Z",
     "published_by": {
       "name": "Lekishi editorial preparation",
       "role": "preparing editor (owner-instructed)"

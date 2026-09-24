@@ -7,12 +7,17 @@
   "revisions": [
     {
       "revision_id": "lks:rev:japan-tang-embassy-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter relationship: the diplomatic mission from Japan to Tang, the report's first relationship type.",
       "content": {
         "summary": "The diplomatic mission from 日本國 to 唐: the court appointed and dispatched the embassy in 750–752, the envoys were received at the Tang court in 753, and the returning envoys reported to the Japanese court in 754. The relationship is directional and asserts no causation.",
-        "relationship_types": ["diplomacy"],
+        "relationship_types": [
+          "diplomacy"
+        ],
         "from": "lks:actor:japan-state",
         "to": "lks:actor:tang-dynasty",
         "directionality": "directed",
@@ -25,8 +30,14 @@
           "interval": {
             "bounds": "two_sided",
             "boundary": "inclusive",
-            "start": {"year": 750, "era": "ce"},
-            "end": {"year": 754, "era": "ce"}
+            "start": {
+              "year": 750,
+              "era": "ce"
+            },
+            "end": {
+              "year": 754,
+              "era": "ce"
+            }
           }
         },
         "editorial_notes": "The relationship covers appointment, dispatch, audience, and return as the report's coverage model lists them. It does not assert that the mission caused any later development."
@@ -41,23 +52,32 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十八 天平勝寶二年九月己酉; 卷第十九 天平勝寶六年正月壬子"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十八 天平勝寶二年九月己酉; 卷第十九 天平勝寶六年正月壬子"
+              }
             },
             {
               "source_id": "lks:source:jiu-tangshu",
-              "locator": {"kind": "chapter", "value": "卷199上 東夷 日本國（天寶十二年，又遣使貢）"}
+              "locator": {
+                "kind": "chapter",
+                "value": "卷199上 東夷 日本國（天寶十二年，又遣使貢）"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:baf084a100e5d4b48e6318f0939b0bfb47dd951337ffb57d4724ccef8c57ba17"
+      "revision_hash": "sha256:411e6963951350ca56e0c860fdafc27130981c3c8395750e1b2bd7c2276157c1"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:japan-tang-embassy-1",
-    "published_revision_hash": "sha256:baf084a100e5d4b48e6318f0939b0bfb47dd951337ffb57d4724ccef8c57ba17",
+    "published_revision_hash": "sha256:411e6963951350ca56e0c860fdafc27130981c3c8395750e1b2bd7c2276157c1",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

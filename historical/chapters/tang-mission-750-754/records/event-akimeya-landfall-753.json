@@ -7,12 +7,17 @@
   "revisions": [
     {
       "revision_id": "lks:rev:akimeya-landfall-753-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter event: the second ship's landfall at 秋妻屋浦.",
       "content": {
         "summary": "The second ship lands at 薩摩國阿多郡秋妻屋浦 at noon on 天寶十二載十二月廿日.",
-        "event_types": ["journey"],
+        "event_types": [
+          "journey"
+        ],
         "time": {
           "source_expression": "廿日乙酉午時",
           "calendar": "chinese_lunisolar",
@@ -21,14 +26,31 @@
           "interval": {
             "bounds": "two_sided",
             "boundary": "inclusive",
-            "start": {"year": 753, "era": "ce", "month": 12, "day": 20},
-            "end": {"year": 753, "era": "ce", "month": 12, "day": 20}
+            "start": {
+              "year": 753,
+              "era": "ce",
+              "month": 12,
+              "day": 20
+            },
+            "end": {
+              "year": 753,
+              "era": "ce",
+              "month": 12,
+              "day": 20
+            }
           }
         },
         "places": [
-          {"place_id": "lks:place:akimeya", "role": "site"}
+          {
+            "place_id": "lks:place:akimeya",
+            "role": "site"
+          }
         ],
-        "part_of": [{"event_id": "lks:event:return-voyage-753"}],
+        "part_of": [
+          {
+            "event_id": "lks:event:return-voyage-753"
+          }
+        ],
         "editorial_notes": "The landing place is source-attested; its modern identification is a scholarly proposal and is recorded on the place as a cited interpretation."
       },
       "claims": [
@@ -41,7 +63,10 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "廿日乙酉午時，第二舟著薩摩國阿多郡秋妻屋浦"}
+              "locator": {
+                "kind": "entry",
+                "value": "廿日乙酉午時，第二舟著薩摩國阿多郡秋妻屋浦"
+              }
             }
           ]
         },
@@ -54,19 +79,25 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "廿日乙酉午時，第二舟著薩摩國阿多郡秋妻屋浦"}
+              "locator": {
+                "kind": "entry",
+                "value": "廿日乙酉午時，第二舟著薩摩國阿多郡秋妻屋浦"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:3444a3135c042ccaa732d0f2d76d55d21ecab63bc7edc7565084219661d42be6"
+      "revision_hash": "sha256:b30d8f53ceef34716f50a5109ac6a3d324695a42a8eecf98c3a1991063d5a776"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:akimeya-landfall-753-1",
-    "published_revision_hash": "sha256:3444a3135c042ccaa732d0f2d76d55d21ecab63bc7edc7565084219661d42be6",
+    "published_revision_hash": "sha256:b30d8f53ceef34716f50a5109ac6a3d324695a42a8eecf98c3a1991063d5a776",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

@@ -7,8 +7,11 @@
   "revisions": [
     {
       "revision_id": "lks:rev:makibi-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter actor: the vice-envoy appointed in 751, with the ship reports kept separate from the biography's account.",
       "content": {
         "summary": "吉備朝臣眞備, appointed vice-envoy (入唐副使) in 天平勝寶三年十一月 (751). The chronicle records his ship reaching 益久嶋 on 天平勝寶五年十二月七日 and drifting to 紀伊國牟漏埼, and records him receiving 正四位下 with 古麻呂 in 天平勝寶六年四月 (754). His 717–735 study and 735 book list belong to another candidate mission and are excluded here.",
@@ -34,7 +37,9 @@
             "claim_id": "lks:claim:makibi-name"
           }
         ],
-        "actor_types": ["person"],
+        "actor_types": [
+          "person"
+        ],
         "roles": [
           {
             "role": "envoy",
@@ -46,8 +51,14 @@
               "interval": {
                 "bounds": "two_sided",
                 "boundary": "inclusive",
-                "start": {"year": 751, "era": "ce"},
-                "end": {"year": 754, "era": "ce"}
+                "start": {
+                  "year": 751,
+                  "era": "ce"
+                },
+                "end": {
+                  "year": 754,
+                  "era": "ce"
+                }
               }
             },
             "note": "Vice-envoy from the 751 appointment; the 754 rewards close the documented mission span."
@@ -74,7 +85,10 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十八 天平勝寶三年十一月丙戌"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十八 天平勝寶三年十一月丙戌"
+              }
             }
           ]
         },
@@ -87,23 +101,32 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年正月癸丑"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年正月癸丑"
+              }
             },
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年四月壬申"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年四月壬申"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:0afe76e9e9b3929d6b53839a575ad95a0a1f9d820839f6c5d1a03889c1383166"
+      "revision_hash": "sha256:34327277b04f33534fe932fbd1e3bfc032682a84e4e389bb0ae1838df50c82e5"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:makibi-1",
-    "published_revision_hash": "sha256:0afe76e9e9b3929d6b53839a575ad95a0a1f9d820839f6c5d1a03889c1383166",
+    "published_revision_hash": "sha256:34327277b04f33534fe932fbd1e3bfc032682a84e4e389bb0ae1838df50c82e5",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

@@ -7,8 +7,11 @@
   "revisions": [
     {
       "revision_id": "lks:rev:tang-dynasty-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter actor: the receiving court as the sources name it, for the diplomacy and audience relationships.",
       "content": {
         "summary": "唐 (大唐), the receiving court in the cited sources. The chapter uses this actor for the embassy's diplomacy and for the New Year audience at 蓬萊宮含元殿, which 古麻呂 reported.",
@@ -34,7 +37,9 @@
             "claim_id": "lks:claim:tang-dynasty-name"
           }
         ],
-        "actor_types": ["dynasty"],
+        "actor_types": [
+          "dynasty"
+        ],
         "editorial_notes": "The state actor carries no roles: the role vocabulary is person-oriented. The court's acts are recorded on the events and relationships that cite the entries."
       },
       "claims": [
@@ -47,23 +52,32 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年正月丙寅"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年正月丙寅"
+              }
             },
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "天寶十二載 十月十五日壬午"}
+              "locator": {
+                "kind": "entry",
+                "value": "天寶十二載 十月十五日壬午"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:9e750ff6b1cf9d3191433606f032101a83d660c3a84673d321338cbe6a1c5bbb"
+      "revision_hash": "sha256:8064fd80a11599d0fd0eed6ca7d60c1e0a6d60c0820b91da89de2bf588cf25da"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:tang-dynasty-1",
-    "published_revision_hash": "sha256:9e750ff6b1cf9d3191433606f032101a83d660c3a84673d321338cbe6a1c5bbb",
+    "published_revision_hash": "sha256:8064fd80a11599d0fd0eed6ca7d60c1e0a6d60c0820b91da89de2bf588cf25da",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

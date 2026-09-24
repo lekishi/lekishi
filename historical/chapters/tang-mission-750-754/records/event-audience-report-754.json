@@ -7,84 +7,7 @@
   "revisions": [
     {
       "revision_id": "lks:rev:audience-report-754-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {
-        "name": "Lekishi editorial preparation",
-        "role": "preparing editor (owner-instructed)"
-      },
-      "change_explanation": "Initial chapter event: 古麻呂's report of the Tang New Year audience to the Japanese court, recorded separately from the audience itself.",
-      "content": {
-        "summary": "大伴古麻呂 comes from Tang and reports to the court the New Year audience at 蓬萊宮含元殿 and the seating-order dispute, in 天平勝寶六年正月 (754).",
-        "event_types": [
-          "mission"
-        ],
-        "time": {
-          "source_expression": "天平勝寶六年正月丙寅 副使大伴宿祢古麻呂自唐國至",
-          "calendar": "regnal",
-          "precision": "month",
-          "mode": "instant",
-          "interval": {
-            "bounds": "two_sided",
-            "boundary": "inclusive",
-            "start": {
-              "year": 754,
-              "era": "ce",
-              "month": 1
-            },
-            "end": {
-              "year": 754,
-              "era": "ce",
-              "month": 1
-            }
-          }
-        },
-        "participants": [
-          {
-            "actor_id": "lks:actor:otomo-no-komaro",
-            "role": "leader"
-          }
-        ],
-        "editorial_notes": "This is the court-side report event, distinct from the audience it describes; the report is the chapter's only account of the audience and is labelled as a self-report there. The day is a sexagenary day (丙寅) and is normalized to the month."
-      },
-      "claims": [
-        {
-          "claim_id": "lks:claim:audience-report-time",
-          "statement": "The chronicle records 大伴宿祢古麻呂 coming from Tang and reporting the New Year audience on 天平勝寶六年正月丙寅.",
-          "asserts": "/time",
-          "basis": "attested",
-          "role": "main",
-          "citations": [
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {
-                "kind": "entry",
-                "value": "卷第十九 天平勝寶六年正月丙寅"
-              }
-            }
-          ]
-        },
-        {
-          "claim_id": "lks:claim:audience-report-participant",
-          "statement": "The entry names 古麻呂 as the reporting envoy.",
-          "asserts": "/participants",
-          "basis": "attested",
-          "role": "main",
-          "citations": [
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {
-                "kind": "entry",
-                "value": "卷第十九 天平勝寶六年正月丙寅"
-              }
-            }
-          ]
-        }
-      ],
-      "revision_hash": "sha256:b6f75bb5402f1d1367963e05b8b76f95a50aed7d23b46e69185c9a972063b6a3"
-    },
-    {
-      "revision_id": "lks:rev:audience-report-754-2",
-      "created_at": "2026-09-24T21:30:00Z",
+      "created_at": "2026-09-24T23:30:00Z",
       "author": {
         "name": "Lekishi editorial preparation",
         "role": "preparing editor (owner-instructed)"
@@ -195,14 +118,14 @@
           ]
         }
       ],
-      "revision_hash": "sha256:2fe8aa9fadefa8ac201050d8dbe554331693bea8dcd614cf42d8d3e43cc92f1c"
+      "revision_hash": "sha256:6499c518da1a703f8bd4c95f52a4d0fe815a3e7087b75129a0a7964dfd23beaa"
     }
   ],
   "publication": {
-    "published_revision_id": "lks:rev:audience-report-754-2",
-    "published_revision_hash": "sha256:2fe8aa9fadefa8ac201050d8dbe554331693bea8dcd614cf42d8d3e43cc92f1c",
-    "set_id": "lks:set:tang-mission-750-754-court-anchors",
-    "published_at": "2026-09-24T23:00:00Z",
+    "published_revision_id": "lks:rev:audience-report-754-1",
+    "published_revision_hash": "sha256:6499c518da1a703f8bd4c95f52a4d0fe815a3e7087b75129a0a7964dfd23beaa",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T23:45:00Z",
     "published_by": {
       "name": "Lekishi editorial preparation",
       "role": "preparing editor (owner-instructed)"

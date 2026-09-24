@@ -7,87 +7,7 @@
   "revisions": [
     {
       "revision_id": "lks:rev:daikasho-title-758-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {
-        "name": "Lekishi editorial preparation",
-        "role": "preparing editor (owner-instructed)"
-      },
-      "change_explanation": "Initial chapter coda event: the 758 title and precept-study order, separately sourced and not presented as a mission effect.",
-      "content": {
-        "summary": "In the accession decree of 天平寶字二年八月庚子朔 (758) the court gives 鑒眞 the title 大和上, ends his 僧綱 post because of his age, and orders monks who wish to study the precepts to study under him.",
-        "event_types": [
-          "other"
-        ],
-        "time": {
-          "source_expression": "天平寶字二年八月庚子朔",
-          "calendar": "regnal",
-          "precision": "day",
-          "mode": "instant",
-          "interval": {
-            "bounds": "two_sided",
-            "boundary": "inclusive",
-            "start": {
-              "year": 758,
-              "era": "ce",
-              "month": 8,
-              "day": 1
-            },
-            "end": {
-              "year": 758,
-              "era": "ce",
-              "month": 8,
-              "day": 1
-            }
-          }
-        },
-        "participants": [
-          {
-            "actor_id": "lks:actor:jianzhen",
-            "role": "subject"
-          }
-        ],
-        "editorial_notes": "Coda node (outside the primary 750–754 mission window): a separately dated court act recorded in the accession decree, published as its own event and not as an effect of the mission. The v0 event vocabulary has no institutional-change type, so this event uses other and explains the choice here rather than extending the vocabulary."
-      },
-      "claims": [
-        {
-          "claim_id": "lks:claim:daikasho-title-time",
-          "statement": "The chronicle's 天平寶字二年八月庚子朔 decree gives 鑒眞 the title 大和上, ends his 僧綱 post, and orders monks wishing to study the precepts to study under him.",
-          "asserts": "/time",
-          "basis": "attested",
-          "role": "main",
-          "citations": [
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {
-                "kind": "entry",
-                "value": "卷第廿一 天平寶字二年八月庚子朔"
-              },
-              "quoted_text": "其大僧都鑒眞和上、戒行轉潔、白頭不變。遠渉滄波、歸我聖朝。号曰大和上。恭敬供養。政事躁煩。不敢勞老。宜停僧綱之任。集諸寺僧尼。欲學戒律者。皆属令習。"
-            }
-          ]
-        },
-        {
-          "claim_id": "lks:claim:daikasho-title-participant",
-          "statement": "The decree names 鑒眞 as the monk receiving the title and the study order.",
-          "asserts": "/participants",
-          "basis": "attested",
-          "role": "main",
-          "citations": [
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {
-                "kind": "entry",
-                "value": "卷第廿一 天平寶字二年八月庚子朔"
-              }
-            }
-          ]
-        }
-      ],
-      "revision_hash": "sha256:0ce330dca247b0073a35fa5f3a19539404987a5419a9daff0f071d43bc80b4e5"
-    },
-    {
-      "revision_id": "lks:rev:daikasho-title-758-2",
-      "created_at": "2026-09-24T21:30:00Z",
+      "created_at": "2026-09-24T23:30:00Z",
       "author": {
         "name": "Lekishi editorial preparation",
         "role": "preparing editor (owner-instructed)"
@@ -201,14 +121,14 @@
           ]
         }
       ],
-      "revision_hash": "sha256:d9e7c5e73477c5dad76d5caa4d5410b573e2e2ea8f43f94748da70d2a13b6355"
+      "revision_hash": "sha256:24ecd90c896b215c17d7bf989719d67fe66a91d40544c8aea7c9dcc7055c3bf1"
     }
   ],
   "publication": {
-    "published_revision_id": "lks:rev:daikasho-title-758-2",
-    "published_revision_hash": "sha256:d9e7c5e73477c5dad76d5caa4d5410b573e2e2ea8f43f94748da70d2a13b6355",
-    "set_id": "lks:set:tang-mission-750-754-court-anchors",
-    "published_at": "2026-09-24T23:00:00Z",
+    "published_revision_id": "lks:rev:daikasho-title-758-1",
+    "published_revision_hash": "sha256:24ecd90c896b215c17d7bf989719d67fe66a91d40544c8aea7c9dcc7055c3bf1",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T23:45:00Z",
     "published_by": {
       "name": "Lekishi editorial preparation",
       "role": "preparing editor (owner-instructed)"

@@ -168,21 +168,16 @@ describe("publication approval gate", () => {
   it("records a decision for every set in the chapter tree", () => {
     const ledger = ledgerRows()
 
-    // The parse must not quietly produce nothing: the two preparation snapshots
-    // and the owner's placement decision are the state the gate was added for.
-    expect(ledger.map((row) => row.setId).sort()).toEqual([
-      "lks:set:tang-mission-750-754-court-anchors",
-      "lks:set:tang-mission-750-754-v1",
-      "lks:set:tang-mission-750-754-v2",
-    ])
+    // The parse must not quietly produce nothing: the single flattened set and
+    // the owner's decision to publish it are the state the gate covers.
+    expect(ledger.map((row) => row.setId).sort()).toEqual(["lks:set:tang-mission-750-754-v1"])
     expect(approvalViolations(chapterSets(), ledger)).toEqual([])
   })
 
   it("records no approved release yet", () => {
-    // Nothing is officially published: the snapshots carry the preparing
-    // editor's self-review, the placement set carries the owner's decision to
-    // publish rather than the owner's editorial approval, and RFD 4's AC2 stays
-    // unsatisfied.
+    // Nothing is officially published: the single set carries the preparing
+    // editor's self-review and the owner's decision to publish, not the owner's
+    // editorial approval, so RFD 4's AC2 stays unsatisfied.
     expect(ledgerRows().filter((row) => row.decision === "owner approved")).toEqual([])
 
     for (const set of chapterSets()) {
@@ -191,7 +186,7 @@ describe("publication approval gate", () => {
   })
 
   it("fails a set that no decision covers", () => {
-    const ledger = ledgerRows().slice(1)
+    const ledger = ledgerRows().filter((row) => row.setId !== "lks:set:tang-mission-750-754-v1")
     const violations = approvalViolations(chapterSets(), ledger)
 
     expect(violations.join("\n")).toContain(
@@ -216,7 +211,8 @@ describe("publication approval gate", () => {
       ...set,
       review: { ...objectOf(set["review"]), independence: "independent_review" },
     }))
-    const violations = approvalViolations(sets, ledgerRows())
+    const ledger = ledgerRows().map((row) => ({ ...row, decision: "preparation snapshot" }))
+    const violations = approvalViolations(sets, ledger)
 
     expect(violations.join("\n")).toContain(
       'is a preparation snapshot but claims review independence "independent_review"',
@@ -224,9 +220,7 @@ describe("publication approval gate", () => {
   })
 
   it("fails an owner decision that does not name the owner", () => {
-    const ledger = ledgerRows().map((row) =>
-      row.decision === "preparation snapshot" ? row : { ...row, decidedBy: "the preparing editor" },
-    )
+    const ledger = ledgerRows().map((row) => ({ ...row, decidedBy: "the preparing editor" }))
     const violations = approvalViolations(chapterSets(), ledger)
 
     expect(violations.join("\n")).toContain(

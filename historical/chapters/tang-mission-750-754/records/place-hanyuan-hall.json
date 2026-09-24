@@ -7,8 +7,11 @@
   "revisions": [
     {
       "revision_id": "lks:rev:hanyuan-hall-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter place: the hall named in 古麻呂's report, with a display anchor at the modern palace site only.",
       "content": {
         "summary": "蓬萊宮含元殿, the hall in the Tang capital where 大伴古麻呂 reported that the New Year audience was held on 天寶十二載正月朔 (753).",
@@ -27,12 +30,20 @@
             "claim_id": "lks:claim:hanyuan-hall-name"
           }
         ],
-        "place_types": ["other"],
+        "place_types": [
+          "other"
+        ],
         "geometry": [
           {
             "claim_id": "lks:claim:hanyuan-hall-anchor",
             "interpretation": "display_anchor",
-            "geojson": {"type": "Point", "coordinates": [108.9594, 34.2914]},
+            "geojson": {
+              "type": "Point",
+              "coordinates": [
+                108.9594,
+                34.2914
+              ]
+            },
             "precision": "unspecified",
             "notes": "Label anchor at the modern 大明宮 palace site (Wikidata Q1158530) in Xi'an. It is not an asserted historical coordinate and does not place the hall itself."
           }
@@ -57,7 +68,10 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年正月丙寅"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年正月丙寅"
+              }
             }
           ]
         },
@@ -70,19 +84,25 @@
           "citations": [
             {
               "source_id": "lks:source:wikidata",
-              "locator": {"kind": "dataset_row", "value": "Q1158530 (P625)"}
+              "locator": {
+                "kind": "dataset_row",
+                "value": "Q1158530 (P625)"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:122f52a10506c109cf51ab096935673071be8e8eedae4a2796a60a586945892a"
+      "revision_hash": "sha256:76a08e77a28dbf8faae7d876f3ff15a25262f9a7183b9a297483130b0e28c758"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:hanyuan-hall-1",
-    "published_revision_hash": "sha256:122f52a10506c109cf51ab096935673071be8e8eedae4a2796a60a586945892a",
+    "published_revision_hash": "sha256:76a08e77a28dbf8faae7d876f3ff15a25262f9a7183b9a297483130b0e28c758",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

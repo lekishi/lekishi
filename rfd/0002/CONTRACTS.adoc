@@ -25,6 +25,7 @@ vocabulary requires a new contract version.
 |`historical/v0/schema/*.json` |JSON Schema (2020-12 subset) documents for records, sources, publication sets, and shared definitions
 |`historical/v0/examples/**` |A synthetic, self-consistent content tree that validates as a whole
 |`historical/v0/vectors/*.json` |Machine-readable boundary vectors with the expected result of each case
+|`historical/chapters/<name>/` |Reviewed chapter content in the same tree shape: `records/`, `sources/`, and `publication-sets/`, loaded through `src/lib/historical/chapter.ts`
 |`test/support/lekishi/historical/contract/*.ex` |Reference semantics and the minimal JSON Schema validator used by the tests
 |`test/historical/contract/*_test.exs` |Focused contract validation
 |===

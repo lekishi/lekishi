@@ -2,8 +2,8 @@
   "contract": "lekishi-historical-contract/v0",
   "document": "publication_set",
   "set_id": "lks:set:tang-mission-750-754-court-anchors",
-  "title": "Tang mission 750–754 chapter, court-act placements",
-  "change_explanation": "Publishes the owner-accepted placement of the chapter's court acts: one new place record for the court's seat (平城宮, the palace of 平城京) and corrected revisions of the ten events whose entries name no place (or name 内裏). Each act is anchored at the palace as a display anchor; no coordinate is asserted, and the palace's attestation and the modern site's coordinate are cited on the place record. The owner accepted this recommendation on 2026-09-24; it is a decision to publish this content, not the owner's editorial approval under RFD 2, and the specialist reviews remain outstanding. The revisions and pins published by lks:set:tang-mission-750-754-v1 and lks:set:tang-mission-750-754-v2 stay in the tree unchanged.",
+  "title": "Tang mission 750–754 chapter, court-act placements and place identifications",
+  "change_explanation": "Publishes the owner-accepted placement of the chapter's court acts: one new place record for the court's seat (平城宮, the palace of 平城京) and corrected revisions of the ten events whose entries name no place (or name 内裏). It also publishes the two place identifications the owner asked to chase: 紀伊國牟漏埼, which the cited prefectural record reports 紀伊続風土記 identified with 太地の燈明崎, and 薩摩國石籬浦, which the cited prefectural record names as 石垣 in present-day 南九州市穎娃町. Both are approximate locality-level placements labelled as modern proposals, not source statements; 驩州 stays unplaced because no source in the set identifies its site. Each act is anchored at the palace as a display anchor; no coordinate is asserted, and the palace's attestation and the modern site's coordinate are cited on the place record. The owner accepted this recommendation on 2026-09-24; it is a decision to publish this content, not the owner's editorial approval under RFD 2, and the specialist reviews remain outstanding. The revisions and pins published by lks:set:tang-mission-750-754-v1 and lks:set:tang-mission-750-754-v2 stay in the tree unchanged.",
   "members": [
     {
       "record_id": "lks:place:heijo-palace",
@@ -59,6 +59,16 @@
       "record_id": "lks:event:nakamaro-death-779",
       "revision_id": "lks:rev:nakamaro-death-779-2",
       "revision_hash": "sha256:86e9e6abe89d4e2c143efa33eb6e6fd77327e4c62fd244576411afd8b402e1f7"
+    },
+    {
+      "record_id": "lks:place:murozaki",
+      "revision_id": "lks:rev:murozaki-2",
+      "revision_hash": "sha256:e37605aadde11af06252742a05a3d142f9644e311f28278c54954e39ca1c6b24"
+    },
+    {
+      "record_id": "lks:place:ishigaki",
+      "revision_id": "lks:rev:ishigaki-2",
+      "revision_hash": "sha256:8f2a48bf6438e61bd9b70515e6f145db67f0e767213dfa18984398be86910837"
     }
   ],
   "sources": [
@@ -97,10 +107,18 @@
     {
       "source_id": "lks:source:wikidata",
       "source_hash": "sha256:f809e6af1b93dc1610af78d2e96d927d490335cc6089f36702e6f2b1c913761a"
+    },
+    {
+      "source_id": "lks:source:wakayama-kibi-drift",
+      "source_hash": "sha256:0f27cecc0b25f3c4d843e529c01a7de02f33da21c854af381b226e99220ddee2"
+    },
+    {
+      "source_id": "lks:source:kagoshima-folk-ishigaki",
+      "source_hash": "sha256:be054790a6e38cd5a4a15477b9424009a84d3c8ab4f36450b4a0dc75efe78ff4"
     }
   ],
   "review": {
-    "reviewed_at": "2026-09-24T21:30:00Z",
+    "reviewed_at": "2026-09-24T22:45:00Z",
     "reviewer": {
       "name": "Lekishi editorial preparation",
       "role": "preparing editor (self-review)"
@@ -115,7 +133,7 @@
     },
     "notes": "Self-review of the placement corrections, recorded explicitly. The palace's naming and the inner-precinct form were re-checked against the cited transcription on 2026-09-24. This is not owner review, not independent review, and not specialist review: the owner decided that this content may be published, but the owner's editorial approval under RFD 2 is still pending, so RFD 4 AC2 is not satisfied by this set, and the specialist reviews the feasibility report identifies have not been performed."
   },
-  "published_at": "2026-09-24T22:00:00Z",
+  "published_at": "2026-09-24T23:00:00Z",
   "published_by": {
     "name": "Lekishi editorial preparation",
     "role": "preparing editor (owner-instructed)"

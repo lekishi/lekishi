@@ -180,8 +180,8 @@ describe("projecting the reviewed Tang chapter", () => {
     const unplaced = inWindow.filter((event) => event.placement.kind === "none")
 
     expect(inWindow).toHaveLength(24)
-    expect(placed).toHaveLength(20)
-    expect(unplaced).toHaveLength(4)
+    expect(placed).toHaveLength(22)
+    expect(unplaced).toHaveLength(2)
 
     // A court act whose entry names no place is anchored at the court's seat as
     // a display anchor: the record asserts no coordinate and the basis stays
@@ -202,17 +202,21 @@ describe("projecting the reviewed Tang chapter", () => {
       label: "驩州",
       reason: "no-position",
     })
-    expect(eventById(chapter, "lks:event:fourth-ship-754").placement).toEqual({
-      kind: "none",
-      placeId: "lks:place:ishigaki",
-      label: "石籬浦",
-      reason: "no-position",
-    })
-    expect(eventById(chapter, "lks:event:kibi-drift-753").placement).toEqual({
-      kind: "none",
+    // The two identifications are approximate locality-level placements: the
+    // events are on the map, and the basis says the position is an approximation.
+    expect(eventById(chapter, "lks:event:kibi-drift-753").placement).toMatchObject({
+      kind: "point",
       placeId: "lks:place:murozaki",
       label: "紀伊國牟漏埼",
-      reason: "no-position",
+      basis: "approximate",
+      precision: "locality",
+    })
+    expect(eventById(chapter, "lks:event:fourth-ship-754").placement).toMatchObject({
+      kind: "point",
+      placeId: "lks:place:ishigaki",
+      label: "石籬浦",
+      basis: "approximate",
+      precision: "locality",
     })
     expect(eventById(chapter, "lks:event:ships-separate-753").placement).toEqual({
       kind: "none",
@@ -226,7 +230,7 @@ describe("projecting the reviewed Tang chapter", () => {
     }
 
     // The places with unknown geometry stay nameable, with no coordinate.
-    for (const placeId of ["lks:place:huanzhou", "lks:place:ishigaki", "lks:place:murozaki"]) {
+    for (const placeId of ["lks:place:huanzhou"]) {
       const place = chapter.places.find((candidate) => candidate.id === placeId)
 
       expect(place).toEqual({

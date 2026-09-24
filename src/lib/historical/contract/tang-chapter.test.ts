@@ -419,7 +419,7 @@ describe("the Tang chapter fixture", () => {
 
     expect(counts).toEqual({ place: 15, actor: 12, event: 29, relationship: 9, story: 1 })
     expect(chapter.documents.filter((document) => document["document"] === "source")).toHaveLength(
-      9,
+      11,
     )
 
     const first = setById(chapter, "lks:set:tang-mission-750-754-v1")
@@ -512,6 +512,8 @@ describe("the Tang chapter fixture", () => {
     expect(memberIds.sort()).toEqual(
       [
         "lks:place:heijo-palace",
+        "lks:place:ishigaki",
+        "lks:place:murozaki",
         "lks:event:appointment-750",
         "lks:event:kibi-appointment-751",
         "lks:event:court-audience-752",
@@ -768,11 +770,10 @@ describe("the Tang chapter fixture", () => {
       geometryEntries(record).some((entry) => entry["interpretation"] === "unknown"),
     )
 
-    expect(unlocated.map((record) => record["record_id"]).sort()).toEqual([
-      "lks:place:huanzhou",
-      "lks:place:ishigaki",
-      "lks:place:murozaki",
-    ])
+    // The two identifications the owner asked to chase are published as
+    // approximate locality-level placements; 驩州 keeps `unknown` geometry
+    // because no source in the set identifies its site.
+    expect(unlocated.map((record) => record["record_id"]).sort()).toEqual(["lks:place:huanzhou"])
   })
 
   it("records self-review, not owner, independent, or specialist review", () => {

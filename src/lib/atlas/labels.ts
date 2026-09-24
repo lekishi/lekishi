@@ -84,7 +84,7 @@ export function unplacedNote(placement: EventPlacement): string | null {
   }
 
   if (placement.reason === "no-place") {
-    return "The published record names no place for this event, so the atlas claims no position for it."
+    return "The chapter's record names no place for this event, so the atlas claims no position for it."
   }
 
   if (placement.reason === "no-position") {

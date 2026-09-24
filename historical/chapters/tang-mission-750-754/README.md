@@ -81,6 +81,14 @@ return-voyage landfalls, Buddhist studies for the ordination and lineage claims,
 Tang court history for the audience, and a philologist for the editions) have
 not been performed.
 
+Neither set is an official publication. In the contract's vocabulary
+"published" means *named by a publication set* — the atomic unit the atlas
+reads — not *approved for release*. The owner's decisions are recorded in
+[`rfd/0002/PUBLICATION_APPROVAL.adoc`](../../../rfd/0002/PUBLICATION_APPROVAL.adoc):
+a set may exist only when that ledger names it, and both sets are recorded there
+as **preparation snapshots** created under the owner's instruction. The first
+`owner approved` row will be the owner's editorial approval of this chapter.
+
 ## What is deferred, and why
 
 - **Purchases, library-only scholarship, and specialist outreach**: deferred at

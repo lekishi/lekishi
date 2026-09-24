@@ -44,7 +44,7 @@ occurs before the authorization item below.
 == Release verification
 
 - [ ] AC1 predeployment rehearsal: verify HTTPS redirect, certificate, routes, and the health endpoint on the release artifact; AC1 is complete only after authorized deployment (outside-host check below).
-- [ ] AC2: verify reviewed launch content, citations, the approval record, and visible uncertainty.
+- [ ] AC2: verify reviewed launch content, citations, the approval record, and visible uncertainty. The approval record is the `owner approved` row in link:../0002/PUBLICATION_APPROVAL.adoc[the publication approval gate]; no such row exists yet, and the gate refuses any set the ledger does not cover.
 - [ ] AC4: verify production-built Vite assets and the selected renderer's resources with no Vite development server.
 - [ ] AC5: record desktop/laptop and physical-iPad results, phone-layout usability, and measured performance against the agreed matrix and thresholds.
 - [ ] AC6: verify keyboard access, touch, reduced motion, non-color cues, and the non-map event list.

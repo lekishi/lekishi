@@ -1,0 +1,101 @@
+:authors: Darwin D Wu <darwin67@users.noreply.github.com>
+:state: published
+:labels: history, data, publication, editorial, governance, poc
+
+= RFD 2 publication approval gate
+
+== Provenance and scope
+
+This record answers a review question from the owner on 2026-09-24, after the
+Tang chapter's two publication sets were already in the tree: *"we should have
+some sort of decision making checkpoint in terms of publishing so you don't just
+go invent multiple versions of data."*
+
+The gap is real. The contract gives every content change one shape — a new
+revision named by a publication set — and the atlas reads the newest set-named
+revision. Nothing in the schema requires that a *person* decided a new version
+of the content may exist: `published_by` accepts any person, and
+`review.independence` has no value for the owner's editorial approval (its enum
+is `self_review`, `independent_review`, `specialist_review`). The two sets in
+the chapter tree were therefore created by the preparing editor alone, and
+nothing but prose in their notes records that they are preparation snapshots
+rather than approved releases.
+
+This record adds the missing decision point. It does not change the contract
+schemas or their version; it changes who may create a set, and it makes the
+decision machine-checkable. link:CONTRACTS.adoc[The v0 contract decision] stays
+readable and unchanged.
+
+== Decision
+
+Publication is a decision, not an agent action.
+
+* **A publication set may exist only when the ledger below names it.** A set
+  that the ledger does not cover fails the build.
+* **The preparing editor may write draft revisions but must not create, extend,
+  or supersede a set.** Draft revisions leave the previously published revision
+  current, so content can be prepared and reviewed without the atlas changing.
+* **The ledger records the decision, not the review.** A row says who decided
+  that this version of the content may exist and when; the set's own `review`
+  block still records the review independence of the content, and a
+  `self_review` set must be recorded as a preparation snapshot rather than as an
+  approved release.
+* **An owner-approved publication is recorded here first.** Until a row says
+  `owner approved`, no set may claim the owner's approval, and RFD 4's AC2 stays
+  unsatisfied.
+
+The gate is enforced by
+`src/lib/historical/contract/publication-approval.test.ts`, which runs in
+`pnpm build` through `scripts/check-chapter.mjs`. It reads this record and the
+chapter's sets and fails on any of: a set with no ledger row, a ledger row for a
+set that does not exist, a row whose decision is not one of the two recorded
+kinds, or a set whose review independence disagrees with its row. So an agent
+cannot mint a version of the content that no decision covers, and cannot label a
+preparation snapshot as approved.
+
+== Ledger
+
+One row per publication set in `historical/chapters/tang-mission-750-754/`, in
+creation order. A new set is added here only after the owner's decision.
+
+[cols="1,1,1,3",options="header"]
+|===
+|Set |Decision |Decided by |Note
+
+|`lks:set:tang-mission-750-754-v1`
+|preparation snapshot
+|owner (Gate 1 instruction, 2026-09-24)
+|First prepared revision of every record in the chapter, created so the reviewed
+mission could be rendered while the owner's editorial approval was still
+pending. This set is not an approved release: its own review block records the
+preparing editor's `self_review`, and RFD 4's AC2 is not satisfied by it.
+
+|`lks:set:tang-mission-750-754-v2`
+|preparation snapshot
+|owner (instructed preparation, 2026-09-24)
+|The first review cycle's corrections, appended as new revisions of the affected
+records so the v1 revisions and pins stay readable. Also a preparation snapshot
+with `self_review`; also not an approved release.
+|===
+
+No `owner approved` row exists yet. The first one will be the owner's editorial
+approval of the chapter under RFD 2, and it is what RFD 4's AC2 asks for; it is
+expected to name the set that publishes the then-current revisions, including
+any placement corrections prepared in the meantime.
+
+== Consequences
+
+* Adding a chapter or changing one now has three distinct steps instead of one:
+  prepare draft revisions (editorial work), record the decision (owner), and
+  publish the set that names them (the mechanical step the atlas reads).
+* The atlas keeps rendering the last published set while corrections are
+  prepared, so review can happen against a stable preview.
+* The retained history is unchanged: the v1 and v2 revisions and their pins stay
+  in the tree, and the ledger records what each set was rather than relabelling
+  it after the fact.
+* **Open question for a later contract version.** The v0 set description says a
+  set records "the approving editor", but the schema cannot express the owner's
+  approval (`review.independence` has no such value and there is no decision
+  field). The ledger is the record until a v1 contract decides whether approval
+  belongs in the set itself, in the ledger, or in both. Extending a vocabulary
+  requires a new contract version, so this is deliberately left open here.

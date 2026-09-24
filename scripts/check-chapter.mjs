@@ -8,6 +8,10 @@
  * what a reviewer opens as reviewed content — and because a Cloudflare Pages
  * build runs exactly this command.
  *
+ * The gate also carries the publication approval checkpoint: a set the owner
+ * decision ledger does not cover fails here, so no version of the content can
+ * exist that no person decided on.
+ *
  * The contract's validator needs `node:fs` (schemas) and `node:crypto`
  * (revision and source hashes), so it cannot run in the browser bundle. This
  * gate runs the chapter's own contract test and the projection's test suite
@@ -28,6 +32,7 @@ const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".."
 
 const gate = [
   "src/lib/historical/contract/tang-chapter.test.ts",
+  "src/lib/historical/contract/publication-approval.test.ts",
   "src/lib/atlas/projection.test.ts",
 ]
 

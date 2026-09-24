@@ -35,7 +35,7 @@ export function relationToWindow(occurrence: Occurrence, window: TimeWindow): Oc
   return overlapsWindow(occurrence, window) ? "possible" : "outside"
 }
 
-/** True when the playhead sits inside the supported occurrence span. */
+/** True when the playhead sits inside the supported occurrence span, at the year it is given. */
 export function occursAtPlayhead(occurrence: Occurrence, playhead: number): boolean {
   return playhead >= occurrence.startYear && playhead <= occurrence.endYear
 }
@@ -52,7 +52,11 @@ export function occursAtPlayhead(occurrence: Occurrence, playhead: number): bool
  * playhead.
  */
 export function playbackStateAt(occurrence: Occurrence, playhead: number): PlaybackState {
-  const inside = occursAtPlayhead(occurrence, playhead)
+  // The playback clock advances in fractional years while the timeline displays
+  // whole years, so classification follows the displayed year. Comparing the raw
+  // fraction would let a single-year instant the timeline is showing as the
+  // playhead's year pass by without ever being classified.
+  const inside = occursAtPlayhead(occurrence, Math.round(playhead))
 
   if (occurrence.mode === "occurrence_window") {
     return inside ? "possible" : "inactive"

@@ -228,14 +228,11 @@ export function selectionTimeStatus(
     : "in-window"
 }
 
-export function isEventActive(state: AtlasState, event: HistoricalEvent): boolean {
-  return state.playhead >= event.occurrence.startYear && state.playhead <= event.occurrence.endYear
-}
-
 /**
  * The playhead's relation to an event: `active` for a supported instant or
  * duration, `possible` for an uncertain occurrence window the playhead falls
- * inside, `inactive` otherwise. The renderer-independent rule lives in `time.ts`.
+ * inside, `inactive` otherwise. The renderer-independent rule lives in `time.ts`,
+ * which classifies at the year the timeline displays.
  */
 export function playbackState(state: AtlasState, event: HistoricalEvent): PlaybackState {
   return playbackStateAt(event.occurrence, state.playhead)

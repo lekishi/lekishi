@@ -17,8 +17,10 @@ import { projectChapter } from "./projection"
  * Cloudflare Pages build) instead of shipping placeholder content, and a
  * deployed page never falls back to synthetic events. `Publication.checkAll`
  * remains the Node-side validator: schemas, revision hashes, and source pins
- * need `node:fs` and `node:crypto` and are covered by the contract tests and
- * `pnpm build`'s content gate.
+ * need `node:fs` and `node:crypto`, so `pnpm build` runs
+ * `scripts/check-chapter.mjs`, which runs the chapter's contract and projection
+ * tests through Vitest before Vite bundles anything. This module is the
+ * representability gate; that one is the validation gate.
  */
 
 /** The reviewed chapter this site ships. Adding a chapter is a content decision, not a code path. */

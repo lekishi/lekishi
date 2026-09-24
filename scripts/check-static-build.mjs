@@ -113,6 +113,7 @@ if (!atlasHtml.includes("_app/immutable/entry/start.")) {
 }
 
 const indexHtml = read(path.join(buildDirectory, "index.html"))
+const notFoundHtml = read(path.join(buildDirectory, "404.html"))
 
 if (!indexHtml.includes('href="/atlas"')) {
   fail("index.html does not link to the atlas")
@@ -143,24 +144,32 @@ if (!scriptText.includes("/cesium/")) {
 
 // The atlas renders the reviewed chapter, and its content boundary throws at
 // module scope when the chapter cannot be projected, so a build that got this
-// far has a valid chapter. These checks are about what the artifact contains.
-// The markers are the chapter's own id and a published record id — and, in the
-// prerendered shell, the chapter title a reader sees — so replacing or renaming
-// the chapter fails this check until the invariant is updated with it.
+// far has a representable chapter. These are sentinel checks on what the
+// artifact actually contains — the chapter's own id and a published record id,
+// and the chapter title a reader sees in the prerendered shell — so replacing or
+// renaming the chapter fails this check until the invariant is updated with it.
 for (const marker of ["tang-mission-750-754", "lks:event:appointment-750"]) {
   if (!scriptText.includes(marker)) {
     fail(`the built scripts do not carry the reviewed chapter: ${marker} is missing`)
   }
 }
 
+// The synthetic test fixture (`src/lib/atlas/fixtures.ts`) is imported by unit
+// tests only. These sentinels are its own strings; they are a tripwire, not a
+// proof that no fixture content could ever reach the artifact, which is what the
+// browser checks are for.
+const applicationText = `${scriptText}\n${[indexHtml, atlasHtml, notFoundHtml].join("\n")}`
+
 for (const marker of [
   "Synthetic foundation fixture",
+  "Synthetic test chapter",
+  "synthetic-test-chapter",
   "Fixture assembly",
   "Sample harbor",
   "event-harbor-assembly",
 ]) {
-  if (scriptText.includes(marker)) {
-    fail(`the built scripts still carry synthetic fixture content: ${marker}`)
+  if (applicationText.includes(marker)) {
+    fail(`the artifact still carries synthetic fixture content: ${marker}`)
   }
 }
 

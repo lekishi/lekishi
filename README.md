@@ -82,8 +82,8 @@ that replaced the old `mix lekishi.assets.check`: it fails the build if the
 prerendered pages, the hashed bundles, the single stylesheet with the Cesium
 widget styles, or the Cesium runtime directories are missing, if the atlas page
 does not have exactly one mount point, if the artifact contains a server runtime,
-if the built scripts do not carry the reviewed chapter, or if synthetic fixture
-content reaches the artifact.
+if the built scripts or the prerendered pages do not carry the reviewed chapter,
+or if the retired synthetic fixture's sentinel strings reach the artifact.
 
 ### Reviewed chapter content
 
@@ -94,13 +94,18 @@ and that boundary is the only way chapter content enters the app:
 1. `src/lib/historical/chapter.ts` is the Node-side loader. It reads the tree
    with `fs` and hands it to the contract's own `Publication.checkAll`; it is
    used by tests and tooling, never by the browser.
-2. `src/lib/atlas/chapter-content.ts` bundles the same records and publication
+2. `scripts/check-chapter.mjs` runs before Vite in `pnpm build` and runs the
+   chapter's contract test and the projection test suite through Vitest, so an
+   edited approved revision, a missing source pin, or a record published at a
+   revision it does not carry fails the build. This is the validation gate:
+   schemas, hashes, and pins need Node, so they cannot run in the bundle.
+3. `src/lib/atlas/chapter-content.ts` bundles the same records and publication
    sets with Vite's `import.meta.glob`, so the browser reads the files the
    contract validates: no `fs`, no second copy, and no request a static host has
    to serve. The projection runs at module scope and **throws** if the chapter
-   cannot be projected. The atlas route is prerendered, so that failure fails
+   cannot be represented. The atlas route is prerendered, so that failure fails
    `pnpm build` instead of shipping placeholder content.
-3. `src/lib/atlas/projection.ts` selects the newest published revision per
+4. `src/lib/atlas/projection.ts` selects the newest published revision per
    record through the contract's own publication ordering — the same
    `currentPublished` the validator uses, split into `publication-order.ts` so
    the browser and Node share one rule — and maps it into the atlas domain.
@@ -112,6 +117,9 @@ What the projection refuses to do is part of the contract with the reader:
   context) stays in the non-map list with **no** coordinate.
 - A place whose geometry is `unknown` carries no position; a `display_anchor`
   stays a display anchor and is never presented as an asserted location.
+- The occurrence mode survives to the surfaces: a duration is active at the
+  playhead, an uncertain occurrence window is only ever a possible match, and
+  neither is presented as the other.
 - A coda node is the chapter's own presentation label, cross-checked against the
   primary window, so a coda node cannot be folded into the mission window and a
   mission event cannot drift out of it.

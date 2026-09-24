@@ -158,14 +158,15 @@ own contract test are unchanged.
 
 |Browser checks
 |`pnpm e2e` against the built artifact, one worker, three projects: desktop
-19 passed / 1 skipped, tablet-touch 19 passed / 1 skipped, phone 19 passed /
-1 skipped (57 passed, 3 skipped, 14.8 minutes). The skipped case is the
-touch-only tap check on the non-touch desktop project, and the desktop-only drag
-check on the touch projects. The checks cover the reviewed chapter's title and
-notice, the 24 in-window events, the unplaced events, the coda window, an
-uncertain occurrence staying a possible match at the playhead, selection and
-outside-window details, playback, camera-follow rules, keyboard access, disposal,
-`pagehide`/`pageshow` restore, and the phone layouts at 390 px and 320 px.
+ 20 passed / 1 skipped, tablet-touch 20 passed / 1 skipped, phone 20 passed /
+ 1 skipped (60 passed, 3 skipped, 16.8 minutes). The skipped case is the
+ touch-only tap check on the non-touch desktop project, and the desktop-only drag
+ check on the touch projects. The checks cover the reviewed chapter's title and
+ notice, the 24 in-window events, the unplaced events, the coda window, an
+ uncertain occurrence staying a possible match at the playhead, selection and
+ outside-window details, playback, camera-follow rules, keyboard access, disposal,
+ `pagehide`/`pageshow` restore, the event list as the panel's scroll container, and
+ the phone layouts at 390 px and 320 px.
 |===
 
 == Consequences
@@ -175,6 +176,9 @@ outside-window details, playback, camera-follow rules, keyboard access, disposal
   panel name the chapter and state its recorded review status.
 * The atlas states what it cannot show instead of filling it in: unplaced events
   are listable and unmarked, and the details surface says why.
+* The event list is the panel's scroll container, and the overlay column is
+  bounded above the time controls at every width, so a window longer than the
+  panel scrolls instead of running under the controls.
 * Adding or changing a chapter is now a content decision with a code path that
   fails loudly, rather than a fixture edit.
 * No server, database, provider account, or secret is introduced; the artifact
@@ -228,3 +232,12 @@ outside-window details, playback, camera-follow rules, keyboard access, disposal
 * Re-checked that the workspace mounts once, that no Cesium ion request is made,
   and that the event list, details, and time controls stay apart at both phone
   widths.
+* Re-checked the event list after an owner-reported regression on the static
+  portal: the panel is bounded above the time controls and the list is the scroll
+  container, so the events below the fold are reachable at desktop, tablet, and
+  phone widths. Measured at 1916×916, 1440×900, and 1024×768 (panel bottom
+  772/756/624 px against controls top 792/776/644 px; the list scrolled 1930–2078 px
+  to its last row), and on the deployed branch preview at 1916×916 and 390×844.
+  The new browser check pins the scroll container, the panel/controls separation,
+  the row being the topmost element at its own centre, and selection of the last
+  published event from the scrolled position; it fails against the pre-fix layout.

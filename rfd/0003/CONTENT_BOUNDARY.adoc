@@ -107,9 +107,13 @@ Measured on 2026-09-24 in the pinned Nix environment, from the built artifact.
 |Check |Result
 
 |Projection over the real tree
-|`src/lib/atlas/projection.test.ts` and `chapter-content.test.ts`: 25 tests. 14
-places, 29 events, 1 story, 65 published revisions. The chapter's title is taken
-from its published story summary: "The 750–754 embassy of 藤原朝臣清河".
+|`src/lib/atlas/projection.test.ts` and `chapter-content.test.ts`: 27 tests. 15
+places, 29 events, 1 story, 66 records, one publication set. (The measurement
+taken before the owner-directed flattening of 2026-09-24 was 14 places and 65
+published revisions; the tree now carries one revision per record, so the
+revision count and the inventory differ from that earlier snapshot.) The
+chapter's title is taken from its published story summary: "The 750–754 embassy
+of 藤原朝臣清河".
 
 |Selected revision
 |The atlas shows the newest published revision of every record: the correction set
@@ -120,14 +124,17 @@ every record carries one revision and the set publishes all of them.
 |Map and list counts
 |29 published events: 24 in the primary 750–754 window and 5 coda nodes outside
 it. Of the 24 in-window events, 22 resolve to a point and 2 do not: 驩州 names a
-place with `unknown` geometry, and 多禰島 is named only as context. Ten of the
-twenty-two are court acts whose entries name no place: they point at 平城宮, the
-court's seat, as a `display_anchor` (owner-accepted on 2026-09-24), so the atlas
-shows them labelled "display anchor only" and asserts no coordinate for them.
-Two more are the identifications the owner asked to chase: 紀伊國牟漏埼 at the
-modern town of 太地 and 石籬浦 at the former town of 頴娃, both approximate
-locality-level placements labelled as modern proposals (比定), not source
-statements.
+place with `unknown` geometry, and 多禰島 is named only as context. Seven of the
+twenty-two are in-window court acts whose entries name no place (three more are
+coda court acts, ten in all): they point at 平城宮, the court's seat, as a
+`display_anchor` (owner-accepted on 2026-09-24), so the atlas shows them labelled
+"display anchor only" and asserts no coordinate for them. The reference is a
+display placement, not a historical site claim: the records carry no claim
+asserting the association. Two more are the identifications the owner asked to
+chase: 紀伊國牟漏埼 at the modern town of 太地, on the cited 和歌山県 page, and
+石籬浦 at the former town of 頴娃, on the cited local-history account by 井上賢一
+— both approximate locality-level placements labelled as modern identifications,
+not source statements.
 
 |Build gate
 |A module-scope projection failure fails `pnpm build`: the prerender reports the

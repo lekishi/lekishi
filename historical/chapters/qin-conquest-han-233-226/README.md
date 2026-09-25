@@ -38,32 +38,28 @@ narrowest source-supported default that still yields a usable comparison:
    the 潁川 commandery;
 5. **226 BCE** — 新鄭, the former capital, revolts.
 
-The 226 BCE notice is the episode's documented aftermath and the **only event
-this fixture places** (the death names 雲陽 and the cession names 南陽, but no
-source in this set identifies either, so both stay unlocated). Excluding the
-revolt would leave the fixture with no sourced map point at all, because the
-annexation's own entries name only the commandery the annexation created.
-Including it as the last event keeps the window bounded to one thread (Han's end)
-and gives the comparison harness one placed event, four list-only events, one
-dispute, and one unlocated-territory case. It is the narrowest scope that is
-still loadable as a map scenario; a future set can narrow or extend it only
-through a new revision and set.
+The 226 BCE notice is the episode's documented aftermath and the last event of
+Han's end. Including it keeps the window bounded to one thread (Han's end) and
+gives the comparison harness five events, one dispute, one annexed-territory
+case, and one event whose place the sources name but do not locate. It is the
+narrowest scope that is still loadable as a map scenario; a future set can
+narrow or extend it only through a new revision and set.
 
 The fixture is **not** a campaign narrative: it records the dated acts the
 sources state, asserts no causation, draws no route or territory, and places
-nothing beyond one label anchor.
+every event at a label anchor or display placement only.
 
 ## Inventory
 
 | Kind | Count | Notes |
 | --- | --- | --- |
-| Places | 4 | `新鄭` (label anchor only), `雲陽`, `南陽`, `潁川郡` (all three `unknown` geometry) |
+| Places | 4 | three with a `display_anchor` label position and one `unknown`; no asserted coordinate anywhere |
 | Actors | 6 | 秦 and 韓 (states), 秦王政, 韓王安, 內史騰, 韓非 |
 | Events | 5 | the submission/embassy, the death, the cession, the annexation, the revolt |
 | Relationships | 4 | conflict, diplomacy (the submission request), changed boundaries (the cession), institutional change (the commandery) |
 | Stories | 1 | the episode in presentation order |
-| Sources | 3 | two primary works and Wikidata for the one anchor coordinate |
-| Records | 20 | one set publishes them; the twelve corrected records also keep the revision they replaced, unpublished |
+| Sources | 4 | two primary works, one Qing historical geography for the place identifications, and Wikidata for the label-anchor coordinates |
+| Records | 20 | one set publishes them; corrected and superseded records keep the revisions they replaced, unpublished |
 
 The exact event inventory is pinned by
 `src/lib/historical/contract/qin-chapter.test.ts`.
@@ -74,31 +70,85 @@ The exact event inventory is pinned by
 | --- | --- | --- | --- |
 | [`史記`](sources/shiji.json) | primary | 卷六 秦始皇本紀 (篇首, 十四年, 十六年, 十七年, 二十一年); 卷十五 六國年表 (秦始皇九年, 十四年, 十六年, 十七年); 卷四十五 韓世家 (韓哀侯二年, 韓桓惠王三十四年, 韓王安五年, 韓王安九年); 卷六十三 老子韓非列傳 | public domain; Wikisource transcription, unproofread; short quotations permitted |
 | [`資治通鑑`](sources/zizhi-tongjian.json) | primary | 卷六 秦紀一 (莊襄王三年, 始皇帝十四年, 十六年, 十七年) | public domain; Wikisource transcription, unproofread, with later annotations; main text only |
-| [`Wikidata`](sources/wikidata.json) | dataset | Q1024662 (P625) | CC0 1.0; modern coordinate only, never a historical claim |
+| [`讀史方輿紀要`](sources/du-shi-fang-yu-ji-yao.json) | reference | 卷四十七 河南二 開封府 (禹州, 禹州 陽翟城, 新鄭縣); 卷四十九 河南四 懷慶府 衛輝府 彰德府 (修武縣 南陽城); 卷五十一 河南六 南陽府 (宛城); 卷五十三 陝西二 西安府 (涇陽縣 雲陽城) | public domain (1692); Wikisource transcription, unproofread; citation of its identifications, short quotations |
+| [`Wikidata`](sources/wikidata.json) | dataset | Q1024662, Q10881340, Q1344848 (P625) | CC0 1.0; modern coordinate only, never a historical claim |
 
 Every locator was re-checked against the named Wikisource transcription on
-2026-09-25. Both transcriptions are unproofread, so every locator must be
+2026-09-25. All three transcriptions are unproofread, so every locator must be
 re-checked against a critical edition before content freeze. The fixture cites
 the 資治通鑑 main text only: its transcription carries later annotations and
 text-critical notes (for example the correction of 勝 to 騰 in the 230 BCE
-entry), and those are not used as evidence.
+entry), and those are not used as evidence. The 讀史方輿紀要 transcription marks
+each gazetteer entry's notes with an `{{annotate}}` template that renders inline;
+the quoted fragments are the entry text as it renders, and one distance
+expression it carries (卷五十三 涇陽縣 雲陽城) is damaged, so no distance is
+quoted or used.
 
-## Geometry: one label anchor, everything else unlocated
+## Geometry: label anchors for what the sources identify, none for what they do not
 
-- `新鄭` carries the fixture's only placement: a `display_anchor` at the modern
-  city of the same name (Wikidata Q1024662), labelled as a label anchor that
-  asserts no historical coordinate. The anchor is a map label position, not an
-  identification of the capital's site or of the revolt's site.
-- `雲陽`, `南陽`, and `潁川郡` carry `unknown` geometry with an explanation: the
-  cited entries name them but state no site, extent, or seat. In particular the
-  fixture does **not** place the Han-era 南陽 at the modern city of the same
-  name — the sources do not identify the two — and it does not place 雲陽 at the
-  modern town of the same name.
+The fixture shows an event only where a cited source supports a place, and every
+position it shows is a **label anchor**: a map label position that asserts no
+historical coordinate. Each anchor names the modern place it sits at, the dataset
+its coordinate comes from, and the source that identifies the place the anchor
+stands for, because a modern namesake is not evidence on its own.
+
+- `新鄭` is anchored at the modern city of the same name (Wikidata Q1024662),
+  which the cited historical geography also records as 新鄭 (卷四十七 開封府
+  新鄭縣). The anchor is a map label position, not an identification of the
+  capital's site or of the revolt's site.
+- `雲陽`, the place the annals name for 韓非's death, is anchored at the modern
+  `雲陽鎮` in `涇陽縣` (Wikidata Q10881340). The anchor rests on the cited
+  historical geography's record of a `雲陽城` as a Qin county in the northwest of
+  涇陽縣 (卷五十三 西安府 涇陽縣); it is area-level, asserts no site, and the
+  transcription's distance expression is damaged, so no distance is used.
+- `潁川郡`, the commandery the 230 BCE annexation created, is anchored at the
+  modern `禹州市` (Wikidata Q1344848), the city that carries the name of the
+  historical geography's `禹州`, whose `州治` `陽翟` it records as the Qin
+  commandery's seat (卷四十七 開封府 禹州, 陽翟城). The anchor is a region-level
+  label position: it asserts no site and no extent, and the entries cited here
+  state neither seat nor extent.
+- `南陽` carries **no position**. The entries name the land but state no extent or
+  seat, and the cited historical geography records the name for two different
+  regions — the `河內 南陽` (`南陽城` in the north of `修武縣`, 卷四十九 懷慶府
+  修武縣) and the Qin `南陽郡` whose seat was `宛` (卷五十一 南陽府) — without
+  identifying the land Han ceded in 231 BCE. The record chooses neither region,
+  and the cession's summary states in the review surface that the cession has no
+  position.
+- The 233 BCE submission and embassy carries a display placement at `新鄭`, the
+  Han capital the hereditary house records, because the entries name no place for
+  either act. It asserts no site, and the Qin court the embassy reached is not
+  named by any source in this set, so it is not anchored.
 - No route, itinerary, area, or territory is published, and no event carries its
-  own point geometry. The annexation is a campaign with **no** campaign site:
-  the sources name only the commandery it created.
-- The one placed event is the 226 BCE revolt; the other four are list-only and
-  the atlas must state why for each.
+  own point geometry. The annexation is a campaign with **no** campaign site: the
+  sources name only the commandery it created, and the anchor is the seat
+  identification the historical geography records, not a site of the campaign.
+- Every anchor's coordinate is the modern place's Wikidata value, and every
+  anchor's identification is the historical geography's statement, recorded as
+  that work's statement rather than as the primary entries'.
+
+## Label positions (owner report, 2026-09-25)
+
+The owner reported that locations were missing where the records name them: the
+review route showed 雲陽, 南陽, and 潁川郡 as unlocated and the submission event
+with no place at all. The preparing editor first added anchors at the modern
+places that merely carry the names and withdrew them on review — a coordinate for
+a modern namesake is not evidence that the ancient place was there. The positions
+now published rest on the identifications the cited historical geography records:
+
+| Revision | Record | What it adds |
+| --- | --- | --- |
+| `lks:rev:xinzheng-2` | `lks:place:xinzheng` | The anchor also cites the historical geography's record of 新鄭, so no anchor rests on the modern name alone. |
+| `lks:rev:yunyang-2` | `lks:place:yunyang` | A label anchor at 雲陽鎮 resting on 雲陽城 as a Qin county in the northwest of 涇陽縣. |
+| `lks:rev:yingchuan-2` | `lks:place:yingchuan` | A region-level label anchor at 禹州市 resting on 陽翟 as the Qin commandery's seat. |
+| `lks:rev:nanyang-3` | `lks:place:nanyang` | Keeps `unknown` geometry and records the two regions the name covers, so the record says why it chooses neither. |
+| `lks:rev:han-nanyang-cession-231-3` | `lks:event:han-nanyang-cession-231` | The summary and notes state in the review surface why the cession has no position. |
+| `lks:rev:han-conquest-230-3` | `lks:event:han-conquest-230` | The summary and notes state that the entries name no campaign site and that the commandery's anchor is the seat the historical geography records. |
+| `lks:rev:qin-conquest-han-story-3` | `lks:story:qin-conquest-han-233-226` | The coverage note names the label positions and why 南陽 has none. |
+
+They are additions in the same preparation set: no reviewed wording was approved
+or rejected, no approval is recorded, and the superseded revisions stay in their
+records. A source that identifies the ceded land would replace 南陽's `unknown`
+geometry with a position; that is an owner/editorial sourcing decision.
 
 ## Time, uncertainty, and disputes
 
@@ -181,14 +231,14 @@ and the event inventory:
   昌平君 being moved to 郢;
 - the 246 BCE 鄭國 canal, the 227–226 BCE Yan campaign and 荊軻's attempt,
   earlier Qin–Han wars, and every later Qin conquest;
-- routes, campaign paths, territory, and asserted coordinates beyond the one
-  label anchor.
+- routes, campaign paths, territory, and asserted coordinates: the fixture
+  publishes label anchors only.
 
 ## Review status
 
 The single set, `lks:set:qin-conquest-han-233-226-v1`, publishes every record
-and pins the three cited sources; the twelve corrected records keep the revision
-they replaced as unpublished history. It records the **preparing editor's
+and pins the four cited sources; the corrected records and the label-position
+additions keep the revisions they replaced as unpublished history. It records the **preparing editor's
 self-review** (`self_review`, reviewer = an author of the member revisions). This
 is not owner review, not independent review, and not specialist review; no owner
 decision exists, and the fixture must not be described as approved or published
@@ -222,9 +272,13 @@ corrected, published for review, awaiting the owner's decision".
   canonical hashing during preparation. A documented way to seal a *new*
   preparation chapter, without weakening the immutability rule for approved
   content, is still open.
-- **Gazetteer sources.** CHGIS and CBDB remain deferred (restrictive or
-  non-commercial terms); a source that identifies the Qin 雲陽, the Han-era
-  南陽, or the 潁川 commandery's seat is what would place them.
+- **A source for the ceded land.** The Qing historical geography now pinned to
+  the set records the name 南陽 for two different regions and identifies the Qin
+  commandery's seat, so the commandery and the death place have anchors. It does
+  not identify which land the 231 BCE cession was, so 南陽 keeps unknown geometry;
+  a source that identifies the ceded land is what would place it. CHGIS and CBDB
+  remain deferred (restrictive or non-commercial terms), and the identifications
+  now used are a Qing compilation's, not a modern critical gazetteer's.
 - **No media.** No image or media asset is included.
 
 ## Load and validate
@@ -267,9 +321,20 @@ publication set, which is the same rule the Tang chapter follows.
 
 - It is a bounded curated selection, not a complete record of Qin's conquests or
   of Han's end, and not a claim that nothing else happened in these years.
+- Its map positions are label anchors and display placements, not historical
+  coordinates: each anchor rests on a cited identification and sits at the modern
+  place that carries the name, and no site, extent, or seat is asserted for any
+  place. 南陽 has no position at all, because the sources state no extent or seat
+  and the name covers two regions.
 - It is a preparation snapshot: not owner-approved, not release content, and not
   a second launch chapter. The corrected revisions are published for the owner's
   review, and the owner's decision on them is still open, so the wording must not
   be treated as final.
 - The locators rest on unproofread transcriptions and must be re-checked against
-  critical editions before content freeze.
+  critical editions before content freeze; the identifications the anchors rest on
+  are a 1692 compilation's, and a modern critical gazetteer would supersede them.
+- The shared atlas opens at one home height for every chapter. The fixture's
+  places are close together (雲陽 to 禹州 is about 450 km), so at that height
+  their map labels overlap; the event list and the details surface carry the
+  names and placements, and the camera can be zoomed. A chapter-relative home
+  height would be a shared-surface change and is not part of this fixture.

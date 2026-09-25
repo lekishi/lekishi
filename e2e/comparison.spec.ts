@@ -76,14 +76,23 @@ test("serves the comparison fixture as unapproved preparation with BCE years", a
   await expect(page.getByTestId("atlas-time-controls")).toContainText("226 BCE")
   await expect(page.locator("#atlas-playhead-value")).toHaveText("233 BCE")
 
-  // Every event states its own BCE year, and none of them is presented with a
-  // day or as a continuous span.
+  // Every event states its own BCE year, every placement is a label anchor
+  // rather than an asserted coordinate, and none of them is presented with a day
+  // or as a continuous span. The 231 BCE cession is named without a position,
+  // because the sources state no extent or seat and the name covers two regions.
   const listText = await page.getByTestId("atlas-event-list").innerText()
 
   expect(listText).toContain("233 BCE")
   expect(listText).toContain("226 BCE")
   expect(listText).toContain("uncertain span")
+  expect(listText).toContain("display anchor only")
+  expect(listText).toContain("南陽 · no sourced position")
   expect(listText).not.toContain("drought")
+
+  // Four of the five events are shown at label anchors; 南陽 is the one place
+  // without a sourced map position, and the notice counts both.
+  await expect(page.locator("#atlas-notice")).toContainText("1 of 5 in-window events")
+  await expect(page.locator("#atlas-notice")).toContainText("1 of 4 places without a sourced map")
 
   expect(problems).toEqual([])
 })
@@ -111,9 +120,10 @@ test("shows the disputed death account with the accounts that challenge it", asy
   // The accounts carry their locators, so the disagreement is checkable here.
   await expect(dispute).toContainText("卷四十五 韓世家")
 
-  // The details panel keeps the record's own uncertainty alongside the dispute.
+  // The details panel keeps the record's own uncertainty alongside the dispute,
+  // and states that the place is shown at a label anchor rather than a site.
   await expect(page.getByTestId("atlas-selection")).toContainText("uncertain span")
-  await expect(page.getByTestId("atlas-selection")).toContainText("no sourced position")
+  await expect(page.getByTestId("atlas-selection")).toContainText("display anchor only")
 })
 
 test("keeps the reviewed Tang atlas on its own chapter and surface", async ({ page }) => {

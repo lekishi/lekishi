@@ -80,13 +80,136 @@
         }
       ],
       "revision_hash": "sha256:bb72543cddc8d0ece29c7674f595e213970ad93798371b491af1c68f04af1024"
+    },
+    {
+      "revision_id": "lks:rev:yunyang-2",
+      "created_at": "2026-09-25T20:00:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Label anchor added after the owner reported that locations were missing where the records name them: the cited primary entries state no site for the Qin 雲陽, and the anchor rests on the cited historical geography's identification of 雲陽城 as a Qin county in the northwest of 涇陽縣, placed at the modern town that carries the name. It asserts no site, and the coordinate is the modern town's Wikidata value.",
+      "content": {
+        "summary": "雲陽, the place where the annals record 韓非 dying after Qin detained him. The annals name the place and state no site for it; the historical geography 讀史方輿紀要 records a 雲陽城 as a Qin county in the northwest of 涇陽縣, and the record's label anchor sits at the modern 雲陽鎮 in 涇陽縣, the town that carries the name in that area. It is a map label position, not an asserted site.",
+        "names": [
+          {
+            "form": "雲陽",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "primary",
+            "romanization": {
+              "value": "Yunyang",
+              "scheme": "pinyin",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:yunyang-name"
+          }
+        ],
+        "place_types": [
+          "settlement"
+        ],
+        "geometry": [
+          {
+            "claim_id": "lks:claim:yunyang-anchor",
+            "interpretation": "display_anchor",
+            "geojson": {
+              "type": "Point",
+              "coordinates": [
+                108.80985,
+                34.6355
+              ]
+            },
+            "precision": "unspecified",
+            "notes": "Label anchor at the modern 雲陽鎮 in 涇陽縣 (Wikidata Q10881340), the town that carries the name in the area the cited historical geography places the Qin 雲陽 (讀史方輿紀要 卷五十三 西安府 涇陽縣, 雲陽城). It is not an asserted historical coordinate: the annals state no site, the anchor places no wall, palace, or death site, and the transcription's distance expression for 雲陽城 is damaged, so no distance is used."
+          }
+        ],
+        "editorial_notes": "The record keeps the annals' name and adds one area-level identification from the cited historical geography (a Qin county in the northwest of 涇陽縣), recorded as that work's statement and not as the annals'. The place stays a label position: a source that fixes the site is what would replace the anchor with an asserted placement.",
+        "modern_equivalents": [
+          {
+            "form": "雲陽鎮",
+            "language": "zh-Hans",
+            "script": "Hani",
+            "note": "Modern town recorded for orientation only; the anchor is a label position, not an identification of the Qin place's site."
+          }
+        ]
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:yunyang-name",
+          "statement": "The annals record that Qin detained 韓非 and that he died at 雲陽, in the same 十四年 (233 BCE) entry.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十四年（非死雲陽）"
+              },
+              "quoted_text": "韓非使秦，秦用李斯謀，留非，非死雲陽。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:yunyang-unlocated",
+          "statement": "The annals name 雲陽 as the place of the death and state no site for it.",
+          "asserts": "/geometry/0",
+          "basis": "attested",
+          "role": "supporting",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十四年（非死雲陽）"
+              }
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:yunyang-identification",
+          "statement": "The historical geography records 雲陽城 as a Qin county in the northwest of 涇陽縣.",
+          "asserts": "/geometry/0",
+          "basis": "attested",
+          "role": "supporting",
+          "citations": [
+            {
+              "source_id": "lks:source:dushi-fangyu-jiyao",
+              "locator": {
+                "kind": "entry",
+                "value": "卷五十三 陝西二 西安府 涇陽縣（雲陽城）"
+              },
+              "quoted_text": "秦縣。始皇二十五年使蒙恬通直道，自九原至雲陽。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:yunyang-anchor",
+          "statement": "The label anchor is placed at the modern town's coordinate recorded in Wikidata (CC0); no historical coordinate is asserted.",
+          "asserts": "/geometry/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:wikidata",
+              "locator": {
+                "kind": "dataset_row",
+                "value": "Q10881340 (P625)"
+              }
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:2d4c5a7112d7c4bfeeaf38789b2d3f75ec9c22e7842b7c3a0c10e4017d87c4b1"
     }
   ],
   "publication": {
-    "published_revision_id": "lks:rev:yunyang-1",
-    "published_revision_hash": "sha256:bb72543cddc8d0ece29c7674f595e213970ad93798371b491af1c68f04af1024",
+    "published_revision_id": "lks:rev:yunyang-2",
+    "published_revision_hash": "sha256:2d4c5a7112d7c4bfeeaf38789b2d3f75ec9c22e7842b7c3a0c10e4017d87c4b1",
     "set_id": "lks:set:qin-conquest-han-233-226-v1",
-    "published_at": "2026-09-25T05:45:00Z",
+    "published_at": "2026-09-25T20:30:00Z",
     "published_by": {
       "name": "Lekishi editorial preparation",
       "role": "preparing editor (owner-instructed)"

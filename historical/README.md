@@ -59,9 +59,15 @@ rather than a release, loadable through the browser-safe comparison catalog
 (`src/lib/atlas/chapter-catalog.ts`) and deliberately not rendered by the
 production atlas. Its single preparation set publishes the twelve corrected
 revisions the internal review prepared, which the owner asked to review before
-deciding, and the comparison review route `/compare/qin` renders them while
-stating that the content is unapproved preparation; no owner decision is
-recorded, and the atlas route still renders only the Tang chapter.
+deciding, and the label positions that followed the owner's report that locations
+were missing where the records name them: label anchors for the death place and
+the annexed commandery, each resting on a cited identification, and a display
+placement for the submission. 南陽 keeps unknown geometry because the entries
+state no extent or seat and the name covers two regions, so it has no position.
+The comparison review route `/compare/qin` renders all of this while stating that
+the content is unapproved preparation, and every map position is a label anchor
+that asserts no historical coordinate. No owner decision is recorded, and the
+atlas route still renders only the Tang chapter.
 
 The publication approval gate covers every chapter tree: a set that
 `rfd/0002/PUBLICATION_APPROVAL.adoc` does not name fails the build, and the

@@ -198,13 +198,163 @@
         }
       ],
       "revision_hash": "sha256:d02039178cf39cc07913c08debd43cb20f34a9c07e6d4238fa2bd18e764b0e09"
+    },
+    {
+      "revision_id": "lks:rev:nanyang-3",
+      "created_at": "2026-09-25T20:00:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "The place keeps unknown geometry and now records why: the cited primary entries state no extent or seat, and the cited historical geography records the name 南陽 for two different regions (the 河內 南陽 in the north of 修武縣 and the Qin 南陽郡 at 宛) without identifying the ceded land. Prepared after the owner reported that locations were missing where the records name them; the record asserts no coordinate and chooses no region.",
+      "content": {
+        "summary": "南陽, the land the annals record Qin receiving from Han in the ninth month of 231 BCE, with 騰 as acting governor of the received land, and that the comprehensive mirror records Han presenting. The sources name the territory but state neither its extent nor its seat, and the record asserts no coordinate. The name is not unique: the cited historical geography records a 南陽城 in the north of 修武縣, which it presents as the 河內 南陽 of the Spring-and-Autumn and Warring-States usage, and separately records the Qin 南陽郡 whose seat was 宛. The entries cited here do not identify which land the 231 BCE cession was, so the record keeps unknown geometry.",
+        "names": [
+          {
+            "form": "南陽",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "primary",
+            "romanization": {
+              "value": "Nanyang",
+              "scheme": "pinyin",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:nanyang-name"
+          }
+        ],
+        "place_types": [
+          "region"
+        ],
+        "geometry": [
+          {
+            "claim_id": "lks:claim:nanyang-unknown",
+            "interpretation": "unknown",
+            "geojson": null,
+            "precision": "unspecified",
+            "notes": "The entries cited here name 韓南陽 as ceded land and give no extent or seat, and the historical geography records the name for two different regions — the 河內 南陽 in the north of 修武縣 and the Qin 南陽郡 at 宛 — without identifying the ceded land. The record asserts no coordinate: a modern namesake is not used, and neither region is chosen."
+          }
+        ],
+        "editorial_notes": "The name is shared by two regions in the cited historical geography: the 河內 南陽 (南陽城 in the north of 修武縣, 卷四十九 懷慶府 修武縣) and the Qin 南陽郡 whose seat was 宛 (卷五十一 河南六 南陽府). The record does not decide which land the 231 BCE cession was and asserts no coordinate; a source that identifies the ceded land is what would place it. The mirror's transcription marks 秋 as an editorial addition, so it is not quoted."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:nanyang-name",
+          "statement": "The annals record that in the ninth month of 十六年 (231 BCE) Qin sent troops to receive the land of Han's 南陽, with 騰 as acting governor.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十六年（發卒受地韓南陽假守騰）"
+              },
+              "quoted_text": "十六年九月，發卒受地韓南陽假守騰。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nanyang-cession",
+          "statement": "The comprehensive mirror records that Han presented 南陽 and that in the ninth month Qin sent troops to receive the land.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "supporting",
+          "citations": [
+            {
+              "source_id": "lks:source:zizhi-tongjian",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦紀一 始皇帝十六年（韓獻南陽地）"
+              },
+              "quoted_text": "韓獻南陽地。"
+            },
+            {
+              "source_id": "lks:source:zizhi-tongjian",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦紀一 始皇帝十六年九月（發卒受地於韓）"
+              },
+              "quoted_text": "九月，發卒受地於韓。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nanyang-henei",
+          "statement": "The historical geography records a 南陽城 in the north of 修武縣 and presents 南陽 as the name of the 河內 region around it.",
+          "asserts": "/geometry/0",
+          "basis": "attested",
+          "role": "supporting",
+          "citations": [
+            {
+              "source_id": "lks:source:dushi-fangyu-jiyao",
+              "locator": {
+                "kind": "entry",
+                "value": "卷四十九 河南四 懷慶府 衛輝府 彰德府 修武縣（南陽城）"
+              },
+              "quoted_text": "南陽城，在縣北。應劭曰：「晉始啓南陽，今南陽城是也。」"
+            },
+            {
+              "source_id": "lks:source:dushi-fangyu-jiyao",
+              "locator": {
+                "kind": "entry",
+                "value": "卷四十九 河南四 懷慶府 衛輝府 彰德府 修武縣（南陽城）"
+              },
+              "quoted_text": "則南陽其統名，而修武則魏之南陽地也。杜預曰：「晉山之南，河之北，故曰南陽。」"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nanyang-commandery",
+          "statement": "The historical geography records that Qin set up its 南陽郡 with its seat at 宛.",
+          "asserts": "/geometry/0",
+          "basis": "attested",
+          "role": "supporting",
+          "citations": [
+            {
+              "source_id": "lks:source:dushi-fangyu-jiyao",
+              "locator": {
+                "kind": "entry",
+                "value": "卷五十一 河南六 南陽府（宛城）"
+              },
+              "quoted_text": "秦併其地，置南陽郡治宛。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nanyang-unknown",
+          "statement": "The entries cited here name 南陽 but state neither its extent nor its seat, and the two regions the historical geography records the name for leave the ceded land unidentified, so the record carries unknown geometry with no coordinates.",
+          "asserts": "/geometry/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十六年（發卒受地韓南陽假守騰）"
+              }
+            },
+            {
+              "source_id": "lks:source:dushi-fangyu-jiyao",
+              "locator": {
+                "kind": "entry",
+                "value": "卷四十九 河南四 懷慶府 衛輝府 彰德府 修武縣（南陽城）"
+              }
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:300f5256859469e18df45851cae1050ca0ff60aa6bc3f866d05f1b9552ac1bc2"
     }
   ],
   "publication": {
-    "published_revision_id": "lks:rev:nanyang-2",
-    "published_revision_hash": "sha256:d02039178cf39cc07913c08debd43cb20f34a9c07e6d4238fa2bd18e764b0e09",
+    "published_revision_id": "lks:rev:nanyang-3",
+    "published_revision_hash": "sha256:300f5256859469e18df45851cae1050ca0ff60aa6bc3f866d05f1b9552ac1bc2",
     "set_id": "lks:set:qin-conquest-han-233-226-v1",
-    "published_at": "2026-09-25T05:45:00Z",
+    "published_at": "2026-09-25T20:30:00Z",
     "published_by": {
       "name": "Lekishi editorial preparation",
       "role": "preparing editor (owner-instructed)"

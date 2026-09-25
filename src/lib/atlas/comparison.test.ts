@@ -75,8 +75,24 @@ describe("the comparison review fixture", () => {
 
     expect(death?.dispute?.status).toBe("disputed")
     expect(death?.dispute?.accounts).toHaveLength(2)
-    // The death is the fixture's only placed-by-nothing event with a dispute; the
-    // revolt is the one event the map can show.
-    expect(chapter.events.filter((event) => event.placement.kind === "point")).toHaveLength(1)
+
+    // Four events are shown, each at a label anchor: the fixture asserts no
+    // historical coordinate anywhere. The 231 BCE cession is the exception —
+    // its place has no sourced identification, so the atlas claims no position
+    // for it and the details surface says so in words.
+    expect(chapter.events.filter((event) => event.placement.kind === "point")).toHaveLength(4)
+
+    for (const event of chapter.events.filter(
+      (candidate) => candidate.placement.kind === "point",
+    )) {
+      expect(event.placement, event.id).toMatchObject({ basis: "display-anchor" })
+    }
+
+    expect(
+      chapter.events.find((event) => event.id === "lks:event:han-nanyang-cession-231")?.placement,
+    ).toMatchObject({ kind: "none", reason: "no-position", label: "南陽" })
+
+    expect(chapter.places.filter((place) => place.placement === "display-anchor")).toHaveLength(3)
+    expect(chapter.places.filter((place) => place.placement === "unknown")).toHaveLength(1)
   })
 })

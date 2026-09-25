@@ -33,9 +33,29 @@ const WINDOW = { startYear: 233, endYear: 226 }
 /** Years whose Qin–Han notices the fixture excludes: the 246 canal and the 227 assassination attempt. */
 const EXCLUDED_YEARS = [246, 227]
 
-/** The one place the fixture places, and the modern anchor coordinate it uses. */
-const ANCHORED_PLACE = "lks:place:xinzheng"
-const ANCHOR_COORDINATES = [113.7249, 34.39621]
+/** The historical geography the fixture cites for the identifications its anchors stand on. */
+const IDENTIFICATION_SOURCE = "lks:source:dushi-fangyu-jiyao"
+
+/**
+ * The label anchors the fixture publishes: the place record, the modern
+ * coordinate Wikidata records for it, the item the anchor cites, and the source
+ * that identifies the place the anchor stands for. A label anchor asserts no
+ * historical coordinate, so every entry is a `display_anchor` with `unspecified`
+ * precision — and because a modern namesake is not evidence, every anchor's area
+ * association has to be cited as well as its coordinate.
+ */
+const ANCHORS: [string, [number, number], string, string][] = [
+  ["lks:place:xinzheng", [113.7249, 34.39621], "Q1024662", IDENTIFICATION_SOURCE],
+  ["lks:place:yunyang", [108.80985, 34.6355], "Q10881340", IDENTIFICATION_SOURCE],
+  ["lks:place:yingchuan", [113.47334, 34.15113], "Q1344848", IDENTIFICATION_SOURCE],
+]
+
+/**
+ * The events the fixture leaves off the map, and why: the cited entries name
+ * their place but state no extent or seat, and the name covers two regions the
+ * historical geography records, so the atlas claims no position.
+ */
+const UNPLACED_EVENTS: [string, string][] = [["lks:event:han-nanyang-cession-231", "no-position"]]
 
 const EVIDENCE_KINDS = ["place", "actor", "event", "relationship"]
 const ROUTE_INTERPRETATIONS = ["attested_itinerary", "reconstructed_route", "schematic_link"]
@@ -49,13 +69,86 @@ const EXPECTED_EVENTS = [
   "lks:event:xinzheng-revolt-226",
 ]
 
-/** The event that must stay unplaced, with the reason the atlas must state. */
-const UNPLACED_EVENTS: [string, string][] = [
-  ["lks:event:han-submission-233", "no-place"],
-  ["lks:event:hanfei-death-233", "no-position"],
-  ["lks:event:han-nanyang-cession-231", "no-position"],
-  ["lks:event:han-conquest-230", "no-position"],
+/** One named revision of a record in the fixture. */
+function revisionById(recordId: string, revisionId: string): JsonObject {
+  const record = recordById(tree(), recordId)
+  const revision = listOf(record["revisions"]).find(
+    (candidate) => objectOf(candidate)["revision_id"] === revisionId,
+  )
+
+  if (revision === undefined) {
+    throw new Error(`${revisionId} is not a revision of ${recordId}`)
+  }
+
+  return objectOf(revision)
+}
+
+function revisionContent(recordId: string, revisionId: string): JsonObject {
+  return objectOf(revisionById(recordId, revisionId)["content"])
+}
+
+function revisionClaims(recordId: string, revisionId: string): JsonObject[] {
+  return listOf(revisionById(recordId, revisionId)["claims"]).map((claim) => objectOf(claim))
+}
+
+/**
+ * The revisions added after the corrections, with the review that produced them.
+ * Two groups: the submission's display placement, and the label positions added
+ * after the owner's report that locations were missing where the records name
+ * them. A record whose corrected revision appears in `CORRECTIONS` publishes one
+ * of these instead only when this list names it.
+ */
+const ADDITIONS: [string, string, string][] = [
+  [
+    "lks:event:han-submission-233",
+    "lks:rev:han-submission-233-3",
+    "sha256:e6cf86ca6e8c47df082e65c4d1f42a1c6c9290b04a99e1dd00d513f250777675",
+  ],
+  [
+    "lks:place:xinzheng",
+    "lks:rev:xinzheng-2",
+    "sha256:140bdd0d74bd90c41cffbccaf21321aaf7bd53110c64c827be8c535b769ab415",
+  ],
+  [
+    "lks:place:yunyang",
+    "lks:rev:yunyang-2",
+    "sha256:2d4c5a7112d7c4bfeeaf38789b2d3f75ec9c22e7842b7c3a0c10e4017d87c4b1",
+  ],
+  [
+    "lks:place:yingchuan",
+    "lks:rev:yingchuan-2",
+    "sha256:b5c326d2f633958edadf17d53e507b971099ad69ad42068be37b8f67727a9de3",
+  ],
+  [
+    "lks:place:nanyang",
+    "lks:rev:nanyang-3",
+    "sha256:300f5256859469e18df45851cae1050ca0ff60aa6bc3f866d05f1b9552ac1bc2",
+  ],
+  [
+    "lks:event:han-nanyang-cession-231",
+    "lks:rev:han-nanyang-cession-231-3",
+    "sha256:06ea5049d2bd706fb7f9660057424f8ec5d662e6351d1a71aa01f7abf7eea130",
+  ],
+  [
+    "lks:event:han-conquest-230",
+    "lks:rev:han-conquest-230-3",
+    "sha256:cd78e7ddf387ff1742214289160981980bd78d84a6fd1d572c9b4356945c854e",
+  ],
+  [
+    "lks:story:qin-conquest-han-233-226",
+    "lks:rev:qin-conquest-han-story-3",
+    "sha256:04a3fb3afca83a1d29af37c8081930586ce3bb3fbf9fd54cae9780515099ab70",
+  ],
 ]
+
+/** Every revision id the chapter's sets publish. */
+function publishedRevisionIds(chapter: ChapterTree): Set<string> {
+  return new Set(
+    chapter.sets.flatMap((set) =>
+      listOf(objectOf(set)["members"]).map((member) => String(objectOf(member)["revision_id"])),
+    ),
+  )
+}
 
 function tree(): ChapterTree {
   return loadChapter(CHAPTER)
@@ -221,9 +314,10 @@ function routeViolations(chapter: ChapterTree): string[] {
 }
 
 /**
- * The fixture asserts one label anchor and no other coordinate: every geometry
- * entry is `unknown` without coordinates or the 新鄭 display anchor, and no
- * entry claims locational precision or an approximate point.
+ * The fixture asserts label anchors and no historical coordinate: every geometry
+ * entry is `unknown` without coordinates, or a `display_anchor` at one of the
+ * recorded modern coordinates that cites the dataset it comes from. No entry
+ * claims locational precision or an approximate point.
  */
 function coordinateViolations(chapter: ChapterTree): string[] {
   const violations: string[] = []
@@ -231,7 +325,7 @@ function coordinateViolations(chapter: ChapterTree): string[] {
   for (const record of chapter.documents.filter((document) => document["document"] === "record")) {
     const recordId = String(record["record_id"])
 
-    for (const entry of geometryEntries(record)) {
+    for (const [index, entry] of geometryEntries(record).entries()) {
       const interpretation = String(entry["interpretation"])
       const geojson = entry["geojson"]
 
@@ -262,18 +356,60 @@ function coordinateViolations(chapter: ChapterTree): string[] {
         )
       }
 
-      if (recordId !== ANCHORED_PLACE) {
+      const anchor = ANCHORS.find(([placeId]) => placeId === recordId)
+      const identificationSource = anchor === undefined ? "" : anchor[3]
+
+      if (anchor === undefined) {
         violations.push(
-          `${recordId} carries a display anchor, but only ${ANCHORED_PLACE} may be anchored`,
+          `${recordId} carries a display anchor, but the fixture anchors only ${ANCHORS.map(([placeId]) => placeId).join(", ")}`,
         )
         continue
       }
 
       const coordinates = isObject(geojson) ? listOf(objectOf(geojson)["coordinates"]) : []
 
-      if (JSON.stringify(coordinates) !== JSON.stringify(ANCHOR_COORDINATES)) {
+      if (JSON.stringify(coordinates) !== JSON.stringify(anchor[1])) {
         violations.push(
           `${recordId} anchors at ${JSON.stringify(coordinates)} instead of the recorded modern coordinate`,
+        )
+      }
+
+      // An anchor has to say where its coordinate comes from and what place it
+      // stands for: the main claim asserting it cites the dataset the coordinate
+      // comes from, and the record cites, with a locator, the source that
+      // identifies the place. A modern namesake is not evidence, so an anchor
+      // with no identification citation is a violation and not a detail.
+      const anchorClaim = claimsOf(record).find(
+        (claim) => claim["asserts"] === `/geometry/${index}` && claim["role"] === "main",
+      )
+      const citesCoordinateSource =
+        anchorClaim !== undefined &&
+        listOf(anchorClaim["citations"]).some(
+          (citation) => String(objectOf(citation)["source_id"]) === "lks:source:wikidata",
+        )
+
+      if (!citesCoordinateSource) {
+        violations.push(`${recordId} anchors without citing the coordinate source`)
+      }
+
+      const citesIdentification = claimsOf(record).some((claim) => {
+        if (String(claim["asserts"]) !== `/geometry/${index}`) {
+          return false
+        }
+
+        return listOf(claim["citations"]).some((citation) => {
+          const entry = objectOf(citation)
+
+          return (
+            String(entry["source_id"]) === identificationSource &&
+            String(objectOf(entry["locator"])["value"] ?? "") !== ""
+          )
+        })
+      })
+
+      if (!citesIdentification) {
+        violations.push(
+          `${recordId} anchors without citing the source that identifies the place the anchor stands for`,
         )
       }
     }
@@ -394,6 +530,13 @@ function pinViolations(chapter: ChapterTree): string[] {
   return violations
 }
 
+/** The locator values of a claim's citations, in order. */
+function locatorValues(claim: JsonObject | undefined): string[] {
+  return listOf(objectOf(claim)["citations"]).map((citation) =>
+    String(objectOf(objectOf(citation)["locator"])["value"]),
+  )
+}
+
 function cloneTree(chapter: ChapterTree): ChapterTree {
   return structuredClone(chapter) as ChapterTree
 }
@@ -420,7 +563,7 @@ describe("the Qin comparison fixture", () => {
   it("carries the exact inventory the fixture documents", () => {
     const chapter = tree()
 
-    expect(chapter.documents).toHaveLength(23)
+    expect(chapter.documents).toHaveLength(24)
     expect(recordsOfKind(chapter, "place")).toHaveLength(4)
     expect(recordsOfKind(chapter, "actor")).toHaveLength(6)
     expect(recordsOfKind(chapter, "event")).toHaveLength(5)
@@ -428,7 +571,7 @@ describe("the Qin comparison fixture", () => {
     expect(recordsOfKind(chapter, "story")).toHaveLength(1)
     expect(chapter.sets).toHaveLength(1)
     expect(chapter.documents.filter((document) => document["document"] === "source")).toHaveLength(
-      3,
+      4,
     )
     expect(
       recordsOfKind(chapter, "event")
@@ -454,9 +597,19 @@ describe("the Qin comparison fixture", () => {
     expect(disputeViolations(tree())).toEqual([])
   })
 
-  it("asserts one label anchor and no other coordinate", () => {
+  it("asserts label anchors and no asserted historical coordinate", () => {
     expect(coordinateViolations(tree())).toEqual([])
     expect(routeViolations(tree())).toEqual([])
+
+    const chapter = tree()
+    const anchored = recordsOfKind(chapter, "place")
+      .filter((record) =>
+        geometryEntries(record).some((entry) => entry["interpretation"] === "display_anchor"),
+      )
+      .map((record) => String(record["record_id"]))
+      .sort()
+
+    expect(anchored).toEqual(ANCHORS.map(([placeId]) => placeId).sort())
   })
 
   it("publishes no day and no duration the sources do not state", () => {
@@ -480,7 +633,7 @@ describe("the Qin comparison fixture", () => {
     expect(Object.values(objectOf(review["checklist"]))).toEqual([true, true, true, true, true])
   })
 
-  it("loads into the atlas domain with one placed event and the rest listable", () => {
+  it("loads into the atlas domain with the sourced label positions on the map", () => {
     const chapter = tree()
     const projected = projectChapter(CHAPTER, chapter.documents, chapter.sets, {
       defaultWindow: { start: -232, end: -225 },
@@ -499,11 +652,29 @@ describe("the Qin comparison fixture", () => {
 
     const placed = projected.chapter.events.filter((event) => event.placement.kind === "point")
 
-    expect(placed.map((event) => event.id)).toEqual(["lks:event:xinzheng-revolt-226"])
-    expect(placed[0]?.placement).toMatchObject({
-      placeId: ANCHORED_PLACE,
-      basis: "display-anchor",
-    })
+    expect(placed.map((event) => event.id).sort()).toEqual([
+      "lks:event:han-conquest-230",
+      "lks:event:han-submission-233",
+      "lks:event:hanfei-death-233",
+      "lks:event:xinzheng-revolt-226",
+    ])
+
+    // Every placement is a label position: the domain keeps them out of the
+    // asserted-placement vocabulary, so none reads as a site claim. The cession
+    // stays off the map because its place has no sourced identification.
+    const expectedPlace = new Map([
+      ["lks:event:han-submission-233", "lks:place:xinzheng"],
+      ["lks:event:hanfei-death-233", "lks:place:yunyang"],
+      ["lks:event:han-conquest-230", "lks:place:yingchuan"],
+      ["lks:event:xinzheng-revolt-226", "lks:place:xinzheng"],
+    ])
+
+    for (const event of placed) {
+      expect(event.placement, event.id).toMatchObject({
+        placeId: expectedPlace.get(event.id),
+        basis: "display-anchor",
+      })
+    }
 
     for (const [eventId, reason] of UNPLACED_EVENTS) {
       expect(
@@ -512,13 +683,18 @@ describe("the Qin comparison fixture", () => {
       ).toMatchObject({ kind: "none", reason })
     }
 
+    expect(
+      projected.chapter.places.filter((place) => place.placement === "display-anchor"),
+    ).toHaveLength(ANCHORS.length)
+    expect(
+      projected.chapter.places.filter((place) => place.placement === "approximate"),
+    ).toHaveLength(0)
+
     for (const event of projected.chapter.events) {
       expect(event.coda, event.id).toBe(false)
     }
   })
-})
 
-describe("adversarial readings of the Qin fixture", () => {
   it("rejects an event for the excluded 246 BCE canal", () => {
     const chapter = cloneTree(tree())
     const record = recordById(chapter, "lks:event:xinzheng-revolt-226")
@@ -587,7 +763,7 @@ describe("adversarial readings of the Qin fixture", () => {
 
   it("rejects promoting the 新鄭 label anchor to an asserted placement", () => {
     const chapter = cloneTree(tree())
-    const record = recordById(chapter, ANCHORED_PLACE)
+    const record = recordById(chapter, "lks:place:xinzheng")
     const entry = geometryEntries(record)[0] as JsonObject
 
     entry["interpretation"] = "approximate_point"
@@ -596,18 +772,65 @@ describe("adversarial readings of the Qin fixture", () => {
     expect(coordinateViolations(chapter)).not.toEqual([])
   })
 
-  it("rejects anchoring a second place", () => {
+  it("rejects an anchor whose coordinate is not the recorded one", () => {
     const chapter = cloneTree(tree())
     const record = recordById(chapter, "lks:place:yunyang")
-    const content = contentOf(record)
+    const entry = geometryEntries(record)[0] as JsonObject
 
-    content["geometry"] = [
+    objectOf(entry["geojson"])["coordinates"] = [110.0, 35.0]
+
+    expect(coordinateViolations(chapter)).not.toEqual([])
+  })
+
+  it("rejects an anchor that does not cite the coordinate source", () => {
+    const chapter = cloneTree(tree())
+    const record = recordById(chapter, "lks:place:yingchuan")
+    const claim = claimsOf(record).find(
+      (candidate) => candidate["claim_id"] === "lks:claim:yingchuan-anchor",
+    )
+
+    // The anchor is asserted, but by the annals rather than by the dataset the
+    // coordinate comes from.
+    claim!["citations"] = [
       {
-        claim_id: "lks:claim:yunyang-unknown",
-        interpretation: "display_anchor",
-        geojson: { type: "Point", coordinates: [108.80985, 34.6355] },
-        precision: "unspecified",
-        notes: "A second anchor the fixture does not publish.",
+        source_id: "lks:source:shiji",
+        locator: { kind: "entry", value: "卷六 秦始皇本紀 十七年（命曰潁川）" },
+      },
+    ]
+
+    expect(coordinateViolations(chapter)).not.toEqual([])
+  })
+
+  it("rejects an anchor with no identification for the place it stands for", () => {
+    const chapter = cloneTree(tree())
+    const record = recordById(chapter, "lks:place:yunyang")
+
+    // A coordinate for a modern namesake is not evidence: dropping the
+    // identification citation leaves the anchor standing on nothing.
+    listOf(record["revisions"]).forEach((candidate) => {
+      const revision = objectOf(candidate)
+
+      if (revision["revision_id"] === objectOf(record["publication"])["published_revision_id"]) {
+        revision["claims"] = listOf(revision["claims"]).filter(
+          (claim) => objectOf(claim)["claim_id"] !== "lks:claim:yunyang-identification",
+        )
+      }
+    })
+
+    expect(coordinateViolations(chapter)).not.toEqual([])
+  })
+
+  it("rejects an anchor whose identification citation has no locator", () => {
+    const chapter = cloneTree(tree())
+    const record = recordById(chapter, "lks:place:yingchuan")
+    const claim = claimsOf(record).find(
+      (candidate) => candidate["claim_id"] === "lks:claim:yingchuan-seat",
+    )
+
+    objectOf(claim)["citations"] = [
+      {
+        source_id: "lks:source:dushi-fangyu-jiyao",
+        locator: { kind: "entry", value: "" },
       },
     ]
 
@@ -732,6 +955,194 @@ describe("adversarial readings of the Qin fixture", () => {
   })
 })
 
+describe("the label positions the owner asked for", () => {
+  /**
+   * The owner reported that locations were missing where the records name them.
+   * The fixture now places what its sources support and says so where it cannot:
+   * the death at 雲陽 and the annexation at the 潁川 commandery carry label
+   * anchors whose area association is cited, the submission is shown at the Han
+   * capital the hereditary house records, and 南陽 keeps unknown geometry because
+   * the entries state no extent or seat and the name covers two regions the cited
+   * historical geography records. Every anchor's revision hash is pinned so a
+   * position cannot drift without review.
+   */
+
+  it("publishes every reviewed addition at its reviewed hash", () => {
+    const chapter = tree()
+    const published = publishedRevisionIds(chapter)
+
+    for (const [recordId, revisionId, expectedHash] of ADDITIONS) {
+      const revision = revisionById(recordId, revisionId)
+
+      expect(revision["revision_hash"], revisionId).toBe(expectedHash)
+      expect(revision["revision_hash"], revisionId).toBe(revisionHash(revision))
+      expect(published.has(revisionId), revisionId).toBe(true)
+      expect(
+        objectOf(recordById(chapter, recordId)["publication"])["published_revision_id"],
+        recordId,
+      ).toBe(revisionId)
+    }
+  })
+
+  it("rests every anchor on a cited identification and the recorded coordinate", () => {
+    const chapter = tree()
+
+    for (const [placeId, coordinates, item, identificationSource] of ANCHORS) {
+      const record = recordById(chapter, placeId)
+      const entry = geometryEntries(record)[0]
+      const anchorClaim = claimsOf(record).find(
+        (claim) => claim["claim_id"] === String(entry["claim_id"]),
+      )
+
+      expect(entry["interpretation"], placeId).toBe("display_anchor")
+      expect(entry["precision"], placeId).toBe("unspecified")
+      expect(String(entry["notes"]), placeId).not.toBe("")
+      expect(objectOf(entry["geojson"])["coordinates"], placeId).toEqual(coordinates)
+
+      // The coordinate comes from the dataset, and the item is the locator.
+      const anchorCitations = listOf(objectOf(anchorClaim)["citations"]).map(objectOf)
+
+      expect(
+        anchorCitations.map((citation) => String(citation["source_id"])),
+        placeId,
+      ).toContain("lks:source:wikidata")
+      expect(
+        anchorCitations
+          .filter((citation) => String(citation["source_id"]) === "lks:source:wikidata")
+          .map((citation) => String(objectOf(citation["locator"])["value"])),
+        placeId,
+      ).toContain(`${item} (P625)`)
+
+      // And the place the anchor stands for is identified by a cited source, not
+      // by the modern name alone.
+      const identification = claimsOf(record).find((claim) =>
+        listOf(claim["citations"]).some(
+          (citation) => String(objectOf(citation)["source_id"]) === identificationSource,
+        ),
+      )
+
+      expect(identification, placeId).toBeDefined()
+
+      for (const citation of listOf(objectOf(identification)["citations"]).map(objectOf)) {
+        if (String(citation["source_id"]) === identificationSource) {
+          expect(String(objectOf(citation["locator"])["value"]), placeId).not.toBe("")
+        }
+      }
+    }
+  })
+
+  it("records the identifications the two new anchors stand on, with their locators", () => {
+    const chapter = tree()
+    const yunyang = claimsOf(recordById(chapter, "lks:place:yunyang")).find(
+      (claim) => claim["claim_id"] === "lks:claim:yunyang-identification",
+    )
+    const yingchuan = claimsOf(recordById(chapter, "lks:place:yingchuan")).find(
+      (claim) => claim["claim_id"] === "lks:claim:yingchuan-seat",
+    )
+
+    expect(String(objectOf(yunyang)["statement"])).toContain("雲陽城")
+    expect(locatorValues(yunyang)).toEqual(["卷五十三 陝西二 西安府 涇陽縣（雲陽城）"])
+    expect(String(objectOf(yingchuan)["statement"])).toContain("陽翟")
+    expect(locatorValues(yingchuan)).toEqual([
+      "卷四十七 河南二 開封府 禹州",
+      "卷四十七 河南二 開封府 禹州（陽翟城）",
+    ])
+
+    // The quoted fragments are the transcription's own text.
+    expect(
+      listOf(objectOf(yunyang)["citations"]).map((citation) =>
+        String(objectOf(citation)["quoted_text"]),
+      ),
+    ).toEqual(["秦縣。始皇二十五年使蒙恬通直道，自九原至雲陽。"])
+    expect(
+      listOf(objectOf(yingchuan)["citations"]).map((citation) =>
+        String(objectOf(citation)["quoted_text"]),
+      ),
+    ).toEqual(["秦始皇十七年滅韓，置潁川郡", "秦置陽翟縣，爲潁川郡治。"])
+  })
+
+  it("shows the submission at the Han capital, with the disclosure in the summary", () => {
+    const chapter = tree()
+    const submission = recordById(chapter, "lks:event:han-submission-233")
+    const reference = objectOf(listOf(contentOf(submission)["places"])[0])
+    const summary = String(contentOf(submission)["summary"])
+
+    expect(reference["place_id"]).toBe("lks:place:xinzheng")
+    expect(reference["role"]).toBe("other")
+    expect(String(reference["note"])).toContain("asserts no site")
+    expect(String(contentOf(submission)["editorial_notes"])).toContain("display placement")
+
+    // The summary is what the details surface renders, so the disclosure has to
+    // be there and not only in the editorial notes.
+    expect(summary).toContain("The entries name no place for the submission or the embassy")
+    expect(summary).toContain("display placement")
+  })
+
+  it("keeps 南陽 unlocated and records the two regions the name covers", () => {
+    const chapter = tree()
+    const nanyang = recordById(chapter, "lks:place:nanyang")
+    const entry = geometryEntries(nanyang)[0]
+    const claims = claimsOf(nanyang).map((claim) => String(claim["claim_id"]))
+
+    expect(entry["interpretation"]).toBe("unknown")
+    expect(entry["geojson"]).toBeNull()
+    expect(String(entry["notes"])).toContain("修武縣")
+    expect(String(contentOf(nanyang)["summary"])).toContain("宛")
+    expect(String(contentOf(nanyang)["editorial_notes"])).toContain("河內")
+
+    // Both regions are recorded as the historical geography's statements, so the
+    // record can say why it chooses neither.
+    expect(claims).toContain("lks:claim:nanyang-henei")
+    expect(claims).toContain("lks:claim:nanyang-commandery")
+    expect(
+      locatorValues(
+        claimsOf(nanyang).find((claim) => claim["claim_id"] === "lks:claim:nanyang-henei"),
+      ),
+    ).toEqual([
+      "卷四十九 河南四 懷慶府 衛輝府 彰德府 修武縣（南陽城）",
+      "卷四十九 河南四 懷慶府 衛輝府 彰德府 修武縣（南陽城）",
+    ])
+    expect(
+      locatorValues(
+        claimsOf(nanyang).find((claim) => claim["claim_id"] === "lks:claim:nanyang-commandery"),
+      ),
+    ).toEqual(["卷五十一 河南六 南陽府（宛城）"])
+
+    // The cession's summary, which the details surface renders, says in words
+    // that the event has no position — the atlas claims none for it.
+    const cession = contentOf(recordById(chapter, "lks:event:han-nanyang-cession-231"))
+
+    expect(String(cession["summary"])).toContain("no position")
+    expect(String(cession["summary"])).toContain("河內 南陽")
+  })
+
+  it("publishes no position the sources do not support", () => {
+    const chapter = tree()
+    const placed = new Set(
+      geometryEntries(recordById(chapter, "lks:place:xinzheng")).map(() => "lks:place:xinzheng"),
+    )
+
+    // Every anchored place is in the pinned list, and no other place carries
+    // coordinates: an anchor the fixture has not reviewed cannot appear.
+    for (const record of recordsOfKind(chapter, "place")) {
+      const recordId = String(record["record_id"])
+      const entry = geometryEntries(record)[0]
+
+      if (entry["interpretation"] === "display_anchor") {
+        expect(
+          ANCHORS.map(([placeId]) => placeId),
+          recordId,
+        ).toContain(recordId)
+      } else {
+        expect(entry["interpretation"], recordId).toBe("unknown")
+        expect(entry["geojson"], recordId).toBeNull()
+      }
+    }
+
+    expect(placed.size).toBe(1)
+  })
+})
+
 describe("the corrections the owner asked to review", () => {
   /**
    * The internal review of this milestone found source-fidelity and wording
@@ -813,60 +1224,50 @@ describe("the corrections the owner asked to review", () => {
     ],
   ]
 
-  function revisionById(recordId: string, revisionId: string): JsonObject {
-    const record = recordById(tree(), recordId)
-    const revision = listOf(record["revisions"]).find(
-      (candidate) => objectOf(candidate)["revision_id"] === revisionId,
-    )
-
-    if (revision === undefined) {
-      throw new Error(`${revisionId} is not a revision of ${recordId}`)
-    }
-
-    return objectOf(revision)
-  }
-
-  function revisionContent(recordId: string, revisionId: string): JsonObject {
-    return objectOf(revisionById(recordId, revisionId)["content"])
-  }
-
-  function revisionClaims(recordId: string, revisionId: string): JsonObject[] {
-    return listOf(revisionById(recordId, revisionId)["claims"]).map((claim) => objectOf(claim))
-  }
-
-  function publishedRevisionIds(chapter: ChapterTree): Set<string> {
-    return new Set(
-      chapter.sets.flatMap((set) =>
-        listOf(objectOf(set)["members"]).map((member) => String(objectOf(member)["revision_id"])),
-      ),
-    )
-  }
-
-  it("publishes each corrected revision and keeps the superseded one unpublished", () => {
+  it("keeps every reviewed correction, and only a reviewed addition may supersede it", () => {
     const chapter = tree()
     const published = publishedRevisionIds(chapter)
 
     for (const [recordId, revisionId, expectedHash] of CORRECTIONS) {
       const revision = revisionById(recordId, revisionId)
       const record = recordById(chapter, recordId)
-      const superseded = String(revisionId).replace(/-2$/, "-1")
+      const revisionIds = listOf(record["revisions"]).map((candidate) =>
+        String(objectOf(candidate)["revision_id"]),
+      )
 
-      // The reviewed content is the published content, at the hash review read.
+      // The reviewed content is retained at the hash review read.
       expect(revision["revision_hash"], revisionId).toBe(expectedHash)
       expect(revision["revision_hash"], revisionId).toBe(revisionHash(revision))
-      expect(published.has(revisionId), revisionId).toBe(true)
+      expect(revisionIds, recordId).toContain(revisionId)
 
-      const mirror = objectOf(record["publication"])
+      // The corrected revision is what the set publishes, unless a reviewed
+      // addition superseded it; nothing else may become current.
+      const current = String(objectOf(record["publication"])["published_revision_id"])
+      const supersededBy = ADDITIONS.find(
+        ([addedRecordId, addedRevisionId]) =>
+          addedRecordId === recordId && addedRevisionId === current,
+      )
 
-      expect(mirror["published_revision_id"], recordId).toBe(revisionId)
-      expect(mirror["published_revision_hash"], recordId).toBe(expectedHash)
+      expect(current, recordId).toBe(supersededBy === undefined ? revisionId : supersededBy[1])
 
-      // The revision it replaced stays in the record as unpublished history.
-      expect(
-        listOf(record["revisions"]).map((candidate) => String(objectOf(candidate)["revision_id"])),
-        recordId,
-      ).toContain(superseded)
-      expect(published.has(superseded), superseded).toBe(false)
+      // The revision each correction replaced stays in the record, unpublished.
+      const predecessor = revisionIds[revisionIds.indexOf(revisionId) - 1]
+
+      expect(predecessor, recordId).toBeDefined()
+      expect(published.has(String(predecessor)), recordId).toBe(false)
+    }
+
+    // A record with history never publishes its first revision any more.
+    for (const record of chapter.documents.filter(
+      (document) => document["document"] === "record",
+    )) {
+      const revisions = listOf(record["revisions"]).map((candidate) =>
+        String(objectOf(candidate)["revision_id"]),
+      )
+
+      if (revisions.length > 1) {
+        expect(published.has(revisions[0]), String(record["record_id"])).toBe(false)
+      }
     }
   })
 

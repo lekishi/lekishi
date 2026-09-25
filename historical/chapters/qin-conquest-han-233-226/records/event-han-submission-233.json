@@ -300,13 +300,168 @@
         }
       ],
       "revision_hash": "sha256:de78b5cfe7e2f891fae70ebdb6a10ded24becb21b3a94c4d175c384d8154717f"
+    },
+    {
+      "revision_id": "lks:rev:han-submission-233-3",
+      "created_at": "2026-09-25T18:40:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Display placement added after the owner reported that locations were missing where the records name them: the event is shown at 新鄭, the Han capital the hereditary house records, and the summary now states that the entries name no place for either act, so the placement is not read as a site.",
+      "content": {
+        "summary": "In 233 BCE the Han king submitted to Qin: the comprehensive mirror records him presenting land and the royal seal and asking to be a vassal, and sending 韓非 as envoy. The annals record that 韓非 came as envoy and that the Han king asked to be a subject; the hereditary house records that Qin attacked Han and that Han, in straits, sent 韓非. The entries name no place for the submission or the embassy: the record shows the event at 新鄭, the Han capital the hereditary house records, as a display placement that asserts no site for either act.",
+        "event_types": [
+          "mission",
+          "exchange"
+        ],
+        "time": {
+          "source_expression": "十四年（史記・秦始皇本紀）; 始皇帝十四年（資治通鑑）; 王安五年（史記・韓世家）; 秦始皇十四年（史記・六國年表）",
+          "calendar": "chinese_lunisolar",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {
+              "year": 233,
+              "era": "bce"
+            },
+            "end": {
+              "year": 233,
+              "era": "bce"
+            }
+          }
+        },
+        "participants": [
+          {
+            "actor_id": "lks:actor:han-king-an",
+            "role": "leader",
+            "note": "The sources record the Han king's submission and the embassy he sent."
+          },
+          {
+            "actor_id": "lks:actor:han-fei",
+            "role": "guest",
+            "note": "Sent as envoy to Qin."
+          },
+          {
+            "actor_id": "lks:actor:qin-king-zheng",
+            "role": "host",
+            "note": "The biography records the king hearing of 韓非 and wanting to see him."
+          }
+        ],
+        "editorial_notes": "The accounts frame the year differently: the comprehensive mirror records a submission (land and seal, a request for vassal status) and an embassy; the annals record the embassy and the king's request to be a subject; the hereditary house records a Qin attack and a desperate embassy. The chapter publishes the submission and the embassy as one event, keeps the framings visible, and dates it to the year only. The hereditary house dates the embassy to 王安五年; the six-states table records the embassy and the killing under 韓王安六年, aligned with 秦始皇帝十四年 (233 BCE), and the fixture records both expressions without converting one into the other. The entries name no place for the submission or the embassy. The record shows the event at 新鄭, the Han capital, as a display placement; the placement asserts no site for either act.",
+        "places": [
+          {
+            "place_id": "lks:place:xinzheng",
+            "role": "other",
+            "note": "The Han capital the hereditary house records (韓哀侯二年 徙都鄭). The entries name no place for the submission or the embassy, so the record shows the event at the capital as a display placement: it asserts no site for either act, and no source in this set names the Qin court the embassy reached."
+          }
+        ]
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:han-submission-time",
+          "statement": "The comprehensive mirror records that the Han king presented land and the royal seal, asked to be a vassal, and sent 韓非 as envoy, in 始皇帝十四年 (233 BCE).",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:zizhi-tongjian",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦紀一 始皇帝十四年（韓王納地效璽）"
+              },
+              "quoted_text": "韓王納地效璽，請為籓臣，使韓非來聘。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:han-submission-annals",
+          "statement": "The annals record that 韓非 came as envoy and that the Han king asked to be a subject, in the same year.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "supporting",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十四年（韓非使秦）"
+              },
+              "quoted_text": "韓非使秦，秦用李斯謀，留非，非死雲陽。韓王請為臣。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:han-submission-house",
+          "statement": "The hereditary house records that Qin attacked Han, that Han was in straits, and that it sent 韓非 as envoy, in 王安五年.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "supporting",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷四十五 韓世家 韓王安五年（使韓非使秦）"
+              },
+              "quoted_text": "王安五年，秦攻韓，韓急，使韓非使秦，秦留非，因殺之。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:han-submission-table",
+          "statement": "The six-states table records the embassy and the killing under 秦始皇帝十四年 and 韓王安六年, aligned with 233 BCE.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "supporting",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷十五 六國年表 秦始皇十四年（韓王安六年）"
+              },
+              "quoted_text": "韓使非來，我殺非。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:han-submission-participants",
+          "statement": "The comprehensive mirror records the king hearing of 韓非's worth and wanting to see him, and the biography records him being pleased with 韓非 but not employing him.",
+          "asserts": "/participants",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:zizhi-tongjian",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦紀一 始皇帝十四年（王聞其賢，欲見之）"
+              },
+              "quoted_text": "王聞其賢，欲見之。"
+            },
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六十三 老子韓非列傳（秦王悅之，未信用）"
+              },
+              "quoted_text": "秦王悅之，未信用。"
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:e6cf86ca6e8c47df082e65c4d1f42a1c6c9290b04a99e1dd00d513f250777675"
     }
   ],
   "publication": {
-    "published_revision_id": "lks:rev:han-submission-233-2",
-    "published_revision_hash": "sha256:de78b5cfe7e2f891fae70ebdb6a10ded24becb21b3a94c4d175c384d8154717f",
+    "published_revision_id": "lks:rev:han-submission-233-3",
+    "published_revision_hash": "sha256:e6cf86ca6e8c47df082e65c4d1f42a1c6c9290b04a99e1dd00d513f250777675",
     "set_id": "lks:set:qin-conquest-han-233-226-v1",
-    "published_at": "2026-09-25T05:45:00Z",
+    "published_at": "2026-09-25T20:30:00Z",
     "published_by": {
       "name": "Lekishi editorial preparation",
       "role": "preparing editor (owner-instructed)"

@@ -113,27 +113,30 @@ Measured on 2026-09-25 in the pinned Nix environment.
 
 |Full check
 |`pnpm verify` passes: format check, `svelte-check` 0 errors and 0 warnings,
-447 tests (446 passed, 1 skipped — the `pnpm seal` maintenance entry point), and
+452 tests (451 passed, 1 skipped — the `pnpm seal` maintenance entry point), and
 the static build with its invariant.
 
 |Fixture, boundary, and route tests
-|`src/lib/historical/contract/qin-chapter.test.ts` (45 tests) pins the corrected
+|`src/lib/historical/contract/qin-chapter.test.ts` (50 tests) pins the corrected
 revisions, their reviewed hashes, the superseded revisions' unpublished status,
-the absence of the flagged wording and of any approval, and the fixture's scope
-and geometry. `src/lib/atlas/comparison.test.ts` (4 tests) pins the route's
-chapter, its window (cross-checked against the fixture's published story window),
-its unapproved wording, and the dispute it renders. `src/lib/atlas/projection.test.ts`
+the absence of the flagged wording and of any approval, the fixture's scope, and
+the label anchors the owner asked for — their coordinates, their Wikidata
+citations, and the fact that no anchor asserts a historical coordinate.
+`src/lib/atlas/comparison.test.ts` (4 tests) pins the route's chapter, its window
+(cross-checked against the fixture's published story window), its unapproved
+wording, and the dispute it renders. `src/lib/atlas/projection.test.ts`
 (28 tests) covers the dispute projection and its refusals; `src/lib/atlas/labels.test.ts`
-covers the BCE year text. The gate's five suites total 116 tests.
+covers the BCE year text. The gate's five suites total 121 tests.
 
 |Browser checks
 |`npx playwright test` against the built artifact (the file-only server, the same
-target a static host serves): 72 passed, 6 skipped in 22.2 minutes across the
-desktop, tablet-touch, and phone projects. The comparison suite's 4 checks run in
-each project — the unapproved status and BCE years, the disputed account and its
-accounts, the unchanged Tang atlas, and the phone-width overlay geometry at 390
-and 320 — and the atlas suite's existing checks (including its own phone-width
-overlay check) still pass.
+target a static host serves): 72 passed, 6 skipped in 22.5 minutes across the
+desktop, tablet-touch, and phone projects, plus a 12-check comparison-only run
+after the label anchors were added (12 passed in 5.2 minutes). The comparison
+suite's 4 checks run in each project — the unapproved status and BCE years, the
+display-anchor placements, the disputed account and its accounts, the unchanged
+Tang atlas, and the phone-width overlay geometry at 390 and 320 — and the atlas
+suite's existing checks still pass.
 
 |Build gate
 |`scripts/check-static-build.mjs` requires `compare/qin.html` (mount point,
@@ -149,6 +152,51 @@ names the reviewed Tang chapter.
 |Unchanged: the atlas route passes the reviewed chapter with the default detail
 surface, its notice still reads `Reviewed chapter · Self-review only`, its event
 list still shows the same events, and its labels are the same text as before.
+|===
+
+=== Update — 2026-09-25: the fixture's label positions, and what places it
+
+The owner then reported that locations were missing where the records name them.
+The first response — anchors at the modern places that carry the names — was
+withdrawn on review, because a coordinate for a modern namesake is not evidence
+that the ancient place was there. The route now renders the positions that rest
+on cited identifications: 雲陽 and the 潁川 commandery carry label anchors based on
+讀史方輿紀要 (1692, now pinned to the fixture's set), the submission keeps its
+display placement at 新鄭, and 南陽 has no position because the entries state no
+extent or seat and the name covers two regions. The fixture therefore shows four
+of its five events, and the details surface states for the cession, in words,
+that the event has no position.
+
+This changes the measured evidence in the table above; it was measured before the
+label positions were reworked. Re-measured with this update:
+
+[cols="1,3",options="header"]
+|===
+|Check |Result
+
+|Full check
+|`pnpm verify` passes: format check, `svelte-check` 0 errors and 0 warnings, 456
+tests (455 passed, 1 skipped — the `pnpm seal` maintenance entry point), and the
+static build with its invariant (451 files).
+
+|Fixture, boundary, and route tests
+|`src/lib/historical/contract/qin-chapter.test.ts` (54 tests) pins the corrected
+revisions and the label-position additions at their reviewed hashes, the
+superseded revisions' unpublished status, the absence of the flagged wording and
+of any approval, the fixture's scope and exclusions, every anchor's cited
+identification and Wikidata coordinate, and the adversarial cases (a changed
+coordinate, a missing coordinate citation, a missing identification, an empty
+locator, a region chosen for 南陽). `src/lib/atlas/comparison.test.ts` (4 tests)
+pins the route's chapter, window, unapproved wording, dispute, and the four
+placements it renders.
+
+|Browser checks
+|`e2e/comparison.spec.ts` re-run against the built artifact (12 passed, 4.8
+minutes across the desktop, tablet-touch, and phone projects): the unapproved
+status and BCE years, four label-anchor placements and one `南陽 · no sourced
+position` row, the notice's counts (1 of 5 in-window events, 1 of 4 places
+without a sourced map position), the disputed death account, the unchanged Tang
+atlas, and the phone-width overlay geometry at 390 and 320.
 |===
 
 == Consequences
@@ -178,6 +226,10 @@ list still shows the same events, and its labels are the same text as before.
   Gate 2.
 * The production surface does not show disputes yet, so the launch chapter's
   visible-uncertainty part of AC2 stays open.
+* Every map position the fixture shows is a label anchor or display placement,
+  not a historical coordinate: the anchors mark modern places that carry the
+  names, and no site, extent, or seat is asserted. A gazetteer identification
+  would replace an anchor with an asserted placement.
 * The BCE labels are the atlas's own year text, not a calendar conversion: the
   contract's own `source_expression` remains the record's date as written, and
   the atlas does not translate between calendars.

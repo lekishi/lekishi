@@ -10,9 +10,13 @@ needed for the shared treatment comparison. It is **comparison-only**:
   as a `preparation snapshot` with the preparing editor's self-review — the owner
   instructed the fixture, no release decision has been taken, and RFD 4's AC2
   does not apply to it;
-- the boundary that makes it loadable without shipping it in the release
-  artifact is recorded in
-  [`rfd/0003/COMPARISON_FIXTURE_BOUNDARY.adoc`](../../../rfd/0003/COMPARISON_FIXTURE_BOUNDARY.adoc).
+- the owner asked to review the corrected content before deciding, so the fixture
+  is now rendered by the comparison review route `/compare/qin`, which states
+  that it is unapproved preparation: see
+  [`rfd/0003/COMPARISON_REVIEW_ROUTE.adoc`](../../../rfd/0003/COMPARISON_REVIEW_ROUTE.adoc);
+- the boundary decision that kept it out of the artifact is recorded in
+  [`rfd/0003/COMPARISON_FIXTURE_BOUNDARY.adoc`](../../../rfd/0003/COMPARISON_FIXTURE_BOUNDARY.adoc),
+  whose artifact rule the review route supersedes.
 
 ## Scope, and why this scope
 
@@ -59,7 +63,7 @@ nothing beyond one label anchor.
 | Relationships | 4 | conflict, diplomacy (the submission request), changed boundaries (the cession), institutional change (the commandery) |
 | Stories | 1 | the episode in presentation order |
 | Sources | 3 | two primary works and Wikidata for the one anchor coordinate |
-| Records | 20 | one sealed revision each, published by one set |
+| Records | 20 | one set publishes them; the twelve corrected records also keep the revision they replaced, unpublished |
 
 The exact event inventory is pinned by
 `src/lib/historical/contract/qin-chapter.test.ts`.
@@ -102,7 +106,7 @@ entry), and those are not used as evidence.
   and 226 BCE and the ninth month for 231 BCE. **No day is published**, and no
   duration is invented: the year-only records are `occurrence_window`s, and the
   spans the fixture records are the two reigns, which the sources attest at both
-  ends. The corrected drafts drop the two spans the review found unsupported (the
+  ends. The corrected revisions drop the two spans the review found unsupported (the
   conflict's 233–230 BCE `duration` and the officer's 231–230 BCE office
   `duration`), and the atlas must never present the year-only records as
   continuous activity.
@@ -127,22 +131,26 @@ entry), and those are not used as evidence.
   killed him, the biography adds 姚賈, the poison 李斯 sent, and the king's
   regret). All three are published as cited claims, the annals' account is the
   main one, and no day, manner, or cause is decided.
-  - **Flagged and drafted.** The published snapshot's dispute summary says the
-    three accounts agree on the year; the sources do not (see above), and the
-    review flagged it. The draft revision
-    `lks:rev:hanfei-death-233-2` states each account's own dating and place and
-    is listed under <<Prepared corrections awaiting a publication decision>>.
+  - **Flagged, corrected, and now published for review.** The preparation
+    snapshot's dispute summary said the three accounts agree on the year; the
+    sources do not (see above), and the internal review flagged it. The corrected
+    revision `lks:rev:hanfei-death-233-2` states each account's own dating and
+    place and is what the set publishes and the review route renders; the
+    superseded revision stays in the record as unpublished history.
 
-## Prepared corrections awaiting a publication decision
+## Corrections the internal review prepared, now published for review
 
 The internal review of this milestone found the following source-fidelity and
-wording issues in the **published snapshot**. The publication gate does not let
-the preparing editor supersede a prepared set, so each correction is prepared as
-an unpublished draft revision that no set names: the atlas, the ledger digest,
-and the projection still read the snapshot the owner has seen. Publishing a
-corrected preparation set is the owner's decision.
+wording issues in the fixture's first preparation. The preparing editor may not
+approve content, so the corrections were first prepared as draft revisions; the
+owner then asked to review the corrected content before deciding ("wire it up
+first, and let me review again before approval"), and the fixture's single
+preparation set now publishes the corrected revisions. Each corrected record
+keeps the revision it replaced as unpublished history, and the ledger row still
+records a `preparation snapshot` with no owner decision: the review route states
+that the content is unapproved.
 
-| Published revision | Draft correction | What the draft changes |
+| Superseded revision | Published revision | What the correction changes |
 | --- | --- | --- |
 | `lks:rev:hanfei-death-233-1` | `lks:rev:hanfei-death-233-2` | The dispute summary no longer claims the accounts agree on the year and no longer equates the hereditary house's 王安五年 with the table's 韓王安六年; each account's own dating is stated, 雲陽 is attributed to the annals alone, and the six-states table is cited for the year. |
 | `lks:rev:han-fei-1` | `lks:rev:han-fei-2` | The summary attributes the 233 BCE embassy dating to the annals and the comprehensive mirror and keeps the hereditary house's notice under 王安五年. |
@@ -157,11 +165,11 @@ corrected preparation set is the owner's decision.
 | `lks:rev:han-king-an-1` | `lks:rev:han-king-an-2` | The role span is described as the six-states table's first numbered regnal year (元年, 238 BCE), not as an accession year, and the embassy year's regnal counts are recorded as differing expressions. |
 | `lks:rev:qin-conquest-han-story-1` | `lks:rev:qin-conquest-han-story-2` | The coverage note names the annals' 230 BCE notice as a famine (民大饑), not a drought. |
 
-`src/lib/historical/contract/qin-chapter.test.ts` pins each draft's id and its
-reviewed sealed hash, its unpublished status, and the published snapshot's
-flagged wording, so neither the drafts nor the boundary can drift silently. The
-ledger row for `lks:set:qin-conquest-han-233-226-v1` still records the published
-digest.
+`src/lib/historical/contract/qin-chapter.test.ts` pins each corrected revision's
+id and reviewed sealed hash, the superseded revisions' unpublished status, the
+absence of the flagged wording from the published content, and the absence of any
+approval. The ledger row for `lks:set:qin-conquest-han-233-226-v1` records the
+digest of the corrected preparation the review route renders.
 
 ## Exclusions
 
@@ -179,34 +187,36 @@ and the event inventory:
 ## Review status
 
 The single set, `lks:set:qin-conquest-han-233-226-v1`, publishes every record
-with exactly one revision each and pins the three cited sources. It records the
-**preparing editor's self-review** (`self_review`, reviewer = an author of the
-member revisions). This is not owner review, not independent review, and not
-specialist review; no owner release decision exists, and the fixture must not be
-described as approved or published for release.
+and pins the three cited sources; the twelve corrected records keep the revision
+they replaced as unpublished history. It records the **preparing editor's
+self-review** (`self_review`, reviewer = an author of the member revisions). This
+is not owner review, not independent review, and not specialist review; no owner
+decision exists, and the fixture must not be described as approved or published
+for release.
 
-The published snapshot is what the ledger row records. Twelve correction drafts
-prepared after the internal review are **unpublished**: they are listed above,
-pinned by the fixture's tests, and await the owner's decision to publish a
-corrected preparation set. Until then, the flagged published wording stays as
-the ledger records it, and the fixture's status is "source-checked, corrections
-drafted, awaiting a publication decision".
+The review route `/compare/qin` renders this set so the owner can inspect the
+corrected content. It labels the content **Unapproved preparation**, shows the
+fixture's 233–226 BCE window in BCE years, and shows 韓非's published dispute
+with its conflicting accounts. The fixture's status is "source-checked,
+corrected, published for review, awaiting the owner's decision".
 
 ## What is deferred, and the remaining decisions
 
 - **Owner review of the fixture's scope.** The owner may extend, narrow, or drop
   the episode; any change needs a new revision and a new set, and a new ledger
   row for that set.
-- **The prepared corrections.** Twelve draft revisions are prepared and unpublished
-  (listed above). Publishing a corrected preparation set needs the owner's
-  decision; the preparing editor may not supersede the prepared set.
+- **The owner's decision on the corrected content.** The corrected revisions are
+  published in the preparation set and rendered by the review route, and no
+  approval is recorded. Approving them (or asking for changes) is the owner's
+  decision; an approval would be a new ledger decision against the digest current
+  then.
 - **Optional specialist review.** Warring States chronology and the 韓非
   accounts are the areas a specialist would check; none has been performed.
-- **The comparison harness.** It does not exist yet. When it is built it must
-  load this chapter through `src/lib/atlas/chapter-catalog.ts` with the window
-  below, and it must add BCE year formatting before rendering: the atlas's
-  current display labels print the astronomical year number, which is correct
-  for the Tang chapter's CE dates but wrong for a BCE chapter.
+- **The comparison harness.** The review route is its first piece: it loads this
+  chapter through `src/lib/atlas/chapter-catalog.ts` with the window below and
+  renders it with the atlas's BCE year labels. The measured treatment comparison
+  and the shared baseline it needs are still to be built, and the review route is
+  not a launch chapter.
 - **A supported preparation-seal command.** `pnpm seal` deliberately refuses
   chapter directories, so this fixture was sealed with the contract's own
   canonical hashing during preparation. A documented way to seal a *new*
@@ -234,11 +244,20 @@ const chapter = await loadChapterContent("qin-conquest-han-233-226", {
 ```
 
 The window is the fixture's coverage model (the years the story window names,
-converted to the astronomical ordinals the atlas domain uses). `pnpm build`
-runs the fixture's contract and catalog tests through
-`scripts/check-chapter.mjs`, and `scripts/check-static-build.mjs` fails if the
-fixture's ids reach the release artifact: the comparison harness shipping is a
-deliberate later change.
+converted to the astronomical ordinals the atlas domain uses), and
+`src/lib/atlas/comparison.ts` holds it together with the route's review wording;
+the fixture's tests cross-check it against the published story window rather than
+restating it. `pnpm build` runs the fixture's contract and catalog tests through
+`scripts/check-chapter.mjs`. The review route ships the fixture on purpose, so
+`scripts/check-static-build.mjs` requires `/compare/qin` to exist, to carry the
+fixture and to state that it is unapproved preparation, and requires the
+production atlas page not to render the fixture.
+
+To review the fixture in a browser, open `/compare/qin` on the running dev server
+or the static build: the route states the content's status, the event list and
+the details panel show BCE years, and the disputed death event carries a
+`disputed account` badge whose details show the published summary and the
+conflicting accounts with their locators.
 
 Do not run `pnpm seal` over this directory, and do not edit a published revision
 or source: corrections require a new revision or source document and a new
@@ -249,7 +268,8 @@ publication set, which is the same rule the Tang chapter follows.
 - It is a bounded curated selection, not a complete record of Qin's conquests or
   of Han's end, and not a claim that nothing else happened in these years.
 - It is a preparation snapshot: not owner-approved, not release content, and not
-  a second launch chapter. Twelve correction drafts await the owner's publication
-  decision, so the published wording must not be treated as final.
+  a second launch chapter. The corrected revisions are published for the owner's
+  review, and the owner's decision on them is still open, so the wording must not
+  be treated as final.
 - The locators rest on unproofread transcriptions and must be re-checked against
   critical editions before content freeze.

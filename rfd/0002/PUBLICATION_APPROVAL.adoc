@@ -104,16 +104,17 @@ AC7 attribution/rights audit stay open.
 
 |`lks:set:qin-conquest-han-233-226-v1`
 |preparation snapshot
-|owner (instructed the bounded Qin comparison fixture, 2026-09-25)
-|`sha256:0260c79f0a75a9167a332abb334b66341e179c7b2823a5f68bbf5a8e300afc74`
+|owner (instructed the bounded Qin comparison fixture and asked to review its
+corrected content before deciding, 2026-09-25)
+|`sha256:dcb9b55fb2f6f82629f34f044ed9ea42f1032150236ae52c8aa64f30872c04d6`
 |The comparison fixture's preparation: 4 places, 6 actors, 5 events, 4
-relationships, and 1 story, with the 3 cited sources pinned. The set records the
-preparing editor's `self_review` only. The owner instructed the fixture; no
-release decision has been taken, it is comparison-only and not a launch chapter,
-and RFD 4's AC2 does not apply to it. An internal review found source-fidelity
-and wording corrections; they are prepared as unpublished draft revisions, and
-publishing a corrected preparation set needs a new set and a new decision, so
-this row still binds the snapshot as prepared.
+relationships, and 1 story, with the 3 cited sources pinned. The set publishes
+the twelve corrected revisions the internal review prepared, which the owner
+asked to review before deciding, and each corrected record also keeps the
+superseded revision it replaced. The set records the preparing editor's
+`self_review` only: no owner decision exists for this content, it is
+comparison-only and not a launch chapter, RFD 4's AC2 does not apply to it, and
+the comparison review route states that it is unapproved.
 |===
 
 === Ledger update — 2026-09-25: the owner approves the Tang set
@@ -145,6 +146,30 @@ The same instruction authorized the bounded Qin comparison fixture. Its row is a
 `preparation snapshot` because the owner instructed preparation, not release:
 the fixture is comparison-only, is not exposed as a second launch chapter, and
 has no `owner approved` row.
+
+=== Ledger update — 2026-09-25: the corrected Qin content is published for review
+
+The owner's follow-up instruction was *"actually wait. wire it up first, and let
+me review again before approval"*, after the preparing editor reported the twelve
+corrections the internal review had prepared as draft revisions. It is recorded
+here as the owner's instruction to publish the corrected content for review, not
+as an approval:
+
+* the fixture's single preparation set now names the twelve corrected revisions,
+  so the comparison review route renders what the owner is being asked to review.
+  Each corrected record keeps the superseded revision it replaced as
+  unpublished history; nothing was flattened and no content was approved;
+* the decision stays `preparation snapshot`. There is no `owner approved` row for
+  this set, and the row's digest is the corrected preparation the route renders.
+  If the owner approves later, that is a new decision against the digest current
+  then — which is why this row's digest was updated with the correction rather
+  than left pointing at content the route no longer shows;
+* the set keeps the preparing editor's `self_review` and its review notes say
+  that no owner decision exists. The optional specialist reviews remain
+  unperformed, and the critical-edition re-check of the cited transcriptions
+  remains open;
+* the fixture remains comparison-only: it is not a launch chapter, its route is a
+  review surface that states it is unapproved, and it is not release content.
 
 == Consequences
 

@@ -741,17 +741,73 @@ describe("the prepared corrections (unpublished draft revisions)", () => {
    * snapshot the owner has seen, and publishing a corrected preparation set is
    * the owner's decision. These tests pin the drafts and the boundary.
    */
-  const CORRECTIONS: [string, string][] = [
-    ["lks:event:hanfei-death-233", "lks:rev:hanfei-death-233-2"],
-    ["lks:relationship:qin-han-conflict", "lks:rev:qin-han-conflict-2"],
-    ["lks:event:han-conquest-230", "lks:rev:han-conquest-230-2"],
-    ["lks:event:han-nanyang-cession-231", "lks:rev:han-nanyang-cession-231-2"],
-    ["lks:place:nanyang", "lks:rev:nanyang-2"],
-    ["lks:relationship:han-nanyang-cession", "lks:rev:han-nanyang-cession-2"],
-    ["lks:actor:nei-shi-teng", "lks:rev:nei-shi-teng-2"],
-    ["lks:actor:qin-king-zheng", "lks:rev:qin-king-zheng-2"],
-    ["lks:actor:han-king-an", "lks:rev:han-king-an-2"],
-    ["lks:story:qin-conquest-han-233-226", "lks:rev:qin-conquest-han-story-2"],
+  /**
+   * Each entry pins the reviewed draft's sealed hash as well as its id: the
+   * hashes are the ones the internal review read, so editing a draft's content
+   * (or resealing it) fails here until the change is reviewed again. The test
+   * also recomputes the hash, so the stored and computed values must agree.
+   */
+  const CORRECTIONS: [string, string, string][] = [
+    [
+      "lks:event:hanfei-death-233",
+      "lks:rev:hanfei-death-233-2",
+      "sha256:f4cdc69cce688d5511cda605816b30e9ad866431ac481f340bdcfea550f9db92",
+    ],
+    [
+      "lks:relationship:qin-han-conflict",
+      "lks:rev:qin-han-conflict-2",
+      "sha256:31a1d037071c281d5a84373e823b3f6dc88b0a34993b58c8059e8cbfaaca7c06",
+    ],
+    [
+      "lks:event:han-conquest-230",
+      "lks:rev:han-conquest-230-2",
+      "sha256:d69efbcb496ae9ca05159ea3785b92886a84f0e6255995b31d674c6a060baa46",
+    ],
+    [
+      "lks:event:han-nanyang-cession-231",
+      "lks:rev:han-nanyang-cession-231-2",
+      "sha256:859171b829f4f84bd075eb188e40b92f3112ae6c9c3d4265afe879108f0018fe",
+    ],
+    [
+      "lks:place:nanyang",
+      "lks:rev:nanyang-2",
+      "sha256:d02039178cf39cc07913c08debd43cb20f34a9c07e6d4238fa2bd18e764b0e09",
+    ],
+    [
+      "lks:relationship:han-nanyang-cession",
+      "lks:rev:han-nanyang-cession-2",
+      "sha256:0ba9693ba4099e46ca02cba48a3ced2887c930d031188f70904bf254fb290f2e",
+    ],
+    [
+      "lks:actor:nei-shi-teng",
+      "lks:rev:nei-shi-teng-2",
+      "sha256:3d0769dc0311dc4db26bc88d2c53661f64951d6ab49385fa13bf568db07ba151",
+    ],
+    [
+      "lks:actor:qin-king-zheng",
+      "lks:rev:qin-king-zheng-2",
+      "sha256:84c87515b6efee89644110c0eea4bf790a94c6af669db20c4ff15ffb00597464",
+    ],
+    [
+      "lks:actor:han-king-an",
+      "lks:rev:han-king-an-2",
+      "sha256:ab3eef70d0f4ccc57b74ee1a860d514ac5336c190be7baad9fe71bff58c77f61",
+    ],
+    [
+      "lks:story:qin-conquest-han-233-226",
+      "lks:rev:qin-conquest-han-story-2",
+      "sha256:df7c81d2bd371d214c57883a101d7cd95974ddb10cae774c3051c92dec481991",
+    ],
+    [
+      "lks:actor:han-fei",
+      "lks:rev:han-fei-2",
+      "sha256:235d77b80da506a039066bb4b9840c633c895a387e1b5af361589cddf6fcfff2",
+    ],
+    [
+      "lks:event:han-submission-233",
+      "lks:rev:han-submission-233-2",
+      "sha256:de78b5cfe7e2f891fae70ebdb6a10ded24becb21b3a94c4d175c384d8154717f",
+    ],
   ]
 
   function draftRevision(recordId: string, revisionId: string): JsonObject {
@@ -787,9 +843,10 @@ describe("the prepared corrections (unpublished draft revisions)", () => {
     const chapter = tree()
     const published = publishedRevisionIds(chapter)
 
-    for (const [recordId, revisionId] of CORRECTIONS) {
+    for (const [recordId, revisionId, expectedHash] of CORRECTIONS) {
       const revision = draftRevision(recordId, revisionId)
 
+      expect(revision["revision_hash"], revisionId).toBe(expectedHash)
       expect(revision["revision_hash"], revisionId).toBe(revisionHash(revision))
       expect(published.has(revisionId), revisionId).toBe(false)
 
@@ -815,6 +872,18 @@ describe("the prepared corrections (unpublished draft revisions)", () => {
       expect(text).not.toContain("agreement")
     }
 
+    // The hereditary house's fifth year and the six-states table's sixth year
+    // are different expressions: the draft records both and never equates them.
+    for (const text of [
+      summary,
+      notes,
+      String(objectOf(revision["content"])["summary"]),
+      String(objectOf(revision["change_explanation"])),
+    ]) {
+      expect(text).not.toMatch(/王安五年[^;.。]*aligns?[^;.。]*王安六年/)
+      expect(text).not.toContain("aligns the same year")
+    }
+
     const tableClaim = draftClaims("lks:event:hanfei-death-233", "lks:rev:hanfei-death-233-2").find(
       (claim) => claim["claim_id"] === "lks:claim:hanfei-death-table",
     )
@@ -825,6 +894,62 @@ describe("the prepared corrections (unpublished draft revisions)", () => {
         String(objectOf(citation)["source_id"]),
       ),
     ).toEqual(["lks:source:shiji"])
+  })
+
+  it("attributes 雲陽 to the annals alone, not to the comprehensive mirror", () => {
+    const revision = draftRevision("lks:event:hanfei-death-233", "lks:rev:hanfei-death-233-2")
+    const content = objectOf(revision["content"])
+    const summary = String(content["summary"])
+    const notes = String(content["editorial_notes"])
+    const dispute = String(objectOf(revision["dispute"])["summary"])
+
+    // Only 史記 names the place of the death; the mirror's account does not.
+    expect(summary).toContain("the annals name 雲陽")
+    expect(notes).toContain("Only the annals name 雲陽")
+
+    for (const text of [summary, notes, dispute]) {
+      expect(text).not.toMatch(/mirror[^;.。]*雲陽/)
+    }
+  })
+
+  it("keeps each source's own dating of the embassy instead of converting it", () => {
+    const death = draftContent("lks:event:hanfei-death-233", "lks:rev:hanfei-death-233-2")
+    const conflict = draftContent("lks:relationship:qin-han-conflict", "lks:rev:qin-han-conflict-2")
+    const conflictClaim = draftClaims(
+      "lks:relationship:qin-han-conflict",
+      "lks:rev:qin-han-conflict-2",
+    )[0]
+    const hanFei = draftContent("lks:actor:han-fei", "lks:rev:han-fei-2")
+    const hanFeiClaim = draftClaims("lks:actor:han-fei", "lks:rev:han-fei-2")[0]
+    const submission = draftContent("lks:event:han-submission-233", "lks:rev:han-submission-233-2")
+
+    // The attack is the hereditary house's own 王安五年 notice; the 233 BCE
+    // dating of the year's events comes from the annals and the table.
+    expect(String(conflict["summary"])).toContain(
+      "the attack the hereditary house records under 王安五年",
+    )
+    expect(String(conflictClaim["statement"])).toContain("attacking Han under 王安五年")
+    expect(String(conflictClaim["statement"])).not.toMatch(/attacking Han in 233 BCE/)
+
+    // The embassy's 233 BCE dating belongs to the annals and the mirror; the
+    // hereditary house's notice keeps its regnal expression.
+    expect(String(hanFei["summary"])).toContain("under 王安五年")
+    expect(String(hanFei["summary"])).not.toContain("records Han sending to Qin in 233 BCE")
+    expect(String(hanFeiClaim["statement"])).toContain("始皇帝十四年 (233 BCE)")
+    expect(String(hanFeiClaim["statement"])).toContain("under 王安五年")
+
+    // The submission's notes state the table's own alignment rather than
+    // equating the hereditary house's fifth year with the table's sixth.
+    expect(String(submission["editorial_notes"])).toContain(
+      "韓王安六年, aligned with 秦始皇帝十四年",
+    )
+    expect(String(submission["editorial_notes"])).not.toContain("aligns the same year")
+
+    // The death's dating is stated per account, and the year's place is the
+    // annals' alone.
+    expect(String(death["summary"])).toContain(
+      "the six-states table records the embassy and the killing under 韓王安六年",
+    )
   })
 
   it("removes the continuous conflict span the sources do not state", () => {
@@ -929,6 +1054,33 @@ describe("the prepared corrections (unpublished draft revisions)", () => {
     const conflictContent = objectOf(conflict["content"])
 
     expect(objectOf(conflictContent["validity"])["mode"]).toBe("duration")
+
+    // The published conflict summary and claim attribute the 233 BCE attack to
+    // the hereditary house, which dates it 王安五年; the draft corrects both.
+    expect(String(conflictContent["summary"])).toContain(
+      "from the 233 BCE attack the hereditary house records",
+    )
+    expect(
+      String(listOf(conflict["claims"]).map((claim) => objectOf(claim))[0]["statement"]),
+    ).toContain("attacking Han in 233 BCE")
+
+    // The published han-fei summary dates the embassy to 233 BCE under the
+    // hereditary house's account; the draft moves that dating to the annals
+    // and the mirror.
+    const hanFei = publishedRevision(recordById(chapter, "lks:actor:han-fei"))
+
+    expect(String(objectOf(hanFei["content"])["summary"])).toContain(
+      "the hereditary house records Han sending to Qin in 233 BCE",
+    )
+
+    // The published submission notes call the table's sixth year "the same
+    // year" as the hereditary house's fifth; the draft states the table's own
+    // alignment instead.
+    const submission = publishedRevision(recordById(chapter, "lks:event:han-submission-233"))
+
+    expect(String(objectOf(submission["content"])["editorial_notes"])).toContain(
+      "aligns the same year with 韓王安六年",
+    )
 
     const death = publishedRevision(recordById(chapter, "lks:event:hanfei-death-233"))
     const deathSummary = String(objectOf(death["dispute"])["summary"])

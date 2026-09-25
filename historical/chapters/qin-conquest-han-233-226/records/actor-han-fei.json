@@ -120,6 +120,122 @@
         }
       ],
       "revision_hash": "sha256:0fde020e45bfee00b83da2243d798cc1c8346ef59106f87ff66b999fd61f2a65"
+    },
+    {
+      "revision_id": "lks:rev:han-fei-2",
+      "created_at": "2026-09-25T05:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Correction prepared after review: the summary attributes the 233 BCE embassy dating to the annals and the comprehensive mirror, and records the hereditary house's notice under its own 王安五年 expression.",
+      "content": {
+        "summary": "韓非, the Han prince and writer whom the hereditary house records Han sending to Qin under 王安五年 and Qin detaining and killing. The annals and the comprehensive mirror date the embassy to 始皇帝十四年 (233 BCE), and the annals record his death at 雲陽; the biography records 李斯 and 姚賈 speaking against him, the poison 李斯 sent, and the king's regret. The chapter records the dispute and decides no manner, cause, or day.",
+        "names": [
+          {
+            "form": "韓非",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "primary",
+            "romanization": {
+              "value": "Han Fei",
+              "scheme": "pinyin",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:han-fei-name"
+          },
+          {
+            "form": "非",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "alternate",
+            "claim_id": "lks:claim:han-fei-name",
+            "note": "The entries' short form: 留非，非死雲陽; 非已死矣."
+          }
+        ],
+        "actor_types": [
+          "person"
+        ],
+        "roles": [
+          {
+            "role": "envoy",
+            "validity": {
+              "source_expression": "十四年，韓非使秦（史記・秦始皇本紀）; 始皇帝十四年，使韓非來聘（資治通鑑）",
+              "calendar": "chinese_lunisolar",
+              "precision": "year",
+              "mode": "occurrence_window",
+              "interval": {
+                "bounds": "two_sided",
+                "boundary": "inclusive",
+                "start": {
+                  "year": 233,
+                  "era": "bce"
+                },
+                "end": {
+                  "year": 233,
+                  "era": "bce"
+                }
+              }
+            },
+            "note": "The embassy year only, as the annals and the comprehensive mirror date it: the entries state no month, so the role is a bounded occurrence within 233 BCE rather than a dated span."
+          }
+        ],
+        "editorial_notes": "The biography's account of his writings and his memorial is recorded in the summary; the fixture does not publish the memorial's text, which is outside the cited entries. The hereditary house's regnal expression (王安五年) is recorded where the sources give it and is not converted to an absolute year."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:han-fei-name",
+          "statement": "The annals record 韓非 coming to Qin as envoy in 始皇帝十四年 (233 BCE), and the hereditary house records the embassy under 王安五年.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十四年（韓非使秦）"
+              },
+              "quoted_text": "韓非使秦，秦用李斯謀，留非，非死雲陽。"
+            },
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷四十五 韓世家 韓王安五年（使韓非使秦）"
+              },
+              "quoted_text": "王安五年，秦攻韓，韓急，使韓非使秦，秦留非，因殺之。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:han-fei-role",
+          "statement": "The comprehensive mirror records the Han king sending 韓非 as envoy, and the biography records the king hearing of him and wanting to see him.",
+          "asserts": "/roles/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:zizhi-tongjian",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦紀一 始皇帝十四年（使韓非來聘）"
+              },
+              "quoted_text": "韓王納地效璽，請為籓臣，使韓非來聘。"
+            },
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六十三 老子韓非列傳（秦王見其書）"
+              },
+              "quoted_text": "秦王見《孤憤》、《五蠹》之書，曰：「嗟乎，寡人得見此人與之游，死不恨矣！」"
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:235d77b80da506a039066bb4b9840c633c895a387e1b5af361589cddf6fcfff2"
     }
   ],
   "publication": {

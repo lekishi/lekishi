@@ -103,19 +103,22 @@ entry), and those are not used as evidence.
   duration is invented; the year-only events are `occurrence_window`s, so the
   atlas must never present them as continuous activity.
 - The regnal and absolute years are kept as the sources give them. The
-  hereditary house dates the embassy to 王安五年, while the six-states table
-  aligns 秦始皇十四年 (233 BCE) with 王安六年; the fixture records both
-  expressions and does not convert between them. `韓王安`'s reign span uses the
-  six-states table's alignment (韓王安元年 = 238 BCE to 韓王安九年 = 230 BCE),
-  with the other expressions recorded beside it.
+  hereditary house dates the embassy and the attack to 王安五年; the six-states
+  table records the embassy and the killing under 韓王安六年, aligned with
+  秦始皇帝十四年 (233 BCE); the annals and the comprehensive mirror date the
+  embassy to 始皇帝十四年 (233 BCE). The fixture records each expression and does
+  not convert between them. `韓王安`'s reign span uses the six-states table's
+  alignment (韓王安元年 = 238 BCE to 韓王安九年 = 230 BCE), with the other
+  expressions recorded beside it.
 - The hereditary house's transcription reads `潁州郡` where the annals and the
   comprehensive mirror read `潁川`/`潁川郡`. The record publishes `潁川郡` and
   keeps the variant in its claims and notes; a critical edition is what would
   settle the reading.
 - 韓非's death is the fixture's one dispute. The annals and the comprehensive
-  mirror date it to 始皇帝十四年 (233 BCE); the hereditary house records the
-  detention and killing under 王安五年, which the six-states table aligns with
-  王安六年; the biography gives no year. The accounts differ on who acted and how
+  mirror date it to 始皇帝十四年 (233 BCE), and only the annals name 雲陽 as the
+  place of the death; the hereditary house places the detention and killing
+  under 王安五年; the six-states table records them under 韓王安六年; the
+  biography gives no year. The accounts differ on who acted and how
   (the annals give 李斯's plan and a death at 雲陽, the hereditary house says Qin
   killed him, the biography adds 姚賈, the poison 李斯 sent, and the king's
   regret). All three are published as cited claims, the annals' account is the
@@ -123,8 +126,8 @@ entry), and those are not used as evidence.
   - **Flagged and drafted.** The published snapshot's dispute summary says the
     three accounts agree on the year; the sources do not (see above), and the
     review flagged it. The draft revision
-    `lks:rev:hanfei-death-233-2` states each account's dating and is listed under
-    <<Prepared corrections awaiting a publication decision>>.
+    `lks:rev:hanfei-death-233-2` states each account's own dating and place and
+    is listed under <<Prepared corrections awaiting a publication decision>>.
 
 ## Prepared corrections awaiting a publication decision
 
@@ -137,21 +140,24 @@ corrected preparation set is the owner's decision.
 
 | Published revision | Draft correction | What the draft changes |
 | --- | --- | --- |
-| `lks:rev:hanfei-death-233-1` | `lks:rev:hanfei-death-233-2` | The dispute summary no longer claims the accounts agree on the year; each account's dating (233 BCE, 王安五年/王安六年, none) is stated, and the six-states table is cited for the year. |
-| `lks:rev:qin-han-conflict-1` | `lks:rev:qin-han-conflict-2` | The relationship no longer carries a continuous 233–230 BCE `duration`; the three separately dated acts stay in the cited summary. |
+| `lks:rev:hanfei-death-233-1` | `lks:rev:hanfei-death-233-2` | The dispute summary no longer claims the accounts agree on the year and no longer equates the hereditary house's 王安五年 with the table's 韓王安六年; each account's own dating is stated, 雲陽 is attributed to the annals alone, and the six-states table is cited for the year. |
+| `lks:rev:han-fei-1` | `lks:rev:han-fei-2` | The summary attributes the 233 BCE embassy dating to the annals and the comprehensive mirror and keeps the hereditary house's notice under 王安五年. |
+| `lks:rev:han-submission-233-1` | `lks:rev:han-submission-233-2` | The notes state the six-states table's own alignment (秦始皇帝十四年 with 韓王安六年) instead of equating the hereditary house's 王安五年 with the table's sixth year. |
+| `lks:rev:qin-han-conflict-1` | `lks:rev:qin-han-conflict-2` | The relationship no longer carries a continuous 233–230 BCE `duration`, and the 233 BCE dating is attributed to the annals and the six-states table rather than to the hereditary house, which gives 王安五年. |
 | `lks:rev:han-conquest-230-1` | `lks:rev:han-conquest-230-2` | The mirror citation no longer attributes the officer's name to a text-critical corrected reading; the name stays with the annals. |
 | `lks:rev:han-nanyang-cession-231-1` | `lks:rev:han-nanyang-cession-231-2` | The mirror's quoted fragments drop the transcription's editorial addition 秋. |
 | `lks:rev:nanyang-1` | `lks:rev:nanyang-2` | The summary attributes the cession to the annals and the comprehensive mirror, not to the hereditary house; the quoted fragments drop 秋. |
 | `lks:rev:han-nanyang-cession-1` | `lks:rev:han-nanyang-cession-2` | The mirror's quoted fragments drop 秋. |
 | `lks:rev:nei-shi-teng-1` | `lks:rev:nei-shi-teng-2` | The name is cited to the annals alone, and the mirror's corrected reading is stated in the notes rather than used as evidence. |
 | `lks:rev:qin-king-zheng-1` | `lks:rev:qin-king-zheng-2` | The mirror quotation is an unchanged fragment; the earlier text changed the source's comma to a full stop. |
-| `lks:rev:han-king-an-1` | `lks:rev:han-king-an-2` | The role span is described as the six-states table's first numbered regnal year (元年, 238 BCE), not as an accession year. |
+| `lks:rev:han-king-an-1` | `lks:rev:han-king-an-2` | The role span is described as the six-states table's first numbered regnal year (元年, 238 BCE), not as an accession year, and the embassy year's regnal counts are recorded as differing expressions. |
 | `lks:rev:qin-conquest-han-story-1` | `lks:rev:qin-conquest-han-story-2` | The coverage note names the annals' 230 BCE notice as a famine (民大饑), not a drought. |
 
-`src/lib/historical/contract/qin-chapter.test.ts` pins each draft, its sealed
-hash, its unpublished status, and the published snapshot's flagged wording, so
-neither the drafts nor the boundary can drift silently. The ledger row for
-`lks:set:qin-conquest-han-233-226-v1` still records the published digest.
+`src/lib/historical/contract/qin-chapter.test.ts` pins each draft's id and its
+reviewed sealed hash, its unpublished status, and the published snapshot's
+flagged wording, so neither the drafts nor the boundary can drift silently. The
+ledger row for `lks:set:qin-conquest-han-233-226-v1` still records the published
+digest.
 
 ## Exclusions
 
@@ -175,7 +181,7 @@ member revisions). This is not owner review, not independent review, and not
 specialist review; no owner release decision exists, and the fixture must not be
 described as approved or published for release.
 
-The published snapshot is what the ledger row records. Ten correction drafts
+The published snapshot is what the ledger row records. Twelve correction drafts
 prepared after the internal review are **unpublished**: they are listed above,
 pinned by the fixture's tests, and await the owner's decision to publish a
 corrected preparation set. Until then, the flagged published wording stays as
@@ -187,7 +193,7 @@ drafted, awaiting a publication decision".
 - **Owner review of the fixture's scope.** The owner may extend, narrow, or drop
   the episode; any change needs a new revision and a new set, and a new ledger
   row for that set.
-- **The prepared corrections.** Ten draft revisions are prepared and unpublished
+- **The prepared corrections.** Twelve draft revisions are prepared and unpublished
   (listed above). Publishing a corrected preparation set needs the owner's
   decision; the preparing editor may not supersede the prepared set.
 - **Optional specialist review.** Warring States chronology and the 韓非
@@ -239,7 +245,7 @@ publication set, which is the same rule the Tang chapter follows.
 - It is a bounded curated selection, not a complete record of Qin's conquests or
   of Han's end, and not a claim that nothing else happened in these years.
 - It is a preparation snapshot: not owner-approved, not release content, and not
-  a second launch chapter. Ten correction drafts await the owner's publication
+  a second launch chapter. Twelve correction drafts await the owner's publication
   decision, so the published wording must not be treated as final.
 - The locators rest on unproofread transcriptions and must be re-checked against
   critical editions before content freeze.

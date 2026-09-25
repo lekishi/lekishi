@@ -18,6 +18,7 @@ import type {
   Chapter,
   ChapterPublication,
   DatePrecision,
+  EventDispute,
   EventPlacement,
   GeoPoint,
   GeometryPrecision,
@@ -405,8 +406,62 @@ function projectEvent(
     placement: projectEventPlacement(entry, places, errors),
     occurrence,
     note,
+    dispute: projectDispute(entry, errors),
     coda: labelledCoda,
   }
+}
+
+/**
+ * The record's published dispute, or null when it is undisputed.
+ *
+ * The atlas must not smooth a disagreement into one account, so a record marked
+ * `disputed` carries its summary and the claims that challenge the main account
+ * into the details surface. A disputed record without a summary is an error
+ * rather than an empty panel: the contract already requires a challenging claim,
+ * and the summary is what the reader is shown.
+ */
+function projectDispute(entry: PublishedRevision, errors: string[]): EventDispute | null {
+  const dispute = entry.revision["dispute"]
+  const challenging = listOf(entry.revision["claims"])
+    .map(objectOf)
+    .filter((claim) => claim["role"] === "conflicting" || claim["role"] === "alternative")
+
+  if (!isObject(dispute) || dispute["status"] !== "disputed") {
+    // The contract's validator refuses this shape too; the projection refuses it
+    // as well so the atlas can never smooth challenging accounts into one
+    // undisputed reading.
+    if (challenging.length > 0) {
+      errors.push(
+        `${entry.recordId} carries ${challenging.length} conflicting or alternative claims without a disputed status, and the atlas will not present them as undisputed`,
+      )
+    }
+
+    return null
+  }
+
+  const summary = stringOrUndefined(dispute["summary"])
+
+  if (summary === undefined || summary === "") {
+    errors.push(`${entry.recordId} is disputed but carries no dispute summary to show`)
+    return null
+  }
+
+  const accounts = challenging.flatMap((claim) => {
+    const statement = stringOrUndefined(claim["statement"])
+
+    if (statement === undefined || statement === "") {
+      return []
+    }
+
+    const locators = listOf(claim["citations"])
+      .map(objectOf)
+      .map((citation) => stringOrUndefined(objectOf(citation["locator"])["value"]) ?? "")
+      .filter((value) => value !== "")
+
+    return [{ statement, locators }]
+  })
+
+  return { status: "disputed", summary, accounts }
 }
 
 function projectOccurrence(entry: PublishedRevision, errors: string[]): Occurrence | null {

@@ -107,3 +107,31 @@ describe("buildScene", () => {
     expect(buildScene(unplaced, chapter).selectedEventId).toBe("event-island-landfall")
   })
 })
+
+describe("buildScene and the published dispute", () => {
+  const dispute = {
+    status: "disputed" as const,
+    summary: "The accounts differ about this event.",
+    accounts: [{ statement: "One account records it one way.", locators: ["卷六（entry）"] }],
+  }
+  const disputed = {
+    ...chapter,
+    events: chapter.events.map((event) =>
+      event.id === "event-island-landfall" ? { ...event, dispute } : event,
+    ),
+  }
+
+  it("carries the dispute into the scene verbatim and leaves the others null", () => {
+    const scene = buildScene(createAtlasState(disputed), disputed)
+    const landfall = scene.events.find((event) => event.id === "event-island-landfall")
+
+    expect(landfall?.dispute).toEqual(dispute)
+    expect(scene.events.filter((event) => event.dispute !== null)).toHaveLength(1)
+  })
+
+  it("keeps undisputed events null", () => {
+    const scene = buildScene(initial, chapter)
+
+    expect(scene.events.every((event) => event.dispute === null)).toBe(true)
+  })
+})

@@ -5,10 +5,13 @@
   let {
     events,
     selectedEventId,
+    disputeDetail = false,
     onSelect,
   }: {
     events: readonly SceneEvent[]
     selectedEventId: string | null
+    /** The comparison review surface marks disputed events; the launch atlas does not yet. */
+    disputeDetail?: boolean
     onSelect: (eventId: string) => void
   } = $props()
 </script>
@@ -53,7 +56,12 @@
               : "border-slate-700/70 bg-slate-900/60 hover:border-slate-500 hover:bg-slate-800/70",
           ]}
         >
-          <span class="flex items-center justify-between gap-2">
+          <!--
+            The title and its badges share a row when the title is short, and the
+            badges drop to their own line when a longer title needs the width;
+            without the wrap a long title runs under the badge at phone widths.
+          -->
+          <span class="flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
             <span class="text-sm font-medium text-slate-100">{event.title}</span>
             {#if playbackLabel(event.playback)}
               <span
@@ -77,6 +85,14 @@
                 class="rounded-full border border-sky-400/60 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-sky-300"
               >
                 possible
+              </span>
+            {/if}
+            {#if disputeDetail && event.dispute}
+              <span
+                data-testid="atlas-dispute-badge"
+                class="rounded-full border border-rose-400/60 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-rose-300"
+              >
+                disputed account
               </span>
             {/if}
             {#if event.coda}

@@ -706,3 +706,72 @@ describe("the chapter's place references", () => {
     expect(result.ok).toBe(true)
   })
 })
+
+describe("the projection's dispute rule", () => {
+  const QIN = "qin-conquest-han-233-226"
+  const QIN_COVERAGE = { defaultWindow: { start: -232, end: -225 } }
+
+  function projectQin(tree: ChapterTree): ProjectionResult {
+    return projectChapter(QIN, tree.documents, tree.sets, QIN_COVERAGE)
+  }
+
+  it("carries a disputed record's summary and challenging accounts into the event", () => {
+    const result = projectQin(loadChapter(QIN))
+
+    if (!result.ok) {
+      throw new Error(result.errors.join("\n"))
+    }
+
+    const death = result.chapter.events.find((event) => event.id === "lks:event:hanfei-death-233")
+    const dispute = death?.dispute
+
+    expect(dispute?.status).toBe("disputed")
+    expect(dispute?.summary).toContain("王安五年")
+    expect(dispute?.summary).toContain("韓王安六年")
+    expect(dispute?.summary).not.toContain("agree")
+    expect(dispute?.accounts).toHaveLength(2)
+    expect(dispute?.accounts[0]?.statement).toContain("hereditary house")
+    expect(dispute?.accounts[0]?.locators.length).toBeGreaterThan(0)
+
+    // The other four events are undisputed, so nothing else gains a panel.
+    expect(result.chapter.events.filter((event) => event.dispute !== null)).toHaveLength(1)
+  })
+
+  it("fails a disputed record with no summary instead of showing an empty panel", () => {
+    const tree = loadChapter(QIN)
+    const record = tree.documents.find(
+      (document) => isObject(document) && document["record_id"] === "lks:event:hanfei-death-233",
+    )
+    const revision = publishedRevisionOf(objectOf(record))
+
+    delete objectOf(revision["dispute"])["summary"]
+
+    const result = projectQin(tree)
+
+    expect(result.ok).toBe(false)
+
+    if (!result.ok) {
+      expect(result.errors.join("\n")).toContain("is disputed but carries no dispute summary")
+    }
+  })
+
+  it("fails conflicting claims the record does not present as a dispute", () => {
+    const tree = loadChapter(QIN)
+    const record = tree.documents.find(
+      (document) => isObject(document) && document["record_id"] === "lks:event:hanfei-death-233",
+    )
+    const revision = publishedRevisionOf(objectOf(record))
+
+    objectOf(revision["dispute"])["status"] = "undisputed"
+
+    const result = projectQin(tree)
+
+    expect(result.ok).toBe(false)
+
+    if (!result.ok) {
+      expect(result.errors.join("\n")).toContain(
+        "without a disputed status, and the atlas will not present them as undisputed",
+      )
+    }
+  })
+})

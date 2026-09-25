@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { TimeWindow } from "../domain"
+  import { yearLabel } from "../labels"
 
   let {
     timeWindow,
@@ -47,6 +48,17 @@
         oninput={(event) => updateWindow("start", (event.currentTarget as HTMLInputElement).value)}
         class="w-16 rounded-lg border border-slate-700 sm:w-24 bg-slate-900 px-2 py-1 text-sm font-medium tabular-nums text-slate-100 focus:border-amber-300 focus:outline-none"
       />
+      <!--
+        The inputs edit the astronomical ordinal the domain computes with. A BCE
+        year is not that number, so it is stated beside the input rather than
+        left to be misread; for CE years the ordinal is the year and no extra
+        text is added.
+      -->
+      {#if timeWindow.start <= 0}
+        <span class="text-[0.6rem] font-medium normal-case tracking-normal text-amber-200/80">
+          {yearLabel(timeWindow.start)}
+        </span>
+      {/if}
     </label>
 
     <label
@@ -61,6 +73,11 @@
         oninput={(event) => updateWindow("end", (event.currentTarget as HTMLInputElement).value)}
         class="w-16 rounded-lg border border-slate-700 sm:w-24 bg-slate-900 px-2 py-1 text-sm font-medium tabular-nums text-slate-100 focus:border-amber-300 focus:outline-none"
       />
+      {#if timeWindow.end <= 0}
+        <span class="text-[0.6rem] font-medium normal-case tracking-normal text-amber-200/80">
+          {yearLabel(timeWindow.end)}
+        </span>
+      {/if}
     </label>
 
     <div class="flex items-center gap-1 pb-0.5">
@@ -119,9 +136,9 @@
     />
     <output
       id="atlas-playhead-value"
-      class="w-16 rounded-md bg-slate-900 px-2 py-0.5 text-right text-sm font-semibold tabular-nums text-amber-200"
+      class="min-w-16 whitespace-nowrap rounded-md bg-slate-900 px-2 py-0.5 text-right text-sm font-semibold tabular-nums text-amber-200"
     >
-      {Math.round(playhead)}
+      {yearLabel(Math.round(playhead))}
     </output>
   </div>
 </div>

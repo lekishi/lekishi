@@ -57,9 +57,11 @@ comparison fixture is `historical/chapters/qin-conquest-han-233-226/`: it is
 source-checked content in the same contract, recorded as a preparation snapshot
 rather than a release, loadable through the browser-safe comparison catalog
 (`src/lib/atlas/chapter-catalog.ts`) and deliberately not rendered by the
-production atlas. Its published snapshot is the preparation the ledger records;
-twelve correction drafts prepared after the internal review are unpublished and
-await the owner's decision, as its README lists.
+production atlas. Its single preparation set publishes the twelve corrected
+revisions the internal review prepared, which the owner asked to review before
+deciding, and the comparison review route `/compare/qin` renders them while
+stating that the content is unapproved preparation; no owner decision is
+recorded, and the atlas route still renders only the Tang chapter.
 
 The publication approval gate covers every chapter tree: a set that
 `rfd/0002/PUBLICATION_APPROVAL.adoc` does not name fails the build, and the

@@ -99,6 +99,25 @@ export type EventPlacement =
       readonly reason: "no-place" | "no-position" | "context-only"
     }
 
+/**
+ * A published dispute, kept as the contract states it.
+ *
+ * The record's own dispute status and summary, plus the claims that challenge
+ * the main account, so a details surface can show the disagreement without
+ * paraphrasing it or deciding it. The atlas never merges these accounts or
+ * presents one as the record's conclusion.
+ */
+export type EventDispute = {
+  readonly status: "disputed"
+  /** The published dispute summary, verbatim. */
+  readonly summary: string
+  /** The conflicting or alternative claims, verbatim, with their cited locators. */
+  readonly accounts: readonly {
+    readonly statement: string
+    readonly locators: readonly string[]
+  }[]
+}
+
 /** A published event with the chapter's presentation title and its own summary. */
 export type HistoricalEvent = {
   readonly id: string
@@ -106,6 +125,8 @@ export type HistoricalEvent = {
   readonly placement: EventPlacement
   readonly occurrence: Occurrence
   readonly note: string
+  /** The published dispute, or null when the record is undisputed. */
+  readonly dispute: EventDispute | null
   /** True when the published record is a coda node outside the primary mission window. */
   readonly coda: boolean
 }

@@ -22,7 +22,7 @@
    * from the content.
    */
   onMount(() => {
-    startAtlasPage()
+    startAtlasPage(CHAPTER)
 
     return () => releaseWorkspace()
   })

@@ -179,15 +179,47 @@ if (!atlasHtml.includes("The 750–754 embassy of 藤原朝臣清河")) {
   fail("atlas.html does not name the reviewed chapter the atlas renders")
 }
 
-// The bounded Qin comparison fixture is loadable through the comparison catalog
-// (`src/lib/atlas/chapter-catalog.ts`), which no route imports, so Vite leaves
-// it out of the build. If a route ever imports the catalog by accident, the
-// fixture would ship in the release artifact as a second chapter; these
-// sentinels fail the build until shipping the comparison harness is a
-// deliberate, reviewed change.
-for (const marker of ["qin-conquest-han-233-226", "lks:event:han-conquest-230"]) {
-  if (scriptText.includes(marker)) {
-    fail(`the artifact carries the comparison fixture: ${marker} is present`)
+// The bounded Qin comparison fixture is rendered by the comparison review route
+// (`/compare/qin`), which loads it through the comparison catalog
+// (`src/lib/atlas/chapter-catalog.ts`). The fixture ships on purpose so the owner
+// can inspect it, but it is unapproved preparation, not a second launch chapter:
+// the review page must exist, state its status, and the production atlas page
+// must not render the fixture.
+const comparisonHtml = path.join(buildDirectory, "compare", "qin.html")
+
+if (requireFile(comparisonHtml)) {
+  const comparisonText = read(comparisonHtml)
+
+  if ((comparisonText.match(/id="atlas-workspace"/g) ?? []).length !== 1) {
+    fail("compare/qin.html must contain exactly one #atlas-workspace mount point")
+  }
+
+  if (!comparisonText.includes("_app/immutable/entry/start.")) {
+    fail("compare/qin.html does not load the client entry, so the workspace would never mount")
+  }
+
+  if (!comparisonText.includes("Unapproved preparation")) {
+    fail("compare/qin.html does not state that the comparison fixture is unapproved preparation")
+  }
+
+  // The shell is prerendered from the route's load, so the fixture's window and
+  // title are real content before any script runs. The chapter's records are
+  // bundled in the route's client chunks rather than inlined here, so the
+  // scripts carry the fixture's own ids.
+  for (const marker of ["233 BCE–226 BCE", "The end of the state of Han under Qin"]) {
+    if (!comparisonText.includes(marker)) {
+      fail(`compare/qin.html does not carry the comparison fixture: ${marker} is missing`)
+    }
+  }
+
+  for (const marker of ["qin-conquest-han-233-226", "lks:event:han-conquest-230"]) {
+    if (!scriptText.includes(marker)) {
+      fail(`the built scripts do not carry the comparison fixture: ${marker} is missing`)
+    }
+
+    if (atlasHtml.includes(marker)) {
+      fail(`the production atlas page renders the comparison fixture: ${marker} is present`)
+    }
   }
 }
 

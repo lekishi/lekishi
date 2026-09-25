@@ -83,9 +83,10 @@ prerendered pages, the hashed bundles, the single stylesheet with the Cesium
 widget styles, or the Cesium runtime directories are missing, if the atlas page
 does not have exactly one mount point, if the artifact contains a server runtime,
 if the built scripts or the prerendered pages do not carry the reviewed chapter,
-if the retired synthetic fixture's sentinel strings reach the artifact, or if the
-bounded Qin comparison fixture's ids reach the artifact (it is loadable through
-the comparison catalog but must not ship).
+if the retired synthetic fixture's sentinel strings reach the artifact, if the
+comparison review page is missing or does not state that the bounded Qin fixture
+is unapproved preparation, or if the production atlas page renders that fixture
+instead of the reviewed chapter.
 
 ### Reviewed chapter content
 
@@ -117,15 +118,18 @@ and that boundary is the only way chapter content enters the app:
    caller, so the comparison catalog can name the Qin fixture's window without a
    chapter branch in the projection.
 5. `src/lib/atlas/chapter-catalog.ts` loads non-production chapters lazily for
-   the later comparison harness. No route imports it, so the Qin fixture is
-   loadable in a browser without shipping in the release artifact; the build
-   invariant fails if its ids ever reach the artifact.
+   the comparison review route (`/compare/qin`), which renders the bounded Qin
+   fixture through the same projection and states that it is unapproved
+   preparation. The atlas route does not import the catalog, so the production
+   page still bundles only the reviewed chapter, and the build invariant requires
+   the review page while forbidding the fixture on the production page.
 
 The bounded Qin comparison fixture
 (`historical/chapters/qin-conquest-han-233-226/`) is source-checked content in
 the same contract, recorded in the publication ledger as a preparation snapshot
-rather than a release, and kept comparison-only until the treatment harness
-exists.
+rather than a release, and rendered only by the comparison review route
+(`/compare/qin`), which labels it unapproved preparation. It stays
+comparison-only until the treatment harness and the owner's decision exist.
 
 What the projection refuses to do is part of the contract with the reader:
 

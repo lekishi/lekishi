@@ -118,9 +118,10 @@
         {CHAPTER.publication.reviewNotes}
       </p>
       <p class="mt-2 text-xs text-slate-400">
-        Published by {CHAPTER.publication.setIds.join(", ")}. Owner editorial approval under RFD 2
-        and the specialist reviews are still pending, so this is not a claim of complete coverage or
-        of independent review.
+        Published by {CHAPTER.publication.setIds.join(", ")}. The owner's editorial approval under
+        RFD 2 was recorded on 2026-09-25 against that set's digest, and the optional specialist
+        reviews remain unperformed, so this is not a claim of complete coverage or of independent
+        review.
       </p>
     </section>
   </main>

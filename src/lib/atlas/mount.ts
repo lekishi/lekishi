@@ -1,4 +1,5 @@
 import { mount, unmount } from "svelte"
+import type { Chapter } from "./domain"
 import AtlasWorkspace from "./workspace/AtlasWorkspace.svelte"
 
 /**
@@ -9,6 +10,15 @@ import AtlasWorkspace from "./workspace/AtlasWorkspace.svelte"
  * time, and camera-follow state. The page bootstrap (`atlas/entry.ts`) is the
  * only caller, so one page has one workspace.
  */
+/**
+ * Which detail surface the workspace shows. `production` is the reviewed launch
+ * chapter's surface; `comparison-review` additionally marks disputed events and
+ * shows their published accounts, which is the comparison fixture's review
+ * surface. The distinction exists so a review surface can show more without
+ * changing what the approved launch chapter renders.
+ */
+export type AtlasDetail = "production" | "comparison-review"
+
 export type AtlasHandle = {
   /** True once the workspace is torn down and its renderer is disposed. */
   readonly disposed: boolean
@@ -16,8 +26,12 @@ export type AtlasHandle = {
   dispose(): void
 }
 
-export function mountAtlas(root: HTMLElement): AtlasHandle {
-  const component = mount(AtlasWorkspace, { target: root })
+export function mountAtlas(
+  root: HTMLElement,
+  chapter: Chapter,
+  detail: AtlasDetail = "production",
+): AtlasHandle {
+  const component = mount(AtlasWorkspace, { target: root, props: { chapter, detail } })
   let disposed = false
 
   return {

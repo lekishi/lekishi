@@ -22,10 +22,12 @@ import { projectChapter, type ChapterCoverage } from "./projection"
  * tests through Vitest before Vite bundles anything. This module is the
  * representability gate; that one is the validation gate.
  *
- * This module binds the one chapter the site renders. Chapters that are not the
- * production chapter (the bounded Qin comparison fixture) load through
- * `chapter-catalog.ts`, which reuses `projectChapterContent` below and stays out
- * of the production bundle.
+ * This module binds the one chapter the production atlas route renders. Chapters
+ * that are not the production chapter (the bounded Qin comparison fixture) load
+ * through `chapter-catalog.ts`, which reuses `projectChapterContent` below and is
+ * imported by the comparison review route (`/compare/qin`), not by the atlas
+ * route. The production page therefore still bundles only the reviewed Tang
+ * chapter, and `scripts/check-static-build.mjs` checks that.
  */
 
 /** The reviewed chapter this site ships. Adding a chapter is a content decision, not a code path. */

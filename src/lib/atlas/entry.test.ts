@@ -22,6 +22,7 @@ const mountAtlas = vi.hoisted(() => vi.fn(() => handle))
 
 vi.mock("./mount", () => ({ mountAtlas }))
 
+import { CHAPTER } from "./chapter-content"
 import { mountWorkspace, releaseWorkspace, startAtlasPage } from "./entry"
 
 function addMountPoint(): HTMLElement {
@@ -46,7 +47,7 @@ beforeEach(() => {
 
   // The module has no import-time side effects (the atlas shell is prerendered
   // on the server), so the page's own start call wires the lifecycle here.
-  startAtlasPage()
+  startAtlasPage(CHAPTER)
 })
 
 // The bootstrap keeps one workspace for the lifetime of a page, so each test
@@ -63,7 +64,7 @@ describe("the atlas page bootstrap", () => {
     mountWorkspace()
 
     expect(mountAtlas).toHaveBeenCalledTimes(1)
-    expect(mountAtlas).toHaveBeenCalledWith(root)
+    expect(mountAtlas).toHaveBeenCalledWith(root, CHAPTER, "production")
     expect(window.__lekishiAtlas).toBe(handle)
   })
 
@@ -77,11 +78,19 @@ describe("the atlas page bootstrap", () => {
   it("keeps one workspace when the page start call repeats", () => {
     addMountPoint()
 
-    startAtlasPage()
-    startAtlasPage()
+    startAtlasPage(CHAPTER)
+    startAtlasPage(CHAPTER)
 
     expect(mountAtlas).toHaveBeenCalledTimes(1)
     expect(window.__lekishiAtlas).toBe(handle)
+  })
+
+  it("mounts the chapter and detail surface the page asks for", () => {
+    const root = addMountPoint()
+
+    startAtlasPage(CHAPTER, "comparison-review")
+
+    expect(mountAtlas).toHaveBeenCalledWith(root, CHAPTER, "comparison-review")
   })
 
   it("releases the workspace on teardown and restores one workspace on pageshow", () => {

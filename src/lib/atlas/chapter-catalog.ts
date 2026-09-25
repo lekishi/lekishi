@@ -9,12 +9,12 @@ import type { ChapterCoverage } from "./projection"
  *
  * The production atlas binds one chapter eagerly in `chapter-content.ts`. The
  * treatment comparison needs to load the bounded Qin fixture through the same
- * projection without shipping it in the release artifact, so this module is
- * deliberately not imported by any route: Vite leaves it (and its lazy globs)
- * out of the build, and `scripts/check-static-build.mjs` fails if the fixture's
- * ids ever reach the artifact. The later comparison harness imports this module
+ * projection, so the comparison review route (`/compare/qin`) imports this module
  * and supplies the chapter's own coverage model, as the production boundary does
- * for Tang; the fixture's README records the window it must pass.
+ * for Tang; the fixture's README records the window it passes. The atlas route
+ * does not import this module, so the production page still bundles only the
+ * reviewed Tang chapter — `scripts/check-static-build.mjs` checks that, and that
+ * the review page states the fixture is unapproved preparation.
  *
  * Loading is lazy per chapter: the modules are fetched only when a harness asks
  * for that chapter, so a catalog with several comparison fixtures never loads

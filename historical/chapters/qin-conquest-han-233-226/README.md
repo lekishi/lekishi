@@ -70,7 +70,7 @@ The exact event inventory is pinned by
 | --- | --- | --- | --- |
 | [`史記`](sources/shiji.json) | primary | 卷六 秦始皇本紀 (篇首, 十四年, 十六年, 十七年, 二十一年); 卷十五 六國年表 (秦始皇九年, 十四年, 十六年, 十七年); 卷四十五 韓世家 (韓哀侯二年, 韓桓惠王三十四年, 韓王安五年, 韓王安九年); 卷六十三 老子韓非列傳 | public domain; Wikisource transcription, unproofread; short quotations permitted |
 | [`資治通鑑`](sources/zizhi-tongjian.json) | primary | 卷六 秦紀一 (莊襄王三年, 始皇帝十四年, 十六年, 十七年) | public domain; Wikisource transcription, unproofread, with later annotations; main text only |
-| [`讀史方輿紀要`](sources/du-shi-fang-yu-ji-yao.json) | reference | 卷四十七 河南二 開封府 (禹州, 禹州 陽翟城, 新鄭縣); 卷四十九 河南四 懷慶府 衛輝府 彰德府 (修武縣 南陽城); 卷五十一 河南六 南陽府 (宛城); 卷五十三 陝西二 西安府 (涇陽縣 雲陽城) | public domain (1692); Wikisource transcription, unproofread; citation of its identifications, short quotations |
+| [`讀史方輿紀要`](sources/du-shi-fang-yu-jiyao.json) | reference | 卷四十七 河南二 開封府 (禹州, 禹州 陽翟城, 新鄭縣); 卷四十九 河南四 懷慶府 衛輝府 彰德府 (修武縣 南陽城); 卷五十一 河南六 南陽府; 卷五十三 陝西二 西安府 (涇陽縣 雲陽城) | public domain (1692); Wikisource transcription, unproofread; citation of its identifications, short quotations |
 | [`Wikidata`](sources/wikidata.json) | dataset | Q1024662, Q10881340, Q1344848 (P625) | CC0 1.0; modern coordinate only, never a historical claim |
 
 Every locator was re-checked against the named Wikisource transcription on
@@ -144,6 +144,15 @@ now published rest on the identifications the cited historical geography records
 | `lks:rev:han-nanyang-cession-231-3` | `lks:event:han-nanyang-cession-231` | The summary and notes state in the review surface why the cession has no position. |
 | `lks:rev:han-conquest-230-3` | `lks:event:han-conquest-230` | The summary and notes state that the entries name no campaign site and that the commandery's anchor is the seat the historical geography records. |
 | `lks:rev:qin-conquest-han-story-3` | `lks:story:qin-conquest-han-233-226` | The coverage note names the label positions and why 南陽 has none. |
+
+A second review round corrected three of those revisions as new revisions rather
+than editing them:
+
+| Revision | Record | What it corrects |
+| --- | --- | --- |
+| `lks:rev:nanyang-4` | `lks:place:nanyang` | The 南陽郡 quotation is from the 南陽府 entry, so the citation no longer names its 宛城 sub-entry. |
+| `lks:rev:han-nanyang-cession-231-4` | `lks:event:han-nanyang-cession-231` | Only Qin's receipt of the land is dated to the ninth month; Han's presentation is dated to 231 BCE. |
+| `lks:rev:han-conquest-230-4` | `lks:event:han-conquest-230` | The anchor sits at the modern city that carries the seat name the historical geography records, not at an established historical seat coordinate. |
 
 They are additions in the same preparation set: no reviewed wording was approved
 or rejected, no approval is recorded, and the superseded revisions stay in their

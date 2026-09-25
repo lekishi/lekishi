@@ -177,7 +177,8 @@ label positions were reworked. Re-measured with this update:
 |Full check
 |`pnpm verify` passes: format check, `svelte-check` 0 errors and 0 warnings, 456
 tests (455 passed, 1 skipped — the `pnpm seal` maintenance entry point), and the
-static build with its invariant (451 files).
+static build with its invariant (451 files). Re-run after the second review
+round's corrections: the same counts.
 
 |Fixture, boundary, and route tests
 |`src/lib/historical/contract/qin-chapter.test.ts` (54 tests) pins the corrected
@@ -192,7 +193,8 @@ placements it renders.
 
 |Browser checks
 |`e2e/comparison.spec.ts` re-run against the built artifact (12 passed, 4.8
-minutes across the desktop, tablet-touch, and phone projects): the unapproved
+minutes across the desktop, tablet-touch, and phone projects, and re-run after
+the second review round's corrections): the unapproved
 status and BCE years, four label-anchor placements and one `南陽 · no sourced
 position` row, the notice's counts (1 of 5 in-window events, 1 of 4 places
 without a sourced map position), the disputed death account, the unchanged Tang

@@ -139,6 +139,21 @@ const ADDITIONS: [string, string, string][] = [
     "lks:rev:qin-conquest-han-story-3",
     "sha256:04a3fb3afca83a1d29af37c8081930586ce3bb3fbf9fd54cae9780515099ab70",
   ],
+  [
+    "lks:place:nanyang",
+    "lks:rev:nanyang-4",
+    "sha256:2b6c654975883c9f923b6b87ab3891e3575279d5efd0b4508bceaa7841ef076c",
+  ],
+  [
+    "lks:event:han-nanyang-cession-231",
+    "lks:rev:han-nanyang-cession-231-4",
+    "sha256:447ae1f1c9bc9feea576f93a8cf7ec939927afe68b9e18986b101dfed1766f3c",
+  ],
+  [
+    "lks:event:han-conquest-230",
+    "lks:rev:han-conquest-230-4",
+    "sha256:3847cd5da6f8f704e738c84222068d4f243e47d31d08ff6a179d37ec3d4ded47",
+  ],
 ]
 
 /** Every revision id the chapter's sets publish. */
@@ -967,20 +982,36 @@ describe("the label positions the owner asked for", () => {
    * position cannot drift without review.
    */
 
-  it("publishes every reviewed addition at its reviewed hash", () => {
+  it("keeps every reviewed addition at its reviewed hash", () => {
     const chapter = tree()
     const published = publishedRevisionIds(chapter)
 
     for (const [recordId, revisionId, expectedHash] of ADDITIONS) {
+      const record = recordById(chapter, recordId)
       const revision = revisionById(recordId, revisionId)
+      const revisionIds = listOf(record["revisions"]).map((candidate) =>
+        String(objectOf(candidate)["revision_id"]),
+      )
 
       expect(revision["revision_hash"], revisionId).toBe(expectedHash)
       expect(revision["revision_hash"], revisionId).toBe(revisionHash(revision))
-      expect(published.has(revisionId), revisionId).toBe(true)
+      expect(revisionIds, recordId).toContain(revisionId)
+
+      // An addition is what the set publishes unless a later reviewed addition
+      // for the same record superseded it; nothing else may become current, and
+      // the successor has to be listed here with its own pinned hash.
+      const current = String(objectOf(record["publication"])["published_revision_id"])
+      const currentIndex = revisionIds.indexOf(current)
+
+      expect(currentIndex, recordId).toBeGreaterThanOrEqual(revisionIds.indexOf(revisionId))
+      expect(published.has(current), recordId).toBe(true)
       expect(
-        objectOf(recordById(chapter, recordId)["publication"])["published_revision_id"],
+        ADDITIONS.some(
+          ([addedRecordId, addedRevisionId]) =>
+            addedRecordId === recordId && addedRevisionId === current,
+        ),
         recordId,
-      ).toBe(revisionId)
+      ).toBe(true)
     }
   })
 
@@ -1106,7 +1137,7 @@ describe("the label positions the owner asked for", () => {
       locatorValues(
         claimsOf(nanyang).find((claim) => claim["claim_id"] === "lks:claim:nanyang-commandery"),
       ),
-    ).toEqual(["卷五十一 河南六 南陽府（宛城）"])
+    ).toEqual(["卷五十一 河南六 南陽府"])
 
     // The cession's summary, which the details surface renders, says in words
     // that the event has no position — the atlas claims none for it.
@@ -1114,6 +1145,23 @@ describe("the label positions the owner asked for", () => {
 
     expect(String(cession["summary"])).toContain("no position")
     expect(String(cession["summary"])).toContain("河內 南陽")
+
+    // Only Qin's receipt of the land is dated to the ninth month; the
+    // presentation is dated to the year, and the summary must not merge them.
+    expect(String(cession["summary"])).toContain(
+      "In 231 BCE Han presented 南陽, and in the ninth month Qin sent troops to receive the land",
+    )
+
+    // The annexation's anchor is a modern label position, not a seat location.
+    const conquest = contentOf(recordById(chapter, "lks:event:han-conquest-230"))
+
+    expect(String(conquest["summary"])).toContain(
+      "not at an established historical seat coordinate",
+    )
+    expect(String(conquest["editorial_notes"])).toContain(
+      "not an established historical seat coordinate",
+    )
+    expect(String(conquest["editorial_notes"])).not.toContain("anchor sits at the seat")
   })
 
   it("publishes no position the sources do not support", () => {

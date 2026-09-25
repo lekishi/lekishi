@@ -1,0 +1,152 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "actor",
+  "record_id": "lks:actor:han-king-an",
+  "created_at": "2026-09-25T03:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:han-king-an-1",
+      "created_at": "2026-09-25T03:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Initial comparison-fixture actor: the last Han king, with the reign span taken from the six-states table's alignment and the hereditary house's regnal notices recorded as given.",
+      "content": {
+        "summary": "韓王安 (King An of Han), the last Han king. The hereditary house records him taking the throne when 桓惠王 died and gives his reign notices in regnal years; the annals and the comprehensive mirror name him in the 230 BCE annexation, and the six-states table aligns 韓王安元年 with 238 BCE and his ninth year with 230 BCE.",
+        "names": [
+          {
+            "form": "韓王安",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "primary",
+            "romanization": {
+              "value": "Han Wang An",
+              "scheme": "pinyin",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:han-king-an-name"
+          },
+          {
+            "form": "王安",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "alternate",
+            "claim_id": "lks:claim:han-king-an-accession",
+            "note": "The hereditary house's form for him in the reign notices."
+          }
+        ],
+        "actor_types": [
+          "person"
+        ],
+        "roles": [
+          {
+            "role": "ruler",
+            "validity": {
+              "source_expression": "三十四年，桓惠王卒，子王安立（史記・韓世家）; 韓王安元年（史記・六國年表）; 九年，秦虜王安（史記・韓世家）",
+              "calendar": "chinese_lunisolar",
+              "precision": "year",
+              "mode": "duration",
+              "interval": {
+                "bounds": "two_sided",
+                "boundary": "inclusive",
+                "start": {
+                  "year": 238,
+                  "era": "bce"
+                },
+                "end": {
+                  "year": 230,
+                  "era": "bce"
+                }
+              }
+            },
+            "note": "The span runs from the accession, which the six-states table aligns with 238 BCE, to the capture the table aligns with 230 BCE. The hereditary house gives the accession and the reign notices in regnal years and the comprehensive mirror places 桓惠王's death in 239 BCE; the fixture records those expressions as given and does not convert between regnal and absolute years."
+          }
+        ],
+        "editorial_notes": "The accession is not asserted from regnal arithmetic: the fixture uses the six-states table's alignment and records the hereditary house's and the mirror's expressions beside it. The embassy year's regnal count is recorded on the submission event, where the hereditary house's 王安五年 and the table's 王安六年 disagree."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:han-king-an-name",
+          "statement": "The annals record that Qin captured 韓王安 in 十七年 (230 BCE), and the comprehensive mirror names him the same way.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十七年（得韓王安）"
+              },
+              "quoted_text": "內史騰攻韓，得韓王安，盡納其地，以其地為郡，命曰潁川。"
+            },
+            {
+              "source_id": "lks:source:zizhi-tongjian",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦紀一 始皇帝十七年（虜韓王安）"
+              },
+              "quoted_text": "虜韓王安，以其地置潁川郡。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:han-king-an-accession",
+          "statement": "The hereditary house records 王安 taking the Han throne when 桓惠王 died, and the six-states table aligns 韓王安元年 with 238 BCE.",
+          "asserts": "/names/1",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷四十五 韓世家 韓桓惠王三十四年（子王安立）"
+              },
+              "quoted_text": "三十四年，桓惠王卒，子王安立。"
+            },
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷十五 六國年表 秦始皇九年（韓王安元年）"
+              },
+              "quoted_text": "韓王安元年"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:han-king-an-role",
+          "statement": "The hereditary house records his reign notices from the accession through 王安九年, when Qin captured him.",
+          "asserts": "/roles/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷四十五 韓世家 韓王安五年、韓王安九年"
+              },
+              "quoted_text": "王安五年，秦攻韓，韓急，使韓非使秦，秦留非，因殺之。"
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:6f72e10df674de9691f07e9d9380397563078091de3f2ff1724307f4361cf58d"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:han-king-an-1",
+    "published_revision_hash": "sha256:6f72e10df674de9691f07e9d9380397563078091de3f2ff1724307f4361cf58d",
+    "set_id": "lks:set:qin-conquest-han-233-226-v1",
+    "published_at": "2026-09-25T03:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
+  }
+}

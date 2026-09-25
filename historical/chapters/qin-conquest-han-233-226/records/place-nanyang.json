@@ -1,0 +1,112 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "place",
+  "record_id": "lks:place:nanyang",
+  "created_at": "2026-09-25T03:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:nanyang-1",
+      "created_at": "2026-09-25T03:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Initial comparison-fixture place: the ceded land the sources name but do not locate, kept with unknown geometry and no modern identification.",
+      "content": {
+        "summary": "南陽, the land the hereditary house records Han ceding to Qin in the ninth month of 231 BCE, when Qin sent troops to receive it. The sources name the territory but state neither its extent nor its seat; the record asserts no coordinate and does not use the modern city of the same name as a placement.",
+        "names": [
+          {
+            "form": "南陽",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "primary",
+            "romanization": {
+              "value": "Nanyang",
+              "scheme": "pinyin",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:nanyang-name"
+          }
+        ],
+        "place_types": [
+          "region"
+        ],
+        "geometry": [
+          {
+            "claim_id": "lks:claim:nanyang-unknown",
+            "interpretation": "unknown",
+            "geojson": null,
+            "precision": "unspecified",
+            "notes": "The cited entries name 韓南陽 as ceded land and give no extent or seat. The record asserts no coordinate, and the modern city of the same name is not used, because the sources in this set do not identify the two."
+          }
+        ],
+        "editorial_notes": "The name is shared with a later commandery and a modern city; the record keeps the source's name and makes no identification. A gazetteer that places the Han-era 南陽 is what would locate it."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:nanyang-name",
+          "statement": "The annals record that in the ninth month of 十六年 (231 BCE) Qin sent troops to receive the land of Han's 南陽, with 騰 as acting governor.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十六年（發卒受地韓南陽假守騰）"
+              },
+              "quoted_text": "十六年九月，發卒受地韓南陽假守騰。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nanyang-cession",
+          "statement": "The comprehensive mirror records that Han presented 南陽 and that in the ninth month Qin sent troops to receive the land.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "supporting",
+          "citations": [
+            {
+              "source_id": "lks:source:zizhi-tongjian",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦紀一 始皇帝十六年（韓獻南陽地）"
+              },
+              "quoted_text": "韓獻南陽地。秋，九月，發卒受地於韓。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nanyang-unknown",
+          "statement": "The cited entries name 南陽 but state neither its extent nor its seat, so the record carries unknown geometry with no coordinates.",
+          "asserts": "/geometry/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十六年（發卒受地韓南陽假守騰）"
+              }
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:13c9a1de6c1b9b4dffb72b2b0cbbc859684a254301b7a836e2bfce8b2066e0ec"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:nanyang-1",
+    "published_revision_hash": "sha256:13c9a1de6c1b9b4dffb72b2b0cbbc859684a254301b7a836e2bfce8b2066e0ec",
+    "set_id": "lks:set:qin-conquest-han-233-226-v1",
+    "published_at": "2026-09-25T03:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
+  }
+}

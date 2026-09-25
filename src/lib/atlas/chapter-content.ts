@@ -1,6 +1,6 @@
-import { isObject, type JsonObject } from "../historical/contract/types"
+import { isObject, type JsonObject, type JsonValue } from "../historical/contract/types"
 import type { Chapter } from "./domain"
-import { projectChapter } from "./projection"
+import { projectChapter, type ChapterCoverage } from "./projection"
 
 /**
  * The browser-safe chapter content boundary.
@@ -21,10 +21,23 @@ import { projectChapter } from "./projection"
  * `scripts/check-chapter.mjs`, which runs the chapter's contract and projection
  * tests through Vitest before Vite bundles anything. This module is the
  * representability gate; that one is the validation gate.
+ *
+ * This module binds the one chapter the site renders. Chapters that are not the
+ * production chapter (the bounded Qin comparison fixture) load through
+ * `chapter-catalog.ts`, which reuses `projectChapterContent` below and stays out
+ * of the production bundle.
  */
 
 /** The reviewed chapter this site ships. Adding a chapter is a content decision, not a code path. */
 const CHAPTER_NAME = "tang-mission-750-754"
+
+/**
+ * The production chapter's own coverage model: the 750–754 primary mission
+ * window its README and contract test define. The projection takes the window
+ * from its caller so a comparison chapter can name its own without a chapter
+ * branch inside the projection.
+ */
+export const PRODUCTION_COVERAGE: ChapterCoverage = { defaultWindow: { start: 750, end: 754 } }
 
 const recordModules: Record<string, unknown> = import.meta.glob(
   "../../../historical/chapters/tang-mission-750-754/records/*.json",
@@ -49,16 +62,35 @@ const documents = Object.entries(recordModules).map(([path, document]) =>
 )
 const sets = Object.entries(setModules).map(([path, document]) => asDocument(document, path))
 
-const projected = projectChapter(CHAPTER_NAME, documents, sets)
+/**
+ * Projects a chapter's documents into the atlas domain, or throws with every
+ * representability error. Shared with the comparison catalog so both chapters
+ * cross the boundary through exactly one projection path.
+ */
+export function projectChapterContent(
+  name: string,
+  documents: JsonValue[],
+  sets: JsonValue[],
+  coverage: ChapterCoverage,
+): Chapter {
+  const projected = projectChapter(name, documents, sets, coverage)
 
-if (!projected.ok) {
-  throw new Error(
-    [
-      `the reviewed chapter ${CHAPTER_NAME} cannot be projected, so the atlas has nothing honest to show:`,
-      ...projected.errors.map((error) => `  - ${error}`),
-    ].join("\n"),
-  )
+  if (!projected.ok) {
+    throw new Error(
+      [
+        `the reviewed chapter ${name} cannot be projected, so the atlas has nothing honest to show:`,
+        ...projected.errors.map((error) => `  - ${error}`),
+      ].join("\n"),
+    )
+  }
+
+  return projected.chapter
 }
 
 /** The reviewed chapter the atlas renders. */
-export const CHAPTER: Chapter = projected.chapter
+export const CHAPTER: Chapter = projectChapterContent(
+  CHAPTER_NAME,
+  documents,
+  sets,
+  PRODUCTION_COVERAGE,
+)

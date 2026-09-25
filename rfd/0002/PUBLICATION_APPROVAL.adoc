@@ -44,8 +44,9 @@ Publication is a decision, not an agent action.
   means the owner decided that this specific content may be published while AC2
   and the specialist reviews stay open. `owner approved` means the owner's
   editorial approval under RFD 2, which is what RFD 4's AC2 asks for. The Tang
-  set's row now carries the owner's approval, taken on 2026-09-25; the ledger
-  update below records it.
+  set's row now carries the owner's approval, taken on 2026-09-25; the bounded
+  Qin comparison fixture's row is a `preparation snapshot`. The ledger update
+  below records both.
 * **Nothing is an official publication until an `owner approved` row exists.**
   The Tang set has one as of 2026-09-25, so it is now the chapter's official
   publication while AC2's remaining parts and the specialist reviews stay open.
@@ -100,6 +101,16 @@ under RFD 2 is now recorded here, so RFD 4's AC2's approval-dependent part is
 satisfied. The approval is not independent or specialist review, the optional
 specialist reviews remain unperformed, and AC2's visible-uncertainty part and the
 AC7 attribution/rights audit stay open.
+
+|`lks:set:qin-conquest-han-233-226-v1`
+|preparation snapshot
+|owner (instructed the bounded Qin comparison fixture, 2026-09-25)
+|`sha256:0260c79f0a75a9167a332abb334b66341e179c7b2823a5f68bbf5a8e300afc74`
+|The comparison fixture's preparation: 4 places, 6 actors, 5 events, 4
+relationships, and 1 story, with the 3 cited sources pinned. The set records the
+preparing editor's `self_review` only. The owner instructed the fixture; no
+release decision has been taken, it is comparison-only and not a launch chapter,
+and RFD 4's AC2 does not apply to it.
 |===
 
 === Ledger update — 2026-09-25: the owner approves the Tang set
@@ -127,6 +138,11 @@ RFD 2 of the exact set merged on `origin/main` (PR #11, merge commit
   attribution/rights audit remains open, so AC2 as a whole is not complete and
   is not marked complete.
 
+The same instruction authorized the bounded Qin comparison fixture. Its row is a
+`preparation snapshot` because the owner instructed preparation, not release:
+the fixture is comparison-only, is not exposed as a second launch chapter, and
+has no `owner approved` row.
+
 == Consequences
 
 * Adding a chapter or changing one now has three distinct steps instead of one:
@@ -139,6 +155,9 @@ RFD 2 of the exact set merged on `origin/main` (PR #11, merge commit
   and the single revision per record recorded above. The digest in the ledger row
   is what keeps that set from being swapped afterwards without the decision being
   taken again.
+* The gate now covers every chapter tree, so the Qin comparison fixture's set is
+  ledger-covered from the day it is prepared: comparison fixtures do not get a
+  second, uncovered publication path.
 * **Open question for a later contract version.** The v0 set description says a
   set records "the approving editor", but the schema cannot express the owner's
   approval (`review.independence` has no such value and there is no decision

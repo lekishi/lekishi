@@ -1,0 +1,87 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "relationship",
+  "record_id": "lks:relationship:han-nanyang-cession",
+  "created_at": "2026-09-25T03:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:han-nanyang-cession-1",
+      "created_at": "2026-09-25T03:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Initial comparison-fixture relationship: the cession of 南陽 recorded as a boundary change, with no extent or coordinate asserted.",
+      "content": {
+        "summary": "The cession of 南陽 from Han to Qin in the ninth month of 231 BCE, which the annals record Qin receiving with 騰 as acting governor and the comprehensive mirror record Han presenting.",
+        "relationship_types": [
+          "changed_boundaries"
+        ],
+        "from": "lks:actor:han-state",
+        "to": "lks:actor:qin-state",
+        "directionality": "directed",
+        "causality": "not_asserted",
+        "validity": {
+          "source_expression": "十六年九月（發卒受地韓南陽）; 始皇帝十六年九月（韓獻南陽地）",
+          "calendar": "chinese_lunisolar",
+          "precision": "month",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {
+              "year": 231,
+              "era": "bce",
+              "month": 9
+            },
+            "end": {
+              "year": 231,
+              "era": "bce",
+              "month": 9
+            }
+          }
+        },
+        "editorial_notes": "Recorded as a change of boundaries, not as a transfer of a located territory: the sources give no extent or seat, and the relationship carries no geometry."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:han-nanyang-cession-basis",
+          "statement": "The annals record Qin receiving the land of Han's 南陽 in the ninth month of 十六年 (231 BCE), and the comprehensive mirror records Han presenting 南陽.",
+          "asserts": "",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十六年九月（發卒受地韓南陽假守騰）"
+              },
+              "quoted_text": "十六年九月，發卒受地韓南陽假守騰。"
+            },
+            {
+              "source_id": "lks:source:zizhi-tongjian",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦紀一 始皇帝十六年（韓獻南陽地）"
+              },
+              "quoted_text": "韓獻南陽地。秋，九月，發卒受地於韓。"
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:793d49a74dc884dcf2208f8262c24266092c64bd9bec89e950777f47bad44daf"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:han-nanyang-cession-1",
+    "published_revision_hash": "sha256:793d49a74dc884dcf2208f8262c24266092c64bd9bec89e950777f47bad44daf",
+    "set_id": "lks:set:qin-conquest-han-233-226-v1",
+    "published_at": "2026-09-25T03:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
+  }
+}

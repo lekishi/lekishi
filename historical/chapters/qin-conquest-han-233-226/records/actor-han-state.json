@@ -1,0 +1,78 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "actor",
+  "record_id": "lks:actor:han-state",
+  "created_at": "2026-09-25T03:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:han-state-1",
+      "created_at": "2026-09-25T03:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Initial comparison-fixture actor: the Han state whose submission, cession, and annexation the fixture records, kept distinct from the last king.",
+      "content": {
+        "summary": "韓, the state whose king submitted to Qin in 233 BCE, ceded 南陽 in 231 BCE, and was annexed in 230 BCE. The hereditary house's account ends with 韓遂亡.",
+        "names": [
+          {
+            "form": "韓",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "primary",
+            "romanization": {
+              "value": "Han",
+              "scheme": "pinyin",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:han-state-name"
+          }
+        ],
+        "actor_types": [
+          "state"
+        ],
+        "editorial_notes": "The state actor carries no roles: the role vocabulary is person-oriented. The hereditary house's account ends with 韓遂亡, which is recorded on the annexation relationship and the conquest event rather than as a role."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:han-state-name",
+          "statement": "The cited entries name 韓 as the state that ceded land and whose king and territory Qin took, and the hereditary house ends its account with 韓遂亡.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷四十五 韓世家 韓王安九年（韓遂亡）"
+              },
+              "quoted_text": "九年，秦虜王安，盡入其地，爲潁州郡。韓遂亡。"
+            },
+            {
+              "source_id": "lks:source:zizhi-tongjian",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦紀一 始皇帝十四年（韓王納地效璽）"
+              },
+              "quoted_text": "韓王納地效璽，請為籓臣，使韓非來聘。"
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:784d95e61a29472e4b976cd70a7e305d1f1da3d2bbbe852c7362eab6d19b4ba8"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:han-state-1",
+    "published_revision_hash": "sha256:784d95e61a29472e4b976cd70a7e305d1f1da3d2bbbe852c7362eab6d19b4ba8",
+    "set_id": "lks:set:qin-conquest-han-233-226-v1",
+    "published_at": "2026-09-25T03:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
+  }
+}

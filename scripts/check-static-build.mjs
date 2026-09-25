@@ -179,6 +179,18 @@ if (!atlasHtml.includes("The 750–754 embassy of 藤原朝臣清河")) {
   fail("atlas.html does not name the reviewed chapter the atlas renders")
 }
 
+// The bounded Qin comparison fixture is loadable through the comparison catalog
+// (`src/lib/atlas/chapter-catalog.ts`), which no route imports, so Vite leaves
+// it out of the build. If a route ever imports the catalog by accident, the
+// fixture would ship in the release artifact as a second chapter; these
+// sentinels fail the build until shipping the comparison harness is a
+// deliberate, reviewed change.
+for (const marker of ["qin-conquest-han-233-226", "lks:event:han-conquest-230"]) {
+  if (scriptText.includes(marker)) {
+    fail(`the artifact carries the comparison fixture: ${marker} is present`)
+  }
+}
+
 // --- Cesium runtime -----------------------------------------------------------
 
 requireFile(path.join(buildDirectory, "cesium", "Workers", "createTaskProcessorWorker.js"))

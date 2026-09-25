@@ -13,11 +13,13 @@ Implements link:README.adoc[RFD 2: Historical data, time, and evidence].
 == Phase 1 — Curated records
 
 - [ ] Implement stable record revisions, reviewer permissions, and draft-to-publication transitions using Git history and explicit editorial metadata; expose the latest published revision and readable correction history, publishing related record changes consistently.
-- [ ] Add schema-validated content covering a campaign, exchange, and institutional relationship.
+- [x] Add schema-validated content covering a campaign, exchange, and institutional relationship. The Qin comparison fixture adds all three, schema-validated and contract-validated: a campaign (the 230 BCE annexation), exchanges (the 233 BCE submission/embassy and the 231 BCE cession), and institutional relationships (the cession's changed boundaries and the 潁川 commandery's institutional change). The fixture is a preparation snapshot, not release content.
 - [ ] Review imported candidates and preserve their external identifiers and licenses; verify historical/local-script labels and local-script/romanized search aliases without conflating successor places, and record the initial editor's approval of the published content revision in the file-based workflow.
   - The approval portion is done: the owner's editorial approval of the published Tang revision was recorded on 2026-09-25 in link:../0002/PUBLICATION_APPROVAL.adoc[the publication approval gate]. The item stays open for the local-script/romanized search aliases and the successor-place checks, which belong to the exploration loop.
 - [ ] Represent contradictory accounts and records lacking exact dates or map positions; present an attributed main account with a visible dispute indication and cited alternatives in the detail panel, without merging competing claims or requiring switchable map interpretations.
+  - The content side is now exercised by the Qin comparison fixture: 韓非's death is published as one disputed record with three cited accounts and a dispute summary, and 雲陽, 南陽, and 潁川郡 carry `unknown` geometry rather than invented positions. The item stays open for the detail panel's visible dispute indication and cited alternatives, which only exist once the loop is implemented.
 - [ ] Verify every published relationship has a cited evidentiary basis; distinguish attested claims from cited scholarly interpretations, label schematic geometry separately, and exclude original contributor hypotheses from public content.
+  - Both chapter suites pin the content side: every published relationship carries cited claims, neither chapter publishes route or schematic geometry, and no published revision carries research notes. The item stays open for the details surface's labeling of interpretation and schematic geometry.
 
 [NOTE]
 ====
@@ -33,12 +35,17 @@ unmarked, a display anchor is never shown as an asserted location, and an
 undated or open-ended occurrence fails the projection instead of being guessed
 (link:../0003/CONTENT_BOUNDARY.adoc[the chapter content boundary decision]).
 
-The owner's approval of the published Tang revision is recorded in
-link:../0002/PUBLICATION_APPROVAL.adoc[the publication approval gate]. The Phase
-1 items that stay open are the ones that also cover the detail-panel dispute and
-alternative behavior and the search aliases, which only exist once the
-exploration loop is implemented. The Gate 1 mission and coverage decision is in
-link:../0004/GATE1_DECISION.adoc[RFD 4's Gate 1 decision record].
+The bounded Qin comparison fixture
+(`historical/chapters/qin-conquest-han-233-226/`) now carries the campaign,
+exchange, and institutional content in the same contract, as a preparation
+snapshot rather than release content, and loads through the comparison catalog
+recorded in link:../0003/COMPARISON_FIXTURE_BOUNDARY.adoc[the comparison fixture
+boundary decision]. The owner's approval of the published Tang revision is
+recorded in link:../0002/PUBLICATION_APPROVAL.adoc[the publication approval
+gate]. The Phase 1 items that stay open are the ones that also cover the
+detail-panel dispute and alternative behavior and the search aliases, which only
+exist once the exploration loop is implemented. The Gate 1 mission and coverage
+decision is in link:../0004/GATE1_DECISION.adoc[RFD 4's Gate 1 decision record].
 ====
 
 == Phase 2 — Persistence and contributions

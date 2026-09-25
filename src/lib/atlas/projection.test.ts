@@ -20,12 +20,15 @@ import { projectChapter, type ProjectionResult } from "./projection"
 
 const CHAPTER = "tang-mission-750-754"
 
+/** The Tang chapter's own coverage model, as the production boundary passes it. */
+const COVERAGE = { defaultWindow: { start: 750, end: 754 } }
+
 function tree(): ChapterTree {
   return loadChapter(CHAPTER)
 }
 
 function attempt(chapter: ChapterTree = tree()): ProjectionResult {
-  return projectChapter(CHAPTER, chapter.documents, chapter.sets)
+  return projectChapter(CHAPTER, chapter.documents, chapter.sets, COVERAGE)
 }
 
 function project(chapter: ChapterTree = tree()): Chapter {
@@ -206,6 +209,21 @@ describe("projecting the reviewed Tang chapter", () => {
     expect(chapter.publication.reviewNotes).toContain(
       "owner's editorial approval under RFD 2 is still pending",
     )
+  })
+
+  it("takes the primary window from the caller rather than a chapter branch", () => {
+    const chapter = project()
+
+    expect(chapter.defaultWindow).toEqual(COVERAGE.defaultWindow)
+
+    // The window is the caller's decision: a window the events do not fit in
+    // fails the projection instead of being silently replaced.
+    const wrongWindow = projectChapter(CHAPTER, tree().documents, tree().sets, {
+      defaultWindow: { start: 900, end: 950 },
+    })
+
+    expect(wrongWindow.ok).toBe(false)
+    expect(errorCodes(wrongWindow).join("\n")).toContain("is not presented as a coda node")
   })
 
   it("selects the newest published revision per record, not the first revision in the file", () => {

@@ -15,8 +15,9 @@ import { objectOf, type JsonObject } from "./types"
  * fails `pnpm build` through `scripts/check-chapter.mjs`.
  *
  * The gate reads every chapter tree under `historical/chapters/`, so a new
- * chapter directory cannot appear with a set the ledger does not cover. The Tang
- * chapter's set carries the owner's release approval.
+ * chapter directory cannot appear with a set the ledger does not cover. The
+ * Tang chapter's set carries the owner's release approval; the Qin comparison
+ * fixture's set is a preparation snapshot and must not claim one.
  *
  * The rule is a predicate over (sets, ledger rows) so it can be exercised
  * against deliberately wrong readings — a set without a row, a row without a
@@ -31,6 +32,7 @@ import { objectOf, type JsonObject } from "./types"
  */
 
 const TANG_SET = "lks:set:tang-mission-750-754-v1"
+const QIN_SET = "lks:set:qin-conquest-han-233-226-v1"
 
 /** The record that holds the owner's publication decisions, relative to the repo root. */
 const LEDGER_URL = new URL("../../../../rfd/0002/PUBLICATION_APPROVAL.adoc", import.meta.url)
@@ -198,21 +200,30 @@ describe("publication approval gate", () => {
   it("records a decision for every set in every chapter tree", () => {
     const ledger = ledgerRows()
 
-    // The parse must not quietly produce nothing: the prepared set and the
-    // decision that covers it are the state the gate covers.
-    expect(ledger.map((row) => row.setId).sort()).toEqual([TANG_SET])
-    expect(chapterNames()).toEqual(["tang-mission-750-754"])
+    // The parse must not quietly produce nothing: the two prepared sets and the
+    // decisions that cover them are the state the gate covers.
+    expect(ledger.map((row) => row.setId).sort()).toEqual([QIN_SET, TANG_SET].sort())
+    expect(chapterNames()).toEqual(["qin-conquest-han-233-226", "tang-mission-750-754"])
     expect(approvalViolations(allSets(), ledger)).toEqual([])
   })
 
-  it("records the owner's approval for the Tang set", () => {
+  it("records the owner's approval for the merged Tang set and nothing else", () => {
     const approved = ledgerRows().filter((row) => row.decision === "owner approved")
 
     expect(approved.map((row) => row.setId)).toEqual([TANG_SET])
 
     // The approval is a ledger decision, not a review relabel: the approved set
-    // still records the preparing editor's self-review.
+    // still records the preparing editor's self-review, and the comparison
+    // fixture is a preparation snapshot.
     for (const set of loadChapter("tang-mission-750-754").sets) {
+      expect(String(objectOf(set["review"])["independence"])).toBe("self_review")
+    }
+
+    const qin = ledgerRows().find((row) => row.setId === QIN_SET)
+
+    expect(qin?.decision).toBe("preparation snapshot")
+
+    for (const set of loadChapter("qin-conquest-han-233-226").sets) {
       expect(String(objectOf(set["review"])["independence"])).toBe("self_review")
     }
   })
@@ -223,6 +234,15 @@ describe("publication approval gate", () => {
 
     expect(violations.join("\n")).toContain(
       `${TANG_SET} is published without a recorded owner decision`,
+    )
+  })
+
+  it("fails a second chapter's set that no decision covers", () => {
+    const ledger = ledgerRows().filter((row) => row.setId !== QIN_SET)
+    const violations = approvalViolations(allSets(), ledger)
+
+    expect(violations.join("\n")).toContain(
+      `${QIN_SET} is published without a recorded owner decision`,
     )
   })
 
@@ -244,7 +264,7 @@ describe("publication approval gate", () => {
   })
 
   it("fails a preparation snapshot that claims a review beyond the preparing editor's", () => {
-    const sets = loadChapter("tang-mission-750-754").sets.map((set) => ({
+    const sets = loadChapter("qin-conquest-han-233-226").sets.map((set) => ({
       ...set,
       review: { ...objectOf(set["review"]), independence: "independent_review" },
     }))
@@ -280,7 +300,7 @@ describe("publication approval gate", () => {
     expect(violations.join("\n")).toContain(`${TANG_SET} has more than one decision row`)
   })
 
-  it("fails the approved set when its content changes after the decision", () => {
+  it("fails the approved Tang set when its content changes after the decision", () => {
     const sets = loadChapter("tang-mission-750-754").sets.map((set) => {
       const members = (set["members"] as JsonObject[]).map((member, index) =>
         index === 0 ? { ...member, revision_hash: `sha256:${"0".repeat(64)}` } : member,
@@ -295,13 +315,28 @@ describe("publication approval gate", () => {
     )
   })
 
-  it("fails the approved set when its source pin changes after the decision", () => {
+  it("fails the approved Tang set when its source pin changes after the decision", () => {
     const sets = loadChapter("tang-mission-750-754").sets.map((set) => {
       const sources = (set["sources"] as JsonObject[]).map((source, index) =>
         index === 0 ? { ...source, source_hash: `sha256:${"1".repeat(64)}` } : source,
       )
 
       return { ...set, sources }
+    })
+    const violations = approvalViolations(sets, ledgerRows())
+
+    expect(violations.join("\n")).toContain(
+      "no longer matches the digest recorded for its decision: the content changed after the decision was taken",
+    )
+  })
+
+  it("fails the comparison fixture when its content changes after preparation", () => {
+    const sets = loadChapter("qin-conquest-han-233-226").sets.map((set) => {
+      const members = (set["members"] as JsonObject[]).map((member, index) =>
+        index === 0 ? { ...member, revision_hash: `sha256:${"2".repeat(64)}` } : member,
+      )
+
+      return { ...set, members }
     })
     const violations = approvalViolations(sets, ledgerRows())
 

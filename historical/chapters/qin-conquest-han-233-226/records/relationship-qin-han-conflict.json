@@ -1,0 +1,93 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "relationship",
+  "record_id": "lks:relationship:qin-han-conflict",
+  "created_at": "2026-09-25T03:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:qin-han-conflict-1",
+      "created_at": "2026-09-25T03:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Initial comparison-fixture relationship: Qin's pressure on Han across the episode's three dated acts, with no causation asserted and no route geometry.",
+      "content": {
+        "summary": "Qin's military pressure on and conquest of Han, from the 233 BCE attack the hereditary house records to the 230 BCE annexation. The relationship asserts no causation and draws no route.",
+        "relationship_types": [
+          "conflict"
+        ],
+        "from": "lks:actor:qin-state",
+        "to": "lks:actor:han-state",
+        "directionality": "directed",
+        "causality": "not_asserted",
+        "validity": {
+          "source_expression": "王安五年（秦攻韓）; 十六年九月（發卒受地韓南陽）; 十七年（內史騰攻韓）",
+          "calendar": "chinese_lunisolar",
+          "precision": "year",
+          "mode": "duration",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {
+              "year": 233,
+              "era": "bce"
+            },
+            "end": {
+              "year": 230,
+              "era": "bce"
+            }
+          }
+        },
+        "editorial_notes": "The relationship spans the three dated acts the chapter covers: it records the sequence of Qin acts against Han, not a claim that one produced another. It carries no geometry, and the atlas draws no line for it."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:qin-han-conflict-basis",
+          "statement": "The cited entries record Qin attacking Han in 233 BCE, receiving Han's ceded 南陽 in 231 BCE, and taking Han's land and king in 230 BCE.",
+          "asserts": "",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷四十五 韓世家 韓王安五年（秦攻韓）"
+              },
+              "quoted_text": "王安五年，秦攻韓，韓急，使韓非使秦，秦留非，因殺之。"
+            },
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十六年九月（發卒受地韓南陽假守騰）"
+              },
+              "quoted_text": "十六年九月，發卒受地韓南陽假守騰。"
+            },
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十七年（內史騰攻韓）"
+              },
+              "quoted_text": "內史騰攻韓，得韓王安，盡納其地，以其地為郡，命曰潁川。"
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:248c5331d1588681c4d9067d366c5755851189d2ddb98ded924d2df779aa22c4"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:qin-han-conflict-1",
+    "published_revision_hash": "sha256:248c5331d1588681c4d9067d366c5755851189d2ddb98ded924d2df779aa22c4",
+    "set_id": "lks:set:qin-conquest-han-233-226-v1",
+    "published_at": "2026-09-25T03:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
+  }
+}

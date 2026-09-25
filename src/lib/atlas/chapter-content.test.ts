@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { loadChapter } from "../historical/chapter"
-import { CHAPTER } from "./chapter-content"
+import { CHAPTER, PRODUCTION_COVERAGE } from "./chapter-content"
 import { projectChapter } from "./projection"
 
 /**
@@ -15,7 +15,7 @@ import { projectChapter } from "./projection"
 describe("the bundled chapter content", () => {
   it("matches what the Node-side loader reads from the content tree", () => {
     const tree = loadChapter(CHAPTER.id)
-    const projected = projectChapter(CHAPTER.id, tree.documents, tree.sets)
+    const projected = projectChapter(CHAPTER.id, tree.documents, tree.sets, PRODUCTION_COVERAGE)
 
     if (!projected.ok) {
       throw new Error(projected.errors.join("\n"))
@@ -30,6 +30,7 @@ describe("the bundled chapter content", () => {
     expect(CHAPTER.events).toHaveLength(29)
     expect(CHAPTER.places).toHaveLength(15)
     expect(CHAPTER.defaultWindow).toEqual({ start: 750, end: 754 })
+    expect(CHAPTER.defaultWindow).toEqual(PRODUCTION_COVERAGE.defaultWindow)
     expect(CHAPTER.publication.setIds[0]).toBe("lks:set:tang-mission-750-754-v1")
 
     const serialized = JSON.stringify(CHAPTER)
@@ -42,5 +43,12 @@ describe("the bundled chapter content", () => {
     ]) {
       expect(serialized).not.toContain(synthetic)
     }
+  })
+
+  it("is not the comparison fixture", () => {
+    const serialized = JSON.stringify(CHAPTER)
+
+    expect(serialized).not.toContain("qin-conquest-han-233-226")
+    expect(serialized).not.toContain("lks:event:han-conquest-230")
   })
 })

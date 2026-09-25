@@ -10,15 +10,15 @@ The site is a SvelteKit project built with `@sveltejs/adapter-static`. Every rou
 is prerendered, so the deployable artifact is a directory of plain files with no
 application server, no database, and no BEAM runtime:
 
-| Owner                                                                 | Responsibility                                                                                                                                                                                                                               |
-| --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SvelteKit (`src/routes`)                                              | Routing, the prerendered page shells, and the `#atlas-workspace` mount point. `/` is the overview page; `/atlas` is the atlas shell.                                                                                                         |
-| Atlas bootstrap (`src/lib/atlas/entry.ts`)                            | The only module that mounts the workspace. It keeps one workspace per page, releases it at the `pagehide` boundary, and restores exactly one on `pageshow`.                                                                                  |
-| Svelte + TypeScript (`src/lib/atlas`)                                 | Search, filters, drawers, timeline controls, selection, responsive layout, and the single source of truth for selection, time window, playhead, and camera-follow state (`state.ts`).                                                        |
-| Chapter content (`src/lib/atlas/chapter-content.ts`, `projection.ts`) | The browser-safe content boundary: Vite bundles the reviewed chapter's records and publication sets, the projection selects the newest published revision per record, and the atlas domain is what the workspace, scene, and renderer share. |
-| Cesium (`src/lib/atlas/renderer`)                                     | Globe, camera, picking, and map primitives. It receives a derived, renderer-independent scene and reports user input back as callbacks.                                                                                                      |
-| Tailwind (`src/app.css`)                                              | All styling, including the Cesium widget stylesheet, so the site ships one stylesheet.                                                                                                                                                       |
-| Historical contract (`historical/v0`, `src/lib/historical/contract`)  | The versioned schemas, worked examples, and adversarial vectors, with the TypeScript reference semantics that validate them.                                                                                                                 |
+| Owner                                                                                       | Responsibility                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SvelteKit (`src/routes`)                                                                    | Routing, the prerendered page shells, and the `#atlas-workspace` mount point. `/` is the overview page; `/atlas` is the atlas shell.                                                                                                                                                                                                                                                                                                            |
+| Atlas bootstrap (`src/lib/atlas/entry.ts`)                                                  | The only module that mounts the workspace. It keeps one workspace per page, releases it at the `pagehide` boundary, and restores exactly one on `pageshow`.                                                                                                                                                                                                                                                                                     |
+| Svelte + TypeScript (`src/lib/atlas`)                                                       | Search, filters, drawers, timeline controls, selection, responsive layout, and the single source of truth for selection, time window, playhead, and camera-follow state (`state.ts`).                                                                                                                                                                                                                                                           |
+| Chapter content (`src/lib/atlas/chapter-content.ts`, `chapter-catalog.ts`, `projection.ts`) | The browser-safe content boundary: Vite bundles the reviewed chapter's records and publication sets, the projection selects the newest published revision per record and takes the chapter's coverage window from its caller, and the atlas domain is what the workspace, scene, and renderer share. The comparison catalog loads non-production chapters (the Qin fixture) through the same projection without entering the production bundle. |
+| Cesium (`src/lib/atlas/renderer`)                                                           | Globe, camera, picking, and map primitives. It receives a derived, renderer-independent scene and reports user input back as callbacks.                                                                                                                                                                                                                                                                                                         |
+| Tailwind (`src/app.css`)                                                                    | All styling, including the Cesium widget stylesheet, so the site ships one stylesheet.                                                                                                                                                                                                                                                                                                                                                          |
+| Historical contract (`historical/v0`, `src/lib/historical/contract`)                        | The versioned schemas, worked examples, and adversarial vectors, with the TypeScript reference semantics that validate them.                                                                                                                                                                                                                                                                                                                    |
 
 Rules that keep the boundary intact:
 
@@ -83,7 +83,9 @@ prerendered pages, the hashed bundles, the single stylesheet with the Cesium
 widget styles, or the Cesium runtime directories are missing, if the atlas page
 does not have exactly one mount point, if the artifact contains a server runtime,
 if the built scripts or the prerendered pages do not carry the reviewed chapter,
-or if the retired synthetic fixture's sentinel strings reach the artifact.
+if the retired synthetic fixture's sentinel strings reach the artifact, or if the
+bounded Qin comparison fixture's ids reach the artifact (it is loadable through
+the comparison catalog but must not ship).
 
 ### Reviewed chapter content
 
@@ -94,11 +96,13 @@ and that boundary is the only way chapter content enters the app:
 1. `src/lib/historical/chapter.ts` is the Node-side loader. It reads the tree
    with `fs` and hands it to the contract's own `Publication.checkAll`; it is
    used by tests and tooling, never by the browser.
-2. `scripts/check-chapter.mjs` runs before Vite in `pnpm build` and runs the
-   chapter's contract test and the projection test suite through Vitest, so an
-   edited approved revision, a missing source pin, or a record published at a
-   revision it does not carry fails the build. This is the validation gate:
-   schemas, hashes, and pins need Node, so they cannot run in the bundle.
+2. `scripts/check-chapter.mjs` runs before Vite in `pnpm build` and runs each
+   chapter's contract test, the publication approval gate, the projection test
+   suite, and the comparison catalog suite through Vitest, so an edited approved
+   revision, a missing source pin, a set the ledger does not name, or a record
+   published at a revision it does not carry fails the build. This is the
+   validation gate: schemas, hashes, and pins need Node, so they cannot run in
+   the bundle.
 3. `src/lib/atlas/chapter-content.ts` bundles the same records and publication
    sets with Vite's `import.meta.glob`, so the browser reads the files the
    contract validates: no `fs`, no second copy, and no request a static host has
@@ -108,7 +112,20 @@ and that boundary is the only way chapter content enters the app:
 4. `src/lib/atlas/projection.ts` selects the newest published revision per
    record through the contract's own publication ordering — the same
    `currentPublished` the validator uses, split into `publication-order.ts` so
-   the browser and Node share one rule — and maps it into the atlas domain.
+   the browser and Node share one rule — and maps it into the atlas domain. The
+   chapter's coverage window (the window the atlas opens in) comes from the
+   caller, so the comparison catalog can name the Qin fixture's window without a
+   chapter branch in the projection.
+5. `src/lib/atlas/chapter-catalog.ts` loads non-production chapters lazily for
+   the later comparison harness. No route imports it, so the Qin fixture is
+   loadable in a browser without shipping in the release artifact; the build
+   invariant fails if its ids ever reach the artifact.
+
+The bounded Qin comparison fixture
+(`historical/chapters/qin-conquest-han-233-226/`) is source-checked content in
+the same contract, recorded in the publication ledger as a preparation snapshot
+rather than a release, and kept comparison-only until the treatment harness
+exists.
 
 What the projection refuses to do is part of the contract with the reader:
 
@@ -121,14 +138,17 @@ What the projection refuses to do is part of the contract with the reader:
   playhead, an uncertain occurrence window is only ever a possible match, and
   neither is presented as the other.
 - A coda node is the chapter's own presentation label, cross-checked against the
-  primary window, so a coda node cannot be folded into the mission window and a
-  mission event cannot drift out of it.
+  caller's primary window, so a coda node cannot be folded into the mission
+  window and a mission event cannot drift out of it.
 - Route geometry, an undated event, and an open-ended occurrence fail the
   projection rather than being flattened into points or guessed at. Those are
   documented gaps, not silent omissions.
 
-The decision and its measured evidence are recorded in
-[`rfd/0003/CONTENT_BOUNDARY.adoc`](rfd/0003/CONTENT_BOUNDARY.adoc).
+The decisions and their measured evidence are recorded in
+[`rfd/0003/CONTENT_BOUNDARY.adoc`](rfd/0003/CONTENT_BOUNDARY.adoc) for the Tang
+chapter's boundary and
+[`rfd/0003/COMPARISON_FIXTURE_BOUNDARY.adoc`](rfd/0003/COMPARISON_FIXTURE_BOUNDARY.adoc)
+for the comparison fixture and the caller-supplied coverage window.
 
 ### Cloudflare Pages
 

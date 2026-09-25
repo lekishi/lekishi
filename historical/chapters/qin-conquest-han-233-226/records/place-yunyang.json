@@ -1,0 +1,95 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "place",
+  "record_id": "lks:place:yunyang",
+  "created_at": "2026-09-25T03:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:yunyang-1",
+      "created_at": "2026-09-25T03:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Initial comparison-fixture place: the death place the annals name, kept with unknown geometry because no source in the set identifies its site.",
+      "content": {
+        "summary": "雲陽, the place where the annals record 韓非 dying after Qin detained him. The record keeps the name and asserts no position: no source in this set locates the Qin 雲陽, and the modern town of the same name is not used as an identification.",
+        "names": [
+          {
+            "form": "雲陽",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "primary",
+            "romanization": {
+              "value": "Yunyang",
+              "scheme": "pinyin",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:yunyang-name"
+          }
+        ],
+        "place_types": [
+          "settlement"
+        ],
+        "geometry": [
+          {
+            "claim_id": "lks:claim:yunyang-unknown",
+            "interpretation": "unknown",
+            "geojson": null,
+            "precision": "unspecified",
+            "notes": "The annals name 雲陽 as the place of the death; the cited entries state no site for the Qin 雲陽, and the record asserts no coordinate rather than equating it with the modern town of the same name."
+          }
+        ],
+        "editorial_notes": "The place stays listable and unmarked. A source that identifies the Qin 雲陽 is what would place it; none in this set does."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:yunyang-name",
+          "statement": "The annals record that Qin detained 韓非 and that he died at 雲陽, in the same 十四年 (233 BCE) entry.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十四年（非死雲陽）"
+              },
+              "quoted_text": "韓非使秦，秦用李斯謀，留非，非死雲陽。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:yunyang-unknown",
+          "statement": "The cited entries name 雲陽 as the death place and state no site for it, so the record carries unknown geometry with no coordinates.",
+          "asserts": "/geometry/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十四年（非死雲陽）"
+              }
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:bb72543cddc8d0ece29c7674f595e213970ad93798371b491af1c68f04af1024"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:yunyang-1",
+    "published_revision_hash": "sha256:bb72543cddc8d0ece29c7674f595e213970ad93798371b491af1c68f04af1024",
+    "set_id": "lks:set:qin-conquest-han-233-226-v1",
+    "published_at": "2026-09-25T03:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
+  }
+}

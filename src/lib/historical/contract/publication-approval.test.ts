@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
-import { loadChapter } from "../chapter"
+import { listChapters, loadChapter } from "../chapter"
 import { encode, sha256 } from "./canonical"
 import { objectOf, type JsonObject } from "./types"
 
@@ -14,6 +14,10 @@ import { objectOf, type JsonObject } from "./types"
  * records one row per set, and a set the record does not cover fails here, which
  * fails `pnpm build` through `scripts/check-chapter.mjs`.
  *
+ * The gate reads every chapter tree under `historical/chapters/`, so a new
+ * chapter directory cannot appear with a set the ledger does not cover. The Tang
+ * chapter's set carries the owner's release approval.
+ *
  * The rule is a predicate over (sets, ledger rows) so it can be exercised
  * against deliberately wrong readings — a set without a row, a row without a
  * set, a preparation snapshot labelled as approved, a set whose content changed
@@ -26,7 +30,7 @@ import { objectOf, type JsonObject } from "./types"
  * that the row, the digest, and the set describe what the owner decided.
  */
 
-const CHAPTER = "tang-mission-750-754"
+const TANG_SET = "lks:set:tang-mission-750-754-v1"
 
 /** The record that holds the owner's publication decisions, relative to the repo root. */
 const LEDGER_URL = new URL("../../../../rfd/0002/PUBLICATION_APPROVAL.adoc", import.meta.url)
@@ -181,37 +185,44 @@ function approvalViolations(sets: JsonObject[], ledger: LedgerRow[]): string[] {
   return violations
 }
 
-function chapterSets(): JsonObject[] {
-  return loadChapter(CHAPTER).sets
+/** Every chapter tree under `historical/chapters`, so a new one cannot slip past the gate. */
+function chapterNames(): string[] {
+  return listChapters()
+}
+
+function allSets(): JsonObject[] {
+  return chapterNames().flatMap((chapter) => loadChapter(chapter).sets)
 }
 
 describe("publication approval gate", () => {
-  it("records a decision for every set in the chapter tree", () => {
+  it("records a decision for every set in every chapter tree", () => {
     const ledger = ledgerRows()
 
-    // The parse must not quietly produce nothing: the single flattened set and
-    // the owner's decision to publish it are the state the gate covers.
-    expect(ledger.map((row) => row.setId).sort()).toEqual(["lks:set:tang-mission-750-754-v1"])
-    expect(approvalViolations(chapterSets(), ledger)).toEqual([])
+    // The parse must not quietly produce nothing: the prepared set and the
+    // decision that covers it are the state the gate covers.
+    expect(ledger.map((row) => row.setId).sort()).toEqual([TANG_SET])
+    expect(chapterNames()).toEqual(["tang-mission-750-754"])
+    expect(approvalViolations(allSets(), ledger)).toEqual([])
   })
 
-  it("records no approved release yet", () => {
-    // Nothing is officially published: the single set carries the preparing
-    // editor's self-review and the owner's decision to publish, not the owner's
-    // editorial approval, so RFD 4's AC2 stays unsatisfied.
-    expect(ledgerRows().filter((row) => row.decision === "owner approved")).toEqual([])
+  it("records the owner's approval for the Tang set", () => {
+    const approved = ledgerRows().filter((row) => row.decision === "owner approved")
 
-    for (const set of chapterSets()) {
+    expect(approved.map((row) => row.setId)).toEqual([TANG_SET])
+
+    // The approval is a ledger decision, not a review relabel: the approved set
+    // still records the preparing editor's self-review.
+    for (const set of loadChapter("tang-mission-750-754").sets) {
       expect(String(objectOf(set["review"])["independence"])).toBe("self_review")
     }
   })
 
   it("fails a set that no decision covers", () => {
-    const ledger = ledgerRows().filter((row) => row.setId !== "lks:set:tang-mission-750-754-v1")
-    const violations = approvalViolations(chapterSets(), ledger)
+    const ledger = ledgerRows().filter((row) => row.setId !== TANG_SET)
+    const violations = approvalViolations(allSets(), ledger)
 
     expect(violations.join("\n")).toContain(
-      "lks:set:tang-mission-750-754-v1 is published without a recorded owner decision",
+      `${TANG_SET} is published without a recorded owner decision`,
     )
   })
 
@@ -225,7 +236,7 @@ describe("publication approval gate", () => {
         digest: "sha256:" + "0".repeat(64),
       },
     ]
-    const violations = approvalViolations(chapterSets(), ledger)
+    const violations = approvalViolations(allSets(), ledger)
 
     expect(violations.join("\n")).toContain(
       "the ledger records lks:set:invented-v9, which is not in the chapter tree",
@@ -233,7 +244,7 @@ describe("publication approval gate", () => {
   })
 
   it("fails a preparation snapshot that claims a review beyond the preparing editor's", () => {
-    const sets = chapterSets().map((set) => ({
+    const sets = loadChapter("tang-mission-750-754").sets.map((set) => ({
       ...set,
       review: { ...objectOf(set["review"]), independence: "independent_review" },
     }))
@@ -247,10 +258,10 @@ describe("publication approval gate", () => {
 
   it("fails an owner decision that does not name the owner", () => {
     const ledger = ledgerRows().map((row) => ({ ...row, decidedBy: "the preparing editor" }))
-    const violations = approvalViolations(chapterSets(), ledger)
+    const violations = approvalViolations(allSets(), ledger)
 
     expect(violations.join("\n")).toContain(
-      'records the decision "owner decided" without naming the owner as the decider',
+      'records the decision "owner approved" without naming the owner as the decider',
     )
   })
 
@@ -258,21 +269,19 @@ describe("publication approval gate", () => {
     const ledger = [
       ...ledgerRows(),
       {
-        setId: "lks:set:tang-mission-750-754-v1",
-        decision: "owner approved",
+        setId: TANG_SET,
+        decision: "preparation snapshot",
         decidedBy: "owner",
         digest: ledgerRows()[0]?.digest ?? "",
       },
     ]
-    const violations = approvalViolations(chapterSets(), ledger)
+    const violations = approvalViolations(allSets(), ledger)
 
-    expect(violations.join("\n")).toContain(
-      "lks:set:tang-mission-750-754-v1 has more than one decision row",
-    )
+    expect(violations.join("\n")).toContain(`${TANG_SET} has more than one decision row`)
   })
 
-  it("fails a set whose content changed after the decision", () => {
-    const sets = chapterSets().map((set) => {
+  it("fails the approved set when its content changes after the decision", () => {
+    const sets = loadChapter("tang-mission-750-754").sets.map((set) => {
       const members = (set["members"] as JsonObject[]).map((member, index) =>
         index === 0 ? { ...member, revision_hash: `sha256:${"0".repeat(64)}` } : member,
       )
@@ -286,8 +295,8 @@ describe("publication approval gate", () => {
     )
   })
 
-  it("fails a set whose source pin changed after the decision", () => {
-    const sets = chapterSets().map((set) => {
+  it("fails the approved set when its source pin changes after the decision", () => {
+    const sets = loadChapter("tang-mission-750-754").sets.map((set) => {
       const sources = (set["sources"] as JsonObject[]).map((source, index) =>
         index === 0 ? { ...source, source_hash: `sha256:${"1".repeat(64)}` } : source,
       )
@@ -303,7 +312,7 @@ describe("publication approval gate", () => {
 
   it("fails a decision the gate does not know", () => {
     const ledger = ledgerRows().map((row) => ({ ...row, decision: "looks fine to me" }))
-    const violations = approvalViolations(chapterSets(), ledger)
+    const violations = approvalViolations(allSets(), ledger)
 
     expect(violations.join("\n")).toContain('records the unknown decision "looks fine to me"')
   })

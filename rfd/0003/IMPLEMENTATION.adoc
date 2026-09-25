@@ -31,7 +31,7 @@ acceptance criteria before dependent work and completion claims, respectively.
 - [ ] Preserve versioned API/data contracts and portable historical behavior fixtures.
   - The browser boundary bundles the chapter's own records and publication sets rather than a second copy, and `src/lib/historical/chapter.ts` keeps loading the same tree for the contract tests. The preparation history was flattened to one revision per record on the owner's instruction of 2026-09-24, so there is no retained v1/v2 revision history in the source files.
 - [ ] Load reviewed content and complete the RFD 1 exploration loop.
-  - Reviewed content loads: the atlas renders the published Tang chapter through `src/lib/atlas/chapter-content.ts` and shows its real titles, dates, places, and coda nodes (link:CONTENT_BOUNDARY.adoc[content boundary decision]). The loop itself stays open: there is no search, sources, story navigation, or layer control, the coda nodes need a window change to reach, and the owner's editorial approval is still pending.
+  - Reviewed content loads: the atlas renders the published Tang chapter through `src/lib/atlas/chapter-content.ts` and shows its real titles, dates, places, and coda nodes (link:CONTENT_BOUNDARY.adoc[content boundary decision]). The owner's editorial approval of that chapter is recorded in link:../0002/PUBLICATION_APPROVAL.adoc[the publication approval gate]. The loop itself stays open: there is no search, sources, story navigation, or layer control, and the coda nodes need a window change to reach.
 - [ ] Verify resource disposal, responsive layout, loading failures, and local scrubbing.
 - [ ] Run ExUnit, relevant client tests, browser interactions, and inspected visual checks.
 

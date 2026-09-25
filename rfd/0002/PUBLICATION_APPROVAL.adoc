@@ -43,11 +43,13 @@ Publication is a decision, not an agent action.
   such a set must carry the preparing editor's `self_review`. `owner decided`
   means the owner decided that this specific content may be published while AC2
   and the specialist reviews stay open. `owner approved` means the owner's
-  editorial approval under RFD 2, which is what RFD 4's AC2 asks for. The
-  chapter currently has one `owner decided` row.
+  editorial approval under RFD 2, which is what RFD 4's AC2 asks for. The Tang
+  set's row now carries the owner's approval, taken on 2026-09-25; the ledger
+  update below records it.
 * **Nothing is an official publication until an `owner approved` row exists.**
-  RFD 4's AC2 stays unsatisfied until then, and no set may claim the owner's
-  approval without that row.
+  The Tang set has one as of 2026-09-25, so it is now the chapter's official
+  publication while AC2's remaining parts and the specialist reviews stay open.
+  No set may claim the owner's approval without that row.
 * **A row binds the decision to the snapshot it was taken on.** Each row carries
   the canonical digest of the set document — members, revision hashes, source
   pins, review, and timestamps — and the gate fails when the set no longer
@@ -58,13 +60,14 @@ Publication is a decision, not an agent action.
 
 The gate is enforced by
 `src/lib/historical/contract/publication-approval.test.ts`, which runs in
-`pnpm build` through `scripts/check-chapter.mjs`. It reads this record and the
-chapter's sets and fails on any of: a set with no ledger row, a ledger row for a
-set that does not exist, a decision the gate does not know, a duplicated row, a
-`preparation snapshot` that claims independent or specialist review, a set whose
-review independence has no owner decision behind it, an owner decision whose row
-does not name the owner as the decider, or a set whose digest no longer matches
-its row. So an agent cannot mint a version of
+`pnpm build` through `scripts/check-chapter.mjs`. It reads this record and every
+chapter's sets under `historical/chapters/` — so a new chapter directory cannot
+appear with an uncovered set — and fails on any of: a set with no ledger row, a
+ledger row for a set that does not exist, a decision the gate does not know, a
+duplicated row, a `preparation snapshot` that claims independent or specialist
+review, a set whose review independence has no owner decision behind it, an
+owner decision whose row does not name the owner as the decider, or a set whose
+digest no longer matches its row. So an agent cannot mint a version of
 the content that no decision covers, and cannot label a preparation snapshot as
 reviewed. The gate checks the shape of the record; whether a decision is truly
 the owner's is the owner's row to write, which is why the ledger names the
@@ -72,8 +75,8 @@ decider in every row.
 
 == Ledger
 
-One row per publication set in `historical/chapters/tang-mission-750-754/`. A new
-set is added here only after the owner's decision.
+One row per publication set under `historical/chapters/`. A new set is added
+here only after the owner's decision.
 
 The preparation history was flattened on the owner's instruction of 2026-09-24:
 the two earlier preparation sets and their corrections are folded into the single
@@ -86,20 +89,43 @@ officially published yet.
 |Set |Decision |Decided by |Set digest |Note
 
 |`lks:set:tang-mission-750-754-v1`
-|owner decided
-|owner (accepted the placement recommendation and the flattening, 2026-09-24)
+|owner approved
+|owner (approved the current merged set for release, 2026-09-25)
 |`sha256:5af33faea26174eb83985bbf3bf4b329c97ed3b79902b4318c6945025c6f5068`
 |The chapter's preparation as one set: 15 places, 12 actors, 29 events, 9
 relationships, and 1 story, with the 11 cited sources pinned, including the
 court-act placements and the two place identifications the owner accepted. The
-set keeps the preparing editor's `self_review`; this decision is not the owner's
-editorial approval under RFD 2, so RFD 4's AC2 stays open and the specialist
-reviews remain outstanding.
+set keeps the preparing editor's `self_review`; the owner's editorial approval
+under RFD 2 is now recorded here, so RFD 4's AC2's approval-dependent part is
+satisfied. The approval is not independent or specialist review, the optional
+specialist reviews remain unperformed, and AC2's visible-uncertainty part and the
+AC7 attribution/rights audit stay open.
 |===
 
-No `owner approved` row exists yet. The first one will be the owner's editorial
-approval of the chapter under RFD 2, and it is what RFD 4's AC2 asks for; it is
-expected to name the set that publishes the then-current revisions.
+=== Ledger update — 2026-09-25: the owner approves the Tang set
+
+The owner's instruction of 2026-09-25 was *"Approve 1. Proceed with 2"*, replying
+to the request to approve the current merged Tang v1 preparation set for release
+or request changes. It is recorded here as the owner's editorial approval under
+RFD 2 of the exact set merged on `origin/main` (PR #11, merge commit
+`6493852e1e29b2028578f715797be941ea74a017`):
+
+* the decision is the owner's editorial approval under RFD 2, which is what
+  RFD 4's AC2 asks for. It is not preparing-editor self-review and not
+  independent or specialist review;
+* the set document is deliberately unchanged, so the digest in the row still
+  matches the snapshot the owner approved. Its `review` block therefore keeps
+  `self_review` and its preparation-time notes; changing the set would change
+  the digest and invalidate the approval it now carries, which is the
+  correction path's own rule;
+* the optional specialist reviews the feasibility report identifies (maritime or
+  ancient history, Buddhist studies, Tang court history, a philologist) remain
+  visibly unperformed. The approval does not imply them;
+* AC2's approval-dependent part — the recorded owner's editorial approval of the
+  published revision — is satisfied for this set. AC2's visible
+  uncertainty/dispute part still depends on the exploration loop, and the AC7
+  attribution/rights audit remains open, so AC2 as a whole is not complete and
+  is not marked complete.
 
 == Consequences
 

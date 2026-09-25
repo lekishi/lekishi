@@ -51,6 +51,11 @@ tree shape and is loaded through the content boundary in
 `historical/chapters/tang-mission-750-754/`; its README records the coverage
 model, the inventory, the evidence, and the review status.
 
+The publication approval gate covers every chapter tree: a set that
+`rfd/0002/PUBLICATION_APPROVAL.adoc` does not name fails the build, and the Tang
+chapter's set carries the owner's recorded release approval (2026-09-25, exact
+digest).
+
 ## Validate
 
 ```bash

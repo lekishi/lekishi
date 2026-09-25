@@ -7,8 +7,11 @@
   "revisions": [
     {
       "revision_id": "lks:rev:akimeya-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter place: the attested landing place with the cited proposal for its modern identification recorded as a cited interpretation.",
       "content": {
         "summary": "秋妻屋浦, in 薩摩國阿多郡, where the biography records the second ship landing on 天寶十二載十二月廿日 (753).",
@@ -27,12 +30,20 @@
             "claim_id": "lks:claim:akimeya-name"
           }
         ],
-        "place_types": ["port"],
+        "place_types": [
+          "port"
+        ],
         "geometry": [
           {
             "claim_id": "lks:claim:akimeya-identification",
             "interpretation": "approximate_point",
-            "geojson": {"type": "Point", "coordinates": [130.2269, 31.2672]},
+            "geojson": {
+              "type": "Point",
+              "coordinates": [
+                130.2269,
+                31.2672
+              ]
+            },
             "precision": "locality",
             "notes": "An approximate placement at 坊津, the identification the cited reference work proposes. The identification is a modern scholarly proposal (比定), not a source statement, and the exact landing site is not asserted."
           }
@@ -57,7 +68,10 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "廿日乙酉午時，第二舟著薩摩國阿多郡秋妻屋浦"}
+              "locator": {
+                "kind": "entry",
+                "value": "廿日乙酉午時，第二舟著薩摩國阿多郡秋妻屋浦"
+              }
             }
           ]
         },
@@ -71,23 +85,32 @@
           "citations": [
             {
               "source_id": "lks:source:chimei-taikei-ata",
-              "locator": {"kind": "entry", "value": "阿多郡"}
+              "locator": {
+                "kind": "entry",
+                "value": "阿多郡"
+              }
             },
             {
               "source_id": "lks:source:wikidata",
-              "locator": {"kind": "dataset_row", "value": "Q10928536 (P625)"}
+              "locator": {
+                "kind": "dataset_row",
+                "value": "Q10928536 (P625)"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:49c075fc963cd478494304448dd5c3df10e852961365d212cbd6c98e8a015387"
+      "revision_hash": "sha256:b4cb8f3cfa3933ef71c98b1e7ccdb203a3a04fa94c653bdfd96c7eba21c8dc49"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:akimeya-1",
-    "published_revision_hash": "sha256:49c075fc963cd478494304448dd5c3df10e852961365d212cbd6c98e8a015387",
+    "published_revision_hash": "sha256:b4cb8f3cfa3933ef71c98b1e7ccdb203a3a04fa94c653bdfd96c7eba21c8dc49",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

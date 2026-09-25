@@ -7,8 +7,11 @@
   "revisions": [
     {
       "revision_id": "lks:rev:huaishi-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter actor: the Tang officer named in 古麻呂's report of the audience seating dispute.",
       "content": {
         "summary": "呉懷實, the Tang general named in 大伴古麻呂's report of the 天寶十二載 (753) New Year audience as the officer who moved the Silla envoy's seat after 古麻呂 objected to the seating order.",
@@ -27,7 +30,9 @@
             "claim_id": "lks:claim:huaishi-name"
           }
         ],
-        "actor_types": ["person"],
+        "actor_types": [
+          "person"
+        ],
         "roles": [
           {
             "role": "soldier",
@@ -39,8 +44,14 @@
               "interval": {
                 "bounds": "two_sided",
                 "boundary": "inclusive",
-                "start": {"year": 753, "era": "ce"},
-                "end": {"year": 753, "era": "ce"}
+                "start": {
+                  "year": 753,
+                  "era": "ce"
+                },
+                "end": {
+                  "year": 753,
+                  "era": "ce"
+                }
               }
             },
             "note": "Recorded as 將軍 (general) only at this audience; nothing further is published."
@@ -58,7 +69,10 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年正月丙寅"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年正月丙寅"
+              }
             }
           ]
         },
@@ -71,19 +85,25 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年正月丙寅"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年正月丙寅"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:b03af50041ebf8767f315a34e8c71eb98be0b2396d8f7455e00e86545b935b40"
+      "revision_hash": "sha256:5b65be0802103d9730f653e58b64310988c971cede21888946fe075bd4a18a46"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:huaishi-1",
-    "published_revision_hash": "sha256:b03af50041ebf8767f315a34e8c71eb98be0b2396d8f7455e00e86545b935b40",
+    "published_revision_hash": "sha256:5b65be0802103d9730f653e58b64310988c971cede21888946fe075bd4a18a46",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

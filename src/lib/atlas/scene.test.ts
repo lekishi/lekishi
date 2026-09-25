@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { FIXTURE_CHAPTER } from "./fixtures"
-import { buildScene } from "./scene"
+import { buildScene, placementPoint } from "./scene"
 import {
   createAtlasState,
   resumeCameraFollow,
@@ -37,9 +37,19 @@ describe("buildScene", () => {
 
   it("marks the events at the playhead as active", () => {
     const scene = buildScene(setPlayhead(initial, chapter, 1219), chapter)
-    const active = scene.events.filter((event) => event.active).map((event) => event.id)
+    const atPlayhead = scene.events
+      .filter((event) => event.playback !== "inactive")
+      .map((event) => ({ id: event.id, playback: event.playback }))
 
-    expect(active).toEqual(["event-coastal-crossing"])
+    // The fixture's crossing is an uncertain occurrence window, so the playhead
+    // makes it possible, never active.
+    expect(atPlayhead).toEqual([{ id: "event-coastal-crossing", playback: "possible" }])
+
+    const onADuration = buildScene(setPlayhead(initial, chapter, 1230), chapter)
+
+    expect(
+      onADuration.events.filter((event) => event.playback === "active").map((event) => event.id),
+    ).toEqual(["event-plain-workshop"])
   })
 
   it("excludes outside-window events from the scene while keeping the selection", () => {
@@ -71,5 +81,29 @@ describe("buildScene", () => {
 
     expect(roundTripped).toEqual(scene)
     expect(Object.getPrototypeOf(roundTripped)).toBe(Object.prototype)
+  })
+
+  it("keeps a list-only event in the scene without a map position", () => {
+    const scene = buildScene(initial, chapter)
+    const landfall = scene.events.find((event) => event.id === "event-island-landfall")
+
+    expect(landfall?.placement).toEqual({
+      kind: "none",
+      placeId: "place-island-stop",
+      label: "Sample island",
+      reason: "no-position",
+    })
+    expect(placementPoint(landfall!.placement)).toBeNull()
+  })
+
+  it("follows only a selection the map can show", () => {
+    const following = resumeCameraFollow(initial, chapter)
+    const placed = selectEvent(following, chapter, "event-harbor-assembly")
+    const unplaced = selectEvent(following, chapter, "event-island-landfall")
+
+    expect(buildScene(placed, chapter).cameraTarget).toEqual({ lon: 129.9, lat: 32.8 })
+    // Following an event with no published position would have to invent one.
+    expect(buildScene(unplaced, chapter).cameraTarget).toBeNull()
+    expect(buildScene(unplaced, chapter).selectedEventId).toBe("event-island-landfall")
   })
 })

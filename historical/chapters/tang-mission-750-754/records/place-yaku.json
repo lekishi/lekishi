@@ -7,8 +7,11 @@
   "revisions": [
     {
       "revision_id": "lks:rev:yaku-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter place: the island name in both attested forms, with the cited identification recorded as a cited interpretation.",
       "content": {
         "summary": "益救島, where the biography records the second ship arriving on 天寶十二載十二月七日 (753) and leaving on the 18th. The chronicle writes the same island name 益久嶋 when it reports 吉備真備's ship reaching it on 天平勝寶五年十二月七日.",
@@ -34,12 +37,20 @@
             "claim_id": "lks:claim:yaku-variant"
           }
         ],
-        "place_types": ["landform"],
+        "place_types": [
+          "landform"
+        ],
         "geometry": [
           {
             "claim_id": "lks:claim:yaku-identification",
             "interpretation": "approximate_point",
-            "geojson": {"type": "Point", "coordinates": [130.5286, 30.3586]},
+            "geojson": {
+              "type": "Point",
+              "coordinates": [
+                130.5286,
+                30.3586
+              ]
+            },
             "precision": "region",
             "notes": "An approximate, region-level placement at the island the cited article equates with 益救島. It is an identification, not a source statement, and no landing site is asserted."
           }
@@ -64,7 +75,10 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "七日，至益救島; 十八日，自益救發"}
+              "locator": {
+                "kind": "entry",
+                "value": "七日，至益救島; 十八日，自益救發"
+              }
             }
           ]
         },
@@ -77,7 +91,10 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年正月癸丑"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年正月癸丑"
+              }
             }
           ]
         },
@@ -91,23 +108,32 @@
           "citations": [
             {
               "source_id": "lks:source:ryukyu-university-tokara",
-              "locator": {"kind": "section", "value": "山里純「南島路とトカラ」"}
+              "locator": {
+                "kind": "section",
+                "value": "山里純「南島路とトカラ」"
+              }
             },
             {
               "source_id": "lks:source:wikidata",
-              "locator": {"kind": "dataset_row", "value": "Q242176 (P625)"}
+              "locator": {
+                "kind": "dataset_row",
+                "value": "Q242176 (P625)"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:7aeb126e863181127cf25a87a9cced2b6d8a5196327c5bf7992d0155abe5570a"
+      "revision_hash": "sha256:f7bd0084d05e643a77e8b259d8c1f35b93710f8c3b01a7f4217f8be5139deaa7"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:yaku-1",
-    "published_revision_hash": "sha256:7aeb126e863181127cf25a87a9cced2b6d8a5196327c5bf7992d0155abe5570a",
+    "published_revision_hash": "sha256:f7bd0084d05e643a77e8b259d8c1f35b93710f8c3b01a7f4217f8be5139deaa7",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

@@ -7,12 +7,17 @@
   "revisions": [
     {
       "revision_id": "lks:rev:longxing-departure-753-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter event: 鑒眞's departure from 龍興寺, the dated leg before the ships sail.",
       "content": {
         "summary": "鑒眞 leaves 龍興寺 in 揚州 in the evening of 天寶十二載十月十九日 and takes a boat at the river landing, under the biography's account of the temple's watch over him.",
-        "event_types": ["journey"],
+        "event_types": [
+          "journey"
+        ],
         "time": {
           "source_expression": "天寶十二載十月［十］九日戌時",
           "calendar": "chinese_lunisolar",
@@ -21,15 +26,32 @@
           "interval": {
             "bounds": "two_sided",
             "boundary": "inclusive",
-            "start": {"year": 753, "era": "ce", "month": 10, "day": 19},
-            "end": {"year": 753, "era": "ce", "month": 10, "day": 19}
+            "start": {
+              "year": 753,
+              "era": "ce",
+              "month": 10,
+              "day": 19
+            },
+            "end": {
+              "year": 753,
+              "era": "ce",
+              "month": 10,
+              "day": 19
+            }
           }
         },
         "places": [
-          {"place_id": "lks:place:yangzhou", "role": "site", "note": "The biography names 龍興寺 within 揚州."}
+          {
+            "place_id": "lks:place:yangzhou",
+            "role": "site",
+            "note": "The biography names 龍興寺 within 揚州."
+          }
         ],
         "participants": [
-          {"actor_id": "lks:actor:jianzhen", "role": "leader"}
+          {
+            "actor_id": "lks:actor:jianzhen",
+            "role": "leader"
+          }
         ],
         "editorial_notes": "The transcription marks the day as ［十］九日, a supplied character; the source expression keeps that marking rather than silently completing it."
       },
@@ -43,7 +65,10 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "天寶十二載十月［十］九日戌時，從龍興寺出，至江頭乘舟"}
+              "locator": {
+                "kind": "entry",
+                "value": "天寶十二載十月［十］九日戌時，從龍興寺出，至江頭乘舟"
+              }
             }
           ]
         },
@@ -56,19 +81,25 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "天寶十二載十月［十］九日戌時"}
+              "locator": {
+                "kind": "entry",
+                "value": "天寶十二載十月［十］九日戌時"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:2692b87a93c29cfb5fa8a69dd7ae298fa110e8095b72359f225135ce4e043b07"
+      "revision_hash": "sha256:ba795a3d3a712586c6992a50e95a0d00b4dfc9625c2ed9982f2335ec59326697"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:longxing-departure-753-1",
-    "published_revision_hash": "sha256:2692b87a93c29cfb5fa8a69dd7ae298fa110e8095b72359f225135ce4e043b07",
+    "published_revision_hash": "sha256:ba795a3d3a712586c6992a50e95a0d00b4dfc9625c2ed9982f2335ec59326697",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

@@ -1,33 +1,37 @@
 <script lang="ts">
-  import type { HistoricalEvent, Place } from "../domain"
+  import type { HistoricalEvent } from "../domain"
+  import {
+    occurrenceLabel,
+    occurrenceModeNote,
+    placementLabel,
+    reviewLabel,
+    unplacedNote,
+  } from "../labels"
   import type { SelectionTimeStatus } from "../state"
 
   let {
     event,
-    place,
     status,
+    review,
     onReturnToTime,
     onClose,
   }: {
     event: HistoricalEvent | null
-    place: Place | null
     status: SelectionTimeStatus | null
+    /** The chapter's recorded review status, so the details surface states it too. */
+    review: { independence: string; reviewer: string }
     onReturnToTime: () => void
     onClose: () => void
   } = $props()
 
-  function yearLabel(occurrence: HistoricalEvent["occurrence"]): string {
-    const { startYear, endYear, precision } = occurrence
-    const span = startYear === endYear ? `${startYear}` : `${startYear}–${endYear}`
-    return precision === "year" ? span : `${span} (${precision} precision)`
-  }
+  const unplaced = $derived(event === null ? null : unplacedNote(event.placement))
 </script>
 
 {#if event}
   <section
     id="atlas-selection"
     data-testid="atlas-selection"
-    aria-label="Selected fixture event"
+    aria-label="Selected event"
     class="pointer-events-auto flex max-h-full flex-col gap-3 overflow-y-auto rounded-t-2xl border border-slate-700/70 bg-slate-950/90 px-4 py-4 shadow-2xl shadow-slate-950/60 backdrop-blur md:rounded-2xl"
   >
     <header class="flex items-start justify-between gap-3">
@@ -48,28 +52,40 @@
       </button>
     </header>
 
-    <p
-      class="rounded-lg border border-dashed border-amber-300/40 bg-amber-300/5 px-3 py-2 text-xs text-amber-100"
-    >
-      Synthetic fixture content — placeholder for the reviewed chapter, not a historical claim.
-    </p>
+    {#if event.coda}
+      <p
+        class="rounded-lg border border-violet-400/40 bg-violet-400/10 px-3 py-2 text-xs text-violet-100"
+      >
+        Coda node — outside the primary 750–754 mission window, separately sourced and not a mission
+        effect.
+      </p>
+    {/if}
 
     <dl class="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 text-sm">
       <dt class="text-slate-400">Place</dt>
-      <dd class="text-slate-100">
-        {place?.label ?? "Unknown"}
-        {#if place}
-          <span class="ml-1 text-xs text-slate-400">
-            {place.locationPrecision === "approximate"
-              ? "approximate location"
-              : "display anchor only"}
-          </span>
-        {/if}
-      </dd>
+      <dd class="text-slate-100">{placementLabel(event.placement)}</dd>
 
       <dt class="text-slate-400">Occurrence</dt>
-      <dd class="text-slate-100 tabular-nums">{yearLabel(event.occurrence)}</dd>
+      <dd class="text-slate-100 tabular-nums">{occurrenceLabel(event.occurrence)}</dd>
+
+      {#if event.occurrence.sourceExpression}
+        <dt class="text-slate-400">As written</dt>
+        <dd class="text-slate-100">{event.occurrence.sourceExpression}</dd>
+      {/if}
     </dl>
+
+    {#if occurrenceModeNote(event.occurrence)}
+      <p class="text-xs leading-snug text-slate-400">{occurrenceModeNote(event.occurrence)}</p>
+    {/if}
+
+    {#if unplaced}
+      <p
+        data-testid="atlas-unplaced"
+        class="rounded-lg border border-dashed border-slate-600 px-3 py-2 text-xs text-slate-300"
+      >
+        Not on the map: {unplaced}
+      </p>
+    {/if}
 
     <p class="text-sm leading-relaxed text-slate-300">{event.note}</p>
 
@@ -95,5 +111,9 @@
         </button>
       </div>
     {/if}
+
+    <p class="text-[0.65rem] leading-snug text-slate-500">
+      {reviewLabel(review.independence, review.reviewer)}
+    </p>
   </section>
 {/if}

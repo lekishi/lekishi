@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { SceneEvent } from "../scene"
+  import { occurrenceLabel, playbackLabel, placementLabel } from "../labels"
 
   let {
     events,
@@ -10,15 +11,15 @@
     selectedEventId: string | null
     onSelect: (eventId: string) => void
   } = $props()
-
-  function yearLabel(event: SceneEvent): string {
-    const { startYear, endYear, precision } = event.occurrence
-    const span = startYear === endYear ? `${startYear}` : `${startYear}–${endYear}`
-    return precision === "year" ? span : `${span} (${precision})`
-  }
 </script>
 
-<div class="flex h-full flex-col gap-2">
+<!--
+  The list is the panel's scroll container, so every level between the panel and
+  the rows has to be shrinkable (`min-h-0`). Without it a 24-row window pushes
+  the rows out of the panel and under the time controls instead of scrolling
+  them, and the events below the fold are unreachable.
+-->
+<div class="flex min-h-0 flex-1 flex-col gap-2">
   <div class="flex items-baseline justify-between gap-2">
     <h2 class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
       Events in window
@@ -26,10 +27,14 @@
     <span class="text-xs text-slate-500" data-testid="atlas-event-count">{events.length}</span>
   </div>
 
-  <ul class="flex flex-col gap-1 overflow-y-auto pr-1" data-testid="atlas-event-list">
+  <ul
+    class="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto pr-1"
+    data-testid="atlas-event-list"
+  >
     {#if events.length === 0}
       <li class="rounded-lg border border-dashed border-slate-700 px-3 py-4 text-xs text-slate-400">
-        No fixture events overlap this window. Widen the window to see the synthetic events again.
+        No published events overlap this window. Widen it to bring the chapter's events back into
+        view.
       </li>
     {/if}
     {#each events as event (event.id)}
@@ -50,23 +55,35 @@
         >
           <span class="flex items-center justify-between gap-2">
             <span class="text-sm font-medium text-slate-100">{event.title}</span>
-            {#if event.active}
+            {#if playbackLabel(event.playback)}
               <span
-                class="rounded-full bg-emerald-400/15 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-emerald-300"
+                class={[
+                  "shrink-0 rounded-full px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide",
+                  event.playback === "active"
+                    ? "bg-emerald-400/15 text-emerald-300"
+                    : "border border-amber-300/60 text-amber-200",
+                ]}
               >
-                at playhead
+                {playbackLabel(event.playback)}
               </span>
             {/if}
           </span>
-          <span class="mt-1 flex items-center gap-2 text-xs text-slate-400">
-            <span>{event.placeLabel}</span>
+          <span class="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-slate-400">
+            <span>{placementLabel(event.placement)}</span>
             <span aria-hidden="true">·</span>
-            <span>{yearLabel(event)}</span>
+            <span class="tabular-nums">{occurrenceLabel(event.occurrence)}</span>
             {#if event.relation === "possible"}
               <span
                 class="rounded-full border border-sky-400/60 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-sky-300"
               >
                 possible
+              </span>
+            {/if}
+            {#if event.coda}
+              <span
+                class="rounded-full border border-violet-400/60 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-violet-300"
+              >
+                coda node
               </span>
             {/if}
           </span>

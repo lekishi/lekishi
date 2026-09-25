@@ -366,7 +366,7 @@ describe("mounting", () => {
 })
 
 describe("sync", () => {
-  it("applies the chapter's home view once and renders one entity per scene event", () => {
+  it("applies the chapter's home view once and renders one entity per placed scene event", () => {
     const { renderer, viewer } = mount()
     const scene = buildScene(initial, chapter)
 
@@ -378,9 +378,12 @@ describe("sync", () => {
       lon: 128.5,
       lat: 32.5,
     })
+    // A list-only event stays in the scene and gets no marker, because the map
+    // must not invent the position it does not have.
     expect(viewer.entities.items.map((entity) => entity.id)).toEqual(
-      scene.events.map((event) => event.id),
+      scene.events.filter((event) => event.placement.kind === "point").map((event) => event.id),
     )
+    expect(scene.events.length).toBeGreaterThan(viewer.entities.items.length)
   })
 
   it("removes entities that leave the scene", () => {

@@ -7,12 +7,17 @@
   "revisions": [
     {
       "revision_id": "lks:rev:precept-study-order-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter coda relationship: the 758 title and precept-study order, separately sourced and not presented as a mission effect.",
       "content": {
         "summary": "The court's 天平寶字二年 (758) act toward 鑒眞: the title 大和上, the end of his 僧綱 post, and the order that monks wishing to study the precepts study under him. The relationship is a later institutional change, recorded with its own source.",
-        "relationship_types": ["institutional_change"],
+        "relationship_types": [
+          "institutional_change"
+        ],
         "from": "lks:actor:japan-state",
         "to": "lks:actor:jianzhen",
         "directionality": "directed",
@@ -25,8 +30,18 @@
           "interval": {
             "bounds": "two_sided",
             "boundary": "inclusive",
-            "start": {"year": 758, "era": "ce", "month": 8, "day": 1},
-            "end": {"year": 758, "era": "ce", "month": 8, "day": 1}
+            "start": {
+              "year": 758,
+              "era": "ce",
+              "month": 8,
+              "day": 1
+            },
+            "end": {
+              "year": 758,
+              "era": "ce",
+              "month": 8,
+              "day": 1
+            }
           }
         },
         "editorial_notes": "Coda node (outside the primary 750–754 mission window): the act is separately dated and sourced, and the relationship asserts no causal link from the mission to the precept-study order."
@@ -41,19 +56,25 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第廿一 天平寶字二年八月庚子朔"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第廿一 天平寶字二年八月庚子朔"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:e7e113c73c650191d200dada8ef16058f67650f8f92603debed1d7d83d7b3ab0"
+      "revision_hash": "sha256:dbcfdd1c95bf024a55410318334a4dc72debfc727a3cee0cbb0d94ec672243a1"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:precept-study-order-1",
-    "published_revision_hash": "sha256:e7e113c73c650191d200dada8ef16058f67650f8f92603debed1d7d83d7b3ab0",
+    "published_revision_hash": "sha256:dbcfdd1c95bf024a55410318334a4dc72debfc727a3cee0cbb0d94ec672243a1",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

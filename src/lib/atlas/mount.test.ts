@@ -39,7 +39,10 @@ describe("mountAtlas", () => {
 
     expect(root.childElementCount).toBe(1)
     expect(root.querySelectorAll('[data-testid="atlas-workspace"]')).toHaveLength(1)
-    expect(root.querySelectorAll('[data-testid="atlas-event-item"]')).toHaveLength(5)
+    // The workspace renders the reviewed chapter: its 24 in-window events, not a
+    // synthetic fixture.
+    expect(root.querySelectorAll('[data-testid="atlas-event-item"]')).toHaveLength(24)
+    expect(root.querySelector("#atlas-notice")?.textContent).toContain("Reviewed chapter")
     expect(renderer.sync).toHaveBeenCalled()
 
     handle.dispose()

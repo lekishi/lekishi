@@ -7,8 +7,11 @@
   "revisions": [
     {
       "revision_id": "lks:rev:yangzhou-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter place: 揚州 with the two named temples recorded in its notes, and a display anchor that asserts no historical coordinate.",
       "content": {
         "summary": "揚州, the city where the envoys visited 鑒眞 at 延光寺 on 天寶十二載十月十五日 (753) and where he left 龍興寺 on the 19th. The temples are named in the biography; the place record keeps them in the event notes rather than inventing separate site records.",
@@ -27,12 +30,20 @@
             "claim_id": "lks:claim:yangzhou-name"
           }
         ],
-        "place_types": ["settlement"],
+        "place_types": [
+          "settlement"
+        ],
         "geometry": [
           {
             "claim_id": "lks:claim:yangzhou-anchor",
             "interpretation": "display_anchor",
-            "geojson": {"type": "Point", "coordinates": [119.4363, 32.3912]},
+            "geojson": {
+              "type": "Point",
+              "coordinates": [
+                119.4363,
+                32.3912
+              ]
+            },
             "precision": "unspecified",
             "notes": "Label anchor at the modern city of Yangzhou (Wikidata Q57906). It is not an asserted historical coordinate, and no temple site is placed."
           }
@@ -57,7 +68,10 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "天寶十二載 十月十五日壬午; 十月［十］九日戌時"}
+              "locator": {
+                "kind": "entry",
+                "value": "天寶十二載 十月十五日壬午; 十月［十］九日戌時"
+              }
             }
           ]
         },
@@ -70,19 +84,25 @@
           "citations": [
             {
               "source_id": "lks:source:wikidata",
-              "locator": {"kind": "dataset_row", "value": "Q57906 (P625)"}
+              "locator": {
+                "kind": "dataset_row",
+                "value": "Q57906 (P625)"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:6eceb27800dbd80aa0f483c09753c062a860d2dac7789d854079099d4ed12bae"
+      "revision_hash": "sha256:1f767320048c3313b6f891574744218152dd518a8bf5c520ec33ae030bcd2515"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:yangzhou-1",
-    "published_revision_hash": "sha256:6eceb27800dbd80aa0f483c09753c062a860d2dac7789d854079099d4ed12bae",
+    "published_revision_hash": "sha256:1f767320048c3313b6f891574744218152dd518a8bf5c520ec33ae030bcd2515",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

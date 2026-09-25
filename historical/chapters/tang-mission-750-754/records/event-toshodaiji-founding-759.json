@@ -7,12 +7,17 @@
   "revisions": [
     {
       "revision_id": "lks:rev:toshodaiji-founding-759-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter coda event: the 唐招提寺 name and cloister, separately sourced and not presented as a mission effect.",
       "content": {
         "summary": "The biography records the temple name 唐律招提 being established on 寶字三年八月一日 (759); the chronicle's 763 notice describes the same cloister as 新田部親王's former residence given to 鑒眞.",
-        "event_types": ["founding"],
+        "event_types": [
+          "founding"
+        ],
         "time": {
           "source_expression": "寶字三年八月一日，私立唐律招提名",
           "calendar": "chinese_lunisolar",
@@ -21,15 +26,31 @@
           "interval": {
             "bounds": "two_sided",
             "boundary": "inclusive",
-            "start": {"year": 759, "era": "ce", "month": 8, "day": 1},
-            "end": {"year": 759, "era": "ce", "month": 8, "day": 1}
+            "start": {
+              "year": 759,
+              "era": "ce",
+              "month": 8,
+              "day": 1
+            },
+            "end": {
+              "year": 759,
+              "era": "ce",
+              "month": 8,
+              "day": 1
+            }
           }
         },
         "places": [
-          {"place_id": "lks:place:toshodaiji", "role": "site"}
+          {
+            "place_id": "lks:place:toshodaiji",
+            "role": "site"
+          }
         ],
         "participants": [
-          {"actor_id": "lks:actor:jianzhen", "role": "leader"}
+          {
+            "actor_id": "lks:actor:jianzhen",
+            "role": "leader"
+          }
         ],
         "editorial_notes": "Coda node (outside the primary 750–754 mission window): the founding is a separately dated later act, recorded with both sources and not as an effect of the mission."
       },
@@ -43,7 +64,10 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "寶字三年八月一日，私立唐律招提名，後請官額，依此爲定"}
+              "locator": {
+                "kind": "entry",
+                "value": "寶字三年八月一日，私立唐律招提名，後請官額，依此爲定"
+              }
             }
           ]
         },
@@ -56,19 +80,25 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第廿四 天平寶字七年五月戊申（施新田部親王之舊宅以爲戒院。今招提寺是也）"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第廿四 天平寶字七年五月戊申（施新田部親王之舊宅以爲戒院。今招提寺是也）"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:685cc51b1aef4a1c486650c5df1618dab5d54a79167016f0b5798f62572b53c7"
+      "revision_hash": "sha256:4dbe43e7e00290ec3d059b4d553248421a7183e6254ee100a2c5324a0079ab51"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:toshodaiji-founding-759-1",
-    "published_revision_hash": "sha256:685cc51b1aef4a1c486650c5df1618dab5d54a79167016f0b5798f62572b53c7",
+    "published_revision_hash": "sha256:4dbe43e7e00290ec3d059b4d553248421a7183e6254ee100a2c5324a0079ab51",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

@@ -7,8 +7,11 @@
   "revisions": [
     {
       "revision_id": "lks:rev:fajin-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter actor: the monk named in the chronicle's return report.",
       "content": {
         "summary": "法進, a monk whom the chronicle names among the eight who returned with 大伴古麻呂 and 鑒眞 in 天平勝寶六年正月 (754).",
@@ -27,7 +30,9 @@
             "claim_id": "lks:claim:fajin-name"
           }
         ],
-        "actor_types": ["person"],
+        "actor_types": [
+          "person"
+        ],
         "roles": [
           {
             "role": "monk",
@@ -39,8 +44,14 @@
               "interval": {
                 "bounds": "two_sided",
                 "boundary": "inclusive",
-                "start": {"year": 754, "era": "ce"},
-                "end": {"year": 754, "era": "ce"}
+                "start": {
+                  "year": 754,
+                  "era": "ce"
+                },
+                "end": {
+                  "year": 754,
+                  "era": "ce"
+                }
               }
             },
             "note": "Recorded only at the 754 return report; no further role is published."
@@ -58,7 +69,10 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年正月壬子"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年正月壬子"
+              }
             }
           ]
         },
@@ -71,19 +85,25 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年正月壬子"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年正月壬子"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:77bcf49890142913fbbac4c35389844e41b57a78bbef662e119c74e7bb52346e"
+      "revision_hash": "sha256:1b6a4c44c5bb6dac8325dd3d173faff6cd8e72224a2512a87c730b47d65be400"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:fajin-1",
-    "published_revision_hash": "sha256:77bcf49890142913fbbac4c35389844e41b57a78bbef662e119c74e7bb52346e",
+    "published_revision_hash": "sha256:1b6a4c44c5bb6dac8325dd3d173faff6cd8e72224a2512a87c730b47d65be400",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

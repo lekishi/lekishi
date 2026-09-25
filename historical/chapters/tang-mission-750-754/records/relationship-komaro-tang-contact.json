@@ -7,12 +7,17 @@
   "revisions": [
     {
       "revision_id": "lks:rev:komaro-tang-contact-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter relationship: the envoys' contact with the Tang court at the New Year audience, recorded from 古麻呂's report.",
       "content": {
         "summary": "The envoys' contact with the Tang court at the New Year audience at 蓬萊宮含元殿 on 天寶十二載正月朔 (753), recorded from 大伴古麻呂's report to the Japanese court, including the seating-order dispute and 呉懷實's intervention.",
-        "relationship_types": ["contact"],
+        "relationship_types": [
+          "contact"
+        ],
         "from": "lks:actor:otomo-no-komaro",
         "to": "lks:actor:tang-dynasty",
         "directionality": "directed",
@@ -25,8 +30,18 @@
           "interval": {
             "bounds": "two_sided",
             "boundary": "inclusive",
-            "start": {"year": 753, "era": "ce", "month": 1, "day": 1},
-            "end": {"year": 753, "era": "ce", "month": 1, "day": 1}
+            "start": {
+              "year": 753,
+              "era": "ce",
+              "month": 1,
+              "day": 1
+            },
+            "end": {
+              "year": 753,
+              "era": "ce",
+              "month": 1,
+              "day": 1
+            }
           }
         },
         "editorial_notes": "The account is a self-report by 古麻呂 and is labelled as such on the audience event; the relationship records the contact the report describes and asserts no protocol detail beyond it."
@@ -41,19 +56,25 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第十九 天平勝寶六年正月丙寅"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第十九 天平勝寶六年正月丙寅"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:07ac27dfd7f4f5bb96bba5269b36915b93df79373884847c4302620c69dd32a2"
+      "revision_hash": "sha256:ac379db24cc76f3df94ac20a0b3fe51a8f16e42a9396dbb888c3f017c3030a1b"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:komaro-tang-contact-1",
-    "published_revision_hash": "sha256:07ac27dfd7f4f5bb96bba5269b36915b93df79373884847c4302620c69dd32a2",
+    "published_revision_hash": "sha256:ac379db24cc76f3df94ac20a0b3fe51a8f16e42a9396dbb888c3f017c3030a1b",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

@@ -24,12 +24,12 @@ Selected by the owner on 2026-09-24 from
 
 | Kind | Count | Notes |
 | --- | --- | --- |
-| Places | 14 | `難波`, `大宰府`, `揚州`, `蘇州黃泗浦`, `阿兒奈波島`, `多禰島`, `益救島`, `秋妻屋浦`, `石籬浦`, `紀伊國牟漏埼`, `驩州`, `蓬萊宮含元殿`, `東大寺`, `唐招提寺` |
+| Places | 15 | `難波`, `大宰府`, `平城宮`, `揚州`, `蘇州黃泗浦`, `阿兒奈波島`, `多禰島`, `益救島`, `秋妻屋浦`, `石籬浦`, `紀伊國牟漏埼`, `驩州`, `蓬萊宮含元殿`, `東大寺`, `唐招提寺` |
 | Actors | 12 | The mission principals, 鑒眞 and 法進, the Tang general 呉懷實, the sovereign 孝謙天皇, and the two state actors 日本國 and 唐 |
 | Events | 29 | 24 inside 750–754 and 5 coda events across the four coda years (779 has two) |
 | Relationships | 9 | diplomacy, travel, two contacts, transmission, two institutional changes, and two 779 commemorations |
 | Stories | 1 | The mission in presentation order, with the coda steps labelled |
-| Sources | 9 | Four primary works, four reference or scholarly works, and Wikidata |
+| Sources | 11 | Four primary works, five reference works, one scholarly article, and Wikidata |
 
 ## Evidence and uncertainty
 
@@ -40,10 +40,30 @@ Selected by the owner on 2026-09-24 from
   `阿兒奈波島` (Okinawa Island), `多禰島` (the Tanegashima–Yakushima area),
   `益救島` (Yakushima), and `秋妻屋浦` (坊津) are recorded as
   `cited_interpretation` claims naming the reference work or article that
-  proposes them; `石籬浦`, `紀伊國牟漏埼`, and `驩州` carry `unknown` geometry
-  with an explanation because no identification is sourced here. The other
-  places carry `display_anchor` geometry only, which is explicitly not an
-  asserted historical coordinate.
+  proposes them; `驩州` carries `unknown` geometry with an explanation because no
+  identification is sourced here. Apart from `紀伊國牟漏埼` and `石籬浦`, which
+  carry the approximate identifications described below, the other places carry
+  `display_anchor` geometry only, which is explicitly not an asserted historical
+  coordinate.
+- **Two place identifications are published as proposals.** `紀伊國牟漏埼` is
+  placed at the modern town of 太地 (`approximate_point`, locality precision)
+  because the cited 和歌山県 page reports that 紀州藩's 紀伊続風土記 identified
+  牟漏崎 with 太地の燈明崎; `石籬浦` is placed at the former town of 頴娃
+  (locality precision) because the cited local-history account by 井上賢一
+  (「薩摩半島民俗文化博物館」) names 石垣 in present-day 南九州市穎娃町 as the
+  drift place. Both are labelled as modern identifications, not source statements,
+  and neither asserts a landing site. `驩州` keeps `unknown` geometry: the primary
+  sources give its seat county but no source in this set identifies the site, so
+  no coordinate is manufactured.
+- **Court acts are anchored, not placed.** The entries that record the court's
+  appointment of the embassy, the 節刀 grant, the audiences and reports, the
+  rewards, and the 758 and 779 court acts name no place (the 節刀 entry names
+  `内裏`). Each of those ten events points at `平城宮` — the court's seat, whose
+  record carries the chronicle's own naming of the palace and the inner precinct,
+  and a `display_anchor` that asserts no coordinate. The event references are
+  display placement: the records carry **no claim asserting the association**, so
+  the atlas shows the act labelled "display anchor only" without turning the
+  editor's placement into a historical site claim.
 - `多禰島` is published only as the second ship's intended destination: the
   biography names it as the course the second ship set out on and then records
   the arrival at `益救島`, so the separation event carries it as a qualified
@@ -65,21 +85,31 @@ Selected by the owner on 2026-09-24 from
 
 ## Review status
 
-Two publication sets are in the tree. `lks:set:tang-mission-750-754-v1`
-publishes the first prepared revision of every record; the corrections the first
-review cycle produced are appended as new revisions of the affected records and
-published by `lks:set:tang-mission-750-754-v2`. The earlier revisions and their
-pins stay in the tree, so `Publication.history` shows the content that was
-published first and the correction beside it.
+One publication set is in the tree, `lks:set:tang-mission-750-754-v1`, and it
+publishes every record with exactly one revision each. The preparation history
+was flattened on the owner's instruction of 2026-09-24: the earlier preparation
+revisions and their review corrections are folded into that single revision, and
+each record's change explanation still says where a review correction, an
+owner-accepted court-act placement, or an owner-accepted identification shaped
+the content. `lks:set:tang-mission-750-754-v2` and the placement set no longer
+exist.
 
-Both sets record the **preparing editor's self-review**
-(`self_review`, reviewer = an author of the member revisions). This is not owner
-review, not independent review, and not specialist review. The owner's editorial
-approval under RFD 2 — and therefore RFD 4's AC2 — is **still pending**, and the
-specialist reviews the feasibility report identified (maritime history for the
-return-voyage landfalls, Buddhist studies for the ordination and lineage claims,
-Tang court history for the audience, and a philologist for the editions) have
-not been performed.
+The set records the **preparing editor's self-review** (`self_review`, reviewer =
+an author of the member revisions). This is not owner review, not independent
+review, and not specialist review. The owner's editorial approval under RFD 2 —
+and therefore RFD 4's AC2 — is **still pending**, and the specialist reviews the
+feasibility report identified (maritime history for the return-voyage landfalls,
+Buddhist studies for the ordination and lineage claims, Tang court history for the
+audience, and a philologist for the editions) have not been performed.
+
+The set is not an official publication. In the contract's vocabulary
+"published" means *named by a publication set* — the atomic unit the atlas reads
+— not *approved for release*. The owner's decisions are recorded in
+[`rfd/0002/PUBLICATION_APPROVAL.adoc`](../../../rfd/0002/PUBLICATION_APPROVAL.adoc):
+a set may exist only when that ledger names it, and the ledger records this one
+as **owner decided** — the owner decided that this content may be published. The
+first `owner approved` row will be the owner's editorial approval of this
+chapter.
 
 ## What is deferred, and why
 
@@ -112,7 +142,8 @@ to the synthetic worked examples. Correcting chapter content requires a new
 revision or source document and a new publication set, preserving the hashes and
 review metadata that approved the existing publication. An in-place edit to an
 approved revision or source must fail validation rather than being resealed; the
-correction set above is the worked example of that path.
+earlier preparation cycles in this chapter are the worked example of that path,
+and the flattened single revision is what the owner's decision covers.
 
 ## Limitations that must be stated wherever this content appears
 

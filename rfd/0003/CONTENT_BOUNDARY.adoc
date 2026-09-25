@@ -1,0 +1,262 @@
+:authors: Darwin D Wu <darwin67@users.noreply.github.com>
+:state: published
+:labels: architecture, content, static, sveltekit, projection, poc
+
+= RFD 3 chapter content boundary decision
+
+== Provenance and scope
+
+RFD 4's Wave 2 work connects the reviewed Tang chapter
+(`historical/chapters/tang-mission-750-754/`, merged in PR #10) to the browser
+atlas. Until this change the atlas rendered `src/lib/atlas/fixtures.ts`, a
+synthetic foundation fixture, so the deployed Pages preview showed placeholder
+events while the reviewed chapter existed only in the repository.
+
+This record is that decision, taken on 2026-09-24 from the measurement in
+<<Measured evidence>>. It does not supersede
+link:STATIC_ARCHITECTURE.adoc[the static architecture decision]: the site stays a
+prerendered static artifact with no server, and RFD 2 stays the owner of
+historical meaning. It records how reviewed content crosses from the versioned
+contract into the browser, which is the part the two earlier records left open.
+
+== Decision
+
+The atlas renders the reviewed chapter through one browser-safe boundary, and
+that boundary is the only path chapter content takes into the app.
+
+* `src/lib/historical/chapter.ts` stays the Node-side loader. It reads the
+  content tree with `fs` and hands it to the contract's own
+  `Publication.checkAll`. Tests and tooling use it; the browser never imports it.
+* `scripts/check-chapter.mjs` runs before Vite in `pnpm build` and runs the
+  chapter's contract test and the projection test suite through Vitest, so an
+  edited approved revision, a missing source pin, or a record published at a
+  revision it does not carry fails the build. This is the validation gate: the
+  validator needs `node:fs` and `node:crypto`, so it cannot run in the bundle,
+  and running it through the existing test suite keeps it the single source of
+  truth instead of a second implementation.
+* `src/lib/atlas/chapter-content.ts` bundles the same records and publication
+  sets with Vite's `import.meta.glob`. The browser therefore reads the files the
+  contract validates: no `fs`, no second copy of the content, no fetch, and no
+  request a static host has to serve.
+* `src/lib/atlas/projection.ts` selects the newest published revision per record
+  through the contract's own publication ordering and maps the published
+  revisions into the renderer-independent atlas domain. `currentPublished` moved
+  into `src/lib/historical/contract/publication-order.ts` — browser-safe, no Node
+  API — and `publication.ts` re-exports it, so the browser projection and the
+  Node-side validator cannot disagree about what is published.
+* The projection runs at module scope in the atlas's module graph and throws when
+  the chapter cannot be projected. The atlas route is prerendered, so an invalid
+  chapter fails `pnpm build` (and therefore the Cloudflare Pages build) instead of
+  shipping placeholder content, and a deployed page never falls back to synthetic
+  events.
+* `src/lib/atlas/fixtures.ts` stays, as synthetic content that only focused unit
+  tests import. `scripts/check-static-build.mjs` fails the build if any of its
+  strings reach the artifact.
+
+=== What the projection refuses to do
+
+These are contract-with-the-reader rules, not implementation details:
+
+* The newest published revision wins. The atlas never shows a revision the sets
+  do not name, and a mirror that disagrees with the newest set fails the
+  projection.
+* An event keeps its whole support interval. An event with no published map
+  position (no place named, no sourced identification, or a place named only as
+  context) stays in the non-map list with no coordinate.
+* A place whose published geometry is `unknown` carries no position. A
+  `display_anchor` stays a display anchor, and a display anchor that carries a
+  stated precision fails the projection: the atlas must not show a coordinate the
+  review never approved.
+* The occurrence mode survives to the surfaces, not only to the data. A duration
+  is active at the playhead, an uncertain occurrence window is only ever a
+  possible match — it is one occurrence at an unknown point inside the span, so
+  the atlas never animates it as continuous activity — and the list and the
+  details surface say which one it is rather than showing identical wording.
+* The coda distinction is the chapter's own presentation label, cross-checked
+  against the primary mission window. A coda node moved into the window, or a
+  mission event moved out of it, fails the projection rather than being folded in.
+* Route geometry fails rather than being flattened into points; so do an undated
+  event and an open-ended occurrence, which the atlas window cannot represent
+  without inventing the missing end. These are recorded gaps, not silent
+  omissions (see <<Limitations recorded>>).
+
+=== Alternatives considered
+
+* **A second hand-written fixture.** Rejected: it duplicates 65 records of
+  reviewed truth and would drift from the content the contract validates.
+* **A generated module written by a build script.** Rejected: the projection
+  needs the contract's TypeScript in Node, which means either a second build step
+  or a generated file to keep in sync; the runtime path is simpler and is the same
+  code the tests exercise.
+* **Fetching a projected JSON file at runtime.** Rejected: it adds an async load
+  and a request for content the bundle already carries, and the atlas would show
+  nothing until the fetch resolved.
+* **A Vite plugin that projects at build time into a virtual module.** Measured
+  and rejected: a plugin can import the Node-side loader and fail the build, and
+  it works, but Vite then warns that the config's inlined module graph uses
+  extensionless imports the future native config loader will not resolve. The
+  prerender already fails the build on a module-scope throw, so the plugin buys
+  nothing for that warning and a config-file dependency on the content tree.
+
+== Measured evidence
+
+Measured on 2026-09-24 in the pinned Nix environment, from the built artifact.
+
+[cols="1,3",options="header"]
+|===
+|Check |Result
+
+|Projection over the real tree
+|`src/lib/atlas/projection.test.ts` and `chapter-content.test.ts`: 27 tests. 15
+places, 29 events, 1 story, 66 records, one publication set. (The measurement
+taken before the owner-directed flattening of 2026-09-24 was 14 places and 65
+published revisions; the tree now carries one revision per record, so the
+revision count and the inventory differ from that earlier snapshot.) The
+chapter's title is taken from its published story summary: "The 750–754 embassy
+of 藤原朝臣清河".
+
+|Selected revision
+|The atlas shows the newest published revision of every record: the correction set
+`lks:set:tang-mission-750-754-v1` decides the shown revisions and the review
+statement: the preparation history was flattened on the owner's instruction, so
+every record carries one revision and the set publishes all of them.
+
+|Map and list counts
+|29 published events: 24 in the primary 750–754 window and 5 coda nodes outside
+it. Of the 24 in-window events, 22 resolve to a point and 2 do not: 驩州 names a
+place with `unknown` geometry, and 多禰島 is named only as context. Seven of the
+twenty-two are in-window court acts whose entries name no place (three more are
+coda court acts, ten in all): they point at 平城宮, the court's seat, as a
+`display_anchor` (owner-accepted on 2026-09-24), so the atlas shows them labelled
+"display anchor only" and asserts no coordinate for them. The reference is a
+display placement, not a historical site claim: the records carry no claim
+asserting the association. Two more are the identifications the owner asked to
+chase: 紀伊國牟漏埼 at the modern town of 太地, on the cited 和歌山県 page, and
+石籬浦 at the former town of 頴娃, on the cited local-history account by 井上賢一
+— both approximate locality-level placements labelled as modern identifications,
+not source statements.
+
+|Build gate
+|A module-scope projection failure fails `pnpm build`: the prerender reports the
+error for `/atlas` and the build exits non-zero. The failure was measured by
+planting one at module scope before the boundary existed. `pnpm build` also runs
+`scripts/check-chapter.mjs` before Vite, which runs the chapter's contract test
+and the projection test suite through Vitest, so publication validation
+(schemas, revision hashes, source pins) is a build gate and not only a test-suite
+concern.
+
+|Static artifact
+|`pnpm build`: 410 files, 12 MB total, unchanged from the static architecture
+measurement. The chapter's own data adds one 236 KB (44.7 KB gzip) client chunk.
+`atlas.html` names the reviewed chapter before any script runs.
+
+|Build invariant
+|`scripts/check-static-build.mjs` additionally requires the chapter's own id and
+a published record id in the built scripts and the chapter title in the
+prerendered shell, and rejects the synthetic fixture's sentinel strings in the
+application scripts and the prerendered pages. It is a sentinel check, not a
+proof that no fixture content could reach the artifact; the browser checks own
+that.
+
+|Occurrence semantics
+|`time.test.ts` and `labels.test.ts` pin the playhead rule and the wording: a
+duration is active inside its support, an uncertain occurrence window is only
+ever possible, and the list and details distinguish the two.
+
+|Unit and contract tests
+|`pnpm test`: 368 tests, 367 passed and 1 skipped (the `pnpm seal` maintenance
+entry point). The historical contract suite, its 187 vectors, and the chapter's
+own contract test are unchanged.
+
+|Browser checks
+|`pnpm e2e` against the built artifact, one worker, three projects: desktop
+20 passed / 1 skipped, tablet-touch 20 passed / 1 skipped, phone 20 passed /
+1 skipped (60 passed, 3 skipped, 16.8 minutes). The skipped case is the
+ touch-only tap check on the non-touch desktop project, and the desktop-only drag
+ check on the touch projects. The checks cover the reviewed chapter's title and
+ notice, the 24 in-window events, the unplaced events, the coda window, an
+ uncertain occurrence staying a possible match at the playhead, selection and
+ outside-window details, playback, camera-follow rules, keyboard access, disposal,
+`pagehide`/`pageshow` restore, the event list as the panel's scroll container, and
+the phone layouts at 390 px and 320 px.
+|===
+
+== Consequences
+
+* The deployed artifact renders the reviewed chapter's events, not placeholder
+  events. Page metadata, the workspace notice, the event list, and the selection
+  panel name the chapter and state its recorded review status.
+* The atlas states what it cannot show instead of filling it in: unplaced events
+  are listable and unmarked, and the details surface says why.
+* The event list is the panel's scroll container, and the overlay column is
+  bounded above the time controls at every width, so a window longer than the
+  panel scrolls instead of running under the controls.
+* Court acts whose entries name no place are anchored at the court's seat
+  (平城宮), and the anchor is labelled as one: the atlas shows the event without
+  asserting a coordinate for it. The owner's decision to publish that placement
+  is recorded in link:../0002/PUBLICATION_APPROVAL.adoc[the publication approval
+  gate].
+* Adding or changing a chapter is now a content decision with a code path that
+  fails loudly, rather than a fixture edit.
+* No server, database, provider account, or secret is introduced; the artifact
+  still contains only prerendered HTML, hashed JS/CSS, and the Cesium runtime.
+
+== Limitations recorded
+
+* **Not AC2 and not AC3.** The owner's editorial approval of the published
+  revision is still pending, the specialist reviews the feasibility report
+  identifies have not been performed, and the atlas has no search, sources,
+  story-navigation, or layer controls. This change connects reviewed content to
+  the existing workspace; it does not complete the exploration loop.
+* **Coda nodes need a window change.** The atlas opens on the primary 750–754
+  window. The five coda nodes are outside it and appear, labelled, only when the
+  window is widened; there is no story navigation to reach them yet.
+* **Undated and open-ended occurrences are rejected.** The atlas window is closed
+  at both ends, so the projection fails on a wholly undated event or an
+  `lower_only`/`upper_only` interval rather than guessing. RFD 4 AC3's
+  "undated events stay discoverable" behavior is not implemented.
+* **驩州 stays unplaced.** The chronicle places it on Tang's southern frontier
+  and the primary sources give its seat county, but no source in the chapter's
+  set identifies the site; the chase for an identification found only modern
+  statements that do not meet the chapter's sourcing bar, so the place keeps
+  `unknown` geometry and its event stays listable without a coordinate. A
+  gazetteer source is the path to placing it.
+* **Areas and routes are rejected.** The atlas domain draws points; a
+  `source_supported_area`, an itinerary, or a reconstructed route fails the
+  projection. The chapter asserts no route, so this is a future-content gap.
+* **Map labels crowd at the whole-globe view.** The renderer labels every event
+  with its reviewed caption, and the chapter's events cluster on the Inland Sea
+  and the Chinese coast, so labels overlap until the camera moves in. Cesium's
+  entity API in this version exposes no label collision detection, so decluttering
+  is a renderer decision rather than a content one.
+* **Tablet evidence is Chromium touch emulation, not a physical iPad.** Physical
+  device acceptance remains a separate gate under RFD 4.
+
+== Verification performed for this document
+
+* Ran the format check, `svelte-check`, the full Vitest suite, the static build
+  with its invariant, and the Playwright suites against the built artifact.
+* Inspected the artifact directly: the prerendered atlas shell names the reviewed
+  chapter, the chapter chunk carries the published chapter and a published event
+  id, and no synthetic fixture string appears in the built scripts.
+* Recorded the rendered DOM and accessibility facts from the artifact: the page
+  title and description name the chapter, `#atlas-notice` states the review
+  status, the coverage note, and the unplaced counts, the list holds the 24
+  in-window events, the globe exposes `role="application"` with the chapter in
+  its label, the follow control is disabled for a selection the map cannot show,
+  and the details surface states why that event has no position.
+* Inspected rendered states at desktop, tablet-emulated, and phone widths
+  (390 px and 320 px), including the event list, a selected event, an unplaced
+  event, and the widened coda window; the captures are in `.amp/in/artifacts/`.
+* Re-checked that the workspace mounts once, that no Cesium ion request is made,
+  and that the event list, details, and time controls stay apart at both phone
+  widths.
+* Re-checked the event list after an owner-reported regression on the static
+  portal: the panel is bounded above the time controls and the list is the scroll
+  container, so the events below the fold are reachable at desktop, tablet, and
+  phone widths. Measured at 1916×916, 1440×900, and 1024×768 (panel bottom
+  772/756/624 px against controls top 792/776/644 px; the list scrolled 1930–2078 px
+  to its last row), and on the deployed branch preview at 1916×916 and 390×844.
+  The new browser check pins the scroll container, the panel/controls separation,
+  the row being the topmost element at its own centre, and selection of the last
+  published event from the scrolled position; it fails against the pre-fix layout.

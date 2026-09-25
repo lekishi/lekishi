@@ -2,89 +2,392 @@
   "contract": "lekishi-historical-contract/v0",
   "document": "publication_set",
   "set_id": "lks:set:tang-mission-750-754-v1",
-  "title": "Tang mission 750–754 chapter, first editorial preparation",
-  "change_explanation": "Publishes the first prepared revision of every record in the Tang chapter fixture: 14 places, 12 actors, 29 events, 9 relationships, and 1 story, with the 9 cited sources pinned. The set records the preparing editor's self-review; the owner's editorial approval under RFD 2 is still pending and is not implied by this set.",
+  "title": "Tang mission 750–754 chapter, preparation",
+  "change_explanation": "Publishes the chapter's preparation as one set: 15 places, 12 actors, 29 events, 9 relationships, and 1 story, with the 11 cited sources pinned. The preparation history was flattened on the owner's instruction of 2026-09-24, so each record carries one revision: the earlier preparation revisions and their corrections are folded into it, and a record's change explanation still says where a review correction, an owner-accepted court-act placement, or an owner-accepted identification shaped the content. The set records the preparing editor's self-review; the owner decided that this content may be published (see rfd/0002/PUBLICATION_APPROVAL.adoc), but the owner's editorial approval under RFD 2 is still pending and is not implied by this set.",
   "members": [
-    {"record_id": "lks:place:naniwa", "revision_id": "lks:rev:naniwa-1", "revision_hash": "sha256:ccbadf8df1dc61f212f2327775e8622044488d84ca3dea4a982f80d29dadd324"},
-    {"record_id": "lks:place:dazaifu", "revision_id": "lks:rev:dazaifu-1", "revision_hash": "sha256:e4325c5421511d4cf00c46962b03508a9ffd33a1d3470397541afddd5914a115"},
-    {"record_id": "lks:place:yangzhou", "revision_id": "lks:rev:yangzhou-1", "revision_hash": "sha256:6eceb27800dbd80aa0f483c09753c062a860d2dac7789d854079099d4ed12bae"},
-    {"record_id": "lks:place:huangsipu", "revision_id": "lks:rev:huangsipu-1", "revision_hash": "sha256:5bea9d3531be329fa50e384d58e4e62f5747286d524457e4d2746241bf1d37e8"},
-    {"record_id": "lks:place:ajinawa", "revision_id": "lks:rev:ajinawa-1", "revision_hash": "sha256:b5a960828cf77454a5aff5dcfe037a77fa68daee31d7e157165f597b9dd974a0"},
-    {"record_id": "lks:place:tane", "revision_id": "lks:rev:tane-1", "revision_hash": "sha256:c80411859c4eaa978e8c465ba4e6b53772f7d1f8e5b04fe08b3fc3e301ee5a38"},
-    {"record_id": "lks:place:yaku", "revision_id": "lks:rev:yaku-1", "revision_hash": "sha256:7aeb126e863181127cf25a87a9cced2b6d8a5196327c5bf7992d0155abe5570a"},
-    {"record_id": "lks:place:akimeya", "revision_id": "lks:rev:akimeya-1", "revision_hash": "sha256:49c075fc963cd478494304448dd5c3df10e852961365d212cbd6c98e8a015387"},
-    {"record_id": "lks:place:ishigaki", "revision_id": "lks:rev:ishigaki-1", "revision_hash": "sha256:4bbfed4aee865bfe847e06a07dfd0d3059ed0af6d6373da15c6db9912bb6f15b"},
-    {"record_id": "lks:place:murozaki", "revision_id": "lks:rev:murozaki-1", "revision_hash": "sha256:0cdf293282fc27e7ca8acf3d808f645b4f47d14c8154a0087d32d1eb76f68d24"},
-    {"record_id": "lks:place:huanzhou", "revision_id": "lks:rev:huanzhou-1", "revision_hash": "sha256:55f29fc9fd1e96787e2cb7e379e9c0b494897cccd8d4e2b3f3614b305690bc88"},
-    {"record_id": "lks:place:hanyuan-hall", "revision_id": "lks:rev:hanyuan-hall-1", "revision_hash": "sha256:122f52a10506c109cf51ab096935673071be8e8eedae4a2796a60a586945892a"},
-    {"record_id": "lks:place:todaiji", "revision_id": "lks:rev:todaiji-1", "revision_hash": "sha256:0bb509b2342332660aa729ef88a32e2a2a07c4f8c56a1ec83885dda15005a996"},
-    {"record_id": "lks:place:toshodaiji", "revision_id": "lks:rev:toshodaiji-1", "revision_hash": "sha256:93e7d4abe4e148282fa85feef9fe4dc565bef8c073edeeac7d01ea0362feb7c1"},
-    {"record_id": "lks:actor:fujiwara-no-kiyokawa", "revision_id": "lks:rev:kiyokawa-1", "revision_hash": "sha256:ebda18fb2e8a4eeb09c4f03597641fb76bbcd05d68f7541974c62e1f6b52074c"},
-    {"record_id": "lks:actor:otomo-no-komaro", "revision_id": "lks:rev:komaro-1", "revision_hash": "sha256:e7fe604e881730cea814bd32857ce6b222d10bf2ff7eb72762b8c1748a53de9e"},
-    {"record_id": "lks:actor:kibi-no-makibi", "revision_id": "lks:rev:makibi-1", "revision_hash": "sha256:0afe76e9e9b3929d6b53839a575ad95a0a1f9d820839f6c5d1a03889c1383166"},
-    {"record_id": "lks:actor:fujiwara-student", "revision_id": "lks:rev:fujiwara-student-1", "revision_hash": "sha256:afdccb84364f834f981455ffaf7c84eb97c0b6d682e1313bebec77c9a512062d"},
-    {"record_id": "lks:actor:abe-no-nakamaro", "revision_id": "lks:rev:nakamaro-1", "revision_hash": "sha256:fc6c67979c87fa6886f61d40c020901fa2198a0255ee4d572dafed4b1083744a"},
-    {"record_id": "lks:actor:fuse-no-hitonushi", "revision_id": "lks:rev:hitonushi-1", "revision_hash": "sha256:3c07327103f6cf1c5195b355db52c5de7ae19d9fdb1be8a19bcecdcff8d3c256"},
-    {"record_id": "lks:actor:jianzhen", "revision_id": "lks:rev:jianzhen-1", "revision_hash": "sha256:cfaee8f48edcbd7946ca3bdc8e52b28d87ca151858c69eb38c8fc972f5cddcf7"},
-    {"record_id": "lks:actor:fajin", "revision_id": "lks:rev:fajin-1", "revision_hash": "sha256:77bcf49890142913fbbac4c35389844e41b57a78bbef662e119c74e7bb52346e"},
-    {"record_id": "lks:actor:wu-huaishi", "revision_id": "lks:rev:huaishi-1", "revision_hash": "sha256:b03af50041ebf8767f315a34e8c71eb98be0b2396d8f7455e00e86545b935b40"},
-    {"record_id": "lks:actor:koken-tenno", "revision_id": "lks:rev:koken-1", "revision_hash": "sha256:ef5acdcbad97c8648630015c77ddbf2f2b48baf9eca40b17c75c4544b8d37679"},
-    {"record_id": "lks:actor:japan-state", "revision_id": "lks:rev:japan-state-1", "revision_hash": "sha256:7ee543131aacaced20a3e429938a5df15683320d255c6b7cfd9b2c818dd990fd"},
-    {"record_id": "lks:actor:tang-dynasty", "revision_id": "lks:rev:tang-dynasty-1", "revision_hash": "sha256:9e750ff6b1cf9d3191433606f032101a83d660c3a84673d321338cbe6a1c5bbb"},
-    {"record_id": "lks:event:appointment-750", "revision_id": "lks:rev:appointment-750-1", "revision_hash": "sha256:901940315c881d9d0feea2353376e173a57fe30771c749fce0ca3384512131ac"},
-    {"record_id": "lks:event:kibi-appointment-751", "revision_id": "lks:rev:kibi-appointment-751-1", "revision_hash": "sha256:639c4e69193874d1974517e1cc39102375bd3adb832c0ec3656c7ff707c6c2a4"},
-    {"record_id": "lks:event:court-audience-752", "revision_id": "lks:rev:court-audience-752-1", "revision_hash": "sha256:9f2ec8e1c2ed48a2fc809f383d619850374158dda33ede40976aca98c980059e"},
-    {"record_id": "lks:event:sekito-752", "revision_id": "lks:rev:sekito-752-1", "revision_hash": "sha256:087b9a966911e522a5a5f2eb5f0445b4bd6de010fd1b2276ce68327b6bdb489f"},
-    {"record_id": "lks:event:tang-new-year-audience-753", "revision_id": "lks:rev:tang-new-year-audience-753-1", "revision_hash": "sha256:22b1676279d2426fa579dc9ba781849a38858f83fb7461412bb6de072d34595e"},
-    {"record_id": "lks:event:yangzhou-invitation-753", "revision_id": "lks:rev:yangzhou-invitation-753-1", "revision_hash": "sha256:bcc513d72e49e16c5a1dddabd3eeff5c4a764c13515b052055a95c16dabf70d0"},
-    {"record_id": "lks:event:longxing-departure-753", "revision_id": "lks:rev:longxing-departure-753-1", "revision_hash": "sha256:2692b87a93c29cfb5fa8a69dd7ae298fa110e8095b72359f225135ce4e043b07"},
-    {"record_id": "lks:event:return-voyage-753", "revision_id": "lks:rev:return-voyage-753-1", "revision_hash": "sha256:4ab7250008e000110e3d110bcb0c523b59797662fd3147f4806689acf1ab2250"},
-    {"record_id": "lks:event:ajinawa-arrival-753", "revision_id": "lks:rev:ajinawa-arrival-753-1", "revision_hash": "sha256:08ad9161cd1d916350640b91a7e90a4f8341e17b77074f9241e0fbe518a4b741"},
-    {"record_id": "lks:event:ships-separate-753", "revision_id": "lks:rev:ships-separate-753-1", "revision_hash": "sha256:1c70a0f2210fb1cad8473c9c874f7529b485a7ff7bd45f33f7c87a00e24cccb9"},
-    {"record_id": "lks:event:yaku-arrival-753", "revision_id": "lks:rev:yaku-arrival-753-1", "revision_hash": "sha256:df608abdb6a49f7fc3e320ee4248f7742fc58aabbfed8723c0f63782c96f8a5c"},
-    {"record_id": "lks:event:kibi-yaku-arrival-753", "revision_id": "lks:rev:kibi-yaku-arrival-753-1", "revision_hash": "sha256:5f6b359a15fb18fa51eed8560de5e4e3440f97969d74b23526d5ad89b29ea367"},
-    {"record_id": "lks:event:yaku-departure-753", "revision_id": "lks:rev:yaku-departure-753-1", "revision_hash": "sha256:25c2626f6cb7951e256aa62257b07ae8cf17c1ecb82f9430a6fea856b1db18d0"},
-    {"record_id": "lks:event:akimeya-landfall-753", "revision_id": "lks:rev:akimeya-landfall-753-1", "revision_hash": "sha256:3444a3135c042ccaa732d0f2d76d55d21ecab63bc7edc7565084219661d42be6"},
-    {"record_id": "lks:event:dazaifu-entry-753", "revision_id": "lks:rev:dazaifu-entry-753-1", "revision_hash": "sha256:d3cf0dbc2bd58388d9ae50fd6cb7983d5ea8a1d2eb9517e9afe1a09c60e9dc7d"},
-    {"record_id": "lks:event:kiyokawa-drift-753", "revision_id": "lks:rev:kiyokawa-drift-753-1", "revision_hash": "sha256:6e576d2814b075ea78e574436bad9a7c13b61d5b34ccaae31fa81f06ccbbf2eb"},
-    {"record_id": "lks:event:kibi-drift-753", "revision_id": "lks:rev:kibi-drift-753-1", "revision_hash": "sha256:fea238c3725f13429bd3d4c8be36192b2ddfea414d44978e10f7002175a03680"},
-    {"record_id": "lks:event:return-report-754", "revision_id": "lks:rev:return-report-754-1", "revision_hash": "sha256:247d2d33fb1984b9e104ce9b7bcec54b4cb2294e82e2e82d9c845dd42490b34f"},
-    {"record_id": "lks:event:audience-report-754", "revision_id": "lks:rev:audience-report-754-1", "revision_hash": "sha256:b6f75bb5402f1d1367963e05b8b76f95a50aed7d23b46e69185c9a972063b6a3"},
-    {"record_id": "lks:event:rewards-754", "revision_id": "lks:rev:rewards-754-1", "revision_hash": "sha256:3104f5c930fd6c6f74868da4501dedce9a191e3c1a9c086a01c205c478fae6b2"},
-    {"record_id": "lks:event:fourth-ship-754", "revision_id": "lks:rev:fourth-ship-754-1", "revision_hash": "sha256:e02c416b05e09b804caf026ec3556c77a313e33c8dd574cb8768356038d80adf"},
-    {"record_id": "lks:event:naniwa-754", "revision_id": "lks:rev:naniwa-754-1", "revision_hash": "sha256:716410da766b7e37f0f86a4ddff9b974161dee77402e30f97760c157a1528a4b"},
-    {"record_id": "lks:event:todaiji-installation-754", "revision_id": "lks:rev:todaiji-installation-754-1", "revision_hash": "sha256:dab9f093a66777831459998d094c4bda1cd5017e9295ca88d72598760d8197c0"},
-    {"record_id": "lks:event:ordination-754", "revision_id": "lks:rev:ordination-754-1", "revision_hash": "sha256:201774af758d4b2f7ee1c1aaf0e54990633d473f459910ff01af479d317ebd9c"},
-    {"record_id": "lks:event:daikasho-title-758", "revision_id": "lks:rev:daikasho-title-758-1", "revision_hash": "sha256:0ce330dca247b0073a35fa5f3a19539404987a5419a9daff0f071d43bc80b4e5"},
-    {"record_id": "lks:event:toshodaiji-founding-759", "revision_id": "lks:rev:toshodaiji-founding-759-1", "revision_hash": "sha256:685cc51b1aef4a1c486650c5df1618dab5d54a79167016f0b5798f62572b53c7"},
-    {"record_id": "lks:event:jianzhen-death-763", "revision_id": "lks:rev:jianzhen-death-763-1", "revision_hash": "sha256:887f1d407d85b543094e6e2045d54ed5fab73b93f31a3335f23f5c886382829c"},
-    {"record_id": "lks:event:kiyokawa-honours-779", "revision_id": "lks:rev:kiyokawa-honours-779-1", "revision_hash": "sha256:543c95c5ce640d11faa5abce444b9c5a20b1c664c7c03b234bb8b97e922f620a"},
-    {"record_id": "lks:event:nakamaro-death-779", "revision_id": "lks:rev:nakamaro-death-779-1", "revision_hash": "sha256:3692fb8f380a6e93141e1d0657482e32b1c1d35d5b39ded8ac8b88ff0cc039b3"},
-    {"record_id": "lks:relationship:japan-tang-embassy", "revision_id": "lks:rev:japan-tang-embassy-1", "revision_hash": "sha256:baf084a100e5d4b48e6318f0939b0bfb47dd951337ffb57d4724ccef8c57ba17"},
-    {"record_id": "lks:relationship:jianzhen-travel", "revision_id": "lks:rev:jianzhen-travel-1", "revision_hash": "sha256:39ed46a712d824533034928432b3a9311873036d75ed732ec74b7240f92e26a6"},
-    {"record_id": "lks:relationship:kiyokawa-jianzhen-contact", "revision_id": "lks:rev:kiyokawa-jianzhen-contact-1", "revision_hash": "sha256:a4473399f4a86c1ab8ca68cfc84f5a20e68fb50821e2204ff6a9e909e7bc9690"},
-    {"record_id": "lks:relationship:komaro-tang-contact", "revision_id": "lks:rev:komaro-tang-contact-1", "revision_hash": "sha256:07ac27dfd7f4f5bb96bba5269b36915b93df79373884847c4302620c69dd32a2"},
-    {"record_id": "lks:relationship:jianzhen-transmission", "revision_id": "lks:rev:jianzhen-transmission-1", "revision_hash": "sha256:223b243f9e1c27603c8080a1e6faec2339965f987f531569551275ee87d74d91"},
-    {"record_id": "lks:relationship:toshodaiji-foundation", "revision_id": "lks:rev:toshodaiji-foundation-1", "revision_hash": "sha256:213b9419c1023de354d4a21a003e6ece36b53309effbb7978aa9e7d30f694581"},
-    {"record_id": "lks:relationship:precept-study-order", "revision_id": "lks:rev:precept-study-order-1", "revision_hash": "sha256:e7e113c73c650191d200dada8ef16058f67650f8f92603debed1d7d83d7b3ab0"},
-    {"record_id": "lks:relationship:kiyokawa-commemoration", "revision_id": "lks:rev:kiyokawa-commemoration-1", "revision_hash": "sha256:72bf232748be68e0d8c69d7d3ff4cc3b90f9223a822e404e6b574a9dc5353c67"},
-    {"record_id": "lks:relationship:nakamaro-commemoration", "revision_id": "lks:rev:nakamaro-commemoration-1", "revision_hash": "sha256:82ece92dee1dd21b7e5dc13957a07661b0baf14a36ecf04c38151ef51cfa2e34"},
-    {"record_id": "lks:story:tang-mission-750-779", "revision_id": "lks:rev:tang-mission-story-1", "revision_hash": "sha256:770b5f3bf41dc2970a76d7c02077aac63c330319ce3afa4c7861ee1829d6fd82"}
+    {
+      "record_id": "lks:actor:abe-no-nakamaro",
+      "revision_id": "lks:rev:nakamaro-1",
+      "revision_hash": "sha256:eac16346be2d04a54d77e3e7d73a46384f12b32d11dd5ee258f565dd9a9a6f7a"
+    },
+    {
+      "record_id": "lks:actor:fajin",
+      "revision_id": "lks:rev:fajin-1",
+      "revision_hash": "sha256:1b6a4c44c5bb6dac8325dd3d173faff6cd8e72224a2512a87c730b47d65be400"
+    },
+    {
+      "record_id": "lks:actor:fujiwara-no-kiyokawa",
+      "revision_id": "lks:rev:kiyokawa-1",
+      "revision_hash": "sha256:ff17e71d105436de97576c2f5e4395ce6c97ed09786b1da0ebe07a5f94072600"
+    },
+    {
+      "record_id": "lks:actor:fujiwara-student",
+      "revision_id": "lks:rev:fujiwara-student-1",
+      "revision_hash": "sha256:8d099ca880b4f65642be17ac1349b0f0214dd210cdb321430891dc4094bbfcc2"
+    },
+    {
+      "record_id": "lks:actor:fuse-no-hitonushi",
+      "revision_id": "lks:rev:hitonushi-1",
+      "revision_hash": "sha256:0dcf46c2ca32a28c7b2e710726d2bf7cce614a4d5b145ed6e6aab06fc83c9a12"
+    },
+    {
+      "record_id": "lks:actor:japan-state",
+      "revision_id": "lks:rev:japan-state-1",
+      "revision_hash": "sha256:b82cef123e3d0dcd704fdf509270df1f145166eb232dfc932b07f43d2c68a013"
+    },
+    {
+      "record_id": "lks:actor:jianzhen",
+      "revision_id": "lks:rev:jianzhen-1",
+      "revision_hash": "sha256:e6ff5dcf73980372e6fcefa068a625b63915e066ace3238db608e1f11572a5b7"
+    },
+    {
+      "record_id": "lks:actor:kibi-no-makibi",
+      "revision_id": "lks:rev:makibi-1",
+      "revision_hash": "sha256:34327277b04f33534fe932fbd1e3bfc032682a84e4e389bb0ae1838df50c82e5"
+    },
+    {
+      "record_id": "lks:actor:koken-tenno",
+      "revision_id": "lks:rev:koken-1",
+      "revision_hash": "sha256:24082a3ea857ba052d35d6fd4fab841e17bd3789f27f5914d959aa6bb7311212"
+    },
+    {
+      "record_id": "lks:actor:otomo-no-komaro",
+      "revision_id": "lks:rev:komaro-1",
+      "revision_hash": "sha256:3af643f8018cc570a0fc5087253da34b81d4a8d41fc06e95bf0c4a2c64448dfe"
+    },
+    {
+      "record_id": "lks:actor:tang-dynasty",
+      "revision_id": "lks:rev:tang-dynasty-1",
+      "revision_hash": "sha256:8064fd80a11599d0fd0eed6ca7d60c1e0a6d60c0820b91da89de2bf588cf25da"
+    },
+    {
+      "record_id": "lks:actor:wu-huaishi",
+      "revision_id": "lks:rev:huaishi-1",
+      "revision_hash": "sha256:5b65be0802103d9730f653e58b64310988c971cede21888946fe075bd4a18a46"
+    },
+    {
+      "record_id": "lks:event:ajinawa-arrival-753",
+      "revision_id": "lks:rev:ajinawa-arrival-753-1",
+      "revision_hash": "sha256:f2a6ce3d702fd7a7680c0f5499dbc23f1c716aea36abe10a47e8756b5030f391"
+    },
+    {
+      "record_id": "lks:event:akimeya-landfall-753",
+      "revision_id": "lks:rev:akimeya-landfall-753-1",
+      "revision_hash": "sha256:b30d8f53ceef34716f50a5109ac6a3d324695a42a8eecf98c3a1991063d5a776"
+    },
+    {
+      "record_id": "lks:event:appointment-750",
+      "revision_id": "lks:rev:appointment-750-1",
+      "revision_hash": "sha256:ff4b4525f8a09991d6e1d217c44715a7851c4f6ee1bc0b23b6fc1a1c57fc43cc"
+    },
+    {
+      "record_id": "lks:event:audience-report-754",
+      "revision_id": "lks:rev:audience-report-754-1",
+      "revision_hash": "sha256:fecc7bf7777ca00ea8a28cbe295a4f556b90460df64369df6329a7b84d168cae"
+    },
+    {
+      "record_id": "lks:event:court-audience-752",
+      "revision_id": "lks:rev:court-audience-752-1",
+      "revision_hash": "sha256:05f22a1b54ce0e6b7e3324418955fc9237af2de659affe6e508edbb4ce96aba5"
+    },
+    {
+      "record_id": "lks:event:daikasho-title-758",
+      "revision_id": "lks:rev:daikasho-title-758-1",
+      "revision_hash": "sha256:fb173ab9e4cbc5347e6ac85638ca9fa7277b576b7d85e2d9fdfdeca6d656f834"
+    },
+    {
+      "record_id": "lks:event:dazaifu-entry-753",
+      "revision_id": "lks:rev:dazaifu-entry-753-1",
+      "revision_hash": "sha256:fccac33efcbaafedc54199e625d85671fa3d1ed1d5f02f81060321f76f9cfefd"
+    },
+    {
+      "record_id": "lks:event:fourth-ship-754",
+      "revision_id": "lks:rev:fourth-ship-754-1",
+      "revision_hash": "sha256:198fc94cf3fde9a51d42aa66fc92a07fc4251f8ab9b80eda2f0f8923abc2a5e9"
+    },
+    {
+      "record_id": "lks:event:jianzhen-death-763",
+      "revision_id": "lks:rev:jianzhen-death-763-1",
+      "revision_hash": "sha256:30990fd41fd527153656a8b2704814bd6a3473ab59913a031d2f464c4b3ade2d"
+    },
+    {
+      "record_id": "lks:event:kibi-appointment-751",
+      "revision_id": "lks:rev:kibi-appointment-751-1",
+      "revision_hash": "sha256:9235ed04c74cfbc350dbf2490e48ffa0e53f5941186382eb8599277d08dbe39d"
+    },
+    {
+      "record_id": "lks:event:kibi-drift-753",
+      "revision_id": "lks:rev:kibi-drift-753-1",
+      "revision_hash": "sha256:6621af01cd5b1412d30ba03631ff866d0af12afe551be6659922ec1bc75cd490"
+    },
+    {
+      "record_id": "lks:event:kibi-yaku-arrival-753",
+      "revision_id": "lks:rev:kibi-yaku-arrival-753-1",
+      "revision_hash": "sha256:23c4e65d28b0e950e116d17f0938f8b8d1dce8dfb4d6937ac6481d5c7d77ad44"
+    },
+    {
+      "record_id": "lks:event:kiyokawa-drift-753",
+      "revision_id": "lks:rev:kiyokawa-drift-753-1",
+      "revision_hash": "sha256:2e3d1d14b138a46ed2eca5ba294c5166aa94ec2ead8c806a62c7c0e72454a4bd"
+    },
+    {
+      "record_id": "lks:event:kiyokawa-honours-779",
+      "revision_id": "lks:rev:kiyokawa-honours-779-1",
+      "revision_hash": "sha256:923f0f56d853b0fb4c21f5e15fa306f3cd6ea72df6e08716fc1729da47cca219"
+    },
+    {
+      "record_id": "lks:event:longxing-departure-753",
+      "revision_id": "lks:rev:longxing-departure-753-1",
+      "revision_hash": "sha256:ba795a3d3a712586c6992a50e95a0d00b4dfc9625c2ed9982f2335ec59326697"
+    },
+    {
+      "record_id": "lks:event:nakamaro-death-779",
+      "revision_id": "lks:rev:nakamaro-death-779-1",
+      "revision_hash": "sha256:de2727f00ad7d18b058500296b5229f00e6d4300a7b21247f0f93846c533915d"
+    },
+    {
+      "record_id": "lks:event:naniwa-754",
+      "revision_id": "lks:rev:naniwa-754-1",
+      "revision_hash": "sha256:c482a7f877a87a4653d7dd0590ef44513a2ef5deffdab8a58043dac44e559ac2"
+    },
+    {
+      "record_id": "lks:event:ordination-754",
+      "revision_id": "lks:rev:ordination-754-1",
+      "revision_hash": "sha256:93dcb442e2290c440dde483275cd07a14ea4bfaa8afbefd3950ba4534aa20384"
+    },
+    {
+      "record_id": "lks:event:return-report-754",
+      "revision_id": "lks:rev:return-report-754-1",
+      "revision_hash": "sha256:f2f69f91a6f2ef51fd8f923c17292eedabd27fd539355c2d40e647fb5611d894"
+    },
+    {
+      "record_id": "lks:event:return-voyage-753",
+      "revision_id": "lks:rev:return-voyage-753-1",
+      "revision_hash": "sha256:f75722ed0e839905ddc74f41c367674eb8d37d2e6bcd9173e9f3ec44eab30a38"
+    },
+    {
+      "record_id": "lks:event:rewards-754",
+      "revision_id": "lks:rev:rewards-754-1",
+      "revision_hash": "sha256:833feb23c2c4634c6ce65e2fa0cd71eb990bad8c8ebf5a4c510278a6db7deff8"
+    },
+    {
+      "record_id": "lks:event:sekito-752",
+      "revision_id": "lks:rev:sekito-752-1",
+      "revision_hash": "sha256:032415d0f74eff603f98dd8fca21b0f7204a7be7fff02e87948246b0f88ca36a"
+    },
+    {
+      "record_id": "lks:event:ships-separate-753",
+      "revision_id": "lks:rev:ships-separate-753-1",
+      "revision_hash": "sha256:785add8968ee40846ab6b4defc65ff000077f59f75b6e7a0a173a1c102ee902c"
+    },
+    {
+      "record_id": "lks:event:tang-new-year-audience-753",
+      "revision_id": "lks:rev:tang-new-year-audience-753-1",
+      "revision_hash": "sha256:d9fe3aa7461532b10702e908d7a75ae1a12b37e08fa6967b8fefb4aadeb7fc51"
+    },
+    {
+      "record_id": "lks:event:todaiji-installation-754",
+      "revision_id": "lks:rev:todaiji-installation-754-1",
+      "revision_hash": "sha256:b666f839c0ac70fac1ebef23f5ddaa578c0e504f6eb91b086e46f0b89fe2f7d7"
+    },
+    {
+      "record_id": "lks:event:toshodaiji-founding-759",
+      "revision_id": "lks:rev:toshodaiji-founding-759-1",
+      "revision_hash": "sha256:4dbe43e7e00290ec3d059b4d553248421a7183e6254ee100a2c5324a0079ab51"
+    },
+    {
+      "record_id": "lks:event:yaku-arrival-753",
+      "revision_id": "lks:rev:yaku-arrival-753-1",
+      "revision_hash": "sha256:38ff18bd3e25f1d41e1e9aad8bcd1c9c1500f1edd62de67ba2c1fbb54de01f16"
+    },
+    {
+      "record_id": "lks:event:yaku-departure-753",
+      "revision_id": "lks:rev:yaku-departure-753-1",
+      "revision_hash": "sha256:3ca997867573ac88304e5c72cbd6a7f4699f12d1ef093705b81b133d44f4d985"
+    },
+    {
+      "record_id": "lks:event:yangzhou-invitation-753",
+      "revision_id": "lks:rev:yangzhou-invitation-753-1",
+      "revision_hash": "sha256:1f33edc2d9815d1828559033b8d09d2e22ecc2097dd28d5e339a5b82f4b5016b"
+    },
+    {
+      "record_id": "lks:place:ajinawa",
+      "revision_id": "lks:rev:ajinawa-1",
+      "revision_hash": "sha256:02bec300b3beb0c9594aad5752e6a5431fa2f208ba2d99cb8993a5e1fa660126"
+    },
+    {
+      "record_id": "lks:place:akimeya",
+      "revision_id": "lks:rev:akimeya-1",
+      "revision_hash": "sha256:b4cb8f3cfa3933ef71c98b1e7ccdb203a3a04fa94c653bdfd96c7eba21c8dc49"
+    },
+    {
+      "record_id": "lks:place:dazaifu",
+      "revision_id": "lks:rev:dazaifu-1",
+      "revision_hash": "sha256:83a2aaef48eb0e7dfb9b8a23bd25f133a1a1f357aa76d863420b119dceb3a8c0"
+    },
+    {
+      "record_id": "lks:place:hanyuan-hall",
+      "revision_id": "lks:rev:hanyuan-hall-1",
+      "revision_hash": "sha256:76a08e77a28dbf8faae7d876f3ff15a25262f9a7183b9a297483130b0e28c758"
+    },
+    {
+      "record_id": "lks:place:heijo-palace",
+      "revision_id": "lks:rev:heijo-palace-1",
+      "revision_hash": "sha256:17731a893404a273e57843df7e9cee524e61b997525057a9a2e2af90d31233a8"
+    },
+    {
+      "record_id": "lks:place:huangsipu",
+      "revision_id": "lks:rev:huangsipu-1",
+      "revision_hash": "sha256:b4726801c9eedb4df1ce3b88e55de77674d982670f32636234bb87f033f36efc"
+    },
+    {
+      "record_id": "lks:place:huanzhou",
+      "revision_id": "lks:rev:huanzhou-1",
+      "revision_hash": "sha256:1ef03df2edd8666bd8251287d7e911249a5b9bdb960f57047d3d51afa3397217"
+    },
+    {
+      "record_id": "lks:place:ishigaki",
+      "revision_id": "lks:rev:ishigaki-1",
+      "revision_hash": "sha256:3a264cbfc6884aa32de5f27e1508d5df5a365d0d0d252f0c9576e0a49e5bbccf"
+    },
+    {
+      "record_id": "lks:place:murozaki",
+      "revision_id": "lks:rev:murozaki-1",
+      "revision_hash": "sha256:7dcd1beff46b8ad01999c9c4f23bda2af5a3dde98671f8a0e948054217e33abf"
+    },
+    {
+      "record_id": "lks:place:naniwa",
+      "revision_id": "lks:rev:naniwa-1",
+      "revision_hash": "sha256:d1ab7ae8d0ca5abb3b2ed7685691b6127aecd24b61949eb72c7b2d6c3306c315"
+    },
+    {
+      "record_id": "lks:place:tane",
+      "revision_id": "lks:rev:tane-1",
+      "revision_hash": "sha256:8900ae66fe5c0bf2f66422b49b19332f0f5f222d213dd4d63f6a24613b043336"
+    },
+    {
+      "record_id": "lks:place:todaiji",
+      "revision_id": "lks:rev:todaiji-1",
+      "revision_hash": "sha256:bd55b0601edd614ffef15afb3c50d4599c90ab4a48264767ddc96cbac3e89f6c"
+    },
+    {
+      "record_id": "lks:place:toshodaiji",
+      "revision_id": "lks:rev:toshodaiji-1",
+      "revision_hash": "sha256:1cce5ae1416b22df9c94bb1693f0dcfdb6890425d3ec039577839296ef1d5396"
+    },
+    {
+      "record_id": "lks:place:yaku",
+      "revision_id": "lks:rev:yaku-1",
+      "revision_hash": "sha256:f7bd0084d05e643a77e8b259d8c1f35b93710f8c3b01a7f4217f8be5139deaa7"
+    },
+    {
+      "record_id": "lks:place:yangzhou",
+      "revision_id": "lks:rev:yangzhou-1",
+      "revision_hash": "sha256:1f767320048c3313b6f891574744218152dd518a8bf5c520ec33ae030bcd2515"
+    },
+    {
+      "record_id": "lks:relationship:japan-tang-embassy",
+      "revision_id": "lks:rev:japan-tang-embassy-1",
+      "revision_hash": "sha256:411e6963951350ca56e0c860fdafc27130981c3c8395750e1b2bd7c2276157c1"
+    },
+    {
+      "record_id": "lks:relationship:jianzhen-transmission",
+      "revision_id": "lks:rev:jianzhen-transmission-1",
+      "revision_hash": "sha256:5461670c84605c204c99dd1b135e153a7c8c1226a34eee44d215b1f150b7e251"
+    },
+    {
+      "record_id": "lks:relationship:jianzhen-travel",
+      "revision_id": "lks:rev:jianzhen-travel-1",
+      "revision_hash": "sha256:d73eea6ecbcc7c2c12684f09809ee913259ee9d804798f343a8f0e35dbd5bca7"
+    },
+    {
+      "record_id": "lks:relationship:kiyokawa-commemoration",
+      "revision_id": "lks:rev:kiyokawa-commemoration-1",
+      "revision_hash": "sha256:052b789cc5aec7c58e352c1b6149b66c064cce7cbe439e72d6bb8466492fa63a"
+    },
+    {
+      "record_id": "lks:relationship:kiyokawa-jianzhen-contact",
+      "revision_id": "lks:rev:kiyokawa-jianzhen-contact-1",
+      "revision_hash": "sha256:e7eaa60fdef0a4d8c0b69693c1325776f2f52f2d6f82b77350f630836906c28a"
+    },
+    {
+      "record_id": "lks:relationship:komaro-tang-contact",
+      "revision_id": "lks:rev:komaro-tang-contact-1",
+      "revision_hash": "sha256:ac379db24cc76f3df94ac20a0b3fe51a8f16e42a9396dbb888c3f017c3030a1b"
+    },
+    {
+      "record_id": "lks:relationship:nakamaro-commemoration",
+      "revision_id": "lks:rev:nakamaro-commemoration-1",
+      "revision_hash": "sha256:f8e3d83ffcf31bfcfe6c43b33550977d7260341705d1f908bef56cc20ec2f61c"
+    },
+    {
+      "record_id": "lks:relationship:precept-study-order",
+      "revision_id": "lks:rev:precept-study-order-1",
+      "revision_hash": "sha256:dbcfdd1c95bf024a55410318334a4dc72debfc727a3cee0cbb0d94ec672243a1"
+    },
+    {
+      "record_id": "lks:relationship:toshodaiji-foundation",
+      "revision_id": "lks:rev:toshodaiji-foundation-1",
+      "revision_hash": "sha256:a1a56270970187b651582790e9ef8c196449312730f1d229c8c9b7a2ca861f96"
+    },
+    {
+      "record_id": "lks:story:tang-mission-750-779",
+      "revision_id": "lks:rev:tang-mission-story-1",
+      "revision_hash": "sha256:cc7c9d0948228edfcc6a183a19b25eb61fa9a7b781d981bdca37e183378051f3"
+    }
   ],
   "sources": [
-    {"source_id": "lks:source:shoku-nihongi", "source_hash": "sha256:e263132f5953555ac8cfefaed3a20047dbe2675a3cb043e72b96ab8be1b7f89d"},
-    {"source_id": "lks:source:toseiden", "source_hash": "sha256:f21eecdcc1405410e364d34ac509180e4ce6e51541535fe734e70b34e213a5dc"},
-    {"source_id": "lks:source:jiu-tangshu", "source_hash": "sha256:b02e0b9bb6bbf60dfbcdcc8fbf130e2dee0818d51a0c8281119a898ab8108196"},
-    {"source_id": "lks:source:xin-tangshu", "source_hash": "sha256:8a900104e3397bfc7098d8610f812c2d76ee8e892133bf761cfae4d958b110bc"},
-    {"source_id": "lks:source:chimei-taikei-ata", "source_hash": "sha256:bc6f40711fc771c6bd69865a3414f2e8b07b9ac41ca7a768d84a27faa9719484"},
-    {"source_id": "lks:source:okinawa-daihyakka-ajinawa", "source_hash": "sha256:9a1a4778786333f5d2af7cd6592c96a3886525810dd86a4b7d8c08642851e70f"},
-    {"source_id": "lks:source:yamakawa-nihonshi-tane", "source_hash": "sha256:cebeab68f061b6a5168e208fbc4210cba3164cbf9ad244fd61278616dbd65960"},
-    {"source_id": "lks:source:ryukyu-university-tokara", "source_hash": "sha256:8fde307becb3df9b777351b9bece7bd9da8076c966e6c6e8b90b45da76adbb0b"},
-    {"source_id": "lks:source:wikidata", "source_hash": "sha256:f809e6af1b93dc1610af78d2e96d927d490335cc6089f36702e6f2b1c913761a"}
+    {
+      "source_id": "lks:source:chimei-taikei-ata",
+      "source_hash": "sha256:bc6f40711fc771c6bd69865a3414f2e8b07b9ac41ca7a768d84a27faa9719484"
+    },
+    {
+      "source_id": "lks:source:hantoubunka-ishigaki",
+      "source_hash": "sha256:364f5c6d245206f5234eb577f224809f20eb1dc60ce3093b0b67b8df7f3f4f4a"
+    },
+    {
+      "source_id": "lks:source:jiu-tangshu",
+      "source_hash": "sha256:b02e0b9bb6bbf60dfbcdcc8fbf130e2dee0818d51a0c8281119a898ab8108196"
+    },
+    {
+      "source_id": "lks:source:okinawa-daihyakka-ajinawa",
+      "source_hash": "sha256:9a1a4778786333f5d2af7cd6592c96a3886525810dd86a4b7d8c08642851e70f"
+    },
+    {
+      "source_id": "lks:source:ryukyu-university-tokara",
+      "source_hash": "sha256:8fde307becb3df9b777351b9bece7bd9da8076c966e6c6e8b90b45da76adbb0b"
+    },
+    {
+      "source_id": "lks:source:shoku-nihongi",
+      "source_hash": "sha256:e263132f5953555ac8cfefaed3a20047dbe2675a3cb043e72b96ab8be1b7f89d"
+    },
+    {
+      "source_id": "lks:source:toseiden",
+      "source_hash": "sha256:f21eecdcc1405410e364d34ac509180e4ce6e51541535fe734e70b34e213a5dc"
+    },
+    {
+      "source_id": "lks:source:wakayama-kibi-drift",
+      "source_hash": "sha256:38468d7aeeae12083a8849b0ac3ed24f0f142655de2fc8dd6320722b41fe0559"
+    },
+    {
+      "source_id": "lks:source:wikidata",
+      "source_hash": "sha256:f809e6af1b93dc1610af78d2e96d927d490335cc6089f36702e6f2b1c913761a"
+    },
+    {
+      "source_id": "lks:source:xin-tangshu",
+      "source_hash": "sha256:8a900104e3397bfc7098d8610f812c2d76ee8e892133bf761cfae4d958b110bc"
+    },
+    {
+      "source_id": "lks:source:yamakawa-nihonshi-tane",
+      "source_hash": "sha256:cebeab68f061b6a5168e208fbc4210cba3164cbf9ad244fd61278616dbd65960"
+    }
   ],
   "review": {
-    "reviewed_at": "2026-09-24T07:00:00Z",
-    "reviewer": {"name": "Lekishi editorial preparation", "role": "preparing editor (self-review)"},
+    "reviewed_at": "2026-09-24T23:40:00Z",
+    "reviewer": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (self-review)"
+    },
     "independence": "self_review",
     "checklist": {
       "source_support": true,
@@ -93,10 +396,13 @@
       "attestation_vs_interpretation": true,
       "reuse_rights": true
     },
-    "notes": "Self-review of machine-assisted editorial preparation, recorded explicitly. This is not owner review, not independent review, and not specialist review: the owner's editorial approval under RFD 2 is still pending, so RFD 4 AC2 is not satisfied by this set. Locators were re-checked against the cited digital transcriptions on 2026-09-24; the transcriptions are unproofread and must be re-checked against critical editions before content freeze."
+    "notes": "Self-review of the flattened preparation, recorded explicitly. The corrections the earlier preparation cycles produced were folded into the single revision of each record. This is not owner review, not independent review, and not specialist review: the owner decided that this content may be published, but the owner's editorial approval under RFD 2 is still pending, so RFD 4 AC2 is not satisfied by this set, and the specialist reviews the feasibility report identifies have not been performed."
   },
-  "published_at": "2026-09-24T08:00:00Z",
-  "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+  "published_at": "2026-09-24T23:45:00Z",
+  "published_by": {
+    "name": "Lekishi editorial preparation",
+    "role": "preparing editor (owner-instructed)"
+  },
   "supersedes": null,
   "correction_of_revision": null
 }

@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { FIXTURE_CHAPTER } from "../fixtures"
-  import { buildScene, placeOf } from "../scene"
+  import { CHAPTER } from "../chapter-content"
+  import { reviewSummaryLabel } from "../labels"
+  import { buildScene } from "../scene"
   import * as atlas from "../state"
   import type { AtlasState } from "../state"
   import EventList from "./EventList.svelte"
@@ -14,17 +15,24 @@
   // diverge. The variable is not named `state`: svelte-check then reads `$state`
   // as a Svelte 4 store subscription instead of the rune, and the runes-mode
   // component stops type-checking.
-  let atlasState: AtlasState = $state.raw(atlas.createAtlasState(FIXTURE_CHAPTER))
+  let atlasState: AtlasState = $state.raw(atlas.createAtlasState(CHAPTER))
   let rendererError = $state<string | null>(null)
   let listOpen = $state(false)
 
-  const scene = $derived(buildScene(atlasState, FIXTURE_CHAPTER))
-  const selectedEvent = $derived(atlas.findEvent(FIXTURE_CHAPTER, atlasState.selectedEventId))
-  const selectedPlace = $derived(
-    selectedEvent === null ? null : placeOf(FIXTURE_CHAPTER, selectedEvent.placeId),
-  )
-  const selectionStatus = $derived(atlas.selectionTimeStatus(atlasState, FIXTURE_CHAPTER))
+  const scene = $derived(buildScene(atlasState, CHAPTER))
+  const selectedEvent = $derived(atlas.findEvent(CHAPTER, atlasState.selectedEventId))
+  const selectionStatus = $derived(atlas.selectionTimeStatus(atlasState, CHAPTER))
   const playing = $derived(atlasState.playing)
+
+  // What the chapter's own publication states, counted rather than claimed: the
+  // notice panel has to stay true when the content changes.
+  const review = CHAPTER.publication
+  const inWindowEvents = $derived(CHAPTER.events.filter((event) => !event.coda))
+  const codaEvents = $derived(CHAPTER.events.length - inWindowEvents.length)
+  const unplacedInWindow = $derived(
+    inWindowEvents.filter((event) => event.placement.kind === "none").length,
+  )
+  const unlocatedPlaces = $derived(CHAPTER.places.filter((place) => place.position === null).length)
 
   // The workspace owns the playback clock; the renderer never advances time.
   $effect(() => {
@@ -35,7 +43,7 @@
     let previous = performance.now()
     const timer = setInterval(() => {
       const now = performance.now()
-      atlasState = atlas.advancePlayhead(atlasState, FIXTURE_CHAPTER, now - previous)
+      atlasState = atlas.advancePlayhead(atlasState, CHAPTER, now - previous)
       previous = now
     }, 100)
 
@@ -43,7 +51,7 @@
   })
 
   function selectEvent(eventId: string | null) {
-    atlasState = atlas.selectEvent(atlasState, FIXTURE_CHAPTER, eventId)
+    atlasState = atlas.selectEvent(atlasState, CHAPTER, eventId)
     listOpen = false
   }
 </script>
@@ -54,6 +62,7 @@
 >
   <Globe
     {scene}
+    label="Atlas globe · {CHAPTER.title}"
     onSelectEvent={selectEvent}
     onManualCameraInput={() => (atlasState = atlas.noteManualCameraInput(atlasState))}
     onError={(error) => (rendererError = error.message)}
@@ -75,38 +84,52 @@
 
   <!--
     One overlay column: the notice, the event list, and the selection panel are
-    laid out in flow, so they can never overlap each other. On phones the column
-    is bounded above the time controls and the notice shrinks beside the controls
-    instead of colliding with them; from `md` up the column is content-sized and
-    each panel keeps its own corner of the viewport.
+    laid out in flow, so they can never overlap each other. At phone widths the
+    notice takes the full width, the buttons wrap below it, the event list keeps
+    a usable minimum height, and the details panel scrolls in what is left; from
+    `md` up the column is bounded above the time controls and the event list
+    shrinks to fit it, so a long window scrolls inside the panel instead of
+    running under the controls.
   -->
-  <div
-    class="pointer-events-none absolute inset-x-3 bottom-36 top-3 z-20 flex flex-col gap-2 md:bottom-auto"
-  >
-    <div class="flex items-start justify-between gap-2">
+  <div class="pointer-events-none absolute inset-x-3 bottom-36 top-3 z-20 flex flex-col gap-2">
+    <div class="flex shrink-0 flex-wrap items-start justify-between gap-2">
       <div
         id="atlas-notice"
-        class="min-w-0 rounded-xl border border-amber-300/40 bg-slate-950/80 px-3 py-2 backdrop-blur sm:max-w-[15rem]"
+        class="max-h-[45dvh] w-full min-w-0 overflow-y-auto rounded-xl border border-amber-300/40 bg-slate-950/85 px-3 py-2 backdrop-blur sm:w-auto sm:max-w-[19rem]"
       >
         <p class="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-amber-300">
-          Synthetic fixture
+          Reviewed chapter · {reviewSummaryLabel(review.independence)}
         </p>
-        <p class="mt-0.5 text-xs leading-snug text-slate-300">
-          Placeholder events for the technical foundation. Not historical content.
+        <p class="mt-0.5 text-xs font-semibold leading-snug text-slate-100">{CHAPTER.title}</p>
+        <!--
+          The chapter's own coverage statement is the full statement of what this
+          chapter does and does not cover. Phone widths keep the derived counts
+          instead: the notice must not eat the space the event list needs.
+        -->
+        <p class="mt-1 hidden text-[0.7rem] leading-snug text-slate-300 sm:block">
+          {review.coverageNote}
+        </p>
+        <p class="mt-1 text-[0.65rem] leading-snug text-amber-200/80">
+          {CHAPTER.defaultWindow.start}–{CHAPTER.defaultWindow.end} with {codaEvents} coda
+          {codaEvents === 1 ? "node" : "nodes"} outside it; {unplacedInWindow} of {inWindowEvents.length}
+          in-window events and {unlocatedPlaces} of {CHAPTER.places.length} places without a sourced map
+          position.
         </p>
       </div>
 
-      <div class="pointer-events-auto flex shrink-0 flex-col items-end gap-2">
+      <div
+        class="pointer-events-auto ml-auto flex shrink-0 flex-row items-center gap-2 sm:flex-col sm:items-end"
+      >
         <button
           id="atlas-follow-toggle"
           type="button"
-          disabled={selectedEvent === null}
+          disabled={selectedEvent === null || selectedEvent.placement.kind !== "point"}
           aria-pressed={atlasState.cameraFollow === "following"}
           onclick={() =>
             (atlasState =
               atlasState.cameraFollow === "following"
                 ? atlas.noteManualCameraInput(atlasState)
-                : atlas.resumeCameraFollow(atlasState, FIXTURE_CHAPTER))}
+                : atlas.resumeCameraFollow(atlasState, CHAPTER))}
           class={[
             "pointer-events-auto rounded-xl border px-3 py-2 text-xs font-semibold backdrop-blur transition",
             "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300",
@@ -134,7 +157,7 @@
     <div
       id="atlas-event-panel"
       class={[
-        "pointer-events-auto min-h-0 w-[17rem] max-w-full flex-1 flex-col rounded-2xl border border-slate-700/70 bg-slate-950/85 px-3 py-3 shadow-xl shadow-slate-950/50 backdrop-blur md:max-h-[calc(100dvh-11rem)] md:flex-none",
+        "pointer-events-auto min-h-[8rem] w-[17rem] max-w-full flex-1 flex-col overflow-hidden rounded-2xl border border-slate-700/70 bg-slate-950/85 px-3 py-3 shadow-xl shadow-slate-950/50 backdrop-blur md:min-h-0 md:flex-initial",
         listOpen ? "flex" : "hidden md:flex",
       ]}
     >
@@ -151,9 +174,9 @@
       >
         <SelectionPanel
           event={selectedEvent}
-          place={selectedPlace}
           status={selectionStatus}
-          onReturnToTime={() => (atlasState = atlas.returnToEventTime(atlasState, FIXTURE_CHAPTER))}
+          review={{ independence: review.independence, reviewer: review.reviewer }}
+          onReturnToTime={() => (atlasState = atlas.returnToEventTime(atlasState, CHAPTER))}
           onClose={() => selectEvent(null)}
         />
       </div>
@@ -165,12 +188,9 @@
       timeWindow={atlasState.timeWindow}
       playhead={atlasState.playhead}
       playing={atlasState.playing}
-      onWindowChange={(window) =>
-        (atlasState = atlas.setTimeWindow(atlasState, FIXTURE_CHAPTER, window))}
-      onPlayheadChange={(year) =>
-        (atlasState = atlas.setPlayhead(atlasState, FIXTURE_CHAPTER, year))}
-      onStep={(direction) =>
-        (atlasState = atlas.stepPlayhead(atlasState, FIXTURE_CHAPTER, direction))}
+      onWindowChange={(window) => (atlasState = atlas.setTimeWindow(atlasState, CHAPTER, window))}
+      onPlayheadChange={(year) => (atlasState = atlas.setPlayhead(atlasState, CHAPTER, year))}
+      onStep={(direction) => (atlasState = atlas.stepPlayhead(atlasState, CHAPTER, direction))}
       onTogglePlaying={() => (atlasState = atlas.setPlaying(atlasState, !atlasState.playing))}
     />
   </div>

@@ -10,14 +10,15 @@ The site is a SvelteKit project built with `@sveltejs/adapter-static`. Every rou
 is prerendered, so the deployable artifact is a directory of plain files with no
 application server, no database, and no BEAM runtime:
 
-| Owner                                                                | Responsibility                                                                                                                                                                        |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SvelteKit (`src/routes`)                                             | Routing, the prerendered page shells, and the `#atlas-workspace` mount point. `/` is the overview page; `/atlas` is the atlas shell.                                                  |
-| Atlas bootstrap (`src/lib/atlas/entry.ts`)                           | The only module that mounts the workspace. It keeps one workspace per page, releases it at the `pagehide` boundary, and restores exactly one on `pageshow`.                           |
-| Svelte + TypeScript (`src/lib/atlas`)                                | Search, filters, drawers, timeline controls, selection, responsive layout, and the single source of truth for selection, time window, playhead, and camera-follow state (`state.ts`). |
-| Cesium (`src/lib/atlas/renderer`)                                    | Globe, camera, picking, and map primitives. It receives a derived, renderer-independent scene and reports user input back as callbacks.                                               |
-| Tailwind (`src/app.css`)                                             | All styling, including the Cesium widget stylesheet, so the site ships one stylesheet.                                                                                                |
-| Historical contract (`historical/v0`, `src/lib/historical/contract`) | The versioned schemas, worked examples, and adversarial vectors, with the TypeScript reference semantics that validate them.                                                          |
+| Owner                                                                 | Responsibility                                                                                                                                                                                                                               |
+| --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| SvelteKit (`src/routes`)                                              | Routing, the prerendered page shells, and the `#atlas-workspace` mount point. `/` is the overview page; `/atlas` is the atlas shell.                                                                                                         |
+| Atlas bootstrap (`src/lib/atlas/entry.ts`)                            | The only module that mounts the workspace. It keeps one workspace per page, releases it at the `pagehide` boundary, and restores exactly one on `pageshow`.                                                                                  |
+| Svelte + TypeScript (`src/lib/atlas`)                                 | Search, filters, drawers, timeline controls, selection, responsive layout, and the single source of truth for selection, time window, playhead, and camera-follow state (`state.ts`).                                                        |
+| Chapter content (`src/lib/atlas/chapter-content.ts`, `projection.ts`) | The browser-safe content boundary: Vite bundles the reviewed chapter's records and publication sets, the projection selects the newest published revision per record, and the atlas domain is what the workspace, scene, and renderer share. |
+| Cesium (`src/lib/atlas/renderer`)                                     | Globe, camera, picking, and map primitives. It receives a derived, renderer-independent scene and reports user input back as callbacks.                                                                                                      |
+| Tailwind (`src/app.css`)                                              | All styling, including the Cesium widget stylesheet, so the site ships one stylesheet.                                                                                                                                                       |
+| Historical contract (`historical/v0`, `src/lib/historical/contract`)  | The versioned schemas, worked examples, and adversarial vectors, with the TypeScript reference semantics that validate them.                                                                                                                 |
 
 Rules that keep the boundary intact:
 
@@ -30,8 +31,10 @@ Rules that keep the boundary intact:
   releases the workspace when it is destroyed, so a duplicated bundle, a re-run,
   or a back/forward-cache restore cannot stack a second globe.
 - RFD 2 owns the durable historical data, calendar, precision, and evidence
-  contracts. `fixtures.ts` is explicitly synthetic placeholder content for the
-  technical foundation and must be replaced by reviewed content, not grown.
+  contracts. The browser never reads the content tree with Node `fs`: the
+  chapter arrives through `chapter-content.ts`, `projection.ts` maps published
+  revisions into `domain.ts`, and `fixtures.ts` is synthetic content that only
+  focused unit tests import.
 
 ### Development commands
 
@@ -78,8 +81,54 @@ build/
 that replaced the old `mix lekishi.assets.check`: it fails the build if the
 prerendered pages, the hashed bundles, the single stylesheet with the Cesium
 widget styles, or the Cesium runtime directories are missing, if the atlas page
-does not have exactly one mount point, or if the artifact contains a server
-runtime.
+does not have exactly one mount point, if the artifact contains a server runtime,
+if the built scripts or the prerendered pages do not carry the reviewed chapter,
+or if the retired synthetic fixture's sentinel strings reach the artifact.
+
+### Reviewed chapter content
+
+The atlas renders the reviewed Tang chapter
+(`historical/chapters/tang-mission-750-754/`) through one browser-safe boundary,
+and that boundary is the only way chapter content enters the app:
+
+1. `src/lib/historical/chapter.ts` is the Node-side loader. It reads the tree
+   with `fs` and hands it to the contract's own `Publication.checkAll`; it is
+   used by tests and tooling, never by the browser.
+2. `scripts/check-chapter.mjs` runs before Vite in `pnpm build` and runs the
+   chapter's contract test and the projection test suite through Vitest, so an
+   edited approved revision, a missing source pin, or a record published at a
+   revision it does not carry fails the build. This is the validation gate:
+   schemas, hashes, and pins need Node, so they cannot run in the bundle.
+3. `src/lib/atlas/chapter-content.ts` bundles the same records and publication
+   sets with Vite's `import.meta.glob`, so the browser reads the files the
+   contract validates: no `fs`, no second copy, and no request a static host has
+   to serve. The projection runs at module scope and **throws** if the chapter
+   cannot be represented. The atlas route is prerendered, so that failure fails
+   `pnpm build` instead of shipping placeholder content.
+4. `src/lib/atlas/projection.ts` selects the newest published revision per
+   record through the contract's own publication ordering — the same
+   `currentPublished` the validator uses, split into `publication-order.ts` so
+   the browser and Node share one rule — and maps it into the atlas domain.
+
+What the projection refuses to do is part of the contract with the reader:
+
+- An event keeps its whole support interval, and an event with no published map
+  position (no place named, no sourced identification, or a place named only as
+  context) stays in the non-map list with **no** coordinate.
+- A place whose geometry is `unknown` carries no position; a `display_anchor`
+  stays a display anchor and is never presented as an asserted location.
+- The occurrence mode survives to the surfaces: a duration is active at the
+  playhead, an uncertain occurrence window is only ever a possible match, and
+  neither is presented as the other.
+- A coda node is the chapter's own presentation label, cross-checked against the
+  primary window, so a coda node cannot be folded into the mission window and a
+  mission event cannot drift out of it.
+- Route geometry, an undated event, and an open-ended occurrence fail the
+  projection rather than being flattened into points or guessed at. Those are
+  documented gaps, not silent omissions.
+
+The decision and its measured evidence are recorded in
+[`rfd/0003/CONTENT_BOUNDARY.adoc`](rfd/0003/CONTENT_BOUNDARY.adoc).
 
 ### Cloudflare Pages
 
@@ -114,10 +163,11 @@ machine-readable boundary vectors. Its rationale and open owner decisions are in
 [README](historical/README.md) covers layout, validation, and resealing.
 
 The reference semantics that validate the contract are TypeScript modules under
-`src/lib/historical/contract` (`time`, `documents`, `publication`, `canonical`,
-`json-schema`, `names`, `timestamps`, `vectors`, `seal`). They were ported from
-the Elixir implementation that the Phoenix runtime used; the schemas, examples,
-pins, and all 187 vectors are unchanged, and `pnpm test` runs every vector.
+`src/lib/historical/contract` (`time`, `documents`, `publication`,
+`publication-order`, `canonical`, `json-schema`, `names`, `timestamps`,
+`vectors`, `seal`). They were ported from the Elixir implementation that the
+Phoenix runtime used; the schemas, examples, pins, and all 187 vectors are
+unchanged, and `pnpm test` runs every vector.
 
 ```bash
 pnpm test    # validates the examples, the schemas, the pins, and every vector

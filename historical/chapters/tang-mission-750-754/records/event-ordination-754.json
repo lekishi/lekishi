@@ -7,12 +7,18 @@
   "revisions": [
     {
       "revision_id": "lks:rev:ordination-754-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter event: the precepts platform and ordinations, single-source and labelled, with the chronicle's related notice as support.",
       "content": {
         "summary": "In the fourth month of 天平勝寶六年 (754) a precepts platform is erected in front of the 盧遮那殿; the biography records the emperor first receiving the bodhisattva precepts, then the empress and crown prince, more than 440 novices being ordained, and more than 80 senior monks re-ordaining.",
-        "event_types": ["process", "exchange"],
+        "event_types": [
+          "process",
+          "exchange"
+        ],
         "time": {
           "source_expression": "天平勝寶六年甲午 四月初，於盧遮那殿前立戒壇",
           "calendar": "chinese_lunisolar",
@@ -21,15 +27,30 @@
           "interval": {
             "bounds": "two_sided",
             "boundary": "inclusive",
-            "start": {"year": 754, "era": "ce", "month": 4},
-            "end": {"year": 754, "era": "ce", "month": 4}
+            "start": {
+              "year": 754,
+              "era": "ce",
+              "month": 4
+            },
+            "end": {
+              "year": 754,
+              "era": "ce",
+              "month": 4
+            }
           }
         },
         "places": [
-          {"place_id": "lks:place:todaiji", "role": "site", "note": "The biography places the platform at the 盧遮那殿, where 鑒眞 had been installed."}
+          {
+            "place_id": "lks:place:todaiji",
+            "role": "site",
+            "note": "The biography places the platform at the 盧遮那殿, where 鑒眞 had been installed."
+          }
         ],
         "participants": [
-          {"actor_id": "lks:actor:jianzhen", "role": "leader"}
+          {
+            "actor_id": "lks:actor:jianzhen",
+            "role": "leader"
+          }
         ],
         "editorial_notes": "The ordination account rests on the biography alone; the chronicle's accessible text does not record the 754 ordinations. The passage says 天皇 without naming the sovereign, and the chronicle's later notice says 聖武皇帝 received the precepts from 鑒眞 without a date, so the chapter names no individual as ordained. The biography's miracle material is excluded."
       },
@@ -43,7 +64,10 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "其年四月初，於盧遮那殿前立戒壇…尋爲沙彌澄修等四百四十餘人授戒。又舊大僧…等八十餘人僧，捨舊戒、重受和上所授之戒"}
+              "locator": {
+                "kind": "entry",
+                "value": "其年四月初，於盧遮那殿前立戒壇…尋爲沙彌澄修等四百四十餘人授戒。又舊大僧…等八十餘人僧，捨舊戒、重受和上所授之戒"
+              }
             }
           ]
         },
@@ -56,7 +80,10 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第廿四 天平寶字七年五月戊申（聖武皇帝師之受戒焉）"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第廿四 天平寶字七年五月戊申（聖武皇帝師之受戒焉）"
+              }
             }
           ]
         },
@@ -69,19 +96,25 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "其年四月初，於盧遮那殿前立戒壇"}
+              "locator": {
+                "kind": "entry",
+                "value": "其年四月初，於盧遮那殿前立戒壇"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:201774af758d4b2f7ee1c1aaf0e54990633d473f459910ff01af479d317ebd9c"
+      "revision_hash": "sha256:93dcb442e2290c440dde483275cd07a14ea4bfaa8afbefd3950ba4534aa20384"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:ordination-754-1",
-    "published_revision_hash": "sha256:201774af758d4b2f7ee1c1aaf0e54990633d473f459910ff01af479d317ebd9c",
+    "published_revision_hash": "sha256:93dcb442e2290c440dde483275cd07a14ea4bfaa8afbefd3950ba4534aa20384",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

@@ -7,12 +7,17 @@
   "revisions": [
     {
       "revision_id": "lks:rev:kiyokawa-jianzhen-contact-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter relationship: the envoys' encounter with 鑒眞 at 延光寺.",
       "content": {
         "summary": "The encounter at 延光寺 in 揚州 on 天寶十二載十月十五日 (753), when the envoys asked 鑒眞 to carry the precepts to Japan and he consented. The relationship records the meeting and the request, not its outcome.",
-        "relationship_types": ["contact"],
+        "relationship_types": [
+          "contact"
+        ],
         "from": "lks:actor:fujiwara-no-kiyokawa",
         "to": "lks:actor:jianzhen",
         "directionality": "directed",
@@ -25,8 +30,18 @@
           "interval": {
             "bounds": "two_sided",
             "boundary": "inclusive",
-            "start": {"year": 753, "era": "ce", "month": 10, "day": 15},
-            "end": {"year": 753, "era": "ce", "month": 10, "day": 15}
+            "start": {
+              "year": 753,
+              "era": "ce",
+              "month": 10,
+              "day": 15
+            },
+            "end": {
+              "year": 753,
+              "era": "ce",
+              "month": 10,
+              "day": 15
+            }
           }
         },
         "editorial_notes": "The chapter records the encounter as contact; it does not assert that the meeting caused the transmission or any later development."
@@ -41,19 +56,25 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "天寶十二載，歲次癸巳，十月十五日壬午…來［至］延光寺"}
+              "locator": {
+                "kind": "entry",
+                "value": "天寶十二載，歲次癸巳，十月十五日壬午…來［至］延光寺"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:a4473399f4a86c1ab8ca68cfc84f5a20e68fb50821e2204ff6a9e909e7bc9690"
+      "revision_hash": "sha256:e7eaa60fdef0a4d8c0b69693c1325776f2f52f2d6f82b77350f630836906c28a"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:kiyokawa-jianzhen-contact-1",
-    "published_revision_hash": "sha256:a4473399f4a86c1ab8ca68cfc84f5a20e68fb50821e2204ff6a9e909e7bc9690",
+    "published_revision_hash": "sha256:e7eaa60fdef0a4d8c0b69693c1325776f2f52f2d6f82b77350f630836906c28a",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte"
   import { releaseWorkspace, startAtlasPage } from "$lib/atlas/entry"
+  import { CHAPTER } from "$lib/atlas/chapter-content"
 
   /**
    * The atlas shell.
@@ -15,6 +16,10 @@
    * bootstrap's own `pagehide`/`pageshow` handling keeps a restored page at
    * exactly one workspace. The mount and its cleanup live in `onMount` so
    * nothing touches the DOM while the shell is rendered on the server.
+   *
+   * The page metadata names the reviewed chapter the atlas actually shows; it
+   * comes from the same projection the workspace renders, so it cannot drift
+   * from the content.
    */
   onMount(() => {
     startAtlasPage()
@@ -24,10 +29,10 @@
 </script>
 
 <svelte:head>
-  <title>Atlas · Lekishi</title>
+  <title>{CHAPTER.title} · Atlas · Lekishi</title>
   <meta
     name="description"
-    content="The Lekishi atlas workspace: a Cesium globe with synthetic foundation events, timeline, and selection details."
+    content="The Lekishi atlas: {CHAPTER.summary} {CHAPTER.publication.coverageNote}"
   />
 </svelte:head>
 
@@ -41,7 +46,7 @@
       <span
         class="rounded-full border border-amber-300/50 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-amber-300"
       >
-        Atlas foundation
+        Reviewed chapter
       </span>
     </a>
     <nav class="flex items-center gap-4 text-xs" aria-label="Primary">

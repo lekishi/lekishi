@@ -7,8 +7,11 @@
   "revisions": [
     {
       "revision_id": "lks:rev:naniwa-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter place: the attested name with its romanization, and a display anchor that asserts no historical coordinate.",
       "content": {
         "summary": "難波, the Naniwa area, named in the 東征傳 as the place 鑒眞's party reached on the first day of the second month of 天平勝寶六年 (754) on the way from 大宰府 to the capital.",
@@ -27,12 +30,20 @@
             "claim_id": "lks:claim:naniwa-name"
           }
         ],
-        "place_types": ["settlement"],
+        "place_types": [
+          "settlement"
+        ],
         "geometry": [
           {
             "claim_id": "lks:claim:naniwa-anchor",
             "interpretation": "display_anchor",
-            "geojson": {"type": "Point", "coordinates": [135.5021, 34.6938]},
+            "geojson": {
+              "type": "Point",
+              "coordinates": [
+                135.5021,
+                34.6938
+              ]
+            },
             "precision": "unspecified",
             "notes": "Label anchor at the modern city of Osaka (Wikidata Q35765). It is not an asserted historical coordinate and does not by itself establish the identification of 難波 with any site."
           }
@@ -57,7 +68,10 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "天平勝寶六年甲午 二月一日到難波"}
+              "locator": {
+                "kind": "entry",
+                "value": "天平勝寶六年甲午 二月一日到難波"
+              }
             }
           ]
         },
@@ -70,19 +84,25 @@
           "citations": [
             {
               "source_id": "lks:source:wikidata",
-              "locator": {"kind": "dataset_row", "value": "Q35765 (P625)"}
+              "locator": {
+                "kind": "dataset_row",
+                "value": "Q35765 (P625)"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:ccbadf8df1dc61f212f2327775e8622044488d84ca3dea4a982f80d29dadd324"
+      "revision_hash": "sha256:d1ab7ae8d0ca5abb3b2ed7685691b6127aecd24b61949eb72c7b2d6c3306c315"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:naniwa-1",
-    "published_revision_hash": "sha256:ccbadf8df1dc61f212f2327775e8622044488d84ca3dea4a982f80d29dadd324",
+    "published_revision_hash": "sha256:d1ab7ae8d0ca5abb3b2ed7685691b6127aecd24b61949eb72c7b2d6c3306c315",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

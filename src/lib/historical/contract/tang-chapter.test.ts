@@ -58,6 +58,21 @@ function recordById(chapter: ChapterTree, recordId: string): JsonObject {
   return record
 }
 
+/**
+ * Sets are loaded in file order, which is not publication order: the projection
+ * and the validator order them by `published_at`. Tests that care about one set
+ * look it up by id so a new file cannot silently change which set they inspect.
+ */
+function setById(chapter: ChapterTree, setId: string): JsonObject {
+  const set = chapter.sets.find((candidate) => objectOf(candidate)["set_id"] === setId)
+
+  if (set === undefined) {
+    throw new Error(`${setId} is not in the chapter tree`)
+  }
+
+  return objectOf(set)
+}
+
 function publishedRevision(record: JsonObject): JsonObject {
   const mirror = objectOf(record["publication"])
   const revision = listOf(record["revisions"]).find(
@@ -389,7 +404,7 @@ describe("the Tang chapter fixture", () => {
     }
 
     expect(chapterDirectory(CHAPTER)).toContain("historical/chapters/tang-mission-750-754")
-    expect(Object.keys(result.currentPublished)).toHaveLength(65)
+    expect(Object.keys(result.currentPublished)).toHaveLength(66)
   })
 
   it("keeps the expected inventory and publishes each record once in the first set", () => {
@@ -402,73 +417,137 @@ describe("the Tang chapter fixture", () => {
       story: recordsOfKind(chapter, "story").length,
     }
 
-    expect(counts).toEqual({ place: 14, actor: 12, event: 29, relationship: 9, story: 1 })
+    expect(counts).toEqual({ place: 15, actor: 12, event: 29, relationship: 9, story: 1 })
     expect(chapter.documents.filter((document) => document["document"] === "source")).toHaveLength(
-      9,
+      11,
     )
 
-    const first = objectOf(chapter.sets[0])
+    const first = setById(chapter, "lks:set:tang-mission-750-754-v1")
     const memberIds = listOf(first["members"]).map((member) =>
       String(objectOf(member)["record_id"]),
     )
 
-    expect(first["set_id"]).toBe("lks:set:tang-mission-750-754-v1")
-    expect(memberIds).toHaveLength(65)
+    expect(memberIds).toHaveLength(66)
     expect(new Set(memberIds).size).toBe(memberIds.length)
-    expect(Publication.currentPublished(chapter.documents, chapter.sets).size).toBe(65)
+    expect(Publication.currentPublished(chapter.documents, chapter.sets).size).toBe(66)
   })
 
-  it("publishes the review corrections as a second set over retained earlier revisions", () => {
+  it("publishes one revision per record in a single preparation set", () => {
     const chapter = tree()
-    const first = objectOf(chapter.sets[0])
-    const correction = objectOf(chapter.sets[1])
-    const correctedIds = listOf(correction["members"]).map((member) =>
-      String(objectOf(member)["record_id"]),
-    )
+    const set = setById(chapter, "lks:set:tang-mission-750-754-v1")
+    const memberIds = listOf(set["members"]).map((member) => String(objectOf(member)["record_id"]))
     const current = Publication.currentPublished(chapter.documents, chapter.sets)
     const history = Publication.history(chapter.documents, chapter.sets)
 
-    expect(correction["set_id"]).toBe("lks:set:tang-mission-750-754-v2")
-    expect(correction["supersedes"]).toBe(first["set_id"])
-    expect(correctedIds.sort()).toEqual([
-      "lks:actor:abe-no-nakamaro",
-      "lks:actor:jianzhen",
-      "lks:event:jianzhen-death-763",
-      "lks:event:return-report-754",
-      "lks:event:return-voyage-753",
-      "lks:event:ships-separate-753",
-      "lks:event:yaku-arrival-753",
-      "lks:place:dazaifu",
-    ])
+    // The owner had the preparation history flattened on 2026-09-24: one set,
+    // one revision per record, and no superseded set.
+    expect(chapter.sets).toHaveLength(1)
+    expect(set["supersedes"]).toBeNull()
+    expect(memberIds.sort()).toEqual(
+      chapter.documents
+        .filter((document) => document["document"] === "record")
+        .map((document) => String(document["record_id"]))
+        .sort(),
+    )
 
-    // The first set keeps pinning what it published. A correction appends a
-    // revision instead of rewriting the one the earlier review approved, so the
-    // previous content stays readable in the tree and in the derived history.
-    for (const member of listOf(first["members"])) {
+    for (const member of listOf(set["members"])) {
+      const recordId = String(objectOf(member)["record_id"])
       const entry = objectOf(member)
-      const record = recordById(chapter, String(entry["record_id"]))
-      const revision = listOf(record["revisions"]).find(
-        (candidate) => objectOf(candidate)["revision_id"] === entry["revision_id"],
-      )
+      const record = recordById(chapter, recordId)
+      const revision = listOf(record["revisions"])
+        .map((candidate) => objectOf(candidate))
+        .find((candidate) => candidate["revision_id"] === entry["revision_id"])
 
-      expect(revisionHash(objectOf(revision)), String(entry["record_id"])).toBe(
-        entry["revision_hash"],
-      )
-    }
-
-    for (const recordId of correctedIds) {
-      const revisions = listOf(recordById(chapter, recordId)["revisions"]).map((revision) =>
-        objectOf(revision),
-      )
-
-      expect(revisions, recordId).toHaveLength(2)
-      expect(revisions[1]["revision_id"], recordId).toBe(current.get(recordId)?.revision_id)
+      // The set publishes exactly one revision of each record. A record may also
+      // carry an unpublished draft; the draft is not what the chapter publishes,
+      // so the published history and the current revision are unchanged by it.
+      expect(revision, recordId).toBeDefined()
+      expect(revisionHash(objectOf(revision)), recordId).toBe(entry["revision_hash"])
+      expect(current.get(recordId)?.revision_id, recordId).toBe(entry["revision_id"])
       expect(
-        history[recordId]?.map((entry) => entry.revision_id),
+        history[recordId]?.map((historyEntry) => historyEntry.revision_id),
         recordId,
-      ).toEqual([revisions[0]["revision_id"], revisions[1]["revision_id"]])
-      expect(String(revisions[1]["change_explanation"]), recordId).toContain("after review")
+      ).toEqual([entry["revision_id"]])
     }
+
+    // The owner-accepted placements and identifications survive the flattening:
+    // the court's seat is a display anchor, the two identifications are
+    // approximate locality-level placements, and 驩州 keeps unknown geometry.
+    const palace = objectOf(listOf(recordById(chapter, "lks:place:heijo-palace")["revisions"])[0])
+    const palaceGeometry = objectOf(listOf(objectOf(palace["content"])["geometry"])[0])
+
+    expect(palaceGeometry["interpretation"]).toBe("display_anchor")
+    expect(palaceGeometry["precision"]).toBe("unspecified")
+
+    for (const recordId of ["lks:event:appointment-750", "lks:event:sekito-752"]) {
+      const revision = objectOf(listOf(recordById(chapter, recordId)["revisions"])[0])
+      const places = listOf(objectOf(revision["content"])["places"]).map(objectOf)
+
+      expect(places, recordId).toHaveLength(1)
+      expect(places[0]?.["place_id"], recordId).toBe("lks:place:heijo-palace")
+    }
+
+    for (const [recordId, placeId, basis] of [
+      ["lks:place:murozaki", "lks:place:murozaki", "cited_interpretation"],
+      ["lks:place:ishigaki", "lks:place:ishigaki", "attested"],
+    ]) {
+      const revision = objectOf(listOf(recordById(chapter, recordId)["revisions"])[0])
+      const geometry = objectOf(listOf(objectOf(revision["content"])["geometry"])[0])
+      const claim = listOf(revision["claims"])
+        .map(objectOf)
+        .find((candidate) => candidate["claim_id"] === geometry["claim_id"])
+
+      expect(geometry["interpretation"], placeId).toBe("approximate_point")
+      expect(geometry["precision"], placeId).toBe("locality")
+      // The basis says what each identification rests on: the 和歌山県 page
+      // reports 紀伊続風土記's identification (an interpretation advanced in a
+      // cited work), while the 石垣 account is a bounded modern statement the
+      // chapter records as what it reports.
+      expect(claim?.["basis"], placeId).toBe(basis)
+    }
+
+    const huanzhou = objectOf(listOf(recordById(chapter, "lks:place:huanzhou")["revisions"])[0])
+    const huanzhouGeometry = objectOf(listOf(objectOf(huanzhou["content"])["geometry"])[0])
+
+    expect(huanzhouGeometry["interpretation"]).toBe("unknown")
+  })
+
+  it("allows an unpublished draft without changing what is published", () => {
+    const chapter = cloneTree(tree())
+    const record = recordById(chapter, "lks:event:appointment-750")
+    const published = publishedRevision(record)
+    const content = JSON.parse(JSON.stringify(published["content"])) as JsonObject
+
+    content["summary"] = "Draft summary that no set publishes."
+
+    const draft: JsonObject = {
+      revision_id: "lks:rev:appointment-750-99",
+      created_at: "2026-09-25T00:00:00Z",
+      author: {
+        name: "Lekishi editorial preparation",
+        role: "preparing editor (owner-instructed)",
+      },
+      change_explanation: "Draft correction: prepared but not published by any set.",
+      content,
+      claims: JSON.parse(JSON.stringify(published["claims"])),
+    }
+    draft["revision_hash"] = revisionHash(draft)
+    ;(record["revisions"] as JsonObject[]).push(draft)
+
+    // The contract accepts a prepared draft: it is a revision no set names, so
+    // the mirror still points at the published one and the chapter publishes what
+    // the owner decided on.
+    expect(Publication.checkAll(chapter.documents, chapter.sets).ok).toBe(true)
+    expect(
+      Publication.currentPublished(chapter.documents, chapter.sets).get(
+        record["record_id"] as string,
+      )?.revision_id,
+    ).toBe(published["revision_id"])
+    expect(
+      Publication.history(chapter.documents, chapter.sets)[String(record["record_id"])]?.map(
+        (historyEntry) => historyEntry.revision_id,
+      ),
+    ).toEqual([published["revision_id"]])
   })
 
   it("is sealed, so an edit to approved content is detected", () => {
@@ -671,11 +750,10 @@ describe("the Tang chapter fixture", () => {
       geometryEntries(record).some((entry) => entry["interpretation"] === "unknown"),
     )
 
-    expect(unlocated.map((record) => record["record_id"]).sort()).toEqual([
-      "lks:place:huanzhou",
-      "lks:place:ishigaki",
-      "lks:place:murozaki",
-    ])
+    // The two identifications the owner asked to chase are published as
+    // approximate locality-level placements; 驩州 keeps `unknown` geometry
+    // because no source in the set identifies its site.
+    expect(unlocated.map((record) => record["record_id"]).sort()).toEqual(["lks:place:huanzhou"])
   })
 
   it("records self-review, not owner, independent, or specialist review", () => {
@@ -876,7 +954,7 @@ describe("adversarial readings of the Tang chapter", () => {
 
   it("rejects relabelling the self-review as independent review", () => {
     const chapter = cloneTree(tree())
-    const set = objectOf(chapter.sets[0])
+    const set = setById(chapter, "lks:set:tang-mission-750-754-v1")
     objectOf(set["review"])["independence"] = "independent_review"
 
     const result = Publication.checkAll(chapter.documents, chapter.sets)

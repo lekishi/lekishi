@@ -226,11 +226,17 @@ class CesiumAtlasRenderer implements AtlasRenderer {
     const present = new Set<string>()
 
     for (const event of scene.events) {
+      // The scene keeps list-only events; the map draws only what a published
+      // place reference places, and no coordinate is invented for the rest.
+      if (event.placement.kind !== "point") {
+        continue
+      }
+
       present.add(event.id)
       const entity = this.entities.get(event.id)
 
       if (entity === undefined) {
-        this.entities.set(event.id, this.createEntity(event))
+        this.entities.set(event.id, this.createEntity(event, event.placement.position))
       } else {
         this.updateEntity(entity, event)
       }
@@ -273,12 +279,12 @@ class CesiumAtlasRenderer implements AtlasRenderer {
     this.viewer.destroy()
   }
 
-  private createEntity(event: SceneEvent): Entity {
+  private createEntity(event: SceneEvent, position: GeoPoint): Entity {
     const style = pointStyle(event)
 
     return this.viewer.entities.add({
       id: event.id,
-      position: Cartesian3.fromDegrees(event.position.lon, event.position.lat),
+      position: Cartesian3.fromDegrees(position.lon, position.lat),
       point: style,
       label: {
         text: event.title,
@@ -332,7 +338,7 @@ function pointStyle(event: SceneEvent): {
   const selected = event.selected
 
   return {
-    pixelSize: selected ? 16 : event.active ? 12 : 9,
+    pixelSize: selected ? 16 : event.playback === "active" ? 12 : 9,
     color: (baseColor ?? Color.WHITE).withAlpha(event.relation === "possible" ? 0.55 : 0.95),
     outlineColor: selected
       ? (SELECTED_OUTLINE ?? Color.WHITE)

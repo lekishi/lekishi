@@ -6,11 +6,13 @@
 
   let {
     scene,
+    label,
     onSelectEvent,
     onManualCameraInput,
     onError,
   }: {
     scene: AtlasScene
+    label: string
     onSelectEvent: (eventId: string | null) => void
     onManualCameraInput: () => void
     onError: (error: Error) => void
@@ -46,5 +48,5 @@
   class="absolute inset-0"
   data-testid="atlas-globe"
   role="application"
-  aria-label="Atlas globe with synthetic fixture events"
+  aria-label={label}
 ></div>

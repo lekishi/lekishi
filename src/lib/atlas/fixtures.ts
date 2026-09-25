@@ -1,87 +1,165 @@
 import type { Chapter } from "./domain"
 
 /**
- * Synthetic foundation fixture.
+ * Synthetic test chapter.
  *
- * This is placeholder geometry and placeholder events used only to exercise the
- * workspace, the renderer boundary, and the production asset pipeline while the
- * RFD 2 content and time contracts are still being written. Nothing here is a
- * historical claim: the names are invented, the dates are arbitrary, and the UI
- * labels the chapter as synthetic. Replace it wholesale with reviewed content;
- * do not grow it into a dataset.
+ * Focused unit tests use this instead of the reviewed chapter when they need
+ * spans the real content does not contain — a decade-precision occurrence, an
+ * event that starts inside the window and ends beyond it, a place with no
+ * position. Nothing in the app imports it: the atlas renders the reviewed
+ * chapter through `chapter-content.ts`, and `check-static-build.mjs` fails the
+ * build if any of these strings reach the artifact.
+ *
+ * Nothing here is a historical claim: the names are invented and the dates are
+ * arbitrary.
  */
 export const FIXTURE_CHAPTER: Chapter = {
-  id: "synthetic-foundation-fixture",
-  title: "Synthetic foundation fixture",
-  synthetic: true,
+  id: "synthetic-test-chapter",
+  title: "Synthetic test chapter",
+  summary: "Invented spans used to exercise the atlas behavior, not historical content.",
   defaultWindow: { start: 1200, end: 1250 },
   homeView: { lon: 128.5, lat: 32.5 },
   places: [
     {
       id: "place-north-harbor",
       label: "Sample harbor",
+      placement: "approximate",
+      precision: "locality",
       position: { lon: 129.9, lat: 32.8 },
-      locationPrecision: "approximate",
     },
     {
       id: "place-inland-plain",
       label: "Sample plain",
+      placement: "display-anchor",
+      precision: "unspecified",
       position: { lon: 120.6, lat: 34.3 },
-      locationPrecision: "display-anchor",
     },
     {
       id: "place-southern-bay",
       label: "Sample bay",
+      placement: "approximate",
+      precision: "region",
       position: { lon: 122.1, lat: 24.9 },
-      locationPrecision: "approximate",
     },
     {
       id: "place-island-stop",
       label: "Sample island",
-      position: { lon: 135.5, lat: 34.2 },
-      locationPrecision: "approximate",
+      placement: "unknown",
+      precision: "unspecified",
+      position: null,
     },
   ],
   events: [
     {
       id: "event-harbor-assembly",
       title: "Fixture assembly",
-      placeId: "place-north-harbor",
-      occurrence: { startYear: 1204, endYear: 1204, precision: "year" },
+      placement: {
+        kind: "point",
+        placeId: "place-north-harbor",
+        label: "Sample harbor",
+        basis: "approximate",
+        precision: "locality",
+        position: { lon: 129.9, lat: 32.8 },
+      },
+      occurrence: {
+        startYear: 1204,
+        endYear: 1204,
+        precision: "year",
+        mode: "instant",
+        sourceExpression: null,
+      },
       note: "Synthetic event used to check selection, details, and camera following.",
-      synthetic: true,
+      coda: false,
     },
     {
       id: "event-coastal-crossing",
       title: "Fixture crossing",
-      placeId: "place-southern-bay",
-      occurrence: { startYear: 1218, endYear: 1220, precision: "year" },
-      note: "Synthetic multi-year occurrence used to check bounded spans and playhead activity.",
-      synthetic: true,
+      placement: {
+        kind: "point",
+        placeId: "place-southern-bay",
+        label: "Sample bay",
+        basis: "approximate",
+        precision: "region",
+        position: { lon: 122.1, lat: 24.9 },
+      },
+      occurrence: {
+        startYear: 1218,
+        endYear: 1220,
+        precision: "year",
+        mode: "occurrence_window",
+        sourceExpression: null,
+      },
+      note: "Synthetic uncertain occurrence used to check bounded spans and playhead activity.",
+      coda: false,
     },
     {
       id: "event-plain-workshop",
       title: "Fixture workshop",
-      placeId: "place-inland-plain",
-      occurrence: { startYear: 1228, endYear: 1236, precision: "decade" },
-      note: "Synthetic uncertain occurrence used to check possible-match filtering.",
-      synthetic: true,
+      placement: {
+        kind: "point",
+        placeId: "place-inland-plain",
+        label: "Sample plain",
+        basis: "display-anchor",
+        precision: "unspecified",
+        position: { lon: 120.6, lat: 34.3 },
+      },
+      occurrence: {
+        startYear: 1228,
+        endYear: 1236,
+        precision: "decade",
+        mode: "duration",
+        sourceExpression: null,
+      },
+      note: "Synthetic decade-precision span used to check possible-match filtering.",
+      coda: false,
     },
     {
       id: "event-island-landfall",
       title: "Fixture landfall",
-      placeId: "place-island-stop",
-      occurrence: { startYear: 1244, endYear: 1244, precision: "year" },
-      note: "Synthetic event used to check chronological stepping across the window.",
-      synthetic: true,
+      placement: {
+        kind: "none",
+        placeId: "place-island-stop",
+        label: "Sample island",
+        reason: "no-position",
+      },
+      occurrence: {
+        startYear: 1244,
+        endYear: 1244,
+        precision: "year",
+        mode: "instant",
+        sourceExpression: null,
+      },
+      note: "Synthetic event with no published position, used to check list-only events.",
+      coda: false,
     },
     {
       id: "event-archive-transfer",
       title: "Fixture transfer",
-      placeId: "place-inland-plain",
-      occurrence: { startYear: 1249, endYear: 1251, precision: "year" },
+      placement: {
+        kind: "point",
+        placeId: "place-inland-plain",
+        label: "Sample plain",
+        basis: "display-anchor",
+        precision: "unspecified",
+        position: { lon: 120.6, lat: 34.3 },
+      },
+      occurrence: {
+        startYear: 1249,
+        endYear: 1251,
+        precision: "year",
+        mode: "duration",
+        sourceExpression: null,
+      },
       note: "Synthetic occurrence that starts inside the default window and ends beyond it.",
-      synthetic: true,
+      coda: false,
     },
   ],
+  publication: {
+    setIds: ["lks:set:synthetic-test"],
+    publishedAt: "2026-09-24T00:00:00Z",
+    independence: "self_review",
+    reviewer: "Synthetic test fixture",
+    coverageNote: "Synthetic test content, not historical content.",
+    reviewNotes: "Synthetic test content, not historical content.",
+  },
 }

@@ -4,8 +4,8 @@ import {
   advancePlayhead,
   createAtlasState,
   eventsVisibleInWindow,
-  isEventActive,
   noteManualCameraInput,
+  playbackState,
   resumeCameraFollow,
   returnToEventTime,
   selectEvent,
@@ -192,11 +192,23 @@ describe("playback", () => {
     expect(stepPlayhead(stepped, chapter, -1).playhead).toBe(1204)
   })
 
-  it("marks only the events at the playhead as active", () => {
-    const atSpan = setPlayhead(initial, chapter, 1219)
-    const events = eventsVisibleInWindow(atSpan, chapter)
-    const active = events.filter((event) => isEventActive(atSpan, event)).map((event) => event.id)
+  it("classifies events by their occurrence mode at the playhead", () => {
+    const atUncertainSpan = setPlayhead(initial, chapter, 1219)
+    const uncertain = eventsVisibleInWindow(atUncertainSpan, chapter).map((event) => [
+      event.id,
+      playbackState(atUncertainSpan, event),
+    ])
 
-    expect(active).toEqual(["event-coastal-crossing"])
+    // An uncertain occurrence window is possible at the playhead, never active.
+    expect(uncertain.filter(([, playback]) => playback !== "inactive")).toEqual([
+      ["event-coastal-crossing", "possible"],
+    ])
+
+    const atDuration = setPlayhead(initial, chapter, 1230)
+    const active = eventsVisibleInWindow(atDuration, chapter)
+      .filter((event) => playbackState(atDuration, event) === "active")
+      .map((event) => event.id)
+
+    expect(active).toEqual(["event-plain-workshop"])
   })
 })

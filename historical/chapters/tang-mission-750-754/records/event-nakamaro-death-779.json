@@ -7,12 +7,17 @@
   "revisions": [
     {
       "revision_id": "lks:rev:nakamaro-death-779-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
-      "change_explanation": "Initial chapter coda event: the 779 report of 阿倍仲麻呂's death and the funeral grants.",
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Owner-accepted placement: the entry names no place, so the court act is anchored at the court's seat (平城宮, the palace of 平城京) as a display anchor, with the palace's attestation cited on the place record and the modern site's coordinate from Wikidata. No coordinate is asserted.",
       "content": {
-        "summary": "The court learns that the former student 阿倍朝臣仲麻呂 has died in Tang and grants funeral goods to his household in 寶龜十年五月 (779).",
-        "event_types": ["occurrence"],
+        "summary": "The court learns that the former student 阿倍朝臣仲麻呂 has died in Tang and grants funeral goods to his household in 寶龜十年五月 (779). The entry names no place; the record anchors the act at the court's seat, 平城宮, as a display anchor.",
+        "event_types": [
+          "occurrence"
+        ],
         "time": {
           "source_expression": "寶龜十年五月丙寅 前學生阿倍朝臣仲麻呂在唐而亡",
           "calendar": "regnal",
@@ -21,14 +26,32 @@
           "interval": {
             "bounds": "two_sided",
             "boundary": "inclusive",
-            "start": {"year": 779, "era": "ce", "month": 5},
-            "end": {"year": 779, "era": "ce", "month": 5}
+            "start": {
+              "year": 779,
+              "era": "ce",
+              "month": 5
+            },
+            "end": {
+              "year": 779,
+              "era": "ce",
+              "month": 5
+            }
           }
         },
         "participants": [
-          {"actor_id": "lks:actor:abe-no-nakamaro", "role": "subject"}
+          {
+            "actor_id": "lks:actor:abe-no-nakamaro",
+            "role": "subject"
+          }
         ],
-        "editorial_notes": "Coda node (outside the primary 750–754 mission window). The entry reports a death that happened in Tang; it gives no death date, so the chapter publishes the report's month and no death year."
+        "editorial_notes": "Coda node (outside the primary 750–754 mission window). The entry reports a death that happened in Tang; it gives no death date, so the chapter publishes the report's month and no death year.",
+        "places": [
+          {
+            "place_id": "lks:place:heijo-palace",
+            "role": "site",
+            "note": "The entry names no place. A court act happens at the court, whose seat in this period is 平城宮 (the palace of 平城京); the record anchors it there for display only, not as a source-named site, and asserts no site for the act."
+          }
+        ]
       },
       "claims": [
         {
@@ -40,7 +63,10 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第卅五 寶龜十年五月丙寅"},
+              "locator": {
+                "kind": "entry",
+                "value": "卷第卅五 寶龜十年五月丙寅"
+              },
               "quoted_text": "丙寅。前學生阿倍朝臣仲麻呂在唐而亡。家口偏乏。葬礼有闕。勅賜東■一百疋。白綿三百屯。"
             }
           ]
@@ -54,19 +80,25 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第卅五 寶龜十年五月丙寅"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第卅五 寶龜十年五月丙寅"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:3692fb8f380a6e93141e1d0657482e32b1c1d35d5b39ded8ac8b88ff0cc039b3"
+      "revision_hash": "sha256:de2727f00ad7d18b058500296b5229f00e6d4300a7b21247f0f93846c533915d"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:nakamaro-death-779-1",
-    "published_revision_hash": "sha256:3692fb8f380a6e93141e1d0657482e32b1c1d35d5b39ded8ac8b88ff0cc039b3",
+    "published_revision_hash": "sha256:de2727f00ad7d18b058500296b5229f00e6d4300a7b21247f0f93846c533915d",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

@@ -7,67 +7,17 @@
   "revisions": [
     {
       "revision_id": "lks:rev:jianzhen-death-763-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
-      "change_explanation": "Initial chapter coda event: 鑒眞's death, with the sources' day expressions and age figures kept as they stand.",
-      "content": {
-        "summary": "鑒眞 dies in the fifth month of 寶字七年 (763). The biography gives 五月六日 and age 76; the chronicle's notice gives 五月戊申 and age 77.",
-        "event_types": ["occurrence"],
-        "time": {
-          "source_expression": "寶字七年五月六日（東征傳）; 天平寶字七年五月戊申（續日本紀）",
-          "calendar": "chinese_lunisolar",
-          "precision": "month",
-          "mode": "instant",
-          "interval": {
-            "bounds": "two_sided",
-            "boundary": "inclusive",
-            "start": {"year": 763, "era": "ce", "month": 5},
-            "end": {"year": 763, "era": "ce", "month": 5}
-          }
-        },
-        "participants": [
-          {"actor_id": "lks:actor:jianzhen", "role": "subject"}
-        ],
-        "editorial_notes": "Coda node (outside the primary 750–754 mission window). The sources disagree on the age (76 against 77) and express the day differently (六日 against 戊申), so the chapter publishes the month and records both expressions and both ages rather than choosing."
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
       },
-      "claims": [
-        {
-          "claim_id": "lks:claim:jianzhen-death-time",
-          "statement": "The biography records 鑒眞's death on 寶字七年五月六日 at age 76.",
-          "asserts": "/time",
-          "basis": "attested",
-          "role": "main",
-          "citations": [
-            {
-              "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "是歲五月六日，結跏趺座，面西化，春秋七十六"}
-            }
-          ]
-        },
-        {
-          "claim_id": "lks:claim:jianzhen-death-chronicle",
-          "statement": "The chronicle's notice records his death on 天平寶字七年五月戊申 at age 77.",
-          "asserts": "/time",
-          "basis": "attested",
-          "role": "supporting",
-          "citations": [
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第廿四 天平寶字七年五月戊申"}
-            }
-          ]
-        }
-      ],
-      "revision_hash": "sha256:887f1d407d85b543094e6e2045d54ed5fab73b93f31a3335f23f5c886382829c"
-    },
-    {
-      "revision_id": "lks:rev:jianzhen-death-763-2",
-      "created_at": "2026-09-24T08:30:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
       "change_explanation": "Corrected chapter coda event after review: the chronicle's differing day and age are published as a conflicting claim with an explicit dispute instead of a supporting claim.",
       "content": {
         "summary": "鑒眞 dies in the fifth month of 寶字七年 (763). The biography gives 五月六日 and age 76; the chronicle's notice gives 五月戊申 and age 77.",
-        "event_types": ["occurrence"],
+        "event_types": [
+          "occurrence"
+        ],
         "time": {
           "source_expression": "寶字七年五月六日（東征傳）; 天平寶字七年五月戊申（續日本紀）",
           "calendar": "chinese_lunisolar",
@@ -76,12 +26,23 @@
           "interval": {
             "bounds": "two_sided",
             "boundary": "inclusive",
-            "start": {"year": 763, "era": "ce", "month": 5},
-            "end": {"year": 763, "era": "ce", "month": 5}
+            "start": {
+              "year": 763,
+              "era": "ce",
+              "month": 5
+            },
+            "end": {
+              "year": 763,
+              "era": "ce",
+              "month": 5
+            }
           }
         },
         "participants": [
-          {"actor_id": "lks:actor:jianzhen", "role": "subject"}
+          {
+            "actor_id": "lks:actor:jianzhen",
+            "role": "subject"
+          }
         ],
         "editorial_notes": "Coda node (outside the primary 750–754 mission window). The sources disagree on the age (76 against 77) and express the day differently (六日 against 戊申), so the chapter publishes the month and records both expressions and both ages rather than choosing."
       },
@@ -95,7 +56,10 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "是歲五月六日，結跏趺座，面西化，春秋七十六"}
+              "locator": {
+                "kind": "entry",
+                "value": "是歲五月六日，結跏趺座，面西化，春秋七十六"
+              }
             }
           ]
         },
@@ -108,7 +72,10 @@
           "citations": [
             {
               "source_id": "lks:source:shoku-nihongi",
-              "locator": {"kind": "entry", "value": "卷第廿四 天平寶字七年五月戊申"}
+              "locator": {
+                "kind": "entry",
+                "value": "卷第廿四 天平寶字七年五月戊申"
+              }
             }
           ]
         }
@@ -117,14 +84,17 @@
         "status": "disputed",
         "summary": "The biography gives age 76 and the chronicle gives age 77; they also express the day differently. The chapter publishes month precision and does not resolve either difference."
       },
-      "revision_hash": "sha256:1a1c9e8e8f17759e8a69d67d4fdd7092a750b233be2a2dcd86afc26e3cc30f29"
+      "revision_hash": "sha256:30990fd41fd527153656a8b2704814bd6a3473ab59913a031d2f464c4b3ade2d"
     }
   ],
   "publication": {
-    "published_revision_id": "lks:rev:jianzhen-death-763-2",
-    "published_revision_hash": "sha256:1a1c9e8e8f17759e8a69d67d4fdd7092a750b233be2a2dcd86afc26e3cc30f29",
-    "set_id": "lks:set:tang-mission-750-754-v2",
-    "published_at": "2026-09-24T09:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_revision_id": "lks:rev:jianzhen-death-763-1",
+    "published_revision_hash": "sha256:30990fd41fd527153656a8b2704814bd6a3473ab59913a031d2f464c4b3ade2d",
+    "set_id": "lks:set:tang-mission-750-754-v1",
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

@@ -7,8 +7,11 @@
   "revisions": [
     {
       "revision_id": "lks:rev:todaiji-1",
-      "created_at": "2026-09-24T05:00:00Z",
-      "author": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"},
+      "created_at": "2026-09-24T23:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
       "change_explanation": "Initial chapter place: the temple where 鑒眞 was installed, with a display anchor at the existing site.",
       "content": {
         "summary": "東大寺, the Nara temple where the biography records 鑒眞 being installed on 天平勝寶六年二月四日 (754), and where the chronicle's later notice places the transmission and the precept study.",
@@ -27,12 +30,20 @@
             "claim_id": "lks:claim:todaiji-name"
           }
         ],
-        "place_types": ["religious_site"],
+        "place_types": [
+          "religious_site"
+        ],
         "geometry": [
           {
             "claim_id": "lks:claim:todaiji-anchor",
             "interpretation": "display_anchor",
-            "geojson": {"type": "Point", "coordinates": [135.8397, 34.6892]},
+            "geojson": {
+              "type": "Point",
+              "coordinates": [
+                135.8397,
+                34.6892
+              ]
+            },
             "precision": "unspecified",
             "notes": "Label anchor at the temple site recorded in Wikidata (Q460367). It is not an asserted historical coordinate; the temple is an existing site and the anchor only places the label."
           }
@@ -58,7 +69,10 @@
           "citations": [
             {
               "source_id": "lks:source:toseiden",
-              "locator": {"kind": "entry", "value": "天平勝寶六年甲午 二月四日，入京…引入東大寺安置"}
+              "locator": {
+                "kind": "entry",
+                "value": "天平勝寶六年甲午 二月四日，入京…引入東大寺安置"
+              }
             }
           ]
         },
@@ -71,19 +85,25 @@
           "citations": [
             {
               "source_id": "lks:source:wikidata",
-              "locator": {"kind": "dataset_row", "value": "Q460367 (P625)"}
+              "locator": {
+                "kind": "dataset_row",
+                "value": "Q460367 (P625)"
+              }
             }
           ]
         }
       ],
-      "revision_hash": "sha256:0bb509b2342332660aa729ef88a32e2a2a07c4f8c56a1ec83885dda15005a996"
+      "revision_hash": "sha256:bd55b0601edd614ffef15afb3c50d4599c90ab4a48264767ddc96cbac3e89f6c"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:todaiji-1",
-    "published_revision_hash": "sha256:0bb509b2342332660aa729ef88a32e2a2a07c4f8c56a1ec83885dda15005a996",
+    "published_revision_hash": "sha256:bd55b0601edd614ffef15afb3c50d4599c90ab4a48264767ddc96cbac3e89f6c",
     "set_id": "lks:set:tang-mission-750-754-v1",
-    "published_at": "2026-09-24T08:00:00Z",
-    "published_by": {"name": "Lekishi editorial preparation", "role": "preparing editor (owner-instructed)"}
+    "published_at": "2026-09-24T23:45:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
   }
 }

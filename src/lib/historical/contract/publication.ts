@@ -1,6 +1,13 @@
 import { revisionHash } from "./canonical"
 import * as Documents from "./documents"
 import { type Violation } from "./documents"
+import {
+  currentPublished,
+  currentPublishedObject,
+  publicationEvents,
+  type CurrentPublished,
+  type PublicationEvent,
+} from "./publication-order"
 import { cycle, orderingConsistent } from "./time"
 import * as Timestamps from "./timestamps"
 import {
@@ -47,13 +54,6 @@ const REFERENCE_FIELDS: [string, string | null][] = [
   ["to", null],
 ]
 
-export type CurrentPublished = {
-  revision_id: JsonValue
-  revision_hash: JsonValue
-  set_id: JsonValue
-  published_at: JsonValue
-}
-
 export type HistoryEntry = {
   revision_id: JsonValue
   set_id: JsonValue
@@ -64,6 +64,15 @@ export type HistoryEntry = {
   independence: JsonValue
   reviewer: JsonValue
 }
+
+// The "which revision is current" rule lives in `publication-order.ts`, which a
+// browser can also run: the atlas projects reviewed records with the same
+// function this validator checks them against.
+export {
+  currentPublished,
+  currentPublishedObject,
+  type CurrentPublished,
+} from "./publication-order"
 
 export type PublicationCheck =
   | { ok: true; currentPublished: Record<string, CurrentPublished>; warnings: string[] }
@@ -121,44 +130,6 @@ export function checkAll(documents: JsonValue[], sets: JsonValue[]): Publication
   }
 
   return { ok: true, currentPublished: currentPublishedObject(records, sets), warnings: [] }
-}
-
-/** Maps each published record id to its newest published revision. */
-export function currentPublished(
-  records: JsonValue[],
-  sets: JsonValue[],
-): Map<string, CurrentPublished> {
-  const current = new Map<string, PublicationEvent>()
-
-  for (const event of publicationEvents(sets)) {
-    const existing = current.get(event.recordId)
-
-    current.set(event.recordId, existing === undefined ? event : newer(existing, event))
-  }
-
-  const known = new Set(records.map((record) => String(valueAt(record, "record_id"))))
-  const result = new Map<string, CurrentPublished>()
-
-  for (const [recordId, event] of current) {
-    if (known.has(recordId)) {
-      result.set(recordId, {
-        revision_id: event.revisionId,
-        revision_hash: event.revisionHash,
-        set_id: event.setId,
-        published_at: event.publishedAt,
-      })
-    }
-  }
-
-  return result
-}
-
-/** The published view as a plain object, for document-shaped results and vectors. */
-export function currentPublishedObject(
-  records: JsonValue[],
-  sets: JsonValue[],
-): Record<string, CurrentPublished> {
-  return Object.fromEntries(currentPublished(records, sets))
 }
 
 /**
@@ -228,43 +199,6 @@ function compareSortKeys(a: JsonValue, b: JsonValue): number {
   const right = Timestamps.sortKey(b)
 
   return left[0] - right[0] || left[1] - right[1]
-}
-
-type PublicationEvent = {
-  recordId: string
-  revisionId: JsonValue
-  revisionHash: JsonValue
-  setId: JsonValue
-  publishedAt: JsonValue
-  independence: JsonValue | undefined
-  reviewer: JsonValue | undefined
-}
-
-function publicationEvents(sets: JsonValue[]): PublicationEvent[] {
-  return sets.flatMap((setValue) => {
-    const set = objectOf(setValue)
-
-    return listOf(set["members"]).map((memberValue) => {
-      const member = objectOf(memberValue)
-
-      return {
-        recordId: String(member["record_id"]),
-        revisionId: member["revision_id"],
-        revisionHash: member["revision_hash"],
-        setId: set["set_id"],
-        publishedAt: set["published_at"],
-        independence: getIn(set, ["review", "independence"]),
-        reviewer: getIn(set, ["review", "reviewer", "name"]),
-      }
-    })
-  })
-}
-
-function newer(existing: PublicationEvent, candidate: PublicationEvent): PublicationEvent {
-  // A timestamp that is not a real UTC instant never becomes the newest set.
-  const order = Timestamps.compare(candidate.publishedAt, existing.publishedAt)
-
-  return order === "gt" || order === "eq" ? candidate : existing
 }
 
 function documentErrors(document: JsonValue): Violation[] {

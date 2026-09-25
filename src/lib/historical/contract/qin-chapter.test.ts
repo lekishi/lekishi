@@ -781,7 +781,7 @@ describe("the prepared corrections (unpublished draft revisions)", () => {
     [
       "lks:actor:nei-shi-teng",
       "lks:rev:nei-shi-teng-2",
-      "sha256:3d0769dc0311dc4db26bc88d2c53661f64951d6ab49385fa13bf568db07ba151",
+      "sha256:69c87dc8714a231085ecbcaf9f67c982eda9e2724ee6fcb0c4ccbf63ce0a3c9a",
     ],
     [
       "lks:actor:qin-king-zheng",
@@ -959,6 +959,72 @@ describe("the prepared corrections (unpublished draft revisions)", () => {
     expect(String(content["editorial_notes"])).toContain("no validity interval")
   })
 
+  it("prepares no corrected actor or relationship with a duration the sources do not state", () => {
+    // Two dated notices are not a continuous span: the corrected drafts must not
+    // turn them into `duration` validity, which the contract defines as activity
+    // supported across the interval. The published snapshot still carries the
+    // spans the review flagged; the drafts are what the owner is being asked to
+    // publish in their place.
+    const chapter = tree()
+
+    // The actor durations the fixture does state are the two reigns, each
+    // attested at both ends: 韓王安's span runs from the six-states table's 元年
+    // (238 BCE) to its ninth year (230 BCE), and 秦王政's succession is dated by
+    // the comprehensive mirror to 247 BCE with the cited entries naming him king
+    // inside the recorded 233–230 BCE span. Every other actor role and
+    // relationship validity in a corrected draft must be an occurrence window.
+    const supportedDurations = new Set([
+      "lks:actor:han-king-an/ruler",
+      "lks:actor:qin-king-zheng/ruler",
+    ])
+
+    for (const [recordId, revisionId] of CORRECTIONS) {
+      const record = recordById(chapter, recordId)
+
+      if (record["kind"] === "relationship") {
+        const validity = draftContent(recordId, revisionId)["validity"]
+
+        // A relationship may carry a bounded occurrence window; what it must not
+        // carry is a `duration` the sources do not support.
+        if (validity !== undefined) {
+          expect(objectOf(validity)["mode"], recordId).not.toBe("duration")
+        }
+
+        continue
+      }
+
+      if (record["kind"] !== "actor") {
+        continue
+      }
+
+      for (const role of listOf(draftContent(recordId, revisionId)["roles"]).map((entry) =>
+        objectOf(entry),
+      )) {
+        const validity = role["validity"]
+
+        if (validity !== undefined && objectOf(validity)["mode"] === "duration") {
+          expect(supportedDurations, `${recordId}/${String(role["role"])}`).toContain(
+            `${recordId}/${String(role["role"])}`,
+          )
+        }
+      }
+    }
+
+    const officer = draftContent("lks:actor:nei-shi-teng", "lks:rev:nei-shi-teng-2")
+    const official = listOf(officer["roles"])
+      .map((entry) => objectOf(entry))
+      .find((role) => role["role"] === "official")
+
+    expect(official).toBeDefined()
+    expect(objectOf(official)["validity"]).toBeUndefined()
+
+    const note = String(objectOf(official)["note"])
+
+    expect(note).toContain("231 BCE")
+    expect(note).toContain("230 BCE")
+    expect(note).toContain("no continuous tenure")
+  })
+
   it("quotes only unannotated fragments in the corrected citations", () => {
     for (const [recordId, revisionId] of CORRECTIONS) {
       for (const claim of draftClaims(recordId, revisionId)) {
@@ -1054,6 +1120,15 @@ describe("the prepared corrections (unpublished draft revisions)", () => {
     const conflictContent = objectOf(conflict["content"])
 
     expect(objectOf(conflictContent["validity"])["mode"]).toBe("duration")
+
+    // The published officer record carries the same unsupported continuity: a
+    // 231–230 BCE office `duration` between two dated notices; the draft drops it.
+    const officer = publishedRevision(recordById(chapter, "lks:actor:nei-shi-teng"))
+    const official = listOf(objectOf(officer["content"])["roles"])
+      .map((entry) => objectOf(entry))
+      .find((role) => role["role"] === "official")
+
+    expect(objectOf(objectOf(official)["validity"])["mode"]).toBe("duration")
 
     // The published conflict summary and claim attribute the 233 BCE attack to
     // the hereditary house, which dates it 王安五年; the draft corrects both.

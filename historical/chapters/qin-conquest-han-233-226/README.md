@@ -100,8 +100,12 @@ entry), and those are not used as evidence.
 
 - Dates are published at the precision the sources give: the year for 233, 230,
   and 226 BCE and the ninth month for 231 BCE. **No day is published**, and no
-  duration is invented; the year-only events are `occurrence_window`s, so the
-  atlas must never present them as continuous activity.
+  duration is invented: the year-only records are `occurrence_window`s, and the
+  spans the fixture records are the two reigns, which the sources attest at both
+  ends. The corrected drafts drop the two spans the review found unsupported (the
+  conflict's 233–230 BCE `duration` and the officer's 231–230 BCE office
+  `duration`), and the atlas must never present the year-only records as
+  continuous activity.
 - The regnal and absolute years are kept as the sources give them. The
   hereditary house dates the embassy and the attack to 王安五年; the six-states
   table records the embassy and the killing under 韓王安六年, aligned with
@@ -148,7 +152,7 @@ corrected preparation set is the owner's decision.
 | `lks:rev:han-nanyang-cession-231-1` | `lks:rev:han-nanyang-cession-231-2` | The mirror's quoted fragments drop the transcription's editorial addition 秋. |
 | `lks:rev:nanyang-1` | `lks:rev:nanyang-2` | The summary attributes the cession to the annals and the comprehensive mirror, not to the hereditary house; the quoted fragments drop 秋. |
 | `lks:rev:han-nanyang-cession-1` | `lks:rev:han-nanyang-cession-2` | The mirror's quoted fragments drop 秋. |
-| `lks:rev:nei-shi-teng-1` | `lks:rev:nei-shi-teng-2` | The name is cited to the annals alone, and the mirror's corrected reading is stated in the notes rather than used as evidence. |
+| `lks:rev:nei-shi-teng-1` | `lks:rev:nei-shi-teng-2` | The name is cited to the annals alone, the mirror's corrected reading is stated in the notes rather than used as evidence, and the officer's office no longer carries a 231–230 BCE `duration` between two dated notices. |
 | `lks:rev:qin-king-zheng-1` | `lks:rev:qin-king-zheng-2` | The mirror quotation is an unchanged fragment; the earlier text changed the source's comma to a full stop. |
 | `lks:rev:han-king-an-1` | `lks:rev:han-king-an-2` | The role span is described as the six-states table's first numbered regnal year (元年, 238 BCE), not as an accession year, and the embassy year's regnal counts are recorded as differing expressions. |
 | `lks:rev:qin-conquest-han-story-1` | `lks:rev:qin-conquest-han-story-2` | The coverage note names the annals' 230 BCE notice as a famine (民大饑), not a drought. |

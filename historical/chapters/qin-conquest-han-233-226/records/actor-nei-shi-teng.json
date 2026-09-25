@@ -176,7 +176,7 @@
         "name": "Lekishi editorial preparation",
         "role": "preparing editor (owner-instructed)"
       },
-      "change_explanation": "Correction prepared after review: the comprehensive mirror's 230 BCE entry carries a text-critical correction of the officer's name, so the name claim cites the annals alone and the notes state the mirror's corrected reading explicitly.",
+      "change_explanation": "Correction prepared after review: the name is cited to the annals alone, and the mirror's corrected reading is stated in the notes rather than used as evidence. The officer's office no longer carries a 231–230 BCE `duration`: the notices attest the title at two dates, not uninterrupted tenure, so the role keeps its note and no validity interval.",
       "content": {
         "summary": "內史騰, the Qin officer the annals name as receiving Han's ceded 南陽 as acting governor in 231 BCE and as attacking Han and taking 韓王安 in 230 BCE. The hereditary house's parallel account names no officer, and the comprehensive mirror records the capture and the commandery with a text-critical correction of the name.",
         "names": [
@@ -208,25 +208,7 @@
         "roles": [
           {
             "role": "official",
-            "validity": {
-              "source_expression": "十六年九月（假守騰）; 十七年（內史騰）",
-              "calendar": "chinese_lunisolar",
-              "precision": "year",
-              "mode": "duration",
-              "interval": {
-                "bounds": "two_sided",
-                "boundary": "inclusive",
-                "start": {
-                  "year": 231,
-                  "era": "bce"
-                },
-                "end": {
-                  "year": 230,
-                  "era": "bce"
-                }
-              }
-            },
-            "note": "The 231 notice calls him 假守 (acting governor) of the received 南陽; the 230 notice calls him 內史. The fixture treats the two notices as naming the same officer and records both titles."
+            "note": "The 231 BCE notice calls him 假守 (acting governor) of the received 南陽; the 230 BCE notice calls him 內史. The fixture treats the two notices as naming the same officer, records both titles, and asserts no continuous tenure between the two notices."
           },
           {
             "role": "soldier",
@@ -251,7 +233,7 @@
             "note": "The 230 BCE campaign the annals record him leading; the sources state no duration."
           }
         ],
-        "editorial_notes": "The comprehensive mirror's 230 BCE entry reads 內史〔騰〕(勝), with 騰 substituted from the annals in its own text-critical note; the chapter therefore attributes the name to the annals and cites the mirror only for the capture and the commandery. The identification of 假守騰 with 內史騰 is the histories' own sequence and is recorded as an editorial reading, not as a source statement."
+        "editorial_notes": "The comprehensive mirror's 230 BCE entry reads 內史〔騰〕(勝), with 騰 substituted from the annals in its own text-critical note; the chapter therefore attributes the name to the annals and cites the mirror only for the capture and the commandery. The identification of 假守騰 with 內史騰 is the histories' own sequence and is recorded as an editorial reading, not as a source statement. The office is recorded without a validity interval: the notices attest the title at two dates and state no continuous tenure."
       },
       "claims": [
         {
@@ -323,7 +305,7 @@
           ]
         }
       ],
-      "revision_hash": "sha256:3d0769dc0311dc4db26bc88d2c53661f64951d6ab49385fa13bf568db07ba151"
+      "revision_hash": "sha256:69c87dc8714a231085ecbcaf9f67c982eda9e2724ee6fcb0c4ccbf63ce0a3c9a"
     }
   ],
   "publication": {

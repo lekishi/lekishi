@@ -29,6 +29,19 @@ approval was still pending is superseded by the owner's 2026-09-25 approval
 recorded in link:../0002/PUBLICATION_APPROVAL.adoc[the publication approval
 gate]; the rest of that record remains readable and unchanged.
 
+NOTE: This record's artifact rule — that the fixture's ids must not reach the
+release artifact — is **superseded** by
+link:COMPARISON_REVIEW_ROUTE.adoc[the comparison review route decision]
+(2026-09-25). The owner asked to review the corrected content in the product
+before deciding on it, so the fixture now ships as the prerendered review route
+`/compare/qin`, which states that it is unapproved preparation, and
+`scripts/check-static-build.mjs` requires that page instead of forbidding the
+fixture's ids. Everything else here still holds: the caller-supplied coverage
+window, the one projection, the catalog as the browser-safe loader for
+non-production chapters, the gate over every chapter tree, and the fixture's
+`preparation snapshot` status. The measured evidence below records the state as
+of this decision and stays readable as what was measured then.
+
 == Decision
 
 * **The projection takes the chapter's coverage model from its caller.**

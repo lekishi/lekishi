@@ -1,7 +1,8 @@
+import { readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
 import { chapterDirectory, loadChapter, type ChapterTree } from "../chapter"
 import { projectChapter } from "../../atlas/projection"
-import { revisionHash, sourceHash } from "./canonical"
+import { encode, revisionHash, sha256, sourceHash } from "./canonical"
 import * as Publication from "./publication"
 import * as Time from "./time"
 import { isObject, listOf, objectOf, type JsonObject, type JsonValue } from "./types"
@@ -16,8 +17,9 @@ import { isObject, listOf, objectOf, type JsonObject, type JsonValue } from "./t
  * the seal and publication rules that protect it. The second is this fixture's
  * own coverage model: the 233–226 BCE window, the excluded notices and campaigns,
  * the year-only dates with no invented day, the disputed death with the three
- * accounts kept apart, and the rule that the fixture places exactly one label
- * anchor and asserts no other coordinate.
+ * accounts kept apart, and the rule that every map position is a label anchor
+ * resting on a cited identification, while the one place without one asserts no
+ * coordinate.
  *
  * The chapter rules are written as predicates and then exercised against
  * deliberately wrong readings, because the contract alone would accept an
@@ -26,6 +28,9 @@ import { isObject, listOf, objectOf, type JsonObject, type JsonValue } from "./t
  */
 
 const CHAPTER = "qin-conquest-han-233-226"
+
+/** The record that holds the owner's publication decisions, relative to the repo root. */
+const LEDGER_URL = new URL("../../../../rfd/0002/PUBLICATION_APPROVAL.adoc", import.meta.url)
 
 /** The fixture's episode window, inclusive at year granularity (civil BCE). */
 const WINDOW = { startYear: 233, endYear: 226 }
@@ -242,47 +247,63 @@ function normalizedTime(record: JsonObject): Time.NormalizedTime {
   return result.value
 }
 
-/** The event's civil years, from the normalized endpoints. */
-function yearsOf(time: Time.NormalizedTime): number[] {
+/**
+ * The event's civil years, from the normalized endpoints. Both endpoints must be
+ * bounded BCE values: an open or CE endpoint would put the event outside a
+ * window the fixture claims to check, so it is a violation rather than a value
+ * this function quietly drops.
+ */
+function yearsOf(recordId: string, time: Time.NormalizedTime, violations: Set<string>): number[] {
   const years: number[] = []
 
   for (const endpoint of [time.start, time.end]) {
-    if (endpoint !== null && endpoint.astro <= 0) {
-      years.push(1 - endpoint.astro)
+    if (endpoint === null) {
+      violations.add(`${recordId} has an open endpoint the fixture's BCE window cannot check`)
+      continue
     }
+
+    if (endpoint.astro > 0) {
+      violations.add(`${recordId} has a CE endpoint, outside the fixture's BCE window`)
+      continue
+    }
+
+    years.push(1 - endpoint.astro)
   }
 
   return years
 }
 
 /**
- * The fixture's scope: every event lies inside 233–226 BCE, and no event falls
- * in the excluded years whose Qin–Han notices the coverage note names.
+ * The fixture's scope: every event's whole inclusive span lies inside 233–226
+ * BCE, and no span covers an excluded year whose Qin–Han notice the coverage
+ * note names.
  */
 function scopeViolations(chapter: ChapterTree): string[] {
   const violations = new Set<string>()
 
   for (const record of recordsOfKind(chapter, "event")) {
     const recordId = String(record["record_id"])
-    const time = normalizedTime(record)
-    const years = yearsOf(time)
+    const years = yearsOf(recordId, normalizedTime(record), violations)
 
     if (years.length === 0) {
       violations.add(`${recordId} carries no dated endpoints`)
       continue
     }
 
-    for (const year of years) {
-      // Civil BCE years run downwards: 233 is the earliest year in the window
-      // and 226 the latest.
-      if (year > WINDOW.startYear || year < WINDOW.endYear) {
-        violations.add(
-          `${recordId} falls in ${year}, outside the ${WINDOW.startYear}–${WINDOW.endYear} BCE window`,
-        )
-      }
+    // Civil BCE years run downwards: 233 is the earliest year in the window
+    // and 226 the latest.
+    const earliest = Math.max(...years)
+    const latest = Math.min(...years)
 
-      if (EXCLUDED_YEARS.includes(year)) {
-        violations.add(`${recordId} falls in the excluded year ${year}`)
+    if (earliest > WINDOW.startYear || latest < WINDOW.endYear) {
+      violations.add(
+        `${recordId} spans ${earliest}–${latest} BCE, outside the ${WINDOW.startYear}–${WINDOW.endYear} BCE window`,
+      )
+    }
+
+    for (const year of EXCLUDED_YEARS) {
+      if (year <= earliest && year >= latest) {
+        violations.add(`${recordId} spans the excluded year ${year}`)
       }
     }
   }
@@ -414,10 +435,12 @@ function coordinateViolations(chapter: ChapterTree): string[] {
 
         return listOf(claim["citations"]).some((citation) => {
           const entry = objectOf(citation)
+          const locator = objectOf(entry["locator"])["value"]
 
           return (
             String(entry["source_id"]) === identificationSource &&
-            String(objectOf(entry["locator"])["value"] ?? "") !== ""
+            typeof locator === "string" &&
+            locator.trim() !== ""
           )
         })
       })
@@ -433,23 +456,60 @@ function coordinateViolations(chapter: ChapterTree): string[] {
   return violations
 }
 
-/** No event publishes day precision: none of the cited entries states a day. */
+/**
+ * Every dated value in a record's published content, wherever the shape carries
+ * one: an event's `time`, an actor's role `validity`, and any future field with
+ * the same time shape. Walking the content means a new dated field cannot escape
+ * the day and duration rules by living somewhere the tests did not look.
+ */
+function timeValues(content: JsonObject): JsonObject[] {
+  const values: JsonObject[] = []
+
+  const visit = (value: JsonValue | undefined): void => {
+    if (isObject(value)) {
+      if (isObject(value["interval"]) && typeof value["mode"] === "string") {
+        values.push(value)
+      }
+
+      for (const entry of Object.values(value)) {
+        visit(entry)
+      }
+
+      return
+    }
+
+    if (Array.isArray(value)) {
+      for (const entry of value) {
+        visit(entry)
+      }
+    }
+  }
+
+  visit(content)
+
+  return values
+}
+
+/** No dated value publishes day precision: none of the cited entries states a day. */
 function dayPrecisionViolations(chapter: ChapterTree): string[] {
   const violations: string[] = []
 
-  for (const record of recordsOfKind(chapter, "event")) {
-    const time = objectOf(contentOf(record)["time"])
-    const interval = objectOf(time["interval"])
+  for (const record of chapter.documents.filter((document) => document["document"] === "record")) {
+    const recordId = String(record["record_id"])
 
-    if (time["precision"] === "day") {
-      violations.push(`${String(record["record_id"])} publishes day precision`)
-    }
+    for (const time of timeValues(contentOf(record))) {
+      if (time["precision"] === "day") {
+        violations.push(`${recordId} publishes day precision`)
+      }
 
-    for (const endpoint of ["start", "end"]) {
-      const value = interval[endpoint]
+      const interval = objectOf(time["interval"])
 
-      if (isObject(value) && value["day"] !== null && value["day"] !== undefined) {
-        violations.push(`${String(record["record_id"])} carries a day in its ${endpoint} endpoint`)
+      for (const endpoint of ["start", "end"]) {
+        const value = interval[endpoint]
+
+        if (isObject(value) && value["day"] !== null && value["day"] !== undefined) {
+          violations.push(`${recordId} carries a day in its ${endpoint} endpoint`)
+        }
       }
     }
   }
@@ -577,22 +637,50 @@ describe("the Qin comparison fixture", () => {
 
   it("carries the exact inventory the fixture documents", () => {
     const chapter = tree()
-
-    expect(chapter.documents).toHaveLength(24)
-    expect(recordsOfKind(chapter, "place")).toHaveLength(4)
-    expect(recordsOfKind(chapter, "actor")).toHaveLength(6)
-    expect(recordsOfKind(chapter, "event")).toHaveLength(5)
-    expect(recordsOfKind(chapter, "relationship")).toHaveLength(4)
-    expect(recordsOfKind(chapter, "story")).toHaveLength(1)
-    expect(chapter.sets).toHaveLength(1)
-    expect(chapter.documents.filter((document) => document["document"] === "source")).toHaveLength(
-      4,
-    )
-    expect(
-      recordsOfKind(chapter, "event")
+    const idsOfKind = (kind: string) =>
+      recordsOfKind(chapter, kind)
         .map((record) => String(record["record_id"]))
+        .sort()
+
+    // Counts and identities together: a record that is added or swapped has to
+    // be reviewed here, not only counted.
+    expect(chapter.documents).toHaveLength(24)
+    expect(idsOfKind("place")).toEqual([
+      "lks:place:nanyang",
+      "lks:place:xinzheng",
+      "lks:place:yingchuan",
+      "lks:place:yunyang",
+    ])
+    expect(idsOfKind("actor")).toEqual([
+      "lks:actor:han-fei",
+      "lks:actor:han-king-an",
+      "lks:actor:han-state",
+      "lks:actor:nei-shi-teng",
+      "lks:actor:qin-king-zheng",
+      "lks:actor:qin-state",
+    ])
+    expect(idsOfKind("event")).toEqual([...EXPECTED_EVENTS].sort())
+    expect(idsOfKind("relationship")).toEqual([
+      "lks:relationship:han-annexation-yingchuan",
+      "lks:relationship:han-nanyang-cession",
+      "lks:relationship:han-qin-submission",
+      "lks:relationship:qin-han-conflict",
+    ])
+    expect(idsOfKind("story")).toEqual(["lks:story:qin-conquest-han-233-226"])
+    expect(
+      chapter.documents
+        .filter((document) => document["document"] === "source")
+        .map((document) => String(document["source_id"]))
         .sort(),
-    ).toEqual([...EXPECTED_EVENTS].sort())
+    ).toEqual([
+      "lks:source:dushi-fangyu-jiyao",
+      "lks:source:shiji",
+      "lks:source:wikidata",
+      "lks:source:zizhi-tongjian",
+    ])
+    expect(chapter.sets.map((set) => String(objectOf(set)["set_id"]))).toEqual([
+      "lks:set:qin-conquest-han-233-226-v1",
+    ])
   })
 
   it("stays inside its 233–226 BCE window and excludes the named notices", () => {
@@ -628,11 +716,70 @@ describe("the Qin comparison fixture", () => {
   })
 
   it("publishes no day and no duration the sources do not state", () => {
-    expect(dayPrecisionViolations(tree())).toEqual([])
+    const chapter = tree()
 
-    for (const record of recordsOfKind(tree(), "event")) {
+    expect(dayPrecisionViolations(chapter)).toEqual([])
+
+    const durations = new Map<string, number>()
+
+    for (const record of chapter.documents.filter(
+      (document) => document["document"] === "record",
+    )) {
+      const recordId = String(record["record_id"])
+      const count = timeValues(contentOf(record)).filter(
+        (time) => time["mode"] === "duration",
+      ).length
+
+      if (count > 0) {
+        durations.set(recordId, count)
+      }
+    }
+
+    // The two reigns are the only spans the sources attest at both ends, one
+    // each; every other dated value is an instant or an uncertain occurrence
+    // window. The counts are compared too, so a second duration inside one of
+    // the two records cannot pass as the same allowance.
+    expect([...durations.entries()].sort(([left], [right]) => left.localeCompare(right))).toEqual([
+      ["lks:actor:han-king-an", 1],
+      ["lks:actor:qin-king-zheng", 1],
+    ])
+
+    for (const record of recordsOfKind(chapter, "event")) {
       expect(normalizedTime(record).mode, String(record["record_id"])).not.toBe("duration")
     }
+  })
+
+  it("is covered by the ledger as a preparation snapshot, with the digest it names", () => {
+    // The fixture must not be the one content tree the gate cannot see: the
+    // ledger row has to name this set, decide it a preparation snapshot, and
+    // carry the digest of the set as it stands. Approving the content would be
+    // the owner's decision, and this test is what fails if one is written in.
+    const set = setById(tree(), "lks:set:qin-conquest-han-233-226-v1")
+    const lines = readFileSync(LEDGER_URL, "utf8").split("\n")
+    const start = lines.findIndex((line) => line.includes("lks:set:qin-conquest-han-233-226-v1"))
+    const cells: string[] = []
+
+    // Read the row's five cells the way the ledger writes them: each cell starts
+    // on a line beginning with `|` and continues on the wrapped lines below it.
+    for (let index = start; index < lines.length && cells.length < 5; index += 1) {
+      const line = lines[index]!.trimEnd()
+
+      if (line.startsWith("|")) {
+        for (const cell of line.split("|").slice(1)) {
+          cells.push(cell.trim())
+        }
+      } else if (cells.length > 0 && line.trim() !== "") {
+        cells[cells.length - 1] = `${cells[cells.length - 1]} ${line.trim()}`
+      }
+    }
+
+    expect(cells[0]).toBe("`lks:set:qin-conquest-han-233-226-v1`")
+    expect(cells[1]).toBe("preparation snapshot")
+    expect(cells[2]).toContain("owner")
+    expect(cells[2]).not.toContain("approved")
+    // The cell carries the digest in backticks, as the ledger writes it.
+    expect(cells[3]).toBe(`\`sha256:${sha256(encode(set))}\``)
+    expect(cells[4]).not.toContain("owner approved")
   })
 
   it("records the preparing editor's self-review and no release decision", () => {
@@ -689,6 +836,16 @@ describe("the Qin comparison fixture", () => {
         placeId: expectedPlace.get(event.id),
         basis: "display-anchor",
       })
+
+      // The projected point is the recorded label-anchor coordinate, not just
+      // the right place id: a wrong position must not pass.
+      const anchor = ANCHORS.find(([placeId]) => placeId === event.placement.placeId)
+
+      expect(anchor, event.id).toBeDefined()
+      expect(event.placement.kind === "point" ? event.placement.position : null, event.id).toEqual({
+        lon: anchor?.[1][0],
+        lat: anchor?.[1][1],
+      })
     }
 
     for (const [eventId, reason] of UNPLACED_EVENTS) {
@@ -730,6 +887,32 @@ describe("the Qin comparison fixture", () => {
 
     objectOf(interval["start"])["year"] = 227
     objectOf(interval["end"])["year"] = 227
+
+    expect(scopeViolations(chapter)).not.toEqual([])
+  })
+
+  it("rejects an event whose dated endpoint is left open", () => {
+    const chapter = cloneTree(tree())
+    const record = recordById(chapter, "lks:event:han-conquest-230")
+    const interval = objectOf(objectOf(contentOf(record)["time"])["interval"])
+
+    // An open endpoint would put the event outside a window the fixture claims
+    // to check, so the scope predicate rejects it rather than skipping it.
+    interval["end"] = null
+    interval["bounds"] = "lower_only"
+
+    expect(scopeViolations(chapter)).not.toEqual([])
+  })
+
+  it("rejects an event whose span covers an excluded year", () => {
+    const chapter = cloneTree(tree())
+    const record = recordById(chapter, "lks:event:xinzheng-revolt-226")
+    const interval = objectOf(objectOf(contentOf(record)["time"])["interval"])
+
+    // Both endpoints stay inside 233–226 BCE, but the span now claims the
+    // excluded 227 BCE year, which the fixture must not do.
+    objectOf(interval["start"])["year"] = 229
+    objectOf(interval["end"])["year"] = 226
 
     expect(scopeViolations(chapter)).not.toEqual([])
   })
@@ -781,10 +964,35 @@ describe("the Qin comparison fixture", () => {
     const record = recordById(chapter, "lks:place:xinzheng")
     const entry = geometryEntries(record)[0] as JsonObject
 
+    // Only the interpretation changes, so the rejection cannot be satisfied by
+    // the precision rule instead of the promotion rule.
     entry["interpretation"] = "approximate_point"
-    entry["precision"] = "locality"
 
-    expect(coordinateViolations(chapter)).not.toEqual([])
+    const violations = coordinateViolations(chapter)
+
+    expect(violations).not.toEqual([])
+    expect(violations.join("\n")).toContain("asserts approximate_point geometry")
+  })
+
+  it("rejects a display anchor for 南陽, which the fixture leaves unlocated", () => {
+    const chapter = cloneTree(tree())
+    const record = recordById(chapter, "lks:place:nanyang")
+    const content = contentOf(record)
+
+    content["geometry"] = [
+      {
+        claim_id: "lks:claim:nanyang-unknown",
+        interpretation: "display_anchor",
+        geojson: { type: "Point", coordinates: [112.5286, 32.9908] },
+        precision: "unspecified",
+        notes: "A modern namesake the fixture does not anchor.",
+      },
+    ]
+
+    const violations = coordinateViolations(chapter)
+
+    expect(violations).not.toEqual([])
+    expect(violations.join("\n")).toContain("the fixture anchors only")
   })
 
   it("rejects an anchor whose coordinate is not the recorded one", () => {
@@ -819,20 +1027,23 @@ describe("the Qin comparison fixture", () => {
   it("rejects an anchor with no identification for the place it stands for", () => {
     const chapter = cloneTree(tree())
     const record = recordById(chapter, "lks:place:yunyang")
+    const claim = claimsOf(record).find(
+      (candidate) => candidate["claim_id"] === "lks:claim:yunyang-identification",
+    )
 
-    // A coordinate for a modern namesake is not evidence: dropping the
-    // identification citation leaves the anchor standing on nothing.
-    listOf(record["revisions"]).forEach((candidate) => {
-      const revision = objectOf(candidate)
+    // A coordinate for a modern namesake is not evidence: the claim stays, but
+    // with no identification citation the anchor stands on nothing.
+    objectOf(claim)["citations"] = [
+      {
+        source_id: "lks:source:wikidata",
+        locator: { kind: "dataset_row", value: "Q10881340 (P625)" },
+      },
+    ]
 
-      if (revision["revision_id"] === objectOf(record["publication"])["published_revision_id"]) {
-        revision["claims"] = listOf(revision["claims"]).filter(
-          (claim) => objectOf(claim)["claim_id"] !== "lks:claim:yunyang-identification",
-        )
-      }
-    })
+    const violations = coordinateViolations(chapter)
 
-    expect(coordinateViolations(chapter)).not.toEqual([])
+    expect(violations).not.toEqual([])
+    expect(violations.join("\n")).toContain("without citing the source that identifies")
   })
 
   it("rejects an anchor whose identification citation has no locator", () => {
@@ -895,7 +1106,7 @@ describe("the Qin comparison fixture", () => {
     expect(disputeViolations(chapter)).not.toEqual([])
   })
 
-  it("detects an edit to an approved revision", () => {
+  it("detects an edit to a sealed published revision", () => {
     const chapter = cloneTree(tree())
     const record = recordById(chapter, "lks:event:han-conquest-230")
     objectOf(publishedRevision(record)["content"])["summary"] = "Edited after sealing"
@@ -953,7 +1164,7 @@ describe("the Qin comparison fixture", () => {
     }
   })
 
-  it("rejects an event that references an unpublished place", () => {
+  it("rejects an event that references a place the fixture does not publish", () => {
     const chapter = cloneTree(tree())
     const record = recordById(chapter, "lks:event:xinzheng-revolt-226")
     const reference = objectOf(listOf(contentOf(record)["places"])[0])
@@ -1166,28 +1377,27 @@ describe("the label positions the owner asked for", () => {
 
   it("publishes no position the sources do not support", () => {
     const chapter = tree()
-    const placed = new Set(
-      geometryEntries(recordById(chapter, "lks:place:xinzheng")).map(() => "lks:place:xinzheng"),
-    )
+    const anchored: string[] = []
+    const unlocated: string[] = []
 
     // Every anchored place is in the pinned list, and no other place carries
-    // coordinates: an anchor the fixture has not reviewed cannot appear.
+    // coordinates: an anchor the fixture has not reviewed cannot appear, and a
+    // place the fixture has not placed cannot quietly gain a position.
     for (const record of recordsOfKind(chapter, "place")) {
       const recordId = String(record["record_id"])
       const entry = geometryEntries(record)[0]
 
       if (entry["interpretation"] === "display_anchor") {
-        expect(
-          ANCHORS.map(([placeId]) => placeId),
-          recordId,
-        ).toContain(recordId)
+        anchored.push(recordId)
       } else {
+        unlocated.push(recordId)
         expect(entry["interpretation"], recordId).toBe("unknown")
         expect(entry["geojson"], recordId).toBeNull()
       }
     }
 
-    expect(placed.size).toBe(1)
+    expect(anchored.sort()).toEqual(ANCHORS.map(([placeId]) => placeId).sort())
+    expect(unlocated).toEqual(["lks:place:nanyang"])
   })
 })
 
@@ -1603,13 +1813,35 @@ describe("the corrections the owner asked to review", () => {
 
   it("names the 230 BCE notice as the annals give it, without inferring a cause", () => {
     const note = String(
-      revisionContent("lks:story:qin-conquest-han-233-226", "lks:rev:qin-conquest-han-story-2")[
-        "coverage_note"
-      ],
+      contentOf(recordById(tree(), "lks:story:qin-conquest-han-233-226"))["coverage_note"],
     )
 
     expect(note).toContain("famine")
     expect(note).not.toContain("drought")
+  })
+
+  it("states the exclusions the fixture's scope depends on", () => {
+    const note = String(
+      contentOf(recordById(tree(), "lks:story:qin-conquest-han-233-226"))["coverage_note"],
+    )
+
+    // The window's edges are only meaningful if the note says what it leaves
+    // out: the other notices of the cited years, the 246 BCE canal, the
+    // 227–226 BCE Yan campaign and 荊軻's attempt, and every earlier and later
+    // Qin–Han war.
+    expect(note).toContain("Excluded")
+    expect(note).toContain("233 BCE Zhao campaign")
+    expect(note).toContain("earthquake")
+    expect(note).toContain("華陽太后")
+    expect(note).toContain("famine notices")
+    expect(note).toContain("246 BCE")
+    expect(note).toContain("鄭國 canal")
+    expect(note).toContain("227–226 BCE Yan campaign")
+    expect(note).toContain("荊軻")
+    expect(note).toContain("昌平君")
+    expect(note).toContain("earlier Qin–Han wars")
+    expect(note).toContain("every later Qin conquest")
+    expect(note).toContain("No route")
   })
 
   it("describes 韓王安's first numbered regnal year rather than an accession year", () => {
@@ -1682,7 +1914,7 @@ describe("the Qin fixture's own review surface", () => {
     expect(String(contentOf(story)["coverage_note"])).toContain("Excluded")
   })
 
-  it("keeps the citation locators inside the cited source documents", () => {
+  it("resolves every citation to a source document in the fixture", () => {
     const chapter = tree()
     const sourceIds = chapter.documents
       .filter((document) => document["document"] === "source")
@@ -1705,9 +1937,13 @@ describe("the Qin fixture's own review surface", () => {
       (document) => document["document"] === "record",
     )) {
       for (const citation of citationsOf(record)) {
-        const locator = objectOf(citation["locator"])
+        const locator = objectOf(citation["locator"])["value"]
 
-        expect(String(locator["value"]).length, String(record["record_id"])).toBeGreaterThan(0)
+        expect(typeof locator, String(record["record_id"])).toBe("string")
+        expect(
+          typeof locator === "string" ? locator.trim() : "",
+          String(record["record_id"]),
+        ).not.toBe("")
       }
     }
   })

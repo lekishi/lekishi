@@ -175,21 +175,23 @@ label positions were reworked. Re-measured with this update:
 |Check |Result
 
 |Full check
-|`pnpm verify` passes: format check, `svelte-check` 0 errors and 0 warnings, 456
-tests (455 passed, 1 skipped — the `pnpm seal` maintenance entry point), and the
-static build with its invariant (451 files). Re-run after the second review
-round's corrections: the same counts.
+|`pnpm verify` passes: format check, `svelte-check` 0 errors and 0 warnings, 462
+tests (461 passed, 1 skipped — the `pnpm seal` maintenance entry point), and the
+static build with its invariant (451 files). The counts are from the final run,
+after the second review round's corrections and the test-hardening round.
 
 |Fixture, boundary, and route tests
-|`src/lib/historical/contract/qin-chapter.test.ts` (54 tests) pins the corrected
-revisions and the label-position additions at their reviewed hashes, the
-superseded revisions' unpublished status, the absence of the flagged wording and
-of any approval, the fixture's scope and exclusions, every anchor's cited
-identification and Wikidata coordinate, and the adversarial cases (a changed
-coordinate, a missing coordinate citation, a missing identification, an empty
-locator, a region chosen for 南陽). `src/lib/atlas/comparison.test.ts` (4 tests)
-pins the route's chapter, window, unapproved wording, dispute, and the four
-placements it renders.
+|`src/lib/historical/contract/qin-chapter.test.ts` (59 tests) pins the inventory by
+identity, the corrected revisions and the label-position additions at their
+reviewed hashes, the superseded revisions' unpublished status, the ledger row and
+its digest for this set, the absence of the flagged wording and of any approval,
+the fixture's scope and exclusions (including an open endpoint and a span that
+would cover an excluded year), every anchor's cited identification and Wikidata
+coordinate, and the adversarial cases (a changed coordinate, a missing coordinate
+citation, a missing identification, an empty locator, a promoted anchor, a display
+anchor for 南陽). `src/lib/atlas/comparison.test.ts` (5 tests) pins the route's
+chapter, its loaded window, the production chapter it is not, the unapproved
+wording, the dispute, and the four placements it renders.
 
 |Browser checks
 |`e2e/comparison.spec.ts` re-run against the built artifact (12 passed, 4.8

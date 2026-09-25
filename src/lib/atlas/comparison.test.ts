@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest"
 import { loadChapter } from "../historical/chapter"
 import { isObject, listOf, objectOf, type JsonObject } from "../historical/contract/types"
+import { CHAPTER as PRODUCTION_CHAPTER } from "./chapter-content"
 import { loadChapterContent } from "./chapter-catalog"
 import { COMPARISON_CHAPTER, COMPARISON_COVERAGE, COMPARISON_REVIEW } from "./comparison"
 import { windowLabel } from "./labels"
@@ -43,7 +44,11 @@ function storyWindow(): { start: number; end: number } {
   const end = objectOf(window["end"])
 
   // The contract's endpoints are BCE years; the atlas computes in the
-  // astronomical ordinals, where 233 BCE is -232.
+  // astronomical ordinals, where 233 BCE is -232. Assert the era rather than
+  // assuming it, so a CE year cannot be converted as if it were BCE.
+  expect(start["era"], "window start era").toBe("bce")
+  expect(end["era"], "window end era").toBe("bce")
+
   return { start: 1 - Number(start["year"]), end: 1 - Number(end["year"]) }
 }
 
@@ -55,11 +60,23 @@ describe("the comparison review fixture", () => {
     expect(chapter.events).toHaveLength(5)
     expect(chapter.places).toHaveLength(4)
     expect(chapter.publication.independence).toBe("self_review")
+
+    // The catalog passes the caller's coverage through to the projection: the
+    // loaded chapter opens in the fixture's own window, not a default.
+    expect(chapter.defaultWindow).toEqual(storyWindow())
+    expect(chapter.defaultWindow).toEqual(COMPARISON_COVERAGE.defaultWindow)
   })
 
   it("passes the window the fixture's own story publishes, in BCE years", () => {
     expect(COMPARISON_COVERAGE.defaultWindow).toEqual(storyWindow())
     expect(windowLabel(COMPARISON_COVERAGE.defaultWindow)).toBe("233 BCE–226 BCE")
+  })
+
+  it("is a comparison chapter, not the production chapter", () => {
+    // The production atlas still binds the reviewed Tang chapter; the fixture is
+    // reachable only through this route's catalog.
+    expect(COMPARISON_CHAPTER).not.toBe(PRODUCTION_CHAPTER.id)
+    expect(PRODUCTION_CHAPTER.id).toBe("tang-mission-750-754")
   })
 
   it("states that the fixture is unapproved preparation, not a launch chapter", () => {

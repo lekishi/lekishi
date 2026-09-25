@@ -81,18 +81,19 @@ Measured on 2026-09-25 in the pinned Nix environment.
 |Check |Result
 
 |Full check
-|`pnpm verify` passes: format check, `svelte-check`, 420 tests (419 passed, 1
+|`pnpm verify` passes: format check, `svelte-check`, 429 tests (428 passed, 1
 skipped — the `pnpm seal` maintenance entry point), and the static build with its
 invariant.
 
 |Fixture and boundary tests
-|`src/lib/historical/contract/qin-chapter.test.ts` (33 tests) validates the
+|`src/lib/historical/contract/qin-chapter.test.ts` (42 tests) validates the
 fixture with the contract's own `Publication.checkAll` and pins its scope,
-exclusions, uncertainty, dispute, geometry, and comparison loadability.
-`src/lib/atlas/chapter-catalog.test.ts` (3 tests) loads the fixture through
-Vite's browser module graph and pins that the production chapter is untouched and
-that an unknown chapter fails. The gate's five suites total 100 tests; with the
-bundled-content suite the chapter and boundary suites total 103.
+exclusions, uncertainty, dispute, geometry, comparison loadability, and the ten
+unpublished correction drafts. `src/lib/atlas/chapter-catalog.test.ts` (3 tests)
+loads the fixture through Vite's browser module graph and pins that the
+production chapter is untouched and that an unknown chapter fails. The gate's
+five suites total 109 tests; with the bundled-content suite the chapter and
+boundary suites total 112.
 
 |Build gate
 |`scripts/check-chapter.mjs` now runs the Tang chapter test, the Qin fixture
@@ -128,6 +129,14 @@ the browser checks are unaffected by this boundary change.
 
 * The fixture is a preparation snapshot, not owner-approved release content: the
   ledger records it as such and no `owner approved` row exists for it.
+* The internal review found source-fidelity and wording corrections in the
+  published snapshot (the death dispute's dating, an unsupported continuous
+  conflict span, three quoted fragments that included or silently dropped the
+  transcription's editorial additions, an officer's name attributed to a
+  text-critical correction, and a famine notice called a drought). They are
+  prepared as unpublished draft revisions, because the publication gate does not
+  let the preparing editor supersede a set; publishing a corrected preparation
+  set is the owner's decision, and the fixture README lists every draft.
 * The comparison harness is later work. This record makes the fixture loadable
   and keeps it out of the artifact; it does not build the harness, and Gate 2 is
   not satisfied.
@@ -140,8 +149,8 @@ the browser checks are unaffected by this boundary change.
 * Ran `pnpm verify` (format, `svelte-check`, tests, build) and inspected the
   artifact: 410 files, no fixture id anywhere under `build/`, and the new
   artifact sentinel exercised by the build.
-* Ran the gate's five suites directly: 100 tests pass; the bundled-content suite
-  brings the chapter and boundary suites to 103.
+* Ran the gate's five suites directly: 109 tests pass; the bundled-content suite
+  brings the chapter and boundary suites to 112.
 * Re-checked that the production boundary still projects the reviewed Tang
   chapter unchanged and that the fixture projects with one placed event, four
   list-only events, and the disputed death.

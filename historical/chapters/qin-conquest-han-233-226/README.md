@@ -35,13 +35,15 @@ narrowest source-supported default that still yields a usable comparison:
 5. **226 BCE** — 新鄭, the former capital, revolts.
 
 The 226 BCE notice is the episode's documented aftermath and the **only event
-whose place the sources name**. Excluding it would leave the fixture with no
-sourced map point at all, because the annexation's own entries name only the
-commandery the annexation created. Including it as the last event keeps the
-window bounded to one thread (Han's end) and gives the comparison harness one
-placed event, four list-only events, one dispute, and one unlocated-territory
-case. It is the narrowest scope that is still loadable as a map scenario; a
-future set can narrow or extend it only through a new revision and set.
+this fixture places** (the death names 雲陽 and the cession names 南陽, but no
+source in this set identifies either, so both stay unlocated). Excluding the
+revolt would leave the fixture with no sourced map point at all, because the
+annexation's own entries name only the commandery the annexation created.
+Including it as the last event keeps the window bounded to one thread (Han's end)
+and gives the comparison harness one placed event, four list-only events, one
+dispute, and one unlocated-territory case. It is the narrowest scope that is
+still loadable as a map scenario; a future set can narrow or extend it only
+through a new revision and set.
 
 The fixture is **not** a campaign narrative: it records the dated acts the
 sources state, asserts no causation, draws no route or territory, and places
@@ -110,12 +112,46 @@ entry), and those are not used as evidence.
   comprehensive mirror read `潁川`/`潁川郡`. The record publishes `潁川郡` and
   keeps the variant in its claims and notes; a critical edition is what would
   settle the reading.
-- 韓非's death is the fixture's one dispute. The three accounts agree that he
-  died in Qin custody in 233 BCE but differ on who acted and how (the annals give
-  李斯's plan and a death at 雲陽, the hereditary house says Qin killed him, the
-  biography adds 姚賈, the poison 李斯 sent, and the king's regret). All three
-  are published as cited claims, the annals' account is the main one, and no day,
-  manner, or cause is decided.
+- 韓非's death is the fixture's one dispute. The annals and the comprehensive
+  mirror date it to 始皇帝十四年 (233 BCE); the hereditary house records the
+  detention and killing under 王安五年, which the six-states table aligns with
+  王安六年; the biography gives no year. The accounts differ on who acted and how
+  (the annals give 李斯's plan and a death at 雲陽, the hereditary house says Qin
+  killed him, the biography adds 姚賈, the poison 李斯 sent, and the king's
+  regret). All three are published as cited claims, the annals' account is the
+  main one, and no day, manner, or cause is decided.
+  - **Flagged and drafted.** The published snapshot's dispute summary says the
+    three accounts agree on the year; the sources do not (see above), and the
+    review flagged it. The draft revision
+    `lks:rev:hanfei-death-233-2` states each account's dating and is listed under
+    <<Prepared corrections awaiting a publication decision>>.
+
+## Prepared corrections awaiting a publication decision
+
+The internal review of this milestone found the following source-fidelity and
+wording issues in the **published snapshot**. The publication gate does not let
+the preparing editor supersede a prepared set, so each correction is prepared as
+an unpublished draft revision that no set names: the atlas, the ledger digest,
+and the projection still read the snapshot the owner has seen. Publishing a
+corrected preparation set is the owner's decision.
+
+| Published revision | Draft correction | What the draft changes |
+| --- | --- | --- |
+| `lks:rev:hanfei-death-233-1` | `lks:rev:hanfei-death-233-2` | The dispute summary no longer claims the accounts agree on the year; each account's dating (233 BCE, 王安五年/王安六年, none) is stated, and the six-states table is cited for the year. |
+| `lks:rev:qin-han-conflict-1` | `lks:rev:qin-han-conflict-2` | The relationship no longer carries a continuous 233–230 BCE `duration`; the three separately dated acts stay in the cited summary. |
+| `lks:rev:han-conquest-230-1` | `lks:rev:han-conquest-230-2` | The mirror citation no longer attributes the officer's name to a text-critical corrected reading; the name stays with the annals. |
+| `lks:rev:han-nanyang-cession-231-1` | `lks:rev:han-nanyang-cession-231-2` | The mirror's quoted fragments drop the transcription's editorial addition 秋. |
+| `lks:rev:nanyang-1` | `lks:rev:nanyang-2` | The summary attributes the cession to the annals and the comprehensive mirror, not to the hereditary house; the quoted fragments drop 秋. |
+| `lks:rev:han-nanyang-cession-1` | `lks:rev:han-nanyang-cession-2` | The mirror's quoted fragments drop 秋. |
+| `lks:rev:nei-shi-teng-1` | `lks:rev:nei-shi-teng-2` | The name is cited to the annals alone, and the mirror's corrected reading is stated in the notes rather than used as evidence. |
+| `lks:rev:qin-king-zheng-1` | `lks:rev:qin-king-zheng-2` | The mirror quotation is an unchanged fragment; the earlier text changed the source's comma to a full stop. |
+| `lks:rev:han-king-an-1` | `lks:rev:han-king-an-2` | The role span is described as the six-states table's first numbered regnal year (元年, 238 BCE), not as an accession year. |
+| `lks:rev:qin-conquest-han-story-1` | `lks:rev:qin-conquest-han-story-2` | The coverage note names the annals' 230 BCE notice as a famine (民大饑), not a drought. |
+
+`src/lib/historical/contract/qin-chapter.test.ts` pins each draft, its sealed
+hash, its unpublished status, and the published snapshot's flagged wording, so
+neither the drafts nor the boundary can drift silently. The ledger row for
+`lks:set:qin-conquest-han-233-226-v1` still records the published digest.
 
 ## Exclusions
 
@@ -123,7 +159,7 @@ The story's coverage note states these, and the fixture's tests pin the window
 and the event inventory:
 
 - the other notices of the cited years: the 233 BCE Zhao campaign, the annals'
-  230 BCE earthquake, drought, and 華陽太后 notices, and the 226 BCE notice of
+  230 BCE earthquake, 華陽太后, and famine notices, and the 226 BCE notice of
   昌平君 being moved to 郢;
 - the 246 BCE 鄭國 canal, the 227–226 BCE Yan campaign and 荊軻's attempt,
   earlier Qin–Han wars, and every later Qin conquest;
@@ -139,11 +175,21 @@ member revisions). This is not owner review, not independent review, and not
 specialist review; no owner release decision exists, and the fixture must not be
 described as approved or published for release.
 
+The published snapshot is what the ledger row records. Ten correction drafts
+prepared after the internal review are **unpublished**: they are listed above,
+pinned by the fixture's tests, and await the owner's decision to publish a
+corrected preparation set. Until then, the flagged published wording stays as
+the ledger records it, and the fixture's status is "source-checked, corrections
+drafted, awaiting a publication decision".
+
 ## What is deferred, and the remaining decisions
 
 - **Owner review of the fixture's scope.** The owner may extend, narrow, or drop
   the episode; any change needs a new revision and a new set, and a new ledger
   row for that set.
+- **The prepared corrections.** Ten draft revisions are prepared and unpublished
+  (listed above). Publishing a corrected preparation set needs the owner's
+  decision; the preparing editor may not supersede the prepared set.
 - **Optional specialist review.** Warring States chronology and the 韓非
   accounts are the areas a specialist would check; none has been performed.
 - **The comparison harness.** It does not exist yet. When it is built it must
@@ -193,6 +239,7 @@ publication set, which is the same rule the Tang chapter follows.
 - It is a bounded curated selection, not a complete record of Qin's conquests or
   of Han's end, and not a claim that nothing else happened in these years.
 - It is a preparation snapshot: not owner-approved, not release content, and not
-  a second launch chapter.
+  a second launch chapter. Ten correction drafts await the owner's publication
+  decision, so the published wording must not be treated as final.
 - The locators rest on unproofread transcriptions and must be re-checked against
   critical editions before content freeze.

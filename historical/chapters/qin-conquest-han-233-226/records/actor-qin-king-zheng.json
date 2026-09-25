@@ -129,6 +129,131 @@
         }
       ],
       "revision_hash": "sha256:f6094096a03c90577819af4e2b542310ee9b74148b26a2c1aa3ae2ff8a3c3f70"
+    },
+    {
+      "revision_id": "lks:rev:qin-king-zheng-2",
+      "created_at": "2026-09-25T05:00:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Correction prepared after review: the quotation from the comprehensive mirror is now an unchanged fragment; the previous text changed the source's comma after 生十三年矣 to a full stop.",
+      "content": {
+        "summary": "秦王政 (King Zheng of Qin), the Qin king whose court received 韓非's embassy in 233 BCE and to whom the biography attributes the order against 韓非 and the later regret. The comprehensive mirror records 政 succeeding 莊襄王 in 莊襄王三年五月 (247 BCE).",
+        "names": [
+          {
+            "form": "秦王政",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "primary",
+            "romanization": {
+              "value": "Qin Wang Zheng",
+              "scheme": "pinyin",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:qin-king-zheng-name"
+          },
+          {
+            "form": "秦王",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "alternate",
+            "claim_id": "lks:claim:qin-king-zheng-title",
+            "note": "The title the biography uses for him in the 韓非 account."
+          }
+        ],
+        "actor_types": [
+          "person"
+        ],
+        "roles": [
+          {
+            "role": "ruler",
+            "validity": {
+              "source_expression": "十四年（秦王悅之，未信用）; 十七年（內史騰攻韓）",
+              "calendar": "chinese_lunisolar",
+              "precision": "year",
+              "mode": "duration",
+              "interval": {
+                "bounds": "two_sided",
+                "boundary": "inclusive",
+                "start": {
+                  "year": 233,
+                  "era": "bce"
+                },
+                "end": {
+                  "year": 230,
+                  "era": "bce"
+                }
+              }
+            },
+            "note": "The span is bounded by the cited entries, not by the reign: the comprehensive mirror dates 政's succession to 莊襄王三年五月丙午 (247 BCE), and the fixture cites him only for 233–230 BCE."
+          }
+        ],
+        "editorial_notes": "The annals' opening records that 政 took the throne as king; the biography calls him 秦王. The chapter uses the conventional form 秦王政 for disambiguation and records both source forms."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:qin-king-zheng-name",
+          "statement": "The annals record that after 莊襄王's death 政 took the Qin throne as king, and the chapter uses the conventional form 秦王政 for him.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 篇首（政代立為秦王）"
+              },
+              "quoted_text": "年十三歲，莊襄王死，政代立為秦王。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:qin-king-zheng-title",
+          "statement": "The biography calls him 秦王 in the account of 韓非's embassy and death.",
+          "asserts": "/names/1",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六十三 老子韓非列傳（秦王悅之，未信用）"
+              },
+              "quoted_text": "秦王悅之，未信用。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:qin-king-zheng-role",
+          "statement": "The comprehensive mirror records 政 succeeding 莊襄王 in 莊襄王三年五月丙午 (247 BCE), and the cited entries record the king receiving 韓非 and deciding his case within 233–230 BCE.",
+          "asserts": "/roles/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:zizhi-tongjian",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦紀一 莊襄王三年（太子政立）"
+              },
+              "quoted_text": "五月，丙午，王薨。太子政立"
+            },
+            {
+              "source_id": "lks:source:zizhi-tongjian",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦紀一 始皇帝十四年（王以為然，下吏治非）"
+              },
+              "quoted_text": "王以為然，下吏治非。"
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:84c87515b6efee89644110c0eea4bf790a94c6af669db20c4ff15ffb00597464"
     }
   ],
   "publication": {

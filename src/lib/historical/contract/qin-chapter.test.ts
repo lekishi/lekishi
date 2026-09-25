@@ -732,6 +732,228 @@ describe("adversarial readings of the Qin fixture", () => {
   })
 })
 
+describe("the prepared corrections (unpublished draft revisions)", () => {
+  /**
+   * The internal review of this milestone found source-fidelity and wording
+   * issues in the prepared snapshot. The publication gate does not let the
+   * preparing editor supersede a set, so the corrections are prepared as draft
+   * revisions that no set publishes: the atlas and the ledger still read the
+   * snapshot the owner has seen, and publishing a corrected preparation set is
+   * the owner's decision. These tests pin the drafts and the boundary.
+   */
+  const CORRECTIONS: [string, string][] = [
+    ["lks:event:hanfei-death-233", "lks:rev:hanfei-death-233-2"],
+    ["lks:relationship:qin-han-conflict", "lks:rev:qin-han-conflict-2"],
+    ["lks:event:han-conquest-230", "lks:rev:han-conquest-230-2"],
+    ["lks:event:han-nanyang-cession-231", "lks:rev:han-nanyang-cession-231-2"],
+    ["lks:place:nanyang", "lks:rev:nanyang-2"],
+    ["lks:relationship:han-nanyang-cession", "lks:rev:han-nanyang-cession-2"],
+    ["lks:actor:nei-shi-teng", "lks:rev:nei-shi-teng-2"],
+    ["lks:actor:qin-king-zheng", "lks:rev:qin-king-zheng-2"],
+    ["lks:actor:han-king-an", "lks:rev:han-king-an-2"],
+    ["lks:story:qin-conquest-han-233-226", "lks:rev:qin-conquest-han-story-2"],
+  ]
+
+  function draftRevision(recordId: string, revisionId: string): JsonObject {
+    const record = recordById(tree(), recordId)
+    const revision = listOf(record["revisions"]).find(
+      (candidate) => objectOf(candidate)["revision_id"] === revisionId,
+    )
+
+    if (revision === undefined) {
+      throw new Error(`${revisionId} is not a revision of ${recordId}`)
+    }
+
+    return objectOf(revision)
+  }
+
+  function draftContent(recordId: string, revisionId: string): JsonObject {
+    return objectOf(draftRevision(recordId, revisionId)["content"])
+  }
+
+  function draftClaims(recordId: string, revisionId: string): JsonObject[] {
+    return listOf(draftRevision(recordId, revisionId)["claims"]).map((claim) => objectOf(claim))
+  }
+
+  function publishedRevisionIds(chapter: ChapterTree): Set<string> {
+    return new Set(
+      chapter.sets.flatMap((set) =>
+        listOf(objectOf(set)["members"]).map((member) => String(objectOf(member)["revision_id"])),
+      ),
+    )
+  }
+
+  it("drafts a corrected revision for every finding and publishes none of them", () => {
+    const chapter = tree()
+    const published = publishedRevisionIds(chapter)
+
+    for (const [recordId, revisionId] of CORRECTIONS) {
+      const revision = draftRevision(recordId, revisionId)
+
+      expect(revision["revision_hash"], revisionId).toBe(revisionHash(revision))
+      expect(published.has(revisionId), revisionId).toBe(false)
+
+      // The record still mirrors the snapshot the ledger records.
+      const mirror = objectOf(recordById(chapter, recordId)["publication"])
+
+      expect(mirror["published_revision_id"], recordId).toBe(
+        String(revisionId).replace(/-2$/, "-1"),
+      )
+    }
+  })
+
+  it("does not claim that the death accounts agree on the year", () => {
+    const revision = draftRevision("lks:event:hanfei-death-233", "lks:rev:hanfei-death-233-2")
+    const dispute = objectOf(revision["dispute"])
+    const summary = String(dispute["summary"])
+    const notes = String(objectOf(revision["content"])["editorial_notes"])
+
+    for (const text of [summary, notes]) {
+      expect(text).toContain("王安五年")
+      expect(text).toContain("王安六年")
+      expect(text).not.toContain("agree")
+      expect(text).not.toContain("agreement")
+    }
+
+    const tableClaim = draftClaims("lks:event:hanfei-death-233", "lks:rev:hanfei-death-233-2").find(
+      (claim) => claim["claim_id"] === "lks:claim:hanfei-death-table",
+    )
+
+    expect(tableClaim).toBeDefined()
+    expect(
+      listOf(objectOf(tableClaim)["citations"]).map((citation) =>
+        String(objectOf(citation)["source_id"]),
+      ),
+    ).toEqual(["lks:source:shiji"])
+  })
+
+  it("removes the continuous conflict span the sources do not state", () => {
+    const content = draftContent("lks:relationship:qin-han-conflict", "lks:rev:qin-han-conflict-2")
+
+    expect(content["validity"]).toBeUndefined()
+    expect(String(content["editorial_notes"])).toContain("no validity interval")
+  })
+
+  it("quotes only unannotated fragments in the corrected citations", () => {
+    for (const [recordId, revisionId] of CORRECTIONS) {
+      for (const claim of draftClaims(recordId, revisionId)) {
+        for (const citation of listOf(claim["citations"]).map((entry) => objectOf(entry))) {
+          const quoted = citation["quoted_text"]
+
+          if (typeof quoted !== "string") {
+            continue
+          }
+
+          for (const marked of ["〔", "〕", "(", ")"]) {
+            expect(quoted, `${revisionId} ${String(citation["source_id"])}`).not.toContain(marked)
+          }
+        }
+      }
+    }
+
+    const cession = draftClaims(
+      "lks:event:han-nanyang-cession-231",
+      "lks:rev:han-nanyang-cession-231-2",
+    )
+    const mirror = cession.find((claim) => claim["claim_id"] === "lks:claim:nanyang-cession-mirror")
+    const quotes = listOf(objectOf(mirror)["citations"]).map((citation) =>
+      String(objectOf(citation)["quoted_text"]),
+    )
+
+    expect(quotes).toEqual(["韓獻南陽地。", "九月，發卒受地於韓。"])
+
+    const succession = draftClaims("lks:actor:qin-king-zheng", "lks:rev:qin-king-zheng-2")
+    const role = succession.find((claim) => claim["claim_id"] === "lks:claim:qin-king-zheng-role")
+    const successionQuotes = listOf(objectOf(role)["citations"]).map((citation) =>
+      String(objectOf(citation)["quoted_text"] ?? ""),
+    )
+
+    expect(successionQuotes[0]).toBe("五月，丙午，王薨。太子政立")
+  })
+
+  it("attributes the officer's name to the annals, not to the corrected mirror reading", () => {
+    const claims = draftClaims("lks:actor:nei-shi-teng", "lks:rev:nei-shi-teng-2")
+    const name = claims.find((claim) => claim["claim_id"] === "lks:claim:nei-shi-teng-name")
+
+    expect(
+      listOf(objectOf(name)["citations"]).map((citation) =>
+        String(objectOf(citation)["source_id"]),
+      ),
+    ).toEqual(["lks:source:shiji"])
+    expect(
+      String(draftContent("lks:actor:nei-shi-teng", "lks:rev:nei-shi-teng-2")["editorial_notes"]),
+    ).toContain("內史〔騰〕(勝)")
+
+    const conquest = draftClaims("lks:event:han-conquest-230", "lks:rev:han-conquest-230-2")
+    const mirror = conquest.find((claim) => claim["claim_id"] === "lks:claim:han-conquest-mirror")
+
+    expect(String(objectOf(mirror)["statement"])).not.toContain("內史騰")
+  })
+
+  it("attributes the cession to the annals and the comprehensive mirror", () => {
+    const summary = String(draftContent("lks:place:nanyang", "lks:rev:nanyang-2")["summary"])
+
+    expect(summary).toContain("annals")
+    expect(summary).toContain("comprehensive mirror")
+    expect(summary).not.toContain("hereditary house")
+  })
+
+  it("names the 230 BCE notice as the annals give it, without inferring a cause", () => {
+    const note = String(
+      draftContent("lks:story:qin-conquest-han-233-226", "lks:rev:qin-conquest-han-story-2")[
+        "coverage_note"
+      ],
+    )
+
+    expect(note).toContain("famine")
+    expect(note).not.toContain("drought")
+  })
+
+  it("describes 韓王安's first numbered regnal year rather than an accession year", () => {
+    const content = draftContent("lks:actor:han-king-an", "lks:rev:han-king-an-2")
+    const note = String(objectOf(listOf(content["roles"])[0])["note"])
+
+    expect(note).toContain("first numbered regnal year")
+    expect(note).toContain("元年")
+    expect(note).not.toContain("from the accession")
+  })
+
+  it("keeps the published snapshot's flagged wording visible until the owner decides", () => {
+    const chapter = tree()
+
+    // These are the published statements the review flagged; the drafts correct
+    // them. The test fails if the published snapshot changes without the ledger
+    // row being taken again, and it documents what the owner is being asked to
+    // replace.
+    const conflict = publishedRevision(recordById(chapter, "lks:relationship:qin-han-conflict"))
+    const conflictContent = objectOf(conflict["content"])
+
+    expect(objectOf(conflictContent["validity"])["mode"]).toBe("duration")
+
+    const death = publishedRevision(recordById(chapter, "lks:event:hanfei-death-233"))
+    const deathSummary = String(objectOf(death["dispute"])["summary"])
+
+    expect(deathSummary).toContain("agree")
+
+    const cession = publishedRevision(recordById(chapter, "lks:event:han-nanyang-cession-231"))
+    const quoted = listOf(cession["claims"])
+      .map((claim) => objectOf(claim))
+      .flatMap((claim) => listOf(claim["citations"]).map((citation) => objectOf(citation)))
+      .map((citation) => String(citation["quoted_text"] ?? ""))
+      .join(" ")
+
+    // The published quote merges the transcription's bracketed editorial
+    // addition 秋 into the source's text as if it were the source's own
+    // wording; the draft quotes only the unannotated fragments.
+    expect(quoted).toContain("韓獻南陽地。秋，九月，發卒受地於韓。")
+    expect(quoted).not.toContain("〔秋〕")
+
+    const story = publishedRevision(recordById(chapter, "lks:story:qin-conquest-han-233-226"))
+
+    expect(String(objectOf(story["content"])["coverage_note"])).toContain("drought")
+  })
+})
+
 describe("the Qin fixture's own review surface", () => {
   it("uses only roles and interpretations the atlas boundary understands", () => {
     const chapter = tree()

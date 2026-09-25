@@ -41,8 +41,10 @@ Selected by the owner on 2026-09-24 from
   `益救島` (Yakushima), and `秋妻屋浦` (坊津) are recorded as
   `cited_interpretation` claims naming the reference work or article that
   proposes them; `驩州` carries `unknown` geometry with an explanation because no
-  identification is sourced here. The other places carry `display_anchor`
-  geometry only, which is explicitly not an asserted historical coordinate.
+  identification is sourced here. Apart from `紀伊國牟漏埼` and `石籬浦`, which
+  carry the approximate identifications described below, the other places carry
+  `display_anchor` geometry only, which is explicitly not an asserted historical
+  coordinate.
 - **Two place identifications are published as proposals.** `紀伊國牟漏埼` is
   placed at the modern town of 太地 (`approximate_point`, locality precision)
   because the cited 和歌山県 page reports that 紀州藩's 紀伊続風土記 identified
@@ -57,10 +59,11 @@ Selected by the owner on 2026-09-24 from
   appointment of the embassy, the 節刀 grant, the audiences and reports, the
   rewards, and the 758 and 779 court acts name no place (the 節刀 entry names
   `内裏`). Each of those ten events points at `平城宮` — the court's seat, whose
-  record carries the chronicle's own naming of the palace and the inner precinct
-  — as a `display_anchor`, with a `cited_interpretation` claim attributed to the
-  editorial preparation. The atlas therefore shows them, labelled "display
-  anchor only", and asserts no coordinate for any of them.
+  record carries the chronicle's own naming of the palace and the inner precinct,
+  and a `display_anchor` that asserts no coordinate. The event references are
+  display placement: the records carry **no claim asserting the association**, so
+  the atlas shows the act labelled "display anchor only" without turning the
+  editor's placement into a historical site claim.
 - `多禰島` is published only as the second ship's intended destination: the
   biography names it as the course the second ship set out on and then records
   the arrival at `益救島`, so the separation event carries it as a qualified

@@ -778,6 +778,19 @@ test("keeps the phone layout free of overlapping panels", async ({ page }) => {
       await page.locator("#atlas-list-toggle").click()
       await expect(page.locator("#atlas-event-panel")).toBeVisible()
       await assertNoOverlappingPanels(page, `selected with list open at ${viewport.width}`)
+    }
+
+    // A content-driven height change: editing the window into BCE years adds the
+    // year label under the input, which grows the controls without a resize. The
+    // overlay column follows the controls' measured height, so the panels stay
+    // apart here too.
+    await page.locator("#atlas-window-start").fill("0")
+    await expect(page.locator('[data-testid="atlas-time-controls"]')).toContainText("1 BCE")
+    await assertNoOverlappingPanels(page, `BCE window at ${viewport.width}`)
+    await page.locator("#atlas-window-start").fill("750")
+    await expect(page.locator('[data-testid="atlas-time-controls"]')).not.toContainText("BCE")
+
+    if (await page.locator("#atlas-list-toggle").isVisible()) {
       await page.locator("#atlas-list-toggle").click()
     }
 

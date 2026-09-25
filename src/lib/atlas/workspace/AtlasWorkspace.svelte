@@ -41,8 +41,9 @@
   // than a CE window's). The controls' measured height drives the column's
   // bottom offset, so the two panels can never overlap; 120 is the height the
   // fixed 9rem offset assumed, kept as the first-paint fallback. The measurement
-  // runs after mount and on resize — the height changes only when the controls
-  // rewrap — so no observer is needed and the tests' DOM has nothing to polyfill.
+  // follows the element's own size — a resize observer catches both a viewport
+  // change and a label change (an edited window crossing into BCE years, say) —
+  // with a guard so the component tests' DOM, which has no layout, still mounts.
   let controlsElement: HTMLDivElement | undefined = $state()
   let controlsHeight = $state(120)
 
@@ -58,9 +59,16 @@
     }
 
     measure()
-    window.addEventListener("resize", measure)
 
-    return () => window.removeEventListener("resize", measure)
+    if (typeof ResizeObserver === "undefined") {
+      return
+    }
+
+    const observer = new ResizeObserver(measure)
+
+    observer.observe(element)
+
+    return () => observer.disconnect()
   })
 
   const scene = $derived(buildScene(atlasState, chapter))

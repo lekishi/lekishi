@@ -487,15 +487,23 @@ describe("the Tang chapter fixture", () => {
       expect(places[0]?.["place_id"], recordId).toBe("lks:place:heijo-palace")
     }
 
-    for (const [recordId, placeId] of [
-      ["lks:place:murozaki", "lks:place:murozaki"],
-      ["lks:place:ishigaki", "lks:place:ishigaki"],
+    for (const [recordId, placeId, basis] of [
+      ["lks:place:murozaki", "lks:place:murozaki", "cited_interpretation"],
+      ["lks:place:ishigaki", "lks:place:ishigaki", "attested"],
     ]) {
       const revision = objectOf(listOf(recordById(chapter, recordId)["revisions"])[0])
       const geometry = objectOf(listOf(objectOf(revision["content"])["geometry"])[0])
+      const claim = listOf(revision["claims"])
+        .map(objectOf)
+        .find((candidate) => candidate["claim_id"] === geometry["claim_id"])
 
       expect(geometry["interpretation"], placeId).toBe("approximate_point")
       expect(geometry["precision"], placeId).toBe("locality")
+      // The basis says what each identification rests on: the 和歌山県 page
+      // reports 紀伊続風土記's identification (an interpretation advanced in a
+      // cited work), while the 石垣 account is a bounded modern statement the
+      // chapter records as what it reports.
+      expect(claim?.["basis"], placeId).toBe(basis)
     }
 
     const huanzhou = objectOf(listOf(recordById(chapter, "lks:place:huanzhou")["revisions"])[0])

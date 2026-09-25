@@ -62,7 +62,7 @@
           {
             "place_id": "lks:place:heijo-palace",
             "role": "site",
-            "note": "The entry names 内裏, the inner palace of 平城宮, as the place of the 節刀 grant; the record anchors the act at the court's seat, not at a site within the palace."
+            "note": "The entry names 内裏, the inner palace of 平城宮, as the place of the 節刀 grant; the record anchors the act at the court's seat for display only, not at a site within the palace, and asserts no site for the act."
           }
         ]
       },
@@ -99,45 +99,14 @@
               }
             }
           ]
-        },
-        {
-          "claim_id": "lks:claim:sekito-752-place",
-          "statement": "The entry summons the envoys to 内裏, the inner palace of 平城宮, and grants the 節刀 there; the chapter places the act at the court's seat, 平城宮, as a display anchor and asserts no coordinate.",
-          "asserts": "/places/0",
-          "basis": "cited_interpretation",
-          "role": "main",
-          "attributed_to": "Lekishi editorial preparation",
-          "citations": [
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {
-                "kind": "entry",
-                "value": "卷第十八 天平勝寶四年閏三月丙辰"
-              }
-            },
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {
-                "kind": "entry",
-                "value": "卷第十八 天平勝寶四年閏三月丙辰"
-              }
-            },
-            {
-              "source_id": "lks:source:wikidata",
-              "locator": {
-                "kind": "dataset_row",
-                "value": "Q211585 (P625)"
-              }
-            }
-          ]
         }
       ],
-      "revision_hash": "sha256:09026f8273c598fd81dea4a428c8a66e0116ac048066bc41ccb3fd6d5c3d5452"
+      "revision_hash": "sha256:032415d0f74eff603f98dd8fca21b0f7204a7be7fff02e87948246b0f88ca36a"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:sekito-752-1",
-    "published_revision_hash": "sha256:09026f8273c598fd81dea4a428c8a66e0116ac048066bc41ccb3fd6d5c3d5452",
+    "published_revision_hash": "sha256:032415d0f74eff603f98dd8fca21b0f7204a7be7fff02e87948246b0f88ca36a",
     "set_id": "lks:set:tang-mission-750-754-v1",
     "published_at": "2026-09-24T23:45:00Z",
     "published_by": {

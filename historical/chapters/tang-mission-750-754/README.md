@@ -29,7 +29,7 @@ Selected by the owner on 2026-09-24 from
 | Events | 29 | 24 inside 750–754 and 5 coda events across the four coda years (779 has two) |
 | Relationships | 9 | diplomacy, travel, two contacts, transmission, two institutional changes, and two 779 commemorations |
 | Stories | 1 | The mission in presentation order, with the coda steps labelled |
-| Sources | 11 | Four primary works, six reference works, and Wikidata |
+| Sources | 11 | Four primary works, five reference works, one scholarly article, and Wikidata |
 
 ## Evidence and uncertainty
 
@@ -40,20 +40,19 @@ Selected by the owner on 2026-09-24 from
   `阿兒奈波島` (Okinawa Island), `多禰島` (the Tanegashima–Yakushima area),
   `益救島` (Yakushima), and `秋妻屋浦` (坊津) are recorded as
   `cited_interpretation` claims naming the reference work or article that
-  proposes them; `石籬浦`, `紀伊國牟漏埼`, and `驩州` carry `unknown` geometry
-  with an explanation because no identification is sourced here. The other
-  places carry `display_anchor` geometry only, which is explicitly not an
-  asserted historical coordinate.
+  proposes them; `驩州` carries `unknown` geometry with an explanation because no
+  identification is sourced here. The other places carry `display_anchor`
+  geometry only, which is explicitly not an asserted historical coordinate.
 - **Two place identifications are published as proposals.** `紀伊國牟漏埼` is
   placed at the modern town of 太地 (`approximate_point`, locality precision)
-  because the cited prefectural record reports that 紀州藩's 紀伊続風土記
-  identified 牟漏崎 with 太地の燈明崎; `石籬浦` is placed at the former town of
-  頴娃 (locality precision) because the cited prefectural record names 石垣 in
-  present-day 南九州市穎娃町 as the drift place. Both are labelled as modern
-  identifications (比定), not source statements, and neither asserts a landing
-  site. `驩州` keeps `unknown` geometry: the primary sources give its seat
-  county but no source in this set identifies the site, so no coordinate is
-  manufactured.
+  because the cited 和歌山県 page reports that 紀州藩's 紀伊続風土記 identified
+  牟漏崎 with 太地の燈明崎; `石籬浦` is placed at the former town of 頴娃
+  (locality precision) because the cited local-history account by 井上賢一
+  (「薩摩半島民俗文化博物館」) names 石垣 in present-day 南九州市穎娃町 as the
+  drift place. Both are labelled as modern identifications, not source statements,
+  and neither asserts a landing site. `驩州` keeps `unknown` geometry: the primary
+  sources give its seat county but no source in this set identifies the site, so
+  no coordinate is manufactured.
 - **Court acts are anchored, not placed.** The entries that record the court's
   appointment of the embassy, the 節刀 grant, the audiences and reports, the
   rewards, and the 758 and 779 court acts name no place (the 節刀 entry names
@@ -140,7 +139,8 @@ to the synthetic worked examples. Correcting chapter content requires a new
 revision or source document and a new publication set, preserving the hashes and
 review metadata that approved the existing publication. An in-place edit to an
 approved revision or source must fail validation rather than being resealed; the
-correction set above is the worked example of that path.
+earlier preparation cycles in this chapter are the worked example of that path,
+and the flattened single revision is what the owner's decision covers.
 
 ## Limitations that must be stated wherever this content appears
 

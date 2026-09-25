@@ -12,9 +12,9 @@
         "name": "Lekishi editorial preparation",
         "role": "preparing editor (owner-instructed)"
       },
-      "change_explanation": "Owner-accepted identification: the cited prefectural record states that 石垣 (present-day 南九州市穎娃町) is known as the place where the embassy ship drifted in 754, so the place carries an approximate locality-level point instead of unknown geometry. The identification is labelled as a modern statement and no site is asserted.",
+      "change_explanation": "Chapter place as published: the attested 石籬浦 with an approximate locality-level identification at the former town of 頴娃, resting on the cited local-history account and labelled as a modern statement rather than a source statement or a scholarly identification.",
       "content": {
-        "summary": "石籬浦, in 薩摩國, where the chronicle records the fourth ship's judge 布勢人主 and his party arriving on 天平勝寶六年四月癸未 (754). The cited prefectural record names 石垣 in present-day 南九州市穎娃町 as the drift place, published as a modern identification and not as a source statement.",
+        "summary": "石籬浦, in 薩摩國, where the chronicle records the fourth ship's judge 布勢人主 and his party arriving on 天平勝寶六年四月癸未 (754). The cited local-history account names 石垣 in present-day 南九州市穎娃町 as the drift place, published as a modern identification and not as a source statement.",
         "names": [
           {
             "form": "石籬浦",
@@ -39,10 +39,10 @@
               ]
             },
             "precision": "locality",
-            "notes": "An approximate locality-level placement at the former town of 頴娃 (Wikidata Q5348687), whose 石垣 port the cited prefectural record names as the place where the embassy ship drifted in 754. The identification is a modern statement, not a source statement, and no landing site is asserted."
+            "notes": "An approximate locality-level placement at the former town of 頴娃 (Wikidata Q5348687), whose 石垣 port the cited local-history account names as the place where the embassy ship drifted in 754. The identification is a modern statement by that account's author, not a scholarly identification, and no landing site is asserted."
           }
         ],
-        "editorial_notes": "The Wave 1A report records the identification as still to be sourced; the fixture publishes the attested name and the dated arrival without a placement."
+        "editorial_notes": "The name is source-attested and the arrival is dated; the modern identification rests on the cited local-history account, not on a scholarly identification or a government statement. The point is an approximate locality-level placement and no landing site is asserted."
       },
       "claims": [
         {
@@ -63,17 +63,17 @@
         },
         {
           "claim_id": "lks:claim:ishigaki-identification",
-          "statement": "The cited prefectural record states that 石垣 (present-day 南九州市穎娃町) is known as the place where the embassy ship drifted in 天平勝宝六年 (754); the point is placed at the former town of 頴娃's coordinate from Wikidata (CC0) as an approximate locality-level placement.",
+          "statement": "The cited local-history account states that 石垣 (present-day 南九州市穎娃町) is known as the place where the embassy ship drifted in 天平勝宝六年 (754); the point is placed at the former town of 頴娃's coordinate from Wikidata (CC0) as an approximate locality-level placement.",
           "asserts": "/geometry/0",
           "basis": "cited_interpretation",
           "role": "main",
-          "attributed_to": "鹿児島県「鹿児島の民俗」",
+          "attributed_to": "井上賢一「薩摩半島民俗文化博物館」",
           "citations": [
             {
-              "source_id": "lks:source:kagoshima-folk-ishigaki",
+              "source_id": "lks:source:hantoubunka-ishigaki",
               "locator": {
-                "kind": "page",
-                "value": "頴娃海村の景観と海運遺構"
+                "kind": "section",
+                "value": "２．海上運搬のムラ — 石垣の海運"
               }
             },
             {
@@ -86,12 +86,12 @@
           ]
         }
       ],
-      "revision_hash": "sha256:a54544da505f667fdd6c4086f9faa259695ecd0408eea5406c47f32372a7ce7a"
+      "revision_hash": "sha256:460c8dcf93fa45c328e7f260b83e87ef2e58e64e2813b160055ea2e14ab42159"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:ishigaki-1",
-    "published_revision_hash": "sha256:a54544da505f667fdd6c4086f9faa259695ecd0408eea5406c47f32372a7ce7a",
+    "published_revision_hash": "sha256:460c8dcf93fa45c328e7f260b83e87ef2e58e64e2813b160055ea2e14ab42159",
     "set_id": "lks:set:tang-mission-750-754-v1",
     "published_at": "2026-09-24T23:45:00Z",
     "published_by": {

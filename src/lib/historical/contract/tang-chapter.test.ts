@@ -451,19 +451,22 @@ describe("the Tang chapter fixture", () => {
     )
 
     for (const member of listOf(set["members"])) {
+      const recordId = String(objectOf(member)["record_id"])
       const entry = objectOf(member)
-      const record = recordById(chapter, String(entry["record_id"]))
-      const revisions = listOf(record["revisions"]).map((revision) => objectOf(revision))
+      const record = recordById(chapter, recordId)
+      const revision = listOf(record["revisions"])
+        .map((candidate) => objectOf(candidate))
+        .find((candidate) => candidate["revision_id"] === entry["revision_id"])
 
-      expect(revisions, String(entry["record_id"])).toHaveLength(1)
-      expect(revisions[0]["revision_id"], String(entry["record_id"])).toBe(entry["revision_id"])
-      expect(revisionHash(revisions[0]), String(entry["record_id"])).toBe(entry["revision_hash"])
-      expect(current.get(String(entry["record_id"]))?.revision_id, String(entry["record_id"])).toBe(
-        entry["revision_id"],
-      )
+      // The set publishes exactly one revision of each record. A record may also
+      // carry an unpublished draft; the draft is not what the chapter publishes,
+      // so the published history and the current revision are unchanged by it.
+      expect(revision, recordId).toBeDefined()
+      expect(revisionHash(objectOf(revision)), recordId).toBe(entry["revision_hash"])
+      expect(current.get(recordId)?.revision_id, recordId).toBe(entry["revision_id"])
       expect(
-        history[String(entry["record_id"])]?.map((historyEntry) => historyEntry.revision_id),
-        String(entry["record_id"]),
+        history[recordId]?.map((historyEntry) => historyEntry.revision_id),
+        recordId,
       ).toEqual([entry["revision_id"]])
     }
 
@@ -499,6 +502,44 @@ describe("the Tang chapter fixture", () => {
     const huanzhouGeometry = objectOf(listOf(objectOf(huanzhou["content"])["geometry"])[0])
 
     expect(huanzhouGeometry["interpretation"]).toBe("unknown")
+  })
+
+  it("allows an unpublished draft without changing what is published", () => {
+    const chapter = cloneTree(tree())
+    const record = recordById(chapter, "lks:event:appointment-750")
+    const published = publishedRevision(record)
+    const content = JSON.parse(JSON.stringify(published["content"])) as JsonObject
+
+    content["summary"] = "Draft summary that no set publishes."
+
+    const draft: JsonObject = {
+      revision_id: "lks:rev:appointment-750-99",
+      created_at: "2026-09-25T00:00:00Z",
+      author: {
+        name: "Lekishi editorial preparation",
+        role: "preparing editor (owner-instructed)",
+      },
+      change_explanation: "Draft correction: prepared but not published by any set.",
+      content,
+      claims: JSON.parse(JSON.stringify(published["claims"])),
+    }
+    draft["revision_hash"] = revisionHash(draft)
+    ;(record["revisions"] as JsonObject[]).push(draft)
+
+    // The contract accepts a prepared draft: it is a revision no set names, so
+    // the mirror still points at the published one and the chapter publishes what
+    // the owner decided on.
+    expect(Publication.checkAll(chapter.documents, chapter.sets).ok).toBe(true)
+    expect(
+      Publication.currentPublished(chapter.documents, chapter.sets).get(
+        record["record_id"] as string,
+      )?.revision_id,
+    ).toBe(published["revision_id"])
+    expect(
+      Publication.history(chapter.documents, chapter.sets)[String(record["record_id"])]?.map(
+        (historyEntry) => historyEntry.revision_id,
+      ),
+    ).toEqual([published["revision_id"]])
   })
 
   it("is sealed, so an edit to approved content is detected", () => {

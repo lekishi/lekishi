@@ -57,7 +57,7 @@
           {
             "place_id": "lks:place:heijo-palace",
             "role": "site",
-            "note": "The entry names no place. A court act happens at the court, whose seat in this period is 平城宮 (the palace of 平城京); the record anchors it there for map readability, not as a source-named site."
+            "note": "The entry names no place. A court act happens at the court, whose seat in this period is 平城宮 (the palace of 平城京); the record anchors it there for display only, not as a source-named site, and asserts no site for the act."
           }
         ]
       },
@@ -110,45 +110,14 @@
               }
             }
           ]
-        },
-        {
-          "claim_id": "lks:claim:return-report-754-place",
-          "statement": "The entry records a court act and names no place; the chapter places the act at the court's seat, 平城宮 (the palace of 平城京), as a display anchor and asserts no coordinate.",
-          "asserts": "/places/0",
-          "basis": "cited_interpretation",
-          "role": "main",
-          "attributed_to": "Lekishi editorial preparation",
-          "citations": [
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {
-                "kind": "entry",
-                "value": "卷第十九 天平勝寶六年正月壬子"
-              }
-            },
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {
-                "kind": "entry",
-                "value": "卷第十九 天平勝寶六年正月丁酉朔"
-              }
-            },
-            {
-              "source_id": "lks:source:wikidata",
-              "locator": {
-                "kind": "dataset_row",
-                "value": "Q211585 (P625)"
-              }
-            }
-          ]
         }
       ],
-      "revision_hash": "sha256:8f058cb43785af95566d8fd2d2b19a0e362c7499d585c2a83f74b7d446485c91"
+      "revision_hash": "sha256:f2f69f91a6f2ef51fd8f923c17292eedabd27fd539355c2d40e647fb5611d894"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:return-report-754-1",
-    "published_revision_hash": "sha256:8f058cb43785af95566d8fd2d2b19a0e362c7499d585c2a83f74b7d446485c91",
+    "published_revision_hash": "sha256:f2f69f91a6f2ef51fd8f923c17292eedabd27fd539355c2d40e647fb5611d894",
     "set_id": "lks:set:tang-mission-750-754-v1",
     "published_at": "2026-09-24T23:45:00Z",
     "published_by": {

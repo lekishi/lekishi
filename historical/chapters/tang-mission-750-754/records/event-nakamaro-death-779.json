@@ -49,7 +49,7 @@
           {
             "place_id": "lks:place:heijo-palace",
             "role": "site",
-            "note": "The entry names no place. A court act happens at the court, whose seat in this period is 平城宮 (the palace of 平城京); the record anchors it there for map readability, not as a source-named site."
+            "note": "The entry names no place. A court act happens at the court, whose seat in this period is 平城宮 (the palace of 平城京); the record anchors it there for display only, not as a source-named site, and asserts no site for the act."
           }
         ]
       },
@@ -86,45 +86,14 @@
               }
             }
           ]
-        },
-        {
-          "claim_id": "lks:claim:nakamaro-death-779-place",
-          "statement": "The entry records a court act and names no place; the chapter places the act at the court's seat, 平城宮 (the palace of 平城京), as a display anchor and asserts no coordinate.",
-          "asserts": "/places/0",
-          "basis": "cited_interpretation",
-          "role": "main",
-          "attributed_to": "Lekishi editorial preparation",
-          "citations": [
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {
-                "kind": "entry",
-                "value": "卷第卅五 寶龜十年五月丙寅"
-              }
-            },
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {
-                "kind": "entry",
-                "value": "卷第卅五 寶龜九年正月戊申朔"
-              }
-            },
-            {
-              "source_id": "lks:source:wikidata",
-              "locator": {
-                "kind": "dataset_row",
-                "value": "Q211585 (P625)"
-              }
-            }
-          ]
         }
       ],
-      "revision_hash": "sha256:5c6c34d22c4d30d54a06cabf5502ad4590f46ebf415000486c71110434573c35"
+      "revision_hash": "sha256:de2727f00ad7d18b058500296b5229f00e6d4300a7b21247f0f93846c533915d"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:nakamaro-death-779-1",
-    "published_revision_hash": "sha256:5c6c34d22c4d30d54a06cabf5502ad4590f46ebf415000486c71110434573c35",
+    "published_revision_hash": "sha256:de2727f00ad7d18b058500296b5229f00e6d4300a7b21247f0f93846c533915d",
     "set_id": "lks:set:tang-mission-750-754-v1",
     "published_at": "2026-09-24T23:45:00Z",
     "published_by": {

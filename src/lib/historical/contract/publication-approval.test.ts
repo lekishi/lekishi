@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
 import { loadChapter } from "../chapter"
+import { encode, sha256 } from "./canonical"
 import { objectOf, type JsonObject } from "./types"
 
 /**
@@ -15,8 +16,14 @@ import { objectOf, type JsonObject } from "./types"
  *
  * The rule is a predicate over (sets, ledger rows) so it can be exercised
  * against deliberately wrong readings — a set without a row, a row without a
- * set, a preparation snapshot labelled as approved — and not only against the
- * tree as it happens to be today.
+ * set, a preparation snapshot labelled as approved, a set whose content changed
+ * after the decision — and not only against the tree as it happens to be today.
+ *
+ * Each row also carries the canonical digest of the set it decided on. The digest
+ * binds the decision to that snapshot: changing a member revision hash or a
+ * source pin invalidates the row instead of silently inheriting its decision.
+ * It is a consistency check, not an authentication — a person still has to check
+ * that the row, the digest, and the set describe what the owner decided.
  */
 
 const CHAPTER = "tang-mission-750-754"
@@ -33,13 +40,19 @@ type LedgerRow = {
   setId: string
   decision: string
   decidedBy: string
+  digest: string
+}
+
+/** The digest a decision row records: the canonical encoding of the whole set. */
+function setDigest(set: JsonObject): string {
+  return `sha256:${sha256(encode(set))}`
 }
 
 /**
  * Reads the ledger table out of the AsciiDoc record. Cells continue until the
  * next line that starts a cell, so the notes may wrap.
  */
-function parseLedger(text: string, columns = 4): LedgerRow[] {
+function parseLedger(text: string, columns = 5): LedgerRow[] {
   const rows: string[][] = []
   const cells: string[] = []
   let inTable = false
@@ -91,6 +104,7 @@ function parseLedger(text: string, columns = 4): LedgerRow[] {
       setId: (row[0] ?? "").replaceAll("`", "").trim(),
       decision: (row[1] ?? "").trim(),
       decidedBy: (row[2] ?? "").trim(),
+      digest: (row[3] ?? "").replaceAll("`", "").trim(),
     }))
 }
 
@@ -149,6 +163,13 @@ function approvalViolations(sets: JsonObject[], ledger: LedgerRow[]): string[] {
         `${setId} records the decision "${decision}" without naming the owner as the decider`,
       )
     }
+
+    // The row decides on one snapshot, not on whatever later carries the set id.
+    if (row.digest !== setDigest(set)) {
+      violations.push(
+        `${setId} no longer matches the digest recorded for its decision: the content changed after the decision was taken`,
+      )
+    }
   }
 
   for (const row of ledger) {
@@ -197,7 +218,12 @@ describe("publication approval gate", () => {
   it("fails a ledger row for a set that does not exist", () => {
     const ledger = [
       ...ledgerRows(),
-      { setId: "lks:set:invented-v9", decision: "preparation snapshot", decidedBy: "owner" },
+      {
+        setId: "lks:set:invented-v9",
+        decision: "preparation snapshot",
+        decidedBy: "owner",
+        digest: "sha256:" + "0".repeat(64),
+      },
     ]
     const violations = approvalViolations(chapterSets(), ledger)
 
@@ -231,12 +257,47 @@ describe("publication approval gate", () => {
   it("fails a set with two decision rows", () => {
     const ledger = [
       ...ledgerRows(),
-      { setId: "lks:set:tang-mission-750-754-v1", decision: "owner approved", decidedBy: "owner" },
+      {
+        setId: "lks:set:tang-mission-750-754-v1",
+        decision: "owner approved",
+        decidedBy: "owner",
+        digest: ledgerRows()[0]?.digest ?? "",
+      },
     ]
     const violations = approvalViolations(chapterSets(), ledger)
 
     expect(violations.join("\n")).toContain(
       "lks:set:tang-mission-750-754-v1 has more than one decision row",
+    )
+  })
+
+  it("fails a set whose content changed after the decision", () => {
+    const sets = chapterSets().map((set) => {
+      const members = (set["members"] as JsonObject[]).map((member, index) =>
+        index === 0 ? { ...member, revision_hash: `sha256:${"0".repeat(64)}` } : member,
+      )
+
+      return { ...set, members }
+    })
+    const violations = approvalViolations(sets, ledgerRows())
+
+    expect(violations.join("\n")).toContain(
+      "no longer matches the digest recorded for its decision: the content changed after the decision was taken",
+    )
+  })
+
+  it("fails a set whose source pin changed after the decision", () => {
+    const sets = chapterSets().map((set) => {
+      const sources = (set["sources"] as JsonObject[]).map((source, index) =>
+        index === 0 ? { ...source, source_hash: `sha256:${"1".repeat(64)}` } : source,
+      )
+
+      return { ...set, sources }
+    })
+    const violations = approvalViolations(sets, ledgerRows())
+
+    expect(violations.join("\n")).toContain(
+      "no longer matches the digest recorded for its decision: the content changed after the decision was taken",
     )
   })
 

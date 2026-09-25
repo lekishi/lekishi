@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest"
 import { loadChapter, type ChapterTree } from "../historical/chapter"
+import { revisionHash } from "../historical/contract/canonical"
+import * as Publication from "../historical/contract/publication"
 import { isObject, listOf, objectOf, type JsonObject } from "../historical/contract/types"
 import type { Chapter, EventPlacement, HistoricalEvent } from "./domain"
 import { projectChapter, type ProjectionResult } from "./projection"
@@ -38,6 +40,112 @@ function project(chapter: ChapterTree = tree()): Chapter {
 
 function cloneTree(chapter: ChapterTree): ChapterTree {
   return structuredClone(chapter) as ChapterTree
+}
+
+/** A record's published revision, as the projection's rules see it. */
+function publishedRevisionOf(record: JsonObject): JsonObject {
+  const mirror = objectOf(record["publication"])
+
+  return objectOf(
+    listOf(record["revisions"]).find(
+      (revision) => objectOf(revision)["revision_id"] === mirror["published_revision_id"],
+    ),
+  )
+}
+
+/** Appends a revision that no set publishes, with a valid hash. */
+function withDraft(
+  chapter: ChapterTree,
+  recordId: string,
+  change: (content: JsonObject) => void,
+): void {
+  const record = recordById(chapter, recordId)
+  const published = publishedRevisionOf(record)
+  const content = JSON.parse(JSON.stringify(published["content"])) as JsonObject
+
+  change(content)
+
+  const draft: JsonObject = {
+    revision_id: `${String(published["revision_id"]).replace(/-\d+$/, "")}-99`,
+    created_at: "2026-09-25T00:00:00Z",
+    author: { name: "Lekishi editorial preparation", role: "preparing editor (owner-instructed)" },
+    change_explanation: "Draft correction: prepared but not published by any set.",
+    content,
+    claims: JSON.parse(JSON.stringify(published["claims"])),
+  }
+  draft["revision_hash"] = revisionHash(draft)
+  ;(record["revisions"] as JsonObject[]).push(draft)
+}
+
+/**
+ * Publishes a new revision of one record in a second set, newest first in the
+ * array so the projection cannot rely on file order. This is the shape the
+ * flattened chapter no longer carries, kept as an in-memory case because the
+ * ordering rule is the reason the boundary exists.
+ */
+function withSecondSet(
+  chapter: ChapterTree,
+  recordId: string,
+  change: (content: JsonObject) => void,
+): ChapterTree {
+  const setId = "lks:set:tang-mission-750-754-in-memory-v2"
+  const record = recordById(chapter, recordId)
+  const published = publishedRevisionOf(record)
+  const content = JSON.parse(JSON.stringify(published["content"])) as JsonObject
+
+  change(content)
+
+  const revision: JsonObject = {
+    revision_id: `${String(published["revision_id"]).replace(/-\d+$/, "")}-2`,
+    created_at: "2026-09-24T23:50:00Z",
+    author: { name: "Lekishi editorial preparation", role: "preparing editor (owner-instructed)" },
+    change_explanation: "In-memory correction used to pin the ordering rule.",
+    content,
+    claims: JSON.parse(JSON.stringify(published["claims"])),
+  }
+  revision["revision_hash"] = revisionHash(revision)
+  ;(record["revisions"] as JsonObject[]).push(revision)
+  record["publication"] = {
+    published_revision_id: revision["revision_id"],
+    published_revision_hash: revision["revision_hash"],
+    set_id: setId,
+    published_at: "2026-09-25T00:10:00Z",
+    published_by: {
+      name: "Lekishi editorial preparation",
+      role: "preparing editor (owner-instructed)",
+    },
+  }
+
+  const current = objectOf(chapter.sets[0])
+  const set: JsonObject = {
+    contract: "lekishi-historical-contract/v0",
+    document: "publication_set",
+    set_id: setId,
+    title: "In-memory correction set",
+    change_explanation: "Pins the newest-published-revision rule without adding a real version.",
+    members: [
+      {
+        record_id: recordId,
+        revision_id: revision["revision_id"],
+        revision_hash: revision["revision_hash"],
+      },
+    ],
+    sources: JSON.parse(JSON.stringify(current["sources"])),
+    review: {
+      ...objectOf(current["review"]),
+      reviewed_at: "2026-09-25T00:05:00Z",
+      notes: "In-memory review record for the ordering test.",
+    },
+    published_at: "2026-09-25T00:10:00Z",
+    published_by: {
+      name: "Lekishi editorial preparation",
+      role: "preparing editor (owner-instructed)",
+    },
+    supersedes: current["set_id"],
+    correction_of_revision: null,
+  }
+
+  return { ...chapter, sets: [set, ...chapter.sets] }
 }
 
 function recordById(chapter: ChapterTree, recordId: string): JsonObject {
@@ -102,21 +210,65 @@ describe("projecting the reviewed Tang chapter", () => {
 
   it("selects the newest published revision per record, not the first revision in the file", () => {
     const chapter = project()
+    const original = eventById(chapter, "lks:event:ships-separate-753")
 
-    // The preparation history was flattened on the owner's instruction: one set
-    // publishes every record, and it decides the review statement.
+    // The flattened chapter publishes one set, and the projection shows what it
+    // names: 多禰島 is a context reference, so the separation stays unplaced.
     expect(chapter.publication.setIds).toEqual(["lks:set:tang-mission-750-754-v1"])
-
-    // The corrections this projection can show are visible: v1 attached no place
-    // to the ships' separation, and v2 added 多禰島 as a context reference.
-    const separation = eventById(chapter, "lks:event:ships-separate-753")
-
-    expect(separation.placement).toEqual({
+    expect(original.placement).toEqual({
       kind: "none",
       placeId: "lks:place:tane",
       label: "多禰島",
       reason: "context-only",
     })
+
+    // The rule itself, kept as an in-memory case: a newer set publishes a new
+    // revision of one record, the sets arrive newest-first (so file order cannot
+    // be what decides), and the projection shows the newer content while the
+    // tree on disk still shows the old one.
+    const corrected = withSecondSet(
+      cloneTree(tree()),
+      "lks:event:ships-separate-753",
+      (content) => {
+        content["places"] = []
+      },
+    )
+
+    const projected = project(corrected)
+
+    expect(projected.publication.setIds[0]).toBe("lks:set:tang-mission-750-754-in-memory-v2")
+    expect(eventById(projected, "lks:event:ships-separate-753").placement).toEqual({
+      kind: "none",
+      placeId: null,
+      label: null,
+      reason: "no-place",
+    })
+    expect(eventById(project(), "lks:event:ships-separate-753").placement).toMatchObject({
+      placeId: "lks:place:tane",
+      reason: "context-only",
+    })
+  })
+
+  it("ignores an unpublished draft", () => {
+    const chapter = cloneTree(tree())
+
+    // A draft revision is prepared but no set publishes it. The contract accepts
+    // it, and the projection keeps showing the published revision: the boundary
+    // reads set-named revisions only, so preparing content cannot change the
+    // atlas before the owner decides to publish it.
+    withDraft(chapter, "lks:event:appointment-750", (content) => {
+      content["summary"] = "Draft summary that no set publishes."
+      content["places"] = []
+    })
+
+    expect(Publication.checkAll(chapter.documents, chapter.sets).ok).toBe(true)
+
+    const projected = project(chapter)
+    const appointment = eventById(projected, "lks:event:appointment-750")
+
+    expect(appointment.note).not.toContain("Draft summary")
+    expect(appointment.placement).toMatchObject({ placeId: "lks:place:heijo-palace" })
+    expect(projected.publication.setIds).toEqual(["lks:set:tang-mission-750-754-v1"])
   })
 
   it("shows nothing when no set publishes the chapter", () => {

@@ -50,12 +50,12 @@
             "note": "Appointed 副使."
           }
         ],
-        "editorial_notes": "The entry gives a sexagenary day (己酉); v0 normalizes it to the month and keeps the day in source_expression. No place is named in the entry, so the event carries no map position.",
+        "editorial_notes": "The entry gives a sexagenary day (己酉); v0 normalizes it to the month and keeps the day in source_expression. No place is named in the entry: the event is anchored at the court's seat for display only, and the record asserts no site for the act.",
         "places": [
           {
             "place_id": "lks:place:heijo-palace",
             "role": "site",
-            "note": "The entry names no place. A court act happens at the court, whose seat in this period is 平城宮 (the palace of 平城京); the record anchors it there for map readability, not as a source-named site."
+            "note": "The entry names no place. A court act happens at the court, whose seat in this period is 平城宮 (the palace of 平城京); the record anchors it there for display only, not as a source-named site, and asserts no site for the act."
           }
         ]
       },
@@ -92,45 +92,14 @@
               }
             }
           ]
-        },
-        {
-          "claim_id": "lks:claim:appointment-750-place",
-          "statement": "The entry records a court act and names no place; the chapter places the act at the court's seat, 平城宮 (the palace of 平城京), as a display anchor and asserts no coordinate.",
-          "asserts": "/places/0",
-          "basis": "cited_interpretation",
-          "role": "main",
-          "attributed_to": "Lekishi editorial preparation",
-          "citations": [
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {
-                "kind": "entry",
-                "value": "卷第十八 天平勝寶二年九月己酉"
-              }
-            },
-            {
-              "source_id": "lks:source:shoku-nihongi",
-              "locator": {
-                "kind": "entry",
-                "value": "卷第十八 天平勝寶四年閏三月丙辰"
-              }
-            },
-            {
-              "source_id": "lks:source:wikidata",
-              "locator": {
-                "kind": "dataset_row",
-                "value": "Q211585 (P625)"
-              }
-            }
-          ]
         }
       ],
-      "revision_hash": "sha256:090a348500cdfdc0f022f15ea57b743687ddaccbb8ef2cf63978fadbc4953e78"
+      "revision_hash": "sha256:ff4b4525f8a09991d6e1d217c44715a7851c4f6ee1bc0b23b6fc1a1c57fc43cc"
     }
   ],
   "publication": {
     "published_revision_id": "lks:rev:appointment-750-1",
-    "published_revision_hash": "sha256:090a348500cdfdc0f022f15ea57b743687ddaccbb8ef2cf63978fadbc4953e78",
+    "published_revision_hash": "sha256:ff4b4525f8a09991d6e1d217c44715a7851c4f6ee1bc0b23b6fc1a1c57fc43cc",
     "set_id": "lks:set:tang-mission-750-754-v1",
     "published_at": "2026-09-24T23:45:00Z",
     "published_by": {

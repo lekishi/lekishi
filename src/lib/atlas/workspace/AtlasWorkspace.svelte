@@ -232,8 +232,17 @@
     </div>
 
     {#if selectedEvent}
+      <!--
+        The details panel is bounded by the space the overlay column actually has
+        and scrolls inside that bound. The column already stops above the time
+        controls (`bottom: controlsHeight + 24`), so taking the bound from the
+        column rather than from a fixed `100dvh` calculation keeps a long summary
+        from rendering under the controls or past the bottom of the workspace,
+        where the page cannot scroll to it: the record's own explanation of why an
+        event has no position was the text that fell off.
+      -->
       <div
-        class="mt-auto min-h-0 max-h-[60%] md:absolute md:right-0 md:top-[5.25rem] md:mt-0 md:max-h-[calc(100dvh-14rem)] md:w-96"
+        class="mt-auto flex min-h-0 max-h-[60%] flex-col overflow-hidden md:absolute md:right-0 md:top-[5.25rem] md:mt-0 md:max-h-[calc(100%-5.25rem)] md:w-96"
       >
         <SelectionPanel
           event={selectedEvent}

@@ -35,7 +35,7 @@
     id="atlas-selection"
     data-testid="atlas-selection"
     aria-label="Selected event"
-    class="pointer-events-auto flex max-h-full flex-col gap-3 overflow-y-auto rounded-t-2xl border border-slate-700/70 bg-slate-950/90 px-4 py-4 shadow-2xl shadow-slate-950/60 backdrop-blur md:rounded-2xl"
+    class="pointer-events-auto flex min-h-0 flex-col gap-3 overflow-y-auto rounded-t-2xl border border-slate-700/70 bg-slate-950/90 px-4 py-4 shadow-2xl shadow-slate-950/60 backdrop-blur md:rounded-2xl"
   >
     <header class="flex items-start justify-between gap-3">
       <div>

@@ -147,6 +147,11 @@ test("keeps the reviewed Tang atlas on its own chapter and surface", async ({ pa
 })
 
 test("keeps the comparison overlays apart at phone widths", async ({ page }) => {
+  // Four viewports, several overlay states each, and software WebGL: every click
+  // and every resize costs seconds, so this check needs more than the default
+  // budget.
+  test.setTimeout(180_000)
+
   await page.goto(COMPARISON)
 
   const selectors = [
@@ -194,6 +199,8 @@ test("keeps the comparison overlays apart at phone widths", async ({ page }) => 
   }
 
   for (const viewport of [
+    { width: 1440, height: 900 },
+    { width: 820, height: 634 },
     { width: 390, height: 844 },
     { width: 320, height: 640 },
   ]) {
@@ -212,5 +219,91 @@ test("keeps the comparison overlays apart at phone widths", async ({ page }) => 
     await row.click()
     await expect(page.getByTestId("atlas-dispute")).toBeVisible()
     await assertNoOverlaps(viewport.width, "selected")
+  }
+})
+
+test("keeps the selected event's explanation reachable at every reviewed size", async ({
+  page,
+}) => {
+  test.setTimeout(180_000)
+
+  // The details panel carries the record's own explanation of why an event has
+  // no position. At a short viewport the panel used to render past the bottom of
+  // the workspace, where nothing could scroll to it, so the explanation was the
+  // text that fell off. The panel must stay inside the viewport, stay clear of
+  // the time controls, and scroll to its own end.
+  for (const viewport of [
+    { width: 1440, height: 900 },
+    { width: 820, height: 634 },
+    { width: 390, height: 844 },
+    { width: 320, height: 640 },
+  ]) {
+    await page.setViewportSize(viewport)
+    await page.goto(COMPARISON)
+    await openEventList(page)
+
+    const row = page.locator(
+      `[data-testid="atlas-event-item"][data-event-id="lks:event:han-nanyang-cession-231"]`,
+    )
+
+    await row.scrollIntoViewIfNeeded()
+    await row.click()
+
+    const panel = page.locator("#atlas-selection")
+
+    await expect(panel).toBeVisible()
+
+    const geometry = await panel.evaluate((element) => {
+      const box = element.getBoundingClientRect()
+      const controls = document.querySelector('[data-testid="atlas-time-controls"]')
+      const controlsBox = controls === null ? null : controls.getBoundingClientRect()
+
+      return {
+        bottom: box.bottom,
+        viewportHeight: window.innerHeight,
+        controlsTop: controlsBox === null ? null : controlsBox.top,
+        clientHeight: element.clientHeight,
+        scrollHeight: element.scrollHeight,
+      }
+    })
+
+    expect(geometry.bottom, `panel bottom at ${viewport.width}`).toBeLessThanOrEqual(
+      geometry.viewportHeight,
+    )
+    expect(geometry.controlsTop, `controls at ${viewport.width}`).not.toBeNull()
+    expect(geometry.bottom, `panel over the controls at ${viewport.width}`).toBeLessThanOrEqual(
+      geometry.controlsTop ?? 0,
+    )
+    // Scroll the panel to its end: the explanation of why 南陽 has no position
+    // is the last thing the panel carries, and it has to be reachable there —
+    // either because the panel fits at this size or because it scrolls to it.
+    await panel.evaluate((element) => {
+      element.scrollTop = element.scrollHeight
+    })
+
+    const reached = await panel.evaluate((element) => {
+      const paragraphs = Array.from(element.querySelectorAll("p"))
+      const last = paragraphs.at(-1)
+      const panelBox = element.getBoundingClientRect()
+      const lastBox = last === undefined ? null : last.getBoundingClientRect()
+
+      return {
+        text: (element as HTMLElement).innerText,
+        lastInside:
+          lastBox !== null &&
+          lastBox.bottom <= panelBox.bottom + 1 &&
+          lastBox.top >= panelBox.top - 1,
+        scrollTop: element.scrollTop,
+        maxScroll: element.scrollHeight - element.clientHeight,
+      }
+    })
+
+    expect(reached.text, `explanation at ${viewport.width}`).toContain("state no extent or seat")
+    expect(reached.text, `explanation at ${viewport.width}`).toContain("no position")
+    expect(reached.scrollTop, `scroll reached the end at ${viewport.width}`).toBeCloseTo(
+      reached.maxScroll,
+      -1,
+    )
+    expect(reached.lastInside, `panel's end visible at ${viewport.width}`).toBe(true)
   }
 })

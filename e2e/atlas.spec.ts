@@ -749,9 +749,10 @@ test("disposes the globe when the workspace is torn down", async ({ page }) => {
 })
 
 test("keeps the phone layout free of overlapping panels", async ({ page }) => {
-  // Two viewports, four overlay states each, and software WebGL: every click and
-  // every resize costs seconds, so this check needs more than the default budget.
-  test.setTimeout(120_000)
+  // Two viewports, several overlay states each, and software WebGL: every click
+  // and every resize costs seconds, so this check needs a budget the software
+  // renderer can meet.
+  test.setTimeout(240_000)
 
   await mountAtlas(page)
 

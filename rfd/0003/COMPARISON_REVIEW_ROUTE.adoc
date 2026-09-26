@@ -203,6 +203,30 @@ without a sourced map position), the disputed death account, the unchanged Tang
 atlas, and the phone-width overlay geometry at 390 and 320.
 |===
 
+=== Update — 2026-09-26: the details panel's bound, after the owner's review comment
+
+The owner's review comment on the served page asked why 南陽 has no sourced
+position. The answer was already in the record — the entries state no extent or
+seat, and the historical geography records the name for two regions — but at the
+owner's 820x634 viewport the details panel rendered past the bottom of the
+workspace, where nothing could scroll to it, so the explanation was the text that
+fell off. Two shared-surface fixes, no content change:
+
+* the details panel is now bounded by the overlay column (which already stops
+  above the time controls) and scrolls inside that bound, instead of taking a
+  fixed `100dvh` height and spilling past the viewport;
+* `e2e/comparison.spec.ts` gains a check that the panel stays inside the viewport
+  and clear of the time controls at 1440x900, 820x634, 390x844 and 320x640, and
+  that scrolling it reaches the record's own explanation. The overlay-geometry
+  check now covers those four sizes too, and the atlas phone-layout check's
+  budget was raised to 240 s for the software renderer.
+
+Re-measured after the change: `pnpm verify` passes (format, `svelte-check` 0
+errors and 0 warnings, 462 tests: 461 passed and 1 skipped, static build 451
+files); `e2e/comparison.spec.ts` 15 passed in 14.3 minutes across the desktop,
+tablet-touch, and phone projects, and `e2e/atlas.spec.ts -g "phone layout"`
+passes in 1.6 minutes.
+
 == Consequences
 
 * The owner can review the corrected fixture in the product at `/compare/qin`,

@@ -3,23 +3,19 @@ import { loadChapter } from "../historical/chapter"
 import { isObject, listOf, objectOf, type JsonObject } from "../historical/contract/types"
 import { CHAPTER as PRODUCTION_CHAPTER } from "./chapter-content"
 import { loadChapterContent } from "./chapter-catalog"
-import {
-  COMPARISON_CHAPTER,
-  COMPARISON_COVERAGE,
-  COMPARISON_REVIEW,
-  COMPARISON_TITLE,
-} from "./comparison"
+import { chapterPresentation } from "./chapters"
+import { COMPARISON_CHAPTER, COMPARISON_COVERAGE, COMPARISON_REVIEW } from "./comparison"
 import { windowLabel } from "./labels"
 
 /**
- * The comparison review route's own contract.
+ * The Qin chapter page's own contract.
  *
- * The route renders the bounded Qin fixture so the owner can inspect the
- * corrected revisions the internal review prepared. These tests pin the three
- * things the route must not get wrong: which chapter it loads, the coverage
- * window it passes (cross-checked against the fixture's published story window,
- * not restated), and the unapproved status it states. The fixture's content is
- * pinned by `src/lib/historical/contract/qin-chapter.test.ts`.
+ * The page renders the bounded Qin chapter so the owner can inspect the corrected
+ * revisions the internal review prepared. These tests pin the three things the
+ * page must not get wrong: which chapter it loads, the coverage window it passes
+ * (cross-checked against the chapter's published story window, not restated), and
+ * the unapproved status it states. The chapter's content is pinned by
+ * `src/lib/historical/contract/qin-chapter.test.ts`.
  */
 
 const STORY = "lks:story:qin-conquest-han-233-226"
@@ -91,13 +87,20 @@ describe("the comparison review fixture", () => {
     expect(JSON.stringify(COMPARISON_REVIEW)).not.toContain("owner approved")
   })
 
-  it("names the fixture the entry point and the route both show", async () => {
-    // The root page's review card names the fixture; the route shows the loaded
-    // chapter. Both take the title from this module, so a renamed story fails
-    // here instead of leaving the entry point describing another chapter.
+  it("opens the chapter the root page's card names", async () => {
+    // The root page's card names the chapter and links this page. The card is
+    // keyed by the id the contract carries and pinned to this route and the
+    // window the projection gives the chapter, so the entry point cannot point at
+    // another chapter or another span; the display name itself is pinned by
+    // `chapters.test.ts`.
     const chapter = await loadChapterContent(COMPARISON_CHAPTER, COMPARISON_COVERAGE)
+    const card = chapterPresentation(COMPARISON_CHAPTER)
 
-    expect(COMPARISON_TITLE).toBe(chapter.title)
+    expect(card).toBeDefined()
+    expect(card?.id).toBe(chapter.id)
+    expect(card?.href).toBe("/compare/qin")
+    expect(card?.window).toEqual(chapter.defaultWindow)
+    expect(card?.name.trim()).not.toBe("")
   })
 
   it("shows the corrected dispute and leaves the corrected records' readings visible", async () => {

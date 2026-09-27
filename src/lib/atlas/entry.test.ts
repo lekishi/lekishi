@@ -64,7 +64,7 @@ describe("the atlas page bootstrap", () => {
     mountWorkspace()
 
     expect(mountAtlas).toHaveBeenCalledTimes(1)
-    expect(mountAtlas).toHaveBeenCalledWith(root, CHAPTER, "production")
+    expect(mountAtlas).toHaveBeenCalledWith(root, CHAPTER, "production", CHAPTER.title)
     expect(window.__lekishiAtlas).toBe(handle)
   })
 
@@ -85,12 +85,68 @@ describe("the atlas page bootstrap", () => {
     expect(window.__lekishiAtlas).toBe(handle)
   })
 
-  it("mounts the chapter and detail surface the page asks for", () => {
+  it("mounts the chapter, detail surface, and display name the page asks for", () => {
     const root = addMountPoint()
 
-    startAtlasPage(CHAPTER, "comparison-review")
+    startAtlasPage(CHAPTER, "comparison-review", "The embassy to Tang China")
 
-    expect(mountAtlas).toHaveBeenCalledWith(root, CHAPTER, "comparison-review")
+    expect(mountAtlas).toHaveBeenCalledWith(
+      root,
+      CHAPTER,
+      "comparison-review",
+      "The embassy to Tang China",
+    )
+  })
+
+  it("keeps the display name when a page is restored from the back/forward cache", () => {
+    addMountPoint()
+
+    startAtlasPage(CHAPTER, "production", "The embassy to Tang China")
+    mountWorkspace()
+
+    transition("pagehide")
+    transition("pageshow")
+
+    expect(mountAtlas).toHaveBeenLastCalledWith(
+      expect.anything(),
+      CHAPTER,
+      "production",
+      "The embassy to Tang China",
+    )
+  })
+
+  it("restores the chapter, detail surface, and name a later page started", () => {
+    const root = addMountPoint()
+    const qin = { ...CHAPTER, id: "qin-conquest-han-233-226" }
+
+    startAtlasPage(CHAPTER, "production", "The embassy to Tang China")
+    mountWorkspace()
+    releaseWorkspace()
+
+    // A navigation starts a different chapter with its own display name and
+    // detail surface.
+    startAtlasPage(qin, "comparison-review", "The end of the state of Han")
+    mountWorkspace()
+
+    expect(mountAtlas).toHaveBeenLastCalledWith(
+      root,
+      qin,
+      "comparison-review",
+      "The end of the state of Han",
+    )
+
+    // The restored page comes back as that chapter, not the first one: clear the
+    // spy so the assertion cannot pass on the mount above.
+    transition("pagehide")
+    mountAtlas.mockClear()
+    transition("pageshow")
+
+    expect(mountAtlas).toHaveBeenCalledWith(
+      root,
+      qin,
+      "comparison-review",
+      "The end of the state of Han",
+    )
   })
 
   it("releases the workspace on teardown and restores one workspace on pageshow", () => {

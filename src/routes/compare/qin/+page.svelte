@@ -1,38 +1,44 @@
 <script lang="ts">
   import { onMount } from "svelte"
+  import { chapterPresentation } from "$lib/atlas/chapters"
   import { COMPARISON_REVIEW } from "$lib/atlas/comparison"
   import { releaseWorkspace, startAtlasPage } from "$lib/atlas/entry"
   import { windowLabel } from "$lib/atlas/labels"
   import type { Chapter } from "$lib/atlas/domain"
 
   /**
-   * The comparison review route.
+   * The review route for the bounded Qin chapter.
    *
-   * It renders the bounded Qin fixture through the same workspace the production
-   * atlas uses, so the owner can inspect the corrected revisions the internal
-   * review prepared before deciding on them. The fixture is not approved content:
-   * the header states that it is unapproved preparation, the load keeps the
-   * fixture's own coverage window, and the workspace shows the published dispute
-   * for the events that carry one. Nothing here changes the atlas route, which
-   * still renders the reviewed Tang chapter.
+   * It renders the chapter through the same workspace the production atlas uses,
+   * so the owner can inspect the corrected revisions the internal review prepared
+   * before deciding on them. The chapter is not approved content: the header
+   * states that it is unapproved preparation, the load keeps the chapter's own
+   * coverage window, and the workspace shows the published dispute for the events
+   * that carry one. Nothing here changes the atlas route, which still renders the
+   * reviewed Tang chapter.
    *
    * The shell is prerendered from the load data, so a direct request for
-   * `/compare/qin` states the fixture's window and review status before any
+   * `/compare/qin` states the chapter's window and review status before any
    * JavaScript runs. The workspace itself mounts in `onMount`, as on the atlas
    * route, and this page releases it on teardown.
    */
   let { data }: { data: { chapter: Chapter } } = $props()
 
+  // Derived, not read once: the page is prerendered from the route's load, and a
+  // reader arriving from the root page must find the chapter named the way the
+  // card named it.
+  const chapterName = $derived(chapterPresentation(data.chapter.id)?.name ?? data.chapter.title)
+
   onMount(() => {
-    startAtlasPage(data.chapter, "comparison-review")
+    startAtlasPage(data.chapter, "comparison-review", chapterName)
 
     return () => releaseWorkspace()
   })
 </script>
 
 <svelte:head>
-  <title>{data.chapter.title} · Comparison fixture · Lekishi</title>
-  <meta name="description" content="{COMPARISON_REVIEW.label}: {COMPARISON_REVIEW.note}" />
+  <title>{chapterName} · Lekishi</title>
+  <meta name="description" content={COMPARISON_REVIEW.note} />
 </svelte:head>
 
 <div class="flex h-dvh min-h-0 flex-col bg-slate-950">
@@ -52,7 +58,7 @@
       </span>
     </div>
     <nav class="flex items-center gap-4 text-xs" aria-label="Primary">
-      <a href="/atlas" class="text-slate-300 transition hover:text-white">Reviewed Tang atlas</a>
+      <a href="/atlas" class="text-slate-300 transition hover:text-white">Atlas</a>
       <a href="/" class="text-slate-300 transition hover:text-white">Overview</a>
     </nav>
   </header>

@@ -83,12 +83,13 @@ prerendered pages, the hashed bundles, the single stylesheet with the Cesium
 widget styles, or the Cesium runtime directories are missing, if the atlas page
 does not have exactly one mount point, if the artifact contains a server runtime,
 if the built scripts or the prerendered pages do not carry the reviewed chapter,
-if the retired synthetic fixture's sentinel strings reach the artifact, if the
-comparison review page is missing or does not state that the bounded Qin fixture
-is unapproved preparation, if the root page does not link that review route and
-state the fixture's unapproved status and the reviewed chapter's recorded owner
-approval, or if the production atlas page renders that fixture instead of the
-reviewed chapter.
+if the retired synthetic fixture's sentinel strings reach the artifact, if the Qin
+chapter's page is missing or does not state that it is unapproved preparation, if
+the root page does not link both chapter entries or drops the Tang chapter's
+recorded owner approval or carries the project's own framing where a reader meets
+a chapter (a review category, `comparison harness`, the harness's `map treatments`
+phrase, or the contract id), or if the production atlas page renders the Qin
+chapter instead of the Tang one.
 
 ### Reviewed chapter content
 
@@ -131,7 +132,13 @@ The bounded Qin comparison fixture
 the same contract, recorded in the publication ledger as a preparation snapshot
 rather than a release, and rendered only by the comparison review route
 (`/compare/qin`), which labels it unapproved preparation. It stays
-comparison-only until the treatment harness and the owner's decision exist.
+comparison-only until the treatment harness and the owner's decision exist. The
+root page presents both chapters as peer cards — name, window, and story summary
+each — from `src/lib/atlas/chapters.ts`, whose tests pin one card per chapter
+tree and each card's window against the projection; each card carries its
+chapter's editorial state as secondary metadata, which is where the Qin chapter's
+missing release decision and the Tang chapter's recorded owner approval stay
+visible without becoming either chapter's identity.
 
 What the projection refuses to do is part of the contract with the reader:
 

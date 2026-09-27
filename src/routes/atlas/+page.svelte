@@ -2,6 +2,7 @@
   import { onMount } from "svelte"
   import { releaseWorkspace, startAtlasPage } from "$lib/atlas/entry"
   import { CHAPTER } from "$lib/atlas/chapter-content"
+  import { chapterPresentation } from "$lib/atlas/chapters"
 
   /**
    * The atlas shell.
@@ -17,19 +18,23 @@
    * exactly one workspace. The mount and its cleanup live in `onMount` so
    * nothing touches the DOM while the shell is rendered on the server.
    *
-   * The page metadata names the reviewed chapter the atlas actually shows; it
-   * comes from the same projection the workspace renders, so it cannot drift
-   * from the content.
+   * The page names the chapter it renders, and its metadata comes from the
+   * content's own summary through the projection, so the title cannot drift from
+   * what the workspace shows. The display name is the chapter card's name
+   * (`chapters.ts`), so a reader arriving from the root page finds the same
+   * chapter named the same way.
    */
+  const chapterName = chapterPresentation(CHAPTER.id)?.name ?? CHAPTER.title
+
   onMount(() => {
-    startAtlasPage(CHAPTER)
+    startAtlasPage(CHAPTER, "production", chapterName)
 
     return () => releaseWorkspace()
   })
 </script>
 
 <svelte:head>
-  <title>{CHAPTER.title} · Atlas · Lekishi</title>
+  <title>{chapterName} · Atlas · Lekishi</title>
   <meta
     name="description"
     content="The Lekishi atlas: {CHAPTER.summary} {CHAPTER.publication.coverageNote}"
@@ -43,11 +48,6 @@
     <a href="/" class="flex items-center gap-2.5">
       <img src="/images/logo.svg" width="24" alt="" />
       <span class="text-sm font-semibold tracking-tight text-slate-100">Lekishi</span>
-      <span
-        class="rounded-full border border-amber-300/50 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-amber-300"
-      >
-        Reviewed chapter
-      </span>
     </a>
     <nav class="flex items-center gap-4 text-xs" aria-label="Primary">
       <a href="/" class="text-slate-300 transition hover:text-white">Overview</a>

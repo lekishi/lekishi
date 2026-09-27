@@ -1,6 +1,7 @@
 <script lang="ts">
   import { untrack } from "svelte"
   import type { Chapter } from "../domain"
+  import { COMPARISON_REVIEW } from "../comparison"
   import { reviewSummaryLabel, windowLabel } from "../labels"
   import { buildScene } from "../scene"
   import * as atlas from "../state"
@@ -17,11 +18,17 @@
    * this component; `detail` only decides whether the review-only dispute
    * presentation is shown, because the approved launch chapter's surface must not
    * change without an owner decision.
+   *
+   * `name` is the chapter's display name. The caller supplies it because the
+   * name a reader sees is product presentation (`chapters.ts`), while the
+   * workspace stays chapter-agnostic and falls back to the chapter's own
+   * published title for a chapter that has no card.
    */
   let {
     chapter,
     detail = "production",
-  }: { chapter: Chapter; detail?: "production" | "comparison-review" } = $props()
+    name = chapter.title,
+  }: { chapter: Chapter; detail?: "production" | "comparison-review"; name?: string } = $props()
 
   // This component is the single owner of atlas interaction state. Everything
   // below reads from `atlasState` and dispatches actions; the renderer only
@@ -87,10 +94,15 @@
   )
   const unlocatedPlaces = $derived(chapter.places.filter((place) => place.position === null).length)
 
-  // The review surface names the content's status in the atlas's own words; the
-  // production surface keeps the wording the owner approved.
+  // The notice states the content's editorial status in the atlas's own words.
+  // The production surface states only the review independence the chapter's
+  // publication records; the review surface states the fixture's unapproved
+  // preparation as well. Either way the label is status metadata beside the
+  // chapter's name — it is not the chapter's name or its identity.
   const noticeLabel = $derived(
-    detail === "comparison-review" ? "Unapproved preparation" : "Reviewed chapter",
+    detail === "comparison-review"
+      ? `${COMPARISON_REVIEW.label} · ${reviewSummaryLabel(review.independence)}`
+      : reviewSummaryLabel(review.independence),
   )
 
   // The workspace owns the playback clock; the renderer never advances time.
@@ -121,7 +133,7 @@
 >
   <Globe
     {scene}
-    label="Atlas globe · {chapter.title}"
+    label="Atlas globe · {name}"
     onSelectEvent={selectEvent}
     onManualCameraInput={() => (atlasState = atlas.noteManualCameraInput(atlasState))}
     onError={(error) => (rendererError = error.message)}
@@ -160,9 +172,9 @@
         class="max-h-[45dvh] w-full min-w-0 overflow-y-auto rounded-xl border border-amber-300/40 bg-slate-950/85 px-3 py-2 backdrop-blur sm:w-auto sm:max-w-[19rem]"
       >
         <p class="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-amber-300">
-          {noticeLabel} · {reviewSummaryLabel(review.independence)}
+          {noticeLabel}
         </p>
-        <p class="mt-0.5 text-xs font-semibold leading-snug text-slate-100">{chapter.title}</p>
+        <p class="mt-0.5 text-xs font-semibold leading-snug text-slate-100">{name}</p>
         <!--
           The chapter's own coverage statement is the full statement of what this
           chapter does and does not cover. Phone widths keep the derived counts

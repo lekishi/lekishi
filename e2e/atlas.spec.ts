@@ -165,7 +165,9 @@ test("serves a prerendered shell at /atlas before any script runs", async ({ req
   // Real HTML, not an empty SPA shell: the route, the mount point, and the
   // header are in the document a static host returns.
   expect(html.match(/id="atlas-workspace"/g)).toHaveLength(1)
-  expect(html).toContain("Reviewed chapter")
+  // The shell names the chapter it renders and carries no review category.
+  expect(html).toContain("The embassy to Tang China")
+  expect(html).not.toContain("Reviewed chapter")
   expect(html).toContain("The 750–754 embassy of 藤原朝臣清河")
   // The deployed shell is the reviewed chapter, not the retired synthetic
   // foundation fixture.
@@ -191,11 +193,12 @@ test("mounts one workspace from the built artifact", async ({ page }) => {
 
   const problems = await mountAtlas(page)
 
-  // The reviewed chapter, not a synthetic fixture: the notice names the chapter
-  // and its recorded review status, and the list holds its in-window events.
-  await expect(page.locator("#atlas-notice")).toContainText("Reviewed chapter")
-  await expect(page.locator("#atlas-notice")).toContainText("The 750–754 embassy of 藤原朝臣清河")
-  await expect(page.locator("#atlas-notice")).toContainText("Reviewed chapter · Self-review only")
+  // The chapter, not a synthetic fixture: the notice names the chapter and its
+  // recorded review status, and the list holds its in-window events.
+  await expect(page.locator("#atlas-notice")).toContainText("The embassy to Tang China")
+  await expect(page.locator("#atlas-notice")).toContainText("Self-review only")
+  await expect(page.locator("#atlas-notice")).not.toContainText("Reviewed chapter")
+  await expect(page.locator("#atlas-notice")).not.toContainText("Unapproved preparation")
   await expect(page.getByTestId("atlas-event-item")).toHaveCount(24)
   await expect(page.getByText("Synthetic", { exact: false })).toHaveCount(0)
   await expect(page.getByTestId("atlas-time-controls")).toBeVisible()

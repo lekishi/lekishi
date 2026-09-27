@@ -32,10 +32,12 @@ declare global {
 let workspace: AtlasHandle | null = null
 let watching = false
 
-// The chapter and detail surface the page asked for, kept so a back/forward-cache
-// restore re-creates the same workspace rather than an empty or default one.
+// The chapter, detail surface, and display name the page asked for, kept so a
+// back/forward-cache restore re-creates the same workspace rather than an empty
+// or default one.
 let currentChapter: Chapter | null = null
 let currentDetail: AtlasDetail = "production"
+let currentName: string | null = null
 
 /**
  * True in a browser. SvelteKit renders the atlas shell on the server while
@@ -79,7 +81,7 @@ export function mountWorkspace(): void {
   workspace = null
 
   try {
-    workspace = mountAtlas(root, currentChapter, currentDetail)
+    workspace = mountAtlas(root, currentChapter, currentDetail, currentName ?? currentChapter.title)
     window.__lekishiAtlas = workspace
   } catch (error) {
     reportFailure(root, error)
@@ -110,11 +112,18 @@ export function watchWorkspaceLifecycle(): void {
 
 /**
  * Starts an atlas page: one workspace owner, one set of lifecycle listeners, one
- * chapter. Called by a route after the prerendered shell is in the DOM.
+ * chapter. Called by a route after the prerendered shell is in the DOM. `name` is
+ * the chapter's display name — product presentation the route takes from
+ * `chapters.ts`; without it the workspace uses the chapter's published title.
  */
-export function startAtlasPage(chapter: Chapter, detail: AtlasDetail = "production"): void {
+export function startAtlasPage(
+  chapter: Chapter,
+  detail: AtlasDetail = "production",
+  name: string = chapter.title,
+): void {
   currentChapter = chapter
   currentDetail = detail
+  currentName = name
   watchWorkspaceLifecycle()
   mountWorkspace()
 }

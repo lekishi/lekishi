@@ -49,7 +49,7 @@ test("serves the comparison fixture as unapproved preparation with BCE years", a
 
   await page.goto(COMPARISON)
 
-  await expect(page).toHaveTitle(/Comparison fixture/)
+  await expect(page).toHaveTitle(/The end of the state of Han · Lekishi/)
   await expect(page.locator("#comparison-status")).toHaveText("Unapproved preparation")
   // The scope strip is hidden at phone widths (the badge and the workspace
   // notice carry the status there), so its content is asserted, not its box.
@@ -62,7 +62,7 @@ test("serves the comparison fixture as unapproved preparation with BCE years", a
 
   await expect(notice).toContainText("Unapproved preparation")
   await expect(notice).toContainText("Self-review only")
-  await expect(notice).toContainText("The end of the state of Han under Qin")
+  await expect(notice).toContainText("The end of the state of Han")
   await expect(notice).not.toContainText("owner approved")
 
   await openEventList(page)
@@ -126,11 +126,14 @@ test("shows the disputed death account with the accounts that challenge it", asy
   await expect(page.getByTestId("atlas-selection")).toContainText("display anchor only")
 })
 
-test("keeps the reviewed Tang atlas on its own chapter and surface", async ({ page }) => {
+test("keeps the Tang atlas on its own chapter and surface", async ({ page }) => {
   await page.goto(ATLAS)
 
-  await expect(page.locator("#atlas-notice")).toContainText("Reviewed chapter")
+  // The production surface names the chapter and its review status; it carries
+  // no review category and never the Qin chapter's unapproved label.
+  await expect(page.locator("#atlas-notice")).toContainText("The embassy to Tang China")
   await expect(page.locator("#atlas-notice")).toContainText("Self-review only")
+  await expect(page.locator("#atlas-notice")).not.toContainText("Reviewed chapter")
   await expect(page.locator("#atlas-notice")).not.toContainText("Unapproved preparation")
 
   await openEventList(page)
@@ -225,7 +228,10 @@ test("keeps the comparison overlays apart at phone widths", async ({ page }) => 
 test("keeps the selected event's explanation reachable at every reviewed size", async ({
   page,
 }) => {
-  test.setTimeout(180_000)
+  // Four viewports, each with a fresh page load, a list open, a selection, and a
+  // panel measurement, all on software WebGL: measured at 2.7 minutes alone, so
+  // the default budget is too tight once the suite runs the whole file.
+  test.setTimeout(300_000)
 
   // The details panel carries the record's own explanation of why an event has
   // no position. At a short viewport the panel used to render past the bottom of
@@ -308,59 +314,75 @@ test("keeps the selected event's explanation reachable at every reviewed size", 
   }
 })
 
-test("links the comparison chapter from the root page without implying approval", async ({
-  page,
-}) => {
+test("presents both chapters from the root page as peer entries", async ({ page }) => {
   const problems = collectProblems(page)
 
   await page.goto("/")
 
-  const card = page.locator("#comparison-review-card")
+  const cards = page.locator("[data-chapter-id]")
 
-  await expect(card).toBeVisible()
-  await expect(card).toContainText("Comparison chapter")
-  await expect(card).toContainText("The end of the state of Han under Qin")
-  await expect(card).toContainText("Unapproved preparation")
-  await expect(card).toContainText("self-review only")
-  await expect(card).toContainText("no release decision exists")
-  await expect(card).toContainText("shared comparison of map treatments")
-  await expect(card).not.toContainText("owner approved")
+  await expect(cards).toHaveCount(2)
 
-  // The reviewed atlas stays the page's primary call to action: its CTA comes
-  // before the review link, and the review card sits below the reviewed chapter.
+  const tang = page.locator('[data-chapter-id="tang-mission-750-754"]')
+  const qin = page.locator('[data-chapter-id="qin-conquest-han-233-226"]')
+
+  // Each card is a chapter entry: a name, its window, a story summary, and an
+  // ordinary link to open it.
+  await expect(tang).toContainText("The embassy to Tang China")
+  await expect(tang).toContainText("750–754")
+  await expect(tang).toContainText("藤原朝臣清河")
+  await expect(tang.getByRole("link", { name: /Open the chapter/ })).toBeVisible()
+
+  await expect(qin).toContainText("The end of the state of Han")
+  await expect(qin).toContainText("233 BCE–226 BCE")
+  await expect(qin).toContainText("韓非")
+  await expect(qin.getByRole("link", { name: /Open the chapter/ })).toBeVisible()
+
+  // Editorial state is secondary metadata in the card, never its pitch: the two
+  // cards are peers, and neither the page nor the Qin card reads as release.
+  await expect(tang).toContainText("Owner-approved for release, 2026-09-25")
+  await expect(tang).toContainText("Not independent or specialist review")
+  await expect(qin).toContainText("Unapproved preparation · self-review only")
+  await expect(qin).not.toContainText("Owner-approved")
+  await expect(qin).not.toContainText("approved for release")
+
+  // The page is a reader's entry point: no review categories, no contract
+  // records, and no comparison-harness rationale.
+  const mainText = await page.locator("main").innerText()
+
+  expect(mainText).not.toContain("Reviewed chapter")
+  expect(mainText).not.toContain("Comparison chapter")
+  expect(mainText).not.toContain("comparison harness")
+  expect(mainText).not.toContain("map treatments")
+  expect(mainText).not.toContain("lekishi-historical-contract")
+
+  // The hero's atlas call to action stays the page's primary action, ahead of
+  // the chapter entries.
   await expect(page.getByRole("link", { name: "Open the atlas" })).toBeVisible()
 
   const order = await page.evaluate(() => {
-    const links = Array.from(document.querySelectorAll("main a"))
+    const text = document.querySelector("main")?.textContent ?? ""
 
     return {
-      atlas: links.findIndex((link) => link.getAttribute("href") === "/atlas"),
-      comparison: links.findIndex((link) => link.getAttribute("href") === "/compare/qin"),
+      atlas: text.indexOf("Open the atlas"),
+      chapter: text.indexOf("Open the chapter"),
     }
   })
 
   expect(order.atlas).toBeGreaterThanOrEqual(0)
-  expect(order.comparison).toBeGreaterThan(order.atlas)
+  expect(order.chapter).toBeGreaterThan(order.atlas)
 
-  // The card is the review route's entry point, and the route labels the same
-  // content the same way.
-  await card.getByRole("link", { name: "Open the comparison chapter" }).click()
+  // The Qin entry opens the Qin chapter, and that page states the chapter's
+  // unapproved status and names the chapter the card named.
+  await qin.getByRole("link", { name: /Open the chapter/ }).click()
 
   await expect(page).toHaveURL(/\/compare\/qin$/)
+  await expect(page).toHaveTitle(/The end of the state of Han/)
   await expect(page.locator("#comparison-status")).toHaveText("Unapproved preparation")
 
-  // The reviewed-chapter card states the recorded approval before the frozen
-  // set's preparation-time notes, which still describe it as pending.
+  // Discoverability holds at the reviewed sizes, with no horizontal overflow.
   await page.goto("/")
 
-  const chapterText = await page.locator("main").innerText()
-
-  expect(chapterText).toContain("recorded on 2026-09-25")
-  expect(chapterText.indexOf("recorded on 2026-09-25")).toBeLessThan(
-    chapterText.indexOf("still describe the approval as pending"),
-  )
-
-  // Discoverability holds at the reviewed sizes, with no horizontal overflow.
   for (const viewport of [
     { width: 1440, height: 900 },
     { width: 820, height: 634 },
@@ -368,7 +390,9 @@ test("links the comparison chapter from the root page without implying approval"
     { width: 320, height: 640 },
   ]) {
     await page.setViewportSize(viewport)
-    await expect(card).toBeVisible()
+    await expect(cards).toHaveCount(2)
+    await expect(tang).toBeVisible()
+    await expect(qin).toBeVisible()
 
     const overflow = await page.evaluate(
       () => document.documentElement.scrollWidth - window.innerWidth,

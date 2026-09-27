@@ -24,20 +24,12 @@ export const COMPARISON_CHAPTER = "qin-conquest-han-233-226"
 export const COMPARISON_COVERAGE: ChapterCoverage = { defaultWindow: { start: -232, end: -225 } }
 
 /**
- * The fixture's display title: the leading clause of its published story
- * summary, as the projection derives it. The review route's metadata and the
- * root page's review card both name the fixture this way, and
- * `comparison.test.ts` cross-checks this constant against the loaded chapter's
- * title, so an entry point cannot describe a different chapter than the route
- * renders.
- */
-export const COMPARISON_TITLE = "The end of the state of Han under Qin"
-
-/**
  * The review state the page states. The wording lives here so the page, its
- * metadata, and its tests cannot describe the fixture differently.
+ * metadata, and its tests cannot describe the fixture differently. The label is
+ * the ledger's own decision class, shortened: the set is a `preparation
+ * snapshot` and no owner decision exists for it.
  */
 export const COMPARISON_REVIEW = {
   label: "Unapproved preparation",
-  note: "Prepared for the owner's review: no release decision exists for this content, it is not a launch chapter, and the atlas shows the corrected revisions the internal review prepared.",
+  note: "Draft chapter under review: no release decision exists for this content, and it is not a launch chapter.",
 } as const

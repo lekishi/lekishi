@@ -43,8 +43,24 @@ describe("mountAtlas", () => {
     // The workspace renders the reviewed chapter: its 24 in-window events, not a
     // synthetic fixture.
     expect(root.querySelectorAll('[data-testid="atlas-event-item"]')).toHaveLength(24)
-    expect(root.querySelector("#atlas-notice")?.textContent).toContain("Reviewed chapter")
+    // The notice names the chapter and its review status; it carries no review
+    // category label, because the reader is looking at a chapter, not a category.
+    expect(root.querySelector("#atlas-notice")?.textContent).toContain("Self-review only")
+    expect(root.querySelector("#atlas-notice")?.textContent).toContain(CHAPTER.title)
+    expect(root.querySelector("#atlas-notice")?.textContent).not.toContain("Reviewed chapter")
     expect(renderer.sync).toHaveBeenCalled()
+
+    handle.dispose()
+  })
+
+  it("uses the display name its caller supplies for the chapter", async () => {
+    const handle = mountAtlas(root, CHAPTER, "production", "The embassy to Tang China")
+    await flush()
+
+    const notice = root.querySelector("#atlas-notice")?.textContent ?? ""
+
+    expect(notice).toContain("The embassy to Tang China")
+    expect(notice).not.toContain(CHAPTER.title)
 
     handle.dispose()
   })
@@ -105,7 +121,7 @@ describe("mountAtlas and the comparison review surface", () => {
     await flush()
 
     expect(root.querySelectorAll('[data-testid="atlas-dispute-badge"]')).toHaveLength(0)
-    expect(root.querySelector("#atlas-notice")?.textContent).toContain("Reviewed chapter")
+    expect(root.querySelector("#atlas-notice")?.textContent).not.toContain("Unapproved preparation")
 
     handle.dispose()
   })

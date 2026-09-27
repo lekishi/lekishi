@@ -256,13 +256,14 @@ for release.
 The review route `/compare/qin` renders this set so the owner can inspect the
 corrected content. It labels the content **Unapproved preparation**, shows the
 fixture's 233–226 BCE window in BCE years, and shows 韓非's published dispute
-with its conflicting accounts. The root page carries a **Comparison chapter**
-card that links the route and repeats that label (`Unapproved preparation ·
-self-review only`), states what the chapter is (a bounded second chapter prepared
-as the second scenario for the shared comparison of map treatments, still to be
-built), so the review surface is discoverable without reading as approved or
-shipped; the card is subordinate to the reviewed Tang atlas call to action. The
-fixture's status is "source-checked, corrected, published for review, awaiting
+with its conflicting accounts. The root page presents the fixture as a chapter
+beside the Tang chapter — its card carries the chapter's name, window, and story,
+and states the same unapproved status as secondary metadata — so the review
+surface is discoverable without reading as approved or shipped. The card does not
+describe the comparison harness or the project's own process; the owner's review
+comment of 2026-09-27 asked for exactly that (see
+[`rfd/0003/CHAPTER_PRESENTATION.adoc`](../../../rfd/0003/CHAPTER_PRESENTATION.adoc)).
+The fixture's status is "source-checked, corrected, published for review, awaiting
 the owner's decision".
 
 ## What is deferred, and the remaining decisions

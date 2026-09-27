@@ -26,12 +26,18 @@ export type AtlasHandle = {
   dispose(): void
 }
 
+/**
+ * Mounts the atlas workspace with the chapter's display name. The name is
+ * presentation the caller owns (`chapters.ts`); the workspace uses it for the
+ * notice and falls back to the chapter's own published title.
+ */
 export function mountAtlas(
   root: HTMLElement,
   chapter: Chapter,
   detail: AtlasDetail = "production",
+  name: string = chapter.title,
 ): AtlasHandle {
-  const component = mount(AtlasWorkspace, { target: root, props: { chapter, detail } })
+  const component = mount(AtlasWorkspace, { target: root, props: { chapter, detail, name } })
   let disposed = false
 
   return {

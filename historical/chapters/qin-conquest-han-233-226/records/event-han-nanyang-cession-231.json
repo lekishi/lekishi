@@ -1,0 +1,557 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "event",
+  "record_id": "lks:event:han-nanyang-cession-231",
+  "created_at": "2026-09-25T03:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:han-nanyang-cession-231-1",
+      "created_at": "2026-09-25T03:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Initial comparison-fixture event: the cession of 南陽, dated to the ninth month and left unplaced because the sources state no extent or seat.",
+      "content": {
+        "summary": "In the ninth month of 231 BCE Han ceded 南陽 and Qin sent troops to receive the land; the annals add that 騰 held it as acting governor, and the comprehensive mirror records Han presenting the land and Qin receiving it.",
+        "event_types": [
+          "exchange"
+        ],
+        "time": {
+          "source_expression": "十六年九月（發卒受地韓南陽假守騰）; 始皇帝十六年九月（發卒受地於韓）",
+          "calendar": "chinese_lunisolar",
+          "precision": "month",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {
+              "year": 231,
+              "era": "bce",
+              "month": 9
+            },
+            "end": {
+              "year": 231,
+              "era": "bce",
+              "month": 9
+            }
+          }
+        },
+        "places": [
+          {
+            "place_id": "lks:place:nanyang",
+            "role": "site",
+            "note": "The land the sources name as ceded and received; they state no extent or seat."
+          }
+        ],
+        "participants": [
+          {
+            "actor_id": "lks:actor:han-state",
+            "role": "other",
+            "note": "The sources record 韓 presenting the land."
+          },
+          {
+            "actor_id": "lks:actor:nei-shi-teng",
+            "role": "participant",
+            "note": "The annals name him 假守騰, the acting governor of the received land."
+          }
+        ],
+        "editorial_notes": "The land is named but not located: the entries state no extent, seat, or site, and the chapter asserts no coordinate. The officer is called 假守騰 here and 內史騰 in the next year's notice; the two titles are recorded on his actor record."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:nanyang-cession-time",
+          "statement": "The annals record that in the ninth month of 十六年 (231 BCE) Qin sent troops to receive the land of Han's 南陽, with 騰 as acting governor.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十六年九月（發卒受地韓南陽假守騰）"
+              },
+              "quoted_text": "十六年九月，發卒受地韓南陽假守騰。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nanyang-cession-mirror",
+          "statement": "The comprehensive mirror records that Han presented 南陽 and that in the ninth month Qin sent troops to receive the land.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "supporting",
+          "citations": [
+            {
+              "source_id": "lks:source:zizhi-tongjian",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦紀一 始皇帝十六年（韓獻南陽地）"
+              },
+              "quoted_text": "韓獻南陽地。秋，九月，發卒受地於韓。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nanyang-cession-table",
+          "statement": "The six-states table aligns 秦始皇帝十六年 (231 BCE) with 韓王安八年 and records Qin receiving the land.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "supporting",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷十五 六國年表 秦始皇十六年（韓王安八年）"
+              },
+              "quoted_text": "十六。置麗邑。發卒受韓南陽。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nanyang-cession-places",
+          "statement": "The entries name 韓南陽 as the land received; they state no extent or seat, so the record asserts no coordinate.",
+          "asserts": "/places",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十六年九月（發卒受地韓南陽假守騰）"
+              }
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:d7bd891af7b5b9370f59d72e85aa058999e4dc4d6fb0f9f72cad8f015b578ae8"
+    },
+    {
+      "revision_id": "lks:rev:han-nanyang-cession-231-2",
+      "created_at": "2026-09-25T05:00:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Correction prepared after review: the comprehensive mirror's transcription supplies 秋 in brackets as an editorial addition, so the quoted fragments are now only the unannotated text.",
+      "content": {
+        "summary": "In the ninth month of 231 BCE Han ceded 南陽 and Qin sent troops to receive the land; the annals add that 騰 held it as acting governor, and the comprehensive mirror records Han presenting the land and Qin receiving it.",
+        "event_types": [
+          "exchange"
+        ],
+        "time": {
+          "source_expression": "十六年九月（發卒受地韓南陽假守騰）; 始皇帝十六年九月（發卒受地於韓）",
+          "calendar": "chinese_lunisolar",
+          "precision": "month",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {
+              "year": 231,
+              "era": "bce",
+              "month": 9
+            },
+            "end": {
+              "year": 231,
+              "era": "bce",
+              "month": 9
+            }
+          }
+        },
+        "places": [
+          {
+            "place_id": "lks:place:nanyang",
+            "role": "site",
+            "note": "The land the sources name as ceded and received; they state no extent or seat."
+          }
+        ],
+        "participants": [
+          {
+            "actor_id": "lks:actor:han-state",
+            "role": "other",
+            "note": "The sources record 韓 presenting the land."
+          },
+          {
+            "actor_id": "lks:actor:nei-shi-teng",
+            "role": "participant",
+            "note": "The annals name him 假守騰, the acting governor of the received land."
+          }
+        ],
+        "editorial_notes": "The land is named but not located: the entries state no extent, seat, or site, and the chapter asserts no coordinate. The officer is called 假守騰 here and 內史騰 in the next year's notice; the two titles are recorded on his actor record. The mirror's transcription marks 秋 as an editorial addition, so it is not quoted."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:nanyang-cession-time",
+          "statement": "The annals record that in the ninth month of 十六年 (231 BCE) Qin sent troops to receive the land of Han's 南陽, with 騰 as acting governor.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十六年九月（發卒受地韓南陽假守騰）"
+              },
+              "quoted_text": "十六年九月，發卒受地韓南陽假守騰。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nanyang-cession-mirror",
+          "statement": "The comprehensive mirror records that Han presented 南陽 and that in the ninth month Qin sent troops to receive the land.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "supporting",
+          "citations": [
+            {
+              "source_id": "lks:source:zizhi-tongjian",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦紀一 始皇帝十六年（韓獻南陽地）"
+              },
+              "quoted_text": "韓獻南陽地。"
+            },
+            {
+              "source_id": "lks:source:zizhi-tongjian",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦紀一 始皇帝十六年九月（發卒受地於韓）"
+              },
+              "quoted_text": "九月，發卒受地於韓。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nanyang-cession-table",
+          "statement": "The six-states table aligns 秦始皇帝十六年 (231 BCE) with 韓王安八年 and records Qin receiving the land.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "supporting",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷十五 六國年表 秦始皇十六年（韓王安八年）"
+              },
+              "quoted_text": "十六。置麗邑。發卒受韓南陽。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nanyang-cession-places",
+          "statement": "The entries name 韓南陽 as the land received; they state no extent or seat, so the record asserts no coordinate.",
+          "asserts": "/places",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十六年九月（發卒受地韓南陽假守騰）"
+              }
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:859171b829f4f84bd075eb188e40b92f3112ae6c9c3d4265afe879108f0018fe"
+    },
+    {
+      "revision_id": "lks:rev:han-nanyang-cession-231-3",
+      "created_at": "2026-09-25T20:00:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "The summary and notes now state why the cession has no position: the entries name the land but state no extent or seat, and the cited historical geography records the name for two different regions without identifying the ceded land. The event's own claims still assert no coordinate, and no position was invented for it.",
+      "content": {
+        "summary": "In the ninth month of 231 BCE Han ceded 南陽 and Qin sent troops to receive the land; the annals add that 騰 held it as acting governor, and the comprehensive mirror records Han presenting the land and Qin receiving it. The entries name the land but state no extent or seat, and the historical geography records the name for two different regions — the 河內 南陽 in the north of 修武縣 and the Qin 南陽郡 at 宛 — so the cession is shown with no position.",
+        "event_types": [
+          "exchange"
+        ],
+        "time": {
+          "source_expression": "十六年九月（發卒受地韓南陽假守騰）; 始皇帝十六年九月（發卒受地於韓）",
+          "calendar": "chinese_lunisolar",
+          "precision": "month",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {
+              "year": 231,
+              "era": "bce",
+              "month": 9
+            },
+            "end": {
+              "year": 231,
+              "era": "bce",
+              "month": 9
+            }
+          }
+        },
+        "places": [
+          {
+            "place_id": "lks:place:nanyang",
+            "role": "site",
+            "note": "The land the sources name as ceded and received; they state no extent or seat, and the historical geography records the name for two different regions, so the event claims no position."
+          }
+        ],
+        "participants": [
+          {
+            "actor_id": "lks:actor:han-state",
+            "role": "other",
+            "note": "The sources record 韓 presenting the land."
+          },
+          {
+            "actor_id": "lks:actor:nei-shi-teng",
+            "role": "participant",
+            "note": "The annals name him 假守騰, the acting governor of the received land."
+          }
+        ],
+        "editorial_notes": "The land is named but not located: the entries state no extent, seat, or site, and the historical geography records the name for the 河內 南陽 (南陽城 in the north of 修武縣) and for the Qin 南陽郡 whose seat was 宛, without identifying the ceded land; the chapter therefore asserts no coordinate. The officer is called 假守騰 here and 內史騰 in the next year's notice; the two titles are recorded on his actor record. The mirror's transcription marks 秋 as an editorial addition, so it is not quoted."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:nanyang-cession-time",
+          "statement": "The annals record that in the ninth month of 十六年 (231 BCE) Qin sent troops to receive the land of Han's 南陽, with 騰 as acting governor.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十六年九月（發卒受地韓南陽假守騰）"
+              },
+              "quoted_text": "十六年九月，發卒受地韓南陽假守騰。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nanyang-cession-mirror",
+          "statement": "The comprehensive mirror records that Han presented 南陽 and that in the ninth month Qin sent troops to receive the land.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "supporting",
+          "citations": [
+            {
+              "source_id": "lks:source:zizhi-tongjian",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦紀一 始皇帝十六年（韓獻南陽地）"
+              },
+              "quoted_text": "韓獻南陽地。"
+            },
+            {
+              "source_id": "lks:source:zizhi-tongjian",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦紀一 始皇帝十六年九月（發卒受地於韓）"
+              },
+              "quoted_text": "九月，發卒受地於韓。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nanyang-cession-table",
+          "statement": "The six-states table aligns 秦始皇帝十六年 (231 BCE) with 韓王安八年 and records Qin receiving the land.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "supporting",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷十五 六國年表 秦始皇十六年（韓王安八年）"
+              },
+              "quoted_text": "十六。置麗邑。發卒受韓南陽。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nanyang-cession-places",
+          "statement": "The entries name 韓南陽 as the land received and state no extent or seat; the two regions the historical geography records the name for leave it unidentified, so the event asserts no coordinate.",
+          "asserts": "/places",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十六年九月（發卒受地韓南陽假守騰）"
+              }
+            },
+            {
+              "source_id": "lks:source:dushi-fangyu-jiyao",
+              "locator": {
+                "kind": "entry",
+                "value": "卷四十九 河南四 懷慶府 衛輝府 彰德府 修武縣（南陽城）"
+              }
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:06ea5049d2bd706fb7f9660057424f8ec5d662e6351d1a71aa01f7abf7eea130"
+    },
+    {
+      "revision_id": "lks:rev:han-nanyang-cession-231-4",
+      "created_at": "2026-09-25T21:00:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Wording correction after review: the entries date Qin's dispatch to receive the land to the ninth month but do not date the presentation to a month, so the summary dates Han's presentation to 231 BCE and keeps the ninth month with Qin's receipt. The no-position disclosure is unchanged.",
+      "content": {
+        "summary": "In 231 BCE Han presented 南陽, and in the ninth month Qin sent troops to receive the land; the annals add that 騰 held it as acting governor, and the comprehensive mirror records Han presenting the land and Qin receiving it. The entries name the land but state no extent or seat, and the historical geography records the name for two different regions — the 河內 南陽 in the north of 修武縣 and the Qin 南陽郡 at 宛 — so the cession is shown with no position.",
+        "event_types": [
+          "exchange"
+        ],
+        "time": {
+          "source_expression": "十六年九月（發卒受地韓南陽假守騰）; 始皇帝十六年九月（發卒受地於韓）",
+          "calendar": "chinese_lunisolar",
+          "precision": "month",
+          "mode": "instant",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {
+              "year": 231,
+              "era": "bce",
+              "month": 9
+            },
+            "end": {
+              "year": 231,
+              "era": "bce",
+              "month": 9
+            }
+          }
+        },
+        "places": [
+          {
+            "place_id": "lks:place:nanyang",
+            "role": "site",
+            "note": "The land the sources name as ceded and received; they state no extent or seat, and the historical geography records the name for two different regions, so the event claims no position."
+          }
+        ],
+        "participants": [
+          {
+            "actor_id": "lks:actor:han-state",
+            "role": "other",
+            "note": "The sources record 韓 presenting the land."
+          },
+          {
+            "actor_id": "lks:actor:nei-shi-teng",
+            "role": "participant",
+            "note": "The annals name him 假守騰, the acting governor of the received land."
+          }
+        ],
+        "editorial_notes": "The land is named but not located: the entries state no extent, seat, or site, and the historical geography records the name for the 河內 南陽 (南陽城 in the north of 修武縣) and for the Qin 南陽郡 whose seat was 宛, without identifying the ceded land; the chapter therefore asserts no coordinate. The officer is called 假守騰 here and 內史騰 in the next year's notice; the two titles are recorded on his actor record. The mirror's transcription marks 秋 as an editorial addition, so it is not quoted."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:nanyang-cession-time",
+          "statement": "The annals record that in the ninth month of 十六年 (231 BCE) Qin sent troops to receive the land of Han's 南陽, with 騰 as acting governor.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十六年九月（發卒受地韓南陽假守騰）"
+              },
+              "quoted_text": "十六年九月，發卒受地韓南陽假守騰。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nanyang-cession-mirror",
+          "statement": "The comprehensive mirror records that Han presented 南陽 and that in the ninth month Qin sent troops to receive the land.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "supporting",
+          "citations": [
+            {
+              "source_id": "lks:source:zizhi-tongjian",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦紀一 始皇帝十六年（韓獻南陽地）"
+              },
+              "quoted_text": "韓獻南陽地。"
+            },
+            {
+              "source_id": "lks:source:zizhi-tongjian",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦紀一 始皇帝十六年九月（發卒受地於韓）"
+              },
+              "quoted_text": "九月，發卒受地於韓。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nanyang-cession-table",
+          "statement": "The six-states table aligns 秦始皇帝十六年 (231 BCE) with 韓王安八年 and records Qin receiving the land.",
+          "asserts": "/time",
+          "basis": "attested",
+          "role": "supporting",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷十五 六國年表 秦始皇十六年（韓王安八年）"
+              },
+              "quoted_text": "十六。置麗邑。發卒受韓南陽。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nanyang-cession-places",
+          "statement": "The entries name 韓南陽 as the land received and state no extent or seat; the two regions the historical geography records the name for leave it unidentified, so the event asserts no coordinate.",
+          "asserts": "/places",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十六年九月（發卒受地韓南陽假守騰）"
+              }
+            },
+            {
+              "source_id": "lks:source:dushi-fangyu-jiyao",
+              "locator": {
+                "kind": "entry",
+                "value": "卷四十九 河南四 懷慶府 衛輝府 彰德府 修武縣（南陽城）"
+              }
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:447ae1f1c9bc9feea576f93a8cf7ec939927afe68b9e18986b101dfed1766f3c"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:han-nanyang-cession-231-4",
+    "published_revision_hash": "sha256:447ae1f1c9bc9feea576f93a8cf7ec939927afe68b9e18986b101dfed1766f3c",
+    "set_id": "lks:set:qin-conquest-han-233-226-v1",
+    "published_at": "2026-09-25T21:30:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
+  }
+}

@@ -1,0 +1,241 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "story",
+  "record_id": "lks:story:qin-conquest-han-233-226",
+  "created_at": "2026-09-25T03:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:qin-conquest-han-story-1",
+      "created_at": "2026-09-25T03:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Initial comparison-fixture story: the end of Han in presentation order, with the dispute labelled and the exclusions stated in the coverage note.",
+      "content": {
+        "summary": "The end of the state of Han under Qin, 233–226 BCE: the submission and embassy, the detention and death of 韓非, the cession of 南陽, the annexation and the 潁川 commandery, and the revolt of the former capital.",
+        "window": {
+          "start": {
+            "year": 233,
+            "era": "bce"
+          },
+          "end": {
+            "year": 226,
+            "era": "bce"
+          },
+          "boundary": "inclusive"
+        },
+        "steps": [
+          {
+            "record_id": "lks:event:han-submission-233",
+            "role": "start",
+            "caption": "The Han king's submission and 韓非's embassy, 233 BCE"
+          },
+          {
+            "record_id": "lks:relationship:han-qin-submission",
+            "role": "step",
+            "caption": "The submission request to Qin"
+          },
+          {
+            "record_id": "lks:event:hanfei-death-233",
+            "role": "step",
+            "caption": "韓非 is detained and dies at 雲陽, 233 BCE — a disputed account"
+          },
+          {
+            "record_id": "lks:event:han-nanyang-cession-231",
+            "role": "step",
+            "caption": "Han cedes 南陽 and Qin receives it, 231 BCE"
+          },
+          {
+            "record_id": "lks:event:han-conquest-230",
+            "role": "step",
+            "caption": "內史騰 takes Han and makes the 潁川 commandery, 230 BCE"
+          },
+          {
+            "record_id": "lks:relationship:han-annexation-yingchuan",
+            "role": "step",
+            "caption": "Han's land becomes the 潁川 commandery"
+          },
+          {
+            "record_id": "lks:relationship:qin-han-conflict",
+            "role": "step",
+            "caption": "Qin's pressure on Han, 233–230 BCE"
+          },
+          {
+            "record_id": "lks:relationship:han-nanyang-cession",
+            "role": "step",
+            "caption": "The cession of 南陽 as a change of boundaries"
+          },
+          {
+            "record_id": "lks:event:xinzheng-revolt-226",
+            "role": "step",
+            "caption": "新鄭, the former capital, revolts, 226 BCE"
+          }
+        ],
+        "coverage_note": "Episode window 233–226 BCE: the Han king's submission and 韓非's embassy, the detention and death at 雲陽, the cession of 南陽, the 230 BCE annexation and the 潁川 commandery, and the 226 BCE revolt of 新鄭. Excluded: the other notices of the cited years (the 233 BCE Zhao campaign, the annals' 230 BCE earthquake, drought, and 華陽太后 notices, and the 226 BCE 昌平君徙於郢), the 246 BCE 鄭國 canal, the 227–226 BCE Yan campaign and 荊軻's attempt, earlier Qin–Han wars, and every later Qin conquest. No route, campaign path, or territory is drawn, and no place is located beyond the label anchor recorded for 新鄭.",
+        "editorial_notes": "Step order is presentation order, not a claim that one event caused another; the relationships appear beside the events they summarize rather than after them. The death is disputed and is presented as disputed. This fixture is a comparison scenario, not a launch chapter, and no release decision has been taken for it."
+      },
+      "claims": [],
+      "revision_hash": "sha256:33f22d91ae1069d6ab5a294b1bcd9557d750b128503a84f176d556f25651928d"
+    },
+    {
+      "revision_id": "lks:rev:qin-conquest-han-story-2",
+      "created_at": "2026-09-25T05:00:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Correction prepared after review: the coverage note names the annals' 230 BCE notice as a famine (民大饑), not a drought, and records no cause for it.",
+      "content": {
+        "summary": "The end of the state of Han under Qin, 233–226 BCE: the submission and embassy, the detention and death of 韓非, the cession of 南陽, the annexation and the 潁川 commandery, and the revolt of the former capital.",
+        "window": {
+          "start": {
+            "year": 233,
+            "era": "bce"
+          },
+          "end": {
+            "year": 226,
+            "era": "bce"
+          },
+          "boundary": "inclusive"
+        },
+        "steps": [
+          {
+            "record_id": "lks:event:han-submission-233",
+            "role": "start",
+            "caption": "The Han king's submission and 韓非's embassy, 233 BCE"
+          },
+          {
+            "record_id": "lks:relationship:han-qin-submission",
+            "role": "step",
+            "caption": "The submission request to Qin"
+          },
+          {
+            "record_id": "lks:event:hanfei-death-233",
+            "role": "step",
+            "caption": "韓非 is detained and dies at 雲陽, 233 BCE — a disputed account"
+          },
+          {
+            "record_id": "lks:event:han-nanyang-cession-231",
+            "role": "step",
+            "caption": "Han cedes 南陽 and Qin receives it, 231 BCE"
+          },
+          {
+            "record_id": "lks:event:han-conquest-230",
+            "role": "step",
+            "caption": "內史騰 takes Han and makes the 潁川 commandery, 230 BCE"
+          },
+          {
+            "record_id": "lks:relationship:han-annexation-yingchuan",
+            "role": "step",
+            "caption": "Han's land becomes the 潁川 commandery"
+          },
+          {
+            "record_id": "lks:relationship:qin-han-conflict",
+            "role": "step",
+            "caption": "Qin's pressure on Han, 233–230 BCE"
+          },
+          {
+            "record_id": "lks:relationship:han-nanyang-cession",
+            "role": "step",
+            "caption": "The cession of 南陽 as a change of boundaries"
+          },
+          {
+            "record_id": "lks:event:xinzheng-revolt-226",
+            "role": "step",
+            "caption": "新鄭, the former capital, revolts, 226 BCE"
+          }
+        ],
+        "coverage_note": "Episode window 233–226 BCE: the Han king's submission and 韓非's embassy, the detention and death at 雲陽, the cession of 南陽, the 230 BCE annexation and the 潁川 commandery, and the 226 BCE revolt of 新鄭. Excluded: the other notices of the cited years (the 233 BCE Zhao campaign, the annals' 230 BCE earthquake, 華陽太后, and famine notices, and the 226 BCE 昌平君徙於郢), the 246 BCE 鄭國 canal, the 227–226 BCE Yan campaign and 荊軻's attempt, earlier Qin–Han wars, and every later Qin conquest. No route, campaign path, or territory is drawn, and no place is located beyond the label anchor recorded for 新鄭.",
+        "editorial_notes": "Step order is presentation order, not a claim that one event caused another; the relationships appear beside the events they summarize rather than after them. The death is disputed and is presented as disputed. This fixture is a comparison scenario, not a launch chapter, and no release decision has been taken for it."
+      },
+      "claims": [],
+      "revision_hash": "sha256:df7c81d2bd371d214c57883a101d7cd95974ddb10cae774c3051c92dec481991"
+    },
+    {
+      "revision_id": "lks:rev:qin-conquest-han-story-3",
+      "created_at": "2026-09-25T20:00:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "The coverage note now names the label positions the fixture carries (新鄭, 雲陽, and the 潁川 commandery) and why 南陽 has none, and the editorial notes state that no event is placed at a site a source does not support. Prepared after the owner reported that locations were missing where the records name them.",
+      "content": {
+        "summary": "The end of the state of Han under Qin, 233–226 BCE: the submission and embassy, the detention and death of 韓非, the cession of 南陽, the annexation and the 潁川 commandery, and the revolt of the former capital.",
+        "window": {
+          "start": {
+            "year": 233,
+            "era": "bce"
+          },
+          "end": {
+            "year": 226,
+            "era": "bce"
+          },
+          "boundary": "inclusive"
+        },
+        "steps": [
+          {
+            "record_id": "lks:event:han-submission-233",
+            "role": "start",
+            "caption": "The Han king's submission and 韓非's embassy, 233 BCE"
+          },
+          {
+            "record_id": "lks:relationship:han-qin-submission",
+            "role": "step",
+            "caption": "The submission request to Qin"
+          },
+          {
+            "record_id": "lks:event:hanfei-death-233",
+            "role": "step",
+            "caption": "韓非 is detained and dies at 雲陽, 233 BCE — a disputed account"
+          },
+          {
+            "record_id": "lks:event:han-nanyang-cession-231",
+            "role": "step",
+            "caption": "Han cedes 南陽 and Qin receives it, 231 BCE"
+          },
+          {
+            "record_id": "lks:event:han-conquest-230",
+            "role": "step",
+            "caption": "內史騰 takes Han and makes the 潁川 commandery, 230 BCE"
+          },
+          {
+            "record_id": "lks:relationship:han-annexation-yingchuan",
+            "role": "step",
+            "caption": "Han's land becomes the 潁川 commandery"
+          },
+          {
+            "record_id": "lks:relationship:qin-han-conflict",
+            "role": "step",
+            "caption": "Qin's pressure on Han, 233–230 BCE"
+          },
+          {
+            "record_id": "lks:relationship:han-nanyang-cession",
+            "role": "step",
+            "caption": "The cession of 南陽 as a change of boundaries"
+          },
+          {
+            "record_id": "lks:event:xinzheng-revolt-226",
+            "role": "step",
+            "caption": "新鄭, the former capital, revolts, 226 BCE"
+          }
+        ],
+        "coverage_note": "Episode window 233–226 BCE: the Han king's submission and 韓非's embassy, the detention and death at 雲陽, the cession of 南陽, the 230 BCE annexation and the 潁川 commandery, and the 226 BCE revolt of 新鄭. Excluded: the other notices of the cited years (the 233 BCE Zhao campaign, the annals' 230 BCE earthquake, 華陽太后, and famine notices, and the 226 BCE 昌平君徙於郢), the 246 BCE 鄭國 canal, the 227–226 BCE Yan campaign and 荊軻's attempt, earlier Qin–Han wars, and every later Qin conquest. No route, campaign path, or territory is drawn, and no place carries an asserted coordinate. Label positions only: 新鄭, 雲陽, and the 潁川 commandery carry label anchors at the places the cited sources record or identify (see the places' records), and 南陽 stays without a position because the entries state no extent or seat and the name covers two regions in the cited historical geography.",
+        "editorial_notes": "Step order is presentation order, not a claim that one event caused another; the relationships appear beside the events they summarize rather than after them. The death is disputed and is presented as disputed. Label anchors assert no historical coordinate and 南陽 has none: the fixture never places an event at a site a source does not support. This fixture is a comparison scenario, not a launch chapter, and no release decision has been taken for it."
+      },
+      "claims": [],
+      "revision_hash": "sha256:04a3fb3afca83a1d29af37c8081930586ce3bb3fbf9fd54cae9780515099ab70"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:qin-conquest-han-story-3",
+    "published_revision_hash": "sha256:04a3fb3afca83a1d29af37c8081930586ce3bb3fbf9fd54cae9780515099ab70",
+    "set_id": "lks:set:qin-conquest-han-233-226-v1",
+    "published_at": "2026-09-25T21:30:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
+  }
+}

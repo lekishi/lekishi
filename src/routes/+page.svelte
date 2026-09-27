@@ -1,12 +1,23 @@
 <script lang="ts">
-  import { CHAPTER } from "$lib/atlas/chapter-content"
-  import { reviewLabel } from "$lib/atlas/labels"
+  import { CHAPTERS } from "$lib/atlas/chapters"
+  import { windowLabel } from "$lib/atlas/labels"
 
-  // The static root page: navigation into the atlas, and the project's
-  // non-negotiables stated where a reviewer will actually read them. The chapter
-  // facts come from the same projection the atlas renders, so this page cannot
-  // describe content the atlas does not show. It carries no application state,
-  // so it is prerendered exactly as written.
+  /**
+   * The static root page.
+   *
+   * It presents the chapters a reader can open — as peers, each with its own name,
+   * story summary, and entry — and the project's non-negotiables stated where a
+   * reviewer will actually read them. The page carries no application state, so it
+   * is prerendered exactly as written.
+   *
+   * The cards come from `src/lib/atlas/chapters.ts`, whose tests pin them against
+   * the chapter trees, so the page cannot describe a chapter the atlas does not
+   * carry. Editorial state is secondary metadata on a card, never the card's pitch
+   * and never its reason to exist: the Tang chapter's recorded owner approval and
+   * the Qin chapter's missing release decision are stated in small print beside
+   * the entry, and nothing here says a chapter exists for the internal treatment
+   * comparison or names the contract records it is built from.
+   */
   const capabilities = [
     {
       title: "Globe first",
@@ -18,17 +29,7 @@
     },
     {
       title: "Sources stay visible",
-      body: "The versioned historical contract keeps citations, uncertainty, calendar precision, and reuse terms with the record they describe.",
-    },
-  ]
-
-  const chapterFacts = [
-    { label: "Events", value: `${CHAPTER.events.length}` },
-    { label: "Places", value: `${CHAPTER.places.length}` },
-    { label: "Coda nodes", value: `${CHAPTER.events.filter((event) => event.coda).length}` },
-    {
-      label: "No sourced map position",
-      value: `${CHAPTER.events.filter((event) => event.placement.kind === "none").length} of ${CHAPTER.events.length} events`,
+      body: "Every claim keeps its citation, its date precision, its uncertainty, and its reuse terms beside the record it describes.",
     },
   ]
 </script>
@@ -37,7 +38,7 @@
   <title>Lekishi · Historical atlas</title>
   <meta
     name="description"
-    content="Lekishi is an interactive historical atlas for exploring events and connections across places and time. It currently ships the reviewed {CHAPTER.title}."
+    content="Lekishi is an interactive historical atlas for exploring events and connections across places and time, with the sources, the uncertainty, and the places it cannot locate kept visible."
   />
 </svelte:head>
 
@@ -65,13 +66,8 @@
         Explore events and connections across places and time
       </h1>
       <p class="text-base leading-relaxed text-slate-300">
-        Lekishi is a browser atlas for reading history in place. The atlas now renders the first
-        reviewed chapter — {CHAPTER.title} — from the versioned
-        <code class="rounded bg-slate-900/80 px-1.5 py-0.5 text-[0.8em] text-slate-200"
-          >lekishi-historical-contract/v0</code
-        >
-        records: real titles, dates, and places, with the uncertainty and the places it cannot locate
-        stated rather than filled in. Search, sources, and story navigation are still being built.
+        Lekishi is a browser atlas for reading history in place: real titles, dates, and places,
+        with the uncertainty and the places it cannot locate stated rather than filled in.
       </p>
       <div class="flex flex-wrap items-center gap-3">
         <a
@@ -84,6 +80,45 @@
       </div>
     </section>
 
+    <section class="flex flex-col gap-4" aria-labelledby="chapters-heading">
+      <h2
+        id="chapters-heading"
+        class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400"
+      >
+        Chapters
+      </h2>
+      <div class="grid gap-4 md:grid-cols-2">
+        {#each CHAPTERS as chapter (chapter.id)}
+          <article
+            class="flex flex-col rounded-2xl border border-slate-800 bg-slate-900/50 p-5 transition hover:border-slate-700"
+            data-chapter-id={chapter.id}
+          >
+            <h3 class="text-lg font-semibold tracking-tight text-slate-100">{chapter.name}</h3>
+            <p class="mt-1 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-slate-400">
+              {windowLabel(chapter.window)}
+            </p>
+            <p class="mt-3 flex-1 text-sm leading-relaxed text-slate-400">{chapter.summary}</p>
+            <div class="mt-5">
+              <a
+                href={chapter.href}
+                class="inline-block rounded-xl border border-slate-700 bg-slate-800/70 px-4 py-2.5 text-sm font-semibold text-slate-100 transition hover:border-slate-500 hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-300"
+              >
+                Open the chapter<span class="sr-only">: {chapter.name}</span>
+              </a>
+            </div>
+            <!--
+              Editorial state: one line below the entry, in every card, so the two
+              cards read alike and the status is never the card's identity.
+              `text-slate-400` rather than a dimmer grey: the Qin card's line is
+              the qualification that keeps a peer presentation from reading as
+              approval, so it has to stay readable.
+            -->
+            <p class="mt-3 text-[0.7rem] leading-snug text-slate-400">{chapter.status}</p>
+          </article>
+        {/each}
+      </div>
+    </section>
+
     <section class="grid gap-4 sm:grid-cols-3">
       {#each capabilities as capability (capability.title)}
         <div class="rounded-2xl border border-slate-800 bg-slate-900/50 p-5">
@@ -91,37 +126,6 @@
           <p class="mt-2 text-sm leading-relaxed text-slate-400">{capability.body}</p>
         </div>
       {/each}
-    </section>
-
-    <section class="rounded-2xl border border-amber-300/30 bg-amber-300/5 p-5">
-      <h2 class="text-sm font-semibold uppercase tracking-[0.18em] text-amber-300">
-        Reviewed chapter
-      </h2>
-      <p class="mt-2 max-w-3xl text-sm leading-relaxed text-slate-300">{CHAPTER.summary}</p>
-      <p class="mt-2 max-w-3xl text-sm leading-relaxed text-slate-300">
-        {CHAPTER.publication.coverageNote}
-      </p>
-
-      <dl class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        {#each chapterFacts as fact (fact.label)}
-          <div class="rounded-xl border border-slate-800 bg-slate-950/60 px-3 py-2">
-            <dt class="text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-slate-400">
-              {fact.label}
-            </dt>
-            <dd class="mt-0.5 text-sm font-semibold tabular-nums text-slate-100">{fact.value}</dd>
-          </div>
-        {/each}
-      </dl>
-
-      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300">
-        {reviewLabel(CHAPTER.publication.independence, CHAPTER.publication.reviewer)}
-        {CHAPTER.publication.reviewNotes}
-      </p>
-      <p class="mt-2 text-xs text-slate-400">
-        Published by {CHAPTER.publication.setIds.join(", ")}. Owner editorial approval under RFD 2
-        and the specialist reviews are still pending, so this is not a claim of complete coverage or
-        of independent review.
-      </p>
     </section>
   </main>
 

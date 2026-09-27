@@ -43,11 +43,14 @@ Publication is a decision, not an agent action.
   such a set must carry the preparing editor's `self_review`. `owner decided`
   means the owner decided that this specific content may be published while AC2
   and the specialist reviews stay open. `owner approved` means the owner's
-  editorial approval under RFD 2, which is what RFD 4's AC2 asks for. The
-  chapter currently has one `owner decided` row.
+  editorial approval under RFD 2, which is what RFD 4's AC2 asks for. The Tang
+  set's row now carries the owner's approval, taken on 2026-09-25; the bounded
+  Qin comparison fixture's row is a `preparation snapshot`. The ledger update
+  below records both.
 * **Nothing is an official publication until an `owner approved` row exists.**
-  RFD 4's AC2 stays unsatisfied until then, and no set may claim the owner's
-  approval without that row.
+  The Tang set has one as of 2026-09-25, so it is now the chapter's official
+  publication while AC2's remaining parts and the specialist reviews stay open.
+  No set may claim the owner's approval without that row.
 * **A row binds the decision to the snapshot it was taken on.** Each row carries
   the canonical digest of the set document — members, revision hashes, source
   pins, review, and timestamps — and the gate fails when the set no longer
@@ -58,13 +61,14 @@ Publication is a decision, not an agent action.
 
 The gate is enforced by
 `src/lib/historical/contract/publication-approval.test.ts`, which runs in
-`pnpm build` through `scripts/check-chapter.mjs`. It reads this record and the
-chapter's sets and fails on any of: a set with no ledger row, a ledger row for a
-set that does not exist, a decision the gate does not know, a duplicated row, a
-`preparation snapshot` that claims independent or specialist review, a set whose
-review independence has no owner decision behind it, an owner decision whose row
-does not name the owner as the decider, or a set whose digest no longer matches
-its row. So an agent cannot mint a version of
+`pnpm build` through `scripts/check-chapter.mjs`. It reads this record and every
+chapter's sets under `historical/chapters/` — so a new chapter directory cannot
+appear with an uncovered set — and fails on any of: a set with no ledger row, a
+ledger row for a set that does not exist, a decision the gate does not know, a
+duplicated row, a `preparation snapshot` that claims independent or specialist
+review, a set whose review independence has no owner decision behind it, an
+owner decision whose row does not name the owner as the decider, or a set whose
+digest no longer matches its row. So an agent cannot mint a version of
 the content that no decision covers, and cannot label a preparation snapshot as
 reviewed. The gate checks the shape of the record; whether a decision is truly
 the owner's is the owner's row to write, which is why the ledger names the
@@ -72,8 +76,8 @@ decider in every row.
 
 == Ledger
 
-One row per publication set in `historical/chapters/tang-mission-750-754/`. A new
-set is added here only after the owner's decision.
+One row per publication set under `historical/chapters/`. A new set is added
+here only after the owner's decision.
 
 The preparation history was flattened on the owner's instruction of 2026-09-24:
 the two earlier preparation sets and their corrections are folded into the single
@@ -86,20 +90,136 @@ officially published yet.
 |Set |Decision |Decided by |Set digest |Note
 
 |`lks:set:tang-mission-750-754-v1`
-|owner decided
-|owner (accepted the placement recommendation and the flattening, 2026-09-24)
+|owner approved
+|owner (approved the current merged set for release, 2026-09-25)
 |`sha256:5af33faea26174eb83985bbf3bf4b329c97ed3b79902b4318c6945025c6f5068`
 |The chapter's preparation as one set: 15 places, 12 actors, 29 events, 9
 relationships, and 1 story, with the 11 cited sources pinned, including the
 court-act placements and the two place identifications the owner accepted. The
-set keeps the preparing editor's `self_review`; this decision is not the owner's
-editorial approval under RFD 2, so RFD 4's AC2 stays open and the specialist
-reviews remain outstanding.
+set keeps the preparing editor's `self_review`; the owner's editorial approval
+under RFD 2 is now recorded here, so RFD 4's AC2's approval-dependent part is
+satisfied. The approval is not independent or specialist review, the optional
+specialist reviews remain unperformed, and AC2's visible-uncertainty part and the
+AC7 attribution/rights audit stay open.
+
+|`lks:set:qin-conquest-han-233-226-v1`
+|preparation snapshot
+|owner (instructed the bounded Qin comparison fixture and asked to review its
+corrected content before deciding, 2026-09-25)
+|`sha256:70bee03e3da03ddef45baebae01283b74d801fd34a9c2523b79c68ceaaa553bf`
+|The comparison fixture's preparation: 4 places, 6 actors, 5 events, 4
+relationships, and 1 story, with the 4 cited sources pinned. The set publishes
+the corrected revisions the internal review prepared, which the owner asked to
+review before deciding, and the label positions that followed the owner's
+2026-09-25 report that locations were missing where the records name them: the
+submission's display placement at the Han capital the hereditary house records,
+and label anchors for the death at 雲陽 and the annexation at the 潁川 commandery
+that rest on the cited historical geography's identifications. 南陽 keeps unknown
+geometry because the entries state no extent or seat and the name covers two
+regions. A second review round corrected a 南陽府 locator and two event phrasings
+(the cession's dating and the annexation's anchor wording) as new revisions. Each
+corrected record keeps the superseded revision it replaced, and no place carries
+an asserted coordinate. The set records the preparing editor's
+`self_review` only: no owner decision exists for this content, it is
+comparison-only and not a launch chapter, RFD 4's AC2 does not apply to it, and
+the comparison review route states that it is unapproved.
 |===
 
-No `owner approved` row exists yet. The first one will be the owner's editorial
-approval of the chapter under RFD 2, and it is what RFD 4's AC2 asks for; it is
-expected to name the set that publishes the then-current revisions.
+=== Ledger update — 2026-09-25: the owner approves the Tang set
+
+The owner's instruction of 2026-09-25 was *"Approve 1. Proceed with 2"*, replying
+to the request to approve the current merged Tang v1 preparation set for release
+or request changes. It is recorded here as the owner's editorial approval under
+RFD 2 of the exact set merged on `origin/main` (PR #11, merge commit
+`6493852e1e29b2028578f715797be941ea74a017`):
+
+* the decision is the owner's editorial approval under RFD 2, which is what
+  RFD 4's AC2 asks for. It is not preparing-editor self-review and not
+  independent or specialist review;
+* the set document is deliberately unchanged, so the digest in the row still
+  matches the snapshot the owner approved. Its `review` block therefore keeps
+  `self_review` and its preparation-time notes; changing the set would change
+  the digest and invalidate the approval it now carries, which is the
+  correction path's own rule;
+* the optional specialist reviews the feasibility report identifies (maritime or
+  ancient history, Buddhist studies, Tang court history, a philologist) remain
+  visibly unperformed. The approval does not imply them;
+* AC2's approval-dependent part — the recorded owner's editorial approval of the
+  published revision — is satisfied for this set. AC2's visible
+  uncertainty/dispute part still depends on the exploration loop, and the AC7
+  attribution/rights audit remains open, so AC2 as a whole is not complete and
+  is not marked complete.
+
+The same instruction authorized the bounded Qin comparison fixture. Its row is a
+`preparation snapshot` because the owner instructed preparation, not release:
+the fixture is comparison-only, is not exposed as a second launch chapter, and
+has no `owner approved` row.
+
+=== Ledger update — 2026-09-25: the corrected Qin content is published for review
+
+The owner's follow-up instruction was *"actually wait. wire it up first, and let
+me review again before approval"*, after the preparing editor reported the twelve
+corrections the internal review had prepared as draft revisions. It is recorded
+here as the owner's instruction to publish the corrected content for review, not
+as an approval:
+
+* the fixture's single preparation set now names the twelve corrected revisions,
+  so the comparison review route renders what the owner is being asked to review.
+  Each corrected record keeps the superseded revision it replaced as
+  unpublished history; nothing was flattened and no content was approved;
+* the decision stays `preparation snapshot`. There is no `owner approved` row for
+  this set, and the row's digest is the corrected preparation the route renders.
+  If the owner approves later, that is a new decision against the digest current
+  then — which is why this row's digest was updated with the correction rather
+  than left pointing at content the route no longer shows;
+* the set keeps the preparing editor's `self_review` and its review notes say
+  that no owner decision exists. The optional specialist reviews remain
+  unperformed, and the critical-edition re-check of the cited transcriptions
+  remains open;
+* the fixture remains comparison-only: it is not a launch chapter, its route is a
+  review surface that states it is unapproved, and it is not release content.
+
+=== Ledger update — 2026-09-25: the Qin fixture's label positions, and what places it
+
+The owner's report of 2026-09-25 was *"locations are missing again where it's
+possible to know from the semantics"*. The preparing editor first added label
+anchors for the three named-but-unlocated places (雲陽, 南陽, 潁川郡) at the modern
+places that carry the names, then withdrew them on review: a coordinate for a
+modern namesake is not evidence that the ancient place was there. The resolution
+below rests every position on a cited source, and is what this row's digest now
+covers:
+
+* **雲陽** (the place the annals name for 韓非's death) and **潁川郡** (the
+  commandery the 230 BCE annexation created) carry label anchors. Each rests on
+  the identification recorded by the historical geography now pinned to the set,
+  讀史方輿紀要 (1692): 雲陽城 as a Qin county in the northwest of 涇陽縣 (卷五十三),
+  and 陽翟 — the seat of its own 禹州 — as the Qin commandery's seat (卷四十七).
+  The anchors sit at the modern places that carry those names (Wikidata
+  coordinates for 雲陽鎮 and 禹州市) and assert no site, extent, or historical
+  coordinate; the source is cited as a reference work, and its identifications are
+  recorded as its statements, not as the primary entries' statements.
+* **南陽** keeps `unknown` geometry and now records why: the cited primary entries
+  state no extent or seat, and the same historical geography records the name for
+  two different regions — the 河內 南陽 (南陽城 in the north of 修武縣, 卷四十九)
+  and the Qin 南陽郡 whose seat was 宛 (卷五十一) — without identifying the land
+  Han ceded in 231 BCE. The record chooses no region, and the cession event's
+  summary says in the review surface that the cession has no position.
+* The 233 BCE submission and embassy keeps its display placement at 新鄭, the Han
+  capital the hereditary house records, and 新鄭's own anchor now also cites the
+  historical geography's record of the place, so no anchor rests on a modern
+  namesake alone.
+* A second review round then corrected three things as new revisions rather than
+  editing the reviewed ones: a 南陽 locator that named the 南陽府 entry's 宛城
+  sub-entry for a quotation from the 南陽府 entry itself; the cession's summary,
+  which dated Han's presentation to the ninth month although only Qin's receipt
+  of the land is dated to that month; and the annexation's wording, which said
+  the anchor sits at the seat rather than at the modern city that carries the
+  seat name the historical geography records.
+* No set or record is approved by any of this. The decision stays
+  `preparation snapshot`, no `owner approved` row exists for the fixture, the
+  preparing editor's `self_review` is unchanged in kind, the optional specialist
+  reviews remain unperformed, and the critical-edition re-check of the cited
+  transcriptions remains open.
 
 == Consequences
 
@@ -113,6 +233,9 @@ expected to name the set that publishes the then-current revisions.
   and the single revision per record recorded above. The digest in the ledger row
   is what keeps that set from being swapped afterwards without the decision being
   taken again.
+* The gate now covers every chapter tree, so the Qin comparison fixture's set is
+  ledger-covered from the day it is prepared: comparison fixtures do not get a
+  second, uncovered publication path.
 * **Open question for a later contract version.** The v0 set description says a
   set records "the approving editor", but the schema cannot express the owner's
   approval (`review.independence` has no such value and there is no decision

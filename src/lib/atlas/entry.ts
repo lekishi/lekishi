@@ -1,12 +1,15 @@
-import { mountAtlas, type AtlasHandle } from "./mount"
+import type { Chapter } from "./domain"
+import { mountAtlas, type AtlasDetail, type AtlasHandle } from "./mount"
 
 /**
  * The atlas workspace's single mount owner.
  *
- * The atlas route renders a prerendered shell with an `#atlas-workspace` mount
- * point and calls `startAtlasPage` once it is in the browser. This module is the
- * only caller of `mountAtlas`: mounting is skipped while a live workspace exists,
- * so a second evaluation of this module — a duplicated bundle, a re-run, or a
+ * A route renders a prerendered shell with an `#atlas-workspace` mount point and
+ * calls `startAtlasPage` once it is in the browser, naming the chapter it
+ * renders: the atlas route passes the reviewed Tang chapter and the comparison
+ * review route passes the bounded Qin fixture. This module is the only caller of
+ * `mountAtlas`: mounting is skipped while a live workspace exists, so a second
+ * evaluation of this module — a duplicated bundle, a re-run, or a
  * back/forward-cache restore — cannot stack a second workspace, event list, or
  * globe onto the page.
  *
@@ -28,6 +31,13 @@ declare global {
 
 let workspace: AtlasHandle | null = null
 let watching = false
+
+// The chapter, detail surface, and display name the page asked for, kept so a
+// back/forward-cache restore re-creates the same workspace rather than an empty
+// or default one.
+let currentChapter: Chapter | null = null
+let currentDetail: AtlasDetail = "production"
+let currentName: string | null = null
 
 /**
  * True in a browser. SvelteKit renders the atlas shell on the server while
@@ -61,7 +71,7 @@ export function mountWorkspace(): void {
 
   const root = mountPoint()
 
-  if (root === null || (workspace !== null && !workspace.disposed)) {
+  if (root === null || currentChapter === null || (workspace !== null && !workspace.disposed)) {
     return
   }
 
@@ -71,7 +81,7 @@ export function mountWorkspace(): void {
   workspace = null
 
   try {
-    workspace = mountAtlas(root)
+    workspace = mountAtlas(root, currentChapter, currentDetail, currentName ?? currentChapter.title)
     window.__lekishiAtlas = workspace
   } catch (error) {
     reportFailure(root, error)
@@ -101,10 +111,19 @@ export function watchWorkspaceLifecycle(): void {
 }
 
 /**
- * Starts the atlas page: one workspace owner, one set of lifecycle listeners.
- * Called by the atlas route after the prerendered shell is in the DOM.
+ * Starts an atlas page: one workspace owner, one set of lifecycle listeners, one
+ * chapter. Called by a route after the prerendered shell is in the DOM. `name` is
+ * the chapter's display name — product presentation the route takes from
+ * `chapters.ts`; without it the workspace uses the chapter's published title.
  */
-export function startAtlasPage(): void {
+export function startAtlasPage(
+  chapter: Chapter,
+  detail: AtlasDetail = "production",
+  name: string = chapter.title,
+): void {
+  currentChapter = chapter
+  currentDetail = detail
+  currentName = name
   watchWorkspaceLifecycle()
   mountWorkspace()
 }

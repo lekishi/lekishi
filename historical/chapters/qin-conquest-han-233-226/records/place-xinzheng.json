@@ -1,0 +1,266 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "place",
+  "record_id": "lks:place:xinzheng",
+  "created_at": "2026-09-25T03:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:xinzheng-1",
+      "created_at": "2026-09-25T03:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Initial comparison-fixture place: the Han capital, named 鄭 by the hereditary house and 新鄭 by the annals, with a label anchor at the modern city of the same name and no asserted site.",
+      "content": {
+        "summary": "新鄭, the seat of the Han kings. The hereditary house records 韓哀侯 moving the capital to 鄭 in his second year, and the annals name 新鄭 as the place that revolted in 226 BCE, after Qin had taken the kingdom. The record's only placement is a label anchor at the modern city of the same name; no site is asserted.",
+        "names": [
+          {
+            "form": "新鄭",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "primary",
+            "romanization": {
+              "value": "Xinzheng",
+              "scheme": "pinyin",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:xinzheng-name"
+          },
+          {
+            "form": "鄭",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "alternate",
+            "claim_id": "lks:claim:xinzheng-capital-name",
+            "note": "The hereditary house's name for the capital the Han kings moved to; the annals use 新鄭 for the same place."
+          }
+        ],
+        "place_types": [
+          "capital"
+        ],
+        "geometry": [
+          {
+            "claim_id": "lks:claim:xinzheng-anchor",
+            "interpretation": "display_anchor",
+            "geojson": {
+              "type": "Point",
+              "coordinates": [
+                113.7249,
+                34.39621
+              ]
+            },
+            "precision": "unspecified",
+            "notes": "Label anchor at the modern city of 新鄭市, which carries the name of the former Han capital (Wikidata Q1024662). It is not an asserted historical coordinate: the cited entries name the place but state no site, and the anchor places no wall, palace, or revolt site."
+          }
+        ],
+        "modern_equivalents": [
+          {
+            "form": "新鄭市",
+            "language": "zh-Hans",
+            "script": "Hani",
+            "note": "Modern city recorded for orientation only; the anchor is a label position, not an identification of the capital's site."
+          }
+        ],
+        "editorial_notes": "The sources name the capital two ways: 鄭 in the hereditary house's account of the move, and 新鄭 in the annals' 226 BCE notice. The record keeps both forms, asserts no coordinate, and makes no claim that the modern city stands on the ancient site."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:xinzheng-name",
+          "statement": "The annals' 二十一年 notice names 新鄭 as the place that revolted in 226 BCE.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 二十一年（新鄭反）"
+              },
+              "quoted_text": "新鄭反。昌平君徙於郢。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:xinzheng-capital-name",
+          "statement": "The hereditary house records 韓哀侯 moving the Han capital to 鄭 in his second year.",
+          "asserts": "/names/1",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷四十五 韓世家 韓哀侯二年（滅鄭，因徙都鄭）"
+              },
+              "quoted_text": "二年，滅鄭，因徙都鄭。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:xinzheng-anchor",
+          "statement": "The label anchor is placed at the modern city's coordinate recorded in Wikidata (CC0); no historical coordinate is asserted.",
+          "asserts": "/geometry/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:wikidata",
+              "locator": {
+                "kind": "dataset_row",
+                "value": "Q1024662 (P625)"
+              }
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:43702ebb40eeb2e49d2ff51e3b2cc74b5259e60146fd4d060fa91b17df35acab"
+    },
+    {
+      "revision_id": "lks:rev:xinzheng-2",
+      "created_at": "2026-09-25T20:00:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Label-anchor citation added after the owner reported that locations were missing where the records name them: the anchor now also cites the historical geography's record of 新鄭, so every anchor's area association rests on a cited source rather than on the modern name alone. No reviewed wording changed and no approval is recorded.",
+      "content": {
+        "summary": "新鄭, the seat of the Han kings. The hereditary house records 韓哀侯 moving the capital to 鄭 in his second year, and the annals name 新鄭 as the place that revolted in 226 BCE, after Qin had taken the kingdom. The record's only placement is a label anchor at the modern city of the same name, which the cited historical geography also records as 新鄭; no site is asserted.",
+        "names": [
+          {
+            "form": "新鄭",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "primary",
+            "romanization": {
+              "value": "Xinzheng",
+              "scheme": "pinyin",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:xinzheng-name"
+          },
+          {
+            "form": "鄭",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "alternate",
+            "claim_id": "lks:claim:xinzheng-capital-name",
+            "note": "The hereditary house's name for the capital the Han kings moved to; the annals use 新鄭 for the same place."
+          }
+        ],
+        "place_types": [
+          "capital"
+        ],
+        "geometry": [
+          {
+            "claim_id": "lks:claim:xinzheng-anchor",
+            "interpretation": "display_anchor",
+            "geojson": {
+              "type": "Point",
+              "coordinates": [
+                113.7249,
+                34.39621
+              ]
+            },
+            "precision": "unspecified",
+            "notes": "Label anchor at the modern city of 新鄭市, which carries the name of the former Han capital and which the cited historical geography records as 新鄭 (Wikidata Q1024662). It is not an asserted historical coordinate: the cited entries name the place but state no site, and the anchor places no wall, palace, or revolt site."
+          }
+        ],
+        "modern_equivalents": [
+          {
+            "form": "新鄭市",
+            "language": "zh-Hans",
+            "script": "Hani",
+            "note": "Modern city recorded for orientation only; the anchor is a label position, not an identification of the capital's site."
+          }
+        ],
+        "editorial_notes": "The sources name the capital two ways: 鄭 in the hereditary house's account of the move, and 新鄭 in the annals' 226 BCE notice. The record keeps both forms, asserts no coordinate, and makes no claim that the modern city stands on the ancient site; its anchor cites both the historical geography's record of the place and the dataset the coordinate comes from."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:xinzheng-name",
+          "statement": "The annals' 二十一年 notice names 新鄭 as the place that revolted in 226 BCE.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 二十一年（新鄭反）"
+              },
+              "quoted_text": "新鄭反。昌平君徙於郢。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:xinzheng-capital-name",
+          "statement": "The hereditary house records 韓哀侯 moving the Han capital to 鄭 in his second year.",
+          "asserts": "/names/1",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷四十五 韓世家 韓哀侯二年（滅鄭，因徙都鄭）"
+              },
+              "quoted_text": "二年，滅鄭，因徙都鄭。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:xinzheng-anchor",
+          "statement": "The label anchor is placed at the modern city's coordinate recorded in Wikidata (CC0); no historical coordinate is asserted.",
+          "asserts": "/geometry/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:wikidata",
+              "locator": {
+                "kind": "dataset_row",
+                "value": "Q1024662 (P625)"
+              }
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:xinzheng-identification",
+          "statement": "The historical geography records 新鄭 as the place of the state of 鄭 and of the capital 韓哀侯 also held.",
+          "asserts": "/geometry/0",
+          "basis": "attested",
+          "role": "supporting",
+          "citations": [
+            {
+              "source_id": "lks:source:dushi-fangyu-jiyao",
+              "locator": {
+                "kind": "entry",
+                "value": "卷四十七 河南二 開封府 新鄭縣"
+              },
+              "quoted_text": "春秋時爲鄭國，曰新鄭，以別於京兆之鄭也。戰國時，韓哀侯亦都之。"
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:140bdd0d74bd90c41cffbccaf21321aaf7bd53110c64c827be8c535b769ab415"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:xinzheng-2",
+    "published_revision_hash": "sha256:140bdd0d74bd90c41cffbccaf21321aaf7bd53110c64c827be8c535b769ab415",
+    "set_id": "lks:set:qin-conquest-han-233-226-v1",
+    "published_at": "2026-09-25T21:30:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
+  }
+}

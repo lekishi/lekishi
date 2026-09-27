@@ -1,0 +1,78 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "actor",
+  "record_id": "lks:actor:qin-state",
+  "created_at": "2026-09-25T03:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:qin-state-1",
+      "created_at": "2026-09-25T03:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Initial comparison-fixture actor: the Qin state as the sources name it, for the conflict, submission, cession, and annexation relationships.",
+      "content": {
+        "summary": "秦, the Qin state whose king received Han's submission in 233 BCE, received Han's ceded 南陽 in 231 BCE, and took Han's land and king in 230 BCE, making the 潁川 commandery.",
+        "names": [
+          {
+            "form": "秦",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "primary",
+            "romanization": {
+              "value": "Qin",
+              "scheme": "pinyin",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:qin-state-name"
+          }
+        ],
+        "actor_types": [
+          "state"
+        ],
+        "editorial_notes": "The state actor carries no roles: the role vocabulary is person-oriented. The acts are recorded on the events and relationships that cite the entries, and the king is a separate actor record."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:qin-state-name",
+          "statement": "The cited entries name 秦 as the state that attacked Han, received its ceded land, and took its king and territory.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十七年（內史騰攻韓）"
+              },
+              "quoted_text": "內史騰攻韓，得韓王安，盡納其地，以其地為郡，命曰潁川。"
+            },
+            {
+              "source_id": "lks:source:zizhi-tongjian",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦紀一 始皇帝十七年（內史騰滅韓）"
+              },
+              "quoted_text": "虜韓王安，以其地置潁川郡。"
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:9bb3a9235aea033121712f82de90e22f7c42d3ee0b580b7fd8ce879e2f5f3edf"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:qin-state-1",
+    "published_revision_hash": "sha256:9bb3a9235aea033121712f82de90e22f7c42d3ee0b580b7fd8ce879e2f5f3edf",
+    "set_id": "lks:set:qin-conquest-han-233-226-v1",
+    "published_at": "2026-09-25T21:30:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
+  }
+}

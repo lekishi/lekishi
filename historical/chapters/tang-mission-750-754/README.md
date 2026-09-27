@@ -96,20 +96,25 @@ exist.
 
 The set records the **preparing editor's self-review** (`self_review`, reviewer =
 an author of the member revisions). This is not owner review, not independent
-review, and not specialist review. The owner's editorial approval under RFD 2 —
-and therefore RFD 4's AC2 — is **still pending**, and the specialist reviews the
-feasibility report identified (maritime history for the return-voyage landfalls,
-Buddhist studies for the ordination and lineage claims, Tang court history for the
-audience, and a philologist for the editions) have not been performed.
+review, and not specialist review. The owner's editorial approval under RFD 2 was
+recorded on 2026-09-25 against this exact set and its canonical digest, so the
+set is now the chapter's official publication. The optional specialist reviews
+the feasibility report identified (maritime history for the return-voyage
+landfalls, Buddhist studies for the ordination and lineage claims, Tang court
+history for the audience, and a philologist for the editions) remain visibly
+unperformed, and the approval does not imply them. RFD 4's AC2's
+approval-dependent part is therefore satisfied; AC2's visible
+uncertainty/dispute part still depends on the exploration loop, and the AC7
+attribution/rights audit remains open, so AC2 as a whole is not complete.
 
-The set is not an official publication. In the contract's vocabulary
-"published" means *named by a publication set* — the atomic unit the atlas reads
-— not *approved for release*. The owner's decisions are recorded in
+The owner's decisions are recorded in
 [`rfd/0002/PUBLICATION_APPROVAL.adoc`](../../../rfd/0002/PUBLICATION_APPROVAL.adoc):
-a set may exist only when that ledger names it, and the ledger records this one
-as **owner decided** — the owner decided that this content may be published. The
-first `owner approved` row will be the owner's editorial approval of this
-chapter.
+a set may exist only when that ledger names it, and the ledger now records this
+one as **owner approved** — the owner's editorial approval under RFD 2 of the
+snapshot merged on `origin/main`. The set document itself is deliberately
+unchanged, so the approved digest still matches it; its `review` block therefore
+keeps `self_review` and its preparation-time notes, and correcting the content
+means a new revision or source document and a new set rather than an edit.
 
 ## What is deferred, and why
 

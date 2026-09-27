@@ -1,0 +1,231 @@
+:authors: Darwin D Wu <darwin67@users.noreply.github.com>
+:state: published
+:labels: architecture, content, static, ui, chapters, review, poc
+:date: 2026-09-27
+
+= RFD 3 chapter presentation decision
+
+== Provenance and scope
+
+Two owner review comments on the served static build, both on 2026-09-27, drove
+this record. The first asked why a reader would care about the Qin chapter at all:
+
+*"you're not getting it. I'm not asking if that's the appropriate copy (obviously
+not in my eyes), but why would a user look at this and even care about it? it's
+just another chapter. comparing it or not is our problem not a user looking at
+this page. also I don't think it needs to show reviewed chapter anymore, and
+provide a name for each chapter instead"*
+
+The second asked what the previous framing had meant in the first place: *"what
+does a comparison review mean? isn't it just another chapter?"* The framing it
+replaced is recorded in link:COMPARISON_REVIEW_ROUTE.adoc[the comparison review
+route decision]'s update of the same day, which this record supersedes for the
+user-facing surface; that record stays readable and its route, status, and ledger
+decisions still stand.
+
+The change is presentation only. No historical content, no publication set, and
+no ledger row changed: the Tang set is still the owner-approved `lks:set:tang-mission-750-754-v1`
+and the Qin set is still a `preparation snapshot` with no owner decision.
+
+== Decision
+
+* **The root page presents chapters, not review categories.** Each chapter is a
+  peer card: the chapter's name, its coverage window in the atlas's year text, a
+  story summary, and an ordinary `Open the chapter` entry. The card list comes
+  from `src/lib/atlas/chapters.ts`; `chapters.test.ts` pins it against the
+  content — one card per chapter tree, each card's window equal to the window the
+  projection gives that chapter, and each card's target pinned to the route that
+  serves it — so the page cannot describe a chapter the atlas does not carry.
+* **Chapter names are presentation text.** The published story summary opens with
+  the chapter's own construction ("from appointment through the return voyage ...
+  with the included coda nodes ... presented after it"), which describes how the
+  chapter was assembled rather than what a reader follows. The display names are
+  therefore product copy — *The embassy to Tang China* and *The end of the state
+  of Han* — grounded in the chapter's published scope, and they are the names the
+  chapter's own page uses too (page title, workspace notice, globe label). The
+  workspace takes the display name as a mount parameter, so it stays
+  chapter-agnostic and falls back to the chapter's published title for a chapter
+  that has no card.
+* **Editorial state is secondary metadata, never the pitch.** The Tang card
+  states the recorded owner approval and the specialist-review caveat in small
+  print beside its entry, and `release.test.ts` still reads the RFD 2 ledger and
+  the set: the date the card states is the date the Tang row records, and the line
+  cannot describe the approved set as independent or specialist review. The Qin
+  card states `Unapproved preparation · self-review only`, so discoverability
+  still cannot read as release. Neither line is a chapter's identity or its
+  reason to exist.
+* **The review-category label leaves the user surface.** `Reviewed chapter` is
+  gone from the root page, from the atlas page's header badge, and from the
+  workspace notice: the notice now states the review independence the chapter's
+  publication records (`Self-review only` for Tang) above the chapter's name, and
+  the Qin chapter's page keeps its `Unapproved preparation` badge and its review
+  note, which is where that status has to stay prominent. The Qin page is titled
+  with the chapter's name instead of `Comparison fixture`, and its navigation
+  offers the atlas, not a "reviewed" variant of it.
+* **The Qin chapter's page still exists, is still unapproved, and is still not a
+  launch chapter.** `/compare/qin` keeps its path: the owner is reviewing it by
+  URL, and the path is the least user-visible place the harness vocabulary
+  survives. Renaming it into a chapter namespace is an open presentation decision
+  for the owner, not something this record takes on its own.
+* **The artifact invariant follows the presentation.** `scripts/check-static-build.mjs`
+  requires the root page to link both entries, to state the Qin chapter's
+  unapproved preparation, and to state the Tang chapter's recorded owner approval,
+  and it fails the build if `index.html` carries the exact framings the owner
+  rejected — a review category, the comparison harness, the harness's `map
+  treatments` phrase, or the contract id. `atlas.html` must still name the chapter
+  it renders (now by display name) and must not carry a review category or the
+  unapproved label; the Qin page must still carry its window and its unapproved
+  status and must not label itself a comparison fixture. The bans are the rejected
+  framings, not ordinary historical words: a paraphrase is a copy-review question,
+  and the card test says the same.
+* **The page still leads with the atlas.** The hero's `Open the atlas` call to
+  action is unchanged and remains the first link in `main`; the chapter cards
+  follow it with equal weight, so no chapter is set apart as the project's "real"
+  one.
+
+== Alternatives considered
+
+* **Rename `/compare/qin` to a chapter path.** Deferred, not rejected: the owner
+  is reviewing the current URL, the path is not shown as chapter identity, and the
+  static file server that serves the review artifact does not read
+  `static/_redirects`, so a rename would break the link the owner is using. This
+  is recorded as an open presentation decision below.
+* **Curate the names in the chapter content.** Rejected: the Tang set's canonical
+  digest carries the owner's approval and the Qin set's digest is what its ledger
+  row records, so editing either set to rename a chapter would invalidate state
+  the owner has not re-decided. A display name is presentation, and presentation
+  belongs on the browser side of the content boundary.
+* **Keep the published story summary verbatim on the cards.** Rejected for the
+  root page: it is written for the record's readers and describes the chapter's
+  construction. The Tang chapter's own page metadata still carries it, where that
+  provenance belongs.
+* **Keep a `Reviewed chapter` badge on the atlas page.** Rejected: it is the same
+  internal category the owner asked to drop, and the notice's review-independence
+  line states what the publication records.
+* **Keep the Qin card as the privileged review entry and add a second, equal
+  card.** Rejected: the owner asked for peers, and a review card beside a chapter
+  card is the framing the review rejected.
+
+== Measured evidence
+
+Measured on 2026-09-27 in the pinned Nix environment.
+
+[cols="1,3",options="header"]
+|===
+|Check |Result
+
+|Full check
+|`pnpm verify` passes: format check clean, `svelte-check` 0 errors and 0 warnings,
+478 tests (477 passed, 1 skipped — the `pnpm seal` maintenance entry point), 130
+contract tests, and the static build with its invariant (451 files).
+
+|Card, page, and chapter-surface tests
+|`src/lib/atlas/chapters.test.ts` (6 tests) pins the card list against the chapter
+trees: one card per tree, unique ids and names, each card's window equal to the
+projection's window for that chapter, each card's target pinned, and every card's
+name and summary free of all seven rejected framings (`reviewed chapter`,
+`comparison chapter`, `comparison harness`, `map treatments`,
+`lekishi-historical-contract`, `preparation snapshot`, `self_review`).
+`src/routes/page.test.ts` (4 tests) mounts the root page's client component in
+jsdom — the component SvelteKit prerenders, not the emitted HTML — and asserts the
+peer-card shape, the absence of the five framings that can appear on a page
+(everything above except `preparation snapshot` and `self_review`, which are
+record vocabulary), and each card's structure: the rendered `h3` is the name, the
+rendered summary paragraph is the summary, the status is its own paragraph that
+follows the entry link in document order, and neither the heading, the link, nor
+the summary carries the status. `src/lib/atlas/release.test.ts` (2 tests) still
+cross-checks the stated approval date against the ledger row and the set's
+`self_review`; `src/lib/atlas/comparison.test.ts` cross-checks the Qin card
+against the loaded chapter (id, target, projected window, non-empty name);
+`mount.test.ts` covers the display name at the mount boundary, and `entry.test.ts`
+(10 tests) covers it across the page lifecycle, including a page restored after a
+different chapter with its own name and detail surface had started.
+
+|Browser checks
+|`e2e/comparison.spec.ts` against the built artifact across the desktop,
+tablet-touch, and phone projects (18 checks): 17 passed in 21.8 minutes, and the
+one failure — the desktop run of the disputed-death check — was a Chromium
+session crash (`Protocol error ... session closed`) during a run that overlapped a
+separate screenshot capture; re-run alone against the same artifact it passes in
+42.2 s. The rewritten root-page check passes in all three projects (both cards
+visible and labelled, the Qin card not reading as release, no review-category or
+comparison vocabulary on the page, the click-through to the Qin chapter, and no
+horizontal overflow at 1440x900, 820x634, 390x844 and 320x640), and the chapter
+checks pass with the new notice wording. `e2e/atlas.spec.ts`'s shell, mount,
+direct-load, and root-page checks pass: 12 passed in 53.7 s. The selected-event
+explanation check's own budget was raised from 180 s to 300 s after it measured
+2.7 minutes alone (it had passed at 180 s in an earlier session and now exceeded
+it once the whole file ran on a loaded machine); nothing about the assertion
+changed.
+
+|Rendered inspection
+|Screenshots of the root page (both cards), `/atlas`, and `/compare/qin` at
+1440x900, 820x634, 390x844 and 320x640 under `.amp/in/artifacts/`
+(`home-chapters-*.png`, `atlas-chapter-*.png`, `qin-chapter-*.png`): the cards are
+peers, the status lines are secondary, the atlas header no longer carries a
+category badge, and no overlay panel overlaps or clips text. The globe's event
+labels still crowd each other where the chapter's places are dense — the same
+rendering the pre-change screenshots show, unchanged by this record and outside
+its scope.
+
+|Artifact
+|`build/index.html` carries both entries, `Owner-approved for release`,
+`2026-09-25`, and `Unapproved preparation`, and carries no `Reviewed chapter`,
+`Comparison chapter`, `comparison`, `map treatments`, or contract id;
+`build/atlas.html` names *The embassy to Tang China* and carries no review
+category; `build/compare/qin.html` names *The end of the state of Han*, its
+233–226 BCE window, and `Unapproved preparation`.
+|===
+
+== Consequences
+
+* A reader arriving at the site sees two chapters with names and stories, and the
+  page's own categories are gone; the project's review vocabulary lives in the
+  records and on the review page, where the status has to be stated.
+* The Tang chapter keeps its recorded owner approval visible without the page
+  reciting the frozen set's preparation notes; the previously quoted
+  preparation-time notes are no longer shown, so their "approval pending" wording
+  cannot stand as the current state anywhere a reader sees it.
+* The Qin chapter is more discoverable than before — it is a peer card, not a
+  subordinate review card — which raises the cost of a mistake in its status line.
+  The tests and the artifact invariant hold that line to the ledger's words.
+* Display names are code, not content: renaming a chapter does not require a new
+  publication set or a new ledger row, and a chapter tree that has no card fails
+  `chapters.test.ts` rather than shipping unnamed.
+
+== Limitations recorded
+
+* `/compare/qin` keeps the harness word in its path. The page presents as a
+  chapter, but the URL does not; renaming it is an open owner decision.
+* The Qin chapter is still unapproved preparation. Nothing here advances its
+  approval, and RFD 4's AC2 still does not apply to it.
+* The details panel still states the chapter publication's review independence
+  beside a selected record (`Self-reviewed by ...: not owner review, not
+  independent review, not specialist review`). That is the same kind of process
+  prose the owner asked to remove from the cards, but it belongs to the production
+  surface's approved presentation, so changing it is an open owner decision rather
+  than a consequence of this record.
+* The treatment comparison, the shared baseline, Wave 2, Gate 2, and the PoC
+  remain open; this record changes presentation only.
+* The cards' summaries are reviewed copy, not derived text: the tests check that a
+  summary names a year from the chapter's own window and carries none of the
+  rejected framings, and correctness of the prose itself stays a review question.
+
+== Verification performed for this document
+
+* Ran `pnpm verify` (format, `svelte-check`, unit and contract tests, static build
+  with its invariant) on the final tree after the last test and copy corrections:
+  format clean, `svelte-check` 0 errors and 0 warnings, 478 tests (477 passed, 1
+  skipped), 130 contract tests, static build verified at 451 files.
+* Ran the comparison browser suite against the built artifact in all three
+  projects (18 checks; the one crash is recorded above and passes alone), and the
+  atlas suite's shell, mount, direct-load, and root-page checks (12 passed in
+  53.7 s), and re-ran the rewritten root-page check after the last card-markup
+  tweak (3 passed in 9.2 s).
+* Rendered the root page, `/atlas`, and `/compare/qin` at 1440x900, 820x634,
+  390x844 and 320x640 and inspected the screenshots saved under
+  `.amp/in/artifacts/`.
+* Inspected the built pages' own markers: `index.html` carries both entries, the
+  Tang approval line, and the Qin unapproved line, and none of the removed
+  vocabulary; `atlas.html` names the Tang chapter and carries no review category;
+  `compare/qin.html` names the Qin chapter, its window, and its unapproved status.

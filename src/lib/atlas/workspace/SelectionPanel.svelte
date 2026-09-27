@@ -13,6 +13,7 @@
     event,
     status,
     review,
+    disputeDetail = false,
     onReturnToTime,
     onClose,
   }: {
@@ -20,6 +21,8 @@
     status: SelectionTimeStatus | null
     /** The chapter's recorded review status, so the details surface states it too. */
     review: { independence: string; reviewer: string }
+    /** The comparison review surface shows the published dispute; the launch atlas does not yet. */
+    disputeDetail?: boolean
     onReturnToTime: () => void
     onClose: () => void
   } = $props()
@@ -32,7 +35,7 @@
     id="atlas-selection"
     data-testid="atlas-selection"
     aria-label="Selected event"
-    class="pointer-events-auto flex max-h-full flex-col gap-3 overflow-y-auto rounded-t-2xl border border-slate-700/70 bg-slate-950/90 px-4 py-4 shadow-2xl shadow-slate-950/60 backdrop-blur md:rounded-2xl"
+    class="pointer-events-auto flex min-h-0 flex-col gap-3 overflow-y-auto rounded-t-2xl border border-slate-700/70 bg-slate-950/90 px-4 py-4 shadow-2xl shadow-slate-950/60 backdrop-blur md:rounded-2xl"
   >
     <header class="flex items-start justify-between gap-3">
       <div>
@@ -88,6 +91,29 @@
     {/if}
 
     <p class="text-sm leading-relaxed text-slate-300">{event.note}</p>
+
+    {#if disputeDetail && event.dispute}
+      <section
+        id="atlas-dispute"
+        data-testid="atlas-dispute"
+        class="flex flex-col gap-2 rounded-lg border border-rose-400/40 bg-rose-400/5 px-3 py-2.5"
+      >
+        <h3 class="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-rose-300">
+          Disputed account
+        </h3>
+        <p class="text-xs leading-snug text-rose-50">{event.dispute.summary}</p>
+        {#each event.dispute.accounts as account, index (index)}
+          <div class="border-t border-rose-400/20 pt-2">
+            <p class="text-xs leading-snug text-slate-200">{account.statement}</p>
+            {#if account.locators.length > 0}
+              <p class="mt-1 text-[0.65rem] leading-snug text-slate-500">
+                {account.locators.join(" · ")}
+              </p>
+            {/if}
+          </div>
+        {/each}
+      </section>
+    {/if}
 
     {#if status === "outside-window"}
       <div

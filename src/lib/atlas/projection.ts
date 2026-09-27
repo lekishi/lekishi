@@ -18,6 +18,7 @@ import type {
   Chapter,
   ChapterPublication,
   DatePrecision,
+  EventDispute,
   EventPlacement,
   GeoPoint,
   GeometryPrecision,
@@ -47,16 +48,24 @@ import type {
  * points, and an occurrence the atlas cannot represent (undated, or open-ended)
  * is an error rather than a guessed year.
  *
- * The chapter's coverage model lives in the content, not here: `PRIMARY_WINDOW`
- * is the 750–754 mission window the chapter's own README and contract test
- * define, and it is the window the atlas opens in. Coda nodes outside it stay
- * outside it — the projection labels them, it does not fold them in.
+ * The chapter's coverage model comes from the caller, not from this module: the
+ * production boundary names the reviewed chapter's own primary window and the
+ * comparison catalog names the fixture's, so adding a chapter does not add a
+ * chapter branch here. Coda nodes outside that window stay outside it — the
+ * projection labels them, it does not fold them in.
  */
 
 export type ProjectionResult = { ok: true; chapter: Chapter } | { ok: false; errors: string[] }
 
-/** The chapter's primary mission window, inclusive, in years (RFD 4 Gate 1 coverage model). */
-const PRIMARY_WINDOW: TimeWindow = { start: 750, end: 754 }
+/**
+ * A chapter's own coverage model, supplied by the caller that owns the chapter
+ * decision: the inclusive window the atlas opens in, in the same year numbers
+ * the contract's normalized endpoints use (astronomical ordinals, so 230 BCE is
+ * -229). A chapter with no coda nodes simply passes the window its events share.
+ */
+export type ChapterCoverage = {
+  readonly defaultWindow: TimeWindow
+}
 
 const POINT_INTERPRETATIONS: ReadonlyMap<string, PointPlacement> = new Map([
   ["approximate_point", "approximate"],
@@ -96,6 +105,7 @@ export function projectChapter(
   name: string,
   documents: JsonValue[],
   sets: JsonValue[],
+  coverage: ChapterCoverage,
 ): ProjectionResult {
   const errors: string[] = []
   const records = documents.filter(
@@ -130,7 +140,7 @@ export function projectChapter(
 
   const events = published
     .filter((entry) => entry.kind === "event")
-    .map((entry) => projectEvent(entry, places, captions, errors))
+    .map((entry) => projectEvent(entry, places, captions, coverage, errors))
     .filter((entry): entry is HistoricalEvent => entry !== null)
 
   eventGeometryErrors(published, errors)
@@ -165,7 +175,7 @@ export function projectChapter(
       id: name,
       title: chapterTitle(summary),
       summary,
-      defaultWindow: PRIMARY_WINDOW,
+      defaultWindow: coverage.defaultWindow,
       homeView: boundingBoxCenter(mapped),
       places: [...places.values()],
       events,
@@ -342,6 +352,7 @@ function projectEvent(
   entry: PublishedRevision,
   places: Map<string, Place>,
   captions: Map<string, string>,
+  coverage: ChapterCoverage,
   errors: string[],
 ): HistoricalEvent | null {
   const title = captions.get(entry.recordId)
@@ -367,22 +378,24 @@ function projectEvent(
   }
 
   // The coda distinction is the chapter's own presentation label, cross-checked
-  // against the primary window: a coda node that moved inside the window, or a
-  // mission event that moved out of it, fails here instead of being folded in.
+  // against the caller's primary window: a coda node that moved inside the
+  // window, or a mission event that moved out of it, fails here instead of
+  // being folded in.
   const labelledCoda = title.startsWith(CODA_CAPTION_PREFIX)
   const outsidePrimaryWindow =
-    occurrence.startYear > PRIMARY_WINDOW.end || occurrence.endYear < PRIMARY_WINDOW.start
+    occurrence.startYear > coverage.defaultWindow.end ||
+    occurrence.endYear < coverage.defaultWindow.start
 
   if (labelledCoda && !outsidePrimaryWindow) {
     errors.push(
-      `${entry.recordId} is presented as a coda node but its published date falls inside the primary ${PRIMARY_WINDOW.start}–${PRIMARY_WINDOW.end} window`,
+      `${entry.recordId} is presented as a coda node but its published date falls inside the primary ${coverage.defaultWindow.start}–${coverage.defaultWindow.end} window`,
     )
     return null
   }
 
   if (!labelledCoda && outsidePrimaryWindow) {
     errors.push(
-      `${entry.recordId} falls outside the primary ${PRIMARY_WINDOW.start}–${PRIMARY_WINDOW.end} window and is not presented as a coda node`,
+      `${entry.recordId} falls outside the primary ${coverage.defaultWindow.start}–${coverage.defaultWindow.end} window and is not presented as a coda node`,
     )
     return null
   }
@@ -393,8 +406,62 @@ function projectEvent(
     placement: projectEventPlacement(entry, places, errors),
     occurrence,
     note,
+    dispute: projectDispute(entry, errors),
     coda: labelledCoda,
   }
+}
+
+/**
+ * The record's published dispute, or null when it is undisputed.
+ *
+ * The atlas must not smooth a disagreement into one account, so a record marked
+ * `disputed` carries its summary and the claims that challenge the main account
+ * into the details surface. A disputed record without a summary is an error
+ * rather than an empty panel: the contract already requires a challenging claim,
+ * and the summary is what the reader is shown.
+ */
+function projectDispute(entry: PublishedRevision, errors: string[]): EventDispute | null {
+  const dispute = entry.revision["dispute"]
+  const challenging = listOf(entry.revision["claims"])
+    .map(objectOf)
+    .filter((claim) => claim["role"] === "conflicting" || claim["role"] === "alternative")
+
+  if (!isObject(dispute) || dispute["status"] !== "disputed") {
+    // The contract's validator refuses this shape too; the projection refuses it
+    // as well so the atlas can never smooth challenging accounts into one
+    // undisputed reading.
+    if (challenging.length > 0) {
+      errors.push(
+        `${entry.recordId} carries ${challenging.length} conflicting or alternative claims without a disputed status, and the atlas will not present them as undisputed`,
+      )
+    }
+
+    return null
+  }
+
+  const summary = stringOrUndefined(dispute["summary"])
+
+  if (summary === undefined || summary === "") {
+    errors.push(`${entry.recordId} is disputed but carries no dispute summary to show`)
+    return null
+  }
+
+  const accounts = challenging.flatMap((claim) => {
+    const statement = stringOrUndefined(claim["statement"])
+
+    if (statement === undefined || statement === "") {
+      return []
+    }
+
+    const locators = listOf(claim["citations"])
+      .map(objectOf)
+      .map((citation) => stringOrUndefined(objectOf(citation["locator"])["value"]) ?? "")
+      .filter((value) => value !== "")
+
+    return [{ statement, locators }]
+  })
+
+  return { status: "disputed", summary, accounts }
 }
 
 function projectOccurrence(entry: PublishedRevision, errors: string[]): Occurrence | null {

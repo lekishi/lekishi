@@ -1,0 +1,85 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "relationship",
+  "record_id": "lks:relationship:han-qin-submission",
+  "created_at": "2026-09-25T03:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:han-qin-submission-1",
+      "created_at": "2026-09-25T03:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Initial comparison-fixture relationship: Han's submission request, recorded as diplomacy because the sources record no Qin acceptance.",
+      "content": {
+        "summary": "The Han king's submission to Qin in 233 BCE: the comprehensive mirror records land and the royal seal presented and a request for vassal status; the annals record the request to be a subject. The sources record no Qin acceptance, so the relationship is a request, not an asserted subjection.",
+        "relationship_types": [
+          "diplomacy"
+        ],
+        "from": "lks:actor:han-state",
+        "to": "lks:actor:qin-state",
+        "directionality": "directed",
+        "causality": "not_asserted",
+        "validity": {
+          "source_expression": "始皇帝十四年（韓王納地效璽，請為籓臣）; 十四年（韓王請為臣）",
+          "calendar": "chinese_lunisolar",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {
+              "year": 233,
+              "era": "bce"
+            },
+            "end": {
+              "year": 233,
+              "era": "bce"
+            }
+          }
+        },
+        "editorial_notes": "The sources record the request and do not record Qin accepting it; the relationship is therefore recorded as diplomacy, not as rulership or membership, and the chapter does not decide the outcome. It carries no geometry."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:han-qin-submission-basis",
+          "statement": "The comprehensive mirror records that the Han king presented land and the royal seal, asked to be a vassal, and sent 韓非, and the annals record that the Han king asked to be a subject.",
+          "asserts": "",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:zizhi-tongjian",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦紀一 始皇帝十四年（韓王納地效璽）"
+              },
+              "quoted_text": "韓王納地效璽，請為籓臣，使韓非來聘。"
+            },
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十四年（韓王請為臣）"
+              },
+              "quoted_text": "韓王請為臣。"
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:1e29aa6dc9980786b512826e5cf9c419caaf0c9b333213cf5fb4730d0ea2f472"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:han-qin-submission-1",
+    "published_revision_hash": "sha256:1e29aa6dc9980786b512826e5cf9c419caaf0c9b333213cf5fb4730d0ea2f472",
+    "set_id": "lks:set:qin-conquest-han-233-226-v1",
+    "published_at": "2026-09-25T21:30:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
+  }
+}

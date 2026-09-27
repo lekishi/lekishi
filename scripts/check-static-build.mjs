@@ -119,6 +119,39 @@ if (!indexHtml.includes('href="/atlas"')) {
   fail("index.html does not link to the atlas")
 }
 
+// The root page presents the chapters as peers: one card per chapter, each with
+// its name, its window, its story summary, and an entry. The artifact must keep
+// both entries, the Qin chapter's unapproved state, and the Tang chapter's
+// recorded owner approval, and it must not carry the exact framings the owner
+// rejected (a review category, the comparison harness, the contract id) — a
+// deploy cannot turn a chapter card back into a note about the project's own
+// process.
+for (const route of ['href="/atlas"', 'href="/compare/qin"']) {
+  if (!indexHtml.includes(route)) {
+    fail(`index.html does not link to ${route}`)
+  }
+}
+
+if (!indexHtml.includes("Unapproved preparation")) {
+  fail("index.html does not state that the Qin chapter is unapproved preparation")
+}
+
+if (!indexHtml.includes("Owner-approved for release") || !indexHtml.includes("2026-09-25")) {
+  fail("index.html does not state the recorded owner approval for the Tang chapter")
+}
+
+for (const marker of [
+  "Reviewed chapter",
+  "Comparison chapter",
+  "comparison harness",
+  "map treatments",
+  "lekishi-historical-contract",
+]) {
+  if (indexHtml.includes(marker)) {
+    fail(`index.html carries the project's own framing where a reader meets a chapter: ${marker}`)
+  }
+}
+
 // --- bundles ------------------------------------------------------------------
 
 requireMatching(/_app\/immutable\/entry\/.*\.js$/, "a client entry bundle under _app/immutable")
@@ -174,9 +207,63 @@ for (const marker of [
 }
 
 // The prerendered shell names the chapter it renders, so a direct request for
-// /atlas is already about the reviewed content before any script runs.
-if (!atlasHtml.includes("The 750–754 embassy of 藤原朝臣清河")) {
-  fail("atlas.html does not name the reviewed chapter the atlas renders")
+// /atlas is already about the chapter before any script runs, and it carries no
+// review category and no unapproved-content label.
+if (!atlasHtml.includes("The embassy to Tang China")) {
+  fail("atlas.html does not name the chapter the atlas renders")
+}
+
+for (const marker of ["Reviewed chapter", "Unapproved preparation"]) {
+  if (atlasHtml.includes(marker)) {
+    fail(`atlas.html carries a review category or status label: ${marker}`)
+  }
+}
+
+// The bounded Qin chapter is rendered by its own page (`/compare/qin`), which
+// loads it through the comparison catalog (`src/lib/atlas/chapter-catalog.ts`).
+// The chapter ships on purpose so the owner can inspect it, but it is unapproved
+// preparation, not a second launch chapter: the page must exist, state its
+// status, and the production atlas page must not render the chapter.
+const comparisonHtml = path.join(buildDirectory, "compare", "qin.html")
+
+if (requireFile(comparisonHtml)) {
+  const comparisonText = read(comparisonHtml)
+
+  if ((comparisonText.match(/id="atlas-workspace"/g) ?? []).length !== 1) {
+    fail("compare/qin.html must contain exactly one #atlas-workspace mount point")
+  }
+
+  if (!comparisonText.includes("_app/immutable/entry/start.")) {
+    fail("compare/qin.html does not load the client entry, so the workspace would never mount")
+  }
+
+  if (!comparisonText.includes("Unapproved preparation")) {
+    fail("compare/qin.html does not state that the comparison fixture is unapproved preparation")
+  }
+
+  // The shell is prerendered from the route's load, so the chapter's window and
+  // name are real content before any script runs. The chapter's records are
+  // bundled in the route's client chunks rather than inlined here, so the
+  // scripts carry the chapter's own ids.
+  for (const marker of ["233 BCE–226 BCE", "The end of the state of Han"]) {
+    if (!comparisonText.includes(marker)) {
+      fail(`compare/qin.html does not carry the chapter: ${marker} is missing`)
+    }
+  }
+
+  if (comparisonText.includes("Comparison fixture")) {
+    fail("compare/qin.html still labels the chapter as a comparison fixture")
+  }
+
+  for (const marker of ["qin-conquest-han-233-226", "lks:event:han-conquest-230"]) {
+    if (!scriptText.includes(marker)) {
+      fail(`the built scripts do not carry the comparison fixture: ${marker} is missing`)
+    }
+
+    if (atlasHtml.includes(marker)) {
+      fail(`the production atlas page renders the comparison fixture: ${marker} is present`)
+    }
+  }
 }
 
 // --- Cesium runtime -----------------------------------------------------------

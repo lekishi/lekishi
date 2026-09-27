@@ -13,10 +13,13 @@ Implements link:README.adoc[RFD 2: Historical data, time, and evidence].
 == Phase 1 — Curated records
 
 - [ ] Implement stable record revisions, reviewer permissions, and draft-to-publication transitions using Git history and explicit editorial metadata; expose the latest published revision and readable correction history, publishing related record changes consistently.
-- [ ] Add schema-validated content covering a campaign, exchange, and institutional relationship.
+- [x] Add schema-validated content covering a campaign, exchange, and institutional relationship. The Qin comparison fixture adds all three, schema-validated and contract-validated: a campaign (the 230 BCE annexation), exchanges (the 233 BCE submission/embassy and the 231 BCE cession), and institutional relationships (the cession's changed boundaries and the 潁川 commandery's institutional change). The fixture is a preparation snapshot, not release content.
 - [ ] Review imported candidates and preserve their external identifiers and licenses; verify historical/local-script labels and local-script/romanized search aliases without conflating successor places, and record the initial editor's approval of the published content revision in the file-based workflow.
+  - The approval portion is done: the owner's editorial approval of the published Tang revision was recorded on 2026-09-25 in link:../0002/PUBLICATION_APPROVAL.adoc[the publication approval gate]. The item stays open for the local-script/romanized search aliases and the successor-place checks, which belong to the exploration loop.
 - [ ] Represent contradictory accounts and records lacking exact dates or map positions; present an attributed main account with a visible dispute indication and cited alternatives in the detail panel, without merging competing claims or requiring switchable map interpretations.
+  - The content side is now exercised by the Qin comparison fixture: 韓非's death is published as one disputed record with three cited accounts and a dispute summary, and 雲陽, 南陽, and 潁川郡 carry `unknown` geometry rather than invented positions. The comparison review route (`/compare/qin`) shows that dispute in the details surface — a badge in the event list and the summary with the conflicting accounts and their locators — as unapproved preparation (link:../0003/COMPARISON_REVIEW_ROUTE.adoc[the comparison review route decision]). The item stays open for the launch chapter's own surface: the production atlas keeps its current presentation until the owner decides, and the loop's search, sources, and story navigation are still to be built.
 - [ ] Verify every published relationship has a cited evidentiary basis; distinguish attested claims from cited scholarly interpretations, label schematic geometry separately, and exclude original contributor hypotheses from public content.
+  - Both chapter suites pin the content side: every published relationship carries cited claims, neither chapter publishes route or schematic geometry, and no published revision carries research notes. The item stays open for the details surface's labeling of interpretation and schematic geometry.
 
 [NOTE]
 ====
@@ -31,9 +34,23 @@ browser-safe boundary in `src/lib/atlas/chapter-content.ts` and
 unmarked, a display anchor is never shown as an asserted location, and an
 undated or open-ended occurrence fails the projection instead of being guessed
 (link:../0003/CONTENT_BOUNDARY.adoc[the chapter content boundary decision]).
-Every Phase 1 item above stays open: they also cover the bounded Qin comparison
-fixture, the owner's recorded approval of the published revision, and the
-detail-panel dispute and alternative behavior that only exists once the
+
+The bounded Qin comparison fixture
+(`historical/chapters/qin-conquest-han-233-226/`) now carries the campaign,
+exchange, and institutional content in the same contract, as a preparation
+snapshot rather than release content, and loads through the comparison catalog
+recorded in link:../0003/COMPARISON_FIXTURE_BOUNDARY.adoc[the comparison fixture
+boundary decision] and now rendered by the comparison review route
+(link:../0003/COMPARISON_REVIEW_ROUTE.adoc[the comparison review route
+decision]). An internal review prepared twelve source-fidelity corrections, and
+the owner asked to review them before deciding, so the preparation set publishes
+the corrected revisions and the review route renders them as unapproved
+preparation; the owner's decision on that content stays open, and each corrected
+record keeps the revision it replaced as unpublished history. The owner's
+approval of the published Tang revision is recorded in
+link:../0002/PUBLICATION_APPROVAL.adoc[the publication approval gate]. The Phase
+1 items that stay open are the ones that also cover the detail-panel dispute and
+alternative behavior and the search aliases, which only exist once the
 exploration loop is implemented. The Gate 1 mission and coverage decision is in
 link:../0004/GATE1_DECISION.adoc[RFD 4's Gate 1 decision record].
 ====
@@ -51,3 +68,4 @@ link:../0004/GATE1_DECISION.adoc[RFD 4's Gate 1 decision record].
 - [ ] Confirm no route animation or territory interpolation asserts unsupported history; verify approximate points and source-supported areas carry non-color-only uncertainty cues and source explanations, display anchors are not asserted coordinates, no unsupported radius or boundary is generated, and wholly unlocated records remain accessible without fabricated map positions.
 - [ ] Audit source locators, attribution, and media redistribution rights for the first release.
 - [ ] Record the launch-chapter approval, source locators, attribution, and media redistribution audit against the RFD 4 release build and criteria AC2 and AC7.
+  - The launch-chapter approval is recorded in link:../0002/PUBLICATION_APPROVAL.adoc[the publication approval gate] (2026-09-25, exact set digest). The source-locator re-check against critical editions and the media redistribution audit remain open, and no media is published.

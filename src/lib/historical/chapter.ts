@@ -22,6 +22,19 @@ export function chapterDirectory(name: string): string {
   return fileURLToPath(new URL(name, chaptersRoot))
 }
 
+/**
+ * Names of every reviewed chapter tree under `historical/chapters`, sorted.
+ *
+ * The publication approval gate reads this instead of naming one chapter, so a
+ * new chapter directory cannot appear without a ledger decision.
+ */
+export function listChapters(): string[] {
+  return readdirSync(chaptersRoot, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .sort()
+}
+
 export type ChapterTree = {
   readonly name: string
   readonly documents: JsonObject[]

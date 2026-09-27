@@ -1,0 +1,85 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "relationship",
+  "record_id": "lks:relationship:han-annexation-yingchuan",
+  "created_at": "2026-09-25T03:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:han-annexation-yingchuan-1",
+      "created_at": "2026-09-25T03:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Initial comparison-fixture relationship: the annexation's administrative outcome, an institutional change with no causation and no geometry.",
+      "content": {
+        "summary": "Han's annexed land becoming the 潁川 commandery in 230 BCE, as the annals and the comprehensive mirror record. The relationship is an institutional change and asserts no causation.",
+        "relationship_types": [
+          "institutional_change"
+        ],
+        "from": "lks:actor:han-state",
+        "to": "lks:place:yingchuan",
+        "directionality": "directed",
+        "causality": "not_asserted",
+        "validity": {
+          "source_expression": "十七年（以其地為郡，命曰潁川）; 始皇帝十七年（以其地置潁川郡）",
+          "calendar": "chinese_lunisolar",
+          "precision": "year",
+          "mode": "occurrence_window",
+          "interval": {
+            "bounds": "two_sided",
+            "boundary": "inclusive",
+            "start": {
+              "year": 230,
+              "era": "bce"
+            },
+            "end": {
+              "year": 230,
+              "era": "bce"
+            }
+          }
+        },
+        "editorial_notes": "The relationship records the administrative outcome of the annexation without asserting that the annexation caused it. It carries no geometry; the commandery's record keeps the sources' names and no coordinates."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:han-annexation-yingchuan-basis",
+          "statement": "The annals record the annexed land being made a commandery named 潁川, and the comprehensive mirror records the land being made into 潁川郡.",
+          "asserts": "",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十七年（命曰潁川）"
+              },
+              "quoted_text": "盡納其地，以其地為郡，命曰潁川。"
+            },
+            {
+              "source_id": "lks:source:zizhi-tongjian",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦紀一 始皇帝十七年（以其地置潁川郡）"
+              },
+              "quoted_text": "虜韓王安，以其地置潁川郡。"
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:277d62397355ccafd9ff30810d9fcc58ae38ddb0d13a1075d0772539237aedd1"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:han-annexation-yingchuan-1",
+    "published_revision_hash": "sha256:277d62397355ccafd9ff30810d9fcc58ae38ddb0d13a1075d0772539237aedd1",
+    "set_id": "lks:set:qin-conquest-han-233-226-v1",
+    "published_at": "2026-09-25T21:30:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
+  }
+}

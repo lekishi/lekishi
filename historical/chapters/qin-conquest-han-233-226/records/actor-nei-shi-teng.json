@@ -1,0 +1,321 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "record",
+  "kind": "actor",
+  "record_id": "lks:actor:nei-shi-teng",
+  "created_at": "2026-09-25T03:00:00Z",
+  "revisions": [
+    {
+      "revision_id": "lks:rev:nei-shi-teng-1",
+      "created_at": "2026-09-25T03:30:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Initial comparison-fixture actor: the Qin officer the annals name in the cession and the annexation, with the two titles the entries use recorded separately.",
+      "content": {
+        "summary": "內史騰, the Qin officer the annals name as receiving Han's ceded 南陽 as acting governor in 231 BCE and as attacking Han and taking 韓王安 in 230 BCE. The hereditary house's parallel account names no officer, and the comprehensive mirror names him in the 230 BCE notice.",
+        "names": [
+          {
+            "form": "內史騰",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "primary",
+            "romanization": {
+              "value": "Neishi Teng",
+              "scheme": "pinyin",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:nei-shi-teng-name"
+          },
+          {
+            "form": "假守騰",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "alternate",
+            "claim_id": "lks:claim:nei-shi-teng-acting",
+            "note": "The 231 BCE notice's form: 發卒受地韓南陽假守騰 (the acting governor of the received land)."
+          }
+        ],
+        "actor_types": [
+          "person"
+        ],
+        "roles": [
+          {
+            "role": "official",
+            "validity": {
+              "source_expression": "十六年九月（假守騰）; 十七年（內史騰）",
+              "calendar": "chinese_lunisolar",
+              "precision": "year",
+              "mode": "duration",
+              "interval": {
+                "bounds": "two_sided",
+                "boundary": "inclusive",
+                "start": {
+                  "year": 231,
+                  "era": "bce"
+                },
+                "end": {
+                  "year": 230,
+                  "era": "bce"
+                }
+              }
+            },
+            "note": "The 231 notice calls him 假守 (acting governor) of the received 南陽; the 230 notice calls him 內史. The fixture treats the two notices as naming the same officer and records both titles."
+          },
+          {
+            "role": "soldier",
+            "validity": {
+              "source_expression": "十七年，內史騰攻韓",
+              "calendar": "chinese_lunisolar",
+              "precision": "year",
+              "mode": "occurrence_window",
+              "interval": {
+                "bounds": "two_sided",
+                "boundary": "inclusive",
+                "start": {
+                  "year": 230,
+                  "era": "bce"
+                },
+                "end": {
+                  "year": 230,
+                  "era": "bce"
+                }
+              }
+            },
+            "note": "The 230 BCE campaign the annals record him leading; the sources state no duration."
+          }
+        ],
+        "editorial_notes": "The 通鑑 transcription carries a text-critical correction of 勝 to 騰 in its 230 BCE notice; the fixture cites the main text and does not use the annotation as evidence. The identification of 假守騰 with 內史騰 is the histories' own sequence and is recorded as an editorial reading, not as a source statement."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:nei-shi-teng-name",
+          "statement": "The annals name 內史騰 as the officer who attacked Han and took 韓王安 in 十七年 (230 BCE), and the comprehensive mirror names him in the same notice.",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十七年（內史騰攻韓）"
+              },
+              "quoted_text": "內史騰攻韓，得韓王安，盡納其地，以其地為郡，命曰潁川。"
+            },
+            {
+              "source_id": "lks:source:zizhi-tongjian",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦紀一 始皇帝十七年（內史騰滅韓）"
+              },
+              "quoted_text": "虜韓王安，以其地置潁川郡。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nei-shi-teng-acting",
+          "statement": "The annals' 十六年 notice records that Qin sent troops to receive the land of Han's 南陽 and calls the officer 假守騰.",
+          "asserts": "/names/1",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十六年（假守騰）"
+              },
+              "quoted_text": "十六年九月，發卒受地韓南陽假守騰。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nei-shi-teng-office",
+          "statement": "The two notices record the officer receiving the ceded land in 231 BCE and attacking Han in 230 BCE.",
+          "asserts": "/roles/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十六年、十七年"
+              },
+              "quoted_text": "十六年九月，發卒受地韓南陽假守騰。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nei-shi-teng-campaign",
+          "statement": "The annals record 內史騰 leading the attack on Han in 十七年 (230 BCE).",
+          "asserts": "/roles/1",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十七年（內史騰攻韓）"
+              },
+              "quoted_text": "內史騰攻韓，得韓王安，盡納其地，以其地為郡，命曰潁川。"
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:cd97d7f1b1123000be2eb11788c36199ca31304ca4b67d286581c8dca65271c0"
+    },
+    {
+      "revision_id": "lks:rev:nei-shi-teng-2",
+      "created_at": "2026-09-25T05:00:00Z",
+      "author": {
+        "name": "Lekishi editorial preparation",
+        "role": "preparing editor (owner-instructed)"
+      },
+      "change_explanation": "Correction prepared after review: the name is cited to the annals alone, and the mirror's corrected reading is stated in the notes rather than used as evidence. The officer's office no longer carries a 231–230 BCE `duration`: the notices attest the title at two dates, not uninterrupted tenure, so the role keeps its note and no validity interval.",
+      "content": {
+        "summary": "內史騰, the Qin officer the annals name as receiving Han's ceded 南陽 as acting governor in 231 BCE and as attacking Han and taking 韓王安 in 230 BCE. The hereditary house's parallel account names no officer, and the comprehensive mirror records the capture and the commandery with a text-critical correction of the name.",
+        "names": [
+          {
+            "form": "內史騰",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "primary",
+            "romanization": {
+              "value": "Neishi Teng",
+              "scheme": "pinyin",
+              "origin": "editorial",
+              "pronunciation_claim": false
+            },
+            "claim_id": "lks:claim:nei-shi-teng-name"
+          },
+          {
+            "form": "假守騰",
+            "script": "Hani",
+            "language": "lzh",
+            "role": "alternate",
+            "claim_id": "lks:claim:nei-shi-teng-acting",
+            "note": "The 231 BCE notice's form: 發卒受地韓南陽假守騰 (the acting governor of the received land)."
+          }
+        ],
+        "actor_types": [
+          "person"
+        ],
+        "roles": [
+          {
+            "role": "official",
+            "note": "The 231 BCE notice calls him 假守 (acting governor) of the received 南陽; the 230 BCE notice calls him 內史. The fixture treats the two notices as naming the same officer, records both titles, and asserts no continuous tenure between the two notices."
+          },
+          {
+            "role": "soldier",
+            "validity": {
+              "source_expression": "十七年，內史騰攻韓",
+              "calendar": "chinese_lunisolar",
+              "precision": "year",
+              "mode": "occurrence_window",
+              "interval": {
+                "bounds": "two_sided",
+                "boundary": "inclusive",
+                "start": {
+                  "year": 230,
+                  "era": "bce"
+                },
+                "end": {
+                  "year": 230,
+                  "era": "bce"
+                }
+              }
+            },
+            "note": "The 230 BCE campaign the annals record him leading; the sources state no duration."
+          }
+        ],
+        "editorial_notes": "The comprehensive mirror's 230 BCE entry reads 內史〔騰〕(勝), with 騰 substituted from the annals in its own text-critical note; the chapter therefore attributes the name to the annals and cites the mirror only for the capture and the commandery. The identification of 假守騰 with 內史騰 is the histories' own sequence and is recorded as an editorial reading, not as a source statement. The office is recorded without a validity interval: the notices attest the title at two dates and state no continuous tenure."
+      },
+      "claims": [
+        {
+          "claim_id": "lks:claim:nei-shi-teng-name",
+          "statement": "The annals name 內史騰 as the officer who attacked Han and took 韓王安 in 十七年 (230 BCE).",
+          "asserts": "/names/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十七年（內史騰攻韓）"
+              },
+              "quoted_text": "內史騰攻韓，得韓王安，盡納其地，以其地為郡，命曰潁川。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nei-shi-teng-acting",
+          "statement": "The annals' 十六年 notice records that Qin sent troops to receive the land of Han's 南陽 and calls the officer 假守騰.",
+          "asserts": "/names/1",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十六年（假守騰）"
+              },
+              "quoted_text": "十六年九月，發卒受地韓南陽假守騰。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nei-shi-teng-office",
+          "statement": "The two notices record the officer receiving the ceded land in 231 BCE and attacking Han in 230 BCE.",
+          "asserts": "/roles/0",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十六年、十七年"
+              },
+              "quoted_text": "十六年九月，發卒受地韓南陽假守騰。"
+            }
+          ]
+        },
+        {
+          "claim_id": "lks:claim:nei-shi-teng-campaign",
+          "statement": "The annals record 內史騰 leading the attack on Han in 十七年 (230 BCE).",
+          "asserts": "/roles/1",
+          "basis": "attested",
+          "role": "main",
+          "citations": [
+            {
+              "source_id": "lks:source:shiji",
+              "locator": {
+                "kind": "entry",
+                "value": "卷六 秦始皇本紀 十七年（內史騰攻韓）"
+              },
+              "quoted_text": "內史騰攻韓，得韓王安，盡納其地，以其地為郡，命曰潁川。"
+            }
+          ]
+        }
+      ],
+      "revision_hash": "sha256:69c87dc8714a231085ecbcaf9f67c982eda9e2724ee6fcb0c4ccbf63ce0a3c9a"
+    }
+  ],
+  "publication": {
+    "published_revision_id": "lks:rev:nei-shi-teng-2",
+    "published_revision_hash": "sha256:69c87dc8714a231085ecbcaf9f67c982eda9e2724ee6fcb0c4ccbf63ce0a3c9a",
+    "set_id": "lks:set:qin-conquest-han-233-226-v1",
+    "published_at": "2026-09-25T21:30:00Z",
+    "published_by": {
+      "name": "Lekishi editorial preparation",
+      "role": "preparing editor (owner-instructed)"
+    }
+  }
+}

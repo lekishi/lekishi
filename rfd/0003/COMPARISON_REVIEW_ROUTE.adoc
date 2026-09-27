@@ -1,0 +1,395 @@
+:authors: Darwin D Wu <darwin67@users.noreply.github.com>
+:state: published
+:labels: architecture, content, static, comparison, qin, review, poc
+:date: 2026-09-25
+
+= RFD 3 comparison review route decision
+
+== Provenance and scope
+
+The bounded Qin comparison fixture
+(`historical/chapters/qin-conquest-han-233-226/`) was prepared and self-reviewed,
+and the internal review that followed found source-fidelity and wording
+corrections. The preparing editor may not approve content, so the corrections were
+first prepared as draft revisions, and the fixture stayed unapproved. The owner's
+instruction of 2026-09-25 was *"actually wait. wire it up first, and let me review
+again before approval"*: the corrected content had to become inspectable in the
+product, still unapproved, before any decision about it.
+
+This record is the dated decision that makes that possible. It supersedes the
+artifact rule of link:COMPARISON_FIXTURE_BOUNDARY.adoc[the comparison fixture
+boundary decision] — the fixture now ships as a prerendered review route instead
+of being kept out of the artifact — and it leaves that record's other decisions
+intact: the caller-supplied coverage window, the one projection, the comparison
+catalog as the browser-safe loader for non-production chapters, the approval gate
+over every chapter tree, and the fixture's `preparation snapshot` status. It does
+not supersede link:CONTENT_BOUNDARY.adoc[the chapter content boundary decision]:
+the atlas route still binds only the reviewed Tang chapter, and the projection's
+refusals are unchanged.
+
+== Decision
+
+* **The corrected revisions are what the fixture's preparation set publishes.**
+  The single set `lks:set:qin-conquest-han-233-226-v1` names the twelve corrected
+  revisions the internal review prepared, and each corrected record also keeps the
+  revision it replaced as unpublished history. Nothing is flattened and no
+  approval is recorded: the ledger row stays `preparation snapshot` with no owner
+  decision, and its digest is the corrected preparation.
+* **`/compare/qin` is a prerendered review route.** It loads the fixture through
+  `src/lib/atlas/chapter-catalog.ts` with the fixture's own coverage model and
+  mounts the same workspace the atlas route mounts, with
+  `detail="comparison-review"`. The route's load means a fixture that cannot be
+  projected fails `pnpm build` instead of rendering an empty page.
+* **The review surface says what the content is.** The route header carries the
+  badge `Unapproved preparation`, the prerendered shell states the review note
+  ("no release decision exists for this content, it is not a launch chapter, and
+  the atlas shows the corrected revisions the internal review prepared"), and the
+  workspace's notice reads `Unapproved preparation · Self-review only` instead of
+  `Reviewed chapter`. The wording lives in `src/lib/atlas/comparison.ts`, so the
+  page, its metadata, and its tests cannot describe the fixture differently.
+* **The workspace takes its chapter and its detail surface from its caller.**
+  `AtlasWorkspace` now receives `chapter` and an optional `detail`; the atlas
+  route passes the reviewed Tang chapter with the production surface, and the
+  comparison route passes the fixture with the review surface. The production
+  surface's rendering is unchanged — including its wording, its counts, and the
+  absence of the review-only dispute presentation — so approving the fixture
+  later cannot silently change the launch chapter.
+* **BCE years are printed as BCE years.** `yearLabel` and `windowLabel` in
+  `src/lib/atlas/labels.ts` turn the astronomical ordinal the domain computes with
+  into the historical year (`-232` is `233 BCE`), and a CE year prints exactly as
+  it did before, so the Tang chapter's labels do not change. The occurrence, the
+  window, the playhead, and the notice use it; the window inputs keep the ordinal
+  the domain edits and state the BCE year beside it.
+* **The published dispute is shown on the review surface.** The projection carries
+  a disputed record's summary and its conflicting or alternative claims, with
+  their cited locators, into the atlas domain, and refuses a record whose
+  challenging claims are not presented as a dispute. The review surface marks the
+  event in the list and shows the summary and the accounts in the details panel.
+  The production surface keeps its current presentation: visible uncertainty for
+  the launch chapter is an open RFD 4 AC2 part, and changing it is the owner's
+  decision, not this record's.
+* **The artifact rule becomes a review-page rule.**
+  `scripts/check-static-build.mjs` requires `build/compare/qin.html` to exist,
+  to carry exactly one mount point and the client entry, to state
+  `Unapproved preparation`, and to name the fixture and its 233–226 BCE window,
+  and it requires the built scripts to carry the fixture while `atlas.html` does
+  not. A fixture that stopped shipping, or one that leaked onto the production
+  page, fails the build.
+* **The development server serves the chapter tree.** The comparison catalog
+  loads chapter JSON with lazy `import.meta.glob`, so in development those files
+  are fetched over HTTP; `vite.config.ts` allows the workspace root for that
+  (`server.fs.allow`), and the production build bundles the same files into the
+  artifact and never reads them from disk at runtime.
+
+== Alternatives considered
+
+* **Keep the fixture out of the artifact and review it in a local-only harness.**
+  Rejected: the owner asked to review the corrected content in the product, and a
+  separate harness would be a second content path with its own rendering, which
+  is exactly what the chapter boundary exists to prevent.
+* **Render the corrected drafts without publishing them.** Rejected: the atlas
+  reads published revisions, and a route that projected unpublished drafts would
+  bypass the publication gate that keeps a set from existing without a decision.
+  Publishing them in the existing `preparation snapshot` set keeps the decision
+  class honest and the digest current.
+* **Show the dispute presentation on the production surface too.** Rejected for
+  now: it would change the approved launch chapter's rendered surface without an
+  owner decision. The shared component takes the detail surface as a prop so the
+  launch chapter can adopt it later.
+* **Bundle the fixture eagerly into the production boundary.** Rejected: the
+  atlas route stays bound to the reviewed Tang chapter, and the comparison route
+  keeps the catalog as its only path.
+* **Inline the fixture's records into the prerendered HTML.** Not needed: the
+  shell is prerendered from the load, so the page states the fixture's window and
+  status before any script runs, and the records ship in the route's own chunks.
+
+== Measured evidence
+
+Measured on 2026-09-25 in the pinned Nix environment.
+
+[cols="1,3",options="header"]
+|===
+|Check |Result
+
+|Full check
+|`pnpm verify` passes: format check, `svelte-check` 0 errors and 0 warnings,
+452 tests (451 passed, 1 skipped — the `pnpm seal` maintenance entry point), and
+the static build with its invariant.
+
+|Fixture, boundary, and route tests
+|`src/lib/historical/contract/qin-chapter.test.ts` (50 tests) pins the corrected
+revisions, their reviewed hashes, the superseded revisions' unpublished status,
+the absence of the flagged wording and of any approval, the fixture's scope, and
+the label anchors the owner asked for — their coordinates, their Wikidata
+citations, and the fact that no anchor asserts a historical coordinate.
+`src/lib/atlas/comparison.test.ts` (4 tests) pins the route's chapter, its window
+(cross-checked against the fixture's published story window), its unapproved
+wording, and the dispute it renders. `src/lib/atlas/projection.test.ts`
+(28 tests) covers the dispute projection and its refusals; `src/lib/atlas/labels.test.ts`
+covers the BCE year text. The gate's five suites total 121 tests.
+
+|Browser checks
+|`npx playwright test` against the built artifact (the file-only server, the same
+target a static host serves): 72 passed, 6 skipped in 22.5 minutes across the
+desktop, tablet-touch, and phone projects, plus a 12-check comparison-only run
+after the label anchors were added (12 passed in 5.2 minutes). The comparison
+suite's 4 checks run in each project — the unapproved status and BCE years, the
+display-anchor placements, the disputed account and its accounts, the unchanged
+Tang atlas, and the phone-width overlay geometry at 390 and 320 — and the atlas
+suite's existing checks still pass.
+
+|Build gate
+|`scripts/check-static-build.mjs` requires `compare/qin.html` (mount point,
+client entry, `Unapproved preparation`, the fixture's id and 233–226 BCE window),
+requires the fixture in the built scripts, and fails if `atlas.html` carries it.
+
+|Artifact
+|`pnpm build`: 450 files (was 410 before the review route), including the
+comparison route's HTML and its chunks; no server runtime; the atlas page still
+names the reviewed Tang chapter.
+
+|Production chapter
+|Unchanged: the atlas route passes the reviewed chapter with the default detail
+surface, its notice still reads `Reviewed chapter · Self-review only`, its event
+list still shows the same events, and its labels are the same text as before.
+|===
+
+=== Update — 2026-09-25: the fixture's label positions, and what places it
+
+The owner then reported that locations were missing where the records name them.
+The first response — anchors at the modern places that carry the names — was
+withdrawn on review, because a coordinate for a modern namesake is not evidence
+that the ancient place was there. The route now renders the positions that rest
+on cited identifications: 雲陽 and the 潁川 commandery carry label anchors based on
+讀史方輿紀要 (1692, now pinned to the fixture's set), the submission keeps its
+display placement at 新鄭, and 南陽 has no position because the entries state no
+extent or seat and the name covers two regions. The fixture therefore shows four
+of its five events, and the details surface states for the cession, in words,
+that the event has no position.
+
+This changes the measured evidence in the table above; it was measured before the
+label positions were reworked. Re-measured with this update:
+
+[cols="1,3",options="header"]
+|===
+|Check |Result
+
+|Full check
+|`pnpm verify` passes: format check, `svelte-check` 0 errors and 0 warnings, 462
+tests (461 passed, 1 skipped — the `pnpm seal` maintenance entry point), and the
+static build with its invariant (451 files). The counts are from the final run,
+after the second review round's corrections and the test-hardening round.
+
+|Fixture, boundary, and route tests
+|`src/lib/historical/contract/qin-chapter.test.ts` (59 tests) pins the inventory by
+identity, the corrected revisions and the label-position additions at their
+reviewed hashes, the superseded revisions' unpublished status, the ledger row and
+its digest for this set, the absence of the flagged wording and of any approval,
+the fixture's scope and exclusions (including an open endpoint and a span that
+would cover an excluded year), every anchor's cited identification and Wikidata
+coordinate, and the adversarial cases (a changed coordinate, a missing coordinate
+citation, a missing identification, an empty locator, a promoted anchor, a display
+anchor for 南陽). `src/lib/atlas/comparison.test.ts` (5 tests) pins the route's
+chapter, its loaded window, the production chapter it is not, the unapproved
+wording, the dispute, and the four placements it renders.
+
+|Browser checks
+|`e2e/comparison.spec.ts` re-run against the built artifact (12 passed, 4.8
+minutes across the desktop, tablet-touch, and phone projects, and re-run after
+the second review round's corrections): the unapproved
+status and BCE years, four label-anchor placements and one `南陽 · no sourced
+position` row, the notice's counts (1 of 5 in-window events, 1 of 4 places
+without a sourced map position), the disputed death account, the unchanged Tang
+atlas, and the phone-width overlay geometry at 390 and 320.
+|===
+
+=== Update — 2026-09-26: the details panel's bound, after the owner's review comment
+
+The owner's review comment on the served page asked why 南陽 has no sourced
+position. The answer was already in the record — the entries state no extent or
+seat, and the historical geography records the name for two regions — but at the
+owner's 820x634 viewport the details panel rendered past the bottom of the
+workspace, where nothing could scroll to it, so the explanation was the text that
+fell off. Two shared-surface fixes, no content change:
+
+* the details panel is now bounded by the overlay column (which already stops
+  above the time controls) and scrolls inside that bound, instead of taking a
+  fixed `100dvh` height and spilling past the viewport;
+* `e2e/comparison.spec.ts` gains a check that the panel stays inside the viewport
+  and clear of the time controls at 1440x900, 820x634, 390x844 and 320x640, and
+  that scrolling it reaches the record's own explanation. The overlay-geometry
+  check now covers those four sizes too, and the atlas phone-layout check's
+  budget was raised to 240 s for the software renderer.
+
+Re-measured after the change: `pnpm verify` passes (format, `svelte-check` 0
+errors and 0 warnings, 462 tests: 461 passed and 1 skipped, static build 451
+files); `e2e/comparison.spec.ts` 15 passed in 14.3 minutes across the desktop,
+tablet-touch, and phone projects, and `e2e/atlas.spec.ts -g "phone layout"`
+passes in 1.6 minutes.
+
+=== Update — 2026-09-27: the root page carries the review entry point, after the owner's report
+
+The owner's report on the served static review build was *"Why is this story not
+shown on the top page?"*: `/compare/qin` was reachable only by URL, so the review
+surface the owner had asked to inspect was undiscoverable from the site's root.
+The same review found the reviewed-chapter card stating two contradictory things
+— the set's preparation-time review notes, which say the owner's editorial
+approval under RFD 2 was still pending, and a paragraph recording that the
+approval was taken on 2026-09-25. Both are corrected on the root page:
+
+* the root page gains a **Comparison chapter** card that links `/compare/qin`,
+  names the fixture (`COMPARISON_TITLE`, cross-checked against the loaded
+  chapter's title), shows its 233–226 BCE window in BCE years, and states the
+  route's own review wording — `Unapproved preparation` and `self-review only` —
+  through `src/lib/atlas/comparison.ts`, so the entry point, the route, and their
+  tests cannot describe the fixture differently;
+* the card is subordinate to the reviewed chapter and the atlas call to action:
+  the Tang CTA still comes first, and the card states that no release decision
+  exists, that the fixture is not a launch chapter, and that no route, territory,
+  or historical coordinate is shown for its events. This supersedes the earlier
+  consequence that the fixture is "not linked from the production surfaces":
+  being discoverable now serves the owner's review, and the label is what keeps
+  discoverability from reading as release. No ledger state changed — the row is
+  still a `preparation snapshot` with no owner decision;
+* the reviewed-chapter card now states the decision in the order a reader needs:
+  the set's own review block (preparing-editor self-review), then the owner's
+  editorial approval recorded on 2026-09-25 against the set's canonical digest,
+  then the set's preparation-time notes explicitly framed as written before that
+  decision. The notes stay byte-identical because the set is frozen by the digest
+  the decision was taken on — the page explains the staleness instead of letting
+  it stand as the current state. The wording lives in
+  `src/lib/atlas/release.ts`, and `src/lib/atlas/release.test.ts` reads the ledger
+  and the set: the page cannot state an approval date the Tang row does not
+  record, or describe the approved set as reviewed beyond its `self_review`;
+* the artifact rule grows three root-page markers: `scripts/check-static-build.mjs`
+  requires `index.html` to link `/compare/qin`, to state `Unapproved preparation`,
+  and to state the recorded Tang approval, so a deploy cannot drop the label, the
+  entry point, or the decision;
+* the root page's own copy contract is covered by `src/routes/page.test.ts`
+  (mounted in jsdom), and `e2e/comparison.spec.ts` gains a browser check that the
+  card is discoverable, labelled as unapproved, subordinate to the atlas CTA,
+  clickable through to the route, and free of horizontal overflow at 1440x900,
+  820x634, 390x844 and 320x640;
+* the owner's follow-up review comment on the shipped card asked *"what does a
+  comparison review mean? isn't it just another chapter?"*. The card is titled
+  **Comparison chapter** and now says in one sentence what the chapter is: a
+  bounded second chapter on the same contract, prepared as the second scenario for
+  the shared comparison of map treatments, which is still to be built — so the
+  card itself answers what the fixture is for, while `Unapproved preparation ·
+  self-review only`, the route's review note, and the ledger row keep it
+  unapproved and unreleased. `src/routes/page.test.ts` and the browser check pin
+  the sentence.
+
+Measured evidence for this update:
+
+[cols="1,3",options="header"]
+|===
+|Check |Result
+
+|Full check
+|`pnpm verify` passes: format check clean, `svelte-check` 0 errors and 0 warnings,
+468 tests (467 passed, 1 skipped — the `pnpm seal` maintenance entry point), and
+the static build with its invariant (452 files, up one file from 451: the root
+page now imports the fixture's review wording through
+`src/lib/atlas/comparison.ts`, so the bundler emits a small shared chunk for it
+instead of inlining it in each route).
+
+|Root page and fixture tests
+|`src/routes/page.test.ts` (3 tests) mounts the prerendered root page in jsdom and
+pins the comparison entry point's label, link, and purpose sentence, the atlas
+CTA's precedence in document order, and the order of the recorded approval, its
+framing, and the set's preparation-time notes. `src/lib/atlas/release.test.ts`
+(2 tests) reads the RFD 2 ledger and the Tang set: the date the page states is the
+date the Tang row records, and the page does not describe the set as reviewed
+beyond its `self_review`. `src/lib/atlas/comparison.test.ts` gains the title
+cross-check between the entry point and the loaded chapter.
+
+|Browser checks
+|`e2e/comparison.spec.ts` against the built artifact: 18 passed in 16.2 minutes
+across the desktop, tablet-touch, and phone projects. The root-page check covers
+the card's name and `Unapproved preparation · self-review only` label, its
+precedence behind the atlas CTA, the click-through to `/compare/qin`, and no
+horizontal overflow at 1440x900, 820x634, 390x844 and 320x640; the existing
+fixture checks and the unchanged Tang atlas check still pass.
+
+|Rendered inspection
+|Screenshots of the root page at 1440x900, 820x634, 390x844 and 320x640 inspected
+under `.amp/in/artifacts/` (home-comparison-card-desktop.png,
+home-comparison-card-820.png, home-comparison-card-phone.png,
+home-comparison-card-320.png): the atlas CTA stays the page's primary action, the
+review card is fully visible and labelled, the quoted preparation-time notes read
+as history behind their framing, and no layout overlaps or clipped text appear.
+|===
+
+=== Supersession — 2026-09-27: the user-facing framing of the update above
+
+The owner reviewed the served page again and rejected the framing the update
+above describes: *"you're not getting it. I'm not asking if that's the appropriate
+copy (obviously not in my eyes), but why would a user look at this and even care
+about it? it's just another chapter. comparing it or not is our problem not a user
+looking at this page. also I don't think it needs to show reviewed chapter
+anymore, and provide a name for each chapter instead"*.
+
+That supersedes the user-facing parts of the update above — the `Comparison
+chapter` card, its stated purpose as the comparison's second scenario, its
+subordination to a `Reviewed chapter` card, and the review-category labels on the
+atlas surface. link:CHAPTER_PRESENTATION.adoc[The chapter presentation decision]
+records what replaced them. What still stands from this record, unchanged: the
+route exists and renders the chapter through the comparison catalog; its page
+states `Unapproved preparation` and the review note; the ledger row is still a
+`preparation snapshot` with no owner decision; the workspace still takes its
+chapter and detail surface from its caller; and the artifact still requires the
+page while forbidding the chapter on the production atlas page.
+
+== Consequences
+
+* The owner can review the corrected fixture in the product at `/compare/qin`,
+  with the atlas's own BCE labels and the published dispute, while the ledger
+  still records no decision on the content.
+* The fixture now ships in the artifact. That is a deliberate, reviewed change:
+  it is unapproved content reachable at a URL, clearly labelled as such, and not
+  linked from the atlas surface (the root page now carries its review entry
+  point, superseding the earlier "not linked from the production surfaces" on
+  2026-09-27 — see the update above).
+* The comparison harness has a first piece. Its remaining work — the shared
+  baseline, the measured treatment comparison, and any additional comparison
+  chapters — builds on this route rather than on a second rendering path.
+* The workspace's overlay column now derives its bottom offset from the time
+  controls' measured height, so a chapter whose labels are taller (a BCE window)
+  cannot push the event list over the controls.
+
+== Limitations recorded
+
+* The content is **not approved**. The ledger row is a `preparation snapshot`,
+  the set records the preparing editor's `self_review` only, the optional
+  specialist reviews remain unperformed, and the locators still rest on
+  unproofread Wikisource transcriptions that a critical edition must settle
+  before any content freeze.
+* The review route is not a launch chapter and not a release: RFD 4's AC2 does
+  not apply to the fixture, and the treatment comparison does not start before
+  Gate 2.
+* The production surface does not show disputes yet, so the launch chapter's
+  visible-uncertainty part of AC2 stays open.
+* Every map position the fixture shows is a label anchor or display placement,
+  not a historical coordinate: the anchors mark modern places that carry the
+  names, and no site, extent, or seat is asserted. A gazetteer identification
+  would replace an anchor with an asserted placement.
+* The BCE labels are the atlas's own year text, not a calendar conversion: the
+  contract's own `source_expression` remains the record's date as written, and
+  the atlas does not translate between calendars.
+* Shipping the fixture means the artifact carries unreleased preparation
+  content. If the owner decides against the fixture, the route and the fixture's
+  membership in the artifact are removed together, and the ledger row is retired
+  with them.
+
+== Verification performed for this document
+
+* Ran `pnpm verify` (format, `svelte-check`, tests, build) and inspected the
+  artifact: 450 files, no server runtime, `atlas.html` names the reviewed
+  chapter and carries no fixture id.
+* Ran the browser checks against the built artifact in all three projects
+  (`npx playwright test`, 72 passed and 6 skipped in 22.2 minutes), which include
+  the comparison route's unapproved status, BCE labels, dispute presentation, the
+  unchanged Tang atlas, and the phone-width overlay geometry at 390 and 320.
+* Rendered the route in a browser at desktop and phone widths and inspected the
+  screenshots (saved under `.amp/in/artifacts/` for the owner's review).

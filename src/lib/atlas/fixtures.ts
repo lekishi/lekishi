@@ -69,6 +69,7 @@ export const FIXTURE_CHAPTER: Chapter = {
         sourceExpression: null,
       },
       note: "Synthetic event used to check selection, details, and camera following.",
+      dispute: null,
       coda: false,
     },
     {
@@ -90,6 +91,7 @@ export const FIXTURE_CHAPTER: Chapter = {
         sourceExpression: null,
       },
       note: "Synthetic uncertain occurrence used to check bounded spans and playhead activity.",
+      dispute: null,
       coda: false,
     },
     {
@@ -111,6 +113,7 @@ export const FIXTURE_CHAPTER: Chapter = {
         sourceExpression: null,
       },
       note: "Synthetic decade-precision span used to check possible-match filtering.",
+      dispute: null,
       coda: false,
     },
     {
@@ -130,6 +133,7 @@ export const FIXTURE_CHAPTER: Chapter = {
         sourceExpression: null,
       },
       note: "Synthetic event with no published position, used to check list-only events.",
+      dispute: null,
       coda: false,
     },
     {
@@ -151,6 +155,7 @@ export const FIXTURE_CHAPTER: Chapter = {
         sourceExpression: null,
       },
       note: "Synthetic occurrence that starts inside the default window and ends beyond it.",
+      dispute: null,
       coda: false,
     },
   ],

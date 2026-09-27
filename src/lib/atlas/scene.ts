@@ -1,4 +1,4 @@
-import type { Chapter, EventPlacement, GeoPoint, Occurrence } from "./domain"
+import type { Chapter, EventDispute, EventPlacement, GeoPoint, Occurrence } from "./domain"
 import type { AtlasState, CameraFocusRequest } from "./state"
 import { findEvent, playbackState, selectionTimeStatus } from "./state"
 import { relationToWindow, type OccurrenceRelation, type PlaybackState } from "./time"
@@ -20,6 +20,8 @@ export type SceneEvent = {
   readonly title: string
   readonly placement: EventPlacement
   readonly occurrence: Occurrence
+  /** The published dispute, or null; the list and details surfaces show it verbatim. */
+  readonly dispute: EventDispute | null
   /** `definite` or `possible` inside the window; outside-window events are excluded. */
   readonly relation: Exclude<OccurrenceRelation, "outside">
   /** `active` at the playhead, `possible` for an uncertain occurrence window, or `inactive`. */
@@ -64,6 +66,7 @@ export function buildScene(state: AtlasState, chapter: Chapter): AtlasScene {
       title: event.title,
       placement: event.placement,
       occurrence: event.occurrence,
+      dispute: event.dispute,
       relation,
       playback: playbackState(state, event),
       selected: state.selectedEventId === event.id,

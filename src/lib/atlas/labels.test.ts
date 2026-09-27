@@ -7,6 +7,8 @@ import {
   placementLabel,
   reviewLabel,
   unplacedNote,
+  windowLabel,
+  yearLabel,
 } from "./labels"
 
 /**
@@ -134,5 +136,39 @@ describe("reviewLabel", () => {
     expect(reviewLabel("independent_review", "A reviewer")).toBe(
       "Independent review recorded by A reviewer.",
     )
+  })
+})
+
+describe("the atlas's year text", () => {
+  it("prints BCE years as BCE years and CE years as the plain number", () => {
+    expect(yearLabel(-232)).toBe("233 BCE")
+    expect(yearLabel(0)).toBe("1 BCE")
+    expect(yearLabel(-1)).toBe("2 BCE")
+    expect(yearLabel(750)).toBe("750")
+    expect(windowLabel({ start: -232, end: -225 })).toBe("233 BCE–226 BCE")
+    expect(windowLabel({ start: 750, end: 754 })).toBe("750–754")
+    expect(windowLabel({ start: 750, end: 750 })).toBe("750")
+  })
+
+  it("uses the BCE year in an occurrence and leaves a CE occurrence unchanged", () => {
+    expect(
+      occurrenceLabel({
+        startYear: -232,
+        endYear: -232,
+        precision: "year",
+        mode: "occurrence_window",
+        sourceExpression: "十四年（史記・秦始皇本紀）",
+      }),
+    ).toBe("233 BCE · year precision · uncertain span")
+
+    expect(
+      occurrenceLabel({
+        startYear: 750,
+        endYear: 750,
+        precision: "year",
+        mode: "instant",
+        sourceExpression: null,
+      }),
+    ).toBe("750")
   })
 })

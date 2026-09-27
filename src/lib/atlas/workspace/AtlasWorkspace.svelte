@@ -1,6 +1,8 @@
 <script lang="ts">
-  import { CHAPTER } from "../chapter-content"
-  import { reviewSummaryLabel } from "../labels"
+  import { untrack } from "svelte"
+  import type { Chapter } from "../domain"
+  import { COMPARISON_REVIEW } from "../comparison"
+  import { reviewSummaryLabel, windowLabel } from "../labels"
   import { buildScene } from "../scene"
   import * as atlas from "../state"
   import type { AtlasState } from "../state"
@@ -9,30 +11,99 @@
   import SelectionPanel from "./SelectionPanel.svelte"
   import TimeControls from "./TimeControls.svelte"
 
+  /**
+   * The workspace renders whichever chapter its caller mounts it with: the
+   * production atlas passes the reviewed Tang chapter, and the comparison review
+   * route passes the bounded Qin fixture. The chapter is data, not a branch in
+   * this component; `detail` only decides whether the review-only dispute
+   * presentation is shown, because the approved launch chapter's surface must not
+   * change without an owner decision.
+   *
+   * `name` is the chapter's display name. The caller supplies it because the
+   * name a reader sees is product presentation (`chapters.ts`), while the
+   * workspace stays chapter-agnostic and falls back to the chapter's own
+   * published title for a chapter that has no card.
+   */
+  let {
+    chapter,
+    detail = "production",
+    name = chapter.title,
+  }: { chapter: Chapter; detail?: "production" | "comparison-review"; name?: string } = $props()
+
   // This component is the single owner of atlas interaction state. Everything
   // below reads from `atlasState` and dispatches actions; the renderer only
   // receives the derived scene, so selection, time, and camera-follow can never
   // diverge. The variable is not named `state`: svelte-check then reads `$state`
   // as a Svelte 4 store subscription instead of the rune, and the runes-mode
   // component stops type-checking.
-  let atlasState: AtlasState = $state.raw(atlas.createAtlasState(CHAPTER))
+  // `untrack` is deliberate: the workspace is mounted once per page for one
+  // chapter, so the initial state is created from the chapter as mounted rather
+  // than re-created when a caller passes a new prop value.
+  let atlasState: AtlasState = $state.raw(untrack(() => atlas.createAtlasState(chapter)))
   let rendererError = $state<string | null>(null)
   let listOpen = $state(false)
 
-  const scene = $derived(buildScene(atlasState, CHAPTER))
-  const selectedEvent = $derived(atlas.findEvent(CHAPTER, atlasState.selectedEventId))
-  const selectionStatus = $derived(atlas.selectionTimeStatus(atlasState, CHAPTER))
+  // The overlay column must clear the time controls, whose height depends on the
+  // viewport and on the chapter's own labels (a BCE window's year text is taller
+  // than a CE window's). The controls' measured height drives the column's
+  // bottom offset, so the two panels can never overlap; 120 is the height the
+  // fixed 9rem offset assumed, kept as the first-paint fallback. The measurement
+  // follows the element's own size — a resize observer catches both a viewport
+  // change and a label change (an edited window crossing into BCE years, say) —
+  // with a guard so the component tests' DOM, which has no layout, still mounts.
+  let controlsElement: HTMLDivElement | undefined = $state()
+  let controlsHeight = $state(120)
+
+  $effect(() => {
+    const element = controlsElement
+
+    if (element === undefined) {
+      return
+    }
+
+    const measure = () => {
+      controlsHeight = element.clientHeight
+    }
+
+    measure()
+
+    if (typeof ResizeObserver === "undefined") {
+      return
+    }
+
+    const observer = new ResizeObserver(measure)
+
+    observer.observe(element)
+
+    return () => observer.disconnect()
+  })
+
+  const scene = $derived(buildScene(atlasState, chapter))
+  const selectedEvent = $derived(atlas.findEvent(chapter, atlasState.selectedEventId))
+  const selectionStatus = $derived(atlas.selectionTimeStatus(atlasState, chapter))
   const playing = $derived(atlasState.playing)
+  const showDisputeDetail = $derived(detail === "comparison-review")
 
   // What the chapter's own publication states, counted rather than claimed: the
   // notice panel has to stay true when the content changes.
-  const review = CHAPTER.publication
-  const inWindowEvents = $derived(CHAPTER.events.filter((event) => !event.coda))
-  const codaEvents = $derived(CHAPTER.events.length - inWindowEvents.length)
+  const review = $derived(chapter.publication)
+  const inWindowEvents = $derived(chapter.events.filter((event) => !event.coda))
+  const codaEvents = $derived(chapter.events.length - inWindowEvents.length)
   const unplacedInWindow = $derived(
     inWindowEvents.filter((event) => event.placement.kind === "none").length,
   )
-  const unlocatedPlaces = $derived(CHAPTER.places.filter((place) => place.position === null).length)
+  const unlocatedPlaces = $derived(chapter.places.filter((place) => place.position === null).length)
+
+  // The notice states the content's editorial status in the atlas's own words.
+  // The production surface states only the review independence the chapter's
+  // publication records; the review surface states the fixture's unapproved
+  // preparation as well. Either way the label is status metadata beside the
+  // chapter's name — it is not the chapter's name or its identity.
+  const noticeLabel = $derived(
+    detail === "comparison-review"
+      ? `${COMPARISON_REVIEW.label} · ${reviewSummaryLabel(review.independence)}`
+      : reviewSummaryLabel(review.independence),
+  )
 
   // The workspace owns the playback clock; the renderer never advances time.
   $effect(() => {
@@ -43,7 +114,7 @@
     let previous = performance.now()
     const timer = setInterval(() => {
       const now = performance.now()
-      atlasState = atlas.advancePlayhead(atlasState, CHAPTER, now - previous)
+      atlasState = atlas.advancePlayhead(atlasState, chapter, now - previous)
       previous = now
     }, 100)
 
@@ -51,7 +122,7 @@
   })
 
   function selectEvent(eventId: string | null) {
-    atlasState = atlas.selectEvent(atlasState, CHAPTER, eventId)
+    atlasState = atlas.selectEvent(atlasState, chapter, eventId)
     listOpen = false
   }
 </script>
@@ -62,7 +133,7 @@
 >
   <Globe
     {scene}
-    label="Atlas globe · {CHAPTER.title}"
+    label="Atlas globe · {name}"
     onSelectEvent={selectEvent}
     onManualCameraInput={() => (atlasState = atlas.noteManualCameraInput(atlasState))}
     onError={(error) => (rendererError = error.message)}
@@ -91,16 +162,19 @@
     shrinks to fit it, so a long window scrolls inside the panel instead of
     running under the controls.
   -->
-  <div class="pointer-events-none absolute inset-x-3 bottom-36 top-3 z-20 flex flex-col gap-2">
+  <div
+    class="pointer-events-none absolute inset-x-3 top-3 z-20 flex flex-col gap-2"
+    style="bottom: {controlsHeight + 24}px"
+  >
     <div class="flex shrink-0 flex-wrap items-start justify-between gap-2">
       <div
         id="atlas-notice"
         class="max-h-[45dvh] w-full min-w-0 overflow-y-auto rounded-xl border border-amber-300/40 bg-slate-950/85 px-3 py-2 backdrop-blur sm:w-auto sm:max-w-[19rem]"
       >
         <p class="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-amber-300">
-          Reviewed chapter · {reviewSummaryLabel(review.independence)}
+          {noticeLabel}
         </p>
-        <p class="mt-0.5 text-xs font-semibold leading-snug text-slate-100">{CHAPTER.title}</p>
+        <p class="mt-0.5 text-xs font-semibold leading-snug text-slate-100">{name}</p>
         <!--
           The chapter's own coverage statement is the full statement of what this
           chapter does and does not cover. Phone widths keep the derived counts
@@ -110,9 +184,9 @@
           {review.coverageNote}
         </p>
         <p class="mt-1 text-[0.65rem] leading-snug text-amber-200/80">
-          {CHAPTER.defaultWindow.start}–{CHAPTER.defaultWindow.end} with {codaEvents} coda
+          {windowLabel(chapter.defaultWindow)} with {codaEvents} coda
           {codaEvents === 1 ? "node" : "nodes"} outside it; {unplacedInWindow} of {inWindowEvents.length}
-          in-window events and {unlocatedPlaces} of {CHAPTER.places.length} places without a sourced map
+          in-window events and {unlocatedPlaces} of {chapter.places.length} places without a sourced map
           position.
         </p>
       </div>
@@ -129,7 +203,7 @@
             (atlasState =
               atlasState.cameraFollow === "following"
                 ? atlas.noteManualCameraInput(atlasState)
-                : atlas.resumeCameraFollow(atlasState, CHAPTER))}
+                : atlas.resumeCameraFollow(atlasState, chapter))}
           class={[
             "pointer-events-auto rounded-xl border px-3 py-2 text-xs font-semibold backdrop-blur transition",
             "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300",
@@ -164,33 +238,47 @@
       <EventList
         events={scene.events}
         selectedEventId={atlasState.selectedEventId}
+        disputeDetail={showDisputeDetail}
         onSelect={selectEvent}
       />
     </div>
 
     {#if selectedEvent}
+      <!--
+        The details panel is bounded by the space the overlay column actually has
+        and scrolls inside that bound. The column already stops above the time
+        controls (`bottom: controlsHeight + 24`), so taking the bound from the
+        column rather than from a fixed `100dvh` calculation keeps a long summary
+        from rendering under the controls or past the bottom of the workspace,
+        where the page cannot scroll to it: the record's own explanation of why an
+        event has no position was the text that fell off.
+      -->
       <div
-        class="mt-auto min-h-0 max-h-[60%] md:absolute md:right-0 md:top-[5.25rem] md:mt-0 md:max-h-[calc(100dvh-14rem)] md:w-96"
+        class="mt-auto flex min-h-0 max-h-[60%] flex-col overflow-hidden md:absolute md:right-0 md:top-[5.25rem] md:mt-0 md:max-h-[calc(100%-5.25rem)] md:w-96"
       >
         <SelectionPanel
           event={selectedEvent}
           status={selectionStatus}
           review={{ independence: review.independence, reviewer: review.reviewer }}
-          onReturnToTime={() => (atlasState = atlas.returnToEventTime(atlasState, CHAPTER))}
+          disputeDetail={showDisputeDetail}
+          onReturnToTime={() => (atlasState = atlas.returnToEventTime(atlasState, chapter))}
           onClose={() => selectEvent(null)}
         />
       </div>
     {/if}
   </div>
 
-  <div class="pointer-events-none absolute inset-x-3 bottom-3 z-20 flex justify-center">
+  <div
+    class="pointer-events-none absolute inset-x-3 bottom-3 z-20 flex justify-center"
+    bind:this={controlsElement}
+  >
     <TimeControls
       timeWindow={atlasState.timeWindow}
       playhead={atlasState.playhead}
       playing={atlasState.playing}
-      onWindowChange={(window) => (atlasState = atlas.setTimeWindow(atlasState, CHAPTER, window))}
-      onPlayheadChange={(year) => (atlasState = atlas.setPlayhead(atlasState, CHAPTER, year))}
-      onStep={(direction) => (atlasState = atlas.stepPlayhead(atlasState, CHAPTER, direction))}
+      onWindowChange={(window) => (atlasState = atlas.setTimeWindow(atlasState, chapter, window))}
+      onPlayheadChange={(year) => (atlasState = atlas.setPlayhead(atlasState, chapter, year))}
+      onStep={(direction) => (atlasState = atlas.stepPlayhead(atlasState, chapter, direction))}
       onTogglePlaying={() => (atlasState = atlas.setPlaying(atlasState, !atlasState.playing))}
     />
   </div>

@@ -32,8 +32,10 @@ const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".."
 
 const gate = [
   "src/lib/historical/contract/tang-chapter.test.ts",
+  "src/lib/historical/contract/qin-chapter.test.ts",
   "src/lib/historical/contract/publication-approval.test.ts",
   "src/lib/atlas/projection.test.ts",
+  "src/lib/atlas/chapter-catalog.test.ts",
 ]
 
 const result = spawnSync(
@@ -50,7 +52,7 @@ if (result.error !== undefined) {
 
 if (result.status !== 0) {
   console.error("")
-  console.error("The reviewed chapter did not pass its own contract and projection tests.")
+  console.error("A reviewed chapter did not pass its own contract and projection tests.")
   console.error(
     "Refusing to build: the artifact must not ship content that review did not approve.",
   )

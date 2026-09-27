@@ -33,6 +33,9 @@ historical/chapters/
     records/                    the chapter's places, actors, events, relationships, story
     sources/                    the cited works and datasets, with reuse terms
     publication-sets/           the set that publishes the chapter and pins its sources
+  qin-conquest-han-233-226/  the bounded Qin comparison fixture (see its README)
+    records/ sources/ publication-sets/   the same tree shape, prepared as a
+                              comparison-only snapshot rather than a launch chapter
 ```
 
 The contract version string is `lekishi-historical-contract/v0`. Every document
@@ -49,7 +52,27 @@ tree shape and is loaded through the content boundary in
 `src/lib/historical/chapter.ts`, which hands it to the contract's own
 `Publication.checkAll`. The first chapter is
 `historical/chapters/tang-mission-750-754/`; its README records the coverage
-model, the inventory, the evidence, and the review status.
+model, the inventory, the evidence, and the review status. The bounded Qin
+comparison fixture is `historical/chapters/qin-conquest-han-233-226/`: it is
+source-checked content in the same contract, recorded as a preparation snapshot
+rather than a release, loadable through the browser-safe comparison catalog
+(`src/lib/atlas/chapter-catalog.ts`) and deliberately not rendered by the
+production atlas. Its single preparation set publishes the twelve corrected
+revisions the internal review prepared, which the owner asked to review before
+deciding, and the label positions that followed the owner's report that locations
+were missing where the records name them: label anchors for the death place and
+the annexed commandery, each resting on a cited identification, and a display
+placement for the submission. 南陽 keeps unknown geometry because the entries
+state no extent or seat and the name covers two regions, so it has no position.
+The comparison review route `/compare/qin` renders all of this while stating that
+the content is unapproved preparation, and every map position is a label anchor
+that asserts no historical coordinate. No owner decision is recorded, and the
+atlas route still renders only the Tang chapter.
+
+The publication approval gate covers every chapter tree: a set that
+`rfd/0002/PUBLICATION_APPROVAL.adoc` does not name fails the build, and the
+Tang chapter's set carries the owner's recorded release approval while the
+comparison fixture's set carries preparation self-review only.
 
 ## Validate
 
@@ -61,8 +84,9 @@ The suite validates the examples as one content tree, runs every vector (187
 cases across `time`, `ordering`, `names`, `geometry`, `documents`, and
 `publication`), checks that every code and caveat the vectors expect is
 documented by the reference semantics, and validates the reviewed Tang chapter
-with its own coverage, coda, and exclusion checks. `pnpm verify` runs the full
-check.
+with its own coverage, coda, and exclusion checks. The Qin comparison fixture
+has its own suite with scope, exclusion, uncertainty, dispute, geometry, and
+comparison-loadability checks. `pnpm verify` runs the full check.
 
 ## Reseal synthetic examples after editing them
 

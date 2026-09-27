@@ -1,0 +1,178 @@
+:authors: Darwin D Wu <darwin67@users.noreply.github.com>
+:state: published
+:labels: architecture, content, static, comparison, qin, poc
+:date: 2026-09-25
+
+= RFD 3 comparison fixture boundary decision
+
+== Provenance and scope
+
+Wave 2's second content item is the bounded Qin comparison fixture, authorized
+by the owner on 2026-09-25 ("Approve 1. Proceed with 2"). The fixture is
+prepared, source-checked content
+(`historical/chapters/qin-conquest-han-233-226/`), and RFD 4 keeps Qin a bounded
+comparison fixture rather than a launch chapter: the production atlas must keep
+rendering only the Tang chapter while the fixture stays loadable for the later
+shared treatment harness. This record is the dated decision that makes both
+possible without a second content path: it generalizes the chapter content
+boundary and records where the comparison fixture sits in the artifact.
+
+It does not supersede link:CONTENT_BOUNDARY.adoc[the chapter content boundary
+decision]. That record's rules for the Tang chapter still hold: one projection,
+one browser-safe path into the app, the same refusals (no invented position,
+year, or route), and the same build gates. This record changes two things that
+record fixed in code: the primary window is now supplied by the caller instead
+of being a module constant inside `projection.ts`, and chapters other than the
+production chapter load through a catalog that is deliberately not in the
+production bundle. CONTENT_BOUNDARY's statement that the owner's editorial
+approval was still pending is superseded by the owner's 2026-09-25 approval
+recorded in link:../0002/PUBLICATION_APPROVAL.adoc[the publication approval
+gate]; the rest of that record remains readable and unchanged.
+
+NOTE: This record's artifact rule — that the fixture's ids must not reach the
+release artifact — is **superseded** by
+link:COMPARISON_REVIEW_ROUTE.adoc[the comparison review route decision]
+(2026-09-25). The owner asked to review the corrected content in the product
+before deciding on it, so the fixture now ships as the prerendered review route
+`/compare/qin`, which states that it is unapproved preparation, and
+`scripts/check-static-build.mjs` requires that page instead of forbidding the
+fixture's ids. Everything else here still holds: the caller-supplied coverage
+window, the one projection, the catalog as the browser-safe loader for
+non-production chapters, the gate over every chapter tree, and the fixture's
+`preparation snapshot` status. The measured evidence below records the state as
+of this decision and stays readable as what was measured then.
+
+== Decision
+
+* **The projection takes the chapter's coverage model from its caller.**
+  `projectChapter` receives a `ChapterCoverage` (the inclusive window the atlas
+  opens in, in the astronomical ordinals the contract's normalized endpoints
+  use). The production boundary names the Tang chapter's 750–754 window; the
+  comparison catalog names the fixture's 233–226 BCE window. No chapter branch
+  and no chapter registry lives in the projection, so it stays a pure function
+  of documents, sets, and the coverage its caller owns.
+* **`src/lib/atlas/chapter-content.ts` keeps binding exactly one chapter
+  eagerly**, the reviewed Tang chapter, and stays the only content path the atlas
+  route imports. It exports `projectChapterContent`, the throwing boundary, so
+  the comparison path crosses the same projection.
+* **`src/lib/atlas/chapter-catalog.ts` is the browser-safe loader for
+  non-production chapters.** It lazy-loads a chapter's records, sources, and
+  publication sets from `historical/chapters/*` and projects them through
+  `projectChapterContent` with the caller's coverage. No route imports it, so
+  Vite leaves it and its chunks out of the release artifact, and
+  `scripts/check-static-build.mjs` fails the build if the fixture's chapter or
+  record ids ever reach the artifact. Shipping the comparison harness is
+  therefore a deliberate later change rather than an accident.
+* **The publication approval gate reads every chapter tree.** `listChapters`
+  feeds the gate in `src/lib/historical/contract/publication-approval.test.ts`,
+  so a new chapter directory cannot appear with a set the ledger in
+  link:../0002/PUBLICATION_APPROVAL.adoc[the publication approval gate] does not
+  name. The Tang set carries the owner's approval; the fixture's set is recorded
+  as a `preparation snapshot` with the preparing editor's self-review.
+
+== Alternatives considered
+
+* **A hand-written atlas fixture for Qin.** Rejected: it duplicates content the
+  contract validates and would drift from it — the same reason CONTENT_BOUNDARY
+  rejected a second fixture for Tang.
+* **An eager glob over every chapter in the production boundary.** Rejected: it
+  would bundle the comparison fixture into the release artifact, shipping
+  unreleased preparation content as if it were part of the site.
+* **A chapter registry inside `projection.ts`.** Rejected: the coverage model is
+  a chapter decision, and a registry would put it in the projection's code
+  instead of in the caller that owns the chapter.
+* **Rendering the fixture at a second route now.** Rejected: RFD 4 keeps Qin a
+  bounded comparison fixture rather than a launch chapter, and the treatment
+  comparison does not start before Gate 2.
+
+== Measured evidence
+
+Measured on 2026-09-25 in the pinned Nix environment.
+
+[cols="1,3",options="header"]
+|===
+|Check |Result
+
+|Full check
+|`pnpm verify` passes: format check, `svelte-check`, 432 tests (431 passed, 1
+skipped — the `pnpm seal` maintenance entry point), and the static build with its
+invariant.
+
+|Fixture and boundary tests
+|`src/lib/historical/contract/qin-chapter.test.ts` (45 tests) validates the
+fixture with the contract's own `Publication.checkAll` and pins its scope,
+exclusions, uncertainty, dispute, geometry, comparison loadability, and the
+twelve unpublished correction drafts, including each draft's reviewed sealed
+hash. `src/lib/atlas/chapter-catalog.test.ts` (3 tests)
+loads the fixture through Vite's browser module graph and pins that the
+production chapter is untouched and that an unknown chapter fails. The gate's
+five suites total 112 tests; with the bundled-content suite the chapter and
+boundary suites total 115.
+
+|Build gate
+|`scripts/check-chapter.mjs` now runs the Tang chapter test, the Qin fixture
+test, the publication approval gate, the projection suite, and the catalog suite
+before Vite. An invalid fixture, an uncovered set, or an edited approved set
+fails `pnpm build`.
+
+|Artifact
+|`pnpm build`: 410 files, 12 MB, unchanged from the Tang boundary measurement.
+The fixture's chapter id and record ids appear nowhere under `build/`; the
+artifact invariant now fails the build if they do.
+
+|Production chapter
+|Unchanged: `atlas.html` still names the Tang chapter, the chapter chunk still
+carries the Tang chapter and its events, and no visible UI behavior changes, so
+the browser checks are unaffected by this boundary change.
+|===
+
+== Consequences
+
+* The comparison fixture is source-checked, contract-validated content that is
+  loadable in a browser through the same projection as the launch chapter,
+  without being rendered by the site or shipped in the release artifact.
+* Adding another comparison chapter is a content tree plus one catalog call with
+  its coverage window, not a new loader and not a change to the production
+  boundary.
+* The atlas's display labels still print the astronomical year number, which is
+  correct for the Tang chapter's CE dates and wrong for a BCE chapter. The
+  comparison harness must add BCE formatting before rendering the fixture; this
+  record deliberately does not change the production labels.
+
+== Limitations recorded
+
+* The fixture is a preparation snapshot, not owner-approved release content: the
+  ledger records it as such and no `owner approved` row exists for it.
+* The internal review found source-fidelity and wording corrections in the
+  published snapshot (the death dispute's dating and the place of the death
+  attributed to the wrong source, a continuous conflict span the sources do not
+  state and a 233 BCE dating attributed to the wrong source, the hereditary
+  house's 王安五年 equated with the six-states table's 韓王安六年, an officer's
+  office held as a continuous 231–230 BCE span between two dated notices, three
+  quoted fragments that included or silently dropped the transcription's
+  editorial additions, an officer's name attributed to a text-critical
+  correction, and a famine notice called a drought). Twelve corrections are
+  prepared as unpublished draft revisions, because the publication gate does not
+  let the preparing editor supersede a set; publishing a corrected preparation
+  set is the owner's decision, the fixture README lists every draft, and the
+  fixture's tests pin each reviewed hash.
+* The comparison harness is later work. This record makes the fixture loadable
+  and keeps it out of the artifact; it does not build the harness, and Gate 2 is
+  not satisfied.
+* The coverage window is supplied by the caller, so a caller can pass a window
+  the content does not fit. The projection fails instead of silently replacing
+  it, which the projection suite pins.
+
+== Verification performed for this document
+
+* Ran `pnpm verify` (format, `svelte-check`, tests, build) and inspected the
+  artifact: 410 files, no fixture id anywhere under `build/`, and the new
+  artifact sentinel exercised by the build.
+* Ran the gate's five suites directly: 112 tests pass; the bundled-content suite
+  brings the chapter and boundary suites to 115.
+* Re-measured the counts after the internal review's correction drafts were
+  extended from ten to twelve: the fixture suite grew from 42 to 45 tests and the
+  full suite from 429 to 432, while the boundary itself is unchanged.
+* Re-checked that the production boundary still projects the reviewed Tang
+  chapter unchanged and that the fixture projects with one placed event, four
+  list-only events, and the disputed death.

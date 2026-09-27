@@ -232,6 +232,22 @@ the phone layouts at 390 px and 320 px.
 * **Tablet evidence is Chromium touch emulation, not a physical iPad.** Physical
   device acceptance remains a separate gate under RFD 4.
 
+== Later records
+
+This record's Tang-specific decisions still hold; two of its statements were
+later superseded or generalized, and are recorded here rather than rewritten:
+
+* The owner's editorial approval of the published revision, recorded above as
+  pending, was given on 2026-09-25 and is recorded in
+  link:../0002/PUBLICATION_APPROVAL.adoc[the publication approval gate] against
+  the exact merged set digest. The set document is unchanged, so its
+  `self_review` block and preparation-time notes stay as written.
+* The projection's primary window, a module constant here, is now supplied by
+  the caller, and non-production chapters load through a comparison catalog that
+  stays out of the production bundle. See
+  link:COMPARISON_FIXTURE_BOUNDARY.adoc[the comparison fixture boundary
+  decision].
+
 == Verification performed for this document
 
 * Ran the format check, `svelte-check`, the full Vitest suite, the static build

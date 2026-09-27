@@ -1,6 +1,7 @@
 /// <reference types="vitest/config" />
 import { sveltekit } from "@sveltejs/kit/vite"
 import tailwindcss from "@tailwindcss/vite"
+import { searchForWorkspaceRoot } from "vite"
 import { defineConfig } from "vitest/config"
 
 /**
@@ -16,6 +17,18 @@ import { defineConfig } from "vitest/config"
  */
 export default defineConfig({
   plugins: [sveltekit(), tailwindcss()],
+  // The comparison catalog loads a chapter's JSON with lazy `import.meta.glob`,
+  // so the dev server serves those files over HTTP instead of bundling them into
+  // the importing module the way the eager production glob does. Vite's default
+  // serving allow list stops at `src/`, which would 403 the chapter tree in
+  // development only, so the workspace root is allowed explicitly. The
+  // production build bundles the same files into the artifact and never reads
+  // them from disk at runtime.
+  server: {
+    fs: {
+      allow: [searchForWorkspaceRoot(process.cwd())],
+    },
+  },
   // Vitest resolves modules in Node, where Svelte would resolve its server build;
   // the component tests must mount the same client build the bundle ships. This
   // only applies while Vitest runs, so the production build keeps SvelteKit's

@@ -11,12 +11,31 @@ import type { PlaybackState } from "./time"
  * their own script.
  */
 
+/**
+ * The atlas's own year text.
+ *
+ * The domain carries astronomical ordinals (1 BCE is 0, 233 BCE is -232), which
+ * are the right numbers to compute with and the wrong ones to show. A year at or
+ * before 1 BCE is printed as a BCE year, and a CE year is printed as the number
+ * alone, exactly as before, so the Tang chapter's labels do not change.
+ */
+export function yearLabel(year: number): string {
+  return year > 0 ? `${year}` : `${1 - year} BCE`
+}
+
+/** An inclusive year window, with both ends in the atlas's own year text. */
+export function windowLabel(window: { readonly start: number; readonly end: number }): string {
+  return window.start === window.end
+    ? yearLabel(window.start)
+    : `${yearLabel(window.start)}–${yearLabel(window.end)}`
+}
+
 /** The occurrence as the list and the details surface state it. */
 export function occurrenceLabel(occurrence: Occurrence): string {
   const span =
     occurrence.startYear === occurrence.endYear
-      ? `${occurrence.startYear}`
-      : `${occurrence.startYear}–${occurrence.endYear}`
+      ? `${yearLabel(occurrence.startYear)}`
+      : `${yearLabel(occurrence.startYear)}–${yearLabel(occurrence.endYear)}`
   const stated =
     occurrence.precision === "year" && occurrence.mode === "instant"
       ? span

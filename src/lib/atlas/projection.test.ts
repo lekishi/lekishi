@@ -20,12 +20,15 @@ import { projectChapter, type ProjectionResult } from "./projection"
 
 const CHAPTER = "tang-mission-750-754"
 
+/** The Tang chapter's own coverage model, as the production boundary passes it. */
+const COVERAGE = { defaultWindow: { start: 750, end: 754 } }
+
 function tree(): ChapterTree {
   return loadChapter(CHAPTER)
 }
 
 function attempt(chapter: ChapterTree = tree()): ProjectionResult {
-  return projectChapter(CHAPTER, chapter.documents, chapter.sets)
+  return projectChapter(CHAPTER, chapter.documents, chapter.sets, COVERAGE)
 }
 
 function project(chapter: ChapterTree = tree()): Chapter {
@@ -206,6 +209,21 @@ describe("projecting the reviewed Tang chapter", () => {
     expect(chapter.publication.reviewNotes).toContain(
       "owner's editorial approval under RFD 2 is still pending",
     )
+  })
+
+  it("takes the primary window from the caller rather than a chapter branch", () => {
+    const chapter = project()
+
+    expect(chapter.defaultWindow).toEqual(COVERAGE.defaultWindow)
+
+    // The window is the caller's decision: a window the events do not fit in
+    // fails the projection instead of being silently replaced.
+    const wrongWindow = projectChapter(CHAPTER, tree().documents, tree().sets, {
+      defaultWindow: { start: 900, end: 950 },
+    })
+
+    expect(wrongWindow.ok).toBe(false)
+    expect(errorCodes(wrongWindow).join("\n")).toContain("is not presented as a coda node")
   })
 
   it("selects the newest published revision per record, not the first revision in the file", () => {
@@ -686,5 +704,74 @@ describe("the chapter's place references", () => {
     const result = attempt()
 
     expect(result.ok).toBe(true)
+  })
+})
+
+describe("the projection's dispute rule", () => {
+  const QIN = "qin-conquest-han-233-226"
+  const QIN_COVERAGE = { defaultWindow: { start: -232, end: -225 } }
+
+  function projectQin(tree: ChapterTree): ProjectionResult {
+    return projectChapter(QIN, tree.documents, tree.sets, QIN_COVERAGE)
+  }
+
+  it("carries a disputed record's summary and challenging accounts into the event", () => {
+    const result = projectQin(loadChapter(QIN))
+
+    if (!result.ok) {
+      throw new Error(result.errors.join("\n"))
+    }
+
+    const death = result.chapter.events.find((event) => event.id === "lks:event:hanfei-death-233")
+    const dispute = death?.dispute
+
+    expect(dispute?.status).toBe("disputed")
+    expect(dispute?.summary).toContain("王安五年")
+    expect(dispute?.summary).toContain("韓王安六年")
+    expect(dispute?.summary).not.toContain("agree")
+    expect(dispute?.accounts).toHaveLength(2)
+    expect(dispute?.accounts[0]?.statement).toContain("hereditary house")
+    expect(dispute?.accounts[0]?.locators.length).toBeGreaterThan(0)
+
+    // The other four events are undisputed, so nothing else gains a panel.
+    expect(result.chapter.events.filter((event) => event.dispute !== null)).toHaveLength(1)
+  })
+
+  it("fails a disputed record with no summary instead of showing an empty panel", () => {
+    const tree = loadChapter(QIN)
+    const record = tree.documents.find(
+      (document) => isObject(document) && document["record_id"] === "lks:event:hanfei-death-233",
+    )
+    const revision = publishedRevisionOf(objectOf(record))
+
+    delete objectOf(revision["dispute"])["summary"]
+
+    const result = projectQin(tree)
+
+    expect(result.ok).toBe(false)
+
+    if (!result.ok) {
+      expect(result.errors.join("\n")).toContain("is disputed but carries no dispute summary")
+    }
+  })
+
+  it("fails conflicting claims the record does not present as a dispute", () => {
+    const tree = loadChapter(QIN)
+    const record = tree.documents.find(
+      (document) => isObject(document) && document["record_id"] === "lks:event:hanfei-death-233",
+    )
+    const revision = publishedRevisionOf(objectOf(record))
+
+    objectOf(revision["dispute"])["status"] = "undisputed"
+
+    const result = projectQin(tree)
+
+    expect(result.ok).toBe(false)
+
+    if (!result.ok) {
+      expect(result.errors.join("\n")).toContain(
+        "without a disputed status, and the atlas will not present them as undisputed",
+      )
+    }
   })
 })

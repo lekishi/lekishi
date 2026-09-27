@@ -341,6 +341,26 @@ states `Unapproved preparation` and the review note; the ledger row is still a
 chapter and detail surface from its caller; and the artifact still requires the
 page while forbidding the chapter on the production atlas page.
 
+=== Supersession — 2026-09-27: the review route becomes an ordinary chapter route
+
+The owner approved the Qin set on 2026-09-27 (*"approve 1, then proceed with 2"*),
+so `Unapproved preparation` stopped being true of it, and the same instruction
+asked for ordinary chapter routing instead of a comparison-oriented review route.
+link:CHAPTER_READER_ROUTE.adoc[The chapter reader-route decision] records what
+replaced this record's route: one chapter route serves every served chapter at
+`/chapters/<chapter-id>`, and `/compare/qin` is now a prerendered redirect page
+that points at `/chapters/qin-conquest-han-233-226`, so the URL the owner was
+reviewing keeps working.
+
+What this record's route still contributed, and what survives: the workspace takes
+its chapter and detail surface from its caller (now without a per-chapter detail
+mode), the review surface's dispute presentation became the shared chapter
+surface, the chapter's own coverage window is still supplied by its caller, the
+BCE year text is still the atlas's own, and the catalog is still the browser-safe
+loader — now for every served chapter rather than for non-production ones. The
+`preparation snapshot` row and the unapproved framing are gone with the approval
+recorded in link:../0002/PUBLICATION_APPROVAL.adoc[the publication approval gate].
+
 == Consequences
 
 * The owner can review the corrected fixture in the product at `/compare/qin`,

@@ -1,0 +1,310 @@
+:authors: Darwin D Wu <darwin67@users.noreply.github.com>
+:state: published
+:labels: architecture, content, static, chapters, reader, search, sources, poc
+:date: 2026-09-27
+
+= RFD 3 chapter reader-route decision
+
+== Provenance and scope
+
+The owner's instruction of 2026-09-27 was *"approve 1, then proceed with 2"*:
+approve the current Qin set for release, then build the shared reader-facing
+chapter experience. The approval is recorded in
+link:../0002/PUBLICATION_APPROVAL.adoc[the publication approval gate]; this record
+is the dated decision for the second half.
+
+Two earlier records fixed the surfaces this one replaces. The bounded Qin chapter
+shipped as a review route (`/compare/qin`) that stated `Unapproved preparation`
+and rendered through a separate "comparison catalog", because the owner asked to
+inspect corrected content before deciding on it
+(link:COMPARISON_REVIEW_ROUTE.adoc[the comparison review route decision]). The
+root page then presented both chapters as peers, but kept the Qin chapter's path
+and its unapproved status line, and left the details surface's review-independence
+prose as an open owner decision
+(link:CHAPTER_PRESENTATION.adoc[the chapter presentation decision]). With the Qin
+chapter approved, "unapproved preparation" is no longer true of it, and a review
+route is no longer what a reader should meet.
+
+This record supersedes the user-facing parts of both: the Qin chapter's review
+route and its unapproved framing, and the open decision about `/compare/qin`'s
+path. What still holds from them: the caller-supplied coverage window, the one
+projection, the browser-safe catalog as the only loader, the publication approval
+gate over every chapter tree, the peer cards, the display names, and the artifact
+invariant's bans on the framings the owner rejected. No historical content,
+publication set, or ledger digest changed here — only which route serves the
+chapters and what a reader can do on them.
+
+== Decision
+
+* **One chapter route serves every chapter.** A chapter lives at
+  `/chapters/<chapter-id>`, where the id is the chapter tree's own id. One
+  dynamic route (`src/routes/chapters/[chapter]/`) loads the chapter through the
+  browser-safe catalog with the coverage model
+  `src/lib/atlas/chapter-registry.ts` gives it, prerenders one page per served
+  chapter from `entries()`, and 404s an id the site does not serve. There is no
+  per-chapter route, no review route, and no second shell: both chapters render
+  through the same page component, the same workspace, and the same controls.
+* **The served list is the site's chapter list, and the gate reads it.** The
+  registry names the chapters the site serves; the chapter cards are keyed by the
+  same ids, and the publication approval gate fails the build when a served
+  chapter's current revisions come from a set without an `owner approved` row.
+  Adding a chapter to the list, or moving a served chapter to a later revision,
+  therefore requires the owner's decision rather than inheriting an older one. A
+  chapter prepared for review but not served stays out of the list, keeps its
+  `preparation snapshot` row, and does not ship.
+* **The legacy routes redirect.** `/atlas` (the launch chapter's route) and
+  `/compare/qin` (the second chapter's review route) are prerendered redirect
+  pages that point at the chapter each one served, so the URLs a reader or a
+  deployment already has keep working. The artifact invariant checks each
+  redirect page names its target and carries no workspace mount point, so a stub
+  cannot be served as if it were a chapter.
+* **Both chapters expose the same exploration loop.** The workspace panel has
+  three surfaces — the window's events, the chapter's story, and its sources — and
+  a search field on the events surface; the details panel shows the selected
+  event's place and placement note, its occurrence with precision and mode, the
+  record's summary, its participants, its published dispute, and its citations
+  with locators and quoted passages, plus explicit previous/next story jumps. The
+  workspace takes no chapter branch and no per-chapter detail mode: the review
+  surface's dispute presentation is now part of the one chapter surface, which is
+  what RFD 4's AC2 visible-uncertainty part asked for and what the owner's
+  instruction to build the shared experience authorized.
+* **Search covers the chapter, not the window.** A query is matched against the
+  chapter's own published text: event titles and summaries, the date as written
+  and as the atlas states it, place and participant name forms in their own script
+  and in the romanizations and translations the records publish, the published
+  dispute, and citation locators and quotations. Comparison folds case, diacritics
+  (`Ōtomo` matches `Otomo`), and whitespace. A modern equivalent is deliberately
+  not searchable: the contract keeps it out of the historical name list and forbids
+  reading it as an identification. Results include events outside the selected
+  window, and each such row says so; selecting one keeps its details with the
+  outside-selected-time notice and the explicit return action, without a map
+  marker. No alias, coordinate, or claim is invented for search.
+* **Story navigation follows the chapter's own order.** The navigator lists the
+  published story's steps in the story's order with the story's own captions. A
+  step that is a published event is an explicit jump (it selects the event and
+  moves the window and playhead to its time, stopping playback); a step whose
+  record has no event surface — a relationship, for example — stays in place as a
+  summary step rather than being dropped, and is never treated as an event.
+  Chronological stepping stays separate and still never changes the window.
+* **Sources are shown as the records state them, and only when they are cited.**
+  The details panel lists the selected event's citations with the record's own
+  locator and the published quotation where the source's recorded terms permit
+  quoting; the sources surface lists the chapter's *cited* sources with kind,
+  edition, the record's attribution and licence id, and the identifier the record
+  carries. A source document that no published revision cites is preparation
+  content: it stays in the tree and out of the chapter, so a draft cannot change a
+  served chapter's Sources surface without a decision covering it. The atlas
+  states the record's terms and never restates or upgrades them.
+* **The smallest viewports keep the drawer and the details apart.** At phone
+  widths the details panel and the open drawer do not share the screen: the
+  smallest reviewed viewport cannot hold the notice, the drawer's list, and the
+  details at once, and a reader who opens the list is choosing to look at the
+  list. Selecting an event closes the drawer, so the details are what a reader
+  returns to, and from `md` up both stay visible side by side. The overlay column
+  is bounded above the time controls and scrolls rather than overflowing them, and
+  the panel's tabs carry their counts so no surface repeats a heading of its own
+  and the list keeps the panel's height.
+* **The comparison vocabulary leaves the product.** `src/lib/atlas/comparison.ts`
+  is deleted, the chapter registry replaces it, and the reader-facing pages and
+  cards carry none of the project's internal framing; the artifact invariant bans
+  the rejected phrases (`comparison fixture`, `comparison harness`, `map
+  treatments`, `treatment comparison`, `lekishi-historical-contract`, `Reviewed
+  chapter`, `Comparison chapter`) on the root page and on every chapter page. The
+  treatment-comparison rationale stays in the records, where it belongs.
+
+== Alternatives considered
+
+* **Keep `/compare/qin` as a second chapter route.** Rejected: the owner asked for
+  ordinary chapter routing, the chapter is approved, and a path that says
+  "compare" tells a reader about the project's internal comparison rather than
+  about the chapter.
+* **Keep `/atlas` as the Tang chapter's own route and add `/chapters/...` for the
+  rest.** Rejected: two routes for two peer chapters is exactly the asymmetry this
+  decision removes; the legacy URL redirects instead, so nothing that points at it
+  breaks.
+* **Make `/atlas` a chapter index.** Rejected: the root page is the index, and a
+  second list page would duplicate it. `/atlas` therefore redirects to the chapter
+  it always served.
+* **Keep the review-only dispute presentation and add a second, reader
+  presentation.** Rejected: the owner asked for visible uncertainty and dispute
+  cues on both chapters, and two presentations of the same published record would
+  drift. The review surface's presentation became the shared one.
+* **Search the current window's events only.** Rejected: a reader who types a name
+  must find it, and the atlas already has a rule for a selection the window
+  excludes — keep the details, state the exclusion, offer the explicit return.
+* **Make search a client-side filter of the rendered list.** Rejected: it would
+  search only what the window shows, and it would put search logic in the
+  component instead of in a pure, testable module.
+* **Drop the story steps that are relationships.** Rejected: the story's order is
+  the chapter's published presentation order, and silently dropping a published
+  step would present a different order. They stay, marked as summaries.
+* **Show modern equivalents as search aliases.** Rejected: the contract keeps them
+  out of the historical name list and forbids reading them as identifications, so
+  making them the string that finds a historical place would undo that rule in the
+  UI.
+
+== Measured evidence
+
+[cols="1,3",options="header"]
+|===
+|Check |Result
+
+|Full check
+|`pnpm verify` passes: format check clean, `svelte-check` 0 errors and 0 warnings,
+501 tests (500 passed, 1 skipped — the `pnpm seal` maintenance entry point) with
+160 contract tests through the build gate, and the static build with its
+invariant (522 files).
+
+|Chapter route and card tests
+|`src/lib/atlas/chapter-catalog.test.ts` (7 tests) loads both served chapters
+through the one browser-safe path, pins that each opens on its own window, and
+checks that the served list names existing chapter trees exactly once — a
+prepared-but-unserved chapter has a tree and no served entry.
+`src/lib/atlas/chapters.test.ts` (7 tests) pins the cards against the served
+list and the projection, keeps the rejected framings off them, and states each
+chapter's recorded decision; `release.test.ts` (4 tests) reads the RFD 2 ledger
+and both sets, so a stated date must be the date that chapter's row records and
+neither line may describe the content as reviewed beyond its `self_review`.
+`src/routes/page.test.ts` (4 tests) mounts the root page in jsdom and pins the
+peer cards, the status placement, and the page's own vocabulary.
+
+|Loop tests
+|`src/lib/atlas/search.test.ts` (15 tests) covers normalization (case,
+diacritics, spacing), local-script and romanized names, a place the map does not
+show an event at, the record's own date text and dispute text, the deliberate
+exclusion of modern equivalents, and the empty-result case.
+`src/lib/atlas/story.test.ts` (5 tests) pins the published order, the summary
+steps, and the next/previous walk. `src/lib/atlas/projection.test.ts` (31 tests)
+pins the new domain fields and the refusals around them, including the
+cited-sources boundary (an uncited source document cannot change the chapter) and
+a citation to a source the chapter does not publish. `mount.test.ts` (6 tests)
+and `entry.test.ts` (10 tests) cover the mount boundary and the page lifecycle.
+
+|Gate tests
+|`src/lib/historical/contract/publication-approval.test.ts` (18 tests) covers the
+ledger, the digest rule, and the served-chapter rule, including a served chapter
+whose revisions lost their approval, one that moved to an unapproved set, and an
+unserved chapter that keeps its `preparation snapshot` without failing the gate.
+`src/lib/historical/contract/qin-chapter.test.ts` (61 tests) now reads the
+chapter's row as an approval and keeps its self-review assertions.
+
+|Browser checks
+|`pnpm e2e` against the built artifact, three projects: 105 passed, 3 skipped,
+and the overlay-geometry check failed in all three projects because its own
+helper clicked the phone drawer toggle while the drawer was already open. With
+the helper reading the toggle's `aria-expanded`, that check passes in all three
+projects (desktop 4.2 min, tablet 4.7 min, phone 4.2 min); the rest of the run
+took 59.8 minutes. The skipped cases are the touch-only tap check on the
+non-touch desktop project and the desktop-only drag check on the touch projects.
+`e2e/chapters.spec.ts` (15 checks per project) covers the chapters' own shell,
+window, and recorded decision; the legacy routes redirecting; a client-side move
+between two chapters replacing the workspace; search by local script, by a
+published romanization, and by a place the map does not show the event at; story
+navigation with its explicit jumps and its summary steps; the sources and
+locators behind a selection; the disputed account on both chapters; an event
+outside the window keeping its details with the outside-time notice; keyboard
+access to search, the tabs, and the story jumps; the overlay geometry and the
+details panel's reachability at 1440x900, 820x634, 390x844, and 320x640; and the
+root page's peer cards. `e2e/atlas.spec.ts` keeps the workspace behavior,
+lifecycle, keyboard, touch, and artifact checks, now against a chapter route.
+
+|Artifact
+|`pnpm build`: 522 files (was 451 before this change), including
+`chapters/tang-mission-750-754.html` and `chapters/qin-conquest-han-233-226.html`,
+the two redirect stubs, and the chapters' own chunks. The invariant requires each
+chapter page to carry one mount point, the client entry, its name, its window, and
+its recorded decision, requires each redirect page to name its target and carry no
+mount point, requires the root page to link both chapters and state both
+decisions, and fails on the rejected framings in any reader-facing page.
+
+|Rendered inspection
+|Screenshots of both chapters at 1440x900, 820x634, 390x844, and 320x640 under
+`.amp/in/artifacts/` (`chapter-*.png`): the search results, the story surface, the
+sources surface, and a selected disputed event with its accounts and citations,
+plus the root page at 390x844. They are the evidence for the phone and tablet
+layout rules this record states, including the drawer-and-details exclusion and
+the panel's height.
+|===
+
+== Consequences
+
+* A reader meets two chapters as peers, each at an ordinary chapter URL, each with
+  the same story navigation, search, sources, uncertainty cues, and dispute
+  explanations. The project's comparison work is no longer part of what a reader
+  sees or reads.
+* Approving a chapter and serving it are now the same decision point: the gate
+  fails a served chapter whose content is not owner-approved, so the site cannot
+  ship a chapter behind a stale decision.
+* The details panel states the owner's decision and the recorded review
+  independence together, so the approval cannot read as independent or specialist
+  review, and the panel is longer than before — it scrolls inside its bound, which
+  the browser checks pin at every reviewed size.
+* The workspace's panel is now a three-surface panel with a search field, so the
+  overlay column has one more thing to hold at phone widths; the browser checks
+  cover the tabs and the search at 1440x900, 820x634, 390x844, and 320x640.
+* The chapter route's `load` runs during prerendering, so an unrepresentable
+  chapter fails `pnpm build`; the served chapter's records still ship as the
+  route's own chunks and never as a runtime fetch of the content tree.
+
+== Limitations recorded
+
+* **No layer controls, no nearby/connected lists, no relationship surface.** The
+  loop now has chapter/story navigation, search, sources and locators, and
+  uncertainty and dispute cues; RFD 1's layer controls and the separate
+  nearby/connected lists, and any surface for relationships and actors, remain
+  open. Relationship steps appear in the story as captions, and participants
+  appear on their events; a reader cannot yet open a relationship or an actor.
+* **Search is a simple substring match.** It has no ranking beyond name matches
+  first, no fuzzy matching, and no per-field scoring; it also searches citation
+  locators, so a query can match an event through a locator rather than through
+  its story.
+* **Undated events are still rejected.** The atlas window is closed at both ends,
+  so a wholly undated event or an open-ended interval fails the projection rather
+  than being discoverable outside time-filtered results. RFD 4 AC3's
+  undated-event behavior stays unimplemented.
+* **Areas and routes are still rejected.** The domain draws points; a
+  `source_supported_area` or an itinerary fails the projection.
+* **The specialist reviews and the critical-edition re-check remain open** for
+  both chapters, as their ledger rows state; this record changes no content.
+* **`/compare/qin` keeps the word in its path** as a redirect stub. The path
+  resolves, but the URL a reader may still have in a bookmark says "compare" until
+  it is dropped; removing a redirect is a later decision, and the redirect exists
+  so no existing link breaks today.
+* **The map labels still crowd at the whole-globe view** for the Tang chapter, the
+  same rendering earlier records measured; nothing here changed the renderer.
+* **An out-of-window selection can still be a camera-follow target.** The marker
+  is filtered out with the window, and the details say so, but the follow control
+  stays available for a selection the window excludes and would move the camera to
+  a place whose marker is not drawn. Whether following should be disabled for an
+  excluded selection is an open question, not something this record decides.
+* **The panel's surfaces are reached through the drawer at phone widths.** Search,
+  the story, and the sources are all inside the exploration panel, so on a phone
+  the drawer has to be opened before they are visible; the drawer's label states
+  the event count but not that more surfaces are behind it.
+
+== Verification performed for this document
+
+* Ran `pnpm verify` on the final tree: format check clean, `svelte-check` 0
+  errors and 0 warnings, 501 tests (500 passed, 1 skipped — the `pnpm seal`
+  maintenance entry point), the chapter gate's 160 contract tests, and the static
+  build with its invariant (522 files).
+* Ran the built-artifact browser suite in all three projects (105 passed, 3
+  skipped, 59.8 minutes) and re-ran the one check whose helper was wrong: it now
+  passes on desktop, tablet-touch, and phone.
+* Verified the client-navigation regression the review found, both ways: with the
+  route mounting the workspace in `onMount`, the check fails because the second
+  chapter's name renders over the first chapter's events and globe; with the
+  effect it passes. The check is in the suite, so the fix cannot be undone
+  silently.
+* Inspected the artifact directly: both chapter pages carry one mount point, the
+  client entry, the chapter's name, its window, and its recorded decision; both
+  legacy routes are redirect pages that name their targets and carry no mount
+  point; the root page links both chapters and states both decisions; and no
+  reader-facing page carries the comparison vocabulary.
+* Captured and inspected screenshots of both chapters at 1440x900, 820x634,
+  390x844, and 320x640 — the search results, the story surface, the sources
+  surface, and a selected disputed event with its accounts and citations — plus
+  the root page at 390x844, saved under `.amp/in/artifacts/`.
+* Measured the overlay geometry at those four sizes: no panel overlaps another,
+  the details panel stays inside the viewport and clear of the time controls, and
+  the event list scrolls inside its panel rather than spilling over the controls.

@@ -237,7 +237,7 @@ The same review found the reviewed-chapter card stating two contradictory things
 approval under RFD 2 was still pending, and a paragraph recording that the
 approval was taken on 2026-09-25. Both are corrected on the root page:
 
-* the root page gains a **Comparison review** card that links `/compare/qin`,
+* the root page gains a **Comparison chapter** card that links `/compare/qin`,
   names the fixture (`COMPARISON_TITLE`, cross-checked against the loaded
   chapter's title), shows its 233–226 BCE window in BCE years, and states the
   route's own review wording — `Unapproved preparation` and `self-review only` —
@@ -269,7 +269,16 @@ approval was taken on 2026-09-25. Both are corrected on the root page:
   (mounted in jsdom), and `e2e/comparison.spec.ts` gains a browser check that the
   card is discoverable, labelled as unapproved, subordinate to the atlas CTA,
   clickable through to the route, and free of horizontal overflow at 1440x900,
-  820x634, 390x844 and 320x640.
+  820x634, 390x844 and 320x640;
+* the owner's follow-up review comment on the shipped card asked *"what does a
+  comparison review mean? isn't it just another chapter?"*. The card is titled
+  **Comparison chapter** and now says in one sentence what the chapter is: a
+  bounded second chapter on the same contract, prepared as the second scenario for
+  the shared comparison of map treatments, which is still to be built — so the
+  card itself answers what the fixture is for, while `Unapproved preparation ·
+  self-review only`, the route's review note, and the ledger row keep it
+  unapproved and unreleased. `src/routes/page.test.ts` and the browser check pin
+  the sentence.
 
 Measured evidence for this update:
 
@@ -287,20 +296,20 @@ instead of inlining it in each route).
 
 |Root page and fixture tests
 |`src/routes/page.test.ts` (3 tests) mounts the prerendered root page in jsdom and
-pins the comparison entry point's label and link, the atlas CTA's precedence in
-document order, and the order of the recorded approval, its framing, and the set's
-preparation-time notes. `src/lib/atlas/release.test.ts` (2 tests) reads the RFD 2
-ledger and the Tang set: the date the page states is the date the Tang row
-records, and the page does not describe the set as reviewed beyond its
-`self_review`. `src/lib/atlas/comparison.test.ts` gains the title cross-check
-between the entry point and the loaded chapter.
+pins the comparison entry point's label, link, and purpose sentence, the atlas
+CTA's precedence in document order, and the order of the recorded approval, its
+framing, and the set's preparation-time notes. `src/lib/atlas/release.test.ts`
+(2 tests) reads the RFD 2 ledger and the Tang set: the date the page states is the
+date the Tang row records, and the page does not describe the set as reviewed
+beyond its `self_review`. `src/lib/atlas/comparison.test.ts` gains the title
+cross-check between the entry point and the loaded chapter.
 
 |Browser checks
 |`e2e/comparison.spec.ts` against the built artifact: 18 passed in 16.2 minutes
-across the desktop, tablet-touch, and phone projects. The new check covers the
-root page (the card's name and `Unapproved preparation · self-review only` label,
-its precedence behind the atlas CTA, the click-through to `/compare/qin`, and no
-horizontal overflow at 1440x900, 820x634, 390x844 and 320x640); the existing
+across the desktop, tablet-touch, and phone projects. The root-page check covers
+the card's name and `Unapproved preparation · self-review only` label, its
+precedence behind the atlas CTA, the click-through to `/compare/qin`, and no
+horizontal overflow at 1440x900, 820x634, 390x844 and 320x640; the existing
 fixture checks and the unchanged Tang atlas check still pass.
 
 |Rendered inspection

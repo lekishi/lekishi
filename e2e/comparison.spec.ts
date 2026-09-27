@@ -308,7 +308,7 @@ test("keeps the selected event's explanation reachable at every reviewed size", 
   }
 })
 
-test("links the comparison review from the root page without implying approval", async ({
+test("links the comparison chapter from the root page without implying approval", async ({
   page,
 }) => {
   const problems = collectProblems(page)
@@ -318,10 +318,12 @@ test("links the comparison review from the root page without implying approval",
   const card = page.locator("#comparison-review-card")
 
   await expect(card).toBeVisible()
+  await expect(card).toContainText("Comparison chapter")
   await expect(card).toContainText("The end of the state of Han under Qin")
   await expect(card).toContainText("Unapproved preparation")
   await expect(card).toContainText("self-review only")
   await expect(card).toContainText("no release decision exists")
+  await expect(card).toContainText("shared comparison of map treatments")
   await expect(card).not.toContainText("owner approved")
 
   // The reviewed atlas stays the page's primary call to action: its CTA comes
@@ -342,7 +344,7 @@ test("links the comparison review from the root page without implying approval",
 
   // The card is the review route's entry point, and the route labels the same
   // content the same way.
-  await card.getByRole("link", { name: "Open the comparison review" }).click()
+  await card.getByRole("link", { name: "Open the comparison chapter" }).click()
 
   await expect(page).toHaveURL(/\/compare\/qin$/)
   await expect(page.locator("#comparison-status")).toHaveText("Unapproved preparation")

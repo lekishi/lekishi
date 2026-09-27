@@ -51,7 +51,7 @@ describe("the root page", () => {
 
     const link = card?.querySelector('a[href="/compare/qin"]')
 
-    expect(link?.textContent?.trim()).toBe("Open the comparison review")
+    expect(link?.textContent?.trim()).toBe("Open the comparison chapter")
 
     const text = card?.textContent ?? ""
 
@@ -60,6 +60,9 @@ describe("the root page", () => {
     expect(text).toContain("self-review only")
     expect(text).toContain("no release decision exists")
     expect(text).toContain("not a launch chapter")
+    // The card says what the chapter is for, so "comparison" is not a bare
+    // label: it is the second scenario for the map-treatment comparison.
+    expect(text).toContain("shared comparison of map treatments")
     // Discoverability must not imply approval, specialist review, or release.
     expect(text).not.toContain("owner approved")
     expect(text).not.toContain("specialist review recorded")

@@ -85,8 +85,10 @@ does not have exactly one mount point, if the artifact contains a server runtime
 if the built scripts or the prerendered pages do not carry the reviewed chapter,
 if the retired synthetic fixture's sentinel strings reach the artifact, if the
 comparison review page is missing or does not state that the bounded Qin fixture
-is unapproved preparation, or if the production atlas page renders that fixture
-instead of the reviewed chapter.
+is unapproved preparation, if the root page does not link that review route and
+state the fixture's unapproved status and the reviewed chapter's recorded owner
+approval, or if the production atlas page renders that fixture instead of the
+reviewed chapter.
 
 ### Reviewed chapter content
 

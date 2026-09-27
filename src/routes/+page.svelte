@@ -145,11 +145,12 @@
     </section>
 
     <!--
-      The comparison review entry point. The owner asked to inspect the bounded
-      Qin fixture in the product, so the root page links the review route; the
+      The comparison chapter entry point. The owner asked to inspect the bounded
+      Qin chapter in the product, so the root page links the review route; the
       card keeps the route's own words (`Unapproved preparation`, and the review
-      note) and sits below the reviewed chapter, so being findable cannot read
-      as being a launch chapter or a release.
+      note), says in a plain sentence what the chapter is for, and sits below the
+      reviewed chapter, so being findable cannot read as being a launch chapter
+      or a release.
     -->
     <section
       id="comparison-review-card"
@@ -158,7 +159,7 @@
       <div class="flex flex-wrap items-start justify-between gap-x-6 gap-y-3">
         <div>
           <h2 class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-            Comparison review
+            Comparison chapter
           </h2>
           <p class="mt-2 text-base font-semibold text-slate-100">{COMPARISON_TITLE}</p>
           <p class="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-rose-300">
@@ -169,16 +170,17 @@
           href="/compare/qin"
           class="rounded-xl border border-slate-700 bg-slate-800/70 px-4 py-2.5 text-sm font-semibold text-slate-100 transition hover:border-slate-500 hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-300"
         >
-          Open the comparison review
+          Open the comparison chapter
         </a>
       </div>
       <p class="mt-3 max-w-3xl text-sm leading-relaxed text-slate-400">
         {COMPARISON_REVIEW.note}
       </p>
       <p class="mt-2 max-w-3xl text-xs leading-relaxed text-slate-400">
-        {windowLabel(COMPARISON_COVERAGE.defaultWindow)}. The same atlas workspace with BCE years
-        and the published dispute, but not a launch chapter: no route, territory, or historical
-        coordinate is shown for the fixture's events.
+        {windowLabel(COMPARISON_COVERAGE.defaultWindow)}. A bounded second chapter on the same
+        contract, prepared as the second scenario for the shared comparison of map treatments, which
+        is still to be built. It is not a launch chapter, and no route, territory, or historical
+        coordinate is shown for its events.
       </p>
     </section>
   </main>

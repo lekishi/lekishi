@@ -256,8 +256,12 @@ for release.
 The review route `/compare/qin` renders this set so the owner can inspect the
 corrected content. It labels the content **Unapproved preparation**, shows the
 fixture's 233–226 BCE window in BCE years, and shows 韓非's published dispute
-with its conflicting accounts. The fixture's status is "source-checked,
-corrected, published for review, awaiting the owner's decision".
+with its conflicting accounts. The root page carries a **Comparison review**
+card that links the route and repeats that label (`Unapproved preparation ·
+self-review only`), so the review surface is discoverable without reading as
+approved or shipped; the card is subordinate to the reviewed Tang atlas call to
+action. The fixture's status is "source-checked, corrected, published for review,
+awaiting the owner's decision".
 
 ## What is deferred, and the remaining decisions
 

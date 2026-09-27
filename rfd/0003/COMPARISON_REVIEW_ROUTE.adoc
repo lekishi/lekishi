@@ -227,6 +227,91 @@ files); `e2e/comparison.spec.ts` 15 passed in 14.3 minutes across the desktop,
 tablet-touch, and phone projects, and `e2e/atlas.spec.ts -g "phone layout"`
 passes in 1.6 minutes.
 
+=== Update — 2026-09-27: the root page carries the review entry point, after the owner's report
+
+The owner's report on the served static review build was *"Why is this story not
+shown on the top page?"*: `/compare/qin` was reachable only by URL, so the review
+surface the owner had asked to inspect was undiscoverable from the site's root.
+The same review found the reviewed-chapter card stating two contradictory things
+— the set's preparation-time review notes, which say the owner's editorial
+approval under RFD 2 was still pending, and a paragraph recording that the
+approval was taken on 2026-09-25. Both are corrected on the root page:
+
+* the root page gains a **Comparison review** card that links `/compare/qin`,
+  names the fixture (`COMPARISON_TITLE`, cross-checked against the loaded
+  chapter's title), shows its 233–226 BCE window in BCE years, and states the
+  route's own review wording — `Unapproved preparation` and `self-review only` —
+  through `src/lib/atlas/comparison.ts`, so the entry point, the route, and their
+  tests cannot describe the fixture differently;
+* the card is subordinate to the reviewed chapter and the atlas call to action:
+  the Tang CTA still comes first, and the card states that no release decision
+  exists, that the fixture is not a launch chapter, and that no route, territory,
+  or historical coordinate is shown for its events. This supersedes the earlier
+  consequence that the fixture is "not linked from the production surfaces":
+  being discoverable now serves the owner's review, and the label is what keeps
+  discoverability from reading as release. No ledger state changed — the row is
+  still a `preparation snapshot` with no owner decision;
+* the reviewed-chapter card now states the decision in the order a reader needs:
+  the set's own review block (preparing-editor self-review), then the owner's
+  editorial approval recorded on 2026-09-25 against the set's canonical digest,
+  then the set's preparation-time notes explicitly framed as written before that
+  decision. The notes stay byte-identical because the set is frozen by the digest
+  the decision was taken on — the page explains the staleness instead of letting
+  it stand as the current state. The wording lives in
+  `src/lib/atlas/release.ts`, and `src/lib/atlas/release.test.ts` reads the ledger
+  and the set: the page cannot state an approval date the Tang row does not
+  record, or describe the approved set as reviewed beyond its `self_review`;
+* the artifact rule grows three root-page markers: `scripts/check-static-build.mjs`
+  requires `index.html` to link `/compare/qin`, to state `Unapproved preparation`,
+  and to state the recorded Tang approval, so a deploy cannot drop the label, the
+  entry point, or the decision;
+* the root page's own copy contract is covered by `src/routes/page.test.ts`
+  (mounted in jsdom), and `e2e/comparison.spec.ts` gains a browser check that the
+  card is discoverable, labelled as unapproved, subordinate to the atlas CTA,
+  clickable through to the route, and free of horizontal overflow at 1440x900,
+  820x634, 390x844 and 320x640.
+
+Measured evidence for this update:
+
+[cols="1,3",options="header"]
+|===
+|Check |Result
+
+|Full check
+|`pnpm verify` passes: format check clean, `svelte-check` 0 errors and 0 warnings,
+468 tests (467 passed, 1 skipped — the `pnpm seal` maintenance entry point), and
+the static build with its invariant (452 files, up one file from 451: the root
+page now imports the fixture's review wording through
+`src/lib/atlas/comparison.ts`, so the bundler emits a small shared chunk for it
+instead of inlining it in each route).
+
+|Root page and fixture tests
+|`src/routes/page.test.ts` (3 tests) mounts the prerendered root page in jsdom and
+pins the comparison entry point's label and link, the atlas CTA's precedence in
+document order, and the order of the recorded approval, its framing, and the set's
+preparation-time notes. `src/lib/atlas/release.test.ts` (2 tests) reads the RFD 2
+ledger and the Tang set: the date the page states is the date the Tang row
+records, and the page does not describe the set as reviewed beyond its
+`self_review`. `src/lib/atlas/comparison.test.ts` gains the title cross-check
+between the entry point and the loaded chapter.
+
+|Browser checks
+|`e2e/comparison.spec.ts` against the built artifact: 18 passed in 16.2 minutes
+across the desktop, tablet-touch, and phone projects. The new check covers the
+root page (the card's name and `Unapproved preparation · self-review only` label,
+its precedence behind the atlas CTA, the click-through to `/compare/qin`, and no
+horizontal overflow at 1440x900, 820x634, 390x844 and 320x640); the existing
+fixture checks and the unchanged Tang atlas check still pass.
+
+|Rendered inspection
+|Screenshots of the root page at 1440x900, 820x634, 390x844 and 320x640 inspected
+under `.amp/in/artifacts/` (home-comparison-card-desktop.png,
+home-comparison-card-820.png, home-comparison-card-phone.png,
+home-comparison-card-320.png): the atlas CTA stays the page's primary action, the
+review card is fully visible and labelled, the quoted preparation-time notes read
+as history behind their framing, and no layout overlaps or clipped text appear.
+|===
+
 == Consequences
 
 * The owner can review the corrected fixture in the product at `/compare/qin`,
@@ -234,7 +319,9 @@ passes in 1.6 minutes.
   still records no decision on the content.
 * The fixture now ships in the artifact. That is a deliberate, reviewed change:
   it is unapproved content reachable at a URL, clearly labelled as such, and not
-  linked from the production surfaces.
+  linked from the atlas surface (the root page now carries its review entry
+  point, superseding the earlier "not linked from the production surfaces" on
+  2026-09-27 — see the update above).
 * The comparison harness has a first piece. Its remaining work — the shared
   baseline, the measured treatment comparison, and any additional comparison
   chapters — builds on this route rather than on a second rendering path.

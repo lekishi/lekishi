@@ -307,3 +307,73 @@ test("keeps the selected event's explanation reachable at every reviewed size", 
     expect(reached.lastInside, `panel's end visible at ${viewport.width}`).toBe(true)
   }
 })
+
+test("links the comparison review from the root page without implying approval", async ({
+  page,
+}) => {
+  const problems = collectProblems(page)
+
+  await page.goto("/")
+
+  const card = page.locator("#comparison-review-card")
+
+  await expect(card).toBeVisible()
+  await expect(card).toContainText("The end of the state of Han under Qin")
+  await expect(card).toContainText("Unapproved preparation")
+  await expect(card).toContainText("self-review only")
+  await expect(card).toContainText("no release decision exists")
+  await expect(card).not.toContainText("owner approved")
+
+  // The reviewed atlas stays the page's primary call to action: its CTA comes
+  // before the review link, and the review card sits below the reviewed chapter.
+  await expect(page.getByRole("link", { name: "Open the atlas" })).toBeVisible()
+
+  const order = await page.evaluate(() => {
+    const links = Array.from(document.querySelectorAll("main a"))
+
+    return {
+      atlas: links.findIndex((link) => link.getAttribute("href") === "/atlas"),
+      comparison: links.findIndex((link) => link.getAttribute("href") === "/compare/qin"),
+    }
+  })
+
+  expect(order.atlas).toBeGreaterThanOrEqual(0)
+  expect(order.comparison).toBeGreaterThan(order.atlas)
+
+  // The card is the review route's entry point, and the route labels the same
+  // content the same way.
+  await card.getByRole("link", { name: "Open the comparison review" }).click()
+
+  await expect(page).toHaveURL(/\/compare\/qin$/)
+  await expect(page.locator("#comparison-status")).toHaveText("Unapproved preparation")
+
+  // The reviewed-chapter card states the recorded approval before the frozen
+  // set's preparation-time notes, which still describe it as pending.
+  await page.goto("/")
+
+  const chapterText = await page.locator("main").innerText()
+
+  expect(chapterText).toContain("recorded on 2026-09-25")
+  expect(chapterText.indexOf("recorded on 2026-09-25")).toBeLessThan(
+    chapterText.indexOf("still describe the approval as pending"),
+  )
+
+  // Discoverability holds at the reviewed sizes, with no horizontal overflow.
+  for (const viewport of [
+    { width: 1440, height: 900 },
+    { width: 820, height: 634 },
+    { width: 390, height: 844 },
+    { width: 320, height: 640 },
+  ]) {
+    await page.setViewportSize(viewport)
+    await expect(card).toBeVisible()
+
+    const overflow = await page.evaluate(
+      () => document.documentElement.scrollWidth - window.innerWidth,
+    )
+
+    expect(overflow, `horizontal overflow at ${viewport.width}`).toBeLessThanOrEqual(1)
+  }
+
+  expect(problems).toEqual([])
+})

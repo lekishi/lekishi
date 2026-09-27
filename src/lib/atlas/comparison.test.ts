@@ -3,7 +3,12 @@ import { loadChapter } from "../historical/chapter"
 import { isObject, listOf, objectOf, type JsonObject } from "../historical/contract/types"
 import { CHAPTER as PRODUCTION_CHAPTER } from "./chapter-content"
 import { loadChapterContent } from "./chapter-catalog"
-import { COMPARISON_CHAPTER, COMPARISON_COVERAGE, COMPARISON_REVIEW } from "./comparison"
+import {
+  COMPARISON_CHAPTER,
+  COMPARISON_COVERAGE,
+  COMPARISON_REVIEW,
+  COMPARISON_TITLE,
+} from "./comparison"
 import { windowLabel } from "./labels"
 
 /**
@@ -84,6 +89,15 @@ describe("the comparison review fixture", () => {
     expect(COMPARISON_REVIEW.note).toContain("no release decision exists")
     expect(COMPARISON_REVIEW.note).toContain("not a launch chapter")
     expect(JSON.stringify(COMPARISON_REVIEW)).not.toContain("owner approved")
+  })
+
+  it("names the fixture the entry point and the route both show", async () => {
+    // The root page's review card names the fixture; the route shows the loaded
+    // chapter. Both take the title from this module, so a renamed story fails
+    // here instead of leaving the entry point describing another chapter.
+    const chapter = await loadChapterContent(COMPARISON_CHAPTER, COMPARISON_COVERAGE)
+
+    expect(COMPARISON_TITLE).toBe(chapter.title)
   })
 
   it("shows the corrected dispute and leaves the corrected records' readings visible", async () => {

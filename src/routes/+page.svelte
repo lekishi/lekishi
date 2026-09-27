@@ -1,12 +1,20 @@
 <script lang="ts">
   import { CHAPTER } from "$lib/atlas/chapter-content"
-  import { reviewLabel } from "$lib/atlas/labels"
+  import { COMPARISON_COVERAGE, COMPARISON_REVIEW, COMPARISON_TITLE } from "$lib/atlas/comparison"
+  import { reviewLabel, windowLabel } from "$lib/atlas/labels"
+  import { RELEASE } from "$lib/atlas/release"
 
   // The static root page: navigation into the atlas, and the project's
   // non-negotiables stated where a reviewer will actually read them. The chapter
   // facts come from the same projection the atlas renders, so this page cannot
   // describe content the atlas does not show. It carries no application state,
   // so it is prerendered exactly as written.
+  //
+  // The page also carries the comparison review entry point, because the owner
+  // asked for the bounded Qin fixture to be discoverable while deciding on it.
+  // That card is deliberately subordinate to the reviewed chapter and the atlas
+  // call to action, and it states the route's own review wording, so being
+  // reachable cannot read as being approved or shipped.
   const capabilities = [
     {
       title: "Globe first",
@@ -115,13 +123,62 @@
 
       <p class="mt-4 max-w-3xl text-sm leading-relaxed text-slate-300">
         {reviewLabel(CHAPTER.publication.independence, CHAPTER.publication.reviewer)}
-        {CHAPTER.publication.reviewNotes}
       </p>
-      <p class="mt-2 text-xs text-slate-400">
-        Published by {CHAPTER.publication.setIds.join(", ")}. The owner's editorial approval under
-        RFD 2 was recorded on 2026-09-25 against that set's digest, and the optional specialist
-        reviews remain unperformed, so this is not a claim of complete coverage or of independent
-        review.
+      <p class="mt-2 max-w-3xl text-sm leading-relaxed text-slate-300">{RELEASE.decision}</p>
+      <!--
+        The set's own review notes are shown as history, not as the current
+        state: the frozen digest in the ledger means the set cannot be edited to
+        say the approval was taken, so the page states the decision first and
+        quotes the notes as preparation-time text.
+      -->
+      <blockquote
+        class="mt-3 max-w-3xl rounded-r-lg border-l-2 border-slate-700 bg-slate-950/40 py-2 pr-3 pl-3"
+      >
+        <p class="text-xs font-semibold text-slate-300">{RELEASE.notesLead}</p>
+        <p class="mt-1 text-xs leading-relaxed text-slate-400">
+          {CHAPTER.publication.reviewNotes}
+        </p>
+      </blockquote>
+      <p class="mt-2 max-w-3xl text-xs leading-relaxed text-slate-400">
+        Published by {CHAPTER.publication.setIds.join(", ")}. {RELEASE.caveats}
+      </p>
+    </section>
+
+    <!--
+      The comparison review entry point. The owner asked to inspect the bounded
+      Qin fixture in the product, so the root page links the review route; the
+      card keeps the route's own words (`Unapproved preparation`, and the review
+      note) and sits below the reviewed chapter, so being findable cannot read
+      as being a launch chapter or a release.
+    -->
+    <section
+      id="comparison-review-card"
+      class="rounded-2xl border border-slate-800 bg-slate-900/50 p-5"
+    >
+      <div class="flex flex-wrap items-start justify-between gap-x-6 gap-y-3">
+        <div>
+          <h2 class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
+            Comparison review
+          </h2>
+          <p class="mt-2 text-base font-semibold text-slate-100">{COMPARISON_TITLE}</p>
+          <p class="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-rose-300">
+            {COMPARISON_REVIEW.label} · self-review only
+          </p>
+        </div>
+        <a
+          href="/compare/qin"
+          class="rounded-xl border border-slate-700 bg-slate-800/70 px-4 py-2.5 text-sm font-semibold text-slate-100 transition hover:border-slate-500 hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-300"
+        >
+          Open the comparison review
+        </a>
+      </div>
+      <p class="mt-3 max-w-3xl text-sm leading-relaxed text-slate-400">
+        {COMPARISON_REVIEW.note}
+      </p>
+      <p class="mt-2 max-w-3xl text-xs leading-relaxed text-slate-400">
+        {windowLabel(COMPARISON_COVERAGE.defaultWindow)}. The same atlas workspace with BCE years
+        and the published dispute, but not a launch chapter: no route, territory, or historical
+        coordinate is shown for the fixture's events.
       </p>
     </section>
   </main>

@@ -119,6 +119,24 @@ if (!indexHtml.includes('href="/atlas"')) {
   fail("index.html does not link to the atlas")
 }
 
+// The root page is the comparison review fixture's discoverable entry point: the
+// owner asked for it there, and the artifact has to keep saying what the linked
+// content is, so a deploy cannot turn the link into a launch surface. The
+// reviewed-chapter card must also state the recorded owner approval for the
+// frozen Tang set — a page that only carried the set's preparation-time notes
+// would read as if the approval were still pending.
+if (!indexHtml.includes('href="/compare/qin"')) {
+  fail("index.html does not link to the comparison review route")
+}
+
+if (!indexHtml.includes("Unapproved preparation")) {
+  fail("index.html does not state that the comparison fixture is unapproved preparation")
+}
+
+if (!indexHtml.includes("recorded on 2026-09-25")) {
+  fail("index.html does not state the recorded owner approval for the reviewed chapter")
+}
+
 // --- bundles ------------------------------------------------------------------
 
 requireMatching(/_app\/immutable\/entry\/.*\.js$/, "a client entry bundle under _app/immutable")

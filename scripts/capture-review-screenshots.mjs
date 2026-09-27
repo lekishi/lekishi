@@ -60,7 +60,10 @@ async function openPanel(page) {
 /** Waits for a chapter to have mounted its globe. */
 async function openChapter(page, route) {
   await page.goto(`${baseURL}${route}`, { waitUntil: "load" })
-  await page.locator("#atlas-workspace canvas").first().waitFor({ state: "visible", timeout: 30_000 })
+  await page
+    .locator("#atlas-workspace canvas")
+    .first()
+    .waitFor({ state: "visible", timeout: 30_000 })
   // Let Cesium finish its first tiles so the globe is not captured mid-load.
   await page.waitForTimeout(4_000)
 }

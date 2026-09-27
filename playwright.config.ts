@@ -32,7 +32,11 @@ export default defineConfig({
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? [["github"], ["list"]] : [["list"]],
-  timeout: 60_000,
+  // The software renderer in a headless container starves the page's animation
+  // frames, so a single Playwright action can take seconds to become actionable.
+  // The per-file budgets below are for the checks that measure many states; this
+  // is the floor for every test.
+  timeout: 120_000,
   // WebGL startup and 4 MB of Cesium need more than the default 5s to settle.
   expect: { timeout: 15_000 },
   use: {

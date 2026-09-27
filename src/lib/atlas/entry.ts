@@ -1,15 +1,14 @@
 import type { Chapter } from "./domain"
-import { mountAtlas, type AtlasDetail, type AtlasHandle } from "./mount"
+import { mountAtlas, type AtlasHandle, type AtlasHeading } from "./mount"
 
 /**
  * The atlas workspace's single mount owner.
  *
- * A route renders a prerendered shell with an `#atlas-workspace` mount point and
- * calls `startAtlasPage` once it is in the browser, naming the chapter it
- * renders: the atlas route passes the reviewed Tang chapter and the comparison
- * review route passes the bounded Qin fixture. This module is the only caller of
- * `mountAtlas`: mounting is skipped while a live workspace exists, so a second
- * evaluation of this module — a duplicated bundle, a re-run, or a
+ * A chapter route renders a prerendered shell with an `#atlas-workspace` mount
+ * point and calls `startAtlasPage` once it is in the browser, naming the chapter
+ * it renders and the heading the chapter's card supplies. This module is the only
+ * caller of `mountAtlas`: mounting is skipped while a live workspace exists, so a
+ * second evaluation of this module — a duplicated bundle, a re-run, or a
  * back/forward-cache restore — cannot stack a second workspace, event list, or
  * globe onto the page.
  *
@@ -17,7 +16,7 @@ import { mountAtlas, type AtlasDetail, type AtlasHandle } from "./mount"
  * back/forward-cache freeze; `pageshow` re-creates the workspace, so a restored
  * page still has exactly one.
  *
- * The module has no import-time side effects: SvelteKit prerenders the atlas
+ * The module has no import-time side effects: SvelteKit prerenders the chapter
  * shell on the server, where `document` does not exist. `startAtlasPage` wires
  * the lifecycle listeners once and is safe to call on every navigation.
  */
@@ -32,15 +31,13 @@ declare global {
 let workspace: AtlasHandle | null = null
 let watching = false
 
-// The chapter, detail surface, and display name the page asked for, kept so a
-// back/forward-cache restore re-creates the same workspace rather than an empty
-// or default one.
+// The chapter and heading the page asked for, kept so a back/forward-cache
+// restore re-creates the same workspace rather than an empty or default one.
 let currentChapter: Chapter | null = null
-let currentDetail: AtlasDetail = "production"
-let currentName: string | null = null
+let currentHeading: AtlasHeading | undefined
 
 /**
- * True in a browser. SvelteKit renders the atlas shell on the server while
+ * True in a browser. SvelteKit renders the chapter shell on the server while
  * prerendering, so every entry point here is a no-op without a document instead
  * of throwing during the build.
  */
@@ -81,7 +78,7 @@ export function mountWorkspace(): void {
   workspace = null
 
   try {
-    workspace = mountAtlas(root, currentChapter, currentDetail, currentName ?? currentChapter.title)
+    workspace = mountAtlas(root, currentChapter, currentHeading)
     window.__lekishiAtlas = workspace
   } catch (error) {
     reportFailure(root, error)
@@ -111,19 +108,15 @@ export function watchWorkspaceLifecycle(): void {
 }
 
 /**
- * Starts an atlas page: one workspace owner, one set of lifecycle listeners, one
- * chapter. Called by a route after the prerendered shell is in the DOM. `name` is
- * the chapter's display name — product presentation the route takes from
- * `chapters.ts`; without it the workspace uses the chapter's published title.
+ * Starts a chapter page: one workspace owner, one set of lifecycle listeners, one
+ * chapter. Called by the chapter route after the prerendered shell is in the DOM.
+ * `heading` is the chapter's display name and recorded decision — product
+ * presentation the route takes from `chapters.ts`; without it the workspace uses
+ * the chapter's published title and states no decision line.
  */
-export function startAtlasPage(
-  chapter: Chapter,
-  detail: AtlasDetail = "production",
-  name: string = chapter.title,
-): void {
+export function startAtlasPage(chapter: Chapter, heading?: AtlasHeading): void {
   currentChapter = chapter
-  currentDetail = detail
-  currentName = name
+  currentHeading = heading
   watchWorkspaceLifecycle()
   mountWorkspace()
 }

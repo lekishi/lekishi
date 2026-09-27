@@ -2,7 +2,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 
 /**
- * The atlas page bootstrap owns the single workspace: it mounts one workspace
+ * The chapter page bootstrap owns the single workspace: it mounts one workspace
  * into the page's mount point, releases it at the page-teardown boundary, and
  * restores exactly one workspace when a page comes back from the back/forward
  * cache. `mountAtlas` is mocked because this test covers the page lifecycle, not
@@ -22,8 +22,15 @@ const mountAtlas = vi.hoisted(() => vi.fn(() => handle))
 
 vi.mock("./mount", () => ({ mountAtlas }))
 
-import { CHAPTER } from "./chapter-content"
+import { loadServedChapter } from "./chapter-catalog"
+import { QIN_CHAPTER, TANG_CHAPTER } from "./chapter-registry"
+import { chapterHeading } from "./chapters"
 import { mountWorkspace, releaseWorkspace, startAtlasPage } from "./entry"
+
+const TANG = await loadServedChapter(TANG_CHAPTER)
+const QIN = await loadServedChapter(QIN_CHAPTER)
+const TANG_HEADING = chapterHeading(TANG)
+const QIN_HEADING = chapterHeading(QIN)
 
 function addMountPoint(): HTMLElement {
   const root = document.createElement("div")
@@ -45,9 +52,9 @@ beforeEach(() => {
   mountAtlas.mockImplementation(() => handle)
   delete window.__lekishiAtlas
 
-  // The module has no import-time side effects (the atlas shell is prerendered
+  // The module has no import-time side effects (the chapter shell is prerendered
   // on the server), so the page's own start call wires the lifecycle here.
-  startAtlasPage(CHAPTER)
+  startAtlasPage(TANG, TANG_HEADING)
 })
 
 // The bootstrap keeps one workspace for the lifetime of a page, so each test
@@ -56,7 +63,7 @@ afterEach(() => {
   releaseWorkspace()
 })
 
-describe("the atlas page bootstrap", () => {
+describe("the chapter page bootstrap", () => {
   it("mounts exactly one workspace into the page's mount point", () => {
     const root = addMountPoint()
 
@@ -64,7 +71,7 @@ describe("the atlas page bootstrap", () => {
     mountWorkspace()
 
     expect(mountAtlas).toHaveBeenCalledTimes(1)
-    expect(mountAtlas).toHaveBeenCalledWith(root, CHAPTER, "production", CHAPTER.title)
+    expect(mountAtlas).toHaveBeenCalledWith(root, TANG, TANG_HEADING)
     expect(window.__lekishiAtlas).toBe(handle)
   })
 
@@ -78,62 +85,49 @@ describe("the atlas page bootstrap", () => {
   it("keeps one workspace when the page start call repeats", () => {
     addMountPoint()
 
-    startAtlasPage(CHAPTER)
-    startAtlasPage(CHAPTER)
+    startAtlasPage(TANG, TANG_HEADING)
+    startAtlasPage(TANG, TANG_HEADING)
 
     expect(mountAtlas).toHaveBeenCalledTimes(1)
     expect(window.__lekishiAtlas).toBe(handle)
   })
 
-  it("mounts the chapter, detail surface, and display name the page asks for", () => {
+  it("mounts the chapter and heading the page asks for", () => {
     const root = addMountPoint()
 
-    startAtlasPage(CHAPTER, "comparison-review", "The embassy to Tang China")
+    startAtlasPage(TANG, { name: "The embassy to Tang China", decision: "Owner-approved" })
 
-    expect(mountAtlas).toHaveBeenCalledWith(
-      root,
-      CHAPTER,
-      "comparison-review",
-      "The embassy to Tang China",
-    )
+    expect(mountAtlas).toHaveBeenCalledWith(root, TANG, {
+      name: "The embassy to Tang China",
+      decision: "Owner-approved",
+    })
   })
 
-  it("keeps the display name when a page is restored from the back/forward cache", () => {
+  it("keeps the heading when a page is restored from the back/forward cache", () => {
     addMountPoint()
 
-    startAtlasPage(CHAPTER, "production", "The embassy to Tang China")
+    startAtlasPage(TANG, TANG_HEADING)
     mountWorkspace()
 
     transition("pagehide")
     transition("pageshow")
 
-    expect(mountAtlas).toHaveBeenLastCalledWith(
-      expect.anything(),
-      CHAPTER,
-      "production",
-      "The embassy to Tang China",
-    )
+    expect(mountAtlas).toHaveBeenLastCalledWith(expect.anything(), TANG, TANG_HEADING)
   })
 
-  it("restores the chapter, detail surface, and name a later page started", () => {
+  it("restores the chapter and heading a later page started", () => {
     const root = addMountPoint()
-    const qin = { ...CHAPTER, id: "qin-conquest-han-233-226" }
 
-    startAtlasPage(CHAPTER, "production", "The embassy to Tang China")
+    startAtlasPage(TANG, TANG_HEADING)
     mountWorkspace()
     releaseWorkspace()
 
     // A navigation starts a different chapter with its own display name and
-    // detail surface.
-    startAtlasPage(qin, "comparison-review", "The end of the state of Han")
+    // decision line.
+    startAtlasPage(QIN, QIN_HEADING)
     mountWorkspace()
 
-    expect(mountAtlas).toHaveBeenLastCalledWith(
-      root,
-      qin,
-      "comparison-review",
-      "The end of the state of Han",
-    )
+    expect(mountAtlas).toHaveBeenLastCalledWith(root, QIN, QIN_HEADING)
 
     // The restored page comes back as that chapter, not the first one: clear the
     // spy so the assertion cannot pass on the mount above.
@@ -141,12 +135,7 @@ describe("the atlas page bootstrap", () => {
     mountAtlas.mockClear()
     transition("pageshow")
 
-    expect(mountAtlas).toHaveBeenCalledWith(
-      root,
-      qin,
-      "comparison-review",
-      "The end of the state of Han",
-    )
+    expect(mountAtlas).toHaveBeenCalledWith(root, QIN, QIN_HEADING)
   })
 
   it("releases the workspace on teardown and restores one workspace on pageshow", () => {

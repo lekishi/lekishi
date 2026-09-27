@@ -205,6 +205,19 @@ export function returnToEventTime(state: AtlasState, chapter: Chapter): AtlasSta
   }
 }
 
+/**
+ * An explicit jump to another event, as story navigation makes it: select the
+ * event and move the window and playhead to its time in one action.
+ *
+ * RFD 1 keeps this separate from chronological stepping. Stepping walks the
+ * window's event boundaries and never changes the window; a story jump is a
+ * deliberate move to a named step, so it is allowed to change the window — and it
+ * stops playback rather than leaving it running into a window it just replaced.
+ */
+export function jumpToEvent(state: AtlasState, chapter: Chapter, eventId: string): AtlasState {
+  return returnToEventTime(selectEvent(state, chapter, eventId), chapter)
+}
+
 export function eventsVisibleInWindow(
   state: AtlasState,
   chapter: Chapter,

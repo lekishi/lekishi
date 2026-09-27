@@ -132,6 +132,57 @@ export function reviewLabel(independence: string, reviewer: string): string {
   return `Review independence recorded as ${independence || "unknown"}.`
 }
 
+/**
+ * A source's kind, as a reader reads it. The contract's vocabulary is the
+ * authority; an unknown value is shown as the record wrote it rather than
+ * guessed at.
+ */
+export function sourceKindLabel(kind: string): string {
+  const known: Record<string, string> = {
+    primary: "Primary source",
+    reference: "Reference work",
+    scholarly: "Scholarly work",
+    dataset: "Dataset",
+    secondary: "Secondary source",
+    other: "Source",
+  }
+
+  return known[kind] ?? (kind === "" ? "Source" : kind)
+}
+
+/**
+ * A source's recorded licence, as a reader reads it. The mapping is display text
+ * for the contract's own licence vocabulary; anything else is shown verbatim, so
+ * the atlas never upgrades or restates a reuse term.
+ */
+export function licenseLabel(licenseId: string | null): string {
+  if (licenseId === null || licenseId === "") {
+    return "Reuse terms not recorded"
+  }
+
+  const known: Record<string, string> = {
+    "public-domain": "Public domain",
+    "CC0-1.0": "CC0 1.0",
+    "CC-BY-4.0": "CC BY 4.0",
+    "CC-BY-SA-4.0": "CC BY-SA 4.0",
+    "all-rights-reserved": "All rights reserved",
+  }
+
+  return known[licenseId] ?? licenseId
+}
+
+/** A citation as one line: which source, and where in it. */
+export function citationLabel(sourceTitle: string, locatorKind: string, locator: string): string {
+  return locatorKind === ""
+    ? `${sourceTitle} · ${locator}`
+    : `${sourceTitle} · ${locatorKind}: ${locator}`
+}
+
+/** A participant's role, as a reader reads it. The contract's value is kept, only its initial capitalised. */
+export function roleLabel(role: string): string {
+  return role === "" ? "Participant" : role.charAt(0).toUpperCase() + role.slice(1)
+}
+
 /** The same status as one short line, for the map notice where space is scarce. */
 export function reviewSummaryLabel(independence: string): string {
   if (independence === "self_review") {

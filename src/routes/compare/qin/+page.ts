@@ -1,16 +1,15 @@
-import type { Chapter } from "$lib/atlas/domain"
-import { loadChapterContent } from "$lib/atlas/chapter-catalog"
-import { COMPARISON_CHAPTER, COMPARISON_COVERAGE } from "$lib/atlas/comparison"
+import { redirect } from "@sveltejs/kit"
+import { chapterHref } from "$lib/atlas/chapters"
+import { QIN_CHAPTER } from "$lib/atlas/chapter-registry"
 
 /**
- * The comparison review route's load.
+ * The legacy review route.
  *
- * The fixture loads through the comparison catalog, which crosses the same
- * browser-safe projection as the production chapter and supplies the fixture's
- * own coverage model. Loading in `load` rather than after mount means the page
- * is prerendered with the fixture's real content and a fixture that cannot be
- * projected fails `pnpm build` instead of rendering an empty review page.
+ * `/compare/qin` was the bounded chapter's review route before the chapter was
+ * approved and the site served it like any other. The URL keeps working as a
+ * redirect to the chapter's ordinary route; the page's own unapproved-preparation
+ * framing is gone with the decision that made it obsolete.
  */
-export async function load(): Promise<{ chapter: Chapter }> {
-  return { chapter: await loadChapterContent(COMPARISON_CHAPTER, COMPARISON_COVERAGE) }
+export function load(): never {
+  redirect(308, chapterHref(QIN_CHAPTER))
 }

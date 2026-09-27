@@ -36,6 +36,8 @@ const gate = [
   "src/lib/historical/contract/publication-approval.test.ts",
   "src/lib/atlas/projection.test.ts",
   "src/lib/atlas/chapter-catalog.test.ts",
+  "src/lib/atlas/search.test.ts",
+  "src/lib/atlas/story.test.ts",
 ]
 
 const result = spawnSync(

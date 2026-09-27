@@ -1,11 +1,12 @@
 import { describe, expect, it } from "vitest"
-import { CHAPTER } from "./chapter-content"
+import { loadServedChapter } from "./chapter-catalog"
+import { TANG_CHAPTER } from "./chapter-registry"
 import type { PlaybackState } from "./time"
 import { buildScene } from "./scene"
 import { advancePlayhead, createAtlasState, setPlayhead, setPlaying, setTimeWindow } from "./state"
 
 /**
- * Playback over the reviewed chapter.
+ * Playback over a served chapter.
  *
  * The workspace's clock advances the playhead in fractional years while the
  * timeline displays whole years, so the classification has to follow the
@@ -14,6 +15,7 @@ import { advancePlayhead, createAtlasState, setPlayhead, setPlaying, setTimeWind
  * single-year instant could pass under the playhead without ever being active.
  */
 
+const CHAPTER = await loadServedChapter(TANG_CHAPTER)
 const WINDOW = { start: 750, end: 760 }
 
 function playbackAt(eventId: string, playhead: number): PlaybackState {

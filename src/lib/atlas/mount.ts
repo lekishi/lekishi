@@ -8,16 +8,9 @@ import AtlasWorkspace from "./workspace/AtlasWorkspace.svelte"
  * SvelteKit owns the route, the page shell, and the mount point element; Svelte
  * owns everything inside it, including the single source of truth for selection,
  * time, and camera-follow state. The page bootstrap (`atlas/entry.ts`) is the
- * only caller, so one page has one workspace.
+ * only caller, so one page has one workspace, and every chapter mounts through
+ * this one function with the same behavior and controls.
  */
-/**
- * Which detail surface the workspace shows. `production` is the reviewed launch
- * chapter's surface; `comparison-review` additionally marks disputed events and
- * shows their published accounts, which is the comparison fixture's review
- * surface. The distinction exists so a review surface can show more without
- * changing what the approved launch chapter renders.
- */
-export type AtlasDetail = "production" | "comparison-review"
 
 export type AtlasHandle = {
   /** True once the workspace is torn down and its renderer is disposed. */
@@ -27,17 +20,29 @@ export type AtlasHandle = {
 }
 
 /**
- * Mounts the atlas workspace with the chapter's display name. The name is
- * presentation the caller owns (`chapters.ts`); the workspace uses it for the
- * notice and falls back to the chapter's own published title.
+ * What the page states beside the chapter: the display name a reader met on the
+ * root page, and the chapter's recorded editorial decision. The page owns both
+ * (`chapters.ts`); the workspace falls back to the chapter's own published title
+ * when a caller passes none.
  */
+export type AtlasHeading = {
+  readonly name: string
+  readonly decision: string
+}
+
 export function mountAtlas(
   root: HTMLElement,
   chapter: Chapter,
-  detail: AtlasDetail = "production",
-  name: string = chapter.title,
+  heading?: AtlasHeading,
 ): AtlasHandle {
-  const component = mount(AtlasWorkspace, { target: root, props: { chapter, detail, name } })
+  const component = mount(AtlasWorkspace, {
+    target: root,
+    props: {
+      chapter,
+      name: heading?.name ?? chapter.title,
+      decision: heading?.decision ?? "",
+    },
+  })
   let disposed = false
 
   return {

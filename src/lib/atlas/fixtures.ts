@@ -6,8 +6,8 @@ import type { Chapter } from "./domain"
  * Focused unit tests use this instead of the reviewed chapter when they need
  * spans the real content does not contain — a decade-precision occurrence, an
  * event that starts inside the window and ends beyond it, a place with no
- * position. Nothing in the app imports it: the atlas renders the reviewed
- * chapter through `chapter-content.ts`, and `check-static-build.mjs` fails the
+ * position. Nothing in the app imports it: the atlas renders served
+ * chapters through `chapter-catalog.ts`, and `check-static-build.mjs` fails the
  * build if any of these strings reach the artifact.
  *
  * Nothing here is a historical claim: the names are invented and the dates are
@@ -23,30 +23,38 @@ export const FIXTURE_CHAPTER: Chapter = {
     {
       id: "place-north-harbor",
       label: "Sample harbor",
+      aliases: ["Sample harbor", "Sample Harbour"],
       placement: "approximate",
       precision: "locality",
       position: { lon: 129.9, lat: 32.8 },
+      placementNote: "Synthetic approximate locality placement.",
     },
     {
       id: "place-inland-plain",
       label: "Sample plain",
+      aliases: ["Sample plain"],
       placement: "display-anchor",
       precision: "unspecified",
       position: { lon: 120.6, lat: 34.3 },
+      placementNote: "Synthetic label anchor; no historical coordinate is asserted.",
     },
     {
       id: "place-southern-bay",
       label: "Sample bay",
+      aliases: ["Sample bay", "Sample Bay"],
       placement: "approximate",
       precision: "region",
       position: { lon: 122.1, lat: 24.9 },
+      placementNote: null,
     },
     {
       id: "place-island-stop",
       label: "Sample island",
+      aliases: ["Sample island"],
       placement: "unknown",
       precision: "unspecified",
       position: null,
+      placementNote: "Synthetic place with no sourced position.",
     },
   ],
   events: [
@@ -61,6 +69,7 @@ export const FIXTURE_CHAPTER: Chapter = {
         precision: "locality",
         position: { lon: 129.9, lat: 32.8 },
       },
+      placeIds: ["place-north-harbor"],
       occurrence: {
         startYear: 1204,
         endYear: 1204,
@@ -71,6 +80,15 @@ export const FIXTURE_CHAPTER: Chapter = {
       note: "Synthetic event used to check selection, details, and camera following.",
       dispute: null,
       coda: false,
+      participants: [{ actorId: "actor-fixture-envoy", role: "leader" }],
+      citations: [
+        {
+          sourceId: "source-fixture-chronicle",
+          locatorKind: "entry",
+          locator: "Fixture entry 1",
+          quotedText: null,
+        },
+      ],
     },
     {
       id: "event-coastal-crossing",
@@ -83,6 +101,7 @@ export const FIXTURE_CHAPTER: Chapter = {
         precision: "region",
         position: { lon: 122.1, lat: 24.9 },
       },
+      placeIds: ["place-southern-bay"],
       occurrence: {
         startYear: 1218,
         endYear: 1220,
@@ -93,6 +112,8 @@ export const FIXTURE_CHAPTER: Chapter = {
       note: "Synthetic uncertain occurrence used to check bounded spans and playhead activity.",
       dispute: null,
       coda: false,
+      participants: [],
+      citations: [],
     },
     {
       id: "event-plain-workshop",
@@ -105,6 +126,7 @@ export const FIXTURE_CHAPTER: Chapter = {
         precision: "unspecified",
         position: { lon: 120.6, lat: 34.3 },
       },
+      placeIds: ["place-inland-plain"],
       occurrence: {
         startYear: 1228,
         endYear: 1236,
@@ -115,6 +137,8 @@ export const FIXTURE_CHAPTER: Chapter = {
       note: "Synthetic decade-precision span used to check possible-match filtering.",
       dispute: null,
       coda: false,
+      participants: [{ actorId: "actor-fixture-envoy", role: "participant" }],
+      citations: [],
     },
     {
       id: "event-island-landfall",
@@ -125,6 +149,7 @@ export const FIXTURE_CHAPTER: Chapter = {
         label: "Sample island",
         reason: "no-position",
       },
+      placeIds: ["place-island-stop"],
       occurrence: {
         startYear: 1244,
         endYear: 1244,
@@ -135,6 +160,8 @@ export const FIXTURE_CHAPTER: Chapter = {
       note: "Synthetic event with no published position, used to check list-only events.",
       dispute: null,
       coda: false,
+      participants: [],
+      citations: [],
     },
     {
       id: "event-archive-transfer",
@@ -147,6 +174,7 @@ export const FIXTURE_CHAPTER: Chapter = {
         precision: "unspecified",
         position: { lon: 120.6, lat: 34.3 },
       },
+      placeIds: ["place-inland-plain"],
       occurrence: {
         startYear: 1249,
         endYear: 1251,
@@ -157,7 +185,35 @@ export const FIXTURE_CHAPTER: Chapter = {
       note: "Synthetic occurrence that starts inside the default window and ends beyond it.",
       dispute: null,
       coda: false,
+      participants: [],
+      citations: [],
     },
+  ],
+  actors: [
+    {
+      id: "actor-fixture-envoy",
+      label: "Sample envoy",
+      aliases: ["Sample envoy", "Sample Envoy"],
+      types: ["person"],
+    },
+  ],
+  sources: [
+    {
+      id: "source-fixture-chronicle",
+      title: "Synthetic chronicle",
+      kind: "primary",
+      edition: null,
+      attribution: "Synthetic test source, not historical content.",
+      licenseId: "public-domain",
+      url: null,
+    },
+  ],
+  story: [
+    { recordId: "event-harbor-assembly", caption: "Fixture assembly", kind: "event" },
+    { recordId: "event-coastal-crossing", caption: "Fixture crossing", kind: "event" },
+    { recordId: "event-plain-workshop", caption: "Fixture workshop", kind: "event" },
+    { recordId: "event-island-landfall", caption: "Fixture landfall", kind: "event" },
+    { recordId: "event-archive-transfer", caption: "Fixture transfer", kind: "event" },
   ],
   publication: {
     setIds: ["lks:set:synthetic-test"],

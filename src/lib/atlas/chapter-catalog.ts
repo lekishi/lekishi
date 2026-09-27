@@ -1,24 +1,26 @@
-import { isObject, type JsonObject } from "../historical/contract/types"
-import { projectChapterContent } from "./chapter-content"
+import { isObject, type JsonObject, type JsonValue } from "../historical/contract/types"
 import type { Chapter } from "./domain"
-import type { ChapterCoverage } from "./projection"
+import { SERVED_CHAPTERS, servedChapter, type ServedChapter } from "./chapter-registry"
+import { projectChapter, type ChapterCoverage } from "./projection"
 
 /**
- * The comparison catalog: the browser-safe loader for reviewed chapters that are
- * not the production chapter.
+ * The browser-safe chapter loader.
  *
- * The production atlas binds one chapter eagerly in `chapter-content.ts`. The
- * treatment comparison needs to load the bounded Qin fixture through the same
- * projection, so the comparison review route (`/compare/qin`) imports this module
- * and supplies the chapter's own coverage model, as the production boundary does
- * for Tang; the fixture's README records the window it passes. The atlas route
- * does not import this module, so the production page still bundles only the
- * reviewed Tang chapter — `scripts/check-static-build.mjs` checks that, and that
- * the review page states the fixture is unapproved preparation.
+ * Vite bundles each chapter's records, sources, and publication sets at build
+ * time (`import.meta.glob`, JSON), so the browser reads the same files the
+ * contract validates: there is no second copy of the content, no Node API in
+ * this path, and no request the deployment has to serve. Loading is lazy per
+ * chapter, so a page fetches only the chapter it renders.
  *
- * Loading is lazy per chapter: the modules are fetched only when a harness asks
- * for that chapter, so a catalog with several comparison fixtures never loads
- * them all at once.
+ * Every served chapter loads through this one module — the chapter route passes
+ * the id and coverage model from `chapter-registry.ts`, and the route's `load`
+ * runs during prerendering, so a chapter that cannot be projected fails
+ * `pnpm build` instead of shipping placeholder content. `Publication.checkAll`
+ * remains the Node-side validator: schemas, revision hashes, and source pins
+ * need `node:fs` and `node:crypto`, so `pnpm build` runs
+ * `scripts/check-chapter.mjs`, which runs the chapters' contract and projection
+ * tests through Vitest before Vite bundles anything. This module is the
+ * representability gate; that one is the validation gate.
  */
 
 const recordModules = import.meta.glob("../../../historical/chapters/*/records/*.json", {
@@ -56,9 +58,9 @@ async function loadDirectory(
 }
 
 /**
- * Loads a non-production chapter and projects it into the atlas domain. The
- * caller supplies the chapter's coverage model; the projection and the contract
- * stay the same ones the production chapter uses.
+ * Loads a chapter and projects it into the atlas domain. The caller supplies the
+ * chapter's coverage model; the projection and the contract stay the same ones
+ * every chapter uses.
  */
 export async function loadChapterContent(
   chapter: string,
@@ -71,4 +73,49 @@ export async function loadChapterContent(
   ])
 
   return projectChapterContent(chapter, [...records, ...sources], sets, coverage)
+}
+
+/**
+ * Projects a chapter's documents into the atlas domain, or throws with every
+ * representability error. A projection failure throws at the route's load during
+ * prerendering, so an unrepresentable chapter fails the build rather than
+ * rendering an empty page, and a deployed page never falls back to synthetic
+ * events.
+ */
+export function projectChapterContent(
+  name: string,
+  documents: JsonValue[],
+  sets: JsonValue[],
+  coverage: ChapterCoverage,
+): Chapter {
+  const projected = projectChapter(name, documents, sets, coverage)
+
+  if (!projected.ok) {
+    throw new Error(
+      [
+        `the chapter ${name} cannot be projected, so the atlas has nothing honest to show:`,
+        ...projected.errors.map((error) => `  - ${error}`),
+      ].join("\n"),
+    )
+  }
+
+  return projected.chapter
+}
+
+/**
+ * Loads a chapter the site serves, by its tree id. An id outside the served list
+ * is a programming error rather than a content gap: the chapter route only
+ * enumerates served ids, and the route's own load reports a 404 for anything
+ * else before this is reached.
+ */
+export async function loadServedChapter(id: string): Promise<Chapter> {
+  const served = servedChapter(id)
+
+  if (served === undefined) {
+    throw new Error(
+      `${id} is not a served chapter; the site serves ${SERVED_CHAPTERS.map((chapter) => chapter.id).join(", ")}`,
+    )
+  }
+
+  return loadChapterContent(served.id, served.coverage)
 }

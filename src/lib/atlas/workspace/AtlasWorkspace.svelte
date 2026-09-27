@@ -1,34 +1,37 @@
 <script lang="ts">
   import { untrack } from "svelte"
   import type { Chapter } from "../domain"
-  import { COMPARISON_REVIEW } from "../comparison"
-  import { reviewSummaryLabel, windowLabel } from "../labels"
-  import { buildScene } from "../scene"
+  import { windowLabel } from "../labels"
+  import { buildScene, searchRows } from "../scene"
+  import { searchChapter } from "../search"
+  import * as story from "../story"
   import * as atlas from "../state"
   import type { AtlasState } from "../state"
   import EventList from "./EventList.svelte"
   import Globe from "./Globe.svelte"
+  import SearchResults from "./SearchResults.svelte"
   import SelectionPanel from "./SelectionPanel.svelte"
+  import SourceList from "./SourceList.svelte"
+  import StoryList from "./StoryList.svelte"
   import TimeControls from "./TimeControls.svelte"
 
   /**
-   * The workspace renders whichever chapter its caller mounts it with: the
-   * production atlas passes the reviewed Tang chapter, and the comparison review
-   * route passes the bounded Qin fixture. The chapter is data, not a branch in
-   * this component; `detail` only decides whether the review-only dispute
-   * presentation is shown, because the approved launch chapter's surface must not
-   * change without an owner decision.
+   * The workspace renders whichever chapter its caller mounts it with, through the
+   * same behavior and controls for every chapter: the atlas passes the chapter it
+   * loaded and the heading the chapter's card supplies, and nothing here branches
+   * on which chapter it is.
    *
-   * `name` is the chapter's display name. The caller supplies it because the
-   * name a reader sees is product presentation (`chapters.ts`), while the
-   * workspace stays chapter-agnostic and falls back to the chapter's own
-   * published title for a chapter that has no card.
+   * `name` is the chapter's display name and `decision` its recorded editorial
+   * decision; the caller supplies both because the name a reader sees and the
+   * ledger-derived decision line are product presentation (`chapters.ts`), while
+   * the workspace stays chapter-agnostic and falls back to the chapter's own
+   * published title and recorded review independence.
    */
   let {
     chapter,
-    detail = "production",
     name = chapter.title,
-  }: { chapter: Chapter; detail?: "production" | "comparison-review"; name?: string } = $props()
+    decision = "",
+  }: { chapter: Chapter; name?: string; decision?: string } = $props()
 
   // This component is the single owner of atlas interaction state. Everything
   // below reads from `atlasState` and dispatches actions; the renderer only
@@ -42,6 +45,8 @@
   let atlasState: AtlasState = $state.raw(untrack(() => atlas.createAtlasState(chapter)))
   let rendererError = $state<string | null>(null)
   let listOpen = $state(false)
+  let panelTab = $state<"events" | "story" | "sources">("events")
+  let query = $state("")
 
   // The overlay column must clear the time controls, whose height depends on the
   // viewport and on the chapter's own labels (a BCE window's year text is taller
@@ -82,7 +87,21 @@
   const selectedEvent = $derived(atlas.findEvent(chapter, atlasState.selectedEventId))
   const selectionStatus = $derived(atlas.selectionTimeStatus(atlasState, chapter))
   const playing = $derived(atlasState.playing)
-  const showDisputeDetail = $derived(detail === "comparison-review")
+  const searching = $derived(query.trim() !== "")
+  const results = $derived(
+    searching ? searchRows(atlasState, chapter, searchChapter(chapter, query)) : [],
+  )
+  const selectedPlaceNote = $derived(
+    selectedEvent === null || selectedEvent.placement.kind !== "point"
+      ? null
+      : (chapter.places.find((place) => place.id === selectedEvent.placement.placeId)
+          ?.placementNote ?? null),
+  )
+  const selectedStory = $derived({
+    caption: story.storyCaption(chapter, atlasState.selectedEventId),
+    previous: story.previousStoryStep(chapter, atlasState.selectedEventId)?.recordId ?? null,
+    next: story.nextStoryStep(chapter, atlasState.selectedEventId)?.recordId ?? null,
+  })
 
   // What the chapter's own publication states, counted rather than claimed: the
   // notice panel has to stay true when the content changes.
@@ -93,17 +112,7 @@
     inWindowEvents.filter((event) => event.placement.kind === "none").length,
   )
   const unlocatedPlaces = $derived(chapter.places.filter((place) => place.position === null).length)
-
-  // The notice states the content's editorial status in the atlas's own words.
-  // The production surface states only the review independence the chapter's
-  // publication records; the review surface states the fixture's unapproved
-  // preparation as well. Either way the label is status metadata beside the
-  // chapter's name — it is not the chapter's name or its identity.
-  const noticeLabel = $derived(
-    detail === "comparison-review"
-      ? `${COMPARISON_REVIEW.label} · ${reviewSummaryLabel(review.independence)}`
-      : reviewSummaryLabel(review.independence),
-  )
+  const disputedEvents = $derived(chapter.events.filter((event) => event.dispute !== null).length)
 
   // The workspace owns the playback clock; the renderer never advances time.
   $effect(() => {
@@ -125,6 +134,20 @@
     atlasState = atlas.selectEvent(atlasState, chapter, eventId)
     listOpen = false
   }
+
+  /** A story step is an explicit jump: select the event and move time to it. */
+  function jumpToStoryStep(eventId: string) {
+    atlasState = atlas.jumpToEvent(atlasState, chapter, eventId)
+    listOpen = false
+  }
+
+  // The tabs carry the counts: a surface does not need a heading of its own, and
+  // the panel has to keep its height for the rows it shows at short viewports.
+  const tabs = $derived([
+    { id: "events", label: `Events (${scene.events.length})` },
+    { id: "story", label: `Story (${chapter.story.length})` },
+    { id: "sources", label: `Sources (${chapter.sources.length})` },
+  ] as const)
 </script>
 
 <div
@@ -154,31 +177,39 @@
   {/if}
 
   <!--
-    One overlay column: the notice, the event list, and the selection panel are
-    laid out in flow, so they can never overlap each other. At phone widths the
-    notice takes the full width, the buttons wrap below it, the event list keeps
-    a usable minimum height, and the details panel scrolls in what is left; from
-    `md` up the column is bounded above the time controls and the event list
-    shrinks to fit it, so a long window scrolls inside the panel instead of
-    running under the controls.
+    One overlay column: the notice, the buttons, and the panel are laid out in
+    flow, so they can never overlap each other. At phone widths the notice takes
+    the full width, the buttons wrap below it, the panel keeps a usable minimum
+    height, and the details panel scrolls in what is left; from `md` up the column
+    is bounded above the time controls and the panel shrinks to fit it, so a long
+    list scrolls inside the panel instead of running under the controls.
+
+    The column is bounded above the time controls at every width, and it scrolls
+    rather than overflowing them: at the smallest viewports a notice, a panel, and
+    an open selection can together need more room than the map has, and the one
+    thing that must not happen is a panel crossing the time controls. Scrolling
+    keeps every surface reachable; the panel's own list and the details panel keep
+    their own scroll areas inside it.
   -->
   <div
-    class="pointer-events-none absolute inset-x-3 top-3 z-20 flex flex-col gap-2"
+    class="pointer-events-none absolute inset-x-3 top-3 z-20 flex flex-col gap-2 overflow-y-auto"
     style="bottom: {controlsHeight + 24}px"
   >
     <div class="flex shrink-0 flex-wrap items-start justify-between gap-2">
       <div
         id="atlas-notice"
-        class="max-h-[45dvh] w-full min-w-0 overflow-y-auto rounded-xl border border-amber-300/40 bg-slate-950/85 px-3 py-2 backdrop-blur sm:w-auto sm:max-w-[19rem]"
+        class="max-h-[45dvh] w-full min-w-0 shrink-0 overflow-y-auto rounded-xl border border-amber-300/40 bg-slate-950/85 px-3 py-2 backdrop-blur sm:w-auto sm:max-w-[19rem] md:max-h-[7rem] md:shrink"
       >
-        <p class="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-amber-300">
-          {noticeLabel}
-        </p>
+        {#if decision}
+          <p class="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-amber-300">
+            {decision}
+          </p>
+        {/if}
         <p class="mt-0.5 text-xs font-semibold leading-snug text-slate-100">{name}</p>
         <!--
           The chapter's own coverage statement is the full statement of what this
           chapter does and does not cover. Phone widths keep the derived counts
-          instead: the notice must not eat the space the event list needs.
+          instead: the notice must not eat the space the list needs.
         -->
         <p class="mt-1 hidden text-[0.7rem] leading-snug text-slate-300 sm:block">
           {review.coverageNote}
@@ -187,7 +218,7 @@
           {windowLabel(chapter.defaultWindow)} with {codaEvents} coda
           {codaEvents === 1 ? "node" : "nodes"} outside it; {unplacedInWindow} of {inWindowEvents.length}
           in-window events and {unlocatedPlaces} of {chapter.places.length} places without a sourced map
-          position.
+          position; {disputedEvents} disputed {disputedEvents === 1 ? "account" : "accounts"}.
         </p>
       </div>
 
@@ -223,7 +254,7 @@
           onclick={() => (listOpen = !listOpen)}
           class="pointer-events-auto rounded-xl border border-slate-600 bg-slate-950/80 px-3 py-2 text-xs font-semibold text-slate-200 backdrop-blur transition hover:border-slate-400 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300 md:hidden"
         >
-          Events ({scene.events.length})
+          Explore ({scene.events.length})
         </button>
       </div>
     </div>
@@ -231,16 +262,76 @@
     <div
       id="atlas-event-panel"
       class={[
-        "pointer-events-auto min-h-[8rem] w-[17rem] max-w-full flex-1 flex-col overflow-hidden rounded-2xl border border-slate-700/70 bg-slate-950/85 px-3 py-3 shadow-xl shadow-slate-950/50 backdrop-blur md:min-h-0 md:flex-initial",
+        "pointer-events-auto min-h-[8rem] w-[17rem] max-w-full flex-1 flex-col overflow-hidden rounded-2xl border border-slate-700/70 bg-slate-950/85 px-3 py-3 shadow-xl shadow-slate-950/50 backdrop-blur md:min-h-[11rem] md:w-[19rem] md:flex-initial",
         listOpen ? "flex" : "hidden md:flex",
       ]}
     >
-      <EventList
-        events={scene.events}
-        selectedEventId={atlasState.selectedEventId}
-        disputeDetail={showDisputeDetail}
-        onSelect={selectEvent}
-      />
+      <!--
+        One panel, three surfaces: the window's events, the chapter's story, and
+        its sources. They share the panel so the overlays stay countable at phone
+        widths, and the tab bar says which one is showing.
+      -->
+      <div
+        class="mb-2 flex shrink-0 items-center gap-1"
+        role="tablist"
+        aria-label="Chapter exploration"
+      >
+        {#each tabs as tab (tab.id)}
+          <button
+            id="atlas-tab-{tab.id}"
+            type="button"
+            role="tab"
+            aria-selected={panelTab === tab.id}
+            data-testid="atlas-tab"
+            onclick={() => (panelTab = tab.id)}
+            class={[
+              "rounded-lg px-2.5 py-1 text-xs font-semibold transition",
+              "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300",
+              panelTab === tab.id
+                ? "bg-slate-800 text-white"
+                : "text-slate-400 hover:bg-slate-900 hover:text-slate-200",
+            ]}
+          >
+            {tab.label}
+          </button>
+        {/each}
+      </div>
+
+      {#if panelTab === "events"}
+        <div class="mb-2 flex shrink-0 flex-col gap-1.5">
+          <label
+            class="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-slate-400"
+            for="atlas-search"
+          >
+            Search the chapter
+          </label>
+          <input
+            id="atlas-search"
+            type="search"
+            value={query}
+            placeholder="A name, a place, a year"
+            oninput={(event) => (query = (event.currentTarget as HTMLInputElement).value)}
+            class="w-full rounded-lg border border-slate-700 bg-slate-900 px-2.5 py-1.5 text-sm text-slate-100 placeholder:text-slate-500 focus:border-amber-300 focus:outline-none"
+          />
+        </div>
+
+        {#if searching}
+          <SearchResults {query} {results} onSelect={selectEvent} onClear={() => (query = "")} />
+        {:else}
+          <EventList events={scene.events} onSelect={selectEvent} />
+        {/if}
+      {:else if panelTab === "story"}
+        <StoryList
+          steps={chapter.story}
+          currentRecordId={atlasState.selectedEventId}
+          onJump={jumpToStoryStep}
+        />
+      {:else}
+        <SourceList
+          sources={chapter.sources}
+          citedSourceIds={selectedEvent?.citations.map((citation) => citation.sourceId) ?? []}
+        />
+      {/if}
     </div>
 
     {#if selectedEvent}
@@ -252,16 +343,32 @@
         from rendering under the controls or past the bottom of the workspace,
         where the page cannot scroll to it: the record's own explanation of why an
         event has no position was the text that fell off.
+
+        At phone widths the details and the open drawer do not share the screen:
+        the smallest reviewed viewport cannot hold the notice, the drawer's list,
+        and the details at once, and a reader who opens the list is choosing to
+        look at the list. Selecting an event closes the drawer, so the details are
+        what a reader returns to. From `md` up both stay visible, side by side.
       -->
       <div
-        class="mt-auto flex min-h-0 max-h-[60%] flex-col overflow-hidden md:absolute md:right-0 md:top-[5.25rem] md:mt-0 md:max-h-[calc(100%-5.25rem)] md:w-96"
+        class={[
+          "mt-auto flex min-h-0 max-h-[60%] flex-col overflow-hidden md:absolute md:right-0 md:top-[5.25rem] md:mt-0 md:max-h-[calc(100%-5.25rem)] md:w-96",
+          listOpen ? "hidden md:flex" : "flex",
+        ]}
       >
         <SelectionPanel
           event={selectedEvent}
           status={selectionStatus}
           review={{ independence: review.independence, reviewer: review.reviewer }}
-          disputeDetail={showDisputeDetail}
+          {decision}
+          placeNote={selectedPlaceNote}
+          actors={chapter.actors}
+          sources={chapter.sources}
+          story={selectedStory}
           onReturnToTime={() => (atlasState = atlas.returnToEventTime(atlasState, chapter))}
+          onPreviousStoryStep={() =>
+            selectedStory.previous !== null && jumpToStoryStep(selectedStory.previous)}
+          onNextStoryStep={() => selectedStory.next !== null && jumpToStoryStep(selectedStory.next)}
           onClose={() => selectEvent(null)}
         />
       </div>

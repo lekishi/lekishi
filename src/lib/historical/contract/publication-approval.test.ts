@@ -1,8 +1,10 @@
 import { readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
-import { listChapters, loadChapter } from "../chapter"
+import { listChapters, loadChapter, type ChapterTree } from "../chapter"
 import { encode, sha256 } from "./canonical"
 import { objectOf, type JsonObject } from "./types"
+import { SERVED_CHAPTERS } from "../../atlas/chapter-registry"
+import { currentPublished } from "./publication-order"
 
 /**
  * The publication approval gate.
@@ -15,9 +17,11 @@ import { objectOf, type JsonObject } from "./types"
  * fails `pnpm build` through `scripts/check-chapter.mjs`.
  *
  * The gate reads every chapter tree under `historical/chapters/`, so a new
- * chapter directory cannot appear with a set the ledger does not cover. The
- * Tang chapter's set carries the owner's release approval; the Qin comparison
- * fixture's set is a preparation snapshot and must not claim one.
+ * chapter directory cannot appear with a set the ledger does not cover. Both
+ * served chapters' sets carry the owner's release approval, and a chapter the
+ * site serves must be showing revisions that approval covers: the served list in
+ * `src/lib/atlas/chapter-registry.ts` is what the chapter route prerenders, and a
+ * `preparation snapshot` set may exist in the repository without being served.
  *
  * The rule is a predicate over (sets, ledger rows) so it can be exercised
  * against deliberately wrong readings — a set without a row, a row without a
@@ -29,6 +33,12 @@ import { objectOf, type JsonObject } from "./types"
  * source pin invalidates the row instead of silently inheriting its decision.
  * It is a consistency check, not an authentication — a person still has to check
  * that the row, the digest, and the set describe what the owner decided.
+ *
+ * The served-chapter rule is the reader-facing half of the same idea: a set may
+ * exist as a preparation snapshot, but the chapters the site renders must come
+ * from a set the owner approved. Adding a chapter to the served list, or moving a
+ * served chapter to a later revision, therefore fails the build until the owner
+ * decides again.
  */
 
 const TANG_SET = "lks:set:tang-mission-750-754-v1"
@@ -196,6 +206,44 @@ function allSets(): JsonObject[] {
   return chapterNames().flatMap((chapter) => loadChapter(chapter).sets)
 }
 
+/**
+ * The rule the served chapters add: a chapter the site renders must be showing
+ * revisions an `owner approved` decision covers.
+ *
+ * The gate's other rules keep an undecided set from existing; this one keeps a
+ * served chapter from *rendering* content whose decision is missing, stale, or
+ * was taken on a snapshot the chapter has since moved past. A chapter that is
+ * prepared for review but not served is deliberately out of scope: it may carry a
+ * `preparation snapshot` set, and the served list — not the repository — is what
+ * a reader can open.
+ */
+function servedViolations(served: ChapterTree[], ledger: LedgerRow[]): string[] {
+  const violations: string[] = []
+  const approved = new Set(
+    ledger.filter((row) => row.decision === "owner approved").map((row) => row.setId),
+  )
+
+  for (const tree of served) {
+    const current = currentPublished(tree.documents, tree.sets)
+    const setIds = [...new Set([...current.values()].map((value) => String(value.set_id)))].sort()
+
+    for (const setId of setIds) {
+      if (!approved.has(setId)) {
+        violations.push(
+          `${tree.name} is served, but the revisions it renders come from ${setId}, which has no owner approved decision`,
+        )
+      }
+    }
+  }
+
+  return violations
+}
+
+/** The served chapters' trees, read from the list the chapter route prerenders. */
+function servedTrees(): ChapterTree[] {
+  return SERVED_CHAPTERS.map((chapter) => loadChapter(chapter.id))
+}
+
 describe("publication approval gate", () => {
   it("records a decision for every set in every chapter tree", () => {
     const ledger = ledgerRows()
@@ -207,24 +255,92 @@ describe("publication approval gate", () => {
     expect(approvalViolations(allSets(), ledger)).toEqual([])
   })
 
-  it("records the owner's approval for the merged Tang set and nothing else", () => {
+  it("serves only chapters whose rendered revisions an owner decision covers", () => {
+    const served = servedTrees()
+
+    // The served list is what the chapter route prerenders; both entries are
+    // chapters, and neither renders content the ledger has not approved.
+    expect(served.map((tree) => tree.name).sort()).toEqual(
+      ["qin-conquest-han-233-226", "tang-mission-750-754"].sort(),
+    )
+    expect(servedViolations(served, ledgerRows())).toEqual([])
+  })
+
+  it("fails a served chapter whose rendered revisions lost their approval", () => {
+    // The same content, decided as a preparation snapshot instead of an
+    // approval: the chapter trees are still covered, but the served chapters are
+    // rendering content no decision released.
+    const ledger = ledgerRows().map((row) => ({ ...row, decision: "preparation snapshot" }))
+    const violations = servedViolations(servedTrees(), ledger)
+
+    expect(violations.join("\n")).toContain(
+      "is served, but the revisions it renders come from lks:set:tang-mission-750-754-v1, which has no owner approved decision",
+    )
+    expect(violations.join("\n")).toContain(
+      "is served, but the revisions it renders come from lks:set:qin-conquest-han-233-226-v1, which has no owner approved decision",
+    )
+  })
+
+  it("fails a served chapter that moved to a revision its approved set does not publish", () => {
+    // A later revision inside the served chapter's tree: the approval covered the
+    // snapshot the row records, not whatever the chapter carries next.
+    const served = servedTrees().map((tree) =>
+      tree.name !== "tang-mission-750-754"
+        ? tree
+        : {
+            ...tree,
+            sets: tree.sets.map((set) => ({
+              ...set,
+              set_id: "lks:set:tang-mission-750-754-v2",
+            })),
+          },
+    )
+    const violations = servedViolations(served, ledgerRows())
+
+    expect(violations.join("\n")).toContain(
+      "is served, but the revisions it renders come from lks:set:tang-mission-750-754-v2, which has no owner approved decision",
+    )
+  })
+
+  it("does not apply the served rule to a chapter the site does not serve", () => {
+    // A preparation snapshot may exist in the repository without being served:
+    // that is what keeps the review workflow possible without shipping it. The
+    // set stays ledger-covered, so the approval gate itself is satisfied, and the
+    // served rule only looks at the chapters the site actually renders.
+    const ledger = ledgerRows().map((row) =>
+      row.setId === QIN_SET ? { ...row, decision: "preparation snapshot" } : row,
+    )
+    const served = servedTrees().filter((tree) => tree.name !== "qin-conquest-han-233-226")
+
+    expect(approvalViolations(allSets(), ledger)).toEqual([])
+    expect(servedViolations(served, ledger)).toEqual([])
+    expect(servedViolations(servedTrees(), ledger)).toContain(
+      "qin-conquest-han-233-226 is served, but the revisions it renders come from lks:set:qin-conquest-han-233-226-v1, which has no owner approved decision",
+    )
+  })
+
+  it("records the owner's approval for both served sets, and describes neither as review", () => {
     const approved = ledgerRows().filter((row) => row.decision === "owner approved")
 
-    expect(approved.map((row) => row.setId)).toEqual([TANG_SET])
+    // Both chapter trees are served by the site, and both carry the owner's
+    // editorial approval of the exact snapshot their row records.
+    expect(approved.map((row) => row.setId).sort()).toEqual([QIN_SET, TANG_SET].sort())
 
-    // The approval is a ledger decision, not a review relabel: the approved set
-    // still records the preparing editor's self-review, and the comparison
-    // fixture is a preparation snapshot.
-    for (const set of loadChapter("tang-mission-750-754").sets) {
-      expect(String(objectOf(set["review"])["independence"])).toBe("self_review")
-    }
+    // The approval is a ledger decision, not a review relabel: each approved set
+    // still records the preparing editor's self-review, and the row's own note
+    // keeps the specialist reviews open.
+    for (const [chapter, setId] of [
+      ["tang-mission-750-754", TANG_SET],
+      ["qin-conquest-han-233-226", QIN_SET],
+    ] as const) {
+      for (const set of loadChapter(chapter).sets) {
+        expect(String(objectOf(set["review"])["independence"]), chapter).toBe("self_review")
+      }
 
-    const qin = ledgerRows().find((row) => row.setId === QIN_SET)
+      const row = ledgerRows().find((candidate) => candidate.setId === setId)
 
-    expect(qin?.decision).toBe("preparation snapshot")
-
-    for (const set of loadChapter("qin-conquest-han-233-226").sets) {
-      expect(String(objectOf(set["review"])["independence"])).toBe("self_review")
+      expect(row?.decidedBy, chapter).toContain("owner")
+      expect(row?.decidedBy, chapter).not.toContain("independent")
     }
   })
 

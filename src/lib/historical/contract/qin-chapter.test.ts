@@ -749,11 +749,12 @@ describe("the Qin comparison fixture", () => {
     }
   })
 
-  it("is covered by the ledger as a preparation snapshot, with the digest it names", () => {
-    // The fixture must not be the one content tree the gate cannot see: the
-    // ledger row has to name this set, decide it a preparation snapshot, and
-    // carry the digest of the set as it stands. Approving the content would be
-    // the owner's decision, and this test is what fails if one is written in.
+  it("is covered by the ledger as an approved set, with the digest it names", () => {
+    // The chapter must not be the one content tree the gate cannot see: the
+    // ledger row has to name this set, record the owner's decision, and carry the
+    // digest of the set as it stands. The decision was taken on 2026-09-27; the
+    // content itself was not touched to record it, so this digest is the one the
+    // preparation carried before the decision as well.
     const set = setById(tree(), "lks:set:qin-conquest-han-233-226-v1")
     const lines = readFileSync(LEDGER_URL, "utf8").split("\n")
     const start = lines.findIndex((line) => line.includes("lks:set:qin-conquest-han-233-226-v1"))
@@ -774,15 +775,32 @@ describe("the Qin comparison fixture", () => {
     }
 
     expect(cells[0]).toBe("`lks:set:qin-conquest-han-233-226-v1`")
-    expect(cells[1]).toBe("preparation snapshot")
+    expect(cells[1]).toBe("owner approved")
     expect(cells[2]).toContain("owner")
-    expect(cells[2]).not.toContain("approved")
+    expect(cells[2]).toContain("2026-09-27")
     // The cell carries the digest in backticks, as the ledger writes it.
     expect(cells[3]).toBe(`\`sha256:${sha256(encode(set))}\``)
-    expect(cells[4]).not.toContain("owner approved")
+
+    // The row's own note, read whole rather than as the first wrapped line,
+    // records the approval and keeps the specialist reviews open; it must not
+    // describe the decision as an independent or specialist review.
+    const end = lines.findIndex((line, index) => index > start && line.startsWith("|`lks:set:"))
+    // Wrapped lines are joined before the assertions: the record wraps its prose,
+    // so a phrase can straddle two source lines.
+    const row = lines
+      .slice(start, end === -1 ? undefined : end)
+      .join(" ")
+      .replace(/\s+/g, " ")
+
+    expect(row).toContain("owner's editorial approval")
+    expect(row).toContain("specialist reviews remain unperformed")
+    expect(row).toContain("not independent or specialist review")
   })
 
-  it("records the preparing editor's self-review and no release decision", () => {
+  it("records the preparing editor's self-review alongside the owner's decision", () => {
+    // The approval is a ledger decision, not a review of the content: the set
+    // keeps the preparing editor's self-review and its preparation-time notes,
+    // which were written before any owner decision existed.
     const set = setById(tree(), "lks:set:qin-conquest-han-233-226-v1")
     const review = objectOf(set["review"])
     const notes = String(review["notes"])

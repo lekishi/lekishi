@@ -152,6 +152,15 @@ export type EventParticipant = {
 export type HistoricalEvent = {
   readonly id: string
   readonly title: string
+  /**
+   * The record's published event types, verbatim and in the record's own order.
+   *
+   * The contract's vocabulary is `occurrence`, `process`, `journey`, `campaign`,
+   * `mission`, `council`, `founding`, `exchange`, and `other`. A surface may
+   * group or label by them; the atlas never adds one the record does not carry,
+   * because a type is a claim about what happened.
+   */
+  readonly eventTypes: readonly string[]
   readonly placement: EventPlacement
   readonly occurrence: Occurrence
   readonly note: string

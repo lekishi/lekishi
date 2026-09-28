@@ -873,3 +873,56 @@ describe("the projection's dispute rule", () => {
     }
   })
 })
+
+describe("published event types in the atlas domain", () => {
+  it("carries each event's own types, in the record's order and deduplicated", () => {
+    const chapter = project()
+
+    // One type, two types in the record's own order, and a coda node's type: the
+    // treatment draws its scene from these and must not reorder or merge them.
+    expect(eventById(chapter, "lks:event:appointment-750").eventTypes).toEqual(["mission"])
+    expect(eventById(chapter, "lks:event:return-voyage-753").eventTypes).toEqual([
+      "journey",
+      "mission",
+    ])
+    expect(eventById(chapter, "lks:event:ordination-754").eventTypes).toEqual([
+      "process",
+      "exchange",
+    ])
+    expect(eventById(chapter, "lks:event:daikasho-title-758").eventTypes).toEqual(["other"])
+  })
+
+  it("carries the Qin chapter's own types through the same projection", () => {
+    const tree = loadChapter("qin-conquest-han-233-226")
+    const result = projectChapter("qin-conquest-han-233-226", tree.documents, tree.sets, {
+      defaultWindow: { start: -232, end: -225 },
+    })
+
+    if (!result.ok) {
+      throw new Error(result.errors.join("\n"))
+    }
+
+    const types = new Map(result.chapter.events.map((event) => [event.id, event.eventTypes]))
+
+    expect(types.get("lks:event:han-conquest-230")).toEqual(["campaign"])
+    expect(types.get("lks:event:hanfei-death-233")).toEqual(["occurrence"])
+    expect(types.get("lks:event:han-submission-233")).toEqual(["mission", "exchange"])
+  })
+
+  it("refuses an event with no published type instead of inventing one", () => {
+    // The contract requires a type, so an empty list is a broken reading of the
+    // record rather than an event of unknown kind: the atlas must not guess what
+    // kind of thing happened.
+    const chapter = tree()
+
+    contentOf(recordById(chapter, "lks:event:appointment-750"))["event_types"] = []
+
+    const result = attempt(chapter)
+
+    expect(result.ok).toBe(false)
+
+    if (!result.ok) {
+      expect(result.errors.join("\n")).toContain("publishes no event type")
+    }
+  })
+})

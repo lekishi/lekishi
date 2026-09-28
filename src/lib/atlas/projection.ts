@@ -586,6 +586,12 @@ function projectEvent(
     return null
   }
 
+  const eventTypes = projectEventTypes(entry, errors)
+
+  if (eventTypes === null) {
+    return null
+  }
+
   const note = stringOrUndefined(entry.content["summary"])
 
   if (note === undefined) {
@@ -627,6 +633,7 @@ function projectEvent(
   return {
     id: entry.recordId,
     title,
+    eventTypes,
     placement: eventPlaces.placement,
     occurrence,
     note,
@@ -636,6 +643,31 @@ function projectEvent(
     participants: projectParticipants(entry, actors, errors),
     citations: projectCitations(entry, sourceIds, errors),
   }
+}
+
+/**
+ * The record's published event types, in the record's own order and deduplicated.
+ *
+ * These are the record's own claims about what kind of thing happened, so they
+ * are carried verbatim rather than mapped to an atlas vocabulary here. The
+ * contract requires at least one, so a record without any is an error: the atlas
+ * has nothing to say about the event's kind and must not invent one.
+ */
+function projectEventTypes(entry: PublishedRevision, errors: string[]): string[] | null {
+  const types = listOf(entry.content["event_types"]).flatMap((value) => {
+    const type = stringOrUndefined(value)
+
+    return type === undefined || type === "" ? [] : [type]
+  })
+
+  if (types.length === 0) {
+    errors.push(
+      `${entry.recordId} publishes no event type, and the atlas does not invent what kind of event it was`,
+    )
+    return null
+  }
+
+  return [...new Set(types)]
 }
 
 /**

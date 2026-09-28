@@ -61,6 +61,7 @@ export const FIXTURE_CHAPTER: Chapter = {
     {
       id: "event-harbor-assembly",
       title: "Fixture assembly",
+      eventTypes: ["journey"],
       placement: {
         kind: "point",
         placeId: "place-north-harbor",
@@ -93,6 +94,7 @@ export const FIXTURE_CHAPTER: Chapter = {
     {
       id: "event-coastal-crossing",
       title: "Fixture crossing",
+      eventTypes: ["journey"],
       placement: {
         kind: "point",
         placeId: "place-southern-bay",
@@ -118,6 +120,7 @@ export const FIXTURE_CHAPTER: Chapter = {
     {
       id: "event-plain-workshop",
       title: "Fixture workshop",
+      eventTypes: ["process"],
       placement: {
         kind: "point",
         placeId: "place-inland-plain",
@@ -143,6 +146,7 @@ export const FIXTURE_CHAPTER: Chapter = {
     {
       id: "event-island-landfall",
       title: "Fixture landfall",
+      eventTypes: ["occurrence"],
       placement: {
         kind: "none",
         placeId: "place-island-stop",
@@ -166,6 +170,7 @@ export const FIXTURE_CHAPTER: Chapter = {
     {
       id: "event-archive-transfer",
       title: "Fixture transfer",
+      eventTypes: ["exchange"],
       placement: {
         kind: "point",
         placeId: "place-inland-plain",

@@ -15,10 +15,13 @@ import {
   type JsonValue,
 } from "../historical/contract/types"
 import type {
+  Actor,
   Chapter,
   ChapterPublication,
   DatePrecision,
+  EventCitation,
   EventDispute,
+  EventParticipant,
   EventPlacement,
   GeoPoint,
   GeometryPrecision,
@@ -26,6 +29,8 @@ import type {
   Occurrence,
   Place,
   PointPlacement,
+  Source,
+  StoryStep,
   TimeWindow,
 } from "./domain"
 
@@ -127,6 +132,23 @@ export function projectChapter(
     }
   }
 
+  const actors = new Map<string, Actor>()
+
+  for (const entry of published.filter((candidate) => candidate.kind === "actor")) {
+    const actor = projectActor(entry, errors)
+
+    if (actor !== null) {
+      actors.set(actor.id, actor)
+    }
+  }
+
+  // The sources the atlas shows are the ones the published revisions actually
+  // cite, not every source file the chapter tree happens to carry: a source that
+  // no published revision cites is preparation, and showing it would let a draft
+  // change the chapter's Sources surface without any decision covering it.
+  const sources = projectSources(documents, citedSourceIds(published), errors)
+  const sourceIds = new Set(sources.map((source) => source.id))
+
   const captions = story === undefined ? new Map<string, string>() : storyCaptions(story)
   const summary = story === undefined ? "" : (stringOrUndefined(story.content["summary"]) ?? "")
 
@@ -140,8 +162,10 @@ export function projectChapter(
 
   const events = published
     .filter((entry) => entry.kind === "event")
-    .map((entry) => projectEvent(entry, places, captions, coverage, errors))
+    .map((entry) => projectEvent(entry, places, actors, sourceIds, captions, coverage, errors))
     .filter((entry): entry is HistoricalEvent => entry !== null)
+
+  const storySteps = story === undefined ? [] : projectStory(story, published, errors)
 
   eventGeometryErrors(published, errors)
 
@@ -178,7 +202,10 @@ export function projectChapter(
       defaultWindow: coverage.defaultWindow,
       homeView: boundingBoxCenter(mapped),
       places: [...places.values()],
+      actors: [...actors.values()],
       events,
+      sources,
+      story: storySteps,
       publication,
     },
   }
@@ -265,14 +292,17 @@ function projectPlace(entry: PublishedRevision, errors: string[]): Place | null 
     placement: PointPlacement
     precision: GeometryPrecision
     position: GeoPoint
+    note: string | null
   } | null = null
   let assertsNoPosition = false
+  let unknownNote: string | null = null
 
   for (const candidate of geometry) {
     const interpretation = stringOrUndefined(candidate["interpretation"]) ?? ""
 
     if (interpretation === "unknown") {
       assertsNoPosition = true
+      unknownNote ??= stringOrUndefined(candidate["notes"]) ?? null
       continue
     }
 
@@ -320,16 +350,25 @@ function projectPlace(entry: PublishedRevision, errors: string[]): Place | null 
       continue
     }
 
-    point ??= { placement, precision, position }
+    point ??= {
+      placement,
+      precision,
+      position,
+      note: stringOrUndefined(candidate["notes"]) ?? null,
+    }
   }
+
+  const aliases = nameAliases(entry.content)
 
   if (point !== null) {
     return {
       id: entry.recordId,
       label,
+      aliases,
       placement: point.placement,
       precision: point.precision,
       position: point.position,
+      placementNote: point.note,
     }
   }
 
@@ -342,15 +381,198 @@ function projectPlace(entry: PublishedRevision, errors: string[]): Place | null 
   return {
     id: entry.recordId,
     label,
+    aliases,
     placement: "unknown",
     precision: "unspecified",
     position: null,
+    placementNote: unknownNote,
   }
+}
+
+/**
+ * Every published name form and reading aid, for search.
+ *
+ * The aliases are the record's own name list: the local-script forms, their
+ * romanizations, and their translations. A modern equivalent is deliberately
+ * excluded — the contract keeps it out of the historical name list and forbids
+ * reading it as an identification, so it must not become the string that finds a
+ * historical place either.
+ */
+function nameAliases(content: JsonObject): string[] {
+  const aliases = listOf(content["names"]).flatMap((nameValue) => {
+    const name = objectOf(nameValue)
+    const values: string[] = []
+    const form = stringOrUndefined(name["form"])
+    const romanization = stringOrUndefined(objectOf(name["romanization"])["value"])
+    const translation = stringOrUndefined(objectOf(name["translation"])["value"])
+
+    if (form !== undefined) {
+      values.push(form)
+    }
+
+    if (romanization !== undefined) {
+      values.push(romanization)
+    }
+
+    if (translation !== undefined) {
+      values.push(translation)
+    }
+
+    return values
+  })
+
+  return [...new Set(aliases.map((alias) => alias.trim()).filter((alias) => alias !== ""))]
+}
+
+/** A published actor: its primary name form, its aliases, and its types. */
+function projectActor(entry: PublishedRevision, errors: string[]): Actor | null {
+  const names = listOf(entry.content["names"]).map(objectOf)
+  const primary = names.find((name) => name["role"] === "primary")
+  const label = primary === undefined ? undefined : stringOrUndefined(primary["form"])
+
+  if (label === undefined) {
+    errors.push(`${entry.recordId} has no primary name form, so the atlas cannot name it`)
+    return null
+  }
+
+  const types = listOf(entry.content["actor_types"])
+    .map((value) => stringOrUndefined(value) ?? "")
+    .filter((value) => value !== "")
+
+  return { id: entry.recordId, label, aliases: nameAliases(entry.content), types }
+}
+
+/**
+ * Every source id the published revisions cite.
+ *
+ * The atlas shows a source because a published revision rests on it, so this set
+ * is what the Sources surface is built from. A source document that no published
+ * revision cites is preparation content: it stays in the tree and out of the
+ * chapter, exactly as an unpublished revision does.
+ */
+function citedSourceIds(published: PublishedRevision[]): Set<string> {
+  const cited = new Set<string>()
+
+  for (const entry of published) {
+    for (const claimValue of listOf(entry.revision["claims"])) {
+      for (const citationValue of listOf(objectOf(claimValue)["citations"])) {
+        const sourceId = stringOrUndefined(objectOf(citationValue)["source_id"])
+
+        if (sourceId !== undefined) {
+          cited.add(sourceId)
+        }
+      }
+    }
+  }
+
+  return cited
+}
+
+/**
+ * The chapter's cited sources, in the tree's own order.
+ *
+ * A source is shown because a published revision rests on it: the set of cited
+ * ids comes from the published revisions, so a source document that nothing
+ * published cites cannot change the chapter's Sources surface on its own. The
+ * atlas states the record's own attribution and licence id, and links the first
+ * URL identifier the record carries. It never restates reuse terms: a source
+ * whose terms are not recorded would fail the contract's own validation before
+ * the projection ran.
+ */
+function projectSources(
+  documents: JsonValue[],
+  cited: ReadonlySet<string>,
+  errors: string[],
+): Source[] {
+  return documents
+    .filter(
+      (document): document is JsonObject => isObject(document) && document["document"] === "source",
+    )
+    .flatMap((document) => {
+      const id = stringOrUndefined(document["source_id"])
+      const title = stringOrUndefined(document["title"])
+
+      if (id === undefined || title === undefined) {
+        errors.push(
+          `${String(id ?? "(unnamed source)")} is published without an id or a title, so the atlas cannot cite it`,
+        )
+        return []
+      }
+
+      // A source the published revisions do not cite is preparation: it stays in
+      // the tree and out of the chapter, exactly as an unpublished revision does.
+      if (!cited.has(id)) {
+        return []
+      }
+
+      const license = objectOf(document["license"])
+      const url = listOf(document["identifiers"])
+        .map(objectOf)
+        .find((identifier) => identifier["system"] === "url")
+
+      return [
+        {
+          id,
+          title,
+          kind: stringOrUndefined(document["kind"]) ?? "",
+          edition: stringOrUndefined(document["edition"]) ?? null,
+          attribution: stringOrUndefined(license["attribution_text"]) ?? "",
+          licenseId: stringOrUndefined(license["license_id"]) ?? null,
+          url: stringOrUndefined(url?.["value"]) ?? null,
+        },
+      ]
+    })
+}
+
+/**
+ * The chapter's published story steps, in the story's own order.
+ *
+ * A step whose record is a published event can be opened; a step whose record is
+ * published but has no event surface (a relationship, for example) is kept as a
+ * summary step, because the atlas must not present a different order or drop a
+ * step the chapter publishes. A step that names a record the chapter does not
+ * publish is an error rather than a silently missing row.
+ */
+function projectStory(
+  story: PublishedRevision,
+  published: PublishedRevision[],
+  errors: string[],
+): StoryStep[] {
+  const kinds = new Map(published.map((entry) => [entry.recordId, entry.kind]))
+
+  return listOf(story.content["steps"]).flatMap((stepValue) => {
+    const step = objectOf(stepValue)
+    const recordId = stringOrUndefined(step["record_id"])
+    const caption = stringOrUndefined(step["caption"]) ?? ""
+
+    if (recordId === undefined) {
+      errors.push(`${story.recordId} has a story step without a record id`)
+      return []
+    }
+
+    const kind = kinds.get(recordId)
+
+    if (kind === undefined) {
+      errors.push(
+        `${story.recordId} steps through ${recordId}, which the chapter publishes no revision of`,
+      )
+      return []
+    }
+
+    if (caption === "") {
+      errors.push(`${recordId} is a story step without a caption, so the atlas cannot label it`)
+      return []
+    }
+
+    return [{ recordId, caption, kind: kind === "event" ? "event" : "summary" }]
+  })
 }
 
 function projectEvent(
   entry: PublishedRevision,
   places: Map<string, Place>,
+  actors: Map<string, Actor>,
+  sourceIds: ReadonlySet<string>,
   captions: Map<string, string>,
   coverage: ChapterCoverage,
   errors: string[],
@@ -400,15 +622,101 @@ function projectEvent(
     return null
   }
 
+  const eventPlaces = projectEventPlaces(entry, places, errors)
+
   return {
     id: entry.recordId,
     title,
-    placement: projectEventPlacement(entry, places, errors),
+    placement: eventPlaces.placement,
     occurrence,
     note,
     dispute: projectDispute(entry, errors),
     coda: labelledCoda,
+    placeIds: eventPlaces.placeIds,
+    participants: projectParticipants(entry, actors, errors),
+    citations: projectCitations(entry, sourceIds, errors),
   }
+}
+
+/**
+ * The event's published participants.
+ *
+ * The role is the record's own role value, kept so a surface can say how the
+ * actor took part; an actor the chapter does not publish is an error rather than
+ * an unnamed participant.
+ */
+function projectParticipants(
+  entry: PublishedRevision,
+  actors: Map<string, Actor>,
+  errors: string[],
+): EventParticipant[] {
+  return listOf(entry.content["participants"]).flatMap((referenceValue) => {
+    const reference = objectOf(referenceValue)
+    const actorId = stringOrUndefined(reference["actor_id"])
+
+    if (actorId === undefined) {
+      errors.push(`${entry.recordId} has a participant without an actor_id`)
+      return []
+    }
+
+    if (!actors.has(actorId)) {
+      errors.push(`${entry.recordId} names ${actorId}, which is not a published actor`)
+      return []
+    }
+
+    return [{ actorId, role: stringOrUndefined(reference["role"]) ?? "" }]
+  })
+}
+
+/**
+ * The event's published citations, deduplicated by source and locator.
+ *
+ * These are the claims' own citations, so the details surface can show a reader
+ * where a statement comes from without rephrasing it. A citation to a source the
+ * chapter does not publish is an error: the atlas must not show a locator that
+ * cannot be followed to a source record. Quoted text is carried as published —
+ * the contract's own validation already refuses a quotation whose source terms do
+ * not permit quoting.
+ */
+function projectCitations(
+  entry: PublishedRevision,
+  sourceIds: ReadonlySet<string>,
+  errors: string[],
+): EventCitation[] {
+  const citations: EventCitation[] = []
+  const seen = new Set<string>()
+
+  for (const claimValue of listOf(entry.revision["claims"])) {
+    for (const citationValue of listOf(objectOf(claimValue)["citations"])) {
+      const citation = objectOf(citationValue)
+      const sourceId = stringOrUndefined(citation["source_id"])
+      const locator = objectOf(citation["locator"])
+      const locatorValue = stringOrUndefined(locator["value"])
+
+      if (sourceId === undefined || locatorValue === undefined) {
+        errors.push(`${entry.recordId} has a citation without a source or a locator value`)
+        continue
+      }
+
+      if (!sourceIds.has(sourceId)) {
+        errors.push(`${entry.recordId} cites ${sourceId}, which the chapter does not publish`)
+        continue
+      }
+
+      const locatorKind = stringOrUndefined(locator["kind"]) ?? ""
+      const quotedText = stringOrUndefined(citation["quoted_text"]) ?? null
+      const key = `${sourceId}\u0000${locatorKind}\u0000${locatorValue}\u0000${quotedText ?? ""}`
+
+      if (seen.has(key)) {
+        continue
+      }
+
+      seen.add(key)
+      citations.push({ sourceId, locatorKind, locator: locatorValue, quotedText })
+    }
+  }
+
+  return citations
 }
 
 /**
@@ -540,17 +848,21 @@ function eventGeometryErrors(published: PublishedRevision[], errors: string[]): 
 }
 
 /**
- * Which place, if any, the event is shown at.
+ * Which places the event's published record references, and which one the map
+ * shows.
  *
- * References are read in the record's own order, and a reference the record
- * marks as context never moves a marker: naming an intended destination is not
- * asserting a landfall there.
+ * References are read in the record's own order and resolved once, so the
+ * placement and the list of referenced places cannot disagree about which
+ * references are valid: a reference the record marks as context never moves a
+ * marker — naming an intended destination is not asserting a landfall there —
+ * while every valid reference stays searchable, because a record that names four
+ * places named them all.
  */
-function projectEventPlacement(
+function projectEventPlaces(
   entry: PublishedRevision,
   places: Map<string, Place>,
   errors: string[],
-): EventPlacement {
+): { placement: EventPlacement; placeIds: string[] } {
   const resolved = listOf(entry.content["places"]).flatMap((referenceValue) => {
     const reference = objectOf(referenceValue)
     const placeId = stringOrUndefined(reference["place_id"])
@@ -576,30 +888,40 @@ function projectEventPlacement(
       : [],
   )[0]
 
+  // A record may reference the same place twice (the schema does not forbid it);
+  // the domain carries each place once, in the order it was first referenced.
+  const placeIds = [...new Set(resolved.map((candidate) => candidate.place.id))]
+
   if (placed !== undefined) {
     return {
-      kind: "point",
-      placeId: placed.place.id,
-      label: placed.place.label,
-      basis: placed.place.placement,
-      precision: placed.place.precision,
-      position: placed.position,
+      placement: {
+        kind: "point",
+        placeId: placed.place.id,
+        label: placed.place.label,
+        basis: placed.place.placement,
+        precision: placed.place.precision,
+        position: placed.position,
+      },
+      placeIds,
     }
   }
 
   const [first] = resolved
 
   if (first === undefined) {
-    return { kind: "none", placeId: null, label: null, reason: "no-place" }
+    return { placement: { kind: "none", placeId: null, label: null, reason: "no-place" }, placeIds }
   }
 
   return {
-    kind: "none",
-    placeId: first.place.id,
-    label: first.place.label,
-    reason: resolved.some((candidate) => candidate.place.position !== null)
-      ? "context-only"
-      : "no-position",
+    placement: {
+      kind: "none",
+      placeId: first.place.id,
+      label: first.place.label,
+      reason: resolved.some((candidate) => candidate.place.position !== null)
+        ? "context-only"
+        : "no-position",
+    },
+    placeIds,
   }
 }
 

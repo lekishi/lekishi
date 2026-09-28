@@ -2,20 +2,20 @@
 import { afterEach, describe, expect, it } from "vitest"
 import { mount, unmount } from "svelte"
 import { CHAPTERS, chapterPresentation } from "../lib/atlas/chapters"
-import { COMPARISON_CHAPTER, COMPARISON_REVIEW } from "../lib/atlas/comparison"
+import { QIN_CHAPTER, TANG_CHAPTER } from "../lib/atlas/chapter-registry"
 import { windowLabel } from "../lib/atlas/labels"
-import { RELEASE } from "../lib/atlas/release"
+import { QIN_RELEASE, TANG_RELEASE } from "../lib/atlas/release"
 import Home from "./+page.svelte"
 
 /**
  * The root page's copy contract.
  *
  * The page presents the chapters as peers: each card carries the chapter's name,
- * its window, a story summary, an entry, and — in small print — its editorial
- * state. These tests pin that shape, and they pin what must not come back:
- * review-category labels ("Reviewed chapter", "Comparison chapter"), the
- * contract and comparison-harness vocabulary the page's readers do not share,
- * and any wording that would make the unapproved Qin chapter read as released.
+ * its window, a story summary, an entry, and — in small print — its recorded
+ * editorial decision. These tests pin that shape, and they pin what must not come
+ * back: review-category labels, the contract and comparison-harness vocabulary
+ * the page's readers do not share, and any wording that would make a chapter read
+ * as released when its ledger row does not record an approval.
  * The cards are checked against the real chapter list, not a hand-written fixture.
  */
 
@@ -73,8 +73,8 @@ describe("the root page", () => {
       expect(link?.textContent).toContain(chapter.name)
     }
 
-    // Peers, in a stable order: the launch chapter first, the prepared chapter
-    // second, both with the same structure.
+    // Peers, in a stable order: the launch chapter first, the second chapter
+    // next, both with the same structure.
     expect(cards.map((card) => card.getAttribute("data-chapter-id"))).toEqual(
       CHAPTERS.map((chapter) => chapter.id),
     )
@@ -90,26 +90,28 @@ describe("the root page", () => {
     for (const marker of [
       "Reviewed chapter",
       "Comparison chapter",
+      "comparison fixture",
       "comparison harness",
       "map treatments",
+      "treatment comparison",
       "lekishi-historical-contract",
     ]) {
       expect(text, `the page still says ${marker}`).not.toContain(marker)
     }
   })
 
-  it("keeps each chapter's editorial state in its card's secondary metadata", () => {
+  it("keeps each chapter's editorial decision in its card's secondary metadata", () => {
     const host = render()
-    const tang = cardFor(host, "tang-mission-750-754")
-    const qin = cardFor(host, COMPARISON_CHAPTER)
+    const tang = cardFor(host, TANG_CHAPTER)
+    const qin = cardFor(host, QIN_CHAPTER)
 
     // Placement, not just presence: the rendered heading carries the name, the
     // rendered summary paragraph carries the summary, and the status is its own
     // paragraph after the entry — never inside the heading, the link, or the
     // summary. A reader meets the chapter first and its editorial state second.
     for (const [id, card] of [
-      ["tang-mission-750-754", tang],
-      [COMPARISON_CHAPTER, qin],
+      [TANG_CHAPTER, tang],
+      [QIN_CHAPTER, qin],
     ] as const) {
       const presentation = chapterPresentation(id)
       const paragraphs = [...card.querySelectorAll("p")]
@@ -138,17 +140,16 @@ describe("the root page", () => {
       ).toBe(true)
     }
 
-    expect(tang.textContent).toContain(RELEASE.status)
-    expect(tang.textContent).toContain(RELEASE.decidedOn)
+    expect(tang.textContent).toContain(TANG_RELEASE.status)
+    expect(tang.textContent).toContain(TANG_RELEASE.decidedOn)
+    expect(qin.textContent).toContain(QIN_RELEASE.status)
+    expect(qin.textContent).toContain(QIN_RELEASE.decidedOn)
 
-    expect(qin.textContent).toContain(`${COMPARISON_REVIEW.label} · self-review only`)
-    // No release decision exists for the Qin chapter: its card must not read as
-    // approved, released, or reviewed by anyone but its preparing editor.
-    expect(qin.textContent).not.toContain("Owner-approved")
-    expect(qin.textContent).not.toContain("approved for release")
-    expect(qin.textContent).not.toContain("specialist review recorded")
-    // The Tang chapter's approval does not transfer to the Qin chapter.
-    expect(cardFor(host, "tang-mission-750-754").textContent).not.toContain(COMPARISON_REVIEW.label)
+    // Neither chapter may claim a review its set does not record.
+    for (const card of [tang, qin]) {
+      expect(card.textContent).not.toContain("Independent review recorded")
+      expect(card.textContent).not.toContain("Specialist review recorded")
+    }
   })
 
   it("leads with the atlas call to action, ahead of the chapter entries", () => {

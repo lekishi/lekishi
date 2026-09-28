@@ -37,10 +37,24 @@ before deciding on it, so the fixture now ships as the prerendered review route
 `/compare/qin`, which states that it is unapproved preparation, and
 `scripts/check-static-build.mjs` requires that page instead of forbidding the
 fixture's ids. Everything else here still holds: the caller-supplied coverage
-window, the one projection, the catalog as the browser-safe loader for
-non-production chapters, the gate over every chapter tree, and the fixture's
-`preparation snapshot` status. The measured evidence below records the state as
-of this decision and stays readable as what was measured then.
+window, the one projection, the catalog as the browser-safe loader, the gate over
+every chapter tree, and the fixture's `preparation snapshot` status. The measured
+evidence below records the state as of this decision and stays readable as what
+was measured then.
+
+NOTE: Two of the statements above are **superseded** by
+link:CHAPTER_READER_ROUTE.adoc[the chapter reader-route decision] (2026-09-27),
+after the owner approved the Qin set and asked for the shared reader-facing
+chapter experience. The catalog is now the loader for *every* served chapter, not
+only for non-production ones, and the production boundary
+(`src/lib/atlas/chapter-content.ts`) no longer exists: the served chapters are
+named in `src/lib/atlas/chapter-registry.ts`, one chapter route prerenders them
+all, and the approval gate fails a served chapter whose current revisions are not
+owner-approved. The fixture's `preparation snapshot` status is superseded by the
+`owner approved` row recorded in link:../0002/PUBLICATION_APPROVAL.adoc[the
+publication approval gate], and its ids ship on purpose, as an ordinary chapter's
+do. The rest of this record — the caller-supplied coverage window, the one
+projection, the refusals, and the gate over every chapter tree — still holds.
 
 == Decision
 

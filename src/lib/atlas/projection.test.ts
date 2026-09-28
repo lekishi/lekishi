@@ -364,9 +364,11 @@ describe("projecting the reviewed Tang chapter", () => {
       expect(place).toEqual({
         id: placeId,
         label: expect.any(String),
+        aliases: expect.any(Array),
         placement: "unknown",
         precision: "unspecified",
         position: null,
+        placementNote: expect.any(String),
       })
     }
   })
@@ -380,26 +382,32 @@ describe("projecting the reviewed Tang chapter", () => {
     expect(dazaifu).toEqual({
       id: "lks:place:dazaifu",
       label: "大宰府",
+      aliases: expect.arrayContaining(["大宰府", "Dazaifu"]),
       placement: "display-anchor",
       precision: "unspecified",
       position: { lon: 130.5151, lat: 33.5145 },
+      placementNote: expect.any(String),
     })
     // The court's seat is the same kind of placement: a modern label anchor, not
     // a coordinate the review asserted for any of the ten court acts.
     expect(palace).toEqual({
       id: "lks:place:heijo-palace",
       label: "平城宮",
+      aliases: expect.arrayContaining(["平城宮", "Heijō no miya"]),
       placement: "display-anchor",
       precision: "unspecified",
       position: { lon: 135.79555556, lat: 34.69111111 },
+      placementNote: expect.any(String),
     })
     // The cited identification keeps its own precision; nothing upgrades it.
     expect(yaku).toEqual({
       id: "lks:place:yaku",
       label: "益救島",
+      aliases: expect.arrayContaining(["益救島", "Yakushima"]),
       placement: "approximate",
       precision: "region",
       position: { lon: 130.5286, lat: 30.3586 },
+      placementNote: expect.any(String),
     })
     expect(eventById(chapter, "lks:event:dazaifu-entry-753").placement).toMatchObject({
       kind: "point",
@@ -674,6 +682,96 @@ describe("adversarial readings of the chapter", () => {
     expect(result.ok).toBe(false)
     expect(report).toContain("display anchor asserts no placement precision")
     expect(report).toContain("is undated")
+  })
+})
+
+describe("the projection's source boundary", () => {
+  it("shows the sources the published revisions cite, and only those", () => {
+    const chapter = project()
+    const tree = loadChapter(CHAPTER)
+    const cited = new Set<string>()
+
+    // Every claim of every published revision, whatever kind of record it is on:
+    // a place's identification cites its source just as an event's account does.
+    for (const document of tree.documents) {
+      if (!isObject(document) || document["document"] !== "record") {
+        continue
+      }
+
+      const revision = publishedRevisionOf(document)
+
+      for (const claim of listOf(revision["claims"])) {
+        for (const citation of listOf(objectOf(claim)["citations"])) {
+          cited.add(String(objectOf(citation)["source_id"]))
+        }
+      }
+    }
+
+    // Every shown source is cited by a published revision, and every cited source
+    // is shown: the Sources surface is the chapter's evidence, not its file tree.
+    const shown = chapter.sources.map((source) => source.id)
+
+    expect(cited.size).toBeGreaterThan(0)
+
+    for (const sourceId of shown) {
+      expect(cited.has(sourceId), `${sourceId} is shown but nothing published cites it`).toBe(true)
+    }
+
+    for (const sourceId of cited) {
+      expect(shown, `${sourceId} is cited but not shown`).toContain(sourceId)
+    }
+  })
+
+  it("does not let an uncited source document change the chapter", () => {
+    // A source added to the tree that no published revision cites is preparation
+    // content: the atlas must not show it, because no decision covers it and the
+    // chapter's own digest did not change.
+    const chapter = cloneTree(tree())
+
+    chapter.documents.push({
+      contract: "lekishi-historical-contract/v0",
+      document: "source",
+      source_id: "lks:source:unpublished-draft",
+      source_hash: `sha256:${"0".repeat(64)}`,
+      kind: "reference",
+      title: "Draft source nothing cites",
+      language: "lzh",
+      identifiers: [],
+      license: { status: "recorded", license_id: "public-domain" },
+    })
+
+    const projected = project(chapter)
+
+    expect(projected.sources.map((source) => source.id)).not.toContain(
+      "lks:source:unpublished-draft",
+    )
+    expect(projected.sources.map((source) => source.id).sort()).toEqual(
+      project()
+        .sources.map((source) => source.id)
+        .sort(),
+    )
+  })
+
+  it("fails a citation to a source the chapter does not publish", () => {
+    const chapter = cloneTree(tree())
+    const revision = publishedRevisionOf(recordById(chapter, "lks:event:appointment-750"))
+
+    objectOf(listOf(revision["claims"])[0] as JsonObject)["citations"] = [
+      {
+        source_id: "lks:source:not-in-the-tree",
+        locator: { kind: "entry", value: "Nowhere" },
+      },
+    ]
+
+    const result = attempt(chapter)
+
+    expect(result.ok).toBe(false)
+
+    if (!result.ok) {
+      expect(result.errors.join("\n")).toContain(
+        "cites lks:source:not-in-the-tree, which the chapter does not publish",
+      )
+    }
   })
 })
 

@@ -1,9 +1,18 @@
 # Static-host routing for the Lekishi artifact.
 #
-# `/atlas` is prerendered to `atlas.html`, which Cloudflare Pages serves through
-# its clean-URL behavior. Do not rewrite `/atlas` to `/atlas.html`: Pages redirects
-# that file back to its clean URL, creating a loop.
+# A chapter is prerendered to `chapters/<chapter-id>.html`, which a static host
+# serves at the clean URL `/chapters/<chapter-id>`. Do not rewrite the clean URL
+# to the `.html` file: Pages redirects that file back to its clean URL, creating a
+# loop.
 # A trailing slash redirects to the clean URL rather than rewriting to the same
 # file: the prerendered page references its assets relatively, so serving it at
-# /atlas/ would resolve them under /atlas/ and the page would not load.
+# `/chapters/<chapter-id>/` would resolve them under that directory and the page
+# would not load.
+/chapters/tang-mission-750-754/ /chapters/tang-mission-750-754 308
+/chapters/qin-conquest-han-233-226/ /chapters/qin-conquest-han-233-226 308
+
+# The legacy routes. `/atlas` was the launch chapter's own route and
+# `/compare/qin` the second chapter's review route; both now redirect to the
+# chapter they served, and their redirect pages are in the artifact as well so
+# the rule and the page agree.
 /atlas/ /atlas 308

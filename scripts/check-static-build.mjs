@@ -91,29 +91,119 @@ if (!existsSync(buildDirectory)) {
 const files = walk(buildDirectory)
 
 requireFile(path.join(buildDirectory, "index.html"))
-requireFile(path.join(buildDirectory, "atlas.html"))
 requireFile(path.join(buildDirectory, "404.html"))
 requireFile(path.join(buildDirectory, "favicon.ico"))
 requireFile(path.join(buildDirectory, "robots.txt"))
 requireFile(path.join(buildDirectory, "images", "logo.svg"))
 requireFile(path.join(buildDirectory, "_redirects"))
 
-// Every route is prerendered, so the HTML is real content, not a shell that
-// needs a server to fill in.
-const atlasHtml = read(path.join(buildDirectory, "atlas.html"))
+/**
+ * The chapters the site serves, as the artifact has to carry them.
+ *
+ * These are sentinels, not a second source of truth: the chapter registry and the
+ * chapter cards own the real values, and a chapter that is renamed, re-windowed,
+ * or re-decided fails this check until the invariant is updated with it. Each
+ * entry names the chapter's route, the name and window its prerendered shell must
+ * state, the decision line the ledger records, and one published record id the
+ * built scripts must carry.
+ */
+const CHAPTERS = [
+  {
+    id: "tang-mission-750-754",
+    name: "The embassy to Tang China",
+    window: "750–754",
+    decision: "Owner-approved for release, 2026-09-25",
+    event: "lks:event:appointment-750",
+  },
+  {
+    id: "qin-conquest-han-233-226",
+    name: "The end of the state of Han",
+    window: "233 BCE–226 BCE",
+    decision: "Owner-approved for release, 2026-09-27",
+    event: "lks:event:han-conquest-230",
+  },
+]
 
-if ((atlasHtml.match(/id="atlas-workspace"/g) ?? []).length !== 1) {
-  fail("atlas.html must contain exactly one #atlas-workspace mount point")
-}
-
-// SvelteKit inlines the bootstrap and imports the client entry from it, so the
-// marker is the entry chunk the page loads rather than a `type="module"` tag.
-if (!atlasHtml.includes("_app/immutable/entry/start.")) {
-  fail("atlas.html does not load the client entry, so the workspace would never mount")
-}
+/**
+ * The routes that used to serve a chapter and now redirect to it: `/atlas` was
+ * the launch chapter's route, and `/compare/qin` the bounded chapter's review
+ * route. A redirect page carries no mount point, so a deploy cannot serve a stub
+ * as if it were a chapter.
+ */
+const REDIRECTS = [
+  { file: "atlas.html", target: "/chapters/tang-mission-750-754" },
+  { file: "compare/qin.html", target: "/chapters/qin-conquest-han-233-226" },
+]
 
 const indexHtml = read(path.join(buildDirectory, "index.html"))
 const notFoundHtml = read(path.join(buildDirectory, "404.html"))
+const chapterHtml = new Map()
+
+// Every chapter is prerendered as real content: the HTML a static host returns
+// already names the chapter, its window, and the decision recorded on it, before
+// any script runs.
+for (const chapter of CHAPTERS) {
+  const file = path.join(buildDirectory, "chapters", `${chapter.id}.html`)
+
+  if (!requireFile(file)) {
+    continue
+  }
+
+  const html = read(file)
+
+  chapterHtml.set(chapter.id, html)
+
+  if ((html.match(/id="atlas-workspace"/g) ?? []).length !== 1) {
+    fail(`chapters/${chapter.id}.html must contain exactly one #atlas-workspace mount point`)
+  }
+
+  // SvelteKit inlines the bootstrap and imports the client entry from it, so the
+  // marker is the entry chunk the page loads rather than a `type="module"` tag.
+  if (!html.includes("_app/immutable/entry/start.")) {
+    fail(
+      `chapters/${chapter.id}.html does not load the client entry, so the workspace would never mount`,
+    )
+  }
+
+  for (const marker of [chapter.name, chapter.window, chapter.decision]) {
+    if (!html.includes(marker)) {
+      fail(`chapters/${chapter.id}.html does not state ${marker}`)
+    }
+  }
+
+  // A reader meets a chapter, not a review category: the page must not carry the
+  // framings the owner rejected.
+  for (const marker of [
+    "Reviewed chapter",
+    "Comparison chapter",
+    "comparison harness",
+    "map treatments",
+    "lekishi-historical-contract",
+  ]) {
+    if (html.includes(marker)) {
+      fail(`chapters/${chapter.id}.html carries the project's own framing: ${marker}`)
+    }
+  }
+}
+
+// The legacy routes still resolve, and they resolve to the chapter they served.
+for (const redirect of REDIRECTS) {
+  const file = path.join(buildDirectory, redirect.file)
+
+  if (!requireFile(file)) {
+    continue
+  }
+
+  const html = read(file)
+
+  if (!html.includes(redirect.target)) {
+    fail(`${redirect.file} does not redirect to ${redirect.target}`)
+  }
+
+  if (html.includes('id="atlas-workspace"')) {
+    fail(`${redirect.file} is a redirect page but carries a workspace mount point`)
+  }
+}
 
 if (!indexHtml.includes('href="/atlas"')) {
   fail("index.html does not link to the atlas")
@@ -121,30 +211,29 @@ if (!indexHtml.includes('href="/atlas"')) {
 
 // The root page presents the chapters as peers: one card per chapter, each with
 // its name, its window, its story summary, and an entry. The artifact must keep
-// both entries, the Qin chapter's unapproved state, and the Tang chapter's
-// recorded owner approval, and it must not carry the exact framings the owner
-// rejected (a review category, the comparison harness, the contract id) — a
-// deploy cannot turn a chapter card back into a note about the project's own
-// process.
-for (const route of ['href="/atlas"', 'href="/compare/qin"']) {
-  if (!indexHtml.includes(route)) {
-    fail(`index.html does not link to ${route}`)
+// both entries and the decision recorded on each chapter, and it must not carry
+// the exact framings the owner rejected (a review category, the comparison
+// harness, the contract id) — a deploy cannot turn a chapter card back into a
+// note about the project's own process.
+for (const chapter of CHAPTERS) {
+  if (!indexHtml.includes(`href="/chapters/${chapter.id}"`)) {
+    fail(`index.html does not link to /chapters/${chapter.id}`)
   }
 }
 
-if (!indexHtml.includes("Unapproved preparation")) {
-  fail("index.html does not state that the Qin chapter is unapproved preparation")
-}
-
-if (!indexHtml.includes("Owner-approved for release") || !indexHtml.includes("2026-09-25")) {
-  fail("index.html does not state the recorded owner approval for the Tang chapter")
+for (const chapter of CHAPTERS) {
+  if (!indexHtml.includes(chapter.decision)) {
+    fail(`index.html does not state the recorded decision for ${chapter.id}`)
+  }
 }
 
 for (const marker of [
   "Reviewed chapter",
   "Comparison chapter",
+  "comparison fixture",
   "comparison harness",
   "map treatments",
+  "treatment comparison",
   "lekishi-historical-contract",
 ]) {
   if (indexHtml.includes(marker)) {
@@ -175,15 +264,16 @@ if (!scriptText.includes("/cesium/")) {
 
 // --- reviewed chapter content --------------------------------------------------
 
-// The atlas renders the reviewed chapter, and its content boundary throws at
-// module scope when the chapter cannot be projected, so a build that got this
-// far has a representable chapter. These are sentinel checks on what the
-// artifact actually contains — the chapter's own id and a published record id,
-// and the chapter title a reader sees in the prerendered shell — so replacing or
-// renaming the chapter fails this check until the invariant is updated with it.
-for (const marker of ["tang-mission-750-754", "lks:event:appointment-750"]) {
-  if (!scriptText.includes(marker)) {
-    fail(`the built scripts do not carry the reviewed chapter: ${marker} is missing`)
+// The chapter pages render chapters, and their load throws when a chapter cannot
+// be projected, so a build that got this far has representable chapters. These
+// are sentinel checks on what the artifact actually contains — each chapter's own
+// id and a published record id — so replacing or renaming a chapter fails this
+// check until the invariant is updated with it.
+for (const chapter of CHAPTERS) {
+  for (const marker of [chapter.id, chapter.event]) {
+    if (!scriptText.includes(marker)) {
+      fail(`the built scripts do not carry the served chapter: ${marker} is missing`)
+    }
   }
 }
 
@@ -191,7 +281,7 @@ for (const marker of ["tang-mission-750-754", "lks:event:appointment-750"]) {
 // tests only. These sentinels are its own strings; they are a tripwire, not a
 // proof that no fixture content could ever reach the artifact, which is what the
 // browser checks are for.
-const applicationText = `${scriptText}\n${[indexHtml, atlasHtml, notFoundHtml].join("\n")}`
+const applicationText = `${scriptText}\n${[indexHtml, notFoundHtml, ...chapterHtml.values()].join("\n")}`
 
 for (const marker of [
   "Synthetic foundation fixture",
@@ -206,62 +296,17 @@ for (const marker of [
   }
 }
 
-// The prerendered shell names the chapter it renders, so a direct request for
-// /atlas is already about the chapter before any script runs, and it carries no
-// review category and no unapproved-content label.
-if (!atlasHtml.includes("The embassy to Tang China")) {
-  fail("atlas.html does not name the chapter the atlas renders")
-}
-
-for (const marker of ["Reviewed chapter", "Unapproved preparation"]) {
-  if (atlasHtml.includes(marker)) {
-    fail(`atlas.html carries a review category or status label: ${marker}`)
-  }
-}
-
-// The bounded Qin chapter is rendered by its own page (`/compare/qin`), which
-// loads it through the comparison catalog (`src/lib/atlas/chapter-catalog.ts`).
-// The chapter ships on purpose so the owner can inspect it, but it is unapproved
-// preparation, not a second launch chapter: the page must exist, state its
-// status, and the production atlas page must not render the chapter.
-const comparisonHtml = path.join(buildDirectory, "compare", "qin.html")
-
-if (requireFile(comparisonHtml)) {
-  const comparisonText = read(comparisonHtml)
-
-  if ((comparisonText.match(/id="atlas-workspace"/g) ?? []).length !== 1) {
-    fail("compare/qin.html must contain exactly one #atlas-workspace mount point")
-  }
-
-  if (!comparisonText.includes("_app/immutable/entry/start.")) {
-    fail("compare/qin.html does not load the client entry, so the workspace would never mount")
-  }
-
-  if (!comparisonText.includes("Unapproved preparation")) {
-    fail("compare/qin.html does not state that the comparison fixture is unapproved preparation")
-  }
-
-  // The shell is prerendered from the route's load, so the chapter's window and
-  // name are real content before any script runs. The chapter's records are
-  // bundled in the route's client chunks rather than inlined here, so the
-  // scripts carry the chapter's own ids.
-  for (const marker of ["233 BCE–226 BCE", "The end of the state of Han"]) {
-    if (!comparisonText.includes(marker)) {
-      fail(`compare/qin.html does not carry the chapter: ${marker} is missing`)
-    }
-  }
-
-  if (comparisonText.includes("Comparison fixture")) {
-    fail("compare/qin.html still labels the chapter as a comparison fixture")
-  }
-
-  for (const marker of ["qin-conquest-han-233-226", "lks:event:han-conquest-230"]) {
-    if (!scriptText.includes(marker)) {
-      fail(`the built scripts do not carry the comparison fixture: ${marker} is missing`)
+// Each chapter's prerendered shell is about that chapter: it names it and carries
+// no other chapter's records. The chapters share one route and one loader, so the
+// page's own HTML is what proves the reader is looking at one chapter at a time.
+for (const [id, html] of chapterHtml) {
+  for (const other of CHAPTERS) {
+    if (other.id === id) {
+      continue
     }
 
-    if (atlasHtml.includes(marker)) {
-      fail(`the production atlas page renders the comparison fixture: ${marker} is present`)
+    if (html.includes(other.name)) {
+      fail(`chapters/${id}.html names another chapter: ${other.name}`)
     }
   }
 }

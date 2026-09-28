@@ -44,13 +44,22 @@ Publication is a decision, not an agent action.
   means the owner decided that this specific content may be published while AC2
   and the specialist reviews stay open. `owner approved` means the owner's
   editorial approval under RFD 2, which is what RFD 4's AC2 asks for. The Tang
-  set's row now carries the owner's approval, taken on 2026-09-25; the bounded
-  Qin comparison fixture's row is a `preparation snapshot`. The ledger update
-  below records both.
+  set's row carries the owner's approval taken on 2026-09-25; the Qin set's row
+  carries the owner's approval taken on 2026-09-27, having been a
+  `preparation snapshot` until then. The ledger updates below record both.
 * **Nothing is an official publication until an `owner approved` row exists.**
-  The Tang set has one as of 2026-09-25, so it is now the chapter's official
-  publication while AC2's remaining parts and the specialist reviews stay open.
-  No set may claim the owner's approval without that row.
+  The Tang set has one as of 2026-09-25 and the Qin set has one as of
+  2026-09-27, so both are the chapters' official publications while AC2's
+  remaining parts and the specialist reviews stay open. No set may claim the
+  owner's approval without that row.
+* **A chapter the site serves must render approved content.** The site's served
+  chapters are named in `src/lib/atlas/chapter-catalog.ts`; every set that
+  publishes a served chapter's current revisions must carry an `owner approved`
+  row. A later revision, a new set, or a changed member therefore fails the
+  build for a served chapter until the owner decides again, instead of shipping
+  behind an older approval. A chapter that is prepared for review but not yet
+  decided stays out of the served list; its `preparation snapshot` row still
+  covers it while it is not served.
 * **A row binds the decision to the snapshot it was taken on.** Each row carries
   the canonical digest of the set document — members, revision hashes, source
   pins, review, and timestamps — and the gate fails when the set no longer
@@ -67,12 +76,14 @@ appear with an uncovered set — and fails on any of: a set with no ledger row, 
 ledger row for a set that does not exist, a decision the gate does not know, a
 duplicated row, a `preparation snapshot` that claims independent or specialist
 review, a set whose review independence has no owner decision behind it, an
-owner decision whose row does not name the owner as the decider, or a set whose
-digest no longer matches its row. So an agent cannot mint a version of
-the content that no decision covers, and cannot label a preparation snapshot as
-reviewed. The gate checks the shape of the record; whether a decision is truly
-the owner's is the owner's row to write, which is why the ledger names the
-decider in every row.
+owner decision whose row does not name the owner as the decider, a set whose
+digest no longer matches its row, or a served chapter whose current revisions
+come from a set without an `owner approved` row. So an agent cannot mint a
+version of the content that no decision covers, cannot label a preparation
+snapshot as reviewed, and cannot ship a served chapter behind a stale decision.
+The gate checks the shape of the record; whether a decision is truly the
+owner's is the owner's row to write, which is why the ledger names the decider
+in every row.
 
 == Ledger
 
@@ -103,26 +114,22 @@ specialist reviews remain unperformed, and AC2's visible-uncertainty part and th
 AC7 attribution/rights audit stay open.
 
 |`lks:set:qin-conquest-han-233-226-v1`
-|preparation snapshot
-|owner (instructed the bounded Qin comparison fixture and asked to review its
-corrected content before deciding, 2026-09-25)
+|owner approved
+|owner (approved the current merged set for release, 2026-09-27)
 |`sha256:70bee03e3da03ddef45baebae01283b74d801fd34a9c2523b79c68ceaaa553bf`
-|The comparison fixture's preparation: 4 places, 6 actors, 5 events, 4
-relationships, and 1 story, with the 4 cited sources pinned. The set publishes
-the corrected revisions the internal review prepared, which the owner asked to
-review before deciding, and the label positions that followed the owner's
-2026-09-25 report that locations were missing where the records name them: the
-submission's display placement at the Han capital the hereditary house records,
-and label anchors for the death at 雲陽 and the annexation at the 潁川 commandery
-that rest on the cited historical geography's identifications. 南陽 keeps unknown
-geometry because the entries state no extent or seat and the name covers two
-regions. A second review round corrected a 南陽府 locator and two event phrasings
-(the cession's dating and the annexation's anchor wording) as new revisions. Each
-corrected record keeps the superseded revision it replaced, and no place carries
-an asserted coordinate. The set records the preparing editor's
-`self_review` only: no owner decision exists for this content, it is
-comparison-only and not a launch chapter, RFD 4's AC2 does not apply to it, and
-the comparison review route states that it is unapproved.
+|The chapter's preparation as one set: 4 places, 6 actors, 5 events, 4
+relationships, and 1 story, with the 4 cited sources pinned, including the label
+anchors and display placement that followed the owner's 2026-09-25 report that
+locations were missing where the records name them. The set keeps the preparing
+editor's `self_review`, and the owner's editorial approval under RFD 2 is
+recorded here for the exact corrected preparation the owner reviewed. The
+approval is not independent or specialist review, the optional specialist
+reviews remain unperformed, and the critical-edition re-check of the cited
+transcriptions stays open. The set document is deliberately unchanged, so its
+preparation-time notes still say no owner decision existed when they were
+written; the ledger update of 2026-09-27 records the decision and what it
+covers. 南陽 keeps unknown geometry because the entries state no extent or seat
+and the name covers two regions, and no place carries an asserted coordinate.
 |===
 
 === Ledger update — 2026-09-25: the owner approves the Tang set
@@ -221,6 +228,63 @@ covers:
   reviews remain unperformed, and the critical-edition re-check of the cited
   transcriptions remains open.
 
+=== Ledger update — 2026-09-27: the owner approves the Qin set
+
+The owner's instruction of 2026-09-27 was *"approve 1, then proceed with 2"*,
+answering the request to approve the current Qin set for release, request
+changes, or deliberately retain it as unapproved, and then to build the shared
+reader-facing chapter experience. It is recorded here as the owner's editorial
+approval under RFD 2 of the exact set merged on `origin/main` (PR #12, merge
+commit `9889ed7`):
+
+* the decision is the owner's editorial approval under RFD 2, which is what
+  RFD 4's AC2 asks for. It is not preparing-editor self-review and not
+  independent or specialist review;
+* the approved snapshot is the corrected preparation the internal review
+  prepared and the owner reviewed, at the canonical digest
+  `sha256:70bee03e3da03ddef45baebae01283b74d801fd34a9c2523b79c68ceaaa553bf`,
+  which is the digest the row above records;
+* **no content was altered to record the approval.** The set document is
+  deliberately unchanged, so the digest still matches the snapshot the owner
+  approved. Its `review` block therefore keeps `self_review` and its
+  preparation-time notes, which say no owner decision existed; changing the set
+  would change the digest and invalidate the approval it now carries, which is
+  the correction path's own rule;
+* the optional specialist reviews the feasibility report identifies remain
+  visibly unperformed, and the critical-edition re-check of the Wikisource
+  transcriptions the locators rest on remains open. The approval does not imply
+  them;
+* the chapter is no longer comparison-only. The owner's instruction to build the
+  shared reader-facing chapter experience made it a chapter the site serves, so
+  RFD 4's AC2 now applies to it as it does to the Tang chapter, and the route
+  that served it as unapproved preparation is replaced by an ordinary chapter
+  route (see the RFD 3 chapter reader-route decision). Its content, publication
+  set, and ledger digest are unchanged by that move;
+* the approval binds the snapshot, not the chapter's name or route: presentation
+  and routing are not content, and renaming or re-routing a chapter does not
+  require a new decision.
+
+=== The gate's served-chapter rule — 2026-09-27
+
+Approving the Qin set made both chapter trees official publications, and the
+site now serves both through one shared chapter route. The gate therefore grew
+one rule, enforced by the same suite:
+
+* **A served chapter must render approved content.** The served chapters are
+  named in `src/lib/atlas/chapter-catalog.ts`, the module the chapter routes
+  load through. The gate computes which set publishes each record's current
+  revision and fails the build when any of those sets has no `owner approved`
+  row, naming the chapter and the set. A later revision, an added set, or a
+  changed member therefore stops a served chapter from shipping behind an older
+  decision instead of silently inheriting it.
+* The rule is about what the site serves, not about what the repository may
+  contain. A chapter prepared for review but not yet decided is not in the
+  served list, keeps its `preparation snapshot` row, and does not fail the
+  gate; adding it to the served list is what requires the owner's approval.
+* Nothing about the digest rule changed: a row still binds its decision to the
+  set's canonical digest, so editing an approved set fails the build even when
+  the chapter is not served.
+
 == Consequences
 
 * Adding a chapter or changing one now has three distinct steps instead of one:
@@ -233,9 +297,12 @@ covers:
   and the single revision per record recorded above. The digest in the ledger row
   is what keeps that set from being swapped afterwards without the decision being
   taken again.
-* The gate now covers every chapter tree, so the Qin comparison fixture's set is
-  ledger-covered from the day it is prepared: comparison fixtures do not get a
-  second, uncovered publication path.
+* The gate now covers every chapter tree, so a chapter prepared after the first
+  one is ledger-covered from the day it is prepared: new chapters do not get a
+  second, uncovered publication path. The 2026-09-27 served-chapter rule is the
+  same principle applied to the reader: a chapter the site shows has to be one
+  the owner approved, and a preparation snapshot can exist in the repository
+  without being served.
 * **Open question for a later contract version.** The v0 set description says a
   set records "the approving editor", but the schema cannot express the owner's
   approval (`review.independence` has no such value and there is no decision

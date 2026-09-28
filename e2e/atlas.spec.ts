@@ -6,20 +6,25 @@ import { expect, test, type Page } from "@playwright/test"
 /**
  * Browser checks for the static atlas.
  *
- * They cover direct navigation to `/atlas`, the single workspace mount, selection
- * and time-window behavior, camera-follow rules, workspace lifecycle, keyboard
- * access, the touch layouts, and the production asset surface: hashed bundles,
- * the prerendered shell, the copied Cesium workers, textures, and widget styles,
- * and no Cesium ion request.
+ * They cover direct navigation to a chapter route, the single workspace mount,
+ * selection and time-window behavior, camera-follow rules, workspace lifecycle,
+ * keyboard access, the touch layouts, and the production asset surface: hashed
+ * bundles, the prerendered shell, the copied Cesium workers, textures, and widget
+ * styles, and no Cesium ion request.
  *
- * The default target is the built artifact served by the SvelteKit preview
- * server (`pnpm e2e`); `LEKISHI_E2E_MODE=dev pnpm e2e` runs the same checks
- * against the development server, and `LEKISHI_E2E_BASE_URL` points them at any
- * already-running server.
+ * The chapter's own route and surfaces are covered by `e2e/chapters.spec.ts`;
+ * these checks are about the workspace's behavior and the artifact.
+ *
+ * The default target is the built artifact served as files (`pnpm e2e`);
+ * `LEKISHI_E2E_MODE=dev pnpm e2e` runs the same checks against the development
+ * server, and `LEKISHI_E2E_BASE_URL` points them at any already-running server.
  */
 
 /** Which server the checks run against; the development server reloads modules. */
 const mode = process.env.LEKISHI_E2E_MODE ?? "static"
+
+/** The launch chapter's route: one route serves every chapter the site carries. */
+const CHAPTER = "/chapters/tang-mission-750-754"
 
 /**
  * True when the suite starts the server itself. The raw-socket regression below
@@ -147,15 +152,15 @@ function rawRequest(port: number, target: string): Promise<{ status: string; bod
 async function mountAtlas(page: Page): Promise<string[]> {
   const problems = collectProblems(page)
 
-  await page.goto("/atlas")
+  await page.goto(CHAPTER)
   // The workspace renders its Cesium canvas once the renderer starts.
   await expect(page.locator("#atlas-workspace canvas").first()).toBeVisible({ timeout: 30_000 })
 
   return problems
 }
 
-test("serves a prerendered shell at /atlas before any script runs", async ({ request }) => {
-  const response = await request.get("/atlas")
+test("serves a prerendered chapter shell before any script runs", async ({ request }) => {
+  const response = await request.get(CHAPTER)
 
   expect(response.status()).toBe(200)
   expect(response.headers()["content-type"]).toContain("text/html")
@@ -165,8 +170,11 @@ test("serves a prerendered shell at /atlas before any script runs", async ({ req
   // Real HTML, not an empty SPA shell: the route, the mount point, and the
   // header are in the document a static host returns.
   expect(html.match(/id="atlas-workspace"/g)).toHaveLength(1)
-  // The shell names the chapter it renders and carries no review category.
+  // The shell names the chapter it renders, its window, and the decision the
+  // ledger records, and it carries no review category.
   expect(html).toContain("The embassy to Tang China")
+  expect(html).toContain("750–754")
+  expect(html).toContain("Owner-approved for release, 2026-09-25")
   expect(html).not.toContain("Reviewed chapter")
   expect(html).toContain("The 750–754 embassy of 藤原朝臣清河")
   // The deployed shell is the reviewed chapter, not the retired synthetic
@@ -196,7 +204,9 @@ test("mounts one workspace from the built artifact", async ({ page }) => {
   // The chapter, not a synthetic fixture: the notice names the chapter and its
   // recorded review status, and the list holds its in-window events.
   await expect(page.locator("#atlas-notice")).toContainText("The embassy to Tang China")
-  await expect(page.locator("#atlas-notice")).toContainText("Self-review only")
+  await expect(page.locator("#atlas-notice")).toContainText(
+    "Owner-approved for release, 2026-09-25",
+  )
   await expect(page.locator("#atlas-notice")).not.toContainText("Reviewed chapter")
   await expect(page.locator("#atlas-notice")).not.toContainText("Unapproved preparation")
   await expect(page.getByTestId("atlas-event-item")).toHaveCount(24)
@@ -260,7 +270,7 @@ test("serves the artifact as plain files, with clean URLs and a real 404 page", 
   // the check is static-only.
   test.skip(mode === "dev", "the file-only server is the static target")
 
-  for (const path of ["/atlas", "/atlas.html"]) {
+  for (const path of [CHAPTER, `${CHAPTER}.html`]) {
     const response = await request.get(path)
 
     expect(response.status(), `${path} should be served from the artifact`).toBe(200)
@@ -269,20 +279,31 @@ test("serves the artifact as plain files, with clean URLs and a real 404 page", 
 
   // A trailing slash on the clean URL redirects to the slashless form instead of
   // serving the sibling `.html` in place: the page references its assets
-  // relatively (`./_app/...`), so `/atlas/` would resolve them under `/atlas/`.
-  const trailing = await request.get("/atlas/", { maxRedirects: 0 })
+  // relatively, so `/chapters/<id>/` would resolve them under that directory.
+  const trailing = await request.get(`${CHAPTER}/`, { maxRedirects: 0 })
 
   expect(trailing.status()).toBe(308)
-  expect(trailing.headers()["location"]).toBe("/atlas")
+  expect(trailing.headers()["location"]).toBe(CHAPTER)
+
+  // The legacy route is in the artifact too, as a redirect page that names the
+  // chapter it now points at.
+  const legacy = await request.get("/atlas")
+
+  expect(legacy.status()).toBe(200)
+  expect(await legacy.text()).toContain(CHAPTER)
+  expect(await legacy.text()).not.toContain('id="atlas-workspace"')
 
   // The redirect is built from the matched file, never from the request path. A
   // decoded path can hold a control character (which would throw when it reached
   // a header) or start with `//` (which a browser reads as another origin).
-  for (const target of ["/%0a%2f..%2fatlas/", "/%2fattacker.example%2f..%2fatlas/"]) {
+  for (const target of [
+    `/%0a%2f..%2fchapters%2ftang-mission-750-754/`,
+    `/%2fattacker.example%2f..%2fchapters%2ftang-mission-750-754/`,
+  ]) {
     const encoded = await request.get(target, { maxRedirects: 0 })
 
     expect(encoded.status(), target).toBe(308)
-    expect(encoded.headers()["location"], target).toBe("/atlas")
+    expect(encoded.headers()["location"], target).toBe(CHAPTER)
   }
 
   const missing = await request.get("/no-such-page-in-the-atlas")
@@ -316,13 +337,13 @@ test("mounts the workspace through the trailing-slash redirect", async ({ page }
 
   const problems = collectProblems(page)
 
-  await page.goto("/atlas/")
+  await page.goto(`${CHAPTER}/`)
   await expect(page.locator("#atlas-workspace canvas").first()).toBeVisible({ timeout: 30_000 })
   await expect(page.getByTestId("atlas-event-item")).toHaveCount(24)
 
   // The browser ends on the clean URL, which is what makes the page's relative
   // asset references resolve.
-  expect(new URL(page.url()).pathname).toBe("/atlas")
+  expect(new URL(page.url()).pathname).toBe(CHAPTER)
   expect(problems).toEqual([])
 })
 
@@ -338,7 +359,7 @@ test("answers a malformed request target instead of ending the server", async ({
   expect(response.status).toContain("400")
 
   // The server is still serving: the malformed target is a response, not a crash.
-  expect((await request.get("/atlas")).status()).toBe(200)
+  expect((await request.get(CHAPTER)).status()).toBe(200)
 })
 
 test("serves built assets and the Cesium runtime without Cesium ion", async ({ page, request }) => {

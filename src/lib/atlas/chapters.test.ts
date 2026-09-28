@@ -1,49 +1,53 @@
 import { describe, expect, it } from "vitest"
 import { listChapters } from "../historical/chapter"
-import { CHAPTER as PRODUCTION_CHAPTER } from "./chapter-content"
-import { loadChapterContent } from "./chapter-catalog"
-import { CHAPTERS, chapterPresentation } from "./chapters"
-import { COMPARISON_CHAPTER, COMPARISON_COVERAGE, COMPARISON_REVIEW } from "./comparison"
+import { loadServedChapter } from "./chapter-catalog"
+import { QIN_CHAPTER, SERVED_CHAPTERS, TANG_CHAPTER } from "./chapter-registry"
+import { CHAPTERS, chapterHeading, chapterHref, chapterPresentation } from "./chapters"
+import { QIN_RELEASE, TANG_RELEASE } from "./release"
 import { yearLabel } from "./labels"
-import { RELEASE } from "./release"
 
 /**
  * The chapter cards' contract.
  *
  * The root page presents the chapters from `chapters.ts`, so these tests pin the
- * list against the content instead of against the copy: every chapter tree has
+ * list against the content instead of against the copy: every served chapter has
  * exactly one card, each card shows the window the projection gives its chapter,
  * and each card opens where that chapter is served. They also keep the cards
  * user-facing — the name and summary must not read as production notes about
- * contract sets, comparison harnesses, or preparation state — and keep each
- * chapter's editorial state in the status line, where it is secondary metadata
+ * contract sets, review categories, or preparation state — and keep each
+ * chapter's editorial decision in the status line, where it is secondary metadata
  * rather than the chapter's identity.
  */
 
-const TANG = PRODUCTION_CHAPTER.id
-
 describe("the chapter cards", () => {
-  it("covers every chapter tree exactly once, by id and by name", () => {
+  it("covers every served chapter exactly once, by id and by name", () => {
     const ids = CHAPTERS.map((chapter) => chapter.id)
     const names = CHAPTERS.map((chapter) => chapter.name)
 
     expect(new Set(ids).size).toBe(ids.length)
     expect(new Set(names).size).toBe(names.length)
-    // A chapter directory that has no card, or a card for a chapter that does
-    // not exist, fails here: the page cannot describe a chapter the atlas does
-    // not carry.
-    expect([...ids].sort()).toEqual(listChapters())
-    expect(ids).toContain(TANG)
-    expect(ids).toContain(COMPARISON_CHAPTER)
+    // The cards and the served list are the same set: a served chapter that has
+    // no card, or a card for a chapter the site does not serve, fails here. A
+    // chapter tree that is prepared but not served has neither, which is what
+    // lets a review chapter exist without shipping.
+    expect([...ids].sort()).toEqual(SERVED_CHAPTERS.map((chapter) => chapter.id).sort())
+
+    for (const chapter of CHAPTERS) {
+      expect(listChapters(), `${chapter.id} has a card but no chapter tree`).toContain(chapter.id)
+    }
+
+    expect(ids).toContain(TANG_CHAPTER)
+    expect(ids).toContain(QIN_CHAPTER)
   })
 
   it("shows each chapter the window the projection gives that chapter", async () => {
-    const qin = await loadChapterContent(COMPARISON_CHAPTER, COMPARISON_COVERAGE)
+    const tang = await loadServedChapter(TANG_CHAPTER)
+    const qin = await loadServedChapter(QIN_CHAPTER)
 
     // The window is content, not copy: it must be the window the atlas opens the
     // chapter on, or the card would advertise a span the chapter does not cover.
-    expect(chapterPresentation(TANG)?.window).toEqual(PRODUCTION_CHAPTER.defaultWindow)
-    expect(chapterPresentation(qin.id)?.window).toEqual(qin.defaultWindow)
+    expect(chapterPresentation(TANG_CHAPTER)?.window).toEqual(tang.defaultWindow)
+    expect(chapterPresentation(QIN_CHAPTER)?.window).toEqual(qin.defaultWindow)
   })
 
   it("names each chapter and summarises its story for a visitor", () => {
@@ -60,14 +64,15 @@ describe("the chapter cards", () => {
     // The page is a reader's entry point, not the project's notes. The list pins
     // the exact framings the owner rejected — a review category, the comparison
     // harness, the contract id — rather than ordinary words a historical summary
-    // may legitimately need ("publication", "revision", "contract" as a treaty,
-    // or "treatment" in prose). A paraphrase is a copy-review question, not a
-    // substring rule.
+    // may legitimately need (a "comparison" between two readings, say). A
+    // paraphrase is a copy-review question, not a substring rule.
     const internals = [
       "reviewed chapter",
       "comparison chapter",
+      "comparison fixture",
       "comparison harness",
       "map treatments",
+      "treatment comparison",
       "lekishi-historical-contract",
       "preparation snapshot",
       "self_review",
@@ -82,30 +87,53 @@ describe("the chapter cards", () => {
     }
   })
 
-  it("states each chapter's editorial state as secondary metadata", () => {
-    const tang = chapterPresentation(TANG)
-    const qin = chapterPresentation(COMPARISON_CHAPTER)
+  it("states each chapter's recorded decision as secondary metadata", () => {
+    const tang = chapterPresentation(TANG_CHAPTER)
+    const qin = chapterPresentation(QIN_CHAPTER)
 
-    expect(tang?.status).toBe(RELEASE.status)
-    expect(tang?.status).toContain("Owner-approved for release")
-    expect(tang?.status).toContain(RELEASE.decidedOn)
-    // The owner's editorial approval is not review, and the line must keep
-    // saying so rather than reading as independent or specialist sign-off.
-    expect(tang?.status).toContain("Not independent or specialist review")
+    expect(tang?.status).toBe(TANG_RELEASE.status)
+    expect(qin?.status).toBe(QIN_RELEASE.status)
 
-    expect(qin?.status).toBe(`${COMPARISON_REVIEW.label} · self-review only`)
-    expect(qin?.status).toContain("Unapproved preparation")
-    // Discoverability must not read as release, and neither card may claim an
-    // approval the ledger does not record for its chapter.
-    expect(qin?.status).not.toContain("Owner-approved")
-    expect(qin?.status).not.toContain("approved for release")
+    for (const [id, card] of [
+      [TANG_CHAPTER, tang],
+      [QIN_CHAPTER, qin],
+    ] as const) {
+      expect(card?.status, id).toContain("Owner-approved for release")
+      // The owner's editorial approval is not review, and the line must keep
+      // saying so rather than reading as independent or specialist sign-off.
+      expect(card?.status, id).toContain("Not independent or specialist review")
+      expect(card?.status, id).not.toContain("Independent review recorded")
+      expect(card?.status, id).not.toContain("Specialist review recorded")
+    }
+
+    expect(tang?.status).toContain(TANG_RELEASE.decidedOn)
+    expect(qin?.status).toContain(QIN_RELEASE.decidedOn)
   })
 
   it("opens each chapter where the product serves it", () => {
-    expect(chapterPresentation(TANG)?.href).toBe("/atlas")
-    expect(chapterPresentation(COMPARISON_CHAPTER)?.href).toBe("/compare/qin")
+    expect(chapterPresentation(TANG_CHAPTER)?.href).toBe("/chapters/tang-mission-750-754")
+    expect(chapterPresentation(QIN_CHAPTER)?.href).toBe("/chapters/qin-conquest-han-233-226")
+    expect(chapterHref(TANG_CHAPTER)).toBe(chapterPresentation(TANG_CHAPTER)?.href)
     // An unknown id has no card, so callers fall back to the chapter's own
     // published title instead of rendering an invented one.
     expect(chapterPresentation("no-such-chapter")).toBeUndefined()
+  })
+
+  it("states a chapter's heading from its card, and falls back to the publication", async () => {
+    const tang = await loadServedChapter(TANG_CHAPTER)
+    const heading = chapterHeading(tang)
+
+    expect(heading.name).toBe("The embassy to Tang China")
+    expect(heading.decision).toBe(TANG_RELEASE.decision)
+    expect(heading.status).toBe(TANG_RELEASE.status)
+
+    // A chapter without a card still renders: the heading uses the chapter's own
+    // published title and the review independence its publication records.
+    const other = { ...tang, id: "no-card-chapter" }
+    const fallback = chapterHeading(other)
+
+    expect(fallback.name).toBe(tang.title)
+    expect(fallback.decision).toBe("Self-review only")
+    expect(fallback.status).toBe("Self-review only")
   })
 })

@@ -1,6 +1,14 @@
-import type { Chapter, EventDispute, EventPlacement, GeoPoint, Occurrence } from "./domain"
+import type {
+  Chapter,
+  EventDispute,
+  EventPlacement,
+  GeoPoint,
+  HistoricalEvent,
+  Occurrence,
+} from "./domain"
 import type { AtlasState, CameraFocusRequest } from "./state"
 import { findEvent, playbackState, selectionTimeStatus } from "./state"
+import type { SearchMatchKind, SearchResult } from "./search"
 import { relationToWindow, type OccurrenceRelation, type PlaybackState } from "./time"
 
 /**
@@ -12,7 +20,10 @@ import { relationToWindow, type OccurrenceRelation, type PlaybackState } from ".
  *
  * The scene keeps every in-window event, including the ones the map cannot
  * place. `placement.kind === "none"` is a list-only event, never a guessed
- * coordinate, and the renderer draws nothing for it.
+ * coordinate, and the renderer draws nothing for it. Search is the one surface
+ * that also shows events outside the window (`relation === "outside"`), because a
+ * reader who searches for a name must find it; the row says so instead of
+ * pretending the event is inside the selected window.
  */
 
 export type SceneEvent = {
@@ -22,8 +33,8 @@ export type SceneEvent = {
   readonly occurrence: Occurrence
   /** The published dispute, or null; the list and details surfaces show it verbatim. */
   readonly dispute: EventDispute | null
-  /** `definite` or `possible` inside the window; outside-window events are excluded. */
-  readonly relation: Exclude<OccurrenceRelation, "outside">
+  /** The event's relation to the window; `outside` only appears in search results. */
+  readonly relation: OccurrenceRelation
   /** `active` at the playhead, `possible` for an uncertain occurrence window, or `inactive`. */
   readonly playback: PlaybackState
   readonly selected: boolean
@@ -50,6 +61,28 @@ export function placementPoint(placement: EventPlacement): GeoPoint | null {
   return placement.kind === "point" ? placement.position : null
 }
 
+/**
+ * One event's row, as the list and the details surface read it. `buildScene` and
+ * search both go through here, so a row cannot describe the same event two ways.
+ */
+export function sceneEvent(
+  state: AtlasState,
+  chapter: Chapter,
+  event: HistoricalEvent,
+): SceneEvent {
+  return {
+    id: event.id,
+    title: event.title,
+    placement: event.placement,
+    occurrence: event.occurrence,
+    dispute: event.dispute,
+    relation: relationToWindow(event.occurrence, state.timeWindow),
+    playback: playbackState(state, event),
+    selected: state.selectedEventId === event.id,
+    coda: event.coda,
+  }
+}
+
 export function buildScene(state: AtlasState, chapter: Chapter): AtlasScene {
   const events: SceneEvent[] = []
 
@@ -61,17 +94,7 @@ export function buildScene(state: AtlasState, chapter: Chapter): AtlasScene {
       continue
     }
 
-    events.push({
-      id: event.id,
-      title: event.title,
-      placement: event.placement,
-      occurrence: event.occurrence,
-      dispute: event.dispute,
-      relation,
-      playback: playbackState(state, event),
-      selected: state.selectedEventId === event.id,
-      coda: event.coda,
-    })
+    events.push(sceneEvent(state, chapter, event))
   }
 
   // Chronological order keeps the non-map event list and stepping predictable.
@@ -96,4 +119,40 @@ export function buildScene(state: AtlasState, chapter: Chapter): AtlasScene {
     // Following moves the camera to a selection the map can actually show.
     cameraTarget: state.cameraFollow === "following" ? target : null,
   }
+}
+
+/** One search result, as the list renders it: the event's row plus what matched. */
+export type SceneSearchResult = {
+  readonly event: SceneEvent
+  readonly match: SearchMatchKind
+  readonly matchedText: string
+}
+
+/**
+ * Rows for a search result list.
+ *
+ * Unlike the window's list, these include events the window excludes: search has
+ * to reach the whole chapter, and the row carries its relation so the list can
+ * say an event is outside the selected window instead of hiding it. Selecting one
+ * keeps its details and shows the outside-window notice, exactly as any other
+ * out-of-window selection does.
+ */
+export function searchRows(
+  state: AtlasState,
+  chapter: Chapter,
+  results: readonly SearchResult[],
+): SceneSearchResult[] {
+  return results.flatMap((result) => {
+    const event = findEvent(chapter, result.eventId)
+
+    return event === null
+      ? []
+      : [
+          {
+            event: sceneEvent(state, chapter, event),
+            match: result.match,
+            matchedText: result.matchedText,
+          },
+        ]
+  })
 }

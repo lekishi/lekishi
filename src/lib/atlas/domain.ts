@@ -63,16 +63,26 @@ export type Place =
       readonly id: string
       /** The published primary name form. */
       readonly label: string
+      /** Every published name form and reading aid, for search. */
+      readonly aliases: readonly string[]
       readonly placement: PointPlacement
       readonly precision: GeometryPrecision
       readonly position: GeoPoint
+      /**
+       * The published note on the geometry the atlas shows, or null. A display
+       * anchor's note is what says it asserts no historical coordinate, so the
+       * details surface can state that in the record's own words.
+       */
+      readonly placementNote: string | null
     }
   | {
       readonly id: string
       readonly label: string
+      readonly aliases: readonly string[]
       readonly placement: "unknown"
       readonly precision: "unspecified"
       readonly position: null
+      readonly placementNote: string | null
     }
 
 /**
@@ -118,6 +128,26 @@ export type EventDispute = {
   }[]
 }
 
+/**
+ * One published citation: which source, where in it, and the quoted passage when
+ * the source's recorded terms permit quoting. The locator is the record's own
+ * locator value, never a rephrasing, so a reader can check the claim.
+ */
+export type EventCitation = {
+  readonly sourceId: string
+  readonly locatorKind: string
+  readonly locator: string
+  /** The published quoted text, or null when the citation carries none. */
+  readonly quotedText: string | null
+}
+
+/** A published participant of an event, with the role the record gives it. */
+export type EventParticipant = {
+  readonly actorId: string
+  /** The contract's role vocabulary, e.g. `subject` or `leader`. */
+  readonly role: string
+}
+
 /** A published event with the chapter's presentation title and its own summary. */
 export type HistoricalEvent = {
   readonly id: string
@@ -129,6 +159,64 @@ export type HistoricalEvent = {
   readonly dispute: EventDispute | null
   /** True when the published record is a coda node outside the primary mission window. */
   readonly coda: boolean
+  /**
+   * Every place the published record references, each once, in the order the
+   * record first names it. The atlas places the event at one of them; search and
+   * any other reader surface may name them all, because a record that names four
+   * places named them all.
+   */
+  readonly placeIds: readonly string[]
+  /** The event's published participants, in the record's own order. */
+  readonly participants: readonly EventParticipant[]
+  /** The event's published citations, in the record's own claim order. */
+  readonly citations: readonly EventCitation[]
+}
+
+/**
+ * A published actor the chapter names, kept as a label and its search aliases.
+ * The atlas has no actor surface yet; the label is what a reader reads beside an
+ * event's participants, and the aliases are the name forms the record publishes.
+ */
+export type Actor = {
+  readonly id: string
+  /** The published primary name form. */
+  readonly label: string
+  /** Every published name form and reading aid, for search. */
+  readonly aliases: readonly string[]
+  /** The contract's actor type vocabulary, e.g. `person` or `state`. */
+  readonly types: readonly string[]
+}
+
+/**
+ * A published source the chapter cites, with the reuse terms the record carries.
+ * The atlas states the record's own attribution and links the source's recorded
+ * identifier; it never restates or upgrades a licence.
+ */
+export type Source = {
+  readonly id: string
+  readonly title: string
+  /** The contract's source kind, e.g. `primary`, `reference`, `dataset`. */
+  readonly kind: string
+  readonly edition: string | null
+  readonly attribution: string
+  readonly licenseId: string | null
+  /** The first recorded URL identifier, or null when the record carries none. */
+  readonly url: string | null
+}
+
+/**
+ * One step of the chapter's published story, in the story's own order.
+ *
+ * `event` steps are the events the atlas can open; `summary` steps are the
+ * story's own captions for published records the atlas has no event surface for
+ * (a relationship, for example). The step is kept rather than dropped, because
+ * the order is the chapter's presentation order and the atlas must not present a
+ * different one; the kind tells a surface whether the step can be opened.
+ */
+export type StoryStep = {
+  readonly recordId: string
+  readonly caption: string
+  readonly kind: "event" | "summary"
 }
 
 /** Publication facts the atlas states wherever the chapter's content appears. */
@@ -155,7 +243,11 @@ export type Chapter = {
   readonly defaultWindow: TimeWindow
   readonly homeView: GeoPoint
   readonly places: readonly Place[]
+  readonly actors: readonly Actor[]
   readonly events: readonly HistoricalEvent[]
+  readonly sources: readonly Source[]
+  /** The published story's steps, in the story's own presentation order. */
+  readonly story: readonly StoryStep[]
   readonly publication: ChapterPublication
 }
 

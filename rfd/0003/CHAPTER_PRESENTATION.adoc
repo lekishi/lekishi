@@ -211,6 +211,30 @@ category; `build/compare/qin.html` names *The end of the state of Han*, its
   summary names a year from the chapter's own window and carries none of the
   rejected framings, and correctness of the prose itself stays a review question.
 
+== Supersession — 2026-09-27: the second chapter is approved and served like any other
+
+The owner approved the Qin set on 2026-09-27 (*"approve 1, then proceed with 2"*),
+so three statements above no longer describe the product.
+link:CHAPTER_READER_ROUTE.adoc[The chapter reader-route decision] records what
+replaced them:
+
+* the Qin card no longer reads `Unapproved preparation · self-review only`. Both
+  cards state the decision their chapter's ledger row records, and
+  `release.test.ts` cross-checks each stated date against its own row;
+* `/compare/qin` is no longer the second chapter's path: both chapters are served
+  at `/chapters/<chapter-id>`, and `/compare/qin` is a redirect page. The open
+  presentation decision recorded above — whether to rename the path — is taken by
+  that record;
+* the details surface's review-independence prose is no longer an open decision:
+  the panel states the chapter's recorded decision and the review independence
+  together, on the one shared chapter surface.
+
+What this record's decisions still hold: the peer cards, the display names as
+product copy, editorial state as secondary metadata, the artifact bans on the
+rejected framings, and the root page leading with the atlas. Its measured evidence
+below records the state as of this decision and stays readable as what was
+measured then.
+
 == Verification performed for this document
 
 * Ran `pnpm verify` (format, `svelte-check`, unit and contract tests, static build

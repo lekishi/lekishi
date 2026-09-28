@@ -1,0 +1,185 @@
+:authors: Darwin D Wu <darwin67@users.noreply.github.com>
+:state: Gate 2 evidence record — verified baseline, not a treatment selection
+:date: 2026-09-28
+:prepared-from: origin/main @ 7e45af4 plus this record's own branch
+:labels: release, gate-2, baseline, evidence, poc, verification
+
+= RFD 4 Gate 2 evidence: the shared runnable baseline
+
+== Provenance and scope
+
+This record answers link:README.adoc[RFD 4]'s Gate 2:
+
+____
+Both scenarios run on the shared baseline with comparable content, controls,
+selection, and time behavior; the treatment comparison does not start before this
+gate.
+____
+
+The implementation condition was already in place when this record was written:
+link:../0003/CHAPTER_READER_ROUTE.adoc[the chapter reader-route decision] made
+both chapters ordinary served chapters of one contract, rendered by one chapter
+route, one workspace, and one set of surfaces. What was missing was *executed*
+evidence for every part of the criterion, and this record is that evidence: the
+browser checks in `e2e/shared-baseline.spec.ts`, run against the built artifact in
+all three projects, plus the matched screenshots the same checks' states produce.
+
+Gate 2 is a statement about the baseline, not about quality: the two scenarios
+have to be comparable, so that a difference the treatment comparison later
+measures is the treatment's and not a chapter's. Content is *comparable*, not
+equal — the Tang chapter carries 24 in-window events and the Qin chapter 5 — and
+the criterion is that the same behavior holds for whatever content a chapter
+publishes.
+
+== The criteria, and how each was executed
+
+[cols="1,2",options="header"]
+|===
+|Criterion |How it is executed
+
+|Chapter routing
+|Each chapter is loaded at its own ordinary route (`/chapters/<chapter-id>`) and
+asserted to prerender its own name, window, and recorded decision; the legacy
+routes still resolve to the chapters they served.
+
+|Comparable content
+|Each chapter is asserted to carry the same contract shape with its own counts:
+the panel's three surfaces carry that chapter's own event, story, and source
+counts, and the checks fail if a surface is missing for either chapter.
+
+|Controls
+|The same control set is present on both chapters — window start and end, the
+playhead, step back and forward, play/pause, and the follow toggle — with each
+chapter's own window in the atlas's own year text (a CE window as years, a BCE
+window as BCE years).
+
+|Search
+|A published name form finds the record it names in each chapter, through that
+chapter's own published text, and clearing the query restores the window's list.
+
+|Selection
+|Selecting a row opens the details panel with the record's own place and
+placement, occurrence with precision and mode, and the date as written.
+
+|Sources
+|The selected event's citations with their locators are shown, and the chapter's
+sources surface lists the chapter's own sources with their recorded attribution.
+
+|Visible uncertainty and disputes
+|The chapter's disputed record is marked in the list and explained in the details
+panel with the published dispute summary and the accounts that challenge it.
+
+|Time behavior
+|Chronological stepping moves the playhead to an event boundary without moving
+the window; playback advances the playhead within the fixed window and stops at
+its end; a selection the window excludes keeps its details with the outside-time
+notice and the explicit return action, and keeps no marker in the window's list.
+|===
+
+== Measured evidence
+
+Measured 2026-09-28 on the built static artifact (`pnpm build`, 526 files), served
+as files by `scripts/serve-static.mjs`; browser checks run with
+`LEKISHI_E2E_BASE_URL` against that artifact in the desktop, tablet-touch, and
+phone projects of `playwright.config.ts`.
+
+[cols="1,3",options="header"]
+|===
+|Check |Result
+
+|Shared-baseline browser checks
+|`e2e/shared-baseline.spec.ts`: 5 checks per project — 15 in all — against the
+built artifact in the desktop, tablet-touch, and phone projects: 15 passed in
+19.5 minutes. Each check runs the same criteria against one chapter, so both
+chapters are covered by the same list in every project.
+
+|Existing chapter browser checks
+|The full built-artifact suite (`pnpm e2e`, all three projects) ran on the final
+tree: 129 passed, 3 skipped, and 6 failed — every failure was the same check in
+this record's own time test, which asserted a transient "Pause" state that a
+delayed interval tick can skip on a loaded machine. The check now asserts the
+durable outcome (where the playhead lands and that the window never moved), and
+the re-run is green (15 passed, above). No pre-existing check failed, and the
+suite took 1.8 hours.
+
+|Full unit and contract suite
+|`pnpm verify` passes: format check clean, `svelte-check` 0 errors and 0 warnings,
+520 tests passed with 1 skipped (521 total; the skipped case is the `pnpm seal`
+maintenance entry point), 163 contract tests through the build gate, and the
+static build with its invariant (526 files).
+
+|Matched screenshots
+|Both chapters on their served pages at 1440x900, 820x634, 390x844, and 320x640,
+dense and with the chapter's disputed event selected and explained (16 images,
+`reader-<chapter>-<viewport>[-dispute].png`), plus the same states on the
+comparison surface under `.amp/in/artifacts/treatment-comparison/`.
+|===
+
+== Shared-baseline defects found and fixed
+
+None in the shared baseline: both chapters passed every criterion above without
+any behavior having to be corrected for Gate 2 to hold.
+
+Two defects were found and fixed in the evidence and in the comparison work
+itself, and they are recorded here because they are what the verification caught:
+
+* *The first draft of the baseline checks selected a record its own search had
+  filtered out.* The check searched for a participant name and then selected the
+  chapter's disputed record, which that query does not match; while a search is
+  active the panel lists results, so the selection would have timed out on a
+  correctly working implementation. The check now clears the query, asserts the
+  window's list is back, and only then selects the disputed record. The evidence
+  below is from the corrected checks.
+* *The illustrated treatment's scene card overflowed the overlay column.* The
+  card was first rendered beside the details panel; at 320x640 the card and the
+  details together exceeded the column's bound, so the card was clipped and the
+  record's own details were pushed out of the visible area. The card now renders
+  inside the details panel's own scroll area, so the panel's existing bound
+  covers it, and `e2e/treatment-comparison.spec.ts` pins the card's containment
+  and the panel's clearance at all four reviewed sizes. The shipped reader surface
+  never had the card at all, so no reader-visible behavior changed.
+
+The Tang chapter's label crowding at the default view is a real readability
+limitation, but it is not a Gate 2 defect: it is the same in both treatments, it
+is what the chapter's content puts on the map, and it is recorded as a limitation
+in link:../0003/CHAPTER_READER_ROUTE.adoc[the chapter reader-route decision] and
+in link:../0003/TREATMENT_COMPARISON.adoc[the treatment comparison].
+
+== Limitations recorded
+
+* Gate 2 does not claim the loop is complete. link:../0001/IMPLEMENTATION.adoc[RFD
+  1's checklist] still carries layer controls, the separate nearby/connected
+  lists, coverage guidance, and discoverability for wholly undated events as open
+  items; the loop's remaining work is unchanged by this record.
+* The checks run against the artifact on this machine's software renderer. Device
+  and performance acceptance stays with RFD 4's AC5 and the physical-iPad
+  checkpoint, which this record does not touch.
+* The two chapters are comparable in behavior, not in size or period. Qin's
+  smaller inventory exercises every shared surface, but it cannot exercise a
+  dense list the way the Tang chapter does; the treatment comparison's dense-state
+  evidence uses the Tang chapter for that reason.
+
+== What this record does not decide
+
+* It does not select a local-detail treatment, and it does not resolve the
+  renderer. That is link:../0003/TREATMENT_COMPARISON.adoc[the treatment
+  comparison] and Gate 3.
+* It changes no content, no publication set, and no ledger row.
+
+== Verification performed for this document
+
+* Ran `pnpm verify` on the final tree: format check clean, `svelte-check` 0
+  errors and 0 warnings, 520 tests passed with 1 skipped (521 total), 163
+  contract tests through the build gate, and the static build with its invariant
+  (526 files).
+* Ran the full built-artifact browser suite (`pnpm e2e`) in all three projects on
+  the final tree: 129 passed, 3 skipped, 6 failed — all six failures the same
+  check in this work's own time test, fixed here (the durable-outcome assertion
+  above) and re-run green in all three projects (15 passed in 19.5 minutes).
+* Captured and inspected the reader pages' dense and disputed states at
+  1440x900, 820x634, 390x844, and 320x640 (16 images under
+  `.amp/in/artifacts/treatment-comparison/`), and the same states on the
+  comparison surface for both treatments.
+* Inspected the artifact: both chapter pages carry one mount point, their own
+  name, window, and recorded decision, and neither links nor names the
+  comparison surface; the review pages state what they are and are `noindex`.

@@ -241,6 +241,95 @@ for (const marker of [
   }
 }
 
+// --- the treatment comparison's review surface ---------------------------------
+//
+// The bounded RFD 1/RFD 3 treatment comparison needs a place to look at the
+// illustrated-local treatment beside the shipped geographic/symbolic one. That
+// surface is an internal page, not a chapter: it states what it is, it is
+// `noindex`, and no reader surface links it. A deploy that dropped the surface
+// (the comparison could not be reviewed), turned it into a reader page (its
+// framing could reach a reader), or linked it from the root page or a chapter
+// fails here.
+
+const REVIEW_PAGES = CHAPTERS.map((chapter) => ({
+  file: `review/local-treatment/${chapter.id}.html`,
+  chapter,
+}))
+
+const reviewHtml = new Map()
+
+for (const page of REVIEW_PAGES) {
+  const file = path.join(buildDirectory, page.file)
+
+  if (!requireFile(file)) {
+    continue
+  }
+
+  const html = read(file)
+
+  reviewHtml.set(page.file, html)
+
+  if ((html.match(/id="atlas-workspace"/g) ?? []).length !== 1) {
+    fail(`${page.file} must contain exactly one #atlas-workspace mount point`)
+  }
+
+  if (!html.includes("_app/immutable/entry/start.")) {
+    fail(`${page.file} does not load the client entry, so the workspace would never mount`)
+  }
+
+  for (const marker of [
+    "Internal comparison surface",
+    "noindex",
+    page.chapter.name,
+    "Geographic/symbolic",
+    "Illustrated local",
+  ]) {
+    if (!html.includes(marker)) {
+      fail(`${page.file} does not state ${marker}`)
+    }
+  }
+}
+
+for (const [file, html] of reviewHtml) {
+  // The review surface states the chapter's own recorded decision, so a reviewer
+  // cannot mistake the comparison for a different revision of the content.
+  const chapter = REVIEW_PAGES.find((page) => page.file === file)?.chapter
+
+  if (chapter !== undefined && !html.includes(chapter.decision)) {
+    fail(`${file} does not state the chapter's recorded decision`)
+  }
+}
+
+// A reader meets a chapter, never the comparison: no reader page links the
+// review surface, and none carries its framing, its control, or the illustrated
+// treatment's own markers. The workspace mounts only in the browser, so a page
+// that passed the illustrated treatment to it would still have clean HTML; these
+// sentinels catch the copy, the control ids, and the treatment's own surface
+// names, and the browser checks mount each chapter and select an event.
+const readerPages = [
+  ["index.html", indexHtml],
+  ...[...chapterHtml].map(([id, html]) => [`chapters/${id}.html`, html]),
+]
+
+for (const [file, html] of readerPages) {
+  if (html.includes("/review/local-treatment")) {
+    fail(`${file} links the internal treatment-comparison surface`)
+  }
+
+  for (const marker of [
+    "Internal comparison surface",
+    "Local scene · illustrative",
+    "atlas-local-scene",
+    "Illustrated local",
+    "Geographic/symbolic",
+    "review-treatment",
+  ]) {
+    if (html.includes(marker)) {
+      fail(`${file} carries the treatment comparison's own framing or control: ${marker}`)
+    }
+  }
+}
+
 // --- bundles ------------------------------------------------------------------
 
 requireMatching(/_app\/immutable\/entry\/.*\.js$/, "a client entry bundle under _app/immutable")

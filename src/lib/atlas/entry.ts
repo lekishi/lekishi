@@ -1,5 +1,5 @@
 import type { Chapter } from "./domain"
-import { mountAtlas, type AtlasHandle, type AtlasHeading } from "./mount"
+import { mountAtlas, type AtlasHandle, type AtlasHeading, type AtlasPageOptions } from "./mount"
 
 /**
  * The atlas workspace's single mount owner.
@@ -33,8 +33,11 @@ let watching = false
 
 // The chapter and heading the page asked for, kept so a back/forward-cache
 // restore re-creates the same workspace rather than an empty or default one.
+// The page options travel with them for the same reason: a restored comparison
+// page must come back as the treatment it was showing.
 let currentChapter: Chapter | null = null
 let currentHeading: AtlasHeading | undefined
+let currentOptions: AtlasPageOptions = {}
 
 /**
  * True in a browser. SvelteKit renders the chapter shell on the server while
@@ -78,7 +81,7 @@ export function mountWorkspace(): void {
   workspace = null
 
   try {
-    workspace = mountAtlas(root, currentChapter, currentHeading)
+    workspace = mountAtlas(root, currentChapter, currentHeading, currentOptions)
     window.__lekishiAtlas = workspace
   } catch (error) {
     reportFailure(root, error)
@@ -113,10 +116,20 @@ export function watchWorkspaceLifecycle(): void {
  * `heading` is the chapter's display name and recorded decision — product
  * presentation the route takes from `chapters.ts`; without it the workspace uses
  * the chapter's published title and states no decision line.
+ *
+ * `options` are the page's presentation choices (today, which local-detail
+ * treatment to show). They are remembered with the chapter so a back/forward-cache
+ * restore re-creates the same page, and they default to the shipped treatment:
+ * a caller that passes nothing gets the reader surface exactly as before.
  */
-export function startAtlasPage(chapter: Chapter, heading?: AtlasHeading): void {
+export function startAtlasPage(
+  chapter: Chapter,
+  heading?: AtlasHeading,
+  options: AtlasPageOptions = {},
+): void {
   currentChapter = chapter
   currentHeading = heading
+  currentOptions = options
   watchWorkspaceLifecycle()
   mountWorkspace()
 }

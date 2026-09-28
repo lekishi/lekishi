@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Actor, HistoricalEvent, Source } from "../domain"
+  import type { Actor, HistoricalEvent, Place, Source } from "../domain"
   import {
     citationLabel,
     occurrenceLabel,
@@ -9,7 +9,9 @@
     roleLabel,
     unplacedNote,
   } from "../labels"
+  import type { LocalDetailTreatment } from "../scene-illustration"
   import type { SelectionTimeStatus } from "../state"
+  import LocalScene from "./LocalScene.svelte"
 
   /**
    * The selected event's details.
@@ -21,6 +23,13 @@
    * published dispute when there is one. The chapter's decision and the recorded
    * review independence stay beside all of it, so a reader always knows what they
    * are reading and how it was reviewed.
+   *
+   * `localDetail` is the page's local-detail treatment. The shipped
+   * geographic/symbolic treatment adds nothing here; the treatment comparison's
+   * illustrated-local value puts its scene card at the top of this panel's own
+   * scroll area, so the card is bounded by the panel's bound (and therefore by
+   * the overlay column that stops above the time controls) at every reviewed
+   * viewport instead of being a second thing that can overflow them.
    */
   let {
     event,
@@ -28,9 +37,11 @@
     review,
     decision,
     placeNote,
+    places,
     actors,
     sources,
     story,
+    localDetail = "geographic-symbolic",
     onReturnToTime,
     onPreviousStoryStep,
     onNextStoryStep,
@@ -44,10 +55,14 @@
     decision: string
     /** The record's own note on the geometry the atlas shows, or null. */
     placeNote: string | null
+    /** The chapter's places, so the illustrated treatment can name the record's own place. */
+    places: readonly Place[]
     actors: readonly Actor[]
     sources: readonly Source[]
     /** The story steps around this event, for explicit jumps. */
     story: { previous: string | null; next: string | null; caption: string | null }
+    /** The page's local-detail treatment; the reader surface passes nothing. */
+    localDetail?: LocalDetailTreatment
     onReturnToTime: () => void
     onPreviousStoryStep: () => void
     onNextStoryStep: () => void
@@ -82,6 +97,10 @@
     aria-label="Selected event"
     class="pointer-events-auto flex min-h-0 flex-col gap-3 overflow-y-auto rounded-t-2xl border border-slate-700/70 bg-slate-950/90 px-4 py-4 shadow-2xl shadow-slate-950/60 backdrop-blur md:rounded-2xl"
   >
+    {#if localDetail === "illustrated-local"}
+      <LocalScene {event} {places} />
+    {/if}
+
     <header class="flex items-start justify-between gap-3">
       <div>
         <p class="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-amber-300">

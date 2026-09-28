@@ -1,5 +1,6 @@
 import { mount, unmount } from "svelte"
 import type { Chapter } from "./domain"
+import type { LocalDetailTreatment } from "./scene-illustration"
 import AtlasWorkspace from "./workspace/AtlasWorkspace.svelte"
 
 /**
@@ -30,10 +31,23 @@ export type AtlasHeading = {
   readonly decision: string
 }
 
+/**
+ * The presentation choices a page can make for its workspace.
+ *
+ * `localDetail` is RFD 1's local-detail treatment. It is page-level presentation
+ * rather than content, and the default is the shipped geographic/symbolic
+ * treatment: the chapter route passes no options at all, and only the treatment
+ * comparison's own surface passes `illustrated-local`.
+ */
+export type AtlasPageOptions = {
+  readonly localDetail?: LocalDetailTreatment
+}
+
 export function mountAtlas(
   root: HTMLElement,
   chapter: Chapter,
   heading?: AtlasHeading,
+  options: AtlasPageOptions = {},
 ): AtlasHandle {
   const component = mount(AtlasWorkspace, {
     target: root,
@@ -41,6 +55,7 @@ export function mountAtlas(
       chapter,
       name: heading?.name ?? chapter.title,
       decision: heading?.decision ?? "",
+      localDetail: options.localDetail ?? "geographic-symbolic",
     },
   })
   let disposed = false

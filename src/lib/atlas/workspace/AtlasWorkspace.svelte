@@ -2,6 +2,7 @@
   import { untrack } from "svelte"
   import type { Chapter } from "../domain"
   import { windowLabel } from "../labels"
+  import type { LocalDetailTreatment } from "../scene-illustration"
   import { buildScene, searchRows } from "../scene"
   import { searchChapter } from "../search"
   import * as story from "../story"
@@ -26,12 +27,25 @@
    * ledger-derived decision line are product presentation (`chapters.ts`), while
    * the workspace stays chapter-agnostic and falls back to the chapter's own
    * published title and recorded review independence.
+   *
+   * `localDetail` selects which of RFD 1's local-detail treatments the workspace
+   * presents. The default is the shipped geographic/symbolic treatment, so every
+   * reader surface is unchanged; the treatment comparison's own surface passes
+   * `illustrated-local` and is the only caller that does. The prop changes what
+   * is drawn beside the selection, never the content, the controls, the search,
+   * the selection rules, or the time behavior.
    */
   let {
     chapter,
     name = chapter.title,
     decision = "",
-  }: { chapter: Chapter; name?: string; decision?: string } = $props()
+    localDetail = "geographic-symbolic",
+  }: {
+    chapter: Chapter
+    name?: string
+    decision?: string
+    localDetail?: LocalDetailTreatment
+  } = $props()
 
   // This component is the single owner of atlas interaction state. Everything
   // below reads from `atlasState` and dispatches actions; the renderer only
@@ -362,9 +376,11 @@
           review={{ independence: review.independence, reviewer: review.reviewer }}
           {decision}
           placeNote={selectedPlaceNote}
+          places={chapter.places}
           actors={chapter.actors}
           sources={chapter.sources}
           story={selectedStory}
+          {localDetail}
           onReturnToTime={() => (atlasState = atlas.returnToEventTime(atlasState, chapter))}
           onPreviousStoryStep={() =>
             selectedStory.previous !== null && jumpToStoryStep(selectedStory.previous)}

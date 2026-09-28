@@ -177,6 +177,128 @@ describe("mountAtlas", () => {
     }
   })
 
+  it("adds the illustrated local scene only for the treatment that asks for it", async () => {
+    // The reader surface keeps the shipped geographic/symbolic treatment: no
+    // scene card appears for any selection.
+    const readerHost = document.createElement("div")
+    document.body.append(readerHost)
+    const reader = mountAtlas(readerHost, TANG)
+    await flush()
+
+    readerHost.querySelector<HTMLElement>('[data-testid="atlas-event-item"]')?.click()
+    await flush()
+
+    expect(readerHost.querySelector('[data-testid="atlas-local-scene"]')).toBeNull()
+
+    reader.dispose()
+    readerHost.remove()
+
+    // The comparison's illustrated treatment shows the card beside the same
+    // event's details, and the card says what the drawing is and is not.
+    const illustratedHost = document.createElement("div")
+    document.body.append(illustratedHost)
+    const illustrated = mountAtlas(illustratedHost, TANG, undefined, {
+      localDetail: "illustrated-local",
+    })
+    await flush()
+
+    illustratedHost.querySelector<HTMLElement>('[data-testid="atlas-event-item"]')?.click()
+    await flush()
+
+    const scene = illustratedHost.querySelector('[data-testid="atlas-local-scene"]')
+
+    expect(scene).not.toBeNull()
+    expect(scene?.textContent).toContain("Local scene · illustrative")
+    expect(scene?.textContent).toContain("not a reconstruction")
+    expect(scene?.textContent).toContain("no position, extent, or distance")
+    // The drawing is a drawing, not a map: it carries no coordinate and no text
+    // of its own, so it cannot be read as evidence.
+    expect(
+      scene?.querySelectorAll('[data-testid="atlas-local-scene-drawing"] path').length,
+    ).toBeGreaterThan(0)
+    expect(
+      scene
+        ?.querySelector('[data-testid="atlas-local-scene-drawing"]')
+        ?.getAttribute("aria-hidden"),
+    ).toBe("true")
+    // The record's own details stay: the treatment adds a surface beside them.
+    expect(illustratedHost.querySelector('[data-testid="atlas-selection"]')).not.toBeNull()
+
+    illustrated.dispose()
+    illustratedHost.remove()
+  })
+
+  it("keeps the two treatments comparable: the same content, controls, and selection", async () => {
+    // The comparison only means something if the treatment is the difference. A
+    // mount of each treatment has to list the same events, offer the same tabs,
+    // and carry the same time controls.
+    const hosts: HTMLElement[] = []
+    const handles = []
+    const rendered: { events: string; tabs: string[]; window: string[]; playhead: string }[] = []
+
+    for (const localDetail of ["geographic-symbolic", "illustrated-local"] as const) {
+      const host = document.createElement("div")
+      document.body.append(host)
+      hosts.push(host)
+      const handle = mountAtlas(host, QIN, undefined, { localDetail })
+      handles.push(handle)
+      await flush()
+
+      rendered.push({
+        events: host.querySelector('[data-testid="atlas-event-list"]')?.textContent ?? "",
+        tabs: [...host.querySelectorAll('[data-testid="atlas-tab"]')].map(
+          (tab) => tab.textContent?.trim() ?? "",
+        ),
+        window: [
+          host.querySelector<HTMLInputElement>("#atlas-window-start")?.value ?? "",
+          host.querySelector<HTMLInputElement>("#atlas-window-end")?.value ?? "",
+        ],
+        playhead: host.querySelector("#atlas-playhead-value")?.textContent?.trim() ?? "",
+      })
+    }
+
+    expect(rendered[0]?.events).not.toBe("")
+    expect(rendered[1]).toEqual(rendered[0])
+
+    for (const handle of handles) {
+      handle.dispose()
+    }
+
+    for (const host of hosts) {
+      host.remove()
+    }
+  })
+
+  it("never renders the illustrated treatment on the reader surface, for any event", async () => {
+    // The reader surface is the default mount: no options, no scene card, for any
+    // selection in any chapter. This is the isolation the comparison depends on,
+    // and it is checked over every in-window event rather than one sample.
+    for (const chapter of [TANG, QIN]) {
+      const host = document.createElement("div")
+      document.body.append(host)
+      const handle = mountAtlas(host, chapter)
+      await flush()
+
+      const rows = [...host.querySelectorAll<HTMLElement>('[data-testid="atlas-event-item"]')]
+
+      expect(rows.length, chapter.id).toBeGreaterThan(0)
+
+      for (const row of rows) {
+        row.click()
+        await flush()
+
+        expect(
+          host.querySelector('[data-testid="atlas-local-scene"]'),
+          `${chapter.id} ${row.dataset.eventId}`,
+        ).toBeNull()
+        expect(host.textContent, chapter.id).not.toContain("Local scene")
+      }
+
+      handle.dispose()
+      host.remove()
+    }
+  })
+
   it("tears the workspace down and disposes the renderer, idempotently", async () => {
     const handle = mountAtlas(root, TANG)
     await flush()

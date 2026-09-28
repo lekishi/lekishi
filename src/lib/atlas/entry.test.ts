@@ -71,7 +71,7 @@ describe("the chapter page bootstrap", () => {
     mountWorkspace()
 
     expect(mountAtlas).toHaveBeenCalledTimes(1)
-    expect(mountAtlas).toHaveBeenCalledWith(root, TANG, TANG_HEADING)
+    expect(mountAtlas).toHaveBeenCalledWith(root, TANG, TANG_HEADING, {})
     expect(window.__lekishiAtlas).toBe(handle)
   })
 
@@ -97,10 +97,15 @@ describe("the chapter page bootstrap", () => {
 
     startAtlasPage(TANG, { name: "The embassy to Tang China", decision: "Owner-approved" })
 
-    expect(mountAtlas).toHaveBeenCalledWith(root, TANG, {
-      name: "The embassy to Tang China",
-      decision: "Owner-approved",
-    })
+    expect(mountAtlas).toHaveBeenCalledWith(
+      root,
+      TANG,
+      {
+        name: "The embassy to Tang China",
+        decision: "Owner-approved",
+      },
+      {},
+    )
   })
 
   it("keeps the heading when a page is restored from the back/forward cache", () => {
@@ -112,7 +117,7 @@ describe("the chapter page bootstrap", () => {
     transition("pagehide")
     transition("pageshow")
 
-    expect(mountAtlas).toHaveBeenLastCalledWith(expect.anything(), TANG, TANG_HEADING)
+    expect(mountAtlas).toHaveBeenLastCalledWith(expect.anything(), TANG, TANG_HEADING, {})
   })
 
   it("restores the chapter and heading a later page started", () => {
@@ -127,7 +132,7 @@ describe("the chapter page bootstrap", () => {
     startAtlasPage(QIN, QIN_HEADING)
     mountWorkspace()
 
-    expect(mountAtlas).toHaveBeenLastCalledWith(root, QIN, QIN_HEADING)
+    expect(mountAtlas).toHaveBeenLastCalledWith(root, QIN, QIN_HEADING, {})
 
     // The restored page comes back as that chapter, not the first one: clear the
     // spy so the assertion cannot pass on the mount above.
@@ -135,7 +140,25 @@ describe("the chapter page bootstrap", () => {
     mountAtlas.mockClear()
     transition("pageshow")
 
-    expect(mountAtlas).toHaveBeenCalledWith(root, QIN, QIN_HEADING)
+    expect(mountAtlas).toHaveBeenCalledWith(root, QIN, QIN_HEADING, {})
+  })
+
+  it("keeps the comparison page's local-detail treatment when a page is restored", () => {
+    const root = addMountPoint()
+    const options = { localDetail: "illustrated-local" } as const
+
+    startAtlasPage(TANG, TANG_HEADING, options)
+    mountWorkspace()
+
+    expect(mountAtlas).toHaveBeenLastCalledWith(root, TANG, TANG_HEADING, options)
+
+    // A restored comparison page comes back as the treatment it was showing, not
+    // as the reader surface's default.
+    transition("pagehide")
+    mountAtlas.mockClear()
+    transition("pageshow")
+
+    expect(mountAtlas).toHaveBeenCalledWith(root, TANG, TANG_HEADING, options)
   })
 
   it("releases the workspace on teardown and restores one workspace on pageshow", () => {

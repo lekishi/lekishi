@@ -10,15 +10,15 @@ The site is a SvelteKit project built with `@sveltejs/adapter-static`. Every rou
 is prerendered, so the deployable artifact is a directory of plain files with no
 application server, no database, and no BEAM runtime:
 
-| Owner                                                                                       | Responsibility                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| ------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| SvelteKit (`src/routes`)                                                                    | Routing, the prerendered page shells, and the `#atlas-workspace` mount point. `/` is the overview page; `/atlas` is the atlas shell.                                                                                                                                                                                                                                                                                                            |
-| Atlas bootstrap (`src/lib/atlas/entry.ts`)                                                  | The only module that mounts the workspace. It keeps one workspace per page, releases it at the `pagehide` boundary, and restores exactly one on `pageshow`.                                                                                                                                                                                                                                                                                     |
-| Svelte + TypeScript (`src/lib/atlas`)                                                       | Search, filters, drawers, timeline controls, selection, responsive layout, and the single source of truth for selection, time window, playhead, and camera-follow state (`state.ts`).                                                                                                                                                                                                                                                           |
-| Chapter content (`src/lib/atlas/chapter-content.ts`, `chapter-catalog.ts`, `projection.ts`) | The browser-safe content boundary: Vite bundles the reviewed chapter's records and publication sets, the projection selects the newest published revision per record and takes the chapter's coverage window from its caller, and the atlas domain is what the workspace, scene, and renderer share. The comparison catalog loads non-production chapters (the Qin fixture) through the same projection without entering the production bundle. |
-| Cesium (`src/lib/atlas/renderer`)                                                           | Globe, camera, picking, and map primitives. It receives a derived, renderer-independent scene and reports user input back as callbacks.                                                                                                                                                                                                                                                                                                         |
-| Tailwind (`src/app.css`)                                                                    | All styling, including the Cesium widget stylesheet, so the site ships one stylesheet.                                                                                                                                                                                                                                                                                                                                                          |
-| Historical contract (`historical/v0`, `src/lib/historical/contract`)                        | The versioned schemas, worked examples, and adversarial vectors, with the TypeScript reference semantics that validate them.                                                                                                                                                                                                                                                                                                                    |
+| Owner                                                                                        | Responsibility                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| SvelteKit (`src/routes`)                                                                     | Routing, the prerendered page shells, and the `#atlas-workspace` mount point. `/` is the overview page, `/chapters/<chapter-id>` is a served chapter, and `/atlas` and `/compare/qin` are redirect stubs for the URLs those chapters used to have.                                                                                                                                                                                                                                                                 |
+| Atlas bootstrap (`src/lib/atlas/entry.ts`)                                                   | The only module that mounts the workspace. It keeps one workspace per page, releases it at the `pagehide` boundary, and restores exactly one on `pageshow`.                                                                                                                                                                                                                                                                                                                                                        |
+| Svelte + TypeScript (`src/lib/atlas`)                                                        | Search, filters, drawers, timeline controls, selection, responsive layout, and the single source of truth for selection, time window, playhead, and camera-follow state (`state.ts`).                                                                                                                                                                                                                                                                                                                              |
+| Chapter content (`src/lib/atlas/chapter-registry.ts`, `chapter-catalog.ts`, `projection.ts`) | The browser-safe content boundary: the registry names the chapters the site serves and each one's coverage window, Vite bundles every served chapter's records and publication sets, the projection selects the newest published revision per record and takes the chapter's coverage window from its caller, and the atlas domain is what the workspace, scene, and renderer share. The publication approval gate fails the build for a served chapter whose revisions come from a set without an owner decision. |
+| Cesium (`src/lib/atlas/renderer`)                                                            | Globe, camera, picking, and map primitives. It receives a derived, renderer-independent scene and reports user input back as callbacks.                                                                                                                                                                                                                                                                                                                                                                            |
+| Tailwind (`src/app.css`)                                                                     | All styling, including the Cesium widget stylesheet, so the site ships one stylesheet.                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| Historical contract (`historical/v0`, `src/lib/historical/contract`)                         | The versioned schemas, worked examples, and adversarial vectors, with the TypeScript reference semantics that validate them.                                                                                                                                                                                                                                                                                                                                                                                       |
 
 Rules that keep the boundary intact:
 
@@ -31,8 +31,8 @@ Rules that keep the boundary intact:
   releases the workspace when it is destroyed, so a duplicated bundle, a re-run,
   or a back/forward-cache restore cannot stack a second globe.
 - RFD 2 owns the durable historical data, calendar, precision, and evidence
-  contracts. The browser never reads the content tree with Node `fs`: the
-  chapter arrives through `chapter-content.ts`, `projection.ts` maps published
+  contracts. The browser never reads the content tree with Node `fs`: a chapter
+  arrives through `chapter-catalog.ts`, `projection.ts` maps published
   revisions into `domain.ts`, and `fixtures.ts` is synthetic content that only
   focused unit tests import.
 
@@ -48,6 +48,8 @@ Rules that keep the boundary intact:
 | `pnpm lint` / `pnpm format`    | Prettier check / rewrite.                                                                                              |
 | `pnpm e2e`                     | Browser checks against the built artifact (`LEKISHI_E2E_MODE=dev` runs them against the development server).           |
 | `pnpm screenshots`             | Capture the desktop, tablet, and phone rendered states for review into `.amp/in/artifacts/`.                           |
+| `pnpm capture:comparison`      | Capture the local-detail treatment comparison's matched screenshots into `.amp/in/artifacts/treatment-comparison/`.    |
+| `pnpm measure:comparison`      | Measure the treatment comparison's payload, label crowding, and load/selection timings into the same directory.        |
 | `pnpm verify`                  | Everything CI runs: format check, type check, tests, then the build with its invariant.                                |
 
 `pnpm preview` serves the artifact with `scripts/serve-static.mjs`: a file-only
@@ -68,8 +70,12 @@ work in development and in the deployed artifact.
 
 ```
 build/
-  index.html              prerendered overview page
-  atlas.html              prerendered atlas shell (direct /atlas loads)
+  index.html              prerendered overview page, one card per served chapter
+  chapters/<id>.html      one prerendered page per served chapter
+  atlas.html              redirect stub for the legacy /atlas URL
+  compare/qin.html        redirect stub for the legacy /compare/qin URL
+  review/local-treatment/<id>.html
+                          the internal treatment-comparison surface (unlinked, noindex)
   404.html                fallback for a path that is not in the artifact
   _redirects              explicit /atlas/ → /atlas redirect
   favicon.ico  robots.txt  images/
@@ -80,65 +86,67 @@ build/
 `pnpm build` ends with `node scripts/check-static-build.mjs`, the build invariant
 that replaced the old `mix lekishi.assets.check`: it fails the build if the
 prerendered pages, the hashed bundles, the single stylesheet with the Cesium
-widget styles, or the Cesium runtime directories are missing, if the atlas page
+widget styles, or the Cesium runtime directories are missing, if a chapter page
 does not have exactly one mount point, if the artifact contains a server runtime,
-if the built scripts or the prerendered pages do not carry the reviewed chapter,
-if the retired synthetic fixture's sentinel strings reach the artifact, if the Qin
-chapter's page is missing or does not state that it is unapproved preparation, if
-the root page does not link both chapter entries or drops the Tang chapter's
+if the built scripts or a chapter page do not carry that chapter's own content and
+recorded decision, if the retired synthetic fixture's sentinel strings reach the
+artifact, if the root page does not link both chapter entries or drops a chapter's
 recorded owner approval or carries the project's own framing where a reader meets
 a chapter (a review category, `comparison harness`, the harness's `map treatments`
-phrase, or the contract id), or if the production atlas page renders the Qin
-chapter instead of the Tang one.
+phrase, or the contract id), if the internal treatment-comparison surface is
+missing or stops stating what it is, or if a reader page links that surface or
+carries its framing.
 
 ### Reviewed chapter content
 
-The atlas renders the reviewed Tang chapter
-(`historical/chapters/tang-mission-750-754/`) through one browser-safe boundary,
-and that boundary is the only way chapter content enters the app:
+The atlas renders the chapters the site serves — the reviewed Tang chapter
+(`historical/chapters/tang-mission-750-754/`) and the reviewed Qin chapter
+(`historical/chapters/qin-conquest-han-233-226/`) — through one browser-safe
+boundary, and that boundary is the only way chapter content enters the app:
 
-1. `src/lib/historical/chapter.ts` is the Node-side loader. It reads the tree
+1. `src/lib/historical/chapter.ts` is the Node-side loader. It reads a tree
    with `fs` and hands it to the contract's own `Publication.checkAll`; it is
    used by tests and tooling, never by the browser.
 2. `scripts/check-chapter.mjs` runs before Vite in `pnpm build` and runs each
    chapter's contract test, the publication approval gate, the projection test
-   suite, and the comparison catalog suite through Vitest, so an edited approved
-   revision, a missing source pin, a set the ledger does not name, or a record
-   published at a revision it does not carry fails the build. This is the
-   validation gate: schemas, hashes, and pins need Node, so they cannot run in
-   the bundle.
-3. `src/lib/atlas/chapter-content.ts` bundles the same records and publication
-   sets with Vite's `import.meta.glob`, so the browser reads the files the
-   contract validates: no `fs`, no second copy, and no request a static host has
-   to serve. The projection runs at module scope and **throws** if the chapter
-   cannot be represented. The atlas route is prerendered, so that failure fails
+   suite, and the catalog suite through Vitest, so an edited approved revision, a
+   missing source pin, a set the ledger does not name, or a record published at a
+   revision it does not carry fails the build. This is the validation gate:
+   schemas, hashes, and pins need Node, so they cannot run in the bundle.
+3. `src/lib/atlas/chapter-catalog.ts` bundles each chapter's records, sources, and
+   publication sets with Vite's `import.meta.glob`, so the browser reads the files
+   the contract validates: no `fs`, no second copy, and no request a static host
+   has to serve. The projection runs in the route's `load` and **throws** if a
+   chapter cannot be represented; the route is prerendered, so that failure fails
    `pnpm build` instead of shipping placeholder content.
 4. `src/lib/atlas/projection.ts` selects the newest published revision per
    record through the contract's own publication ordering — the same
    `currentPublished` the validator uses, split into `publication-order.ts` so
    the browser and Node share one rule — and maps it into the atlas domain. The
    chapter's coverage window (the window the atlas opens in) comes from the
-   caller, so the comparison catalog can name the Qin fixture's window without a
-   chapter branch in the projection.
-5. `src/lib/atlas/chapter-catalog.ts` loads non-production chapters lazily for
-   the comparison review route (`/compare/qin`), which renders the bounded Qin
-   fixture through the same projection and states that it is unapproved
-   preparation. The atlas route does not import the catalog, so the production
-   page still bundles only the reviewed chapter, and the build invariant requires
-   the review page while forbidding the fixture on the production page.
+   caller, so a new chapter is a registry entry and its own window rather than a
+   branch in the projection.
+5. `src/lib/atlas/chapter-registry.ts` names the chapters the site serves with
+   their coverage windows, and `src/routes/chapters/[chapter]/` prerenders one
+   page per entry through the same workspace. The publication approval gate fails
+   the build for a served chapter whose current revisions come from a set without
+   an `owner approved` row, so serving a chapter and approving it are the same
+   decision point. `/atlas` and `/compare/qin` are prerendered redirect stubs for
+   the URLs those two chapters used to have.
 
-The bounded Qin comparison fixture
-(`historical/chapters/qin-conquest-han-233-226/`) is source-checked content in
-the same contract, recorded in the publication ledger as a preparation snapshot
-rather than a release, and rendered only by the comparison review route
-(`/compare/qin`), which labels it unapproved preparation. It stays
-comparison-only until the treatment harness and the owner's decision exist. The
-root page presents both chapters as peer cards — name, window, and story summary
-each — from `src/lib/atlas/chapters.ts`, whose tests pin one card per chapter
-tree and each card's window against the projection; each card carries its
-chapter's editorial state as secondary metadata, which is where the Qin chapter's
-missing release decision and the Tang chapter's recorded owner approval stay
-visible without becoming either chapter's identity.
+The root page presents the served chapters as peer cards — name, window, and
+story summary each — from `src/lib/atlas/chapters.ts`, whose tests pin one card
+per chapter tree and each card's window against the projection; each card carries
+its chapter's editorial state as secondary metadata, which is where each
+chapter's recorded owner approval and the specialist-review caveat stay visible
+without becoming either chapter's identity.
+
+`/review/local-treatment/<chapter-id>` is the one exception to "a reader meets a
+chapter": it is the internal surface for RFD 1's bounded comparison of
+local-detail treatments, it is unlinked from every reader page, it is `noindex`,
+it states what it is, and the build invariant keeps it that way. Its results and
+the recommendation for the owner are in
+[`rfd/0003/TREATMENT_COMPARISON.adoc`](rfd/0003/TREATMENT_COMPARISON.adoc).
 
 What the projection refuses to do is part of the contract with the reader:
 
@@ -159,9 +167,11 @@ What the projection refuses to do is part of the contract with the reader:
 
 The decisions and their measured evidence are recorded in
 [`rfd/0003/CONTENT_BOUNDARY.adoc`](rfd/0003/CONTENT_BOUNDARY.adoc) for the Tang
-chapter's boundary and
+chapter's boundary,
 [`rfd/0003/COMPARISON_FIXTURE_BOUNDARY.adoc`](rfd/0003/COMPARISON_FIXTURE_BOUNDARY.adoc)
-for the comparison fixture and the caller-supplied coverage window.
+for the caller-supplied coverage window, and
+[`rfd/0003/CHAPTER_READER_ROUTE.adoc`](rfd/0003/CHAPTER_READER_ROUTE.adoc) for the
+one chapter route, the registry, and the redirect stubs.
 
 ### Cloudflare Pages
 

@@ -51,17 +51,18 @@ rules below when updating project-specific guidance.
 
 - There is no server: every route is prerendered (`src/routes/+layout.ts` sets `prerender = true`) and the artifact is plain files. Do not add a runtime server, an adapter that needs one, server-only data loading, or a dependency that requires a database or secret.
 - Nothing may touch `window`, `document`, or WebGL at module scope: SvelteKit renders the pages on the server while prerendering. Browser-only work belongs in `onMount` or behind an explicit `typeof window` guard (`src/lib/atlas/entry.ts` does both).
-- One page has one workspace. `src/lib/atlas/entry.ts` is the only module that mounts it, it refuses to mount a second workspace, and the atlas route releases it on teardown. Do not mount the workspace from anywhere else, and keep the regression coverage for it.
+- One page has one workspace. `src/lib/atlas/entry.ts` is the only module that mounts it, it refuses to mount a second workspace, and the page that started it releases it on teardown. Do not mount the workspace from anywhere else, and keep the regression coverage for it.
 - The site is served from the domain root. `window.CESIUM_BASE_URL` is `/cesium/`; if a deployment ever moves under a sub-path, the base URL and `static/_redirects` must move with it.
 - No Cesium ion account, token, or third-party provider. Imagery is the bundled Natural Earth II tiles and terrain is the ellipsoid. Keep it that way unless the owner authorizes a provider, and keep attribution visible where it is shown today.
 
 ### SvelteKit guidelines
 
-- Routes live in `src/routes`: `+page.svelte` for the overview page, `atlas/+page.svelte` for the atlas shell, `+error.svelte` for 404s, `+layout.svelte` for the global stylesheet. `src/app.html` is the document template.
+- Routes live in `src/routes`: `+page.svelte` for the overview page, `chapters/[chapter]/+page.svelte` for a served chapter, `review/local-treatment/[chapter]/+page.svelte` for the internal treatment-comparison surface, `+error.svelte` for 404s, `+layout.svelte` for the global stylesheet. `src/app.html` is the document template. `/atlas` and `/compare/qin` are redirect stubs, not shells.
 - Import shared code through `$lib/...` (`$lib/atlas`, `$lib/historical/contract`) instead of deep relative paths from routes.
 - Files that must be served as-is (favicon, robots, images, the 404 page, `_redirects`) live in `static/` and are copied into `build/` unchanged. `static/cesium` is generated.
 - Use `<svelte:head>` for the page title and description; each page sets its own.
-- The prerendered HTML is real content, so a direct request for `/atlas` works before any JavaScript runs. Do not move the shell into a client-only path.
+- The prerendered HTML is real content, so a direct request for a chapter works before any JavaScript runs. Do not move the shell into a client-only path.
+- The treatment-comparison route is internal: never link it from a reader surface, never put its vocabulary on one, and keep `scripts/check-static-build.mjs` failing the build when either happens.
 
 ### Svelte and TypeScript guidelines
 

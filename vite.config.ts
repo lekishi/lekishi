@@ -28,6 +28,18 @@ export default defineConfig({
     fs: {
       allow: [searchForWorkspaceRoot(process.cwd())],
     },
+    // Amp exposes the development server through a generated portal hostname
+    // (`<id>.onamp.dev`), and Vite's host check answers any other host with 403
+    // before the app sees the request. A leading dot is Vite's suffix entry —
+    // the equivalent of `*.onamp.dev`, matching the domain and its subdomains —
+    // so the portal works without naming one ephemeral hostname, and it matches
+    // nothing else (`onamp.dev.example.com` and `notonamp.dev` stay blocked).
+    //
+    // This is `server` only: Vite validates the preview server against
+    // `preview.allowedHosts`, which stays at its default, and the deployable
+    // artifact is plain files served by a static host with no Vite in front of
+    // it. Development is the only place this allowance exists.
+    allowedHosts: [".onamp.dev"],
   },
   // Vitest resolves modules in Node, where Svelte would resolve its server build;
   // the component tests must mount the same client build the bundle ships. This

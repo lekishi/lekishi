@@ -1,0 +1,516 @@
+:authors: Darwin D Wu <darwin67@users.noreply.github.com>
+:state: measured comparison — recommendation for the owner, not a Gate 3 decision
+:date: 2026-09-28
+:prepared-from: origin/main @ 7e45af4 plus this record's own branch
+:labels: architecture, rendering, comparison, treatments, evidence, poc
+
+= RFD 3 treatment comparison: geographic/symbolic and illustrated-local
+
+== Provenance and scope
+
+This record answers the treatment comparison RFD 4 places between its Gate 2 and
+Gate 3, and it is the dated decision record for the work:
+
+* link:../0001/README.adoc[RFD 1] decided to *compare local-detail approaches
+  through later implementation* — geographic detail with symbolic landmarks
+  against an illustrated local historical scene — over the Tang mission and a
+  bounded Qin episode, keeping scenario content, controls, selection, and time
+  behavior comparable so the visual trade-off is what differs.
+* link:../0003/README.adoc[RFD 3] owns the rendering evaluation: compare labels,
+  geographic scale, local playback, selection, and measured rendering behavior
+  across zoom levels for those two treatments and two scenarios, with Cesium
+  evaluated first and MapLibre compared only if Cesium fails a named requirement.
+* link:../0004/README.adoc[RFD 4] keeps the comparison behind Gate 2 and leaves
+  the treatment choice and the renderer resolution to Gate 3, which is the
+  owner's decision. link:../0004/GATE2_EVIDENCE.adoc[The Gate 2 evidence record]
+  precedes this one and is what allowed the comparison to start.
+
+It is internal product work. Nothing here changes a reader surface: the root page
+and the chapter pages carry no comparison vocabulary, no treatment control, and
+no illustrated treatment, and `scripts/check-static-build.mjs` fails the build if
+they ever do. No historical content, publication set, or ledger row changed.
+
+== What is compared
+
+=== Treatment A — geographic/symbolic (shipped, unchanged)
+
+The map as the site ships it: the Cesium globe with Natural Earth II imagery, the
+ellipsoid terrain, the chapter's places as symbolic points with their published
+label forms, the selected event outlined, playback states by point size and
+colour, and the details panel's place, placement note, occurrence, dispute, and
+citations. No city reconstruction, no route geometry, no illustrated scenery.
+
+=== Treatment B — illustrated local (new, comparison only)
+
+A restrained, code-drawn vignette of the selected event's locality, shown as a
+card at the top of the selected event's details: the place the record names, the
+record's own published `event_types`, a small set of silhouette shapes, and a
+sentence that states what the drawing is and is not.
+
+Its content rules are the treatment's own honesty contract, and they are the part
+of it that is tested rather than eyeballed:
+
+* the card prints the record's published `event_types` verbatim — the contract's
+  own vocabulary — and classifies nothing itself. An early draft narrowed the
+  published type into an atlas word ("voyage" for `journey`, "court act" for
+  `mission`) and drew a vessel for any journey; that was wrong twice over: the
+  card asserted a classification the record does not publish, and it decided how
+  a journey was made when the record does not say. The card now shows the
+  record's own words, and the `journey` composition is land-neutral — no vessel
+  and no shoreline exist anywhere in the drawing vocabulary
+  (`src/lib/atlas/scene-illustration.ts`);
+* the scene is a pictogram of a *published type*, not a portrait of a *place*:
+  every event that publishes the same types draws the same shapes, so the drawing
+  claims nothing about this place's buildings, coastline, distances, or bearing;
+* a composition is drawn only where the published type supports it: `founding`
+  draws a foundation, `campaign` a campaign, `mission`/`council` an assembly,
+  `exchange`/`process` an exchange, `journey` a land travel scene, and
+  `occurrence`/`other` the plain scene rather than a wrong one;
+* a record that names no place draws nothing at all, and a record the atlas does
+  not place keeps the record's own statement of why beside the drawing;
+* the drawing carries no text, no coordinate, and no shape derived from one, and
+  every card states in words that no position, extent, or distance in it is
+  sourced.
+
+=== Boundary of this comparison, stated up front
+
+The illustrated treatment is a surface *beside* the map, not a replacement of the
+globe view at local scale. A treatment that replaced the map at local scale would
+be a second rendering path, which RFD 3 forbids building speculatively, and it
+would make the two treatments differ in far more than local detail. This is the
+smallest representative implementation of RFD 1's illustrated option that can be
+compared fairly; what it cannot measure — whether an illustrated *map* reads
+better than a geographic one at local scale — is recorded as a limitation below
+and is not claimed either way.
+
+== Criteria, defined before measuring
+
+These were fixed before any screenshot or number was taken, and the measurements
+below report against them in this order.
+
+. *Readability at globe and local scales*: what a reader can read at the default
+  view and at a local view, with and without the treatment.
+. *Label crowding*: how many labels the map has to draw and how close their
+  anchors are, per chapter.
+. *Selection and time-state clarity*: whether the selected event, its window
+  relation, and its playback state stay legible.
+. *Source and uncertainty cues*: whether the place's placement kind, the
+  record's uncertainty, and the published dispute stay visible and unaltered.
+. *Mobile and tablet usability*: the treatment at 1440x900, 820x634, 390x844, and
+  320x640, including whether it overlaps anything or crowds the details out.
+. *Payload and performance*: what each page loads, and the measured cost of the
+  treatment on one machine.
+. *Implementation risk*: what the treatment costs to build and keep.
+. *Unsupported-detail risk*: what the drawing implies that the sources do not
+  support, and what stops it reading as evidence.
+
+== Concepts developed before implementation
+
+Three concepts were drawn as design references before any code was written, and
+inspected (`.amp/in/artifacts/concepts/`; no image-generation tool is available
+in this environment, so the references are hand-authored SVG and their rendered
+PNGs, not generated art):
+
+* *Concept 1 — scene card in the exploration column*: a bordered vignette card
+  beside the selected event's details.
+* *Concept 2 — illustrated local band across the map*: a wide, short scene strip
+  pinned above the time controls, with the map above it unchanged.
+* *Concept 3 — illustrated vignette anchored on the map*: a framed scene over the
+  map, tied to the selected marker by a leader line.
+
+Chosen: *Concept 1*, because it is the smallest representative implementation. It
+needs no new renderer API (Concept 3 would need a screen-position channel from the
+renderer into the workspace, which the renderer-independent boundary deliberately
+does not have), it cannot cover the map (Concept 2 takes map height exactly where
+the phone layouts have least), and it is testable without a graphics engine. The
+chosen concept is preserved with the other two under `.amp/in/artifacts/concepts/`
+so the owner can see what was rejected and why.
+
+== The comparison surface
+
+The treatments are compared on one internal page,
+`/review/local-treatment/<chapter-id>`, which renders a served chapter through
+the same catalog, the same projection, and the same workspace as the chapter
+route, with one extra page-level choice: which treatment to show. The page
+prerenders for each served chapter, states `Internal comparison surface · not a
+reader page`, carries `noindex, nofollow`, and holds the only treatment control in
+the product.
+
+Isolation is enforced, not asserted: `scripts/check-static-build.mjs` requires the
+review pages to exist with one mount point, the internal marker, the chapter's own
+name and recorded decision, and both treatment labels; and it fails the build if
+the root page or a chapter page links the review surface or carries any of its
+framing, its control ids, or the illustrated treatment's own markers. Because the
+workspace mounts only in the browser, the HTML sentinels are backed by executed
+checks: `e2e/treatment-comparison.spec.ts` mounts each chapter, selects an event,
+and asserts the card and the control are absent, and `mount.test.ts` does the same
+over every in-window event of both chapters.
+
+== Measured evidence
+
+Measured 2026-09-28 on the built static artifact, served as files by
+`scripts/serve-static.mjs`. Full output:
+`.amp/in/artifacts/treatment-comparison/measurements.json`.
+
+=== Payload
+
+Measured on two builds of the same tree: `origin/main` at `7e45af4` (the state
+before this work) and the tree this record describes, both built with
+`pnpm build` in the pinned environment.
+
+[cols="2,1,1,1",options="header"]
+|===
+|Measure |Before (`7e45af4`) |With the treatment |Delta
+
+|Artifact files |522 |526 |+4 (two review pages, two route chunks)
+|Artifact bytes |11,891,151 |11,909,413 |+18,262
+|JavaScript files |120 |122 |+2
+|JavaScript bytes |4,710,340 |4,719,233 |+8,893
+|Stylesheet bytes |57,141 |57,549 |+408
+|A reader chapter page: HTML |3,806 |3,880 |+74
+|A reader chapter page: chunks |12 |13 |+1
+|A reader chapter page: JavaScript |4,301,762 |4,307,388 |+5,626
+|The comparison page: JavaScript |— |4,308,283 |+895 over the chapter page
+|===
+
+The illustrated treatment's code is compiled into the chunk a chapter page
+already loads, so a reader page gains no extra request — but it does pay 5,626
+bytes (0.13%) of JavaScript for code it never renders, and the comparison page
+pays 895 bytes more than a chapter page for its own route chunk. If the treatment
+were adopted, its surface should be imported lazily so a reader page stops paying
+for it; that is recorded as a limitation rather than fixed here, because the
+treatment is not adopted.
+
+=== Label crowding
+
+Computed from the published records the way the projection reads them, and
+cross-checked against the event count the served page renders.
+
+[cols="1,1,1",options="header"]
+|===
+|Chapter |Tang (750–754) |Qin (233–226 BCE)
+
+|In-window events |24 |5
+|Placed in-window events |22 |4
+|Distinct anchors |12 |3
+|Most labels on one anchor |7 |2
+|Closest pair of distinct anchors |4.0 km |35.7 km
+|Rendered event count (cross-check) |24 |5
+|===
+
+The Tang chapter's map draws seven labels on the palace anchor alone and twelve
+anchors within a few degrees of each other; Qin's four labels sit on three
+anchors. The screenshots show what that means at the default camera height: both
+chapters' labels overlap there, the Tang chapter's densely (22 labels in one
+region) and Qin's lightly (4 labels, still crossing). Both treatments share this —
+it is a property of what the map draws, not of the local-detail treatment — and
+the distances above are anchor distances, not a screen measurement.
+
+=== Load and interaction timings
+
+Measured 2026-09-28 in the container with software-rendered WebGL. Every sample is
+reported rather than a single summary, because the spread across repetitions is
+larger than the difference between the treatments: the same reader-page globe took
+1.2 s to appear in one run and 5.1 s in the next, on the same machine, with no
+code change between them.
+
+[cols="2,1,1",options="header"]
+|===
+|Measure |Tang |Qin
+
+|Reader chapter page: load |146 ms |1,651 ms
+|Reader chapter page: globe visible |5,146 ms |5,497 ms
+|Comparison page: load |122 ms |2,075 ms
+|Comparison page: globe visible |4,245 ms |5,933 ms
+|Select to visible details, geographic/symbolic |13,711 ms |15,157 ms
+|Select to visible details, illustrated local |14,904 ms |14,157 ms
+|Treatment toggle re-mount (comparison surface only) |12,530 ms |14,844 ms
+|===
+
+The minimum of two samples per figure; the full samples are in
+`.amp/in/artifacts/treatment-comparison/measurements.json`. Read as: the two
+treatments are not separable here, and the container's software renderer — not
+the treatment — is what these numbers measure. An earlier protocol that measured
+the shipped treatment before a treatment switch and the illustrated treatment
+after one reported 3.1 s against 16 s; the same operations measured under one
+protocol, on fresh page loads, gave 13.7–15.2 s for both. The difference was the
+protocol, not the treatment, which is why the number is reported with its samples
+and its spread.
+
+=== Screenshots
+
+Captured with `pnpm capture:comparison` against the built artifact and inspected
+under `.amp/in/artifacts/treatment-comparison/` (64 PNGs, 2x device scale):
+
+[cols="1,2",options="header"]
+|===
+|Set |What it shows
+
+|`<chapter>-<treatment>-<viewport>-default` (16)
+|The chapter's dense default state — the window's whole event list and the map —
+with no selection, for both chapters, both treatments, and all four viewports
+(1440x900, 820x634, 390x844, 320x640). The two treatments are identical here,
+which is itself the finding: the illustrated treatment appears only with a
+selection.
+
+|`<chapter>-<treatment>-<viewport>-selected` (16)
+|A selected in-window event: the Tang chapter's documented return voyage (a
+`journey` record) and the Qin chapter's cession of 南陽 (a record the atlas does
+not place, so the card carries the record's own no-position note).
+
+|`<chapter>-<treatment>-<viewport>-dispute` (16)
+|Each chapter's disputed record selected: the dispute summary, the accounts that
+challenge it with their locators, and the citations, with the illustrated
+treatment's card above them.
+
+|`reader-<chapter>-<viewport>` and `-dispute` (16)
+|The same two states on the served reader pages, which is the Gate 2 evidence:
+the shipped surface, dense and with its disputed event selected, at all four
+reviewed sizes.
+|===
+
+Inspected: the card renders inside the details panel at every size without
+covering the panel's own content, the map, or the time controls; the default
+state is identical between treatments; the reader pages show no card and no
+treatment control at any size.
+
+=== Tests and invariants added for the treatment
+
+[cols="1,2",options="header"]
+|===
+|Check |What it distinguishes
+
+|`src/lib/atlas/scene-illustration.test.ts` (12 tests)
+|The composition mapping over the contract's whole vocabulary; the record's own
+order winning; an unknown type drawing the plain scene; the same shapes for two
+places of one type; every shape inside the scene's view box; a record with no
+place drawing nothing; an unplaced record keeping the record's own note; the
+notice naming the place, the record's own types, and the missing sourcing; and two
+regressions over real reviewed records — 東大寺's installation (published
+`journey`) must not be drawn or described as a sea voyage, and 揚州's invitation
+(published `mission, exchange`) must print the record's own types rather than an
+atlas classification.
+
+|`src/lib/atlas/projection.test.ts` (3 new tests)
+|The published types reaching the domain verbatim and deduplicated, on both
+chapters, and an event with no published type failing the projection rather than
+being guessed at.
+
+|`src/lib/atlas/mount.test.ts` (3 new tests)
+|The scene card appearing only for the treatment that asks for it, the card
+carrying the notice and the hidden drawing, the two treatments rendering the same
+event list, tabs, window, and playhead, and — over every in-window event of both
+chapters — the reader surface never rendering the illustrated treatment at all.
+
+|`e2e/treatment-comparison.spec.ts` (4 checks)
+|The surface's own status; the absence of its link, framing, control, and card
+from the reader pages with a live selection; the toggle re-mounting exactly one
+workspace; the scene card appearing and disappearing with the treatment while the
+details stay; no scene where the record names no place; the record's own note
+where it names a place only as context; and the card staying inside the details
+panel's bound at all four reviewed viewports.
+
+|`scripts/check-static-build.mjs`
+|The review pages exist, state what they are, and are unlinked from every reader
+page; the reader pages carry none of the comparison's framing, control ids, or
+treatment markers.
+|===
+
+== Findings, criterion by criterion
+
+*Readability at globe and local scales.* Both treatments draw the same map, so
+the treatment changes nothing about what the globe shows; what it adds is a
+statement about the selected event's locality. At the default view both
+chapters' labels overlap on the map, and the card is the clearest local
+statement on screen for the selected event — but it is a statement the details
+panel already makes in the record's own words ("the return voyage, 753",
+"display anchor only"). At a local view the map's labels separate and the card
+adds least.
+
+*Label crowding.* Measured above. The treatment does not touch it: the map draws
+the same labels in both treatments, and the Tang chapter's seven-labels-on-one-
+anchor crowding is unchanged. A treatment that addressed crowding would have to
+change what the map draws, which is a different treatment than the one compared
+here.
+
+*Selection and time-state clarity.* The card appears with a selection and only
+with one, names the selected record's place, and disappears with the treatment
+switch. It carries no playback state and no window relation, so it neither helps
+nor hinders the outside-selected-time case: the details panel's notice stays where
+it was, below the card, and the card's decorative marker cannot be confused with
+the map's selection outline.
+
+*Source and uncertainty cues.* Unchanged and unweakened: the card repeats the
+place label the record publishes and, for a record the atlas does not place,
+carries the record's own statement of why (the same sentence the details panel
+shows). The placement note, the date precision and occurrence mode, the published
+dispute with its accounts, and the citations are all still the details panel's
+own. The card adds one more statement that no position, extent, or distance in
+the drawing is sourced.
+
+*Mobile and tablet usability.* At 1440x900 and 820x634 the card sits above the
+details inside the same panel and both are readable. At 390x844 it takes roughly
+a third of the panel's visible height. At 320x640 it takes most of it, so the
+record's own details need a scroll that the shipped treatment does not need. The
+executed geometry check passes at all four sizes: the card is inside the details
+panel's own bound, the panel stays inside the viewport, and nothing crosses the
+time controls.
+
+*Payload and performance.* The illustrated treatment's code is compiled into the
+chapter chunk both routes already load, so a reader page gains no request and no
+measurable load time; the comparison page pays 895 bytes more than a chapter page
+for its own route chunk. The measured selection-to-details times are within noise
+of each other (see the table), and the container's software renderer is the
+dominant cost in both.
+
+*Implementation risk.* Contained and small: one new pure module (the scene model),
+one new Svelte surface, one optional prop through the existing mount boundary
+(defaulting to the shipped treatment), one review route, one build-invariant
+addition, and 17 unit tests plus 4 browser checks. The reader surface is pinned
+unchanged by `mount.test.ts` and by the artifact invariant. The risk that remains
+is not technical: it is that the comparison surface and the vignette code keep
+shipping until the owner decides.
+
+*Unsupported-detail risk.* This is where the two treatments differ most. The
+geographic/symbolic treatment claims only what the records publish: a labelled
+point, its placement kind, and the record's own note. The illustrated treatment
+adds a drawing of a place, and a drawing of a place is the kind of surface a
+reader reads as a depiction. The mitigations are real and tested — the card
+prints the record's own published event types, the same shapes are drawn for
+every event that publishes them, no shape is derived from a coordinate, a record
+with no place draws nothing, the `journey` composition is land-neutral, and every
+card says in words that it is not a reconstruction — but they reduce the risk
+rather than remove it: a reader can still take the vignette as an impression of
+what the place looked like, and nothing in the sources supports that impression.
+The review that produced the corrections above is the evidence that this risk is
+not hypothetical: the first draft of the treatment asserted a classification the
+records do not publish.
+
+== Recommendation and trade-offs
+
+This record does not decide Gate 3. It recommends, and the trade-offs are the
+owner's to weigh.
+
+*Renderer.* Cesium is confirmed for the experiment. The comparison produced no
+named visual, device, or delivery requirement that Cesium failed: globe and local
+scale both render, labels, selection, and playback states behave, and the
+container's software renderer is a test-environment cost rather than a Cesium
+one. No MapLibre comparison was started, because RFD 3 asks for one only when
+Cesium fails a named requirement.
+
+*Treatment.* The recommendation is to keep *geographic/symbolic* as the reader
+default, and to keep the illustrated treatment as a review artifact rather than a
+shipped surface. The reasons are the findings above, in the order they matter:
+
+. the illustrated treatment's information is generic by construction: it restates
+   the record's own published event types and adds a pictogram chosen from them,
+   but it adds no place-specific detail the record's own text does not carry;
+. it carries the larger unsupported-detail risk of the two, which the labelling
+   mitigates but does not remove;
+. it costs details-panel area exactly where the phone layout is tightest;
+. it does not address the map's real readability problem — label crowding at the
+   default view — which a treatment would have to change the map to fix.
+
+The trade-off on the other side is real and worth stating plainly: the
+illustrated treatment is the only one of the two that gives the atlas a distinct
+visual identity and a calm local anchor, and the founding concepts in RFD 1 point
+that way. If the owner wants illustration, the finding of this comparison is that
+it has to be *sourced* illustration — rights-cleared historical imagery for the
+specific place, labelled as a later illustrated copy and never as evidence, with
+its own rights review under RFD 4 AC7 — because a generic generated scene buys
+the visual language without buying any historical content.
+
+*What the owner is being asked to decide (Gate 3).*
+
+. Select the local-detail treatment: keep `geographic-symbolic` as the default
+   with the illustrated treatment retained as a review artifact (the
+   recommendation), or adopt `illustrated-local` as the reader default.
+. If neither is settled yet, authorize a bounded follow-up instead: a
+   *sourced*-illustration study for one place (rights-cleared imagery, labelled as
+   a design reference), and the same comparison run again on its result.
+. Confirm the renderer half of Gate 3: Cesium confirmed, with the MapLibre
+   comparison remaining unstarted unless the owner names a requirement Cesium
+   fails.
+. Decide whether the internal comparison surface (`/review/local-treatment/*`)
+   stays in the artifact for the remainder of the experiment or is dropped before
+   the public launch; the public deployment remains a separate owner-authorized
+   action.
+
+== Review findings and corrections
+
+An independent review of the change set (a stronger reasoning model reading the
+diff, not the author) raised three findings before this record was finalized.
+Two were real defects in the work and are corrected here; the third was a
+verification gap.
+
+. *The illustrated treatment asserted classifications the records do not
+  publish.* The first draft mapped a published `journey` to an atlas word
+  ("voyage") and drew a vessel, and mapped `mission` to "court act"; the card
+  printed that word, so a record that was an overland installation at 東大寺 was
+  labelled a voyage. Corrected: the card prints the record's published
+  `event_types` verbatim, the composition names are internal and never printed,
+  the vessel and shoreline are gone from the drawing vocabulary, and the
+  `journey` composition is land-neutral. Two regressions over the real records
+  named in the finding now pin it.
+. *The build invariant did not enforce all of the isolation it claimed.* It
+  banned the review route and two phrases on reader pages, but not the
+  treatment's control ids or its surface names, and the browser isolation check
+  never selected an event (so a reader page that handed the workspace the
+  illustrated treatment would still have passed both). Corrected: the invariant
+  bans the labels, the control id prefix, and the card's own test id on every
+  reader page, and the browser check mounts each chapter, selects an event, and
+  asserts no card and no control, while a unit test does the same over every
+  in-window event of both chapters.
+. *A Gate 2 check selected a record its own search had filtered out.* The
+  baseline spec searched for a participant name and then selected a record that
+  does not match that query; the selection would have timed out on a correctly
+  working implementation. Corrected before the run recorded in
+  link:../0004/GATE2_EVIDENCE.adoc[the Gate 2 evidence record]: the query is
+  cleared, the window's list is asserted back, and the control-parity assertion
+  now requires every expected control rather than only equality between the two
+  chapters.
+
+== Limitations recorded
+
+* The illustrated treatment is a card beside the map, not an illustrated map. It
+  therefore cannot answer whether an illustrated *local view* reads better than a
+  geographic one; that question would need a second rendering path and is not
+  measured here.
+* The vignette is deliberately generic. It gives the kind of thing that happened,
+  not what a place looked like, and the same shapes are drawn for every event of
+  a kind. A place-specific illustration would need sourced, rights-cleared
+  historical imagery and its own rights review under RFD 4 AC7; nothing here
+  authorizes one.
+* The timings come from the container's software renderer. They are comparable
+  with each other and are not device evidence; RFD 4 AC5's physical-device
+  acceptance remains a separate checkpoint.
+* The review surface ships in the artifact because the owner reviews the built
+  site. It is unlinked, `noindex`, and labelled, but it is reachable by URL until
+  the owner decides otherwise; the public launch is a later owner-authorized
+  action, and dropping the surface is one commit if the owner prefers.
+* The comparison exercises two chapters. A chapter with dense, closely spaced
+  labels (Tang) and a sparse one (Qin) are both covered, but a future chapter
+  with a different label profile could behave differently.
+
+== Verification performed for this document
+
+* Ran `pnpm verify` on the final tree: format check clean, `svelte-check` 0
+  errors and 0 warnings, 520 tests passed with 1 skipped (521 total), 163
+  contract tests through the build gate, and the static build with its invariant
+  (526 files).
+* Ran the full built-artifact browser suite in all three projects: 129 passed, 3
+  skipped, and 6 failed — every failure was this work's own time check in
+  `e2e/shared-baseline.spec.ts` asserting a transient playback state. The check
+  was rewritten to assert the durable outcome, and the re-run passed in all three
+  projects (15 passed in 19.5 minutes). `e2e/treatment-comparison.spec.ts` passes
+  in all three projects.
+* Ran the comparison's own harness against the built artifact: `pnpm
+  capture:comparison` (64 matched screenshots, inspected) and `pnpm
+  measure:comparison` (payload, crowding, and timings written to
+  `.amp/in/artifacts/treatment-comparison/measurements.json`).
+* Built `origin/main` at `7e45af4` in a separate worktree with the same toolchain
+  and measured both artifacts for the payload comparison above.
+* Inspected the built artifact for the isolation the record claims: the review
+  pages exist, state what they are, and are `noindex`; no reader page links them
+  or carries their framing, control ids, or treatment markers; the build
+  invariant fails the build in each of those cases.

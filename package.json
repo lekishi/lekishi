@@ -18,6 +18,8 @@
     "lint": "prettier --check .",
     "format": "prettier --write .",
     "screenshots": "node scripts/capture-review-screenshots.mjs",
+    "capture:comparison": "node scripts/capture-treatment-comparison.mjs",
+    "measure:comparison": "node scripts/measure-treatment-comparison.mjs",
     "seal": "LEKISHI_SEAL=1 vitest run src/lib/historical/contract/seal.maintenance.test.ts",
     "e2e": "playwright test",
     "e2e:dev": "LEKISHI_E2E_MODE=dev playwright test",

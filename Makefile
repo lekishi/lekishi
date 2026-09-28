@@ -2,7 +2,7 @@ SHELL := /bin/bash
 .SHELLFLAGS := -euo pipefail -c
 .DEFAULT_GOAL := dev
 
-.PHONY: dev build preview check test lint format seal screenshots e2e e2e-dev verify clean
+.PHONY: dev build preview check test lint format seal screenshots capture-comparison measure-comparison e2e e2e-dev verify clean
 
 # Development server (SvelteKit + Vite) at http://localhost:5173. It serves the
 # same static/cesium runtime the built artifact ships.
@@ -37,6 +37,14 @@ seal:
 # Capture the rendered states a reviewer needs from a running server.
 screenshots:
 	pnpm screenshots
+
+# Capture the treatment comparison's matched screenshots (internal review only).
+capture-comparison:
+	pnpm capture:comparison
+
+# Measure the treatment comparison's payload, crowding, and timings.
+measure-comparison:
+	pnpm measure:comparison
 
 # Browser checks against the built artifact (the default e2e mode).
 e2e:

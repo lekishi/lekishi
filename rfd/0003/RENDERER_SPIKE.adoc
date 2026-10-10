@@ -2,7 +2,7 @@
 :toc: macro
 :toclevels: 2
 
-*State:* evidence recorded, decision open (owner). +
+*State:* region-scale evidence recorded; proposal withdrawn; globe-to-local phase open. Decision open (owner). +
 *Date:* 2026-10-10. +
 *Owner of the decision:* the project owner, per link:README.adoc[RFD 3]'s
 "the renderer is decided on the hero, in a bounded spike". +
@@ -263,10 +263,11 @@ same picture. 75 draw calls and 520 k triangles at the full tier.
 
 *Weaknesses.*
 
-* No globe, no tile streaming, no geodetic camera: the atlas would keep
-  Cesium (or a painted globe) for world scale and hand off to the scene at
-  region scale, and that hand-off (camera continuity, the moment of swap) is
-  work and a risk the spike did not measure.
+* No globe of its own: Three.js has no tile streaming or geodetic camera.
+  The `3d-tiles-renderer` package (0.5.3, maintained, built on Three.js)
+  adds globe camera controls, a quantized-mesh terrain loader, and tiled
+  imagery on the ellipsoid, so a Three.js globe is possible without
+  rebuilding streaming. This spike did not test it.
 * Picking, label collision, and the camera controller are the atlas's to
   write; the spike's labels are HTML projected per frame with no collision.
 * A scene graph of JavaScript objects: 4,000 instances are cheap, but
@@ -327,36 +328,46 @@ keep is a specific, measured bottleneck that a library engine cannot meet:
 hundreds of thousands of animated symbols, a terrain streamer with our own
 tile format, or a native build. None of those is on RFD 4's PoC path.
 
-== Proposal (owner decides)
+== Proposal withdrawn, and the globe phase
 
-On the evidence above, the proposal is *Three.js for the diorama, Cesium
-retired from the artifact, and the Rust/wgpu path recorded as the native
-option to reopen when a measured need appears*.
+The first proposal (Three.js for the diorama, Cesium retired) was withdrawn
+on 2026-10-10 by the owner's decision. It gave up the globe, and the globe
+is the experience: a reader explores an era across the whole Earth and
+zooms in and out whenever they want, from the globe down to the diorama and
+back. A comparison that drops the globe is not like for like, and this
+record's region-scale evidence cannot decide the renderer on its own.
 
-* The hero is a stylized, hand-lit, region-scale scene. Three.js drew it in
-  133 lines with every effect on a public API, at a fifth of Cesium's
-  payload, and the phone tier is the same scene with fewer instances. Cesium
-  drew it too, but only by baking its lighting into imagery and reaching
-  into private fields for shadows, and its frame starts with a tile
-  pipeline the chapters do not need: a chapter's extent is known offline and
-  ships as one heightmap and one texture, which is exactly the spike's
-  input.
-* What Cesium would keep giving (the globe, world-scale continuity,
-  geodetic picking) is real, and the proposal is to give it up: the atlas
-  opens on a chapter, and world scale becomes a painted globe or a flat
-  overview with the chapter extents, not a streamed planet. That is a
-  product decision the owner should make knowingly; RFD 3's rendering list
-  would lose "globe" and gain "overview map".
-* The Rust/wgpu probe shows a custom engine is feasible and that its frame
-  is cheap, and also that its first week buys what Three.js has on day one.
-  It becomes the right choice if native delivery is pulled forward or if a
-  measured scene outgrows a JavaScript scene graph. Until then it is an
-  option, kept open by keeping the scene data renderer-independent, as RFD 3
-  already requires.
+What the region-scale phase still shows, and what it cannot:
 
-The decision needs one more input the container cannot give: frame times on
-the desktop, a physical iPad, and a mid-range phone. The three pages are on
-this branch; open each, read the overlay, and record the numbers here.
+* It shows the look each engine reaches at local scale, the work each took,
+  and each engine's payload. It shows that the Rust/wgpu path starts with
+  nothing at globe scale, so it is out of the next phase.
+* It cannot show continuity. Cesium's strongest property, one camera from
+  the globe to the diorama, was never exercised, and Three.js was measured
+  without any globe at all.
+* Two of Cesium's weaknesses here came from the spike's shortcut, not the
+  engine: a custom heightmap provider has no vertex normals, which forced
+  the baked relief lighting. Quantized-mesh terrain tiles with the
+  oct-encoded normals extension light dynamically in Cesium, and the same
+  tiles load in `3d-tiles-renderer`.
+
+The next phase compares the two engines that can carry a globe on equal
+inputs:
+
+. *One shared tileset built offline from open data*: quantized-mesh terrain
+  with normals from the Terrarium elevation (coarse globally, fine over the
+  chapter extent) and painted imagery tiles, both shipped as static files.
+. *Cesium* with that terrain and imagery, the diorama symbols instanced as
+  in this phase, and dynamic lighting instead of the bake.
+. *Three.js with `3d-tiles-renderer`* reading the same tiles, with the
+  Three.js diorama layer from this phase on top.
+. *One flight both must make*: the whole globe in 753, down across the East
+  China Sea to the landfall diorama, an orbit there, and back out to the
+  globe, with symbols and labels appearing and thinning by altitude.
+. *Measured the same way*: frame-by-frame videos of the flight, stills at
+  globe, region and local altitude, frame rates at each altitude, payload,
+  and the tile bytes each engine fetches. Real-device frame times are still
+  the deciding numbers.
 
 == Reproduce
 

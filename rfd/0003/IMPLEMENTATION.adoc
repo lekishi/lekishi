@@ -16,6 +16,7 @@ rendering and delivery roadmap.
 
 - [x] Retire the treatment comparison: PR #14 closed by the owner's decision on 2026-10-10; its Gate 2 evidence stays readable there, and its review route never reached `main`.
 - [x] Renderer spike built and measured: the hero's diorama scene on stylized Cesium, on a custom Three.js scene, and on a Rust/wgpu probe compiled to wasm, one harness. Evidence: link:RENDERER_SPIKE.adoc[the renderer spike record].
+- [ ] Globe-to-local phase: one shared quantized-mesh terrain and imagery tileset; Cesium and Three.js with `3d-tiles-renderer` each fly from the globe to the landfall diorama and back; frame-by-frame videos, stills at three altitudes, frame rates and tile bytes. Requirement (owner, 2026-10-10): the globe stays, with free zoom from globe to diorama.
 - [ ] Owner decides the renderer on the spike's screenshots and on frame times measured on the desktop, a physical iPad, and a mid-range phone; record the decision in the spike record.
 
 == Rendering

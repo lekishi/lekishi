@@ -123,7 +123,10 @@ continuous camera. The spike's region-scale proposal, which dropped the
 globe, was withdrawn, and a globe-to-local phase compared Cesium, Three.js
 with `3d-tiles-renderer`, and a custom Three.js globe on one shared tileset.
 All three carried the flight; the record proposes the custom globe with a
-follow-up spike, for the owner to decide.
+follow-up spike, for the owner to decide. The owner started that follow-up
+the same day: the custom globe gained camera controls, picking, a draped
+polygon and an arc, and fetches fewer tiles than Cesium for the same flight;
+its frame times on real devices are still to be measured.
 
 === Timeline and diagrams
 

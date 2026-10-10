@@ -2,7 +2,7 @@
 :toc: macro
 :toclevels: 2
 
-*State:* region-scale and globe-phase evidence recorded; globe-phase proposal open. Decision open (owner). +
+*State:* region-scale, globe-phase and custom-globe follow-up evidence recorded; real-device frame times and the decision open (owner). +
 *Date:* 2026-10-10. +
 *Owner of the decision:* the project owner, per link:README.adoc[RFD 3]'s
 "the renderer is decided on the hero, in a bounded spike". +
@@ -594,12 +594,222 @@ can still read. If the follow-up fails on controls or draping,
 `3d-tiles-renderer` is the fallback on the same stack and the same tiles; if
 it fails on geospatial breadth, Cesium remains viable on the same tiles.
 
+== Custom globe follow-up (2026-10-10)
+
+The owner asked for the proposal's follow-up spike on the custom globe, to see
+whether it gets to what the atlas needs. It took the four questions the
+proposal set and answered three of them in the container; the fourth needs
+the owner's devices. No decision is recorded here: the proposal stays open.
+
+The code is `spikes/renderer/globe/followup/`. The globe phase's `custom/` is
+left exactly as captured, so the comparison above stays reproducible.
+
+=== What was built
+
+* *The engine as a module* (`globe.js`, 233 lines): the same quadtree,
+  heights, skirts and imagery, with the level-of-detail target as a
+  parameter and the tiles as ordinary meshes that controls and picking can
+  raycast.
+* *Camera controls*: `GlobeControls` from `3d-tiles-renderer` 0.5.3, used
+  alone, on the custom tile meshes and the WGS84 ellipsoid. No tile
+  renderer, no plugin, no subclass. Drag turns the globe, the wheel or a
+  pinch zooms toward the cursor, right-drag or two fingers tilt, with
+  damping. The scripted flight hands over to the reader on the first input.
+* *Picking* in one function, in priority order: diorama symbols (ships,
+  forests, settlements), then lines and arcs within 10 px of the pointer,
+  then the terrain, which resolves to the draped polygon under it, the sea,
+  or the ground with longitude, latitude and height. Labels are clickable
+  too. Each pick opens a card with the item's kind and caveat.
+* *Draping* (`overlay.js`, 53 lines): polygons are rasterized per tile, in
+  that tile's own longitude and latitude, onto a small texture the tile
+  samples over its imagery on a second UV set. A tile the shapes do not
+  touch gets nothing. The shape follows the terrain exactly and stays sharp
+  from the globe to the diorama.
+* *A relationship arc*: a great-circle curve lifted in proportion to its
+  length, drawn as a screen-space line with a colour ramp, pickable.
+* *Spike data* (`followup.json`): a schematic outline of 薩摩国 and a
+  schematic 遣唐使 arc from 平城京 to 揚州. Both say on their cards that
+  they are not sourced; they exist to test draping and arcs.
+* *A real-device bench* (`?bench=N`): plays the flight in real time for N
+  seconds and reports frame times (median, 95th percentile, worst, share
+  over 33 ms) with a Copy button.
+* *An interaction capture* (`capture-interaction.mjs`): real mouse input
+  through Playwright, one screenshot per input step, with a drawn cursor and
+  a caption, assembled into a video. Picks are found by asking the page's
+  own picker over a grid, so the clicks are not tuned to pixel positions.
+
+=== Results against the four questions
+
+. *Controls and picking: met.* Drag, zoom to the cursor (from 1,500 km to
+  29 km at the landfall in one gesture sequence) and tilt all work on the
+  custom tiles, and every kind of target returns the right card: a label,
+  a ship, the voyage line, the arc, the province, the ground and the sea.
+  See the interaction video and the pick stills below.
+. *One draped polygon and one arc: met, with one visible flaw.* Both read
+  from the globe to the diorama (they are in every flight frame from the
+  region view down). In tilted views the province outline gets thicker
+  where a coarse tile meets a finer one, because the outline is drawn a
+  fixed number of texels wide per tile. A sharper overlay texture does not
+  help; the fix is to draw outlines as screen-space lines, like the voyage
+  line, and keep only the fill draped.
+. *Level of detail no greater than Cesium's: met.* Two changes. Tiles are
+  now bounded by their real heights instead of the highest terrain on
+  Earth, which the globe phase's version assumed for every tile and which
+  made sea tiles look near. And the detail target moved from 2 px to
+  4.5 px. Over the shared flight the follow-up fetches 424 height and 424
+  imagery tiles (Cesium: 440 terrain and 432 imagery), 2,725 KB in all
+  (Cesium: 4,359 KB). The diorama, region and globe stills are
+  indistinguishable from the 2 px version.
+. *Frame times on the desktop, a physical iPad and a mid-range phone: not
+  measured.* The container has only a software GPU. The bench mode is
+  ready for the owner to run; see "Real devices" below.
+
+=== Level-of-detail tuning
+
+Tiles fetched over the 140-frame flight, height plus imagery, one run per
+setting. The pictures were compared at the diorama.
+
+[cols="1,2,2,1,3",options="header"]
+|===
+| Target (px) | Tiles, every tile bounded at 19.8 km | Tiles, real height bounds | KB, real bounds | At the diorama
+
+| 2 | 1,006 + 1,006 | 836 + 836 | 2,185 + 2,698 | the globe phase's picture
+| 3 | 656 + 656 | 592 + 592 | 1,444 + 1,989 | same
+| 4 | 516 + 516 | 464 + 464 | 1,206 + 1,724 | same
+| *4.5 (default)* | | *424 + 424* | *1,127 + 1,598* | same terrain; outline flaw visible
+| 5 | | 396 + 396 | 1,063 + 1,487 | same terrain; outline flaw visible
+| 6 | 398 + 398 | | | not compared
+|===
+
+Cesium reaches 440 tiles with a 2 px target because it also relaxes detail
+toward the horizon where its fog hides it. The custom globe has no fog; a
+horizon relaxation of its own would let it keep a tighter target near the
+camera.
+
+=== Proof of work
+
+Stills at 1440 × 900 unless noted, from the same harness as the globe
+phase. Media in link:spike/globe/followup/[`rfd/0003/spike/globe/followup/`].
+
+[cols="h,3,3",options="header"]
+|===
+| | Globe phase (`custom/`) | Follow-up
+
+| Globe, 16,000 km
+| image:spike/globe/custom/globe.jpg[Custom globe,400]
+| image:spike/globe/followup/globe.jpg[Follow-up globe,400]
+
+| Region, 1,500 km
+| image:spike/globe/custom/region.jpg[Custom region,400]
+| image:spike/globe/followup/region.jpg[Follow-up region,400]
+
+| Diorama, 29.5 km
+| image:spike/globe/custom/local.jpg[Custom diorama,400]
+| image:spike/globe/followup/local.jpg[Follow-up diorama,400]
+
+| Phone tier, 390 × 844 at 2×
+| image:spike/globe/custom/phone-local.jpg[Custom phone,180]
+| image:spike/globe/followup/phone-local.jpg[Follow-up phone,180]
+
+| Flight, 14 s
+| link:spike/globe/custom/flight.mp4[flight.mp4]
+| link:spike/globe/followup/flight.mp4[flight.mp4]
+|===
+
+Interaction, 1280 × 800:
+link:spike/globe/followup/interaction.mp4[interaction.mp4] (drag, zoom to
+the cursor, tilt, then clicks on each kind of target).
+
+[cols="1,1,1",options="header"]
+|===
+| Label | Ship | Province
+
+| image:spike/globe/followup/pick-label.jpg[Label card,300]
+| image:spike/globe/followup/pick-ship.jpg[Ship card,300]
+| image:spike/globe/followup/pick-polygon.jpg[Province card,300]
+
+h| Ground h| Sea h| Arc
+
+| image:spike/globe/followup/pick-ground.jpg[Ground card,300]
+| image:spike/globe/followup/pick-sea.jpg[Sea card,300]
+| image:spike/globe/followup/pick-arc.jpg[Arc card,300]
+|===
+
+Every flight frame was checked: the same sequence as the globe phase, with
+the arc and the province on the surface from the region view down, and the
+same half-second of open sea on the return.
+
+=== Measurements
+
+Single captures on the container's software GPU, as in the globe phase, with
+the same caveat about noisy frame rates.
+
+[cols="3,1,2,2,2",options="header"]
+|===
+| | Better | Cesium | Custom, globe phase | Custom, follow-up
+
+| Engine JavaScript loaded | lower | 5,908 KB | 1,344 KB | 1,574 KB (adds `GlobeControls` and screen-space lines)
+| Page load to first settled globe | lower | 7.9 s | 2.7 s | 2.3 s
+| Measured fps at the globe / region / diorama | higher | 2.1 / 2.7 / 1.5 | 3.6 / 2.1 / 0.9 | 6.0 / 3.9 / 1.0
+| Measured fps, phone tier at the diorama | higher | 2.2 | 2.5 | 2.4
+| Tiles fetched over the whole flight | lower, for the same picture | 440 + 432 | 1,006 + 1,006 | 424 + 424
+| Tile kilobytes over the whole flight | lower, for the same picture | 2,912 + 1,447 | 2,757 + 3,139 | 1,127 + 1,598
+| Draw calls at the diorama | lower, for the same picture | 59 | 135 | 125
+| JS heap at the diorama | lower | 47 MB | 100 MB | 68 MB
+| Flight frames that did not settle in a minute | lower | 0 of 140 | 0 of 140 | 0 of 140
+| Source of the spike (lines) | lower | 523 JS + 41 HTML | 373 JS + 25 HTML | 614 JS + 46 HTML
+| Private API or library internals used | fewer | shadow map camera; render list for stats | none | none
+|===
+
+Draw calls stay about twice Cesium's: each tile is its own mesh with its own
+material. Merging tiles that share an imagery texture, or an array texture,
+is the known cure and was not needed to answer the questions.
+
+=== Gaps found
+
+* The outline-width step on draped polygons, above.
+* No sky at low tilt: looking toward the horizon shows the atmosphere rim
+  and then black space. Cesium and the `3d-tiles-renderer` spike draw a sky
+  gradient there.
+* A drag that starts on label text does not turn the globe (labels take
+  the pointer so they can be clicked). Wheel events over labels are
+  forwarded and zoom normally.
+* Touch pinch and two-finger tilt are `GlobeControls`' own and were not
+  exercised: the container has no touch input. The bench on a phone or iPad
+  is the first real test.
+* Normals at tile edges are still one-sided, as in the globe phase; no seam
+  was visible in the captures.
+
+=== Real devices
+
+The bench runs the flight in real time on the device in hand and reports
+frame times. On a machine on the same network as the devices:
+
+    python3 -I spikes/renderer/globe/build-tiles.py      # once, if tiles/ is missing
+    HOST=0.0.0.0 node spikes/renderer/serve.mjs          # serves the repository on the LAN, port 4300
+
+Then open `http://<that machine's address>:4300/spikes/renderer/globe/followup/?bench=24`
+on the desktop, the iPad and the phone, wait 24 seconds, and copy the report.
+`?sse=` changes the detail target for a comparison run. The results belong in
+this record, under this section, with the device names.
+
+=== What the follow-up means for the proposal
+
+On the three questions the container can answer, the custom globe got to
+what the atlas needs without workarounds or private API, and it now fetches
+less than Cesium for the same flight. The remaining unknown is the one the
+proposal always deferred to the owner: frame times on real devices. The
+gaps above are ordinary engine work, each with a known fix.
+
 == Reproduce
 
     python3 -I spikes/renderer/globe/build-tiles.py       # the shared tileset, about five minutes
     node spikes/renderer/serve.mjs                        # serves the repository on :4300
     node spikes/renderer/globe/capture.mjs custom         # also cesium, tilesjs
     sh spikes/renderer/globe/publish-evidence.sh custom   # → rfd/0003/spike/globe/custom/
+    node spikes/renderer/globe/capture.mjs followup       # the follow-up, same harness
+    node spikes/renderer/globe/followup/capture-interaction.mjs
+    sh spikes/renderer/globe/publish-evidence.sh followup
 
 The region-scale phase is reproduced from commit `9337056`
 (`node spikes/renderer/capture.mjs three|cesium|wgpu`).

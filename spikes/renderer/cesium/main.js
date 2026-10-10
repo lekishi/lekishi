@@ -407,8 +407,12 @@ const ready = new Promise(resolve => {
 window.spike._install({
   ready,
   orbit(t) { orbitT = t; placeCamera() },
+  // Same mapping as the Three.js and wgpu spikes: t = 0 is ship 2 at its recorded
+  // position (the hero still), t in (0, 1] sails the last 40% of the route to the
+  // landfall. Sailing the whole route kept the ship off-screen for half the video.
   playhead(t) {
-    const p = routeAt(t)
+    if (t <= 0) { const s = spec.ships[0]; primitives.ships[0].modelMatrix = shipMatrix(s.lon, s.lat, s.headingRad); return }
+    const p = routeAt(0.6 + 0.4 * Math.min(1, t))
     primitives.ships[0].modelMatrix = shipMatrix(colToLon(p.c), rowToLat(p.r), Math.atan2(-p.dr, p.dc))
   },
   setQuality(level) {

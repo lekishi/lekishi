@@ -1,7 +1,7 @@
 :authors: Darwin D Wu <darwin67@users.noreply.github.com>
 :state: discussion
 :discussion: https://github.com/chaba-dev/lekishi/pull/2
-:labels: architecture, svelte, sveltekit, cesium, maplibre, rendering, native, geospatial
+:labels: architecture, svelte, sveltekit, cesium, three, rendering, native, geospatial
 :revised: 2026-10-10
 
 = RFD 3 Browser architecture and native options
@@ -59,15 +59,24 @@ publishes instead of rejecting them. Places become first-class scene objects
 with their events attached, so the renderer draws one marker and one label
 per place with a count.
 
-=== Decision: a shipped relief basemap, provider-free
+=== Decision: terrain, basemap, and symbols, all shipped and provider-free
 
-The basemap is built offline from open data (Natural Earth 1:10m hypsometric
-tints and vectors, a public-domain elevation model for shaded relief) into
-raster tiles shipped in the artifact: zoom 0–4 globally and 0–7 over the
-served chapters' extents, with coastlines and rivers styled for a muted
-palette. It replaces the Natural Earth II zoom 0–2 raster that Cesium
-bundles. No provider account, token, or runtime tile service; the attribution
-stays visible as today. Payload is measured and recorded with the build.
+Three assets, all built offline from open data and shipped in the artifact,
+with no provider account, token, or runtime tile service:
+
+* *Terrain* for the diorama: a mesh built from open elevation (the Terrarium
+  tiles on AWS Open Data, or an equivalent public-domain model) over each
+  served chapter's extents, at about 130 m per sample at region scale and
+  finer where a local scene needs it, with the vertical exaggeration recorded.
+* *Basemap* for the globe and the 2D fallback: raster tiles painted from
+  Natural Earth 1:10m tints and vectors with shaded relief, zoom 0–4 globally
+  and 0–7 over chapter extents, replacing the Natural Earth II raster Cesium
+  bundles.
+* *Symbols*: a small library of glyph assets (conifer, broadleaf, house, hall,
+  pagoda, vessel, party), instanced and scattered by terrain or placed at
+  attested sites. Their terms are recorded with the build like any media.
+
+The attribution stays visible as today. Payload is measured and recorded.
 
 === Decision: collision-free labels with script coverage
 
@@ -79,13 +88,26 @@ renderer spike below.
 === Decision: the renderer is decided on the hero, in a bounded spike
 
 Cesium is the current renderer. It was "confirmed" earlier because no named
-requirement failed; RFD 1's hero now names one. A spike of at most two days
-builds the basemap and the label items on MapLibre GL JS with its globe
-projection in a branch, side by side with the same on Cesium, and the owner
-decides on the screenshots. What the spike measures: label quality, basemap
-styling effort, line and polygon styling, terrain-RGB relief, payload, and
-touch behaviour. Whichever wins, the `AtlasRenderer` boundary, the domain,
-and the scene are unchanged; there is no dual-renderer framework.
+requirement failed; RFD 1's hero now names one, and the hero is a tilted 3D
+diorama. That rules out a 2D vector-map engine (MapLibre GL has no terrain
+mesh with placed models) and leaves two candidates:
+
+* *Cesium, stylized.* Keeps the globe, terrain streaming, camera, and picking
+  the atlas already has. The work is self-hosted terrain from the open
+  elevation above, painted imagery, vertical exaggeration, instanced glyph
+  assets at region zoom, and custom shading or post-processing to leave the
+  GIS look behind.
+* *A custom Three.js scene* for region and local scale, with the globe kept
+  on Cesium or a painted globe. Full control over the stylization (the mock
+  was built this way in about 250 lines) at the cost of rebuilding tile
+  streaming, globe-to-local continuity, and picking.
+
+A spike of at most two days builds the hero's scene (terrain, water, scattered
+symbols, a vessel, labels, shadows) on each candidate in a branch, and the
+owner decides on the screenshots and on measured frame time on the desktop,
+a physical iPad, and a mid-range phone. Whichever wins, the `AtlasRenderer`
+boundary, the domain, and the scene are unchanged; there is no dual-renderer
+framework.
 
 === Timeline and diagrams
 
@@ -118,8 +140,13 @@ provider credential anywhere in the artifact.
 
 == Devices and performance
 
-Desktop/laptop browsers and iPad-class tablets are the primary targets; phones
-get a usable layout. Acceptance on the tablet is on physical hardware. The
+Desktop/laptop browsers and iPad-class tablets are the primary targets and
+get the 3D diorama. Phones get RFD 1's 2D tier: either the same scene rendered
+at a quarter resolution with nearest-neighbour upscaling and a reduced
+palette (cheap, and a pixel-art look in its own right), or a pre-rendered 2D
+scene with sprites on a 2D engine such as PixiJS. The spike measures the
+first on a mid-range phone; the second is built only if the first fails the
+budget or the look. Acceptance on the tablet is on physical hardware. The
 budget is reader-facing: the chapter page interactive within three seconds on
 a mid-range phone over a typical mobile connection, sixty frames per second
 during pan and playback on the desktop and the iPad, and a measured payload
@@ -136,17 +163,23 @@ experience. Nothing is built for native until then.
 
 == What this RFD stops
 
-* The treatment comparison harness, its review route, and its measurements.
+* The treatment comparison harness, its review route, and its measurements
+  (PR #14, closed 2026-10-10).
 * "Cesium confirmed" as a conclusion drawn from the absence of a named
   requirement.
 * Comparing renderers through a dual-renderer abstraction rather than a
   spike.
+* The MapLibre comparison: the hero is a 3D diorama, which it cannot draw.
 
 == Open questions
 
-* The renderer, decided by the spike.
-* The elevation model and tiling pipeline for the basemap (GEBCO or ETOPO at
-  globe scale, SRTM-derived over chapter extents), recorded with its rights.
+* The renderer, decided by the spike between stylized Cesium and a custom
+  Three.js scene.
+* The elevation source and pipeline (Terrarium tiles for both the terrain and
+  the basemap relief, or GEBCO/ETOPO at globe scale), recorded with its
+  rights.
+* Which 2D tier the phone gets: the quarter-resolution pixel render or a
+  pre-rendered sprite scene.
 * A custom domain and an error-reporting provider, both owner decisions.
 
 == Implementation

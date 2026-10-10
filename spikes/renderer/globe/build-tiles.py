@@ -197,6 +197,9 @@ def build_terrain(z, x, y):
     l = np.linalg.norm(nrm, axis=1, keepdims=True); bad = (l[:, 0] < 1e-9)
     nrm = np.where(bad[:, None], up, nrm / np.maximum(l, 1e-12))
     nrm = np.where((np.sum(nrm * up, 1) < 0)[:, None], -nrm, nrm)
+    # Sea is flat: a sea vertex beside a slope would otherwise carry the slope's
+    # normal, and long simplified sea triangles smear it into dark streaks.
+    nrm = np.where((H[1:-1, 1:-1].ravel() <= 0.5)[:, None], up, nrm)
     # Simplify the grid into a triangulated mesh within an error bound that
     # halves per level, as terrain services do (a tenth of Cesium's own
     # per-level geometric error); flat sea collapses to two triangles. The

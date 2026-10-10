@@ -88,7 +88,17 @@ captures it like the others, and adds:
 - `?bench=N` to play the flight in real time for N seconds and report frame
   times on the device in hand.
 
-Real devices on the same network:
+On any device, from the PR's Cloudflare Pages preview: preview builds (never
+`main`) run `preview-build.mjs` at the end of `pnpm build`, which generates the
+heights and imagery with `build-tiles.py --custom` and copies the page in, so it
+is served at
+
+    https://<branch>.lekishi.pages.dev/spikes/renderer/globe/followup/
+    https://<branch>.lekishi.pages.dev/spikes/renderer/globe/followup/?bench=24
+
+`LEKISHI_SPIKE_PREVIEW=1 pnpm build` does the same locally.
+
+Real devices on the same network, without the preview:
 
     HOST=0.0.0.0 node spikes/renderer/serve.mjs              # listens on the LAN
     open http://<this machine's address>:4300/spikes/renderer/globe/followup/?bench=24

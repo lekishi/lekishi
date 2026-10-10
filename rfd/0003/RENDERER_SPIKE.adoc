@@ -785,7 +785,15 @@ is the known cure and was not needed to answer the questions.
 === Real devices
 
 The bench runs the flight in real time on the device in hand and reports
-frame times. On a machine on the same network as the devices:
+frame times. The simplest way to reach it is the PR's Cloudflare Pages preview:
+preview builds, and only they, generate the custom globe's tiles and include
+the page (`spikes/renderer/globe/preview-build.mjs`; production builds from
+`main` are unchanged). Open
+
+    https://spike-renderer-hero.lekishi.pages.dev/spikes/renderer/globe/followup/?bench=24
+
+on the desktop, the iPad and the phone. Without the preview, on a machine on
+the same network as the devices:
 
     python3 -I spikes/renderer/globe/build-tiles.py      # once, if tiles/ is missing
     HOST=0.0.0.0 node spikes/renderer/serve.mjs          # serves the repository on the LAN, port 4300

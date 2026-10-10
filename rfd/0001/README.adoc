@@ -28,9 +28,11 @@ browser while keeping native delivery open.
 == Established direction
 
 Start with a globe and narrow continuously into regional and local exploration.
-Use a maps-application layout with Civilization-inspired readable terrain,
-symbolic settlements, and visible interactions. Globe and local views are
-scales of one experience, not competing modes.
+At region and local scale the atlas is a tilted diorama in the Civilization
+register, with readable terrain, symbolic settlements, and visible journeys and
+connections; at globe scale it is a painted relief globe. Globe and local
+views are scales of one experience, not competing modes, and the camera moves
+between them without a cut.
 
 War is one interaction among many. Trade, diplomacy, missions, learning,
 religious transmission and division, institutional development, and local
@@ -45,13 +47,47 @@ economy, alternate history, or invented certainty.
 
 Every chapter has one target image, the *hero*: a mockup of the chapter's best
 screen at desktop width, made before implementation and approved by the owner.
-For the Tang chapter it is a styled relief map of the East China Sea with the
-four ships' schematic return through their dated landfalls, 鑒眞's arc to
-東大寺, a timeline with the 753–754 events as ticks, and one period image in
-the selection card. The hero is the acceptance bar for the chapter's
-visualization work: the served page is compared with it side by side, and the
-owner judges the comparison. A gate, a harness measurement, or a passing test
-is not a substitute for that comparison.
+The hero is the acceptance bar for the chapter's visualization work: the served
+page is compared with it side by side, and the owner judges the comparison. A
+gate, a harness measurement, or a passing test is not a substitute for that
+comparison.
+
+=== The Tang chapter's hero, approved 2026-10-10
+
+The owner approved the *diorama* in link:hero/README.md[`hero/`]: the second
+ship arriving at 秋妻屋浦 on 753-12-20, seen from a tilted camera over real
+Satsuma terrain. The register is Civilization VII's "readable realism", a
+tabletop diorama rather than a map: a 3D terrain mesh from open elevation,
+raised for legibility, with symbolic forest, fields, and houses placed by the
+terrain, a schematic 遣唐使船 on the attested landfall with its dashed path,
+labels in the chapter's own script, and warm directional light with shadows.
+The chrome follows the same game's pattern: a thin date bar in both calendars,
+round orbs for layers, a journal for the story, pennants for the people in it,
+a minimap, and a circular next-event dial that is also the playhead.
+
+The diorama is the register for the region and local scales on desktop and
+tablet. The painted relief map in the same directory is the register for the
+globe and is what the diorama sits in when the camera pulls back. The earlier
+local view of 平城京 is to be remade as a diorama.
+
+=== Decision: phones get a 2D tier of their own
+
+A phone does not get the diorama scaled down; it gets a deliberate 2D
+rendition of the same scene, the way a handheld version of a console game is
+re-drawn rather than down-rendered. Two candidates, both to be judged on the
+hero: the diorama rendered at a quarter of the resolution with
+nearest-neighbour upscaling and a reduced palette, which reads as pixel art
+and costs a fraction of the pixels; or a pre-rendered 2D scene with sprites
+for vessels, parties, and settlements, drawn with a 2D engine. The 2D tier
+keeps the same chrome, the same evidence grammar, and the same honesty plate.
+The owner asked for this on 2026-10-10; the mock carries the first candidate
+as a toggle on the diorama screen.
+
+What the hero draws and what it claims are kept apart on the screen itself: a
+plate states that the terrain is real and exaggerated, that vegetation and
+buildings are symbols placed by terrain and not reconstructions, and that the
+ship and its path are schematic. That plate, in some form, ships with the
+product.
 
 == Decision: show, then qualify
 
@@ -66,8 +102,8 @@ metre is withdrawn.
 |Evidence state |Visual form |Meaning to preserve
 
 |Attested site (an excavated palace, temple, port, or city)
-|Solid marker at the site, the name in its own script, no caveat badge.
-|A site coordinate from a cited gazetteer is an identification, not a survey of the event's spot.
+|Solid marker at the site, the name in its own script, no caveat badge. In the diorama, a symbolic settlement: glyph buildings placed on the terrain at the site.
+|A site coordinate from a cited gazetteer is an identification, not a survey of the event's spot; the buildings are symbols of a kind, never a reconstruction.
 
 |Identified locality or region (an island, a commandery, a bay)
 |Soft-edged marker whose size follows the stated precision.
@@ -78,8 +114,12 @@ metre is withdrawn.
 |An absence on the map is not a claim that nothing happened there.
 
 |Journey with dated stops
-|Dashed line through the dated stops, labelled "schematic, follows the dated stops", animated along the playhead.
-|The line connects attested places; it is not an itinerary between them.
+|Dashed line through the dated stops, labelled "schematic, follows the dated stops", animated along the playhead. In the diorama, a schematic vessel or party at the playhead's stop.
+|The line connects attested places; it is not an itinerary between them. The vessel is a symbol of its kind.
+
+|Terrain, vegetation, and fields
+|Real elevation, exaggerated and stated; forest and fields scattered by terrain and labelled symbolic.
+|Modern relief is geographic context; the landscape is not an 8th-century reconstruction, and the plate says so.
 
 |Route reconstructed in cited scholarship
 |Dashed line in a distinct pattern with its citation, labelled "reconstructed".
@@ -120,22 +160,29 @@ one marker, one label, and a count, and opens a list on selection. Event
 titles are short names for a reader, in the chapter's own language where that
 reads naturally; caveats, precision, and placement notes belong in the card.
 
-=== Basemap and labels
+=== Terrain, basemap, and labels
 
-The basemap is a styled relief map: hypsometric tints, shaded relief, strong
-coastlines, rivers at regional scale, a muted palette that lets markers and
-routes read. Labels are collision-free, one per place, prioritised by zoom,
+At region and local scale the ground is a 3D terrain mesh from open elevation,
+vertically exaggerated, coloured by elevation and slope, with symbolic forest
+and fields scattered by terrain and water that reads shallow near the coast.
+At globe scale and as the 2D fallback the ground is a painted relief map:
+hypsometric tints, shaded relief, strong coastlines, rivers at regional scale,
+a muted palette that lets markers and routes read. Labels are collision-free, one per place, prioritised by zoom,
 set in fonts with the script coverage the chapter needs, with the historical
 name leading and the local-script form beside its romanization following
 RFD 2's naming policy. Modern names live in details and search.
 
 === Layout
 
-A full-screen map, floating search and layer controls, a persistent timeline,
-and a selection drawer that becomes a bottom sheet on small screens. One header
-line. Editorial status, coverage, and review independence live in an About
-sheet opened from the header, stated once. A flat or low-tilt view remains an
-option for geographic reading.
+A full-screen scene with the hero's chrome: a thin date bar, round orbs for
+layers (journeys, transmission, diplomacy, territory, sources), a journal for
+the story, pennants for the people in the selected story, a minimap, and a
+circular next-event dial that carries the window and the playhead. The
+selection card opens beside the scene and becomes a bottom sheet on small
+screens. Editorial status, coverage, and review independence live in an About
+sheet opened from the date bar, stated once. A flat or low-tilt view remains an
+option for geographic reading, and the painted map is the fallback where 3D is
+unavailable.
 
 === Timeline and playback
 
@@ -283,7 +330,8 @@ and dated snapshots for control.
 
 == Open questions
 
-* The hero mockup for the Tang chapter, for the owner's approval.
+* The local-scale hero for 平城京 in the diorama register.
+* Where the honesty plate lives in the product (always visible, or one tap away in the About sheet).
 * The first reader-facing evaluation: who, and what they are asked to do.
 
 == Implementation

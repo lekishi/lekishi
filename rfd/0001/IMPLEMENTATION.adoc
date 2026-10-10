@@ -15,20 +15,26 @@ item lands something a reader can see.
 
 == Decide (first week)
 
-- [ ] Produce the Tang hero mockup and record the owner's approval of it as the bar.
-- [ ] Retire the treatment comparison: close PR #14 by decision, keep its Gate 2 evidence, drop `/review/local-treatment/*` from the artifact.
+- [x] Produce the Tang hero mockup and record the owner's approval of it as the bar. Approved 2026-10-10: the diorama in link:hero/README.md[`hero/`], with the painted relief map as the globe register and 2D fallback.
+- [x] Retire the treatment comparison: PR #14 closed by the owner's decision on 2026-10-10; its Gate 2 evidence stays readable in the closed PR, and the review route it added never reached `main`.
 
 == Make the map worth looking at
 
-- [ ] Ship a self-made relief basemap (hypsometric tint, shaded relief, coastlines, rivers) as static tiles: zoom 0–4 global, 0–7 over chapter extents, provider-free (RFD 3 owns the tiling).
-- [ ] Collision-free labels: one per place, event-count badge, zoom priority, CJK-capable fonts, historical name leading with local script and romanization.
+- [ ] Region and local scale as a diorama: 3D terrain from open elevation with exaggeration, slope and elevation tinting, shallow-water shading, symbolic forest and fields scattered by terrain, warm directional light with shadows (RFD 3 owns the renderer and the terrain pipeline).
+- [ ] Symbolic settlements at attested sites: glyph buildings of a kind, scaled for legibility, never a reconstruction; a schematic vessel or party at the playhead's stop.
+- [ ] Ship a self-made relief basemap (hypsometric tint, shaded relief, coastlines, rivers) as static tiles for the globe and the 2D fallback: zoom 0–4 global, 0–7 over chapter extents, provider-free.
+- [ ] Collision-free labels: one per place, event-count badge, zoom priority, CJK-capable fonts, historical name leading with local script and romanization, projected from the 3D scene.
 - [ ] Places-first markers: events attach to places, a place with many events shows a count and opens a list.
+- [ ] The hero's chrome: date bar in both calendars, layer orbs, journal, pennants for the story's people, minimap, and the next-event dial as the playhead.
+- [ ] The honesty plate: what is real, what is symbolic, what is schematic, on the scene.
 - [ ] Short event titles; caveats, precision, and placement notes move to the card.
 - [ ] Schematic journey lines through dated stops, labelled schematic, animated with the playhead.
 - [ ] Relationship arcs on selection, styled by type, with the claim and citation reachable from the arc.
 - [ ] Dated control-snapshot polygons with a hatched edge and a date label; no interpolation.
-- [ ] Timeline strip with event ticks, window brush, playhead, and zoomable scale; retire the number inputs.
-- [ ] Chrome diet: one header line, an About sheet for editorial status and coverage, a narrative-and-image-first selection card.
+- [ ] Timeline strip with event ticks, window brush, playhead, and zoomable scale, paired with the dial; retire the number inputs.
+- [ ] Chrome diet: the hero's bar replaces the header banners, an About sheet for editorial status and coverage, a narrative-and-image-first selection card.
+- [ ] The 平城京 local hero remade in the diorama register, for the owner's approval.
+- [ ] The phone tier: the hero in 2D, as pixel-rendered diorama or a pre-rendered sprite scene, judged on the hero at 390 px; same chrome, grammar, and honesty plate.
 - [ ] Nearby and connected lists in the card, kept separate.
 - [ ] Layer controls for story layers; shared window and playhead; non-colour membership cues.
 - [ ] Coverage guidance with distinct uncovered and filtered-empty states.

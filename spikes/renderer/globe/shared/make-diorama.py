@@ -12,7 +12,7 @@ import json, math, os
 import numpy as np
 from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__))
-R = os.path.join(HERE, "..", "..", "shared")
+R = os.path.join(HERE, "region")  # the region-scale scene the diorama was designed in
 spec = json.load(open(os.path.join(R, "scene.json"))); HM = json.load(open(os.path.join(R, "height.json")))
 a = np.asarray(Image.open(os.path.join(R, "height.png")).convert("RGB"), np.float64)
 E = a[..., 0] * 256 + a[..., 1] - 1000

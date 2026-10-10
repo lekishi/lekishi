@@ -6,7 +6,10 @@
 *Date:* 2026-10-10. +
 *Owner of the decision:* the project owner, per link:README.adoc[RFD 3]'s
 "the renderer is decided on the hero, in a bounded spike". +
-*Code:* `spikes/renderer/` on this branch (nothing here ships in the artifact).
+*Code:* `spikes/renderer/globe/` (nothing there ships in the artifact). The
+region-scale phase's code (`spikes/renderer/{three,cesium,wgpu}`, its harness and
+shared scene) was removed after the globe phase superseded it; it is in the
+history at commit `9337056`, and its evidence below is kept as recorded.
 
 toc::[]
 
@@ -593,15 +596,15 @@ it fails on geospatial breadth, Cesium remains viable on the same tiles.
 
 == Reproduce
 
-    node spikes/renderer/serve.mjs                        # :4300
-    node spikes/renderer/capture.mjs three                # → spikes/renderer/out/three/
-    node spikes/renderer/capture.mjs cesium
-    spikes/renderer/wgpu/build.sh && node spikes/renderer/capture.mjs wgpu
-    python3 -I spikes/renderer/globe/build-tiles.py       # globe phase: the shared tileset
+    python3 -I spikes/renderer/globe/build-tiles.py       # the shared tileset, about five minutes
+    node spikes/renderer/serve.mjs                        # serves the repository on :4300
     node spikes/renderer/globe/capture.mjs custom         # also cesium, tilesjs
     sh spikes/renderer/globe/publish-evidence.sh custom   # → rfd/0003/spike/globe/custom/
 
-The curated copies under `rfd/0003/spike/` are made from `out/` by
-`spikes/renderer/publish-evidence.sh`. The harness needs Chromium with WebGL
+The region-scale phase is reproduced from commit `9337056`
+(`node spikes/renderer/capture.mjs three|cesium|wgpu`).
+
+The curated copies under `rfd/0003/spike/globe/` are made from the harness
+output by `spikes/renderer/globe/publish-evidence.sh`. The harness needs Chromium with WebGL
 (Playwright's build with `--use-angle=swiftshader` in a container) and an
 `ffmpeg` with libx264.

@@ -2,7 +2,7 @@
 :toc: macro
 :toclevels: 2
 
-*State:* region-scale, globe-phase and custom-globe follow-up evidence recorded; iPad frame times recorded; desktop and phone frame times and the decision open (owner). +
+*State:* region-scale, globe-phase and custom-globe follow-up evidence recorded; iPad and iPhone frame times recorded; desktop and mid-range phone frame times and the decision open (owner). +
 *Date:* 2026-10-10. +
 *Owner of the decision:* the project owner, per link:README.adoc[RFD 3]'s
 "the renderer is decided on the hero, in a bounded spike". +
@@ -826,6 +826,15 @@ ratio (up to 2), not at CSS resolution, so it is the harder of the two.
 | 2.7%
 | 995 + 995
 
+| iPhone (2026-10-10; model not recorded, a 402-point-wide screen, which is a recent high-end model)
+| Chrome 155 on iOS 26.7.1 (WebKit), 402 × 684 at 3×, drawn at 2×
+| 59.3
+| 17.0 ms
+| 21.0 ms
+| 74 ms
+| 0.8%
+| 603 + 603
+
 | Desktop | not yet run | | | | | |
 | Mid-range phone | not yet run | | | | | |
 |===
@@ -836,6 +845,11 @@ On the iPad the globe holds the display's 60 Hz for most of the flight
 (30 ms), FR3 for no stall over 1,000 ms (the worst frame was 99 ms). The slow
 frames coincide with tile streaming; decoding heights and building meshes
 happen on the main thread, and moving them to a worker is the known cure.
+
+The iPhone did better still (median 17.0 ms, 95th percentile 21.0 ms, worst
+74 ms); the evaluation sets no phone thresholds, and it meets the tablet ones.
+Its screen width puts it among recent high-end iPhones, so it does not stand in
+for the mid-range phone the decision asks for; that row stays open.
 
 The iPad fetched 995 + 995 tiles where the container's capture fetched
 424 + 424. The detail target is measured in device pixels: at 2× and with a

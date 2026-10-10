@@ -30,7 +30,8 @@ fn shade(world: vec3<f32>, n_in: vec3<f32>, albedo: vec3<f32>) -> vec3<f32> {
   let l = normalize(U.sun_dir.xyz);
   let diffuse = max(dot(n, l), 0.0) * U.sun_color.w * srgb_to_linear(U.sun_color.rgb);
   let hemi = mix(srgb_to_linear(U.ground.rgb), srgb_to_linear(U.sky.rgb), n.y * 0.5 + 0.5) * U.fog_params.z;
-  var lit = albedo * (diffuse + hemi) * 0.82;
+  // Lambert divides irradiance by pi, as Three.js does; 1.05 is the shared exposure.
+  var lit = albedo * (diffuse + hemi) * (1.05 / 3.14159);
   // ACES-style curve keeps the sunlit grass from clipping, like the Three spike.
   lit = (lit * (2.51 * lit + 0.03)) / (lit * (2.43 * lit + 0.59) + 0.14);
   let dist = distance(world, U.cam_pos.xyz);

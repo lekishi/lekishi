@@ -240,14 +240,15 @@ impl Probe {
         for b in &opaque { triangles += b.tris_per_inst * b.inst_count }
 
         // water: a translucent sheet over an opaque sea floor, both far larger than the terrain slab
-        let sheet = Mesh::boxed(wu + 9000.0, 0.02, hu + 9000.0, Vec3::ZERO);
+        // flat quads, not boxes: a second face a few centimetres away z-fights at the horizon
+        let mut sheet = Mesh::new(); let (sx, sz) = ((wu + 9000.0) / 2.0, (hu + 9000.0) / 2.0); sheet.quad(Vec3::new(-sx, 0.0, sz), Vec3::new(sx, 0.0, sz), Vec3::new(sx, 0.0, -sz), Vec3::new(-sx, 0.0, -sz));
         let mut water = vec![];
         let wc = hex(&spec.water.color);
-        for (y, col, _blend) in [(-0.6f32, [0.114, 0.337, 0.455, 1.0], false), (0.06, [wc[0], wc[1], wc[2], spec.water.opacity], true)] {
+        for (y, col, _blend) in [(-0.6f32, [0.09, 0.27, 0.37, 1.0], false), (0.3, [wc[0], wc[1], wc[2], spec.water.opacity], true)] {
             let vb = device.create_buffer_init(&wgpu::util::BufferInitDescriptor { label: None, contents: bytemuck::cast_slice(&sheet.v), usage: wgpu::BufferUsages::VERTEX });
             let ib = device.create_buffer_init(&wgpu::util::BufferInitDescriptor { label: None, contents: bytemuck::cast_slice(&sheet.i), usage: wgpu::BufferUsages::INDEX });
             let inst = device.create_buffer_init(&wgpu::util::BufferInitDescriptor { label: None, contents: bytemuck::bytes_of(&Instance { model: model(Vec3::new(0.0, y, 0.0), 0.0, 1.0), color: col }), usage: wgpu::BufferUsages::VERTEX });
-            water.push(Batch { vb, ib, index_count: sheet.i.len() as u32, inst, inst_count: 1, tris_per_inst: 12 });
+            water.push(Batch { vb, ib, index_count: sheet.i.len() as u32, inst, inst_count: 1, tris_per_inst: 2 });
         }
 
         let (tx, tz) = to_xz(spec.camera.target.lon, spec.camera.target.lat);
@@ -305,7 +306,7 @@ impl Probe {
         let a = self.orbit * std::f32::consts::TAU; let (c, s) = (a.cos(), a.sin()); let o = self.offset;
         let eye = Vec3::new(self.target.x + o.x * c - o.z * s, self.target.y + o.y, self.target.z + o.x * s + o.z * c);
         let aspect = self.config.width as f32 / self.config.height as f32;
-        self.view_proj = Mat4::perspective_rh(self.fov.to_radians(), aspect, 1.0, 12000.0) * Mat4::look_at_rh(eye, self.target, Vec3::Y);
+        self.view_proj = Mat4::perspective_rh(self.fov.to_radians(), aspect, 4.0, 9000.0) * Mat4::look_at_rh(eye, self.target, Vec3::Y);
         self.uniforms.view_proj = self.view_proj.to_cols_array_2d(); self.uniforms.cam_pos = [eye.x, eye.y, eye.z, 1.0];
         self.queue.write_buffer(&self.ubuf, 0, bytemuck::bytes_of(&self.uniforms));
     }

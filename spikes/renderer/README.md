@@ -3,7 +3,8 @@
 Three implementations of the same scene, RFD 1's approved hero (the second
 ship's landfall at 秋妻屋浦 on 753-12-20): one on CesiumJS, one on a custom
 Three.js scene, and a Rust/wgpu probe compiled to wasm to size up a custom
-engine. All three are measured the same way. RFD 3 names this spike; the report that records
+engine. All three are measured the same way. The globe phase, which flies from the
+whole Earth down to this scene on three globes, is in `globe/`. RFD 3 names this spike; the report that records
 the result is `rfd/0003/RENDERER_SPIKE.adoc`. Nothing here ships in the
 artifact.
 

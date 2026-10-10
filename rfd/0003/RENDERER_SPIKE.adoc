@@ -2,7 +2,7 @@
 :toc: macro
 :toclevels: 2
 
-*State:* region-scale evidence recorded; proposal withdrawn; globe-to-local phase open. Decision open (owner). +
+*State:* region-scale and globe-phase evidence recorded; globe-phase proposal open. Decision open (owner). +
 *Date:* 2026-10-10. +
 *Owner of the decision:* the project owner, per link:README.adoc[RFD 3]'s
 "the renderer is decided on the hero, in a bounded spike". +
@@ -369,12 +369,237 @@ inputs:
   and the tile bytes each engine fetches. Real-device frame times are still
   the deciding numbers.
 
+== Globe phase (2026-10-10)
+
+The owner started the globe phase with three engines rather than two: Cesium,
+Three.js with the maintained `3d-tiles-renderer` package, and a custom globe
+on Three.js built for this atlas. Each flies the same path on the same files
+and is measured the same way. The code is `spikes/renderer/globe/`; its
+protocol is `spikes/renderer/globe/README.md`.
+
+=== What was built
+
+* *One shared tileset* (`build-tiles.py`), built offline from Terrarium
+  elevation (AWS Open Data, attribution required) and Natural Earth II hue
+  (public domain). One elevation sampler feeds quantized-mesh terrain with
+  seamless oct-encoded normals (6,444 tiles, 43 MB), the same heights as
+  65×65 Terrarium PNGs for the custom globe, and painted, unlit imagery on
+  the same geographic tiling. Coverage is nested: the whole Earth to level 5,
+  the East China Sea to level 8, southern Kyushu to level 10, the Satsuma
+  peninsula to level 11 (about 150 m per height sample). Nothing is shipped;
+  the script rebuilds it in about five minutes.
+* *One scene contract* (`shared/scene.json`, `shared/diorama.json`,
+  `shared/flight.js`): the globe in 753, a schematic voyage line from 黄泗浦
+  to 秋妻屋浦 (not evidence), labels shown by camera range, and the
+  region-scale diorama (4,162 trees, 25 houses, two ships) placed from the
+  same rules as geodetic positions.
+* *One flight* every engine makes: the whole globe at 16,000 km, down across
+  the East China Sea, an orbit of the landfall at 29.5 km, and back out.
+* *One harness* (`capture.mjs`): stills at globe, region and local range, the
+  phone tier at the diorama, and a 14-second flight assembled frame by frame.
+  Every frame waits for the engine to report its tiles loaded (up to a
+  minute on the software GPU); no frame in any capture hit that cap.
+
+=== Defects the spike found in its own data
+
+The shared tileset had real bugs, found by the engines that read it, and
+fixed before the captures:
+
+* The mesh simplifier counts rows from the bottom; the builder read them
+  from the top, so every terrain tile's vertex choice was mirrored and peaks
+  were missed. Found by the Cesium spike.
+* Triangles were clockwise, so both quantized-mesh engines culled the surface.
+* Flat tiles collapsed to two triangles, chords sagging kilometres into the
+  globe at coarse levels. The simplifier now also bounds curvature error.
+* The encoder library's oct normals wrapped +1 to 0, flipping normals on
+  three meridians.
+* Imagery levels disagreed in colour, so seams showed where two levels met,
+  and narrow land took the sea's blue from a blurred hue map.
+* Sea vertices carried the slope normals of the coast, which streaked the
+  water in the simplified meshes.
+
+The custom globe reads the PNG heights and was not affected by the mesh bugs.
+The client-side repairs the Cesium spike wrote while the tiles were wrong
+remain behind URL switches, off in every capture.
+
+=== Proof of work
+
+Stills at 1440 × 900 unless noted. Media in link:spike/globe/[`rfd/0003/spike/globe/`].
+
+[cols="h,3,3,3",options="header"]
+|===
+| | Cesium | Three.js + 3d-tiles-renderer | Custom Three.js globe
+
+| Globe, 16,000 km
+| image:spike/globe/cesium/globe.jpg[Cesium globe,400]
+| image:spike/globe/tilesjs/globe.jpg[3d-tiles-renderer globe,400]
+| image:spike/globe/custom/globe.jpg[Custom globe,400]
+
+| Region, 1,500 km
+| image:spike/globe/cesium/region.jpg[Cesium region,400]
+| image:spike/globe/tilesjs/region.jpg[3d-tiles-renderer region,400]
+| image:spike/globe/custom/region.jpg[Custom region,400]
+
+| Diorama, 29.5 km
+| image:spike/globe/cesium/local.jpg[Cesium diorama,400]
+| image:spike/globe/tilesjs/local.jpg[3d-tiles-renderer diorama,400]
+| image:spike/globe/custom/local.jpg[Custom diorama,400]
+
+| Phone tier, 390 × 844 at 2×
+| image:spike/globe/cesium/phone-local.jpg[Cesium phone,180]
+| image:spike/globe/tilesjs/phone-local.jpg[3d-tiles-renderer phone,180]
+| image:spike/globe/custom/phone-local.jpg[Custom phone,180]
+
+| Flight, 14 s
+| link:spike/globe/cesium/flight.mp4[flight.mp4]
+| link:spike/globe/tilesjs/flight.mp4[flight.mp4]
+| link:spike/globe/custom/flight.mp4[flight.mp4]
+|===
+
+Every flight video was checked frame by frame. All three show the same
+sequence: the globe, the descent with the route and region labels, the
+peninsula appearing with its trees and houses, the full orbit, and the climb
+back to the globe. On the return leg the flight's target slides west over
+open sea before the camera has climbed, so for about half a second every
+engine shows only water; that is the flight path, not a rendering fault.
+
+=== Measurements
+
+Single captures on the container's software GPU, one engine at a time.
+Frame rates are noisy (up to twice as fast on another run in the region
+phase) and only order the engines roughly. The "Better" column gives the
+direction of each row.
+
+[cols="3,1,2,2,2",options="header"]
+|===
+| | Better | Cesium | 3d-tiles-renderer | Custom
+
+| Engine JavaScript loaded | lower | 5,908 KB, plus workers and assets on demand | 2,026 KB | 1,314 KB (Three.js) + 30 KB
+| Page load to first settled globe | lower | 7.9 s | 5.2 s | 2.7 s
+| Measured fps at the globe / region / diorama | higher | 2.1 / 2.7 / 1.5 | 6.0 / 3.9 / 1.2 | 3.6 / 2.1 / 0.9
+| Measured fps, phone tier at the diorama | higher | 2.2 | 3.0 | 2.5
+| Tiles fetched over the whole flight | lower, for the same picture | 440 terrain + 432 imagery | 593 + 592 | 1,006 + 1,006
+| Tile kilobytes over the whole flight | lower, for the same picture | 2,912 + 1,447 | 3,931 + 2,035 | 2,757 + 3,139
+| Draw calls at the diorama | lower, for the same picture | 59 | 66 | 135
+| JS heap at the diorama | lower | 47 MB | 33 MB | 100 MB
+| Flight frames that did not settle in a minute | lower | 0 of 140 | 0 of 140 | 0 of 140
+| Source of the spike (lines) | lower | 523 JS + 41 HTML | 421 JS + 36 HTML | 373 JS + 25 HTML
+| Private API or library internals used | fewer | shadow map camera; render list for stats | overlay internals subclassed, one private method | none
+|===
+
+The custom globe refines further than the other two (1,006 tiles, about
+twice the draw calls), because it keeps every level's full 65×65 grid and
+uses Cesium's per-level error with a two-pixel target. That is tuning, not
+engine quality: a looser target or simplified meshes would bring it down.
+Its heap is higher for the same reason.
+
+=== Assessment
+
+==== Cesium
+
+*What the capture shows.* The full flight on the engine the atlas ships
+today, with dynamic lighting from the shared normals instead of the
+region phase's baked relief. Faint triangular shading remains on the sea
+near coasts, where long simplified triangles meet; Cesium's water-mask
+extension in the terrain tiles is the standard cure. Labels are canvas text
+and read softer than the HTML labels of the other two.
+
+*Strengths.* The globe, terrain streaming, camera controls, picking,
+draped lines and polygons, and labels are built in and mature; the camera
+matched the shared flight to the millimetre. It read the standard tiles
+without help once they were correct. Nested imagery coverage is expressible
+with public options (`minimumTerrainLevel`).
+
+*Weaknesses.* The heaviest payload by far. Shadows that reach the diorama
+need a private shadow-map camera. It loads tiles a few per rendered frame,
+which is slow on weak GPUs. Stylization beyond imagery and lighting (the
+pixel look, custom tone mapping) is upstream of its public API, as the
+region phase found.
+
+*Future extensibility.* Everything geospatial the atlas will add (journey
+lines, arcs, control polygons draped over terrain, picking) is built in.
+Everything stylistic stays a fight with each upgrade.
+
+==== Three.js with 3d-tiles-renderer
+
+*What the capture shows.* The same flight with the region phase's Three.js
+look: the same diorama code, soft shadows, HTML labels, a limb glow. The
+highest frame rates at globe and region range in this run.
+
+*Strengths.* One rendering stack with the diorama work. The package brings
+quantized-mesh loading, image overlays on the ellipsoid, globe camera
+controls, and an active maintainer (0.5.3, updated weeks ago). Its
+`GeoJSONOverlay` can rasterize polygons onto terrain, a route to draped
+control polygons.
+
+*Weaknesses.* It needed the most adaptation: vertical exaggeration by
+wrapping the plugin's mesh parser and stretching normals; one overlay
+subclass per imagery group, overriding internals, to express nested
+coverage without 404s; and a workaround for a reversed `smoothstep` in the
+overlay shader that dropped imagery on vertices at the top of a tile's
+height range (worth reporting upstream). The diorama needed up to 90 s to
+settle on the software GPU. A 0.x library whose internals we override is an
+upgrade risk.
+
+*Future extensibility.* Good for stylization (the whole Three.js ecosystem)
+and reasonable for geospatial overlays; each new kind of data likely means
+another plugin or overlay to adapt.
+
+==== Custom Three.js globe
+
+*What the capture shows.* The same flight from 373 lines: a quadtree over
+the shared tiling chosen by screen-space error, full-grid heights with
+skirts, imagery mapped one to one, parent quadrants where the tileset stops,
+the diorama placed in exact Earth coordinates, and a logarithmic depth
+buffer. The fastest load.
+
+*Strengths.* No workarounds and no private API: every behaviour is ours and
+fits this atlas (our tiling, our exaggeration, our levels). The smallest
+payload. Because the engine is small, porting it later (to the Rust/wgpu
+native path, for instance) is a bounded job.
+
+*Weaknesses.* It has no interaction yet: no camera controls, no picking, no
+draped lines or polygons beyond the route, no request cancellation. Normals
+are one-sided at tile edges. Its level-of-detail rule fetches more than the
+other two and needs tuning. All of that is ours to build and maintain.
+
+*Future extensibility.* Unlimited and fully ours, at the cost of writing
+each feature. `3d-tiles-renderer`'s `GlobeControls` and ellipsoid maths are
+separable and could give it interaction without adopting the tile renderer;
+that is untested.
+
+=== Proposal (owner decides)
+
+All three carry the globe-to-diorama flight on identical data with a similar
+look, so the requirement no longer separates them by picture; it separates
+them by what each costs to finish.
+
+The proposal is the *custom Three.js globe on the shared tileset*, with
+interaction borrowed from `3d-tiles-renderer`'s `GlobeControls`, and a
+one-week follow-up spike to prove the missing pieces before committing:
+
+. camera controls (GlobeControls on the custom tile meshes) and picking of
+  places and symbols;
+. one draped control polygon and one relationship arc across the sea;
+. level-of-detail tuning to fetch no more than Cesium for the same flight;
+. frame times on the desktop, a physical iPad, and a mid-range phone.
+
+Why: it met the contract with no workarounds, it is the lightest, it shares
+one rendering stack with the diorama look, and the tile format stays a
+standard quantized-mesh and PNG pair that Cesium and `3d-tiles-renderer`
+can still read. If the follow-up fails on controls or draping,
+`3d-tiles-renderer` is the fallback on the same stack and the same tiles; if
+it fails on geospatial breadth, Cesium remains viable on the same tiles.
+
 == Reproduce
 
     node spikes/renderer/serve.mjs                        # :4300
     node spikes/renderer/capture.mjs three                # → spikes/renderer/out/three/
     node spikes/renderer/capture.mjs cesium
     spikes/renderer/wgpu/build.sh && node spikes/renderer/capture.mjs wgpu
+    python3 -I spikes/renderer/globe/build-tiles.py       # globe phase: the shared tileset
+    node spikes/renderer/globe/capture.mjs custom         # also cesium, tilesjs
+    sh spikes/renderer/globe/publish-evidence.sh custom   # → rfd/0003/spike/globe/custom/
 
 The curated copies under `rfd/0003/spike/` are made from `out/` by
 `spikes/renderer/publish-evidence.sh`. The harness needs Chromium with WebGL

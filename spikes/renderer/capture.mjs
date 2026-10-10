@@ -33,9 +33,13 @@ p = await page(phone); await ready(p, "phone"); await p.screenshot({ path: join(
 const statsPhone = await measure(p, 4); await phone.close()
 
 // videos: orbit and playhead, 1280x800
+// Recording starts with the context, so each video also captures the page load; the
+// trim offset (seconds until ready) is kept per video and cut off in the mp4.
+const trim = {}
 async function video(name, seconds, step) {
+  const t0 = Date.now()
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 }, recordVideo: { dir: out, size: { width: 1280, height: 800 } } })
-  const v = await page(ctx); await ready(v)
+  const v = await page(ctx); await ready(v); trim[name] = (Date.now() - t0) / 1000
   const frames = seconds * 10
   for (let i = 0; i <= frames; i++) { await v.evaluate(step, i / frames); await v.waitForTimeout(100) }
   const path = await v.video().path(); await ctx.close(); renameSync(path, join(out, `${name}.webm`))
@@ -43,7 +47,7 @@ async function video(name, seconds, step) {
 await video("orbit", 8, t => window.spike.orbit(t))
 await video("playhead", 6, t => window.spike.playhead(t))
 await browser.close()
-writeFileSync(join(out, "stats.json"), JSON.stringify({ full: statsFull, phone: statsPhone, errors, capturedAt: new Date().toISOString(), note: "software GPU in the capture container; fps is relative" }, null, 2))
+writeFileSync(join(out, "stats.json"), JSON.stringify({ full: statsFull, phone: statsPhone, videoTrimSeconds: trim, errors, capturedAt: new Date().toISOString(), note: "software GPU in the capture container; fps is relative" }, null, 2))
 // mp4 for playback outside Chrome, with Playwright's own ffmpeg
-for (const name of ["orbit", "playhead"]) await new Promise(r => spawn(process.env.FFMPEG ?? "ffmpeg", ["-y", "-loglevel", "error", "-i", join(out, `${name}.webm`), "-vf", "scale=1280:-2", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "26", "-preset", "veryfast", "-an", join(out, `${name}.mp4`)]).on("exit", r))
+for (const name of ["orbit", "playhead"]) await new Promise(r => spawn(process.env.FFMPEG ?? "ffmpeg", ["-y", "-loglevel", "error", "-ss", String(trim[name] ?? 0), "-i", join(out, `${name}.webm`), "-vf", "scale=1280:-2", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "26", "-preset", "veryfast", "-an", join(out, `${name}.mp4`)]).on("exit", r))
 console.log(JSON.stringify({ full: statsFull, phone: statsPhone, errors }, null, 2))

@@ -2,312 +2,239 @@
 :state: discussion
 :discussion: https://github.com/chaba-dev/lekishi/pull/2
 :labels: history, data, provenance, time, geography, editorial
+:revised: 2026-10-10
 
 = RFD 2 Historical data, time, and evidence
 
+== Revision note
+
+Revised on 2026-10-10 on the owner's instruction, after the status review
+found the content thinner than the free sources it cites and the authoring
+workflow heavier than a single editor can sustain: 0 of 19 places with an
+asserted historical coordinate, 13 of them anchored at modern city centres
+while cited gazetteers hold the sites, no route or area anywhere, and every
+correction requiring a new revision, a new publication set, a ledger row, and
+a digest. This text replaces the earlier RFD 2. The dated records under this
+directory, link:CONTRACTS.adoc[the v0 contract],
+link:TANG_MISSION_FEASIBILITY.adoc[the feasibility report], and
+link:PUBLICATION_APPROVAL.adoc[the publication approval gate], stay readable
+as the evidence they are; where this text changes their effect it says so.
+
 == Goal
 
-Represent historical events and relationships with enough temporal, geographic,
-and evidentiary context to support link:../0001/README.adoc[RFD 1] without turning
-visual convenience into historical certainty. Support small curated chapters
-first and eventual contributions from researchers, professors, and other editors.
+Represent historical events and relationships with enough temporal,
+geographic, and evidentiary context to support link:../0001/README.adoc[RFD 1]
+without turning visual convenience into historical certainty, and at a volume
+and pace that produces chapters worth exploring. Support one owner-editor
+first and eventual contributions from researchers and other editors.
 
-== Context
+== Domain model
 
-The owner's illustrated history books are useful high-level references, but
-will not supply every date, route, interaction, or competing interpretation.
-Public datasets, papers, and specialist contributors will be necessary. No
-single dataset is expected to provide a reliable global history of influence.
-
-== Proposed domain model
-
-This is a conceptual model, not an approved database schema.
-
-Places:: Stable identities with historical names, source-backed locations,
-  geometry validity periods, and spatial precision or uncertainty. A changing
-  name must not silently create a new place or imply that identities never change.
-Actors:: Distinguish people, states, communities, companies, religious bodies,
-  and other institutions. Membership and roles can vary over time. Cultures
-  are not assumed to occupy exclusive, sharply bounded polygons.
-Events:: Occurrences or processes with temporal bounds, participants and roles,
-  locations, and links to a broader campaign, mission, or sequence.
+Places:: Stable identities with historical names, cited locations, geometry
+  validity periods, and spatial precision. A changing name must not silently
+  create a new place.
+Actors:: People, states, communities, companies, religious bodies, and other
+  institutions, with roles that vary over time. Cultures do not occupy
+  exclusive, sharply bounded polygons.
+Events:: Occurrences or processes with temporal bounds, participants and
+  roles, locations, and membership in a campaign, mission, or sequence.
 Relationships:: Typed connections among actors, places, and events: trade,
   travel, conflict, diplomacy, transmission, institutional change, or proposed
-  influence. Direction and temporal validity are explicit where meaningful;
-  not every relationship is directional or causal.
-Claims and sources:: Attach assertions to citations, locators such as page or
-  section, provenance, review status, uncertainty, and supporting or conflicting
-  interpretations. One source need not support every field of an event.
-Stories:: Curated selections and navigation sequences over the historical
-  records, not separate copies of those records or the only possible interpretation.
+  influence, with explicit direction and validity where meaningful.
+Claims and sources:: Assertions attached to citations with locators,
+  provenance, review status, uncertainty, and supporting or conflicting
+  interpretations.
+Stories:: Curated sequences over the records, not copies of them.
+Media:: Images and other assets with per-file rights, attribution, and a
+  depiction label (contemporary depiction, later depiction, modern
+  photograph of a site, modern reconstruction).
 
-Use portable identifiers and retain external dataset identifiers at import.
-Keep presentation colors, viewport coordinates, and Cesium objects out of the
-historical source of truth. Geometries can use GeoJSON where suitable, accompanied
-by explicit temporal and evidentiary metadata.
+Portable identifiers, retained external identifiers, GeoJSON geometry with
+temporal and evidentiary metadata, and no renderer objects in the source of
+truth all stand as decided in link:CONTRACTS.adoc[the v0 contract].
 
 == Decision: historical names with local-script forms
 
-Use the period-appropriate historical name as the primary place label, paired
-with its local-language/script form where supported by sources. Include Japanese
-kanji, Chinese hanzi, and equivalent writing systems for other places rather than
-displaying only romanized or English names. A label can pair a readable
-romanization with local script, such as "Chang'an · 長安"; the example does not
-establish a universal transliteration convention or assert historical pronunciation.
+The period-appropriate historical name is the primary label, paired with its
+local-script form where sources support it, with the romanization or
+translation marked as editorial. Multiple attested forms may coexist. Modern
+equivalents live in details and search. This decision stands unchanged.
 
-Retain the name's language, script, historical validity, and source, including
-the relationship between a local-script form and a romanization or translation.
-Do not infer language or pronunciation from shared characters alone. Prefer
-source-supported period-appropriate forms; do not silently substitute modern
-orthography or fabricate a historical spelling when evidence is unavailable.
-Document missing or uncertain forms and distinguish editorial transliteration
-from original-script evidence. Multiple attested local names may coexist.
+== Time
 
-Modern equivalents and alternate spellings remain available in details and
-search, including local-script and romanized queries. Preserve original display
-forms when normalizing search text. Explain relationships to modern places:
-renaming, relocation, successor settlements, and changed boundaries are not
-automatically aliases of an identical place.
+Historical dates keep the source's expression, calendar, precision, and
+uncertainty separately from the normalized values used to sort and filter.
+Duration is distinct from an uncertain occurrence inside a range. BCE/CE,
+year zero, interval boundaries, and ordering are specified in
+link:CONTRACTS.adoc[the v0 contract] and pinned by the vectors under
+`historical/v0/vectors`; they stand.
 
-== Time and space contracts
+=== Decision: possible temporal matches are included by default
 
-Historical dates are not ordinary application timestamps. Preserve the source's
-date expression, calendar where known, precision, and uncertainty separately
-from normalized values used to sort and filter. Distinguish an event that lasted
-several years from an event whose exact date is only known to fall in that range.
+An event whose supported range overlaps the window is a visibly uncertain
+possible match. Playback never invents an exact date or animates continuous
+activity across an uncertainty range. Stands.
 
-Before durable storage, specify BCE/CE conversion and the treatment of year zero,
-calendar conversion, open-ended intervals, overlapping events, and inclusion at
-window boundaries. Civil BCE/CE display has no year zero; internal astronomical
-numbering is a possible representation, not yet a decision. JavaScript Date and
-the renderer's clock must not be the authoritative historical model.
+=== Decision: undated events remain discoverable outside temporal results
 
-Playback can use a derived numeric coordinate. Derivation must not convert a
-year-only claim into an asserted January 1 date. Preserve partial ordering when
-the evidence does not establish which event happened first.
+Undated events are reachable through search, connections, and a "Date
+unknown" list; they are absent from time-filtered map results, stepping, and
+playback, and are labelled unknown rather than outside the window. Stands.
 
-Locations likewise need precision and interpretation. A point may represent an
-approximate site or a label anchor, not a surveyed location. A route may be an
-attested itinerary, a reconstructed route, or a schematic link. Record the
-difference. Political control, religious presence, and cultural influence are
-different relationships and must not share one generic territorial meaning.
+== Location
 
-Modern terrain is geographic context, not historical reconstruction. Rivers,
-coastlines, settlements, and borders can change; historical geometry overrides
-need their own sources and validity ranges.
+=== Decision: cite the best available coordinate, and only then anchor
 
-== Decision: readable, explicitly approximate locations
+A place is placed at the best coordinate a citable source supports, in this
+order of preference:
 
-Include approximate locations on the map using clearly marked approximate points
-or source-supported areas. Use labels or symbols as well as color to distinguish
-them from precise locations, and explain the location claim, its uncertainty,
-and supporting sources in details.
+. A site coordinate for an excavated or standing site, from a cited gazetteer
+  or dataset (Wikidata CC0, Pleiades CC BY, the World Historical Gazetteer
+  under its dataset terms, CHGIS under its terms once the owner decides).
+  The record names the dataset, the identifier, and the precision it states.
+. A locality or region identification from cited scholarship or a historical
+  geography, with the precision stated (`locality`, `region`).
+. A display anchor at a modern namesake, used only when neither of the above
+  exists, and stated as such in the record.
 
-Do not invent an uncertainty radius or precise boundary when the evidence supplies
-none. If a point anchors the label for a broadly located event, identify it as a
-display anchor rather than an asserted event coordinate. A source-supported area
-does not imply uniform probability or political control. Keep the default map
-readable rather than requiring prominent uncertainty areas for every event.
+A display anchor is a last resort, not a default. The earlier practice of
+anchoring palaces, temples, and ports at modern city centres while a cited
+site exists is withdrawn: 黃泗浦 anchored at central Suzhou when Wikidata
+holds the excavated Huangsipu site 60 km away is the case that decided this.
+A place with no citable placement keeps `unknown` geometry and stays out of
+the map.
 
-When there is no usable geographic placement, retain the record in lists and
-details without manufacturing a map position. Approximate placement is distinct
-from wholly unknown location and is not grounds for excluding a supported event
-from the map.
+=== Decision: routes and areas are published with their interpretation
 
-== Decision: possible temporal matches are included by default
+Movement and control are drawn, with the interpretation recorded on the
+geometry and shown in the visual grammar RFD 1 defines:
 
-Time filtering includes events whose supported possible occurrence range
-overlaps the selected window, even when occurrence within that window is not
-certain. Visibly distinguish these possible matches from definite matches and
-expose the source date expression and uncertainty in the event details. The cue
-must not depend on color alone.
+* `schematic_link`: a line through the dated places a record attests, asserting
+  no path between them. A journey with dated stops publishes one.
+* `reconstructed_route`: a route proposed in cited scholarship, attributed to
+  its author.
+* `attested_itinerary`: a path the source itself describes stage by stage.
+* A dated control snapshot: a polygon with its date and source, drawn as a
+  snapshot and never interpolated. Political control, religious presence,
+  and cultural influence remain different relationships and never share one
+  territorial meaning.
 
-For example, an event known only to have happened sometime between 730 and 760 CE
-appears as a possible match in a 740–750 CE window. This does not assert that it
-happened in those years, lasted thirty years, or occurred at the range midpoint.
-An occurrence range entirely outside the window does not match on this basis.
-Playback must preserve the distinction between uncertain occurrence and duration;
-it must not invent an exact event date or animate continuous activity throughout
-the uncertainty range.
+The atlas domain accepts all four. The earlier projection rule that rejected
+every route interpretation as an error is withdrawn. A chapter that draws
+nothing it could draw with a label is below RFD 1's bar.
 
-This decides the inclusion default for bounded uncertain occurrences, not all
-temporal mechanics. Exact endpoint conventions, calendar normalization, uncertain
-duration endpoints remain to be specified.
+=== Decision: readable, explicitly approximate locations
 
-== Decision: undated events remain discoverable outside temporal results
-
-Events with no usable date remain accessible through search, connected events,
-and a clearly labelled "Date unknown" list. Exclude them from time-filtered map
-results, chronological stepping, and playback; do not assign a placeholder date
-or treat a missing date as matching every time window. This differs from a
-bounded uncertain occurrence, which follows the possible-match policy above.
-
-Opening an undated event exposes its details and sources without changing the
-time window or inventing a playhead position. Mark its date as unknown, not
-"outside selected time": there is no evidence that it falls outside the window
-either. A connection to a dated event does not by itself establish its date.
+Approximate points and source-supported areas appear on the map with
+non-colour cues and an explanation in details. No invented radius or
+boundary. Stands, with the precision now carried by the marker's size rather
+than by a text badge.
 
 == Claims drive visualization
 
-Documented contact does not establish influence; influence does not imply
-unchanged adoption. Trade networks do not prove particular voyages. A religious
-council does not cause an instantaneous, geographically uniform division.
+Documented contact does not establish influence; a network does not prove a
+voyage; a council does not cause a uniform division. Competing accounts are
+stored without averaging. Where location or date is unknown the record stays
+in lists and cards. Stands.
 
-Store competing accounts without averaging them into false precision. Prefer
-descriptive uncertainty and review states over invented confidence percentages.
-Publication and historical certainty are separate: a reviewed account can
-explicitly describe a disputed claim.
+=== Decision: first-release interpretation policy
 
-Only interpolate movement when the chosen presentation is justified or clearly
-labelled illustrative. Use dated political-control snapshots rather than
-invented continuously moving boundaries. Where location or date is unknown,
-retain the record in the narrative/list rather than assigning arbitrary map
-coordinates or dates merely to make it visible.
+The release includes directly attested claims and interpretations advanced in
+cited scholarship, distinguished and attributed. Every relationship, route,
+and snapshot carries a cited basis. Original contributor hypotheses stay out
+of public content. Stands.
 
-== Decision: first-release interpretation policy
+=== Decision: an attributed main account with cited alternatives
 
-The first public release includes directly attested claims and interpretations
-already advanced in cited scholarship. Clearly distinguish the two and attribute
-interpretations to their sources. Attestation records what a source reports;
-it does not by itself establish that the report is undisputed or accurate.
+One main account, visibly marked when disputed, with the alternatives and
+their citations in the card. Stands.
 
-Original contributor hypotheses remain unpublished research notes, not public
-atlas content or a separate experimental public layer. This limits the initial
-review burden without excluding scholarly disagreement. Whether to publish
-original hypotheses in a later release requires a separate policy decision.
+== Acquisition
 
-Every published relationship requires a cited evidentiary basis. An interpretive
-label never substitutes for evidence. Label schematic route geometry separately
-from the historical claim: a sourced connection does not establish an exact
-itinerary. Generated illustrations and AI suggestions do not supply evidence.
+=== Decision: adopt the open gazetteers now
 
-=== Decision: present an attributed main account with cited alternatives
+Wikidata (CC0) and Pleiades (CC BY) are adopted with attribution for place
+identification and coordinates. The World Historical Gazetteer is used per
+dataset with its terms recorded. CHGIS (CC BY-NC) and CBDB are an owner
+decision: the recommendation is to adopt CHGIS with attribution for this
+non-commercial project, because it is the single largest improvement
+available to Chinese place data. Structured data is a candidate fact with a
+source, not a guarantee of accuracy; a gazetteer identification is cited as
+an identification.
 
-For the first release, present one clearly attributed main account with a visible
-indication when it is disputed. Explain the disagreement and make alternative
-scholarly accounts available in the detail panel, citing each account. Choosing
-the main account is an editorial presentation choice, not a declaration that
-the disagreement is settled or that alternatives have equal evidentiary support.
+=== Decision: media is content
 
-Preserve distinct claims and their sources rather than merging conflicting dates,
-locations, or interpretations into a supposedly definitive record. A map depiction
-based on the main account must not conceal material disagreement behind an
-unqualified visual assertion. The detail panel should explain what differs and
-which account informs the depiction.
+Public-domain and openly licensed images are cleared per file and published
+with attribution and a depiction label. The 東征伝絵巻 scenes and Commons
+photographs of 唐招提寺, the Daming Palace site, and 平城宮跡 are the first
+set. A later depiction is labelled as such and is never evidence.
 
-Selectable interpretations that change the map and simultaneous competing map
-overlays are deferred beyond the first release. Disputed relationships need not
-be excluded solely because scholars disagree; they still must satisfy the cited
-evidence and publication policies above.
+Sources remain primary texts in public-domain editions, cited scholarship,
+and the datasets above, each with recorded reuse terms. Owning a book does
+not grant reproduction rights; cite and summarize.
 
-== Acquisition and publication
+== Publication
 
-Begin with versioned, schema-validated JSON/GeoJSON and citations for one chapter.
-Imports are candidates for review, not automatically published facts. Once
-editing and queries require a database, migrate the curated records into the
-storage proposed in link:../0003/README.adoc[RFD 3] with stable identities and
-provenance. Do not maintain files and database as competing writable authorities.
+=== Decision: a single-editor workflow until there is a second editor
 
-Candidate sources include:
+The owner is the editor and may approve his own sourced work for the public
+release (unchanged from the earlier decision). The workflow is sized for
+that:
 
-* https://www.wikidata.org/wiki/Wikidata:Licensing[Wikidata]: identifiers and
-  structured candidate facts; structured data is CC0, not a guarantee of accuracy.
-* https://pleiades.stoa.org/[Pleiades]: ancient-place information useful for
-  selected ancient-world chapters, not complete world coverage.
-* https://whgazetteer.org/[World Historical Gazetteer]: historical place names,
-  temporal context, and linked datasets with uneven coverage and dataset-specific
-  reuse terms.
-* Scholarly books, papers, primary-source editions, and specialist review for
-  relationships and interpretations that gazetteers do not supply.
+* *Authoring format.* One compact file per chapter, with one entry per place,
+  actor, event, relationship, story, and media item, citations inline, in
+  the vocabulary link:CONTRACTS.adoc[the v0 contract] defines. A build-time
+  compiler produces the contract documents the atlas and the contract tests
+  consume, so the contract's semantics and vectors stand unchanged while the
+  authoring cost per fact falls from a hundred lines to a few.
+* *Revision history.* Git history, with the commit as the change explanation.
+  Readers get a correction history from it when the atlas grows a history
+  surface; nothing requires per-record revision envelopes or hashes for one
+  editor.
+* *Approval.* One `published` decision per chapter, recorded by the owner
+  with the commit it approves, enforced by the build: a served chapter must
+  carry the owner's approval of its current content.
+* *Review.* The owner's review checklist (source support, attribution,
+  uncertainty, attestation versus interpretation, reuse rights) is run once
+  per chapter release and once per batch of corrections, not per edit. The
+  critical-edition re-check of locators cited from unproofread transcriptions
+  is one pass before a release.
 
-Record licenses and attribution requirements for each dataset and media asset.
-Open access is not the same as unrestricted redistribution. Owning a book does
-not grant permission to reproduce its maps or illustrations. Cite and summarize
-appropriately; do not copy imagery or substantial text without suitable rights.
+This changes the effect of link:PUBLICATION_APPROVAL.adoc[the publication
+approval gate]: the per-set digest ledger governs the chapters until the
+authoring format lands, and is then replaced by the per-chapter approval
+above. The ledger and the sets stay in the tree as the record of how the
+first two chapters were approved; `publication-approval.test.ts` is retired
+with them.
 
-Initially, contributors can propose content-file changes for review. A later
-editorial UI can support draft, source review, and publication, with revisions,
-attribution, corrections, and disagreement retained. Apply the initial editorial
-authority below; credentials alone do not substitute for sources.
+=== Decision: stable records with reviewed revisions
 
-AI may assist extraction, normalization suggestions, and missing-field checks.
-Its output remains a candidate with a traceable source, never an automatic
-historical authority or a reason to invent missing evidence.
+Records keep stable identities across corrections. The current published
+content is what the chapter's approved commit contains. Corrections are
+distinct from scholarly disagreement, which stays in the current content under
+the main-account policy. Stands in substance; the mechanism is the one above.
 
-=== Decision: owner-led initial editorial review
-
-Darwin, the project owner, is the initial editor and may approve his own sourced
-work for the first public release. A second reviewer or specialist is not a
-mandatory publication gate. Invite specialist review when available and useful,
-without describing self-reviewed material as independently or expertly reviewed.
-
-Require citations and a documented review checklist before publication, including
-checks for source support, attribution, date/location uncertainty, the distinction
-between attestation and scholarly interpretation, and reuse rights. Record the
-reviewer and the content revision approved, including when author and reviewer
-are the same person. This applies to the initial content-file workflow, not only
-to a future editorial application.
-
-Self-review does not permit unsupported claims or original contributor hypotheses
-in public content. External contributors can propose changes, but publication
-requires the initial editor's approval; broader delegation remains to be defined.
-AI assistance does not constitute editorial approval.
-
-=== Decision: stable records with reviewed revisions and public correction history
-
-An event, relationship, or other historical record has a stable identity across
-multiple revisions. Its normal URL shows the latest published revision, not an
-unreviewed draft. Preserve published revisions and expose a reader-facing history
-of what changed, why, and the supporting sources; readers need not understand Git
-commits to follow corrections.
-
-Each revision preserves its content, citations, author, and change explanation.
-Publication records the approving editor, the exact revision approved, and when
-approval and publication occurred. A draft correction leaves the previous
-published revision visible until the correction is approved and published.
-Publish related changes as a consistent set of record revisions so an event and
-its relationships do not expose incompatible intermediate updates.
-
-For the initial file-based workflow, use Git history with explicit editorial
-metadata alongside the content. A commit alone is not editorial approval or
-publication. Retain the history needed to serve prior published revisions and
-their correction explanations. This does not require readers to select numbered
-chapter editions or require a custom branching-and-merging system.
-
-Corrections are distinct from scholarly disagreement: if competing claims remain
-supported, preserve them in the current revision under the main-account and
-cited-alternatives policy rather than hiding one in an older revision.
-
-If editing later moves into PostgreSQL, preserve these semantics with immutable
-revision records and a reference to the current published revision, retaining
-consistent publication across related records. The migration must preserve
-stable identities, published history, and approval metadata without introducing
-two writable authorities.
+Contributors propose changes to the authoring file; publication requires the
+owner's approval. Broader delegation is defined when a second editor exists.
+AI may assist extraction and checking; its output is a candidate with a
+source, never an approval.
 
 == Alternatives and trade-offs
 
-Live queries against public knowledge services avoid an import pipeline but
-introduce availability, consistency, and review problems; prefer curated releases.
-A universal event table with one year and coordinate is simple but cannot
-represent uncertainty or relationships. A full scholarly ontology before the
-first chapter is costly; begin with the smallest explicit model that preserves
-the distinctions above and version its interchange format.
+Keeping the per-record revision and set machinery would preserve a
+multi-editor publication model that has no second editor and that made
+thirty-four events a three-week job. A database now would add migration work
+without a demonstrated query need. The compact format with Git history keeps
+every distinction the contract makes and removes the ceremony.
 
 == Open questions
 
-* Which specific Japanese mission to Tang China, sources, and learning/adaptation links define the first curated release selected in RFD 1, and where would optional specialist review be most useful?
-* What exact date normalization and interval semantics should be standardized?
-* What future delegation of publication authority suits external contributors beyond the initial owner-led review?
+* CHGIS and CBDB adoption, for the owner's decision.
+* The shape of the reader-facing correction history once the atlas has one.
+* When a second editor appears, how publication authority is delegated.
 
 == Implementation
 
-See link:IMPLEMENTATION.adoc[RFD 2 implementation checklist]. This RFD defines
-the evidence and domain requirements; it does not assert that a dataset, schema,
-importer, or editorial workflow already exists. link:../0004/README.adoc[RFD 4]
-owns the public-PoC release criteria, including the reviewed launch-content and
-attribution requirements the first chapter must meet. Wave 1 evidence is in the
-link:TANG_MISSION_FEASIBILITY.adoc[source-feasibility report] and
-link:CONTRACTS.adoc[historical data, time, geometry, and publication contract].
-The Gate 1 mission and coverage decision is in
-link:../0004/GATE1_DECISION.adoc[RFD 4's Gate 1 decision record], and the first
-reviewed chapter content is `historical/chapters/tang-mission-750-754/`.
+See link:IMPLEMENTATION.adoc[RFD 2 implementation checklist]. RFD 1 owns the
+visual grammar that draws what this RFD publishes; RFD 3 owns the domain and
+scene types that carry it; RFD 4 owns the release criteria.

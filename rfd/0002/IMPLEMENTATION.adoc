@@ -1,70 +1,42 @@
 = RFD 0002 implementation checklist
 
-Implements link:README.adoc[RFD 2: Historical data, time, and evidence].
+Implements link:README.adoc[RFD 2: Historical data, time, and evidence], as
+revised on 2026-10-10. Completed items keep their evidence; open items are the
+content roadmap, ordered so the Tang chapter improves every week.
 
-== Phase 0 — Content and contracts
+== Done before the revision
 
-- [x] Compare up to three Tang missions in one initial desk-research pass using accessible sources and owner-supplied references under RFD 1; return findings before deeper research, purchases, or outreach, recommending a concrete content inventory with bibliography, coverage limits, evidence/rights gaps, and optional specialist-review needs, or reporting that no candidate is sufficiently supported; document the initial editor's review checklist and approval record, permitting self-review without implying independent specialist review. Evidence: link:TANG_MISSION_FEASIBILITY.adoc[Wave 1A feasibility report] and link:CONTRACTS.adoc[publication review contract].
-- [x] Define portable identifiers, claim citations, source locators, and reuse metadata, including historical names with sourced language/script forms, temporal validity, and explicit romanization/translation relationships. Evidence: link:CONTRACTS.adoc[Wave 1B contract record] and `historical/v0`.
-- [x] Specify BCE/CE, calendars, precision, uncertainty, and interval boundary semantics. Evidence: link:CONTRACTS.adoc[Wave 1B contract record] and the time vectors.
-- [x] Distinguish event duration from uncertain occurrence and define partial ordering. Evidence: link:CONTRACTS.adoc[Wave 1B contract record] and the time and ordering vectors.
-- [x] Define geometry validity, approximate locations, and route interpretation metadata. Evidence: link:CONTRACTS.adoc[Wave 1B contract record] and the geometry vectors.
+- [x] Source-feasibility pass over three Tang missions with a recommendation and coverage model. Evidence: link:TANG_MISSION_FEASIBILITY.adoc[the Wave 1A feasibility report].
+- [x] The v0 contract: identifiers, claims, locators, reuse metadata, names with script forms, time semantics, ordering, geometry interpretation, publication, and the 187 adversarial vectors. Evidence: link:CONTRACTS.adoc[the Wave 1B contract record], `historical/v0`.
+- [x] Two chapters in the contract, owner-approved, served: `tang-mission-750-754` (29 events) and `qin-conquest-han-233-226` (5 events). Evidence: link:PUBLICATION_APPROVAL.adoc[the publication approval gate].
+- [x] Disputed accounts published with their alternatives and shown in the card; unplaced records listed without an invented position.
 
-== Phase 1 — Curated records
+== Decide (first week)
 
-- [ ] Implement stable record revisions, reviewer permissions, and draft-to-publication transitions using Git history and explicit editorial metadata; expose the latest published revision and readable correction history, publishing related record changes consistently.
-- [x] Add schema-validated content covering a campaign, exchange, and institutional relationship. The Qin comparison fixture adds all three, schema-validated and contract-validated: a campaign (the 230 BCE annexation), exchanges (the 233 BCE submission/embassy and the 231 BCE cession), and institutional relationships (the cession's changed boundaries and the 潁川 commandery's institutional change). The fixture is a preparation snapshot, not release content.
-- [ ] Review imported candidates and preserve their external identifiers and licenses; verify historical/local-script labels and local-script/romanized search aliases without conflating successor places, and record the initial editor's approval of the published content revision in the file-based workflow.
-  - The approval portion is done for both chapters: the owner's editorial approval of the published Tang revision was recorded on 2026-09-25 and of the corrected Qin revision on 2026-09-27, both in link:../0002/PUBLICATION_APPROVAL.adoc[the publication approval gate]. The search-alias portion is implemented: the projection carries each place's and actor's published name forms, romanizations, and translations as search aliases, and deliberately excludes the contract's modern equivalents, because those are kept out of the historical name list and must not become the string that finds a historical place (`src/lib/atlas/projection.ts`, `search.test.ts`, link:../0003/CHAPTER_READER_ROUTE.adoc[the chapter reader-route decision]). The item stays open for the successor-place checks and the critical-edition re-check of the cited transcriptions, which the ledger rows keep open.
-- [x] Represent contradictory accounts and records lacking exact dates or map positions; present an attributed main account with a visible dispute indication and cited alternatives in the detail panel, without merging competing claims or requiring switchable map interpretations.
-  - Content: 韓非's death is published as one disputed record with three cited accounts and a dispute summary, and 雲陽, 南陽, and 潁川郡 carry `unknown` geometry rather than invented positions; the Tang chapter publishes its own disputed records the same way. Surface: the shared chapter surface marks a disputed record in the event list and shows the record's published summary with the accounts that challenge it and their locators in the details panel, on both chapters — the badge and the accounts are no longer a review-only presentation (link:../0003/CHAPTER_READER_ROUTE.adoc[the chapter reader-route decision]). An event the atlas cannot place keeps its place name, its reason, and its record's own note instead of a coordinate, and the panel states the date precision and the occurrence mode. Browser-checked on both chapters.
-- [ ] Verify every published relationship has a cited evidentiary basis; distinguish attested claims from cited scholarly interpretations, label schematic geometry separately, and exclude original contributor hypotheses from public content.
-  - Both chapter suites pin the content side: every published relationship carries cited claims, neither chapter publishes route or schematic geometry, and no published revision carries research notes. The details surface now labels placement kinds and shows each claim's citation with its source, locator, and quotation, but it does not yet state a claim's `basis` (`attested` versus `cited_interpretation`) or open a relationship, so the item stays open.
+- [ ] Record the gazetteer decision (CHGIS CC BY-NC, CBDB) with attribution text; Wikidata and Pleiades are adopted by this RFD.
+- [ ] Design the compact per-chapter authoring format and the compiler to the v0 contract; keep claims, citations, precision, and attestation versus interpretation.
 
-[NOTE]
-====
-The Tang chapter fixture (`historical/chapters/tang-mission-750-754/`) now
-exercises the file-based workflow for one chapter: stable identities, sealed
-revisions, publication sets that record self-review and a complete review
-checklist, cited claims on every published place, actor, event, and relationship,
-and readable correction history through `Publication.history/2`. The browser
-atlas renders the newest published revision of that chapter through the
-browser-safe boundary in `src/lib/atlas/chapter-content.ts` and
-`projection.ts`: records with no sourced map position stay listable and
-unmarked, a display anchor is never shown as an asserted location, and an
-undated or open-ended occurrence fails the projection instead of being guessed
-(link:../0003/CONTENT_BOUNDARY.adoc[the chapter content boundary decision]).
+== Fix the places we have
 
-The bounded Qin chapter (`historical/chapters/qin-conquest-han-233-226/`) carries
-the campaign, exchange, and institutional content in the same contract, and loads
-through the browser-safe catalog recorded in
-link:../0003/COMPARISON_FIXTURE_BOUNDARY.adoc[the comparison fixture boundary
-decision] — now the loader for every served chapter, with the served list in
-`src/lib/atlas/chapter-registry.ts`. An internal review prepared twelve
-source-fidelity corrections, the owner asked to review them before deciding, and
-then approved the corrected preparation on 2026-09-27, so the chapter is served
-like the Tang chapter at `/chapters/qin-conquest-han-233-226` and each corrected
-record still keeps the revision it replaced as unpublished history
-(link:../0003/CHAPTER_READER_ROUTE.adoc[the chapter reader-route decision]). Both
-chapters' approvals are recorded in
-link:../0002/PUBLICATION_APPROVAL.adoc[the publication approval gate]. The Phase 1
-items that stay open are the relationship surface, the claim-basis labelling, the
-successor-place checks, and the critical-edition re-check of the cited
-transcriptions. The Gate 1 mission and coverage decision is in
-link:../0004/GATE1_DECISION.adoc[RFD 4's Gate 1 decision record].
-====
+- [ ] Replace every city-centre display anchor with the best cited site or locality coordinate (Wikidata, Pleiades, CHGIS once decided); target 0 remaining where a site exists. First: 黃泗浦, 含元殿 (the Daming Palace), 平城宮, 大宰府, 東大寺, 唐招提寺, 揚州's temples where identified, 新鄭, 陽翟.
+- [ ] Publish the 753 return voyage and 鑒眞's 754 overland leg 大宰府 → 難波 → 平城京 as `schematic_link` geometry through the dated places.
+- [ ] Clear and add the first media set with per-file rights and depiction labels.
 
-== Phase 2 — Persistence and contributions
+== Widen the chapters
 
-- [ ] Move to the RFD 3 store when needed without creating two writable sources of truth.
-- [ ] Add editorial tools only after the content-file workflow reveals concrete needs.
+- [ ] Tang: the 630–894 missions as a sparse network layer, 鑒眞's 743–748 crossings as a second story, 圓仁's 838–847 diary as a third. Target 200+ events, 60+ placed places, 5+ routes, 20+ images.
+- [ ] Qin: dated control snapshots for Han (233, 230 BCE) cited as interpretations, extended to 230–221 BCE.
+- [ ] Migrate both chapters to the authoring format; retire the per-set digest ledger and its test once the per-chapter approval is enforced by the build.
+- [ ] Claim basis (`attested` versus `cited_interpretation`) shown in the card; relationships openable from an arc.
 
-== Acceptance evidence
+== Review before release
 
-- [ ] Test BCE/CE boundary cases, uncertain dates, calendar conversions, and range endpoints; verify wholly undated events remain discoverable through search, connections, and a "Date unknown" list but are absent from time-filtered map results, chronological stepping, and playback, and opening them does not change time or mislabel them as outside the window.
-- [ ] Test asymmetric overlapping intervals and events with only partial ordering; verify the default includes a 730–760 CE uncertain occurrence as a visibly uncertain possible match for 740–750 CE, excludes disjoint ranges, and does not invent an exact date or duration during playback. The contract-level evidence is in `historical/v0/vectors/time.json` and `ordering.json`; visible UI integration remains Phase 1 work.
-- [ ] Verify a draft correction leaves the published version visible, publication updates the stable URL while retaining prior published revisions and approval metadata, related changes appear consistently, and correction history does not replace current historical uncertainty or disagreement. Publication vectors and contract tests cover the file-based semantics; stable route integration remains Phase 1 work.
-- [ ] Confirm no route animation or territory interpolation asserts unsupported history; verify approximate points and source-supported areas carry non-color-only uncertainty cues and source explanations, display anchors are not asserted coordinates, no unsupported radius or boundary is generated, and wholly unlocated records remain accessible without fabricated map positions.
-- [ ] Audit source locators, attribution, and media redistribution rights for the first release.
-- [ ] Record the launch-chapter approval, source locators, attribution, and media redistribution audit against the RFD 4 release build and criteria AC2 and AC7.
-  - The launch-chapter approval is recorded in link:../0002/PUBLICATION_APPROVAL.adoc[the publication approval gate] (2026-09-25, exact set digest). The source-locator re-check against critical editions and the media redistribution audit remain open, and no media is published.
+- [ ] One batched critical-edition re-check of locators cited from unproofread transcriptions.
+- [ ] Attribution, licence, and media audit against the release build (RFD 4 AC7).
+- [ ] The owner's per-chapter approval recorded for the content the release serves.
+
+== Later
+
+- [ ] A reader-facing correction history from Git history.
+- [ ] Delegation of publication authority when a second editor exists.
+- [ ] A database only when a demonstrated editing or query need justifies it.

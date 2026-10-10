@@ -17,7 +17,7 @@ const LEVEL0_ERROR = 77067 // Cesium's level-0 geometric error for 65-sample til
 const G = 65
 
 export class Globe {
-  constructor({ tilesUrl, tileset, exaggeration, maxSSE = 2, overlay = null, maxInflight = 10 }) {
+  constructor({ tilesUrl, tileset, exaggeration, maxSSE = 4.5, overlay = null, maxInflight = 10 }) {
     this.url = tilesUrl; this.avail = tileset.available; this.maxLevel = tileset.maxLevel
     this.K = exaggeration; this.maxSSE = maxSSE; this.overlay = overlay; this.maxInflight = maxInflight
     this.MAXH = 9000 * exaggeration   // above any terrain on Earth: the roots' bound before they load

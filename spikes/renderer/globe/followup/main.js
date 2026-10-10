@@ -44,7 +44,7 @@ Object.assign(sun.shadow.camera, { left: -40000, right: 40000, top: 40000, botto
 
 // ---- the globe, with the draped polygon as an overlay ----
 const overlay = new DrapedOverlay(extra.polygons.map(p => ({ id: p.id, rings: p.rings, fill: p.fill, stroke: p.stroke, widthPx: p.widthPx })))
-const globe = new Globe({ tilesUrl: new URL(spec.tiles, location.href).href, tileset, exaggeration: K, maxSSE: +(qs.get("sse") ?? 3), overlay })
+const globe = new Globe({ tilesUrl: new URL(spec.tiles, location.href).href, tileset, exaggeration: K, maxSSE: +(qs.get("sse") ?? 4.5), overlay })
 scene.add(globe.group)
 
 // ---- atmosphere rim (never picked) ----

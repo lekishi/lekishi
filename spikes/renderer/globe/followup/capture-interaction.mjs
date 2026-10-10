@@ -71,14 +71,19 @@ const findPick = name => p.evaluate(name => {
   for (const [x, y] of pts) { const h = window.spike.pick(x, y); if (h && h.name === name) return { x, y } }
   return null
 }, name)
-for (const [name, cap, file] of [["薩摩国", "Click inside the draped province", "polygon"], ["地点", "Click the ground outside it: position and height", "ground"], ["海", "Click the sea", "sea"]]) {
+const clickByName = async (name, cap, file) => {
   const q = await findPick(name)
   if (q) await click(q.x, q.y, cap, file); else picks.push({ gesture: cap, card: null, note: "no point on screen picks " + name })
 }
+await clickByName("薩摩国", "Click inside the draped province", "polygon")
+await clickByName("海", "Click the sea", "sea")
 // 5. the arc, from farther out
 await p.evaluate(() => window.spike.fly(0.28)); await p.evaluate(() => window.spike.settled(60000)); await p.evaluate(() => window.spike.explore())
 await ui(mx, my, "", "Relationship arc across the sea"); await hold(4)
 q = await p.evaluate(() => window.spike.arcScreen(0)); await click(q.x, q.y, "Click the arc: the relationship card", "arc")
+// bare ground: at the diorama every bit of land outside the province carries
+// trees or houses, which take the click first, so it is picked out here
+await clickByName("地点", "Click the ground: position and height", "ground")
 
 await browser.close()
 writeFileSync(join(out, "interaction.json"), JSON.stringify({ frames: n, picks, errors }, null, 2))

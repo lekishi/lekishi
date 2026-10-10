@@ -1,6 +1,7 @@
 # Renderer spike, globe phase: one flight on three globes
 
-The region-scale phase (`../`) compared the diorama alone. The owner's
+The region-scale phase compared the diorama alone (its code is in the history
+at commit `9337056`). The owner's
 requirement is the globe: a reader explores an era across the whole Earth and
 zooms freely from the globe to the diorama and back. This phase flies the same
 path on three globes built from the same files, and measures them the same way.
@@ -11,6 +12,10 @@ The record is `rfd/0003/RENDERER_SPIKE.adoc`. Nothing here ships in the artifact
 | Cesium | `cesium/` | CesiumJS with the shared quantized-mesh terrain (normals on) and the shared imagery |
 | Three.js + 3d-tiles-renderer | `tilesjs/` | `TilesRenderer` with `QuantizedMeshPlugin` and an `XYZTilesOverlay` on the same files |
 | Custom Three.js globe | `custom/` | A purpose-built quadtree globe reading the same heights and imagery |
+| Custom globe follow-up | `followup/` | The custom globe as a module, with `GlobeControls`, picking, a draped polygon, an arc, tighter level of detail, and a real-device bench |
+
+`custom/` is kept exactly as captured in the comparison; `followup/` is where
+the custom globe continued.
 
 ## The shared tileset
 
@@ -68,3 +73,24 @@ scene's vertical exaggeration (2.2) to terrain and symbols alike.
     node spikes/renderer/serve.mjs                           # serves the repo on :4300
     open http://127.0.0.1:4300/spikes/renderer/globe/cesium/
     node spikes/renderer/globe/capture.mjs cesium            # → spikes/renderer/globe/out/cesium/
+
+## The follow-up
+
+`followup/` answers the four questions the globe phase left open for the
+custom globe. It speaks the same `window.spike` API, so `capture.mjs followup`
+captures it like the others, and adds:
+
+- `pick(x, y)`, `screenOf(lon, lat, h)`, `arcScreen(i)` and `explore()` for
+  scripted interaction; `followup/capture-interaction.mjs` drives real mouse
+  input through them and writes `out/followup/interaction.mp4` and the pick
+  stills;
+- `?sse=N` to set the level-of-detail target (pixels of geometric error);
+- `?bench=N` to play the flight in real time for N seconds and report frame
+  times on the device in hand.
+
+Real devices on the same network:
+
+    HOST=0.0.0.0 node spikes/renderer/serve.mjs              # listens on the LAN
+    open http://<this machine's address>:4300/spikes/renderer/globe/followup/?bench=24
+
+The report box has a Copy button; paste it into the record.

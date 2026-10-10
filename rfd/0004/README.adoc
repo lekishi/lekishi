@@ -1,238 +1,165 @@
 :authors: Darwin D Wu <darwin67@users.noreply.github.com>
 :state: discussion
 :discussion: https://github.com/lekishi/lekishi/pull/5
-:labels: release, delivery, acceptance, poc
+:labels: release, delivery, acceptance, roadmap, poc
+:revised: 2026-10-10
 
-= RFD 4 Public PoC release charter
+= RFD 4 Public release charter and roadmap
+
+== Revision note
+
+Revised on 2026-10-10 on the owner's instruction. The earlier charter planned
+the work as waves and gates (feasibility, contracts, foundation, fixtures,
+baseline, treatment comparison, loop, hardening, launch) and eight acceptance
+criteria, all about verification and none about whether a reader learns or
+enjoys anything. Gates 1 and 2 were passed and the result was an atlas the
+owner is not happy with. This text replaces that plan with a roadmap whose
+every step lands something a reader can see. link:GATE1_DECISION.adoc[The
+Gate 1 decision record] stays readable and its mission and coverage decision
+stands.
+
+== Where the project is
+
+Measured on 2026-10-10 at `main` @ 7e45af4, from the served build:
+
+[cols="1,1,3",options="header"]
+|===
+|Area |Number |Reading
+
+|Commits on `main` |14 |Four of them docs and process.
+|RFD and decision prose |6,228 lines |More governance than application code.
+|Application and contract code |about 10,200 lines, 311 tests, 3 browser projects |Clean, typed, well tested.
+|Content |2 chapters: 34 events, 19 places, 18 actors, 13 relationships, 15 sources |1.2 MB of JSON in 129 files, about 35 KB per event.
+|Places with an asserted historical coordinate |0 of 19 |13 anchored at modern city centres, 4 approximate, 2 unplaced.
+|Routes, areas, images |0 |Nothing drawn but points.
+|Events on one anchor (Tang) |10 of 29 at 平城宮 |Seven labels overprint at the default camera.
+|Deployment |live at `lekishi.pages.dev` |Static, provider-free, previews per pull request.
+|===
+
+The build, the tests, the invariant, and the publication gate all pass. The
+problem is not a bug; it is that the plan measured the wrong things.
 
 == Goal
 
-Deliver a publicly accessible browser proof of concept that shows one reviewed
-Japanese mission to Tang China through the complete first-chapter exploration
-loop. The owner has set public deployment as the PoC goal: implementation is now
-planned, while creating provider accounts, purchasing anything, and performing
-the external deployment remain separately authorized actions. Meeting this
-charter does not by itself promote the experiment stack to a final production
-decision.
+A publicly accessible atlas in which a reader can follow the 752–754 embassy
+and 鑒眞's crossing on a map worth looking at, with the sources one click
+away, and then explore the network of missions around it. The site is already
+public; what the charter now gates is the announcement, which waits until the
+Tang chapter renders its hero.
 
-== Relationship to RFDs 1–3
+== Principle
 
-link:../0001/README.adoc[RFD 1], link:../0002/README.adoc[RFD 2], and
-link:../0003/README.adoc[RFD 3] remain the owners of product interaction,
-historical meaning and evidence, and browser architecture. This charter changes
-none of their decisions. It records that their implementation is now planned and
-defines the release-level criteria the implementation must satisfy. Historical
-contracts and behavior fixtures remain renderer-independent, as RFD 2 and RFD 3
-require.
+Show, then qualify (link:../0001/README.adoc[RFD 1]). Draw what the sources
+support, qualify what is reconstructed in the visual grammar, and keep
+editorial status to one line in an About sheet. Content and experience are the
+deliverables; process exists to serve them and is sized for one editor
+(link:../0002/README.adoc[RFD 2]).
 
-=== Decision: implementation is planned; external deployment stays gated
+== Roadmap
 
-RFDs 1–3 said their decisions did not launch implementation or deployment. That
-timing statement is superseded: with public deployment set as the PoC goal,
-implementation of the approved Phoenix + Svelte/TypeScript + Vite experiment
-with Cesium evaluated first is planned under this charter, and installing that
-experiment stack is part of that implementation. What is not superseded:
-PostGIS, the historical-content database migration, and any external account,
-purchase, domain, or deployment still require explicit later authorization.
-This charter alone authorizes no account creation, spend, or deploy action.
+Three tracks in parallel. Each has an exit a reader sees. The owning
+checklists hold the items; this charter holds the order and the exits.
 
-== Definition: publicly accessible PoC
+=== Track 0 — Decide and unblock (one week)
 
-A publicly accessible PoC is a production release build of the Lekishi browser
-application, served from a stable public HTTPS URL, that a reviewer can open
-without special instructions and use to explore one reviewed Japanese mission to
-Tang China through the first-chapter loop: globe-to-local navigation, selection
-and details, sources, search, timeline, and playback. It demonstrates the
-product direction and evidence quality; it is not a claim of complete historical
-coverage, production hardening, or a final stack decision.
+. The Tang hero mockup, approved by the owner (RFD 1).
+. PR #14 closed by decision; the treatment comparison retired (RFD 1, RFD 3).
+. The compact authoring format designed and the per-chapter approval
+  defined (RFD 2).
+. Gazetteer rights decided: CHGIS and CBDB (RFD 2).
+. The two-day MapLibre spike run and the renderer decided (RFD 3).
 
-It is not publicly accessible if it requires the Vite development server, a
-private network, or per-reviewer setup such as a personal token. A private or
-credential-gated preview may support internal review, but it does not satisfy
-the public-route criterion.
+Exit: five recorded decisions.
 
-== Acceptance criteria
+=== Track 1 — The map worth looking at (four to six weeks)
 
-Each criterion is verifiable on the deployed release build and on the agreed
-devices. link:IMPLEMENTATION.adoc[RFD 4's implementation checklist] records the
-verification evidence; the criteria are referenced, not restated, in the RFD 1–3
-checklists, which own the work inside each stage.
+Basemap, labels, places first, journey lines, arcs, control snapshots, the
+timeline strip, the chrome diet, nearby and connected lists, layers, reduced
+motion (RFD 1 checklist; RFD 3 for the rendering and the basemap pipeline).
 
-=== AC1 Public HTTPS route
+Exit: the served Tang chapter beside its hero, judged by the owner.
 
-* The release is reachable at a stable public HTTPS URL; HTTP redirects to HTTPS
-  with a valid certificate and no mixed-content or certificate warnings on a
-  current desktop browser or the physical iPad.
-* A reviewer needs only the documented URL, without authentication, personal
-  tokens, or per-reviewer setup, to open the launch chapter.
-* A documented health endpoint responds successfully over the public URL.
+=== Track 2 — The data worth exploring (continuous from week one)
 
-=== AC2 Reviewed launch content
+Site coordinates for every anchor that has one, the 753 voyage and the 754
+overland leg as schematic links, the first cleared images, the embassy
+network, 鑒眞's crossings, 圓仁's diary, the Qin control snapshots, the
+chapters migrated to the authoring format (RFD 2 checklist).
 
-* The launch chapter is one source-checked Japanese mission to Tang China with
-  selected travel, encounter, and learning/adaptation claims, bounded by RFD 1
-  and reviewed under RFD 2.
-* Every published event, place, actor, and relationship carries citations, and
-  the owner's editorial approval is recorded for the published revision
-  (self-review permitted, not described as independent specialist review).
-* Uncertainty, approximate locations, disputed accounts, and coverage limits
-  are visible; attested claims and cited scholarly interpretations are
-  distinguished; no unsupported or original-hypothesis claim is published.
+Exit: a journey can be followed end to end with its sources; the Tang chapter
+holds 200 or more events; the Qin chapter has a shape.
 
-=== AC3 Required exploration loop
+=== Track 3 — Announce and learn
 
-* A reviewer can move from the globe to the chapter's local area, select an
-  event, read its story, sources, participants, and separate nearby/connected
-  lists, and follow connections.
-* Search, layer controls, timeline/playback, and a non-map event list are
-  present.
-* Playback advances a playhead within a fixed exploration window and stops at
-  its end; chronological stepping stays separate from explicit "Next in story"
-  jumps.
-* Bounded uncertain occurrences appear as visibly uncertain possible matches;
-  wholly undated events stay discoverable outside time-filtered results; no
-  exact date or duration is invented.
-* A selection excluded by the time window keeps its details with an
-  outside-selected-time notice and an explicit return action, without retaining
-  its map marker.
-* Manual pan or zoom stops camera following without pausing playback; following
-  stays off until explicitly resumed at the current playback position.
+After Track 1's exit and the release criteria below: announce the Tang
+chapter publicly, record what readers do and ask, and choose the next chapter
+from that.
 
-=== AC4 Production-built assets
+== Release criteria
 
-* The deployed application serves Vite-built JS/CSS and the selected renderer's
-  production resources — Cesium workers, styles, runtime resources, and models
-  if Cesium is selected — from the release artifact; the Vite development server
-  is neither running nor required.
-* Static assets are digested and served through the production cache manifest,
-  and the existing Phoenix pages still work.
-* A documented build command produces the deployed artifact from a clean
-  checkout.
+Verified on the deployed build on the agreed devices before the announcement.
 
-=== AC5 Device scope
+=== RC1 The hero renders
 
-* The loop passes on desktop/laptop browsers with mouse and keyboard and on a
-  physical iPad-class tablet with touch.
-* The phone layout is usable for navigation, selection, and details without
-  claiming full exploration parity.
-* The device/browser matrix and measurable performance thresholds are agreed
-  and recorded before the comparative measurements; acceptance meets them and
-  records remaining limitations. Generated images and desktop viewport or touch
-  emulation are not accepted as tablet evidence.
+The served Tang chapter matches its approved hero on desktop and on a physical
+iPad: relief basemap, collision-free labels, the voyage's schematic line, the
+transmission arc, the timeline strip, and an image in the card.
 
-=== AC6 Accessibility
+=== RC2 A journey can be followed
 
-* Keyboard-only exploration reaches search, timeline, selection, details, and
-  story navigation.
-* Touch controls work on the tablet; reduced-motion preference is respected;
-  uncertainty and relationship cues do not depend on color alone; the event
-  list is readable and usable without the map.
+A reader can select the 753 return voyage, step or play through its dated
+landfalls on the map and the timeline, open each landfall's card, and reach
+each citation's locator and quoted text within two clicks. The same holds for
+鑒眞's crossing to 東大寺.
 
-=== AC7 Attribution and rights
+=== RC3 Everything drawn is traceable
 
-* Sources, providers, media, and datasets carry their required attribution in
-  the release, with licenses and reuse terms recorded.
-* No imagery or substantial text is reproduced without suitable rights;
-  generated illustrations are labelled as design references, never as evidence.
-* Map, imagery, terrain, and model provider terms are satisfied; offline use is
-  not promised unless the rights review permits it.
+Every marker, line, polygon, arc, and image on the chapter traces to a cited
+claim with the interpretation it carries (attested, identified, schematic,
+reconstructed, snapshot, depiction) visible in the card. No position, route,
+or boundary is invented. Disputed accounts are marked and their alternatives
+shown. Undated events are reachable outside time-filtered results.
 
-=== AC8 CI, health, error visibility, and recovery
+=== RC4 It is fast enough to explore
 
-* CI passes on the commit being released: formatting, linting, compilation with
-  warnings as errors, tests, and a production asset build.
-* The deployed release exposes a health endpoint and records application errors
-  where the owner can review them.
-* Deployment steps are documented and repeatable, and a rollback or recovery
-  path is documented and exercised: redeploy the previous release artifact or
-  restore the last known good content revision.
+Interactive within three seconds on a mid-range phone; sixty frames per second
+during pan and playback on the desktop and the iPad; payload per chapter
+recorded. Keyboard-only exploration reaches search, timeline, selection,
+details, and story navigation; reduced motion is respected; cues do not
+depend on colour alone; the event list works without the map.
+
+=== RC5 Rights
+
+Sources, datasets, basemap data, and media carry their attribution and
+recorded terms; nothing is reproduced without suitable rights; later
+depictions are labelled. Unchanged in substance from the earlier AC7.
+
+=== RC6 Operations
+
+CI green on the released commit (format, type check, tests, build, browser
+suite); a documented deploy with a rollback exercised once; a health path and
+error visibility the owner can read. Unchanged in substance from the earlier
+AC8, minus the Phoenix-era health endpoint.
 
 == Non-goals
 
-The PoC does not imply or require:
+* A database or PostGIS before a demonstrated need.
+* Native applications before the native checkpoint in RFD 3.
+* Editorial tooling or contributor permissions before a second editor.
+* Offline maps before a rights review.
+* A production stack decision: the stack remains an experiment promoted by
+  the measured result.
 
-* PostGIS. Displaying points, routes, or GeoJSON does not by itself require it;
-  adopt it only for a separately demonstrated spatial-query need.
-* A historical-content database migration. Versioned, schema-validated content
-  files remain the first chapter's authority; move to PostgreSQL only when a
-  demonstrated editing or query need justifies it.
-* Native applications. RFD 3's native evaluation remains a separate later
-  checkpoint after the browser loop; no native shell, Flutter, or platform
-  client is a PoC deliverable.
-* Broad application- or database-backed contributor and editorial tooling.
-  Owner-led review under RFD 2, with file-based revision metadata and
-  publication rules, still applies from the first chapter; permissions,
-  editorial transitions, and background jobs wait for demonstrated needs.
-* Offline maps. Provider caching rights are reviewed before any offline
-  promise, and offline behavior is not part of PoC acceptance.
-* Multiple public launch chapters. Qin and other examples remain bounded
-  comparison fixtures, not additional launch chapters.
+== Owner decisions
 
-== Owner decisions that remain later gates
-
-These decisions are not resolved by this charter and do not block this
-charter's acceptance:
-
-* The exact mission, claims, and coverage of the launch chapter, following
-  RFD 2's source-feasibility pass. The owner selected Candidate B and accepted
-  its coverage model on 2026-09-24; the decision and its bounds are in
-  link:GATE1_DECISION.adoc[the Gate 1 decision record]. The owner's editorial
-  approval of the published fixture revision remains open under AC2.
-* Any choice that materially affects historical meaning or the user experience,
-  including the local-detail treatment selected at Gate 3.
-* Paid providers, budget, hosting vendor, and domain.
-* Representative physical test hardware and measurable performance thresholds.
-* Explicit authorization to create accounts, purchase services, and perform the
-  external deployment.
-
-== Dependency order and gates
-
-The checklist sequences the work; the RFD 1–3 checklists own the tasks inside
-each stage.
-
-[source,text]
-----
-Step 0  Release charter (this RFD) and RFD checklist alignment
-Wave 1  Source feasibility (RFD 2) | Data/time contracts (RFD 2) |
-        Technical foundation (RFD 3) | Delivery evaluation (RFD 3)
-Gate 1  Foundations frozen: owner reviews findings, selects the mission,
-        and accepts the delivery approach
-Wave 2  Reviewed Tang fixture | Bounded Qin fixture |
-        Deployment packaging (RFD 3) | Shared comparison harness and baseline
-Gate 2  Common runnable baseline: comparable content, controls, time behavior
-Compare Geographic/symbolic and illustrated-local treatments across Tang and Qin
-Gate 3  Local treatment selected and the experiment renderer resolved: Cesium
-        confirmed, or the bounded MapLibre comparison completed and reviewed
-        because Cesium failed a named requirement
-Then    Complete the browser exploration loop
-        Hardening, integration, browser verification, and editorial approval
-        Physical-iPad acceptance
-        Public launch after explicit owner authorization
-----
-
-Wave 1 runs in parallel, and Wave 2 runs in parallel after Gate 1. The treatment
-comparison must not start before Gate 2, or it would compare unequal features or
-unsupported content instead of the treatments. The fixtures and the shared
-baseline are prerequisites for both treatments, not deliverables of either.
-
-== Open questions
-
-* Which mission, content inventory, and coverage limits does the RFD 2
-  feasibility pass recommend, and which specialist review would most improve
-  the launch chapter?
-* Which hosting, map/imagery/terrain provider, and domain meet the visual,
-  licensing, cost, and delivery needs?
-* Which representative desktop/laptop and physical iPad-class devices define
-  the measured performance targets?
-* Which error-visibility mechanism should the owner use for the deployed
-  release?
+The five in Track 0, plus: a custom domain, an error-reporting provider, and
+any paid provider, each separately authorized. The announcement itself is the
+owner's call once RC1–RC6 hold.
 
 == Implementation
 
-See link:IMPLEMENTATION.adoc[RFD 4 implementation checklist] for the release
-gates and acceptance verification, and the owning checklists in
+See link:IMPLEMENTATION.adoc[RFD 4 implementation checklist] for the
+track exits and release verification, and the owning checklists in
 link:../0001/IMPLEMENTATION.adoc[RFD 1],
 link:../0002/IMPLEMENTATION.adoc[RFD 2], and
-link:../0003/IMPLEMENTATION.adoc[RFD 3] for the tasks within each stage.
-RFD 1 owns interaction behavior, RFD 2 owns historical meaning and evidence, and
-RFD 3 owns browser architecture and delivery.
+link:../0003/IMPLEMENTATION.adoc[RFD 3] for the items.

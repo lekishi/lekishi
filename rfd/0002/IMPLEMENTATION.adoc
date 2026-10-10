@@ -13,8 +13,10 @@ content roadmap, ordered so the Tang chapter improves every week.
 
 == Decide (first week)
 
-- [ ] Record the gazetteer decision (CHGIS CC BY-NC, CBDB) with attribution text; Wikidata and Pleiades are adopted by this RFD.
-- [ ] Design the compact per-chapter authoring format and the compiler to the v0 contract; keep claims, citations, precision, and attestation versus interpretation.
+- [x] Decide the source rule: approved 2026-10-10, sources allowing commercial use with attribution are adopted by default; the register in the RFD records each source's verified terms and status. CHGIS, CCTS, CBDB, and Seshat are not adopted.
+- [ ] Read the terms of every `?` row in link:../../docs/SOURCE_REGISTER.adoc[the source register] on the source's own page (the Japanese gazetteer datasets first), file ColBase's and the Taipei Palace Museum's terms pages, and update the rows.
+- [x] Decide the authoring format: approved 2026-10-10 as a folder per chapter with one small file per record, compiled to the v0 contract at build time, with the content model, approval contract, roles, and staged contribution surface recorded in the RFD.
+- [ ] Build the compiler from record files to the v0 contract, with the CI checks the RFD lists; keep claims, citations, precision, and attestation versus interpretation.
 
 == Fix the places we have
 
@@ -26,7 +28,8 @@ content roadmap, ordered so the Tang chapter improves every week.
 
 - [ ] Tang: the 630–894 missions as a sparse network layer, 鑒眞's 743–748 crossings as a second story, 圓仁's 838–847 diary as a third. Target 200+ events, 60+ placed places, 5+ routes, 20+ images.
 - [ ] Qin: dated control snapshots for Han (233, 230 BCE) cited as interpretations, extended to 230–221 BCE.
-- [ ] Migrate both chapters to the authoring format; retire the per-set digest ledger and its test once the per-chapter approval is enforced by the build.
+- [ ] Migrate both chapters to the record files; retire the per-set digest ledger and its test once the per-chapter approval is enforced by the build.
+- [ ] Stage 2 of the contribution surface when the first regular contributor appears: a structured proposal form with claim, source, and locator fields.
 - [ ] Claim basis (`attested` versus `cited_interpretation`) shown in the card; relationships openable from an arc.
 
 == Review before release

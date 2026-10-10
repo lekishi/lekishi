@@ -1,0 +1,85 @@
+{
+  "note": "Spike data to exercise draping and arcs. Both shapes are schematic stand-ins chosen for the test, not evidence.",
+  "polygons": [
+    {
+      "id": "satsuma-province",
+      "name": "薩摩国",
+      "rom": "SATSUMA PROVINCE · SCHEMATIC EXTENT",
+      "kind": "control snapshot",
+      "caveat": "Schematic outline drawn for the spike; not a sourced boundary.",
+      "fill": "rgba(192, 57, 43, 0.10)",
+      "stroke": "#c0392b",
+      "widthPx": 2.5,
+      "rings": [
+        [
+          [
+            129.95,
+            31.25
+          ],
+          [
+            130.15,
+            31.98
+          ],
+          [
+            130.42,
+            32.1
+          ],
+          [
+            130.62,
+            31.85
+          ],
+          [
+            130.6,
+            31.55
+          ],
+          [
+            130.66,
+            31.3
+          ],
+          [
+            130.68,
+            31.18
+          ],
+          [
+            130.6,
+            31.05
+          ],
+          [
+            130.4,
+            31.12
+          ],
+          [
+            130.15,
+            31.2
+          ],
+          [
+            129.95,
+            31.25
+          ]
+        ]
+      ]
+    }
+  ],
+  "arcs": [
+    {
+      "id": "embassy",
+      "name": "遣唐使",
+      "rom": "EMBASSY · 平城京 → 揚州",
+      "kind": "diplomacy",
+      "caveat": "Schematic relationship arc for the spike; the route is not modelled.",
+      "from": {
+        "name": "平城京",
+        "lon": 135.8,
+        "lat": 34.69
+      },
+      "to": {
+        "name": "揚州",
+        "lon": 119.44,
+        "lat": 32.39
+      },
+      "colorFrom": "#f1cf7a",
+      "colorTo": "#e07a5f",
+      "heightRatio": 0.12
+    }
+  ]
+}

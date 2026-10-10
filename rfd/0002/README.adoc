@@ -151,16 +151,55 @@ their citations in the card. Stands.
 
 == Acquisition
 
-=== Decision: adopt the open gazetteers now
+=== Decision: default to sources whose terms allow commercial use
 
-Wikidata (CC0) and Pleiades (CC BY) are adopted with attribution for place
-identification and coordinates. The World Historical Gazetteer is used per
-dataset with its terms recorded. CHGIS (CC BY-NC) and CBDB are an owner
-decision: the recommendation is to adopt CHGIS with attribution for this
-non-commercial project, because it is the single largest improvement
-available to Chinese place data. Structured data is a candidate fact with a
-source, not a guarantee of accuracy; a gazetteer identification is cited as
-an identification.
+Decided by the owner on 2026-10-10. A dataset, text transcription, or media
+source is adopted by default only when its terms allow commercial use with
+attribution: public domain, CC0, CC BY, ODC-By, or government standard terms
+compatible with CC BY. A source with a non-commercial or share-alike term, or
+with terms the project has not read, is not adopted by default; it needs a
+separate owner decision per source, and anything taken from it must stay
+removable, which is why every coordinate, identification, quotation, and
+image records its dataset of origin. The rule keeps the project free to
+decide its own future rather than inheriting a constraint from a dataset.
+
+Quoting a public-domain text remains quoting the work, whatever the terms of
+the transcription it was read in: the record cites the work and the edition,
+notes the transcription, and re-checks the locator against a critical edition
+before release, as the existing chapters do.
+
+The source register, with the terms verified on 2026-10-10 and the status
+the rule gives each source:
+
+[cols="2,2,2,1",options="header"]
+|===
+|Source |Gives |Terms |Status
+
+|Wikidata |Coordinates including excavated sites, identifiers, name forms |CC0 |Adopted
+|Pleiades |Ancient Mediterranean and Near Eastern places with precision and period |CC BY |Adopted
+|OpenHistoricalMap |Dated features and boundary polygons with start and end dates |Data CC0; boundary tiles public domain; landmass tiles ODbL |Adopted for data and boundaries
+|ColBase (Japan's national museums) |Object images and records |Government standard terms v2.0, CC BY compatible, commercial use allowed with attribution |Adopted, terms page to be filed
+|Natural Earth; SRTM, GEBCO, ETOPO; Terrarium elevation tiles |Coastlines, relief, elevation |Public domain; open with attribution |Adopted
+|Wikisource (zh, ja) |Transcriptions of public-domain texts |Text public domain; transcription CC BY-SA |Quoted as the work, transcription noted
+|NDL Digital Collections |Scans of public-domain editions |Public domain per item |Adopted per item
+|Wikimedia Commons |Reproductions of public-domain works |Per file |Adopted per file where public domain or CC BY
+|The Met, Smithsonian, Cleveland open access |Tang and Buddhist objects |CC0 (to verify once) |Adopt after verification
+|World Historical Gazetteer |Aggregated historical gazetteers |CC BY 4.0 per public dataset; contributor terms vary |Per dataset, after reading its terms
+|日本歴史地名大系 data (CODH, 平凡社) |79,502 Japanese place entries, Edo village identifiers |Not yet read |Verify next
+|歴史地名データ (NIHU) |About 300,000 Meiji to Shōwa place names with coordinates |Not yet read |Verify next
+|Getty TGN |Historical names with dates and coordinates |ODC-By (to verify) |Verify next
+|Kanseki Repository, ctext.org |Public-domain Chinese texts |Site terms not yet read |Verify next
+|CHGIS |Chinese historical places with validity dates |Academic research only; no commercial use, resale, or redistribution |Not adopted; usable only with written permission
+|CCTS (Academia Sinica) |Chinese historical administrative geography |Not published; sister system CC BY-NC-SA 3.0 TW |Not adopted; ask
+|CBDB |Chinese biographical data |CC BY-NC-SA 4.0; later data under non-commercial, no-derivatives terms |Not adopted
+|Seshat |Polity attributes over time |CC BY-NC-SA |Not adopted
+|CBETA; SAT Daizōkyō |Buddhist canon transcriptions |CC BY-NC-SA 4.0, non-profit; non-profit, no redistribution |Not adopted as data; the works are quoted as public-domain texts
+|David Rumsey maps |Historical map scans |CC BY-NC-SA |Not adopted
+|譚其驤 中國歷史地圖集; 讀史方輿紀要 and other historical geographies |Identifications and readings |Copyrighted print; public domain (1692) |Cited as interpretation, geometry never copied
+|===
+
+Structured data is a candidate fact with a source, not a guarantee of
+accuracy; a gazetteer identification is cited as an identification.
 
 === Decision: media is content
 
@@ -282,7 +321,8 @@ every distinction the contract makes and removes the ceremony.
 
 == Open questions
 
-* CHGIS and CBDB adoption, for the owner's decision.
+* Whether to ask CHGIS and CCTS for written permission for a free public
+  atlas, and on what terms the owner would accept it.
 * The shape of the reader-facing correction history once the atlas has one.
 * When a second editor appears, how publication authority is delegated.
 

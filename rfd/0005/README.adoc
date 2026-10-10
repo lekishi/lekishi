@@ -1,0 +1,305 @@
+:authors: Darwin D Wu <darwin67@users.noreply.github.com>
+:state: prediscussion
+:discussion:
+:labels: roadmap, content, visualization, process, poc
+:date: 2026-10-10
+
+= RFD 5 Roadmap reset: from a correct atlas to one worth looking at
+
+== Why this RFD exists
+
+The owner's assessment on 2026-10-10, after inspecting the served build: not
+happy with what has been accomplished so far, both in data quality and in
+visualization. This record states where the project actually is, why the result
+disappoints despite everything being "done", and a roadmap that puts the
+experience and the content first. It proposes; it decides nothing until the
+owner does.
+
+Nothing here rewrites RFD 1–4. Their requirements stand. What changes is the
+order of work, the bar a chapter must clear before it is worth serving, and the
+reading of RFD 2's evidence rules, which the implementation has applied as a
+prohibition on drawing rather than as a duty to qualify what is drawn.
+
+== Where the project is (measured 2026-10-10, `main` @ 7e45af4)
+
+[cols="1,1,3",options="header"]
+|===
+|Area |Number |What it means
+
+|Commits on `main` |14 |Of which 4 are docs/process and 1 is the Phoenix-era scaffold.
+
+|RFD and decision prose |6,228 lines in 17 AsciiDoc files |More lines of governance than of application code.
+
+|Application and contract code |~10,200 lines (excluding tests) |Plus 311 unit/contract tests and 3 browser projects. The code is clean, typed, and well tested.
+
+|Historical content |2 chapters: 34 events, 19 places, 18 actors, 13 relationships, 15 sources |1.2 MB of JSON in 129 files, roughly 35 KB per event. Every record carries a revision envelope, claims, hashes, and a publication pin.
+
+|Places with an asserted historical coordinate |0 of 19 |13 are "display anchors" at a modern city's Wikidata point, 4 are approximate identifications, 2 have no position.
+
+|Events stacked on one anchor (Tang) |10 of 29 at 平城宮 |Every court act is drawn at the same point, so 7 labels overprint each other at the default camera.
+
+|Routes, areas, territory snapshots, images |0 |Not one line, polygon, or picture in either chapter. The contract allows `reconstructed_route` and `schematic_link`; nothing uses them.
+
+|Qin chapter |5 events on 3 anchors |Five dots in Henan and Shaanxi with no connection between them.
+
+|Open work |PR #14 (Gate 2 evidence and the treatment comparison) |3,244 lines added to compare two treatments of content that has nothing local to illustrate.
+|===
+
+The site is live at `https://lekishi.pages.dev`. The build, the tests, the
+static invariant, and the publication gate all pass. By every criterion the
+checklists track, the project is on schedule. That is the problem: the
+checklists measure correctness and process, and neither measures whether a
+reader learns or enjoys anything.
+
+== What the screenshots show
+
+Captured from the built artifact on 2026-10-10 (`.amp/in/artifacts/`, desktop
+1440×900 and phone 390×844):
+
+* *The map is a blur with a pile of labels.* At the default height Natural
+  Earth II is a low-resolution raster with no relief, no coastline detail, and
+  no sense of place. The event labels are drawn unconditionally and collide:
+  "The 節刀 grant and promotions, 752" lies over six other labels at 平城宮.
+  Zooming in to follow a selection shows a green-brown smear with one dot.
+* *Nothing moves and nothing connects.* No route between 蘇州黃泗浦 and the
+  landfalls. No arc between 揚州 and 東大寺 for 鑒眞's transmission. No
+  territory for Han or Qin. The 13 relationships exist only as JSON.
+* *Governance is louder than history.* One screen says "Owner-approved for
+  release, 2026-09-25" three times (header badge, sub-header, notice panel),
+  then "Not independent or specialist review; those remain unperformed", then
+  "2 of 24 in-window events and 1 of 15 places without a sourced map
+  position". Every event row says "display anchor only". The reader is being
+  told what the atlas refuses to claim before being told anything it does.
+* *Titles are caveats.* "The return voyage, 753: documented landfalls only, no
+  route drawn" is an editorial note, not a title; it is also the map label.
+* *Time is a number field.* The window is two `<input type=number>` fields and
+  the playhead is a bare range slider with no ticks, no event marks, and no
+  scale. Playing a 750–754 window takes four steps and shows nothing happening.
+* *The phone view is the same chrome at a third of the width.*
+
+== Diagnosis
+
+=== 1. Rigour was applied as refusal, not as annotation
+
+RFD 2 says: interpolate movement only when "clearly labelled illustrative", use
+"dated political-control snapshots rather than invented continuously moving
+boundaries", and label "schematic route geometry separately from the historical
+claim". Every one of those sentences permits drawing with a label. The
+implementation read them as "draw nothing you cannot prove", so the chapter
+asserts no route, no area, no site, and the domain layer rejects route geometry
+outright (`projection.ts` lists `reconstructed_route` and `schematic_link`
+among the interpretations it refuses). The result is an atlas whose honesty is
+expressed as absence. A reader cannot see the honesty; they see an empty map.
+
+=== 2. The data is thinner than the free sources it cites
+
+The chapter places 黃泗浦 at the centre of modern Suzhou (31.30 N, 120.62 E)
+and labels it "display anchor only". Wikidata, the same CC0 source the record
+cites, has a site-precision item for the Huangsipu archaeological site at
+31.853 N, 120.612 E, about 60 km away. The palace, the temples, 大宰府, and
+the Daming Palace's 含元殿 are all excavated sites with published coordinates;
+the chapter anchors them at modern city centres. The CHGIS gazetteer, Pleiades,
+and the World Historical Gazetteer were deferred at Gate 1 and never revisited.
+The feasibility report's own candidate images (東征伝絵巻, public domain) were
+never cleared. The content is not wrong; it is far less than what was
+available for free, because the process rewarded caution over coverage.
+
+=== 3. The content format is built for a newsroom and used by one person
+
+A place with one point is ~100 lines of JSON with a revision envelope, claim
+ids, a revision hash, and a publication pin, and any change needs a new
+revision, a new set, a ledger row, and a recomputed digest, which the build
+then enforces. RFD 2 already decided the owner may approve his own sourced
+work. The machinery for multi-editor publication exists before a second editor
+does, and it makes every correction a governance event. Thirty-four events
+took three weeks; a chapter that is interesting needs a few hundred.
+
+=== 4. The roadmap measured gates, not the experience
+
+RFD 4's waves and gates are all about verification: Gate 1 freeze, Gate 2
+baseline, Gate 3 treatment, AC1–AC8. None asks "would a reader stay on this
+page for five minutes?" The treatment comparison in PR #14 spent a sprint
+comparing two ways of showing nothing local, and recommended keeping the
+current one. The "Civilization-inspired readable terrain, symbolic settlements,
+and visible interactions" that RFD 1 established as direction has not been
+started.
+
+== Principle change: show, then qualify
+
+Replace "refuse unless proven" with "draw what the sources support, qualify
+what is reconstructed, and make the difference visible in the visual grammar":
+
+[cols="1,2,2",options="header"]
+|===
+|Evidence state |Today |Proposed
+
+|Attested site (excavated palace, temple, port)
+|Modern city-centre anchor, "display anchor only"
+|Solid marker at the site, name in its own script, no caveat badge.
+
+|Identified locality or region (an island, a commandery)
+|Point with "approximate location (region)"
+|Soft-edged marker sized to the precision; the precision is the marker's size, not a text badge.
+
+|Named place with no identification (驩州)
+|Omitted from the map, present in the list
+|Keep it off the map; show it in the event's story card with "location not identified".
+
+|Journey with dated landfalls
+|No geometry; the route is refused
+|Dashed schematic line through the dated landfalls, labelled "schematic, follows the dated landfalls", animated along the playhead. The contract's `schematic_link` already exists for this.
+
+|Reconstructed route from scholarship
+|Refused
+|Dashed line with a citation, `reconstructed_route`, visibly distinct from attested movement.
+
+|Political control at a date
+|Nothing
+|Dated snapshot polygon with a hatched edge, labelled with its date and source; no interpolation between snapshots.
+
+|Relationship (contact, transmission, diplomacy)
+|JSON only
+|Arc drawn on selection, styled by type, with the claim and its citation one click away.
+
+|Editorial status
+|Three banners plus per-row badges
+|One line in the chapter's "About" sheet. Never in a map label or a row.
+|===
+
+Every one of these remains within RFD 2. What changes is that uncertainty
+becomes something a reader can see rather than something that was left out.
+
+== Roadmap
+
+Three tracks, run in parallel, each with an exit condition that is a thing a
+reader sees. Estimates assume one person plus agent assistance at the current
+pace.
+
+=== Track 0 — Decide and unblock (one week)
+
+. *Pick the hero.* One screenshot that defines what "done" looks like for the
+  Tang chapter: a styled relief map of the East China Sea, the four ships'
+  schematic return, 鑒眞's arc to 東大寺, a timeline with the 753–754 events
+  as ticks, one image. Make it (as a mockup, not code), and put it at the top
+  of RFD 1's implementation checklist as the bar.
+. *Close PR #14 by decision.* Accept its recommendation (geographic default,
+  Cesium stays for now), merge the Gate 2 evidence, and drop the
+  `/review/local-treatment/*` route from the artifact. The treatment question
+  is answered by the hero, not by a harness.
+. *Lift the content ceremony for single-editor work.* Keep claims, citations,
+  precision, and the attested/interpretation distinction. Replace revision
+  envelopes, per-record hashes, publication sets, and the digest ledger with:
+  one compact authoring file per chapter (YAML, one entry per place, actor,
+  event, relationship, with citations inline), a build-time compiler to the
+  v0 contract shape the atlas already consumes, Git history as the revision
+  history, and a `published:` flag per chapter the owner flips. The
+  publication-approval test keeps its purpose (nothing unapproved is served)
+  with one row per chapter instead of one digest per set.
+. *Decide the gazetteer rights.* CHGIS is CC BY-NC 4.0: usable for a
+  non-commercial passion project with attribution, and the single largest
+  improvement available to Chinese place data. Pleiades is CC BY. The owner
+  decides; the recommendation is to adopt both with attribution.
+
+=== Track 1 — Make the map worth looking at (four to six weeks)
+
+Each item is independently shippable and visible.
+
+. *Basemap.* Replace Natural Earth II at zoom 0–2 with a self-built, shipped
+  raster from Natural Earth 1:10m hypsometric tints plus shaded relief
+  (GEBCO/ETOPO or SRTM-derived), rendered offline at zoom 0–7 for the chapters'
+  extents and zoom 0–4 globally. No provider, no token, still static. Muted
+  palette, strong coastlines, rivers at zoom ≥ 5. This alone changes the
+  product more than anything since the Cesium mount.
+. *Labels.* Collision-free labels: one label per place, event counts as a
+  badge, label priority by zoom, script-appropriate fonts (Noto Sans CJK for
+  CJK labels, a serif for Latin titles). Event titles become short names;
+  the caveat text moves to the card.
+. *Places first.* The map draws places; events attach to places. A place with
+  seven events shows a "7" and opens a list, instead of seven overprinted
+  labels.
+. *Movement and connection.* Schematic journey lines through dated landfalls,
+  animated with the playhead; relationship arcs on selection; a dated-snapshot
+  polygon type for territory, used first by the Qin chapter.
+. *Timeline.* A real timeline strip replaces the number inputs: event ticks,
+  the window as a draggable brush, the playhead on it, and zoomable scale
+  (centuries → years → months) so a 753 voyage is readable day by day.
+. *Chrome diet.* One header line. The notice panel becomes an "About this
+  chapter" sheet. Editorial state appears once, there. The selection card
+  leads with the narrative and the image, then the sources.
+. *Renderer check, bounded to two days.* Build the basemap and label items on
+  MapLibre GL JS globe in a spike branch and compare: label collision is
+  built in, vector styling is far easier, terrain-RGB is supported, the
+  payload is a third of Cesium's. RFD 3 already names MapLibre as the
+  comparison when Cesium fails a visual requirement; the hero mockup is that
+  requirement. Decide on the spike's screenshots, not on a harness.
+
+Exit: the Tang chapter renders the hero. Measured by a side-by-side of the
+hero mockup and the served page, reviewed by the owner.
+
+=== Track 2 — Make the data worth exploring (continuous, starts week one)
+
+. *Fix the places we have.* Replace every display anchor with the best
+  available site or locality coordinate from Wikidata, CHGIS, or Pleiades,
+  with the dataset cited. Target: 0 of 19 city-centre anchors where a site
+  exists.
+. *Draw the voyage.* Publish the 753 return as a `schematic_link` through the
+  dated landfalls, and 鑒眞's 753–754 overland leg 大宰府 → 難波 → 平城京 the
+  same way. Cite the biography for the landfalls; the line is labelled
+  schematic.
+. *Images.* Clear and add the public-domain 東征伝絵巻 scenes and Wikimedia
+  Commons photographs of 唐招提寺, the Daming Palace site, and 平城宮跡, each
+  with its licence and a "later depiction, not evidence" label where it
+  applies.
+. *Widen the Tang chapter to its network.* The single embassy is a thin
+  story; the embassy system is a rich one. Add the dated missions 630–894 as
+  a sparse network layer (each mission one event at the Japanese and Chinese
+  ends), 鑒眞's five failed attempts 743–748 as a second story, and 圓仁's
+  diary 838–847 as a third. All are in public-domain primary sources already
+  in the citation set or their siblings. Target by the end of the quarter:
+  200+ events, 60+ places with site or locality coordinates, 5+ routes, 20+
+  images.
+. *Give Qin a shape.* Add the dated control snapshots for Han's territory
+  (233, 230 BCE) from the standard historical atlases' readings, cited as
+  interpretations, and extend to the fall of the six states 230–221 BCE so
+  the chapter has a campaign to follow.
+. *Batch the philology.* The critical-edition locator re-check is one pass
+  before a release, not a gate on every edit.
+
+Exit: a reader can follow one journey end to end on the map with the sources
+one click away, and a second chapter has a visible shape.
+
+=== Track 3 — Ship and learn (after Track 1's exit)
+
+. Replace RFD 4's AC list for the first public release with four reader-facing
+  criteria: the hero renders on desktop and iPad; a journey can be followed
+  end to end; every drawn thing can be traced to a citation in two clicks;
+  nothing takes more than three seconds to appear on a mid-range phone.
+  Keep AC7 (rights) and AC8 (CI, rollback) as they are.
+. Announce the Tang chapter publicly, collect reactions, and let the next
+  chapter be chosen from what readers ask for.
+
+== What to stop doing
+
+* Stop adding gates, ledgers, invariants, and decision records ahead of
+  content. A new decision record is warranted when a product decision changes,
+  not for each presentation tweak.
+* Stop labelling the reader's view with the editor's doubts. Doubt belongs in
+  the visual grammar and in the card, not in titles, badges, and banners.
+* Stop measuring the treatment comparison, the payload deltas, and the gate
+  criteria until the map has something to compare.
+* Stop treating "no coordinate asserted" as the safe default when a free,
+  citable site coordinate exists.
+
+== Owner decisions requested
+
+. Accept the principle change (show, then qualify) as the reading of RFD 2.
+. Approve the hero mockup as the bar for Track 1.
+. Decide CHGIS (CC BY-NC) and Pleiades (CC BY) adoption.
+. Authorize the content-format simplification in Track 0.3, including
+  retiring the per-set digest ledger in favour of a per-chapter approval row.
+. Authorize the two-day MapLibre spike.
+. Close or merge PR #14.
+
+== Implementation
+
+Tracked in link:IMPLEMENTATION.adoc[the RFD 5 implementation checklist].

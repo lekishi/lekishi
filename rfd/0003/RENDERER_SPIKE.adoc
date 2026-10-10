@@ -2,7 +2,7 @@
 :toc: macro
 :toclevels: 2
 
-*State:* region-scale, globe-phase and custom-globe follow-up evidence recorded; real-device frame times and the decision open (owner). +
+*State:* region-scale, globe-phase and custom-globe follow-up evidence recorded; iPad frame times recorded; desktop and phone frame times and the decision open (owner). +
 *Date:* 2026-10-10. +
 *Owner of the decision:* the project owner, per link:README.adoc[RFD 3]'s
 "the renderer is decided on the hero, in a bounded spike". +
@@ -802,6 +802,49 @@ Then open `http://<that machine's address>:4300/spikes/renderer/globe/followup/?
 on the desktop, the iPad and the phone, wait 24 seconds, and copy the report.
 `?sse=` changes the detail target for a comparison run. The results belong in
 this record, under this section, with the device names.
+
+==== Results
+
+Reported by the owner from the bench on the Pages preview (commit `7ac0248`),
+detail target 4.5 px, tiles streaming during the run (a cold cache). The
+thresholds are the tablet and desktop rows of
+link:DELIVERY_EVALUATION.adoc[the delivery evaluation] (FR1 median frame rate,
+FR2 95th-percentile frame time, FR3 longest stall). The bench is the globe
+flight rather than FR1's playback protocol, and renders at the device's pixel
+ratio (up to 2), not at CSS resolution, so it is the harder of the two.
+
+[cols="2,2,1,1,1,1,1,2",options="header"]
+|===
+| Device | Browser and viewport | Mean fps | Median frame | 95th percentile | Worst frame | Over 33 ms | Tiles (height + imagery)
+
+| iPad (2026-10-10; model not recorded)
+| Chrome 155 on iPadOS 26.6.2 (WebKit), 820 × 1042 at 2×
+| 55.6
+| 17.0 ms
+| 30.0 ms
+| 99 ms
+| 2.7%
+| 995 + 995
+
+| Desktop | not yet run | | | | | |
+| Mid-range phone | not yet run | | | | | |
+|===
+
+On the iPad the globe holds the display's 60 Hz for most of the flight
+(median 17.0 ms) and meets the tablet thresholds with room: FR1 asks for a
+30 fps median (it ran at about 59), FR2 for a 95th percentile within 66 ms
+(30 ms), FR3 for no stall over 1,000 ms (the worst frame was 99 ms). The slow
+frames coincide with tile streaming; decoding heights and building meshes
+happen on the main thread, and moving them to a worker is the known cure.
+
+The iPad fetched 995 + 995 tiles where the container's capture fetched
+424 + 424. The detail target is measured in device pixels: at 2× and with a
+taller viewport the screen is about 2.3 times as many pixels high, so the same
+target asks for finer tiles. The Cesium spike measures the same way (it also
+renders at device pixels), so the comparison above, made at 1×, still holds.
+Measuring the target in CSS pixels would bring a 2× screen back to the
+container's budget at a slightly softer picture; it is a tuning choice, not
+made here.
 
 === What the follow-up means for the proposal
 

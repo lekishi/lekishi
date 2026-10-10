@@ -1,0 +1,834 @@
+<title>Tang Embassy Hero</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Noto+Serif+JP:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;600&family=DotGothic16&family=Press+Start+2P&display=swap">
+<style>
+/* Layout: one full-bleed map stage per screen; UI plates float over it (title, story rail, card, timeline). Single committed dark lacquer look. */
+:root{
+  --bg:#0c1216; --lacquer:rgba(16,22,27,.86); --lacquer-solid:#121a20; --line:rgba(210,169,79,.35);
+  --gold:#d2a94f; --gold-bright:#f1cf7a; --ink:#f3ead7; --ink-dim:#b9af9c; --ink-faint:#7f786b;
+  --vermilion:#d9593e; --jade:#79c3b4; --sea-label:#cfe6ea;
+  --display:"Cinzel",Georgia,serif; --serif:"Noto Serif JP","Noto Serif CJK JP","Hiragino Mincho ProN","Yu Mincho",Georgia,serif; --ui:"Noto Sans JP","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:14px;line-height:1.45}
+.wrap{max-width:1440px;margin:0 auto;padding-block:14px;padding-inline:16px}
+.bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 18px;margin-bottom:12px}
+.brand{display:flex;align-items:baseline;gap:12px}
+.brand .name{font-family:var(--display);font-weight:600;font-size:18px;letter-spacing:.14em;color:var(--gold-bright)}
+.brand .kind{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{appearance:none;border:1px solid var(--line);background:transparent;color:var(--ink-dim);font:500 12px/1 var(--ui);letter-spacing:.12em;text-transform:uppercase;padding:9px 14px;border-radius:3px;cursor:pointer}
+.tab .short{display:none}
+.tab:hover{color:var(--ink);border-color:var(--gold)}
+.tab[aria-selected="true"]{background:var(--gold);color:#1a1409;border-color:var(--gold)}
+.tab:focus-visible,button:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px}
+.screen[hidden]{display:none}
+.stage{position:relative;width:100%;aspect-ratio:1138/783;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:#17455f;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.stage.region{aspect-ratio:1184/783}
+.stage img.base{position:absolute;inset:0;width:100%;height:100%;display:block}
+.stage svg.overlay{position:absolute;inset:0;width:100%;height:100%}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%}
+/* plates */
+.plate{position:absolute;background:var(--lacquer);border:1px solid var(--line);border-radius:4px;backdrop-filter:blur(6px);box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.plate::before{content:"";position:absolute;inset:4px;border:1px solid rgba(210,169,79,.18);border-radius:2px;pointer-events:none}
+.title{left:16px;top:16px;padding:12px 16px 12px;max-width:min(340px,40%)}
+.title .chapter{font-family:var(--display);font-size:18px;font-weight:600;letter-spacing:.06em;color:var(--gold-bright);line-height:1.2;text-wrap:balance}
+.title .cjk{font-family:var(--serif);font-size:13px;color:var(--ink-dim);margin-top:3px}
+.title .window{font:500 11px var(--ui);letter-spacing:.2em;color:var(--ink-faint);margin-top:6px;text-transform:uppercase}
+.title .about{margin-top:8px;font-size:11px;color:var(--ink-faint)}
+.title .about a{color:var(--gold);text-decoration:none;border-bottom:1px dotted var(--gold)}
+.ribbon{left:376px;right:336px;top:16px;padding:8px 12px 9px;overflow:hidden}
+.ribbon h3{margin:0 0 4px;font:500 10px var(--ui);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint);display:flex;justify-content:space-between;gap:10px}
+.ribbon h3 span{color:var(--gold);letter-spacing:.04em;text-transform:none;font-family:var(--serif);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.steps{display:flex;align-items:flex-start;gap:0;position:relative}
+.steps::before{content:"";position:absolute;left:8px;right:8px;top:5px;height:1px;background:rgba(210,169,79,.3)}
+.step{appearance:none;border:0;background:transparent;color:var(--ink-dim);padding:0 2px;flex:1;min-width:0;cursor:pointer;font:500 9px var(--ui);letter-spacing:.02em;display:flex;flex-direction:column;align-items:center;gap:5px;position:relative}
+.step::before{content:"";width:9px;height:9px;border-radius:50%;border:1px solid var(--gold);background:var(--lacquer-solid)}
+.step:hover{color:var(--ink)}
+.step[aria-current="true"]{color:var(--gold-bright)}
+.step[aria-current="true"]::before{background:var(--gold);box-shadow:0 0 0 3px rgba(210,169,79,.25)}
+.step .d{white-space:nowrap}
+.card{right:16px;top:16px;bottom:116px;width:min(300px,34%);display:flex;flex-direction:column;overflow:hidden}
+.card .scroll{overflow:auto;padding:14px 16px 16px;min-height:0}
+.eyebrow{font:500 10px var(--ui);letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.card h2{font-family:var(--serif);font-weight:700;font-size:20px;line-height:1.25;margin:4px 0 0;color:var(--ink)}
+.card .en{font-family:var(--display);font-size:12px;letter-spacing:.06em;color:var(--ink-dim);margin-top:4px}
+.figure{margin:12px 0 0;border:1px solid var(--line);border-radius:3px;overflow:hidden;background:#1b2229}
+.figure .art{aspect-ratio:16/8;background:
+  repeating-linear-gradient(135deg,rgba(210,169,79,.08) 0 2px,transparent 2px 14px),
+  radial-gradient(120% 80% at 30% 90%,#3b5c6c 0%,#1e2e38 60%,#141c22 100%);position:relative}
+.figure .art::after{content:"東征伝絵巻 · scene placeholder";position:absolute;inset:auto 0 0 0;padding:6px 10px;font:500 10px var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);background:linear-gradient(transparent,rgba(0,0,0,.5))}
+.figure figcaption{padding:7px 10px;font-size:11px;color:var(--ink-dim)}
+.figure figcaption b{color:var(--ink);font-weight:500}
+.quote{margin:12px 0 0;padding:10px 12px;border-left:2px solid var(--gold);background:rgba(210,169,79,.06);font-family:var(--serif);font-size:14px;line-height:1.6;color:var(--ink)}
+.quote .src{display:block;margin-top:6px;font:11px var(--ui);color:var(--ink-dim)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:5px 12px;margin-top:12px;font-size:12px}
+.kv dt{color:var(--ink-faint)} .kv dd{margin:0;color:var(--ink)}
+.chip{display:inline-block;padding:1px 7px;border:1px solid var(--line);border-radius:2px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim);vertical-align:1px}
+.chip.site{border-color:var(--gold);color:var(--gold)}
+.chip.loc{border-color:var(--jade);color:var(--jade)}
+.card h4{margin:14px 0 4px;font:500 10px var(--ui);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint)}
+.list{margin:0;padding:0;list-style:none;font-size:12px}
+.list li{padding:5px 0;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;gap:10px}
+.list li span:last-child{color:var(--ink-faint);white-space:nowrap}
+.list .arc{color:var(--vermilion)}
+.legend{left:16px;bottom:16px;right:16px;padding:8px 12px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;font-size:11px;color:var(--ink-dim)}
+.legend i{display:inline-block;vertical-align:middle;margin-right:6px}
+.legend .site{width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 2px #121a20,0 0 0 3px var(--gold)}
+.legend .loc{width:12px;height:12px;border-radius:50%;background:rgba(121,195,180,.35);border:1px dashed var(--jade)}
+.legend .sch{width:26px;height:0;border-top:2px dashed var(--gold-bright)}
+.legend .ovl{width:26px;height:0;border-top:2px dotted var(--ink)}
+.legend .arcl{width:26px;height:8px;border-top:2px solid var(--vermilion);border-radius:50% 50% 0 0}
+.legend .cand{width:26px;height:0;border-top:2px dashed var(--ink-faint)}
+.legend .spacer{flex:1}
+.timeline{left:16px;right:16px;bottom:54px;height:54px;padding:0}
+.timeline svg{width:100%;height:100%;display:block}
+.tl-controls{position:absolute;right:16px;bottom:62px;display:flex;gap:4px;z-index:2}
+.tl-controls button{appearance:none;border:1px solid var(--line);background:var(--lacquer-solid);color:var(--ink);width:30px;height:30px;border-radius:3px;cursor:pointer;font-size:12px}
+.tl-controls button.play{background:var(--gold);color:#1a1409;border-color:var(--gold)}
+/* map text */
+.lbl{font-family:var(--serif);font-weight:500;fill:var(--ink);paint-order:stroke;stroke:#0b1114;stroke-width:3.5px;stroke-linejoin:round;font-size:14px}
+.lbl.rom{font-family:var(--display);font-size:9px;letter-spacing:.14em;fill:var(--ink-dim);stroke-width:3px}
+.lbl.sea{font-family:var(--display);font-size:11px;letter-spacing:.32em;fill:var(--sea-label);opacity:.55;stroke:none;font-weight:500}
+.lbl.date{font-family:var(--ui);font-size:9.5px;fill:var(--gold-bright);letter-spacing:.04em;stroke-width:3px}
+.lbl.note{font-family:var(--ui);font-size:9.5px;fill:var(--ink-dim);stroke-width:3px}
+.route{fill:none;stroke:var(--gold-bright);stroke-width:2;stroke-dasharray:7 5;stroke-linecap:round;filter:drop-shadow(0 0 2px rgba(0,0,0,.8))}
+.route.under{stroke:#0b1114;stroke-width:4.5;stroke-dasharray:none;opacity:.55;filter:none}
+.route.faint{stroke-dasharray:3 6;opacity:.75}
+.route.overland{stroke:var(--ink);stroke-dasharray:1.5 5;stroke-width:2.2}
+.arc{fill:none;stroke:var(--vermilion);stroke-width:2.4;filter:drop-shadow(0 0 3px rgba(0,0,0,.9))}
+.arc.glow{stroke:var(--vermilion);stroke-width:7;opacity:.18;filter:none}
+.pin .ring{fill:#121a20;stroke:var(--gold);stroke-width:2}
+.pin .core{fill:var(--gold)}
+.pin.selected .ring{stroke:var(--gold-bright);stroke-width:2.5}
+.pin.selected .halo{fill:none;stroke:var(--gold-bright);stroke-width:1.5;opacity:.8}
+@media (prefers-reduced-motion:no-preference){.pin.selected .halo{animation:pulse 2.4s ease-out infinite}}
+@keyframes pulse{0%{r:9;opacity:.9}100%{r:22;opacity:0}}
+.loc-pin{fill:rgba(121,195,180,.28);stroke:var(--jade);stroke-width:1.3;stroke-dasharray:3 2.5}
+.loc-pin.core{fill:var(--jade);stroke:none}
+.count{fill:var(--lacquer-solid);stroke:var(--gold);stroke-width:1.2}
+.count-t{font:600 10px var(--ui);fill:var(--gold-bright);text-anchor:middle}
+.offmap{fill:none;stroke:var(--gold-bright);stroke-width:1.5;stroke-dasharray:4 4}
+.tl-axis{stroke:rgba(243,234,215,.25)}
+.tl-tick{stroke:var(--ink-dim);stroke-width:1}
+.tl-year{font:500 10px var(--display);fill:var(--ink-dim);letter-spacing:.1em}
+.tl-ev{fill:var(--gold)}
+.tl-ev.sel{fill:var(--gold-bright);stroke:#0b1114;stroke-width:1.5}
+.tl-lens{fill:rgba(210,169,79,.08);stroke:rgba(210,169,79,.5);stroke-width:1}
+.tl-play{stroke:var(--gold-bright);stroke-width:1.5}
+.tl-lbl{font:10px var(--ui);fill:var(--ink-dim)}
+.tl-lbl.sel{fill:var(--gold-bright)}
+.tl-win{font:500 9px var(--ui);letter-spacing:.16em;text-transform:uppercase;fill:var(--ink-faint)}
+.tl-cross{fill:none;stroke:rgba(210,169,79,.35);stroke-width:1;stroke-dasharray:2 3}
+/* globe + local extras */
+.glabel{font:500 10px var(--display);letter-spacing:.16em;fill:var(--ink-dim)}
+.band{fill:rgba(210,169,79,.25);stroke:var(--gold)}
+.band.qin{fill:rgba(121,195,180,.25);stroke:var(--jade)}
+.grid{stroke:rgba(20,28,16,.45);stroke-width:1.2;fill:none}
+.block{fill:rgba(255,255,255,.06)}
+.avenue{stroke:rgba(243,234,215,.55);stroke-width:5}
+.palace{fill:rgba(210,169,79,.22);stroke:var(--gold);stroke-width:1.5}
+.temple{fill:rgba(217,89,62,.18);stroke:var(--vermilion);stroke-width:1.2}
+.river{fill:none;stroke:#5ea5c0;stroke-width:5;opacity:.8}
+.glyph{fill:var(--ink);stroke:#0b1114;stroke-width:1;paint-order:stroke}
+.note-plate{right:16px;top:16px;padding:10px 14px;max-width:min(380px,50%);font-size:11px;color:var(--ink-dim)}
+.note-plate b{color:var(--ink);font-weight:500}
+.foot{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px 18px;font-size:11px;color:var(--ink-faint)}
+.foot b{color:var(--ink-dim);font-weight:500}
+.dio{background:linear-gradient(#8fb9cf 0%,#c9dde6 38%,#dfe9ec 100%)}
+.dio canvas{position:absolute;inset:0;width:100%;height:100%}
+#dio-pixel{image-rendering:pixelated;image-rendering:crisp-edges}
+.dio.pixel #dio-canvas{position:absolute;width:1px;height:1px;visibility:hidden}
+.tier{position:absolute;right:14px;bottom:196px;display:flex;gap:4px}
+.tier button{appearance:none;border:1px solid var(--gold);background:rgba(10,14,18,.8);color:var(--ink-dim);font:600 10px var(--ui);letter-spacing:.14em;padding:7px 10px;border-radius:3px;cursor:pointer}
+.tier button[aria-pressed="true"]{background:var(--gold);color:#1a1409}
+.dio .lblr{position:absolute;left:0;top:0;transform:translate(-50%,-100%);pointer-events:none;text-align:center;white-space:nowrap}
+.dio .lblr b{display:block;font:500 15px var(--serif);color:var(--ink);text-shadow:0 0 3px #0b1114,0 0 6px #0b1114,0 1px 0 #0b1114}
+.dio .lblr i{display:block;font:500 8.5px var(--display);letter-spacing:.16em;color:var(--ink-dim);font-style:normal;text-shadow:0 0 3px #0b1114,0 0 5px #0b1114}
+.dio .lblr::after{content:"";display:block;width:1px;height:14px;margin:2px auto 0;background:rgba(243,234,215,.7)}
+.dio .lblr.sea b{font:500 11px var(--display);letter-spacing:.3em;color:#eaf4f7;opacity:.8}
+.dio .lblr.sea::after{display:none}
+.civbar{position:absolute;inset:0 0 auto 0;height:46px;background:linear-gradient(rgba(10,14,18,.92),rgba(10,14,18,.55) 80%,transparent);display:flex;align-items:center;justify-content:space-between;padding:0 14px;gap:12px;color:var(--ink)}
+.civbar .stat{display:flex;gap:16px;font:500 12px var(--ui);letter-spacing:.04em}
+.civbar .stat b{color:var(--gold-bright);font-weight:600}
+.civbar .stat span{color:var(--ink-dim)}
+.orbs{position:absolute;left:14px;top:54px;display:flex;gap:8px}
+.orb{width:48px;height:48px;border-radius:50%;border:2px solid var(--gold);background:radial-gradient(circle at 40% 35%,#2b3640,#0f161b 70%);box-shadow:0 0 0 2px #0b1114,0 6px 14px rgba(0,0,0,.5);display:grid;place-items:center;color:var(--gold-bright);font:600 18px var(--serif);cursor:pointer;position:relative}
+.orb small{position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);background:#0f161b;border:1px solid var(--gold);border-radius:8px;padding:0 6px;font:600 9px var(--ui);color:var(--ink);white-space:nowrap}
+.orb.on{border-color:var(--gold-bright);box-shadow:0 0 0 2px #0b1114,0 0 14px rgba(241,207,122,.5)}
+.orb.off{opacity:.6}
+.journal{position:absolute;left:14px;top:114px;width:250px;color:var(--ink);text-shadow:0 1px 2px #0b1114,0 0 6px #0b1114}
+.journal h5{margin:0;font:500 13px var(--display);letter-spacing:.12em;color:var(--gold-bright)}
+.journal p{margin:4px 0 0;font:12px var(--ui);color:var(--ink)}
+.journal p.n{color:var(--ink-dim);padding-left:14px;position:relative}
+.journal p.n::before{content:"›";position:absolute;left:2px;color:var(--gold)}
+.pennants{position:absolute;right:14px;top:50px;display:flex;gap:10px}
+.pen{width:54px;text-align:center;cursor:pointer}
+.pen .flag{width:46px;height:70px;margin:0 auto;clip-path:polygon(0 0,100% 0,100% 78%,50% 100%,0 78%);background:linear-gradient(#5b1d1d,#8f2a2a);box-shadow:0 4px 10px rgba(0,0,0,.5);display:grid;place-items:start center;padding-top:6px}
+.pen .flag span{width:34px;height:34px;border-radius:50%;background:#0f161b;border:2px solid var(--gold);display:grid;place-items:center;font:600 17px var(--serif);color:var(--ink)}
+.pen.t2 .flag{background:linear-gradient(#2a3f5b,#3b5f8a)} .pen.t3 .flag{background:linear-gradient(#3f4a1f,#6b7a2b)} .pen.t4 .flag{background:linear-gradient(#5b4a1d,#8a7126)}
+.pen small{display:block;margin-top:4px;font:500 9px var(--ui);color:var(--ink);text-shadow:0 1px 2px #0b1114,0 0 5px #0b1114;line-height:1.2}
+.titlef{position:absolute;left:50%;top:54px;transform:translateX(-50%);text-align:center;color:var(--ink);text-shadow:0 1px 2px #0b1114,0 0 8px #0b1114;width:min(520px,60%)}
+.titlef .k{font:500 11px var(--display);letter-spacing:.3em;color:var(--ink-dim)}
+.titlef h2{margin:2px 0 0;font:600 28px var(--display);letter-spacing:.08em;color:var(--gold-bright);line-height:1.1}
+.titlef .rule{height:14px;margin:4px auto 2px;width:70%;background:linear-gradient(90deg,transparent,var(--gold) 20%,var(--gold) 80%,transparent) center/100% 1px no-repeat}
+.titlef .rule::before{content:"❖";display:block;color:var(--gold-bright);font-size:11px;line-height:14px;background:transparent}
+.titlef .sub{font:500 13px var(--serif);color:var(--ink)}
+.minimap{position:absolute;left:14px;bottom:14px;width:220px;height:150px;border:2px solid var(--gold);border-radius:3px;overflow:hidden;background:#17455f;box-shadow:0 8px 20px rgba(0,0,0,.5)}
+.minimap img{position:absolute;width:300%;height:300%;left:-110%;top:-62%;filter:saturate(.8) brightness(.9)}
+.minimap .view{position:absolute;border:1.5px solid var(--gold-bright);width:18px;height:13px;left:98px;top:76px;box-shadow:0 0 0 1px #0b1114}
+.minimap .ship{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--gold-bright);left:101px;top:84px;box-shadow:0 0 0 1px #0b1114}
+.minimap .cap{position:absolute;left:0;right:0;bottom:0;padding:2px 6px;font:500 9px var(--ui);letter-spacing:.14em;color:var(--ink);background:rgba(10,14,18,.7)}
+.dial{position:absolute;right:14px;bottom:14px;width:150px;height:150px}
+.dial svg{width:100%;height:100%}
+.dial .nt{position:absolute;right:0;top:-26px;font:500 10px var(--display);letter-spacing:.24em;color:var(--ink);text-shadow:0 1px 2px #0b1114,0 0 6px #0b1114}
+.dial button{position:absolute;left:50%;top:50%;width:62px;height:62px;transform:translate(-50%,-50%);border-radius:50%;border:2px solid var(--gold);background:radial-gradient(circle at 40% 35%,#3a4650,#121a20 70%);color:var(--gold-bright);font-size:22px;cursor:pointer;box-shadow:0 0 0 3px #0b1114}
+.honest{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:rgba(10,14,18,.78);border:1px solid var(--line);border-radius:3px;padding:6px 12px;font:11px var(--ui);color:var(--ink-dim);max-width:min(560px,52%);text-align:center}
+.honest b{color:var(--ink);font-weight:500}
+/* handheld tier: a top-down tile map in a device frame, the phone's own register */
+.hh-wrap{display:flex;justify-content:center;padding:0}
+.device{width:100%;height:780px;display:grid;grid-template-columns:232px minmax(0,1fr) 300px;grid-template-rows:auto minmax(0,1fr) auto;gap:8px 10px;background:linear-gradient(#1a2229,#0e1418);border:1px solid var(--line);border-radius:6px;padding:10px 12px 12px;box-shadow:0 30px 80px rgba(0,0,0,.55);position:relative}
+.device::before{border-radius:3px}
+.hh-top{grid-column:1/-1}
+.hh-journal{grid-row:2/4;grid-column:1} .screen-hh{grid-row:2;grid-column:2} .hh-card{grid-row:2/4;grid-column:3} .pads{grid-row:3;grid-column:2}
+.pbox{background:#f5efdc;color:#141a1f;border:3px solid #141a1f;box-shadow:inset 0 0 0 2px #f5efdc,inset 0 0 0 4px #141a1f;padding:12px 14px;font:12px/1.5 "DotGothic16","Press Start 2P",monospace;overflow:auto;min-height:0}
+.pbox h4{margin:0 0 8px;font:9px "Press Start 2P",monospace;color:#4a5560;letter-spacing:.04em}
+.pbox h4 span{font:13px "DotGothic16",monospace;color:#141a1f;margin-right:8px}
+.jstep{display:block;width:100%;appearance:none;border:0;background:transparent;text-align:left;font:12px/1.35 "DotGothic16",monospace;color:#141a1f;padding:4px 2px 4px 16px;position:relative;cursor:pointer}
+.jstep small{display:block;font:7px "Press Start 2P",monospace;color:#6a7480;margin-top:2px}
+.jstep[aria-current="true"]{background:#141a1f;color:#f5efdc} .jstep[aria-current="true"] small{color:#c9c0a8}
+.jstep[aria-current="true"]::before{content:"▶";position:absolute;left:3px;top:5px;font-size:9px}
+.jstep.off{opacity:.55}
+.hh-card .tag{display:inline-block;border:2px solid #141a1f;padding:0 4px;font:9px "Press Start 2P",monospace;margin-right:6px;vertical-align:1px}
+.hh-card h3{margin:6px 0 2px;font:16px/1.3 "DotGothic16",monospace}
+.hh-card .en{font:8px/1.6 "Press Start 2P",monospace;color:#4a5560}
+.hh-card .pic{margin:10px 0;height:96px;border:2px solid #141a1f;background:repeating-linear-gradient(135deg,#e6dcc2 0 3px,#f5efdc 3px 9px);display:grid;place-items:center;font:7px "Press Start 2P",monospace;color:#6a7480;text-align:center;line-height:1.8}
+.hh-card .q{border-left:3px solid #141a1f;padding:4px 8px;margin:8px 0;font-size:12px}
+.hh-card .q small{display:block;font:7px "Press Start 2P",monospace;color:#6a7480;margin-top:4px}
+.hh-card dl{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;margin:8px 0 0;font-size:11px} .hh-card dt{color:#6a7480} .hh-card dd{margin:0}
+.hh-card ul{margin:4px 0 0;padding:0;list-style:none;font-size:11px} .hh-card li{padding:3px 0;border-top:1px dashed #b9b09a}
+.keys{display:flex;gap:10px;align-items:center;font:7px/1.6 "Press Start 2P",monospace;color:var(--ink-faint);letter-spacing:.04em}
+.keys b{color:var(--ink-dim);font-weight:400}
+.device::before{content:"";position:absolute;inset:5px;border:1px solid rgba(210,169,79,.16);border-radius:18px;pointer-events:none}
+.hh-top{display:flex;justify-content:space-between;align-items:center;font:10px "Press Start 2P","DotGothic16",monospace;color:var(--gold-bright);padding:2px 4px 8px;letter-spacing:.02em}
+.hh-top .jp{font-family:"DotGothic16","Press Start 2P",monospace;font-size:13px;color:var(--ink)}
+.screen-hh{position:relative;flex:1;min-height:0;background:#1b2b3a;border:3px solid #0b1114;border-radius:4px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(210,169,79,.35)}
+.screen-hh canvas{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);image-rendering:pixelated;image-rendering:crisp-edges}
+.dlg{position:absolute;left:6px;right:6px;bottom:6px;background:#f5efdc;color:#141a1f;border:3px solid #141a1f;box-shadow:inset 0 0 0 2px #f5efdc,inset 0 0 0 4px #141a1f;padding:10px 12px 12px;font:13px/1.55 "DotGothic16","Press Start 2P",monospace;min-height:64px}
+.dlg .en{display:block;font:8px/1.6 "Press Start 2P",monospace;color:#4a5560;margin-top:4px;letter-spacing:.02em}
+.dlg .arrow{position:absolute;right:10px;bottom:6px;font-size:10px;animation:blink 1s steps(2) infinite}
+.dlg .tag{display:inline-block;border:2px solid #141a1f;padding:0 4px;font-size:9px;font-family:"Press Start 2P",monospace;margin-right:6px;vertical-align:1px}
+@keyframes blink{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.dlg .arrow{animation:none}}
+.pads{display:flex;justify-content:space-between;align-items:center;padding:10px 4px 0;flex:none}
+.ss{display:flex;gap:8px;align-self:flex-end;margin-bottom:6px}
+.ss button{appearance:none;border:0;background:#2a343c;color:var(--ink-dim);font:7px "Press Start 2P",monospace;padding:7px 9px;border-radius:10px;box-shadow:inset 0 -2px 0 #141a1f;cursor:pointer;letter-spacing:.04em}
+.ss button b{display:block;font:7px "Press Start 2P",monospace;color:var(--gold-bright);margin-bottom:3px}
+.dpad{position:relative;width:90px;height:90px}
+.dpad button{position:absolute;width:30px;height:30px;border:0;background:#2a343c;box-shadow:inset 0 -3px 0 #141a1f;cursor:pointer;color:var(--ink-dim);font-size:11px}
+.dpad .u{left:30px;top:0;border-radius:4px 4px 0 0} .dpad .d{left:30px;top:60px;border-radius:0 0 4px 4px} .dpad .l{left:0;top:30px;border-radius:4px 0 0 4px} .dpad .r{left:60px;top:30px;border-radius:0 4px 4px 0} .dpad .c{left:30px;top:30px;cursor:default;box-shadow:none;background:#222b32}
+.dpad button:active,.ab button:active{transform:translateY(2px);box-shadow:none}
+.ab{display:flex;gap:14px;align-items:flex-end}
+.ab button{width:42px;height:42px;border-radius:50%;border:0;background:var(--gold);color:#1a1409;font:10px "Press Start 2P",monospace;box-shadow:inset 0 -3px 0 #8a6a1e;cursor:pointer}
+.ab button.b{background:#8f2a2a;color:var(--ink);box-shadow:inset 0 -3px 0 #4a1414;margin-bottom:14px}
+.hh-note{max-width:400px;margin:12px auto 0;font-size:11px;color:var(--ink-dim);text-align:center}
+.hh-note b{color:var(--ink);font-weight:500}
+@media (max-width:820px){
+  .wrap{padding-block:8px}
+  .bar{margin-bottom:8px;gap:6px}
+  .brand .kind{display:none}
+  .tabs{flex-wrap:nowrap;overflow-x:auto;gap:4px;width:100%;scrollbar-width:none}
+  .tab{padding:7px 10px;font-size:10px;letter-spacing:.08em;white-space:nowrap;flex:none}
+  .tab .long{display:none} .tab .short{display:inline}
+  .foot,.hh-note{display:none}
+  .device{display:flex;flex-direction:column;width:100%;height:calc(100dvh - 88px);min-height:520px;padding:6px 6px 10px;border-radius:14px}
+  .hh-journal,.hh-card,.keys{display:none}
+  .hh-top{padding:2px 4px 6px}
+  .journal,.pennants{display:none}
+  .civbar{height:32px;padding:0 10px}
+  .civbar .stat{gap:8px;font-size:10px;white-space:nowrap}
+  .civbar .stat span:nth-child(2){display:none}
+  .orbs{top:38px;left:10px;gap:5px}
+  .orb{width:30px;height:30px;font-size:12px;border-width:1.5px;box-shadow:0 0 0 1px #0b1114}
+  .titlef{top:40px;width:62%;left:auto;right:10px;transform:none;text-align:right}
+  .titlef .k{font-size:8px;letter-spacing:.2em}
+  .titlef h2{font-size:18px}
+  .titlef .rule{width:50%;margin-left:auto;margin-right:0}
+  .titlef .sub{font-size:10px}
+  .minimap{width:96px;height:66px;left:10px;bottom:10px;border-width:1.5px}
+  .minimap .view{left:42px;top:33px;width:8px;height:6px} .minimap .ship{left:44px;top:37px;width:4px;height:4px} .minimap .cap{display:none}
+  .dial{width:78px;height:78px;right:10px;bottom:10px}
+  .dial button{width:36px;height:36px;font-size:13px}
+  .dial .nt{font-size:7px;top:-14px;letter-spacing:.18em}
+  .tier{position:static;justify-content:flex-end;margin-top:8px}
+  .dio .lblr b{font-size:12px} .dio .lblr i{font-size:7px}
+  .honest{position:static;transform:none;max-width:none;margin-top:12px}
+  .minimap{width:150px;height:100px}
+  .dio canvas{position:relative;display:block;aspect-ratio:1138/783;height:auto}
+  .stage,.stage.region{aspect-ratio:auto;height:auto}
+  .stage img.base{position:relative;display:block;width:100%;height:auto}
+  .stage canvas{position:relative;display:block;width:100%;height:auto;aspect-ratio:1138/783}
+  .stage svg.overlay{position:absolute;top:0;left:0;width:100%;height:auto;aspect-ratio:1184/783}
+  #local-svg{position:relative;display:block;aspect-ratio:1138/783}
+  #globe-svg{aspect-ratio:1138/783}
+  .ribbon{display:none}
+  .card{position:static;width:auto;margin-top:12px;max-height:none}
+  .card .scroll{max-height:none}
+  .title{max-width:70%}
+  .legend{position:static;margin-top:12px}
+  .timeline{position:static;margin-top:12px;height:54px}
+  .tl-controls{position:static;margin-top:8px;justify-content:flex-end}
+  .note-plate{position:static;max-width:none;margin-top:12px}
+}
+</style>
+
+<div class="wrap">
+  <div class="bar">
+    <div class="brand"><span class="name">LEKISHI</span><span class="kind">UI mock · hero candidates · 2026-10-10</span></div>
+    <div class="tabs" role="tablist" aria-label="Scale">
+      <button class="tab" role="tab" id="tab-globe" aria-selected="false" data-screen="globe"><span class="long">Globe</span><span class="short">Globe</span></button>
+      <button class="tab" role="tab" id="tab-region" aria-selected="true" data-screen="region"><span class="long">Region · the hero</span><span class="short">Region</span></button>
+      <button class="tab" role="tab" id="tab-diorama" aria-selected="false" data-screen="diorama"><span class="long">Diorama · 秋妻屋浦</span><span class="short">Diorama</span></button>
+      <button class="tab" role="tab" id="tab-handheld" aria-selected="false" data-screen="handheld"><span class="long">Handheld · 2D phone</span><span class="short">Handheld</span></button>
+      <button class="tab" role="tab" id="tab-local" aria-selected="false" data-screen="local"><span class="long">Local · 平城京</span><span class="short">Local</span></button>
+    </div>
+  </div>
+
+  <!-- ===== REGION: the hero ===== -->
+  <section class="screen" id="screen-region" role="tabpanel">
+    <div class="stage region">
+      <img class="base" alt="Relief map of the East China Sea, Kyūshū, and the Ryūkyū arc, painted from open elevation data" src="__REGION__">
+      <svg class="overlay" viewBox="0 0 1184 783" id="region-svg" aria-hidden="true"></svg>
+
+      <div class="plate title">
+        <div class="chapter">The Embassy to Tang China</div>
+        <div class="cjk">遣唐使 · 藤原清河の遣唐使、鑒眞の東渡</div>
+        <div class="window">750 – 754 · 29 events · 15 places</div>
+        <div class="about">Owner-approved content, self-reviewed. <a href="#about">About this chapter</a></div>
+      </div>
+
+      <nav class="plate ribbon" aria-label="Story">
+        <h3>Story · 物語 <span id="ribbon-title"></span></h3>
+        <div class="steps" id="rail"></div>
+      </nav>
+
+      <aside class="plate card" aria-label="Selected event"><div class="scroll" id="card"></div></aside>
+
+      <div class="tl-controls"><button type="button" aria-label="Previous event" id="tl-prev">◀</button><button type="button" class="play" aria-label="Play" id="tl-play">▶</button><button type="button" aria-label="Next event" id="tl-next">▶|</button></div>
+      <div class="plate timeline"><svg id="tl" viewBox="0 0 1100 54" preserveAspectRatio="none"></svg></div>
+
+      <div class="plate legend">
+        <span><i class="site"></i>attested site</span>
+        <span><i class="loc"></i>identified locality</span>
+        <span><i class="sch"></i>schematic, through dated stops</span>
+        <span><i class="ovl"></i>overland, dated stops</span>
+        <span><i class="arcl"></i>transmission (on selection)</span>
+        <span class="spacer"></span>
+        <span>Relief: open elevation data · coast: Natural Earth · no provider</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GLOBE ===== -->
+  <section class="screen" id="screen-globe" role="tabpanel" hidden>
+    <div class="stage">
+      <canvas id="globe-canvas" width="1138" height="783"></canvas>
+      <svg class="overlay" viewBox="0 0 1138 783" id="globe-svg" aria-hidden="true"></svg>
+      <div class="plate title">
+        <div class="chapter">Lekishi</div>
+        <div class="cjk">歴史地図 · chapters in the selected centuries</div>
+        <div class="window">300 BCE – 900 CE · 2 chapters</div>
+        <div class="about">Zoom into a chapter or pick one from the timeline.</div>
+      </div>
+      <div class="plate timeline"><svg id="tl-globe" viewBox="0 0 1100 54" preserveAspectRatio="none"></svg></div>
+      <div class="plate legend">
+        <span><i class="site"></i>chapter, with its event count</span>
+        <span><i class="cand"></i>candidate chapters, not yet researched</span>
+        <span><i style="width:14px;height:10px;background:#8c7a5c;border-radius:1px"></i>outside the chapters' coverage: parchment, no claim</span>
+        <span class="spacer"></span>
+        <span>Globe: same painted relief, sampled per pixel</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DIORAMA ===== -->
+  <section class="screen" id="screen-diorama" role="tabpanel" hidden>
+    <div class="stage dio" id="dio-stage">
+      <canvas id="dio-canvas" width="1138" height="783"></canvas>
+      <canvas id="dio-pixel" width="284" height="196" hidden></canvas>
+      <div id="dio-labels"></div>
+      <div class="civbar">
+        <div class="stat"><b>753</b><span>天寶十二載 · 天平勝寶五年</span><span>12月 20日 · 乙酉 · 午時</span></div>
+        <div class="stat"><span>Window</span><b>750 – 754</b><span>Story 8 / 12</span></div>
+      </div>
+      <div class="orbs">
+        <div class="orb on" title="Journeys">⛵</div>
+        <div class="orb on" title="Transmission">☸</div>
+        <div class="orb off" title="Diplomacy">⚖</div>
+        <div class="orb" title="Sources">✎</div>
+        <div class="orb off" title="Territory">▦</div>
+      </div>
+      <div class="journal"><h5>Journal</h5><p>鑒眞 · 第六次渡航</p><p class="n">Second ship lands at 秋妻屋浦</p><p class="n">Next · enters 大宰府, 12·26</p></div>
+      <div class="titlef"><div class="k">LANDFALL · 薩摩國阿多郡</div><h2>秋妻屋浦</h2><div class="rule"></div><div class="sub">The second ship lands · 753 CE · 十二月廿日乙酉午時</div></div>
+      <div class="pennants">
+        <div class="pen"><div class="flag"><span>鑒</span></div><small>鑒眞<br>Jianzhen</small></div>
+        <div class="pen t2"><div class="flag"><span>大</span></div><small>大伴古麻呂<br>Ōtomo</small></div>
+        <div class="pen t3"><div class="flag"><span>吉</span></div><small>吉備真備<br>Kibi</small></div>
+        <div class="pen t4"><div class="flag"><span>藤</span></div><small>藤原清河<br>Fujiwara</small></div>
+      </div>
+      <div class="minimap"><img id="mini-img" alt=""><div class="view"></div><div class="ship"></div><div class="cap">SATSUMA · 薩摩</div></div>
+      <div class="tier" role="group" aria-label="Render tier"><button type="button" id="tier-3d" aria-pressed="true">3D</button><button type="button" id="tier-px" aria-pressed="false">PIXEL · SAME SCENE</button></div>
+      <div class="dial"><div class="nt">NEXT EVENT</div><svg viewBox="0 0 150 150" aria-hidden="true"><circle cx="75" cy="75" r="66" fill="rgba(10,14,18,.75)" stroke="#0b1114" stroke-width="4"/><circle cx="75" cy="75" r="66" fill="none" stroke="#d2a94f" stroke-width="1.5"/><circle cx="75" cy="75" r="56" fill="none" stroke="rgba(210,169,79,.35)" stroke-width="8"/><path id="dial-arc" fill="none" stroke="#f1cf7a" stroke-width="8" stroke-linecap="round"/><g id="dial-ticks"></g><text x="75" y="22" text-anchor="middle" font-family="Cinzel" font-size="9" fill="#b9af9c" letter-spacing="2">750</text><text x="75" y="140" text-anchor="middle" font-family="Cinzel" font-size="9" fill="#b9af9c" letter-spacing="2">754</text></svg><button type="button" aria-label="Play">▶</button></div>
+      <div class="honest"><b>What is real here.</b> Terrain is open elevation data at 130 m, raised 2.2×. Forest, fields, and houses are symbols placed by terrain, not reconstructions. The ship is a schematic 遣唐使船 on the attested landfall; its path is the dashed line.</div>
+    </div>
+  </section>
+
+  <!-- ===== HANDHELD ===== -->
+  <section class="screen" id="screen-handheld" role="tabpanel" hidden>
+    <div class="hh-wrap">
+      <div class="device">
+        <div class="hh-top"><span>753 12/20</span><span class="jp" id="hh-place">秋妻屋浦</span><span id="hh-step">8/12</span></div>
+        <nav class="pbox hh-journal" aria-label="Story"><h4><span>物語</span>STORY · 遣唐使</h4><div id="hh-journal"></div></nav>
+        <aside class="pbox hh-card" id="hh-card" aria-label="Selected event"></aside>
+        <div class="screen-hh"><canvas id="hh-canvas" width="384" height="320"></canvas>
+          <div class="dlg" id="hh-dlg"><span class="tag">753</span>第二舟、薩摩國阿多郡秋妻屋浦に着く。<span class="en">THE 2ND SHIP LANDS AT AKIMEYA BAY</span><span class="arrow">▼</span></div>
+        </div>
+        <div class="pads">
+          <div class="dpad" role="group" aria-label="Move the cursor"><button type="button" class="u" data-dir="0,-1" aria-label="Up">▲</button><button type="button" class="l" data-dir="-1,0" aria-label="Left">◀</button><button type="button" class="c" tabindex="-1" aria-hidden="true"></button><button type="button" class="r" data-dir="1,0" aria-label="Right">▶</button><button type="button" class="d" data-dir="0,1" aria-label="Down">▼</button></div>
+          <div class="ss"><button type="button" id="hh-select"><b>SELECT</b>STORY ▶</button><button type="button" id="hh-start"><b>START</b>MENU</button></div>
+          <div class="keys"><span><b>↑↓←→</b> MOVE</span><span><b>ENTER</b> A</span><span><b>ESC</b> B</span><span><b>TAB</b> SELECT</span><span><b>M</b> START</span></div>
+          <div class="ab"><button type="button" class="b" id="hh-b" aria-label="Close">B</button><button type="button" class="a" id="hh-a" aria-label="Read">A</button></div>
+        </div>
+      </div>
+    </div>
+    <p class="hh-note"><b>The 2D tile mode.</b> On tablet and desktop it fills the stage with the journal and the card beside the map; on a phone it is the device alone. The same terrain in 16-pixel tiles at about 260 m, drawn with PixiJS; sprites at the attested places; dotted tiles for the schematic path. D-pad moves, A reads, B closes, Select steps the story, Start opens the menu. Arrow keys, Enter, Escape, Tab, and M on a keyboard.</p>
+  </section>
+
+  <!-- ===== LOCAL ===== -->
+  <section class="screen" id="screen-local" role="tabpanel" hidden>
+    <div class="stage">
+      <svg class="overlay" viewBox="0 0 1138 783" id="local-svg" aria-hidden="true" style="background:#9fb35a"></svg>
+      <div class="plate title">
+        <div class="chapter">Heijō-kyō · 754</div>
+        <div class="cjk">平城京 · 鑒眞、京に入る · 天平勝寶六年二月四日</div>
+        <div class="window">local view · symbolic landmarks</div>
+        <div class="about">The grid follows the 条坊 plan; landmarks are symbols, not reconstructions.</div>
+      </div>
+      <div class="plate note-plate"><b>What is drawn here.</b> The street grid and the palace precinct are schematic, after the known 条坊 layout. Temples sit at their attested sites (Wikidata, site precision). Buildings are glyphs of their kind; no roofline, wall, or garden is reconstructed. The dotted line is 鑒眞's dated arrival on the 4th day of the 2nd month, from 難波, drawn to the gate as a schematic.</div>
+      <div class="plate legend">
+        <span><i class="site"></i>temple, attested site</span>
+        <span><i class="ovl"></i>arrival, schematic</span>
+        <span class="spacer"></span>
+        <span>Scale ≈ 1 : 60 000 · north up</span>
+      </div>
+    </div>
+  </section>
+
+  <p class="foot"><b>Mock notes.</b> <span>Basemap painted offline from open elevation tiles and Natural Earth coastlines, no provider. </span><span>Every drawn position is from the chapter's records or a cited gazetteer. </span><span>Image frame is a placeholder for a later depiction pending rights. </span><span>Click a story step or a timeline tick to select.</span></p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.158.0/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.4.2/pixi.min.js"></script>
+<script>
+const R = __REGIONJSON__;
+const mx = lon => (lon + 180) / 360, my = lat => { const r = lat * Math.PI / 180; return (1 - Math.log(Math.tan(r) + 1 / Math.cos(r)) / Math.PI) / 2; };
+const P = (lon, lat) => [ (mx(lon) - R.MX0) / (R.MX1 - R.MX0) * R.W, (my(lat) - R.MY0) / (R.MY1 - R.MY0) * R.H ];
+
+// Places: coordinates from the chapter's records where it has an identification, otherwise the cited site (Wikidata, Pleiades) the roadmap adopts.
+const places = {
+  huangsipu:{n:"黃泗浦",r:"Huangsipu",ll:[120.612,31.853],k:"site",dx:-8,dy:-12,anchor:"end"},
+  yangzhou:{n:"揚州",r:"Yangzhou",ll:[119.436,32.391],k:"site",dx:-10,dy:4,anchor:"end"},
+  okinawa:{n:"阿兒奈波島",r:"Ajinawa · Okinawa",ll:[127.95,26.48],k:"loc",rad:16,dx:14,dy:4},
+  yaku:{n:"益救島",r:"Yaku",ll:[130.53,30.36],k:"loc",rad:9,dx:14,dy:5},
+  akimeya:{n:"秋妻屋浦",r:"Akimeya · Bōnotsu",ll:[130.23,31.27],k:"loc",rad:7,dx:-12,dy:14,anchor:"end"},
+  ishigaki:{n:"石籬浦",r:"Ishigaki · Ei",ll:[130.492,31.239],k:"loc",rad:6,dx:12,dy:-2},
+  dazaifu:{n:"大宰府",r:"Dazaifu",ll:[130.515,33.513],k:"site",dx:-12,dy:-8,anchor:"end"},
+  murozaki:{n:"紀伊國牟漏埼",r:"Murozaki · Taiji",ll:[135.944,33.594],k:"loc",rad:7,dx:-10,dy:22,anchor:"end"},
+  naniwa:{n:"難波",r:"Naniwa",ll:[135.52,34.68],k:"site",dx:-12,dy:14,anchor:"end"},
+  heijo:{n:"平城京",r:"Heijō-kyō",ll:[135.795,34.691],k:"site",dx:-12,dy:-10,anchor:"end",count:11},
+  todaiji:{n:"東大寺",r:"Tōdai-ji",ll:[135.84,34.689],k:"site",dx:12,dy:16},
+};
+const events = [
+  {id:"appoint",s:"750·9",t:750.72,d:"750 · 9th month",w:"天平勝寶二年九月",p:"heijo",title:"遣唐大使に藤原清河",en:"The court appoints the embassy",src:"續日本紀 · 卷十八",q:"以從四位上藤原朝臣清河為遣唐大使"},
+  {id:"audience",s:"753·1·1",t:753.0,d:"753 · 1st day",w:"天寶十二載正月朔",p:null,off:true,title:"含元殿の元日朝賀",en:"New Year audience at Hanyuan Hall, Chang'an",src:"舊唐書 · 東夷傳",q:"大明宮含元殿"},
+  {id:"invite",s:"10·15",t:753.79,d:"753 · 10th month, 15th",w:"天寶十二載十月十五日",p:"yangzhou",title:"揚州延光寺に鑒眞を訪ねる",en:"The envoys invite Jianzhen at Yangzhou",src:"唐大和上東征傳",q:"來至延光寺，白和上曰…"},
+  {id:"depart",s:"11·15",t:753.87,d:"753 · 11th month, 15th",w:"天寶十二載十一月十五日壬子",p:"huangsipu",title:"四舟、黃泗浦を同發",en:"Four ships leave Huangsipu together",src:"唐大和上東征傳",q:"十五日壬子，四舟同發"},
+  {id:"okinawa",s:"11·21",t:753.89,d:"753 · 11th month, 21st",w:"十一月廿一日戊午",p:"okinawa",title:"第一・第二舟、阿兒奈波島に到る",en:"Ships one and two reach Ajinawa",src:"唐大和上東征傳",q:"廿一日戊午，第一第二兩舟同到阿兒奈波島"},
+  {id:"wind",s:"12·6",t:753.93,d:"753 · 12th month, 6th",w:"十二月六日",p:"okinawa",title:"南風起こる、第一舟座礁",en:"A south wind; the first ship runs aground, the second sails for Tane",src:"唐大和上東征傳",q:"六日，南風起，第一舟著石不動，第二舟發向多禰去"},
+  {id:"yaku",s:"12·7",t:753.935,d:"753 · 12th month, 7th",w:"十二月七日",p:"yaku",title:"第二舟、益救島に至る",en:"The second ship reaches Yaku",src:"唐大和上東征傳",q:"七日，至益救島"},
+  {id:"akimeya",s:"12·20",t:753.97,d:"753 · 12th month, 20th",w:"十二月廿日乙酉午時",p:"akimeya",title:"第二舟、秋妻屋浦に着く",en:"The second ship lands at Akimeya Bay",src:"唐大和上東征傳",q:"廿日乙酉午時，第二舟著薩摩國阿多郡秋妻屋浦",sel:true},
+  {id:"dazaifu",s:"12·26",t:753.99,d:"753 · 12th month, 26th",w:"十二月廿六日辛卯",p:"dazaifu",title:"鑒眞、大宰府に入る",en:"Jianzhen enters Dazaifu",src:"唐大和上東征傳",q:"廿六日辛卯，延慶師引和上入太宰府"},
+  {id:"naniwa",s:"754·2·1",t:754.08,d:"754 · 2nd month, 1st",w:"天平勝寶六年二月一日",p:"naniwa",title:"難波に至る",en:"The party reaches Naniwa",src:"唐大和上東征傳",q:"二月一日，至難波"},
+  {id:"capital",s:"2·4",t:754.09,d:"754 · 2nd month, 4th",w:"二月四日",p:"todaiji",title:"京に入り、東大寺に安置",en:"Jianzhen enters the capital; installed at Tōdai-ji",src:"唐大和上東征傳",q:"四日，入京…引入東大寺安置"},
+  {id:"ordain",s:"754·4",t:754.25,d:"754 · 4th month",w:"天平勝寶六年四月",p:"todaiji",title:"戒壇を築き、授戒",en:"A precepts platform is built; ordinations",src:"唐大和上東征傳",q:"於盧舍那殿前立戒壇"},
+];
+let selected = events.findIndex(e => e.sel);
+
+// ---------- region overlay ----------
+function drawRegion(){
+  const svg = d3.select("#region-svg"); svg.selectAll("*").remove();
+  const sea = svg.append("g");
+  const seaLbl = [["東海 · EAST CHINA SEA",123.3,28.6,-28],["黄海 · YELLOW SEA",123.2,35.3,0],["PHILIPPINE SEA",133,27.2,-20],["日本海",133.5,37.3,0]];
+  for (const [t,lo,la,rot] of seaLbl){ const [x,y]=P(lo,la); sea.append("text").attr("class","lbl sea").attr("x",x).attr("y",y).attr("text-anchor","middle").attr("transform",`rotate(${rot} ${x} ${y})`).text(t); }
+  // routes
+  const line = d3.line().curve(d3.curveCatmullRom.alpha(.6));
+  const g = svg.append("g");
+  const seaRoute = ["huangsipu","okinawa","yaku","akimeya"].map(k=>P(...places[k].ll));
+  // bend the sea legs slightly to read as sailing lines, not rulers
+  const bent = [seaRoute[0], mid(seaRoute[0],seaRoute[1],-26), seaRoute[1], mid(seaRoute[1],seaRoute[2],22), seaRoute[2], seaRoute[3]];
+  g.append("path").attr("class","route under").attr("d", line(bent));
+  g.append("path").attr("class","route").attr("d", line(bent));
+  // ship 3 to Murozaki
+  const s3 = [P(...places.yaku.ll), mid(P(...places.yaku.ll),P(...places.murozaki.ll),34), P(...places.murozaki.ll)];
+  g.append("path").attr("class","route under").attr("d", line(s3)); g.append("path").attr("class","route faint").attr("d", line(s3));
+  // ship 1 driven south: off the map, not located
+  const o = P(...places.okinawa.ll); const s1 = [o,[o[0]-60,o[1]+60],[o[0]-110,o[1]+118]];
+  g.append("path").attr("class","route faint").attr("d", line(s1));
+  g.append("text").attr("class","lbl note").attr("x",o[0]-116).attr("y",o[1]+112).attr("text-anchor","end").text("ship 1 driven south to 驩州 · not located ▼");
+  // overland
+  const ov = ["dazaifu","naniwa","todaiji"].map(k=>P(...places[k].ll)); const ovb=[ov[0], mid(ov[0],ov[1],-30), ov[1], ov[2]];
+  g.append("path").attr("class","route under").attr("d", line(ovb)); g.append("path").attr("class","route overland").attr("d", line(ovb));
+  // transmission arc (selected relationship)
+  const a0=P(...places.yangzhou.ll), a1=P(...places.todaiji.ll); const arcd=`M${a0} Q${(a0[0]+a1[0])/2},${Math.min(a0[1],a1[1])-150} ${a1}`;
+  g.append("path").attr("class","arc glow").attr("d",arcd); g.append("path").attr("class","arc").attr("d",arcd);
+  const am = [ (a0[0]+a1[0])/2, Math.min(a0[1],a1[1])-72 ];
+  g.append("text").attr("class","lbl note").attr("x",am[0]).attr("y",am[1]).attr("text-anchor","middle").attr("fill","var(--vermilion)").text("transmission · 四十八部 · 753 – 754");
+  // leg dates along the sea route
+  const dates=[["11·15",seaRoute[0],10,18],["11·21",seaRoute[1],-40,-8],["12·07",seaRoute[2],-36,12],["12·20",seaRoute[3],-16,-16],["12·26",P(...places.dazaifu.ll),10,16],["754 · 02·04",P(...places.todaiji.ll),14,-10]];
+  for(const [t,p,dx,dy] of dates){ g.append("text").attr("class","lbl date").attr("x",p[0]+dx).attr("y",p[1]+dy).text(t); }
+  // off-map Chang'an
+  const cx = 14, cy = P(109,34.29)[1]+70;
+  g.append("path").attr("class","offmap").attr("d",`M${P(...places.yangzhou.ll)} L${cx+40},${cy}`);
+  g.append("text").attr("class","lbl").attr("x",cx+44).attr("y",cy-6).text("◀ 長安 · 1 100 km");
+  g.append("text").attr("class","lbl rom").attr("x",cx+44).attr("y",cy+6).text("CHANG'AN · NEW YEAR AUDIENCE · 753");
+  // places
+  const pg = svg.append("g");
+  for (const [k,p] of Object.entries(places)){
+    const [x,y]=P(...p.ll); const isSel = events[selected].p===k;
+    const n = pg.append("g").attr("class", (p.k==="site"?"pin":"locpin")+(isSel?" selected":"")).attr("data-place",k).style("cursor","pointer").on("click",()=>{const i=events.findIndex(e=>e.p===k); if(i>=0) select(i);});
+    if (p.k==="site"){
+      if(isSel) n.append("circle").attr("class","halo").attr("cx",x).attr("cy",y).attr("r",10);
+      n.append("circle").attr("class","ring").attr("cx",x).attr("cy",y).attr("r",6.5);
+      n.append("circle").attr("class","core").attr("cx",x).attr("cy",y).attr("r",2.6);
+      if(p.count){ n.append("circle").attr("class","count").attr("cx",x+10).attr("cy",y-9).attr("r",8); n.append("text").attr("class","count-t").attr("x",x+10).attr("y",y-5.5).text(p.count); }
+    } else {
+      if(isSel) n.append("circle").attr("class","halo").attr("cx",x).attr("cy",y).attr("r",10).attr("fill","none").attr("stroke","var(--gold-bright)").attr("stroke-width",1.5);
+      n.append("circle").attr("class","loc-pin").attr("cx",x).attr("cy",y).attr("r",p.rad);
+      n.append("circle").attr("class","loc-pin core").attr("cx",x).attr("cy",y).attr("r",2.4);
+    }
+    const anchor = p.anchor||"start";
+    n.append("text").attr("class","lbl").attr("x",x+p.dx).attr("y",y+p.dy).attr("text-anchor",anchor).text(p.n);
+    n.append("text").attr("class","lbl rom").attr("x",x+p.dx).attr("y",y+p.dy+11).attr("text-anchor",anchor).text(p.r.toUpperCase());
+  }
+}
+function mid(a,b,off){ const m=[(a[0]+b[0])/2,(a[1]+b[1])/2]; const d=[b[0]-a[0],b[1]-a[1]]; const l=Math.hypot(...d)||1; return [m[0]-d[1]/l*off, m[1]+d[0]/l*off]; }
+
+// ---------- story rail ----------
+function drawRail(){
+  const rail = d3.select("#rail"); rail.selectAll("*").remove();
+  events.forEach((e,i)=>{ rail.append("button").attr("type","button").attr("class","step").attr("aria-current",i===selected?"true":null).attr("title",e.title).on("click",()=>select(i)).html(`<span class="d">${e.s}</span>`); });
+  d3.select("#ribbon-title").text(`${selected+1} / ${events.length} · ${events[selected].title}`);
+}
+// ---------- card ----------
+function drawCard(){
+  const e = events[selected]; const p = e.p?places[e.p]:null;
+  const placeLine = p ? `${p.n} <span class="chip ${p.k}">${p.k==="site"?"attested site":"identified locality"}</span>` : `含元殿, 長安 <span class="chip site">attested site · off this map</span>`;
+  d3.select("#card").html(`
+    <div class="eyebrow">Event · ${e.d.split(" · ")[0]} · day precision</div>
+    <h2>${e.title}</h2>
+    <div class="en">${e.en.toUpperCase()}</div>
+    <figure class="figure"><div class="art"></div><figcaption><b>東征伝絵巻</b>, Kamakura, 1298 · later depiction, not evidence · rights check pending</figcaption></figure>
+    <blockquote class="quote">${e.q}<span class="src">${e.src} · as written: ${e.w}</span></blockquote>
+    <dl class="kv"><dt>Place</dt><dd>${placeLine}</dd><dt>Date</dt><dd>${e.d} · 唐 and 日本 calendars kept</dd><dt>Who</dt><dd>鑒眞 Jianzhen · 大伴古麻呂 Ōtomo no Komaro</dd></dl>
+    <h4>Connected</h4><ul class="list"><li><span>鑒眞 enters 大宰府</span><span>6 days later</span></li><li><span class="arc">Transmission 揚州 → 東大寺 · 四十八部</span><span>753 – 754</span></li></ul>
+    <h4>Nearby</h4><ul class="list"><li><span>石籬浦 · the fourth ship's landfall</span><span>≈ 25 km</span></li></ul>
+    <h4>Sources</h4><ul class="list"><li><span>唐大和上東征傳 (779) · 淡海三船</span><span>public domain</span></li><li><span>續日本紀 (797)</span><span>public domain</span></li></ul>`);
+}
+// ---------- timeline ----------
+function drawTimeline(){
+  const svg = d3.select("#tl"); svg.selectAll("*").remove();
+  const W=1100,H=54; const x = d3.scaleLinear().domain([750,755]).range([70,W-70]);
+  const yA=14; svg.append("line").attr("class","tl-axis").attr("x1",x(750)).attr("x2",x(755)).attr("y1",yA).attr("y2",yA);
+  svg.append("text").attr("class","tl-win").attr("x",10).attr("y",yA+3).text("Window");
+  for(let y=750;y<=755;y++){ svg.append("line").attr("class","tl-tick").attr("x1",x(y)).attr("x2",x(y)).attr("y1",yA-4).attr("y2",yA+4); if(y<755) svg.append("text").attr("class","tl-year").attr("x",x(y)+4).attr("y",yA-6).text(y); }
+  // lens: 753-10 .. 754-05 expanded on the lower row
+  const L0=753.75,L1=754.42, yB=40; const xl=d3.scaleLinear().domain([L0,L1]).range([70,W-70]);
+  svg.append("rect").attr("class","tl-lens").attr("x",x(L0)).attr("y",yA-6).attr("width",x(L1)-x(L0)).attr("height",12).attr("rx",2);
+  svg.append("path").attr("class","tl-cross").attr("d",`M${x(L0)},${yA+6} L70,${yB-9} M${x(L1)},${yA+6} L${W-70},${yB-9}`);
+  svg.append("line").attr("class","tl-axis").attr("x1",70).attr("x2",W-70).attr("y1",yB).attr("y2",yB);
+  svg.append("text").attr("class","tl-win").attr("x",10).attr("y",yB+3).text("Voyage");
+  const months=[[753.75,"753 · 10月"],[753.833,"11月"],[753.917,"12月"],[754,"754 · 正月"],[754.083,"2月"],[754.167,"3月"],[754.25,"4月"],[754.333,"5月"]];
+  for(const [t,l] of months){ svg.append("line").attr("class","tl-tick").attr("x1",xl(t)).attr("x2",xl(t)).attr("y1",yB-3).attr("y2",yB+3); svg.append("text").attr("class","tl-year").attr("x",xl(t)+3).attr("y",yB+13).text(l); }
+  events.forEach((e,i)=>{
+    svg.append("circle").attr("class","tl-ev"+(i===selected?" sel":"")).attr("cx",x(e.t)).attr("cy",yA).attr("r",i===selected?4:2.5).style("cursor","pointer").on("click",()=>select(i));
+    if(e.t>=L0&&e.t<=L1) svg.append("circle").attr("class","tl-ev"+(i===selected?" sel":"")).attr("cx",xl(e.t)).attr("cy",yB).attr("r",i===selected?5:3).style("cursor","pointer").on("click",()=>select(i));
+  });
+  const s=events[selected]; if(s.t>=L0&&s.t<=L1){ svg.append("line").attr("class","tl-play").attr("x1",xl(s.t)).attr("x2",xl(s.t)).attr("y1",yB-12).attr("y2",yB+8); svg.append("text").attr("class","tl-lbl sel").attr("x",xl(s.t)+7).attr("y",yB-8).text(s.d); }
+}
+function select(i){ selected=i; drawRegion(); drawRail(); drawCard(); drawTimeline(); }
+d3.select("#tl-prev").on("click",()=>select(Math.max(0,selected-1)));
+d3.select("#tl-next").on("click",()=>select(Math.min(events.length-1,selected+1)));
+let playing=null; d3.select("#tl-play").on("click",function(){ if(playing){clearInterval(playing);playing=null;this.textContent="▶";return;} this.textContent="❚❚"; playing=setInterval(()=>{ if(selected>=events.length-1){clearInterval(playing);playing=null;d3.select("#tl-play").text("▶");return;} select(selected+1); },1400); });
+select(selected);
+
+// ---------- globe ----------
+let globeDrawn=false;
+function drawGlobe(){
+  if(globeDrawn) return; globeDrawn=true;
+  const canvas=document.getElementById("globe-canvas"), ctx=canvas.getContext("2d"); const W=canvas.width,H=canvas.height;
+  const img=new Image(); img.onload=()=>{
+    const tw=img.naturalWidth, th=img.naturalHeight; const tc=document.createElement("canvas"); tc.width=tw; tc.height=th; const tctx=tc.getContext("2d"); tctx.drawImage(img,0,0); const tex=tctx.getImageData(0,0,tw,th).data;
+    const proj=d3.geoOrthographic().rotate([-126,-30,0]).translate([W*0.58,H*0.52]).scale(H*0.46).clipAngle(90);
+    const out=ctx.createImageData(W,H); const o=out.data;
+    const C=[W*0.58,H*0.52], RR=H*0.46; const centers=[[128,31],[113.5,34.3]];
+    for(let y=0;y<H;y++) for(let x=0;x<W;x++){ const k=(y*W+x)*4; if(Math.hypot(x-C[0],y-C[1])>RR){o[k+3]=0;continue;} const ll=proj.invert([x,y]); if(!ll||isNaN(ll[0])){o[k+3]=0;continue;} const u=((ll[0]+180)/360*tw)|0, v=((90-ll[1])/180*th)|0; const t=((Math.min(th-1,Math.max(0,v)))*tw+((u%tw)+tw)%tw)*4;
+      // fog of coverage: outside the chapters' reach the map fades toward sketched parchment, the way a strategy map marks the unexplored. It states no history; it marks where the atlas has none.
+      let dmin=Infinity; for(const c of centers){ const d=d3.geoDistance(ll,c); if(d<dmin) dmin=d; }
+      const f=Math.min(1,Math.max(0,(dmin-0.22)/0.35)); const r=tex[t],gg=tex[t+1],b=tex[t+2]; const lum=0.3*r+0.59*gg+0.11*b; const pr=lum*0.55+120, pg=lum*0.5+105, pb=lum*0.4+80;
+      o[k]=r*(1-f)+pr*f; o[k+1]=gg*(1-f)+pg*f; o[k+2]=b*(1-f)+pb*f; o[k+3]=255; }
+    ctx.fillStyle="#0c1216"; ctx.fillRect(0,0,W,H);
+    // starfield-free: a quiet gradient space
+    const bg=ctx.createRadialGradient(W*0.58,H*0.52,H*0.3,W*0.58,H*0.52,H*0.9); bg.addColorStop(0,"#15232c"); bg.addColorStop(1,"#070b0e"); ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+    ctx.putImageData(out,0,0);
+    // limb shading + atmosphere
+    const c=[W*0.58,H*0.52], r=H*0.46; const sh=ctx.createRadialGradient(c[0]-r*0.35,c[1]-r*0.35,r*0.2,c[0],c[1],r); sh.addColorStop(0,"rgba(255,255,255,0.06)"); sh.addColorStop(0.75,"rgba(0,0,0,0)"); sh.addColorStop(1,"rgba(0,0,0,0.55)"); ctx.fillStyle=sh; ctx.beginPath(); ctx.arc(c[0],c[1],r,0,7); ctx.fill();
+    const at=ctx.createRadialGradient(c[0],c[1],r*0.98,c[0],c[1],r*1.08); at.addColorStop(0,"rgba(120,190,220,0.35)"); at.addColorStop(1,"rgba(120,190,220,0)"); ctx.fillStyle=at; ctx.beginPath(); ctx.arc(c[0],c[1],r*1.08,0,7); ctx.fill();
+    // overlay
+    const svg=d3.select("#globe-svg"); svg.selectAll("*").remove(); const path=d3.geoPath(proj);
+    svg.append("path").attr("d",path(d3.geoGraticule().step([15,15])())).attr("fill","none").attr("stroke","rgba(243,234,215,0.10)").attr("stroke-width",0.8);
+    const ch=[{n:"The Embassy to Tang China",c:"遣唐使 · 750 – 754",ll:[128,31],count:29,cls:""},{n:"The End of the State of Han",c:"韓の滅亡 · 233 – 226 BCE",ll:[113.5,34.3],count:5,cls:"qin"}];
+    for(const k of ch){ const [x,y]=proj(k.ll); const g=svg.append("g"); g.append("circle").attr("class","band "+k.cls).attr("cx",x).attr("cy",y).attr("r",k.cls?22:40).attr("stroke-dasharray","4 3"); g.append("circle").attr("class","ring").attr("cx",x).attr("cy",y).attr("r",6).attr("fill","#121a20").attr("stroke","var(--gold)").attr("stroke-width",2); g.append("text").attr("class","lbl").attr("x",x+(k.cls?-30:50)).attr("y",y+(k.cls?-30:-48)).attr("text-anchor",k.cls?"end":"start").text(k.n); g.append("text").attr("class","lbl rom").attr("x",x+(k.cls?-30:50)).attr("y",y+(k.cls?-18:-36)).attr("text-anchor",k.cls?"end":"start").text(k.c+" · "+k.count+" EVENTS"); }
+    const cand=[["Alexander",[33,36]],["Silk Road networks",[75,40]],["Christianity's divisions",[29,41]]];
+    for(const [n,ll] of cand){ const p=proj(ll); if(!p||isNaN(p[0])) continue; const vis=d3.geoDistance(ll,[126,30])<Math.PI/2; if(!vis) continue; svg.append("circle").attr("cx",p[0]).attr("cy",p[1]).attr("r",5).attr("fill","none").attr("stroke","var(--ink-faint)").attr("stroke-dasharray","2 2"); svg.append("text").attr("class","lbl note").attr("x",p[0]+9).attr("y",p[1]+4).text(n+" · candidate"); }
+    // globe timeline
+    const t=d3.select("#tl-globe"); t.selectAll("*").remove(); const x=d3.scaleLinear().domain([-300,900]).range([70,1030]); const yA=20;
+    t.append("line").attr("class","tl-axis").attr("x1",70).attr("x2",1030).attr("y1",yA).attr("y2",yA); t.append("text").attr("class","tl-win").attr("x",10).attr("y",yA+3).text("Centuries");
+    for(let y=-300;y<=900;y+=100){ t.append("line").attr("class","tl-tick").attr("x1",x(y)).attr("x2",x(y)).attr("y1",yA-4).attr("y2",yA+4); t.append("text").attr("class","tl-year").attr("x",x(y)+4).attr("y",yA+16).text(y<=0?(1-y)+" BCE":y); }
+    t.append("rect").attr("class","band qin").attr("x",x(-232)-3).attr("y",yA-10).attr("width",8).attr("height",8).attr("rx",1); t.append("text").attr("class","tl-lbl").attr("x",x(-232)+9).attr("y",yA-4).text("Han · 233 – 226 BCE");
+    t.append("rect").attr("class","band").attr("x",x(750)).attr("y",yA-10).attr("width",Math.max(6,x(754)-x(750))).attr("height",8).attr("rx",1); t.append("text").attr("class","tl-lbl sel").attr("x",x(754)+8).attr("y",yA-4).text("Tang embassy · 750 – 754");
+    t.append("rect").attr("x",x(630)).attr("y",yA-3).attr("width",x(894)-x(630)).attr("height",2).attr("fill","rgba(210,169,79,.35)"); t.append("text").attr("class","tl-lbl").attr("x",x(630)).attr("y",yA+30).text("missions to Tang, 630 – 894 · network layer (planned)").attr("fill","var(--ink-faint)");
+  }; img.src="__GLOBE__";
+}
+// ---------- local: Heijō-kyō ----------
+function drawLocal(){
+  const svg=d3.select("#local-svg"); if(!svg.select("g").empty()) return;
+  const g=svg.append("g");
+  // ground: soft green with hills to the east, river 佐保川 schematic
+  const defs=svg.append("defs"); const gr=defs.append("linearGradient").attr("id","ground").attr("x1",0).attr("x2",1).attr("y1",0).attr("y2",1); gr.append("stop").attr("offset",0).attr("stop-color","#a7bb62"); gr.append("stop").attr("offset",1).attr("stop-color","#8fae55");
+  g.append("rect").attr("width",1138).attr("height",783).attr("fill","url(#ground)");
+  const hills=[[980,120,170],[1060,330,140],[1010,560,180],[120,640,150],[60,180,120]]; for(const [x,y,r] of hills){ const h=defs.append("radialGradient").attr("id","h"+x+y); h.append("stop").attr("offset",0).attr("stop-color","rgba(140,110,70,.55)"); h.append("stop").attr("offset",1).attr("stop-color","rgba(140,110,70,0)"); g.append("circle").attr("cx",x).attr("cy",y).attr("r",r).attr("fill","url(#h"+x+y+")"); }
+  g.append("path").attr("class","river").attr("d","M700,0 C690,120 740,220 720,330 S690,560 730,783");
+  // grid: 右京 / 左京, 9 条 × 4 坊 each; palace at the north centre
+  const x0=290,y0=96,cw=62,ch=62; // 条坊 cell
+  for(let c=0;c<=8;c++) for(let b=0;b<=8;b++){ if(c>=0&&c<2&&b>=3&&b<5) continue; g.append("rect").attr("class","block").attr("x",x0+b*cw+2).attr("y",y0+c*ch+2).attr("width",cw-4).attr("height",ch-4); }
+  for(let i=0;i<=9;i++) g.append("line").attr("class","grid").attr("x1",x0).attr("x2",x0+9*cw).attr("y1",y0+i*ch).attr("y2",y0+i*ch);
+  for(let i=0;i<=9;i++) g.append("line").attr("class","grid").attr("x1",x0+i*cw).attr("x2",x0+i*cw).attr("y1",y0).attr("y2",y0+9*ch);
+  // 外京 to the east (3 条 × 3 坊)
+  for(let c=1;c<=4;c++) for(let b=0;b<3;b++){ g.append("rect").attr("class","block").attr("x",x0+9*cw+b*cw+2).attr("y",y0+c*ch+2).attr("width",cw-4).attr("height",ch-4); }
+  for(let i=1;i<=5;i++) g.append("line").attr("class","grid").attr("x1",x0+9*cw).attr("x2",x0+12*cw).attr("y1",y0+i*ch).attr("y2",y0+i*ch);
+  for(let i=0;i<=3;i++) g.append("line").attr("class","grid").attr("x1",x0+9*cw+i*cw).attr("x2",x0+9*cw+i*cw).attr("y1",y0+ch).attr("y2",y0+5*ch);
+  // 朱雀大路
+  const sx=x0+4.5*cw; g.append("line").attr("class","avenue").attr("x1",sx).attr("x2",sx).attr("y1",y0+2*ch).attr("y2",y0+9*ch);
+  g.append("text").attr("class","lbl").attr("x",sx+8).attr("y",y0+8.6*ch).text("朱雀大路").attr("transform",`rotate(-90 ${sx+8} ${y0+8.6*ch})`);
+  g.append("text").attr("class","lbl rom").attr("x",x0+1.2*cw).attr("y",y0+9*ch+30).text("UKYŌ · 右京");
+  g.append("text").attr("class","lbl rom").attr("x",x0+6.6*cw).attr("y",y0+9*ch+30).text("SAKYŌ · 左京");
+  g.append("text").attr("class","lbl rom").attr("x",x0+9.6*cw).attr("y",y0+5*ch+30).text("GEKYŌ · 外京");
+  // palace
+  const px=x0+3*cw, py=y0, pw=2*cw+cw*0.5, ph=2*ch; g.append("rect").attr("class","palace").attr("x",px).attr("y",py).attr("width",pw).attr("height",ph);
+  hall(g,px+pw/2,py+ph/2-6,1.5); g.append("text").attr("class","lbl").attr("x",px+pw/2).attr("y",py-10).attr("text-anchor","middle").text("平城宮"); g.append("text").attr("class","lbl rom").attr("x",px+pw/2).attr("y",py-22).attr("text-anchor","middle").text("HEIJŌ PALACE · SITE");
+  // temples (attested sites, schematic positions on the grid)
+  const temples=[["東大寺","TŌDAI-JI",x0+11.4*cw,y0+1.5*ch,true],["興福寺","KŌFUKU-JI",x0+9.6*cw,y0+3.2*ch,false],["大安寺","DAIAN-JI",x0+6.5*cw,y0+6.5*ch,false],["唐招提寺","TŌSHŌDAI-JI · 759",x0+1.5*cw,y0+4.6*ch,false],["薬師寺","YAKUSHI-JI",x0+2.5*cw,y0+6.6*ch,false]];
+  for(const [n,r,x,y,big] of temples){ g.append("rect").attr("class","temple").attr("x",x-26).attr("y",y-22).attr("width",52).attr("height",44).attr("rx",2); pagoda(g,x,y+2,big?1.2:1); g.append("text").attr("class","lbl").attr("x",x).attr("y",y+40).attr("text-anchor","middle").text(n); g.append("text").attr("class","lbl rom").attr("x",x).attr("y",y+51).attr("text-anchor","middle").text(r); }
+  // arrival: from 難波 (west) along the road to 羅城門, then up 朱雀大路 to 東大寺
+  const line=d3.line().curve(d3.curveCatmullRom.alpha(.5)); const arr=[[0,y0+9*ch+40],[x0-40,y0+9*ch+10],[sx,y0+9*ch],[sx,y0+2*ch+10],[x0+9*cw,y0+2*ch+10],[x0+11.4*cw,y0+1.5*ch+26]];
+  g.append("path").attr("class","route under").attr("d",line(arr)); g.append("path").attr("class","route overland").attr("d",line(arr));
+  g.append("text").attr("class","lbl date").attr("x",30).attr("y",y0+9*ch+28).text("from 難波 · 754 · 2·01");
+  g.append("text").attr("class","lbl date").attr("x",x0+9.9*cw).attr("y",y0+1.3*ch).text("2·04 · 入京");
+  const [tx,ty]=[x0+11.4*cw,y0+1.5*ch]; g.append("circle").attr("class","halo").attr("cx",tx).attr("cy",ty).attr("r",10).attr("fill","none").attr("stroke","var(--gold-bright)").attr("stroke-width",1.5);
+  g.append("text").attr("class","lbl rom").attr("x",1120).attr("y",770).attr("text-anchor","end").text("SCHEMATIC PLAN · LANDMARKS ARE SYMBOLS");
+}
+function hall(g,x,y,s){ g.append("path").attr("class","glyph").attr("transform",`translate(${x},${y}) scale(${s})`).attr("d","M-16,6 L-16,-2 L-20,-2 L0,-14 L20,-2 L16,-2 L16,6 Z M-10,6 L-10,-1 L-4,-1 L-4,6 M4,6 L4,-1 L10,-1 L10,6"); }
+function pagoda(g,x,y,s){ g.append("path").attr("class","glyph").attr("transform",`translate(${x},${y}) scale(${s})`).attr("d","M-12,10 L-12,6 L-15,6 L0,-1 L15,6 L12,6 L12,10 Z M-9,-1 L-9,-4 L-12,-4 L0,-10 L12,-4 L9,-4 L9,-1 M-6,-10 L-6,-12 L-8,-12 L0,-17 L8,-12 L6,-12 L6,-10 M-1,-17 L-1,-22 L1,-22 L1,-17"); }
+
+// ---------- diorama ----------
+const HM = __HEIGHTJSON__;
+let dioDrawn=false;
+function drawDiorama(){
+  if(dioDrawn) return; dioDrawn=true;
+  const canvas=document.getElementById("dio-canvas"); const W=canvas.width,H=canvas.height;
+  document.getElementById("mini-img").src=document.querySelector("#screen-region img.base").src;
+  const img=new Image(); img.onload=()=>{
+    const tc=document.createElement("canvas"); tc.width=img.width; tc.height=img.height; const tx=tc.getContext("2d"); tx.drawImage(img,0,0); const d=tx.getImageData(0,0,img.width,img.height).data;
+    const cols=img.width, rows=img.height; const E=new Float32Array(cols*rows); for(let i=0;i<cols*rows;i++) E[i]=d[i*4]*256+d[i*4+1]-1000;
+    const U=HM.mpp/100; const Wu=cols*U, Hu=rows*U; const YS=2.2/100; // 1 unit = 100 m
+    const hAt=(c,r)=>E[Math.min(rows-1,Math.max(0,r|0))*cols+Math.min(cols-1,Math.max(0,c|0))];
+    const hLerp=(x,z)=>{ const c=(x+Wu/2)/U, r=(z+Hu/2)/U; const c0=Math.floor(c), r0=Math.floor(r), fc=c-c0, fr=r-r0; return (hAt(c0,r0)*(1-fc)+hAt(c0+1,r0)*fc)*(1-fr)+(hAt(c0,r0+1)*(1-fc)+hAt(c0+1,r0+1)*fc)*fr; };
+    const toXZ=(lon,lat)=>[ (mx(lon)-HM.MX0)/(HM.MX1-HM.MX0)*Wu-Wu/2, (my(lat)-HM.MY0)/(HM.MY1-HM.MY0)*Hu-Hu/2 ];
+    // value noise
+    const hash=(x,y)=>{ const s=Math.sin(x*127.1+y*311.7)*43758.5453; return s-Math.floor(s); };
+    const vnoise=(x,y)=>{ const x0=Math.floor(x),y0=Math.floor(y),fx=x-x0,fy=y-y0, sx=fx*fx*(3-2*fx), sy=fy*fy*(3-2*fy); return (hash(x0,y0)*(1-sx)+hash(x0+1,y0)*sx)*(1-sy)+(hash(x0,y0+1)*(1-sx)+hash(x0+1,y0+1)*sx)*sy; };
+    const fbm=(x,y)=>vnoise(x,y)*0.5+vnoise(x*2.1,y*2.1)*0.3+vnoise(x*4.3,y*4.3)*0.2;
+
+    const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true}); renderer.setPixelRatio(1); renderer.setSize(W,H,false); renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap; renderer.outputColorSpace=THREE.SRGBColorSpace; renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=1.05;
+    const scene=new THREE.Scene(); scene.fog=new THREE.Fog(0xd3e3ea,330,820);
+    const camera=new THREE.PerspectiveCamera(40,W/H,1,3000);
+    const target=new THREE.Vector3(-70,0,-5); camera.position.set(-235,175,165); camera.lookAt(target);
+    scene.add(new THREE.HemisphereLight(0xdcecff,0x6b5a3b,0.6));
+    const sun=new THREE.DirectionalLight(0xffe2b4,2.1); sun.position.set(-320,420,160); sun.castShadow=true; sun.shadow.mapSize.set(2048,2048); const sc=sun.shadow.camera; sc.left=-380; sc.right=380; sc.top=380; sc.bottom=-380; sc.near=50; sc.far=1200; sun.shadow.bias=-0.0008; scene.add(sun); scene.add(sun.target);
+
+    // terrain
+    const geo=new THREE.PlaneGeometry(Wu,Hu,cols-1,rows-1); geo.rotateX(-Math.PI/2);
+    const pos=geo.attributes.position; const col=new Float32Array(pos.count*3); const C=new THREE.Color();
+    const slopeAt=(c,r)=>Math.hypot(hAt(c+1,r)-hAt(c-1,r),hAt(c,r+1)-hAt(c,r-1))/(2*HM.mpp);
+    for(let r=0;r<rows;r++) for(let c=0;c<cols;c++){ const i=r*cols+c; const e=E[i]; pos.setY(i,e*YS);
+      const n=fbm(c*0.045,r*0.045), n2=fbm(c*0.012+9,r*0.012+3), sl=slopeAt(c,r);
+      if(e<=1){ const t=Math.min(1,-e/35); C.setHex(0x3f93ad).lerp(new THREE.Color(0x1d5674),t); }
+      else if(e<7){ C.setHex(0xd8c48c); }
+      else { const field=n2>0.56&&e<160&&sl<0.12; C.setHex(field?0xb7b65a:0x7faf49).lerp(new THREE.Color(0x5c8a39),n*0.6);
+        if(e>220) C.lerp(new THREE.Color(0x8d7d4e),Math.min(1,(e-220)/300)); if(e>520) C.lerp(new THREE.Color(0x857568),Math.min(1,(e-520)/300));
+        if(sl>0.22) C.lerp(new THREE.Color(0x8f8373),Math.min(1,(sl-0.22)/0.25)); }
+      col[i*3]=C.r; col[i*3+1]=C.g; col[i*3+2]=C.b; }
+    geo.setAttribute("color",new THREE.BufferAttribute(col,3)); geo.computeVertexNormals();
+    const terrain=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({vertexColors:true,roughness:0.95,metalness:0})); terrain.receiveShadow=true; terrain.castShadow=true; scene.add(terrain);
+    // water
+    const water=new THREE.Mesh(new THREE.PlaneGeometry(Wu+1600,Hu+1600),new THREE.MeshStandardMaterial({color:0x2a7c9d,transparent:true,opacity:0.6,roughness:0.22,metalness:0.08})); water.rotation.x=-Math.PI/2; water.position.y=0.06; water.receiveShadow=true; scene.add(water);
+    const deep=new THREE.Mesh(new THREE.PlaneGeometry(Wu+1600,Hu+1600),new THREE.MeshStandardMaterial({color:0x1b4f6a,roughness:1})); deep.rotation.x=-Math.PI/2; deep.position.y=-0.6; scene.add(deep);
+
+    // trees: symbols, scattered by terrain. Conifers on slopes and heights, broadleaf on the lowland.
+    const coneG=new THREE.ConeGeometry(0.95,3.4,6); coneG.translate(0,1.9,0); const ballG=new THREE.SphereGeometry(1.25,6,5); ballG.translate(0,2.0,0); const trunkG=new THREE.CylinderGeometry(0.18,0.26,1.6,5); trunkG.translate(0,0.8,0);
+    const pts=[]; for(let r=2;r<rows-2;r+=2) for(let c=2;c<cols-2;c+=2){ const e=hAt(c,r); if(e<14||e>560) continue; const sl=slopeAt(c,r); if(sl>0.4) continue; const n=fbm(c*0.03+5,r*0.03+7); if(n<0.5) continue; if(hash(c,r)>0.75) continue; const x=(c+hash(r,c)*1.6-0.8)*U-Wu/2, z=(r+hash(c*3,r)*1.6-0.8)*U-Hu/2; pts.push([x,z,e,sl]); }
+    const con=pts.filter(p=>p[2]>140||p[3]>0.16), bro=pts.filter(p=>!(p[2]>140||p[3]>0.16));
+    function inst(g,color,list,scaleFn){ const m=new THREE.InstancedMesh(g,new THREE.MeshStandardMaterial({color,roughness:0.9}),list.length); const M=new THREE.Matrix4(),Q=new THREE.Quaternion(),S=new THREE.Vector3(),T=new THREE.Vector3(); list.forEach((p,i)=>{ const s=scaleFn(p); T.set(p[0],hLerp(p[0],p[1])*YS-0.1,p[1]); S.set(s,s,s); M.compose(T,Q,S); m.setMatrixAt(i,M); }); m.castShadow=true; m.receiveShadow=true; scene.add(m); return m; }
+    inst(coneG,0x2d5f2b,con,p=>0.75+hash(p[0],p[1])*0.5); inst(ballG,0x4f8c32,bro,p=>0.7+hash(p[1],p[0])*0.5); inst(trunkG,0x5a3f26,pts,p=>0.8+hash(p[0]*2,p[1])*0.4);
+
+    // houses: symbolic settlements at the attested landfalls
+    const wall=new THREE.MeshStandardMaterial({color:0xe9dfc8,roughness:0.9}), roof=new THREE.MeshStandardMaterial({color:0x8a5a3a,roughness:0.9}), thatch=new THREE.MeshStandardMaterial({color:0xb9a15c,roughness:1});
+    const boxG=new THREE.BoxGeometry(1.4,0.9,1.1); boxG.translate(0,0.45,0); const roofG=new THREE.ConeGeometry(1.05,0.8,4); roofG.rotateY(Math.PI/4); roofG.translate(0,1.3,0); roofG.scale(1,1,0.8);
+    function village(lon,lat,n,seed){ const [cx,cz]=toXZ(lon,lat); let placed=0,k=0; while(placed<n&&k<200){ k++; const a=hash(seed+k,3)*6.28, rr=1.5+hash(k,seed)*7; const x=cx+Math.cos(a)*rr, z=cz+Math.sin(a)*rr*0.8; const e=hLerp(x,z); if(e<4||e>90) continue; const g=new THREE.Group(); g.position.set(x,e*YS,z); g.rotation.y=hash(k,9)*6.28; const sc=1.5+hash(k,2)*0.7; g.scale.set(sc,sc,sc); const b=new THREE.Mesh(boxG,wall); b.castShadow=true; b.receiveShadow=true; const rf=new THREE.Mesh(roofG,hash(k,5)>0.5?roof:thatch); rf.castShadow=true; g.add(b,rf); scene.add(g); placed++; } }
+    village(130.232,31.27,14,11); village(130.492,31.239,6,23); village(130.30,31.40,5,31);
+
+    // ship: a schematic 遣唐使船, two masts, square sails
+    function ship(lon,lat,heading,scale){ const g=new THREE.Group(); const [x,z]=toXZ(lon,lat); g.position.set(x,0.35,z); g.rotation.y=heading; g.scale.setScalar(scale);
+      const hull=new THREE.Mesh(new THREE.BoxGeometry(7,1.3,2.4),new THREE.MeshStandardMaterial({color:0x4a2f1c,roughness:.8})); hull.position.y=0.4; hull.castShadow=true; g.add(hull);
+      const deck=new THREE.Mesh(new THREE.BoxGeometry(5.6,0.5,2.0),new THREE.MeshStandardMaterial({color:0xb4895a,roughness:.9})); deck.position.y=1.25; g.add(deck);
+      const cabin=new THREE.Mesh(new THREE.BoxGeometry(2.2,1.2,1.6),new THREE.MeshStandardMaterial({color:0xd9c6a2,roughness:.9})); cabin.position.set(-1.2,2.05,0); g.add(cabin); const croof=new THREE.Mesh(new THREE.ConeGeometry(1.5,0.7,4),roof); croof.rotation.y=Math.PI/4; croof.position.set(-1.2,3.0,0); croof.scale.set(1,1,0.75); g.add(croof);
+      for(const mxp of [1.9,-0.2]){ const mast=new THREE.Mesh(new THREE.CylinderGeometry(0.1,0.14,7,6),new THREE.MeshStandardMaterial({color:0x3a2616})); mast.position.set(mxp,4.5,0); g.add(mast); const sail=new THREE.Mesh(new THREE.PlaneGeometry(3.2,3.6),new THREE.MeshStandardMaterial({color:0xf2e6cf,side:THREE.DoubleSide,roughness:1})); sail.position.set(mxp+0.3,5.0,0); sail.rotation.y=Math.PI/2-0.25; sail.castShadow=true; g.add(sail); }
+      const flag=new THREE.Mesh(new THREE.PlaneGeometry(1.4,0.8),new THREE.MeshStandardMaterial({color:0xc0392b,side:THREE.DoubleSide})); flag.position.set(2.0,8.4,0); flag.rotation.y=Math.PI/2; g.add(flag);
+      scene.add(g); return g; }
+    ship(130.19,31.244,-0.35,1.5); ship(130.474,31.228,0.6,1.1);
+    // dashed route: off the map from the south-west to the landfall
+    const rp=[[130.07,31.10],[130.13,31.19],[130.195,31.247],[130.225,31.262]].map(([lo,la])=>{ const [x,z]=toXZ(lo,la); return new THREE.Vector3(x,0.5,z); });
+    const curve=new THREE.CatmullRomCurve3(rp); const nD=34; const dashG=new THREE.BoxGeometry(2.6,0.12,0.9); const dashes=new THREE.InstancedMesh(dashG,new THREE.MeshStandardMaterial({color:0xf1cf7a,emissive:0x8a6a1e,roughness:.6}),nD); const DM=new THREE.Matrix4(),DQ=new THREE.Quaternion(),DS=new THREE.Vector3(1,1,1),DT=new THREE.Vector3(),up=new THREE.Vector3(0,1,0);
+    for(let i=0;i<nD;i++){ const u=(i+0.5)/nD; const p=curve.getPointAt(u), tg=curve.getTangentAt(u); DT.set(p.x,0.5,p.z); DQ.setFromUnitVectors(new THREE.Vector3(1,0,0),new THREE.Vector3(tg.x,0,tg.z).normalize()); DM.compose(DT,DQ,DS); dashes.setMatrixAt(i,DM); } scene.add(dashes);
+
+    // labels
+    const L=[["秋妻屋浦","AKIMEYA · LANDFALL 12·20",130.228,31.268,"",true],["石籬浦","ISHIGAKI · 4TH SHIP",130.492,31.239,"",false],["開聞岳","MT KAIMON · 924 m",130.528,31.18,"",false],["薩摩半島","SATSUMA",130.40,31.33,"",false],["東海 · EAST CHINA SEA","",130.10,31.14,"sea",false]];
+    const box=document.getElementById("dio-labels"); const els=L.map(l=>{ const d=document.createElement("div"); d.className="lblr "+l[4]; d.innerHTML=`<b>${l[0]}</b>${l[1]?`<i>${l[1]}</i>`:""}`; box.appendChild(d); return d; });
+    function placeLabels(){ const rect=canvas.getBoundingClientRect(); L.forEach((l,i)=>{ const [x,z]=toXZ(l[2],l[3]); const v=new THREE.Vector3(x,(l[4]==="sea"?0:hLerp(x,z)*YS)+(l[5]?6:3),z).project(camera); els[i].style.left=((v.x+1)/2*rect.width)+"px"; els[i].style.top=((1-v.y)/2*rect.height)+"px"; }); }
+    // dial
+    const arc=document.getElementById("dial-arc"); const a0=-Math.PI/2+0.35, a1=a0+(753.97-750)/5*(2*Math.PI-0.7); const px=a=>75+56*Math.cos(a), py=a=>75+56*Math.sin(a); arc.setAttribute("d",`M${px(a0)},${py(a0)} A56,56 0 ${a1-a0>Math.PI?1:0} 1 ${px(a1)},${py(a1)}`);
+    const tk=document.getElementById("dial-ticks"); for(let y=750;y<=754;y++){ const a=a0+(y-750)/5*(2*Math.PI-0.7); const t=document.createElementNS("http://www.w3.org/2000/svg","line"); t.setAttribute("x1",75+48*Math.cos(a)); t.setAttribute("y1",75+48*Math.sin(a)); t.setAttribute("x2",75+64*Math.cos(a)); t.setAttribute("y2",75+64*Math.sin(a)); t.setAttribute("stroke","#b9af9c"); t.setAttribute("stroke-width","1"); tk.appendChild(t); }
+    let t0=performance.now(); const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const pix=document.getElementById("dio-pixel"), pctx=pix.getContext("2d",{willReadFrequently:true}); let pixel=location.hash==="#pixel";
+    const bayer=[[0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]]; const LV=8;
+    function setTier(on){ pixel=on; document.getElementById("tier-3d").setAttribute("aria-pressed",String(!on)); document.getElementById("tier-px").setAttribute("aria-pressed",String(on)); pix.hidden=!on; document.getElementById("dio-stage").classList.toggle("pixel",on); renderer.setSize(on?pix.width:W,on?pix.height:H,false); camera.aspect=W/H; camera.updateProjectionMatrix(); if(reduce) frame(); }
+    document.getElementById("tier-3d").onclick=()=>setTier(false); document.getElementById("tier-px").onclick=()=>setTier(true);
+    function frame(){ const t=(performance.now()-t0)/1000; if(!reduce){ camera.position.x=-235+Math.sin(t*0.12)*5; camera.position.z=165+Math.cos(t*0.1)*4; camera.lookAt(target); } renderer.render(scene,camera);
+      if(pixel){ pctx.imageSmoothingEnabled=false; pctx.drawImage(canvas,0,0,pix.width,pix.height); const id=pctx.getImageData(0,0,pix.width,pix.height), d=id.data; const step=255/(LV-1);
+        for(let y=0;y<pix.height;y++) for(let x=0;x<pix.width;x++){ const k=(y*pix.width+x)*4, th=(bayer[y&3][x&3]/16-0.5)*step*0.35; for(let c=0;c<3;c++){ d[k+c]=Math.round(Math.min(255,Math.max(0,d[k+c]+th))/step)*step; } }
+        pctx.putImageData(id,0,0); }
+      placeLabels(); if(!reduce) requestAnimationFrame(frame); }
+    if(pixel) setTier(true); frame(); window.addEventListener("resize",()=>{ renderer.render(scene,camera); placeLabels(); });
+  }; img.src="__HEIGHT__";
+}
+
+// ---------- handheld: a top-down tile map ----------
+let hhDrawn=false;
+function drawHandheld(){
+  if(hhDrawn) return; hhDrawn=true;
+  const img=new Image(); img.onload=async()=>{
+    try{ await Promise.all([document.fonts.load('13px "DotGothic16"'),document.fonts.load('10px "Press Start 2P"')]); }catch(e){}
+    const tc=document.createElement("canvas"); tc.width=img.width; tc.height=img.height; const tx=tc.getContext("2d"); tx.drawImage(img,0,0); const d=tx.getImageData(0,0,img.width,img.height).data;
+    const cols=img.width>>1, rows=img.height>>1; const E=new Float32Array(cols*rows);
+    for(let r=0;r<rows;r++) for(let c=0;c<cols;c++){ let sum=0; for(let dy=0;dy<2;dy++) for(let dx=0;dx<2;dx++){ const k=((r*2+dy)*img.width+(c*2+dx))*4; sum+=d[k]*256+d[k+1]-1000; } E[r*cols+c]=sum/4; }
+    const hash=(x,y)=>{ const s=Math.sin(x*127.1+y*311.7)*43758.5453; return s-Math.floor(s); };
+    const vn=(x,y)=>{ const x0=Math.floor(x),y0=Math.floor(y),fx=x-x0,fy=y-y0,sx=fx*fx*(3-2*fx),sy=fy*fy*(3-2*fy); return (hash(x0,y0)*(1-sx)+hash(x0+1,y0)*sx)*(1-sy)+(hash(x0,y0+1)*(1-sx)+hash(x0+1,y0+1)*sx)*sy; };
+    const e=(c,r)=>E[Math.min(rows-1,Math.max(0,r))*cols+Math.min(cols-1,Math.max(0,c))];
+    const T={DEEP:0,WATER:1,SHALLOW:2,SAND:3,GRASS:4,FOREST:5,HILL:6,MTN:7,PEAK:8};
+    const type=new Uint8Array(cols*rows);
+    for(let r=0;r<rows;r++) for(let c=0;c<cols;c++){ const v=e(c,r); let t; if(v<=0.5){ t=v<-14?T.DEEP:T.WATER; } else if(v<120){ t=(vn(c*0.11+3,r*0.11+7)>0.52&&hash(c,r)>0.25)?T.FOREST:T.GRASS; } else if(v<380){ t=T.HILL; } else if(v<720){ t=T.MTN; } else t=T.PEAK; type[r*cols+c]=t; }
+    const isW=(c,r)=>{ const t=type[Math.min(rows-1,Math.max(0,r))*cols+Math.min(cols-1,Math.max(0,c))]; return t<=T.SHALLOW; };
+    const t2=new Uint8Array(type);
+    for(let r=0;r<rows;r++) for(let c=0;c<cols;c++){ const t=type[r*cols+c]; const nw=isW(c-1,r)||isW(c+1,r)||isW(c,r-1)||isW(c,r+1); if(t===T.WATER&&!(isW(c-1,r)&&isW(c+1,r)&&isW(c,r-1)&&isW(c,r+1))) t2[r*cols+c]=T.SHALLOW; if((t===T.GRASS||t===T.FOREST)&&nw) t2[r*cols+c]=T.SAND; }
+    // tile art, drawn pixel by pixel on a 16px grid
+    const S=16, N=14; const atlas=document.createElement("canvas"); atlas.width=S*N; atlas.height=S; const a=atlas.getContext("2d");
+    const fill=(i,col)=>{ a.fillStyle=col; a.fillRect(i*S,0,S,S); }; const px=(i,x,y,col,w=1,h=1)=>{ a.fillStyle=col; a.fillRect(i*S+x,y,w,h); };
+    // 0 deep, 1 water, 2 shallow, 3 sand, 4 grass, 5 forest, 6 hill, 7 mountain, 8 peak, 9 house, 10 ship, 11 path, 12 cursor, 13 water frame 2
+    fill(0,"#1f5a80"); for(const [x,y] of [[2,4],[9,11],[12,3]]) px(0,x,y,"#2b6f96",3,1);
+    fill(1,"#3b86b5"); for(const [x,y] of [[1,3],[8,3],[4,10],[11,10]]) px(1,x,y,"#5fa6cf",3,1);
+    fill(13,"#3b86b5"); for(const [x,y] of [[3,3],[10,3],[6,10],[13,10]]) px(13,x,y,"#5fa6cf",3,1);
+    fill(2,"#6fb8d6"); for(const [x,y] of [[2,2],[9,6],[5,12],[12,13]]) px(2,x,y,"#a6d8e8",2,1);
+    fill(3,"#e4d49c"); for(const [x,y] of [[3,4],[10,2],[6,9],[13,12],[1,13]]) px(3,x,y,"#c9b67a");
+    fill(4,"#8cc457"); for(const [x,y] of [[2,3],[9,2],[5,8],[12,9],[3,13],[10,13]]){ px(4,x,y,"#6da53f",1,2); px(4,x+1,y+1,"#6da53f"); }
+    fill(5,"#8cc457"); px(5,4,2,"#3d7a34",8,1); px(5,3,3,"#3d7a34",10,6); px(5,2,5,"#3d7a34",12,4); px(5,4,9,"#3d7a34",8,2); px(5,5,3,"#5c9c48",3,2); px(5,7,11,"#6b4a2a",2,4); px(5,4,14,"#5e8f3a",8,1);
+    fill(6,"#a3b05a"); px(6,2,9,"#6f7d3a",5,1); px(6,4,6,"#6f7d3a",6,1); px(6,9,11,"#6f7d3a",5,1); px(6,8,4,"#c4cf7c",4,1); px(6,1,13,"#6f7d3a",4,1);
+    fill(7,"#8f7f70"); px(7,7,2,"#6b5c50",2,1); px(7,6,3,"#6b5c50",4,1); px(7,5,4,"#6b5c50",6,1); px(7,4,5,"#6b5c50",8,1); px(7,3,6,"#6b5c50",10,1); px(7,2,7,"#6b5c50",12,1); px(7,1,8,"#6b5c50",14,1); px(7,7,3,"#a89888",2,1); px(7,8,5,"#a89888",2,2); px(7,0,12,"#7a6a5c",16,4);
+    fill(8,"#9d8e80"); px(8,7,1,"#e8e3d8",2,1); px(8,6,2,"#e8e3d8",4,1); px(8,5,3,"#e8e3d8",6,1); px(8,4,4,"#d0c8bc",8,1); px(8,3,5,"#6b5c50",10,1); px(8,2,6,"#6b5c50",12,2); px(8,1,8,"#6b5c50",14,2); px(8,0,10,"#7a6a5c",16,6);
+    fill(9,"#8cc457"); px(9,2,8,"#e8dcc0",12,7); px(9,7,10,"#5a3a24",3,5); px(9,3,10,"#5a6b8c",2,2); px(9,11,10,"#5a6b8c",2,2); px(9,7,3,"#a0522d",2,1); px(9,6,4,"#a0522d",4,1); px(9,5,5,"#a0522d",6,1); px(9,4,6,"#a0522d",8,1); px(9,3,7,"#a0522d",10,1); px(9,2,8,"#7a3b1e",12,1);
+    fill(10,"#3b86b5"); px(10,2,11,"#4a2f1c",12,3); px(10,3,10,"#6b4a2a",10,1); px(10,4,14,"#2d1c10",8,1); px(10,8,3,"#3a2616",1,8); px(10,4,4,"#f2e6cf",4,5); px(10,9,4,"#f2e6cf",4,5); px(10,8,2,"#c0392b",3,1); for(const [x,y] of [[0,3],[13,10]]) px(10,x,y,"#5fa6cf",3,1);
+    a.clearRect(11*S,0,S,S); px(11,6,6,"#f1cf7a",4,4); px(11,7,7,"#fff2c8",2,2);
+    a.clearRect(12*S,0,S,S); px(12,0,0,"#f3ead7",16,2); px(12,0,14,"#f3ead7",16,2); px(12,0,0,"#f3ead7",2,16); px(12,14,0,"#f3ead7",2,16); px(12,2,2,"#0b1114",12,1); px(12,2,13,"#0b1114",12,1); px(12,2,2,"#0b1114",1,12); px(12,13,2,"#0b1114",1,12);
+    PIXI.BaseTexture.defaultOptions.scaleMode=PIXI.SCALE_MODES.NEAREST;
+    const base=PIXI.BaseTexture.from(atlas); const tex=[]; for(let i=0;i<N;i++) tex.push(new PIXI.Texture(base,new PIXI.Rectangle(i*S,0,S,S)));
+    const canvas=document.getElementById("hh-canvas"), screenEl=canvas.parentElement; let VW=24,VH=20;
+    const app=new PIXI.Application({view:canvas,width:VW*S,height:VH*S,backgroundColor:0x1f5a80,antialias:false,resolution:1,autoDensity:false});
+    const tiles=new PIXI.Container(), objs=new PIXI.Container(); app.stage.addChild(tiles,objs);
+    let pool=[];
+    function fit(){ const w=screenEl.clientWidth, h=screenEl.clientHeight; const nw=Math.max(10,Math.floor(w/S)), nh=Math.max(10,Math.floor(h/S)); if(nw===VW&&nh===VH&&pool.length) return; VW=nw; VH=nh; app.renderer.resize(VW*S,VH*S); canvas.style.width=(VW*S)+"px"; canvas.style.height=(VH*S)+"px"; tiles.removeChildren(); pool=[]; for(let i=0;i<VW*VH;i++){ const sp=new PIXI.Sprite(tex[1]); sp.x=(i%VW)*S; sp.y=((i/VW)|0)*S; tiles.addChild(sp); pool.push(sp); } }
+    fit(); window.addEventListener("resize",()=>{ fit(); });
+    const toTile=(lon,lat)=>[Math.round((mx(lon)-HM.MX0)/(HM.MX1-HM.MX0)*cols), Math.round((my(lat)-HM.MY0)/(HM.MY1-HM.MY0)*rows)];
+    // objects: houses at the attested places, the ship, the path, labels
+    const bay=toTile(130.232,31.27), ei=toTile(130.492,31.239), kaimon=toTile(130.528,31.18), north=toTile(130.30,31.40);
+    const objects=[]; const addObj=(c,r,i)=>{ const sp=new PIXI.Sprite(tex[i]); objs.addChild(sp); objects.push({c,r,sp}); return sp; };
+    function village(c,r,n,seed){ let k=0,placed=0; while(placed<n&&k<80){ k++; const cc=c+Math.round((hash(seed,k)-0.5)*7), rr=r+Math.round((hash(k,seed)-0.5)*5); const t=t2[rr*cols+cc]; if(t===T.GRASS||t===T.SAND||t===T.FOREST){ addObj(cc,rr,9); t2[rr*cols+cc]=T.GRASS; placed++; } } }
+    village(bay[0],bay[1],6,11); village(ei[0],ei[1],4,23); village(north[0],north[1],3,31);
+    const route=[[130.07,31.10],[130.14,31.20],[130.208,31.258],[130.224,31.266]].map(([lo,la])=>toTile(lo,la));
+    for(let i=0;i<route.length-1;i++){ const [c0,r0]=route[i],[c1,r1]=route[i+1]; const n=Math.max(Math.abs(c1-c0),Math.abs(r1-r0)); for(let k=0;k<n;k+=2){ const c=Math.round(c0+(c1-c0)*k/n), r=Math.round(r0+(r1-r0)*k/n); if(isW(c,r)) addObj(c,r,11); } }
+    const shipT=route[2]; const ship=addObj(shipT[0],shipT[1],10); addObj(ei[0]-1,ei[1]+1,10);
+    const labels=[["秋妻屋浦",bay[0]-1,bay[1]-2],["石籬浦",ei[0]-1,ei[1]-2],["開聞岳",kaimon[0]-1,kaimon[1]-2],["薩摩",north[0]+3,north[1]+1]];
+    for(const [t,c,r] of labels){ const txt=new PIXI.Text(t,{fontFamily:'"DotGothic16","Press Start 2P",monospace',fontSize:12,fill:"#f3ead7",stroke:"#0b1114",strokeThickness:3}); txt.resolution=1; objs.addChild(txt); objects.push({c,r,sp:txt}); }
+    const cursor=new PIXI.Sprite(tex[12]); objs.addChild(cursor); objs.sortableChildren=true; cursor.zIndex=10;
+    let cur=[bay[0],bay[1]]; let cam=[0,0]; let frame=0;
+    const events2={[bay.join()]:{p:"秋妻屋浦",jp:"第二舟、薩摩國阿多郡秋妻屋浦に着く。",en:"THE 2ND SHIP LANDS AT AKIMEYA BAY",tag:"753"},[ei.join()]:{p:"石籬浦",jp:"第四舟は石籬浦に着いたと大宰府が報ず。",en:"THE 4TH SHIP MADE LAND AT ISHIGAKI",tag:"754"},[shipT.join()]:{p:"第二舟",jp:"鑒眞、大伴古麻呂らを乗せた第二舟。益救島より南風に乗る。",en:"JIANZHEN'S SHIP, FROM YAKU ON A SOUTH WIND",tag:"12/20"},[kaimon.join()]:{p:"開聞岳",jp:"開聞岳。薩摩の南端に立つ火山。地名の目印。",en:"MT KAIMON · A LANDMARK, NOT AN EVENT",tag:"地"}};
+    const desc={[T.DEEP]:"深い海。",[T.WATER]:"海。",[T.SHALLOW]:"浅瀬。",[T.SAND]:"浜。",[T.GRASS]:"草地。",[T.FOREST]:"林。",[T.HILL]:"丘。",[T.MTN]:"山。",[T.PEAK]:"高い山。"};
+    const dlg=document.getElementById("hh-dlg"), placeEl=document.getElementById("hh-place");
+    function say(tag,jp,en){ dlg.hidden=false; dlg.innerHTML=`<span class="tag">${tag}</span>${jp}<span class="en">${en}</span><span class="arrow">▼</span>`; }
+    function render(){ cam=[Math.min(cols-VW,Math.max(0,cur[0]-VW/2|0)),Math.min(rows-VH,Math.max(0,cur[1]-VH/2|0))]; const wf=(frame>>5)&1;
+      for(let i=0;i<pool.length;i++){ const c=cam[0]+(i%VW), r=cam[1]+((i/VW)|0); let t=t2[r*cols+c]; if(t===T.WATER&&wf) t=13; pool[i].texture=tex[t]; }
+      for(const o of objects){ o.sp.x=(o.c-cam[0])*S; o.sp.y=(o.r-cam[1])*S; o.sp.visible=o.c>=cam[0]-2&&o.c<cam[0]+VW+2&&o.r>=cam[1]-1&&o.r<cam[1]+VH+1; }
+      ship.y+=((frame>>4)&1); cursor.x=(cur[0]-cam[0])*S; cursor.y=(cur[1]-cam[1])*S; cursor.visible=((frame>>3)&1)===0||true; }
+    const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches; app.ticker.add(()=>{ if(!reduce) frame++; render(); });
+    function move(dx,dy){ cur=[Math.min(cols-1,Math.max(0,cur[0]+dx)),Math.min(rows-1,Math.max(0,cur[1]+dy))]; dlg.hidden=true; const ev=events2[cur.join()]; placeEl.textContent=ev?ev.p:desc[t2[cur[1]*cols+cur[0]]]; }
+    function act(){ const ev=events2[cur.join()]; if(ev) say(ev.tag,ev.jp,ev.en); else say("?",desc[t2[cur[1]*cols+cur[0]]],"NOTHING RECORDED HERE"); }
+    document.querySelectorAll(".dpad button[data-dir]").forEach(b=>{ const [dx,dy]=b.dataset.dir.split(",").map(Number); let rep=null; const start=e=>{ e.preventDefault(); move(dx,dy); clearInterval(rep); rep=setInterval(()=>move(dx,dy),140); }; const stop=()=>{ clearInterval(rep); rep=null; }; b.addEventListener("pointerdown",start); b.addEventListener("pointerup",stop); b.addEventListener("pointerleave",stop); b.addEventListener("pointercancel",stop); b.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); move(dx,dy); } }); });
+    document.getElementById("hh-a").addEventListener("click",act); document.getElementById("hh-b").addEventListener("click",()=>{ dlg.hidden=true; });
+    // Select steps the story: the cursor jumps to the next event tile and reads it. Start opens the menu in the same box.
+    const stepTile={akimeya:bay,wind:null,yaku:null}; let storyI=events.findIndex(e=>e.id==="akimeya");
+    const jl=document.getElementById("hh-journal"), card=document.getElementById("hh-card"), stepEl=document.getElementById("hh-step");
+    function drawJournal(){ jl.innerHTML=""; events.forEach((e,i)=>{ const b=document.createElement("button"); b.type="button"; b.className="jstep"+(stepTile[e.id]?"":" off"); b.setAttribute("aria-current",i===storyI?"true":"false"); b.innerHTML=`${e.title}<small>${e.d.toUpperCase()}</small>`; b.addEventListener("click",()=>goStep(i)); jl.appendChild(b); }); }
+    function drawCard(){ const e=events[storyI]; const p=e.p?places[e.p]:null; card.innerHTML=`<h4><span>記録</span>EVENT ${storyI+1}/${events.length}</h4><span class="tag">${e.d.split(" · ")[0]}</span><h3>${e.title}</h3><div class="en">${e.en.toUpperCase()}</div><div class="pic">東征伝絵巻<br>LATER DEPICTION · RIGHTS PENDING</div><div class="q">${e.q}<small>${e.src} · ${e.w}</small></div><dl><dt>場所</dt><dd>${p?p.n+" · "+(p.k==="site"?"attested site":"identified locality"):"含元殿 · off this map"}</dd><dt>日付</dt><dd>${e.d} · day precision</dd><dt>人</dt><dd>鑒眞 · 大伴古麻呂</dd></dl><h4 style="margin-top:10px"><span>資料</span>SOURCES</h4><ul><li>唐大和上東征傳 (779) · public domain</li><li>續日本紀 (797) · public domain</li></ul>`; stepEl.textContent=`${storyI+1}/${events.length}`; }
+    function goStep(i){ storyI=i; const e=events[i]; const t=stepTile[e.id]; drawJournal(); drawCard(); if(t){ cur=[...t]; const ev=events2[cur.join()]; placeEl.textContent=ev.p; say(ev.tag,ev.jp,ev.en); } else { placeEl.textContent="地図外"; say(e.d.split(" · ")[0],e.title+"（この地図の外）",e.en.toUpperCase()+" · OUTSIDE THIS MAP"); } }
+    function nextStory(){ goStep((storyI+1)%events.length); }
+    function menu(){ say("MENU","▶ 物語 STORY　　資料 SOURCES<br>　 地図 MAP　　　章 ABOUT","B CLOSES · SELECT STEPS THE STORY"); }
+    document.getElementById("hh-select").addEventListener("click",nextStory); document.getElementById("hh-start").addEventListener("click",menu);
+    window.addEventListener("keydown",ev=>{ if(document.getElementById("screen-handheld").hidden) return; const m={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]}[ev.key]; if(m){ ev.preventDefault(); move(...m); } else if(ev.key==="Enter"||ev.key===" "||ev.key==="a"){ ev.preventDefault(); act(); } else if(ev.key==="Escape"||ev.key==="b"){ dlg.hidden=true; } else if(ev.key==="Tab"){ ev.preventDefault(); nextStory(); } else if(ev.key==="m"){ menu(); } });
+    drawJournal(); drawCard(); render();
+  }; img.src="__HEIGHT__";
+}
+
+// ---------- tabs ----------
+d3.selectAll(".tab").on("click",function(){ const s=this.dataset.screen; d3.selectAll(".tab").attr("aria-selected",function(){return this.dataset.screen===s?"true":"false";}); d3.selectAll(".screen").property("hidden",function(){return this.id!=="screen-"+s;}); if(s==="globe") drawGlobe(); if(s==="local") drawLocal(); if(s==="diorama") drawDiorama(); if(s==="handheld") drawHandheld(); try{localStorage.setItem("lekishi-mock-tab",s);}catch(e){} });
+try{ const t=localStorage.getItem("lekishi-mock-tab"); if(t&&t!=="region") document.getElementById("tab-"+t)?.click(); else if(!t&&innerWidth<=820) document.getElementById("tab-handheld")?.click(); }catch(e){ if(innerWidth<=820) document.getElementById("tab-handheld")?.click(); }
+if(location.hash==="#globe"||location.hash==="#local"||location.hash==="#diorama"||location.hash==="#handheld") document.getElementById("tab-"+location.hash.slice(1))?.click();
+</script>

@@ -2,7 +2,7 @@
 /**
  * Captures the rendered chapter states a reviewer needs to see.
  *
- * The screenshots are evidence for the shared chapter experience (RFD 4 AC3/AC5):
+ * The screenshots are evidence for the shared chapter experience (RFD 4 RC1/RC4):
  * both chapters at the four reviewed viewports — desktop, 820x634, 390x844, and
  * 320x640 — with the exploration panel's surfaces (events with a search, story,
  * sources) and a selected disputed event whose details carry the dispute and its

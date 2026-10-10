@@ -1,36 +1,50 @@
 = RFD 0001 implementation checklist
 
-Implements link:README.adoc[RFD 1: Historical exploration and visual interactions].
-All work below is proposed; the concept images are not implementation evidence.
-link:../0004/README.adoc[RFD 4] plans this implementation and owns the
-release-level acceptance criteria; the items here own the interaction work.
+Implements link:README.adoc[RFD 1: Historical exploration and visual interactions],
+as revised on 2026-10-10. Completed items from the earlier checklist are kept
+with their evidence; the open items are the visualization roadmap. Each open
+item lands something a reader can see.
 
-== Phase 0 — Scope and interaction proof
+== Done before the revision
 
-- [x] Bound the Japanese missions to Tang China chapter to one source-checked mission and selected learning/adaptation links with RFD 2; define small contrasting test examples rather than additional launch chapters.
-  - Bounded on 2026-09-24 to Candidate B, the 752–754 embassy of 藤原清河: primary window 750–754, coda nodes at 758, 759, 763, and 779, and the 752 outbound voyage excluded. See link:../0004/GATE1_DECISION.adoc[RFD 4's Gate 1 decision record] and `historical/chapters/tang-mission-750-754/`. The contrasting Qin example is prepared as the bounded comparison fixture `historical/chapters/qin-conquest-han-233-226/` (preparation snapshot, not a launch chapter; link:../0003/COMPARISON_FIXTURE_BOUNDARY.adoc[the comparison fixture boundary decision]).
-- [ ] Select representative desktop/laptop and physical iPad-class tablet hardware and browsers within RFD 3's primary device scope; define phone responsive-layout checks without requiring full exploration parity.
-- [ ] In later separate implementation threads, compare geographic/symbolic and illustrated local-detail treatments for both a Tang mission and a bounded Qin-conquest episode, preserving time and selection through globe-to-local navigation.
-- [ ] Validate distinct visual forms for campaigns, trade, journeys, and divisions.
+- [x] Bound the Tang chapter to one mission (Candidate B, 752–754, coda nodes at 758, 759, 763, 779, the 752 outbound excluded). Evidence: link:../0004/GATE1_DECISION.adoc[the Gate 1 decision record].
+- [x] Scrubbing, chronological stepping, playback within a fixed window, optional camera following, and separate story navigation with explicit jumps (`state.test.ts`, `playback.test.ts`, `story.test.ts`, browser suite).
+- [x] Retained details for an out-of-window selection with the outside-time notice and the return action; search reaching events the window excludes.
+- [x] Search over published text and name forms; event details with precision, mode, placement note, participants, dispute, and citations; a sources surface with reuse terms.
+- [x] Keyboard access to search, tabs, story steps, and the details panel (browser suite).
 
-== Phase 1 — Complete exploration loop
+== Decide (first week)
 
-- [ ] Add search, layer controls, event details, sources, and separate nearby/connected lists; provide chapter/region/period coverage guidance and verify distinct uncovered, filtered-empty, and unestablished-coverage states without implying historical inactivity or comprehensive coverage.
-  - Search, event details, and sources are implemented and browser-checked (link:../0003/CHAPTER_READER_ROUTE.adoc[the chapter reader-route decision]): search covers each chapter's published event text and the name forms its places and participants publish, in local script and in the records' own romanizations; the details panel states the place with its placement note, the occurrence with precision and mode, the record's summary, its participants, its dispute, and its citations with locators and quoted passages; and the sources surface lists the chapter's sources with their recorded attribution and reuse terms. Layer controls, the separate nearby/connected lists, and the coverage guidance remain open, so the item stays unchecked.
-- [x] Implement scrubbing, chronological event stepping, playback, and optional camera following; verify playback advances a playhead within a fixed exploration window and stops at its end, distinguishes contextual events from current activity without inventing certainty, and does not mark selections outside-time merely as the playhead moves; provide separate curated "Next in story" navigation with explicit time jumps, without implying a known chronological order for uncertain dates.
-  - The playhead is scrubbed with the range input and stepped to event boundaries; playback advances at a fixed rate and stops at the window's end; following is opt-in and a manual pan or zoom stops it without pausing playback (all pinned in `state.test.ts`, `playback.test.ts`, and the browser suite). The story navigator lists the chapter's published story steps in the story's own order, and a step that is a published event is an explicit jump that selects the event and moves the window and playhead to its time (`story.test.ts`, `jumpToEvent` in `state.ts`, browser-checked). An uncertain occurrence keeps its whole span when it is jumped to, and the story's step order is presentation order, not a claim of causality or of a known chronology for uncertain dates.
-- [ ] Explain and confirm navigation to related events outside the selected time window; preserve excluded selections in the detail panel with an outside-time notice and explicit return-to-time action, without retaining their map markers or misclassifying uncertain possible matches.
-  - The excluded-selection behavior is implemented and browser-checked, and search now reaches events the window excludes: a result outside the window says so on its row, and selecting it keeps the details with the outside-time notice and the explicit return action and without a map marker. What stays open is navigation to *related* events: the atlas has no connections surface yet, so a reader cannot follow a relationship from an event (link:../0003/CHAPTER_READER_ROUTE.adoc[the chapter reader-route decision], "Limitations recorded").
-- [ ] Connect a relationship timeline to map selection without assigning religion to territory.
-- [ ] Make uncertainty, schematic motion, and supported boundary snapshots visible.
-  - Partly done: the details surface states each record's date precision, occurrence mode, placement kind, and why an event has no position; the notice counts unplaced and unlocated records; disputed accounts are marked in the list and explained with their accounts and locators in the panel; and a display anchor states the record's own note that it asserts no historical coordinate. Schematic motion and boundary snapshots remain open (the domain draws points and refuses routes and areas).
+- [x] Produce the Tang hero mockup and record the owner's approval of it as the bar. Approved 2026-10-10: the diorama in link:hero/README.md[`hero/`], with the painted relief map as the globe register and 2D fallback.
+- [x] Retire the treatment comparison: PR #14 closed by the owner's decision on 2026-10-10; its Gate 2 evidence stays readable in the closed PR, and the review route it added never reached `main`.
+
+== Make the map worth looking at
+
+- [ ] Region and local scale as a diorama: 3D terrain from open elevation with exaggeration, slope and elevation tinting, shallow-water shading, symbolic forest and fields scattered by terrain, warm directional light with shadows (RFD 3 owns the renderer and the terrain pipeline).
+- [ ] Symbolic settlements at attested sites: glyph buildings of a kind, scaled for legibility, never a reconstruction; a schematic vessel or party at the playhead's stop.
+- [ ] Ship a self-made relief basemap (hypsometric tint, shaded relief, coastlines, rivers) as static tiles for the globe and the 2D fallback: zoom 0–4 global, 0–7 over chapter extents, provider-free.
+- [ ] Collision-free labels: one per place, event-count badge, zoom priority, CJK-capable fonts, historical name leading with local script and romanization, projected from the 3D scene.
+- [ ] Places-first markers: events attach to places, a place with many events shows a count and opens a list.
+- [ ] The hero's chrome: date bar in both calendars, layer orbs, journal, pennants for the story's people, minimap, and the next-event dial as the playhead.
+- [ ] The honesty plate: what is real, what is symbolic, what is schematic, on the scene.
+- [ ] Short event titles; caveats, precision, and placement notes move to the card.
+- [ ] Schematic journey lines through dated stops, labelled schematic, animated with the playhead.
+- [ ] Relationship arcs on selection, styled by type, with the claim and citation reachable from the arc.
+- [ ] Dated control-snapshot polygons with a hatched edge and a date label; no interpolation.
+- [ ] Timeline strip with event ticks, window brush, playhead, and zoomable scale, paired with the dial; retire the number inputs.
+- [ ] Chrome diet: the hero's bar replaces the header banners, an About sheet for editorial status and coverage, a narrative-and-image-first selection card.
+- [ ] The 平城京 local hero remade in the diorama register, for the owner's approval.
+- [ ] The handheld tier for phones: top-down tile map from the same terrain, sprites at attested places, dotted schematic path, cursor on a grid with a d-pad and A/B, a dialogue box that reads the selection; judged on the hero at 390 px.
+- [ ] The pixel look on tablet and desktop: the diorama at a quarter resolution with a reduced palette, switchable on demand.
+- [ ] Nearby and connected lists in the card, kept separate.
+- [ ] Layer controls for story layers; shared window and playhead; non-colour membership cues.
+- [ ] Coverage guidance with distinct uncovered and filtered-empty states.
+- [ ] Reduced-motion preference respected for playback and camera flights.
+- [ ] Exit review: the served Tang chapter beside its hero, judged by the owner.
 
 == Acceptance evidence
 
-- [ ] Inspect rendered globe, region, selected-event, and connection states on desktop and touch layouts; verify manual pan/zoom stops camera following without pausing time, following stays off until explicitly resumed at the current playback position, and programmatic camera movement does not cancel following.
-- [ ] Verify keyboard access, reduced motion, non-color cues, and a readable event list.
-  - Keyboard access is browser-checked for the chapter's own surfaces as well as the workspace: the search field, the panel's tabs, the story's steps, and the details panel's story jumps are all reachable and operable with the keyboard, and the time controls and event list already were. Reduced motion and the remaining non-color cues (a schematic motion or boundary cue does not exist yet) stay open.
-- [ ] Demonstrate a nonmilitary story is as navigable as a campaign; verify simultaneous story layers share one map, time window, and playhead, identify memberships without color alone, preserve shared events without duplication, and imply no unsupported cross-story relationship.
-- [ ] Confirm labels and scene geometry against reviewed data, not generated mockups.
-- [ ] Record measured performance and remaining limitations with RFD 3.
-- [ ] Re-verify the exploration loop, device layouts, keyboard access, reduced motion, non-color cues, and event list on the RFD 4 release build, recording the results as release evidence (RFD 4 AC3, AC5, AC6).
+- [ ] A reader can follow the 753 return voyage end to end on the map with each landfall's source one click away.
+- [ ] Screenshots of globe, region, selected-event, and connection states on desktop and touch layouts against reviewed data.
+- [ ] Keyboard, reduced motion, non-colour cues, and the non-map event list re-verified on the release build (RFD 4).
+- [ ] Measured performance and remaining limitations recorded with RFD 3.

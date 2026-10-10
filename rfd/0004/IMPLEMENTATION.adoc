@@ -1,68 +1,43 @@
 = RFD 0004 implementation checklist
 
-Implements link:README.adoc[RFD 4: Public PoC release charter].
-Release-level criteria live in RFD 4; the per-RFD tasks stay in the
-link:../0001/IMPLEMENTATION.adoc[RFD 1],
-link:../0002/IMPLEMENTATION.adoc[RFD 2], and
-link:../0003/IMPLEMENTATION.adoc[RFD 3] checklists and are referenced here
-rather than restated. No account creation, purchase, or external deployment
-occurs before the authorization item below.
+Implements link:README.adoc[RFD 4: Public release charter and roadmap], as
+revised on 2026-10-10. The items are the track exits and the release
+verification; the work inside each track lives in the RFD 1–3 checklists.
 
-== Wave 1 — Parallel foundations
+== Done before the revision
 
-- [x] A. Complete RFD 2's bounded source-feasibility pass over up to three Tang missions and return findings for owner review (RFD 2 Phase 0). See link:../0002/TANG_MISSION_FEASIBILITY.adoc[the Wave 1A feasibility report].
-- [x] B. Define the RFD 2 data, time, and geometry contracts the first chapter depends on (RFD 2 Phase 0). See link:../0002/CONTRACTS.adoc[the Wave 1B contract record] and the versioned schemas, examples, and adversarial vectors under `historical/v0`.
-- [x] C. Establish the approved Svelte/TypeScript + Cesium production-build foundation (RFD 3 Phase 0). Wave 1 delivered it on the Phoenix runtime; link:../0003/STATIC_ARCHITECTURE.adoc[the static architecture decision] supersedes that runtime and the site is now a statically built SvelteKit project. The root link:../../README.md[README] records the ownership and build boundaries; production and development browser suites verify one workspace mount, lifecycle disposal, prerendered and bundled assets, responsive layouts, and the renderer-independent state boundary.
-- [x] D. Evaluate hosting, map/imagery/terrain providers, device targets, performance limits, and delivery options; record rights, costs, payloads, and measured behavior (RFD 3 Phase 0). See link:../0003/DELIVERY_EVALUATION.adoc[the Wave 1D delivery evaluation]; device performance measurements remain dependent on Wave 2 and release evidence, as the report states.
+- [x] Source feasibility, the v0 contract, the static foundation, and the delivery evaluation (the earlier Wave 1). Evidence in the RFD 2 and RFD 3 records.
+- [x] Gate 1: Candidate B selected with its coverage model, the static delivery accepted. Evidence: link:GATE1_DECISION.adoc[the Gate 1 decision record].
+- [x] Two owner-approved chapters served through one route; the site deployed at `lekishi.pages.dev`.
+- [x] Gate 2 verified on the shared baseline (PR #14's evidence, kept when the PR is closed).
 
-== Gate 1 — Foundations frozen
+== Track 0 — Decide and unblock
 
-- [x] Owner reviews the Wave 1 findings, selects the launch mission from the feasibility recommendation, and accepts the delivery approach before Wave 2 starts. Recorded 2026-09-24: the owner selected Candidate B (the 752–754 embassy of 藤原清河) and accepted its coverage model, and the delivery approach is link:../0003/STATIC_ARCHITECTURE.adoc[the static architecture decision]. See link:GATE1_DECISION.adoc[the Gate 1 decision record] for what the decision covers and what it leaves open.
+- [x] Tang hero mockup approved, 2026-10-10: the diorama in `rfd/0001/hero/`.
+- [x] PR #14 closed by decision on 2026-10-10; the treatment comparison retired.
+- [ ] Authoring format and per-chapter approval designed.
+- [ ] CHGIS and CBDB rights decided.
+- [ ] Renderer spike run (stylized Cesium against a custom Three.js scene, on the hero); renderer decided.
 
-== Wave 2 — Reviewed fixtures and shared baseline
+== Track 1 — The map worth looking at
 
-- [x] Publish the reviewed Tang fixture for the selected mission (RFD 1 Phase 0, RFD 2 Phase 1).
-  - Prepared and self-reviewed: `historical/chapters/tang-mission-750-754/`, validated by `src/lib/historical/contract/tang-chapter.test.ts`. The owner's editorial approval under RFD 2 was recorded on 2026-09-25 against the exact merged set and its canonical digest in link:../0002/PUBLICATION_APPROVAL.adoc[the publication approval gate], so the fixture is published. The optional specialist reviews the feasibility report identifies remain visibly unperformed and are not implied by the approval; AC2's visible-uncertainty/dispute part and the AC7 attribution/rights audit remain open, so this item's completion is the fixture's publication, not AC2 as a whole.
-  - The browser atlas renders that chapter instead of the synthetic foundation fixture, through the browser-safe boundary in `src/lib/atlas/chapter-content.ts` and `projection.ts` (link:../0003/CONTENT_BOUNDARY.adoc[the chapter content boundary decision]): 29 published events (24 in the primary 750–754 window, 5 coda nodes outside it), 15 places, 22 of the 24 in-window events resolved to a point — 7 in-window court acts anchored at the court's seat (平城宮) as a display anchor — three more court anchors sit in the coda — and 2 approximate locality-level identifications (紀伊國牟漏埼, 石籬浦), owner-accepted on 2026-09-24 and recorded in link:../0002/PUBLICATION_APPROVAL.adoc[the publication approval gate] — and 2 kept in the non-map list with no invented coordinate (驩州, whose identification no source in the set provides, and 多禰島, named only as context). The event list is bounded above the time controls and scrolls inside its panel at desktop, tablet, and phone widths, after an owner-reported regression on the static portal. The preparation history was flattened to one revision per record and one publication set on the owner's instruction of 2026-09-24. The served root page presents the Tang chapter as a card with its name, its window, and its story, and states the recorded owner approval and the specialist-review caveat as secondary metadata — the set's preparation-time notes are no longer quoted on the page, so their stale "approval pending" wording cannot stand as the current state, and `src/lib/atlas/release.test.ts` cross-checks the stated date against the ledger row.
-- [x] Source-check the bounded Qin-conquest chapter (RFD 1 Phase 0).
-  - Prepared 2026-09-25: `historical/chapters/qin-conquest-han-233-226/`, validated by `src/lib/historical/contract/qin-chapter.test.ts`. The episode is the end of the state of Han, 233–226 BCE, taken as the narrowest source-supported default that still yields a sourced map point.
-  - The internal review found source-fidelity and wording corrections in the published snapshot, the owner asked to review the corrected content before deciding, and after the owner reported that locations were missing where the records name them the places the cited sources support carry label anchors that assert no historical coordinate: the death place 雲陽 and the 潁川 commandery rest on the identifications of the historical geography pinned to the set (讀史方輿紀要, 1692), the submission carries a display placement at the Han capital the hereditary house records, and 南陽 keeps unknown geometry because the entries state no extent or seat and the name covers two regions.
-  - The owner approved the corrected preparation on 2026-09-27 (*"approve 1, then proceed with 2"*) and asked for the shared reader-facing chapter experience. The approval is recorded against the set's exact digest in link:../0002/PUBLICATION_APPROVAL.adoc[the publication approval gate], so the chapter is an ordinary served chapter at `/chapters/qin-conquest-han-233-226` (link:../0003/CHAPTER_READER_ROUTE.adoc[the chapter reader-route decision]). The "comparison-only" framing this item carried is superseded by that decision: the comparison vocabulary is gone from every reader-facing surface and `/compare/qin` is a redirect. The item is complete as source-checked, owner-approved, served content; the optional specialist reviews and the critical-edition re-check stay open as the ledger row states, and the treatment comparison itself is a later item below.
-- [ ] Prepare the release artifact and deployment packaging without deploying (RFD 3 release preparation).
-- [ ] Build the shared comparison harness and baseline content, controls, and time behavior (RFD 3 Phase 0 comparison item). The shared baseline now exists: both chapters are served chapters that load through one catalog and render through one route, one workspace, and the same controls, search, story navigation, sources, and dispute presentation (link:../0003/CHAPTER_READER_ROUTE.adoc[the chapter reader-route decision]). What remains is the harness's measured comparison of the two local-detail treatments, which Gate 2 still precedes.
+- [ ] Exit: the served Tang chapter beside its hero, owner-judged (RFD 1 checklist holds the items).
 
-== Gate 2 — Common runnable baseline
+== Track 2 — The data worth exploring
 
-- [ ] Both scenarios run on the shared baseline with comparable content, controls, selection, and time behavior; the treatment comparison does not start before this gate.
-  - The implementation condition is now in place: both chapters are served content of the same contract, rendered by one chapter route, one workspace, one set of controls, and one set of surfaces (search, story navigation, sources, uncertainty and dispute cues), with the same time semantics and the atlas's own BCE year text (link:../0003/CHAPTER_READER_ROUTE.adoc[the chapter reader-route decision]). Whether that satisfies Gate 2 — and therefore whether the treatment comparison may start — is the owner's call, so the gate stays open here and nothing of the comparison has started.
+- [ ] Exit: the 753 voyage followable end to end with sources; Tang at 200+ events; Qin with control snapshots (RFD 2 checklist holds the items).
 
-== Treatment comparison and Gate 3
+== Release verification (before the announcement)
 
-- [ ] Compare geographic/symbolic and illustrated-local treatments across the Tang and Qin scenarios, recording measured results and unsupported-detail risks (RFD 1 Phase 0, RFD 3 Phase 0).
-- [ ] Gate 3: the owner selects the local-detail treatment, and the experiment's renderer is resolved — Cesium confirmed, or the bounded MapLibre comparison completed and reviewed because Cesium failed a named visual, device, or delivery requirement (RFD 3 Phase 0).
+- [ ] RC1 The hero renders on desktop and a physical iPad.
+- [ ] RC2 A journey can be followed, with citations within two clicks.
+- [ ] RC3 Everything drawn is traceable; disputes marked; undated events reachable.
+- [ ] RC4 Fast enough: three seconds on a mid-range phone, sixty frames per second on desktop and iPad; keyboard, reduced motion, non-colour cues, and the list without the map.
+- [ ] RC5 Rights: attribution and terms for sources, datasets, basemap data, and media.
+- [ ] RC6 Operations: CI green, deploy documented, rollback exercised, health and errors visible.
+- [ ] Release evidence and remaining limitations recorded for the owner.
 
-== Complete the exploration loop
+== Track 3 — Announce and learn
 
-- [ ] Implement and verify the RFD 1 Phase 1 loop with RFD 2 time semantics, including the AC3 behaviors in link:README.adoc[RFD 4].
-  - Implemented and verified so far: chapter and story navigation with explicit jumps kept separate from chronological stepping; search over each chapter's published text and name forms, reaching events outside the selected window and marking them as such; sources and locators with the records' own attribution and reuse terms; visible uncertainty and dispute cues with their explanations; and the bounded-uncertainty, playback, camera-follow, and outside-selection behaviors. Not yet implemented: layer controls, a nearby/connected or relationship surface, coverage guidance, and discoverability for wholly undated events, which the projection still rejects. link:../0001/IMPLEMENTATION.adoc[RFD 1's checklist] records the item-level states.
-
-== Release verification
-
-- [ ] AC1 predeployment rehearsal: verify HTTPS redirect, certificate, routes, and the health endpoint on the release artifact; AC1 is complete only after authorized deployment (outside-host check below).
-- [ ] AC2: verify reviewed launch content, citations, the approval record, and visible uncertainty. The approval record is the `owner approved` row in link:../0002/PUBLICATION_APPROVAL.adoc[the publication approval gate]; rows now exist for both served chapters at their exact merged digests, so the approval-dependent part is satisfied and verified at the ledger, and the gate also fails a served chapter whose revisions are not owner-approved. The visible-uncertainty/dispute part is implemented and browser-checked on both chapters: the list marks a disputed record, the details panel shows the published dispute summary and the accounts that challenge it with their locators, and the panel states date precision, occurrence mode, the placement kind, the record's own note when a label anchor asserts no coordinate, and why an event has no position (link:../0003/CHAPTER_READER_ROUTE.adoc[the chapter reader-route decision]). What remains for AC2 as a whole is the AC7 attribution/rights audit and the specialist reviews the ledger rows keep open.
-- [ ] AC4: verify production-built Vite assets and the selected renderer's resources with no Vite development server.
-- [ ] AC5: record desktop/laptop and physical-iPad results, phone-layout usability, and measured performance against the agreed matrix and thresholds.
-- [ ] AC6: verify keyboard access, touch, reduced motion, non-color cues, and the non-map event list.
-  - Keyboard access now covers the chapter's own surfaces as well as the workspace: the browser suite reaches the search field, the panel's tabs, the story's steps, and the details panel's story jumps with the keyboard alone (link:../0003/CHAPTER_READER_ROUTE.adoc[the chapter reader-route decision]). Touch layouts, the non-map event list, and the uncertainty cues' non-color labelling are covered by existing checks; reduced-motion preference and the physical-iPad acceptance remain open.
-- [ ] AC7: verify attribution, licenses, reuse terms, and provider compliance.
-- [ ] AC8: verify CI, error visibility, documented deployment steps, and an exercised rollback or recovery path.
-- [ ] Record the release evidence, remaining limitations, and any criterion met with exceptions for owner review.
-
-== Physical iPad acceptance
-
-- [ ] Run the release build on the physical iPad and verify touch interaction, performance, accessibility, and lifecycle; record the measured results.
-
-== Public launch (owner-authorized)
-
-- [ ] Obtain explicit owner authorization for external deployment, provider accounts, purchases, and the domain.
-- [ ] Deploy the release build and verify AC1 from outside the host.
+- [ ] Owner authorizes the announcement; the Tang chapter is announced.
+- [ ] Reader reactions recorded; the next chapter chosen from them.

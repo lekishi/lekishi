@@ -1,6 +1,10 @@
 // Shared by every globe spike: the flight's camera at time t, and WGS84 helpers.
 // Each engine converts the returned target/range/heading/pitch into its own camera,
 // so all three fly exactly the same path.
+// Browsers keep only 250 resource-timing entries by default; a flight fetches
+// thousands of tiles, so raise the cap or tileTraffic() silently undercounts.
+if (typeof performance !== "undefined" && performance.setResourceTimingBufferSize) performance.setResourceTimingBufferSize(100000)
+
 export const WGS84 = { a: 6378137.0, b: 6356752.314245179, e2: 0.00669437999014133 }
 const rad = d => d * Math.PI / 180
 const smooth = u => u * u * (3 - 2 * u)

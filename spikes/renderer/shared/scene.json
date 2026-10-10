@@ -1,0 +1,40 @@
+{
+  "name": "Landfall at 秋妻屋浦, 753-12-20",
+  "heightmap": "height.png",
+  "heightmapMeta": "height.json",
+  "texture": "terrain-color.jpg",
+  "unitsPerMeter": 0.01,
+  "verticalExaggeration": 2.2,
+  "sun": { "azimuthDeg": 300, "elevationDeg": 42, "color": "#ffe2b4", "intensity": 2.1 },
+  "hemisphere": { "sky": "#dcecff", "ground": "#6b5a3b", "intensity": 0.6 },
+  "fog": { "color": "#d3e3ea", "nearUnits": 330, "farUnits": 820 },
+  "water": { "color": "#2a7c9d", "opacity": 0.6, "deep": "#1b4f6a" },
+  "camera": { "target": { "lon": 130.26, "lat": 31.262 }, "offsetUnits": { "x": -165, "y": 175, "z": 170 }, "fovDeg": 40 },
+  "places": [
+    { "id": "akimeya", "name": "秋妻屋浦", "rom": "AKIMEYA · LANDFALL 12·20", "lon": 130.232, "lat": 31.27, "kind": "locality", "village": 14, "seed": 11, "selected": true },
+    { "id": "ishigaki", "name": "石籬浦", "rom": "ISHIGAKI · 4TH SHIP", "lon": 130.492, "lat": 31.239, "kind": "locality", "village": 6, "seed": 23 },
+    { "id": "north", "name": "", "rom": "", "lon": 130.30, "lat": 31.40, "kind": "village", "village": 5, "seed": 31 },
+    { "id": "kaimon", "name": "開聞岳", "rom": "MT KAIMON · 924 m", "lon": 130.528, "lat": 31.18, "kind": "landmark" },
+    { "id": "satsuma", "name": "薩摩半島", "rom": "SATSUMA", "lon": 130.40, "lat": 31.33, "kind": "region" },
+    { "id": "sea", "name": "東海 · EAST CHINA SEA", "rom": "", "lon": 130.10, "lat": 31.14, "kind": "sea" }
+  ],
+  "ships": [
+    { "id": "ship2", "lon": 130.19, "lat": 31.244, "headingRad": -0.35, "scale": 1.5, "label": "第二舟 · 鑒眞" },
+    { "id": "ship4", "lon": 130.474, "lat": 31.228, "headingRad": 0.6, "scale": 1.1 }
+  ],
+  "route": [
+    { "lon": 130.07, "lat": 31.10 },
+    { "lon": 130.13, "lat": 31.19 },
+    { "lon": 130.19, "lat": 31.244 },
+    { "lon": 130.225, "lat": 31.262 }
+  ],
+  "trees": { "sampleEvery": 2, "minElev": 14, "maxElev": 560, "maxSlope": 0.4, "noiseThreshold": 0.5, "dropFraction": 0.75, "coniferAbove": 140, "coniferSlope": 0.16 },
+  "palette": { "conifer": "#2d5f2b", "broadleaf": "#4f8c32", "trunk": "#5a3f26", "wall": "#e9dfc8", "roof": "#8a5a3a", "thatch": "#b9a15c", "hull": "#4a2f1c", "deck": "#b4895a", "sail": "#f2e6cf", "flag": "#c0392b", "route": "#f1cf7a" },
+  "metricsApi": {
+    "window.spike.ready": "Promise resolved after first full render",
+    "window.spike.orbit(t)": "t in [0,1]: move the camera around the target by t*360 degrees at constant tilt",
+    "window.spike.playhead(t)": "t in [0,1]: move ship2 along the route from its start to the landfall",
+    "window.spike.stats()": "{ fps, frameMs, drawCalls, triangles, memoryMB, loadMs, bundleKB }",
+    "window.spike.setQuality(level)": "'full' | 'phone': phone disables shadows and halves vegetation"
+  }
+}

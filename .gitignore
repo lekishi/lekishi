@@ -26,3 +26,9 @@
 /dbg/
 .env
 npm-debug.log
+
+# Renderer spike: harness captures and the Rust/wasm probe's build output are
+# generated; curated copies of the evidence live under rfd/0003/spike/.
+/spikes/renderer/out/
+/spikes/renderer/wgpu/target/
+/spikes/renderer/wgpu/pkg/

@@ -111,6 +111,12 @@ a physical iPad, and a mid-range phone. Whichever wins, the `AtlasRenderer`
 boundary, the domain, and the scene are unchanged; there is no dual-renderer
 framework.
 
+The spike ran on 2026-10-10 on three implementations, the two candidates
+above and a Rust/wgpu probe compiled to WebAssembly that the owner asked to
+have weighed as a custom-engine option. Its screenshots, videos, measurements,
+and the assessment of each are in link:RENDERER_SPIKE.adoc[the renderer spike
+record]; the decision is still the owner's and is recorded there when taken.
+
 === Timeline and diagrams
 
 The timeline strip and relationship timelines are SVG components with

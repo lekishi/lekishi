@@ -15,7 +15,8 @@ rendering and delivery roadmap.
 == Decide (first week)
 
 - [x] Retire the treatment comparison: PR #14 closed by the owner's decision on 2026-10-10; its Gate 2 evidence stays readable there, and its review route never reached `main`.
-- [ ] Two-day renderer spike: the hero's diorama scene on stylized Cesium and on a custom Three.js scene; owner decides on screenshots and measured frame time; record the decision here.
+- [x] Renderer spike built and measured: the hero's diorama scene on stylized Cesium, on a custom Three.js scene, and on a Rust/wgpu probe compiled to wasm, one harness. Evidence: link:RENDERER_SPIKE.adoc[the renderer spike record].
+- [ ] Owner decides the renderer on the spike's screenshots and on frame times measured on the desktop, a physical iPad, and a mid-range phone; record the decision in the spike record.
 
 == Rendering
 

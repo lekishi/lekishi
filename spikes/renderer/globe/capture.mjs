@@ -17,7 +17,9 @@ const out = join("spikes/renderer/globe/out", spike); mkdirSync(out, { recursive
 const exe = "/opt/pw-browsers/chromium-1194/chrome-linux/chrome"
 const browser = await chromium.launch({ executablePath: exe, args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist", "--enable-webgl"] })
 const errors = []
-const SETTLE_MS = 20000
+// Software-GPU frames take seconds and tile engines refine level by level, so
+// the diorama can need a minute to settle; the stats count frames that did not.
+const SETTLE_MS = 60000, STILL_SETTLE_MS = 120000
 const STILLS = { globe: 0.0, region: 0.44, local: 0.70 }
 async function page(ctx) {
   const p = await ctx.newPage()
@@ -32,9 +34,9 @@ async function open(p) {
   await p.evaluate(() => window.spike.ready)
   return Date.now() - t0
 }
-async function flyTo(p, t) {
+async function flyTo(p, t, ms = SETTLE_MS) {
   await p.evaluate(t => window.spike.fly(t), t)
-  const settled = await p.evaluate(ms => window.spike.settled(ms), SETTLE_MS)
+  const settled = await p.evaluate(ms => window.spike.settled(ms), ms)
   await p.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))))
   return settled
 }
@@ -48,7 +50,7 @@ let p = await page(desktop)
 const loadMsWall = await open(p)
 const altitudes = {}
 for (const [name, t] of Object.entries(STILLS)) {
-  const settled = await flyTo(p, t)
+  const settled = await flyTo(p, t, STILL_SETTLE_MS)
   await p.screenshot({ path: join(out, `${name}.png`) })
   altitudes[name] = { t, settled, fps: await fps(p, 3), stats: await p.evaluate(() => window.spike.stats()) }
 }
@@ -59,7 +61,7 @@ await desktop.close()
 const phone = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true })
 p = await page(phone); await open(p)
 await p.evaluate(() => window.spike.setQuality("phone"))
-const phoneSettled = await flyTo(p, STILLS.local)
+const phoneSettled = await flyTo(p, STILLS.local, STILL_SETTLE_MS)
 await p.screenshot({ path: join(out, "phone-local.png") })
 const phoneStats = { settled: phoneSettled, fps: await fps(p, 3), stats: await p.evaluate(() => window.spike.stats()) }
 await phone.close()

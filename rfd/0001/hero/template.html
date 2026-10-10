@@ -18,6 +18,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-s
 .brand .kind{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint)}
 .tabs{display:flex;gap:6px;flex-wrap:wrap}
 .tab{appearance:none;border:1px solid var(--line);background:transparent;color:var(--ink-dim);font:500 12px/1 var(--ui);letter-spacing:.12em;text-transform:uppercase;padding:9px 14px;border-radius:3px;cursor:pointer}
+.tab .short{display:none}
 .tab:hover{color:var(--ink);border-color:var(--gold)}
 .tab[aria-selected="true"]{background:var(--gold);color:#1a1409;border-color:var(--gold)}
 .tab:focus-visible,button:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px}
@@ -185,32 +186,42 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-s
 .honest{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:rgba(10,14,18,.78);border:1px solid var(--line);border-radius:3px;padding:6px 12px;font:11px var(--ui);color:var(--ink-dim);max-width:min(560px,52%);text-align:center}
 .honest b{color:var(--ink);font-weight:500}
 /* handheld tier: a top-down tile map in a device frame, the phone's own register */
-.hh-wrap{display:flex;justify-content:center;padding:18px 0 6px}
-.device{width:min(100%,460px);background:linear-gradient(#1a2229,#0e1418);border:1px solid var(--line);border-radius:22px;padding:14px 14px 18px;box-shadow:0 30px 80px rgba(0,0,0,.55);position:relative}
+.hh-wrap{display:flex;justify-content:center;padding:12px 0 6px}
+.device{width:min(100%,400px);height:780px;display:flex;flex-direction:column;background:linear-gradient(#1a2229,#0e1418);border:1px solid var(--line);border-radius:22px;padding:10px 10px 12px;box-shadow:0 30px 80px rgba(0,0,0,.55);position:relative}
 .device::before{content:"";position:absolute;inset:5px;border:1px solid rgba(210,169,79,.16);border-radius:18px;pointer-events:none}
 .hh-top{display:flex;justify-content:space-between;align-items:center;font:10px "Press Start 2P","DotGothic16",monospace;color:var(--gold-bright);padding:2px 4px 8px;letter-spacing:.02em}
 .hh-top .jp{font-family:"DotGothic16","Press Start 2P",monospace;font-size:13px;color:var(--ink)}
-.screen-hh{position:relative;aspect-ratio:384/320;background:#1b2b3a;border:3px solid #0b1114;border-radius:4px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(210,169,79,.35)}
-.screen-hh canvas{display:block;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges}
+.screen-hh{position:relative;flex:1;min-height:0;background:#1b2b3a;border:3px solid #0b1114;border-radius:4px;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(210,169,79,.35)}
+.screen-hh canvas{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);image-rendering:pixelated;image-rendering:crisp-edges}
 .dlg{position:absolute;left:6px;right:6px;bottom:6px;background:#f5efdc;color:#141a1f;border:3px solid #141a1f;box-shadow:inset 0 0 0 2px #f5efdc,inset 0 0 0 4px #141a1f;padding:10px 12px 12px;font:13px/1.55 "DotGothic16","Press Start 2P",monospace;min-height:64px}
 .dlg .en{display:block;font:8px/1.6 "Press Start 2P",monospace;color:#4a5560;margin-top:4px;letter-spacing:.02em}
 .dlg .arrow{position:absolute;right:10px;bottom:6px;font-size:10px;animation:blink 1s steps(2) infinite}
 .dlg .tag{display:inline-block;border:2px solid #141a1f;padding:0 4px;font-size:9px;font-family:"Press Start 2P",monospace;margin-right:6px;vertical-align:1px}
 @keyframes blink{50%{opacity:0}}
 @media (prefers-reduced-motion:reduce){.dlg .arrow{animation:none}}
-.pads{display:flex;justify-content:space-between;align-items:center;padding:16px 6px 0}
-.dpad{position:relative;width:96px;height:96px}
-.dpad button{position:absolute;width:32px;height:32px;border:0;background:#2a343c;box-shadow:inset 0 -3px 0 #141a1f;cursor:pointer;color:var(--ink-dim);font-size:11px}
-.dpad .u{left:32px;top:0;border-radius:4px 4px 0 0} .dpad .d{left:32px;top:64px;border-radius:0 0 4px 4px} .dpad .l{left:0;top:32px;border-radius:4px 0 0 4px} .dpad .r{left:64px;top:32px;border-radius:0 4px 4px 0} .dpad .c{left:32px;top:32px;cursor:default;box-shadow:none;background:#222b32}
+.pads{display:flex;justify-content:space-between;align-items:center;padding:10px 4px 0;flex:none}
+.ss{display:flex;gap:8px;align-self:flex-end;margin-bottom:6px}
+.ss button{appearance:none;border:0;background:#2a343c;color:var(--ink-dim);font:7px "Press Start 2P",monospace;padding:7px 9px;border-radius:10px;box-shadow:inset 0 -2px 0 #141a1f;cursor:pointer;letter-spacing:.04em}
+.ss button b{display:block;font:7px "Press Start 2P",monospace;color:var(--gold-bright);margin-bottom:3px}
+.dpad{position:relative;width:90px;height:90px}
+.dpad button{position:absolute;width:30px;height:30px;border:0;background:#2a343c;box-shadow:inset 0 -3px 0 #141a1f;cursor:pointer;color:var(--ink-dim);font-size:11px}
+.dpad .u{left:30px;top:0;border-radius:4px 4px 0 0} .dpad .d{left:30px;top:60px;border-radius:0 0 4px 4px} .dpad .l{left:0;top:30px;border-radius:4px 0 0 4px} .dpad .r{left:60px;top:30px;border-radius:0 4px 4px 0} .dpad .c{left:30px;top:30px;cursor:default;box-shadow:none;background:#222b32}
 .dpad button:active,.ab button:active{transform:translateY(2px);box-shadow:none}
 .ab{display:flex;gap:14px;align-items:flex-end}
-.ab button{width:44px;height:44px;border-radius:50%;border:0;background:var(--gold);color:#1a1409;font:10px "Press Start 2P",monospace;box-shadow:inset 0 -3px 0 #8a6a1e;cursor:pointer}
-.ab button.b{background:#8f2a2a;color:var(--ink);box-shadow:inset 0 -3px 0 #4a1414;margin-bottom:16px}
-.hh-hint{text-align:center;margin-top:10px;font:9px "Press Start 2P",monospace;color:var(--ink-faint);letter-spacing:.02em}
-.hh-note{max-width:460px;margin:12px auto 0;font-size:11px;color:var(--ink-dim);text-align:center}
+.ab button{width:42px;height:42px;border-radius:50%;border:0;background:var(--gold);color:#1a1409;font:10px "Press Start 2P",monospace;box-shadow:inset 0 -3px 0 #8a6a1e;cursor:pointer}
+.ab button.b{background:#8f2a2a;color:var(--ink);box-shadow:inset 0 -3px 0 #4a1414;margin-bottom:14px}
+.hh-note{max-width:400px;margin:12px auto 0;font-size:11px;color:var(--ink-dim);text-align:center}
 .hh-note b{color:var(--ink);font-weight:500}
 @media (max-width:820px){
-  .hh-wrap{padding-top:4px} .device{width:100%;padding:10px 8px 12px;border-radius:16px}
+  .wrap{padding-block:8px}
+  .bar{margin-bottom:8px;gap:6px}
+  .brand .kind{display:none}
+  .tabs{flex-wrap:nowrap;overflow-x:auto;gap:4px;width:100%;scrollbar-width:none}
+  .tab{padding:7px 10px;font-size:10px;letter-spacing:.08em;white-space:nowrap;flex:none}
+  .tab .long{display:none} .tab .short{display:inline}
+  .foot,.hh-note{display:none}
+  .hh-wrap{padding:0} .device{width:100%;height:calc(100dvh - 88px);min-height:520px;padding:6px 6px 10px;border-radius:14px}
+  .hh-top{padding:2px 4px 6px}
   .journal,.pennants{display:none}
   .civbar{height:32px;padding:0 10px}
   .civbar .stat{gap:8px;font-size:10px;white-space:nowrap}
@@ -253,11 +264,11 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-s
   <div class="bar">
     <div class="brand"><span class="name">LEKISHI</span><span class="kind">UI mock · hero candidates · 2026-10-10</span></div>
     <div class="tabs" role="tablist" aria-label="Scale">
-      <button class="tab" role="tab" id="tab-globe" aria-selected="false" data-screen="globe">Globe</button>
-      <button class="tab" role="tab" id="tab-region" aria-selected="true" data-screen="region">Region · the hero</button>
-      <button class="tab" role="tab" id="tab-diorama" aria-selected="false" data-screen="diorama">Diorama · 秋妻屋浦</button>
-      <button class="tab" role="tab" id="tab-handheld" aria-selected="false" data-screen="handheld">Handheld · 2D phone</button>
-      <button class="tab" role="tab" id="tab-local" aria-selected="false" data-screen="local">Local · 平城京</button>
+      <button class="tab" role="tab" id="tab-globe" aria-selected="false" data-screen="globe"><span class="long">Globe</span><span class="short">Globe</span></button>
+      <button class="tab" role="tab" id="tab-region" aria-selected="true" data-screen="region"><span class="long">Region · the hero</span><span class="short">Region</span></button>
+      <button class="tab" role="tab" id="tab-diorama" aria-selected="false" data-screen="diorama"><span class="long">Diorama · 秋妻屋浦</span><span class="short">Diorama</span></button>
+      <button class="tab" role="tab" id="tab-handheld" aria-selected="false" data-screen="handheld"><span class="long">Handheld · 2D phone</span><span class="short">Handheld</span></button>
+      <button class="tab" role="tab" id="tab-local" aria-selected="false" data-screen="local"><span class="long">Local · 平城京</span><span class="short">Local</span></button>
     </div>
   </div>
 
@@ -360,12 +371,12 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-s
         </div>
         <div class="pads">
           <div class="dpad" role="group" aria-label="Move the cursor"><button type="button" class="u" data-dir="0,-1" aria-label="Up">▲</button><button type="button" class="l" data-dir="-1,0" aria-label="Left">◀</button><button type="button" class="c" tabindex="-1" aria-hidden="true"></button><button type="button" class="r" data-dir="1,0" aria-label="Right">▶</button><button type="button" class="d" data-dir="0,1" aria-label="Down">▼</button></div>
-          <div class="ab"><button type="button" class="b" id="hh-b" aria-label="Close">B</button><button type="button" class="a" id="hh-a" aria-label="Select">A</button></div>
+          <div class="ss"><button type="button" id="hh-select"><b>SELECT</b>STORY ▶</button><button type="button" id="hh-start"><b>START</b>MENU</button></div>
+          <div class="ab"><button type="button" class="b" id="hh-b" aria-label="Close">B</button><button type="button" class="a" id="hh-a" aria-label="Read">A</button></div>
         </div>
-        <div class="hh-hint">D-PAD MOVES · A READS · B CLOSES</div>
       </div>
     </div>
-    <p class="hh-note"><b>The phone's own tier.</b> The same terrain, classified into 16-pixel tiles at about 260 m each, drawn with PixiJS. Water, sand, grass, forest, hill, and mountain come from the elevation; houses and the ship are sprites at the attested places; the dotted tiles are the schematic path. Grid movement and two buttons are the whole control scheme.</p>
+    <p class="hh-note"><b>The phone's own tier.</b> The same terrain in 16-pixel tiles at about 260 m, drawn with PixiJS; sprites at the attested places; dotted tiles for the schematic path. D-pad moves, A reads, B closes, Select steps the story, Start opens the menu. Arrow keys, Enter, Escape, Tab, and M on a keyboard.</p>
   </section>
 
   <!-- ===== LOCAL ===== -->
@@ -745,10 +756,12 @@ function drawHandheld(){
     a.clearRect(12*S,0,S,S); px(12,0,0,"#f3ead7",16,2); px(12,0,14,"#f3ead7",16,2); px(12,0,0,"#f3ead7",2,16); px(12,14,0,"#f3ead7",2,16); px(12,2,2,"#0b1114",12,1); px(12,2,13,"#0b1114",12,1); px(12,2,2,"#0b1114",1,12); px(12,13,2,"#0b1114",1,12);
     PIXI.BaseTexture.defaultOptions.scaleMode=PIXI.SCALE_MODES.NEAREST;
     const base=PIXI.BaseTexture.from(atlas); const tex=[]; for(let i=0;i<N;i++) tex.push(new PIXI.Texture(base,new PIXI.Rectangle(i*S,0,S,S)));
-    const canvas=document.getElementById("hh-canvas"); const VW=24,VH=20;
+    const canvas=document.getElementById("hh-canvas"), screenEl=canvas.parentElement; let VW=24,VH=20;
     const app=new PIXI.Application({view:canvas,width:VW*S,height:VH*S,backgroundColor:0x1f5a80,antialias:false,resolution:1,autoDensity:false});
     const tiles=new PIXI.Container(), objs=new PIXI.Container(); app.stage.addChild(tiles,objs);
-    const pool=[]; for(let i=0;i<VW*VH;i++){ const sp=new PIXI.Sprite(tex[1]); sp.x=(i%VW)*S; sp.y=((i/VW)|0)*S; tiles.addChild(sp); pool.push(sp); }
+    let pool=[];
+    function fit(){ const w=screenEl.clientWidth, h=screenEl.clientHeight; const nw=Math.max(10,Math.floor(w/S)), nh=Math.max(10,Math.floor(h/S)); if(nw===VW&&nh===VH&&pool.length) return; VW=nw; VH=nh; app.renderer.resize(VW*S,VH*S); canvas.style.width=(VW*S)+"px"; canvas.style.height=(VH*S)+"px"; tiles.removeChildren(); pool=[]; for(let i=0;i<VW*VH;i++){ const sp=new PIXI.Sprite(tex[1]); sp.x=(i%VW)*S; sp.y=((i/VW)|0)*S; tiles.addChild(sp); pool.push(sp); } }
+    fit(); window.addEventListener("resize",()=>{ fit(); });
     const toTile=(lon,lat)=>[Math.round((mx(lon)-HM.MX0)/(HM.MX1-HM.MX0)*cols), Math.round((my(lat)-HM.MY0)/(HM.MY1-HM.MY0)*rows)];
     // objects: houses at the attested places, the ship, the path, labels
     const bay=toTile(130.232,31.27), ei=toTile(130.492,31.239), kaimon=toTile(130.528,31.18), north=toTile(130.30,31.40);
@@ -760,7 +773,7 @@ function drawHandheld(){
     const shipT=route[2]; const ship=addObj(shipT[0],shipT[1],10); addObj(ei[0]-1,ei[1]+1,10);
     const labels=[["秋妻屋浦",bay[0]-1,bay[1]-2],["石籬浦",ei[0]-1,ei[1]-2],["開聞岳",kaimon[0]-1,kaimon[1]-2],["薩摩",north[0]+3,north[1]+1]];
     for(const [t,c,r] of labels){ const txt=new PIXI.Text(t,{fontFamily:'"DotGothic16","Press Start 2P",monospace',fontSize:12,fill:"#f3ead7",stroke:"#0b1114",strokeThickness:3}); txt.resolution=1; objs.addChild(txt); objects.push({c,r,sp:txt}); }
-    const cursor=new PIXI.Sprite(tex[12]); objs.addChild(cursor);
+    const cursor=new PIXI.Sprite(tex[12]); objs.addChild(cursor); objs.sortableChildren=true; cursor.zIndex=10;
     let cur=[bay[0],bay[1]]; let cam=[0,0]; let frame=0;
     const events={[bay.join()]:{p:"秋妻屋浦",jp:"第二舟、薩摩國阿多郡秋妻屋浦に着く。",en:"THE 2ND SHIP LANDS AT AKIMEYA BAY",tag:"753"},[ei.join()]:{p:"石籬浦",jp:"第四舟は石籬浦に着いたと大宰府が報ず。",en:"THE 4TH SHIP MADE LAND AT ISHIGAKI",tag:"754"},[shipT.join()]:{p:"第二舟",jp:"鑒眞、大伴古麻呂らを乗せた第二舟。益救島より南風に乗る。",en:"JIANZHEN'S SHIP, FROM YAKU ON A SOUTH WIND",tag:"12/20"},[kaimon.join()]:{p:"開聞岳",jp:"開聞岳。薩摩の南端に立つ火山。地名の目印。",en:"MT KAIMON · A LANDMARK, NOT AN EVENT",tag:"地"}};
     const desc={[T.DEEP]:"深い海。",[T.WATER]:"海。",[T.SHALLOW]:"浅瀬。",[T.SAND]:"浜。",[T.GRASS]:"草地。",[T.FOREST]:"林。",[T.HILL]:"丘。",[T.MTN]:"山。",[T.PEAK]:"高い山。"};
@@ -773,9 +786,14 @@ function drawHandheld(){
     const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches; app.ticker.add(()=>{ if(!reduce) frame++; render(); });
     function move(dx,dy){ cur=[Math.min(cols-1,Math.max(0,cur[0]+dx)),Math.min(rows-1,Math.max(0,cur[1]+dy))]; dlg.hidden=true; const ev=events[cur.join()]; placeEl.textContent=ev?ev.p:desc[t2[cur[1]*cols+cur[0]]]; }
     function act(){ const ev=events[cur.join()]; if(ev) say(ev.tag,ev.jp,ev.en); else say("?",desc[t2[cur[1]*cols+cur[0]]],"NOTHING RECORDED HERE"); }
-    document.querySelectorAll(".dpad button[data-dir]").forEach(b=>b.addEventListener("click",()=>{ const [dx,dy]=b.dataset.dir.split(",").map(Number); move(dx,dy); }));
+    document.querySelectorAll(".dpad button[data-dir]").forEach(b=>{ const [dx,dy]=b.dataset.dir.split(",").map(Number); let rep=null; const start=e=>{ e.preventDefault(); move(dx,dy); clearInterval(rep); rep=setInterval(()=>move(dx,dy),140); }; const stop=()=>{ clearInterval(rep); rep=null; }; b.addEventListener("pointerdown",start); b.addEventListener("pointerup",stop); b.addEventListener("pointerleave",stop); b.addEventListener("pointercancel",stop); b.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); move(dx,dy); } }); });
     document.getElementById("hh-a").addEventListener("click",act); document.getElementById("hh-b").addEventListener("click",()=>{ dlg.hidden=true; });
-    window.addEventListener("keydown",ev=>{ if(document.getElementById("screen-handheld").hidden) return; const m={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]}[ev.key]; if(m){ ev.preventDefault(); move(...m); } else if(ev.key==="Enter"||ev.key===" "||ev.key==="a"){ ev.preventDefault(); act(); } else if(ev.key==="Escape"||ev.key==="b"){ dlg.hidden=true; } });
+    // Select steps the story: the cursor jumps to the next event tile and reads it. Start opens the menu in the same box.
+    const storyTiles=[shipT,bay,ei]; let storyI=1;
+    function nextStory(){ storyI=(storyI+1)%storyTiles.length; cur=[...storyTiles[storyI]]; const ev=events[cur.join()]; placeEl.textContent=ev.p; say(ev.tag,ev.jp,ev.en); }
+    function menu(){ say("MENU","▶ 物語 STORY　　資料 SOURCES<br>　 地図 MAP　　　章 ABOUT","B CLOSES · SELECT STEPS THE STORY"); }
+    document.getElementById("hh-select").addEventListener("click",nextStory); document.getElementById("hh-start").addEventListener("click",menu);
+    window.addEventListener("keydown",ev=>{ if(document.getElementById("screen-handheld").hidden) return; const m={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]}[ev.key]; if(m){ ev.preventDefault(); move(...m); } else if(ev.key==="Enter"||ev.key===" "||ev.key==="a"){ ev.preventDefault(); act(); } else if(ev.key==="Escape"||ev.key==="b"){ dlg.hidden=true; } else if(ev.key==="Tab"){ ev.preventDefault(); nextStory(); } else if(ev.key==="m"){ menu(); } });
     render();
   }; img.src="__HEIGHT__";
 }

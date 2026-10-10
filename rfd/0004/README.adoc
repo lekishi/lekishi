@@ -62,12 +62,12 @@ checklists hold the items; this charter holds the order and the exits.
 
 === Track 0 — Decide and unblock (one week)
 
-. The Tang hero mockup, approved by the owner (RFD 1).
-. PR #14 closed by decision; the treatment comparison retired (RFD 1, RFD 3).
+. The Tang hero mockup, approved by the owner (RFD 1). Done 2026-10-10: the diorama in `rfd/0001/hero/`.
+. PR #14 closed by decision; the treatment comparison retired (RFD 1, RFD 3). Done 2026-10-10.
 . The compact authoring format designed and the per-chapter approval
   defined (RFD 2).
 . Gazetteer rights decided: CHGIS and CBDB (RFD 2).
-. The two-day MapLibre spike run and the renderer decided (RFD 3).
+. The two-day renderer spike run on the hero, stylized Cesium against a custom Three.js scene, and the renderer decided (RFD 3).
 
 Exit: five recorded decisions.
 
@@ -102,8 +102,9 @@ Verified on the deployed build on the agreed devices before the announcement.
 === RC1 The hero renders
 
 The served Tang chapter matches its approved hero on desktop and on a physical
-iPad: relief basemap, collision-free labels, the voyage's schematic line, the
-transmission arc, the timeline strip, and an image in the card.
+iPad: the diorama's terrain, symbols, vessel, and chrome at region scale, the
+painted relief on the globe, collision-free labels, the voyage's schematic
+line, the transmission arc, the timeline, and an image in the card.
 
 === RC2 A journey can be followed
 

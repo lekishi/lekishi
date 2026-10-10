@@ -219,7 +219,20 @@ def ne2():
         for x in range(8):
             for y in range(4):
                 im.paste(Image.open(os.path.join(NE2, "2", str(x), f"{y}.jpg")).convert("RGB"), (x * 256, (3 - y) * 256))
-        NE2_IMG = np.asarray(im.filter(ImageFilter.GaussianBlur(2.2)), np.float32)
+        # The land hue is a mask-normalised blur of Natural Earth's land pixels,
+        # extended outward from the nearest land, because land in our elevation
+        # is often sea at Natural Earth's 20 km pixels (narrow peninsulas,
+        # islands). A plain blur would tint coasts with the sea's blue.
+        a = np.asarray(im, np.float32)
+        land = ~((a[..., 2] > a[..., 0] + 12) & (a[..., 2] >= a[..., 1])) | (a.mean(-1) > 200)  # ice counts as land
+        def blur(arr, r): return np.asarray(Image.fromarray(arr).filter(ImageFilter.GaussianBlur(r)), np.float32)
+        def fill(r):
+            w = blur((land * 255).astype(np.uint8), r) / 255.0
+            c = np.stack([blur((a[..., i] * land).astype(np.uint8), r) for i in range(3)], -1)
+            return c / np.maximum(w, 1e-4)[..., None], w
+        near, wn = fill(2.2); far, wf = fill(12)
+        hue = np.where((wn > 0.15)[..., None], near, np.where((wf > 0.02)[..., None], far, hexc("#6f9a4a")))
+        NE2_IMG = np.clip(hue, 0, 255)
     return NE2_IMG
 
 def ne2_at(lon, lat):
@@ -241,39 +254,51 @@ def noise(lon, lat, scale):
     return vnoise(lon * scale, lat * scale) * 0.6 + vnoise(lon * scale * 2.3 + 17, lat * scale * 2.3 + 5) * 0.4
 
 def build_imagery(z, x, y):
+    """Paints one tile so that every point gets the same colour at every level:
+    the same rules apply worldwide (no per-level or per-region switches), sea
+    depth and slope come from one fixed source, and detail finer than a pixel
+    fades to its average instead of aliasing. Level seams would otherwise show
+    wherever two imagery levels meet on screen."""
     w, s, e, n = tile_bounds(z, x, y)
     step = (e - w) / IMG
     lons = w + (np.arange(IMG + 2) - 0.5) * step
     lats = n - (np.arange(IMG + 2) - 0.5) * step
     LON, LAT = np.meshgrid(lons, lats); LAT = np.clip(LAT, -89.999, 89.999)
-    E = elevation(LON, LAT, step)
-    m_per_deg = 111320.0
-    gy, gx = np.gradient(E, step * m_per_deg)
+    E = elevation(LON, LAT, step)[1:-1, 1:-1]                 # coastline at full resolution
+    COARSE = 0.011                                            # the z7 source where it exists, z4 elsewhere
+    Ec = elevation(LON, LAT, COARSE)
+    gy, gx = np.gradient(Ec, step * 111320.0)
     gx = gx / np.maximum(np.cos(np.radians(LAT)), 0.05)
-    slope = np.hypot(gx, gy)[1:-1, 1:-1]; E = E[1:-1, 1:-1]; LON = LON[1:-1, 1:-1]; LAT = LAT[1:-1, 1:-1]
+    slope = np.hypot(gx, gy)[1:-1, 1:-1]
+    Ec = Ec[1:-1, 1:-1]; LON = LON[1:-1, 1:-1]; LAT = LAT[1:-1, 1:-1]
     base = ne2_at(LON, LAT)
-    # Detail fades in with zoom: Natural Earth hue alone on the globe, the
-    # diorama palette (fields, forest tones, sand, rock) by the peninsula.
-    detail = np.clip((z - 5) / 4.0, 0, 1)
-    nz = noise(LON, LAT, 40.0)[..., None]
-    field = (noise(LON + 3.1, LAT - 7.7, 55.0) > 0.58)[..., None] & (E[..., None] < 160) & (slope[..., None] < 0.12)
-    grass = np.where(field, hexc("#b7b65a"), hexc("#7faf49")) * (1 - 0.35 * nz) + hexc("#5c8a39") * 0.35 * nz
-    hue_match = np.clip(base / np.maximum(base.mean(-1, keepdims=True), 1), 0.6, 1.5)  # keep NE2's biome cast
-    land_detail = grass * (0.55 + 0.45 * hue_match)
-    rock = np.clip((slope[..., None] - 0.25) / 0.35, 0, 1)
-    land_detail = land_detail * (1 - rock * 0.7) + hexc("#9b8a6c") * rock * 0.7
-    high = np.clip((E[..., None] - 900) / 1800, 0, 1)
-    land_detail = land_detail * (1 - high * 0.6) + hexc("#a39377") * high * 0.6
-    land_globe = np.clip((base - 128) * 1.2 + 128, 0, 255)  # a touch more saturated than NE2
-    land = land_globe * (1 - detail) + land_detail * detail
-    sand = ((E > 0.5) & (E < 6) & (z >= 8))[..., None]
-    land = np.where(sand, hexc("#d8c48c"), land)
-    depth = np.clip(-E, 0, None)[..., None]
+    # Vegetated land (Natural Earth's greens) takes the diorama's grass; arid and
+    # icy land keeps its own hue. The same rule everywhere, at every level.
+    green = np.clip((base[..., 1] - np.maximum(base[..., 0], base[..., 2]) + 6) / 30.0, 0, 1)[..., None]
+    lum = base.mean(-1, keepdims=True)
+    styl = np.clip((base - lum) * 1.25 + lum * 1.04, 0, 255)
+    land = styl * (1 - 0.8 * green) + hexc("#7faf49") * 0.8 * green
+    # Detail with a pixel-size fade: features of a given size fade to their mean
+    # once a pixel is wider than half the feature.
+    def fade(feature_deg): return float(np.clip((feature_deg / step - 2.0) / 2.0, 0, 1))
+    f_field, f_tone = fade(1 / 55.0), fade(1 / 40.0)
+    fn = noise(LON + 3.1, LAT - 7.7, 55.0)
+    field = np.clip((fn - 0.52) / 0.12, 0, 1)
+    field = (0.18 + (field - 0.18) * f_field)[..., None] * green * (Ec[..., None] < 160) * (slope[..., None] < 0.12)
+    land = land * (1 - 0.5 * field) + hexc("#b7b65a") * 0.5 * field
+    nz = (0.5 + (noise(LON, LAT, 40.0) - 0.5) * f_tone)[..., None]
+    land = land * (1.12 - 0.3 * nz)
+    rock = np.clip((slope[..., None] - 0.18) / 0.3, 0, 1) * 0.6
+    land = land * (1 - rock) + hexc("#9b8a6c") * rock
+    high = np.clip((Ec[..., None] - 900) / 1800, 0, 1) * 0.6
+    land = land * (1 - high) + hexc("#a39377") * high
+    sand = ((E > 0.5) & (E < 6))[..., None] * fade(0.004)
+    land = land * (1 - sand) + hexc("#d8c48c") * sand
+    depth = np.clip(-Ec, 0, None)[..., None]
     t = np.clip(depth / 1800.0, 0, 1) ** 0.55
     sea = hexc("#4aa3b8") * (1 - t) + hexc("#163f5c") * t
-    ice = (base.mean(-1) > 225)[..., None]  # Natural Earth's ice caps stay white
-    col = np.where((E > 0.5)[..., None] | ice, land, sea)
-    col = np.where(ice & (E > 0.5)[..., None], base, col)
+    ice = ((base.mean(-1) > 185) & (base.max(-1) - base.min(-1) < 45))[..., None]  # Natural Earth ice and snow
+    col = np.where((E > 0.5)[..., None], np.where(ice, base, land), np.where(ice, base, sea))
     p = os.path.join(OUT, "imagery", str(z), str(x), f"{y}.jpg")
     os.makedirs(os.path.dirname(p), exist_ok=True)
     Image.fromarray(np.clip(col, 0, 255).astype(np.uint8)).save(p, quality=86, optimize=True)

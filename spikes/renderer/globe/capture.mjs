@@ -17,7 +17,7 @@ const out = join("spikes/renderer/globe/out", spike); mkdirSync(out, { recursive
 const exe = "/opt/pw-browsers/chromium-1194/chrome-linux/chrome"
 const browser = await chromium.launch({ executablePath: exe, args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist", "--enable-webgl"] })
 const errors = []
-const SETTLE_MS = 12000
+const SETTLE_MS = 20000
 const STILLS = { globe: 0.0, region: 0.44, local: 0.70 }
 async function page(ctx) {
   const p = await ctx.newPage()
@@ -65,7 +65,7 @@ const phoneStats = { settled: phoneSettled, fps: await fps(p, 3), stats: await p
 await phone.close()
 
 // the flight, frame by frame: globe, down across the sea, the diorama orbit, back out
-const FPS = 10, SECONDS = 14, frames = FPS * SECONDS
+const FPS = 10, SECONDS = +(process.env.FLIGHT_SECONDS ?? 14), frames = FPS * SECONDS  // FLIGHT_SECONDS shortens a dry run
 const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } })
 p = await page(ctx); await open(p)
 const dir = join(out, "flight-frames"); rmSync(dir, { recursive: true, force: true }); mkdirSync(dir)

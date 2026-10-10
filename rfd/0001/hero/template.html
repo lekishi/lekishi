@@ -186,8 +186,29 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-s
 .honest{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:rgba(10,14,18,.78);border:1px solid var(--line);border-radius:3px;padding:6px 12px;font:11px var(--ui);color:var(--ink-dim);max-width:min(560px,52%);text-align:center}
 .honest b{color:var(--ink);font-weight:500}
 /* handheld tier: a top-down tile map in a device frame, the phone's own register */
-.hh-wrap{display:flex;justify-content:center;padding:12px 0 6px}
-.device{width:min(100%,400px);height:780px;display:flex;flex-direction:column;background:linear-gradient(#1a2229,#0e1418);border:1px solid var(--line);border-radius:22px;padding:10px 10px 12px;box-shadow:0 30px 80px rgba(0,0,0,.55);position:relative}
+.hh-wrap{display:flex;justify-content:center;padding:0}
+.device{width:100%;height:780px;display:grid;grid-template-columns:232px minmax(0,1fr) 300px;grid-template-rows:auto minmax(0,1fr) auto;gap:8px 10px;background:linear-gradient(#1a2229,#0e1418);border:1px solid var(--line);border-radius:6px;padding:10px 12px 12px;box-shadow:0 30px 80px rgba(0,0,0,.55);position:relative}
+.device::before{border-radius:3px}
+.hh-top{grid-column:1/-1}
+.hh-journal{grid-row:2/4;grid-column:1} .screen-hh{grid-row:2;grid-column:2} .hh-card{grid-row:2/4;grid-column:3} .pads{grid-row:3;grid-column:2}
+.pbox{background:#f5efdc;color:#141a1f;border:3px solid #141a1f;box-shadow:inset 0 0 0 2px #f5efdc,inset 0 0 0 4px #141a1f;padding:12px 14px;font:12px/1.5 "DotGothic16","Press Start 2P",monospace;overflow:auto;min-height:0}
+.pbox h4{margin:0 0 8px;font:9px "Press Start 2P",monospace;color:#4a5560;letter-spacing:.04em}
+.pbox h4 span{font:13px "DotGothic16",monospace;color:#141a1f;margin-right:8px}
+.jstep{display:block;width:100%;appearance:none;border:0;background:transparent;text-align:left;font:12px/1.35 "DotGothic16",monospace;color:#141a1f;padding:4px 2px 4px 16px;position:relative;cursor:pointer}
+.jstep small{display:block;font:7px "Press Start 2P",monospace;color:#6a7480;margin-top:2px}
+.jstep[aria-current="true"]{background:#141a1f;color:#f5efdc} .jstep[aria-current="true"] small{color:#c9c0a8}
+.jstep[aria-current="true"]::before{content:"▶";position:absolute;left:3px;top:5px;font-size:9px}
+.jstep.off{opacity:.55}
+.hh-card .tag{display:inline-block;border:2px solid #141a1f;padding:0 4px;font:9px "Press Start 2P",monospace;margin-right:6px;vertical-align:1px}
+.hh-card h3{margin:6px 0 2px;font:16px/1.3 "DotGothic16",monospace}
+.hh-card .en{font:8px/1.6 "Press Start 2P",monospace;color:#4a5560}
+.hh-card .pic{margin:10px 0;height:96px;border:2px solid #141a1f;background:repeating-linear-gradient(135deg,#e6dcc2 0 3px,#f5efdc 3px 9px);display:grid;place-items:center;font:7px "Press Start 2P",monospace;color:#6a7480;text-align:center;line-height:1.8}
+.hh-card .q{border-left:3px solid #141a1f;padding:4px 8px;margin:8px 0;font-size:12px}
+.hh-card .q small{display:block;font:7px "Press Start 2P",monospace;color:#6a7480;margin-top:4px}
+.hh-card dl{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;margin:8px 0 0;font-size:11px} .hh-card dt{color:#6a7480} .hh-card dd{margin:0}
+.hh-card ul{margin:4px 0 0;padding:0;list-style:none;font-size:11px} .hh-card li{padding:3px 0;border-top:1px dashed #b9b09a}
+.keys{display:flex;gap:10px;align-items:center;font:7px/1.6 "Press Start 2P",monospace;color:var(--ink-faint);letter-spacing:.04em}
+.keys b{color:var(--ink-dim);font-weight:400}
 .device::before{content:"";position:absolute;inset:5px;border:1px solid rgba(210,169,79,.16);border-radius:18px;pointer-events:none}
 .hh-top{display:flex;justify-content:space-between;align-items:center;font:10px "Press Start 2P","DotGothic16",monospace;color:var(--gold-bright);padding:2px 4px 8px;letter-spacing:.02em}
 .hh-top .jp{font-family:"DotGothic16","Press Start 2P",monospace;font-size:13px;color:var(--ink)}
@@ -220,7 +241,8 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-s
   .tab{padding:7px 10px;font-size:10px;letter-spacing:.08em;white-space:nowrap;flex:none}
   .tab .long{display:none} .tab .short{display:inline}
   .foot,.hh-note{display:none}
-  .hh-wrap{padding:0} .device{width:100%;height:calc(100dvh - 88px);min-height:520px;padding:6px 6px 10px;border-radius:14px}
+  .device{display:flex;flex-direction:column;width:100%;height:calc(100dvh - 88px);min-height:520px;padding:6px 6px 10px;border-radius:14px}
+  .hh-journal,.hh-card,.keys{display:none}
   .hh-top{padding:2px 4px 6px}
   .journal,.pennants{display:none}
   .civbar{height:32px;padding:0 10px}
@@ -365,18 +387,21 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);font-s
   <section class="screen" id="screen-handheld" role="tabpanel" hidden>
     <div class="hh-wrap">
       <div class="device">
-        <div class="hh-top"><span>753 12/20</span><span class="jp" id="hh-place">秋妻屋浦</span><span>8/12</span></div>
+        <div class="hh-top"><span>753 12/20</span><span class="jp" id="hh-place">秋妻屋浦</span><span id="hh-step">8/12</span></div>
+        <nav class="pbox hh-journal" aria-label="Story"><h4><span>物語</span>STORY · 遣唐使</h4><div id="hh-journal"></div></nav>
+        <aside class="pbox hh-card" id="hh-card" aria-label="Selected event"></aside>
         <div class="screen-hh"><canvas id="hh-canvas" width="384" height="320"></canvas>
           <div class="dlg" id="hh-dlg"><span class="tag">753</span>第二舟、薩摩國阿多郡秋妻屋浦に着く。<span class="en">THE 2ND SHIP LANDS AT AKIMEYA BAY</span><span class="arrow">▼</span></div>
         </div>
         <div class="pads">
           <div class="dpad" role="group" aria-label="Move the cursor"><button type="button" class="u" data-dir="0,-1" aria-label="Up">▲</button><button type="button" class="l" data-dir="-1,0" aria-label="Left">◀</button><button type="button" class="c" tabindex="-1" aria-hidden="true"></button><button type="button" class="r" data-dir="1,0" aria-label="Right">▶</button><button type="button" class="d" data-dir="0,1" aria-label="Down">▼</button></div>
           <div class="ss"><button type="button" id="hh-select"><b>SELECT</b>STORY ▶</button><button type="button" id="hh-start"><b>START</b>MENU</button></div>
+          <div class="keys"><span><b>↑↓←→</b> MOVE</span><span><b>ENTER</b> A</span><span><b>ESC</b> B</span><span><b>TAB</b> SELECT</span><span><b>M</b> START</span></div>
           <div class="ab"><button type="button" class="b" id="hh-b" aria-label="Close">B</button><button type="button" class="a" id="hh-a" aria-label="Read">A</button></div>
         </div>
       </div>
     </div>
-    <p class="hh-note"><b>The phone's own tier.</b> The same terrain in 16-pixel tiles at about 260 m, drawn with PixiJS; sprites at the attested places; dotted tiles for the schematic path. D-pad moves, A reads, B closes, Select steps the story, Start opens the menu. Arrow keys, Enter, Escape, Tab, and M on a keyboard.</p>
+    <p class="hh-note"><b>The 2D tile mode.</b> On tablet and desktop it fills the stage with the journal and the card beside the map; on a phone it is the device alone. The same terrain in 16-pixel tiles at about 260 m, drawn with PixiJS; sprites at the attested places; dotted tiles for the schematic path. D-pad moves, A reads, B closes, Select steps the story, Start opens the menu. Arrow keys, Enter, Escape, Tab, and M on a keyboard.</p>
   </section>
 
   <!-- ===== LOCAL ===== -->
@@ -775,7 +800,7 @@ function drawHandheld(){
     for(const [t,c,r] of labels){ const txt=new PIXI.Text(t,{fontFamily:'"DotGothic16","Press Start 2P",monospace',fontSize:12,fill:"#f3ead7",stroke:"#0b1114",strokeThickness:3}); txt.resolution=1; objs.addChild(txt); objects.push({c,r,sp:txt}); }
     const cursor=new PIXI.Sprite(tex[12]); objs.addChild(cursor); objs.sortableChildren=true; cursor.zIndex=10;
     let cur=[bay[0],bay[1]]; let cam=[0,0]; let frame=0;
-    const events={[bay.join()]:{p:"秋妻屋浦",jp:"第二舟、薩摩國阿多郡秋妻屋浦に着く。",en:"THE 2ND SHIP LANDS AT AKIMEYA BAY",tag:"753"},[ei.join()]:{p:"石籬浦",jp:"第四舟は石籬浦に着いたと大宰府が報ず。",en:"THE 4TH SHIP MADE LAND AT ISHIGAKI",tag:"754"},[shipT.join()]:{p:"第二舟",jp:"鑒眞、大伴古麻呂らを乗せた第二舟。益救島より南風に乗る。",en:"JIANZHEN'S SHIP, FROM YAKU ON A SOUTH WIND",tag:"12/20"},[kaimon.join()]:{p:"開聞岳",jp:"開聞岳。薩摩の南端に立つ火山。地名の目印。",en:"MT KAIMON · A LANDMARK, NOT AN EVENT",tag:"地"}};
+    const events2={[bay.join()]:{p:"秋妻屋浦",jp:"第二舟、薩摩國阿多郡秋妻屋浦に着く。",en:"THE 2ND SHIP LANDS AT AKIMEYA BAY",tag:"753"},[ei.join()]:{p:"石籬浦",jp:"第四舟は石籬浦に着いたと大宰府が報ず。",en:"THE 4TH SHIP MADE LAND AT ISHIGAKI",tag:"754"},[shipT.join()]:{p:"第二舟",jp:"鑒眞、大伴古麻呂らを乗せた第二舟。益救島より南風に乗る。",en:"JIANZHEN'S SHIP, FROM YAKU ON A SOUTH WIND",tag:"12/20"},[kaimon.join()]:{p:"開聞岳",jp:"開聞岳。薩摩の南端に立つ火山。地名の目印。",en:"MT KAIMON · A LANDMARK, NOT AN EVENT",tag:"地"}};
     const desc={[T.DEEP]:"深い海。",[T.WATER]:"海。",[T.SHALLOW]:"浅瀬。",[T.SAND]:"浜。",[T.GRASS]:"草地。",[T.FOREST]:"林。",[T.HILL]:"丘。",[T.MTN]:"山。",[T.PEAK]:"高い山。"};
     const dlg=document.getElementById("hh-dlg"), placeEl=document.getElementById("hh-place");
     function say(tag,jp,en){ dlg.hidden=false; dlg.innerHTML=`<span class="tag">${tag}</span>${jp}<span class="en">${en}</span><span class="arrow">▼</span>`; }
@@ -784,17 +809,21 @@ function drawHandheld(){
       for(const o of objects){ o.sp.x=(o.c-cam[0])*S; o.sp.y=(o.r-cam[1])*S; o.sp.visible=o.c>=cam[0]-2&&o.c<cam[0]+VW+2&&o.r>=cam[1]-1&&o.r<cam[1]+VH+1; }
       ship.y+=((frame>>4)&1); cursor.x=(cur[0]-cam[0])*S; cursor.y=(cur[1]-cam[1])*S; cursor.visible=((frame>>3)&1)===0||true; }
     const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches; app.ticker.add(()=>{ if(!reduce) frame++; render(); });
-    function move(dx,dy){ cur=[Math.min(cols-1,Math.max(0,cur[0]+dx)),Math.min(rows-1,Math.max(0,cur[1]+dy))]; dlg.hidden=true; const ev=events[cur.join()]; placeEl.textContent=ev?ev.p:desc[t2[cur[1]*cols+cur[0]]]; }
-    function act(){ const ev=events[cur.join()]; if(ev) say(ev.tag,ev.jp,ev.en); else say("?",desc[t2[cur[1]*cols+cur[0]]],"NOTHING RECORDED HERE"); }
+    function move(dx,dy){ cur=[Math.min(cols-1,Math.max(0,cur[0]+dx)),Math.min(rows-1,Math.max(0,cur[1]+dy))]; dlg.hidden=true; const ev=events2[cur.join()]; placeEl.textContent=ev?ev.p:desc[t2[cur[1]*cols+cur[0]]]; }
+    function act(){ const ev=events2[cur.join()]; if(ev) say(ev.tag,ev.jp,ev.en); else say("?",desc[t2[cur[1]*cols+cur[0]]],"NOTHING RECORDED HERE"); }
     document.querySelectorAll(".dpad button[data-dir]").forEach(b=>{ const [dx,dy]=b.dataset.dir.split(",").map(Number); let rep=null; const start=e=>{ e.preventDefault(); move(dx,dy); clearInterval(rep); rep=setInterval(()=>move(dx,dy),140); }; const stop=()=>{ clearInterval(rep); rep=null; }; b.addEventListener("pointerdown",start); b.addEventListener("pointerup",stop); b.addEventListener("pointerleave",stop); b.addEventListener("pointercancel",stop); b.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); move(dx,dy); } }); });
     document.getElementById("hh-a").addEventListener("click",act); document.getElementById("hh-b").addEventListener("click",()=>{ dlg.hidden=true; });
     // Select steps the story: the cursor jumps to the next event tile and reads it. Start opens the menu in the same box.
-    const storyTiles=[shipT,bay,ei]; let storyI=1;
-    function nextStory(){ storyI=(storyI+1)%storyTiles.length; cur=[...storyTiles[storyI]]; const ev=events[cur.join()]; placeEl.textContent=ev.p; say(ev.tag,ev.jp,ev.en); }
+    const stepTile={akimeya:bay,wind:null,yaku:null}; let storyI=events.findIndex(e=>e.id==="akimeya");
+    const jl=document.getElementById("hh-journal"), card=document.getElementById("hh-card"), stepEl=document.getElementById("hh-step");
+    function drawJournal(){ jl.innerHTML=""; events.forEach((e,i)=>{ const b=document.createElement("button"); b.type="button"; b.className="jstep"+(stepTile[e.id]?"":" off"); b.setAttribute("aria-current",i===storyI?"true":"false"); b.innerHTML=`${e.title}<small>${e.d.toUpperCase()}</small>`; b.addEventListener("click",()=>goStep(i)); jl.appendChild(b); }); }
+    function drawCard(){ const e=events[storyI]; const p=e.p?places[e.p]:null; card.innerHTML=`<h4><span>記録</span>EVENT ${storyI+1}/${events.length}</h4><span class="tag">${e.d.split(" · ")[0]}</span><h3>${e.title}</h3><div class="en">${e.en.toUpperCase()}</div><div class="pic">東征伝絵巻<br>LATER DEPICTION · RIGHTS PENDING</div><div class="q">${e.q}<small>${e.src} · ${e.w}</small></div><dl><dt>場所</dt><dd>${p?p.n+" · "+(p.k==="site"?"attested site":"identified locality"):"含元殿 · off this map"}</dd><dt>日付</dt><dd>${e.d} · day precision</dd><dt>人</dt><dd>鑒眞 · 大伴古麻呂</dd></dl><h4 style="margin-top:10px"><span>資料</span>SOURCES</h4><ul><li>唐大和上東征傳 (779) · public domain</li><li>續日本紀 (797) · public domain</li></ul>`; stepEl.textContent=`${storyI+1}/${events.length}`; }
+    function goStep(i){ storyI=i; const e=events[i]; const t=stepTile[e.id]; drawJournal(); drawCard(); if(t){ cur=[...t]; const ev=events2[cur.join()]; placeEl.textContent=ev.p; say(ev.tag,ev.jp,ev.en); } else { placeEl.textContent="地図外"; say(e.d.split(" · ")[0],e.title+"（この地図の外）",e.en.toUpperCase()+" · OUTSIDE THIS MAP"); } }
+    function nextStory(){ goStep((storyI+1)%events.length); }
     function menu(){ say("MENU","▶ 物語 STORY　　資料 SOURCES<br>　 地図 MAP　　　章 ABOUT","B CLOSES · SELECT STEPS THE STORY"); }
     document.getElementById("hh-select").addEventListener("click",nextStory); document.getElementById("hh-start").addEventListener("click",menu);
     window.addEventListener("keydown",ev=>{ if(document.getElementById("screen-handheld").hidden) return; const m={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]}[ev.key]; if(m){ ev.preventDefault(); move(...m); } else if(ev.key==="Enter"||ev.key===" "||ev.key==="a"){ ev.preventDefault(); act(); } else if(ev.key==="Escape"||ev.key==="b"){ dlg.hidden=true; } else if(ev.key==="Tab"){ ev.preventDefault(); nextStory(); } else if(ev.key==="m"){ menu(); } });
-    render();
+    drawJournal(); drawCard(); render();
   }; img.src="__HEIGHT__";
 }
 

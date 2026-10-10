@@ -69,9 +69,7 @@ tiles.setCamera(camera)
 let tilesLoaded = 0
 tiles.addEventListener("load-model", ({ scene: s }) => {
   tilesLoaded++
-  // Terrain receives the symbols' shadows but does not cast its own: with the exaggerated
-  // relief and mixed tile levels, self-shadowing left black slivers along ridges and skirts.
-  s.traverse(o => { if (o.isMesh) { o.castShadow = false; o.receiveShadow = true; o.material.roughness = 0.95; o.material.metalness = 0 } })
+  s.traverse(o => { if (o.isMesh) { o.castShadow = o.receiveShadow = true; o.material.roughness = 0.95; o.material.metalness = 0 } })
 })
 scene.add(tiles.group)
 
@@ -258,7 +256,6 @@ function overlay() { const s = stats(); document.getElementById("stats").textCon
 resize(); addEventListener("resize", resize)
 fly(0)
 requestAnimationFrame(loop)
-window.__dbg = { tiles, overlays, overlayPlugin, scene, camera, renderer, THREE }
 window.spike = {
   ready: settled(120000).then(() => {
     loadMs = Math.round(performance.now() - T0)

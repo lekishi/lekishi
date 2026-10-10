@@ -20,7 +20,7 @@ export class Globe {
   constructor({ tilesUrl, tileset, exaggeration, maxSSE = 2, overlay = null, maxInflight = 10 }) {
     this.url = tilesUrl; this.avail = tileset.available; this.maxLevel = tileset.maxLevel
     this.K = exaggeration; this.maxSSE = maxSSE; this.overlay = overlay; this.maxInflight = maxInflight
-    this.MAXH = 9000 * exaggeration
+    this.MAXH = 9000 * exaggeration   // above any terrain on Earth: the roots' bound before they load
     this.tiles = new Map(); this.queue = []; this.inflight = 0
     this.group = new THREE.Group(); this.group.name = "globe"
     this.materials = new Map()
@@ -37,14 +37,38 @@ export class Globe {
     const k = `${z}/${x}/${y}`; let t = this.tiles.get(k)
     if (t) return t
     const b = Globe.bounds(z, x, y)
-    // bounds from a 5x5 sample at sea level and at the highest possible terrain:
-    // corners alone miss the bulge of large, curved tiles
+    t = { z, x, y, b, key: k, parent, sphere: new THREE.Sphere(), horizonPts: [], available: this.isAvailable(z, x, y), state: "new", mesh: null, heights: null, texture: null, lastUsed: 0 }
+    // Tight height bounds decide how far away a tile is, so they decide how much
+    // gets fetched: with every tile assumed to reach the highest possible terrain
+    // (19.8 km after exaggeration) the sea tiles looked near and over-refined.
+    // Roots start from that worst case; children start from the parent's samples
+    // over their quadrant plus the parent's geometric error (the parent grid can
+    // miss a peak between samples); a loaded tile then uses its own heights.
+    const r = parent?.heights ? this.quadrantRange(parent, x - parent.x * 2, y - parent.y * 2, LEVEL0_ERROR / (1 << parent.z)) : [0, this.MAXH]
+    this.setBounds(t, r[0], r[1])
+    this.tiles.set(k, t); return t
+  }
+  // [min, max] rendered height (exaggerated, sea clamped to 0) over a quadrant of a loaded tile
+  quadrantRange(p, qx, qy, margin) {
+    const r0 = qy === 1 ? 0 : 32, c0 = qx * 32
+    let lo = Infinity, hi = -Infinity
+    for (let r = r0; r <= r0 + 32; r++) for (let c = c0; c <= c0 + 32; c++) { const v = p.heights[r * G + c]; if (v < lo) lo = v; if (v > hi) hi = v }
+    return [Math.max(0, lo - margin) * this.K, (Math.max(0, hi) + margin) * this.K]
+  }
+  ownRange(t) {
+    let lo = Infinity, hi = -Infinity
+    for (const v of t.heights) { if (v < lo) lo = v; if (v > hi) hi = v }
+    return [Math.max(0, lo) * this.K, Math.max(0, hi) * this.K]
+  }
+  setBounds(t, minH, maxH) {
+    const { b } = t
+    // bounds from a 5x5 sample at the lowest and highest terrain: corners alone
+    // miss the bulge of large, curved tiles
     const grid = []
     for (let i = 0; i <= 4; i++) for (let j = 0; j <= 4; j++) grid.push([b.w + (b.e - b.w) * i / 4, Math.max(-89.9, Math.min(89.9, b.s + (b.n - b.s) * j / 4))])
-    const high = grid.map(([lo, la]) => new THREE.Vector3(...toEcef(lo, la, this.MAXH)))
-    const low = grid.map(([lo, la]) => new THREE.Vector3(...toEcef(lo, la, 0)))
-    t = { z, x, y, b, key: k, parent, sphere: new THREE.Sphere().setFromPoints([...high, ...low]), horizonPts: high, available: this.isAvailable(z, x, y), state: "new", mesh: null, heights: null, texture: null, lastUsed: 0 }
-    this.tiles.set(k, t); return t
+    const high = grid.map(([lo, la]) => new THREE.Vector3(...toEcef(lo, la, maxH)))
+    const low = grid.map(([lo, la]) => new THREE.Vector3(...toEcef(lo, la, minH)))
+    t.sphere.setFromPoints([...high, ...low]); t.horizonPts = high; t.minH = minH; t.maxH = maxH
   }
 
   // ---- loading ----
@@ -116,6 +140,7 @@ export class Globe {
 
   buildMesh(t) {
     const { b } = t, h = t.heights, K = this.K
+    const [minH, maxH] = this.ownRange(t); this.setBounds(t, minH, maxH)
     const center = new THREE.Vector3(...toEcef((b.w + b.e) / 2, (b.s + b.n) / 2, 0))
     const skirt = Math.max(50, LEVEL0_ERROR / (1 << t.z) * 2)
     const n = G * G, ring = 4 * (G - 1)

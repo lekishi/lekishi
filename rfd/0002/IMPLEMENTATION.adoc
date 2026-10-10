@@ -14,7 +14,7 @@ content roadmap, ordered so the Tang chapter improves every week.
 == Decide (first week)
 
 - [x] Decide the source rule: approved 2026-10-10, sources allowing commercial use with attribution are adopted by default; the register in the RFD records each source's verified terms and status. CHGIS, CCTS, CBDB, and Seshat are not adopted.
-- [ ] Verify the terms of the sources the register marks "verify next" (日本歴史地名大系 data, 歴史地名データ, Getty TGN, the museum open-access sets, Kanripo and ctext) and file ColBase's terms page.
+- [ ] Read the terms of every `?` row in link:SOURCE_REGISTER.adoc[the source register] on the source's own page (the Japanese gazetteer datasets first), file ColBase's and the Taipei Palace Museum's terms pages, and update the rows.
 - [x] Decide the authoring format: approved 2026-10-10 as a folder per chapter with one small file per record, compiled to the v0 contract at build time, with the content model, approval contract, roles, and staged contribution surface recorded in the RFD.
 - [ ] Build the compiler from record files to the v0 contract, with the CI checks the RFD lists; keep claims, citations, precision, and attestation versus interpretation.
 

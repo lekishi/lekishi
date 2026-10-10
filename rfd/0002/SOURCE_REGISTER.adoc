@@ -1,0 +1,487 @@
+:authors: Darwin D Wu <darwin67@users.noreply.github.com>
+:state: published
+:labels: history, data, sources, licensing, rights, media
+:date: 2026-10-10
+
+= RFD 2 source register
+
+== Purpose and rule
+
+This register lists the data, text, image, map, and runtime sources the atlas
+may draw on, with each source's terms as read on the date given and the
+status the owner's rule gives it. link:README.adoc[RFD 2] owns the rule and
+the content semantics; link:../0001/README.adoc[RFD 1] draws what the sources
+support; link:../0003/README.adoc[RFD 3] ships the base geography and runtime
+assets; link:../0004/README.adoc[RFD 4]'s release criterion RC5 checks that
+every source in the artifact carries its attribution and terms.
+
+The rule, decided by the owner on 2026-10-10: *a source is adopted by default
+only when its terms allow commercial use with attribution*: public domain,
+CC0, CC BY, ODC-By, or government standard terms compatible with CC BY. A
+source with a non-commercial, share-alike, or research-only term, or whose
+terms the project has not read, is not adopted by default. Adopting one
+needs a separate owner decision recorded here, and anything taken from it
+must stay removable, which is why every coordinate, identification,
+quotation, and image records its dataset of origin.
+
+Quoting a public-domain text is quoting the work, whatever the terms of the
+transcription it was read in: the record cites the work and the edition,
+notes the transcription, and re-checks the locator against a critical
+edition before release.
+
+== How to read the status column
+
+[cols="1,4",options="header"]
+|===
+|Status |Meaning
+
+|✓ allowed
+|Terms read, commercial use with attribution allowed. Adopt; record the attribution line on each record that uses it.
+
+|⚠ conditional
+|Allowed within a stated condition: per item or per file, render-only, cite-as-interpretation, or an attribution line that must appear. The condition is in the Notes column.
+
+|? unread
+|Terms not yet read on the source's own page, or known only from memory or from a secondary report. Not allowed until read; reading it is a checklist item.
+
+|✗ not allowed
+|Terms read; a non-commercial, share-alike, research-only, or no-redistribution term. Not adopted. A permission path, where one exists, is in the Notes column.
+|===
+
+Verification dates are the day the terms were read on the source's own page
+or an official statement. "Reported" means a secondary report; it does not
+count as read.
+
+== Gazetteers and places
+
+[cols="2,2,2,1,2",options="header"]
+|===
+|Source |What it gives |Terms (verified) |Status |Notes
+
+|Wikidata
+|Coordinates, including excavated sites; identifiers; name forms in script
+|CC0 (2026-10-10)
+|✓ allowed
+|The chapter's dataset for coordinates. A gazetteer identification is cited as an identification, not a fact.
+
+|Pleiades
+|Ancient Mediterranean and Near Eastern places with precision and period
+|CC BY (2026-10-10, release statement)
+|✓ allowed
+|Maintainers ask for notice of reuse by email. Cite numbered releases.
+
+|Getty Thesaurus of Geographic Names
+|Historical and current names with dates, coordinates, worldwide
+|ODC-By 1.0 (2026-10-10, Getty FAQ)
+|✓ allowed
+|Use the Linked Open Data release, not the web interface.
+
+|World Historical Gazetteer
+|Aggregated historical gazetteers, some East Asian
+|CC BY 4.0 for public datasets; licensing page also mentions non-commercial; contributor datasets keep their own terms (2026-10-10)
+|⚠ conditional
+|Per dataset: read that dataset's terms before use.
+
+|日本歴史地名大系 地名項目データセット (CODH and 平凡社, Geoshape repository)
+|79,502 Japanese place entries with readings and coordinates; Edo-period village identifiers
+|CC BY reported in a 2024 presentation; page not yet read
+|? unread
+|The strongest Japanese candidate. Read the Geoshape page and file the line.
+
+|歴史地名データ (NIHU, 2018)
+|About 300,000 Meiji to early Shōwa place names with coordinates
+|Not yet read
+|? unread
+|Useful for modern equivalents of Japanese names.
+
+|れきちめ (日本歴史地名統合データベース)
+|Integrated Japanese historical place-name database
+|Not yet read
+|? unread
+|Likely the entry point for the two above.
+
+|GeoNames
+|Modern place names and coordinates, worldwide
+|CC BY 4.0 from memory
+|? unread
+|Modern equivalents only; never a historical claim.
+
+|Digital Atlas of the Roman Empire
+|Roman-era places and map tiles
+|CC BY reported; a linked GIS repository reported non-commercial (2026-10-10, conflicting)
+|? unread
+|Read the current site before use.
+
+|Itiner-e
+|Roman roads
+|Not yet read
+|? unread
+|Candidate for Rome chapters.
+
+|CHGIS (China Historical GIS, Harvard)
+|Chinese historical places with validity dates
+|"Free for academic research, no commercial use, resale, or redistribution permitted" (2026-10-10, v5 and v6 pages)
+|✗ not allowed
+|Usable only with written permission for a free public atlas; a request is an open owner decision. The earlier description of CHGIS as CC BY-NC was wrong.
+
+|TGAZ (Temporal Gazetteer API, Harvard)
+|API over CHGIS data
+|Same as CHGIS
+|✗ not allowed
+|As CHGIS.
+
+|CCTS (中華文明之時空基礎架構, Academia Sinica)
+|Chinese historical administrative geography after 譚其驤's atlas
+|Not published on the site; the sister system THCTS is CC BY-NC-SA 3.0 TW (2026-10-10)
+|✗ not allowed
+|Ask the centre if ever needed.
+|===
+
+== Boundaries, polities, and chronology
+
+[cols="2,2,2,1,2",options="header"]
+|===
+|Source |What it gives |Terms (verified) |Status |Notes
+
+|OpenHistoricalMap
+|Dated features and boundary polygons with start and end dates
+|Data CC0; boundary tiles public domain; landmass tiles ODbL; a few features carry their own licence tags (2026-10-10, reuse page)
+|⚠ conditional
+|Data and boundaries allowed. Landmass tiles render-only with attribution. Check per-feature licence tags on anything imported.
+
+|historical-basemaps (aourednik, GitHub)
+|World borders by year with a precision flag
+|GPL-3.0 (2026-10-10); "work in progress, verify before academic use"
+|⚠ conditional
+|Reference for coarse snapshots, cited as interpretation. Do not embed its geometry: a software licence on data, and unsourced borders.
+
+|讀史方輿紀要 and other public-domain historical geographies
+|Identifications of historical places and administrative seats
+|Public domain (1692)
+|✓ allowed
+|Cited as identification, as the Qin chapter does.
+
+|譚其驤 中國歷史地圖集
+|The standard Chinese historical atlas
+|Copyrighted print
+|⚠ conditional
+|Cite its readings as interpretation; never copy its geometry.
+
+|Seshat Global History Databank
+|Polity attributes over time
+|CC BY-NC-SA (2026-10-10, downloads page)
+|✗ not allowed
+|Share-alike and non-commercial.
+
+|Wikidata events and dates
+|Dated events with sources
+|CC0
+|✓ allowed
+|A candidate fact; the record cites the primary source, not Wikidata.
+
+|Pantheon (MIT)
+|Notable people and places with dates
+|CC BY from memory
+|? unread
+|Low priority.
+|===
+
+== Routes and networks
+
+[cols="2,2,2,1,2",options="header"]
+|===
+|Source |What it gives |Terms (verified) |Status |Notes
+
+|ORBIS (Stanford)
+|Roman transport network model
+|Not yet read
+|? unread
+|Candidate for Rome chapters.
+
+|Pelagios and Recogito
+|Annotated places in texts and maps
+|Not yet read
+|? unread
+|Candidate for linking places to texts.
+
+|Scholarship on the 遣唐使 routes (e.g. 東野治之, 上田雄)
+|Reconstructed routes between attested landfalls
+|Copyrighted works
+|⚠ conditional
+|Published as `reconstructed_route` with the author cited; no dataset exists, the line is drawn from the cited reading.
+|===
+
+== People and biography
+
+[cols="2,2,2,1,2",options="header"]
+|===
+|Source |What it gives |Terms (verified) |Status |Notes
+
+|Wikidata
+|People with dates, roles, and identifiers
+|CC0
+|✓ allowed
+|Candidate facts; the record cites the primary source.
+
+|CBDB (China Biographical Database, Harvard)
+|Chinese biographical data
+|Current standalone release CC BY-NC-SA 4.0; later data under non-commercial, no-derivatives terms (2026-10-10, licensing page)
+|✗ not allowed
+|The chapters' actors come from the primary texts.
+
+|VIAF and national authority files
+|Name authority identifiers
+|Varies; VIAF ODC-By from memory
+|? unread
+|Identifiers only.
+|===
+
+== Primary texts and editions
+
+[cols="2,2,2,1,2",options="header"]
+|===
+|Source |What it gives |Terms (verified) |Status |Notes
+
+|Wikisource (zh, ja)
+|Transcriptions of public-domain works
+|Work public domain; transcription CC BY-SA (2026-10-10)
+|⚠ conditional
+|Quote the work, cite the edition, note the transcription, re-check against a critical edition before release. In use.
+
+|NDL Digital Collections (国立国会図書館)
+|Scans of public-domain editions
+|Public domain per item, marked by the library
+|⚠ conditional
+|Per item; file the item's rights statement.
+
+|国立公文書館デジタルアーカイブ
+|Scans and catalogue of archival documents
+|Catalogue CC0 (2026-10-10, reported); images "may be used freely" subject to a notes page not yet read
+|⚠ conditional
+|Read the image-use page and file it.
+
+|Kanseki Repository (Kanripo)
+|Public-domain Chinese texts in open formats
+|Not yet read
+|? unread
+|Preferred source for Chinese primary texts if its terms allow.
+
+|ctext.org (Chinese Text Project)
+|Chinese texts and an API
+|Programmatic and systematic use by subscription; scraping disallowed (2026-10-10, notes page)
+|✗ not allowed
+|Not as a data source. The works themselves are public domain and may be quoted from another edition.
+
+|CBETA
+|Chinese Buddhist canon transcriptions
+|CC BY-NC-SA 4.0, non-profit use (2026-10-10)
+|✗ not allowed
+|Not as data. Public-domain works may be quoted as works, with the transcription noted.
+
+|SAT Daizōkyō Text Database
+|Taishō canon transcriptions
+|Non-profit only; no redistribution (2026-10-10)
+|✗ not allowed
+|As CBETA.
+
+|新訂増補国史大系, 新日本古典文学大系 and other critical editions
+|Proofread texts and apparatus
+|Copyrighted editions
+|⚠ conditional
+|Consult for the locator re-check; quote only the public-domain text, cite the edition.
+|===
+
+== Images, maps, and media
+
+[cols="2,2,2,1,2",options="header"]
+|===
+|Source |What it gives |Terms (verified) |Status |Notes
+
+|ColBase (Japan's national museums)
+|Object images and records from the Tokyo, Kyoto, Nara, and Kyushu National Museums and the Sannomaru Shōzōkan
+|Government standard terms v2.0, stated CC BY compatible; commercial use with attribution, no application (2026-10-10, agency explanation; terms page to be filed)
+|✓ allowed
+|Attribution "出典: ColBase" with the item link. Check per-item notes for exceptions.
+
+|國立故宮博物院 Open Data (Taipei)
+|Object images at 72 and 300 dpi
+|Taiwan Open Government Data Licence 1.0, no application, any purpose (2026-10-10, reported); scope may change
+|⚠ conditional
+|Read the current terms page before each batch and file it.
+
+|The Met Open Access
+|Public-domain artworks, incl. Tang objects
+|CC0 (2026-10-10, policy announcement)
+|✓ allowed
+|
+
+|Smithsonian Open Access (incl. Freer and Sackler)
+|Chinese and Japanese art, objects
+|CC0 (2026-10-10, announcement)
+|✓ allowed
+|
+
+|Cleveland Museum of Art Open Access
+|Asian art
+|CC0 (2026-10-10, announcement)
+|✓ allowed
+|
+
+|Getty Museum open content
+|Artworks
+|CC0 (2026-10-10, announcement)
+|✓ allowed
+|
+
+|Rijksmuseum; Art Institute of Chicago
+|Artworks
+|CC0 from memory
+|? unread
+|Low priority for East Asian chapters.
+
+|Wikimedia Commons
+|Reproductions of public-domain works, photographs of sites
+|Per file
+|⚠ conditional
+|Public-domain and CC BY files allowed; CC BY-SA files only by a separate decision. File each file's page.
+
+|Japan Search (ジャパンサーチ)
+|Aggregated items with rights labels
+|Per item
+|⚠ conditional
+|Use the item's own label; prefer the holding institution's terms.
+
+|文化遺産オンライン; 全国遺跡報告総覧 (奈良文化財研究所)
+|Designated properties; excavation reports
+|Per item
+|⚠ conditional
+|Per item; reports often carry their own terms.
+
+|日文研 所蔵地図データベース (Nichibunken)
+|Early modern Japanese maps
+|Labelled open access; terms not yet read
+|? unread
+|
+
+|Library of Congress maps; Internet Archive; HathiTrust
+|Historical maps and books
+|Mostly public domain, per item
+|⚠ conditional
+|Per item.
+
+|David Rumsey Map Collection
+|Historical map scans
+|CC BY-NC-SA
+|✗ not allowed
+|
+
+|故宮博物院 数字文物库 (Beijing)
+|Object images
+|Not yet read; reported restrictive
+|? unread
+|Assume not allowed until read.
+
+|東征伝絵巻 and other depictions
+|Later depictions of the chapter's events
+|Per reproduction
+|⚠ conditional
+|Labelled "later depiction, not evidence" on the card whatever the licence.
+|===
+
+== Base geography and elevation
+
+[cols="2,2,2,1,2",options="header"]
+|===
+|Source |What it gives |Terms (verified) |Status |Notes
+
+|Natural Earth (incl. Natural Earth II raster bundled with Cesium)
+|Coastlines, rivers, lakes, tints
+|Public domain
+|✓ allowed
+|In use. Attribution shown by convention.
+
+|Terrarium elevation tiles (Mapzen, AWS Open Data)
+|Global elevation and bathymetry mosaic
+|Open; attribution to the underlying sources per the Joerd attribution guide (2026-10-10)
+|⚠ conditional
+|Carry the attribution block the guide lists. In use for the hero mock.
+
+|SRTM; GEBCO; ETOPO
+|Elevation and bathymetry
+|Public domain; GEBCO asks for attribution
+|✓ allowed
+|
+
+|Copernicus DEM GLO-30
+|30 m global elevation
+|Free and open with attribution; licence text to file
+|⚠ conditional
+|File the licence before use.
+
+|OpenStreetMap
+|Modern features, coastlines
+|ODbL
+|⚠ conditional
+|Render-only with attribution; never mixed into the content database.
+
+|地理院タイル, 基盤地図情報, 国土数値情報 (国土地理院, 国土交通省)
+|Japanese elevation, coastlines, administrative data
+|Government standard terms from memory
+|? unread
+|Read and file; likely allowed with 出典 attribution.
+
+|OpenHistoricalMap landmass tiles
+|Coastlines derived from OSM
+|ODbL (2026-10-10)
+|⚠ conditional
+|Render-only with attribution.
+|===
+
+== Fonts and runtime assets shipped in the artifact
+
+[cols="2,2,2,1,2",options="header"]
+|===
+|Source |What it gives |Terms (verified) |Status |Notes
+
+|Noto Sans and Serif (JP, SC, CJK)
+|Script coverage for labels and text
+|SIL Open Font License 1.1
+|✓ allowed
+|
+
+|Cinzel; DotGothic16; Press Start 2P
+|Display and pixel faces used in the hero mock
+|SIL Open Font License 1.1
+|✓ allowed
+|
+
+|CesiumJS
+|Globe and terrain engine
+|Apache-2.0
+|✓ allowed
+|Cesium ion services are a separate paid provider and are not used.
+
+|Three.js; PixiJS; d3; MapLibre GL JS
+|Rendering and visualization libraries
+|MIT; MIT; ISC; BSD-3-Clause
+|✓ allowed
+|
+|===
+
+== Open permission requests
+
+None sent. Candidates, each a separate owner decision: CHGIS (a free public
+atlas's use of place identifications and coordinates), CCTS (the same).
+
+== Adding or changing a source
+
+. Read the terms on the source's own page; do not rely on a report or on
+  memory. Record the date.
+. Give the source a row in the group it belongs to, with the status the rule
+  gives it and the attribution line the terms require.
+. A `?` row is not a licence to use the source; reading the terms is the
+  checklist item that turns it into `✓`, `⚠`, or `✗`.
+. Every record that uses the source names it as its dataset or edition of
+  origin, so a change of status can be acted on.
+. A change to a `✗` source's status is an owner decision recorded here with
+  its date and the condition accepted.

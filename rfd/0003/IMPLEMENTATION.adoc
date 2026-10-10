@@ -25,7 +25,8 @@ rendering and delivery roadmap.
 - [ ] Offline basemap pipeline: open elevation and Natural Earth data to raster tiles, zoom 0–4 global and 0–7 over chapter extents, shipped in the artifact with attribution; payload recorded.
 - [ ] Symbol library: conifer, broadleaf, house, hall, pagoda, vessel, party, with terms recorded.
 - [ ] Labels projected from the 3D scene with collision handling and CJK coverage.
-- [ ] The phone tier: quarter-resolution pixel render of the diorama measured on a mid-range phone; a PixiJS pre-rendered sprite scene only if that fails the budget or the look.
+- [ ] The handheld tier: build-time tile classification from the elevation, a tileset and sprite sheet, a PixiJS renderer behind the `AtlasRenderer` boundary with grid cursor, d-pad and A/B input, and the dialogue box; measured on a mid-range phone.
+- [ ] The pixel look for tablet and desktop: quarter-resolution render of the diorama with a reduced palette, switchable on demand.
 - [ ] Collision-free labelling with CJK and Latin font coverage.
 - [ ] Playhead-driven animation of journey lines without the renderer owning time.
 - [ ] Timeline strip component (SVG) driven by workspace state.

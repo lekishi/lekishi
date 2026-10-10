@@ -70,18 +70,28 @@ tablet. The painted relief map in the same directory is the register for the
 globe and is what the diorama sits in when the camera pulls back. The earlier
 local view of 平城京 is to be remade as a diorama.
 
-=== Decision: phones get a 2D tier of their own
+=== Decision: phones get a handheld tier of their own
 
 A phone does not get the diorama scaled down; it gets a deliberate 2D
-rendition of the same scene, the way a handheld version of a console game is
-re-drawn rather than down-rendered. Two candidates, both to be judged on the
-hero: the diorama rendered at a quarter of the resolution with
-nearest-neighbour upscaling and a reduced palette, which reads as pixel art
-and costs a fraction of the pixels; or a pre-rendered 2D scene with sprites
-for vessels, parties, and settlements, drawn with a 2D engine. The 2D tier
-keeps the same chrome, the same evidence grammar, and the same honesty plate.
-The owner asked for this on 2026-10-10; the mock carries the first candidate
-as a toggle on the diorama screen.
+rendition in the register of the early handheld Pokémon games, the way a
+handheld version of a console game is re-drawn rather than down-rendered:
+
+* a top-down tile map, the same terrain classified into tiles (water,
+  shallows, sand, grass, forest, hill, mountain) at a few hundred metres per
+  tile, with sprites for settlements, vessels, and parties at the attested
+  places and dotted tiles for a schematic path;
+* grid movement of a cursor and two buttons as the whole control scheme (a
+  d-pad and A/B on screen, arrow keys and Enter/Escape on a keyboard), so
+  the controls are constrained to what a small screen can carry;
+* a dialogue box in the same register that reads the selected event, place,
+  or tile, with the chapter's date and the source line, and the same evidence
+  grammar: a tile with nothing recorded says so.
+
+Tablet and desktop keep the 3D diorama and can switch on demand to the
+pixel rendering of the same scene (a quarter-resolution, palette-reduced
+render) as a look, not a tier. The owner set this on 2026-10-10; the mock
+carries the handheld tier as its own screen, built with PixiJS, and the
+pixel look as a toggle on the diorama.
 
 What the hero draws and what it claims are kept apart on the screen itself: a
 plate states that the terrain is real and exaggerated, that vegetation and

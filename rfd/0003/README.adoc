@@ -141,12 +141,14 @@ provider credential anywhere in the artifact.
 == Devices and performance
 
 Desktop/laptop browsers and iPad-class tablets are the primary targets and
-get the 3D diorama. Phones get RFD 1's 2D tier: either the same scene rendered
-at a quarter resolution with nearest-neighbour upscaling and a reduced
-palette (cheap, and a pixel-art look in its own right), or a pre-rendered 2D
-scene with sprites on a 2D engine such as PixiJS. The spike measures the
-first on a mid-range phone; the second is built only if the first fails the
-budget or the look. Acceptance on the tablet is on physical hardware. The
+get the 3D diorama, with the pixel look (the same scene at a quarter
+resolution with a reduced palette) switchable on demand. Phones get RFD 1's
+handheld tier: a top-down tile map drawn with PixiJS from a tileset and a
+sprite sheet, the tiles classified at build time from the same elevation the
+diorama uses, with grid movement and two buttons. The tile map is cheap to
+draw and needs no WebGL beyond what PixiJS falls back from, so it is also the
+fallback where the diorama cannot run. Acceptance on the tablet is on physical
+hardware; the handheld tier is accepted on a mid-range phone. The
 budget is reader-facing: the chapter page interactive within three seconds on
 a mid-range phone over a typical mobile connection, sixty frames per second
 during pan and playback on the desktop and the iPad, and a measured payload
@@ -178,8 +180,8 @@ experience. Nothing is built for native until then.
 * The elevation source and pipeline (Terrarium tiles for both the terrain and
   the basemap relief, or GEBCO/ETOPO at globe scale), recorded with its
   rights.
-* Which 2D tier the phone gets: the quarter-resolution pixel render or a
-  pre-rendered sprite scene.
+* The tile size and the tileset's own look for the handheld tier, decided on
+  the hero at phone width.
 * A custom domain and an error-reporting provider, both owner decisions.
 
 == Implementation

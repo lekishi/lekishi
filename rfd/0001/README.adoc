@@ -2,22 +2,35 @@
 :state: discussion
 :discussion: https://github.com/chaba-dev/lekishi/pull/2
 :labels: product, maps, visualization, interaction, accessibility
+:revised: 2026-10-10
 
 = RFD 1 Historical exploration and visual interactions
+
+== Revision note
+
+Revised on 2026-10-10 on the owner's instruction, after a status review of the
+served build found the atlas correct but not worth looking at: no routes, no
+areas, no images, every place at a modern city-centre anchor, labels piled on
+one point, and more screen given to editorial status than to history. This
+text replaces the earlier RFD 1; the earlier text stays readable in Git history
+and its decisions that still stand are restated here rather than referenced.
+The founding discussion's visual references remain in <<Visual references>>.
 
 == Goal
 
 Lekishi is a passion project for exploring what happened across the world and
-how people, societies, and institutions interacted over time. It should be
-engaging to explore, not merely a database of pins. Begin in the browser while
-keeping native devices and native applications open as future delivery options.
+how people, societies, and institutions interacted over time. It must be
+engaging to explore: a reader should be able to follow a journey, a campaign,
+or a transmission across the map and the timeline and come away having learned
+something. A database of pins with caveats is not the product. Begin in the
+browser while keeping native delivery open.
 
 == Established direction
 
 Start with a globe and narrow continuously into regional and local exploration.
 Use a maps-application layout with Civilization-inspired readable terrain,
-symbolic settlements, and visible interactions. Globe and local views are scales
-of one experience, not competing designs or unrelated modes.
+symbolic settlements, and visible interactions. Globe and local views are
+scales of one experience, not competing modes.
 
 War is one interaction among many. Trade, diplomacy, missions, learning,
 religious transmission and division, institutional development, and local
@@ -25,278 +38,257 @@ adaptation matter equally. States, cultures, religions, and companies are not
 interchangeable entities or mutually exclusive territorial categories.
 
 The Civilization reference describes clarity, discovery, and the pleasure of
-following interactions. It does not request a playable strategy simulation,
-resource economy, alternate-history engine, or invented historical certainty.
+following interactions. It does not request a playable simulation, a resource
+economy, alternate history, or invented certainty.
+
+== Decision: the hero defines done
+
+Every chapter has one target image, the *hero*: a mockup of the chapter's best
+screen at desktop width, made before implementation and approved by the owner.
+For the Tang chapter it is a styled relief map of the East China Sea with the
+four ships' schematic return through their dated landfalls, 鑒眞's arc to
+東大寺, a timeline with the 753–754 events as ticks, and one period image in
+the selection card. The hero is the acceptance bar for the chapter's
+visualization work: the served page is compared with it side by side, and the
+owner judges the comparison. A gate, a harness measurement, or a passing test
+is not a substitute for that comparison.
+
+== Decision: show, then qualify
+
+The atlas draws what the sources support and qualifies what is reconstructed.
+Uncertainty is expressed in the visual grammar, not by leaving the map empty.
+This is the reading of link:../0002/README.adoc[RFD 2] that governs the
+atlas; the earlier practice of refusing to draw anything not proven to the
+metre is withdrawn.
+
+[cols="1,2,2",options="header"]
+|===
+|Evidence state |Visual form |Meaning to preserve
+
+|Attested site (an excavated palace, temple, port, or city)
+|Solid marker at the site, the name in its own script, no caveat badge.
+|A site coordinate from a cited gazetteer is an identification, not a survey of the event's spot.
+
+|Identified locality or region (an island, a commandery, a bay)
+|Soft-edged marker whose size follows the stated precision.
+|The size is the precision. No text badge repeats it.
+
+|Named place with no identification
+|Not drawn. Named in the event's card with "location not identified".
+|An absence on the map is not a claim that nothing happened there.
+
+|Journey with dated stops
+|Dashed line through the dated stops, labelled "schematic, follows the dated stops", animated along the playhead.
+|The line connects attested places; it is not an itinerary between them.
+
+|Route reconstructed in cited scholarship
+|Dashed line in a distinct pattern with its citation, labelled "reconstructed".
+|An interpretation attributed to its author, visibly different from attested movement.
+
+|Political control at a date
+|Dated snapshot polygon with a hatched edge and a date label.
+|No interpolation between snapshots; no implication of uniform control inside.
+
+|Relationship (contact, transmission, diplomacy, conflict, institutional change)
+|Arc drawn on selection, styled by type, with the claim and its citation one click away.
+|Showing a connection asserts the cited claim and nothing more; it never implies causation.
+
+|Editorial status
+|One line in the chapter's About sheet.
+|Never in a map label, a row badge, or a header banner.
+|===
 
 == Proposed experience
 
 === Globe to region to event
 
-At globe scale, display a sparse selection of events or clusters in a selected
-time window. Reveal places, relief, routes, and individual events with zoom.
-At closer scales, introduce symbolic landmarks without implying that the
-landscape is an archaeological reconstruction. Preserve real geographic
-positions and distances rather than arranging cities like board-game pieces.
+At globe scale, show the chapters as sparse clusters within the selected time
+window. Reveal places, relief, routes, and individual events with zoom. Keep
+real geographic positions and distances. At close scales, symbolic landmarks
+may appear without implying an archaeological reconstruction.
 
 Keep the time window and selection stable across zoom changes. A selected event
-opens its story, participants, sources, nearby events, and connected events.
-Nearby does not mean related; connected events can be geographically distant.
-Following a link can move the camera, but should offer an explicit time change
-when the destination falls outside the current window.
+opens its narrative, image, participants, sources, nearby events, and connected
+events. Nearby does not mean related; connected events can be distant. Following
+a link may move the camera and offers an explicit time change when the
+destination is outside the window.
 
-Prefer a full-screen map, floating search and layer controls, persistent time
-controls, and a selection drawer. On smaller screens the drawer can become a
-bottom sheet. A flat or low-tilt view remains an option for geographic reading.
+=== Places first
 
-Place labels lead with historical names and include their source-supported local
-script alongside romanization or translation, following RFD 2's naming policy.
-Use fonts with appropriate script coverage and keep paired labels readable on
-desktop and tablet. Modern names and alternate spellings belong in details and
-search rather than replacing the historical label.
+The map draws places; events attach to places. A place with many events shows
+one marker, one label, and a count, and opens a list on selection. Event
+titles are short names for a reader, in the chapter's own language where that
+reads naturally; caveats, precision, and placement notes belong in the card.
 
-=== Decision: retain details when time filtering excludes the selection
+=== Basemap and labels
 
-Changing the selected time window does not close the selected event's detail
-panel. If the event no longer matches, keep its story and sources available,
-visibly mark it as "outside selected time", and offer "Return to event's time".
-The return action explicitly changes the time window; retaining the panel does
-not silently undo the user's time change.
+The basemap is a styled relief map: hypsometric tints, shaded relief, strong
+coastlines, rivers at regional scale, a muted palette that lets markers and
+routes read. Labels are collision-free, one per place, prioritised by zoom,
+set in fonts with the script coverage the chapter needs, with the historical
+name leading and the local-script form beside its romanization following
+RFD 2's naming policy. Modern names live in details and search.
 
-Exclude the event from ordinary map results and do not keep an out-of-window
-marker merely because it is selected. The open panel preserves reading context,
-not an exception to temporal filtering. For example, a selected event from
-762 CE remains readable after moving the window to 700 CE, but its event marker
-does not remain visible on that basis.
+=== Layout
 
-Apply RFD 2's possible-match policy before classifying an event as outside the
-window: a bounded uncertain occurrence that overlaps still qualifies as a
-visibly uncertain possible match. The return action must respect date precision
-and uncertainty rather than invent an exact date for an uncertain event.
+A full-screen map, floating search and layer controls, a persistent timeline,
+and a selection drawer that becomes a bottom sheet on small screens. One header
+line. Editorial status, coverage, and review independence live in an About
+sheet opened from the header, stated once. A flat or low-tilt view remains an
+option for geographic reading.
 
-=== A visual language for different relationships
+=== Timeline and playback
+
+The timeline is a strip, not a pair of number fields: event ticks, the window
+as a draggable brush, the playhead on it, and a zoomable scale from centuries
+to months so a five-week voyage is readable day by day. Offer scrubbing,
+play/pause, event stepping, speed control, and optional camera following.
+
+==== Decision: fixed exploration window with a moving playhead
+
+Playback moves a playhead within the selected window without moving or
+expanding the window. The playhead stops at the window's end; no looping and
+no rolling window. Distinguish contextual events from those supported at the
+playhead; an uncertain occurrence stays visibly uncertain across its span and
+is never highlighted as definite activity throughout it.
+
+==== Decision: chronological controls and separate story navigation
+
+Time controls step through dated events chronologically. Chapters provide a
+separate "Next in story" action for editorial sequences that may revisit
+context or jump ahead. Story jumps are explicit, with the existing confirmation
+when the destination is outside the window. Story order is presentation order,
+not evidence of sequence or cause.
+
+==== Decision: retain details when time filtering excludes the selection
+
+Changing the window does not close the selected event's card. If the event no
+longer matches, keep its content, mark it "outside selected time", and offer
+"Return to event's time", which changes the window explicitly. The map marker
+is not retained on that basis. A bounded uncertain occurrence that overlaps
+the window is a visibly uncertain possible match, not an exclusion.
+
+==== Decision: manual camera control stops following, not playback
+
+A manual pan or zoom during camera-follow stops following while time keeps
+playing. Following resumes only through an explicit action, at the current
+playback position. Programmatic camera movement never cancels following.
+
+=== Visual language for relationships
 
 [cols="1,2,2",options="header"]
 |===
 |Subject |Visual form |Meaning to preserve
-|Campaigns and war |Directional campaign segments, battle markers, control snapshots |A schematic campaign is not an exact marching itinerary.
-|Trade |Networks of ports, cities, and route segments |The Silk Road is not one timeless road; a network does not prove a particular shipment.
-|Missions and learning |Selected journeys within wider networks, outbound and return stages |Travel, encounters, and subsequent adaptation are separate claims.
-|Religion |Community markers and journeys linked to a relationship timeline |Spread is not territorial ownership; divisions develop over time.
-|Companies and institutions |Selectable organizations, changing roles, places and relationships |The British East India Company's commerce, diplomacy, and coercion need distinct treatment.
-|Diplomacy |Selected alliances, agreements, and dated links |Connections can change, overlap, or be disputed.
+|Campaigns and war |Directional campaign segments, battle markers, dated control snapshots |A schematic campaign is not an exact marching itinerary.
+|Trade |Networks of ports, cities, and route segments |A network does not prove a particular shipment.
+|Missions and learning |Selected journeys within wider networks, outbound and return stages |Travel, encounter, and later adaptation are separate claims.
+|Religion |Community markers and journeys linked to a relationship timeline |Spread is not territorial ownership.
+|Companies and institutions |Selectable organizations with changing roles, places, and relationships |Commerce, diplomacy, and coercion need distinct treatment.
+|Diplomacy |Dated links for alliances and agreements |Connections change, overlap, and can be disputed.
 |===
 
-Use symbols, line patterns, and labels as well as color. Reveal relevant
-connections on selection or within a focused story layer rather than drawing
-every relationship at once. Relationship timelines supplement the map when
-geography alone cannot explain institutional or religious change.
+Use symbols, line patterns, and labels as well as colour. Reveal connections on
+selection or within a story layer rather than drawing every relationship at
+once. A relationship timeline supplements the map where geography alone cannot
+explain institutional or religious change.
 
 === Decision: compare stories on a shared map and timeline
 
-Allow multiple stories to be selected as layers on one map, sharing the selected
-time window and playhead. Identify each story's events and connections through
-labels or other non-color-only cues. Showing events together establishes neither
-contact nor causation; cross-story relationships require their own cited evidence.
-
-Stories reference the same underlying records. An event belonging to multiple
-selected stories remains one event with visible story memberships, not duplicate
-historical occurrences. Keep relationship-type symbols meaningful while identifying
-story membership. Contested interpretations still follow RFD 2's main-account and
-cited-alternatives policy, not interchangeable story layers.
-
-Side-by-side maps with independent cameras are deferred. This comparison behavior
-does not expand the first public chapter into multiple full launch chapters;
-small contrasting examples can verify it during implementation.
-
-=== Playback and evidence
-
-Offer scrubbing, play/pause, event stepping, speed control, and optional camera
-following. Time resolution must fit the story: centuries for a broad network,
-years for a campaign overview, and finer dates only where evidence supports
-them. Exact playback and uncertainty contracts belong to link:../0002/README.adoc[RFD 2].
-
-==== Decision: fixed exploration window with a moving playhead
-
-Playback moves a playhead within the selected time window without moving or
-expanding that window. The window filters the exploration context; the playhead
-highlights the current moment within it. For example, playing a 700–800 CE
-window retains that context while the playhead advances and stops at its end,
-without automatically looping or continuing into a new window. A rolling-window
-playback mode is deferred.
-
-Distinguish contextual events from those supported as occurring at the playhead;
-remaining visible in the window does not mean an event is currently active.
-Keep uncertain occurrences visibly uncertain, following RFD 2, rather than
-highlighting them as definite activity throughout their possible date range.
-Playhead movement alone does not exclude the selected event from the window or
-trigger the outside-selected-time notice.
-
-==== Decision: chronological controls and separate story navigation
-
-Time controls step through dated events chronologically by default. Curated
-chapters provide a separate "Next in story" action for editorial sequences that
-may revisit earlier context or jump ahead to consequences. Do not silently
-replace chronological stepping with narrative order when entering a chapter.
-
-Make story-related time jumps explicit, retaining the existing confirmation
-behavior when the destination is outside the selected window. A position in a
-story sequence describes presentation order, not evidence that one event preceded
-or caused another. Where uncertain dates do not establish a chronological order,
-preserve and communicate that ambiguity rather than fabricating an exact date
-or presenting an arbitrary tie-break as known historical order.
-
-==== Decision: manual camera control stops following, not playback
-
-When the user manually pans or zooms during camera-follow playback, stop camera
-following while time continues playing at the selected speed. Leave the camera
-under the user's control and expose an explicit "Resume following" action.
-Do not automatically return to following after a delay or at the next event.
-Resuming follows the current playback position rather than rewinding time to
-where the user left follow mode. Programmatic camera movement is not manual
-input and must not itself cancel following.
-
-==== Evidence and accessibility
-
-Show supported boundary snapshots rather than smoothly inventing intermediate
-front lines. Label illustrative motion and schematic routes. Selecting a link
-must expose what is asserted and its sources, not leave an arrow to imply
-causation. Do not assign numerical confidence percentages without a meaningful
-methodology.
-
-Keyboard navigation, touch controls, reduced-motion behavior, readable labels,
-and a non-map event list should let users explore without relying on animation,
-precise pointer input, or color discrimination.
-
-== Candidate stories, not a committed launch dataset
-
-* Qin's conquests of the rival Warring States: campaigns, battles, chronology,
-  and political change. Do not equate the resulting domain with modern China.
-* Alexander's campaigns: movement, selected milestones, and consequences.
-* World War II: a later stress case for simultaneous theaters and dense dates,
-  rather than the default first dataset.
-* Silk Road networks and the British East India Company: changing commercial
-  connections and organizations, not only military states.
-* Japanese missions to Tang China: people, learning, return journeys, and local
-  adaptation, situated within wider East Asian networks.
-* Christianity's spread and divisions: communities, councils, contested
-  reception, and changing relationships rather than a single clean split.
-
-=== Decision: first public chapter
-
-Start with Japanese missions to Tang China, bounded to one mission and selected
-learning/adaptation links rather than the entire history of the missions. Choose
-the specific mission, people, dates, and links after checking source availability
-and reuse rights under RFD 2. This selects the chapter direction, not a researched
-itinerary or an assertion that a journey caused a particular cultural change.
-
-The first public chapter should make travel, encounters, and subsequent adaptation
-explorable as distinct, sourced relationships. A small set of contrasting test
-examples can exercise campaigns and institutional change without becoming
-additional full launch chapters. The other stories above remain future candidates;
-the precise content inventory and research budget remain open.
-
-=== Decision: source feasibility before selecting the mission
-
-Before selecting the exact Tang mission, run a bounded source-feasibility pass
-over up to three missions in one initial desk-research pass. Use accessible
-sources and references supplied by the owner. Return findings and gaps for review
-before deeper research, purchases, or outreach; this pass authorizes none of those
-follow-on activities. This bounds the initial scope without setting a numerical
-time or spending budget. Compare reliable source availability, reuse rights, geographic
-detail, and evidence for travel, encounters, and subsequent learning/adaptation
-as separate claims. Reference books can inform the shortlist without being its
-only evidence base.
-
-The pass should recommend one mission with a concrete proposed inventory of
-events, places, actors, and relationships, a source bibliography, coverage limits,
-and remaining evidence or rights gaps. Identify where optional specialist review
-would help. If no candidate is sufficiently supported within this initial pass, report
-that outcome and propose a narrower scope rather than filling gaps speculatively
-or continuing research without a bound.
-
-This selects the research approach, not the mission or its historical claims.
-The feasibility pass and implementation are now planned under
-link:../0004/README.adoc[RFD 4]; the mission remains an owner decision after the
-pass returns.
+Multiple stories can be selected as layers on one map, sharing the window and
+playhead, each identified by non-colour-only cues. Showing events together
+establishes neither contact nor causation. An event in several stories remains
+one event with visible memberships. Side-by-side maps with independent cameras
+are deferred.
 
 === Decision: explicit coverage guidance and distinct empty states
 
-Keep globe exploration available while clearly identifying the chapters, regions,
-and periods included in the published content. Describe this as curated coverage,
-not a claim that every event within those bounds has been documented.
+Keep globe exploration available while identifying the chapters, regions, and
+periods the content covers. Distinguish "not yet covered" from "no results with
+these filters" using the declared scope. An empty map never establishes that
+nothing happened. A coverage overlay is deferred.
 
-Distinguish "not yet covered" from "no results with these filters" using the
-declared content scope, not an empty query result alone. Offer available chapters
-for uncovered areas and relevant filter adjustments for filtered results. Where
-coverage is not established, say so rather than imply completeness. An empty map
-never establishes that nothing happened there; missing historical knowledge and
-missing atlas content are different limitations.
+=== Evidence and accessibility
 
-Provide this guidance without requiring a geographic coverage overlay for the
-first release. A dedicated coverage overlay is deferred, not a prerequisite for
-unrestricted globe exploration.
+Show dated snapshots rather than invented intermediate front lines. Label
+schematic and reconstructed motion. Selecting a link exposes what is asserted
+and its sources. Do not assign numerical confidence without a methodology.
+Keyboard navigation, touch controls, reduced motion, readable labels, and a
+non-map event list let a reader explore without animation, precise pointing,
+or colour discrimination.
 
-=== Decision: compare local-detail approaches through later implementation
+== Chapters
 
-Keep the local-detail choice open until runnable implementations can be compared.
-Use separate implementation threads later, not additional image-generation
-threads now. Evaluate two scenarios: the bounded Japanese mission to Tang China
-and a bounded episode from Qin's conquest. Qin is a comparative prototype scenario,
-not a replacement for the first public chapter or a second full launch chapter.
-The specific Qin episode remains to be selected and source-checked.
+=== Decision: a chapter is served when it clears the bar
 
-For each scenario, compare both approaches:
+A chapter is worth serving when a reader can follow at least one journey,
+campaign, or transmission end to end on the map with the sources one click
+away, and when it renders its hero. The bar is content and experience, not
+process. Two chapters at a few dozen events each are below it; the roadmap in
+link:IMPLEMENTATION.adoc[the checklist] raises them above it.
 
-* Geographic detail with symbolic landmarks: terrain, rivers, historical labels,
-  selected sites, and route/event markers without city reconstruction.
-* An illustrated local historical scene: restrained buildings and scenery that
-  provide context, explicitly distinguished from researched reconstruction.
+=== Decision: widen the Tang chapter to its network
 
-Keep scenario content, controls, selection, and time behavior comparable between
-the two treatments so differences in features do not obscure the visual trade-off.
-Compare globe-to-local continuity, readability, interaction, performance, asset
-and research effort, and the risk of implying unsupported historical detail.
-Generated images can inform styling but cannot settle implementation feasibility.
-This comparative work is now planned under link:../0004/README.adoc[RFD 4] and
-begins only after RFD 4's Gate 2; it still does not select either treatment as
-the production default.
+The single 752–754 embassy stays the spine, bounded as the Gate 1 decision
+records. Around it the chapter adds the dated missions to Tang 630–894 as a
+sparse network layer, 鑒眞's five failed crossings 743–748 as a second story,
+and 圓仁's 838–847 diary as a third, all from public-domain primary sources
+already in or beside the citation set. Target by the end of the first
+quarter: 200 or more events, 60 or more places with site or locality
+coordinates, 5 or more routes, and 20 or more cleared images.
+
+=== Decision: give the Qin chapter a campaign shape
+
+The end of Han 233–226 BCE is extended to the fall of the six states 230–221
+BCE, with dated control snapshots cited to the standard historical atlases as
+interpretations, so the chapter has a campaign to follow and the atlas has a
+territory snapshot to draw.
+
+=== Candidate stories
+
+Alexander's campaigns, the Silk Road networks and the British East India
+Company, Christianity's spread and divisions, and World War II as a later
+stress case remain candidates. The next chapter after Tang and Qin is chosen
+from what readers ask for once the Tang chapter is public.
 
 == Visual references
 
 The https://ampcode.com/threads/T-01a0ca04-003d-7398-a8c8-2516cb38414a[founding discussion]
-contains the design progression and the owner's responses. Generated concepts:
+contains the design progression. Generated concepts:
 
 * https://ampcode.com/user-content/attachments/deb8320dde1ce642c7c30c2e5cdbad5e1a0dc6339fb3ee0f5437e465a7c33f75-file.png[Globe-to-region progression]
 * https://ampcode.com/user-content/attachments/027a5e274ea3f34e6c44bc9cd5fda29f8d63247ea25ccf1789b2dc5801565c3f-file.png[Campaign playback]
 * https://ampcode.com/user-content/attachments/9afe132a3422541b233d1a78e0670306755697b173f7c35e9298cede2c4f6828-file.png[Communities and divisions]
 * https://ampcode.com/user-content/attachments/9e9c0e520c66b9c3563848844829e2fd998913fce3a3079aff475baa631a5752-file.png[Trade and learning]
 
-These are external design references, not validated datasets, implemented UI,
-or proof of rendering feasibility. Known defects include misplaced locations,
-anachronistic imagery, a mission arrow opposing its caption, and oversimplified
-religious categories. Earlier concepts also showed Cairo before its founding
-and Baghdad as a capital before its founding. Do not transcribe their claims,
-routes, source counts, or boundaries into content. Attachment access may depend
-on Amp; the requirements above remain understandable without the images.
+These are design references with known defects (misplaced locations,
+anachronistic imagery, oversimplified categories). They are not evidence, and
+nothing from them is transcribed into content. The hero mockups replace them
+as the working target.
+
+== What this RFD stops
+
+* The geographic-versus-illustrated treatment comparison. The hero decides the
+  treatment; the comparison harness and its review route are retired.
+* Per-row and per-banner editorial caveats on reader surfaces.
+* Caveat text in event titles and map labels.
+* Number inputs as the time control.
 
 == Alternatives and trade-offs
 
-A pin-only atlas is simpler but misses the central interaction experience.
-A game simulation would be engaging but invent outcomes beyond the evidence.
-A purely photorealistic globe risks modern-looking scenery and weak historical
-readability; a heavily illustrated local world risks inaccurate scale and costly
-reconstruction. Prefer geographic continuity with restrained symbolic detail.
+A pin-only atlas is simpler and is what was built; it misses the product. A
+game simulation would invent outcomes. A photorealistic globe reads modern; a
+heavily illustrated local world risks false scale. Prefer geographic
+continuity with restrained symbolic detail, routes and arcs for interaction,
+and dated snapshots for control.
 
 == Open questions
 
-* Which mission and learning/adaptation links offer a manageable, well-sourced first chapter, and what content inventory and research budget bound it?
-* Which local-detail treatment should become the default after the Tang-mission and Qin-conquest implementation comparisons?
-* Which representative desktop/laptop and physical iPad-class tablet devices define the first performance targets within RFD 3's selected browser scope?
+* The hero mockup for the Tang chapter, for the owner's approval.
+* The first reader-facing evaluation: who, and what they are asked to do.
 
 == Implementation
 
 See link:IMPLEMENTATION.adoc[RFD 1 implementation checklist].
 link:../0002/README.adoc[RFD 2] owns historical meaning and evidence;
-link:../0003/README.adoc[RFD 3] owns rendering and platform feasibility.
-link:../0004/README.adoc[RFD 4] owns the public-PoC release criteria that this
-RFD's exploration loop must satisfy.
+link:../0003/README.adoc[RFD 3] owns rendering and delivery;
+link:../0004/README.adoc[RFD 4] owns the public release criteria.

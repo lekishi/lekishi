@@ -1,0 +1,51 @@
+{
+  "name": "753: from 黄泗浦 across the East China Sea to the landfall at 秋妻屋浦",
+  "tiles": "../tiles/",
+  "verticalExaggeration": 2.2,
+  "fovDeg": 40,
+  "sun": { "note": "Direction fixed in the diorama's local frame, then held constant in Earth-fixed space so every altitude shares one light.", "atLon": 130.26, "atLat": 31.262, "azimuthDeg": 300, "elevationDeg": 42, "color": "#ffe2b4" },
+  "hemisphere": { "sky": "#dcecff", "ground": "#6b5a3b" },
+  "space": "#0b1016",
+  "atmosphere": "#9fc4dc",
+  "diorama": { "file": "diorama.json", "center": { "lon": 130.26, "lat": 31.262 }, "showBelowRangeM": 220000 },
+  "ships": [
+    { "id": "ship2", "lon": 130.19, "lat": 31.244, "headingRad": -0.35, "scale": 1.5, "label": "第二舟 · 鑒眞" },
+    { "id": "ship4", "lon": 130.474, "lat": 31.228, "headingRad": 0.6, "scale": 1.1 }
+  ],
+  "route": {
+    "note": "Schematic line for the spike, not evidence: departure, two recorded stops, landfall.",
+    "points": [
+      { "lon": 120.612, "lat": 31.853 }, { "lon": 122.2, "lat": 31.1 }, { "lon": 125.0, "lat": 28.6 },
+      { "lon": 127.75, "lat": 26.45 }, { "lon": 129.6, "lat": 28.6 }, { "lon": 130.53, "lat": 30.25 },
+      { "lon": 130.19, "lat": 31.244 }, { "lon": 130.225, "lat": 31.262 }
+    ],
+    "color": "#f1cf7a"
+  },
+  "places": [
+    { "id": "tang", "name": "大唐", "rom": "TANG", "lon": 112.0, "lat": 33.0, "kind": "realm", "minRangeM": 2500000, "maxRangeM": 40000000 },
+    { "id": "yamato", "name": "日本", "rom": "NIHON", "lon": 136.5, "lat": 36.0, "kind": "realm", "minRangeM": 2500000, "maxRangeM": 40000000 },
+    { "id": "huangsipu", "name": "黄泗浦", "rom": "HUANGSIPU · DEPARTURE", "lon": 120.612, "lat": 31.853, "kind": "locality", "minRangeM": 250000, "maxRangeM": 6000000 },
+    { "id": "heijo", "name": "平城京", "rom": "HEIJŌ-KYŌ", "lon": 135.8, "lat": 34.69, "kind": "locality", "minRangeM": 250000, "maxRangeM": 6000000 },
+    { "id": "akonaha", "name": "阿児奈波島", "rom": "AKONAHA", "lon": 127.75, "lat": 26.45, "kind": "locality", "minRangeM": 250000, "maxRangeM": 6000000 },
+    { "id": "yaku", "name": "屋久島", "rom": "YAKU", "lon": 130.53, "lat": 30.35, "kind": "locality", "minRangeM": 250000, "maxRangeM": 6000000 },
+    { "id": "sea", "name": "東海", "rom": "EAST CHINA SEA", "lon": 125.0, "lat": 30.0, "kind": "sea", "minRangeM": 400000, "maxRangeM": 6000000 },
+    { "id": "akimeya", "name": "秋妻屋浦", "rom": "AKIMEYA · LANDFALL 12·20", "lon": 130.232, "lat": 31.27, "kind": "locality", "selected": true, "minRangeM": 0, "maxRangeM": 6000000 },
+    { "id": "ishigaki", "name": "石籬浦", "rom": "ISHIGAKI · 4TH SHIP", "lon": 130.492, "lat": 31.239, "kind": "locality", "minRangeM": 0, "maxRangeM": 250000 },
+    { "id": "kaimon", "name": "開聞岳", "rom": "MT KAIMON · 924 m", "lon": 130.528, "lat": 31.18, "kind": "landmark", "minRangeM": 0, "maxRangeM": 250000 },
+    { "id": "satsuma", "name": "薩摩半島", "rom": "SATSUMA", "lon": 130.40, "lat": 31.33, "kind": "region", "minRangeM": 0, "maxRangeM": 250000 }
+  ],
+  "flight": {
+    "note": "Camera looks at a ground target from range metres; heading 0 looks north, pitch negative looks down. Segments ease in and out unless ease is false.",
+    "keys": [
+      { "t": 0.00, "lon": 122.0, "lat": 31.0, "rangeM": 16000000, "headingDeg": 0, "pitchDeg": -90 },
+      { "t": 0.06, "lon": 122.0, "lat": 31.0, "rangeM": 16000000, "headingDeg": 0, "pitchDeg": -90 },
+      { "t": 0.28, "lon": 124.0, "lat": 30.5, "rangeM": 3500000, "headingDeg": 0, "pitchDeg": -82 },
+      { "t": 0.44, "lon": 126.0, "lat": 29.6, "rangeM": 1500000, "headingDeg": 8, "pitchDeg": -64 },
+      { "t": 0.60, "lon": 130.3, "lat": 31.25, "rangeM": 160000, "headingDeg": 30, "pitchDeg": -55 },
+      { "t": 0.70, "lon": 130.26, "lat": 31.262, "rangeM": 29500, "headingDeg": 44, "pitchDeg": -36 },
+      { "t": 0.88, "lon": 130.26, "lat": 31.262, "rangeM": 29500, "headingDeg": 404, "pitchDeg": -36, "ease": false },
+      { "t": 1.00, "lon": 122.0, "lat": 31.0, "rangeM": 16000000, "headingDeg": 360, "pitchDeg": -90 }
+    ],
+    "stills": { "globe": 0.0, "region": 0.44, "local": 0.70 }
+  }
+}

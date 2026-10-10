@@ -63,9 +63,18 @@ await ui(mx, my, "", "Click to inspect"); await hold(4)
 const lbl = await p.evaluate(() => { const e = [...document.querySelectorAll(".lbl b")].find(b => b.textContent.startsWith("秋妻屋浦")); const r = e.getBoundingClientRect(); return { x: r.x + r.width / 2, y: r.y + r.height / 2 } })
 await click(lbl.x, lbl.y, "Click a label: the place card", "label")
 q = await at(130.19, 31.244, 600); await click(q.x, q.y, "Click a ship: the symbol card", "ship")
-const ground = await p.evaluate(() => { for (let y = 160; y < 700; y += 40) for (let x = 120; x < 1160; x += 40) { const h = window.spike.pick(x, y); if (h && h.name === "地点") return { x, y } } return null })
-if (ground) await click(ground.x, ground.y, "Click the ground: position and height", "ground")
-q = await at(130.45, 31.6, 50); await click(q.x, q.y, "Click inside the draped province", "polygon")
+// the shapes overlap on screen, so find a point for each card by asking the
+// page's own picker over a grid, nearest the centre first
+const findPick = name => p.evaluate(name => {
+  const pts = []; for (let y = 140; y < 740; y += 20) for (let x = 40; x < 1240; x += 20) pts.push([x, y])
+  pts.sort((a, b) => Math.hypot(a[0] - 640, a[1] - 420) - Math.hypot(b[0] - 640, b[1] - 420))
+  for (const [x, y] of pts) { const h = window.spike.pick(x, y); if (h && h.name === name) return { x, y } }
+  return null
+}, name)
+for (const [name, cap, file] of [["薩摩国", "Click inside the draped province", "polygon"], ["地点", "Click the ground outside it: position and height", "ground"], ["海", "Click the sea", "sea"]]) {
+  const q = await findPick(name)
+  if (q) await click(q.x, q.y, cap, file); else picks.push({ gesture: cap, card: null, note: "no point on screen picks " + name })
+}
 // 5. the arc, from farther out
 await p.evaluate(() => window.spike.fly(0.28)); await p.evaluate(() => window.spike.settled(60000)); await p.evaluate(() => window.spike.explore())
 await ui(mx, my, "", "Relationship arc across the sea"); await hold(4)

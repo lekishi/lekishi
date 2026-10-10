@@ -25,3 +25,8 @@ playwright-report/
 
 # The hero mock is generated from the scripts beside it; its inline script is kept as authored.
 rfd/0001/hero/template.html
+
+# Renderer spike pages are dense, hand-formatted throwaway code (nothing under
+# `spikes/` ships), and `rfd/0003/spike/` is harness output copied verbatim.
+spikes/
+rfd/0003/spike/

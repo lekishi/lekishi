@@ -2,7 +2,7 @@
 // quality, an orbit video, a playhead video, and the stats, written to out/<spike>/.
 // Usage: node spikes/renderer/capture.mjs <three|cesium> [baseURL]
 import { chromium } from "@playwright/test"
-import { mkdirSync, renameSync, writeFileSync } from "node:fs"
+import { mkdirSync, rmSync, writeFileSync } from "node:fs"
 import { spawn } from "node:child_process"
 import { join } from "node:path"
 const spike = process.argv[2]; if (!spike) { console.error("usage: capture.mjs <spike>"); process.exit(1) }
@@ -32,22 +32,30 @@ const phone = await browser.newContext({ viewport: { width: 390, height: 844 }, 
 p = await page(phone); await ready(p, "phone"); await p.screenshot({ path: join(out, "phone-quality.png") })
 const statsPhone = await measure(p, 4); await phone.close()
 
-// videos: orbit and playhead, 1280x800
-// Recording starts with the context, so each video also captures the page load; the
-// trim offset (seconds until ready) is kept per video and cut off in the mp4.
-const trim = {}
+// videos: orbit and playhead, 1280x800, assembled from rendered frames.
+// Real-time screen recording does not work on a software GPU: the recorder only
+// catches the few frames the page manages to composite, so the motion is lost.
+// Instead each step sets the API, waits two animation frames so the new state is
+// on screen, and screenshots it; ffmpeg then plays the frames at a fixed rate.
+// The video therefore shows every step at the intended speed, whatever the
+// renderer's real frame time (which the stats report separately).
+const FPS = 10
 async function video(name, seconds, step) {
-  const t0 = Date.now()
-  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 }, recordVideo: { dir: out, size: { width: 1280, height: 800 } } })
-  const v = await page(ctx); await ready(v); trim[name] = (Date.now() - t0) / 1000
-  const frames = seconds * 10
-  for (let i = 0; i <= frames; i++) { await v.evaluate(step, i / frames); await v.waitForTimeout(100) }
-  const path = await v.video().path(); await ctx.close(); renameSync(path, join(out, `${name}.webm`))
+  const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } })
+  const v = await page(ctx); await ready(v)
+  const dir = join(out, `${name}-frames`); rmSync(dir, { recursive: true, force: true }); mkdirSync(dir)
+  const frames = seconds * FPS
+  for (let i = 0; i < frames; i++) {
+    await v.evaluate(step, i / (frames - 1))
+    await v.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))))
+    await v.screenshot({ path: join(dir, `${String(i).padStart(4, "0")}.jpg`), type: "jpeg", quality: 92 })
+  }
+  await ctx.close()
+  await new Promise((r, j) => spawn(process.env.FFMPEG ?? "ffmpeg", ["-y", "-loglevel", "error", "-framerate", String(FPS), "-i", join(dir, "%04d.jpg"), "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "24", "-preset", "veryfast", "-r", "24", join(out, `${name}.mp4`)]).on("exit", c => c === 0 ? r() : j(new Error(`ffmpeg exited ${c}`))))
+  rmSync(dir, { recursive: true, force: true })
 }
 await video("orbit", 8, t => window.spike.orbit(t))
 await video("playhead", 6, t => window.spike.playhead(t))
 await browser.close()
-writeFileSync(join(out, "stats.json"), JSON.stringify({ full: statsFull, phone: statsPhone, videoTrimSeconds: trim, errors, capturedAt: new Date().toISOString(), note: "software GPU in the capture container; fps is relative" }, null, 2))
-// mp4 for playback outside Chrome, with Playwright's own ffmpeg
-for (const name of ["orbit", "playhead"]) await new Promise(r => spawn(process.env.FFMPEG ?? "ffmpeg", ["-y", "-loglevel", "error", "-ss", String(trim[name] ?? 0), "-i", join(out, `${name}.webm`), "-vf", "scale=1280:-2", "-c:v", "libx264", "-pix_fmt", "yuv420p", "-crf", "26", "-preset", "veryfast", "-an", join(out, `${name}.mp4`)]).on("exit", r))
+writeFileSync(join(out, "stats.json"), JSON.stringify({ full: statsFull, phone: statsPhone, errors, capturedAt: new Date().toISOString(), note: "software GPU in the capture container; fps is relative" }, null, 2))
 console.log(JSON.stringify({ full: statsFull, phone: statsPhone, errors }, null, 2))

@@ -51,7 +51,10 @@ the same videos, and collect the same numbers for each spike.
     node spikes/renderer/capture.mjs wgpu
 
 The harness needs an `ffmpeg` with libx264 on PATH (or `FFMPEG=/path/to/ffmpeg`)
-to turn the recorded WebM into MP4. The Rust probe needs the `wasm32-unknown-unknown`
+to assemble the captured frames into MP4. Videos are built frame by frame
+(set the API, wait two animation frames, screenshot) because real-time screen
+recording loses the motion on a software GPU; on this container that takes
+several seconds a frame. The Rust probe needs the `wasm32-unknown-unknown`
 target and `wasm-bindgen-cli` 0.2.100 (`build.sh` lists both); its build output
 (`target/`, `pkg/`) is generated and ignored.
 

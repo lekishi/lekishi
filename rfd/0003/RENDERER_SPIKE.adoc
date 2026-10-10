@@ -149,30 +149,44 @@ is measured separately. The raw files are `spike/<spike>/stats.json`.
 |===
 | | Cesium | Three.js | Rust/wgpu
 
-| Engine payload, uncompressed | CESIUM_BUNDLE | 1,284 KB | 2,425 KB (wasm 2,357 KB + 68 KB glue)
-| Engine payload, gzip | CESIUM_GZ | 259 KB | 700 KB
+| Engine payload, uncompressed | 5,908 KB (Cesium.js, widgets.css, worker entry files) | 1,284 KB | 2,425 KB (wasm 2,357 KB + 68 KB glue)
+| Engine payload, gzip | 1,712 KB (Cesium.js alone) | 259 KB | 700 KB
 | Runtime assets needed besides the payload | Workers, Assets, Widgets, ThirdParty (23 MB on disk, fetched on demand) | none | none
-| Page-start to first frame (ms, in-page) | CESIUM_LOAD | 1,195 | 1,011
-| Draw calls, full quality | CESIUM_CALLS | 75 | 11
-| Triangles, full quality | CESIUM_TRIS | 520,230 | 462,622
-| Trees placed, full / phone | CESIUM_TREES | 4,162 / 2,081 | 3,466 / 1,733
-| Measured fps, full quality, 1440 × 900, software GPU | CESIUM_FPS | 0.60 | WGPU_FPS
-| Measured fps, phone quality, 390 × 844 at 2×, software GPU | CESIUM_PFPS | 1.29 | WGPU_PFPS
-| JS heap after load (MB) | CESIUM_MEM | 18.4 | 33.5
-| Source size of the spike | CESIUM_LOC | 133 lines HTML+JS | 322 Rust + 78 WGSL + 57 HTML+JS
-| Shadows | CESIUM_SHADOWS | yes (PCF, 2048²) | no
+| Script start to `ready` (ms, in-page) | 24,096 (39 terrain tiles, loaded a few per rendered frame on the software GPU; 24,569 from page start) | 1,442 | 1,102
+| Draw calls, full quality | 50 (command-list entries; shadow pass not counted) | 75 | 11
+| Triangles, full quality | 558,438 (229,200 scene + ~329,000 terrain, estimated) | 520,230 | 462,622
+| Trees placed, full / phone | 4,162 / 2,081 | 4,162 / 2,081 | 3,466 / 1,733
+| Measured fps, full quality, 1440 × 900, software GPU | 0.62 | 0.62 | 1.22
+| Measured fps, phone quality, 390 × 844 at 2×, software GPU | 1.38 | 1.04 | 1.59
+| JS heap after load (MB) | 50.9 | 17.7 | 33.8 (the terrain grid and texture are copied into wasm memory as well)
+| Source size of the spike | 420 JS + 39 HTML | 133 HTML+JS | 322 Rust + 78 WGSL + 57 HTML+JS
+| Shadows | yes (one cascade, 2048², through a private field; barely visible) | yes (PCF soft, 2048²) | no
 |===
 
 The Rust probe places fewer trees than the JavaScript spikes from the same
 rule because its hash runs in `f32` and theirs in `f64`; the rule's inputs
 sit on the threshold often enough to move about 17% of the samples. A shared
-engine would fix the rule's precision, not the engine.
+engine would fix the rule's precision, not the engine. The Cesium and Three
+frame rates are equal on the software GPU; the Rust probe's frame is about
+twice as cheap, but it draws no shadow pass, which is most of the
+difference, not the language.
 
 == Assessment
 
 === Cesium, stylized
 
-*What the capture shows.* CESIUM_ASSESSMENT_SHOWS
+*What the capture shows.* The diorama, recognisably, on the engine the atlas
+already ships: exaggerated terrain under the painted texture, 4,162 batched
+trees, the houses, both ships, the dashed route, the chapter's labels with
+leaders, and the ship sailing to the landfall. Two things give it away. The
+relief shading is baked into the imagery (a custom heightmap terrain provider
+has no vertex normals, so the globe's lighting cannot shade the slopes), and
+the cast shadows, though paid for, are barely visible. In the orbit frames
+the far edge of the water rectangle and the globe's base colour meet as hard
+bands at the horizon. Loading took 24 s in the container because Cesium
+streams terrain a few tiles per rendered frame; on a real GPU that is a
+second or two, but it is still a tile pipeline between the page and the
+first frame.
 
 *Strengths.*
 
@@ -198,8 +212,13 @@ engine would fix the rule's precision, not the engine.
   helps, but every instance is still an entity-sized object with a
   per-primitive bounding sphere, and per-frame culling and shadow passes are
   tuned for buildings and tilesets, not scattered glyphs.
-* Payload: the engine plus its runtime assets is an order of magnitude
-  heavier than the other two, before any chapter data.
+* Payload: 5.9 MB of engine before the first frame, plus workers and
+  assets fetched on demand, against 1.3 MB and 2.4 MB for the other two.
+* The spike had to reach past the public API twice already: the shadow map
+  is replaced through a private field to get one cascade that reaches 30 km,
+  and the heightmap provider cannot deliver vertex normals, so relief
+  lighting is static imagery. Each such reach is a line that breaks on an
+  upgrade.
 * The phone tier is still the full engine; `setQuality('phone')` can remove
   shadows and half the symbols, but it cannot make Cesium a small engine.
 
@@ -298,7 +317,34 @@ tile format, or a native build. None of those is on RFD 4's PoC path.
 
 == Proposal (owner decides)
 
-SPIKE_PROPOSAL
+On the evidence above, the proposal is *Three.js for the diorama, Cesium
+retired from the artifact, and the Rust/wgpu path recorded as the native
+option to reopen when a measured need appears*.
+
+* The hero is a stylized, hand-lit, region-scale scene. Three.js drew it in
+  133 lines with every effect on a public API, at a fifth of Cesium's
+  payload, and the phone tier is the same scene with fewer instances. Cesium
+  drew it too, but only by baking its lighting into imagery and reaching
+  into private fields for shadows, and its frame starts with a tile
+  pipeline the chapters do not need: a chapter's extent is known offline and
+  ships as one heightmap and one texture, which is exactly the spike's
+  input.
+* What Cesium would keep giving (the globe, world-scale continuity,
+  geodetic picking) is real, and the proposal is to give it up: the atlas
+  opens on a chapter, and world scale becomes a painted globe or a flat
+  overview with the chapter extents, not a streamed planet. That is a
+  product decision the owner should make knowingly; RFD 3's rendering list
+  would lose "globe" and gain "overview map".
+* The Rust/wgpu probe shows a custom engine is feasible and that its frame
+  is cheap, and also that its first week buys what Three.js has on day one.
+  It becomes the right choice if native delivery is pulled forward or if a
+  measured scene outgrows a JavaScript scene graph. Until then it is an
+  option, kept open by keeping the scene data renderer-independent, as RFD 3
+  already requires.
+
+The decision needs one more input the container cannot give: frame times on
+the desktop, a physical iPad, and a mid-range phone. The three pages are on
+this branch; open each, read the overlay, and record the numbers here.
 
 == Reproduce
 

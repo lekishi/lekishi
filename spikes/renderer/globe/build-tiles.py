@@ -24,22 +24,33 @@ Coverage is nested so the tileset stays small: the whole Earth to level 5, the
 East China Sea to level 8, southern Kyushu to level 10, and the Satsuma
 peninsula to level 11 (about 150 m per terrain sample, the source resolution).
 
-Usage: python3 -I spikes/renderer/globe/build-tiles.py [--only terrain|height|imagery]
+Usage: python3 -I spikes/renderer/globe/build-tiles.py [--only terrain|height|imagery] [--custom]
+
+--custom writes only what the custom globe reads (heights, imagery and
+tileset.json) and needs only numpy and Pillow: the meshing libraries are not
+imported. Cloudflare preview builds use it (see preview-build.mjs); the heights
+and imagery are the same files the full build writes.
 """
 import io, json, math, os, sys, time, urllib.request
 from concurrent.futures import ThreadPoolExecutor
 import numpy as np
 from PIL import Image, ImageFilter
-from pydelatin import Delatin
-from quantized_mesh_encoder import encode
-from quantized_mesh_encoder.extensions import ExtensionBase, ExtensionId, EXTENSION_HEADER, oct_encode
-from quantized_mesh_encoder.ecef import to_ecef
 from struct import pack
+
+CUSTOM_ONLY = "--custom" in sys.argv
+if not CUSTOM_ONLY:
+    from pydelatin import Delatin
+    from quantized_mesh_encoder import encode
+    from quantized_mesh_encoder.extensions import ExtensionBase, ExtensionId, EXTENSION_HEADER, oct_encode
+    from quantized_mesh_encoder.ecef import to_ecef
+else:
+    ExtensionBase = object   # the quantized-mesh extension class below is defined but never used
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
-CACHE = os.path.join(HERE, ".cache")
-OUT = os.path.join(HERE, "tiles")
+# Overridable so a build can be checked against another without touching tiles/.
+CACHE = os.environ.get("LEKISHI_TILES_CACHE", os.path.join(HERE, ".cache"))
+OUT = os.environ.get("LEKISHI_TILES_OUT", os.path.join(HERE, "tiles"))
 NE2 = os.path.join(REPO, "node_modules/cesium/Build/Cesium/Assets/Textures/NaturalEarthII")
 TERRARIUM = "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"
 GRID = 65          # terrain samples per tile edge (Cesium's heightmap convention)
@@ -228,13 +239,19 @@ def build_terrain(z, x, y):
     p = os.path.join(OUT, "terrain", str(z), str(x), f"{y}.terrain")
     os.makedirs(os.path.dirname(p), exist_ok=True)
     with open(p, "wb") as f: f.write(buf.getvalue())
+    write_height(z, x, y, H)
+    return len(buf.getvalue())
+
+def build_height(z, x, y):
+    write_height(z, x, y, heights_with_border(z, x, y)[2])
+
+def write_height(z, x, y, H):
     # The same heights for the custom globe, Terrarium-encoded (R*256 + G + B/256 - 32768).
     h = H[1:-1, 1:-1] + 32768
     rgb = np.stack([np.floor(h / 256), np.floor(h) % 256, np.floor((h % 1) * 256)], -1).astype(np.uint8)
     p = os.path.join(OUT, "height", str(z), str(x), f"{y}.png")
     os.makedirs(os.path.dirname(p), exist_ok=True)
     Image.fromarray(rgb).save(p, optimize=True)
-    return len(buf.getvalue())
 
 # ---- imagery: painted, unlit, seamless ----
 NE2_IMG = None
@@ -341,7 +358,7 @@ def main():
     for z in sorted(LEVELS):
         jobs = tiles_for(z); t1 = time.time()
         if only in (None, "terrain", "height"):
-            with ThreadPoolExecutor(4) as ex: sizes = list(ex.map(lambda j: build_terrain(z, *j), jobs))
+            with ThreadPoolExecutor(4) as ex: list(ex.map(lambda j: (build_height if CUSTOM_ONLY else build_terrain)(z, *j), jobs))
         if only in (None, "imagery"):
             with ThreadPoolExecutor(4) as ex: list(ex.map(lambda j: build_imagery(z, *j), jobs))
         print(f"  level {z}: {len(jobs)} tiles in {time.time() - t1:.0f}s", flush=True)
@@ -349,7 +366,8 @@ def main():
              "scheme": "tms", "projection": "EPSG:4326", "bounds": [-180, -90, 180, 90], "minzoom": 0, "maxzoom": max(LEVELS),
              "tiles": ["{z}/{x}/{y}.terrain?v={version}"], "extensions": ["octvertexnormals"], "available": avail,
              "attribution": "Elevation: Terrain Tiles on AWS Open Data (Mapzen and contributors). Imagery painted from it and Natural Earth II."}
-    with open(os.path.join(OUT, "terrain", "layer.json"), "w") as f: json.dump(layer, f)
+    if not CUSTOM_ONLY:
+        with open(os.path.join(OUT, "terrain", "layer.json"), "w") as f: json.dump(layer, f)
     tileset = {"scheme": "tms", "projection": "EPSG:4326", "terrainGrid": GRID, "imagerySize": IMG, "maxLevel": max(LEVELS),
                "available": avail, "levelRects": {str(z): LEVELS[z] for z in LEVELS},
                "imageryGroups": [{"minLevel": 0, "maxLevel": 5, "rect": None}, {"minLevel": 6, "maxLevel": 8, "rect": LEVELS[6]},

@@ -14,7 +14,7 @@ const [spec, dio, tileset] = await Promise.all(["../shared/scene.json", "../shar
 // Debug knobs (defaults are the measured configuration):
 // ?shadows=0 ?lighting=0 ?fog=0 ?ga=0 (ground atmosphere) ?fogScale=0.05 ?maxEdge=0.25 (0 resamples every tile)
 const qs = new URLSearchParams(location.search)
-const KNOB = { shadows: qs.get("shadows") !== "0", maxEdge: +(qs.get("maxEdge") ?? 0.25), lighting: qs.get("lighting") !== "0", fog: qs.get("fog") !== "0", ga: qs.get("ga") !== "0" }
+const KNOB = { shadows: qs.get("shadows") !== "0", maxEdge: +(qs.get("maxEdge") ?? Infinity), lighting: qs.get("lighting") !== "0", fog: qs.get("fog") !== "0", ga: qs.get("ga") !== "0" }
 const EX = spec.verticalExaggeration
 const U = dio.unitMetres // metres per region-spike scene unit (100): symbolic sizes, not to scale
 const rad = d => d * Math.PI / 180
@@ -47,8 +47,8 @@ const tiling = new C.GeographicTilingScheme()
 //    east/north/up frame and rebuilt in the grid point's frame: across a 90°
 //    source triangle a plain ECEF blend tilts the sea's normal by tens of degrees.
 //    Level 10/11 land tiles around the diorama pass through untouched.
-// 2. Normals (repairNormals). 3. Winding (in curvedTerrain).
-const MAX_EDGE_DEG = KNOB.maxEdge // a 0.25° chord sags ~15 m: invisible from where such tiles are drawn
+// 2. Normals (repairNormals). 3. Mirrored vertices and winding (in curvedTerrain).
+const MAX_EDGE_DEG = KNOB.maxEdge // off by default since the shared tiles bound curvature error; ?maxEdge=0.25 re-enables the client rebuild
 const occluder = new C.EllipsoidalOccluder(C.Ellipsoid.WGS84)
 let tilesResampled = 0, normalsRepaired = 0, trianglesFlipped = 0
 // 2. Normals: quantized_mesh_encoder's oct_encode maps
@@ -80,11 +80,16 @@ function curvedTerrain(d, x, y, level) {
   const n = qv.length / 3, Q = 32767
   const rect = tiling.tileXYToRectangle(x, y, level)
   if (nrm) repairNormals(qv, nrm, n, rect)
-  // 3. Winding: Delatin triangulates in image space (row 0 north), so every
-  // source triangle is clockwise in (east, north). The quantized-mesh spec and
-  // Cesium's globe back-face culling expect counter-clockwise: as served, every
-  // interior triangle is culled and only Cesium's own skirts draw (the sky
-  // atmosphere shows through as white). Flip each clockwise triangle in place.
+  // 3. Winding: pydelatin's vertex y counts from the bottom row, and
+  // build-tiles.py reads it as a row from the top, so every tile's vertex
+  // choice is mirrored north–south (heights at the vertices are still true;
+  // the peaks Delatin meant to keep are missed, e.g. 11/3530/1381 tops out at
+  // 232 m where the grid has 493 m). The mirror also makes every triangle
+  // clockwise in (east, north); Cesium's back-face culling then drops every
+  // interior triangle and only its skirts draw (the sky atmosphere shows
+  // through as white). Clockwise triangles are flipped here; the vertex choice
+  // can only be fixed in the builder (vr = GRID - 1 - tin.vertices[:, 1]),
+  // after which this loop finds nothing to flip.
   for (let t = 0; t < idx.length; t += 3) {
     const a = idx[t], b = idx[t + 1], c = idx[t + 2]
     if ((qv[b] - qv[a]) * (qv[n + c] - qv[n + a]) - (qv[c] - qv[a]) * (qv[n + b] - qv[n + a]) < 0) { idx[t + 1] = c; idx[t + 2] = b; trianglesFlipped++ }
@@ -379,7 +384,9 @@ function catmull(pts, i, u) {
   const u2 = u * u, u3 = u2 * u
   return [0, 1].map(d => 0.5 * ((2 * p1[d]) + (-p0[d] + p2[d]) * u + (2 * p0[d] - 5 * p1[d] + 4 * p2[d] - p3[d]) * u2 + (-p0[d] + 3 * p1[d] - 3 * p2[d] + p3[d]) * u3))
 }
-const curve = []; { const N = 32; for (let i = 0; i < routePts.length - 1; i++) for (let j = 0; j < N; j++) curve.push(catmull(routePts, i, j / N)); curve.push(routePts[routePts.length - 1]) }
+// Few points per span: a ground polyline restarts its dash pattern at every
+// vertex, so a densely sampled curve reads as dash-dot. Six keeps it smooth.
+const curve = []; { const N = 6; for (let i = 0; i < routePts.length - 1; i++) for (let j = 0; j < N; j++) curve.push(catmull(routePts, i, j / N)); curve.push(routePts[routePts.length - 1]) }
 viewer.entities.add({
   id: "route",
   polyline: {

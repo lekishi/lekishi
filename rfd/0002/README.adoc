@@ -179,14 +179,19 @@ not grant reproduction rights; cite and summarize.
 
 The owner is the editor and may approve his own sourced work for the public
 release (unchanged from the earlier decision). The workflow is sized for
-that:
+that, in a form that later contributors can grow into (next section):
 
-* *Authoring format.* One compact file per chapter, with one entry per place,
-  actor, event, relationship, story, and media item, citations inline, in
-  the vocabulary link:CONTRACTS.adoc[the v0 contract] defines. A build-time
-  compiler produces the contract documents the atlas and the contract tests
-  consume, so the contract's semantics and vectors stand unchanged while the
-  authoring cost per fact falls from a hundred lines to a few.
+* *Authoring format.* Approved by the owner on 2026-10-10. A folder per
+  chapter with one small file per record (`events/akimeya-landfall-753.yaml`,
+  about ten lines), for places, actors, events, relationships, stories,
+  sources, and media, with citations inline, in the vocabulary
+  link:CONTRACTS.adoc[the v0 contract] defines. A build-time compiler
+  concatenates the folder into the contract documents the atlas and the
+  contract tests consume, so the contract's semantics and vectors stand
+  unchanged while the authoring cost per fact falls from a hundred lines to a
+  few. One file per record, with flat fields of simple types, is what a web
+  form, a scholar, and two concurrent contributors can all write; a record's
+  history is its file's history.
 * *Revision history.* Git history, with the commit as the change explanation.
   Readers get a correction history from it when the atlas grows a history
   surface; nothing requires per-record revision envelopes or hashes for one
@@ -214,10 +219,58 @@ content is what the chapter's approved commit contains. Corrections are
 distinct from scholarly disagreement, which stays in the current content under
 the main-account policy. Stands in substance; the mechanism is the one above.
 
-Contributors propose changes to the authoring file; publication requires the
+Contributors propose changes to the record files; publication requires the
 owner's approval. Broader delegation is defined when a second editor exists.
 AI may assist extraction and checking; its output is a candidate with a
 source, never an approval.
+
+=== Decision: standardize the content model, grow the contribution surface
+
+Decided by the owner on 2026-10-10, for contributors who may be scholars and
+experts rather than engineers. What is standardized is the content model and
+the approval contract, because they survive every stage; the way a
+contribution arrives is expected to change, and Git stays the storage and
+history layer underneath for the foreseeable future without contributors
+having to see it.
+
+The standard:
+
+* The record shape: stable ids; claims with citations; attested versus
+  interpretation; disputes as sibling claims in one record, each with its
+  citation, the main account marked as an editorial choice; name forms with
+  language and script; sources with reuse terms; `contributed_by` and
+  `reviewed_by` on each claim, shown as credit on the record's card.
+* The approval contract: nothing reaches the site without the editor's
+  approval of a specific version, and a pending contribution never changes
+  what is published.
+* The roles: contributor, specialist reviewer, editor. A specialist's review
+  is recorded as the reviewer on the chapter's approval line, which is what
+  the earlier `specialist_review` flag meant.
+* The checks CI runs on every proposed change, so review is about history and
+  not syntax: schema validity, every id resolving, every drawn geometry with
+  a cited basis, every name form with language and script, every source with
+  terms, and no change to an approved chapter reaching the build without a
+  new approval.
+
+The contribution surface, in stages, each entered when the previous one is
+felt to be short:
+
+. *Now.* The owner edits record files, with AI assistance drafting entries
+  from sources. A scholar contributes as to any editor, in a document or a
+  message, and is transcribed with credit.
+. *First regular contributors.* A structured proposal form (a GitHub issue
+  form with fields for the claim, the source, and the locator) that needs a
+  GitHub account and shows no file; each proposal becomes a record through
+  review.
+. *Several contributors.* A Git-backed editing site: a web form per record
+  kind that saves to the repository, with draft, review, and publish states
+  mapped to branches and the editor's approval, and a review queue per
+  chapter for its specialist. This needs one small piece of infrastructure,
+  an authentication proxy, which is a separate owner decision under the
+  no-provider rule.
+. *Many editors or real query needs.* The database-backed editorial
+  application link:../0003/README.adoc[RFD 3] reserves, importing from the
+  files, with Git kept as the publication record. Only when demonstrated.
 
 == Alternatives and trade-offs
 

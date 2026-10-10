@@ -6,6 +6,9 @@ import { createReadStream, statSync } from "node:fs"
 import { extname, join, normalize, resolve } from "node:path"
 const root = resolve(process.argv[2] ?? ".")
 const port = Number(process.argv[3] ?? 4300)
+// HOST=0.0.0.0 serves the local network, so a tablet or phone can open the
+// pages for real-device frame times (static files only; nothing is uploaded).
+const host = process.env.HOST ?? "127.0.0.1"
 const mime = { ".html": "text/html; charset=utf-8", ".js": "text/javascript", ".mjs": "text/javascript", ".css": "text/css", ".json": "application/json", ".png": "image/png", ".jpg": "image/jpeg", ".wasm": "application/wasm", ".glb": "model/gltf-binary", ".svg": "image/svg+xml", ".woff2": "font/woff2", ".ttf": "font/ttf", ".webm": "video/webm", ".mp4": "video/mp4" }
 createServer((req, res) => {
   let path = decodeURIComponent(new URL(req.url, "http://x").pathname)
@@ -16,4 +19,4 @@ createServer((req, res) => {
   if (st.isDirectory()) { res.writeHead(301, { Location: path + "/" }); return res.end() }
   res.writeHead(200, { "Content-Type": mime[extname(file)] ?? "application/octet-stream", "Content-Length": st.size, "Cache-Control": "no-store" })
   createReadStream(file).pipe(res)
-}).listen(port, "127.0.0.1", () => console.log(`serving ${root} on http://127.0.0.1:${port}`))
+}).listen(port, host, () => console.log(`serving ${root} on http://${host}:${port}`))

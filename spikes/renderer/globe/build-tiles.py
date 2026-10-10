@@ -151,8 +151,20 @@ class Normals(ExtensionBase):
     so neighbouring tiles agree at their shared edge and lighting has no seams."""
     def __init__(self, normals): self.id = ExtensionId.VERTEX_NORMALS; self.normals = normals
     def encode(self):
-        enc = oct_encode(self.normals).tobytes("C")
+        enc = oct_encode_snorm(self.normals).tobytes("C")
         return pack(EXTENSION_HEADER["extensionId"], self.id.value) + pack(EXTENSION_HEADER["extensionLength"], len(enc)) + enc
+
+def oct_encode_snorm(v):
+    """Oct-encodes unit normals to two bytes the way Cesium decodes them
+    (AttributeCompression.octEncode: round((x * 0.5 + 0.5) * 255)). The
+    encoder library floors * 256, which wraps a component of exactly +1 to 0
+    and flips normals along the 0, 90 and 180 degree meridians."""
+    l1 = np.abs(v).sum(1, keepdims=True)
+    r = v[:, :2] / l1
+    neg = v[:, 2] < 0
+    sx, sy = np.where(r[:, 0] >= 0, 1.0, -1.0), np.where(r[:, 1] >= 0, 1.0, -1.0)
+    x = np.where(neg, (1 - np.abs(r[:, 1])) * sx, r[:, 0]); y = np.where(neg, (1 - np.abs(r[:, 0])) * sy, r[:, 1])
+    return np.round((np.clip(np.stack([x, y], 1), -1, 1) * 0.5 + 0.5) * 255).astype(np.uint8)
 
 TRI = None
 def grid_indices():
@@ -190,13 +202,26 @@ def build_terrain(z, x, y):
     # per-level geometric error); flat sea collapses to two triangles. The
     # custom globe keeps the full grid in the PNG below, by design.
     inner = H[1:-1, 1:-1]
-    tin = Delatin(inner.astype(np.float64), max_error=max(0.5, 0.1 * 77067.0 / (1 << z)))
-    vc, vr = tin.vertices[:, 0].astype(int), tin.vertices[:, 1].astype(int)
     lon_i, lat_i = LON[1:-1, 1:-1], LAT[1:-1, 1:-1]
+    # The simplifier sees heights plus the Earth's curvature below the tile's
+    # tangent plane, so it also keeps the vertices a flat triangle would need
+    # to stay within the error of the curved surface (otherwise flat sea tiles
+    # collapse to chords that cut kilometres into the globe at coarse levels).
+    P0 = to_ecef(np.stack([lon_i.ravel(), lat_i.ravel(), np.zeros(GRID * GRID)], 1)).reshape(GRID, GRID, 3)
+    pc = P0[GRID // 2, GRID // 2]; nc = pc / np.linalg.norm(pc)
+    dome = np.einsum("ijk,k->ij", P0 - pc, nc)
+    tin = Delatin((inner + dome).astype(np.float64), max_error=max(0.5, 0.1 * 77067.0 / (1 << z)))
+    # pydelatin's y counts rows from the bottom; the grid's row 0 is north.
+    vc, vr = tin.vertices[:, 0].astype(int), (GRID - 1 - tin.vertices[:, 1]).astype(int)
     pos = np.stack([lon_i[vr, vc], lat_i[vr, vc], inner[vr, vc]], 1).astype(np.float64)
     nrm_v = nrm.reshape(GRID, GRID, 3)[vr, vc]
     buf = io.BytesIO()
-    encode(buf, pos, tin.triangles.astype(np.uint32).ravel(), bounds=tile_bounds(z, x, y), sphere_method="naive", extensions=(Normals(nrm_v.astype(np.float64)),))
+    tri = tin.triangles.astype(np.int64)
+    # Counter-clockwise in (east, north), as quantized-mesh expects (front faces).
+    a, b, c = pos[tri[:, 0], :2], pos[tri[:, 1], :2], pos[tri[:, 2], :2]
+    cw = ((b[:, 0] - a[:, 0]) * (c[:, 1] - a[:, 1]) - (b[:, 1] - a[:, 1]) * (c[:, 0] - a[:, 0])) < 0
+    tri[cw] = tri[cw][:, [0, 2, 1]]
+    encode(buf, pos, tri.astype(np.uint32).ravel(), bounds=tile_bounds(z, x, y), sphere_method="naive", extensions=(Normals(nrm_v.astype(np.float64)),))
     p = os.path.join(OUT, "terrain", str(z), str(x), f"{y}.terrain")
     os.makedirs(os.path.dirname(p), exist_ok=True)
     with open(p, "wb") as f: f.write(buf.getvalue())

@@ -10,7 +10,7 @@
   "scripts": {
     "sync:cesium": "node scripts/sync-cesium-runtime.mjs",
     "dev": "node scripts/sync-cesium-runtime.mjs && vite dev",
-    "build": "node scripts/check-chapter.mjs && node scripts/sync-cesium-runtime.mjs && vite build && node scripts/check-static-build.mjs",
+    "build": "node scripts/check-chapter.mjs && node scripts/sync-cesium-runtime.mjs && vite build && node scripts/check-static-build.mjs && node spikes/renderer/globe/preview-build.mjs",
     "preview": "node scripts/serve-static.mjs --directory build",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "test": "vitest run",

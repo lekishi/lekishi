@@ -58,6 +58,41 @@ scene.add(globe.group)
   const atm = new THREE.Mesh(new THREE.SphereGeometry(6378137 * 1.025, 96, 48), m); atm.raycast = () => {}; scene.add(atm)
 }
 
+// ---- sky and haze ----
+// Low over the Earth the reader faces a horizon, not space: a sky gradient
+// fills the view above it and a distance haze softens the terrain toward it.
+// Both fade out with altitude, so the globe seen from space stays crisp. The
+// haze also tells the globe where it can ask for less detail (fogDensity).
+const HAZE = new THREE.Color("#b6ccd9"), ZENITH = new THREE.Color("#5a86ab")
+scene.fog = new THREE.FogExp2(HAZE, 0)
+const sky = new THREE.Mesh(new THREE.SphereGeometry(1, 48, 24), new THREE.ShaderMaterial({
+  side: THREE.BackSide, depthWrite: false, depthTest: false, transparent: true,
+  uniforms: { horizon: { value: HAZE }, zenith: { value: ZENITH }, up: { value: new THREE.Vector3(0, 0, 1) }, sinDip: { value: 0 }, strength: { value: 0 } },
+  vertexShader: "varying vec3 vDir; void main(){ vDir = position; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.); }",
+  // elevation 0 is the true horizon, which lies below the local horizontal by
+  // the dip angle at the camera's altitude; below it is the Earth
+  fragmentShader: `uniform vec3 horizon; uniform vec3 zenith; uniform vec3 up; uniform float sinDip; uniform float strength; varying vec3 vDir;
+    void main(){ float h = dot(normalize(vDir), up) + sinDip;
+      vec3 c = mix(horizon, zenith, smoothstep(0.0, 0.5, h));
+      gl_FragColor = vec4(c, strength * smoothstep(-0.01, 0.015, h));
+      #include <tonemapping_fragment>
+      #include <colorspace_fragment>
+    }` }))
+sky.renderOrder = -1; sky.frustumCulled = false; sky.raycast = () => {}; scene.add(sky)
+function updateAtmosphere() {
+  const R = 6371000, alt = Math.max(1, camera.position.length() - R)
+  const horizonDist = Math.sqrt(2 * R * alt + alt * alt)
+  const fade = 1 - THREE.MathUtils.smoothstep(alt, 150e3, 900e3)
+  // about 80% haze at the horizon, a few percent at the diorama's 30 km
+  scene.fog.density = 1.3 / horizonDist * fade
+  globe.fogDensity = scene.fog.density
+  const m = sky.material.uniforms
+  m.up.value.copy(camera.position).normalize(); m.sinDip.value = Math.sqrt(1 - (R / (R + alt)) ** 2)
+  m.strength.value = 1 - THREE.MathUtils.smoothstep(alt, 60e3, 400e3)
+  sky.visible = m.strength.value > 0
+  sky.position.copy(camera.position); sky.scale.setScalar(camera.near * 20); sky.updateMatrixWorld()
+}
+
 // ---- lines: the voyage (dashed) and the relationship arc, constant pixel width ----
 const lineMats = []
 function polyline(points, { color, colors, dashed = false, width = 3 }) {
@@ -210,6 +245,7 @@ function afterCamera() {
   sun.castShadow = near && quality === "full"
   sun.target.position.copy(near ? origin : look); sun.position.copy(sun.target.position).addScaledVector(SUN, 200000); sun.target.updateMatrixWorld()
   voyage.mat.dashSize = voyage.mat.gapSize = Math.max(6, range / 90)
+  updateAtmosphere()
 }
 function resize() {
   const w = canvas.clientWidth || innerWidth, h = canvas.clientHeight || innerHeight

@@ -1,0 +1,248 @@
+{
+  "spike": "followup",
+  "loadMsWall": 2075,
+  "altitudes": {
+    "globe": {
+      "t": 0,
+      "settled": true,
+      "fps": 5.75,
+      "stats": {
+        "fps": 4.6,
+        "frameMs": 1.56,
+        "drawCalls": 11,
+        "triangles": 73306,
+        "memoryMB": 12.2,
+        "loadMs": 1614,
+        "bundleKB": 1619,
+        "tilesLoaded": 10,
+        "tilesDrawn": 7,
+        "maxSSE": 4.5,
+        "trees": 4162,
+        "rangeM": 16000000,
+        "traffic": {
+          "terrain": {
+            "n": 0,
+            "kb": 0
+          },
+          "height": {
+            "n": 10,
+            "kb": 42,
+            "unique": 10
+          },
+          "imagery": {
+            "n": 10,
+            "kb": 99,
+            "unique": 10
+          },
+          "other": {
+            "n": 1,
+            "kb": 2
+          }
+        },
+        "memoryBudgetMB": 256,
+        "tileMemoryMB": 6,
+        "cancelled": 0,
+        "lastPick": null,
+        "engine": "custom globe follow-up on three 170"
+      }
+    },
+    "region": {
+      "t": 0.44,
+      "settled": true,
+      "fps": 3.93,
+      "stats": {
+        "fps": 3.7,
+        "frameMs": 1.86,
+        "drawCalls": 26,
+        "triangles": 203866,
+        "memoryMB": 27.4,
+        "loadMs": 1614,
+        "bundleKB": 1619,
+        "tilesLoaded": 86,
+        "tilesDrawn": 22,
+        "maxSSE": 4.5,
+        "trees": 4162,
+        "rangeM": 1500000,
+        "traffic": {
+          "terrain": {
+            "n": 0,
+            "kb": 0
+          },
+          "height": {
+            "n": 86,
+            "kb": 409,
+            "unique": 86
+          },
+          "imagery": {
+            "n": 86,
+            "kb": 458,
+            "unique": 86
+          },
+          "other": {
+            "n": 1,
+            "kb": 2
+          }
+        },
+        "memoryBudgetMB": 256,
+        "tileMemoryMB": 46,
+        "cancelled": 0,
+        "lastPick": null,
+        "engine": "custom globe follow-up on three 170"
+      }
+    },
+    "local": {
+      "t": 0.7,
+      "settled": true,
+      "fps": 0.96,
+      "stats": {
+        "fps": 1.8,
+        "frameMs": 24.94,
+        "drawCalls": 61,
+        "triangles": 645630,
+        "memoryMB": 54.2,
+        "loadMs": 1614,
+        "bundleKB": 1619,
+        "tilesLoaded": 210,
+        "tilesDrawn": 49,
+        "maxSSE": 4.5,
+        "trees": 4162,
+        "rangeM": 29500,
+        "traffic": {
+          "terrain": {
+            "n": 0,
+            "kb": 0
+          },
+          "height": {
+            "n": 210,
+            "kb": 729,
+            "unique": 210
+          },
+          "imagery": {
+            "n": 210,
+            "kb": 965,
+            "unique": 210
+          },
+          "other": {
+            "n": 1,
+            "kb": 2
+          }
+        },
+        "memoryBudgetMB": 256,
+        "tileMemoryMB": 123,
+        "cancelled": 0,
+        "lastPick": null,
+        "engine": "custom globe follow-up on three 170"
+      }
+    }
+  },
+  "phone": {
+    "settled": true,
+    "fps": 2.16,
+    "stats": {
+      "fps": 1.6,
+      "frameMs": 6.21,
+      "drawCalls": 32,
+      "triangles": 300164,
+      "memoryMB": 35.4,
+      "loadMs": 1396,
+      "bundleKB": 1619,
+      "tilesLoaded": 126,
+      "tilesDrawn": 21,
+      "maxSSE": 4.5,
+      "trees": 2081,
+      "rangeM": 29500,
+      "traffic": {
+        "terrain": {
+          "n": 0,
+          "kb": 0
+        },
+        "height": {
+          "n": 126,
+          "kb": 341,
+          "unique": 126
+        },
+        "imagery": {
+          "n": 126,
+          "kb": 576,
+          "unique": 126
+        },
+        "other": {
+          "n": 1,
+          "kb": 2
+        }
+      },
+      "memoryBudgetMB": 128,
+      "tileMemoryMB": 77,
+      "cancelled": 0,
+      "lastPick": null,
+      "engine": "custom globe follow-up on three 170"
+    }
+  },
+  "flight": {
+    "frames": 140,
+    "unsettledFrames": 0,
+    "wallSeconds": 673,
+    "stats": {
+      "fps": 4.9,
+      "frameMs": 0.68,
+      "drawCalls": 11,
+      "triangles": 73306,
+      "memoryMB": 96,
+      "loadMs": 1288,
+      "bundleKB": 1619,
+      "tilesLoaded": 396,
+      "tilesDrawn": 7,
+      "maxSSE": 4.5,
+      "trees": 4162,
+      "rangeM": 16000000,
+      "traffic": {
+        "terrain": {
+          "n": 0,
+          "kb": 0
+        },
+        "height": {
+          "n": 396,
+          "kb": 1074,
+          "unique": 396
+        },
+        "imagery": {
+          "n": 396,
+          "kb": 1430,
+          "unique": 396
+        },
+        "other": {
+          "n": 1,
+          "kb": 2
+        }
+      },
+      "memoryBudgetMB": 256,
+      "tileMemoryMB": 227,
+      "cancelled": 0,
+      "lastPick": null,
+      "engine": "custom globe follow-up on three 170"
+    }
+  },
+  "trafficAfterStills": {
+    "terrain": {
+      "n": 0,
+      "kb": 0
+    },
+    "height": {
+      "n": 210,
+      "kb": 729,
+      "unique": 210
+    },
+    "imagery": {
+      "n": 210,
+      "kb": 965,
+      "unique": 210
+    },
+    "other": {
+      "n": 1,
+      "kb": 2
+    }
+  },
+  "errors": [],
+  "capturedAt": "2026-10-11T01:14:38.557Z",
+  "note": "software GPU in the capture container; fps is relative and noisy"
+}

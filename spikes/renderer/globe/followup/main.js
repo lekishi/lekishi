@@ -44,7 +44,9 @@ Object.assign(sun.shadow.camera, { left: -40000, right: 40000, top: 40000, botto
 
 // ---- the globe, with the draped polygon as an overlay ----
 const overlay = new DrapedOverlay(extra.polygons.map(p => ({ id: p.id, rings: p.rings, fill: p.fill, stroke: p.stroke, widthPx: p.widthPx })))
-const globe = new Globe({ tilesUrl: new URL(spec.tiles, location.href).href, tileset, exaggeration: K, maxSSE: +(qs.get("sse") ?? 4.5), overlay })
+// Phones and tablets get a smaller GPU memory budget for tiles (?mem= overrides, in MB).
+const coarse = matchMedia("(pointer: coarse)").matches
+const globe = new Globe({ tilesUrl: new URL(spec.tiles, location.href).href, tileset, exaggeration: K, maxSSE: +(qs.get("sse") ?? 4.5), overlay, memoryBudgetMB: +(qs.get("mem") ?? (coarse ? 96 : 160)) })
 scene.add(globe.group)
 
 // ---- atmosphere rim (never picked) ----
@@ -255,7 +257,7 @@ function render() {
   const t = performance.now()
   if (driving) controls.update()
   afterCamera()
-  globe.update(camera, renderer.domElement.height)
+  globe.update(camera, canvas.clientHeight || innerHeight)
   renderer.render(scene, camera); placeLabels(); frameNo++
   frameMs = frameMs * 0.9 + (performance.now() - t) * 0.1
   const idle = globe.settled
@@ -277,11 +279,14 @@ const bundleKB = Math.round(performance.getEntriesByType("resource").filter(e =>
 function stats() {
   const i = renderer.info.render
   return { fps: +fps.toFixed(1), frameMs: +frameMs.toFixed(2), drawCalls: i.calls, triangles: i.triangles, memoryMB: performance.memory ? +(performance.memory.usedJSHeapSize / 1048576).toFixed(1) : null,
-    loadMs, bundleKB, tilesLoaded: globe.loadedCount, tilesDrawn: globe.selected.length, maxSSE: globe.maxSSE, trees: treeCount, rangeM: Math.round(range), traffic: tileTraffic(), lastPick: lastPick && lastPick.name, engine: "custom globe follow-up on three " + THREE.REVISION }
+    loadMs, bundleKB, tilesLoaded: globe.loadedCount, tilesDrawn: globe.selected.length, maxSSE: globe.maxSSE, trees: treeCount, rangeM: Math.round(range), traffic: traffic(), memoryBudgetMB: Math.round(globe.budget / 1048576), tileMemoryMB: Math.round(globe.memoryBytes / 1048576), cancelled: globe.cancelled, lastPick: lastPick && lastPick.name, engine: "custom globe follow-up on three " + THREE.REVISION }
 }
+// Tiles load in workers, whose requests the page's resource timing does not
+// see; the globe counts them itself.
+function traffic() { return { terrain: { n: 0, kb: 0 }, ...globe.trafficKB(), other: tileTraffic().other } }
 function statsOverlay() {
   const s = stats()
-  document.getElementById("stats").textContent = `custom globe follow-up · sse ${s.maxSSE}\nfps ${s.fps}  frame ${s.frameMs} ms\ndraw calls ${s.drawCalls}  tris ${s.triangles}\ntiles drawn ${s.tilesDrawn}  loaded ${s.tilesLoaded}\nterrain ${s.traffic.height.kb} KB  imagery ${s.traffic.imagery.kb} KB\nrange ${(s.rangeM / 1000).toFixed(1)} km`
+  document.getElementById("stats").textContent = `custom globe follow-up · sse ${s.maxSSE}\nfps ${s.fps}  frame ${s.frameMs} ms\ndraw calls ${s.drawCalls}  tris ${s.triangles}\ntiles drawn ${s.tilesDrawn}  loaded ${s.tilesLoaded}\nterrain ${s.traffic.height.kb} KB  imagery ${s.traffic.imagery.kb} KB\ntile memory ${s.tileMemoryMB} / ${s.memoryBudgetMB} MB\nrange ${(s.rangeM / 1000).toFixed(1)} km`
 }
 
 // ---- bench: the flight in real time, frame times as the device delivers them ----
@@ -299,7 +304,7 @@ function startBench(seconds = 24) {
         bench = null
         const d = deltas.slice(5).sort((a, b) => a - b), q = f => d[Math.min(d.length - 1, Math.floor(d.length * f))]
         const report = [`device: ${navigator.userAgent}`, `viewport: ${innerWidth}×${innerHeight} @${devicePixelRatio}x · sse ${globe.maxSSE}`, `frames: ${d.length} in ${seconds} s (${(d.length / seconds).toFixed(1)} fps mean)`,
-          `frame time p50 ${q(0.5).toFixed(1)} ms · p95 ${q(0.95).toFixed(1)} ms · max ${d.at(-1).toFixed(0)} ms`, `frames over 33 ms: ${(100 * d.filter(x => x > 33.4).length / d.length).toFixed(1)}%`, `tiles: ${tileTraffic().height.n} heights, ${tileTraffic().imagery.n} imagery`].join("\n")
+          `frame time p50 ${q(0.5).toFixed(1)} ms · p95 ${q(0.95).toFixed(1)} ms · max ${d.at(-1).toFixed(0)} ms`, `frames over 33 ms: ${(100 * d.filter(x => x > 33.4).length / d.length).toFixed(1)}%`, `tiles: ${traffic().height.n} heights, ${traffic().imagery.n} imagery`].join("\n")
         box.innerHTML = `<b>Frame times on this device</b><pre>${report}</pre><button type="button" id="copyBench">Copy</button> <button type="button" id="closeBench">Close</button>`
         box.querySelector("#closeBench").onclick = () => { box.hidden = true }
         box.querySelector("#copyBench").onclick = () => navigator.clipboard.writeText(report).catch(() => {})
@@ -323,6 +328,12 @@ Object.assign(window.spike, {
   // screen position of a geodetic point, for scripted picking tests
   screenOf(lon, lat, h = 0) { const r = canvas.getBoundingClientRect(); v3.set(...toEcef(lon, lat, h)).project(camera); return { x: r.left + (v3.x + 1) / 2 * r.width, y: r.top + (1 - v3.y) / 2 * r.height, front: v3.z < 1 } },
   explore() { flightPose = null; driving = true },   // hand the camera to the controls without a pointer event
+  // tile bookkeeping by state and level, for tests of eviction and cancellation
+  tileCensus() {
+    const out = {}
+    for (const t of globe.tiles.values()) { const k = `${t.state}${t.virtual ? "*" : ""}`; out[k] ??= {}; out[k][t.z] = (out[k][t.z] ?? 0) + 1; out[k].recent = (out[k].recent ?? 0) + (globe.frameId - t.lastUsed <= 60 ? 1 : 0) }
+    return { frame: globe.frameId, memoryMB: Math.round(globe.memoryBytes / 1048576), selected: globe.selected.length, byState: out }
+  },
 })
 resolveReady()
 if (qs.has("bench")) startBench(+(qs.get("bench") || 24))

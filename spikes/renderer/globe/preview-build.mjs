@@ -10,7 +10,7 @@
 // never ships in the published artifact.
 //
 // The tiles are generated, not committed: build-tiles.py --custom writes the
-// heights and imagery (about 13,000 files, 78 MB) from AWS Open Data in a few
+// bordered heights and imagery (about 13,000 files, 80 MB) from AWS Open Data in a few
 // minutes with only numpy and Pillow. If Python or the tiles cannot be had, the
 // site preview still deploys and the spike's URL explains what is missing.
 import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"
@@ -64,14 +64,14 @@ if (!quiet(python, ["-c", "import numpy, PIL"])) {
 
 // 2. The tiles, unless a previous build in this checkout left them.
 const tiles = path.join(here, "tiles")
-const haveTiles = ["tileset.json", "height/11", "imagery/11"].every(p => existsSync(path.join(tiles, p)))
+const haveTiles = ["tileset.json", "heightb/11", "imagery/11"].every(p => existsSync(path.join(tiles, p)))
 if (!haveTiles && !run(python, ["-I", path.join(here, "build-tiles.py"), "--custom"])) placeholder("Building the tiles failed.")
 
 // 3. The page, its data and its tiles, at the same relative paths as in the repository.
 const copy = (from, to) => cpSync(from, to, { recursive: true })
-for (const f of ["main.js", "globe.js", "overlay.js", "followup.json"]) copy(path.join(here, "followup", f), path.join(followupOut, f))
+for (const f of ["main.js", "globe.js", "overlay.js", "tile-worker.js", "followup.json"]) copy(path.join(here, "followup", f), path.join(followupOut, f))
 for (const f of ["scene.json", "diorama.json", "flight.js"]) copy(path.join(here, "shared", f), path.join(out, "shared", f))
-for (const f of ["tileset.json", "height", "imagery"]) copy(path.join(tiles, f), path.join(out, "tiles", f))
+for (const f of ["tileset.json", "heightb", "imagery"]) copy(path.join(tiles, f), path.join(out, "tiles", f))
 
 // 4. Its libraries. Locally the import map points into /node_modules/, which a
 //    Pages upload leaves out, so they are copied under /spikes/vendor/ and the

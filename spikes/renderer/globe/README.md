@@ -86,7 +86,9 @@ captures it like the others, and adds:
   stills;
 - `?sse=N` to set the level-of-detail target (pixels of geometric error);
 - `?bench=N` to play the flight in real time for N seconds and report frame
-  times on the device in hand.
+  times on the device in hand, with what could explain a long frame: the page
+  hidden, a lost WebGL context, shaders compiled during the flight, the longest
+  main-thread task, and where in the flight the worst frames fell.
 
 On any device, from the PR's Cloudflare Pages preview: preview builds (never
 `main`) run `preview-build.mjs` at the end of `pnpm build`, which generates the

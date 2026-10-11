@@ -8,8 +8,10 @@
   html,body{margin:0;height:100%;background:#0b1016;overflow:hidden;font-family:system-ui,sans-serif;color:#f3ead7}
   canvas{display:block;width:100%;height:100%;touch-action:none}
   #labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+  /* labels never take the pointer: the canvas hit-tests them, so a drag that
+     starts on a label still turns the globe and a click on one still opens it */
   .lbl{position:absolute;transform:translate(-50%,-100%);text-align:center;white-space:nowrap;pointer-events:none}
-  .lbl b,.lbl i{pointer-events:auto;cursor:pointer}
+  .lbl:focus-visible{outline:none} .lbl:focus-visible b{outline:2px solid #d2a94f;outline-offset:3px;border-radius:2px}
   .lbl b{display:block;font:500 15px "Noto Serif JP","Hiragino Mincho ProN",serif;color:#f3ead7;text-shadow:0 0 3px #0b1114,0 0 6px #0b1114,0 1px 0 #0b1114}
   .lbl i{display:block;font:600 8.5px "Cinzel",serif;letter-spacing:.16em;color:#b9af9c;font-style:normal;text-shadow:0 0 3px #0b1114,0 0 5px #0b1114}
   .lbl::after{content:"";display:block;width:1px;height:14px;margin:2px auto 0;background:rgba(243,234,215,.7)}

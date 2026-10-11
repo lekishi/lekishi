@@ -221,12 +221,19 @@ extra.polygons.forEach(pg => { const r = pg.rings[0], lon = r.reduce((s, q) => s
 for (const L of labels) {
   const e = document.createElement("div"); e.className = ["lbl", ...L.cls].filter(Boolean).join(" ")
   e.innerHTML = `<b>${L.p.name}</b>${L.p.rom ? `<i>${L.p.rom}</i>` : ""}`; e.tabIndex = 0
-  const open = ev => { ev.stopPropagation(); showCard({ name: L.p.name, rom: L.p.rom, kind: L.p.kind, lon: L.p.lon, lat: L.p.lat, caveat: L.p.caveat }) }
-  e.addEventListener("click", open); e.addEventListener("keydown", ev => { if (ev.key === "Enter") open(ev) })
+  L.card = () => ({ name: L.p.name, rom: L.p.rom, kind: L.p.kind, lon: L.p.lon, lat: L.p.lat, caveat: L.p.caveat })
+  e.addEventListener("keydown", ev => { if (ev.key === "Enter") showCard(L.card()) })
   lblBox.appendChild(e); L.e = e
 }
-// Labels are clickable, but a scroll over one still zooms the globe.
-lblBox.addEventListener("wheel", e => { e.preventDefault(); canvas.dispatchEvent(new WheelEvent("wheel", e)) }, { passive: false })
+// The label whose text is under a point, if any (labels are laid out by
+// placeLabels; hidden ones have display none and an empty rectangle).
+function labelAt(x, y) {
+  for (const L of labels) {
+    if (L.e.style.display === "none") continue
+    for (const el of L.e.children) { const r = el.getBoundingClientRect(); if (x >= r.left - 2 && x <= r.right + 2 && y >= r.top - 2 && y <= r.bottom + 2) return L }
+  }
+  return null
+}
 const v3 = new THREE.Vector3()
 function placeLabels() {
   const w = canvas.clientWidth, h = canvas.clientHeight, eye = camera.position, R2 = 6356752 ** 2
@@ -300,7 +307,9 @@ canvas.addEventListener("pointerup", e => {
   if (!downAt || Math.hypot(e.clientX - downAt.x, e.clientY - downAt.y) > 5 || performance.now() - downAt.t > 500) return
   const hit = pick(e.clientX, e.clientY); if (hit) showCard(hit)
 })
+canvas.addEventListener("pointermove", e => { if (e.pointerType === "mouse" && !e.buttons) canvas.style.cursor = labelAt(e.clientX, e.clientY) ? "pointer" : "" })
 function pick(x, y) {
+  const L = labelAt(x, y); if (L) return L.card()
   const r = canvas.getBoundingClientRect(), ndc = new THREE.Vector2((x - r.left) / r.width * 2 - 1, -((y - r.top) / r.height) * 2 + 1)
   raycaster.setFromCamera(ndc, camera)
   if (frame.visible) {

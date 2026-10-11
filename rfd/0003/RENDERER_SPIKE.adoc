@@ -2,7 +2,7 @@
 :toc: macro
 :toclevels: 2
 
-*State:* region-scale, globe-phase and custom-globe follow-up evidence recorded; custom-globe engine gaps closed (2026-10-11); the second hardware round and the decision open (owner). +
+*State:* region-scale, globe-phase and custom-globe follow-up evidence recorded; custom-globe engine gaps closed (2026-10-11); second hardware round recorded on a desktop, an iPad, an iPhone and a mid-range phone (2026-10-11); the decision open (owner). +
 *Date:* 2026-10-10. +
 *Owner of the decision:* the project owner, per link:README.adoc[RFD 3]'s
 "the renderer is decided on the hero, in a bounded spike". +
@@ -1115,7 +1115,14 @@ mid-range phone. The results belong in this table.
 | 0.0%
 | 490 requests, 378 distinct; peak 155 MB against a 128 MB budget
 
-| Mid-range phone | not yet run | | | | | |
+| Mid-range Android phone (2026-10-11; model not reported)
+| Chrome 154 on Android, 411 × 782 at 2.625×, drawn at 2×; full quality
+| 51.5
+| 16.9 ms
+| 34.9 ms
+| 70 ms
+| 9.5%
+| 500 requests, 384 distinct; peak 150 MB against a 128 MB budget
 |===
 
 After the shader warm-up below, the iPhone held its 60 Hz refresh for the
@@ -1158,6 +1165,22 @@ frame of about 6 ms against the 33 ms the desktop limit allows at the
 fly-to freeze limit; Chrome's was 13 ms. The larger viewport fetched more
 tiles (542 and 562 distinct) and filled the 256 MB budget, which held.
 
+The mid-range phone is the one device that did not hold its refresh rate
+throughout. Its median frame was 16.9 ms, but 9.5% of frames took longer than
+33 ms, and the worst three (57-70 ms) fell between 73% and 90% of the flight,
+as the diorama comes into view. It ran at full quality, with shadows and every
+tree, drawn at 2 device pixels per CSS pixel; the phone tier (half the trees,
+no shadows) was not used. The delivery evaluation holds phones to responsive
+checks only, with no frame-time limits; against the tablet limits the run
+passes (95th percentile 34.9 ms against 66 ms, worst frame 70 ms against the
+300 ms fly-to limit). The bench also reported one 299 ms main-thread task at
+the start of the flight. In the container the same report showed that task
+beginning before the flight: it is the end of the shader warm-up, whose last
+renders run in one task so that no warm-up frame reaches the screen, and it is
+reported when it ends. The bench now counts such a task apart, starts in the
+phone tier with `?quality=phone`, and keeps every frame after the first: the
+versions that produced the rows above left out the flight's first five frames.
+
 The iPhone's 95th percentile fell from 21.0 ms to 17.0 ms and its frames over
 33 ms from 0.8% to 0.1%, but one frame took 808 ms: a visible freeze, over the
 evaluation's 300 ms limit for a fly-to. Counting shader programs showed why:
@@ -1185,8 +1208,8 @@ again, which a deployed site answers from the browser's HTTP cache.
 
 === What remains open
 
-Nothing in the engine is known to be missing for the decision. Open are the
-second hardware round above, touch gestures on real devices (the bench plays
+Nothing in the engine is known to be missing for the decision. Open are
+touch gestures on real devices (the bench plays
 the flight; gestures are the reader's own), desktop Safari (desktop Firefox is
 the desktop row above; Chrome on iOS and iPadOS is WebKit), and the
 owner's decision. The integration work that any renderer needs (the

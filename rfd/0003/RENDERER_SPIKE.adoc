@@ -1025,7 +1025,14 @@ mid-range phone. The results belong in this table.
 |===
 | Device | Browser and viewport | Mean fps | Median frame | 95th percentile | Worst frame | Over 33 ms | Tiles (requests, distinct) and peak tile memory
 
-| Desktop | not yet run | | | | | |
+| Desktop, after the shader warm-up (2026-10-11)
+| Firefox 154 on Linux, 1916 × 891 at 1×
+| 59.5
+| 17.0 ms
+| 18.0 ms
+| 90 ms
+| 0.7%
+| 538 requests, 479 distinct; peak 258 MB against a 256 MB budget
 
 | iPad, the first round's (2026-10-11)
 | Chrome 155 on iPadOS 26.6.2 (WebKit), 1180 × 682 at 2× (landscape; the first round ran in portrait)
@@ -1074,6 +1081,16 @@ than 33 ms, against one or two before. The bench does not say what those
 frames were doing, and a difference of two frames in 1,432 is within what one
 run to the next can show.
 
+The desktop run, in Firefox on Linux, meets the desktop limits: the median
+frame of 17.0 ms is the display's 60 Hz (at least 55 fps required), the 95th
+percentile is 18.0 ms (33 ms allowed), and the worst frame, 90 ms, is far
+under both the 500 ms stall limit and the 300 ms fly-to freeze limit. About
+ten frames (0.7%) took longer than 33 ms; the bench does not say what they were
+doing. The window was 1916 × 891 rather than the evaluation's 1920 × 1080, so
+about a sixth fewer pixels; at one device pixel per CSS pixel it fetched more
+distinct tiles than the iPad or iPhone (479 against about 390), because a wider
+view sees more of the ground.
+
 The iPhone's 95th percentile fell from 21.0 ms to 17.0 ms and its frames over
 33 ms from 0.8% to 0.1%, but one frame took 808 ms: a visible freeze, over the
 evaluation's 300 ms limit for a fly-to. Counting shader programs showed why:
@@ -1103,7 +1120,8 @@ again, which a deployed site answers from the browser's HTTP cache.
 
 Nothing in the engine is known to be missing for the decision. Open are the
 second hardware round above, touch gestures on real devices (the bench plays
-the flight; gestures are the reader's own), desktop Firefox and Safari, and the
+the flight; gestures are the reader's own), desktop Safari (desktop Firefox is
+the desktop row above; Chrome on iOS and iPadOS is WebKit), and the
 owner's decision. The integration work that any renderer needs (the
 `AtlasRenderer` boundary, bundling through SvelteKit, chapter tile pipelines,
 real data in place of the spike's schematic shapes) is the project's next

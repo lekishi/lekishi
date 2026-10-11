@@ -6,7 +6,9 @@ One elevation sampler feeds three outputs on the same geographic tiling
 
   tiles/terrain/{z}/{x}/{y}.terrain   quantized-mesh 1.0, simplified, with oct-encoded normals
                                       (Cesium and 3d-tiles-renderer)
-  tiles/height/{z}/{x}/{y}.png        65x65 Terrarium-encoded heights (custom globe)
+  tiles/height/{z}/{x}/{y}.png        65x65 Terrarium-encoded heights (the globe phase's custom globe)
+  tiles/heightb/{z}/{x}/{y}.png       the same heights with a one-sample border, 67x67
+                                      (the follow-up: normals are seamless across tile edges)
   tiles/imagery/{z}/{x}/{y}.jpg       256x256 painted imagery, unlit (all three)
   tiles/terrain/layer.json            terrain descriptor with per-level availability
   tiles/tileset.json                  the same availability for the imagery and the custom globe
@@ -26,10 +28,10 @@ peninsula to level 11 (about 150 m per terrain sample, the source resolution).
 
 Usage: python3 -I spikes/renderer/globe/build-tiles.py [--only terrain|height|imagery] [--custom]
 
---custom writes only what the custom globe reads (heights, imagery and
-tileset.json) and needs only numpy and Pillow: the meshing libraries are not
-imported. Cloudflare preview builds use it (see preview-build.mjs); the heights
-and imagery are the same files the full build writes.
+--custom writes only what the custom globe follow-up reads (bordered heights,
+imagery and tileset.json) and needs only numpy and Pillow: the meshing
+libraries are not imported. Cloudflare preview builds use it (see
+preview-build.mjs); the files are the same ones the full build writes.
 """
 import io, json, math, os, sys, time, urllib.request
 from concurrent.futures import ThreadPoolExecutor
@@ -246,12 +248,17 @@ def build_height(z, x, y):
     write_height(z, x, y, heights_with_border(z, x, y)[2])
 
 def write_height(z, x, y, H):
-    # The same heights for the custom globe, Terrarium-encoded (R*256 + G + B/256 - 32768).
-    h = H[1:-1, 1:-1] + 32768
-    rgb = np.stack([np.floor(h / 256), np.floor(h) % 256, np.floor((h % 1) * 256)], -1).astype(np.uint8)
-    p = os.path.join(OUT, "height", str(z), str(x), f"{y}.png")
-    os.makedirs(os.path.dirname(p), exist_ok=True)
-    Image.fromarray(rgb).save(p, optimize=True)
+    # The same heights for the custom globes, Terrarium-encoded (R*256 + G + B/256 - 32768):
+    # height/ is the tile's own 65x65 grid; heightb/ keeps the one-sample border
+    # the grid was sampled with, so a tile's edge normals see its neighbours.
+    def save(dirname, grid):
+        h = grid + 32768
+        rgb = np.stack([np.floor(h / 256), np.floor(h) % 256, np.floor((h % 1) * 256)], -1).astype(np.uint8)
+        p = os.path.join(OUT, dirname, str(z), str(x), f"{y}.png")
+        os.makedirs(os.path.dirname(p), exist_ok=True)
+        Image.fromarray(rgb).save(p, optimize=True)
+    if not CUSTOM_ONLY: save("height", H[1:-1, 1:-1])
+    save("heightb", H)
 
 # ---- imagery: painted, unlit, seamless ----
 NE2_IMG = None
@@ -368,7 +375,7 @@ def main():
              "attribution": "Elevation: Terrain Tiles on AWS Open Data (Mapzen and contributors). Imagery painted from it and Natural Earth II."}
     if not CUSTOM_ONLY:
         with open(os.path.join(OUT, "terrain", "layer.json"), "w") as f: json.dump(layer, f)
-    tileset = {"scheme": "tms", "projection": "EPSG:4326", "terrainGrid": GRID, "imagerySize": IMG, "maxLevel": max(LEVELS),
+    tileset = {"scheme": "tms", "projection": "EPSG:4326", "terrainGrid": GRID, "borderedGrid": GRID + 2, "imagerySize": IMG, "maxLevel": max(LEVELS),
                "available": avail, "levelRects": {str(z): LEVELS[z] for z in LEVELS},
                "imageryGroups": [{"minLevel": 0, "maxLevel": 5, "rect": None}, {"minLevel": 6, "maxLevel": 8, "rect": LEVELS[6]},
                                  {"minLevel": 9, "maxLevel": 9, "rect": LEVELS[9]}, {"minLevel": 10, "maxLevel": 10, "rect": LEVELS[10]},

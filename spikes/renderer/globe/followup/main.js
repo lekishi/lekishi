@@ -395,21 +395,48 @@ function statsOverlay() {
 }
 
 // ---- bench: the flight in real time, frame times as the device delivers them ----
+// Beside the frame times it reports what could explain a long frame, so a
+// device run can be diagnosed from the pasted report alone: whether the page
+// was hidden (browsers stop drawing a hidden tab, which the frame clock would
+// otherwise count as a stall), whether the WebGL context was lost, how many
+// shader programs were compiled during the flight (the warm-up should leave
+// none), the longest main-thread task where the browser reports them, and
+// where in the flight the worst frames fell.
 let bench = null
 function startBench(seconds = 24) {
-  const box = document.getElementById("bench"), deltas = []; let t0 = null, lastT = null
+  const box = document.getElementById("bench"), frames = []; let t0 = null, lastT = null
   box.hidden = false; box.innerHTML = `<b>Measuring…</b> the flight plays for ${seconds} s in real time.`
   driving = false
+  const seen = { hidden: 0, hiddenMs: 0, hiddenAt: null, lost: 0, tasks: [] }
+  let spanned = false   // the next frame spans a hidden period: not a frame the reader saw
+  const onVisibility = () => {
+    spanned = true
+    if (document.hidden) { seen.hidden++; seen.hiddenAt = performance.now() }
+    else if (seen.hiddenAt !== null) { seen.hiddenMs += performance.now() - seen.hiddenAt; seen.hiddenAt = null }
+  }
+  const onLost = () => { seen.lost++ }
+  document.addEventListener("visibilitychange", onVisibility); canvas.addEventListener("webglcontextlost", onLost)
+  let tasks = null
+  if (PerformanceObserver.supportedEntryTypes?.includes("longtask")) {
+    tasks = new PerformanceObserver(list => { for (const e of list.getEntries()) seen.tasks.push(e.duration) }); tasks.observe({ type: "longtask" })
+  }
+  const programs0 = renderer.info.programs?.length ?? 0
   bench = {
     tick(now) {
       if (t0 === null) { t0 = now; lastT = now }
-      deltas.push(now - lastT); lastT = now
       const t = (now - t0) / 1000 / seconds
+      frames.push({ ms: now - lastT, t: Math.min(1, t), hidden: spanned }); lastT = now; spanned = false
       if (t >= 1) {
         bench = null
-        const d = deltas.slice(5).sort((a, b) => a - b), q = f => d[Math.min(d.length - 1, Math.floor(d.length * f))]
+        document.removeEventListener("visibilitychange", onVisibility); canvas.removeEventListener("webglcontextlost", onLost); tasks?.disconnect()
+        const all = frames.slice(5), d = all.filter(f => !f.hidden).map(f => f.ms).sort((a, b) => a - b), q = f => d[Math.min(d.length - 1, Math.floor(d.length * f))]
+        const worst = [...all].sort((a, b) => b.ms - a.ms).slice(0, 3).map(f => `${f.ms.toFixed(0)} ms at ${Math.round(f.t * 100)}%${f.hidden ? " (page hidden)" : ""}`).join(", ")
+        const compiled = (renderer.info.programs?.length ?? 0) - programs0, longest = seen.tasks.length ? Math.max(...seen.tasks) : null
         const report = [`device: ${navigator.userAgent}`, `viewport: ${innerWidth}×${innerHeight} @${devicePixelRatio}x · sse ${globe.maxSSE}`, `frames: ${d.length} in ${seconds} s (${(d.length / seconds).toFixed(1)} fps mean)`,
-          `frame time p50 ${q(0.5).toFixed(1)} ms · p95 ${q(0.95).toFixed(1)} ms · max ${d.at(-1).toFixed(0)} ms`, `frames over 33 ms: ${(100 * d.filter(x => x > 33.4).length / d.length).toFixed(1)}%`, `tiles: ${traffic().height.n} heights, ${traffic().imagery.n} imagery (${traffic().height.unique} distinct) · tile memory peak ${Math.round(globe.memoryPeak / 1048576)} of ${Math.round(globe.budget / 1048576)} MB`].join("\n")
+          `frame time p50 ${q(0.5).toFixed(1)} ms · p95 ${q(0.95).toFixed(1)} ms · max ${d.at(-1).toFixed(0)} ms`, `frames over 33 ms: ${(100 * d.filter(x => x > 33.4).length / d.length).toFixed(1)}%`, `tiles: ${traffic().height.n} heights, ${traffic().imagery.n} imagery (${traffic().height.unique} distinct) · tile memory peak ${Math.round(globe.memoryPeak / 1048576)} of ${Math.round(globe.budget / 1048576)} MB`,
+          `worst frames: ${worst} of the flight`,
+          `page hidden: ${seen.hidden ? `${seen.hidden}× for ${Math.round(seen.hiddenMs)} ms (frames spanning it left out of the figures above)` : "no"} · context lost: ${seen.lost ? seen.lost + "×" : "no"} · shaders compiled during the flight: ${compiled}`,
+          `longest main-thread task: ${longest === null ? "not reported by this browser" : `${Math.round(longest)} ms (${seen.tasks.filter(x => x > 100).length} over 100 ms)`}`].join("\n")
         box.innerHTML = `<b>Frame times on this device</b><pre>${report}</pre><button type="button" id="copyBench">Copy</button> <button type="button" id="closeBench">Close</button>`
         box.querySelector("#closeBench").onclick = () => { box.hidden = true }
         box.querySelector("#copyBench").onclick = () => navigator.clipboard.writeText(report).catch(() => {})

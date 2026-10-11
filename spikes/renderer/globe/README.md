@@ -89,6 +89,8 @@ captures it like the others, and adds:
   times on the device in hand, with what could explain a long frame: the page
   hidden, a lost WebGL context, shaders compiled during the flight, the longest
   main-thread task, and where in the flight the worst frames fell.
+- `?quality=phone` to start in the lighter tier (half the trees, no shadows),
+  for example `?bench=24&quality=phone` to bench a phone in both tiers.
 
 On any device, from the PR's Cloudflare Pages preview: preview builds (never
 `main`) run `preview-build.mjs` at the end of `pnpm build`, which generates the

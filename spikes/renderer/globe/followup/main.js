@@ -20,6 +20,9 @@ import { DrapedOverlay } from "./overlay.js"
 
 const T0 = performance.now()
 const qs = new URLSearchParams(location.search)
+// ?quality=phone starts in the lighter tier (half the trees, no shadows), so a
+// device can be benched in both tiers
+const startQuality = qs.get("quality") === "phone" ? "phone" : "full"
 let resolveReady; window.spike = { ready: new Promise(r => { resolveReady = r }), fly() {}, settled: async () => false, setQuality() {}, stats: () => ({ loading: true }) }
 
 const [spec, dio, tileset, extra] = await Promise.all(["../shared/scene.json", "../shared/diorama.json", "../tiles/tileset.json", "./followup.json"].map(u => fetch(u).then(r => r.json())))
@@ -32,7 +35,7 @@ const canvas = document.getElementById("c")
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, logarithmicDepthBuffer: true })
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2))
 renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05
-renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap
+renderer.shadowMap.enabled = startQuality === "full"; renderer.shadowMap.type = THREE.PCFSoftShadowMap
 renderer.setClearColor(new THREE.Color(spec.space))
 const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera(spec.fovDeg, 1, 1, 4e7)
@@ -194,7 +197,7 @@ function buildVegetation(fraction) {
   inst(trunkG, P.trunk, list, t => 0.8 + (t[4] % 0.1) * 4, forest)
   treeCount = list.length
 }
-buildVegetation(1)
+buildVegetation(startQuality === "phone" ? 0.5 : 1)
 // Houses are two instanced meshes (walls, and roofs coloured per house as tile
 // or thatch) and each ship is one vertex-coloured mesh: a draw call per kind of
 // thing rather than per part, which more than halves the diorama's draw calls.
@@ -283,7 +286,7 @@ controls.addEventListener("start", () => { driving = true; flightPose = null })
 // any input on the globe hands the camera to the controls (a wheel turn alone
 // does not fire their start event, so the first scroll after a flight was lost)
 for (const ev of ["pointerdown", "wheel", "touchstart"]) canvas.addEventListener(ev, () => { driving = true; flightPose = null }, { passive: true, capture: true })
-let flightPose = cameraAt(spec.flight, 0), range = flightPose.rangeM, quality = "full"
+let flightPose = cameraAt(spec.flight, 0), range = flightPose.rangeM, quality = startQuality
 const ray = new THREE.Ray()
 // Range as the reader experiences it: the distance from the camera to the
 // ground at the centre of the view (or the altitude, looking past the globe).
@@ -418,7 +421,7 @@ function startBench(seconds = 24) {
   document.addEventListener("visibilitychange", onVisibility); canvas.addEventListener("webglcontextlost", onLost)
   let tasks = null
   if (PerformanceObserver.supportedEntryTypes?.includes("longtask")) {
-    tasks = new PerformanceObserver(list => { for (const e of list.getEntries()) seen.tasks.push(e.duration) }); tasks.observe({ type: "longtask" })
+    tasks = new PerformanceObserver(list => { for (const e of list.getEntries()) seen.tasks.push({ ms: e.duration, at: e.startTime }) }); tasks.observe({ type: "longtask" })
   }
   const programs0 = renderer.info.programs?.length ?? 0
   bench = {
@@ -429,14 +432,18 @@ function startBench(seconds = 24) {
       if (t >= 1) {
         bench = null
         document.removeEventListener("visibilitychange", onVisibility); canvas.removeEventListener("webglcontextlost", onLost); tasks?.disconnect()
-        const all = frames.slice(5), d = all.filter(f => !f.hidden).map(f => f.ms).sort((a, b) => a - b), q = f => d[Math.min(d.length - 1, Math.floor(d.length * f))]
+        const all = frames.slice(1), d = all.filter(f => !f.hidden).map(f => f.ms).sort((a, b) => a - b), q = f => d[Math.min(d.length - 1, Math.floor(d.length * f))]
         const worst = [...all].sort((a, b) => b.ms - a.ms).slice(0, 3).map(f => `${f.ms.toFixed(0)} ms at ${Math.round(f.t * 100)}%${f.hidden ? " (page hidden)" : ""}`).join(", ")
-        const compiled = (renderer.info.programs?.length ?? 0) - programs0, longest = seen.tasks.length ? Math.max(...seen.tasks) : null
-        const report = [`device: ${navigator.userAgent}`, `viewport: ${innerWidth}×${innerHeight} @${devicePixelRatio}x · sse ${globe.maxSSE}`, `frames: ${d.length} in ${seconds} s (${(d.length / seconds).toFixed(1)} fps mean)`,
+        // a long task is reported when it ends, so one that began before the
+        // flight's first frame (the end of the warm-up) is counted apart
+        const compiled = (renderer.info.programs?.length ?? 0) - programs0, inFlight = seen.tasks.filter(x => x.at >= t0)
+        const longest = inFlight.reduce((a, x) => (a && a.ms >= x.ms ? a : x), null), before = seen.tasks.filter(x => x.at < t0).reduce((m, x) => Math.max(m, x.ms), 0)
+        const flightAt = ms => Math.round(Math.min(1, (ms - t0) / 1000 / seconds) * 100)
+        const report = [`device: ${navigator.userAgent}`, `viewport: ${innerWidth}×${innerHeight} @${devicePixelRatio}x (drawn at ${renderer.getPixelRatio()}x) · sse ${globe.maxSSE} · quality ${quality}`, `frames: ${d.length} in ${seconds} s (${(d.length / seconds).toFixed(1)} fps mean)`,
           `frame time p50 ${q(0.5).toFixed(1)} ms · p95 ${q(0.95).toFixed(1)} ms · max ${d.at(-1).toFixed(0)} ms`, `frames over 33 ms: ${(100 * d.filter(x => x > 33.4).length / d.length).toFixed(1)}%`, `tiles: ${traffic().height.n} heights, ${traffic().imagery.n} imagery (${traffic().height.unique} distinct) · tile memory peak ${Math.round(globe.memoryPeak / 1048576)} of ${Math.round(globe.budget / 1048576)} MB`,
           `worst frames: ${worst} of the flight`,
           `page hidden: ${seen.hidden ? `${seen.hidden}× for ${Math.round(seen.hiddenMs)} ms (frames spanning it left out of the figures above)` : "no"} · context lost: ${seen.lost ? seen.lost + "×" : "no"} · shaders compiled during the flight: ${compiled}`,
-          `longest main-thread task: ${longest === null ? "not reported by this browser" : `${Math.round(longest)} ms (${seen.tasks.filter(x => x > 100).length} over 100 ms)`}`].join("\n")
+          `longest main-thread task: ${!tasks ? "not reported by this browser" : `${longest === null ? "none over 50 ms" : `${Math.round(longest.ms)} ms at ${flightAt(longest.at)}% (${inFlight.filter(x => x.ms > 100).length} over 100 ms)`} during the flight${before ? `; ${Math.round(before)} ms ending as it began` : ""}`}`].join("\n")
         box.innerHTML = `<b>Frame times on this device</b><pre>${report}</pre><button type="button" id="copyBench">Copy</button> <button type="button" id="closeBench">Close</button>`
         box.querySelector("#closeBench").onclick = () => { box.hidden = true }
         box.querySelector("#copyBench").onclick = () => navigator.clipboard.writeText(report).catch(() => {})

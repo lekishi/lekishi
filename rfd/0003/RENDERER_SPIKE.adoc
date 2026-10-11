@@ -1034,6 +1034,33 @@ mid-range phone. The results belong in this table.
 | 0.7%
 | 538 requests, 479 distinct; peak 258 MB against a 256 MB budget
 
+| Desktop, after the shader warm-up (2026-10-11)
+| Chrome 154 on Linux, 1916 × 883 at 1×
+| 44.1
+| 16.7 ms
+| 17.3 ms
+| 6,340 ms (one frame; unexplained, see below)
+| 0.1%
+| 549 requests, 490 distinct; peak 258 MB against a 256 MB budget
+
+| Laptop screen, after the shader warm-up (2026-10-11)
+| Firefox 154 on Linux, 2129 × 1094 at 1.2×, a high-refresh display
+| 159.6
+| 6.0 ms
+| 7.0 ms
+| 197 ms
+| 0.1%
+| 618 requests, 542 distinct; peak 256 MB against a 256 MB budget
+
+| Laptop screen, after the shader warm-up (2026-10-11)
+| Chrome 154 on Linux, 2129 × 1062 at 1.2×, a high-refresh display
+| 164.8
+| 6.1 ms
+| 6.3 ms
+| 13 ms
+| 0.0%
+| 677 requests, 562 distinct; peak 256 MB against a 256 MB budget
+
 | iPad, the first round's (2026-10-11)
 | Chrome 155 on iPadOS 26.6.2 (WebKit), 1180 × 682 at 2× (landscape; the first round ran in portrait)
 | 59.8
@@ -1090,6 +1117,24 @@ doing. The window was 1916 × 891 rather than the evaluation's 1920 × 1080, so
 about a sixth fewer pixels; at one device pixel per CSS pixel it fetched more
 distinct tiles than the iPad or iPhone (479 against about 390), because a wider
 view sees more of the ground.
+
+Chrome on the same 1916-pixel desktop held 60 Hz for every frame but one,
+which took 6,340 ms: 1,059 frames in 24 s is what a 60 Hz display draws in the
+18 s left over. One frame that long fails the evaluation's 500 ms stall limit
+as measured. The bench of that run could not say why. The page may have been
+hidden or its window covered, which stops a browser drawing it; the GPU
+process may have stalled; or the WebGL context may have been lost and
+restored. The bench now reports each of these, the shaders compiled during
+the flight and the longest main-thread task, and a re-run in Chrome on that
+screen will say which, or show that it does not recur. On the laptop's own
+screen, at a larger viewport and 1.2 device pixels per CSS pixel, Chrome's
+worst frame was 13 ms.
+
+On the laptop's screen both browsers ran at its high refresh rate, a median
+frame of about 6 ms against the 33 ms the desktop limit allows at the
+95th percentile. Firefox's worst frame there was 197 ms, under the 300 ms
+fly-to freeze limit; Chrome's was 13 ms. The larger viewport fetched more
+tiles (542 and 562 distinct) and filled the 256 MB budget, which held.
 
 The iPhone's 95th percentile fell from 21.0 ms to 17.0 ms and its frames over
 33 ms from 0.8% to 0.1%, but one frame took 808 ms: a visible freeze, over the

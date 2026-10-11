@@ -26,7 +26,10 @@ const G = 65, B = G + 2
 const TEXTURE_BYTES = 256 * 256 * 4 * 4 / 3   // an imagery texture with its mipmaps
 
 // One index buffer layout serves every tile: the grid, then the skirt ring
-// (edge vertices in ring order, matching tile-worker.js).
+// (edge vertices in ring order, matching tile-worker.js). The ring runs
+// clockwise seen from above, so the skirt triangles are wound to face out of
+// the tile: a crack at a level boundary is seen from the neighbouring tile, and
+// an inward-facing skirt would be culled from there, showing the background.
 const INDEX = (() => {
   const edge = []
   for (let c = 0; c < G - 1; c++) edge.push(c)
@@ -35,7 +38,7 @@ const INDEX = (() => {
   for (let r = G - 1; r > 0; r--) edge.push(r * G)
   const n = G * G, ring = edge.length, idx = []
   for (let r = 0; r < G - 1; r++) for (let c = 0; c < G - 1; c++) { const a = r * G + c, b = a + G; idx.push(a, b, a + 1, a + 1, b, b + 1) }
-  for (let k = 0; k < ring; k++) { const a = edge[k], b = edge[(k + 1) % ring], sa = n + k, sb = n + (k + 1) % ring; idx.push(a, sa, b, b, sa, sb) }
+  for (let k = 0; k < ring; k++) { const a = edge[k], b = edge[(k + 1) % ring], sa = n + k, sb = n + (k + 1) % ring; idx.push(a, b, sa, b, sb, sa) }
   return new Uint16Array(idx)
 })()
 

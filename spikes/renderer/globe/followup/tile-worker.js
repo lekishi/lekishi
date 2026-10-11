@@ -72,7 +72,11 @@ function subdivide(p, qx, qy) {
 // quadrant of the parent's texture for virtual tiles), and a second UV set
 // spanning the tile for draped overlays.
 function buildMesh(h, { b, K, uv: [u0, v0, u1, v1] }) {
-  const n = G * G, ring = 4 * (G - 1), skirt = Math.max(50, 77067 / 2 ** b.z * 2)
+  // The skirt must reach below the edge of a coarser neighbour, which can sit a
+  // level's geometric error away, exaggerated, and two levels coarser where the
+  // haze relaxes detail; shorter skirts let the background show through as dark
+  // cracks at level boundaries.
+  const n = G * G, ring = 4 * (G - 1), skirt = Math.max(100, 77067 / 2 ** b.z * K * 4)
   const cx = toEcef((b.w + b.e) / 2, (b.s + b.n) / 2, 0)
   const P = new Float64Array(B * B * 3)
   let lo = Infinity, hi = -Infinity

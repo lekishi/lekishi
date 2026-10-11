@@ -1019,10 +1019,29 @@ mid-range phone. The results belong in this table.
 | Device | Browser and viewport | Mean fps | Median frame | 95th percentile | Worst frame | Over 33 ms | Tiles (requests, distinct) and peak tile memory
 
 | Desktop | not yet run | | | | | |
-| iPad | not yet run | | | | | |
+
+| iPad, the first round's (2026-10-11)
+| Chrome 155 on iPadOS 26.6.2 (WebKit), 1180 × 682 at 2× (landscape; the first round ran in portrait)
+| 59.8
+| 17.0 ms
+| 17.0 ms
+| 72 ms
+| 0.1%
+| 521 requests, 385 distinct; peak 160 MB against a 128 MB budget
+
 | iPhone | not yet run | | | | | |
 | Mid-range phone | not yet run | | | | | |
 |===
+
+On the iPad the 95th-percentile frame fell from 30.0 ms to 17.0 ms, so at
+least 95% of frames now fit the display's 60 Hz refresh; frames over 33 ms
+fell from 2.7% to 0.1% and the worst frame from 99 ms to 72 ms. Moving tile
+loading into workers is the change that touches those frames.
+
+The budget is a soft limit by design: only tiles unused for 1.5 s are evicted,
+never one on screen or a parent of one, so a fast flight's working set can pass
+it (here by a quarter). The 136 repeated requests were tiles evicted and needed
+again, which a deployed site answers from the browser's HTTP cache.
 
 === What remains open
 

@@ -43,7 +43,9 @@ sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0005
 Object.assign(sun.shadow.camera, { left: -40000, right: 40000, top: 40000, bottom: -40000, near: 1000, far: 400000 })
 
 // ---- the globe, with the draped polygon as an overlay ----
-const overlay = new DrapedOverlay(extra.polygons.map(p => ({ id: p.id, rings: p.rings, fill: p.fill, stroke: p.stroke, widthPx: p.widthPx })))
+// Fills are draped into the tiles; outlines are screen-space lines (below), so
+// their width does not step where tiles of different levels meet.
+const overlay = new DrapedOverlay(extra.polygons.map(p => ({ id: p.id, rings: p.rings, fill: p.fill })))
 // Phones and tablets get a smaller GPU memory budget for tiles (?mem= overrides, in MB).
 const coarse = matchMedia("(pointer: coarse)").matches
 const globe = new Globe({ tilesUrl: new URL(spec.tiles, location.href).href, tileset, exaggeration: K, maxSSE: +(qs.get("sse") ?? 4.5), overlay, memoryBudgetMB: +(qs.get("mem") ?? (coarse ? 96 : 160)) })
@@ -124,6 +126,43 @@ const arcs = extra.arcs.map(a => {
   const p = polyline(pts, { colors: cols, width: 2.5 })
   return { ...p, spec: a, mid: V(pts[48]) }
 })
+
+// Province outlines: a constant-width line laid on the terrain. Its points
+// are densified to about a kilometre, take their heights from the finest
+// loaded tiles, and are lifted a little in proportion to the viewing range so
+// a coarser tile drawn under them never swallows the line. They are refreshed
+// when new tiles load or the range changes by a third.
+const outlines = extra.polygons.map(pg => {
+  const ring = []
+  pg.rings[0].forEach((a, i, r) => {
+    if (i === r.length - 1) return
+    const b = r[i + 1], n = Math.max(1, Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1]) / 0.01))
+    for (let k = 0; k < n; k++) ring.push([a[0] + (b[0] - a[0]) * k / n, a[1] + (b[1] - a[1]) * k / n])
+  })
+  ring.push(ring[0])
+  const o = toEcef(ring[0][0], ring[0][1], 0)
+  const m = new LineMaterial({ color: new THREE.Color(pg.stroke), linewidth: pg.widthPx ?? 2.5, worldUnits: false })
+  lineMats.push(m)
+  const g = new LineGeometry(); g.setPositions(new Array(ring.length * 3).fill(0))
+  const l = new Line2(g, m); l.position.set(...o); l.updateMatrixWorld(); l.frustumCulled = false; l.raycast = () => {}; scene.add(l)
+  return { ring, origin: o, line: l, version: -1, lift: 0 }
+})
+function updateOutlines() {
+  const lift = Math.max(20, range * 0.003)
+  for (const ol of outlines) {
+    const liftOk = Math.abs(lift / ol.lift - 1) < 0.33
+    // while tiles stream, at most every fifth frame; once settled, at once
+    if (liftOk && (ol.version === globe.version || (frameNo - (ol.at ?? -9) < 5 && !globe.settled))) continue
+    ol.at = frameNo
+    const pos = []
+    for (const [lon, lat] of ol.ring) {
+      const p = toEcef(lon, lat, (globe.heightAt(lon, lat) ?? 0) + lift)
+      pos.push(p[0] - ol.origin[0], p[1] - ol.origin[1], p[2] - ol.origin[2])
+    }
+    ol.line.geometry.dispose(); ol.line.geometry = new LineGeometry(); ol.line.geometry.setPositions(pos)
+    ol.version = globe.version; ol.lift = lift
+  }
+}
 
 // ---- the diorama, in exact Earth coordinates, every symbol pickable ----
 const P = dio.palette, UM = dio.unitMetres, C = spec.diorama.center
@@ -246,6 +285,7 @@ function afterCamera() {
   sun.target.position.copy(near ? origin : look); sun.position.copy(sun.target.position).addScaledVector(SUN, 200000); sun.target.updateMatrixWorld()
   voyage.mat.dashSize = voyage.mat.gapSize = Math.max(6, range / 90)
   updateAtmosphere()
+  updateOutlines()
 }
 function resize() {
   const w = canvas.clientWidth || innerWidth, h = canvas.clientHeight || innerHeight

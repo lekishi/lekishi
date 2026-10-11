@@ -47,9 +47,11 @@ Object.assign(sun.shadow.camera, { left: -40000, right: 40000, top: 40000, botto
 // Fills are draped into the tiles; outlines are screen-space lines (below), so
 // their width does not step where tiles of different levels meet.
 const overlay = new DrapedOverlay(extra.polygons.map(p => ({ id: p.id, rings: p.rings, fill: p.fill })))
-// Phones and tablets get a smaller GPU memory budget for tiles (?mem= overrides, in MB).
+// GPU memory for tiles (?mem= overrides, in MB). At 256 MB the shared flight
+// never re-fetches a tile (396 distinct, 396 requests); phones and tablets get
+// half, and a tile they evict and need again comes from the HTTP cache.
 const coarse = matchMedia("(pointer: coarse)").matches
-const globe = new Globe({ tilesUrl: new URL(spec.tiles, location.href).href, tileset, exaggeration: K, maxSSE: +(qs.get("sse") ?? 4.5), overlay, memoryBudgetMB: +(qs.get("mem") ?? (coarse ? 96 : 160)) })
+const globe = new Globe({ tilesUrl: new URL(spec.tiles, location.href).href, tileset, exaggeration: K, maxSSE: +(qs.get("sse") ?? 4.5), overlay, memoryBudgetMB: +(qs.get("mem") ?? (coarse ? 128 : 256)) })
 scene.add(globe.group)
 
 // ---- atmosphere rim (never picked) ----

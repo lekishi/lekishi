@@ -406,7 +406,7 @@ function startBench(seconds = 24) {
         bench = null
         const d = deltas.slice(5).sort((a, b) => a - b), q = f => d[Math.min(d.length - 1, Math.floor(d.length * f))]
         const report = [`device: ${navigator.userAgent}`, `viewport: ${innerWidth}×${innerHeight} @${devicePixelRatio}x · sse ${globe.maxSSE}`, `frames: ${d.length} in ${seconds} s (${(d.length / seconds).toFixed(1)} fps mean)`,
-          `frame time p50 ${q(0.5).toFixed(1)} ms · p95 ${q(0.95).toFixed(1)} ms · max ${d.at(-1).toFixed(0)} ms`, `frames over 33 ms: ${(100 * d.filter(x => x > 33.4).length / d.length).toFixed(1)}%`, `tiles: ${traffic().height.n} heights, ${traffic().imagery.n} imagery`].join("\n")
+          `frame time p50 ${q(0.5).toFixed(1)} ms · p95 ${q(0.95).toFixed(1)} ms · max ${d.at(-1).toFixed(0)} ms`, `frames over 33 ms: ${(100 * d.filter(x => x > 33.4).length / d.length).toFixed(1)}%`, `tiles: ${traffic().height.n} heights, ${traffic().imagery.n} imagery · tile memory peak ${Math.round(globe.memoryPeak / 1048576)} of ${Math.round(globe.budget / 1048576)} MB`].join("\n")
         box.innerHTML = `<b>Frame times on this device</b><pre>${report}</pre><button type="button" id="copyBench">Copy</button> <button type="button" id="closeBench">Close</button>`
         box.querySelector("#closeBench").onclick = () => { box.hidden = true }
         box.querySelector("#copyBench").onclick = () => navigator.clipboard.writeText(report).catch(() => {})
@@ -430,6 +430,19 @@ Object.assign(window.spike, {
   // screen position of a geodetic point, for scripted picking tests
   screenOf(lon, lat, h = 0) { const r = canvas.getBoundingClientRect(); v3.set(...toEcef(lon, lat, h)).project(camera); return { x: r.left + (v3.x + 1) / 2 * r.width, y: r.top + (1 - v3.y) / 2 * r.height, front: v3.z < 1 } },
   explore() { flightPose = null; driving = true },   // hand the camera to the controls without a pointer event
+  // milliseconds per raycast against the drawn tiles, with the tiles' block
+  // raycast and with three's default one, and the largest disagreement in metres
+  raycastCost(n = 30) {
+    const rays = Array.from({ length: n }, (_, i) => new THREE.Vector2((i % 5) / 5 - 0.4, Math.floor(i / 5) / 6 - 0.4))
+    const run = fast => {
+      for (const m of globe.group.children) if (m.userData.tile) m.raycast = fast ? m.userData.fastRaycast ??= m.raycast : THREE.Mesh.prototype.raycast
+      const t0 = performance.now(), d = rays.map(v => { raycaster.setFromCamera(v, camera); return raycaster.intersectObject(globe.group, true)[0]?.distance ?? null })
+      return { ms: (performance.now() - t0) / n, d }
+    }
+    const fast = run(true), slow = run(false); run(true)
+    const diff = Math.max(0, ...fast.d.map((x, i) => x === null || slow.d[i] === null ? (x === slow.d[i] ? 0 : Infinity) : Math.abs(x - slow.d[i])))
+    return { fastMs: +fast.ms.toFixed(3), defaultMs: +slow.ms.toFixed(3), maxDiffM: +diff.toFixed(3), hits: fast.d.filter(x => x !== null).length, tiles: globe.selected.length }
+  },
   // tile bookkeeping by state and level, for tests of eviction and cancellation
   tileCensus() {
     const out = {}

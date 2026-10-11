@@ -39,6 +39,31 @@ const INDEX = (() => {
   return new Uint16Array(idx)
 })()
 
+// Ray against a tile: the 64 block boxes first, then only the triangles of
+// blocks the ray crosses (skirts are left out; they hang below the surface).
+// About a hundredth of the triangle tests of three's default raycast, which
+// matters because the camera controls raycast the terrain every frame.
+const _ray = new THREE.Ray(), _box = new THREE.Box3(), _sph = new THREE.Sphere(), _a = new THREE.Vector3(), _b = new THREE.Vector3(), _c = new THREE.Vector3(), _hit = new THREE.Vector3(), _best = new THREE.Vector3()
+function tileRaycast(raycaster, intersects) {
+  const blocks = this.userData.blocks, pos = this.geometry.attributes.position.array
+  _sph.copy(this.geometry.boundingSphere).translate(this.position)
+  if (!raycaster.ray.intersectsSphere(_sph)) return
+  _ray.copy(raycaster.ray); _ray.origin.sub(this.position)   // tile meshes are only translated
+  let best = Infinity
+  const tri = (i, j, k) => {
+    _a.fromArray(pos, i * 3); _b.fromArray(pos, j * 3); _c.fromArray(pos, k * 3)
+    if (_ray.intersectTriangle(_a, _b, _c, false, _hit)) { const d = _hit.distanceTo(_ray.origin); if (d < best) { best = d; _best.copy(_hit) } }
+  }
+  for (let k = 0; k < 64; k++) {
+    _box.min.fromArray(blocks, k * 6).subScalar(1); _box.max.fromArray(blocks, k * 6 + 3).addScalar(1)
+    if (!_ray.intersectsBox(_box)) continue
+    const r0 = (k >> 3) * 8, c0 = (k & 7) * 8
+    for (let r = r0; r < r0 + 8; r++) for (let c = c0; c < c0 + 8; c++) { const a = r * G + c, b = a + G; tri(a, b, a + 1); tri(a + 1, b, b + 1) }
+  }
+  if (best === Infinity || best < raycaster.near || best > raycaster.far) return
+  intersects.push({ distance: best, point: _best.clone().add(this.position), object: this })
+}
+
 export class Globe {
   constructor({ tilesUrl, tileset, exaggeration, maxSSE = 3, overlay = null, maxInflight = 12, memoryBudgetMB = 160 }) {
     this.url = tilesUrl; this.avail = tileset.available; this.maxLevel = tileset.maxLevel
@@ -189,7 +214,8 @@ export class Globe {
     t.mesh = new THREE.Mesh(geo, this.material(t.texture, t.overlayTex))
     t.mesh.position.set(...m.center); t.mesh.matrixAutoUpdate = false; t.mesh.updateMatrix(); t.mesh.updateMatrixWorld(true)
     t.mesh.receiveShadow = true; t.mesh.frustumCulled = false; t.mesh.userData.tile = t
-    t.bytes = m.pos.byteLength + m.nor.byteLength + m.uv.byteLength + m.ouv.byteLength + INDEX.byteLength + (t.virtual ? 0 : TEXTURE_BYTES) + (t.overlayTex ? 256 * 256 * 4 : 0)
+    t.mesh.userData.blocks = m.blocks; t.mesh.raycast = tileRaycast
+    t.bytes = m.blocks.byteLength + m.pos.byteLength + m.nor.byteLength + m.uv.byteLength + m.ouv.byteLength + INDEX.byteLength + (t.virtual ? 0 : TEXTURE_BYTES) + (t.overlayTex ? 256 * 256 * 4 : 0)
   }
 
   // ---- selection ----
@@ -237,7 +263,7 @@ export class Globe {
   evict() {
     let used = 0
     for (const t of this.tiles.values()) used += t.bytes
-    this.memoryBytes = used
+    this.memoryBytes = used; this.memoryPeak = Math.max(this.memoryPeak ?? 0, used)
     if (used > this.budget) {
       const old = [...this.tiles.values()].filter(t => t.z > 0 && t.state === "ready" && this.stale(t, 1500)).sort((a, b) => a.lastUsedT - b.lastUsedT)
       for (const t of old) {

@@ -102,9 +102,25 @@ function buildMesh(h, { b, K, uv: [u0, v0, u1, v1] }) {
     pos[j * 3] = pos[i * 3] - px / l * skirt; pos[j * 3 + 1] = pos[i * 3 + 1] - py / l * skirt; pos[j * 3 + 2] = pos[i * 3 + 2] - pz / l * skirt
     nor.copyWithin(j * 3, i * 3, i * 3 + 3); uv.copyWithin(j * 2, i * 2, i * 2 + 2); ouv.copyWithin(j * 2, i * 2, i * 2 + 2)
   })
-  return { center: cx, pos, nor, uv, ouv, minH: lo, maxH: hi }
+  return { center: cx, pos, nor, uv, ouv, blocks: blockBoxes(pos), minH: lo, maxH: hi }
 }
-const transfers = m => [m.pos.buffer, m.nor.buffer, m.uv.buffer, m.ouv.buffer]
+const transfers = m => [m.pos.buffer, m.nor.buffer, m.uv.buffer, m.ouv.buffer, m.blocks.buffer]
+
+// Bounding boxes of the grid in 8x8 blocks of 8x8 cells (tile-local), so a ray
+// tests only the triangles of the blocks it crosses: the camera controls cast
+// rays at the terrain every frame while the reader drags or zooms.
+function blockBoxes(pos) {
+  const out = new Float32Array(64 * 6)
+  for (let k = 0; k < 64; k++) {
+    const r0 = (k >> 3) * 8, c0 = (k & 7) * 8, box = [Infinity, Infinity, Infinity, -Infinity, -Infinity, -Infinity]
+    for (let r = r0; r <= r0 + 8; r++) for (let c = c0; c <= c0 + 8; c++) {
+      const i = (r * G + c) * 3
+      for (let a = 0; a < 3; a++) { box[a] = Math.min(box[a], pos[i + a]); box[a + 3] = Math.max(box[a + 3], pos[i + a]) }
+    }
+    out.set(box, k * 6)
+  }
+  return out
+}
 
 // Edge vertices in ring order (top row east, right column south, bottom row west, left column north).
 let EDGE = null

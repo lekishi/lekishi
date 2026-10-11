@@ -1045,8 +1045,20 @@ mid-range phone. The results belong in this table.
 | 0.1%
 | 498 requests, 386 distinct; peak 162 MB against a 128 MB budget
 
+| iPhone, after the shader warm-up (2026-10-11)
+| Chrome 155 on iOS 26.7.1 (WebKit), 402 × 684 at 3×, drawn at 2×
+| 59.9
+| 17.0 ms
+| 17.0 ms
+| 24 ms
+| 0.0%
+| 490 requests, 378 distinct; peak 155 MB against a 128 MB budget
+
 | Mid-range phone | not yet run | | | | | |
 |===
+
+After the shader warm-up below, the iPhone held its 60 Hz refresh for the
+whole flight: the worst frame was 24 ms and no frame took longer than 33 ms.
 
 The iPhone's 95th percentile fell from 21.0 ms to 17.0 ms and its frames over
 33 ms from 0.8% to 0.1%, but one frame took 808 ms: a visible freeze, over the
@@ -1061,7 +1073,7 @@ transition the flight makes (three keys them by the previous frame's light
 state), the tiles with and without a draped fill, and the camera controls'
 pivot marker. In the container no program is compiled during the flight, a
 drag, a tilt or a zoom; the globe appears at 1.5 s and is ready to fly at
-2.4 s. The iPhone and iPad rows above predate this fix and are to be re-run.
+2.4 s. The first iPhone and the iPad rows above predate this fix; the iPhone's re-run is the row after them.
 
 On the iPad the 95th-percentile frame fell from 30.0 ms to 17.0 ms, so at
 least 95% of frames now fit the display's 60 Hz refresh; frames over 33 ms

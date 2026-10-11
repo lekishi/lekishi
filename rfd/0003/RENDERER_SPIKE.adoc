@@ -943,6 +943,13 @@ link:spike/globe/engine/[`rfd/0003/spike/globe/engine/`].
   outward and reach a two-level drop at the exaggerated scale.
 | The phone still before and after the fix; the published evidence is after.
 
+| Found in the second hardware round: an 808 ms freeze on the iPhone as the diorama came into view
+| Every shader program the flight, the controls and the phone tier need is
+  compiled while the globe is first on screen (details under the second
+  hardware round).
+| No program compiles during the flight, a drag, a tilt or a zoom (27 programs
+  at ready, 27 after).
+
 | Not measured before: recovery from a lost WebGL context
 | None needed: three.js restores the context and re-uploads from the tiles'
   retained sources.
@@ -1029,9 +1036,32 @@ mid-range phone. The results belong in this table.
 | 0.1%
 | 521 requests, 385 distinct; peak 160 MB against a 128 MB budget
 
-| iPhone | not yet run | | | | | |
+| iPhone, the first round's (2026-10-11)
+| Chrome 155 on iOS 26.7.1 (WebKit), 402 × 684 at 3×, drawn at 2×
+| 57.7
+| 17.0 ms
+| 17.0 ms
+| 808 ms (one stall; fixed since, see below)
+| 0.1%
+| 498 requests, 386 distinct; peak 162 MB against a 128 MB budget
+
 | Mid-range phone | not yet run | | | | | |
 |===
+
+The iPhone's 95th percentile fell from 21.0 ms to 17.0 ms and its frames over
+33 ms from 0.8% to 0.1%, but one frame took 808 ms: a visible freeze, over the
+evaluation's 300 ms limit for a fly-to. Counting shader programs showed why:
+six were compiled at load, one more when the province fill first appeared,
+and eleven in a single frame when the diorama came into view (its materials,
+the sky and the shadow pass). iOS compiles slowly. The page now compiles
+every program the flight needs while the globe is first on screen, before
+the reader can fly anywhere: the diorama's materials from its own viewpoint,
+the shadow pass's depth programs through the same unshadowed-to-shadowed
+transition the flight makes (three keys them by the previous frame's light
+state), the tiles with and without a draped fill, and the camera controls'
+pivot marker. In the container no program is compiled during the flight, a
+drag, a tilt or a zoom; the globe appears at 1.5 s and is ready to fly at
+2.4 s. The iPhone and iPad rows above predate this fix and are to be re-run.
 
 On the iPad the 95th-percentile frame fell from 30.0 ms to 17.0 ms, so at
 least 95% of frames now fit the display's 60 Hz refresh; frames over 33 ms

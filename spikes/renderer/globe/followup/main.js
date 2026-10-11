@@ -11,6 +11,7 @@ import * as THREE from "three"
 import { Line2 } from "three/addons/lines/Line2.js"
 import { LineMaterial } from "three/addons/lines/LineMaterial.js"
 import { LineGeometry } from "three/addons/lines/LineGeometry.js"
+import { mergeGeometries } from "three/addons/utils/BufferGeometryUtils.js"
 import { GlobeControls } from "3d-tiles-renderer/src/three/renderer/controls/GlobeControls.js"
 import { WGS84_ELLIPSOID } from "3d-tiles-renderer/src/three/renderer/math/GeoConstants.js"
 import { cameraAt, eyeFor, toEcef, enu, sunDirection, tileTraffic } from "../shared/flight.js"
@@ -192,25 +193,41 @@ function buildVegetation(fraction) {
   treeCount = list.length
 }
 buildVegetation(1)
+// Houses are two instanced meshes (walls, and roofs coloured per house as tile
+// or thatch) and each ship is one vertex-coloured mesh: a draw call per kind of
+// thing rather than per part, which more than halves the diorama's draw calls.
 {
   const boxG = new THREE.BoxGeometry(1.4 * UM, 0.9 * UM, 1.1 * UM); boxG.translate(0, 0.45 * UM, 0)
   const roofG = new THREE.ConeGeometry(1.05 * UM, 0.8 * UM, 4); roofG.rotateY(Math.PI / 4); roofG.translate(0, 1.3 * UM, 0); roofG.scale(1, 1, 0.8)
-  const wall = new THREE.MeshStandardMaterial({ color: new THREE.Color(P.wall), roughness: 0.9 }), roof = new THREE.MeshStandardMaterial({ color: new THREE.Color(P.roof), roughness: 0.9 }), thatch = new THREE.MeshStandardMaterial({ color: new THREE.Color(P.thatch), roughness: 1 })
   const village = { name: "集落", rom: "SETTLEMENT · SYMBOLIC", kind: "settlement symbol", caveat: "Houses placed by seed around the named places; symbolic, not excavated sites." }
-  for (const h of dio.houses.items) {
-    const g = new THREE.Group(); g.position.copy(local(h[0], h[1], h[2] * K - 5)); g.rotation.y = h[3]; g.scale.setScalar(h[4]); g.userData.pick = village
-    const a = new THREE.Mesh(boxG, wall), b = new THREE.Mesh(roofG, h[5] ? thatch : roof); a.castShadow = b.castShadow = true; g.add(a, b); frame.add(g)
-  }
+  const items = dio.houses.items, n = items.length
+  const walls = new THREE.InstancedMesh(boxG, new THREE.MeshStandardMaterial({ color: new THREE.Color(P.wall), roughness: 0.9 }), n)
+  const roofs = new THREE.InstancedMesh(roofG, new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.95 }), n)
+  const M = new THREE.Matrix4(), Q = new THREE.Quaternion(), S = new THREE.Vector3(), Y = new THREE.Vector3(0, 1, 0)
+  const tile = new THREE.Color(P.roof), thatch = new THREE.Color(P.thatch)
+  items.forEach((h, i) => {
+    M.compose(local(h[0], h[1], h[2] * K - 5), Q.setFromAxisAngle(Y, h[3]), S.setScalar(h[4]))
+    walls.setMatrixAt(i, M); roofs.setMatrixAt(i, M); roofs.setColorAt(i, h[5] ? thatch : tile)
+  })
+  for (const m of [walls, roofs]) { m.castShadow = true; m.receiveShadow = true; m.frustumCulled = false; m.computeBoundingSphere(); m.userData.pick = village; frame.add(m) }
 }
 spec.ships.forEach(s => {
-  const g = new THREE.Group(); g.position.copy(local(s.lon, s.lat, 35)); g.rotation.y = s.headingRad; g.scale.setScalar(s.scale * UM)
-  g.userData.pick = { name: s.label ? s.label.split(" · ")[0] : "遣唐使船", rom: s.label ? `SHIP 2 · ${s.label.split(" · ")[1] ?? ""}`.trim() : "SHIP 4", kind: "vessel (schematic)", caveat: "A schematic 遣唐使船 at its recorded position; hull and rig are not reconstructed." }
-  const add = (geo, color, x, y, z, ry = 0) => { const m = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color: new THREE.Color(color), roughness: 0.85, side: THREE.DoubleSide })); m.position.set(x, y, z); m.rotation.y = ry; m.castShadow = true; g.add(m); return m }
+  const parts = []
+  const add = (geo, color, x, y, z, ry = 0, sz = 1) => {
+    geo.applyMatrix4(new THREE.Matrix4().compose(new THREE.Vector3(x, y, z), new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), ry), new THREE.Vector3(1, 1, sz)))
+    const c = new THREE.Color(color), n = geo.attributes.position.count, col = new Float32Array(n * 3)
+    for (let i = 0; i < n; i++) col.set([c.r, c.g, c.b], i * 3)
+    geo.setAttribute("color", new THREE.BufferAttribute(col, 3)); parts.push(geo)
+  }
   add(new THREE.BoxGeometry(7, 1.3, 2.4), P.hull, 0, 0.4, 0); add(new THREE.BoxGeometry(5.6, 0.5, 2.0), P.deck, 0, 1.25, 0); add(new THREE.BoxGeometry(2.2, 1.2, 1.6), P.wall, -1.2, 2.05, 0)
-  const cr = add(new THREE.ConeGeometry(1.5, 0.7, 4), P.roof, -1.2, 3.0, 0, Math.PI / 4); cr.scale.set(1, 1, 0.75)
+  add(new THREE.ConeGeometry(1.5, 0.7, 4), P.roof, -1.2, 3.0, 0, Math.PI / 4, 0.75)
   for (const mx of [1.9, -0.2]) { add(new THREE.CylinderGeometry(0.1, 0.14, 7, 6), "#3a2616", mx, 4.5, 0); add(new THREE.PlaneGeometry(3.2, 3.6), P.sail, mx + 0.3, 5.0, 0, Math.PI / 2) }
   add(new THREE.PlaneGeometry(1.4, 0.8), P.flag, 2.0, 8.4, 0, Math.PI / 2)
-  frame.add(g)
+  const ship = new THREE.Mesh(mergeGeometries(parts), new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.85, side: THREE.DoubleSide }))
+  parts.forEach(g => g.dispose())
+  ship.position.copy(local(s.lon, s.lat, 35)); ship.rotation.y = s.headingRad; ship.scale.setScalar(s.scale * UM); ship.castShadow = true
+  ship.userData.pick = { name: s.label ? s.label.split(" · ")[0] : "遣唐使船", rom: s.label ? `SHIP 2 · ${s.label.split(" · ")[1] ?? ""}`.trim() : "SHIP 4", kind: "vessel (schematic)", caveat: "A schematic 遣唐使船 at its recorded position; hull and rig are not reconstructed." }
+  frame.add(ship)
 })
 
 // ---- labels (HTML, clickable) ----

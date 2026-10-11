@@ -355,9 +355,10 @@ function geo(p) {
 }
 
 // ---- frame loop, settling, stats ----
-let frames = 0, fps = 0, acc = 0, last = performance.now(), frameMs = 0, loadMs = 0, frameNo = 0
+let frames = 0, fps = 0, acc = 0, last = performance.now(), frameMs = 0, loadMs = 0, readyMs = 0, frameNo = 0, warming = false
 const waiters = new Set()
 function render() {
+  if (warming) return
   const t = performance.now()
   if (driving) controls.update()
   afterCamera()
@@ -383,7 +384,7 @@ const bundleKB = Math.round(performance.getEntriesByType("resource").filter(e =>
 function stats() {
   const i = renderer.info.render
   return { fps: +fps.toFixed(1), frameMs: +frameMs.toFixed(2), drawCalls: i.calls, triangles: i.triangles, memoryMB: performance.memory ? +(performance.memory.usedJSHeapSize / 1048576).toFixed(1) : null,
-    loadMs, bundleKB, tilesLoaded: globe.loadedCount, tilesDrawn: globe.selected.length, maxSSE: globe.maxSSE, trees: treeCount, rangeM: Math.round(range), traffic: traffic(), memoryBudgetMB: Math.round(globe.budget / 1048576), tileMemoryMB: Math.round(globe.memoryBytes / 1048576), cancelled: globe.cancelled, lastPick: lastPick && lastPick.name, engine: "custom globe follow-up on three " + THREE.REVISION }
+    loadMs, readyMs, bundleKB, tilesLoaded: globe.loadedCount, tilesDrawn: globe.selected.length, maxSSE: globe.maxSSE, trees: treeCount, rangeM: Math.round(range), traffic: traffic(), memoryBudgetMB: Math.round(globe.budget / 1048576), tileMemoryMB: Math.round(globe.memoryBytes / 1048576), cancelled: globe.cancelled, lastPick: lastPick && lastPick.name, engine: "custom globe follow-up on three " + THREE.REVISION }
 }
 // Tiles load in workers, whose requests the page's resource timing does not
 // see; the globe counts them itself.
@@ -420,18 +421,69 @@ function startBench(seconds = 24) {
   }
 }
 
+// Every shader program the flight will need is compiled before the first frame
+// is shown. Compiling them as they first came into view (the province fill,
+// the sky, the diorama's materials and the shadow pass, eleven programs in one
+// frame) stalled an iPhone for 808 ms.
+const warmTexture = new THREE.DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1); warmTexture.colorSpace = THREE.SRGBColorSpace; warmTexture.needsUpdate = true
+const warmOverlay = extra.polygons.length ? overlay.textureFor(Globe.bounds(8, 441, 172), 8) : null
+async function warmUp() {
+  const g = new THREE.PlaneGeometry(1, 1); g.setAttribute("ouv", g.attributes.uv.clone())
+  // tile materials, plain and with a draped overlay, receiving shadows as tiles
+  // do; their programs are shared with every real tile, so the materials are
+  // kept (disposing them would release the programs)
+  const probes = [null, warmOverlay].map(ov => { const m = new THREE.Mesh(g, globe.material(warmTexture, ov)); m.frustumCulled = false; m.receiveShadow = true; m.position.copy(origin); scene.add(m); return m })
+  warming = true   // the frame loop pauses: it would reset what is shown below between awaits
+  const was = { frame: frame.visible, shadow: sun.castShadow, sky: sky.visible, target: sun.target.position.clone(), pos: sun.position.clone() }
+  // the diorama with its sun and shadow box where they will be when it is in view
+  const show = () => {
+    frame.visible = true; sky.visible = true; sun.castShadow = renderer.shadowMap.enabled
+    sun.target.position.copy(origin); sun.position.copy(origin).addScaledVector(SUN, 200000); sun.target.updateMatrixWorld(); sun.updateMatrixWorld()
+  }
+  show()
+  // the controls' pivot marker, shown from the first drag on
+  const pivot = controls.pivotMesh, pivotWas = { parent: pivot.parent, visible: pivot.visible }
+  scene.add(pivot); pivot.visible = true
+  await renderer.compileAsync(scene, camera)
+  if (pivotWas.parent) pivotWas.parent.add(pivot); else scene.remove(pivot)
+  pivot.visible = pivotWas.visible
+  show()
+  // The shadow pass compiles its depth programs on first use, from the diorama's
+  // own viewpoint, and keys them by the light state of the frame before (three
+  // sets up lights after the shadow pass): the first shadowed frame after an
+  // unshadowed one needs different programs from the frames that follow it, so
+  // the transition is rendered as it happens in flight.
+  const pose = { pos: camera.position.clone(), q: camera.quaternion.clone(), up: camera.up.clone(), near: camera.near, far: camera.far }
+  applyPose(cameraAt(spec.flight, 0.7)); camera.near = 10; camera.updateProjectionMatrix(); camera.updateMatrixWorld()
+  const shadow = sun.castShadow
+  sun.castShadow = false; renderer.render(scene, camera)
+  sun.castShadow = shadow; renderer.render(scene, camera); renderer.render(scene, camera)
+  camera.position.copy(pose.pos); camera.quaternion.copy(pose.q); camera.up.copy(pose.up); camera.near = pose.near; camera.far = pose.far; camera.updateProjectionMatrix(); camera.updateMatrixWorld()
+  probes.forEach(m => scene.remove(m)); g.dispose()
+  frame.visible = was.frame; sun.castShadow = was.shadow; sky.visible = was.sky
+  sun.target.position.copy(was.target); sun.position.copy(was.pos); sun.target.updateMatrixWorld(); sun.updateMatrixWorld()
+  // redraw the real view in the same task, so no warm-up frame reaches the screen
+  warming = false; render()
+}
+// The globe is shown first; the warm-up runs while it is on screen, long
+// before the reader can fly down to the diorama, and the flight and the bench
+// wait for it (window.spike.ready).
 applyPose(flightPose); afterCamera(); loop()
-await settled(60000); loadMs = Math.round(performance.now() - T0); statsOverlay()
+await settled(60000); loadMs = Math.round(performance.now() - T0)
+await warmUp(); readyMs = Math.round(performance.now() - T0); statsOverlay()
 Object.assign(window.spike, {
   fly(t) { driving = false; flightPose = cameraAt(spec.flight, t); applyPose(flightPose) },
   settled,
-  setQuality(level) { quality = level; buildVegetation(level === "phone" ? 0.5 : 1); renderer.shadowMap.enabled = level !== "phone" },
+  async setQuality(level) { quality = level; buildVegetation(level === "phone" ? 0.5 : 1); renderer.shadowMap.enabled = level !== "phone"; await warmUp() },
   stats,
   pick, startBench,
   arcScreen(i = 0) { const r = canvas.getBoundingClientRect(); v3.copy(arcs[i].mid).project(camera); return { x: r.left + (v3.x + 1) / 2 * r.width, y: r.top + (1 - v3.y) / 2 * r.height } },
   // screen position of a geodetic point, for scripted picking tests
   screenOf(lon, lat, h = 0) { const r = canvas.getBoundingClientRect(); v3.set(...toEcef(lon, lat, h)).project(camera); return { x: r.left + (v3.x + 1) / 2 * r.width, y: r.top + (1 - v3.y) / 2 * r.height, front: v3.z < 1 } },
   explore() { flightPose = null; driving = true },   // hand the camera to the controls without a pointer event
+  // shader programs compiled so far: a program compiled mid-flight is a stall on mobile GPUs
+  programs: () => renderer.info.programs.length,
+  programKeys: () => renderer.info.programs.map(p => p.name + "|" + p.cacheKey),
   // milliseconds per raycast against the drawn tiles, with the tiles' block
   // raycast and with three's default one, and the largest disagreement in metres
   raycastCost(n = 30) {

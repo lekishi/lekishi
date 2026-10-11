@@ -406,7 +406,7 @@ function startBench(seconds = 24) {
         bench = null
         const d = deltas.slice(5).sort((a, b) => a - b), q = f => d[Math.min(d.length - 1, Math.floor(d.length * f))]
         const report = [`device: ${navigator.userAgent}`, `viewport: ${innerWidth}×${innerHeight} @${devicePixelRatio}x · sse ${globe.maxSSE}`, `frames: ${d.length} in ${seconds} s (${(d.length / seconds).toFixed(1)} fps mean)`,
-          `frame time p50 ${q(0.5).toFixed(1)} ms · p95 ${q(0.95).toFixed(1)} ms · max ${d.at(-1).toFixed(0)} ms`, `frames over 33 ms: ${(100 * d.filter(x => x > 33.4).length / d.length).toFixed(1)}%`, `tiles: ${traffic().height.n} heights, ${traffic().imagery.n} imagery · tile memory peak ${Math.round(globe.memoryPeak / 1048576)} of ${Math.round(globe.budget / 1048576)} MB`].join("\n")
+          `frame time p50 ${q(0.5).toFixed(1)} ms · p95 ${q(0.95).toFixed(1)} ms · max ${d.at(-1).toFixed(0)} ms`, `frames over 33 ms: ${(100 * d.filter(x => x > 33.4).length / d.length).toFixed(1)}%`, `tiles: ${traffic().height.n} heights, ${traffic().imagery.n} imagery (${traffic().height.unique} distinct) · tile memory peak ${Math.round(globe.memoryPeak / 1048576)} of ${Math.round(globe.budget / 1048576)} MB`].join("\n")
         box.innerHTML = `<b>Frame times on this device</b><pre>${report}</pre><button type="button" id="copyBench">Copy</button> <button type="button" id="closeBench">Close</button>`
         box.querySelector("#closeBench").onclick = () => { box.hidden = true }
         box.querySelector("#copyBench").onclick = () => navigator.clipboard.writeText(report).catch(() => {})

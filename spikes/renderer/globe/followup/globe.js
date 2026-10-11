@@ -76,7 +76,7 @@ export class Globe {
     this.frustum = new THREE.Frustum(); this.projView = new THREE.Matrix4()
     this.frameId = 0; this.selected = []; this.pendingRefine = 0; this.failed = 0; this.cancelled = 0
     this.fogDensity = 0; this.version = 0; this.memoryBytes = 0
-    this.traffic = { height: { n: 0, bytes: 0 }, imagery: { n: 0, bytes: 0 } }
+    this.traffic = { height: { n: 0, bytes: 0, unique: 0 }, imagery: { n: 0, bytes: 0, unique: 0 } }; this.seen = new Set()
     const n = Math.max(1, Math.min(3, (navigator.hardwareConcurrency || 2) - 1))
     this.workers = Array.from({ length: n }, () => {
       const w = new Worker(new URL("./tile-worker.js", import.meta.url), { type: "module" })
@@ -172,7 +172,12 @@ export class Globe {
     if (t.network) this.inflight--
     if (m.type === "aborted") { t.state = "new"; return }
     if (m.type === "error") { console.error("tile failed", t.key, m.message); t.state = "failed"; this.failed++; return }
-    if (m.bytes) { this.traffic.height.n++; this.traffic.height.bytes += m.bytes.height; this.traffic.imagery.n++; this.traffic.imagery.bytes += m.bytes.imagery }
+    if (m.bytes) {
+      // requests, and distinct tiles: a tile evicted and needed again is a second
+      // request, which a deployed site answers from the browser's HTTP cache
+      this.traffic.height.n++; this.traffic.height.bytes += m.bytes.height; this.traffic.imagery.n++; this.traffic.imagery.bytes += m.bytes.imagery
+      if (!this.seen.has(t.key)) { this.seen.add(t.key); this.traffic.height.unique++; this.traffic.imagery.unique++ }
+    }
     if (!m.imagery && t.parent?.state !== "ready") { t.state = "new"; return }   // its parent was evicted meanwhile
     t.heights = m.heights
     if (m.imagery) {
@@ -316,7 +321,7 @@ export class Globe {
   }
 
   trafficKB() {
-    const kb = o => ({ n: o.n, kb: Math.round(o.bytes / 1024) })
+    const kb = o => ({ n: o.n, kb: Math.round(o.bytes / 1024), unique: o.unique })
     return { height: kb(this.traffic.height), imagery: kb(this.traffic.imagery) }
   }
   dispose() {

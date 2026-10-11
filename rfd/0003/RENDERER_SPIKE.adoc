@@ -2,7 +2,7 @@
 :toc: macro
 :toclevels: 2
 
-*State:* region-scale, globe-phase and custom-globe follow-up evidence recorded; iPad and iPhone frame times recorded; desktop and mid-range phone frame times and the decision open (owner). +
+*State:* region-scale, globe-phase and custom-globe follow-up evidence recorded; custom-globe engine gaps closed (2026-10-11); the second hardware round and the decision open (owner). +
 *Date:* 2026-10-10. +
 *Owner of the decision:* the project owner, per link:README.adoc[RFD 3]'s
 "the renderer is decided on the hero, in a bounded spike". +
@@ -868,6 +868,165 @@ less than Cesium for the same flight. The remaining unknown is the one the
 proposal always deferred to the owner: frame times on real devices. The
 gaps above are ordinary engine work, each with a known fix.
 
+== Custom globe engine gaps closed (2026-10-11)
+
+The owner asked for every engine gap the follow-up found to be closed before a
+second hardware evaluation, so that the renderer can be decided and the other
+spikes removed without follow-up work. The code is still
+`spikes/renderer/globe/followup/`; the follow-up's evidence above is kept as
+captured, and this round's is in
+link:spike/globe/engine/[`rfd/0003/spike/globe/engine/`].
+
+=== What changed
+
+[cols="2,4,3",options="header"]
+|===
+| Gap | Change | Evidence
+
+| Frame spikes while tiles stream (74-99 ms worst frames on the iPad and iPhone)
+| Tiles load in a pool of web workers (`tile-worker.js`): fetching, PNG
+  decoding and mesh building no longer run on the main thread, which receives
+  ready vertex buffers and an image bitmap.
+| Same tiles and pictures as before; frame times are the second hardware round.
+
+| Loads the camera had left kept downloading; eviction by tile count
+| A load unwanted for half a second (and three frames) is cancelled. Tiles are
+  evicted least recently used against an estimated GPU memory budget: 256 MB,
+  128 MB on touch devices. Staleness is measured in wall time, so the rules
+  mean the same at 60 fps and at 1 fps.
+| Under a 48 MB test budget memory falls to the view's working set (87 MB) and
+  the flight still settles every frame; at 256 MB the flight re-fetches nothing.
+
+| One-sided normals at tile edges
+| The tile builder writes heights with a one-sample border (`heightb/`, 67 × 67);
+  edge normals are central differences across the neighbour's samples.
+| Inner samples identical to `height/`; borders equal the neighbours' samples
+  (201 of 201 pairs checked).
+
+| Detail measured in device pixels: 995 + 995 tiles on the iPad
+| Screen-space error is in CSS pixels, and up to two pixels are subtracted under
+  the distance haze, as Cesium subtracts under its fog. Level 0 and 1 tiles are
+  now frustum-culled too; the tile under the camera is never horizon-culled.
+| At 820 × 1042 and 2× the flight needs 458 distinct tiles (995 before).
+
+| No sky at low tilt
+| A sky gradient fills the view above the true horizon below 400 km, and an
+  altitude-dependent haze softens the terrain toward it; both fade out with
+  altitude, so the globe from space is unchanged.
+| Tilted still below.
+
+| Outline width stepped where tile levels met
+| Fills stay draped in the tiles; outlines are constant-width screen-space lines
+  that follow the finest loaded heights, lifted in proportion to range.
+| Region and diorama stills.
+
+| A drag starting on a label did not turn the globe
+| Labels no longer take the pointer; the canvas hit-tests them, so clicks still
+  open cards and drags pass through. Keyboard focus is visible.
+| A drag from a label turned the globe 352 px; a click on it opened its card.
+
+| About twice Cesium's draw calls
+| Houses are two instanced meshes, each ship one vertex-coloured mesh.
+| Diorama view at 1440 × 900: 61 draw calls (Cesium 59; the follow-up 135).
+
+| Not on the list, found while closing it: the camera controls raycast the
+  terrain every frame while the reader drags or zooms
+| Each tile carries bounding boxes for 8 × 8 blocks of its grid; a ray tests only
+  the triangles of blocks it crosses.
+| Identical hits to three.js's raycast over 90 rays; 0.09-0.52 ms per ray
+  against 2.7-3.6 ms.
+
+| Not measured before: recovery from a lost WebGL context
+| None needed: three.js restores the context and re-uploads from the tiles'
+  retained sources.
+| A forced loss and restore left the diorama complete, and new tiles loaded
+  after it, without errors.
+|===
+
+=== Measurements
+
+The same harness and caveats as the comparison above. The default detail target
+stays 4.5 px.
+
+[cols="3,1,2,2,2",options="header"]
+|===
+| | Better | Cesium | Custom, follow-up | Custom, gaps closed
+
+| Engine JavaScript loaded | lower | 5,908 KB | 1,574 KB | 1,619 KB
+| Page load to first settled globe | lower | 7.9 s | 2.3 s | 2.1 s
+| Measured fps at the globe / region / diorama | higher | 2.1 / 2.7 / 1.5 | 6.0 / 3.9 / 1.0 | 5.8 / 3.9 / 1.0
+| Measured fps, phone tier at the diorama | higher | 2.2 | 2.4 | 2.2
+| Tiles fetched over the whole flight | lower, for the same picture | 440 + 432 | 424 + 424 | 396 + 396, none re-fetched
+| Tile kilobytes over the whole flight | lower, for the same picture | 2,912 + 1,447 | 1,127 + 1,598 | 1,074 + 1,430
+| Draw calls at the diorama | lower, for the same picture | 59 | 125 | 61
+| JS heap at the diorama | lower | 47 MB | 68 MB | 54 MB
+| Flight frames that did not settle in a minute | lower | 0 of 140 | 0 of 140 | 0 of 140
+| Private API or library internals used | fewer | shadow map camera; render list for stats | none | none
+|===
+
+Container frame rates come from a software GPU and do not show what the workers
+change; the second hardware round does.
+
+=== Proof of work
+
+[cols="h,3,3",options="header"]
+|===
+| | Follow-up | Gaps closed
+
+| Region, 1,500 km
+| image:spike/globe/followup/region.jpg[Follow-up region,400]
+| image:spike/globe/engine/region.jpg[Region with screen-space outline,400]
+
+| Diorama, 29.5 km
+| image:spike/globe/followup/local.jpg[Follow-up diorama,400]
+| image:spike/globe/engine/local.jpg[Diorama with instanced houses,400]
+
+| Tilted toward the horizon
+| (black space past the rim)
+| image:spike/globe/engine/horizon.jpg[Sky gradient and haze at low tilt,400]
+
+| Phone tier, 390 × 844 at 2×
+| image:spike/globe/followup/phone-local.jpg[Follow-up phone,180]
+| image:spike/globe/engine/phone-local.jpg[Phone tier,180]
+
+| Flight, 14 s, and interaction
+| link:spike/globe/followup/flight.mp4[flight.mp4],
+  link:spike/globe/followup/interaction.mp4[interaction.mp4]
+| link:spike/globe/engine/flight.mp4[flight.mp4],
+  link:spike/globe/engine/interaction.mp4[interaction.mp4]
+|===
+
+Every frame of both videos was checked: the flight is the same sequence as
+before, with the outline at constant width, and the interaction video drags,
+zooms to the cursor, tilts toward the new sky, and opens the card for a
+label, a ship, the province, the sea, the arc and the ground.
+
+=== Second hardware round
+
+The bench on the Pages preview, after these changes (commit `83b58ad` or
+later), on the devices of the first round and, where available, a desktop and a
+mid-range phone. The results belong in this table.
+
+[cols="2,2,1,1,1,1,1,2",options="header"]
+|===
+| Device | Browser and viewport | Mean fps | Median frame | 95th percentile | Worst frame | Over 33 ms | Tiles (requests, distinct) and peak tile memory
+
+| Desktop | not yet run | | | | | |
+| iPad | not yet run | | | | | |
+| iPhone | not yet run | | | | | |
+| Mid-range phone | not yet run | | | | | |
+|===
+
+=== What remains open
+
+Nothing in the engine is known to be missing for the decision. Open are the
+second hardware round above, touch gestures on real devices (the bench plays
+the flight; gestures are the reader's own), desktop Firefox and Safari, and the
+owner's decision. The integration work that any renderer needs (the
+`AtlasRenderer` boundary, bundling through SvelteKit, chapter tile pipelines,
+real data in place of the spike's schematic shapes) is the project's next
+work, not part of this record.
+
 == Reproduce
 
     python3 -I spikes/renderer/globe/build-tiles.py       # the shared tileset, about five minutes
@@ -876,7 +1035,8 @@ gaps above are ordinary engine work, each with a known fix.
     sh spikes/renderer/globe/publish-evidence.sh custom   # → rfd/0003/spike/globe/custom/
     node spikes/renderer/globe/capture.mjs followup       # the follow-up, same harness
     node spikes/renderer/globe/followup/capture-interaction.mjs
-    sh spikes/renderer/globe/publish-evidence.sh followup
+    sh spikes/renderer/globe/publish-evidence.sh followup            # the follow-up's evidence
+    sh spikes/renderer/globe/publish-evidence.sh followup engine     # after the engine gaps were closed
 
 The region-scale phase is reproduced from commit `9337056`
 (`node spikes/renderer/capture.mjs three|cesium|wgpu`).

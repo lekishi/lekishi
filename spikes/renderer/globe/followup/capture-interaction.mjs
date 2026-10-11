@@ -1,7 +1,7 @@
 // Records the follow-up's interaction evidence: real mouse input (drag to turn,
 // wheel to zoom at the cursor, right-drag to tilt, clicks to pick) driven
 // through Playwright, one screenshot per input step, assembled into a video.
-// Writes spikes/renderer/globe/out/followup/{interaction.mp4,pick-*.png,interaction.json}.
+// Writes spikes/renderer/globe/out/followup/{interaction.mp4,pick-*.png,horizon.png,interaction.json}.
 // Usage: node spikes/renderer/globe/followup/capture-interaction.mjs [baseURL]
 //
 // Frame by frame for the same reason as the flight capture: real-time
@@ -57,6 +57,7 @@ let q = await at(130.232, 31.27)
 await wheel(q.x, q.y, 9, -650, "Scroll at the cursor: zoom to the landfall")
 // 3. right-drag to tilt
 await drag([[640, 560], [640, 380]], "right", "Right-drag: tilt toward the horizon")
+await p.screenshot({ path: join(out, "horizon.png") })   // the sky and haze at low tilt
 // 4. picks at the diorama
 await p.evaluate(() => window.spike.fly(0.70)); await p.evaluate(() => window.spike.settled(60000)); await p.evaluate(() => window.spike.explore())
 await ui(mx, my, "", "Click to inspect"); await hold(4)

@@ -14,7 +14,7 @@ for f in globe region local phone-local; do
   ${FFMPEG:-ffmpeg} -y -loglevel error -i "$src/$f.png" -q:v 4 "$dst/$f.jpg"
 done
 cp "$src/flight.mp4" "$src/stats.json" "$dst/"
-for f in "$src"/pick-*.png; do
+for f in "$src"/pick-*.png "$src"/horizon.png; do
   [ -e "$f" ] || continue
   ${FFMPEG:-ffmpeg} -y -loglevel error -i "$f" -q:v 4 "$dst/$(basename "$f" .png).jpg"
 done

@@ -936,6 +936,13 @@ link:spike/globe/engine/[`rfd/0003/spike/globe/engine/`].
 | Identical hits to three.js's raycast over 90 rays; 0.09-0.52 ms per ray
   against 2.7-3.6 ms.
 
+| Found while closing it: thin dark cracks at level boundaries on the phone tier
+| The skirts hung from tile edges faced into their own tile and were culled
+  when seen from the neighbour, which is where such a crack is seen from;
+  coarser neighbours under CSS-pixel detail made it visible. Skirts now face
+  outward and reach a two-level drop at the exaggerated scale.
+| The phone still before and after the fix; the published evidence is after.
+
 | Not measured before: recovery from a lost WebGL context
 | None needed: three.js restores the context and re-uploads from the tiles'
   retained sources.

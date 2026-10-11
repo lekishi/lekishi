@@ -960,9 +960,9 @@ stays 4.5 px.
 | | Better | Cesium | Custom, follow-up | Custom, gaps closed
 
 | Engine JavaScript loaded | lower | 5,908 KB | 1,574 KB | 1,619 KB
-| Page load to first settled globe | lower | 7.9 s | 2.3 s | 2.1 s
-| Measured fps at the globe / region / diorama | higher | 2.1 / 2.7 / 1.5 | 6.0 / 3.9 / 1.0 | 5.8 / 3.9 / 1.0
-| Measured fps, phone tier at the diorama | higher | 2.2 | 2.4 | 2.2
+| Page load to first settled globe | lower | 7.9 s | 2.3 s | 2.2 s
+| Measured fps at the globe / region / diorama | higher | 2.1 / 2.7 / 1.5 | 6.0 / 3.9 / 1.0 | 6.0 / 4.0 / 1.0
+| Measured fps, phone tier at the diorama | higher | 2.2 | 2.4 | 2.8
 | Tiles fetched over the whole flight | lower, for the same picture | 440 + 432 | 424 + 424 | 396 + 396, none re-fetched
 | Tile kilobytes over the whole flight | lower, for the same picture | 2,912 + 1,447 | 1,127 + 1,598 | 1,074 + 1,430
 | Draw calls at the diorama | lower, for the same picture | 59 | 125 | 61

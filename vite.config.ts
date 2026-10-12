@@ -9,14 +9,18 @@ import { defineConfig } from "vitest/config"
  * the static artifact; Tailwind owns the stylesheet; Vitest runs the unit and
  * contract tests in the same resolution context as the build.
  *
- * The Cesium runtime directories (Workers, Assets, Widgets, ThirdParty) are not
- * bundled: Cesium resolves them at runtime through `window.CESIUM_BASE_URL`.
- * `scripts/sync-cesium-runtime.mjs` copies them into `static/cesium` before the
- * dev server or the build starts, and `scripts/check-static-build.mjs` fails the
- * build if the artifact is missing them.
+ * The globe's tiles are not bundled either: `scripts/sync-globe-tiles.mjs`
+ * builds them into `static/globe` before the dev server or the build starts,
+ * SvelteKit copies them into the artifact, and the renderer fetches them from
+ * `/globe/`. `scripts/check-static-build.mjs` fails the build if they are
+ * missing.
  */
 export default defineConfig({
   plugins: [sveltekit(), tailwindcss()],
+  // The globe's tile worker imports the bundle reader and the mesh builder; ES
+  // module workers keep those imports instead of an IIFE wrapper, and every
+  // browser the atlas targets runs them.
+  worker: { format: "es" },
   // The comparison catalog loads a chapter's JSON with lazy `import.meta.glob`,
   // so the dev server serves those files over HTTP instead of bundling them into
   // the importing module the way the eager production glob does. Vite's default

@@ -24,6 +24,13 @@ rendering and delivery roadmap.
 
 == Rendering
 
+Review hardening (2026-10-12): PR 18's tile-failure fallback and bounded retries,
+co-located picking, idle-context restoration, WGS84 flight continuity, and
+existing-checkout migration are covered by regressions. The pinned environment
+includes the tile builder's dependencies. Evidence:
+link:GLOBE_RENDERER.adoc[the globe renderer decision, review hardening supplement].
+The open rendering and device-acceptance items below stay open.
+
 - [ ] The custom globe behind the unchanged `AtlasRenderer` boundary, bundled through SvelteKit, replacing the Cesium renderer: tiles in workers under a memory budget, `GlobeControls`, picking, draped polygons and arcs, shaders compiled before the first flight, and a quality tier chosen up front or from measured frame times (the mid-range phone needs the lighter one). Decision: link:RENDERER_SPIKE.adoc[the renderer spike record], decision. Progress (2026-10-12): the custom globe replaces the Cesium renderer behind the unchanged boundary, with tiles in a worker under a memory budget, `GlobeControls`, picking, markers, collision-free labels, flights, and shaders compiled before the first flight; tiles built at deploy time, four siblings to a file. Draped polygons and arcs wait on the scene types below, and the quality tier on the diorama; device frame times on the preview are the owner's. Evidence: link:GLOBE_RENDERER.adoc[the globe renderer decision].
 - [ ] Domain and scene types for journey lines, relationship arcs, control-snapshot polygons, and places-with-events; the projection accepts the published geometry interpretations.
 - [ ] Renderer support for the diorama: terrain mesh with exaggeration, slope and elevation tinting, shallow-water shading, directional light with shadows, instanced symbols scattered by terrain, glyph settlements at sites, a vessel at the playhead's stop, lines, arcs, and polygons, behind the unchanged `AtlasRenderer` boundary.

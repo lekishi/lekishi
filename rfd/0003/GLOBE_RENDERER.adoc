@@ -132,3 +132,50 @@ Measured on 2026-10-12 in the cloud development container, from
   artifact's own tiles and nothing else", "selects an event by clicking its
   marker on the globe", "amplifies only the Firefox/Linux Ctrl-wheel trackpad
   pinch").
+
+== Review hardening — 2026-10-12
+
+Oracle's review of PR 18 identified five renderer and migration defects. This
+supplement records the corrections without changing the original measurements
+above; the renderer choice and release scope stand.
+
+* A failed refinement now keeps its loaded parent until every child is drawable.
+  Failed roots and children no longer keep demand rendering busy. Two retries,
+  after one and two seconds, recover transient failures without an unbounded
+  request loop; disposal cancels the timers. `tiles.test.ts` covers transient and
+  permanent root failure, failed refinement, and a partial sibling bundle.
+* Co-located picks break equal-distance ties by the same selected, active, base
+  priority used to draw the dots. The browser regression checks the exact
+  arrival and departure identities rather than just their shared place name.
+* Context restoration invalidates an idle view so Three.js redraws its restored
+  resources without camera input. The browser regression loses and restores a
+  settled context and observes new WebGL draw calls.
+* Flights read the initial camera against WGS84, the same surface used to place
+  it, rather than against the mean sphere. `geo.test.ts` now checks reconstructed
+  eye and target positions within one centimetre, including 1,000 m nadir and
+  500 m tilted views instead of tolerating a 15 km range discrepancy.
+* Sync removes the retired generated `static/cesium` before either its cache-hit
+  exit or a cold build; `make clean` also removes it, and it stays ignored during
+  migration. Existing checkouts need no manual cleanup.
+
+The pinned Nix shell also now includes Python, numpy and Pillow, and orb setup
+calls `sync:globe` instead of the removed `sync:cesium`. This was necessary after
+the first verification run failed to load `libstdc++.so.6` in the fallback
+NumPy virtual environment. With the pinned packages, isolated Python imports
+work, `pnpm verify` passes (528 tests; no type errors or warnings), and the cold
+tile build produced 3,162 tiles in 809 bundles in 143 seconds. The static
+invariant still verifies 944 files. Orb setup passed twice (8.8 s and 4.4 s),
+using the cached tiles on both runs.
+
+The built-artifact browser matrix exercised 117 cases across desktop, tablet
+touch and phone emulation: 108 initially passed, five were deliberately skipped,
+and four new-regression cases failed because of test setup. After making picking
+stationary and allowing the loss event to finish before requesting restoration,
+`playwright test --last-failed` passed all four, including restoration in each
+project. The picker also checks that an initially unselected event becomes
+selected from the canvas, so ignoring clicks cannot pass the regression.
+
+Evidence: link:https://github.com/lekishi/lekishi/pull/18[PR 18] and
+link:https://ampcode.com/threads/T-01a1315d-3a80-7728-a14b-3f462e746445[the review
+and verification thread]. Physical-device frame-time acceptance remains the
+owner's separate gate.

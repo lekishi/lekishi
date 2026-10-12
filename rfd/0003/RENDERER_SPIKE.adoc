@@ -1123,6 +1123,15 @@ mid-range phone. The results belong in this table.
 | 70 ms
 | 9.5%
 | 500 requests, 384 distinct; peak 150 MB against a 128 MB budget
+
+| Mid-range Android phone, phone tier (2026-10-12)
+| Chrome 154 on Android, 411 × 782 at 2.625×, drawn at 2×; phone tier (half the trees, no shadows)
+| 58.9
+| 16.8 ms
+| 18.7 ms
+| 80 ms
+| 0.7%
+| 508 requests, 392 distinct; peak 154 MB against a 128 MB budget
 |===
 
 After the shader warm-up below, the iPhone held its 60 Hz refresh for the
@@ -1180,6 +1189,17 @@ renders run in one task so that no warm-up frame reaches the screen, and it is
 reported when it ends. The bench now counts such a task apart, starts in the
 phone tier with `?quality=phone`, and keeps every frame after the first: the
 versions that produced the rows above left out the flight's first five frames.
+
+In the phone tier, on the same phone and with the bench that keeps every
+frame, the flight held 60 Hz: frames over 33 ms fell from 9.5% to 0.7% and the
+95th percentile from 34.9 ms to 18.7 ms. No main-thread task reached 50 ms
+during the flight, and the warm-up's last task fell from 299 ms to 87 ms. The
+worst frame, 80 ms, came at the flight's first frames, which earlier versions
+of the bench left out. The tiles fetched were the same (392 distinct against
+384), so the full tier's slow frames on this phone came from drawing the
+shadows and the trees, not from streaming tiles: a phone of this class wants
+the lighter tier, chosen up front or by measuring frame times as the page
+runs.
 
 The iPhone's 95th percentile fell from 21.0 ms to 17.0 ms and its frames over
 33 ms from 0.8% to 0.1%, but one frame took 808 ms: a visible freeze, over the

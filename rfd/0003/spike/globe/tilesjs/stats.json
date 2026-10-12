@@ -1,0 +1,216 @@
+{
+  "spike": "tilesjs",
+  "loadMsWall": 5184,
+  "altitudes": {
+    "globe": {
+      "t": 0,
+      "settled": true,
+      "fps": 5.98,
+      "stats": {
+        "fps": 5.2,
+        "frameMs": 1.11,
+        "drawCalls": 26,
+        "triangles": 33887,
+        "memoryMB": 16.5,
+        "loadMs": 4817,
+        "bundleKB": 2026,
+        "tilesLoaded": 38,
+        "traffic": {
+          "terrain": {
+            "n": 39,
+            "kb": 463
+          },
+          "height": {
+            "n": 0,
+            "kb": 0
+          },
+          "imagery": {
+            "n": 38,
+            "kb": 285
+          },
+          "other": {
+            "n": 1,
+            "kb": 2
+          }
+        },
+        "tilesResident": 38,
+        "trees": 4162,
+        "houses": 25,
+        "engine": "three r170 + 3d-tiles-renderer 0.5.3",
+        "range": 16000000
+      }
+    },
+    "region": {
+      "t": 0.44,
+      "settled": true,
+      "fps": 3.91,
+      "stats": {
+        "fps": 4.3,
+        "frameMs": 0.94,
+        "drawCalls": 34,
+        "triangles": 28681,
+        "memoryMB": 32.1,
+        "loadMs": 4817,
+        "bundleKB": 2026,
+        "tilesLoaded": 106,
+        "traffic": {
+          "terrain": {
+            "n": 107,
+            "kb": 880
+          },
+          "height": {
+            "n": 0,
+            "kb": 0
+          },
+          "imagery": {
+            "n": 106,
+            "kb": 530
+          },
+          "other": {
+            "n": 1,
+            "kb": 2
+          }
+        },
+        "tilesResident": 106,
+        "trees": 4162,
+        "houses": 25,
+        "engine": "three r170 + 3d-tiles-renderer 0.5.3",
+        "range": 1500000
+      }
+    },
+    "local": {
+      "t": 0.7,
+      "settled": true,
+      "fps": 1.23,
+      "stats": {
+        "fps": 1.3,
+        "frameMs": 2.73,
+        "drawCalls": 66,
+        "triangles": 301724,
+        "memoryMB": 32.7,
+        "loadMs": 4817,
+        "bundleKB": 2026,
+        "tilesLoaded": 214,
+        "traffic": {
+          "terrain": {
+            "n": 215,
+            "kb": 2594
+          },
+          "height": {
+            "n": 0,
+            "kb": 0
+          },
+          "imagery": {
+            "n": 214,
+            "kb": 1026
+          },
+          "other": {
+            "n": 1,
+            "kb": 2
+          }
+        },
+        "tilesResident": 214,
+        "trees": 4162,
+        "houses": 25,
+        "engine": "three r170 + 3d-tiles-renderer 0.5.3",
+        "range": 29500
+      }
+    }
+  },
+  "phone": {
+    "settled": true,
+    "fps": 2.98,
+    "stats": {
+      "fps": 2.8,
+      "frameMs": 0.95,
+      "drawCalls": 35,
+      "triangles": 157718,
+      "memoryMB": 27.4,
+      "loadMs": 5147,
+      "bundleKB": 2026,
+      "tilesLoaded": 118,
+      "traffic": {
+        "terrain": {
+          "n": 119,
+          "kb": 1732
+        },
+        "height": {
+          "n": 0,
+          "kb": 0
+        },
+        "imagery": {
+          "n": 118,
+          "kb": 704
+        },
+        "other": {
+          "n": 1,
+          "kb": 2
+        }
+      },
+      "tilesResident": 118,
+      "trees": 2081,
+      "houses": 25,
+      "engine": "three r170 + 3d-tiles-renderer 0.5.3",
+      "range": 29500
+    }
+  },
+  "flight": {
+    "frames": 140,
+    "unsettledFrames": 0,
+    "wallSeconds": 581,
+    "stats": {
+      "fps": 7.8,
+      "frameMs": 0.61,
+      "drawCalls": 26,
+      "triangles": 33887,
+      "memoryMB": 55.1,
+      "loadMs": 4337,
+      "bundleKB": 2026,
+      "tilesLoaded": 598,
+      "traffic": {
+        "terrain": {
+          "n": 593,
+          "kb": 3931
+        },
+        "height": {
+          "n": 0,
+          "kb": 0
+        },
+        "imagery": {
+          "n": 592,
+          "kb": 2035
+        },
+        "other": {
+          "n": 1,
+          "kb": 2
+        }
+      },
+      "tilesResident": 598,
+      "trees": 4162,
+      "houses": 25,
+      "engine": "three r170 + 3d-tiles-renderer 0.5.3",
+      "range": 16000000
+    }
+  },
+  "trafficAfterStills": {
+    "terrain": {
+      "n": 215,
+      "kb": 2594
+    },
+    "height": {
+      "n": 0,
+      "kb": 0
+    },
+    "imagery": {
+      "n": 214,
+      "kb": 1026
+    },
+    "other": {
+      "n": 1,
+      "kb": 2
+    }
+  },
+  "errors": [],
+  "capturedAt": "2026-10-10T15:08:06.756Z",
+  "note": "software GPU in the capture container; fps is relative and noisy"
+}

@@ -172,6 +172,11 @@ The site is deployed from the `main` branch at <https://lekishi.pages.dev>.
 - Node version: 24 (see `engines` in `package.json` and `.github/workflows/ci.yml`)
 - Environment variables: none
 
+Preview builds (any branch but `main`) also run
+`spikes/renderer/globe/preview-build.mjs`, which adds the renderer spike's
+custom globe under `/spikes/` for testing on devices; it generates that page's
+tiles from open data during the build. Production builds skip it.
+
 Cloudflare Pages resolves `/atlas` to `atlas.html` with its default clean-URL
 behavior. `static/_redirects` only normalizes `/atlas/` to `/atlas`; rewriting
 `/atlas` to `/atlas.html` would loop because Pages redirects the file back to its

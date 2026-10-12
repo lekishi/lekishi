@@ -1,0 +1,48 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Globe follow-up · custom Three.js globe</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;700&family=Cinzel:wght@600&display=swap">
+<style>
+  html,body{margin:0;height:100%;background:#0b1016;overflow:hidden;font-family:system-ui,sans-serif;color:#f3ead7}
+  canvas{display:block;width:100%;height:100%;touch-action:none}
+  #labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+  /* labels never take the pointer: the canvas hit-tests them, so a drag that
+     starts on a label still turns the globe and a click on one still opens it */
+  .lbl{position:absolute;transform:translate(-50%,-100%);text-align:center;white-space:nowrap;pointer-events:none}
+  .lbl:focus-visible{outline:none} .lbl:focus-visible b{outline:2px solid #d2a94f;outline-offset:3px;border-radius:2px}
+  .lbl b{display:block;font:500 15px "Noto Serif JP","Hiragino Mincho ProN",serif;color:#f3ead7;text-shadow:0 0 3px #0b1114,0 0 6px #0b1114,0 1px 0 #0b1114}
+  .lbl i{display:block;font:600 8.5px "Cinzel",serif;letter-spacing:.16em;color:#b9af9c;font-style:normal;text-shadow:0 0 3px #0b1114,0 0 5px #0b1114}
+  .lbl::after{content:"";display:block;width:1px;height:14px;margin:2px auto 0;background:rgba(243,234,215,.7)}
+  .lbl.sel b{font-size:17px;color:#fff3d6} .lbl.realm b{font-size:22px;letter-spacing:.3em} .lbl.realm::after,.lbl.sea::after,.lbl.arc::after{display:none}
+  .lbl.sea b{font:600 11px "Cinzel",serif;letter-spacing:.3em;color:#eaf4f7;opacity:.85}
+  .lbl.arc b{font-size:13px;color:#f1cf7a}
+  .lbl:hover b{color:#fff}
+  #stats{position:absolute;left:10px;top:10px;background:rgba(10,14,18,.8);font:11px/1.5 ui-monospace,monospace;padding:8px 10px;border-radius:4px;border:1px solid rgba(210,169,79,.4);white-space:pre}
+  #hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:rgba(10,14,18,.72);border:1px solid rgba(210,169,79,.3);border-radius:999px;padding:6px 14px;font:12px system-ui,sans-serif;color:#d8cfbd;white-space:nowrap}
+  #card{position:absolute;right:12px;top:12px;width:min(300px,calc(100vw - 24px));background:rgba(12,17,22,.92);border:1px solid rgba(210,169,79,.45);border-radius:6px;padding:12px 14px;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+  #card h2{margin:0;font:700 19px "Noto Serif JP",serif} #card .rom{font:600 9px "Cinzel",serif;letter-spacing:.16em;color:#b9af9c;margin-top:2px}
+  #card dl{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin:10px 0 0;font-size:12.5px} #card dt{color:#a39c8c} #card dd{margin:0}
+  #card .caveat{margin-top:10px;font-size:12px;color:#e0b46a;border-left:2px solid #d2a94f;padding-left:8px}
+  #card button,#bench button{margin-top:10px;background:transparent;color:#d2a94f;border:1px solid rgba(210,169,79,.5);border-radius:4px;padding:4px 10px;font:12px system-ui;cursor:pointer}
+  #card button:focus-visible,#bench button:focus-visible{outline:2px solid #d2a94f;outline-offset:2px}
+  #bench{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(360px,calc(100vw - 32px));background:rgba(12,17,22,.95);border:1px solid rgba(210,169,79,.5);border-radius:8px;padding:16px 18px;font-size:13px}
+  #bench pre{font:12px/1.5 ui-monospace,monospace;white-space:pre-wrap;margin:8px 0 0;user-select:all}
+  #credit{position:absolute;right:8px;bottom:6px;color:rgba(243,234,215,.55);font:9px system-ui,sans-serif}
+  @media (max-width:600px){#hint{font-size:11px;bottom:40px;white-space:normal;text-align:center;width:calc(100vw - 48px);border-radius:12px}#stats{font-size:10px}}
+</style>
+<canvas id="c"></canvas>
+<div id="labels"></div>
+<div id="stats">loading…</div>
+<div id="hint">drag to turn the globe · scroll or pinch to zoom · right-drag or two fingers to tilt · tap to inspect</div>
+<aside id="card" hidden></aside>
+<div id="bench" hidden></div>
+<div id="credit"></div>
+<script type="importmap">{"imports":{
+  "three":"/node_modules/three/build/three.module.js",
+  "three/addons/":"/node_modules/three/examples/jsm/",
+  "3d-tiles-renderer/core":"/node_modules/3d-tiles-renderer/src/core/renderer/index.js",
+  "3d-tiles-renderer/src/":"/node_modules/3d-tiles-renderer/src/"
+}}</script>
+<script type="module" src="./main.js"></script>

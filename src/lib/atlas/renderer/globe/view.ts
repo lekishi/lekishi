@@ -129,6 +129,10 @@ class ThreeGlobeView implements GlobeView {
     this.dirty = true
   }
 
+  private readonly restoreContext = (): void => {
+    this.dirty = true
+  }
+
   constructor(container: HTMLElement, options: GlobeViewOptions) {
     this.container = container
     this.exaggeration = options.exaggeration ?? 2.2
@@ -144,6 +148,7 @@ class ThreeGlobeView implements GlobeView {
       antialias: true,
       logarithmicDepthBuffer: true,
     })
+    this.canvas.addEventListener("webglcontextrestored", this.restoreContext)
     container.append(this.canvas, this.overlay)
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2))
     this.renderer.outputColorSpace = THREE.SRGBColorSpace
@@ -480,15 +485,23 @@ class ThreeGlobeView implements GlobeView {
     const y = clientY - rect.top
     let nearest: string | null = null
     let nearestDistance = Infinity
+    let nearestPriority = -1
 
     for (const entry of this.markers.values()) {
       if (entry.screen === null) continue
       const distance = Math.hypot(entry.screen.x - x, entry.screen.y - y)
       const reach = radiusPx + MARKER_SIZES[entry.data.emphasis] / 2
+      const priority =
+        entry.data.emphasis === "selected" ? 2 : entry.data.emphasis === "active" ? 1 : 0
 
-      if (distance <= reach && distance < nearestDistance) {
+      // Co-located events must pick the dot drawn on top, not insertion order.
+      if (
+        distance <= reach &&
+        (distance < nearestDistance || (distance === nearestDistance && priority > nearestPriority))
+      ) {
         nearest = entry.data.id
         nearestDistance = distance
+        nearestPriority = priority
       }
     }
 
@@ -596,6 +609,7 @@ class ThreeGlobeView implements GlobeView {
     this.disposed = true
     cancelAnimationFrame(this.raf)
     this.abort.abort()
+    this.canvas.removeEventListener("webglcontextrestored", this.restoreContext)
 
     for (const type of ["pointerdown", "wheel", "touchstart"] as const) {
       this.canvas.removeEventListener(type, this.takeControl, { capture: true })

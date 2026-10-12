@@ -102,18 +102,22 @@ export function eyeFor(pose: CameraPose): { eye: Vec3; target: Vec3; up: Vec3 } 
 /**
  * The pose of a camera already in flight, read back from its eye and view
  * direction, so a flight starts where the reader left the camera rather than
- * jumping. The target is where the view direction meets the mean sphere, or the
+ * jumping. The target is where the view direction meets WGS84, or the
  * point under the camera when the view misses the Earth.
  */
 export function poseOf(eye: Vec3, direction: Vec3): CameraPose {
   const [ex, ey, ez] = eye
   const length = Math.hypot(...direction) || 1
   const [dx, dy, dz] = direction.map((v) => v / length) as unknown as Vec3
-  // Ray against the mean sphere: |e + t d| = R.
-  const b = ex * dx + ey * dy + ez * dz
-  const c = ex * ex + ey * ey + ez * ez - MEAN_RADIUS_M * MEAN_RADIUS_M
-  const discriminant = b * b - c
-  const t = discriminant >= 0 ? -b - Math.sqrt(discriminant) : -1
+  // Use the same surface as eyeFor: a mean-sphere hit causes kilometre-scale
+  // jumps when a flight begins near the ground.
+  const a2 = WGS84.a ** 2
+  const b2 = WGS84.b ** 2
+  const a = (dx * dx + dy * dy) / a2 + (dz * dz) / b2
+  const b = (ex * dx + ey * dy) / a2 + (ez * dz) / b2
+  const c = (ex * ex + ey * ey) / a2 + (ez * ez) / b2 - 1
+  const discriminant = b * b - a * c
+  const t = discriminant >= 0 ? (-b - Math.sqrt(discriminant)) / a : -1
 
   if (t <= 0) {
     const ground = fromEcef(ex, ey, ez)

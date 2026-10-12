@@ -24,7 +24,15 @@
  */
 import { spawnSync } from "node:child_process"
 import { createHash } from "node:crypto"
-import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs"
+import {
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  rmSync,
+  statSync,
+  writeFileSync,
+} from "node:fs"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 
@@ -33,6 +41,10 @@ const builderDirectory = path.join(repoRoot, "scripts", "globe")
 const builder = path.join(builderDirectory, "build-tiles.py")
 const destination = path.join(repoRoot, "static", "globe")
 const cache = path.join(repoRoot, ".cache", "globe")
+
+// Retire the generated runtime in already-used checkouts before SvelteKit
+// copies static/. Otherwise the invariant rejects the obsolete worker scripts.
+rmSync(path.join(repoRoot, "static", "cesium"), { recursive: true, force: true })
 
 /** Written beside the elevation cache so repeated runs can skip an unchanged build. */
 const STAMP = "tiles-stamp"

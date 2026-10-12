@@ -64,6 +64,7 @@ type Tile = {
   virtual: boolean
   /** The pending request that will deliver this tile, if any. */
   request: number | null
+  failures: number
   lastUsed: number
   lastUsedTime: number
   bytes: number
@@ -217,6 +218,7 @@ export class GlobeTiles {
   private bytes = 0
   private failed = 0
   private disposed = false
+  private readonly retries = new Set<ReturnType<typeof setTimeout>>()
 
   constructor(options: GlobeTilesOptions) {
     this.options = options
@@ -308,6 +310,7 @@ export class GlobeTiles {
       uv: [0, 0, 1, 1],
       virtual: false,
       request: null,
+      failures: 0,
       lastUsed: 0,
       lastUsedTime: 0,
       bytes: 0,
@@ -552,11 +555,10 @@ export class GlobeTiles {
     if (message.type === "error") {
       console.error("globe tiles failed", load.key, message.message)
       this.failed++
-      load.tiles.forEach((t) => {
-        if (t.request === load.id) t.state = "failed"
-      })
+      this.retryFailed(load.tiles.filter((t) => t.request === load.id))
       this.loads.delete(load.id)
       this.loadsByKey.delete(load.key)
+      this.options.onChange()
       return
     }
 
@@ -577,14 +579,36 @@ export class GlobeTiles {
 
     // Any tile the bundle did not carry is not coming: mark it failed rather
     // than leave its siblings waiting forever.
-    for (const tile of load.tiles) {
-      if (tile.request === load.id && tile.state === "loading") {
-        tile.state = "failed"
-        this.failed++
-      }
-    }
+    const missing = load.tiles.filter(
+      (tile) => tile.request === load.id && tile.state === "loading",
+    )
+    this.failed += missing.length
+    this.retryFailed(missing)
 
     this.options.onChange()
+  }
+
+  private retryFailed(tiles: Tile[]): void {
+    for (const tile of tiles) {
+      tile.state = "failed"
+      tile.request = null
+      tile.failures++
+    }
+    const retryable = tiles.filter((tile) => tile.failures <= 2)
+    if (retryable.length === 0) return
+    // Back off without keeping the demand-rendering loop busy. Two retries
+    // recover transient failures; a permanent failure retains the parent.
+    const timer = setTimeout(
+      () => {
+        this.retries.delete(timer)
+        for (const tile of retryable) {
+          if (tile.state === "failed") tile.state = "new"
+        }
+        this.options.onChange()
+      },
+      1000 * 2 ** (retryable[0].failures - 1),
+    )
+    this.retries.add(timer)
   }
 
   private apply(tile: Tile, built: BuiltTile): void {
@@ -700,7 +724,7 @@ export class GlobeTiles {
 
       if (tile.state !== "ready") {
         if (tile.z === 0 && tile.state === "new") this.requestLoad(null, 100)
-        this.pendingRefine++
+        if (tile.state !== "failed") this.pendingRefine++
         return
       }
 
@@ -721,12 +745,12 @@ export class GlobeTiles {
           .filter((c) => !c.available && c.state === "new")
           .forEach((c) => this.buildVirtual(c))
 
-        if (children.every((c) => c.state === "ready" || c.state === "failed")) {
-          children.forEach((c) => c.state === "ready" && visit(c))
+        if (children.every((c) => c.state === "ready")) {
+          children.forEach(visit)
           return
         }
 
-        this.pendingRefine++
+        if (children.some((c) => c.state !== "ready" && c.state !== "failed")) this.pendingRefine++
       }
 
       this.selected.push(tile)
@@ -845,6 +869,8 @@ export class GlobeTiles {
   dispose(): void {
     if (this.disposed) return
     this.disposed = true
+    this.retries.forEach(clearTimeout)
+    this.retries.clear()
     this.workers.forEach((w) => w.terminate())
     this.workers = []
 

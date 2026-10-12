@@ -11,6 +11,8 @@
 # (scripts/globe/build-tiles.py) before a dev server or build starts, from
 # elevation it caches under .cache/globe/. Both are generated, not source.
 /static/globe/
+# Retired generated runtime in checkouts that used the Cesium renderer.
+/static/cesium/
 /.cache/
 
 # Browser-test output.

@@ -52,4 +52,4 @@ verify:
 	pnpm verify
 
 clean:
-	rm -rf build .svelte-kit static/globe
+	rm -rf build .svelte-kit static/globe static/cesium

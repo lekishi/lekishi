@@ -625,7 +625,68 @@ test("selects an event by clicking its marker on the globe", async ({ page, hasT
   await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2)
 
   await expect(page.getByTestId("atlas-selection")).toBeVisible()
-  await expect(page.getByTestId("atlas-selection")).toContainText("益救島")
+  await expect(page.locator('[data-event-id="lks:event:yaku-arrival-753"]')).toHaveAttribute(
+    "aria-current",
+    "true",
+  )
+
+  // The departure shares the arrival's coordinates but was inserted later.
+  // Clicking its selected dot must preserve its identity, not pick the arrival.
+  await selectEvent(page, "lks:event:yaku-departure-753")
+  const departure = page.locator('[data-marker-id="lks:event:yaku-departure-753"] > span').first()
+  await expect(departure).toHaveCSS("width", "16px")
+  const departureBox = (await departure.boundingBox())!
+  await page.mouse.click(
+    departureBox.x + departureBox.width / 2,
+    departureBox.y + departureBox.height / 2,
+  )
+  await expect(page.locator('[data-event-id="lks:event:yaku-departure-753"]')).toHaveAttribute(
+    "aria-current",
+    "true",
+  )
+})
+
+test("redraws a settled globe after WebGL context restoration without input", async ({ page }) => {
+  await page.addInitScript(() => {
+    const draw = WebGL2RenderingContext.prototype.drawElements
+    WebGL2RenderingContext.prototype.drawElements = function (...args) {
+      draw.apply(this, args)
+      const canvas = this.canvas as HTMLCanvasElement
+      canvas.dataset.draws = String(Number(canvas.dataset.draws ?? 0) + 1)
+    }
+  })
+  await mountAtlas(page)
+  const canvas = page.locator("[data-testid='atlas-globe'] canvas")
+  await expect.poll(async () => Number(await canvas.getAttribute("data-draws"))).toBeGreaterThan(0)
+  // Wait for genuine demand-rendering idle, not an arbitrary elapsed delay.
+  await canvas.evaluate(async (element) => {
+    let stable = 0
+    let previous = element.getAttribute("data-draws")
+    while (stable < 20) {
+      await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()))
+      const current = element.getAttribute("data-draws")
+      stable = current === previous ? stable + 1 : 0
+      previous = current
+    }
+  })
+  const before = Number(await canvas.getAttribute("data-draws"))
+  await canvas.evaluate(async (element) => {
+    const gl = (element as HTMLCanvasElement).getContext("webgl2")!
+    const extension = gl.getExtension("WEBGL_lose_context")!
+    const lost = new Promise<void>((resolve) =>
+      element.addEventListener("webglcontextlost", () => resolve(), { once: true }),
+    )
+    extension.loseContext()
+    await lost
+    const restored = new Promise<void>((resolve) =>
+      element.addEventListener("webglcontextrestored", () => resolve(), { once: true }),
+    )
+    extension.restoreContext()
+    await restored
+  })
+  await expect
+    .poll(async () => Number(await canvas.getAttribute("data-draws")))
+    .toBeGreaterThan(before)
 })
 
 test("keeps events the chapter cannot place in the list without a map position", async ({

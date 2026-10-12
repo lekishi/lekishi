@@ -22,18 +22,18 @@ describe("geodesy", () => {
   })
 
   it("reads back the pose a camera was placed with", () => {
-    const pose = { lon: 130.2, lat: 31.3, rangeM: 250_000, headingDeg: 30, pitchDeg: -45 }
-    const { eye, target } = eyeFor(pose)
-    const direction = [target[0] - eye[0], target[1] - eye[1], target[2] - eye[2]] as const
-    const back = poseOf(eye, direction)
-
-    // The pose is read against the mean sphere, so the target is a few
-    // kilometres off the ellipsoid's at this latitude.
-    expect(back.lon).toBeCloseTo(pose.lon, 1)
-    expect(back.lat).toBeCloseTo(pose.lat, 1)
-    expect(back.headingDeg).toBeCloseTo(pose.headingDeg, 0)
-    expect(back.pitchDeg).toBeCloseTo(pose.pitchDeg, 0)
-    expect(Math.abs(back.rangeM - pose.rangeM)).toBeLessThan(15_000)
+    for (const pose of [
+      { lon: 130.2, lat: 31.3, rangeM: 250_000, headingDeg: 30, pitchDeg: -45 },
+      { lon: 0, lat: 0, rangeM: 1000, headingDeg: 0, pitchDeg: -90 },
+      { lon: -70, lat: -60, rangeM: 500, headingDeg: 120, pitchDeg: -30 },
+    ]) {
+      const { eye, target } = eyeFor(pose)
+      const direction = [target[0] - eye[0], target[1] - eye[1], target[2] - eye[2]] as const
+      const back = poseOf(eye, direction)
+      const reconstructed = eyeFor(back)
+      expect(Math.hypot(...reconstructed.eye.map((v, i) => v - eye[i]))).toBeLessThan(0.01)
+      expect(Math.hypot(...reconstructed.target.map((v, i) => v - target[i]))).toBeLessThan(0.01)
+    }
   })
 
   it("reads a camera looking past the Earth as one looking straight down", () => {

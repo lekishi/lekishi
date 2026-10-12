@@ -67,7 +67,17 @@ jobs:
   e2e:
     # Builds the static artifact and runs the atlas browser checks against it
     # with no development server (RFD 4 AC4).
-    runs-on: blacksmith-2vcpu-ubuntu-2404
+    # Desktop benefits from two workers when each has two CPUs available.
+    name: e2e (${{ matrix.project }})
+    runs-on: ${{ matrix.runner || 'blacksmith-2vcpu-ubuntu-2404' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [desktop-chromium, tablet-touch-chromium, phone-chromium]
+        include:
+          - project: desktop-chromium
+            runner: blacksmith-4vcpu-ubuntu-2404
+            workers: 2
     env:
       LEKISHI_SKIP_BUILD: "1"
 
@@ -110,4 +120,4 @@ jobs:
         run: pnpm build
 
       - name: Browser checks against the static artifact
-        run: pnpm e2e
+        run: pnpm e2e --project=${{ matrix.project }} --workers=${{ matrix.workers || 1 }}

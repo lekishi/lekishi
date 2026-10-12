@@ -67,7 +67,12 @@ jobs:
   e2e:
     # Builds the static artifact and runs the atlas browser checks against it
     # with no development server (RFD 4 AC4).
+    # Give each browser project its own runner to avoid WebGL CPU contention.
     runs-on: blacksmith-2vcpu-ubuntu-2404
+    strategy:
+      fail-fast: false
+      matrix:
+        project: [desktop-chromium, tablet-touch-chromium, phone-chromium]
     env:
       LEKISHI_SKIP_BUILD: "1"
 
@@ -110,4 +115,4 @@ jobs:
         run: pnpm build
 
       - name: Browser checks against the static artifact
-        run: pnpm e2e
+        run: pnpm e2e --project=${{ matrix.project }}

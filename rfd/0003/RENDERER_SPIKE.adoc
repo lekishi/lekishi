@@ -2,14 +2,18 @@
 :toc: macro
 :toclevels: 2
 
-*State:* region-scale, globe-phase and custom-globe follow-up evidence recorded; custom-globe engine gaps closed (2026-10-11); second hardware round recorded on a desktop, an iPad, an iPhone and a mid-range phone (2026-10-11); the decision open (owner). +
+*State:* region-scale, globe-phase and custom-globe follow-up evidence recorded; custom-globe engine gaps closed (2026-10-11); second hardware round recorded on a desktop, an iPad, an iPhone and a mid-range phone (2026-10-11); decided (owner, 2026-10-12): the custom Three.js globe; the other spikes removed. +
 *Date:* 2026-10-10. +
 *Owner of the decision:* the project owner, per link:README.adoc[RFD 3]'s
 "the renderer is decided on the hero, in a bounded spike". +
 *Code:* `spikes/renderer/globe/` (nothing there ships in the artifact). The
 region-scale phase's code (`spikes/renderer/{three,cesium,wgpu}`, its harness and
 shared scene) was removed after the globe phase superseded it; it is in the
-history at commit `9337056`, and its evidence below is kept as recorded.
+history at commit `9337056`, and its evidence below is kept as recorded. After
+the decision the globe phase's other engines (`globe/cesium/`, `globe/tilesjs/`)
+and the custom globe's first prototype (`globe/custom/`) were removed in the
+same way: they are in the history at commit `8b54ac8`, and their evidence below
+is kept as recorded. `globe/followup/` is the custom globe.
 
 toc::[]
 
@@ -1237,18 +1241,50 @@ owner's decision. The integration work that any renderer needs (the
 real data in place of the spike's schematic shapes) is the project's next
 work, not part of this record.
 
+== Decision (2026-10-12)
+
+The owner chose the *custom Three.js globe* (`spikes/renderer/globe/followup/`)
+as the atlas's renderer, on the evidence above: it carries the flight from
+the globe to the diorama with no workarounds, fetches fewer tiles and bytes
+than Cesium for the same flight, closed every engine gap the follow-up found,
+and held the display's refresh rate on the desktop, the iPad and the iPhone,
+and on the mid-range phone in its lighter tier. The owner asked for the other
+spikes to be removed and for the investigation records to stay.
+
+What follows from it:
+
+* *Removed:* the globe phase's Cesium and 3d-tiles-renderer spikes and the
+  custom globe's first prototype, in the history at commit `8b54ac8`.
+  `build-tiles.py` now writes only what the custom globe reads (bordered
+  heights, imagery and `tileset.json`, byte-identical to before); the
+  quantized-mesh terrain the other engines read is in the same commit, so the
+  fallback the proposal kept open (Cesium or 3d-tiles-renderer on the same
+  tiles) means restoring that writer.
+* *Kept:* every record in this RFD and every still and video under
+  link:spike/[`rfd/0003/spike/`], as recorded.
+* *Not yet changed:* the shipped atlas still renders with Cesium
+  (`src/lib/atlas/renderer/cesium-renderer.ts`), and the project guidance that
+  describes it still applies to it. Bringing the custom globe behind the
+  `AtlasRenderer` boundary, bundled through SvelteKit, replaces it; that is
+  the project's next work (see link:IMPLEMENTATION.adoc[the implementation
+  plan]). A phone of the mid-range class needs the lighter tier, chosen up
+  front or from measured frame times.
+
 == Reproduce
 
-    python3 -I spikes/renderer/globe/build-tiles.py       # the shared tileset, about five minutes
+The custom globe, as it stands:
+
+    python3 -I spikes/renderer/globe/build-tiles.py       # the tileset, about four minutes
     node spikes/renderer/serve.mjs                        # serves the repository on :4300
-    node spikes/renderer/globe/capture.mjs custom         # also cesium, tilesjs
-    sh spikes/renderer/globe/publish-evidence.sh custom   # → rfd/0003/spike/globe/custom/
-    node spikes/renderer/globe/capture.mjs followup       # the follow-up, same harness
+    node spikes/renderer/globe/capture.mjs                # stills, flight video, stats
     node spikes/renderer/globe/followup/capture-interaction.mjs
     sh spikes/renderer/globe/publish-evidence.sh followup            # the follow-up's evidence
     sh spikes/renderer/globe/publish-evidence.sh followup engine     # after the engine gaps were closed
 
-The region-scale phase is reproduced from commit `9337056`
+The globe phase's comparison is reproduced from commit `8b54ac8`, where
+`build-tiles.py` also writes the quantized-mesh terrain and
+`capture.mjs cesium|tilesjs|custom` captures the other globes. The
+region-scale phase is reproduced from commit `9337056`
 (`node spikes/renderer/capture.mjs three|cesium|wgpu`).
 
 The curated copies under `rfd/0003/spike/globe/` are made from the harness

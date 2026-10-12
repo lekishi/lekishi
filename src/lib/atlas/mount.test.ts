@@ -6,8 +6,8 @@ import { mountAtlas } from "./mount"
 
 /**
  * The workspace mount boundary: what a mount point contains while the workspace
- * is live, and what it contains after teardown. The Cesium renderer is replaced
- * because this test owns DOM ownership, not WebGL; `cesium-renderer.test.ts`
+ * is live, and what it contains after teardown. The globe renderer is replaced
+ * because this test owns DOM ownership, not WebGL; `globe-renderer.test.ts`
  * covers the renderer lifecycle itself.
  *
  * Every chapter mounts through this one function, so the cases here run a chapter
@@ -16,8 +16,8 @@ import { mountAtlas } from "./mount"
  */
 const renderer = vi.hoisted(() => ({ sync: vi.fn(), dispose: vi.fn() }))
 
-vi.mock("./renderer/cesium-renderer", () => ({
-  createCesiumAtlasRenderer: () => renderer,
+vi.mock("./renderer/globe-renderer", () => ({
+  createGlobeAtlasRenderer: () => renderer,
 }))
 
 const TANG = await loadServedChapter(TANG_CHAPTER)

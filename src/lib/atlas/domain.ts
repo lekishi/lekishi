@@ -1,7 +1,7 @@
 /**
  * Renderer-independent atlas contracts.
  *
- * These types describe what the atlas shows, never how it is drawn: no Cesium,
+ * These types describe what the atlas shows, never how it is drawn: no Three.js,
  * DOM, or Svelte object appears here. RFD 2 owns the durable historical data,
  * calendar, precision, and evidence contracts; this layer carries the published
  * view of a reviewed chapter, built by `projection.ts` from the contract's own

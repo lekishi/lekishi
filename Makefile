@@ -5,12 +5,12 @@ SHELL := /bin/bash
 .PHONY: dev build preview check test lint format seal screenshots e2e e2e-dev verify clean
 
 # Development server (SvelteKit + Vite) at http://localhost:5173. It serves the
-# same static/cesium runtime the built artifact ships.
+# same static/globe tiles the built artifact ships (built on first run).
 dev:
 	pnpm dev
 
-# The deployable artifact: prerendered HTML, hashed bundles, and the Cesium
-# runtime in build/. `pnpm build` also runs the build invariant.
+# The deployable artifact: prerendered HTML, hashed bundles, and the globe
+# tiles in build/. `pnpm build` also runs the build invariant.
 build:
 	pnpm build
 
@@ -52,4 +52,4 @@ verify:
 	pnpm verify
 
 clean:
-	rm -rf build .svelte-kit static/cesium
+	rm -rf build .svelte-kit static/globe

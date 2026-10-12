@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte"
-  import { createCesiumAtlasRenderer } from "../renderer/cesium-renderer"
+  import { createGlobeAtlasRenderer } from "../renderer/globe-renderer"
   import type { AtlasRenderer } from "../renderer/types"
   import type { AtlasScene } from "../scene"
 
@@ -23,7 +23,7 @@
 
   onMount(() => {
     try {
-      const mounted = createCesiumAtlasRenderer(container, { onSelectEvent, onManualCameraInput })
+      const mounted = createGlobeAtlasRenderer(container, { onSelectEvent, onManualCameraInput })
       mounted.sync(scene)
       renderer = mounted
     } catch (error) {

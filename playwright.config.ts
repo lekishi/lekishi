@@ -22,7 +22,7 @@ const baseURL = process.env.LEKISHI_E2E_BASE_URL ?? `http://127.0.0.1:${port}`
 const build = process.env.LEKISHI_SKIP_BUILD === "1" ? "" : "pnpm build && "
 const serve =
   mode === "dev"
-    ? `pnpm sync:cesium && pnpm exec vite dev --port ${port} --strictPort --host 127.0.0.1`
+    ? `pnpm sync:globe && pnpm exec vite dev --port ${port} --strictPort --host 127.0.0.1`
     : `${build}node scripts/serve-static.mjs --directory build --port ${port} --host 127.0.0.1`
 
 export default defineConfig({
@@ -37,7 +37,7 @@ export default defineConfig({
   // The per-file budgets below are for the checks that measure many states; this
   // is the floor for every test.
   timeout: 120_000,
-  // WebGL startup and 4 MB of Cesium need more than the default 5s to settle.
+  // WebGL startup on a software renderer needs more than the default 5s to settle.
   expect: { timeout: 15_000 },
   use: {
     baseURL,

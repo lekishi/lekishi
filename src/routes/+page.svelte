@@ -21,7 +21,7 @@
   const capabilities = [
     {
       title: "Globe first",
-      body: "A bundled CesiumJS globe with Natural Earth II imagery and ellipsoid terrain. No provider account, token, or ion dependency.",
+      body: "A globe drawn from tiles the site ships, painted from open elevation and Natural Earth. No provider account, token, or tile service.",
     },
     {
       title: "Time as evidence",
@@ -131,8 +131,12 @@
 
   <footer class="border-t border-slate-800 px-4 py-4 text-xs text-slate-500 sm:px-6">
     <p>
-      Globe: CesiumJS (Apache-2.0) · Imagery: Natural Earth II, shipped with Cesium · Terrain:
-      ellipsoid, no Cesium ion account
+      Globe: Three.js (MIT), 3d-tiles-renderer (Apache-2.0) · Elevation: Terrain Tiles on AWS Open
+      Data (Mapzen and contributors) · Imagery painted from it and Natural Earth II ·
+      <a
+        class="underline decoration-slate-600 underline-offset-2 transition-colors hover:text-slate-300 focus-visible:rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
+        href="/globe/ATTRIBUTION.txt">Full attribution</a
+      >
     </p>
   </footer>
 </div>

@@ -7,11 +7,6 @@
 /build/
 /.svelte-kit/
 
-# The Cesium runtime (Workers, Assets, Widgets, ThirdParty) is copied out of the
-# npm package by `pnpm sync:cesium` before a dev server or build starts, and
-# SvelteKit copies it into `build/`. It is generated, not source.
-/static/cesium/
-
 # The globe tiles are painted and packed by `pnpm sync:globe`
 # (scripts/globe/build-tiles.py) before a dev server or build starts, from
 # elevation it caches under .cache/globe/. Both are generated, not source.

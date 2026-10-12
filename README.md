@@ -67,6 +67,11 @@ later runs skip the build while `scripts/globe/` is unchanged. SvelteKit copies
 everything under `static/` into the build unchanged, so the same `/globe/` paths
 work in development and in the deployed artifact.
 
+The pinned `nix develop` environment includes Python, numpy and Pillow, so it
+does not need the fallback virtual environment. On an existing Cesium checkout,
+the sync step also removes the retired generated `static/cesium` runtime before
+building; no manual migration cleanup is needed.
+
 ### The deployable artifact
 
 ```

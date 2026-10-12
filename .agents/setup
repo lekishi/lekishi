@@ -50,8 +50,8 @@ step "Realizing the pinned development toolchain"
 step "Installing the frontend workspace from the lockfile"
 "$nix_bin" develop "$repo_root" --command pnpm install --frozen-lockfile
 
-step "Copying the Cesium runtime into static/cesium"
-"$nix_bin" develop "$repo_root" --command pnpm sync:cesium
+step "Building the globe tiles into static/globe"
+"$nix_bin" develop "$repo_root" --command pnpm sync:globe
 
 step "Installing the browser the end-to-end checks use"
 "$nix_bin" develop "$repo_root" --command pnpm exec playwright install --with-deps chromium

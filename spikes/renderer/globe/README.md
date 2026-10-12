@@ -1,45 +1,38 @@
-# Renderer spike, globe phase: one flight on three globes
+# Renderer spike: the custom globe
 
-The region-scale phase compared the diorama alone (its code is in the history
-at commit `9337056`). The owner's
-requirement is the globe: a reader explores an era across the whole Earth and
-zooms freely from the globe to the diorama and back. This phase flies the same
-path on three globes built from the same files, and measures them the same way.
-The record is `rfd/0003/RENDERER_SPIKE.adoc`. Nothing here ships in the artifact.
+The owner's requirement is the globe: a reader explores an era across the
+whole Earth and zooms freely from the globe to the diorama and back. The
+spike compared three globes on the same files, and the owner chose the custom
+Three.js globe on 2026-10-12. `followup/` is that globe: a quadtree of tiles
+loaded in workers, `GlobeControls` from 3d-tiles-renderer for the camera,
+picking, a draped polygon, a relationship arc, and a real-device bench. The
+record is `rfd/0003/RENDERER_SPIKE.adoc`. Nothing here ships in the artifact.
 
-| Spike | Directory | What it is |
-| --- | --- | --- |
-| Cesium | `cesium/` | CesiumJS with the shared quantized-mesh terrain (normals on) and the shared imagery |
-| Three.js + 3d-tiles-renderer | `tilesjs/` | `TilesRenderer` with `QuantizedMeshPlugin` and an `XYZTilesOverlay` on the same files |
-| Custom Three.js globe | `custom/` | A purpose-built quadtree globe reading the same heights and imagery |
-| Custom globe follow-up | `followup/` | The custom globe as a module, with `GlobeControls`, picking, a draped polygon, an arc, tighter level of detail, and a real-device bench |
+The other globes (Cesium, Three.js with 3d-tiles-renderer) and the custom
+globe's first prototype are in the history at commit `8b54ac8`; their evidence
+stays in `rfd/0003/spike/`.
 
-`custom/` is kept exactly as captured in the comparison; `followup/` is where
-the custom globe continued.
+## The tileset
 
-## The shared tileset
+`build-tiles.py` builds the tiles from open data into `tiles/` (generated,
+ignored; about 80 MB) with only numpy and Pillow:
 
-`build-tiles.py` builds everything from open data into `tiles/` (generated,
-ignored; about 200 MB):
-
-- `tiles/terrain/` quantized-mesh 1.0, geographic TMS (EPSG:4326, two root
-  tiles, y counts from the south), 65×65 grid per tile, with the
-  `octvertexnormals` extension computed across tile borders so lighting has no
-  seams. `layer.json` lists per-level availability.
-- `tiles/height/{z}/{x}/{y}.png` the same 65×65 heights, Terrarium-encoded
-  (`R*256 + G + B/256 - 32768`), row 0 north, for the custom globe.
-- `tiles/imagery/{z}/{x}/{y}.jpg` 256×256 painted imagery on the same tiles
-  (same z/x/y, TMS y), unlit: engines light it. Natural Earth II hue on the
-  globe, the diorama palette by the peninsula.
-- `tiles/tileset.json` the availability again, plus `imageryGroups`: imagery
+- `tiles/heightb/{z}/{x}/{y}.png` 67×67 heights, Terrarium-encoded
+  (`R*256 + G + B/256 - 32768`), row 0 north, geographic TMS (EPSG:4326, two
+  root tiles, y counts from the south): each tile's 65×65 grid plus a
+  one-sample border, so normals are seamless across tile edges.
+- `tiles/imagery/{z}/{x}/{y}.jpg` 256×256 painted imagery on the same tiles,
+  unlit: the globe lights it. Natural Earth II hue on the globe, the diorama
+  palette by the peninsula.
+- `tiles/tileset.json` per-level availability, plus `imageryGroups`: imagery
   exists for levels 0–5 everywhere, 6–8 over the East China Sea, 9, 10 and 11
   over nested rectangles in southern Kyushu. Never request a tile outside
   them; a 404 counts as an error in the stats.
 
-Heights are true metres with the sea clamped to 0. Every engine applies the
+Heights are true metres with the sea clamped to 0. The globe applies the
 scene's vertical exaggeration (2.2) to terrain and symbols alike.
 
-## The scene every spike draws
+## The scene
 
 `shared/scene.json` and `shared/diorama.json`:
 
@@ -54,7 +47,7 @@ scene's vertical exaggeration (2.2) to terrain and symbols alike.
   two ships, at the positions in `diorama.json` and `scene.json`, sizes in the
   region spike's units times 100 metres (symbolic, not to scale).
 
-## The API every spike exposes
+## The spike API
 
 `window.spike` with:
 
@@ -64,37 +57,32 @@ scene's vertical exaggeration (2.2) to terrain and symbols alike.
   frame has rendered, or `false` after `ms`;
 - `setQuality('full' | 'phone')`: phone disables shadows and halves vegetation;
 - `stats()`: `{ fps, frameMs, drawCalls, triangles, memoryMB, loadMs, bundleKB,
-  tilesLoaded, traffic }`, where `traffic` is `tileTraffic()` from `shared/flight.js`.
+  tilesLoaded, traffic, ... }`;
+- `pick(x, y)`, `screenOf(lon, lat, h)`, `arcScreen(i)` and `explore()` for
+  scripted interaction.
 
 ## Running
 
     python3 -I spikes/renderer/globe/build-tiles.py          # once, a few minutes
     python3 -I spikes/renderer/globe/shared/make-diorama.py  # already committed output
     node spikes/renderer/serve.mjs                           # serves the repo on :4300
-    open http://127.0.0.1:4300/spikes/renderer/globe/cesium/
-    node spikes/renderer/globe/capture.mjs cesium            # → spikes/renderer/globe/out/cesium/
+    open http://127.0.0.1:4300/spikes/renderer/globe/followup/
+    node spikes/renderer/globe/capture.mjs                   # stills, flight video, stats → out/followup/
+    node spikes/renderer/globe/followup/capture-interaction.mjs   # real mouse input → out/followup/interaction.mp4
 
-## The follow-up
+Query parameters:
 
-`followup/` answers the four questions the globe phase left open for the
-custom globe. It speaks the same `window.spike` API, so `capture.mjs followup`
-captures it like the others, and adds:
-
-- `pick(x, y)`, `screenOf(lon, lat, h)`, `arcScreen(i)` and `explore()` for
-  scripted interaction; `followup/capture-interaction.mjs` drives real mouse
-  input through them and writes `out/followup/interaction.mp4` and the pick
-  stills;
 - `?sse=N` to set the level-of-detail target (pixels of geometric error);
 - `?bench=N` to play the flight in real time for N seconds and report frame
   times on the device in hand, with what could explain a long frame: the page
   hidden, a lost WebGL context, shaders compiled during the flight, the longest
-  main-thread task, and where in the flight the worst frames fell.
+  main-thread task, and where in the flight the worst frames fell;
 - `?quality=phone` to start in the lighter tier (half the trees, no shadows),
   for example `?bench=24&quality=phone` to bench a phone in both tiers.
 
 On any device, from the PR's Cloudflare Pages preview: preview builds (never
 `main`) run `preview-build.mjs` at the end of `pnpm build`, which generates the
-heights and imagery with `build-tiles.py --custom` and copies the page in, so it
+heights and imagery with `build-tiles.py` and copies the page in, so it
 is served at
 
     https://<branch>.lekishi.pages.dev/spikes/renderer/globe/followup/

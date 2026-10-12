@@ -15,7 +15,8 @@ Sources (all fetched once into .cache/, none shipped):
   Foundation; attribution required): z4 globally, finer zooms over nested
   rectangles around the 753 voyage. Bathymetry is kept for sea colour; the
   terrain surface is clamped to sea level.
-  Natural Earth II (public domain), as bundled with CesiumJS: the biome hue at
+  Natural Earth II (public domain), the level-2 tiles CesiumJS 1.145.0 bundled,
+  vendored in scripts/globe/natural-earth-ii/: the biome hue at
   every zoom, blurred so its baked relief shading does not double the globe's
   own lighting.
 
@@ -39,7 +40,9 @@ REPO = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 # Overridable so a build can be checked against another without touching tiles/.
 CACHE = os.environ.get("LEKISHI_TILES_CACHE", os.path.join(HERE, ".cache"))
 OUT = os.environ.get("LEKISHI_TILES_OUT", os.path.join(HERE, "tiles"))
-NE2 = os.path.join(REPO, "node_modules/cesium/Build/Cesium/Assets/Textures/NaturalEarthII")
+# The hue source is vendored with the shipped globe's builder (scripts/globe/),
+# so neither builder depends on the Cesium package.
+NE2 = os.path.join(REPO, "scripts/globe/natural-earth-ii")
 TERRARIUM = "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"
 GRID = 65          # terrain samples per tile edge (Cesium's heightmap convention)
 IMG = 256          # imagery pixels per tile edge

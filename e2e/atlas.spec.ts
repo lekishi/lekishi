@@ -613,13 +613,33 @@ test("selects events by tap on touch input", async ({ page, hasTouch }) => {
 test("selects an event by clicking its marker on the globe", async ({ page, hasTouch }) => {
   test.skip(hasTouch, "Desktop pointer click; the touch project covers taps in the list.")
 
+  // Picking is under test, not flight timing: keep the target stationary.
+  await page.emulateMedia({ reducedMotion: "reduce" })
   await mountAtlas(page)
+
+  // The active dot is drawn above the other events at 平城宮. A canvas click
+  // must establish selection, not merely preserve an existing list selection.
+  const active = page.locator('[data-marker-id="lks:event:appointment-750"] > span').first()
+  await expect(active).toHaveCSS("width", "12px")
+  await expect(page.locator('[data-event-id="lks:event:appointment-750"]')).not.toHaveAttribute(
+    "aria-current",
+    "true",
+  )
+  const activeBox = (await active.boundingBox())!
+  await page.mouse.click(activeBox.x + activeBox.width / 2, activeBox.y + activeBox.height / 2)
+  await expect(page.locator('[data-event-id="lks:event:appointment-750"]')).toHaveAttribute(
+    "aria-current",
+    "true",
+  )
 
   // Markers are laid over the canvas from the 3D scene and never take the
   // pointer themselves: the click lands on the canvas, and the renderer picks the
-  // marker under it. Two of the chapter's events share 益救島's marker position.
+  // marker under it. Select explicitly: several events share this position,
+  // so an unselected dot alone cannot promise a particular event identity.
+  await selectEvent(page, "lks:event:yaku-arrival-753")
   const dot = page.locator('[data-marker-id="lks:event:yaku-arrival-753"] > span').first()
   await expect(dot).toBeVisible()
+  await expect(dot).toHaveCSS("width", "16px")
   const box = (await dot.boundingBox())!
 
   await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2)
@@ -630,8 +650,8 @@ test("selects an event by clicking its marker on the globe", async ({ page, hasT
     "true",
   )
 
-  // The departure shares the arrival's coordinates but was inserted later.
-  // Clicking its selected dot must preserve its identity, not pick the arrival.
+  // The departure shares the arrival's coordinates. Both must remain selected
+  // when clicked, regardless of their order in the scene.
   await selectEvent(page, "lks:event:yaku-departure-753")
   const departure = page.locator('[data-marker-id="lks:event:yaku-departure-753"] > span').first()
   await expect(departure).toHaveCSS("width", "16px")
@@ -678,6 +698,9 @@ test("redraws a settled globe after WebGL context restoration without input", as
     )
     extension.loseContext()
     await lost
+    // Let the loss event finish dispatching before requesting restoration.
+    // A microtask inside that dispatch is too early for Chromium to allow it.
+    await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()))
     const restored = new Promise<void>((resolve) =>
       element.addEventListener("webglcontextrestored", () => resolve(), { once: true }),
     )

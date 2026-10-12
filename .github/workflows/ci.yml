@@ -39,6 +39,19 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # The globe tiles are painted from open elevation by
+      # scripts/globe/build-tiles.py (numpy and Pillow, a few minutes). Cache the
+      # fetched elevation and the built tiles by the builder's inputs, so a run
+      # repaints them only when the builder changes; `pnpm build` skips an
+      # up-to-date build by its own stamp.
+      - name: Cache globe tiles
+        uses: actions/cache@v4
+        with:
+          path: |
+            .cache/globe
+            static/globe
+          key: globe-tiles-${{ hashFiles('scripts/globe/**') }}
+
       - name: Check formatting
         run: pnpm lint
 
@@ -76,6 +89,19 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      # The globe tiles are painted from open elevation by
+      # scripts/globe/build-tiles.py (numpy and Pillow, a few minutes). Cache the
+      # fetched elevation and the built tiles by the builder's inputs, so a run
+      # repaints them only when the builder changes; `pnpm build` skips an
+      # up-to-date build by its own stamp.
+      - name: Cache globe tiles
+        uses: actions/cache@v4
+        with:
+          path: |
+            .cache/globe
+            static/globe
+          key: globe-tiles-${{ hashFiles('scripts/globe/**') }}
 
       - name: Install browser
         run: pnpm exec playwright install --with-deps chromium

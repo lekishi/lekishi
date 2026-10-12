@@ -12,6 +12,12 @@
 # SvelteKit copies it into `build/`. It is generated, not source.
 /static/cesium/
 
+# The globe tiles are painted and packed by `pnpm sync:globe`
+# (scripts/globe/build-tiles.py) before a dev server or build starts, from
+# elevation it caches under .cache/globe/. Both are generated, not source.
+/static/globe/
+/.cache/
+
 # Browser-test output.
 /test-results/
 /playwright-report/

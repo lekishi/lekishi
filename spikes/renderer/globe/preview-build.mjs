@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Adds the custom globe follow-up to Cloudflare Pages *preview* builds, so the
+// Adds the custom globe to Cloudflare Pages *preview* builds, so the
 // owner can open it on any device from the PR's preview URL:
 //
 //   https://<branch>.lekishi.pages.dev/spikes/renderer/globe/followup/
@@ -9,7 +9,7 @@
 // asks for it locally. Production builds from `main` are unchanged: the spike
 // never ships in the published artifact.
 //
-// The tiles are generated, not committed: build-tiles.py --custom writes the
+// The tiles are generated, not committed: build-tiles.py writes the
 // bordered heights and imagery (about 13,000 files, 80 MB) from AWS Open Data in a few
 // minutes with only numpy and Pillow. If Python or the tiles cannot be had, the
 // site preview still deploys and the spike's URL explains what is missing.
@@ -65,7 +65,7 @@ if (!quiet(python, ["-c", "import numpy, PIL"])) {
 // 2. The tiles, unless a previous build in this checkout left them.
 const tiles = path.join(here, "tiles")
 const haveTiles = ["tileset.json", "heightb/11", "imagery/11"].every(p => existsSync(path.join(tiles, p)))
-if (!haveTiles && !run(python, ["-I", path.join(here, "build-tiles.py"), "--custom"])) placeholder("Building the tiles failed.")
+if (!haveTiles && !run(python, ["-I", path.join(here, "build-tiles.py")])) placeholder("Building the tiles failed.")
 
 // 3. The page, its data and its tiles, at the same relative paths as in the repository.
 const copy = (from, to) => cpSync(from, to, { recursive: true })

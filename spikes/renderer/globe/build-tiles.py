@@ -1,17 +1,14 @@
 #!/usr/bin/env python3
-"""Builds the shared globe tileset that every globe spike reads.
+"""Builds the custom globe's tileset from open data.
 
-One elevation sampler feeds three outputs on the same geographic tiling
-(EPSG:4326, TMS, two root tiles), so the engines are compared on identical data:
+One elevation sampler feeds both outputs on the same geographic tiling
+(EPSG:4326, TMS, two root tiles):
 
-  tiles/terrain/{z}/{x}/{y}.terrain   quantized-mesh 1.0, simplified, with oct-encoded normals
-                                      (Cesium and 3d-tiles-renderer)
-  tiles/height/{z}/{x}/{y}.png        65x65 Terrarium-encoded heights (the globe phase's custom globe)
-  tiles/heightb/{z}/{x}/{y}.png       the same heights with a one-sample border, 67x67
-                                      (the follow-up: normals are seamless across tile edges)
-  tiles/imagery/{z}/{x}/{y}.jpg       256x256 painted imagery, unlit (all three)
-  tiles/terrain/layer.json            terrain descriptor with per-level availability
-  tiles/tileset.json                  the same availability for the imagery and the custom globe
+  tiles/heightb/{z}/{x}/{y}.png       67x67 Terrarium-encoded heights: the tile's 65x65
+                                      grid plus a one-sample border, so normals are
+                                      seamless across tile edges
+  tiles/imagery/{z}/{x}/{y}.jpg       256x256 painted imagery, unlit (the globe lights it)
+  tiles/tileset.json                  per-level availability and the imagery groups
 
 Sources (all fetched once into .cache/, none shipped):
   Terrarium elevation tiles, AWS Open Data "Terrain Tiles" (Mapzen/Linux
@@ -19,34 +16,23 @@ Sources (all fetched once into .cache/, none shipped):
   rectangles around the 753 voyage. Bathymetry is kept for sea colour; the
   terrain surface is clamped to sea level.
   Natural Earth II (public domain), as bundled with CesiumJS: the biome hue at
-  every zoom, blurred so its baked relief shading does not double the engines'
+  every zoom, blurred so its baked relief shading does not double the globe's
   own lighting.
 
 Coverage is nested so the tileset stays small: the whole Earth to level 5, the
 East China Sea to level 8, southern Kyushu to level 10, and the Satsuma
 peninsula to level 11 (about 150 m per terrain sample, the source resolution).
 
-Usage: python3 -I spikes/renderer/globe/build-tiles.py [--only terrain|height|imagery] [--custom]
+Usage: python3 -I spikes/renderer/globe/build-tiles.py [--only height|imagery]
 
---custom writes only what the custom globe follow-up reads (bordered heights,
-imagery and tileset.json) and needs only numpy and Pillow: the meshing
-libraries are not imported. Cloudflare preview builds use it (see
-preview-build.mjs); the files are the same ones the full build writes.
+Needs only numpy and Pillow. The globe-phase comparison also wrote
+quantized-mesh terrain and unbordered heights for the engines it compared;
+that version is in the history at commit 8b54ac8.
 """
-import io, json, math, os, sys, time, urllib.request
+import json, math, os, sys, time, urllib.request
 from concurrent.futures import ThreadPoolExecutor
 import numpy as np
 from PIL import Image, ImageFilter
-from struct import pack
-
-CUSTOM_ONLY = "--custom" in sys.argv
-if not CUSTOM_ONLY:
-    from pydelatin import Delatin
-    from quantized_mesh_encoder import encode
-    from quantized_mesh_encoder.extensions import ExtensionBase, ExtensionId, EXTENSION_HEADER, oct_encode
-    from quantized_mesh_encoder.ecef import to_ecef
-else:
-    ExtensionBase = object   # the quantized-mesh extension class below is defined but never used
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
@@ -158,39 +144,7 @@ def elevation(lon, lat, deg_per_sample):
         break
     return out
 
-# ---- terrain: quantized mesh with seamless normals ----
-class Normals(ExtensionBase):
-    """Oct-encoded normals computed on a grid one sample wider than the tile,
-    so neighbouring tiles agree at their shared edge and lighting has no seams."""
-    def __init__(self, normals): self.id = ExtensionId.VERTEX_NORMALS; self.normals = normals
-    def encode(self):
-        enc = oct_encode_snorm(self.normals).tobytes("C")
-        return pack(EXTENSION_HEADER["extensionId"], self.id.value) + pack(EXTENSION_HEADER["extensionLength"], len(enc)) + enc
-
-def oct_encode_snorm(v):
-    """Oct-encodes unit normals to two bytes the way Cesium decodes them
-    (AttributeCompression.octEncode: round((x * 0.5 + 0.5) * 255)). The
-    encoder library floors * 256, which wraps a component of exactly +1 to 0
-    and flips normals along the 0, 90 and 180 degree meridians."""
-    l1 = np.abs(v).sum(1, keepdims=True)
-    r = v[:, :2] / l1
-    neg = v[:, 2] < 0
-    sx, sy = np.where(r[:, 0] >= 0, 1.0, -1.0), np.where(r[:, 1] >= 0, 1.0, -1.0)
-    x = np.where(neg, (1 - np.abs(r[:, 1])) * sx, r[:, 0]); y = np.where(neg, (1 - np.abs(r[:, 0])) * sy, r[:, 1])
-    return np.round((np.clip(np.stack([x, y], 1), -1, 1) * 0.5 + 0.5) * 255).astype(np.uint8)
-
-TRI = None
-def grid_indices():
-    global TRI
-    if TRI is None:
-        idx = []
-        for r in range(GRID - 1):
-            for c in range(GRID - 1):
-                a = r * GRID + c; b = a + GRID
-                idx += [a, a + 1, b, a + 1, b + 1, b]
-        TRI = np.array(idx, np.uint32)
-    return TRI
-
+# ---- heights: the tile grid plus a one-sample border ----
 def heights_with_border(z, x, y):
     w, s, e, n = tile_bounds(z, x, y)
     step = (e - w) / (GRID - 1)
@@ -200,65 +154,17 @@ def heights_with_border(z, x, y):
     lat_c = np.clip(LAT, -90, 90)
     return LON, lat_c, np.maximum(elevation(LON, lat_c, step), 0.0)
 
-def build_terrain(z, x, y):
-    LON, LAT, H = heights_with_border(z, x, y)
-    P = to_ecef(np.stack([LON.ravel(), LAT.ravel(), H.ravel()], 1).astype(np.float64)).reshape(GRID + 2, GRID + 2, 3)
-    dx = P[1:-1, 2:] - P[1:-1, :-2]; dy = P[2:, 1:-1] - P[:-2, 1:-1]
-    nrm = np.cross(dy, dx).reshape(-1, 3)
-    up = to_ecef(np.stack([LON[1:-1, 1:-1].ravel(), LAT[1:-1, 1:-1].ravel(), np.zeros(GRID * GRID)], 1))
-    up /= np.linalg.norm(up, axis=1, keepdims=True)
-    l = np.linalg.norm(nrm, axis=1, keepdims=True); bad = (l[:, 0] < 1e-9)
-    nrm = np.where(bad[:, None], up, nrm / np.maximum(l, 1e-12))
-    nrm = np.where((np.sum(nrm * up, 1) < 0)[:, None], -nrm, nrm)
-    # Sea is flat: a sea vertex beside a slope would otherwise carry the slope's
-    # normal, and long simplified sea triangles smear it into dark streaks.
-    nrm = np.where((H[1:-1, 1:-1].ravel() <= 0.5)[:, None], up, nrm)
-    # Simplify the grid into a triangulated mesh within an error bound that
-    # halves per level, as terrain services do (a tenth of Cesium's own
-    # per-level geometric error); flat sea collapses to two triangles. The
-    # custom globe keeps the full grid in the PNG below, by design.
-    inner = H[1:-1, 1:-1]
-    lon_i, lat_i = LON[1:-1, 1:-1], LAT[1:-1, 1:-1]
-    # The simplifier sees heights plus the Earth's curvature below the tile's
-    # tangent plane, so it also keeps the vertices a flat triangle would need
-    # to stay within the error of the curved surface (otherwise flat sea tiles
-    # collapse to chords that cut kilometres into the globe at coarse levels).
-    P0 = to_ecef(np.stack([lon_i.ravel(), lat_i.ravel(), np.zeros(GRID * GRID)], 1)).reshape(GRID, GRID, 3)
-    pc = P0[GRID // 2, GRID // 2]; nc = pc / np.linalg.norm(pc)
-    dome = np.einsum("ijk,k->ij", P0 - pc, nc)
-    tin = Delatin((inner + dome).astype(np.float64), max_error=max(0.5, 0.1 * 77067.0 / (1 << z)))
-    # pydelatin's y counts rows from the bottom; the grid's row 0 is north.
-    vc, vr = tin.vertices[:, 0].astype(int), (GRID - 1 - tin.vertices[:, 1]).astype(int)
-    pos = np.stack([lon_i[vr, vc], lat_i[vr, vc], inner[vr, vc]], 1).astype(np.float64)
-    nrm_v = nrm.reshape(GRID, GRID, 3)[vr, vc]
-    buf = io.BytesIO()
-    tri = tin.triangles.astype(np.int64)
-    # Counter-clockwise in (east, north), as quantized-mesh expects (front faces).
-    a, b, c = pos[tri[:, 0], :2], pos[tri[:, 1], :2], pos[tri[:, 2], :2]
-    cw = ((b[:, 0] - a[:, 0]) * (c[:, 1] - a[:, 1]) - (b[:, 1] - a[:, 1]) * (c[:, 0] - a[:, 0])) < 0
-    tri[cw] = tri[cw][:, [0, 2, 1]]
-    encode(buf, pos, tri.astype(np.uint32).ravel(), bounds=tile_bounds(z, x, y), sphere_method="naive", extensions=(Normals(nrm_v.astype(np.float64)),))
-    p = os.path.join(OUT, "terrain", str(z), str(x), f"{y}.terrain")
-    os.makedirs(os.path.dirname(p), exist_ok=True)
-    with open(p, "wb") as f: f.write(buf.getvalue())
-    write_height(z, x, y, H)
-    return len(buf.getvalue())
-
 def build_height(z, x, y):
     write_height(z, x, y, heights_with_border(z, x, y)[2])
 
 def write_height(z, x, y, H):
-    # The same heights for the custom globes, Terrarium-encoded (R*256 + G + B/256 - 32768):
-    # height/ is the tile's own 65x65 grid; heightb/ keeps the one-sample border
+    # Terrarium-encoded (R*256 + G + B/256 - 32768), keeping the one-sample border
     # the grid was sampled with, so a tile's edge normals see its neighbours.
-    def save(dirname, grid):
-        h = grid + 32768
-        rgb = np.stack([np.floor(h / 256), np.floor(h) % 256, np.floor((h % 1) * 256)], -1).astype(np.uint8)
-        p = os.path.join(OUT, dirname, str(z), str(x), f"{y}.png")
-        os.makedirs(os.path.dirname(p), exist_ok=True)
-        Image.fromarray(rgb).save(p, optimize=True)
-    if not CUSTOM_ONLY: save("height", H[1:-1, 1:-1])
-    save("heightb", H)
+    h = H + 32768
+    rgb = np.stack([np.floor(h / 256), np.floor(h) % 256, np.floor((h % 1) * 256)], -1).astype(np.uint8)
+    p = os.path.join(OUT, "heightb", str(z), str(x), f"{y}.png")
+    os.makedirs(os.path.dirname(p), exist_ok=True)
+    Image.fromarray(rgb).save(p, optimize=True)
 
 # ---- imagery: painted, unlit, seamless ----
 NE2_IMG = None
@@ -364,23 +270,18 @@ def main():
     avail = availability()
     for z in sorted(LEVELS):
         jobs = tiles_for(z); t1 = time.time()
-        if only in (None, "terrain", "height"):
-            with ThreadPoolExecutor(4) as ex: list(ex.map(lambda j: (build_height if CUSTOM_ONLY else build_terrain)(z, *j), jobs))
+        if only in (None, "height"):
+            with ThreadPoolExecutor(4) as ex: list(ex.map(lambda j: build_height(z, *j), jobs))
         if only in (None, "imagery"):
             with ThreadPoolExecutor(4) as ex: list(ex.map(lambda j: build_imagery(z, *j), jobs))
         print(f"  level {z}: {len(jobs)} tiles in {time.time() - t1:.0f}s", flush=True)
-    layer = {"tilejson": "2.1.0", "name": "lekishi-spike", "version": "1.0.0", "format": "quantized-mesh-1.0",
-             "scheme": "tms", "projection": "EPSG:4326", "bounds": [-180, -90, 180, 90], "minzoom": 0, "maxzoom": max(LEVELS),
-             "tiles": ["{z}/{x}/{y}.terrain?v={version}"], "extensions": ["octvertexnormals"], "available": avail,
-             "attribution": "Elevation: Terrain Tiles on AWS Open Data (Mapzen and contributors). Imagery painted from it and Natural Earth II."}
-    if not CUSTOM_ONLY:
-        with open(os.path.join(OUT, "terrain", "layer.json"), "w") as f: json.dump(layer, f)
+    attribution = "Elevation: Terrain Tiles on AWS Open Data (Mapzen and contributors). Imagery painted from it and Natural Earth II."
     tileset = {"scheme": "tms", "projection": "EPSG:4326", "terrainGrid": GRID, "borderedGrid": GRID + 2, "imagerySize": IMG, "maxLevel": max(LEVELS),
                "available": avail, "levelRects": {str(z): LEVELS[z] for z in LEVELS},
                "imageryGroups": [{"minLevel": 0, "maxLevel": 5, "rect": None}, {"minLevel": 6, "maxLevel": 8, "rect": LEVELS[6]},
                                  {"minLevel": 9, "maxLevel": 9, "rect": LEVELS[9]}, {"minLevel": 10, "maxLevel": 10, "rect": LEVELS[10]},
                                  {"minLevel": 11, "maxLevel": 11, "rect": LEVELS[11]}],
-               "attribution": layer["attribution"]}
+               "attribution": attribution}
     with open(os.path.join(OUT, "tileset.json"), "w") as f: json.dump(tileset, f, indent=1)
     print(f"done in {time.time() - t0:.0f}s", flush=True)
 

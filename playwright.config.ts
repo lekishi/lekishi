@@ -25,6 +25,23 @@ const serve =
     ? `pnpm sync:globe && pnpm exec vite dev --port ${port} --strictPort --host 127.0.0.1`
     : `${build}node scripts/serve-static.mjs --directory build --port ${port} --host 127.0.0.1`
 
+// Reuse the reader-loop checks in other engines without tripling the full suite.
+// Keep Chromium's complete device coverage; Linux WebKit is not physical Safari.
+const crossBrowserSmoke = new RegExp(
+  [
+    "mounts one workspace from the built artifact",
+    "draws the globe from the artifact's own tiles and nothing else",
+    "steps chronologically and plays to the end of the window",
+    "stops camera following on manual input without pausing playback",
+    "disposes the globe when the workspace is torn down",
+    "keeps the phone layout free of overlapping panels",
+    "searches both chapters by local script and romanized name",
+    "navigates the chapter's story with explicit jumps",
+    "shows the sources and locators behind a selected event",
+    "keeps the selected event's explanation reachable at every reviewed size",
+  ].join("|"),
+)
+
 export default defineConfig({
   testDir: "./e2e",
   fullyParallel: false,
@@ -77,6 +94,16 @@ export default defineConfig({
         ...devices["iPhone 14"],
         browserName: "chromium",
       },
+    },
+    {
+      name: "smoke-webkit",
+      grep: crossBrowserSmoke,
+      use: { ...devices["Desktop Safari"] },
+    },
+    {
+      name: "smoke-firefox",
+      grep: crossBrowserSmoke,
+      use: { ...devices["Desktop Firefox"] },
     },
   ],
   webServer: process.env.LEKISHI_E2E_BASE_URL

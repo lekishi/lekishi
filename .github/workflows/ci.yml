@@ -73,11 +73,20 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        project: [desktop-chromium, tablet-touch-chromium, phone-chromium]
+        project:
+          - desktop-chromium
+          - tablet-touch-chromium
+          - phone-chromium
+          - smoke-webkit
+          - smoke-firefox
         include:
           - project: desktop-chromium
             runner: blacksmith-4vcpu-ubuntu-2404
             workers: 2
+          - project: smoke-webkit
+            browser: webkit
+          - project: smoke-firefox
+            browser: firefox
     env:
       LEKISHI_SKIP_BUILD: "1"
 
@@ -114,10 +123,11 @@ jobs:
           key: globe-tiles-${{ hashFiles('scripts/globe/**') }}
 
       - name: Install browser
-        run: pnpm exec playwright install --with-deps chromium
+        run: pnpm exec playwright install --with-deps ${{ matrix.browser || 'chromium' }}
 
       - name: Build the static artifact
         run: pnpm build
 
+      # Firefox's Linux software WebGL needs an X display even in headless mode.
       - name: Browser checks against the static artifact
-        run: pnpm e2e --project=${{ matrix.project }} --workers=${{ matrix.workers || 1 }}
+        run: xvfb-run -a pnpm e2e --project=${{ matrix.project }} --workers=${{ matrix.workers || 1 }}

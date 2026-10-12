@@ -4,23 +4,24 @@
  * `mix lekishi.assets.check`).
  *
  * `pnpm build` runs this after `vite build`: the build fails if the artifact is
- * not deployable as plain static files, or if the Cesium runtime the renderer
- * needs at runtime is missing. It is deliberately narrow — it checks the
+ * not deployable as plain static files, or if the globe tiles and tile worker
+ * the renderer needs at runtime are missing. It is deliberately narrow — it checks the
  * contract between the build and the deployable artifact, not the app's
  * behavior, which the unit and browser suites own.
  */
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs"
-import { createRequire } from "node:module"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const buildDirectory = path.join(repoRoot, "build")
 
-const require = createRequire(import.meta.url)
-const { version: cesiumVersion } = JSON.parse(
-  readFileSync(require.resolve("cesium/package.json"), "utf8"),
-)
+/**
+ * Cloudflare Pages refuses a deployment of more than 20,000 files. The globe's
+ * tiles are bundled four to a file to stay far under it; this keeps a change to
+ * the tile coverage from silently crossing it.
+ */
+const MAX_FILES = 20_000
 
 const problems = []
 
@@ -249,17 +250,20 @@ const stylesheets = requireMatching(
   "a stylesheet under _app/immutable",
 )
 
-const stylesheetText = stylesheets.map(read).join("\n")
-
-if (!stylesheetText.includes(".cesium-viewer")) {
-  fail("the built stylesheet does not carry the Cesium widget styles")
+if (stylesheets.length > 1) {
+  fail(`the site ships one stylesheet, found ${stylesheets.length}`)
 }
 
-const scripts = files.filter((file) => file.endsWith(".js") && !inBuild(file).startsWith("cesium/"))
+const scripts = files.filter((file) => file.endsWith(".js"))
 const scriptText = scripts.map(read).join("\n")
 
-if (!scriptText.includes("/cesium/")) {
-  fail("no built script sets the /cesium/ base URL the renderer needs at runtime")
+// The globe decodes and meshes its tiles in a module worker, which Vite emits
+// as its own chunk; the renderer fetches the tiles from /globe/.
+requireMatching(/_app\/immutable\/workers\/tile-worker-.*\.js$/, "the globe's tile worker bundle")
+
+// The minifier may quote the literal with any of the three quote characters.
+if (!/["'`]\/globe\/["'`]/.test(scriptText)) {
+  fail("no built script points the renderer at the /globe/ tiles")
 }
 
 // --- reviewed chapter content --------------------------------------------------
@@ -311,30 +315,66 @@ for (const [id, html] of chapterHtml) {
   }
 }
 
-// --- Cesium runtime -----------------------------------------------------------
+// --- globe tiles ----------------------------------------------------------------
 
-requireFile(path.join(buildDirectory, "cesium", "Workers", "createTaskProcessorWorker.js"))
-requireFile(path.join(buildDirectory, "cesium", "Widgets", "widgets.css"))
-requireFile(path.join(buildDirectory, "cesium", "ThirdParty", "Workers", "package.json"))
-requireFile(
-  path.join(
-    buildDirectory,
-    "cesium",
-    "Assets",
-    "Textures",
-    "NaturalEarthII",
-    "tilemapresource.xml",
-  ),
-)
-requireMatching(
-  /cesium\/Assets\/Textures\/NaturalEarthII\/\d+\/\d+\/\d+\.jpg$/,
-  "Natural Earth II imagery tiles",
-)
+// The tiles are built by `pnpm sync:globe` (scripts/globe/build-tiles.py) into
+// static/globe and copied here. The layout of a bundle is
+// src/lib/atlas/renderer/globe/bundle.ts's; reading the root bundle's header
+// back here pins the builder's side of it.
+const globeDirectory = path.join(buildDirectory, "globe")
+const tilesetFile = path.join(globeDirectory, "tileset.json")
 
-const marker = path.join(buildDirectory, "cesium", ".lekishi-cesium-version")
+if (requireFile(tilesetFile)) {
+  const tileset = JSON.parse(read(tilesetFile))
 
-if (requireFile(marker) && read(marker) !== cesiumVersion) {
-  fail(`the copied Cesium runtime is not ${cesiumVersion}; run \`pnpm sync:cesium\` and rebuild`)
+  if (tileset.format !== "lekishi-globe-bundles" || tileset.version !== 1) {
+    fail(
+      `globe/tileset.json is ${tileset.format} version ${tileset.version}, not lekishi-globe-bundles 1`,
+    )
+  }
+
+  const bundles = files.filter((file) => /^globe\/b\/.*\.bin$/.test(inBuild(file)))
+
+  if (bundles.length !== tileset.bundles) {
+    fail(
+      `globe/tileset.json lists ${tileset.bundles} bundles, the artifact carries ${bundles.length}`,
+    )
+  }
+
+  const rootBundle = path.join(globeDirectory, "b", "root.bin")
+
+  if (requireFile(rootBundle)) {
+    const bytes = readFileSync(rootBundle)
+    const count = bytes.readUInt16LE(6)
+    const levels = Array.from({ length: count }, (_, i) => bytes.readUInt8(8 + i * 20))
+
+    if (bytes.toString("latin1", 0, 4) !== "LKGB" || bytes.readUInt16LE(4) !== 1) {
+      fail("globe/b/root.bin is not a version 1 Lekishi globe bundle")
+    } else if (count !== 2 || levels.some((z) => z !== 0)) {
+      fail(`globe/b/root.bin must hold the two level-0 tiles, holds ${count} at levels ${levels}`)
+    }
+  }
+}
+
+// The Terrain Tiles require their attribution block wherever the elevation is used.
+const attributionFile = path.join(globeDirectory, "ATTRIBUTION.txt")
+
+if (requireFile(attributionFile)) {
+  const attribution = read(attributionFile)
+
+  for (const marker of [
+    "Terrain Tiles on AWS Open Data",
+    "U.S. Geological Survey",
+    "Natural Earth II",
+  ]) {
+    if (!attribution.includes(marker)) {
+      fail(`globe/ATTRIBUTION.txt does not carry ${marker}`)
+    }
+  }
+}
+
+if (files.length > MAX_FILES) {
+  fail(`the artifact has ${files.length} files; Cloudflare Pages accepts at most ${MAX_FILES}`)
 }
 
 // --- no server process --------------------------------------------------------
@@ -344,14 +384,11 @@ if (existsSync(path.join(buildDirectory, "server"))) {
 }
 
 const strayScripts = files.filter(
-  (file) =>
-    file.endsWith(".js") &&
-    !inBuild(file).startsWith("cesium/") &&
-    !inBuild(file).startsWith("_app/"),
+  (file) => file.endsWith(".js") && !inBuild(file).startsWith("_app/"),
 )
 
 if (strayScripts.length > 0) {
-  fail(`unexpected scripts outside _app/ and cesium/: ${strayScripts.map(inBuild).join(", ")}`)
+  fail(`unexpected scripts outside _app/: ${strayScripts.map(inBuild).join(", ")}`)
 }
 
 // --- report -------------------------------------------------------------------
@@ -367,5 +404,5 @@ if (problems.length > 0) {
 }
 
 console.log(
-  `Static build verified: ${files.length} files, Cesium ${cesiumVersion} runtime included, no server runtime.`,
+  `Static build verified: ${files.length} files, globe tiles and tile worker included, no server runtime.`,
 )

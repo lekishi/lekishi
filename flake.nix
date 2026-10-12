@@ -22,12 +22,12 @@
         };
       in
       {
-        # The site is a statically built SvelteKit project: Node and pnpm are the
-        # whole toolchain. Node matches the version CI runs (`NODE_VERSION: 24`).
+        # Node matches CI (`NODE_VERSION: 24`); Python paints the shipped tiles.
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             nodejs_24
             pnpm
+            (python3.withPackages (ps: [ ps.numpy ps.pillow ]))
 
             # Version control and repository hygiene.
             git

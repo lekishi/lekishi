@@ -393,7 +393,11 @@
   <p
     class="pointer-events-none absolute bottom-3 left-3 z-10 hidden max-w-[16rem] text-[0.65rem] leading-snug text-slate-400 lg:block"
   >
-    Globe: CesiumJS (Apache-2.0) · Imagery: Natural Earth II, shipped with Cesium · Terrain:
-    ellipsoid, no Cesium ion account
+    Globe: Three.js (MIT), 3d-tiles-renderer (Apache-2.0) · Elevation: Terrain Tiles on AWS Open
+    Data (Mapzen and contributors) · Imagery painted from it and Natural Earth II ·
+    <a
+      class="pointer-events-auto underline decoration-slate-600 underline-offset-2 transition-colors hover:text-slate-200 focus-visible:rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
+      href="/globe/ATTRIBUTION.txt">Full attribution</a
+    >
   </p>
 </div>

@@ -18,8 +18,9 @@ link:DELIVERY_EVALUATION.adoc[the delivery evaluation],
 link:CONTENT_BOUNDARY.adoc[the content boundary],
 link:COMPARISON_FIXTURE_BOUNDARY.adoc[the comparison fixture boundary],
 link:COMPARISON_REVIEW_ROUTE.adoc[the comparison review route],
-link:CHAPTER_PRESENTATION.adoc[the chapter presentation decision], and
-link:CHAPTER_READER_ROUTE.adoc[the chapter reader route].
+link:CHAPTER_PRESENTATION.adoc[the chapter presentation decision],
+link:CHAPTER_READER_ROUTE.adoc[the chapter reader route], and
+link:GLOBE_RENDERER.adoc[the globe renderer decision].
 
 == Goal
 
@@ -131,7 +132,10 @@ A first hardware round met the tablet thresholds on an iPad and an iPhone. On
 request. A second hardware round followed the same day on a desktop (Firefox
 and Chrome), an iPad, an iPhone and a mid-range Android phone. On 2026-10-12
 the owner chose the custom globe; the other spikes were removed and the
-investigation records kept.
+investigation records kept. The same day the custom globe replaced Cesium in
+the atlas, with its tiles built at deploy time and four sibling tiles to a
+file; the measurements are in link:GLOBE_RENDERER.adoc[the globe renderer
+decision].
 
 === Timeline and diagrams
 
@@ -143,9 +147,9 @@ the map.
 
 These stand from link:STATIC_ARCHITECTURE.adoc[the static architecture
 decision] and `AGENTS.md`: no server, no server-only data loading, no module
-scope access to `window` or WebGL, one workspace mount per page, Cesium (or
-its successor) imported in one module, runtime assets resolved through the
-base URL and checked by the build invariant, idempotent disposal, and no
+scope access to `window` or WebGL, one workspace mount per page, the globe's
+engine imported only by the renderer's modules, its tiles and worker shipped
+in the artifact and checked by the build invariant, idempotent disposal, and no
 provider credential anywhere in the artifact.
 
 == Delivery

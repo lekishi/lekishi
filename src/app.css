@@ -2,24 +2,11 @@
  * The site's single stylesheet.
  *
  * Tailwind v4 with `source(none)`: only the site's own source is scanned, so the
- * historical contract JSON under `historical/` and the Cesium runtime under
- * `static/cesium` can never contribute utility classes.
+ * historical contract JSON under `historical/` and the generated globe tiles
+ * under `static/globe` can never contribute utility classes. The globe's
+ * markers and labels are built in `src/lib/atlas/renderer/globe/view.ts`, which
+ * `./lib` covers.
  */
 @import "tailwindcss" source(none);
 @source "./lib";
 @source "./routes";
-
-/* Cesium's widget styles are part of the renderer. Importing them here keeps one
-   stylesheet for the whole site instead of a second link the layout has to know
-   about. */
-@import "cesium/Build/Cesium/Widgets/widgets.css";
-
-/* Cesium sizes its canvas from the container; the atlas shell owns the viewport
-   height, so the widget must fill whatever the shell gives it. */
-.cesium-viewer,
-.cesium-viewer-cesiumWidgetContainer,
-.cesium-widget,
-.cesium-widget canvas {
-  height: 100%;
-  width: 100%;
-}

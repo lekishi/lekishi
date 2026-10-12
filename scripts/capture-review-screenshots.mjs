@@ -64,7 +64,7 @@ async function openChapter(page, route) {
     .locator("#atlas-workspace canvas")
     .first()
     .waitFor({ state: "visible", timeout: 30_000 })
-  // Let Cesium finish its first tiles so the globe is not captured mid-load.
+  // Let the globe load its first tiles so the globe is not captured mid-load.
   await page.waitForTimeout(4_000)
 }
 

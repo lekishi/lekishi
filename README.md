@@ -16,8 +16,8 @@ application server, no database, and no BEAM runtime:
 | Atlas bootstrap (`src/lib/atlas/entry.ts`)                                                  | The only module that mounts the workspace. It keeps one workspace per page, releases it at the `pagehide` boundary, and restores exactly one on `pageshow`.                                                                                                                                                                                                                                                                                     |
 | Svelte + TypeScript (`src/lib/atlas`)                                                       | Search, filters, drawers, timeline controls, selection, responsive layout, and the single source of truth for selection, time window, playhead, and camera-follow state (`state.ts`).                                                                                                                                                                                                                                                           |
 | Chapter content (`src/lib/atlas/chapter-content.ts`, `chapter-catalog.ts`, `projection.ts`) | The browser-safe content boundary: Vite bundles the reviewed chapter's records and publication sets, the projection selects the newest published revision per record and takes the chapter's coverage window from its caller, and the atlas domain is what the workspace, scene, and renderer share. The comparison catalog loads non-production chapters (the Qin fixture) through the same projection without entering the production bundle. |
-| Cesium (`src/lib/atlas/renderer`)                                                           | Globe, camera, picking, and map primitives. It receives a derived, renderer-independent scene and reports user input back as callbacks.                                                                                                                                                                                                                                                                                                         |
-| Tailwind (`src/app.css`)                                                                    | All styling, including the Cesium widget stylesheet, so the site ships one stylesheet.                                                                                                                                                                                                                                                                                                                                                          |
+| Globe (`src/lib/atlas/renderer`)                                                            | A custom Three.js globe: tiles, camera, picking, markers, and labels. It receives a derived, renderer-independent scene and reports user input back as callbacks.                                                                                                                                                                                                                                                                               |
+| Tailwind (`src/app.css`)                                                                    | All styling, including the globe's markers and labels, so the site ships one stylesheet.                                                                                                                                                                                                                                                                                                                                                        |
 | Historical contract (`historical/v0`, `src/lib/historical/contract`)                        | The versioned schemas, worked examples, and adversarial vectors, with the TypeScript reference semantics that validate them.                                                                                                                                                                                                                                                                                                                    |
 
 Rules that keep the boundary intact:
@@ -58,11 +58,19 @@ malformed request target, and no access to `.svelte-kit`, the module graph, or a
 SSR runtime. That is what the browser checks run against, so the suite proves the
 artifact is deployable as plain files rather than proving a preview server works.
 
-`pnpm dev` and `pnpm build` first run `pnpm sync:cesium`, which copies the Cesium
-runtime (Workers, Assets, Widgets, ThirdParty) from the npm package into
-`static/cesium`. SvelteKit copies everything under `static/` into the build
-unchanged, and `window.CESIUM_BASE_URL` points at `/cesium/`, so the same paths
+`pnpm dev` and `pnpm build` first run `pnpm sync:globe`, which builds the
+globe's tiles into `static/globe` with `scripts/globe/build-tiles.py` (Python 3
+with numpy and Pillow; a private virtual environment under `.cache/globe` is
+created when the system Python lacks them). The first build fetches open
+elevation into `.cache/globe` and paints every tile, which takes a few minutes;
+later runs skip the build while `scripts/globe/` is unchanged. SvelteKit copies
+everything under `static/` into the build unchanged, so the same `/globe/` paths
 work in development and in the deployed artifact.
+
+The pinned `nix develop` environment includes Python, numpy and Pillow, so it
+does not need the fallback virtual environment. On an existing Cesium checkout,
+the sync step also removes the retired generated `static/cesium` runtime before
+building; no manual migration cleanup is needed.
 
 ### The deployable artifact
 
@@ -74,13 +82,15 @@ build/
   _redirects              explicit /atlas/ → /atlas redirect
   favicon.ico  robots.txt  images/
   _app/immutable/...      hashed JS and CSS
-  cesium/                 Workers, Assets (Natural Earth II), Widgets, ThirdParty
+  _app/immutable/workers/ the globe's tile worker
+  globe/                  tileset.json, tile bundles (b/), ATTRIBUTION.txt
 ```
 
 `pnpm build` ends with `node scripts/check-static-build.mjs`, the build invariant
 that replaced the old `mix lekishi.assets.check`: it fails the build if the
-prerendered pages, the hashed bundles, the single stylesheet with the Cesium
-widget styles, or the Cesium runtime directories are missing, if the atlas page
+prerendered pages, the hashed bundles, the single stylesheet, the globe's tile
+worker, its tileset, bundles, or attribution are missing, if the artifact holds
+more files than the static host accepts, if the atlas page
 does not have exactly one mount point, if the artifact contains a server runtime,
 if the built scripts or the prerendered pages do not carry the reviewed chapter,
 if the retired synthetic fixture's sentinel strings reach the artifact, if the Qin
@@ -183,13 +193,14 @@ behavior. `static/_redirects` only normalizes `/atlas/` to `/atlas`; rewriting
 clean URL. A path that is not in the artifact is answered from `404.html`, which
 static hosts serve by convention.
 
-### Cesium without a provider account
+### A globe without a provider account
 
-The foundation uses only what ships with the CesiumJS package: Natural Earth II
-imagery from `Assets/Textures/NaturalEarthII` and the ellipsoid terrain provider.
-No Cesium ion account, token, or third-party provider is required, and the
-renderer clears Cesium's bundled demo token and ion logo credit so that
-accidental ion usage fails loudly. Attribution is shown in the workspace footer
+The globe draws only tiles the artifact ships: elevation from the Terrain Tiles
+on AWS Open Data (Mapzen and contributors), and imagery painted from that
+elevation with the Natural Earth II hue, at levels 0–5 worldwide and 6–7 over
+the Tang chapter's extent. Four sibling tiles share one bundle, so the artifact
+carries about 810 tile files. No tile service, account, token, or third-party
+provider is required. Attribution is shown in the workspace footer
 (from the `lg` breakpoint) and on the overview page at every width.
 
 ## Historical contract

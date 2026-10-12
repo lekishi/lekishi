@@ -7,8 +7,8 @@ build/
 # Dependencies.
 node_modules/
 
-# The Cesium runtime, copied from the npm package.
-static/cesium/
+# The globe tiles, built by `pnpm sync:globe`.
+static/globe/
 
 # The historical contract keeps its hand-written formatting: the seal utility
 # rewrites hash fields positionally and the tests compare the stored hashes with

@@ -9,8 +9,8 @@ import { expect, test, type Page } from "@playwright/test"
  * They cover direct navigation to a chapter route, the single workspace mount,
  * selection and time-window behavior, camera-follow rules, workspace lifecycle,
  * keyboard access, the touch layouts, and the production asset surface: hashed
- * bundles, the prerendered shell, the copied Cesium workers, textures, and widget
- * styles, and no Cesium ion request.
+ * bundles, the prerendered shell, the globe's tile worker and tile bundles, and
+ * no request to any other origin.
  *
  * The chapter's own route and surfaces are covered by `e2e/chapters.spec.ts`;
  * these checks are about the workspace's behavior and the artifact.
@@ -153,7 +153,7 @@ async function mountAtlas(page: Page): Promise<string[]> {
   const problems = collectProblems(page)
 
   await page.goto(CHAPTER)
-  // The workspace renders its Cesium canvas once the renderer starts.
+  // The workspace renders its globe canvas once the renderer starts.
   await expect(page.locator("#atlas-workspace canvas").first()).toBeVisible({ timeout: 30_000 })
 
   return problems
@@ -223,8 +223,13 @@ test("mounts one workspace from the built artifact", async ({ page }) => {
   // second URL for the workspace entry, which mounted two workspaces; nothing in
   // the built artifact may be requested under two URLs again. The development
   // server re-requests modules for hot updates, so the check is static-only.
+  // The globe's tile workers are the exception: each worker in the pool loads
+  // the same worker script, so that one URL repeats, and it must stay one URL.
   if (mode === "static") {
-    expect(requests).toHaveLength(new Set(requests).size)
+    const modules = requests.filter((url) => !url.includes("/_app/immutable/workers/"))
+    const workers = requests.filter((url) => url.includes("/_app/immutable/workers/"))
+    expect(modules).toHaveLength(new Set(modules).size)
+    expect(new Set(workers).size).toBe(1)
   }
 
   // The workspace reports itself as a single client-owned handle.
@@ -362,56 +367,56 @@ test("answers a malformed request target instead of ending the server", async ({
   expect((await request.get(CHAPTER)).status()).toBe(200)
 })
 
-test("serves built assets and the Cesium runtime without Cesium ion", async ({ page, request }) => {
-  const cesiumRequests: string[] = []
-  const ionRequests: string[] = []
+test("draws the globe from the artifact's own tiles and nothing else", async ({
+  page,
+  request,
+}) => {
+  const tileRequests: string[] = []
+  const foreignRequests: string[] = []
+  const origin = new URL(test.info().project.use.baseURL ?? "http://127.0.0.1").origin
 
-  page.on("request", (req) => {
+  // The tiles load in a worker; its requests are the page's too.
+  page.context().on("request", (req) => {
     const url = req.url()
 
-    if (url.includes("/cesium/")) {
-      cesiumRequests.push(url)
+    if (url.includes("/globe/")) {
+      tileRequests.push(url)
     }
 
-    if (/cesium\.com|api\.cesium|ion\.cesium/.test(url)) {
-      ionRequests.push(url)
+    if (!url.startsWith(origin) && !url.startsWith("data:") && !url.startsWith("blob:")) {
+      foreignRequests.push(url)
     }
   })
 
   await mountAtlas(page)
-  // Let Cesium finish loading imagery and any worker it needs.
-  await page.waitForTimeout(5_000)
+  // The first view needs the tileset and the root bundle, then a refinement.
+  await expect.poll(() => tileRequests.some((url) => url.endsWith("/globe/b/root.bin"))).toBe(true)
+  await expect
+    .poll(() => tileRequests.some((url) => /\/globe\/b\/\d+\/\d+\/\d+\.bin$/.test(url)))
+    .toBe(true)
 
-  expect(ionRequests).toEqual([])
-  expect(cesiumRequests.length).toBeGreaterThan(0)
+  // No provider, token, or tile service: every request stays on the site.
+  expect(foreignRequests).toEqual([])
 
-  // The runtime directories Cesium resolves through CESIUM_BASE_URL are part of
-  // the artifact: workers, imagery, and the widget stylesheet.
-  for (const entry of [
-    "cesium/Workers/createTaskProcessorWorker.js",
-    "cesium/Assets/Textures/NaturalEarthII/tilemapresource.xml",
-    "cesium/Assets/Textures/NaturalEarthII/0/0/0.jpg",
-    "cesium/Widgets/widgets.css",
-  ]) {
+  // The tiles and their attribution are part of the artifact.
+  for (const entry of ["globe/tileset.json", "globe/b/root.bin", "globe/ATTRIBUTION.txt"]) {
     const response = await request.get(`/${entry}`)
     expect(response.status(), `${entry} should be served from the static artifact`).toBe(200)
   }
 
-  // The site ships one stylesheet, and it carries the Cesium widget styles.
-  const stylesheetHref = await page.evaluate(
-    () => document.querySelector('link[rel="stylesheet"]')?.getAttribute("href") ?? "",
-  )
-  const stylesheet = await request.get(stylesheetHref)
-  expect(await stylesheet.text()).toContain(".cesium-viewer")
+  const tileset = await (await request.get("/globe/tileset.json")).json()
+  expect(tileset).toMatchObject({ format: "lekishi-globe-bundles", version: 1 })
 
-  // Attribution is present in the workspace, and no provider account is implied.
-  // The footer line is part of the wide layout (`hidden lg:block`), so a phone
-  // viewport keeps it in the document without showing it; the overview page
-  // carries the same attribution at every width.
-  const attribution = page.getByText("CesiumJS (Apache-2.0)", { exact: false })
+  // Attribution is present in the workspace. The footer line is part of the wide
+  // layout (`hidden lg:block`), so a phone viewport keeps it in the document
+  // without showing it; the overview page carries the same attribution at every
+  // width.
+  const attribution = page.getByText("Terrain Tiles on AWS Open Data", { exact: false })
 
   await expect(attribution).toHaveCount(1)
-  await expect(page.getByText("no Cesium ion account", { exact: false })).toHaveCount(1)
+  await expect(
+    page.getByRole("link", { name: "Full attribution", includeHidden: true }),
+  ).toHaveAttribute("href", "/globe/ATTRIBUTION.txt")
 
   if ((page.viewportSize()?.width ?? 0) >= 1024) {
     await expect(attribution).toBeVisible()
@@ -423,8 +428,8 @@ test("amplifies only the Firefox/Linux Ctrl-wheel trackpad pinch", async ({ page
   // multiplied by five, because Firefox on Linux reports a trackpad pinch as a
   // very small Ctrl-wheel delta. Recording wheel events at the document during
   // capture sees both the original and the replacement, which is the actual
-  // browser-level semantics: ordinary wheels and touchscreen pinches keep
-  // Cesium's default response.
+  // browser-level semantics: ordinary wheels and touchscreen pinches keep the
+  // camera controls' default response.
   await page.addInitScript(() => {
     const log: { deltaX: number; deltaY: number; ctrlKey: boolean }[] = []
     ;(window as unknown as { __wheelLog: typeof log }).__wheelLog = log
@@ -603,6 +608,108 @@ test("selects events by tap on touch input", async ({ page, hasTouch }) => {
   await page.locator('[data-event-id="lks:event:yaku-arrival-753"]').tap()
   await expect(page.getByTestId("atlas-selection")).toBeVisible()
   await expect(page.getByTestId("atlas-selection")).toContainText("益救島")
+})
+
+test("selects an event by clicking its marker on the globe", async ({ page, hasTouch }) => {
+  test.skip(hasTouch, "Desktop pointer click; the touch project covers taps in the list.")
+
+  // Picking is under test, not flight timing: keep the target stationary.
+  await page.emulateMedia({ reducedMotion: "reduce" })
+  await mountAtlas(page)
+
+  // The active dot is drawn above the other events at 平城宮. A canvas click
+  // must establish selection, not merely preserve an existing list selection.
+  const active = page.locator('[data-marker-id="lks:event:appointment-750"] > span').first()
+  await expect(active).toHaveCSS("width", "12px")
+  await expect(page.locator('[data-event-id="lks:event:appointment-750"]')).not.toHaveAttribute(
+    "aria-current",
+    "true",
+  )
+  const activeBox = (await active.boundingBox())!
+  await page.mouse.click(activeBox.x + activeBox.width / 2, activeBox.y + activeBox.height / 2)
+  await expect(page.locator('[data-event-id="lks:event:appointment-750"]')).toHaveAttribute(
+    "aria-current",
+    "true",
+  )
+
+  // Markers are laid over the canvas from the 3D scene and never take the
+  // pointer themselves: the click lands on the canvas, and the renderer picks the
+  // marker under it. Select explicitly: several events share this position,
+  // so an unselected dot alone cannot promise a particular event identity.
+  await selectEvent(page, "lks:event:yaku-arrival-753")
+  const dot = page.locator('[data-marker-id="lks:event:yaku-arrival-753"] > span').first()
+  await expect(dot).toBeVisible()
+  await expect(dot).toHaveCSS("width", "16px")
+  const box = (await dot.boundingBox())!
+
+  await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2)
+
+  await expect(page.getByTestId("atlas-selection")).toBeVisible()
+  await expect(page.locator('[data-event-id="lks:event:yaku-arrival-753"]')).toHaveAttribute(
+    "aria-current",
+    "true",
+  )
+
+  // The departure shares the arrival's coordinates. Both must remain selected
+  // when clicked, regardless of their order in the scene.
+  await selectEvent(page, "lks:event:yaku-departure-753")
+  const departure = page.locator('[data-marker-id="lks:event:yaku-departure-753"] > span').first()
+  await expect(departure).toHaveCSS("width", "16px")
+  const departureBox = (await departure.boundingBox())!
+  await page.mouse.click(
+    departureBox.x + departureBox.width / 2,
+    departureBox.y + departureBox.height / 2,
+  )
+  await expect(page.locator('[data-event-id="lks:event:yaku-departure-753"]')).toHaveAttribute(
+    "aria-current",
+    "true",
+  )
+})
+
+test("redraws a settled globe after WebGL context restoration without input", async ({ page }) => {
+  await page.addInitScript(() => {
+    const draw = WebGL2RenderingContext.prototype.drawElements
+    WebGL2RenderingContext.prototype.drawElements = function (...args) {
+      draw.apply(this, args)
+      const canvas = this.canvas as HTMLCanvasElement
+      canvas.dataset.draws = String(Number(canvas.dataset.draws ?? 0) + 1)
+    }
+  })
+  await mountAtlas(page)
+  const canvas = page.locator("[data-testid='atlas-globe'] canvas")
+  await expect.poll(async () => Number(await canvas.getAttribute("data-draws"))).toBeGreaterThan(0)
+  // Wait for genuine demand-rendering idle, not an arbitrary elapsed delay.
+  await canvas.evaluate(async (element) => {
+    let stable = 0
+    let previous = element.getAttribute("data-draws")
+    while (stable < 20) {
+      await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()))
+      const current = element.getAttribute("data-draws")
+      stable = current === previous ? stable + 1 : 0
+      previous = current
+    }
+  })
+  const before = Number(await canvas.getAttribute("data-draws"))
+  await canvas.evaluate(async (element) => {
+    const gl = (element as HTMLCanvasElement).getContext("webgl2")!
+    const extension = gl.getExtension("WEBGL_lose_context")!
+    const lost = new Promise<void>((resolve) =>
+      element.addEventListener("webglcontextlost", () => resolve(), { once: true }),
+    )
+    extension.loseContext()
+    await lost
+    // Let the loss event finish dispatching before requesting restoration.
+    // A microtask inside that dispatch is too early for Chromium to allow it.
+    await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()))
+    const restored = new Promise<void>((resolve) =>
+      element.addEventListener("webglcontextrestored", () => resolve(), { once: true }),
+    )
+    extension.restoreContext()
+    await restored
+  })
+  await expect
+    .poll(async () => Number(await canvas.getAttribute("data-draws")))
+    .toBeGreaterThan(before)
 })
 
 test("keeps events the chapter cannot place in the list without a map position", async ({
@@ -808,10 +915,14 @@ test("keeps the phone layout free of overlapping panels", async ({ page }) => {
     // A content-driven height change: editing the window into BCE years adds the
     // year label under the input, which grows the controls without a resize. The
     // overlay column follows the controls' measured height, so the panels stay
-    // apart here too.
+    // apart here too. The measurement arrives through a ResizeObserver, one
+    // rendering step after the label appears, so the check waits for the
+    // settled layout rather than sampling the frame in between.
     await page.locator("#atlas-window-start").fill("0")
     await expect(page.locator('[data-testid="atlas-time-controls"]')).toContainText("1 BCE")
-    await assertNoOverlappingPanels(page, `BCE window at ${viewport.width}`)
+    await expect(async () => {
+      await assertNoOverlappingPanels(page, `BCE window at ${viewport.width}`)
+    }).toPass({ timeout: 5_000 })
     await page.locator("#atlas-window-start").fill("750")
     await expect(page.locator('[data-testid="atlas-time-controls"]')).not.toContainText("BCE")
 

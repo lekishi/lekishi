@@ -15,7 +15,7 @@ import { relationToWindow, type OccurrenceRelation, type PlaybackState } from ".
  * The renderer-facing view of the atlas.
  *
  * A scene is derived from state, never stored in it, and contains no renderer
- * objects: only identifiers, placements, and display status. Swapping Cesium for
+ * objects: only identifiers, placements, and display status. Swapping the globe for
  * another engine replaces the renderer, not this contract or the state module.
  *
  * The scene keeps every in-window event, including the ones the map cannot

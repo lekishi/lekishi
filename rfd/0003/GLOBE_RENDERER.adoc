@@ -1,0 +1,134 @@
+:authors: Darwin D Wu <darwin67@users.noreply.github.com>
+:state: discussion
+:labels: architecture, rendering, three, globe, static, tiles
+:date: 2026-10-12
+
+= RFD 3 globe renderer decision
+
+== Provenance and scope
+
+On 2026-10-12 the owner chose the custom Three.js globe as the atlas's
+renderer (link:RENDERER_SPIKE.adoc[the renderer spike record], decision). That
+record left the shipped atlas on Cesium and named the next work: bring the
+custom globe behind the `AtlasRenderer` boundary, bundled through SvelteKit.
+The owner approved a plan for that slice the same day, with one addition from
+the owner's question about the file count: four sibling tiles share one file.
+
+This record covers the browser renderer and its tiles only. The domain, the
+state, the scene, the workspace, and the `AtlasRenderer` boundary are
+unchanged; no historical content, publication set, or ledger row changed.
+link:STATIC_ARCHITECTURE.adoc[The static architecture decision] stands, and
+its Cesium-specific rules (the runtime copied into `static/cesium`, the base
+URL, the ion token cleared) are replaced by the rules below; that record stays
+readable as written.
+
+== Decision
+
+* *The custom globe replaces Cesium in the atlas.*
+  `src/lib/atlas/renderer/globe-renderer.ts` implements `AtlasRenderer` on a
+  Three.js globe ported from the spike (`spikes/renderer/globe/followup/`) into
+  typed modules under `renderer/globe/`: tile geometry, the tile manager, the
+  tile worker, geodesy and flights, label placement, and the view. Cesium, its
+  runtime copy, and its build checks are removed from the package and the
+  artifact.
+* *What the renderer draws now.* Event markers in the scene's two tones
+  (definite and possible) and three emphases (base, active, selected); labels
+  placed without collision, the selected and active ones first; picking by
+  screen distance (8 px for a mouse, 14 px for touch) or on a label; the home
+  view; flights to a focused event (1.2 s, eased, over an arc for long hops, a
+  jump under reduced motion); and camera following that stops on manual input,
+  detected from pointer and wheel events so a flight never cancels it. The
+  Firefox/Linux Ctrl-wheel pinch keeps its 5x amplification.
+* *Tiles built at deploy time, not committed.* `scripts/globe/build-tiles.py`
+  builds them into `static/globe` from the Terrain Tiles on AWS Open Data and
+  the Natural Earth II hue, vendored at level 2 under
+  `scripts/globe/natural-earth-ii/`. `pnpm dev` and `pnpm build` run it
+  through `scripts/sync-globe-tiles.mjs`, which skips the build while
+  `scripts/globe/` is unchanged; CI caches the tiles on the same key.
+  Committing ~20 MB of binary tiles would grow the history on every repaint.
+* *Coverage.* Levels 0–5 worldwide and 6–7 over the Tang chapter's extent
+  (107°E–140°E, 22°N–40°N). Beyond the built levels the globe subdivides the
+  parent's heights and imagery instead of requesting tiles that do not exist.
+* *Four sibling tiles per file.* Each refinement is one request: `b/root.bin`
+  holds the two level-0 tiles and `b/{z}/{x}/{y}.bin` holds the four children
+  of tile z/x/y. The quadtree always loads siblings together, so a bundle adds
+  no bytes and no wasted requests. The format is versioned (`LKGB`, version 1)
+  and read and written by `renderer/globe/bundle.ts`.
+* *Attribution.* The visible line names Three.js, 3d-tiles-renderer, the
+  elevation, and the imagery, and links the full required attribution, which
+  ships at `/globe/ATTRIBUTION.txt`.
+* *The build invariant.* `scripts/check-static-build.mjs` now requires the tile
+  worker, the `/globe/` URL in the built scripts, a well-formed tileset whose
+  bundle count matches the files, a valid root bundle, the attribution, one
+  stylesheet, and at most 20,000 files (the static host's limit).
+
+== Measurements
+
+Measured on 2026-10-12 in the cloud development container, from
+`pnpm build` on this change and on `main` at `d1227be2` (Cesium).
+
+[cols="2,1,1",options="header"]
+|===
+|Artifact |Cesium (`main`) |Custom globe
+
+|Files
+|522
+|944
+
+|Total bytes
+|11.9 MB
+|21.9 MB
+
+|Renderer runtime or tiles
+|7.1 MB Cesium runtime in 390 files
+|20.7 MB of tiles in 809 bundles (3,162 tiles), plus `tileset.json` and the attribution
+
+|Atlas page chunk (raw / gzip)
+|4.2 MB / 1.12 MB
+|629 KB / 160 KB
+
+|Tile worker
+|Cesium's own workers, in the runtime above
+|5.4 KB
+|===
+
+* Without bundles the same tiles would be 6,324 files (a height and an
+  imagery file per tile); the bundles bring the artifact to 944.
+* The tile build from a cold cache, elevation fetched, took about 2 min 45 s;
+  an unchanged builder skips it.
+* The artifact is larger because Cesium drew a flat ellipsoid with 42 Natural
+  Earth II tiles and the globe now carries relief and painted imagery to
+  level 7. The reader downloads only the tiles the view needs: the home view
+  loads the root bundle and a few child bundles, and the atlas JavaScript a
+  reader downloads before the globe appears is about a seventh of Cesium's.
+* Checks on this change: `pnpm check` with no errors, 524 unit and contract
+  tests passing, the build invariant passing, and the browser suite on the
+  built artifact, including a new check that a click on a globe marker selects
+  its event and a check that every globe request stays on the artifact's own
+  origin.
+
+== Open
+
+* *Frame times on devices.* The owner benchmarks the pull request's preview on
+  the desktop, the iPad, the iPhone, and the mid-range phone before merge. The
+  spike's lighter phone tier (half the trees, no shadows) concerns the diorama,
+  which the atlas does not draw yet, so no tier is chosen in this change.
+* *The deploy build.* The static host's build now needs Python 3 and network
+  access to the elevation tiles and the package index on a cold cache. The
+  first preview build of this change is the check that its build image
+  provides them.
+* *Not in this change:* draped polygons, relationship arcs, and journey lines,
+  which wait on the domain and scene types for them
+  (link:IMPLEMENTATION.adoc[the implementation plan], rendering).
+
+== Evidence
+
+* The renderer: `src/lib/atlas/renderer/globe-renderer.ts` and
+  `src/lib/atlas/renderer/globe/`, with `globe-renderer.test.ts`,
+  `bundle.test.ts`, `geo.test.ts`, `labels.test.ts`, and `tile-mesh.test.ts`.
+* The tiles: `scripts/globe/build-tiles.py`, `scripts/sync-globe-tiles.mjs`.
+* The build invariant: `scripts/check-static-build.mjs`.
+* The browser checks: `e2e/atlas.spec.ts` ("draws the globe from the
+  artifact's own tiles and nothing else", "selects an event by clicking its
+  marker on the globe", "amplifies only the Firefox/Linux Ctrl-wheel trackpad
+  pinch").

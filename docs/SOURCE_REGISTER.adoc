@@ -394,17 +394,17 @@ count as read.
 |===
 |Source |What it gives |Terms (verified) |Status |Notes
 
-|Natural Earth (incl. Natural Earth II raster bundled with Cesium)
+|Natural Earth (incl. the Natural Earth II raster)
 |Coastlines, rivers, lakes, tints
 |Public domain
 |✓ allowed
-|In use. Attribution shown by convention.
+|In use: the globe's imagery takes its hue from Natural Earth II, vendored at level 2 under `scripts/globe/natural-earth-ii/` (byte copies of the tiles CesiumJS 1.145.0 shipped). Attribution shown by convention.
 
 |Terrarium elevation tiles (Mapzen, AWS Open Data)
 |Global elevation and bathymetry mosaic
 |Open; attribution to the underlying sources per the Joerd attribution guide (2026-10-10)
 |⚠ conditional
-|Carry the attribution block the guide lists. In use for the hero mock.
+|Carry the attribution block the guide lists. In use for the hero mock and, since 2026-10-12, for the atlas globe's elevation and painted imagery; the block ships verbatim at `/globe/ATTRIBUTION.txt`, linked from the visible attribution.
 
 |SRTM; GEBCO; ETOPO
 |Elevation and bathymetry
@@ -459,7 +459,13 @@ count as read.
 |Globe and terrain engine
 |Apache-2.0
 |✓ allowed
-|Cesium ion services are a separate paid provider and are not used.
+|No longer shipped: replaced by the custom Three.js globe on 2026-10-12. Cesium ion services are a separate paid provider and were never used.
+
+|3d-tiles-renderer
+|Globe camera controls (`GlobeControls`) and the WGS84 ellipsoid for the custom globe
+|Apache-2.0
+|✓ allowed
+|In use; credited in the visible attribution.
 
 |Three.js; PixiJS; d3; MapLibre GL JS
 |Rendering and visualization libraries

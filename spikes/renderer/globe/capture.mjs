@@ -1,16 +1,16 @@
-// Drives one globe spike through the shared API and writes stills, the flight
+// Drives the custom globe through its spike API and writes stills, the flight
 // video, and stats to spikes/renderer/globe/out/<spike>/.
-// Usage: node spikes/renderer/globe/capture.mjs <cesium|tilesjs|custom> [baseURL]
+// Usage: node spikes/renderer/globe/capture.mjs [followup] [baseURL]
 //
-// Every frame waits for the engine to report its tiles settled (capped), so the
-// pictures show what each engine draws once data has arrived; the stats record
-// how often the cap was hit. Videos are assembled frame by frame because
+// Every frame waits for the globe to report its tiles settled (capped), so the
+// pictures show what it draws once data has arrived; the stats record how
+// often the cap was hit. Videos are assembled frame by frame because
 // real-time recording loses the motion on the container's software GPU.
 import { chromium } from "@playwright/test"
 import { mkdirSync, rmSync, writeFileSync } from "node:fs"
 import { spawn } from "node:child_process"
 import { join } from "node:path"
-const spike = process.argv[2]; if (!spike) { console.error("usage: capture.mjs <spike>"); process.exit(1) }
+const spike = process.argv[2] ?? "followup"
 const base = process.argv[3] ?? "http://127.0.0.1:4300"
 const url = `${base}/spikes/renderer/globe/${spike}/`
 const out = join("spikes/renderer/globe/out", spike); mkdirSync(out, { recursive: true })

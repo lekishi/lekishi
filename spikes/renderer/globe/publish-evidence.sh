@@ -1,10 +1,10 @@
 #!/usr/bin/env sh
-# Copies one globe spike's harness output into rfd/0003/spike/globe/<spike>/ as
-# the evidence the record links: JPEG stills, the flight MP4, and stats.json.
-# The follow-up also has an interaction video, its pick stills and their log.
+# Copies the custom globe's harness output into rfd/0003/spike/globe/<spike>/ as
+# the evidence the record links: JPEG stills, the flight MP4, and stats.json,
+# plus the interaction video, its pick stills and their log.
 # A second argument names a different evidence directory, so a later capture of
 # the same spike does not replace the evidence an earlier record section shows.
-# Usage: publish-evidence.sh <cesium|tilesjs|custom|followup> [evidence-dir]
+# Usage: publish-evidence.sh followup [evidence-dir]
 set -eu
 spike=$1
 src="$(dirname "$0")/out/$spike"

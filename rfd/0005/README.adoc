@@ -397,7 +397,8 @@ hero image, the chapter title in Cinzel, and the Latin and CJK names as a
 A prerendered `/design` page renders every token and every primitive in every
 state, plus the frame at each reviewed width with placeholder content. It is
 the system's documentation, it is what the browser suite screenshots for visual
-review at 1440, 820, 390 and 320 px, and it is marked `noindex`. The RFD does
+review at 1440, 820, 390 and 320 px. Where it is built is an open question
+below; it is never part of the production site's content. The RFD does
 not duplicate component specifications; the page and the components are the
 specification.
 
@@ -433,15 +434,26 @@ scene is an abstract placeholder.
   mock exactly but breaks RFD 1's continuous camera: surfaces would jump at a
   zoom threshold.
 
+== Owner decisions
+
+Answered by the owner on 2026-10-13:
+
+* *Palette and families: yes.* The hero's lacquer, ink and gold palette and
+  its three families are the system's foundation, with the AA corrections
+  above.
+* *The reconciled frame: yes.* Navigation left, selection right, time bottom;
+  the region screen's top story ribbon is dropped.
+* *Fonts: self-hosted and subset.* The CJK payload is measured and recorded
+  against RFD 4 RC4 before it ships.
+
 == Open questions for the owner
 
-* Adopt the hero's lacquer, ink and gold palette and its three families as the
-  system's foundation, with the AA corrections above?
-* Accept the reconciled frame (navigation left, selection right, time bottom),
-  which departs from the region screen's top story ribbon?
-* Self-host subset fonts, accepting a CJK payload to be measured, or start
-  with system fonts?
-* Publish `/design` with the site (`noindex`), or build it only in development?
+* Where `/design` is built. The owner asked why it would be public rather than
+  development-only. Proposed: development and Cloudflare Pages preview builds
+  only, gated the way `spikes/renderer/globe/preview-build.mjs` gates the
+  renderer spike, so each pull request's preview shows its design changes and
+  the production site never carries the page. The alternative is development
+  only.
 
 == Implementation
 

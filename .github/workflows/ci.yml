@@ -77,15 +77,21 @@ jobs:
           - desktop-chromium
           - tablet-touch-chromium
           - phone-chromium
-          - smoke-webkit
-          - smoke-firefox
+          - desktop-webkit
+          - tablet-touch-webkit
+          - phone-webkit
+          - desktop-firefox
         include:
           - project: desktop-chromium
             runner: blacksmith-4vcpu-ubuntu-2404
             workers: 2
-          - project: smoke-webkit
+          - project: desktop-webkit
             browser: webkit
-          - project: smoke-firefox
+          - project: tablet-touch-webkit
+            browser: webkit
+          - project: phone-webkit
+            browser: webkit
+          - project: desktop-firefox
             browser: firefox
     env:
       LEKISHI_SKIP_BUILD: "1"

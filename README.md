@@ -50,6 +50,15 @@ Rules that keep the boundary intact:
 | `pnpm screenshots`             | Capture the desktop, tablet, and phone rendered states for review into `.amp/in/artifacts/`.                           |
 | `pnpm verify`                  | Everything CI runs: format check, type check, tests, then the build with its invariant.                                |
 
+The full browser suite runs in Chromium and WebKit at desktop, tablet-touch,
+and phone sizes, and in Firefox on desktop. No engine uses a smoke-only filter.
+Install all three engines with
+`pnpm exec playwright install --with-deps chromium webkit firefox`.
+On headless Linux, run `xvfb-run -a pnpm e2e` so Firefox can create its software
+WebGL context. Select a project with, for example, `--project=desktop-webkit` or
+`--project=desktop-firefox`. These checks do not replace physical-iPad Safari or
+physical-trackpad acceptance.
+
 `pnpm preview` serves the artifact with `scripts/serve-static.mjs`: a file-only
 server rooted at `build/` with clean-URL handling (`/atlas` serves `atlas.html`;
 `/atlas/` redirects to `/atlas`, because the page references its assets

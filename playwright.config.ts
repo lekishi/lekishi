@@ -78,6 +78,27 @@ export default defineConfig({
         browserName: "chromium",
       },
     },
+    {
+      name: "desktop-webkit",
+      use: { ...devices["Desktop Safari"] },
+    },
+    {
+      // Touch emulation exercises WebKit's mobile input/layout paths, not a
+      // physical iPad or the Safari build shipped on it.
+      name: "tablet-touch-webkit",
+      use: {
+        ...devices["iPad (gen 7)"],
+        viewport: { width: 1024, height: 768 },
+      },
+    },
+    {
+      name: "phone-webkit",
+      use: { ...devices["iPhone 14"] },
+    },
+    {
+      name: "desktop-firefox",
+      use: { ...devices["Desktop Firefox"] },
+    },
   ],
   webServer: process.env.LEKISHI_E2E_BASE_URL
     ? undefined

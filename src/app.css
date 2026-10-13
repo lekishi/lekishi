@@ -10,3 +10,138 @@
 @import "tailwindcss" source(none);
 @source "./lib";
 @source "./routes";
+
+/*
+ * The design system's tokens (RFD 5, "Tokens"; the working reference is
+ * `docs/design-system.md`). Each one is a Tailwind utility (`bg-lacquer`,
+ * `text-ink-dim`, `rounded-plate`, `text-title`) and a custom property the
+ * globe's DOM overlays can read (`var(--color-gold)`). `static` keeps every
+ * token in the stylesheet even when no class uses it yet, because the overlays
+ * and the `/design` reference read the properties directly.
+ *
+ * Tailwind's own palette, sizes and radii are still defined because the
+ * screens written before the system use them. They are cleared here
+ * (`--color-*: initial` and friends) once `design-system.test.ts` lists no
+ * legacy file; until then the test stops any new file from using them.
+ *
+ * Contrast figures are against `lacquer` and are what keeps `ink-faint` at
+ * #8f877a rather than the hero's #7f786b: the hero's value fails AA.
+ */
+@theme static {
+  /* Surfaces and lines */
+  --color-abyss: #0b1114;
+  --color-lacquer: #121a20;
+  --color-lacquer-glass: rgb(18 26 32 / 0.86);
+  --color-lacquer-raised: #1a242b;
+  --color-frame: rgb(210 169 79 / 0.35);
+  --color-rule: #2a343b;
+
+  /* Text */
+  --color-ink: #f3ead7;
+  --color-ink-dim: #b9af9c;
+  --color-ink-faint: #8f877a;
+
+  /* The current thing: selection, playhead, primary action */
+  --color-gold: #d2a94f;
+  --color-gold-bright: #f1cf7a;
+  --color-on-gold: #1a1409;
+  --color-gold-tint: rgb(210 169 79 / 0.14);
+
+  /* Errors only (the renderer failed). Never a historical state. */
+  --color-danger: #e8735a;
+
+  /*
+   * Evidence and relationships: the only colours the map and the interface
+   * share. Each always travels with a non-colour cue (a shape, a dash, a
+   * word), which the `Badge` primitive and the globe's markers draw; a hue on
+   * its own never carries meaning. "Possible", "disputed" and "outside" are
+   * states that modify a mark, not hues, so they have no colour here.
+   */
+  --color-evidence-attested: #d2a94f;
+  --color-evidence-identified: #79c3b4;
+  --color-evidence-schematic: #d2a94f;
+  --color-evidence-overland: #f3ead7;
+  --color-evidence-reconstructed: #b9af9c;
+  --color-rel-transmission: #d9593e;
+  --color-rel-diplomacy: #7fb2e0;
+  --color-rel-conflict: #c94f4f;
+  --color-rel-trade: #c9a66b;
+  --color-rel-institution: #c58fd1;
+
+  /*
+   * Families. The faces are self-hosted and subset in a later step; until then
+   * each falls back to a system face of close metrics, so nothing is fetched
+   * from a font provider at any stage.
+   */
+  --font-display: "Cinzel", "Noto Serif JP", ui-serif, Georgia, serif;
+  --font-serif:
+    "Noto Serif JP", "Noto Serif TC", "Hiragino Mincho ProN", "Yu Mincho", ui-serif, Georgia,
+    serif;
+  --font-sans:
+    "Noto Sans JP", "Hiragino Sans", "Yu Gothic UI", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji";
+
+  /*
+   * The type scale: seven steps and a floor. Nothing below 12 px except the
+   * Latin-only caps label, and no CJK below 13 px (`body-sm`), so a historical
+   * name is never set smaller than the line it sits in.
+   */
+  --text-label: 11px;
+  --text-label--line-height: 14px;
+  --text-label--letter-spacing: 0.16em;
+  --text-caption: 12px;
+  --text-caption--line-height: 16px;
+  --text-body-sm: 13px;
+  --text-body-sm--line-height: 20px;
+  --text-body: 15px;
+  --text-body--line-height: 24px;
+  --text-title-sm: 17px;
+  --text-title-sm--line-height: 24px;
+  --text-title: 22px;
+  --text-title--line-height: 28px;
+  --text-display: 32px;
+  --text-display--line-height: 36px;
+
+  /* Three radii: controls, plates, and round things (`rounded-full`). */
+  --radius-control: 4px;
+  --radius-plate: 6px;
+
+  /* Two depths: glass plates over the scene, and solid sheets. */
+  --shadow-plate: 0 8px 24px rgb(0 0 0 / 0.35);
+  --shadow-sheet: 0 24px 60px rgb(0 0 0 / 0.55);
+
+  /* One easing for the interface; the camera keeps its own timing. */
+  --ease-ui: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/*
+ * Values that are not Tailwind theme namespaces: the motion durations and the
+ * fixed z-order ladder. Components read them as `duration-(--motion-fast)` and
+ * `z-(--z-chrome)`, so the ladder is defined once.
+ */
+@layer base {
+  :root {
+    --motion-fast: 120ms;
+    --motion-base: 200ms;
+    --motion-slow: 400ms;
+    --z-scene: 0;
+    --z-markers: 10;
+    --z-labels: 11;
+    --z-chrome: 20;
+    --z-sheet: 30;
+    --z-alert: 40;
+  }
+
+  /*
+   * Reduced motion: interface transitions become instant (RFD 5 allows an
+   * opacity fade; instant is the stricter reading until a component needs one).
+   * Playback still advances, because time is content, not decoration.
+   */
+  @media (prefers-reduced-motion: reduce) {
+    :root {
+      --motion-fast: 0ms;
+      --motion-base: 0ms;
+      --motion-slow: 0ms;
+    }
+  }
+}

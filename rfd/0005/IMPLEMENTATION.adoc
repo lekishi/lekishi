@@ -12,6 +12,7 @@ so the two checklists do not double-count.
 - [x] Owner answers the open questions: palette and families, the reconciled frame and self-hosted fonts all yes; `/design` in development and PR previews only (2026-10-13, link:README.adoc#_owner_decisions[owner decisions]).
 - [x] First cut of the system sheet published for review: https://claude.ai/artifact/EHEH25jePp1RRBVXbWFwDd[tokens, evidence grammar, type, primitives in their states, the frame at 1440, 820 and 390 px] (2026-10-13).
 - [x] System sheet revised to the owner's answers, with the 320 px frame added (2026-10-13).
+- [x] Navigation canvas reviewed; information architecture kept in this RFD and in-chapter state in the query, `?event=` and its siblings (2026-10-13, link:README.adoc#_information_architecture_and_navigation[information architecture and navigation]).
 - [ ] System sheet approved by the owner.
 
 == Foundation
@@ -34,6 +35,16 @@ so the two checklists do not double-count.
 - [ ] Scene safe area passed to the renderer; flights and follow frame into the clear zone (RFD 3 records the input).
 - [ ] Phone layout: compact date bar and a three-detent bottom sheet.
 - [ ] Overview and chapter entry on the same tokens and header.
+
+== Navigation
+
+- [ ] The URL contract: pure parse and write functions beside `state.ts` for `event`, `place`, `step`, `from` and `to`, with unit tests for precedence, the default window and stale ids; the workspace applies them, adding a history entry for jumps and replacing it for in-chapter changes.
+- [ ] The search index: one static file built from the published records (every name form, romanization and story caption), a build-invariant check that it covers every served chapter, and its size recorded against RFD 4 RC4.
+- [ ] `SearchDialog`: opened by `/` and the `DateBar` control on every page, results grouped by chapter with the current one first, a scope toggle, a preview, and keyboard operation; the left rail's event search reuses it with the scope fixed.
+- [ ] Chapter switcher from the chapter name in the `DateBar`, with the time ribbon and this device's last position per chapter.
+- [ ] Arrival plate for a linked event ("Play from here", "From the beginning") and the not-found line for a stale id.
+- [ ] Home: search first, chapters on the globe and the time ribbon, "Continue where you left off" from browser storage; the not-found page keeps search and the chapter list.
+- [ ] Browser checks: a linked event opens its card, Back after a search jump returns to the origin, and search is reachable by keyboard alone (RC4).
 
 == Atlas compositions (each also an RFD 1 item)
 

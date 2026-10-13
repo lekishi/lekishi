@@ -1,0 +1,44 @@
+= RFD 0005 implementation checklist
+
+Implements link:README.adoc[RFD 5: Design system and layout]. The RFD is in
+`prediscussion`; nothing below is started until the owner has answered its
+open questions and approved the system sheet. Each step after the sheet lands
+something a reader can see, and the RFD 1 checklist items it serves are named
+so the two checklists do not double-count.
+
+== Decide
+
+- [x] Audit the hero mocks and the shipped interface (2026-10-13, link:README.adoc#_audit_2026_10_13[the audit]).
+- [ ] Owner answers the open questions: palette and families, the reconciled frame, self-hosted fonts, `/design` in production.
+- [x] First cut of the system sheet published for review: https://claude.ai/artifact/EHEH25jePp1RRBVXbWFwDd[tokens, evidence grammar, type, primitives in their states, the frame at 1440, 820 and 390 px] (2026-10-13).
+- [ ] System sheet revised to the owner's answers, the 320 px frame added, and approved by the owner.
+
+== Foundation
+
+- [ ] Tokens in `src/app.css` `@theme`, with Tailwind's default colours, sizes and radii cleared.
+- [ ] A unit test that fails on raw hex colours and off-system arbitrary values in `src/` outside the theme.
+- [ ] Font subsetting in the build (fontTools, OFL faces in `static/fonts/`), a build-invariant check that every glyph the chapters use is in the subset, and the measured payload recorded against RFD 4 RC4.
+- [ ] `$lib/ui` primitives: `Plate`, `Button`, `Orb`, `Badge`, `Tabs`, `Field`, `Sheet`, `SectionLabel`, `NameForm`, `DateLine`, `CitationLine`, `EmptyState`, `Icon`.
+- [ ] The `/design` reference page, prerendered and `noindex`, with browser screenshots at the four reviewed widths.
+
+== Migration (no layout change)
+
+- [ ] Existing components rebuilt on the primitives and tokens; screenshots before and after at the four widths.
+- [ ] Globe markers and labels take the evidence tokens and the serif; `MARKER_COLORS` retired.
+- [ ] Editorial status stated once (serves RFD 1's chrome diet).
+
+== The frame
+
+- [ ] Workspace regions (top, left rail, right rail, bottom) replace the single overlay column, keeping the no-overlap coverage at 390 and 320 px.
+- [ ] Scene safe area passed to the renderer; flights and follow frame into the clear zone (RFD 3 records the input).
+- [ ] Phone layout: compact date bar and a three-detent bottom sheet.
+- [ ] Overview and chapter entry on the same tokens and header.
+
+== Atlas compositions (each also an RFD 1 item)
+
+- [ ] `DateBar` and `AboutSheet`.
+- [ ] `TimelineStrip` and `EventDial`; number inputs retired.
+- [ ] `SelectionCard`, narrative and image first.
+- [ ] `LayerOrbs`, `Journal`, `Pennants`, `Minimap`.
+- [ ] `HonestyPlate` and `Legend` with the attribution line.
+- [ ] Handheld skin (`data-tier="handheld"`) when RFD 1's handheld tier is built.

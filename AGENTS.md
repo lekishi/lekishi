@@ -74,7 +74,7 @@ rules below when updating project-specific guidance.
 
 ### Tailwind and CSS guidelines
 
-- Build interface on the design system: read [docs/design-system.md](docs/design-system.md) first. Use the tokens in `src/app.css` and the primitives in `$lib/ui`, and check your change on `/design` (development and PR previews only). `src/lib/ui/design-system.test.ts` fails on Tailwind palette colours, hex values, default type sizes and off-scale radii; files in its `LEGACY` list may only lower their counts, and new files never join it.
+- Build interface on the design system: read [docs/design-system.md](docs/design-system.md) first. Use the tokens in `src/app.css` and the primitives in `$lib/ui`, and check your change on `/dev/design` (development and PR previews only; every non-production page lives under `/dev`, gated by `scripts/dev-pages.mjs`). `src/lib/ui/design-system.test.ts` fails on Tailwind palette colours, hex values, default type sizes and off-scale radii; files in its `LEGACY` list may only lower their counts, and new files never join it.
 
 - One stylesheet, `src/app.css`, imported by `src/routes/+layout.svelte`. Tailwind v4 needs no config file; keep the explicit source list and extend it when a new directory contributes classes:
 

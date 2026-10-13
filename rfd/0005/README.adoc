@@ -495,16 +495,16 @@ storage is empty or blocked, and nothing about it leaves the device.
 
 === A living reference
 
-A prerendered `/design` page renders every token and every primitive in every
+A prerendered `/dev/design` page renders every token and every primitive in every
 state, plus the frame at each reviewed width with placeholder content. It is
 the system's documentation, it is what the browser suite screenshots for visual
 review at 1440, 820, 390 and 320 px. It is built in development and on
-pull-request previews only (<<Owner decisions>>): a Vite constant compiles the
-page in on the dev server, on Cloudflare Pages builds of any branch but
-`main`, and with `LEKISHI_DESIGN_PREVIEW=1`, and out everywhere else, where
-its route has no prerender entries and its code is dropped. The build
-invariant checks a production artifact carries neither, and a preview carries
-the page. Its swatches, scale and contrast figures are parsed from
+pull-request previews only, under the `/dev` prefix every non-production page
+shares (<<Owner decisions>>): a Vite constant compiles the `/dev` pages in on
+the dev server, on Cloudflare Pages builds of any branch but `main`, and with
+`LEKISHI_DEV_PAGES=1`, and out everywhere else, where their routes have no
+prerender entries and their code is dropped. The build invariant checks a
+production artifact carries neither, and a preview carries the pages. Its swatches, scale and contrast figures are parsed from
 `src/app.css`, so the page cannot drift from the stylesheet. The RFD does
 not duplicate component specifications; the page and the components are the
 specification.
@@ -557,6 +557,10 @@ Answered by the owner on 2026-10-13:
   `spikes/renderer/globe/preview-build.mjs` gates the renderer spike, so each
   pull request's preview shows its design changes and the production site
   never carries the page.
+* *The reference at `/dev/design` (2026-10-13).* Every page that is not for
+  readers lives under one `/dev` prefix, gated together, so later
+  non-production pages need no gate of their own. This places the reference;
+  it does not change the decision above.
 * *Information architecture in this RFD, with event links in the query.*
   The navigation structure, search, chapter switcher and URL contract are
   part of the design system rather than a separate RFD, and in-chapter state

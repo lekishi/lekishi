@@ -6,18 +6,19 @@ When the two disagree, RFD 5 is right and this page is out of date.
 
 The system has four parts, and each one is the specification for its layer:
 
-| Part       | Where                                                                | What it owns                                                                                      |
-| ---------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| Tokens     | `src/app.css` (`@theme static`)                                      | Every colour, type size, family, radius, shadow, easing, duration and z-layer the interface uses. |
-| Primitives | `src/lib/ui/` (`$lib/ui`)                                            | The only components that combine tokens into a look: plates, buttons, badges, fields, sheets.     |
-| Reference  | `/design`, rendered by `src/lib/ui/reference/DesignReference.svelte` | Every token and primitive in its states, on real chapter content. Dev and PR previews only.       |
-| Guard      | `src/lib/ui/design-system.test.ts`                                   | Fails on a raw palette colour, a hex value, a default type size or an off-scale radius in `src/`. |
+| Part       | Where                                                                    | What it owns                                                                                      |
+| ---------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| Tokens     | `src/app.css` (`@theme static`)                                          | Every colour, type size, family, radius, shadow, easing, duration and z-layer the interface uses. |
+| Primitives | `src/lib/ui/` (`$lib/ui`)                                                | The only components that combine tokens into a look: plates, buttons, badges, fields, sheets.     |
+| Reference  | `/dev/design`, rendered by `src/lib/ui/reference/DesignReference.svelte` | Every token and primitive in its states, on real chapter content. Dev and PR previews only.       |
+| Guard      | `src/lib/ui/design-system.test.ts`                                       | Fails on a raw palette colour, a hex value, a default type size or an off-scale radius in `src/`. |
 
-Open the reference while you work: `pnpm dev`, then `/design`. On a pull
-request, the Cloudflare Pages preview serves it at `/design` too. Production
-never carries it (`scripts/design-reference.mjs` decides, and the build
-invariant checks the artifact both ways). A local production-shaped build with
-the page: `LEKISHI_DESIGN_PREVIEW=1 pnpm build`.
+Open the reference while you work: `pnpm dev`, then `/dev/design`. On a pull
+request, the Cloudflare Pages preview serves it at `/dev/design` too. It is one
+of the `/dev` pages, the prefix for every page that is not for readers; `/dev`
+lists them. Production never carries them (`scripts/dev-pages.mjs` decides, and
+the build invariant checks the artifact both ways). A local production-shaped
+build with the pages: `LEKISHI_DEV_PAGES=1 pnpm build`.
 
 ## Rules of thumb
 
@@ -51,7 +52,7 @@ All colours are tokens; use them as utilities (`bg-lacquer`, `text-ink-dim`,
 | Evidence      | `evidence-attested`, `-identified`, `-schematic`, `-overland`, `-reconstructed` | RFD 1's visual forms. Shared by the map and the interface.      |
 | Relationships | `rel-transmission`, `-diplomacy`, `-conflict`, `-trade`, `-institution`         | Relationship arcs and their legend.                             |
 
-Contrast is measured against `lacquer`, and `/design` prints each figure from
+Contrast is measured against `lacquer`, and `/dev/design` prints each figure from
 the stylesheet's own values. Keep body text at AA (4.5:1) or better.
 
 "Possible", "disputed" and "outside the window" are **states**, not hues. They
@@ -166,13 +167,13 @@ selects, what the playhead does) lives in the atlas compositions in
 ## Changing the system
 
 1. **A new value:** add the token to `src/app.css` with a comment saying what
-   it is for, and check it on `/design` (contrast is computed there).
+   it is for, and check it on `/dev/design` (contrast is computed there).
 2. **A new primitive or variant:** add it to `src/lib/ui/`, export it from
    `index.ts`, cover its accessible behaviour in `ui.test.ts`, and add it to
    the reference in its states.
 3. **A decision that changes a rule here** (a new family, a new colour role, a
    new radius): record it in RFD 5 first, then update this page.
-4. **Screenshots:** capture `/design` at the four widths into
+4. **Screenshots:** capture `/dev/design` at the four widths into
    `.amp/in/artifacts/` for review when a change is visual.
 
 ### The legacy ratchet

@@ -3,6 +3,7 @@ import { sveltekit } from "@sveltejs/kit/vite"
 import tailwindcss from "@tailwindcss/vite"
 import { searchForWorkspaceRoot } from "vite"
 import { defineConfig } from "vitest/config"
+import { designReferenceEnabled } from "./scripts/design-reference.mjs"
 
 /**
  * One build tool for the whole site. SvelteKit owns routing, prerendering, and
@@ -15,8 +16,13 @@ import { defineConfig } from "vitest/config"
  * `/globe/`. `scripts/check-static-build.mjs` fails the build if they are
  * missing.
  */
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [sveltekit(), tailwindcss()],
+  // The `/design` reference is compiled in for development and pull-request
+  // previews and out of production builds (RFD 5's owner decision).
+  define: {
+    __DESIGN_REFERENCE__: JSON.stringify(designReferenceEnabled({ command })),
+  },
   // The globe's tile worker imports the bundle reader and the mesh builder; ES
   // module workers keep those imports instead of an IIFE wrapper, and every
   // browser the atlas targets runs them.
@@ -48,5 +54,8 @@ export default defineConfig({
     // the same client build the bundle ships, so Svelte is processed by Vite
     // instead of being externalized.
     server: { deps: { inline: ["svelte"] } },
+    // Vitest stubs stylesheets as empty strings. The design reference reads its
+    // tokens from `app.css?raw`, so that one import keeps its real text.
+    css: { include: [/app\.css/] },
   },
-})
+}))

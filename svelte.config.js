@@ -1,5 +1,6 @@
 import adapter from "@sveltejs/adapter-static"
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte"
+import { DESIGN_ROUTE_ID } from "./scripts/design-reference.mjs"
 
 /**
  * The site is a static artifact: every route is prerendered at build time and
@@ -16,5 +17,13 @@ export default {
       // `/atlas` is served from `atlas.html` and an unknown path is a real 404.
       strict: true,
     }),
+    prerender: {
+      // A production build gives the `/design` reference no entries, so the
+      // crawler never reaches it; that one route is allowed to go unseen.
+      // Any other unseen route still fails the build.
+      handleUnseenRoutes: ({ routes, message }) => {
+        if (routes.some((id) => id !== DESIGN_ROUTE_ID)) throw new Error(message)
+      },
+    },
   },
 }

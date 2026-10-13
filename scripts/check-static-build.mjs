@@ -12,6 +12,7 @@
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
+import { designReferenceEnabled } from "./design-reference.mjs"
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const buildDirectory = path.join(repoRoot, "build")
@@ -389,6 +390,35 @@ const strayScripts = files.filter(
 
 if (strayScripts.length > 0) {
   fail(`unexpected scripts outside _app/: ${strayScripts.map(inBuild).join(", ")}`)
+}
+
+// --- the design reference -----------------------------------------------------
+
+// `/design` is built in development and on pull-request previews only (RFD 5,
+// owner decision of 2026-10-13). A production artifact must carry neither its
+// page nor its code; a preview must carry the page, or the reviewers have
+// nothing to open.
+const designHtml = path.join(buildDirectory, "design.html")
+const designMarker = 'data-testid="design-reference"'
+
+if (designReferenceEnabled()) {
+  if (!existsSync(designHtml) || !read(designHtml).includes(designMarker)) {
+    fail("this is a preview build but design.html does not carry the design reference")
+  }
+} else {
+  if (existsSync(designHtml)) {
+    fail("design.html is in a production build; the design reference ships on previews only")
+  }
+
+  const referenceScripts = files.filter(
+    (file) => file.endsWith(".js") && readFileSync(file, "utf8").includes("design-reference"),
+  )
+
+  if (referenceScripts.length > 0) {
+    fail(
+      `the design reference's code is in a production build: ${referenceScripts.map(inBuild).join(", ")}`,
+    )
+  }
 }
 
 // --- report -------------------------------------------------------------------

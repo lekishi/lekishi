@@ -11,6 +11,7 @@
     tone = "glass",
     title,
     count,
+    level = 2,
     padded = true,
     class: className,
     children,
@@ -18,6 +19,8 @@
     tone?: "glass" | "solid"
     title?: string
     count?: number
+    /** The title's heading level, so a plate fits the page's outline. */
+    level?: 2 | 3 | 4
     padded?: boolean
     class?: string
     children: Snippet
@@ -28,7 +31,7 @@
   aria-label={title}
   data-tone={tone}
   class={[
-    "rounded-plate border text-ink",
+    "min-w-0 rounded-plate border text-ink",
     tone === "glass"
       ? "border-frame bg-lacquer-glass shadow-plate backdrop-blur-md"
       : "border-rule bg-lacquer shadow-sheet",
@@ -37,7 +40,7 @@
   ]}
 >
   {#if title}
-    <SectionLabel text={title} {count} class="mb-2" />
+    <SectionLabel text={title} {count} {level} class="mb-2" />
   {/if}
   {@render children()}
 </section>

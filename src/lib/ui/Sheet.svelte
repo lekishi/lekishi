@@ -74,7 +74,7 @@
     placement === "bottom" && [
       "w-full rounded-t-plate border-b-0",
       "transition-[height] duration-(--motion-base) ease-ui",
-      detent === "peek" && "h-32",
+      detent === "peek" && "h-36",
       detent === "half" && "h-[50dvh]",
       detent === "full" && "h-[calc(100dvh-3.5rem)]",
     ],

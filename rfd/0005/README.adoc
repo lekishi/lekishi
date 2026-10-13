@@ -388,9 +388,97 @@ objects out of the workspace (RFD 3's boundary holds).
 ==== Other pages
 
 The overview and the chapter entry use the same tokens and the `DateBar`'s
-header form. The overview becomes a title screen: chapters as plates with their
-hero image, the chapter title in Cinzel, and the Latin and CJK names as a
-`NameForm`.
+header form. The overview becomes the home page that
+<<Information architecture and navigation>> describes: search first, then the
+chapters as plates with their hero image, the chapter title in Cinzel, and the
+Latin and CJK names as a `NameForm`.
+
+=== Information architecture and navigation
+
+The atlas mock serves a reader who is exploring. A reader who already knows
+what they want (a name, a place, a year, an event someone sent them) needs to
+reach it in two steps from anywhere and land with the map, the card and the
+story already pointing at it. The structure, the ways in and the key screens
+are drawn on
+https://claude.ai/artifact/LbB9H3dnzBLSVkeJhbQbZF[the IA and navigation canvas],
+reviewed by the owner on 2026-10-13. Its names, dates and counts are the two
+served chapters' own records.
+
+==== Pages
+
+Two pages carry everything, as today: home at `/` and one prerendered chapter
+route at `/chapters/<chapter>`, whose slug stays the chapter tree's id. The
+legacy `/atlas` and `/compare/qin` redirects stay. The not-found page keeps the
+search field and the chapter list, so a stale link is not a dead end.
+
+==== Ways in
+
+[cols="1,3",options="header"]
+|===
+|Reader |Path
+
+|Exploring |Home, open a chapter, play or step the story, select what catches the eye, read the sources. This is the atlas mock.
+|Looking for something |Press `/` anywhere (or use the home search field), type in any script or romanization, pick a result grouped by chapter, land on it with the card open. Back returns to where the search started.
+|Following a link |The link names the chapter and the event. The prerendered chapter arrives readable; the card opens on load, the camera frames the place in the clear zone, and a plate offers "Play from here" or "From the beginning".
+|Switching chapter |The chapter name in the `DateBar` is a button. It opens every served chapter on one time ribbon, oldest first, with search on top; a chapter opens where this device last left it, or at its story start.
+|===
+
+==== Search
+
+One search, reachable from every page with `/` and from a control in the
+`DateBar` and on home. It covers chapters, people and states, places and
+events, and matches every name form and romanization the records carry
+(`韓非` and "Han Fei" find the same person; "han" also finds
+`蓬萊宮含元殿` through its romanization) as well as the story captions.
+Results are grouped by chapter with the current chapter first, each row says
+what matched, disputed accounts keep their badge, and a preview shows where
+Enter goes before the reader leaves the chapter. A scope toggle narrows it to
+this chapter; the left rail's event search is the same component with that
+scope fixed.
+
+The index is one static file built with the site from the published records,
+so search needs no service and covers exactly what a reader can open. It
+follows RFD 2's naming policy: modern names are search aliases, never the map
+label.
+
+==== The URL contract
+
+What a reader is looking at inside a chapter is kept in the chapter URL's
+query, so any view can be linked and Back behaves. A path per event was
+considered and not chosen: it would give each event its own crawlable page but
+multiply the prerendered file count against the static host's limit.
+
+[cols="1,3",options="header"]
+|===
+|Parameter |Meaning
+
+|`?event=<record>` |That event selected: card open, camera framed in the clear zone, journal at its step. If the event lies outside the window, the window widens to include it and the plate says so (RFD 1's explicit time change).
+|`?place=<record>` |That place selected, with its events as a list (places first).
+|`?step=<n>` |That story step at the playhead.
+|`?from=<year>&to=<year>` |The time window, in the atlas's year ordinals. Left out when it is the chapter's default window.
+|===
+
+The ids are the records' own ids without their `lks:event:` or `lks:place:`
+prefix (`akimeya-landfall-753`), so a link survives a retitle. One selection at a time: `event` wins over `place`,
+`place` over `step`. An id the chapter no longer has opens the chapter at its
+start with a line saying the item was not found.
+
+History: a jump from search or a link adds a history entry, so Back returns the
+reader; selecting, stepping and playing inside a chapter replace the current
+entry, so Back leaves the chapter instead of replaying every click.
+
+The prerendered page is the chapter without a query; the query is read in the
+browser after hydration. The workspace stays the only owner of selection,
+window and playhead: parsing and writing the query are pure functions beside
+`state.ts`, and the URL is one more projection of the workspace state, never a
+second owner.
+
+==== Home
+
+Home leads with search, places the served chapters on the globe at their
+places and on a time ribbon, and offers "Continue where you left off" from
+browser storage. That is a per-device convenience that renders correctly when
+storage is empty or blocked, and nothing about it leaves the device.
 
 === A living reference
 
@@ -450,6 +538,11 @@ Answered by the owner on 2026-10-13:
   `spikes/renderer/globe/preview-build.mjs` gates the renderer spike, so each
   pull request's preview shows its design changes and the production site
   never carries the page.
+* *Information architecture in this RFD, with event links in the query.*
+  The navigation structure, search, chapter switcher and URL contract are
+  part of the design system rather than a separate RFD, and in-chapter state
+  uses `?event=` and its siblings on the chapter route rather than a path per
+  event.
 
 == Implementation
 

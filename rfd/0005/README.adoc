@@ -397,8 +397,8 @@ hero image, the chapter title in Cinzel, and the Latin and CJK names as a
 A prerendered `/design` page renders every token and every primitive in every
 state, plus the frame at each reviewed width with placeholder content. It is
 the system's documentation, it is what the browser suite screenshots for visual
-review at 1440, 820, 390 and 320 px. Where it is built is an open question
-below; it is never part of the production site's content. The RFD does
+review at 1440, 820, 390 and 320 px. It is built in development and on
+pull-request previews only (<<Owner decisions>>). The RFD does
 not duplicate component specifications; the page and the components are the
 specification.
 
@@ -445,15 +445,11 @@ Answered by the owner on 2026-10-13:
   the region screen's top story ribbon is dropped.
 * *Fonts: self-hosted and subset.* The CJK payload is measured and recorded
   against RFD 4 RC4 before it ships.
-
-== Open questions for the owner
-
-* Where `/design` is built. The owner asked why it would be public rather than
-  development-only. Proposed: development and Cloudflare Pages preview builds
-  only, gated the way `spikes/renderer/globe/preview-build.mjs` gates the
-  renderer spike, so each pull request's preview shows its design changes and
-  the production site never carries the page. The alternative is development
-  only.
+* *`/design` in development and pull-request previews only.* It is built
+  when `pnpm dev` runs or on a Cloudflare Pages preview build, gated the way
+  `spikes/renderer/globe/preview-build.mjs` gates the renderer spike, so each
+  pull request's preview shows its design changes and the production site
+  never carries the page.
 
 == Implementation
 

@@ -9,8 +9,7 @@ so the two checklists do not double-count.
 == Decide
 
 - [x] Audit the hero mocks and the shipped interface (2026-10-13, link:README.adoc#_audit_2026_10_13[the audit]).
-- [x] Owner answers on palette and families, the reconciled frame, and self-hosted fonts: yes to each (2026-10-13, link:README.adoc#_owner_decisions[owner decisions]).
-- [ ] Owner answers where `/design` is built (proposed: development and PR previews only).
+- [x] Owner answers the open questions: palette and families, the reconciled frame and self-hosted fonts all yes; `/design` in development and PR previews only (2026-10-13, link:README.adoc#_owner_decisions[owner decisions]).
 - [x] First cut of the system sheet published for review: https://claude.ai/artifact/EHEH25jePp1RRBVXbWFwDd[tokens, evidence grammar, type, primitives in their states, the frame at 1440, 820 and 390 px] (2026-10-13).
 - [ ] System sheet revised to the owner's answers, the 320 px frame added, and approved by the owner.
 
@@ -20,7 +19,7 @@ so the two checklists do not double-count.
 - [ ] A unit test that fails on raw hex colours and off-system arbitrary values in `src/` outside the theme.
 - [ ] Font subsetting in the build (fontTools, OFL faces in `static/fonts/`), a build-invariant check that every glyph the chapters use is in the subset, and the measured payload recorded against RFD 4 RC4.
 - [ ] `$lib/ui` primitives: `Plate`, `Button`, `Orb`, `Badge`, `Tabs`, `Field`, `Sheet`, `SectionLabel`, `NameForm`, `DateLine`, `CitationLine`, `EmptyState`, `Icon`.
-- [ ] The `/design` reference page, built where the owner decides, with browser screenshots at the four reviewed widths.
+- [ ] The `/design` reference page, built in development and on PR previews only, with browser screenshots at the four reviewed widths.
 
 == Migration (no layout change)
 

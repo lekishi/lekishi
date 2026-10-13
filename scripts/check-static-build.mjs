@@ -12,7 +12,7 @@
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
-import { designReferenceEnabled } from "./design-reference.mjs"
+import { devPagesEnabled } from "./dev-pages.mjs"
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const buildDirectory = path.join(repoRoot, "build")
@@ -392,32 +392,41 @@ if (strayScripts.length > 0) {
   fail(`unexpected scripts outside _app/: ${strayScripts.map(inBuild).join(", ")}`)
 }
 
-// --- the design reference -----------------------------------------------------
+// --- the /dev pages ----------------------------------------------------------
 
-// `/design` is built in development and on pull-request previews only (RFD 5,
-// owner decision of 2026-10-13). A production artifact must carry neither its
-// page nor its code; a preview must carry the page, or the reviewers have
-// nothing to open.
-const designHtml = path.join(buildDirectory, "design.html")
-const designMarker = 'data-testid="design-reference"'
+// The `/dev` pages (the design reference among them) are built in development
+// and on pull-request previews only (RFD 5, owner decisions of 2026-10-13). A
+// production artifact must carry neither their pages nor their code; a preview
+// must carry them, or the reviewers have nothing to open. Each dev page's root
+// element carries `data-dev-page`, which is how its code is recognised.
+const devPageMarker = "data-dev-page"
+const devPages = [
+  { file: "dev.html", page: "index" },
+  { file: "dev/design.html", page: "design" },
+]
 
-if (designReferenceEnabled()) {
-  if (!existsSync(designHtml) || !read(designHtml).includes(designMarker)) {
-    fail("this is a preview build but design.html does not carry the design reference")
+if (devPagesEnabled()) {
+  for (const { file, page } of devPages) {
+    const html = path.join(buildDirectory, file)
+    if (!existsSync(html) || !read(html).includes(`${devPageMarker}="${page}"`)) {
+      fail(`this is a preview build but ${file} does not carry the ${page} dev page`)
+    }
   }
 } else {
-  if (existsSync(designHtml)) {
-    fail("design.html is in a production build; the design reference ships on previews only")
+  const shipped = [path.join(buildDirectory, "dev.html"), path.join(buildDirectory, "dev")]
+    .filter((file) => existsSync(file))
+    .map(inBuild)
+
+  if (shipped.length > 0) {
+    fail(`the /dev pages are in a production build: ${shipped.join(", ")}`)
   }
 
-  const referenceScripts = files.filter(
-    (file) => file.endsWith(".js") && readFileSync(file, "utf8").includes("design-reference"),
+  const devScripts = files.filter(
+    (file) => file.endsWith(".js") && readFileSync(file, "utf8").includes(devPageMarker),
   )
 
-  if (referenceScripts.length > 0) {
-    fail(
-      `the design reference's code is in a production build: ${referenceScripts.map(inBuild).join(", ")}`,
-    )
+  if (devScripts.length > 0) {
+    fail(`the /dev pages' code is in a production build: ${devScripts.map(inBuild).join(", ")}`)
   }
 }
 

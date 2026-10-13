@@ -1,6 +1,6 @@
 import adapter from "@sveltejs/adapter-static"
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte"
-import { DESIGN_ROUTE_ID } from "./scripts/design-reference.mjs"
+import { DEV_ROUTE_PREFIX } from "./scripts/dev-pages.mjs"
 
 /**
  * The site is a static artifact: every route is prerendered at build time and
@@ -18,11 +18,14 @@ export default {
       strict: true,
     }),
     prerender: {
-      // A production build gives the `/design` reference no entries, so the
-      // crawler never reaches it; that one route is allowed to go unseen.
+      // A production build gives the `/dev` pages no entries, so the crawler
+      // never reaches them; routes under that prefix are allowed to go unseen.
       // Any other unseen route still fails the build.
       handleUnseenRoutes: ({ routes, message }) => {
-        if (routes.some((id) => id !== DESIGN_ROUTE_ID)) throw new Error(message)
+        const outsideDev = routes.filter(
+          (id) => id !== DEV_ROUTE_PREFIX && !id.startsWith(`${DEV_ROUTE_PREFIX}/`),
+        )
+        if (outsideDev.length > 0) throw new Error(message)
       },
     },
   },

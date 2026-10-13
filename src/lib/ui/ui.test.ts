@@ -22,7 +22,7 @@ import {
  * The primitives' behaviour contract: accessible names, states that do not
  * rest on colour, keyboard paths, and the distinctions the history depends on
  * (the two empty states, the name before its romanization). How they look is
- * reviewed on the `/design` page; this pins what must not regress.
+ * reviewed on the `/dev/design` page; this pins what must not regress.
  */
 
 let target: HTMLElement

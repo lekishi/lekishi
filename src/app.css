@@ -17,7 +17,7 @@
  * `text-ink-dim`, `rounded-plate`, `text-title`) and a custom property the
  * globe's DOM overlays can read (`var(--color-gold)`). `static` keeps every
  * token in the stylesheet even when no class uses it yet, because the overlays
- * and the `/design` reference read the properties directly.
+ * and the `/dev/design` reference read the properties directly.
  *
  * Tailwind's own palette, sizes and radii are still defined because the
  * screens written before the system use them. They are cleared here

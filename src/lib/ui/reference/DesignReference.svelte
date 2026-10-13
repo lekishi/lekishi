@@ -23,7 +23,7 @@
   import { composite, contrast, contrastGrade, parseTokens } from "./tokens"
 
   /**
-   * The living reference for RFD 5's design system, served at `/design` in
+   * The living reference for RFD 5's design system, served at `/dev/design` in
    * development and on pull-request previews only. It renders what
    * `src/app.css` and `$lib/ui` define, so it is the specification rather than
    * a description of one: the tokens are parsed from the stylesheet, and every
@@ -365,10 +365,16 @@
   </svg>
 {/snippet}
 
-<div class="min-h-dvh bg-abyss font-sans text-ink" data-testid="design-reference">
+<div class="min-h-dvh bg-abyss font-sans text-ink" data-dev-page="design">
   <header class="border-b border-rule bg-lacquer">
     <div class="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-8 lg:px-8">
-      <p class="text-label font-semibold uppercase text-gold">Lekishi · RFD 5</p>
+      <p class="text-label font-semibold uppercase text-gold">
+        <a
+          href="/dev"
+          class="rounded-control hover:text-gold-bright focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-bright"
+          >Lekishi · dev</a
+        > · RFD 5
+      </p>
       <h1 class="font-display text-display font-semibold">Design system</h1>
       <p class="max-w-prose text-body text-ink-dim">
         Every token and primitive, in its states, rendered from the stylesheet and the components

@@ -1,5 +1,5 @@
 /**
- * Reads the design tokens out of `src/app.css` for the `/design` reference.
+ * Reads the design tokens out of `src/app.css` for the `/dev/design` reference.
  *
  * The reference shows what the stylesheet defines rather than a copy of it, so
  * a token changed in `app.css` changes on the page with it and the two cannot

@@ -3,7 +3,7 @@ import { sveltekit } from "@sveltejs/kit/vite"
 import tailwindcss from "@tailwindcss/vite"
 import { searchForWorkspaceRoot } from "vite"
 import { defineConfig } from "vitest/config"
-import { designReferenceEnabled } from "./scripts/design-reference.mjs"
+import { devPagesEnabled } from "./scripts/dev-pages.mjs"
 
 /**
  * One build tool for the whole site. SvelteKit owns routing, prerendering, and
@@ -18,10 +18,10 @@ import { designReferenceEnabled } from "./scripts/design-reference.mjs"
  */
 export default defineConfig(({ command }) => ({
   plugins: [sveltekit(), tailwindcss()],
-  // The `/design` reference is compiled in for development and pull-request
-  // previews and out of production builds (RFD 5's owner decision).
+  // The `/dev` pages (the design reference among them) are compiled in for
+  // development and pull-request previews and out of production builds.
   define: {
-    __DESIGN_REFERENCE__: JSON.stringify(designReferenceEnabled({ command })),
+    __DEV_PAGES__: JSON.stringify(devPagesEnabled({ command })),
   },
   // The globe's tile worker imports the bundle reader and the mesh builder; ES
   // module workers keep those imports instead of an IIFE wrapper, and every

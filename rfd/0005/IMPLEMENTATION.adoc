@@ -1,8 +1,10 @@
 = RFD 0005 implementation checklist
 
 Implements link:README.adoc[RFD 5: Design system and layout]. The RFD is in
-`discussion`; nothing below is started until the owner has answered its
-open questions and approved the system sheet. Each step after the sheet lands
+`discussion`. The owner answered its open questions, and on 2026-10-13 asked
+for the design system itself (reference document, tokens, primitives, living
+page) in the RFD's pull request, so the Foundation started before the sheet's
+formal approval; that approval stays open below. Each step after the sheet lands
 something a reader can see, and the RFD 1 checklist items it serves are named
 so the two checklists do not double-count.
 
@@ -17,11 +19,15 @@ so the two checklists do not double-count.
 
 == Foundation
 
-- [ ] Tokens in `src/app.css` `@theme`, with Tailwind's default colours, sizes and radii cleared.
-- [ ] A unit test that fails on raw hex colours and off-system arbitrary values in `src/` outside the theme.
+- [x] Tokens in `src/app.css` `@theme static` (2026-10-13). Stylesheet 34.6 KB before, 36.2 KB with the tokens.
+- [x] A unit test that fails on raw hex colours, palette colours, default sizes and off-scale radii in `src/`, with a legacy ratchet for the 13 pre-token files (415 uses on 2026-10-13); `src/lib/ui/design-system.test.ts`.
+- [ ] Tailwind's default colours, sizes and radii cleared, once the legacy list is empty.
 - [ ] Font subsetting in the build (fontTools, OFL faces in `static/fonts/`), a build-invariant check that every glyph the chapters use is in the subset, and the measured payload recorded against RFD 4 RC4.
-- [ ] `$lib/ui` primitives: `Plate`, `Button`, `Orb`, `Badge`, `Tabs`, `Field`, `Sheet`, `SectionLabel`, `NameForm`, `DateLine`, `CitationLine`, `EmptyState`, `Icon`.
-- [ ] The `/design` reference page, built in development and on PR previews only, with browser screenshots at the four reviewed widths.
+- [x] `$lib/ui` primitives: `Plate`, `Button`, `Orb`, `Badge`, `Tabs`, `Field`, `Sheet`, `SectionLabel`, `NameForm`, `DateLine`, `CitationLine`, `EmptyState`, `Icon`, with their behaviour in `src/lib/ui/ui.test.ts` (2026-10-13). The stylesheet is 48.0 KB (9.3 KB gzipped) with the primitives and the reference; 3.2 KB of that is classes only `/design` uses, because Tailwind scans the reference's source in every build.
+- [x] The `/design` reference page, built in development and on PR previews only, gated in the build invariant, screenshotted at 1440, 820, 390 and 320 px with no horizontal overflow (2026-10-13).
+- [ ] The frame at each reviewed width on `/design`, with placeholder content (lands with <<_the_frame>>).
+- [ ] `/design` in the browser suite's screenshot pass (the suite runs against the production artifact today, which does not carry the page).
+- [x] Working reference for contributors: link:../../docs/design-system.md[docs/design-system.md], linked from `AGENTS.md` (2026-10-13).
 
 == Migration (no layout change)
 

@@ -180,6 +180,19 @@ small unit test that scans `src/` for raw hex values outside the theme catch
 what Tailwind cannot. `@apply` stays forbidden; reuse comes from Svelte
 components, not CSS classes.
 
+*As built, 2026-10-13.* The defaults cannot be cleared on the first day: 13
+files written before the tokens carry 415 uses of them (counted by the guard
+below), and clearing them would unstyle every current screen at once. So the
+block is `@theme static` (every token is emitted as a property, used or not,
+for the overlays and the reference) and the defaults stay until the migration
+empties the list. Until then `src/lib/ui/design-system.test.ts` enforces the
+system: it fails on a Tailwind palette colour, a hex value, a default type
+size or an off-scale radius anywhere in `src/`, except in the files it lists
+as legacy, whose counts must match exactly and so can only fall. New files
+never join the list. When it is empty the defaults are cleared as above and
+the principle holds by construction. The working rules for contributors are
+in link:../../docs/design-system.md[the design system reference].
+
 ==== Colour
 
 Taken from the hero and corrected where it misses AA. Contrast is measured
@@ -486,7 +499,13 @@ A prerendered `/design` page renders every token and every primitive in every
 state, plus the frame at each reviewed width with placeholder content. It is
 the system's documentation, it is what the browser suite screenshots for visual
 review at 1440, 820, 390 and 320 px. It is built in development and on
-pull-request previews only (<<Owner decisions>>). The RFD does
+pull-request previews only (<<Owner decisions>>): a Vite constant compiles the
+page in on the dev server, on Cloudflare Pages builds of any branch but
+`main`, and with `LEKISHI_DESIGN_PREVIEW=1`, and out everywhere else, where
+its route has no prerender entries and its code is dropped. The build
+invariant checks a production artifact carries neither, and a preview carries
+the page. Its swatches, scale and contrast figures are parsed from
+`src/app.css`, so the page cannot drift from the stylesheet. The RFD does
 not duplicate component specifications; the page and the components are the
 specification.
 

@@ -103,7 +103,11 @@
   let aboutOpen = $state(false)
   let searchOpen = $state(false)
   let switcherOpen = $state(false)
-  let detent: Detent = $state("peek")
+  // A link that opens a record (an event, a place or a story step) opens the
+  // phone sheet at half, where its card is; at peek the card is not drawn,
+  // and the reader would see the arrival plate name a card they cannot read.
+  // The detent only matters in the phone frame.
+  let detent: Detent = $state(untrack(() => (opensRecord(opening.state) ? "half" : "peek")))
   let notice = $state<string | null>(null)
 
   // ---- Layout ------------------------------------------------------------
@@ -276,6 +280,13 @@
     })
   })
 
+  /** True when a state has a card to show: a selection or a story step. */
+  function opensRecord(state: AtlasState): boolean {
+    return (
+      state.selectedEventId !== null || state.selectedPlaceId !== null || state.storyStep !== null
+    )
+  }
+
   function arrive(base: AtlasState, query: string): Arrival {
     const parsed = readChapterQuery(new URLSearchParams(query))
     return isEmptyQuery(parsed)
@@ -344,6 +355,7 @@
     arrivalFor = result.state
     atlasState = result.state
     arrival = announce ? arrivalPlate(result) : null
+    if (mode === "phone" && detent === "peek" && opensRecord(result.state)) detent = "half"
     remember(result.state, written)
   }
 

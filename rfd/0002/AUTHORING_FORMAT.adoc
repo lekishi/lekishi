@@ -1,0 +1,324 @@
+:authors: Darwin D Wu <darwin67@users.noreply.github.com>
+:state: discussion
+:discussion:
+:labels: history, data, authoring, layout, contract
+
+= RFD 2 authoring format and content layout
+
+== Provenance and supersession
+
+link:README.adoc[RFD 2] approved on 2026-10-10 a compact authoring format: "a
+folder per chapter with one small file per record", compiled at build time
+into link:CONTRACTS.adoc[the v0 contract]. That decision left the concrete
+shape of the files open, and the compiler and the migration are still open
+items in link:IMPLEMENTATION.adoc[the RFD 2 checklist]. This record specifies
+that shape. It was opened on 2026-10-14 from a discussion with the owner.
+
+It contains two kinds of statement, and says which is which:
+
+* *Decided* statements carry the owner's decision and its date.
+* *Proposed* statements are recommendations awaiting the owner's word in this
+  record's review. They are not implemented and not final until marked
+  decided.
+
+For the content layout only, this record supersedes "a folder per chapter" in
+RFD 2's *Authoring format* bullet (<<Decision: world first, chapters as views>>).
+Everything else in that decision stands, and RFD 2's text is not rewritten to
+match: one small file per record, flat fields of simple types, compilation into
+the v0 contract, Git history as the revision history, one owner approval per
+chapter, and the standardized content model, roles, and contribution surface.
+
+== Where the content stands (2026-10-14, `main` at dd572bd)
+
+* *Two chapters* live under `historical/chapters/<id>/` in three folders:
+  `records/`, `sources/`, and `publication-sets/`.
+  ** `tang-mission-750-754` has 29 events, 15 places, 12 actors, 9
+     relationships, and 1 story.
+  ** `qin-conquest-han-233-226` has 5 events, 4 places, 6 actors, 4
+     relationships, and 1 story.
+* *Every record is a full v0 document:* a revision envelope (author, change
+  explanation, `revision_hash`), the content, claims pointing into the content
+  by JSON pointer, and a publication block naming its set.
+  ** The 86 records come to 12,658 lines of JSON, about 147 lines per record.
+  ** `event-akimeya-landfall-753.json` states one cited fact in 103 lines.
+* *Sources are per chapter,* so both chapters carry their own `wikidata.json`.
+  A place or actor that two chapters share would be two records with two ids.
+* *Some chapter facts have no field and are inferred instead:*
+  ** The chapter title is the leading clause of the story summary
+     (`chapterTitle` in `src/lib/atlas/projection.ts`).
+  ** An event's title is its story caption.
+  ** The home view is the centre of the places' bounding box.
+  ** The default window and the served list are TypeScript constants in
+     `src/lib/atlas/chapter-registry.ts`.
+* *The loader emits one script per content file.*
+  `src/lib/atlas/chapter-catalog.ts` lazily globs every JSON file, so Vite emits
+  one JavaScript chunk per file. A client build of `main` on 2026-10-14 emitted
+  121 scripts, and 103 of them are content: 86 records, 15 sources, and 2
+  publication sets. The deployed file count therefore grows with every record,
+  against the static host's 20,000-file limit
+  (link:../0003/GLOBE_RENDERER.adoc[the globe renderer record] measured the
+  whole artifact at 944 files, almost all globe tile bundles).
+* *RFD 1 and RFD 5 ask for things v0 cannot express:*
+  ** Journeys drawn through dated stops. The parts exist (`part_of`, the place
+     roles `start`, `waypoint`, and `end`, and the `schematic_link`
+     interpretation), but nothing ties them into a line.
+  ** Dated political-control snapshots: no record kind holds a dated polygon.
+  ** Images that depict a record: only `source.kind: media` exists, with no
+     link from an image to what it depicts and no depiction label.
+
+== Decision: world first, chapters as views
+
+Decided by the owner on 2026-10-14.
+
+Every record exists once, in a project-wide tree organized by kind. A chapter
+is a manifest that points at records; it does not contain them.
+
+----
+historical/
+  contract/v0/                   schemas, vectors, synthetic examples (today's historical/v0)
+  events/
+    tang-embassy/akimeya-landfall-753.yaml
+  places/
+  actors/
+  relationships/
+  sources/
+  territories/                   with contract v1, see below
+  media/                         with contract v1, see below
+  chapters/
+    tang-mission-750-754.yaml    the chapter manifest
+----
+
+* *Ids.* The id is the file name. The folder supplies the kind, so
+  `events/…/akimeya-landfall-753.yaml` is `lks:event:akimeya-landfall-753`, and
+  no id is written inside the file, which keeps the two from drifting apart.
+* *Uniqueness.* Ids are unique across the whole project, because
+  link:../0005/README.adoc[RFD 5]'s search and deep links (`?event=`,
+  `?place=`) span chapters.
+* *Subfolders.* Subfolders under a kind folder are free for authors' tidiness.
+  They never change an id, and the build fails on two files with the same
+  name under one kind.
+* *One event, several stories.* An event can appear in more than one chapter's
+  story. 鑒眞's 753 crossing belongs to the Tang embassy and to any chapter on
+  the transmission of the precepts.
+
+Why: the owner's stated aim is exploring an era across the globe and zooming
+freely (recorded in link:../0003/README.adoc[RFD 3]). An era view shows several
+chapters' records at once, and search and the chapter ribbon of RFD 5 are
+already cross-chapter. A chapter-first tree would have to duplicate every
+shared place, actor, source, and event, or reach into another chapter's folder
+for it.
+
+What it costs:
+
+* An edit to a shared record re-opens the approval of every chapter that
+  reaches it. <<Proposed: per-chapter approval pins a content digest>> makes
+  that automatic rather than a matter of memory.
+* Kind folders grow large, which subfolders absorb.
+* The migration effort is the same as the migration already planned, and at
+  86 records it is the cheapest it will be.
+
+== Proposed: the chapter manifest
+
+One YAML file per chapter owns every fact the projection now infers or
+hard-codes. It replaces the story record, and it replaces the coverage
+constants and served list in `chapter-registry.ts`.
+
+[source,yaml]
+----
+# historical/chapters/tang-mission-750-754.yaml
+title: The Tang embassy of 750–754
+summary: >-
+  The 750–754 embassy of 藤原朝臣清河, from appointment through the return
+  voyage and the 754 ordinations.
+window: 750..754          # the window the chapter opens on
+span: 750..779            # the story, including its coda nodes
+coverage: …               # today's coverage_note
+home: { center: [125.0, 31.5], scale: region }   # optional; else the bounding box
+hero: hero-landfall-753   # a media record, once media exists
+story:
+  - appointment-750                                    # caption defaults to the event's title
+  - japan-tang-embassy: The diplomatic mission from Japan to Tang
+  - akimeya-landfall-753
+approval:
+  digest: sha256:…
+  by: Darwin D Wu
+  on: 2026-10-20
+  reviewer: …             # a specialist reviewer, when there is one
+----
+
+* *Served chapters.* A chapter is served when its approval matches its current
+  content. The served list is derived from that rule rather than kept by hand.
+* *Titles and captions.* Events gain a `title` field, and a story caption
+  becomes an optional override of it.
+
+== Proposed: per-chapter approval pins a content digest
+
+The approval records a digest of the chapter's compiled closure: the manifest
+and every record and source it reaches, transitively. It does not record a
+commit, because a commit cannot name itself and a squash merge rewrites it.
+
+The build recomputes the digest. A mismatch fails the build for a chapter
+that claims to be served, so any change to an approved chapter, including an
+edit to a shared place it uses, reaches readers only after a new approval.
+This is the check RFD 2 lists as "no change to an approved chapter reaching
+the build without a new approval". It replaces the per-set digest ledger in
+link:PUBLICATION_APPROVAL.adoc[the publication approval gate] once enforced.
+The ledger stays in the tree as the record of how the first two chapters were
+approved.
+
+== Proposed: the record file
+
+YAML, flat fields, and each citation attached to the field it supports. The
+compiler generates the claim ids and JSON pointers the contract needs, so an
+author never writes `asserts: /places/0`.
+
+The event that is 103 lines today:
+
+[source,yaml]
+----
+# historical/events/tang-embassy/akimeya-landfall-753.yaml
+title: The landfall at 秋妻屋浦
+summary: The second ship lands at 薩摩國阿多郡秋妻屋浦 at noon on 天寶十二載十二月廿日.
+types: [journey]
+part_of: return-voyage-753
+date:
+  value: 753-12-20
+  calendar: chinese_lunisolar
+  as_written: 廿日乙酉午時
+  cite: { source: toseiden, at: 廿日乙酉午時，第二舟著薩摩國阿多郡秋妻屋浦 }
+places:
+  - place: akimeya
+    role: site
+    cite: { source: toseiden, at: 廿日乙酉午時，第二舟著薩摩國阿多郡秋妻屋浦 }
+notes: >-
+  The landing place is attested; its modern identification is a cited
+  interpretation on the place.
+----
+
+A place:
+
+[source,yaml]
+----
+# historical/places/yangzhou.yaml
+name: { form: 揚州, lang: lzh, script: Hani, roman: Yangzhou, scheme: pinyin }
+types: [settlement]
+at:
+  point: [119.4363, 32.3912]
+  basis: display_anchor
+  precision: unspecified
+  cite: { source: wikidata, at: Q57906 (P625) }
+modern: [{ form: 揚州市, lang: zh-Hans }]
+----
+
+Conventions:
+
+* *Basis.* `basis` defaults to `attested`. An interpretation says
+  `basis: interpretation` and cites the scholarship, and compiles to the
+  contract's `cited_interpretation`.
+* *Locators.* A source declares its locator kind once (`entry`, `page`,
+  `juan`, `dataset_row`), so a citation gives only `at:`.
+* *Disputes.* A disputed value carries `alternatives:` beside the main value,
+  each with its own `cite`. The main value stays the editorial choice, as RFD 2
+  requires.
+* *Credit.* `contributed_by` and `reviewed_by` are set at the file level and
+  can be overridden per field. They are new to the contract (v0 has
+  `reviewed_by` only on licences), so they arrive with v1, below.
+* *Vocabularies.* The geometry interpretations, place and actor types, roles,
+  and relationship types keep the v0 vocabulary. The format is shorter, not
+  looser.
+* *Editor support.* A JSON Schema for each kind of record file gives editors
+  completion and inline errors, and it is the first CI check.
+
+== Proposed: date notation
+
+Dates are short strings, compiled into the contract's existing `interval`,
+`precision`, and `mode` objects, so the 187 vectors keep holding.
+
+[cols="1,2",options="header"]
+|===
+|Written |Means
+|`753-12-20` / `753-12` / `753` |Day, month, or year precision
+|`750..754` |A two-sided range; `mode: window` (one occurrence somewhere inside) or `mode: duration` (activity across it), with `instant` the default for a single date
+|`233 BCE`, `233-10 BCE`, `233 BCE..226 BCE` |Dates before the common era, with the era spelled out
+|`calendar:` and `as_written:` |The source calendar and the source's own expression, as v0 already keeps them
+|===
+
+BCE is spelled out rather than written as astronomical years. EDTF writes
+233 BCE as `-0232`, which is the off-by-one the contract's `era` field exists
+to prevent. The atlas's internal year ordinals do not change.
+
+== Proposed: journeys, territories, and media
+
+* *Journeys are derived, not duplicated.* A journey event's line runs through
+  the dated places of the events that are `part_of` it, in date order, and
+  compiles to `schematic_link`. The Tang return voyage already has that shape.
+  A route reconstructed in scholarship is an explicit `route:` on the event,
+  with its own GeoJSON file and citation, compiled to `reconstructed_route`.
+* *Territories are a new kind.* A territory file holds a dated control
+  snapshot: whose control (an actor), the snapshot's date, a GeoJSON file, its
+  basis, and its citation. RFD 1 forbids interpolating between snapshots.
+* *Media is a new kind.* A media file holds the file, the source that carries
+  its licence, the record ids it `depicts`, and a depiction label (for example,
+  "a later depiction, not evidence").
+
+Territories, media, and per-claim credit are new rules. Under AGENTS.md they
+mean a new contract version, *v1*, with new vectors, not an edit to v0. The
+proposal is to specify them in this record now and implement v1 with the first
+chapter that draws a territory or shows an image, so that v1 lands with real
+content to test against. Until then the compiler targets v0.
+
+== Proposed: the compiler and what ships
+
+* *Compiler.* A Node script, run by `pnpm build` and by the contract tests,
+  reads the tree and emits v0 documents: one synthetic revision per record,
+  with computed hashes. `Publication.checkAll`, the vectors, and `projection.ts`
+  keep running unchanged during the migration.
+* *What ships.* The compiler writes one compiled document per chapter, and
+  `chapter-catalog.ts` imports that instead of globbing record files. Content
+  then costs one deployed file per chapter however many records the chapter
+  has, instead of one per record (103 files today, and thousands once
+  chapters reach the 200+ events the RFD 2 checklist targets for Tang). Record files never ship.
+* *Migration.* A script converts the two chapters from JSON to the record
+  files. The review is a diff of the compiled output against today's
+  documents, which should be identical apart from revision metadata.
+* *Retirement.* The publication sets, the ledger, and
+  `publication-approval.test.ts` retire once the digest approval is enforced,
+  as RFD 2 already provides.
+
+== Alternatives
+
+Chapter folders with a shared catalog for places, actors, and sources only::
+  Keeps a chapter's events in one folder, which is easy to browse, but still
+  duplicates or cross-references events that belong to two stories, and it
+  does not fit an era view across chapters. Not chosen by the owner on
+  2026-10-14.
+
+Keeping one JSON document per record in the v0 envelope::
+  Changes nothing, and keeps a fact at about a hundred lines and a correction
+  at a new revision, set, and ledger row. RFD 2 already rejected it on
+  2026-10-10.
+
+Markdown files with YAML front matter::
+  Better for long prose, and GitHub renders them. The cards' narrative is a
+  sentence or two today, so plain YAML is proposed; this is worth revisiting
+  if card narratives grow beyond a paragraph.
+
+A database::
+  The data is relational, but a relational shape does not by itself call for a
+  database server. Integrity (every id resolving) is a build and CI check. No
+  reader queries anything live, because every join happens once, when the
+  compiler assembles a chapter. Files keep every change a reviewable diff with
+  history and credit, and keep an approval pinned to exact content. If authors
+  need ad-hoc queries, the build can load the tree into SQLite, which needs no
+  infrastructure. A database server stays reserved by RFD 2's stage 4, for many
+  concurrent editors or for reader-facing data the build cannot precompute, with
+  Git kept as the publication record.
+
+== Open questions
+
+* The proposed statements above, each awaiting the owner's word.
+* Whether a chapter manifest may include records by query (all events
+  `part_of` a journey, for instance) or only by listing them. Listing is
+  proposed for now, because the story order is editorial.
+* How a reader-facing correction history reads the Git history of a shared
+  record (RFD 2's existing open question, now spanning chapters).

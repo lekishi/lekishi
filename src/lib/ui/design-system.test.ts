@@ -22,16 +22,7 @@ import { describe, expect, test } from "vitest"
 const SRC = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..")
 
 const LEGACY: Record<string, number> = {
-  "lib/atlas/entry.ts": 2,
   "lib/atlas/renderer/globe/view.ts": 8,
-  "lib/atlas/workspace/AtlasWorkspace.svelte": 68,
-  "lib/atlas/workspace/EventList.svelte": 4,
-  "lib/atlas/workspace/EventRow.svelte": 31,
-  "lib/atlas/workspace/SearchResults.svelte": 13,
-  "lib/atlas/workspace/SelectionPanel.svelte": 100,
-  "lib/atlas/workspace/SourceList.svelte": 16,
-  "lib/atlas/workspace/StoryList.svelte": 21,
-  "lib/atlas/workspace/TimeControls.svelte": 60,
   "routes/+error.svelte": 15,
   "routes/+page.svelte": 59,
   "routes/chapters/[chapter]/+page.svelte": 14,

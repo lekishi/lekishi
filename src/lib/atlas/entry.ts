@@ -1,5 +1,5 @@
 import type { Chapter } from "./domain"
-import { mountAtlas, type AtlasHandle, type AtlasHeading } from "./mount"
+import { mountAtlas, type AtlasHandle, type AtlasHeading, type AtlasHistory } from "./mount"
 
 /**
  * The atlas workspace's single mount owner.
@@ -35,6 +35,7 @@ let watching = false
 // restore re-creates the same workspace rather than an empty or default one.
 let currentChapter: Chapter | null = null
 let currentHeading: AtlasHeading | undefined
+let currentHistory: AtlasHistory | null = null
 
 /**
  * True in a browser. SvelteKit renders the chapter shell on the server while
@@ -55,7 +56,7 @@ function reportFailure(root: HTMLElement, error: unknown): void {
   root.replaceChildren()
   const alert = document.createElement("p")
   alert.setAttribute("role", "alert")
-  alert.className = "p-6 text-sm text-rose-200"
+  alert.className = "p-6 text-body-sm text-danger"
   alert.textContent = `The atlas workspace failed to load: ${message}`
   root.append(alert)
 }
@@ -78,7 +79,12 @@ export function mountWorkspace(): void {
   workspace = null
 
   try {
-    workspace = mountAtlas(root, currentChapter, currentHeading)
+    // The address is read at mount time, not when the page started: a page
+    // restored from the back/forward cache mounts at the address it shows.
+    workspace = mountAtlas(root, currentChapter, currentHeading, {
+      search: window.location.search,
+      history: currentHistory,
+    })
     window.__lekishiAtlas = workspace
   } catch (error) {
     reportFailure(root, error)
@@ -114,9 +120,26 @@ export function watchWorkspaceLifecycle(): void {
  * presentation the route takes from `chapters.ts`; without it the workspace uses
  * the chapter's published title and states no decision line.
  */
-export function startAtlasPage(chapter: Chapter, heading?: AtlasHeading): void {
+export function startAtlasPage(
+  chapter: Chapter,
+  heading?: AtlasHeading,
+  history: AtlasHistory | null = null,
+): void {
   currentChapter = chapter
   currentHeading = heading
+  currentHistory = history
   watchWorkspaceLifecycle()
   mountWorkspace()
+}
+
+/**
+ * Moves the live workspace to an address in its own chapter: Back and Forward
+ * between the entries it wrote, or a link to the chapter already open. A
+ * request for another chapter is ignored, because that chapter mounts its own
+ * workspace with the address it was opened at.
+ */
+export function navigateWorkspace(chapterId: string, search: string, announce = false): void {
+  if (workspace !== null && !workspace.disposed && workspace.chapterId === chapterId) {
+    workspace.navigate(search, announce)
+  }
 }

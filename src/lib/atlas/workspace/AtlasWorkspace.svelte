@@ -1,170 +1,661 @@
+<script lang="ts" module>
+  /**
+   * How the workspace writes its position into the address bar. The chapter
+   * route supplies it with SvelteKit's shallow routing, so this component
+   * never imports the router and still mounts in a test without one. Each
+   * call takes the chapter's query string (with its `?`, or empty).
+   */
+  export type AtlasHistory = {
+    /** A jump the reader made (a story step, a search result): Back returns from it. */
+    push(search: string): void
+    /** A change within the view (a click on the map, a window edit). */
+    replace(search: string): void
+  }
+</script>
+
 <script lang="ts">
   import { untrack } from "svelte"
+  import { Icon, Orb, Sheet, type Detent, focusRing, transition } from "$lib/ui"
+  import { chapterFacts, pennants } from "../card"
   import type { Chapter } from "../domain"
-  import { windowLabel } from "../labels"
-  import { buildScene, searchRows } from "../scene"
-  import { searchChapter } from "../search"
-  import * as story from "../story"
+  import { windowLabel, yearLabel } from "../labels"
+  import { rememberPosition } from "../memory"
+  import ChapterSwitcher from "../navigation/ChapterSwitcher.svelte"
+  import SearchDialog from "../navigation/SearchDialog.svelte"
+  import { familyOf, layerOptions, RELATIONSHIP_FAMILIES } from "../overlays"
+  import { applyChapterQuery, chapterQuery, isEmptyQuery, readChapterQuery, type Arrival } from "../query"
+  import type { CameraView } from "../renderer/types"
+  import { buildScene, NO_INSETS, type SafeArea } from "../scene"
+  import type { SearchEntry } from "../search-index"
   import * as atlas from "../state"
   import type { AtlasState } from "../state"
-  import EventList from "./EventList.svelte"
+  import AboutSheet from "./AboutSheet.svelte"
+  import ArrivalPlate from "./ArrivalPlate.svelte"
+  import DateBar from "./DateBar.svelte"
+  import EventDial from "./EventDial.svelte"
+  import ExploreList, { type ExploreTab } from "./ExploreList.svelte"
   import Globe from "./Globe.svelte"
-  import SearchResults from "./SearchResults.svelte"
-  import SelectionPanel from "./SelectionPanel.svelte"
-  import SourceList from "./SourceList.svelte"
-  import StoryList from "./StoryList.svelte"
-  import TimeControls from "./TimeControls.svelte"
+  import LayerOrbs from "./LayerOrbs.svelte"
+  import Legend from "./Legend.svelte"
+  import Minimap from "./Minimap.svelte"
+  import Pennants from "./Pennants.svelte"
+  import SelectionCard from "./SelectionCard.svelte"
+  import TimelineStrip from "./TimelineStrip.svelte"
 
   /**
-   * The workspace renders whichever chapter its caller mounts it with, through the
-   * same behavior and controls for every chapter: the atlas passes the chapter it
-   * loaded and the heading the chapter's card supplies, and nothing here branches
-   * on which chapter it is.
+   * The atlas frame (RFD 5, "Layout"): the globe fills the page and the
+   * interface is regions around it, never panels floating over each other.
    *
-   * `name` is the chapter's display name and `decision` its recorded editorial
-   * decision; the caller supplies both because the name a reader sees and the
-   * ledger-derived decision line are product presentation (`chapters.ts`), while
-   * the workspace stays chapter-agnostic and falls back to the chapter's own
-   * published title and recorded review independence.
+   * - Desktop: the date bar across the top; a left rail with the layer orbs,
+   *   the people and the explore list; the selection card in a right rail;
+   *   the dial, the timeline strip and the locator across the bottom; the
+   *   legend in the scene's corner.
+   * - Tablet: the orbs stand in a column, the explore list opens beside them,
+   *   and the card keeps its rail.
+   * - Phone: a compact date bar and a row of orbs on top, and one bottom
+   *   sheet with three detents: peek holds the dial and what is current, half
+   *   holds the card or the list, full holds the list with search.
+   *
+   * The globe is told how much of it the frame covers (the scene safe area),
+   * so a flight frames its target in the clear part of the screen.
+   *
+   * The workspace renders whichever chapter it is mounted with and branches on
+   * no chapter id. It is the single owner of the atlas state: selection, time,
+   * playback, layers and camera follow change here and only here, and the
+   * renderer receives the derived scene. The state variable is not called
+   * `state`: svelte-check would read `$state` as a store subscription and
+   * stop type-checking the component.
    */
   let {
     chapter,
     name = chapter.title,
     decision = "",
-  }: { chapter: Chapter; name?: string; decision?: string } = $props()
+    search = "",
+    history = null,
+  }: {
+    chapter: Chapter
+    name?: string
+    decision?: string
+    /** The address bar's query when the workspace mounts. */
+    search?: string
+    history?: AtlasHistory | null
+  } = $props()
 
-  // This component is the single owner of atlas interaction state. Everything
-  // below reads from `atlasState` and dispatches actions; the renderer only
-  // receives the derived scene, so selection, time, and camera-follow can never
-  // diverge. The variable is not named `state`: svelte-check then reads `$state`
-  // as a Svelte 4 store subscription instead of the rune, and the runes-mode
-  // component stops type-checking.
-  // `untrack` is deliberate: the workspace is mounted once per page for one
-  // chapter, so the initial state is created from the chapter as mounted rather
-  // than re-created when a caller passes a new prop value.
-  let atlasState: AtlasState = $state.raw(untrack(() => atlas.createAtlasState(chapter)))
+  // `untrack`: the workspace is mounted once per page for one chapter, so its
+  // first state comes from the chapter and the address it was mounted with.
+  const opening = untrack(() => arrive(atlas.createAtlasState(chapter), search))
+  let atlasState: AtlasState = $state.raw(opening.state)
+  let arrival = $state.raw(untrack(() => arrivalPlate(opening)))
+  let arrivalFor: AtlasState | null = opening.state
+
   let rendererError = $state<string | null>(null)
+  let view = $state.raw<CameraView | null>(null)
+  let exploreTab = $state<ExploreTab>("story")
+  let chapterQueryText = $state("")
+  let person = $state<string | null>(null)
   let listOpen = $state(false)
-  let panelTab = $state<"events" | "story" | "sources">("events")
-  let query = $state("")
+  let aboutOpen = $state(false)
+  let searchOpen = $state(false)
+  let switcherOpen = $state(false)
+  let detent: Detent = $state("peek")
+  let notice = $state<string | null>(null)
 
-  // The overlay column must clear the time controls, whose height depends on the
-  // viewport and on the chapter's own labels (a BCE window's year text is taller
-  // than a CE window's). The controls' measured height drives the column's
-  // bottom offset, so the two panels can never overlap; 120 is the height the
-  // fixed 9rem offset assumed, kept as the first-paint fallback. The measurement
-  // follows the element's own size — a resize observer catches both a viewport
-  // change and a label change (an edited window crossing into BCE years, say) —
-  // with a guard so the component tests' DOM, which has no layout, still mounts.
-  let controlsElement: HTMLDivElement | undefined = $state()
-  let controlsHeight = $state(120)
+  // ---- Layout ------------------------------------------------------------
+
+  // Measured by `measure` below rather than `bind:clientWidth`, which needs a
+  // ResizeObserver that a test DOM does not have.
+  let width = $state(0)
+  // A DOM without layout (the component tests) reports zero: it gets the
+  // desktop frame, which has every control.
+  const mode = $derived(
+    width === 0 || width >= 1180 ? "desktop" : width >= 768 ? "tablet" : "phone",
+  )
+
+  let root: HTMLDivElement | undefined = $state()
+  let topRegion: HTMLElement | undefined = $state()
+  let leftRegion: HTMLElement | undefined = $state()
+  let rightRegion: HTMLElement | undefined = $state()
+  let bottomRegion: HTMLElement | undefined = $state()
+  let safeArea: SafeArea = $state.raw(NO_INSETS)
+
+  /** The frame's regions, measured as insets from the workspace's edges. */
+  function measure() {
+    if (root === undefined) return
+    width = root.clientWidth
+    const box = root.getBoundingClientRect()
+    if (box.width === 0) return
+    const edge = (element: HTMLElement | undefined, side: "top" | "bottom" | "left" | "right") =>
+      element === undefined ? null : element.getBoundingClientRect()[side]
+    const top = edge(topRegion, "bottom")
+    const bottom = edge(bottomRegion, "top")
+    const left = edge(leftRegion, "right")
+    const right = edge(rightRegion, "left")
+    const next: SafeArea = {
+      top: top === null ? 0 : Math.max(0, Math.round(top - box.top)),
+      bottom: bottom === null ? 0 : Math.max(0, Math.round(box.bottom - bottom)),
+      left: left === null ? 0 : Math.max(0, Math.round(left - box.left)),
+      right: right === null ? 0 : Math.max(0, Math.round(box.right - right)),
+    }
+    if (
+      next.top !== safeArea.top ||
+      next.bottom !== safeArea.bottom ||
+      next.left !== safeArea.left ||
+      next.right !== safeArea.right
+    ) {
+      safeArea = next
+    }
+  }
 
   $effect(() => {
-    const element = controlsElement
-
-    if (element === undefined) {
-      return
-    }
-
-    const measure = () => {
-      controlsHeight = element.clientHeight
-    }
-
+    const regions = [root, topRegion, leftRegion, rightRegion, bottomRegion].filter(
+      (element): element is HTMLElement => element !== undefined,
+    )
+    void detent
     measure()
-
-    if (typeof ResizeObserver === "undefined") {
-      return
-    }
-
-    const observer = new ResizeObserver(measure)
-
-    observer.observe(element)
-
+    if (typeof ResizeObserver === "undefined") return
+    const observer = new ResizeObserver(() => measure())
+    for (const element of regions) observer.observe(element)
     return () => observer.disconnect()
   })
 
-  const scene = $derived(buildScene(atlasState, chapter))
+  // ---- Derived view ------------------------------------------------------
+
+  const scene = $derived(buildScene(atlasState, chapter, safeArea))
   const selectedEvent = $derived(atlas.findEvent(chapter, atlasState.selectedEventId))
-  const selectionStatus = $derived(atlas.selectionTimeStatus(atlasState, chapter))
-  const playing = $derived(atlasState.playing)
-  const searching = $derived(query.trim() !== "")
-  const results = $derived(
-    searching ? searchRows(atlasState, chapter, searchChapter(chapter, query)) : [],
+  const selectedPlace = $derived(atlas.findPlace(chapter, atlasState.selectedPlaceId))
+  const hasSelection = $derived(selectedEvent !== null || selectedPlace !== null)
+  const storyStep = $derived(
+    atlasState.storyStep === null ? null : (chapter.story[atlasState.storyStep] ?? null),
   )
-  const selectedPlaceNote = $derived(
-    selectedEvent === null || selectedEvent.placement.kind !== "point"
-      ? null
-      : (chapter.places.find((place) => place.id === selectedEvent.placement.placeId)
-          ?.placementNote ?? null),
+  const storyRelationship = $derived(
+    storyStep?.kind === "summary"
+      ? (chapter.relationships.find((relationship) => relationship.id === storyStep.recordId) ??
+          null)
+      : null,
   )
-  const selectedStory = $derived({
-    caption: story.storyCaption(chapter, atlasState.selectedEventId),
-    previous: story.previousStoryStep(chapter, atlasState.selectedEventId)?.recordId ?? null,
-    next: story.nextStoryStep(chapter, atlasState.selectedEventId)?.recordId ?? null,
+  const options = $derived(layerOptions(chapter))
+  const people = $derived(pennants(chapter))
+  const facts = $derived(chapterFacts(chapter))
+  const windowChanged = $derived(
+    atlasState.timeWindow.start !== chapter.defaultWindow.start ||
+      atlasState.timeWindow.end !== chapter.defaultWindow.end,
+  )
+  const progress = $derived.by(() => {
+    const { start, end } = atlasState.timeWindow
+    return end === start ? 1 : (atlasState.playhead - start) / (end - start)
+  })
+  const nextEvent = $derived(
+    scene.events
+      .filter((event) => event.occurrence.startYear > Math.floor(atlasState.playhead))
+      .sort((a, b) => a.occurrence.startYear - b.occurrence.startYear)[0] ?? null,
+  )
+  const canFollow = $derived(
+    (selectedEvent !== null && selectedEvent.placement.kind === "point") ||
+      (selectedPlace !== null && selectedPlace.position !== null),
+  )
+  const marks = $derived({
+    attested: scene.places.some((place) => place.mark === "attested"),
+    identified: scene.places.some((place) => place.mark === "identified"),
+    anchor: scene.places.some((place) => place.mark === "anchor"),
+  })
+  const families = $derived(
+    RELATIONSHIP_FAMILIES.filter((family) => scene.arcs.some((arc) => arc.family === family)),
+  )
+  const dioramaInView = $derived.by(() => {
+    if (view === null) return null
+    const camera = view
+    const shown = scene.dioramas.find(
+      (diorama) =>
+        camera.heightMeters < diorama.showBelowMeters &&
+        Math.abs(camera.center.lat - diorama.center.lat) < 1.5 &&
+        Math.abs(camera.center.lon - diorama.center.lon) < 1.5,
+    )
+    return shown ? (atlas.findPlace(chapter, shown.placeId)?.label ?? null) : null
+  })
+  const storyPosition = $derived(
+    atlasState.storyStep === null ? null : `${atlasState.storyStep + 1} of ${chapter.story.length}`,
+  )
+
+  // ---- The address, and where the reader left off -------------------------
+
+  // The first state came from the address, so it is not written back: a
+  // stale link stays in the bar until the reader moves, and the arrival plate
+  // has already said what it opened instead.
+  let written = untrack(() => chapterQuery(opening.state, chapter))
+  let pushNext = false
+
+  function positionLabel(state: AtlasState): string {
+    return (
+      atlas.findEvent(chapter, state.selectedEventId)?.title ??
+      atlas.findPlace(chapter, state.selectedPlaceId)?.label ??
+      (state.storyStep === null ? null : chapter.story[state.storyStep]?.caption) ??
+      name
+    )
+  }
+
+  function remember(state: AtlasState, query: string) {
+    rememberPosition({
+      chapterId: chapter.id,
+      search: query,
+      label: positionLabel(state),
+      at: Date.now(),
+    })
+  }
+
+  untrack(() => remember(opening.state, written))
+
+  $effect(() => {
+    const state = atlasState
+    const query = chapterQuery(state, chapter)
+
+    untrack(() => {
+      if (query === written) return
+      written = query
+      if (pushNext) history?.push(query)
+      else history?.replace(query)
+      pushNext = false
+      remember(state, query)
+    })
   })
 
-  // What the chapter's own publication states, counted rather than claimed: the
-  // notice panel has to stay true when the content changes.
-  const review = $derived(chapter.publication)
-  const inWindowEvents = $derived(chapter.events.filter((event) => !event.coda))
-  const codaEvents = $derived(chapter.events.length - inWindowEvents.length)
-  const unplacedInWindow = $derived(
-    inWindowEvents.filter((event) => event.placement.kind === "none").length,
-  )
-  const unlocatedPlaces = $derived(chapter.places.filter((place) => place.position === null).length)
-  const disputedEvents = $derived(chapter.events.filter((event) => event.dispute !== null).length)
-
-  // The workspace owns the playback clock; the renderer never advances time.
+  // The arrival plate describes the view a link opened; the reader's next
+  // change to that view retires it.
   $effect(() => {
-    if (!playing) {
+    const state = atlasState
+    untrack(() => {
+      if (arrival !== null && state !== arrivalFor) arrival = null
+    })
+  })
+
+  function arrive(base: AtlasState, query: string): Arrival {
+    const parsed = readChapterQuery(new URLSearchParams(query))
+    return isEmptyQuery(parsed)
+      ? { state: base, opened: null, widened: false, notFound: null }
+      : applyChapterQuery(base, chapter, parsed)
+  }
+
+  function arrivalPlate(result: Arrival) {
+    if (result.notFound !== null) {
+      const what = { event: "event", place: "place", step: "story step" }[result.notFound.kind]
+      return {
+        tone: "missing" as const,
+        title: `This chapter has no ${what} “${result.notFound.value}”.`,
+        detail: "The link may be older than the chapter's records. It opened at the start.",
+      }
+    }
+
+    const opened = result.opened
+    if (opened === null) return null
+    const widened = result.widened
+      ? `The window widened to ${windowLabel(result.state.timeWindow)} to include it.`
+      : null
+
+    if (opened.kind === "event") {
+      return {
+        tone: "arrived" as const,
+        title: atlas.findEvent(chapter, opened.id)?.title ?? opened.id,
+        detail: widened,
+      }
+    }
+
+    if (opened.kind === "place") {
+      return {
+        tone: "arrived" as const,
+        title: atlas.findPlace(chapter, opened.id)?.label ?? opened.id,
+        detail: widened,
+      }
+    }
+
+    return {
+      tone: "arrived" as const,
+      title: `Story ${opened.index + 1} of ${chapter.story.length}: ${chapter.story[opened.index]?.caption ?? ""}`,
+      detail: widened,
+    }
+  }
+
+  /**
+   * Moves the workspace to an address: Back and Forward, or a link to the
+   * chapter that is already open. An address the workspace wrote itself is
+   * ignored, so its own writes never loop back. `announce` shows the arrival
+   * plate, for a link; Back and Forward return silently to where the reader
+   * was.
+   */
+  export function navigate(query: string, announce = false): void {
+    const normalized = query === "?" ? "" : query
+    if (normalized === written) return
+    const result = arrive(
+      { ...atlas.createAtlasState(chapter), layers: atlasState.layers },
+      normalized,
+    )
+    written = chapterQuery(result.state, chapter)
+    arrivalFor = result.state
+    atlasState = result.state
+    arrival = announce ? arrivalPlate(result) : null
+    remember(result.state, written)
+  }
+
+  // ---- Actions -----------------------------------------------------------
+
+  function update(next: AtlasState, jump = false) {
+    if (jump) pushNext = true
+    atlasState = next
+  }
+
+  function selectEvent(eventId: string | null) {
+    update(atlas.selectEvent(atlasState, chapter, eventId))
+    listOpen = false
+    if (mode === "phone" && eventId !== null) detent = "half"
+  }
+
+  function jumpToStep(index: number) {
+    update(atlas.jumpToStoryStep(atlasState, chapter, index), true)
+    listOpen = false
+    if (mode === "phone") detent = "half"
+  }
+
+  function selectPlace(placeId: string | null) {
+    const here =
+      placeId === null
+        ? []
+        : scene.events.filter(
+            (event) => event.placement.kind === "point" && event.placement.placeId === placeId,
+          )
+
+    if (here.length === 1) {
+      selectEvent(here[0]!.id)
       return
     }
 
+    update(atlas.selectPlace(atlasState, chapter, placeId))
+    if (mode === "phone" && placeId !== null) detent = "half"
+  }
+
+  function openFromSearch(entry: SearchEntry) {
+    const kind = entry.kind
+    if (kind === "event") {
+      update(atlas.jumpToEvent(atlasState, chapter, entry.id), true)
+    } else if (kind === "place") {
+      update(atlas.selectPlace(atlasState, chapter, entry.id, true), true)
+    } else if (kind === "step") {
+      const index = chapter.story.findIndex((step) => step.recordId === entry.id)
+      if (index !== -1) update(atlas.jumpToStoryStep(atlasState, chapter, index), true)
+    } else if (kind === "person" || kind === "state") {
+      person = entry.id
+      exploreTab = "events"
+      listOpen = true
+      if (mode === "phone") detent = "full"
+    }
+    if (mode === "phone" && kind !== "person" && kind !== "state") detent = "half"
+  }
+
+  function toggleFollow() {
+    update(
+      atlasState.cameraFollow === "following"
+        ? atlas.noteManualCameraInput(atlasState)
+        : atlas.resumeCameraFollow(atlasState, chapter),
+    )
+  }
+
+  function toggleSources() {
+    const showing = exploreTab === "sources" && (mode === "desktop" || listOpen || detent !== "peek")
+    if (showing) {
+      exploreTab = "story"
+      listOpen = false
+      return
+    }
+    exploreTab = "sources"
+    listOpen = true
+    if (mode === "phone") detent = "full"
+  }
+
+  function choosePerson(actorId: string | null) {
+    person = actorId
+    if (actorId !== null) exploreTab = "events"
+  }
+
+  async function copyLink() {
+    const url = `${location.origin}${location.pathname}${chapterQuery(atlasState, chapter)}`
+    try {
+      await navigator.clipboard.writeText(url)
+      notice = "Link copied"
+    } catch {
+      notice = url
+    }
+  }
+
+  $effect(() => {
+    if (notice === null) return
+    const timer = setTimeout(() => (notice = null), 2400)
+    return () => clearTimeout(timer)
+  })
+
+  // The workspace owns the playback clock; the renderer never advances time.
+  $effect(() => {
+    if (!atlasState.playing) return
     let previous = performance.now()
     const timer = setInterval(() => {
       const now = performance.now()
       atlasState = atlas.advancePlayhead(atlasState, chapter, now - previous)
       previous = now
     }, 100)
-
     return () => clearInterval(timer)
   })
 
-  function selectEvent(eventId: string | null) {
-    atlasState = atlas.selectEvent(atlasState, chapter, eventId)
-    listOpen = false
+  /** `/` opens search from anywhere that is not a text field. */
+  function shortcut(event: KeyboardEvent) {
+    if (event.key !== "/" || event.metaKey || event.ctrlKey || event.altKey) return
+    const target = event.target as HTMLElement | null
+    if (target?.closest("input, textarea, select, [contenteditable='true'], dialog[open]")) return
+    event.preventDefault()
+    searchOpen = true
   }
 
-  /** A story step is an explicit jump: select the event and move time to it. */
-  function jumpToStoryStep(eventId: string) {
-    atlasState = atlas.jumpToEvent(atlasState, chapter, eventId)
-    listOpen = false
-  }
-
-  // The tabs carry the counts: a surface does not need a heading of its own, and
-  // the panel has to keep its height for the rows it shows at short viewports.
-  const tabs = $derived([
-    { id: "events", label: `Events (${scene.events.length})` },
-    { id: "story", label: `Story (${chapter.story.length})` },
-    { id: "sources", label: `Sources (${chapter.sources.length})` },
-  ] as const)
+  const sourcesOpen = $derived(
+    exploreTab === "sources" && (mode === "desktop" || listOpen || detent !== "peek"),
+  )
 </script>
 
+<svelte:window onkeydown={shortcut} />
+
+{#snippet dateBar(compact: boolean)}
+  <DateBar
+    chapterName={name}
+    year={yearLabel(Math.floor(atlasState.playhead))}
+    sourceExpression={selectedEvent?.occurrence.sourceExpression ?? null}
+    windowText={windowLabel(atlasState.timeWindow)}
+    {windowChanged}
+    storyText={atlasState.storyStep === null
+      ? null
+      : `${atlasState.storyStep + 1} / ${chapter.story.length}`}
+    {compact}
+    onAbout={() => (aboutOpen = true)}
+    onSwitch={() => (switcherOpen = true)}
+    onSearch={() => (searchOpen = true)}
+  />
+{/snippet}
+
+{#snippet orbs(vertical: boolean)}
+  <LayerOrbs
+    {options}
+    layers={atlasState.layers}
+    {sourcesOpen}
+    {vertical}
+    onToggle={(layer, visible) => update(atlas.setLayer(atlasState, layer, visible))}
+    onSources={toggleSources}
+  />
+{/snippet}
+
+{#snippet explore()}
+  <ExploreList
+    {chapter}
+    {scene}
+    {atlasState}
+    bind:tab={exploreTab as string}
+    bind:query={chapterQueryText}
+    {person}
+    onSelect={selectEvent}
+    onJump={jumpToStep}
+    onClearPerson={() => (person = null)}
+  />
+{/snippet}
+
+{#snippet card()}
+  {#if hasSelection}
+    <SelectionCard
+      {chapter}
+      {atlasState}
+      event={selectedEvent}
+      place={selectedPlace}
+      playback={selectedEvent ? atlas.playbackState(atlasState, selectedEvent) : null}
+      outsideWindow={atlas.selectionTimeStatus(atlasState, chapter) === "outside-window"}
+      {storyPosition}
+      onClose={() => update(atlas.selectEvent(atlasState, chapter, null))}
+      onSelectEvent={(eventId) => update(atlas.jumpToEvent(atlasState, chapter, eventId), true)}
+      onReturnToTime={() => update(atlas.returnToEventTime(atlasState, chapter))}
+      onPrevious={atlasState.storyStep !== null && atlasState.storyStep > 0
+        ? () => jumpToStep(atlasState.storyStep! - 1)
+        : null}
+      onNext={atlasState.storyStep !== null && atlasState.storyStep < chapter.story.length - 1
+        ? () => jumpToStep(atlasState.storyStep! + 1)
+        : null}
+      onCopyLink={copyLink}
+    />
+  {:else if storyStep !== null && atlasState.storyStep !== null}
+    {@const index = atlasState.storyStep}
+    <!--
+      A story step the atlas has no card for: the story's own caption for a
+      relationship it narrates. It keeps the story's previous and next, so
+      walking the story never dead-ends on a summary step.
+    -->
+    <article
+      id="atlas-story-summary"
+      data-testid="atlas-story-summary-step"
+      class="pointer-events-auto flex min-h-0 flex-col overflow-hidden rounded-plate border border-frame bg-lacquer text-ink shadow-sheet"
+    >
+      <div class="min-h-0 overflow-y-auto px-4 py-3">
+        <p class="text-label font-semibold uppercase text-ink-dim">
+          Story · {index + 1} of {chapter.story.length}
+        </p>
+        <h2 class="mt-1 font-serif text-title-sm text-ink">{storyStep.caption}</h2>
+        {#if storyRelationship}
+          <p class="mt-2 text-body-sm text-ink-dim">{storyRelationship.summary}</p>
+          <p class="mt-2 text-caption text-ink-faint">
+            {familyOf(storyRelationship) ?? "relationship"}{storyRelationship.validity
+              ? ` · ${windowLabel({ start: storyRelationship.validity.startYear, end: storyRelationship.validity.endYear })}`
+              : ""}{storyRelationship.causal ? "" : " · asserts no causation"}
+          </p>
+        {/if}
+      </div>
+      <footer class="flex shrink-0 items-center gap-2 border-t border-rule px-3 py-2">
+        <button
+          type="button"
+          id="atlas-story-previous"
+          disabled={index === 0}
+          onclick={() => jumpToStep(index - 1)}
+          class={[
+            "inline-flex h-8 cursor-pointer items-center gap-1 rounded-control px-2 text-body-sm text-ink-dim hover:text-ink disabled:cursor-not-allowed disabled:opacity-50",
+            transition,
+            focusRing,
+          ]}><Icon name="chevron-left" size={14} />Previous</button
+        >
+        <span class="flex-1"></span>
+        <button
+          type="button"
+          id="atlas-story-next"
+          disabled={index === chapter.story.length - 1}
+          onclick={() => jumpToStep(index + 1)}
+          class={[
+            "inline-flex h-8 cursor-pointer items-center gap-1 rounded-control border border-frame px-3 text-body-sm text-ink hover:bg-lacquer-raised disabled:cursor-not-allowed disabled:opacity-50",
+            transition,
+            focusRing,
+          ]}>Next in story<Icon name="chevron-right" size={14} /></button
+        >
+      </footer>
+    </article>
+  {/if}
+{/snippet}
+
+{#snippet dial(compact: boolean)}
+  <EventDial
+    playing={atlasState.playing}
+    {progress}
+    nextLabel={nextEvent
+      ? `Next: ${nextEvent.title} · ${yearLabel(nextEvent.occurrence.startYear)}`
+      : null}
+    following={atlasState.cameraFollow === "following"}
+    {canFollow}
+    {compact}
+    onTogglePlay={() => update(atlas.setPlaying(atlasState, !atlasState.playing))}
+    onStep={(direction) => update(atlas.stepPlayhead(atlasState, chapter, direction))}
+    onToggleFollow={toggleFollow}
+  />
+{/snippet}
+
+{#snippet strip(compact: boolean)}
+  <TimelineStrip
+    {chapter}
+    timeWindow={atlasState.timeWindow}
+    playhead={atlasState.playhead}
+    events={scene.events}
+    selectedEventId={atlasState.selectedEventId}
+    {compact}
+    onWindowChange={(window) => update(atlas.setTimeWindow(atlasState, chapter, window))}
+    onPlayheadChange={(year) => update(atlas.setPlayhead(atlasState, chapter, year))}
+    onSelect={selectEvent}
+  />
+{/snippet}
+
+{#snippet legend(folded: boolean)}
+  <Legend
+    {marks}
+    journeys={scene.journeys.length > 0}
+    {families}
+    diorama={dioramaInView}
+    {folded}
+  />
+{/snippet}
+
+{#snippet minimap()}
+  <Minimap
+    home={chapter.homeView}
+    places={scene.places}
+    journeys={scene.journeys}
+    camera={view}
+    onHome={() => update(atlas.returnHome(atlasState))}
+  />
+{/snippet}
+
+{#snippet overlays()}
+  {#if arrival}
+    <ArrivalPlate
+      title={arrival.title}
+      detail={arrival.detail}
+      tone={arrival.tone}
+      onDismiss={() => (arrival = null)}
+    />
+  {/if}
+  {#if notice}
+    <p
+      role="status"
+      class="pointer-events-auto max-w-md truncate rounded-plate border border-frame bg-lacquer-glass px-3 py-1.5 text-caption text-ink shadow-plate backdrop-blur-md"
+    >
+      {notice}
+    </p>
+  {/if}
+{/snippet}
+
 <div
-  class="relative h-full w-full overflow-hidden bg-slate-950 text-slate-100"
+  bind:this={root}
+  class="relative isolate h-full w-full overflow-hidden bg-abyss font-interface text-ink"
   data-testid="atlas-workspace"
+  data-layout={mode}
 >
   <Globe
     {scene}
     label="Atlas globe · {name}"
-    onSelectPlace={(placeId) => {
-      const here = scene.events.filter(
-        (event) => event.placement.kind === "point" && event.placement.placeId === placeId,
-      )
-      if (placeId !== null && here.length === 1) selectEvent(here[0]!.id)
-      else atlasState = atlas.selectPlace(atlasState, chapter, placeId)
-    }}
+    onSelectPlace={selectPlace}
     onManualCameraInput={() => (atlasState = atlas.noteManualCameraInput(atlasState))}
+    onViewChange={(next) => (view = next)}
     onError={(error) => (rendererError = error.message)}
   />
 
@@ -172,238 +663,169 @@
     <div
       id="atlas-renderer-error"
       role="alert"
-      class="absolute left-1/2 top-1/2 z-30 w-[min(26rem,90%)] -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-rose-400/50 bg-slate-950/95 px-5 py-4 text-sm text-rose-100 shadow-2xl"
+      class="absolute top-1/2 left-1/2 z-(--z-alert) w-[min(26rem,90%)] -translate-x-1/2 -translate-y-1/2 rounded-plate border border-danger bg-lacquer px-5 py-4 text-body-sm text-ink shadow-sheet"
     >
-      <p class="font-semibold">The globe renderer did not start</p>
-      <p class="mt-1 text-rose-200/80">{rendererError}</p>
-      <p class="mt-2 text-xs text-rose-200/70">
-        The event list and time controls stay usable so exploration does not depend on the map.
+      <p class="font-semibold text-danger">The globe did not start</p>
+      <p class="mt-1 text-ink-dim">{rendererError}</p>
+      <p class="mt-2 text-caption text-ink-dim">
+        The story, the events, the timeline and the sources all work without it.
       </p>
     </div>
   {/if}
 
-  <!--
-    One overlay column: the notice, the buttons, and the panel are laid out in
-    flow, so they can never overlap each other. At phone widths the notice takes
-    the full width, the buttons wrap below it, the panel keeps a usable minimum
-    height, and the details panel scrolls in what is left; from `md` up the column
-    is bounded above the time controls and the panel shrinks to fit it, so a long
-    list scrolls inside the panel instead of running under the controls.
-
-    The column is bounded above the time controls at every width, and it scrolls
-    rather than overflowing them: at the smallest viewports a notice, a panel, and
-    an open selection can together need more room than the map has, and the one
-    thing that must not happen is a panel crossing the time controls. Scrolling
-    keeps every surface reachable; the panel's own list and the details panel keep
-    their own scroll areas inside it.
-  -->
-  <div
-    class="pointer-events-none absolute inset-x-3 top-3 z-20 flex flex-col gap-2 overflow-y-auto"
-    style="bottom: {controlsHeight + 24}px"
-  >
-    <div class="flex shrink-0 flex-wrap items-start justify-between gap-2">
-      <div
-        id="atlas-notice"
-        class="max-h-[45dvh] w-full min-w-0 shrink-0 overflow-y-auto rounded-xl border border-amber-300/40 bg-slate-950/85 px-3 py-2 backdrop-blur sm:w-auto sm:max-w-[19rem] md:max-h-[7rem] md:shrink"
-      >
-        {#if decision}
-          <p class="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-amber-300">
-            {decision}
-          </p>
-        {/if}
-        <p class="mt-0.5 text-xs font-semibold leading-snug text-slate-100">{name}</p>
-        <!--
-          The chapter's own coverage statement is the full statement of what this
-          chapter does and does not cover. Phone widths keep the derived counts
-          instead: the notice must not eat the space the list needs.
-        -->
-        <p class="mt-1 hidden text-[0.7rem] leading-snug text-slate-300 sm:block">
-          {review.coverageNote}
-        </p>
-        <p class="mt-1 text-[0.65rem] leading-snug text-amber-200/80">
-          {windowLabel(chapter.defaultWindow)} with {codaEvents} coda
-          {codaEvents === 1 ? "node" : "nodes"} outside it; {unplacedInWindow} of {inWindowEvents.length}
-          in-window events and {unlocatedPlaces} of {chapter.places.length} places without a sourced map
-          position; {disputedEvents} disputed {disputedEvents === 1 ? "account" : "accounts"}.
-        </p>
-      </div>
-
-      <div
-        class="pointer-events-auto ml-auto flex shrink-0 flex-row items-center gap-2 sm:flex-col sm:items-end"
-      >
-        <button
-          id="atlas-follow-toggle"
-          type="button"
-          disabled={selectedEvent === null || selectedEvent.placement.kind !== "point"}
-          aria-pressed={atlasState.cameraFollow === "following"}
-          onclick={() =>
-            (atlasState =
-              atlasState.cameraFollow === "following"
-                ? atlas.noteManualCameraInput(atlasState)
-                : atlas.resumeCameraFollow(atlasState, chapter))}
-          class={[
-            "pointer-events-auto rounded-xl border px-3 py-2 text-xs font-semibold backdrop-blur transition",
-            "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300",
-            "disabled:cursor-not-allowed disabled:opacity-50",
-            atlasState.cameraFollow === "following"
-              ? "border-emerald-300/70 bg-emerald-400/15 text-emerald-100 hover:bg-emerald-400/25"
-              : "border-slate-600 bg-slate-950/80 text-slate-200 hover:border-slate-400 hover:text-white",
-          ]}
-        >
-          {atlasState.cameraFollow === "following" ? "Following selection" : "Resume following"}
-        </button>
-
-        <button
-          id="atlas-list-toggle"
-          type="button"
-          aria-expanded={listOpen}
-          onclick={() => (listOpen = !listOpen)}
-          class="pointer-events-auto rounded-xl border border-slate-600 bg-slate-950/80 px-3 py-2 text-xs font-semibold text-slate-200 backdrop-blur transition hover:border-slate-400 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300 md:hidden"
-        >
-          Explore ({scene.events.length})
-        </button>
-      </div>
-    </div>
-
+  {#if mode === "desktop"}
     <div
-      id="atlas-event-panel"
-      class={[
-        "pointer-events-auto min-h-[8rem] w-[17rem] max-w-full flex-1 flex-col overflow-hidden rounded-2xl border border-slate-700/70 bg-slate-950/85 px-3 py-3 shadow-xl shadow-slate-950/50 backdrop-blur md:min-h-[11rem] md:w-[19rem] md:flex-initial",
-        listOpen ? "flex" : "hidden md:flex",
-      ]}
+      class="pointer-events-none absolute inset-0 z-(--z-chrome) grid grid-cols-[18rem_minmax(0,1fr)_24rem] grid-rows-[auto_minmax(0,1fr)_auto] gap-3 p-3"
     >
-      <!--
-        One panel, three surfaces: the window's events, the chapter's story, and
-        its sources. They share the panel so the overlays stay countable at phone
-        widths, and the tab bar says which one is showing.
-      -->
-      <div
-        class="mb-2 flex shrink-0 items-center gap-1"
-        role="tablist"
-        aria-label="Chapter exploration"
-      >
-        {#each tabs as tab (tab.id)}
-          <button
-            id="atlas-tab-{tab.id}"
-            type="button"
-            role="tab"
-            aria-selected={panelTab === tab.id}
-            data-testid="atlas-tab"
-            onclick={() => (panelTab = tab.id)}
-            class={[
-              "rounded-lg px-2.5 py-1 text-xs font-semibold transition",
-              "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300",
-              panelTab === tab.id
-                ? "bg-slate-800 text-white"
-                : "text-slate-400 hover:bg-slate-900 hover:text-slate-200",
-            ]}
-          >
-            {tab.label}
-          </button>
-        {/each}
-      </div>
+      <div class="col-span-3" bind:this={topRegion}>{@render dateBar(false)}</div>
 
-      {#if panelTab === "events"}
-        <div class="mb-2 flex shrink-0 flex-col gap-1.5">
-          <label
-            class="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-slate-400"
-            for="atlas-search"
-          >
-            Search the chapter
-          </label>
-          <input
-            id="atlas-search"
-            type="search"
-            value={query}
-            placeholder="A name, a place, a year"
-            oninput={(event) => (query = (event.currentTarget as HTMLInputElement).value)}
-            class="w-full rounded-lg border border-slate-700 bg-slate-900 px-2.5 py-1.5 text-sm text-slate-100 placeholder:text-slate-500 focus:border-amber-300 focus:outline-none"
-          />
+      <aside
+        bind:this={leftRegion}
+        aria-label="Explore"
+        class="flex min-h-0 flex-col gap-2"
+      >
+        {@render orbs(false)}
+        <Pennants {people} active={person} onToggle={choosePerson} />
+        <div
+          id="atlas-event-panel"
+          class="pointer-events-auto flex min-h-0 flex-1 flex-col rounded-plate border border-frame bg-lacquer-glass px-3 py-3 shadow-plate backdrop-blur-md"
+        >
+          {@render explore()}
         </div>
+      </aside>
 
-        {#if searching}
-          <SearchResults {query} {results} onSelect={selectEvent} onClear={() => (query = "")} />
-        {:else}
-          <EventList events={scene.events} onSelect={selectEvent} />
-        {/if}
-      {:else if panelTab === "story"}
-        <StoryList
-          steps={chapter.story}
-          currentRecordId={atlasState.selectedEventId}
-          onJump={jumpToStoryStep}
-        />
-      {:else}
-        <SourceList
-          sources={chapter.sources}
-          citedSourceIds={selectedEvent?.citations.map((citation) => citation.sourceId) ?? []}
-        />
-      {/if}
-    </div>
-
-    {#if selectedEvent}
-      <!--
-        The details panel is bounded by the space the overlay column actually has
-        and scrolls inside that bound. The column already stops above the time
-        controls (`bottom: controlsHeight + 24`), so taking the bound from the
-        column rather than from a fixed `100dvh` calculation keeps a long summary
-        from rendering under the controls or past the bottom of the workspace,
-        where the page cannot scroll to it: the record's own explanation of why an
-        event has no position was the text that fell off.
-
-        At phone widths the details and the open drawer do not share the screen:
-        the smallest reviewed viewport cannot hold the notice, the drawer's list,
-        and the details at once, and a reader who opens the list is choosing to
-        look at the list. Selecting an event closes the drawer, so the details are
-        what a reader returns to. From `md` up both stay visible, side by side.
-      -->
-      <div
-        class={[
-          "mt-auto flex min-h-0 max-h-[60%] flex-col overflow-hidden md:absolute md:right-0 md:top-[5.25rem] md:mt-0 md:max-h-[calc(100%-5.25rem)] md:w-96",
-          listOpen ? "hidden md:flex" : "flex",
-        ]}
-      >
-        <SelectionPanel
-          event={selectedEvent}
-          status={selectionStatus}
-          review={{ independence: review.independence, reviewer: review.reviewer }}
-          {decision}
-          placeNote={selectedPlaceNote}
-          actors={chapter.actors}
-          sources={chapter.sources}
-          story={selectedStory}
-          onReturnToTime={() => (atlasState = atlas.returnToEventTime(atlasState, chapter))}
-          onPreviousStoryStep={() =>
-            selectedStory.previous !== null && jumpToStoryStep(selectedStory.previous)}
-          onNextStoryStep={() => selectedStory.next !== null && jumpToStoryStep(selectedStory.next)}
-          onClose={() => selectEvent(null)}
-        />
+      <div class="relative flex min-h-0 flex-col items-center gap-2">
+        {@render overlays()}
+        <div class="pointer-events-none mt-auto self-start">
+          {@render legend(false)}
+        </div>
       </div>
-    {/if}
-  </div>
 
-  <div
-    class="pointer-events-none absolute inset-x-3 bottom-3 z-20 flex justify-center"
-    bind:this={controlsElement}
-  >
-    <TimeControls
-      timeWindow={atlasState.timeWindow}
-      playhead={atlasState.playhead}
-      playing={atlasState.playing}
-      onWindowChange={(window) => (atlasState = atlas.setTimeWindow(atlasState, chapter, window))}
-      onPlayheadChange={(year) => (atlasState = atlas.setPlayhead(atlasState, chapter, year))}
-      onStep={(direction) => (atlasState = atlas.stepPlayhead(atlasState, chapter, direction))}
-      onTogglePlaying={() => (atlasState = atlas.setPlaying(atlasState, !atlasState.playing))}
-    />
-  </div>
+      <aside aria-label="Selection" class="flex min-h-0 flex-col">
+        {#if hasSelection || storyStep !== null}
+          <div bind:this={rightRegion} class="flex max-h-full min-h-0 flex-col">
+            {@render card()}
+          </div>
+        {/if}
+      </aside>
 
-  <p
-    class="pointer-events-none absolute bottom-3 left-3 z-10 hidden max-w-[16rem] text-[0.65rem] leading-snug text-slate-400 lg:block"
-  >
-    Globe: Three.js (MIT), 3d-tiles-renderer (Apache-2.0) · Elevation: Terrain Tiles on AWS Open
-    Data (Mapzen and contributors) · Imagery painted from it and Natural Earth II ·
-    <a
-      class="pointer-events-auto underline decoration-slate-600 underline-offset-2 transition-colors hover:text-slate-200 focus-visible:rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
-      href="/globe/ATTRIBUTION.txt">Full attribution</a
+      <div bind:this={bottomRegion} class="col-span-3 flex items-end gap-3">
+        {@render dial(false)}
+        <div class="min-w-0 flex-1">{@render strip(false)}</div>
+        {@render minimap()}
+      </div>
+    </div>
+  {:else if mode === "tablet"}
+    <div
+      class="pointer-events-none absolute inset-0 z-(--z-chrome) grid grid-cols-[auto_minmax(0,1fr)_22rem] grid-rows-[auto_minmax(0,1fr)_auto] gap-3 p-3"
     >
-  </p>
+      <div class="col-span-3" bind:this={topRegion}>{@render dateBar(false)}</div>
+
+      <aside bind:this={leftRegion} aria-label="Layers" class="flex min-h-0 flex-col gap-2">
+        {@render orbs(true)}
+        <Orb
+          icon="list"
+          label={listOpen ? "Close the story and events" : "Story and events"}
+          pressed={listOpen}
+          onchange={(next) => (listOpen = next)}
+        />
+      </aside>
+
+      <div class="relative flex min-h-0 flex-col items-start gap-2">
+        {#if listOpen}
+          <div
+            id="atlas-event-panel"
+            class="pointer-events-auto flex min-h-0 w-80 max-w-full flex-1 flex-col gap-2 rounded-plate border border-frame bg-lacquer px-3 py-3 shadow-sheet"
+          >
+            <Pennants {people} active={person} onToggle={choosePerson} />
+            <div class="min-h-0 flex-1">{@render explore()}</div>
+          </div>
+        {:else}
+          <div class="flex w-full flex-col items-center gap-2">{@render overlays()}</div>
+          <div class="mt-auto">{@render legend(true)}</div>
+        {/if}
+      </div>
+
+      <aside aria-label="Selection" class="flex min-h-0 flex-col">
+        {#if hasSelection || storyStep !== null}
+          <div bind:this={rightRegion} class="flex max-h-full min-h-0 flex-col">
+            {@render card()}
+          </div>
+        {/if}
+      </aside>
+
+      <div bind:this={bottomRegion} class="col-span-3 flex items-end gap-3">
+        {@render dial(false)}
+        <div class="min-w-0 flex-1">{@render strip(false)}</div>
+        {@render minimap()}
+      </div>
+    </div>
+  {:else}
+    <div class="pointer-events-none absolute inset-0 z-(--z-chrome) flex flex-col">
+      <div bind:this={topRegion} class="flex flex-col gap-2 px-2 pt-2">
+        {@render dateBar(true)}
+        <div class="-mx-2 overflow-x-auto px-2 pb-1">{@render orbs(false)}</div>
+      </div>
+      <div class="flex flex-col items-center gap-2 px-2 pt-1">{@render overlays()}</div>
+      {#if detent === "peek"}
+        <div class="mt-auto px-2 pb-2">{@render legend(true)}</div>
+      {/if}
+      <div bind:this={bottomRegion} class="pointer-events-auto mt-auto">
+        <Sheet
+          title={selectedEvent?.title ?? selectedPlace?.label ?? storyStep?.caption ?? name}
+          placement="bottom"
+          bind:detent
+          closable={false}
+        >
+          <div class="flex flex-col gap-3">
+            {@render dial(true)}
+            {#if detent !== "peek"}
+              {@render strip(true)}
+              {#if (hasSelection || storyStep !== null) && !listOpen}
+                <div class="flex min-h-[24rem] flex-col">{@render card()}</div>
+                <button
+                  type="button"
+                  onclick={() => {
+                    listOpen = true
+                    detent = "full"
+                  }}
+                  class={[
+                    "self-center rounded-control px-2 py-1 text-body-sm text-ink-dim underline decoration-rule underline-offset-2 hover:text-ink",
+                    transition,
+                    focusRing,
+                  ]}>Story and events</button
+                >
+              {:else}
+                <Pennants {people} active={person} onToggle={choosePerson} />
+                <div id="atlas-event-panel" class="flex h-[60dvh] min-h-0 flex-col">
+                  {@render explore()}
+                </div>
+              {/if}
+            {/if}
+          </div>
+        </Sheet>
+      </div>
+    </div>
+  {/if}
+
+  <AboutSheet
+    {chapter}
+    {name}
+    {decision}
+    {facts}
+    open={aboutOpen}
+    onClose={() => (aboutOpen = false)}
+  />
+  <SearchDialog
+    open={searchOpen}
+    current={chapter.id}
+    currentName={name}
+    onClose={() => (searchOpen = false)}
+    onOpenHere={openFromSearch}
+  />
+  <ChapterSwitcher
+    open={switcherOpen}
+    current={chapter.id}
+    onClose={() => (switcherOpen = false)}
+  />
 </div>

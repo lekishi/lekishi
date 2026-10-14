@@ -1,6 +1,8 @@
 import { mount, unmount } from "svelte"
 import type { Chapter } from "./domain"
-import AtlasWorkspace from "./workspace/AtlasWorkspace.svelte"
+import AtlasWorkspace, { type AtlasHistory } from "./workspace/AtlasWorkspace.svelte"
+
+export type { AtlasHistory }
 
 /**
  * Mounts the atlas workspace into a SvelteKit-rendered mount point.
@@ -13,6 +15,13 @@ import AtlasWorkspace from "./workspace/AtlasWorkspace.svelte"
  */
 
 export type AtlasHandle = {
+  /** The chapter the workspace renders. */
+  readonly chapterId: string
+  /**
+   * Moves the workspace to a chapter query (Back and Forward, or a link to the
+   * open chapter). `announce` shows the arrival plate, for a link.
+   */
+  navigate(search: string, announce?: boolean): void
   /** True once the workspace is torn down and its renderer is disposed. */
   readonly disposed: boolean
   /** Tears the workspace down and disposes the renderer. Idempotent. */
@@ -30,10 +39,18 @@ export type AtlasHeading = {
   readonly decision: string
 }
 
+/** Where the workspace starts and how it writes the address (RFD 5's URL contract). */
+export type AtlasAddress = {
+  /** The address bar's query when the workspace mounts. */
+  readonly search: string
+  readonly history: AtlasHistory | null
+}
+
 export function mountAtlas(
   root: HTMLElement,
   chapter: Chapter,
   heading?: AtlasHeading,
+  address?: AtlasAddress,
 ): AtlasHandle {
   const component = mount(AtlasWorkspace, {
     target: root,
@@ -41,11 +58,17 @@ export function mountAtlas(
       chapter,
       name: heading?.name ?? chapter.title,
       decision: heading?.decision ?? "",
+      search: address?.search ?? "",
+      history: address?.history ?? null,
     },
   })
   let disposed = false
 
   return {
+    chapterId: chapter.id,
+    navigate(search, announce = false) {
+      if (!disposed) component.navigate(search, announce)
+    },
     get disposed() {
       return disposed
     },

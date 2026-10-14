@@ -6,6 +6,7 @@
     Button,
     CitationLine,
     DateLine,
+    Dialog,
     EmptyState,
     Field,
     Icon,
@@ -276,6 +277,7 @@
   let query = $state("鑒眞")
   let detent = $state<Detent>("peek")
   let quoteOpen = $state(false)
+  let dialogOpen = $state(false)
   let busy = $state(false)
 
   function pretend() {
@@ -840,6 +842,37 @@
                 </Sheet>
               </div>
             </div>
+          </div>
+        </Plate>
+
+        <Plate tone="solid" title="Dialog" level={3}>
+          <div class="flex flex-col items-start gap-3">
+            <p class="text-caption text-ink-faint">
+              Modal, for search, the chapter switcher and About: the native dialog traps focus,
+              Escape and the backdrop close it, and the page behind is inert.
+            </p>
+            <Button variant="secondary" icon="search" onclick={() => (dialogOpen = true)}
+              >Open a dialog</Button
+            >
+            <Dialog
+              open={dialogOpen}
+              labelledby="reference-dialog-title"
+              placement="top"
+              class="w-[32rem]"
+              onclose={() => (dialogOpen = false)}
+            >
+              <div class="flex flex-col gap-3 p-5">
+                <h4 id="reference-dialog-title" class="font-display text-title text-ink">
+                  The embassy to Tang China
+                </h4>
+                <p class="font-serif text-body-sm text-ink-dim">
+                  鑒眞 reaches 秋妻屋浦 with the second ship, 753.
+                </p>
+                <div>
+                  <Button variant="primary" onclick={() => (dialogOpen = false)}>Close</Button>
+                </div>
+              </div>
+            </Dialog>
           </div>
         </Plate>
       </section>

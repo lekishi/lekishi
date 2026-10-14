@@ -269,6 +269,33 @@ describe("mountAtlas", () => {
     handle.dispose()
   })
 
+  it("keeps a long press on the globe and its controls from selecting the page", async () => {
+    // iOS Safari starts a text selection from a long press on a non-text
+    // surface, and it spreads over every panel. The surfaces a reader handles
+    // opt out; the lists and the card stay selectable for copying citations.
+    const handle = mountAtlas(root, TANG)
+    await flush()
+
+    for (const selector of [
+      '[data-testid="atlas-globe"]',
+      '[data-testid="atlas-dial"]',
+      '[data-testid="atlas-minimap"]',
+    ]) {
+      const element = root.querySelector(selector)
+
+      expect(element, selector).not.toBeNull()
+      expect(element?.classList.contains("select-none"), selector).toBe(true)
+      expect(element?.classList.contains("[-webkit-touch-callout:none]"), selector).toBe(true)
+    }
+    expect(
+      root
+        .querySelector('[data-testid="atlas-explore"], [role="tabpanel"]')
+        ?.closest(".select-none"),
+    ).toBeNull()
+
+    handle.dispose()
+  })
+
   it("tears the workspace down and disposes the renderer, idempotently", async () => {
     const handle = mountAtlas(root, TANG)
     await flush()

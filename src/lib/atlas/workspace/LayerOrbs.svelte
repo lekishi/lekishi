@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Orb, type IconName } from "$lib/ui"
+  import { Orb, handled, type IconName } from "$lib/ui"
   import type { LayerOption } from "../overlays"
   import type { LayerId, LayerVisibility } from "../state"
 
@@ -63,7 +63,7 @@
   role="group"
   aria-label="Map layers"
   data-testid="atlas-layers"
-  class={["pointer-events-auto flex gap-2", vertical ? "flex-col" : "flex-row flex-wrap"]}
+  class={["pointer-events-auto flex gap-2", handled, vertical ? "flex-col" : "flex-row flex-wrap"]}
 >
   {#each options as option (option.id)}
     <Orb

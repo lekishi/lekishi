@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Icon, focusRing, focusRingOnGold, transition } from "$lib/ui"
+  import { Icon, focusRing, focusRingOnGold, handled, transition } from "$lib/ui"
 
   /**
    * The event dial (RFD 5, bottom region): play and step through the window,
@@ -55,6 +55,7 @@
   data-testid="atlas-dial"
   class={[
     "pointer-events-auto flex min-w-0 items-center gap-2",
+    handled,
     !compact &&
       "rounded-plate border border-frame bg-lacquer-glass px-2 py-1.5 shadow-plate backdrop-blur-md",
   ]}

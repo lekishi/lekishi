@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { focusRing, transition } from "$lib/ui"
+  import { focusRing, handled, transition } from "$lib/ui"
   import type { Chapter, TimeWindow } from "../domain"
   import { windowLabel, yearLabel } from "../labels"
   import type { SceneEvent } from "../scene"
@@ -125,7 +125,10 @@
 <section
   aria-label="Timeline"
   data-testid="atlas-timeline"
-  class="pointer-events-auto flex min-w-0 flex-col gap-1.5 rounded-plate border border-frame bg-lacquer-glass px-3 py-2 text-ink shadow-plate backdrop-blur-md"
+  class={[
+    "pointer-events-auto flex min-w-0 flex-col gap-1.5 rounded-plate border border-frame bg-lacquer-glass px-3 py-2 text-ink shadow-plate backdrop-blur-md",
+    handled,
+  ]}
 >
   {#if !compact}
     <div class="flex items-center gap-3">

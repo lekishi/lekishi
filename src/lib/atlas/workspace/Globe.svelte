@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte"
+  import { handled } from "$lib/ui"
   import { createGlobeAtlasRenderer } from "../renderer/globe-renderer"
   import type { AtlasRenderer, CameraView } from "../renderer/types"
   import type { AtlasScene } from "../scene"
@@ -51,7 +52,7 @@
 
 <div
   bind:this={container}
-  class="absolute inset-0"
+  class={["absolute inset-0", handled]}
   data-testid="atlas-globe"
   role="application"
   aria-label={label}

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { focusRing, transition } from "$lib/ui"
+  import { focusRing, handled, transition } from "$lib/ui"
   import type { GeoPoint } from "../domain"
   import type { SceneJourney } from "../overlays"
   import type { ScenePlace } from "../scene"
@@ -125,6 +125,7 @@
   title="Back to the chapter's view"
   data-testid="atlas-minimap"
   class={[
+    handled,
     "group pointer-events-auto relative size-24 shrink-0 cursor-pointer rounded-full border border-frame bg-lacquer-glass shadow-plate backdrop-blur-md hover:border-gold",
     transition,
     focusRing,

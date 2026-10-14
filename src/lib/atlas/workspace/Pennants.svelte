@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { focusRing, transition } from "$lib/ui"
+  import { focusRing, handled, transition } from "$lib/ui"
   import type { Pennant } from "../card"
 
   /**
@@ -26,7 +26,7 @@
   <div
     role="group"
     aria-label="People in this chapter"
-    class="pointer-events-auto flex items-center gap-1.5 overflow-x-auto py-0.5"
+    class={["pointer-events-auto flex items-center gap-1.5 overflow-x-auto py-0.5", handled]}
   >
     {#each people as person (person.actor.id)}
       {@const pressed = active === person.actor.id}

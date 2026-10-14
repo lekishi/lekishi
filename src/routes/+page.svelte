@@ -110,8 +110,13 @@
   </header>
 
   <main class="flex flex-1 flex-col">
+    <!--
+      `grid-cols-1` is a minmax(0, 1fr) track: without it the implicit column
+      is sized to its widest unbreakable content, the search button's one-line
+      placeholder, and the hero runs off a 320 px screen.
+    -->
     <section
-      class="relative mx-auto grid w-full max-w-6xl items-center gap-10 px-4 pt-10 pb-12 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,28rem)] lg:pt-16"
+      class="relative mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-10 px-4 pt-10 pb-12 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,28rem)] lg:pt-16"
     >
       <div class="flex max-w-2xl flex-col gap-6">
         <p class="text-label font-semibold uppercase text-gold">A historical atlas</p>

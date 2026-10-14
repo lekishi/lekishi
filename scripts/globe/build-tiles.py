@@ -363,6 +363,29 @@ def inland_detail(land, z, w, n, step, LON, LAT, green, fade):
         (noise(LON - 2.9, LAT + 8.6, 420.0) - 0.5) * 0.12 * fade(1 / 420.0)
     return land * (1 + (shade + mottle[..., None]) * green)
 
+SPECK_DEG = 0.0015  # low ground narrower than this (about 150 m) is not drawn as water
+BEACH_DEG = 0.003   # how far (about 300 m) sand reaches inland from water
+def low_ground(w, n, step, z):
+    """Water and beach for the finest levels. The elevation steps in whole metres,
+    and deltas and coastal plains lie a few metres above the sea, so thresholds on
+    height alone paint them as blocks of sand with specks of water wherever a
+    pixel is finer than the elevation's own step (蘇州 and 難波 at levels 9 and 10).
+    Water is instead what most of a small neighbourhood is low enough to be, and
+    sand needs water nearby. Coarser pixels than SPECK_DEG keep the plain height
+    rule, so the levels below are painted exactly as before. The neighbourhood is
+    read over a margin, so a tile's edge agrees with its neighbour's."""
+    blur = BEACH_DEG / step
+    m = int(math.ceil(3 * blur)) + 1
+    lons = w + (np.arange(IMG + 2 * m) - m + 0.5) * step
+    lats = n - (np.arange(IMG + 2 * m) - m + 0.5) * step
+    LONm, LATm = np.meshgrid(lons, lats)
+    Em = elevation(LONm, np.clip(LATm, -89.999, 89.999), step, z)
+    water = gaussian((Em <= 0.5).astype(np.float32), SPECK_DEG / step) > 0.5
+    near = gaussian(water.astype(np.float32), blur)
+    inner = (slice(m, m + IMG), slice(m, m + IMG))
+    beach = np.clip((near[inner] - 0.04) / 0.1, 0, 1) * (Em[inner] < 6)
+    return water[inner], beach
+
 def imagery_jpeg(z, x, y):
     """Paints one tile so that every point gets the same colour at every level:
     the same rules apply worldwide (no per-level or per-region switches), sea
@@ -404,13 +427,17 @@ def imagery_jpeg(z, x, y):
     land = land * (1 - rock) + hexc("#9b8a6c") * rock
     high = np.clip((Ec[..., None] - 900) / 1800, 0, 1) * 0.6
     land = land * (1 - high) + hexc("#a39377") * high
-    sand = ((E > 0.5) & (E < 6))[..., None] * fade(0.004)
+    if step <= SPECK_DEG:
+        water, beach = low_ground(w, n, step, z)
+        dry, sand = ~water, (beach * ~water)[..., None] * fade(0.004)
+    else:
+        dry, sand = E > 0.5, ((E > 0.5) & (E < 6))[..., None] * fade(0.004)
     land = land * (1 - sand) + hexc("#d8c48c") * sand
     depth = np.clip(-Ec, 0, None)[..., None]
     t = np.clip(depth / 1800.0, 0, 1) ** 0.55
     sea = hexc("#4aa3b8") * (1 - t) + hexc("#163f5c") * t
     ice = ((base.mean(-1) > 185) & (base.max(-1) - base.min(-1) < 45))[..., None]  # Natural Earth ice and snow
-    col = np.where((E > 0.5)[..., None], np.where(ice, base, land), np.where(ice, base, sea))
+    col = np.where(dry[..., None], np.where(ice, base, land), np.where(ice, base, sea))
     out = io.BytesIO()
     Image.fromarray(np.clip(col, 0, 255).astype(np.uint8)).save(out, "JPEG", quality=86, optimize=True)
     return out.getvalue()

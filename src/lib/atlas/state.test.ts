@@ -14,6 +14,10 @@ import {
   setPlayhead,
   setTimeWindow,
   stepPlayhead,
+  selectPlace,
+  jumpToStoryStep,
+  setLayer,
+  includeInWindow,
   type AtlasState,
 } from "./state"
 import { buildScene } from "./scene"
@@ -52,8 +56,8 @@ describe("selection", () => {
     const first = selectEvent(following, chapter, "event-harbor-assembly")
     const second = selectEvent(first, chapter, "event-island-landfall")
 
-    expect(first.cameraFocus?.eventId).toBe("event-harbor-assembly")
-    expect(second.cameraFocus?.eventId).toBe("event-island-landfall")
+    expect(first.cameraFocus?.recordId).toBe("event-harbor-assembly")
+    expect(second.cameraFocus?.recordId).toBe("event-island-landfall")
     expect(second.cameraFocus!.token).toBeGreaterThan(first.cameraFocus!.token)
   })
 })
@@ -69,7 +73,7 @@ describe("camera follow", () => {
 
     expect(following.playhead).toBe(1246)
     expect(following.cameraFollow).toBe("following")
-    expect(following.cameraFocus).toEqual({ eventId: "event-island-landfall", token: 1 })
+    expect(following.cameraFocus).toEqual({ recordId: "event-island-landfall", token: 1 })
   })
 
   it("stops following on manual camera input without pausing playback", () => {
@@ -92,7 +96,7 @@ describe("camera follow", () => {
     const resumed = resumeCameraFollow(selected, chapter)
 
     expect(resumed.cameraFollow).toBe("following")
-    expect(resumed.cameraFocus?.eventId).toBe("event-harbor-assembly")
+    expect(resumed.cameraFocus?.recordId).toBe("event-harbor-assembly")
   })
 
   it("is unaffected by programmatic playhead, window, and playback changes", () => {
@@ -118,7 +122,7 @@ describe("camera follow", () => {
     const scene = buildScene(selected, chapter)
 
     expect(scene.cameraTarget).toEqual({ lon: 129.9, lat: 32.8 })
-    expect(scene.cameraFocus?.eventId).toBe("event-harbor-assembly")
+    expect(scene.cameraFocus?.recordId).toBe("event-harbor-assembly")
   })
 })
 
@@ -210,5 +214,57 @@ describe("playback", () => {
       .map((event) => event.id)
 
     expect(active).toEqual(["event-plain-workshop"])
+  })
+})
+
+describe("place selection", () => {
+  it("keeps one selection at a time", () => {
+    const event = selectEvent(initial, chapter, "event-harbor-assembly")
+    const place = selectPlace(event, chapter, "place-north-harbor")
+
+    expect(place.selectedPlaceId).toBe("place-north-harbor")
+    expect(place.selectedEventId).toBeNull()
+    expect(selectEvent(place, chapter, "event-harbor-assembly").selectedPlaceId).toBeNull()
+    expect(selectPlace(initial, chapter, "place-missing")).toBe(initial)
+  })
+
+  it("frames a place only for an explicit jump while following is off", () => {
+    expect(selectPlace(initial, chapter, "place-north-harbor").cameraFocus).toBeNull()
+    expect(selectPlace(initial, chapter, "place-north-harbor", true).cameraFocus?.recordId).toBe(
+      "place-north-harbor",
+    )
+    // A place without a sourced position has nowhere to fly to.
+    expect(selectPlace(initial, chapter, "place-island-stop", true).cameraFocus).toBeNull()
+  })
+})
+
+describe("story steps", () => {
+  it("moves the story position with an event that is a step", () => {
+    expect(selectEvent(initial, chapter, "event-coastal-crossing").storyStep).toBe(1)
+    expect(selectPlace(initial, chapter, "place-north-harbor").storyStep).toBeNull()
+  })
+
+  it("jumps to an event step with an explicit camera flight", () => {
+    const jumped = jumpToStoryStep(initial, chapter, 0)
+
+    expect(jumped.selectedEventId).toBe("event-harbor-assembly")
+    expect(jumped.storyStep).toBe(0)
+    expect(jumped.cameraFocus?.recordId).toBe("event-harbor-assembly")
+    expect(jumpToStoryStep(initial, chapter, 99)).toBe(initial)
+  })
+})
+
+describe("layers", () => {
+  it("starts with journeys on and the relationship families drawn on selection only", () => {
+    expect(initial.layers.journeys).toBe(true)
+    expect(initial.layers.diplomacy).toBe(false)
+    expect(setLayer(initial, "diplomacy", true).layers.diplomacy).toBe(true)
+  })
+})
+
+describe("widening the window", () => {
+  it("widens only as far as a span needs, and leaves an enclosing window alone", () => {
+    expect(includeInWindow(initial, 1210, 1220)).toBe(initial)
+    expect(includeInWindow(initial, 1190, 1210).timeWindow).toEqual({ start: 1190, end: 1250 })
   })
 })

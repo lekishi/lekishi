@@ -399,6 +399,9 @@ if (strayScripts.length > 0) {
 // production artifact must carry neither their pages, route wrappers nor their
 // code; a preview must carry them, or the reviewers have nothing to open. The
 // two markers distinguish the route entries from the page implementations.
+// They catch rendering code only: a helper such as the token parser imported
+// from a production page would pass, so the guarantee is the route copy in
+// `scripts/build-app.mjs`, and this is its check.
 const devPageMarker = "data-dev-page"
 const devRouteMarker = "data-dev-route"
 const devPages = [

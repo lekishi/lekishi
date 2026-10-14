@@ -52,6 +52,10 @@ describe("contrast", () => {
     expect(contrastGrade(contrast("#7f786b", "#121a20")!)).toBe("AA large")
   })
 
+  it("keeps field placeholder text at AA on its raised surface", () => {
+    expect(contrast("#b9af9c", "#1a242b")!).toBeGreaterThanOrEqual(4.5)
+  })
+
   it("composites a translucent colour over the background", () => {
     expect(parseColor("rgb(210 169 79 / 0.35)")).toEqual([210, 169, 79, 0.35])
     expect(contrast("rgb(210 169 79 / 0.35)", "#121a20")!).toBeLessThan(

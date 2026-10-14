@@ -396,10 +396,11 @@ if (strayScripts.length > 0) {
 
 // The `/dev` pages (the design reference among them) are built in development
 // and on pull-request previews only (RFD 5, owner decisions of 2026-10-13). A
-// production artifact must carry neither their pages nor their code; a preview
-// must carry them, or the reviewers have nothing to open. Each dev page's root
-// element carries `data-dev-page`, which is how its code is recognised.
+// production artifact must carry neither their pages, route wrappers nor their
+// code; a preview must carry them, or the reviewers have nothing to open. The
+// two markers distinguish the route entries from the page implementations.
 const devPageMarker = "data-dev-page"
+const devRouteMarker = "data-dev-route"
 const devPages = [
   { file: "dev.html", page: "index" },
   { file: "dev/design.html", page: "design" },
@@ -408,7 +409,11 @@ const devPages = [
 if (devPagesEnabled()) {
   for (const { file, page } of devPages) {
     const html = path.join(buildDirectory, file)
-    if (!existsSync(html) || !read(html).includes(`${devPageMarker}="${page}"`)) {
+    if (
+      !existsSync(html) ||
+      !read(html).includes(`${devPageMarker}="${page}"`) ||
+      !read(html).includes(`${devRouteMarker}="${page}"`)
+    ) {
       fail(`this is a preview build but ${file} does not carry the ${page} dev page`)
     }
   }
@@ -421,9 +426,11 @@ if (devPagesEnabled()) {
     fail(`the /dev pages are in a production build: ${shipped.join(", ")}`)
   }
 
-  const devScripts = files.filter(
-    (file) => file.endsWith(".js") && readFileSync(file, "utf8").includes(devPageMarker),
-  )
+  const devScripts = files.filter((file) => {
+    if (!file.endsWith(".js")) return false
+    const script = readFileSync(file, "utf8")
+    return script.includes(devPageMarker) || script.includes(devRouteMarker)
+  })
 
   if (devScripts.length > 0) {
     fail(`the /dev pages' code is in a production build: ${devScripts.map(inBuild).join(", ")}`)

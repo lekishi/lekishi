@@ -76,7 +76,12 @@
   --font-display: "Cinzel", "Noto Serif JP", ui-serif, Georgia, serif;
   --font-serif:
     "Noto Serif JP", "Noto Serif TC", "Hiragino Mincho ProN", "Yu Mincho", ui-serif, Georgia, serif;
-  --font-sans:
+  /*
+   * `interface` is deliberately opt-in until the legacy screens migrate. Using
+   * Tailwind's `--font-sans` name would also replace Preflight's site-wide
+   * default and change reader screens before that migration.
+   */
+  --font-interface:
     "Noto Sans JP", "Hiragino Sans", "Yu Gothic UI", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji";
 

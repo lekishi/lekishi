@@ -9,6 +9,8 @@
   <meta name="robots" content="noindex" />
 </svelte:head>
 
-{#if data.index}
-  <data.index />
-{/if}
+<div data-dev-route="index">
+  {#if data.index}
+    <data.index />
+  {/if}
+</div>

@@ -63,7 +63,7 @@
   data-placement={placement}
   data-detent={placement === "bottom" ? detent : undefined}
   onkeydown={(event) => {
-    if (event.key === "Escape" && closable && onclose) {
+    if (event.key === "Escape" && !event.defaultPrevented && closable && onclose) {
       event.stopPropagation()
       onclose()
     }

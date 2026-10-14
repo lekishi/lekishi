@@ -76,7 +76,7 @@
         }
       }}
       class={[
-        "h-9 w-full min-w-0 rounded-control border border-rule bg-lacquer-raised font-sans text-body-sm text-ink placeholder:text-ink-faint hover:border-ink-faint focus:border-gold",
+        "h-9 w-full min-w-0 rounded-control border border-rule bg-lacquer-raised font-interface text-body-sm text-ink placeholder:text-ink-dim hover:border-ink-faint focus:border-gold",
         "[&::-webkit-search-cancel-button]:appearance-none",
         transition,
         focusRing,

@@ -1,9 +1,11 @@
 // @vitest-environment jsdom
-import { existsSync } from "node:fs"
+import { existsSync, mkdtempSync, rmSync } from "node:fs"
+import os from "node:os"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 import { flushSync, mount, unmount, type Component } from "svelte"
 import { describe, expect, it } from "vitest"
+import { prepareBuildRoutes } from "../../scripts/build-app.mjs"
 import { devPagesEnabled } from "../../scripts/dev-pages.mjs"
 import { match } from "../params/dev"
 import DevIndex from "../lib/dev/DevIndex.svelte"
@@ -60,6 +62,24 @@ describe("the /dev prefix", () => {
     const links = [...target.querySelectorAll("a")].map((a) => a.getAttribute("href"))
     expect(links).toEqual(DEV_PAGES.map((page) => `/dev/${page.slug}`))
     done()
+  })
+
+  it.each([
+    ["production", false],
+    ["preview", true],
+  ])("prepares the exact %s route tree before SvelteKit discovers routes", (_, includeDevPages) => {
+    const destination = mkdtempSync(path.join(os.tmpdir(), "lekishi-routes-"))
+    try {
+      prepareBuildRoutes({
+        source: path.resolve(routes, ".."),
+        destination,
+        includeDevPages,
+      })
+      expect(existsSync(path.join(destination, "+page.svelte"))).toBe(true)
+      expect(existsSync(path.join(destination, "[dev=dev]"))).toBe(includeDevPages)
+    } finally {
+      rmSync(destination, { recursive: true, force: true })
+    }
   })
 })
 

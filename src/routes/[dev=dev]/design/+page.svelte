@@ -12,6 +12,8 @@
   <meta name="robots" content="noindex" />
 </svelte:head>
 
-{#if data.reference}
-  <data.reference />
-{/if}
+<div data-dev-route="design">
+  {#if data.reference}
+    <data.reference />
+  {/if}
+</div>

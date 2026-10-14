@@ -192,17 +192,17 @@
   const SPECIMEN: Record<string, { text: string; lang?: string; font: string; role: string }> = {
     label: {
       text: "Sources",
-      font: "font-sans font-semibold uppercase",
+      font: "font-interface font-semibold uppercase",
       role: "Section labels, Latin only",
     },
     caption: {
       text: "Akimeya no ura · Hepburn, editorial",
-      font: "font-sans",
+      font: "font-interface",
       role: "Metadata, romanization",
     },
     "body-sm": {
       text: "The passage names 薩摩國阿多郡秋妻屋浦 as the landing place.",
-      font: "font-sans",
+      font: "font-interface",
       role: "Rows, card details; the CJK minimum",
     },
     body: {
@@ -242,7 +242,7 @@
   const FONT_CLASS: Record<string, string> = {
     display: "font-display",
     serif: "font-serif",
-    sans: "font-sans",
+    interface: "font-interface",
   }
 
   const SECTIONS = [
@@ -365,7 +365,7 @@
   </svg>
 {/snippet}
 
-<div class="min-h-dvh bg-abyss font-sans text-ink" data-dev-page="design">
+<div class="min-h-dvh bg-abyss font-interface text-ink" data-dev-page="design">
   <header class="border-b border-rule bg-lacquer">
     <div class="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-8 lg:px-8">
       <p class="text-label font-semibold uppercase text-gold">

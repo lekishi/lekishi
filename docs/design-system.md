@@ -16,9 +16,10 @@ The system has four parts, and each one is the specification for its layer:
 Open the reference while you work: `pnpm dev`, then `/dev/design`. On a pull
 request, the Cloudflare Pages preview serves it at `/dev/design` too. It is one
 of the `/dev` pages, the prefix for every page that is not for readers; `/dev`
-lists them. Production never carries them (`scripts/dev-pages.mjs` decides, and
-the build invariant checks the artifact both ways). A local production-shaped
-build with the pages: `LEKISHI_DEV_PAGES=1 pnpm build`.
+lists them. Production never carries them: `scripts/dev-pages.mjs` decides,
+`scripts/build-app.mjs` omits their directory before SvelteKit discovers routes,
+and the build invariant checks the artifact both ways. A local
+production-shaped build with the pages: `LEKISHI_DEV_PAGES=1 pnpm build`.
 
 ## Rules of thumb
 
@@ -63,9 +64,11 @@ words.
 
 Three families: **Cinzel** (`font-display`) for Latin display titles only,
 **Noto Serif JP** (`font-serif`) for historical names, quotations and narrative,
-and **Noto Sans JP** (`font-sans`, the default) for interface text and numbers.
-They are to be self-hosted and subset; until that step lands, each family falls
-back to a system face. No font is ever fetched from a provider.
+and **Noto Sans JP** (`font-interface`) for interface text and numbers. The
+families are opt-in until each legacy screen migrates, so adding the tokens does
+not change reader screens on its own. They are to be self-hosted and subset;
+until that step lands, each family falls back to a system face. No font is ever
+fetched from a provider.
 
 | Utility         | Size / line   | Use                                                                       |
 | --------------- | ------------- | ------------------------------------------------------------------------- |

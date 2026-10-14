@@ -9,7 +9,7 @@
    */
 </script>
 
-<div class="min-h-dvh bg-abyss font-sans text-ink" data-dev-page="index">
+<div class="min-h-dvh bg-abyss font-interface text-ink" data-dev-page="index">
   <main class="mx-auto flex max-w-3xl flex-col gap-8 px-4 py-10 lg:px-8">
     <header class="flex flex-col gap-2">
       <p class="text-label font-semibold uppercase text-gold">Lekishi · dev</p>

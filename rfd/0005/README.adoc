@@ -502,9 +502,11 @@ review at 1440, 820, 390 and 320 px. It is built in development and on
 pull-request previews only, under the `/dev` prefix every non-production page
 shares (<<Owner decisions>>): a Vite constant compiles the `/dev` pages in on
 the dev server, on Cloudflare Pages builds of any branch but `main`, and with
-`LEKISHI_DEV_PAGES=1`, and out everywhere else, where their routes have no
-prerender entries and their code is dropped. The build invariant checks a
-production artifact carries neither, and a preview carries the pages. Its swatches, scale and contrast figures are parsed from
+`LEKISHI_DEV_PAGES=1`. `scripts/build-app.mjs` copies the route tree for each
+build and omits the `/dev` directory before SvelteKit discovers production
+routes, so neither the pages, their route entries nor their code reach that
+artifact. The build invariant checks a production artifact carries none of
+them, and a preview carries the pages. Its swatches, scale and contrast figures are parsed from
 `src/app.css`, so the page cannot drift from the stylesheet. The RFD does
 not duplicate component specifications; the page and the components are the
 specification.

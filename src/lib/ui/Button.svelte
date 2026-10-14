@@ -80,7 +80,7 @@
   data-variant={variant}
   onclick={click}
   class={[
-    "inline-flex shrink-0 items-center justify-center gap-1.5 rounded-control font-sans text-body-sm font-semibold no-underline select-none",
+    "inline-flex shrink-0 items-center justify-center gap-1.5 rounded-control font-interface text-body-sm font-semibold no-underline select-none",
     transition,
     variant === "primary" ? focusRingOnGold : focusRing,
     variant === "icon"

@@ -50,7 +50,7 @@ const ALLOWED: Record<string, { readonly matches: readonly string[]; readonly re
 }
 
 const PALETTE =
-  "slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose"
+  "slate|gray|zinc|neutral|stone|mauve|olive|mist|taupe|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose"
 const UTILITIES =
   "bg|text|border|ring|ring-offset|divide|outline|fill|stroke|from|via|to|decoration|placeholder|caret|accent|shadow|inset-shadow"
 const VARIANTS = String.raw`(?:[\w-]+(?:\[[^\]]*\])?:)*`
@@ -138,6 +138,10 @@ describe("the design-system rules", () => {
     "bg-slate-900",
     "hover:border-amber-300/80",
     "focus-visible:outline-amber-300",
+    "bg-mauve-500",
+    "text-olive-300",
+    "border-mist-700",
+    "fill-taupe-200",
     "text-white",
     "bg-black/60",
     "bg-[#0b1114]",

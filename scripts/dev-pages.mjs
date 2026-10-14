@@ -5,11 +5,12 @@
  * they are built in development and on pull-request previews only, never on
  * production, and that every such page lives under the one `/dev` prefix.
  *
- * One answer, read by the Vite config (which compiles the pages in or out), the
- * SvelteKit config (which lets their routes go unprerendered when they are
- * out) and the build invariant (which checks the artifact agrees). It mirrors
- * the globe spike's preview gate in `spikes/renderer/globe/preview-build.mjs`:
- * a Cloudflare Pages build of any branch but `main`, or an explicit opt-in.
+ * One answer, read by the build wrapper (which removes their route directory
+ * before a production build), the Vite config (which compiles their lazy code
+ * in or out) and the build invariant (which checks the artifact agrees). It
+ * mirrors the globe spike's preview gate in
+ * `spikes/renderer/globe/preview-build.mjs`: a Cloudflare Pages build of any
+ * branch but `main`, or an explicit opt-in.
  *
  * @param {{ command?: "serve" | "build"; env?: NodeJS.ProcessEnv }} [options]
  * @returns {boolean}
@@ -23,3 +24,6 @@ export function devPagesEnabled({ command = "build", env = process.env } = {}) {
 
 /** The route segment every `/dev` page lives under, as SvelteKit names it. */
 export const DEV_ROUTE_PREFIX = "/[dev=dev]"
+
+/** The matching source directory, omitted from production route discovery. */
+export const DEV_ROUTE_DIRECTORY = "[dev=dev]"

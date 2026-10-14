@@ -40,9 +40,11 @@ function render<Props extends Record<string, unknown>>(
   return target
 }
 
-function key(element: Element, name: string) {
-  element.dispatchEvent(new KeyboardEvent("keydown", { key: name, bubbles: true }))
+function key(element: Element, name: string): KeyboardEvent {
+  const event = new KeyboardEvent("keydown", { key: name, bubbles: true, cancelable: true })
+  element.dispatchEvent(event)
   flushSync()
+  return event
 }
 
 beforeEach(() => {
@@ -215,7 +217,8 @@ describe("Field", () => {
   it("clears a search with Escape", () => {
     const oninput = vi.fn()
     render(Field, { label: "Search", value: "han", oninput })
-    key(target.querySelector("input")!, "Escape")
+    const event = key(target.querySelector("input")!, "Escape")
+    expect(event.defaultPrevented).toBe(true)
     expect(oninput).toHaveBeenLastCalledWith("")
     expect(target.querySelector("input")?.value).toBe("")
   })
@@ -252,6 +255,15 @@ describe("Sheet", () => {
     target.querySelector<HTMLButtonElement>('button[aria-label="Close About"]')!.click()
     key(target.querySelector("p")!, "Escape")
     expect(onclose).toHaveBeenCalledTimes(2)
+  })
+
+  it("stays open when a child handles Escape", () => {
+    const onclose = vi.fn()
+    render(Sheet, { title: "Explore", onclose, children: text("<input type=search>") })
+    const event = new KeyboardEvent("keydown", { key: "Escape", bubbles: true, cancelable: true })
+    event.preventDefault()
+    target.querySelector("input")!.dispatchEvent(event)
+    expect(onclose).not.toHaveBeenCalled()
   })
 })
 

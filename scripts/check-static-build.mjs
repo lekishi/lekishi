@@ -211,9 +211,9 @@ for (const redirect of REDIRECTS) {
   }
 }
 
-if (!indexHtml.includes('href="/atlas"')) {
-  fail("index.html does not link to the atlas")
-}
+// The home page leads with search and links each chapter directly (RFD 5,
+// "Home"); `/atlas` survives only as a redirect for old links, so the page no
+// longer has to carry it.
 
 // The root page presents the chapters as peers: one card per chapter, each with
 // its name, its window, its story summary, and an entry. The artifact must keep
@@ -318,6 +318,34 @@ for (const [id, html] of chapterHtml) {
       fail(`chapters/${id}.html names another chapter: ${other.name}`)
     }
   }
+}
+
+// --- search index ---------------------------------------------------------------
+
+// Search is client-side over one prerendered file (RFD 5, "Search"). It must
+// exist and cover every served chapter, or the search dialog would silently
+// find nothing in a chapter the site serves.
+const searchIndexFile = path.join(buildDirectory, "search-index.json")
+requireFile(searchIndexFile)
+
+try {
+  const index = JSON.parse(read(searchIndexFile))
+
+  if (index.version !== 1) {
+    fail(`search-index.json has version ${index.version}, expected 1`)
+  }
+
+  for (const chapter of CHAPTERS) {
+    if (!index.chapters?.some((entry) => entry.id === chapter.id)) {
+      fail(`search-index.json does not list the chapter ${chapter.id}`)
+    }
+
+    if (!index.entries?.some((entry) => entry.chapterId === chapter.id && entry.id === chapter.event)) {
+      fail(`search-index.json does not carry ${chapter.event}`)
+    }
+  }
+} catch (error) {
+  fail(`search-index.json is not valid JSON: ${error.message}`)
 }
 
 // --- globe tiles ----------------------------------------------------------------

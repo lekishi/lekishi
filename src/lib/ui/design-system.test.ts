@@ -23,9 +23,6 @@ const SRC = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..")
 
 const LEGACY: Record<string, number> = {
   "lib/atlas/renderer/globe/view.ts": 8,
-  "routes/+error.svelte": 15,
-  "routes/+page.svelte": 59,
-  "routes/chapters/[chapter]/+page.svelte": 14,
 }
 
 /**

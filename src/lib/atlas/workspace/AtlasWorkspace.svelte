@@ -737,7 +737,14 @@
 
       <aside bind:this={leftRegion} aria-label="Layers" class="flex min-h-0 flex-col gap-2">
         {@render orbs(true)}
+        <!--
+          The frame's grid lets pointer input through to the globe
+          (pointer-events-none) and each control opts back in. The layer orbs
+          do so as a group; this orb stands outside that group, so it opts in
+          itself, or a press on it would land on the globe instead.
+        -->
         <Orb
+          class="pointer-events-auto"
           icon="list"
           label={listOpen ? "Close the story and events" : "Story and events"}
           pressed={listOpen}

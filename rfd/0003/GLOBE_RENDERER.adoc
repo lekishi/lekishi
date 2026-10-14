@@ -264,3 +264,30 @@ it in all eight jobs on two-CPU runners whenever the builder changed.
   forked workers share the sources. In CI, one build job on a four-CPU runner
   repainted every tile and built the artifact in 4 min 6 s. The browser jobs
   download that artifact rather than building their own.
+
+== Land cover from ESA WorldCover — 2026-10-14
+
+A check of every chapter place on the PR preview, against main's tiles, showed
+that the finer levels above sharpened coasts and relief but left flat land
+almost unchanged, and broke it on low deltas. The evidence is the close-up
+audit published for PR 23 on 2026-10-14: a side-by-side video and zoom strips
+for each of the 17 places, and tile crops at those places and at seven points
+between them.
+
+* *What it found.*
+** 10 of the 17 places gained a sharp shoreline and relief, and so did 5 of the 7 points between them.
+** The three Qin chapter places, 蓬萊宮含元殿, the North China Plain and the middle Yangtze changed only by a faint mottle. The land's colour came from Natural Earth II alone (about 20 km a pixel), and flat land has no relief for the inland detail to draw.
+** 蘇州黃泗浦, 揚州 and 難波 were painted as blocks of sand with specks of water at levels 9 and 10. The beach rule (land 0.5 to 6 m above sea level) and the water rule (below 0.5 m) worked on elevation that steps in whole metres.
+* *Decision (owner, 2026-10-14).* Paint the land from real land cover, ESA WorldCover 2021 v200. The alternatives offered were painted colour only, or open water data only. WorldCover is open (CC BY 4.0) and built offline like the elevation, so no provider is contacted at runtime.
+* *How.*
+** The builder reads WorldCover's cloud-optimised GeoTIFFs block by block, with HTTP range requests and a Deflate decoder from the standard library. It uses the about 300 m overview over the 3-degree squares around the chapters (105–141°E, 21–42°N) and the about 75 m overview in the level 9 boxes around the places, and caches 26 MB.
+** Classes are grouped and painted relative to their regional mean (about 0.34°), applied to Natural Earth's hue. Forest is darker and fields lighter than the region around them, while each region keeps its Natural Earth colour on average. The globe therefore shows no rectangle where the land cover starts.
+** Each pixel is the area mean of its classes, taken from a pyramid of class fractions, so every level shows the same colour for the same ground.
+** The land cover fades in from level 5 and out over 1° at its edge. Permanent water becomes water, which brings in rivers and lakes the elevation does not show.
+** Built-up land is painted as cropland, since a modern city says nothing about the eighth century. The land cover is otherwise today's, which the About sheet states.
+** Where WorldCover paints, the invented field and mottle noise is off.
+* *Low ground.* At pixels finer than 0.0015° (levels 9 and 10), water is what most of a 150 m neighbourhood is low enough to be, and sand needs water within about 300 m. Coarser levels keep the height rule.
+* *Attribution.* WorldCover's attribution is in `ATTRIBUTION.txt`, in the tileset, and next to the elevation's in the legend and on the home page. The build invariant requires it.
+* *Measured.*
+** Tiles: 4,985 in 1,347 bundles, 53.2 MB as the builder counts it (was 44.3 MB). The heights and levels 0 to 4 are byte-identical to the build above; 1,524 imagery tiles at levels 5 to 10 changed.
+** Build: the tile build took 448 s in the four-CPU cloud container (was 373 to 394 s), with a 2.34 GB peak summed proportional set size.

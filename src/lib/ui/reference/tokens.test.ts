@@ -53,7 +53,8 @@ describe("contrast", () => {
 
   // Every text tier the primitives set on each solid surface they sit on: the
   // placeholder, a selected tab's count and a hovered citation's terms put
-  // ink-dim on lacquer-raised; ink-faint is used on lacquer only.
+  // ink-dim on lacquer-raised. ink-faint belongs on solid lacquer only; glass
+  // is checked separately below, because the scene shows through it.
   it.each([
     ["ink", "lacquer"],
     ["ink-dim", "lacquer"],
@@ -65,6 +66,11 @@ describe("contrast", () => {
   ])("keeps %s text at AA on %s", (foreground, background) => {
     const ratio = contrast(value(tokens.colors, foreground)!, value(tokens.colors, background)!)
     expect(ratio).toBeGreaterThanOrEqual(4.5)
+  })
+
+  it("keeps ink-dim at AA on glass even over the brightest scene", () => {
+    const glass = composite(value(tokens.colors, "lacquer-glass")!, "#ffffff")!
+    expect(contrast(value(tokens.colors, "ink-dim")!, glass)!).toBeGreaterThanOrEqual(4.5)
   })
 
   it("composites a translucent colour over the background", () => {

@@ -44,7 +44,7 @@
   ]}
 >
   {#if title}
-    <SectionLabel text={title} {count} {level} class="mb-2" />
+    <SectionLabel text={title} {count} {level} onGlass={tone === "glass"} class="mb-2" />
   {/if}
   {@render children()}
 </section>

@@ -56,7 +56,10 @@ All colours are tokens; use them as utilities (`bg-lacquer`, `text-ink-dim`,
 Contrast is measured against `lacquer`, and `/dev/design` prints each figure from
 the stylesheet's own values. Keep body text at AA (4.5:1) or better. `ink-faint`
 passes on `lacquer` but not on `lacquer-raised` (4.44:1), so text on a raised,
-selected or hovered surface steps up to `ink-dim`.
+selected or hovered surface steps up to `ink-dim`. Glass lets the scene show
+through, so its contrast depends on the terrain beneath: tertiary text on glass
+uses `ink-dim` too (a glass `Plate` already does this for its count), and
+`ink-faint` stays on solid `lacquer`.
 
 "Possible", "disputed" and "outside the window" are **states**, not hues. They
 modify whatever mark they apply to (hollow, split, dimmed) and always say so in

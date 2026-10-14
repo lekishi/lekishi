@@ -8,11 +8,17 @@
     text,
     count,
     level = 2,
+    onGlass = false,
     class: className,
   }: {
     text: string
     count?: number
     level?: 2 | 3 | 4
+    /**
+     * The label sits on glass over the scene, where ink-faint can fall below
+     * AA over bright terrain, so the count steps up to ink-dim.
+     */
+    onGlass?: boolean
     class?: string
   } = $props()
 </script>
@@ -23,6 +29,11 @@
 >
   <span>{text}</span>
   {#if count !== undefined}
-    <span class="font-normal tabular-nums tracking-normal text-ink-faint">{count}</span>
+    <span
+      class={[
+        "font-normal tabular-nums tracking-normal",
+        onGlass ? "text-ink-dim" : "text-ink-faint",
+      ]}>{count}</span
+    >
   {/if}
 </svelte:element>

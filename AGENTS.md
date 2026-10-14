@@ -28,6 +28,7 @@ rules below when updating project-specific guidance.
 - Use the pinned `flake.nix` environment: `nix develop`, or `nix develop --command <command>` from the repository root. It provides Node 24 (matching CI) and pnpm; Playwright installs its own browsers.
 - Use the existing Makefile and `package.json` scripts rather than inventing parallel setup workflows. In an Amp orb, use `amp orb services ensure` for the services declared in `.amp/services.yaml` (the development server, and the built artifact served as files).
 - `pnpm dev` and `pnpm build` build the globe's tiles into `static/globe` first (`pnpm sync:globe`, which runs `scripts/globe/build-tiles.py` with Python 3, numpy and Pillow, and fetches open elevation once into `.cache/globe`). Both directories are generated and ignored; never commit them and never assume they exist before `pnpm sync:globe` has run. An unchanged `scripts/globe/` leaves the tiles in place; a changed one repaints them all.
+- `pnpm build` runs `vite build` through `scripts/build-app.mjs`, which copies `src/routes` into `.svelte-kit-build/routes` (without `/dev` in production), builds from the copy, removes it and re-syncs `.svelte-kit` from `src/routes`. That directory is generated and ignored; never commit it, and build with `pnpm build` rather than `vite build`.
 - If a required tool or service is unavailable, report the blocked check explicitly; do not claim verification succeeded.
 
 ## Project guidelines
@@ -73,6 +74,8 @@ rules below when updating project-specific guidance.
 - Type every public boundary. `svelte-check` runs with `strict`; do not silence a type error with `any` or a cast when a narrower type will do.
 
 ### Tailwind and CSS guidelines
+
+- Build interface on the design system: read [docs/design-system.md](docs/design-system.md) first. Use the tokens in `src/app.css` and the primitives in `$lib/ui`, and check your change on `/dev/design` (development and PR previews only; every non-production page lives under `/dev`, gated by `scripts/dev-pages.mjs`). `src/lib/ui/design-system.test.ts` fails on Tailwind palette colours, hex values, default type sizes and off-scale radii; files in its `LEGACY` list may only lower their counts, and new files never join it.
 
 - One stylesheet, `src/app.css`, imported by `src/routes/+layout.svelte`. Tailwind v4 needs no config file; keep the explicit source list and extend it when a new directory contributes classes:
 

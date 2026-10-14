@@ -12,6 +12,7 @@
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
+import { devPagesEnabled } from "./dev-pages.mjs"
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const buildDirectory = path.join(repoRoot, "build")
@@ -389,6 +390,54 @@ const strayScripts = files.filter(
 
 if (strayScripts.length > 0) {
   fail(`unexpected scripts outside _app/: ${strayScripts.map(inBuild).join(", ")}`)
+}
+
+// --- the /dev pages ----------------------------------------------------------
+
+// The `/dev` pages (the design reference among them) are built in development
+// and on pull-request previews only (RFD 5, owner decisions of 2026-10-13). A
+// production artifact must carry neither their pages, route wrappers nor their
+// code; a preview must carry them, or the reviewers have nothing to open. The
+// two markers distinguish the route entries from the page implementations.
+// They catch rendering code only: a helper such as the token parser imported
+// from a production page would pass, so the guarantee is the route copy in
+// `scripts/build-app.mjs`, and this is its check.
+const devPageMarker = "data-dev-page"
+const devRouteMarker = "data-dev-route"
+const devPages = [
+  { file: "dev.html", page: "index" },
+  { file: "dev/design.html", page: "design" },
+]
+
+if (devPagesEnabled()) {
+  for (const { file, page } of devPages) {
+    const html = path.join(buildDirectory, file)
+    if (
+      !existsSync(html) ||
+      !read(html).includes(`${devPageMarker}="${page}"`) ||
+      !read(html).includes(`${devRouteMarker}="${page}"`)
+    ) {
+      fail(`this is a preview build but ${file} does not carry the ${page} dev page`)
+    }
+  }
+} else {
+  const shipped = [path.join(buildDirectory, "dev.html"), path.join(buildDirectory, "dev")]
+    .filter((file) => existsSync(file))
+    .map(inBuild)
+
+  if (shipped.length > 0) {
+    fail(`the /dev pages are in a production build: ${shipped.join(", ")}`)
+  }
+
+  const devScripts = files.filter((file) => {
+    if (!file.endsWith(".js")) return false
+    const script = readFileSync(file, "utf8")
+    return script.includes(devPageMarker) || script.includes(devRouteMarker)
+  })
+
+  if (devScripts.length > 0) {
+    fail(`the /dev pages' code is in a production build: ${devScripts.map(inBuild).join(", ")}`)
+  }
 }
 
 // --- report -------------------------------------------------------------------

@@ -305,7 +305,7 @@
             </p>
           {/if}
           <p class="mt-auto flex items-center gap-1 text-caption text-ink-faint">
-            <kbd class="rounded-control border border-rule px-1">↵</kbd> to open
+            <kbd class="rounded-control border border-rule px-1">Enter</kbd> to open
             <kbd class="ml-1 rounded-control border border-rule px-1">↑↓</kbd> to move
           </p>
         </aside>

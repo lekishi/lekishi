@@ -340,12 +340,62 @@ try {
       fail(`search-index.json does not list the chapter ${chapter.id}`)
     }
 
-    if (!index.entries?.some((entry) => entry.chapterId === chapter.id && entry.id === chapter.event)) {
+    if (
+      !index.entries?.some((entry) => entry.chapterId === chapter.id && entry.id === chapter.event)
+    ) {
       fail(`search-index.json does not carry ${chapter.event}`)
     }
   }
 } catch (error) {
   fail(`search-index.json is not valid JSON: ${error.message}`)
+}
+
+// --- fonts ----------------------------------------------------------------------
+
+// The fonts are self-hosted and subset to the site's characters (RFD 5,
+// "Typography"). Every face the stylesheet names must ship with its licence,
+// and every character a chapter's searchable text uses must be drawn by one of
+// them: a glyph outside the subset would fall back to whatever the reader's
+// system has, which RFD 1 does not allow for a historical name.
+const fontsDirectory = path.join(buildDirectory, "fonts")
+
+for (const file of [
+  "lekishi-display.woff2",
+  "lekishi-serif.woff2",
+  "lekishi-serif-tc.woff2",
+  "lekishi-sans.woff2",
+  "lekishi-latin-fallback.woff2",
+  "cinzel-OFL.txt",
+  "notoserifjp-OFL.txt",
+  "notoseriftc-OFL.txt",
+  "notosansjp-OFL.txt",
+  "notoserif-OFL.txt",
+  "coverage.json",
+]) {
+  requireFile(path.join(fontsDirectory, file))
+}
+
+try {
+  const coverage = JSON.parse(read(path.join(fontsDirectory, "coverage.json")))
+  const drawn = new Set(
+    Object.values(coverage.faces ?? {}).flatMap((face) => [...(face.characters ?? "")]),
+  )
+  const index = JSON.parse(read(searchIndexFile))
+  const missing = new Set()
+
+  for (const entry of index.entries ?? []) {
+    for (const text of [entry.title, entry.detail, ...(entry.names ?? []), ...(entry.text ?? [])]) {
+      for (const character of String(text ?? "")) {
+        if (!/\s/.test(character) && !drawn.has(character)) missing.add(character)
+      }
+    }
+  }
+
+  if (missing.size > 0) {
+    fail(`the subset fonts do not draw ${[...missing].join("")}; run pnpm sync:fonts`)
+  }
+} catch (error) {
+  fail(`fonts/coverage.json could not be checked: ${error.message}`)
 }
 
 // --- globe tiles ----------------------------------------------------------------

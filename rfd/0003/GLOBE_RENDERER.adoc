@@ -179,3 +179,47 @@ Evidence: link:https://github.com/lekishi/lekishi/pull/18[PR 18] and
 link:https://ampcode.com/threads/T-01a1315d-3a80-7728-a14b-3f462e746445[the review
 and verification thread]. Physical-device frame-time acceptance remains the
 owner's separate gate.
+
+== Finer levels around the chapters' places — 2026-10-14
+
+On 2026-10-14 the owner reported, from an iPhone on the PR 23 preview, that the
+ground stayed blurred when zoomed in over 阿兒奈波島, and chose finer tiles over
+a zoom floor. The renderer had loaded every tile it could: level 7, about
+0.6 km per imagery pixel, was the finest built, so at the reported distance
+(about 40 km) each pixel was drawn more than 15 screen pixels wide, and the tile
+edges showed as straight seams. This supplement records the change; the
+measurements above stay as measured.
+
+* *Levels 8 to 10 around each drawn place.* `scripts/globe/build-tiles.py`
+  builds level 8 within 0.8°, level 9 within 0.6° and level 10 within 0.4° of
+  each of the 17 points the two chapters draw (`PLACES`), down to about 76 m per
+  imagery pixel. A new place needs its point there. The renderer needed no
+  change: it reads several ranges per level from `tileset.json` and subdivides
+  its parent wherever a level is not built.
+* *z10 elevation for those levels only.* Terrarium z10 is fetched over six
+  boxes around the places (744 tiles, once, into `.cache/globe`) and serves
+  levels 8 to 10 only. Levels 0 to 7 paint from the same sources as before, so
+  they still match their neighbours; the fine levels take their colouring
+  (slope, high ground, fields) from z7 as every level does, so only the
+  coastline and the relief sharpen.
+* *Needles removed.* The sharper close-up showed a dark wedge on the sea at
+  秋妻屋浦: a 728 m needle in Terrarium's z10 data beside sea-level samples.
+  The z7 mosaic carries them too (5,310 m beside samples at sea level). The
+  builder now replaces any sample more than one pixel's width (at least
+  150 m) above the fourth highest of the 24 around it, or below the fourth
+  lowest, with their median: 24 in the z7 mosaic and 1,280 across the z10
+  boxes. Of the 3,162 tiles built before, 37 changed (2 at level 4, 9 at
+  level 5, 12 at level 6, 14 at level 7), all where a needle was; the others
+  are byte-identical.
+* *Measured.* 3,839 tiles in 1,052 bundles, 28.7 MB (was 3,162 in 809,
+  20.7 MB). The artifact is 1,209 files (was 966), far under the static host's
+  20,000. The cold tile build, z10 included, took about 3 min 40 s in the cloud
+  development container; an unchanged builder still skips it.
+* *Still soft below about 20 km.* Level 10 starts loading at about 39 km on a
+  phone, where it is drawn about 2 screen pixels per imagery pixel; at 20 km it
+  is about 4, and the camera can still come down to the ground. A zoom floor stays
+  open if the owner wants one.
+
+Evidence: link:https://github.com/lekishi/lekishi/pull/23[PR 23]; before and
+after close-ups over 秋妻屋浦 at 57, 29 and 14 km and over 阿兒奈波島 at 38 km,
+taken in the cloud container's software renderer.

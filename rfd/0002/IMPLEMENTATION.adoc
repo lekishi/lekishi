@@ -17,8 +17,8 @@ content roadmap, ordered so the Tang chapter improves every week.
 - [ ] Read the terms of every `?` row in link:../../docs/SOURCE_REGISTER.adoc[the source register] on the source's own page (the Japanese gazetteer datasets first), file ColBase's and the Taipei Palace Museum's terms pages, and update the rows.
 - [x] Decide the authoring format: approved 2026-10-10 as a folder per chapter with one small file per record, compiled to the v0 contract at build time, with the content model, approval contract, roles, and staged contribution surface recorded in the RFD.
 - [x] Decide the content layout: world first, decided 2026-10-14, with every record once under `historical/<kind>/` and chapters as manifests. Evidence: link:AUTHORING_FORMAT.adoc[the authoring format record].
-- [ ] Agree the proposed parts of link:AUTHORING_FORMAT.adoc[the authoring format record]: the chapter manifest, the digest approval, the record file, date notation, and journeys, territories, and media.
-- [ ] Build the compiler from record files to the v0 contract, with the CI checks the RFD lists, emitting one compiled document per chapter so content costs one deployed file per chapter; keep claims, citations, precision, and attestation versus interpretation.
+- [ ] Agree the proposed parts of link:AUTHORING_FORMAT.adoc[the authoring format record]: detailed directory and id rules, the chapter manifest, digest approval and its canonical payload, record files, date notation, journey curation, territories and media, compiled chapter bundles, source-id collision policy, and migration and retirement criteria.
+- [ ] Build the compiler from the agreed record files to the complete v0 representation, with the CI checks the RFD lists, emitting one compiled bundle per chapter so content costs one deployed file per chapter; keep claims, citations, precision, attestation versus interpretation, generated stories and publication sets, and approved source metadata.
 
 == Fix the places we have
 
@@ -30,7 +30,7 @@ content roadmap, ordered so the Tang chapter improves every week.
 
 - [ ] Tang: the 630–894 missions as a sparse network layer, 鑒眞's 743–748 crossings as a second story, 圓仁's 838–847 diary as a third. Target 200+ events, 60+ placed places, 5+ routes, 20+ images.
 - [ ] Qin: dated control snapshots for Han (233, 230 BCE) cited as interpretations, extended to 230–221 BCE.
-- [ ] Migrate both chapters to the record files; retire the per-set digest ledger and its test once the per-chapter approval is enforced by the build.
+- [ ] Migrate both chapters to the record files; retire the per-set digest ledger and its test only after the owner approves the replacement and its per-chapter approval invariant is enforced by the build.
 - [ ] Stage 2 of the contribution surface when the first regular contributor appears: a structured proposal form with claim, source, and locator fields.
 - [ ] Claim basis (`attested` versus `cited_interpretation`) shown in the card; relationships openable from an arc.
 

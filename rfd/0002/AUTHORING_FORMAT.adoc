@@ -58,11 +58,17 @@ chapter, and the standardized content model, roles, and contribution surface.
   against the static host's 20,000-file limit
   (link:../0003/GLOBE_RENDERER.adoc[the globe renderer record] measured the
   whole artifact at 944 files, almost all globe tile bundles).
-* *RFD 1 and RFD 5 ask for things v0 cannot express:*
-  ** Journeys drawn through dated stops. The parts exist (`part_of`, the place
-     roles `start`, `waypoint`, and `end`, and the `schematic_link`
-     interpretation), but nothing ties them into a line.
-  ** Dated political-control snapshots: no record kind holds a dated polygon.
+* *RFD 1 and RFD 5 ask for things the current authoring and rendering path does
+  not supply.* v0 geometry already permits routes with dated waypoints and
+  polygons with validity dates; the gaps are in selecting and interpreting
+  that geometry, not all in contract expressivity.
+  ** Journeys drawn through dated stops. The parts exist (`part_of`, place
+     roles, dated waypoints, and the `schematic_link` interpretation), but
+     membership does not say which places are actual stops or establish their
+     historical order.
+  ** Dated political-control snapshots: v0 can hold a dated polygon, but no
+     authoring kind or renderer gives it the actor-control semantics RFD 1
+     distinguishes from religious presence and cultural influence.
   ** Images that depict a record: only `source.kind: media` exists, with no
      link from an image to what it depicts and no depiction label.
 
@@ -73,9 +79,39 @@ Decided by the owner on 2026-10-14.
 Every record exists once, in a project-wide tree organized by kind. A chapter
 is a manifest that points at records; it does not contain them.
 
+Record ids are unique project-wide. An event can appear in more than one
+chapter's story: 鑒眞's 753 crossing belongs to the Tang embassy and to any
+chapter on the transmission of the precepts.
+
+That is the extent of the decision. The concrete directory inventory and
+contract-fixture placement, filename-to-id rule, YAML format,
+chapter-manifest fields, compiler output, and migration below are proposals. In
+particular, this decision neither relocates the existing v0 schemas and vectors
+nor changes the current publication gate.
+
+Why: the owner's stated aim is exploring an era across the globe and zooming
+freely (recorded in link:../0003/README.adoc[RFD 3]). An era view shows several
+chapters' records at once, and search and the chapter ribbon of RFD 5 are
+already cross-chapter. A chapter-first tree would have to duplicate every
+shared place, actor, source, and event, or reach into another chapter's folder
+for it.
+
+What it costs:
+
+* An edit to a shared record re-opens the approval of every chapter that
+  reaches it. <<Proposed: per-chapter approval pins a content digest>> makes
+  that automatic rather than a matter of memory.
+* Kind folders grow large, which the proposed subfolders absorb.
+* The migration effort is the same as the migration already planned, and at
+  86 records it is the cheapest it will be.
+
+== Proposed: directory and identifier realization
+
+One realization of the decided world-first layout is:
+
 ----
 historical/
-  contract/v0/                   schemas, vectors, synthetic examples (today's historical/v0)
+  v0/                            existing schemas, vectors, and synthetic examples
   events/
     tang-embassy/akimeya-landfall-753.yaml
   places/
@@ -91,37 +127,19 @@ historical/
 * *Ids.* The id is the file name. The folder supplies the kind, so
   `events/…/akimeya-landfall-753.yaml` is `lks:event:akimeya-landfall-753`, and
   no id is written inside the file, which keeps the two from drifting apart.
-* *Uniqueness.* Ids are unique across the whole project, because
+* *Uniqueness.* The decided ids are unique across the whole project, because
   link:../0005/README.adoc[RFD 5]'s search and deep links (`?event=`,
-  `?place=`) span chapters.
+  `?place=`) span chapters. The proposed compiler rejects duplicate full ids.
 * *Subfolders.* Subfolders under a kind folder are free for authors' tidiness.
   They never change an id, and the build fails on two files with the same
   name under one kind.
-* *One event, several stories.* An event can appear in more than one chapter's
-  story. 鑒眞's 753 crossing belongs to the Tang embassy and to any chapter on
-  the transmission of the precepts.
-
-Why: the owner's stated aim is exploring an era across the globe and zooming
-freely (recorded in link:../0003/README.adoc[RFD 3]). An era view shows several
-chapters' records at once, and search and the chapter ribbon of RFD 5 are
-already cross-chapter. A chapter-first tree would have to duplicate every
-shared place, actor, source, and event, or reach into another chapter's folder
-for it.
-
-What it costs:
-
-* An edit to a shared record re-opens the approval of every chapter that
-  reaches it. <<Proposed: per-chapter approval pins a content digest>> makes
-  that automatic rather than a matter of memory.
-* Kind folders grow large, which subfolders absorb.
-* The migration effort is the same as the migration already planned, and at
-  86 records it is the cheapest it will be.
 
 == Proposed: the chapter manifest
 
 One YAML file per chapter owns every fact the projection now infers or
-hard-codes. It replaces the story record, and it replaces the coverage
-constants and served list in `chapter-registry.ts`.
+hard-codes. It replaces the story record as an authoring input (the compiler
+still emits the v0 story), and it replaces the coverage constants and served
+list in `chapter-registry.ts`.
 
 [source,yaml]
 ----
@@ -146,25 +164,42 @@ approval:
   reviewer: …             # a specialist reviewer, when there is one
 ----
 
-* *Served chapters.* A chapter is served when its approval matches its current
-  content. The served list is derived from that rule rather than kept by hand.
+* *Approval states.* The compiler validates every manifest carrying an
+  approval before it derives the served list. A matching approval is served;
+  no approval is a draft and is omitted; a stale or malformed approval fails
+  the build and is never silently filtered out. Removing the approval from a
+  chapter already served is a withdrawal, not a draft edit, and requires a
+  separately recorded owner decision.
 * *Titles and captions.* Events gain a `title` field, and a story caption
   becomes an optional override of it.
 
 == Proposed: per-chapter approval pins a content digest
 
-The approval records a digest of the chapter's compiled closure: the manifest
+The approval records a digest of the chapter's content closure: the manifest
 and every record and source it reaches, transitively. It does not record a
 commit, because a commit cannot name itself and a squash merge rewrites it.
 
+The proposed digest payload is canonical JSON containing the manifest without
+its entire `approval` block, followed by each reachable file's kind, logical id,
+and normalized content in a deterministic order. It includes source metadata.
+Generated revision, publication-set, and mirror fields are not inputs. Revision
+metadata is a deterministic product of the content payload; publication
+metadata may copy the separately validated approver, date, and reviewer from
+the approval block, but cannot feed back into the content digest. The compiler's
+tests must pin the canonicalization before this proposal can replace the
+current gate, so writing an approval can never change the digest it approves.
+
 The build recomputes the digest. A mismatch fails the build for a chapter
-that claims to be served, so any change to an approved chapter, including an
-edit to a shared place it uses, reaches readers only after a new approval.
+that carries an approval, before any served-list filtering, so any change to an
+approved chapter, including an edit to a shared place it uses, reaches readers
+only after a new approval.
 This is the check RFD 2 lists as "no change to an approved chapter reaching
 the build without a new approval". It replaces the per-set digest ledger in
-link:PUBLICATION_APPROVAL.adoc[the publication approval gate] once enforced.
-The ledger stays in the tree as the record of how the first two chapters were
-approved.
+link:PUBLICATION_APPROVAL.adoc[the publication approval gate] only after the
+owner approves this replacement and its implementation enforces the same
+invariant. Until then, the existing gate and approved content remain
+authoritative. The ledger stays in the tree as the record of how the first two
+chapters were approved.
 
 == Proposed: the record file
 
@@ -195,12 +230,18 @@ notes: >-
   interpretation on the place.
 ----
 
-A place:
+An abridged place syntax example, not an evidence-complete migration fixture:
 
 [source,yaml]
 ----
 # historical/places/yangzhou.yaml
-name: { form: 揚州, lang: lzh, script: Hani, roman: Yangzhou, scheme: pinyin }
+name:
+  form: 揚州
+  lang: lzh
+  script: Hani
+  roman: Yangzhou
+  scheme: pinyin
+  cite: { source: toseiden, at: 天寶十二載 十月十五日壬午; 十月［十］九日戌時 }
 types: [settlement]
 at:
   point: [119.4363, 32.3912]
@@ -228,6 +269,13 @@ Conventions:
   looser.
 * *Editor support.* A JSON Schema for each kind of record file gives editors
   completion and inline errors, and it is the first CI check.
+* *Existing source identities.* Migration first inventories logical-id
+  collisions. The two current `wikidata` sources, for example, record different
+  read dates, hashes, review dates, and usage notes and therefore cannot be
+  merged automatically. They either become distinct, versioned authoring
+  sources whose approved v0 metadata compiles unchanged, or an owner-reviewed
+  consolidation explicitly supersedes them. No collision resolution may erase
+  approved provenance merely to satisfy global uniqueness.
 
 == Proposed: date notation
 
@@ -249,41 +297,57 @@ to prevent. The atlas's internal year ordinals do not change.
 
 == Proposed: journeys, territories, and media
 
-* *Journeys are derived, not duplicated.* A journey event's line runs through
-  the dated places of the events that are `part_of` it, in date order, and
-  compiles to `schematic_link`. The Tang return voyage already has that shape.
-  A route reconstructed in scholarship is an explicit `route:` on the event,
-  with its own GeoJSON file and citation, compiled to `reconstructed_route`.
-* *Territories are a new kind.* A territory file holds a dated control
-  snapshot: whose control (an actor), the snapshot's date, a GeoJSON file, its
-  basis, and its citation. RFD 1 forbids interpolating between snapshots.
+* *Journey membership is not a route.* `part_of` can suggest candidate events,
+  but the compiler must not connect all of their places or sort them into a
+  historical route automatically. A context place may be only an intended
+  destination; two events may be separate, unresolved accounts; disputed dates
+  must remain disputed; and v0 deliberately does not order same-year events at
+  sub-year precision. An explicitly curated schematic sequence remains the
+  proposal, with rules still needed for actual-stop eligibility, branches,
+  account identity, and unsupported order. A route reconstructed in scholarship
+  is an explicit `route:` on the event, with its own GeoJSON file and citation,
+  compiled to `reconstructed_route`.
+* *Territories are a proposed new authoring kind.* A territory file holds a
+  dated control snapshot: whose control (an actor), the snapshot's date, a
+  GeoJSON file, its basis, and its citation. v0 already admits a polygon with a
+  validity date; the proposed kind adds the control semantics and authoring and
+  rendering rules. RFD 1 forbids interpolating between snapshots.
 * *Media is a new kind.* A media file holds the file, the source that carries
   its licence, the record ids it `depicts`, and a depiction label (for example,
   "a later depiction, not evidence").
 
-Territories, media, and per-claim credit are new rules. Under AGENTS.md they
-mean a new contract version, *v1*, with new vectors, not an edit to v0. The
-proposal is to specify them in this record now and implement v1 with the first
-chapter that draws a territory or shows an image, so that v1 lands with real
-content to test against. Until then the compiler targets v0.
+Dedicated territory records with actor-control semantics, media depiction
+links, and per-claim credit are new rules. Under AGENTS.md they mean a new
+contract version, *v1*, with new vectors, not an edit to v0. The proposal is to
+specify them in this record now and implement v1 with the first chapter that
+draws a territory or shows an image, so that v1 lands with real content to test
+against. Until then the compiler targets v0.
 
 == Proposed: the compiler and what ships
 
 * *Compiler.* A Node script, run by `pnpm build` and by the contract tests,
-  reads the tree and emits v0 documents: one synthetic revision per record,
-  with computed hashes. `Publication.checkAll`, the vectors, and `projection.ts`
-  keep running unchanged during the migration.
-* *What ships.* The compiler writes one compiled document per chapter, and
-  `chapter-catalog.ts` imports that instead of globbing record files. Content
-  then costs one deployed file per chapter however many records the chapter
-  has, instead of one per record (103 files today, and thousands once
-  chapters reach the 200+ events the RFD 2 checklist targets for Tang). Record files never ship.
+  reads the tree and emits the complete v0 representation: one synthetic
+  revision per record, a generated story record for each manifest, generated
+  publication sets and record mirrors, and computed hashes. Those generated
+  artifacts remain necessary while `Publication.checkAll`, the vectors, and
+  `projection.ts` consume v0, even though authors no longer edit them.
+* *What ships.* The compiler writes one compiled chapter bundle containing
+  those v0 documents, and `chapter-catalog.ts` imports that bundle instead of
+  globbing record files. Content then costs one deployed file per chapter
+  however many records the chapter has, instead of one per record (103 files
+  today, and thousands once chapters reach the 200+ events the RFD 2 checklist
+  targets for Tang). Authoring record files never ship.
 * *Migration.* A script converts the two chapters from JSON to the record
-  files. The review is a diff of the compiled output against today's
-  documents, which should be identical apart from revision metadata.
-* *Retirement.* The publication sets, the ledger, and
-  `publication-approval.test.ts` retire once the digest approval is enforced,
-  as RFD 2 already provides.
+  files. The first preservation target is compiled v0 output identical to
+  today's documents apart from synthetic revision metadata. Any unavoidable
+  source-id collision resolution is listed separately and reviewed before it
+  changes an id or approved metadata; passing validation alone is not evidence
+  of a lossless migration.
+* *Retirement.* Hand-authored publication sets, the ledger, and
+  `publication-approval.test.ts` retire only after an owner-approved digest gate
+  enforces the equivalent publication invariant. The compiler continues to
+  generate the v0 story, publication sets, and mirrors until their consumers
+  migrate to a later contract.
 
 == Alternatives
 

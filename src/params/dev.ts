@@ -1,9 +1,10 @@
 import type { ParamMatcher } from "@sveltejs/kit"
 
 /**
- * Matches only `dev`. The `/dev` pages live behind a parameter so their routes
- * can have no prerender entries in a production build (see
- * `scripts/dev-pages.mjs`); a plain `dev/` directory would always be
- * prerendered into the artifact.
+ * Matches only `dev`. A production build leaves the `/dev` directory out before
+ * SvelteKit discovers routes (`scripts/build-app.mjs`). The parameter is the
+ * second line: its pages' `entries` are empty unless `__DEV_PAGES__` is true,
+ * whereas a plain `dev/` directory would be prerendered whenever it is
+ * present.
  */
 export const match = ((param: string): param is "dev" => param === "dev") satisfies ParamMatcher

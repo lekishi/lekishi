@@ -22,8 +22,5 @@ export function devPagesEnabled({ command = "build", env = process.env } = {}) {
   return env.CF_PAGES === "1" && Boolean(branch) && branch !== "main"
 }
 
-/** The route segment every `/dev` page lives under, as SvelteKit names it. */
-export const DEV_ROUTE_PREFIX = "/[dev=dev]"
-
 /** The matching source directory, omitted from production route discovery. */
 export const DEV_ROUTE_DIRECTORY = "[dev=dev]"

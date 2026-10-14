@@ -28,6 +28,7 @@ rules below when updating project-specific guidance.
 - Use the pinned `flake.nix` environment: `nix develop`, or `nix develop --command <command>` from the repository root. It provides Node 24 (matching CI) and pnpm; Playwright installs its own browsers.
 - Use the existing Makefile and `package.json` scripts rather than inventing parallel setup workflows. In an Amp orb, use `amp orb services ensure` for the services declared in `.amp/services.yaml` (the development server, and the built artifact served as files).
 - `pnpm dev` and `pnpm build` build the globe's tiles into `static/globe` first (`pnpm sync:globe`, which runs `scripts/globe/build-tiles.py` with Python 3, numpy and Pillow, and fetches open elevation once into `.cache/globe`). Both directories are generated and ignored; never commit them and never assume they exist before `pnpm sync:globe` has run. An unchanged `scripts/globe/` leaves the tiles in place; a changed one repaints them all.
+- `pnpm build` runs `vite build` through `scripts/build-app.mjs`, which copies `src/routes` into `.svelte-kit-build/routes` (without `/dev` in production), builds from the copy, removes it and re-syncs `.svelte-kit` from `src/routes`. That directory is generated and ignored; never commit it, and build with `pnpm build` rather than `vite build`.
 - If a required tool or service is unavailable, report the blocked check explicitly; do not claim verification succeeded.
 
 ## Project guidelines

@@ -6,6 +6,8 @@
 # output. Neither is committed, and neither is required for a clean build.
 /build/
 /.svelte-kit/
+# `scripts/build-app.mjs`'s route copy, removed after each build.
+/.svelte-kit-build/
 
 # The globe tiles are painted and packed by `pnpm sync:globe`
 # (scripts/globe/build-tiles.py) before a dev server or build starts, from

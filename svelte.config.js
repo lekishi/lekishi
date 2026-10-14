@@ -1,5 +1,6 @@
 import adapter from "@sveltejs/adapter-static"
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte"
+import { BUILD_ROUTES_DIRECTORY } from "./scripts/build-app.mjs"
 
 /**
  * The site is a static artifact: every route is prerendered at build time and
@@ -14,7 +15,7 @@ export default {
       // production copy has no `/dev` directory, so those routes never enter
       // SvelteKit's server or client manifests. Dev and type-checking use the
       // source tree directly.
-      routes: process.env.LEKISHI_BUILD_ROUTES === "1" ? ".amp/in/build-routes" : "src/routes",
+      routes: process.env.LEKISHI_BUILD_ROUTES === "1" ? BUILD_ROUTES_DIRECTORY : "src/routes",
     },
     adapter: adapter({
       pages: "build",

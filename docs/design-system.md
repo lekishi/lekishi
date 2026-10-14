@@ -128,6 +128,31 @@ decorative and hidden from assistive technology; an icon-only button takes its
 name from `Button`'s `label`. Add a glyph to `ICONS` in `Icon.svelte`; the
 reference shows it automatically.
 
+## Logo
+
+The mark is the Meridian dial (RFD 5, "Mark and wordmark"): a globe leaning
+23.4°, the Earth's axial tilt, inside a time window that ends at a gold
+playhead. Use `Logo` from `$lib/ui`; never an `<img>` of the files, which are
+for places outside the app (the favicon, links, documents).
+
+- **Colour:** ink takes the text colour (`text-ink` on lacquer); the playhead
+  is gold and is the only gold on the logo. Do not recolour it.
+- **Size:** `size` is the mark in CSS pixels. At 32 px and below, and again
+  at 16 px, the component switches to drawings cut for those sizes; never
+  scale a larger cut down.
+- **Wordmark:** `wordmark="bilingual"` is the logo's full form, the caps with
+  歴史. `wordmark="caps"` is the name alone, for where the pair does not fit;
+  the caps keep their size and position, so the two swap cleanly. The header
+  uses `size={22}`, with the caps alone below `sm` (640 px).
+- **Name:** the logo is decorative unless given a `label`; a logo inside a link
+  takes the link's name ("Lekishi home").
+- **Changing it:** edit `src/lib/ui/brand.ts`, then run `pnpm brand` to rewrite
+  `static/images/logo.svg`, `static/images/wordmark.svg`,
+  `static/images/wordmark-caps.svg`, `static/favicon.svg`,
+  `static/favicon.ico` and `static/apple-touch-icon.png`. `brand.test.ts` fails
+  until the SVGs match, and `pnpm brand:check` rerenders the raster files in
+  Playwright's pinned Chromium and fails until they match.
+
 ## Components
 
 Import from `$lib/ui`:
@@ -143,21 +168,22 @@ Import from `$lib/ui`:
 </Plate>
 ```
 
-| Primitive      | Use it for                                                                                                          |
-| -------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `Plate`        | Every chrome surface. `tone` glass or solid; a titled plate is a labelled region.                                   |
-| `SectionLabel` | The caps heading with an optional count.                                                                            |
-| `Button`       | `primary` (one per surface), `secondary`, `ghost`, `icon` (needs `label`). `href` makes a link; `busy` keeps focus. |
-| `Orb`          | Layer toggles: `pressed` true, false or `"mixed"`.                                                                  |
-| `Badge`        | An evidence form or a state, as glyph plus word. Kinds in `BADGES`.                                                 |
-| `Tabs`         | A tablist with one panel; the panel is a snippet that receives the selected id.                                     |
-| `Field`        | Search or text input with label, hint and a clear action.                                                           |
-| `Sheet`        | Side panel, or bottom sheet with `peek`, `half`, `full` detents. Non-modal.                                         |
-| `NameForm`     | A historical name, its romanization, and the modern name on request (`modern` never inside a button or link).       |
-| `DateLine`     | A date in both calendars with its precision. Takes formatted parts; formatting is RFD 2's.                          |
-| `CitationLine` | A source, its locator and reuse terms on one line; opens the quote.                                                 |
-| `EmptyState`   | `uncovered` ("not yet covered") or `filtered` ("no results with these filters"). Never mix them.                    |
-| `Icon`         | The glyph set.                                                                                                      |
+| Primitive      | Use it for                                                                                                            |
+| -------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `Plate`        | Every chrome surface. `tone` glass or solid; a titled plate is a labelled region.                                     |
+| `SectionLabel` | The caps heading with an optional count.                                                                              |
+| `Button`       | `primary` (one per surface), `secondary`, `ghost`, `icon` (needs `label`). `href` makes a link; `busy` keeps focus.   |
+| `Orb`          | Layer toggles: `pressed` true, false or `"mixed"`.                                                                    |
+| `Badge`        | An evidence form or a state, as glyph plus word. Kinds in `BADGES`.                                                   |
+| `Tabs`         | A tablist with one panel; the panel is a snippet that receives the selected id.                                       |
+| `Field`        | Search or text input with label, hint and a clear action.                                                             |
+| `Sheet`        | Side panel, or bottom sheet with `peek`, `half`, `full` detents. Non-modal.                                           |
+| `NameForm`     | A historical name, its romanization, and the modern name on request (`modern` never inside a button or link).         |
+| `DateLine`     | A date in both calendars with its precision. Takes formatted parts; formatting is RFD 2's.                            |
+| `CitationLine` | A source, its locator and reuse terms on one line; opens the quote.                                                   |
+| `EmptyState`   | `uncovered` ("not yet covered") or `filtered` ("no results with these filters"). Never mix them.                      |
+| `Icon`         | The glyph set.                                                                                                        |
+| `Logo`         | The mark, with `wordmark="bilingual"` (caps and 歴史) or `"caps"` beside it. Ink from the text colour; gold playhead. |
 
 Primitives know nothing about history or the atlas. Behaviour (what a click
 selects, what the playhead does) lives in the atlas compositions in

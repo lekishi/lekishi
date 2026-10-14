@@ -10,6 +10,7 @@ import {
   EmptyState,
   Field,
   Icon,
+  Logo,
   NameForm,
   Orb,
   Plate,
@@ -69,6 +70,62 @@ describe("Icon", () => {
     expect(svg.getAttribute("role")).toBe("img")
     expect(svg.getAttribute("aria-label")).toBe("Play")
     expect(svg.hasAttribute("aria-hidden")).toBe(false)
+  })
+})
+
+describe("Logo", () => {
+  it("is hidden without a label and an image with one", () => {
+    render(Logo, {})
+    expect(target.querySelector("[data-logo]")?.getAttribute("aria-hidden")).toBe("true")
+    unmount(mounted!)
+    mounted = undefined
+    render(Logo, { label: "Lekishi", wordmark: "bilingual" })
+    const logo = target.querySelector("[data-logo]")!
+    expect(logo.getAttribute("role")).toBe("img")
+    expect(logo.getAttribute("aria-label")).toBe("Lekishi")
+    expect(logo.querySelectorAll("svg")).toHaveLength(2)
+  })
+
+  it("keeps the caps the same size with and without 歴史", () => {
+    render(Logo, { size: 22, wordmark: "caps" })
+    const caps = target.querySelector("[data-wordmark]")!
+    const capsScale =
+      Number(caps.getAttribute("height")) / Number(caps.getAttribute("viewBox")!.split(" ")[3])
+    unmount(mounted!)
+    mounted = undefined
+    render(Logo, { size: 22, wordmark: "bilingual" })
+    const pair = target.querySelector("[data-wordmark]")!
+    const pairScale =
+      Number(pair.getAttribute("height")) / Number(pair.getAttribute("viewBox")!.split(" ")[3])
+    expect(pairScale).toBeCloseTo(capsScale, 2)
+    expect(pair.querySelectorAll("path")).toHaveLength(2)
+  })
+
+  it("draws the small cuts without clipping their playheads", () => {
+    for (const [size, cut] of [
+      [16, "tiny"],
+      [22, "small"],
+      [32, "small"],
+    ] as const) {
+      render(Logo, { size })
+      const logo = target.querySelector("[data-logo]")!
+      expect(logo.getAttribute("data-logo")).toBe(cut)
+      expect(logo.querySelector("svg")?.getAttribute("overflow")).toBe("visible")
+      for (const shape of logo.querySelectorAll("circle, ellipse, path"))
+        expect(shape.namespaceURI).toBe("http://www.w3.org/2000/svg")
+      unmount(mounted!)
+      mounted = undefined
+    }
+  })
+
+  it("gives each logo on a page its own playhead mask", () => {
+    render(Logo, {})
+    mount(Logo, { target, props: {} })
+    flushSync()
+    const masks = [...target.querySelectorAll("mask")].map((mask) => mask.id)
+    expect(masks).toHaveLength(2)
+    expect(new Set(masks).size).toBe(2)
+    for (const id of masks) expect(target.querySelector(`g[mask="url(#${id})"]`)).not.toBeNull()
   })
 })
 

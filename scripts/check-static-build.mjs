@@ -95,8 +95,12 @@ const files = walk(buildDirectory)
 requireFile(path.join(buildDirectory, "index.html"))
 requireFile(path.join(buildDirectory, "404.html"))
 requireFile(path.join(buildDirectory, "favicon.ico"))
+requireFile(path.join(buildDirectory, "favicon.svg"))
+requireFile(path.join(buildDirectory, "apple-touch-icon.png"))
 requireFile(path.join(buildDirectory, "robots.txt"))
 requireFile(path.join(buildDirectory, "images", "logo.svg"))
+requireFile(path.join(buildDirectory, "images", "wordmark.svg"))
+requireFile(path.join(buildDirectory, "images", "wordmark-caps.svg"))
 requireFile(path.join(buildDirectory, "_redirects"))
 
 /**

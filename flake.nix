@@ -28,6 +28,9 @@
             nodejs_24
             pnpm
             (python3.withPackages (ps: [ ps.numpy ps.pillow ]))
+            # Keep Playwright's browser revision available to `pnpm verify`,
+            # which checks that the committed raster brand assets are current.
+            playwright-driver.browsers
 
             # Version control and repository hygiene.
             git
@@ -42,6 +45,9 @@
             vscode-json-languageserver
             yaml-language-server
           ];
+
+          PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright-driver.browsers}";
+          PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = "true";
 
           shellHook = ''
             echo "Lekishi: pnpm dev (5173) · pnpm build · pnpm verify"

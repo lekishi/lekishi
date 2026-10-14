@@ -18,11 +18,13 @@
     "lint": "prettier --check .",
     "format": "prettier --write .",
     "screenshots": "node scripts/capture-review-screenshots.mjs",
+    "brand": "LEKISHI_BRAND=1 vitest run src/lib/ui/brand.maintenance.test.ts && node scripts/rasterize-brand.mjs",
+    "brand:check": "node scripts/rasterize-brand.mjs --check",
     "seal": "LEKISHI_SEAL=1 vitest run src/lib/historical/contract/seal.maintenance.test.ts",
     "e2e": "playwright test",
     "e2e:dev": "LEKISHI_E2E_MODE=dev playwright test",
     "e2e:static": "LEKISHI_E2E_MODE=static playwright test",
-    "verify": "pnpm lint && pnpm check && pnpm test && pnpm build",
+    "verify": "pnpm lint && pnpm check && pnpm test && pnpm brand:check && pnpm build",
     "prepare": "svelte-kit sync"
   },
   "dependencies": {

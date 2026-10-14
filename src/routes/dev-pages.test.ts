@@ -94,8 +94,12 @@ describe("the design reference", () => {
       "shape",
       "motion",
       "components",
+      "logo",
       "icons",
     ])
+    // The logo is drawn by the primitive, in its large and small cuts.
+    expect(target.querySelector('[data-logo="full"]')).not.toBeNull()
+    expect(target.querySelector('[data-logo="tiny"]')).not.toBeNull()
     // Swatches come from `app.css`, not a copy: every colour token is shown.
     expect(target.querySelector('[data-token="lacquer"]')).not.toBeNull()
     expect(target.querySelector('[data-token="danger"]')).not.toBeNull()

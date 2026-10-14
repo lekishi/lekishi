@@ -1,0 +1,289 @@
+/**
+ * Lekishi's mark and wordmark (RFD 5, "Mark and wordmark"), as geometry rather
+ * than markup, so the `Logo` primitive and the shipped files under `static/`
+ * draw the same figure. `brand.maintenance.test.ts` writes the files from this
+ * module and `brand.test.ts` fails when they drift.
+ *
+ * The mark is the Meridian dial, Window cut: a globe inside the arc of a time
+ * window that ends at a gold playhead. Its construction carries meaning that
+ * must not regress:
+ *
+ * - The globe and the dial lean by the Earth's axial tilt, 23.4°.
+ * - The playhead sits where the tilted axis meets the dial, and it is the
+ *   mark's only gold: gold means _current_ in the interface too.
+ * - The window spans five hours of a twelve-hour dial, closed by the playhead;
+ *   the rest of the dial is a dotted path ahead.
+ * - Smaller cuts are separate drawings, not scaled copies: at 32 px the globe
+ *   keeps one meridian and the near equator, at 16 px one meridian, because a
+ *   full ellipse inside a circle reads as the empty-set sign.
+ */
+
+/** The Earth's axial tilt, in degrees. The globe and the dial lean by it. */
+export const TILT = 23.4
+
+/** Where the tilted axis meets the dial, in SVG degrees (clockwise from +x). */
+export const PLAYHEAD_ANGLE = -90 + TILT
+
+/** The window opens five dial hours before the playhead. */
+const WINDOW_START = PLAYHEAD_ANGLE - 150
+
+export type LogoCut = "full" | "small" | "tiny"
+
+/** What a shape is painted with. `ink` is the text colour; `accent` is gold. */
+export type Paint = "ink" | "accent"
+
+export type Shape = {
+  readonly tag: "circle" | "ellipse" | "path"
+  readonly attrs: Readonly<Record<string, string>>
+  readonly paint: Paint
+  /** Stroked shapes take their colour as `stroke`; filled ones as `fill`. */
+  readonly stroked: boolean
+}
+
+/**
+ * A cut's drawing: its grid, the shapes, and the circles the playhead knocks out
+ * of the ink beneath it. The knock-out is a mask rather than a ring painted in
+ * the background colour, so the mark sits on any surface.
+ */
+export type MarkDrawing = {
+  readonly grid: number
+  readonly shapes: readonly Shape[]
+  readonly gaps: readonly { readonly cx: string; readonly cy: string; readonly r: string }[]
+}
+
+const n = (value: number) => {
+  const text = value.toFixed(2).replace(/\.?0+$/, "")
+  return text === "-0" ? "0" : text
+}
+
+const point = (c: number, r: number, degrees: number): [number, number] => {
+  const a = (degrees * Math.PI) / 180
+  return [c + r * Math.cos(a), c + r * Math.sin(a)]
+}
+
+const stroke = (
+  tag: Shape["tag"],
+  attrs: Record<string, string>,
+  width: number,
+  extra: Record<string, string> = {},
+): Shape => ({
+  tag,
+  attrs: { ...attrs, fill: "none", "stroke-width": n(width), ...extra },
+  paint: "ink",
+  stroked: true,
+})
+
+const arc = (c: number, r: number, from: number, to: number) => {
+  const [x0, y0] = point(c, r, from)
+  const [x1, y1] = point(c, r, to)
+  const large = (((to - from) % 360) + 360) % 360 > 180 ? 1 : 0
+  return `M${n(x0)} ${n(y0)} A${n(r)} ${n(r)} 0 ${large} 1 ${n(x1)} ${n(y1)}`
+}
+
+const tilt = (c: number) => ({ transform: `rotate(${TILT} ${n(c)} ${n(c)})` })
+
+/** The globe's outline and its lines of longitude and latitude, leaning by the tilt. */
+function globe(c: number, r: number, cut: LogoCut): Shape[] {
+  const outline = { full: 2.6, small: 2.4, tiny: 3 }[cut]
+  const shapes = [stroke("circle", { cx: n(c), cy: n(c), r: n(r) }, outline)]
+  const meridian = `M${n(c)} ${n(c - r)} A${n(r * (cut === "tiny" ? 0.47 : 0.5))} ${n(r)} 0 0 0 ${n(c)} ${n(c + r)}`
+  const equator = `M${n(c - r)} ${n(c)} A${n(r)} ${n(r * (cut === "full" ? 0.3 : 0.32))} 0 0 0 ${n(c + r)} ${n(c)}`
+  if (cut === "full") {
+    // Both meridians of one great circle, and only the near half of the equator,
+    // so the globe reads as a sphere seen from slightly above.
+    shapes.push(
+      stroke("ellipse", { cx: n(c), cy: n(c), rx: n(r * 0.44), ry: n(r), ...tilt(c) }, 1.9),
+    )
+    shapes.push(stroke("path", { d: equator, ...tilt(c) }, 1.9))
+  } else if (cut === "small") {
+    shapes.push(stroke("path", { d: meridian, ...tilt(c) }, 1.8))
+    shapes.push(stroke("path", { d: equator, ...tilt(c) }, 1.8))
+  } else {
+    shapes.push(stroke("path", { d: meridian, ...tilt(c) }, 2.4))
+  }
+  return shapes
+}
+
+function playhead(c: number, r: number, size: number, gap: number) {
+  const [x, y] = point(c, r, PLAYHEAD_ANGLE)
+  return {
+    shape: {
+      tag: "circle",
+      attrs: { cx: n(x), cy: n(y), r: n(size) },
+      paint: "accent",
+      stroked: false,
+    } satisfies Shape,
+    gap: { cx: n(x), cy: n(y), r: n(size + gap) },
+  }
+}
+
+const CUTS: Record<LogoCut, () => MarkDrawing> = {
+  full() {
+    const head = playhead(32, 27, 4.6, 2.4)
+    const ticks = [1, 2, 3, 4, 5].map((k) => {
+      const a = PLAYHEAD_ANGLE - 30 * k
+      const [x0, y0] = point(32, 27, a)
+      const [x1, y1] = point(32, 24.2, a)
+      return stroke("path", { d: `M${n(x0)} ${n(y0)} L${n(x1)} ${n(y1)}` }, 1.6, {
+        "stroke-linecap": "round",
+      })
+    })
+    return {
+      grid: 64,
+      shapes: [
+        ...globe(32, 16.5, "full"),
+        // The rest of the dial: the time ahead of the playhead, drawn as dots.
+        stroke("path", { d: arc(32, 27, PLAYHEAD_ANGLE + 14, WINDOW_START + 346) }, 1.3, {
+          "stroke-linecap": "round",
+          "stroke-dasharray": "0.1 4.3",
+          opacity: "0.6",
+        }),
+        stroke("path", { d: arc(32, 27, WINDOW_START, PLAYHEAD_ANGLE) }, 2.6, {
+          "stroke-linecap": "round",
+        }),
+        ...ticks,
+        head.shape,
+      ],
+      gaps: [head.gap],
+    }
+  },
+  small() {
+    const head = playhead(16, 14, 3.8, 2)
+    return {
+      grid: 32,
+      shapes: [
+        ...globe(16, 9, "small"),
+        stroke("path", { d: arc(16, 14, WINDOW_START, PLAYHEAD_ANGLE) }, 2.6, {
+          "stroke-linecap": "round",
+        }),
+        head.shape,
+      ],
+      gaps: [head.gap],
+    }
+  },
+  tiny() {
+    const head = playhead(16, 14.3, 4.4, 2)
+    return {
+      grid: 32,
+      shapes: [
+        ...globe(16, 8.5, "tiny"),
+        stroke("path", { d: arc(16, 14.3, WINDOW_START, PLAYHEAD_ANGLE) }, 3, {
+          "stroke-linecap": "round",
+        }),
+        head.shape,
+      ],
+      gaps: [head.gap],
+    }
+  },
+}
+
+export function markDrawing(cut: LogoCut): MarkDrawing {
+  return CUTS[cut]()
+}
+
+/** The cut drawn for a rendered size in CSS pixels. */
+export function cutFor(size: number): LogoCut {
+  return size <= 16 ? "tiny" : size <= 32 ? "small" : "full"
+}
+
+/**
+ * The wordmark: LEKISHI in Cinzel SemiBold (600), tracked 0.16 em like the
+ * interface's section labels, outlined at 40 units per em so it never waits on
+ * a font. Cinzel is SIL OFL 1.1, which permits outlining it into a logo.
+ */
+export const WORDMARK = {
+  viewBox: "1.91 -28.72 197.19 29.28",
+  width: 197.19,
+  height: 29.28,
+  d: "M9.86 -28V0H4.99V-28ZM20.5 -1.56 21.15 0H9.74V-1.56ZM23.26 -7.61 21.27 0H13.82L15.26 -1.56Q17.3 -1.56 18.77 -2.3Q20.24 -3.05 21.24 -4.42Q22.24 -5.79 22.87 -7.61ZM5.11 -2.92V0H1.91V-0.4Q1.91 -0.4 2.17 -0.4Q2.43 -0.4 2.43 -0.4Q3.47 -0.4 4.21 -1.14Q4.95 -1.88 4.99 -2.92ZM5.11 -25.08H4.99Q4.95 -26.12 4.21 -26.86Q3.47 -27.6 2.43 -27.6Q2.43 -27.6 2.17 -27.6Q1.91 -27.6 1.91 -27.6V-28H5.11ZM9.74 -25.08V-28H12.94V-27.6Q12.9 -27.6 12.66 -27.6Q12.42 -27.6 12.42 -27.6Q11.38 -27.6 10.64 -26.86Q9.9 -26.12 9.86 -25.08ZM40.18 -28V0H35.31V-28ZM50.82 -1.56 51.47 0H40.06V-1.56ZM49.26 -14.56V-13.04H40.06V-14.56ZM51.14 -28V-26.44H40.06V-28ZM53.58 -7.61 51.59 0H44.14L45.58 -1.56Q47.62 -1.56 49.09 -2.3Q50.56 -3.05 51.56 -4.42Q52.56 -5.79 53.19 -7.61ZM49.26 -13.12V-9.67H48.86V-10.11Q48.86 -11.34 48.03 -12.18Q47.21 -13.02 45.97 -13.04V-13.12ZM49.26 -17.93V-14.48H45.97V-14.56Q47.21 -14.6 48.04 -15.45Q48.88 -16.3 48.86 -17.53V-17.93ZM51.14 -26.56V-22.38H50.74V-22.94Q50.74 -24.49 49.79 -25.46Q48.83 -26.44 47.25 -26.48V-26.56ZM51.14 -28.72V-27.56L46.26 -28Q47.14 -28 48.12 -28.12Q49.1 -28.24 49.94 -28.4Q50.78 -28.56 51.14 -28.72ZM35.43 -2.92V0H32.23V-0.4Q32.23 -0.4 32.49 -0.4Q32.75 -0.4 32.75 -0.4Q33.79 -0.4 34.53 -1.14Q35.27 -1.88 35.31 -2.92ZM35.43 -25.08H35.31Q35.3 -26.12 34.54 -26.86Q33.79 -27.6 32.75 -27.6Q32.75 -27.6 32.51 -27.6Q32.26 -27.6 32.26 -27.6L32.23 -28H35.43ZM76.1 -16.61 86.88 -2.61Q87.77 -1.53 88.7 -0.99Q89.63 -0.44 90.87 -0.4V0H88.1Q87.69 0 86.76 -0.05Q85.83 -0.1 84.69 -0.36Q83.55 -0.62 82.4 -1.24Q81.24 -1.85 80.37 -2.98Q80.24 -3.15 79.61 -3.97Q78.99 -4.79 78.08 -5.97Q77.17 -7.15 76.19 -8.45Q75.2 -9.75 74.34 -10.87Q73.48 -12 72.93 -12.72Q72.38 -13.43 72.38 -13.43ZM86.64 -27.72 74.63 -13.6 72.38 -13.43 83.38 -27.72ZM89.44 -28V-27.64H89.28Q87.96 -27.64 86.82 -27.11Q85.68 -26.58 84.88 -25.68L81.87 -25.76Q82.37 -26.44 82.05 -27.04Q81.73 -27.64 80.92 -27.64H80.51V-28H89.28ZM71.1 -28V0H66.23V-28ZM66.35 -2.92V0H63.15V-0.4Q63.19 -0.4 63.42 -0.4Q63.66 -0.4 63.67 -0.4Q64.71 -0.4 65.45 -1.14Q66.19 -1.88 66.23 -2.92ZM66.35 -25.08H66.23Q66.19 -26.12 65.45 -26.86Q64.71 -27.6 63.67 -27.6Q63.66 -27.6 63.42 -27.6Q63.19 -27.6 63.15 -27.6V-28H66.35ZM70.98 -2.92H71.1Q71.14 -1.88 71.88 -1.14Q72.62 -0.4 73.66 -0.4Q73.69 -0.4 73.92 -0.4Q74.14 -0.4 74.18 -0.4V0H70.98ZM70.98 -25.08V-28H74.18V-27.6Q74.14 -27.6 73.92 -27.6Q73.69 -27.6 73.66 -27.6Q72.62 -27.6 71.88 -26.86Q71.14 -26.12 71.1 -25.08ZM106.46 -28V0H101.59V-28ZM101.71 -2.92V0H98.51V-0.4Q98.51 -0.4 98.77 -0.4Q99.03 -0.4 99.03 -0.4Q100.07 -0.4 100.81 -1.14Q101.55 -1.88 101.59 -2.92ZM101.71 -25.08H101.59Q101.55 -26.12 100.81 -26.86Q100.07 -27.6 99.03 -27.6Q99.03 -27.6 98.77 -27.6Q98.51 -27.6 98.51 -27.6V-28H101.71ZM106.34 -2.92H106.46Q106.5 -1.88 107.24 -1.14Q107.98 -0.4 109.02 -0.4Q109.02 -0.4 109.26 -0.4Q109.5 -0.4 109.54 -0.4V0H106.34ZM106.34 -25.08V-28H109.54V-27.6Q109.5 -27.6 109.26 -27.6Q109.02 -27.6 109.02 -27.6Q107.98 -27.6 107.24 -26.86Q106.5 -26.12 106.46 -25.08ZM128.54 -28.56Q129.27 -28.56 130.31 -28.48Q131.35 -28.4 132.42 -28.26Q133.48 -28.12 134.31 -27.98Q135.14 -27.84 135.48 -27.68L135.16 -22.59H134.78Q134.78 -24.63 133.31 -25.83Q131.83 -27.04 129.51 -27.04Q127.22 -27.04 125.82 -25.83Q124.43 -24.63 124.38 -22.94Q124.34 -21.9 124.98 -20.97Q125.63 -20.04 126.78 -19.24L134.5 -13.5Q136.12 -12.43 136.87 -10.89Q137.63 -9.35 137.55 -7.45Q137.43 -3.75 134.9 -1.59Q132.36 0.56 128.01 0.56Q126.5 0.56 124.97 0.3Q123.43 0.03 122.16 -0.5Q120.89 -1.03 120.13 -1.8Q119.88 -2.59 119.91 -3.74Q119.94 -4.9 120.22 -6.1Q120.5 -7.31 120.93 -8.17H121.29Q121.12 -6.12 121.96 -4.45Q122.79 -2.78 124.42 -1.85Q126.05 -0.92 128.23 -0.96Q130.71 -1.04 132.21 -2.37Q133.71 -3.7 133.71 -5.74Q133.71 -6.95 133.07 -7.93Q132.44 -8.91 131.06 -9.74L123.85 -15.2Q122.02 -16.39 121.22 -18.09Q120.43 -19.8 120.57 -21.64Q120.69 -23.58 121.65 -25.15Q122.61 -26.73 124.35 -27.64Q126.09 -28.56 128.54 -28.56ZM135.51 -28.16 135.46 -27.32H131.31V-28.16ZM174.78 -28V0H169.91V-28ZM155.82 -28V0H150.95V-28ZM170.27 -14.67V-13.14H155.42V-14.67ZM151.07 -2.92V0H147.87V-0.4Q147.87 -0.4 148.13 -0.4Q148.39 -0.4 148.39 -0.4Q149.43 -0.4 150.17 -1.14Q150.91 -1.88 150.95 -2.92ZM151.07 -25.08H150.95Q150.91 -26.12 150.17 -26.86Q149.43 -27.6 148.39 -27.6Q148.39 -27.6 148.13 -27.6Q147.87 -27.6 147.87 -27.6V-28H151.07ZM155.7 -2.92H155.82Q155.86 -1.88 156.6 -1.14Q157.34 -0.4 158.38 -0.4Q158.38 -0.4 158.62 -0.4Q158.86 -0.4 158.9 -0.4V0H155.7ZM155.7 -25.08V-28H158.9V-27.6Q158.86 -27.6 158.62 -27.6Q158.38 -27.6 158.38 -27.6Q157.34 -27.6 156.6 -26.86Q155.86 -26.12 155.82 -25.08ZM170.03 -2.92V0H166.83V-0.4Q166.87 -0.4 167.11 -0.4Q167.35 -0.4 167.35 -0.4Q168.39 -0.4 169.15 -1.14Q169.91 -1.88 169.91 -2.92ZM170.03 -25.08H169.91Q169.91 -26.12 169.15 -26.86Q168.39 -27.6 167.35 -27.6Q167.35 -27.6 167.11 -27.6Q166.87 -27.6 166.83 -27.6V-28H170.03ZM174.66 -2.92H174.78Q174.82 -1.88 175.56 -1.14Q176.3 -0.4 177.34 -0.4Q177.34 -0.4 177.6 -0.4Q177.86 -0.4 177.86 -0.4V0H174.66ZM174.66 -25.08V-28H177.86V-27.6Q177.86 -27.6 177.6 -27.6Q177.34 -27.6 177.34 -27.6Q176.3 -27.6 175.56 -26.86Q174.82 -26.12 174.78 -25.08ZM196.02 -28V0H191.15V-28ZM191.27 -2.92V0H188.07V-0.4Q188.07 -0.4 188.33 -0.4Q188.59 -0.4 188.59 -0.4Q189.63 -0.4 190.37 -1.14Q191.11 -1.88 191.15 -2.92ZM191.27 -25.08H191.15Q191.11 -26.12 190.37 -26.86Q189.63 -27.6 188.59 -27.6Q188.59 -27.6 188.33 -27.6Q188.07 -27.6 188.07 -27.6V-28H191.27ZM195.9 -2.92H196.02Q196.06 -1.88 196.8 -1.14Q197.54 -0.4 198.58 -0.4Q198.58 -0.4 198.82 -0.4Q199.06 -0.4 199.1 -0.4V0H195.9ZM195.9 -25.08V-28H199.1V-27.6Q199.06 -27.6 198.82 -27.6Q198.58 -27.6 198.58 -27.6Q197.54 -27.6 196.8 -26.86Q196.06 -26.12 196.02 -25.08Z",
+} as const
+
+/**
+ * The owner's wordmark (2026-10-14): the caps, a hairline, and 歴史, the word
+ * the name echoes, in Noto Serif CJK JP SemiBold (OFL) at 30.5 units. The pair
+ * is centred on the caps' cap height so both scripts share one optical middle,
+ * and the caps keep their coordinates from `WORDMARK`, so the two lockups
+ * line up when one replaces the other at a breakpoint.
+ */
+export const WORDMARK_BILINGUAL = {
+  viewBox: "1.91 -32 288.06 36",
+  width: 288.06,
+  height: 36,
+  rule: { x: "215.96", y: "-32", width: "1.2", height: "36", opacity: "0.45" },
+  ja: {
+    transform: "translate(229.98 -2.44)",
+    d: "M3.51 -23.45V-15.92C3.51 -10.03 3.39 -3.17 0.98 2.29L1.4 2.53C6.07 -2.75 6.25 -10.46 6.25 -15.95V-22.6H28.21C28.64 -22.6 28.94 -22.75 29.04 -23.09C27.79 -24.16 25.77 -25.71 25.77 -25.71L23.97 -23.45H6.74L3.51 -24.86ZM10.86 -21.87V-18.03H6.56L6.8 -17.17H10.13C9.33 -14.4 8.08 -11.65 6.25 -9.55L6.59 -9.09C8.3 -10.34 9.73 -11.77 10.86 -13.39V-8.72H11.32C12.23 -8.72 13.3 -9.21 13.3 -9.46V-15.65C14.03 -14.82 14.7 -13.66 14.88 -12.72C16.96 -11.16 19.03 -15.19 13.3 -16.32V-17.17H16.53C16.81 -17.17 17.05 -17.26 17.17 -17.45L17.23 -17.17H19.82C19 -14.52 17.69 -12.02 15.74 -10.13L16.04 -9.64C18.09 -10.89 19.73 -12.41 20.95 -14.18V-8.66H21.41C22.36 -8.66 23.45 -9.15 23.45 -9.39V-16.59C24.28 -13.48 25.65 -11.07 27.51 -9.49C27.82 -10.8 28.52 -11.62 29.52 -11.83V-12.17C27.39 -13.05 25.22 -14.88 24 -17.17H28.21C28.64 -17.17 28.94 -17.32 29.04 -17.63C28.03 -18.61 26.41 -19.92 26.41 -19.92L24.98 -18.03H23.45V-20.65C24.19 -20.77 24.43 -21.04 24.49 -21.44L20.95 -21.81V-18.03H17.02L17.05 -17.87C16.16 -18.73 14.98 -19.67 14.98 -19.67L13.69 -18.03H13.3V-20.71C14.03 -20.83 14.27 -21.11 14.33 -21.5ZM4.64 0.7 4.88 1.59H28.7C29.13 1.59 29.46 1.43 29.52 1.1C28.3 0 26.26 -1.52 26.26 -1.52L24.49 0.7H18.97V-4.09H26.87C27.3 -4.09 27.6 -4.24 27.69 -4.58C26.57 -5.58 24.7 -7.01 24.7 -7.01L23.06 -4.94H18.97V-7.66C19.7 -7.78 19.92 -8.05 19.98 -8.45L16.2 -8.81V0.7H12.29V-5.76C12.99 -5.89 13.24 -6.13 13.3 -6.56L9.55 -6.89V0.7ZM44.32 -25.59V-20.13H38L34.86 -21.41V-8.78H35.29C36.48 -8.78 37.76 -9.42 37.76 -9.7V-11.32H44.29C44.16 -8.94 43.68 -6.83 42.64 -5C40.99 -6.19 39.65 -7.66 38.7 -9.49L38.28 -9.18C39.16 -6.98 40.32 -5.18 41.75 -3.72C39.83 -1.22 36.63 0.7 31.69 2.1L31.84 2.59C37.33 1.62 41.02 0 43.43 -2.23C46.94 0.49 51.7 1.86 57.55 2.56C57.83 1.1 58.65 0.09 59.96 -0.24L59.99 -0.58C54.14 -0.82 48.8 -1.68 44.77 -3.72C46.36 -5.83 47.09 -8.36 47.27 -11.32H53.98V-9H54.44C55.45 -9 56.88 -9.61 56.91 -9.85V-18.76C57.55 -18.88 57.98 -19.12 58.19 -19.37L55.11 -21.72L53.68 -20.13H47.31V-24.34C48.07 -24.46 48.31 -24.77 48.4 -25.19ZM53.98 -19.28V-12.17H47.31V-12.47V-19.28ZM37.76 -12.17V-19.28H44.32V-12.44V-12.17Z",
+  },
+} as const
+
+export type BrandColours = {
+  readonly ink: string
+  readonly accent: string
+  readonly ground: string
+}
+
+const attrs = (values: Readonly<Record<string, string>>) =>
+  Object.entries(values)
+    .map(([k, v]) => `${k}="${v}"`)
+    .join(" ")
+
+function shapeMarkup(shape: Shape, colours: BrandColours) {
+  const colour = shape.paint === "ink" ? colours.ink : colours.accent
+  const attrs = { ...shape.attrs, [shape.stroked ? "stroke" : "fill"]: colour }
+  return `<${shape.tag} ${Object.entries(attrs)
+    .map(([k, v]) => `${k}="${v}"`)
+    .join(" ")}/>`
+}
+
+/** The mark as markup, for the shipped files. `id` names its knock-out mask. */
+export function markMarkup(cut: LogoCut, colours: BrandColours, id = "lekishi-mark") {
+  const drawing = markDrawing(cut)
+  const ink = drawing.shapes.filter((s) => s.paint === "ink").map((s) => shapeMarkup(s, colours))
+  const accent = drawing.shapes
+    .filter((s) => s.paint === "accent")
+    .map((s) => shapeMarkup(s, colours))
+  const holes = drawing.gaps.map(
+    (g) => `<circle cx="${g.cx}" cy="${g.cy}" r="${g.r}" fill="black"/>`,
+  )
+  return (
+    `<mask id="${id}"><rect width="${drawing.grid}" height="${drawing.grid}" fill="white"/>${holes.join("")}</mask>` +
+    `<g mask="url(#${id})">${ink.join("")}</g>${accent.join("")}`
+  )
+}
+
+/**
+ * The shipped files. `logo.svg`, `wordmark.svg` (the caps with 歴史) and
+ * `wordmark-caps.svg` are transparent, for dark surfaces; the favicon and the
+ * touch icon sit on a lacquer tile, because a cream mark disappears on a light
+ * browser's tab strip.
+ */
+export function brandFiles(colours: BrandColours): Record<string, string> {
+  const svg = (viewBox: string, body: string) =>
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}">${body}</svg>\n`
+  const tile = (cut: LogoCut, size: number, radius: number, inset: number) => {
+    const grid = markDrawing(cut).grid
+    const scale = (size - 2 * inset) / grid
+    return svg(
+      `0 0 ${size} ${size}`,
+      `<rect width="${size}" height="${size}" rx="${radius}" fill="${colours.ground}"/>` +
+        `<g transform="translate(${n(inset)} ${n(inset)}) scale(${n(scale)})">${markMarkup(cut, colours)}</g>`,
+    )
+  }
+  return {
+    "static/images/logo.svg": svg("0 0 64 64", markMarkup("full", colours)),
+    "static/images/wordmark.svg": svg(
+      WORDMARK_BILINGUAL.viewBox,
+      `<path fill="${colours.ink}" d="${WORDMARK.d}"/>` +
+        `<rect ${attrs(WORDMARK_BILINGUAL.rule)} fill="${colours.ink}"/>` +
+        `<path fill="${colours.ink}" transform="${WORDMARK_BILINGUAL.ja.transform}" d="${WORDMARK_BILINGUAL.ja.d}"/>`,
+    ),
+    "static/images/wordmark-caps.svg": svg(
+      WORDMARK.viewBox,
+      `<path fill="${colours.ink}" d="${WORDMARK.d}"/>`,
+    ),
+    "static/favicon.svg": tile("small", 32, 7, 2.24),
+    // Sources for the raster icons, which `scripts/rasterize-brand.mjs` renders.
+    "scripts/brand/favicon-16.svg": tile("tiny", 32, 7, 2.24),
+    "scripts/brand/touch-icon.svg": tile("full", 180, 0, 26),
+  }
+}

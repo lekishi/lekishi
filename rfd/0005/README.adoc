@@ -513,6 +513,55 @@ them, and a preview carries the pages. Its swatches, scale and contrast figures 
 not duplicate component specifications; the page and the components are the
 specification.
 
+=== Mark and wordmark
+
+Until 2026-10-14 the site shipped the Phoenix framework's orange bird as
+`static/images/logo.svg`, left over from the Phoenix runtime RFD 3 retired, and
+set the name in the default sans. The identity is part of the system, so it is
+built from the same tokens and the same rule for gold.
+
+The mark is the *Meridian dial*: a globe inside the arc of a time window that
+ends at a gold playhead. It is the atlas's own interaction in one figure (the
+reader moves through time and the world answers), and its construction is
+specified rather than drawn by eye, in `src/lib/ui/brand.ts`:
+
+* The globe and the dial lean by the Earth's axial tilt, 23.4°, so the figure
+  is the planet rather than a generic globe icon.
+* The playhead sits where the tilted axis meets the dial, and it is the mark's
+  only gold, because gold means _current_ in the interface too.
+* The window spans five hours of a twelve-hour dial and the rest of the dial is
+  a dotted path ahead, the way the time controls show a window that ends at the
+  playhead.
+* The 32 px and 16 px cuts are separate drawings. At 32 px the globe keeps one
+  meridian and the near equator; at 16 px one meridian on whole-pixel strokes,
+  because a full ellipse inside a circle reads as the empty-set sign. The
+  playhead's gap is a mask, so the mark sits on any surface.
+
+The wordmark is LEKISHI in Cinzel SemiBold, tracked 0.16 em like the section
+labels, then a hairline and 歴史, the word the name echoes, in Noto Serif JP
+SemiBold. The two scripts are centred on the caps' cap height so they share one
+optical middle. Both are outlined into paths (both faces are OFL), so the
+wordmark never waits on the font self-hosting step. Where the pair does not fit
+(the header below 640 px) the caps stand alone at the same size and position.
+The favicon and touch icon put the mark on a lacquer tile, because a cream mark
+disappears on a light browser's tab strip.
+
+`Logo` in `$lib/ui` draws the mark and the wordmark from that module with the
+ink and gold tokens; `pnpm brand` writes the shipped SVGs from it and renders
+the ICO and PNG icons. `src/lib/ui/brand.test.ts` pins the SVGs and
+`pnpm brand:check` rerenders the raster files in Playwright's pinned Chromium,
+so either form of drift fails verification. The brand files total 29 KB: the favicon ICO grows
+from 152 bytes to 4.9 KB with its 16, 32 and 48 px images, `logo.svg` shrinks
+from 3.1 KB to 1.4 KB, and `favicon.svg`, `apple-touch-icon.png`,
+`images/wordmark.svg` and `images/wordmark-caps.svg` are four new files.
+
+The studies, with the alternatives the owner saw, are published at
+https://claude.ai/artifact/Ps24CWpX4vZPnTSuSrisEy[Lekishi mark studies]: round 1
+compared four directions (the dial; an L of place and time; a crossing in the
+evidence grammar; a 歴 seal), and round 2 three cuts of the dial (full dial,
+window, bezel) and three wordmarks (Cinzel caps; caps with 歴史; lowercase with
+a gold last dot).
+
 === The system sheet is a second hero
 
 Following RFD 1's "the hero defines done", the system gets one reviewed
@@ -570,6 +619,17 @@ Answered by the owner on 2026-10-13:
   part of the design system rather than a separate RFD, and in-chapter state
   uses `?event=` and its siblings on the chapter route rather than a path per
   event.
+
+Answered by the owner on 2026-10-14:
+
+* *The mark is the Meridian dial,* chosen from the four round 1 directions
+  (<<Mark and wordmark>>), *in its Window cut,* chosen over the full dial and
+  the bezel.
+* *The wordmark is the caps with 歴史,* chosen over the caps alone and the
+  lowercase with a gold dot.
+
+The responsive header implementation uses the caps alone below 640 px, where
+the chosen bilingual lockup does not fit beside the navigation.
 
 == Implementation
 

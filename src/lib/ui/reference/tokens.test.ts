@@ -8,12 +8,11 @@ const stylesheet = readFileSync(
   path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../app.css"),
   "utf8",
 )
+const tokens = parseTokens(stylesheet)
+const value = (list: readonly { name: string; value: string }[], name: string) =>
+  list.find((token) => token.name === name)?.value
 
 describe("parseTokens", () => {
-  const tokens = parseTokens(stylesheet)
-  const value = (list: readonly { name: string; value: string }[], name: string) =>
-    list.find((token) => token.name === name)?.value
-
   it("reads the stylesheet's own tokens, so the reference cannot drift from it", () => {
     expect(value(tokens.colors, "lacquer")).toBe("#121a20")
     expect(value(tokens.colors, "frame")).toBe("rgb(210 169 79 / 0.35)")
@@ -53,7 +52,9 @@ describe("contrast", () => {
   })
 
   it("keeps field placeholder text at AA on its raised surface", () => {
-    expect(contrast("#b9af9c", "#1a242b")!).toBeGreaterThanOrEqual(4.5)
+    const foreground = value(tokens.colors, "ink-dim")
+    const background = value(tokens.colors, "lacquer-raised")
+    expect(contrast(foreground!, background!)!).toBeGreaterThanOrEqual(4.5)
   })
 
   it("composites a translucent colour over the background", () => {

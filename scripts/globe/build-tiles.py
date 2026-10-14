@@ -183,6 +183,29 @@ def fetch(z, x, y):
         with open(p, "wb") as f: f.write(data)
     return p
 
+def despiked(e, limit):
+    """Replaces needles: a sample more than `limit` metres above the fourth
+    highest of the 24 around it (or below the fourth lowest) takes their median.
+    Terrarium carries such needles at some coasts and in the sea, alone or two
+    or three abreast: 5,310 m beside sea-level samples in the z7 mosaic, 728 m
+    at the shore of 秋妻屋浦 at z10. Drawn exaggerated, each is a dark wedge on
+    the sea. The limit is one pixel's width (a 45-degree slope on every side
+    at once), and never under 150 m, so real summits and cliffs stand."""
+    r, h, w = 2, *e.shape
+    p = np.pad(e, r, mode="edge")
+    out = e.copy()
+    count = 0
+    for top in range(0, h, 256):  # in bands: the 24 neighbours of a whole mosaic do not fit in memory
+        rows = min(256, h - top)
+        around = np.sort(np.stack([p[top + r + dy:top + r + dy + rows, r + dx:r + dx + w]
+                                   for dy in range(-r, r + 1) for dx in range(-r, r + 1) if dy or dx]), 0)
+        band = e[top:top + rows]
+        needle = (band > around[-4] + limit) | (band < around[3] - limit)
+        out[top:top + rows] = np.where(needle, np.median(around, 0), band)
+        count += int(needle.sum())
+    print(f"    {count} needles replaced", flush=True)
+    return out
+
 class Source:
     def __init__(self, z, rect, min_level):
         n = 1 << z
@@ -200,6 +223,9 @@ class Source:
             a = np.asarray(Image.open(p).convert("RGB"), np.float32)
             self.e[(y - ty0) * 256:(y - ty0 + 1) * 256, (x - tx0) * 256:(x - tx0 + 1) * 256] = a[..., 0] * 256 + a[..., 1] + a[..., 2] / 256 - 32768
         self.deg_per_px = 360.0 / (256 * n)
+        if rect is not None:  # the whole-Earth z4 is too coarse for a needle to show
+            # One pixel's width at the chapters' latitudes (about 30 degrees north).
+            self.e = despiked(self.e, max(150.0, self.deg_per_px * 111320 * math.cos(math.radians(30))))
         print(f"  source z{z}: {len(jobs)} tiles, mosaic {self.e.shape[1]}x{self.e.shape[0]}", flush=True)
 
     def covers(self, lon, lat):

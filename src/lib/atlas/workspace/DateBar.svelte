@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button, Icon, focusRing, transition } from "$lib/ui"
+  import { Button, Icon, Logo, focusRing, transition } from "$lib/ui"
 
   /**
    * The date bar (RFD 5, top region): where the reader is in time, in which
@@ -58,11 +58,12 @@
     ]}
     aria-label="Lekishi home"
   >
-    <img src="/images/logo.svg" width="22" height="22" alt="" />
-    {#if !compact}
-      <span class="hidden font-display text-body-sm font-semibold tracking-wide text-ink xl:inline"
-        >LEKISHI</span
-      >
+    <!-- The mark alone where the bar is tight; the caps beside it on wide screens. -->
+    {#if compact}
+      <Logo size={22} />
+    {:else}
+      <span class="flex xl:hidden"><Logo size={22} /></span>
+      <span class="hidden xl:flex"><Logo size={22} wordmark="caps" /></span>
     {/if}
   </a>
 

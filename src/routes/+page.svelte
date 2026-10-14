@@ -7,7 +7,7 @@
   import ChapterGlobe from "$lib/atlas/navigation/ChapterGlobe.svelte"
   import SearchDialog from "$lib/atlas/navigation/SearchDialog.svelte"
   import TimeRibbon from "$lib/atlas/navigation/TimeRibbon.svelte"
-  import { Icon, focusRing, transition } from "$lib/ui"
+  import { Icon, Logo, focusRing, transition } from "$lib/ui"
 
   /**
    * The home page (RFD 5, "Home"): search first, the chapters on the globe and
@@ -80,11 +80,12 @@
   <header class="flex items-center justify-between gap-4 px-4 py-3 sm:px-8">
     <a
       href="/"
-      class={["flex items-center gap-2.5 rounded-control no-underline", focusRing]}
+      class={["flex items-center rounded-control text-ink no-underline", focusRing]}
       aria-label="Lekishi home"
     >
-      <img src="/images/logo.svg" width="26" height="26" alt="" />
-      <span class="font-display text-body font-semibold tracking-wide text-ink">LEKISHI</span>
+      <!-- The caps with 歴史 do not fit beside the navigation on phones. -->
+      <span class="flex sm:hidden"><Logo size={22} wordmark="caps" /></span>
+      <span class="hidden sm:flex"><Logo size={22} wordmark="bilingual" /></span>
     </a>
     <nav aria-label="Primary" class="flex items-center gap-1">
       <a

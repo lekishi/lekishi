@@ -7,6 +7,7 @@
   import { navigateWorkspace, releaseWorkspace, startAtlasPage } from "$lib/atlas/entry"
   import { windowLabel } from "$lib/atlas/labels"
   import type { AtlasHistory } from "$lib/atlas/mount"
+  import { Logo, focusRing } from "$lib/ui"
 
   /**
    * The chapter page.
@@ -97,9 +98,13 @@
       <div class="w-full max-w-xl">
         <a
           href="/"
-          class="inline-flex items-center gap-2 rounded-control font-display text-body-sm font-semibold tracking-wide text-ink-dim no-underline hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-bright"
+          class={[
+            "inline-flex items-center rounded-control text-ink-dim no-underline hover:text-ink",
+            focusRing,
+          ]}
+          aria-label="Lekishi home"
         >
-          <img src="/images/logo.svg" width="22" height="22" alt="" />LEKISHI
+          <Logo size={22} wordmark="bilingual" />
         </a>
         <p class="mt-8 text-label font-semibold uppercase text-gold">
           Chapter · <span class="tabular-nums">{windowLabel(data.chapter.defaultWindow)}</span>

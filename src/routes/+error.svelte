@@ -3,7 +3,7 @@
   import { CHAPTERS } from "$lib/atlas/chapters"
   import { windowLabel } from "$lib/atlas/labels"
   import SearchDialog from "$lib/atlas/navigation/SearchDialog.svelte"
-  import { Icon, focusRing, transition } from "$lib/ui"
+  import { Icon, Logo, focusRing, transition } from "$lib/ui"
 
   /**
    * The not-found page (RFD 5, "Not found"): say plainly that the address is
@@ -26,12 +26,13 @@
     <a
       href="/"
       class={[
-        "inline-flex items-center gap-2 rounded-control font-display text-body-sm font-semibold tracking-wide text-ink-dim no-underline hover:text-ink",
+        "inline-flex items-center rounded-control text-ink-dim no-underline hover:text-ink",
         transition,
         focusRing,
       ]}
+      aria-label="Lekishi home"
     >
-      <img src="/images/logo.svg" width="22" height="22" alt="" />LEKISHI
+      <Logo size={22} wordmark="bilingual" />
     </a>
     <p class="mt-10 text-label font-semibold uppercase text-gold">{status}</p>
     <h1 class="mt-2 font-display text-title text-ink">

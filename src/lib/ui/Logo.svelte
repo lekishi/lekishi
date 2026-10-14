@@ -45,7 +45,14 @@
   aria-hidden={label ? undefined : "true"}
   data-logo={cut}
 >
-  <svg width={size} height={size} viewBox="0 0 {drawing.grid} {drawing.grid}" class="block">
+  <!-- Small-cut playheads intentionally bleed above the grid; keep the circle round. -->
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 {drawing.grid} {drawing.grid}"
+    overflow="visible"
+    class="block"
+  >
     <mask id={mask}>
       <rect width={drawing.grid} height={drawing.grid} fill="white" />
       {#each drawing.gaps as gap, index (index)}

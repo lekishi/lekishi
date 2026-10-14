@@ -863,7 +863,7 @@
           <div
             class="flex items-center justify-center rounded-plate border border-rule bg-lacquer p-6"
           >
-            <Logo size={48} wordmark="bilingual" label="Lekishi 歴史" class="text-ink" />
+            <Logo size={32} wordmark="bilingual" label="Lekishi 歴史" class="text-ink" />
           </div>
           <div
             class="flex items-center justify-center rounded-plate border border-rule bg-abyss p-6"

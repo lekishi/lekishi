@@ -101,12 +101,21 @@ describe("Logo", () => {
     expect(pair.querySelectorAll("path")).toHaveLength(2)
   })
 
-  it("draws the small cuts at small sizes, in the SVG namespace", () => {
-    render(Logo, { size: 16 })
-    const logo = target.querySelector("[data-logo]")!
-    expect(logo.getAttribute("data-logo")).toBe("tiny")
-    for (const shape of logo.querySelectorAll("circle, ellipse, path"))
-      expect(shape.namespaceURI).toBe("http://www.w3.org/2000/svg")
+  it("draws the small cuts without clipping their playheads", () => {
+    for (const [size, cut] of [
+      [16, "tiny"],
+      [22, "small"],
+      [32, "small"],
+    ] as const) {
+      render(Logo, { size })
+      const logo = target.querySelector("[data-logo]")!
+      expect(logo.getAttribute("data-logo")).toBe(cut)
+      expect(logo.querySelector("svg")?.getAttribute("overflow")).toBe("visible")
+      for (const shape of logo.querySelectorAll("circle, ellipse, path"))
+        expect(shape.namespaceURI).toBe("http://www.w3.org/2000/svg")
+      unmount(mounted!)
+      mounted = undefined
+    }
   })
 
   it("gives each logo on a page its own playhead mask", () => {

@@ -12,6 +12,42 @@
 @source "./routes";
 
 /*
+ * The self-hosted faces (generated into static/fonts, never committed). Each
+ * is a variable font cut to the weights the system uses; `swap` shows text in
+ * the fallback at once rather than waiting on a font.
+ */
+@font-face {
+  font-family: "Cinzel";
+  src: url("/fonts/lekishi-display.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Noto Serif JP";
+  src: url("/fonts/lekishi-serif.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Noto Serif TC";
+  src: url("/fonts/lekishi-serif-tc.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Noto Sans JP";
+  src: url("/fonts/lekishi-sans.woff2") format("woff2");
+  font-weight: 400 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Noto Serif";
+  src: url("/fonts/lekishi-latin-fallback.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+/*
  * The design system's tokens (RFD 5, "Tokens"; the working reference is
  * `docs/design-system.md`). Each one is a Tailwind utility (`bg-lacquer`,
  * `text-ink-dim`, `rounded-plate`, `text-title`) and a custom property the
@@ -19,15 +55,19 @@
  * token in the stylesheet even when no class uses it yet, because the overlays
  * and the `/dev/design` reference read the properties directly.
  *
- * Tailwind's own palette, sizes and radii are still defined because the
- * screens written before the system use them. They are cleared here
- * (`--color-*: initial` and friends) once `design-system.test.ts` lists no
- * legacy file; until then the test stops any new file from using them.
+ * Tailwind's own palette, type sizes and radii are cleared (`--color-*:
+ * initial` and friends): every screen is on the tokens, so `text-sm` or
+ * `bg-slate-900` no longer generates a style at all, and `design-system.test.ts`
+ * still names the offender when one is written.
  *
  * Contrast figures are against `lacquer` and are what keeps `ink-faint` at
  * #8f877a rather than the hero's #7f786b: the hero's value fails AA.
  */
 @theme static {
+  --color-*: initial;
+  --text-*: initial;
+  --radius-*: initial;
+
   /* Surfaces and lines */
   --color-abyss: #0b1114;
   --color-lacquer: #121a20;
@@ -69,21 +109,21 @@
   --color-rel-institution: #c58fd1;
 
   /*
-   * Families. The faces are self-hosted and subset in a later step; until then
-   * each falls back to a system face of close metrics, so nothing is fetched
-   * from a font provider at any stage.
+   * Families. Every face is self-hosted from `/fonts/` and subset at build time
+   * to the characters the site sets (`pnpm sync:fonts`, RFD 5 "Typography"),
+   * so nothing is fetched from a font provider. A face carries only its own
+   * job: Cinzel the Latin display, Noto Serif JP the historical names and
+   * narrative (Noto Serif TC fills the forms JP lacks, Noto Serif the rare
+   * Latin letters), Noto Sans JP the interface without ideographs, which fall
+   * through to the serif so they ship once.
    */
-  --font-display: "Cinzel", "Noto Serif JP", ui-serif, Georgia, serif;
+  --font-display: "Cinzel", "Noto Serif JP", "Noto Serif TC", "Noto Serif", ui-serif, serif;
   --font-serif:
-    "Noto Serif JP", "Noto Serif TC", "Hiragino Mincho ProN", "Yu Mincho", ui-serif, Georgia, serif;
-  /*
-   * `interface` is deliberately opt-in until the legacy screens migrate. Using
-   * Tailwind's `--font-sans` name would also replace Preflight's site-wide
-   * default and change reader screens before that migration.
-   */
+    "Noto Serif JP", "Noto Serif TC", "Noto Serif", "Hiragino Mincho ProN", "Yu Mincho", ui-serif,
+    serif;
   --font-interface:
-    "Noto Sans JP", "Hiragino Sans", "Yu Gothic UI", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji";
+    "Noto Sans JP", "Noto Serif JP", "Noto Serif TC", "Noto Serif", ui-sans-serif, system-ui,
+    sans-serif;
 
   /*
    * The type scale: seven steps and a floor. Nothing below 12 px except the
@@ -134,6 +174,13 @@
     --z-chrome: 20;
     --z-sheet: 30;
     --z-alert: 40;
+  }
+
+  /* Every screen is on the system now, so the interface face is the default. */
+  html {
+    font-family: var(--font-interface);
+    background-color: var(--color-abyss);
+    color: var(--color-ink);
   }
 
   /*

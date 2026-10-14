@@ -65,6 +65,10 @@ export type Place =
       readonly label: string
       /** Every published name form and reading aid, for search. */
       readonly aliases: readonly string[]
+      /** The primary name's published romanization, or null. */
+      readonly romanization: string | null
+      /** The primary name's language as the record tags it (`ja`, `lzh`), or null. */
+      readonly lang: string | null
       readonly placement: PointPlacement
       readonly precision: GeometryPrecision
       readonly position: GeoPoint
@@ -79,6 +83,8 @@ export type Place =
       readonly id: string
       readonly label: string
       readonly aliases: readonly string[]
+      readonly romanization: string | null
+      readonly lang: string | null
       readonly placement: "unknown"
       readonly precision: "unspecified"
       readonly position: null
@@ -183,6 +189,10 @@ export type Actor = {
   readonly label: string
   /** Every published name form and reading aid, for search. */
   readonly aliases: readonly string[]
+  /** The primary name's published romanization, or null. */
+  readonly romanization: string | null
+  /** The primary name's language as the record tags it, or null. */
+  readonly lang: string | null
   /** The contract's actor type vocabulary, e.g. `person` or `state`. */
   readonly types: readonly string[]
 }

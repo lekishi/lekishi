@@ -368,12 +368,15 @@ function projectPlace(entry: PublishedRevision, errors: string[]): Place | null 
   }
 
   const aliases = nameAliases(entry.content)
+  const { romanization, lang } = primaryNameFacts(primary)
 
   if (point !== null) {
     return {
       id: entry.recordId,
       label,
       aliases,
+      romanization,
+      lang,
       placement: point.placement,
       precision: point.precision,
       position: point.position,
@@ -391,6 +394,8 @@ function projectPlace(entry: PublishedRevision, errors: string[]): Place | null 
     id: entry.recordId,
     label,
     aliases,
+    romanization,
+    lang,
     placement: "unknown",
     precision: "unspecified",
     position: null,
@@ -448,7 +453,27 @@ function projectActor(entry: PublishedRevision, errors: string[]): Actor | null 
     .map((value) => stringOrUndefined(value) ?? "")
     .filter((value) => value !== "")
 
-  return { id: entry.recordId, label, aliases: nameAliases(entry.content), types }
+  return {
+    id: entry.recordId,
+    label,
+    aliases: nameAliases(entry.content),
+    ...primaryNameFacts(primary),
+    types,
+  }
+}
+
+/** The primary name's romanization and language tag, as the record publishes them. */
+function primaryNameFacts(primary: JsonObject | undefined): {
+  romanization: string | null
+  lang: string | null
+} {
+  return {
+    romanization:
+      primary === undefined
+        ? null
+        : (stringOrUndefined(objectOf(primary["romanization"])["value"]) ?? null),
+    lang: primary === undefined ? null : (stringOrUndefined(primary["language"]) ?? null),
+  }
 }
 
 /**

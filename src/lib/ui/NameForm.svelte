@@ -14,7 +14,10 @@
    * Every element is phrasing content (spans and a button), so a name can sit
    * inside a paragraph or a heading. A `<details>` toggle would close an
    * enclosing `<p>` when the prerendered HTML is parsed, and hydration would
-   * then meet a different tree from the one Svelte rendered.
+   * then meet a different tree from the one Svelte rendered. For the same
+   * reason, pass `modern` only outside interactive containers: inside a row
+   * that is itself a button or link, the toggle would nest one control in
+   * another. Show the bare name there and the modern name in the card.
    */
   let {
     name,
@@ -63,7 +66,9 @@
         aria-controls="{id}-modern"
         onclick={() => (showModern = !showModern)}
         class={[
-          "cursor-pointer rounded-control underline decoration-dotted underline-offset-2 hover:text-ink-dim",
+          // The caption line is 16 px; the overlay widens the target to 32 px
+          // without moving the layout.
+          "relative cursor-pointer rounded-control underline decoration-dotted underline-offset-2 after:absolute after:-inset-x-1 after:-inset-y-2 hover:text-ink-dim",
           focusRing,
         ]}>{showModern ? "Today" : "Modern name"}</button
       >

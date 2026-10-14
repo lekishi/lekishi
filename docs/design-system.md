@@ -153,7 +153,7 @@ Import from `$lib/ui`:
 | `Tabs`         | A tablist with one panel; the panel is a snippet that receives the selected id.                                     |
 | `Field`        | Search or text input with label, hint and a clear action.                                                           |
 | `Sheet`        | Side panel, or bottom sheet with `peek`, `half`, `full` detents. Non-modal.                                         |
-| `NameForm`     | A historical name, its romanization, and the modern name on request.                                                |
+| `NameForm`     | A historical name, its romanization, and the modern name on request (`modern` never inside a button or link).       |
 | `DateLine`     | A date in both calendars with its precision. Takes formatted parts; formatting is RFD 2's.                          |
 | `CitationLine` | A source, its locator and reuse terms on one line; opens the quote.                                                 |
 | `EmptyState`   | `uncovered` ("not yet covered") or `filtered` ("no results with these filters"). Never mix them.                    |

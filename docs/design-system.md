@@ -128,6 +128,25 @@ decorative and hidden from assistive technology; an icon-only button takes its
 name from `Button`'s `label`. Add a glyph to `ICONS` in `Icon.svelte`; the
 reference shows it automatically.
 
+## Logo
+
+The mark is the Meridian dial (RFD 5, "Mark and wordmark"): a globe leaning
+23.4°, the Earth's axial tilt, inside a time window that ends at a gold
+playhead. Use `Logo` from `$lib/ui`; never an `<img>` of the files, which are
+for places outside the app (the favicon, links, documents).
+
+- **Colour:** ink takes the text colour (`text-ink` on lacquer); the playhead
+  is gold and is the only gold on the logo. Do not recolour it.
+- **Size:** `size` is the mark in CSS pixels. At 32 px and below, and again
+  at 16 px, the component switches to drawings cut for those sizes; never
+  scale a larger cut down. In the header the lockup is `size={22} wordmark`.
+- **Name:** the logo is decorative unless given a `label`; a logo inside a link
+  takes the link's name ("Lekishi home").
+- **Changing it:** edit `src/lib/ui/brand.ts`, then run `pnpm brand` to rewrite
+  `static/images/logo.svg`, `static/images/wordmark.svg`, `static/favicon.svg`,
+  `static/favicon.ico` and `static/apple-touch-icon.png`. `brand.test.ts` fails
+  until the files match.
+
 ## Components
 
 Import from `$lib/ui`:
@@ -158,6 +177,7 @@ Import from `$lib/ui`:
 | `CitationLine` | A source, its locator and reuse terms on one line; opens the quote.                                                 |
 | `EmptyState`   | `uncovered` ("not yet covered") or `filtered` ("no results with these filters"). Never mix them.                    |
 | `Icon`         | The glyph set.                                                                                                      |
+| `Logo`         | The mark, and with `wordmark` the outlined name beside it. Ink from the text colour; the playhead is the only gold. |
 
 Primitives know nothing about history or the atlas. Behaviour (what a click
 selects, what the playhead does) lives in the atlas compositions in

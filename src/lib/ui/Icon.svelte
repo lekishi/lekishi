@@ -33,6 +33,18 @@
     reconstructed: "M2 12h7M12 12h.01M15 12h7",
     playhead: "M12 9v11M8 4h8l-4 5z",
     coda: "M4 12h11M15 7l5 5-5 5",
+    anchor: "M12 6l6 6-6 6-6-6z",
+    conflict: "M5 5l14 14M19 5L5 19M5 9V5h4M19 9V5h-4",
+    trade: "M12 8a4 2 0 1 0 0 .01M8 8v8c0 1 2 2 4 2s4-1 4-2V8M8 12c0 1 2 2 4 2s4-1 4-2",
+    institution: "M4 20h16M5 10h14M12 4l8 6H4zM7 10v8M12 10v8M17 10v8",
+    ship: "M3 15h18l-3 4H6zM12 4v10M12 5l6 8h-6M12 7l-4 6h4",
+    party: "M9 5a2 2 0 1 0 0 .01M8 21l1-6-2-3 1-4h2l3 3 2 1M9 15l3 6M15 5a2 2 0 1 0 0 .01M15 8l2 4-1 4 1 5",
+    home: "M4 11l8-7 8 7M6 10v10h12V10",
+    about: "M12 3a9 9 0 1 1 0 18 9 9 0 0 1 0-18zM12 11v6M12 7.5h.01",
+    globe: "M12 3a9 9 0 1 1 0 18 9 9 0 0 1 0-18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18",
+    follow: "M12 4v3M12 17v3M4 12h3M17 12h3M12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z",
+    "arrow-right": "M5 12h14M13 6l6 6-6 6",
+    calendar: "M4 7h16v13H4zM4 11h16M8 4v4M16 4v4",
   } as const
 
   export type IconName = keyof typeof ICONS

@@ -11,7 +11,10 @@
    * next event the playhead will reach is named beside the dial, so a press of
    * "step forward" is never a surprise. Following is off until the reader asks
    * for it, and any drag or wheel on the globe turns it off again: the button
-   * states which, in words as well as in its pressed state.
+   * states which, in words as well as in its pressed state. Beside it, the
+   * whole-chapter button flies back to the chapter's opening view: on a phone
+   * the locator that does the same on wider screens is not shown, and a reader
+   * zoomed into a harbour needs one press to see the whole chapter again.
    */
   let {
     playing,
@@ -23,6 +26,7 @@
     onTogglePlay,
     onStep,
     onToggleFollow,
+    onWholeChapter,
   }: {
     playing: boolean
     /** The playhead's position through the window, 0 to 1. */
@@ -36,6 +40,7 @@
     onTogglePlay: () => void
     onStep: (direction: 1 | -1) => void
     onToggleFollow: () => void
+    onWholeChapter: () => void
   } = $props()
 
   // The ring's circumference at r = 21 in a 48-unit box.
@@ -142,5 +147,16 @@
   >
     <Icon name="follow" size={14} />
     <span class={compact ? "sr-only" : ""}>{following ? "Following" : "Follow"}</span>
+  </button>
+
+  <button
+    type="button"
+    id="atlas-whole-chapter"
+    class={["shrink-0", stepClass]}
+    aria-label="Zoom out to the whole chapter"
+    title="Whole chapter"
+    onclick={onWholeChapter}
+  >
+    <Icon name="extent" size={16} />
   </button>
 </div>

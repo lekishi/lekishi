@@ -500,6 +500,12 @@ test("fetches the 秋妻屋浦 diorama from the artifact when the camera comes d
   expect(diorama).toEqual({ url: expect.stringMatching(/\/dioramas\/akimeya\.json$/), status: 200 })
   // The legend says what the close-up is once it is in view.
   await expect(page.getByTestId("atlas-legend")).toContainText("秋妻屋浦")
+
+  // One press takes the reader from the harbour back to the whole chapter:
+  // the close-up leaves the legend and 平城宮 is on the open globe again.
+  await page.getByRole("button", { name: "Zoom out to the whole chapter" }).click()
+  await expect(page.getByTestId("atlas-legend")).not.toContainText("秋妻屋浦")
+  await markPoint(page, "lks:place:heijo-palace")
   expect(foreignRequests).toEqual([])
 })
 

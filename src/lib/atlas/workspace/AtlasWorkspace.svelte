@@ -424,6 +424,10 @@
     if (mode === "phone" && kind !== "person" && kind !== "state") detent = "half"
   }
 
+  function wholeChapter() {
+    update(atlas.returnHome(atlasState))
+  }
+
   function toggleFollow() {
     update(
       atlasState.cameraFollow === "following"
@@ -625,6 +629,7 @@
     onTogglePlay={() => update(atlas.setPlaying(atlasState, !atlasState.playing))}
     onStep={(direction) => update(atlas.stepPlayhead(atlasState, chapter, direction))}
     onToggleFollow={toggleFollow}
+    onWholeChapter={wholeChapter}
   />
 {/snippet}
 
@@ -658,7 +663,7 @@
     places={scene.places}
     journeys={scene.journeys}
     camera={view}
-    onHome={() => update(atlas.returnHome(atlasState))}
+    onHome={wholeChapter}
   />
 {/snippet}
 

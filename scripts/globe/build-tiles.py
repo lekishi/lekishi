@@ -37,15 +37,19 @@ Sources (fetched once into .cache/globe/, none shipped):
   z9 over the chapters' extent, and z10 around each place. Bathymetry is kept for the sea's colour; the terrain
   surface is clamped to sea level.
   Natural Earth II (public domain), the level-2 tiles vendored in
-  scripts/globe/natural-earth-ii/: the biome hue at every level, blurred so its
+  scripts/globe/natural-earth-ii/: the biome hue outside the land cover, blurred so its
   baked relief shading does not double the globe's own lighting.
+  ESA WorldCover 2021 v200 (CC BY 4.0; attribution required), its 300 m
+  overview over the 3-degree squares around the chapters and its 75 m overview
+  around each place, read block by block from ESA's public bucket: the land's
+  colour there, at every level.
 
 Usage: python3 -I scripts/globe/build-tiles.py
 Needs only numpy and Pillow; `scripts/sync-globe-tiles.mjs` runs it (with a
 private virtual environment if the system Python lacks them) when the builder
 or its inputs change.
 """
-import io, json, math, multiprocessing, os, shutil, struct, time, urllib.request
+import io, json, math, multiprocessing, os, shutil, struct, time, urllib.error, urllib.request, zlib
 from concurrent.futures import ThreadPoolExecutor
 import numpy as np
 from PIL import Image, ImageFilter
@@ -143,10 +147,16 @@ ATTRIBUTION = """Globe elevation: Terrain Tiles on AWS Open Data (Mapzen and con
 * United States 3DEP (formerly NED) and global GMTED2010 and SRTM terrain data
   courtesy of the U.S. Geological Survey.
 
-Globe imagery: painted for Lekishi from that elevation and Natural Earth II
-(public domain).
+Globe land cover: ESA WorldCover 2021 v200, © ESA WorldCover project 2021 /
+Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover
+consortium. Licensed under CC BY 4.0 (creativecommons.org/licenses/by/4.0/).
+Modified: classes grouped and painted as colours, built-up land painted as
+cropland, resampled to the globe's tiles.
+
+Globe imagery: painted for Lekishi from that elevation, that land cover and
+Natural Earth II (public domain).
 """
-SHORT_ATTRIBUTION = "Elevation: Terrain Tiles on AWS Open Data (Mapzen and contributors). Imagery painted from it and Natural Earth II."
+SHORT_ATTRIBUTION = "Elevation: Terrain Tiles on AWS Open Data (Mapzen and contributors). Land cover: ESA WorldCover 2021 (CC BY 4.0). Imagery painted from them and Natural Earth II."
 
 def tile_bounds(z, x, y):
     s = 180.0 / (1 << z)
@@ -265,6 +275,200 @@ def elevation(lon, lat, deg_per_sample, level):
             break
     return out
 
+# ---- land cover: ESA WorldCover 2021 ----
+# WorldCover is a 10 m land-cover map in plain latitude and longitude (the tiles'
+# own grid), published as one cloud-optimised GeoTIFF per 3-degree square with
+# overviews at 2 to 64 times its pixel (about 19 to 590 m). The builder reads
+# only the overview blocks it needs, with HTTP range requests, and caches them
+# (about 26 MB for the chapters); no GDAL needed.
+# It is today's land cover: built-up land is painted as the cropland that
+# surrounds it, since a modern city says nothing about the eighth century.
+WORLDCOVER = "https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_{name}_Map.tif"
+COVER_EXTENT = (105, 21, 141, 42)   # the 3-degree squares around the chapters' extent
+COVER_FADE = 1.0                    # degrees over which it gives way to Natural Earth at its edge
+# Classes grouped by how they are painted: (WorldCover codes, colour).
+COVER_GROUPS = [
+    ((10,), "#4e7d37"),       # tree cover
+    ((95,), "#3f7046"),       # mangroves
+    ((20,), "#80994d"),       # shrubland
+    ((30,), "#93b255"),       # grassland
+    ((40, 50), "#adb35f"),    # cropland, and built-up land painted as cropland
+    ((90,), "#6f9a68"),       # herbaceous wetland
+    ((60, 100), "#bba982"),   # bare or sparse vegetation, moss and lichen
+    ((70,), "#eef0f0"),       # snow and ice
+    ((80,), "#4aa3b8"),       # permanent water
+]
+COVER_WATER = len(COVER_GROUPS) - 1
+COVER_GREEN = [0, 1, 2, 3, 4, 5]    # the vegetated groups, which take the relief's forest and field shading
+
+def cover_file(name):
+    """The header of one WorldCover square and a reader for its overview blocks,
+    or None where ESA publishes no square (open sea)."""
+    d = os.path.join(CACHE, "worldcover", name); os.makedirs(d, exist_ok=True)
+    url = WORLDCOVER.format(name=name)
+    def get(a, n, path):
+        if os.path.exists(path):
+            with open(path, "rb") as f: return f.read()
+        for attempt in range(4):
+            try:
+                data = urllib.request.urlopen(urllib.request.Request(url, headers={"Range": f"bytes={a}-{a + n - 1}"}), timeout=60).read()
+                break
+            except urllib.error.HTTPError as err:
+                if err.code in (403, 404): return None
+                if attempt == 3: raise
+                time.sleep(2 ** attempt)
+            except Exception:
+                if attempt == 3: raise
+                time.sleep(2 ** attempt)
+        with open(path, "wb") as f: f.write(data)
+        return data
+    absent = os.path.join(d, "absent")
+    if os.path.exists(absent): return None
+    head = get(0, 1 << 17, os.path.join(d, "head"))
+    if head is None:
+        open(absent, "w").close(); return None
+    # A classic little-endian TIFF: each image file directory is one overview,
+    # 1024-pixel tiles of Deflate-compressed palette indices (the class codes).
+    levels, off = [], struct.unpack_from("<I", head, 4)[0]
+    while off:
+        n = struct.unpack_from("<H", head, off)[0]; tags = {}
+        for k in range(n):
+            tag, typ, cnt = struct.unpack_from("<HHI", head, off + 2 + 12 * k)
+            size = {3: 2, 4: 4}.get(typ, 1) * cnt; at = off + 2 + 12 * k + 8
+            at = at if size <= 4 else struct.unpack_from("<I", head, at)[0]
+            if typ in (3, 4): tags[tag] = struct.unpack_from("<" + ("H" if typ == 3 else "I") * cnt, head, at)
+        assert tags[259] == (8,) and tags[322] == (1024,), f"{name}: unexpected TIFF layout"
+        levels.append((tags[256][0], tags[324], tags[325]))
+        off = struct.unpack_from("<I", head, off + 2 + 12 * n)[0]
+    def block(size, bx, by):
+        lvl = next(i for i, l in enumerate(levels) if l[0] == size)
+        _, offs, counts = levels[lvl]; k = by * ((size + 1023) // 1024) + bx
+        data = get(offs[k], counts[k], os.path.join(d, f"{size}-{k}.zz"))
+        return np.frombuffer(zlib.decompress(data), np.uint8).reshape(1024, 1024)
+    return block
+
+class Cover:
+    """WorldCover classes over a rectangle at one overview (`size` pixels per
+    3-degree square), as one mosaic, row 0 north."""
+    def __init__(self, size, rect, min_level):
+        w, s, e, n = rect
+        lon0, lat0 = int(w // 3) * 3, int(s // 3) * 3
+        lon1, lat1 = int(math.ceil(e / 3)) * 3, int(math.ceil(n / 3)) * 3
+        self.deg_per_px, self.min_level = 3.0 / size, min_level
+        # Whole pixels around the rectangle, so a tile inside it reads no padding.
+        px0, px1 = int((w - lon0) / self.deg_per_px), int(math.ceil((e - lon0) / self.deg_per_px))
+        py0, py1 = int((lat1 - n) / self.deg_per_px), int(math.ceil((lat1 - s) / self.deg_per_px))
+        self.west, self.north = lon0 + px0 * self.deg_per_px, lat1 - py0 * self.deg_per_px
+        self.c = np.zeros((py1 - py0, px1 - px0), np.uint8)       # 0: no data
+        jobs = []
+        for sq_lat in range(lat0, lat1, 3):
+            for sq_lon in range(lon0, lon1, 3):
+                name = f"{'N' if sq_lat >= 0 else 'S'}{abs(sq_lat):02d}{'E' if sq_lon >= 0 else 'W'}{abs(sq_lon):03d}"
+                gx, gy = (sq_lon - lon0) * size // 3, (lat1 - 3 - sq_lat) * size // 3   # the square's corner in the grid
+                for by in range((size + 1023) // 1024):
+                    for bx in range((size + 1023) // 1024):
+                        x0, y0 = gx + bx * 1024, gy + by * 1024
+                        if x0 + 1024 > px0 and x0 < px1 and y0 + 1024 > py0 and y0 < py1:
+                            jobs.append((name, size, bx, by, x0, y0))
+        readers = {}
+        def place(job):
+            name, size, bx, by, x0, y0 = job
+            if name not in readers: readers[name] = cover_file(name)
+            if readers[name] is None: return
+            b = readers[name](size, bx, by)
+            w_ = min(1024, size - bx * 1024); h_ = min(1024, size - by * 1024)
+            b = b[:h_, :w_]
+            ax0, ay0 = max(x0, px0), max(y0, py0); ax1, ay1 = min(x0 + w_, px1), min(y0 + h_, py1)
+            if ax0 < ax1 and ay0 < ay1:
+                self.c[ay0 - py0:ay1 - py0, ax0 - px0:ax1 - px0] = b[ay0 - y0:ay1 - y0, ax0 - x0:ax1 - x0]
+        for name in sorted({j[0] for j in jobs}): readers[name] = cover_file(name)
+        with ThreadPoolExecutor(8) as ex: list(ex.map(place, jobs))
+        self.groups = None
+        print(f"  land cover {3 / size * 111320:.0f} m: {len({j[0] for j in jobs})} squares, mosaic {self.c.shape[1]}x{self.c.shape[0]}", flush=True)
+
+    def covers(self, w, s, e, n):
+        h, wd = self.c.shape
+        return w >= self.west and n <= self.north and e <= self.west + wd * self.deg_per_px and s >= self.north - h * self.deg_per_px
+
+    def pyramid(self):
+        """Group fractions at 2, 4, 8... times the pixel size, each the area mean
+        of the one below, so a coarse tile shows the same mean colour as the
+        finer tiles inside it and no level seams appear."""
+        if self.groups is None:
+            h, w = self.c.shape
+            # One group at a time, so only one full-size mask exists at once.
+            cur = [np.asarray(Image.fromarray(np.isin(self.c, codes).astype(np.uint8) * 255).resize((w // 2, h // 2), Image.BOX))
+                   for codes, _ in COVER_GROUPS]
+            levels = [None, cur]   # level 0 is the class mosaic itself
+            while min(cur[0].shape) > 64:
+                h, w = cur[0].shape
+                cur = [np.asarray(Image.fromarray(g).resize((w // 2, h // 2), Image.BOX)) for g in cur]
+                levels.append(cur)
+            self.groups = levels
+        return self.groups
+
+    def mean_land(self, lon, lat):
+        """The mean colour of the land classes over about 0.34 degrees (the scale
+        of Natural Earth's blurred hue), bilinear, with how much of it is known
+        land. Painting land cover relative to this mean keeps each region's
+        Natural Earth colour on average, so the globe shows no rectangle where the
+        land cover starts and coarse levels look as before."""
+        if not hasattr(self, "_mean"):
+            pyr = self.pyramid(); k = min(7, len(pyr) - 1)
+            g = np.stack(pyr[k], -1).astype(np.float32) / 255.0
+            land = np.delete(g, COVER_WATER, -1); rgb = np.delete(COVER_RGB, COVER_WATER, 0)
+            amount = land.sum(-1)
+            self._mean = ((land @ rgb) / np.maximum(amount, 1e-6)[..., None], amount, self.deg_per_px * self.c.shape[1] / g.shape[1])
+        mean, amount, scale = self._mean
+        h, w = amount.shape
+        px = np.clip((lon - self.west) / scale - 0.5, 0, w - 1.001); py = np.clip((self.north - lat) / scale - 0.5, 0, h - 1.001)
+        x0, y0 = px.astype(int), py.astype(int); fx, fy = px - x0, py - y0
+        def bil(a):
+            f = (lambda v: v[..., None]) if a.ndim == 3 else (lambda v: v)
+            return (a[y0, x0] * f(1 - fx) + a[y0, x0 + 1] * f(fx)) * f(1 - fy) + (a[y0 + 1, x0] * f(1 - fx) + a[y0 + 1, x0 + 1] * f(fx)) * f(fy)
+        return bil(mean), bil(amount)
+
+    def fractions(self, w, s, e, n, size):
+        """The area fraction of each group in every pixel of a size x size tile
+        over (w, s, e, n); outside the mosaic and where there is no data the
+        fractions are zero, so their sum is how much of the pixel is known."""
+        k = 0
+        if (e - w) / size >= self.deg_per_px * 2:
+            k = min(int(math.log2((e - w) / size / self.deg_per_px)), len(self.pyramid()) - 1)
+        if k == 0:
+            src = self.c; scale = self.deg_per_px
+        else:
+            src = self.pyramid()[k]; h, wd = src[0].shape
+            scale = self.deg_per_px * self.c.shape[1] / wd   # its pixels are the mosaic's, 2^k at a time
+        fx0, fx1 = (w - self.west) / scale, (e - self.west) / scale
+        fy0, fy1 = (self.north - n) / scale, (self.north - s) / scale
+        ix0, iy0, ix1, iy1 = int(math.floor(fx0)), int(math.floor(fy0)), int(math.ceil(fx1)), int(math.ceil(fy1))
+        H, W = (src.shape if k == 0 else src[0].shape)
+        cx0, cy0, cx1, cy1 = max(ix0, 0), max(iy0, 0), min(ix1, W), min(iy1, H)
+        out = np.zeros((size, size, len(COVER_GROUPS)), np.float32)
+        if cx0 >= cx1 or cy0 >= cy1: return out
+        box = (fx0 - ix0, fy0 - iy0, fx1 - ix0, fy1 - iy0)
+        for g, (codes, _) in enumerate(COVER_GROUPS):
+            win = np.zeros((iy1 - iy0, ix1 - ix0), np.float32)
+            win[cy0 - iy0:cy1 - iy0, cx0 - ix0:cx1 - ix0] = np.isin(src[cy0:cy1, cx0:cx1], codes) if k == 0 else src[g][cy0:cy1, cx0:cx1] / 255.0
+            out[..., g] = np.asarray(Image.fromarray(win, "F").resize((size, size), Image.BOX, box=box))
+        return out
+
+# Land cover (pixels per 3-degree square, rectangle, first level): about 300 m
+# over the chapters' squares for every level, and about 75 m around the places
+# for levels 9 and 10, the same boxes the z10 elevation is fetched for.
+COVER_SOURCES = [(1125, COVER_EXTENT, 0)] + [(4500, b, min(FINE_RADIUS)) for b in merged(snapped(9, b, 0.05) for b in boxes(FINE_RADIUS[9]))]
+
+COVERS = []
+def land_cover(z, w, s, e, n, size):
+    """Group fractions for one tile, from the finest cover that serves its level
+    and holds the whole tile, else from the coarsest (which may hold part)."""
+    step = (e - w) / size
+    for c in sorted(COVERS, key=lambda c: c.deg_per_px):
+        if c.min_level <= z and c.deg_per_px <= step * 1.6 and c.covers(w, s, e, n):
+            return c.fractions(w, s, e, n, size)
+    return max(COVERS, key=lambda c: c.deg_per_px).fractions(w, s, e, n, size)
+
 # ---- heights: the tile grid plus a one-sample border ----
 def heights_with_border(z, x, y):
     w, s, e, n = tile_bounds(z, x, y)
@@ -319,6 +523,7 @@ def ne2_at(lon, lat):
     return (a[y0, x0] * (1 - fx) + a[y0, x0 + 1] * fx) * (1 - fy) + (a[y0 + 1, x0] * (1 - fx) + a[y0 + 1, x0 + 1] * fx) * fy
 
 def hexc(h): return np.array([int(h[i:i + 2], 16) for i in (1, 3, 5)], np.float32)
+COVER_RGB = np.array([hexc(c) for _, c in COVER_GROUPS], np.float32)
 def hash2(x, y):
     s = np.sin(x * 127.1 + y * 311.7) * 43758.5453
     return s - np.floor(s)
@@ -341,7 +546,7 @@ def gaussian(a, sigma):
     return a
 
 DETAIL_DEG = 0.015   # hills and valleys narrower than this (about 1.6 km) mark the ground
-def inland_detail(land, z, w, n, step, LON, LAT, green, fade):
+def inland_detail(land, z, w, n, step, LON, LAT, green, fade, invented):
     """The fine levels' inland ground. Its colour comes from Natural Earth's
     20 km pixels, so without this the land is smooth blobs however close the
     camera comes. Ground above its surroundings darkens towards forest and
@@ -361,7 +566,9 @@ def inland_detail(land, z, w, n, step, LON, LAT, green, fade):
     shade = above[..., None] * np.array([-0.30, -0.17, -0.30]) * fade(DETAIL_DEG)
     mottle = (noise(LON + 11.3, LAT - 4.1, 150.0) - 0.5) * 0.16 * fade(1 / 150.0) + \
         (noise(LON - 2.9, LAT + 8.6, 420.0) - 0.5) * 0.12 * fade(1 / 420.0)
-    return land * (1 + (shade + mottle[..., None]) * green)
+    # The mottle is invented texture: it stands in for land cover only where
+    # there is none (`invented` is 1 there and 0 where WorldCover paints).
+    return land * (1 + (shade + mottle[..., None] * invented) * green)
 
 SPECK_DEG = 0.0015  # low ground narrower than this (about 150 m) is not drawn as water
 BEACH_DEG = 0.003   # how far (about 300 m) sand reaches inland from water
@@ -411,18 +618,47 @@ def imagery_jpeg(z, x, y):
     lum = base.mean(-1, keepdims=True)
     styl = np.clip((base - lum) * 1.25 + lum * 1.04, 0, 255)
     land = styl * (1 - 0.8 * green) + hexc("#7faf49") * 0.8 * green
+    # Around the chapters, WorldCover paints the land: each pixel is the area mean
+    # of its classes' colours, so every level shows the same colour for the same
+    # ground. `real` is how much of a pixel it paints (none where it has no data,
+    # fading out at its edge); the rest keeps Natural Earth's hue and the noise
+    # that stands in for land cover where there is none.
     # Detail with a pixel-size fade: features of a given size fade to their mean
     # once a pixel is wider than half the feature.
     def fade(feature_deg): return float(np.clip((feature_deg / step - 2.0) / 2.0, 0, 1))
+    # Faded in from level 5, as other detail is: the whole-Earth levels keep their
+    # look, and the land cover's own edge never shows from afar.
+    inside = w < COVER_EXTENT[2] and e > COVER_EXTENT[0] and s < COVER_EXTENT[3] and n > COVER_EXTENT[1]
+    if inside and fade(0.066) > 0:
+        cover = land_cover(z, w, s, e, n, IMG)
+        known = cover.sum(-1)
+        edge = np.minimum.reduce([LON - COVER_EXTENT[0], COVER_EXTENT[2] - LON, LAT - COVER_EXTENT[1], COVER_EXTENT[3] - LAT])
+        real = (np.clip(known, 0, 1) * np.clip(edge / COVER_FADE, 0, 1) * fade(0.066))[..., None]
+    else:  # nothing to paint: every term below reduces to the Natural Earth painting
+        cover = np.zeros((IMG, IMG, len(COVER_GROUPS)), np.float32); known = cover.sum(-1)
+        real = np.zeros((IMG, IMG, 1), np.float32)
+    share = cover / np.maximum(known, 1e-6)[..., None]
+    # The land classes' colour relative to their regional mean, applied to
+    # Natural Earth's hue: forest darker and greener, fields lighter and
+    # yellower than the region around them, the region itself unchanged.
+    dry_share = np.delete(share, COVER_WATER, -1); amount = dry_share.sum(-1, keepdims=True)
+    here = (dry_share @ np.delete(COVER_RGB, COVER_WATER, 0)) / np.maximum(amount, 1e-6)
+    mean, mean_amount = COVERS[0].mean_land(LON, LAT)
+    # Clipped so a lone field among forest does not glare.
+    tinted = land * np.clip(here / np.maximum(mean, 1.0), 0.65, 1.3)
+    real_land = real * (amount > 0.05) * (mean_amount[..., None] > 0.05)
+    land = land * (1 - real_land) + np.clip(tinted, 0, 255) * real_land
+    green = green * (1 - real) + share[..., COVER_GREEN].sum(-1, keepdims=True) * real
+    wet = (share[..., COVER_WATER] > 0.5) & (real[..., 0] > 0.5)
     f_field, f_tone = fade(1 / 55.0), fade(1 / 40.0)
     fn = noise(LON + 3.1, LAT - 7.7, 55.0)
     field = np.clip((fn - 0.52) / 0.12, 0, 1)
-    field = (0.18 + (field - 0.18) * f_field)[..., None] * green * (Ec[..., None] < 160) * (slope[..., None] < 0.12)
+    field = (0.18 + (field - 0.18) * f_field)[..., None] * green * (Ec[..., None] < 160) * (slope[..., None] < 0.12) * (1 - real)
     land = land * (1 - 0.5 * field) + hexc("#b7b65a") * 0.5 * field
     nz = (0.5 + (noise(LON, LAT, 40.0) - 0.5) * f_tone)[..., None]
     land = land * (1.12 - 0.3 * nz)
     if z >= FINE:
-        land = inland_detail(land, z, w, n, step, LON, LAT, green, fade)
+        land = inland_detail(land, z, w, n, step, LON, LAT, green, fade, 1 - real)
     rock = np.clip((slope[..., None] - 0.18) / 0.3, 0, 1) * 0.6
     land = land * (1 - rock) + hexc("#9b8a6c") * rock
     high = np.clip((Ec[..., None] - 900) / 1800, 0, 1) * 0.6
@@ -437,6 +673,7 @@ def imagery_jpeg(z, x, y):
     t = np.clip(depth / 1800.0, 0, 1) ** 0.55
     sea = hexc("#4aa3b8") * (1 - t) + hexc("#163f5c") * t
     ice = ((base.mean(-1) > 185) & (base.max(-1) - base.min(-1) < 45))[..., None]  # Natural Earth ice and snow
+    dry = dry & ~wet   # rivers and lakes the elevation does not show
     col = np.where(dry[..., None], np.where(ice, base, land), np.where(ice, base, sea))
     out = io.BytesIO()
     Image.fromarray(np.clip(col, 0, 255).astype(np.uint8)).save(out, "JPEG", quality=86, optimize=True)
@@ -467,6 +704,9 @@ def main():
     t0 = time.time()
     print("globe tiles: fetching elevation sources", flush=True)
     for z, rect, min_level in SOURCES: SRC.append(Source(z, rect, min_level))
+    for size, rect, min_level in COVER_SOURCES: COVERS.append(Cover(size, rect, min_level))
+    for c in COVERS: c.pyramid()   # before forking, so the workers share it
+    COVERS[0].mean_land(np.zeros(1), np.zeros(1))
     # Start from an empty output so a tile the coverage no longer includes
     # cannot linger in the artifact.
     if os.path.isdir(OUT):

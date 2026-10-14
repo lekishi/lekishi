@@ -263,12 +263,24 @@ describe("Sheet", () => {
     expect(onclose).toHaveBeenCalledTimes(2)
   })
 
-  it("stays open when a child handles Escape", () => {
+  it("stays open when Escape clears a search field inside it", () => {
     const onclose = vi.fn()
-    render(Sheet, { title: "Explore", onclose, children: text("<input type=search>") })
-    const event = new KeyboardEvent("keydown", { key: "Escape", bubbles: true, cancelable: true })
-    event.preventDefault()
-    target.querySelector("input")!.dispatchEvent(event)
+    const oninput = vi.fn()
+    // The real Field, mounted as the sheet's content, so the test follows its
+    // Escape handling rather than a hand-made cancelled event.
+    const field = createRawSnippet(() => ({
+      render: () => "<div></div>",
+      setup: (element) => {
+        const child = mount(Field, {
+          target: element,
+          props: { label: "Search", value: "han", oninput },
+        })
+        return () => unmount(child)
+      },
+    }))
+    render(Sheet, { title: "Explore", onclose, children: field })
+    key(target.querySelector("input")!, "Escape")
+    expect(oninput).toHaveBeenLastCalledWith("")
     expect(onclose).not.toHaveBeenCalled()
   })
 })

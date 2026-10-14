@@ -406,6 +406,25 @@ if (requireFile(attributionFile)) {
   }
 }
 
+// --- the diorama -----------------------------------------------------------------
+
+// The globe fetches the diorama's symbols from /dioramas/ the first time the
+// camera is low over 秋妻屋浦 (src/lib/atlas/overlays.ts names the file). It is
+// a static file, not a bundle import, so only this check notices it missing.
+const dioramaFile = path.join(buildDirectory, "dioramas", "akimeya.json")
+
+if (requireFile(dioramaFile)) {
+  try {
+    const diorama = JSON.parse(read(dioramaFile))
+
+    if (!Array.isArray(diorama.trees?.items) || !Array.isArray(diorama.houses?.items)) {
+      fail("dioramas/akimeya.json carries no trees or houses")
+    }
+  } catch {
+    fail("dioramas/akimeya.json is not JSON")
+  }
+}
+
 if (files.length > MAX_FILES) {
   fail(`the artifact has ${files.length} files; Cloudflare Pages accepts at most ${MAX_FILES}`)
 }

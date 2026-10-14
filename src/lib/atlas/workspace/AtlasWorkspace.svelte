@@ -288,6 +288,7 @@
       const what = { event: "event", place: "place", step: "story step" }[result.notFound.kind]
       return {
         tone: "missing" as const,
+        playable: false,
         title: `This chapter has no ${what} “${result.notFound.value}”.`,
         detail: "The link may be older than the chapter's records. It opened at the start.",
       }
@@ -302,6 +303,7 @@
     if (opened.kind === "event") {
       return {
         tone: "arrived" as const,
+        playable: true,
         title: atlas.findEvent(chapter, opened.id)?.title ?? opened.id,
         detail: widened,
       }
@@ -310,6 +312,7 @@
     if (opened.kind === "place") {
       return {
         tone: "arrived" as const,
+        playable: false,
         title: atlas.findPlace(chapter, opened.id)?.label ?? opened.id,
         detail: widened,
       }
@@ -317,6 +320,7 @@
 
     return {
       tone: "arrived" as const,
+      playable: false,
       title: `Story ${opened.index + 1} of ${chapter.story.length}: ${chapter.story[opened.index]?.caption ?? ""}`,
       detail: widened,
     }
@@ -641,6 +645,10 @@
       title={arrival.title}
       detail={arrival.detail}
       tone={arrival.tone}
+      onPlay={arrival.playable ? () => update(atlas.setPlaying(atlasState, true)) : undefined}
+      onRestart={arrival.tone === "arrived" && chapter.story.length > 0
+        ? () => jumpToStep(0)
+        : undefined}
       onDismiss={() => (arrival = null)}
     />
   {/if}

@@ -8,18 +8,26 @@
    * the chapter does not have says that it opened the chapter at its start
    * instead, rather than silently showing something else.
    *
-   * The workspace clears it on the reader's next action, so it never stays to
+   * A linked event offers to play from its time, or to start the story from
+   * its beginning instead (RFD 5's arrival plate). The workspace clears it on
+   * the reader's next action, so it never stays to
    * describe a view the reader has since changed.
    */
   let {
     title,
     detail,
     tone,
+    onPlay,
+    onRestart,
     onDismiss,
   }: {
     title: string
     detail: string | null
     tone: "arrived" | "missing"
+    /** Plays from the linked event's time; offered for a linked event. */
+    onPlay?: () => void
+    /** Starts the chapter's story from its first step instead. */
+    onRestart?: () => void
     onDismiss: () => void
   } = $props()
 </script>
@@ -41,6 +49,16 @@
     <p class="font-serif text-body-sm text-ink">{title}</p>
     {#if detail}
       <p class="text-caption text-ink-dim">{detail}</p>
+    {/if}
+    {#if onPlay || onRestart}
+      <div class="mt-1.5 flex flex-wrap gap-1.5">
+        {#if onPlay}
+          <Button variant="primary" size="sm" icon="play" onclick={onPlay}>Play from here</Button>
+        {/if}
+        {#if onRestart}
+          <Button variant="ghost" size="sm" onclick={onRestart}>From the beginning</Button>
+        {/if}
+      </div>
     {/if}
   </div>
   <Button variant="icon" icon="close" size="sm" label="Dismiss" onclick={onDismiss} />

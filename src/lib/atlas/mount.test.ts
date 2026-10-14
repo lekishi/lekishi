@@ -211,6 +211,18 @@ describe("mountAtlas", () => {
     expect(root.querySelector("#atlas-selection h2")?.textContent).toContain(event?.title)
     expect(root.querySelector('[data-testid="atlas-arrival"]')?.textContent).toContain(event?.title)
 
+    // "Play from here" plays from the linked event's time, and the plate
+    // retires once the reader has acted.
+    const play = [
+      ...root.querySelectorAll<HTMLButtonElement>('[data-testid="atlas-arrival"] button'),
+    ].find((button) => button.textContent?.includes("Play from here"))
+
+    play?.click()
+    await flush()
+    expect(play).toBeDefined()
+    expect(root.querySelector("#atlas-play-toggle")?.getAttribute("aria-pressed")).toBe("true")
+    expect(root.querySelector('[data-testid="atlas-arrival"]')).toBeNull()
+
     handle.dispose()
   })
 

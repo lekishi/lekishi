@@ -309,10 +309,16 @@ A database::
   reader queries anything live, because every join happens once, when the
   compiler assembles a chapter. Files keep every change a reviewable diff with
   history and credit, and keep an approval pinned to exact content. If authors
-  need ad-hoc queries, the build can load the tree into SQLite, which needs no
-  infrastructure. A database server stays reserved by RFD 2's stage 4, for many
-  concurrent editors or for reader-facing data the build cannot precompute, with
-  Git kept as the publication record.
+  need ad-hoc queries, the compiler can also write the tree into a local,
+  ignored SQLite file on the author's machine and in CI. It is never deployed,
+  and it needs no infrastructure. If a cross-chapter era view ever outgrows
+  loading per-chapter bundles, SQLite compiled to WebAssembly can read a
+  database shipped as a static file with HTTP range requests, which keeps the
+  site static; that would be measured and decided then. A hosted database (for
+  example Cloudflare D1, which needs a Worker) is a runtime and a provider, and
+  stays reserved by RFD 2's stage 4 for many concurrent editors or for
+  reader-facing data the build cannot precompute, with Git kept as the
+  publication record.
 
 == Open questions
 

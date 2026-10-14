@@ -10,6 +10,7 @@
     Field,
     Icon,
     ICONS,
+    Logo,
     NameForm,
     Orb,
     Plate,
@@ -252,6 +253,7 @@
     ["shape", "Shape and depth"],
     ["motion", "Motion and focus"],
     ["components", "Components"],
+    ["logo", "Logo"],
     ["icons", "Icons"],
   ] as const
 
@@ -840,6 +842,35 @@
             </div>
           </div>
         </Plate>
+      </section>
+
+      <!-- Logo -->
+      <section aria-labelledby="logo" class="flex flex-col gap-6">
+        {@render sectionHeading(
+          "logo",
+          "Logo",
+          "The Meridian dial: a globe leaning 23.4°, inside a time window that ends at the gold playhead. Below 33 px and at 16 px it switches to drawings cut for those sizes.",
+        )}
+        <div class="flex flex-wrap items-end gap-8 rounded-plate border border-rule bg-lacquer p-6">
+          {#each [96, 48, 32, 24, 16] as size (size)}
+            <figure class="flex flex-col items-center gap-2">
+              <Logo {size} class="text-ink" />
+              <figcaption class="text-caption text-ink-faint tabular-nums">{size}</figcaption>
+            </figure>
+          {/each}
+        </div>
+        <div class="grid gap-3 sm:grid-cols-2">
+          <div
+            class="flex items-center justify-center rounded-plate border border-rule bg-lacquer p-6"
+          >
+            <Logo size={48} wordmark label="Lekishi" class="text-ink" />
+          </div>
+          <div
+            class="flex items-center justify-center rounded-plate border border-rule bg-abyss p-6"
+          >
+            <Logo size={22} wordmark label="Lekishi" class="text-ink" />
+          </div>
+        </div>
       </section>
 
       <!-- Icons -->

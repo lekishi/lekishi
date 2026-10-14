@@ -166,9 +166,20 @@
     void detent
     measure()
     if (typeof ResizeObserver === "undefined") return
-    const observer = new ResizeObserver(() => measure())
+    // Measured on the next frame, not inside the observer's callback: a
+    // measurement can switch the layout or move a region, and a size change
+    // made while the observer delivers is reported by WebKit as a
+    // "ResizeObserver loop" error on every phone load.
+    let frame = 0
+    const observer = new ResizeObserver(() => {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(measure)
+    })
     for (const element of regions) observer.observe(element)
-    return () => observer.disconnect()
+    return () => {
+      cancelAnimationFrame(frame)
+      observer.disconnect()
+    }
   })
 
   // ---- Derived view ------------------------------------------------------

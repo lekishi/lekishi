@@ -791,7 +791,17 @@
       {#if detent === "peek"}
         <div class="mt-auto px-2 pb-2">{@render legend(true)}</div>
       {/if}
-      <div bind:this={bottomRegion} class={["pointer-events-auto", detent !== "peek" && "mt-auto"]}>
+      <!--
+        The sheet's detents are heights in viewport units, but it sits under
+        the date bar, the orbs and any arrival plate, whose height the detent
+        cannot know. The region may shrink (min-h-0) and the sheet shrinks with
+        it as a flex item, so the full detent ends at the bottom of the screen
+        instead of running past it with its last rows and its footer cut off.
+      -->
+      <div
+        bind:this={bottomRegion}
+        class={["pointer-events-auto flex min-h-0 flex-col", detent !== "peek" && "mt-auto"]}
+      >
         <Sheet
           title={selectedEvent?.title ?? selectedPlace?.label ?? storyStep?.caption ?? name}
           placement="bottom"

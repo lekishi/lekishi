@@ -79,11 +79,26 @@ describe("Logo", () => {
     expect(target.querySelector("[data-logo]")?.getAttribute("aria-hidden")).toBe("true")
     unmount(mounted!)
     mounted = undefined
-    render(Logo, { label: "Lekishi", wordmark: true })
+    render(Logo, { label: "Lekishi", wordmark: "bilingual" })
     const logo = target.querySelector("[data-logo]")!
     expect(logo.getAttribute("role")).toBe("img")
     expect(logo.getAttribute("aria-label")).toBe("Lekishi")
     expect(logo.querySelectorAll("svg")).toHaveLength(2)
+  })
+
+  it("keeps the caps the same size with and without 歴史", () => {
+    render(Logo, { size: 22, wordmark: "caps" })
+    const caps = target.querySelector("[data-wordmark]")!
+    const capsScale =
+      Number(caps.getAttribute("height")) / Number(caps.getAttribute("viewBox")!.split(" ")[3])
+    unmount(mounted!)
+    mounted = undefined
+    render(Logo, { size: 22, wordmark: "bilingual" })
+    const pair = target.querySelector("[data-wordmark]")!
+    const pairScale =
+      Number(pair.getAttribute("height")) / Number(pair.getAttribute("viewBox")!.split(" ")[3])
+    expect(pairScale).toBeCloseTo(capsScale, 2)
+    expect(pair.querySelectorAll("path")).toHaveLength(2)
   })
 
   it("draws the small cuts at small sizes, in the SVG namespace", () => {

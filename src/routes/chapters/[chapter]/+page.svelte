@@ -67,7 +67,9 @@
         class={["flex items-center rounded-control text-ink", focusRing]}
         aria-label="Lekishi home"
       >
-        <Logo size={22} wordmark />
+        <!-- The caps with 歴史 do not fit beside the navigation on phones. -->
+        <span class="flex sm:hidden"><Logo size={22} wordmark="caps" /></span>
+        <span class="hidden sm:flex"><Logo size={22} wordmark="bilingual" /></span>
       </a>
       <span
         id="chapter-decision"

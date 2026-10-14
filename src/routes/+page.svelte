@@ -52,7 +52,9 @@
       class={["flex items-center rounded-control text-ink", focusRing]}
       aria-label="Lekishi home"
     >
-      <Logo size={22} wordmark />
+      <!-- The caps with 歴史 do not fit beside the navigation on phones. -->
+      <span class="flex sm:hidden"><Logo size={22} wordmark="caps" /></span>
+      <span class="hidden sm:flex"><Logo size={22} wordmark="bilingual" /></span>
     </a>
     <nav class="flex items-center gap-4 text-xs" aria-label="Primary">
       <a href="/" class="text-slate-100 transition hover:text-white" aria-current="page">Overview</a

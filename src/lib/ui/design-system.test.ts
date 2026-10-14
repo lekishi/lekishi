@@ -22,7 +22,6 @@ import { describe, expect, test } from "vitest"
 const SRC = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..")
 
 const LEGACY: Record<string, number> = {
-  "lib/atlas/renderer/globe/view.ts": 8,
 }
 
 /**

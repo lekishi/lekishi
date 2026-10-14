@@ -32,7 +32,7 @@ link:GLOBE_RENDERER.adoc[the globe renderer decision, review hardening supplemen
 The open rendering and device-acceptance items below stay open.
 
 - [ ] The custom globe behind the unchanged `AtlasRenderer` boundary, bundled through SvelteKit, replacing the Cesium renderer: tiles in workers under a memory budget, `GlobeControls`, picking, draped polygons and arcs, shaders compiled before the first flight, and a quality tier chosen up front or from measured frame times (the mid-range phone needs the lighter one). Decision: link:RENDERER_SPIKE.adoc[the renderer spike record], decision. Progress (2026-10-12): the custom globe replaces the Cesium renderer behind the unchanged boundary, with tiles in a worker under a memory budget, `GlobeControls`, picking, markers, collision-free labels, flights, and shaders compiled before the first flight; tiles built at deploy time, four siblings to a file. Draped polygons and arcs wait on the scene types below, and the quality tier on the diorama; device frame times on the preview are the owner's. Evidence: link:GLOBE_RENDERER.adoc[the globe renderer decision].
-- [ ] Domain and scene types for journey lines, relationship arcs, control-snapshot polygons, and places-with-events; the projection accepts the published geometry interpretations.
+- [ ] Domain and scene types for journey lines, relationship arcs, control-snapshot polygons, and places-with-events; the projection accepts the published geometry interpretations. Progress (2026-10-14): the scene carries places, journeys, arcs, territories and dioramas, with the safe area, a view report and a home token; the published geometry interpretations wait on RFD 2. Evidence: link:ATLAS_FRAME.adoc[the atlas frame record].
 - [ ] Renderer support for the diorama: terrain mesh with exaggeration, slope and elevation tinting, shallow-water shading, directional light with shadows, instanced symbols scattered by terrain, glyph settlements at sites, a vessel at the playhead's stop, lines, arcs, and polygons, behind the unchanged `AtlasRenderer` boundary.
 - [ ] Offline terrain pipeline: open elevation to a shipped mesh or heightmap per chapter extent, with the exaggeration and the source terms recorded.
 - [ ] Offline basemap pipeline: open elevation and Natural Earth data to raster tiles, zoom 0–4 global and 0–7 over chapter extents, shipped in the artifact with attribution; payload recorded.
@@ -41,8 +41,8 @@ The open rendering and device-acceptance items below stay open.
 - [ ] The handheld tier: build-time tile classification from the elevation, a tileset and sprite sheet, a PixiJS renderer behind the `AtlasRenderer` boundary with grid cursor, d-pad and A/B input, and the dialogue box; measured on a mid-range phone.
 - [ ] The pixel look for tablet and desktop: quarter-resolution render of the diorama with a reduced palette, switchable on demand.
 - [ ] Collision-free labelling with CJK and Latin font coverage.
-- [ ] Playhead-driven animation of journey lines without the renderer owning time.
-- [ ] Timeline strip component (SVG) driven by workspace state.
+- [x] Playhead-driven animation of journey lines without the renderer owning time (2026-10-14, link:ATLAS_FRAME.adoc[the atlas frame record]).
+- [x] Timeline strip component (SVG) driven by workspace state (2026-10-14).
 
 == Delivery and verification
 

@@ -69,11 +69,16 @@ words.
 
 Three families: **Cinzel** (`font-display`) for Latin display titles only,
 **Noto Serif JP** (`font-serif`) for historical names, quotations and narrative,
-and **Noto Sans JP** (`font-interface`) for interface text and numbers. The
-families are opt-in until each legacy screen migrates, so adding the tokens does
-not change reader screens on its own. They are to be self-hosted and subset;
-until that step lands, each family falls back to a system face. No font is ever
-fetched from a provider.
+and **Noto Sans JP** (`font-interface`) for interface text and numbers. Noto
+Serif TC draws the traditional Han forms the Japanese face lacks, and Noto Serif
+draws the Latin diacritics of romanizations (ṭ, ā).
+
+The faces are self-hosted and subset at build time: `pnpm sync:fonts` fetches
+the files pinned by commit and sha256 in `scripts/fonts/sources.json` and cuts
+them to the characters the records and the interface use, into `static/fonts`
+(generated, never committed). The build fails if a chapter's searchable text
+uses a character the subsets do not draw, so new text with an unusual glyph
+needs only a rebuild. No font is ever fetched from a provider.
 
 | Utility         | Size / line   | Use                                                                       |
 | --------------- | ------------- | ------------------------------------------------------------------------- |
@@ -178,6 +183,7 @@ Import from `$lib/ui`:
 | `Tabs`         | A tablist with one panel; the panel is a snippet that receives the selected id.                                       |
 | `Field`        | Search or text input with label, hint and a clear action.                                                             |
 | `Sheet`        | Side panel, or bottom sheet with `peek`, `half`, `full` detents. Non-modal.                                           |
+| `Dialog`       | Modal: search, the chapter switcher, About. The native `<dialog>`; every close is reported through `onclose`.         |
 | `NameForm`     | A historical name, its romanization, and the modern name on request (`modern` never inside a button or link).         |
 | `DateLine`     | A date in both calendars with its precision. Takes formatted parts; formatting is RFD 2's.                            |
 | `CitationLine` | A source, its locator and reuse terms on one line; opens the quote.                                                   |
@@ -212,9 +218,9 @@ selects, what the playhead does) lives in the atlas compositions in
 
 ### The legacy ratchet
 
-Screens written before the tokens still use Tailwind's own palette, sizes and
-radii, so the defaults are not cleared yet. `design-system.test.ts` lists those
-files in `LEGACY` with their exact violation counts:
+`design-system.test.ts` lists files written before the tokens in `LEGACY` with
+their exact violation counts. The list has been empty since 2026-10-14; the
+rules stay in case a file ever has to join it again:
 
 - A file **not** in `LEGACY` may not have any violation. New files never join.
 - A legacy file's count must match exactly. When you remove violations, lower
@@ -222,6 +228,6 @@ files in `LEGACY` with their exact violation counts:
 - Deliberate exceptions (the WebGL scene's lighting colours) are in `ALLOWED`
   with the reason.
 
-When `LEGACY` is empty, `src/app.css` clears Tailwind's defaults
-(`--color-*: initial`, `--text-*: initial`, `--radius-*: initial`) and an
-off-system class stops compiling into anything at all.
+`src/app.css` clears Tailwind's defaults (`--color-*: initial`,
+`--text-*: initial`, `--radius-*: initial`), so an off-system class compiles
+into nothing at all; the test is what names it.

@@ -24,20 +24,20 @@ item lands something a reader can see.
 - [ ] Symbolic settlements at attested sites: glyph buildings of a kind, scaled for legibility, never a reconstruction; a schematic vessel or party at the playhead's stop.
 - [ ] Ship a self-made relief basemap (hypsometric tint, shaded relief, coastlines, rivers) as static tiles for the globe and the 2D fallback: zoom 0–4 global, 0–7 over chapter extents, provider-free.
 - [ ] Collision-free labels: one per place, event-count badge, zoom priority, CJK-capable fonts, historical name leading with local script and romanization, projected from the 3D scene.
-- [ ] Places-first markers: events attach to places, a place with many events shows a count and opens a list.
-- [ ] The hero's chrome: date bar in both calendars, layer orbs, journal, pennants for the story's people, minimap, and the next-event dial as the playhead.
-- [ ] The honesty plate: what is real, what is symbolic, what is schematic, on the scene.
+- [x] Places-first markers: events attach to places, a place with many events shows a count and opens a list (2026-10-14, link:../0003/ATLAS_FRAME.adoc[the atlas frame record]).
+- [ ] The hero's chrome: date bar in both calendars, layer orbs, journal, pennants for the story's people, minimap, and the next-event dial as the playhead. Progress (2026-10-14): built on RFD 5's frame; the date bar shows the source's own date expression beside the year, and converted era dates wait on RFD 2's calendar contract.
+- [x] The honesty plate: what is real, what is symbolic, what is schematic, on the scene (2026-10-14).
 - [ ] Short event titles; caveats, precision, and placement notes move to the card.
-- [ ] Schematic journey lines through dated stops, labelled schematic, animated with the playhead.
-- [ ] Relationship arcs on selection, styled by type, with the claim and citation reachable from the arc.
-- [ ] Dated control-snapshot polygons with a hatched edge and a date label; no interpolation.
-- [ ] Timeline strip with event ticks, window brush, playhead, and zoomable scale, paired with the dial; retire the number inputs.
-- [ ] Chrome diet: the hero's bar replaces the header banners, an About sheet for editorial status and coverage, a narrative-and-image-first selection card.
+- [ ] Schematic journey lines through dated stops, labelled schematic, animated with the playhead. Progress (2026-10-14): drawn from the scene's journeys with the travelled part following the playhead and a vessel at the reached stop; awaiting the owner's review on the preview.
+- [ ] Relationship arcs on selection, styled by type, with the claim and citation reachable from the arc. Progress (2026-10-14): drawn on selection and by layer from the published relationships, styled by family; an arc does not yet mark a schematic end.
+- [ ] Dated control-snapshot polygons with a hatched edge and a date label; no interpolation. Progress (2026-10-14): the scene type and the drawing exist; no snapshot is published, so the layer is offered disabled.
+- [x] Timeline strip with event ticks, window brush, playhead, and zoomable scale, paired with the dial; retire the number inputs (2026-10-14).
+- [ ] Chrome diet: the hero's bar replaces the header banners, an About sheet for editorial status and coverage, a narrative-and-image-first selection card. Progress (2026-10-14): the bar and the About sheet are built and the card leads with the narrative; no published record carries an image yet.
 - [ ] The 平城京 local hero remade in the diorama register, for the owner's approval.
 - [ ] The handheld tier for phones: top-down tile map from the same terrain, sprites at attested places, dotted schematic path, cursor on a grid with a d-pad and A/B, a dialogue box that reads the selection; judged on the hero at 390 px.
 - [ ] The pixel look on tablet and desktop: the diorama at a quarter resolution with a reduced palette, switchable on demand.
-- [ ] Nearby and connected lists in the card, kept separate.
-- [ ] Layer controls for story layers; shared window and playhead; non-colour membership cues.
+- [x] Nearby and connected lists in the card, kept separate (2026-10-14).
+- [x] Layer controls for story layers; shared window and playhead; non-colour membership cues (2026-10-14).
 - [ ] Coverage guidance with distinct uncovered and filtered-empty states.
 - [ ] Reduced-motion preference respected for playback and camera flights.
 - [ ] Exit review: the served Tang chapter beside its hero, judged by the owner.

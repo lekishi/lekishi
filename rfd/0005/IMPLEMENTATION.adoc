@@ -23,8 +23,8 @@ so the two checklists do not double-count.
 
 - [x] Tokens in `src/app.css` `@theme static` (2026-10-13). Stylesheet 34.6 KB before, 36.2 KB with the tokens.
 - [x] A unit test that fails on raw hex colours, palette colours, default sizes and off-scale radii in `src/`, with a legacy ratchet for the 13 pre-token files (415 uses on 2026-10-13); `src/lib/ui/design-system.test.ts`.
-- [ ] Tailwind's default colours, sizes and radii cleared, once the legacy list is empty.
-- [ ] Font subsetting in the build (fontTools, OFL faces in `static/fonts/`), a build-invariant check that every glyph the chapters use is in the subset, and the measured payload recorded against RFD 4 RC4.
+- [x] Tailwind's default colours, sizes and radii cleared, once the legacy list is empty (2026-10-14). The legacy list is empty; `src/app.css` resets `--color-*`, `--text-*` and `--radius-*` before the tokens, so an off-system class generates no style. Stylesheet 45 KB (8.8 KB gzipped) with the frame and the screens.
+- [x] Font subsetting in the build (fontTools, OFL faces in `static/fonts/`), a build-invariant check that every glyph the chapters use is in the subset, and the measured payload recorded against RFD 4 RC4 (2026-10-14). `pnpm sync:fonts` cuts the faces pinned by commit and sha256 in `scripts/fonts/sources.json`; 280 KB in five WOFF2 files, of which Noto Serif JP is 240 KB for 774 characters. Evidence: link:../0003/ATLAS_FRAME.adoc[the atlas frame record].
 - [x] `$lib/ui` primitives: `Plate`, `Button`, `Orb`, `Badge`, `Tabs`, `Field`, `Sheet`, `SectionLabel`, `NameForm`, `DateLine`, `CitationLine`, `EmptyState`, `Icon`, with their behaviour in `src/lib/ui/ui.test.ts` (2026-10-13). The stylesheet is 48.0 KB (9.3 KB gzipped) with the primitives and the reference; 3.2 KB of that is classes only the design reference uses, because Tailwind scans the reference's source in every build.
 - [x] The design reference page, built in development and on PR previews only, gated in the build invariant, screenshotted at 1440, 820, 390 and 320 px with no horizontal overflow (2026-10-13); moved to `/dev/design` under the gated `/dev` prefix, with a `/dev` index, at the owner's request the same day.
 - [ ] The frame at each reviewed width on `/dev/design`, with placeholder content (lands with <<_the_frame>>).
@@ -34,32 +34,32 @@ so the two checklists do not double-count.
 
 == Migration (no layout change)
 
-- [ ] Existing components rebuilt on the primitives and tokens; screenshots before and after at the four widths.
-- [ ] Globe markers and labels take the evidence tokens and the serif; `MARKER_COLORS` retired.
-- [ ] Editorial status stated once (serves RFD 1's chrome diet).
+- [ ] Existing components rebuilt on the primitives and tokens; screenshots before and after at the four widths. Progress (2026-10-14): every atlas, home and error component is on the primitives and tokens (the legacy list is empty); screenshots at 1440, 820 and 390 px are on the pull request; 320 px waits on the browser checks.
+- [x] Globe markers and labels take the evidence tokens and the serif; `MARKER_COLORS` retired (2026-10-14, `globe/marks.ts`, `marks.test.ts`).
+- [x] Editorial status stated once (serves RFD 1's chrome diet): the recorded decision is in the About sheet and the home cards' small print (2026-10-14, `mount.test.ts`).
 
 == The frame
 
-- [ ] Workspace regions (top, left rail, right rail, bottom) replace the single overlay column, keeping the no-overlap coverage at 390 and 320 px.
-- [ ] Scene safe area passed to the renderer; flights and follow frame into the clear zone (RFD 3 records the input).
-- [ ] Phone layout: compact date bar and a three-detent bottom sheet.
-- [ ] Overview and chapter entry on the same tokens and header.
+- [ ] Workspace regions (top, left rail, right rail, bottom) replace the single overlay column, keeping the no-overlap coverage at 390 and 320 px. Progress (2026-10-14): the regions are built for desktop (1,180 px and wider), tablet and phone; the no-overlap browser checks are being rewritten for them.
+- [x] Scene safe area passed to the renderer; flights and follow frame into the clear zone (RFD 3 records the input) (2026-10-14, link:../0003/ATLAS_FRAME.adoc[the atlas frame record]).
+- [x] Phone layout: compact date bar and a three-detent bottom sheet (2026-10-14).
+- [x] Overview and chapter entry on the same tokens and header (2026-10-14).
 
 == Navigation
 
-- [ ] The URL contract: pure parse and write functions beside `state.ts` for `event`, `place`, `step`, `from` and `to`, with unit tests for precedence, the default window and stale ids; the workspace applies them, adding a history entry for jumps and replacing it for in-chapter changes.
-- [ ] The search index: one static file built from the published records (every name form, romanization and story caption), a build-invariant check that it covers every served chapter, and its size recorded against RFD 4 RC4.
-- [ ] `SearchDialog`: opened by `/` and the `DateBar` control on every page, results grouped by chapter with the current one first, a scope toggle, a preview, and keyboard operation; the left rail's event search reuses it with the scope fixed.
-- [ ] Chapter switcher from the chapter name in the `DateBar`, with the time ribbon and this device's last position per chapter.
-- [ ] Arrival plate for a linked event ("Play from here", "From the beginning") and the not-found line for a stale id.
-- [ ] Home: search first, chapters on the globe and the time ribbon, "Continue where you left off" from browser storage; the not-found page keeps search and the chapter list.
+- [x] The URL contract: pure parse and write functions beside `state.ts` for `event`, `place`, `step`, `from` and `to`, with unit tests for precedence, the default window and stale ids; the workspace applies them, adding a history entry for jumps and replacing it for in-chapter changes (2026-10-14, `query.ts`, `query.test.ts`, `mount.test.ts`). The chapter route writes through SvelteKit's shallow routing and hands Back and Forward to the workspace; nothing is written for the address a page opened at.
+- [x] The search index: one static file built from the published records (every name form, romanization and story caption), a build-invariant check that it covers every served chapter, and its size recorded against RFD 4 RC4 (2026-10-14): `/search-index.json`, 51 KB (10.5 KB gzipped), fetched the first time search opens. Evidence: link:../0003/ATLAS_FRAME.adoc[the atlas frame record].
+- [ ] `SearchDialog`: opened by `/` and the `DateBar` control on every page, results grouped by chapter with the current one first, a scope toggle, a preview, and keyboard operation; the left rail's event search reuses it with the scope fixed. Progress (2026-10-14): the dialog is built and opened by `/` and the date bar's control in the atlas, and from home and the not-found page; the left rail's event list still uses the in-chapter matcher.
+- [x] Chapter switcher from the chapter name in the `DateBar`, with the time ribbon and this device's last position per chapter (2026-10-14, `memory.ts`).
+- [x] Arrival plate for a linked event ("Play from here", "From the beginning") and the not-found line for a stale id (2026-10-14, `mount.test.ts`).
+- [x] Home: search first, chapters on the globe and the time ribbon, "Continue where you left off" from browser storage; the not-found page keeps search and the chapter list (2026-10-14, `page.test.ts`).
 - [ ] Browser checks: a linked event opens its card, Back after a search jump returns to the origin, and search is reachable by keyboard alone (RC4).
 
 == Atlas compositions (each also an RFD 1 item)
 
-- [ ] `DateBar` and `AboutSheet`.
-- [ ] `TimelineStrip` and `EventDial`; number inputs retired.
-- [ ] `SelectionCard`, narrative and image first.
-- [ ] `LayerOrbs`, `Journal`, `Pennants`, `Minimap`.
-- [ ] `HonestyPlate` and `Legend` with the attribution line.
+- [x] `DateBar` and `AboutSheet` (2026-10-14).
+- [x] `TimelineStrip` and `EventDial`; number inputs retired (2026-10-14).
+- [ ] `SelectionCard`, narrative and image first. Progress (2026-10-14): narrative first, with the connected and nearby lists; no published record carries an image yet.
+- [x] `LayerOrbs`, `Journal`, `Pennants`, `Minimap` (2026-10-14; the journal is the story tab of the explore list).
+- [x] `HonestyPlate` and `Legend` with the attribution line (2026-10-14).
 - [ ] Handheld skin (`data-tier="handheld"`) when RFD 1's handheld tier is built.

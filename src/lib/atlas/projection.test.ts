@@ -873,3 +873,78 @@ describe("the projection's dispute rule", () => {
     }
   })
 })
+
+describe("the projection's relationships", () => {
+  const QIN = "qin-conquest-han-233-226"
+  const QIN_COVERAGE = { defaultWindow: { start: -232, end: -225 } }
+
+  function relationshipRecord(tree: ChapterTree, id: string): JsonObject {
+    return objectOf(
+      tree.documents.find((document) => isObject(document) && document["record_id"] === id),
+    )
+  }
+
+  it("projects every published relationship with its ends, direction and citations", () => {
+    const chapter = project()
+    const embassy = chapter.relationships.find(
+      (relationship) => relationship.id === "lks:relationship:japan-tang-embassy",
+    )
+
+    expect(chapter.relationships.length).toBeGreaterThan(0)
+    expect(embassy?.types).toEqual(["diplomacy"])
+    expect(embassy?.from).toEqual({ kind: "actor", id: "lks:actor:japan-state" })
+    expect(embassy?.to).toEqual({ kind: "actor", id: "lks:actor:tang-dynasty" })
+    expect(embassy?.directionality).toBe("directed")
+    // Contact is not influence: the record asserts no causation, so neither does the atlas.
+    expect(embassy?.causal).toBe(false)
+    expect(embassy?.validity).toMatchObject({ startYear: 750, endYear: 754, mode: "duration" })
+    expect(embassy?.citations.map((citation) => citation.sourceId)).toContain(
+      "lks:source:shoku-nihongi",
+    )
+
+    const transmission = chapter.relationships.find(
+      (relationship) => relationship.id === "lks:relationship:jianzhen-transmission",
+    )
+
+    expect(transmission?.to).toEqual({ kind: "place", id: "lks:place:todaiji" })
+  })
+
+  it("keeps an undated relationship undated instead of borrowing a span", () => {
+    const result = projectChapter(
+      QIN,
+      loadChapter(QIN).documents,
+      loadChapter(QIN).sets,
+      QIN_COVERAGE,
+    )
+
+    if (!result.ok) {
+      throw new Error(result.errors.join("\n"))
+    }
+
+    const conflict = result.chapter.relationships.find(
+      (relationship) => relationship.id === "lks:relationship:qin-han-conflict",
+    )
+
+    expect(conflict?.types).toEqual(["conflict"])
+    expect(conflict?.validity).toBeNull()
+  })
+
+  it("fails a relationship whose end the chapter does not publish", () => {
+    const chapter = tree()
+    const revision = publishedRevisionOf(
+      relationshipRecord(chapter, "lks:relationship:japan-tang-embassy"),
+    )
+
+    objectOf(revision["content"])["to"] = "lks:actor:nobody"
+
+    const result = attempt(chapter)
+
+    expect(result.ok).toBe(false)
+
+    if (!result.ok) {
+      expect(result.errors.join("\n")).toContain(
+        "relates lks:actor:nobody, which is not a published actor or place",
+      )
+    }
+  })
+})

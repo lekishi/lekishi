@@ -189,6 +189,26 @@ export const FIXTURE_CHAPTER: Chapter = {
       citations: [],
     },
   ],
+  relationships: [
+    {
+      id: "relationship-fixture-mission",
+      caption: null,
+      summary: "Synthetic relationship between the envoy and the harbor.",
+      types: ["diplomacy"],
+      from: { kind: "actor", id: "actor-fixture-envoy" },
+      to: { kind: "place", id: "place-north-harbor" },
+      directionality: "directed",
+      causal: false,
+      validity: {
+        startYear: 1210,
+        endYear: 1212,
+        precision: "year",
+        mode: "duration",
+        sourceExpression: null,
+      },
+      citations: [],
+    },
+  ],
   actors: [
     {
       id: "actor-fixture-envoy",

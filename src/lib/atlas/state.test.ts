@@ -7,6 +7,7 @@ import {
   noteManualCameraInput,
   playbackState,
   resumeCameraFollow,
+  returnHome,
   returnToEventTime,
   selectEvent,
   selectionTimeStatus,
@@ -83,6 +84,18 @@ describe("camera follow", () => {
     expect(afterInput.cameraFollow).toBe("manual")
     expect(afterInput.playing).toBe(true)
     expect(afterInput.playhead).toBe(playing.playhead)
+  })
+
+  it("stops following when the reader asks for the whole chapter", () => {
+    const following = resumeCameraFollow(
+      selectEvent(initial, chapter, "event-island-landfall"),
+      chapter,
+    )
+    const home = returnHome(following)
+
+    expect(home.homeToken).toBe(following.homeToken + 1)
+    expect(home.cameraFollow).toBe("manual")
+    expect(home.selectedEventId).toBe("event-island-landfall")
   })
 
   it("stays off until the user explicitly resumes", () => {

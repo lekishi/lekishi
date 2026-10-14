@@ -200,12 +200,12 @@ export function selectPlace(
 }
 
 /**
- * An explicit return to the chapter's opening view. It is a programmatic
- * flight, so it does not stop following by itself; following has nothing to
- * hold the camera on without a selection anyway.
+ * An explicit return to the chapter's opening view. The reader asked to see
+ * the whole chapter, so following stops, as it does on a drag: otherwise the
+ * next step of playback would fly the camera straight back to the selection.
  */
 export function returnHome(state: AtlasState): AtlasState {
-  return { ...state, homeToken: state.homeToken + 1 }
+  return { ...state, cameraFollow: "manual", homeToken: state.homeToken + 1 }
 }
 
 export function setLayer(state: AtlasState, layer: LayerId, visible: boolean): AtlasState {

@@ -45,7 +45,7 @@ Needs only numpy and Pillow; `scripts/sync-globe-tiles.mjs` runs it (with a
 private virtual environment if the system Python lacks them) when the builder
 or its inputs change.
 """
-import io, json, math, os, shutil, struct, time, urllib.request
+import io, json, math, multiprocessing, os, shutil, struct, time, urllib.request
 from concurrent.futures import ThreadPoolExecutor
 import numpy as np
 from PIL import Image, ImageFilter
@@ -201,11 +201,14 @@ def despiked(e, limit):
     count = 0
     for top in range(0, h, 256):  # in bands: the 24 neighbours of a whole mosaic do not fit in memory
         rows = min(256, h - top)
-        around = np.sort(np.stack([p[top + r + dy:top + r + dy + rows, r + dx:r + dx + w]
-                                   for dy in range(-r, r + 1) for dx in range(-r, r + 1) if dy or dx]), 0)
+        around = np.stack([p[top + r + dy:top + r + dy + rows, r + dx:r + dx + w]
+                           for dy in range(-r, r + 1) for dx in range(-r, r + 1) if dy or dx])
+        # The fourth lowest and fourth highest of the 24, without a full sort.
+        ranked = np.partition(around, (3, 20), axis=0)
         band = e[top:top + rows]
-        needle = (band > around[-4] + limit) | (band < around[3] - limit)
-        out[top:top + rows] = np.where(needle, np.median(around, 0), band)
+        needle = (band > ranked[20] + limit) | (band < ranked[3] - limit)
+        if needle.any():
+            out[top:top + rows][needle] = np.median(around[:, needle], axis=0)
         count += int(needle.sum())
     print(f"    {count} needles replaced", flush=True)
     return out
@@ -220,12 +223,13 @@ class Source:
             tx0, tx1 = int(fx0 // 256), int(fx1 // 256)
             ty0, ty1 = int(fy0 // 256), int(fy1 // 256)
         jobs = [(z, x, y) for x in range(tx0, tx1 + 1) for y in range(ty0, ty1 + 1)]
-        with ThreadPoolExecutor(8) as ex: paths = list(ex.map(lambda j: fetch(*j), jobs))
         self.z, self.ox, self.oy, self.min_level = z, tx0 * 256, ty0 * 256, min_level
         self.e = np.zeros(((ty1 - ty0 + 1) * 256, (tx1 - tx0 + 1) * 256), np.float32)
-        for (_, x, y), p in zip(jobs, paths):
-            a = np.asarray(Image.open(p).convert("RGB"), np.float32)
+        def place(job):  # fetched and decoded in threads: Pillow's decoder releases the GIL
+            _, x, y = job
+            a = np.asarray(Image.open(fetch(*job)).convert("RGB"), np.float32)
             self.e[(y - ty0) * 256:(y - ty0 + 1) * 256, (x - tx0) * 256:(x - tx0 + 1) * 256] = a[..., 0] * 256 + a[..., 1] + a[..., 2] / 256 - 32768
+        with ThreadPoolExecutor(8) as ex: list(ex.map(place, jobs))
         self.deg_per_px = 360.0 / (256 * n)
         if rect is not None:  # the whole-Earth z4 is too coarse for a needle to show
             # One pixel's width at the chapters' latitudes (about 30 degrees north).
@@ -429,6 +433,9 @@ def write(rel, data):
     os.makedirs(os.path.dirname(p), exist_ok=True)
     with open(p, "wb") as f: f.write(data)
 
+def paint(job):
+    return height_png(*job), imagery_jpeg(*job)
+
 def main():
     t0 = time.time()
     print("globe tiles: fetching elevation sources", flush=True)
@@ -439,12 +446,16 @@ def main():
         shutil.rmtree(OUT)
     os.makedirs(OUT)
     built = {}
-    for z in sorted(LEVELS):
-        jobs = tiles_for(z); t1 = time.time()
-        with ThreadPoolExecutor(4) as ex:
-            out = list(ex.map(lambda j: (height_png(z, *j), imagery_jpeg(z, *j)), jobs))
-        built.update({(z, *j): o for j, o in zip(jobs, out)})
-        print(f"  level {z}: {len(jobs)} tiles in {time.time() - t1:.0f}s", flush=True)
+    ne2()
+    # Painting is numpy and Python in about equal parts, so threads would share
+    # one interpreter lock: forked workers inherit the sources loaded above
+    # (copy on write) and paint on every core.
+    with multiprocessing.get_context("fork").Pool(os.cpu_count() or 2) as pool:
+        for z in sorted(LEVELS):
+            jobs = [(z, x, y) for x, y in tiles_for(z)]; t1 = time.time()
+            out = pool.map(paint, jobs, chunksize=4)
+            built.update(zip(jobs, out))
+            print(f"  level {z}: {len(jobs)} tiles in {time.time() - t1:.0f}s", flush=True)
     # One bundle per tile that has built children, plus the roots'.
     groups = {}
     for (z, x, y), data in sorted(built.items()):

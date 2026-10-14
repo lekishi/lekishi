@@ -538,17 +538,21 @@ specified rather than drawn by eye, in `src/lib/ui/brand.ts`:
   playhead's gap is a mask, so the mark sits on any surface.
 
 The wordmark is LEKISHI in Cinzel SemiBold, tracked 0.16 em like the section
-labels and outlined into paths (Cinzel is OFL), so it never waits on the font
-self-hosting step. The favicon and touch icon put the mark on a lacquer tile,
-because a cream mark disappears on a light browser's tab strip.
+labels, then a hairline and 歴史, the word the name echoes, in Noto Serif JP
+SemiBold. The two scripts are centred on the caps' cap height so they share one
+optical middle. Both are outlined into paths (both faces are OFL), so the
+wordmark never waits on the font self-hosting step. Where the pair does not fit
+(the header below 640 px) the caps stand alone at the same size and position.
+The favicon and touch icon put the mark on a lacquer tile, because a cream mark
+disappears on a light browser's tab strip.
 
 `Logo` in `$lib/ui` draws the mark and the wordmark from that module with the
 ink and gold tokens; `pnpm brand` writes the shipped SVGs from it and renders
 the ICO and PNG icons, and `src/lib/ui/brand.test.ts` fails when a shipped file
-drifts from the module. The shipped files add 21 KB to the artifact: the
-favicon ICO grows from 152 bytes to 4.9 KB with its 16, 32 and 48 px images,
-and `favicon.svg`, `apple-touch-icon.png` and `images/wordmark.svg` are three
-new files.
+drifts from the module. The brand files total 29 KB: the favicon ICO grows
+from 152 bytes to 4.9 KB with its 16, 32 and 48 px images, `logo.svg` shrinks
+from 3.1 KB to 1.4 KB, and `favicon.svg`, `apple-touch-icon.png`,
+`images/wordmark.svg` and `images/wordmark-caps.svg` are four new files.
 
 The studies, with the alternatives the owner saw, are published at
 https://claude.ai/artifact/Ps24CWpX4vZPnTSuSrisEy[Lekishi mark studies]: round 1
@@ -618,9 +622,11 @@ Answered by the owner on 2026-10-13:
 Answered by the owner on 2026-10-14:
 
 * *The mark is the Meridian dial,* chosen from the four round 1 directions
-  (<<Mark and wordmark>>). The Window cut and the Cinzel caps wordmark are the
-  proposal implemented here; the owner's choice between the three cuts and the
-  three wordmarks is open.
+  (<<Mark and wordmark>>), *in its Window cut,* chosen over the full dial and
+  the bezel.
+* *The wordmark is the caps with 歴史,* chosen over the caps alone and the
+  lowercase with a gold dot. The caps alone remain for the phone header,
+  where the pair does not fit.
 
 == Implementation
 

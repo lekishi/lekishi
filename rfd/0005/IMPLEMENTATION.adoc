@@ -17,7 +17,7 @@ so the two checklists do not double-count.
 - [x] Navigation canvas reviewed; information architecture kept in this RFD and in-chapter state in the query, `?event=` and its siblings (2026-10-13, link:README.adoc#_information_architecture_and_navigation[information architecture and navigation]).
 - [ ] System sheet approved by the owner.
 - [x] Logo direction: the owner chose the Meridian dial from four studies (2026-10-14, link:README.adoc#_mark_and_wordmark[mark and wordmark]).
-- [ ] Owner picks the dial's cut (full dial, window, bezel) and the wordmark (caps, caps with 歴史, lowercase).
+- [x] Owner picks the dial's cut and the wordmark: the Window cut, and the caps with 歴史 (2026-10-14).
 
 == Foundation
 
@@ -29,7 +29,7 @@ so the two checklists do not double-count.
 - [x] The design reference page, built in development and on PR previews only, gated in the build invariant, screenshotted at 1440, 820, 390 and 320 px with no horizontal overflow (2026-10-13); moved to `/dev/design` under the gated `/dev` prefix, with a `/dev` index, at the owner's request the same day.
 - [ ] The frame at each reviewed width on `/dev/design`, with placeholder content (lands with <<_the_frame>>).
 - [ ] `/dev/design` in the browser suite's screenshot pass (the suite runs against the production artifact today, which does not carry the page).
-- [x] The mark and wordmark: `Logo` in `$lib/ui`, generated from `src/lib/ui/brand.ts`; the header, favicon (ICO and SVG) and touch icon replace Phoenix's bird; `pnpm brand` regenerates the files and `brand.test.ts` pins them (2026-10-14). The artifact gains three files and 21 KB.
+- [x] The mark and wordmark: `Logo` in `$lib/ui`, generated from `src/lib/ui/brand.ts`; the header (caps with 歴史, caps alone below 640 px), favicon (ICO and SVG) and touch icon replace Phoenix's bird; `pnpm brand` regenerates the files and `brand.test.ts` pins them (2026-10-14). The artifact gains four files; the brand files total 29 KB.
 - [x] Working reference for contributors: link:../../docs/design-system.md[docs/design-system.md], linked from `AGENTS.md` (2026-10-13).
 
 == Migration (no layout change)

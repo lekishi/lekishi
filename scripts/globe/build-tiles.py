@@ -26,14 +26,15 @@ documents it; `scripts/check-static-build.mjs` reads a bundle back to check it.
 Coverage: the whole Earth to level 5 (about 5.6 degrees per tile), and levels
 6 and 7 (about 0.6 km per imagery pixel) over the published chapters' extent,
 107-140 E and 22-40 N with a margin, which covers 長安 to 平城京 and the Qin
-chapter's 新鄭. A chapter beyond it needs its own rectangle here. Levels 8 to
-10 (down to about 76 m per pixel) cover a box around each place the chapters
-draw, where a reader zooms in; a new place needs its point in PLACES.
+chapter's 新鄭. A chapter beyond it needs its own rectangle here. Level 8
+(about 0.3 km per pixel) covers the same extent, and levels 9 and 10 (down to
+about 76 m per pixel) a box around each place the chapters draw, where a
+reader zooms in; a new place needs its point in PLACES.
 
 Sources (fetched once into .cache/globe/, none shipped):
   Terrarium elevation tiles, AWS Open Data "Terrain Tiles" (Mapzen and the
-  sources in ATTRIBUTION below; attribution required): z4 globally, z7 over
-  the chapters' extent, and z10 around each place. Bathymetry is kept for the sea's colour; the terrain
+  sources in ATTRIBUTION below; attribution required): z4 globally, z7 and
+  z9 over the chapters' extent, and z10 around each place. Bathymetry is kept for the sea's colour; the terrain
   surface is clamped to sea level.
   Natural Earth II (public domain), the level-2 tiles vendored in
   scripts/globe/natural-earth-ii/: the biome hue at every level, blurred so its
@@ -80,7 +81,7 @@ PLACES = {
 }
 # How far around each place (degrees) a fine level reaches: the finer the level,
 # the closer the camera that asks for it, so the less ground it has to cover.
-FINE_RADIUS = {8: 0.8, 9: 0.6, 10: 0.4}
+FINE_RADIUS = {9: 0.6, 10: 0.4}
 def boxes(r): return [(lon - r, lat - r, lon + r, lat + r) for lon, lat in PLACES.values()]
 def merged(rects):
     """Overlapping rectangles joined into their bounding boxes, so places close
@@ -105,16 +106,19 @@ def snapped(z, rect, margin):
     x0, y0, x1, y1 = tile_range(z, rect)
     return (-180 + x0 * s - margin, -90 + y0 * s - margin, -180 + (x1 + 1) * s + margin, -90 + (y1 + 1) * s + margin)
 # Levels and the rectangles each is built over (None: the whole Earth).
-LEVELS = {0: None, 1: None, 2: None, 3: None, 4: None, 5: None, 6: [CHAPTERS], 7: [CHAPTERS],
+LEVELS = {0: None, 1: None, 2: None, 3: None, 4: None, 5: None, 6: [CHAPTERS], 7: [CHAPTERS], 8: [CHAPTERS],
           **{z: boxes(r) for z, r in FINE_RADIUS.items()}}
+FINE = 8  # the first level painted from the fine sources
 # Elevation sources: the Terrarium zoom whose pixel matches the level's sample
 # spacing, the rectangle (plus margin) it is fetched over, and the lowest level
-# it serves. z10 serves the fine levels only, so every level below paints
-# exactly as it did before they existed and still matches its neighbours. Its
-# boxes cover every level-8 tile built (the coarsest fine level reaches
-# furthest), plus a margin for the imagery's one-pixel border.
-SOURCES = [(4, None, 0), (7, (CHAPTERS[0] - 2, CHAPTERS[1] - 2, CHAPTERS[2] + 2, CHAPTERS[3] + 2), 0)] + \
-    [(10, b, min(FINE_RADIUS)) for b in merged(snapped(8, b, 0.05) for b in boxes(FINE_RADIUS[8]))]
+# it serves. z9 and z10 serve the fine levels only, so every level below
+# paints exactly as it did before they existed and still matches its
+# neighbours. z9 covers level 8's extent and z10 every level-9 tile built (the
+# coarser of the place levels reaches furthest), each with a margin for the
+# imagery's one-pixel border.
+SOURCES = [(4, None, 0), (7, (CHAPTERS[0] - 2, CHAPTERS[1] - 2, CHAPTERS[2] + 2, CHAPTERS[3] + 2), 0),
+           (9, snapped(8, CHAPTERS, 0.05), FINE)] + \
+    [(10, b, min(FINE_RADIUS)) for b in merged(snapped(9, b, 0.05) for b in boxes(FINE_RADIUS[9]))]
 
 # The attribution the Terrain Tiles require, as listed by the Joerd attribution
 # guide (github.com/tilezen/joerd/blob/master/docs/attribution.md, read

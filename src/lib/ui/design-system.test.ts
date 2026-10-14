@@ -33,8 +33,8 @@ const LEGACY: Record<string, number> = {
   "lib/atlas/workspace/StoryList.svelte": 21,
   "lib/atlas/workspace/TimeControls.svelte": 60,
   "routes/+error.svelte": 15,
-  "routes/+page.svelte": 61,
-  "routes/chapters/[chapter]/+page.svelte": 16,
+  "routes/+page.svelte": 59,
+  "routes/chapters/[chapter]/+page.svelte": 14,
 }
 
 /**

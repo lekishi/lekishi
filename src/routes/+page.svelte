@@ -1,5 +1,6 @@
 <script lang="ts">
   import { CHAPTERS } from "$lib/atlas/chapters"
+  import { focusRing, Logo } from "$lib/ui"
   import { windowLabel } from "$lib/atlas/labels"
 
   /**
@@ -46,9 +47,12 @@
   <header
     class="flex items-center justify-between gap-4 border-b border-slate-800 px-4 py-3 sm:px-6"
   >
-    <a href="/" class="flex items-center gap-2.5" aria-label="Lekishi home">
-      <img src="/images/logo.svg" width="24" alt="" />
-      <span class="text-sm font-semibold tracking-tight text-slate-100">Lekishi</span>
+    <a
+      href="/"
+      class={["flex items-center rounded-control text-ink", focusRing]}
+      aria-label="Lekishi home"
+    >
+      <Logo size={22} wordmark />
     </a>
     <nav class="flex items-center gap-4 text-xs" aria-label="Primary">
       <a href="/" class="text-slate-100 transition hover:text-white" aria-current="page">Overview</a

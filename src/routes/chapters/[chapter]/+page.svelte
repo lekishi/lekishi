@@ -3,6 +3,7 @@
   import { releaseWorkspace, startAtlasPage } from "$lib/atlas/entry"
   import { windowLabel } from "$lib/atlas/labels"
   import type { Chapter } from "$lib/atlas/domain"
+  import { focusRing, Logo } from "$lib/ui"
 
   /**
    * The chapter page.
@@ -61,9 +62,12 @@
     class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-slate-800 bg-slate-950 px-4 py-2.5"
   >
     <div class="flex min-w-0 items-center gap-2.5">
-      <a href="/" class="flex items-center gap-2.5">
-        <img src="/images/logo.svg" width="24" alt="" />
-        <span class="text-sm font-semibold tracking-tight text-slate-100">Lekishi</span>
+      <a
+        href="/"
+        class={["flex items-center rounded-control text-ink", focusRing]}
+        aria-label="Lekishi home"
+      >
+        <Logo size={22} wordmark />
       </a>
       <span
         id="chapter-decision"

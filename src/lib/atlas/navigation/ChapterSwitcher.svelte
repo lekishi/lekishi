@@ -26,7 +26,9 @@
 
   $effect(() => {
     if (open) {
-      positions = Object.fromEntries(CHAPTERS.map((chapter) => [chapter.id, chapterPosition(chapter.id)]))
+      positions = Object.fromEntries(
+        CHAPTERS.map((chapter) => [chapter.id, chapterPosition(chapter.id)]),
+      )
     }
   })
 </script>

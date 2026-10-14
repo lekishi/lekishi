@@ -100,6 +100,17 @@
     return list
   })
 
+  /**
+   * A window in the strip's narrow column: one era marker for a window wholly
+   * BCE ("233–226 BCE"), the atlas's full year text otherwise. The scale below
+   * it marks the era once, on its first year, for the same reason.
+   */
+  function shortWindow(window: TimeWindow): string {
+    return window.end <= 0 && window.start !== window.end
+      ? `${1 - window.start}–${1 - window.end} BCE`
+      : windowLabel(window)
+  }
+
   const range = [
     "absolute inset-x-0 h-full w-full cursor-pointer appearance-none bg-transparent",
     "[&::-webkit-slider-runnable-track]:h-full [&::-webkit-slider-runnable-track]:bg-transparent",
@@ -126,7 +137,11 @@
             aria-hidden="true"
             class={[
               "absolute top-1/2 size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full",
-              event.id === selectedEventId ? "bg-gold-bright" : event.coda ? "bg-ink-dim" : "bg-ink",
+              event.id === selectedEventId
+                ? "bg-gold-bright"
+                : event.coda
+                  ? "bg-ink-dim"
+                  : "bg-ink",
             ]}
             style="left: {at(event.occurrence.startYear, extent.start, extentSpan) +
               50 / extentSpan}%"
@@ -184,8 +199,9 @@
           ]}
         />
       </div>
-      <span class="w-24 shrink-0 text-right text-caption text-ink-dim tabular-nums"
-        >{windowLabel(extent)}</span
+      <span
+        class="w-24 shrink-0 text-right text-caption whitespace-nowrap text-ink-dim tabular-nums"
+        >{shortWindow(extent)}</span
       >
     </div>
   {/if}
@@ -215,10 +231,11 @@
                 ? "border border-dashed border-ink-dim"
                 : "bg-ink-dim",
           ]}
-          style="left: {at(Math.max(event.occurrence.startYear, timeWindow.start), timeWindow.start, windowSpan)}%; width: {((Math.min(
-            event.occurrence.endYear,
-            timeWindow.end,
-          ) -
+          style="left: {at(
+            Math.max(event.occurrence.startYear, timeWindow.start),
+            timeWindow.start,
+            windowSpan,
+          )}%; width: {((Math.min(event.occurrence.endYear, timeWindow.end) -
             Math.max(event.occurrence.startYear, timeWindow.start) +
             1) /
             windowSpan) *
@@ -290,10 +307,11 @@
   </div>
 
   <div class={["relative h-4", compact ? "mx-0" : "mr-[6.75rem] ml-[4.25rem]"]} aria-hidden="true">
-    {#each years as year (year)}
+    {#each years as year, index (year)}
       <span
-        class="absolute -translate-x-1/2 text-caption text-ink-dim tabular-nums"
-        style="left: {at(year, timeWindow.start, windowSpan) + 50 / windowSpan}%">{yearLabel(year)}</span
+        class="absolute -translate-x-1/2 text-caption whitespace-nowrap text-ink-dim tabular-nums"
+        style="left: {at(year, timeWindow.start, windowSpan) + 50 / windowSpan}%"
+        >{index === 0 || year > 0 ? yearLabel(year) : 1 - year}</span
       >
     {/each}
   </div>

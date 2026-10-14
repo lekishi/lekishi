@@ -55,7 +55,8 @@
   data-testid="atlas-dial"
   class={[
     "pointer-events-auto flex min-w-0 items-center gap-2",
-    !compact && "rounded-plate border border-frame bg-lacquer-glass px-2 py-1.5 shadow-plate backdrop-blur-md",
+    !compact &&
+      "rounded-plate border border-frame bg-lacquer-glass px-2 py-1.5 shadow-plate backdrop-blur-md",
   ]}
 >
   <button

@@ -178,7 +178,10 @@ export function relationshipsFor(
 export type Pennant = {
   readonly actor: Actor
   readonly events: number
-  /** The first character of the name, for the medallion. */
+  /**
+   * The medallion's text: the name's first two characters in a CJK script (one
+   * would make 韓非 and 韓王安 the same 韓), its first letter otherwise.
+   */
   readonly mark: string
 }
 
@@ -200,9 +203,16 @@ export function pennants(chapter: Chapter): Pennant[] {
 
   return chapter.actors
     .filter((actor) => (counts.get(actor.id) ?? 0) >= 2)
-    .map((actor) => ({ actor, events: counts.get(actor.id) ?? 0, mark: [...actor.label][0] ?? "" }))
+    .map((actor) => ({ actor, events: counts.get(actor.id) ?? 0, mark: medallion(actor.label) }))
     .sort((a, b) => b.events - a.events || a.actor.label.localeCompare(b.actor.label))
     .slice(0, 5)
+}
+
+const CJK = /^[\p{Script=Han}\p{Script=Hiragana}\p{Script=Katakana}\p{Script=Hangul}]/u
+
+function medallion(label: string): string {
+  const characters = [...label]
+  return CJK.test(label) ? characters.slice(0, 2).join("") : (characters[0] ?? "")
 }
 
 /** The chapter's own counts, as the About sheet states them. */

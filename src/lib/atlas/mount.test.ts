@@ -83,9 +83,7 @@ describe("mountAtlas", () => {
     expect(root.querySelector("#atlas-about-decision")?.textContent).toContain(
       "Owner-approved for release, 2026-09-25",
     )
-    expect(root.querySelector("#atlas-about")?.textContent).toContain(
-      TANG.publication.coverageNote,
-    )
+    expect(root.querySelector("#atlas-about")?.textContent).toContain(TANG.publication.coverageNote)
 
     handle.dispose()
   })
@@ -139,9 +137,7 @@ describe("mountAtlas", () => {
         `Sources ${chapter.sources.length}`,
       ])
       await openTab(host, "events")
-      expect(host.querySelectorAll('[data-testid="atlas-event-item"]').length).toBe(
-        inWindow.length,
-      )
+      expect(host.querySelectorAll('[data-testid="atlas-event-item"]').length).toBe(inWindow.length)
       // The dispute cue follows the in-window disputed records, which is what the
       // list renders: a disputed coda node is outside the default window.
       expect(host.querySelectorAll('[data-testid="atlas-dispute-badge"]')).toHaveLength(
@@ -213,15 +209,16 @@ describe("mountAtlas", () => {
     const event = TANG.events.find((candidate) => candidate.id === "lks:event:akimeya-landfall-753")
 
     expect(root.querySelector("#atlas-selection h2")?.textContent).toContain(event?.title)
-    expect(root.querySelector('[data-testid="atlas-arrival"]')?.textContent).toContain(
-      event?.title,
-    )
+    expect(root.querySelector('[data-testid="atlas-arrival"]')?.textContent).toContain(event?.title)
 
     handle.dispose()
   })
 
   it("says so when a link names something the chapter does not have", async () => {
-    const handle = mountAtlas(root, QIN, undefined, { search: "?event=not-a-record", history: null })
+    const handle = mountAtlas(root, QIN, undefined, {
+      search: "?event=not-a-record",
+      history: null,
+    })
     await flush()
 
     expect(root.querySelector("#atlas-selection")).toBeNull()

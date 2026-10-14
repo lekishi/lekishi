@@ -1,7 +1,7 @@
 <script lang="ts">
   import { focusRing, transition } from "$lib/ui"
   import type { ChapterCard } from "../chapters"
-  import { windowLabel, yearLabel } from "../labels"
+  import { windowLabel } from "../labels"
 
   /**
    * The chapters on one line of time (RFD 5, "Chapters on a time ribbon"): each
@@ -27,23 +27,36 @@
 
   const at = (year: number) => ((year - span.start) / (span.end - span.start)) * 100
 
+  /**
+   * Ticks at round years as a reader counts them (200 BCE, 1 CE, 200),
+   * placed at their astronomical ordinals: 200 BCE is -199.
+   */
   const ticks = $derived.by(() => {
     const step = span.end - span.start > 600 ? 200 : 100
-    const first = Math.ceil(span.start / step) * step
-    return Array.from(
-      { length: Math.floor((span.end - first) / step) + 1 },
-      (_, index) => first + index * step,
-    )
+    const ordinal = (year: number) => (year < 0 ? year + 1 : year)
+    const list: { year: number; label: string }[] = []
+    for (
+      let year = Math.ceil((span.start - 1) / step) * step;
+      ordinal(year) <= span.end;
+      year += step
+    ) {
+      if (ordinal(year) < span.start) continue
+      list.push({
+        year: ordinal(year),
+        label: year < 0 ? `${-year} BCE` : year === 0 ? "1 CE" : `${year}`,
+      })
+    }
+    return list
   })
 </script>
 
 <div class="relative h-16 w-full" data-testid="time-ribbon">
   <div aria-hidden="true" class="absolute inset-x-0 top-7 h-px bg-rule"></div>
-  {#each ticks as tick (tick)}
+  {#each ticks as tick (tick.year)}
     <span
       aria-hidden="true"
       class="absolute top-9 -translate-x-1/2 text-caption text-ink-faint tabular-nums"
-      style="left: {at(tick)}%">{yearLabel(tick)}</span
+      style="left: {at(tick.year === 0 ? 1 : tick.year)}%">{tick.label}</span
     >
   {/each}
   <ol class="contents">

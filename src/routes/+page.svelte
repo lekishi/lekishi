@@ -119,8 +119,8 @@
           History, in the places it happened.
         </h1>
         <p class="max-w-xl font-serif text-body text-ink-dim">
-          Follow embassies, voyages and conquests across a globe drawn from real terrain, with
-          every date, dispute and source kept beside the story.
+          Follow embassies, voyages and conquests across a globe drawn from real terrain, with every
+          date, dispute and source kept beside the story.
         </p>
 
         <button
@@ -171,7 +171,8 @@
               <span class="block text-label font-semibold uppercase text-ink-dim"
                 >Continue where you left off</span
               >
-              <span class="block truncate font-serif text-body text-ink group-hover:text-gold-bright"
+              <span
+                class="block truncate font-serif text-body text-ink group-hover:text-gold-bright"
                 >{resume.label}</span
               >
               <span class="block truncate text-caption text-ink-faint">{resumeChapter.name}</span>

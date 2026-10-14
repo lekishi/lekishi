@@ -8,7 +8,8 @@
    * nothing to draw in this chapter is shown disabled, and its label says why,
    * so a reader learns the chapter has no territory snapshot rather than that
    * the atlas cannot draw one. The Sources orb is not a map layer: it opens
-   * the sources list, and stays pressed while that list is showing.
+   * the sources list, and stays pressed while that list is showing. On desktop
+   * the list is always open with a Sources tab, so the orb is left out there.
    */
   let {
     options,
@@ -23,7 +24,8 @@
     sourcesOpen: boolean
     vertical?: boolean
     onToggle: (layer: LayerId, visible: boolean) => void
-    onSources: () => void
+    /** Omitted where the sources already have a tab beside the list (desktop). */
+    onSources?: () => void
   } = $props()
 
   const META: Record<LayerId, { icon: IconName; label: string; none: string }> = {
@@ -72,5 +74,7 @@
       onchange={(next) => onToggle(option.id, next)}
     />
   {/each}
-  <Orb icon="sources" label="Sources" pressed={sourcesOpen} onchange={() => onSources()} />
+  {#if onSources}
+    <Orb icon="sources" label="Sources" pressed={sourcesOpen} onchange={() => onSources()} />
+  {/if}
 </div>

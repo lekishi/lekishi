@@ -79,7 +79,7 @@ describe("the frame's chapter facts", () => {
 
     expect(people.length).toBeGreaterThan(1)
     expect(people.length).toBeLessThanOrEqual(5)
-    expect(people.map((person) => person.mark)).toContain("鑒")
+    expect(people.map((person) => person.mark)).toContain("鑒眞")
     expect(people.every((person) => person.events >= 2)).toBe(true)
   })
 

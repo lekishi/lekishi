@@ -30,8 +30,8 @@
   {/if}
   {#if diorama}
     <li class="text-gold-bright">
-      The close-up at <span lang="ja" class="font-serif">{diorama}</span> is an illustrated
-      diorama, not a survey.
+      The close-up at <span lang="ja" class="font-serif">{diorama}</span> is an illustrated diorama, not
+      a survey.
     </li>
   {/if}
 </ul>

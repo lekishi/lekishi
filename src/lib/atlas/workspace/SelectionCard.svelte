@@ -87,7 +87,9 @@
   )
   const relationships = $derived(relationshipsFor(chapter, selectionRecords(atlasState, chapter)))
   const placeEvents = $derived(place === null ? [] : eventsAtPlace(chapter, place.id))
-  const evidence = $derived((eventPlace ?? place) === null ? null : placeEvidence((eventPlace ?? place)!))
+  const evidence = $derived(
+    (eventPlace ?? place) === null ? null : placeEvidence((eventPlace ?? place)!),
+  )
   const titleId = "atlas-selection-title"
 
   function span(start: number, end: number): string {
@@ -112,15 +114,13 @@
     type="button"
     onclick={() => onSelectEvent(row.id)}
     class={[
-      "group flex w-full cursor-pointer items-baseline justify-between gap-3 rounded-control px-2 py-1.5 text-left hover:bg-lacquer-raised",
+      "group flex w-full cursor-pointer flex-col gap-0.5 rounded-control px-2 py-1.5 text-left hover:bg-lacquer-raised",
       transition,
       focusRing,
     ]}
   >
-    <span class="min-w-0 font-serif text-body-sm text-ink group-hover:text-gold-bright"
-      >{row.title}</span
-    >
-    <span class="shrink-0 text-caption text-ink-dim tabular-nums">{note}</span>
+    <span class="font-serif text-body-sm text-ink group-hover:text-gold-bright">{row.title}</span>
+    <span class="text-caption text-ink-dim tabular-nums">{note}</span>
   </button>
 {/snippet}
 
@@ -210,7 +210,9 @@
                 <li class="border-l-2 border-rule pl-2 text-body-sm text-ink-dim">
                   {account.statement}
                   {#if account.locators.length > 0}
-                    <span class="block text-caption text-ink-dim">{account.locators.join("; ")}</span>
+                    <span class="block text-caption text-ink-dim"
+                      >{account.locators.join("; ")}</span
+                    >
                   {/if}
                 </li>
               {/each}
@@ -303,8 +305,8 @@
         {/if}
         {#if place.position === null}
           <EmptyState kind="uncovered" title="Not on the map">
-            {place.label} is named, but no identification is sourced for it, so the atlas claims no
-            position. This is not a claim that nothing happened there.
+            {place.label} is named, but no identification is sourced for it, so the atlas claims no position.
+            This is not a claim that nothing happened there.
           </EmptyState>
         {/if}
         <section aria-label="Events here" class="flex flex-col gap-1">
@@ -348,7 +350,9 @@
               <p class="flex flex-wrap items-center gap-x-2 text-body-sm">
                 <span class="font-serif text-ink">{row.fromLabel}</span>
                 <Icon
-                  name={row.relationship.directionality === "directed" ? "arrow-right" : "schematic"}
+                  name={row.relationship.directionality === "directed"
+                    ? "arrow-right"
+                    : "schematic"}
                   size={14}
                   class="text-ink-dim"
                 />
@@ -378,7 +382,10 @@
             {@const source = sources.get(citation.sourceId)}
             <CitationLine
               source={source?.title ?? citation.sourceId}
-              locator={citationLabel("", citation.locatorKind, citation.locator).replace(/^ · /, "")}
+              locator={citationLabel("", citation.locatorKind, citation.locator).replace(
+                /^ · /,
+                "",
+              )}
               terms={licenseLabel(source?.licenseId ?? null)}
               href={source?.url ?? undefined}
             />
@@ -404,8 +411,7 @@
         size="sm"
         disabled={onNext === null}
         onclick={() => onNext?.()}
-        id="atlas-story-next"
-        >Next in story <Icon name="chevron-right" size={14} /></Button
+        id="atlas-story-next">Next in story <Icon name="chevron-right" size={14} /></Button
       >
     {:else}
       <span class="flex-1"></span>

@@ -23,7 +23,13 @@
   import ChapterSwitcher from "../navigation/ChapterSwitcher.svelte"
   import SearchDialog from "../navigation/SearchDialog.svelte"
   import { familyOf, layerOptions, RELATIONSHIP_FAMILIES } from "../overlays"
-  import { applyChapterQuery, chapterQuery, isEmptyQuery, readChapterQuery, type Arrival } from "../query"
+  import {
+    applyChapterQuery,
+    chapterQuery,
+    isEmptyQuery,
+    readChapterQuery,
+    type Arrival,
+  } from "../query"
   import type { CameraView } from "../renderer/types"
   import { buildScene, NO_INSETS, type SafeArea } from "../scene"
   import type { SearchEntry } from "../search-index"
@@ -124,8 +130,11 @@
     width = root.clientWidth
     const box = root.getBoundingClientRect()
     if (box.width === 0) return
-    const edge = (element: HTMLElement | undefined, side: "top" | "bottom" | "left" | "right") =>
-      element === undefined ? null : element.getBoundingClientRect()[side]
+    // A region that has left the page is bound as null, not undefined.
+    const edge = (
+      element: HTMLElement | null | undefined,
+      side: "top" | "bottom" | "left" | "right",
+    ) => (element ? element.getBoundingClientRect()[side] : null)
     const top = edge(topRegion, "bottom")
     const bottom = edge(bottomRegion, "top")
     const left = edge(leftRegion, "right")
@@ -148,7 +157,7 @@
 
   $effect(() => {
     const regions = [root, topRegion, leftRegion, rightRegion, bottomRegion].filter(
-      (element): element is HTMLElement => element !== undefined,
+      (element): element is HTMLElement => element instanceof HTMLElement,
     )
     void detent
     measure()
@@ -397,7 +406,8 @@
   }
 
   function toggleSources() {
-    const showing = exploreTab === "sources" && (mode === "desktop" || listOpen || detent !== "peek")
+    const showing =
+      exploreTab === "sources" && (mode === "desktop" || listOpen || detent !== "peek")
     if (showing) {
       exploreTab = "story"
       listOpen = false
@@ -481,7 +491,7 @@
     {sourcesOpen}
     {vertical}
     onToggle={(layer, visible) => update(atlas.setLayer(atlasState, layer, visible))}
-    onSources={toggleSources}
+    onSources={mode === "desktop" ? undefined : toggleSources}
   />
 {/snippet}
 
@@ -675,15 +685,11 @@
 
   {#if mode === "desktop"}
     <div
-      class="pointer-events-none absolute inset-0 z-(--z-chrome) grid grid-cols-[18rem_minmax(0,1fr)_24rem] grid-rows-[auto_minmax(0,1fr)_auto] gap-3 p-3"
+      class="pointer-events-none absolute inset-0 z-(--z-chrome) grid grid-cols-[19.5rem_minmax(0,1fr)_24rem] grid-rows-[auto_minmax(0,1fr)_auto] gap-3 p-3"
     >
       <div class="col-span-3" bind:this={topRegion}>{@render dateBar(false)}</div>
 
-      <aside
-        bind:this={leftRegion}
-        aria-label="Explore"
-        class="flex min-h-0 flex-col gap-2"
-      >
+      <aside bind:this={leftRegion} aria-label="Explore" class="flex min-h-0 flex-col gap-2">
         {@render orbs(false)}
         <Pennants {people} active={person} onToggle={choosePerson} />
         <div
@@ -770,7 +776,7 @@
       {#if detent === "peek"}
         <div class="mt-auto px-2 pb-2">{@render legend(true)}</div>
       {/if}
-      <div bind:this={bottomRegion} class="pointer-events-auto mt-auto">
+      <div bind:this={bottomRegion} class={["pointer-events-auto", detent !== "peek" && "mt-auto"]}>
         <Sheet
           title={selectedEvent?.title ?? selectedPlace?.label ?? storyStep?.caption ?? name}
           placement="bottom"

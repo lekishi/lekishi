@@ -69,7 +69,8 @@
               focusRing,
             ]}
           >
-            <span class="min-w-0 flex-1 truncate font-serif text-body text-ink group-hover:text-gold-bright"
+            <span
+              class="min-w-0 flex-1 truncate font-serif text-body text-ink group-hover:text-gold-bright"
               >{chapter.name}</span
             >
             <span class="shrink-0 text-caption text-ink-dim tabular-nums"

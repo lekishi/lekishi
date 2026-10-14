@@ -45,13 +45,7 @@
   ])
 </script>
 
-<Dialog
-  {open}
-  id="atlas-about"
-  labelledby="atlas-about-title"
-  onclose={onClose}
-  class="w-[36rem]"
->
+<Dialog {open} id="atlas-about" labelledby="atlas-about-title" onclose={onClose} class="w-[36rem]">
   <div class="flex max-h-[calc(100dvh-1.5rem)] flex-col">
     <header class="flex shrink-0 items-start gap-3 border-b border-rule px-5 pt-4 pb-3">
       <div class="min-w-0 flex-1">

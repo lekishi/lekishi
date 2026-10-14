@@ -211,6 +211,10 @@ that, in a form that later contributors can grow into (next section):
   few. One file per record, with flat fields of simple types, is what a web
   form, a scholar, and two concurrent contributors can all write; a record's
   history is its file's history.
+  The file shapes are proposed, and the "folder per chapter" layout is
+  superseded by a world-first layout decided on 2026-10-14, in
+  link:AUTHORING_FORMAT.adoc[the authoring format record]. Only the layout is
+  decided there; its concrete file and compiler shapes await agreement.
 * *Revision history.* Git history, with the commit as the change explanation.
   Readers get a correction history from it when the atlas grows a history
   surface; nothing requires per-record revision envelopes or hashes for one
@@ -226,10 +230,12 @@ that, in a form that later contributors can grow into (next section):
 
 This changes the effect of link:PUBLICATION_APPROVAL.adoc[the publication
 approval gate]: the per-set digest ledger governs the chapters until the
-authoring format lands, and is then replaced by the per-chapter approval
-above. The ledger and the sets stay in the tree as the record of how the
-first two chapters were approved; `publication-approval.test.ts` is retired
-with them.
+owner approves a replacement and its implementation enforces the equivalent
+per-chapter invariant. The ledger and the hand-authored sets then stay in the
+tree as the record of how the first two chapters were approved;
+`publication-approval.test.ts` is retired only when the replacement gate is
+enforced. The proposed mechanism is specified in
+link:AUTHORING_FORMAT.adoc[the authoring format record].
 
 === Decision: stable records with reviewed revisions
 

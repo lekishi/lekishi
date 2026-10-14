@@ -108,7 +108,7 @@ def snapped(z, rect, margin):
 # Levels and the rectangles each is built over (None: the whole Earth).
 LEVELS = {0: None, 1: None, 2: None, 3: None, 4: None, 5: None, 6: [CHAPTERS], 7: [CHAPTERS], 8: [CHAPTERS],
           **{z: boxes(r) for z, r in FINE_RADIUS.items()}}
-FINE = 8  # the first level painted from the fine sources
+FINE = 8  # the first level painted from the fine sources, with inland detail
 # Elevation sources: the Terrarium zoom whose pixel matches the level's sample
 # spacing, the rectangle (plus margin) it is fetched over, and the lowest level
 # it serves. z9 and z10 serve the fine levels only, so every level below
@@ -326,6 +326,39 @@ def noise(lon, lat, scale):
     """Value noise keyed on absolute lon/lat, so every tile and zoom agrees."""
     return vnoise(lon * scale, lat * scale) * 0.6 + vnoise(lon * scale * 2.3 + 17, lat * scale * 2.3 + 5) * 0.4
 
+def gaussian(a, sigma):
+    """A separable Gaussian blur of a float array (Pillow's blurs take bytes only)."""
+    r = max(1, int(math.ceil(3 * sigma)))
+    k = np.exp(-0.5 * (np.arange(-r, r + 1) / sigma) ** 2); k /= k.sum()
+    for axis in (0, 1):
+        p = np.pad(a, [(r, r) if i == axis else (0, 0) for i in (0, 1)], mode="edge")
+        n = a.shape[axis]
+        a = sum(k[i] * (p[i:i + n] if axis == 0 else p[:, i:i + n]) for i in range(2 * r + 1))
+    return a
+
+DETAIL_DEG = 0.015   # hills and valleys narrower than this (about 1.6 km) mark the ground
+def inland_detail(land, z, w, n, step, LON, LAT, green, fade):
+    """The fine levels' inland ground. Its colour comes from Natural Earth's
+    20 km pixels, so without this the land is smooth blobs however close the
+    camera comes. Ground above its surroundings darkens towards forest and
+    ground below them (valley floors) lightens towards fields, from the fine
+    elevation; a mottle at two finer scales follows. Every term is zero on
+    average over a few kilometres and fades in with the pixel size, as the
+    coarser detail does, so level 8 keeps level 7's colours where a view shows
+    both. The elevation is read over a margin wider than the blur, so a tile's
+    edge agrees with its neighbour's."""
+    blur = DETAIL_DEG / step
+    m = int(math.ceil(3 * blur)) + 1
+    lons = w + (np.arange(IMG + 2 * m) - m + 0.5) * step
+    lats = n - (np.arange(IMG + 2 * m) - m + 0.5) * step
+    LONm, LATm = np.meshgrid(lons, lats)
+    Em = np.maximum(elevation(LONm, np.clip(LATm, -89.999, 89.999), step, z), 0)
+    above = np.tanh((Em - gaussian(Em, blur)) / 40.0)[m:m + IMG, m:m + IMG]
+    shade = above[..., None] * np.array([-0.30, -0.17, -0.30]) * fade(DETAIL_DEG)
+    mottle = (noise(LON + 11.3, LAT - 4.1, 150.0) - 0.5) * 0.16 * fade(1 / 150.0) + \
+        (noise(LON - 2.9, LAT + 8.6, 420.0) - 0.5) * 0.12 * fade(1 / 420.0)
+    return land * (1 + (shade + mottle[..., None]) * green)
+
 def imagery_jpeg(z, x, y):
     """Paints one tile so that every point gets the same colour at every level:
     the same rules apply worldwide (no per-level or per-region switches), sea
@@ -361,6 +394,8 @@ def imagery_jpeg(z, x, y):
     land = land * (1 - 0.5 * field) + hexc("#b7b65a") * 0.5 * field
     nz = (0.5 + (noise(LON, LAT, 40.0) - 0.5) * f_tone)[..., None]
     land = land * (1.12 - 0.3 * nz)
+    if z >= FINE:
+        land = inland_detail(land, z, w, n, step, LON, LAT, green, fade)
     rock = np.clip((slope[..., None] - 0.18) / 0.3, 0, 1) * 0.6
     land = land * (1 - rock) + hexc("#9b8a6c") * rock
     high = np.clip((Ec[..., None] - 900) / 1800, 0, 1) * 0.6

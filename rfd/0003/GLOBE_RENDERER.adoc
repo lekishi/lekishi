@@ -223,3 +223,28 @@ measurements above stay as measured.
 Evidence: link:https://github.com/lekishi/lekishi/pull/23[PR 23]; before and
 after close-ups over 秋妻屋浦 at 57, 29 and 14 km and over 阿兒奈波島 at 38 km,
 taken in the cloud container's software renderer.
+
+=== Level 8 across the chapters, and inland detail — 2026-10-14
+
+On the preview the owner found the sharper ground confined to small areas.
+Two things caused it: the place boxes are small, and inland the land's colour
+comes from Natural Earth's 20 km pixels, so only coasts and relief sharpened.
+Offered both remedies, the owner chose both.
+
+* *Level 8 across the chapters' extent.* Level 8 (about 0.3 km per pixel) now
+  covers the same rectangle as levels 6 and 7, painted from Terrarium z9
+  (1,600 tiles over the extent, needles removed: 1,254), which serves levels 8
+  to 10 only. Levels 9 and 10 keep their boxes around the places; z10 is
+  fetched over the level 9 boxes now, in seven mosaics.
+* *Inland detail.* From level 8 down, vegetated ground above its surroundings
+  darkens towards forest and valley floors lighten towards fields (the fine
+  elevation less its 1.6 km blur), with a mottle at two finer scales. Each
+  term is zero on average and fades in with the pixel size, so level 8 keeps
+  level 7's colours where a view shows both. The elevation is read over a
+  margin wider than the blur, so neighbouring tiles agree at their edges.
+* *Measured.* 4,985 tiles in 1,347 bundles, 46.4 MB (level 8 alone is 1,248
+  tiles and 17.3 MB); the artifact is 1,504 files. Levels 0 to 7 are
+  byte-identical to the build above. The tile build, with the elevation
+  already cached, took 8 min 36 s in the cloud development container, and its
+  peak memory was about 2.3 GB (the z9 mosaic); a cold cache adds the z9 and
+  z10 downloads.

@@ -1,148 +1,269 @@
 <script lang="ts">
-  import { CHAPTERS } from "$lib/atlas/chapters"
-  import { focusRing, Logo } from "$lib/ui"
+  import { onMount } from "svelte"
+  import { goto } from "$app/navigation"
+  import { CHAPTERS, chapterPresentation } from "$lib/atlas/chapters"
   import { windowLabel } from "$lib/atlas/labels"
+  import { lastPosition, type Position } from "$lib/atlas/memory"
+  import ChapterGlobe from "$lib/atlas/navigation/ChapterGlobe.svelte"
+  import SearchDialog from "$lib/atlas/navigation/SearchDialog.svelte"
+  import TimeRibbon from "$lib/atlas/navigation/TimeRibbon.svelte"
+  import { Icon, focusRing, transition } from "$lib/ui"
 
   /**
-   * The static root page.
+   * The home page (RFD 5, "Home"): search first, the chapters on the globe and
+   * on a line of time, and where the reader left off.
    *
-   * It presents the chapters a reader can open — as peers, each with its own name,
-   * story summary, and entry — and the project's non-negotiables stated where a
-   * reviewer will actually read them. The page carries no application state, so it
-   * is prerendered exactly as written.
+   * The chapters are peers. Each card carries its name, window, story summary
+   * and an entry, and its recorded editorial decision in small print after the
+   * entry: metadata about the chapter, never its pitch. The cards come from
+   * `chapters.ts`, whose tests pin them against the chapter trees.
    *
-   * The cards come from `src/lib/atlas/chapters.ts`, whose tests pin them against
-   * the chapter trees, so the page cannot describe a chapter the atlas does not
-   * carry. Editorial state is secondary metadata on a card, never the card's pitch
-   * and never its reason to exist: the Tang chapter's recorded owner approval and
-   * the Qin chapter's missing release decision are stated in small print beside
-   * the entry, and nothing here says a chapter exists for the internal treatment
-   * comparison or names the contract records it is built from.
+   * Everything a reader needs is prerendered. The globe, the search index and
+   * "Continue" are additions the browser makes after the page has painted;
+   * without them the page is the same choice in text.
    */
-  const capabilities = [
+  const SUGGESTIONS = ["鑒眞", "秋妻屋浦", "韓非", "新鄭", "754"]
+
+  const principles = [
     {
-      title: "Globe first",
-      body: "A globe drawn from tiles the site ships, painted from open elevation and Natural Earth. No provider account, token, or tile service.",
+      icon: "globe",
+      title: "Real terrain, nothing rented",
+      body: "Elevation and imagery are built from open data and shipped with the site. No map service, account or token.",
     },
     {
-      title: "Time as evidence",
-      body: "Uncertain occurrences keep their whole supported span. Playback advances a playhead inside a fixed window and stops at its end.",
+      icon: "calendar",
+      title: "Time as the sources state it",
+      body: "An uncertain date keeps its whole span. The date as the source writes it stays beside the year.",
     },
     {
-      title: "Sources stay visible",
-      body: "Every claim keeps its citation, its date precision, its uncertainty, and its reuse terms beside the record it describes.",
+      icon: "sources",
+      title: "Every claim cited",
+      body: "Citations, disputes, and the places that cannot be located stay visible beside the record.",
     },
-  ]
+  ] as const
+
+  let searchOpen = $state(false)
+  let query = $state("")
+  let resume = $state<Position | null>(null)
+
+  onMount(() => {
+    resume = lastPosition()
+  })
+
+  const resumeChapter = $derived(resume ? chapterPresentation(resume.chapterId) : undefined)
+
+  function openSearch(text = "") {
+    query = text
+    searchOpen = true
+  }
+
+  function shortcut(event: KeyboardEvent) {
+    if (event.key !== "/" || event.metaKey || event.ctrlKey || event.altKey) return
+    const target = event.target as HTMLElement | null
+    if (target?.closest("input, textarea, select, [contenteditable='true'], dialog[open]")) return
+    event.preventDefault()
+    openSearch()
+  }
 </script>
+
+<svelte:window onkeydown={shortcut} />
 
 <svelte:head>
   <title>Lekishi · Historical atlas</title>
   <meta
     name="description"
-    content="Lekishi is an interactive historical atlas for exploring events and connections across places and time, with the sources, the uncertainty, and the places it cannot locate kept visible."
+    content="Lekishi is a historical atlas: follow events across places and time on a globe, with the sources, the uncertainty, and the places it cannot locate kept visible."
   />
 </svelte:head>
 
-<div class="flex min-h-dvh flex-col bg-slate-950">
-  <header
-    class="flex items-center justify-between gap-4 border-b border-slate-800 px-4 py-3 sm:px-6"
-  >
+<div class="flex min-h-dvh flex-col bg-abyss font-interface text-ink">
+  <header class="flex items-center justify-between gap-4 px-4 py-3 sm:px-8">
     <a
       href="/"
-      class={["flex items-center rounded-control text-ink", focusRing]}
+      class={["flex items-center gap-2.5 rounded-control no-underline", focusRing]}
       aria-label="Lekishi home"
     >
-      <!-- The caps with 歴史 do not fit beside the navigation on phones. -->
-      <span class="flex sm:hidden"><Logo size={22} wordmark="caps" /></span>
-      <span class="hidden sm:flex"><Logo size={22} wordmark="bilingual" /></span>
+      <img src="/images/logo.svg" width="26" height="26" alt="" />
+      <span class="font-display text-body font-semibold tracking-wide text-ink">LEKISHI</span>
     </a>
-    <nav class="flex items-center gap-4 text-xs" aria-label="Primary">
-      <a href="/" class="text-slate-100 transition hover:text-white" aria-current="page">Overview</a
+    <nav aria-label="Primary" class="flex items-center gap-1">
+      <a
+        href="#chapters"
+        class={[
+          "rounded-control px-3 py-1.5 text-body-sm text-ink-dim no-underline hover:text-ink",
+          transition,
+          focusRing,
+        ]}>Chapters</a
       >
-      <a href="/atlas" class="text-slate-300 transition hover:text-white">Atlas</a>
+      <button
+        type="button"
+        onclick={() => openSearch()}
+        class={[
+          "inline-flex cursor-pointer items-center gap-1.5 rounded-control px-3 py-1.5 text-body-sm text-ink-dim hover:text-ink",
+          transition,
+          focusRing,
+        ]}
+      >
+        <Icon name="search" size={16} />Search
+      </button>
     </nav>
   </header>
 
-  <main class="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-12 px-4 py-12 sm:px-6 sm:py-16">
-    <section class="flex max-w-3xl flex-col gap-5">
-      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-amber-300">
-        Historical atlas
-      </p>
-      <h1 class="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-        Explore events and connections across places and time
-      </h1>
-      <p class="text-base leading-relaxed text-slate-300">
-        Lekishi is a browser atlas for reading history in place: real titles, dates, and places,
-        with the uncertainty and the places it cannot locate stated rather than filled in.
-      </p>
-      <div class="flex flex-wrap items-center gap-3">
-        <a
-          href="/atlas"
-          class="rounded-xl border border-amber-300/70 bg-amber-300/15 px-4 py-2.5 text-sm font-semibold text-amber-100 transition hover:bg-amber-300/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
+  <main class="flex flex-1 flex-col">
+    <section
+      class="relative mx-auto grid w-full max-w-6xl items-center gap-10 px-4 pt-10 pb-12 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,28rem)] lg:pt-16"
+    >
+      <div class="flex max-w-2xl flex-col gap-6">
+        <p class="text-label font-semibold uppercase text-gold">A historical atlas</p>
+        <h1 class="font-display text-display text-balance text-ink">
+          History, in the places it happened.
+        </h1>
+        <p class="max-w-xl font-serif text-body text-ink-dim">
+          Follow embassies, voyages and conquests across a globe drawn from real terrain, with
+          every date, dispute and source kept beside the story.
+        </p>
+
+        <button
+          type="button"
+          onclick={() => openSearch()}
+          data-testid="home-search"
+          class={[
+            "group flex h-14 w-full max-w-xl cursor-text items-center gap-3 rounded-plate border border-frame bg-lacquer px-4 text-left shadow-plate hover:border-gold",
+            transition,
+            focusRing,
+          ]}
         >
-          Open the atlas
-        </a>
-        <span class="text-xs text-slate-400">Static build · no account · no server process</span>
+          <Icon name="search" size={20} class="text-gold" />
+          <span class="flex-1 truncate text-body text-ink-faint group-hover:text-ink-dim"
+            >Search people, places, events and years</span
+          >
+          <kbd
+            class="hidden rounded-control border border-rule px-1.5 py-0.5 text-caption text-ink-faint sm:inline"
+            >/</kbd
+          >
+        </button>
+        <div class="-mt-2 flex flex-wrap items-center gap-1.5">
+          <span class="mr-1 text-caption text-ink-faint">Try</span>
+          {#each SUGGESTIONS as suggestion (suggestion)}
+            <button
+              type="button"
+              onclick={() => openSearch(suggestion)}
+              class={[
+                "cursor-pointer rounded-full border border-rule px-3 py-0.5 font-serif text-body-sm text-ink-dim hover:border-gold hover:text-gold-bright",
+                transition,
+                focusRing,
+              ]}>{suggestion}</button
+            >
+          {/each}
+        </div>
+
+        {#if resume && resumeChapter}
+          <a
+            href="{resumeChapter.href}{resume.search}"
+            data-testid="home-continue"
+            class={[
+              "group flex max-w-xl items-center gap-3 rounded-plate border border-rule bg-lacquer-raised px-4 py-3 no-underline hover:border-gold",
+              transition,
+              focusRing,
+            ]}
+          >
+            <span class="min-w-0 flex-1">
+              <span class="block text-label font-semibold uppercase text-ink-dim"
+                >Continue where you left off</span
+              >
+              <span class="block truncate font-serif text-body text-ink group-hover:text-gold-bright"
+                >{resume.label}</span
+              >
+              <span class="block truncate text-caption text-ink-faint">{resumeChapter.name}</span>
+            </span>
+            <Icon name="arrow-right" size={18} class="text-gold" />
+          </a>
+        {/if}
+      </div>
+
+      <div
+        aria-hidden="true"
+        class="relative hidden aspect-square w-full overflow-hidden rounded-full border border-frame bg-lacquer shadow-sheet lg:block"
+      >
+        <ChapterGlobe onOpen={(href) => goto(href)} />
       </div>
     </section>
 
-    <section class="flex flex-col gap-4" aria-labelledby="chapters-heading">
-      <h2
-        id="chapters-heading"
-        class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400"
-      >
-        Chapters
-      </h2>
+    <section
+      id="chapters"
+      aria-labelledby="chapters-heading"
+      class="mx-auto flex w-full max-w-6xl scroll-mt-4 flex-col gap-5 px-4 pb-16 sm:px-8"
+    >
+      <div class="flex items-baseline justify-between gap-4">
+        <h2 id="chapters-heading" class="font-display text-title text-ink">Chapters</h2>
+        <span class="text-caption text-ink-faint">{CHAPTERS.length} chapters</span>
+      </div>
+      <div class="rounded-plate border border-rule bg-lacquer px-4 pt-3 pb-1 sm:px-6">
+        <TimeRibbon chapters={CHAPTERS} />
+      </div>
       <div class="grid gap-4 md:grid-cols-2">
         {#each CHAPTERS as chapter (chapter.id)}
           <article
-            class="flex flex-col rounded-2xl border border-slate-800 bg-slate-900/50 p-5 transition hover:border-slate-700"
+            class="group flex flex-col rounded-plate border border-rule bg-lacquer p-5 shadow-plate transition-[border-color] duration-(--motion-fast) ease-ui hover:border-frame"
             data-chapter-id={chapter.id}
           >
-            <h3 class="text-lg font-semibold tracking-tight text-slate-100">{chapter.name}</h3>
-            <p class="mt-1 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-slate-400">
-              {windowLabel(chapter.window)}
+            <p class="text-label font-semibold uppercase text-gold">
+              <span class="tabular-nums">{windowLabel(chapter.window)}</span>
             </p>
-            <p class="mt-3 flex-1 text-sm leading-relaxed text-slate-400">{chapter.summary}</p>
+            <h3 class="mt-2 font-display text-title text-ink">{chapter.name}</h3>
+            <p class="mt-3 flex-1 font-serif text-body-sm text-ink-dim">{chapter.summary}</p>
             <div class="mt-5">
               <a
                 href={chapter.href}
-                class="inline-block rounded-xl border border-slate-700 bg-slate-800/70 px-4 py-2.5 text-sm font-semibold text-slate-100 transition hover:border-slate-500 hover:bg-slate-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-300"
+                class={[
+                  "inline-flex items-center gap-2 rounded-control bg-gold px-4 py-2 text-body-sm font-semibold text-on-gold no-underline hover:bg-gold-bright",
+                  transition,
+                  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-bright",
+                ]}
               >
                 Open the chapter<span class="sr-only">: {chapter.name}</span>
+                <Icon name="arrow-right" size={16} />
               </a>
             </div>
             <!--
-              Editorial state: one line below the entry, in every card, so the two
+              Editorial state: one line after the entry, in every card, so the
               cards read alike and the status is never the card's identity.
-              `text-slate-400` rather than a dimmer grey: the Qin card's line is
-              the qualification that keeps a peer presentation from reading as
-              approval, so it has to stay readable.
             -->
-            <p class="mt-3 text-[0.7rem] leading-snug text-slate-400">{chapter.status}</p>
+            <p class="mt-3 text-caption text-ink-dim">{chapter.status}</p>
           </article>
         {/each}
       </div>
     </section>
 
-    <section class="grid gap-4 sm:grid-cols-3">
-      {#each capabilities as capability (capability.title)}
-        <div class="rounded-2xl border border-slate-800 bg-slate-900/50 p-5">
-          <h2 class="text-sm font-semibold text-slate-100">{capability.title}</h2>
-          <p class="mt-2 text-sm leading-relaxed text-slate-400">{capability.body}</p>
-        </div>
-      {/each}
+    <section class="border-t border-rule bg-lacquer">
+      <div class="mx-auto grid w-full max-w-6xl gap-8 px-4 py-12 sm:grid-cols-3 sm:px-8">
+        {#each principles as principle (principle.title)}
+          <div>
+            <Icon name={principle.icon} size={20} class="text-gold" />
+            <h2 class="mt-3 font-serif text-title-sm text-ink">{principle.title}</h2>
+            <p class="mt-1 text-body-sm text-ink-dim">{principle.body}</p>
+          </div>
+        {/each}
+      </div>
     </section>
   </main>
 
-  <footer class="border-t border-slate-800 px-4 py-4 text-xs text-slate-500 sm:px-6">
+  <footer
+    class="flex flex-wrap items-center justify-between gap-2 border-t border-rule px-4 py-4 text-caption text-ink-faint sm:px-8"
+  >
+    <p>A static site: no account and no server.</p>
     <p>
-      Globe: Three.js (MIT), 3d-tiles-renderer (Apache-2.0) · Elevation: Terrain Tiles on AWS Open
-      Data (Mapzen and contributors) · Imagery painted from it and Natural Earth II ·
+      Elevation: Terrain Tiles (Mapzen and contributors) · Imagery from Natural Earth II ·
       <a
-        class="underline decoration-slate-600 underline-offset-2 transition-colors hover:text-slate-300 focus-visible:rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-300"
+        class={[
+          "rounded-control text-ink-dim underline decoration-rule underline-offset-2 hover:text-ink",
+          transition,
+          focusRing,
+        ]}
         href="/globe/ATTRIBUTION.txt">Full attribution</a
       >
     </p>
   </footer>
 </div>
+
+<SearchDialog open={searchOpen} bind:query onClose={() => (searchOpen = false)} />

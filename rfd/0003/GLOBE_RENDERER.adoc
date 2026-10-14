@@ -248,3 +248,19 @@ Offered both remedies, the owner chose both.
   already cached, took 8 min 36 s in the cloud development container, and its
   peak memory was about 2.3 GB (the z9 mosaic); a cold cache adds the z9 and
   z10 downloads.
+
+=== Painting in parallel, and one build in CI — 2026-10-14
+
+Painting the tiles dominated the build, and continuous integration repeated
+it in all eight jobs on two-CPU runners whenever the builder changed.
+
+* *Builder.* Each level's tiles are painted across one forked process per
+  CPU, the needle filter ranks its neighbours with a partition instead of a
+  full sort, and the elevation tiles are decoded on threads. The output is
+  byte-identical to the build above.
+* *Measured.* With the elevation cached, the build takes 373 to 394 s in the
+  four-CPU cloud development container (was 8 min 36 s), with a peak of
+  2.34 GB summed proportional set size across the workers, because the
+  forked workers share the sources. In CI, one build job on a four-CPU runner
+  repainted every tile and built the artifact in 4 min 6 s. The browser jobs
+  download that artifact rather than building their own.

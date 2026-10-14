@@ -26,12 +26,14 @@ documents it; `scripts/check-static-build.mjs` reads a bundle back to check it.
 Coverage: the whole Earth to level 5 (about 5.6 degrees per tile), and levels
 6 and 7 (about 0.6 km per imagery pixel) over the published chapters' extent,
 107-140 E and 22-40 N with a margin, which covers 長安 to 平城京 and the Qin
-chapter's 新鄭. A chapter beyond it needs its own rectangle here.
+chapter's 新鄭. A chapter beyond it needs its own rectangle here. Levels 8 to
+10 (down to about 76 m per pixel) cover a box around each place the chapters
+draw, where a reader zooms in; a new place needs its point in PLACES.
 
 Sources (fetched once into .cache/globe/, none shipped):
   Terrarium elevation tiles, AWS Open Data "Terrain Tiles" (Mapzen and the
-  sources in ATTRIBUTION below; attribution required): z4 globally and z7 over
-  the chapters' extent. Bathymetry is kept for the sea's colour; the terrain
+  sources in ATTRIBUTION below; attribution required): z4 globally, z7 over
+  the chapters' extent, and z10 around each place. Bathymetry is kept for the sea's colour; the terrain
   surface is clamped to sea level.
   Natural Earth II (public domain), the level-2 tiles vendored in
   scripts/globe/natural-earth-ii/: the biome hue at every level, blurred so its
@@ -56,13 +58,63 @@ TERRARIUM = "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}
 GRID = 65          # terrain samples per tile edge
 IMG = 256          # imagery pixels per tile edge
 
+def tile_range(z, rect):
+    """The tiles of level z that a rectangle touches, as (x0, y0, x1, y1)."""
+    s = 180.0 / (1 << z)
+    return (int((rect[0] + 180) // s), int((rect[1] + 90) // s),
+            int((rect[2] + 180 - 1e-9) // s), int((rect[3] + 90 - 1e-9) // s))
+
 # The published chapters' extent (west, south, east, north) with a margin.
 CHAPTERS = (107, 22, 140, 40)
-# Levels and the rectangle each is built over (None: the whole Earth).
-LEVELS = {0: None, 1: None, 2: None, 3: None, 4: None, 5: None, 6: CHAPTERS, 7: CHAPTERS}
-# Elevation source per zoom: the Terrarium zoom whose pixel matches the level's
-# sample spacing, with the rectangle (plus margin) it is fetched over.
-SOURCES = [(4, None), (7, (CHAPTERS[0] - 2, CHAPTERS[1] - 2, CHAPTERS[2] + 2, CHAPTERS[3] + 2))]
+# The points the chapters draw (lon, lat), rounded: a reader zooms in on these,
+# so the finest levels are built around them and nowhere else. They are where
+# detail is wanted, not historical claims; the records hold the positions.
+# Places closer than a box apart share their boxes' tiles.
+PLACES = {
+    "xinzheng": (113.72, 34.40), "yingchuan": (113.47, 34.15), "yunyang": (108.81, 34.64),
+    "hanyuan-hall": (108.96, 34.29), "yangzhou": (119.44, 32.39), "huangsipu": (120.62, 31.30),
+    "ajinawa": (127.95, 26.48), "yaku": (130.53, 30.36), "tane": (130.98, 30.57),
+    "akimeya": (130.23, 31.27), "ishigaki": (130.49, 31.24), "dazaifu": (130.52, 33.51),
+    "murozaki": (135.94, 33.59), "naniwa": (135.50, 34.69), "heijo-palace": (135.80, 34.69),
+    "todaiji": (135.84, 34.69), "toshodaiji": (135.78, 34.68),
+}
+# How far around each place (degrees) a fine level reaches: the finer the level,
+# the closer the camera that asks for it, so the less ground it has to cover.
+FINE_RADIUS = {8: 0.8, 9: 0.6, 10: 0.4}
+def boxes(r): return [(lon - r, lat - r, lon + r, lat + r) for lon, lat in PLACES.values()]
+def merged(rects):
+    """Overlapping rectangles joined into their bounding boxes, so places close
+    together share one elevation mosaic instead of fetching and holding it twice."""
+    rects = list(rects)
+    while True:
+        for i in range(len(rects)):
+            for j in range(i + 1, len(rects)):
+                a, b = rects[i], rects[j]
+                if a[0] <= b[2] and b[0] <= a[2] and a[1] <= b[3] and b[1] <= a[3]:
+                    rects[i] = (min(a[0], b[0]), min(a[1], b[1]), max(a[2], b[2]), max(a[3], b[3]))
+                    del rects[j]
+                    break
+            else:
+                continue
+            break
+        else:
+            return rects
+def snapped(z, rect, margin):
+    """A rectangle grown to the bounds of the level-z tiles it touches, plus a margin."""
+    s = 180.0 / (1 << z)
+    x0, y0, x1, y1 = tile_range(z, rect)
+    return (-180 + x0 * s - margin, -90 + y0 * s - margin, -180 + (x1 + 1) * s + margin, -90 + (y1 + 1) * s + margin)
+# Levels and the rectangles each is built over (None: the whole Earth).
+LEVELS = {0: None, 1: None, 2: None, 3: None, 4: None, 5: None, 6: [CHAPTERS], 7: [CHAPTERS],
+          **{z: boxes(r) for z, r in FINE_RADIUS.items()}}
+# Elevation sources: the Terrarium zoom whose pixel matches the level's sample
+# spacing, the rectangle (plus margin) it is fetched over, and the lowest level
+# it serves. z10 serves the fine levels only, so every level below paints
+# exactly as it did before they existed and still matches its neighbours. Its
+# boxes cover every level-8 tile built (the coarsest fine level reaches
+# furthest), plus a margin for the imagery's one-pixel border.
+SOURCES = [(4, None, 0), (7, (CHAPTERS[0] - 2, CHAPTERS[1] - 2, CHAPTERS[2] + 2, CHAPTERS[3] + 2), 0)] + \
+    [(10, b, min(FINE_RADIUS)) for b in merged(snapped(8, b, 0.05) for b in boxes(FINE_RADIUS[8]))]
 
 # The attribution the Terrain Tiles require, as listed by the Joerd attribution
 # guide (github.com/tilezen/joerd/blob/master/docs/attribution.md, read
@@ -96,23 +148,19 @@ def tile_bounds(z, x, y):
     s = 180.0 / (1 << z)
     return (-180 + x * s, -90 + y * s, -180 + (x + 1) * s, -90 + (y + 1) * s)
 
+def ranges(z):
+    if LEVELS[z] is None:
+        return [(0, 0, (2 << z) - 1, (1 << z) - 1)]
+    return sorted({tile_range(z, rect) for rect in LEVELS[z]})
+
 def tiles_for(z):
-    nx, ny = 2 << z, 1 << z
-    rect = LEVELS[z]
-    if rect is None:
-        return [(x, y) for x in range(nx) for y in range(ny)]
-    s = 180.0 / (1 << z)
-    x0, x1 = int((rect[0] + 180) // s), int((rect[2] + 180 - 1e-9) // s)
-    y0, y1 = int((rect[1] + 90) // s), int((rect[3] + 90 - 1e-9) // s)
-    return [(x, y) for x in range(x0, x1 + 1) for y in range(y0, y1 + 1)]
+    return sorted({(x, y) for x0, y0, x1, y1 in ranges(z) for x in range(x0, x1 + 1) for y in range(y0, y1 + 1)})
 
 def availability():
-    out = []
-    for z in sorted(LEVELS):
-        t = tiles_for(z)
-        xs, ys = [a for a, _ in t], [b for _, b in t]
-        out.append([{"startX": min(xs), "startY": min(ys), "endX": max(xs), "endY": max(ys)}])
-    return out
+    """Per level, the tile ranges built: one for a whole-Earth or chapter level,
+    one per place box for a fine one (the client accepts any of them)."""
+    return [[{"startX": x0, "startY": y0, "endX": x1, "endY": y1} for x0, y0, x1, y1 in ranges(z)]
+            for z in sorted(LEVELS)]
 
 # ---- elevation sources: Terrarium mosaics in Web Mercator pixel space ----
 def merc(lon, lat, z):
@@ -136,7 +184,7 @@ def fetch(z, x, y):
     return p
 
 class Source:
-    def __init__(self, z, rect):
+    def __init__(self, z, rect, min_level):
         n = 1 << z
         if rect is None:
             tx0, tx1, ty0, ty1 = 0, n - 1, 0, n - 1
@@ -146,7 +194,7 @@ class Source:
             ty0, ty1 = int(fy0 // 256), int(fy1 // 256)
         jobs = [(z, x, y) for x in range(tx0, tx1 + 1) for y in range(ty0, ty1 + 1)]
         with ThreadPoolExecutor(8) as ex: paths = list(ex.map(lambda j: fetch(*j), jobs))
-        self.z, self.ox, self.oy = z, tx0 * 256, ty0 * 256
+        self.z, self.ox, self.oy, self.min_level = z, tx0 * 256, ty0 * 256, min_level
         self.e = np.zeros(((ty1 - ty0 + 1) * 256, (tx1 - tx0 + 1) * 256), np.float32)
         for (_, x, y), p in zip(jobs, paths):
             a = np.asarray(Image.open(p).convert("RGB"), np.float32)
@@ -168,18 +216,19 @@ class Source:
         return (e[y0, x0] * (1 - fx) + e[y0, x0 + 1] * fx) * (1 - fy) + (e[y0 + 1, x0] * (1 - fx) + e[y0 + 1, x0 + 1] * fx) * fy
 
 SRC = []
-def elevation(lon, lat, deg_per_sample):
+def elevation(lon, lat, deg_per_sample, level):
     """Bilinear elevation from the coarsest source fine enough for the spacing,
-    falling back to coarser sources where a finer one does not cover the point."""
+    falling back to coarser sources where a finer one does not cover the point.
+    The sources of one zoom are one layer (z10 is fetched as a few boxes), and
+    only the sources that serve the tile's level are used."""
     out = SRC[0].sample(lon, lat)
-    for s in SRC[1:]:
-        if s.deg_per_px > deg_per_sample * 1.6:
+    for z in sorted({s.z for s in SRC[1:] if s.min_level <= level}):
+        layer = [s for s in SRC[1:] if s.z == z and s.min_level <= level]
+        for s in layer:
             m = s.covers(lon, lat)
             if m.any(): out = np.where(m, s.sample(lon, lat), out)
-            continue
-        m = s.covers(lon, lat)
-        if m.any(): out = np.where(m, s.sample(lon, lat), out)
-        break
+        if layer[0].deg_per_px <= deg_per_sample * 1.6:
+            break
     return out
 
 # ---- heights: the tile grid plus a one-sample border ----
@@ -190,7 +239,7 @@ def heights_with_border(z, x, y):
     lats = n - (np.arange(GRID + 2) - 1) * step      # row 0 = north
     LON, LAT = np.meshgrid(lons, lats)
     lat_c = np.clip(LAT, -90, 90)
-    return LON, lat_c, np.maximum(elevation(LON, lat_c, step), 0.0)
+    return LON, lat_c, np.maximum(elevation(LON, lat_c, step, z), 0.0)
 
 def height_png(z, x, y):
     """Terrarium-encoded (R*256 + G + B/256 - 32768) PNG bytes, keeping the
@@ -258,9 +307,9 @@ def imagery_jpeg(z, x, y):
     lons = w + (np.arange(IMG + 2) - 0.5) * step
     lats = n - (np.arange(IMG + 2) - 0.5) * step
     LON, LAT = np.meshgrid(lons, lats); LAT = np.clip(LAT, -89.999, 89.999)
-    E = elevation(LON, LAT, step)[1:-1, 1:-1]                 # coastline at full resolution
+    E = elevation(LON, LAT, step, z)[1:-1, 1:-1]                 # coastline at full resolution
     COARSE = 0.011                                            # the z7 source where it exists, z4 elsewhere
-    Ec = elevation(LON, LAT, COARSE)
+    Ec = elevation(LON, LAT, COARSE, z)
     gy, gx = np.gradient(Ec, step * 111320.0)
     gx = gx / np.maximum(np.cos(np.radians(LAT)), 0.05)
     slope = np.hypot(gx, gy)[1:-1, 1:-1]
@@ -318,7 +367,7 @@ def write(rel, data):
 def main():
     t0 = time.time()
     print("globe tiles: fetching elevation sources", flush=True)
-    for z, rect in SOURCES: SRC.append(Source(z, rect))
+    for z, rect, min_level in SOURCES: SRC.append(Source(z, rect, min_level))
     # Start from an empty output so a tile the coverage no longer includes
     # cannot linger in the artifact.
     if os.path.isdir(OUT):

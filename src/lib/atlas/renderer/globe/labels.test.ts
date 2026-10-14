@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { placeLabels } from "./labels"
+import { placeLabelBoxes, placeLabels } from "./labels"
 
 const box = (id: string, left: number, top: number, priority = 0) => ({
   id,
@@ -38,5 +38,23 @@ describe("label placement", () => {
   it("keeps a small gap between labels", () => {
     expect(placeLabels([box("a", 0, 0), box("b", 101, 0)]).size).toBe(1)
     expect(placeLabels([box("a", 0, 0), box("b", 103, 0)]).size).toBe(2)
+  })
+})
+
+describe("labels with alternative positions", () => {
+  it("uses the first alternative that fits and skips the rest", () => {
+    const placed = placeLabelBoxes([
+      box("place", 0, 0, 1),
+      box("caption", 0, 0, -1),
+      box("caption", 0, 40, -1),
+      box("caption", 0, 80, -1),
+    ])
+
+    expect([...placed.keys()]).toEqual(["place", "caption"])
+    expect(placed.get("caption")?.top).toBe(40)
+  })
+
+  it("never hides a higher-priority label for a caption", () => {
+    expect(placeLabels([box("caption", 0, 0, -1), box("place", 0, 0)])).toEqual(new Set(["place"]))
   })
 })

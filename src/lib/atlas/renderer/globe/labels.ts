@@ -23,13 +23,24 @@ export type LabelBox = {
 
 /** The ids of the labels to show, given each candidate's screen box. */
 export function placeLabels(candidates: readonly LabelBox[], gap = 2): Set<string> {
+  return new Set(placeLabelBoxes(candidates, gap).keys())
+}
+
+/**
+ * The box each shown label was placed in, by id. A label may offer several
+ * boxes under one id, in order of preference (a line's caption can sit at
+ * more than one point along it): the first that fits is used.
+ */
+export function placeLabelBoxes(candidates: readonly LabelBox[], gap = 2): Map<string, LabelBox> {
   const ordered = candidates
     .map((box, index) => ({ box, index }))
     .sort((a, b) => b.box.priority - a.box.priority || a.index - b.index)
   const placed: LabelBox[] = []
-  const shown = new Set<string>()
+  const shown = new Map<string, LabelBox>()
 
   for (const { box } of ordered) {
+    if (shown.has(box.id)) continue
+
     const overlaps = placed.some(
       (other) =>
         box.left < other.left + other.width + gap &&
@@ -40,7 +51,7 @@ export function placeLabels(candidates: readonly LabelBox[], gap = 2): Set<strin
 
     if (!overlaps) {
       placed.push(box)
-      shown.add(box.id)
+      shown.set(box.id, box)
     }
   }
 

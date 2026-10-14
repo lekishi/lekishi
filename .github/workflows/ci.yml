@@ -57,6 +57,15 @@ jobs:
             static/globe
           key: globe-tiles-${{ hashFiles('scripts/globe/**') }}
 
+      # The pinned font sources (about 40 MB) are fetched once by
+      # scripts/sync-fonts.mjs; cutting them to the site's characters takes
+      # seconds and follows the content, so only the downloads are cached.
+      - name: Cache font sources
+        uses: actions/cache@v4
+        with:
+          path: .cache/fonts/src
+          key: font-sources-${{ hashFiles('scripts/fonts/sources.json') }}
+
       - name: Check formatting
         run: pnpm lint
 
@@ -135,6 +144,15 @@ jobs:
             .cache/globe
             static/globe
           key: globe-tiles-${{ hashFiles('scripts/globe/**') }}
+
+      # The pinned font sources (about 40 MB) are fetched once by
+      # scripts/sync-fonts.mjs; cutting them to the site's characters takes
+      # seconds and follows the content, so only the downloads are cached.
+      - name: Cache font sources
+        uses: actions/cache@v4
+        with:
+          path: .cache/fonts/src
+          key: font-sources-${{ hashFiles('scripts/fonts/sources.json') }}
 
       - name: Install browser
         run: pnpm exec playwright install --with-deps ${{ matrix.browser || 'chromium' }}

@@ -10,6 +10,11 @@
    * The name carries its `lang` so CJK text gets the right glyph forms and is
    * read correctly. Sizes follow the type scale; a CJK name is never set below
    * `body-sm`.
+   *
+   * Every element is phrasing content (spans and a button), so a name can sit
+   * inside a paragraph or a heading. A `<details>` toggle would close an
+   * enclosing `<p>` when the prerendered HTML is parsed, and hydration would
+   * then meet a different tree from the one Svelte rendered.
    */
   let {
     name,
@@ -30,6 +35,9 @@
     size?: "display" | "title" | "title-sm" | "body" | "body-sm"
     class?: string
   } = $props()
+
+  const id = $props.id()
+  let showModern = $state(false)
 </script>
 
 <span class={["inline-flex min-w-0 flex-col", className]} data-name-form>
@@ -48,17 +56,20 @@
     <span class="text-caption text-ink-dim">{romanization}</span>
   {/if}
   {#if modern}
-    <details class="group text-caption text-ink-faint">
-      <summary
+    <span class="flex flex-col items-start text-caption text-ink-faint">
+      <button
+        type="button"
+        aria-expanded={showModern}
+        aria-controls="{id}-modern"
+        onclick={() => (showModern = !showModern)}
         class={[
-          "w-fit cursor-pointer list-none rounded-control underline decoration-dotted underline-offset-2 hover:text-ink-dim [&::-webkit-details-marker]:hidden",
+          "cursor-pointer rounded-control underline decoration-dotted underline-offset-2 hover:text-ink-dim",
           focusRing,
-        ]}
+        ]}>{showModern ? "Today" : "Modern name"}</button
       >
-        <span class="group-open:hidden">Modern name</span>
-        <span class="hidden group-open:inline">Today</span>
-      </summary>
-      <span lang={modernLang} class="text-ink-dim">{modern}</span>
-    </details>
+      <span id="{id}-modern" lang={modernLang} hidden={!showModern} class="text-ink-dim"
+        >{modern}</span
+      >
+    </span>
   {/if}
 </span>

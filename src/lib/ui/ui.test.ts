@@ -289,7 +289,16 @@ describe("NameForm", () => {
     expect(name.getAttribute("lang")).toBe("ja")
     expect(name.textContent).toBe("秋妻屋浦")
     expect(romanization.textContent).toBe("Akimeya no ura")
-    expect(target.querySelector("details")?.open).toBe(false)
+    const toggle = target.querySelector("button")!
+    const modern = document.getElementById(toggle.getAttribute("aria-controls")!)!
+    expect(toggle.getAttribute("aria-expanded")).toBe("false")
+    expect(modern.hidden).toBe(true)
+    toggle.click()
+    flushSync()
+    expect(toggle.getAttribute("aria-expanded")).toBe("true")
+    expect(modern.hidden).toBe(false)
+    expect(modern.getAttribute("lang")).toBe("ja")
+    expect(modern.textContent).toBe("坊津 (a proposed identification)")
   })
 })
 

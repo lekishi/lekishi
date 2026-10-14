@@ -951,7 +951,14 @@ test("keeps the selected event's explanation reachable at every reviewed size", 
       ["sources", card(page).getByTestId("atlas-citations")],
       ["story footer", page.locator("#atlas-story-next")],
     ] as const) {
-      await target.scrollIntoViewIfNeeded()
+      // Scrolled the way a reader reads it, from its first line. Playwright's
+      // `scrollIntoViewIfNeeded` centres in Chromium but aligns the end in
+      // Firefox, and an element taller than the phone sheet's visible part then
+      // has its first line above the sheet, so the check judged the scroll
+      // rather than the layout.
+      await target.evaluate((element) =>
+        element.scrollIntoView({ block: "start", inline: "nearest", behavior: "instant" }),
+      )
       const reached = await target.evaluate((element) => {
         const box = element.getBoundingClientRect()
         const x = box.left + Math.min(box.width / 2, 20)

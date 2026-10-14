@@ -449,6 +449,7 @@ if (requireFile(attributionFile)) {
     "Terrain Tiles on AWS Open Data",
     "U.S. Geological Survey",
     "Natural Earth II",
+    "ESA WorldCover",
   ]) {
     if (!attribution.includes(marker)) {
       fail(`globe/ATTRIBUTION.txt does not carry ${marker}`)

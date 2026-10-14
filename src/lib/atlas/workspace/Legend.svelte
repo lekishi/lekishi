@@ -91,7 +91,8 @@
       {/if}
       <HonestyPlate lines={journeys || families.length > 0} anchors={marks.anchor} {diorama} />
       <p class="text-caption text-ink-faint">
-        Elevation: Terrain Tiles (Mapzen and contributors) · Imagery from Natural Earth II ·
+        Elevation: Terrain Tiles (Mapzen and contributors) · Land cover: ESA WorldCover 2021 (CC BY
+        4.0) · Imagery from Natural Earth II ·
         <a
           href="/globe/ATTRIBUTION.txt"
           class={[

@@ -260,7 +260,8 @@
   >
     <p>A static site: no account and no server.</p>
     <p>
-      Elevation: Terrain Tiles (Mapzen and contributors) · Imagery from Natural Earth II ·
+      Elevation: Terrain Tiles (Mapzen and contributors) · Land cover: ESA WorldCover 2021 (CC BY
+      4.0) · Imagery from Natural Earth II ·
       <a
         class={[
           "rounded-control text-ink-dim underline decoration-rule underline-offset-2 hover:text-ink",

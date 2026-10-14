@@ -90,8 +90,10 @@
 
       <SectionLabel text="The globe" level={3} class="mt-5 mb-1.5" />
       <p class="text-body-sm text-ink-dim">
-        Terrain is open elevation data, painted with Natural Earth II and shipped with the site; no
-        map service is contacted. Journeys and relationship arcs are schematic.
+        Terrain is open elevation data, painted from today's land cover (ESA WorldCover) and Natural
+        Earth II and shipped with the site; no map service is contacted. Land cover shows the
+        present, not the period: built-up land is painted as the fields around it. Journeys and
+        relationship arcs are schematic.
         <a
           href="/globe/ATTRIBUTION.txt"
           class="rounded-control text-ink underline decoration-rule underline-offset-2 hover:text-gold-bright focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-bright"

@@ -447,6 +447,7 @@ test("draws the globe from the artifact's own tiles, fonts and data, and nothing
   }
 
   await expect(legend.getByText("Terrain Tiles", { exact: false })).toBeVisible()
+  await expect(legend.getByText("ESA WorldCover", { exact: false })).toBeVisible()
   await expect(legend.getByRole("link", { name: "Full attribution" })).toHaveAttribute(
     "href",
     "/globe/ATTRIBUTION.txt",

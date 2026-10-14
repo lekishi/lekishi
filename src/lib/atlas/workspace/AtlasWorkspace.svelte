@@ -820,7 +820,15 @@
           bind:detent
           closable={false}
         >
-          <div class="flex flex-col gap-3">
+          <!--
+            The list takes what the sheet has left under the dial, the strip
+            and the people, rather than a fixed share of the viewport: a fixed
+            60dvh ran below the sheet's bottom edge, so the list's last rows
+            sat under a second, outer scroll and could not be reached by
+            scrolling the list. Its floor keeps the tabs, the search field and
+            a few rows at the half detent, where the sheet's body scrolls to it.
+          -->
+          <div class="flex h-full flex-col gap-3">
             {@render dial(true)}
             {#if detent !== "peek"}
               {@render strip(true)}
@@ -840,7 +848,7 @@
                 >
               {:else}
                 <Pennants {people} active={person} onToggle={choosePerson} />
-                <div id="atlas-event-panel" class="flex h-[60dvh] min-h-0 flex-col">
+                <div id="atlas-event-panel" class="flex min-h-48 flex-1 flex-col">
                   {@render explore()}
                 </div>
               {/if}

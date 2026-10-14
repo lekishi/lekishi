@@ -1,23 +1,42 @@
 import { expect, test, type Page } from "@playwright/test"
+import {
+  QIN,
+  TANG,
+  card,
+  collectProblems,
+  expectFrameApart,
+  layoutOf,
+  openChapter,
+  openExplore,
+  openSwitcher,
+  playheadYear,
+  raiseSheet,
+  searchChapter,
+  selectEvent,
+  setWindow,
+  sheet,
+  sheetHandle,
+} from "./workspace"
 
 /**
- * Browser checks for the chapter routes.
+ * Browser checks for the chapter routes and the screens around the atlas.
  *
  * Every chapter the site serves renders through one route and one workspace, so
  * these checks are the shared reader loop in a real browser: the chapter's own
- * name, window, and recorded decision before any script runs, the same tabs,
- * search, story navigation, sources, and dispute cues for both chapters, the
- * legacy routes still resolving, and the responsive layouts staying apart at
- * every reviewed size. The default target is the built artifact served as files
- * (`pnpm e2e`); the same checks run against the development server with
- * `LEKISHI_E2E_MODE=dev pnpm e2e`.
+ * name, window, and recorded decision before any script runs, the same explore
+ * list, search, story navigation, sources, and dispute cues for both chapters,
+ * the address that links any view (RFD 5's URL contract) and Back and Forward
+ * through it, the search dialog, the chapter switcher, the About sheet, the
+ * phone sheet, the home page, the legacy routes still resolving, and the frame
+ * staying apart at every reviewed size. The default target is the built
+ * artifact served as files (`pnpm e2e`); the same checks run against the
+ * development server with `LEKISHI_E2E_MODE=dev pnpm e2e`.
  */
 
-const TANG = "/chapters/tang-mission-750-754"
-const QIN = "/chapters/qin-conquest-han-233-226"
 const DEATH_EVENT = "lks:event:hanfei-death-233"
 const DRIFT_EVENT = "lks:event:kiyokawa-drift-753"
 const HONOURS_EVENT = "lks:event:kiyokawa-honours-779"
+const CESSION_EVENT = "lks:event:han-nanyang-cession-231"
 
 const VIEWPORTS = [
   { width: 1440, height: 900 },
@@ -26,137 +45,132 @@ const VIEWPORTS = [
   { width: 320, height: 640 },
 ]
 
-function collectProblems(page: Page): string[] {
-  const problems: string[] = []
-
-  page.on("pageerror", (error) => problems.push(`page error: ${error.message}`))
-  page.on("console", (message) => {
-    if (message.type() === "error") {
-      problems.push(`console error: ${message.text()}`)
-    }
-  })
-
-  return problems
+/** The About sheet: the one place the chapter's editorial status is stated. */
+async function openAbout(page: Page): Promise<void> {
+  await page.locator("#atlas-about-open").click()
+  await expect(page.locator("dialog#atlas-about")).toBeVisible()
 }
 
-/**
- * Opens the exploration panel when it is behind the phone drawer toggle.
- *
- * The toggle's `aria-expanded` decides whether it has to be clicked: at `md` and
- * up the panel is always open and the toggle is hidden, and clicking it again
- * while the drawer is open would close it.
- */
-async function openPanel(page: Page): Promise<void> {
-  const toggle = page.locator("#atlas-list-toggle")
-
-  // The workspace mounts after the route's load resolves, so wait for the
-  // toggle to exist before deciding whether the drawer needs opening.
-  await toggle.waitFor({ state: "attached" })
-
-  if ((await toggle.isVisible()) && (await toggle.getAttribute("aria-expanded")) !== "true") {
-    await toggle.click()
-  }
-
-  await expect(page.locator('[data-testid="atlas-tab"]').first()).toBeVisible()
+async function closeAbout(page: Page): Promise<void> {
+  await page.locator("dialog#atlas-about").getByRole("button", { name: "Close About" }).click()
+  await expect(page.locator("dialog#atlas-about")).toBeHidden()
 }
 
-/** Closes the panel when it is the phone drawer, so the details are on screen. */
-async function closePanel(page: Page): Promise<void> {
-  const toggle = page.locator("#atlas-list-toggle")
-
-  if ((await toggle.isVisible()) && (await toggle.getAttribute("aria-expanded")) === "true") {
-    await toggle.click()
-  }
+/** The card's title, which names the selected record. */
+function cardTitle(page: Page) {
+  return page.locator("#atlas-selection-title")
 }
 
-/** Opens the panel and switches it to one of its surfaces. */
-async function openTab(page: Page, tab: "events" | "story" | "sources"): Promise<void> {
-  await openPanel(page)
-  await page.locator(`#atlas-tab-${tab}`).click()
-}
+test("serves the Tang chapter as an ordinary chapter page", async ({ page, request }) => {
+  // Before any script runs, the page is the chapter: its name, its window, and
+  // the decision its ledger row records, with the review it has not had.
+  const html = await (await request.get(TANG)).text()
 
-/** Selects an event from the panel's list or its search results. */
-async function selectRow(page: Page, eventId: string): Promise<void> {
-  const row = page.locator(`[data-event-id="${eventId}"]`)
+  expect(html).toMatch(/id="chapter-decision"[^>]*>\s*Owner-approved for release, 2026-09-25/)
+  expect(html).toContain("Not independent or specialist review")
 
-  await row.scrollIntoViewIfNeeded()
-  await row.click()
-  await expect(page.getByTestId("atlas-selection")).toBeVisible()
-}
-
-test("serves the Tang chapter as an ordinary chapter page", async ({ page }) => {
   const problems = collectProblems(page)
 
-  await page.goto(TANG)
+  await openChapter(page, TANG)
 
   await expect(page).toHaveTitle(/The embassy to Tang China · Lekishi/)
-  await expect(page.locator("#chapter-decision")).toHaveText(
+  // Once the workspace is up, the prerendered scope gives way to it.
+  await expect(page.locator("#chapter-scope")).toHaveCount(0)
+
+  // The workspace names the chapter in the date bar (the switcher on wide
+  // layouts), and states the decision recorded on it once, in About.
+  if ((await layoutOf(page)) !== "phone") {
+    await expect(page.locator("#atlas-chapter-switcher")).toContainText("The embassy to Tang China")
+  }
+
+  // The frame itself (everything outside its dialogs) never repeats it.
+  const frameText = await page.getByTestId("atlas-workspace").evaluate((root) => {
+    const copy = root.cloneNode(true) as HTMLElement
+    copy.querySelectorAll("dialog").forEach((dialog) => dialog.remove())
+    return copy.textContent ?? ""
+  })
+
+  expect(frameText).not.toContain("Owner-approved")
+  await openAbout(page)
+  await expect(page.locator("#atlas-about-decision")).toHaveText(
     "Owner-approved for release, 2026-09-25",
   )
-  await expect(page.locator("#chapter-scope")).toContainText("750–754")
-  await expect(page.locator("#chapter-scope")).toContainText("Not independent or specialist review")
+  await expect(page.locator("dialog#atlas-about")).toContainText("750–754")
+  await closeAbout(page)
 
-  // The workspace names the chapter and states the decision recorded on it.
-  const notice = page.locator("#atlas-notice")
-
-  await expect(notice).toContainText("Owner-approved for release, 2026-09-25")
-  await expect(notice).toContainText("The embassy to Tang China")
-
-  await openPanel(page)
+  await openExplore(page, "events")
   await expect(page.getByTestId("atlas-event-item")).toHaveCount(24)
 
   // A chapter's own year text: the CE window prints as years, never as BCE.
   const listText = await page.getByTestId("atlas-event-list").innerText()
 
   expect(listText).not.toContain("BCE")
+  await expect(playheadYear(page)).toHaveText("750")
 
   expect(problems).toEqual([])
 })
 
 test("serves the Qin chapter through the same route with its own window and BCE years", async ({
   page,
+  request,
 }) => {
+  const html = await (await request.get(QIN)).text()
+
+  expect(html).toMatch(/id="chapter-decision"[^>]*>\s*Owner-approved for release, 2026-09-27/)
+  expect(html).toContain("233 BCE–226 BCE")
+
   const problems = collectProblems(page)
 
-  await page.goto(QIN)
+  await openChapter(page, QIN)
 
   await expect(page).toHaveTitle(/The end of the state of Han · Lekishi/)
-  await expect(page.locator("#chapter-decision")).toHaveText(
+  await openAbout(page)
+  await expect(page.locator("#atlas-about-decision")).toHaveText(
     "Owner-approved for release, 2026-09-27",
   )
-  await expect(page.locator("#chapter-scope")).toContainText("233 BCE–226 BCE")
-  await expect(page.locator("#chapter-scope")).toContainText("Not independent or specialist review")
 
-  const notice = page.locator("#atlas-notice")
+  // The About sheet's counts come from the records: one of the five events and
+  // one of the four places have no sourced position.
+  const about = page.locator("dialog#atlas-about")
 
-  await expect(notice).toContainText("Owner-approved for release, 2026-09-27")
-  await expect(notice).toContainText("The end of the state of Han")
+  await expect(about).toContainText("233 BCE–226 BCE")
+  await expect(about).toContainText("Self-reviewed by")
+  await expect(about).toContainText("1 events · 1 places")
+  await closeAbout(page)
 
-  await openPanel(page)
+  await openExplore(page, "events")
   await expect(page.getByTestId("atlas-event-item")).toHaveCount(5)
 
   // Astronomical ordinals stay in the inputs; the BCE year is what the atlas
-  // states, including the playhead readout.
-  await expect(page.locator("#atlas-window-start")).toHaveValue("-232")
-  await expect(page.locator("#atlas-window-end")).toHaveValue("-225")
-  await expect(page.getByTestId("atlas-time-controls")).toContainText("233 BCE")
-  await expect(page.getByTestId("atlas-time-controls")).toContainText("226 BCE")
+  // states, including the playhead.
+  await expect(playheadYear(page)).toHaveText("233 BCE")
+
+  if ((await layoutOf(page)) !== "phone") {
+    await expect(page.locator("#atlas-window-start")).toHaveValue("-232")
+    await expect(page.locator("#atlas-window-end")).toHaveValue("-225")
+    await expect(page.locator("#atlas-window-start")).toHaveAttribute("aria-valuetext", "233 BCE")
+    await expect(page.locator("#atlas-window-end")).toHaveAttribute("aria-valuetext", "226 BCE")
+  }
+
+  await raiseSheet(page)
   await expect(page.locator("#atlas-playhead-value")).toHaveText("233 BCE")
 
-  // Every event states its own BCE year, every placement is a label anchor
-  // rather than an asserted coordinate, and the cession is named without a
-  // position because the entries state no extent or seat.
-  const listText = await page.getByTestId("atlas-event-list").innerText()
+  // Every event states its own BCE year; the uncertain spans are possible at
+  // the playhead rather than active; the cession is listed without a position
+  // because the entries state no extent or seat.
+  await openExplore(page, "events")
+
+  const list = page.getByTestId("atlas-event-list")
+  const listText = await list.innerText()
 
   expect(listText).toContain("233 BCE")
   expect(listText).toContain("226 BCE")
-  expect(listText).toContain("uncertain span")
-  expect(listText).toContain("display anchor only")
-  expect(listText).toContain("南陽 · no sourced position")
   expect(listText).not.toContain("drought")
-
-  await expect(notice).toContainText("1 of 5 in-window events")
-  await expect(notice).toContainText("1 of 4 places without a sourced map")
+  await expect(list.locator('[data-badge="possible"]').first()).toBeVisible()
+  await expect(
+    page.locator(`[data-event-id="${CESSION_EVENT}"] [data-badge="unlocated"]`),
+  ).toBeVisible()
+  await expect(page.locator(`[data-event-id="${CESSION_EVENT}"]`)).toContainText("南陽")
 
   expect(problems).toEqual([])
 })
@@ -169,50 +183,59 @@ test("redirects the legacy routes to the chapters they served", async ({ page })
   await page.goto("/compare/qin")
   await expect(page).toHaveURL(new RegExp(`${QIN}$`))
   await expect(page.locator("#atlas-workspace canvas").first()).toBeVisible({ timeout: 30_000 })
-  await expect(page.locator("#atlas-notice")).toContainText("The end of the state of Han")
+  await expect(playheadYear(page)).toHaveText("233 BCE")
 })
 
 test("replaces the workspace when the router moves between two chapters", async ({ page }) => {
   // SvelteKit reuses the page component for two values of the same dynamic route,
   // so this is the path where a mount-once workspace would leave the first
-  // chapter's events and globe under the second chapter's name. The link is
-  // injected because no surface links the chapters to each other yet; the router
-  // intercepts it exactly as it would a real one.
-  await page.goto(TANG)
-  await expect(page.locator("#atlas-workspace canvas").first()).toBeVisible({ timeout: 30_000 })
-  await openPanel(page)
+  // chapter's events and globe under the second chapter's name. The chapter
+  // switcher's links are ordinary links the router intercepts.
+  const problems = collectProblems(page)
+
+  await openChapter(page, TANG)
+  await openExplore(page, "events")
   await expect(page.getByTestId("atlas-event-item")).toHaveCount(24)
 
-  await page.evaluate((target) => {
-    const link = document.createElement("a")
+  await openSwitcher(page)
 
-    link.id = "injected-chapter-link"
-    link.href = target
-    link.textContent = "The end of the state of Han"
-    document.body.append(link)
-  }, QIN)
+  const switcher = page.locator("dialog#chapter-switcher")
 
-  await page.locator("#injected-chapter-link").click()
+  await expect(
+    switcher.getByRole("link", { name: "The embassy to Tang China", exact: true }),
+  ).toHaveAttribute("aria-current", "page")
+  await switcher.getByRole("link", { name: "The end of the state of Han", exact: true }).click()
 
   await expect(page).toHaveURL(new RegExp(`${QIN}$`))
-  await expect(page.locator("#chapter-decision")).toHaveText(
-    "Owner-approved for release, 2026-09-27",
-  )
-  await expect(page.locator("#atlas-notice")).toContainText("The end of the state of Han")
+  await expect(page).toHaveTitle(/The end of the state of Han/)
+  await expect(playheadYear(page)).toHaveText("233 BCE")
   // One workspace, and it is the chapter the URL names.
   await expect(page.getByTestId("atlas-workspace")).toHaveCount(1)
   await expect(page.locator("#atlas-workspace canvas")).toHaveCount(1)
-  await openPanel(page)
+  await openAbout(page)
+  await expect(page.locator("#atlas-about-decision")).toHaveText(
+    "Owner-approved for release, 2026-09-27",
+  )
+  await closeAbout(page)
+  await openExplore(page, "events")
   await expect(page.getByTestId("atlas-event-item")).toHaveCount(5)
   await expect(page.locator(`[data-event-id="${DEATH_EVENT}"]`)).toBeVisible()
   await expect(page.locator('[data-event-id="lks:event:appointment-750"]')).toHaveCount(0)
-  await expect(page.locator("#atlas-window-start")).toHaveValue("-232")
+
+  if ((await layoutOf(page)) !== "phone") {
+    await expect(page.locator("#atlas-window-start")).toHaveValue("-232")
+  }
+
+  // The globe moved too: it draws the Qin chapter's places, not Tang's.
+  await expect(page.locator('[data-marker-id="lks:place:yunyang"]')).toHaveCount(1)
+  await expect(page.locator('[data-marker-id="lks:place:heijo-palace"]')).toHaveCount(0)
+
+  expect(problems).toEqual([])
 })
 
 test("keeps the workspace single and the chapter records on their own page", async ({ page }) => {
   for (const route of [TANG, QIN]) {
-    await page.goto(route)
-    await expect(page.locator("#atlas-workspace canvas").first()).toBeVisible({ timeout: 30_000 })
+    await openChapter(page, route)
     await expect(page.getByTestId("atlas-workspace")).toHaveCount(1)
     await expect(page.locator("#atlas-workspace canvas")).toHaveCount(1)
     await expect(page.getByText("Synthetic", { exact: false })).toHaveCount(0)
@@ -220,65 +243,67 @@ test("keeps the workspace single and the chapter records on their own page", asy
 
   // The two chapters' events do not mix: the Tang chapter's list never carries a
   // Qin record and the other way round.
-  await page.goto(TANG)
-  await openPanel(page)
+  await openChapter(page, TANG)
+  await openExplore(page, "events")
   await expect(page.locator(`[data-event-id="${DEATH_EVENT}"]`)).toHaveCount(0)
 
-  await page.goto(QIN)
-  await openPanel(page)
+  await openChapter(page, QIN)
+  await openExplore(page, "events")
   await expect(page.locator('[data-event-id="lks:event:appointment-750"]')).toHaveCount(0)
 })
 
 test("searches both chapters by local script and romanized name", async ({ page }) => {
   // The Tang chapter: a romanized actor name, the local-script form, and a place
   // whose published reading aid is a diacritic-bearing romanization.
-  await page.goto(TANG)
-  await openPanel(page)
+  await openChapter(page, TANG)
+  await searchChapter(page, "Fujiwara no Kiyokawa")
 
-  const search = page.locator("#atlas-search")
+  const results = page.getByTestId("atlas-search-results")
 
-  await search.fill("Fujiwara no Kiyokawa")
-  await expect(page.getByTestId("atlas-search-results")).toBeVisible()
-  await expect(page.locator('[data-event-id="lks:event:appointment-750"]')).toBeVisible()
+  await expect(results).toBeVisible()
+  await expect(results.locator('[data-event-id="lks:event:appointment-750"]')).toBeVisible()
 
-  await search.fill("東大寺")
-  await expect(page.locator('[data-event-id="lks:event:todaiji-installation-754"]')).toBeVisible()
+  await page.locator("#atlas-search").fill("東大寺")
+  await expect(
+    results.locator('[data-event-id="lks:event:todaiji-installation-754"]'),
+  ).toBeVisible()
 
   // The diacritic-free spelling finds the same events as the published one.
   const resultIds = () =>
-    page
-      .getByTestId("atlas-search-results")
+    results
       .locator("[data-event-id]")
       .evaluateAll((rows) => rows.map((row) => row.getAttribute("data-event-id")))
 
-  await search.fill("Otomo no Komaro")
+  await page.locator("#atlas-search").fill("Otomo no Komaro")
+  await expect.poll(async () => (await resultIds()).length).toBeGreaterThan(0)
   const withoutDiacritics = await resultIds()
 
-  expect(withoutDiacritics.length).toBeGreaterThan(0)
-  await search.fill("Ōtomo no Komaro")
+  await page.locator("#atlas-search").fill("Ōtomo no Komaro")
   await expect.poll(resultIds).toEqual(withoutDiacritics)
 
   // A place the record names but the map does not show the event at is still
   // searchable: the return voyage's record references four places.
-  await search.fill("Yakushima")
-  await expect(page.locator('[data-event-id="lks:event:return-voyage-753"]')).toBeVisible()
+  await page.locator("#atlas-search").fill("Yakushima")
+  await expect(results.locator('[data-event-id="lks:event:return-voyage-753"]')).toBeVisible()
 
   // Clearing the search brings the window's own list back.
-  await search.fill("")
+  await page.locator("#atlas-search").fill("")
   await expect(page.getByTestId("atlas-event-list")).toBeVisible()
+  await expect(results).toHaveCount(0)
 
   // The Qin chapter searches the same way, including its own dispute text.
-  await page.goto(QIN)
-  await openPanel(page)
-  await page.locator("#atlas-search").fill("Yunyang")
-  await expect(page.locator(`[data-event-id="${DEATH_EVENT}"]`)).toBeVisible()
+  await openChapter(page, QIN)
+  await searchChapter(page, "Yunyang")
+  await expect(results.locator(`[data-event-id="${DEATH_EVENT}"]`)).toBeVisible()
 
   await page.locator("#atlas-search").fill("hereditary house")
-  await expect(page.locator(`[data-event-id="${DEATH_EVENT}"]`)).toBeVisible()
+  await expect(results.locator(`[data-event-id="${DEATH_EVENT}"]`)).toBeVisible()
 
   // A query nothing matches says so instead of showing the whole chapter.
   await page.locator("#atlas-search").fill("Xanadu")
-  await expect(page.getByTestId("atlas-search-empty")).toContainText("No published event")
+  await expect(page.locator('#atlas-event-panel [data-empty="filtered"]')).toBeVisible()
+  await expect(results).toHaveCount(0)
+  await expect(page.getByTestId("atlas-event-list")).toHaveCount(0)
 })
 
 test("finds an event outside the window and keeps its details with the outside-time notice", async ({
@@ -287,27 +312,24 @@ test("finds an event outside the window and keeps its details with the outside-t
   // 藤原清河's posthumous honours are a 779 coda node, outside the chapter's
   // 750–754 window. Search reaches it, and selecting it keeps the details
   // readable while the window still excludes it.
-  await page.goto(TANG)
-  await openPanel(page)
-  await page.locator("#atlas-window-start").fill("753")
-  await page.locator("#atlas-window-end").fill("754")
-  await page.locator("#atlas-search").fill("posthumous honours")
+  await openChapter(page, TANG)
+  await setWindow(page, TANG, 753, 754)
+  await searchChapter(page, "posthumous honours")
 
-  const row = page.locator(`[data-event-id="${HONOURS_EVENT}"]`)
+  const row = page.locator(
+    `[data-testid="atlas-search-results"] [data-event-id="${HONOURS_EVENT}"]`,
+  )
 
   await expect(row).toBeVisible()
   await expect(row.getByTestId("atlas-outside-badge")).toBeVisible()
-  await row.click()
+  await selectEvent(page, HONOURS_EVENT)
 
-  const panel = page.getByTestId("atlas-selection")
+  await expect(card(page)).toContainText("posthumous honours")
+  await expect(page.locator("#atlas-outside-notice")).toBeVisible()
 
-  await expect(panel).toBeVisible()
-  await expect(panel).toContainText("posthumous honours")
-  await expect(page.getByTestId("atlas-outside-time")).toBeVisible()
-
-  // The event keeps no map marker while the window excludes it: with the search
+  // The event keeps no map mark while the window excludes it: with the search
   // cleared, the window's own list is what is left, and the event is not in it.
-  await openPanel(page)
+  await openExplore(page, "events")
   await page.locator("#atlas-search").fill("")
   await expect(
     page.locator(`[data-testid="atlas-event-list"] [data-event-id="${HONOURS_EVENT}"]`),
@@ -315,63 +337,383 @@ test("finds an event outside the window and keeps its details with the outside-t
 
   // The explicit return moves the window instead of silently undoing the change,
   // and the event is in the window's list afterwards.
-  await closePanel(page)
+  await page.locator("#atlas-search").fill("posthumous honours")
+  await selectEvent(page, HONOURS_EVENT)
   await page.locator("#atlas-return-to-time").click()
-  await expect(page.getByTestId("atlas-outside-time")).toHaveCount(0)
-  await openPanel(page)
+  await expect(page.locator("#atlas-outside-notice")).toHaveCount(0)
+  await expect(playheadYear(page)).toHaveText("779")
+  await openExplore(page, "events")
+  await page.locator("#atlas-search").fill("")
   await expect(
     page.locator(`[data-testid="atlas-event-list"] [data-event-id="${HONOURS_EVENT}"]`),
   ).toBeVisible()
 })
 
 test("navigates the chapter's story with explicit jumps", async ({ page }) => {
-  await page.goto(QIN)
-  await openTab(page, "story")
+  await openChapter(page, QIN)
+  await openExplore(page, "story")
 
   const steps = page.getByTestId("atlas-story-step")
 
-  await expect(steps).toHaveCount(5)
-  await expect(page.getByTestId("atlas-story-summary-step")).toHaveCount(4)
+  // The story keeps its own order: five event steps and four steps that
+  // narrate a relationship, marked as such.
+  await expect(steps).toHaveCount(9)
+  await expect(steps.getByRole("img", { name: "Relationship" })).toHaveCount(4)
 
-  // The story's own caption is the step's label, and the summary steps stay in
-  // the sequence without being openable: no button, no link, nothing to activate.
-  await expect(page.getByTestId("atlas-story")).toContainText("The submission request to Qin")
+  await steps.nth(2).click()
 
-  const summaryStep = page.getByTestId("atlas-story-summary-step").first()
-
-  await expect(summaryStep).toContainText("The submission request to Qin")
-  await expect(summaryStep.locator("button")).toHaveCount(0)
-  await expect(summaryStep.locator("a")).toHaveCount(0)
-
-  await steps.nth(1).click()
-
-  const panel = page.getByTestId("atlas-selection")
-
-  await expect(panel).toBeVisible()
-  await expect(panel).toContainText("韓非 is detained and dies at 雲陽")
+  await expect(card(page)).toBeVisible()
+  await expect(cardTitle(page)).toHaveText(
+    "韓非 is detained and dies at 雲陽, 233 BCE — a disputed account",
+  )
   // The jump moved the window to the event's own time: the playhead lands in the
   // event's span.
-  await expect(page.locator("#atlas-playhead-value")).toHaveText("233 BCE")
+  await expect(playheadYear(page)).toHaveText("233 BCE")
 
-  // The jump selected the event, so the events surface now lists it as current.
-  await openTab(page, "events")
+  // The jump selected the event, so the events surface lists it as current.
+  await openExplore(page, "events")
   await expect(
     page.locator(`[data-testid="atlas-event-list"] [data-event-id="${DEATH_EVENT}"]`),
   ).toHaveAttribute("aria-current", "true")
 
   // "Next in story" is an explicit jump, separate from chronological stepping.
-  await closePanel(page)
+  // The phone list gives the sheet back to the card when an event is chosen.
+  await selectEvent(page, DEATH_EVENT)
   await page.locator("#atlas-story-next").click()
-  await expect(panel).toContainText("Han cedes 南陽")
+  await expect(cardTitle(page)).toContainText("Han cedes 南陽")
   await page.locator("#atlas-story-previous").click()
-  await expect(panel).toContainText("韓非 is detained and dies at 雲陽")
+  await expect(cardTitle(page)).toContainText("韓非 is detained and dies at 雲陽")
+
+  // A step that narrates a relationship is a jump too: it selects nothing, and
+  // shows the story's caption with the same previous and next.
+  await page.locator("#atlas-story-previous").click()
+  const summary = page.locator("#atlas-story-summary")
+
+  await expect(summary).toBeVisible()
+  await expect(summary).toContainText("The submission request to Qin")
+  await expect(summary).toContainText("2 of 9")
+  await expect(card(page)).toHaveCount(0)
+  await page.locator("#atlas-story-previous").click()
+  await expect(cardTitle(page)).toContainText("The Han king's submission")
+  await expect(page.locator("#atlas-story-previous")).toBeDisabled()
+})
+
+test("moves Back and Forward through story jumps", async ({ page }) => {
+  await openChapter(page, TANG)
+  await openExplore(page, "story")
+
+  // A story jump is a new history entry, written into the address (with the
+  // window it moved to, when that is not the chapter's default).
+  await page.getByTestId("atlas-story-step").nth(2).click()
+  await expect(cardTitle(page)).toContainText("吉備真備 is appointed vice-envoy")
+  await expect(page).toHaveURL(/\?event=kibi-appointment-751(&|$)/)
+
+  await page.locator("#atlas-story-next").click()
+  await expect(cardTitle(page)).toContainText("The envoys pay court")
+  await expect(page).toHaveURL(/\?event=court-audience-752(&|$)/)
+
+  // Back returns to the previous step without a page load.
+  await page.evaluate(() => ((window as unknown as { __marker: number }).__marker = 1))
+  await page.goBack()
+  await expect(page).toHaveURL(/\?event=kibi-appointment-751(&|$)/)
+  await expect(cardTitle(page)).toContainText("吉備真備 is appointed vice-envoy")
+  await expect(playheadYear(page)).toHaveText("751")
+
+  // And once more to where the chapter opened, with nothing selected.
+  await page.goBack()
+  await expect(page).toHaveURL(new RegExp(`${TANG}$`))
+  await expect(card(page)).toHaveCount(0)
+
+  await page.goForward()
+  await expect(page).toHaveURL(/\?event=kibi-appointment-751(&|$)/)
+  await expect(cardTitle(page)).toContainText("吉備真備 is appointed vice-envoy")
+  await page.goForward()
+  await expect(cardTitle(page)).toContainText("The envoys pay court")
+
+  // The same document throughout: Back and Forward moved the workspace, not
+  // the page.
+  expect(await page.evaluate(() => (window as unknown as { __marker?: number }).__marker)).toBe(1)
+  await expect(page.locator("#atlas-workspace canvas")).toHaveCount(1)
+})
+
+test("opens the view a link names", async ({ page }) => {
+  // An event: the card is open, the arrival plate names it, and the playhead
+  // is at the event's time.
+  await openChapter(page, `${TANG}?event=akimeya-landfall-753`)
+  await expect(cardTitle(page)).toHaveText("The landfall at 秋妻屋浦")
+  await expect(page.getByTestId("atlas-arrival")).toContainText("The landfall at 秋妻屋浦")
+  await expect(playheadYear(page)).toHaveText("753")
+
+  // The reader's next action retires the arrival plate.
+  await page.locator("#atlas-step-forward").click()
+  await expect(page.getByTestId("atlas-arrival")).toHaveCount(0)
+
+  // A story step, counted from one as a reader counts it.
+  await openChapter(page, `${TANG}?step=7`)
+  await expect(cardTitle(page)).toHaveText("The envoys invite 鑒眞 at 延光寺, 753")
+  await expect(page.getByTestId("atlas-arrival")).toContainText("Story 7 of 37")
+  await expect(card(page)).toContainText("7 of 37")
+
+  // A place: its own card.
+  await openChapter(page, `${TANG}?place=heijo-palace`)
+  await expect(card(page)).toHaveAttribute("data-selection-kind", "place")
+  await expect(page.getByTestId("atlas-arrival")).toContainText("平城宮")
+
+  // A window: the list holds that window's events.
+  await openChapter(page, `${TANG}?from=753&to=754`)
+  await openExplore(page, "events")
+  await expect(page.locator('[data-event-id="lks:event:appointment-750"]')).toHaveCount(0)
+  await expect(page.locator('[data-event-id="lks:event:naniwa-754"]')).toBeVisible()
+  await expect(playheadYear(page)).toHaveText("753")
+
+  // An event outside the linked window widens it, and the plate says to what:
+  // the event is in the window's list, with no outside-time notice.
+  await openChapter(page, `${TANG}?from=753&to=754&event=appointment-750`)
+  await expect(cardTitle(page)).toContainText("The court appoints the embassy")
+  await expect(page.locator("#atlas-outside-notice")).toHaveCount(0)
+  await expect(page.getByTestId("atlas-arrival")).toContainText("750–754")
+  await openExplore(page, "events")
+  await expect(
+    page.locator('[data-testid="atlas-event-list"] [data-event-id="lks:event:appointment-750"]'),
+  ).toBeVisible()
+
+  // A coda node outside the default window widens it just as far.
+  await openChapter(page, `${TANG}?event=jianzhen-death-763`)
+  await expect(page.locator("#atlas-outside-notice")).toHaveCount(0)
+  await expect(page.getByTestId("atlas-arrival")).toContainText("750–763")
+
+  if ((await layoutOf(page)) !== "phone") {
+    await expect(page.locator("#atlas-window-end")).toHaveValue("763")
+  }
+})
+
+test("says so when a link names a record the chapter does not have", async ({ page }) => {
+  const problems = collectProblems(page)
+
+  for (const query of ["?event=no-such-event", "?place=no-such-place", "?step=99"]) {
+    await openChapter(page, `${TANG}${query}`)
+
+    // The chapter opens at its start, and the plate says what was not found
+    // instead of silently showing something else.
+    const arrival = page.getByTestId("atlas-arrival")
+
+    await expect(arrival, query).toBeVisible()
+    await expect(arrival, query).toContainText(query.split("=")[1]!)
+    await expect(card(page), query).toHaveCount(0)
+    await expect(playheadYear(page), query).toHaveText("750")
+
+    // The stale address stays as the reader followed it until they move.
+    expect(new URL(page.url()).search).toBe(query)
+  }
+
+  // Dismissing the plate keeps the chapter where it is.
+  await page.getByTestId("atlas-arrival").getByRole("button", { name: "Dismiss" }).click()
+  await expect(page.getByTestId("atlas-arrival")).toHaveCount(0)
+  await expect(playheadYear(page)).toHaveText("750")
+  await openExplore(page, "events")
+  await expect(page.getByTestId("atlas-event-item")).toHaveCount(24)
+
+  expect(problems).toEqual([])
+})
+
+test("searches every chapter from the search dialog", async ({ page }) => {
+  const problems = collectProblems(page)
+
+  // From the home page: `/` opens search, a name in the record's own script and
+  // its romanization find the same person, and Enter opens the active result.
+  await page.goto("/")
+  await expect(page.getByTestId("home-search")).toBeVisible()
+  await page.keyboard.press("/")
+
+  const dialog = page.locator("dialog#search-dialog")
+  const input = page.locator("#search-dialog-input")
+  const hits = page.getByTestId("search-hit")
+  const hrefs = () => hits.evaluateAll((links) => links.map((link) => link.getAttribute("href")))
+
+  await expect(dialog).toBeVisible()
+  await expect(input).toBeFocused()
+
+  // The person leads both result lists. The script form also matches the
+  // records' own text, where the name is written that way, so its list is the
+  // longer one; every romanized result is among it.
+  await input.fill("鑒眞")
+  await expect(hits.first()).toContainText("Person")
+  await expect(hits.first()).toContainText("Jianzhen")
+  const byScript = await hrefs()
+  const person = await hits.first().innerText()
+
+  await input.fill("Jianzhen")
+  await expect(hits.first()).toHaveText(person)
+  const byRomanization = await hrefs()
+
+  expect(byRomanization.length).toBeGreaterThan(1)
+  expect(byScript).toEqual(expect.arrayContaining(byRomanization))
+  await expect(hits.first()).toHaveAttribute("aria-selected", "true")
+
+  // The arrow keys move the active result; every result is a real link.
+  await input.press("ArrowDown")
+  await expect(hits.nth(1)).toHaveAttribute("aria-selected", "true")
+  await expect(input).toHaveAttribute("aria-activedescendant", "search-hit-1")
+  await input.press("ArrowUp")
+  await expect(hits.first()).toHaveAttribute("aria-selected", "true")
+
+  const target = await hits.first().getAttribute("href")
+
+  expect(target).toMatch(new RegExp(`^${TANG}\\?event=`))
+  await input.press("Enter")
+  await expect(page).toHaveURL(new RegExp(`${target!.replace("?", "\\?")}$`))
+  await expect(card(page)).toBeVisible()
+  await expect(card(page)).toContainText("鑒眞")
+
+  // Inside a chapter, a result in another chapter navigates to it; results are
+  // grouped by chapter, the open chapter first, and can be scoped to it.
+  await page.keyboard.press("Escape")
+  await page.locator("#atlas-step-back").focus()
+  await page.keyboard.press("/")
+  await expect(dialog).toBeVisible()
+  await input.fill("韓非")
+
+  const qinHit = hits.filter({ hasText: "韓非 is detained" })
+
+  await expect(qinHit).toHaveAttribute("href", `${QIN}?event=hanfei-death-233`)
+
+  // Scoped to the open chapter, the Qin results are gone.
+  await dialog.getByRole("radio", { name: "The embassy to Tang China" }).click()
+  await expect(qinHit).toHaveCount(0)
+  await dialog.getByRole("radio", { name: "All chapters" }).click()
+
+  await qinHit.click()
+  await expect(page).toHaveURL(new RegExp(`${QIN}\\?event=hanfei-death-233$`))
+  await expect(cardTitle(page)).toContainText("韓非 is detained and dies at 雲陽")
+  await expect(page.getByTestId("atlas-workspace")).toHaveCount(1)
+
+  // A result in the chapter already open moves the workspace without a load.
+  await page.keyboard.press("/")
+  await expect(dialog).toBeVisible()
+  await input.fill("南陽")
+  await hits.filter({ hasText: "Han cedes 南陽" }).click()
+  await expect(dialog).toBeHidden()
+  await expect(cardTitle(page)).toContainText("Han cedes 南陽")
+  await expect(page).toHaveURL(/\?event=han-nanyang-cession-231(&|$)/)
+
+  // The date bar's search button opens the same dialog; nothing matching says so.
+  await page.getByTestId("atlas-open-search").click()
+  await expect(dialog).toBeVisible()
+  await input.fill("Xanadu")
+  await expect(page.getByTestId("search-empty")).toBeVisible()
+  await expect(hits).toHaveCount(0)
+
+  expect(problems).toEqual([])
+})
+
+test("switches chapters and offers to continue where the reader was", async ({ page }) => {
+  // Leave the Qin chapter at a story step, then open the switcher from Tang.
+  await openChapter(page, `${QIN}?event=hanfei-death-233`)
+  await expect(card(page)).toBeVisible()
+  await openChapter(page, TANG)
+  await openSwitcher(page)
+
+  const switcher = page.locator("dialog#chapter-switcher")
+
+  // Every chapter, on the time ribbon and in the list, the open one marked.
+  await expect(switcher.getByTestId("time-ribbon").getByRole("link")).toHaveCount(2)
+  await expect(switcher.locator("ul > li")).toHaveCount(2)
+  await expect(switcher.locator('a[aria-current="page"]')).toHaveAttribute("href", TANG)
+
+  // The chapter the reader left offers to continue at that position.
+  const resume = switcher.getByRole("link", { name: /Continue at/ })
+
+  await expect(resume).toHaveCount(1)
+  await expect(resume).toHaveAttribute("href", `${QIN}?event=hanfei-death-233`)
+  await expect(resume).toContainText("韓非 is detained")
+
+  // Escape closes it and leaves the chapter as it was.
+  await page.keyboard.press("Escape")
+  await expect(switcher).toBeHidden()
+  await expect(page).toHaveURL(new RegExp(`${TANG}$`))
+
+  await openSwitcher(page)
+  await resume.click()
+  await expect(page).toHaveURL(new RegExp(`${QIN}\\?event=hanfei-death-233$`))
+  await expect(cardTitle(page)).toContainText("韓非 is detained")
+})
+
+test("explains the chapter once, in the About sheet", async ({ page }) => {
+  await openChapter(page, TANG)
+  await openAbout(page)
+
+  const about = page.locator("dialog#atlas-about")
+
+  await expect(page.locator("#atlas-about-decision")).toHaveText(
+    "Owner-approved for release, 2026-09-25",
+  )
+  await expect(about).toContainText("Self-reviewed by")
+  // The coverage statement is the chapter's own, and the counts are the records'.
+  await expect(about).toContainText("Primary mission window 750–754")
+  await expect(about).toContainText("24 + 5 coda")
+  await expect(about.getByRole("link", { name: "Full attribution" })).toHaveAttribute(
+    "href",
+    "/globe/ATTRIBUTION.txt",
+  )
+
+  // It is modal: the page behind is inert, and Escape closes it.
+  await page.keyboard.press("Escape")
+  await expect(about).toBeHidden()
+  await expect(page.locator("#atlas-about-open")).toBeVisible()
+
+  // The card never repeats the decision beside an event.
+  await selectEvent(page, "lks:event:appointment-750")
+  await expect(card(page)).not.toContainText("Owner-approved")
+})
+
+test("steps the phone sheet through its detents", async ({ page }) => {
+  await openChapter(page, TANG)
+  test.skip((await layoutOf(page)) !== "phone", "The bottom sheet is the phone layout.")
+
+  const handle = sheetHandle(page)
+
+  // Peek: the dial and the legend, nothing else.
+  await expect(sheet(page)).toHaveAttribute("data-detent", "peek")
+  await expect(page.getByTestId("atlas-dial")).toBeVisible()
+  await expect(page.getByTestId("atlas-legend")).toBeVisible()
+  await expect(page.getByTestId("atlas-timeline")).toHaveCount(0)
+  await expect(handle).toHaveAccessibleName(/^Expand/)
+
+  // Half: the strip and the list; the legend gives way.
+  await handle.click()
+  await expect(sheet(page)).toHaveAttribute("data-detent", "half")
+  await expect(page.getByTestId("atlas-timeline")).toBeVisible()
+  await expect(page.locator("#atlas-event-panel")).toBeVisible()
+  await expect(page.getByTestId("atlas-legend")).toHaveCount(0)
+
+  // Full, then the handle collapses it back to peek.
+  await handle.click()
+  await expect(sheet(page)).toHaveAttribute("data-detent", "full")
+  await expect(handle).toHaveAccessibleName(/^Collapse/)
+  const full = await sheet(page).boundingBox()
+  const viewport = page.viewportSize()!
+
+  expect(full!.y + full!.height).toBeLessThanOrEqual(viewport.height + 1)
+  await handle.click()
+  await expect(sheet(page)).toHaveAttribute("data-detent", "peek")
+  await expect(page.getByTestId("atlas-legend")).toBeVisible()
+
+  // Choosing an event raises the sheet to half with its card.
+  await openExplore(page, "events")
+  await page.locator('[data-event-id="lks:event:yaku-arrival-753"]').click()
+  await expect(sheet(page)).toHaveAttribute("data-detent", "half")
+  await expect(card(page)).toBeVisible()
+  await expect(sheet(page).getByRole("heading", { level: 2 }).first()).toContainText("益救島")
+
+  // The Sources orb opens the sources list at full.
+  await page.getByTestId("atlas-layers").getByRole("button", { name: "Sources" }).click()
+  await expect(sheet(page)).toHaveAttribute("data-detent", "full")
+  await expect(page.getByTestId("atlas-sources")).toBeVisible()
 })
 
 test("shows the sources and locators behind a selected event", async ({ page }) => {
-  await page.goto(QIN)
-  await openPanel(page)
-
-  await selectRow(page, DEATH_EVENT)
+  await openChapter(page, QIN)
+  await selectEvent(page, DEATH_EVENT)
 
   const citations = page.getByTestId("atlas-citations")
 
@@ -379,12 +721,15 @@ test("shows the sources and locators behind a selected event", async ({ page }) 
   // The locator is the record's own, and the quoted passage is shown where the
   // source's recorded terms permit quoting.
   await expect(citations).toContainText("卷六 秦始皇本紀")
-  await expect(citations).toContainText("韓非使秦，秦用李斯謀，留非，非死雲陽。")
-  await expect(citations).toContainText("Wikisource")
+  await expect(citations).toContainText("Public domain")
+  await expect(card(page).locator("blockquote")).toContainText(
+    "韓非使秦，秦用李斯謀，留非，非死雲陽。",
+  )
 
   // The chapter's source list states each source's kind, attribution, and reuse
-  // terms, and links only the identifier the record carries.
-  await openTab(page, "sources")
+  // terms, links only the identifier the record carries, and marks what the
+  // selection cites.
+  await openExplore(page, "sources")
 
   const sources = page.getByTestId("atlas-sources")
 
@@ -393,12 +738,13 @@ test("shows the sources and locators behind a selected event", async ({ page }) 
   await expect(sources).toContainText("Public domain")
   await expect(sources).toContainText("CC0 1.0")
   await expect(sources.locator("a", { hasText: "zh.wikisource.org" }).first()).toBeVisible()
+  await expect(sources.locator('[data-cited="true"]').first()).toBeVisible()
 
   // The Tang chapter's own source list states its sources' recorded terms too,
   // including the one whose rights are reserved: the atlas states them and links
   // only the identifiers the records carry.
-  await page.goto(TANG)
-  await openTab(page, "sources")
+  await openChapter(page, TANG)
+  await openExplore(page, "sources")
 
   const tangSources = page.getByTestId("atlas-sources")
 
@@ -410,264 +756,248 @@ test("shows the sources and locators behind a selected event", async ({ page }) 
 
 test("shows the disputed account on both chapters", async ({ page }) => {
   // The Qin chapter's disputed death: the badge in the list and the accounts
-  // with their locators in the details panel.
-  await page.goto(QIN)
-  await openPanel(page)
+  // with their locators in the card.
+  await openChapter(page, QIN)
+  await openExplore(page, "events")
 
   const qinRow = page.locator(`[data-event-id="${DEATH_EVENT}"]`)
 
   await expect(qinRow.getByTestId("atlas-dispute-badge")).toBeVisible()
-  await selectRow(page, DEATH_EVENT)
+  await selectEvent(page, DEATH_EVENT)
 
   const dispute = page.getByTestId("atlas-dispute")
 
   await expect(dispute).toBeVisible()
-  await expect(dispute).toContainText("Disputed account")
+  await expect(dispute.locator('[data-badge="disputed"]')).toBeVisible()
   await expect(dispute).toContainText("王安五年")
   await expect(dispute).toContainText("韓王安六年")
   await expect(dispute).toContainText("hereditary house")
   await expect(dispute).toContainText("卷四十五 韓世家")
 
-  // The details panel keeps the record's own uncertainty alongside the dispute,
-  // and states that the place is shown at a label anchor rather than a site.
-  await expect(page.getByTestId("atlas-selection")).toContainText("uncertain span")
-  await expect(page.getByTestId("atlas-selection")).toContainText("display anchor only")
+  // The card keeps the record's own uncertainty alongside the dispute, and
+  // states that the place is shown at a label anchor rather than a site.
+  await expect(card(page).locator('[data-badge="possible"]')).toContainText("uncertain span")
+  await expect(card(page).locator('[data-badge="anchor"]')).toBeVisible()
+  // The disputed event's place keeps its mark on the map.
+  await expect(page.locator('[data-marker-id="lks:place:yunyang"]')).toHaveCount(1)
 
   // The Tang chapter shows its own disputed record the same way. 鑒眞's death is
   // a coda node at 763, outside the chapter's 750–754 window.
-  await page.goto(TANG)
-  await openPanel(page)
-  await page.locator("#atlas-window-end").fill("779")
+  await openChapter(page, TANG)
+  await setWindow(page, TANG, 750, 779)
+  await openExplore(page, "events")
 
   const tangRow = page.locator('[data-event-id="lks:event:jianzhen-death-763"]')
 
   await expect(tangRow.getByTestId("atlas-dispute-badge")).toBeVisible()
-  await selectRow(page, "lks:event:jianzhen-death-763")
+  await selectEvent(page, "lks:event:jianzhen-death-763")
   await expect(page.getByTestId("atlas-dispute")).toBeVisible()
-  await expect(page.getByTestId("atlas-dispute")).toContainText("Disputed account")
+  await expect(page.getByTestId("atlas-dispute").locator('[data-badge="disputed"]')).toBeVisible()
 })
 
 test("keeps an unplaced event listable and explains why it has no position", async ({ page }) => {
-  await page.goto(TANG)
-  await openPanel(page)
+  await openChapter(page, TANG)
 
   // 驩州 is named by the published record, but no identification is sourced.
-  await selectRow(page, DRIFT_EVENT)
+  await selectEvent(page, DRIFT_EVENT)
 
-  const panel = page.getByTestId("atlas-selection")
-
-  await expect(panel).toContainText("驩州")
-  await expect(page.getByTestId("atlas-unplaced")).toContainText(
+  await expect(card(page)).toContainText("驩州")
+  await expect(card(page).locator('[data-empty="uncovered"]')).toContainText(
     "no identification is sourced for it",
   )
   await expect(page.locator("#atlas-follow-toggle")).toBeDisabled()
 
   // A label anchor states the record's own note instead of an unplaced reason.
-  await openPanel(page)
-  await page.locator("#atlas-search").fill("節刀")
-  await selectRow(page, "lks:event:sekito-752")
-  await expect(page.getByTestId("atlas-placement-note")).toContainText("平城宮")
+  await searchChapter(page, "節刀")
+  await selectEvent(page, "lks:event:sekito-752")
+  await expect(card(page).getByTestId("atlas-place-note")).toContainText("平城宮")
+  await expect(card(page).locator('[data-empty="uncovered"]')).toHaveCount(0)
 })
 
 test("reaches search, the story, and a story jump with the keyboard", async ({ page }) => {
-  // Keyboard-only exploration: the search field, the panel's tabs, the story's
-  // steps, and the details panel's own story jumps are all reachable without a
-  // pointer (RFD 4 AC6).
-  await page.goto(QIN)
-  await openPanel(page)
+  // Keyboard-only exploration: the search field, the list's tabs, the story's
+  // steps, and the card's own story jumps are all reachable without a pointer
+  // (RFD 4 AC6).
+  await openChapter(page, QIN)
+  await openExplore(page, "events")
 
   await page.locator("#atlas-search").focus()
   await page.keyboard.type("Yunyang")
 
-  const row = page.locator(`[data-event-id="${DEATH_EVENT}"]`)
+  const row = page.locator(`[data-testid="atlas-search-results"] [data-event-id="${DEATH_EVENT}"]`)
 
   await expect(row).toBeVisible()
   await row.focus()
   await page.keyboard.press("Enter")
-  await expect(page.getByTestId("atlas-selection")).toBeVisible()
-  await expect(page.getByTestId("atlas-selection")).toContainText("韓非 is detained")
+  await expect(cardTitle(page)).toContainText("韓非 is detained")
 
-  // The panel's tabs are buttons with a role: a keyboard user can move to the
-  // story surface and open a step.
-  await openPanel(page)
-  await page.locator("#atlas-tab-story").focus()
-  await page.keyboard.press("Enter")
+  // The list's tabs are a tablist with roving focus: the arrow keys move
+  // between them and select as they go.
+  await openExplore(page, "events")
+  await page.locator("#atlas-explore-tab-events").focus()
+  await page.keyboard.press("ArrowLeft")
+  await expect(page.locator("#atlas-explore-tab-story")).toBeFocused()
+  await expect(page.locator("#atlas-explore-tab-story")).toHaveAttribute("aria-selected", "true")
   await expect(page.getByTestId("atlas-story-step").first()).toBeVisible()
 
   await page.getByTestId("atlas-story-step").first().focus()
   await page.keyboard.press("Enter")
-  await expect(page.getByTestId("atlas-selection")).toContainText(
-    "The Han king's submission and 韓非's embassy",
-  )
+  await expect(cardTitle(page)).toContainText("The Han king's submission and 韓非's embassy")
 
-  // And the details panel's own jumps work from the keyboard.
+  // And the card's own jumps work from the keyboard, through the summary step.
   await expect(page.locator("#atlas-story-next")).toBeVisible()
   await page.locator("#atlas-story-next").focus()
   await page.keyboard.press("Enter")
-  await expect(page.getByTestId("atlas-selection")).toContainText("韓非 is detained")
+  await expect(page.locator("#atlas-story-summary")).toContainText("The submission request to Qin")
+  await page.locator("#atlas-story-next").focus()
+  await page.keyboard.press("Enter")
+  await expect(cardTitle(page)).toContainText("韓非 is detained")
 })
 
 test("keeps the chapter overlays apart at every reviewed size", async ({ page }) => {
-  // Four viewports, several overlay states each, and software WebGL: every click
-  // and every resize costs seconds, so this check needs more than the default
-  // budget.
+  // Four viewports, several states each, on software WebGL: every click and
+  // every resize costs seconds, so this check needs more than the default budget.
   test.setTimeout(420_000)
-
-  await page.goto(QIN)
-
-  const selectors = [
-    "#chapter-decision",
-    "#chapter-scope",
-    "#atlas-notice",
-    "#atlas-follow-toggle",
-    "#atlas-list-toggle",
-    "#atlas-event-panel",
-    "#atlas-selection",
-    '[data-testid="atlas-time-controls"]',
-  ]
-
-  async function assertNoOverlaps(width: number, state: string): Promise<void> {
-    const boxes = await page.evaluate(
-      (candidates) =>
-        candidates.flatMap((selector) =>
-          Array.from(document.querySelectorAll(selector))
-            .filter((element) => {
-              const rect = element.getBoundingClientRect()
-              const style = getComputedStyle(element)
-              return (
-                style.display !== "none" &&
-                style.visibility !== "hidden" &&
-                rect.width > 0 &&
-                rect.height > 0
-              )
-            })
-            .map((element) => {
-              const rect = element.getBoundingClientRect()
-              return { selector, x: rect.x, y: rect.y, right: rect.right, bottom: rect.bottom }
-            }),
-        ),
-      selectors,
-    )
-
-    for (let i = 0; i < boxes.length; i += 1) {
-      for (let j = i + 1; j < boxes.length; j += 1) {
-        const [a, b] = [boxes[i], boxes[j]]
-        const overlaps = a.right > b.x && b.right > a.x && a.bottom > b.y && b.bottom > a.y
-
-        expect(overlaps, `${a.selector} overlaps ${b.selector} (${state} at ${width})`).toBe(false)
-      }
-    }
-  }
 
   for (const viewport of VIEWPORTS) {
     await page.setViewportSize(viewport)
-    await expect(page.locator("#chapter-decision")).toBeVisible()
-    await assertNoOverlaps(viewport.width, "default")
+    await openChapter(page, QIN)
+    const at = `at ${viewport.width}`
 
-    // The phone layout puts the panel behind the drawer toggle, so the states
-    // that matter here are the panel open, each tab, and an event selected.
-    await openPanel(page)
-    await assertNoOverlaps(viewport.width, "panel open")
+    await expectFrameApart(page, `default ${at}`)
 
-    for (const tab of ["story", "sources", "events"] as const) {
-      await page.locator(`#atlas-tab-${tab}`).click()
-      await assertNoOverlaps(viewport.width, `${tab} tab`)
+    // The legend folds on tablets and phones; unfolded it still stays apart.
+    const legendButton = page.getByTestId("atlas-legend").getByRole("button", { name: "Legend" })
+
+    if ((await legendButton.getAttribute("aria-expanded")) !== "true") {
+      await legendButton.click()
+      await expectFrameApart(page, `legend open ${at}`)
+      await legendButton.click()
     }
 
-    await selectRow(page, DEATH_EVENT)
+    // The explore list on each tab.
+    for (const tab of ["story", "sources", "events"] as const) {
+      await openExplore(page, tab)
+      await expectFrameApart(page, `${tab} tab ${at}`)
+    }
+
+    await selectEvent(page, DEATH_EVENT)
     await expect(page.getByTestId("atlas-dispute")).toBeVisible()
-    await assertNoOverlaps(viewport.width, "selected")
+    await expectFrameApart(page, `selected ${at}`)
 
-    // The story and sources surfaces are reachable with a selection too, and
-    // their content stays inside the panel. Selecting closed the phone drawer, so
-    // the panel is opened again for them.
+    // The story and sources surfaces are reachable with a selection too.
     for (const tab of ["story", "sources", "events"] as const) {
-      await openTab(page, tab)
-      await assertNoOverlaps(viewport.width, `${tab} tab with selection`)
+      await openExplore(page, tab)
+      await expectFrameApart(page, `${tab} tab with selection ${at}`)
     }
+
+    // A summary step's card.
+    await openExplore(page, "story")
+    await page.getByTestId("atlas-story-step").nth(1).click()
+    await expect(page.locator("#atlas-story-summary")).toBeVisible()
+    await expectFrameApart(page, `story summary ${at}`)
+
+    // A link's arrival plate with its card.
+    await openChapter(page, `${QIN}?event=hanfei-death-233`)
+    await expect(page.getByTestId("atlas-arrival")).toBeVisible()
+    await expectFrameApart(page, `arrival ${at}`)
   }
 })
 
 test("keeps the selected event's explanation reachable at every reviewed size", async ({
   page,
 }) => {
-  // Four viewports, each with a fresh page load, a panel open, a selection, and a
-  // panel measurement, all on software WebGL: measured at 2.7 minutes alone, so
-  // the default budget is too tight once the suite runs the whole file.
   test.setTimeout(360_000)
 
-  // The details panel carries the record's own explanation of why an event has
-  // no position. At a short viewport the panel used to render past the bottom of
-  // the workspace, where nothing could scroll to it, so the explanation was the
-  // text that fell off. The panel must stay inside the viewport, stay clear of
-  // the time controls, and scroll to its own end.
+  // The card carries the record's own explanation of why an event has no
+  // position. At a short viewport a card used to render past the bottom of the
+  // workspace, where nothing could scroll to it, so the explanation was the text
+  // that fell off. The card must stay inside the viewport, clear of the dial and
+  // the strip, and scroll to its own end; the chapter's decision and review
+  // status are in About, which is reachable at every size too.
   for (const viewport of VIEWPORTS) {
     await page.setViewportSize(viewport)
-    await page.goto(QIN)
-    await openPanel(page)
+    await openChapter(page, QIN)
+    await selectEvent(page, CESSION_EVENT)
 
-    await selectRow(page, "lks:event:han-nanyang-cession-231")
-
-    const panel = page.locator("#atlas-selection")
-
-    await expect(panel).toBeVisible()
-
-    const geometry = await panel.evaluate((element) => {
+    const geometry = await card(page).evaluate((element) => {
       const box = element.getBoundingClientRect()
-      const controls = document.querySelector('[data-testid="atlas-time-controls"]')
-      const controlsBox = controls === null ? null : controls.getBoundingClientRect()
+      const controls = ['[data-testid="atlas-dial"]', '[data-testid="atlas-timeline"]']
+        .map((selector) => document.querySelector(selector))
+        .filter((found): found is Element => found !== null)
+        .filter((found) => !found.closest("section[data-detent]"))
+        .map((found) => found.getBoundingClientRect())
 
       return {
         bottom: box.bottom,
         viewportHeight: window.innerHeight,
-        controlsTop: controlsBox === null ? null : controlsBox.top,
-        clientHeight: element.clientHeight,
-        scrollHeight: element.scrollHeight,
+        overControls: controls.some(
+          (control) =>
+            control.right > box.left &&
+            box.right > control.left &&
+            control.bottom > box.top &&
+            box.bottom > control.top,
+        ),
       }
     })
 
-    expect(geometry.bottom, `panel bottom at ${viewport.width}`).toBeLessThanOrEqual(
-      geometry.viewportHeight,
+    expect(geometry.overControls, `card over the controls at ${viewport.width}`).toBe(false)
+
+    // The explanation and the card's footer are reachable: scrolled into view,
+    // each is inside the viewport and on top where it is drawn.
+    for (const [what, target] of [
+      ["no-position explanation", card(page).locator('[data-empty="uncovered"]')],
+      ["record note", card(page).getByTestId("atlas-selection-note")],
+      ["sources", card(page).getByTestId("atlas-citations")],
+      ["story footer", page.locator("#atlas-story-next")],
+    ] as const) {
+      await target.scrollIntoViewIfNeeded()
+      const reached = await target.evaluate((element) => {
+        const box = element.getBoundingClientRect()
+        const x = box.left + Math.min(box.width / 2, 20)
+        const y = box.top + Math.min(box.height / 2, 10)
+        const hit = document.elementFromPoint(x, y)
+
+        return {
+          inside: box.top >= -1 && box.top + Math.min(box.height, 20) <= window.innerHeight + 1,
+          onTop: hit !== null && (hit === element || element.contains(hit)),
+        }
+      })
+
+      expect(reached, `${what} at ${viewport.width}`).toEqual({ inside: true, onTop: true })
+    }
+
+    await expect(card(page).getByTestId("atlas-selection-note")).toContainText(
+      "state no extent or seat",
     )
-    expect(geometry.controlsTop, `controls at ${viewport.width}`).not.toBeNull()
-    expect(geometry.bottom, `panel over the controls at ${viewport.width}`).toBeLessThanOrEqual(
-      geometry.controlsTop ?? 0,
+    await expect(card(page).locator('[data-empty="uncovered"]')).toContainText("no position")
+
+    // The card's frame stays inside the viewport.
+    const box = (await card(page).boundingBox())!
+    const inSheet = (await layoutOf(page)) === "phone"
+
+    if (!inSheet) {
+      expect(box.y + box.height, `card bottom at ${viewport.width}`).toBeLessThanOrEqual(
+        geometry.viewportHeight + 1,
+      )
+    }
+
+    // The decision and review status: one press away, and the dialog fits.
+    await openAbout(page)
+    const about = page.locator("dialog#atlas-about")
+    const aboutBox = (await about.boundingBox())!
+
+    expect(aboutBox.y + aboutBox.height).toBeLessThanOrEqual(viewport.height + 1)
+    expect(aboutBox.x + aboutBox.width).toBeLessThanOrEqual(viewport.width + 1)
+    await expect(page.locator("#atlas-about-decision")).toHaveText(
+      "Owner-approved for release, 2026-09-27",
     )
+    await expect(about).toContainText("Self-reviewed by")
+    const attribution = about.getByRole("link", { name: "Full attribution" })
 
-    // Scroll the panel to its end: the explanation of why 南陽 has no position is
-    // in the panel, and the chapter's recorded decision and review status are the
-    // last thing it carries. Both have to be reachable — either because the panel
-    // fits at this size or because it scrolls to them.
-    await panel.evaluate((element) => {
-      element.scrollTop = element.scrollHeight
-    })
-
-    const reached = await panel.evaluate((element) => {
-      const paragraphs = Array.from(element.querySelectorAll("p"))
-      const last = paragraphs.at(-1)
-      const panelBox = element.getBoundingClientRect()
-      const lastBox = last === undefined ? null : last.getBoundingClientRect()
-
-      return {
-        text: (element as HTMLElement).innerText,
-        lastInside:
-          lastBox !== null &&
-          lastBox.bottom <= panelBox.bottom + 1 &&
-          lastBox.top >= panelBox.top - 1,
-        scrollTop: element.scrollTop,
-        maxScroll: element.scrollHeight - element.clientHeight,
-      }
-    })
-
-    expect(reached.text, `explanation at ${viewport.width}`).toContain("state no extent or seat")
-    expect(reached.text, `explanation at ${viewport.width}`).toContain("no position")
-    expect(reached.text, `status at ${viewport.width}`).toContain("Owner-approved for release")
-    expect(reached.text, `review status at ${viewport.width}`).toContain("Self-reviewed by")
-    expect(reached.scrollTop, `scroll reached the end at ${viewport.width}`).toBeCloseTo(
-      reached.maxScroll,
-      -1,
-    )
-    expect(reached.lastInside, `panel's end visible at ${viewport.width}`).toBe(true)
+    await attribution.scrollIntoViewIfNeeded()
+    await expect(attribution).toBeInViewport()
+    await closeAbout(page)
   }
 })
 
@@ -714,33 +1044,33 @@ test("presents both chapters from the root page as peer entries", async ({ page 
   expect(mainText).not.toContain("treatment comparison")
   expect(mainText).not.toContain("lekishi-historical-contract")
 
-  // The hero's atlas call to action stays the page's primary action, ahead of
-  // the chapter entries.
-  await expect(page.getByRole("link", { name: "Open the atlas" })).toBeVisible()
-
+  // Search is the page's primary action, ahead of the chapter entries; the time
+  // ribbon places both chapters on one line of time.
   const order = await page.evaluate(() => {
-    const text = document.querySelector("main")?.textContent ?? ""
+    const search = document.querySelector('[data-testid="home-search"]')
+    const chapter = document.querySelector("[data-chapter-id]")
 
-    return {
-      atlas: text.indexOf("Open the atlas"),
-      chapter: text.indexOf("Open the chapter"),
-    }
+    return search !== null && chapter !== null
+      ? Boolean(search.compareDocumentPosition(chapter) & Node.DOCUMENT_POSITION_FOLLOWING)
+      : null
   })
 
-  expect(order.atlas).toBeGreaterThanOrEqual(0)
-  expect(order.chapter).toBeGreaterThan(order.atlas)
+  expect(order).toBe(true)
+  await expect(page.getByTestId("time-ribbon").getByRole("link")).toHaveCount(2)
 
-  // The Qin entry opens the Qin chapter, and that page states the chapter's
-  // recorded decision and names the chapter the card named.
+  // A first visit offers nothing to continue.
+  await expect(page.getByTestId("home-continue")).toHaveCount(0)
+
+  // The Qin entry opens the Qin chapter, and that page names the chapter the
+  // card named.
   await qin.getByRole("link", { name: /Open the chapter/ }).click()
 
   await expect(page).toHaveURL(new RegExp(`${QIN}$`))
   await expect(page).toHaveTitle(/The end of the state of Han/)
-  await expect(page.locator("#chapter-decision")).toHaveText(
-    "Owner-approved for release, 2026-09-27",
-  )
+  await expect(page.locator("#atlas-workspace canvas").first()).toBeVisible({ timeout: 30_000 })
 
   // Discoverability holds at the reviewed sizes, with no horizontal overflow.
+  // The chapter globe is drawn only where it is seen: wide screens with WebGL.
   await page.goto("/")
 
   for (const viewport of VIEWPORTS) {
@@ -748,6 +1078,13 @@ test("presents both chapters from the root page as peer entries", async ({ page 
     await expect(cards).toHaveCount(2)
     await expect(tang).toBeVisible()
     await expect(qin).toBeVisible()
+    await expect(page.getByTestId("home-search")).toBeVisible()
+
+    if (viewport.width >= 1024) {
+      await expect(page.getByTestId("chapter-globe")).toBeVisible()
+    } else {
+      await expect(page.getByTestId("chapter-globe")).toBeHidden()
+    }
 
     const overflow = await page.evaluate(
       () => document.documentElement.scrollWidth - window.innerWidth,
@@ -757,4 +1094,32 @@ test("presents both chapters from the root page as peer entries", async ({ page 
   }
 
   expect(problems).toEqual([])
+})
+
+test("offers to continue where the reader left off", async ({ page }) => {
+  // The position is kept on this device only, and the home page offers the
+  // last one.
+  await openChapter(page, `${QIN}?event=hanfei-death-233`)
+  await expect(card(page)).toBeVisible()
+
+  // A story jump moves the position; the remembered one is the latest.
+  await page.locator("#atlas-story-next").click()
+  await expect(cardTitle(page)).toContainText("Han cedes 南陽")
+
+  await page.goto("/")
+
+  const resume = page.getByTestId("home-continue")
+
+  await expect(resume).toBeVisible()
+  // The jump moved the window to the event's time, so the address carries it.
+  await expect(resume).toHaveAttribute(
+    "href",
+    new RegExp(`^${QIN}\\?event=han-nanyang-cession-231(&|$)`),
+  )
+  await expect(resume).toContainText("Han cedes 南陽")
+  await expect(resume).toContainText("The end of the state of Han")
+
+  await resume.click()
+  await expect(page).toHaveURL(new RegExp(`${QIN}\\?event=han-nanyang-cession-231(&|$)`))
+  await expect(cardTitle(page)).toContainText("Han cedes 南陽")
 })

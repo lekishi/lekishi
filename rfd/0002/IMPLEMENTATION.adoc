@@ -16,7 +16,9 @@ content roadmap, ordered so the Tang chapter improves every week.
 - [x] Decide the source rule: approved 2026-10-10, sources allowing commercial use with attribution are adopted by default; the register in the RFD records each source's verified terms and status. CHGIS, CCTS, CBDB, and Seshat are not adopted.
 - [ ] Read the terms of every `?` row in link:../../docs/SOURCE_REGISTER.adoc[the source register] on the source's own page (the Japanese gazetteer datasets first), file ColBase's and the Taipei Palace Museum's terms pages, and update the rows.
 - [x] Decide the authoring format: approved 2026-10-10 as a folder per chapter with one small file per record, compiled to the v0 contract at build time, with the content model, approval contract, roles, and staged contribution surface recorded in the RFD.
-- [ ] Build the compiler from record files to the v0 contract, with the CI checks the RFD lists; keep claims, citations, precision, and attestation versus interpretation.
+- [x] Decide the content layout: world first, decided 2026-10-14, with every record once under `historical/<kind>/` and chapters as manifests. Evidence: link:AUTHORING_FORMAT.adoc[the authoring format record].
+- [ ] Agree the proposed parts of link:AUTHORING_FORMAT.adoc[the authoring format record]: the chapter manifest, the digest approval, the record file, date notation, and journeys, territories, and media.
+- [ ] Build the compiler from record files to the v0 contract, with the CI checks the RFD lists, emitting one compiled document per chapter so content costs one deployed file per chapter; keep claims, citations, precision, and attestation versus interpretation.
 
 == Fix the places we have
 

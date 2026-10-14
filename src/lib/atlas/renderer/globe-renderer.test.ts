@@ -112,7 +112,7 @@ const initial = createAtlasState(chapter)
 const container = { clientWidth: 1280, clientHeight: 720 } as unknown as HTMLElement
 
 function mount() {
-  const callbacks = { onSelectEvent: vi.fn(), onManualCameraInput: vi.fn() }
+  const callbacks = { onSelectPlace: vi.fn(), onManualCameraInput: vi.fn() }
   const renderer = createGlobeAtlasRenderer(container, callbacks)
   const view = fake.FakeView.instances.at(-1)!
 
@@ -190,13 +190,13 @@ describe("mounting", () => {
 
   it("reports a click on a marker as event selection", () => {
     const { callbacks, view } = mount()
-    view.markerAt.mockReturnValueOnce("event-harbor-assembly")
+    view.markerAt.mockReturnValueOnce("place-north-harbor")
 
     view.canvas.dispatch("pointerdown", { clientX: 10, clientY: 20, timeStamp: 100 })
     view.canvas.dispatch("pointerup", { clientX: 11, clientY: 20, timeStamp: 180 })
 
     expect(view.markerAt).toHaveBeenCalledWith(11, 20, 8)
-    expect(callbacks.onSelectEvent).toHaveBeenCalledWith("event-harbor-assembly")
+    expect(callbacks.onSelectPlace).toHaveBeenCalledWith("place-north-harbor")
   })
 
   it("reports a click on empty globe as clearing the selection", () => {
@@ -205,7 +205,7 @@ describe("mounting", () => {
     view.canvas.dispatch("pointerdown", { clientX: 10, clientY: 20 })
     view.canvas.dispatch("pointerup", { clientX: 10, clientY: 20 })
 
-    expect(callbacks.onSelectEvent).toHaveBeenCalledWith(null)
+    expect(callbacks.onSelectPlace).toHaveBeenCalledWith(null)
   })
 
   it("gives a tap a wider reach than a mouse click", () => {
@@ -230,12 +230,12 @@ describe("mounting", () => {
     view.canvas.dispatch("pointerdown", { clientX: 10, clientY: 20, button: 2 })
     view.canvas.dispatch("pointerup", { clientX: 10, clientY: 20, button: 2 })
 
-    expect(callbacks.onSelectEvent).not.toHaveBeenCalled()
+    expect(callbacks.onSelectPlace).not.toHaveBeenCalled()
   })
 })
 
 describe("sync", () => {
-  it("applies the chapter's home view once and draws one marker per placed scene event", () => {
+  it("applies the chapter's home view once and draws one marker per place", () => {
     const { renderer, view } = mount()
     const scene = buildScene(initial, chapter)
 
@@ -244,11 +244,11 @@ describe("sync", () => {
 
     expect(view.setView).toHaveBeenCalledTimes(1)
     expect(view.setView).toHaveBeenCalledWith({ lon: 128.5, lat: 32.5 }, 9_000_000)
-    // A list-only event stays in the scene and gets no marker, because the map
+    // The map draws places, each once, however many events stand at it; a
+    // list-only event stays in the scene and adds no marker, because the map
     // must not invent the position it does not have.
-    expect(view.markerIds).toEqual(
-      scene.events.filter((event) => event.placement.kind === "point").map((event) => event.id),
-    )
+    expect(view.markerIds).toEqual(scene.places.map((place) => place.id))
+    expect(new Set(view.markerIds).size).toBe(view.markerIds.length)
     expect(scene.events.length).toBeGreaterThan(view.markerIds.length)
   })
 
@@ -259,16 +259,16 @@ describe("sync", () => {
     const narrowed = { ...initial, timeWindow: { start: 1200, end: 1210 } }
     renderer.sync(buildScene(narrowed, chapter))
 
-    expect(view.markerIds).toEqual(["event-harbor-assembly"])
+    expect(view.markerIds).toEqual(["place-north-harbor"])
   })
 
-  it("emphasizes the selected event's marker", () => {
+  it("emphasizes the selected event's place", () => {
     const { renderer, view } = mount()
 
     renderer.sync(buildScene(selectEvent(initial, chapter, "event-harbor-assembly"), chapter))
     const markers = view.setMarkers.mock.calls.at(-1)?.[0] as { id: string; emphasis: string }[]
 
-    expect(markers.find((m) => m.id === "event-harbor-assembly")?.emphasis).toBe("selected")
+    expect(markers.find((m) => m.id === "place-north-harbor")?.emphasis).toBe("selected")
     expect(markers.filter((m) => m.emphasis === "selected")).toHaveLength(1)
   })
 

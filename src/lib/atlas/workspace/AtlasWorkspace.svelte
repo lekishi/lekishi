@@ -157,7 +157,13 @@
   <Globe
     {scene}
     label="Atlas globe · {name}"
-    onSelectEvent={selectEvent}
+    onSelectPlace={(placeId) => {
+      const here = scene.events.filter(
+        (event) => event.placement.kind === "point" && event.placement.placeId === placeId,
+      )
+      if (placeId !== null && here.length === 1) selectEvent(here[0]!.id)
+      else atlasState = atlas.selectPlace(atlasState, chapter, placeId)
+    }}
     onManualCameraInput={() => (atlasState = atlas.noteManualCameraInput(atlasState))}
     onError={(error) => (rendererError = error.message)}
   />

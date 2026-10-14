@@ -116,6 +116,8 @@ export type AtlasScene = {
   readonly selectionOutsideWindow: boolean
   readonly cameraFollow: AtlasState["cameraFollow"]
   readonly cameraFocus: CameraFocusRequest | null
+  /** Changes when the reader asks for the chapter's opening view again. */
+  readonly homeToken: number
   /** Where the focus request flies to, or null when there is no flight to make. */
   readonly cameraTarget: GeoPoint | null
   readonly safeArea: SafeArea
@@ -260,6 +262,7 @@ export function buildScene(
     selectionOutsideWindow: selectionTimeStatus(state, chapter) === "outside-window",
     cameraFollow: state.cameraFollow,
     cameraFocus: state.cameraFocus,
+    homeToken: state.homeToken,
     // A focus request exists only when following or for an explicit jump, and
     // flies to a position the map can actually show.
     cameraTarget:

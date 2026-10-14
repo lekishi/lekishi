@@ -1,4 +1,4 @@
-import type { AtlasScene, SceneEvent } from "../scene"
+import type { AtlasScene, ScenePlace } from "../scene"
 import { createGlobeView, type GlobeMarker, type GlobeView } from "./globe/view"
 import type { AtlasRenderer, AtlasRendererCallbacks } from "./types"
 
@@ -40,21 +40,19 @@ export type GlobeRendererOptions = {
   tilesUrl?: string
 }
 
-/** The marker a placed scene event draws: colour by certainty, size by emphasis. */
-export function markerFor(event: SceneEvent): GlobeMarker | null {
-  // The scene keeps list-only events; the map draws only what a published place
-  // reference places, and no coordinate is invented for the rest.
-  if (event.placement.kind !== "point") {
-    return null
-  }
-
+/**
+ * The marker a scene place draws: colour by certainty, size by emphasis. The
+ * scene only carries places with a published position, so no coordinate is
+ * invented for a list-only event.
+ */
+export function markerFor(place: ScenePlace): GlobeMarker {
   return {
-    id: event.id,
-    lon: event.placement.position.lon,
-    lat: event.placement.position.lat,
-    label: event.title,
-    tone: event.relation === "possible" ? "possible" : "definite",
-    emphasis: event.selected ? "selected" : event.playback === "active" ? "active" : "base",
+    id: place.id,
+    lon: place.position.lon,
+    lat: place.position.lat,
+    label: place.label,
+    tone: place.tone,
+    emphasis: place.selected ? "selected" : place.playback === "active" ? "active" : "base",
   }
 }
 
@@ -115,7 +113,7 @@ class GlobeAtlasRenderer implements AtlasRenderer {
 
     // A tap is a finger, so it reaches a little further than a mouse click.
     const radius = event.pointerType === "touch" ? 14 : 8
-    this.callbacks.onSelectEvent(this.view.markerAt(event.clientX, event.clientY, radius))
+    this.callbacks.onSelectPlace(this.view.markerAt(event.clientX, event.clientY, radius))
   }
 
   private readonly handlePointerCancel = (): void => {
@@ -201,9 +199,7 @@ class GlobeAtlasRenderer implements AtlasRenderer {
       this.view.setView(scene.homeView, this.options.homeHeightMeters)
     }
 
-    this.view.setMarkers(
-      scene.events.map(markerFor).filter((marker): marker is GlobeMarker => marker !== null),
-    )
+    this.view.setMarkers(scene.places.map(markerFor))
 
     // Apply each camera request exactly once; the token is bumped by the state
     // reducer whenever a new flight is wanted, including on resume.

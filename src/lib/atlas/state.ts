@@ -84,6 +84,8 @@ export type AtlasState = {
   readonly storyStep: number | null
   readonly cameraFollow: CameraFollow
   readonly cameraFocus: CameraFocusRequest | null
+  /** Bumped by "back to the chapter's view"; the renderer flies home once per value. */
+  readonly homeToken: number
   readonly layers: LayerVisibility
 }
 
@@ -105,6 +107,7 @@ export function createAtlasState(chapter: Chapter): AtlasState {
     // Following is opt-in: nothing moves the camera until the user asks for it.
     cameraFollow: "manual",
     cameraFocus: null,
+    homeToken: 0,
     layers: DEFAULT_LAYERS,
   }
 }
@@ -194,6 +197,15 @@ export function selectPlace(
     storyStep: null,
     cameraFocus: place?.position ? nextFocus(state, placeId, explicit) : state.cameraFocus,
   }
+}
+
+/**
+ * An explicit return to the chapter's opening view. It is a programmatic
+ * flight, so it does not stop following by itself; following has nothing to
+ * hold the camera on without a selection anyway.
+ */
+export function returnHome(state: AtlasState): AtlasState {
+  return { ...state, homeToken: state.homeToken + 1 }
 }
 
 export function setLayer(state: AtlasState, layer: LayerId, visible: boolean): AtlasState {

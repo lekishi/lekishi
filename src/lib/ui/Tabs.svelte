@@ -82,7 +82,7 @@
         onclick={() => choose(index)}
         onkeydown={(event) => keydown(event, index)}
         class={[
-          "inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-control px-2.5 text-body-sm font-semibold",
+          "group inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-control px-2.5 text-body-sm font-semibold",
           transition,
           focusRing,
           isSelected
@@ -92,7 +92,13 @@
       >
         {tab.label}
         {#if tab.count !== undefined}
-          <span class="font-normal tabular-nums text-ink-faint">{tab.count}</span>
+          <!-- ink-faint falls below AA on the raised fill, so the count steps up with it. -->
+          <span
+            class={[
+              "font-normal tabular-nums",
+              isSelected ? "text-ink-dim" : "text-ink-faint group-hover:text-ink-dim",
+            ]}>{tab.count}</span
+          >
         {/if}
       </button>
     {/each}

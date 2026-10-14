@@ -33,7 +33,9 @@
             <span class="flex min-w-0 flex-1 flex-col gap-0.5">
               <span class="font-serif text-title-sm font-semibold text-ink">{page.title}</span>
               <span class="text-body-sm text-ink-dim">{page.description}</span>
-              <span class="text-caption text-ink-faint">/dev/{page.slug}</span>
+              <span class="text-caption text-ink-faint group-hover:text-ink-dim"
+                >/dev/{page.slug}</span
+              >
             </span>
             <Icon name="chevron-right" size={18} class="text-ink-faint group-hover:text-gold" />
           </a>

@@ -54,7 +54,9 @@ All colours are tokens; use them as utilities (`bg-lacquer`, `text-ink-dim`,
 | Relationships | `rel-transmission`, `-diplomacy`, `-conflict`, `-trade`, `-institution`         | Relationship arcs and their legend.                             |
 
 Contrast is measured against `lacquer`, and `/dev/design` prints each figure from
-the stylesheet's own values. Keep body text at AA (4.5:1) or better.
+the stylesheet's own values. Keep body text at AA (4.5:1) or better. `ink-faint`
+passes on `lacquer` but not on `lacquer-raised` (4.44:1), so text on a raised,
+selected or hovered surface steps up to `ink-dim`.
 
 "Possible", "disputed" and "outside the window" are **states**, not hues. They
 modify whatever mark they apply to (hollow, split, dimmed) and always say so in

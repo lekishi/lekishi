@@ -51,10 +51,20 @@ describe("contrast", () => {
     expect(contrastGrade(contrast("#7f786b", "#121a20")!)).toBe("AA large")
   })
 
-  it("keeps field placeholder text at AA on its raised surface", () => {
-    const foreground = value(tokens.colors, "ink-dim")
-    const background = value(tokens.colors, "lacquer-raised")
-    expect(contrast(foreground!, background!)!).toBeGreaterThanOrEqual(4.5)
+  // Every text tier the primitives set on each solid surface they sit on: the
+  // placeholder, a selected tab's count and a hovered citation's terms put
+  // ink-dim on lacquer-raised; ink-faint is used on lacquer only.
+  it.each([
+    ["ink", "lacquer"],
+    ["ink-dim", "lacquer"],
+    ["ink-faint", "lacquer"],
+    ["ink", "lacquer-raised"],
+    ["ink-dim", "lacquer-raised"],
+    ["on-gold", "gold"],
+    ["on-gold", "gold-bright"],
+  ])("keeps %s text at AA on %s", (foreground, background) => {
+    const ratio = contrast(value(tokens.colors, foreground)!, value(tokens.colors, background)!)
+    expect(ratio).toBeGreaterThanOrEqual(4.5)
   })
 
   it("composites a translucent colour over the background", () => {

@@ -28,7 +28,7 @@
 
   const base =
     "flex w-full min-w-0 items-baseline gap-2 rounded-control px-1 py-0.5 text-left text-body-sm no-underline"
-  const interactive = ["cursor-pointer hover:bg-lacquer-raised", transition, focusRing]
+  const interactive = ["group cursor-pointer hover:bg-lacquer-raised", transition, focusRing]
 </script>
 
 {#snippet line()}
@@ -40,7 +40,8 @@
     {/if}
   </span>
   {#if terms}
-    <span class="shrink-0 text-caption text-ink-faint">{terms}</span>
+    <!-- ink-faint falls below AA on the hover fill, so the terms step up with it. -->
+    <span class="shrink-0 text-caption text-ink-faint group-hover:text-ink-dim">{terms}</span>
   {/if}
 {/snippet}
 

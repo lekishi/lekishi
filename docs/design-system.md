@@ -150,7 +150,8 @@ for places outside the app (the favicon, links, documents).
   `static/images/logo.svg`, `static/images/wordmark.svg`,
   `static/images/wordmark-caps.svg`, `static/favicon.svg`,
   `static/favicon.ico` and `static/apple-touch-icon.png`. `brand.test.ts` fails
-  until the files match.
+  until the SVGs match, and `pnpm brand:check` rerenders the raster files in
+  Playwright's pinned Chromium and fails until they match.
 
 ## Components
 

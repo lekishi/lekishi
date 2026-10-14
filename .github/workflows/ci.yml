@@ -39,6 +39,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      # `pnpm verify` rerenders the committed PNG and ICO in Playwright's pinned
+      # Chromium and fails if either raster has drifted from the brand geometry.
+      - name: Install Chromium for brand asset verification
+        run: pnpm exec playwright install --with-deps chromium
+
       # The globe tiles are painted from open elevation by
       # scripts/globe/build-tiles.py (numpy and Pillow, a few minutes). Cache the
       # fetched elevation and the built tiles by the builder's inputs, so a run
@@ -60,6 +65,9 @@ jobs:
 
       - name: Run unit and contract tests
         run: pnpm test
+
+      - name: Check generated brand assets
+        run: pnpm brand:check
 
       - name: Build the static artifact
         run: pnpm build

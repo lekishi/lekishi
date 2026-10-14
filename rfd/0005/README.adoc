@@ -548,8 +548,9 @@ disappears on a light browser's tab strip.
 
 `Logo` in `$lib/ui` draws the mark and the wordmark from that module with the
 ink and gold tokens; `pnpm brand` writes the shipped SVGs from it and renders
-the ICO and PNG icons, and `src/lib/ui/brand.test.ts` fails when a shipped file
-drifts from the module. The brand files total 29 KB: the favicon ICO grows
+the ICO and PNG icons. `src/lib/ui/brand.test.ts` pins the SVGs and
+`pnpm brand:check` rerenders the raster files in Playwright's pinned Chromium,
+so either form of drift fails verification. The brand files total 29 KB: the favicon ICO grows
 from 152 bytes to 4.9 KB with its 16, 32 and 48 px images, `logo.svg` shrinks
 from 3.1 KB to 1.4 KB, and `favicon.svg`, `apple-touch-icon.png`,
 `images/wordmark.svg` and `images/wordmark-caps.svg` are four new files.
@@ -625,8 +626,10 @@ Answered by the owner on 2026-10-14:
   (<<Mark and wordmark>>), *in its Window cut,* chosen over the full dial and
   the bezel.
 * *The wordmark is the caps with 歴史,* chosen over the caps alone and the
-  lowercase with a gold dot. The caps alone remain for the phone header,
-  where the pair does not fit.
+  lowercase with a gold dot.
+
+The responsive header implementation uses the caps alone below 640 px, where
+the chosen bilingual lockup does not fit beside the navigation.
 
 == Implementation
 

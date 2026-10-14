@@ -8,7 +8,9 @@
  *   the corners itself, so the tile is square.
  *
  * Chromium draws them, so the rasters match what a browser draws from the SVG.
- * Set LEKISHI_CHROMIUM to a Chromium executable if Playwright's own is missing.
+ * `--check` compares the rendered bytes without rewriting them. Playwright's
+ * pinned browser is the canonical renderer; the Nix shell provides that exact
+ * browser revision through PLAYWRIGHT_BROWSERS_PATH.
  */
 import { readFileSync, writeFileSync } from "node:fs"
 import path from "node:path"
@@ -17,10 +19,9 @@ import { chromium } from "@playwright/test"
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const source = (file) => readFileSync(path.join(root, file), "utf8")
+const check = process.argv.includes("--check")
 
-const browser = await chromium.launch(
-  process.env.LEKISHI_CHROMIUM ? { executablePath: process.env.LEKISHI_CHROMIUM } : {},
-)
+const browser = await chromium.launch()
 const page = await browser.newPage({ deviceScaleFactor: 1 })
 
 async function png(svg, size) {
@@ -55,17 +56,26 @@ function ico(images) {
 
 const tiny = source("scripts/brand/favicon-16.svg")
 const small = source("static/favicon.svg")
-writeFileSync(
-  path.join(root, "static/favicon.ico"),
-  ico([
+const files = {
+  "static/favicon.ico": ico([
     { size: 16, data: await png(tiny, 16) },
     { size: 32, data: await png(small, 32) },
     { size: 48, data: await png(small, 48) },
   ]),
-)
-writeFileSync(
-  path.join(root, "static/apple-touch-icon.png"),
-  await png(source("scripts/brand/touch-icon.svg"), 180),
-)
+  "static/apple-touch-icon.png": await png(source("scripts/brand/touch-icon.svg"), 180),
+}
 await browser.close()
-console.log("Wrote static/favicon.ico and static/apple-touch-icon.png")
+
+for (const [file, data] of Object.entries(files)) {
+  const target = path.join(root, file)
+  if (check) {
+    if (!readFileSync(target).equals(data)) throw new Error(`${file} is stale; run pnpm brand`)
+  } else {
+    writeFileSync(target, data)
+  }
+}
+console.log(
+  check
+    ? "Checked static/favicon.ico and static/apple-touch-icon.png"
+    : "Wrote static/favicon.ico and static/apple-touch-icon.png",
+)

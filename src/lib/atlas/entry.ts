@@ -36,6 +36,8 @@ let watching = false
 let currentChapter: Chapter | null = null
 let currentHeading: AtlasHeading | undefined
 let currentHistory: AtlasHistory | null = null
+// The address the page started at, used once: a restored page reads its own.
+let startSearch: string | null = null
 
 /**
  * True in a browser. SvelteKit renders the chapter shell on the server while
@@ -82,9 +84,10 @@ export function mountWorkspace(): void {
     // The address is read at mount time, not when the page started: a page
     // restored from the back/forward cache mounts at the address it shows.
     workspace = mountAtlas(root, currentChapter, currentHeading, {
-      search: window.location.search,
+      search: startSearch ?? window.location.search,
       history: currentHistory,
     })
+    startSearch = null
     window.__lekishiAtlas = workspace
   } catch (error) {
     reportFailure(root, error)
@@ -118,16 +121,22 @@ export function watchWorkspaceLifecycle(): void {
  * chapter. Called by the chapter route after the prerendered shell is in the DOM.
  * `heading` is the chapter's display name and recorded decision — product
  * presentation the route takes from `chapters.ts`; without it the workspace uses
- * the chapter's published title and states no decision line.
+ * the chapter's published title and states no decision line. `history` writes
+ * the reader's position into the address (the route supplies SvelteKit's
+ * shallow routing), and `search` is the address the route is rendering, which
+ * the router may not have written to `location` yet; without it the workspace
+ * reads `location`.
  */
 export function startAtlasPage(
   chapter: Chapter,
   heading?: AtlasHeading,
   history: AtlasHistory | null = null,
+  search: string | null = null,
 ): void {
   currentChapter = chapter
   currentHeading = heading
   currentHistory = history
+  startSearch = search
   watchWorkspaceLifecycle()
   mountWorkspace()
 }

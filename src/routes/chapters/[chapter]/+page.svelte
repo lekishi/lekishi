@@ -1,105 +1,128 @@
 <script lang="ts">
-  import { chapterHeading } from "$lib/atlas/chapters"
-  import { releaseWorkspace, startAtlasPage } from "$lib/atlas/entry"
-  import { windowLabel } from "$lib/atlas/labels"
+  import { untrack } from "svelte"
+  import { afterNavigate, pushState, replaceState } from "$app/navigation"
+  import { page } from "$app/state"
+  import { chapterHeading, chapterHref } from "$lib/atlas/chapters"
   import type { Chapter } from "$lib/atlas/domain"
-  import { focusRing, Logo } from "$lib/ui"
+  import { navigateWorkspace, releaseWorkspace, startAtlasPage } from "$lib/atlas/entry"
+  import { windowLabel } from "$lib/atlas/labels"
+  import type { AtlasHistory } from "$lib/atlas/mount"
 
   /**
    * The chapter page.
    *
-   * One route renders every chapter the site carries, with the same shell and the
-   * same workspace: a reader arriving from the root page finds the chapter named
-   * the way the card named it, its window in the atlas's own year text, and the
-   * recorded decision on the content, then the workspace itself.
+   * One route renders every chapter the site carries. SvelteKit owns the route
+   * and the `#atlas-workspace` mount point; everything inside the mount point
+   * belongs to the Svelte workspace, the single owner of atlas state (RFD 3).
    *
-   * SvelteKit owns the route, the page, and the `#atlas-workspace` mount point.
-   * Everything inside the mount point belongs to the Svelte workspace, which is
-   * the single owner of atlas selection, time, and camera-follow state (RFD 3).
-   *
-   * The shell is prerendered from the route's load, so a direct request for a
-   * chapter returns real HTML before any JavaScript runs. `startAtlasPage` is the
-   * one module that mounts a workspace; it refuses to mount a second one, and the
-   * teardown here plus the bootstrap's own `pagehide`/`pageshow` handling keeps a
-   * restored page at exactly one workspace.
+   * The page is prerendered from the route's load, so a direct request returns
+   * the chapter's name, window, decision, summary and coverage as real HTML
+   * before any JavaScript runs. That shell covers the page until the workspace
+   * has mounted, and is the page a reader without JavaScript keeps.
    *
    * The mount runs in an effect rather than `onMount`, because SvelteKit reuses
-   * this page component when the router moves between two chapters of the same
-   * dynamic route: `onMount` would run once and the new chapter would render
-   * under the previous chapter's workspace. The effect re-runs whenever the
-   * loaded chapter changes, and its cleanup releases the workspace before the
-   * next one starts, so the URL, the heading, and the workspace always describe
-   * the same chapter. The effect is browser-only: Svelte does not run effects
-   * while the shell is rendered on the server, so nothing touches the DOM during
-   * prerendering.
+   * this component when the router moves between two chapters of the same
+   * route: the effect re-runs for the new chapter and its cleanup releases the
+   * old workspace first. The effect is browser-only, so nothing touches the DOM
+   * while prerendering.
+   *
+   * The address carries the reader's position (RFD 5's URL contract). The
+   * workspace writes it through shallow routing, so moving around a chapter
+   * never reloads it; Back and Forward between those entries are handed back to
+   * the workspace, and a link to the chapter already open moves the workspace
+   * to it and says what it opened.
    */
   let { data }: { data: { chapter: Chapter } } = $props()
 
-  // Derived, not read once: the page is prerendered from the route's load, and a
-  // reader arriving from the root page must find the chapter named the way the
-  // card named it.
   const heading = $derived(chapterHeading(data.chapter))
+  let mounted = $state(false)
+
+  const history: AtlasHistory = {
+    push: (search) => pushState(`${location.pathname}${search}`, {}),
+    replace: (search) => replaceState(`${location.pathname}${search}`, {}),
+  }
 
   $effect(() => {
     const chapter = data.chapter
 
-    startAtlasPage(chapter, chapterHeading(chapter))
+    untrack(() => {
+      startAtlasPage(chapter, chapterHeading(chapter), history, page.url.search)
+      mounted = true
+    })
 
     return () => releaseWorkspace()
   })
+
+  afterNavigate(({ to, type }) => {
+    // A link to the chapter already open. The first arrival is the mount's
+    // own, and a popstate is the listener's below.
+    if (type === "enter" || type === "popstate" || to === null) return
+    if (to.url.pathname !== chapterHref(data.chapter.id)) return
+    navigateWorkspace(data.chapter.id, to.url.search, true)
+  })
 </script>
+
+<svelte:window
+  onpopstate={() => {
+    // Back and Forward between the entries the workspace wrote are shallow:
+    // the router does not navigate, so the workspace is told directly.
+    if (location.pathname === chapterHref(data.chapter.id)) {
+      navigateWorkspace(data.chapter.id, location.search)
+    }
+  }}
+/>
 
 <svelte:head>
   <title>{heading.name} · Lekishi</title>
   <meta
     name="description"
-    content="{heading.name}: {data.chapter.summary} {data.chapter.publication.coverageNote}"
+    content="{heading.name}, {windowLabel(data.chapter.defaultWindow)}: {data.chapter.summary}"
   />
 </svelte:head>
 
-<div class="flex h-dvh min-h-0 flex-col bg-slate-950">
-  <header
-    class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-slate-800 bg-slate-950 px-4 py-2.5"
-  >
-    <div class="flex min-w-0 items-center gap-2.5">
-      <a
-        href="/"
-        class={["flex items-center rounded-control text-ink", focusRing]}
-        aria-label="Lekishi home"
-      >
-        <!-- The caps with 歴史 do not fit beside the navigation on phones. -->
-        <span class="flex sm:hidden"><Logo size={22} wordmark="caps" /></span>
-        <span class="hidden sm:flex"><Logo size={22} wordmark="bilingual" /></span>
-      </a>
-      <span
-        id="chapter-decision"
-        class="rounded-full border border-emerald-400/50 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wide text-emerald-300"
-      >
-        {heading.decision}
-      </span>
-    </div>
-    <nav class="flex items-center gap-4 text-xs" aria-label="Primary">
-      <a href="/" class="text-slate-300 transition hover:text-white">Overview</a>
-    </nav>
-  </header>
+<main class="relative h-dvh min-h-0 overflow-hidden bg-abyss font-interface text-ink">
+  <!-- The workspace owns everything inside this element; see $lib/atlas/entry. -->
+  <div id="atlas-workspace" class="h-full w-full"></div>
 
-  <!--
-    The chapter's identity, prerendered from the load: its window in the atlas's
-    own year text and the decision recorded on its content. At phone widths the
-    strip is hidden: the header badge and the workspace notice already state the
-    decision, and the workspace needs that height for the map and the list.
-  -->
-  <div
-    id="chapter-scope"
-    class="hidden flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-slate-800/60 bg-slate-900/40 px-4 py-2 text-[0.7rem] leading-snug text-slate-400 sm:flex"
-  >
-    <span class="font-semibold text-slate-200">{windowLabel(data.chapter.defaultWindow)}</span>
-    <span aria-hidden="true">·</span>
-    <span>{heading.status}</span>
-  </div>
-
-  <main class="relative min-h-0 flex-1">
-    <!-- The workspace owns everything inside this element; see $lib/atlas/entry. -->
-    <div id="atlas-workspace" class="h-full w-full"></div>
-  </main>
-</div>
+  {#if !mounted}
+    <!--
+      The prerendered chapter: what the page is about before the globe loads,
+      and all of it for a reader without JavaScript.
+    -->
+    <section
+      id="chapter-scope"
+      aria-labelledby="chapter-title"
+      class="absolute inset-0 z-(--z-sheet) flex items-center justify-center overflow-y-auto bg-abyss px-4 py-10"
+    >
+      <div class="w-full max-w-xl">
+        <a
+          href="/"
+          class="inline-flex items-center gap-2 rounded-control font-display text-body-sm font-semibold tracking-wide text-ink-dim no-underline hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-bright"
+        >
+          <img src="/images/logo.svg" width="22" height="22" alt="" />LEKISHI
+        </a>
+        <p class="mt-8 text-label font-semibold uppercase text-gold">
+          Chapter · <span class="tabular-nums">{windowLabel(data.chapter.defaultWindow)}</span>
+        </p>
+        <h1 id="chapter-title" class="mt-2 font-display text-display text-ink">
+          {heading.name}
+        </h1>
+        <p id="chapter-decision" class="mt-3 text-body-sm font-semibold text-gold-bright">
+          {heading.decision}
+        </p>
+        <p class="mt-1 text-body-sm text-ink-dim">{heading.status}</p>
+        <p class="mt-6 font-serif text-body text-ink">{data.chapter.summary}</p>
+        <p class="mt-4 text-body-sm text-ink-dim">{data.chapter.publication.coverageNote}</p>
+        <p class="mt-8 flex items-center gap-2 text-caption text-ink-faint" aria-live="polite">
+          <span class="inline-block size-2 animate-pulse rounded-full bg-gold"></span>
+          Opening the globe…
+        </p>
+        <noscript>
+          <p class="mt-2 text-body-sm text-ink-dim">
+            The atlas needs JavaScript to draw the globe and the timeline.
+          </p>
+        </noscript>
+      </div>
+    </section>
+  {/if}
+</main>

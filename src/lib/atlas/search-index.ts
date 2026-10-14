@@ -1,5 +1,5 @@
 import { chapterHref, chapterPresentation } from "./chapters"
-import type { Chapter } from "./domain"
+import type { Chapter, GeoPoint } from "./domain"
 import { windowLabel, yearLabel } from "./labels"
 import { shortId } from "./query"
 import { normalizeForSearch } from "./search"
@@ -46,6 +46,10 @@ export type SearchChapter = {
   readonly window: string
   readonly href: string
   readonly start: number
+  /** Where the chapter opens on the globe; the home page marks it there. */
+  readonly home: GeoPoint
+  /** The chapter's events in its window, for the home globe's marker. */
+  readonly events: number
 }
 
 export type SearchIndex = {
@@ -209,6 +213,8 @@ export function buildSearchIndex(chapters: readonly Chapter[]): SearchIndex {
       window: windowLabel(chapter.defaultWindow),
       href: chapterHref(chapter.id),
       start: chapter.defaultWindow.start,
+      home: chapter.homeView,
+      events: chapter.events.filter((event) => !event.coda).length,
     })),
     entries: ordered.flatMap(chapterEntries),
   }

@@ -1,20 +1,3 @@
-<script lang="ts" module>
-  import type { SearchIndex } from "../search-index"
-
-  // One fetch per page load: the index is a static file, and a reader who
-  // opens search twice should not wait twice.
-  let cached: Promise<SearchIndex> | null = null
-
-  function loadIndex(): Promise<SearchIndex> {
-    cached ??= fetch("/search-index.json").then((response) => {
-      if (!response.ok) throw new Error(`search index: ${response.status}`)
-      return response.json() as Promise<SearchIndex>
-    })
-    cached.catch(() => (cached = null))
-    return cached
-  }
-</script>
-
 <script lang="ts">
   import { Badge, Dialog, Icon, focusRing, transition } from "$lib/ui"
   import {
@@ -23,7 +6,9 @@
     searchIndex,
     type SearchEntry,
     type SearchHit,
+    type SearchIndex,
   } from "../search-index"
+  import { loadSearchIndex } from "./load-index"
 
   /**
    * Search (RFD 5, "Search"): one field for every chapter, opened with `/`
@@ -39,12 +24,15 @@
    */
   let {
     open,
+    query = $bindable(""),
     current = null,
     currentName = null,
     onClose,
     onOpenHere,
   }: {
     open: boolean
+    /** The field's text; a caller may open the dialog with a query in it. */
+    query?: string
     /** The open chapter's id, or null outside a chapter. */
     current?: string | null
     currentName?: string | null
@@ -56,7 +44,6 @@
 
   let index: SearchIndex | null = $state.raw(null)
   let failed = $state(false)
-  let query = $state("")
   let scope = $state<"chapter" | "all">("all")
   let active = $state(0)
   let input: HTMLInputElement | undefined = $state()
@@ -65,7 +52,7 @@
   $effect(() => {
     if (!open || index !== null) return
     failed = false
-    loadIndex().then(
+    loadSearchIndex().then(
       (loaded) => (index = loaded),
       () => (failed = true),
     )

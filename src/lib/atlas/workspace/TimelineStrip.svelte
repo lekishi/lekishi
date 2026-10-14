@@ -86,8 +86,27 @@
     events.filter((event) => event.occurrence.endYear > event.occurrence.startYear),
   )
 
+  // The scale row's width, measured in the browser (0 before then, and under
+  // jsdom, where every year is labelled). A label needs about 3 rem, and the
+  // first, which carries the era, more; on a narrow strip the scale labels
+  // every second year or wider rather than letting "233 BCE" touch "232".
+  let scale: HTMLDivElement | undefined = $state()
+  let scaleWidth = $state(0)
+
+  function measureScale() {
+    scaleWidth = scale?.clientWidth ?? 0
+  }
+
+  $effect(() => {
+    measureScale()
+  })
+
   const years = $derived.by(() => {
-    const step = windowSpan <= 12 ? 1 : Math.ceil(windowSpan / 8)
+    const fit = scaleWidth > 0 ? Math.max(1, Math.floor(scaleWidth / 52)) : Infinity
+    const step = Math.max(
+      windowSpan <= 12 ? 1 : Math.ceil(windowSpan / 8),
+      Math.ceil(windowSpan / fit),
+    )
     const list: number[] = []
     for (let year = timeWindow.start; year <= timeWindow.end; year += step) list.push(year)
     return list
@@ -121,6 +140,8 @@
     focusRing,
   ]
 </script>
+
+<svelte:window onresize={measureScale} />
 
 <section
   aria-label="Timeline"
@@ -309,7 +330,11 @@
     >
   </div>
 
-  <div class={["relative h-4", compact ? "mx-0" : "mr-[6.75rem] ml-[4.25rem]"]} aria-hidden="true">
+  <div
+    bind:this={scale}
+    class={["relative h-4", compact ? "mx-0" : "mr-[6.75rem] ml-[4.25rem]"]}
+    aria-hidden="true"
+  >
     {#each years as year, index (year)}
       <span
         class="absolute -translate-x-1/2 text-caption whitespace-nowrap text-ink-dim tabular-nums"

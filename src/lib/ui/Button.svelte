@@ -55,6 +55,8 @@
   }: Props = $props()
 
   const inert = $derived(disabled || busy)
+  // A disabled link drops its href, which also drops the anchor's link role;
+  // `role="link"` keeps it announced as a link that is unavailable.
 
   function click(event: MouseEvent) {
     // A disabled link has no `disabled` attribute to stop it, and a busy
@@ -73,6 +75,7 @@
   href={href && !disabled ? href : undefined}
   type={href ? undefined : type}
   disabled={!href && disabled ? true : undefined}
+  role={href && disabled ? "link" : undefined}
   aria-disabled={href && disabled ? "true" : undefined}
   aria-busy={busy ? "true" : undefined}
   aria-label={variant === "icon" ? label : undefined}

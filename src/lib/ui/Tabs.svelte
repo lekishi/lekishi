@@ -108,7 +108,8 @@
       id="{idPrefix}-panel"
       role="tabpanel"
       aria-labelledby="{idPrefix}-tab-{current.id}"
-      class="mt-2 min-h-0 flex-1"
+      tabindex="0"
+      class={["mt-2 min-h-0 flex-1 rounded-control", focusRing]}
     >
       {@render children(current.id)}
     </div>

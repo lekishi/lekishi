@@ -27,6 +27,10 @@
   } = $props()
 </script>
 
+<!--
+  Named by the title alone: the heading also carries the count, which would
+  make every landmark read "Sources 11".
+-->
 <section
   aria-label={title}
   data-tone={tone}

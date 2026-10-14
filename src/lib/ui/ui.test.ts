@@ -105,6 +105,7 @@ describe("Button", () => {
     render(Button, { href: "/atlas", disabled: true, children: text("<span>Open</span>") })
     const link = target.querySelector("a")!
     expect(link.hasAttribute("href")).toBe(false)
+    expect(link.getAttribute("role")).toBe("link")
     expect(link.getAttribute("aria-disabled")).toBe("true")
   })
 })
@@ -168,6 +169,8 @@ describe("Tabs", () => {
     const panel = target.querySelector('[role="tabpanel"]')!
     expect(panel.getAttribute("aria-labelledby")).toBe(events.id)
     expect(events.getAttribute("aria-controls")).toBe(panel.id)
+    // A panel whose content may hold nothing focusable is itself a tab stop.
+    expect((panel as HTMLElement).tabIndex).toBe(0)
   })
 
   it("moves selection and focus with the arrow keys, wrapping, and Home and End", async () => {
@@ -235,6 +238,9 @@ describe("Sheet", () => {
       children: text("<p>list</p>"),
     })
     const section = target.querySelector("section")!
+    const heading = document.getElementById(section.getAttribute("aria-labelledby")!)
+    expect(heading?.tagName).toBe("H2")
+    expect(heading?.textContent).toBe("Explore")
     const handle = () => target.querySelector<HTMLButtonElement>("section > button")!
     expect(handle().getAttribute("aria-label")).toBe("Expand Explore")
     handle().click()

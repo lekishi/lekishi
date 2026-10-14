@@ -42,6 +42,8 @@
     children: Snippet
   } = $props()
 
+  const id = $props.id()
+
   // The handle steps up through the detents and drops back to peek from full,
   // so one control reaches every height in at most two presses.
   const next = $derived<Detent>(detent === "peek" ? "half" : detent === "half" ? "full" : "peek")
@@ -59,7 +61,7 @@
 -->
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
 <section
-  aria-label={title}
+  aria-labelledby="{id}-title"
   data-placement={placement}
   data-detent={placement === "bottom" ? detent : undefined}
   onkeydown={(event) => {
@@ -102,7 +104,7 @@
     </button>
   {/if}
   <header class="flex shrink-0 items-center gap-2 px-4 pb-2">
-    <h2 class="min-w-0 flex-1 truncate font-serif text-title-sm">{title}</h2>
+    <h2 id="{id}-title" class="min-w-0 flex-1 truncate font-serif text-title-sm">{title}</h2>
     {#if closable && onclose}
       <Button variant="icon" icon="close" size="sm" label="Close {title}" onclick={onclose} />
     {/if}

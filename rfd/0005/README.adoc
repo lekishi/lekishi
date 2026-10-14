@@ -496,9 +496,11 @@ storage is empty or blocked, and nothing about it leaves the device.
 === A living reference
 
 A prerendered `/dev/design` page renders every token and every primitive in every
-state, plus the frame at each reviewed width with placeholder content. It is
-the system's documentation, it is what the browser suite screenshots for visual
-review at 1440, 820, 390 and 320 px. It is built in development and on
+state; the frame at each reviewed width, with placeholder content, joins it
+when the frame lands. It is the system's documentation and the page reviewed
+at 1440, 820, 390 and 320 px; it joins the browser suite's screenshot pass once
+that suite can run against an artifact that carries it (both are open in
+link:IMPLEMENTATION.adoc[the implementation plan]). It is built in development and on
 pull-request previews only, under the `/dev` prefix every non-production page
 shares (<<Owner decisions>>): a Vite constant compiles the `/dev` pages in on
 the dev server, on Cloudflare Pages builds of any branch but `main`, and with

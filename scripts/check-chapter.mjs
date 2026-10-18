@@ -24,10 +24,17 @@
  * `scripts/check-static-build.mjs` checks what the artifact actually contains.
  * The three are separate on purpose: validation, representability, and
  * artifact contents.
+ *
+ * A build that serves drafts (a pull-request preview) runs the gate with
+ * `LEKISHI_DRAFTS=1`, so it checks the chapters that build ships: the drafts
+ * face the same contract and projection tests, and a stale approval is served
+ * as a draft instead of failing. Every other build, and every plain test run,
+ * keeps the production gate.
  */
 import { spawnSync } from "node:child_process"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
+import { draftChaptersServed } from "./dev-pages.mjs"
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 
@@ -44,7 +51,11 @@ const gate = [
 const result = spawnSync(
   process.execPath,
   [path.join(repoRoot, "node_modules", "vitest", "vitest.mjs"), "run", ...gate],
-  { cwd: repoRoot, stdio: "inherit" },
+  {
+    cwd: repoRoot,
+    stdio: "inherit",
+    env: draftChaptersServed() ? { ...process.env, LEKISHI_DRAFTS: "1" } : process.env,
+  },
 )
 
 if (result.error !== undefined) {

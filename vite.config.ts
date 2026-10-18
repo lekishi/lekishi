@@ -2,7 +2,7 @@
 import { sveltekit } from "@sveltejs/kit/vite"
 import tailwindcss from "@tailwindcss/vite"
 import { defineConfig } from "vitest/config"
-import { devPagesEnabled } from "./scripts/dev-pages.mjs"
+import { devPagesEnabled, draftChaptersServed } from "./scripts/dev-pages.mjs"
 import { historicalChapters } from "./scripts/historical-chapters.mjs"
 
 /**
@@ -18,10 +18,15 @@ import { historicalChapters } from "./scripts/historical-chapters.mjs"
  *
  * Historical content is compiled from the record files under `historical/` by
  * the `historicalChapters` plugin and served as virtual modules, one chunk per
- * chapter; nothing compiled is written to disk.
+ * chapter; nothing compiled is written to disk. Development and pull-request
+ * previews also serve the chapters the owner has not approved, as drafts.
  */
 export default defineConfig(({ command }) => ({
-  plugins: [historicalChapters(), sveltekit(), tailwindcss()],
+  plugins: [
+    historicalChapters({ drafts: draftChaptersServed({ command }) }),
+    sveltekit(),
+    tailwindcss(),
+  ],
   // The `/dev` pages (the design reference among them) are compiled in for
   // development and pull-request previews and out of production builds.
   define: {

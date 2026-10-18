@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { SERVED_CHAPTERS } from "../../atlas/chapter-registry"
+import { DRAFTS_SERVED, SERVED_CHAPTERS } from "../../atlas/chapter-registry"
 import {
   compileAll,
   compileChapter,
@@ -25,7 +25,11 @@ import { objectOf } from "./types"
  * - the approval lives in the manifest only, never in a record.
  *
  * A chapter without an approval is a draft: it compiles and faces every
- * contract test as a preview, but it is not served. The gate cannot tell who
+ * contract test as a preview, but it is not served. Only a build that serves
+ * drafts (development and pull-request previews; the build's gate runs this
+ * suite with `LEKISHI_DRAFTS=1` there) serves it, stale ones included, under
+ * its draft preview set; production and every plain test run keep the rules
+ * above. The gate cannot tell who
  * wrote an approval, so `.github/CODEOWNERS` requires the owner's review on
  * every manifest, and `pnpm approvals` shows the owner what changed since the
  * last approval. Nothing here, and no agent, writes an approval for the owner.
@@ -70,13 +74,21 @@ function compiled(source: TreeFile[], chapter: string): ChapterBundle {
   return compileChapter(buildTree(source), chapter)
 }
 
-/** The chapters the gate would let the site serve: approved, never stale. */
-function approvalViolations(bundles: readonly ChapterBundle[], today: string): string[] {
+/**
+ * The chapters the gate would let the site serve: approved, never stale. A build
+ * that serves drafts serves a stale chapter as a draft, so only its approval's
+ * date and name can fail there.
+ */
+function approvalViolations(
+  bundles: readonly ChapterBundle[],
+  today: string,
+  { drafts = false }: { drafts?: boolean } = {},
+): string[] {
   const violations: string[] = []
   const adopted = RECORD_FILES_ADOPTED_AT.slice(0, 10)
 
   for (const bundle of bundles) {
-    if (bundle.state === "stale") {
+    if (bundle.state === "stale" && !drafts) {
       violations.push(
         `${bundle.id}: approved ${String(bundle.approval?.digest)}, but the content is now ${bundle.digest}; run \`pnpm approvals\` to see what changed`,
       )
@@ -111,13 +123,13 @@ describe("publication approval gate", () => {
   const bundles = compileAll(buildTree(files()))
 
   it("leaves no chapter stale and no approval misdated", () => {
-    expect(approvalViolations(bundles, TODAY)).toEqual([])
+    expect(approvalViolations(bundles, TODAY, { drafts: DRAFTS_SERVED })).toEqual([])
   })
 
-  it("serves exactly the approved chapters", () => {
+  it("serves exactly the approved chapters, and the drafts only on a build that serves drafts", () => {
     expect(SERVED_CHAPTERS.map((chapter) => chapter.id).sort()).toEqual(
       bundles
-        .filter((bundle) => bundle.state === "approved")
+        .filter((bundle) => DRAFTS_SERVED || bundle.state === "approved")
         .map((bundle) => bundle.id)
         .sort(),
     )
@@ -206,6 +218,28 @@ describe("publication approval gate", () => {
     expect(draft.state).toBe("draft")
     expect(draft.sets).toEqual([])
     expect(approvalViolations([draft], TODAY)).toEqual([])
+  })
+
+  it("serves a stale chapter on a draft build as a draft preview, never as approved", () => {
+    const stale = compileChapter(
+      buildTree(approve(files(), TANG, `sha256:${"0".repeat(64)}`)),
+      TANG,
+      { preview: true },
+    )
+
+    expect(stale.state).toBe("stale")
+    expect(approvalViolations([stale], TODAY, { drafts: true })).toEqual([])
+    expect(approvalViolations([stale], TODAY).join("\n")).toContain("pnpm approvals")
+    expect(objectOf(stale.sets[0]["published_by"])["role"]).toBe("draft preview, not approved")
+
+    const future = compiled(
+      approve(files(), TANG, compiled(files(), TANG).digest, "2999-01-01"),
+      TANG,
+    )
+
+    expect(approvalViolations([future], TODAY, { drafts: true }).join("\n")).toContain(
+      "in the future",
+    )
   })
 
   it("fails an approval dated before the record files or in the future", () => {

@@ -1,4 +1,4 @@
-import { CHAPTERS as MANIFESTS, type ChapterEntry } from "virtual:lekishi-chapters"
+import { DRAFTS, CHAPTERS as MANIFESTS, type ChapterEntry } from "virtual:lekishi-chapters"
 import type { ChapterCoverage } from "./projection"
 
 /**
@@ -6,7 +6,10 @@ import type { ChapterCoverage } from "./projection"
  *
  * The list is the chapter manifests in `historical/chapters/` whose approval
  * matches their content (RFD 2): an approved chapter is served, a draft is not,
- * and a stale approval fails the build before this module exists. The chapter
+ * and a stale approval fails the build before this module exists. A build that
+ * serves drafts (development and pull-request previews, never production) also
+ * serves every other chapter, and `release.ts` states on each of them that it
+ * is a draft. The chapter
  * route enumerates this list to prerender, the root page's cards are keyed by
  * these ids, and search covers exactly these chapters, so the list is exactly
  * what a reader can open.
@@ -24,6 +27,9 @@ export const QIN_CHAPTER = "qin-conquest-han-233-226"
 /** Every chapter manifest, served or not, as the build compiled it. */
 export const CHAPTER_MANIFESTS: readonly ChapterEntry[] = MANIFESTS
 
+/** Whether this build serves the chapters without a matching approval, as drafts. */
+export const DRAFTS_SERVED: boolean = DRAFTS
+
 /** A chapter the site serves: its tree id and the coverage model it owns. */
 export type ServedChapter = {
   readonly id: string
@@ -31,7 +37,7 @@ export type ServedChapter = {
 }
 
 export const SERVED_CHAPTERS: readonly ServedChapter[] = MANIFESTS.filter(
-  (chapter) => chapter.state === "approved",
+  (chapter) => chapter.served,
 ).map((chapter) => ({ id: chapter.id, coverage: { defaultWindow: chapter.window } }))
 
 /** The served entry for a chapter id, or undefined when the site does not serve it. */

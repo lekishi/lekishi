@@ -3,7 +3,7 @@ import { listChapters } from "../historical/chapter"
 import { loadServedChapter } from "./chapter-catalog"
 import { QIN_CHAPTER, SERVED_CHAPTERS, TANG_CHAPTER } from "./chapter-registry"
 import { CHAPTERS, chapterHeading, chapterHref, chapterPresentation } from "./chapters"
-import { QIN_RELEASE, TANG_RELEASE } from "./release"
+import { chapterRelease, type ChapterRelease } from "./release"
 import { yearLabel } from "./labels"
 
 /**
@@ -18,6 +18,17 @@ import { yearLabel } from "./labels"
  * chapter's editorial decision in the status line, where it is secondary metadata
  * rather than the chapter's identity.
  */
+
+/** A served chapter's recorded decision, which every served chapter has. */
+function release(id: string): ChapterRelease {
+  const recorded = chapterRelease(id)
+
+  if (recorded === undefined) {
+    throw new Error(`${id} is served without an approval`)
+  }
+
+  return recorded
+}
 
 describe("the chapter cards", () => {
   it("covers every served chapter exactly once, by id and by name", () => {
@@ -91,8 +102,8 @@ describe("the chapter cards", () => {
     const tang = chapterPresentation(TANG_CHAPTER)
     const qin = chapterPresentation(QIN_CHAPTER)
 
-    expect(tang?.status).toBe(TANG_RELEASE.status)
-    expect(qin?.status).toBe(QIN_RELEASE.status)
+    expect(tang?.status).toBe(release(TANG_CHAPTER).status)
+    expect(qin?.status).toBe(release(QIN_CHAPTER).status)
 
     for (const [id, card] of [
       [TANG_CHAPTER, tang],
@@ -106,8 +117,8 @@ describe("the chapter cards", () => {
       expect(card?.status, id).not.toContain("Specialist review recorded")
     }
 
-    expect(tang?.status).toContain(TANG_RELEASE.decidedOn)
-    expect(qin?.status).toContain(QIN_RELEASE.decidedOn)
+    expect(tang?.status).toContain(release(TANG_CHAPTER).decidedOn)
+    expect(qin?.status).toContain(release(QIN_CHAPTER).decidedOn)
   })
 
   it("opens each chapter where the product serves it", () => {
@@ -124,8 +135,8 @@ describe("the chapter cards", () => {
     const heading = chapterHeading(tang)
 
     expect(heading.name).toBe("The embassy to Tang China")
-    expect(heading.decision).toBe(TANG_RELEASE.decision)
-    expect(heading.status).toBe(TANG_RELEASE.status)
+    expect(heading.decision).toBe(release(TANG_CHAPTER).decision)
+    expect(heading.status).toBe(release(TANG_CHAPTER).status)
 
     // A chapter without a card still renders: the heading uses the chapter's own
     // published title and the review independence its publication records.

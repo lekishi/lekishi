@@ -4,7 +4,7 @@ import { mount, unmount } from "svelte"
 import { CHAPTERS, chapterPresentation } from "../lib/atlas/chapters"
 import { QIN_CHAPTER, TANG_CHAPTER } from "../lib/atlas/chapter-registry"
 import { windowLabel } from "../lib/atlas/labels"
-import { QIN_RELEASE, TANG_RELEASE } from "../lib/atlas/release"
+import { chapterRelease } from "../lib/atlas/release"
 import Home from "./+page.svelte"
 
 /**
@@ -140,10 +140,10 @@ describe("the root page", () => {
       ).toBe(true)
     }
 
-    expect(tang.textContent).toContain(TANG_RELEASE.status)
-    expect(tang.textContent).toContain(TANG_RELEASE.decidedOn)
-    expect(qin.textContent).toContain(QIN_RELEASE.status)
-    expect(qin.textContent).toContain(QIN_RELEASE.decidedOn)
+    expect(tang.textContent).toContain(String(chapterRelease(TANG_CHAPTER)?.status))
+    expect(tang.textContent).toContain(String(chapterRelease(TANG_CHAPTER)?.decidedOn))
+    expect(qin.textContent).toContain(String(chapterRelease(QIN_CHAPTER)?.status))
+    expect(qin.textContent).toContain(String(chapterRelease(QIN_CHAPTER)?.decidedOn))
 
     // Neither chapter may claim a review its set does not record.
     for (const card of [tang, qin]) {

@@ -70,7 +70,7 @@ function withDraft(
 
   const draft: JsonObject = {
     revision_id: `${String(published["revision_id"]).replace(/-\d+$/, "")}-99`,
-    created_at: "2026-09-25T00:00:00Z",
+    created_at: "2026-10-19T00:00:00Z",
     author: { name: "Lekishi editorial preparation", role: "preparing editor (owner-instructed)" },
     change_explanation: "Draft correction: prepared but not published by any set.",
     content,
@@ -100,7 +100,7 @@ function withSecondSet(
 
   const revision: JsonObject = {
     revision_id: `${String(published["revision_id"]).replace(/-\d+$/, "")}-2`,
-    created_at: "2026-09-24T23:50:00Z",
+    created_at: "2026-10-19T00:00:00Z",
     author: { name: "Lekishi editorial preparation", role: "preparing editor (owner-instructed)" },
     change_explanation: "In-memory correction used to pin the ordering rule.",
     content,
@@ -112,7 +112,7 @@ function withSecondSet(
     published_revision_id: revision["revision_id"],
     published_revision_hash: revision["revision_hash"],
     set_id: setId,
-    published_at: "2026-09-25T00:10:00Z",
+    published_at: "2026-10-19T00:10:00Z",
     published_by: {
       name: "Lekishi editorial preparation",
       role: "preparing editor (owner-instructed)",
@@ -136,10 +136,10 @@ function withSecondSet(
     sources: JSON.parse(JSON.stringify(current["sources"])),
     review: {
       ...objectOf(current["review"]),
-      reviewed_at: "2026-09-25T00:05:00Z",
+      reviewed_at: "2026-10-19T00:05:00Z",
       notes: "In-memory review record for the ordering test.",
     },
-    published_at: "2026-09-25T00:10:00Z",
+    published_at: "2026-10-19T00:10:00Z",
     published_by: {
       name: "Lekishi editorial preparation",
       role: "preparing editor (owner-instructed)",
@@ -204,11 +204,9 @@ describe("projecting the reviewed Tang chapter", () => {
     expect(chapter.events.filter((event) => event.coda)).toHaveLength(5)
     expect(chapter.defaultWindow).toEqual({ start: 750, end: 754 })
     expect(chapter.publication.independence).toBe("self_review")
-    expect(chapter.publication.reviewer).toBe("Lekishi editorial preparation")
+    expect(chapter.publication.reviewer).toBe("Lekishi contributors")
     expect(chapter.publication.coverageNote).toContain("outbound voyage of 752 is excluded")
-    expect(chapter.publication.reviewNotes).toContain(
-      "owner's editorial approval under RFD 2 is still pending",
-    )
+    expect(chapter.publication.reviewNotes).toContain("Self-review by the contributors")
   })
 
   it("takes the primary window from the caller rather than a chapter branch", () => {
@@ -232,7 +230,7 @@ describe("projecting the reviewed Tang chapter", () => {
 
     // The flattened chapter publishes one set, and the projection shows what it
     // names: 多禰島 is a context reference, so the separation stays unplaced.
-    expect(chapter.publication.setIds).toEqual(["lks:set:tang-mission-750-754-v1"])
+    expect(chapter.publication.setIds).toEqual([String(objectOf(tree().sets[0])["set_id"])])
     expect(original.placement).toEqual({
       kind: "none",
       placeId: "lks:place:tane",
@@ -286,7 +284,7 @@ describe("projecting the reviewed Tang chapter", () => {
 
     expect(appointment.note).not.toContain("Draft summary")
     expect(appointment.placement).toMatchObject({ placeId: "lks:place:heijo-palace" })
-    expect(projected.publication.setIds).toEqual(["lks:set:tang-mission-750-754-v1"])
+    expect(projected.publication.setIds).toEqual([String(objectOf(tree().sets[0])["set_id"])])
   })
 
   it("shows nothing when no set publishes the chapter", () => {
@@ -562,11 +560,7 @@ describe("adversarial readings of the chapter", () => {
     const chapter = cloneTree(tree())
     const record = recordById(chapter, "lks:place:naniwa")
     const mirror = objectOf(record["publication"])
-    const member = listOf(
-      objectOf(
-        chapter.sets.find((set) => objectOf(set)["set_id"] === "lks:set:tang-mission-750-754-v1"),
-      )["members"],
-    )
+    const member = listOf(objectOf(chapter.sets[0])["members"])
       .map(objectOf)
       .find((candidate) => candidate["record_id"] === "lks:place:naniwa")
 
@@ -585,7 +579,7 @@ describe("adversarial readings of the chapter", () => {
 
   it("rejects an event without a story caption instead of inventing a title", () => {
     const chapter = cloneTree(tree())
-    const story = recordById(chapter, "lks:story:tang-mission-750-779")
+    const story = recordById(chapter, "lks:story:tang-mission-750-754")
     const content = contentOf(story)
 
     content["steps"] = listOf(content["steps"]).filter(

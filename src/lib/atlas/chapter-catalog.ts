@@ -1,4 +1,5 @@
-import { isObject, type JsonObject, type JsonValue } from "../historical/contract/types"
+import { loadBundle } from "virtual:lekishi-chapters"
+import type { JsonValue } from "../historical/contract/types"
 import type { Chapter } from "./domain"
 import { SERVED_CHAPTERS, servedChapter, type ServedChapter } from "./chapter-registry"
 import { projectChapter, type ChapterCoverage } from "./projection"
@@ -6,10 +7,11 @@ import { projectChapter, type ChapterCoverage } from "./projection"
 /**
  * The browser-safe chapter loader.
  *
- * Vite bundles each chapter's records, sources, and publication sets at build
- * time (`import.meta.glob`, JSON), so the browser reads the same files the
- * contract validates: there is no second copy of the content, no Node API in
- * this path, and no request the deployment has to serve. Loading is lazy per
+ * The build compiles the record files into one bundle per chapter
+ * (`virtual:lekishi-chapters`, see `historical/authoring/vite-plugin.ts`), so the
+ * browser reads exactly the v0 documents the contract validates: there is no
+ * second copy of the content, no Node API in this path, and no request the
+ * deployment has to serve beyond the chapter's own chunk. Loading is lazy per
  * chapter, so a page fetches only the chapter it renders.
  *
  * Every served chapter loads through this one module — the chapter route passes
@@ -18,44 +20,10 @@ import { projectChapter, type ChapterCoverage } from "./projection"
  * `pnpm build` instead of shipping placeholder content. `Publication.checkAll`
  * remains the Node-side validator: schemas, revision hashes, and source pins
  * need `node:fs` and `node:crypto`, so `pnpm build` runs
- * `scripts/check-chapter.mjs`, which runs the chapters' contract and projection
- * tests through Vitest before Vite bundles anything. This module is the
- * representability gate; that one is the validation gate.
+ * `scripts/check-chapter.mjs`, which runs the chapters' contract, approval and
+ * projection tests through Vitest before Vite bundles anything. This module is
+ * the representability gate; that one is the validation gate.
  */
-
-const recordModules = import.meta.glob("../../../historical/chapters/*/records/*.json", {
-  import: "default",
-})
-
-const sourceModules = import.meta.glob("../../../historical/chapters/*/sources/*.json", {
-  import: "default",
-})
-
-const setModules = import.meta.glob("../../../historical/chapters/*/publication-sets/*.json", {
-  import: "default",
-})
-
-async function loadDirectory(
-  modules: Record<string, () => Promise<unknown>>,
-  chapter: string,
-  subdirectory: string,
-): Promise<JsonObject[]> {
-  const entries = Object.entries(modules)
-    .filter(([path]) => path.includes(`chapters/${chapter}/${subdirectory}/`))
-    .sort(([left], [right]) => left.localeCompare(right))
-
-  return Promise.all(
-    entries.map(async ([path, load]) => {
-      const value = await load()
-
-      if (!isObject(value)) {
-        throw new Error(`${path} is not a JSON object`)
-      }
-
-      return value
-    }),
-  )
-}
 
 /**
  * Loads a chapter and projects it into the atlas domain. The caller supplies the
@@ -66,13 +34,13 @@ export async function loadChapterContent(
   chapter: string,
   coverage: ChapterCoverage,
 ): Promise<Chapter> {
-  const [records, sources, sets] = await Promise.all([
-    loadDirectory(recordModules, chapter, "records"),
-    loadDirectory(sourceModules, chapter, "sources"),
-    loadDirectory(setModules, chapter, "publication-sets"),
-  ])
+  const bundle = await loadBundle(chapter)
 
-  return projectChapterContent(chapter, [...records, ...sources], sets, coverage)
+  if (bundle === undefined) {
+    throw new Error(`${chapter} is not an approved chapter, so there is no content to load`)
+  }
+
+  return projectChapterContent(chapter, bundle.documents, bundle.sets, coverage)
 }
 
 /**

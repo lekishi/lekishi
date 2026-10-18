@@ -8,13 +8,14 @@
  * what a reviewer opens as reviewed content — and because a Cloudflare Pages
  * build runs exactly this command.
  *
- * The gate also carries the publication approval checkpoint: a set the owner
- * decision ledger does not cover fails here, so no version of the content can
- * exist that no person decided on.
+ * The gate also carries the publication approval checkpoint: a chapter whose
+ * manifest approval no longer matches the digest of its record files fails
+ * here, so no edit to approved content reaches readers until the owner approves
+ * it again (RFD 2).
  *
  * The contract's validator needs `node:fs` (schemas) and `node:crypto`
  * (revision and source hashes), so it cannot run in the browser bundle. This
- * gate runs the chapter's own contract test and the projection's test suite
+ * gate compiles the record files and runs the chapter's own contract test and the projection's test suite
  * through Vitest before Vite bundles anything: the validator stays the single
  * source of truth, and the browser keeps the browser-safe projection.
  *

@@ -1,3 +1,4 @@
+import type { ChapterEntry } from "virtual:lekishi-chapters"
 import { CHAPTER_MANIFESTS } from "./chapter-registry"
 
 /**
@@ -48,4 +49,45 @@ export function chapterRelease(id: string): ChapterRelease | undefined {
   return manifest?.state === "approved" && manifest.approval !== null
     ? approval(manifest.approval.on)
     : undefined
+}
+
+/**
+ * What a draft chapter states in place of a decision. Only a build that serves
+ * drafts has one (development and pull-request previews, by the owner's
+ * decision of 2026-10-18); production never serves a chapter without a
+ * matching approval. A draft must never read as approved: every surface that
+ * shows one says it is a draft, and a stale chapter also says that its content
+ * changed since the approval it still carries.
+ */
+export type ChapterDraft = {
+  /** The short line a page states beside the chapter's name. */
+  readonly decision: string
+  /** The full line: the decision and `DRAFT_SCOPE`, as the chapter card states it. */
+  readonly status: string
+}
+
+/** What a draft's full line adds to its decision: that only previews serve it. */
+export const DRAFT_SCOPE =
+  "This build is a preview; the published site serves approved chapters only."
+
+/**
+ * What a chapter without a matching approval states when a build serves it.
+ * Exported so the wording can be pinned without a build that serves drafts.
+ */
+export function draftStatement(manifest: ChapterEntry): ChapterDraft {
+  const decision =
+    manifest.state === "stale" && manifest.approval !== null
+      ? `Draft: changed since the owner's approval of ${manifest.approval.on}, not approved for release`
+      : "Draft, not approved for release"
+
+  return { decision, status: `${decision}. ${DRAFT_SCOPE}` }
+}
+
+/** The draft statement for a chapter id, or undefined for an approved or unserved chapter. */
+export function chapterDraft(id: string): ChapterDraft | undefined {
+  const manifest = CHAPTER_MANIFESTS.find((chapter) => chapter.id === id)
+
+  return manifest === undefined || manifest.state === "approved" || !manifest.served
+    ? undefined
+    : draftStatement(manifest)
 }

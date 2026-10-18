@@ -12,8 +12,8 @@
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
-import { parse } from "yaml"
-import { devPagesEnabled } from "./dev-pages.mjs"
+import { devPagesEnabled, draftChaptersServed } from "./dev-pages.mjs"
+import { compileChapters } from "./historical-chapters.mjs"
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const buildDirectory = path.join(repoRoot, "build")
@@ -105,18 +105,32 @@ requireFile(path.join(buildDirectory, "images", "wordmark-caps.svg"))
 requireFile(path.join(buildDirectory, "_redirects"))
 
 /**
+ * Whether this build serves drafts, and every chapter's approval state as the
+ * build compiled it.
+ */
+const drafts = draftChaptersServed()
+const states = new Map((await compileChapters()).map((bundle) => [bundle.id, bundle]))
+
+/**
  * The decision line a served chapter states: the date of the owner's approval in
- * its manifest. An unapproved chapter is not served, so it has no line.
+ * its manifest, or, on a build that serves drafts, the draft line for a chapter
+ * whose approval does not match. Production serves no draft, so a chapter
+ * without a matching approval has no line there and fails below.
  *
  * @param {string} chapter
  */
 function decisionLine(chapter) {
-  const manifest = parse(
-    readFileSync(path.join(repoRoot, "historical", "chapters", `${chapter}.yaml`), "utf8"),
-  )
-  const on = manifest?.approval?.on
+  const bundle = states.get(chapter)
 
-  return on === undefined ? `${chapter} has no approval` : `Owner-approved for release, ${on}`
+  if (bundle?.state === "approved") {
+    return `Owner-approved for release, ${bundle.approval?.on}`
+  }
+
+  if (drafts && bundle?.state === "stale") {
+    return `Draft: changed since the owner's approval of ${bundle.approval?.on}, not approved for release`
+  }
+
+  return drafts ? "Draft, not approved for release" : `${chapter} has no matching approval`
 }
 
 /**
@@ -191,6 +205,18 @@ for (const chapter of CHAPTERS) {
     if (!html.includes(marker)) {
       fail(`chapters/${chapter.id}.html does not state ${marker}`)
     }
+  }
+
+  // A draft keeps its banner on screen; an approved chapter, and anything a
+  // production build serves, has none.
+  const draftBanner = html.includes('id="chapter-draft"')
+
+  if (draftBanner !== (drafts && states.get(chapter.id)?.state !== "approved")) {
+    fail(
+      draftBanner
+        ? `chapters/${chapter.id}.html carries the draft banner, but this build does not serve it as a draft`
+        : `chapters/${chapter.id}.html is a draft without its draft banner`,
+    )
   }
 
   // A reader meets a chapter, not a review category: the page must not carry the

@@ -1,5 +1,5 @@
 import { CHAPTER_MANIFESTS, servedChapter } from "./chapter-registry"
-import { chapterRelease } from "./release"
+import { chapterDraft, chapterRelease } from "./release"
 import type { Chapter, TimeWindow } from "./domain"
 import { reviewSummaryLabel } from "./labels"
 
@@ -36,6 +36,12 @@ export type ChapterCard = {
   readonly href: string
   /** The chapter's editorial decision, stated as secondary metadata. */
   readonly status: string
+  /**
+   * Whether the chapter is a draft this build serves without the owner's
+   * approval. Only development and pull-request previews have one, and the
+   * card says so before anything else.
+   */
+  readonly draft: boolean
 }
 
 /**
@@ -55,7 +61,8 @@ export const CHAPTERS: readonly ChapterCard[] = CHAPTER_MANIFESTS.filter(
   summary: manifest.summary,
   window: manifest.window,
   href: chapterHref(manifest.id),
-  status: chapterRelease(manifest.id)?.status ?? "",
+  status: chapterRelease(manifest.id)?.status ?? chapterDraft(manifest.id)?.status ?? "",
+  draft: chapterDraft(manifest.id) !== undefined,
 }))
 
 /**
@@ -78,6 +85,8 @@ export type ChapterHeading = {
   readonly name: string
   readonly decision: string
   readonly status: string
+  /** Whether the page keeps a draft banner on screen: a draft this build serves. */
+  readonly draft: boolean
 }
 
 export function chapterHeading(chapter: Chapter): ChapterHeading {
@@ -86,13 +95,18 @@ export function chapterHeading(chapter: Chapter): ChapterHeading {
   if (card === undefined) {
     const fallback = reviewSummaryLabel(chapter.publication.independence)
 
-    return { name: chapter.title, decision: fallback, status: fallback }
+    return { name: chapter.title, decision: fallback, status: fallback, draft: false }
   }
+
+  const draft = chapterDraft(card.id)
 
   return {
     name: card.name,
     decision:
-      chapterRelease(card.id)?.decision ?? reviewSummaryLabel(chapter.publication.independence),
+      chapterRelease(card.id)?.decision ??
+      draft?.decision ??
+      reviewSummaryLabel(chapter.publication.independence),
     status: card.status,
+    draft: draft !== undefined,
   }
 }

@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest"
 import { chapterBundle } from "../historical/chapter"
 import { objectOf } from "../historical/contract/types"
-import { CHAPTER_MANIFESTS, SERVED_CHAPTERS } from "./chapter-registry"
-import { chapterRelease } from "./release"
+import { CHAPTER_MANIFESTS, DRAFTS_SERVED, SERVED_CHAPTERS } from "./chapter-registry"
+import { chapterDraft, chapterRelease, draftStatement } from "./release"
 
 /**
  * The chapter cards' release statements against the approvals that decide them.
@@ -59,6 +59,39 @@ describe("the chapter cards' release statements", () => {
 
     for (const manifest of CHAPTER_MANIFESTS.filter((entry) => entry.state !== "approved")) {
       expect(chapterRelease(manifest.id), manifest.id).toBeUndefined()
+    }
+  })
+
+  it("states a draft as a draft, and a stale chapter as changed since its approval", () => {
+    const entry = {
+      id: "example-chapter",
+      title: "An example",
+      summary: "",
+      window: { start: 750, end: 754 },
+      served: true,
+    }
+    const draft = draftStatement({ ...entry, state: "draft", approval: null })
+    const stale = draftStatement({
+      ...entry,
+      state: "stale",
+      approval: { digest: `sha256:${"0".repeat(64)}`, by: "Example Owner", on: "2026-10-18" },
+    })
+
+    expect(draft.decision).toBe("Draft, not approved for release")
+    expect(stale.decision).toContain("changed since the owner's approval of 2026-10-18")
+
+    for (const statement of [draft, stale]) {
+      expect(statement.status).toContain(statement.decision)
+      expect(statement.status).toContain("approved chapters only")
+      expect(statement.status).not.toContain("Owner-approved")
+    }
+  })
+
+  it("serves a draft only on a build that serves drafts", () => {
+    for (const manifest of CHAPTER_MANIFESTS) {
+      expect(chapterDraft(manifest.id) !== undefined, manifest.id).toBe(
+        DRAFTS_SERVED && manifest.state !== "approved",
+      )
     }
   })
 })

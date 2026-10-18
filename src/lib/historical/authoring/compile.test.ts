@@ -459,6 +459,21 @@ describe("the digest an approval pins", () => {
     }
   })
 
+  it("previews a draft for checks without naming an owner or reading as approved", () => {
+    const preview = compileChapter(buildTree(files()), "example-chapter", { preview: true })
+
+    expect(preview.state).toBe("draft")
+    expect(preview.sets).toHaveLength(1)
+    expect(String(preview.sets[0]["set_id"])).toContain("-draft-")
+    expect(preview.sets[0]["published_by"]).toEqual({
+      name: "Lekishi contributors",
+      role: "draft preview, not approved",
+    })
+    expect(Publication.checkAll(preview.documents, preview.sets)).toEqual(
+      expect.objectContaining({ ok: true }),
+    )
+  })
+
   it("marks an approval of other content stale and publishes nothing", () => {
     const bundle = approved(
       `approval:\n  digest: ${digest}\n  by: Example Owner\n  on: 2026-10-19`,

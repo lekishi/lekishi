@@ -1,7 +1,7 @@
 import { encode, revisionHash, sha256, sourceHash } from "../contract/canonical"
 import { isList, isObject, type JsonObject, type JsonValue } from "../contract/types"
 import { compileWindow } from "./dates"
-import { compileRecord, RECORD_KINDS, type Lookup, type RecordKind } from "./records"
+import { compileRecord, type Lookup, type RecordKind } from "./records"
 import type { AuthoringFile, AuthoringTree } from "./tree"
 
 /**
@@ -71,7 +71,7 @@ export type ChapterBundle = {
   readonly state: ApprovalState
   /** Record and source documents, sorted by id. */
   readonly documents: JsonObject[]
-  /** The publication set, present only for an approved chapter. */
+  /** The publication set: an approved chapter's, or a draft preview when asked for. */
   readonly sets: JsonObject[]
   /** The files the closure reached, by path below `historical/`, for review tools. */
   readonly files: readonly string[]
@@ -254,20 +254,53 @@ function approvalOf(manifest: AuthoringFile): Approval | null {
     : null
 }
 
+/** Who publishes a set, when, and what the set says about it. */
+type Publisher = {
+  readonly at: string
+  readonly by: JsonObject
+  readonly setSuffix: string
+  readonly explanation: string
+  readonly notes: string
+}
+
+function approvedBy(approval: Approval, digest: string): Publisher {
+  return {
+    at: `${approval.on}T00:00:00Z`,
+    by: { name: approval.by, role: "owner" },
+    setSuffix: digest.slice("sha256:".length, "sha256:".length + 12),
+    explanation: `Publishes the chapter at the content its approval pins, ${digest}.`,
+    notes: `Self-review by the contributors. ${approval.by} approved this content for publication on ${approval.on} at ${digest}; that approval is an owner decision, not independent or specialist review.`,
+  }
+}
+
+/**
+ * The publisher of a draft preview: the chapter as it stands, published to the
+ * contract's checks and nowhere else. It never names an owner and never reads as
+ * an approval, so a check that needs the owner's word reads the bundle's
+ * `state`, never the existence of a set.
+ */
+function previewOf(digest: string): Publisher {
+  return {
+    at: RECORD_FILES_ADOPTED_AT,
+    by: { name: CONTRIBUTORS.name, role: "draft preview, not approved" },
+    setSuffix: `draft-${digest.slice("sha256:".length, "sha256:".length + 12)}`,
+    explanation: `Previews the chapter's unapproved content, ${digest}, for checks and review only.`,
+    notes: "Self-review by the contributors. The owner has not approved this content.",
+  }
+}
+
 function publicationSet(
-  bundle: { id: string; title: string; digest: string },
-  approval: Approval,
+  bundle: { id: string; title: string },
+  publisher: Publisher,
   members: JsonObject[],
   sources: JsonObject[],
 ): JsonObject {
-  const at = `${approval.on}T00:00:00Z`
-
   return {
     contract: CONTRACT,
     document: "publication_set",
-    set_id: `lks:set:${bundle.id}-${bundle.digest.slice("sha256:".length, "sha256:".length + 12)}`,
+    set_id: `lks:set:${bundle.id}-${publisher.setSuffix}`,
     title: bundle.title,
-    change_explanation: `Publishes ${bundle.id} at the content its approval pins, ${bundle.digest}.`,
+    change_explanation: publisher.explanation,
     members: members.map((record) => {
       const revisions = record["revisions"] as JsonObject[]
       const latest = revisions[revisions.length - 1]
@@ -288,7 +321,7 @@ function publicationSet(
     // published and in the notes, and the atlas keeps saying that independent
     // and specialist review remain open.
     review: {
-      reviewed_at: at,
+      reviewed_at: publisher.at,
       reviewer: CONTRIBUTORS,
       independence: "self_review",
       checklist: {
@@ -298,17 +331,30 @@ function publicationSet(
         attestation_vs_interpretation: true,
         reuse_rights: true,
       },
-      notes: `Self-review by the contributors. ${approval.by} approved this content for publication on ${approval.on} at ${bundle.digest}; that approval is an owner decision, not independent or specialist review.`,
+      notes: publisher.notes,
     },
-    published_at: at,
-    published_by: { name: approval.by, role: "owner" },
+    published_at: publisher.at,
+    published_by: publisher.by,
     supersedes: null,
     correction_of_revision: null,
   }
 }
 
+export type CompileOptions = {
+  /**
+   * Publish a chapter without a matching approval as a draft preview, so its
+   * content can be checked and reviewed. The bundle's `state` still says it is a
+   * draft or stale; nothing that serves readers may set this.
+   */
+  readonly preview?: boolean
+}
+
 /** Compiles one chapter manifest and everything it reaches. */
-export function compileChapter(tree: AuthoringTree, id: string): ChapterBundle {
+export function compileChapter(
+  tree: AuthoringTree,
+  id: string,
+  options: CompileOptions = {},
+): ChapterBundle {
   const manifest = tree.chapters.get(id)
 
   if (manifest === undefined) {
@@ -414,10 +460,14 @@ export function compileChapter(tree: AuthoringTree, id: string): ChapterBundle {
     String(a["record_id"]).localeCompare(String(b["record_id"])),
   )
   const title = String(manifest.data["title"])
-  const sets =
+  const publisher =
     state === "approved"
-      ? [publicationSet({ id, title, digest }, approval as Approval, members, sources)]
-      : []
+      ? approvedBy(approval as Approval, digest)
+      : options.preview === true
+        ? previewOf(digest)
+        : undefined
+  const sets =
+    publisher === undefined ? [] : [publicationSet({ id, title }, publisher, members, sources)]
 
   if (sets.length === 1) {
     const set = sets[0]
@@ -457,8 +507,7 @@ export function compileChapter(tree: AuthoringTree, id: string): ChapterBundle {
 }
 
 /** Every chapter in the tree, in id order. */
-export function compileAll(tree: AuthoringTree): ChapterBundle[] {
-  return [...tree.chapters.keys()].sort().map((id) => compileChapter(tree, id))
+export function compileAll(tree: AuthoringTree, options: CompileOptions = {}): ChapterBundle[] {
+  return [...tree.chapters.keys()].sort().map((id) => compileChapter(tree, id, options))
 }
 
-export { RECORD_KINDS }

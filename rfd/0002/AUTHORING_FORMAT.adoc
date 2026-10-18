@@ -85,9 +85,10 @@ chapter on the transmission of the precepts.
 
 That is the extent of the decision. The concrete directory inventory and
 contract-fixture placement, filename-to-id rule, YAML format,
-chapter-manifest fields, compiler output, and migration below are proposals. In
-particular, this decision neither relocates the existing v0 schemas and vectors
-nor changes the current publication gate.
+chapter-manifest fields, compiler output, and migration below were proposals on
+2026-10-14; <<Decisions of 2026-10-18>> records which of them the owner has
+since decided. In particular, this decision neither relocates the existing v0
+schemas and vectors nor changes the current publication gate.
 
 Why: the owner's stated aim is exploring an era across the globe and zooming
 freely (recorded in link:../0003/README.adoc[RFD 3]). An era view shows several
@@ -99,13 +100,51 @@ for it.
 What it costs:
 
 * An edit to a shared record re-opens the approval of every chapter that
-  reaches it. <<Proposed: per-chapter approval pins a content digest>> makes
+  reaches it. <<Decided: per-chapter approval pins a content digest>> makes
   that automatic rather than a matter of memory.
 * Kind folders grow large, which the proposed subfolders absorb.
 * The migration effort is the same as the migration already planned, and at
   86 records it is the cheapest it will be.
 
-== Proposed: directory and identifier realization
+== Decisions of 2026-10-18
+
+The owner decided six of the proposals below on 2026-10-18, one at a time, in
+the project thread that followed PR #23. Each section keeps its text and is now
+headed *Decided*; this section records what was chosen, the alternatives the
+owner weighed, and what the owner added.
+
+. *Directory and identifiers:* as proposed.
+. *The record file:* YAML as proposed, after weighing Markdown with YAML front
+  matter, JSON with the same flat fields, and AsciiDoc. AsciiDoc remains a
+  candidate for an optional companion file if a chapter gains a long essay with
+  footnoted sources; records stay YAML.
+. *Date notation:* as proposed, after weighing EDTF and separate structured
+  fields. The compiler may convert EDTF on import; authors write the short
+  strings.
+. *The chapter manifest:* as proposed, with the story listed by event id. A
+  story by query was weighed and not chosen, because it orders same-year events
+  that the contract deliberately leaves unordered and it changes an approved
+  chapter without anyone touching it.
+. *Digest approval:* as proposed, with two additions by the owner:
+  ** a `CODEOWNERS` rule that requires the owner's review on every chapter
+     manifest, because a digest proves the content has not changed since
+     approval but not who wrote the approval; and
+  ** an approvals command, `pnpm approvals`, that lists every chapter as
+     approved, draft, or awaiting approval and, for one awaiting approval, shows
+     the records added, removed, or changed since the approved content, field by
+     field, with the new digest. It finds the approved content by walking Git
+     history to the revision whose closure matches the manifest's digest.
+. *The compiler and migration:* as proposed, and the existing content is made
+  consistent with the new format, including its sources
+  (<<Decided: one Wikidata source, pinned per citation>>).
+
+Still proposed: journey curation, territories, media, per-claim credit, and
+contract v1 (<<Proposed: journeys, territories, and media>>). The existing
+publication gate stays authoritative until the digest check is built, enforces
+the same invariant, and the owner approves the switch; no step of this work
+records an approval for the owner.
+
+== Decided: directory and identifier realization
 
 One realization of the decided world-first layout is:
 
@@ -134,7 +173,7 @@ historical/
   They never change an id, and the build fails on two files with the same
   name under one kind.
 
-== Proposed: the chapter manifest
+== Decided: the chapter manifest
 
 One YAML file per chapter owns every fact the projection now infers or
 hard-codes. It replaces the story record as an authoring input (the compiler
@@ -173,7 +212,7 @@ approval:
 * *Titles and captions.* Events gain a `title` field, and a story caption
   becomes an optional override of it.
 
-== Proposed: per-chapter approval pins a content digest
+== Decided: per-chapter approval pins a content digest
 
 The approval records a digest of the chapter's content closure: the manifest
 and every record and source it reaches, transitively. It does not record a
@@ -201,7 +240,7 @@ invariant. Until then, the existing gate and approved content remain
 authoritative. The ledger stays in the tree as the record of how the first two
 chapters were approved.
 
-== Proposed: the record file
+== Decided: the record file
 
 YAML, flat fields, and each citation attached to the field it supports. The
 compiler generates the claim ids and JSON pointers the contract needs, so an
@@ -277,7 +316,7 @@ Conventions:
   consolidation explicitly supersedes them. No collision resolution may erase
   approved provenance merely to satisfy global uniqueness.
 
-== Proposed: date notation
+== Decided: date notation
 
 Dates are short strings, compiled into the contract's existing `interval`,
 `precision`, and `mode` objects, so the 187 vectors keep holding.
@@ -323,7 +362,7 @@ specify them in this record now and implement v1 with the first chapter that
 draws a territory or shows an image, so that v1 lands with real content to test
 against. Until then the compiler targets v0.
 
-== Proposed: the compiler and what ships
+== Decided: the compiler and what ships
 
 * *Compiler.* A Node script, run by `pnpm build` and by the contract tests,
   reads the tree and emits the complete v0 representation: one synthetic
@@ -348,6 +387,35 @@ against. Until then the compiler targets v0.
   enforces the equivalent publication invariant. The compiler continues to
   generate the v0 story, publication sets, and mirrors until their consumers
   migrate to a later contract.
+
+== Decided: one Wikidata source, pinned per citation
+
+Decided by the owner on 2026-10-18. This supersedes, for Wikidata, the
+*Existing source identities* convention above, which would have kept the two
+chapters' Wikidata files as two dated sources.
+
+Both chapters carry a `wikidata` source today. They are different reads: the
+Tang file records a read on 2026-09-24 for external identifiers and label
+anchors, and the Qin file a read on 2026-09-25 for one label anchor. Neither a
+read date nor a content date identifies what was read. A read date says when
+we looked and collides when two reads fall on one day; a dataset has no single
+content date, because each item has its own edit history.
+
+* *One source.* There is one `wikidata` source record. It states the dataset,
+  its licence (CC0 1.0), and its terms once.
+* *The revision is in the citation.* Every Wikidata item edit has a permanent
+  revision id, so each citation pins the exact data it used:
+  `at: Q57906 (P625), revision 2234567890`. Any number of reads on any day
+  resolve to exact content.
+* *Existing citations are re-pinned, not guessed.* Migration resolves each
+  cited item's revision through the Wikidata API and checks that the cited
+  value (the coordinate or identifier the record uses) still equals the value
+  the approved record holds. A citation whose value has changed is listed for
+  the owner rather than re-pinned silently.
+* *This is new content for the approved chapters.* The consolidated source and
+  the re-pinned citations change what the Tang and Qin approvals cover. They
+  are prepared as drafts; the approved content stays served until the owner
+  approves the new content, under whichever gate is authoritative then.
 
 == Alternatives
 
@@ -386,9 +454,7 @@ A database::
 
 == Open questions
 
-* The proposed statements above, each awaiting the owner's word.
-* Whether a chapter manifest may include records by query (all events
-  `part_of` a journey, for instance) or only by listing them. Listing is
-  proposed for now, because the story order is editorial.
+* The statements still marked *Proposed* above, each awaiting the owner's
+  word.
 * How a reader-facing correction history reads the Git history of a shared
   record (RFD 2's existing open question, now spanning chapters).

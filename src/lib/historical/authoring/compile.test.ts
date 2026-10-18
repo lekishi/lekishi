@@ -251,6 +251,32 @@ describe("compiling a record file", () => {
     })
   })
 
+  it("lists claims in the order the record file writes them", () => {
+    // The card shows an event's first quoted citation, so the order an author
+    // writes is the order a reader meets: a whole-record cite written after a
+    // field comes after that field's claims.
+    const landing = `${EVENT.trimEnd()}
+cite:
+  id: example-landing-record
+  says: The chronicle reports the landing as a whole.
+  source: example-chronicle
+  at: 卷三
+`
+    const event = record(
+      compileChapter(
+        buildTree(files({ "events/example/deep/example-landing.yaml": landing })),
+        "example-chapter",
+      ).documents,
+      "lks:event:example-landing",
+    )
+
+    expect((event["claims"] as JsonObject[]).map((claim) => claim["claim_id"])).toEqual([
+      "lks:claim:example-landing-time",
+      "lks:claim:example-landing-places",
+      "lks:claim:example-landing-record",
+    ])
+  })
+
   it("links a name to its own main claim, or to the one it names", () => {
     const place = record(bundle.documents, "lks:place:example-harbour")
     const content = place["content"] as JsonObject

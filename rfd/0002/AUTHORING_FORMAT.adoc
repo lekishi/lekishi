@@ -446,8 +446,12 @@ with the change.
 *Migration evidence.* Before the site switched to the compiled chapters, a
 check compiled each of the 86 records and compared it with the revision its
 approved set published. Content, dispute, and every claim matched, with claims
-compared by the field they assert; four records list claims for different
-fields in another order, which carries no meaning. Every source's
+compared by the field they assert. The compiler lists a record's claims in the
+order its file writes them, and in 83 records that is the approved order
+exactly. In three (`return-voyage-753`, `yaku-arrival-753`, `yingchuan`) one
+claim moves past a claim for another field, because a file cannot write a cite
+for one field between two cites of another; every record's first quoted
+citation, which the selection card shows, is unchanged. Every source's
 `source_hash` was unchanged apart from the consolidated `wikidata` source. One
 id changed: the Tang story `lks:story:tang-mission-750-779`, named after its old
 file, is now `lks:story:tang-mission-750-754`, after its chapter. `pnpm

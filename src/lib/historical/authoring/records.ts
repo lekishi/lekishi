@@ -76,13 +76,33 @@ function copy(from: JsonObject, fields: Record<string, string>): JsonObject {
 }
 
 class Claims {
-  readonly compiled: JsonObject[] = []
+  private readonly claims: { readonly key: string; readonly claim: JsonObject }[] = []
   private readonly counts = new Map<string, number>()
 
   constructor(
     private readonly record: string,
     private readonly lookup: Lookup,
   ) {}
+
+  /**
+   * The claims in the order the record file writes them: by the position of the
+   * top-level field each cite sits under, and in written order within a field.
+   * The card shows a record's first quoted claim, so this order is what a reader
+   * meets first, and an author sets it by where a cite is written.
+   */
+  ordered(data: JsonObject): JsonObject[] {
+    const keys = Object.keys(data)
+    const position = (key: string) => {
+      const index = keys.indexOf(key)
+
+      return index === -1 ? keys.length : index
+    }
+
+    return this.claims
+      .map((entry, index) => ({ ...entry, index }))
+      .sort((a, b) => position(a.key) - position(b.key) || a.index - b.index)
+      .map((entry) => entry.claim)
+  }
 
   /** Compiles the `cite` of one field into claims asserting `pointer`; returns their ids. */
   add(pointer: string, cite: JsonValue | undefined, where: string): string[] {
@@ -128,7 +148,8 @@ class Claims {
       claim["attributed_to"] = entry["attributed_to"]
     }
 
-    this.compiled.push(claim)
+    // `where` starts with the top-level field the cite is written under.
+    this.claims.push({ key: /^[a-z_]+/.exec(where)?.[0] ?? "", claim })
 
     return String(claim["claim_id"])
   }
@@ -154,7 +175,7 @@ class Claims {
   named(name: string, where: string): string {
     const id = `lks:claim:${name}`
 
-    if (!this.compiled.some((claim) => claim["claim_id"] === id)) {
+    if (!this.claims.some((entry) => entry.claim["claim_id"] === id)) {
       throw new Error(`${where}: claim ${name} is not one of this record's claims`)
     }
 
@@ -422,7 +443,6 @@ export function compileRecord(
 ): CompiledRecord {
   const claims = new Claims(name, lookup)
 
-  // Whole-record claims first, as the record's own citations, then each field's.
   claims.add("", data["cite"], "cite")
 
   const content =
@@ -436,7 +456,7 @@ export function compileRecord(
 
   fieldCites(claims, kind, data)
 
-  const compiled: CompiledRecord = { content, claims: claims.compiled }
+  const compiled: CompiledRecord = { content, claims: claims.ordered(data) }
 
   return isObject(data["dispute"]) ? { ...compiled, dispute: data["dispute"] } : compiled
 }

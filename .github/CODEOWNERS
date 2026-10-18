@@ -1,0 +1,11 @@
+# A chapter is published by the owner's approval in its manifest (RFD 2,
+# rfd/0002/AUTHORING_FORMAT.adoc). The build checks that an approval's digest
+# matches the content, but a digest cannot say who wrote the approval, so every
+# change to a manifest needs the owner's review. This file protects itself for
+# the same reason.
+#
+# GitHub enforces this only while the default branch's protection requires a
+# review from Code Owners.
+
+/historical/chapters/*.yaml @darwin67
+/.github/CODEOWNERS @darwin67

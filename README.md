@@ -112,52 +112,37 @@ chapter instead of the Tang one.
 
 ### Reviewed chapter content
 
-The atlas renders the reviewed Tang chapter
-(`historical/chapters/tang-mission-750-754/`) through one browser-safe boundary,
-and that boundary is the only way chapter content enters the app:
+The atlas renders two chapters, the Tang mission of 750–754 and the bounded Qin
+episode of 233–226 BCE. Their content is authored as YAML record files under
+`historical/` (see [`historical/README.md`](historical/README.md)), and one
+path takes it into the app:
 
-1. `src/lib/historical/chapter.ts` is the Node-side loader. It reads the tree
-   with `fs` and hands it to the contract's own `Publication.checkAll`; it is
-   used by tests and tooling, never by the browser.
+1. `src/lib/historical/authoring/` compiles the record files into complete
+   `lekishi-historical-contract/v0` documents: a chapter manifest's story,
+   everything it reaches, one generated revision per record, and a publication
+   set when the owner's approval in the manifest matches the content's digest.
 2. `scripts/check-chapter.mjs` runs before Vite in `pnpm build` and runs each
-   chapter's contract test, the publication approval gate, the projection test
-   suite, and the comparison catalog suite through Vitest, so an edited approved
-   revision, a missing source pin, a set the ledger does not name, or a record
-   published at a revision it does not carry fails the build. This is the
-   validation gate: schemas, hashes, and pins need Node, so they cannot run in
-   the bundle.
-3. `src/lib/atlas/chapter-content.ts` bundles the same records and publication
-   sets with Vite's `import.meta.glob`, so the browser reads the files the
-   contract validates: no `fs`, no second copy, and no request a static host has
-   to serve. The projection runs at module scope and **throws** if the chapter
-   cannot be represented. The atlas route is prerendered, so that failure fails
-   `pnpm build` instead of shipping placeholder content.
+   chapter's contract test, the publication approval gate, and the projection
+   and catalog suites through Vitest, so a stale approval or content the
+   contract refuses fails the build. Schemas and hashes need Node, so this
+   validation cannot run in the bundle; `src/lib/historical/chapter.ts` is the
+   Node-side loader the tests use.
+3. A Vite plugin (`src/lib/historical/authoring/vite-plugin.ts`) compiles the
+   same bundles at build time and serves each approved chapter as one lazily
+   loaded chunk, so the browser reads exactly what the contract validated, with
+   no `fs`, no generated files on disk, and no request a static host has to
+   serve. A draft is listed but not served.
 4. `src/lib/atlas/projection.ts` selects the newest published revision per
-   record through the contract's own publication ordering — the same
-   `currentPublished` the validator uses, split into `publication-order.ts` so
-   the browser and Node share one rule — and maps it into the atlas domain. The
-   chapter's coverage window (the window the atlas opens in) comes from the
-   caller, so the comparison catalog can name the Qin fixture's window without a
-   chapter branch in the projection.
-5. `src/lib/atlas/chapter-catalog.ts` loads non-production chapters lazily for
-   the comparison review route (`/compare/qin`), which renders the bounded Qin
-   fixture through the same projection and states that it is unapproved
-   preparation. The atlas route does not import the catalog, so the production
-   page still bundles only the reviewed chapter, and the build invariant requires
-   the review page while forbidding the fixture on the production page.
+   record through the contract's own publication ordering and maps it into the
+   atlas domain; `src/lib/atlas/chapter-catalog.ts` is the one loader every
+   chapter page uses, with the window its manifest writes. The chapter route is
+   prerendered, so content the projection cannot represent fails `pnpm build`
+   instead of shipping placeholder content.
 
-The bounded Qin comparison fixture
-(`historical/chapters/qin-conquest-han-233-226/`) is source-checked content in
-the same contract, recorded in the publication ledger as a preparation snapshot
-rather than a release, and rendered only by the comparison review route
-(`/compare/qin`), which labels it unapproved preparation. It stays
-comparison-only until the treatment harness and the owner's decision exist. The
-root page presents both chapters as peer cards — name, window, and story summary
-each — from `src/lib/atlas/chapters.ts`, whose tests pin one card per chapter
-tree and each card's window against the projection; each card carries its
-chapter's editorial state as secondary metadata, which is where the Qin chapter's
-missing release decision and the Tang chapter's recorded owner approval stay
-visible without becoming either chapter's identity.
+The root page presents the served chapters as peer cards (name, window, and
+summary from each manifest) from `src/lib/atlas/chapters.ts`; each card carries
+its chapter's approval as secondary metadata, and `/compare/qin`, the Qin
+chapter's old review route, redirects to its chapter page.
 
 What the projection refuses to do is part of the contract with the reader:
 

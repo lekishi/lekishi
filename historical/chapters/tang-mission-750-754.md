@@ -1,5 +1,14 @@
 # Tang chapter fixture: the 750–754 embassy of Fujiwara no Kiyokawa
 
+> **Since 2026-10-18 this chapter is the manifest [`tang-mission-750-754.yaml`](tang-mission-750-754.yaml) and
+> the record files it reaches** (RFD 2's record-file format), compiled at build
+> time and published by the owner's digest approval in the manifest. These notes
+> were the README of the hand-written JSON tree the record files replaced. They
+> are kept for the chapter's scope, sources and review history; where they
+> describe the JSON tree, its `-v1` set, earlier revisions, or the ledger in
+> [`rfd/0002/PUBLICATION_APPROVAL.adoc`](../../rfd/0002/PUBLICATION_APPROVAL.adoc),
+> they describe the chapter before that change, which Git history keeps.
+
 This directory holds the first reviewed chapter content for the public PoC: the
 Tang mission selected at Gate 1, in the versioned `lekishi-historical-contract/v0`
 format. It is content, not contract; the schemas and semantics live in
@@ -8,9 +17,9 @@ format. It is content, not contract; the schemas and semantics live in
 ## Coverage model
 
 Selected by the owner on 2026-09-24 from
-[`rfd/0002/TANG_MISSION_FEASIBILITY.adoc`](../../../rfd/0002/TANG_MISSION_FEASIBILITY.adoc)
+[`rfd/0002/TANG_MISSION_FEASIBILITY.adoc`](../../rfd/0002/TANG_MISSION_FEASIBILITY.adoc)
 (Candidate B) and recorded in
-[`rfd/0004/GATE1_DECISION.adoc`](../../../rfd/0004/GATE1_DECISION.adoc):
+[`rfd/0004/GATE1_DECISION.adoc`](../../rfd/0004/GATE1_DECISION.adoc):
 
 - **Primary mission window 750–754**: appointment, dispatch, the Tang New Year
   audience, the return voyage, the return reports, the rewards, and the 754
@@ -108,7 +117,7 @@ uncertainty/dispute part still depends on the exploration loop, and the AC7
 attribution/rights audit remains open, so AC2 as a whole is not complete.
 
 The owner's decisions are recorded in
-[`rfd/0002/PUBLICATION_APPROVAL.adoc`](../../../rfd/0002/PUBLICATION_APPROVAL.adoc):
+[`rfd/0002/PUBLICATION_APPROVAL.adoc`](../../rfd/0002/PUBLICATION_APPROVAL.adoc):
 a set may exist only when that ledger names it, and the ledger now records this
 one as **owner approved** — the owner's editorial approval under RFD 2 of the
 snapshot merged on `origin/main`. The set document itself is deliberately

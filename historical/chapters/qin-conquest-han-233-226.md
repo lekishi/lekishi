@@ -1,21 +1,30 @@
 # Qin comparison fixture: the end of the state of Han, 233–226 BCE
 
+> **Since 2026-10-18 this chapter is the manifest [`qin-conquest-han-233-226.yaml`](qin-conquest-han-233-226.yaml) and
+> the record files it reaches** (RFD 2's record-file format), compiled at build
+> time and published by the owner's digest approval in the manifest. These notes
+> were the README of the hand-written JSON tree the record files replaced. They
+> are kept for the chapter's scope, sources and review history; where they
+> describe the JSON tree, its `-v1` set, earlier revisions, or the ledger in
+> [`rfd/0002/PUBLICATION_APPROVAL.adoc`](../../rfd/0002/PUBLICATION_APPROVAL.adoc),
+> they describe the chapter before that change, which Git history keeps.
+
 This directory holds the bounded Qin comparison fixture authorized on
 2026-09-25: the smallest source-checked, contract-valid Qin-conquest episode
 needed for the shared treatment comparison. It is **comparison-only**:
 
 - it is not a launch chapter and is not rendered by the production atlas;
 - its publication set is recorded in
-  [`rfd/0002/PUBLICATION_APPROVAL.adoc`](../../../rfd/0002/PUBLICATION_APPROVAL.adoc)
+  [`rfd/0002/PUBLICATION_APPROVAL.adoc`](../../rfd/0002/PUBLICATION_APPROVAL.adoc)
   as a `preparation snapshot` with the preparing editor's self-review — the owner
   instructed the fixture, no release decision has been taken, and RFD 4's AC2
   does not apply to it;
 - the owner asked to review the corrected content before deciding, so the fixture
   is now rendered by the comparison review route `/compare/qin`, which states
   that it is unapproved preparation: see
-  [`rfd/0003/COMPARISON_REVIEW_ROUTE.adoc`](../../../rfd/0003/COMPARISON_REVIEW_ROUTE.adoc);
+  [`rfd/0003/COMPARISON_REVIEW_ROUTE.adoc`](../../rfd/0003/COMPARISON_REVIEW_ROUTE.adoc);
 - the boundary decision that kept it out of the artifact is recorded in
-  [`rfd/0003/COMPARISON_FIXTURE_BOUNDARY.adoc`](../../../rfd/0003/COMPARISON_FIXTURE_BOUNDARY.adoc),
+  [`rfd/0003/COMPARISON_FIXTURE_BOUNDARY.adoc`](../../rfd/0003/COMPARISON_FIXTURE_BOUNDARY.adoc),
   whose artifact rule the review route supersedes.
 
 ## Scope, and why this scope
@@ -68,10 +77,10 @@ The exact event inventory is pinned by
 
 | Source | Kind | Cited locators | Rights |
 | --- | --- | --- | --- |
-| [`史記`](sources/shiji.json) | primary | 卷六 秦始皇本紀 (篇首, 十四年, 十六年, 十七年, 二十一年); 卷十五 六國年表 (秦始皇九年, 十四年, 十六年, 十七年); 卷四十五 韓世家 (韓哀侯二年, 韓桓惠王三十四年, 韓王安五年, 韓王安九年); 卷六十三 老子韓非列傳 | public domain; Wikisource transcription, unproofread; short quotations permitted |
-| [`資治通鑑`](sources/zizhi-tongjian.json) | primary | 卷六 秦紀一 (莊襄王三年, 始皇帝十四年, 十六年, 十七年) | public domain; Wikisource transcription, unproofread, with later annotations; main text only |
-| [`讀史方輿紀要`](sources/du-shi-fang-yu-jiyao.json) | reference | 卷四十七 河南二 開封府 (禹州, 禹州 陽翟城, 新鄭縣); 卷四十九 河南四 懷慶府 衛輝府 彰德府 (修武縣 南陽城); 卷五十一 河南六 南陽府; 卷五十三 陝西二 西安府 (涇陽縣 雲陽城) | public domain (1692); Wikisource transcription, unproofread; citation of its identifications, short quotations |
-| [`Wikidata`](sources/wikidata.json) | dataset | Q1024662, Q10881340, Q1344848 (P625) | CC0 1.0; modern coordinate only, never a historical claim |
+| [`史記`](../sources/shiji.yaml) | primary | 卷六 秦始皇本紀 (篇首, 十四年, 十六年, 十七年, 二十一年); 卷十五 六國年表 (秦始皇九年, 十四年, 十六年, 十七年); 卷四十五 韓世家 (韓哀侯二年, 韓桓惠王三十四年, 韓王安五年, 韓王安九年); 卷六十三 老子韓非列傳 | public domain; Wikisource transcription, unproofread; short quotations permitted |
+| [`資治通鑑`](../sources/zizhi-tongjian.yaml) | primary | 卷六 秦紀一 (莊襄王三年, 始皇帝十四年, 十六年, 十七年) | public domain; Wikisource transcription, unproofread, with later annotations; main text only |
+| [`讀史方輿紀要`](../sources/dushi-fangyu-jiyao.yaml) | reference | 卷四十七 河南二 開封府 (禹州, 禹州 陽翟城, 新鄭縣); 卷四十九 河南四 懷慶府 衛輝府 彰德府 (修武縣 南陽城); 卷五十一 河南六 南陽府; 卷五十三 陝西二 西安府 (涇陽縣 雲陽城) | public domain (1692); Wikisource transcription, unproofread; citation of its identifications, short quotations |
+| [`Wikidata`](../sources/wikidata.yaml) | dataset | Q1024662, Q10881340, Q1344848 (P625) | CC0 1.0; modern coordinate only, never a historical claim |
 
 Every locator was re-checked against the named Wikisource transcription on
 2026-09-25. All three transcriptions are unproofread, so every locator must be
@@ -262,7 +271,7 @@ and states the same unapproved status as secondary metadata — so the review
 surface is discoverable without reading as approved or shipped. The card does not
 describe the comparison harness or the project's own process; the owner's review
 comment of 2026-09-27 asked for exactly that (see
-[`rfd/0003/CHAPTER_PRESENTATION.adoc`](../../../rfd/0003/CHAPTER_PRESENTATION.adoc)).
+[`rfd/0003/CHAPTER_PRESENTATION.adoc`](../../rfd/0003/CHAPTER_PRESENTATION.adoc)).
 The fixture's status is "source-checked, corrected, published for review, awaiting
 the owner's decision".
 

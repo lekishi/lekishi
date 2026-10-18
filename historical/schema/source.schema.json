@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lekishi/lekishi/historical/schema/source.schema.json",
+  "title": "Lekishi record file: source",
+  "description": "historical/sources/<id>.yaml: a cited work, dataset or media asset with its reuse terms, in the v0 source fields. `locator` is the locator kind its citations use unless a citation names another; it is not source metadata and is not part of the compiled source or its hash.",
+  "type": "object",
+  "required": ["locator", "kind", "title", "license"],
+  "additionalProperties": false,
+  "properties": {
+    "locator": { "$ref": "../v0/schema/common.schema.json#/$defs/locator/properties/kind" },
+    "kind": { "$ref": "../v0/schema/source.schema.json#/properties/kind" },
+    "title": { "$ref": "../v0/schema/source.schema.json#/properties/title" },
+    "edition": { "$ref": "../v0/schema/source.schema.json#/properties/edition" },
+    "author": { "$ref": "../v0/schema/source.schema.json#/properties/author" },
+    "issued": { "$ref": "../v0/schema/source.schema.json#/properties/issued" },
+    "language": { "$ref": "../v0/schema/source.schema.json#/properties/language" },
+    "identifiers": { "$ref": "../v0/schema/source.schema.json#/properties/identifiers" },
+    "license": { "$ref": "../v0/schema/source.schema.json#/properties/license" },
+    "notes": { "$ref": "../v0/schema/source.schema.json#/properties/notes" },
+    "supersedes_source_id": {
+      "$ref": "../v0/schema/source.schema.json#/properties/supersedes_source_id"
+    }
+  }
+}

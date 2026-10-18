@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lekishi/lekishi/historical/schema/event.schema.json",
+  "title": "Lekishi record file: event",
+  "description": "historical/events/**/<id>.yaml. The file name is the event's id.",
+  "type": "object",
+  "required": ["summary", "types", "date"],
+  "additionalProperties": false,
+  "properties": {
+    "summary": { "$ref": "common.schema.json#/$defs/text" },
+    "types": {
+      "$ref": "../v0/schema/kinds.schema.json#/$defs/event_content/properties/event_types"
+    },
+    "part_of": {
+      "type": "array",
+      "maxItems": 20,
+      "items": { "$ref": "common.schema.json#/$defs/name" }
+    },
+    "date": { "$ref": "common.schema.json#/$defs/date" },
+    "places": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "required": ["place", "role"],
+        "additionalProperties": false,
+        "properties": {
+          "place": { "$ref": "common.schema.json#/$defs/name" },
+          "role": {
+            "$ref": "../v0/schema/kinds.schema.json#/$defs/event_content/properties/places/items/properties/role"
+          },
+          "note": { "$ref": "common.schema.json#/$defs/note" },
+          "cite": { "$ref": "common.schema.json#/$defs/cite" }
+        }
+      }
+    },
+    "participants": {
+      "type": "array",
+      "maxItems": 100,
+      "items": {
+        "type": "object",
+        "required": ["actor", "role"],
+        "additionalProperties": false,
+        "properties": {
+          "actor": { "$ref": "common.schema.json#/$defs/name" },
+          "role": {
+            "$ref": "../v0/schema/kinds.schema.json#/$defs/event_content/properties/participants/items/properties/role"
+          },
+          "note": { "$ref": "common.schema.json#/$defs/note" },
+          "cite": { "$ref": "common.schema.json#/$defs/cite" }
+        }
+      }
+    },
+    "at": { "$ref": "common.schema.json#/$defs/positions" },
+    "notes": { "$ref": "common.schema.json#/$defs/text" },
+    "dispute": { "$ref": "common.schema.json#/$defs/dispute" },
+    "cite": { "$ref": "common.schema.json#/$defs/cite" },
+    "cites": { "$ref": "common.schema.json#/$defs/cites" }
+  }
+}

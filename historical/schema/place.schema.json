@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lekishi/lekishi/historical/schema/place.schema.json",
+  "title": "Lekishi record file: place",
+  "description": "historical/places/**/<id>.yaml. The file name is the place's id.",
+  "type": "object",
+  "required": ["summary", "types", "names", "at"],
+  "additionalProperties": false,
+  "properties": {
+    "summary": { "$ref": "common.schema.json#/$defs/text" },
+    "types": {
+      "$ref": "../v0/schema/kinds.schema.json#/$defs/place_content/properties/place_types"
+    },
+    "names": {
+      "type": "array",
+      "maxItems": 50,
+      "items": { "$ref": "common.schema.json#/$defs/local_name" }
+    },
+    "at": { "$ref": "common.schema.json#/$defs/positions" },
+    "modern": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "required": ["form", "lang", "note"],
+        "additionalProperties": false,
+        "properties": {
+          "form": { "type": "string", "minLength": 1, "maxLength": 300 },
+          "lang": { "$ref": "../v0/schema/common.schema.json#/$defs/name/properties/language" },
+          "script": { "$ref": "../v0/schema/common.schema.json#/$defs/name/properties/script" },
+          "note": { "$ref": "common.schema.json#/$defs/note" }
+        }
+      }
+    },
+    "external_ids": { "$ref": "common.schema.json#/$defs/external_ids" },
+    "notes": { "$ref": "common.schema.json#/$defs/text" },
+    "dispute": { "$ref": "common.schema.json#/$defs/dispute" },
+    "cite": { "$ref": "common.schema.json#/$defs/cite" },
+    "cites": { "$ref": "common.schema.json#/$defs/cites" }
+  }
+}

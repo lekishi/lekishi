@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lekishi/lekishi/historical/schema/actor.schema.json",
+  "title": "Lekishi record file: actor",
+  "description": "historical/actors/**/<id>.yaml: a person, state, dynasty, community, religious body, company, institution or culture. The file name is the actor's id.",
+  "type": "object",
+  "required": ["summary", "types", "names"],
+  "additionalProperties": false,
+  "properties": {
+    "summary": { "$ref": "common.schema.json#/$defs/text" },
+    "types": {
+      "$ref": "../v0/schema/kinds.schema.json#/$defs/actor_content/properties/actor_types"
+    },
+    "names": {
+      "type": "array",
+      "maxItems": 50,
+      "items": { "$ref": "common.schema.json#/$defs/local_name" }
+    },
+    "roles": {
+      "type": "array",
+      "maxItems": 30,
+      "items": {
+        "type": "object",
+        "required": ["role"],
+        "additionalProperties": false,
+        "properties": {
+          "role": {
+            "$ref": "../v0/schema/kinds.schema.json#/$defs/actor_content/properties/roles/items/properties/role"
+          },
+          "note": { "$ref": "common.schema.json#/$defs/note" },
+          "date": { "$ref": "common.schema.json#/$defs/date" },
+          "cite": { "$ref": "common.schema.json#/$defs/cite" }
+        }
+      }
+    },
+    "external_ids": { "$ref": "common.schema.json#/$defs/external_ids" },
+    "notes": { "$ref": "common.schema.json#/$defs/text" },
+    "dispute": { "$ref": "common.schema.json#/$defs/dispute" },
+    "cite": { "$ref": "common.schema.json#/$defs/cite" },
+    "cites": { "$ref": "common.schema.json#/$defs/cites" }
+  }
+}

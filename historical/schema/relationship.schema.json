@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lekishi/lekishi/historical/schema/relationship.schema.json",
+  "title": "Lekishi record file: relationship",
+  "description": "historical/relationships/**/<id>.yaml: trade, learning, religion, diplomacy, institutional change, conflict and the other v0 interactions between two records. It is directed and asserts no causation unless `directionality` and `causality` say otherwise.",
+  "type": "object",
+  "required": ["summary", "types", "from", "to"],
+  "additionalProperties": false,
+  "properties": {
+    "summary": { "$ref": "common.schema.json#/$defs/text" },
+    "types": {
+      "$ref": "../v0/schema/kinds.schema.json#/$defs/relationship_content/properties/relationship_types"
+    },
+    "from": { "$ref": "common.schema.json#/$defs/reference" },
+    "to": { "$ref": "common.schema.json#/$defs/reference" },
+    "directionality": {
+      "$ref": "../v0/schema/kinds.schema.json#/$defs/relationship_content/properties/directionality"
+    },
+    "causality": {
+      "$ref": "../v0/schema/kinds.schema.json#/$defs/relationship_content/properties/causality"
+    },
+    "date": { "$ref": "common.schema.json#/$defs/date" },
+    "notes": { "$ref": "common.schema.json#/$defs/text" },
+    "dispute": { "$ref": "common.schema.json#/$defs/dispute" },
+    "cite": { "$ref": "common.schema.json#/$defs/cite" },
+    "cites": { "$ref": "common.schema.json#/$defs/cites" }
+  }
+}

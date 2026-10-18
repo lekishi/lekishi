@@ -131,7 +131,8 @@ path takes it into the app:
    same bundles at build time and serves each approved chapter as one lazily
    loaded chunk, so the browser reads exactly what the contract validated, with
    no `fs`, no generated files on disk, and no request a static host has to
-   serve. A draft is listed but not served.
+   serve. A draft is listed but not served, except by development and
+   pull-request previews, which serve it under a draft banner.
 4. `src/lib/atlas/projection.ts` selects the newest published revision per
    record through the contract's own publication ordering and maps it into the
    atlas domain; `src/lib/atlas/chapter-catalog.ts` is the one loader every

@@ -77,7 +77,9 @@ lists every chapter as approved, draft, or stale and shows the field-level
 changes since the last approval.
 
 - A chapter without an approval is a draft: it compiles and faces every
-  contract test as a preview, and the site does not serve it.
+  contract test as a preview, and production does not serve it. Development
+  and pull-request previews serve it, and a stale chapter too, under a draft
+  banner, so the owner can open what they are asked to approve.
 - An edit to anything an approved chapter reaches, a shared place included,
   makes the approval stale, and a stale approval fails the build until the owner
   approves the new content.

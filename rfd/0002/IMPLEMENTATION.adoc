@@ -32,6 +32,7 @@ content roadmap, ordered so the Tang chapter improves every week.
 - [ ] Tang: the 630–894 missions as a sparse network layer, 鑒眞's 743–748 crossings as a second story, 圓仁's 838–847 diary as a third. Target 200+ events, 60+ placed places, 5+ routes, 20+ images.
 - [ ] Qin: dated control snapshots for Han (233, 230 BCE) cited as interpretations, extended to 230–221 BCE.
 - [x] Migrate both chapters to the record files, with one `wikidata` source and each Wikidata citation pinned to the item revision it read. Evidence: link:AUTHORING_FORMAT.adoc[the authoring format record], "Implemented on 2026-10-18".
+- [x] Serve drafts on development and pull-request previews under a visible draft banner, never on production. Decided by the owner on 2026-10-18; evidence: link:AUTHORING_FORMAT.adoc[the authoring format record], "Decided: previews show drafts".
 - [ ] Retire the per-set digest ledger and its test only after the owner approves the replacement and its per-chapter approval invariant is enforced by the build. The digest gate replaces the test in PR #25; this completes when the owner merges it and approves both chapters with `pnpm approvals`.
 - [ ] Stage 2 of the contribution surface when the first regular contributor appears: a structured proposal form with claim, source, and locator fields.
 - [ ] Claim basis (`attested` versus `cited_interpretation`) shown in the card; relationships openable from an arc.

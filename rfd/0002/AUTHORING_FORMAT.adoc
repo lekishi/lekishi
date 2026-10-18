@@ -495,6 +495,34 @@ the owner approves this change and approves both chapters with `pnpm
 approvals`. Until then the branch serves no chapter, and its chapter tests fail,
 so it cannot be merged by mistake.
 
+== Decided: previews show drafts — 2026-10-18
+
+The owner decided on 2026-10-18 that pull-request previews serve the chapters
+without a matching approval, as drafts, so the content can be judged on the
+device it is tested on before it is approved. The alternative, never serving a
+draft and reviewing it through `pnpm approvals` and a local build, kept
+previews identical to production but left the owner approving content they
+could not open on the preview. This amends the open detail above that the site
+does not serve a draft: production still never does.
+
+* The builds that serve drafts are the ones that carry the `/dev` pages:
+  development and Cloudflare Pages previews of any branch but `main`
+  (`draftChaptersServed` in `scripts/dev-pages.mjs`). Production serves
+  approved chapters only.
+* A served draft is published under its draft preview set, whose publisher's
+  role is "draft preview, not approved". A stale chapter is served the same way
+  on a preview, so an edit to approved content can be looked at before it is
+  re-approved; production and CI still fail on it.
+* Every surface that shows a draft says so: the chapter card carries a "Draft"
+  mark and the status "Draft, not approved for release", the chapter page keeps
+  a banner above the atlas, and a stale chapter's line names the approval its
+  content no longer matches.
+* The unit and contract tests keep the production view, so a draft never makes
+  `pnpm test` or CI's verify job pass. A preview build's chapter gate runs them
+  with `LEKISHI_DRAFTS=1`, so it checks the chapters that build ships, and the
+  build invariant fails a draft without its banner or a banner on anything
+  else.
+
 == Alternatives
 
 Chapter folders with a shared catalog for places, actors, and sources only::

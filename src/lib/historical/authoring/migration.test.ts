@@ -40,6 +40,31 @@ function published(document: JsonObject): JsonObject {
   return revisions.find((revision) => revision["revision_id"] === id) as JsonObject
 }
 
+/**
+ * A Wikidata citation's locator gains the item revision it read (decided by the
+ * owner on 2026-10-18). Each revision was resolved from the item's history as the
+ * revision current on the source's read date, with no edit on that day, and the
+ * cited coordinate at that revision equals the record's.
+ */
+const PINNED = /^(Q[0-9]+ \(P[0-9]+\)), revision [0-9]+$/
+
+/** A compiled claim with its Wikidata revision pins removed, so it compares with the approved one. */
+function unpinned(claim: JsonObject): JsonObject {
+  return {
+    ...claim,
+    citations: (claim["citations"] as JsonObject[]).map((citation) => {
+      const locator = citation["locator"] as JsonObject
+
+      return citation["source_id"] === "lks:source:wikidata"
+        ? {
+            ...citation,
+            locator: { ...locator, value: String(locator["value"]).replace(PINNED, "$1") },
+          }
+        : citation
+    }),
+  }
+}
+
 function byField(claims: unknown): Record<string, unknown[]> {
   const grouped: Record<string, unknown[]> = {}
 
@@ -83,8 +108,28 @@ describe.each(CHAPTERS)("the migration of %s", (chapter) => {
       const after = ((compiled.get(id) as JsonObject)["revisions"] as JsonObject[])[0]
 
       expect(after["content"], id).toEqual(before["content"])
-      expect(byField(after["claims"]), id).toEqual(byField(before["claims"]))
+      expect(byField((after["claims"] as JsonObject[]).map(unpinned)), id).toEqual(
+        byField(before["claims"]),
+      )
       expect(after["dispute"], id).toEqual(before["dispute"])
+    }
+  })
+
+  it("pins every Wikidata citation to the item revision it read", () => {
+    const locators = bundle.documents
+      .flatMap((document) =>
+        ((document["revisions"] as JsonObject[] | undefined) ?? []).flatMap(
+          (revision) => revision["claims"] as JsonObject[],
+        ),
+      )
+      .flatMap((claim) => claim["citations"] as JsonObject[])
+      .filter((citation) => citation["source_id"] === "lks:source:wikidata")
+      .map((citation) => String((citation["locator"] as JsonObject)["value"]))
+
+    expect(locators.length).toBeGreaterThan(0)
+
+    for (const locator of locators) {
+      expect(locator).toMatch(PINNED)
     }
   })
 

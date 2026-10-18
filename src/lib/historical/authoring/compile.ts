@@ -510,4 +510,3 @@ export function compileChapter(
 export function compileAll(tree: AuthoringTree, options: CompileOptions = {}): ChapterBundle[] {
   return [...tree.chapters.keys()].sort().map((id) => compileChapter(tree, id, options))
 }
-

@@ -59,7 +59,9 @@ export function loadChapter(name: string): ChapterTree {
   // A JSON round trip, not structuredClone: the compiled documents may share
   // objects (a set's publisher and every record's mirror of it), and a test that
   // edits one copy must not edit the others, exactly as with files on disk.
-  return JSON.parse(JSON.stringify({ name, documents: bundle.documents, sets: bundle.sets })) as ChapterTree
+  return JSON.parse(
+    JSON.stringify({ name, documents: bundle.documents, sets: bundle.sets }),
+  ) as ChapterTree
 }
 
 /** Validates a chapter with the contract's own publication semantics. */

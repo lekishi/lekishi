@@ -417,6 +417,80 @@ content date, because each item has its own edit history.
   are prepared as drafts; the approved content stays served until the owner
   approves the new content, under whichever gate is authoritative then.
 
+== Implemented on 2026-10-18
+
+The decisions of 2026-10-18 are implemented in PR #25. This section records
+what was built, the evidence that the migration lost nothing, and the details
+the decisions left open, which the implementation chose and the owner reviews
+with the change.
+
+*What was built.*
+
+* The tree: 84 record files under `historical/{places,actors,events,relationships}/`
+  (subfolders `tang/` and `qin/`), 14 source files under `historical/sources/`,
+  and two manifests in `historical/chapters/`, each with the chapter's former
+  README beside it as `<id>.md`. The two stories are the manifests' `story`
+  blocks, so the chapters still publish 86 records. Every file is checked
+  against a JSON Schema in `historical/schema/`.
+* The compiler, `src/lib/historical/authoring/`, emits the complete v0
+  representation. The site gets it from a Vite plugin
+  (`scripts/historical-chapters.mjs`) as one lazily loaded chunk per approved
+  chapter; nothing compiled is written to disk. The contract and chapter tests
+  compile the same bundles through `src/lib/historical/chapter.ts`.
+* The gate: `publication-approval.test.ts` now fails the build for a stale
+  approval or a misdated one, and requires the served chapters to be exactly the
+  approved ones. `pnpm approvals` lists and compares chapters as decided, and
+  `.github/CODEOWNERS` requires the owner's review on every manifest.
+* The hand-written JSON trees under `historical/chapters/<id>/` are removed.
+
+*Migration evidence.* Before the site switched to the compiled chapters, a
+check compiled each of the 86 records and compared it with the revision its
+approved set published. Content, dispute, and every claim matched, with claims
+compared by the field they assert; four records list claims for different
+fields in another order, which carries no meaning. Every source's
+`source_hash` was unchanged apart from the consolidated `wikidata` source. One
+id changed: the Tang story `lks:story:tang-mission-750-779`, named after its old
+file, is now `lks:story:tang-mission-750-754`, after its chapter. `pnpm
+approvals` shows exactly these differences against the approved JSON sets: the
+cards' text (code until now), the Wikidata source and its 17 pinned citations,
+and the story id.
+
+*How the 17 Wikidata citations were pinned.* The Wikidata API (`api.php`)
+refused the requests with HTTP 429, so each item's history was read from its
+`index.php?action=history` page and the data from `Special:EntityData` at the
+chosen revision. Each citation names the revision that was current on the day
+its chapter recorded the read (2026-09-24 for Tang, 2026-09-25 for Qin). For all
+17, the item had no edit on that day, so the revision is unambiguous, and the
+coordinate at that revision equals the record's to the record's precision. No
+citation needed to be listed for the owner.
+
+*Details the decisions left open.*
+
+* A generated revision's id is `lks:rev:<file name>-<first 12 hex digits of
+  the sha256 of its content, claims, and dispute>`, so it changes exactly when
+  the record does. Its `created_at` is 2026-10-18, the day the record files
+  were adopted, and its author is "Lekishi contributors", because who wrote a
+  line is in Git history.
+* An approved chapter's set is `lks:set:<chapter>-<first 12 hex digits of the
+  digest>`, published at the approval's date by the approver, whose role is
+  `owner`. Its review stays the contributors' `self_review`, and its notes say
+  that the approval is an owner decision, not independent or specialist review.
+* An approval's date is a UTC calendar day, no earlier than 2026-10-18 and no
+  later than the day the build runs.
+* A chapter without an approval is a draft. The site does not serve it. The
+  contract and chapter tests check it as a preview set that names no owner, so
+  its content is held to every rule before anyone approves it.
+* `pnpm approvals approve <chapter>` needs an interactive terminal and the
+  chapter id typed back. It names the approver from `git config user.name`
+  unless `--by` names someone, and it writes only the manifest's `approval`
+  block.
+
+*Retirement.* The ledger's test is replaced by the digest gate in the same
+change, and the ledger takes no further rows. The criterion above holds when
+the owner approves this change and approves both chapters with `pnpm
+approvals`. Until then the branch serves no chapter, and its chapter tests fail,
+so it cannot be merged by mistake.
+
 == Alternatives
 
 Chapter folders with a shared catalog for places, actors, and sources only::

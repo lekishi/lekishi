@@ -19,7 +19,7 @@ content roadmap, ordered so the Tang chapter improves every week.
 - [x] Decide the content layout: world first, decided 2026-10-14, with every record once under `historical/<kind>/` and chapters as manifests. Evidence: link:AUTHORING_FORMAT.adoc[the authoring format record].
 - [x] Agree the core of link:AUTHORING_FORMAT.adoc[the authoring format record]: directory and id rules, record files, date notation, the chapter manifest, digest approval (with a `CODEOWNERS` rule and a `pnpm approvals` command), compiled chapter bundles, one Wikidata source pinned per citation, and migration and retirement criteria. Decided by the owner on 2026-10-18.
 - [ ] Agree journey curation, territories, media, per-claim credit, and contract v1 (still proposed in the same record).
-- [ ] Build the compiler from the agreed record files to the complete v0 representation, with `pnpm approvals` and the `CODEOWNERS` rule, with the CI checks the RFD lists, emitting one compiled bundle per chapter so content costs one deployed file per chapter; keep claims, citations, precision, attestation versus interpretation, generated stories and publication sets, and approved source metadata.
+- [x] Build the compiler from the agreed record files to the complete v0 representation, with `pnpm approvals` and the `CODEOWNERS` rule, with the CI checks the RFD lists, emitting one compiled bundle per chapter so content costs one deployed file per chapter; keep claims, citations, precision, attestation versus interpretation, generated stories and publication sets, and approved source metadata. Evidence: link:AUTHORING_FORMAT.adoc[the authoring format record], "Implemented on 2026-10-18".
 
 == Fix the places we have
 
@@ -31,7 +31,8 @@ content roadmap, ordered so the Tang chapter improves every week.
 
 - [ ] Tang: the 630–894 missions as a sparse network layer, 鑒眞's 743–748 crossings as a second story, 圓仁's 838–847 diary as a third. Target 200+ events, 60+ placed places, 5+ routes, 20+ images.
 - [ ] Qin: dated control snapshots for Han (233, 230 BCE) cited as interpretations, extended to 230–221 BCE.
-- [ ] Migrate both chapters to the record files; retire the per-set digest ledger and its test only after the owner approves the replacement and its per-chapter approval invariant is enforced by the build.
+- [x] Migrate both chapters to the record files, with one `wikidata` source and each Wikidata citation pinned to the item revision it read. Evidence: link:AUTHORING_FORMAT.adoc[the authoring format record], "Implemented on 2026-10-18".
+- [ ] Retire the per-set digest ledger and its test only after the owner approves the replacement and its per-chapter approval invariant is enforced by the build. The digest gate replaces the test in PR #25; this completes when the owner merges it and approves both chapters with `pnpm approvals`.
 - [ ] Stage 2 of the contribution surface when the first regular contributor appears: a structured proposal form with claim, source, and locator fields.
 - [ ] Claim basis (`attested` versus `cited_interpretation`) shown in the card; relationships openable from an arc.
 

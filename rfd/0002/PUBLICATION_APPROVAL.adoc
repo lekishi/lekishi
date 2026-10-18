@@ -309,3 +309,17 @@ one rule, enforced by the same suite:
   field). The ledger is the record until a v1 contract decides whether approval
   belongs in the set itself, in the ledger, or in both. Extending a vocabulary
   requires a new contract version, so this is deliberately left open here.
+
+== Superseded by the digest approval — 2026-10-18
+
+The owner decided on 2026-10-18 that a chapter's approval pins a digest of its
+record files (link:AUTHORING_FORMAT.adoc[the authoring format record], "Decided:
+per-chapter approval pins a content digest"). From the change that implements
+it, PR #25, the approval in each chapter manifest is the publication decision
+and `publication-approval.test.ts` checks those digests. The change takes effect
+when the owner merges it, and the chapters are served again once the owner
+approves them with `pnpm approvals`.
+
+This ledger takes no new rows. Its rows above stay readable as the record of how
+the hand-written JSON sets were decided. The compiled chapters are compared with
+those sets when the owner first approves them as record files.

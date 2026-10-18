@@ -91,7 +91,8 @@ export function parseRange(value: unknown): {
   }
 
   const start = endpoint(sides[0])
-  const end = sides.length === 2 ? endpoint(sides[1]) : start
+  // A single date is its own end, parsed twice so the two endpoints never share an object.
+  const end = endpoint(sides.length === 2 ? sides[1] : sides[0])
 
   // v0 states one precision for the whole interval, so both ends of a range must
   // be written to the same granularity rather than have one silently widened.

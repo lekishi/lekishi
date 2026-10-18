@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  石籬浦, in 薩摩國, where the chronicle records the fourth ship's judge 布勢人主 and his party
+  arriving on 天平勝寶六年四月癸未 (754). The cited local-history account names 石垣 in present-day 南九州市穎娃町 as
+  the drift place, published as a modern identification and not as a source statement.
+types: [port]
+names:
+  - form: 石籬浦
+    lang: ja
+    script: Hani
+    cite:
+      - id: ishigaki-name
+        says: The chronicle records the fourth ship's judge 布勢人主 arriving at 薩摩國石籬浦 on 天平勝寶六年四月癸未.
+        source: shoku-nihongi
+        at: 卷第十九 天平勝寶六年四月癸未
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [130.4922222, 31.23944444]
+    notes:
+      An approximate locality-level placement at the former town of 頴娃 (Wikidata Q5348687), whose
+      石垣 port the cited local-history account names as the place where the embassy ship drifted in
+      754. The identification is a modern statement by that account's author, not a scholarly
+      identification, and no landing site is asserted.
+    cite:
+      - id: ishigaki-identification
+        says:
+          The cited local-history account reports that 石垣 is known as the place where the embassy ship
+          drifted in 天平勝宝六年 (754); the point is placed at the former town of 頴娃's coordinate from
+          Wikidata (CC0) as an approximate locality-level placement, and no landing site is
+          asserted.
+        attributed_to: 井上賢一「薩摩半島民俗文化博物館」
+        sources:
+          - source: hantoubunka-ishigaki
+            at: ２．海上運搬のムラ — 石垣の海運
+          - source: wikidata
+            at: Q5348687 (P625)
+notes: The name is source-attested and the arrival is dated; the modern identification rests on the
+  cited local-history account, not on a scholarly identification or a government statement. The
+  point is an approximate locality-level placement and no landing site is asserted.

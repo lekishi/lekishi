@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  內史騰, the Qin officer the annals name as receiving Han's ceded 南陽 as acting governor in 231
+  BCE and as attacking Han and taking 韓王安 in 230 BCE. The hereditary house's parallel account names
+  no officer, and the comprehensive mirror records the capture and the commandery with a
+  text-critical correction of the name.
+types: [person]
+names:
+  - form: 內史騰
+    lang: lzh
+    script: Hani
+    roman: Neishi Teng
+    scheme: pinyin
+    cite:
+      - id: nei-shi-teng-name
+        says: The annals name 內史騰 as the officer who attacked Han and took 韓王安 in 十七年 (230 BCE).
+        source: shiji
+        at: 卷六 秦始皇本紀 十七年（內史騰攻韓）
+        quote: 內史騰攻韓，得韓王安，盡納其地，以其地為郡，命曰潁川。
+  - form: 假守騰
+    lang: lzh
+    script: Hani
+    note: "The 231 BCE notice's form: 發卒受地韓南陽假守騰 (the acting governor of the received land)."
+    cite:
+      - id: nei-shi-teng-acting
+        says:
+          The annals' 十六年 notice records that Qin sent troops to receive the land of Han's 南陽 and calls
+          the officer 假守騰.
+        source: shiji
+        at: 卷六 秦始皇本紀 十六年（假守騰）
+        quote: 十六年九月，發卒受地韓南陽假守騰。
+roles:
+  - role: official
+    note:
+      The 231 BCE notice calls him 假守 (acting governor) of the received 南陽; the 230 BCE notice calls
+      him 內史. The fixture treats the two notices as naming the same officer, records both titles,
+      and asserts no continuous tenure between the two notices.
+    cite:
+      - id: nei-shi-teng-office
+        says:
+          The two notices record the officer receiving the ceded land in 231 BCE and attacking Han in
+          230 BCE.
+        source: shiji
+        at: 卷六 秦始皇本紀 十六年、十七年
+        quote: 十六年九月，發卒受地韓南陽假守騰。
+  - role: soldier
+    note: The 230 BCE campaign the annals record him leading; the sources state no duration.
+    date:
+      value: 230 BCE
+      mode: window
+      calendar: chinese_lunisolar
+      as_written: 十七年，內史騰攻韓
+    cite:
+      - id: nei-shi-teng-campaign
+        says: The annals record 內史騰 leading the attack on Han in 十七年 (230 BCE).
+        source: shiji
+        at: 卷六 秦始皇本紀 十七年（內史騰攻韓）
+        quote: 內史騰攻韓，得韓王安，盡納其地，以其地為郡，命曰潁川。
+notes:
+  "The comprehensive mirror's 230 BCE entry reads 內史〔騰〕(勝), with 騰 substituted from the annals
+  in its own text-critical note; the chapter therefore attributes the name to the annals and cites
+  the mirror only for the capture and the commandery. The identification of 假守騰 with 內史騰 is the
+  histories' own sequence and is recorded as an editorial reading, not as a source statement. The
+  office is recorded without a validity interval: the notices attest the title at two dates and
+  state no continuous tenure."

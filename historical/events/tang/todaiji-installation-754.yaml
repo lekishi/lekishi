@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  鑒眞 enters the capital on 天平勝寶六年二月四日 (754); the court sends 安宿王 to meet him outside the 羅城門
+  and he is installed at 東大寺.
+types: [journey]
+date:
+  value: 754-02-04
+  calendar: chinese_lunisolar
+  as_written: 天平勝寶六年甲午 二月四日，入京
+  cite:
+    - id: todaiji-installation-time
+      says:
+        The biography records 鑒眞 entering the capital on 天平勝寶六年二月四日 and being installed at 東大寺, with
+        安宿王 sent to meet him.
+      source: toseiden
+      at: 天平勝寶六年甲午，二月四日，入京，勑遣正四位下安宿王於羅城門外迎慰、拜勞，引入東大寺安置
+places:
+  - place: todaiji
+    role: site
+participants:
+  - actor: jianzhen
+    role: leader
+notes:
+  安宿王, who met him at the gate, is not in this fixture's actor set; the report lists him among
+  the candidate court figures and the chapter defers him rather than adding a thin record.
+cites:
+  places:
+    - id: todaiji-installation-place
+      says: The passage names 東大寺 as the place where he was installed.
+      source: toseiden
+      at: 引入東大寺安置

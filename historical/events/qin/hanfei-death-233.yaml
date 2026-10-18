@@ -1,0 +1,78 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 韓非 is detained in Qin and dies at 雲陽. The annals and the comprehensive mirror date the
+  death to 始皇帝十四年 (233 BCE); the annals name 雲陽; the hereditary house places the detention and
+  killing under 王安五年; the six-states table records the embassy and the killing under 韓王安六年; the
+  biography gives no year. The annals record that Qin used 李斯's plan and kept him; the hereditary
+  house records that Qin killed him; the biography adds 姚賈, the poison 李斯 sent, and the king's
+  regret.
+types: [occurrence]
+date:
+  value: 233 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 十四年（非死雲陽）; 始皇帝十四年（王後悔，使赦之，非已死矣）; 秦始皇十四年（韓使非來，我殺非）; 王安五年（秦留非，因殺之）
+  cite:
+    - id: hanfei-death-time
+      says:
+        The annals record that Qin, using 李斯's plan, detained 韓非 and that he died at 雲陽, in 始皇帝十四年
+        (233 BCE).
+      source: shiji
+      at: 卷六 秦始皇本紀 十四年（非死雲陽）
+      quote: 韓非使秦，秦用李斯謀，留非，非死雲陽。
+    - id: hanfei-death-table
+      says:
+        The six-states table aligns 秦始皇帝十四年 (233 BCE) with 韓王安六年 and records the embassy and the
+        killing in that year.
+      role: supporting
+      source: shiji
+      at: 卷十五 六國年表 秦始皇十四年（韓王安六年）
+      quote: 韓使非來，我殺非。
+places:
+  - place: yunyang
+    role: site
+    note: The place the annals name for the death.
+participants:
+  - actor: han-fei
+    role: subject
+notes: "The death is dated to the year only, and the sources date it differently: the annals and the
+  comprehensive mirror place it in 始皇帝十四年 (233 BCE), the hereditary house places the detention and
+  killing under 王安五年, the six-states table records the embassy and the killing under 韓王安六年 (aligned
+  with 秦始皇帝十四年), and the biography gives no year. Only the annals name 雲陽; the other cited entries
+  state no place. None of the cited entries gives a month or day, so the event is an uncertain
+  occurrence window and must never be presented as continuous activity or at a midpoint. The chapter
+  publishes the annals' dating and place, keeps the other accounts as conflicting claims, and
+  decides no manner, cause, or day."
+dispute:
+  status: disputed
+  summary: "The accounts date and describe the death differently: the annals and the comprehensive
+    mirror place it in 始皇帝十四年 (233 BCE); the annals give 李斯's plan and a death at 雲陽; the mirror
+    gives 李斯's accusation, the poison, and the king's belated pardon; the hereditary house places
+    the detention and killing under 王安五年; the six-states table records them under 韓王安六年; the
+    biography gives no year and adds 姚賈. The chapter publishes the annals' dating and place, keeps
+    the other accounts as conflicting claims, and invents no day, manner, or cause."
+cite:
+  - id: hanfei-death-house
+    says: The hereditary house records that Qin detained 韓非 and killed him, under 王安五年.
+    role: conflicting
+    source: shiji
+    at: 卷四十五 韓世家 韓王安五年（秦留非，因殺之）
+    quote: 王安五年，秦攻韓，韓急，使韓非使秦，秦留非，因殺之。
+  - id: hanfei-death-biography
+    says:
+      The biography, which gives no year, records that 李斯 and 姚賈 spoke against 韓非, that the king
+      handed him to the law officers, that 李斯 sent him poison to take his own life, and that the
+      king's pardon came after his death.
+    role: conflicting
+    sources:
+      - source: shiji
+        at: 卷六十三 老子韓非列傳（李斯使人遺非藥）
+        quote: 李斯使人遺非藥，使自殺。韓非欲自陳，不得見。秦王後悔之，使人赦之，非已死矣。
+      - source: zizhi-tongjian
+        at: 卷六 秦紀一 始皇帝十四年（李斯嫉之）
+        quote: 李斯嫉之，曰：「韓非，韓之諸公子也。今欲並諸侯，非終為韓不為秦，此人情也。今王不用，又留而歸之，此自遺患也。不如以法誅之。」
+cites:
+  places:
+    - id: hanfei-death-place
+      says: The annals name 雲陽 as the place of the death, and the cited entries state no site for it.
+      source: shiji
+      at: 卷六 秦始皇本紀 十四年（非死雲陽）

@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  蓬萊宮含元殿, the hall in the Tang capital where 大伴古麻呂 reported that the New Year audience was
+  held on 天寶十二載正月朔 (753).
+types: [other]
+names:
+  - form: 蓬萊宮含元殿
+    lang: lzh
+    script: Hani
+    roman: Penglai gong Hanyuan dian
+    scheme: pinyin
+    cite:
+      - id: hanyuan-hall-name
+        says:
+          古麻呂's report to the court names 蓬萊宮含元殿 as the hall where the New Year audience was held on
+          大唐天寶十二載正月朔.
+        source: shoku-nihongi
+        at: 卷第十九 天平勝寶六年正月丙寅
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [108.9594, 34.2914]
+    notes: Label anchor at the modern 大明宮 palace site (Wikidata Q1158530) in Xi'an. It is not an
+      asserted historical coordinate and does not place the hall itself.
+    cite:
+      - id: hanyuan-hall-anchor
+        says:
+          The label anchor is placed at the modern palace site's coordinate recorded in Wikidata (CC0);
+          no historical coordinate is asserted.
+        source: wikidata
+        at: Q1158530 (P625)
+modern:
+  - form: 西安市
+    lang: zh-Hans
+    script: Hani
+    note: Modern city recorded for orientation; the 大明宮 site is within it.
+notes: The vocabulary has no palace-hall type, so the place uses other and explains it here. The
+  report's place list groups 長安 with this hall; the chapter records the attested hall name only.

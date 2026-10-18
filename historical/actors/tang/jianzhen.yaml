@@ -1,0 +1,84 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  鑒眞, the Yangzhou precept master whom the envoys invited at 延光寺 in 天寶十二載 (753) and who
+  sailed with the returning embassy, reaching 大宰府 in 753 and 東大寺 in 754. The biography records a
+  precepts platform and imperial ordinations in the fourth month of 754, the title 大和上 and the
+  founding of 唐招提寺 in the coda years, and his death in 寶字七年 (763) at 76; the chronicle's death
+  notice gives 77.
+types: [person]
+names:
+  - form: 鑒眞
+    lang: lzh
+    script: Hani
+    roman: Jianzhen
+    scheme: pinyin
+    note:
+      Chinese reading recorded as an editorial aid; the Japanese reading Ganjin is not a separate
+      name form.
+    cite:
+      - id: jianzhen-name
+        says:
+          The chronicle names 鑒眞 as the Tang monk who returned with 古麻呂 in 天平勝寶六年正月 and later received
+          the title 大和上.
+        sources:
+          - source: shoku-nihongi
+            at: 卷第十九 天平勝寶六年正月壬子
+          - source: shoku-nihongi
+            at: 卷第廿一 天平寶字二年八月庚子朔
+  - form: 大和上
+    lang: lzh
+    script: Hani
+    note:
+      Title granted by the court in 天平寶字二年 (758), recorded as an alternate form for search rather
+      than a second person.
+    cite:
+      - id: jianzhen-title
+        says:
+          The chronicle's 天平寶字二年 entry records the court giving him the title 大和上 and ordering monks who
+          wished to study the precepts to study under him.
+        source: shoku-nihongi
+        at: 卷第廿一 天平寶字二年八月庚子朔
+roles:
+  - role: monk
+    note: The chapter documents his mission role from the 753 invitation to the 763 death notice.
+    date:
+      value: 753..763
+      mode: duration
+      calendar: chinese_lunisolar
+      as_written: 天寶十二載十月十五日壬午 揚州延光寺; 寶字七年五月 物化
+    cite:
+      - id: jianzhen-role
+        says:
+          The biography records the envoys' visit to him at 延光寺 in 753, his voyage with the returning
+          embassy, the 754 precepts platform and ordinations, and his death in 寶字七年.
+        sources:
+          - source: toseiden
+            at: 天寶十二載十月十五日壬午; 天平勝寶六年甲午 四月初; 寶字七年五月六日
+          - source: shoku-nihongi
+            at: 卷第廿四 天平寶字七年五月戊申
+external_ids:
+  - system: wikidata
+    id: Q714061
+    url: https://www.wikidata.org/wiki/Q714061
+    license: CC0-1.0
+    note: External identifier found in the Wave 1A feasibility pass.
+notes: The biography is hagiographic and single-source for the ordinations; the chapter labels its
+  claims accordingly and keeps the chronicle's independent title notice and age variant. He is
+  recorded as a person; the temple he founded is a place record and the coda relationships point at
+  it.
+dispute:
+  status: disputed
+  summary:
+    The biography gives his age at death as 76 and the chronicle's notice gives 77. The chapter
+    publishes both ages and does not choose between them.
+cites:
+  summary:
+    - id: jianzhen-age-biography
+      says: The biography gives his age at death as 76.
+      source: toseiden
+      at: 是歲五月六日，結跏趺座，面西化，春秋七十六
+    - id: jianzhen-age-chronicle
+      says: The chronicle's death notice gives his age as 77.
+      role: conflicting
+      source: shoku-nihongi
+      at: 卷第廿四 天平寶字七年五月戊申

@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  The envoys' contact with the Tang court at the New Year audience at 蓬萊宮含元殿 on 天寶十二載正月朔
+  (753), recorded from 大伴古麻呂's report to the Japanese court, including the seating-order dispute and
+  呉懷實's intervention.
+types: [contact]
+from: otomo-no-komaro
+to: tang-dynasty
+date:
+  value: 753-01-01
+  calendar: chinese_lunisolar
+  as_written: 大唐天寶十二載正月朔癸夘 天子於蓬莱宮含元殿受朝
+notes: The account is a self-report by 古麻呂 and is labelled as such on the audience event; the
+  relationship records the contact the report describes and asserts no protocol detail beyond it.
+cite:
+  - id: komaro-tang-contact-basis
+    says:
+      古麻呂's report records the envoys' attendance at the New Year audience at 蓬萊宮含元殿 and the seating
+      dispute with the Silla envoy.
+    source: shoku-nihongi
+    at: 卷第十九 天平勝寶六年正月丙寅

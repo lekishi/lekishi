@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  益救島, where the biography records the second ship arriving on 天寶十二載十二月七日 (753) and leaving
+  on the 18th. The chronicle writes the same island name 益久嶋 when it reports 吉備真備's ship reaching it
+  on 天平勝寶五年十二月七日.
+types: [landform]
+names:
+  - form: 益救島
+    lang: lzh
+    script: Hani
+    roman: Yakushima
+    scheme: hepburn
+    cite:
+      - id: yaku-name
+        says:
+          The biography names 益救島 as the island the second ship reached on 天寶十二載十二月七日 and left on the
+          18th.
+        source: toseiden
+        at: 七日，至益救島; 十八日，自益救發
+  - form: 益久嶋
+    lang: lzh
+    script: Hani
+    cite:
+      - id: yaku-variant
+        says: The chronicle writes the island's name 益久嶋 where the biography writes 益救島.
+        role: supporting
+        source: shoku-nihongi
+        at: 卷第十九 天平勝寶六年正月癸丑
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [130.5286, 30.3586]
+    notes:
+      An approximate, region-level placement at the island the cited article equates with 益救島. It
+      is an identification, not a source statement, and no landing site is asserted.
+    cite:
+      - id: yaku-identification
+        says:
+          The cited article equates 益救島 with 屋久島; the point is placed at that island's modern coordinate
+          from Wikidata (CC0) as an approximate region-level placement.
+        basis: interpretation
+        attributed_to: 高良倉吉・山里純一ほか「琉球と日本本土の遷移地域としてのトカラ列島の歴史的位置づけをめぐる総合的研究」
+        sources:
+          - source: ryukyu-university-tokara
+            at: 山里純「南島路とトカラ」
+            locator: section
+          - source: wikidata
+            at: Q242176 (P625)
+modern:
+  - form: 屋久島
+    lang: ja
+    script: Hani
+    note: The cited article equates 益救島 with 屋久島; recorded as a scholarly identification.
+notes: Both attested forms are recorded because the chapter cites the biography and the chronicle on
+  separate events, and the name variant must stay visible rather than being silently normalized.

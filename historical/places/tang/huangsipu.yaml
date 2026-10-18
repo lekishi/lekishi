@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  蘇州黃泗浦, the place from which the four ships put to sea on 天寶十二載十一月十五日 (753), named in the
+  biography as 蘇州黃泗浦. The exact landing is not identified, so the anchor marks the modern prefecture
+  city only.
+types: [port]
+names:
+  - form: 蘇州黃泗浦
+    lang: lzh
+    script: Hani
+    roman: Suzhou Huangsipu
+    scheme: pinyin
+    cite:
+      - id: huangsipu-name
+        says: The biography names 蘇州黃泗浦 as the place the four ships left on 天寶十二載十一月十五日.
+        source: toseiden
+        at: 十一月十五日壬子，四舟同發
+  - form: 黃泗浦
+    lang: lzh
+    script: Hani
+    claim: huangsipu-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [120.6194, 31.3]
+    notes:
+      Label anchor at the modern city of Suzhou (Wikidata Q42622). It is not an asserted historical
+      coordinate and does not place the 浦, whose exact location is not identified here.
+    cite:
+      - id: huangsipu-anchor
+        says:
+          The label anchor is placed at the modern city's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q42622 (P625)
+modern:
+  - form: 蘇州市
+    lang: zh-Hans
+    script: Hani
+    note: Modern prefecture city recorded for orientation; the departure point itself is not identified.
+notes: The name is a compound of prefecture and waterway. Both attested forms are recorded; neither
+  is given a site placement.

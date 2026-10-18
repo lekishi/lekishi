@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  難波, the Naniwa area, named in the 東征傳 as the place 鑒眞's party reached on the first day of
+  the second month of 天平勝寶六年 (754) on the way from 大宰府 to the capital.
+types: [settlement]
+names:
+  - form: 難波
+    lang: ja
+    script: Hani
+    roman: Naniwa
+    scheme: hepburn
+    cite:
+      - id: naniwa-name
+        says: The biography names 難波 as the place the party reached on 天平勝寶六年二月一日.
+        source: toseiden
+        at: 天平勝寶六年甲午 二月一日到難波
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [135.5021, 34.6938]
+    notes:
+      Label anchor at the modern city of Osaka (Wikidata Q35765). It is not an asserted historical
+      coordinate and does not by itself establish the identification of 難波 with any site.
+    cite:
+      - id: naniwa-anchor
+        says:
+          The label anchor is placed at the modern city's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q35765 (P625)
+modern:
+  - form: 大阪市
+    lang: ja
+    script: Hani
+    note: Modern city recorded for orientation only; the cited passages do not state a site
+      identification.
+notes:
+  The place is recorded because the 東征傳 names it on a dated leg of 鑒眞's journey. No site-level
+  identification is asserted, so the geometry is a display anchor.

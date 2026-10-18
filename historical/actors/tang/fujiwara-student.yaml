@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  藤原朝臣刷雄, recorded in the chronicle's 節刀 entry of 天平勝寶四年閏三月 (752) as a student (留學生)
+  receiving 從五位下. The chapter records only that documented promotion.
+types: [person]
+names:
+  - form: 藤原朝臣刷雄
+    lang: ja
+    script: Hani
+    roman: Fujiwara no Yoshio
+    scheme: hepburn
+    note:
+      Reading recorded as an editorial aid from modern reference literature; it is not a claim about
+      historical pronunciation.
+    cite:
+      - id: fujiwara-student-name
+        says: The chronicle names 藤原朝臣刷雄 as a student (留學生) receiving 從五位下 in the 節刀 entry of 天平勝寶四年閏三月丙辰.
+        source: shoku-nihongi
+        at: 卷第十八 天平勝寶四年閏三月丙辰
+  - form: 藤原刷雄
+    lang: ja
+    script: Hani
+    claim: fujiwara-student-name
+roles:
+  - role: scholar
+    note: Recorded as a student at the 節刀 grant; no other role is asserted in this fixture.
+    date:
+      value: "752"
+      calendar: regnal
+      as_written: 天平勝寶四年閏三月丙辰 留學生无位藤原朝臣刷雄從五位下
+    cite:
+      - id: fujiwara-student-role
+        says: The same entry records his promotion to 從五位下; no later role is published.
+        source: shoku-nihongi
+        at: 卷第十八 天平勝寶四年閏三月丙辰
+notes: "The chronicle records him only at this entry, so the actor record stays minimal: one
+  attested promotion and no later career claims."

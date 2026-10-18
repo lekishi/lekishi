@@ -1,0 +1,85 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "In 233 BCE the Han king submitted to Qin: the comprehensive mirror records him presenting
+  land and the royal seal and asking to be a vassal, and sending 韓非 as envoy. The annals record that
+  韓非 came as envoy and that the Han king asked to be a subject; the hereditary house records that
+  Qin attacked Han and that Han, in straits, sent 韓非. The entries name no place for the submission
+  or the embassy: the record shows the event at 新鄭, the Han capital the hereditary house records, as
+  a display placement that asserts no site for either act."
+types: [mission, exchange]
+date:
+  value: 233 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 十四年（史記・秦始皇本紀）; 始皇帝十四年（資治通鑑）; 王安五年（史記・韓世家）; 秦始皇十四年（史記・六國年表）
+  cite:
+    - id: han-submission-time
+      says:
+        The comprehensive mirror records that the Han king presented land and the royal seal, asked to
+        be a vassal, and sent 韓非 as envoy, in 始皇帝十四年 (233 BCE).
+      source: zizhi-tongjian
+      at: 卷六 秦紀一 始皇帝十四年（韓王納地效璽）
+      quote: 韓王納地效璽，請為籓臣，使韓非來聘。
+    - id: han-submission-annals
+      says:
+        The annals record that 韓非 came as envoy and that the Han king asked to be a subject, in the
+        same year.
+      role: supporting
+      source: shiji
+      at: 卷六 秦始皇本紀 十四年（韓非使秦）
+      quote: 韓非使秦，秦用李斯謀，留非，非死雲陽。韓王請為臣。
+    - id: han-submission-house
+      says:
+        The hereditary house records that Qin attacked Han, that Han was in straits, and that it sent
+        韓非 as envoy, in 王安五年.
+      role: supporting
+      source: shiji
+      at: 卷四十五 韓世家 韓王安五年（使韓非使秦）
+      quote: 王安五年，秦攻韓，韓急，使韓非使秦，秦留非，因殺之。
+    - id: han-submission-table
+      says:
+        The six-states table records the embassy and the killing under 秦始皇帝十四年 and 韓王安六年, aligned with
+        233 BCE.
+      role: supporting
+      source: shiji
+      at: 卷十五 六國年表 秦始皇十四年（韓王安六年）
+      quote: 韓使非來，我殺非。
+places:
+  - place: xinzheng
+    role: other
+    note:
+      "The Han capital the hereditary house records (韓哀侯二年 徙都鄭). The entries name no place for the
+      submission or the embassy, so the record shows the event at the capital as a display
+      placement: it asserts no site for either act, and no source in this set names the Qin court
+      the embassy reached."
+participants:
+  - actor: han-king-an
+    role: leader
+    note: The sources record the Han king's submission and the embassy he sent.
+  - actor: han-fei
+    role: guest
+    note: Sent as envoy to Qin.
+  - actor: qin-king-zheng
+    role: host
+    note: The biography records the king hearing of 韓非 and wanting to see him.
+notes: "The accounts frame the year differently: the comprehensive mirror records a submission (land
+  and seal, a request for vassal status) and an embassy; the annals record the embassy and the
+  king's request to be a subject; the hereditary house records a Qin attack and a desperate embassy.
+  The chapter publishes the submission and the embassy as one event, keeps the framings visible, and
+  dates it to the year only. The hereditary house dates the embassy to 王安五年; the six-states table
+  records the embassy and the killing under 韓王安六年, aligned with 秦始皇帝十四年 (233 BCE), and the fixture
+  records both expressions without converting one into the other. The entries name no place for the
+  submission or the embassy. The record shows the event at 新鄭, the Han capital, as a display
+  placement; the placement asserts no site for either act."
+cites:
+  participants:
+    - id: han-submission-participants
+      says:
+        The comprehensive mirror records the king hearing of 韓非's worth and wanting to see him, and
+        the biography records him being pleased with 韓非 but not employing him.
+      sources:
+        - source: zizhi-tongjian
+          at: 卷六 秦紀一 始皇帝十四年（王聞其賢，欲見之）
+          quote: 王聞其賢，欲見之。
+        - source: shiji
+          at: 卷六十三 老子韓非列傳（秦王悅之，未信用）
+          quote: 秦王悅之，未信用。

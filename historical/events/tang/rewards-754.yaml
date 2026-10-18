@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The court promotes the returning envoys 大伴古麻呂 and 吉備真備 to 正四位下, promotes the judges, and
+  rewards the 222 persons below the envoys, in 天平勝寶六年四月 (754). The entry names no place; the record
+  anchors the act at the court's seat, 平城宮, as a display anchor.
+types: [mission]
+date:
+  value: 754-04
+  calendar: regnal
+  as_written: 天平勝寶六年四月壬申 入唐廻使從四位上大伴宿祢古麻呂。吉備朝臣眞備並授正四位下
+  cite:
+    - id: rewards-time
+      says:
+        The chronicle records the promotions and rewards of 天平勝寶六年四月壬申, including 222 persons below
+        the envoys.
+      source: shoku-nihongi
+      at: 卷第十九 天平勝寶六年四月壬申
+      quote: 壬申。入唐廻使從四位上大伴宿祢古麻呂。吉備朝臣眞備並授正四位下。判官正六位上大伴宿祢御笠。巨萬朝臣大山並從五位下。自餘使下二百廿二人亦各有差。
+places:
+  - place: heijo-palace
+    role: site
+    note:
+      The entry names no place. A court act happens at the court, whose seat in this period is 平城宮
+      (the palace of 平城京); the record anchors it there for display only, not as a source-named site,
+      and asserts no site for the act.
+participants:
+  - actor: otomo-no-komaro
+    role: leader
+  - actor: kibi-no-makibi
+    role: participant
+notes: The 222-person figure is the only documented headcount for the mission in the sources
+  checked; the chapter publishes it as the entry states it and does not use it as the mission's
+  total size.
+cites:
+  participants:
+    - id: rewards-participants
+      says: The entry names 古麻呂 and 吉備真備 as the promoted envoys.
+      source: shoku-nihongi
+      at: 卷第十九 天平勝寶六年四月壬申

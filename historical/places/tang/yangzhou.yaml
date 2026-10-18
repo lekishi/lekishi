@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  揚州, the city where the envoys visited 鑒眞 at 延光寺 on 天寶十二載十月十五日 (753) and where he left 龍興寺
+  on the 19th. The temples are named in the biography; the place record keeps them in the event
+  notes rather than inventing separate site records.
+types: [settlement]
+names:
+  - form: 揚州
+    lang: lzh
+    script: Hani
+    roman: Yangzhou
+    scheme: pinyin
+    cite:
+      - id: yangzhou-name
+        says: The biography names 揚州 as the city where the envoys came to 鑒眞 at 延光寺 and where he left 龍興寺.
+        source: toseiden
+        at: 天寶十二載 十月十五日壬午; 十月［十］九日戌時
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [119.4363, 32.3912]
+    notes: Label anchor at the modern city of Yangzhou (Wikidata Q57906). It is not an asserted
+      historical coordinate, and no temple site is placed.
+    cite:
+      - id: yangzhou-anchor
+        says:
+          The label anchor is placed at the modern city's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q57906 (P625)
+modern:
+  - form: 揚州市
+    lang: zh-Hans
+    script: Hani
+    note: Modern city recorded for orientation only.
+notes:
+  延光寺 and 龍興寺 are attested by name inside 揚州; the chapter does not assert either temple's
+  modern site, so both stay in event notes.

@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "孝謙天皇, the sovereign under whose reign the chronicle's mission records fall: the 750
+  appointment, the 752 節刀, and the 754 return reports and rewards. The cited volumes are headed 孝謙天皇
+  from 天平勝寶二年正月 and record her abdication in 天平寶字二年八月 (758)."
+types: [person]
+names:
+  - form: 孝謙天皇
+    lang: ja
+    script: Hani
+    roman: Kōken Tennō
+    scheme: hepburn
+    cite:
+      - id: koken-name
+        says: The cited volumes are headed 孝謙天皇 and cover 天平勝寶二年正月 to 天平寶字二年十二月.
+        source: shoku-nihongi
+        at: 卷第十八 起天平勝寶二年正月; 卷第十九 起天平勝寶五年正月; 卷第廿一 起天平寶字二年八月
+        locator: chapter
+roles:
+  - role: ruler
+    note:
+      "The span is bounded by the cited volumes, not by the accession: 天平寶字二年八月 records the
+      abdication, and the accession (749) is outside the cited span."
+    date:
+      value: 750..758
+      mode: duration
+      calendar: regnal
+      as_written: 卷第十八・卷第十九・卷第廿一 起天平勝寶二年正月、盡天平寶字二年十二月
+    cite:
+      - id: koken-role
+        says:
+          The 天平寶字二年八月庚子朔 entry records the sovereign handing the throne to the crown prince, which
+          bounds the reign span used here.
+        source: shoku-nihongi
+        at: 卷第廿一 天平寶字二年八月庚子朔
+notes: The court acts through her reign in the cited entries, but the entries rarely name her
+  personally, so the chapter records the reign span and does not attribute individual acts to her
+  beyond what the entries state.

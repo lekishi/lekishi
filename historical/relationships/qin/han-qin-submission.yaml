@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "The Han king's submission to Qin in 233 BCE: the comprehensive mirror records land and the
+  royal seal presented and a request for vassal status; the annals record the request to be a
+  subject. The sources record no Qin acceptance, so the relationship is a request, not an asserted
+  subjection."
+types: [diplomacy]
+from: han-state
+to: qin-state
+date:
+  value: 233 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 始皇帝十四年（韓王納地效璽，請為籓臣）; 十四年（韓王請為臣）
+notes: The sources record the request and do not record Qin accepting it; the relationship is
+  therefore recorded as diplomacy, not as rulership or membership, and the chapter does not decide
+  the outcome. It carries no geometry.
+cite:
+  - id: han-qin-submission-basis
+    says:
+      The comprehensive mirror records that the Han king presented land and the royal seal, asked to
+      be a vassal, and sent 韓非, and the annals record that the Han king asked to be a subject.
+    sources:
+      - source: zizhi-tongjian
+        at: 卷六 秦紀一 始皇帝十四年（韓王納地效璽）
+        quote: 韓王納地效璽，請為籓臣，使韓非來聘。
+      - source: shiji
+        at: 卷六 秦始皇本紀 十四年（韓王請為臣）
+        quote: 韓王請為臣。

@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  鑒眞 dies in the fifth month of 寶字七年 (763). The biography gives 五月六日 and age 76; the
+  chronicle's notice gives 五月戊申 and age 77.
+types: [occurrence]
+date:
+  value: 763-05
+  calendar: chinese_lunisolar
+  as_written: 寶字七年五月六日（東征傳）; 天平寶字七年五月戊申（續日本紀）
+  cite:
+    - id: jianzhen-death-time
+      says: The biography records 鑒眞's death on 寶字七年五月六日 at age 76.
+      source: toseiden
+      at: 是歲五月六日，結跏趺座，面西化，春秋七十六
+    - id: jianzhen-death-chronicle
+      says: The chronicle's notice records his death on 天平寶字七年五月戊申 at age 77.
+      role: conflicting
+      source: shoku-nihongi
+      at: 卷第廿四 天平寶字七年五月戊申
+participants:
+  - actor: jianzhen
+    role: subject
+notes: Coda node (outside the primary 750–754 mission window). The sources disagree on the age (76
+  against 77) and express the day differently (六日 against 戊申), so the chapter publishes the month
+  and records both expressions and both ages rather than choosing.
+dispute:
+  status: disputed
+  summary: The biography gives age 76 and the chronicle gives age 77; they also express the day
+    differently. The chapter publishes month precision and does not resolve either difference.

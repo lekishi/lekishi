@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The envoys pay court (拜朝) in the third month of 天平勝寶四年, before the 節刀 grant of the
+  following leap month. The entry names no place; the record anchors the act at the court's seat,
+  平城宮, as a display anchor.
+types: [mission]
+date:
+  value: 752-03
+  calendar: regnal
+  as_written: 天平勝寶四年三月庚辰
+  cite:
+    - id: court-audience-752-time
+      says: The chronicle records the envoys paying court on 天平勝寶四年三月庚辰.
+      source: shoku-nihongi
+      at: 卷第十八 天平勝寶四年三月庚辰
+      quote: 三月庚辰。遣唐使等拜朝。
+places:
+  - place: heijo-palace
+    role: site
+    note:
+      The entry names no place. A court act happens at the court, whose seat in this period is 平城宮
+      (the palace of 平城京); the record anchors it there for display only, not as a source-named site,
+      and asserts no site for the act.
+participants:
+  - actor: fujiwara-no-kiyokawa
+    role: leader
+  - actor: otomo-no-komaro
+    role: participant
+  - actor: kibi-no-makibi
+    role: participant
+notes:
+  The entry names the envoys collectively (遣唐使等); the participant list follows the appointment
+  entries and is not an independent naming in this entry.
+cites:
+  participants:
+    - id: court-audience-752-participants
+      says:
+        The entry names the envoys collectively; the three named participants are the appointees of
+        the 750 and 751 entries.
+      sources:
+        - source: shoku-nihongi
+          at: 卷第十八 天平勝寶四年三月庚辰
+        - source: shoku-nihongi
+          at: 卷第十八 天平勝寶二年九月己酉; 卷第十八 天平勝寶三年十一月丙戌

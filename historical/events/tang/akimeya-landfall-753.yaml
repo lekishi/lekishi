@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The second ship lands at 薩摩國阿多郡秋妻屋浦 at noon on 天寶十二載十二月廿日.
+types: [journey]
+part_of: [return-voyage-753]
+date:
+  value: 753-12-20
+  calendar: chinese_lunisolar
+  as_written: 廿日乙酉午時
+  cite:
+    - id: akimeya-landfall-time
+      says: The biography records the second ship landing at 薩摩國阿多郡秋妻屋浦 at noon on 天寶十二載十二月廿日.
+      source: toseiden
+      at: 廿日乙酉午時，第二舟著薩摩國阿多郡秋妻屋浦
+places:
+  - place: akimeya
+    role: site
+notes: The landing place is source-attested; its modern identification is a scholarly proposal and
+  is recorded on the place as a cited interpretation.
+cites:
+  places:
+    - id: akimeya-landfall-place
+      says: The passage names 薩摩國阿多郡秋妻屋浦 as the landing place.
+      source: toseiden
+      at: 廿日乙酉午時，第二舟著薩摩國阿多郡秋妻屋浦

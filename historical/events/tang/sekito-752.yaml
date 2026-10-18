@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The court summons the envoys to the inner palace, grants the 節刀, and promotes the
+  ambassador 藤原朝臣清河 to 正四位下, the vice-envoy 大伴宿祢古麻呂 to 從四位上, and the student 藤原朝臣刷雄 to 從五位下. The
+  entry names 内裏, the inner palace of 平城宮; the record anchors the act at the court's seat as a
+  display anchor.
+types: [mission]
+date:
+  value: 752-03
+  calendar: regnal
+  as_written: 天平勝寶四年閏三月丙辰
+  cite:
+    - id: sekito-752-time
+      says: The chronicle records the envoys being summoned and the 節刀 granted on 天平勝寶四年閏三月丙辰.
+      source: shoku-nihongi
+      at: 卷第十八 天平勝寶四年閏三月丙辰
+      quote: 閏三月丙辰。召遣唐使副使已上於内裏。詔給節刀。仍授大使從四位上藤原朝臣清河正四位下。副使從五位上大伴宿祢古麻呂從四位上。留學生无位藤原朝臣刷雄從五位下。
+places:
+  - place: heijo-palace
+    role: site
+    note:
+      The entry names 内裏, the inner palace of 平城宮, as the place of the 節刀 grant; the record anchors
+      the act at the court's seat for display only, not at a site within the palace, and asserts no
+      site for the act.
+participants:
+  - actor: koken-tenno
+    role: host
+    note:
+      The entry records an imperial decree (詔) at the inner palace; the sovereign is implicit and is
+      recorded through her reign span.
+  - actor: fujiwara-no-kiyokawa
+    role: guest
+  - actor: otomo-no-komaro
+    role: guest
+  - actor: fujiwara-student
+    role: guest
+notes: The entry is dated 閏三月 (a leap third month); v0 records the month only and keeps 閏三月 in
+  source_expression. This event is the coverage model's last dated court event before the excluded
+  outbound voyage of 752.
+cites:
+  participants:
+    - id: sekito-752-participants
+      says:
+        The entry records the 節刀 grant by decree at the inner palace and the promotions of 清河, 古麻呂,
+        and the student 刷雄.
+      source: shoku-nihongi
+      at: 卷第十八 天平勝寶四年閏三月丙辰

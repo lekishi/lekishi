@@ -1,0 +1,68 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: In 231 BCE Han presented 南陽, and in the ninth month Qin sent troops to receive the land;
+  the annals add that 騰 held it as acting governor, and the comprehensive mirror records Han
+  presenting the land and Qin receiving it. The entries name the land but state no extent or seat,
+  and the historical geography records the name for two different regions — the 河內 南陽 in the north
+  of 修武縣 and the Qin 南陽郡 at 宛 — so the cession is shown with no position.
+types: [exchange]
+date:
+  value: 231-09 BCE
+  calendar: chinese_lunisolar
+  as_written: 十六年九月（發卒受地韓南陽假守騰）; 始皇帝十六年九月（發卒受地於韓）
+  cite:
+    - id: nanyang-cession-time
+      says:
+        The annals record that in the ninth month of 十六年 (231 BCE) Qin sent troops to receive the land
+        of Han's 南陽, with 騰 as acting governor.
+      source: shiji
+      at: 卷六 秦始皇本紀 十六年九月（發卒受地韓南陽假守騰）
+      quote: 十六年九月，發卒受地韓南陽假守騰。
+    - id: nanyang-cession-mirror
+      says:
+        The comprehensive mirror records that Han presented 南陽 and that in the ninth month Qin sent
+        troops to receive the land.
+      role: supporting
+      sources:
+        - source: zizhi-tongjian
+          at: 卷六 秦紀一 始皇帝十六年（韓獻南陽地）
+          quote: 韓獻南陽地。
+        - source: zizhi-tongjian
+          at: 卷六 秦紀一 始皇帝十六年九月（發卒受地於韓）
+          quote: 九月，發卒受地於韓。
+    - id: nanyang-cession-table
+      says: The six-states table aligns 秦始皇帝十六年 (231 BCE) with 韓王安八年 and records Qin receiving the land.
+      role: supporting
+      source: shiji
+      at: 卷十五 六國年表 秦始皇十六年（韓王安八年）
+      quote: 十六。置麗邑。發卒受韓南陽。
+places:
+  - place: nanyang
+    role: site
+    note: The land the sources name as ceded and received; they state no extent or seat, and the
+      historical geography records the name for two different regions, so the event claims no
+      position.
+participants:
+  - actor: han-state
+    role: other
+    note: The sources record 韓 presenting the land.
+  - actor: nei-shi-teng
+    role: participant
+    note: The annals name him 假守騰, the acting governor of the received land.
+notes: "The land is named but not located: the entries state no extent, seat, or site, and the
+  historical geography records the name for the 河內 南陽 (南陽城 in the north of 修武縣) and for the Qin 南陽郡
+  whose seat was 宛, without identifying the ceded land; the chapter therefore asserts no coordinate.
+  The officer is called 假守騰 here and 內史騰 in the next year's notice; the two titles are recorded on
+  his actor record. The mirror's transcription marks 秋 as an editorial addition, so it is not
+  quoted."
+cites:
+  places:
+    - id: nanyang-cession-places
+      says:
+        The entries name 韓南陽 as the land received and state no extent or seat; the two regions the
+        historical geography records the name for leave it unidentified, so the event asserts no
+        coordinate.
+      sources:
+        - source: shiji
+          at: 卷六 秦始皇本紀 十六年九月（發卒受地韓南陽假守騰）
+        - source: dushi-fangyu-jiyao
+          at: 卷四十九 河南四 懷慶府 衛輝府 彰德府 修武縣（南陽城）

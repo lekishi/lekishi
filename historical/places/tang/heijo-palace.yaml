@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  "平城宮, the palace of 平城京 (Nara) where the Japanese court sat while it recorded the acts this
+  chapter covers: the embassy's appointment and the 節刀 grant, the audiences and reports, the
+  rewards, and the 758 and 779 court acts. The entries name the palace as 平城宮 or its inner precinct
+  内裏."
+types: [other]
+names:
+  - form: 平城宮
+    lang: lzh
+    script: Hani
+    roman: Heijō no miya
+    scheme: hepburn
+    cite:
+      - id: heijo-palace-name
+        says: The chronicle names 平城宮 as the palace of the court in the volumes this chapter cites.
+        sources:
+          - source: shoku-nihongi
+            at: 卷第廿一 天平寶字二年八月庚子朔
+          - source: shoku-nihongi
+            at: 卷第廿四 天平寶字七年五月辛丑
+  - form: 内裏
+    lang: lzh
+    script: Hani
+    note:
+      The entries name the inner palace for the 節刀 grant and for court banquets within it; recorded
+      as the palace's inner precinct, not a separate site.
+    cite:
+      - id: heijo-palace-inner
+        says:
+          The chronicle names 内裏 as the place of the 節刀 grant and of court banquets in the volumes this
+          chapter cites.
+        sources:
+          - source: shoku-nihongi
+            at: 卷第十八 天平勝寶四年閏三月丙辰
+          - source: shoku-nihongi
+            at: 卷第卅五 寶龜九年正月戊申朔
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [135.79555556, 34.69111111]
+    notes:
+      Label anchor at the modern 平城宮跡 site recorded in Wikidata as 平城宮 (Q211585). It is not an
+      asserted historical coordinate; the anchor marks the court's seat for map readability and
+      places no building or precinct.
+    cite:
+      - id: heijo-palace-anchor
+        says:
+          The label anchor is placed at the modern site's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q211585 (P625)
+modern:
+  - form: 奈良市
+    lang: ja
+    script: Hani
+    note: Modern city recorded for orientation; the 平城宮跡 site is within it.
+notes: "The vocabulary has no palace type, so the place uses other and explains it here. The
+  chronicle names 平城宮 as the palace and 内裏 as the inner precinct where the court held the 節刀 grant
+  and banquets. Court acts whose entries name no place are anchored here rather than given a site,
+  and the capital 平城京 is not a separate record: the chapter's acts are the court's, and the anchor
+  is the palace site."

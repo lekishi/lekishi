@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  鑒眞 travels from 揚州 with the returning embassy, landing at 秋妻屋浦 and reaching 東大寺 in 754. The
+  relationship records documented movement only and draws no route.
+types: [travel]
+from: jianzhen
+to: todaiji
+date:
+  value: 753..754
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: 天寶十二載十月十九日 從龍興寺出 — 天平勝寶六年二月四日 引入東大寺安置
+notes: "No geometry is attached: the documented movements are the dated events and the named places,
+  and the report excludes any interpolated sea route."
+cite:
+  - id: jianzhen-travel-basis
+    says:
+      The biography records 鑒眞 leaving 龍興寺, sailing with the returning embassy, landing at 秋妻屋浦, and
+      being installed at 東大寺.
+    source: toseiden
+    at: 天寶十二載十月［十］九日戌時; 廿日乙酉午時，第二舟著薩摩國阿多郡秋妻屋浦; 天平勝寶六年甲午，二月四日…引入東大寺安置

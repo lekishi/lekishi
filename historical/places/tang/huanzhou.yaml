@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  驩州, on Tang's southern frontier, where the chronicle's 寶龜十年 (779) notice records 藤原清河's
+  ship being driven on the return voyage.
+types: [region]
+names:
+  - form: 驩州
+    lang: lzh
+    script: Hani
+    roman: Huanzhou
+    scheme: pinyin
+    cite:
+      - id: huanzhou-name
+        says:
+          The chronicle's notice records 藤原清河's ship being driven to 驩州 on Tang's southern frontier on
+          the return voyage.
+        source: shoku-nihongi
+        at: 卷第卅五 寶龜十年二月乙亥
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      The chronicle places 驩州 on Tang's southern frontier but no modern identification is sourced
+      in this fixture, so no coordinates are asserted.
+    cite:
+      - id: huanzhou-location
+        says: No modern identification of 驩州 is sourced in this fixture, so the record carries no
+          coordinates.
+        source: shoku-nihongi
+        at: 卷第卅五 寶龜十年二月乙亥
+notes: The notice that records the drift is a report made about twenty-five years later; the chapter
+  publishes the place name and the report without a map position.

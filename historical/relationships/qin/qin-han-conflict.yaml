@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "Qin's military pressure on and conquest of Han: the attack the hereditary house records
+  under 王安五年, the 231 BCE receipt of Han's ceded 南陽, and the 230 BCE annexation. The relationship
+  asserts no causation, states no span of continuous activity, and draws no route."
+types: [conflict]
+from: qin-state
+to: han-state
+notes: "The relationship records three separately dated Qin acts without claiming activity between
+  them: it carries no validity interval, because the sources establish the acts and not a continuous
+  conflict, and it carries no geometry. The attack is recorded under the hereditary house's own 王安五年
+  expression; the 233 BCE dating of that year's events comes from the annals and the six-states
+  table, not from the hereditary house."
+cite:
+  - id: qin-han-conflict-basis
+    says:
+      The cited entries record Qin attacking Han under 王安五年, receiving Han's ceded 南陽 in 231 BCE,
+      and taking Han's land and king in 230 BCE.
+    sources:
+      - source: shiji
+        at: 卷四十五 韓世家 韓王安五年（秦攻韓）
+        quote: 王安五年，秦攻韓，韓急，使韓非使秦，秦留非，因殺之。
+      - source: shiji
+        at: 卷六 秦始皇本紀 十六年九月（發卒受地韓南陽假守騰）
+        quote: 十六年九月，發卒受地韓南陽假守騰。
+      - source: shiji
+        at: 卷六 秦始皇本紀 十七年（內史騰攻韓）
+        quote: 內史騰攻韓，得韓王安，盡納其地，以其地為郡，命曰潁川。

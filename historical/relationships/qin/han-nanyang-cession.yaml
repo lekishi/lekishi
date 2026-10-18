@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: The cession of 南陽 from Han to Qin in the ninth month of 231 BCE, which the annals record
+  Qin receiving with 騰 as acting governor and the comprehensive mirror record Han presenting.
+types: [changed_boundaries]
+from: han-state
+to: qin-state
+date:
+  value: 231-09 BCE
+  calendar: chinese_lunisolar
+  as_written: 十六年九月（發卒受地韓南陽）; 始皇帝十六年九月（韓獻南陽地）
+notes: "Recorded as a change of boundaries, not as a transfer of a located territory: the sources
+  give no extent or seat, and the relationship carries no geometry. The mirror's transcription marks
+  秋 as an editorial addition, so it is not quoted."
+cite:
+  - id: han-nanyang-cession-basis
+    says:
+      The annals record Qin receiving the land of Han's 南陽 in the ninth month of 十六年 (231 BCE), and
+      the comprehensive mirror records Han presenting 南陽.
+    sources:
+      - source: shiji
+        at: 卷六 秦始皇本紀 十六年九月（發卒受地韓南陽假守騰）
+        quote: 十六年九月，發卒受地韓南陽假守騰。
+      - source: zizhi-tongjian
+        at: 卷六 秦紀一 始皇帝十六年（韓獻南陽地）
+        quote: 韓獻南陽地。
+      - source: zizhi-tongjian
+        at: 卷六 秦紀一 始皇帝十六年九月（發卒受地於韓）
+        quote: 九月，發卒受地於韓。

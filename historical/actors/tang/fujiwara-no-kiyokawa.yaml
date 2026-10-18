@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  藤原朝臣清河, appointed ambassador (大使) of the embassy in 天平勝寶二年九月 (750). The chronicle's 寶龜十年
+  (779) notice records that on the return voyage his ship was driven to 驩州 on Tang's southern
+  frontier, that he alone survived, and that he remained in Tang and died there more than ten years
+  later.
+types: [person]
+names:
+  - form: 藤原朝臣清河
+    lang: ja
+    script: Hani
+    roman: Fujiwara no Kiyokawa
+    scheme: hepburn
+    cite:
+      - id: kiyokawa-name
+        says: The chronicle names 藤原朝臣清河 as ambassador (大使) of the embassy appointed on 天平勝寶二年九月己酉.
+        source: shoku-nihongi
+        at: 卷第十八 天平勝寶二年九月己酉
+  - form: 藤原清河
+    lang: ja
+    script: Hani
+    claim: kiyokawa-name
+roles:
+  - role: envoy
+    note:
+      Ambassador from the 750 appointment; the return-voyage reports and the 754 rewards place the
+      mission's span through 754.
+    date:
+      value: 750..754
+      mode: duration
+      calendar: regnal
+      as_written: 天平勝寶二年九月己酉 大使; 天平勝寶六年正月・四月 歸朝記録
+    cite:
+      - id: kiyokawa-role
+        says:
+          The chronicle records 藤原朝臣清河 as ambassador at the appointment and at the 節刀 grant of
+          天平勝寶四年閏三月, and the 754 return reports and rewards continue the mission's record through
+          天平勝寶六年四月.
+        sources:
+          - source: shoku-nihongi
+            at: 卷第十八 天平勝寶二年九月己酉; 卷第十八 天平勝寶四年閏三月丙辰
+          - source: shoku-nihongi
+            at: 卷第十九 天平勝寶六年四月壬申
+external_ids:
+  - system: wikidata
+    id: Q845311
+    url: https://www.wikidata.org/wiki/Q845311
+    license: CC0-1.0
+    note: External identifier found in the Wave 1A feasibility pass.
+notes: The 779 notice is a report made about twenty-five years after the voyage and is published as
+  such. No birth or death year is asserted; the notice only says he died in Tang after more than ten
+  years.
+cites:
+  summary:
+    - id: kiyokawa-fate
+      says:
+        The chronicle's 寶龜十年二月 notice records that 清河's ship was driven to 驩州 on the return, that he
+        alone survived, and that he remained in Tang and died there more than ten years later.
+      source: shoku-nihongi
+      at: 卷第卅五 寶龜十年二月乙亥

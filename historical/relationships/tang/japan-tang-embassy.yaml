@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "The diplomatic mission from 日本國 to 唐: the court appointed and dispatched the embassy in
+  750–752, the envoys were received at the Tang court in 753, and the returning envoys reported to
+  the Japanese court in 754. The relationship is directional and asserts no causation."
+types: [diplomacy]
+from: japan-state
+to: tang-dynasty
+date:
+  value: 750..754
+  mode: duration
+  calendar: regnal
+  as_written: 天平勝寶二年九月己酉 任遣唐使; 天寶十二年 又遣使貢
+notes: The relationship covers appointment, dispatch, audience, and return as the report's coverage
+  model lists them. It does not assert that the mission caused any later development.
+cite:
+  - id: japan-tang-embassy-basis
+    says:
+      The chronicle records the embassy's appointment and dispatch, the Tang court record reports
+      its tribute in 天寶十二年, and the return reports of 754 close the documented span.
+    sources:
+      - source: shoku-nihongi
+        at: 卷第十八 天平勝寶二年九月己酉; 卷第十九 天平勝寶六年正月壬子
+      - source: jiu-tangshu
+        at: 卷199上 東夷 日本國（天寶十二年，又遣使貢）

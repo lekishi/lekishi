@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 秋妻屋浦, in 薩摩國阿多郡, where the biography records the second ship landing on 天寶十二載十二月廿日 (753).
+types: [port]
+names:
+  - form: 秋妻屋浦
+    lang: ja
+    script: Hani
+    roman: Akimeya no ura
+    scheme: hepburn
+    cite:
+      - id: akimeya-name
+        says: The biography names 薩摩國阿多郡秋妻屋浦 as the place the second ship landed on 天寶十二載十二月廿日.
+        source: toseiden
+        at: 廿日乙酉午時，第二舟著薩摩國阿多郡秋妻屋浦
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [130.2269, 31.2672]
+    notes:
+      An approximate placement at 坊津, the identification the cited reference work proposes. The
+      identification is a modern scholarly proposal (比定), not a source statement, and the exact
+      landing site is not asserted.
+    cite:
+      - id: akimeya-identification
+        says:
+          The cited reference work proposes identifying 秋妻屋浦 with present-day 坊津 (比定); the point is
+          placed at 坊津's modern coordinate from Wikidata (CC0) as an approximate locality-level
+          placement.
+        basis: interpretation
+        attributed_to: 平凡社「日本歴史地名大系」「阿多郡」
+        sources:
+          - source: chimei-taikei-ata
+            at: 阿多郡
+          - source: wikidata
+            at: Q10928536 (P625)
+modern:
+  - form: 坊津
+    lang: ja
+    script: Hani
+    note: The cited reference work proposes the identification with present-day 坊津; recorded as a
+      scholarly proposal.
+notes: The source places the landing in 薩摩國阿多郡; the modern identification is a proposal and is
+  labelled as one.

@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  After leaving 益久嶋, 吉備真備's ship drifts and reaches 紀伊國牟漏埼, as the 大宰府 reported to the court
+  in 天平勝寶六年正月 (754).
+types: [journey]
+date:
+  value: 753..754
+  mode: window
+  calendar: regnal
+  as_written: 自是之後。自益久嶋進發。漂蕩着紀伊國牟漏埼（天平勝寶六年正月癸丑 大宰府奏）
+  cite:
+    - id: kibi-drift-time
+      says: The chronicle's report records that after leaving 益久嶋, 吉備真備's ship drifted to 紀伊國牟漏埼.
+      source: shoku-nihongi
+      at: 卷第十九 天平勝寶六年正月癸丑
+      quote: 癸丑。大宰府奏。入唐副使從四位上吉備朝臣眞備船。以去年十二月七日。來着益久嶋。自是之後。自益久嶋進發。漂蕩着紀伊國牟漏埼。
+places:
+  - place: murozaki
+    role: site
+participants:
+  - actor: kibi-no-makibi
+    role: leader
+notes:
+  The report says the ship left 益久嶋 and afterwards drifted to 牟漏埼; it does not date the drift,
+  so the event is an occurrence window between the landfall (753) and the report (754).
+cites:
+  places:
+    - id: kibi-drift-place
+      says: The report names 紀伊國牟漏埼 as the place the ship reached.
+      source: shoku-nihongi
+      at: 卷第十九 天平勝寶六年正月癸丑

@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 鑒眞's party reaches 難波 on 天平勝寶六年二月一日 (754), on the way from 大宰府 to the capital.
+types: [journey]
+date:
+  value: 754-02-01
+  calendar: chinese_lunisolar
+  as_written: 天平勝寶六年甲午 二月一日到難波
+  cite:
+    - id: naniwa-time
+      says: The biography records the party reaching 難波 on 天平勝寶六年二月一日.
+      source: toseiden
+      at: 天平勝寶六年甲午，二月一日到難波
+places:
+  - place: naniwa
+    role: site
+participants:
+  - actor: jianzhen
+    role: leader
+notes: The biography dates this leg in the 天平勝寶六年 year but with a lunisolar month and day; the
+  calendar field records that, and the normalized year is the source's year.
+cites:
+  places:
+    - id: naniwa-place
+      says: The passage names 難波 as the place reached.
+      source: toseiden
+      at: 二月一日到難波

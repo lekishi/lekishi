@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "The court's 寶龜十年 (779) grants to the household of 阿倍朝臣仲麻呂 after the report of his death in
+  Tang: a commemoration of the student who stayed behind."
+types: [other]
+from: japan-state
+to: abe-no-nakamaro
+date:
+  value: 779-05
+  calendar: regnal
+  as_written: 寶龜十年五月丙寅 前學生阿倍朝臣仲麻呂在唐而亡…勅賜東絁一百疋。白綿三百屯
+notes: "Coda node (outside the primary 750–754 mission window): the v0 relationship vocabulary has
+  no commemoration type, so this relationship uses other and explains the choice here. The grants go
+  to his household, not to him."
+cite:
+  - id: nakamaro-commemoration-basis
+    says:
+      The chronicle records the funeral grants to 仲麻呂's household on 寶龜十年五月丙寅 after the report of
+      his death in Tang.
+    source: shoku-nihongi
+    at: 卷第卅五 寶龜十年五月丙寅

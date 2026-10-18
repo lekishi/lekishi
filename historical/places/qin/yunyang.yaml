@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  雲陽, the place where the annals record 韓非 dying after Qin detained him. The annals name the
+  place and state no site for it; the historical geography 讀史方輿紀要 records a 雲陽城 as a Qin county in
+  the northwest of 涇陽縣, and the record's label anchor sits at the modern 雲陽鎮 in 涇陽縣, the town that
+  carries the name in that area. It is a map label position, not an asserted site.
+types: [settlement]
+names:
+  - form: 雲陽
+    lang: lzh
+    script: Hani
+    roman: Yunyang
+    scheme: pinyin
+    cite:
+      - id: yunyang-name
+        says:
+          The annals record that Qin detained 韓非 and that he died at 雲陽, in the same 十四年 (233 BCE)
+          entry.
+        source: shiji
+        at: 卷六 秦始皇本紀 十四年（非死雲陽）
+        quote: 韓非使秦，秦用李斯謀，留非，非死雲陽。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [108.80985, 34.6355]
+    notes:
+      "Label anchor at the modern 雲陽鎮 in 涇陽縣 (Wikidata Q10881340), the town that carries the name
+      in the area the cited historical geography places the Qin 雲陽 (讀史方輿紀要 卷五十三 西安府 涇陽縣, 雲陽城). It is
+      not an asserted historical coordinate: the annals state no site, the anchor places no wall,
+      palace, or death site, and the transcription's distance expression for 雲陽城 is damaged, so no
+      distance is used."
+    cite:
+      - id: yunyang-unlocated
+        says: The annals name 雲陽 as the place of the death and state no site for it.
+        role: supporting
+        source: shiji
+        at: 卷六 秦始皇本紀 十四年（非死雲陽）
+      - id: yunyang-identification
+        says: The historical geography records 雲陽城 as a Qin county in the northwest of 涇陽縣.
+        role: supporting
+        source: dushi-fangyu-jiyao
+        at: 卷五十三 陝西二 西安府 涇陽縣（雲陽城）
+        quote: 秦縣。始皇二十五年使蒙恬通直道，自九原至雲陽。
+      - id: yunyang-anchor
+        says:
+          The label anchor is placed at the modern town's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q10881340 (P625)
+modern:
+  - form: 雲陽鎮
+    lang: zh-Hans
+    script: Hani
+    note: Modern town recorded for orientation only; the anchor is a label position, not an
+      identification of the Qin place's site.
+notes: "The record keeps the annals' name and adds one area-level identification from the cited
+  historical geography (a Qin county in the northwest of 涇陽縣), recorded as that work's statement and
+  not as the annals'. The place stays a label position: a source that fixes the site is what would
+  replace the anchor with an asserted placement."

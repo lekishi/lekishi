@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: 日本國, the sending state as the biography and the Tang histories name it. The chapter uses
+  this actor for the embassy's diplomacy and for the 779 court acts, so the relationship does not
+  attach a 779 decision to a sovereign who had abdicated in 758.
+types: [state]
+names:
+  - form: 日本國
+    lang: lzh
+    script: Hani
+    roman: Nihon
+    scheme: hepburn
+    cite:
+      - id: japan-state-name
+        says: The biography names 日本國 as the sending state of the embassy, and the Tang histories write 日本.
+        sources:
+          - source: toseiden
+            at: 天寶十二載 十月十五日壬午，日本國使大使特進藤原朝臣清河…
+          - source: jiu-tangshu
+            at: 卷199上 東夷 日本國
+  - form: 日本
+    lang: lzh
+    script: Hani
+    claim: japan-state-name
+notes: "The state actor carries no roles: the role vocabulary is person-oriented. Court acts are
+  recorded on the events and relationships that cite the entries, and individual sovereigns are
+  separate actor records."

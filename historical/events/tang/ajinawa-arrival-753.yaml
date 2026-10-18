@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The first and second ships reach 阿兒奈波島 together on 天寶十二載十一月廿一日, south-west of 多禰島; the same
+  passage records that the third ship had anchored there the previous night.
+types: [journey]
+part_of: [return-voyage-753]
+date:
+  value: 753-11-21
+  calendar: chinese_lunisolar
+  as_written: 廿一日戊午
+  cite:
+    - id: ajinawa-arrival-time
+      says:
+        The biography records the first and second ships reaching 阿兒奈波島 on 天寶十二載十一月廿一日, and the third
+        ship anchoring there the previous night.
+      source: toseiden
+      at: 廿一日戊午，第一、第二兩舟同到阿兒奈波島，在多禰島西南; 第三舟昨夜已泊同處
+places:
+  - place: ajinawa
+    role: site
+notes: The passage names the ships, not individuals; no participants are recorded. The third ship's
+  position is kept in the summary because it belongs to the same entry.
+cites:
+  places:
+    - id: ajinawa-arrival-place
+      says: The passage names 阿兒奈波島 and places it south-west of 多禰島.
+      source: toseiden
+      at: 廿一日戊午，第一、第二兩舟同到阿兒奈波島，在多禰島西南

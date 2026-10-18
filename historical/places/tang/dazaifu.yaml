@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  大宰府, the Kyushu regional government seat. The 東征傳 records 鑒眞 entering it on 天寶十二載十二月廿六日
+  (753), and the chronicle reports the mission's ships and personnel through the 大宰府's reports in
+  天平勝寶六年正月 (754).
+types: [settlement]
+names:
+  - form: 大宰府
+    lang: ja
+    script: Hani
+    roman: Dazaifu
+    scheme: hepburn
+    cite:
+      - id: dazaifu-name
+        says: The biography names 大宰府 as the place 鑒眞 entered on 天寶十二載十二月廿六日.
+        source: toseiden
+        at: 天寶十二載 十二月廿六日辛卯
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [130.5151, 33.5145]
+    notes:
+      Label anchor at the modern site recorded in Wikidata as 大宰府 (Q144845). It is not an asserted
+      historical coordinate; the anchor marks the government seat for map readability.
+    cite:
+      - id: dazaifu-anchor
+        says:
+          The label anchor is placed at the modern site's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q144845 (P625)
+modern:
+  - form: 太宰府市
+    lang: ja
+    script: Hani
+    note: Modern city recorded for orientation; the cited passages do not state a site identification.
+notes:
+  The 大宰府 is both a place in the voyage and the office whose reports the chronicle quotes. This
+  record is the place; the office's reports are cited on the events they report.

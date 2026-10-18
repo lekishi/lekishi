@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  鑒眞's cloister at 唐招提寺, whose name the biography records being established on 寶字三年八月一日
+  (759). The relationship is a later institutional change, recorded with its own source.
+types: [institutional_change]
+from: jianzhen
+to: toshodaiji
+date:
+  value: 759-08-01
+  calendar: chinese_lunisolar
+  as_written: 寶字三年八月一日，私立唐律招提名
+notes: "Coda node (outside the primary 750–754 mission window): the foundation is separately dated
+  and sourced, and the relationship asserts no causal link from the mission to the temple."
+cite:
+  - id: toshodaiji-foundation-basis
+    says:
+      The biography records the temple name being established on 寶字三年八月一日, and the chronicle's later
+      notice calls the cloister today's 招提寺.
+    sources:
+      - source: toseiden
+        at: 寶字三年八月一日，私立唐律招提名，後請官額，依此爲定
+      - source: shoku-nihongi
+        at: 卷第廿四 天平寶字七年五月戊申（今招提寺是也）

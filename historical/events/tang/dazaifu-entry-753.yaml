@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 鑒眞 enters 大宰府 on 天寶十二載十二月廿六日, guided by 延慶師.
+types: [journey]
+part_of: [return-voyage-753]
+date:
+  value: 753-12-26
+  calendar: chinese_lunisolar
+  as_written: 廿六日辛卯
+  cite:
+    - id: dazaifu-entry-time
+      says: The biography records 鑒眞 entering 大宰府 on 天寶十二載十二月廿六日.
+      source: toseiden
+      at: 廿六日辛卯，延慶師引和上入［太］宰府
+places:
+  - place: dazaifu
+    role: site
+participants:
+  - actor: jianzhen
+    role: leader
+notes:
+  延慶師, who guided him, has no actor record in this fixture because the report does not list him
+  and the chapter keeps the actor set bounded.
+cites:
+  places:
+    - id: dazaifu-entry-place
+      says: The passage names 大宰府 as the place entered.
+      source: toseiden
+      at: 廿六日辛卯，延慶師引和上入［太］宰府

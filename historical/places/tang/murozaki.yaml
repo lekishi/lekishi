@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  紀伊國牟漏埼, the place in 紀伊國 where the chronicle reports 吉備真備's ship drifting after leaving
+  益久嶋, in the 大宰府's report of 天平勝寶六年正月 (754). The cited prefectural record reports the
+  identification of 牟漏崎 with 太地の燈明崎, published as a proposal and not as a source statement.
+types: [landform]
+names:
+  - form: 紀伊國牟漏埼
+    lang: ja
+    script: Hani
+    cite:
+      - id: murozaki-name
+        says: The chronicle records that 吉備真備's ship, after reaching 益久嶋, drifted to 紀伊國牟漏埼.
+        source: shoku-nihongi
+        at: 卷第十九 天平勝寶六年正月癸丑
+  - form: 牟漏埼
+    lang: ja
+    script: Hani
+    claim: murozaki-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [135.94391666666667, 33.594027777777775]
+    notes:
+      An approximate locality-level placement at the modern town of 太地 (Wikidata Q1023770), where
+      the cited prefectural record reports the identification of 牟漏崎 with 太地の燈明崎. The identification
+      is a modern proposal (比定), not a source statement, and the cape's own site is not asserted.
+    cite:
+      - id: murozaki-identification
+        says:
+          The cited prefectural record reports that 紀州藩's 紀伊続風土記 identified 牟漏崎 with 太地の燈明崎; the point
+          is placed at the modern town of 太地's coordinate from Wikidata (CC0) as an approximate
+          locality-level placement.
+        basis: interpretation
+        attributed_to: 和歌山県「吉備真備漂着之地」
+        sources:
+          - source: wakayama-kibi-drift
+            at: 吉備真備漂着之地
+          - source: wikidata
+            at: Q1023770 (P625)
+notes: The report lists the identification as still to be sourced; the fixture keeps the attested
+  name and the report that places it in 紀伊國.

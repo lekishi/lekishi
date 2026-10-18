@@ -9,7 +9,7 @@
  * sha256, fetched once into `.cache/fonts/`, and cut by
  * `scripts/fonts/subset.py` (fontTools, beside the globe's Python scripts).
  *
- * The corpus is every character the site can set: the historical records,
+ * The corpus is every character the site can set: the historical record files,
  * the interface's own source, and the static not-found page. The output is
  * stamped with a hash of the sources, the subsetter and the corpus: an
  * unchanged corpus leaves the fonts in place; a new character in a record
@@ -58,7 +58,7 @@ function filesUnder(directory, extensions) {
 function corpus() {
   const characters = new Set()
   const files = [
-    ...filesUnder(path.join(repoRoot, "historical"), [".json"]),
+    ...filesUnder(path.join(repoRoot, "historical"), [".json", ".yaml"]),
     ...filesUnder(path.join(repoRoot, "src"), [".svelte", ".ts"]),
     path.join(repoRoot, "static", "404.html"),
   ]

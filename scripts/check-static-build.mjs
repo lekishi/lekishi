@@ -12,6 +12,7 @@
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
+import { parse } from "yaml"
 import { devPagesEnabled } from "./dev-pages.mjs"
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
@@ -104,28 +105,43 @@ requireFile(path.join(buildDirectory, "images", "wordmark-caps.svg"))
 requireFile(path.join(buildDirectory, "_redirects"))
 
 /**
+ * The decision line a served chapter states: the date of the owner's approval in
+ * its manifest. An unapproved chapter is not served, so it has no line.
+ *
+ * @param {string} chapter
+ */
+function decisionLine(chapter) {
+  const manifest = parse(
+    readFileSync(path.join(repoRoot, "historical", "chapters", `${chapter}.yaml`), "utf8"),
+  )
+  const on = manifest?.approval?.on
+
+  return on === undefined ? `${chapter} has no approval` : `Owner-approved for release, ${on}`
+}
+
+/**
  * The chapters the site serves, as the artifact has to carry them.
  *
- * These are sentinels, not a second source of truth: the chapter registry and the
- * chapter cards own the real values, and a chapter that is renamed, re-windowed,
- * or re-decided fails this check until the invariant is updated with it. Each
- * entry names the chapter's route, the name and window its prerendered shell must
- * state, the decision line the ledger records, and one published record id the
- * built scripts must carry.
+ * These are sentinels, not a second source of truth: the chapter manifests own
+ * the real values, and a chapter that is renamed or re-windowed fails this check
+ * until the invariant is updated with it. Each entry names the chapter's route,
+ * the name and window its prerendered shell must state, the decision line its
+ * manifest's approval records (read from the manifest, so a new approval needs
+ * no edit here), and one published record id the built scripts must carry.
  */
 const CHAPTERS = [
   {
     id: "tang-mission-750-754",
     name: "The embassy to Tang China",
     window: "750–754",
-    decision: "Owner-approved for release, 2026-09-25",
+    decision: decisionLine("tang-mission-750-754"),
     event: "lks:event:appointment-750",
   },
   {
     id: "qin-conquest-han-233-226",
     name: "The end of the state of Han",
     window: "233 BCE–226 BCE",
-    decision: "Owner-approved for release, 2026-09-27",
+    decision: decisionLine("qin-conquest-han-233-226"),
     event: "lks:event:han-conquest-230",
   },
 ]

@@ -17,6 +17,7 @@ import {
   sheet,
   sheetHandle,
 } from "./workspace"
+import { TANG_DECISION, QIN_DECISION, decisionElement } from "./approvals"
 
 /**
  * Browser checks for the chapter routes and the screens around the atlas.
@@ -63,10 +64,10 @@ function cardTitle(page: Page) {
 
 test("serves the Tang chapter as an ordinary chapter page", async ({ page, request }) => {
   // Before any script runs, the page is the chapter: its name, its window, and
-  // the decision its ledger row records, with the review it has not had.
+  // the decision its manifest records, with the review it has not had.
   const html = await (await request.get(TANG)).text()
 
-  expect(html).toMatch(/id="chapter-decision"[^>]*>\s*Owner-approved for release, 2026-09-25/)
+  expect(html).toMatch(decisionElement(TANG_DECISION))
   expect(html).toContain("Not independent or specialist review")
 
   const problems = collectProblems(page)
@@ -92,9 +93,7 @@ test("serves the Tang chapter as an ordinary chapter page", async ({ page, reque
 
   expect(frameText).not.toContain("Owner-approved")
   await openAbout(page)
-  await expect(page.locator("#atlas-about-decision")).toHaveText(
-    "Owner-approved for release, 2026-09-25",
-  )
+  await expect(page.locator("#atlas-about-decision")).toHaveText(TANG_DECISION)
   await expect(page.locator("dialog#atlas-about")).toContainText("750–754")
   await closeAbout(page)
 
@@ -116,7 +115,7 @@ test("serves the Qin chapter through the same route with its own window and BCE 
 }) => {
   const html = await (await request.get(QIN)).text()
 
-  expect(html).toMatch(/id="chapter-decision"[^>]*>\s*Owner-approved for release, 2026-09-27/)
+  expect(html).toMatch(decisionElement(QIN_DECISION))
   expect(html).toContain("233 BCE–226 BCE")
 
   const problems = collectProblems(page)
@@ -125,9 +124,7 @@ test("serves the Qin chapter through the same route with its own window and BCE 
 
   await expect(page).toHaveTitle(/The end of the state of Han · Lekishi/)
   await openAbout(page)
-  await expect(page.locator("#atlas-about-decision")).toHaveText(
-    "Owner-approved for release, 2026-09-27",
-  )
+  await expect(page.locator("#atlas-about-decision")).toHaveText(QIN_DECISION)
 
   // The About sheet's counts come from the records: one of the five events and
   // one of the four places have no sourced position.
@@ -213,9 +210,7 @@ test("replaces the workspace when the router moves between two chapters", async 
   await expect(page.getByTestId("atlas-workspace")).toHaveCount(1)
   await expect(page.locator("#atlas-workspace canvas")).toHaveCount(1)
   await openAbout(page)
-  await expect(page.locator("#atlas-about-decision")).toHaveText(
-    "Owner-approved for release, 2026-09-27",
-  )
+  await expect(page.locator("#atlas-about-decision")).toHaveText(QIN_DECISION)
   await closeAbout(page)
   await openExplore(page, "events")
   await expect(page.getByTestId("atlas-event-item")).toHaveCount(5)
@@ -644,9 +639,7 @@ test("explains the chapter once, in the About sheet", async ({ page }) => {
 
   const about = page.locator("dialog#atlas-about")
 
-  await expect(page.locator("#atlas-about-decision")).toHaveText(
-    "Owner-approved for release, 2026-09-25",
-  )
+  await expect(page.locator("#atlas-about-decision")).toHaveText(TANG_DECISION)
   await expect(about).toContainText("Self-reviewed by")
   // The coverage statement is the chapter's own, and the counts are the records'.
   await expect(about).toContainText("Primary mission window 750–754")
@@ -996,9 +989,7 @@ test("keeps the selected event's explanation reachable at every reviewed size", 
 
     expect(aboutBox.y + aboutBox.height).toBeLessThanOrEqual(viewport.height + 1)
     expect(aboutBox.x + aboutBox.width).toBeLessThanOrEqual(viewport.width + 1)
-    await expect(page.locator("#atlas-about-decision")).toHaveText(
-      "Owner-approved for release, 2026-09-27",
-    )
+    await expect(page.locator("#atlas-about-decision")).toHaveText(QIN_DECISION)
     await expect(about).toContainText("Self-reviewed by")
     const attribution = about.getByRole("link", { name: "Full attribution" })
 
@@ -1033,10 +1024,10 @@ test("presents both chapters from the root page as peer entries", async ({ page 
   await expect(qin.getByRole("link", { name: /Open the chapter/ })).toBeVisible()
 
   // Editorial state is secondary metadata in the card, never its pitch: the two
-  // cards are peers, and each states the decision its ledger row records.
-  await expect(tang).toContainText("Owner-approved for release, 2026-09-25")
+  // cards are peers, and each states the decision its manifest records.
+  await expect(tang).toContainText(TANG_DECISION)
   await expect(tang).toContainText("Not independent or specialist review")
-  await expect(qin).toContainText("Owner-approved for release, 2026-09-27")
+  await expect(qin).toContainText(QIN_DECISION)
   await expect(qin).toContainText("Not independent or specialist review")
 
   // The page is a reader's entry point: no review categories, no contract

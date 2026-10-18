@@ -127,7 +127,7 @@ path takes it into the app:
    contract refuses fails the build. Schemas and hashes need Node, so this
    validation cannot run in the bundle; `src/lib/historical/chapter.ts` is the
    Node-side loader the tests use.
-3. A Vite plugin (`src/lib/historical/authoring/vite-plugin.ts`) compiles the
+3. A Vite plugin (`scripts/historical-chapters.mjs`) compiles the
    same bundles at build time and serves each approved chapter as one lazily
    loaded chunk, so the browser reads exactly what the contract validated, with
    no `fs`, no generated files on disk, and no request a static host has to

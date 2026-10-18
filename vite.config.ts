@@ -3,7 +3,7 @@ import { sveltekit } from "@sveltejs/kit/vite"
 import tailwindcss from "@tailwindcss/vite"
 import { defineConfig } from "vitest/config"
 import { devPagesEnabled } from "./scripts/dev-pages.mjs"
-import { historicalChapters } from "./src/lib/historical/authoring/vite-plugin"
+import { historicalChapters } from "./scripts/historical-chapters.mjs"
 
 /**
  * One build tool for the whole site. SvelteKit owns routing, prerendering, and

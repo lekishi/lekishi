@@ -1,6 +1,7 @@
 /**
- * The compiled chapters, served by `vite-plugin.ts`. The plugin compiles the
- * record files at build time; nothing compiled exists on disk.
+ * The compiled chapters, served by the Vite plugin in
+ * `scripts/historical-chapters.mjs`. The plugin compiles the record files at
+ * build time; nothing compiled exists on disk.
  */
 declare module "virtual:lekishi-chapters" {
   /** One chapter manifest, served or not. */

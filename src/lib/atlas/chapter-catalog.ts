@@ -8,7 +8,7 @@ import { projectChapter, type ChapterCoverage } from "./projection"
  * The browser-safe chapter loader.
  *
  * The build compiles the record files into one bundle per chapter
- * (`virtual:lekishi-chapters`, see `historical/authoring/vite-plugin.ts`), so the
+ * (`virtual:lekishi-chapters`, see `scripts/historical-chapters.mjs`), so the
  * browser reads exactly the v0 documents the contract validates: there is no
  * second copy of the content, no Node API in this path, and no request the
  * deployment has to serve beyond the chapter's own chunk. Loading is lazy per

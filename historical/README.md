@@ -58,7 +58,7 @@ JSON by hand. `src/lib/historical/authoring/` reads the tree, checks every file
 against `historical/schema`, and compiles a chapter into complete v0 documents:
 its manifest's story, every record and source the story and `include` reach,
 one generated revision per record, and a publication set. The site compiles
-the chapters at build time (`vite-plugin.ts`) and ships one chunk per chapter;
+the chapters at build time (`scripts/historical-chapters.mjs`) and ships one chunk per chapter;
 nothing compiled is checked in. The Node content boundary,
 `src/lib/historical/chapter.ts`, compiles the same bundles for the contract and
 chapter tests and hands them to the contract's own `Publication.checkAll`.

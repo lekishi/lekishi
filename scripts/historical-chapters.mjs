@@ -1,8 +1,3 @@
-import path from "node:path"
-import { fileURLToPath } from "node:url"
-import { runnerImport, type Plugin, type ViteDevServer } from "vite"
-import type { ChapterBundle } from "./compile"
-
 /**
  * Serves the compiled chapters to the site as virtual modules, so nothing
  * compiled is ever written to disk or checked in (RFD 2, "Decided: the compiler
@@ -18,27 +13,37 @@ import type { ChapterBundle } from "./compile"
  * but not served. A stale approval fails the build here, before anything is
  * bundled, and fails the dev server's page with the same message, because an
  * edit to approved content must never reach readers without a new approval.
+ * The types the site imports are declared in
+ * `src/lib/historical/authoring/virtual-chapters.d.ts`.
  *
  * The dev server watches `historical/` and reloads the page when a record file
  * changes.
  *
- * The compiler is loaded through Vite's module runner rather than imported here:
- * this module is part of the Vite config, which Node loads natively, and the
- * compiler's TypeScript imports are written without extensions like the rest of
- * `src/`.
+ * This module is part of the Vite config, which Node loads as it is, so it is
+ * plain JavaScript and loads the TypeScript compiler in
+ * `src/lib/historical/authoring/` through Vite's module runner.
  */
+import path from "node:path"
+import { fileURLToPath } from "node:url"
+import { runnerImport } from "vite"
+
+/** @typedef {import("../src/lib/historical/authoring/compile").ChapterBundle} ChapterBundle */
 
 export const INDEX_ID = "virtual:lekishi-chapters"
 
-const RESOLVED = "\0virtual:lekishi-chapters"
+const RESOLVED = `\0${INDEX_ID}`
 
-const ROOT = fileURLToPath(new URL("../../../../", import.meta.url))
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 
 const HISTORICAL = path.join(ROOT, "historical")
 
-/** Imports one of the authoring modules beside this file through a module runner. */
-async function authoring<T>(file: string): Promise<T> {
-  const imported = await runnerImport<T>(fileURLToPath(new URL(file, import.meta.url)), {
+/**
+ * Imports one of the authoring modules through a module runner.
+ *
+ * @param {string} file the module's path below `src/lib/historical/authoring/`
+ */
+async function authoring(file) {
+  const imported = await runnerImport(path.join(ROOT, "src/lib/historical/authoring", file), {
     root: ROOT,
     configFile: false,
     logLevel: "silent",
@@ -47,17 +52,19 @@ async function authoring<T>(file: string): Promise<T> {
   return imported.module
 }
 
-/** Compiles every chapter, without the preview sets: only approved content ships. */
-async function compileChapters(): Promise<ChapterBundle[]> {
-  const [compiler, tree] = await Promise.all([
-    authoring<typeof import("./compile")>("./compile.ts"),
-    authoring<typeof import("./tree")>("./tree.ts"),
-  ])
+/**
+ * Compiles every chapter, without the preview sets: only approved content ships.
+ *
+ * @returns {Promise<ChapterBundle[]>}
+ */
+async function compileChapters() {
+  const [compiler, tree] = await Promise.all([authoring("compile.ts"), authoring("tree.ts")])
 
   return compiler.compileAll(tree.readTree())
 }
 
-function staleMessage(stale: ChapterBundle[]): string {
+/** @param {ChapterBundle[]} stale */
+function staleMessage(stale) {
   return [
     "A chapter's approval no longer matches its content, so it cannot be served:",
     ...stale.map(
@@ -68,10 +75,12 @@ function staleMessage(stale: ChapterBundle[]): string {
   ].join("\n")
 }
 
-export function historicalChapters(): Plugin {
-  let bundles: Promise<ChapterBundle[]> | undefined
+/** @returns {import("vite").Plugin} */
+export function historicalChapters() {
+  /** @type {Promise<ChapterBundle[]> | undefined} */
+  let bundles
 
-  async function compiled(): Promise<ChapterBundle[]> {
+  async function compiled() {
     bundles ??= compileChapters()
 
     const all = await bundles
@@ -84,7 +93,8 @@ export function historicalChapters(): Plugin {
     return all
   }
 
-  function invalidate(server: ViteDevServer): void {
+  /** @param {import("vite").ViteDevServer} server */
+  function invalidate(server) {
     bundles = undefined
 
     for (const module of server.moduleGraph.idToModuleMap.values()) {

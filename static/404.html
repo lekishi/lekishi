@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="dark" />
     <title>Not found · Lekishi</title>
+    <link rel="icon" href="/favicon.ico" />
+    <!--
+      The static host's not-found page, served as a plain file for any path the
+      build does not contain. It cannot load the site's stylesheet or scripts,
+      so its colours are the design tokens' values (src/app.css) written out.
+    -->
     <style>
       :root {
         color-scheme: dark;
@@ -13,50 +19,94 @@
         margin: 0;
         min-height: 100vh;
         display: flex;
-        flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 1rem;
-        background: #020617;
-        color: #e2e8f0;
-        font-family:
-          ui-sans-serif,
-          system-ui,
-          -apple-system,
-          sans-serif;
-        text-align: center;
+        background: #0b1114;
+        color: #f3ead7;
+        font-family: "Noto Sans JP", ui-sans-serif, system-ui, sans-serif;
         padding: 1.5rem;
       }
-      p.eyebrow {
-        margin: 0;
-        font-size: 0.75rem;
-        letter-spacing: 0.2em;
+      main {
+        width: 100%;
+        max-width: 32rem;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #b9af9c;
+        text-decoration: none;
+        font-family: "Cinzel", Georgia, serif;
+        font-weight: 600;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+      }
+      .eyebrow {
+        margin: 2.5rem 0 0;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.16em;
         text-transform: uppercase;
-        color: #fcd34d;
+        color: #d2a94f;
       }
       h1 {
-        margin: 0;
-        font-size: 1.5rem;
+        margin: 0.5rem 0 0;
+        font-family: "Cinzel", Georgia, serif;
+        font-size: 22px;
+        line-height: 28px;
+        font-weight: 600;
       }
       p.body {
-        margin: 0;
-        max-width: 32rem;
-        font-size: 0.9rem;
-        line-height: 1.6;
-        color: #94a3b8;
+        margin: 0.5rem 0 0;
+        font-size: 13px;
+        line-height: 20px;
+        color: #b9af9c;
       }
-      a {
-        color: #fcd34d;
+      nav {
+        margin-top: 1.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      nav a {
+        display: inline-flex;
+        align-items: center;
+        height: 2.25rem;
+        padding: 0 1rem;
+        border-radius: 4px;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      nav a.primary {
+        background: #d2a94f;
+        color: #1a1409;
+      }
+      nav a.secondary {
+        border: 1px solid rgb(210 169 79 / 0.35);
+        color: #f3ead7;
+      }
+      a:focus-visible {
+        outline: 2px solid #f1cf7a;
+        outline-offset: 2px;
       }
     </style>
   </head>
   <body>
-    <p class="eyebrow">404</p>
-    <h1>This page is not part of the atlas</h1>
-    <p class="body">
-      The Lekishi static build contains the overview page and the atlas workspace. Use the links
-      below to continue.
-    </p>
-    <p class="body"><a href="/">Overview</a> · <a href="/atlas">Open the atlas</a></p>
+    <main>
+      <a class="brand" href="/"
+        ><img src="/images/logo.svg" width="22" height="22" alt="" />LEKISHI</a
+      >
+      <p class="eyebrow">404</p>
+      <h1>This page is not part of the atlas</h1>
+      <p class="body">
+        The address may be mistyped, or older than the site's chapters. Search and every chapter are
+        one step away.
+      </p>
+      <nav aria-label="Ways on">
+        <a class="primary" href="/">Search the atlas</a>
+        <a class="secondary" href="/#chapters">Chapters</a>
+      </nav>
+    </main>
   </body>
 </html>

@@ -12,6 +12,16 @@ export const focusRing =
 export const focusRingOnGold =
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
 
+/**
+ * For surfaces that are handled rather than read: the globe, and the controls
+ * a reader presses, drags or holds over it. A long press on them in iOS Safari
+ * otherwise starts a text selection that can spread over the whole page and
+ * tint every panel, and opens the callout menu. Reading surfaces (the lists,
+ * the card, the sheets) stay selectable so a reader can copy a citation, and
+ * inputs never take this, because WebKit then refuses to place a caret.
+ */
+export const handled = "select-none [-webkit-touch-callout:none]"
+
 /** The interface's one transition: colour and opacity over the fast duration. */
 export const transition =
   "transition-[color,background-color,border-color,opacity] duration-(--motion-fast) ease-ui"

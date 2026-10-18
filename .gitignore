@@ -16,6 +16,9 @@
 # Retired generated runtime in checkouts that used the Cesium renderer.
 /static/cesium/
 /.cache/
+# The fonts are subset by `pnpm sync:fonts` (scripts/fonts/subset.py) from
+# pinned sources cached under .cache/fonts/; generated, not source.
+/static/fonts/
 
 # Browser-test output.
 /test-results/

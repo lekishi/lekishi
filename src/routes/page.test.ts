@@ -152,22 +152,48 @@ describe("the root page", () => {
     }
   })
 
-  it("leads with the atlas call to action, ahead of the chapter entries", () => {
+  it("leads with search, ahead of the chapter entries", () => {
     const host = render()
-    const links = [...host.querySelectorAll("main a")]
-    const first = links[0]
+    const main = host.querySelector("main")
+    const search = host.querySelector('[data-testid="home-search"]')
+    const entries = [...(main?.querySelectorAll("a") ?? [])].filter((link) =>
+      link.textContent?.includes("Open the chapter"),
+    )
 
-    expect(first?.getAttribute("href")).toBe("/atlas")
-    expect(first?.textContent).toContain("Open the atlas")
+    // Search is the page's first action (RFD 5, "Home"); the chapter entries
+    // follow it as peers, none of them set apart as the "real" chapter.
+    expect(search?.textContent).toContain("Search")
+    expect(entries).toHaveLength(CHAPTERS.length)
+    for (const entry of entries) {
+      expect(
+        search !== null &&
+          (search.compareDocumentPosition(entry) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0,
+      ).toBe(true)
+    }
+  })
 
-    // The hero's call to action is the page's primary action; the chapter cards
-    // follow it, and none of them is set apart as the "real" chapter.
-    const text = host.querySelector("main")?.textContent ?? ""
-    const atlas = text.indexOf("Open the atlas")
-    const entries = links.filter((link) => link.textContent?.includes("Open the chapter"))
+  it("offers to continue where the reader left off, from this device only", async () => {
+    localStorage.setItem(
+      "lekishi:positions:v1",
+      JSON.stringify({
+        last: QIN_CHAPTER,
+        chapters: {
+          [QIN_CHAPTER]: {
+            chapterId: QIN_CHAPTER,
+            search: "?event=hanfei-death-233",
+            label: "韓非 dies in Qin",
+            at: 1,
+          },
+        },
+      }),
+    )
+    const host = render()
+    await new Promise((resolve) => setTimeout(resolve, 0))
 
-    expect(atlas).toBeGreaterThanOrEqual(0)
-    expect(entries.length).toBe(CHAPTERS.length)
-    expect(text.indexOf("Open the chapter")).toBeGreaterThan(atlas)
+    const resume = host.querySelector('[data-testid="home-continue"]')
+
+    expect(resume?.getAttribute("href")).toBe(`/chapters/${QIN_CHAPTER}?event=hanfei-death-233`)
+    expect(resume?.textContent).toContain("韓非 dies in Qin")
+    localStorage.clear()
   })
 })

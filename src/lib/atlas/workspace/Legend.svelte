@@ -1,0 +1,107 @@
+<script lang="ts">
+  import { Badge, Icon, focusRing, transition } from "$lib/ui"
+  import type { RelationshipFamily } from "../overlays"
+  import HonestyPlate from "./HonestyPlate.svelte"
+
+  /**
+   * The legend (RFD 5, bottom left): only the marks the view is drawing, each
+   * as the badge the card uses, so the map and the card speak one grammar.
+   * Under it, what the view is made of, and the data attribution the globe
+   * owes. The full attribution text ships with the tiles at
+   * `/globe/ATTRIBUTION.txt`; AGENTS.md keeps the link visible here.
+   *
+   * At phone and tablet widths the legend folds to its button, so it never
+   * covers the scene the reader is looking at.
+   */
+  let {
+    marks,
+    journeys,
+    families,
+    diorama,
+    folded = false,
+  }: {
+    marks: { readonly attested: boolean; readonly identified: boolean; readonly anchor: boolean }
+    journeys: boolean
+    families: readonly RelationshipFamily[]
+    diorama: string | null
+    folded?: boolean
+  } = $props()
+
+  let open = $state(true)
+
+  $effect(() => {
+    open = !folded
+  })
+
+  const FAMILY_TEXT: Record<RelationshipFamily, string> = {
+    transmission: "transmission",
+    diplomacy: "diplomacy",
+    conflict: "conflict",
+    trade: "trade",
+    institution: "institutional change",
+  }
+
+  const FAMILY_CLASS: Record<RelationshipFamily, string> = {
+    transmission: "bg-rel-transmission",
+    diplomacy: "bg-rel-diplomacy",
+    conflict: "bg-rel-conflict",
+    trade: "bg-rel-trade",
+    institution: "bg-rel-institution",
+  }
+</script>
+
+<section
+  aria-label="Legend"
+  data-testid="atlas-legend"
+  class="pointer-events-auto w-72 max-w-full rounded-plate border border-frame bg-lacquer-glass text-ink shadow-plate backdrop-blur-md"
+>
+  <button
+    type="button"
+    aria-expanded={open}
+    onclick={() => (open = !open)}
+    class={[
+      "flex w-full cursor-pointer items-center gap-2 rounded-plate px-3 py-2 text-left text-label font-semibold uppercase text-ink-dim hover:text-ink",
+      transition,
+      focusRing,
+    ]}
+  >
+    <Icon name="about" size={14} />
+    <span class="flex-1">Legend</span>
+    <Icon name={open ? "chevron-down" : "chevron-up"} size={14} />
+  </button>
+
+  {#if open}
+    <div class="flex flex-col gap-2 border-t border-rule px-3 pt-2 pb-3">
+      <ul class="flex flex-wrap gap-1.5">
+        {#if marks.attested}<li><Badge kind="attested" text="attested site" /></li>{/if}
+        {#if marks.identified}<li><Badge kind="identified" text="identified locality" /></li>{/if}
+        {#if marks.anchor}<li><Badge kind="anchor" /></li>{/if}
+        {#if journeys}<li><Badge kind="schematic" text="journey, schematic" /></li>{/if}
+      </ul>
+      {#if families.length > 0}
+        <ul class="flex flex-wrap gap-x-3 gap-y-1 text-caption text-ink-dim">
+          {#each families as family (family)}
+            <li class="inline-flex items-center gap-1.5">
+              <span aria-hidden="true" class={["h-0.5 w-4 rounded-full", FAMILY_CLASS[family]]}
+              ></span>
+              {FAMILY_TEXT[family]}
+            </li>
+          {/each}
+        </ul>
+      {/if}
+      <HonestyPlate lines={journeys || families.length > 0} anchors={marks.anchor} {diorama} />
+      <p class="text-caption text-ink-faint">
+        Elevation: Terrain Tiles (Mapzen and contributors) · Land cover: ESA WorldCover · Imagery:
+        Natural Earth II ·
+        <a
+          href="/globe/ATTRIBUTION.txt"
+          class={[
+            "rounded-control text-ink-dim underline decoration-rule underline-offset-2 hover:text-ink",
+            transition,
+            focusRing,
+          ]}>Full attribution</a
+        >
+      </p>
+    </div>
+  {/if}
+</section>

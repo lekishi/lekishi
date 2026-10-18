@@ -28,6 +28,7 @@ rules below when updating project-specific guidance.
 - Use the pinned `flake.nix` environment: `nix develop`, or `nix develop --command <command>` from the repository root. It provides Node 24 (matching CI) and pnpm; Playwright installs its own browsers.
 - Use the existing Makefile and `package.json` scripts rather than inventing parallel setup workflows. In an Amp orb, use `amp orb services ensure` for the services declared in `.amp/services.yaml` (the development server, and the built artifact served as files).
 - `pnpm dev` and `pnpm build` build the globe's tiles into `static/globe` first (`pnpm sync:globe`, which runs `scripts/globe/build-tiles.py` with Python 3, numpy and Pillow, and fetches open elevation once into `.cache/globe`). Both directories are generated and ignored; never commit them and never assume they exist before `pnpm sync:globe` has run. An unchanged `scripts/globe/` leaves the tiles in place; a changed one repaints them all.
+- `pnpm dev` and `pnpm build` then cut the self-hosted fonts into `static/fonts` (`pnpm sync:fonts`, which runs `scripts/fonts/subset.py` with fontTools in a virtualenv under `.cache/fonts`, from faces pinned by commit and sha256 in `scripts/fonts/sources.json`). The subset follows the characters of `historical/` and `src/`; the build invariant fails if a chapter's searchable text uses a character the subsets lack, so a rebuild picks up new text. `static/fonts` is generated and ignored; never commit it.
 - `pnpm build` runs `vite build` through `scripts/build-app.mjs`, which copies `src/routes` into `.svelte-kit-build/routes` (without `/dev` in production), builds from the copy, removes it and re-syncs `.svelte-kit` from `src/routes`. That directory is generated and ignored; never commit it, and build with `pnpm build` rather than `vite build`.
 - If a required tool or service is unavailable, report the blocked check explicitly; do not claim verification succeeded.
 
@@ -36,6 +37,7 @@ rules below when updating project-specific guidance.
 - Run `pnpm verify` when you are done with all changes (format check, `svelte-check`, unit and contract tests, then the static build with its invariant) and fix any pending issues. `pnpm e2e` runs the browser checks.
 - Use Conventional Commits for commit messages and pull request titles (`type(optional-scope): description`), for example `feat(atlas): add event selection` or `docs(rfd): document historical time semantics`.
 - Add intent-focused comments around domain rules, historical invariants, normalization, prerendering constraints, and non-obvious UI state. Explain why the choice exists and what must not regress; avoid restating the next line of code.
+- The browser keeps one thing: the last position per chapter in `localStorage` (`$lib/atlas/memory.ts`), guarded so a blocked or corrupt store reads as empty. Anything more needs an owner decision.
 - Keep the artifact free of secrets and provider credentials. There is no `.env` file, no token, and no account; nothing may be introduced that requires one without an explicit owner decision.
 
 ### Version control guidelines
@@ -53,29 +55,31 @@ rules below when updating project-specific guidance.
 
 - There is no server: every route is prerendered (`src/routes/+layout.ts` sets `prerender = true`) and the artifact is plain files. Do not add a runtime server, an adapter that needs one, server-only data loading, or a dependency that requires a database or secret.
 - Nothing may touch `window`, `document`, or WebGL at module scope: SvelteKit renders the pages on the server while prerendering. Browser-only work belongs in `onMount` or behind an explicit `typeof window` guard (`src/lib/atlas/entry.ts` does both).
-- One page has one workspace. `src/lib/atlas/entry.ts` is the only module that mounts it, it refuses to mount a second workspace, and the atlas route releases it on teardown. Do not mount the workspace from anywhere else, and keep the regression coverage for it.
+- One page has one workspace. `src/lib/atlas/entry.ts` is the only module that mounts it, it refuses to mount a second workspace, and the chapter route releases it on teardown. Do not mount the workspace from anywhere else, and keep the regression coverage for it.
 - The site is served from the domain root. The globe reads its tiles from `/globe/`; if a deployment ever moves under a sub-path, that URL (in `globe-renderer.ts`) and `static/_redirects` must move with it.
 - No tile service, account, token, or third-party provider. Elevation and imagery are built offline from open data and shipped in the artifact. Keep it that way unless the owner authorizes a provider, and keep attribution visible where it is shown today, with the full text at `/globe/ATTRIBUTION.txt`.
 
 ### SvelteKit guidelines
 
-- Routes live in `src/routes`: `+page.svelte` for the overview page, `atlas/+page.svelte` for the atlas shell, `+error.svelte` for 404s, `+layout.svelte` for the global stylesheet. `src/app.html` is the document template.
+- Routes live in `src/routes`: `+page.svelte` for the home page, `chapters/[chapter]/+page.svelte` for every chapter's atlas shell (`atlas/` only redirects the old address), `+error.svelte` for 404s, `+layout.svelte` for the global stylesheet. `src/app.html` is the document template.
 - Import shared code through `$lib/...` (`$lib/atlas`, `$lib/historical/contract`) instead of deep relative paths from routes.
-- Files that must be served as-is (favicon, robots, images, the 404 page, `_redirects`) live in `static/` and are copied into `build/` unchanged. `static/globe` is generated.
+- Files that must be served as-is (favicon, robots, images, the 404 page, `_redirects`) live in `static/` and are copied into `build/` unchanged. `static/globe` and `static/fonts` are generated.
+- Search reads one prerendered file, `/search-index.json` (`src/routes/search-index.json/+server.ts`, built from the same projected chapters the pages render). The build invariant requires it to cover every served chapter, so a new chapter needs no search wiring of its own.
+- The chapter route owns the address. In-chapter state is in the query (`?event=`, `?place=`, `?step=`, `?from=`/`?to=`, parsed and written by `$lib/atlas/query.ts`); the route writes it through SvelteKit's shallow routing (`pushState` for jumps, `replaceState` for in-view changes) and hands Back and Forward to the workspace. Nothing is written for the address a page opened at, and a stale id gets the arrival plate's not-found line rather than a silent default.
 - Use `<svelte:head>` for the page title and description; each page sets its own.
-- The prerendered HTML is real content, so a direct request for `/atlas` works before any JavaScript runs. Do not move the shell into a client-only path.
+- The prerendered HTML is real content, so a direct request for a chapter works before any JavaScript runs. Do not move the shell into a client-only path.
 
 ### Svelte and TypeScript guidelines
 
 - Svelte 5 runes only: `$state`, `$state.raw`, `$derived`, `$effect`, `$props`, `$bindable`. No stores, no `export let`, no `createEventDispatcher`.
 - In `AtlasWorkspace.svelte` the state variable is deliberately named `atlasState`, not `state`: `svelte-check` reads `$state` as a Svelte 4 store subscription otherwise and stops type-checking the component.
-- The workspace is the only owner of selection, time window, playhead, playback, and camera-follow state. Keep `state.ts`, `time.ts`, and `scene.ts` pure and renderer-independent; the renderer receives a derived scene and reports user input as callbacks. Renderer objects must never enter those modules.
+- The workspace is the only owner of selection, time window, playhead, playback, camera-follow, and address state. Keep `state.ts`, `time.ts`, and `scene.ts` pure and renderer-independent; the renderer receives a derived scene and reports user input as callbacks. Renderer objects must never enter those modules.
 - Prefer plain functions and derived values over reactive side effects. Playback advances from the workspace's own clock (`$effect` in `AtlasWorkspace.svelte`); the renderer must never advance time.
 - Type every public boundary. `svelte-check` runs with `strict`; do not silence a type error with `any` or a cast when a narrower type will do.
 
 ### Tailwind and CSS guidelines
 
-- Build interface on the design system: read [docs/design-system.md](docs/design-system.md) first. Use the tokens in `src/app.css` and the primitives in `$lib/ui`, and check your change on `/dev/design` (development and PR previews only; every non-production page lives under `/dev`, gated by `scripts/dev-pages.mjs`). `src/lib/ui/design-system.test.ts` fails on Tailwind palette colours, hex values, default type sizes and off-scale radii; files in its `LEGACY` list may only lower their counts, and new files never join it.
+- Build interface on the design system: read [docs/design-system.md](docs/design-system.md) first. Use the tokens in `src/app.css` and the primitives in `$lib/ui`, and check your change on `/dev/design` (development and PR previews only; every non-production page lives under `/dev`, gated by `scripts/dev-pages.mjs`). `src/lib/ui/design-system.test.ts` fails on Tailwind palette colours, hex values, default type sizes and off-scale radii. Its `LEGACY` list is empty and new files never join it; `src/app.css` clears Tailwind's default colours, sizes and radii, so an off-system class generates no style at all.
 
 - One stylesheet, `src/app.css`, imported by `src/routes/+layout.svelte`. Tailwind v4 needs no config file; keep the explicit source list and extend it when a new directory contributes classes:
 
@@ -98,6 +102,7 @@ rules below when updating project-specific guidance.
 
 ### Globe guidelines
 
+- The map draws places, not events: the scene carries places (with their event counts and evidence form), journeys, arcs, territories and dioramas, and the renderer reports `onSelectPlace`, `onViewChange` and manual camera input as callbacks. The workspace measures the regions that cover the globe and passes them as `scene.safeArea`; flights and follow frame into the clear zone. See [the atlas frame record](rfd/0003/ATLAS_FRAME.adoc).
 - `src/lib/atlas/renderer/globe-renderer.ts` is the only `AtlasRenderer` implementation. It owns pointer, wheel and resize handling and drives `globe/view.ts`, which is the only module that creates a WebGL context. Only `globe/` modules import Three.js; the domain, state, and scene never see a Three.js object.
 - Tiles come from `/globe/`: `tileset.json`, then one bundle per refinement (`b/root.bin` for level 0, `b/{z}/{x}/{y}.bin` for the four children of a tile; the format is in `globe/bundle.ts`). They load in a module worker (`globe/tile-worker.ts`) with cancellation and a GPU memory budget. Beyond the built levels the globe subdivides the parent's heights rather than requesting tiles that do not exist. `scripts/check-static-build.mjs` fails the build if the worker, the tileset, the bundles, or the attribution are missing.
 - The tile builder is `scripts/globe/build-tiles.py`; the Natural Earth II hue it paints from is vendored under `scripts/globe/natural-earth-ii/`. Changing the coverage or levels changes the artifact's file count and size, so record the new measurements, and keep the artifact under the static host's file limit (20,000, enforced by the build invariant).

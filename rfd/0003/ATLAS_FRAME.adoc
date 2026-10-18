@@ -1,0 +1,109 @@
+:authors: Darwin D Wu <darwin67@users.noreply.github.com>
+:state: discussion
+:labels: architecture, rendering, globe, navigation, static, fonts
+:date: 2026-10-14
+
+= RFD 3 atlas frame and scene contract
+
+== Provenance and scope
+
+On 2026-10-14 the owner asked for the new globe to replace the old one with
+link:../0005/README.adoc[RFD 5]'s atlas frame, the screens of the navigation
+canvas, and the globe extras of link:../0001/README.adoc[RFD 1] (journeys, arcs,
+territory, the diorama, the minimap), made to "look like a product", with
+RFD 2's data migration left for later. This record covers what that changed in
+the browser architecture RFD 3 owns: the renderer boundary, the address, the
+search index, the fonts, and what the browser keeps.
+
+No historical content, publication set, ledger row, or contract version
+changed. The projection gained fields it reads from the published records
+(relationships; each name's romanization and language), nothing more.
+link:STATIC_ARCHITECTURE.adoc[The static architecture decision] stands.
+
+== Decision
+
+* *The map draws places, not events (RFD 1, "Places first").* The scene
+  carries `places` (one per place with a sourced position, with its window's
+  event count and its evidence form: attested site, identified locality, or
+  display anchor), and the renderer reports `onSelectPlace(placeId)` instead
+  of an event id. The workspace decides that a place with one event opens the
+  event. This supersedes the event markers described in
+  link:GLOBE_RENDERER.adoc[the globe renderer decision]; that record stays
+  readable as written.
+* *The scene carries the extras as data.* `journeys` (dated stops, a vessel or
+  party at the reached stop), `arcs` (relationship families, drawn on
+  selection and by layer), `territories` (dated snapshots; none are published,
+  so the layer is offered disabled) and `dioramas` (the 秋妻屋浦 close-up,
+  fetched from `/dioramas/akimeya.json` below 220 km) are derived in
+  `overlays.ts` from the published relationships and a per-chapter overlay
+  table. The renderer draws them; no renderer object enters the scene.
+* *The scene safe area is a view input.* The workspace measures how much of
+  the globe its regions cover and passes it as `scene.safeArea`; the renderer
+  frames flights and follow into the clear zone with `camera.setViewOffset`.
+  The renderer also reports the camera's centre and height
+  (`onViewChange`) for the locator, and flies home once per `homeToken`.
+* *The address carries the reader's position.* `query.ts` reads and writes
+  `?event=`, `?place=`, `?step=` and `?from=`/`?to=`; the chapter route writes
+  it through SvelteKit's shallow routing (a jump pushes, an in-view change
+  replaces) and hands Back and Forward to the workspace. Nothing is written
+  for the address the page opened at, so a stale link stays visible until the
+  reader moves, and the arrival plate has said what it opened instead.
+* *Search is one prerendered file.* `/search-index.json` is built from the
+  same projected chapters the pages render and fetched the first time search
+  opens; the build invariant requires it to cover every served chapter.
+* *Fonts are self-hosted and subset at build time.* RFD 5's faces are pinned in
+  `scripts/fonts/sources.json` by commit and sha256, cut by fontTools to the
+  characters of the records and the interface (`pnpm sync:fonts`, generated
+  into `static/fonts`, never committed), and the build invariant fails if a
+  chapter's searchable text uses a glyph the subsets lack. Each face ships with
+  its OFL text.
+* *The browser keeps one thing.* "Continue where you left off" stores the
+  last chapter position per chapter in `localStorage`, guarded so a blocked or
+  corrupt store is the same as none, and the switcher says it is kept on this
+  device only. No account, server, or third-party request is involved.
+
+== Measurements
+
+Measured on 2026-10-14 in the cloud development container, from `pnpm build`
+on this change.
+
+[cols="2,2",options="header"]
+|===
+|Artifact |This change
+
+|Files
+|962 (944 at the globe renderer decision)
+
+|Fonts
+|280 KB in five WOFF2 files: Noto Serif JP 240 KB (774 characters, weights 400–700), Noto Sans JP 22 KB, Cinzel 16 KB, two fallback faces 3 KB
+
+|Search index
+|51 KB (10.5 KB gzipped)
+
+|Stylesheet
+|45 KB (8.8 KB gzipped)
+
+|Chapter page chunk / Three.js chunk (raw / gzip)
+|117 KB / 32 KB and 583 KB / 150 KB
+
+|Diorama
+|227 KB, fetched only below 220 km over 秋妻屋浦
+|===
+
+* All JavaScript in the artifact is 1.25 MB raw, 390 KB gzipped; the home page
+  loads the globe chunk only on a viewport at least 1,024 px wide with WebGL.
+* The font cut takes about 15 s from cached sources and is skipped while the
+  sources, the subsetter and the corpus are unchanged.
+
+== Open
+
+* RFD 2 calendars: the date bar shows the source's own date expression beside
+  the year; converted era dates wait on RFD 2's calendar contract.
+* A `SceneArc` does not yet say which of its ends is a schematic stand-in (an
+  actor drawn at its court); the card states it, the map does not.
+* Arcs are bowed sideways a little so an arc never lies on a journey between
+  the same two places; the owner reviews that on the preview.
+* The chapter list's own search still uses the in-chapter matcher rather than
+  the shared index with its scope fixed.
+* Frame times of the extras on the reference devices are the owner's, on the
+  pull request's preview.

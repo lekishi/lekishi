@@ -1,5 +1,14 @@
-import type { AtlasScene, SceneEvent } from "../scene"
-import { createGlobeView, type GlobeMarker, type GlobeView } from "./globe/view"
+import type { SceneArc, SceneDiorama, SceneJourney, SceneTerritory } from "../overlays"
+import type { AtlasScene, ScenePlace } from "../scene"
+import {
+  createGlobeView,
+  type GlobeArc,
+  type GlobeDiorama,
+  type GlobeJourney,
+  type GlobeMarker,
+  type GlobeTerritory,
+  type GlobeView,
+} from "./globe/view"
 import type { AtlasRenderer, AtlasRendererCallbacks } from "./types"
 
 /**
@@ -8,9 +17,13 @@ import type { AtlasRenderer, AtlasRendererCallbacks } from "./types"
  * The owner chose the custom Three.js globe on 2026-10-12 (the renderer spike
  * record, `rfd/0003/RENDERER_SPIKE.adoc`), and it replaces the Cesium renderer
  * here without changing the boundary: the workspace hands over a scene of plain
- * data and receives event ids and camera input back. Three.js objects live only
- * in `./globe/`; this module turns the scene into markers and camera requests,
- * and the reader's pointer and wheel input into the two callbacks.
+ * data and receives place ids and camera input back. Three.js objects live only
+ * in `./globe/`; this module turns the scene into markers, lines, dioramas and
+ * camera requests, and the reader's pointer and wheel input into callbacks.
+ *
+ * Flights frame into the scene's safe area (RFD 5, "Scene safe area"): the
+ * view moves its projection's centre into the clear zone, so the home view,
+ * a followed selection and an explicit jump all land between the rails.
  *
  * The globe is drawn from tiles shipped in the artifact (`/globe/`, built by
  * `scripts/globe/build-tiles.py` from open elevation and Natural Earth II), so
@@ -40,21 +53,60 @@ export type GlobeRendererOptions = {
   tilesUrl?: string
 }
 
-/** The marker a placed scene event draws: colour by certainty, size by emphasis. */
-export function markerFor(event: SceneEvent): GlobeMarker | null {
-  // The scene keeps list-only events; the map draws only what a published place
-  // reference places, and no coordinate is invented for the rest.
-  if (event.placement.kind !== "point") {
-    return null
-  }
-
+/**
+ * The marker a scene place draws: its form is the evidence (attested ring,
+ * identified halo, display-anchor diamond), its fill the certainty, its size
+ * the emphasis. The scene only carries places with a published position, so
+ * no coordinate is invented for a list-only event.
+ */
+export function markerFor(place: ScenePlace): GlobeMarker {
   return {
-    id: event.id,
-    lon: event.placement.position.lon,
-    lat: event.placement.position.lat,
-    label: event.title,
-    tone: event.relation === "possible" ? "possible" : "definite",
-    emphasis: event.selected ? "selected" : event.playback === "active" ? "active" : "base",
+    id: place.id,
+    lon: place.position.lon,
+    lat: place.position.lat,
+    label: place.label,
+    mark: place.mark,
+    precision: place.precision,
+    tone: place.tone,
+    emphasis: place.selected ? "selected" : place.playback === "active" ? "active" : "base",
+    count: place.eventCount,
+    disputed: place.disputed,
+  }
+}
+
+/** A journey's line: its stops' positions, in story order, and where the vessel is. */
+export function journeyFor(journey: SceneJourney): GlobeJourney {
+  return {
+    id: journey.id,
+    stops: journey.stops.map((stop) => stop.position),
+    vessel: journey.vessel,
+    selected: journey.selected,
+  }
+}
+
+/** A relationship arc, captioned with its two ends' names in the arc's direction. */
+export function arcFor(arc: SceneArc): GlobeArc {
+  return {
+    id: arc.id,
+    family: arc.family,
+    from: arc.from,
+    to: arc.to,
+    directed: arc.directed,
+    emphasis: arc.emphasis,
+    caption: `${arc.fromLabel} ${arc.directed ? "→" : "–"} ${arc.toLabel}`,
+  }
+}
+
+export function territoryFor(territory: SceneTerritory): GlobeTerritory {
+  return { id: territory.id, dateLabel: territory.dateLabel, rings: territory.rings }
+}
+
+export function dioramaFor(diorama: SceneDiorama): GlobeDiorama {
+  return {
+    id: diorama.id,
+    url: diorama.url,
+    center: diorama.center,
+    showBelowMeters: diorama.showBelowMeters,
   }
 }
 
@@ -70,6 +122,7 @@ class GlobeAtlasRenderer implements AtlasRenderer {
   /** Where and when the current press started, while it may still be a click. */
   private press: { x: number; y: number; time: number; pointerId: number } | null = null
   private homeApplied = false
+  private lastHomeToken: number | null = null
   private lastFocusToken: number | null = null
   private disposed = false
 
@@ -115,7 +168,7 @@ class GlobeAtlasRenderer implements AtlasRenderer {
 
     // A tap is a finger, so it reaches a little further than a mouse click.
     const radius = event.pointerType === "touch" ? 14 : 8
-    this.callbacks.onSelectEvent(this.view.markerAt(event.clientX, event.clientY, radius))
+    this.callbacks.onSelectPlace(this.view.markerAt(event.clientX, event.clientY, radius))
   }
 
   private readonly handlePointerCancel = (): void => {
@@ -168,7 +221,12 @@ class GlobeAtlasRenderer implements AtlasRenderer {
       focusHeightMeters: options.focusHeightMeters ?? FOCUS_HEIGHT_METERS,
       homeHeightMeters: options.homeHeightMeters ?? HOME_HEIGHT_METERS,
     }
-    this.view = createGlobeView(container, { tilesUrl: options.tilesUrl ?? "/globe/" })
+    this.view = createGlobeView(container, {
+      tilesUrl: options.tilesUrl ?? "/globe/",
+      onViewChange: (view) => {
+        if (!this.disposed) this.callbacks.onViewChange?.(view)
+      },
+    })
     this.canvas = this.view.canvas
     this.canvas.addEventListener("pointerdown", this.handlePointerDown)
     this.canvas.addEventListener("pointermove", this.handlePointerMove)
@@ -196,14 +254,27 @@ class GlobeAtlasRenderer implements AtlasRenderer {
       return
     }
 
+    // The clear zone first, so the home view below already lands inside it.
+    this.view.setSafeArea(scene.safeArea)
+
     if (!this.homeApplied) {
       this.homeApplied = true
+      this.lastHomeToken = scene.homeToken
       this.view.setView(scene.homeView, this.options.homeHeightMeters)
+    } else if (scene.homeToken !== this.lastHomeToken) {
+      // The reader asked for the chapter's opening view again: one flight per
+      // request, never on the first sync (which already placed the camera).
+      this.lastHomeToken = scene.homeToken
+      this.view.flyTo(scene.homeView, this.options.homeHeightMeters, FLIGHT_MS)
     }
 
-    this.view.setMarkers(
-      scene.events.map(markerFor).filter((marker): marker is GlobeMarker => marker !== null),
-    )
+    this.view.setMarkers(scene.places.map(markerFor))
+    this.view.setOverlays({
+      journeys: scene.journeys.map(journeyFor),
+      arcs: scene.arcs.map(arcFor),
+      territories: scene.territories.map(territoryFor),
+    })
+    this.view.setDioramas(scene.dioramas.map(dioramaFor))
 
     // Apply each camera request exactly once; the token is bumped by the state
     // reducer whenever a new flight is wanted, including on resume.

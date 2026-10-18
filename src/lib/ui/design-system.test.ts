@@ -15,27 +15,13 @@ import { describe, expect, test } from "vitest"
  * violations they still carry. The count must match exactly: it may only go
  * down, and lowering it is part of the change that removes a violation, so the
  * ratchet cannot slip back. A file leaves the list at zero, new files never
- * join it, and once the list is empty `src/app.css` clears Tailwind's defaults
- * and this test's job passes to the build itself.
+ * join it. The list is empty: `src/app.css` now clears Tailwind's defaults, so
+ * an off-system class generates no style, and this test is what names it.
  */
 
 const SRC = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..")
 
-const LEGACY: Record<string, number> = {
-  "lib/atlas/entry.ts": 2,
-  "lib/atlas/renderer/globe/view.ts": 8,
-  "lib/atlas/workspace/AtlasWorkspace.svelte": 68,
-  "lib/atlas/workspace/EventList.svelte": 4,
-  "lib/atlas/workspace/EventRow.svelte": 31,
-  "lib/atlas/workspace/SearchResults.svelte": 13,
-  "lib/atlas/workspace/SelectionPanel.svelte": 100,
-  "lib/atlas/workspace/SourceList.svelte": 16,
-  "lib/atlas/workspace/StoryList.svelte": 21,
-  "lib/atlas/workspace/TimeControls.svelte": 60,
-  "routes/+error.svelte": 15,
-  "routes/+page.svelte": 59,
-  "routes/chapters/[chapter]/+page.svelte": 14,
-}
+const LEGACY: Record<string, number> = {}
 
 /**
  * Deliberate exceptions, matched by exact text, each with the reason it is not

@@ -11,10 +11,11 @@ env:
 
 jobs:
   verify:
-    # Everything that can fail a change: formatting, Svelte/TypeScript checks,
-    # the unit and historical-contract tests, and the static build with its
-    # build invariant. No service container, database, or BEAM runtime is
-    # involved: the site is a static artifact.
+    # The checks that need no artifact: formatting, Svelte/TypeScript checks,
+    # the unit and historical-contract tests, and the brand rasters. The static
+    # build and its invariant run once, in `build`, which the browser checks
+    # reuse. No service container, database, or BEAM runtime is involved: the
+    # site is a static artifact.
     runs-on: blacksmith-2vcpu-ubuntu-2404
 
     steps:
@@ -39,23 +40,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # `pnpm verify` rerenders the committed PNG and ICO in Playwright's pinned
-      # Chromium and fails if either raster has drifted from the brand geometry.
+      # `pnpm brand:check` rerenders the committed PNG and ICO in Playwright's
+      # pinned Chromium and fails if either raster has drifted from the brand
+      # geometry.
       - name: Install Chromium for brand asset verification
         run: pnpm exec playwright install --with-deps chromium
-
-      # The globe tiles are painted from open elevation by
-      # scripts/globe/build-tiles.py (numpy and Pillow, a few minutes). Cache the
-      # fetched elevation and the built tiles by the builder's inputs, so a run
-      # repaints them only when the builder changes; `pnpm build` skips an
-      # up-to-date build by its own stamp.
-      - name: Cache globe tiles
-        uses: actions/cache@v4
-        with:
-          path: |
-            .cache/globe
-            static/globe
-          key: globe-tiles-${{ hashFiles('scripts/globe/**') }}
 
       - name: Check formatting
         run: pnpm lint
@@ -69,40 +58,12 @@ jobs:
       - name: Check generated brand assets
         run: pnpm brand:check
 
-      - name: Build the static artifact
-        run: pnpm build
-
-  e2e:
-    # Builds the static artifact and runs the atlas browser checks against it
-    # with no development server (RFD 4 AC4).
-    # Desktop benefits from two workers when each has two CPUs available.
-    name: e2e (${{ matrix.project }})
-    runs-on: ${{ matrix.runner || 'blacksmith-2vcpu-ubuntu-2404' }}
-    strategy:
-      fail-fast: false
-      matrix:
-        project:
-          - desktop-chromium
-          - tablet-touch-chromium
-          - phone-chromium
-          - desktop-webkit
-          - tablet-touch-webkit
-          - phone-webkit
-          - desktop-firefox
-        include:
-          - project: desktop-chromium
-            runner: blacksmith-4vcpu-ubuntu-2404
-            workers: 2
-          - project: desktop-webkit
-            browser: webkit
-          - project: tablet-touch-webkit
-            browser: webkit
-          - project: phone-webkit
-            browser: webkit
-          - project: desktop-firefox
-            browser: firefox
-    env:
-      LEKISHI_SKIP_BUILD: "1"
+  build:
+    # Builds the static artifact once, with its build invariant, and hands it to
+    # every browser job. Painting the globe tiles is most of the time when the
+    # builder changes, so this job gets the larger runner: the painter uses one
+    # process per CPU.
+    runs-on: blacksmith-4vcpu-ubuntu-2404
 
     steps:
       - name: Checkout
@@ -127,7 +88,10 @@ jobs:
       # scripts/globe/build-tiles.py (numpy and Pillow, a few minutes). Cache the
       # fetched elevation and the built tiles by the builder's inputs, so a run
       # repaints them only when the builder changes; `pnpm build` skips an
-      # up-to-date build by its own stamp.
+      # up-to-date build by its own stamp. When the builder has changed, the
+      # previous entry still restores the elevation downloads and the Python
+      # environment, and the stale tiles are repainted because their stamp no
+      # longer matches.
       - name: Cache globe tiles
         uses: actions/cache@v4
         with:
@@ -135,12 +99,89 @@ jobs:
             .cache/globe
             static/globe
           key: globe-tiles-${{ hashFiles('scripts/globe/**') }}
+          restore-keys: globe-tiles-
+
+      # The pinned font sources (about 40 MB) are fetched once by
+      # scripts/sync-fonts.mjs; cutting them to the site's characters takes
+      # seconds and follows the content, so only the downloads are cached.
+      - name: Cache font sources
+        uses: actions/cache@v4
+        with:
+          path: .cache/fonts/src
+          key: font-sources-${{ hashFiles('scripts/fonts/sources.json') }}
+
+      - name: Build the static artifact
+        run: pnpm build
+
+      - name: Upload the static artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: static-site
+          path: build/
+          if-no-files-found: error
+          retention-days: 7
+
+  e2e:
+    # Runs the atlas browser checks against the artifact `build` produced, with
+    # no development server (RFD 4 AC4). Every project tests the same files.
+    # Desktop benefits from two workers when each has two CPUs available.
+    name: e2e (${{ matrix.project }})
+    needs: build
+    runs-on: ${{ matrix.runner || 'blacksmith-2vcpu-ubuntu-2404' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - desktop-chromium
+          - tablet-touch-chromium
+          - phone-chromium
+          - desktop-webkit
+          - tablet-touch-webkit
+          - phone-webkit
+          - desktop-firefox
+        include:
+          - project: desktop-chromium
+            runner: blacksmith-4vcpu-ubuntu-2404
+            workers: 2
+          - project: desktop-webkit
+            browser: webkit
+          - project: tablet-touch-webkit
+            browser: webkit
+          - project: phone-webkit
+            browser: webkit
+          - project: desktop-firefox
+            browser: firefox
+    # Serve the downloaded artifact instead of building it again.
+    env:
+      LEKISHI_SKIP_BUILD: "1"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          package_json_file: package.json
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
       - name: Install browser
         run: pnpm exec playwright install --with-deps ${{ matrix.browser || 'chromium' }}
 
-      - name: Build the static artifact
-        run: pnpm build
+      - name: Download the static artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: static-site
+          path: build/
 
       # Firefox's Linux software WebGL needs an X display even in headless mode.
       - name: Browser checks against the static artifact

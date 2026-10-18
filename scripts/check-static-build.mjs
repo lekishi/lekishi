@@ -211,9 +211,9 @@ for (const redirect of REDIRECTS) {
   }
 }
 
-if (!indexHtml.includes('href="/atlas"')) {
-  fail("index.html does not link to the atlas")
-}
+// The home page leads with search and links each chapter directly (RFD 5,
+// "Home"); `/atlas` survives only as a redirect for old links, so the page no
+// longer has to carry it.
 
 // The root page presents the chapters as peers: one card per chapter, each with
 // its name, its window, its story summary, and an entry. The artifact must keep
@@ -320,6 +320,84 @@ for (const [id, html] of chapterHtml) {
   }
 }
 
+// --- search index ---------------------------------------------------------------
+
+// Search is client-side over one prerendered file (RFD 5, "Search"). It must
+// exist and cover every served chapter, or the search dialog would silently
+// find nothing in a chapter the site serves.
+const searchIndexFile = path.join(buildDirectory, "search-index.json")
+requireFile(searchIndexFile)
+
+try {
+  const index = JSON.parse(read(searchIndexFile))
+
+  if (index.version !== 1) {
+    fail(`search-index.json has version ${index.version}, expected 1`)
+  }
+
+  for (const chapter of CHAPTERS) {
+    if (!index.chapters?.some((entry) => entry.id === chapter.id)) {
+      fail(`search-index.json does not list the chapter ${chapter.id}`)
+    }
+
+    if (
+      !index.entries?.some((entry) => entry.chapterId === chapter.id && entry.id === chapter.event)
+    ) {
+      fail(`search-index.json does not carry ${chapter.event}`)
+    }
+  }
+} catch (error) {
+  fail(`search-index.json is not valid JSON: ${error.message}`)
+}
+
+// --- fonts ----------------------------------------------------------------------
+
+// The fonts are self-hosted and subset to the site's characters (RFD 5,
+// "Typography"). Every face the stylesheet names must ship with its licence,
+// and every character a chapter's searchable text uses must be drawn by one of
+// them: a glyph outside the subset would fall back to whatever the reader's
+// system has, which RFD 1 does not allow for a historical name.
+const fontsDirectory = path.join(buildDirectory, "fonts")
+
+for (const file of [
+  "lekishi-display.woff2",
+  "lekishi-serif.woff2",
+  "lekishi-serif-tc.woff2",
+  "lekishi-sans.woff2",
+  "lekishi-latin-fallback.woff2",
+  "cinzel-OFL.txt",
+  "notoserifjp-OFL.txt",
+  "notoseriftc-OFL.txt",
+  "notosansjp-OFL.txt",
+  "notoserif-OFL.txt",
+  "coverage.json",
+]) {
+  requireFile(path.join(fontsDirectory, file))
+}
+
+try {
+  const coverage = JSON.parse(read(path.join(fontsDirectory, "coverage.json")))
+  const drawn = new Set(
+    Object.values(coverage.faces ?? {}).flatMap((face) => [...(face.characters ?? "")]),
+  )
+  const index = JSON.parse(read(searchIndexFile))
+  const missing = new Set()
+
+  for (const entry of index.entries ?? []) {
+    for (const text of [entry.title, entry.detail, ...(entry.names ?? []), ...(entry.text ?? [])]) {
+      for (const character of String(text ?? "")) {
+        if (!/\s/.test(character) && !drawn.has(character)) missing.add(character)
+      }
+    }
+  }
+
+  if (missing.size > 0) {
+    fail(`the subset fonts do not draw ${[...missing].join("")}; run pnpm sync:fonts`)
+  }
+} catch (error) {
+  fail(`fonts/coverage.json could not be checked: ${error.message}`)
+}
+
 // --- globe tiles ----------------------------------------------------------------
 
 // The tiles are built by `pnpm sync:globe` (scripts/globe/build-tiles.py) into
@@ -371,10 +449,30 @@ if (requireFile(attributionFile)) {
     "Terrain Tiles on AWS Open Data",
     "U.S. Geological Survey",
     "Natural Earth II",
+    "ESA WorldCover",
   ]) {
     if (!attribution.includes(marker)) {
       fail(`globe/ATTRIBUTION.txt does not carry ${marker}`)
     }
+  }
+}
+
+// --- the diorama -----------------------------------------------------------------
+
+// The globe fetches the diorama's symbols from /dioramas/ the first time the
+// camera is low over 秋妻屋浦 (src/lib/atlas/overlays.ts names the file). It is
+// a static file, not a bundle import, so only this check notices it missing.
+const dioramaFile = path.join(buildDirectory, "dioramas", "akimeya.json")
+
+if (requireFile(dioramaFile)) {
+  try {
+    const diorama = JSON.parse(read(dioramaFile))
+
+    if (!Array.isArray(diorama.trees?.items) || !Array.isArray(diorama.houses?.items)) {
+      fail("dioramas/akimeya.json carries no trees or houses")
+    }
+  } catch {
+    fail("dioramas/akimeya.json is not JSON")
   }
 }
 

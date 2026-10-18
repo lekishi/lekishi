@@ -179,3 +179,115 @@ Evidence: link:https://github.com/lekishi/lekishi/pull/18[PR 18] and
 link:https://ampcode.com/threads/T-01a1315d-3a80-7728-a14b-3f462e746445[the review
 and verification thread]. Physical-device frame-time acceptance remains the
 owner's separate gate.
+
+== Finer levels around the chapters' places — 2026-10-14
+
+On 2026-10-14 the owner reported, from an iPhone on the PR 23 preview, that the
+ground stayed blurred when zoomed in over 阿兒奈波島, and chose finer tiles over
+a zoom floor. The renderer had loaded every tile it could: level 7, about
+0.6 km per imagery pixel, was the finest built, so at the reported distance
+(about 40 km) each pixel was drawn more than 15 screen pixels wide, and the tile
+edges showed as straight seams. This supplement records the change; the
+measurements above stay as measured.
+
+* *Levels 8 to 10 around each drawn place.* `scripts/globe/build-tiles.py`
+  builds level 8 within 0.8°, level 9 within 0.6° and level 10 within 0.4° of
+  each of the 17 points the two chapters draw (`PLACES`), down to about 76 m per
+  imagery pixel. A new place needs its point there. The renderer needed no
+  change: it reads several ranges per level from `tileset.json` and subdivides
+  its parent wherever a level is not built.
+* *z10 elevation for those levels only.* Terrarium z10 is fetched over six
+  boxes around the places (744 tiles, once, into `.cache/globe`) and serves
+  levels 8 to 10 only. Levels 0 to 7 paint from the same sources as before, so
+  they still match their neighbours; the fine levels take their colouring
+  (slope, high ground, fields) from z7 as every level does, so only the
+  coastline and the relief sharpen.
+* *Needles removed.* The sharper close-up showed a dark wedge on the sea at
+  秋妻屋浦: a 728 m needle in Terrarium's z10 data beside sea-level samples.
+  The z7 mosaic carries them too (5,310 m beside samples at sea level). The
+  builder now replaces any sample more than one pixel's width (at least
+  150 m) above the fourth highest of the 24 around it, or below the fourth
+  lowest, with their median: 24 in the z7 mosaic and 1,280 across the z10
+  boxes. Of the 3,162 tiles built before, 37 changed (2 at level 4, 9 at
+  level 5, 12 at level 6, 14 at level 7), all where a needle was; the others
+  are byte-identical.
+* *Measured.* 3,839 tiles in 1,052 bundles, 28.7 MB (was 3,162 in 809,
+  20.7 MB). The artifact is 1,209 files (was 966), far under the static host's
+  20,000. The cold tile build, z10 included, took about 3 min 40 s in the cloud
+  development container; an unchanged builder still skips it.
+* *Still soft below about 20 km.* Level 10 starts loading at about 39 km on a
+  phone, where it is drawn about 2 screen pixels per imagery pixel; at 20 km it
+  is about 4, and the camera can still come down to the ground. A zoom floor stays
+  open if the owner wants one.
+
+Evidence: link:https://github.com/lekishi/lekishi/pull/23[PR 23]; before and
+after close-ups over 秋妻屋浦 at 57, 29 and 14 km and over 阿兒奈波島 at 38 km,
+taken in the cloud container's software renderer.
+
+=== Level 8 across the chapters, and inland detail — 2026-10-14
+
+On the preview the owner found the sharper ground confined to small areas.
+Two things caused it: the place boxes are small, and inland the land's colour
+comes from Natural Earth's 20 km pixels, so only coasts and relief sharpened.
+Offered both remedies, the owner chose both.
+
+* *Level 8 across the chapters' extent.* Level 8 (about 0.3 km per pixel) now
+  covers the same rectangle as levels 6 and 7, painted from Terrarium z9
+  (1,600 tiles over the extent, needles removed: 1,254), which serves levels 8
+  to 10 only. Levels 9 and 10 keep their boxes around the places; z10 is
+  fetched over the level 9 boxes now, in seven mosaics.
+* *Inland detail.* From level 8 down, vegetated ground above its surroundings
+  darkens towards forest and valley floors lighten towards fields (the fine
+  elevation less its 1.6 km blur), with a mottle at two finer scales. Each
+  term is zero on average and fades in with the pixel size, so level 8 keeps
+  level 7's colours where a view shows both. The elevation is read over a
+  margin wider than the blur, so neighbouring tiles agree at their edges.
+* *Measured.* 4,985 tiles in 1,347 bundles, 46.4 MB (level 8 alone is 1,248
+  tiles and 17.3 MB); the artifact is 1,504 files. Levels 0 to 7 are
+  byte-identical to the build above. The tile build, with the elevation
+  already cached, took 8 min 36 s in the cloud development container, and its
+  peak memory was about 2.3 GB (the z9 mosaic); a cold cache adds the z9 and
+  z10 downloads.
+
+=== Painting in parallel, and one build in CI — 2026-10-14
+
+Painting the tiles dominated the build, and continuous integration repeated
+it in all eight jobs on two-CPU runners whenever the builder changed.
+
+* *Builder.* Each level's tiles are painted across one forked process per
+  CPU, the needle filter ranks its neighbours with a partition instead of a
+  full sort, and the elevation tiles are decoded on threads. The output is
+  byte-identical to the build above.
+* *Measured.* With the elevation cached, the build takes 373 to 394 s in the
+  four-CPU cloud development container (was 8 min 36 s), with a peak of
+  2.34 GB summed proportional set size across the workers, because the
+  forked workers share the sources. In CI, one build job on a four-CPU runner
+  repainted every tile and built the artifact in 4 min 6 s. The browser jobs
+  download that artifact rather than building their own.
+
+== Land cover from ESA WorldCover — 2026-10-14
+
+A check of every chapter place on the PR preview, against main's tiles, showed
+that the finer levels above sharpened coasts and relief but left flat land
+almost unchanged, and broke it on low deltas. The evidence is the close-up
+audit published for PR 23 on 2026-10-14: a side-by-side video and zoom strips
+for each of the 17 places, and tile crops at those places and at seven points
+between them.
+
+* *What it found.*
+** 10 of the 17 places gained a sharp shoreline and relief, and so did 5 of the 7 points between them.
+** The three Qin chapter places, 蓬萊宮含元殿, the North China Plain and the middle Yangtze changed only by a faint mottle. The land's colour came from Natural Earth II alone (about 20 km a pixel), and flat land has no relief for the inland detail to draw.
+** 蘇州黃泗浦, 揚州 and 難波 were painted as blocks of sand with specks of water at levels 9 and 10. The beach rule (land 0.5 to 6 m above sea level) and the water rule (below 0.5 m) worked on elevation that steps in whole metres.
+* *Decision (owner, 2026-10-14).* Paint the land from real land cover, ESA WorldCover 2021 v200. The alternatives offered were painted colour only, or open water data only. WorldCover is open (CC BY 4.0) and built offline like the elevation, so no provider is contacted at runtime.
+* *How.*
+** The builder reads WorldCover's cloud-optimised GeoTIFFs block by block, with HTTP range requests and a Deflate decoder from the standard library. It uses the about 300 m overview over the 3-degree squares around the chapters (105–141°E, 21–42°N) and the about 75 m overview in the level 9 boxes around the places, and caches 26 MB.
+** Classes are grouped and painted relative to their regional mean (about 0.34°), applied to Natural Earth's hue. Forest is darker and fields lighter than the region around them, while each region keeps its Natural Earth colour on average. The globe therefore shows no rectangle where the land cover starts.
+** Each pixel is the area mean of its classes, taken from a pyramid of class fractions, so every level shows the same colour for the same ground.
+** The land cover fades in from level 5 and out over 1° at its edge. Permanent water becomes water, which brings in rivers and lakes the elevation does not show.
+** Built-up land is painted as cropland, since a modern city says nothing about the eighth century. The land cover is otherwise today's, which the About sheet states.
+** Where WorldCover paints, the invented field and mottle noise is off.
+* *Low ground.* At pixels finer than 0.0015° (levels 9 and 10), water is what most of a 150 m neighbourhood is low enough to be, and sand needs water within about 300 m. Coarser levels keep the height rule.
+* *Attribution.* WorldCover's attribution is in `ATTRIBUTION.txt`, in the tileset, and next to the elevation's in the legend and on the home page. The build invariant requires it.
+* *Measured.*
+** Tiles: 4,985 in 1,347 bundles, 53.2 MB as the builder counts it (was 44.3 MB). The heights and levels 0 to 4 are byte-identical to the build above; 1,524 imagery tiles at levels 5 to 10 changed.
+** Build: the tile build took 448 s in the four-CPU cloud container (was 373 to 394 s), with a 2.34 GB peak summed proportional set size.

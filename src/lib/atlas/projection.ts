@@ -29,6 +29,8 @@ import type {
   Occurrence,
   Place,
   PointPlacement,
+  Relationship,
+  RelationshipEndpoint,
   Source,
   StoryStep,
   TimeWindow,
@@ -167,6 +169,12 @@ export function projectChapter(
 
   const storySteps = story === undefined ? [] : projectStory(story, published, errors)
 
+  const relationships = published
+    .filter((entry) => entry.kind === "relationship")
+    .map((entry) => projectRelationship(entry, places, actors, sourceIds, captions, errors))
+    .filter((entry): entry is Relationship => entry !== null)
+    .sort((a, b) => a.id.localeCompare(b.id))
+
   eventGeometryErrors(published, errors)
 
   if (events.length === 0) {
@@ -204,6 +212,7 @@ export function projectChapter(
       places: [...places.values()],
       actors: [...actors.values()],
       events,
+      relationships,
       sources,
       story: storySteps,
       publication,
@@ -359,12 +368,15 @@ function projectPlace(entry: PublishedRevision, errors: string[]): Place | null 
   }
 
   const aliases = nameAliases(entry.content)
+  const { romanization, lang } = primaryNameFacts(primary)
 
   if (point !== null) {
     return {
       id: entry.recordId,
       label,
       aliases,
+      romanization,
+      lang,
       placement: point.placement,
       precision: point.precision,
       position: point.position,
@@ -382,6 +394,8 @@ function projectPlace(entry: PublishedRevision, errors: string[]): Place | null 
     id: entry.recordId,
     label,
     aliases,
+    romanization,
+    lang,
     placement: "unknown",
     precision: "unspecified",
     position: null,
@@ -439,7 +453,27 @@ function projectActor(entry: PublishedRevision, errors: string[]): Actor | null 
     .map((value) => stringOrUndefined(value) ?? "")
     .filter((value) => value !== "")
 
-  return { id: entry.recordId, label, aliases: nameAliases(entry.content), types }
+  return {
+    id: entry.recordId,
+    label,
+    aliases: nameAliases(entry.content),
+    ...primaryNameFacts(primary),
+    types,
+  }
+}
+
+/** The primary name's romanization and language tag, as the record publishes them. */
+function primaryNameFacts(primary: JsonObject | undefined): {
+  romanization: string | null
+  lang: string | null
+} {
+  return {
+    romanization:
+      primary === undefined
+        ? null
+        : (stringOrUndefined(objectOf(primary["romanization"])["value"]) ?? null),
+    lang: primary === undefined ? null : (stringOrUndefined(primary["language"]) ?? null),
+  }
 }
 
 /**
@@ -593,7 +627,7 @@ function projectEvent(
     return null
   }
 
-  const occurrence = projectOccurrence(entry, errors)
+  const occurrence = projectOccurrence(entry.recordId, entry.content["time"], "event", errors)
 
   if (occurrence === null) {
     return null
@@ -772,11 +806,21 @@ function projectDispute(entry: PublishedRevision, errors: string[]): EventDisput
   return { status: "disputed", summary, accounts }
 }
 
-function projectOccurrence(entry: PublishedRevision, errors: string[]): Occurrence | null {
-  const result = normalize(entry.content["time"])
+/**
+ * A published time value as the atlas's closed year range. `what` names the
+ * record kind in the error, because an undated event and an undated
+ * relationship are refused for the same reason.
+ */
+function projectOccurrence(
+  recordId: string,
+  value: JsonValue | undefined,
+  what: "event" | "relationship",
+  errors: string[],
+): Occurrence | null {
+  const result = normalize(value)
 
   if (!result.ok) {
-    errors.push(`${entry.recordId} has an invalid time: ${result.errors.join(", ")}`)
+    errors.push(`${recordId} has an invalid time: ${result.errors.join(", ")}`)
     return null
   }
 
@@ -784,14 +828,14 @@ function projectOccurrence(entry: PublishedRevision, errors: string[]): Occurren
 
   if (time.mode === "undated") {
     errors.push(
-      `${entry.recordId} is undated; the atlas cannot yet keep an undated event discoverable outside the time window, and it will not guess a year`,
+      `${recordId} is undated; the atlas cannot yet keep an undated ${what} discoverable outside the time window, and it will not guess a year`,
     )
     return null
   }
 
   if (time.bounds !== "two_sided" || time.start === null || time.end === null) {
     errors.push(
-      `${entry.recordId} has an open-ended occurrence (${String(time.bounds)}); the atlas window is closed at both ends and will not invent the missing one`,
+      `${recordId} has an open-ended occurrence (${String(time.bounds)}); the atlas window is closed at both ends and will not invent the missing one`,
     )
     return null
   }
@@ -799,7 +843,7 @@ function projectOccurrence(entry: PublishedRevision, errors: string[]): Occurren
   const precision = asPrecision(time.precision)
 
   if (precision === null) {
-    errors.push(`${entry.recordId} publishes the date precision ${String(time.precision)}`)
+    errors.push(`${recordId} publishes the date precision ${String(time.precision)}`)
     return null
   }
 
@@ -810,6 +854,80 @@ function projectOccurrence(entry: PublishedRevision, errors: string[]): Occurren
     mode: time.mode,
     sourceExpression: time.sourceExpression,
   }
+}
+
+/**
+ * A published relationship, with both ends resolved against the chapter's own
+ * actors and places.
+ *
+ * The validity is optional in the contract: a relationship the record does not
+ * date (the Qin chapter's conflict between the two states, for one) keeps a
+ * null validity instead of borrowing a span from its events, and a surface says
+ * it is undated. An end the chapter does not publish is an error rather than an
+ * arc to nowhere.
+ */
+function projectRelationship(
+  entry: PublishedRevision,
+  places: Map<string, Place>,
+  actors: Map<string, Actor>,
+  sourceIds: ReadonlySet<string>,
+  captions: Map<string, string>,
+  errors: string[],
+): Relationship | null {
+  const summary = stringOrUndefined(entry.content["summary"])
+  const types = listOf(entry.content["relationship_types"]).filter(
+    (type): type is string => typeof type === "string",
+  )
+  const from = relationshipEndpoint(entry, "from", places, actors, errors)
+  const to = relationshipEndpoint(entry, "to", places, actors, errors)
+
+  if (summary === undefined || types.length === 0) {
+    errors.push(`${entry.recordId} has no published summary or relationship type`)
+    return null
+  }
+
+  const validityValue = entry.content["validity"]
+  const validity = isNil(validityValue)
+    ? null
+    : projectOccurrence(entry.recordId, validityValue, "relationship", errors)
+
+  if (from === null || to === null || (!isNil(validityValue) && validity === null)) {
+    return null
+  }
+
+  return {
+    id: entry.recordId,
+    caption: captions.get(entry.recordId) || null,
+    summary,
+    types,
+    from,
+    to,
+    directionality: stringOrUndefined(entry.content["directionality"]) ?? "directed",
+    causal: entry.content["causality"] === "asserted",
+    validity,
+    citations: projectCitations(entry, sourceIds, errors),
+  }
+}
+
+function relationshipEndpoint(
+  entry: PublishedRevision,
+  key: "from" | "to",
+  places: Map<string, Place>,
+  actors: Map<string, Actor>,
+  errors: string[],
+): RelationshipEndpoint | null {
+  const id = stringOrUndefined(entry.content[key])
+
+  if (id !== undefined && actors.has(id)) {
+    return { kind: "actor", id }
+  }
+
+  if (id !== undefined && places.has(id)) {
+    return { kind: "place", id }
+  }
+
+  errors.push(`${entry.recordId} relates ${String(id)}, which is not a published actor or place`)
+  return null
 }
 
 /**

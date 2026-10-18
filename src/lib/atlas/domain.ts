@@ -65,6 +65,10 @@ export type Place =
       readonly label: string
       /** Every published name form and reading aid, for search. */
       readonly aliases: readonly string[]
+      /** The primary name's published romanization, or null. */
+      readonly romanization: string | null
+      /** The primary name's language as the record tags it (`ja`, `lzh`), or null. */
+      readonly lang: string | null
       readonly placement: PointPlacement
       readonly precision: GeometryPrecision
       readonly position: GeoPoint
@@ -79,6 +83,8 @@ export type Place =
       readonly id: string
       readonly label: string
       readonly aliases: readonly string[]
+      readonly romanization: string | null
+      readonly lang: string | null
       readonly placement: "unknown"
       readonly precision: "unspecified"
       readonly position: null
@@ -183,6 +189,10 @@ export type Actor = {
   readonly label: string
   /** Every published name form and reading aid, for search. */
   readonly aliases: readonly string[]
+  /** The primary name's published romanization, or null. */
+  readonly romanization: string | null
+  /** The primary name's language as the record tags it, or null. */
+  readonly lang: string | null
   /** The contract's actor type vocabulary, e.g. `person` or `state`. */
   readonly types: readonly string[]
 }
@@ -219,6 +229,40 @@ export type StoryStep = {
   readonly kind: "event" | "summary"
 }
 
+/** One end of a relationship: a published actor or a published place. */
+export type RelationshipEndpoint = {
+  readonly kind: "actor" | "place"
+  readonly id: string
+}
+
+/**
+ * A published relationship between two actors or places, as the record states
+ * it: its types in the contract's vocabulary, its direction, whether it asserts
+ * causation, when it held, and the claims' citations.
+ *
+ * Contact is not influence. The record's own `causality` travels with the
+ * relationship, so a surface can say "asserts no causation" in the record's
+ * terms rather than implying one from an arc on the map.
+ */
+export type Relationship = {
+  readonly id: string
+  /** The story's caption for the relationship when the story steps through it, else null. */
+  readonly caption: string | null
+  /** The published summary, verbatim. */
+  readonly summary: string
+  /** The contract's relationship types, e.g. `diplomacy` or `transmission`. */
+  readonly types: readonly string[]
+  readonly from: RelationshipEndpoint
+  readonly to: RelationshipEndpoint
+  /** `directed`, `undirected` or `mutual`, in the contract's vocabulary. */
+  readonly directionality: string
+  /** True only when the record asserts causation. */
+  readonly causal: boolean
+  /** When the relationship held, or null when the record publishes no validity. */
+  readonly validity: Occurrence | null
+  readonly citations: readonly EventCitation[]
+}
+
 /** Publication facts the atlas states wherever the chapter's content appears. */
 export type ChapterPublication = {
   /** Every set that published a revision the atlas shows, newest first. */
@@ -245,6 +289,8 @@ export type Chapter = {
   readonly places: readonly Place[]
   readonly actors: readonly Actor[]
   readonly events: readonly HistoricalEvent[]
+  /** Every published relationship, in record id order. */
+  readonly relationships: readonly Relationship[]
   readonly sources: readonly Source[]
   /** The published story's steps, in the story's own presentation order. */
   readonly story: readonly StoryStep[]

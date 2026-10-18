@@ -7,6 +7,7 @@ import {
   Button,
   CitationLine,
   DateLine,
+  Dialog,
   EmptyState,
   Field,
   Icon,
@@ -339,6 +340,29 @@ describe("Sheet", () => {
     key(target.querySelector("input")!, "Escape")
     expect(oninput).toHaveBeenLastCalledWith("")
     expect(onclose).not.toHaveBeenCalled()
+  })
+})
+
+describe("Dialog", () => {
+  it("is named by its heading and reports every close to its owner", () => {
+    const onclose = vi.fn()
+    render(Dialog, {
+      open: true,
+      labelledby: "dialog-title",
+      onclose,
+      children: text('<h2 id="dialog-title">Search</h2>'),
+    })
+    const dialog = target.querySelector("dialog")!
+    expect(dialog.open).toBe(true)
+    expect(document.getElementById(dialog.getAttribute("aria-labelledby")!)?.textContent).toBe(
+      "Search",
+    )
+    // A click on the backdrop lands on the dialog element itself; a click
+    // inside the content does not close it.
+    target.querySelector("h2")!.click()
+    expect(onclose).not.toHaveBeenCalled()
+    dialog.click()
+    expect(onclose).toHaveBeenCalledTimes(1)
   })
 })
 

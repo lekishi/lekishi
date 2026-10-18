@@ -1,8 +1,18 @@
-import { beforeEach, describe, expect, it, vi } from "vitest"
+import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest"
+import { loadServedChapter } from "../chapter-catalog"
+import { TANG_CHAPTER } from "../chapter-registry"
+import type { Chapter } from "../domain"
 import { FIXTURE_CHAPTER } from "../fixtures"
 import { buildScene } from "../scene"
-import { createAtlasState, noteManualCameraInput, resumeCameraFollow, selectEvent } from "../state"
-import { createGlobeAtlasRenderer } from "./globe-renderer"
+import {
+  createAtlasState,
+  noteManualCameraInput,
+  resumeCameraFollow,
+  returnHome,
+  selectEvent,
+  setLayer,
+} from "../state"
+import { arcFor, createGlobeAtlasRenderer, markerFor } from "./globe-renderer"
 
 /**
  * Coverage for the globe renderer's mount, sync, input, and disposal lifecycle.
@@ -55,13 +65,16 @@ const fake = vi.hoisted(() => {
     readonly setView = vi.fn()
     readonly flyTo = vi.fn()
     readonly setMarkers = vi.fn()
+    readonly setOverlays = vi.fn()
+    readonly setDioramas = vi.fn()
+    readonly setSafeArea = vi.fn()
     readonly markerAt = vi.fn((): string | null => null)
     readonly resize = vi.fn()
     readonly dispose = vi.fn()
 
     constructor(
       readonly container: unknown,
-      readonly options: unknown,
+      readonly options: { tilesUrl: string; onViewChange?: (view: unknown) => void },
     ) {
       FakeView.instances.push(this)
     }
@@ -104,7 +117,10 @@ const fake = vi.hoisted(() => {
 })
 
 vi.mock("./globe/view", () => ({
-  createGlobeView: (container: unknown, options: unknown) => new fake.FakeView(container, options),
+  createGlobeView: (
+    container: unknown,
+    options: { tilesUrl: string; onViewChange?: (view: unknown) => void },
+  ) => new fake.FakeView(container, options),
 }))
 
 const chapter = FIXTURE_CHAPTER
@@ -112,7 +128,11 @@ const initial = createAtlasState(chapter)
 const container = { clientWidth: 1280, clientHeight: 720 } as unknown as HTMLElement
 
 function mount() {
-  const callbacks = { onSelectEvent: vi.fn(), onManualCameraInput: vi.fn() }
+  const callbacks = {
+    onSelectPlace: vi.fn(),
+    onManualCameraInput: vi.fn(),
+    onViewChange: vi.fn(),
+  }
   const renderer = createGlobeAtlasRenderer(container, callbacks)
   const view = fake.FakeView.instances.at(-1)!
 
@@ -132,7 +152,7 @@ describe("mounting", () => {
     expect(fake.FakeView.instances).toHaveLength(1)
     expect(view.container).toBe(container)
     // Same-origin tiles under the site root: no provider, token, or tile service.
-    expect(view.options).toEqual({ tilesUrl: "/globe/" })
+    expect(view.options.tilesUrl).toBe("/globe/")
   })
 
   it("observes container size changes for the globe canvas", () => {
@@ -190,13 +210,13 @@ describe("mounting", () => {
 
   it("reports a click on a marker as event selection", () => {
     const { callbacks, view } = mount()
-    view.markerAt.mockReturnValueOnce("event-harbor-assembly")
+    view.markerAt.mockReturnValueOnce("place-north-harbor")
 
     view.canvas.dispatch("pointerdown", { clientX: 10, clientY: 20, timeStamp: 100 })
     view.canvas.dispatch("pointerup", { clientX: 11, clientY: 20, timeStamp: 180 })
 
     expect(view.markerAt).toHaveBeenCalledWith(11, 20, 8)
-    expect(callbacks.onSelectEvent).toHaveBeenCalledWith("event-harbor-assembly")
+    expect(callbacks.onSelectPlace).toHaveBeenCalledWith("place-north-harbor")
   })
 
   it("reports a click on empty globe as clearing the selection", () => {
@@ -205,7 +225,7 @@ describe("mounting", () => {
     view.canvas.dispatch("pointerdown", { clientX: 10, clientY: 20 })
     view.canvas.dispatch("pointerup", { clientX: 10, clientY: 20 })
 
-    expect(callbacks.onSelectEvent).toHaveBeenCalledWith(null)
+    expect(callbacks.onSelectPlace).toHaveBeenCalledWith(null)
   })
 
   it("gives a tap a wider reach than a mouse click", () => {
@@ -230,12 +250,12 @@ describe("mounting", () => {
     view.canvas.dispatch("pointerdown", { clientX: 10, clientY: 20, button: 2 })
     view.canvas.dispatch("pointerup", { clientX: 10, clientY: 20, button: 2 })
 
-    expect(callbacks.onSelectEvent).not.toHaveBeenCalled()
+    expect(callbacks.onSelectPlace).not.toHaveBeenCalled()
   })
 })
 
 describe("sync", () => {
-  it("applies the chapter's home view once and draws one marker per placed scene event", () => {
+  it("applies the chapter's home view once and draws one marker per place", () => {
     const { renderer, view } = mount()
     const scene = buildScene(initial, chapter)
 
@@ -244,11 +264,11 @@ describe("sync", () => {
 
     expect(view.setView).toHaveBeenCalledTimes(1)
     expect(view.setView).toHaveBeenCalledWith({ lon: 128.5, lat: 32.5 }, 9_000_000)
-    // A list-only event stays in the scene and gets no marker, because the map
+    // The map draws places, each once, however many events stand at it; a
+    // list-only event stays in the scene and adds no marker, because the map
     // must not invent the position it does not have.
-    expect(view.markerIds).toEqual(
-      scene.events.filter((event) => event.placement.kind === "point").map((event) => event.id),
-    )
+    expect(view.markerIds).toEqual(scene.places.map((place) => place.id))
+    expect(new Set(view.markerIds).size).toBe(view.markerIds.length)
     expect(scene.events.length).toBeGreaterThan(view.markerIds.length)
   })
 
@@ -259,16 +279,16 @@ describe("sync", () => {
     const narrowed = { ...initial, timeWindow: { start: 1200, end: 1210 } }
     renderer.sync(buildScene(narrowed, chapter))
 
-    expect(view.markerIds).toEqual(["event-harbor-assembly"])
+    expect(view.markerIds).toEqual(["place-north-harbor"])
   })
 
-  it("emphasizes the selected event's marker", () => {
+  it("emphasizes the selected event's place", () => {
     const { renderer, view } = mount()
 
     renderer.sync(buildScene(selectEvent(initial, chapter, "event-harbor-assembly"), chapter))
     const markers = view.setMarkers.mock.calls.at(-1)?.[0] as { id: string; emphasis: string }[]
 
-    expect(markers.find((m) => m.id === "event-harbor-assembly")?.emphasis).toBe("selected")
+    expect(markers.find((m) => m.id === "place-north-harbor")?.emphasis).toBe("selected")
     expect(markers.filter((m) => m.emphasis === "selected")).toHaveLength(1)
   })
 
@@ -333,6 +353,141 @@ describe("sync", () => {
   })
 })
 
+describe("the evidence grammar", () => {
+  let tang: Chapter
+
+  beforeAll(async () => {
+    tang = await loadServedChapter(TANG_CHAPTER)
+  })
+
+  it("hands each place's evidence form, count and dispute to its marker", () => {
+    const { renderer, view } = mount()
+    const scene = buildScene(createAtlasState(tang), tang)
+    renderer.sync(scene)
+    const markers = view.setMarkers.mock.calls.at(-1)?.[0] as ReturnType<typeof markerFor>[]
+
+    expect(markers).toEqual(scene.places.map(markerFor))
+
+    for (const [index, place] of scene.places.entries()) {
+      expect(markers[index]).toMatchObject({
+        mark: place.mark,
+        precision: place.precision,
+        count: place.eventCount,
+        disputed: place.disputed,
+        tone: place.tone,
+      })
+    }
+
+    // The Tang chapter's opening window has identified localities, display
+    // anchors and several events at one place, so the grammar is exercised
+    // on real content.
+    expect(new Set(markers.map((marker) => marker.mark))).toEqual(new Set(["identified", "anchor"]))
+    expect(markers.some((marker) => marker.count > 1)).toBe(true)
+  })
+
+  it("passes journeys, arcs and dioramas to the view, as plain data", () => {
+    const { renderer, view } = mount()
+    let state = selectEvent(createAtlasState(tang), tang, "lks:event:akimeya-landfall-753")
+    state = setLayer(state, "diplomacy", true)
+    const scene = buildScene(state, tang)
+    renderer.sync(scene)
+    const overlays = view.setOverlays.mock.calls.at(-1)?.[0] as {
+      journeys: { id: string; stops: unknown[]; vessel: unknown; selected: boolean }[]
+      arcs: ReturnType<typeof arcFor>[]
+      territories: unknown[]
+    }
+
+    expect(scene.journeys.length).toBeGreaterThan(0)
+    expect(overlays.journeys.map((journey) => journey.id)).toEqual(
+      scene.journeys.map((journey) => journey.id),
+    )
+
+    for (const [index, journey] of scene.journeys.entries()) {
+      expect(overlays.journeys[index].stops).toEqual(journey.stops.map((stop) => stop.position))
+      expect(overlays.journeys[index].vessel).toEqual(journey.vessel)
+      expect(overlays.journeys[index].selected).toBe(journey.selected)
+    }
+
+    // The landfall is a stop of 鑒眞's voyage, so that journey is the selected one.
+    expect(overlays.journeys.find((journey) => journey.id === "jianzhen-voyage")?.selected).toBe(
+      true,
+    )
+    expect(scene.arcs.length).toBeGreaterThan(0)
+    expect(overlays.arcs).toEqual(scene.arcs.map(arcFor))
+    expect(overlays.territories).toEqual([])
+    expect(view.setDioramas).toHaveBeenLastCalledWith([
+      {
+        id: "akimeya",
+        url: "/dioramas/akimeya.json",
+        center: scene.dioramas[0].center,
+        showBelowMeters: 220_000,
+      },
+    ])
+  })
+
+  it("captions an arc with its ends in the arc's direction", () => {
+    const arc = {
+      id: "r",
+      family: "diplomacy" as const,
+      label: "An embassy",
+      from: { lon: 135.8, lat: 34.7 },
+      to: { lon: 108.9, lat: 34.3 },
+      fromLabel: "日本",
+      toLabel: "唐",
+      directed: true,
+      emphasis: "selected" as const,
+    }
+
+    expect(arcFor(arc).caption).toBe("日本 → 唐")
+    expect(arcFor({ ...arc, directed: false }).caption).toBe("日本 – 唐")
+  })
+})
+
+describe("framing", () => {
+  it("applies the safe area before the first view, so the home view lands in the clear zone", () => {
+    const { renderer, view } = mount()
+    const safeArea = { top: 56, right: 384, bottom: 120, left: 288 }
+
+    renderer.sync({ ...buildScene(initial, chapter), safeArea })
+
+    expect(view.setSafeArea).toHaveBeenCalledWith(safeArea)
+    expect(view.setSafeArea.mock.invocationCallOrder[0]).toBeLessThan(
+      view.setView.mock.invocationCallOrder[0],
+    )
+
+    const narrower = { ...safeArea, right: 0 }
+    renderer.sync({ ...buildScene(initial, chapter), safeArea: narrower })
+    expect(view.setSafeArea).toHaveBeenLastCalledWith(narrower)
+  })
+
+  it("flies home once per home request, never on the first sync", () => {
+    const { renderer, view } = mount()
+    const home = returnHome(initial)
+
+    // A scene that arrives already carrying a home token is the first view.
+    renderer.sync(buildScene(home, chapter))
+    expect(view.flyTo).not.toHaveBeenCalled()
+
+    renderer.sync(buildScene(returnHome(home), chapter))
+    renderer.sync(buildScene(returnHome(home), chapter))
+
+    expect(view.flyTo).toHaveBeenCalledTimes(1)
+    expect(view.flyTo).toHaveBeenCalledWith(chapter.homeView, 9_000_000, 1_200)
+  })
+
+  it("reports where the camera looks, and stops after disposal", () => {
+    const { callbacks, renderer, view } = mount()
+    const report = { center: { lon: 130.2, lat: 31.3 }, heightMeters: 120_000 }
+
+    view.options.onViewChange?.(report)
+    expect(callbacks.onViewChange).toHaveBeenCalledWith(report)
+
+    renderer.dispose()
+    view.options.onViewChange?.(report)
+    expect(callbacks.onViewChange).toHaveBeenCalledTimes(1)
+  })
+})
+
 describe("dispose", () => {
   it("releases the view, listeners, and size observer", () => {
     const { renderer, view } = mount()
@@ -365,6 +520,9 @@ describe("dispose", () => {
     renderer.sync(buildScene(initial, chapter))
 
     expect(view.setMarkers).not.toHaveBeenCalled()
+    expect(view.setOverlays).not.toHaveBeenCalled()
+    expect(view.setDioramas).not.toHaveBeenCalled()
+    expect(view.setSafeArea).not.toHaveBeenCalled()
     expect(view.setView).not.toHaveBeenCalled()
   })
 })

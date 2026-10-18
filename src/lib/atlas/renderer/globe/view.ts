@@ -1,17 +1,28 @@
 import * as THREE from "three"
 import { GlobeControls, WGS84_ELLIPSOID } from "3d-tiles-renderer/three"
 import type { GeoPoint } from "../../domain"
+import { DioramaLayer, type GlobeDiorama } from "./diorama"
+import { principalOffset, ViewThrottle, type Insets } from "./framing"
 import {
   MEAN_RADIUS_M,
   eyeFor,
+  fromEcef,
   interpolatePose,
   poseOf,
   surfaceDistance,
   toEcef,
   type CameraPose,
+  type Vec3,
 } from "./geo"
-import { placeLabels, type LabelBox } from "./labels"
+import { placeLabelBoxes, type LabelBox } from "./labels"
+import { LineLayer, type GlobeOverlays } from "./line-layer"
+import { HORIZON2, hiddenByEarth, type ScreenPoint } from "./lines"
+import { markerLook, type GlobeMarker, type MarkerLook } from "./marks"
 import { GlobeTiles, type Tileset } from "./tiles"
+
+export type { GlobeMarker } from "./marks"
+export type { GlobeOverlays, GlobeJourney, GlobeArc, GlobeTerritory } from "./line-layer"
+export type { GlobeDiorama } from "./diorama"
 
 /**
  * The custom globe's Three.js view: the WebGL canvas, the camera and its
@@ -20,25 +31,28 @@ import { GlobeTiles, type Tileset } from "./tiles"
  * atlas renderer (`../globe-renderer.ts`) translates the scene into markers and
  * user input into callbacks.
  *
- * Markers and labels are HTML laid over the canvas and positioned each frame
- * from the 3D scene: text stays crisp in every script the browser can set, and
- * a label never takes the pointer, so a drag that starts on one still turns
- * the globe (`markerAt` hit-tests them for a click instead).
+ * Markers, labels and lines are HTML and SVG laid over the canvas and
+ * positioned each frame from the 3D scene: text stays crisp in every script
+ * the browser can set, a line's dash or double stroke stays the same in
+ * pixels at every altitude, and every colour is a design-system token the
+ * browser resolves. None of it takes the pointer, so a drag that starts on a
+ * label still turns the globe (`markerAt` hit-tests markers for a click).
+ * The diorama's symbols are the one atlas layer drawn in WebGL, because they
+ * stand on the terrain.
+ *
+ * The camera frames into the clear zone the workspace's chrome leaves
+ * (`setSafeArea`): the projection's principal point moves to the clear zone's
+ * centre, so every flight lands its target there, and the markers, lines and
+ * camera controls all project through that same camera.
  *
  * The view draws a frame only when something changed (the camera, a tile
  * arriving, the markers, the size), so an idle atlas does not spin the GPU.
  */
 
-export type MarkerTone = "definite" | "possible"
-export type MarkerEmphasis = "base" | "active" | "selected"
-
-export type GlobeMarker = {
-  readonly id: string
-  readonly lon: number
-  readonly lat: number
-  readonly label: string
-  readonly tone: MarkerTone
-  readonly emphasis: MarkerEmphasis
+/** Where the camera is looking: the ground at the clear zone's centre, and its height. */
+export type GlobeCameraView = {
+  readonly center: GeoPoint
+  readonly heightMeters: number
 }
 
 export interface GlobeView {
@@ -49,6 +63,12 @@ export interface GlobeView {
   /** Flies the camera to straight above a point; input from the reader cancels it. */
   flyTo(target: GeoPoint, rangeM: number, durationMs: number): void
   setMarkers(markers: readonly GlobeMarker[]): void
+  /** Journeys, relationship arcs and territory rings, drawn under the markers. */
+  setOverlays(overlays: GlobeOverlays): void
+  /** The scene's dioramas; each is fetched the first time the camera is low over it. */
+  setDioramas(dioramas: readonly GlobeDiorama[]): void
+  /** The scene's edges the chrome covers, in CSS pixels; flights frame into the rest. */
+  setSafeArea(insets: Insets): void
   /** The marker (dot or label) under a client point, within `radiusPx` of its dot. */
   markerAt(clientX: number, clientY: number, radiusPx: number): string | null
   /** Matches the drawing buffer to the container's size. */
@@ -62,6 +82,8 @@ export type GlobeViewOptions = {
   readonly tilesUrl: string
   /** Vertical exaggeration for terrain, as in the renderer spike. */
   readonly exaggeration?: number
+  /** Where the camera looks, reported a few times a second at most and once when it settles. */
+  readonly onViewChange?: (view: GlobeCameraView) => void
 }
 
 const SPACE = "#020617"
@@ -69,15 +91,17 @@ const ATMOSPHERE = "#9fc4dc"
 const HAZE = new THREE.Color("#b6ccd9")
 const ZENITH = new THREE.Color("#5a86ab")
 const FOV_DEG = 40
-const MARKER_COLORS: Record<MarkerTone, string> = { definite: "#f59e0b", possible: "#38bdf8" }
-const MARKER_SIZES: Record<MarkerEmphasis, number> = { base: 9, active: 12, selected: 16 }
-/** The polar radius squared, slightly under: a point is visible when its dot with the eye exceeds it. */
-const HORIZON2 = 6356752 * 6356752 * 0.999
+/** The view is reported to the workspace at most this often while the camera moves. */
+const VIEW_REPORT_MS = 250
 
 type MarkerEntry = {
   data: GlobeMarker
+  look: MarkerLook
   readonly root: HTMLDivElement
-  readonly dot: HTMLSpanElement
+  readonly pulse: HTMLSpanElement
+  readonly mark: HTMLSpanElement
+  readonly core: HTMLSpanElement
+  readonly count: HTMLSpanElement
   readonly label: HTMLSpanElement
   world: THREE.Vector3
   labelWidth: number
@@ -111,6 +135,12 @@ class ThreeGlobeView implements GlobeView {
   private readonly abort = new AbortController()
   private tiles: GlobeTiles | null = null
   private markers = new Map<string, MarkerEntry>()
+  private readonly lines: LineLayer
+  private readonly dioramas: DioramaLayer
+  private safeArea: Insets = { top: 0, right: 0, bottom: 0, left: 0 }
+  private readonly viewThrottle = new ViewThrottle(VIEW_REPORT_MS)
+  private readonly onViewChange: ((view: GlobeCameraView) => void) | null
+  private readonly projected = new THREE.Vector3()
   private flight: Flight | null = null
   private driving = false
   private warming = false
@@ -136,6 +166,7 @@ class ThreeGlobeView implements GlobeView {
   constructor(container: HTMLElement, options: GlobeViewOptions) {
     this.container = container
     this.exaggeration = options.exaggeration ?? 2.2
+    this.onViewChange = options.onViewChange ?? null
     this.canvas = document.createElement("canvas")
     this.canvas.className = "block h-full w-full touch-none outline-none"
     this.overlay = document.createElement("div")
@@ -150,6 +181,7 @@ class ThreeGlobeView implements GlobeView {
     })
     this.canvas.addEventListener("webglcontextrestored", this.restoreContext)
     container.append(this.canvas, this.overlay)
+    this.lines = new LineLayer(this.overlay)
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2))
     this.renderer.outputColorSpace = THREE.SRGBColorSpace
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping
@@ -162,6 +194,15 @@ class ThreeGlobeView implements GlobeView {
     this.atmosphere = this.createAtmosphere()
     this.sky = this.createSky()
     this.scene.add(this.atmosphere, this.sky)
+    this.dioramas = new DioramaLayer({
+      scene: this.scene,
+      exaggeration: this.exaggeration,
+      signal: this.abort.signal,
+      compile: (object) => this.renderer.compileAsync(object, this.camera, this.scene),
+      onReady: () => {
+        this.dirty = true
+      },
+    })
 
     this.controls = new GlobeControls(this.globe, this.camera, this.canvas)
     this.controls.setEllipsoid(WGS84_ELLIPSOID, this.globe)
@@ -372,21 +413,69 @@ class ThreeGlobeView implements GlobeView {
     this.dirty = true
   }
 
+  setOverlays(overlays: GlobeOverlays): void {
+    if (this.disposed) return
+
+    if (this.lines.set(overlays, this.heightAt)) {
+      this.dirty = true
+    }
+  }
+
+  setDioramas(dioramas: readonly GlobeDiorama[]): void {
+    if (this.disposed) return
+    this.dioramas.set(dioramas)
+    this.dirty = true
+  }
+
+  setSafeArea(insets: Insets): void {
+    if (this.disposed) return
+    const current = this.safeArea
+
+    if (
+      current.top === insets.top &&
+      current.right === insets.right &&
+      current.bottom === insets.bottom &&
+      current.left === insets.left
+    ) {
+      return
+    }
+
+    this.safeArea = {
+      top: insets.top,
+      right: insets.right,
+      bottom: insets.bottom,
+      left: insets.left,
+    }
+    this.applyProjection()
+  }
+
+  /** Ground height as the tiles draw it, for laying markers and lines on the terrain. */
+  private readonly heightAt = (lon: number, lat: number): number =>
+    this.tiles?.heightAt(lon, lat) ?? 0
+
   private createMarker(data: GlobeMarker): MarkerEntry {
     const root = document.createElement("div")
-    root.className = "absolute left-0 top-0 hidden will-change-transform"
     root.dataset.markerId = data.id
-    const dot = document.createElement("span")
-    dot.className = "absolute block -translate-x-1/2 -translate-y-1/2 rounded-full border-solid"
-    const label = document.createElement("span")
-    label.className =
-      "absolute bottom-[10px] block -translate-x-1/2 whitespace-nowrap font-semibold text-white [text-shadow:0_0_3px_#0f172a,0_0_6px_#0f172a,0_1px_0_#0f172a]"
-    root.append(dot, label)
+    const part = () => {
+      const span = document.createElement("span")
+      root.append(span)
+      return span
+    }
+    // In drawing order: the selection's pulse under the mark, the label on top.
+    const pulse = part()
+    const mark = part()
+    const core = part()
+    const count = part()
+    const label = part()
     this.overlay.append(root)
     const entry: MarkerEntry = {
       data,
+      look: markerLook(data),
       root,
-      dot,
+      pulse,
+      mark,
+      core,
+      count,
       label,
       world: new THREE.Vector3(),
       labelWidth: 0,
@@ -399,37 +488,74 @@ class ThreeGlobeView implements GlobeView {
 
   private updateMarker(entry: MarkerEntry, data: GlobeMarker): void {
     const previous = entry.data
+    const look = markerLook(data)
+    const hidden = entry.screen === null
     entry.data = data
-    const size = MARKER_SIZES[data.emphasis]
-    const selected = data.emphasis === "selected"
-    const { style } = entry.dot
-    style.width = `${size}px`
-    style.height = `${size}px`
-    style.backgroundColor = MARKER_COLORS[data.tone]
-    style.opacity = data.tone === "possible" ? "0.55" : "0.95"
-    style.borderColor = selected ? "#ffffff" : "#0f172a"
-    style.borderWidth = `${selected ? 3 : 1.5}px`
-    entry.label.style.fontSize = selected ? "16px" : "14px"
+    entry.look = look
+    entry.root.className = `${look.group} will-change-transform${hidden ? " hidden" : ""}`
+    entry.root.dataset.mark = data.mark
+    entry.root.style.zIndex = String(look.priority + 1)
+
+    const sized = (element: HTMLElement, className: string | null, size: number) => {
+      element.className = className ?? "hidden"
+      element.style.width = `${size}px`
+      element.style.height = `${size}px`
+    }
+
+    sized(entry.mark, look.mark, look.size)
+    sized(entry.core, look.core, Math.max(4, Math.round(look.size * 0.42)))
+    sized(entry.pulse, look.pulse, look.size + 10)
+
+    entry.count.className = look.count ?? "hidden"
+    entry.count.style.left = `${Math.round(look.hitRadius + 3)}px`
+    entry.count.textContent = data.count > 1 ? String(data.count) : ""
+
+    entry.label.className = look.label
+    entry.label.style.bottom = `${look.labelOffset}px`
 
     if (entry.label.textContent !== data.label || previous.emphasis !== data.emphasis) {
       entry.label.textContent = data.label
       entry.labelWidth = 0
     }
 
-    entry.root.style.zIndex = selected ? "3" : data.emphasis === "active" ? "2" : "1"
+    entry.label.style.visibility = entry.labelShown ? "" : "hidden"
   }
 
-  /** Projects the markers and decides which labels fit. Runs only when a frame is drawn. */
-  private placeMarkers(): void {
+  /** Projects a world point to the canvas, or null behind the horizon or the camera. */
+  private project(world: Vec3, eye: Vec3, width: number, height: number): ScreenPoint | null {
+    if (hiddenByEarth(world, eye)) return null
+    const p = this.projected.set(...world).project(this.camera)
+
+    // Samples far off the screen still count: low over a stop, the next
+    // sample is tens of kilometres away, and the line must still run off the
+    // edge toward it. Only a sample nearly in the camera's plane, whose
+    // projection explodes, breaks the line.
+    if (p.z >= 1 || Math.abs(p.x) > 1e4 || Math.abs(p.y) > 1e4) return null
+    return { x: ((p.x + 1) / 2) * width, y: ((1 - p.y) / 2) * height }
+  }
+
+  /**
+   * Projects the lines and markers and decides which labels fit. Runs only
+   * when a frame is drawn.
+   */
+  private placeOverlay(): void {
     const width = this.container.clientWidth
     const height = this.container.clientHeight
     const eye = this.camera.position
+    const eyeAt: Vec3 = [eye.x, eye.y, eye.z]
     const projected = new THREE.Vector3()
     const boxes: LabelBox[] = []
 
+    // New tiles change the ground the lines and markers stand on.
+    if (this.markersDirty) {
+      this.lines.refresh(this.heightAt)
+    }
+
+    const captions = this.lines.place((world) => this.project(world, eyeAt, width, height))
+
     for (const entry of this.markers.values()) {
       if (this.markersDirty) {
-        const h = this.tiles?.heightAt(entry.data.lon, entry.data.lat) ?? 0
+        const h = this.heightAt(entry.data.lon, entry.data.lat)
         entry.world.set(...toEcef(entry.data.lon, entry.data.lat, h))
       }
 
@@ -453,27 +579,58 @@ class ThreeGlobeView implements GlobeView {
       entry.root.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`
 
       if (entry.labelWidth === 0) entry.labelWidth = entry.label.offsetWidth
-      const emphasis = entry.data.emphasis
-      const labelHeight = emphasis === "selected" ? 21 : 19
+      const { labelHeight, labelOffset, priority } = entry.look
       boxes.push({
         id: entry.data.id,
-        priority: emphasis === "selected" ? 2 : emphasis === "active" ? 1 : 0,
+        priority,
         left: x - entry.labelWidth / 2,
-        top: y - 10 - labelHeight,
+        top: y - labelOffset - labelHeight,
         width: entry.labelWidth,
         height: labelHeight,
       })
     }
 
-    const shown = placeLabels(boxes)
+    // The lines' captions compete with place names for room and lose to them
+    // (their priorities are negative), and never cover a mark: a place is
+    // never hidden for a caption.
+    const marks = [...this.markers.values()].flatMap(({ screen, look }) =>
+      screen === null
+        ? []
+        : [
+            {
+              left: screen.x - look.hitRadius,
+              top: screen.y - look.hitRadius,
+              right: screen.x + look.hitRadius,
+              bottom: screen.y + look.hitRadius,
+            },
+          ],
+    )
+    const clear = (box: LabelBox) =>
+      !marks.some(
+        (mark) =>
+          box.left < mark.right &&
+          mark.left < box.left + box.width &&
+          box.top < mark.bottom &&
+          mark.top < box.top + box.height,
+      )
+
+    for (const caption of captions) {
+      boxes.push(...caption.boxes.filter(clear))
+    }
+
+    const placed = placeLabelBoxes(boxes)
 
     for (const entry of this.markers.values()) {
-      const show = shown.has(entry.data.id)
+      const show = placed.has(entry.data.id)
 
       if (show !== entry.labelShown) {
         entry.labelShown = show
         entry.label.style.visibility = show ? "" : "hidden"
       }
+    }
+
+    for (const caption of captions) {
+      caption.show(placed.get(caption.id) ?? null)
     }
 
     this.markersDirty = false
@@ -490,9 +647,8 @@ class ThreeGlobeView implements GlobeView {
     for (const entry of this.markers.values()) {
       if (entry.screen === null) continue
       const distance = Math.hypot(entry.screen.x - x, entry.screen.y - y)
-      const reach = radiusPx + MARKER_SIZES[entry.data.emphasis] / 2
-      const priority =
-        entry.data.emphasis === "selected" ? 2 : entry.data.emphasis === "active" ? 1 : 0
+      const reach = radiusPx + entry.look.hitRadius
+      const priority = entry.look.priority
 
       // Co-located events must pick the dot drawn on top, not insertion order.
       if (
@@ -530,9 +686,40 @@ class ThreeGlobeView implements GlobeView {
     const width = this.container.clientWidth || 1
     const height = this.container.clientHeight || 1
     this.renderer.setSize(width, height, false)
+    this.applyProjection()
+  }
+
+  /**
+   * Sizes the projection to the canvas and moves its principal point to the
+   * centre of the clear zone. The full image is the canvas itself, so the
+   * scale is unchanged and only the centre moves; the camera controls, the
+   * tiles' culling and the overlay all read this one projection matrix.
+   */
+  private applyProjection(): void {
+    const width = this.container.clientWidth || 1
+    const height = this.container.clientHeight || 1
+    const offset = principalOffset(width, height, this.safeArea)
     this.camera.aspect = width / height
+
+    if (offset.x === 0 && offset.y === 0) {
+      this.camera.clearViewOffset()
+    } else {
+      this.camera.setViewOffset(width, height, offset.x, offset.y, width, height)
+    }
+
     this.camera.updateProjectionMatrix()
     this.dirty = true
+  }
+
+  /** The ground at the clear zone's centre, and the camera's height above the terrain. */
+  private cameraView(): GlobeCameraView {
+    const p = this.camera.position
+    const pose = this.currentPose()
+    const under = fromEcef(p.x, p.y, p.z)
+    return {
+      center: { lon: pose.lon, lat: pose.lat },
+      heightMeters: Math.max(1, under.height - this.heightAt(under.lon, under.lat)),
+    }
   }
 
   // Compiles every shader the globe can draw while the first view is on
@@ -588,15 +775,24 @@ class ThreeGlobeView implements GlobeView {
     const tiles = this.tiles
     const loading = tiles !== null && !tiles.settled
 
+    // Reported before the idle check: the camera coming to rest is a frame
+    // with nothing to draw, and it is the report the minimap needs most.
+    if (this.onViewChange && this.viewThrottle.frame(performance.now(), moved)) {
+      this.onViewChange(this.cameraView())
+    }
+
     if (!moved && !this.dirty && !loading) return
 
     this.lastCamera.copy(this.camera.matrixWorld)
     this.dirty = false
     this.updateAtmosphere()
     this.updateLight()
+    const p = this.camera.position
+    const under = fromEcef(p.x, p.y, p.z)
+    this.dioramas.update(under.height - this.heightAt(under.lon, under.lat), under)
     tiles?.update(this.camera, this.container.clientHeight || 1)
     this.renderer.render(this.scene, this.camera)
-    this.placeMarkers()
+    this.placeOverlay()
 
     if (!this.warmed && tiles?.rootsReady) {
       this.warmed = true
@@ -623,6 +819,8 @@ class ThreeGlobeView implements GlobeView {
     this.atmosphere.material.dispose()
     this.sky.geometry.dispose()
     this.sky.material.dispose()
+    this.dioramas.dispose()
+    this.lines.dispose()
     this.markers.clear()
     this.renderer.dispose()
     // Hand the WebGL context back now rather than at garbage collection:

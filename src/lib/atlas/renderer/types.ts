@@ -1,3 +1,4 @@
+import type { GeoPoint } from "../domain"
 import type { AtlasScene } from "../scene"
 
 /**
@@ -9,11 +10,25 @@ import type { AtlasScene } from "../scene"
  * implementation without touching state, time filtering, or fixtures.
  */
 
+/** Where the camera is looking, as the minimap draws it. */
+export type CameraView = {
+  /** The point on the ground at the centre of the clear zone. */
+  readonly center: GeoPoint
+  /** The camera's height above the ground, in metres. */
+  readonly heightMeters: number
+}
+
 export type AtlasRendererCallbacks = {
-  /** A map click selected an event, or `null` when the click hit nothing. */
-  onSelectEvent(eventId: string | null): void
+  /**
+   * A map click hit a place marker, or `null` when the click hit nothing. The
+   * map draws places, not events (RFD 1, "Places first"); the workspace decides
+   * whether a place with one event opens that event.
+   */
+  onSelectPlace(placeId: string | null): void
   /** The user panned, zoomed, or rotated the camera themselves. */
   onManualCameraInput(): void
+  /** The camera settled somewhere new; reported at most a few times a second. */
+  onViewChange?(view: CameraView): void
 }
 
 export interface AtlasRenderer {

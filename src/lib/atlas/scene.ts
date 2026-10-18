@@ -6,8 +6,17 @@ import type {
   HistoricalEvent,
   Occurrence,
 } from "./domain"
+import {
+  sceneArcs,
+  sceneDioramas,
+  sceneJourneys,
+  type SceneArc,
+  type SceneDiorama,
+  type SceneJourney,
+  type SceneTerritory,
+} from "./overlays"
 import type { AtlasState, CameraFocusRequest } from "./state"
-import { findEvent, playbackState, selectionTimeStatus } from "./state"
+import { findEvent, findPlace, playbackState, selectionTimeStatus } from "./state"
 import type { SearchMatchKind, SearchResult } from "./search"
 import { relationToWindow, type OccurrenceRelation, type PlaybackState } from "./time"
 
@@ -42,6 +51,53 @@ export type SceneEvent = {
   readonly coda: boolean
 }
 
+/**
+ * How a place is marked (RFD 1's evidence grammar, RFD 5's evidence tokens).
+ * `attested` is a site: a solid ring. `identified` is a locality or region: a
+ * soft halo whose size is the precision. `anchor` is a display anchor that
+ * places the name and asserts no historical coordinate: a small hollow
+ * diamond, never a ring, so it is not read as a surveyed site.
+ */
+export type PlaceMark = "attested" | "identified" | "anchor"
+
+/**
+ * One place on the map with the window's events at it (RFD 1, "Places
+ * first"): one marker, one label and a count, however many events it has.
+ */
+export type ScenePlace = {
+  readonly id: string
+  readonly label: string
+  readonly position: GeoPoint
+  readonly mark: PlaceMark
+  /** For an identified place, how wide the halo is: a region's is wider than a locality's. */
+  readonly precision: "site" | "locality" | "region" | "unspecified"
+  /** The window's events placed here. */
+  readonly eventCount: number
+  /** `possible` when every event here only partly overlaps the window. */
+  readonly tone: "definite" | "possible"
+  /** `active` when an event here is supported at the playhead, `possible` for an uncertain one. */
+  readonly playback: PlaybackState
+  /** The place is the selection, or the selected event's place. */
+  readonly selected: boolean
+  /** An event here carries a disputed account. */
+  readonly disputed: boolean
+}
+
+/**
+ * What the frame covers, in CSS pixels from each edge of the scene (RFD 5,
+ * "Scene safe area"). A view input like the canvas size, not state: the
+ * workspace measures its regions and the renderer frames flights into the
+ * clear zone between them.
+ */
+export type SafeArea = {
+  readonly top: number
+  readonly right: number
+  readonly bottom: number
+  readonly left: number
+}
+
+export const NO_INSETS: SafeArea = { top: 0, right: 0, bottom: 0, left: 0 }
+
 export type AtlasScene = {
   readonly chapterId: string
   readonly homeView: GeoPoint
@@ -49,11 +105,22 @@ export type AtlasScene = {
   readonly playhead: number
   readonly playing: boolean
   readonly events: readonly SceneEvent[]
+  /** The places the map marks, each once. */
+  readonly places: readonly ScenePlace[]
+  readonly journeys: readonly SceneJourney[]
+  readonly arcs: readonly SceneArc[]
+  readonly territories: readonly SceneTerritory[]
+  readonly dioramas: readonly SceneDiorama[]
   readonly selectedEventId: string | null
+  readonly selectedPlaceId: string | null
   readonly selectionOutsideWindow: boolean
   readonly cameraFollow: AtlasState["cameraFollow"]
   readonly cameraFocus: CameraFocusRequest | null
+  /** Changes when the reader asks for the chapter's opening view again. */
+  readonly homeToken: number
+  /** Where the focus request flies to, or null when there is no flight to make. */
   readonly cameraTarget: GeoPoint | null
+  readonly safeArea: SafeArea
 }
 
 /** The map position of a placement, or null when the atlas must not draw one. */
@@ -83,7 +150,83 @@ export function sceneEvent(
   }
 }
 
-export function buildScene(state: AtlasState, chapter: Chapter): AtlasScene {
+function placeMark(place: { placement: string; precision: string }): PlaceMark {
+  if (place.placement === "display-anchor") {
+    return "anchor"
+  }
+
+  return place.precision === "site" ? "attested" : "identified"
+}
+
+/** The places the scene's events stand at, plus a selected place with a position. */
+function scenePlaces(
+  state: AtlasState,
+  chapter: Chapter,
+  events: readonly SceneEvent[],
+): ScenePlace[] {
+  const selectedEvent = findEvent(chapter, state.selectedEventId)
+  const selectedPlaceId =
+    state.selectedPlaceId ??
+    (selectedEvent?.placement.kind === "point" ? selectedEvent.placement.placeId : null)
+  const byPlace = new Map<string, SceneEvent[]>()
+
+  for (const event of events) {
+    if (event.placement.kind === "point") {
+      byPlace.set(event.placement.placeId, [...(byPlace.get(event.placement.placeId) ?? []), event])
+    }
+  }
+
+  if (selectedPlaceId !== null && !byPlace.has(selectedPlaceId)) {
+    byPlace.set(selectedPlaceId, [])
+  }
+
+  return chapter.places.flatMap((place) => {
+    const here = byPlace.get(place.id)
+
+    if (here === undefined || place.position === null) {
+      return []
+    }
+
+    return [
+      {
+        id: place.id,
+        label: place.label,
+        position: place.position,
+        mark: placeMark(place),
+        precision: place.precision,
+        eventCount: here.length,
+        tone:
+          here.length > 0 && here.every((event) => event.relation === "possible")
+            ? "possible"
+            : "definite",
+        playback: here.some((event) => event.playback === "active")
+          ? "active"
+          : here.some((event) => event.playback === "possible")
+            ? "possible"
+            : "inactive",
+        selected: place.id === selectedPlaceId,
+        disputed: here.some((event) => event.dispute !== null),
+      },
+    ]
+  })
+}
+
+/** Where a focus request flies: the event's placed point or the place's position. */
+function focusTarget(chapter: Chapter, recordId: string): GeoPoint | null {
+  const event = findEvent(chapter, recordId)
+
+  if (event !== null) {
+    return placementPoint(event.placement)
+  }
+
+  return findPlace(chapter, recordId)?.position ?? null
+}
+
+export function buildScene(
+  state: AtlasState,
+  chapter: Chapter,
+  safeArea: SafeArea = NO_INSETS,
+): AtlasScene {
   const events: SceneEvent[] = []
 
   for (const event of chapter.events) {
@@ -102,9 +245,6 @@ export function buildScene(state: AtlasState, chapter: Chapter): AtlasScene {
     (a, b) => a.occurrence.startYear - b.occurrence.startYear || a.title.localeCompare(b.title),
   )
 
-  const selected = findEvent(chapter, state.selectedEventId)
-  const target = selected === null ? null : placementPoint(selected.placement)
-
   return {
     chapterId: chapter.id,
     homeView: chapter.homeView,
@@ -112,12 +252,22 @@ export function buildScene(state: AtlasState, chapter: Chapter): AtlasScene {
     playhead: state.playhead,
     playing: state.playing,
     events,
+    places: scenePlaces(state, chapter, events),
+    journeys: sceneJourneys(state, chapter),
+    arcs: sceneArcs(state, chapter),
+    territories: [],
+    dioramas: sceneDioramas(chapter),
     selectedEventId: state.selectedEventId,
+    selectedPlaceId: state.selectedPlaceId,
     selectionOutsideWindow: selectionTimeStatus(state, chapter) === "outside-window",
     cameraFollow: state.cameraFollow,
     cameraFocus: state.cameraFocus,
-    // Following moves the camera to a selection the map can actually show.
-    cameraTarget: state.cameraFollow === "following" ? target : null,
+    homeToken: state.homeToken,
+    // A focus request exists only when following or for an explicit jump, and
+    // flies to a position the map can actually show.
+    cameraTarget:
+      state.cameraFocus === null ? null : focusTarget(chapter, state.cameraFocus.recordId),
+    safeArea,
   }
 }
 

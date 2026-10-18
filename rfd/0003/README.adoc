@@ -19,8 +19,9 @@ link:CONTENT_BOUNDARY.adoc[the content boundary],
 link:COMPARISON_FIXTURE_BOUNDARY.adoc[the comparison fixture boundary],
 link:COMPARISON_REVIEW_ROUTE.adoc[the comparison review route],
 link:CHAPTER_PRESENTATION.adoc[the chapter presentation decision],
-link:CHAPTER_READER_ROUTE.adoc[the chapter reader route], and
-link:GLOBE_RENDERER.adoc[the globe renderer decision].
+link:CHAPTER_READER_ROUTE.adoc[the chapter reader route],
+link:GLOBE_RENDERER.adoc[the globe renderer decision], and
+link:ATLAS_FRAME.adoc[the atlas frame and scene contract].
 
 == Goal
 
@@ -135,7 +136,9 @@ the owner chose the custom globe; the other spikes were removed and the
 investigation records kept. The same day the custom globe replaced Cesium in
 the atlas, with its tiles built at deploy time and four sibling tiles to a
 file; the measurements are in link:GLOBE_RENDERER.adoc[the globe renderer
-decision].
+decision]. On 2026-10-14 the atlas moved onto RFD 5's frame, with places-first
+markers, journeys, arcs, the diorama, the address and search; that is in
+link:ATLAS_FRAME.adoc[the atlas frame and scene contract].
 
 === Timeline and diagrams
 

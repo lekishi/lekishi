@@ -95,12 +95,18 @@ function withSecondSet(
   const record = recordById(chapter, recordId)
   const published = publishedRevisionOf(record)
   const content = JSON.parse(JSON.stringify(published["content"])) as JsonObject
+  const current = objectOf(chapter.sets[0])
+  const currentPublishedAt = Date.parse(String(current["published_at"]))
+  const after = (minutes: number) => new Date(currentPublishedAt + minutes * 60_000).toISOString()
+  const revisionCreatedAt = after(1)
+  const reviewedAt = after(5)
+  const publishedAt = after(10)
 
   change(content)
 
   const revision: JsonObject = {
     revision_id: `${String(published["revision_id"]).replace(/-\d+$/, "")}-2`,
-    created_at: "2026-10-19T00:00:00Z",
+    created_at: revisionCreatedAt,
     author: { name: "Lekishi editorial preparation", role: "preparing editor (owner-instructed)" },
     change_explanation: "In-memory correction used to pin the ordering rule.",
     content,
@@ -112,14 +118,13 @@ function withSecondSet(
     published_revision_id: revision["revision_id"],
     published_revision_hash: revision["revision_hash"],
     set_id: setId,
-    published_at: "2026-10-19T00:10:00Z",
+    published_at: publishedAt,
     published_by: {
       name: "Lekishi editorial preparation",
       role: "preparing editor (owner-instructed)",
     },
   }
 
-  const current = objectOf(chapter.sets[0])
   const set: JsonObject = {
     contract: "lekishi-historical-contract/v0",
     document: "publication_set",
@@ -136,10 +141,10 @@ function withSecondSet(
     sources: JSON.parse(JSON.stringify(current["sources"])),
     review: {
       ...objectOf(current["review"]),
-      reviewed_at: "2026-10-19T00:05:00Z",
+      reviewed_at: reviewedAt,
       notes: "In-memory review record for the ordering test.",
     },
-    published_at: "2026-10-19T00:10:00Z",
+    published_at: publishedAt,
     published_by: {
       name: "Lekishi editorial preparation",
       role: "preparing editor (owner-instructed)",
@@ -242,13 +247,20 @@ describe("projecting the reviewed Tang chapter", () => {
     // revision of one record, the sets arrive newest-first (so file order cannot
     // be what decides), and the projection shows the newer content while the
     // tree on disk still shows the old one.
-    const corrected = withSecondSet(
-      cloneTree(tree()),
-      "lks:event:ships-separate-753",
-      (content) => {
-        content["places"] = []
-      },
-    )
+    const laterApproval = cloneTree(tree())
+    const laterPublishedAt = "2026-10-20T00:00:00Z"
+
+    objectOf(laterApproval.sets[0])["published_at"] = laterPublishedAt
+
+    for (const document of laterApproval.documents) {
+      if (document["document"] === "record" && isObject(document["publication"])) {
+        document["publication"]["published_at"] = laterPublishedAt
+      }
+    }
+
+    const corrected = withSecondSet(laterApproval, "lks:event:ships-separate-753", (content) => {
+      content["places"] = []
+    })
 
     const projected = project(corrected)
 

@@ -1107,8 +1107,6 @@ describe("the label positions the owner asked for", () => {
   it("publishes every reviewed addition as the record's one current revision", () => {
     const chapter = tree()
 
-    expect(chapterBundle(CHAPTER).state).not.toBe("stale")
-
     for (const recordId of ADDITIONS) {
       const record = recordById(chapter, recordId)
       const revision = publishedRevision(record)

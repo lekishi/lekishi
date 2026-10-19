@@ -47,7 +47,7 @@ const CONTRIBUTORS = { name: "Lekishi contributors", role: "record file authors 
  * The digest format version. Changing what the digest covers or how it is
  * encoded is a new version, because it would invalidate every approval at once.
  */
-export const DIGEST_VERSION = "lekishi-chapter-digest/1"
+export const DIGEST_VERSION = "lekishi-chapter-digest/2"
 
 export type Approval = { readonly digest: string; readonly by: string; readonly on: string }
 
@@ -224,11 +224,17 @@ function steps(manifest: AuthoringFile, lookup: Lookup): Step[] {
 /**
  * The digest an approval pins: the manifest without its approval, then every
  * record and source the chapter reaches, each as its kind, id and parsed
- * content, in id order. Parsed content, so a comment or reformatting never
- * re-opens an approval; a changed value always does, including a shared place
- * or a source's licence.
+ * content, in id order. A record also carries its compiled claim-id order,
+ * because the first quoted claim is reader-visible and follows the order of
+ * cited fields in the YAML file. Parsed content, so a comment or reformatting
+ * never re-opens an approval; a changed value or reader-visible claim order
+ * always does, including in a shared place or source licence.
  */
-export function chapterDigest(manifest: AuthoringFile, files: readonly AuthoringFile[]): string {
+export function chapterDigest(
+  manifest: AuthoringFile,
+  files: readonly AuthoringFile[],
+  claimOrder: ReadonlyMap<string, readonly string[]>,
+): string {
   const { approval, ...unapproved } = manifest.data
   void approval
 
@@ -237,7 +243,12 @@ export function chapterDigest(manifest: AuthoringFile, files: readonly Authoring
     chapter: manifest.name,
     manifest: unapproved,
     files: [...files]
-      .map((file) => ({ kind: file.kind, id: file.name, content: file.data }))
+      .map((file) => ({
+        kind: file.kind,
+        id: file.name,
+        content: file.data,
+        ...(file.kind === "source" ? {} : { claim_order: claimOrder.get(file.path) ?? [] }),
+      }))
       .sort((a, b) =>
         a.kind === b.kind ? a.id.localeCompare(b.id) : a.kind.localeCompare(b.kind),
       ),
@@ -366,6 +377,7 @@ export function compileChapter(
   const storySteps = steps(manifest, lookup)
   const records = new Map<string, JsonObject>()
   const reached: AuthoringFile[] = []
+  const claimOrder = new Map<string, string[]>()
   // A chapter may publish a record its story does not step through (an arc the
   // map draws, say); `include` names those, so the closure is still explicit.
   const included = (isList(manifest.data["include"]) ? manifest.data["include"] : []).map(
@@ -405,6 +417,10 @@ export function compileChapter(
       publication: null,
     })
     reached.push(file)
+    claimOrder.set(
+      file.path,
+      compiled.claims.map((claim) => String(claim["claim_id"])),
+    )
     pending.push(...references(kind, compiled.content))
 
     for (const source of cited(compiled.claims)) {
@@ -451,7 +467,7 @@ export function compileChapter(
     publication: null,
   })
 
-  const digest = chapterDigest(manifest, [...reached, ...sourceFiles])
+  const digest = chapterDigest(manifest, [...reached, ...sourceFiles], claimOrder)
   const approval = approvalOf(manifest)
   const state: ApprovalState =
     approval === null ? "draft" : approval.digest === digest ? "approved" : "stale"

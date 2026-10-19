@@ -523,6 +523,30 @@ does not serve a draft: production still never does.
   build invariant fails a draft without its banner or a banner on anything
   else.
 
+== Digest and gate corrections — 2026-10-19
+
+Review of PR #25 found two paths around the publication invariant and one path
+that prevented the decided preview workflow. The implementation was corrected
+without changing the decisions above:
+
+* The digest is now `lekishi-chapter-digest/2`. In addition to canonical parsed
+  values, it binds each record's compiled claim-id order. YAML mapping order
+  normally remains insignificant, but reordering cited fields changes which
+  quotation a reader meets first, so it now invalidates the approval exactly as
+  any other reader-visible content edit does. Moving to v2 makes both v1
+  approvals stale; the owner must review and approve the v2 digests rather than
+  having an agent carry the old decisions forward.
+* The publication gate compiles every discovered manifest with a preview set
+  and runs the complete v0 `Publication.checkAll` contract over it. The Tang and
+  Qin suites continue to enforce chapter-specific historical constraints, but a
+  third chapter can no longer bypass general source-licence, reference,
+  publication, ordering, or cycle rules merely because no named fixture suite
+  exists for it yet.
+* Chapter-specific tests no longer enforce approval freshness. The all-manifest
+  approval gate owns that environment-dependent rule: production rejects stale
+  approvals, while development and pull-request previews validate and serve the
+  changed content under a non-owner draft preview set.
+
 == Alternatives
 
 Chapter folders with a shared catalog for places, actors, and sources only::

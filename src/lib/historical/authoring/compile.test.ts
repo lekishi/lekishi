@@ -418,7 +418,7 @@ describe("the digest an approval pins", () => {
     )
   }
 
-  it("ignores comments, formatting and key order", () => {
+  it("ignores comments, formatting and key order that does not affect claim order", () => {
     const reformatted = PLACE.replace("types: [port]", "# a comment\ntypes:\n  - port").replace(
       "summary: An example harbour.",
       "summary: >-\n  An example\n  harbour.",
@@ -430,6 +430,28 @@ describe("the digest an approval pins", () => {
         "example-chapter",
       ).digest,
     ).toBe(digest)
+  })
+
+  it("invalidates an approval when YAML field order changes the claims readers see", () => {
+    const placesCite = `cites:
+  places:
+    says: The chronicle names the harbour as the landing place.
+    source: example-chronicle
+    at: 卷一
+`
+    const reordered = EVENT.replace(placesCite, "").replace("date:\n", `${placesCite}date:\n`)
+    const changed = approved(
+      `approval:\n  digest: ${digest}\n  by: Example Owner\n  on: 2026-10-19`,
+      { "events/example/deep/example-landing.yaml": reordered },
+    )
+    const event = record(changed.documents, "lks:event:example-landing")
+
+    expect((event["claims"] as JsonObject[]).map((claim) => claim["claim_id"])).toEqual([
+      "lks:claim:example-landing-places",
+      "lks:claim:example-landing-time",
+    ])
+    expect(changed.digest).not.toBe(digest)
+    expect(changed.state).toBe("stale")
   })
 
   it("moves when a record the chapter reaches changes, and not when an unreached one does", () => {

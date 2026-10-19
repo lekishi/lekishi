@@ -7,6 +7,7 @@ import {
   type ChapterBundle,
 } from "../authoring/compile"
 import { buildTree, readFiles, type TreeFile } from "../authoring/tree"
+import * as Publication from "./publication"
 import { objectOf } from "./types"
 
 /**
@@ -114,13 +115,27 @@ function approvalViolations(
   return violations
 }
 
+/** Full v0 publication violations for every discovered manifest. */
+function contractViolations(bundles: readonly ChapterBundle[]): string[] {
+  return bundles.flatMap((bundle) => {
+    const result = Publication.checkAll(bundle.documents, bundle.sets)
+
+    return result.ok
+      ? []
+      : result.errors.map((error) => `${bundle.id}: ${error.code} ${error.where}: ${error.detail}`)
+  })
+}
+
 const TANG = "tang-mission-750-754"
+const QIN = "qin-conquest-han-233-226"
 
 /** A record file the Tang chapter reaches, and one no chapter reaches. */
 const TANG_RECORD = "events/tang/akimeya-landfall-753.yaml"
 
 describe("publication approval gate", () => {
-  const bundles = compileAll(buildTree(files()))
+  // Preview sets let the contract validate draft and stale manifests too; the
+  // bundles' approval states remain the production gate's source of truth.
+  const bundles = compileAll(buildTree(files()), { preview: true })
 
   it("leaves no chapter stale and no approval misdated", () => {
     expect(approvalViolations(bundles, TODAY, { drafts: DRAFTS_SERVED })).toEqual([])
@@ -137,6 +152,53 @@ describe("publication approval gate", () => {
     for (const bundle of bundles.filter((entry) => entry.state === "approved")) {
       expect(bundle.approval?.digest, bundle.id).toBe(bundle.digest)
     }
+  })
+
+  it("validates every discovered chapter with the full publication contract", () => {
+    expect(contractViolations(bundles)).toEqual([])
+  })
+
+  it("rejects a newly discovered chapter whose compiled publication is invalid", () => {
+    const added: TreeFile[] = [
+      ...files(),
+      {
+        path: "sources/example-unlicensed.yaml",
+        text: `locator: entry
+kind: primary
+title: An unlicensed test source
+license:
+  status: unknown
+`,
+      },
+      {
+        path: "events/example-contract-invalid.yaml",
+        text: `summary: A synthetic event used only to exercise the all-chapter gate.
+types: [occurrence]
+date:
+  value: 750
+  calendar: gregorian
+  cite:
+    says: The unlicensed source dates the synthetic event.
+    source: example-unlicensed
+    at: example entry
+`,
+      },
+      {
+        path: "chapters/example-contract-invalid.yaml",
+        text: `title: An invalid synthetic chapter
+summary: A synthetic chapter used only to exercise the all-chapter gate.
+window: 750
+story:
+  summary: The invalid synthetic chapter.
+  span: 750
+  steps:
+    - example-contract-invalid: The synthetic event
+`,
+      },
+    ]
+    const violations = contractViolations(compileAll(buildTree(added), { preview: true }))
+
+    expect(violations.join("\n")).toContain("example-contract-invalid: unrecorded_source_license")
   })
 
   it("keeps the approval in the manifest, never in a record's revisions", () => {
@@ -231,23 +293,31 @@ describe("publication approval gate", () => {
     expect(approvalViolations([stale], TODAY, { drafts: true })).toEqual([])
     expect(approvalViolations([stale], TODAY).join("\n")).toContain("pnpm approvals")
     expect(objectOf(stale.sets[0]["published_by"])["role"]).toBe("draft preview, not approved")
+  })
 
-    const future = compiled(
-      approve(files(), TANG, compiled(files(), TANG).digest, "2999-01-01"),
-      TANG,
+  it("lets the preview gate validate stale Qin content as a draft", () => {
+    const changed = edit(files(), "events/qin/han-submission-233.yaml", (text) =>
+      text.replace(
+        /^summary: (.*)$/m,
+        "summary: $1 Edited after approval for the synthetic preview check.",
+      ),
     )
+    const stale = compileChapter(buildTree(changed), QIN, { preview: true })
 
-    expect(approvalViolations([future], TODAY, { drafts: true }).join("\n")).toContain(
-      "in the future",
-    )
+    expect(stale.state).toBe("stale")
+    expect(approvalViolations([stale], TODAY, { drafts: true })).toEqual([])
+    expect(contractViolations([stale])).toEqual([])
   })
 
   it("fails an approval dated before the record files or in the future", () => {
     const digest = compiled(files(), TANG).digest
-    const early = compiled(approve(files(), TANG, digest, "2026-09-27"), TANG)
-    const future = compiled(approve(files(), TANG, digest, "2999-01-01"), TANG)
+    const bundle = compiled(approve(files(), TANG, digest), TANG)
+    const early = { ...bundle, approval: { ...bundle.approval!, on: "2026-09-27" } }
+    const future = { ...bundle, approval: { ...bundle.approval!, on: "2999-01-01" } }
 
     expect(approvalViolations([early], TODAY).join("\n")).toContain("before the record files")
-    expect(approvalViolations([future], TODAY).join("\n")).toContain("in the future")
+    expect(approvalViolations([future], TODAY, { drafts: true }).join("\n")).toContain(
+      "in the future",
+    )
   })
 })

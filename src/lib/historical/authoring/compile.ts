@@ -230,16 +230,17 @@ function steps(manifest: AuthoringFile, lookup: Lookup): Step[] {
  * never re-opens an approval; a changed value or reader-visible claim order
  * always does, including in a shared place or source licence.
  */
-export function chapterDigest(
+function digest(
   manifest: AuthoringFile,
   files: readonly AuthoringFile[],
-  claimOrder: ReadonlyMap<string, readonly string[]>,
+  version: string,
+  claimOrder?: ReadonlyMap<string, readonly string[]>,
 ): string {
   const { approval, ...unapproved } = manifest.data
   void approval
 
   const payload = {
-    version: DIGEST_VERSION,
+    version,
     chapter: manifest.name,
     manifest: unapproved,
     files: [...files]
@@ -247,7 +248,9 @@ export function chapterDigest(
         kind: file.kind,
         id: file.name,
         content: file.data,
-        ...(file.kind === "source" ? {} : { claim_order: claimOrder.get(file.path) ?? [] }),
+        ...(file.kind === "source" || claimOrder === undefined
+          ? {}
+          : { claim_order: claimOrder.get(file.path) ?? [] }),
       }))
       .sort((a, b) =>
         a.kind === b.kind ? a.id.localeCompare(b.id) : a.kind.localeCompare(b.kind),
@@ -255,6 +258,26 @@ export function chapterDigest(
   }
 
   return `sha256:${sha256(encode(payload))}`
+}
+
+export function chapterDigest(
+  manifest: AuthoringFile,
+  files: readonly AuthoringFile[],
+  claimOrder: ReadonlyMap<string, readonly string[]>,
+): string {
+  return digest(manifest, files, DIGEST_VERSION, claimOrder)
+}
+
+/**
+ * Recomputes a v1 digest only so `pnpm approvals` can locate an approval's
+ * historical snapshot after the v2 upgrade. Publication state never calls
+ * this: a v1 approval remains stale until the owner approves its v2 digest.
+ */
+export function historicalChapterDigestV1(
+  manifest: AuthoringFile,
+  files: readonly AuthoringFile[],
+): string {
+  return digest(manifest, files, "lekishi-chapter-digest/1")
 }
 
 function approvalOf(manifest: AuthoringFile): Approval | null {

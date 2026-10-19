@@ -4,11 +4,18 @@ import { createInterface } from "node:readline/promises"
 import { readFileSync, writeFileSync } from "node:fs"
 import { parse } from "yaml"
 import { isList, isObject, type JsonObject, type JsonValue } from "../contract/types"
-import { compileAll, compileChapter, type Approval, type ChapterBundle } from "./compile"
+import {
+  compileAll,
+  compileChapter,
+  historicalChapterDigestV1,
+  type Approval,
+  type ChapterBundle,
+} from "./compile"
 import {
   buildTree,
   historicalDirectory,
   readFiles,
+  type AuthoringFile,
   type AuthoringTree,
   type TreeFile,
 } from "./tree"
@@ -130,9 +137,11 @@ export function viewsOf(
     if (document["document"] === "record") {
       const id = String(document["record_id"])
       const revision = shownRevision(document)
+      const claims = isList(revision["claims"]) ? revision["claims"].filter(isObject) : []
       const value: JsonObject = {
         content: revision["content"] ?? null,
-        claims: claimsByField(revision["claims"]),
+        claims: claimsByField(claims),
+        claim_order: claims.map((claim) => String(claim["claim_id"])),
       }
 
       if (revision["dispute"] !== undefined) {
@@ -288,17 +297,36 @@ function approvalIn(text: string | undefined): Approval | null {
     : null
 }
 
-/** How many commits the search for approved content reads before giving up. */
-const SEARCH_LIMIT = 300
+/** The record and source files a compiled closure reached, excluding its manifest. */
+function closureFiles(tree: AuthoringTree, bundle: ChapterBundle): AuthoringFile[] {
+  const byPath = new Map(
+    [...tree.records.values(), ...tree.sources.values()].map((file) => [file.path, file]),
+  )
+
+  return bundle.files.slice(1).map((file) => {
+    const found = byPath.get(file)
+
+    if (found === undefined) {
+      throw new Error(`${bundle.id}: compiled closure names missing file ${file}`)
+    }
+
+    return found
+  })
+}
+
+function sameApproval(left: Approval | null, right: Approval | null): boolean {
+  return left?.digest === right?.digest && left?.by === right?.by && left?.on === right?.on
+}
 
 /** Finds the content a chapter was last approved at, or its hand-written predecessor. */
 export function findBaseline(history: History, bundle: ChapterBundle): Baseline {
   const id = bundle.id
   const manifestPath = `chapters/${id}.yaml`
+  const manifestCommits = history.commits(`historical/${manifestPath}`)
   let approval = bundle.approval
 
   if (approval === null) {
-    for (const commit of history.commits(`historical/${manifestPath}`)) {
+    for (const commit of manifestCommits) {
       approval = approvalIn(history.files(commit).find((file) => file.path === manifestPath)?.text)
 
       if (approval !== null) {
@@ -308,27 +336,42 @@ export function findBaseline(history: History, bundle: ChapterBundle): Baseline 
   }
 
   if (approval !== null) {
-    for (const commit of history.commits("historical").slice(0, SEARCH_LIMIT)) {
-      let tree: AuthoringTree
-      let earlier: ChapterBundle
+    // A v1 digest cannot distinguish a mapping-order-only edit. Anchor recovery
+    // to the commit that introduced this approval block, rather than accepting
+    // any newer snapshot that happens to retain the same v1 digest.
+    const commit = manifestCommits.find((candidate) => {
+      const atCommit = approvalIn(
+        history.files(candidate).find((file) => file.path === manifestPath)?.text,
+      )
+      const beforeCommit = approvalIn(
+        history.files(`${candidate}^`).find((file) => file.path === manifestPath)?.text,
+      )
 
+      return sameApproval(atCommit, approval) && !sameApproval(beforeCommit, approval)
+    })
+
+    if (commit !== undefined) {
       try {
-        tree = buildTree(history.files(commit))
+        const tree = buildTree(history.files(commit))
+        const manifest = tree.chapters.get(id)
 
-        if (!tree.chapters.has(id)) {
-          continue
+        if (manifest !== undefined) {
+          const earlier = compileChapter(tree, id)
+          const historicalV1 = historicalChapterDigestV1(manifest, closureFiles(tree, earlier))
+
+          if (earlier.digest === approval.digest || historicalV1 === approval.digest) {
+            return { kind: "approval", commit, approval, views: chapterViews(tree, earlier) }
+          }
         }
-
-        earlier = compileChapter(tree, id)
       } catch {
-        // A commit the current schemas or compiler cannot read cannot hold the
-        // approved content either: the digest is over content they accept.
-        continue
+        // The explicit unavailable result below is safer than silently showing
+        // an older publication as though this approval had never happened.
       }
+    }
 
-      if (earlier.digest === approval.digest) {
-        return { kind: "approval", commit, approval, views: chapterViews(tree, earlier) }
-      }
+    return {
+      kind: "none",
+      reason: `The content ${approval.by} approved on ${approval.on} (${approval.digest}) could not be recovered from the commit that recorded it. No older baseline was substituted.`,
     }
   }
 
@@ -368,10 +411,7 @@ export function findBaseline(history: History, bundle: ChapterBundle): Baseline 
 
   return {
     kind: "none",
-    reason:
-      approval === null
-        ? "This chapter has never been approved, so everything in it is new."
-        : `No commit holds the content its approval of ${approval.on} pins (${approval.digest}), so everything is shown as new.`,
+    reason: "This chapter has never been approved, so everything in it is new.",
   }
 }
 

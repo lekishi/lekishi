@@ -535,7 +535,14 @@ without changing the decisions above:
   quotation a reader meets first, so it now invalidates the approval exactly as
   any other reader-visible content edit does. Moving to v2 makes both v1
   approvals stale; the owner must review and approve the v2 digests rather than
-  having an agent carry the old decisions forward.
+  having an agent carry the old decisions forward. `pnpm approvals` may
+  recompute v1 only at the commit that introduced that approval block, to locate
+  the historical approved snapshot; it never accepts a newer, order-only edit
+  with the same v1 digest, and never substitutes the older JSON set when that
+  snapshot is unavailable. The publication gate accepts only the current v2
+  digest. Its comparison keeps claim details keyed by asserted field and now
+  also shows their reader-visible order, so an order-only edit cannot produce an
+  empty approval diff.
 * The publication gate compiles every discovered manifest with a preview set
   and runs the complete v0 `Publication.checkAll` contract over it. The Tang and
   Qin suites continue to enforce chapter-specific historical constraints, but a

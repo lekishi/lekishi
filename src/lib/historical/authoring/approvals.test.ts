@@ -9,7 +9,7 @@ import {
   withApproval,
   type History,
 } from "./approvals"
-import { compileChapter, type ChapterBundle } from "./compile"
+import { compileChapter, historicalChapterDigestV1, type ChapterBundle } from "./compile"
 import { buildTree, readFiles, type TreeFile } from "./tree"
 
 /**
@@ -56,6 +56,34 @@ function compiled(source: TreeFile[]): ChapterBundle {
   return compileChapter(buildTree(source), TANG)
 }
 
+function v1Digest(source: TreeFile[]): string {
+  const tree = buildTree(source)
+  const bundle = compileChapter(tree, TANG)
+  const byPath = new Map(
+    [...tree.records.values(), ...tree.sources.values()].map((file) => [file.path, file]),
+  )
+  const reached = bundle.files.slice(1).map((path) => {
+    const file = byPath.get(path)
+
+    if (file === undefined) {
+      throw new Error(`missing ${path}`)
+    }
+
+    return file
+  })
+
+  return historicalChapterDigestV1(tree.chapters.get(TANG)!, reached)
+}
+
+function reorderLandfallClaims(source: TreeFile[]): TreeFile[] {
+  return edit(source, RECORD, (text) => {
+    const start = text.indexOf("cites:\n")
+    const cites = text.slice(start)
+
+    return text.slice(0, start).replace("date:\n", `${cites}date:\n`)
+  })
+}
+
 /** A history whose commits hold the given trees, newest first. */
 function history(
   commits: Record<string, TreeFile[]>,
@@ -77,7 +105,14 @@ describe("pnpm approvals", () => {
     const now = edit(approved(files(), digest), RECORD, edited)
     const bundle = compiled(now)
     const baseline = findBaseline(
-      history({ newer: now, approved: approved(files(), digest), older: [] }),
+      history(
+        {
+          newer: now,
+          approved: approved(files(), digest),
+          "approved^": files(),
+        },
+        { [`historical/${MANIFEST}`]: ["approved"] },
+      ),
       bundle,
     )
 
@@ -102,7 +137,7 @@ describe("pnpm approvals", () => {
     const bundle = compiled(files())
     const baseline = findBaseline(
       history(
-        { approved: approved(files(), digest) },
+        { approved: approved(files(), digest), "approved^": files() },
         { [`historical/${MANIFEST}`]: ["approved"] },
       ),
       bundle,
@@ -114,6 +149,82 @@ describe("pnpm approvals", () => {
       baseline.kind === "approval" &&
         compareViews(baseline.views, chapterViews(buildTree(files()), bundle)),
     ).toEqual([])
+  })
+
+  it("finds a v1 approval's snapshot without accepting it as a current approval", () => {
+    const before = files()
+    const v1 = approved(before, v1Digest(before))
+    const bundle = compiled(v1)
+    const baseline = findBaseline(
+      history(
+        { approvedV1: v1, "approvedV1^": before },
+        { [`historical/${MANIFEST}`]: ["approvedV1"] },
+      ),
+      bundle,
+    )
+
+    expect(bundle.state).toBe("stale")
+    expect(baseline.kind).toBe("approval")
+    expect(baseline.kind === "approval" && baseline.commit).toBe("approvedV1")
+    expect(
+      baseline.kind === "approval" &&
+        compareViews(baseline.views, chapterViews(buildTree(v1), bundle)),
+    ).toEqual([])
+  })
+
+  it("anchors a v1 baseline before a committed claim-order edit", () => {
+    const before = files()
+    const approvedV1 = approved(before, v1Digest(before))
+    const reordered = reorderLandfallClaims(approvedV1)
+    const bundle = compiled(reordered)
+    const baseline = findBaseline(
+      history(
+        { reordered, approvedV1, "approvedV1^": before },
+        { [`historical/${MANIFEST}`]: ["approvedV1"] },
+      ),
+      bundle,
+    )
+
+    expect(baseline.kind).toBe("approval")
+    expect(baseline.kind === "approval" && baseline.commit).toBe("approvedV1")
+
+    const changes =
+      baseline.kind === "approval"
+        ? compareViews(baseline.views, chapterViews(buildTree(reordered), bundle))
+        : []
+    const landfall = changes.find((change) => change.key === "lks:event:akimeya-landfall-753")
+
+    expect(landfall?.fields.map((field) => field.field)).toEqual([
+      "claim_order[0]",
+      "claim_order[1]",
+    ])
+  })
+
+  it("does not substitute a legacy set when a known approval cannot be recovered", () => {
+    const unknown = approved(files(), `sha256:${"0".repeat(64)}`)
+    const legacyPath = `chapters/${TANG}/publication-sets/${TANG}-v1.json`
+    const baseline = findBaseline(
+      history(
+        {
+          unknown,
+          "unknown^": files(),
+          removal: [],
+          "removal^": [
+            { path: legacyPath, text: JSON.stringify({ set_id: `lks:set:${TANG}-v1` }) },
+          ],
+        },
+        {
+          [`historical/${MANIFEST}`]: ["unknown"],
+          [`historical/chapters/${TANG}/publication-sets/`]: ["removal"],
+        },
+      ),
+      compiled(unknown),
+    )
+
+    expect(baseline).toMatchObject({
+      kind: "none",
+      reason: expect.stringContaining("No older baseline was substituted"),
+    })
   })
 
   it("compares a chapter never approved as record files with its hand-written set", () => {
@@ -166,7 +277,7 @@ describe("pnpm approvals", () => {
     expect(findBaseline(history({}), compiled(files()))).toMatchObject({ kind: "none" })
   })
 
-  it("follows a claim by the field it supports, not by its position or id", () => {
+  it("follows claim details by field while reporting reader-visible order", () => {
     const record: JsonObject = {
       document: "record",
       kind: "event",
@@ -186,7 +297,29 @@ describe("pnpm approvals", () => {
 
     claims.reverse()
 
-    expect(compareViews(viewsOf([record]), viewsOf([reordered]))).toEqual([])
+    const changes = compareViews(viewsOf([record]), viewsOf([reordered]))
+
+    expect(changes).toHaveLength(1)
+    expect(changes[0]?.fields.map((field) => field.field)).toEqual([
+      "claim_order[0]",
+      "claim_order[1]",
+    ])
+  })
+
+  it("reports a YAML field reorder that changes the leading claim", () => {
+    const beforeTree = buildTree(files())
+    const before = compileChapter(beforeTree, TANG, { preview: true })
+    const afterFiles = reorderLandfallClaims(files())
+    const afterTree = buildTree(afterFiles)
+    const after = compileChapter(afterTree, TANG, { preview: true })
+    const changes = compareViews(chapterViews(beforeTree, before), chapterViews(afterTree, after))
+    const landfall = changes.find((change) => change.key === "lks:event:akimeya-landfall-753")
+
+    expect(after.digest).not.toBe(before.digest)
+    expect(landfall?.fields.map((field) => field.field)).toEqual([
+      "claim_order[0]",
+      "claim_order[1]",
+    ])
   })
 
   it("writes an approval of the content shown and changes nothing else in the manifest", () => {

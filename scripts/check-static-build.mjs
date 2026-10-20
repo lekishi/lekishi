@@ -258,8 +258,10 @@ for (const redirect of REDIRECTS) {
 // longer has to carry it.
 
 // The root page presents the chapters as peers: one card per chapter, each with
-// its name, its window, its story summary, and an entry. The artifact must keep
-// both entries and the decision recorded on each chapter, and it must not carry
+// its name, its window, its story summary, and an entry. An approved chapter's
+// card states no decision (the owner's decision of 2026-10-20: it lives in the
+// chapter's About sheet), and a draft's card always states that it is a draft.
+// The page must not carry
 // the exact framings the owner rejected (a review category, the comparison
 // harness, the contract id) — a deploy cannot turn a chapter card back into a
 // note about the project's own process.
@@ -270,8 +272,14 @@ for (const chapter of CHAPTERS) {
 }
 
 for (const chapter of CHAPTERS) {
-  if (!indexHtml.includes(chapter.decision)) {
-    fail(`index.html does not state the recorded decision for ${chapter.id}`)
+  const approved = states.get(chapter.id)?.state === "approved"
+
+  if (approved && indexHtml.includes(chapter.decision)) {
+    fail(`index.html states the approval of ${chapter.id} on its card`)
+  }
+
+  if (!approved && !indexHtml.includes(chapter.decision)) {
+    fail(`index.html does not mark ${chapter.id} as a draft`)
   }
 }
 

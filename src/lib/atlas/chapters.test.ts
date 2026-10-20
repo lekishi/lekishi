@@ -14,9 +14,9 @@ import { yearLabel } from "./labels"
  * exactly one card, each card shows the window the projection gives its chapter,
  * and each card opens where that chapter is served. They also keep the cards
  * user-facing — the name and summary must not read as production notes about
- * contract sets, review categories, or preparation state — and keep each
- * chapter's editorial decision in the status line, where it is secondary metadata
- * rather than the chapter's identity.
+ * contract sets, review categories, or preparation state — and keep an approved
+ * chapter's card free of its approval line, which lives in the chapter's own
+ * page and About sheet (the owner's decision of 2026-10-20).
  */
 
 /** A served chapter's recorded decision, which every served chapter has. */
@@ -98,27 +98,16 @@ describe("the chapter cards", () => {
     }
   })
 
-  it("states each chapter's recorded decision as secondary metadata", () => {
-    const tang = chapterPresentation(TANG_CHAPTER)
-    const qin = chapterPresentation(QIN_CHAPTER)
+  it("states no approval on an approved chapter's card", () => {
+    for (const id of [TANG_CHAPTER, QIN_CHAPTER]) {
+      const card = chapterPresentation(id)
 
-    expect(tang?.status).toBe(release(TANG_CHAPTER).status)
-    expect(qin?.status).toBe(release(QIN_CHAPTER).status)
-
-    for (const [id, card] of [
-      [TANG_CHAPTER, tang],
-      [QIN_CHAPTER, qin],
-    ] as const) {
-      expect(card?.status, id).toContain("Owner-approved for release")
-      // The owner's editorial approval is not review, and the line must keep
-      // saying so rather than reading as independent or specialist sign-off.
-      expect(card?.status, id).toContain("Not independent or specialist review")
-      expect(card?.status, id).not.toContain("Independent review recorded")
-      expect(card?.status, id).not.toContain("Specialist review recorded")
+      // Every chapter production serves is approved, so the line would set no
+      // card apart; the decision and its caveat stay on the chapter's page.
+      expect(release(id).status, id).toContain("Owner-approved for release")
+      expect(card?.status, id).toBe("")
+      expect(card?.draft, id).toBe(false)
     }
-
-    expect(tang?.status).toContain(release(TANG_CHAPTER).decidedOn)
-    expect(qin?.status).toContain(release(QIN_CHAPTER).decidedOn)
   })
 
   it("opens each chapter where the product serves it", () => {

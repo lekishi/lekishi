@@ -74,7 +74,9 @@
               >
             </div>
             <p class="mt-1 line-clamp-2 text-body-sm text-ink-dim">{chapter.summary}</p>
-            <p class="mt-1 text-caption text-ink-faint">{chapter.status}</p>
+            {#if chapter.status !== ""}
+              <p class="mt-1 text-caption text-ink-faint">{chapter.status}</p>
+            {/if}
             {#if position && !here && position.search !== ""}
               <a
                 href="{chapter.href}{position.search}"

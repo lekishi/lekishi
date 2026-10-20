@@ -14,10 +14,12 @@ import { reviewSummaryLabel } from "./labels"
  * pins every card against the served chapters — one card per served chapter, and
  * each card's window is the window the projection gives that chapter.
  *
- * The status line is restrained secondary metadata: it states each chapter's
- * approval and the specialist caveat, and it is deliberately not what the card
- * leads with or what a chapter is for; `release.test.ts` cross-checks each stated
- * date against the chapter's approval.
+ * An approved chapter's card carries no status line. Every chapter production
+ * serves is approved, so the line told a reader nothing that set one chapter
+ * apart, and the owner decided on 2026-10-20 to drop it: the decision and the
+ * specialist-review caveat stay in the chapter's About sheet and in its
+ * prerendered page. Only a draft, which only development and pull-request
+ * previews serve, keeps a status line, so it can never read as approved.
  *
  * A chapter's window is shown in the atlas's own year text (`750–754`,
  * `233 BCE–226 BCE`), never in the astronomical ordinals the domain computes
@@ -34,7 +36,7 @@ export type ChapterCard = {
   readonly window: TimeWindow
   /** Where the chapter opens. */
   readonly href: string
-  /** The chapter's editorial decision, stated as secondary metadata. */
+  /** The card's status line: a draft's statement, or empty for an approved chapter. */
   readonly status: string
   /**
    * Whether the chapter is a draft this build serves without the owner's
@@ -61,7 +63,7 @@ export const CHAPTERS: readonly ChapterCard[] = CHAPTER_MANIFESTS.filter(
   summary: manifest.summary,
   window: manifest.window,
   href: chapterHref(manifest.id),
-  status: chapterRelease(manifest.id)?.status ?? chapterDraft(manifest.id)?.status ?? "",
+  status: chapterDraft(manifest.id)?.status ?? "",
   draft: chapterDraft(manifest.id) !== undefined,
 }))
 
@@ -106,7 +108,7 @@ export function chapterHeading(chapter: Chapter): ChapterHeading {
       chapterRelease(card.id)?.decision ??
       draft?.decision ??
       reviewSummaryLabel(chapter.publication.independence),
-    status: card.status,
+    status: chapterRelease(card.id)?.status ?? draft?.status ?? card.status,
     draft: draft !== undefined,
   }
 }

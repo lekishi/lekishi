@@ -1023,12 +1023,10 @@ test("presents both chapters from the root page as peer entries", async ({ page 
   await expect(qin).toContainText("韓非")
   await expect(qin.getByRole("link", { name: /Open the chapter/ })).toBeVisible()
 
-  // Editorial state is secondary metadata in the card, never its pitch: the two
-  // cards are peers, and each states the decision its manifest records.
-  await expect(tang).toContainText(TANG_DECISION)
-  await expect(tang).toContainText("Not independent or specialist review")
-  await expect(qin).toContainText(QIN_DECISION)
-  await expect(qin).toContainText("Not independent or specialist review")
+  // An approved chapter's card states no decision (the owner's decision of
+  // 2026-10-20); the chapter's page and About sheet state it.
+  await expect(tang).not.toContainText(TANG_DECISION)
+  await expect(qin).not.toContainText(QIN_DECISION)
 
   // The page is a reader's entry point: no review categories, no contract
   // records, and no comparison-harness rationale.

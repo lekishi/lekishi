@@ -2,8 +2,10 @@ import type { ChapterEntry } from "virtual:lekishi-chapters"
 import { CHAPTER_MANIFESTS } from "./chapter-registry"
 
 /**
- * The editorial state the chapter cards and pages state, one entry per served
- * chapter.
+ * The editorial state the chapter pages state, one entry per served chapter.
+ * The home page's cards state only a draft's line: the owner decided on
+ * 2026-10-20 that an approved chapter's card carries no approval line, since
+ * every chapter production serves is approved.
  *
  * A served chapter is one whose manifest carries the owner's approval of its
  * exact content (RFD 2's digest approval), so the atlas states that approval and

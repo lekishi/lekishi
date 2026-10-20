@@ -241,11 +241,13 @@
                 <Icon name="arrow-right" size={16} />
               </a>
             </div>
-            <!--
-              Editorial state: one line after the entry, in every card, so the
-              cards read alike and the status is never the card's identity.
-            -->
-            <p class="mt-3 text-caption text-ink-dim">{chapter.status}</p>
+            {#if chapter.status !== ""}
+              <!--
+                Only a draft has a status line, after the entry; an approved
+                chapter's decision lives in its About sheet.
+              -->
+              <p class="mt-3 text-caption text-ink-dim">{chapter.status}</p>
+            {/if}
           </article>
         {/each}
       </div>

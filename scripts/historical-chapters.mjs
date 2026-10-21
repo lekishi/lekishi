@@ -43,6 +43,19 @@ export const INDEX_ID = "virtual:lekishi-chapters"
 
 const RESOLVED = `\0${INDEX_ID}`
 
+/**
+ * The chapters a production build leaves out of the public site, compiled as
+ * their draft previews for the Pages worker to show signed-in members of the
+ * `lekishi` organization (RFD 6). Only the server bundle may import it: the
+ * plugin refuses to load it for the browser, and `$lib/server/drafts.ts`, its
+ * only importer, is server-only by SvelteKit's rule. A build that serves drafts
+ * publicly (development and previews) has none here; they are all in
+ * `virtual:lekishi-chapters`.
+ */
+export const DRAFTS_ID = "virtual:lekishi-drafts"
+
+const RESOLVED_DRAFTS = `\0${DRAFTS_ID}`
+
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 
 const HISTORICAL = path.join(ROOT, "historical")
@@ -97,8 +110,18 @@ export function historicalChapters({ drafts = false } = {}) {
   /** @type {Promise<ChapterBundle[]> | undefined} */
   let bundles
 
+  /** @type {Promise<ChapterBundle[]> | undefined} */
+  let memberBundles
+
   /** @param {ChapterBundle} bundle */
   const served = (bundle) => bundle.state === "approved" || drafts
+
+  /** The chapters this build leaves out, as draft previews for members. */
+  async function memberDrafts() {
+    if (drafts) return []
+    memberBundles ??= compileChapters(true)
+    return (await memberBundles).filter((bundle) => bundle.state !== "approved")
+  }
 
   /** The chapters this build serves; the rest are left out with a warning. */
   async function compiled() {
@@ -118,9 +141,10 @@ export function historicalChapters({ drafts = false } = {}) {
   /** @param {import("vite").ViteDevServer} server */
   function invalidate(server) {
     bundles = undefined
+    memberBundles = undefined
 
     for (const module of server.moduleGraph.idToModuleMap.values()) {
-      if (module.id?.startsWith(RESOLVED)) {
+      if (module.id?.startsWith(RESOLVED) || module.id === RESOLVED_DRAFTS) {
         server.moduleGraph.invalidateModule(module)
       }
     }
@@ -132,11 +156,42 @@ export function historicalChapters({ drafts = false } = {}) {
     name: "lekishi-historical-chapters",
     buildStart() {
       bundles = undefined
+      memberBundles = undefined
     },
     resolveId(id) {
-      return id === INDEX_ID || id.startsWith(`${INDEX_ID}/`) ? `\0${id}` : undefined
+      return id === INDEX_ID || id.startsWith(`${INDEX_ID}/`) || id === DRAFTS_ID
+        ? `\0${id}`
+        : undefined
     },
-    async load(id) {
+    async load(id, options) {
+      if (id === RESOLVED_DRAFTS) {
+        if (!options?.ssr) {
+          throw new Error(`${DRAFTS_ID} holds unapproved chapters and must never reach the browser`)
+        }
+
+        const unserved = await memberDrafts()
+        const index = unserved.map((bundle) => ({
+          id: bundle.id,
+          title: bundle.title,
+          summary: bundle.summary,
+          window: bundle.window,
+          state: bundle.state,
+          served: false,
+          approval: bundle.approval,
+        }))
+        const contents = Object.fromEntries(
+          unserved.map((bundle) => [bundle.id, { documents: bundle.documents, sets: bundle.sets }]),
+        )
+
+        return [
+          `export const DRAFT_CHAPTERS = ${JSON.stringify(index)}`,
+          `const contents = ${JSON.stringify(contents)}`,
+          "export function loadDraftBundle(id) {",
+          "  return Object.hasOwn(contents, id) ? contents[id] : undefined",
+          "}",
+        ].join("\n")
+      }
+
       if (id === RESOLVED) {
         const all = await compiled()
         const index = all.map((bundle) => ({

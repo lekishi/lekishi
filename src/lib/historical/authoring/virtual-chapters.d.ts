@@ -40,3 +40,24 @@ declare module "virtual:lekishi-chapters" {
     | undefined
   >
 }
+
+/**
+ * The chapters a production build leaves out of the public site, as draft
+ * previews, for the Pages worker to show signed-in members (RFD 6). Server-only:
+ * the plugin refuses to load it for the browser. Empty on a build that serves
+ * drafts publicly.
+ */
+declare module "virtual:lekishi-drafts" {
+  import type { ChapterEntry } from "virtual:lekishi-chapters"
+
+  /** Every chapter left out of the public site, in id order. */
+  export const DRAFT_CHAPTERS: readonly ChapterEntry[]
+
+  /** A left-out chapter's draft preview documents and set, or undefined. */
+  export function loadDraftBundle(id: string):
+    | {
+        readonly documents: import("../contract/types").JsonObject[]
+        readonly sets: import("../contract/types").JsonObject[]
+      }
+    | undefined
+}

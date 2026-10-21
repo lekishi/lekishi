@@ -630,6 +630,32 @@ if (strayScripts.length > 0) {
   fail(`unexpected scripts outside _app/: ${strayScripts.map(inBuild).join(", ")}`)
 }
 
+// --- members' drafts ------------------------------------------------------------
+
+// A production build leaves every unapproved chapter out of the public site,
+// and the worker shows it only to signed-in members (RFD 6). No file a static
+// host serves may name one: not its id, its title or its summary, in a page, a
+// script, a data file or the search index. Binary files (tiles, fonts, images)
+// cannot carry them and are skipped.
+const TEXT_FILE = /\.(html|js|json|css|txt|xml|svg|webmanifest)$/
+
+if (!drafts) {
+  const unserved = [...states.values()].filter((bundle) => !served(bundle.id))
+  const texts = files
+    .filter((file) => file !== workerFile && TEXT_FILE.test(file))
+    .map((file) => ({ file, text: read(file) }))
+
+  for (const bundle of unserved) {
+    for (const marker of [bundle.id, bundle.title, bundle.summary]) {
+      const leak = texts.find(({ text }) => text.includes(marker))
+
+      if (leak !== undefined) {
+        fail(`${inBuild(leak.file)} names the unapproved chapter ${bundle.id}: ${marker}`)
+      }
+    }
+  }
+}
+
 // --- the /dev pages ----------------------------------------------------------
 
 // The `/dev` pages (the design reference among them) are built in development

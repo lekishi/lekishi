@@ -1,7 +1,8 @@
 # yaml-language-server: $schema=../../schema/place.schema.json
 summary:
   Tyre, the Phoenician island city that refused Alexander entry and fell to him in 332 BCE after
-  a seven-month siege and the building of a mole from the mainland.
+  a seven-month siege and the building of a mole from the mainland. Under Rome it was a port of
+  the province of Syria, where Paul's ship unloaded and he stayed seven days with the disciples.
 types: [settlement, port]
 names:
   - form: Τύρος
@@ -20,6 +21,12 @@ names:
         source: arrian-anabasis
         at: II.24
         quote: Thus then was Tyre captured in the month Hecatombaion, when Anicetus was archon at Athens.
+        role: supporting
+      - id: tyre-name-acts
+        says: Acts tells that they sailed into Syria and landed at Tyre, where the ship was to unload.
+        source: bible-kjv
+        at: "Acts 21:3"
+        quote: and sailed into Syria, and landed at Tyre
         role: supporting
   - form: Tyre
     lang: en

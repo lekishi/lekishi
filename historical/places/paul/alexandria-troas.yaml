@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Alexandria Troas, the Roman colony on the Aegean coast of the Troad, where Paul saw the man of
+  Macedonia in a vision and later raised Eutychus.
+types: [port, settlement]
+names:
+  - form: Troas
+    lang: en
+    script: Latn
+    cite:
+      - id: troas-name
+        says: Acts tells that they passed by Mysia and came down to Troas.
+        source: bible-kjv
+        at: "Acts 16:8"
+        quote: And they passing by Mysia came down to Troas.
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [26.15756, 39.7517]
+    notes: The gazetteer's point for the excavated colony near Dalyan.
+    cite:
+      - id: alexandria-troas-location
+        says:
+          Pleiades gives this representative point for Alexandria Troas, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 550434 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "550434"

@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Thessalonica, the chief city of the province of Macedonia, where Paul preached in the synagogue
+  until a crowd attacked the house of Jason.
+types: [capital, port, settlement]
+names:
+  - form: Thessalonica
+    lang: en
+    script: Latn
+    cite:
+      - id: thessalonica-name
+        says: Acts tells that they came to Thessalonica, where there was a synagogue of the Jews.
+        source: bible-kjv
+        at: "Acts 17:1"
+        quote: they came to Thessalonica, where was a synagogue of the Jews
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [22.95288, 40.62834]
+    notes: The gazetteer's point for the ancient city under modern Thessaloniki.
+    cite:
+      - id: thessalonica-location
+        says: Pleiades gives this representative point for Thessalonica, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 491741 (reprLatLong), dump 2026-10-21
+modern:
+  - form: Θεσσαλονίκη
+    lang: el
+    note: The modern city.
+external_ids:
+  - system: pleiades
+    id: "491741"

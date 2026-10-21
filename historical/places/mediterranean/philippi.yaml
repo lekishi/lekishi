@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Philippi, a Roman colony in eastern Macedonia, where Acts tells that Lydia was baptised and Paul
+  and Silas were beaten and imprisoned.
+types: [settlement]
+names:
+  - form: Philippi
+    lang: en
+    script: Latn
+    cite:
+      - id: philippi-name
+        says: Acts calls Philippi the chief city of that part of Macedonia, and a colony.
+        source: bible-kjv
+        at: "Acts 16:12"
+        quote: And from thence to Philippi, which is the chief city of that part of Macedonia, and a
+          colony
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [24.33451, 41.02518]
+    notes: The gazetteer's point for the excavated city near Krinides.
+    cite:
+      - id: philippi-location
+        says: Pleiades gives this representative point for Philippi, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 501564 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "501564"

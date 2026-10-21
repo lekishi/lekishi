@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Antioch on the Orontes, the capital of the Roman province of Syria. Acts tells that the disciples
+  were first called Christians there, and that its church sent Barnabas and Saul out on the first
+  mission and received them back after each journey.
+types: [capital, settlement]
+names:
+  - form: Antioch
+    lang: en
+    script: Latn
+    note: The King James form; Acts distinguishes it from Antioch in Pisidia.
+    cite:
+      - id: antioch-orontes-name
+        says: Acts tells that the disciples were first called Christians in Antioch.
+        source: bible-kjv
+        at: "Acts 11:26"
+        quote: And the disciples were called Christians first in Antioch.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [36.17684, 36.21589]
+    notes: The gazetteer's point for the ancient city under modern Antakya.
+    cite:
+      - id: antioch-on-the-orontes-location
+        says:
+          Pleiades gives this representative point for Antiochia on the Orontes, with its location
+          precision recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 658381 (reprLatLong), dump 2026-10-21
+modern:
+  - form: Antakya
+    lang: tr
+    note: The modern town.
+external_ids:
+  - system: pleiades
+    id: "658381"

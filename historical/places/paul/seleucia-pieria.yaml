@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Seleucia Pieria, the port of Antioch at the mouth of the Orontes, from which Barnabas and Saul
+  sailed for Cyprus.
+types: [port, settlement]
+names:
+  - form: Seleucia
+    lang: en
+    script: Latn
+    cite:
+      - id: seleucia-pieria-name
+        says: Acts tells that Barnabas and Saul went down to Seleucia and sailed from there to Cyprus.
+        source: bible-kjv
+        at: "Acts 13:4"
+        quote: departed unto Seleucia; and from thence they sailed to Cyprus.
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [35.9286, 36.12126]
+    notes: The gazetteer's point for the excavated harbour city near Çevlik.
+    cite:
+      - id: seleucia-pieria-location
+        says:
+          Pleiades gives this representative point for Seleukeia Pieria, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 658483 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "658483"

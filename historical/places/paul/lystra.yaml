@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Lystra, a Roman colony in Lycaonia, where Acts tells that the crowd took Barnabas and Paul for
+  Jupiter and Mercury and later stoned Paul.
+types: [settlement]
+names:
+  - form: Lystra
+    lang: en
+    script: Latn
+    cite:
+      - id: lystra-name
+        says: Acts calls Lystra and Derbe cities of Lycaonia.
+        source: bible-kjv
+        at: "Acts 14:6"
+        quote: fled unto Lystra and Derbe, cities of Lycaonia
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [32.34447, 37.58828]
+    notes: The gazetteer's point for the mound at Hatunsaray identified as Lystra.
+    cite:
+      - id: lystra-location
+        says:
+          Pleiades gives this representative point for Lystra, with its location precision recorded
+          as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 648699 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "648699"

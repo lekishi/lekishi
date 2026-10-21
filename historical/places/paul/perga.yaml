@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Perga in Pamphylia, where John Mark left Paul and Barnabas, and where they preached on their way
+  back to the coast.
+types: [settlement]
+names:
+  - form: Perga
+    lang: en
+    script: Latn
+    cite:
+      - id: perga-name
+        says: Acts tells that from Paphos Paul and his company came to Perga in Pamphylia.
+        source: bible-kjv
+        at: "Acts 13:13"
+        quote: they came to Perga in Pamphylia
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [30.85326, 36.96447]
+    notes: The gazetteer's point for the excavated city near Aksu.
+    cite:
+      - id: perga-location
+        says:
+          Pleiades gives this representative point for Perge, with its location precision recorded
+          as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 639048 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "639048"

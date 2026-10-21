@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Myra, a city of Lycia, where the centurion moved Paul and the other prisoners to a ship of
+  Alexandria bound for Italy.
+types: [settlement]
+names:
+  - form: Myra
+    lang: en
+    script: Latn
+    cite:
+      - id: myra-name
+        says: Acts calls Myra a city of Lycia.
+        source: bible-kjv
+        at: "Acts 27:5"
+        quote: we came to Myra, a city of Lycia.
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [29.98545, 36.25856]
+    notes: The gazetteer's point for the excavated city at Demre.
+    cite:
+      - id: myra-location
+        says:
+          Pleiades gives this representative point for Myra, with its location precision recorded as
+          "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 639005 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "639005"

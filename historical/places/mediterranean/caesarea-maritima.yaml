@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Caesarea, Herod's harbour city on the coast of Judaea and the seat of its Roman governors, where
+  Paul landed on his journeys and was held for two years under Felix.
+types: [capital, port, settlement]
+names:
+  - form: Caesarea
+    lang: en
+    script: Latn
+    note: The King James form; the city is Caesarea Maritima, not Caesarea Philippi.
+    cite:
+      - id: caesarea-maritima-name
+        says: Acts tells that the soldiers came to Caesarea and presented Paul to the governor.
+        source: bible-kjv
+        at: "Acts 23:33"
+        quote:
+          Who, when they came to Caesarea and delivered the epistle to the governor, presented Paul
+          also before him.
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [34.89245, 32.50184]
+    notes: The gazetteer's point for the excavated city at Caesarea.
+    cite:
+      - id: caesarea-maritima-location
+        says: Pleiades gives this representative point for Caesarea (Stratonos Pyrgos), with its
+          location precision recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 678401 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "678401"

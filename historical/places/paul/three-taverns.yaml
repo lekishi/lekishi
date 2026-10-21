@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Tres Tabernae (the Three Taverns), a station on the Via Appia nearer Rome, where a second group of
+  brethren met Paul.
+types: [route_node]
+names:
+  - form: The three taverns
+    lang: en
+    script: Latn
+    cite:
+      - id: three-taverns-name
+        says: Acts names The three taverns as the second meeting place.
+        source: bible-kjv
+        at: "Acts 28:15"
+        quote: and The three taverns
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [12.87428, 41.56168]
+    notes: The gazetteer's point for the station on the Via Appia.
+    cite:
+      - id: three-taverns-location
+        says:
+          Pleiades gives this representative point for Tres Tabernae, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 423106 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "423106"

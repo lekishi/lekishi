@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Salamis, the chief port of eastern Cyprus, where Barnabas and Saul first preached on the island in
+  the synagogues of the Jews.
+types: [port, settlement]
+names:
+  - form: Salamis
+    lang: en
+    script: Latn
+    cite:
+      - id: salamis-cyprus-name
+        says: Acts tells that at Salamis they preached in the synagogues of the Jews.
+        source: bible-kjv
+        at: "Acts 13:5"
+        quote: And when they were at Salamis, they preached the word of God in the synagogues of the Jews
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [33.90286, 35.17958]
+    notes: The gazetteer's point for the excavated city north of Famagusta.
+    cite:
+      - id: salamis-cyprus-location
+        says: Pleiades gives this representative point for Salamis on Cyprus, with its location
+          precision recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 707617 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "707617"
+notes: Not the Attic island of Salamis.

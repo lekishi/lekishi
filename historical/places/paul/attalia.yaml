@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Attalia, the port of Pamphylia, from which Paul and Barnabas sailed home to Antioch.
+types: [port, settlement]
+names:
+  - form: Attalia
+    lang: en
+    script: Latn
+    cite:
+      - id: attalia-name
+        says: Acts tells that after preaching in Perga they went down to Attalia.
+        source: bible-kjv
+        at: "Acts 14:25"
+        quote: they went down into Attalia
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [30.69997, 36.89031]
+    notes: The gazetteer's point for the ancient harbour town under modern Antalya.
+    cite:
+      - id: attalia-location
+        says:
+          Pleiades gives this representative point for Attalea, with its location precision recorded
+          as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 638778 (reprLatLong), dump 2026-10-21
+modern:
+  - form: Antalya
+    lang: tr
+    note: The modern town.
+external_ids:
+  - system: pleiades
+    id: "638778"

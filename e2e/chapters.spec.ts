@@ -17,7 +17,7 @@ import {
   sheet,
   sheetHandle,
 } from "./workspace"
-import { TANG_DECISION, QIN_DECISION, decisionElement } from "./approvals"
+import { TANG_DECISION, QIN_DECISION, approved, decisionElement } from "./approvals"
 
 /**
  * Browser checks for the chapter routes and the screens around the atlas.
@@ -68,7 +68,11 @@ test("serves the Tang chapter as an ordinary chapter page", async ({ page, reque
   const html = await (await request.get(TANG)).text()
 
   expect(html).toMatch(decisionElement(TANG_DECISION))
-  expect(html).toContain("Not independent or specialist review")
+
+  // An approval keeps the specialist caveat; a draft says it is a preview instead.
+  if (approved("tang-mission-750-754")) {
+    expect(html).toContain("Not independent or specialist review")
+  }
 
   const problems = collectProblems(page)
 
@@ -1024,9 +1028,18 @@ test("presents both chapters from the root page as peer entries", async ({ page 
   await expect(qin.getByRole("link", { name: /Open the chapter/ })).toBeVisible()
 
   // An approved chapter's card states no decision (the owner's decision of
-  // 2026-10-20); the chapter's page and About sheet state it.
-  await expect(tang).not.toContainText(TANG_DECISION)
-  await expect(qin).not.toContainText(QIN_DECISION)
+  // 2026-10-20); the chapter's page and About sheet state it. A draft's card
+  // says it is a draft.
+  for (const [card, id, decision] of [
+    [tang, "tang-mission-750-754", TANG_DECISION],
+    [qin, "qin-conquest-han-233-226", QIN_DECISION],
+  ] as const) {
+    if (approved(id)) {
+      await expect(card).not.toContainText(decision)
+    } else {
+      await expect(card).toContainText(decision)
+    }
+  }
 
   // The page is a reader's entry point: no review categories, no contract
   // records, and no comparison-harness rationale.

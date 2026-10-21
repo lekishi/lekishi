@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest"
 import { listChapters } from "../historical/chapter"
 import { loadServedChapter } from "./chapter-catalog"
-import { QIN_CHAPTER, SERVED_CHAPTERS, TANG_CHAPTER } from "./chapter-registry"
+import { CHAPTER_MANIFESTS, QIN_CHAPTER, SERVED_CHAPTERS, TANG_CHAPTER } from "./chapter-registry"
 import { CHAPTERS, chapterHeading, chapterHref, chapterPresentation } from "./chapters"
-import { chapterRelease, type ChapterRelease } from "./release"
+import { chapterDraft, chapterRelease, type ChapterRelease } from "./release"
 import { yearLabel } from "./labels"
 
 /**
@@ -29,6 +29,16 @@ function release(id: string): ChapterRelease {
 
   return recorded
 }
+
+/**
+ * The chapters approved at their current content. CI runs the suite with drafts
+ * served, so a chapter awaiting the owner's approval is served as a draft and
+ * its card is held to the draft's rules instead; the publication gate is its
+ * own check.
+ */
+const APPROVED = CHAPTER_MANIFESTS.filter((entry) => entry.state === "approved").map(
+  (entry) => entry.id,
+)
 
 describe("the chapter cards", () => {
   it("covers every served chapter exactly once, by id and by name", () => {
@@ -99,7 +109,7 @@ describe("the chapter cards", () => {
   })
 
   it("states no approval on an approved chapter's card", () => {
-    for (const id of [TANG_CHAPTER, QIN_CHAPTER]) {
+    for (const id of APPROVED) {
       const card = chapterPresentation(id)
 
       // Every chapter production serves is approved, so the line would set no
@@ -122,10 +132,15 @@ describe("the chapter cards", () => {
   it("states a chapter's heading from its card, and falls back to the publication", async () => {
     const tang = await loadServedChapter(TANG_CHAPTER)
     const heading = chapterHeading(tang)
+    // An approved chapter's heading carries its release; a draft's, its draft
+    // statement.
+    const stated = chapterRelease(TANG_CHAPTER) ?? chapterDraft(TANG_CHAPTER)
 
     expect(heading.name).toBe("The embassy to Tang China")
-    expect(heading.decision).toBe(release(TANG_CHAPTER).decision)
-    expect(heading.status).toBe(release(TANG_CHAPTER).status)
+    expect(stated).toBeDefined()
+    expect(heading.decision).toBe(stated?.decision)
+    expect(heading.status).toBe(stated?.status)
+    expect(heading.draft).toBe(!APPROVED.includes(TANG_CHAPTER))
 
     // A chapter without a card still renders: the heading uses the chapter's own
     // published title and the review independence its publication records.

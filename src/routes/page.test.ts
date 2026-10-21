@@ -2,7 +2,7 @@
 import { afterEach, describe, expect, it } from "vitest"
 import { mount, unmount } from "svelte"
 import { CHAPTERS, chapterPresentation } from "../lib/atlas/chapters"
-import { QIN_CHAPTER, TANG_CHAPTER } from "../lib/atlas/chapter-registry"
+import { CHAPTER_MANIFESTS, QIN_CHAPTER } from "../lib/atlas/chapter-registry"
 import { windowLabel } from "../lib/atlas/labels"
 import { chapterRelease } from "../lib/atlas/release"
 import Home from "./+page.svelte"
@@ -103,9 +103,12 @@ describe("the root page", () => {
   it("keeps the approval line off an approved chapter's card", () => {
     const host = render()
 
-    // The owner's decision of 2026-10-20: every served chapter is approved, so
-    // the card states no decision; the chapter's page and About sheet do.
-    for (const id of [TANG_CHAPTER, QIN_CHAPTER]) {
+    // The owner's decision of 2026-10-20: every chapter production serves is
+    // approved, so the card states no decision; the chapter's page and About
+    // sheet do. A chapter awaiting approval is served only as a draft.
+    const approved = CHAPTER_MANIFESTS.filter((entry) => entry.state === "approved")
+
+    for (const { id } of approved) {
       const card = cardFor(host, id)
 
       expect(card.textContent, id).not.toContain(String(chapterRelease(id)?.decision))

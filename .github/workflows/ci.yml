@@ -52,11 +52,49 @@ jobs:
       - name: Check Svelte and TypeScript
         run: pnpm check
 
+      # Drafts served: a chapter whose approval no longer matches its content is
+      # checked as the draft it is, so this job fails only for a real problem.
+      # The approval itself is the `publication` job (the owner's decision of
+      # 2026-10-21).
       - name: Run unit and contract tests
         run: pnpm test
+        env:
+          LEKISHI_DRAFTS: "1"
 
       - name: Check generated brand assets
         run: pnpm brand:check
+
+  publication:
+    # The publication gate on its own (RFD 2, "Decided: CI checks drafts; the
+    # approval is its own check"): the chapter gate without drafts, as
+    # production runs it. It fails while a chapter's approval does not match its
+    # content, and only the owner clears it, with `pnpm approvals`.
+    runs-on: blacksmith-2vcpu-ubuntu-2404
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          package_json_file: package.json
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: List the chapters and what awaits approval
+        run: pnpm approvals
+
+      - name: Check every chapter is approved at its current content
+        run: node scripts/check-chapter.mjs
 
   build:
     # Builds the static artifact once, with its build invariant, and hands it to
@@ -110,8 +148,13 @@ jobs:
           path: .cache/fonts/src
           key: font-sources-${{ hashFiles('scripts/fonts/sources.json') }}
 
+      # The artifact serves drafts, as a pull-request preview does, so the
+      # browser checks run on content awaiting approval. Production (the
+      # Cloudflare build of `main`) never sets this, and refuses a stale chapter.
       - name: Build the static artifact
         run: pnpm build
+        env:
+          LEKISHI_DRAFTS: "1"
 
       - name: Upload the static artifact
         uses: actions/upload-artifact@v4

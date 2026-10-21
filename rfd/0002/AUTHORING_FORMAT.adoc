@@ -571,6 +571,27 @@ chapter awaiting approval. This supersedes the "chapter id typed back" rule in
   an answer in cannot approve a chapter. The approver and the date are named in
   the question, as before.
 
+== Decided: CI checks drafts; the approval is its own check — 2026-10-21
+
+The owner observed on 2026-10-21 that every content change failed CI until the
+owner approved it, because `verify` and `build` ran the production gate. That
+hid real failures behind the expected one and made a content pull request red
+by design. The owner asked whether CI should run against drafts.
+
+* `verify` runs the tests and `build` builds the artifact with
+  `LEKISHI_DRAFTS=1`, as a pull-request preview does: a chapter whose approval
+  does not match its content is checked, built, and browser-tested as the
+  draft it is. They fail only for a real problem.
+* A separate `publication` job lists the chapters with `pnpm approvals` and
+  runs the chapter gate (`scripts/check-chapter.mjs`) without drafts, exactly
+  as production does. It is red while a chapter awaits the owner's approval
+  and says which; only the owner turns it green. Making it a required check
+  keeps unapproved content from merging.
+* Production is unchanged: the Cloudflare build of `main` serves no draft and
+  refuses a stale chapter, so even a merge past a red `publication` job ships
+  nothing unapproved; the site keeps its last good deploy.
+* A plain `pnpm test` or `pnpm verify` keeps the production view, as before.
+
 == Alternatives
 
 Chapter folders with a shared catalog for places, actors, and sources only::

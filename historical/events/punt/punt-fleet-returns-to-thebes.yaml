@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The fleet returns with chiefs of the coasts on board. Hatshepsut holds a festival: the Theban
+  militia and the royal flotilla escort it to the temple landing, and a procession carries the goods,
+  the incense trees, the animals and the giraffe to Amun."
+types: [occurrence]
+part_of:
+  - punt-expedition
+date:
+  value: 1505 BCE..1458 BCE
+  mode: window
+  calendar: regnal
+  as_written: later on, in the queen's reign
+places:
+  - place: thebes
+    role: end
+  - place: karnak
+    role: context
+participants:
+  - actor: hatshepsut
+    role: host
+  - actor: punt-royal-envoy
+    role: leader
+  - actor: egypt-new-kingdom
+    role: participant
+cite:
+  - id: return-basis
+    says: Maspero says the queen held a festival and the spoil was carried in procession to the god.
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the return"
+    quote:
+      The Queen inaugurated a solemn festival in honour of the explorers. The Theban militia was ordered
+      out to meet them, the royal flotilla escorting them as far as the temple landing-place, where a procession
+      was formed to carry the spoil to the feet of the god.
+  - id: return-hostages
+    says: Maspero takes the chiefs on board for young men given as pledges or commercial hostages.
+    role: supporting
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the return (the chiefs)"
+    quote:
+      The chiefs mentioned were probably young men of superior family, who had been confided to the
+      officer in command of the squadron by local sheikhs, as pledges to the Pharaoh of good will or as
+      commercial hostages.
+notes:
+  "The inscriptions present the chiefs as vassals bringing tribute; Maspero reads them as hostages
+  for trade. Maspero gives no regnal year for the expedition, only that Hatshepsut reigned at least eight
+  years after it. Her reign converts to BCE according to the chronology used: its start is put between
+  about 1505 and 1479 BCE and its end between about 1483 and 1458 BCE. The window spans her reign in those
+  placements. It is an editorial bound that a cited chronology must replace before approval."

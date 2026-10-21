@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At prayer in the temple of Amun, Hatshepsut hears a command from the god's sanctuary that the
+  ways to Punt be explored and the roads to the Ladders of Incense trodden, after centuries without direct
+  contact.
+types: [occurrence]
+part_of:
+  - punt-expedition
+date:
+  value: 1505 BCE..1458 BCE
+  mode: window
+  calendar: regnal
+  as_written: later on, in the queen's reign
+places:
+  - place: karnak
+    role: site
+participants:
+  - actor: hatshepsut
+    role: subject
+cite:
+  - id: oracle-basis
+    says: Maspero says a command was heard in the sanctuary to explore the ways to Pûanît.
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the oracle"
+    quote:
+      a command was heard in the sanctuary, a behest of the god himself, that the ways which lead to
+      Pûanît should be explored, and that the roads to the Ladders of Incense should be trodden.
+  - id: oracle-karnak
+    says: Maspero says the queen's prayers rose before the throne of the Lord of Karnak.
+    role: supporting
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the oracle (Karnak)"
+    quote:
+      On a day when Hâtshopsîtû had gone to the temple to offer prayers, her supplications arose up
+      before the throne of the Lord of Karnak
+  - id: oracle-suspended
+    says: Maspero says relations with the incense lands had been suspended for centuries.
+    role: supporting
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the incense trade"
+    quote:
+      But the relations maintained in former times with the people of these aromatic regions had been
+      suspended for centuries.
+notes:
+  "This is the inscription's framing of a royal decision as a divine command. Maspero gives no regnal
+  year for the expedition, only that Hatshepsut reigned at least eight years after it. Her reign converts
+  to BCE according to the chronology used: its start is put between about 1505 and 1479 BCE and its end
+  between about 1483 and 1458 BCE. The window spans her reign in those placements. It is an editorial
+  bound that a cited chronology must replace before approval."

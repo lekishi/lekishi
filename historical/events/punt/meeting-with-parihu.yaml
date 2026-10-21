@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The people of Punt run to meet the strangers, led by their chief Parihu and his wife Ati, and
+  ask whether they came down from the sky or over the sea.
+types: [council]
+part_of:
+  - punt-expedition
+date:
+  value: 1505 BCE..1458 BCE
+  mode: window
+  calendar: regnal
+  as_written: later on, in the queen's reign
+places:
+  - place: punt
+    role: site
+participants:
+  - actor: parihu
+    role: host
+  - actor: ati-of-punt
+    role: participant
+  - actor: punt-royal-envoy
+    role: guest
+  - actor: people-of-punt
+    role: participant
+cite:
+  - id: meeting-greeting
+    says: Maspero gives the people's greeting as the reliefs' text has it.
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the meeting"
+    quote:
+      How is it, they exclaimed, that you have reached this country hitherto unknown to men? Have you
+      come down by way of the sky, or have you sailed on the waters of the Tonûtir Sea?
+  - id: meeting-parihu
+    says: Maspero names their chief Parihû.
+    role: supporting
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the meeting"
+    quote:
+      The name of their chief was Parihû, who was distinguished from his subjects by the boomerang
+      which he carried, and also by his dagger and necklace of beads
+  - id: meeting-ati
+    says: Maspero says Parihû was accompanied by his wife Ati, riding on an ass.
+    role: supporting
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the meeting"
+    quote:
+      He was accompanied by his wife Ati, riding on an ass, from which she alighted in order to gain
+      a closer view of the strangers.
+notes: "The words are the Egyptian inscription's, written for an Egyptian audience. Maspero gives no
+  regnal year for the expedition, only that Hatshepsut reigned at least eight years after it. Her reign
+  converts to BCE according to the chronology used: its start is put between about 1505 and 1479 BCE and
+  its end between about 1483 and 1458 BCE. The window spans her reign in those placements. It is an editorial
+  bound that a cited chronology must replace before approval."

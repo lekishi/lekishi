@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "Hatshepsut has the story of the expedition carved on the west wall of the middle colonnade of
+  her temple at Deir el-Bahari: the fleet under sail, the arrival, the meeting, the barter and the loading
+  of the ships."
+types: [other]
+date:
+  value: 1505 BCE..1458 BCE
+  mode: window
+  calendar: regnal
+  as_written: after the return of the fleet
+places:
+  - place: deir-el-bahari
+    role: site
+participants:
+  - actor: hatshepsut
+    role: leader
+cite:
+  - id: reliefs-basis
+    says:
+      Maspero says the queen had the history of the expedition carved on the colonnade of her funerary
+      chapel.
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the reliefs"
+    quote:
+      Hâtshopsîtû commanded the history of the expedition to be carved on the wall of the colonnades
+      which lay on the west side of the middle platform of her funerary chapel
+notes:
+  "Kept because the reliefs are the record of the expedition. Maspero gives no regnal year for the
+  expedition, only that Hatshepsut reigned at least eight years after it. Her reign converts to BCE according
+  to the chronology used: its start is put between about 1505 and 1479 BCE and its end between about 1483
+  and 1458 BCE. The window spans her reign in those placements. It is an editorial bound that a cited
+  chronology must replace before approval."

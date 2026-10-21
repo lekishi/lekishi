@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  成王, king of 楚, who feasted 重耳, heard him promise to withdraw three days' march if their armies met,
+  refused to kill him, and sent him on to 秦.
+types: [person]
+names:
+  - form: 楚成王
+    lang: lzh
+    script: Hani
+    roman: Chu Cheng Wang
+    scheme: pinyin
+    cite:
+      - id: chu-cheng-wang-name
+        says: The 晉 house records that 楚成王 received 重耳 with the courtesy due a lord.
+        source: shiji-chunqiu
+        at: 卷三十九 晉世家 文公（楚成王以適諸侯禮待之）
+        quote: 重耳去之楚，楚成王以適諸侯禮待之，重耳謝不敢當。
+roles:
+  - role: ruler
+    note: King of 楚.
+    cite:
+      - id: chu-cheng-wang-role
+        says: The 晉 house records that 楚成王 received 重耳 with the courtesy due a lord.
+        source: shiji-chunqiu
+        at: 卷三十九 晉世家 文公（楚成王以適諸侯禮待之）

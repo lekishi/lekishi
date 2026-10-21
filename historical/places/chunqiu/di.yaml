@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  狄, the northern people among whom 重耳 lived for twelve years, his mother's people. The texts give no
+  position, and the record asserts none.
+types: [region]
+names:
+  - form: 狄
+    lang: lzh
+    script: Hani
+    roman: Di
+    scheme: pinyin
+    cite:
+      - id: di-name
+        says: The 晉 house records that 重耳 fled to the 狄, his mother's people.
+        source: shiji-chunqiu
+        at: 卷三十九 晉世家 文公（重耳遂奔狄）
+        quote: 重耳遂奔狄。狄，其母國也。
+  - form: 翟
+    lang: lzh
+    script: Hani
+    note: The same name as the 左傳 writes it in the flight.
+    cite:
+      - id: di-zhai
+        says: The 左傳 records that 重耳 escaped over the wall and fled to the 翟.
+        source: zuozhuan
+        at: 僖公五年（遂出奔翟）
+        quote: 踰垣而走。披斬其袪，遂出奔翟。
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: The 狄 were a people north of 晉; neither text places the camp where 重耳 lived.
+    cite:
+      - id: di-unknown
+        says: The cited entry names the 狄 and states no position.
+        source: shiji-chunqiu
+        at: 卷三十九 晉世家 文公（重耳遂奔狄）
+notes: Recorded as a place because the journey stops there; it is a people's land, not a site.

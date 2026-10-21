@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  郢, the 楚 capital, where 楚成王 feasted 重耳 and asked what he would give in return. Wikidata records the
+  walled site at 紀南城 north of 荊州 as 郢; whether that city stood in 637 BCE is argued.
+types: [capital]
+names:
+  - form: 郢
+    lang: lzh
+    script: Hani
+    roman: Ying
+    scheme: pinyin
+    note: The texts name the state 楚; 郢 is the capital the record places the visit at.
+    cite:
+      - id: ying-name
+        says: >-
+          The 晉 house records that 重耳 went to 楚, where 楚成王 received him with the courtesy due a lord.
+        source: shiji-chunqiu
+        at: 卷三十九 晉世家 文公（重耳去之楚）
+        quote: 重耳去之楚，楚成王以適諸侯禮待之，重耳謝不敢當。
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [112.190298, 30.405722]
+    notes: >-
+      Wikidata's coordinate for the 紀南城 site, which it identifies as the 楚 capital. The texts of the exile
+      name only the state, and the date of the walled city is disputed in the archaeology, so the point
+      is the dataset's identification.
+    cite:
+      - id: ying-point
+        says: Wikidata (CC0) records the 楚 紀南 city site with this coordinate.
+        basis: interpretation
+        attributed_to: Wikidata contributors
+        source: wikidata
+        at: Q11119879 (P625), revision 2515968679
+external_ids:
+  - system: wikidata
+    id: Q11119879
+    url: https://www.wikidata.org/wiki/Q11119879
+    license: CC0-1.0
+notes: >-
+  The exile texts say only 楚. The record places the visit at the capital as the seat of the king who received
+  him, which is an editorial reading recorded in the event's notes.

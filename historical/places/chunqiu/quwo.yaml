@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  曲沃, the old seat of the 晉 ruling line and site of its ancestral temple, the 武宮, where 重耳 entered and
+  was made lord in 636 BCE. The label sits at the modern 曲沃 county.
+types: [settlement]
+names:
+  - form: 曲沃
+    lang: lzh
+    script: Hani
+    roman: Quwo
+    scheme: pinyin
+    cite:
+      - id: quwo-name
+        says: The 左傳 records 重耳 entering 曲沃 on 丙午 and paying court at the 武宮 on 丁未.
+        source: zuozhuan
+        at: 僖公二十四年（丙午，入于曲沃）
+        quote: 丙午，入于曲沃。丁未，朝于武宮。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [111.46925, 35.64113]
+    notes: >-
+      Label anchor at the modern 曲沃 county, which carries the name. Where the 春秋 city stood is argued, and
+      no site is asserted.
+    cite:
+      - id: quwo-anchor
+        says: The anchor is the coordinate Wikidata (CC0) records for the modern 曲沃 county.
+        source: wikidata
+        at: Q1332080 (P625), revision 2526580306
+modern:
+  - form: 曲沃縣
+    lang: zh-Hans
+    script: Hani
+    note: Modern county recorded for orientation only.

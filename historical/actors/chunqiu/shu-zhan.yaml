@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: 叔詹, the 鄭 officer who urged his lord to honour 重耳, or else to kill him.
+types: [person]
+names:
+  - form: 叔詹
+    lang: lzh
+    script: Hani
+    roman: Shu Zhan
+    scheme: pinyin
+    cite:
+      - id: shu-zhan-name
+        says: The 左傳 records 叔詹 remonstrating that heaven had opened the way for 重耳.
+        source: zuozhuan
+        at: 僖公二十三年（叔詹諫曰）
+        quote: 叔詹諫曰：「臣聞天之所啟，人弗及也。
+roles:
+  - role: official
+    note: Officer of 鄭.
+    cite:
+      - id: shu-zhan-role
+        says: The 左傳 records 叔詹 remonstrating with the lord of 鄭.
+        source: zuozhuan
+        at: 僖公二十三年（叔詹諫曰）

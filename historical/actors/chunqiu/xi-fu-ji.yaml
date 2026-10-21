@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  僖負羈, a 曹 officer whose wife foresaw 重耳's return; he sent 重耳 a dish of food with a jade hidden in it,
+  and 重耳 kept the food and returned the jade.
+types: [person]
+names:
+  - form: 僖負羈
+    lang: lzh
+    script: Hani
+    roman: Xi Fuji
+    scheme: pinyin
+    cite:
+      - id: xi-fu-ji-name
+        says: >-
+          The 左傳 records 僖負羈 sending food with a jade in it, and 重耳 accepting the food and returning the jade.
+        source: zuozhuan
+        at: 僖公二十三年（乃饋盤飧，寘璧焉）
+        quote: 乃饋盤飧，寘璧焉。公子受飧反璧。
+roles:
+  - role: official
+    note: Officer of 曹.
+    cite:
+      - id: xi-fu-ji-role
+        says: The 晉 house calls him a 曹 officer.
+        source: shiji-chunqiu
+        at: 卷三十九 晉世家 文公（曹大夫釐負羈）
+        quote: 曹大夫釐負羈曰

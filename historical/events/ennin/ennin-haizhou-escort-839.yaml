@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: Found out, the monks are escorted by the 海州 押衙 張實 to the 海龍王廟, where the second ship's officers are lodged, and are returned to the embassy.
+types: [occurrence]
+date:
+  value: 839-04-08
+  calendar: chinese_lunisolar
+  as_written: 開成四年四月八日未時
+  cite:
+    - id: ennin-haizhou-escort-839-time
+      says: The diary records reaching the 海龍王廟 and meeting 良岑判官 at 未時 on the 8th.
+      source: nitto-guho-junrei-gyoki
+      at: 卷一 開成四年四月八日
+      quote: 未時。到海龍王廟。相看良岑判官。
+places:
+  - place: haizhou
+    role: site
+participants:
+  - actor: ennin
+    role: leader

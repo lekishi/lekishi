@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The broken first ship, led by a boat that knows the channel, reaches the garrison village in 白潮鎮 of 揚州's 海陵縣, where the party sent ashore the day before comes out to meet it.
+types: [journey]
+date:
+  value: 838-07-03
+  calendar: chinese_lunisolar
+  as_written: 開成三年七月三日午時
+  cite:
+    - id: ennin-landfall-838-time
+      says: The diary records reaching the garrison village within 白潮鎮 of 海陵縣 at 午時 on the 3rd.
+      source: nitto-guho-junrei-gyoki
+      at: 卷一 承和五年七月三日
+      quote: 午時僅到海陵縣白潮鎮管內守捉軍中村。
+places:
+  - place: hailing
+    role: end
+    note: The village in 白潮鎮 is not placed; the county is.
+participants:
+  - actor: ennin
+    role: leader
+notes: On 七月二日 a boat had taken 圓載 and twenty-six others off the wreck to 東梁豐村 in the same 鎮; the diary marks that day as 七月二日 in both the Japanese and the Tang calendar.
+cites:
+  notes:
+    - id: ennin-landfall-calendars
+      says: The diary notes that 七月二日 fell on the same month and day in both calendars, though the era names differ.
+      source: nitto-guho-junrei-gyoki
+      at: 卷一 承和五年七月二日
+      quote: 日本國承和五年七月二日。即大唐開成三年七月二日。雖年號殊。而月日共同。
+    - id: ennin-landfall-first-party
+      says: The diary records 圓載 and others, twenty-seven in all, transferring to the boat and heading for land on 七月二日.
+      role: supporting
+      source: nitto-guho-junrei-gyoki
+      at: 卷一 承和五年七月二日
+      quote: 學問僧圓載等已下廿七人。同遷乘之。指陸發去。

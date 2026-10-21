@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The ships reach 有救嶋 and, at dusk the same day, set sail across the open sea, the two ships keeping in touch by fire signals.
+types: [journey]
+date:
+  value: 838-06-23
+  calendar: regnal
+  as_written: 承和五年六月廿三日巳時
+  cite:
+    - id: ennin-ukujima-838-time
+      says: The diary records reaching 有救嶋 on the 23rd and setting sail across the sea at 酉時.
+      source: nitto-guho-junrei-gyoki
+      at: 卷一 承和五年六月廿三日
+      quote: 廿三日巳時。到有救嶋。東北風吹。征留執別。比至酉時。上帆渡海。
+places:
+  - place: ukujima
+    role: waypoint
+participants:
+  - actor: ennin
+    role: leader
+notes: The last Japanese landfall the diary names before the crossing.

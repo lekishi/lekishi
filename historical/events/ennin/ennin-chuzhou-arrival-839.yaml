@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The boats reach 楚州, where the ambassador, back from 長安, tells 圓仁 that the emperor has refused him leave to go to 台州 while allowing the long-term student monk to go.
+types: [journey, exchange]
+date:
+  value: 839-02-24
+  calendar: chinese_lunisolar
+  as_written: 開成四年二月廿四日申後
+  cite:
+    - id: ennin-chuzhou-arrival-839-time
+      says: The diary records reaching the city of 楚州 in the late afternoon of the 24th.
+      source: nitto-guho-junrei-gyoki
+      at: 卷一 開成四年二月廿四日
+      quote: 申後。到楚州城。
+places:
+  - place: chuzhou
+    role: site
+participants:
+  - actor: ennin
+    role: leader
+  - actor: fujiwara-no-tsunetsugu
+    role: leader
+  - actor: ensai
+    role: participant
+cites:
+  summary:
+    - id: ennin-chuzhou-refusal
+      says: "The diary reports the imperial answer: 圓仁 may not go to 台州, but the one long-term student monk may, with provisions for five years."
+      source: nitto-guho-junrei-gyoki
+      at: 卷一 開成四年二月廿四日
+      quote: 仍不許向台州。但其留學僧一人。許向台州五年之內。宜終給食粮者。

@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: Out of the mouth of the 淮, the nine ships anchor on the east side of 東海山 in 海州's 東海縣.
+types: [journey]
+date:
+  value: 839-03-29
+  calendar: chinese_lunisolar
+  as_written: 開成四年三月廿九日申時
+  cite:
+    - id: ennin-donghai-anchorage-839-time
+      says: The diary records anchoring on the east side of 東海山 in 東海縣 on the 29th.
+      source: nitto-guho-junrei-gyoki
+      at: 卷一 開成四年三月廿九日
+      quote: 到海州管內東海縣東海山東邊。入澳停住。
+places:
+  - place: haizhou
+    role: waypoint
+participants:
+  - actor: ennin
+    role: leader

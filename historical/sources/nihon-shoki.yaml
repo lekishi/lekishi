@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../schema/source.schema.json
+locator: entry
+kind: primary
+title: 日本書紀 (Nihon shoki)
+edition:
+  Wikisource digital transcription (unproofread); locators read against it on 2026-10-21; re-check
+  against a critical edition (新訂増補国史大系 or 新編日本古典文学全集) before content freeze
+author: 舍人親王 et al. (court-ordered compilation)
+issued:
+  year: 720
+  era: ce
+language: lzh
+identifiers:
+  - system: url
+    value: https://zh.wikisource.org/wiki/日本書紀
+license:
+  status: recorded
+  license_id: public-domain
+  attribution_text: 日本書紀 (720), Wikisource transcription
+  redistribution: permitted
+  quotation_permitted: true
+  reviewed_by: Lekishi editorial preparation
+  reviewed_at: "2026-10-21T15:00:00Z"
+  notes:
+    The work and its text are public domain. The Wikisource page text is additionally CC BY-SA 4.0;
+    the records cite the work and the edition, not the wiki page, and quote only the public-domain classical
+    text. The transcription is unproofread and uses ■ where characters are damaged or unavailable, so
+    a quoted passage must be re-checked against a critical edition.
+notes:
+  Court-ordered chronicle to 697, compiled in 720 and the earliest Japanese court record of the seventh-century
+  missions to Tang. Locators name the volume and the entry's date expression; the entries carry month
+  and sexagenary day, so v0 normalizes them to the month. The 659 mission is told in 伊吉連博德書, an envoy's
+  own account the compilers quote in notes; it is cited as quoted there, not as an independent work. The
+  compilers also give variant readings (或本云), which the records keep as such.

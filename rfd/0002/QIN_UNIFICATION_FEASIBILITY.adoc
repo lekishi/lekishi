@@ -1,0 +1,178 @@
+= Qin's conquest of the six states: source-feasibility note
+:state: Preparation note for the draft chapter `qin-unification-230-221`; not an RFD decision and not an approval
+:research-window: single pass, 2026-10-21
+:toc:
+:toclevels: 2
+
+This note records what the draft chapter
+link:../../historical/chapters/qin-unification-230-221.yaml[`qin-unification-230-221`]
+is built from, how its places are positioned, where its sources disagree, and
+how far the sources carry the territory the owner asked for. It deepens the
+approved Han chapter
+link:../../historical/chapters/qin-conquest-han-233-226.yaml[`qin-conquest-han-233-226`]
+from Han alone to all six states, 230–221 BCE.
+
+The chapter is a draft. Only the owner approves it, with `pnpm approvals`.
+
+== Finding
+
+The episode is well served by public-domain primary text in accessible
+transcriptions. 史記 gives each event twice or more: in the annals of the first
+emperor (卷六), in the six-states table (卷十五), and in each state's hereditary
+house or a general's biography. 資治通鑑 卷六–七 gives a third, later
+narrative. Every event, place and relationship cites at least one of them with
+a locator and a short quotation, and every quotation was checked against the
+transcription text on 2026-10-21.
+
+The sources are enough for a dated, cited chapter whose story steps through 39 events and 11 relationships. They are not
+enough for drawn borders or routes: they name cities, commanderies and passes,
+not lines.
+
+== What the chapter holds
+
+[cols="1,1,3"]
+|===
+|Kind |New records |Notes
+
+|Events
+|37
+|Plus two reused from the Han chapter without edits (`han-conquest-230` and
+`xinzheng-revolt-226`). Nine carry a dispute (<<disputes>>).
+
+|Relationships
+|16
+|Six conflicts with no validity interval (listed under `include`, not stepped
+through), six annexations as `changed_boundaries`, the Yan–Dai alliance, the
+會稽 commandery as an institutional change, and two diplomacies (the Yan embassy
+and the 安陵 exchange). `qin-han-conflict` and `han-annexation-yingchuan` are
+reused without edits.
+
+|Places
+|27
+|20 with a label anchor, 7 with no position (<<placement>>).
+
+|Actors
+|36
+|The six states and Dai, their kings, the Qin and Zhao generals, 荊軻 and his
+companions, 李斯 and 王綰. `qin-state`, `qin-king-zheng` and the Han records
+are reused without edits.
+
+|Sources
+|3
+|Second records for works the approved chapters already cite
+(<<sources>>).
+|===
+
+== Sources and terms
+
+[[sources]]
+[cols="2,1,3"]
+|===
+|Source record |Terms |What it covers
+
+|`shiji-six-states`
+|Public domain
+|史記 卷34, 40, 43, 44, 46 (the hereditary houses of 燕, 楚, 趙, 魏, 齊), 卷73
+(白起王翦列傳), 卷81 (廉頗藺相如列傳, for 李牧) and 卷86 (刺客列傳, for 荊軻). The
+transcription is Chinese Wikisource, already in the source register as
+conditional (⚠): the text is public domain and the transcription's own layer is
+CC BY-SA, so the chapter quotes only short passages.
+
+|`zizhi-tongjian-qin-ji-2`
+|Public domain
+|資治通鑑 卷七 (秦紀二), 始皇帝二十年–二十六年, on the same Wikisource terms.
+Bracketed editorial text in the transcription (〔〕 and （）) is never quoted.
+
+|`dushi-fangyu-jiyao-six-states`
+|Public domain
+|讀史方輿紀要 (1692), allowed (✓) in the register. Cited only to identify where a
+place the primary texts name was, never as a primary date or name. The
+transcription has copying errors in three of the entries cited (始皇三十二年
+for 二十二年, 項襄王 for 頃襄王, 公子和 for 公子嘉); the records note them and
+never quote them.
+
+|`wikidata` (existing)
+|CC0
+|Modern coordinates for the label anchors, each pinned to an item revision.
+|===
+
+Separate source records keep the approved chapters fresh. `shiji`,
+`zizhi-tongjian` and `dushi-fangyu-jiyao` belong to the approved Han chapter,
+and editing them to add juan would make it stale. The chapter still cites
+`shiji` (卷六 and 卷十五) and `zizhi-tongjian` (卷六) where the approved records
+already cover the juan.
+
+Before publication each locator should be rechecked against a critical edition
+(the 中華書局 punctuated 史記 and 資治通鑑), because the transcriptions are
+unproofread.
+
+== Placement
+
+[[placement]]
+No place carries an asserted historical coordinate. Each of the 20 positioned
+places has a `display_anchor` at the modern place Wikidata records (P625), cited
+to the item revision, with its identification cited to 讀史方輿紀要 where that
+work identifies it. Capitals and cities are anchored at the modern city
+(邯鄲, 薊, 大梁, 臨淄, 陳, 咸陽 and others); commanderies and regions at their
+modern namesake, labelled region-level (遼東, 代, 上谷, 太原, 會稽 and others).
+
+Seven places stay without a position, because the sources name them and state no
+site: 霸上, 衍水, 上郡, 鄢郢, 寢, the Zhao land of 東陽, and 淮南. 鄢郢 carries
+胡三省's reading as an attributed interpretation, not as a position.
+
+No route is drawn: the sources name a pass (井陘), a river crossing (易水) and
+the ends of marches, not roads.
+
+== Disputes
+
+[[disputes]]
+The chapter publishes one reading for each and keeps the others as
+`conflicting` claims.
+
+* *The end of Zhao.* The biographies end it with king 遷's capture in 228 BCE;
+  the six-states table writes 秦滅趙 at the Dai king's capture in 222 BCE. The
+  hereditary house puts the surrender in 229.
+* *太子丹's death, 226 BCE.* The annals have Qin taking his head; the
+  hereditary house of Yan and 刺客列傳 have his father send it.
+* *The Wei king's fate, 225 BCE.* Captured, or surrendered and killed (資治通鑑).
+* *李信's colleague, 225 BCE.* 蒙恬 in the biography, 蒙武 elsewhere.
+* *王翦's recall*, dated 225 or 224 BCE.
+* *項燕's end.* Killed in battle in 224 (the table, the hereditary house,
+  資治通鑑) or a suicide in 223 (the annals).
+* *The Chu king's capture.* 223 BCE in three sources, 224 in the annals.
+* *The 36 commanderies.* 221 BCE in the annals, 220 in the table; and the
+  weapons melted into bronze figures, likewise.
+
+== Territory
+
+Territory is not yet a contract kind, and the owner's choice on how to show it
+is pending. What the sources do support is control by place: which named cities
+and commanderies Qin took, and when. Read from the chapter's records:
+
+[cols="1,2,3"]
+|===
+|Year |State |Places that pass to Qin, as the sources name them
+
+|230 BCE |Han |Han's land, made the 潁川 commandery
+|228 BCE |Zhao |邯鄲 and the Zhao land of 東陽; the prince 嘉 holds 代, allied with Yan at 上谷
+|226 BCE |Yan |薊; the Yan king withdraws to 遼東
+|226 BCE |Chu |Ten cities, unnamed
+|225 BCE |Wei |大梁 and all of Wei's land; 安陵 refuses an exchange and stays outside
+|224 BCE |Chu |From 陳 south to 平輿
+|223 BCE |Chu |The Chu king captured; the table writes 秦滅楚
+|222 BCE |Yan, Dai |遼東; 代
+|222 BCE |Chu |The lands south of the 江, made the 會稽 commandery
+|221 BCE |Qi |臨淄 and Qi; the Qi king removed to 共
+|===
+
+Borders drawn as areas would need a source this pass did not find on usable
+terms. OpenHistoricalMap has no Warring States polygons. 譚其驤's
+中國歷史地圖集 is in copyright. The historical-basemaps dataset is GPL and too
+coarse for a ten-year episode.
+
+== Open items
+
+* The owner's choice on how to show territory.
+* A critical-edition check of the locators before publication.
+* The 220 BCE tours, roads and later campaigns are out of the window and could
+  be a further chapter.

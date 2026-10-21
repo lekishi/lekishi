@@ -72,8 +72,10 @@ officials (李德裕, 楊敬之); teachers (志遠, 元政, 法全); the 會昌 
 expulsion as an institutional change.
 
 |Journeys |5
-|Drafted in the shape proposed in draft PR #26 under `historical/journeys/`;
-the compiler does not read them until the owner accepts the shape.
+|Drafted under `historical/journeys/` in the record shape that
+link:AUTHORING_FORMAT.adoc[the authoring format record] proposes. The owner
+decided on 2026-10-21 that journeys are their own kind; the shape is still
+proposed, and the compiler does not read them until the owner accepts it.
 |===
 
 The missions records own the 838 embassy itself (its appointment, the
@@ -81,8 +83,12 @@ ambassador 藤原常嗣, the court's side); the diary's events reference
 `fujiwara-no-tsunetsugu` from that work, so the Tang chapter needs both before
 it can reach these events.
 
-All records compile and pass the contract's publication check when a
-throwaway manifest reaches every one of them.
+The v0 records were checked with a throwaway manifest (not committed) that
+reached all 102 events, 11 relationships, 35 places and 15 actors, with a
+stand-in record for `fujiwara-no-tsunetsugu` because the missions work that
+creates it is not merged: they compile and pass the contract's publication
+check. The five journeys were not part of that check, because the compiler
+does not read them and a manifest cannot include them yet.
 
 == Dates
 
@@ -117,12 +123,17 @@ This story is a harder test than the 753 voyage, which is its value:
 * *Long journeys.* The 840 pilgrimage has 14 stops and the 847 return 14.
 * *Breaks in the line.* Unlocated stops in the middle of journeys (鎮州, 汾州,
   河中府, 同州 in 840; the whole Silla leg in 847) exercise the rule that an
-  unlocated stop breaks the line on both sides.
+  unlocated stop breaks the line on both sides. Under the proposed rule a
+  `display_anchor` breaks the line too, and every place this note adds is
+  either a display anchor (22) or `unknown` (13), so the five journeys
+  have no drawable leg until places are placed at `approximate_point` or
+  better from a source the register allows. Their list and card still work;
+  the coordinates are not to be upgraded only to get a line.
 * *Repeated places.* A party that stays (海州 in 839: three stops in five
   days) and a place visited twice in one journey (海陵縣 at the landfall and
   again on the canal).
-* *Window-dated stops.* Two 閏三月 stops start the 847 return; PR #26's order
-  check can only order what v0 orders, so these test that limit.
+* *Window-dated stops.* Two 閏三月 stops start the 847 return; the proposed
+  order check can only order what v0 orders, so these test that limit.
 * *Mixed modes.* Sea, river (canal and 淮) and land legs in one journey, and a
   driven leg (the 838 wreck drifting ashore), each with its own cite.
 * *Events without a place,* such as the wreck and the reported death of the

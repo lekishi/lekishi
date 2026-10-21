@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "On the 癸卯 day of the twelfth month of 天寶十四載 (755), on the report of the army supervisor 邊令誠
+  that he had abandoned 陝 and cut the soldiers' rations, 高仙芝 is beheaded at 潼關 with 封常清. He
+  denies the theft; the soldiers cry out that he is wronged."
+types: [occurrence]
+date:
+  value: 755-12-18
+  calendar: chinese_lunisolar
+  as_written: 天寶十四載十二月癸卯（十二月丙戌朔）
+  cite:
+    - id: gao-xianzhi-execution-time
+      says: The mirror records the emperor, angered by 邊令誠's report, sending him on the 癸卯 day to execute 高仙芝 and 封常清 in the camp.
+      source: zizhi-tongjian-tang
+      at: 卷二一七 唐紀三十三 天寶十四載十二月癸卯（遣令誠繼敕即軍中斬仙芝及常清）
+      quote: 上大怒，癸卯，遣令誠繼敕即軍中斬仙芝及常清。
+places:
+  - place: tongguan
+    role: site
+    cite:
+      - id: gao-xianzhi-execution-place
+        says: The mirror records 邊令誠 reaching 潼關 and carrying out the order there.
+        source: zizhi-tongjian-tang
+        at: 卷二一七 唐紀三十三 天寶十四載十二月（令誠至潼關，先引常清）
+        quote: 令誠至潼關，先引常清，宣敕示之
+participants:
+  - actor: gao-xianzhi
+    role: subject
+  - actor: feng-changqing
+    role: subject
+  - actor: bian-lingcheng
+    role: other
+    note: Carried out the order.
+cites:
+  summary:
+    - id: gao-xianzhi-execution-words
+      says: The mirror gives 高仙芝's last words, denying the theft of rations, and the soldiers' outcry.
+      source: zizhi-tongjian-tang
+      at: 卷二一七 唐紀三十三 天寶十四載十二月（仙芝曰：我遇敵而退）
+      quote: 我遇敵而退，死則宜矣。今上戴天，下履地，謂我盜減糧賜則誣也。
+notes:
+  "The day is the eighteenth of the month, counted from the month's first day, 丙戌, which the mirror
+  gives. The notice dates the order; the execution followed when 邊令誠 reached 潼關, and the chapter
+  does not separate the two days."

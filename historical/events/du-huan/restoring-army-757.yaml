@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "On the 丁亥 day of the ninth month of 至德二載 (757) the supreme commander 廣平王 leads an army of two
+  hundred thousand, troops of 朔方, 安西, 回紇, 南蠻 and 大食, east against the rebels; it retakes the
+  western capital 長安 within the month."
+types: [campaign]
+date:
+  value: 757-09
+  calendar: chinese_lunisolar
+  as_written: 至德二載九月丁亥（舊唐書 肅宗紀）
+  cite:
+    - id: restoring-army-time
+      says: The annals record the supreme commander 廣平王 leading the 朔方, 安西, 回紇, 南蠻 and 大食 troops east on the 丁亥 day of the ninth month.
+      source: jiu-tangshu-tang-west
+      at: 卷十 肅宗紀 至德二載九月丁亥（元帥廣平王統朔方、安西、回紇、南蠻、大食之眾）
+      quote: 丁亥，元帥廣平王統朔方、安西、回紇、南蠻、大食之眾二十萬，東向討賊。
+    - id: restoring-army-dashi
+      says: The 大食 entry says 代宗, as supreme commander, used the kingdom's troops to retake the two capitals.
+      role: supporting
+      source: jiu-tangshu-tang-west
+      at: 卷一九八 西戎 大食國（代宗時為元帥，亦用其國兵以收兩都）
+      quote: 代宗時為元帥，亦用其國兵以收兩都。
+places:
+  - place: changan
+    role: end
+    cite:
+      - id: restoring-army-changan
+        says: The annals record 廣平王 retaking the western capital on the 癸卯 day.
+        source: jiu-tangshu-tang-west
+        at: 卷十 肅宗紀 至德二載九月癸卯（廣平王收西京）
+        quote: 癸卯，廣平王收西京。
+participants:
+  - actor: li-chu
+    role: leader
+  - actor: tang-dynasty
+    role: participant
+  - actor: dashi
+    role: participant
+  - actor: uighurs
+    role: participant
+notes:
+  The army set out from the court at 鳳翔, which has no place record here, so 長安 is the only place
+  named. The month's first day is not given in the passage, so the chapter publishes the month.

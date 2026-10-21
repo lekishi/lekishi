@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "經行記 describes the 大食 king, every seventh day, going to a prayer hall that holds tens of
+  thousands and preaching from a high seat: against adultery, theft and lies, and that whoever is
+  killed fighting an enemy goes to heaven. Everyone prays five times a day; wine and music are
+  forbidden."
+types: [process]
+date:
+  value: 751..762
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 經行記不繫年（杜環在西：天寶十載至寶應初）
+  cite:
+    - id: kufa-sermon-time
+      says: The fragment is undated; it can only fall within 杜環's years in the west.
+      source: tongdian
+      at: 卷一九一 邊防七 西戎總序（天寶十載至西海，寶應初，因賈商船舶自廣州而回）
+places:
+  - place: kufa
+    role: site
+    cite:
+      - id: kufa-sermon-place
+        says: 經行記 describes the prayer hall and the king's sermon every seventh day.
+        source: tongdian
+        at: 卷一九三 邊防九 大食（又有禮堂，容數萬人）
+        quote: 又有禮堂，容數萬人。每七日，王出禮拜，登高座為眾說法
+participants:
+  - actor: dashi
+    role: participant
+  - actor: du-huan
+    role: witness
+cites:
+  summary:
+    - id: kufa-sermon-practice
+      says: 經行記 says that rich and poor alike worship heaven five times a day, and that wine and music are forbidden.
+      source: tongdian
+      at: 卷一九三 邊防九 大食（無問貴賤，一日五時禮天）
+      quote: 無問貴賤，一日五時禮天。食肉作齋，以殺生為功德。繫銀帶，佩銀刀。斷飲酒，禁音樂。
+notes:
+  "A recurring practice, published as a process across 杜環's stay rather than as a dated event. It
+  is the earliest Chinese description of Islamic Friday prayer that names its observer; the chapter
+  draws no conclusion from that beyond the fragment."

@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "石國's prince escapes and tells the western peoples how 高仙芝 deceived and plundered his country.
+  In the mirror, the angry peoples secretly bring in 大食 to attack the four garrisons; in the Song
+  biography, the prince goes to 大食 himself and asks for troops. Where he went is told two ways."
+types: [exchange]
+date:
+  value: 751
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 天寶十載（資治通鑑，繫於恆羅斯之役）
+  cite:
+    - id: chach-prince-appeal-time
+      says: The mirror tells the prince's flight and the peoples' appeal to 大食 as the start of the 天寶十載 war.
+      source: zizhi-tongjian-tang
+      at: 卷二一六 唐紀三十二 天寶十載（髙仙芝之虜石國王也）
+      quote: 髙仙芝之虜石國王也，石國王子逃詣諸胡，具告仙芝欺誘貪暴之狀。諸胡皆怒，潛引大食慾共攻四鎭。
+    - id: chach-prince-appeal-xin
+      says: 高仙芝's biography in 新唐書 says the prince fled to 大食 and asked for troops to attack 高仙芝 at 怛邏斯城.
+      role: conflicting
+      source: xin-tangshu-tang-west
+      at: 卷一三五 高仙芝傳（其王子走大食，乞兵攻仙芝於怛邏斯城）
+      quote: 其王子走大食，乞兵攻仙芝於怛邏斯城，以直其冤。
+places:
+  - place: chach
+    role: context
+    note: The prince's country; neither account says where he made his appeal.
+participants:
+  - actor: shi-state
+    role: participant
+  - actor: dashi
+    role: participant
+notes:
+  "The two accounts differ on who called in 大食: the western peoples (諸胡) in the mirror and 舊唐書's
+  李嗣業 biography, the prince himself in 新唐書. Neither names the prince. The transcription of the
+  mirror prints 欲 as 慾."
+dispute:
+  status: disputed
+  summary:
+    The mirror has the prince tell the western peoples, who bring in 大食; the Song biography has
+    the prince go to 大食 and ask for troops. The chapter keeps both.

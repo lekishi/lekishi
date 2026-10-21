@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "On the fifth day of the standoff at 恆羅斯城 the 葛羅祿 contingent of the Tang army turns and attacks
+  it together with 大食. The biographies do not mention the defection; it is the mirror's account."
+types: [occurrence]
+part_of: [talas-battle-751]
+date:
+  value: 751
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 相持五日，葛羅祿部衆叛
+  cite:
+    - id: karluk-defection-time
+      says: The mirror records that after five days of standoff the 葛羅祿 contingent rebelled and attacked the Tang army with 大食.
+      source: zizhi-tongjian-tang
+      at: 卷二一六 唐紀三十二 天寶十載（相持五日，葛羅祿部衆叛）
+      quote: 相持五日，葛羅祿部衆叛，與大食夾攻唐軍
+places:
+  - place: talas
+    role: site
+participants:
+  - actor: karluks
+    role: participant
+  - actor: dashi
+    role: participant
+notes: A single-source detail. The 李嗣業 biographies blame the defeat on 大食 and the western peoples without naming the 葛羅祿.

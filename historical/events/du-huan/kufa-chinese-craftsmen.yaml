@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "At 亞俱羅, 經行記 lists the silk looms and the gold, silver and painting crafts, and names the
+  Chinese craftsmen working there: the painters 樊淑 and 劉泚 of 京兆 and two weavers of 河東, one of
+  them 呂禮. It is the only named record of Chinese artisans in the 大食 lands of the 750s."
+types: [exchange]
+date:
+  value: 751..762
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 經行記不繫年（杜環在西：天寶十載至寶應初）
+  cite:
+    - id: kufa-craftsmen-time
+      says: The fragment is undated; it can only fall within 杜環's years in the west, which 杜佑 gives as 天寶十載 to 寶應初.
+      source: tongdian
+      at: 卷一九一 邊防七 西戎總序（天寶十載至西海，寶應初，因賈商船舶自廣州而回）
+places:
+  - place: kufa
+    role: site
+    cite:
+      - id: kufa-craftsmen-place
+        says: 經行記's 大食 passage, which opens with 亞俱羅 as the seat of the 大食 king, names the Chinese craftsmen.
+        source: tongdian
+        at: 卷一九三 邊防九 大食（綾絹機杼，金銀匠、畫匠、漢匠起作畫者）
+        quote: 綾絹機杼，金銀匠、畫匠、漢匠起作畫者，京兆人樊淑、劉泚
+participants:
+  - actor: fan-shu
+    role: participant
+  - actor: liu-ci
+    role: participant
+  - actor: lu-li
+    role: participant
+  - actor: du-huan
+    role: witness
+    note: The author of the description; the fragment does not say he met them.
+notes:
+  "The fragment does not say how the craftsmen came to 亞俱羅. That they were prisoners of 怛邏斯 is a
+  common modern inference and is not asserted. Nor does 經行記 mention paper-making; the story that
+  captives of 751 brought paper to Samarkand comes from much later Arabic writers and is outside
+  this chapter. The second weaver's given name is a rare graph left for the critical-edition check."

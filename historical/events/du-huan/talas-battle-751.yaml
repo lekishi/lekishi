@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "高仙芝 leads a Tang and allied army more than seven hundred 里 into the west and meets 大食 at 怛邏斯
+  (恆羅斯城). After a five-day standoff the 葛羅祿 contingent turns, 大食 and the 葛羅祿 attack together,
+  and the Tang army is routed; a few thousand survive. The mirror gives thirty thousand men, the
+  biographies twenty thousand."
+types: [campaign]
+date:
+  value: 751
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 天寶十載（資治通鑑繫於夏四月後）; 天寶十年（經行記：即天寶十年高仙芝軍敗之地）
+  cite:
+    - id: talas-battle-time
+      says: The mirror records the battle at 恆羅斯城 among the notices of 天寶十載, after the fourth month.
+      source: zizhi-tongjian-tang
+      at: 卷二一六 唐紀三十二 天寶十載（仙芝聞之，將蕃、漢三萬衆撃大食）
+      quote: 仙芝聞之，將蕃、漢三萬衆撃大食，深入七百餘里，至恆羅斯城，與大食遇。相持五日，葛羅祿部衆叛，與大食夾攻唐軍，仙芝大敗，士卒死亡略盡，所餘才數千人。
+    - id: talas-battle-jingxingji
+      says: 經行記 names 怛邏斯, at the western end of the 碎葉 valley, as the place where 高仙芝's army was defeated in 天寶十年.
+      role: supporting
+      source: tongdian
+      at: 卷一九三 邊防九 石國（又云：碎葉國……其川西頭有城，名曰怛邏斯）
+      quote: 其川西頭有城，名曰怛邏斯，石國人鎮，即天寶十年高仙芝軍敗之地。
+    - id: talas-battle-numbers
+      says: 李嗣業's biography in 舊唐書 gives the army as twenty thousand and says those left after the night's fighting were no more than a few thousand.
+      role: conflicting
+      source: jiu-tangshu-tang-west
+      at: 卷一〇九 李嗣業傳（仙芝懼，領兵二萬深入胡地）
+      quote: 仙芝懼，領兵二萬深入胡地，與大食戰，仙芝大敗。會夜，兩軍解，仙芝眾為大食所殺，存者不過數千。
+places:
+  - place: talas
+    role: site
+participants:
+  - actor: gao-xianzhi
+    role: leader
+  - actor: li-siye
+    role: participant
+  - actor: tang-dynasty
+    role: participant
+  - actor: dashi
+    role: participant
+  - actor: karluks
+    role: participant
+notes:
+  "The mirror calls the city 恆羅斯城, 經行記 and 新唐書 怛邏斯 (城). The mirror's notice follows the
+  fourth-month entries but carries no day; the chapter publishes the year. Army sizes are told as
+  three myriads (the mirror) and two (both 李嗣業 biographies), and the chapter decides neither.
+  The Arabic histories' account of the battle is not cited in this chapter. 杜環 is not named in any
+  battle notice, so he is not a participant here."
+dispute:
+  status: disputed
+  summary:
+    The mirror gives the Tang army as thirty thousand men; the 李嗣業 biographies of 舊唐書 and
+    新唐書 give twenty thousand. The chapter records both.

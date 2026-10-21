@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "杜環 follows 高仙芝's western campaign and reaches 西海 in 天寶十載 (751). 杜佑's one sentence is all
+  the sources say of how he went west: it names no battle, no capture and no route."
+types: [journey]
+date:
+  value: 751
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 天寶十載至西海
+  cite:
+    - id: du-huan-xihai-time
+      says: 杜佑's preface records his kinsman 環 following 高仙芝's western campaign and reaching 西海 in 天寶十載.
+      source: tongdian
+      at: 卷一九一 邊防七 西戎總序（族子環隨鎮西節度使高仙芝西征）
+      quote: 族子環隨鎮西節度使高仙芝西征，天寶十載至西海
+places:
+  - place: xihai
+    role: end
+participants:
+  - actor: du-huan
+    role: participant
+  - actor: gao-xianzhi
+    role: leader
+    note: The campaign 杜環 followed; the preface does not say 高仙芝 reached 西海.
+notes:
+  "The usual modern reading joins this sentence to the 怛邏斯 notices: 杜環 was taken in the defeat
+  and carried west. The preface does not say so, and the chapter records only what it says. As a
+  journey stop, 西海 is unlocated, so nothing is drawn to it."

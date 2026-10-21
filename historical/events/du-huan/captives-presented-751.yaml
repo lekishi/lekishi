@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "高仙芝 comes to court in the first month of 天寶十載 (751) and presents his captives: a 突騎施
+  khagan, a 吐蕃 chief, the king of 石國 and the king of 朅師. He is made 開府儀同三司. The Song biography
+  says the 石國 king was beheaded, and that this turned the western regions against Tang."
+types: [occurrence]
+date:
+  value: 751-01
+  calendar: chinese_lunisolar
+  as_written: 天寶十載正月（資治通鑑）
+  cite:
+    - id: captives-presented-time
+      says: The mirror enters 高仙芝's presentation of his captives among the notices of the first month of 天寶十載.
+      source: zizhi-tongjian-tang
+      at: 卷二一六 唐紀三十二 天寶十載正月（安西節度使髙仙芝入朝）
+      quote: 安西節度使髙仙芝入朝，獻所擒突騎施可汗、吐蕃酋長、石國王、朅師王。加仙芝開府儀同三司。
+places:
+  - place: changan
+    role: site
+    cite:
+      - id: captives-presented-place
+        says: The biography says the 石國 king was presented 闕下, at the palace, where the court was at 長安.
+        source: xin-tangshu-tang-west
+        at: 卷一三五 高仙芝傳（仙芝為俘獻闕下，斬之）
+        quote: 仙芝為俘獻闕下，斬之，由是西域不服。
+participants:
+  - actor: gao-xianzhi
+    role: leader
+  - actor: chebishi
+    role: subject
+    cite:
+      - id: captives-presented-execution
+        says: 高仙芝's biography in 新唐書 records the 石國 king being presented and beheaded.
+        source: xin-tangshu-tang-west
+        at: 卷一三五 高仙芝傳（其王車鼻施約降，仙芝為俘獻闕下，斬之）
+  - actor: tang-dynasty
+    role: host
+notes:
+  "The mirror does not say the king was killed; the Song biography does. The mirror names the other
+  captives only by title, and the chapter makes no records for them. 闕下 is the palace; the chapter
+  places the event in 長安 because the court sat there in 天寶十載."

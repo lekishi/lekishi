@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "經行記 says 大食's envoy for the eastern road (東道使) is stationed at 末祿, and that from there to
+  the western sea 大食 and 波斯 people live mixed together."
+types: [process]
+date:
+  value: 751..762
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 經行記不繫年（杜環在西：天寶十載至寶應初）
+  cite:
+    - id: merv-envoy-time
+      says: The fragment is undated; it can only fall within 杜環's years in the west.
+      source: tongdian
+      at: 卷一九一 邊防七 西戎總序（天寶十載至西海，寶應初，因賈商船舶自廣州而回）
+places:
+  - place: merv
+    role: site
+    cite:
+      - id: merv-envoy-place
+        says: 經行記 records the 大食 envoy for the eastern road stationed at 末祿.
+        source: tongdian
+        at: 卷一九三 邊防九 大食（又云：末祿國……其大食東道使鎮於此）
+        quote: 其大食東道使鎮於此。從此至西海以來，大食、波斯參雜居止。
+participants:
+  - actor: dashi
+    role: participant
+notes: 東道使 is 經行記's own term; the chapter does not translate it into an Arabic office.

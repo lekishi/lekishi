@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "After the defeat 李嗣業 urges 高仙芝 to slip away by night. The narrow road is blocked by the 拔汗那
+  troops and their pack animals; 李嗣業 rides ahead and clubs a way through, men and horses falling,
+  so that 高仙芝 gets past. 段秀實 rebukes him for saving himself, and 李嗣業 turns back to hold off the
+  pursuit. The Song biography names the pass 白石嶺."
+types: [journey]
+part_of: [talas-battle-751]
+date:
+  value: 751
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 天寶十載（資治通鑑）
+  cite:
+    - id: baishi-ling-retreat-time
+      says: The mirror tells the night retreat after the defeat, with the 拔汗那 troops blocking the road and 李嗣業 clubbing a way through.
+      source: zizhi-tongjian-tang
+      at: 卷二一六 唐紀三十二 天寶十載（右威衞將軍李嗣業勸仙芝宵遁）
+      quote: 右威衞將軍李嗣業勸仙芝宵遁，道路阻隘，拔汗那部衆在前，人畜塞路；嗣業前驅，奮大梃撃之，人馬倶斃，仙芝乃得過。
+    - id: baishi-ling-retreat-xin
+      says: 李嗣業's biography in 新唐書 has him propose holding 白石嶺, ride to it, and club his way through the returning 拔汗那 troops on the narrow road.
+      role: supporting
+      source: xin-tangshu-tang-west
+      at: 卷一三八 李嗣業傳（即馳守白石，路既隘）
+      quote: 即馳守白石，路既隘，步騎魚貫而前。會拔汗那還兵，輜餉塞道不可騁，嗣業懼追及，手梃鏖擊，人馬斃僕者數十百，虜駭走，仙芝乃得還。
+places:
+  - place: baishi-ling
+    role: site
+  - place: talas
+    role: start
+    note: The retreat starts from the battlefield; the sources give no road.
+participants:
+  - actor: li-siye
+    role: leader
+  - actor: gao-xianzhi
+    role: participant
+  - actor: duan-xiushi
+    role: participant
+    cite:
+      - id: baishi-ling-retreat-duan
+        says: The mirror records 段秀實 rebuking 李嗣業, who then held off the pursuers and gathered the scattered troops.
+        source: zizhi-tongjian-tang
+        at: 卷二一六 唐紀三十二 天寶十載（別將汧陽段秀實聞嗣業之聲）
+        quote: 嗣業執其手謝之，留拒追兵，收散卒，得倶免。
+  - actor: ferghana-state
+    role: other
+    note: Its troops and animals blocked the road; whether as allies or enemies is not stated.
+notes:
+  "The mirror does not name the pass; the Song biography's 白石嶺 has no position. The 拔汗那 troops
+  are 'in front' in the mirror and 'returning' (還兵) in the Song biography, which does not settle
+  whose side they were on."

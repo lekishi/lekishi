@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "杜環 goes on (又去) to 摩鄰, two thousand 里 across a great desert south-west of 秋薩羅國, a land of
+  black people, little grain and grievous fevers. It is the furthest point his fragments describe;
+  where it was is disputed."
+types: [journey]
+date:
+  value: 751..762
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 經行記不繫年（杜環在西：天寶十載至寶應初）
+  cite:
+    - id: du-huan-molin-time
+      says: The fragment is undated; it can only fall within 杜環's years in the west.
+      source: tongdian
+      at: 卷一九一 邊防七 西戎總序（天寶十載至西海，寶應初，因賈商船舶自廣州而回）
+places:
+  - place: molin
+    role: end
+    cite:
+      - id: du-huan-molin-place
+        says: 經行記, quoted under 大秦, says he went on to 摩鄰, crossing a great desert for two thousand 里.
+        source: tongdian
+        at: 卷一九三 邊防九 大秦（又云：摩鄰國）
+        quote: 渡大磧行二千里至其國。
+participants:
+  - actor: du-huan
+    role: participant
+notes:
+  "The reading of 又去 as 杜環's own journey is the plain sense of the fragment, but 經行記 survives
+  only in quotation and the transcription prints the first graph of 秋薩羅 as a private-use character, so the event is
+  an uncertain occurrence. Its place has no position."

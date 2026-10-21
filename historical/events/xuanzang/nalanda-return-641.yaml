@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 玄奘 returns to 那爛陀 and pays his respects to 戒賢.
+types: [journey]
+date:
+  value: 636..642
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 從此複東南，還摩揭陀施無厭寺，參禮正法藏訖
+  cite:
+    - id: nalanda-return-641-time
+      says: The biography records the return without a date.
+      source: cien-zhuan
+      at: 卷四（從此複東南，還摩揭陀施無厭寺，參）
+      quote: 從此複東南，還摩揭陀施無厭寺，參禮正法藏訖
+places:
+  - place: nalanda
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

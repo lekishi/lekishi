@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The king of 阿耆尼 meets 玄奘 but, resentful of 高昌's raids, gives no horses; he stays one night.
+types: [journey]
+date:
+  value: 629..630
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 法師停一宿而過
+  cite:
+    - id: agni-stop-630-time
+      says: The biography records the night at 阿耆尼 without a date.
+      source: cien-zhuan
+      at: 卷二（法師停一宿而過）
+      quote: 法師停一宿而過
+places:
+  - place: agni
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

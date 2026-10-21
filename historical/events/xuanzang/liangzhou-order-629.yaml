@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The governor 李大亮, under orders to stop anyone leaving for the west, orders 玄奘 back to the capital;
+  the monk 慧威 sends two disciples to take him west in secret, travelling by night.
+types: [occurrence]
+date:
+  value: "629"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 亮聞之，逼還京
+  cite:
+    - id: liangzhou-order-629-time
+      says: The biography records the governor's order without a date, during the stay at 涼州.
+      source: cien-zhuan
+      at: 卷一（亮聞之，逼還京）
+      quote: 亮聞之，逼還京
+places:
+  - place: liangzhou
+    role: site
+participants:
+  - actor: xuanzang
+    role: subject
+  - actor: li-daliang
+    role: participant
+cite:
+  - id: liangzhou-order-escape
+    says: The biography records 慧威 sending 慧琳 and 道整 to take him west in secret.
+    source: cien-zhuan
+    at: 卷一（密遣二弟子，一曰慧琳、二曰道整）
+    quote: 密遣二弟子，一曰慧琳、二曰道整，竊送向西

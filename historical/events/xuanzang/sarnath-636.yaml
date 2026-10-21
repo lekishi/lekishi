@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: From 婆羅痆斯 玄奘 goes to the 鹿野伽藍, where the Buddha first preached.
+types: [journey]
+date:
+  value: 632..637
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 渡婆羅痆斯河東北行十餘里，至鹿野伽藍
+  cite:
+    - id: sarnath-636-time
+      says: The biography records the 鹿野伽藍 without a date.
+      source: cien-zhuan
+      at: 卷三（渡婆羅痆斯河東北行十餘里）
+      quote: 渡婆羅痆斯河東北行十餘里，至鹿野伽藍
+places:
+  - place: sarnath
+    role: site
+  - place: varanasi
+    role: context
+    note: The city he came from.
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

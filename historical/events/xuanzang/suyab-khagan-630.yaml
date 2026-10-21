@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At 素葉城 玄奘 meets the 葉護可汗 out hunting and is received in his golden tent with the envoys of Tang
+  and 高昌; the khagan tries to dissuade him from India, then gives him an interpreter who had lived in
+  長安, letters, and an escort to 迦畢試.
+types: [occurrence, exchange]
+date:
+  value: 629..630
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 至素葉城，逢突厥葉護可汗
+  cite:
+    - id: suyab-khagan-630-time
+      says: The biography records the meeting without a date.
+      source: cien-zhuan
+      at: 卷二（至素葉城，逢突厥葉護可汗）
+      quote: 至素葉城，逢突厥葉護可汗
+places:
+  - place: suyab
+    role: site
+participants:
+  - actor: xuanzang
+    role: guest
+  - actor: yabghu-khagan
+    role: host
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.
+cite:
+  - id: suyab-escort
+    says: The biography records the khagan ordering letters and an escort as far as 迦畢試.
+    source: cien-zhuan
+    at: 卷二（作諸國書，令摩咄送法師到迦畢試國）
+    quote: 作諸國書，令摩咄送法師到迦畢試國

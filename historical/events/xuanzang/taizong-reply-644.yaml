@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  After seven or eight months, during which 玄奘 lectures to the monks of 于闐, the envoy returns with
+  the emperor's welcome and orders that the countries escort him and that 敦煌 and 鄯善 meet him in the desert.
+types: [exchange]
+date:
+  value: 644..645
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 時間經七八月，使還，蒙恩敕降使迎勞曰
+  cite:
+    - id: taizong-reply-644-time
+      says: The biography records the reply after seven or eight months, without a date.
+      source: cien-zhuan
+      at: 卷五（時間經七八月）
+      quote: 時間經七八月，使還，蒙恩敕降使迎勞曰
+places:
+  - place: khotan
+    role: site
+participants:
+  - actor: xuanzang
+    role: subject
+  - actor: tang-taizong
+    role: leader
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.
+cite:
+  - id: taizong-reply-words
+    says: The biography quotes the edict asking him to come quickly.
+    source: cien-zhuan
+    at: 卷五（可即速來與朕相見）
+    quote: 可即速來與朕相見

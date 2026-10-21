@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  By night 玄奘 and 石盤陀 reach the river and see 玉門關; ten 里 upstream they bridge the river with branches
+  and cross. The guide turns back the next day.
+types: [journey]
+date:
+  value: 629..630
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 三更許到河，遙見玉門關
+  cite:
+    - id: yumen-crossing-629-time
+      says: The biography records the night crossing without a date.
+      source: cien-zhuan
+      at: 卷一（三更許到河，遙見玉門關）
+      quote: 三更許到河，遙見玉門關
+places:
+  - place: yumen-pass
+    role: site
+    note: The crossing was ten 里 upstream of the pass.
+participants:
+  - actor: xuanzang
+    role: leader
+  - actor: shi-pantuo
+    role: participant
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.
+cite:
+  - id: yumen-crossing-bridge
+    says: The biography records the guide cutting wood to bridge the river.
+    source: cien-zhuan
+    at: 卷一（胡人乃斬木為橋）
+    quote: 胡人乃斬木為橋，布草填沙，驅馬而過

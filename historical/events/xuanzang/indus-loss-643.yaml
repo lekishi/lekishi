@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Crossing the 信度河, 玄奘 rides an elephant while the books go by boat; a storm nearly sinks it, and
+  fifty bundles of sūtras and the seeds of Indian flowers are lost.
+types: [occurrence]
+date:
+  value: 642..644
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 遂失五十夾經本及華種等
+  cite:
+    - id: indus-loss-643-time
+      says: The biography records the loss without a date.
+      source: cien-zhuan
+      at: 卷五（遂失五十夾經本及華種等）
+      quote: 遂失五十夾經本及華種等
+places:
+  - place: udakhand
+    role: site
+    note: The king of 迦畢試 was waiting at 烏鐸迦漢荼 on the river.
+participants:
+  - actor: xuanzang
+    role: subject
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

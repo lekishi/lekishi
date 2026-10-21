@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: At 闍爛達那, the royal seat of the north, 玄奘 stays a month before 烏地多王 sends him on.
+types: [journey]
+date:
+  value: 642..644
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 至闍蘭逢國，即北印度王都，複停一月
+  cite:
+    - id: jalandhara-return-643-time
+      says: The biography records the month without dates.
+      source: cien-zhuan
+      at: 卷五（至闍蘭逢國，即北印度王都，複停一）
+      quote: 至闍蘭逢國，即北印度王都，複停一月
+places:
+  - place: jalandhara
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

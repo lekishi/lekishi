@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: At 劫比他 玄奘 sees the 三寶階, the stair of the Buddha's descent.
+types: [journey]
+date:
+  value: 632..637
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 又東行二百餘里，至劫比他國
+  cite:
+    - id: sankasya-635-time
+      says: The biography records 劫比他 without a date.
+      source: cien-zhuan
+      at: 卷二（又東行二百餘里）
+      quote: 又東行二百餘里，至劫比他國
+places:
+  - place: sankasya
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

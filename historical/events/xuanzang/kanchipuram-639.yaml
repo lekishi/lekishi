@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At 建志補羅, the port for 僧伽羅, 玄奘 meets three hundred monks who have fled the king's death and famine
+  there, and gives up the crossing.
+types: [occurrence]
+date:
+  value: 636..642
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 未去之間而彼王死，國內饑亂
+  cite:
+    - id: kanchipuram-639-time
+      says: The biography records the meeting without a date.
+      source: cien-zhuan
+      at: 卷四（未去之間而彼王死）
+      quote: 未去之間而彼王死，國內饑亂
+places:
+  - place: kanchipuram
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

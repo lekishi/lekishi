@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 玄奘 presents the 大唐西域記 in twelve 卷, the account the emperor asked for at 洛陽, with the first translations.
+types: [other]
+date:
+  value: 646-07
+  calendar: chinese_lunisolar
+  as_written: 貞觀二十年秋七月
+  cite:
+    - id: xiyu-ji-presented-646-time
+      says: The biography records the 西域記 finished in the seventh month of 貞觀二十年.
+      source: cien-zhuan
+      at: 卷六（前又洛陽奉見日）
+      quote: 前又洛陽奉見日，敕令法師修《西域記》，至是而成
+places:
+  - place: changan
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+  - actor: tang-taizong
+    role: witness
+notes:
+  The type is other because the event vocabulary has no kind for completing or presenting a written
+  work; the same gap applies to the 會宗論 at 那爛陀.
+cite:
+  - id: xiyu-ji-title
+    says: The memorial names the work and its twelve 卷.
+    source: cien-zhuan
+    at: 卷六（稱為《大唐西域記》）
+    quote: 稱為《大唐西域記》，凡一十二卷

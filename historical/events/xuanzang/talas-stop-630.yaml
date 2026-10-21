@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 玄奘 passes 呾邏斯城, west of the khagan's summer grounds at the 千泉.
+types: [journey]
+date:
+  value: 629..630
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 自屏聿西百五十里，至呾邏斯城
+  cite:
+    - id: talas-stop-630-time
+      says: The biography records 呾邏斯 without a date.
+      source: cien-zhuan
+      at: 卷二（自屏聿西百五十里）
+      quote: 自屏聿西百五十里，至呾邏斯城
+places:
+  - place: talas
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  麹文泰 sends for 玄奘, who crosses the southern desert in six days and reaches the royal city of 高昌
+  at midnight; the king and queen have stayed up reading scripture to wait for him.
+types: [journey]
+date:
+  value: 629..630
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 即以其夜半到王城
+  cite:
+    - id: gaochang-arrival-630-time
+      says: The biography records the midnight arrival without a date.
+      source: cien-zhuan
+      at: 卷一（即以其夜半到王城）
+      quote: 即以其夜半到王城
+places:
+  - place: gaochang
+    role: site
+participants:
+  - actor: xuanzang
+    role: guest
+  - actor: qu-wentai
+    role: host
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

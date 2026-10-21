@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 玄奘 returns from 洛陽 to 長安 and settles at the 弘福寺 to begin translating, with the scholars 房玄齡 assembles.
+types: [founding, process]
+date:
+  value: 645-03
+  calendar: chinese_lunisolar
+  as_written: 貞觀十九年三月己巳
+  cite:
+    - id: hongfu-translation-645-time
+      says: The biography dates his return to 長安 and the 弘福寺 to the day 己巳 of the third month of 貞觀十九年.
+      source: cien-zhuan
+      at: 卷六（三月己巳，法師自洛陽還至長安，即）
+      quote: 三月己巳，法師自洛陽還至長安，即居弘福寺
+places:
+  - place: changan
+    role: site
+    note: The 弘福寺, inside the city.
+participants:
+  - actor: xuanzang
+    role: leader
+  - actor: fang-xuanling
+    role: participant

@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "From 于闐 玄奘 sends a memorial to the emperor with 馬玄智 and a caravan: he left without leave, travelled
+  seventeen years and is now on his way back, delayed by the loss of his elephant."
+types: [exchange]
+date:
+  value: 642..644
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 謹遣高昌俗人馬玄智隨商侶奉表先聞
+  cite:
+    - id: khotan-memorial-644-time
+      says: The memorial gives no date of its own; it is written after the return over the 蔥嶺.
+      source: cien-zhuan
+      at: 卷五（謹遣高昌俗人馬玄智隨商侶奉表先聞）
+      quote: 謹遣高昌俗人馬玄智隨商侶奉表先聞
+places:
+  - place: khotan
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+  - actor: ma-xuanzhi
+    role: participant
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.
+cite:
+  - id: khotan-memorial-years
+    says: The memorial says he travelled for seventeen years.
+    source: cien-zhuan
+    at: 卷五（曆覽周遊一十七載）
+    quote: 曆覽周遊一十七載

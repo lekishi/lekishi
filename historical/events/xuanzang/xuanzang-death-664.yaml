@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  玄奘 dies at midnight at the 玉華寺, where he had finished the 大般若經. The biography dates it 麟德元年二月五日
+  (664); the official history says he died in 顯慶六年 (661) at fifty-six.
+types: [occurrence]
+date:
+  value: 664-02-05
+  calendar: chinese_lunisolar
+  as_written: 麟德元年二月五日夜半
+  cite:
+    - id: xuanzang-death-664-time
+      says: The biography records his death at midnight on the fifth day of the second month of 麟德元年.
+      source: cien-zhuan
+      at: 卷十（至五日夜半，弟子光等問云）
+      quote: 至五日夜半，弟子光等問云
+    - id: xuanzang-death-month
+      says: The heading of 卷十 closes the biography with his death at 玉華宮 in 麟德元年二月.
+      role: supporting
+      source: cien-zhuan
+      at: 卷十（終至麟德元年二月玉華宮舍化）
+      quote: 終至麟德元年二月玉華宮舍化
+places:
+  - place: yuhua-palace
+    role: site
+participants:
+  - actor: xuanzang
+    role: subject
+notes:
+  The month comes from the heading of 卷十, which ends the biography at 麟德元年二月 at 玉華宮; the day from
+  the account of the night itself.
+dispute:
+  status: disputed
+  summary:
+    The biography dates the death to 麟德元年二月五日 (664) and the official history to 顯慶六年 (661). The
+    chapter publishes the biography's date and keeps the history's as a conflicting claim.
+cite:
+  - id: xuanzang-death-history
+    says: The official history records his death in the sixth year after 顯慶元年, at fifty-six.
+    role: conflicting
+    source: jiu-tangshu-fangji
+    at: 卷一九一 方伎 僧玄奘
+    quote: 六年卒，時年五十六

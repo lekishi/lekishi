@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: At 伊爛拏 玄奘 stays a year reading the 毗婆沙 and the 順正理.
+types: [journey, exchange]
+date:
+  value: 636..642
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 又停一年，就讀《毗婆沙》、《順正理》等
+  cite:
+    - id: hiranyaparvata-stay-638-time
+      says: The biography records the year there without dates.
+      source: cien-zhuan
+      at: 卷三（又停一年，就讀《毗婆沙》、《順正）
+      quote: 又停一年，就讀《毗婆沙》、《順正理》等
+places:
+  - place: hiranyaparvata
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

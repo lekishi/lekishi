@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The king of 迦濕彌羅 meets 玄奘 with a thousand followers, lodges him at the 闍耶因陀羅寺 and gives him twenty
+  copyists; he studies with 僧稱 and stays two years.
+types: [journey, exchange]
+date:
+  value: 631..633
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 知足停留首尾二年，學諸經、論，禮聖跡已，乃辭
+  cite:
+    - id: kashmir-stay-631-time
+      says: The biography records the two years in 迦濕彌羅 without dates.
+      source: cien-zhuan
+      at: 卷二（知足停留首尾二年）
+      quote: 知足停留首尾二年，學諸經、論，禮聖跡已，乃辭
+places:
+  - place: kashmir
+    role: site
+participants:
+  - actor: xuanzang
+    role: guest
+  - actor: sengcheng
+    role: participant
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.
+cite:
+  - id: kashmir-copyists
+    says: The biography records the king giving twenty copyists.
+    source: cien-zhuan
+    at: 卷二（遂給書手二十人）
+    quote: 遂給書手二十人，令寫經、論

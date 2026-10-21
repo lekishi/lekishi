@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At 活國 玄奘 finds the khagan's son 呾度設 widowed and ill; the 設 is poisoned by his new wife, and 玄奘
+  stays more than a month through the mourning.
+types: [journey]
+date:
+  value: 629..630
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 為逢喪故，淹留月餘
+  cite:
+    - id: kunduz-stay-630-time
+      says: The biography records the month at 活國 without a date.
+      source: cien-zhuan
+      at: 卷二（為逢喪故，淹留月餘）
+      quote: 為逢喪故，淹留月餘
+places:
+  - place: kunduz
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

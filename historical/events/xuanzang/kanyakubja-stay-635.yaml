@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: At the 跋達羅毗訶羅寺 in 羯若鞠闍 玄奘 stays three months reading with 毗離耶犀那.
+types: [journey, exchange]
+date:
+  value: 632..637
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 到跋達羅昆訶羅寺住三月
+  cite:
+    - id: kanyakubja-stay-635-time
+      says: The biography records the three months without dates.
+      source: cien-zhuan
+      at: 卷二（到跋達羅昆訶羅寺住三月）
+      quote: 到跋達羅昆訶羅寺住三月
+places:
+  - place: kanyakubja
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

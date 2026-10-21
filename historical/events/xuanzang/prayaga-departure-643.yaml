@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  玄奘 refuses 戒日王's and 鳩摩羅王's offers to stay or to go home by sea, saying he promised the king
+  of 高昌 to return by the north; the kings see him off and send letters ordering every country to pass
+  him on to China.
+types: [journey]
+date:
+  value: 642..644
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 今者還須北路而去
+  cite:
+    - id: prayaga-departure-643-time
+      says: The biography records the departure without a date.
+      source: cien-zhuan
+      at: 卷五（今者還須北路而去）
+      quote: 今者還須北路而去
+places:
+  - place: prayaga
+    role: start
+participants:
+  - actor: xuanzang
+    role: leader
+  - actor: harsha
+    role: host
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.
+cite:
+  - id: prayaga-letters
+    says: The biography records the letters sealed in red clay for the countries on the way.
+    source: cien-zhuan
+    at: 卷五（王以素氈作書）
+    quote: 王以素氈作書，紅泥封印

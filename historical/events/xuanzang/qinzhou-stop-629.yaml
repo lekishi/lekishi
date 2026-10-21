@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 玄奘 goes with the monk 孝達 of 秦州, who is returning home, and stays one night in 秦州.
+types: [journey]
+date:
+  value: "629"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 至秦州，停一宿，逢蘭州伴，又隨去至蘭州
+  cite:
+    - id: qinzhou-stop-629-time
+      says: The biography records the night at 秦州 without a date, after the 貞觀三年 departure.
+      source: cien-zhuan
+      at: 卷一（至秦州，停一宿，逢蘭州伴，又隨去）
+      quote: 至秦州，停一宿，逢蘭州伴，又隨去至蘭州
+places:
+  - place: qinzhou
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes: Dated to 貞觀三年 by the departure; the biography gives no day.

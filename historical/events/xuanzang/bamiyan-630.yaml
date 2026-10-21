@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At the capital of 梵衍那 the king hosts 玄奘 for days; he sees the standing stone image of a hundred
+  and fifty 尺 in the hillside and the thousand-尺 reclining Buddha.
+types: [journey]
+date:
+  value: 629..630
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 王城東北山阿有立石像，高百五十尺
+  cite:
+    - id: bamiyan-630-time
+      says: The biography records 梵衍那 without a date.
+      source: cien-zhuan
+      at: 卷二（王城東北山阿有立石像）
+      quote: 王城東北山阿有立石像，高百五十尺
+places:
+  - place: bamiyan
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  鳩摩羅王 of 迦摩縷波 demands 玄奘 and threatens to trample 那爛陀 if 戒賢 refuses; 玄奘 goes and stays more than
+  a month.
+types: [journey]
+date:
+  value: 641..643
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 法師辭師，與使俱去。至彼，王見甚喜
+  cite:
+    - id: kamarupa-invitation-642-time
+      says: The biography records the visit without a date.
+      source: cien-zhuan
+      at: 卷五（法師辭師，與使俱去。至彼，王見甚）
+      quote: 法師辭師，與使俱去。至彼，王見甚喜
+places:
+  - place: kamarupa
+    role: site
+participants:
+  - actor: xuanzang
+    role: guest
+  - actor: bhaskaravarman
+    role: host
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.
+cite:
+  - id: kamarupa-threat
+    says: The biography quotes the king's threat to trample 那爛陀.
+    source: cien-zhuan
+    at: 卷五（踏那燜陀寺，使碎如塵）
+    quote: 踏那燜陀寺，使碎如塵

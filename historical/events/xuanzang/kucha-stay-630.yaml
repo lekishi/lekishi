@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: At 屈支 玄奘 debates 木叉鞠多 on the 俱舍 and waits more than sixty days for the snow road over 凌山 to open.
+types: [journey]
+date:
+  value: 629..630
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 時為淩山雪路未開，不得進發，淹停六十餘日
+  cite:
+    - id: kucha-stay-630-time
+      says: The biography records the stay at 屈支 without a date.
+      source: cien-zhuan
+      at: 卷二（時為淩山雪路未開）
+      quote: 時為淩山雪路未開，不得進發，淹停六十餘日
+places:
+  - place: kucha
+    role: site
+participants:
+  - actor: xuanzang
+    role: guest
+  - actor: mokshagupta
+    role: participant
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: From 那爛陀 玄奘 visits 王舍城, the 鷲峰 and the cave of the first council.
+types: [journey]
+date:
+  value: 636..642
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 法師於那爛陀寺安置已，向王舍城觀禮聖跡
+  cite:
+    - id: rajagriha-visit-637-time
+      says: The biography records the visit without a date.
+      source: cien-zhuan
+      at: 卷三（法師於那爛陀寺安置已）
+      quote: 法師於那爛陀寺安置已，向王舍城觀禮聖跡
+places:
+  - place: rajagriha
+    role: site
+  - place: vulture-peak
+    role: context
+    note: One of the sites the biography describes at 王舍城.
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

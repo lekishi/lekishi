@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 玄奘 reaches the ruined city of 劫比羅伐窣堵 and the palace of 淨飯王.
+types: [journey]
+date:
+  value: 632..637
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 從此東南行八百餘里，至劫比羅伐窣堵國
+  cite:
+    - id: kapilavastu-636-time
+      says: The biography records 劫比羅伐窣堵 without a date.
+      source: cien-zhuan
+      at: 卷三（從此東南行八百餘里）
+      quote: 從此東南行八百餘里，至劫比羅伐窣堵國
+places:
+  - place: kapilavastu
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

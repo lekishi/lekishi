@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: Turning back, 始皇 passed 吳, crossed the 江 at 江乘 and went north along the sea to 瑯邪.
+types: [journey]
+date:
+  value: 211-12 BCE..210-08 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 三十七年
+  cite:
+    - id: coast-north-210-account
+      says: The annals record the return by 吳 and 江乘 and the coastal road north to 瑯邪.
+      source: shiji
+      at: 卷六 秦始皇本紀 三十七年（還過吳）
+      quote: 還過吳，從江乘渡。并海上，北至瑯邪。
+places:
+  - place: wu-xian
+    role: waypoint
+  - place: jiangcheng
+    role: waypoint
+  - place: langya
+    role: end
+participants:
+  - actor: qin-king-zheng
+    role: leader

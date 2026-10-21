@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: In his twenty-seventh year (220 BCE), the first after the unification, 始皇 toured 隴西 and 北地, going out by 雞頭山 and passing 回中.
+types: [journey]
+date:
+  value: 220 BCE
+  calendar: chinese_lunisolar
+  as_written: 二十七年
+  cite:
+    - id: west-tour-220-account
+      says: The annals record the tour of 隴西 and 北地 by 雞頭山 and 回中.
+      source: shiji
+      at: 卷六 秦始皇本紀 二十七年（始皇巡隴西、北地）
+      quote: 二十七年，始皇巡隴西、北地，出雞頭山，過回中。
+places:
+  - place: longxi
+    role: waypoint
+  - place: beidi
+    role: waypoint
+  - place: jitou-shan
+    role: waypoint
+  - place: huizhong
+    role: waypoint
+participants:
+  - actor: qin-king-zheng
+    role: leader
+notes: The order of the places is the annals'; the route between them is not recorded and no line is drawn.

@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: On the eastern tour of 218 BCE 始皇 was alarmed by bandits at 博狼沙 in 陽武. They were not caught, and he ordered a ten-day search of the whole realm.
+types: [occurrence]
+date:
+  value: 218 BCE
+  calendar: chinese_lunisolar
+  as_written: 二十九年
+  cite:
+    - id: bolangsha-attack-218-account
+      says: The annals record the attack at 博狼沙 and the ten-day search.
+      source: shiji
+      at: 卷六 秦始皇本紀 二十九年（至陽武博狼沙中）
+      quote: 二十九年，始皇東游。至陽武博狼沙中，為盜所驚。求弗得，乃令天下大索十日。
+places:
+  - place: bolangsha
+    role: site
+participants:
+  - actor: qin-king-zheng
+    role: subject
+notes: The annals do not name the attackers.

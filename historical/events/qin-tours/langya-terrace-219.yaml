@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 始皇 went south to 瑯邪, was delighted with it and stayed three months. He moved thirty thousand households to the foot of the 瑯邪臺, exempting them from labour for twelve years, built the terrace and set up an inscribed stone; the annals list the lords and ministers who discussed it with him by the sea, among them 王賁 and 李斯.
+types: [occurrence]
+date:
+  value: 219 BCE
+  calendar: chinese_lunisolar
+  as_written: 二十八年
+  cite:
+    - id: langya-terrace-219-account
+      says: The annals record the three-month stay at 瑯邪, the resettlement and the terrace with its inscription.
+      source: shiji
+      at: 卷六 秦始皇本紀 二十八年（南登瑯邪）
+      quote: 南登瑯邪，大樂之，留三月。乃徙黔首三萬戶瑯邪臺下，復十二歲。作瑯邪臺，立石刻，頌秦德，明得意。
+places:
+  - place: langya
+    role: site
+participants:
+  - actor: qin-king-zheng
+    role: leader
+  - actor: wang-ben
+    role: participant
+    note: Listed as 通武侯 among those who discussed the inscription.
+  - actor: li-si
+    role: participant
+    note: Listed as 卿 among those who discussed the inscription.
+cites:
+  participants:
+    - id: langya-terrace-219-participants
+      says: The annals list 王賁 and 李斯 among the lords and ministers who discussed the inscription by the sea.
+      sources:
+        - source: shiji
+          at: 卷六 秦始皇本紀 二十八年（列侯通武侯王賁）
+          quote: 列侯武城侯王離、列侯通武侯王賁
+        - source: shiji
+          at: 卷六 秦始皇本紀 二十八年（卿李斯）
+          quote: 丞相王綰、卿李斯

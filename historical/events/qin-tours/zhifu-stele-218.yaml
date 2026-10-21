@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: In the middle of spring 218 BCE 始皇 climbed 之罘 again and had two inscriptions cut, then turned to 瑯邪 and went home through 上黨.
+types: [journey]
+date:
+  value: 218 BCE
+  calendar: chinese_lunisolar
+  as_written: 二十九年
+  cite:
+    - id: zhifu-stele-218-account
+      says: The annals record the inscriptions on 之罘 and the return by 瑯邪 and 上黨.
+      sources:
+        - source: shiji
+          at: 卷六 秦始皇本紀 二十九年（登之罘，刻石）
+          quote: 登之罘，刻石。
+        - source: shiji
+          at: 卷六 秦始皇本紀 二十九年（道上黨入）
+          quote: 旋，遂之瑯邪，道上黨入。
+places:
+  - place: zhifu
+    role: site
+  - place: langya
+    role: waypoint
+  - place: shangdang
+    role: waypoint
+participants:
+  - actor: qin-king-zheng
+    role: leader

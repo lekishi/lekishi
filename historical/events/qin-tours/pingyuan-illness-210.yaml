@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 始皇 fell ill on reaching 平原津. He hated talk of death, and no minister dared raise it. As he grew worse he sealed a letter to 扶蘇 telling him to meet the cortege at 咸陽 for the burial; it stayed with 趙高, unsent.
+types: [occurrence]
+date:
+  value: 210-07 BCE..210-09 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 三十七年
+  cite:
+    - id: pingyuan-illness-210-account
+      says: The annals record the illness at 平原津 and the sealed letter left with 趙高.
+      sources:
+        - source: shiji
+          at: 卷六 秦始皇本紀 三十七年（至平原津而病）
+          quote: 至平原津而病。始皇惡言死，群臣莫敢言死事。
+        - source: shiji
+          at: 卷六 秦始皇本紀 三十七年（中車府令趙高）
+          quote: 書已封，在中車府令趙高行符璽事所，未授使者。
+places:
+  - place: pingyuan-jin
+    role: site
+participants:
+  - actor: qin-king-zheng
+    role: subject
+  - actor: zhao-gao
+    role: participant
+notes: The annals give no month for the illness; it came before the death in the seventh month.

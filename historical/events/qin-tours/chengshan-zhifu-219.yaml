@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: From 泰山 始皇 went east along the 勃海, past 黃 and 腄, to the end of 成山, climbed 之罘 and set up a stone praising Qin.
+types: [journey]
+date:
+  value: 219 BCE
+  calendar: chinese_lunisolar
+  as_written: 二十八年
+  cite:
+    - id: chengshan-zhifu-219-account
+      says: The annals record the coastal journey east to 成山 and the stone on 之罘.
+      source: shiji
+      at: 卷六 秦始皇本紀 二十八年（窮成山）
+      quote: 於是乃并勃海以東，過黃、腄，窮成山，登之罘，立石頌秦德焉而去。
+places:
+  - place: chengshan
+    role: waypoint
+  - place: zhifu
+    role: site
+participants:
+  - actor: qin-king-zheng
+    role: leader
+notes: 黃 and 腄 are not recorded as places.

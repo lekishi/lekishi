@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: At 瑯邪 徐巿, who had found no elixir after years at sea, claimed a great fish barred the way. 始皇, who had dreamt of fighting a sea god, had crossbows carried, went north to 榮成山 without seeing it, and at 之罘 shot and killed a great fish. Then he followed the coast west.
+types: [occurrence]
+date:
+  value: 211-12 BCE..210-08 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 三十七年
+  cite:
+    - id: great-fish-210-account
+      says: The annals record 徐巿's excuse, the search north from 瑯邪 and the great fish shot at 之罘.
+      sources:
+        - source: shiji
+          at: 卷六 秦始皇本紀 三十七年（方士徐巿等入海求神藥）
+          quote: 方士徐巿等入海求神藥，數歲不得，費多，恐譴，乃詐曰
+        - source: shiji
+          at: 卷六 秦始皇本紀 三十七年（射殺一魚）
+          quote: 自瑯邪北至榮成山，弗見。至之罘，見巨魚，射殺一魚。遂并海西。
+places:
+  - place: langya
+    role: start
+  - place: zhifu
+    role: site
+participants:
+  - actor: qin-king-zheng
+    role: leader
+  - actor: xu-fu
+    role: participant
+notes: 榮成山 is not recorded as a place; the record does not identify it with 成山.

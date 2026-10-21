@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 始皇 climbed 會稽, sacrificed to 大禹, looked out over the southern sea and set up a stone inscribed with Qin's virtue, his last inscription.
+types: [occurrence]
+date:
+  value: 211-12 BCE..210-08 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 三十七年
+  cite:
+    - id: kuaiji-stele-210-account
+      says: The annals record the sacrifice to 大禹 on 會稽 and the inscribed stone.
+      source: shiji
+      at: 卷六 秦始皇本紀 三十七年（上會稽）
+      quote: 上會稽，祭大禹，望于南海，而立石刻頌秦德。
+places:
+  - place: kuaiji-shan
+    role: site
+participants:
+  - actor: qin-king-zheng
+    role: leader
+notes: The window is the same as the crossing of the 浙江, because the annals give no month.

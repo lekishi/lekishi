@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 趙高, 胡亥 and 李斯 destroyed 始皇's sealed letter to 扶蘇, forged an edict making 胡亥 heir, and sent letters ordering 扶蘇 and 蒙恬 to die.
+types: [occurrence]
+date:
+  value: 210-09 BCE..210-10 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 三十七年
+  cite:
+    - id: shaqiu-plot-210-account
+      says: The annals record the plot to destroy the letter and forge the edict naming 胡亥 heir.
+      source: shiji
+      at: 卷六 秦始皇本紀 三十七年（陰謀破去始皇所封書）
+      quote: 高乃與公子胡亥、丞相斯陰謀破去始皇所封書賜公子扶蘇者，而更詐為丞相斯受始皇遺詔沙丘，立子胡亥為太子。
+places:
+  - place: shaqiu
+    role: site
+participants:
+  - actor: zhao-gao
+    role: leader
+  - actor: hu-hai
+    role: participant
+  - actor: li-si
+    role: participant
+  - actor: meng-tian
+    role: subject
+    note: Ordered to die in the forged letters.
+cites:
+  participants:
+    - id: shaqiu-plot-210-participants
+      says: The annals record the forged letters ordering 扶蘇 and 蒙恬 to die.
+      source: shiji
+      at: 卷六 秦始皇本紀 三十七年（更為書賜公子扶蘇、蒙恬）
+      quote: 更為書賜公子扶蘇、蒙恬，數以罪
+notes: The window is a reading of the annals' order, in which the plot follows the death in the seventh month and precedes the burial in the ninth.

@@ -94,6 +94,14 @@ jobs:
       - name: Build as production does
         run: pnpm build
 
+      # The members' draft path through the built Pages worker (RFD 6): one
+      # approved chapter is made stale for this build only, and a member's
+      # session must open it while no session, a forged one or an expired one
+      # gets the same 404 as an unknown chapter. The tiles are already built, so
+      # only the app is rebuilt.
+      - name: Check the worker's drafts with a stale chapter
+        run: pnpm check:worker
+
   build:
     # Builds the static artifact once, with its build invariant, and hands it to
     # every browser job. Painting the globe tiles is most of the time when the

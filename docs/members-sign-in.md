@@ -75,3 +75,12 @@ which Git ignores, then:
 pnpm build
 pnpm exec wrangler pages dev build --port 8788
 ```
+
+`pnpm check:worker` does this without GitHub, and CI's `production` job runs
+it. It makes one approved chapter stale for a single production build by
+retitling its manifest, restoring the file once the build has read it. Then it
+serves `build/` under `wrangler pages dev` with a throwaway session key and
+checks two things. A member's session opens the draft's page and data, and
+neither may be cached. Without a session, or with a forged or expired one, the
+reader gets exactly the answer an unknown chapter gets. It leaves `build/` as
+that stale build.

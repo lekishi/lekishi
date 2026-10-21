@@ -20,13 +20,15 @@ names:
 at:
   - interpretation: approximate_point
     precision: locality
-    point: [-175.12541, -21.154458]
-    notes: The site location Pofatu records for Nukuleka's artefacts.
+    point: [-175.12674, -21.15191]
+    notes:
+      The modern village of Nukuleka on Tongatapu, which the cited study names for the site; the
+      excavated site lies at the village, so the point is approximate.
     cite:
       - id: nukuleka-location
-        says: Pofatu records the Nukuleka site, Tongatapu, at this point.
-        source: pofatu
-        at: clark2014_92 (location_latitude, location_longitude), v1.4
+        says: GeoNames records Nukuleka at this point.
+        source: geonames
+        at: 4032395 (Nukuleka; latitude, longitude), dump 2026-10-21
 external_ids:
   - system: geonames
     id: "4032395"

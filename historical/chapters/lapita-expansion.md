@@ -13,13 +13,11 @@ range of calibrated radiocarbon or U/Th dates for when an archaeological signal
 begins at a site, and the scholars who model them disagree by up to two
 centuries. That is the chapter's value: it tests the engine on wide,
 overlapping, probabilistic windows, on places that are islands and island
-groups rather than towns, and on undated relationships.
+groups rather than towns.
 
-- 10 events (the expansion, 9 dated settlements and phases), 14 places, 1 actor
-  (the Lapita culture), 4 obsidian relationships, all undated: one trade arc
-  to Bukit Tengkorak, whose source calls it exchange, and three provenance
-  links (`other`) to Lapita sites, which say obsidian arrived but not how and
-  are listed on the cards, not drawn.
+- 10 events (the expansion, 9 dated settlements and phases), 9 places, 1 actor
+  (the Lapita culture), and no relationships while the obsidian finds are held
+  back (below).
 - A proposed v1 journey in
   [`historical/journeys/lapita-expansion.yaml`](../journeys/lapita-expansion.yaml)
   with the one `reconstructed_route` leg, not compiled.
@@ -35,23 +33,27 @@ groups rather than towns, and on undated relationships.
 | Burley, Weisler and Zhao 2012 (PLOS ONE 7) | `burley-2012-nukuleka` | CC BY | Nukuleka; quoted |
 | Petchey 2001 (Radiocarbon 43) | `petchey-2001-mulifanua` | Cite-only, abstract read | Mulifanua's first date |
 | Petchey and Kirch 2019 (PLOS ONE 14) | `petchey-kirch-2019` | CC0 | Mulifanua's revised date and the culture's span; quoted |
-| Pofatu v1.4 | `pofatu` | CC BY 4.0 on the release; the repository's LICENSE file says CC BY-NC 4.0 | Site points and obsidian finds |
+| Pofatu v1.4 | `pofatu` | CC BY 4.0 on the release; the repository's LICENSE file says CC BY-NC 4.0 | Not reached: only the held-back obsidian records cite it |
 | GeoNames | `geonames` | CC BY 4.0 | Modern island and region points |
 
 The cite-only articles are never quoted; their figures are paraphrased as
 interpretations attributed to their authors. Quotations from the two open
-articles were checked by script against the downloaded texts; Pofatu is
-paraphrased, not quoted, while its terms are unresolved.
-Wikidata was rate-limited for this whole pass (HTTP 429), so GeoNames and
-Pofatu stand in for it.
+articles were checked by script against the downloaded texts.
+Wikidata was rate-limited for this whole pass (HTTP 429), so GeoNames stands in
+for it.
 
-**Pofatu needs an owner decision before approval:** its Zenodo release,
-metadata and website say CC BY 4.0, but the GitHub repository's LICENSE file
-says CC BY-NC 4.0. The register's rule does not adopt a source with a possible
-non-commercial term by default, so the source record claims only what both
-readings allow (attributed, non-commercial sharing, no quotation), and the
-chapter is not ready for approval until the owner records a decision, the
-maintainers resolve the LICENSE, or the Pofatu claims are replaced.
+**The obsidian finds are held back until the owner decides on Pofatu:** its
+Zenodo release, metadata and website say CC BY 4.0, but the GitHub
+repository's LICENSE file says CC BY-NC 4.0. The register's rule does not
+adopt a source with a possible non-commercial term without the owner's
+decision, and drafts are served to previews and members, so the chapter
+reaches nothing that cites Pofatu. The four obsidian relationships and the
+places only they use (`talasea-obsidian`, `lapita-site`, `vatcha`,
+`vorovoro`, `bukit-tengkorak`) stay in the tree, unreached. Once the owner
+records a decision in the register, or the maintainers resolve the LICENSE,
+listing the four relationships in the manifest's `include` restores them: one
+trade arc to Bukit Tengkorak, whose source calls it exchange, and three
+provenance links (`other`) that say obsidian arrived but not how.
 
 ## Dates
 
@@ -77,7 +79,8 @@ events.
 
 ## Places
 
-Sites come from Pofatu's sample coordinates; islands and groups from GeoNames.
+Sites, islands and groups come from GeoNames; a site's point is the modern
+locality its study names.
 Three places are label anchors only (`display_anchor`, unspecified precision):
 the Bismarck Archipelago, Vanuatu, and Bourewa, which has no open coordinate
 and is anchored on Viti Levu, where its cited title puts it.

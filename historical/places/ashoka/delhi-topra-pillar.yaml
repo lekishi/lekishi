@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  The Delhi-Topra pillar, the only monument carrying all seven Pillar Edicts. Sultan Fīrōz Tughlak moved
+  it in 1356 CE from Topra in the Ambala district to his city of Fīrōzābād at Delhi, where it stands on
+  the Kotla.
+types: [other]
+names:
+  - form: Delhi-Topra pillar
+    lang: en
+    script: Latn
+    cite:
+      - id: delhi-topra-name
+        says: >-
+          Smith's table places the pillar on the summit of the Kotla in the ruined city of Fīrōzābād, transported
+          from Topra in A.D. 1356.
+        source: smith-asoka-1920
+        at: ch. III, Existing Inscribed Pillars of Asoka
+        quote: >-
+          On summit of Kothila in the ruined city of Fîrozâbâd near Delhi; transported from Topra in Ambâla
+          District in A.D. 1356 by Sultan Fîroz Tughlak.
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [77.245277777, 28.635833333]
+    notes: >-
+      The coordinate is the pillar's modern position recorded in Wikidata (CC0). That is where the pillar
+      has stood since 1356 CE, not where Aśoka set it up: its original place was Topra (Wikidata Q29467679,
+      about 77.16° E, 30.13° N), which the chapter does not draw.
+    cite:
+      - id: delhi-topra-anchor
+        says: >-
+          The coordinate is the modern position recorded in Wikidata (CC0); it is a map reference, not a historical
+          claim.
+        source: wikidata
+        at: Q22806981 (P625), revision 2534279982
+notes: >-
+  The anchor is the monument's present position. A reader following the Pillar Edicts sees Delhi, and
+  the record says so; the original site is named, not mapped.

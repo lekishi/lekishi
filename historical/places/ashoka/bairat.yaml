@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  Bairāṭ in Rajputana, a very ancient town where a version of the first Minor Rock Edict is engraved at
+  the foot of a hill and where the Bhābrū Edict, addressed to the Buddhist Order, lay on a boulder on
+  the Inscription Hill.
+types: [settlement, religious_site]
+names:
+  - form: Bairat
+    lang: en
+    script: Latn
+    note: Smith writes Bairât.
+    cite:
+      - id: bairat-name
+        says: >-
+          Smith describes the Bairât version at the foot of the Pândus' hill close to the very ancient town
+          of Bairât.
+        source: smith-asoka-1920
+        at: ch. III, The Monuments (the Minor Rock Edicts)
+        quote: close to the very ancient town of Bairât
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [76.18, 27.45]
+    notes: >-
+      Label anchor at Wikidata's coordinate for Viratnagar, the modern town of Bairāṭ. Smith gives 27° 27′
+      N, 76° 12′ E.
+    cite:
+      - id: bairat-anchor
+        says: >-
+          The coordinate is the modern position recorded in Wikidata (CC0); it is a map reference, not a historical
+          claim.
+        source: wikidata
+        at: Q2544533 (P625), revision 2523947515
+modern:
+  - form: Viratnagar, Rajasthan
+    lang: en
+    script: Latn
+    note: The modern name of the town.

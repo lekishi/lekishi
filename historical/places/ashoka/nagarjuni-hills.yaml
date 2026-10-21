@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  The Nāgārjunī hills beside Barābar, where Aśoka's grandson Daśaratha assigned caves to the Ājīvikas
+  immediately after his consecration.
+types: [landform, religious_site]
+names:
+  - form: Nagarjuni hills
+    lang: en
+    script: Latn
+    note: Smith writes Nâgârjunî.
+    cite:
+      - id: nagarjuni-name
+        says: Smith places Daśaratha's inscriptions in the Nāgārjunī hills near Gayā.
+        source: smith-asoka-1920
+        at: ch. I, The History of Asoka
+        quote: >-
+          his inscriptions in the Nâgâjuni Hills near Gaya, where he dedicated caves to the use of the Âjîvikas
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [85.063, 25.005]
+    notes: >-
+      Label anchor at Wikidata's coordinate for the Nagarjuni Caves, which the dataset records at the same
+      point as Barabar.
+    cite:
+      - id: nagarjuni-anchor
+        says: >-
+          The coordinate is the modern position recorded in Wikidata (CC0); it is a map reference, not a historical
+          claim.
+        source: wikidata
+        at: Q131783095 (P625), revision 2333086039

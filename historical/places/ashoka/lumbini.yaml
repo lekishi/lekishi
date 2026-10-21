@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  Lumbinī, the birthplace of the Buddha, now Rummindeī in the Nepal Tarai, where Aśoka's pillar records
+  his visit in the twentieth year after his consecration and the remission of the village's dues.
+types: [religious_site, settlement]
+names:
+  - form: Lumbini
+    lang: en
+    script: Latn
+    cite:
+      - id: lumbini-name
+        says: >-
+          Smith identifies Lumbinī with Rummindēī, a hamlet named after the shrine of the goddess, and calls
+          the identification beyond doubt.
+        source: smith-asoka-1920
+        at: ch. V, The Pillar and Miscellaneous Inscriptions (Rummindêî)
+        quote: The identification of the site is beyond doubt.
+  - form: Luṁmini
+    lang: pra
+    script: Latn
+    note: The village named in the pillar inscription, in the locative luṁminigāme.
+    cite:
+      - id: lummini-name
+        says: The pillar inscription names the village of Lummini.
+        source: asoka-inscriptions
+        at: Rummindēī pillar inscription
+        quote: the village of Lurḿmini was released from religious cesses
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [83.275829, 27.4814]
+    notes: >-
+      Label anchor at Wikidata's coordinate for Lumbini. The pillar is a few yards from the shrine in Smith's
+      account; his own coordinate for it is wrong for the site and is not used.
+    cite:
+      - id: lumbini-anchor
+        says: >-
+          The coordinate is the modern position recorded in Wikidata (CC0); it is a map reference, not a historical
+          claim.
+        source: wikidata
+        at: Q9213 (P625), revision 2550789179
+notes: >-
+  The Wikisource transcription renders the name in Smith's translation with OCR damage (Lurḿmini); the
+  quotation keeps it as printed.

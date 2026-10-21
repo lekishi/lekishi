@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  The quartz boulder near Kalsi in the Dehra Dun district, above the junction of the Yamunā and the Tons,
+  which carries what Smith calls perhaps the most perfect version of the Fourteen Rock Edicts and an incised
+  elephant labelled gajatama.
+types: [other]
+names:
+  - form: Kalsi
+    lang: en
+    script: Latn
+    note: Smith insists on Kâlsî, not Khâlsî.
+    cite:
+      - id: kalsi-name
+        says: >-
+          Smith places the third version of the Fourteen Edicts on a rock about a mile and a half south of
+          the village of Kâlsî.
+        source: smith-asoka-1920
+        at: ch. III, The Monuments
+        quote: on a rock about a mile and a half to the south of the village of Kâlsî
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [77.848333333, 30.518055555]
+    notes: >-
+      The coordinate is the inscribed rock's modern position recorded in Wikidata (CC0). Smith gives N.
+      lat. 30° 32′, E. long. 77° 51′.
+    cite:
+      - id: kalsi-anchor
+        says: >-
+          The coordinate is the modern position recorded in Wikidata (CC0); it is a map reference, not a historical
+          claim.
+        source: wikidata
+        at: Q56064770 (P625), revision 2491819606
+modern:
+  - form: Kalsi, Uttarakhand
+    lang: en
+    script: Latn
+    note: The village beside the boulder.
+notes: >-
+  Typed other: the place is an inscribed monument (a rock, boulder or pillar bearing Aśoka's edicts),
+  which the v0 place types do not name.

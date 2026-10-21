@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  The Delhi-Meerut pillar, broken, on the Ridge at Delhi, carrying Pillar Edicts I to VI much mutilated.
+  Fīrōz Tughlak brought it from Meerut in 1356 CE.
+types: [other]
+names:
+  - form: Delhi-Meerut pillar
+    lang: en
+    script: Latn
+    cite:
+      - id: delhi-meerut-name
+        says: >-
+          Smith's table places the broken pillar on the ridge at Delhi, removed from Meerut by Sultan Fīrōz
+          in 1356.
+        source: smith-asoka-1920
+        at: ch. III, Existing Inscribed Pillars of Asoka
+        quote: On ridge at Delhi, broken
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [77.211666666, 28.673888888]
+    notes: >-
+      The coordinate is the pillar's modern position recorded in Wikidata (CC0). It is the present position,
+      not the original one at Meerut.
+    cite:
+      - id: delhi-meerut-anchor
+        says: >-
+          The coordinate is the modern position recorded in Wikidata (CC0); it is a map reference, not a historical
+          claim.
+        source: wikidata
+        at: Q138498894 (P625), revision 2467535288
+notes: >-
+  Typed other: the place is an inscribed monument (a rock, boulder or pillar bearing Aśoka's edicts),
+  which the v0 place types do not name.

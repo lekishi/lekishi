@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  Maski in the Raichur district, where a damaged version of the first Minor Rock Edict found in 1915 is
+  the only inscription that names the emperor Aśoka; it lies close to ancient gold workings.
+types: [other]
+names:
+  - form: Maski
+    lang: en
+    script: Latn
+    cite:
+      - id: maski-name
+        says: Smith reports the version of Minor Rock Edict I discovered at Maski in 1915.
+        source: smith-asoka-1920
+        at: ch. IV, The Rock Edicts (comment on Minor Rock Edict I)
+        quote: discovered in 1915 at Maski
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [76.65, 15.96]
+    notes: Label anchor at Wikidata's coordinate for Maski.
+    cite:
+      - id: maski-anchor
+        says: >-
+          The coordinate is the modern position recorded in Wikidata (CC0); it is a map reference, not a historical
+          claim.
+        source: wikidata
+        at: Q3360195 (P625), revision 2520879117
+notes: >-
+  Typed other: the place is an inscribed monument (a rock, boulder or pillar bearing Aśoka's edicts),
+  which the v0 place types do not name.

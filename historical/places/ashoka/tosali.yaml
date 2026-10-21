@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  Tosalī, the seat of the Kalinga viceroyalty to which the Dhauli version of the Kalinga Edicts is addressed.
+  Smith says it appears to have been in the neighbourhood of Dhauli; its site is not established by the
+  cited sources.
+types: [capital]
+names:
+  - form: Tosalī
+    lang: pra
+    script: Latn
+    cite:
+      - id: tosali-name
+        says: >-
+          Smith says the viceregal town of Tosali appears to have been in the neighbourhood of the Dhauli
+          rock.
+        source: smith-asoka-1920
+        at: ch. III, The Monuments
+        quote: The viceregal town of Tosali appears to have been in the neighbourhood
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [85.853055555, 20.226638888]
+    notes: >-
+      Label anchor at Wikidata's coordinate for its Tosali item. It is not an identification of the town's
+      site: Smith places Tosalī only near Dhauli.
+    cite:
+      - id: tosali-anchor
+        says: >-
+          The coordinate is the modern position recorded in Wikidata (CC0); it is a map reference, not a historical
+          claim.
+        source: wikidata
+        at: Q7827550 (P625), revision 2499753362
+notes: >-
+  Kept separate from Dhauli because the edict names the town, while the inscription is on the rock.

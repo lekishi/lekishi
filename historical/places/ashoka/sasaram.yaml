@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  Sasaram in Shahabad, south Bihar, where a version of the first Minor Rock Edict is engraved in an artificial
+  cave near the summit of a hill east of the town.
+types: [other, settlement]
+names:
+  - form: Sasaram
+    lang: en
+    script: Latn
+    note: Smith writes Sahasrâm.
+    cite:
+      - id: sasaram-name
+        says: >-
+          Smith describes the Sahasrâm recension engraved on the rock face near the summit of a hill east
+          of the town.
+        source: smith-asoka-1920
+        at: ch. III, The Monuments (the Minor Rock Edicts)
+        quote: The Sahasrâm recension is engraved on the face of the rock
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [84.03, 24.95]
+    notes: >-
+      Label anchor at Wikidata's coordinate for the town of Sasaram. Smith gives 24° 57′ N, 84° 1′ E.
+    cite:
+      - id: sasaram-anchor
+        says: >-
+          The coordinate is the modern position recorded in Wikidata (CC0); it is a map reference, not a historical
+          claim.
+        source: wikidata
+        at: Q1949410 (P625), revision 2536797050
+notes: >-
+  Typed other: the place is an inscribed monument (a rock, boulder or pillar bearing Aśoka's edicts),
+  which the v0 place types do not name.

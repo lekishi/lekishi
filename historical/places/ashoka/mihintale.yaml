@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  Mihintale in Sri Lanka, where the chronicles place the Chetiyagiri monastery founded soon after the
+  Mahāvihāra.
+types: [religious_site]
+names:
+  - form: Mihintale
+    lang: en
+    script: Latn
+    note: Smith writes Mihintalé.
+    cite:
+      - id: mihintale-name
+        says: Smith's retelling names the Chetiyagiri (Mihintalé) monastery.
+        source: smith-asoka-1920
+        at: ch. VI, The Ceylonese Legend of Asoka
+        quote: the construction of the Chetiyagiri (Mihintalé) monastery followed soon after
+  - form: Chetiyagiri
+    lang: pi
+    script: Latn
+    note: The monastery's name in the chronicles.
+    claim: mihintale-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [80.516945, 8.350594]
+    notes: Label anchor at Wikidata's coordinate for Mihintale.
+    cite:
+      - id: mihintale-anchor
+        says: >-
+          The coordinate is the modern position recorded in Wikidata (CC0); it is a map reference, not a historical
+          claim.
+        source: wikidata
+        at: Q1478212 (P625), revision 2453539920

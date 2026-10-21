@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  The rocks at Mansehra in the Hazara district carrying the second Kharoṣṭhī version of the Fourteen Rock
+  Edicts, on an ancient road to a place of pilgrimage that Dr. Stein identified.
+types: [other]
+names:
+  - form: Mansehra
+    lang: en
+    script: Latn
+    note: Smith writes Mânsahra (Mânsera).
+    cite:
+      - id: mansehra-name
+        says: >-
+          Smith places the next recension at Mânsahra in the Hazâra District, about fifteen miles north of
+          Abbottabad, at N. lat. 34° 20′, E. long. 73° 13′.
+        source: smith-asoka-1920
+        at: ch. III, The Monuments
+        quote: >-
+          The next recension in order is that at Mânsahra. (Mânsera) in the Hazâra District
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [73.16666667, 34.33333333]
+    notes: >-
+      The coordinate is the inscribed rock's modern position recorded in Wikidata (CC0).
+    cite:
+      - id: mansehra-anchor
+        says: >-
+          The coordinate is the modern position recorded in Wikidata (CC0); it is a map reference, not a historical
+          claim.
+        source: wikidata
+        at: Q6751573 (P625), revision 2491823210
+notes: >-
+  Typed other: the place is an inscribed monument (a rock, boulder or pillar bearing Aśoka's edicts),
+  which the v0 place types do not name.

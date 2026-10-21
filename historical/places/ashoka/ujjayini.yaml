@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  Ujjain, the seat of the western viceroyalty: the Provincials' Edict names a prince sending officials
+  from it, and the Ceylon chronicles make Aśoka viceroy there under his father.
+types: [capital, settlement]
+names:
+  - form: Ujjain
+    lang: en
+    script: Latn
+    cite:
+      - id: ujjain-name
+        says: >-
+          The Provincials' Edict says the prince will send out a similar body of officials from Ujjain.
+        source: asoka-inscriptions
+        at: Kalinga Edict II (Provincials' Edict), Dhauli text
+        quote: From Ujjain, however, the Prince for this purpose will send out a similar body
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [75.777222222, 23.182777777]
+    notes: Label anchor at Wikidata's coordinate for the modern city of Ujjain.
+    cite:
+      - id: ujjain-anchor
+        says: >-
+          The coordinate is the modern position recorded in Wikidata (CC0); it is a map reference, not a historical
+          claim.
+        source: wikidata
+        at: Q200119 (P625), revision 2547472059
+notes: >-
+  Ujjayinī is the Sanskrit form; the chapter writes the name as the translation does.

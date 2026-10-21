@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  Brahmagiri in northern Mysore, beside the site of a large ancient town: one of three neighbouring rocks
+  with the Mysore versions of the first and second Minor Rock Edicts, which are addressed from Suvarṇagiri
+  to the officers at Isila.
+types: [other]
+names:
+  - form: Brahmagiri
+    lang: en
+    script: Latn
+    cite:
+      - id: brahmagiri-name
+        says: >-
+          Smith lists Brahmagiri, near the site of a large ancient town, among the three Mysore localities
+          of the Minor Rock Edicts.
+        source: smith-asoka-1920
+        at: ch. III, The Monuments (the Minor Rock Edicts)
+        quote: Jatinga-Râmesvara, and Brahmagiri, near the site of a large ancient town
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [76.80638889, 14.81388889]
+    notes: Label anchor at Wikidata's coordinate for the Brahmagiri archaeological site.
+    cite:
+      - id: brahmagiri-anchor
+        says: >-
+          The coordinate is the modern position recorded in Wikidata (CC0); it is a map reference, not a historical
+          claim.
+        source: wikidata
+        at: Q4955533 (P625), revision 2520881313
+notes: >-
+  Typed other: the place is an inscribed monument (a rock, boulder or pillar bearing Aśoka's edicts),
+  which the v0 place types do not name.

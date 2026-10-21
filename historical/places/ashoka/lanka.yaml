@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  The island the chronicles call Laṅkā and Smith calls Ceylon, whose king Devānaṃpiya Tissa received Mahinda's
+  mission and the branch of the bodhi tree.
+types: [region]
+names:
+  - form: Ceylon
+    lang: en
+    script: Latn
+    cite:
+      - id: lanka-name
+        says: >-
+          Smith's retelling of the chronicles calls the island Ceylon and its king Devânampiya Tissa.
+        source: smith-asoka-1920
+        at: ch. VI, The Ceylonese Legend of Asoka
+        quote: King Devânampiya Tissa (Tishya) ascended the throne of Ceylon
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [81.0, 7.0]
+    notes: >-
+      Region anchor at Wikidata's coordinate for Sri Lanka. The Missa mountain, the Mahāmegha garden and
+      the Mahāvihāra of the chronicles stand on the island but are not located by the cited sources, so
+      they are named on the events and not drawn.
+    cite:
+      - id: lanka-anchor
+        says: >-
+          The coordinate is the modern position recorded in Wikidata (CC0); it is a map reference, not a historical
+          claim.
+        source: wikidata
+        at: Q854 (P625), revision 2559349656
+notes: >-
+  A deliberately coarse place: the cited retelling names the island, the Missa mountain, the Mahāmegha
+  garden and the Mahāvihāra, and the chapter does not locate them more closely than the island without
+  a source.

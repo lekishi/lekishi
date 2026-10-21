@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  Rāmpurwā in Champaran, where a prostrate pillar carries Pillar Edicts I to VI well preserved; its crowning
+  lion was found buried nearby.
+types: [other]
+names:
+  - form: Rampurva
+    lang: en
+    script: Latn
+    note: Smith writes Râmpurwâ.
+    cite:
+      - id: rampurva-name
+        says: >-
+          Smith's table places the pillar at Râmpurwâ hamlet, more than a mile north-east of Pipariyâ.
+        source: smith-asoka-1920
+        at: ch. III, Existing Inscribed Pillars of Asoka
+        quote: more than a mile NE. of Pipariyâ village
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [84.499466666, 27.269930555]
+    notes: >-
+      Label anchor at Wikidata's coordinate for the Rampurva site. Smith gives 84° 34′ E, 27° 15′ 45″ N.
+    cite:
+      - id: rampurva-anchor
+        says: >-
+          The coordinate is the modern position recorded in Wikidata (CC0); it is a map reference, not a historical
+          claim.
+        source: wikidata
+        at: Q18210863 (P625), revision 2520454720
+notes: >-
+  Typed other: the place is an inscribed monument (a rock, boulder or pillar bearing Aśoka's edicts),
+  which the v0 place types do not name.

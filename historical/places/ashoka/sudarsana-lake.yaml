@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  The Sudarśana reservoir below Girnar. Smith reports that it was constructed under Chandragupta Maurya,
+  equipped with watercourses by Aśoka's local representative, and has long since disappeared, its limits
+  traced with difficulty.
+types: [landform]
+names:
+  - form: Sudarśana
+    lang: sa
+    script: Latn
+    note: Smith's Sudarsana Lake.
+    cite:
+      - id: sudarsana-name
+        says: >-
+          Smith names the Sudarsana Lake that filled the valley between the Uparkot rocks and the inscription
+          rock.
+        source: smith-asoka-1920
+        at: ch. III, The Monuments
+        quote: >-
+          The Sudarsana Lake constructed under the orders of Chandragupta Maurya and equipped with watercourses
+          and sluices by Asoka's local representatives
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [70.5035, 21.5272]
+    notes: >-
+      Label anchor at Wikidata's coordinate for the vanished lake. The lake's extent is not drawn; Smith
+      says only that it filled the valley east of Uparkot.
+    cite:
+      - id: sudarsana-anchor
+        says: >-
+          The coordinate is the modern position recorded in Wikidata (CC0); it is a map reference, not a historical
+          claim.
+        source: wikidata
+        at: Q65286549 (P625), revision 2370145827
+notes: >-
+  A vanished reservoir known from the Rudradāman inscription. No shoreline is drawn.

@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  The Barābar hills near Gayā, the Khalatika hill of the cave dedications, where Aśoka granted caves cut
+  in hard gneiss to the Ājīvika ascetics in the twelfth and nineteenth years after his consecration.
+types: [landform, religious_site]
+names:
+  - form: Barabar hills
+    lang: en
+    script: Latn
+    note: Smith writes Barâbar.
+    cite:
+      - id: barabar-name
+        says: >-
+          Smith reports two near-contemporary labels discovered in 1913 and 1914 that name the hill.
+        source: smith-asoka-1920
+        at: ch. V, The Pillar and Miscellaneous Inscriptions (the cave dedications)
+        quote: give the name of the hill as Gorathargiri
+  - form: Khalatika
+    lang: pra
+    script: Latn
+    note: The hill named in Aśoka's cave dedications.
+    cite:
+      - id: khalatika-name
+        says: The dedication grants a cave in the Khalatika hill to the Ājīvikas.
+        source: asoka-inscriptions
+        at: Barābar cave dedication II (Khalatika or Viśva-jhoprī cave)
+        quote: This cave in the Khalatikei Hill was granted to the Âjîvikas
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [85.063, 25.005]
+    notes: Label anchor at Wikidata's coordinate for the Barabar Caves.
+    cite:
+      - id: barabar-anchor
+        says: >-
+          The coordinate is the modern position recorded in Wikidata (CC0); it is a map reference, not a historical
+          claim.
+        source: wikidata
+        at: Q1311736 (P625), revision 2426735622
+notes: >-
+  The hill has three names in the sources: Khalatika in Aśoka's dedications, Gorathagiri in two later
+  labels, and Barābar today.

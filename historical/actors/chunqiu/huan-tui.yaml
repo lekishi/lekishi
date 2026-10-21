@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  桓魋, the 宋 marshal who tried to kill Confucius by cutting down the tree he was teaching under.
+types: [person]
+names:
+  - form: 桓魋
+    lang: lzh
+    script: Hani
+    roman: Huan Tui
+    scheme: pinyin
+    cite:
+      - id: huan-tui-name
+        says: The 孔子世家 records that the 宋 marshal 桓魋 wanted to kill Confucius and pulled up the tree.
+        source: shiji-chunqiu
+        at: 卷四十七 孔子世家（宋司馬桓魋欲殺孔子）
+        quote: 宋司馬桓魋欲殺孔子，拔其樹。
+roles:
+  - role: official
+    note: Marshal of 宋.
+    cite:
+      - id: huan-tui-role
+        says: The 孔子世家 calls 桓魋 the marshal of 宋.
+        source: shiji-chunqiu
+        at: 卷四十七 孔子世家（宋司馬桓魋欲殺孔子）

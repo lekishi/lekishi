@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  帝丘, the 衛 capital from 629 BCE, where Confucius stayed with 衛靈公 and met 南子, and to which he returned
+  again and again. The label sits at the modern 濮陽 county.
+types: [capital]
+names:
+  - form: 帝丘
+    lang: lzh
+    script: Hani
+    roman: Diqiu
+    scheme: pinyin
+    cite:
+      - id: wey-diqiu-name
+        says: The 左傳 records that, besieged by the 狄, 衛 moved to 帝丘 in the winter of 僖公三十一年.
+        source: zuozhuan
+        at: 僖公三十一年（衛遷于帝丘）
+        quote: 冬，狄圍衛，衛遷于帝丘。卜曰三百年。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [115.01746, 35.70523]
+    notes: >-
+      Label anchor at the modern 濮陽 county, the conventional site of 帝丘. The historical geography quotes
+      a placement seventy 里 north-east of 滑縣; no city site is asserted.
+    cite:
+      - id: wey-diqiu-anchor
+        says: The anchor is the coordinate Wikidata (CC0) records for the modern 濮陽 county.
+        source: wikidata
+        at: Q1168628 (P625), revision 2526576850
+      - id: wey-diqiu-geography
+        says: >-
+          The historical geography quotes the 寰宇記 placing the old 帝丘 at 土山村, seventy 里 north-east of the county.
+        role: supporting
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷十六 北直七 大名府 滑縣（古帝丘城）
+        quote: 縣東北七十里土山村，即古帝丘城。衛成公遷於帝丘，即此城云。
+modern:
+  - form: 濮陽縣
+    lang: zh-Hans
+    script: Hani
+    note: Modern place recorded for orientation only.
+notes: >-
+  The texts of Confucius's travels say only 衛; the record places the visits at the capital because he
+  was received by the lord.

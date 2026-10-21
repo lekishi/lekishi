@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  蒲, a 衛 town whose people, rebelling under 公叔氏, stopped Confucius and let him go only on an oath not
+  to go to 衛, which he broke. The historical geography puts it at the 長垣 county seat.
+types: [settlement]
+names:
+  - form: 蒲
+    lang: lzh
+    script: Hani
+    roman: Pu
+    scheme: pinyin
+    cite:
+      - id: pu-wey-name
+        says: >-
+          The historical geography records the 蒲 of the 衛 lords' meetings and of Confucius's detention at
+          the 長垣 county seat.
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷十六 北直七 大名府 長垣縣（蒲城）
+        quote: 蒲城，今縣治也。春秋時衛邑。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [114.735, 35.2125]
+    notes: >-
+      Label anchor at the modern 長垣 city, the same point as `kuang`: the geography puts both in 長垣 county,
+      and no separate site is asserted.
+    cite:
+      - id: pu-wey-anchor
+        says: The anchor is the coordinate Wikidata (CC0) records for the modern 長垣 city.
+        source: wikidata
+        at: Q1062184 (P625), revision 2526648763
+      - id: pu-wey-geography
+        says: The historical geography quotes the 史記 on Confucius at 蒲 under its entry for 蒲城.
+        role: supporting
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷十六 北直七 大名府 長垣縣（蒲城）
+        quote: 《史記》：「孔子去陳至蒲，會公叔氏以蒲畔，止。」
+notes: >-
+  Not the 晉 蒲 that 重耳 held, which is `pu-jin`. Two places at one anchor is a case the map must handle.

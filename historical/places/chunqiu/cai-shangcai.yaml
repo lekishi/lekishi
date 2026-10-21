@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  蔡, the old capital of the state of 蔡 at 上蔡, which Wikidata records as the 蔡國故城 site. By 491 BCE the
+  蔡 court had moved to 州來, so which 蔡 Confucius went to is not settled.
+types: [capital]
+names:
+  - form: 蔡
+    lang: lzh
+    script: Hani
+    roman: Cai
+    scheme: pinyin
+    cite:
+      - id: cai-shangcai-name
+        says: The 孔子世家 records that Confucius moved from 陳 to 蔡.
+        source: shiji-chunqiu
+        at: 卷四十七 孔子世家（孔子自陳遷于蔡）
+        quote: 冉求既去，明年，孔子自陳遷于蔡。
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [114.2481, 33.2749]
+    notes: >-
+      Wikidata's coordinate for the 蔡國故城 at 上蔡, the dataset's identification of the 蔡 capital. The 孔子世家
+      itself records 蔡 moving to 州來 in 493 BCE, so the point may not be the 蔡 Confucius reached.
+    cite:
+      - id: cai-shangcai-point
+        says: Wikidata (CC0) records the 蔡國故城 with this coordinate.
+        basis: interpretation
+        attributed_to: Wikidata contributors
+        source: wikidata
+        at: Q16078493 (P625), revision 2515980484
+      - id: cai-shangcai-move
+        says: The 孔子世家 records that in the winter of the year 衛靈公 died, 蔡 moved to 州來.
+        role: supporting
+        source: shiji-chunqiu
+        at: 卷四十七 孔子世家（冬，蔡遷于州來）
+        quote: 冬，蔡遷于州來。
+external_ids:
+  - system: wikidata
+    id: Q16078493
+    url: https://www.wikidata.org/wiki/Q16078493
+    license: CC0-1.0

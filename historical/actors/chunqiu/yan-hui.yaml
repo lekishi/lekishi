@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  顏淵, 顏回, the disciple Confucius loved best, who fell behind at 匡 and answered that he would not dare
+  die while his master lived.
+types: [person]
+names:
+  - form: 顏淵
+    lang: lzh
+    script: Hani
+    roman: Yan Yuan
+    scheme: pinyin
+    cite:
+      - id: yan-hui-name
+        says: The 論語 records that 顏淵 fell behind when the Master was in danger at 匡.
+        source: lunyu
+        at: 先進第十一（子畏於匡，顏淵後）
+        quote: 子畏於匡，顏淵後。
+  - form: 顏回
+    lang: lzh
+    script: Hani
+    note: His personal name.
+    cite:
+      - id: yan-hui-hui
+        says: The 孔子世家 records 顏回 answering Confucius between 陳 and 蔡.
+        source: shiji-chunqiu
+        at: 卷四十七 孔子世家（顏回入見）
+        quote: 子貢出，顏回入見。

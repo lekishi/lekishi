@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  匡, a 衛 town where the people mistook Confucius for 陽虎, who had wronged them, and held him for five days.
+  The historical geography identifies it with 長垣; the label sits at the modern 長垣 city.
+types: [settlement]
+names:
+  - form: 匡
+    lang: lzh
+    script: Hani
+    roman: Kuang
+    scheme: pinyin
+    cite:
+      - id: kuang-name
+        says: The 論語 records that the Master was in danger at 匡.
+        source: lunyu
+        at: 子罕第九（子畏於匡）
+        quote: 子畏於匡。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [114.735, 35.2125]
+    notes: >-
+      Label anchor at the modern 長垣 city, which the geography identifies with the 衛 town of 匡. The same
+      anchor serves 蒲, which the geography puts at the 長垣 county seat.
+    cite:
+      - id: kuang-anchor
+        says: The anchor is the coordinate Wikidata (CC0) records for the modern 長垣 city.
+        source: wikidata
+        at: Q1062184 (P625), revision 2526648763
+      - id: kuang-geography
+        says: The historical geography records that 長垣 county was the 衛 town of 匡 in the 春秋 period.
+        role: supporting
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷十六 北直七 大名府 長垣縣
+        quote: 春秋時衛之匡邑。
+modern:
+  - form: 長垣市
+    lang: zh-Hans
+    script: Hani
+    note: Modern place recorded for orientation only.

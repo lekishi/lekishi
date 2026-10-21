@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  葉公, the lord of the 楚 town of 葉, who asked Confucius about government and asked 子路 what kind of man
+  his master was.
+types: [person]
+names:
+  - form: 葉公
+    lang: lzh
+    script: Hani
+    roman: Ye Gong
+    scheme: pinyin
+    cite:
+      - id: ye-gong-name
+        says: The 論語 records that 葉公 asked 子路 about Confucius and 子路 did not answer.
+        source: lunyu
+        at: 述而第七（葉公問孔子於子路）
+        quote: 葉公問孔子於子路，子路不對。
+roles:
+  - role: official
+    note: Lord of 葉 for 楚.
+    cite:
+      - id: ye-gong-role
+        says: The 孔子世家 records 葉公 asking Confucius about government.
+        source: shiji-chunqiu
+        at: 卷四十七 孔子世家（葉公問政）
+        quote: 葉公問政，孔子曰：「政在來遠附邇。」

@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  孔文子, 孔圉, the 衛 minister who asked Confucius how to attack 大叔; Confucius left, and was recalled to 魯
+  before he could be stopped.
+types: [person]
+names:
+  - form: 孔文子
+    lang: lzh
+    script: Hani
+    roman: Kong Wenzi
+    scheme: pinyin
+    cite:
+      - id: kong-wenzi-name
+        says: The 左傳 records 孔文子 consulting 仲尼 before attacking 大叔.
+        source: zuozhuan
+        at: 哀公十一年（孔文子之將攻大叔也）
+        quote: 孔文子之將攻大叔也．訪於仲尼．
+roles:
+  - role: official
+    note: Minister of 衛.
+    cite:
+      - id: kong-wenzi-role
+        says: The 左傳 records 孔文子 consulting 仲尼 before attacking 大叔.
+        source: zuozhuan
+        at: 哀公十一年（孔文子之將攻大叔也）

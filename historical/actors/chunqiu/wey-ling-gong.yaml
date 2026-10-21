@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  靈公, lord of 衛 until 493 BCE, who gave Confucius a 魯 minister's grain but would not use him, and asked
+  him about the order of battle.
+types: [person]
+names:
+  - form: 衛靈公
+    lang: lzh
+    script: Hani
+    roman: Wey Ling Gong
+    scheme: pinyin
+    cite:
+      - id: wey-ling-gong-name
+        says: >-
+          The 論語 records that 衛靈公 asked Confucius about the order of battle, and that Confucius left the next
+          day.
+        source: lunyu
+        at: 衞靈公第十五（衞靈公問陳於孔子）
+        quote: 衞靈公問陳於孔子。
+roles:
+  - role: ruler
+    note: Lord of 衛 until 493 BCE.
+    cite:
+      - id: wey-ling-gong-role
+        says: The 論語 records that 衛靈公 asked Confucius about the order of battle.
+        source: lunyu
+        at: 衞靈公第十五（衞靈公問陳於孔子）

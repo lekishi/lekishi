@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Hanno, son of Bomilcar, whom Hannibal sent upstream to cross the Rhône and fall on the Gauls
+  holding the far bank in 218 BCE.
+types: [person]
+names:
+  - form: Ἄννων
+    lang: grc
+    script: Grek
+    cite:
+      - id: hanno-son-of-bomilcar-name-polybius
+        says:
+          Polybius names Ἄννων, son of Bomilcar the king (suffete), as the leader of the flanking
+          detachment.
+        source: polybius
+        at: "3.42.6"
+        quote: ἐπὶ δὲ πάντων Ἄννωνα τὸν Βοαμίλκου τοῦ βασιλέως
+  - form: Hanno Bomilcaris filius
+    lang: la
+    script: Latn
+    cite:
+      - id: hanno-son-of-bomilcar-name-livy
+        says: Livy names Hanno son of Bomilcar as the leader sent off in the first watch.
+        source: livy
+        at: "21.27.2"
+        quote: Hannonem Bomilcaris filium vigilia prima noctis cum parte copiarum

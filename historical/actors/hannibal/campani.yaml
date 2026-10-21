@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  The Campanians of Capua, whose people and senate went over to Hannibal after Cannae on terms that
+  kept their own laws and magistrates.
+types: [community]
+names:
+  - form: Campani
+    lang: la
+    script: Latn
+    cite:
+      - id: campani-name-livy
+        says:
+          Livy's treaty terms speak of the Campanian citizen, over whom no Carthaginian was to have
+          jurisdiction.
+        source: livy
+        at: "23.7.1"
+        quote: ne quis imperator magistratusve Poenorum ius ullum in civem Campanum haberet
+  - form: Καπυανοί
+    lang: grc
+    script: Grek
+    cite:
+      - id: campani-name-polybius
+        says: Polybius records some of the Capuans calling Hannibal in after Cannae.
+        source: polybius
+        at: "3.118.3"
+        quote: Ἀργυριππανοὶ δὲ καὶ Καπυανῶν τινες ἐκάλουν τὸν Ἀννίβαν

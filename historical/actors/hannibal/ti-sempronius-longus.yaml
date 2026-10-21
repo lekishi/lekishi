@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Tiberius Sempronius Longus, consul in 218 BCE, who was preparing at Lilybaeum to invade Africa
+  when he was recalled to the Po and lost the battle of the Trebia.
+types: [person]
+names:
+  - form: Ti. Sempronius
+    lang: la
+    script: Latn
+    cite:
+      - id: ti-sempronius-longus-name-livy
+        says: Livy names Ti. Sempronius as the second consul of the year.
+        source: livy
+        at: "21.15.4"
+        quote: ut P. Cornelius Ti. Sempronius consules fuerint
+  - form: Τεβέριος Σεμπρώνιος
+    lang: grc
+    script: Grek
+    cite:
+      - id: ti-sempronius-longus-name-polybius
+        says: Polybius records Τεβέριος Σεμπρώνιος sailing for Libya with a hundred and sixty
+          quinqueremes.
+        source: polybius
+        at: "3.41.2"
+        quote: Τεβέριος δὲ Σεμπρώνιος εἰς Λιβύην ἑκατὸν ἑξήκοντα σκάφεσι πεντηρικοῖς
+roles:
+  - role: official
+    note: Consul.
+    date:
+      value: "218 BCE"
+      mode: duration
+      calendar: regnal
+      as_written: P. Cornelio Ti. Sempronio consulibus
+    cite:
+      - id: ti-sempronius-longus-consul
+        says: Livy dates the year by the consulship of P. Cornelius and Ti. Sempronius.
+        source: livy
+        at: "21.15.5"
+        quote: quo P. Cornelius Ti. Sempronius consules fuerunt
+notes: The cognomen Longus is the modern conventional form; the cited passages give no cognomen.

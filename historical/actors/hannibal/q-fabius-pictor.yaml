@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Quintus Fabius Pictor, senator and the first Roman to write Rome's history, a contemporary whom
+  Livy follows for the losses at Trasimene; sent to Delphi after Cannae.
+types: [person]
+names:
+  - form: Q. Fabius Pictor
+    lang: la
+    script: Latn
+    cite:
+      - id: q-fabius-pictor-name-livy
+        says: Livy records Q. Fabius Pictor sent to the oracle at Delphi.
+        source: livy
+        at: "22.57.5"
+        quote: Q. Fabius Pictor Delphos ad oraculum missus est
+roles:
+  - role: envoy
+    date:
+      value: "216 BCE"
+      mode: window
+      calendar: regnal
+      as_written: L. Aemilio Paullo C. Terentio Varrone consulibus
+    cite:
+      - id: q-fabius-pictor-envoy
+        says: Livy records his mission to Delphi to ask how the gods could be appeased.
+        source: livy
+        at: "22.57.5"
+        quote: sciscitatum, quibus precibus suppliciisque deos possent placare
+  - role: scholar
+    note: Historian; the span is the chapter's, not his career's.
+    date:
+      value: "217 BCE..216 BCE"
+      mode: duration
+      calendar: regnal
+      as_written: Fabium, aequalem temporibus huiusce belli
+    cite:
+      - id: q-fabius-pictor-historian
+        says:
+          Livy names Fabius, a contemporary of the war, as the authority he chiefly follows for the
+          numbers at Trasimene.
+        source: livy
+        at: "22.7.4"
+        quote: Fabium, aequalem temporibus huiusce belli, potissimum auctorem habui
+notes:
+  His own history survives only in fragments and is not a source of this chapter; Livy's use of it
+  is.

@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  The Boii, a Gallic people south of the Po, who rose against Rome's new colonies in 218 BCE, joined
+  Hannibal, and destroyed Postumius' army in 216 BCE.
+types: [community]
+names:
+  - form: Boi
+    lang: la
+    script: Latn
+    cite:
+      - id: boii-name-livy
+        says: Livy records the Boii stirring up the Insubres and revolting.
+        source: livy
+        at: "21.25.2"
+        quote: Boi sollicitatis Insubribus defecerunt
+  - form: Βοῖοι
+    lang: grc
+    script: Grek
+    cite:
+      - id: boii-name-polybius
+        says: Polybius records the Gauls called Βοῖοι breaking with Rome.
+        source: polybius
+        at: "3.40.6"
+        quote: οἱ Βοῖοι καλούμενοι Γαλάται
+external_ids:
+  - system: wikidata
+    id: Q157676
+    license: CC0-1.0
+  - system: pleiades
+    id: "393390"
+    license: CC BY 3.0

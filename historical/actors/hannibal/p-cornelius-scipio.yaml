@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Publius Cornelius Scipio, consul in 218 BCE, who landed at the Rhône too late to stop Hannibal,
+  sent his army on to Iberia under his brother, and was wounded at the Ticinus.
+types: [person]
+names:
+  - form: P. Cornelius Scipio
+    lang: la
+    script: Latn
+    cite:
+      - id: p-cornelius-scipio-name-livy
+        says: Livy names P. Cornelius and Ti. Sempronius as the consuls who fought Hannibal at the
+          Ticinus and the Trebia.
+        source: livy
+        at: "21.15.4"
+        quote: ut P. Cornelius Ti. Sempronius consules fuerint
+  - form: Πόπλιος Κορνήλιος
+    lang: grc
+    script: Grek
+    cite:
+      - id: p-cornelius-scipio-name-polybius
+        says: Polybius records the Romans appointing Πόπλιος Κορνήλιος to Iberia.
+        source: polybius
+        at: "3.40.2"
+        quote: προεχειρίσαντο πέμπειν μετὰ στρατοπέδων Πόπλιον μὲν Κορνήλιον εἰς Ἰβηρίαν
+roles:
+  - role: official
+    note: Consul.
+    date:
+      value: "218 BCE"
+      mode: duration
+      calendar: regnal
+      as_written: P. Cornelio Ti. Sempronio consulibus
+    cite:
+      - id: p-cornelius-scipio-consul
+        says: Livy dates the year by the consulship of P. Cornelius and Ti. Sempronius.
+        source: livy
+        at: "21.15.5"
+        quote: quo P. Cornelius Ti. Sempronius consules fuerunt

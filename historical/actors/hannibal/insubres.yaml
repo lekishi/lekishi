@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  The Insubres, the Gallic people north of the Po, whom the Boii drew into revolt in 218 BCE and
+  into whose country Hannibal descended from the Alps.
+types: [community]
+names:
+  - form: Insubres
+    lang: la
+    script: Latn
+    cite:
+      - id: insubres-name-livy
+        says: Livy records the Taurini at war with the Insubres when Hannibal arrived.
+        source: livy
+        at: "21.39.1"
+        quote: Taurinis, proximae genti, adversus Insubres motum bellum erat
+  - form: Ἴνσομβρες
+    lang: grc
+    script: Grek
+    cite:
+      - id: insubres-name-polybius
+        says: Polybius records the Boii calling in the Ἴνσομβρες.
+        source: polybius
+        at: "3.40.8"
+        quote: παρακαλέσαντες δὲ τοὺς Ἴνσομβρας
+external_ids:
+  - system: wikidata
+    id: Q1097266
+    license: CC0-1.0
+  - system: pleiades
+    id: "383678"
+    license: CC BY 3.0

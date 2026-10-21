@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Hasdrubal, the officer who led the Carthaginian left-wing cavalry at Cannae and rode round the
+  Roman army to break the allied horse. Not Hannibal's brother.
+types: [person]
+names:
+  - form: Ἀσδρούβας
+    lang: grc
+    script: Grek
+    cite:
+      - id: hasdrubal-cavalry-commander-name-polybius
+        says: Polybius records Hasdrubal holding the Carthaginian left at Cannae.
+        source: polybius
+        at: "3.114.7"
+        quote: τῶν δὲ Καρχηδονίων τὸ μὲν εὐώνυμον Ἀσδρούβας εἶχε
+  - form: Hasdrubal
+    lang: la
+    script: Latn
+    cite:
+      - id: hasdrubal-cavalry-commander-name-livy
+        says: Livy records Hasdrubal commanding the left wing.
+        source: livy
+        at: "22.46.7"
+        quote: duces cornibus praeerant sinistro Hasdrubal
+notes:
+  Polybius also names a Hasdrubal in charge of the army's services in the Falernian plain (3.93.4).
+  The sources do not say that he is the Cannae commander, so the records are not merged.

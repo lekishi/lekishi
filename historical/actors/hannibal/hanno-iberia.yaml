@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Hanno, left by Hannibal in 218 BCE to hold the country between the Ebro and the Pyrenees; defeated
+  and captured by Gnaeus Scipio near Kissa that year.
+types: [person]
+names:
+  - form: Ἄννων
+    lang: grc
+    script: Grek
+    cite:
+      - id: hanno-iberia-name-polybius
+        says: Polybius records Hannibal leaving Ἄννων in command of all the country this side of the
+          Ebro.
+        source: polybius
+        at: "3.35.4"
+        quote: ἡγεμόνα μὲν ἐπὶ πάσης κατέλιπε τῆς ἐπὶ τάδε τοῦ ποταμοῦ χώρας Ἄννωνα
+  - form: Hanno
+    lang: la
+    script: Latn
+    cite:
+      - id: hanno-iberia-name-livy
+        says: Livy records Hannibal putting Hanno over the coast below the Pyrenees.
+        source: livy
+        at: "21.23.2"
+        quote: oraeque huic omni praefecit Hannonem
+notes: A different man from Hanno son of Bomilcar; the sources give this Hanno no patronymic.

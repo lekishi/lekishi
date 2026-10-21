@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Gaius Centenius, propraetor, sent by Servilius with four thousand cavalry after Trasimene and
+  destroyed by Maharbal.
+types: [person]
+names:
+  - form: C. Centenius
+    lang: la
+    script: Latn
+    cite:
+      - id: c-centenius-name-livy
+        says: Livy names C. Centenius, propraetor, as the commander of the four thousand horse.
+        source: livy
+        at: "22.8.1"
+        quote: quattuor milia equitum cum C. Centenio propraetore
+  - form: Γάιος Κεντήνιος
+    lang: grc
+    script: Grek
+    cite:
+      - id: c-centenius-name-polybius
+        says: Polybius records Servilius sending Γάιος Κεντήνιος ahead with four thousand horse.
+        source: polybius
+        at: "3.86.3"
+        quote: Γάιον Κεντήνιον κατὰ σπουδὴν δοὺς τετρακισχιλίους ἱππεῖς προεξαπέστειλε

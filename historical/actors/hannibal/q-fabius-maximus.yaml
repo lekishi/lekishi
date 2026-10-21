@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Quintus Fabius Maximus, appointed dictator after Trasimene in 217 BCE, who restored the rites,
+  shadowed Hannibal without giving battle, and rescued Minucius at Gerunium.
+types: [person]
+names:
+  - form: Q. Fabius Maximus
+    lang: la
+    script: Latn
+    cite:
+      - id: q-fabius-maximus-name-livy
+        says: Livy records the people electing Q. Fabius Maximus dictator.
+        source: livy
+        at: "22.8.6"
+        quote: dictatorem populus creavit Q. Fabium Maximum
+  - form: Κόιντος Φάβιος
+    lang: grc
+    script: Grek
+    cite:
+      - id: q-fabius-maximus-name-polybius
+        says: Polybius records the Romans appointing Κόιντος Φάβιος dictator.
+        source: polybius
+        at: "3.87.6"
+        quote: Ῥωμαῖοι δὲ δικτάτορα μὲν κατέστησαν Κόιντον Φάβιον
+roles:
+  - role: official
+    note: Dictator.
+    date:
+      value: "217 BCE"
+      mode: duration
+      calendar: regnal
+      as_written: Q. Fabius Maximus dictator
+    cite:
+      - id: q-fabius-maximus-dictator
+        says:
+          Livy records his appointment as dictator in 217 BCE by the people, which had never been
+          done before.
+        source: livy
+        at: "22.8.6"
+        quote: quod numquam ante eam diem factum erat, dictatorem populus creavit Q. Fabium Maximum

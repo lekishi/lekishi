@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  The Taurini, the people at the foot of the Alps, at feud with the Insubres, whose chief town
+  Hannibal stormed in 218 BCE.
+types: [community]
+names:
+  - form: Taurini
+    lang: la
+    script: Latn
+    cite:
+      - id: taurini-name-livy
+        says: Livy names the Taurini, half-Gauls, as the nearest people to the army coming down into
+          Italy.
+        source: livy
+        at: "21.38.5"
+        quote: Taurini Semigalli proxuma gens erat in Italiam degresso
+  - form: Ταυρῖνοι
+    lang: grc
+    script: Grek
+    cite:
+      - id: taurini-name-polybius
+        says: Polybius records the Ταυρῖνοι, at the foot of the mountains, at odds with the Insubres.
+        source: polybius
+        at: "3.60.8"
+        quote: τῶν Ταυρίνων, οἳ τυγχάνουσι πρὸς τῇ παρωρείᾳ κατοικοῦντες, στασιαζόντων μὲν πρὸς τοὺς
+          Ἴνσομβρας
+external_ids:
+  - system: pleiades
+    id: "383794"
+    license: CC BY 3.0

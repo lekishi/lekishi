@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Carthalo, a Carthaginian noble sent with the ten Roman prisoners to Rome after Cannae to offer
+  terms, and turned back at the frontier.
+types: [person]
+names:
+  - form: Carthalo
+    lang: la
+    script: Latn
+    cite:
+      - id: carthalo-name-livy
+        says: Livy records Carthalo, a Carthaginian noble, sent with the prisoners' delegates.
+        source: livy
+        at: "22.58.7"
+        quote: missus cum his Carthalo, nobilis Carthaginiensis
+roles:
+  - role: envoy
+    date:
+      value: "216 BCE"
+      mode: window
+      calendar: regnal
+      as_written: L. Aemilio Paullo C. Terentio Varrone consulibus
+    cite:
+      - id: carthalo-envoy
+        says:
+          Livy records Carthalo being sent to put forward conditions if the Romans inclined toward
+          peace.
+        source: livy
+        at: "22.58.7"
+        quote: qui, si forte ad pacem inclinarent animos, condiciones ferret

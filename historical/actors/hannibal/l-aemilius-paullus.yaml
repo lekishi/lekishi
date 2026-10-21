@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Lucius Aemilius Paullus, consul in 216 BCE, who argued against fighting on open ground and was
+  killed at Cannae.
+types: [person]
+names:
+  - form: L. Aemilius Paulus
+    lang: la
+    script: Latn
+    cite:
+      - id: l-aemilius-paullus-name-livy
+        says: Livy records the nobles pressing L. Aemilius Paulus to stand for the consulship.
+        source: livy
+        at: "22.35.3"
+        quote: L. Aemilium Paulum, qui cum M. Livio consul fuerat
+  - form: Λεύκιος Αἰμίλιος
+    lang: grc
+    script: Grek
+    cite:
+      - id: l-aemilius-paullus-name-polybius
+        says: Polybius records the Romans electing Λεύκιος Αἰμίλιος and Γάιος Τερέντιος.
+        source: polybius
+        at: "3.106.1"
+        quote: εἵλοντο στρατηγοὺς οἱ Ῥωμαῖοι Λεύκιον Αἰμίλιον καὶ Γάιον Τερέντιον
+roles:
+  - role: official
+    note: Consul.
+    date:
+      value: "216 BCE"
+      mode: duration
+      calendar: regnal
+      as_written: L. Aemilio Paullo C. Terentio Varrone consulibus
+    cite:
+      - id: l-aemilius-paullus-consul
+        says: Polybius records his election with Gaius Terentius for the year of Cannae.
+        source: polybius
+        at: "3.106.1"
+        quote: εἵλοντο στρατηγοὺς οἱ Ῥωμαῖοι Λεύκιον Αἰμίλιον καὶ Γάιον Τερέντιον

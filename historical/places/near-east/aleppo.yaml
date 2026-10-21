@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Aleppo (Khilip, Halab) in north Syria, where the captured spies told Ramesses II the Hittite
+  king was encamped, whose Storm-god (Sutekh) the treaty calls to witness, and whose king, by Garstang's
+  reading of the Hittite texts, drowned in the moat at Kadesh.
+types: [settlement]
+names:
+  - form: Aleppo
+    lang: en
+    script: Latn
+    cite:
+      - id: aleppo-name
+        says: Sayce says the spies claimed the Hittite king was encamped at Aleppo.
+        source: sayce-hittites
+        at: "ch. II: Kadesh, the spies"
+        quote:
+          There two Beduin spies were captured, who averred that the Hittite king was far away in the
+          north with his forces, encamped at Aleppo. But the intelligence was false.
+  - form: Khilip
+    lang: egy
+    script: Latn
+    role: alternate
+    note: Brugsch's reading of the name in the treaty's list of gods.
+    cite:
+      - id: aleppo-egyptian-name
+        says: The treaty's list of gods names Sutekh of the city of Khilip, glossed as Aleppo.
+        source: sayce-hittites
+        at: "ch. II: the treaty, the gods of Kheta"
+        quote: "'Sutekh of the city of Khilip (Aleppo),"
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [37.1629, 36.19941]
+    notes:
+      Pleiades' representative point for the ancient city under modern Aleppo, entered under its Hellenistic
+      name Beroia. The Bronze Age city lies under the citadel and old town; the point marks the city.
+    cite:
+      - id: aleppo-identification
+        says:
+          Pleiades identifies Beroia, the ancient city of Aleppo, and gives this representative point
+          (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 658409 (reprLatLong, version 19), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "658409"
+    url: https://pleiades.stoa.org/places/658409
+    license: CC-BY-3.0

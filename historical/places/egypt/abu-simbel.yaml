@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Abu Simbel in Lower Nubia, where Ramesses II's great rock temple carries a relief of the battle
+  of Kadesh.
+types: [religious_site]
+names:
+  - form: Abu Simbel
+    lang: en
+    script: Latn
+    note: The modern name.
+    cite:
+      - id: abu-simbel-name
+        says: Garstang lists Abu Simbel among the temples with the Kadesh records.
+        source: garstang-land-of-hittites
+        at: "ch. VI: fn. 710"
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [31.62551, 22.33723]
+    notes:
+      Pleiades' point for the site; the temples were moved up the cliff in the 1960s, and the point
+      is the gazetteer's.
+    cite:
+      - id: abu-simbel-identification
+        says:
+          Pleiades identifies Abu Simbel, the site of Ramesses II's two temples, and gives this representative
+          point (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 721417202 (reprLatLong, version 12), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "721417202"
+    url: https://pleiades.stoa.org/places/721417202
+    license: CC-BY-3.0

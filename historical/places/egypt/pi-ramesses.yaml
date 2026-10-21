@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Pi-Ramesses, the city of Ramses in the eastern Delta, where Ramesses II was presenting offerings
+  on the day the Hittite envoys brought the silver tablet of the treaty.
+types: [capital]
+names:
+  - form: the city of Ramses
+    lang: en
+    script: Latn
+    note: Brugsch's translation of the Egyptian Per-Ramesses.
+    cite:
+      - id: pi-ramesses-name
+        says: The treaty says the king was in the city of Ramses on that day.
+        source: sayce-hittites
+        at: "ch. II: the treaty, the setting"
+        quote:
+          On that day the king was in the city of Ramses, presenting his peace-offerings to his father
+          Amon-Ra
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [31.83477, 30.80076]
+    notes:
+      Pleiades' point for the city at Qantir. Brugsch and Sayce did not know the site; the identification
+      of the treaty's "city of Ramses" with Qantir is the gazetteer's.
+    cite:
+      - id: pi-ramesses-identification
+        says:
+          Pleiades identifies Pi-Ramesses, the capital Ramesses II built at Qantir near Avaris, and gives
+          this representative point (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 905314398 (reprLatLong, version 6), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "905314398"
+    url: https://pleiades.stoa.org/places/905314398
+    license: CC-BY-3.0

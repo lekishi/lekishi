@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Hattusa, the capital of the Hittite kings at Boghazköy in central Anatolia, where an Egyptian
+  embassy was received and where Winckler's excavations recovered the Hittite archive with the cuneiform
+  treaty.
+types: [capital]
+names:
+  - form: Hattusa
+    lang: hit
+    script: Latn
+    note: The Hittite name; the site is at Boğazkale (Boghaz-Keui).
+    cite:
+      - id: hattusa-name
+        says: Garstang places the Hittite capital at Boghaz-Keui, where Winckler excavated.
+        source: garstang-land-of-hittites
+        at: "ch. VI, p. 347: the treaty, fn. 817"
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [34.61716, 40.01491]
+    notes:
+      Pleiades' representative point for the walled city; the archive came from several buildings within
+      it.
+    cite:
+      - id: hattusa-identification
+        says:
+          Pleiades identifies Hattusa, the Late Bronze Age Hittite capital near Boğazkale, and gives this
+          representative point (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 283602441 (reprLatLong, version 14), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "283602441"
+    url: https://pleiades.stoa.org/places/283602441
+    license: CC-BY-3.0

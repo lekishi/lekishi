@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Orontes, the river of inner Syria on which Kadesh stands, with Ramesses II's camp on its
+  western bank by the city's northern wall.
+types: [landform]
+names:
+  - form: Arunatha
+    lang: egy
+    script: Latn
+    note: The 1914 translation's form of the Egyptian name of the river.
+    cite:
+      - id: orontes-name
+        says: The poem places Pharaoh at the western side of Arunatha's tide, near the city's northern wall.
+        source: petrie-victory-of-ramses
+        at: the stanza "But at the western side"
+        quote:
+          But at the western side Of Arunatha's tide, Near the city's northern wall, our Pharaoh had
+          his place.
+  - form: Orontes
+    lang: en
+    script: Latn
+    role: alternate
+    note: The Greek and modern name.
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [36.47813, 35.37838]
+    notes:
+      Pleiades' representative point for the river as a whole, well north of Kadesh. It labels the
+      river, not the crossing or the camp.
+    cite:
+      - id: orontes-identification
+        says: Pleiades identifies the Orontes river and gives this representative point (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 658560 (reprLatLong, version 13), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "658560"
+    url: https://pleiades.stoa.org/places/658560
+    license: CC-BY-3.0

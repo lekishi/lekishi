@@ -11,19 +11,19 @@ RFD is in `discussion`. The owner chose option A on 2026-10-21.
 
 == Build
 
-- [ ] A production build drops unapproved chapters with a warning instead of failing (PR #26).
-- [ ] The public `virtual:lekishi-chapters` index lists served chapters only, so no draft title reaches public JavaScript.
-- [ ] Move to `adapter-cloudflare` with every public route prerendered; the build invariant, `pnpm preview` and the e2e static mode read `.svelte-kit/cloudflare`. Record the file count and payload before and after.
-- [ ] The chapter route loads on the server with `prerender = "auto"`: approved chapters prerendered, drafts rendered for members, 404 otherwise.
-- [ ] `/drafts.json` and `/drafts/search-index.json` for members; home cards and search read them under the hint cookie.
-- [ ] The production draft wording in `release.ts`.
-- [ ] Build invariant: no draft id, title or summary in any static file or client chunk; every prerendered chapter approved and excluded from the worker; a preview build prerenders every chapter.
+- [x] A production build drops unapproved chapters with a warning instead of failing (from PR #26, carried here so it lands first).
+- [x] The public `virtual:lekishi-chapters` index lists served chapters only, so no draft title reaches public JavaScript.
+- [x] Move to `adapter-cloudflare` with every public route prerendered. `wrangler.jsonc` keeps the output in `build/`, so `pnpm preview`, the e2e static mode and CI are unchanged. A production build is 1,405 files with 12 `_routes.json` rules (2026-10-21); a chapter's data moves from a script chunk into its page and `__data.json` (Tang: 72 KB page, 60 KB data, uncompressed).
+- [x] The chapter route loads on the server with `prerender = "auto"`: approved chapters prerendered, drafts rendered for members, 404 otherwise.
+- [x] `/drafts.json` and `/drafts/search-index.json` for members; home cards and search read them under the hint cookie.
+- [x] The production draft wording in `release.ts` (`MEMBER_DRAFT_SCOPE`).
+- [x] Build invariant: no draft id, title or summary in any static file or client chunk; the worker's routes, every served chapter excluded from it, and at most 100 rules.
 
 == Gate (option A)
 
-- [ ] OAuth App owned by the `lekishi` organization; owner creates it and sets the Production secrets.
-- [ ] `src/lib/server/github.ts` and `session.ts` after renga's, `src/hooks.server.ts`, and the `/auth/*` routes, with Vitest coverage for expiry, tampering, non-members and the 404 for anonymous requests.
-- [ ] "Sign in" control placed per RFD 5.
+- [ ] OAuth App owned by the `lekishi` organization; owner creates it and sets the Production secrets (link:../../docs/members-sign-in.md[the setup guide]).
+- [x] `src/lib/server/github.ts` and `session.ts` after renga's, `src/hooks.server.ts`, and the `/auth/*` routes, with Vitest coverage for expiry, tampering, non-members and the 404 for anonymous requests. Checked end to end under `wrangler pages dev` with a probe draft (2026-10-21).
+- [x] "Members sign in" in the home page's footer, and on a chapter address's not-found page. RFD 5 may move it.
 - [ ] Verified on production after the owner's go-ahead: anonymous sees no draft, a member sees every draft, previews unchanged.
 
 == Later

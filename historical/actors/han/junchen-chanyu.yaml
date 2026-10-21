@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  軍臣單于, the 匈奴 單于 who succeeded 老上單于 under 孝文帝, whose court held 張騫, who was drawn toward
+  馬邑 in 133 BCE, and whose death in the winter after 元朔二年 opened the succession war during which
+  張騫 escaped.
+types: [person]
+names:
+  - form: 軍臣單于
+    lang: lzh
+    script: Hani
+    roman: Junchen Chanyu
+    scheme: pinyin
+    cite:
+      - id: junchen-name
+        says: The 匈奴列傳 records 老上單于's death and his son 軍臣 becoming 單于.
+        source: shiji-han-frontiers
+        at: 卷一百十 匈奴列傳（子軍臣立爲單于）
+        quote: 後四歳，老上稽粥單于死，子軍臣立爲單于。
+roles:
+  - role: ruler
+    note: The span the chapters cite, from the 馬邑 ambush to his death; his accession under 孝文帝 is earlier.
+    date:
+      value: 133 BCE..126 BCE
+      mode: duration
+      calendar: chinese_lunisolar
+    cite:
+      - id: junchen-death
+        says: The 匈奴列傳 records that in the winter after 元朔二年 軍臣單于 died.
+        source: shiji-han-frontiers
+        at: 卷一百十 匈奴列傳（其後冬，匈奴軍臣單于死）
+        quote: 其後冬，匈奴軍臣單于死。
+notes:
+  The 大宛列傳 and the 漢書 names neither 單于 who held 張騫; the identification of the 單于 of 133 BCE and
+  of 張騫's capture with 軍臣 follows the 匈奴列傳's reign sequence.

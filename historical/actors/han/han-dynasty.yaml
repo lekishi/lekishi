@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  漢, the empire founded by 劉邦 in 202 BCE, whose Western Han court at 長安 sent 張騫 west and fought
+  the 匈奴 from 133 BCE, and whose Eastern Han court at 洛陽 received the 倭奴國 embassy of 57 CE and
+  sent 班超 into the Western Regions. The record is the state, not a dynasty's genealogy; the
+  sources call it 漢 throughout.
+types: [state, dynasty]
+names:
+  - form: 漢
+    lang: lzh
+    script: Hani
+    roman: Han
+    scheme: pinyin
+    cite:
+      - id: han-dynasty-name
+        says: The 匈奴列傳 names 漢 as the party that set the 馬邑 ambush and broke the peace with the 匈奴.
+        source: shiji-han-frontiers
+        at: 卷一百十 匈奴列傳（漢使馬邑下人聶翁壹）
+        quote: 漢伏兵三十餘萬馬邑旁
+notes:
+  "Not the Warring-States state 韓 (`han-state`), whose name is romanized the same way. The chapters
+  that use this record cite the Western Han (to 9 CE) and the Eastern Han (from 25 CE) under one
+  actor, because the sources name both 漢 and the reader follows one polity's frontier; the
+  interregnum of 王莽 is outside every chapter that reaches it."

@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Hinnatuni (Niebuhr's Khinaton), the Canaanite city where a Babylonian trading company was attacked
+  and plundered after the ambassador had left.
+types: [settlement]
+names:
+  - form: Khinaton
+    lang: akk
+    script: Latn
+    note: Niebuhr's form; the letter has Hinnatuni.
+    cite:
+      - id: hinnatuni-name
+        says:
+          Niebuhr says Burnaburiash complained of the plunder of a trading company in the Canaanite city
+          of Khinaton.
+        source: niebuhr-tell-el-amarna-period
+        at: "ch. IV: the merchants of Burnaburiash"
+        quote:
+          King Burnaburiash complained that a Babylonian trading company established by his ambassador
+          in the Canaanite city of Khinaton had, immediately after the ambassador's departure, been attacked
+          and utterly plundered.
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      Niebuhr calls it a Canaanite city and no gazetteer read for this chapter locates it, so the record
+      asserts no coordinate. It is usually sought in Lower Galilee.
+    cite:
+      - id: hinnatuni-unlocated
+        says: Niebuhr names the city without locating it.
+        source: niebuhr-tell-el-amarna-period
+        at: "ch. IV: the merchants of Burnaburiash"

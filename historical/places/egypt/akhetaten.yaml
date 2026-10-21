@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Akhetaten (Tell el-Amarna), the city Akhenaten built as his capital in Middle Egypt on the east
+  bank of the Nile, where the clay tablets of the foreign correspondence were found in 1888.
+types: [capital]
+names:
+  - form: Akhet-haten
+    lang: egy
+    script: Latn
+    note: Niebuhr's form of Akhetaten, "horizon of the Aten".
+    cite:
+      - id: akhetaten-name
+        says: Niebuhr names the city Akhet-haten, built by Amenophis IV.
+        source: niebuhr-tell-el-amarna-period
+        at: "ch. I: the site"
+        quote:
+          the rock-cut tombs of the most distinguished inhabitants of Akhet-haten, the royal city built
+          for himself about 1380 B.C. by Amenophis IV., and destroyed soon after his early death.
+  - form: Tell el-Amarna
+    lang: en
+    script: Latn
+    role: alternate
+    note: The modern name of the site, after the village of El Amarna.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [30.89818, 27.6441]
+    notes:
+      Pleiades' representative point for the city; the archive building, the "place of the letters
+      of Pharaoh", is in the central city. The point marks the city.
+    cite:
+      - id: akhetaten-identification
+        says:
+          Pleiades identifies Amarna, the capital Akhenaten founded, and gives this representative point
+          (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 149576487 (reprLatLong, version 9), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "149576487"
+    url: https://pleiades.stoa.org/places/149576487
+    license: CC-BY-3.0

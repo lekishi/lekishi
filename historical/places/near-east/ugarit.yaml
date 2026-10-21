@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Ugarit (Ras Shamra) on the north Syrian coast, whose burning Abi-milki of Tyre reported, and
+  which Niebuhr took for the northernmost Egyptian possession.
+types: [settlement]
+names:
+  - form: Ugarit
+    lang: akk
+    script: Latn
+    cite:
+      - id: ugarit-name
+        says: Abi-milki reports that fire has devoured half the city of Ugarit.
+        source: niebuhr-tell-el-amarna-period
+        at: "ch. IV: Ugarit"
+        quote:
+          Abi-milki, the Tyrian prefect, once informs the king, "Fire hath devoured the city of Ugarit;
+          one half of it hath it destroyed and not the other."
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [35.78556, 35.60194]
+    notes:
+      Wikidata's coordinate for the tell of Ras Shamra. Niebuhr, writing before the site was found,
+      put Ugarit near Alexandretta; the record follows the later identification.
+    cite:
+      - id: ugarit-identification
+        says: Wikidata records Ugarit, the ancient city at Ras Shamra, with this coordinate (CC0).
+        basis: interpretation
+        attributed_to: Wikidata contributors
+        source: wikidata
+        at: Q191369 (P625), revision 2547138586
+external_ids:
+  - system: wikidata
+    id: Q191369
+    url: https://www.wikidata.org/wiki/Q191369
+    license: CC0-1.0
+  - system: pleiades
+    id: "668295"
+    url: https://pleiades.stoa.org/places/668295
+    license: CC-BY-3.0
+    note: Pleiades enters the site under its Greek port name, Leukos Limen.

@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Qatna in inner Syria, whose headman Akizzi wrote to Amenhotep III about the raiding chiefs and
+  Aziru.
+types: [settlement]
+names:
+  - form: Katna
+    lang: akk
+    script: Latn
+    note: Niebuhr's form.
+    cite:
+      - id: qatna-name
+        says: Niebuhr names Akizzi as headman of the city of Katna.
+        source: niebuhr-tell-el-amarna-period
+        at: "ch. IV: Akizzi of Katna"
+        quote:
+          Two communications from Akizzi, the headman of the city of Katna, near Damascus, exhibit the
+          difference clearly.
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [36.86631, 34.83467]
+    notes: Pleiades' point for the tell. Niebuhr calls it "near Damascus"; it lies north-east of Homs.
+    cite:
+      - id: qatna-identification
+        says:
+          Pleiades identifies Qatna, the Bronze Age city in western Syria (Tell Mishrifeh), and gives
+          this representative point (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 412342122 (reprLatLong, version 5), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "412342122"
+    url: https://pleiades.stoa.org/places/412342122
+    license: CC-BY-3.0

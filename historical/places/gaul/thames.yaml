@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: The Tamesis (Thames), which Caesar says could be forded on foot in one place only, and with
+  difficulty. He forced the crossing against Cassivellaunus in 54 BCE.
+types: [landform]
+names:
+  - form: Tamesis
+    lang: la
+    script: Latn
+    cite:
+      - id: thames-name
+        says: Caesar tells that he led the army to the river Tamesis, into the territory of
+          Cassivellaunus.
+        source: caesar-gallic-war
+        at: "5.18"
+        quote: Caesar cognito consilio eorum ad flumen Tamesim in fines Cassivellauni exercitum duxit
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [-0.76225, 51.5579]
+    notes: A river's representative point; the ford Caesar crossed is not identified.
+    cite:
+      - id: thames-location
+        says: Pleiades gives this representative point for the river Tamesis, with its location
+          precision recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 79705 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "79705"

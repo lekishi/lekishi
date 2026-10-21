@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The country of the Morini on the Channel coast, from which, Caesar says, the crossing to Britain
+  was shortest. He sailed for Britain from their harbours in 55 and 54 BCE.
+types: [region]
+names:
+  - form: Morini
+    lang: la
+    script: Latn
+    cite:
+      - id: morini-coast-name
+        says:
+          Caesar tells that he set out with all his forces into the territory of the Morini, from
+          which the crossing to Britain was shortest.
+        source: caesar-gallic-war
+        at: "4.21"
+        quote:
+          Ipse cum omnibus copiis in Morinos proficiscitur, quod inde erat brevissimus in Britanniam
+          traiectus.
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [2.02938, 50.72595]
+    notes:
+      A label point for the people's territory. Caesar's harbour, which he calls portus Itius in
+      book V, is not identified; Boulogne and Wissant are proposed.
+    cite:
+      - id: morini-coast-location
+        says: Pleiades gives this representative point for the Morini, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 109177 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "109177"

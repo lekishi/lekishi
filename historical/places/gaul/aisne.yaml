@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Axona (Aisne), at the edge of the territory of the Remi. In 57 BCE Caesar crossed it and
+  camped with the river at his back, and the Belgic army failed to force its fords.
+types: [landform]
+names:
+  - form: Axona
+    lang: la
+    script: Latn
+    cite:
+      - id: aisne-name
+        says:
+          Caesar tells that he led the army across the river Axona, on the furthest bounds of the
+          Remi, and camped there.
+        source: caesar-gallic-war
+        at: "2.5"
+        quote:
+          flumen Axonam, quod est in extremis Remorum finibus, exercitum traducere maturavit atque
+          ibi castra posuit.
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [4.28421, 49.32183]
+    notes:
+      A river's representative point; the camp was by a bridge Caesar does not locate, often placed
+      near Berry-au-Bac.
+    cite:
+      - id: aisne-location
+        says:
+          Pleiades gives this representative point for the river Axona, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 108779 (reprLatLong), dump 2026-10-21
+modern:
+  - form: Aisne
+    lang: fr
+    note: The modern river.
+external_ids:
+  - system: pleiades
+    id: "108779"

@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Cenabum (Orléans), the town of the Carnutes on the Loire, where the Roman traders were massacred
+  at the start of the revolt of 52 BCE; Caesar took and burned it in reprisal.
+types: [settlement]
+names:
+  - form: Cenabum
+    lang: la
+    script: Latn
+    cite:
+      - id: cenabum-name
+        says:
+          Caesar tells that the Carnutes rushed to Cenabum at a signal and killed the Roman citizens
+          who traded there.
+        source: caesar-gallic-war
+        at: "7.3"
+        quote: Cenabum signo dato concurrunt civesque Romanos, qui negotiandi causa ibi constiterant
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [1.90687, 47.90073]
+    notes: The gazetteer's point for the town at modern Orléans.
+    cite:
+      - id: cenabum-location
+        says:
+          Pleiades gives this representative point for Cenabum, with its location precision recorded
+          as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 138281 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "138281"

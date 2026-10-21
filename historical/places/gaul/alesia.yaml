@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Alesia, the oppidum of the Mandubii, where Caesar besieged Vercingetorix behind two lines of works
+  in 52 BCE and Vercingetorix surrendered. The site at Mont Auxois above Alise-Sainte-Reine is
+  identified by the excavations of the siege works.
+types: [settlement, fortification]
+names:
+  - form: Alesia
+    lang: la
+    script: Latn
+    cite:
+      - id: alesia-name
+        says: Caesar tells that Vercingetorix began to march to Alesia, a town of the Mandubii.
+        source: caesar-gallic-war
+        at: "7.68"
+        quote: protinusque Alesiam, quod est oppidum Mandubiorum, iter facere coepit
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [4.50388, 47.53662]
+    notes: The gazetteer's point for the oppidum on Mont Auxois. Other sites were proposed in the
+      nineteenth and twentieth centuries; the excavated siege works are the basis of the
+      identification.
+    cite:
+      - id: alesia-location
+        says:
+          Pleiades gives this representative point for Alesia, with its location precision recorded
+          as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 177434 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "177434"

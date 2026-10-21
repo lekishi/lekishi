@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Uxellodunum, an oppidum of the Cadurci strongly fortified by nature, the last stronghold of the
+  Gallic war in 51 BCE. Hirtius tells that Caesar cut off the hands of its defenders; the site is
+  identified with the Puy d'Issolud.
+types: [settlement, fortification]
+names:
+  - form: Uxellodunum
+    lang: la
+    script: Latn
+    cite:
+      - id: uxellodunum-name
+        says: Hirtius tells that Lucterius occupied Uxellodunum, a town strongly fortified by nature
+          that had been in his clientship.
+        source: caesar-gallic-war
+        at: "8.32"
+        quote:
+          oppidum Uxellodunum, quod in clientela fuerat eius, egregie natura loci munitum, occupat
+          suis et Drappetis copiis oppidanosque sibi coniungit.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [1.58896, 44.76979]
+    notes: The gazetteer's point, which it derives from related features. The excavations at the Puy
+      d'Issolud, near Vayrac, support the identification.
+    cite:
+      - id: uxellodunum-location
+        says: Pleiades gives this representative point for Uxellodunum, with its location precision
+          recorded as "related".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 138636 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "138636"

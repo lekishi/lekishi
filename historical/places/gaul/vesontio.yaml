@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Vesontio (Besançon), the largest oppidum of the Sequani, in a loop of the Doubs. Caesar seized it
+  in 58 BCE before Ariovistus could, for its supplies and its natural strength.
+types: [settlement, fortification]
+names:
+  - form: Vesontio
+    lang: la
+    script: Latn
+    cite:
+      - id: vesontio-name
+        says:
+          Caesar calls Vesontio the largest oppidum of the Sequani, which Ariovistus was hurrying to
+          occupy.
+        source: caesar-gallic-war
+        at: "1.38"
+        quote: ad occupandum Vesontionem, quod est oppidum maximum Sequanorum, contendere
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [6.02792, 47.23724]
+    notes: The gazetteer's point for the town at modern Besançon.
+    cite:
+      - id: vesontio-location
+        says: Pleiades gives this representative point for Vesontio, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 177657 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "177657"

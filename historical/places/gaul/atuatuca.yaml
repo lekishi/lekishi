@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Atuatuca, a stronghold in the middle of the territory of the Eburones, where Sabinus and Cotta
+  wintered in 54 BCE before their force was destroyed. The camp has not been found; its
+  identification with Tongeren is traditional and disputed.
+types: [fortification]
+names:
+  - form: Aduatuca
+    lang: la
+    script: Latn
+    note: This transcription spells the name Aduatuca; editions also print Atuatuca.
+    cite:
+      - id: atuatuca-name
+        says: Caesar tells that Aduatuca is the name of a stronghold almost in the middle of the
+          territory of the Eburones, where Titurius and Aurunculeius had wintered.
+        source: caesar-gallic-war
+        at: "6.32"
+        quote: Id castelli nomen est. Hoc fere est in mediis Eburonum finibus, ubi Titurius atque
+          Aurunculeius hiemandi causa consederant.
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [5.46392, 50.78063]
+    notes:
+      A label position at the Roman town of Tongeren, which took the name later. Caesar's stronghold
+      is not identified, so the record asserts no site and the map draws no line through it.
+    cite:
+      - id: atuatuca-location
+        says:
+          Pleiades gives this point for Atuatuca at Tongeren, the later Roman town of that name; it
+          is used only as a label position.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 108765 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "108765"

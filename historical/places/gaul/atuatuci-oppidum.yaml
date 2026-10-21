@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The oppidum of the Atuatuci, a stronghold ringed by cliffs with one approach two hundred feet
+  wide, which Caesar besieged in 57 BCE. Its site is not identified; Namur, Thuin and other heights
+  have been proposed.
+types: [settlement, fortification]
+names:
+  - form: oppidum Atuatucorum
+    lang: la
+    script: Latn
+    note: Caesar names the people, not the town; the form is editorial.
+    cite:
+      - id: atuatuci-oppidum-name
+        says:
+          Caesar tells that the Atuatuci abandoned their other towns and brought everything into one
+          oppidum strongly fortified by nature.
+        source: caesar-gallic-war
+        at: "2.29"
+        quote:
+          cunctis oppidis castellisque desertis sua omnia in unum oppidum egregie natura munitum
+          contulerunt.
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: "No position: the site is not identified, and the proposals are not cited here."
+    cite:
+      - id: atuatuci-oppidum-unlocated
+        says:
+          Caesar describes the stronghold by its cliffs and its one approach but gives no name and no
+          distance from a known place, so the record carries no coordinate.
+        source: caesar-gallic-war
+        at: "2.29"
+        quote:
+          Quod cum ex omnibus in circuitu partibus altissimas rupes deiectusque haberet, una ex parte
+          leniter acclivis aditus in latitudinem non amplius pedum CC relinquebatur

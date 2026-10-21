@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The country of the Veneti on the Atlantic coast of Armorica (southern Brittany), a seafaring
+  people whose fleet Caesar's ships destroyed in 56 BCE.
+types: [region]
+names:
+  - form: Veneti
+    lang: la
+    script: Latn
+    cite:
+      - id: venetia-armorica-name
+        says: Caesar tells that the war of the Veneti and of the whole sea coast was ended by that
+          battle.
+        source: caesar-gallic-war
+        at: "3.16"
+        quote: Quo proelio bellum Venetorum totiusque orae maritimae confectum est.
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [-2.78315, 47.76931]
+    notes:
+      A label point for the people's region around the Gulf of Morbihan; Caesar does not locate the
+      sea battle.
+    cite:
+      - id: venetia-armorica-location
+        says: Pleiades gives this representative point for Venetia, the land of the Veneti, with its
+          location precision recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 138643 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "138643"

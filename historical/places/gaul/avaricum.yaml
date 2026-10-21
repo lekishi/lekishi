@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Avaricum (Bourges), the finest town of the Bituriges, which the Gauls spared from their scorched-
+  earth plan in 52 BCE and Caesar took after a long siege.
+types: [settlement, fortification]
+names:
+  - form: Avaricum
+    lang: la
+    script: Latn
+    cite:
+      - id: avaricum-name
+        says:
+          Caesar reports that of about forty thousand people barely eight hundred escaped from the
+          town to Vercingetorix.
+        source: caesar-gallic-war
+        at: "7.28"
+        quote:
+          Denique ex omni numero, qui fuit circiter milium XL, vix DCCC, qui primo clamore audito se
+          ex oppido eiecerunt, incolumes ad Vercingetorigem pervenerunt.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [2.39787, 47.08254]
+    notes: The gazetteer's point for the town at modern Bourges.
+    cite:
+      - id: avaricum-location
+        says: Pleiades gives this representative point for Avaricum, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 138207 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "138207"

@@ -18,6 +18,9 @@ export const SESSION_COOKIE = "__Host-lekishi_session"
  */
 export const MEMBER_HINT_COOKIE = "lekishi_member"
 
+/** The one-use state of a sign-in in flight, kept for ten minutes under `/auth`. */
+export const OAUTH_COOKIE = "lekishi_oauth"
+
 export const SESSION_SECONDS = 12 * 60 * 60
 
 /** A verified session. */

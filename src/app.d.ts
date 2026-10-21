@@ -9,7 +9,12 @@ declare global {
   const __DEV_PAGES__: boolean
 
   namespace App {
-    // No server-side or session state exists: the site is a static artifact.
+    // The reader site is prerendered and has no session. Only requests the
+    // Pages worker answers (sign-in and drafts, RFD 6) see one.
+    interface Locals {
+      /** The signed-in member of the lekishi organization, or null. */
+      user: import("$lib/server/session").Session | null
+    }
   }
 }
 

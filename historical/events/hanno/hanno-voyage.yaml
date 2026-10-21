@@ -1,0 +1,86 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Hanno's voyage beyond the Pillars of Heracles with sixty fifty-oared ships, founding cities along
+  the Atlantic coast of Libya and sailing on until provisions failed at the Horn of the South. The
+  account gives its stages in days' sailing and no year; when it happened, and how far it went, are
+  disputed.
+types: [journey, mission]
+date:
+  value: 570 BCE..470 BCE
+  mode: window
+  calendar: julian
+  as_written: in the most flourishing times of the Punic state (Pliny); "about 470" (Schoff); "about B.C. 570" (Falconer, Bougainville, Gail)
+  cite:
+    - id: hanno-voyage-time
+      says: The account gives no date. Pliny places the voyage only in Carthage's most flourishing
+        times; the cited commentators put it between about 570 BCE (Falconer, Bougainville and
+        Gail) and about 470 BCE (Schoff), and the window encloses those readings.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1913); J. Bostock and H. T. Riley (1855), citing Falconer, Bougainville and Gail
+      sources:
+        - source: schoff-hanno
+          at: Carthaginian Chronology, "Probable date of the voyage of Hanno … 470"
+        - source: pliny-natural-history
+          at: V.1, note 24
+    - id: hanno-voyage-time-pliny
+      says: Pliny dates the commentaries only to the most flourishing times of the Punic state.
+      role: supporting
+      source: pliny-natural-history
+      at: V.1
+    - id: hanno-voyage-time-other
+      says: Pliny's translators record that the expedition has also been placed as far back as the
+        Trojan war or Hesiod, and as late as the reign of Agathocles; those readings fall outside
+        the window.
+      basis: interpretation
+      role: alternative
+      attributed_to: J. Bostock and H. T. Riley (1855)
+      source: pliny-natural-history
+      at: V.1, note 24
+places:
+  - place: carthage
+    role: start
+    note: The account says the Carthaginians sent the fleet out; it does not say it sailed from Carthage itself.
+  - place: notou-keras
+    role: end
+    note: The furthest point the account reaches before turning back.
+participants:
+  - actor: hanno
+    role: leader
+  - actor: carthage-state
+    role: participant
+    note: The state that resolved to send the voyage.
+cites:
+  summary:
+    - id: hanno-voyage-account
+      says: The account says Hanno set out with sixty fifty-oared ships and a multitude of thirty
+        thousand men and women, with wheat and other provisions, to found cities outside the Pillars.
+      source: hanno-periplus
+      at: "1"
+      quote: Καὶ ἔπλευσε πεντηκοντόρους ἑξήκοντα ἄγων, καὶ πλῆθος ἀνδρῶν καὶ γυναικῶν εἰς ἀριθμὸν μυριάδων τριῶν καὶ σῖτα καὶ τὴν ἄλλην παρασκευήν.
+    - id: hanno-voyage-extent-pliny
+      says:
+        Pliny says Hanno published an account of a voyage from Gades to the extremity of Arabia —
+        a circumnavigation of Africa the Periplus itself does not describe.
+      role: conflicting
+      source: pliny-natural-history
+      at: II.67
+      quote: While the power of Carthage was at its height, Hanno published an account of a voyage which he made from Gades to the extremity of Arabia
+  places:
+    - id: hanno-voyage-places
+      says:
+        The account names the Pillars as the point of departure outside the Mediterranean and the
+        Horn of the South as the place where the fleet turned back because provisions failed.
+      source: hanno-periplus
+      at: "1; 18"
+notes:
+  The thirty thousand people and sixty ships are the account's own figures. Every stage below is a
+  part of this voyage and shares its undated window; the account orders them by sailing days, which
+  the atlas cannot place in time, so their order is the story's and the journey's, not the
+  timeline's.
+dispute:
+  status: disputed
+  summary:
+    The date is unknown (readings run from the age of Hesiod to Agathocles; the window encloses the
+    sixth- and fifth-century readings). The extent is disputed — the Periplus ends at the Horn of
+    the South, Pliny speaks of a voyage from Gades to Arabia — and most of the places it names are
+    identified differently by different scholars.

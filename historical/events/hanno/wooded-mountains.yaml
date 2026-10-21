@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "On the last of the twelve days the fleet anchors by great wooded mountains of fragrant timber, sails around them two days and comes to an immense opening of the sea, where fires leap up on every side by night."
+types: [occurrence]
+part_of: [hanno-voyage]
+date:
+  value: 570 BCE..470 BCE
+  mode: window
+  calendar: julian
+  as_written: "τῇ τελευταίᾳ ἡμέρᾳ; ἡμέρας δύο (the last day; two days)"
+  cite:
+    - id: wooded-mountains-time
+      says: "The account dates none of its stages; this one belongs to the undated voyage, whose window the cited commentators set between about 570 and 470 BCE."
+      basis: interpretation
+      attributed_to: W. H. Schoff (1913); J. Bostock and H. T. Riley (1855)
+      sources:
+        - source: hanno-periplus
+          at: "12–13"
+        - source: schoff-hanno
+          at: Carthaginian Chronology
+participants:
+  - actor: hanno
+    role: leader
+notes: "No place record. Schoff says the mountains can be nothing but Cape Verde and the opening the mouth of the Gambia (13° 30′ N); not drawn."
+cite:
+  - id: wooded-mountains-account
+    says: "The account says that on the last day the fleet anchored by great wooded mountains of fragrant and varied timber, and after sailing around them two days came to an immense opening of the sea with fires by night."
+    source: hanno-periplus
+    at: "12–13"
+    quote: "Τῇ δ᾽ οὖν τελευταίᾳ ἡμέρᾳ προσωρμίσθημεν ὄρεσι μεγάλοις δασέσιν."
+cites:
+  notes:
+    - id: wooded-mountains-cape-verde
+      says: "Schoff says the wooded mountains can be nothing but Cape Verde, and the immense opening of the sea the mouth of the Gambia at 13° 30′ N."
+      basis: interpretation
+      attributed_to: W. H. Schoff (1913)
+      source: schoff-hanno
+      at: "The Geography of the Voyage of Hanno, §§ 12 and 13"
+      quote: "These great wooded mountains around which the expedition sailed, can be nothing but Cape Verde, and the immense opening of the sea is the mouth of the Gambia River at 13° 30' N."

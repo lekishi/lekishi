@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "From the river of crocodiles the fleet turns about and goes back to Cerne."
+types: [journey]
+part_of: [hanno-voyage]
+date:
+  value: 570 BCE..470 BCE
+  mode: window
+  calendar: julian
+  as_written: "πάλιν ἐπιστρέψαντες εἰς Κέρνην ἐπανήλθομεν"
+  cite:
+    - id: cerne-return-time
+      says: "The account dates none of its stages; this one belongs to the undated voyage, whose window the cited commentators set between about 570 and 470 BCE."
+      basis: interpretation
+      attributed_to: W. H. Schoff (1913); J. Bostock and H. T. Riley (1855)
+      sources:
+        - source: hanno-periplus
+          at: "10"
+        - source: schoff-hanno
+          at: Carthaginian Chronology
+places:
+  - place: cerne
+    role: end
+participants:
+  - actor: hanno
+    role: leader
+notes: "A return to a base, so the voyage revisits a place: one place, two stops."
+cite:
+  - id: cerne-return-account
+    says: "The account says the fleet turned back from the river and returned to Cerne."
+    source: hanno-periplus
+    at: "10"
+    quote: "Ὅθεν δὴ πάλιν ἐπιστρέψαντες εἰς Κέρνην ἐπανήλθομεν."

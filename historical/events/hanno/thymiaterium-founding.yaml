@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Two days' sail beyond the Pillars the fleet founds its first city, Thymiaterium, above a great plain."
+types: [founding]
+part_of: [hanno-voyage]
+date:
+  value: 570 BCE..470 BCE
+  mode: window
+  calendar: julian
+  as_written: "ἔξω πλοῦν δυοῖν ἡμερῶν (two days' sail beyond)"
+  cite:
+    - id: thymiaterium-founding-time
+      says: "The account dates none of its stages; this one belongs to the undated voyage, whose window the cited commentators set between about 570 and 470 BCE."
+      basis: interpretation
+      attributed_to: W. H. Schoff (1913); J. Bostock and H. T. Riley (1855)
+      sources:
+        - source: hanno-periplus
+          at: "2"
+        - source: schoff-hanno
+          at: Carthaginian Chronology
+places:
+  - place: thymiaterium
+    role: site
+participants:
+  - actor: hanno
+    role: leader
+cite:
+  - id: thymiaterium-founding-account
+    says: "The account says the fleet sailed two days beyond the Pillars and founded its first city, Thymiaterium."
+    source: hanno-periplus
+    at: "2"
+    quote: "ἔξω πλοῦν δυοῖν ἡμερῶν ἐπλεύσαμεν, ἐκτίσαμεν πρώτην πόλιν, ἥντινα ὠνομάσαμεν Θυμιατήριον"

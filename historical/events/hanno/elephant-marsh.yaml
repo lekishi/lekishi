@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Half a day's sail east of Soloeis the fleet reaches a marsh near the sea, thick with tall reeds, where elephants and many other beasts are feeding."
+types: [occurrence]
+part_of: [hanno-voyage]
+date:
+  value: 570 BCE..470 BCE
+  mode: window
+  calendar: julian
+  as_written: "ἡμέρας ἥμισυ (half a day)"
+  cite:
+    - id: elephant-marsh-time
+      says: "The account dates none of its stages; this one belongs to the undated voyage, whose window the cited commentators set between about 570 and 470 BCE."
+      basis: interpretation
+      attributed_to: W. H. Schoff (1913); J. Bostock and H. T. Riley (1855)
+      sources:
+        - source: hanno-periplus
+          at: "4"
+        - source: schoff-hanno
+          at: Carthaginian Chronology
+participants:
+  - actor: hanno
+    role: leader
+notes: "The marsh has no name and no place record; Schoff puts it on both sides of Cape Safi (about 32° 20′ N), which follows from his Cape Cantin for Soloeis. Not drawn."
+cite:
+  - id: elephant-marsh-account
+    says: "The account says that half a day east of Soloeis the fleet reached a reedy lake not far from the sea with elephants and many other beasts feeding."
+    source: hanno-periplus
+    at: "4"
+    quote: "εἰς λίμνην οὐ πόρρω τῆς θαλάττης κειμένην, καλάμου μεστὴν πολλοῦ καὶ μεγάλου· ἐνῆσαν δὲ καὶ ἐλέφαντες"
+cites:
+  notes:
+    - id: elephant-marsh-safi
+      says: "Schoff says the marshy ground is probably reached on both sides of Cape Safi, 32° 20′ N."
+      basis: interpretation
+      attributed_to: W. H. Schoff (1913)
+      source: schoff-hanno
+      at: "The Geography of the Voyage of Hanno, § 4"
+      quote: "The section of marshy ground is probably reached on both sides of Cape Safi, 32° 20' N."

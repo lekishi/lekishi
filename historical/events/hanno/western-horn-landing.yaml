@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "After five days the fleet reaches the bay the interpreters call the Horn of the West; landing on an island within a sea-lake, the crew sees only forest by day, but by night fires, pipes, cymbals and drums, and the soothsayers order them to leave."
+types: [occurrence]
+part_of: [hanno-voyage]
+date:
+  value: 570 BCE..470 BCE
+  mode: window
+  calendar: julian
+  as_written: "ἡμέρας πέντε (five days)"
+  cite:
+    - id: western-horn-landing-time
+      says: "The account dates none of its stages; this one belongs to the undated voyage, whose window the cited commentators set between about 570 and 470 BCE."
+      basis: interpretation
+      attributed_to: W. H. Schoff (1913); J. Bostock and H. T. Riley (1855)
+      sources:
+        - source: hanno-periplus
+          at: "14"
+        - source: schoff-hanno
+          at: Carthaginian Chronology
+places:
+  - place: western-horn
+    role: site
+participants:
+  - actor: hanno
+    role: leader
+notes: "Religion again shapes the voyage: the soothsayers, not the commander, decide to leave."
+cite:
+  - id: western-horn-account
+    says: "The account says the crew landed on the inner island, saw fires and heard pipes, cymbals and drums by night, and the soothsayers ordered them to leave the island."
+    source: hanno-periplus
+    at: "14"
+    quote: "Φόβος οὖν ἔλαβεν ἡμᾶς, καὶ οἱ μάντεις ἐκέλευον ἐκλείπειν τὴν νῆσον."

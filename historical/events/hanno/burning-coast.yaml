@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Sailing on in fear past a burning, fragrant country whose streams of fire run down to the sea, the fleet sees after four days a land covered with flames, and in its midst one great fire that by day is a very high mountain called the Chariot of the Gods."
+types: [occurrence]
+part_of: [hanno-voyage]
+date:
+  value: 570 BCE..470 BCE
+  mode: window
+  calendar: julian
+  as_written: "Τέτταρας δ᾽ ἡμέρας φερόμενοι (borne along four days)"
+  cite:
+    - id: burning-coast-time
+      says: "The account dates none of its stages; this one belongs to the undated voyage, whose window the cited commentators set between about 570 and 470 BCE."
+      basis: interpretation
+      attributed_to: W. H. Schoff (1913); J. Bostock and H. T. Riley (1855)
+      sources:
+        - source: hanno-periplus
+          at: "15–16"
+        - source: schoff-hanno
+          at: Carthaginian Chronology
+places:
+  - place: theon-ochema
+    role: waypoint
+    note: "Seen from the sea; the account does not say the crew landed."
+participants:
+  - actor: hanno
+    role: leader
+notes: "Whether the fires were grass burning, a volcano, or both is argued; the record keeps the account's description and the place identification separately."
+cite:
+  - id: burning-coast-account
+    says: "The account says that after four days the crew saw by night a land full of flame, and in its midst a fire greater than the rest, which by day was a very high mountain called the Chariot of the Gods."
+    source: hanno-periplus
+    at: "16"
+    quote: "ἐν μέσῳ δ᾽ ἦν ἠλίβατόν τι πῦρ, τῶν ἄλλων μεῖζον, ἁπτόμενον, ὦς ἐδόκει, τῶν ἄστρων."

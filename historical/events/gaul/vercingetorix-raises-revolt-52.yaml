@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Vercingetorix, a young Arvernian noble whose father had been killed for aiming at kingship, called out his clients; driven out of Gergovia by his uncle Gobannitio and the leading men, he raised a force in the countryside, expelled his opponents, and was hailed king by his followers. The neighbouring states gave him the supreme command."
+types: [occurrence]
+date:
+  value: 52 BCE
+  mode: window
+  calendar: julian
+  as_written: "the year of book VII (one commentary a year, from 58 BCE)"
+  cite:
+    id: vercingetorix-raises-revolt-52-year
+    says: "Hirtius writes that Caesar composed one commentary for each year, and book I is dated by the consuls of 58 BCE, so each book is one year from 58 BCE."
+    sources:
+      - source: caesar-gallic-war
+        at: "1.6"
+        quote: "L. Pisone, A. Gabinio consulibus."
+      - source: caesar-gallic-war
+        at: "8.48"
+        quote: Scio Caesarem singulorum annorum singulos commentarios confecisse
+places:
+  - place: gergovia
+    role: site
+    cite:
+      id: vercingetorix-revolt-place
+      says: Caesar tells that Vercingetorix was opposed by his uncle Gobannitio and the other leading men and driven out of the oppidum of Gergovia.
+      source: caesar-gallic-war
+      at: "7.4"
+      quote: "Prohibetur ab Gobannitione, patruo suo, reliquisque principibus, qui hanc temptandam fortunam non existimabant; expellitur ex oppido Gergovia"
+participants:
+  - actor: vercingetorix
+    role: leader
+  - actor: arverni
+    role: participant
+cite:
+  - id: vercingetorix-revolt-king
+    says: Caesar tells that Vercingetorix was hailed king by his followers.
+    source: caesar-gallic-war
+    at: "7.4"
+    quote: Rex ab suis appellatur.
+notes: "Caesar's own account: he commanded the army and wrote the report, and the numbers in it are his."

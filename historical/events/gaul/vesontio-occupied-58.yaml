@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Hearing that Ariovistus was marching to seize Vesontio, the largest oppidum of the Sequani and a store of everything needed for war, Caesar forced the pace by day and night, took the town first, and garrisoned it."
+types: [campaign]
+date:
+  value: 58 BCE
+  mode: window
+  calendar: julian
+  as_written: "the year of book I (one commentary a year, from 58 BCE)"
+  cite:
+    id: vesontio-occupied-58-year
+    says: "Hirtius writes that Caesar composed one commentary for each year, and book I is dated by the consuls of 58 BCE, so each book is one year from 58 BCE."
+    sources:
+      - source: caesar-gallic-war
+        at: "1.6"
+        quote: "L. Pisone, A. Gabinio consulibus."
+      - source: caesar-gallic-war
+        at: "8.48"
+        quote: Scio Caesarem singulorum annorum singulos commentarios confecisse
+places:
+  - place: vesontio
+    role: site
+    cite:
+      id: vesontio-occupied-place
+      says: "Caesar tells that Ariovistus was hurrying to occupy Vesontio, the largest oppidum of the Sequani."
+      source: caesar-gallic-war
+      at: "1.38"
+      quote: "ad occupandum Vesontionem, quod est oppidum maximum Sequanorum, contendere"
+participants:
+  - actor: julius-caesar
+    role: leader
+  - actor: ariovistus
+    role: other
+notes: "Caesar's own account: he commanded the army and wrote the report, and the numbers in it are his."

@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "The Veneti had held Caesar's officers sent for grain. Their towns on headlands could not be taken by land, so Caesar waited for the fleet he had built on the Loire. About 220 Venetic ships met it; D. Brutus's ships cut their rigging with hooks on poles, and a sudden calm left the sailing ships helpless. The battle lasted from about the fourth hour to sunset. Caesar put the senate to death and sold the rest."
+types: [campaign]
+date:
+  value: 56 BCE
+  mode: window
+  calendar: julian
+  as_written: "the year of book III (one commentary a year, from 58 BCE)"
+  cite:
+    id: veneti-fleet-destroyed-56-year
+    says: "Hirtius writes that Caesar composed one commentary for each year, and book I is dated by the consuls of 58 BCE, so each book is one year from 58 BCE."
+    sources:
+      - source: caesar-gallic-war
+        at: "1.6"
+        quote: "L. Pisone, A. Gabinio consulibus."
+      - source: caesar-gallic-war
+        at: "8.48"
+        quote: Scio Caesarem singulorum annorum singulos commentarios confecisse
+places:
+  - place: venetia-armorica
+    role: site
+    note: Caesar does not locate the battle on the Venetic coast.
+participants:
+  - actor: julius-caesar
+    role: leader
+  - actor: decimus-junius-brutus
+    role: leader
+  - actor: veneti
+    role: subject
+cite:
+  - id: veneti-fleet-ships
+    says: "Caesar tells that about 220 of their ships, fully equipped, came out of harbour against the Roman fleet."
+    source: caesar-gallic-war
+    at: "3.14"
+    quote: circiter CCXX naves eorum paratissimae atque omni genere armorum ornatissimae profectae ex portu nostris adversae constiterunt
+  - id: veneti-fleet-end
+    says: Caesar tells that this battle ended the war of the Veneti and of the whole sea coast.
+    role: supporting
+    source: caesar-gallic-war
+    at: "3.16"
+    quote: Quo proelio bellum Venetorum totiusque orae maritimae confectum est.
+notes: "Caesar's own account. The seizure of his officers is his stated cause of the war; the battlefield is somewhere off the Venetic coast, often placed in Quiberon Bay, which the event does not assert."

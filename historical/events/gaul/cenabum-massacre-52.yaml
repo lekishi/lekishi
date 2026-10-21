@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "On the day agreed, the Carnutes under Cotuatus and Conconnetodumnus rushed into Cenabum at a signal and killed the Roman citizens who traded there, among them C. Fufius Cita, Caesar's officer for the grain supply. Caesar says the news was shouted across the fields and reached the Arverni, 160 miles away, before the end of the first watch."
+types: [occurrence]
+date:
+  value: 52 BCE
+  mode: window
+  calendar: julian
+  as_written: "the year of book VII (one commentary a year, from 58 BCE)"
+  cite:
+    id: cenabum-massacre-52-year
+    says: "Hirtius writes that Caesar composed one commentary for each year, and book I is dated by the consuls of 58 BCE, so each book is one year from 58 BCE."
+    sources:
+      - source: caesar-gallic-war
+        at: "1.6"
+        quote: "L. Pisone, A. Gabinio consulibus."
+      - source: caesar-gallic-war
+        at: "8.48"
+        quote: Scio Caesarem singulorum annorum singulos commentarios confecisse
+places:
+  - place: cenabum
+    role: site
+    cite:
+      id: cenabum-massacre-place
+      says: Caesar tells that the Carnutes rushed to Cenabum at a signal and killed the Roman citizens who traded there.
+      source: caesar-gallic-war
+      at: "7.3"
+      quote: "Cenabum signo dato concurrunt civesque Romanos, qui negotiandi causa ibi constiterant"
+participants:
+  - actor: carnutes
+    role: leader
+notes: "Caesar's own account of what began the revolt of 52 BCE."

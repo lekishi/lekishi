@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Turning towards Bibracte, the Aeduan oppidum eighteen miles away, to draw grain, Caesar was attacked by the Helvetii and defeated them in a battle that lasted from the seventh hour to evening and around their wagons into the night. Caesar reports that tablets in Greek letters found in their camp counted 368,000 emigrants, and that a census of those who went home found 110,000."
+types: [campaign]
+date:
+  value: 58 BCE
+  mode: window
+  calendar: julian
+  as_written: "the year of book I (one commentary a year, from 58 BCE)"
+  cite:
+    id: helvetii-defeated-near-bibracte-58-year
+    says: "Hirtius writes that Caesar composed one commentary for each year, and book I is dated by the consuls of 58 BCE, so each book is one year from 58 BCE."
+    sources:
+      - source: caesar-gallic-war
+        at: "1.6"
+        quote: "L. Pisone, A. Gabinio consulibus."
+      - source: caesar-gallic-war
+        at: "8.48"
+        quote: Scio Caesarem singulorum annorum singulos commentarios confecisse
+places:
+  - place: bibracte
+    role: context
+    note: Caesar was marching to Bibracte; he puts the battle within eighteen miles of it and does not locate the field.
+    cite:
+      id: helvetii-bibracte-place
+      says: "Caesar tells that Bibracte, the Aedui's greatest oppidum, was no more than eighteen miles off, so he turned his march towards it."
+      source: caesar-gallic-war
+      at: "1.23"
+      quote: itaque iter ab Helvetiis avertit ac Bibracte ire contendit.
+participants:
+  - actor: julius-caesar
+    role: leader
+  - actor: helvetii
+    role: subject
+cite:
+  - id: helvetii-bibracte-battle
+    says: Caesar tells that the battle was fought from the seventh hour to evening and that no one saw an enemy turn his back.
+    source: caesar-gallic-war
+    at: "1.26"
+    quote: "Nam hoc toto proelio, cum ab hora septima ad vesperum pugnatum sit, aversum hostem videre nemo potuit."
+  - id: helvetii-bibracte-census
+    says: "Caesar reports the total of the emigrants on the tablets as about 368,000."
+    role: supporting
+    source: caesar-gallic-war
+    at: "1.29"
+    quote: Summa omnium fuerunt ad milia CCCLXVIII.
+notes: "Caesar's own account and his numbers. The battlefield is not identified; the event is shown at Bibracte only as the place Caesar was marching to."

@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "The day after the relief army fled, Vercingetorix told a council that he had made the war for the common freedom and offered himself to the Romans, dead or alive. Caesar ordered arms and leaders brought out, sat on the works before his camp, and received Vercingetorix's surrender. He kept the Aedui and Arverni back to win their states and gave every soldier a captive."
+types: [occurrence]
+date:
+  value: 52 BCE
+  mode: window
+  calendar: julian
+  as_written: "the year of book VII (one commentary a year, from 58 BCE)"
+  cite:
+    id: vercingetorix-surrenders-52-year
+    says: "Hirtius writes that Caesar composed one commentary for each year, and book I is dated by the consuls of 58 BCE, so each book is one year from 58 BCE."
+    sources:
+      - source: caesar-gallic-war
+        at: "1.6"
+        quote: "L. Pisone, A. Gabinio consulibus."
+      - source: caesar-gallic-war
+        at: "8.48"
+        quote: Scio Caesarem singulorum annorum singulos commentarios confecisse
+places:
+  - place: alesia
+    role: site
+participants:
+  - actor: julius-caesar
+    role: leader
+  - actor: vercingetorix
+    role: subject
+  - actor: arverni
+    role: other
+cite:
+  - id: vercingetorix-surrender
+    says: "Caesar tells that he sat on the works in front of the camp, the leaders were brought to him, Vercingetorix was surrendered, and arms were thrown down."
+    source: caesar-gallic-war
+    at: "7.89"
+    quote: "Ipse in munitione pro castris consedit: eo duces producuntur; Vercingetorix deditur, arma proiciuntur."
+notes: "Caesar's own account; Vercingetorix was kept for Caesar's triumph in 46 BCE and executed after it, which this chapter does not include."

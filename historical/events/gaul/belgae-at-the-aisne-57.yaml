@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Facing the united army of the Belgae, Caesar crossed the Axona (Aisne) on the edge of the Remi, camped with the river at his back and a bridge guarded by Q. Titurius, and beat off their attempt to cross by the fords; short of food, the Belgic army broke up and went home."
+types: [campaign]
+date:
+  value: 57 BCE
+  mode: window
+  calendar: julian
+  as_written: "the year of book II (one commentary a year, from 58 BCE)"
+  cite:
+    id: belgae-at-the-aisne-57-year
+    says: "Hirtius writes that Caesar composed one commentary for each year, and book I is dated by the consuls of 58 BCE, so each book is one year from 58 BCE."
+    sources:
+      - source: caesar-gallic-war
+        at: "1.6"
+        quote: "L. Pisone, A. Gabinio consulibus."
+      - source: caesar-gallic-war
+        at: "8.48"
+        quote: Scio Caesarem singulorum annorum singulos commentarios confecisse
+places:
+  - place: aisne
+    role: site
+    cite:
+      id: belgae-aisne-place
+      says: Caesar tells that he led the army across the Axona and camped there.
+      source: caesar-gallic-war
+      at: "2.5"
+      quote: "flumen Axonam, quod est in extremis Remorum finibus, exercitum traducere maturavit atque ibi castra posuit."
+participants:
+  - actor: julius-caesar
+    role: leader
+cite:
+  - id: belgae-aisne-fords
+    says: Caesar tells that the enemy made for the Axona behind his camp and tried to bring part of their forces over by the fords.
+    source: caesar-gallic-war
+    at: "2.9"
+    quote: "Hostes protinus ex eo loco ad flumen Axonam contenderunt, quod esse post nostra castra demonstratum est."
+notes: "Caesar's own account: he commanded the army and wrote the report, and the numbers in it are his."

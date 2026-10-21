@@ -321,15 +321,14 @@ describe("projecting the reviewed Tang chapter", () => {
     expect(placed).toHaveLength(22)
     expect(unplaced).toHaveLength(2)
 
-    // A court act whose entry names no place is anchored at the court's seat as
-    // a display anchor: the record asserts no coordinate and the basis stays
-    // visible to the surfaces.
+    // A court act whose entry names no place is placed at the court's seat, the
+    // excavated palace site, and the basis stays visible to the surfaces.
     expect(eventById(chapter, "lks:event:appointment-750").placement).toMatchObject({
       kind: "point",
       placeId: "lks:place:heijo-palace",
       label: "平城宮",
-      basis: "display-anchor",
-      precision: "unspecified",
+      basis: "approximate",
+      precision: "locality",
     })
 
     // The entries that name a place the chapter cannot identify, and the one that
@@ -387,31 +386,31 @@ describe("projecting the reviewed Tang chapter", () => {
 
   it("keeps a display anchor a display anchor instead of an asserted position", () => {
     const chapter = project()
-    const dazaifu = chapter.places.find((place) => place.id === "lks:place:dazaifu")
+    const hall = chapter.places.find((place) => place.id === "lks:place:hanyuan-hall")
     const yaku = chapter.places.find((place) => place.id === "lks:place:yaku")
     const palace = chapter.places.find((place) => place.id === "lks:place:heijo-palace")
 
-    expect(dazaifu).toEqual({
-      id: "lks:place:dazaifu",
-      label: "大宰府",
-      aliases: expect.arrayContaining(["大宰府", "Dazaifu"]),
-      romanization: "Dazaifu",
+    expect(hall).toEqual({
+      id: "lks:place:hanyuan-hall",
+      label: "蓬萊宮含元殿",
+      aliases: expect.arrayContaining(["蓬萊宮含元殿", "Penglai gong Hanyuan dian"]),
+      romanization: "Penglai gong Hanyuan dian",
       lang: expect.any(String),
       placement: "display-anchor",
       precision: "unspecified",
-      position: { lon: 130.5151, lat: 33.5145 },
+      position: { lon: 108.9594, lat: 34.2914 },
       placementNote: expect.any(String),
     })
-    // The court's seat is the same kind of placement: a modern label anchor, not
-    // a coordinate the review asserted for any of the ten court acts.
+    // The court's seat was a display anchor until 2026-10-21; it is now placed
+    // at the excavated palace site, a cited locality-level placement.
     expect(palace).toEqual({
       id: "lks:place:heijo-palace",
       label: "平城宮",
       aliases: expect.arrayContaining(["平城宮", "Heijō no miya"]),
       romanization: "Heijō no miya",
       lang: expect.any(String),
-      placement: "display-anchor",
-      precision: "unspecified",
+      placement: "approximate",
+      precision: "locality",
       position: { lon: 135.79555556, lat: 34.69111111 },
       placementNote: expect.any(String),
     })
@@ -427,9 +426,9 @@ describe("projecting the reviewed Tang chapter", () => {
       position: { lon: 130.5286, lat: 30.3586 },
       placementNote: expect.any(String),
     })
-    expect(eventById(chapter, "lks:event:dazaifu-entry-753").placement).toMatchObject({
+    expect(eventById(chapter, "lks:event:tang-new-year-audience-753").placement).toMatchObject({
       kind: "point",
-      placeId: "lks:place:dazaifu",
+      placeId: "lks:place:hanyuan-hall",
       basis: "display-anchor",
       precision: "unspecified",
     })
@@ -514,7 +513,7 @@ describe("adversarial readings of the chapter", () => {
 
   it("rejects a display anchor that claims a placement precision", () => {
     const chapter = cloneTree(tree())
-    const geometry = listOf(contentOf(recordById(chapter, "lks:place:dazaifu"))["geometry"])[0]
+    const geometry = listOf(contentOf(recordById(chapter, "lks:place:hanyuan-hall"))["geometry"])[0]
 
     objectOf(geometry)["precision"] = "locality"
 
@@ -681,7 +680,7 @@ describe("adversarial readings of the chapter", () => {
     const chapter = cloneTree(tree())
 
     objectOf(
-      listOf(contentOf(recordById(chapter, "lks:place:dazaifu"))["geometry"])[0] as JsonObject,
+      listOf(contentOf(recordById(chapter, "lks:place:hanyuan-hall"))["geometry"])[0] as JsonObject,
     )["precision"] = "region"
 
     const time = objectOf(contentOf(recordById(chapter, "lks:event:rewards-754"))["time"])

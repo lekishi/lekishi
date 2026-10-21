@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=../../schema/place.schema.json
 summary:
   蘇州黃泗浦, the place from which the four ships put to sea on 天寶十二載十一月十五日 (753), named in the
-  biography as 蘇州黃泗浦. The exact landing is not identified, so the anchor marks the modern prefecture
-  city only.
+  biography as 蘇州黃泗浦. Its excavators identify it with the 黃泗浦遺址 at 張家港; the anchorage the
+  ships left from is not located within the site.
 types: [port]
 names:
   - form: 蘇州黃泗浦
@@ -20,23 +20,32 @@ names:
     script: Hani
     claim: huangsipu-name
 at:
-  - interpretation: display_anchor
-    precision: unspecified
-    point: [120.6194, 31.3]
+  - interpretation: approximate_point
+    precision: locality
+    point: [120.61228, 31.85329]
     notes:
-      Label anchor at the modern city of Suzhou (Wikidata Q42622). It is not an asserted historical
-      coordinate and does not place the 浦, whose exact location is not identified here.
+      An approximate placement at the 黃泗浦遺址 in 張家港, the excavated port settlement its excavators
+      identify with the biography's 黃泗浦. The identification is a modern archaeological one, not a
+      source statement, and the point marks the site, not the anchorage the ships left from.
     cite:
-      - id: huangsipu-anchor
+      - id: huangsipu-identification
         says:
-          The label anchor is placed at the modern city's coordinate recorded in Wikidata (CC0); no
-          historical coordinate is asserted.
-        source: wikidata
-        at: Q42622 (P625), revision 2527812164
+          The excavators of the 黃泗浦遺址 (南京博物院, from 2008) identified it, after the artificial ancient
+          waterway was uncovered in 2018 and compared with the written sources, as the place in the
+          biography from which 鑒眞's sixth crossing set out. The point is the site's modern coordinate
+          from Wikidata (CC0).
+        basis: interpretation
+        attributed_to: 南京博物院考古研究所 (林留根, 周潤墾)
+        sources:
+          - source: chinanews-huangsipu-2019
+            at: 第7段
+          - source: wikidata
+            at: Q133305745 (P625), revision 2328693819
 modern:
-  - form: 蘇州市
+  - form: 張家港市
     lang: zh-Hans
     script: Hani
-    note: Modern prefecture city recorded for orientation; the departure point itself is not identified.
-notes: The name is a compound of prefecture and waterway. Both attested forms are recorded; neither
-  is given a site placement.
+    note: The modern city in which the 黃泗浦遺址 lies, recorded for orientation.
+notes: The name is a compound of prefecture and waterway. Both attested forms are recorded. The
+  placement is the excavated site's, as its excavators identify it; until 2026-10-21 the record
+  carried only a label anchor at central 蘇州.

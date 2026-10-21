@@ -336,6 +336,10 @@ to prevent. The atlas's internal year ordinals do not change.
 
 == Proposed: journeys, territories, and media
 
+For journeys, this section is superseded by
+<<Decided: journeys are their own kind — 2026-10-21>>; territories and media
+stay proposed here.
+
 * *Journey membership is not a route.* `part_of` can suggest candidate events,
   but the compiler must not connect all of their places or sort them into a
   historical route automatically. A context place may be only an intended
@@ -361,6 +365,194 @@ contract version, *v1*, with new vectors, not an edit to v0. The proposal is to
 specify them in this record now and implement v1 with the first chapter that
 draws a territory or shows an image, so that v1 lands with real content to test
 against. Until then the compiler targets v0.
+
+== Decided: journeys are their own kind — 2026-10-21
+
+The owner decided on 2026-10-21 that a journey is a record kind of its own,
+`historical/journeys/<id>.yaml`, under contract *v1*. This supersedes, for
+journeys only, the first bullet of
+<<Proposed: journeys, territories, and media>>; territories, media, and
+per-claim credit stay proposed there. It also supersedes that section's timing
+for v1, which proposed introducing it with the first chapter that draws a
+territory or shows an image: v1 now arrives with the first published journey,
+and territories, media, and per-claim credit join it as further rules once
+they are agreed.
+
+Two other homes were weighed and not chosen:
+
+On the journey event::
+  The event's `at` holds a `schematic_link` with an ordered list of stop
+  events. It needs no contract change, because v0 already has route geometry
+  with dated waypoints. But one geometry on one event cannot say that four
+  ships left together and separated, that two sources tell a stop differently,
+  or that one leg was sailed and the next walked; the event's geometry would
+  carry structure it was not designed for.
+In the chapter manifest::
+  A `journeys:` list beside `story`. Quick, but a line on the map is a claim,
+  and a manifest is the chapter's presentation, not evidence. Every chapter
+  that shows the voyage would repeat it, and the copies could drift apart.
+
+Why the kind: the owner asked which home is better in the long term,
+regardless of effort. The first journey to publish, the 753 return voyage, is
+already the hard case: four ships leave 黃泗浦 together, the first is driven to
+驩州, 吉備真備's ship to 牟漏埼, and the second ship's 益救島 and the chronicle's
+益久嶋 are kept apart because the sources do not say they are one ship. 鑒眞's
+743–748 crossings, 圓仁's diary, and the mission network follow. Events stay
+"this happened here"; a journey says "this party moved through these events",
+with each leg's own meaning.
+
+The shape below is proposed for the owner's review. Nothing of it is built
+until the owner accepts it.
+
+== Proposed: the journey record
+
+A journey is one party's movement through an ordered list of stops. A stop is
+an event: the dated, cited evidence that the party was at a place. The journey
+adds what no single event says: who travelled, the order, and what each leg
+between two stops was.
+
+[source,yaml]
+----
+# historical/journeys/jianzhen-to-nara-753.yaml
+title: 鑒眞's journey to Nara, 753–754
+summary: >-
+  鑒眞 leaves 龍興寺 in 揚州, sails with the returning embassy from 黃泗浦 on the
+  second ship, lands at 秋妻屋浦, and travels by 大宰府 and 難波 to 東大寺.
+travellers:
+  - actor: jianzhen
+    role: leader
+stops:
+  - longxing-departure-753
+  - event: huangsipu-departure-753      # 四舟同發, a new event
+    by: river
+    cite: { source: toseiden, at: 訖，乘舟下至蘇州黃［泗浦］ }
+  - event: ajinawa-arrival-753
+    by: sea
+  - event: yaku-arrival-753
+    by: sea
+    toward: tane                          # set out for 多禰島, reached 益救島
+    cite: { source: toseiden, at: 十二月六日…第二舟發向多禰去; 七日，至益救島 }
+  - yaku-departure-753
+  - event: akimeya-landfall-753
+    by: sea
+  - dazaifu-entry-753                     # how he went is not stated: no `by`
+  - naniwa-754
+  - todaiji-installation-754
+cite:
+  - id: jianzhen-to-nara-sequence
+    says: >-
+      The biography narrates 鑒眞's departure from 龍興寺, the voyage on the second
+      ship, the landfall, and his entries to 大宰府, 難波, and the capital, in
+      this order.
+    source: toseiden
+    at: 天寶十二載十月［十］九日戌時 … 天平勝寶六年甲午 二月四日，入京
+----
+
+*The record.*
+
+* `travellers` are actors with a role, as on events. A ship is not an actor;
+  "the second ship" belongs in the summary and the legs.
+* `stops` is the journey's claim about order, supported by the journey's
+  `cite`. A stop is an event id, or an object with `event` and the arriving
+  leg's fields. A journey has at least two stops.
+* The stop's place is the event's one `site`, `start`, `end`, or `waypoint`
+  place. An event with several such places takes `place:` to say which; a
+  `context` place is never a stop, because the event did not put the party
+  there.
+* The stop's time is its event's time, unchanged. The journey has no date of
+  its own; the compiler derives its span from the first and last stops.
+* A party that stays (an arrival and a departure at one place) is two stops at
+  one place, and the map draws one vertex.
+
+*The leg arriving at a stop.* Every field is optional, and an unstated field
+asserts nothing.
+
+* `by`: `sea`, `river`, or `land`, when the source says so or the places leave
+  no other way (an island). Omitted, the leg's mode is unstated.
+* `driven: true`: the party did not choose the course (a drift). It needs its
+  own cite.
+* `toward: <place>`: the leg set out for a place it did not reach. It needs its
+  own cite, and it may not name the stop's own place. 多禰島 on the second ship's
+  leg and 福州 on the 744 attempt are the cases.
+* `route: <file>.geojson`: a route proposed in cited scholarship, with
+  `basis: interpretation` and its cite, compiled to `reconstructed_route`.
+  Without one, the leg is a `schematic_link`, which asserts no path.
+* `cite` on a stop supports that stop's leg fields. Without one, the
+  journey's `cite` must support them, as it supports the order and the
+  travellers.
+
+*Branches and accounts.* Ships that sail together and part are separate
+journeys that share their first stops. The 753 voyage is three journeys
+(鑒眞's, 藤原清河's, 吉備真備's), each listing 黃泗浦 and the stops it shares, and
+the map draws a shared leg once and the fork where the stop lists part. Two
+sources that tell a stop differently stay two events, as they are today; a
+journey lists the one its cite supports, and a second journey cites the other
+account when the sources do not say they describe one party. Nothing merges
+accounts.
+
+*What is drawn.* The rules keep the line from asserting more than the stops
+do:
+
+* A leg is drawn only between two stops whose places have an asserted
+  coordinate (`approximate_point` or better). A stop at an `unknown` place or a
+  `display_anchor` breaks the line: the legs on either side are not drawn, and
+  the journey's list and card still show the stop as unlocated. The compiler
+  never draws a line through a place it does not locate. 驩州 and the 743
+  crossing's anchorages are the cases.
+* A schematic leg is a straight great-circle segment, labelled schematic, and
+  never a path. A driven leg is drawn as a drift. An intended destination is
+  named on the card and never drawn as a line.
+* Whether the playhead shows a ship or a party follows from `by` (`sea` and
+  `river` a ship, `land` a party, unstated a plain marker). It is derived, never
+  stored: presentation keys stay out of the record.
+
+*Chapters.* A chapter publishes a journey by listing it in the manifest's
+`include`. The build fails if any of its stops' events is not also reached by
+that chapter, so a chapter never draws through an event it does not publish. A
+journey reached by an approved chapter is in that chapter's digest, so editing
+a stop reopens the approval like any other record.
+
+*Validation the compiler adds* (each becomes a v1 vector):
+
+. Fewer than two stops.
+. A stop whose event is missing, or whose place is `context`, ambiguous
+  without `place:`, or not one of the event's places.
+. A stop strictly earlier than the stop before it under v0's partial ordering.
+  v0 does not order day-precision dates within one year, so this check catches
+  only what v0 can order; a finer check waits on RFD 2's sub-year question.
+. `toward` naming the stop's own place, or `toward` or `driven` without a
+  cite.
+. A `route` without `basis: interpretation`, a cite, or a LineString that ends
+  at the two stops' points.
+. A journey included by a chapter that does not reach all its stops.
+
+*Contract v1.* v1 is v0 plus the journey kind: `lks:journey:<id>`, a revision
+whose content holds the travellers, the stops (event id, place id, and the
+arriving leg's mode, drift flag, intended place, and geometry), and the claims
+the compiler generates from the cites. Each drawn leg compiles to a v0
+`geometry` entry with its interpretation and two `waypoints` carrying the
+stops' place ids and times. v0's schemas, examples, and 187 vectors stay as
+they are and keep passing; v1 adds its schema and vectors under
+`historical/v1/`, and a v0 document is a valid v1 document. The compiler emits
+v1 bundles once the first journey is published.
+
+*What moves.* The hand-written journeys in
+`src/lib/atlas/overlay-definitions.ts` (鑒眞's and 大伴古麻呂's for Tang,
+韓非's for Qin) are curation in code, uncited and unapproved. Since RFD 6 they
+travel in each chapter's data rather than in a shared browser table, so a
+chapter production leaves out names none of them in a public file. The 753
+journeys replace 鑒眞's, the map's journeys come from the published records,
+and his hand-written entry is removed; 大伴古麻呂's and 韓非's lines stay
+hand-written until they are authored, then go too. Journey records keep that
+boundary: they compile into their chapter's bundle, so a left-out chapter's
+journeys are as server-only as its events.
+
+*Open for the owner.*
+
+* Whether `by` may be inferred from the places (an island reached from the
+  mainland) or must always be stated by a source.
+* Whether a journey whose stops are all unlocated (the 743 crossing) is worth
+  publishing for its list and card alone. The proposal is yes.
 
 == Decided: the compiler and what ships
 

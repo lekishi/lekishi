@@ -189,11 +189,13 @@ describe("places first", () => {
     const tang = chapter(TANG_CHAPTER)
     const scene = buildScene(createAtlasState(tang), tang)
     const heijo = scene.places.find((place) => place.id === "lks:place:heijo-palace")
+    const hall = scene.places.find((place) => place.id === "lks:place:hanyuan-hall")
     const akimeya = scene.places.find((place) => place.id === "lks:place:akimeya")
 
     expect(new Set(scene.places.map((place) => place.id)).size).toBe(scene.places.length)
     expect(heijo?.eventCount).toBeGreaterThan(1)
-    expect(heijo?.mark).toBe("anchor")
+    expect(heijo?.mark).toBe("identified")
+    expect(hall?.mark).toBe("anchor")
     expect(akimeya?.mark).toBe("identified")
     // A place with no sourced position is never marked.
     expect(scene.places.map((place) => place.id)).not.toContain("lks:place:huanzhou")

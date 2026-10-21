@@ -906,31 +906,51 @@ test("keeps events the chapter cannot place in the list without a map position",
   await expect(page.locator("#atlas-follow-toggle")).toBeDisabled()
 })
 
-test("anchors a court act at the court's seat without asserting a coordinate", async ({ page }) => {
+test("places a court act at the identified palace site, and a hall by anchor alone", async ({
+  page,
+}) => {
   await mountAtlas(page)
 
-  // The entry names no place, so the record anchors the act at the court's seat
-  // (平城宮) as a display anchor: the row names the place, the card says which
-  // kind of placement it is, and the map draws it as an anchor, not a site.
+  // The entry names no place, so the record places the act at the court's seat
+  // (平城宮), whose excavated site is a cited identification: the row names the
+  // place, the card says which kind of placement it is, and the map draws it as
+  // identified.
   await openExplore(page, "events")
   await expect(page.locator('[data-event-id="lks:event:appointment-750"]')).toContainText("平城宮")
   await selectEvent(page, "lks:event:appointment-750")
 
-  await expect(card(page).locator('[data-badge="anchor"]')).toContainText(
-    "label anchor, no site asserted",
+  await expect(card(page).locator('[data-badge="identified"]')).toContainText(
+    "identified, size is precision",
   )
-  await expect(card(page).getByTestId("atlas-place-note")).toContainText("not an asserted")
-  await expect(card(page).locator('[data-empty="uncovered"]')).toHaveCount(0)
-  await expect(page.locator("#atlas-follow-toggle")).toBeEnabled()
+  // Identifying the palace site does not locate the act: the card still says
+  // that no source places it there.
+  await expect(card(page).getByTestId("atlas-selection-note")).toContainText(
+    "no source places the act there",
+  )
   await expect(page.locator('[data-marker-id="lks:place:heijo-palace"]')).toHaveAttribute(
     "data-mark",
-    "anchor",
+    "identified",
   )
 
   // The entry itself names 内裏, the inner palace, and the record says so.
   await selectEvent(page, "lks:event:sekito-752")
 
   await expect(card(page)).toContainText("内裏")
+
+  // The Tang hall has no sourced site, so it is a display anchor: the card says
+  // so, and the map draws an anchor, not a site.
+  await selectEvent(page, "lks:event:tang-new-year-audience-753")
+
+  await expect(card(page).locator('[data-badge="anchor"]')).toContainText(
+    "label anchor, no site asserted",
+  )
+  await expect(card(page).getByTestId("atlas-place-note")).toContainText("not an")
+  await expect(card(page).locator('[data-empty="uncovered"]')).toHaveCount(0)
+  await expect(page.locator("#atlas-follow-toggle")).toBeEnabled()
+  await expect(page.locator('[data-marker-id="lks:place:hanyuan-hall"]')).toHaveAttribute(
+    "data-mark",
+    "anchor",
+  )
 })
 
 test("keeps the coda nodes outside the primary window until it is widened", async ({ page }) => {

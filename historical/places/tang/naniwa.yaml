@@ -15,25 +15,32 @@ names:
         source: toseiden
         at: 天平勝寶六年甲午 二月一日到難波
 at:
-  - interpretation: display_anchor
-    precision: unspecified
-    point: [135.5021, 34.6938]
+  - interpretation: approximate_point
+    precision: region
+    point: [135.52327778, 34.68065194]
     notes:
-      Label anchor at the modern city of Osaka (Wikidata Q35765). It is not an asserted historical
-      coordinate and does not by itself establish the identification of 難波 with any site.
+      A region-level placement at the 難波宮跡, the site of the palace at 難波 rebuilt from 726 and in
+      use in the period. The biography names 難波, not the palace, so the point stands for the area
+      and asserts no landing, lodging, or building.
     cite:
-      - id: naniwa-anchor
+      - id: naniwa-identification
         says:
-          The label anchor is placed at the modern city's coordinate recorded in Wikidata (CC0); no
-          historical coordinate is asserted.
-        source: wikidata
-        at: Q35765 (P625), revision 2539626242
+          The 難波宮跡 at 大阪市中央区法円坂 holds two palaces confirmed by excavation from 1961, the later
+          one built from 726 (神亀3年). The point is the palace site's modern coordinate from Wikidata
+          (CC0), placed to stand for the 難波 area.
+        basis: interpretation
+        attributed_to: 大阪観光局 (Osaka Convention & Tourism Bureau)
+        sources:
+          - source: osaka-info-naniwa-palace
+            at: 難波宮跡公園
+          - source: wikidata
+            at: Q3608523 (P625), revision 2516927439
 modern:
   - form: 大阪市
     lang: ja
     script: Hani
-    note: Modern city recorded for orientation only; the cited passages do not state a site
-      identification.
+    note: Modern city recorded for orientation; the 難波宮跡 lies in its 中央区.
 notes:
-  The place is recorded because the 東征傳 names it on a dated leg of 鑒眞's journey. No site-level
-  identification is asserted, so the geometry is a display anchor.
+  The place is recorded because the 東征傳 names it on a dated leg of 鑒眞's journey. The point stands
+  for the 難波 area at its palace site, at region precision; no site-level identification of where
+  the party arrived is asserted.

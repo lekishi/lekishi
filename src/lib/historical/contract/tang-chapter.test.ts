@@ -414,7 +414,7 @@ describe("the Tang chapter fixture", () => {
 
     expect(counts).toEqual({ place: 15, actor: 12, event: 29, relationship: 9, story: 1 })
     expect(chapter.documents.filter((document) => document["document"] === "source")).toHaveLength(
-      11,
+      18,
     )
 
     const first = theSet(chapter)
@@ -465,14 +465,15 @@ describe("the Tang chapter fixture", () => {
       ).toEqual([entry["revision_id"]])
     }
 
-    // The owner-accepted placements and identifications survive the flattening:
-    // the court's seat is a display anchor, the two identifications are
-    // approximate locality-level placements, and 驩州 keeps unknown geometry.
+    // The placements and identifications survive the flattening: the court's
+    // seat is placed at the excavated palace site (no longer a display anchor
+    // since 2026-10-21), the identifications are approximate locality-level
+    // placements, and 驩州 keeps unknown geometry.
     const palace = objectOf(listOf(recordById(chapter, "lks:place:heijo-palace")["revisions"])[0])
     const palaceGeometry = objectOf(listOf(objectOf(palace["content"])["geometry"])[0])
 
-    expect(palaceGeometry["interpretation"]).toBe("display_anchor")
-    expect(palaceGeometry["precision"]).toBe("unspecified")
+    expect(palaceGeometry["interpretation"]).toBe("approximate_point")
+    expect(palaceGeometry["precision"]).toBe("locality")
 
     for (const recordId of ["lks:event:appointment-750", "lks:event:sekito-752"]) {
       const revision = objectOf(listOf(recordById(chapter, recordId)["revisions"])[0])

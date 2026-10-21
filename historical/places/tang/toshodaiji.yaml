@@ -16,18 +16,26 @@ names:
         source: toseiden
         at: 寶字三年八月一日，私立唐律招提名
 at:
-  - interpretation: display_anchor
-    precision: unspecified
+  - interpretation: approximate_point
+    precision: locality
     point: [135.7848, 34.6756]
-    notes: Label anchor at the temple site recorded in Wikidata (Q973175). It is not an asserted
-      historical coordinate; the temple is an existing site and the anchor only places the label.
+    notes:
+      An approximate placement at 唐招提寺 in Nara, which still stands on the former residence of
+      新田部親王 granted to 鑒眞 and keeps its Nara-period halls. The point marks the temple, not a
+      building of 759.
     cite:
-      - id: toshodaiji-anchor
+      - id: toshodaiji-identification
         says:
-          The label anchor is placed at the temple site's coordinate recorded in Wikidata (CC0); no
-          historical coordinate is asserted.
-        source: wikidata
-        at: Q973175 (P625), revision 2542534325
+          唐招提寺 at 奈良市五条町 is the temple 鑒眞 opened in 759 on 新田部親王's former residence, and
+          its Nara-period 金堂 and 講堂 still stand. The point is the temple's modern coordinate from
+          Wikidata (CC0).
+        basis: interpretation
+        attributed_to: 唐招提寺
+        sources:
+          - source: toshodaiji-about
+            at: 唐招提寺とは
+          - source: wikidata
+            at: Q973175 (P625), revision 2542534325
 external_ids:
   - system: wikidata
     id: Q973175

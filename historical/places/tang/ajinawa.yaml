@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  阿兒奈波島, the island the biography records the first and second ships reaching on 天寶十二載十一月廿一日
+  (753), in the passage that places it south-west of 多禰島.
+types: [landform]
+names:
+  - form: 阿兒奈波島
+    lang: lzh
+    script: Hani
+    roman: Akonahajima
+    scheme: hepburn
+    cite:
+      - id: ajinawa-name
+        says:
+          The biography names 阿兒奈波島 as the island the first and second ships reached on 天寶十二載十一月廿一日,
+          south-west of 多禰島.
+        source: toseiden
+        at: 廿一日戊午，第一、第二兩舟同到阿兒奈波島，在多禰島西南
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [127.95, 26.4833]
+    notes:
+      An approximate, region-level placement at the island the cited reference work identifies with
+      阿兒奈波島. It is an identification, not a source statement of the eighth century, and no landing
+      site is asserted.
+    cite:
+      - id: ajinawa-identification
+        says:
+          The cited reference work identifies 阿兒奈波島 with 沖縄島; the point is placed at that island's
+          modern coordinate from Wikidata (CC0) as an approximate region-level placement.
+        basis: interpretation
+        attributed_to: 琉球新報『沖縄大百科事典』「阿児奈波島」
+        sources:
+          - source: okinawa-daihyakka-ajinawa
+            at: 阿児奈波島
+          - source: wikidata
+            at: Q600614 (P625), revision 2538726612
+modern:
+  - form: 沖縄島
+    lang: ja
+    script: Hani
+    note: The cited reference work identifies 阿兒奈波島 with 沖縄島; recorded as a scholarly identification.
+notes: The island name is source-attested; the modern identification is a cited interpretation and
+  is labelled as one. The island's own coordinate comes from Wikidata and is a modern reference
+  point, not a historical location.

@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  大伴古麻呂 returns to court in 天平勝寶六年正月 (754), with eight people including 鑒眞 and 法進 coming back
+  with him. The biography separately records his report that 鑒眞 reached 大宰府; whether that report and
+  the chronicle's return notice describe the same occasion is not established. The entry names no
+  place; the record anchors the act at the court's seat, 平城宮, as a display anchor.
+types: [mission]
+date:
+  value: 754-01
+  calendar: regnal
+  as_written: 天平勝寶六年正月壬子 入唐副使從四位上大伴宿祢古麻呂來歸
+  cite:
+    - id: return-report-time
+      says: The chronicle records 大伴宿祢古麻呂 returning on 天平勝寶六年正月壬子 with eight people including 鑒眞 and 法進.
+      source: shoku-nihongi
+      at: 卷第十九 天平勝寶六年正月壬子
+      quote: 入唐副使從四位上大伴宿祢古麻呂來歸。唐僧鑒眞。法進等八人隨而歸朝。
+places:
+  - place: heijo-palace
+    role: site
+    note:
+      The entry names no place. A court act happens at the court, whose seat in this period is 平城宮
+      (the palace of 平城京); the record anchors it there for display only, not as a source-named site,
+      and asserts no site for the act.
+participants:
+  - actor: otomo-no-komaro
+    role: leader
+  - actor: jianzhen
+    role: participant
+  - actor: fajin
+    role: participant
+notes:
+  The chronicle gives 正月壬子 for 古麻呂's return and the biography records a 奏 on 正月十一日丁未 that 鑒眞
+  had reached 大宰府; the cited passages do not establish that these are the same occasion, so the
+  chapter keeps them as separate statements and publishes the month only. The Wave 1A pass also
+  notes 正月十二日 for the biography's report in a different edition's searchable preview; that reading
+  is not in the transcription cited here, so it stays a re-check item for a critical edition rather
+  than published evidence.
+cites:
+  summary:
+    - id: return-report-biography
+      says:
+        The biography records 古麻呂 reporting on 天平勝寶六年正月十一日丁未 that 鑒眞 had reached 大宰府. The chapter does
+        not publish a day for it, and the cited passages do not establish that this report is the
+        same occasion as the chronicle's return notice.
+      role: supporting
+      source: toseiden
+      at: 天平勝寶六年甲午，正月十一日丁未，副使從四位上大伴宿禰胡麿奏：大和上到筑志［太］宰府
+  participants:
+    - id: return-report-participants
+      says: The chronicle names 鑒眞 and 法進 among the eight who returned with 古麻呂.
+      source: shoku-nihongi
+      at: 卷第十九 天平勝寶六年正月壬子

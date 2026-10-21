@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  韓, the state whose king submitted to Qin in 233 BCE, ceded 南陽 in 231 BCE, and was annexed
+  in 230 BCE. The hereditary house's account ends with 韓遂亡.
+types: [state]
+names:
+  - form: 韓
+    lang: lzh
+    script: Hani
+    roman: Han
+    scheme: pinyin
+    cite:
+      - id: han-state-name
+        says:
+          The cited entries name 韓 as the state that ceded land and whose king and territory Qin took,
+          and the hereditary house ends its account with 韓遂亡.
+        sources:
+          - source: shiji
+            at: 卷四十五 韓世家 韓王安九年（韓遂亡）
+            quote: 九年，秦虜王安，盡入其地，爲潁州郡。韓遂亡。
+          - source: zizhi-tongjian
+            at: 卷六 秦紀一 始皇帝十四年（韓王納地效璽）
+            quote: 韓王納地效璽，請為籓臣，使韓非來聘。
+notes: "The state actor carries no roles: the role vocabulary is person-oriented. The hereditary
+  house's account ends with 韓遂亡, which is recorded on the annexation relationship and the conquest
+  event rather than as a role."

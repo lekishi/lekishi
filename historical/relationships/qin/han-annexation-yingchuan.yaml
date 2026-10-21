@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: Han's annexed land becoming the 潁川 commandery in 230 BCE, as the annals and the
+  comprehensive mirror record. The relationship is an institutional change and asserts no causation.
+types: [institutional_change]
+from: han-state
+to: yingchuan
+date:
+  value: 230 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 十七年（以其地為郡，命曰潁川）; 始皇帝十七年（以其地置潁川郡）
+notes: The relationship records the administrative outcome of the annexation without asserting that
+  the annexation caused it. It carries no geometry; the commandery's record keeps the sources' names
+  and no coordinates.
+cite:
+  - id: han-annexation-yingchuan-basis
+    says:
+      The annals record the annexed land being made a commandery named 潁川, and the comprehensive
+      mirror records the land being made into 潁川郡.
+    sources:
+      - source: shiji
+        at: 卷六 秦始皇本紀 十七年（命曰潁川）
+        quote: 盡納其地，以其地為郡，命曰潁川。
+      - source: zizhi-tongjian
+        at: 卷六 秦紀一 始皇帝十七年（以其地置潁川郡）
+        quote: 虜韓王安，以其地置潁川郡。

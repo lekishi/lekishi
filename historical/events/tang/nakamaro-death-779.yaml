@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The court learns that the former student 阿倍朝臣仲麻呂 has died in Tang and grants funeral goods
+  to his household in 寶龜十年五月 (779). The entry names no place; the record anchors the act at the
+  court's seat, 平城宮, as a display anchor.
+types: [occurrence]
+date:
+  value: 779-05
+  calendar: regnal
+  as_written: 寶龜十年五月丙寅 前學生阿倍朝臣仲麻呂在唐而亡
+  cite:
+    - id: nakamaro-death-time
+      says:
+        The chronicle records on 寶龜十年五月丙寅 that the former student 阿倍朝臣仲麻呂 died in Tang and that
+        funeral goods were granted to his household.
+      source: shoku-nihongi
+      at: 卷第卅五 寶龜十年五月丙寅
+      quote: 丙寅。前學生阿倍朝臣仲麻呂在唐而亡。家口偏乏。葬礼有闕。勅賜東■一百疋。白綿三百屯。
+places:
+  - place: heijo-palace
+    role: site
+    note:
+      The entry names no place. A court act happens at the court, whose seat in this period is 平城宮
+      (the palace of 平城京); the record anchors it there for display only, not as a source-named site,
+      and asserts no site for the act.
+participants:
+  - actor: abe-no-nakamaro
+    role: subject
+notes: Coda node (outside the primary 750–754 mission window). The entry reports a death that
+  happened in Tang; it gives no death date, so the chapter publishes the report's month and no death
+  year.
+cites:
+  participants:
+    - id: nakamaro-death-subject
+      says: The entry names 仲麻呂 as the deceased former student.
+      source: shoku-nihongi
+      at: 卷第卅五 寶龜十年五月丙寅

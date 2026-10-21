@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The court raises the late ambassador 藤原朝臣清河 from 從三位 to 從二位 in 寶龜十年二月 (779), in a notice
+  that also records his drift to 驩州, his survival, and his death in Tang. The entry names no place;
+  the record anchors the act at the court's seat, 平城宮, as a display anchor.
+types: [occurrence]
+date:
+  value: 779-02
+  calendar: regnal
+  as_written: 寶龜十年二月乙亥 贈故入唐大使從三位藤原朝臣清河從二位
+  cite:
+    - id: kiyokawa-honours-time
+      says: The chronicle records the posthumous promotion of 藤原朝臣清河 from 從三位 to 從二位 on 寶龜十年二月乙亥.
+      source: shoku-nihongi
+      at: 卷第卅五 寶龜十年二月乙亥
+      quote: 乙亥。贈故入唐大使從三位藤原朝臣清河從二位。
+places:
+  - place: heijo-palace
+    role: site
+    note:
+      The entry names no place. A court act happens at the court, whose seat in this period is 平城宮
+      (the palace of 平城京); the record anchors it there for display only, not as a source-named site,
+      and asserts no site for the act.
+participants:
+  - actor: fujiwara-no-kiyokawa
+    role: subject
+notes: Coda node (outside the primary 750–754 mission window). The honours are the court's act; the
+  voyage and death details in the same notice are cited on the drift event and on the actor, not
+  restated as mission effects.
+cites:
+  participants:
+    - id: kiyokawa-honours-subject
+      says: The entry names 清河 as the recipient of the posthumous rank.
+      source: shoku-nihongi
+      at: 卷第卅五 寶龜十年二月乙亥

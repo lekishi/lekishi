@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lekishi/lekishi/historical/schema/chapter.schema.json",
+  "title": "Lekishi chapter manifest",
+  "description": "historical/chapters/<id>.yaml: what a chapter is called, the window it opens on, its story as an ordered list of event and relationship ids, and the owner's approval. The approval pins a digest of the manifest and every record and source it reaches; `pnpm approvals` shows what changed since the last approval and prints the digest. The owner writes the approval; no one else does.",
+  "type": "object",
+  "required": ["title", "summary", "window", "story"],
+  "additionalProperties": false,
+  "properties": {
+    "title": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "summary": { "$ref": "common.schema.json#/$defs/text" },
+    "window": { "$ref": "common.schema.json#/$defs/date_value" },
+    "story": {
+      "type": "object",
+      "required": ["summary", "span", "steps"],
+      "additionalProperties": false,
+      "properties": {
+        "summary": { "$ref": "common.schema.json#/$defs/text" },
+        "span": { "$ref": "common.schema.json#/$defs/date_value" },
+        "coverage": { "$ref": "common.schema.json#/$defs/text" },
+        "notes": { "$ref": "common.schema.json#/$defs/text" },
+        "steps": {
+          "description": "The story in presentation order, which is not a claim that one step preceded or caused another. Each step is an event or relationship id with its caption: `- akimeya-landfall-753: The landfall at 秋妻屋浦`.",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 200,
+          "items": {
+            "type": "object",
+            "additionalProperties": { "type": "string", "minLength": 1, "maxLength": 500 }
+          }
+        }
+      }
+    },
+    "include": {
+      "description": "Records the chapter publishes that its story does not step through, such as a relationship the map draws as an arc.",
+      "type": "array",
+      "maxItems": 200,
+      "items": { "$ref": "common.schema.json#/$defs/reference" }
+    },
+    "approval": {
+      "type": "object",
+      "required": ["digest", "by", "on"],
+      "additionalProperties": false,
+      "properties": {
+        "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "by": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "on": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" }
+      }
+    }
+  }
+}

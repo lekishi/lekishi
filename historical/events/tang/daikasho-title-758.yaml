@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In the accession decree of 天平寶字二年八月庚子朔 (758) the court gives 鑒眞 the title 大和上, ends his 僧綱
+  post because of his age, and orders monks who wish to study the precepts to study under him. The
+  entry names no place; the record anchors the act at the court's seat, 平城宮, as a display anchor.
+types: [other]
+date:
+  value: 758-08-01
+  calendar: regnal
+  as_written: 天平寶字二年八月庚子朔
+  cite:
+    - id: daikasho-title-time
+      says:
+        The chronicle's 天平寶字二年八月庚子朔 decree gives 鑒眞 the title 大和上, ends his 僧綱 post, and orders monks
+        wishing to study the precepts to study under him.
+      source: shoku-nihongi
+      at: 卷第廿一 天平寶字二年八月庚子朔
+      quote: 其大僧都鑒眞和上、戒行轉潔、白頭不變。遠渉滄波、歸我聖朝。号曰大和上。恭敬供養。政事躁煩。不敢勞老。宜停僧綱之任。集諸寺僧尼。欲學戒律者。皆属令習。
+places:
+  - place: heijo-palace
+    role: site
+    note:
+      The entry names no place. A court act happens at the court, whose seat in this period is 平城宮
+      (the palace of 平城京); the record anchors it there for display only, not as a source-named site,
+      and asserts no site for the act.
+participants:
+  - actor: jianzhen
+    role: subject
+notes: "Coda node (outside the primary 750–754 mission window): a separately dated court act
+  recorded in the accession decree, published as its own event and not as an effect of the mission.
+  The v0 event vocabulary has no institutional-change type, so this event uses other and explains
+  the choice here rather than extending the vocabulary."
+cites:
+  participants:
+    - id: daikasho-title-participant
+      says: The decree names 鑒眞 as the monk receiving the title and the study order.
+      source: shoku-nihongi
+      at: 卷第廿一 天平寶字二年八月庚子朔

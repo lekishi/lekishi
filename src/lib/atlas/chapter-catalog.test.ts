@@ -3,10 +3,8 @@ import { listChapters, loadChapter } from "../historical/chapter"
 import { loadChapterContent, loadServedChapter, projectChapterContent } from "./chapter-catalog"
 import {
   QIN_CHAPTER,
-  QIN_COVERAGE,
   SERVED_CHAPTERS,
   TANG_CHAPTER,
-  TANG_COVERAGE,
   servedChapter,
   servedChapterViolations,
 } from "./chapter-registry"
@@ -17,12 +15,16 @@ import { projectChapter } from "./projection"
  *
  * Every chapter the site serves loads through this one browser-safe path, and the
  * route that renders a chapter passes the coverage model the registry gives it.
- * This suite runs through Vite's module graph (the lazy `import.meta.glob` maps),
- * so it proves each chapter loads in a browser build; it pins that the served list
- * covers exactly the chapter trees the site carries, that a chapter's loaded
- * window is its own, and that an unknown chapter fails instead of rendering
- * nothing.
+ * This suite runs through Vite's module graph (the compiled chapters' virtual
+ * modules), so it proves each chapter loads in a browser build; it pins that the
+ * served list covers only chapter manifests the site carries, that a chapter's
+ * loaded window is the one its manifest writes, and that an unknown chapter
+ * fails instead of rendering nothing.
  */
+
+/** The windows the two manifests write, in astronomical ordinals (233 BCE is -232). */
+const TANG_COVERAGE = { defaultWindow: { start: 750, end: 754 } }
+const QIN_COVERAGE = { defaultWindow: { start: -232, end: -225 } }
 
 describe("the served chapter catalog", () => {
   it("loads the Tang chapter through the same path every chapter uses", async () => {
@@ -71,8 +73,8 @@ describe("the served chapter catalog", () => {
     // A served entry for a tree that does not exist would fail to load, and a
     // duplicate entry would prerender the same chapter twice. The served list is
     // deliberately a subset of the trees, not an equality: a chapter that is
-    // prepared for review but not served has a tree, no served entry, and no page
-    // (the publication approval gate covers it as a `preparation snapshot`).
+    // prepared for review but not served has a manifest, no served entry, and no
+    // page (a draft, which the approval gate reports).
     expect(servedChapterViolations(SERVED_CHAPTERS, listChapters())).toEqual([])
 
     expect(SERVED_CHAPTERS.map((chapter) => chapter.id)).toContain(TANG_CHAPTER)
@@ -99,16 +101,16 @@ describe("the served chapter catalog", () => {
         [...SERVED_CHAPTERS, { id: "no-tree", coverage: TANG_COVERAGE }],
         trees,
       ),
-    ).toContain("no-tree is served but has no chapter tree")
-    expect(servedChapterViolations([...SERVED_CHAPTERS, SERVED_CHAPTERS[0]!], trees)).toContain(
-      `${TANG_CHAPTER} is served more than once`,
-    )
+    ).toContain("no-tree is served but has no chapter manifest")
+    expect(
+      servedChapterViolations([...SERVED_CHAPTERS, servedChapter(TANG_CHAPTER)!], trees),
+    ).toContain(`${TANG_CHAPTER} is served more than once`)
   })
 
   it("fails on a chapter the content tree does not carry", async () => {
     await expect(loadServedChapter("invented-chapter")).rejects.toThrow(/not a served chapter/)
     await expect(loadChapterContent("invented-chapter", TANG_COVERAGE)).rejects.toThrow(
-      /cannot be projected/,
+      /not an approved chapter/,
     )
   })
 

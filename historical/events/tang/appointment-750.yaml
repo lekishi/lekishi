@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The court appoints the embassy: 藤原朝臣清河 as ambassador and 大伴宿祢古麻呂 as vice-envoy, with four
+  judges and four scribes. The entry names no place; the record anchors the act at the court's seat,
+  平城宮, as a display anchor."
+types: [mission]
+date:
+  value: 750-09
+  calendar: regnal
+  as_written: 天平勝寶二年九月己酉
+  cite:
+    - id: appointment-750-time
+      says: The chronicle records the embassy's appointment on 天平勝寶二年九月己酉.
+      source: shoku-nihongi
+      at: 卷第十八 天平勝寶二年九月己酉
+      quote: 己酉。任遣唐使。以從四位下藤原朝臣清河爲大使。從五位下大伴宿祢古麻呂爲副使。判官主典各四人。
+places:
+  - place: heijo-palace
+    role: site
+    note:
+      The entry names no place. A court act happens at the court, whose seat in this period is 平城宮
+      (the palace of 平城京); the record anchors it there for display only, not as a source-named site,
+      and asserts no site for the act.
+participants:
+  - actor: fujiwara-no-kiyokawa
+    role: leader
+    note: Appointed 大使.
+  - actor: otomo-no-komaro
+    role: participant
+    note: Appointed 副使.
+notes: "The entry gives a sexagenary day (己酉); v0 normalizes it to the month and keeps the day in
+  source_expression. No place is named in the entry: the event is anchored at the court's seat for
+  display only, and the record asserts no site for the act."
+cites:
+  participants:
+    - id: appointment-750-participants
+      says: The same entry names 藤原朝臣清河 as ambassador and 大伴宿祢古麻呂 as vice-envoy.
+      source: shoku-nihongi
+      at: 卷第十八 天平勝寶二年九月己酉

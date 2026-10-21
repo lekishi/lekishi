@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The second ship leaves 益救島 on 天寶十二載十二月十八日; the next day a storm makes the direction
+  unknowable, and a mountain top is sighted from the waves at noon.
+types: [journey]
+part_of: [return-voyage-753]
+date:
+  value: 753-12-18
+  calendar: chinese_lunisolar
+  as_written: 十八日，自益救發
+  cite:
+    - id: yaku-departure-time
+      says: The biography records the ship leaving 益救島 on 天寶十二載十二月十八日 and the storm of the 19th.
+      source: toseiden
+      at: 十八日，自益救發。十九日，風雨大發，不知四方
+places:
+  - place: yaku
+    role: site
+notes: The following day's storm is kept in the summary because it belongs to the same passage and
+  explains the landfall's date.
+cites:
+  places:
+    - id: yaku-departure-place
+      says: The passage names 益救島 as the island left.
+      source: toseiden
+      at: 十八日，自益救發

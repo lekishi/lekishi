@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: 唐 (大唐), the receiving court in the cited sources. The chapter uses this actor for the
+  embassy's diplomacy and for the New Year audience at 蓬萊宮含元殿, which 古麻呂 reported.
+types: [dynasty]
+names:
+  - form: 唐
+    lang: lzh
+    script: Hani
+    roman: Tang
+    scheme: pinyin
+    cite:
+      - id: tang-dynasty-name
+        says:
+          The sources name the receiving court 唐 (大唐), and 古麻呂's report records the New Year audience at
+          蓬萊宮含元殿.
+        sources:
+          - source: shoku-nihongi
+            at: 卷第十九 天平勝寶六年正月丙寅
+          - source: toseiden
+            at: 天寶十二載 十月十五日壬午
+  - form: 大唐
+    lang: lzh
+    script: Hani
+    claim: tang-dynasty-name
+notes: "The state actor carries no roles: the role vocabulary is person-oriented. The court's acts
+  are recorded on the events and relationships that cite the entries."

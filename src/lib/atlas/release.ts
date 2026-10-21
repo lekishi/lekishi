@@ -1,23 +1,26 @@
-import { QIN_CHAPTER, TANG_CHAPTER } from "./chapter-registry"
+import type { ChapterEntry } from "virtual:lekishi-chapters"
+import { CHAPTER_MANIFESTS } from "./chapter-registry"
 
 /**
- * The editorial state the chapter cards and pages state, one entry per served
- * chapter.
+ * The editorial state the chapter pages state, one entry per served chapter.
+ * The home page's cards state only a draft's line: the owner decided on
+ * 2026-10-20 that an approved chapter's card carries no approval line, since
+ * every chapter production serves is approved.
  *
- * A chapter's set document is frozen on purpose: the owner's editorial approval
- * under RFD 2 was recorded against its canonical digest, and editing the set
- * would change that digest and invalidate the decision. Every set's `review`
- * block records only the preparing editor's `self_review`, so the atlas states
- * the decision the RFD 2 ledger records rather than the set's own earlier
- * wording. The wording lives here so the cards, the chapter pages, and their
- * tests state the decision the same way; `release.test.ts` reads the ledger and
- * the sets: a stated date must be the date the chapter's row records, and no line
- * may describe the content as reviewed beyond the `self_review` it carries.
+ * A served chapter is one whose manifest carries the owner's approval of its
+ * exact content (RFD 2's digest approval), so the atlas states that approval and
+ * its date. The compiled set's `review` records only the contributors'
+ * `self_review`, because the approval is an editorial decision rather than a
+ * review by anyone independent of the preparation. The wording lives here so the
+ * cards, the chapter pages, and their tests state the decision the same way;
+ * `release.test.ts` reads the manifests and the sets: a stated date must be the
+ * date the chapter's approval records, and no line may describe the content as
+ * reviewed beyond the `self_review` it carries.
  */
 
 /** One chapter's recorded decision: the short line and the card's full status. */
 export type ChapterRelease = {
-  /** The date the chapter's ledger row records for the owner's editorial approval. */
+  /** The date the chapter's manifest records for the owner's approval. */
   readonly decidedOn: string
   /** The short decision line a page states beside the chapter's name. */
   readonly decision: string
@@ -26,10 +29,10 @@ export type ChapterRelease = {
 }
 
 /**
- * The owner's editorial approval under RFD 2, as a chapter states it. The
- * approval is a ledger decision, not a review of the content, so every line keeps
- * the specialist caveat: the approval must never read as independent or
- * specialist sign-off.
+ * The owner's approval under RFD 2, as a chapter states it. The approval is an
+ * editorial decision, not a review of the content, so every line keeps the
+ * specialist caveat: the approval must never read as independent or specialist
+ * sign-off.
  */
 function approval(decidedOn: string): ChapterRelease {
   const decision = `Owner-approved for release, ${decidedOn}`
@@ -41,17 +44,52 @@ function approval(decidedOn: string): ChapterRelease {
   }
 }
 
-/** The Tang chapter's recorded decision. Its set's preparation-time notes still describe the approval as pending; the page states the decision instead of quoting them. */
-export const TANG_RELEASE = approval("2026-09-25")
-
-/** The Qin chapter's recorded decision, taken on 2026-09-27 against the corrected preparation. */
-export const QIN_RELEASE = approval("2026-09-27")
-
-/** The recorded decision for a served chapter id, or undefined for another chapter. */
+/** The recorded decision for a chapter id, or undefined for a chapter without an approval. */
 export function chapterRelease(id: string): ChapterRelease | undefined {
-  if (id === TANG_CHAPTER) {
-    return TANG_RELEASE
-  }
+  const manifest = CHAPTER_MANIFESTS.find((chapter) => chapter.id === id)
 
-  return id === QIN_CHAPTER ? QIN_RELEASE : undefined
+  return manifest?.state === "approved" && manifest.approval !== null
+    ? approval(manifest.approval.on)
+    : undefined
+}
+
+/**
+ * What a draft chapter states in place of a decision. Only a build that serves
+ * drafts has one (development and pull-request previews, by the owner's
+ * decision of 2026-10-18); production never serves a chapter without a
+ * matching approval. A draft must never read as approved: every surface that
+ * shows one says it is a draft, and a stale chapter also says that its content
+ * changed since the approval it still carries.
+ */
+export type ChapterDraft = {
+  /** The short line a page states beside the chapter's name. */
+  readonly decision: string
+  /** The full line: the decision and `DRAFT_SCOPE`, as the chapter card states it. */
+  readonly status: string
+}
+
+/** What a draft's full line adds to its decision: that only previews serve it. */
+export const DRAFT_SCOPE =
+  "This build is a preview; the published site serves approved chapters only."
+
+/**
+ * What a chapter without a matching approval states when a build serves it.
+ * Exported so the wording can be pinned without a build that serves drafts.
+ */
+export function draftStatement(manifest: ChapterEntry): ChapterDraft {
+  const decision =
+    manifest.state === "stale" && manifest.approval !== null
+      ? `Draft: changed since the owner's approval of ${manifest.approval.on}, not approved for release`
+      : "Draft, not approved for release"
+
+  return { decision, status: `${decision}. ${DRAFT_SCOPE}` }
+}
+
+/** The draft statement for a chapter id, or undefined for an approved or unserved chapter. */
+export function chapterDraft(id: string): ChapterDraft | undefined {
+  const manifest = CHAPTER_MANIFESTS.find((chapter) => chapter.id === id)
+
+  return manifest === undefined || manifest.state === "approved" || !manifest.served
+    ? undefined
+    : draftStatement(manifest)
 }

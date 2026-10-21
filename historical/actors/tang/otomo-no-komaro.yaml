@@ -1,0 +1,58 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  大伴宿祢古麻呂, appointed vice-envoy (副使) in 天平勝寶二年九月 (750). The chronicle records him returning
+  in 天平勝寶六年正月 (754) with 鑒眞 and 法進 and reporting the New Year audience at 蓬萊宮含元殿; the biography
+  writes his name 大伴宿禰胡麿 and records him carrying 鑒眞 on his ship.
+types: [person]
+names:
+  - form: 大伴宿祢古麻呂
+    lang: ja
+    script: Hani
+    roman: Ōtomo no Komaro
+    scheme: hepburn
+    cite:
+      - id: komaro-name
+        says: The chronicle names 大伴宿祢古麻呂 as vice-envoy (副使) of the embassy appointed on 天平勝寶二年九月己酉.
+        source: shoku-nihongi
+        at: 卷第十八 天平勝寶二年九月己酉
+  - form: 大伴古麻呂
+    lang: ja
+    script: Hani
+    claim: komaro-name
+  - form: 大伴宿禰胡麿
+    lang: ja
+    script: Hani
+    cite:
+      - id: komaro-variant
+        says: The biography writes his name 大伴宿禰胡麿 and records him carrying 鑒眞 on his ship.
+        role: supporting
+        source: toseiden
+        at: 十一月十日丁未夜，大伴副使竊招和上及衆僧納己舟
+roles:
+  - role: envoy
+    note: Vice-envoy from the 750 appointment; the 754 return reports name him returning with 鑒眞.
+    date:
+      value: 750..754
+      mode: duration
+      calendar: regnal
+      as_written: 天平勝寶二年九月己酉 副使; 天平勝寶六年正月壬子 來歸
+    cite:
+      - id: komaro-role
+        says:
+          The chronicle records 大伴宿祢古麻呂 as vice-envoy at the appointment and at the 節刀 grant, and
+          returning in 天平勝寶六年正月 with 鑒眞 and 法進.
+        sources:
+          - source: shoku-nihongi
+            at: 卷第十八 天平勝寶二年九月己酉; 卷第十八 天平勝寶四年閏三月丙辰
+          - source: shoku-nihongi
+            at: 卷第十九 天平勝寶六年正月壬子
+external_ids:
+  - system: wikidata
+    id: Q11432332
+    url: https://www.wikidata.org/wiki/Q11432332
+    license: CC0-1.0
+    note: External identifier found in the Wave 1A feasibility pass.
+notes:
+  The name variant 胡麿/古麻呂 is published as two forms rather than normalized away, because the
+  chapter cites both the chronicle and the biography. The audience account he reported is a
+  self-report and is labelled as one on the event.

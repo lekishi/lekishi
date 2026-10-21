@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  東大寺, the Nara temple where the biography records 鑒眞 being installed on 天平勝寶六年二月四日 (754),
+  and where the chronicle's later notice places the transmission and the precept study.
+types: [religious_site]
+names:
+  - form: 東大寺
+    lang: ja
+    script: Hani
+    roman: Tōdai-ji
+    scheme: hepburn
+    cite:
+      - id: todaiji-name
+        says: The biography names 東大寺 as the temple where 鑒眞 was installed on 天平勝寶六年二月四日.
+        source: toseiden
+        at: 天平勝寶六年甲午 二月四日，入京…引入東大寺安置
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [135.8397, 34.6892]
+    notes: Label anchor at the temple site recorded in Wikidata (Q460367). It is not an asserted
+      historical coordinate; the temple is an existing site and the anchor only places the label.
+    cite:
+      - id: todaiji-anchor
+        says:
+          The label anchor is placed at the temple site's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q460367 (P625), revision 2543513396
+external_ids:
+  - system: wikidata
+    id: Q460367
+    url: https://www.wikidata.org/wiki/Q460367
+    license: CC0-1.0
+    note: External identifier found in the Wave 1A feasibility pass.
+notes: The place is a named site in the cited passages; the anchor is a label placement, not a
+  surveyed reconstruction of the eighth-century precinct.

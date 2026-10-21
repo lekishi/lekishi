@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The 大宰府 reports that the fourth ship's judge 布勢朝臣人主 and his party have arrived at 薩摩國石籬浦,
+  in 天平勝寶六年四月 (754).
+types: [journey]
+date:
+  value: 754-04
+  calendar: regnal
+  as_written: 天平勝寶六年四月癸未 大宰府言。入唐第四船判官正六位上布勢朝臣人主等來泊薩摩國石籬浦
+  cite:
+    - id: fourth-ship-time
+      says: The chronicle's 天平勝寶六年四月癸未 report records the fourth ship's judge 布勢朝臣人主 arriving at 薩摩國石籬浦.
+      source: shoku-nihongi
+      at: 卷第十九 天平勝寶六年四月癸未
+      quote: 癸未。大宰府言。入唐第四船判官正六位上布勢朝臣人主等來泊薩摩國石籬浦。
+places:
+  - place: ishigaki
+    role: site
+participants:
+  - actor: fuse-no-hitonushi
+    role: leader
+notes: The report records the arrival, not the ship's earlier course, so the chapter draws no route
+  for the fourth ship.
+cites:
+  participants:
+    - id: fourth-ship-participant
+      says: The report names 布勢朝臣人主 as the fourth ship's judge.
+      source: shoku-nihongi
+      at: 卷第十九 天平勝寶六年四月癸未

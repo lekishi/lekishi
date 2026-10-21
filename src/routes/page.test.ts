@@ -4,7 +4,7 @@ import { mount, unmount } from "svelte"
 import { CHAPTERS, chapterPresentation } from "../lib/atlas/chapters"
 import { QIN_CHAPTER, TANG_CHAPTER } from "../lib/atlas/chapter-registry"
 import { windowLabel } from "../lib/atlas/labels"
-import { QIN_RELEASE, TANG_RELEASE } from "../lib/atlas/release"
+import { chapterRelease } from "../lib/atlas/release"
 import Home from "./+page.svelte"
 
 /**
@@ -100,55 +100,17 @@ describe("the root page", () => {
     }
   })
 
-  it("keeps each chapter's editorial decision in its card's secondary metadata", () => {
+  it("keeps the approval line off an approved chapter's card", () => {
     const host = render()
-    const tang = cardFor(host, TANG_CHAPTER)
-    const qin = cardFor(host, QIN_CHAPTER)
 
-    // Placement, not just presence: the rendered heading carries the name, the
-    // rendered summary paragraph carries the summary, and the status is its own
-    // paragraph after the entry — never inside the heading, the link, or the
-    // summary. A reader meets the chapter first and its editorial state second.
-    for (const [id, card] of [
-      [TANG_CHAPTER, tang],
-      [QIN_CHAPTER, qin],
-    ] as const) {
-      const presentation = chapterPresentation(id)
-      const paragraphs = [...card.querySelectorAll("p")]
-      const renderedSummary = paragraphs.find(
-        (paragraph) => paragraph.textContent === presentation?.summary,
-      )
-      const renderedStatus = paragraphs.find(
-        (paragraph) => paragraph.textContent === presentation?.status,
-      )
-      const link = card.querySelector("a")
+    // The owner's decision of 2026-10-20: every served chapter is approved, so
+    // the card states no decision; the chapter's page and About sheet do.
+    for (const id of [TANG_CHAPTER, QIN_CHAPTER]) {
+      const card = cardFor(host, id)
 
-      expect(card.querySelector("h3")?.textContent).toBe(presentation?.name)
-      expect(card.querySelector("h3")?.textContent).not.toContain(presentation?.status)
-      expect(renderedSummary?.textContent).toBe(presentation?.summary)
-      expect(renderedSummary?.textContent).not.toContain(presentation?.status)
-      expect(renderedStatus?.textContent).toBe(presentation?.status)
-      expect(link?.textContent).not.toContain(presentation?.status)
-      // The status follows the entry in document order, so it reads as metadata
-      // about the chapter rather than as part of the chapter's pitch.
-      expect(
-        link !== undefined &&
-          link !== null &&
-          renderedStatus !== undefined &&
-          (link.compareDocumentPosition(renderedStatus) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0,
-        `${id}: status after the entry link`,
-      ).toBe(true)
-    }
-
-    expect(tang.textContent).toContain(TANG_RELEASE.status)
-    expect(tang.textContent).toContain(TANG_RELEASE.decidedOn)
-    expect(qin.textContent).toContain(QIN_RELEASE.status)
-    expect(qin.textContent).toContain(QIN_RELEASE.decidedOn)
-
-    // Neither chapter may claim a review its set does not record.
-    for (const card of [tang, qin]) {
-      expect(card.textContent).not.toContain("Independent review recorded")
-      expect(card.textContent).not.toContain("Specialist review recorded")
+      expect(card.textContent, id).not.toContain(String(chapterRelease(id)?.decision))
+      expect(card.textContent, id).not.toContain("Not independent or specialist review")
+      expect(card.querySelector("[data-chapter-draft]"), id).toBeNull()
     }
   })
 

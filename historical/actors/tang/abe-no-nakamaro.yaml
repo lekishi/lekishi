@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  阿倍朝臣仲麻呂, a student who remained in Tang and is named in the biography among the envoys who
+  came to 鑒眞 in 揚州 in 天寶十二載 (753). The Tang histories name him by his adopted name 朝衡; the
+  chronicle's 寶龜十年 (779) notice records that he died in Tang and that the court gave funeral gifts
+  to his household.
+types: [person]
+names:
+  - form: 阿倍朝臣仲麻呂
+    lang: ja
+    script: Hani
+    roman: Abe no Nakamaro
+    scheme: hepburn
+    cite:
+      - id: nakamaro-name
+        says:
+          The biography names 安倍朝臣朝衡 among the envoys who came to 鑒眞 in 揚州 in 天寶十二載; the chronicle's 779
+          notice names him 阿倍朝臣仲麻呂.
+        sources:
+          - source: toseiden
+            at: 天寶十二載 十月十五日壬午
+          - source: shoku-nihongi
+            at: 卷第卅五 寶龜十年五月丙寅
+  - form: 朝臣仲滿
+    lang: lzh
+    script: Hani
+    cite:
+      - id: nakamaro-tang-name
+        says:
+          The Tang histories record that the student 朝臣仲滿 changed his name to 朝衡 and stayed in Tang, and
+          that 朝衡 returned to court in 天寶十二載.
+        sources:
+          - source: jiu-tangshu
+            at: 卷199上 東夷 日本國
+          - source: xin-tangshu
+            at: 卷220 東夷 日本
+  - form: 朝衡
+    lang: lzh
+    script: Hani
+    claim: nakamaro-tang-name
+external_ids:
+  - system: wikidata
+    id: Q479788
+    url: https://www.wikidata.org/wiki/Q479788
+    license: CC0-1.0
+    note: External identifier found in the Wave 1A feasibility pass.
+notes: "His 717–752 career in Tang is not published except as it appears in the return episode, per
+  the coverage model. No death year is asserted: the chronicle reports the death in 779 without a
+  date, and the Chinese passages checked give no death year."

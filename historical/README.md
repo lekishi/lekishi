@@ -1,11 +1,15 @@
-# Historical content contract (v0)
+# Historical content
 
-This directory holds the renderer-independent contract that the first chapter
-depends on: stable identities, revisions and publication, claims and reuse,
-names and romanization, time and uncertainty, geometry, and stories.
+This directory holds the atlas's historical content and the
+renderer-independent contract it compiles to: stable identities, revisions and
+publication, claims and reuse, names and romanization, time and uncertainty,
+geometry, and stories.
 
-The rationale, decisions, worked examples, and open owner decisions are in
-[`rfd/0002/CONTRACTS.adoc`](../rfd/0002/CONTRACTS.adoc). Read that first.
+The contract's rationale, decisions, and worked examples are in
+[`rfd/0002/CONTRACTS.adoc`](../rfd/0002/CONTRACTS.adoc); the record-file format
+an author writes is decided in
+[`rfd/0002/AUTHORING_FORMAT.adoc`](../rfd/0002/AUTHORING_FORMAT.adoc). Read those
+first.
 
 The directory lives at the repository root rather than under a framework's
 private tree: it is content and contract, not a build input for one toolchain.
@@ -28,14 +32,16 @@ historical/v0/
     publication-sets/           one set publishing every example revision and pinning both sources
   vectors/             machine-readable boundary vectors with expected results
     time.json ordering.json names.json geometry.json documents.json publication.json
+historical/schema/     JSON Schema for the record files an author writes
+historical/places/ actors/ events/ relationships/
+                       one YAML record per file, written once for every chapter;
+                       the file name is the id, subfolders (tang/, qin/) are tidiness
+historical/sources/    one YAML file per cited work or dataset, with its reuse terms
 historical/chapters/
-  tang-mission-750-754/  the reviewed first chapter (see its README)
-    records/                    the chapter's places, actors, events, relationships, story
-    sources/                    the cited works and datasets, with reuse terms
-    publication-sets/           the set that publishes the chapter and pins its sources
-  qin-conquest-han-233-226/  the bounded Qin comparison fixture (see its README)
-    records/ sources/ publication-sets/   the same tree shape, prepared as a
-                              comparison-only snapshot rather than a launch chapter
+  tang-mission-750-754.yaml      a chapter manifest: card text, window, story, approval
+  tang-mission-750-754.md        the chapter's scope, evidence and review notes
+  qin-conquest-han-233-226.yaml  the bounded Qin chapter
+  qin-conquest-han-233-226.md
 ```
 
 The contract version string is `lekishi-historical-contract/v0`. Every document
@@ -47,32 +53,44 @@ Every file under `examples/` is a fixture for the contract, not historical
 content. Example ids contain `example-`, their `editorial_notes` say they are
 synthetic, and they must never be imported as atlas content or cited as evidence.
 
-Reviewed chapter content lives under `historical/chapters/<name>/` in the same
-tree shape and is loaded through the content boundary in
-`src/lib/historical/chapter.ts`, which hands it to the contract's own
-`Publication.checkAll`. The first chapter is
-`historical/chapters/tang-mission-750-754/`; its README records the coverage
-model, the inventory, the evidence, and the review status. The bounded Qin
-comparison fixture is `historical/chapters/qin-conquest-han-233-226/`: it is
-source-checked content in the same contract, recorded as a preparation snapshot
-rather than a release, loadable through the browser-safe comparison catalog
-(`src/lib/atlas/chapter-catalog.ts`) and deliberately not rendered by the
-production atlas. Its single preparation set publishes the twelve corrected
-revisions the internal review prepared, which the owner asked to review before
-deciding, and the label positions that followed the owner's report that locations
-were missing where the records name them: label anchors for the death place and
-the annexed commandery, each resting on a cited identification, and a display
-placement for the submission. 南陽 keeps unknown geometry because the entries
-state no extent or seat and the name covers two regions, so it has no position.
-The comparison review route `/compare/qin` renders all of this while stating that
-the content is unapproved preparation, and every map position is a label anchor
-that asserts no historical coordinate. No owner decision is recorded, and the
-atlas route still renders only the Tang chapter.
+Chapter content is authored as record files and compiled, never written as v0
+JSON by hand. `src/lib/historical/authoring/` reads the tree, checks every file
+against `historical/schema`, and compiles a chapter into complete v0 documents:
+its manifest's story, every record and source the story and `include` reach,
+one generated revision per record, and a publication set. The site compiles
+the chapters at build time (`scripts/historical-chapters.mjs`) and ships one chunk per chapter;
+nothing compiled is checked in. The Node content boundary,
+`src/lib/historical/chapter.ts`, compiles the same bundles for the contract and
+chapter tests and hands them to the contract's own `Publication.checkAll`.
 
-The publication approval gate covers every chapter tree: a set that
-`rfd/0002/PUBLICATION_APPROVAL.adoc` does not name fails the build, and the
-Tang chapter's set carries the owner's recorded release approval while the
-comparison fixture's set carries preparation self-review only.
+The two chapters are the Tang mission of 750–754 and the bounded Qin episode of
+233–226 BCE. Each chapter's `.md` notes record its coverage model, inventory,
+evidence, and review history, including the history from before the record
+files replaced the hand-written JSON tree on 2026-10-18.
+
+## Publication is the owner's approval
+
+A chapter is published only by the `approval` block in its manifest: the
+digest of the manifest and of every record and source the chapter reaches,
+who approved it, and on which day. Only the owner writes it. `pnpm approvals`
+lists every chapter as approved, draft, or stale and shows the field-level
+changes since the last approval; `pnpm approvals approve all` goes through each
+chapter awaiting approval and asks the owner `y` or `n`.
+
+- A chapter without an approval is a draft: it compiles and faces every
+  contract test as a preview, and production does not serve it. Development
+  and pull-request previews serve it, and a stale chapter too, under a draft
+  banner, so the owner can open what they are asked to approve.
+- An edit to anything an approved chapter reaches, a shared place included,
+  makes the approval stale, and a stale approval fails the build until the owner
+  approves the new content.
+- The approval gate is `src/lib/historical/contract/publication-approval.test.ts`,
+  run by `pnpm build` through `scripts/check-chapter.mjs`, and
+  `.github/CODEOWNERS` requires the owner's review on every manifest.
+
+The ledger in `rfd/0002/PUBLICATION_APPROVAL.adoc` records the decisions taken
+on the hand-written JSON sets before the record files; it is history, and no
+compiled set needs a row in it.
 
 ## Validate
 
@@ -83,10 +101,12 @@ pnpm test
 The suite validates the examples as one content tree, runs every vector (187
 cases across `time`, `ordering`, `names`, `geometry`, `documents`, and
 `publication`), checks that every code and caveat the vectors expect is
-documented by the reference semantics, and validates the reviewed Tang chapter
-with its own coverage, coda, and exclusion checks. The Qin comparison fixture
-has its own suite with scope, exclusion, uncertainty, dispute, geometry, and
-comparison-loadability checks. `pnpm verify` runs the full check.
+documented by the reference semantics, and validates the compiled Tang chapter
+with its own coverage, coda, and exclusion checks. The Qin chapter has its own
+suite with scope, exclusion, uncertainty, dispute, and geometry checks. The
+compiler's own rules are pinned against a synthetic tree in
+`src/lib/historical/authoring/compile.test.ts`. `pnpm verify` runs the full
+check.
 
 ## Reseal synthetic examples after editing them
 
@@ -103,16 +123,10 @@ member and source pins. Replacement is positional, so an author's placeholder
 (`sha256:000...001`) or a stale hash is replaced either way and the hand-written
 formatting is preserved.
 
-`pnpm seal` refuses reviewed chapter directories. Chapter corrections require a
-new revision or source document and a new publication set; the existing hashes
-and review metadata remain immutable. Tests fail if an approved revision or
-source no longer matches its stored hash or publication pin.
-
-Approved source metadata is immutable: correcting a title or a license means
-adding a new source document (new `source_id`, optional `supersedes_source_id`),
-citing it from a new revision, and publishing a set that pins it. The earlier
-source and set stay in the tree, so resealing an edited approved source still
-fails the pin rather than silently rewriting what review approved.
+`pnpm seal` is for the synthetic examples only. Chapter content has no stored
+hashes to reseal: the compiler generates every revision and source hash from the
+record files, and the approval digest is what keeps approved content from being
+rewritten silently.
 
 ## Canonical encoding
 

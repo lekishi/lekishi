@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The second ship reaches 益救島 on 天寶十二載十二月七日, the day after it set out for 多禰島.
+types: [journey]
+part_of: [return-voyage-753]
+date:
+  value: 753-12-07
+  calendar: chinese_lunisolar
+  as_written: 七日，至益救島
+  cite:
+    - id: yaku-arrival-time
+      says: The biography records the second ship reaching 益救島 on 天寶十二載十二月七日.
+      source: toseiden
+      at: 十二月六日南風起，第一舟着石不動，第二舟發向多禰去。七日，至益救島
+    - id: yaku-arrival-day-reading
+      says:
+        The cited study records competing readings of 七日 as the seventh day and as seven days elapsed;
+        the chapter does not resolve that interpretation.
+      basis: interpretation
+      role: alternative
+      attributed_to: 高良倉吉・山里純一ほか (2009)
+      source: ryukyu-university-tokara
+      at: "24"
+places:
+  - place: yaku
+    role: site
+notes: "This event and the chronicle's report of 吉備真備's ship are kept as two records: the cited
+  passages do not state that they describe the same ship, and the chapter does not decide that
+  question. The cited study also records a scholarly disagreement over whether 七日 means the seventh
+  day or seven days elapsed, so the source reading remains visibly disputed."
+dispute:
+  status: disputed
+  summary:
+    A cited study records competing readings of the biography's 七日 as a calendar day or elapsed
+    duration. The chapter retains the transcription's day expression and exposes the alternative
+    without resolving it.
+cites:
+  places:
+    - id: yaku-arrival-place
+      says: The passage names 益救島 as the island reached.
+      source: toseiden
+      at: 七日，至益救島

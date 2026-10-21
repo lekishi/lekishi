@@ -12,7 +12,8 @@
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
-import { devPagesEnabled } from "./dev-pages.mjs"
+import { devPagesEnabled, draftChaptersServed } from "./dev-pages.mjs"
+import { compileChapters } from "./historical-chapters.mjs"
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const buildDirectory = path.join(repoRoot, "build")
@@ -104,28 +105,57 @@ requireFile(path.join(buildDirectory, "images", "wordmark-caps.svg"))
 requireFile(path.join(buildDirectory, "_redirects"))
 
 /**
+ * Whether this build serves drafts, and every chapter's approval state as the
+ * build compiled it.
+ */
+const drafts = draftChaptersServed()
+const states = new Map((await compileChapters()).map((bundle) => [bundle.id, bundle]))
+
+/**
+ * The decision line a served chapter states: the date of the owner's approval in
+ * its manifest, or, on a build that serves drafts, the draft line for a chapter
+ * whose approval does not match. Production serves no draft, so a chapter
+ * without a matching approval has no line there and fails below.
+ *
+ * @param {string} chapter
+ */
+function decisionLine(chapter) {
+  const bundle = states.get(chapter)
+
+  if (bundle?.state === "approved") {
+    return `Owner-approved for release, ${bundle.approval?.on}`
+  }
+
+  if (drafts && bundle?.state === "stale") {
+    return `Draft: changed since the owner's approval of ${bundle.approval?.on}, not approved for release`
+  }
+
+  return drafts ? "Draft, not approved for release" : `${chapter} has no matching approval`
+}
+
+/**
  * The chapters the site serves, as the artifact has to carry them.
  *
- * These are sentinels, not a second source of truth: the chapter registry and the
- * chapter cards own the real values, and a chapter that is renamed, re-windowed,
- * or re-decided fails this check until the invariant is updated with it. Each
- * entry names the chapter's route, the name and window its prerendered shell must
- * state, the decision line the ledger records, and one published record id the
- * built scripts must carry.
+ * These are sentinels, not a second source of truth: the chapter manifests own
+ * the real values, and a chapter that is renamed or re-windowed fails this check
+ * until the invariant is updated with it. Each entry names the chapter's route,
+ * the name and window its prerendered shell must state, the decision line its
+ * manifest's approval records (read from the manifest, so a new approval needs
+ * no edit here), and one published record id the built scripts must carry.
  */
 const CHAPTERS = [
   {
     id: "tang-mission-750-754",
     name: "The embassy to Tang China",
     window: "750–754",
-    decision: "Owner-approved for release, 2026-09-25",
+    decision: decisionLine("tang-mission-750-754"),
     event: "lks:event:appointment-750",
   },
   {
     id: "qin-conquest-han-233-226",
     name: "The end of the state of Han",
     window: "233 BCE–226 BCE",
-    decision: "Owner-approved for release, 2026-09-27",
+    decision: decisionLine("qin-conquest-han-233-226"),
     event: "lks:event:han-conquest-230",
   },
 ]
@@ -177,6 +207,18 @@ for (const chapter of CHAPTERS) {
     }
   }
 
+  // A draft keeps its banner on screen; an approved chapter, and anything a
+  // production build serves, has none.
+  const draftBanner = html.includes('id="chapter-draft"')
+
+  if (draftBanner !== (drafts && states.get(chapter.id)?.state !== "approved")) {
+    fail(
+      draftBanner
+        ? `chapters/${chapter.id}.html carries the draft banner, but this build does not serve it as a draft`
+        : `chapters/${chapter.id}.html is a draft without its draft banner`,
+    )
+  }
+
   // A reader meets a chapter, not a review category: the page must not carry the
   // framings the owner rejected.
   for (const marker of [
@@ -216,8 +258,10 @@ for (const redirect of REDIRECTS) {
 // longer has to carry it.
 
 // The root page presents the chapters as peers: one card per chapter, each with
-// its name, its window, its story summary, and an entry. The artifact must keep
-// both entries and the decision recorded on each chapter, and it must not carry
+// its name, its window, its story summary, and an entry. An approved chapter's
+// card states no decision (the owner's decision of 2026-10-20: it lives in the
+// chapter's About sheet), and a draft's card always states that it is a draft.
+// The page must not carry
 // the exact framings the owner rejected (a review category, the comparison
 // harness, the contract id) — a deploy cannot turn a chapter card back into a
 // note about the project's own process.
@@ -228,8 +272,14 @@ for (const chapter of CHAPTERS) {
 }
 
 for (const chapter of CHAPTERS) {
-  if (!indexHtml.includes(chapter.decision)) {
-    fail(`index.html does not state the recorded decision for ${chapter.id}`)
+  const approved = states.get(chapter.id)?.state === "approved"
+
+  if (approved && indexHtml.includes(chapter.decision)) {
+    fail(`index.html states the approval of ${chapter.id} on its card`)
+  }
+
+  if (!approved && !indexHtml.includes(chapter.decision)) {
+    fail(`index.html does not mark ${chapter.id} as a draft`)
   }
 }
 

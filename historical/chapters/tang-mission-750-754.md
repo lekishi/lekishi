@@ -1,0 +1,169 @@
+# Tang chapter fixture: the 750–754 embassy of Fujiwara no Kiyokawa
+
+> **Since 2026-10-18 this chapter is the manifest [`tang-mission-750-754.yaml`](tang-mission-750-754.yaml) and
+> the record files it reaches** (RFD 2's record-file format), compiled at build
+> time and published by the owner's digest approval in the manifest. These notes
+> were the README of the hand-written JSON tree the record files replaced. They
+> are kept for the chapter's scope, sources and review history; where they
+> describe the JSON tree, its `-v1` set, earlier revisions, or the ledger in
+> [`rfd/0002/PUBLICATION_APPROVAL.adoc`](../../rfd/0002/PUBLICATION_APPROVAL.adoc),
+> they describe the chapter before that change, which Git history keeps.
+
+This directory holds the first reviewed chapter content for the public PoC: the
+Tang mission selected at Gate 1, in the versioned `lekishi-historical-contract/v0`
+format. It is content, not contract; the schemas and semantics live in
+`historical/v0` and `src/lib/historical/contract`.
+
+## Coverage model
+
+Selected by the owner on 2026-09-24 from
+[`rfd/0002/TANG_MISSION_FEASIBILITY.adoc`](../../rfd/0002/TANG_MISSION_FEASIBILITY.adoc)
+(Candidate B) and recorded in
+[`rfd/0004/GATE1_DECISION.adoc`](../../rfd/0004/GATE1_DECISION.adoc):
+
+- **Primary mission window 750–754**: appointment, dispatch, the Tang New Year
+  audience, the return voyage, the return reports, the rewards, and the 754
+  ordinations.
+- **Included coda nodes outside the window at 758, 759, 763, and 779**, each
+  separately sourced and labelled as a coda node, not as a mission effect.
+- **The outbound voyage of 752 is excluded**: it is undocumented in the sources
+  checked, so the chapter has no content, no route, and no map geometry for it.
+
+## Inventory
+
+| Kind | Count | Notes |
+| --- | --- | --- |
+| Places | 15 | `難波`, `大宰府`, `平城宮`, `揚州`, `蘇州黃泗浦`, `阿兒奈波島`, `多禰島`, `益救島`, `秋妻屋浦`, `石籬浦`, `紀伊國牟漏埼`, `驩州`, `蓬萊宮含元殿`, `東大寺`, `唐招提寺` |
+| Actors | 12 | The mission principals, 鑒眞 and 法進, the Tang general 呉懷實, the sovereign 孝謙天皇, and the two state actors 日本國 and 唐 |
+| Events | 29 | 24 inside 750–754 and 5 coda events across the four coda years (779 has two) |
+| Relationships | 9 | diplomacy, travel, two contacts, transmission, two institutional changes, and two 779 commemorations |
+| Stories | 1 | The mission in presentation order, with the coda steps labelled |
+| Sources | 11 | Four primary works, five reference works, one scholarly article, and Wikidata |
+
+## Evidence and uncertainty
+
+- Every published place, actor, event, and relationship carries a cited claim,
+  and every claim names a source and a locator (volume and entry, article, or
+  dataset row). Quotes are used only from the public-domain primary texts.
+- **No coordinates are asserted from the sources.** Modern identifications of
+  `阿兒奈波島` (Okinawa Island), `多禰島` (the Tanegashima–Yakushima area),
+  `益救島` (Yakushima), and `秋妻屋浦` (坊津) are recorded as
+  `cited_interpretation` claims naming the reference work or article that
+  proposes them; `驩州` carries `unknown` geometry with an explanation because no
+  identification is sourced here. Apart from `紀伊國牟漏埼` and `石籬浦`, which
+  carry the approximate identifications described below, the other places carry
+  `display_anchor` geometry only, which is explicitly not an asserted historical
+  coordinate.
+- **Two place identifications are published as proposals.** `紀伊國牟漏埼` is
+  placed at the modern town of 太地 (`approximate_point`, locality precision)
+  because the cited 和歌山県 page reports that 紀州藩's 紀伊続風土記 identified
+  牟漏崎 with 太地の燈明崎; `石籬浦` is placed at the former town of 頴娃
+  (locality precision) because the cited local-history account by 井上賢一
+  (「薩摩半島民俗文化博物館」) names 石垣 in present-day 南九州市穎娃町 as the
+  drift place. Both are labelled as modern identifications, not source statements,
+  and neither asserts a landing site. `驩州` keeps `unknown` geometry: the primary
+  sources give its seat county but no source in this set identifies the site, so
+  no coordinate is manufactured.
+- **Court acts are anchored, not placed.** The entries that record the court's
+  appointment of the embassy, the 節刀 grant, the audiences and reports, the
+  rewards, and the 758 and 779 court acts name no place (the 節刀 entry names
+  `内裏`). Each of those ten events points at `平城宮` — the court's seat, whose
+  record carries the chronicle's own naming of the palace and the inner precinct,
+  and a `display_anchor` that asserts no coordinate. The event references are
+  display placement: the records carry **no claim asserting the association**, so
+  the atlas shows the act labelled "display anchor only" without turning the
+  editor's placement into a historical site claim.
+- `多禰島` is published only as the second ship's intended destination: the
+  biography names it as the course the second ship set out on and then records
+  the arrival at `益救島`, so the separation event carries it as a qualified
+  contextual place and no landing there is asserted.
+- Textual variants are kept rather than normalized away: `益救島`/`益久嶋`,
+  `胡麿`/`古麻呂`, and the day expressions the sources use for 古麻呂's return
+  and report. Where the source gives only a sexagenary day, or where the chapter
+  does not establish that two notices describe one occasion, it publishes month
+  precision and keeps the source's own expression. 鑒眞's age at death is
+  published as an explicit dispute, because the two sources give different
+  figures.
+- The 754 ordinations rest on the biography alone; the chronicle's later notice
+  of 聖武皇帝 receiving the precepts is recorded as a supporting claim without
+  resolving who the biography's `天皇` is. The biography's hagiographic material
+  is excluded.
+- The two 753 island arrivals (`益救島` in the biography, `益久嶋` in the
+  chronicle) are two records with their own citations: the cited passages do not
+  state that they describe the same ship, and the chapter does not decide that.
+
+## Review status
+
+One publication set is in the tree, `lks:set:tang-mission-750-754-v1`, and it
+publishes every record with exactly one revision each. The preparation history
+was flattened on the owner's instruction of 2026-09-24: the earlier preparation
+revisions and their review corrections are folded into that single revision, and
+each record's change explanation still says where a review correction, an
+owner-accepted court-act placement, or an owner-accepted identification shaped
+the content. `lks:set:tang-mission-750-754-v2` and the placement set no longer
+exist.
+
+The set records the **preparing editor's self-review** (`self_review`, reviewer =
+an author of the member revisions). This is not owner review, not independent
+review, and not specialist review. The owner's editorial approval under RFD 2 was
+recorded on 2026-09-25 against this exact set and its canonical digest, so the
+set is now the chapter's official publication. The optional specialist reviews
+the feasibility report identified (maritime history for the return-voyage
+landfalls, Buddhist studies for the ordination and lineage claims, Tang court
+history for the audience, and a philologist for the editions) remain visibly
+unperformed, and the approval does not imply them. RFD 4's AC2's
+approval-dependent part is therefore satisfied; AC2's visible
+uncertainty/dispute part still depends on the exploration loop, and the AC7
+attribution/rights audit remains open, so AC2 as a whole is not complete.
+
+The owner's decisions are recorded in
+[`rfd/0002/PUBLICATION_APPROVAL.adoc`](../../rfd/0002/PUBLICATION_APPROVAL.adoc):
+a set may exist only when that ledger names it, and the ledger now records this
+one as **owner approved** — the owner's editorial approval under RFD 2 of the
+snapshot merged on `origin/main`. The set document itself is deliberately
+unchanged, so the approved digest still matches it; its `review` block therefore
+keeps `self_review` and its preparation-time notes, and correcting the content
+means a new revision or source document and a new set rather than an edit.
+
+## What is deferred, and why
+
+- **Purchases, library-only scholarship, and specialist outreach**: deferred at
+  Gate 1; no account, purchase, or contact was made.
+- **CHGIS and CBDB**: deferred (restrictive or non-commercial terms); no Chinese
+  gazetteer or biographical data is used, which is why `驩州` and the Chinese
+  places carry no asserted coordinates.
+- **Images and media**: none are included. The public-domain 東征伝絵巻 scroll
+  and the 鑒眞 statue photograph remain candidates, but every media file needs
+  per-file clearance and a "later illustrated copy, not evidence" label first.
+- **Deferred actors**: 思託, 榮叡, 普照, 川部酒麻呂, 王維, 藤原仲麻呂, 良弁,
+  and 安宿王 appear in the feasibility report's candidate list but are not
+  published here; each would need its own sourced role statement and date range,
+  and 王維's poem was not verified in the Wave 1A pass.
+- **The 752 outbound voyage**: no content at all, by the coverage model.
+
+## Load and validate
+
+The chapter is loaded through the content boundary in
+`src/lib/historical/chapter.ts` and validated with the contract's own
+`Publication.checkAll`:
+
+```bash
+pnpm test        # includes src/lib/historical/contract/tang-chapter.test.ts
+```
+
+Do not run `pnpm seal` over this directory. That command is deliberately limited
+to the synthetic worked examples. Correcting chapter content requires a new
+revision or source document and a new publication set, preserving the hashes and
+review metadata that approved the existing publication. An in-place edit to an
+approved revision or source must fail validation rather than being resealed; the
+earlier preparation cycles in this chapter are the worked example of that path,
+and the flattened single revision is what the owner's decision covers.
+
+## Limitations that must be stated wherever this content appears
+
+- Locators were re-checked against the named digital transcriptions on
+  2026-09-24. Those transcriptions are unproofread and use `■` for damaged
+  characters, so every locator must be re-checked against a critical edition
+  before content freeze.
+- The chapter is a bounded curated selection, not a complete record of the
+  mission, and not a claim that nothing else happened in these years.

@@ -235,6 +235,31 @@ rejected framings, and the root page leading with the atlas. Its measured eviden
 below records the state as of this decision and stays readable as what was
 measured then.
 
+== Supersession — 2026-10-20: an approved chapter's card states no decision
+
+The owner decided on 2026-10-20 to drop the editorial-state line from an
+approved chapter's card on the root page and in the chapter switcher. The line
+was there to tell an approved chapter from an unapproved one on the same page;
+since RFD 2's digest approval, production serves approved chapters only, so it
+set no card apart, and the specialist-review caveat it carried read as the
+project's own review vocabulary rather than something a reader acts on. The
+owner weighed keeping the line, and rewording it for readers, against dropping
+it.
+
+* An approved chapter's card shows its window, name, summary and entry only.
+* The decision and the caveat stay where a reader who wants them looks: the
+  chapter's prerendered page and its About sheet, both unchanged.
+* A draft's card, which only development and pull-request previews serve, keeps
+  its Draft mark and status line, so a draft never reads as approved.
+* `chapters.test.ts`, `page.test.ts`, the browser check of the root page, and
+  `scripts/check-static-build.mjs` now require the approval line to be absent
+  from an approved chapter's card and the draft line to be present on a
+  draft's.
+
+The decision bullet above, "Editorial state is secondary metadata, never the
+pitch", is superseded for the cards by this section; it still holds for the
+chapter's own page.
+
 == Verification performed for this document
 
 * Ran `pnpm verify` (format, `svelte-check`, unit and contract tests, static build

@@ -19,6 +19,7 @@ import {
   sheet,
   sheetHandle,
 } from "./workspace"
+import { TANG_DECISION, decisionElement } from "./approvals"
 
 /**
  * Browser checks for the static atlas.
@@ -130,11 +131,11 @@ test("serves a prerendered chapter shell before any script runs", async ({ reque
   // chapter's own scope are in the document a static host returns.
   expect(html.match(/id="atlas-workspace"/g)).toHaveLength(1)
   expect(html).toContain('id="chapter-scope"')
-  // The shell names the chapter it renders, its window, and the decision the
-  // ledger records, and it carries no review category.
+  // The shell names the chapter it renders, its window, and the decision its
+  // manifest records, and it carries no review category.
   expect(html).toContain("The embassy to Tang China")
   expect(html).toContain("750–754")
-  expect(html).toMatch(/id="chapter-decision"[^>]*>\s*Owner-approved for release, 2026-09-25/)
+  expect(html).toMatch(decisionElement(TANG_DECISION))
   expect(html).not.toContain("Reviewed chapter")
   expect(html).toContain("The 750–754 embassy of 藤原朝臣清河")
   // The deployed shell is the reviewed chapter, not the retired synthetic
@@ -166,9 +167,7 @@ test("mounts one workspace from the built artifact", async ({ page }) => {
   // events.
   await expect(page.locator("#atlas-date-bar")).toBeVisible()
   await expect(playheadYear(page)).toHaveText("750")
-  await expect(page.locator("#atlas-about-decision")).toHaveText(
-    "Owner-approved for release, 2026-09-25",
-  )
+  await expect(page.locator("#atlas-about-decision")).toHaveText(TANG_DECISION)
   await expect(page.getByTestId("atlas-workspace")).not.toContainText("Reviewed chapter")
   await expect(page.getByTestId("atlas-workspace")).not.toContainText("Unapproved preparation")
   await expect(page.getByText("Synthetic", { exact: false })).toHaveCount(0)

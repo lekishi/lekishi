@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  新鄭, the seat of the Han kings. The hereditary house records 韓哀侯 moving the capital to 鄭 in
+  his second year, and the annals name 新鄭 as the place that revolted in 226 BCE, after Qin had taken
+  the kingdom. The record's only placement is a label anchor at the modern city of the same name,
+  which the cited historical geography also records as 新鄭; no site is asserted.
+types: [capital]
+names:
+  - form: 新鄭
+    lang: lzh
+    script: Hani
+    roman: Xinzheng
+    scheme: pinyin
+    cite:
+      - id: xinzheng-name
+        says: The annals' 二十一年 notice names 新鄭 as the place that revolted in 226 BCE.
+        source: shiji
+        at: 卷六 秦始皇本紀 二十一年（新鄭反）
+        quote: 新鄭反。昌平君徙於郢。
+  - form: 鄭
+    lang: lzh
+    script: Hani
+    note:
+      The hereditary house's name for the capital the Han kings moved to; the annals use 新鄭 for the
+      same place.
+    cite:
+      - id: xinzheng-capital-name
+        says: The hereditary house records 韓哀侯 moving the Han capital to 鄭 in his second year.
+        source: shiji
+        at: 卷四十五 韓世家 韓哀侯二年（滅鄭，因徙都鄭）
+        quote: 二年，滅鄭，因徙都鄭。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [113.7249, 34.39621]
+    notes:
+      "Label anchor at the modern city of 新鄭市, which carries the name of the former Han capital and
+      which the cited historical geography records as 新鄭 (Wikidata Q1024662). It is not an asserted
+      historical coordinate: the cited entries name the place but state no site, and the anchor
+      places no wall, palace, or revolt site."
+    cite:
+      - id: xinzheng-anchor
+        says:
+          The label anchor is placed at the modern city's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q1024662 (P625), revision 2532628031
+      - id: xinzheng-identification
+        says:
+          The historical geography records 新鄭 as the place of the state of 鄭 and of the capital 韓哀侯 also
+          held.
+        role: supporting
+        source: dushi-fangyu-jiyao
+        at: 卷四十七 河南二 開封府 新鄭縣
+        quote: 春秋時爲鄭國，曰新鄭，以別於京兆之鄭也。戰國時，韓哀侯亦都之。
+modern:
+  - form: 新鄭市
+    lang: zh-Hans
+    script: Hani
+    note: Modern city recorded for orientation only; the anchor is a label position, not an
+      identification of the capital's site.
+notes: "The sources name the capital two ways: 鄭 in the hereditary house's account of the move, and
+  新鄭 in the annals' 226 BCE notice. The record keeps both forms, asserts no coordinate, and makes no
+  claim that the modern city stands on the ancient site; its anchor cites both the historical
+  geography's record of the place and the dataset the coordinate comes from."

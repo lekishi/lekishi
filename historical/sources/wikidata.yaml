@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../schema/source.schema.json
+locator: dataset_row
+kind: dataset
+title: Wikidata
+edition: Wikidata item data read through the Wikidata API; each citation names the item, the
+  property, and the item revision read
+author: Wikidata contributors
+identifiers:
+  - system: url
+    value: https://www.wikidata.org/wiki/Wikidata:Licensing
+license:
+  status: recorded
+  license_id: CC0-1.0
+  attribution_text: Wikidata contributors, CC0 1.0
+  redistribution: permitted
+  quotation_permitted: true
+  reviewed_by: Lekishi editorial preparation
+  reviewed_at: 2026-09-24T05:00:00Z
+  notes: Structured data is CC0 and carries no accuracy guarantee. The atlas uses it for external
+    identifiers and for modern label-anchor coordinates only, never as a historical claim, and
+    each citation records the item id, the property, and the item revision as the locator.
+notes: Used for external identifiers (the mission's people and temples) and for the modern
+  coordinates of label anchors. A coordinate taken from Wikidata is a modern map reference, not a
+  historical location.

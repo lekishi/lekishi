@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  吉備朝臣眞備, appointed vice-envoy (入唐副使) in 天平勝寶三年十一月 (751). The chronicle records his ship
+  reaching 益久嶋 on 天平勝寶五年十二月七日 and drifting to 紀伊國牟漏埼, and records him receiving 正四位下 with 古麻呂 in
+  天平勝寶六年四月 (754). His 717–735 study and 735 book list belong to another candidate mission and are
+  excluded here.
+types: [person]
+names:
+  - form: 吉備朝臣眞備
+    lang: ja
+    script: Hani
+    roman: Kibi no Makibi
+    scheme: hepburn
+    cite:
+      - id: makibi-name
+        says: The chronicle names 吉備朝臣眞備 as 入唐副使 appointed on 天平勝寶三年十一月丙戌.
+        source: shoku-nihongi
+        at: 卷第十八 天平勝寶三年十一月丙戌
+  - form: 吉備真備
+    lang: ja
+    script: Hani
+    claim: makibi-name
+roles:
+  - role: envoy
+    note: Vice-envoy from the 751 appointment; the 754 rewards close the documented mission span.
+    date:
+      value: 751..754
+      mode: duration
+      calendar: regnal
+      as_written: 天平勝寶三年十一月丙戌 入唐副使; 天平勝寶六年四月壬申 授正四位下
+    cite:
+      - id: makibi-role
+        says:
+          The chronicle records 吉備朝臣眞備 as 入唐副使, his ship reaching 益久嶋 and drifting to 紀伊國牟漏埼, and his
+          promotion to 正四位下 in 天平勝寶六年四月.
+        sources:
+          - source: shoku-nihongi
+            at: 卷第十九 天平勝寶六年正月癸丑
+          - source: shoku-nihongi
+            at: 卷第十九 天平勝寶六年四月壬申
+external_ids:
+  - system: wikidata
+    id: Q1063276
+    url: https://www.wikidata.org/wiki/Q1063276
+    license: CC0-1.0
+    note: External identifier found in the Wave 1A feasibility pass.
+notes:
+  "Legendary attributions to 吉備真備 (for example the game of go, military texts, and divination)
+  are excluded: the cited sources do not support them. Only his 751–754 mission role is published
+  here."

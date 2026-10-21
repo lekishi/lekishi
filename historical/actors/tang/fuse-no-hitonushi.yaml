@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  布勢朝臣人主, recorded in the chronicle as the fourth ship's judge (判官) arriving with his party
+  at 薩摩國石籬浦 on 天平勝寶六年四月癸未 (754).
+types: [person]
+names:
+  - form: 布勢朝臣人主
+    lang: ja
+    script: Hani
+    roman: Fuse no Hitonushi
+    scheme: hepburn
+    note:
+      Reading recorded as an editorial aid from modern reference literature; it is not a claim about
+      historical pronunciation.
+    cite:
+      - id: hitonushi-name
+        says: The chronicle names 布勢朝臣人主 as the fourth ship's judge (判官) arriving at 薩摩國石籬浦 on 天平勝寶六年四月癸未.
+        source: shoku-nihongi
+        at: 卷第十九 天平勝寶六年四月癸未
+  - form: 布勢人主
+    lang: ja
+    script: Hani
+    claim: hitonushi-name
+roles:
+  - role: official
+    note: Recorded as the fourth ship's judge at the 754 arrival; no other role is asserted in this
+      fixture.
+    date:
+      value: "754"
+      calendar: regnal
+      as_written: 天平勝寶六年四月癸未 入唐第四船判官正六位上布勢朝臣人主等來泊薩摩國石籬浦
+    cite:
+      - id: hitonushi-role
+        says: The same entry records his rank 正六位上 and his arrival with his party.
+        source: shoku-nihongi
+        at: 卷第十九 天平勝寶六年四月癸未
+notes: The chronicle names him only at this arrival. The fourth ship's earlier course is not
+  documented in the sources checked, so no voyage is drawn for it.

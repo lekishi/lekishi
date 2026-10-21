@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "The court's 天平寶字二年 (758) act toward 鑒眞: the title 大和上, the end of his 僧綱 post, and the
+  order that monks wishing to study the precepts study under him. The relationship is a later
+  institutional change, recorded with its own source."
+types: [institutional_change]
+from: japan-state
+to: jianzhen
+date:
+  value: 758-08-01
+  calendar: regnal
+  as_written: 天平寶字二年八月庚子朔 号曰大和上…欲學戒律者。皆属令習
+notes: "Coda node (outside the primary 750–754 mission window): the act is separately dated and
+  sourced, and the relationship asserts no causal link from the mission to the precept-study order."
+cite:
+  - id: precept-study-order-basis
+    says:
+      The chronicle's 天平寶字二年 decree gives 鑒眞 the title 大和上 and orders monks wishing to study the
+      precepts to study under him.
+    source: shoku-nihongi
+    at: 卷第廿一 天平寶字二年八月庚子朔

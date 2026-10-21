@@ -13,6 +13,7 @@
     "dev": "node scripts/sync-globe-tiles.mjs && node scripts/sync-fonts.mjs && vite dev",
     "build": "node scripts/check-chapter.mjs && node scripts/sync-globe-tiles.mjs && node scripts/sync-fonts.mjs && node scripts/build-app.mjs && node scripts/check-static-build.mjs && node spikes/renderer/globe/preview-build.mjs",
     "preview": "node scripts/serve-static.mjs --directory build",
+    "approvals": "node scripts/approvals.mjs",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -48,6 +49,7 @@
     "tailwindcss": "^4.3.3",
     "typescript": "^5.9.0",
     "vite": "^8.3.0",
-    "vitest": "^5.0.1"
+    "vitest": "^5.0.1",
+    "yaml": "2.8.1"
   }
 }

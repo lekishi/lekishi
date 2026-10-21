@@ -214,8 +214,17 @@
             class="group flex flex-col rounded-plate border border-rule bg-lacquer p-5 shadow-plate transition-[border-color] duration-(--motion-fast) ease-ui hover:border-frame"
             data-chapter-id={chapter.id}
           >
-            <p class="text-label font-semibold uppercase text-gold">
+            <p class="flex items-center gap-2 text-label font-semibold uppercase text-gold">
               <span class="tabular-nums">{windowLabel(chapter.window)}</span>
+              {#if chapter.draft}
+                <!-- Only development and pull-request previews serve a draft. -->
+                <span
+                  data-chapter-draft
+                  class="rounded-control border border-current px-1.5 text-danger"
+                >
+                  Draft
+                </span>
+              {/if}
             </p>
             <h3 class="mt-2 font-display text-title text-ink">{chapter.name}</h3>
             <p class="mt-3 flex-1 font-serif text-body-sm text-ink-dim">{chapter.summary}</p>
@@ -232,11 +241,13 @@
                 <Icon name="arrow-right" size={16} />
               </a>
             </div>
-            <!--
-              Editorial state: one line after the entry, in every card, so the
-              cards read alike and the status is never the card's identity.
-            -->
-            <p class="mt-3 text-caption text-ink-dim">{chapter.status}</p>
+            {#if chapter.status !== ""}
+              <!--
+                Only a draft has a status line, after the entry; an approved
+                chapter's decision lives in its About sheet.
+              -->
+              <p class="mt-3 text-caption text-ink-dim">{chapter.status}</p>
+            {/if}
           </article>
         {/each}
       </div>

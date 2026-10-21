@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  秦, the Qin state whose king received Han's submission in 233 BCE, received Han's ceded 南陽
+  in 231 BCE, and took Han's land and king in 230 BCE, making the 潁川 commandery.
+types: [state]
+names:
+  - form: 秦
+    lang: lzh
+    script: Hani
+    roman: Qin
+    scheme: pinyin
+    cite:
+      - id: qin-state-name
+        says:
+          The cited entries name 秦 as the state that attacked Han, received its ceded land, and took its
+          king and territory.
+        sources:
+          - source: shiji
+            at: 卷六 秦始皇本紀 十七年（內史騰攻韓）
+            quote: 內史騰攻韓，得韓王安，盡納其地，以其地為郡，命曰潁川。
+          - source: zizhi-tongjian
+            at: 卷六 秦紀一 始皇帝十七年（內史騰滅韓）
+            quote: 虜韓王安，以其地置潁川郡。
+notes: "The state actor carries no roles: the role vocabulary is person-oriented. The acts are
+  recorded on the events and relationships that cite the entries, and the king is a separate actor
+  record."

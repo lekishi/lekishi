@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  多禰島, named in the biography as the island the second ship headed for on 天寶十二載十二月六日 (753),
+  in the passage that places 阿兒奈波島 south-west of it.
+types: [landform]
+names:
+  - form: 多禰島
+    lang: lzh
+    script: Hani
+    roman: Taneshima
+    scheme: hepburn
+    cite:
+      - id: tane-name
+        says: The biography names 多禰島 as the island the second ship set out for on 天寶十二載十二月六日.
+        source: toseiden
+        at: 十二月六日南風起，第一舟着石不動，第二舟發向多禰去
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [130.9811, 30.5739]
+    notes:
+      "Label anchor at Tanegashima (Wikidata Q696228), the northern island of the area the cited
+      reference work describes for 多禰島. It is not an asserted historical coordinate: the cited work
+      describes an area covering Tanegashima and Yakushima, so no single site is placed."
+    cite:
+      - id: tane-identification
+        says:
+          The cited reference work describes 多禰島 as an island of 西海道 covering the present-day
+          Tanegashima and Yakushima area; the label anchor is placed at Tanegashima's modern
+          coordinate from Wikidata (CC0) and asserts no site.
+        basis: interpretation
+        attributed_to: 山川出版社「山川 日本史小辞典 改訂新版」「多禰島」
+        sources:
+          - source: yamakawa-nihonshi-tane
+            at: 多禰島
+          - source: wikidata
+            at: Q696228 (P625), revision 2506215278
+modern:
+  - form: 種子島・屋久島
+    lang: ja
+    script: Hani
+    note:
+      The cited reference work describes 多禰島 (also 多褹島) as covering the present-day Tanegashima and
+      Yakushima area; recorded as a scholarly identification.
+notes: The identification is area-level, so the geometry stays a display anchor rather than an
+  approximate point; the reader sees where the islands are without an asserted site.

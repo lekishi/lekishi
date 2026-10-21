@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "The court's 寶龜十年 (779) posthumous promotion of 藤原朝臣清河, who remained in Tang: the honour is
+  a commemoration of an envoy who did not return."
+types: [other]
+from: japan-state
+to: fujiwara-no-kiyokawa
+date:
+  value: 779-02
+  calendar: regnal
+  as_written: 寶龜十年二月乙亥 贈故入唐大使從三位藤原朝臣清河從二位
+notes: "Coda node (outside the primary 750–754 mission window): the v0 relationship vocabulary has
+  no commemoration type, so this relationship uses other and explains the choice here rather than
+  extending the vocabulary."
+cite:
+  - id: kiyokawa-commemoration-basis
+    says: The chronicle records the posthumous promotion of 藤原朝臣清河 on 寶龜十年二月乙亥.
+    source: shoku-nihongi
+    at: 卷第卅五 寶龜十年二月乙亥

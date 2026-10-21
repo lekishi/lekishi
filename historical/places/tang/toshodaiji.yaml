@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  唐招提寺, the Nara temple whose name the biography records being established on 寶字三年八月一日 (759),
+  and which the chronicle's 763 notice calls the precept cloister made from 新田部親王's former
+  residence.
+types: [religious_site]
+names:
+  - form: 唐招提寺
+    lang: ja
+    script: Hani
+    roman: Tōshōdai-ji
+    scheme: hepburn
+    cite:
+      - id: toshodaiji-name
+        says: The biography records the temple name being established on 寶字三年八月一日.
+        source: toseiden
+        at: 寶字三年八月一日，私立唐律招提名
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [135.7848, 34.6756]
+    notes: Label anchor at the temple site recorded in Wikidata (Q973175). It is not an asserted
+      historical coordinate; the temple is an existing site and the anchor only places the label.
+    cite:
+      - id: toshodaiji-anchor
+        says:
+          The label anchor is placed at the temple site's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q973175 (P625), revision 2542534325
+external_ids:
+  - system: wikidata
+    id: Q973175
+    url: https://www.wikidata.org/wiki/Q973175
+    license: CC0-1.0
+    note: External identifier found in the Wave 1A feasibility pass.
+notes: "Coda place: the founding is outside the primary 750–754 window and is separately sourced; it
+  is recorded as an institutional coda node, not as a mission effect."

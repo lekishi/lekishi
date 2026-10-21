@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  秦王政 (King Zheng of Qin), the Qin king whose court received 韓非's embassy in 233 BCE and to
+  whom the biography attributes the order against 韓非 and the later regret. The comprehensive mirror
+  records 政 succeeding 莊襄王 in 莊襄王三年五月 (247 BCE).
+types: [person]
+names:
+  - form: 秦王政
+    lang: lzh
+    script: Hani
+    roman: Qin Wang Zheng
+    scheme: pinyin
+    cite:
+      - id: qin-king-zheng-name
+        says:
+          The annals record that after 莊襄王's death 政 took the Qin throne as king, and the chapter uses
+          the conventional form 秦王政 for him.
+        source: shiji
+        at: 卷六 秦始皇本紀 篇首（政代立為秦王）
+        quote: 年十三歲，莊襄王死，政代立為秦王。
+  - form: 秦王
+    lang: lzh
+    script: Hani
+    note: The title the biography uses for him in the 韓非 account.
+    cite:
+      - id: qin-king-zheng-title
+        says: The biography calls him 秦王 in the account of 韓非's embassy and death.
+        source: shiji
+        at: 卷六十三 老子韓非列傳（秦王悅之，未信用）
+        quote: 秦王悅之，未信用。
+roles:
+  - role: ruler
+    note:
+      "The span is bounded by the cited entries, not by the reign: the comprehensive mirror dates
+      政's succession to 莊襄王三年五月丙午 (247 BCE), and the fixture cites him only for 233–230 BCE."
+    date:
+      value: 233 BCE..230 BCE
+      mode: duration
+      calendar: chinese_lunisolar
+      as_written: 十四年（秦王悅之，未信用）; 十七年（內史騰攻韓）
+    cite:
+      - id: qin-king-zheng-role
+        says:
+          The comprehensive mirror records 政 succeeding 莊襄王 in 莊襄王三年五月丙午 (247 BCE), and the cited
+          entries record the king receiving 韓非 and deciding his case within 233–230 BCE.
+        sources:
+          - source: zizhi-tongjian
+            at: 卷六 秦紀一 莊襄王三年（太子政立）
+            quote: 五月，丙午，王薨。太子政立
+          - source: zizhi-tongjian
+            at: 卷六 秦紀一 始皇帝十四年（王以為然，下吏治非）
+            quote: 王以為然，下吏治非。
+notes:
+  The annals' opening records that 政 took the throne as king; the biography calls him 秦王. The
+  chapter uses the conventional form 秦王政 for disambiguation and records both source forms.

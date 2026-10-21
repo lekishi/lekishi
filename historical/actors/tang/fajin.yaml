@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  法進, a monk whom the chronicle names among the eight who returned with 大伴古麻呂 and 鑒眞 in
+  天平勝寶六年正月 (754).
+types: [person]
+names:
+  - form: 法進
+    lang: lzh
+    script: Hani
+    roman: Fajin
+    scheme: pinyin
+    cite:
+      - id: fajin-name
+        says: The chronicle names 法進 among the eight monks who returned with 大伴古麻呂 and 鑒眞 on 天平勝寶六年正月壬子.
+        source: shoku-nihongi
+        at: 卷第十九 天平勝寶六年正月壬子
+roles:
+  - role: monk
+    note: Recorded only at the 754 return report; no further role is published.
+    date:
+      value: "754"
+      calendar: regnal
+      as_written: 天平勝寶六年正月壬子 唐僧鑒眞・法進等八人隨而歸朝
+    cite:
+      - id: fajin-role
+        says:
+          The entry records him as one of the eight who came back with the returning vice-envoy; nothing
+          further is asserted.
+        source: shoku-nihongi
+        at: 卷第十九 天平勝寶六年正月壬子
+notes: The chronicle names him among the eight returning monks without a separate notice; the actor
+  record keeps exactly that much.

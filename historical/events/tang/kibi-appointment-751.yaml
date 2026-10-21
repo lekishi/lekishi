@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The court appoints 吉備朝臣眞備 as 入唐副使 (vice-envoy to Tang), a later appointment than the 750
+  embassy appointment. The entry names no place; the record anchors the act at the court's seat,
+  平城宮, as a display anchor.
+types: [mission]
+date:
+  value: 751-11
+  calendar: regnal
+  as_written: 天平勝寶三年十一月丙戌
+  cite:
+    - id: kibi-appointment-time
+      says: The chronicle records 吉備朝臣眞備's appointment as 入唐副使 on 天平勝寶三年十一月丙戌.
+      source: shoku-nihongi
+      at: 卷第十八 天平勝寶三年十一月丙戌
+      quote: 十一月丙戌。以從四位上吉備朝臣眞備爲入唐副使。
+places:
+  - place: heijo-palace
+    role: site
+    note:
+      The entry names no place. A court act happens at the court, whose seat in this period is 平城宮
+      (the palace of 平城京); the record anchors it there for display only, not as a source-named site,
+      and asserts no site for the act.
+participants:
+  - actor: kibi-no-makibi
+    role: leader
+    note: Appointed 入唐副使.
+notes: The entry gives a sexagenary day (丙戌); v0 normalizes it to the month. This appointment is a
+  distinct entry from the 750 appointment and is recorded as its own event rather than folded into
+  it.
+cites:
+  participants:
+    - id: kibi-appointment-participant
+      says: The same entry names 吉備朝臣眞備 as the appointee.
+      source: shoku-nihongi
+      at: 卷第十八 天平勝寶三年十一月丙戌

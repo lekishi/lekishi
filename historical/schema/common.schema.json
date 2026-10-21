@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lekishi/lekishi/historical/schema/common.schema.json",
+  "title": "Lekishi record files: shared definitions",
+  "description": "Definitions every record file shares: short ids, citations attached to the field they support, dates in the short notation, names and positions. Vocabularies are the v0 contract's own, referenced rather than copied, so the record files are shorter than v0 but never looser.",
+  "$defs": {
+    "name": {
+      "description": "A file name, which is the record's id within its kind: lowercase letters, digits and hyphens.",
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{0,62}$"
+    },
+    "reference": {
+      "description": "Another record by its file name. Where a field admits several kinds and two records share the name, write the kind first, as in actor:jianzhen.",
+      "type": "string",
+      "pattern": "^((place|actor|event|relationship):)?[a-z0-9][a-z0-9-]{0,62}$"
+    },
+    "text": { "type": "string", "minLength": 1, "maxLength": 2000 },
+    "note": { "type": "string", "minLength": 1, "maxLength": 500 },
+    "citation": {
+      "description": "Where a source supports a claim. The locator kind is the source's declared `locator` unless `locator` names another.",
+      "type": "object",
+      "required": ["source", "at"],
+      "additionalProperties": false,
+      "properties": {
+        "source": { "$ref": "#/$defs/name" },
+        "at": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "locator": { "$ref": "../v0/schema/common.schema.json#/$defs/locator/properties/kind" },
+        "quote": { "type": "string", "maxLength": 600 }
+      }
+    },
+    "claim": {
+      "description": "One claim about the field this cite is attached to. `says` is what the reader is told the source says. Give one source inline (source, at, quote) or several under `sources`. `basis: interpretation` is an interpretation advanced in cited scholarship and names who advances it in `attributed_to`.",
+      "type": "object",
+      "required": ["says"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/name" },
+        "says": { "$ref": "#/$defs/text" },
+        "basis": { "enum": ["attested", "interpretation"] },
+        "role": { "$ref": "../v0/schema/common.schema.json#/$defs/claim/properties/role" },
+        "attributed_to": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "source": { "$ref": "#/$defs/name" },
+        "at": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "locator": { "$ref": "../v0/schema/common.schema.json#/$defs/locator/properties/kind" },
+        "quote": { "type": "string", "maxLength": 600 },
+        "sources": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/citation" } }
+      },
+      "oneOf": [
+        { "required": ["source", "at"], "not": { "required": ["sources"] } },
+        {
+          "required": ["sources"],
+          "not": {
+            "anyOf": [
+              { "required": ["source"] },
+              { "required": ["at"] },
+              { "required": ["quote"] },
+              { "required": ["locator"] }
+            ]
+          }
+        }
+      ]
+    },
+    "cite": {
+      "description": "The claims supporting the field this is attached to: one claim, or a list.",
+      "anyOf": [
+        { "$ref": "#/$defs/claim" },
+        { "type": "array", "minItems": 1, "maxItems": 50, "items": { "$ref": "#/$defs/claim" } }
+      ]
+    },
+    "cites": {
+      "description": "Claims about a whole list or a text field, which has no mapping of its own to carry `cite`.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "summary": { "$ref": "#/$defs/cite" },
+        "types": { "$ref": "#/$defs/cite" },
+        "names": { "$ref": "#/$defs/cite" },
+        "places": { "$ref": "#/$defs/cite" },
+        "participants": { "$ref": "#/$defs/cite" },
+        "part_of": { "$ref": "#/$defs/cite" },
+        "roles": { "$ref": "#/$defs/cite" },
+        "at": { "$ref": "#/$defs/cite" },
+        "modern": { "$ref": "#/$defs/cite" },
+        "notes": { "$ref": "#/$defs/cite" }
+      }
+    },
+    "date_value": {
+      "description": "753-12-20, 753-12 or 753; a range 750..754; years before the common era as 233 BCE, 233-10 BCE, or 233 BCE..226 BCE.",
+      "anyOf": [
+        { "type": "integer", "minimum": 1 },
+        {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*(-[0-9]{2}(-[0-9]{2})?)?( BCE)?(\\.\\.[1-9][0-9]*(-[0-9]{2}(-[0-9]{2})?)?( BCE)?)?$"
+        }
+      ]
+    },
+    "date": {
+      "description": "When, in the short notation. A single date is an instant unless `mode` says otherwise; a range needs `mode: window` (one occurrence somewhere inside it) or `mode: duration` (activity across it).",
+      "type": "object",
+      "required": ["value", "calendar"],
+      "additionalProperties": false,
+      "properties": {
+        "value": { "$ref": "#/$defs/date_value" },
+        "mode": { "enum": ["instant", "window", "duration"] },
+        "calendar": { "$ref": "../v0/schema/common.schema.json#/$defs/time/properties/calendar" },
+        "as_written": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "cite": { "$ref": "#/$defs/cite" }
+      }
+    },
+    "local_name": {
+      "description": "A name form. The first name is the primary one unless `role` says otherwise. `roman` is an editorial reading aid, never a claim about historical pronunciation. A name links to its own first main claim unless `claim` names another of the record's claims.",
+      "type": "object",
+      "required": ["form", "lang", "script"],
+      "additionalProperties": false,
+      "properties": {
+        "form": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "lang": { "$ref": "../v0/schema/common.schema.json#/$defs/name/properties/language" },
+        "script": { "$ref": "../v0/schema/common.schema.json#/$defs/name/properties/script" },
+        "role": { "$ref": "../v0/schema/common.schema.json#/$defs/name/properties/role" },
+        "roman": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "scheme": {
+          "$ref": "../v0/schema/common.schema.json#/$defs/romanization/properties/scheme"
+        },
+        "origin": {
+          "$ref": "../v0/schema/common.schema.json#/$defs/romanization/properties/origin"
+        },
+        "pronunciation": { "type": "boolean" },
+        "note": { "$ref": "#/$defs/note" },
+        "claim": { "$ref": "#/$defs/name" },
+        "cite": { "$ref": "#/$defs/cite" }
+      },
+      "if": { "required": ["roman"] },
+      "then": { "required": ["scheme"] },
+      "else": {
+        "not": {
+          "anyOf": [
+            { "required": ["scheme"] },
+            { "required": ["origin"] },
+            { "required": ["pronunciation"] }
+          ]
+        }
+      }
+    },
+    "position": {
+      "description": "Where a record is drawn and what that position means. `point` is [longitude, latitude]; a position with neither `point` nor `geojson` is unknown. It links to its own first main claim unless `claim` names another.",
+      "type": "object",
+      "required": ["interpretation", "precision"],
+      "additionalProperties": false,
+      "properties": {
+        "interpretation": {
+          "$ref": "../v0/schema/common.schema.json#/$defs/geometry/properties/interpretation"
+        },
+        "precision": {
+          "$ref": "../v0/schema/common.schema.json#/$defs/geometry/properties/precision"
+        },
+        "point": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "number" } },
+        "geojson": { "$ref": "../v0/schema/common.schema.json#/$defs/geojson" },
+        "notes": { "type": "string", "maxLength": 2000 },
+        "claim": { "$ref": "#/$defs/name" },
+        "cite": { "$ref": "#/$defs/cite" }
+      },
+      "not": { "required": ["point", "geojson"] }
+    },
+    "positions": {
+      "anyOf": [
+        { "$ref": "#/$defs/position" },
+        { "type": "array", "maxItems": 50, "items": { "$ref": "#/$defs/position" } }
+      ]
+    },
+    "dispute": { "$ref": "../v0/schema/record.schema.json#/$defs/dispute" },
+    "external_ids": {
+      "type": "array",
+      "maxItems": 30,
+      "items": { "$ref": "../v0/schema/common.schema.json#/$defs/external_id" }
+    }
+  }
+}

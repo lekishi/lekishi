@@ -85,9 +85,10 @@ chapter on the transmission of the precepts.
 
 That is the extent of the decision. The concrete directory inventory and
 contract-fixture placement, filename-to-id rule, YAML format,
-chapter-manifest fields, compiler output, and migration below are proposals. In
-particular, this decision neither relocates the existing v0 schemas and vectors
-nor changes the current publication gate.
+chapter-manifest fields, compiler output, and migration below were proposals on
+2026-10-14; <<Decisions of 2026-10-18>> records which of them the owner has
+since decided. In particular, this decision neither relocates the existing v0
+schemas and vectors nor changes the current publication gate.
 
 Why: the owner's stated aim is exploring an era across the globe and zooming
 freely (recorded in link:../0003/README.adoc[RFD 3]). An era view shows several
@@ -99,13 +100,51 @@ for it.
 What it costs:
 
 * An edit to a shared record re-opens the approval of every chapter that
-  reaches it. <<Proposed: per-chapter approval pins a content digest>> makes
+  reaches it. <<Decided: per-chapter approval pins a content digest>> makes
   that automatic rather than a matter of memory.
 * Kind folders grow large, which the proposed subfolders absorb.
 * The migration effort is the same as the migration already planned, and at
   86 records it is the cheapest it will be.
 
-== Proposed: directory and identifier realization
+== Decisions of 2026-10-18
+
+The owner decided six of the proposals below on 2026-10-18, one at a time, in
+the project thread that followed PR #23. Each section keeps its text and is now
+headed *Decided*; this section records what was chosen, the alternatives the
+owner weighed, and what the owner added.
+
+. *Directory and identifiers:* as proposed.
+. *The record file:* YAML as proposed, after weighing Markdown with YAML front
+  matter, JSON with the same flat fields, and AsciiDoc. AsciiDoc remains a
+  candidate for an optional companion file if a chapter gains a long essay with
+  footnoted sources; records stay YAML.
+. *Date notation:* as proposed, after weighing EDTF and separate structured
+  fields. The compiler may convert EDTF on import; authors write the short
+  strings.
+. *The chapter manifest:* as proposed, with the story listed by event id. A
+  story by query was weighed and not chosen, because it orders same-year events
+  that the contract deliberately leaves unordered and it changes an approved
+  chapter without anyone touching it.
+. *Digest approval:* as proposed, with two additions by the owner:
+  ** a `CODEOWNERS` rule that requires the owner's review on every chapter
+     manifest, because a digest proves the content has not changed since
+     approval but not who wrote the approval; and
+  ** an approvals command, `pnpm approvals`, that lists every chapter as
+     approved, draft, or awaiting approval and, for one awaiting approval, shows
+     the records added, removed, or changed since the approved content, field by
+     field, with the new digest. It finds the approved content by walking Git
+     history to the revision whose closure matches the manifest's digest.
+. *The compiler and migration:* as proposed, and the existing content is made
+  consistent with the new format, including its sources
+  (<<Decided: one Wikidata source, pinned per citation>>).
+
+Still proposed: journey curation, territories, media, per-claim credit, and
+contract v1 (<<Proposed: journeys, territories, and media>>). The existing
+publication gate stays authoritative until the digest check is built, enforces
+the same invariant, and the owner approves the switch; no step of this work
+records an approval for the owner.
+
+== Decided: directory and identifier realization
 
 One realization of the decided world-first layout is:
 
@@ -134,7 +173,7 @@ historical/
   They never change an id, and the build fails on two files with the same
   name under one kind.
 
-== Proposed: the chapter manifest
+== Decided: the chapter manifest
 
 One YAML file per chapter owns every fact the projection now infers or
 hard-codes. It replaces the story record as an authoring input (the compiler
@@ -173,7 +212,7 @@ approval:
 * *Titles and captions.* Events gain a `title` field, and a story caption
   becomes an optional override of it.
 
-== Proposed: per-chapter approval pins a content digest
+== Decided: per-chapter approval pins a content digest
 
 The approval records a digest of the chapter's content closure: the manifest
 and every record and source it reaches, transitively. It does not record a
@@ -201,7 +240,7 @@ invariant. Until then, the existing gate and approved content remain
 authoritative. The ledger stays in the tree as the record of how the first two
 chapters were approved.
 
-== Proposed: the record file
+== Decided: the record file
 
 YAML, flat fields, and each citation attached to the field it supports. The
 compiler generates the claim ids and JSON pointers the contract needs, so an
@@ -277,7 +316,7 @@ Conventions:
   consolidation explicitly supersedes them. No collision resolution may erase
   approved provenance merely to satisfy global uniqueness.
 
-== Proposed: date notation
+== Decided: date notation
 
 Dates are short strings, compiled into the contract's existing `interval`,
 `precision`, and `mode` objects, so the 187 vectors keep holding.
@@ -323,7 +362,7 @@ specify them in this record now and implement v1 with the first chapter that
 draws a territory or shows an image, so that v1 lands with real content to test
 against. Until then the compiler targets v0.
 
-== Proposed: the compiler and what ships
+== Decided: the compiler and what ships
 
 * *Compiler.* A Node script, run by `pnpm build` and by the contract tests,
   reads the tree and emits the complete v0 representation: one synthetic
@@ -348,6 +387,189 @@ against. Until then the compiler targets v0.
   enforces the equivalent publication invariant. The compiler continues to
   generate the v0 story, publication sets, and mirrors until their consumers
   migrate to a later contract.
+
+== Decided: one Wikidata source, pinned per citation
+
+Decided by the owner on 2026-10-18. This supersedes, for Wikidata, the
+*Existing source identities* convention above, which would have kept the two
+chapters' Wikidata files as two dated sources.
+
+Both chapters carry a `wikidata` source today. They are different reads: the
+Tang file records a read on 2026-09-24 for external identifiers and label
+anchors, and the Qin file a read on 2026-09-25 for one label anchor. Neither a
+read date nor a content date identifies what was read. A read date says when
+we looked and collides when two reads fall on one day; a dataset has no single
+content date, because each item has its own edit history.
+
+* *One source.* There is one `wikidata` source record. It states the dataset,
+  its licence (CC0 1.0), and its terms once.
+* *The revision is in the citation.* Every Wikidata item edit has a permanent
+  revision id, so each citation pins the exact data it used:
+  `at: Q57906 (P625), revision 2234567890`. Any number of reads on any day
+  resolve to exact content.
+* *Existing citations are re-pinned, not guessed.* Migration resolves each
+  cited item's revision through the Wikidata API and checks that the cited
+  value (the coordinate or identifier the record uses) still equals the value
+  the approved record holds. A citation whose value has changed is listed for
+  the owner rather than re-pinned silently.
+* *This is new content for the approved chapters.* The consolidated source and
+  the re-pinned citations change what the Tang and Qin approvals cover. They
+  are prepared as drafts; the approved content stays served until the owner
+  approves the new content, under whichever gate is authoritative then.
+
+== Implemented on 2026-10-18
+
+The decisions of 2026-10-18 are implemented in PR #25. This section records
+what was built, the evidence that the migration lost nothing, and the details
+the decisions left open, which the implementation chose and the owner reviews
+with the change.
+
+*What was built.*
+
+* The tree: 84 record files under `historical/{places,actors,events,relationships}/`
+  (subfolders `tang/` and `qin/`), 14 source files under `historical/sources/`,
+  and two manifests in `historical/chapters/`, each with the chapter's former
+  README beside it as `<id>.md`. The two stories are the manifests' `story`
+  blocks, so the chapters still publish 86 records. Every file is checked
+  against a JSON Schema in `historical/schema/`.
+* The compiler, `src/lib/historical/authoring/`, emits the complete v0
+  representation. The site gets it from a Vite plugin
+  (`scripts/historical-chapters.mjs`) as one lazily loaded chunk per approved
+  chapter; nothing compiled is written to disk. The contract and chapter tests
+  compile the same bundles through `src/lib/historical/chapter.ts`.
+* The gate: `publication-approval.test.ts` now fails the build for a stale
+  approval or a misdated one, and requires the served chapters to be exactly the
+  approved ones. `pnpm approvals` lists and compares chapters as decided, and
+  `.github/CODEOWNERS` requires the owner's review on every manifest.
+* The hand-written JSON trees under `historical/chapters/<id>/` are removed.
+
+*Migration evidence.* Before the site switched to the compiled chapters, a
+check compiled each of the 86 records and compared it with the revision its
+approved set published. Content, dispute, and every claim matched, with claims
+compared by the field they assert. The compiler lists a record's claims in the
+order its file writes them, and in 83 records that is the approved order
+exactly. In three (`return-voyage-753`, `yaku-arrival-753`, `yingchuan`) one
+claim moves past a claim for another field, because a file cannot write a cite
+for one field between two cites of another; every record's first quoted
+citation, which the selection card shows, is unchanged. Every source's
+`source_hash` was unchanged apart from the consolidated `wikidata` source. One
+id changed: the Tang story `lks:story:tang-mission-750-779`, named after its old
+file, is now `lks:story:tang-mission-750-754`, after its chapter. `pnpm
+approvals` shows exactly these differences against the approved JSON sets: the
+cards' text (code until now), the Wikidata source and its 17 pinned citations,
+and the story id.
+
+*How the 17 Wikidata citations were pinned.* The Wikidata API (`api.php`)
+refused the requests with HTTP 429, so each item's history was read from its
+`index.php?action=history` page and the data from `Special:EntityData` at the
+chosen revision. Each citation names the revision that was current on the day
+its chapter recorded the read (2026-09-24 for Tang, 2026-09-25 for Qin). For all
+17, the item had no edit on that day, so the revision is unambiguous, and the
+coordinate at that revision equals the record's to the record's precision. No
+citation needed to be listed for the owner.
+
+*Details the decisions left open.*
+
+* A generated revision's id is `lks:rev:<file name>-<first 12 hex digits of
+  the sha256 of its content, claims, and dispute>`, so it changes exactly when
+  the record does. Its `created_at` is 2026-10-18, the day the record files
+  were adopted, and its author is "Lekishi contributors", because who wrote a
+  line is in Git history.
+* An approved chapter's set is `lks:set:<chapter>-<first 12 hex digits of the
+  digest>`, published at the approval's date by the approver, whose role is
+  `owner`. Its review stays the contributors' `self_review`, and its notes say
+  that the approval is an owner decision, not independent or specialist review.
+* An approval's date is a UTC calendar day, no earlier than 2026-10-18 and no
+  later than the day the build runs.
+* A chapter without an approval is a draft. The site does not serve it. The
+  contract and chapter tests check it as a preview set that names no owner, so
+  its content is held to every rule before anyone approves it.
+* `pnpm approvals approve <chapter>` needs an interactive terminal and the
+  chapter id typed back. It names the approver from `git config user.name`
+  unless `--by` names someone, and it writes only the manifest's `approval`
+  block.
+
+*Retirement.* The ledger's test is replaced by the digest gate in the same
+change, and the ledger takes no further rows. The criterion above holds when
+the owner approves this change and approves both chapters with `pnpm
+approvals`. Until then the branch serves no chapter, and its chapter tests fail,
+so it cannot be merged by mistake.
+
+== Decided: previews show drafts — 2026-10-18
+
+The owner decided on 2026-10-18 that pull-request previews serve the chapters
+without a matching approval, as drafts, so the content can be judged on the
+device it is tested on before it is approved. The alternative, never serving a
+draft and reviewing it through `pnpm approvals` and a local build, kept
+previews identical to production but left the owner approving content they
+could not open on the preview. This amends the open detail above that the site
+does not serve a draft: production still never does.
+
+* The builds that serve drafts are the ones that carry the `/dev` pages:
+  development and Cloudflare Pages previews of any branch but `main`
+  (`draftChaptersServed` in `scripts/dev-pages.mjs`). Production serves
+  approved chapters only.
+* A served draft is published under its draft preview set, whose publisher's
+  role is "draft preview, not approved". A stale chapter is served the same way
+  on a preview, so an edit to approved content can be looked at before it is
+  re-approved; production and CI still fail on it.
+* Every surface that shows a draft says so: the chapter card carries a "Draft"
+  mark and the status "Draft, not approved for release", the chapter page keeps
+  a banner above the atlas, and a stale chapter's line names the approval its
+  content no longer matches.
+* The unit and contract tests keep the production view, so a draft never makes
+  `pnpm test` or CI's verify job pass. A preview build's chapter gate runs them
+  with `LEKISHI_DRAFTS=1`, so it checks the chapters that build ships, and the
+  build invariant fails a draft without its banner or a banner on anything
+  else.
+
+== Digest and gate corrections — 2026-10-19
+
+Review of PR #25 found two paths around the publication invariant and one path
+that prevented the decided preview workflow. The implementation was corrected
+without changing the decisions above:
+
+* The digest is now `lekishi-chapter-digest/2`. In addition to canonical parsed
+  values, it binds each record's compiled claim-id order. YAML mapping order
+  normally remains insignificant, but reordering cited fields changes which
+  quotation a reader meets first, so it now invalidates the approval exactly as
+  any other reader-visible content edit does. Moving to v2 makes both v1
+  approvals stale; the owner must review and approve the v2 digests rather than
+  having an agent carry the old decisions forward. `pnpm approvals` may
+  recompute v1 only at the commit that introduced that approval block, to locate
+  the historical approved snapshot; it never accepts a newer, order-only edit
+  with the same v1 digest, and never substitutes the older JSON set when that
+  snapshot is unavailable. The publication gate accepts only the current v2
+  digest. Its comparison keeps claim details keyed by asserted field and now
+  also shows their reader-visible order, so an order-only edit cannot produce an
+  empty approval diff.
+* The publication gate compiles every discovered manifest with a preview set
+  and runs the complete v0 `Publication.checkAll` contract over it. The Tang and
+  Qin suites continue to enforce chapter-specific historical constraints, but a
+  third chapter can no longer bypass general source-licence, reference,
+  publication, ordering, or cycle rules merely because no named fixture suite
+  exists for it yet.
+* Chapter-specific tests no longer enforce approval freshness. The all-manifest
+  approval gate owns that environment-dependent rule: production rejects stale
+  approvals, while development and pull-request previews validate and serve the
+  changed content under a non-owner draft preview set.
+
+== Decided: approving one by one, with a yes — 2026-10-21
+
+The owner found approving chapter by chapter, each by typing its id back, too
+cumbersome, and asked on 2026-10-21 for one command that goes through every
+chapter awaiting approval. This supersedes the "chapter id typed back" rule in
+"Implemented on 2026-10-18"; the rest of that rule stands.
+
+* `pnpm approvals approve all` lists every chapter, then shows each draft or
+  stale chapter's changes in turn and asks `[y/N]`. Only `y` or `yes` approves;
+  Enter or any other answer leaves the chapter as it is and moves on. Each
+  approval pins the digest of the content shown above its question.
+* `pnpm approvals approve <chapter>` asks the same `[y/N]` question for one
+  chapter.
+* Both still need an interactive terminal, so a script or an agent that pipes
+  an answer in cannot approve a chapter. The approver and the date are named in
+  the question, as before.
 
 == Alternatives
 
@@ -386,9 +608,7 @@ A database::
 
 == Open questions
 
-* The proposed statements above, each awaiting the owner's word.
-* Whether a chapter manifest may include records by query (all events
-  `part_of` a journey, for instance) or only by listing them. Listing is
-  proposed for now, because the story order is editorial.
+* The statements still marked *Proposed* above, each awaiting the owner's
+  word.
 * How a reader-facing correction history reads the Git history of a shared
   record (RFD 2's existing open question, now spanning chapters).

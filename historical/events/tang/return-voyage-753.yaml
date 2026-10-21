@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The return voyage of the four ships, from leaving 蘇州黃泗浦 on 天寶十二載十一月十五日 (753) to 鑒眞 entering
+  大宰府 on 十二月廿六日. The documented landfalls are separate dated events; this event carries the span and
+  the named places and asserts no continuous route.
+types: [journey, mission]
+date:
+  value: 753-11-15..753-12-26
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: 天寶十二載十一月十五日壬子 四舟同發 — 十二月廿六日辛卯 入［太］宰府
+  cite:
+    - id: return-voyage-time
+      says:
+        The biography records the four ships leaving 蘇州黃泗浦 on 天寶十二載十一月十五日 and 鑒眞 entering 大宰府 on
+        十二月廿六日.
+      source: toseiden
+      at: 十五日壬子，四舟同發; 廿六日辛卯，延慶師引和上入［太］宰府
+places:
+  - place: huangsipu
+    role: start
+  - place: ajinawa
+    role: waypoint
+  - place: yaku
+    role: waypoint
+  - place: akimeya
+    role: end
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      No route geometry is asserted. The documented movements are the dated landfall events and the
+      named places on this record; the outbound voyage of 752 is excluded from the chapter.
+    cite:
+      - id: return-voyage-no-route
+        says:
+          "The chapter asserts no route geometry: the voyage is recorded as its dated landfalls and
+          named places, and the outbound voyage of 752 is excluded."
+        source: toseiden
+        at: 十五日壬子，四舟同發; 廿一日戊午…; 十二月六日…; 七日…; 廿日…
+notes: The voyage sequence rests on the biography, a single near-contemporary account; the chronicle
+  independently corroborates the ships' returns and divergent landfalls, not the day-by-day
+  sequence. The coverage model excludes the outbound voyage of 752, so no outward leg or
+  interpolated line exists anywhere in the chapter.
+cites:
+  places:
+    - id: return-voyage-places
+      says:
+        The biography names the attested landfalls along the return as 阿兒奈波島, 益救島, and 薩摩國阿多郡秋妻屋浦; it
+        names 多禰島 only as the second ship's intended destination.
+      source: toseiden
+      at: 廿一日戊午，第一、第二兩舟同到阿兒奈波島; 十二月六日…第二舟發向多禰去; 七日，至益救島; 廿日乙酉午時，第二舟著薩摩國阿多郡秋妻屋浦

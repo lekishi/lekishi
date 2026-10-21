@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: 韓非, the Han prince and writer whom the hereditary house records Han sending to Qin under
+  王安五年 and Qin detaining and killing. The annals and the comprehensive mirror date the embassy to
+  始皇帝十四年 (233 BCE), and the annals record his death at 雲陽; the biography records 李斯 and 姚賈 speaking
+  against him, the poison 李斯 sent, and the king's regret. The chapter records the dispute and
+  decides no manner, cause, or day.
+types: [person]
+names:
+  - form: 韓非
+    lang: lzh
+    script: Hani
+    roman: Han Fei
+    scheme: pinyin
+    cite:
+      - id: han-fei-name
+        says:
+          The annals record 韓非 coming to Qin as envoy in 始皇帝十四年 (233 BCE), and the hereditary house
+          records the embassy under 王安五年.
+        sources:
+          - source: shiji
+            at: 卷六 秦始皇本紀 十四年（韓非使秦）
+            quote: 韓非使秦，秦用李斯謀，留非，非死雲陽。
+          - source: shiji
+            at: 卷四十五 韓世家 韓王安五年（使韓非使秦）
+            quote: 王安五年，秦攻韓，韓急，使韓非使秦，秦留非，因殺之。
+  - form: 非
+    lang: lzh
+    script: Hani
+    note: "The entries' short form: 留非，非死雲陽; 非已死矣."
+    claim: han-fei-name
+roles:
+  - role: envoy
+    note:
+      "The embassy year only, as the annals and the comprehensive mirror date it: the entries state
+      no month, so the role is a bounded occurrence within 233 BCE rather than a dated span."
+    date:
+      value: 233 BCE
+      mode: window
+      calendar: chinese_lunisolar
+      as_written: 十四年，韓非使秦（史記・秦始皇本紀）; 始皇帝十四年，使韓非來聘（資治通鑑）
+    cite:
+      - id: han-fei-role
+        says:
+          The comprehensive mirror records the Han king sending 韓非 as envoy, and the biography records
+          the king hearing of him and wanting to see him.
+        sources:
+          - source: zizhi-tongjian
+            at: 卷六 秦紀一 始皇帝十四年（使韓非來聘）
+            quote: 韓王納地效璽，請為籓臣，使韓非來聘。
+          - source: shiji
+            at: 卷六十三 老子韓非列傳（秦王見其書）
+            quote: 秦王見《孤憤》、《五蠹》之書，曰：「嗟乎，寡人得見此人與之游，死不恨矣！」
+notes: The biography's account of his writings and his memorial is recorded in the summary; the
+  fixture does not publish the memorial's text, which is outside the cited entries. The hereditary
+  house's regnal expression (王安五年) is recorded where the sources give it and is not converted to an
+  absolute year.

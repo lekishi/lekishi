@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "A south wind rises on 天寶十二載十二月六日: the first ship goes aground on rocks and does not move,
+  and the second ship sets out for 多禰島."
+types: [journey]
+part_of: [return-voyage-753]
+date:
+  value: 753-12-06
+  calendar: chinese_lunisolar
+  as_written: 十二月六日南風起
+  cite:
+    - id: ships-separate-time
+      says:
+        The biography records that on 天寶十二載十二月六日 the first ship went aground and the second set out
+        for 多禰島.
+      source: toseiden
+      at: 十二月六日南風起，第一舟着石不動，第二舟發向多禰去
+places:
+  - place: tane
+    role: context
+    note: Named only as the second ship's intended destination; the passage records no landing here.
+    cite:
+      - id: ships-separate-place
+        says:
+          The biography names 多禰島 as the island the second ship set out for; the passage records no
+          landing there.
+        source: toseiden
+        at: 十二月六日南風起，第一舟着石不動，第二舟發向多禰去
+notes:
+  The entry places the ships at sea near 阿兒奈波島 and names 多禰島 as the second ship's destination,
+  so the place is attached as context with that qualification rather than as a landfall; the passage
+  records no landing at 多禰島.

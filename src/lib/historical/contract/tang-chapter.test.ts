@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest"
-import { chapterDirectory, loadChapter, type ChapterTree } from "../chapter"
-import { revisionHash, sourceHash } from "./canonical"
+import { RECORD_FILES_ADOPTED_AT } from "../authoring/compile"
+import { chapterBundle, listChapters, loadChapter, type ChapterTree } from "../chapter"
+import { encode, revisionHash, sha256, sourceHash } from "./canonical"
 import * as Publication from "./publication"
-import { sealAll } from "./seal"
 import * as Time from "./time"
 import { isObject, listOf, objectOf, type JsonObject, type JsonValue } from "./types"
 
@@ -10,8 +10,8 @@ import { isObject, listOf, objectOf, type JsonObject, type JsonValue } from "./t
  * Independent checks for the reviewed Tang chapter fixture.
  *
  * Two layers are tested. The first is the contract's own semantics, run over the
- * chapter tree with `Publication.checkAll`, plus the seal and publication rules
- * that protect approved content. The second is this chapter's coverage model:
+ * compiled chapter with `Publication.checkAll`, plus the hash and publication
+ * rules that protect published content. The second is this chapter's coverage model:
  * the primary 750–754 window, the four included coda years, the labelling of
  * coda nodes, the exclusion of the 752 outbound voyage, and the rule that no
  * route geometry is drawn. Those chapter rules are written as predicates and
@@ -59,18 +59,13 @@ function recordById(chapter: ChapterTree, recordId: string): JsonObject {
 }
 
 /**
- * Sets are loaded in file order, which is not publication order: the projection
- * and the validator order them by `published_at`. Tests that care about one set
- * look it up by id so a new file cannot silently change which set they inspect.
+ * The chapter's one publication set: the set its approval stands for, or a
+ * draft preview until the owner approves. A chapter compiles to exactly one.
  */
-function setById(chapter: ChapterTree, setId: string): JsonObject {
-  const set = chapter.sets.find((candidate) => objectOf(candidate)["set_id"] === setId)
+function theSet(chapter: ChapterTree): JsonObject {
+  expect(chapter.sets).toHaveLength(1)
 
-  if (set === undefined) {
-    throw new Error(`${setId} is not in the chapter tree`)
-  }
-
-  return objectOf(set)
+  return objectOf(chapter.sets[0])
 }
 
 function publishedRevision(record: JsonObject): JsonObject {
@@ -285,7 +280,7 @@ function nakamaroRoleViolations(chapter: ChapterTree): string[] {
 /** Coda nodes are labelled in the story as well as in their own records. */
 function codaLabelViolations(chapter: ChapterTree): string[] {
   const violations: string[] = []
-  const story = recordById(chapter, "lks:story:tang-mission-750-779")
+  const story = recordById(chapter, "lks:story:tang-mission-750-754")
   const steps = listOf(contentOf(story)["steps"]).map((step) => objectOf(step))
   const codaRecords = chapter.documents.filter(
     (document) => document["document"] === "record" && isCoda(document),
@@ -403,7 +398,7 @@ describe("the Tang chapter fixture", () => {
       )
     }
 
-    expect(chapterDirectory(CHAPTER)).toContain("historical/chapters/tang-mission-750-754")
+    expect(listChapters()).toContain(CHAPTER)
     expect(Object.keys(result.currentPublished)).toHaveLength(66)
   })
 
@@ -422,7 +417,7 @@ describe("the Tang chapter fixture", () => {
       11,
     )
 
-    const first = setById(chapter, "lks:set:tang-mission-750-754-v1")
+    const first = theSet(chapter)
     const memberIds = listOf(first["members"]).map((member) =>
       String(objectOf(member)["record_id"]),
     )
@@ -432,15 +427,15 @@ describe("the Tang chapter fixture", () => {
     expect(Publication.currentPublished(chapter.documents, chapter.sets).size).toBe(66)
   })
 
-  it("publishes one revision per record in a single preparation set", () => {
+  it("publishes one revision per record in a single set", () => {
     const chapter = tree()
-    const set = setById(chapter, "lks:set:tang-mission-750-754-v1")
+    const set = theSet(chapter)
     const memberIds = listOf(set["members"]).map((member) => String(objectOf(member)["record_id"]))
     const current = Publication.currentPublished(chapter.documents, chapter.sets)
     const history = Publication.history(chapter.documents, chapter.sets)
 
-    // The owner had the preparation history flattened on 2026-09-24: one set,
-    // one revision per record, and no superseded set.
+    // One set, one revision per record, and no superseded set: a revision is
+    // generated from its record file, and a record's history is in Git.
     expect(chapter.sets).toHaveLength(1)
     expect(set["supersedes"]).toBeNull()
     expect(memberIds.sort()).toEqual(
@@ -522,10 +517,10 @@ describe("the Tang chapter fixture", () => {
 
     const draft: JsonObject = {
       revision_id: "lks:rev:appointment-750-99",
-      created_at: "2026-09-25T00:00:00Z",
+      created_at: "2026-10-19T00:00:00Z",
       author: {
-        name: "Lekishi editorial preparation",
-        role: "preparing editor (owner-instructed)",
+        name: "Lekishi contributors",
+        role: "record file authors (see Git history)",
       },
       change_explanation: "Draft correction: prepared but not published by any set.",
       content,
@@ -735,10 +730,26 @@ describe("the Tang chapter fixture", () => {
     expect(nakamaroRoleViolations(tree())).toEqual([])
   })
 
-  it("refuses to reseal published chapter history", () => {
-    expect(() => sealAll(chapterDirectory(CHAPTER))).toThrow(
-      "published chapter content requires a new revision and publication set",
-    )
+  it("generates every revision from its record file, so no history can be resealed by hand", () => {
+    // A revision's id carries a prefix of its content hash and its hash covers
+    // the content, so the only way to change a published revision is to change
+    // its record file, which changes the chapter's digest and needs a new
+    // approval before it is served.
+    for (const document of tree().documents.filter((entry) => entry["document"] === "record")) {
+      const revisions = listOf(document["revisions"]).map(objectOf)
+
+      expect(revisions, String(document["record_id"])).toHaveLength(1)
+
+      const [revision] = revisions
+      const body: JsonObject = { content: revision["content"], claims: revision["claims"] }
+
+      if (revision["dispute"] !== undefined) {
+        body["dispute"] = revision["dispute"]
+      }
+
+      expect(String(revision["revision_id"]).endsWith(sha256(encode(body)).slice(0, 12))).toBe(true)
+      expect(revision["created_at"]).toBe(RECORD_FILES_ADOPTED_AT)
+    }
   })
 
   it("carries citations and explicit uncertainty on every published record", () => {
@@ -756,22 +767,27 @@ describe("the Tang chapter fixture", () => {
     expect(unlocated.map((record) => record["record_id"]).sort()).toEqual(["lks:place:huanzhou"])
   })
 
-  it("records self-review, not owner, independent, or specialist review", () => {
-    const chapter = tree()
+  it("records the contributors' self-review, never independent or specialist review", () => {
+    const bundle = chapterBundle(CHAPTER)
+    const set = theSet(tree())
+    const review = objectOf(set["review"])
+    const notes = String(review["notes"])
+    const publishedBy = objectOf(set["published_by"])
 
-    expect(chapter.sets.length).toBeGreaterThan(0)
+    expect(review["independence"]).toBe("self_review")
+    expect(objectOf(review["reviewer"])["name"]).toBe("Lekishi contributors")
+    expect(notes).toContain("Self-review by the contributors")
+    expect(notes).not.toContain("independent review is recorded")
+    expect(Object.values(objectOf(review["checklist"]))).toEqual([true, true, true, true, true])
 
-    for (const set of chapter.sets) {
-      const review = objectOf(objectOf(set)["review"])
-      const notes = String(review["notes"])
-
-      expect(review["independence"], String(objectOf(set)["set_id"])).toBe("self_review")
-      expect(objectOf(review["reviewer"])["name"]).toBe("Lekishi editorial preparation")
-      expect(objectOf(objectOf(set)["published_by"])["name"]).toBe("Lekishi editorial preparation")
-      expect(notes).toContain("not owner review")
-      expect(notes).toContain("still pending")
-      expect(notes).not.toContain("independent review is recorded")
-      expect(Object.values(objectOf(review["checklist"]))).toEqual([true, true, true, true, true])
+    // An approved chapter names the owner who approved it, as an owner decision
+    // rather than a review; an unapproved one says it is a preview.
+    if (bundle.state === "approved") {
+      expect(publishedBy).toEqual({ name: bundle.approval?.by, role: "owner" })
+      expect(notes).toContain("an owner decision, not independent or specialist review")
+    } else {
+      expect(publishedBy["role"]).toBe("draft preview, not approved")
+      expect(notes).toContain("has not approved")
     }
   })
 })
@@ -954,7 +970,7 @@ describe("adversarial readings of the Tang chapter", () => {
 
   it("rejects relabelling the self-review as independent review", () => {
     const chapter = cloneTree(tree())
-    const set = setById(chapter, "lks:set:tang-mission-750-754-v1")
+    const set = theSet(chapter)
     objectOf(set["review"])["independence"] = "independent_review"
 
     const result = Publication.checkAll(chapter.documents, chapter.sets)

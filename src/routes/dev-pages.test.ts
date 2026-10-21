@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url"
 import { flushSync, mount, unmount, type Component } from "svelte"
 import { describe, expect, it } from "vitest"
 import { prepareBuildRoutes } from "../../scripts/build-app.mjs"
-import { devPagesEnabled } from "../../scripts/dev-pages.mjs"
+import { devPagesEnabled, draftChaptersServed } from "../../scripts/dev-pages.mjs"
 import { match } from "../params/dev"
 import DevIndex from "../lib/dev/DevIndex.svelte"
 import { DEV_PAGES } from "../lib/dev/pages"
@@ -44,6 +44,24 @@ describe("devPagesEnabled", () => {
     ["an explicit local opt-in", { env: { LEKISHI_DEV_PAGES: "1" } }, true],
   ])("is %s: %s", (_, options, expected) => {
     expect(devPagesEnabled(options)).toBe(expected)
+  })
+})
+
+describe("draftChaptersServed", () => {
+  // The owner's decision of 2026-10-18: previews show drafts, production never.
+  it.each([
+    ["the development server", { command: "serve" as const, env: {} }, true],
+    ["a local production build", { env: {} }, false],
+    ["the production deploy from main", { env: { CF_PAGES: "1", CF_PAGES_BRANCH: "main" } }, false],
+    ["a pull-request preview", { env: { CF_PAGES: "1", CF_PAGES_BRANCH: "claude/x" } }, true],
+    ["a test run", { command: "serve" as const, env: { VITEST: "true" } }, false],
+    [
+      "a preview's chapter gate",
+      { command: "serve" as const, env: { VITEST: "true", LEKISHI_DRAFTS: "1" } },
+      true,
+    ],
+  ])("is %s: %s", (_, options, expected) => {
+    expect(draftChaptersServed(options)).toBe(expected)
   })
 })
 

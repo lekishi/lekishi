@@ -1,470 +1,323 @@
-import { readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
-import { listChapters, loadChapter, type ChapterTree } from "../chapter"
-import { encode, sha256 } from "./canonical"
-import { objectOf, type JsonObject } from "./types"
-import { SERVED_CHAPTERS } from "../../atlas/chapter-registry"
-import { currentPublished } from "./publication-order"
+import { DRAFTS_SERVED, SERVED_CHAPTERS } from "../../atlas/chapter-registry"
+import {
+  compileAll,
+  compileChapter,
+  RECORD_FILES_ADOPTED_AT,
+  type ChapterBundle,
+} from "../authoring/compile"
+import { buildTree, readFiles, type TreeFile } from "../authoring/tree"
+import * as Publication from "./publication"
+import { objectOf } from "./types"
 
 /**
- * The publication approval gate.
+ * The publication approval gate (RFD 2, "Decided: the approval digest").
  *
- * The contract has one shape for a content change — a new revision named by a
- * publication set — and the atlas reads the newest set-named revision. Nothing
- * in the schema requires that a person decided a new version of the content may
- * exist, so this suite adds that decision point: `rfd/0002/PUBLICATION_APPROVAL.adoc`
- * records one row per set, and a set the record does not cover fails here, which
- * fails `pnpm build` through `scripts/check-chapter.mjs`.
+ * A chapter is published only by the owner's approval in its manifest: a
+ * digest of the manifest and of every record and source the chapter reaches,
+ * with who approved it and on which day. This suite fails `pnpm build` through
+ * `scripts/check-chapter.mjs` when that approval does not hold:
  *
- * The gate reads every chapter tree under `historical/chapters/`, so a new
- * chapter directory cannot appear with a set the ledger does not cover. Both
- * served chapters' sets carry the owner's release approval, and a chapter the
- * site serves must be showing revisions that approval covers: the served list in
- * `src/lib/atlas/chapter-registry.ts` is what the chapter route prerenders, and a
- * `preparation snapshot` set may exist in the repository without being served.
+ * - every chapter the site serves is approved at exactly its current content;
+ * - no chapter is stale, so an edit to approved content, a shared place
+ *   included, cannot reach readers until the owner approves again;
+ * - an approval is dated, and not before the record files existed or after
+ *   today;
+ * - the approval lives in the manifest only, never in a record.
  *
- * The rule is a predicate over (sets, ledger rows) so it can be exercised
- * against deliberately wrong readings — a set without a row, a row without a
- * set, a preparation snapshot labelled as approved, a set whose content changed
- * after the decision — and not only against the tree as it happens to be today.
+ * A chapter without an approval is a draft: it compiles and faces every
+ * contract test as a preview, but it is not served. Only a build that serves
+ * drafts (development and pull-request previews; the build's gate runs this
+ * suite with `LEKISHI_DRAFTS=1` there) serves it, stale ones included, under
+ * its draft preview set; production and every plain test run keep the rules
+ * above. The gate cannot tell who
+ * wrote an approval, so `.github/CODEOWNERS` requires the owner's review on
+ * every manifest, and `pnpm approvals` shows the owner what changed since the
+ * last approval. Nothing here, and no agent, writes an approval for the owner.
  *
- * Each row also carries the canonical digest of the set it decided on. The digest
- * binds the decision to that snapshot: changing a member revision hash or a
- * source pin invalidates the row instead of silently inheriting its decision.
- * It is a consistency check, not an authentication — a person still has to check
- * that the row, the digest, and the set describe what the owner decided.
- *
- * The served-chapter rule is the reader-facing half of the same idea: a set may
- * exist as a preparation snapshot, but the chapters the site renders must come
- * from a set the owner approved. Adding a chapter to the served list, or moving a
- * served chapter to a later revision, therefore fails the build until the owner
- * decides again.
+ * The rules are exercised against in-memory copies of the real tree, with an
+ * approval written into the copy, so they hold whether or not the owner has
+ * approved the chapters on this branch.
  */
 
-const TANG_SET = "lks:set:tang-mission-750-754-v1"
-const QIN_SET = "lks:set:qin-conquest-han-233-226-v1"
+const TODAY = new Date().toISOString().slice(0, 10)
 
-/** The record that holds the owner's publication decisions, relative to the repo root. */
-const LEDGER_URL = new URL("../../../../rfd/0002/PUBLICATION_APPROVAL.adoc", import.meta.url)
-
-/** The only decisions the ledger may record. */
-const DECISIONS = ["preparation snapshot", "owner decided", "owner approved"] as const
-
-type Decision = (typeof DECISIONS)[number]
-
-type LedgerRow = {
-  setId: string
-  decision: string
-  decidedBy: string
-  digest: string
+/** A fresh in-memory copy of the authoring tree's files. */
+function files(): TreeFile[] {
+  return readFiles().map((file) => ({ ...file }))
 }
 
-/** The digest a decision row records: the canonical encoding of the whole set. */
-function setDigest(set: JsonObject): string {
-  return `sha256:${sha256(encode(set))}`
+/** The files with one file's text changed. */
+function edit(source: TreeFile[], path: string, change: (text: string) => string): TreeFile[] {
+  const target = source.find((file) => file.path === path)
+
+  if (target === undefined) {
+    throw new Error(`${path} is not in the authoring tree`)
+  }
+
+  return source.map((file) => (file === target ? { ...file, text: change(file.text) } : file))
 }
 
 /**
- * Reads the ledger table out of the AsciiDoc record. Cells continue until the
- * next line that starts a cell, so the notes may wrap.
+ * The files with a chapter's approval replaced by one of `digest`, standing in
+ * for the owner's line. Tests only: the gate never writes one.
  */
-function parseLedger(text: string, columns = 5): LedgerRow[] {
-  const rows: string[][] = []
-  const cells: string[] = []
-  let inTable = false
-
-  const flush = () => {
-    if (cells.length > 0) {
-      rows.push(cells.splice(0, cells.length))
-    }
-  }
-
-  for (const rawLine of text.split("\n")) {
-    const line = rawLine.trimEnd()
-
-    if (line.startsWith("|===")) {
-      if (inTable) {
-        flush()
-      }
-      inTable = !inTable
-      continue
-    }
-
-    if (!inTable) {
-      continue
-    }
-
-    if (line.startsWith("|")) {
-      if (cells.length === columns) {
-        flush()
-      }
-
-      for (const cell of line.split("|").slice(1)) {
-        if (cells.length === columns) {
-          flush()
-        }
-        cells.push(cell.trim())
-      }
-
-      continue
-    }
-
-    if (cells.length > 0 && line.trim() !== "") {
-      cells[cells.length - 1] = `${cells[cells.length - 1]} ${line.trim()}`
-    }
-  }
-
-  return rows
-    .filter((row) => row[0] !== "Set")
-    .map((row) => ({
-      setId: (row[0] ?? "").replaceAll("`", "").trim(),
-      decision: (row[1] ?? "").trim(),
-      decidedBy: (row[2] ?? "").trim(),
-      digest: (row[3] ?? "").replaceAll("`", "").trim(),
-    }))
-}
-
-function ledgerRows(): LedgerRow[] {
-  return parseLedger(readFileSync(LEDGER_URL, "utf8"))
-}
-
-/**
- * What the gate refuses. Every message names the set and the disagreement, so a
- * failing build says which decision is missing rather than only that one is.
- */
-function approvalViolations(sets: JsonObject[], ledger: LedgerRow[]): string[] {
-  const violations: string[] = []
-  const setIds = sets.map((set) => String(set["set_id"]))
-  const rows = new Map<string, LedgerRow>()
-
-  for (const row of ledger) {
-    if (rows.has(row.setId)) {
-      violations.push(`${row.setId} has more than one decision row`)
-    }
-
-    rows.set(row.setId, row)
-  }
-
-  for (const set of sets) {
-    const setId = String(set["set_id"])
-    const row = rows.get(setId)
-
-    if (row === undefined) {
-      violations.push(`${setId} is published without a recorded owner decision`)
-      continue
-    }
-
-    if (!(DECISIONS as readonly string[]).includes(row.decision)) {
-      violations.push(`${setId} records the unknown decision "${row.decision}"`)
-      continue
-    }
-
-    const independence = String(objectOf(set["review"])["independence"])
-    const decision = row.decision as Decision
-    const snapshot = decision === "preparation snapshot"
-
-    // A snapshot exists because preparation was instructed, not because the
-    // owner decided on this content, so it cannot claim a review beyond the
-    // preparing editor's own.
-    if (snapshot && independence !== "self_review") {
-      violations.push(
-        `${setId} is a preparation snapshot but claims review independence "${independence}"`,
-      )
-    }
-
-    // An owner decision must name the owner as the decider, so the ledger says
-    // whose decision it is rather than only that one was taken.
-    if (!snapshot && !row.decidedBy.toLowerCase().startsWith("owner")) {
-      violations.push(
-        `${setId} records the decision "${decision}" without naming the owner as the decider`,
-      )
-    }
-
-    // The row decides on one snapshot, not on whatever later carries the set id.
-    if (row.digest !== setDigest(set)) {
-      violations.push(
-        `${setId} no longer matches the digest recorded for its decision: the content changed after the decision was taken`,
-      )
-    }
-  }
-
-  for (const row of ledger) {
-    if (!setIds.includes(row.setId)) {
-      violations.push(`the ledger records ${row.setId}, which is not in the chapter tree`)
-    }
-  }
-
-  return violations
-}
-
-/** Every chapter tree under `historical/chapters`, so a new one cannot slip past the gate. */
-function chapterNames(): string[] {
-  return listChapters()
-}
-
-function allSets(): JsonObject[] {
-  return chapterNames().flatMap((chapter) => loadChapter(chapter).sets)
-}
-
-/**
- * The rule the served chapters add: a chapter the site renders must be showing
- * revisions an `owner approved` decision covers.
- *
- * The gate's other rules keep an undecided set from existing; this one keeps a
- * served chapter from *rendering* content whose decision is missing, stale, or
- * was taken on a snapshot the chapter has since moved past. A chapter that is
- * prepared for review but not served is deliberately out of scope: it may carry a
- * `preparation snapshot` set, and the served list — not the repository — is what
- * a reader can open.
- */
-function servedViolations(served: ChapterTree[], ledger: LedgerRow[]): string[] {
-  const violations: string[] = []
-  const approved = new Set(
-    ledger.filter((row) => row.decision === "owner approved").map((row) => row.setId),
+function approve(source: TreeFile[], chapter: string, digest: string, on = TODAY) {
+  return edit(
+    source,
+    `chapters/${chapter}.yaml`,
+    (text) =>
+      `${text.replace(/\napproval:\n(?: {2}.*\n?)*/, "\n").trimEnd()}\napproval:\n  digest: ${digest}\n  by: Example Owner\n  on: ${on}\n`,
   )
+}
 
-  for (const tree of served) {
-    const current = currentPublished(tree.documents, tree.sets)
-    const setIds = [...new Set([...current.values()].map((value) => String(value.set_id)))].sort()
+function compiled(source: TreeFile[], chapter: string): ChapterBundle {
+  return compileChapter(buildTree(source), chapter)
+}
 
-    for (const setId of setIds) {
-      if (!approved.has(setId)) {
+/**
+ * The chapters the gate would let the site serve: approved, never stale. A build
+ * that serves drafts serves a stale chapter as a draft, so only its approval's
+ * date and name can fail there.
+ */
+function approvalViolations(
+  bundles: readonly ChapterBundle[],
+  today: string,
+  { drafts = false }: { drafts?: boolean } = {},
+): string[] {
+  const violations: string[] = []
+  const adopted = RECORD_FILES_ADOPTED_AT.slice(0, 10)
+
+  for (const bundle of bundles) {
+    if (bundle.state === "stale" && !drafts) {
+      violations.push(
+        `${bundle.id}: approved ${String(bundle.approval?.digest)}, but the content is now ${bundle.digest}; run \`pnpm approvals\` to see what changed`,
+      )
+    }
+
+    if (bundle.approval !== null) {
+      if (bundle.approval.on < adopted) {
         violations.push(
-          `${tree.name} is served, but the revisions it renders come from ${setId}, which has no owner approved decision`,
+          `${bundle.id}: approved on ${bundle.approval.on}, before the record files existed`,
         )
       }
+
+      if (bundle.approval.on > today) {
+        violations.push(`${bundle.id}: approved on ${bundle.approval.on}, which is in the future`)
+      }
+
+      if (bundle.approval.by.trim() === "") {
+        violations.push(`${bundle.id}: the approval does not name who approved it`)
+      }
     }
   }
 
   return violations
 }
 
-/** The served chapters' trees, read from the list the chapter route prerenders. */
-function servedTrees(): ChapterTree[] {
-  return SERVED_CHAPTERS.map((chapter) => loadChapter(chapter.id))
+/** Full v0 publication violations for every discovered manifest. */
+function contractViolations(bundles: readonly ChapterBundle[]): string[] {
+  return bundles.flatMap((bundle) => {
+    const result = Publication.checkAll(bundle.documents, bundle.sets)
+
+    return result.ok
+      ? []
+      : result.errors.map((error) => `${bundle.id}: ${error.code} ${error.where}: ${error.detail}`)
+  })
 }
 
+const TANG = "tang-mission-750-754"
+const QIN = "qin-conquest-han-233-226"
+
+/** A record file the Tang chapter reaches, and one no chapter reaches. */
+const TANG_RECORD = "events/tang/akimeya-landfall-753.yaml"
+
 describe("publication approval gate", () => {
-  it("records a decision for every set in every chapter tree", () => {
-    const ledger = ledgerRows()
+  // Preview sets let the contract validate draft and stale manifests too; the
+  // bundles' approval states remain the production gate's source of truth.
+  const bundles = compileAll(buildTree(files()), { preview: true })
 
-    // The parse must not quietly produce nothing: the two prepared sets and the
-    // decisions that cover them are the state the gate covers.
-    expect(ledger.map((row) => row.setId).sort()).toEqual([QIN_SET, TANG_SET].sort())
-    expect(chapterNames()).toEqual(["qin-conquest-han-233-226", "tang-mission-750-754"])
-    expect(approvalViolations(allSets(), ledger)).toEqual([])
+  it("leaves no chapter stale and no approval misdated", () => {
+    expect(approvalViolations(bundles, TODAY, { drafts: DRAFTS_SERVED })).toEqual([])
   })
 
-  it("serves only chapters whose rendered revisions an owner decision covers", () => {
-    const served = servedTrees()
-
-    // The served list is what the chapter route prerenders; both entries are
-    // chapters, and neither renders content the ledger has not approved.
-    expect(served.map((tree) => tree.name).sort()).toEqual(
-      ["qin-conquest-han-233-226", "tang-mission-750-754"].sort(),
+  it("serves exactly the approved chapters, and the drafts only on a build that serves drafts", () => {
+    expect(SERVED_CHAPTERS.map((chapter) => chapter.id).sort()).toEqual(
+      bundles
+        .filter((bundle) => DRAFTS_SERVED || bundle.state === "approved")
+        .map((bundle) => bundle.id)
+        .sort(),
     )
-    expect(servedViolations(served, ledgerRows())).toEqual([])
-  })
 
-  it("fails a served chapter whose rendered revisions lost their approval", () => {
-    // The same content, decided as a preparation snapshot instead of an
-    // approval: the chapter trees are still covered, but the served chapters are
-    // rendering content no decision released.
-    const ledger = ledgerRows().map((row) => ({ ...row, decision: "preparation snapshot" }))
-    const violations = servedViolations(servedTrees(), ledger)
-
-    expect(violations.join("\n")).toContain(
-      "is served, but the revisions it renders come from lks:set:tang-mission-750-754-v1, which has no owner approved decision",
-    )
-    expect(violations.join("\n")).toContain(
-      "is served, but the revisions it renders come from lks:set:qin-conquest-han-233-226-v1, which has no owner approved decision",
-    )
-  })
-
-  it("fails a served chapter that moved to a revision its approved set does not publish", () => {
-    // A later revision inside the served chapter's tree: the approval covered the
-    // snapshot the row records, not whatever the chapter carries next.
-    const served = servedTrees().map((tree) =>
-      tree.name !== "tang-mission-750-754"
-        ? tree
-        : {
-            ...tree,
-            sets: tree.sets.map((set) => ({
-              ...set,
-              set_id: "lks:set:tang-mission-750-754-v2",
-            })),
-          },
-    )
-    const violations = servedViolations(served, ledgerRows())
-
-    expect(violations.join("\n")).toContain(
-      "is served, but the revisions it renders come from lks:set:tang-mission-750-754-v2, which has no owner approved decision",
-    )
-  })
-
-  it("does not apply the served rule to a chapter the site does not serve", () => {
-    // A preparation snapshot may exist in the repository without being served:
-    // that is what keeps the review workflow possible without shipping it. The
-    // set stays ledger-covered, so the approval gate itself is satisfied, and the
-    // served rule only looks at the chapters the site actually renders.
-    const ledger = ledgerRows().map((row) =>
-      row.setId === QIN_SET ? { ...row, decision: "preparation snapshot" } : row,
-    )
-    const served = servedTrees().filter((tree) => tree.name !== "qin-conquest-han-233-226")
-
-    expect(approvalViolations(allSets(), ledger)).toEqual([])
-    expect(servedViolations(served, ledger)).toEqual([])
-    expect(servedViolations(servedTrees(), ledger)).toContain(
-      "qin-conquest-han-233-226 is served, but the revisions it renders come from lks:set:qin-conquest-han-233-226-v1, which has no owner approved decision",
-    )
-  })
-
-  it("records the owner's approval for both served sets, and describes neither as review", () => {
-    const approved = ledgerRows().filter((row) => row.decision === "owner approved")
-
-    // Both chapter trees are served by the site, and both carry the owner's
-    // editorial approval of the exact snapshot their row records.
-    expect(approved.map((row) => row.setId).sort()).toEqual([QIN_SET, TANG_SET].sort())
-
-    // The approval is a ledger decision, not a review relabel: each approved set
-    // still records the preparing editor's self-review, and the row's own note
-    // keeps the specialist reviews open.
-    for (const [chapter, setId] of [
-      ["tang-mission-750-754", TANG_SET],
-      ["qin-conquest-han-233-226", QIN_SET],
-    ] as const) {
-      for (const set of loadChapter(chapter).sets) {
-        expect(String(objectOf(set["review"])["independence"]), chapter).toBe("self_review")
-      }
-
-      const row = ledgerRows().find((candidate) => candidate.setId === setId)
-
-      expect(row?.decidedBy, chapter).toContain("owner")
-      expect(row?.decidedBy, chapter).not.toContain("independent")
+    for (const bundle of bundles.filter((entry) => entry.state === "approved")) {
+      expect(bundle.approval?.digest, bundle.id).toBe(bundle.digest)
     }
   })
 
-  it("fails a set that no decision covers", () => {
-    const ledger = ledgerRows().filter((row) => row.setId !== TANG_SET)
-    const violations = approvalViolations(allSets(), ledger)
-
-    expect(violations.join("\n")).toContain(
-      `${TANG_SET} is published without a recorded owner decision`,
-    )
+  it("validates every discovered chapter with the full publication contract", () => {
+    expect(contractViolations(bundles)).toEqual([])
   })
 
-  it("fails a second chapter's set that no decision covers", () => {
-    const ledger = ledgerRows().filter((row) => row.setId !== QIN_SET)
-    const violations = approvalViolations(allSets(), ledger)
-
-    expect(violations.join("\n")).toContain(
-      `${QIN_SET} is published without a recorded owner decision`,
-    )
-  })
-
-  it("fails a ledger row for a set that does not exist", () => {
-    const ledger = [
-      ...ledgerRows(),
+  it("rejects a newly discovered chapter whose compiled publication is invalid", () => {
+    const added: TreeFile[] = [
+      ...files(),
       {
-        setId: "lks:set:invented-v9",
-        decision: "preparation snapshot",
-        decidedBy: "owner",
-        digest: "sha256:" + "0".repeat(64),
+        path: "sources/example-unlicensed.yaml",
+        text: `locator: entry
+kind: primary
+title: An unlicensed test source
+license:
+  status: unknown
+`,
+      },
+      {
+        path: "events/example-contract-invalid.yaml",
+        text: `summary: A synthetic event used only to exercise the all-chapter gate.
+types: [occurrence]
+date:
+  value: 750
+  calendar: gregorian
+  cite:
+    says: The unlicensed source dates the synthetic event.
+    source: example-unlicensed
+    at: example entry
+`,
+      },
+      {
+        path: "chapters/example-contract-invalid.yaml",
+        text: `title: An invalid synthetic chapter
+summary: A synthetic chapter used only to exercise the all-chapter gate.
+window: 750
+story:
+  summary: The invalid synthetic chapter.
+  span: 750
+  steps:
+    - example-contract-invalid: The synthetic event
+`,
       },
     ]
-    const violations = approvalViolations(allSets(), ledger)
+    const violations = contractViolations(compileAll(buildTree(added), { preview: true }))
 
-    expect(violations.join("\n")).toContain(
-      "the ledger records lks:set:invented-v9, which is not in the chapter tree",
-    )
+    expect(violations.join("\n")).toContain("example-contract-invalid: unrecorded_source_license")
   })
 
-  it("fails a preparation snapshot that claims a review beyond the preparing editor's", () => {
-    const sets = loadChapter("qin-conquest-han-233-226").sets.map((set) => ({
-      ...set,
-      review: { ...objectOf(set["review"]), independence: "independent_review" },
-    }))
-    const ledger = ledgerRows().map((row) => ({ ...row, decision: "preparation snapshot" }))
-    const violations = approvalViolations(sets, ledger)
+  it("keeps the approval in the manifest, never in a record's revisions", () => {
+    // A record's publication mirror repeats its set's publisher, as the contract
+    // requires; what a record's own revisions carry is content, never a decision.
+    for (const bundle of compileAll(buildTree(files()), { preview: true })) {
+      const revisions = JSON.stringify(bundle.documents.map((document) => document["revisions"]))
 
-    expect(violations.join("\n")).toContain(
-      'is a preparation snapshot but claims review independence "independent_review"',
-    )
+      expect(revisions, bundle.id).not.toContain('"role":"owner"')
+      expect(revisions, bundle.id).not.toContain("owner approved")
+    }
   })
 
-  it("fails an owner decision that does not name the owner", () => {
-    const ledger = ledgerRows().map((row) => ({ ...row, decidedBy: "the preparing editor" }))
-    const violations = approvalViolations(allSets(), ledger)
+  it("approves a chapter whose approval names its current digest", () => {
+    const digest = compiled(files(), TANG).digest
+    const bundle = compiled(approve(files(), TANG, digest), TANG)
 
-    expect(violations.join("\n")).toContain(
-      'records the decision "owner approved" without naming the owner as the decider',
-    )
+    expect(bundle.state).toBe("approved")
+    expect(approvalViolations([bundle], TODAY)).toEqual([])
+    expect(objectOf(bundle.sets[0]["published_by"])).toEqual({
+      name: "Example Owner",
+      role: "owner",
+    })
+    expect(objectOf(bundle.sets[0]["review"])["independence"]).toBe("self_review")
   })
 
-  it("fails a set with two decision rows", () => {
-    const ledger = [
-      ...ledgerRows(),
-      {
-        setId: TANG_SET,
-        decision: "preparation snapshot",
-        decidedBy: "owner",
-        digest: ledgerRows()[0]?.digest ?? "",
-      },
+  it("fails an approved chapter when a record it reaches changes", () => {
+    const digest = compiled(files(), TANG).digest
+    const changed = edit(approve(files(), TANG, digest), TANG_RECORD, (text) =>
+      text.replace(/summary: (.*)/, "summary: $1 Edited after the approval."),
+    )
+    const bundle = compiled(changed, TANG)
+
+    expect(bundle.state).toBe("stale")
+    expect(bundle.sets).toEqual([])
+    expect(approvalViolations([bundle], TODAY).join("\n")).toContain("pnpm approvals")
+  })
+
+  it("fails an approved chapter when its manifest's card text changes", () => {
+    const digest = compiled(files(), TANG).digest
+    const changed = edit(approve(files(), TANG, digest), `chapters/${TANG}.yaml`, (text) =>
+      text.replace(/^title: (.*)$/m, "title: $1, edited"),
+    )
+
+    expect(compiled(changed, TANG).state).toBe("stale")
+  })
+
+  it("fails an approved chapter when a source it cites changes", () => {
+    const digest = compiled(files(), TANG).digest
+    const changed = edit(approve(files(), TANG, digest), "sources/wikidata.yaml", (text) =>
+      text.replace(/^title: (.*)$/m, "title: $1 (edited)"),
+    )
+
+    expect(compiled(changed, TANG).state).toBe("stale")
+  })
+
+  it("keeps an approved chapter approved when an unreached record is added", () => {
+    const digest = compiled(files(), TANG).digest
+    const unreached = files().find((file) => file.path === TANG_RECORD) as TreeFile
+    const added = [
+      ...approve(files(), TANG, digest),
+      { path: "events/unreached-example-753.yaml", text: unreached.text },
     ]
-    const violations = approvalViolations(allSets(), ledger)
 
-    expect(violations.join("\n")).toContain(`${TANG_SET} has more than one decision row`)
+    expect(compiled(added, TANG).state).toBe("approved")
   })
 
-  it("fails the approved Tang set when its content changes after the decision", () => {
-    const sets = loadChapter("tang-mission-750-754").sets.map((set) => {
-      const members = (set["members"] as JsonObject[]).map((member, index) =>
-        index === 0 ? { ...member, revision_hash: `sha256:${"0".repeat(64)}` } : member,
-      )
-
-      return { ...set, members }
-    })
-    const violations = approvalViolations(sets, ledgerRows())
-
-    expect(violations.join("\n")).toContain(
-      "no longer matches the digest recorded for its decision: the content changed after the decision was taken",
+  it("fails an approval of other content, and does not serve a draft", () => {
+    const other = `sha256:${"0".repeat(64)}`
+    const stale = compiled(approve(files(), TANG, other), TANG)
+    const draft = compiled(
+      edit(files(), `chapters/${TANG}.yaml`, (text) =>
+        text.replace(/\napproval:\n(?: {2}.*\n?)*/, "\n"),
+      ),
+      TANG,
     )
+
+    expect(stale.state).toBe("stale")
+    expect(draft.state).toBe("draft")
+    expect(draft.sets).toEqual([])
+    expect(approvalViolations([draft], TODAY)).toEqual([])
   })
 
-  it("fails the approved Tang set when its source pin changes after the decision", () => {
-    const sets = loadChapter("tang-mission-750-754").sets.map((set) => {
-      const sources = (set["sources"] as JsonObject[]).map((source, index) =>
-        index === 0 ? { ...source, source_hash: `sha256:${"1".repeat(64)}` } : source,
-      )
-
-      return { ...set, sources }
-    })
-    const violations = approvalViolations(sets, ledgerRows())
-
-    expect(violations.join("\n")).toContain(
-      "no longer matches the digest recorded for its decision: the content changed after the decision was taken",
+  it("serves a stale chapter on a draft build as a draft preview, never as approved", () => {
+    const stale = compileChapter(
+      buildTree(approve(files(), TANG, `sha256:${"0".repeat(64)}`)),
+      TANG,
+      { preview: true },
     )
+
+    expect(stale.state).toBe("stale")
+    expect(approvalViolations([stale], TODAY, { drafts: true })).toEqual([])
+    expect(approvalViolations([stale], TODAY).join("\n")).toContain("pnpm approvals")
+    expect(objectOf(stale.sets[0]["published_by"])["role"]).toBe("draft preview, not approved")
   })
 
-  it("fails the comparison fixture when its content changes after preparation", () => {
-    const sets = loadChapter("qin-conquest-han-233-226").sets.map((set) => {
-      const members = (set["members"] as JsonObject[]).map((member, index) =>
-        index === 0 ? { ...member, revision_hash: `sha256:${"2".repeat(64)}` } : member,
-      )
-
-      return { ...set, members }
-    })
-    const violations = approvalViolations(sets, ledgerRows())
-
-    expect(violations.join("\n")).toContain(
-      "no longer matches the digest recorded for its decision: the content changed after the decision was taken",
+  it("lets the preview gate validate stale Qin content as a draft", () => {
+    const changed = edit(files(), "events/qin/han-submission-233.yaml", (text) =>
+      text.replace(
+        /^summary: (.*)$/m,
+        "summary: $1 Edited after approval for the synthetic preview check.",
+      ),
     )
+    const stale = compileChapter(buildTree(changed), QIN, { preview: true })
+
+    expect(stale.state).toBe("stale")
+    expect(approvalViolations([stale], TODAY, { drafts: true })).toEqual([])
+    expect(contractViolations([stale])).toEqual([])
   })
 
-  it("fails a decision the gate does not know", () => {
-    const ledger = ledgerRows().map((row) => ({ ...row, decision: "looks fine to me" }))
-    const violations = approvalViolations(allSets(), ledger)
+  it("fails an approval dated before the record files or in the future", () => {
+    const digest = compiled(files(), TANG).digest
+    const bundle = compiled(approve(files(), TANG, digest), TANG)
+    const early = { ...bundle, approval: { ...bundle.approval!, on: "2026-09-27" } }
+    const future = { ...bundle, approval: { ...bundle.approval!, on: "2999-01-01" } }
 
-    expect(violations.join("\n")).toContain('records the unknown decision "looks fine to me"')
+    expect(approvalViolations([early], TODAY).join("\n")).toContain("before the record files")
+    expect(approvalViolations([future], TODAY, { drafts: true }).join("\n")).toContain(
+      "in the future",
+    )
   })
 })

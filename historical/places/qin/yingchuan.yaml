@@ -1,0 +1,85 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  潁川郡, the commandery the annals record Qin making from the land it took from Han in 230 BCE.
+  The entries cited here state neither its seat nor its extent; the historical geography records the
+  Qin commandery's seat as 陽翟, the place of its own 禹州, and the record's label anchor sits at the
+  modern 禹州市, the city that carries that name. The anchor is a region-level label position, not an
+  asserted site or extent. The hereditary house's transcription reads 潁州郡.
+types: [region]
+names:
+  - form: 潁川郡
+    lang: lzh
+    script: Hani
+    roman: Yingchuan Jun
+    scheme: pinyin
+    cite:
+      - id: yingchuan-name
+        says:
+          The comprehensive mirror records that Qin made the land it took from Han into 潁川郡, in 始皇帝十七年
+          (230 BCE).
+        source: zizhi-tongjian
+        at: 卷六 秦紀一 始皇帝十七年（以其地置潁川郡）
+        quote: 虜韓王安，以其地置潁川郡。
+      - id: yingchuan-variant
+        says:
+          The hereditary house's transcription records that Han's land became 潁州郡 and that Han thereupon
+          perished.
+        role: supporting
+        source: shiji
+        at: 卷四十五 韓世家 韓王安九年（爲潁州郡）
+        quote: 九年，秦虜王安，盡入其地，爲潁州郡。韓遂亡。
+  - form: 潁川
+    lang: lzh
+    script: Hani
+    note: "The annals' wording for the commandery name: 以其地為郡，命曰潁川."
+    cite:
+      - id: yingchuan-annals-name
+        says: The annals record the annexed land being made a commandery named 潁川.
+        source: shiji
+        at: 卷六 秦始皇本紀 十七年（命曰潁川）
+        quote: 內史騰攻韓，得韓王安，盡納其地，以其地為郡，命曰潁川。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [113.47334, 34.15113]
+    notes:
+      "Region-level label anchor at the modern 禹州市 (Wikidata Q1344848), the city that carries the
+      name of the historical geography's 禹州, whose 州治 陽翟 it records as the Qin 潁川郡's seat (讀史方輿紀要
+      卷四十七 開封府 禹州). It is not an asserted historical coordinate and asserts no extent: the entries
+      cited here state neither seat nor extent, and the anchor places no site."
+    cite:
+      - id: yingchuan-unlocated
+        says: The entries cited here name the commandery and state neither its seat nor its extent.
+        role: supporting
+        source: shiji
+        at: 卷六 秦始皇本紀 十七年（命曰潁川）
+      - id: yingchuan-seat
+        says:
+          The historical geography records that Qin set up the 潁川 commandery after destroying Han in
+          秦始皇十七年, and that 陽翟, the seat of its own 禹州, was the commandery's seat.
+        role: supporting
+        sources:
+          - source: dushi-fangyu-jiyao
+            at: 卷四十七 河南二 開封府 禹州
+            quote: 秦始皇十七年滅韓，置潁川郡
+          - source: dushi-fangyu-jiyao
+            at: 卷四十七 河南二 開封府 禹州（陽翟城）
+            quote: 秦置陽翟縣，爲潁川郡治。
+      - id: yingchuan-anchor
+        says:
+          The label anchor is placed at the modern city's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q1344848 (P625), revision 2531885272
+modern:
+  - form: 禹州市
+    lang: zh-Hans
+    script: Hani
+    note:
+      Modern city recorded for orientation only; the anchor is a region-level label position, not an
+      identification of the commandery's seat or extent.
+notes: The commandery's own entries state no seat; the seat identification is the cited historical
+  geography's, recorded as that work's statement. The hereditary house's transcription reads 潁州郡
+  where the annals and the comprehensive mirror read 潁川 (潁川郡). The record publishes 潁川郡 and keeps
+  the variant in the claims and notes rather than deciding it; a critical edition is what would
+  settle the reading.

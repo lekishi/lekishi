@@ -1,0 +1,66 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  韓王安 (King An of Han), the last Han king. The hereditary house records him taking the throne
+  when 桓惠王 died and gives his reign notices in regnal years; the annals and the comprehensive mirror
+  name him in the 230 BCE annexation, and the six-states table aligns 韓王安元年 with 238 BCE and his
+  ninth year with 230 BCE.
+types: [person]
+names:
+  - form: 韓王安
+    lang: lzh
+    script: Hani
+    roman: Han Wang An
+    scheme: pinyin
+    cite:
+      - id: han-king-an-name
+        says:
+          The annals record that Qin captured 韓王安 in 十七年 (230 BCE), and the comprehensive mirror names
+          him the same way.
+        sources:
+          - source: shiji
+            at: 卷六 秦始皇本紀 十七年（得韓王安）
+            quote: 內史騰攻韓，得韓王安，盡納其地，以其地為郡，命曰潁川。
+          - source: zizhi-tongjian
+            at: 卷六 秦紀一 始皇帝十七年（虜韓王安）
+            quote: 虜韓王安，以其地置潁川郡。
+  - form: 王安
+    lang: lzh
+    script: Hani
+    note: The hereditary house's form for him in the reign notices.
+    cite:
+      - id: han-king-an-accession
+        says:
+          The hereditary house records 王安 taking the Han throne when 桓惠王 died, and the six-states table
+          aligns 韓王安元年 with 238 BCE.
+        sources:
+          - source: shiji
+            at: 卷四十五 韓世家 韓桓惠王三十四年（子王安立）
+            quote: 三十四年，桓惠王卒，子王安立。
+          - source: shiji
+            at: 卷十五 六國年表 秦始皇九年（韓王安元年）
+            quote: 韓王安元年
+roles:
+  - role: ruler
+    note:
+      The span runs from the six-states table's first numbered regnal year for 韓王安 (元年, aligned with
+      238 BCE) to its ninth year (aligned with 230 BCE). The hereditary house gives the reign
+      notices in regnal years and the comprehensive mirror places 桓惠王's death in 239 BCE; the
+      fixture records those expressions as given and does not convert between regnal and absolute
+      years.
+    date:
+      value: 238 BCE..230 BCE
+      mode: duration
+      calendar: chinese_lunisolar
+      as_written: 三十四年，桓惠王卒，子王安立（史記・韓世家）; 韓王安元年（史記・六國年表）; 九年，秦虜王安（史記・韓世家）
+    cite:
+      - id: han-king-an-role
+        says:
+          The hereditary house records his reign notices from the accession through 王安九年, when Qin
+          captured him.
+        source: shiji
+        at: 卷四十五 韓世家 韓王安五年、韓王安九年
+        quote: 王安五年，秦攻韓，韓急，使韓非使秦，秦留非，因殺之。
+notes: "The first numbered regnal year is not converted to an accession date: the fixture uses the
+  six-states table's alignment and records the hereditary house's and the mirror's expressions
+  beside it. The embassy year's regnal count is recorded on the submission event, where the
+  hereditary house's 王安五年 and the table's 韓王安六年 differ."

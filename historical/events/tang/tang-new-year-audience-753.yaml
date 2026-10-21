@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The New Year audience at 蓬萊宮含元殿 on the first day of the first month of 天寶十二載 (753), as
+  大伴古麻呂 reported it to the Japanese court: the envoys were seated below the Silla envoy, 古麻呂
+  objected, and the Tang general 呉懷實 moved the Silla envoy and placed the Japanese envoy above him."
+types: [mission, exchange]
+date:
+  value: 753-01-01
+  calendar: chinese_lunisolar
+  as_written: 大唐天寶十二載正月朔癸夘
+  cite:
+    - id: tang-audience-time
+      says:
+        古麻呂 reported to the Japanese court that the New Year audience was held at 蓬萊宮含元殿 on
+        大唐天寶十二載正月朔癸夘.
+      source: shoku-nihongi
+      at: 卷第十九 天平勝寶六年正月丙寅
+      quote: 古麻呂奏曰。大唐天寳十二載。歳在癸巳正月朔癸夘。百官諸蕃朝賀。天子於蓬莱宮含元殿受朝。
+    - id: tang-audience-tribute
+      says: The Tang court record reports that in the twelfth year of 天寶 the Japanese sent tribute again.
+      role: supporting
+      source: jiu-tangshu
+      at: 卷199上 東夷 日本國（天寶十二年，又遣使貢）
+    - id: tang-audience-nakamaro
+      says: The Song history reports that 朝衡 returned to the Tang court in 天寶十二載.
+      role: supporting
+      source: xin-tangshu
+      at: 卷220 東夷 日本（天寶十二載，朝衡復入朝）
+places:
+  - place: hanyuan-hall
+    role: site
+    note: The hall named in 古麻呂's report.
+participants:
+  - actor: tang-dynasty
+    role: host
+  - actor: otomo-no-komaro
+    role: guest
+    note: Reported the audience to the Japanese court.
+  - actor: wu-huaishi
+    role: participant
+    note: Moved the Silla envoy's seat after 古麻呂 objected.
+notes:
+  The account is 古麻呂's own report to the Japanese court and is published as a self-report, not
+  as an independent record. The Silla envoy is named only by court in the report and has no actor
+  record in this fixture. The Tang histories record the embassy's tribute and 朝衡's return at year
+  granularity and do not describe the audience.
+cites:
+  participants:
+    - id: tang-audience-participants
+      says: The same report records the seating-order dispute and 呉懷實's intervention.
+      source: shoku-nihongi
+      at: 卷第十九 天平勝寶六年正月丙寅

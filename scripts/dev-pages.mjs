@@ -24,3 +24,24 @@ export function devPagesEnabled({ command = "build", env = process.env } = {}) {
 
 /** The matching source directory, omitted from production route discovery. */
 export const DEV_ROUTE_DIRECTORY = "[dev=dev]"
+
+/**
+ * Whether this build serves the chapters the owner has not approved, as drafts
+ * under a visible banner. The owner decided on 2026-10-18 that previews show
+ * drafts, so the content can be judged on the device it is tested on before it
+ * is approved: the same builds as the `/dev` pages (development and
+ * pull-request previews), never production, which serves approved chapters
+ * only.
+ *
+ * Vitest is the exception. The unit and contract tests pin the production view,
+ * so a draft never makes `pnpm test` or CI's verify job pass; the build's
+ * chapter gate (`scripts/check-chapter.mjs`) opts in with `LEKISHI_DRAFTS=1` on
+ * a build that serves drafts, so the gate checks the chapters that build ships.
+ *
+ * @param {{ command?: "serve" | "build"; env?: NodeJS.ProcessEnv }} [options]
+ * @returns {boolean}
+ */
+export function draftChaptersServed({ command = "build", env = process.env } = {}) {
+  if (env.VITEST) return env.LEKISHI_DRAFTS === "1"
+  return devPagesEnabled({ command, env })
+}

@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The biography records the temple name 唐律招提 being established on 寶字三年八月一日 (759); the
+  chronicle's 763 notice describes the same cloister as 新田部親王's former residence given to 鑒眞.
+types: [founding]
+date:
+  value: 759-08-01
+  calendar: chinese_lunisolar
+  as_written: 寶字三年八月一日，私立唐律招提名
+  cite:
+    - id: toshodaiji-founding-time
+      says: The biography records the temple name being established on 寶字三年八月一日.
+      source: toseiden
+      at: 寶字三年八月一日，私立唐律招提名，後請官額，依此爲定
+places:
+  - place: toshodaiji
+    role: site
+participants:
+  - actor: jianzhen
+    role: leader
+notes: "Coda node (outside the primary 750–754 mission window): the founding is a separately dated
+  later act, recorded with both sources and not as an effect of the mission."
+cites:
+  places:
+    - id: toshodaiji-founding-chronicle
+      says:
+        The chronicle's notice describes the cloister as 新田部親王's former residence given to 鑒眞, today's
+        招提寺.
+      role: supporting
+      source: shoku-nihongi
+      at: 卷第廿四 天平寶字七年五月戊申（施新田部親王之舊宅以爲戒院。今招提寺是也）

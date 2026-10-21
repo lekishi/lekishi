@@ -3,7 +3,7 @@ import { listChapters } from "../historical/chapter"
 import { loadServedChapter } from "./chapter-catalog"
 import { QIN_CHAPTER, SERVED_CHAPTERS, TANG_CHAPTER } from "./chapter-registry"
 import { CHAPTERS, chapterHeading, chapterHref, chapterPresentation } from "./chapters"
-import { QIN_RELEASE, TANG_RELEASE } from "./release"
+import { chapterRelease, type ChapterRelease } from "./release"
 import { yearLabel } from "./labels"
 
 /**
@@ -14,10 +14,21 @@ import { yearLabel } from "./labels"
  * exactly one card, each card shows the window the projection gives its chapter,
  * and each card opens where that chapter is served. They also keep the cards
  * user-facing — the name and summary must not read as production notes about
- * contract sets, review categories, or preparation state — and keep each
- * chapter's editorial decision in the status line, where it is secondary metadata
- * rather than the chapter's identity.
+ * contract sets, review categories, or preparation state — and keep an approved
+ * chapter's card free of its approval line, which lives in the chapter's own
+ * page and About sheet (the owner's decision of 2026-10-20).
  */
+
+/** A served chapter's recorded decision, which every served chapter has. */
+function release(id: string): ChapterRelease {
+  const recorded = chapterRelease(id)
+
+  if (recorded === undefined) {
+    throw new Error(`${id} is served without an approval`)
+  }
+
+  return recorded
+}
 
 describe("the chapter cards", () => {
   it("covers every served chapter exactly once, by id and by name", () => {
@@ -87,27 +98,16 @@ describe("the chapter cards", () => {
     }
   })
 
-  it("states each chapter's recorded decision as secondary metadata", () => {
-    const tang = chapterPresentation(TANG_CHAPTER)
-    const qin = chapterPresentation(QIN_CHAPTER)
+  it("states no approval on an approved chapter's card", () => {
+    for (const id of [TANG_CHAPTER, QIN_CHAPTER]) {
+      const card = chapterPresentation(id)
 
-    expect(tang?.status).toBe(TANG_RELEASE.status)
-    expect(qin?.status).toBe(QIN_RELEASE.status)
-
-    for (const [id, card] of [
-      [TANG_CHAPTER, tang],
-      [QIN_CHAPTER, qin],
-    ] as const) {
-      expect(card?.status, id).toContain("Owner-approved for release")
-      // The owner's editorial approval is not review, and the line must keep
-      // saying so rather than reading as independent or specialist sign-off.
-      expect(card?.status, id).toContain("Not independent or specialist review")
-      expect(card?.status, id).not.toContain("Independent review recorded")
-      expect(card?.status, id).not.toContain("Specialist review recorded")
+      // Every chapter production serves is approved, so the line would set no
+      // card apart; the decision and its caveat stay on the chapter's page.
+      expect(release(id).status, id).toContain("Owner-approved for release")
+      expect(card?.status, id).toBe("")
+      expect(card?.draft, id).toBe(false)
     }
-
-    expect(tang?.status).toContain(TANG_RELEASE.decidedOn)
-    expect(qin?.status).toContain(QIN_RELEASE.decidedOn)
   })
 
   it("opens each chapter where the product serves it", () => {
@@ -124,8 +124,8 @@ describe("the chapter cards", () => {
     const heading = chapterHeading(tang)
 
     expect(heading.name).toBe("The embassy to Tang China")
-    expect(heading.decision).toBe(TANG_RELEASE.decision)
-    expect(heading.status).toBe(TANG_RELEASE.status)
+    expect(heading.decision).toBe(release(TANG_CHAPTER).decision)
+    expect(heading.status).toBe(release(TANG_CHAPTER).status)
 
     // A chapter without a card still renders: the heading uses the chapter's own
     // published title and the review independence its publication records.

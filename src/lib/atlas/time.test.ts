@@ -104,4 +104,17 @@ describe("stepToEventBoundary", () => {
     expect(stepToEventBoundary(FIXTURE_CHAPTER.events, window, 1251, 1)).toBeNull()
     expect(stepToEventBoundary(FIXTURE_CHAPTER.events, window, 1200, -1)).toBeNull()
   })
+
+  it("stops at the window's edge when an event's support runs past it", () => {
+    const [template] = FIXTURE_CHAPTER.events
+    const events = [
+      { ...template, id: "event-before-edge", occurrence: occurrence(1190, 1210) },
+      { ...template, id: "event-after-edge", occurrence: occurrence(1240, 1260) },
+    ]
+
+    expect(stepToEventBoundary(events, window, 1245, 1)).toBe(1250)
+    expect(stepToEventBoundary(events, window, 1250, 1)).toBeNull()
+    expect(stepToEventBoundary(events, window, 1205, -1)).toBe(1200)
+    expect(stepToEventBoundary(events, window, 1200, -1)).toBeNull()
+  })
 })

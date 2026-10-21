@@ -1,0 +1,149 @@
+= Hannibal's march into Italy, 218–216 BCE: feasibility note
+:state: Draft chapter for testing data and the engine; not approved content, not an RFD decision
+:prepared: 2026-10-21
+:toc:
+:toclevels: 2
+
+This note goes with the draft chapter
+link:../../historical/chapters/hannibal-italy-218-216.yaml[`hannibal-italy-218-216`],
+candidate 2 in "Choosing Lekishi's next chapters". The owner asked for as many
+chapters and events as possible to test the data and the engine, so the chapter
+was authored in full rather than scoped first. It has no approval and no one but
+the owner may write one.
+
+== What was authored
+
+[cols="1,1,3",options="header"]
+|===
+|Kind |Count |Notes
+
+|Sources |4
+|`polybius`, `livy`, `gellius` (primary, `locator: section`), and `pleiades` (shared with other chapters; dump of 2026-10-21).
+
+|Places |43
+|25 approximate points (towns identified by Pleiades, coordinate from Wikidata), 12 display anchors (rivers, mountains, regions, Gerunium, the Taurini's town), 6 unknown (the Rhône crossing, the Island, the Alpine pass, Picenum, Kissa, the Silva Litana). `rome` lives in `places/mediterranean/`.
+
+|Actors |36
+|Commanders, magistrates, envoys and peoples on both sides. `roman-republic` lives in `actors/mediterranean/`.
+
+|Events |56
+|219 BCE (Saguntum) to 216 BCE (Capua, the Silva Litana), with codas in 215 BCE (the Philip V treaty) and 205 BCE (the Lacinian inscription). 11 are disputed.
+
+|Relationships |9
+|The war, the alliances each side won or kept, Capua's break with Rome, Rome's consultation of Delphi.
+|===
+
+Every quotation (434 in all) was checked by script against the transcription at
+its locator.
+
+== Sources
+
+* *Polybius* book 3 is the spine: the earliest continuous account, by a writer who
+  says he walked the route and read Hannibal's own figures on a bronze tablet at
+  Lacinium (3.33.18, 3.56.4). Book 7.9 gives the Philip V oath and 10.3 the
+  Ticinus rescue.
+* *Livy* 21–23 doubles almost every event and supplies what Polybius lacks
+  (Gades, the Carpetani, Spoletium, the Sibylline vows, Busa, the Vestals,
+  Pictor at Delphi, Capua's terms, Mago's rings, the Silva Litana). He names his
+  own authorities (Fabius Pictor, Cincius Alimentus, Coelius), which the records
+  keep as attributed claims.
+* *Gellius* 5.17.5 is the only source here for Cannae's Roman date.
+* Both main texts were read in the Perseus Digital Library's TEI transcriptions,
+  which are CC BY-SA 4.0 over public-domain Teubner editions. That is the same
+  conditional status as Wikisource, now in
+  link:../../docs/SOURCE_REGISTER.adoc[the source register]. The OCR has errors
+  (Livy 22.49.11 is garbled and not quoted); every locator still needs the
+  critical-edition re-check before release.
+* *Pleiades* identifications are cited to the daily dump of 2026-10-21 by place
+  id. The register asks for numbered releases; a numbered release should
+  replace the dump citation before release.
+
+Feasibility: high. Two independent, detailed ancient narratives, public-domain,
+with section-level locators, give more events than any chapter so far. The
+weakness is geography, below.
+
+== Engine findings
+
+. *No Roman calendar.* v0's calendars are julian, gregorian, islamic,
+  chinese_lunisolar, regnal and unknown. Consular years are recorded as
+  `calendar: regnal` with the consuls or the season in `as_written`. The
+  sources' days (the Ides of March 217, a.d. IV Non. Sext. 216) cannot be
+  converted, because the pre-Julian civil calendar drifted from the seasons, so
+  every event is year-precision. A `roman_republican` calendar (and an Olympiad
+  one for Greek writers) that records a day without converting it would let the
+  record say what the source says.
+. *Same-year order.* 23 events fall in 218 BCE and v0 does not order events
+  within a year, so the story's order is presentation only. Polybius gives
+  relative order ("on the third night", "ten days along the river", "fifteen
+  days over the Alps"); a relative-order or season precision would capture it.
+. *Journey legs break almost everywhere.* Under the journey proposal (PR #26) a
+  leg is drawn only between two located stops. The march's stops sit at
+  display anchors or unknown places from the Ebro to the Po, so not one leg of
+  the 218 BCE march would be drawn, and the 217 BCE route only between
+  Spoletium and Cannae. That is the right answer, but it means the chapter's
+  headline journey is a list and a card, not a line. The proposal's open
+  question (is an all-unlocated journey worth publishing?) gets a concrete
+  case here.
+. *Events have no external ids.* The event schema has no `external_ids`, so the
+  Wikidata items for the battles (Trebia Q179591, Trasimene Q271873, Cannae
+  Q207250 and the rest) cannot be recorded.
+. *Participant roles.* `envoy` is an actor role but not a participant role, so
+  Magilus, Carthalo, Xenophanes and Fabius Pictor are `participant` with a note.
+. *No quantities.* Troop strengths and losses are the main point of several
+  disputes (the arrival count, Cannae's dead) but live only in text.
+. *City-states as endpoints.* Massalia is a place, so the Massalia–Rome
+  alliance runs from a place. A Massaliot state actor would be the better
+  endpoint; the same will happen for Saguntum, Syracuse and Capua's people.
+. Two contract rules the authoring format does not mention, found by the
+  publication test: a record-level `cite` may have only one `main` claim, and a
+  `dispute` needs at least one alternative or conflicting claim.
+
+== Proposed journeys
+
+If PR #26's journey kind is accepted, the chapter would add these three; nothing
+is written until then.
+
+[source,yaml]
+----
+# historical/journeys/hannibal-to-italy-218.yaml
+title: Hannibal's march from New Carthage to the Po, 218 BCE
+travellers: [{ actor: hannibal, role: leader }]
+stops:
+  - new-carthage-departure-218
+  - { event: ebro-crossing-218, by: land }
+  - { event: pyrenees-crossing-218, by: land }
+  - { event: rhone-crossing-218, by: land }
+  - { event: insula-arbitration-218, by: land }
+  - { event: allobroges-attack-218, by: land }
+  - { event: alpine-summit-218, by: land }
+  - { event: alpine-descent-218, by: land }
+  - { event: po-plain-arrival-218, place: padus, by: land }
+cite: { source: polybius, at: "3.56.3" }
+
+# historical/journeys/sempronius-to-trebia-218.yaml
+travellers: [{ actor: ti-sempronius-longus, role: leader }]
+stops:
+  - { event: sempronius-recalled-218, place: lilybaeum }
+  - { event: sempronius-recalled-218, place: ariminum }   # by: disputed (land or sea)
+  - trebia-218
+
+# historical/journeys/scipio-to-rhone-218.yaml
+travellers: [{ actor: p-cornelius-scipio, role: leader }]
+stops:
+  - { event: scipio-voyage-massalia-218, place: rome }
+  - { event: scipio-voyage-massalia-218, place: massalia, by: sea }
+  - { event: scipio-voyage-massalia-218, place: rhone, by: sea }
+  - { event: scipio-returns-218, place: rhone-crossing, by: land }
+----
+
+Sempronius' second leg is the case for a disputed `by`: Polybius has the army
+march forty days, Livy has it shipped. The proposal has no way to say a leg's
+mode is disputed. One event with a start and an end place standing for two
+stops is also a question for the proposal.
+
+== Shared records
+
+`rome` and `roman-republic` use the ids and paths the Rome chapter announced;
+whichever PR lands second drops its copy. `syracuse`, `delphi`, `massalia` and
+`carthage` are minted here for other chapters to reuse, and `pleiades` matches
+the other branches' source record apart from formatting.

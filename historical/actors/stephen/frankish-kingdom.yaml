@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  The kingdom of the Franks (Francia) under Pepin, to which Stephen II travelled in 753 to seek help
+  "pro iustitiis sancti Petri".
+types: [state]
+names:
+  - form: Francia
+    lang: la
+    script: Latn
+    cite:
+      - id: frankish-kingdom-name
+        says: The annals say Pope Stephen came into Francia seeking help for the rights of St Peter.
+        source: annales-regni-francorum
+        at: "s.a. 753: Eodemque anno Stephanus papa venit in Franciam, adiutorium et solatium quaerendo pro iustitiis sancti Petri"
+  - form: Franks
+    lang: en
+    script: Latn
+    role: alternate
+    claim: frankish-kingdom-name
+notes: "The state actor carries no roles: the role vocabulary is person-oriented."

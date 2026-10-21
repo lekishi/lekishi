@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Autchar, Frankish duke and Pepin's envoy, who came to Rome with Bishop Chrodegang in 753 and rode
+  ahead of the pope to wait for him at Pavia.
+types: [person]
+names:
+  - form: Autcharius
+    lang: la
+    script: Latn
+    cite:
+      - id: autchar-name
+        says: The life names Duke Autcharius as the second envoy and has him ride ahead to Pavia.
+        source: liber-pontificalis
+        at: Itaque unus ex eisdem Francorum missis, scilicet Autcharius dux, quantotius praecedens. Ticino eum prestolatus est
+roles:
+  - role: envoy
+    date:
+      value: "753"
+      calendar: julian
+      as_written: Autcharius dux (753)
+    cite:
+      - id: autchar-role
+        says: The life names Duke Autcharius as the second envoy and has him ride ahead to Pavia.
+        source: liber-pontificalis
+        at: Itaque unus ex eisdem Francorum missis, scilicet Autcharius dux, quantotius praecedens. Ticino eum prestolatus est

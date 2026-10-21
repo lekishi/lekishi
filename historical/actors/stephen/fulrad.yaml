@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Fulrad, abbot (of Saint-Denis) and Pepin's counsellor. With Duke Rothard he met Stephen II at
+  Saint-Maurice in 753 and escorted him to the king; in 754 or 755 he led the Frankish escort that
+  took the pope back to Rome, and in 756 he received the cities of the exarchate and laid their keys
+  at the tomb of St Peter.
+types: [person]
+names:
+  - form: Fulradus
+    lang: la
+    script: Latn
+    cite:
+      - id: fulrad-name
+        says:
+          The life names Abbot Fulradus and Duke Rotardus as the king's men who came to the pope at
+          Saint-Maurice.
+        source: liber-pontificalis
+        at: coniunxerunt in praedicto venerabili monasterio Fulradus abbas et Rotardus dux directi a sepefato Pippino
+  - form: Folradus
+    lang: la
+    script: Latn
+    role: alternate
+    note: The annals' spelling.
+    cite:
+      - id: fulrad-name-annals
+        says: The annals name Folradus as the king's envoy who brought the pope back to the holy see.
+        source: annales-regni-francorum
+        at: "s.a. 755: Stephanus papa reductus est ad sanctam sedem per missos domni regis Pippini, Folradum et reliquis"
+roles:
+  - role: envoy
+    note: Abbot and royal counsellor; the life calls him "consiliarium" in 756.
+    date:
+      value: 753..756
+      mode: duration
+      calendar: julian
+      as_written: Fulradus abbas (753); suum consiliarium, id est Fulradum venerabilem abbatem et presbiterum (756)
+    cite:
+      - id: fulrad-role
+        says: The life calls him the king's counsellor, abbot and priest, sent to receive the cities in 756.
+        source: liber-pontificalis
+        at: misit ipse christianissimus Francorum rex suum consiliarium, id est Fulradum venerabilem abbatem et presbiterum
+notes: The sources call him abbot without naming the house; the identification with Fulrad, abbot of
+  Saint-Denis, is editorial.

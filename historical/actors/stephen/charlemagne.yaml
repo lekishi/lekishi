@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Charles, Pepin's elder son, later king and emperor. In the winter of 753–754 his father sent him to
+  meet Stephen II on the road and bring him to Ponthion, and in 754 Stephen anointed him king with
+  his father and his brother Carloman.
+types: [person]
+names:
+  - form: Karolus
+    lang: la
+    script: Latn
+    cite:
+      - id: charlemagne-name
+        says: The papal life says Pepin sent his son Karolus almost a hundred miles to meet the pope.
+        source: liber-pontificalis
+        at: fere ad centum milia filium suum nomine Karolum in occursum ipsius … papae direxit
+  - form: Carolus
+    lang: la
+    script: Latn
+    role: alternate
+    note: The spelling of the continuations of Fredegar and the annals.
+    cite:
+      - id: charlemagne-name-fredegar
+        says: The continuations of Fredegar say the king ordered his son Carolus to go and meet him.
+        source: fredegar-continuations
+        at: CXIX
+        quote: filio suo Carolo ei obviam ire praecepit
+  - form: Charlemagne
+    lang: en
+    script: Latn
+    role: alternate
+    note: The later name, used for search.
+    claim: charlemagne-name
+roles:
+  - role: other
+    note: The king's son, anointed king with his father in 754; not yet ruling.
+    date:
+      value: 753..754
+      mode: duration
+      calendar: julian
+      as_written: filium suum nomine Karolum; domnum Carolum … in regibus
+    cite:
+      - id: charlemagne-role
+        says: The annals record Stephen anointing Pepin's two sons, Charles and Carloman, as kings.
+        source: annales-regni-francorum
+        at: "s.a. 754: cum eo inunxit duos filios eius, domnum Carolum et Carlomannum, in regibus"

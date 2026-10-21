@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Ambrose, primicerius (head of the notaries) of the Roman church, sent with the deacon Paul to make
+  the forty-year peace with Aistulf in 752, and one of the clergy who left Pavia with the pope in 753.
+types: [person]
+names:
+  - form: Ambrosius
+    lang: la
+    script: Latn
+    cite:
+      - id: ambrose-primicerius-name
+        says: The life names Ambrosius the primicerius as Paul's companion to Aistulf and as one of the pope's companions from Pavia.
+        source: liber-pontificalis
+        at: atque Ambrosium primicerium, plurimis cum muneribus; Pardum et Gemmulum diaconos, Ambrosium primicerium
+roles:
+  - role: official
+    note: Primicerius of the notaries of the Roman church.
+    date:
+      value: 752..753
+      mode: duration
+      calendar: julian
+      as_written: Ambrosium primicerium
+    cite:
+      - id: ambrose-primicerius-role
+        says: The life names Ambrosius the primicerius as Paul's companion to Aistulf and as one of the pope's companions from Pavia.
+        source: liber-pontificalis
+        at: atque Ambrosium primicerium, plurimis cum muneribus; Pardum et Gemmulum diaconos, Ambrosium primicerium

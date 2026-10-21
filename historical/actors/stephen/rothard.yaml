@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: Rothard, Frankish duke, who came with Abbot Fulrad to Saint-Maurice in 753 to escort Stephen II to Pepin.
+types: [person]
+names:
+  - form: Rotardus
+    lang: la
+    script: Latn
+    cite:
+      - id: rothard-name
+        says: The life names Duke Rotardus with Abbot Fulradus at Saint-Maurice.
+        source: liber-pontificalis
+        at: Fulradus abbas et Rotardus dux directi a sepefato Pippino excellentissimo Francorum rege
+roles:
+  - role: envoy
+    date:
+      value: "753"
+      calendar: julian
+      as_written: Rotardus dux (753)
+    cite:
+      - id: rothard-role
+        says: The life names Duke Rotardus with Abbot Fulradus at Saint-Maurice.
+        source: liber-pontificalis
+        at: Fulradus abbas et Rotardus dux directi a sepefato Pippino excellentissimo Francorum rege

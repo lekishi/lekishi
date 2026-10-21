@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Paul, deacon, Stephen II's brother and his envoy to Aistulf in 752 and to Ravenna with John the
+  silentiarius, and again to Desiderius in 756. He succeeded his brother as bishop of Rome in 757.
+types: [person]
+names:
+  - form: Paulus
+    lang: la
+    script: Latn
+    cite:
+      - id: paul-i-name
+        says: The life names the pope's brother, the deacon Paul, sent with the primicerius Ambrose to Aistulf.
+        source: liber-pontificalis
+        at: disponens suum germanum, sanctissimum scilicet Paulum diaconum, atque Ambrosium primicerium
+  - form: Paul I
+    lang: en
+    script: Latn
+    role: alternate
+    note: His name as pope from 757; the chapter's sources show him only as deacon.
+    claim: paul-i-name
+roles:
+  - role: envoy
+    note: Deacon of the Roman church and his brother's envoy.
+    date:
+      value: 752..756
+      mode: duration
+      calendar: julian
+      as_written: Paulum diaconum
+    cite:
+      - id: paul-i-role
+        says: The life names the pope's brother, the deacon Paul, sent with the primicerius Ambrose to Aistulf.
+        source: liber-pontificalis
+        at: disponens suum germanum, sanctissimum scilicet Paulum diaconum, atque Ambrosium primicerium

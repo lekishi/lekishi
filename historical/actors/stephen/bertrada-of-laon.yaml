@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Bertrada, Pepin's queen. The papal life has her at Ponthion with the king and their sons to receive
+  Stephen II; the annals have her staying at Vienne with the ill Carloman while Pepin was in Italy.
+types: [person]
+names:
+  - form: Bertrada
+    lang: la
+    script: Latn
+    cite:
+      - id: bertrada-name
+        says: The annals name Queen Bertrada as staying at Vienne with the monk Carloman.
+        source: annales-regni-francorum
+        at: "s.a. 755: Carlomannus autem monachus Vienna civitate remansit una cum Bertradane reginae infirmus"
+  - form: Bertrada of Laon
+    lang: en
+    script: Latn
+    role: alternate
+    note: The modern byname, used for search.
+    claim: bertrada-name
+roles:
+  - role: other
+    note: Queen of the Franks.
+    date:
+      value: 754..755
+      mode: window
+      calendar: julian
+      as_written: una cum Bertradane reginae (s.a. 755)
+    cite:
+      - id: bertrada-role
+        says: The annals call her queen in the entry on Carloman's stay at Vienne.
+        source: annales-regni-francorum
+        at: "s.a. 755: una cum Bertradane reginae"
+notes:
+  The life names Pepin's wife ("coniuge") at Ponthion without naming her; the identification with
+  Bertrada is the annals' naming of the queen, applied editorially.

@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Desiderius, Lombard duke sent by Aistulf to Tuscia, who after Aistulf's death in 756 seized the
+  kingship with Stephen II's support against Ratchis, promising the pope the cities that remained.
+types: [person]
+names:
+  - form: Desiderius
+    lang: la
+    script: Latn
+    cite:
+      - id: desiderius-name
+        says: The life names Desiderius, a Lombard duke whom Aistulf had sent into Tuscia.
+        source: liber-pontificalis
+        at: Tunc Desiderius quidam dux Langobardorum, qui ab eodem nequissimo Aistulfo Tusciae in partes erat directus
+roles:
+  - role: ruler
+    note: King of the Lombards from 756 or 757.
+    date:
+      value: 756..757
+      mode: window
+      calendar: julian
+      as_written: eandem, quam ambiebat, adsumeret regalem dignitatem
+    cite:
+      - id: desiderius-role
+        says: The life says he took the royal dignity he sought, without bloodshed, through the pope's help.
+        source: liber-pontificalis
+        at: ut sine ulla animarum periclitatione antefatus Desiderius … eandem, quam ambiebat, adsumeret regalem dignitatem

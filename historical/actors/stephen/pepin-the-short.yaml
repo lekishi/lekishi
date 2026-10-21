@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Pepin, king of the Franks from 751 to 768. He met Stephen II at Ponthion in January 754, sent him
+  to winter at Saint-Denis, was anointed there with his two sons, and led the Frankish armies into
+  Italy against Aistulf in 754 and 756, handing Ravenna and the exarchate to St Peter.
+types: [person]
+names:
+  - form: Pippinus
+    lang: la
+    script: Latn
+    cite:
+      - id: pepin-name
+        says: The annals call him Pippinus rex and record his anointing by Stephen with his two sons.
+        source: annales-regni-francorum
+        at: "s.a. 754: Supradictus apostolicus Stephanus confirmavit Pippinum unctione sancta in regem"
+  - form: Pepin the Short
+    lang: en
+    script: Latn
+    role: alternate
+    note: A later byname, used for search; the sources call him only Pippinus rex.
+    claim: pepin-name
+roles:
+  - role: ruler
+    note: King of the Franks; the chapter documents him from 753 to 756.
+    date:
+      value: 753..756
+      mode: duration
+      calendar: julian
+      as_written: Pippinus rex (s.a. 753–756)
+    cite:
+      - id: pepin-role
+        says: The annals name him king in their entries from his Saxon campaign of 753 to the second
+          Italian campaign of 756.
+        source: annales-regni-francorum
+        at: "s.a. 753: Pippinus rex in Saxonia iter fecit; s.a. 756: iterum iter peragens in Italiam Papiam obsedit"

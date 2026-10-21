@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: Tassilo, duke of the Bavarians and Pepin's nephew, who went with him on the second Italian campaign of 756.
+types: [person]
+names:
+  - form: Tassilo
+    lang: la
+    script: Latn
+    cite:
+      - id: tassilo-name
+        says: The continuations of Fredegar have King Pepin come to Pavia again with his nephew Tassilo, duke of the Bavarians.
+        source: fredegar-continuations
+        at: CXXI
+        quote: Rex Pippinus cum nepote suo Tassilone, Bajoariorum duce, partibus Italiae usque ad Ticinum iterum accessit
+  - form: Tassilo III
+    lang: en
+    script: Latn
+    role: alternate
+    note: The modern numbering.
+    claim: tassilo-name
+roles:
+  - role: ruler
+    note: Duke of the Bavarians.
+    date:
+      value: "756"
+      calendar: julian
+      as_written: Bajoariorum duce
+    cite:
+      - id: tassilo-iii-role
+        says: The continuations of Fredegar have King Pepin come to Pavia again with his nephew Tassilo, duke of the Bavarians.
+        source: fredegar-continuations
+        at: CXXI
+        quote: Rex Pippinus cum nepote suo Tassilone, Bajoariorum duce, partibus Italiae usque ad Ticinum iterum accessit

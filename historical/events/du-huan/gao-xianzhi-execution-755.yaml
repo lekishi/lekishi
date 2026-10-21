@@ -1,19 +1,20 @@
 # yaml-language-server: $schema=../../schema/event.schema.json
 summary:
-  "On the 癸卯 day of the twelfth month of 天寶十四載 (755), on the report of the army supervisor 邊令誠
-  that he had abandoned 陝 and cut the soldiers' rations, 高仙芝 is beheaded at 潼關 with 封常清. He
-  denies the theft; the soldiers cry out that he is wronged."
+  "On the 丙午 day of the twelfth month of 天寶十四載 (755), 高仙芝 is beheaded at 潼關 with 封常清. On
+  the 癸卯 day, angered by the army supervisor 邊令誠's report that he had abandoned 陝 and cut the
+  soldiers' rations, the emperor had sent 邊令誠 back with the order. 高仙芝 denies the theft; the
+  soldiers cry out that he is wronged."
 types: [occurrence]
 date:
-  value: 755-12-18
+  value: 755-12-21
   calendar: chinese_lunisolar
-  as_written: 天寶十四載十二月癸卯（十二月丙戌朔）
+  as_written: 天寶十四載十二月丙午（十二月丙戌朔）
   cite:
     - id: gao-xianzhi-execution-time
-      says: The mirror records the emperor, angered by 邊令誠's report, sending him on the 癸卯 day to execute 高仙芝 and 封常清 in the camp.
-      source: zizhi-tongjian-tang
-      at: 卷二一七 唐紀三十三 天寶十四載十二月癸卯（遣令誠繼敕即軍中斬仙芝及常清）
-      quote: 上大怒，癸卯，遣令誠繼敕即軍中斬仙芝及常清。
+      says: The annals date the beheading of 封常清 and 高仙芝 at 潼關 to the 丙午 day of a twelfth month whose first day is 丙戌.
+      source: jiu-tangshu-tang-west
+      at: 卷九 玄宗紀下 天寶十四載十二月丙午（斬封常清、高仙芝於潼關）
+      quote: 丙午，斬封常清、高仙芝於潼關
 places:
   - place: tongguan
     role: site
@@ -33,12 +34,18 @@ participants:
     note: Carried out the order.
 cites:
   summary:
+    - id: gao-xianzhi-execution-order
+      says: The mirror records the emperor, angered by 邊令誠's report, sending him on the 癸卯 day to execute 高仙芝 and 封常清 in the camp.
+      source: zizhi-tongjian-tang
+      at: 卷二一七 唐紀三十三 天寶十四載十二月癸卯（遣令誠繼敕即軍中斬仙芝及常清）
+      quote: 上大怒，癸卯，遣令誠繼敕即軍中斬仙芝及常清。
     - id: gao-xianzhi-execution-words
       says: The mirror gives 高仙芝's last words, denying the theft of rations, and the soldiers' outcry.
+      role: supporting
       source: zizhi-tongjian-tang
       at: 卷二一七 唐紀三十三 天寶十四載十二月（仙芝曰：我遇敵而退）
       quote: 我遇敵而退，死則宜矣。今上戴天，下履地，謂我盜減糧賜則誣也。
 notes:
-  "The day is the eighteenth of the month, counted from the month's first day, 丙戌, which the mirror
-  gives. The notice dates the order; the execution followed when 邊令誠 reached 潼關, and the chapter
-  does not separate the two days."
+  "The day is the twenty-first of the month, counted from its first day, 丙戌, which the annals give
+  (十二月丙戌朔). The mirror's 癸卯, the eighteenth, is the day the order was sent from the court; the
+  execution followed when 邊令誠 reached 潼關. The two dates are two acts, not a dispute."

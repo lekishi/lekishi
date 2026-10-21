@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: 陳睦, the Han 都護 of the Western Regions whom 焉耆 and 龜茲 attacked and killed after the death of 明帝 in 75 CE.
+types: [person]
+names:
+  - form: 陳睦
+    lang: lzh
+    script: Hani
+    roman: Chen Mu
+    scheme: pinyin
+    cite:
+      - id: chen-mu-name
+        says: The biography records 焉耆 attacking and killing the 都護 陳睦 during the mourning for the emperor in 永平十八年.
+        source: hou-hanshu
+        at: 卷四十七 班梁列傳 班超 永平十八年
+        quote: 十八年，帝崩。焉耆以中國大喪，遂攻沒都護陳睦。
+roles:
+  - role: official
+    note: 西域都護 until his death.
+    cite:
+      - id: chen-mu-role
+        says: The 焉耆 entry records 焉耆 and 龜茲 killing the 都護 陳睦 and the deputy 郭恂 at the end of 永平.
+        source: hou-hanshu
+        at: 卷八十八 西域傳 焉耆國
+        quote: 永平末，焉耆與龜茲共攻沒都護陳睦、副校尉郭恂，殺吏士二千餘人。

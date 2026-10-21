@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  甘英, a clerk (掾) on 班超's staff whom 班超 sent toward 大秦 in 97 CE. He reached 條支 on the shore of a
+  great sea and, told by sailors at the western edge of 安息 that the crossing could take two years,
+  turned back.
+types: [person]
+names:
+  - form: 甘英
+    lang: lzh
+    script: Hani
+    roman: Gan Ying
+    scheme: pinyin
+    cite:
+      - id: gan-ying-name
+        says: The 西域傳 records that in 永元九年 班超 sent his clerk 甘英 to the shore of the western sea and back.
+        source: hou-hanshu
+        at: 卷八十八 西域傳 序（班超遣掾甘英窮臨西海而還）
+        quote: 九年，班超遣掾甘英窮臨西海而還。
+roles:
+  - role: envoy
+    date:
+      value: 97
+      mode: window
+      calendar: chinese_lunisolar
+      as_written: 和帝永元九年
+    cite:
+      - id: gan-ying-envoy
+        says: The 安息 entry records that in 永元九年 the 都護 班超 sent 甘英 as envoy to 大秦.
+        source: hou-hanshu
+        at: 卷八十八 西域傳 安息國（都護班超遣甘英使大秦）
+        quote: 和帝永元九年，都護班超遣甘英使大秦，抵條支。

@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 疏勒, the kingdom at the western end of the northern road where 班超 set up 忠 as king and held 盤橐城 for years. The label anchor sits at the modern 喀什市, the usual identification; it asserts no site of 盤橐城.
+types: [region]
+names:
+  - form: 疏勒
+    lang: lzh
+    script: Hani
+    roman: Shule
+    scheme: pinyin
+    cite:
+      - id: shule-name
+        says: The biography records 班超 holding 盤橐城 in 疏勒 with 忠 for more than a year.
+        source: hou-hanshu
+        at: 卷四十七 班梁列傳 班超（超守盤橐城）
+        quote: 超守盤橐城，與忠爲首尾，士吏單少，拒守歲餘。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [75.9833, 39.45]
+    notes: Label anchor at the modern 喀什市 in the Kashgar oasis; the anchor asserts no site of 盤橐城.
+    cite:
+      - id: shule-anchor
+        says:
+          The label anchor is placed at the modern city's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q170521 (P625), revision 2550839165
+external_ids:
+  - system: wikidata
+    id: Q170521
+    url: https://www.wikidata.org/wiki/Q170521
+    license: CC0-1.0
+    note: The item whose coordinate places the point.

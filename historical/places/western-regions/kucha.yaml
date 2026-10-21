@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 龜茲, the strongest kingdom of the northern road, a 匈奴 ally until it submitted in 91 CE; 班超 then lived as 都護 at its 它乾城. The label anchor sits at the modern 庫車市, the usual identification; it asserts no site of 它乾城.
+types: [region]
+names:
+  - form: 龜茲
+    lang: lzh
+    script: Hani
+    roman: Qiuci
+    scheme: pinyin
+    cite:
+      - id: qiuci-name
+        says: The biography records that 班超 lived at 龜茲's 它乾城 and 徐幹 was stationed at 疏勒.
+        source: hou-hanshu
+        at: 卷四十七 班梁列傳 班超（超居龜茲它乾城）
+        quote: 超居龜茲它乾城，徐幹屯疏勒。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [82.9, 41.65]
+    notes: Label anchor at the modern 庫車市 in the Kucha oasis; the anchor asserts no site of 它乾城.
+    cite:
+      - id: qiuci-anchor
+        says:
+          The label anchor is placed at the modern city's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q1328546 (P625), revision 2523055382
+external_ids:
+  - system: wikidata
+    id: Q1328546
+    url: https://www.wikidata.org/wiki/Q1328546
+    license: CC0-1.0
+    note: The item whose coordinate places the point.

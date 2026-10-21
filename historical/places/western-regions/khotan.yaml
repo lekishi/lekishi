@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 于窴, the oasis kingdom of the southern road whose king 廣德 submitted to 班超 in 73 CE after 班超 killed his shaman. The label anchor sits at the modern 和田市; it asserts no site of the royal town 西城.
+types: [region]
+names:
+  - form: 于窴
+    lang: lzh
+    script: Hani
+    roman: Yutian
+    scheme: pinyin
+    cite:
+      - id: yutian-name
+        says: The biography records 班超 going west to 于窴 first and 廣德 receiving him coolly.
+        source: hou-hanshu
+        at: 卷四十七 班梁列傳 班超（超旣西，先至于窴）
+        quote: 超旣西，先至于窴。廣德禮意甚踈。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [79.9327, 37.1012]
+    notes: Label anchor at the modern 和田市 in the Khotan oasis; the anchor asserts no site of the royal town.
+    cite:
+      - id: yutian-anchor
+        says:
+          The label anchor is placed at the modern city's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q235389 (P625), revision 2549978239
+external_ids:
+  - system: wikidata
+    id: Q235389
+    url: https://www.wikidata.org/wiki/Q235389
+    license: CC0-1.0
+    note: The item whose coordinate places the point.

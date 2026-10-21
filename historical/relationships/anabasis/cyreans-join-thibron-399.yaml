@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  The remains of the Greek army taken into Thibron's Spartan forces in 399 BCE for the war against
+  Tissaphernes and Pharnabazus.
+types: [membership]
+from: cyreans
+to: sparta-state
+directionality: directed
+date:
+  value: 399 BCE
+  mode: window
+  calendar: julian
+  as_written: Thibron arrived and received the troops
+  cite:
+    - id: cyreans-join-thibron-399-time
+      says: Grote ends the expedition and retreat about June 399 BCE.
+      source: grote-history-of-greece
+      at: vol. IX, ch. LXXII
+      quote: occupying the two years intervening between about April 401 B.C. and June 399 B.C.
+      basis: interpretation
+      attributed_to: George Grote
+cite:
+  - id: cyreans-join-thibron-399-basis
+    says: Xenophon records Thibron incorporating the troops into his forces.
+    source: xenophon-anabasis
+    at: VII.8
+    quote:
+      Meanwhile Thibron arrived and received the troops which he incorporated with the rest of his
+      Hellenic forces

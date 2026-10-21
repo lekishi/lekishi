@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "The Greek army's paid service for the Thracian prince Seuthes in the winter of 400–399 BCE:
+  a daric a month for each soldier, which was paid only in part."
+types: [other]
+from: cyreans
+to: seuthes
+directionality: directed
+date:
+  value: 400 BCE..399 BCE
+  mode: window
+  calendar: julian
+  as_written: a daric a month as pay
+  cite:
+    - id: cyreans-serve-seuthes-400-time
+      says: Grote reads Xenophon's 'mid-winter' in Seuthes's service as probably December 400 BCE.
+      source: grote-history-of-greece
+      at: vol. IX, ch. LXXI, note 271
+      quote: Probably the month of December.
+      basis: interpretation
+      attributed_to: George Grote
+notes:
+  Typed other because the relationship vocabulary has no type for mercenary service or employment;
+  the chapter's feasibility note proposes one.
+cite:
+  - id: cyreans-serve-seuthes-400-basis
+    says: Xenophon records the pay promised to the soldiers, officers and generals.
+    source: xenophon-anabasis
+    at: VII.6
+    quote:
+      He could guarantee that each soldier should receive a daric a month as pay, the officers double
+      pay, and the generals quadruple.

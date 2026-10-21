@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Cyrus the Younger's war against his brother Artaxerxes II for the Persian throne, from his secret
+  preparations to his death in battle in 401 BCE. The relationship asserts no cause.
+types: [conflict]
+from: cyrus-the-younger
+to: artaxerxes-ii
+directionality: directed
+causality: not_asserted
+date:
+  value: 401 BCE
+  mode: window
+  calendar: julian
+  as_written: he might become king in his stead
+  cite:
+    - id: cyrus-against-artaxerxes-401-time
+      says:
+        Grote dates Cyrus's march from Sardis to about March or April 401 BCE and the battle in which
+        he died to about September or October of the same year.
+      basis: interpretation
+      attributed_to: George Grote
+      sources:
+        - source: grote-history-of-greece
+          at: vol. IX, ch. LXIX
+          quote: With such means Cyrus set forth, (March or April, 401 B.C.), from Sardis.
+        - source: grote-history-of-greece
+          at: vol. IX, ch. LXIX
+          quote:
+            It was about six months afterwards, in the month of September or October of the same year,
+            that the battle of Kunaxa was fought
+notes:
+  Xenophon dates Cyrus's design to the start of his brother's reign; the relationship is dated to
+  the open war of 401 BCE only.
+cite:
+  - id: cyrus-against-artaxerxes-401-basis
+    says: Xenophon records Cyrus resolving to become king in his brother's place.
+    source: xenophon-anabasis
+    at: I.1
+    quote:
+      fell to considering, not only how he might avoid ever again being in his brother's power, but
+      how, if possible, he might become king in his stead.

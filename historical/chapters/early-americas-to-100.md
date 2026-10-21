@@ -21,10 +21,14 @@ The chapter has one story, in chronological order by the start of each event's
 span. The order is not a claim that one event led to another. The only link
 between events is a `proposed_influence` relationship from San Lorenzo to the
 formal ceremonial complexes, which Inomata and colleagues (2021) propose. It is
-marked `not_asserted`.
+marked `not_asserted`. The record exists, but it is not a story step: the
+contract allows a relationship between events, and the atlas can so far draw
+only relationships between actors and places.
 
-The chapter's `window` is 2700 BCE to 100 CE, the stretch with the most events.
-The story's `span` reaches back to 21051 BCE so the earliest sites stay in it.
+The chapter's `window` runs from 21051 BCE to 100 CE, so the atlas opens on every
+event before 100 CE. The atlas fails a draft whose story has an event wholly
+outside the window unless that step's caption starts "Coda — ", and the earliest
+sites are a prelude, not a coda. The densest stretch is 2700 BCE to 100 CE.
 
 Not covered: La Venta, Izapa, Cuicuilco, Paracas, Moche, Tiwanaku, the wider
 Archaic of South America, and every site after 100 CE.

@@ -45,5 +45,7 @@ cite:
 notes: >-
   Test case for a journey that outlives its leader: after the death at 沙丘 the party is the
   cortege, and the travellers stay as listed. Two stops sit at 咸陽 (departure and return), so the
-  map draws one vertex there. The stops between 雲夢 and 沙丘 share one window, so v0 orders only the
-  departure, the death and the return; the rest rests on the journey's cite.
+  map draws one vertex there. v0 compares years only, so it orders the departure (211 BCE) before
+  the death and the return (210 BCE) and nothing else: the stops between 雲夢 and 沙丘 have
+  overlapping windows across both years, and the death and the return share 210. Their order, the
+  death before the return included, rests on the journey's cite.

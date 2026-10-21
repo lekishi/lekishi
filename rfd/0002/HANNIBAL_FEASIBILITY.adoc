@@ -97,6 +97,12 @@ weakness is geography, below.
 . Two contract rules the authoring format does not mention, found by the
   publication test: a record-level `cite` may have only one `main` claim, and a
   `dispute` needs at least one alternative or conflicting claim.
+. *A coda is a caption convention.* A step whose event falls wholly outside
+  the manifest `window` must have a caption starting "Coda — ", and only the
+  draft-serving preview build checks it (`pnpm test` and a production build do
+  not). Saguntum (219 BCE) is a prelude, not a coda, so the window opens in
+  219 BCE; a `prelude` label, or a coda flag on the step rather than in its
+  caption, would say this better.
 
 == Proposed journeys
 

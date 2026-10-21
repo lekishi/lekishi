@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In the course of the campaign Sennacherib besieges, conquers and plunders Beth-Dagon, Joppa,
+  Banaibarka and Asuru, cities of Sidka that had not speedily bowed in submission.
+types: [campaign]
+part_of: [sennacherib-third-campaign-701]
+date:
+  value: 701 BCE
+  mode: window
+  calendar: regnal
+  as_written: ina šalši girriya (in my third campaign)
+  cite:
+    - says: The prism numbers the campaign as Sennacherib's third and gives no year.
+      source: luckenbill-annals-sennacherib
+      at: p. 29, Oriental Institute prism col. II 37
+      quote: In my third campaign I went against the Hittite-land.
+    - says: Luckenbill dates the third campaign, and the siege of Jerusalem in it, to 701 BCE.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 12 (introduction)
+      quote: According to the Assyrian account this siege, conducted in 701, led to the submission of Hezekiah
+places:
+  - place: beth-dagon
+    role: site
+  - place: banai-barqa
+    role: site
+  - place: azuru
+    role: site
+participants:
+  - actor: sennacherib
+    role: leader
+cite:
+  - says: The prism records the siege, conquest and plunder of four cities of Sidka.
+    source: luckenbill-annals-sennacherib
+    at: p. 31, Oriental Institute prism col. II 68–72
+    quote:
+      Beth-Dagon, Joppa, Banaibarka, Asuru, cities of Sidka, who had not speedily bowed in submission
+      at my feet, I besieged, I conquered, I carried off their spoil.
+notes:
+  "Joppa is not yet linked: its place record is being added with the Egyptian chapters and will join
+  this event when it exists."

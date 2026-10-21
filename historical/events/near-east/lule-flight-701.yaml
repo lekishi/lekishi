@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Lulê, king of Sidon, overcome by the terror of Sennacherib's sovereignty, flees far off into
+  the midst of the sea, where the prism says he died.
+types: [occurrence]
+part_of: [sennacherib-third-campaign-701]
+date:
+  value: 701 BCE
+  mode: window
+  calendar: regnal
+  as_written: ina šalši girriya (in my third campaign)
+  cite:
+    - says: The prism numbers the campaign as Sennacherib's third and gives no year.
+      source: luckenbill-annals-sennacherib
+      at: p. 29, Oriental Institute prism col. II 37
+      quote: In my third campaign I went against the Hittite-land.
+    - says: Luckenbill dates the third campaign, and the siege of Jerusalem in it, to 701 BCE.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 12 (introduction)
+      quote: According to the Assyrian account this siege, conducted in 701, led to the submission of Hezekiah
+places:
+  - place: sidon
+    role: start
+    note:
+      The city Lulê ruled and fled from; the prism names no harbour and no destination beyond "the midst
+      of the sea".
+participants:
+  - actor: lule-of-sidon
+    role: subject
+cite:
+  - says: The prism records that Lulê, king of Sidon, fled far off into the midst of the sea and died there.
+    source: luckenbill-annals-sennacherib
+    at: p. 29, Oriental Institute prism col. II 38–40
+    quote:
+      Lulê, king of Sidon,—the terrifying splendor (lit. terrors of splendors) of my sovereignty overcame
+      him and far off into the midst of the sea he fled. (There) he died.

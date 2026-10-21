@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "Assyria's war on Judah in Sennacherib's third campaign: the taking of Hezekiah's walled cities,
+  the shutting up of Jerusalem and the diminishing of Judah's land. The relationship states no span of
+  continuous fighting and draws no route."
+types: [conflict]
+from: neo-assyrian-empire
+to: kingdom-of-judah
+date:
+  value: 701 BCE
+  mode: window
+  calendar: regnal
+  as_written: ina šalši girriya (in my third campaign)
+  cite:
+    - says: The prism numbers the campaign as Sennacherib's third and gives no year.
+      source: luckenbill-annals-sennacherib
+      at: p. 29, Oriental Institute prism col. II 37
+      quote: In my third campaign I went against the Hittite-land.
+    - says: Luckenbill dates the third campaign, and the siege of Jerusalem in it, to 701 BCE.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 12 (introduction)
+      quote: According to the Assyrian account this siege, conducted in 701, led to the submission of Hezekiah
+cite:
+  - says: The prism records the war on Hezekiah's cities.
+    source: luckenbill-annals-sennacherib
+    at: p. 32, Oriental Institute prism col. III 18–19
+    quote: As for Hezekiah, the Jew, who did not submit to my yoke, 46 of his strong, walled cities,
+  - says: The books of Kings record the same invasion.
+    role: supporting
+    source: bible-kjv
+    at: 2 Kings 18:13
+    quote: did Sennacherib king of Assyria come up against all the fenced cities of Judah, and took them.

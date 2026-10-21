@@ -1,0 +1,69 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The kings of Amurru, Menachem of Shamsimuruna, Tuba'lu of Sidon, Abdi-liti of Arvad, Uru-milki
+  of Byblos, Mitinti of Ashdod, Budu-ilu of Beth-Ammon, Kammusu-nadbi of Moab and Malik-rammu of Edom,
+  bring Sennacherib numerous presents and heavy tribute and kiss his feet.
+types: [exchange]
+part_of: [sennacherib-third-campaign-701]
+date:
+  value: 701 BCE
+  mode: window
+  calendar: regnal
+  as_written: ina šalši girriya (in my third campaign)
+  cite:
+    - says: The prism numbers the campaign as Sennacherib's third and gives no year.
+      source: luckenbill-annals-sennacherib
+      at: p. 29, Oriental Institute prism col. II 37
+      quote: In my third campaign I went against the Hittite-land.
+    - says: Luckenbill dates the third campaign, and the siege of Jerusalem in it, to 701 BCE.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 12 (introduction)
+      quote: According to the Assyrian account this siege, conducted in 701, led to the submission of Hezekiah
+places:
+  - place: arvad
+    role: context
+    note: Abdi-liti's city; the prism does not say where the tribute was brought.
+  - place: byblos
+    role: context
+    note: Uru-milki's city.
+  - place: ashdod
+    role: context
+    note: Mitinti's city.
+  - place: sidon
+    role: context
+    note: Tuba'lu's city.
+participants:
+  - actor: sennacherib
+    role: host
+    note: The tribute was brought before him.
+  - actor: menahem-of-samsimuruna
+    role: participant
+  - actor: tubalu-of-sidon
+    role: participant
+  - actor: abdi-liti-of-arvad
+    role: participant
+  - actor: uru-milki-of-byblos
+    role: participant
+  - actor: mitinti-of-ashdod
+    role: participant
+  - actor: budu-ilu-of-beth-ammon
+    role: participant
+  - actor: kammusu-nadbi-of-moab
+    role: participant
+  - actor: malik-rammu-of-edom
+    role: participant
+cite:
+  - says:
+      The prism lists eight kings of Amurru who brought numerous presents as heavy tribute and kissed
+      the king's feet.
+    source: luckenbill-annals-sennacherib
+    at: p. 30, Oriental Institute prism col. II 50–60
+    quote:
+      kings of Amurru, all of them, numerous presents, as their heavy tribute, they brought before
+      me for the fourth time, and kissed my feet.
+notes:
+  The prism names the kings by their cities and lands and does not say where the tribute was brought,
+  so the event has no site; the kings' cities that are placed are context only.

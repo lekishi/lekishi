@@ -1,0 +1,67 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The king of Assyria hears that Tirhakah, king of Ethiopia, has come out to fight against him,
+  and sends messengers to Hezekiah again.
+types: [occurrence]
+part_of: [sennacherib-third-campaign-701]
+date:
+  value: 701 BCE
+  mode: window
+  calendar: unknown
+  as_written: not dated
+  cite:
+    - says: The prism numbers the campaign as Sennacherib's third and gives no year.
+      source: luckenbill-annals-sennacherib
+      at: p. 29, Oriental Institute prism col. II 37
+      quote: In my third campaign I went against the Hittite-land.
+    - says: Luckenbill dates the third campaign, and the siege of Jerusalem in it, to 701 BCE.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 12 (introduction)
+      quote: According to the Assyrian account this siege, conducted in 701, led to the submission of Hezekiah
+participants:
+  - actor: tirhakah
+    role: leader
+  - actor: sennacherib
+    role: subject
+cite:
+  - says: The books of Kings record the report of Tirhakah's advance and a second embassy to Hezekiah.
+    source: bible-kjv
+    at: 2 Kings 19:9
+    quote:
+      "And when he heard say of Tirhakah king of Ethiopia, Behold, he is come out to fight against
+      thee: he sent messengers again unto Hezekiah"
+dispute:
+  status: disputed
+  summary:
+    The passage calls Tirhakah king of Ethiopia in 701 BCE. Those who hold that the books of Kings
+    join two campaigns read the mention of Tirhakah as belonging to a later one; Luckenbill argues he
+    may have commanded his uncle Shabaka's troops in 701 BCE, some thirteen years before he became king.
+    The chapter records the report as the passage gives it and decides neither.
+cites:
+  summary:
+    - says:
+        Luckenbill argues that Tirhakah may have commanded Shabaka's troops in 701 BCE, some thirteen
+        years before he became king.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: pp. 13–14 (introduction)
+      quote:
+        As for the mention of Tirhakah, he may well have been in command of his uncle Shabaka's troops
+        in 701, some thirteen years before he became king
+    - says:
+        Luckenbill reports that most scholars then held that the books of Kings telescope two western
+        campaigns, one in 701 BCE and a second in 687 or 686 BCE.
+      role: conflicting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 13 (introduction)
+      quote:
+        and a second campaign in 687 or 686, when he met a crushing defeat (naturally not mentioned
+        in the Assyrian annals). The Old Testament is supposed to have telescoped the two campaigns into
+        one.

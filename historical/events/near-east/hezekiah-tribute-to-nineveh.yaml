@@ -1,0 +1,66 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Overcome by the splendour of Sennacherib's majesty, Hezekiah has 30 talents of gold, 800 talents
+  of silver, gems, ivory couches and chairs, elephant hide, valuable woods and treasures, and his daughters,
+  his harem and his musicians brought after Sennacherib to Nineveh, and sends his messengers to pay tribute
+  and accept servitude.
+types: [exchange]
+part_of: [sennacherib-third-campaign-701]
+date:
+  value: 701 BCE
+  mode: window
+  calendar: regnal
+  as_written: ina šalši girriya (in my third campaign)
+  cite:
+    - says: The prism numbers the campaign as Sennacherib's third and gives no year.
+      source: luckenbill-annals-sennacherib
+      at: p. 29, Oriental Institute prism col. II 37
+      quote: In my third campaign I went against the Hittite-land.
+    - says: Luckenbill dates the third campaign, and the siege of Jerusalem in it, to 701 BCE.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 12 (introduction)
+      quote: According to the Assyrian account this siege, conducted in 701, led to the submission of Hezekiah
+places:
+  - place: jerusalem
+    role: start
+  - place: nineveh
+    role: end
+participants:
+  - actor: hezekiah
+    role: leader
+  - actor: sennacherib
+    role: host
+cite:
+  - says: The prism records 30 talents of gold and 800 talents of silver among Hezekiah's tribute.
+    source: luckenbill-annals-sennacherib
+    at: p. 34, Oriental Institute prism col. III 41–49
+    quote: In addition to the 30 talents of gold and 800 talents of silver,
+  - says:
+      The prism records Hezekiah's daughters, harem and musicians sent after the king to Nineveh, and
+      his messengers sent to pay tribute.
+    source: luckenbill-annals-sennacherib
+    at: p. 34, Oriental Institute prism col. III 46–49
+    quote:
+      as well as his daughters, his harem, his male and female musicians, (which) he had (them) bring
+      after me to Nineveh, my royal city. To pay tribute and to accept (lit. do) servitude, he dispatched
+      his messenger(s).
+    role: supporting
+dispute:
+  status: disputed
+  summary:
+    The prism has the tribute brought after Sennacherib to Nineveh, at thirty talents of gold and
+    eight hundred of silver; the books of Kings put three hundred talents of silver and thirty of gold,
+    laid on Hezekiah at Lachish. The chapter keeps both accounts, each on its own event, and does not
+    reconcile the figures.
+cites:
+  summary:
+    - says: The books of Kings give three hundred talents of silver and thirty talents of gold.
+      role: conflicting
+      source: bible-kjv
+      at: 2 Kings 18:14
+      quote:
+        And the king of Assyria appointed unto Hezekiah king of Judah three hundred talents of silver
+        and thirty talents of gold.

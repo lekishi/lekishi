@@ -1,0 +1,85 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Sennacherib leaves Judah and returns to Nineveh. The prism tells the campaign's end as tribute
+  sent after him; the books of Kings say the angel of the LORD smote 185,000 in the Assyrian camp in the
+  night; Herodotus tells of field mice eating the quivers and bows of "Sanacharib's" army at Pelusion.
+  The chapter records the withdrawal and the three accounts, not their causes.
+types: [journey]
+part_of: [sennacherib-third-campaign-701]
+date:
+  value: 701 BCE
+  mode: window
+  calendar: unknown
+  as_written: not dated in any account
+  cite:
+    - says: The prism numbers the campaign as Sennacherib's third and gives no year.
+      source: luckenbill-annals-sennacherib
+      at: p. 29, Oriental Institute prism col. II 37
+      quote: In my third campaign I went against the Hittite-land.
+    - says: Luckenbill dates the third campaign, and the siege of Jerusalem in it, to 701 BCE.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 12 (introduction)
+      quote: According to the Assyrian account this siege, conducted in 701, led to the submission of Hezekiah
+places:
+  - place: nineveh
+    role: end
+  - place: pelusium
+    role: context
+    note: Herodotus' setting for the Egyptian king's camp; the other accounts do not mention it.
+participants:
+  - actor: sennacherib
+    role: leader
+cite:
+  - says: The books of Kings record Sennacherib departing and returning to Nineveh.
+    source: bible-kjv
+    at: 2 Kings 19:36
+    quote: So Sennacherib king of Assyria departed, and went and returned, and dwelt at Nineveh.
+  - says: The prism has Hezekiah's tribute brought after the king to Nineveh, which implies his return there.
+    role: supporting
+    source: luckenbill-annals-sennacherib
+    at: p. 34, Oriental Institute prism col. III 47–48
+    quote: bring after me to Nineveh, my royal city.
+  - says:
+      The books of Kings attribute the end of the campaign to the angel of the LORD smiting 185,000
+      in the Assyrian camp, a religious account the chapter reports and does not present as an established
+      event.
+    role: conflicting
+    source: bible-kjv
+    at: 2 Kings 19:35
+    quote:
+      the angel of the LORD went out, and smote in the camp of the Assyrians an hundred fourscore and
+      five thousand
+  - says:
+      Herodotus, from Egyptian priests, tells that field mice swarmed by night on the army of "Sanacharib"
+      at Pelusion and ate their quivers, bows and shield handles, so that they fled.
+    role: conflicting
+    source: herodotus
+    at: II.141
+    quote:
+      there swarmed by night upon their enemies mice of the fields, and ate up their quivers and their
+      bows, and moreover the handles of their shields, so that on the next day they fled
+  - says:
+      Luckenbill holds that a drawn battle with the allies and the raising of the siege of Jerusalem
+      would be basis enough for the stories of a rout.
+    role: supporting
+    basis: interpretation
+    attributed_to: D. D. Luckenbill (1924)
+    source: luckenbill-annals-sennacherib
+    at: p. 13 (introduction)
+    quote:
+      A drawn battle with the allies and the raising of the siege of Jerusalem would be basis enough
+      for the story of the utter rout of Sennacherib as handed down by the Old Testament and Herodotus.
+dispute:
+  status: disputed
+  summary:
+    The prism claims Hezekiah's submission and is silent on any reverse; the books of Kings tell
+    of the angel of the LORD smiting the camp; Herodotus tells of mice at Pelusion against an army marching
+    on Egypt. Whether the biblical account joins two campaigns is debated. The chapter publishes the withdrawal
+    to Nineveh, which the prism and Kings share, and keeps the three accounts of its cause as conflicting
+    claims.
+notes:
+  "The religious and legendary accounts are kept as claims about what each text says. No route is
+  drawn: the accounts give no stage between Judah and Nineveh."

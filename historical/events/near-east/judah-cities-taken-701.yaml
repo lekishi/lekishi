@@ -1,0 +1,64 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Sennacherib besieges and takes 46 of Hezekiah's strong, walled cities and the small cities around
+  them, with battering-rams, siege-engines, mines and breaches, and counts 200,150 people and their animals
+  as spoil.
+types: [campaign]
+part_of: [sennacherib-third-campaign-701]
+date:
+  value: 701 BCE
+  mode: window
+  calendar: regnal
+  as_written: ina šalši girriya (in my third campaign)
+  cite:
+    - says: The prism numbers the campaign as Sennacherib's third and gives no year.
+      source: luckenbill-annals-sennacherib
+      at: p. 29, Oriental Institute prism col. II 37
+      quote: In my third campaign I went against the Hittite-land.
+    - says: Luckenbill dates the third campaign, and the siege of Jerusalem in it, to 701 BCE.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 12 (introduction)
+      quote: According to the Assyrian account this siege, conducted in 701, led to the submission of Hezekiah
+    - says:
+        The books of Kings date the taking of the fenced cities of Judah to the fourteenth year of king
+        Hezekiah.
+      role: supporting
+      source: bible-kjv
+      at: 2 Kings 18:13
+      quote:
+        Now in the fourteenth year of king Hezekiah did Sennacherib king of Assyria come up against
+        all the fenced cities of Judah, and took them.
+participants:
+  - actor: sennacherib
+    role: leader
+  - actor: hezekiah
+    role: subject
+  - actor: kingdom-of-judah
+    role: subject
+cite:
+  - says: The prism records the siege and capture of 46 of Hezekiah's strong, walled cities.
+    source: luckenbill-annals-sennacherib
+    at: p. 32, Oriental Institute prism col. III 18–19
+    quote:
+      As for Hezekiah, the Jew, who did not submit to my yoke, 46 of his strong, walled cities, as
+      well as the small cities in their neighborhood,
+  - says: The prism claims 200,150 people taken as spoil, with their animals.
+    source: luckenbill-annals-sennacherib
+    at: p. 33, Oriental Institute prism col. III 24–27
+    quote:
+      200,150 people, great and small, male and female, horses, mules, asses, camels, cattle and sheep,
+      without number, I brought away from them and counted as spoil.
+    role: supporting
+  - says:
+      The books of Kings record that Sennacherib came up against all the fenced cities of Judah and
+      took them.
+    role: supporting
+    source: bible-kjv
+    at: 2 Kings 18:13
+    quote: did Sennacherib king of Assyria come up against all the fenced cities of Judah, and took them.
+notes:
+  Neither account names the cities, so the event has no site. The figure of 200,150 is the prism's
+  claim and is reported as such. Lachish, the one city named elsewhere, is its own event.

@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The king of Assyria sends Tartan, Rabsaris and Rabshakeh from Lachish with a great host against
+  Jerusalem; they stand by the conduit of the upper pool and call on Hezekiah to surrender.
+types: [mission]
+part_of: [sennacherib-third-campaign-701]
+date:
+  value: 701 BCE
+  mode: window
+  calendar: unknown
+  as_written: not dated; the passage follows Hezekiah's message to Lachish
+  cite:
+    - says: The prism numbers the campaign as Sennacherib's third and gives no year.
+      source: luckenbill-annals-sennacherib
+      at: p. 29, Oriental Institute prism col. II 37
+      quote: In my third campaign I went against the Hittite-land.
+    - says: Luckenbill dates the third campaign, and the siege of Jerusalem in it, to 701 BCE.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 12 (introduction)
+      quote: According to the Assyrian account this siege, conducted in 701, led to the submission of Hezekiah
+places:
+  - place: lachish
+    role: start
+  - place: jerusalem
+    role: end
+    note: The passage places them by the conduit of the upper pool, which the record does not locate.
+participants:
+  - actor: sennacherib
+    role: other
+    note: He sent the officers; the passage names them by title.
+  - actor: hezekiah
+    role: subject
+cite:
+  - says:
+      The books of Kings record three Assyrian officers sent from Lachish to Jerusalem with a great
+      host.
+    source: bible-kjv
+    at: 2 Kings 18:17
+    quote:
+      And the king of Assyria sent Tartan and Rabsaris and Rabshakeh from Lachish to king Hezekiah
+      with a great host against Jerusalem.
+notes:
+  Tartan, Rabsaris and Rabshakeh are Assyrian titles, not personal names, so they are not actor records.
+  Only the books of Kings and Isaiah tell the parley; the prism does not.

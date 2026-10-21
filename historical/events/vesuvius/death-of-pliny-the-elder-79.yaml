@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "At Stabiae the elder Pliny bathes, dines and sleeps while the earth shakes and ash fills
+  the courtyard; at dawn, in a darkness blacker than night, the party goes down to the shore with
+  pillows tied on their heads, and there he collapses and dies. When daylight returns, on the third
+  day counting from the last he had seen, his body is found unharmed."
+types: [occurrence]
+date:
+  value: "79-08-25"
+  calendar: julian
+  as_written: "Iam dies alibi, illic nox omnibus noctibus nigrior densiorque"
+  cite:
+    - id: death-day
+      says: "Pliny tells that it was already day elsewhere, the morning after the voyage, but
+        blacker than any night at Stabiae, when they went down to the shore."
+      source: pliny-letters
+      at: "6.16.17"
+      quote: "Iam dies alibi, illic nox omnibus noctibus nigrior densiorque"
+    - id: death-of-pliny-the-elder-79-year
+      says: "Foster's translation of Dio dates the chapters on the eruption, by a sidenote, to A.D.
+        79."
+      basis: interpretation
+      attributed_to: H. B. Foster (1906)
+      role: supporting
+      source: cassius-dio
+      at: "LXVI.16 (A.D. 79), translator's sidenote"
+      quote: A.D. 79 (a.u. 832)
+places:
+  - place: stabiae
+    role: site
+participants:
+  - actor: pliny-the-elder
+    role: subject
+  - actor: pomponianus
+    role: participant
+cite:
+  - id: death-collapse
+    says: "Pliny tells that, leaning on two slaves, his uncle stood up and at once collapsed."
+    source: pliny-letters
+    at: "6.16.19"
+    quote: Innitens servolis duobus assurrexit et statim concidit
+  - id: death-body-found
+    says: "Pliny tells that when daylight returned, on the third day from the last he had seen, the
+      body was found whole and unharmed."
+    role: supporting
+    source: pliny-letters
+    at: "6.16.20"
+    quote: corpus inventum integrum illaesum opertumque ut fuerat indutus
+notes: "Pliny the Younger's account, written about twenty-five years later for Tacitus; he was at
+  Misenum, and tells his uncle's last hours from those who were with him. The day is counted from
+  the letter: the morning after the voyage. The year is an interpretation."

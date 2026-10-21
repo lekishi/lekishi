@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "At Misenum, after a night of earthquakes, the seventeen-year-old Pliny and his mother
+  leave the town at the first hour among a panicking crowd; the sea draws back, a black cloud comes
+  down over Capri and the cape, and they sit in darkness under falling ash until a weak sun
+  returns."
+types: [journey]
+date:
+  value: "79-08-25"
+  calendar: julian
+  as_written: illa vero nocte ... Iam hora diei prima
+  cite:
+    - id: flight-day
+      says: "Pliny tells that the earthquake grew strong that night, after his uncle had left, and
+        that by the first hour of the day the buildings were shaking."
+      source: pliny-letters
+      at: "6.20.6"
+      quote: "Iam hora diei prima, et adhuc dubius et quasi languidus dies."
+    - id: younger-pliny-flees-misenum-79-year
+      says: "Foster's translation of Dio dates the chapters on the eruption, by a sidenote, to A.D.
+        79."
+      basis: interpretation
+      attributed_to: H. B. Foster (1906)
+      role: supporting
+      source: cassius-dio
+      at: "LXVI.16 (A.D. 79), translator's sidenote"
+      quote: A.D. 79 (a.u. 832)
+places:
+  - place: misenum
+    role: site
+participants:
+  - actor: pliny-the-younger
+    role: subject
+cite:
+  - id: flight-night
+    says: "Pliny tells that the tremors, frequent in Campania, grew so strong that night that
+      everything seemed overturned."
+    source: pliny-letters
+    at: "6.20.3"
+    quote: "illa vero nocte ita invaluit, ut non moveri omnia sed verti crederentur."
+  - id: flight-cloud
+    says: "Pliny tells that the cloud came down to the earth and covered the sea, hiding Capri and
+      the cape of Misenum."
+    role: supporting
+    source: pliny-letters
+    at: "6.20.11"
+    quote: "Nec multo post illa nubes descendere in terras, operire maria; cinxerat Capreas et
+      absconderat, Miseni quod procurrit abstulerat."
+  - id: flight-age
+    says: Pliny tells that he was in his eighteenth year.
+    role: supporting
+    source: pliny-letters
+    at: "6.20.5"
+    quote: agebam enim duodevicensimum annum
+notes: "Pliny the Younger's own account, written about twenty-five years later. The day is counted
+  from the letters: the morning after his uncle sailed. The year is an interpretation."

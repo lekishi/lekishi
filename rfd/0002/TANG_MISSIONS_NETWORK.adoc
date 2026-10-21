@@ -1,12 +1,13 @@
 = The missions to Tang, 630–894, as a network: feasibility note
 :toc: macro
 
-Status:: Note, 2026-10-21. Records drafted; no manifest changed and nothing
-approved.
+Status:: Note, 2026-10-21; revised the same day after rebasing onto `main` with
+journeys as their own kind (PR #26). Records drafted; no manifest changed and
+nothing approved.
 Belongs to:: link:README.adoc[RFD 2] (sources and authoring); the story joins
 the Tang chapter under the owner's decision of 2026-10-21 that the chapter
-holds several stories (link:CHAPTER_STORIES.adoc[several stories in one
-chapter], proposed on its own branch).
+holds several stories (several stories in one chapter, proposed in
+https://github.com/lekishi/lekishi/pull/27[PR #27] and not yet on `main`).
 
 toc::[]
 
@@ -46,11 +47,12 @@ request, 平群廣成's return through 渤海.
 |Courts, harbours and landfalls no other record set owns. See <<places>>.
 |===
 
-Every claim carries a quote, and every quote was checked as a verbatim
-substring of the transcription it cites before the files were written. A
-scratch compile of all of it under a throwaway manifest, with the records it
-borrows from other branches (<<dependencies>>), passes the publication checks
-with no errors.
+Every claim carries a citation, and every quotation a claim gives was checked
+as a verbatim substring of the transcription it cites before the files were
+written; claims on Wikidata coordinates and modern identifications give a
+locator, not a quotation. A scratch compile of all of it under a throwaway
+manifest, with the records it borrows from other branches (<<dependencies>>),
+passes the publication checks with no errors (see <<scratch>>).
 
 == Sources and access
 
@@ -77,11 +79,14 @@ left for the next re-approval rather than changed here.
 == Conflicts kept
 
 Where two sources disagree, both are recorded and the event carries a visible
-dispute. Neither account is preferred.
+dispute. The record takes one account's value as its own, and says which in
+its notes; the other stays visible as a conflicting claim.
 
 * `mission-633-gao-biaoren-departure`: 日本書紀 records a ceremonious visit;
   both Tang histories record 高表仁 quarrelling over ritual and leaving
   without delivering his message.
+* `mission-654-dispatch`: 日本書紀 dates the embassy to the second month of
+  白雉五年; a variant it quotes (或本) gives the fifth.
 * `mission-659-iwashiki-wreck`: 伊吉博德 says the islanders of 爾加委
   destroyed the ship; 難波吉士男人 says it struck an island and capsized.
 * `mission-703-wu-zetian-banquet`: 舊唐書 dates 粟田眞人's embassy to
@@ -109,17 +114,41 @@ dispute. Neither account is preferred.
 * *Damaged characters.* The transcription writes ■ for missing characters.
   Quotes keep them; where a name is damaged (the Tang monk 道■ of 736) the
   record does not name the person.
+* *The months of 659.* 伊吉博德's account puts 潤十月一日 before 十月十五日, so
+  one month name is wrong and the account does not say which. The arrival at
+  洛陽 and the audience the next day are dated to a window from the tenth
+  month to the eleventh rather than to a day; v0 has no notation for an
+  intercalary month.
+* *Participants the source does not name.* 空海 and 最澄 sailed in 804 and
+  圓仁 in 838 by tradition or by their own writings, but the entries these
+  events cite do not name them, so they are not recorded as participants
+  there. 空海 is a participant where the Tang histories name him.
 * *Day precision in 801.* 日本後紀's 逸文 give 延暦廿年 with a day but no
   month for the appointment, so it is recorded at year precision.
 
 [[places]]
 == Places
 
-22 of the 24 new places carry a display anchor citing `wikidata` "Q… (P625),
-revision N", placed at the modern site, district or city the summary names.
-The anchors are for display only and assert no historical coordinate. Where
-the modern item covers only part of the old unit (筑紫 at 筑前, 松浦郡 at the
-modern city of 松浦) the note says so. Two stay unknown on purpose:
+22 of the 24 new places are approximate points with a cited modern
+identification, following the Tang places since PR #26: a heritage body's,
+city's, museum's or reference work's page says what the place is today, and
+the point is that item's Wikidata coordinate, pinned by revision. Each cite is
+`basis: interpretation` and names who identifies the place.
+
+* *Locality precision* for the palace sites identified by excavation:
+  藤原宮跡, 飛鳥宮跡 (岡本宮 and 後飛鳥岡本宮), the 錦織 site of 近江大津宮, and
+  平安宮.
+* *Region precision* for the islands (壹伎, 對馬, 隱岐, 耽羅, 値賀, 甑嶋), the
+  districts and provinces (天草郡, 出水郡, 松浦郡, 筑紫, 出羽國), the Tang
+  prefectures and counties (蘇州, 明州, 括州, 鹽城縣, and 赤岸 in 霞浦), and two
+  harder cases: 博多大津 at the 鴻臚館跡, the house where missions made ready,
+  whose page does not name the harbour; and 朝倉橘廣庭宮, whose site is
+  disputed, at the 朝倉 area.
+* CHGIS and its TGAZ gazetteer would identify every Tang unit, but the
+  link:../../docs/SOURCE_REGISTER.adoc[source register] does not allow them,
+  so the Tang units cite reference works and a news history instead.
+
+Two stay unknown on purpose:
 
 * `nikawe-island` (爾加委): no modern identification is sourced.
 * `kunlun` (崑崙國): a general name for the lands of the southern sea; which
@@ -141,6 +170,16 @@ Until those branches merge, these references dangle. The build does not
 notice, because only records a manifest reaches are resolved (see
 <<engine>>).
 
+[[scratch]]
+== Scratch compile
+
+On 2026-10-21, after the rebase onto `main` at 4a7d53a and the review fixes,
+every record was compiled under a throwaway manifest listing all 123 events
+and 16 relationships as steps, in a copy of the tree with the 13 borrowed
+records taken from those branches (PR #36, #27 and #32) and the sources they
+cite. `Publication.checkAll` reported no errors and no warnings. The manifest
+and the copy were not committed.
+
 == Draft story for the several-stories manifest
 
 Proposed key `tang-missions-630-894`, title "The missions to Tang, 630–894",
@@ -161,13 +200,18 @@ are written when the manifest change is drafted.
 * 834–839, the last embassy: `mission-834-appointment`, `mission-836-sekito`, `mission-836-posthumous-honours`, `mission-836-silla-notice`, `mission-836-first-attempt`, `mission-836-third-ship-wreck`, `mission-837-second-attempt`, `mission-838-takamura-refuses`, `mission-838-departure`, `mission-838-takamura-exile`, `mission-839-tang-tribute`, `mission-839-silla-ships`, `mission-839-matsura-return`, `mission-839-tang-letter`, `mission-839-hakata-last-ship`
 
 123 steps fit under the schema's 200. The 838 embassy meets the 圓仁 story at
-`mission-838-departure`, where 圓仁 is a participant; the diary's own events
+`mission-838-departure`, the court's record of the sailing; the chronicle does
+not name 圓仁, so he is not a participant there, and the diary's own events
 stay in that story.
 
-== Journey candidates for PR #26
+== Journey candidates
 
-The events are shaped as dated stops, so these can become journeys once the
-kind is decided:
+The owner decided on 2026-10-21 that journeys are their own record kind under
+contract v1 (link:AUTHORING_FORMAT.adoc[the authoring format record],
+"Decided: journeys are their own kind"). The journey record's shape is still
+proposed there, and nothing of it is built, so no journey record is authored
+here. The events are shaped as dated stops, so these can become journeys once
+the shape is agreed and built:
 
 * 659, 伊吉博德's ship: 難波 → 筑紫大津 → 越州 → 洛陽, with 石布's ship
   breaking off to 爾加委 and five survivors reaching 括州.
@@ -186,15 +230,19 @@ kind is decided:
   four drafts sharing ids across branches this is easy to hit. A tree-wide
   reference check, separate from compiling, would catch it.
 * *One main claim per field.* The publication checks allow one `main` claim
-  per pointer, so two claims that each support part of a field (one per
-  participant, say) must mark all but one `supporting`. Per-participant
-  citation would say this more exactly.
+  per pointer. This needs no engine change for participants: a `cite` on a
+  participant entry is its own claim on `/participants/<n>`, which is how
+  `mission-717-sekito` cites each student's obituary.
 * *Disputes are per event.* An event with a conflicting claim on one field is
-  marked disputed as a whole. That is right for these five events, but a
+  marked disputed as a whole. That is right for these six events, but a
   field-level dispute would let the reader show which part is contested.
-* *Court acts.* 28 events are court acts the entry gives no place for; each
-  is anchored at the court's seat with the same note. A place role
-  for this, or a chapter-level default, would remove the repetition.
-* *Unknown places in journeys.* Landfalls with no sourced identification
-  (爾加委, 崑崙) break a journey's line. PR #26 should
-  say how a journey shows a leg it cannot draw.
+* *Court acts.* 28 events are court acts the entry gives no place for. 27
+  name the court's seat with the `context` role, which asserts no site for
+  the act and is never a journey stop; the 630 dispatch names no place,
+  because the court moved to 岡本宮 only after it. The existing role is
+  enough; no new role or chapter default is needed.
+* *Unlocated places in journeys.* The proposed journey record (PR #26, not
+  yet built) draws no leg into or out of a stop at an `unknown` place or a
+  `display_anchor`, and still lists the stop as unlocated. 爾加委 and 崑崙
+  are such stops, and so is any place in <<places>> that keeps a display
+  anchor.

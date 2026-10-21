@@ -38,6 +38,6 @@ follow-ups are in
   Alexander of Rock Edict XIII.
 - **Legend is labelled.** Events from the Ceylon chronicles and the
   Aśokāvadāna say so and cite Smith's retelling.
-- **No route is drawn.** Moved pillars are placed where they stand today.
+- **No route is drawn.** Moved pillars are anchored, as a label only, where they stand today.
 - **Not covered:** inscriptions found after 1920, Chandragupta, the Kuṇāla and
   Tiṣyarakṣitā legends, and everything after Daśaratha's accession.

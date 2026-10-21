@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Comari, the cape and harbour at the southern tip of India, where men and women came to bathe
+  and live in celibacy because a goddess was said to have bathed there.
+types: [landform, religious_site]
+names:
+  - form: Comari
+    lang: en
+    script: Latn
+    cite:
+      - id: comari-name
+        says:
+          The Periplus names Comari, with its cape and harbour, where those who wish to consecrate themselves
+          come to bathe.
+        source: periplus-erythraean-sea
+        at: "58"
+        quote: there is another place called Comari at which are the Cape of Comari and a harbor
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [77.5513761, 8.0772932]
+    notes:
+      The gazetteer's representative point; an identification by the gazetteer, not a statement of
+      the Periplus.
+    cite:
+      - id: comari-location
+        says: Pleiades identifies the promontory with Kanyakumari (Cape Comorin) and gives this point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 50066 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "50066"
+    url: https://pleiades.stoa.org/places/50066
+    license: CC BY 3.0

@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Coptos on the Nile, where Pliny says goods from Alexandria came up the river in twelve days and
+  set out by camel across the desert to Berenice.
+types: [settlement, port]
+names:
+  - form: Coptos
+    lang: en
+    script: Latn
+    cite:
+      - id: coptos-name
+        says:
+          Pliny says the voyage from Juliopolis up the Nile to Coptos takes twelve days when the Etesian
+          winds blow.
+        source: pliny-natural-history
+        at: VI.26
+        quote:
+          The distance thence to Coptos, up the Nile, is three hundred and eight miles; the voyage is
+          performed, when the Etesian winds are blowing, in twelve days.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [32.8159103667, 25.9963989667]
+    notes:
+      The gazetteer's representative point; an identification by the gazetteer, not a statement of
+      the Periplus.
+    cite:
+      - id: coptos-location
+        says: Pleiades locates Coptos at modern Quft/Qift and gives this representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 786010 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "786010"
+    url: https://pleiades.stoa.org/places/786010
+    license: CC BY 3.0
+notes: A shared place for any chapter on Egypt's Nile and desert roads.

@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Saphar, the metropolis nine days beyond Saua where Charibael, king of the Homerites and Sabaites,
+  lived.
+types: [capital]
+names:
+  - form: Saphar
+    lang: en
+    script: Latn
+    cite:
+      - id: saphar-name
+        says: The Periplus says Saphar, the metropolis, is where Charibael lives.
+        source: periplus-erythraean-sea
+        at: "23"
+        quote: there is Saphar, the metropolis, in which lives Charibael
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [44.400794, 14.211704]
+    notes:
+      The gazetteer's representative point; an identification by the gazetteer, not a statement of
+      the Periplus.
+    cite:
+      - id: saphar-location
+        says:
+          Pleiades identifies Ẓafār in the southern highlands of Yemen, capital of the Ḥimyarite confederation,
+          and gives this point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 39423 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "39423"
+    url: https://pleiades.stoa.org/places/39423
+    license: CC BY 3.0

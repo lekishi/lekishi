@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Berenice, the Egyptian port on the Red Sea that the Periplus names second among the designated
+  ports and Pliny makes the point of embarkation for India.
+types: [port]
+names:
+  - form: Berenice
+    lang: en
+    script: Latn
+    cite:
+      - id: berenice-name
+        says:
+          The Periplus says Berenice lies eighteen hundred stadia beyond Mussel Harbor, and that both
+          harbours are at the boundary of Egypt.
+        source: periplus-erythraean-sea
+        at: "1"
+        quote:
+          To those sailing down from that place, on the right hand, after eighteen hundred stadia, there
+          is Berenice.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [35.47481885, 23.91062525]
+    notes:
+      The gazetteer's representative point; an identification by the gazetteer, not a statement of
+      the Periplus.
+    cite:
+      - id: berenice-location
+        says: Pleiades locates Berenice on the west coast of the Red Sea at this representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 785986 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "785986"
+    url: https://pleiades.stoa.org/places/785986
+    license: CC BY 3.0

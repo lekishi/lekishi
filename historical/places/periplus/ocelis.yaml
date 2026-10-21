@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  "Ocelis, the Arab village on the strait at the mouth of the Red Sea: not a market but an anchorage,
+  a watering-place and the first landing in the gulf; for Pliny, the best place to embark for India."
+types: [port]
+names:
+  - form: Ocelis
+    lang: en
+    script: Latn
+    cite:
+      - id: ocelis-name
+        says:
+          The Periplus calls Ocelis a village of Arabs on the strait, an anchorage and watering-place
+          rather than a market-town.
+        source: periplus-erythraean-sea
+        at: "25"
+        quote:
+          Directly on this strait by the shore there is a village of Arabs, subject to the same chief,
+          called Ocelis
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [43.4791157187, 12.7137760337]
+    notes:
+      The gazetteer's representative point; an identification by the gazetteer, not a statement of
+      the Periplus.
+    cite:
+      - id: ocelis-location
+        says: Pleiades identifies Okelis with Khor Ghurayrah on the strait and gives this point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 39279 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "39279"
+    url: https://pleiades.stoa.org/places/39279
+    license: CC BY 3.0

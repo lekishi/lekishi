@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Calliena (Kalyan), a lawful market-town under the elder Saraganus whose port was obstructed after
+  Sandares took it, so that Greek ships landing there might be sent to Barygaza under guard.
+types: [port]
+names:
+  - form: Calliena
+    lang: en
+    script: Latn
+    cite:
+      - id: calliena-name
+        says: The Periplus says Calliena became a lawful market-town in the time of the elder Saraganus.
+        source: periplus-erythraean-sea
+        at: "52"
+        quote: the city of Calliena, which in the time of the elder Saraganus became a lawful Market-town
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [73.139156, 19.272784]
+    notes:
+      The gazetteer's representative point; an identification by the gazetteer, not a statement of
+      the Periplus.
+    cite:
+      - id: calliena-location
+        says: Pleiades gives this point for Kalliena.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 50023 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "50023"
+    url: https://pleiades.stoa.org/places/50023
+    license: CC BY 3.0

@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Muza, the lawful market-town on the Arabian shore near the mouth of the Red Sea, crowded with
+  Arab ship-owners trading to Africa and Barygaza.
+types: [port]
+names:
+  - form: Muza
+    lang: en
+    script: Latn
+    cite:
+      - id: muza-name
+        says:
+          The Periplus calls Muza a market-town established by law, crowded with Arab ship-owners and
+          seafaring men.
+        source: periplus-erythraean-sea
+        at: "21"
+        quote: there is a place by the shore called Muza, a market-town established by law
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [43.421475, 13.261275]
+    notes:
+      The gazetteer's representative point; an identification by the gazetteer, not a statement of
+      the Periplus.
+    cite:
+      - id: muza-location
+        says: Pleiades gives this point for Mouza Emporion.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 39390 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "39390"
+    url: https://pleiades.stoa.org/places/39390
+    license: CC BY 3.0

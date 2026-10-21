@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Bacare, the village at the mouth of Nelcynda's river where ships anchored in the roadstead to
+  take on pepper, because the river was full of shoals.
+types: [port]
+names:
+  - form: Bacare
+    lang: en
+    script: Latn
+    cite:
+      - id: bacare-name
+        says:
+          The Periplus says ships drop down from Nelcynda to the village of Bacare at the river's mouth
+          to load.
+        source: periplus-erythraean-sea
+        at: "55"
+        quote: There is another place at the mouth of this river, the village of Bacare
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [76.36792, 9.35099]
+    notes:
+      The gazetteer's representative point; an identification by the gazetteer, not a statement of
+      the Periplus.
+    cite:
+      - id: bacare-location
+        says: Pleiades gives this point for Bakare.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 49890 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "49890"
+    url: https://pleiades.stoa.org/places/49890
+    license: CC BY 3.0

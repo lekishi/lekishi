@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Muziris, in the kingdom of Cerobothra on the Malabar coast, the port that abounds in ships from
+  Arabia and from the Greeks, and Pliny's nearest mart of India.
+types: [port]
+names:
+  - form: Muziris
+    lang: en
+    script: Latn
+    cite:
+      - id: muziris-name
+        says:
+          The Periplus says Muziris, of the kingdom of Cerobothra, abounds in ships sent there with cargoes
+          from Arabia and by the Greeks.
+        source: periplus-erythraean-sea
+        at: "54"
+        quote:
+          Muziris, of the same Kingdom, abounds in ships sent there with cargoes from Arabia, and by
+          the Greeks
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [76.213146, 10.153976]
+    notes:
+      The gazetteer's representative point; an identification by the gazetteer, not a statement of
+      the Periplus.
+    cite:
+      - id: muziris-location
+        says: Pleiades gives this point for Muziris.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 50146 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "50146"
+    url: https://pleiades.stoa.org/places/50146
+    license: CC BY 3.0

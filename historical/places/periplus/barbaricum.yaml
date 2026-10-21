@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Barbaricum, the market-town at the middle mouth of the Indus, where ships anchored while their
+  cargoes went up the river to the king at Minnagara.
+types: [port]
+names:
+  - form: Barbaricum
+    lang: en
+    script: Latn
+    cite:
+      - id: barbaricum-name
+        says:
+          The Periplus says the market-town Barbaricum lies at the middle mouth of the Sinthus, the only
+          navigable one.
+        source: periplus-erythraean-sea
+        at: "38"
+        quote: except the one in the middle; at which by the shore, is the market-town, Barbaricum
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [69.021536, 24.92407]
+    notes:
+      The gazetteer's representative point; an identification by the gazetteer, not a statement of
+      the Periplus.
+    cite:
+      - id: barbaricum-location
+        says: Pleiades places Barbarikon near modern Karachi and gives this point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 59734 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "59734"
+    url: https://pleiades.stoa.org/places/59734
+    license: CC BY 3.0

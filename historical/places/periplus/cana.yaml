@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Cana, the market-town of the Frankincense Country under King Eleazus, to which frankincense came
+  on rafts and by boat, trading on to Barygaza, Scythia, Ommana and Persia.
+types: [port]
+names:
+  - form: Cana
+    lang: en
+    script: Latn
+    cite:
+      - id: cana-name
+        says:
+          The Periplus says Cana is a market-town by the shore, of the Kingdom of Eleazus, the Frankincense
+          Country.
+        source: periplus-erythraean-sea
+        at: "27"
+        quote:
+          there is another market-town by the shore, Cana, of the Kingdom of Eleazus, the Frankincense
+          Country
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [48.2359537616, 13.992228265]
+    notes:
+      The gazetteer's representative point; an identification by the gazetteer, not a statement of
+      the Periplus.
+    cite:
+      - id: cana-location
+        says: Pleiades gives this point for Kane.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 39355 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "39355"
+    url: https://pleiades.stoa.org/places/39355
+    license: CC BY 3.0

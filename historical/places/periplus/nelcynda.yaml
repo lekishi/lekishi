@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Nelcynda, the river port of the Pandian kingdom some five hundred stadia beyond Muziris, its
+  cargoes loaded at Bacare at the river's mouth.
+types: [port]
+names:
+  - form: Nelcynda
+    lang: en
+    script: Latn
+    cite:
+      - id: nelcynda-name
+        says:
+          The Periplus says Nelcynda is about five hundred stadia from Muziris and of another kingdom,
+          the Pandian.
+        source: periplus-erythraean-sea
+        at: "54"
+        quote:
+          Nelcynda is distant from Muziris by river and sea about five hundred stadia, and is of another
+          Kingdom, the Pandian.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [76.558846, 9.272624]
+    notes:
+      The gazetteer's representative point; an identification by the gazetteer, not a statement of
+      the Periplus.
+    cite:
+      - id: nelcynda-location
+        says: Pleiades gives this point for Nelkynda, in the kingdom of the Pandyas.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 50165 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "50165"
+    url: https://pleiades.stoa.org/places/50165
+    license: CC BY 3.0

@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Tagara (Ter), the very great city ten days east of Paethana, from which common cloth and muslins
+  came down to Barygaza by wagon.
+types: [settlement]
+names:
+  - form: Tagara
+    lang: en
+    script: Latn
+    cite:
+      - id: tagara-name
+        says: The Periplus says that about ten days east of Paethana lies another very great city, Tagara.
+        source: periplus-erythraean-sea
+        at: "51"
+        quote: beyond which, about ten days' journey east, there is another very great city, Tagara
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [76.14594, 18.301382]
+    notes:
+      The gazetteer's representative point; an identification by the gazetteer, not a statement of
+      the Periplus.
+    cite:
+      - id: tagara-location
+        says: Pleiades gives this point for Tagara.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 50294 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "50294"
+    url: https://pleiades.stoa.org/places/50294
+    license: CC BY 3.0

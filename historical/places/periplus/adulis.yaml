@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Adulis, the lawful market-town at the head of a bay on the African shore of the Red Sea, the
+  outlet for the ivory brought down from Axum.
+types: [port, settlement]
+names:
+  - form: Adulis
+    lang: en
+    script: Latn
+    cite:
+      - id: adulis-name
+        says:
+          The Periplus calls Adulis a port established by law at the inner end of a bay, three days' journey
+          from Coloe.
+        source: periplus-erythraean-sea
+        at: "4"
+        quote:
+          there is Adulis, a port established by law, lying at the inner end of a bay that runs in toward
+          the south
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [39.6591296, 15.2616612]
+    notes:
+      The gazetteer's representative point; an identification by the gazetteer, not a statement of
+      the Periplus.
+    cite:
+      - id: adulis-location
+        says: Pleiades places Adulis near modern Zula in Eritrea at this representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 39271 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "39271"
+    url: https://pleiades.stoa.org/places/39271
+    license: CC BY 3.0

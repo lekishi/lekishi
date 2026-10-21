@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Paethana (Paithan), the market-town of Dachinabades twenty days south of Barygaza, from which
+  carnelian came down by wagon.
+types: [settlement]
+names:
+  - form: Paethana
+    lang: en
+    script: Latn
+    cite:
+      - id: paethana-name
+        says: The Periplus says Paethana lies about twenty days' journey south of Barygaza.
+        source: periplus-erythraean-sea
+        at: "51"
+        quote: Paethana, distant about twenty days' journey south from Barygaza
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [75.385416, 19.468043]
+    notes:
+      The gazetteer's representative point; an identification by the gazetteer, not a statement of
+      the Periplus.
+    cite:
+      - id: paethana-location
+        says: Pleiades gives this point for Paithana.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 50192 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "50192"
+    url: https://pleiades.stoa.org/places/50192
+    license: CC BY 3.0

@@ -35,9 +35,11 @@ does not change until the owner decides on this record.
   chapter, and that stands. The digest already covers everything a manifest
   reaches, so several stories only make the closure larger. The digest
   algorithm (`lekishi-chapter-digest/2`) does not change.
-* *Journeys.* They are their own kind, as proposed in PR #26. A story steps
-  through events and relationships, and a journey draws the legs between the
-  events. The two are independent.
+* *Journeys.* They are their own kind, decided by the owner on 2026-10-21
+  (link:AUTHORING_FORMAT.adoc[the authoring format record], "Decided: journeys
+  are their own kind"); the journey record's shape is still proposed there. A
+  story steps through events and relationships, and a journey draws the legs
+  between the events. The two are independent.
 
 == Proposed: the manifest
 
@@ -129,8 +131,14 @@ stories:
 == What it costs
 
 * Every new story makes the approved Tang chapter stale until the owner
-  approves again, and production keeps serving the last approved content until
-  then. That is the decided gate, applied to a larger chapter.
+  approves again. Under the owner's decision of 2026-10-21 (link:AUTHORING_FORMAT.adoc[the
+  authoring format record], "Decided: a missing approval never fails a
+  build"), the build does not fail, but production leaves the whole chapter
+  out, page, index and title, until then; it does not fall back to the last
+  approved version. Previews and signed-in members of the `lekishi`
+  organization (link:../0006/README.adoc[RFD 6]) can still open the changed
+  draft. Adding one story can therefore take the Tang chapter off the public
+  site until the owner approves the larger closure.
 * Three threads are adding stories to one manifest. The manifest change should
   land once, carrying all the stories that are ready, so the owner approves
   one diff rather than three.

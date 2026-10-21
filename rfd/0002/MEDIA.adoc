@@ -12,8 +12,11 @@ proposed a media kind since 2026-10-14. A media file names the file, the
 source that carries its licence, the records it `depicts`, and a depiction
 label. That proposal says images arrive with contract v1, together with the
 first chapter that shows one. The owner chose on 2026-10-21 to make journeys
-their own v1 kind (PR #26), so v1 is now being specified. This record proposes
-the media half of it.
+their own v1 kind (#26; link:AUTHORING_FORMAT.adoc[the authoring format
+record], "Decided: journeys are their own kind"), and v1 now arrives with the
+first published journey, with territories, media and per-claim credit joining
+it as further rules once they are agreed. This record proposes the media
+rules.
 
 Everything below is *proposed*. No image is added and no code is changed until
 the owner decides.
@@ -100,12 +103,24 @@ caption: >-
   `historical/media/files/`, at most 3000 px on the long side and normally
   well under 1 MB. Its `sha256` is in the record, so the approval digest
   covers the exact pixels. At the 20-image target this adds roughly 10–15 MB
-  of history.
+  of history. Masters are inputs, like the record files; nothing under
+  `historical/media/` is copied into the artifact.
 * *Derivatives at build time.* `pnpm build` derives the sizes the site serves
   (for example 480, 960 and 1600 px, in AVIF and JPEG) into a generated,
   ignored directory, the way the globe tiles and fonts are built today. 20
   images come to about 120 files, against the 20,000 limit. The build
   invariant fails on a record whose file or hash doesn't match.
+* *Only published chapters' images are public.* A production build derives
+  and credits only the media reached by a chapter it serves. Media that only
+  a draft or stale chapter reaches gets no derivative, no credit line and no
+  public URL, because a file name, an alt text or a credit can name what the
+  chapter withholds (link:../0006/README.adoc[RFD 6]). An image shared with a
+  served chapter stays public. Signed-in members opening a production draft
+  see its text without its draft-only images at first; serving them would
+  need authenticated asset delivery, which is a separate decision and must not
+  widen the worker's routes on its own. Previews built with drafts derive
+  every image. The build invariant gains a check that no draft-only media
+  file, derivative or credit is in a production artifact.
 * *Not chosen: fetching from Commons at build time.* It would keep the
   repository small, but it makes every build depend on a third-party service,
   and the images could change under an approval. RFD 2 and AGENTS.md rule out
@@ -121,7 +136,8 @@ caption: >-
 * Images never go on the globe as markers, and they never stand in for a
   place's position.
 * `/globe/ATTRIBUTION.txt` gains a sibling, `/media/ATTRIBUTION.txt`, with
-  every image's full credit. The build fails if an image is missing from it.
+  the full credit of every image the artifact serves, and only those. The
+  build fails if a served image is missing from it.
 
 == Contract v1
 
@@ -135,8 +151,9 @@ rules, so v1 gains vectors such as these:
 * a `later_depiction` cannot support a claim about its subject
 * a file whose hash differs from the record fails
 
-v1 ships with the journeys kind (PR #26) as one contract version. Neither kind
-changes v0, and the 187 vectors stay as they are.
+These rules join v1, which arrives with the first published journey; media
+does not gate journey publication, and journeys do not wait for media.
+Neither kind changes v0, and the 187 vectors stay as they are.
 
 == Candidates for the first set
 

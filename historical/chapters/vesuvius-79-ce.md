@@ -13,7 +13,8 @@ aftermath from Cassius Dio. It is the smallest chapter in this set, a test of
 how the atlas shows a few events over two days in one bay, with the
 day-level dispute visible.
 
-- 6 events, 5 places, 4 new actors (Titus is shared).
+- 6 events, 6 places (Rome only for Titus's relief), 4 new actors (Titus is
+  shared).
 - Story: the cloud seen from Misenum, the elder Pliny's voyage to Stabiae and
   his death, the younger Pliny's flight, the burial of Herculaneum and
   Pompeii, and Titus's relief for Campania.
@@ -28,9 +29,8 @@ day-level dispute visible.
 
 Every quotation was checked by script against the downloaded text on
 2026-10-21, and every Pliny quotation against the letter its locator names.
-The `cassius-dio` record is copied byte for byte from the Egypt and the Nile
-thread; its title names books LIV and LXIII, and the owning thread has been
-asked to widen it to the whole work.
+The `cassius-dio` record is taken byte for byte from the Egypt and the Nile
+thread, which widened it to the whole work, book LXVI included.
 
 ## Dates
 
@@ -39,7 +39,8 @@ before the Kalends of September at about the seventh hour, which is 24 August
 in the Julian calendar. He does not give the year. Dio gives no day, and
 Foster's sidenote puts the chapters on the eruption under A.D. 79, so the year
 is an interpretation attributed to Foster. The events of the next morning are
-dated 25 August by counting in the letters.
+dated 25 August by counting in the letters, and they carry the same dispute:
+the letters fix the sequence, not the absolute date.
 
 The day is disputed. Foster translates Dio as saying the fire broke out "just
 at the end of autumn", which conflicts with August; Cary's Loeb translation
@@ -50,9 +51,10 @@ says the conflict turns on the Greek.
 
 ## Places
 
-All five places come from the Pleiades dump: Vesuvius (the summit), Misenum,
-Stabiae, Pompeii and Herculaneum. Pliny never names Pompeii or Herculaneum;
-their names here come from Dio. No plume, ash fall or damage area is drawn.
+The five places of the eruption come from the Pleiades dump: Vesuvius (the
+summit), Misenum, Stabiae, Pompeii and Herculaneum. Pliny never names Pompeii
+or Herculaneum; their names here come from Dio. The sixth, Rome, is the shared
+record and appears only for Titus's relief. No plume, ash fall or damage area is drawn.
 
 ## Gaps and proposals for the owner
 
@@ -69,12 +71,14 @@ their names here come from Dio. No plume, ash fall or damage area is drawn.
    dawn. The date contract stops at the day, so the hours stay in
    `as_written`.
 4. **Areas.** An eruption is an area, not a point. The chapter uses the
-   summit as context; an `approximate_area` or hazard footprint would need a
-   source and a geometry kind that the v0 contract does not offer for events.
+   summit as context. v0 event geometry already accepts a polygon with
+   `source_supported_area`, so a hazard footprint needs cited geometry for
+   the fall and rendering support for event areas, not a new geometry kind.
 
 ## What it tests in the engine
 
-- Six events in two days at one bay, then one a year later.
+- Five eruption-era events over two days at one bay, then one aftermath event
+  a year later.
 - A day-level dispute with a `conflicting` claim from a second source.
 - Two authors who are also actors (Pliny the Younger) or subjects (the elder
   Pliny) of their own account.

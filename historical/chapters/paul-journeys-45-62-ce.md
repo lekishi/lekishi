@@ -45,7 +45,10 @@ for its stage: first mission 45–49, council 49 or 50, second mission 50–53,
 fourth visit to Jerusalem 53, third mission 53–57, arrest 57, Festus and the
 departure for Rome 59, captivity at Rome 60–62. Each date claim is
 `basis: interpretation` attributed to Prat, quoting his table. The custody and
-the voyage, which fall between two of his dates, cite both.
+the voyage, which fall between two of his dates, cite both. The four journeys,
+the custody at Caesarea and the two years at Rome are `mode: duration`, because
+Paul was travelling or held through the whole span; each stop within a journey
+is a `mode: window`, one occurrence somewhere inside it.
 
 This is a century-old reckoning. Prat puts Gallio "about 53". Modern
 chronologies use the Delphi inscription that dates Gallio's proconsulship,
@@ -55,7 +58,7 @@ was read for it; see the gaps below.
 
 ## Places
 
-Twenty-two places are minted here from the Pleiades dump, as
+Twenty-three places are minted here from the Pleiades dump, as
 `approximate_point` interpretations attributed to Pleiades. Six of them are
 shared records this thread owns (Antioch on the Orontes, Caesarea, Philippi,
 Thessalonica, Rhegium and Puteoli). Ten are reused: Rome from the Stephen II
@@ -76,9 +79,12 @@ are road stations.
    added as an `alternative` date claim on each event, or as the main claim
    with Prat as the alternative. It needs a source whose terms allow
    commercial use, or a citation-only reference that someone has read.
-2. **Journeys as their own kind.** Under draft PR #26 the four journeys would
-   be journey records with ordered, dated stops, and the stages would be stops
-   rather than child events. Here they are v0 events with `part_of`, which
+2. **Journeys as their own kind.** The owner decided on 2026-10-21 that a
+   journey is a record kind of its own
+   ([the decision](../../rfd/0002/AUTHORING_FORMAT.adoc)); the record's shape
+   is still proposed and nothing of it is built. Once it is, the four journeys
+   would be journey records with ordered, dated stops, and the stages would be
+   stops rather than child events. Here they are v0 events with `part_of`, which
    tests the hierarchy but not ordering: two stops on the same day cannot be
    ordered.
 3. **Unlocated and passing stops.** Acts names about fifteen places in passing
@@ -92,7 +98,9 @@ are road stations.
 
 ## What it tests in the engine
 
-- Four parent journeys with 29 child events through `part_of`.
+- Four parent journeys with 24 child events through `part_of`; the other five
+  events (the council, the arrest, the custody at Caesarea, the appeal to
+  Caesar, and Rome) stand alone.
 - A long sea voyage with a shipwreck and a winter stop.
 - Shared places reused across chapters (Rome, Jerusalem, Athens, Corinth,
   Syracuse, Sidon).

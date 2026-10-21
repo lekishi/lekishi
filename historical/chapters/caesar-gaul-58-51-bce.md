@@ -85,9 +85,12 @@ No march route, front line or territory is drawn.
    with `display_anchor` would be more honest when a modern identification is
    cited; none is cited here.
 4. **Journeys.** The marches (Genava to Bibracte, Vesontio to the Rhine, the
-   two crossings to Britain) are journey-shaped. Under draft PR #26 they would
-   be journeys with Caesar's stages as attested stops; this chapter does not
-   add them until that shape is settled.
+   two crossings to Britain) are journey-shaped. The owner decided on
+   2026-10-21 that journeys are their own record kind
+   ([the decision](../../rfd/0002/AUTHORING_FORMAT.adoc)), but the record's
+   shape is still proposed and unbuilt. Once it is, they would be journeys
+   with Caesar's stages as attested stops; until then this chapter does not
+   add them.
 
 ## What it tests in the engine
 

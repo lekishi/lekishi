@@ -1,0 +1,64 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Sargon marches up the Euphrates to the west. His Nippur inscriptions say Enlil gave him the upper
+  land, Mari, Iarmuti and Ibla, as far as the Cedar Forest and the Silver Mountains; King notes that he
+  names no battle and claims no devastation.
+types: [journey]
+date:
+  value: 2334 BCE..2279 BCE
+  mode: window
+  calendar: unknown
+  as_written: not dated in the inscriptions
+  cite:
+    - says: The Livius translation dates Sargon's reign to 2334–2279 BCE in the middle chronology.
+      basis: interpretation
+      attributed_to: Livius.org
+      source: livius-abc-20
+      at: tablet A, line 1, note
+places:
+  - place: agade
+    role: context
+    note: The capital; the inscriptions name no starting point.
+  - place: mari
+    role: waypoint
+    note: 'King: "the name may here signify the district of Mari".'
+  - place: iarmuti
+    role: waypoint
+  - place: ebla
+    role: waypoint
+    note: Ibla, as the inscription names it.
+  - place: cedar-forest
+    role: end
+  - place: silver-mountains
+    role: end
+participants:
+  - actor: sargon-of-akkad
+    role: leader
+cite:
+  - says:
+      Sargon's inscription says Enlil gave him the upper land, Mari, Iarmuti and Ibla, as far as the
+      Cedar Forest and the Silver Mountains.
+    source: king-legends-babylon-egypt
+    at: Lecture I
+    quote: gave him the upper land, Mari, Iarmuti, and Ibla, as far as the Cedar Forest and the Silver Mountains
+  - says: King says Sargon pressed up the Euphrates to the Mediterranean, seeking precious wood and metal.
+    role: supporting
+    basis: interpretation
+    attributed_to: L. W. King (1918)
+    source: king-legends-babylon-egypt
+    at: Lecture I
+    quote:
+      had pressed up the Euphrates to the Mediterranean, and we now have information that he too was
+      fired by a desire for precious wood and metal
+  - says: King notes that Sargon alludes to no battle on this expedition.
+    role: supporting
+    basis: interpretation
+    attributed_to: L. W. King (1918)
+    source: king-legends-babylon-egypt
+    at: Lecture I
+    quote: It is significant that Sargon does not allude to any battle when describing this expedition
+notes:
+  The stops are the inscription's list in its order; the chapter does not claim it is the order of
+  march, and draws no route between them. Whether this is the chronicle's conquest of the west in the
+  eleventh year is not decided here.
+part_of: [sargon-reign]

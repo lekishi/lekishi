@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Sargon completes the subjugation of southern Babylonia, before turning west, as King reads his
+  Nippur inscriptions.
+types: [campaign]
+date:
+  value: 2334 BCE..2279 BCE
+  mode: window
+  calendar: unknown
+  as_written: not dated in the inscriptions
+  cite:
+    - says: The Livius translation dates Sargon's reign to 2334–2279 BCE in the middle chronology.
+      basis: interpretation
+      attributed_to: Livius.org
+      source: livius-abc-20
+      at: tablet A, line 1, note
+participants:
+  - actor: sargon-of-akkad
+    role: leader
+  - actor: akkadian-empire
+    role: participant
+cite:
+  - says:
+      King reads the inscriptions as recording the complete subjugation of southern Babylonia before
+      the western expedition.
+    basis: interpretation
+    attributed_to: L. W. King (1918)
+    source: king-legends-babylon-egypt
+    at: Lecture I
+    quote: after his complete subjugation of Southern Babylonia he turned his attention to the west
+notes: "No place is recorded: King names no city of the southern campaign."
+part_of: [sargon-reign]

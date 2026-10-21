@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Subartu attacks Sargon in full force; he sets an ambush, defeats them, overpowers their army
+  and sends their possessions to Akkad, by the Chronicle of Early Kings.
+types: [campaign]
+date:
+  value: 2334 BCE..2279 BCE
+  mode: window
+  calendar: unknown
+  as_written: not dated in the chronicle; after the revolt of his old age
+  cite:
+    - says: The Livius translation dates Sargon's reign to 2334–2279 BCE in the middle chronology.
+      basis: interpretation
+      attributed_to: Livius.org
+      source: livius-abc-20
+      at: tablet A, line 1, note
+places:
+  - place: subartu
+    role: context
+  - place: agade
+    role: end
+    note: "Where the booty was sent: the chronicle says Akkad."
+participants:
+  - actor: sargon-of-akkad
+    role: leader
+cite:
+  - says:
+      The chronicle says Subartu attacked Sargon, who ambushed and defeated them and sent their possessions
+      into Akkad.
+    source: livius-abc-20
+    at: tablet A, lines 14–17
+  - says: King notes the late tradition that Sargon conquered Subartu.
+    role: supporting
+    basis: interpretation
+    attributed_to: L. W. King (1910)
+    source: king-sumer-akkad
+    at: chapter VIII (the empire of Akkad)
+    quote: the late tradition records that Sargon conquered Subartu and Kazallu
+part_of: [sargon-reign]

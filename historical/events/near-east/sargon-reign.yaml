@@ -1,0 +1,79 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The reign of Sargon of Akkad. The cited datings disagree by two thousand years: about 3800 BCE
+  by the reckoning of Nabonidus' scribes, about 2650 for King in 1910, about 1800 for George Smith, and
+  2334–2279 in the modern middle chronology."
+types: [process]
+date:
+  value: 2334 BCE..2279 BCE
+  mode: duration
+  calendar: unknown
+  as_written: not dated in the sources; the legend gives 45? years
+  cite:
+    - says: The Livius translation dates Sargon's reign to 2334–2279 BCE in the middle chronology.
+      basis: interpretation
+      attributed_to: Livius.org
+      source: livius-abc-20
+      at: tablet A, line 1, note
+    - says: King and Hall (1906) accept the date of Nabonidus' scribes, about 3800 BCE.
+      role: alternative
+      basis: interpretation
+      attributed_to: L. W. King and H. R. Hall (1906)
+      source: king-hall-history
+      at: chapter IV (Western Asia and the dawn of Chaldaean history)
+      quote:
+        the date of his reign is settled, according to the reckoning of the scribes of Nabonidus, as
+        about 3800 B.C.
+    - says:
+        King (1910) reduces the date of Nabonidus and puts Shar-Gani-sharri, his traditional Sargon,
+        at about 2650 BCE.
+      role: alternative
+      basis: interpretation
+      attributed_to: L. W. King (1910)
+      source: king-sumer-akkad
+      at: chapter III (chronology)
+      quote: we obtain for Narâm-Sin a date of 2600 B.C., and for Shar-Gani-Sharri one of 2650 B.C.
+    - says: Smith (1880) dates Sargina to about 1800 BCE.
+      role: alternative
+      basis: interpretation
+      attributed_to: G. Smith and A. H. Sayce (1880)
+      source: smith-chaldean-genesis
+      at: chapter XVII (the Legend of Sargon)
+      quote: Sargina or Sargon I. was a Babylonian monarch who reigned in the city of Agané about B.C. 1800.
+    - says: The legend has the king say he ruled the kingdom 45? years, with Smith's query.
+      role: supporting
+      source: smith-chaldean-genesis
+      at: chapter XVII (the Legend of Sargon), line 12
+      quote: 45? years the kingdom I ruled,
+places:
+  - place: agade
+    role: site
+participants:
+  - actor: sargon-of-akkad
+    role: leader
+  - actor: akkadian-empire
+    role: participant
+cite:
+  - says:
+      "King quotes Sargon's inscriptions: Enlil gave him the lands from the Upper Sea to the Lower
+      Sea."
+    source: king-legends-babylon-egypt
+    at: Lecture I
+    quote: Enlil gave him the lands "from the Upper Sea to the Lower Sea"
+  - says:
+      King quotes Sargon saying 5,400 men ate bread before him daily, which he reads as his court or
+      his army.
+    source: king-legends-babylon-egypt
+    at: Lecture I, note 1 to the Cedar Forest passage
+    quote: 5,400 men daily eat bread before him
+    role: supporting
+dispute:
+  status: disputed
+  summary:
+    Competing chronologies. The modern middle chronology, cited from the Livius translation, gives
+    2334–2279 BCE; King and Hall (1906) accept Nabonidus' 3800; King (1910) argues for about 2650; Smith
+    (1880) gave about 1800. The chapter publishes the middle chronology as its window and keeps each other
+    dating as an alternative claim; all the events below inherit the window.
+notes:
+  Recorded to carry the chronology dispute once for the chapter. The Upper Sea and the Lower Sea
+  are not places here; King glosses them as the Mediterranean and the Persian Gulf.

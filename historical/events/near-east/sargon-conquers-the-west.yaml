@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In his eleventh year Sargon conquers the western land to its farthest point, brings it under
+  one authority, sets up his statues there and ferries its booty across on barges, by the Chronicle of
+  Early Kings. The Omens tell of several expeditions to Amurru, the Western Land.
+types: [campaign]
+date:
+  value: 2323 BCE
+  mode: window
+  calendar: regnal
+  as_written: In the eleventh year (Chronicle of Early Kings, line 4)
+  cite:
+    - says: The Livius translation puts Sargon's eleventh year in 2323 BCE, in the middle chronology.
+      basis: interpretation
+      attributed_to: Livius.org
+      source: livius-abc-20
+      at: tablet A, line 1, note
+participants:
+  - actor: sargon-of-akkad
+    role: leader
+  - actor: akkadian-empire
+    role: participant
+cite:
+  - says:
+      The chronicle says that in the eleventh year he conquered the western land, set up his statues
+      there and ferried its booty across on barges.
+    source: livius-abc-20
+    at: tablet A, lines 4–6
+  - says:
+      King reports four sections of the Omens on the conquest of Amurru, the Western Land, one recording
+      Sargon setting up his images there.
+    role: supporting
+    basis: interpretation
+    attributed_to: L. W. King (1910)
+    source: king-sumer-akkad
+    at: chapter VIII (the empire of Akkad)
+    quote:
+      The conquest of Amurru, the "Western Land" on the coast of Syria, is referred to in four sections
+      of the Omens
+  - says:
+      King ascribes the conquest to Shar-Gani-sharri, citing a tablet dated in the year he conquered
+      Amurru in Basar.
+    role: supporting
+    basis: interpretation
+    attributed_to: L. W. King (1910)
+    source: king-sumer-akkad
+    at: chapter VIII (the empire of Akkad)
+    quote: in the year in which Shar-Gani-sharri conquered Amurru in Basar
+notes:
+  "The only exact BCE year in the chapter: the cited translation converts the chronicle's eleventh
+  year. The western land is not drawn as a place."
+part_of: [sargon-reign]

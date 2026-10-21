@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Sargon invades Elam and conquers the Elamites, afflicting them by cutting off their food, as
+  the Omens of Sargon tell it. King (1910) ascribes the war to Shar-Gani-sharri, whose year-name records
+  a victory over an Elamite expedition against Opis.
+types: [campaign]
+date:
+  value: 2334 BCE..2279 BCE
+  mode: window
+  calendar: unknown
+  as_written: not dated in the omens
+  cite:
+    - says: The Livius translation dates Sargon's reign to 2334–2279 BCE in the middle chronology.
+      basis: interpretation
+      attributed_to: Livius.org
+      source: livius-abc-20
+      at: tablet A, line 1, note
+participants:
+  - actor: sargon-of-akkad
+    role: leader
+  - actor: elam
+    role: participant
+cite:
+  - says:
+      King reports that the Omen-tablet opens with Sargon's invasion of Elam and his conquest of the
+      Elamites.
+    basis: interpretation
+    attributed_to: L. W. King (1910)
+    source: king-sumer-akkad
+    at: chapter VIII (the empire of Akkad)
+    quote:
+      The Omen-tablet opens with the record of Sargon's invasion of the country, followed by his conquest
+      of the Elamites
+  - says:
+      King cites a year-name of Shar-Gani-sharri recording his defeat of an expedition Elam and Zakhara
+      sent against Opis and Sakli.
+    role: supporting
+    basis: interpretation
+    attributed_to: L. W. King (1910)
+    source: king-sumer-akkad
+    at: chapter VIII (the empire of Akkad)
+    quote: Shar-Gani-sharri overcame the expedition which Elam and Zakhara had sent against Opis and Sakli
+notes:
+  The omens are a divination text that carries historical notices; the chapter cites the notice,
+  not the omen.
+part_of: [sargon-reign]

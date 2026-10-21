@@ -11,9 +11,9 @@ follow-ups are in
 - **Window 273–232 BCE**, from Aśoka's succession to his death. The edicts
   begin after the Kalinga war of 261 BCE; the years before it hold the
   succession, the consecration and Mahinda's ordination.
-- **Story span 301–232 BCE.** The two opening steps (Dionysios' embassy and
+- **Story span 304–229 BCE.** The two opening steps (Dionysios' embassy and
   the Taxila legend) may fall in Bindusāra's reign and overlap the window only
-  in part.
+  in part, and Smith's three-year error carries the latest dates past 232 BCE.
 - **Step order is presentation order**, not a claim that one event caused
   another. Relationships sit between events as steps where they explain one.
 
@@ -32,7 +32,9 @@ follow-ups are in
 - Every name, date and position carries a cited claim, and each quotation was
   checked against the Wikisource transcription it was taken from.
 - **Regnal years are the source dates.** The BCE windows are Smith's
-  conversions (consecration as year 1 in 269 BCE), cited as his interpretation.
+  conversions (consecration as year 1 in 269 BCE), cited as his interpretation,
+  and each runs three years either side of his year, the error Smith allows
+  his chronology of the reign. Aśoka's rule keeps Smith's nominal 273–232 BCE.
 - **Five disputes** are recorded and not merged: the succession massacre, the
   meaning of _sambodhi_, the council's date, the length of the reign, and the
   Alexander of Rock Edict XIII.

@@ -23,14 +23,17 @@ names:
         at: 卷第廿六 齊明天皇七年五月 注 伊吉連博得書
         quote: 五月二十三日，奉進朝倉之朝。
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
-    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    point: [130.665528, 33.423417]
+    notes: Label anchor at the modern city of 朝倉 (Wikidata Q720625). It is not an asserted historical coordinate.
     cite:
-      - id: asakura-palace-location
-        says: The text names the place but the record asserts no coordinates for it.
-        source: nihon-shoki
-        at: 卷第廿六 齊明天皇七年五月癸卯
+      - id: asakura-palace-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q720625 (P625), revision 2549821149
 modern:
   - form: 朝倉市
     lang: ja

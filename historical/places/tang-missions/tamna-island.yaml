@@ -23,14 +23,17 @@ names:
         at: 卷第卅五 寶龜九年十一月壬子
         quote: 其判官海上眞人三狩等漂着耽羅嶋。
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
-    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    point: [126.55, 33.38]
+    notes: Label anchor at 濟州島 (Wikidata Q29151). It is not an asserted historical coordinate.
     cite:
-      - id: tamna-island-location
-        says: The text names the place but the record asserts no coordinates for it.
-        source: nihon-shoki
-        at: 卷第廿六 齊明天皇七年五月 注 伊吉連博得書
+      - id: tamna-island-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q29151 (P625), revision 2556994090
 modern:
   - form: 濟州島
     lang: ko

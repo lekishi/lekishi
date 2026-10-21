@@ -14,11 +14,14 @@ names:
         at: 卷第十二 延暦廿四年六月乙巳
         quote: 遣唐使第一船到泊對馬嶋下縣郡。
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
-    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    point: [129.333333, 34.416667]
+    notes: Label anchor at 對馬島 (Wikidata Q52051). It is not an asserted historical coordinate.
     cite:
-      - id: tsushima-location
-        says: The text names the place but the record asserts no coordinates for it.
-        source: nihon-koki
-        at: 卷第十二 延暦廿四年六月乙巳
+      - id: tsushima-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q52051 (P625), revision 2555315605

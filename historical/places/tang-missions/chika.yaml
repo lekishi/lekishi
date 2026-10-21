@@ -23,14 +23,20 @@ names:
         at: 卷第五 承和三年七月甲申
         quote: 宜値嘉嶋涯畔可着船處。
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
-    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    point: [129.05, 32.9]
+    notes:
+      Label anchor at the 五島列島 (Wikidata Q1333790). It is not an asserted historical coordinate. That
+      値賀嶋 covers the 五島 islands is a common modern reading the record does not source; the anchor is for
+      display only.
     cite:
-      - id: chika-location
-        says: The text names the place but the record asserts no coordinates for it.
-        source: shoku-nihon-koki
-        at: 卷第六 承和四年七月癸未
+      - id: chika-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q1333790 (P625), revision 2544236760
 modern:
   - form: 五島列島
     lang: ja

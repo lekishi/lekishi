@@ -14,14 +14,17 @@ names:
         at: 卷第卅五 寶龜九年十一月壬子
         quote: 遣唐第四船來泊薩摩國甑嶋郡。
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
-    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    point: [129.784239, 31.753281]
+    notes: Label anchor at the 甑島列島 (Wikidata Q49515). It is not an asserted historical coordinate.
     cite:
-      - id: koshikijima-location
-        says: The text names the place but the record asserts no coordinates for it.
-        source: shoku-nihongi
-        at: 卷第卅五 寶龜九年十一月壬子
+      - id: koshikijima-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q49515 (P625), revision 2559120919
 modern:
   - form: 甑島列島
     lang: ja

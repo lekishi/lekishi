@@ -14,11 +14,14 @@ names:
         at: 卷第十三 天平十一年十一月辛夘
         quote: 廣成等率遣衆。到著出羽國。
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
-    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    point: [140.317222, 39.016389]
+    notes: Label anchor at the 出羽國 province (Wikidata Q876032). It is not an asserted historical coordinate.
     cite:
-      - id: dewa-location
-        says: The text names the place but the record asserts no coordinates for it.
-        source: shoku-nihongi
-        at: 卷第十三 天平十一年十一月辛夘
+      - id: dewa-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q876032 (P625), revision 2462678914

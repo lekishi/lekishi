@@ -14,14 +14,17 @@ names:
         at: 卷第十二 延暦廿四年六月乙巳
         quote: 至管内明州發遣。
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
-    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    point: [121.549167, 29.875]
+    notes: Label anchor at the modern city of 寧波 (Wikidata Q42780). It is not an asserted historical coordinate.
     cite:
-      - id: mingzhou-location
-        says: The text names the place but the record asserts no coordinates for it.
-        source: nihon-koki
-        at: 卷第十二 延暦廿四年六月乙巳
+      - id: mingzhou-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q42780 (P625), revision 2548007870
 modern:
   - form: 寧波市
     lang: zh

@@ -14,14 +14,19 @@ names:
         at: 卷第十二 延暦廿四年六月乙巳
         quote: 八月十日到福州長溪縣赤岸鎭已南海口。
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
-    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    point: [120.00186, 26.88351]
+    notes:
+      Label anchor at the modern county of 霞浦 (Wikidata Q241877). It is not an asserted historical
+      coordinate. 長溪縣 lay in what is now 霞浦縣; the garrison's own site is not asserted.
     cite:
-      - id: chian-zhen-location
-        says: The text names the place but the record asserts no coordinates for it.
-        source: nihon-koki
-        at: 卷第十二 延暦廿四年六月乙巳
+      - id: chian-zhen-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q241877 (P625), revision 2526609080
 modern:
   - form: 霞浦縣
     lang: zh

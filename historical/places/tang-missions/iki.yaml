@@ -23,11 +23,14 @@ names:
         at: 卷第廿七 天智天皇三年 是歲
         quote: 是歲，於對馬嶋、壹岐嶋、筑紫國等，置防與烽。
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
-    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    point: [129.716667, 33.783333]
+    notes: Label anchor at 壱岐島 (Wikidata Q494914). It is not an asserted historical coordinate.
     cite:
-      - id: iki-location
-        says: The text names the place but the record asserts no coordinates for it.
-        source: shoku-nihon-koki
-        at: 卷第六 承和四年七月癸未
+      - id: iki-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q494914 (P625), revision 2551775883

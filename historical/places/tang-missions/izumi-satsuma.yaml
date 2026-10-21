@@ -14,14 +14,19 @@ names:
         at: 卷第卅五 寶龜九年十一月乙夘
         quote: 第二船到泊薩摩國出水郡。
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
-    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    point: [130.152, 32.179]
+    notes:
+      Label anchor at the modern 出水郡 district (Wikidata Q1043795). It is not an asserted historical
+      coordinate.
     cite:
-      - id: izumi-satsuma-location
-        says: The text names the place but the record asserts no coordinates for it.
-        source: shoku-nihongi
-        at: 卷第卅五 寶龜九年十一月乙夘
+      - id: izumi-satsuma-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q1043795 (P625), revision 2539042126
 modern:
   - form: 出水市
     lang: ja

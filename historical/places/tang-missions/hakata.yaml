@@ -32,14 +32,17 @@ names:
         at: 卷第八 承和六年十月丁巳
         quote: 皈着筑前國博多津。
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
-    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    point: [130.414722, 33.591389]
+    notes: Label anchor at 博多區 of 福岡 (Wikidata Q1330839). It is not an asserted historical coordinate.
     cite:
-      - id: hakata-location
-        says: The text names the place but the record asserts no coordinates for it.
-        source: nihon-shoki
-        at: 卷第廿六 齊明天皇五年七月戊寅 注 伊吉連博德書
+      - id: hakata-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q1330839 (P625), revision 2550907041
 modern:
   - form: 福岡市
     lang: ja

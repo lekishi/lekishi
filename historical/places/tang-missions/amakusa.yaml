@@ -14,14 +14,19 @@ names:
         at: 卷第卅五 寶龜九年十一月乙夘
         quote: 乘其舳而着肥後國天草郡。
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
-    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    point: [130.0475, 32.508056]
+    notes:
+      Label anchor at the modern 天草郡 district (Wikidata Q1132472). It is not an asserted historical
+      coordinate.
     cite:
-      - id: amakusa-location
-        says: The text names the place but the record asserts no coordinates for it.
-        source: shoku-nihongi
-        at: 卷第卅五 寶龜九年十一月乙夘
+      - id: amakusa-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q1132472 (P625), revision 2549707901
 modern:
   - form: 天草市
     lang: ja

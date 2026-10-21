@@ -14,14 +14,17 @@ names:
         at: 卷第三 慶雲元年七月甲申朔
         quote: 是大周楚州塩城縣界也。
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
-    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    point: [120.156944, 33.35]
+    notes: Label anchor at the modern city of 鹽城 (Wikidata Q57866). It is not an asserted historical coordinate.
     cite:
-      - id: yancheng-location
-        says: The text names the place but the record asserts no coordinates for it.
-        source: shoku-nihongi
-        at: 卷第三 慶雲元年七月甲申朔
+      - id: yancheng-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q57866 (P625), revision 2526612666
 modern:
   - form: 鹽城市
     lang: zh

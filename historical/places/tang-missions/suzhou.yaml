@@ -16,14 +16,17 @@ names:
         at: 卷第十三 天平十一年十一月辛夘
         quote: 四船同發從蘇州入海。
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
-    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    point: [120.619444, 31.3]
+    notes: Label anchor at the modern city of 蘇州 (Wikidata Q42622). It is not an asserted historical coordinate.
     cite:
-      - id: suzhou-location
-        says: The text names the place but the record asserts no coordinates for it.
-        source: shoku-nihongi
-        at: 卷第十三 天平十一年十一月辛夘
+      - id: suzhou-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q42622 (P625), revision 2527812164
 modern:
   - form: 蘇州市
     lang: zh

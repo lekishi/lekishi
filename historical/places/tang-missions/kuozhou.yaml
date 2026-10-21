@@ -14,14 +14,19 @@ names:
         at: 卷第廿六 齊明天皇五年七月戊寅 注 伊吉連博德書
         quote: 盜乘嶋人之船，逃到括州。
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
-    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    point: [119.916667, 28.45]
+    notes:
+      Label anchor at the modern city of 麗水 (Wikidata Q58294). It is not an asserted historical coordinate.
+      括州 was later renamed 處州; the modern seat is 麗水.
     cite:
-      - id: kuozhou-location
-        says: The text names the place but the record asserts no coordinates for it.
-        source: nihon-shoki
-        at: 卷第廿六 齊明天皇五年七月戊寅 注 伊吉連博德書
+      - id: kuozhou-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q58294 (P625), revision 2526612704
 modern:
   - form: 麗水市
     lang: zh

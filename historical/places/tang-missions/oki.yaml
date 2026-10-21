@@ -14,11 +14,14 @@ names:
         at: 卷第廿四 天平寶字七年十月乙亥
         quote: 漂流十餘日。着隱岐國。
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
-    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    point: [133.314861, 36.208917]
+    notes: Label anchor at the 隱岐國 province (Wikidata Q1063829). It is not an asserted historical coordinate.
     cite:
-      - id: oki-location
-        says: The text names the place but the record asserts no coordinates for it.
-        source: shoku-nihongi
-        at: 卷第廿四 天平寶字七年十月乙亥
+      - id: oki-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q1063829 (P625), revision 2462678517

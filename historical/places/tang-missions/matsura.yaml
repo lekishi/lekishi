@@ -14,11 +14,16 @@ names:
         at: 卷第卅四 寶龜七年閏八月庚寅
         quote: 遣唐使船到肥前國松浦郡合蚕田浦。
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
-    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    point: [129.709111, 33.340972]
+    notes:
+      Label anchor at the modern city of 松浦 (Wikidata Q850465). It is not an asserted historical coordinate.
+      The modern city covers only part of the old district.
     cite:
-      - id: matsura-location
-        says: The text names the place but the record asserts no coordinates for it.
-        source: shoku-nihongi
-        at: 卷第卅四 寶龜七年閏八月庚寅
+      - id: matsura-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q850465 (P625), revision 2556936862

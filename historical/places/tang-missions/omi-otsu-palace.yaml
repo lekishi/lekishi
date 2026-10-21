@@ -14,14 +14,19 @@ names:
         at: 卷第廿七 天智天皇六年三月己卯
         quote: 三月辛酉朔己卯，遷都于近江。
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
-    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    point: [135.855, 35.028306]
+    notes:
+      Label anchor at the 近江大津宮 palace site (Wikidata Q11638487). It is not an asserted historical
+      coordinate.
     cite:
-      - id: omi-otsu-palace-location
-        says: The text names the place but the record asserts no coordinates for it.
-        source: nihon-shoki
-        at: 卷第廿七 天智天皇六年三月己卯
+      - id: omi-otsu-palace-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q11638487 (P625), revision 2550208019
 modern:
   - form: 大津市
     lang: ja

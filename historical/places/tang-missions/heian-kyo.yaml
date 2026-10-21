@@ -14,14 +14,17 @@ names:
         at: 卷第十三 大同元年四月甲午朔
         quote: 畏哉平安宮《爾》御坐《志》天皇
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
-    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    point: [135.742222, 35.013611]
+    notes: Label anchor at the 平安宮 (大内裏) site (Wikidata Q304501). It is not an asserted historical coordinate.
     cite:
-      - id: heian-kyo-location
-        says: The text names the place but the record asserts no coordinates for it.
-        source: nihon-koki
-        at: 卷第十三 大同元年四月甲午朔
+      - id: heian-kyo-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q304501 (P625), revision 2547881818
 modern:
   - form: 京都市
     lang: ja

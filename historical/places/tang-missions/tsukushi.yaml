@@ -14,11 +14,16 @@ names:
         at: 卷第廿五 白雉五年七月丁酉
         quote: 西海使吉士長丹等，共百濟、新羅送使泊于筑紫。
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
-    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    point: [130.489, 33.5961]
+    notes:
+      Label anchor at the province of 筑前 (Wikidata Q1047664). It is not an asserted historical coordinate.
+      筑紫 also covered the later province of 筑後; the anchor marks the northern half.
     cite:
-      - id: tsukushi-location
-        says: The text names the place but the record asserts no coordinates for it.
-        source: nihon-shoki
-        at: 卷第廿五 白雉五年七月丁酉
+      - id: tsukushi-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q1047664 (P625), revision 2462678915

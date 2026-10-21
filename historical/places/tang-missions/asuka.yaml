@@ -25,14 +25,17 @@ names:
         at: 卷第廿六 齊明天皇二年 是歲
         quote: 天皇乃遷，號曰後飛鳥岡本宮。
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
-    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    point: [135.820833, 34.473333]
+    notes: Label anchor at the 飛鳥宮 palace site (Wikidata Q11665955). It is not an asserted historical coordinate.
     cite:
-      - id: asuka-location
-        says: The text names the place but the record asserts no coordinates for it.
-        source: nihon-shoki
-        at: 卷第廿三 舒明天皇二年十月癸卯
+      - id: asuka-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q11665955 (P625), revision 2548187177
 modern:
   - form: 明日香村
     lang: ja

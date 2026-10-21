@@ -14,14 +14,17 @@ names:
         at: 卷第三 慶雲元年十一月壬寅
         quote: 始定藤原宮地。
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
-    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    point: [135.807222, 34.502222]
+    notes: Label anchor at the 藤原京 site (Wikidata Q1196381). It is not an asserted historical coordinate.
     cite:
-      - id: fujiwara-kyo-location
-        says: The text names the place but the record asserts no coordinates for it.
-        source: shoku-nihongi
-        at: 卷第三 慶雲元年十一月壬寅
+      - id: fujiwara-kyo-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q1196381 (P625), revision 2547948632
 modern:
   - form: 橿原市
     lang: ja

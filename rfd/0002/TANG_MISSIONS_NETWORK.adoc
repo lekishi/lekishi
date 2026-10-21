@@ -114,17 +114,17 @@ dispute. Neither account is preferred.
 [[places]]
 == Places
 
-No Wikidata coordinates could be read this session (every request returned
-429), so all 24 new places carry an `unknown` position for now. The generator
-upgrades each to a display anchor citing `wikidata` "Q… (P625), revision N"
-as soon as the lookup runs. Two stay unknown on purpose:
+22 of the 24 new places carry a display anchor citing `wikidata` "Q… (P625),
+revision N", placed at the modern site, district or city the summary names.
+The anchors are for display only and assert no historical coordinate. Where
+the modern item covers only part of the old unit (筑紫 at 筑前, 松浦郡 at the
+modern city of 松浦) the note says so. Two stay unknown on purpose:
 
 * `nikawe-island` (爾加委): no modern identification is sourced.
 * `kunlun` (崑崙國): a general name for the lands of the southern sea; which
   coast 平群廣成 reached is not sourced.
 
-A stop at an unknown place breaks a journey's line, so until the anchors land
-most of these journeys draw only their Chinese legs.
+A stop at either of these breaks a journey's line.
 
 [[dependencies]]
 == Records borrowed from other branches
@@ -194,6 +194,6 @@ kind is decided:
 * *Court acts.* 28 events are court acts the entry gives no place for; each
   is anchored at the court's seat with the same note. A place role
   for this, or a chapter-level default, would remove the repetition.
-* *Unknown places in journeys.* Several landfalls (爾加委, 崑崙, and every
-  place still waiting for its anchor) break a journey's line. PR #26 should
+* *Unknown places in journeys.* Landfalls with no sourced identification
+  (爾加委, 崑崙) break a journey's line. PR #26 should
   say how a journey shows a leg it cannot draw.

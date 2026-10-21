@@ -1,5 +1,9 @@
 # yaml-language-server: $schema=../../schema/event.schema.json
-summary: "Late in the summer of 55 BCE Caesar sailed from the land of the Morini, reached Britain at about the fourth hour with the first ships, found the cliffs lined with armed men, and landed on an open shore after the standard-bearer of the tenth legion leapt into the sea. The same night's full moon brought the highest tide, which wrecked many ships; he made peace for hostages and sailed back before the equinox."
+summary: "Late in the summer of 55 BCE Caesar sailed from the land of the Morini, reached Britain at
+  about the fourth hour with the first ships, found the cliffs lined with armed men, and landed on
+  an open shore after the standard-bearer of the tenth legion leapt into the sea. The same night's
+  full moon brought the highest tide, which wrecked many ships; he made peace for hostages and
+  sailed back before the equinox."
 types: [journey, campaign]
 date:
   value: 55 BCE
@@ -17,10 +21,12 @@ places:
     role: start
     cite:
       id: first-landing-start
-      says: "Caesar tells that he set out into the territory of the Morini, from which the crossing to Britain was shortest."
+      says: "Caesar tells that he set out into the territory of the Morini, from which the crossing
+        to Britain was shortest."
       source: caesar-gallic-war
       at: "4.21"
-      quote: "Ipse cum omnibus copiis in Morinos proficiscitur, quod inde erat brevissimus in Britanniam traiectus."
+      quote: "Ipse cum omnibus copiis in Morinos proficiscitur, quod inde erat brevissimus in
+        Britanniam traiectus."
   - place: britannia
     role: end
     cite:
@@ -34,8 +40,12 @@ participants:
     role: leader
 cite:
   - id: first-landing-moon
-    says: "Caesar tells that the same night there was a full moon, which brings the highest tides in the Ocean."
+    says: "Caesar tells that the same night there was a full moon, which brings the highest tides in
+      the Ocean."
     source: caesar-gallic-war
     at: "4.29"
-    quote: "Eadem nocte accidit ut esset luna plena, qui dies maritimos aestus maximos in Oceano efficere consuevit"
-notes: "Caesar's own account. The full moon makes the landing datable by astronomy to late August 55 BCE in modern reckonings, which the event does not assert; the landing beach, near Deal or elsewhere in Kent, is disputed and not placed."
+    quote: "Eadem nocte accidit ut esset luna plena, qui dies maritimos aestus maximos in Oceano
+      efficere consuevit"
+notes: "Caesar's own account. The full moon makes the landing datable by astronomy to late August 55
+  BCE in modern reckonings, which the event does not assert; the landing beach, near Deal or
+  elsewhere in Kent, is disputed and not placed."

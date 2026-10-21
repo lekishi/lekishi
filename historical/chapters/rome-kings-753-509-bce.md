@@ -23,15 +23,17 @@ reckoning rather than a measurement.
 
 | Source | Edition read | Terms | Use |
 |---|---|---|---|
-| Livy, *Ab urbe condita* I | The Latin Library transcription, read 2026-10-21 | Work public domain; the site states no terms and names no edition | Quoted in Latin, cited by book and chapter |
+| Livy, *Ab urbe condita* I | Weissenborn and Müller's Teubner text in the Perseus transcription (the shared `livy` source, also used by the Hannibal chapter), read 2026-10-21 | Work and edition public domain; the transcription is CC BY-SA 4.0 and is noted, not copied | Quoted in Latin, cited by book, chapter and section |
 | Dionysius of Halicarnassus, *Roman Antiquities* I–V | Cary's Loeb translation (1937–1940), LacusCurtius | LacusCurtius marks the pages public domain (single-asterisk URLs), read 2026-10-21 | Quoted in English for the Olympiad dates |
 | Censorinus, *De die natali* 21 | Hultsch's Teubner text (1867), LacusCurtius | Public domain, as above | The Varronian era (753 BCE) |
 | Pleiades | Daily dump of 2026-10-21 (shared `pleiades` source) | CC BY 3.0 | Every coordinate except Rome's and Ostia's, as an interpretation attributed to Pleiades |
 
 Every quotation was checked by script against the downloaded text on
-2026-10-21; every Livy quotation also against the chapter its locator names.
-Before release, re-check the locators against a critical edition (Ogilvie's
-Oxford text for Livy) as the source register requires.
+2026-10-21, and every Livy quotation against the section its locator names
+(editorial deletions and the transcription's uncorrected readings are left
+out). Four Livy quotations run across a section break and cite a range, such
+as 1.48.7–8. Before release, re-check the locators against a critical edition
+(Ogilvie's Oxford text for Livy) as the source register requires.
 
 ## Dates
 

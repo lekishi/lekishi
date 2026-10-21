@@ -29,7 +29,9 @@ this chapter honestly can draw any disputed geography.
 | Periplus of Hanno | `hanno-periplus` | Schoff's 1913 Greek text and translation, Wikisource | Public domain; transcription CC BY-SA | Every stage; quoted in Greek |
 | Schoff's commentary | `schoff-hanno` | "The Geography of the Voyage" and "Carthaginian Chronology", 1913 | Public domain | Identifications and the 470 BCE date, as interpretation |
 | Pliny, Natural History | `pliny-natural-history` | Bostock and Riley 1855, Perseus | Public domain; transcription CC BY-SA | II.67, V.1, VI.36, and the translators' notes as 1855 scholarship |
-| Pleiades | `pleiades` | Dump of 2026-10-21 | CC BY 3.0 | Every coordinate, attributed to Pleiades |
+| Pleiades | `pleiades` | Dump of 2026-10-21 | CC BY 3.0 | Every identification, and the coordinates of the places minted here |
+| Wikidata | `wikidata` | Pinned revisions, 2026-10-21 | CC0 | The coordinates of the shared `carthage` and `gades` |
+| Livy; Polybius | `livy`, `polybius` | Teubner editions, Perseus | Public domain; transcription CC BY-SA | Reached through the shared `carthage` and `gades`, not cited by this chapter's own records |
 
 Every quotation was checked by script against the downloaded texts on
 2026-10-21. The Greek is Schoff's text as Wikisource transcribes it, accents

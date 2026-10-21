@@ -29,7 +29,10 @@ in the same decades, gives the route from Alexandria to Muziris in days.
 | Periplus of the Erythraean Sea | `periplus-erythraean-sea` | Schoff's 1912 translation, Wikisource | Public domain; transcription CC BY-SA | Every port, ruler and arc; quoted in translation |
 | Schoff's dating chapters | `schoff-periplus` | "Date and Authorship" and "Date … by Various Commentators", 1912 | Public domain | The 58–62 CE window and the other commentators' dates |
 | Pliny, Natural History | `pliny-natural-history` | Bostock and Riley 1855, Perseus | Public domain; transcription CC BY-SA | VI.24 (the drift and the embassy) and VI.26 (the route) |
-| Pleiades | `pleiades` | Dump of 2026-10-21 | CC BY 3.0 | Every coordinate, attributed to Pleiades |
+| Pleiades | `pleiades` | Dump of 2026-10-21 | CC BY 3.0 | Every port's coordinate and identification |
+| Wikidata | `wikidata` | Q220, pinned revision | CC0 | The coordinate of the shared `rome` |
+| GeoNames | `geonames` | Dumps of 2026-10-21 | CC BY 4.0 | The label anchors of `egypt` and `arabia`, which assert no coordinate |
+| Livy; Liber pontificalis; Arrian | `livy`, `liber-pontificalis`, `arrian-anabasis` | As registered | Public domain | Reached through the shared `rome` and `alexandria-egypt`, not cited by this chapter's own records |
 
 Every quotation was checked by script against the downloaded texts. Eggermont
 (1960) judged the Greek edition Schoff translated untrustworthy, so the records
@@ -53,7 +56,8 @@ reign, 41–54. The Hippalus crossing runs 41–58, from Vincent's reasoning (ab
 
 ## Places
 
-Pleiades gives a point for every port drawn. Places the text names but no
+Pleiades gives a point for every port drawn; Rome keeps the Wikidata point of
+the shared record. Places the text names but no
 gazetteer locates (Leuke Kome, Sabbatha, Moscha, Saua, Minnagara, Rhapta) are
 left out rather than drawn. Where the text names only a country ("from
 Egypt", "from Arabia"), the arc starts at a region place for that country,

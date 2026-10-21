@@ -35,6 +35,13 @@ export const TANG_DECISION = decision("tang-mission-750-754")
 
 export const QIN_DECISION = decision("qin-conquest-han-233-226")
 
+/**
+ * How many chapters the artifact serves: every manifest, because CI builds it
+ * with drafts served. The home page, the switcher and the time ribbon list
+ * each one.
+ */
+export const SERVED_CHAPTER_COUNT = STATES.size
+
 /** Whether `chapter` is approved at its current content, and so served as published. */
 export function approved(chapter: string): boolean {
   return STATES.get(chapter)?.state === "approved"

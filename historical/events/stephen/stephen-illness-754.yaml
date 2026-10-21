@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Worn out by the journey and the weather, the pope falls so gravely ill at Saint-Denis that his own
+  people and the Franks despair of him, and he is found well again the next day.
+types: [occurrence]
+date:
+  value: "754"
+  calendar: julian
+  as_written: prae nimio labore itineris atque temporis inequalitate fortiter infirmavit
+  cite:
+    - id: stephen-illness-754-time
+      says: The life tells the illness after the anointing at Saint-Denis; it gives no date.
+      source: liber-pontificalis
+      at: Et beatissimus papa prae nimio labore itineris atque temporis inequalitate fortiter infirmavit, ut etiam omnes … cum desperarent
+places:
+  - place: saint-denis-abbey
+    role: site
+participants:
+  - actor: stephen-ii
+    role: subject
+notes:
+  The life presents the recovery as an act of divine mercy; the chapter records the illness and the
+  recovery the life reports, not the miracle.

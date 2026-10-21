@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Abbot Fulrad and Duke Rothard arrive at Saint-Maurice from Pepin, ask the pope to come on to the
+  king, and escort him and his company with great honour.
+types: [mission]
+part_of: [stephen-journey-753]
+date:
+  value: 753-11-15..754-01-06
+  mode: window
+  calendar: julian
+  as_written: coniunxerunt in praedicto venerabili monasterio Fulradus abbas et Rotardus dux
+  cite:
+    - id: saint-maurice-escort-753-time
+      says: The life gives no date; the escort came after the pope had stayed some days at the monastery.
+      source: liber-pontificalis
+      at: In quo et aliquantis demorantes diebus, coniunxerunt in praedicto venerabili monasterio Fulradus abbas et Rotardus dux
+places:
+  - place: saint-maurice-agaune
+    role: site
+participants:
+  - actor: fulrad
+    role: participant
+  - actor: rothard
+    role: participant
+  - actor: stephen-ii
+    role: guest
+cites:
+  summary:
+    - id: saint-maurice-escort-753-escort
+      says: The life says they asked the pope to come on to their king and led him there with great honour.
+      source: liber-pontificalis
+      at: petentes eundem sanctissimum pontificem ad suum progredi regem. Quem et cum magno honore cum omnibus, qui cum eo erant, ad eum deduxerunt

@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Stephen II's journey from Rome to the Frankish king, from leaving the city on 14 October 753, by
+  Aistulf's court at Pavia, over the Alps to Saint-Maurice, to the meeting with Pepin at Ponthion on
+  6 January 754. The dated stops are separate events; this event carries the span and the named
+  places and asserts no route.
+types: [journey, mission]
+date:
+  value: 753-10-14..754-01-06
+  mode: duration
+  calendar: julian
+  as_written: XIIII die octobrii mensis, indictionis VII — sexta Ianuarii mensis die, in Apparitionis domini … solemnitate
+  cite:
+    - id: stephen-journey-753-time
+      says:
+        The life dates the departure from Rome to the 14th of October of the seventh indiction (753)
+        and the meeting with the king at Ponthion to the 6th of January, the feast of the Epiphany
+        (754).
+      source: liber-pontificalis
+      at: egressus est ab hac Romana urbe ad beatum Petrum apostolum, XIIII die octobrii mensis, indictionis VII; sexta Ianuarii mensis die, in Apparitionis domini
+places:
+  - place: rome
+    role: start
+  - place: pavia
+    role: waypoint
+  - place: great-st-bernard-pass
+    role: waypoint
+  - place: saint-maurice-agaune
+    role: waypoint
+  - place: ponthion
+    role: end
+participants:
+  - actor: stephen-ii
+    role: leader
+  - actor: chrodegang-of-metz
+    role: participant
+  - actor: autchar
+    role: participant
+cites:
+  places:
+    - id: stephen-journey-753-places
+      says:
+        The life names Rome, Pavia, the Frankish passes, the monastery of St Maurice and the palace of
+        Ponthion; the continuations of Fredegar name the pass he crossed as mons Iovis.
+      sources:
+        - source: liber-pontificalis
+          at: a civitate Papia movens suum Franciam profectus est iter; ad Francorum coniunxit clusas; ad venerabile monasterium sancti Christi martyris Mauricii; in palatio suo, in loco qui vocatur Ponticone
+        - source: fredegar-continuations
+          at: CXIX
+          quote: jam monte Jovis transmeato
+notes:
+  The life calls the year by indiction only; the seventh indiction began on 1 September 753, so 14
+  October of it is 753 and the following 6 January is 754. The 753–754 winter at Saint-Denis and the
+  return with the army are separate events.

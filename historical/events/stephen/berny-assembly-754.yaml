@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Aistulf having refused what Pepin's envoys asked, the king summons all the Franks, as is their
+  custom, to the royal estate of Berny on the Kalends of March, and takes counsel with his great men.
+types: [council]
+date:
+  value: 754-03-01
+  calendar: julian
+  as_written: evoluto anno, praefatus rex ad Kalendas Martias omnes Francos … Bernaco villa publica ad se venire praecepit
+  cite:
+    - id: berny-assembly-754-time
+      says:
+        The continuations date the assembly to the Kalends of March. The year is editorial, the first
+        March after the pope's arrival in the continuations' own order.
+      source: fredegar-continuations
+      at: CXX
+      quote: evoluto anno, praefatus rex ad Kalendas Martias omnes Francos, sicut mos Francorum est, Bernaco villa publica ad se venire praecepit
+places:
+  - place: berny-riviere
+    role: site
+participants:
+  - actor: pepin-the-short
+    role: leader
+  - actor: frankish-kingdom
+    role: participant
+notes:
+  The continuations do not state the year. "Evoluto anno" (the year having turned) is read here as
+  the turn of the year after the pope's arrival, following the order of events in the papal life;
+  the reading is editorial and is kept visible here.

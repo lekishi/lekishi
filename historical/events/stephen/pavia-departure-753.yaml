@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Released by Aistulf after he had tried several times to turn him from it, Stephen leaves Pavia for
+  Francia on 15 November 753 with the bishops of Ostia and Nomentum, four priests, the archdeacon, two
+  deacons, the primicerius, the secundicerius and other clergy, and hurries to the Frankish passes.
+types: [journey]
+part_of: [stephen-journey-753]
+date:
+  value: 753-11-15
+  calendar: julian
+  as_written: XV die novembris mensis praedicte VII indictionis
+  cite:
+    - id: pavia-departure-753-time
+      says: The life dates his setting out from Pavia for Francia to the 15th day of November in the seventh indiction.
+      source: liber-pontificalis
+      at: XV die novembris mensis praedicte VII indictionis, a civitate Papia movens suum Franciam profectus est iter
+places:
+  - place: pavia
+    role: start
+participants:
+  - actor: stephen-ii
+    role: leader
+  - actor: ambrose-primicerius
+    role: participant
+cites:
+  summary:
+    - id: pavia-departure-753-release
+      says: The life has Aistulf ask him whether he wished to go to Francia and the pope answer that if the king would release him, his will was to go; and it says the king still tried to turn him from the road.
+      source: liber-pontificalis
+      at: «Quod si tua est voluntas me relaxandi, mea omnino est ambulandi». Tunc absolutus est ab eo; adhuc nitebatur suprascriptus malignus Langobardorum rex a praedicto itinere eum deviare

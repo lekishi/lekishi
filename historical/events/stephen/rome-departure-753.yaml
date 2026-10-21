@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Stephen leaves Rome on 14 October 753, going out first to St Peter's, with priests, nobles and
+  soldiers of the Roman church and the Frankish envoys, while crowds from Rome and the other cities
+  weep and try to hold him back. The life says he was already weak in body.
+types: [journey]
+part_of: [stephen-journey-753]
+date:
+  value: 753-10-14
+  calendar: julian
+  as_written: XIIII die octobrii mensis, indictionis VII
+  cite:
+    - id: rome-departure-753-time
+      says: The life dates his going out from Rome to St Peter's to the 14th day of October in the seventh indiction.
+      source: liber-pontificalis
+      at: egressus est ab hac Romana urbe ad beatum Petrum apostolum, XIIII die octobrii mensis, indictionis VII
+places:
+  - place: rome
+    role: start
+  - place: old-st-peters
+    role: context
+    note: The life has him go out "ad beatum Petrum"; the basilica is outside the walls and is where the journey begins.
+participants:
+  - actor: stephen-ii
+    role: leader
+cites:
+  summary:
+    - id: rome-departure-753-crowds
+      says: The life says many of the Romans and of the other cities followed him weeping and would not let him go, and that he set out though weak in body.
+      source: liber-pontificalis
+      at: secuti que sunt eum plures Romanorum et ceterarum civitatum popui flentes ululantesque, nequaquam eum penitus ambulare sinebant; licet infirmitate corporis defectus, laboriosum arreptus est iter

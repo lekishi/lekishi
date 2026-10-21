@@ -16,7 +16,7 @@ jobs:
     # build and its invariant run once, in `build`, which the browser checks
     # reuse. No service container, database, or BEAM runtime is involved: the
     # site is a static artifact.
-    runs-on: blacksmith-2vcpu-ubuntu-2404
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout
@@ -67,7 +67,7 @@ jobs:
     # does not match its content and still has to pass, and it lists what awaits
     # the owner's approval in the job summary. Nothing here fails for a missing
     # approval; only the owner approves, with `pnpm approvals`.
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout
@@ -105,9 +105,9 @@ jobs:
   build:
     # Builds the static artifact once, with its build invariant, and hands it to
     # every browser job. Painting the globe tiles is most of the time when the
-    # builder changes, so this job gets the larger runner: the painter uses one
-    # process per CPU.
-    runs-on: blacksmith-4vcpu-ubuntu-2404
+    # builder changes; the painter uses one process per CPU, and GitHub's
+    # standard runner for a public repository has four.
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout
@@ -174,10 +174,11 @@ jobs:
   e2e:
     # Runs the atlas browser checks against the artifact `build` produced, with
     # no development server (RFD 4 AC4). Every project tests the same files.
-    # Desktop benefits from two workers when each has two CPUs available.
+    # Desktop benefits from two workers when each has two CPUs available, which
+    # GitHub's four-CPU standard runner provides.
     name: e2e (${{ matrix.project }})
     needs: build
-    runs-on: ${{ matrix.runner || 'blacksmith-2vcpu-ubuntu-2404' }}
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -191,7 +192,6 @@ jobs:
           - desktop-firefox
         include:
           - project: desktop-chromium
-            runner: blacksmith-4vcpu-ubuntu-2404
             workers: 2
           - project: desktop-webkit
             browser: webkit

@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  張寶高, the Silla commander of 清海鎮 whom the diary calls 張大使. He founded the 赤山法花院 where
+  圓仁 stayed from 839, and 圓仁 wrote to him in 840 asking for passage home through 清海鎮.
+types: [person]
+names:
+  - form: 張寶高
+    lang: lzh
+    script: Hani
+    roman: Jang Bogo
+    scheme: other
+    note:
+      The reading follows Korean usage as an editorial aid. Korean sources write the name 張保皐;
+      that form is not in this story's source and is not recorded as a name here.
+    cite:
+      - id: jang-bogo-name
+        says: The diary records that the 赤山法花院 was first built by 張寶高.
+        source: nitto-guho-junrei-gyoki
+        at: 卷二 開成四年六月七日
+        quote: 山裏有寺。名赤山法花院。本張寶高初所建也。
+roles:
+  - role: official
+    note: Commander (大使) of 清海鎮; the diary addresses him as 清海鎮張大使.
+    cite:
+      - id: jang-bogo-role
+        says: 圓仁's letter of 開成五年二月十七日 is addressed to 清海鎮張大使.
+        source: nitto-guho-junrei-gyoki
+        at: 卷二 開成五年二月十七日
+notes: Not to be confused with 張詠, the Silla officer of 文登縣 the diary also calls 張大使 in 845–847.

@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  The Tang emperor of the 會昌 era (841–846), whom the diary calls 會昌天子 or 皇帝. His edicts against the
+  Buddhist clergy laicized the monks and nuns of 長安 between 842 and 845 and sent 圓仁 home. The diary
+  reports his death on 三月廿三日 (846).
+types: [person]
+names:
+  - form: 會昌天子
+    lang: lzh
+    script: Hani
+    note:
+      The diary's name for him, after his era. The temple name 武宗 is not used in the diary and is
+      recorded only in the summary for orientation.
+    cite:
+      - id: tang-wuzong-name
+        says: The diary records hearing that 會昌天子 died on 三月廿三日.
+        source: nitto-guho-junrei-gyoki
+        at: 卷四 會昌六年七月廿二日
+        quote: 山陵訖。見說。會昌天子三月廿三日崩。
+roles:
+  - role: ruler
+    date:
+      value: 841..846
+      mode: duration
+      calendar: chinese_lunisolar
+      as_written: 改開成六年。為會昌元年 — 會昌天子三月廿三日崩
+    cite:
+      - id: tang-wuzong-reign
+        says: The diary records the change of era to 會昌元年 and the report of the 會昌 emperor's death.
+        sources:
+          - source: nitto-guho-junrei-gyoki
+            at: 卷三 開成六年正月九日
+          - source: nitto-guho-junrei-gyoki
+            at: 卷四 會昌六年七月廿二日

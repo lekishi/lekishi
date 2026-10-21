@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  劉慎言, the Silla interpreter (新羅譯語) of the Silla ward (新羅坊) of 楚州. He kept 圓仁's books,
+  mandalas and robes when the county would not let him sail from 楚州 in 845, and sent them on in
+  846.
+types: [person]
+names:
+  - form: 劉慎言
+    lang: lzh
+    script: Hani
+    roman: Liu Shenyan
+    scheme: pinyin
+    cite:
+      - id: liu-shenyan-name
+        says: The diary names the Silla interpreter 劉慎言 who received 圓仁 at the 新羅坊 of 楚州.
+        source: nitto-guho-junrei-gyoki
+        at: 卷四 會昌五年七月三日
+        quote: 先入新羅坊。見惣管當州同十將薛。新羅譯語劉慎言。相接存問慇懃。
+roles:
+  - role: other
+    note: Interpreter for the Silla community at 楚州 (新羅譯語), later its 惣管.
+    cite:
+      - id: liu-shenyan-role
+        says: The diary calls him 新羅譯語 in 845 and the 楚州新羅坊惣管 in 847.
+        sources:
+          - source: nitto-guho-junrei-gyoki
+            at: 卷四 會昌五年七月三日
+          - source: nitto-guho-junrei-gyoki
+            at: 卷四 會昌七年六月五日

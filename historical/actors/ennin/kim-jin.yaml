@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  金珍, a Silla trader whose ship, sailing from 蘇州 for Japan in 847, turned north to look for 圓仁,
+  took him aboard at 乳山長淮浦, and carried him from 赤山浦 to 肥前國 and 博多. The 太政官 ordered 大宰府 to provide for 金珍 and his 44
+  people.
+types: [person]
+names:
+  - form: 金珍
+    lang: lzh
+    script: Hani
+    roman: Kim Jin
+    scheme: other
+    note: The reading follows Korean usage as an editorial aid.
+    cite:
+      - id: kim-jin-name
+        says:
+          The letter of 會昌七年六月九日 names 金珍 among the traders on the 蘇州 ship bound for Japan who
+          came to look for 圓仁.
+        source: nitto-guho-junrei-gyoki
+        at: 卷四 會昌七年六月九日
+roles:
+  - role: merchant
+    note: The diary calls the ship's company 新羅人 and the 太政官符 calls them 唐人.
+    cite:
+      - id: kim-jin-role
+        says: The 太政官符 of 十月十九日 orders 大宰府 to provide for 唐人金珍等卌四人.
+        source: nitto-guho-junrei-gyoki
+        at: 卷四 會昌七年十月十九日
+        quote: 唐人金珍等卌四人。仰太宰府。量加支給者。
+notes:
+  The letter calls its writers 新羅人 and the court's order calls them 唐人; both labels are kept
+  in the record and neither is chosen.

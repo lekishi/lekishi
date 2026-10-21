@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  圓載, the long-term Tendai student monk (留學僧) of the 838 embassy. The 揚府 let him go on to 台州
+  國清寺 while 圓仁 was refused, and the two separated in 839; 圓仁 asked after him in vain in 845.
+types: [person]
+names:
+  - form: 圓載
+    lang: lzh
+    script: Hani
+    roman: Ensai
+    scheme: hepburn
+    cite:
+      - id: ensai-name
+        says: The 揚府's reply of 承和五年八月四日 names 留學僧圓載 with his novice 仁好 and attendant 伴始滿.
+        source: nitto-guho-junrei-gyoki
+        at: 卷一 承和五年八月四日
+roles:
+  - role: monk
+    note: Long-term student monk (留學僧) of the 838 embassy.
+    cite:
+      - id: ensai-role
+        says: The diary calls him 留學僧 and records him among those brought ashore on 七月二日.
+        sources:
+          - source: nitto-guho-junrei-gyoki
+            at: 卷一 承和五年八月四日
+          - source: nitto-guho-junrei-gyoki
+            at: 卷一 承和五年七月二日

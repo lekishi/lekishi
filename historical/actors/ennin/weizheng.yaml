@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  惟正, 圓仁's disciple, a novice (沙彌) when the embassy reached 揚州 in 838. He took the full
+  precepts at 五臺山 in 840 and was the one companion still with 圓仁 when both were laicized and
+  sent home in 845.
+types: [person]
+names:
+  - form: 惟正
+    lang: lzh
+    script: Hani
+    roman: Ishō
+    scheme: hepburn
+    note: The Japanese reading is an editorial aid.
+    cite:
+      - id: weizheng-name
+        says: The 揚府's reply of 承和五年八月四日 names the novices 惟正 and 惟曉 with 圓仁.
+        source: nitto-guho-junrei-gyoki
+        at: 卷一 承和五年八月四日
+roles:
+  - role: monk
+    note: A novice in 838; ordained with the full precepts at 五臺山 on 開成五年五月十四日.
+    date:
+      value: 838..847
+      mode: duration
+      calendar: regnal
+      as_written: 承和五年八月四日 沙彌惟正 — 會昌七年
+    cite:
+      - id: weizheng-ordination
+        says: The diary records 惟正 and 惟曉 taking the full precepts at the 白玉壇 on the night of the 14th.
+        source: nitto-guho-junrei-gyoki
+        at: 卷三 開成五年五月十四日
+        quote: 十四日夜。惟正惟曉。共數十人。於白玉壇上受具足戒。
+notes: The resident lists give his age as 30 in 會昌二年 and 31 in 會昌三年. The 845 expulsion
+  order named 圓仁 and 惟正 as foreign monks without a 祠部牒.

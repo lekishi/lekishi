@@ -414,7 +414,7 @@ describe("the Tang chapter fixture", () => {
 
     expect(counts).toEqual({ place: 15, actor: 12, event: 29, relationship: 9, story: 1 })
     expect(chapter.documents.filter((document) => document["document"] === "source")).toHaveLength(
-      17,
+      18,
     )
 
     const first = theSet(chapter)

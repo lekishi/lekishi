@@ -16,23 +16,31 @@ names:
         source: toseiden
         at: 天寶十二載 十月十五日壬午; 十月［十］九日戌時
 at:
-  - interpretation: display_anchor
-    precision: unspecified
-    point: [119.4363, 32.3912]
-    notes: Label anchor at the modern city of Yangzhou (Wikidata Q57906). It is not an asserted
-      historical coordinate, and no temple site is placed.
+  - interpretation: approximate_point
+    precision: region
+    point: [119.42231, 32.39926]
+    notes:
+      A region-level placement at the 扬州城遗址 (隋—宋), the protected site of the city whose Tang outer
+      wall enclosed what is now the old city of 揚州. The point stands for the city; no temple site is
+      placed, and neither 延光寺 nor 龍興寺 is located.
     cite:
-      - id: yangzhou-anchor
+      - id: yangzhou-identification
         says:
-          The label anchor is placed at the modern city's coordinate recorded in Wikidata (CC0); no
-          historical coordinate is asserted.
-        source: wikidata
-        at: Q57906 (P625), revision 2526612668
+          The 扬州城遗址 (隋—宋) is a national key protected site, and excavation by the 扬州唐城考古工作队
+          established that the south gate of the Tang 羅城 stood at the 南门 of the modern old city. The
+          point is the protected site's coordinate from Wikidata (CC0), placed to stand for the city.
+        basis: interpretation
+        attributed_to: 扬州唐城考古工作队 (中国社会科学院考古研究所 and others)
+        sources:
+          - source: yangzhou-nanmen-2022
+            at: 亮点：主城门位置千余年几无变动
+          - source: wikidata
+            at: Q19851519 (P625), revision 2486756687
 modern:
-  - form: 揚州市
+  - form: 扬州市
     lang: zh-Hans
     script: Hani
-    note: Modern city recorded for orientation only.
+    note: The modern city, whose old town lies within the Tang city's outer wall.
 notes:
   延光寺 and 龍興寺 are attested by name inside 揚州; the chapter does not assert either temple's
   modern site, so both stay in event notes.

@@ -386,19 +386,19 @@ describe("projecting the reviewed Tang chapter", () => {
 
   it("keeps a display anchor a display anchor instead of an asserted position", () => {
     const chapter = project()
-    const yangzhou = chapter.places.find((place) => place.id === "lks:place:yangzhou")
+    const hall = chapter.places.find((place) => place.id === "lks:place:hanyuan-hall")
     const yaku = chapter.places.find((place) => place.id === "lks:place:yaku")
     const palace = chapter.places.find((place) => place.id === "lks:place:heijo-palace")
 
-    expect(yangzhou).toEqual({
-      id: "lks:place:yangzhou",
-      label: "揚州",
-      aliases: expect.arrayContaining(["揚州", "Yangzhou"]),
-      romanization: "Yangzhou",
+    expect(hall).toEqual({
+      id: "lks:place:hanyuan-hall",
+      label: "蓬萊宮含元殿",
+      aliases: expect.arrayContaining(["蓬萊宮含元殿", "Penglai gong Hanyuan dian"]),
+      romanization: "Penglai gong Hanyuan dian",
       lang: expect.any(String),
       placement: "display-anchor",
       precision: "unspecified",
-      position: { lon: 119.4363, lat: 32.3912 },
+      position: { lon: 108.9594, lat: 34.2914 },
       placementNote: expect.any(String),
     })
     // The court's seat was a display anchor until 2026-10-21; it is now placed
@@ -426,9 +426,9 @@ describe("projecting the reviewed Tang chapter", () => {
       position: { lon: 130.5286, lat: 30.3586 },
       placementNote: expect.any(String),
     })
-    expect(eventById(chapter, "lks:event:longxing-departure-753").placement).toMatchObject({
+    expect(eventById(chapter, "lks:event:tang-new-year-audience-753").placement).toMatchObject({
       kind: "point",
-      placeId: "lks:place:yangzhou",
+      placeId: "lks:place:hanyuan-hall",
       basis: "display-anchor",
       precision: "unspecified",
     })
@@ -513,7 +513,7 @@ describe("adversarial readings of the chapter", () => {
 
   it("rejects a display anchor that claims a placement precision", () => {
     const chapter = cloneTree(tree())
-    const geometry = listOf(contentOf(recordById(chapter, "lks:place:yangzhou"))["geometry"])[0]
+    const geometry = listOf(contentOf(recordById(chapter, "lks:place:hanyuan-hall"))["geometry"])[0]
 
     objectOf(geometry)["precision"] = "locality"
 
@@ -680,7 +680,7 @@ describe("adversarial readings of the chapter", () => {
     const chapter = cloneTree(tree())
 
     objectOf(
-      listOf(contentOf(recordById(chapter, "lks:place:yangzhou"))["geometry"])[0] as JsonObject,
+      listOf(contentOf(recordById(chapter, "lks:place:hanyuan-hall"))["geometry"])[0] as JsonObject,
     )["precision"] = "region"
 
     const time = objectOf(contentOf(recordById(chapter, "lks:event:rewards-754"))["time"])

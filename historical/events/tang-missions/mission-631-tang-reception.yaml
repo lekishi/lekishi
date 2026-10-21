@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The Tang court records an embassy from 倭國 bringing local products in 貞觀五年; 太宗 waives yearly tribute
+  because of the distance and sends 高表仁 to it.
+types: [mission]
+date:
+  value: "631"
+  calendar: chinese_lunisolar
+  as_written: 貞觀五年
+  cite:
+    - id: mission-631-tang-reception-time
+      says: The Tang court history dates the embassy to 貞觀五年.
+      sources:
+        - source: jiu-tangshu
+          at: 卷199上 東夷 倭國
+          quote: 貞觀五年，遣使獻方物。
+        - source: xin-tangshu
+          at: 卷220 東夷 日本
+          quote: 太宗貞觀五年，遣使者入朝，帝矜其遠，詔有司毋拘歲貢。
+places:
+  - place: changan
+    role: context
+    note:
+      The histories name no place; the Tang court sat at 長安. The place is context, not a site the sources
+      state.
+participants:
+  - actor: tang-taizong
+    role: host
+    note: 太宗 receives the embassy and waives the yearly tribute.
+  - actor: tang-dynasty
+    role: host
+  - actor: japan-state
+    role: guest
+    note: Named 倭國 in the 舊唐書 section.
+notes:
+  This is the Tang side of the 630 mission. The Tang histories give a year only and do not name the
+  envoy, so the record does not assert that this notice and the 630 dispatch are one mission, though their
+  sequence fits it.
+cites:
+  participants:
+    - id: mission-631-taizong
+      says:
+        The 舊唐書 records that 太宗 pitied the distance, ordered that no yearly tribute be required, and
+        sent 高表仁 to the country.
+      source: jiu-tangshu
+      at: 卷199上 東夷 倭國
+      quote: 太宗矜其道遠，勑所司無令歲貢，又遣新州刺史高表仁持節往撫之。

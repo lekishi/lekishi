@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "高表仁 leaves for home. Japanese escorts take him as far as 對馬. The Tang histories tell this visit
+  differently: 高表仁 quarrelled over protocol and left without delivering the emperor's message."
+types: [journey]
+date:
+  value: 633-01
+  calendar: regnal
+  as_written: 舒明天皇五年春正月己卯朔甲辰
+  cite:
+    - id: mission-633-departure-time
+      says: The chronicle records 高表仁's departure on 舒明天皇五年正月甲辰 and the escorts turning back at 對馬.
+      source: nihon-shoki
+      at: 卷第廿三 舒明天皇五年正月甲辰
+      quote: 春正月己卯朔甲辰，大唐客高表仁等歸國。送使吉士雄摩呂、黑麻呂等，到對馬而還之。
+places:
+  - place: tsushima
+    role: waypoint
+    note: The escorts turn back at 對馬.
+participants:
+  - actor: gao-biaoren
+    role: leader
+notes:
+  "The two traditions are kept apart rather than merged: the chronicle records a ceremonious welcome
+  and an ordinary departure, while both Tang histories record a dispute over ritual precedence and an
+  envoy who did not deliver his message. Neither account is preferred."
+dispute:
+  status: disputed
+  summary:
+    The chronicle records an ordinary departure; both Tang histories record a quarrel over ritual
+    and an envoy who left without delivering the emperor's message.
+cites:
+  summary:
+    - id: mission-633-jiu-dispute
+      says:
+        The 舊唐書 records that 高表仁 lacked the talent to pacify distant peoples, disputed ritual with a
+        prince, and returned without proclaiming the court's order.
+      role: conflicting
+      source: jiu-tangshu
+      at: 卷199上 東夷 倭國
+      quote: 表仁無綏遠之才，與王子爭禮，不宣朝命而還。
+    - id: mission-633-xin-dispute
+      says:
+        The 新唐書 records that the envoy (written 高仁表) quarrelled with the king over ritual and would
+        not deliver the emperor's order.
+      role: conflicting
+      source: xin-tangshu
+      at: 卷220 東夷 日本
+      quote: 與王爭禮不平，不肯宣天子命而還。

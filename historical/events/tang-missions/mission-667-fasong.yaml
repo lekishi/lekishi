@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  劉仁願, the Tang general holding former Paekche, sends 司馬法聰 to escort 境部連石積 back to 筑紫. Four days
+  later 法聰 leaves with 伊吉連博德 and 笠臣諸石 as escorts, who report back early the next year.
+types: [mission]
+date:
+  value: 667-11
+  calendar: regnal
+  as_written: 天智天皇六年十一月丁巳朔乙丑
+  cite:
+    - id: mission-667-fasong-time
+      says: The chronicle records 法聰's arrival on 天智天皇六年十一月乙丑.
+      source: nihon-shoki
+      at: 卷第廿七 天智天皇六年十一月乙丑
+      quote: 十一月丁巳朔乙丑，百濟鎮將劉仁願，遣熊津都督府熊山縣令上柱國司馬法聰等，送大山下境部連石積等於筑紫都督府。
+places:
+  - place: dazaifu
+    role: site
+    note: The chronicle names 筑紫都督府, the office later called 大宰府.
+participants:
+  - actor: iki-no-hakatoko
+    role: participant
+    note: Escort on 法聰's return.
+  - actor: tang-dynasty
+    role: host
+    note: The sender is the Tang garrison in former Paekche.
+notes:
+  "This is a Tang garrison mission, not the Tang court's: 劉仁願 commanded in the conquered Paekche,
+  and 境部連石積 is the 坂合部連石積 of the 665 escort. The return of 博德's party is recorded in 天智天皇七年正月戊申."
+cites:
+  participants:
+    - id: mission-667-escorts
+      says: The chronicle names 伊吉連博德 and 笠臣諸石 as 法聰's escorts.
+      source: nihon-shoki
+      at: 卷第廿七 天智天皇六年十一月己巳
+      quote: 己巳，司馬法聰等罷歸。以小山下伊吉連博德、大乙下笠臣諸石，為送使。

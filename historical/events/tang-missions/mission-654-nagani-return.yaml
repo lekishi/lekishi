@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  吉士長丹's embassy returns to 筑紫 with Paekche and Silla escorts. The court praises the envoys for
+  answering the Tang emperor well and bringing back many books and treasures, and promotes 長丹 with the
+  surname 吳氏.
+types: [journey]
+date:
+  value: 654-07
+  calendar: regnal
+  as_written: 白雉五年秋七月甲戌朔丁酉
+  cite:
+    - id: mission-654-nagani-return-time
+      says: The chronicle records the return to 筑紫 on 白雉五年七月丁酉.
+      source: nihon-shoki
+      at: 卷第廿五 白雉五年七月丁酉
+      quote: 秋七月甲戌朔丁酉，西海使吉士長丹等，共百濟、新羅送使泊于筑紫。
+places:
+  - place: tsukushi
+    role: end
+participants:
+  - actor: kishi-no-nagani
+    role: leader
+notes: The entry calls the envoys 西海使. The reward entry is dated to the same month.
+cites:
+  summary:
+    - id: mission-654-nagani-reward
+      says:
+        The chronicle records the praise for answering the Tang emperor and bringing back many books
+        and treasures.
+      source: nihon-shoki
+      at: 卷第廿五 白雉五年七月
+      quote: 褒美西海使等奉對唐國天子，多得文書、寶物，授小山上大使吉士長丹以少花下，賜封二百戶，賜姓為吳氏。

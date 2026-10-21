@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The envoys attend the winter-solstice assembly at court. 博德 writes that of all the foreign guests
+  the 倭 envoys were the finest, though the record of it was lost in a fire.
+types: [mission]
+date:
+  value: 659-11-01
+  calendar: chinese_lunisolar
+  as_written: 十一月一日，朝有冬至之會
+  cite:
+    - id: mission-659-solstice-time
+      says: 伊吉連博德書 dates the winter-solstice assembly to the first of the eleventh month.
+      source: nihon-shoki
+      at: 卷第廿六 齊明天皇五年七月戊寅 注 伊吉連博德書
+      quote: 十一月一日，朝有冬至之會。會日亦覲。所朝諸蕃之中，倭客最勝。
+places:
+  - place: luoyang
+    role: site
+participants:
+  - actor: tsumori-no-kisa
+    role: guest
+  - actor: tang-dynasty
+    role: host
+notes: The claim that the 倭 envoys were the finest is 博德's own, not the Tang court's.

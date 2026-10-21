@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The court sends 坂合部連石布 and 津守連吉祥 to 唐, with a man and a woman of the 蝦夷 of 道奧 to show the Tang
+  emperor.
+types: [mission]
+date:
+  value: 659-07
+  calendar: regnal
+  as_written: 齊明天皇五年秋七月丙子朔戊寅
+  cite:
+    - id: mission-659-dispatch-time
+      says: The chronicle records the dispatch on 齊明天皇五年七月戊寅.
+      source: nihon-shoki
+      at: 卷第廿六 齊明天皇五年七月戊寅
+      quote: 秋七月丙子朔戊寅，遣小錦下坂合部連石布、大仙下津守連吉祥，使於唐國。仍以道奧蝦夷男女二人示唐天子。
+places:
+  - place: asuka
+    role: site
+    note:
+      The entry names no place. A court act happens at the court, so the record anchors it at the court's
+      seat for display only; it asserts no site for the act.
+participants:
+  - actor: sakaibe-no-iwashiki
+    role: leader
+    note: 大使.
+  - actor: tsumori-no-kisa
+    role: leader
+    note: 副使 in 難波吉士男人書; leads the second ship.
+  - actor: emishi
+    role: subject
+    note: Two 蝦夷 of 道奧 are taken to be shown to the emperor.
+  - actor: japan-state
+    role: host
+notes:
+  The chronicle's own entry. The voyage itself is told by 伊吉連博德, one of the envoys, in an account
+  the compilers quote; the following events cite it.

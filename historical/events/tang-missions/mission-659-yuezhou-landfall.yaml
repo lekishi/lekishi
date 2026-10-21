@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  吉祥's ship reaches 須岸山 in 會稽縣 of 越州 at midnight in a strong north-east wind, and on the 23rd reaches
+  餘姚縣, where the ship and its stores are left.
+types: [journey]
+date:
+  value: 659-09-16
+  calendar: chinese_lunisolar
+  as_written: 十六日，夜半之時
+  cite:
+    - id: mission-659-yuezhou-time
+      says: 伊吉連博德書 dates the landfall at 越州會稽縣須岸山 to midnight on the sixteenth.
+      source: nihon-shoki
+      at: 卷第廿六 齊明天皇五年七月戊寅 注 伊吉連博德書
+      quote: 十六日，夜半之時，吉祥連船，行到越州會稽縣須岸山。
+places:
+  - place: yuezhou
+    role: site
+    note: 博德 names 須岸山 in 會稽縣 of 越州 and then 餘姚縣; the record places both at the prefecture.
+participants:
+  - actor: tsumori-no-kisa
+    role: leader
+  - actor: iki-no-hakatoko
+    role: participant
+cites:
+  summary:
+    - id: mission-659-yuyao
+      says: 伊吉連博德書 records reaching 餘姚縣 on the 23rd and leaving the ship and stores there.
+      source: nihon-shoki
+      at: 卷第廿六 齊明天皇五年七月戊寅 注 伊吉連博德書
+      quote: 二十三日，行到餘姚縣。所乘大船及諸調度之物留著彼處。

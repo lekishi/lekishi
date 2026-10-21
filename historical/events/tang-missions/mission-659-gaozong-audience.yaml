@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The emperor receives the envoys at 洛陽 the day after they arrive and questions them about Japan
+  and the 蝦夷 they have brought: where they live, how many kinds there are, what they eat. The 蝦夷 present
+  a white deer skin, three bows and eighty arrows."
+types: [mission]
+date:
+  value: 659-10-30
+  calendar: chinese_lunisolar
+  as_written: 三十日，天子相見問訊
+  cite:
+    - id: mission-659-audience-time
+      says: 伊吉連博德書 dates the audience to the thirtieth.
+      source: nihon-shoki
+      at: 卷第廿六 齊明天皇五年七月戊寅 注 伊吉連博德書
+      quote: 三十日，天子相見問訊之：「日本國天皇，平安以不？」
+places:
+  - place: luoyang
+    role: site
+participants:
+  - actor: tang-gaozong
+    role: host
+    note: 博德 says 天子; the reigning emperor is 高宗.
+  - actor: tsumori-no-kisa
+    role: guest
+  - actor: emishi
+    role: guest
+notes:
+  The emperor is named only 天子 in the account. The gifts are reported in 難波吉士男人書, quoted after 博德's
+  account.
+cites:
+  summary:
+    - id: mission-659-emishi-gifts
+      says:
+        難波吉士男人書 reports that the vice-envoy saw the emperor and showed him the 蝦夷, who presented a white
+        deer skin, three bows and eighty arrows.
+      source: nihon-shoki
+      at: 卷第廿六 齊明天皇五年七月戊寅 注 難波吉士男人書
+      quote: 副使親覲天子，奉示蝦夷。於是蝦夷以白鹿皮一、弓三、箭八十獻于天子。
+  participants:
+    - id: mission-659-emishi-questions
+      says: 博德 records the emperor questioning the envoys about the 蝦夷.
+      source: nihon-shoki
+      at: 卷第廿六 齊明天皇五年七月戊寅 注 伊吉連博德書
+      quote: 天子問曰：「此等蝦夷國有何方？」使人謹答：「國有東北。」

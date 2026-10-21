@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Five survivors of 石布's ship, among them 東漢長直阿利麻 and 坂合部連稻積, steal an islanders' boat and escape
+  to 括州, whose officials send them on to 洛陽.
+types: [journey]
+date:
+  value: 659-09..659-10
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 便東漢長直阿利麻、坂合部連稻積等五人，盜乘嶋人之船，逃到括州
+  cite:
+    - id: mission-659-escape-time
+      says: 伊吉連博德書 reports the escape after the wreck of the 15th without a date of its own.
+      source: nihon-shoki
+      at: 卷第廿六 齊明天皇五年七月戊寅 注 伊吉連博德書
+      quote: 便東漢長直阿利麻、坂合部連稻積等五人，盜乘嶋人之船，逃到括州。州縣官人送到洛陽之京。
+places:
+  - place: kuozhou
+    role: end
+participants:
+  - actor: japan-state
+    role: other
+    note: Five men of the ambassador's ship.
+notes:
+  The window runs from the wreck to the envoys' arrival in 洛陽 at the end of the tenth month; it is
+  an editorial bound, not a stated date.

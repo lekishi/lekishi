@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 河邊臣麻呂 and the rest of the 654 embassy return from 大唐.
+types: [journey]
+date:
+  value: 655-08-01
+  calendar: regnal
+  as_written: 齊明天皇元年八月戊戌朔
+  cite:
+    - id: mission-655-return-time
+      says: The chronicle records the return on 齊明天皇元年八月戊戌朔.
+      source: nihon-shoki
+      at: 卷第廿六 齊明天皇元年八月戊戌朔
+      quote: 八月戊戌朔，河邊臣麻呂等自大唐還。
+participants:
+  - actor: japan-state
+    role: host
+notes: The entry names neither a landing place nor 麻呂's companions. 朔 fixes the first day of the month.

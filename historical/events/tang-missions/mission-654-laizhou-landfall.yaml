@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  After months on the way, the 654 embassy follows the Silla route and puts in at 萊州, then goes
+  on to the capital and is received by the emperor.
+types: [journey]
+date:
+  value: "654"
+  calendar: regnal
+  as_written: 白雉五年 留連數月，取新羅道，泊於萊州
+  cite:
+    - id: mission-654-laizhou-time
+      says: The chronicle reports the landfall in the 白雉五年 entry without its own date.
+      source: nihon-shoki
+      at: 卷第廿五 白雉五年二月
+      quote: 分乘二船，留連數月，取新羅道，泊於萊州。遂到于京，奉覲天子。
+places:
+  - place: laizhou
+    role: site
+participants:
+  - actor: takamuko-no-kuromaro
+    role: leader
+  - actor: silla
+    role: other
+    note: The route is named the Silla route.
+notes:
+  The entry gives no date for the landfall, only that it came after several months, so the event
+  is dated to the year of the dispatch.

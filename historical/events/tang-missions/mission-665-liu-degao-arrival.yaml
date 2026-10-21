@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The Tang envoy 劉德高, with 郭務悰 and 254 people, reaches 對馬 on 7/28 and 筑紫 on 9/20, and on 9/22 presents
+  his letter.
+types: [mission]
+date:
+  value: 665-09
+  calendar: regnal
+  as_written: 天智天皇四年九月庚午朔壬辰
+  cite:
+    - id: mission-665-liu-time
+      says: The chronicle records the Tang embassy on 天智天皇四年九月壬辰, with the dates of its stages in a note.
+      source: nihon-shoki
+      at: 卷第廿七 天智天皇四年九月壬辰
+      quote: 九月庚午朔壬辰，唐國遣朝散大夫沂州司馬上柱國劉德高等。
+places:
+  - place: tsushima
+    role: waypoint
+    note: Reached 七月二十八日.
+  - place: tsukushi
+    role: end
+    note: Reached 九月二十日.
+participants:
+  - actor: liu-degao
+    role: leader
+  - actor: tang-dynasty
+    role: host
+    note: The sending court.
+cites:
+  places:
+    - id: mission-665-liu-places
+      says:
+        The chronicle's note gives 254 people, 對馬 on the 28th of the seventh month and 筑紫 on the 20th
+        of the ninth.
+      source: nihon-shoki
+      at: 卷第廿七 天智天皇四年九月壬辰
+      quote: 凡二百五十四人。七月二十八日，至于對馬。九月二十日，至于筑紫。二十二日，進表函焉。

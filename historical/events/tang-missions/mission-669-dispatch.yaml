@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 河內直鯨 and others are sent as envoys to 大唐.
+types: [mission]
+date:
+  value: "669"
+  calendar: regnal
+  as_written: 天智天皇八年 是歲
+  cite:
+    - id: mission-669-dispatch-time
+      says: The chronicle records the dispatch under 天智天皇八年 是歲, without a month.
+      source: nihon-shoki
+      at: 卷第廿七 天智天皇八年 是歲
+      quote: 是歲，遣小錦中河內直鯨等，使於大唐。
+places:
+  - place: omi-otsu-palace
+    role: site
+    note:
+      The entry names no place; the court of this reign sits at 近江大津宮, and the anchor is for display
+      only.
+participants:
+  - actor: kawachi-no-kujira
+    role: leader
+  - actor: japan-state
+    role: host

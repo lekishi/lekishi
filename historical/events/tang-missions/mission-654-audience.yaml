@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The 654 embassy reaches the capital and has audience with the emperor. An official of the Crown
+  Prince's household questions them closely on Japan's geography and the names of its first gods.
+types: [mission]
+date:
+  value: 654..655
+  mode: window
+  calendar: regnal
+  as_written: 遂到于京，奉覲天子（白雉五年二月條）
+  cite:
+    - id: mission-654-audience-time
+      says: The chronicle reports the audience within the 白雉五年 entry, without a date of its own.
+      source: nihon-shoki
+      at: 卷第廿五 白雉五年二月
+      quote: 於是，東宮監門郭丈舉，悉問日本國之地里及國初之神名。皆隨問而答。
+places:
+  - place: changan
+    role: site
+    note: The chronicle says only 京, the capital; 長安 is the Tang capital, and the record reads 京 as 長安.
+participants:
+  - actor: takamuko-no-kuromaro
+    role: leader
+  - actor: tang-dynasty
+    role: host
+notes:
+  The audience has no date of its own; it lies between the embassy's landfall and its return in 655,
+  so it is a window, not an instant.

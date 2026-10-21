@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  高表仁's party reaches 難波津 and is met at the river mouth by thirty-two dressed ships with drums,
+  flutes and banners, then led to the guest lodge.
+types: [mission]
+date:
+  value: 632-10
+  calendar: regnal
+  as_written: 舒明天皇四年冬十月辛亥朔甲寅
+  cite:
+    - id: mission-632-naniwa-time
+      says: The chronicle records 高表仁 putting in at 難波津 on 舒明天皇四年十月甲寅.
+      source: nihon-shoki
+      at: 卷第廿三 舒明天皇四年十月甲寅
+      quote: 冬十月辛亥朔甲寅，唐國使人高表仁等，泊于難波津。
+places:
+  - place: naniwa
+    role: site
+    note: The entry names 難波津, the port of 難波.
+participants:
+  - actor: gao-biaoren
+    role: guest
+  - actor: japan-state
+    role: host
+    note: 大伴連馬養 is sent to meet the envoys at the river mouth.
+notes: The entry gives a sexagenary day (甲寅); v0 normalizes it to the month.
+cites:
+  summary:
+    - id: mission-632-naniwa-welcome
+      says: The entry records thirty-two ships with drums, flutes and banners meeting the envoys.
+      source: nihon-shoki
+      at: 卷第廿三 舒明天皇四年十月甲寅
+      quote: 船三十二艘及鼓、吹、旗幟，皆具整飾。

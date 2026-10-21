@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The monks 智通 and 智達 sail to 大唐 on a Silla ship at the court's order and study the doctrine of
+  beings without Buddha-nature under 玄奘.
+types: [journey]
+date:
+  value: 658-07
+  calendar: regnal
+  as_written: 齊明天皇四年秋七月 是月
+  cite:
+    - id: mission-658-chitsu-time
+      says: The chronicle records their sailing in the seventh month of 齊明天皇四年.
+      source: nihon-shoki
+      at: 卷第廿六 齊明天皇四年七月
+      quote: 是月，沙門智通、智達奉敕乘新羅船往大唐國，受無性眾生義於玄奘法師所。
+participants:
+  - actor: xuanzang
+    role: host
+    note: The chronicle names 玄奘法師 as their teacher.
+  - actor: silla
+    role: other
+    note: They sail on a Silla ship.
+notes:
+  The study under 玄奘 follows the sailing and is not separately dated. An attempt in the previous
+  year failed when Silla declined to carry 智達 (齊明天皇三年 是歲).

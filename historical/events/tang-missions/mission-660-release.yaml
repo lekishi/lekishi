@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: After Paekche has fallen, the envoys are released, and on the 19th they leave the western capital.
+types: [journey]
+date:
+  value: 660-09-19
+  calendar: chinese_lunisolar
+  as_written: 庚申年八月，百濟已平之後，九月十二日，放客本國。十九日，發自西京。
+  cite:
+    - id: mission-660-release-time
+      says:
+        伊吉連博德書 dates the release to the twelfth of the ninth month of 庚申年 and the departure from 西京
+        to the 19th.
+      source: nihon-shoki
+      at: 卷第廿六 齊明天皇六年 注 伊吉連博德書
+      quote: 『伊吉連博德書』云：庚申年八月，百濟已平之後，九月十二日，放客本國。
+places:
+  - place: changan
+    role: start
+participants:
+  - actor: tsumori-no-kisa
+    role: leader
+  - actor: iki-no-hakatoko
+    role: participant

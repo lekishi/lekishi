@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The envoys are back at 越州 and wait there until spring.
+types: [journey]
+date:
+  value: 661-01-25
+  calendar: chinese_lunisolar
+  as_written: 辛酉年，正月二十五日，還到越州。
+  cite:
+    - id: mission-661-yuezhou-time
+      says: 伊吉連博德書 dates the return to 越州 to the 25th of the first month of 辛酉年.
+      source: nihon-shoki
+      at: 卷第廿六 齊明天皇七年五月 注 伊吉連博得書
+      quote: 『伊吉連博得書』云：辛酉年，正月二十五日，還到越州。
+places:
+  - place: yuezhou
+    role: site
+participants:
+  - actor: tsumori-no-kisa
+    role: leader
+  - actor: iki-no-hakatoko
+    role: participant
+notes: The transcription spells the author 伊吉連博得 in this note and 伊吉連博德 elsewhere.

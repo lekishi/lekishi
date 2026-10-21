@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  高向玄理, the embassy's 押使, dies in 大唐. He had first gone to China as a student with the Sui mission
+  of 608.
+types: [occurrence]
+date:
+  value: 654..655
+  mode: window
+  calendar: regnal
+  as_written: 押使高向玄理，卒於大唐（白雉五年二月條）
+  cite:
+    - id: mission-654-takamuko-death-time
+      says: The chronicle reports the death within the 白雉五年 entry, without a date.
+      source: nihon-shoki
+      at: 卷第廿五 白雉五年二月
+      quote: 押使高向玄理，卒於大唐。
+participants:
+  - actor: takamuko-no-kuromaro
+    role: subject
+notes: The chronicle names no place beyond 大唐, so the event carries no place.

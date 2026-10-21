@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The envoys go overland from 越州 by post-horse and reach 東京 (洛陽), where the emperor is staying.
+types: [journey]
+date:
+  value: 659-10..659-11
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 潤十月一日，行到越州之底。十月十五日，乘驛入京。二十九日，馳到東京。
+  cite:
+    - id: mission-659-luoyang-time
+      says:
+        伊吉連博德書 records reaching the seat of 越州 on 潤十月一日, setting out by post on 十月十五日, and reaching
+        東京 on the 29th.
+      source: nihon-shoki
+      at: 卷第廿六 齊明天皇五年七月戊寅 注 伊吉連博德書
+      quote: 二十九日，馳到東京。天子在東京。
+places:
+  - place: luoyang
+    role: end
+    note: 博德 names 東京, the eastern capital 洛陽.
+participants:
+  - actor: tsumori-no-kisa
+    role: leader
+  - actor: iki-no-hakatoko
+    role: participant
+notes:
+  The transcription's month sequence (潤十月一日 before 十月十五日) cannot both be right; scholarship reads
+  the month differently, so the record keeps the as-written expression and dates the arrival as a window
+  over the tenth and intercalary months.

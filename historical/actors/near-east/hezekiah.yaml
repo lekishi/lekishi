@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Hezekiah, king of Judah, who in 701 BCE held Padi of Ekron in Jerusalem, was shut up there by
+  Sennacherib, lost his walled cities, and sent tribute to the king of Assyria. The prism and the books
+  of Kings tell his submission differently.
+types: [person]
+names:
+  - form: Hezekiah
+    lang: en
+    script: Latn
+    cite:
+      - id: hezekiah-name
+        says: The books of Kings date Sennacherib's invasion to the fourteenth year of king Hezekiah.
+        source: bible-kjv
+        at: 2 Kings 18:13
+        quote: Now in the fourteenth year of king Hezekiah
+      - says: The prism names Hezekiah, the Jew.
+        role: supporting
+        source: luckenbill-annals-sennacherib
+        at: p. 32, Oriental Institute prism col. III 18
+        quote: As for Hezekiah, the Jew,
+  - form: Ḫazaqiau
+    lang: akk
+    script: Latn
+    note: The prism writes the name Ḫa-za-ḳi-a-u; the form is an editorial normalization.
+    claim: hezekiah-name
+roles:
+  - role: ruler
+    note: King of Judah; the chapter dates no reign.
+    cite:
+      says: The books of Kings call Hezekiah king of Judah.
+      source: bible-kjv
+      at: 2 Kings 18:14
+      quote: And Hezekiah king of Judah sent to the king of Assyria to Lachish

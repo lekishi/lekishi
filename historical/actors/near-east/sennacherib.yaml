@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Sennacherib, king of Assyria, who in his third campaign of 701 BCE marched against the west,
+  received the submission of the Phoenician cities, defeated the Egyptian and Kushite army at Eltekeh,
+  took the cities of Judah and shut Hezekiah up in Jerusalem.
+types: [person]
+names:
+  - form: Sennacherib
+    lang: en
+    script: Latn
+    cite:
+      - id: sennacherib-name
+        says:
+          The books of Kings name Sennacherib king of Assyria as the king who came up against the cities
+          of Judah.
+        source: bible-kjv
+        at: 2 Kings 18:13
+        quote: did Sennacherib king of Assyria come up against all the fenced cities of Judah, and took them
+      - says: The epigraph over the Lachish relief names Sennacherib, king of Assyria.
+        role: supporting
+        source: luckenbill-annals-sennacherib
+        at: p. 156, epigraph XXV, line 1
+        quote: Sennacherib, king of the universe, king of Assyria,
+  - form: Sîn-aḫḫē-erība
+    lang: akk
+    script: Latn
+    note: The Akkadian name, an editorial normalization of the inscriptions' spelling.
+    claim: sennacherib-name
+roles:
+  - role: ruler
+    note: King of Assyria; the chapter dates no reign, only the campaign of 701 BCE.
+    cite:
+      says: The epigraph styles Sennacherib king of the universe and king of Assyria.
+      source: luckenbill-annals-sennacherib
+      at: p. 156, epigraph XXV, line 1
+      quote: Sennacherib, king of the universe, king of Assyria,

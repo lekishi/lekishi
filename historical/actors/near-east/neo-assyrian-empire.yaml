@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Assyria, the state of Sennacherib, whose army in 701 BCE received the submission of the Phoenician
+  and Philistine cities, fought the Egyptian and Kushite army at Eltekeh and took the cities of Judah.
+types: [state]
+names:
+  - form: Assyria
+    lang: en
+    script: Latn
+    cite:
+      - id: neo-assyrian-empire-name
+        says: The books of Kings call Sennacherib king of Assyria.
+        source: bible-kjv
+        at: 2 Kings 18:13
+        quote: Sennacherib king of Assyria
+      - says: The prism records Sidka carried off to Assyria.
+        role: supporting
+        source: luckenbill-annals-sennacherib
+        at: p. 30, Oriental Institute prism col. II 64
+        quote: I tore away and brought to Assyria.
+  - form: Aššur
+    lang: akk
+    script: Latn
+    note: The land and its god share the name in the inscriptions; an editorial normalization.
+    claim: neo-assyrian-empire-name
+notes:
+  '"Neo-Assyrian" is the modern name for the state in this period; the sources say Assyria. Earlier
+  Assyrian states are separate actors.'

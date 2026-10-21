@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "The Yan embassy of 227 BCE: 荊軻 came to 咸陽 as Yan's envoy bearing the map of 督亢 and the head of 樊於期, and the king of Qin received him at court. The embassy was a cover for the attempt on the king's life."
+types: [diplomacy]
+from: yan-state
+to: qin-state
+date:
+  value: "227 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "二十年（使荊軻刺秦王）"
+notes: "The relationship records the embassy as received; the sources say it was sent to kill the king, which the event jing-ke-attempt-227 records. It asserts no causation for the attack on Yan that followed, and carries no geometry."
+cite:
+  - says: "The biography of 荊軻 records the king receiving the Yan envoys at the 咸陽 palace with full court ceremony."
+    source: shiji-six-states
+    at: "卷八十六 刺客列傳（見燕使者咸陽宮）"
+    quote: "秦王聞之，大喜，乃朝服，設九賓，見燕使者咸陽宮。"
+  - says: "The hereditary house of Yan records 荊軻 sent to present the map of 督亢 to Qin and to stab the king."
+    role: supporting
+    source: shiji-six-states
+    at: "卷三十四 燕召公世家（使荊軻獻督亢地圖於秦）"
+    quote: "太子丹陰養壯士二十人，使荊軻獻督亢地圖於秦，因襲刺秦王。秦王覺，殺軻，使將軍王翦撃燕。"

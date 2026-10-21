@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "The Chu lands south of the 江 becoming the 會稽 commandery in 222 BCE, after 王翦 settled them and the lord of Yue submitted. The relationship is an institutional change and asserts no causation."
+types: [institutional_change]
+from: chu-state
+to: kuaiji-jun
+date:
+  value: "222 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "二十五年（置會稽郡）"
+notes: "The commandery took in Yue lands as well as Chu's; the relationship records only the Chu side the sources name. It carries no geometry."
+cite:
+  - says: "The annals record 王翦 settling the Jing lands south of the 江, the lord of Yue submitting, and the 會稽 commandery set up."
+    source: shiji
+    at: "卷六 秦始皇本紀 二十五年（置會稽郡）"
+    quote: "王翦遂定荊江南地；降越君，置會稽郡。"
+  - says: "The comprehensive mirror records the same, with the lords of the Hundred Yue."
+    role: supporting
+    source: zizhi-tongjian-qin-ji-2
+    at: "卷七 秦紀二 始皇帝二十五年（王翦悉定荊江南地）"
+    quote: "王翦悉定荊江南地，降百越之君，置會稽郡。"

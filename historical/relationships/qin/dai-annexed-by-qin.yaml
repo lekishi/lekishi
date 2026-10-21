@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "Dai's land passing to Qin in 222 BCE, when 王賁 captured its king 嘉."
+types: [changed_boundaries]
+from: dai-state
+to: qin-state
+date:
+  value: "222 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "二十五年（還攻代，虜代王嘉）"
+notes: "The relationship records that the state's land passed to Qin; it draws no boundary, because the chapter has no cited territory geometry, and it asserts no causation."
+cite:
+  - says: "The annals record Qin turning back to attack Dai and capturing its king in 二十五年."
+    source: shiji
+    at: "卷六 秦始皇本紀 二十五年（還攻代，虜代王嘉）"
+    quote: "還攻代，虜代王嘉。"
+  - says: "The comprehensive mirror records 王賁 attacking Dai and capturing its king."
+    role: supporting
+    source: zizhi-tongjian-qin-ji-2
+    at: "卷七 秦紀二 始皇帝二十五年（王賁攻代）"
+    quote: "王賁攻代，虜代王嘉。"

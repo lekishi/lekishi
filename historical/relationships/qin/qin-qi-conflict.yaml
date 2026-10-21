@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "Qin's conquest of Qi in 221 BCE: Qi closed its western border, and 王賁 came south from Yan into 臨淄, where no one resisted, and took the king. The relationship asserts no causation and draws no route."
+types: [conflict]
+from: qin-state
+to: qi-state
+notes: "The sources record a surrender without battle; the relationship is a conflict because Qin's army entered Qi, not because fighting is recorded. It carries no validity interval, because the sources establish separately dated acts and not a continuous war, and it carries no geometry. It asserts no causation."
+cite:
+  - says: "The annals record the Qi king guarding his western border against Qin and 王賁 attacking Qi from Yan in 二十六年."
+    source: shiji
+    at: "卷六 秦始皇本紀 二十六年（從燕南攻齊）"
+    quote: "秦使將軍王賁從燕南攻齊，得齊王建。"
+  - says: "The hereditary house records Qi surrendering without fighting, on the advice of its minister 后勝."
+    role: supporting
+    source: shiji-six-states
+    at: "卷四十六 田敬仲完世家 王建四十四年（秦兵卒入臨淄）"
+    quote: "四十四年，秦兵撃齊。齊王聽相后勝計，不戰，以兵降秦。"

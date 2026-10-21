@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "Qin's war on Dai, the remnant Zhao kingdom: Dai's army fought beside Yan's west of the 易水 in 227 BCE, and 王賁 captured the Dai king 嘉 in 222 BCE. The relationship asserts no causation and draws no route."
+types: [conflict]
+from: qin-state
+to: dai-state
+notes: "It carries no validity interval, because the sources establish separately dated acts and not a continuous war, and it carries no geometry. It asserts no causation."
+cite:
+  - says: "The annals record Yan and Dai sending troops against Qin west of the 易水 in 二十年."
+    source: shiji
+    at: "卷六 秦始皇本紀 二十年（秦軍破燕易水之西）"
+    quote: "而使王翦、辛勝攻燕。燕、代發兵擊秦軍，秦軍破燕易水之西。"
+  - says: "The annals record Qin turning back to attack Dai and capturing its king 嘉 in 二十五年."
+    role: supporting
+    source: shiji
+    at: "卷六 秦始皇本紀 二十五年（還攻代，虜代王嘉）"
+    quote: "還攻代，虜代王嘉。"

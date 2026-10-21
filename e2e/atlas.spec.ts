@@ -922,6 +922,11 @@ test("places a court act at the identified palace site, and a hall by anchor alo
   await expect(card(page).locator('[data-badge="identified"]')).toContainText(
     "identified, size is precision",
   )
+  // Identifying the palace site does not locate the act: the card still says
+  // that no source places it there.
+  await expect(card(page).getByTestId("atlas-selection-note")).toContainText(
+    "no source places the act there",
+  )
   await expect(page.locator('[data-marker-id="lks:place:heijo-palace"]')).toHaveAttribute(
     "data-mark",
     "identified",

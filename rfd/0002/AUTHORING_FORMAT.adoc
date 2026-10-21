@@ -372,7 +372,11 @@ The owner decided on 2026-10-21 that a journey is a record kind of its own,
 `historical/journeys/<id>.yaml`, under contract *v1*. This supersedes, for
 journeys only, the first bullet of
 <<Proposed: journeys, territories, and media>>; territories, media, and
-per-claim credit stay proposed there.
+per-claim credit stay proposed there. It also supersedes that section's timing
+for v1, which proposed introducing it with the first chapter that draws a
+territory or shows an image: v1 now arrives with the first published journey,
+and territories, media, and per-claim credit join it as further rules once
+they are agreed.
 
 Two other homes were weighed and not chosen:
 
@@ -532,11 +536,16 @@ they are and keep passing; v1 adds its schema and vectors under
 `historical/v1/`, and a v0 document is a valid v1 document. The compiler emits
 v1 bundles once the first journey is published.
 
-*What moves.* The two journeys in `src/lib/atlas/overlays.ts` (鑒眞's and
-大伴古麻呂's) are curation in code, uncited and unapproved. The 753 journeys
-replace 鑒眞's, the map's journeys come from the published records, and the
-hand-written list is removed; 大伴古麻呂's and 韓非's lines stay hand-written
-until they are authored, then go too.
+*What moves.* The hand-written journeys in
+`src/lib/atlas/overlay-definitions.ts` (鑒眞's and 大伴古麻呂's for Tang,
+韓非's for Qin) are curation in code, uncited and unapproved. Since RFD 6 they
+travel in each chapter's data rather than in a shared browser table, so a
+chapter production leaves out names none of them in a public file. The 753
+journeys replace 鑒眞's, the map's journeys come from the published records,
+and his hand-written entry is removed; 大伴古麻呂's and 韓非's lines stay
+hand-written until they are authored, then go too. Journey records keep that
+boundary: they compile into their chapter's bundle, so a left-out chapter's
+journeys are as server-only as its events.
 
 *Open for the owner.*
 

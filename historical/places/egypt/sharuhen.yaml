@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Sharuhen, the city in the south of Canaan whose people, the annals say, had begun to revolt against
+  Thutmose III, "from Yeraza to the marshes of the earth". It was the last Hyksos stronghold taken by
+  Ahmose a generation before.
+types: [settlement]
+names:
+  - form: Sharuhen
+    lang: egy
+    script: Latn
+    cite:
+      - id: sharuhen-name
+        says: The annals name the city of Sharuhen as the place whose people had begun to revolt.
+        source: breasted-ancient-records
+        at: "II, Annals of Thutmose III, first campaign: the revolt (Sharuhen)"
+        quote:
+          Now, it happened that the tribes - the people, who were there in the city of Sharuhen; behold,
+          from Yeraza to the marshes of the earth, they had begun to revolt against his majesty.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [34.4825, 31.28194]
+    notes:
+      "The point is the coordinate Wikidata gives for the site it calls Sharuhen (Tell el-Far'ah South).
+      The identification is disputed: Tell el-Ajjul near Gaza is the other candidate. The point is kept
+      at locality precision for that reason."
+    cite:
+      - id: sharuhen-identification
+        says:
+          Wikidata records Sharuhen as an archaeological site in southern Israel with this coordinate
+          (CC0).
+        basis: interpretation
+        attributed_to: Wikidata contributors
+        source: wikidata
+        at: Q1548392 (P625), revision 2533058760
+external_ids:
+  - system: wikidata
+    id: Q1548392
+    url: https://www.wikidata.org/wiki/Q1548392
+    license: CC0-1.0
+notes:
+  Which tell is Sharuhen is a scholarly question this chapter does not settle; the record follows
+  the Wikidata item and says so.

@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Yehem, the town where Thutmose III arrived on the 16th day of the first month of the third season
+  of year 23 and held his council of war on the road to take to Megiddo.
+types: [settlement]
+names:
+  - form: Yehem
+    lang: egy
+    script: Latn
+    cite:
+      - id: yehem-name
+        says: The annals record the king arriving at the city of Yehem.
+        source: breasted-ancient-records
+        at: "II, Annals of Thutmose III, first campaign: Year 23, I Shemu 16 (Yehem)"
+        quote: Year 23, first month of the third season, on the sixteenth day, he arrived at the city of Yehem.
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      The annals do not describe where Yehem lay beyond its place on the march between Gaza and the
+      Aruna road. It is usually sought at Khirbet Yemma on the edge of the Sharon plain, but no source read
+      for this chapter states that, so the record asserts no coordinate.
+    cite:
+      - id: yehem-unlocated
+        says: The annals name Yehem as a city on the march, without describing its site.
+        source: breasted-ancient-records
+        at: "II, Annals of Thutmose III, first campaign: Year 23, I Shemu 16 (Yehem)"

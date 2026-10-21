@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Megiddo, the fortified city in the Jezreel valley where the chief of Kadesh gathered the coalition
+  against Thutmose III, where the battle was fought on the 21st day of the first month of the third season
+  of year 23, and which the Egyptians then besieged.
+types: [fortification, settlement]
+names:
+  - form: Megiddo
+    lang: egy
+    script: Latn
+    cite:
+      - id: megiddo-name
+        says: The king tells his council that the chief of Kadesh has entered Megiddo.
+        source: breasted-ancient-records
+        at: "II, Annals of Thutmose III, first campaign: the council at Yehem (Megiddo)"
+        quote:
+          That wretched enemy, the chief of Kadesh, has come and entered into Megiddo; he is there at
+          this moment.
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [35.18444, 32.58528]
+    notes:
+      Wikidata's coordinate for the tell. The battle was fought outside the city, south and north-west
+      of it; the point marks the city, not the battlefield.
+    cite:
+      - id: megiddo-identification
+        says:
+          Wikidata records Tel Megiddo, the site of the ancient city in the Jezreel valley, with this
+          coordinate (CC0).
+        basis: interpretation
+        attributed_to: Wikidata contributors
+        source: wikidata
+        at: Q208379 (P625), revision 2521612586
+external_ids:
+  - system: wikidata
+    id: Q208379
+    url: https://www.wikidata.org/wiki/Q208379
+    license: CC0-1.0

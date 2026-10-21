@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Aruna, the town at the head of the narrow pass that Thutmose III chose against his officers'
+  advice, and where the royal tent stood on the 19th day of the first month of the third season of year
+  23.
+types: [route_node]
+names:
+  - form: Aruna
+    lang: egy
+    script: Latn
+    cite:
+      - id: aruna-name
+        says: The annals record the royal tent at the city of Aruna.
+        source: breasted-ancient-records
+        at: "II, Annals of Thutmose III, first campaign: Year 23, I Shemu 19 (Aruna)"
+        quote:
+          Year 23, first month of the third season, on the nineteenth day; the watch in safety in the
+          royal tent was at the city of Aruna.
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      The annals place Aruna on the narrow road to Megiddo. The pass is usually identified with the
+      Wadi Ara through the Carmel ridge, but no source read for this chapter states the town's site, so
+      the record asserts no coordinate.
+    cite:
+      - id: aruna-unlocated
+        says: The annals name Aruna on the narrow road without describing its site.
+        source: breasted-ancient-records
+        at: "II, Annals of Thutmose III, first campaign: Year 23, I Shemu 19 (Aruna)"

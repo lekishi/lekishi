@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Thebes (Waset), the city of Amun in Upper Egypt and the seat of the New Kingdom's state god,
+  with Karnak on its east bank and the royal temples on its west.
+types: [capital, religious_site]
+names:
+  - form: Thebes
+    lang: en
+    script: Latn
+    note: Greek Thebai; Egyptian Waset.
+    cite:
+      - id: thebes-name
+        says: The officers address Amun as lord of Thebes, presider over Karnak.
+        source: breasted-ancient-records
+        at: "II, Annals of Thutmose III, first campaign: the council at Yehem (Thebes)"
+        quote: May thy father Amon, lord of Thebes, presider over Karnak, grant thee life.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [32.63188, 25.66478]
+    notes:
+      Pleiades' representative point for Thebes at Luxor. The city spread over both banks; the point
+      marks the place, not a building.
+    cite:
+      - id: thebes-identification
+        says:
+          Pleiades identifies Diospolis Magna/Thebai, ancient Waset, and gives this representative point
+          (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 786017 (reprLatLong, version 16), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "786017"
+    url: https://pleiades.stoa.org/places/786017
+    license: CC-BY-3.0

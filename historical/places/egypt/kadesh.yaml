@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Kadesh on the Orontes, the city whose chief led the coalition at Megiddo against Thutmose III,
+  and where Ramesses II fought the Hittites in his fifth year. The site is Tell Nebi Mend in Syria.
+types: [settlement, fortification]
+names:
+  - form: Kadesh
+    lang: egy
+    script: Latn
+    cite:
+      - id: kadesh-name
+        says: The annals call the coalition's leader the chief of Kadesh.
+        source: breasted-ancient-records
+        at: "II, Annals of Thutmose III, first campaign: the council at Yehem (Kadesh)"
+        quote:
+          That wretched enemy, the chief of Kadesh, has come and entered into Megiddo; he is there at
+          this moment.
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [36.51938, 34.55707]
+    notes:
+      Pleiades' point for Tell Nebi Mend, the tell of Bronze Age Kadesh and Hellenistic Laodicea, on
+      the Orontes south-west of Homs.
+    cite:
+      - id: kadesh-identification
+        says:
+          Pleiades records the site as Laodicea ad Libanum, the Hellenistic city at Tell Nebi Mend, with
+          the names Qadesh on the Orontes and Kadesh, and gives this representative point (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 668291 (reprLatLong, version 14), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "668291"
+    url: https://pleiades.stoa.org/places/668291
+    license: CC-BY-3.0

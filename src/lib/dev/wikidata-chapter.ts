@@ -153,6 +153,8 @@ export function wikidataChapter(snapshot: WikidataSnapshot): Chapter {
       },
     ],
     story: [],
+    // The stress chapter draws places only: no journeys, anchors or dioramas.
+    overlays: { journeys: [], actorAnchors: {}, endAnchors: {}, dioramas: [] },
     publication: {
       setIds: [],
       publishedAt: snapshot.retrieved,

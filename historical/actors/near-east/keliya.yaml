@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Keliya (Niebuhr's Gilia), Tushratta's messenger, a witness to what Amenhotep III had promised,
+  whom Akhenaten demanded be sent to him.
+types: [person]
+names:
+  - form: Gilia
+    lang: akk
+    script: Latn
+    note: Niebuhr's form.
+    cite:
+      - id: keliya-name
+        says: Tushratta names Gilia and Mani as messengers who knew the negotiations.
+        source: niebuhr-tell-el-amarna-period
+        at: "ch. III: Teye"
+        quote: thou and Gilia and Mani (Tushratta's messengers), ye know it.
+  - form: Keliya
+    lang: en
+    script: Latn
+    role: alternate
+    note: The modern form.
+roles:
+  - role: envoy

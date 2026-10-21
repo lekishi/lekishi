@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Abi-Milku, the king's man at Tyre, whose letters praise the king as the sun and report on Sidon,
+  Aziru and Ugarit.
+types: [person]
+names:
+  - form: Abi-milki
+    lang: akk
+    script: Latn
+    note: Niebuhr's form.
+    cite:
+      - id: abi-milku-name
+        says: Niebuhr names Abi-milki of Tyre.
+        source: niebuhr-tell-el-amarna-period
+        at: "ch. IV: Abi-milki of Tyre"
+        quote:
+          Abi-milki of Tyre had carried this practice farthest, and he was also admirably skilful in
+          lodging complaints by the way.
+  - form: Abi-Milku
+    lang: en
+    script: Latn
+    role: alternate
+    note: The modern form.
+roles:
+  - role: ruler

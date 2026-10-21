@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Akhenaten (Amenhotep IV, Neferkheperure), king of Egypt, son of Amenhotep III and Tiye, who built
+  Akhetaten and kept his father's foreign archive there.
+types: [person]
+names:
+  - form: Napkhuria
+    lang: akk
+    script: Latn
+    note: The cuneiform form of Neferkheperure.
+    cite:
+      - id: akhenaten-name
+        says: Niebuhr says the foreign kings address Akhenaten as Napkhuria, his throne name Nefer-khepru-Ra.
+        source: niebuhr-tell-el-amarna-period
+        at: "ch. III: the prenomen"
+        quote:
+          but always "Nimmuria" (i.e., Neb-maat-Ra) for Amenophis III. and "Napkhuria" (i.e., Nefer-khepru-Ra)
+          for Akhenaten.
+  - form: Akhenaten
+    lang: en
+    script: Latn
+    role: alternate
+    note: The modern form.
+roles:
+  - role: ruler

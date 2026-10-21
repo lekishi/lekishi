@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Labayu, a chief in the hill country of Canaan who tried to build a realm in the south, was captured
+  at Megiddo and escaped.
+types: [person]
+names:
+  - form: Labaya
+    lang: akk
+    script: Latn
+    note: Niebuhr's form.
+    cite:
+      - id: labayu-name
+        says: Niebuhr names Labaya as the would-be Aziru of the south.
+        source: niebuhr-tell-el-amarna-period
+        at: "ch. IV: Labaya"
+        quote: Here a certain Labaya tried to play the part taken by Aziru in the north.
+  - form: Labayu
+    lang: en
+    script: Latn
+    role: alternate
+    note: The modern form.
+roles:
+  - role: ruler

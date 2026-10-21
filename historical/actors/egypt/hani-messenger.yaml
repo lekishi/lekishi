@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Hani, the Egyptian messenger sent to Aziru with the king's demands, who found he had gone over
+  the hills.
+types: [person]
+names:
+  - form: Hani
+    lang: akk
+    script: Latn
+    cite:
+      - id: hani-messenger-name
+        says: Niebuhr says Aziru vanished when the messenger Hani arrived.
+        source: niebuhr-tell-el-amarna-period
+        at: "ch. IV: Hani and Aziru"
+        quote:
+          When the messenger Hani arrived with this note, Aziru, evidently warned in good time, had promptly
+          vanished over the hills, and none of the royal commands could be carried out.
+roles:
+  - role: envoy

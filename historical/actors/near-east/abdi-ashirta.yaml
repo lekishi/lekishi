@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Abdi-Ashirta, father of Aziru and lord of Amurru, against whom Rib-Hadda of Byblos asked for
+  help.
+types: [person]
+names:
+  - form: Abd-Ashera
+    lang: akk
+    script: Latn
+    note: Niebuhr's form.
+    cite:
+      - id: abdi-ashirta-name
+        says: Niebuhr names Abd-Ashera as Aziru's father, against whom Rib-Addi complains.
+        source: niebuhr-tell-el-amarna-period
+        at: "ch. IV: Rib-Addi"
+        quote: The most bitter complaints against Aziru and his father Abd-Ashera come from Rib-Addi of Gebal.
+  - form: Abdi-Ashirta
+    lang: en
+    script: Latn
+    role: alternate
+    note: The modern form.
+roles:
+  - role: ruler

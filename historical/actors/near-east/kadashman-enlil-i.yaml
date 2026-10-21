@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Kadashman-Enlil I, Kassite king of Babylon, who corresponded with Amenhotep III about marriages,
+  gold and his sister in the Egyptian harem.
+types: [person]
+names:
+  - form: Kadashman-Bel
+    lang: akk
+    script: Latn
+    note: Niebuhr's reading of the name.
+    cite:
+      - id: kadashman-enlil-i-name
+        says: Niebuhr names Kadashman-Bel, first misread Kallima-Sin, as the writer of four letters to Nimmuria.
+        source: niebuhr-tell-el-amarna-period
+        at: "ch. III: Kadashman-Bel"
+        quote:
+          Four communications to "Nimmuria" from the Babylonian ruler Kadashman-Bel (at first incorrectly
+          read Kallima-Sin) are among the most important in this respect. The writer calls his land Karduniash
+  - form: Kadashman-Enlil I
+    lang: en
+    script: Latn
+    role: alternate
+    note: The modern form.
+roles:
+  - role: ruler

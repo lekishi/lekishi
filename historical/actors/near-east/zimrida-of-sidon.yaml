@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: Zimrida, prefect of Sidon, who, by Abi-Milku's report, passed every word from Egypt to Aziru.
+types: [person]
+names:
+  - form: Zimrida
+    lang: akk
+    script: Latn
+    cite:
+      - id: zimrida-of-sidon-name
+        says: Abi-milki reports that Zimrida, prefect of Sidon, sends Aziru a report every day.
+        source: niebuhr-tell-el-amarna-period
+        at: "ch. IV: Abi-milki of Tyre"
+        quote:
+          '"Furthermore, Zimrida, the prefect of Sidon, sends a report every day to Aziru, Abd-Ashera''s
+          son. Every word that comes from Egypt he telleth to him.'
+roles:
+  - role: ruler
+notes: The id names Sidon to keep him apart from Zimrida of Lachish.

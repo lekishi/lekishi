@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Meroë, the city on the east bank of the Nile near Shendi that was the centre of the kingdom of
+  Kush in this period. Nero's praetorians reported its few buildings, its queen called Candace and its
+  temple of Jupiter Hammon.
+types: [capital]
+names:
+  - form: Meroë
+    lang: la
+    script: Latn
+    cite:
+      - id: meroe-name
+        says: Pliny reports the praetorians' account of the city of Meroë and its queen.
+        source: pliny-natural-history
+        at: VI.35 (§186)
+        quote:
+          The buildings in the city, they said, were but few in number, and they stated that a female,
+          whose name was Candace, ruled over the district
+  - form: Μερόη
+    lang: grc
+    script: Grek
+    roman: Meroe
+    scheme: other
+    note: "The Res Gestae's Greek version: ἔνγιστα Μερόῃ."
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [33.71192, 16.93686]
+    notes:
+      Pleiades' representative point for the city of Meroë (the Royal City), not its pyramid fields
+      to the east.
+    cite:
+      - id: meroe-identification
+        says:
+          Pleiades identifies Meroë with the ancient city on the east bank of the Nile near Shendi and
+          gives this representative point (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 805630 (reprLatLong, version 15), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "805630"
+    url: https://pleiades.stoa.org/places/805630
+    license: CC-BY-3.0

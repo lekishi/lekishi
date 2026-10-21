@@ -1,0 +1,58 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Syene, the town at the First Cataract that the Roman sources treat as the southern limit of Egypt.
+  Strabo records the Ethiopians taking it by surprise and Pliny measures the road to Meroë from it.
+types: [settlement]
+names:
+  - form: Συήνη
+    lang: grc
+    script: Grek
+    roman: Syene
+    scheme: other
+    cite:
+      - id: syene-name
+        says: Strabo names Syene among the places the Ethiopians took in their attack on the Thebaïd.
+        source: strabo-geography
+        at: XVII.1.54 (C819–821)
+        quote:
+          invaded the Thebaïs, and attacked the garrison, consisting of three cohorts, near Syene; surprised
+          and took Syene, Elephantina, and Philæ, by a sudden inroad; enslaved the inhabitants, and threw
+          down the statues of Cæsar.
+  - form: Syene
+    lang: la
+    script: Latn
+    note: Pliny's form, the starting point of the praetorians' measured distances.
+    cite:
+      - id: syene-pliny-name
+        says: Pliny gives the distance the praetorians reported from Syene to Meroë.
+        source: pliny-natural-history
+        at: VI.35 (§184)
+        quote:
+          the persons sent by Nero for the purposes of discovery have reported that the distance from
+          Syene to Meroë is eight hundred and seventy-one miles
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [32.90149, 24.08857]
+    notes:
+      The point is Pleiades' representative point for the ancient town at Aswan. It places the town,
+      not the garrison camp of the three cohorts, which Strabo puts near Syene without a site.
+    cite:
+      - id: syene-identification
+        says:
+          Pleiades identifies ancient Syene with the town at modern Aswan and gives this representative
+          point (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 786123 (reprLatLong, version 12), dump 2026-10-21
+modern:
+  - form: Aswan
+    lang: en
+    script: Latn
+    note: The modern city, recorded for orientation.
+external_ids:
+  - system: pleiades
+    id: "786123"
+    url: https://pleiades.stoa.org/places/786123
+    license: CC-BY-3.0

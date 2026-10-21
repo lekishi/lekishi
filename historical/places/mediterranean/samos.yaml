@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Samos, the Aegean island where Augustus wintered in 21–20 BCE and where, by Strabo's account,
+  the Candace's envoys reached him.
+types: [region]
+names:
+  - form: Σάμος
+    lang: grc
+    script: Grek
+    roman: Samos
+    scheme: other
+    cite:
+      - id: samos-name
+        says: Strabo records that the envoys arrived at Samos, where Caesar was at that time.
+        source: strabo-geography
+        at: XVII.1.54 (C819–821)
+        quote:
+          They arrived at Samos, where Cæsar was at that time, and from whence he was on the point of
+          proceeding into Syria, having already despatched Tiberius into Armenia.
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [26.83913, 37.73246]
+    notes:
+      Pleiades' representative point for the island as a whole. The sources name the island, not the
+      town or house where Augustus received the envoys.
+    cite:
+      - id: samos-identification
+        says: Pleiades identifies the island of Samos and gives this representative point (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 599926 (reprLatLong, version 11), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "599926"
+    url: https://pleiades.stoa.org/places/599926
+    license: CC-BY-3.0

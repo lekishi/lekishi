@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Philae, the temple island above the First Cataract. Strabo lists it among the places the Ethiopians
+  took. The island was flooded by the Aswan dams and its temples moved to Agilkia; the point keeps the
+  ancient island.
+types: [religious_site]
+names:
+  - form: Φιλαί
+    lang: grc
+    script: Grek
+    roman: Philai
+    scheme: other
+    cite:
+      - id: philae-name
+        says: Strabo names Philae among the places the Ethiopians took by surprise.
+        source: strabo-geography
+        at: XVII.1.54 (C819–821)
+        quote:
+          invaded the Thebaïs, and attacked the garrison, consisting of three cohorts, near Syene; surprised
+          and took Syene, Elephantina, and Philæ, by a sudden inroad; enslaved the inhabitants, and threw
+          down the statues of Cæsar.
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [32.88414, 24.02526]
+    notes:
+      Pleiades' representative point for the ancient island, which now lies under the reservoir; the
+      temples stand on Agilkia nearby.
+    cite:
+      - id: philae-identification
+        says:
+          Pleiades identifies Philae with the island above the First Cataract, now flooded, and gives
+          this representative point (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 786089 (reprLatLong, version 12), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "786089"
+    url: https://pleiades.stoa.org/places/786089
+    license: CC-BY-3.0

@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Premnis or Primis, the strong place in Lower Nubia that Petronius took at the first onset and
+  then garrisoned, and that the Candace attacked; it is identified with Qasr Ibrim.
+types: [fortification]
+names:
+  - form: Πρῆμνις
+    lang: grc
+    script: Grek
+    roman: Premnis
+    scheme: other
+    cite:
+      - id: premnis-name
+        says: Strabo names Premnis, a strong city that Petronius took at the first onset.
+        source: strabo-geography
+        at: XVII.1.54 (C819–821)
+        quote:
+          From Pselchis Petronius went to Premnis, a strong city, travelling over the hills of sand,
+          beneath which the army of Cambyses was overwhelmed by the setting in of a whirlwind. He took the
+          fortress at the first onset
+  - form: Primis
+    lang: la
+    script: Latn
+    note: Pliny's form.
+    cite:
+      - id: premnis-pliny-name
+        says: Pliny lists Primis second among the towns Petronius took.
+        source: pliny-natural-history
+        at: VI.35 (§181)
+        quote: Pselcis, Primis, Abuncis, Phthuris, Cambusis, Atteva, and Stadasis
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [31.99277, 22.64965]
+    notes: Pleiades' representative point for Qasr Ibrim, whose citadel survives as an island in Lake Nasser.
+    cite:
+      - id: premnis-identification
+        says:
+          Pleiades identifies Premis with the archaeological site of Qasr Ibrim in Lower Nubia and gives
+          this representative point (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 795845 (reprLatLong, version 11), dump 2026-10-21
+modern:
+  - form: Qasr Ibrim
+    lang: en
+    script: Latn
+    note: The modern name of the site, recorded for orientation.
+external_ids:
+  - system: pleiades
+    id: "795845"
+    url: https://pleiades.stoa.org/places/795845
+    license: CC-BY-3.0

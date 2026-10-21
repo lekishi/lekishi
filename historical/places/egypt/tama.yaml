@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Tama, a stage on the road Nero's praetorians measured from Syene to Meroë. Pliny gives only its
+  distance from the stage before; no gazetteer read for this chapter locates it.
+types: [route_node]
+names:
+  - form: Tama
+    lang: la
+    script: Latn
+    cite:
+      - id: tama-name
+        says: Pliny gives Tama as the stage seventy-two miles beyond Hiera Sycaminos.
+        source: pliny-natural-history
+        at: VI.35 (§184)
+        quote: from thence to Tama seventy-two
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      Pliny gives Tama only as a distance on the praetorians' itinerary. Pleiades has no record of
+      the name in the 2026-10-21 dump, so the record asserts no coordinate, and a line drawn through this
+      stage would claim a path the sources do not give.
+    cite:
+      - id: tama-unlocated
+        says: Pliny records Tama as a stage of the itinerary without any other description.
+        source: pliny-natural-history
+        at: VI.35 (§184)

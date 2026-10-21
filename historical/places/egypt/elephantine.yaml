@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Elephantine, the island town opposite Syene at the First Cataract. Strabo lists it among the
+  places the Ethiopians took; Dio says they advanced as far as it.
+types: [settlement]
+names:
+  - form: Ἐλεφαντίνη
+    lang: grc
+    script: Grek
+    roman: Elephantine
+    scheme: other
+    cite:
+      - id: elephantine-name
+        says: Strabo names Elephantine among the places the Ethiopians took by surprise.
+        source: strabo-geography
+        at: XVII.1.54 (C819–821)
+        quote:
+          invaded the Thebaïs, and attacked the garrison, consisting of three cohorts, near Syene; surprised
+          and took Syene, Elephantina, and Philæ, by a sudden inroad; enslaved the inhabitants, and threw
+          down the statues of Cæsar.
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [32.889, 24.09]
+    notes: Pleiades' representative point for the island settlement opposite Aswan.
+    cite:
+      - id: elephantine-identification
+        says:
+          Pleiades identifies Elephantine with the fortified settlement on the island at the First Cataract
+          and gives this representative point (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 786021 (reprLatLong, version 9), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "786021"
+    url: https://pleiades.stoa.org/places/786021
+    license: CC-BY-3.0

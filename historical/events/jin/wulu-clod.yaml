@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Leaving 衛 by 五鹿, the hungry 重耳 begs food from a countryman, who hands him a clod of earth. He reaches
+  for his whip; 子犯 calls it a gift from heaven, a sign of land to come, and he bows and takes it.
+types: [occurrence]
+date:
+  value: 644 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: (between 衛 and 齊)
+  cite:
+    - id: wulu-clod-date
+      says: The 左傳 tells 五鹿 between 衛 and 齊, on the leg the table sets in 644 BCE.
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 晉 惠公 七年（去翟之齊）
+      quote: 七重耳聞管仲死，去翟之齊。
+places:
+  - place: wulu
+    role: site
+participants:
+  - actor: chonger
+    role: leader
+  - actor: hu-yan
+    role: participant
+cite:
+  - id: wulu-clod-zuo
+    says: The 左傳 records the countryman's clod and 子犯 calling it a gift from heaven.
+    source: zuozhuan
+    at: 僖公二十三年（出於五鹿）
+    quote: 出於五鹿，乞食於野人，野人與之塊。公子怒，欲鞭之。子犯曰：「天賜也。」稽首受而載之。

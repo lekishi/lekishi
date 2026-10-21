@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  At 鄭, 文公 refuses 重耳 courtesy. 叔詹 argues that heaven has opened the way for him, that 晉 and 鄭 are kin,
+  and that if his lord will not honour 重耳 he should kill him; he is not heeded.
+types: [occurrence]
+date:
+  value: 637 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 鄭文公三十六年
+  cite:
+    - id: chonger-at-zheng-date
+      says: >-
+        The table enters it in the 637 BCE row, the year its count from the 共和 regency (841 BCE) gives.
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 鄭 文公 三十六年（重耳過）
+      quote: 三十六重耳過，無禮，叔詹諫。
+places:
+  - place: xinzheng
+    role: site
+    note: The 鄭 capital; the texts name only the state.
+participants:
+  - actor: chonger
+    role: leader
+  - actor: zheng-wen-gong
+    role: host
+  - actor: shu-zhan
+    role: participant
+  - actor: zheng-state
+    role: host
+cite:
+  - id: chonger-at-zheng-zuo
+    says: The 左傳 records that 鄭文公 refused 重耳 courtesy and that 叔詹 remonstrated.
+    source: zuozhuan
+    at: 僖公二十三年（及鄭）
+    quote: 及鄭，鄭文公亦不禮焉。
+  - id: chonger-at-zheng-jin
+    says: The 晉 house records 叔詹 telling his lord to kill 重耳 if he would not honour him.
+    role: supporting
+    source: shiji-chunqiu
+    at: 卷三十九 晉世家 文公（君不禮，不如殺之）
+    quote: 叔瞻曰：「君不禮，不如殺之，且後爲國患。」鄭君不聽。

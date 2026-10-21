@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Hearing that 管仲 is dead and that 惠公 has sent the eunuch again to kill him, 重耳 leaves the 狄 for 齊, telling
+  季隗 to wait twenty-five years before remarrying.
+types: [occurrence]
+date:
+  value: 644 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 惠公七年
+  cite:
+    - id: chonger-leaves-di-date
+      says: >-
+        The table enters 重耳 leaving the 翟 for 齊 on hearing of 管仲's death in 惠公's seventh year, 644 BCE in
+        its count.
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 晉 惠公 七年（去翟之齊）
+      quote: 七重耳聞管仲死，去翟之齊。
+places:
+  - place: di
+    role: start
+participants:
+  - actor: chonger
+    role: leader
+  - actor: ji-wei
+    role: witness
+  - actor: hu-yan
+    role: participant
+  - actor: zhao-shuai
+    role: participant
+cite:
+  - id: chonger-leaves-di-zuo
+    says: The 左傳 records 重耳 telling 季隗 to wait twenty-five years as he set out for 齊.
+    source: zuozhuan
+    at: 僖公二十三年（將適齊，謂季隗曰）
+    quote: 將適齊，謂季隗曰：「待我二十五年，不來而後嫁。」

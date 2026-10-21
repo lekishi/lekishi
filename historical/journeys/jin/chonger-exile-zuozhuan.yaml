@@ -1,0 +1,44 @@
+# Proposed journey record (RFD 2, "Proposed: the journey record", draft PR #26).
+# The compiler does not read historical/journeys/ until the owner accepts the shape.
+title: 重耳's exile, as the 左傳 tells it, 655–636 BCE
+summary: >-
+  From 蒲 over the wall to the 狄; after twelve years through 衛 and 五鹿 to 齊; carried out of 齊
+  drunk, then 曹, 宋, 鄭, 楚 and 秦; across the Yellow River with a 秦 army to the covenant at 郇 and
+  the 武宮 at 曲沃.
+travellers:
+  - actor: chonger
+    role: leader
+  - actor: hu-yan
+    role: participant
+  - actor: zhao-shuai
+    role: participant
+stops:
+  - event: chonger-flees-pu
+    place: pu-jin
+  - chonger-among-di
+  - chonger-leaves-di
+  - chonger-at-wey
+  - wulu-clod
+  - chonger-in-qi
+  - chonger-leaves-qi
+  - chonger-at-cao
+  - chonger-at-song
+  - chonger-at-zheng
+  - chonger-at-chu
+  - chonger-in-qin
+  - chonger-crosses-he
+  - xun-covenant
+  - chonger-enthroned
+cite:
+  - id: chonger-exile-zuozhuan-sequence
+    says: >-
+      The 左傳 narrates 重耳's flight to the 狄, then 衛, 五鹿, 齊, 曹, 宋, 鄭, 楚 and 秦, and the next
+      year the river crossing, 郇 and 曲沃, in this order. It does not say how he travelled, so no leg
+      carries a mode; the river is crossed, not travelled along.
+    sources:
+      - source: zuozhuan
+        at: 僖公二十三年（晉公子重耳之及於難也 … 乃送諸秦）
+        quote: 過衛，衛文公不禮焉。出於五鹿，乞食於野人
+      - source: zuozhuan
+        at: 僖公二十四年（及河 … 丁未，朝于武宮）
+        quote: 濟河，圍令狐，入桑泉，取臼衰。

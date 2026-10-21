@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  The table of the twelve lords enters 重耳's passage through 衛, on his way from 齊, in 637 BCE, the year
+  of 曹, 鄭, 楚 and 秦: a different order from the 左傳's.
+types: [occurrence]
+date:
+  value: 637 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 衛文公二十三年
+  cite:
+    - id: chonger-at-wey-637-date
+      says: >-
+        The table enters it in the 637 BCE row, the year its count from the 共和 regency (841 BCE) gives.
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 衛 文公 二十三年（重耳從齊過）
+      quote: 二十三重耳從齊過，無禮。
+places:
+  - place: wey-chuqiu
+    role: site
+participants:
+  - actor: chonger
+    role: leader
+  - actor: wey-wen-gong
+    role: host
+notes: >-
+  Kept as its own event, the table's account of the 衛 visit, beside `chonger-at-wey`, the 左傳's. The two
+  cannot both be right; the contract has no way yet to say that two events are rival accounts of one visit.
+cite:
+  - id: chonger-at-wey-637-basis
+    says: >-
+      The table records that 重耳 passed through 衛 coming from 齊 and was not received with courtesy.
+    source: shiji-chunqiu
+    at: 卷十四 十二諸侯年表 衛 文公 二十三年（重耳從齊過）
+    quote: 二十三重耳從齊過，無禮。

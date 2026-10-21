@@ -1,0 +1,38 @@
+# Proposed journey record (RFD 2, "Proposed: the journey record", draft PR #26).
+# The compiler does not read historical/journeys/ until the owner accepts the shape.
+title: 重耳's exile, as the table of the twelve lords enters it, 655–636 BCE
+summary: >-
+  The same exile in the table's account: from the 翟 straight to 齊 in 644 BCE, then in 637 BCE 衛
+  "coming from 齊", 曹, 鄭, 楚 and 秦, and home in 636 BCE. 五鹿 and 宋 have no entry.
+travellers:
+  - actor: chonger
+    role: leader
+stops:
+  - event: chonger-flees-pu
+    place: pu-jin
+  - chonger-among-di
+  - chonger-leaves-di
+  - chonger-in-qi
+  - chonger-leaves-qi
+  - chonger-at-wey-637
+  - chonger-at-cao
+  - chonger-at-zheng
+  - chonger-at-chu
+  - chonger-in-qin
+  - chonger-enthroned
+cite:
+  - id: chonger-exile-table-sequence
+    says: >-
+      The table enters 重耳 leaving the 翟 for 齊 in 644 BCE and passing through 衛 coming from 齊
+      in 637 BCE. It enters 曹, 鄭, 楚 and 秦 in the same 637 BCE row without an order; the order of
+      those four stops is the 晉 house's.
+    sources:
+      - source: shiji-chunqiu
+        at: 卷十四 十二諸侯年表 晉 惠公 七年（去翟之齊）
+        quote: 七重耳聞管仲死，去翟之齊。
+      - source: shiji-chunqiu
+        at: 卷十四 十二諸侯年表 衛 文公 二十三年（重耳從齊過）
+        quote: 二十三重耳從齊過，無禮。
+      - source: shiji-chunqiu
+        at: 卷三十九 晉世家 文公（過曹 … 過鄭 … 重耳去之楚 … 重耳至秦）
+        quote: 重耳去之楚

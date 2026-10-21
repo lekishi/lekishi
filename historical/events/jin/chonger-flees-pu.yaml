@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  獻公 sends the eunuch 披 to kill 重耳 at 蒲. 重耳 forbids his men to fight his father's envoy, goes over the
+  wall as 披 cuts off his sleeve, and flees to the 狄, his mother's people, with 狐偃, 趙衰 and others.
+types: [journey]
+date:
+  value: 655 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 獻公二十二年（晉世家）; 僖公五年（左傳）
+  cite:
+    - id: chonger-flees-date
+      says: >-
+        The table enters 重耳's flight to the 狄 in 獻公's twenty-second year, which its count from the 共和 regency
+        (841 BCE) sets in 655 BCE.
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 晉 獻公 二十二年（重耳奔狄）
+      quote: 二十二滅虞、虢。重耳奔狄。
+places:
+  - place: pu-jin
+    role: start
+  - place: di
+    role: end
+participants:
+  - actor: chonger
+    role: leader
+  - actor: si-ren-pi
+    role: participant
+  - actor: jin-xian-gong
+    role: subject
+  - actor: hu-yan
+    role: participant
+  - actor: zhao-shuai
+    role: participant
+cite:
+  - id: chonger-flees-zuo
+    says: >-
+      The 左傳 records that 寺人披 attacked 蒲, that 重耳 would not resist his father's command, and that he went
+      over the wall and fled to the 翟.
+    source: zuozhuan
+    at: 僖公五年（公使寺人披伐蒲）
+    quote: 及難，公使寺人披伐蒲。重耳曰：「君父之命不校。」乃徇曰：「校者，吾讎也。」踰垣而走。披斬其袪，遂出奔翟。
+  - id: chonger-flees-jin
+    says: >-
+      The 晉 house records the eunuch cutting off his sleeve as he went over the wall, and his flight to
+      the 狄, his mother's people.
+    role: supporting
+    source: shiji-chunqiu
+    at: 卷三十九 晉世家 文公（重耳踰垣）
+    quote: 重耳踰垣，宦者逐斬其衣袪。重耳遂奔狄。狄，其母國也。

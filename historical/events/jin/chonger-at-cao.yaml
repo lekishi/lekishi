@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  At 曹, 共公, curious about 重耳's joined ribs, watches him bathe. The officer 僖負羈, warned by his wife that
+  重耳 will return and punish the discourteous, sends him a dish of food with a jade hidden in it; 重耳 keeps
+  the food and returns the jade.
+types: [occurrence]
+date:
+  value: 637 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 曹共公十六年
+  cite:
+    - id: chonger-at-cao-date
+      says: >-
+        The table enters it in the 637 BCE row, the year its count from the 共和 regency (841 BCE) gives.
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 曹 共公 十六年（重耳過）
+      quote: 十六重耳過，無禮，僖負羈私善。
+places:
+  - place: cao-taoqiu
+    role: site
+    note: The 曹 capital; the texts name only the state.
+participants:
+  - actor: chonger
+    role: leader
+  - actor: cao-gong-gong
+    role: host
+  - actor: xi-fu-ji
+    role: participant
+  - actor: cao-state
+    role: host
+cite:
+  - id: chonger-at-cao-zuo
+    says: The 左傳 records 曹共公 watching 重耳 bathe and 僖負羈 sending food with a jade, which 重耳 returned.
+    source: zuozhuan
+    at: 僖公二十三年（及曹）
+    quote: 及曹，曹共公聞其駢脅，欲觀其裸。浴，薄而觀之。

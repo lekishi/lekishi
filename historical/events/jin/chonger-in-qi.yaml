@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  In 齊, 桓公 gives 重耳 a wife of his house and twenty teams of horses, and he is content to stay. 桓公 dies,
+  齊 falls into disorder, and 重耳 stays on for five years in all.
+types: [process]
+date:
+  value: 644 BCE..639 BCE
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: 留齊凡五歲
+  cite:
+    - id: chonger-in-qi-span
+      says: >-
+        The 晉 house says he stayed five years in all; counted from the arrival in 644 BCE, the stay ends
+        about 639 BCE.
+      source: shiji-chunqiu
+      at: 卷三十九 晉世家 文公（留齊凡五歳）
+      quote: 留齊凡五歳。
+places:
+  - place: linzi
+    role: site
+    note: The 齊 capital; the texts name only the state.
+participants:
+  - actor: chonger
+    role: leader
+  - actor: qi-huan-gong
+    role: host
+  - actor: qi-jiang
+    role: participant
+  - actor: qi-state
+    role: host
+notes: >-
+  The end of the stay is the arrival plus the five years the 晉 house states; the table has no entry for
+  the departure.
+cite:
+  - id: chonger-in-qi-zuo
+    says: The 左傳 records that 齊桓公 gave 重耳 a wife and twenty teams of horses and that he was content.
+    source: zuozhuan
+    at: 僖公二十三年（及齊，齊桓公妻之）
+    quote: 及齊，齊桓公妻之，有馬二十乘。公子安之
+  - id: chonger-in-qi-jin
+    says: >-
+      The 晉 house records that 桓公 died two years after he arrived and that he stayed five years in all.
+    role: supporting
+    source: shiji-chunqiu
+    at: 卷三十九 晉世家 文公（重耳至齊二歳而桓公卒）
+    quote: 重耳至齊二歳而桓公卒，會豎刀等爲内亂，齊孝公之立，諸侯兵數至。留齊凡五歳。

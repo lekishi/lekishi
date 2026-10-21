@@ -58,9 +58,19 @@ describe("safeNext", () => {
     ["//evil.example", "/"],
     ["/\\evil.example", "/"],
     ["https://evil.example", "/"],
+    // A browser strips tabs and newlines from a Location, leaving `//evil.example`.
+    ["/\t/evil.example", "/"],
+    ["/\t\\evil.example", "/"],
+    ["/\n/evil.example", "/"],
     ["", "/"],
     [null, "/"],
   ])("%j returns %j", (next, expected) => {
     expect(safeNext(next)).toBe(expected)
+  })
+
+  it("refuses a tab that arrives percent-encoded in the login query", () => {
+    const next = new URL("https://lekishi.example/auth/login?next=%2F%09%2Fevil.example")
+
+    expect(safeNext(next.searchParams.get("next"))).toBe("/")
   })
 })

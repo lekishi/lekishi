@@ -104,13 +104,16 @@ export async function readSession(
 /**
  * A same-site path to return to after signing in. Anything else, a
  * protocol-relative `//host` or `/\host` among them, goes home, so the sign-in
- * cannot be used to redirect a reader off the site.
+ * cannot be used to redirect a reader off the site. Control characters are
+ * refused outright: a browser strips a tab or newline from a `Location`, so
+ * `/<tab>/host` would arrive as `//host`.
  */
 export function safeNext(next: string | null | undefined): string {
   return typeof next === "string" &&
     next.startsWith("/") &&
     !next.startsWith("//") &&
-    !next.startsWith("/\\")
+    !next.startsWith("/\\") &&
+    !/[\u0000-\u001f\u007f]/.test(next)
     ? next
     : "/"
 }

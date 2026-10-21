@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Ships from Egypt bring cloth, glass, metals, wine and oil to Adulis between January and September
+  and take away ivory, tortoise-shell and rhinoceros-horn.
+types: [trade]
+from: place:berenice
+to: place:adulis
+directionality: directed
+causality: not_asserted
+date:
+  value: 58..62
+  mode: window
+  calendar: julian
+  as_written: no date; the text speaks of the present
+  cite:
+    - id: egypt-adulis-trade-time
+      says:
+        The Periplus describes this as present at the time of the voyage it was written from, which
+        it does not date; Schoff puts that voyage between the summers of 58 and 62 CE.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      sources:
+        - source: periplus-erythraean-sea
+          at: "6"
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+cite:
+  - id: egypt-adulis-trade-basis
+    says: The Periplus says most goods come from Egypt to this market from January to September.
+    source: periplus-erythraean-sea
+    at: "6"
+    quote:
+      The most from Egypt is brought to this market from the month of January, to September, that is,
+      from Tybi to Thoth
+notes: The Periplus says 'from Egypt'; Berenice stands for the Egyptian ports so the arc can be drawn.

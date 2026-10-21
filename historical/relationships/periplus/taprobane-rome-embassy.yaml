@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: The king of Taprobane sends an embassy to Rome under Claudius, seeking an alliance.
+types: [diplomacy]
+from: place:lanka
+to: place:rome
+directionality: directed
+causality: not_asserted
+date:
+  value: 41..54
+  mode: window
+  calendar: julian
+  as_written: during the reign of the Emperor Claudius
+  cite:
+    - id: taprobane-rome-time
+      says:
+        Pliny places the drift and the embassy in the reign of Claudius, which Schoff says began in
+        41; Nero's reign followed from 54.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      sources:
+        - source: pliny-natural-history
+          at: VI.24
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+cite:
+  - id: taprobane-rome-embassy-basis
+    says: Pliny says the king of Taprobane sent an embassy to Rome to form an alliance.
+    source: pliny-natural-history
+    at: VI.24
+    quote: the king was prompted to form an alliance with the Romans, and accordingly sent to Rome an embassy

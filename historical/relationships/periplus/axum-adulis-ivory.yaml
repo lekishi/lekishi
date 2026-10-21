@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: The ivory of the country beyond the Nile goes to the Auxumites' city and down to Adulis.
+types: [trade]
+from: place:axum
+to: place:adulis
+directionality: directed
+causality: not_asserted
+date:
+  value: 58..62
+  mode: window
+  calendar: julian
+  as_written: no date; the text speaks of the present
+  cite:
+    - id: axum-adulis-ivory-time
+      says:
+        The Periplus describes this as present at the time of the voyage it was written from, which
+        it does not date; Schoff puts that voyage between the summers of 58 and 62 CE.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      sources:
+        - source: periplus-erythraean-sea
+          at: "4"
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+cite:
+  - id: axum-adulis-ivory-basis
+    says: The Periplus says all the ivory is brought to the Auxumites' city and thence to Adulis.
+    source: periplus-erythraean-sea
+    at: "4"
+    quote:
+      to that place all the ivory is brought from the country beyond the Nile through the district
+      called Cyeneum, and thence to Adulis.

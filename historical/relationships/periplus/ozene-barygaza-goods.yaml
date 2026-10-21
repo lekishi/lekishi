@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: From Ozene come down to Barygaza agate, carnelian, muslins and spikenard.
+types: [trade]
+from: place:ujjayini
+to: place:bharukaccha
+directionality: directed
+causality: not_asserted
+date:
+  value: 58..62
+  mode: window
+  calendar: julian
+  as_written: no date; the text speaks of the present
+  cite:
+    - id: ozene-barygaza-goods-time
+      says:
+        The Periplus describes this as present at the time of the voyage it was written from, which
+        it does not date; Schoff puts that voyage between the summers of 58 and 62 CE.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      sources:
+        - source: periplus-erythraean-sea
+          at: "48"
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+cite:
+  - id: ozene-barygaza-goods-basis
+    says:
+      The Periplus says all things needed by the country about Barygaza, and many for trade, are brought
+      down from Ozene.
+    source: periplus-erythraean-sea
+    at: "48"
+    quote:
+      from this place are brought down all things needed for the welfare of the country about Barygaza,
+      and many things for our trade

@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Ships from Egypt sail for Barbaricum about July with the Indian Etesian winds, bringing thin
+  clothing, glass and plate and taking costus, nard, turquoise, lapis lazuli, silk yarn and indigo.
+types: [trade]
+from: place:berenice
+to: place:barbaricum
+directionality: directed
+causality: not_asserted
+date:
+  value: 58..62
+  mode: window
+  calendar: julian
+  as_written: no date; the text speaks of the present
+  cite:
+    - id: egypt-barbaricum-trade-time
+      says:
+        The Periplus describes this as present at the time of the voyage it was written from, which
+        it does not date; Schoff puts that voyage between the summers of 58 and 62 CE.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      sources:
+        - source: periplus-erythraean-sea
+          at: "39"
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+cite:
+  - id: egypt-barbaricum-trade-basis
+    says: The Periplus says sailors set out for Barbaricum with the Indian Etesian winds about July.
+    source: periplus-erythraean-sea
+    at: "39"
+    quote: And sailors set out thither with the Indian Etesian winds, about the month of July, that is Epiphi
+notes: The Periplus says 'from Egypt'; Berenice stands for the Egyptian ports so the arc can be drawn.

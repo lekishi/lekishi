@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: Cana trades with Scythia, whose market-town is Barbaricum.
+types: [trade]
+from: place:cana
+to: place:barbaricum
+directionality: mutual
+causality: not_asserted
+date:
+  value: 58..62
+  mode: window
+  calendar: julian
+  as_written: no date; the text speaks of the present
+  cite:
+    - id: cana-barbaricum-trade-time
+      says:
+        The Periplus describes this as present at the time of the voyage it was written from, which
+        it does not date; Schoff puts that voyage between the summers of 58 and 62 CE.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      sources:
+        - source: periplus-erythraean-sea
+          at: "27"
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+cite:
+  - id: cana-barbaricum-trade-basis
+    says: The Periplus names Scythia among Cana's trading partners.
+    source: periplus-erythraean-sea
+    at: "27"
+    quote: with Barygaza and Scythia and Ommana
+notes:
+  The Periplus names the country, Scythia; Barbaricum is its market-town (§ 38), so it stands for
+  Scythia here.

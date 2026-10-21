@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: The Arab ship-owners of Muza send their own ships to Barygaza.
+types: [trade]
+from: place:muza
+to: place:bharukaccha
+directionality: directed
+causality: not_asserted
+date:
+  value: 58..62
+  mode: window
+  calendar: julian
+  as_written: no date; the text speaks of the present
+  cite:
+    - id: muza-barygaza-trade-time
+      says:
+        The Periplus describes this as present at the time of the voyage it was written from, which
+        it does not date; Schoff puts that voyage between the summers of 58 and 62 CE.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      sources:
+        - source: periplus-erythraean-sea
+          at: "21"
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+cite:
+  - id: muza-barygaza-trade-basis
+    says:
+      The Periplus says the people of Muza trade with the far-side coast and with Barygaza in their
+      own ships.
+    source: periplus-erythraean-sea
+    at: "21"
+    quote:
+      for they carry on a trade with the far-side coast and with Barygaza, sending their own ships
+      there.

@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: Common cloth, muslins and mallow cloth come down by wagon from Tagara to Barygaza.
+types: [trade]
+from: place:tagara
+to: place:bharukaccha
+directionality: directed
+causality: not_asserted
+date:
+  value: 58..62
+  mode: window
+  calendar: julian
+  as_written: no date; the text speaks of the present
+  cite:
+    - id: tagara-barygaza-cloth-time
+      says:
+        The Periplus describes this as present at the time of the voyage it was written from, which
+        it does not date; Schoff puts that voyage between the summers of 58 and 62 CE.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      sources:
+        - source: periplus-erythraean-sea
+          at: "51"
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+cite:
+  - id: tagara-barygaza-cloth-basis
+    says: The Periplus says cloth and muslins come by wagon from Tagara to Barygaza.
+    source: periplus-erythraean-sea
+    at: "51"
+    quote: and from Tagara much common cloth, all kinds of muslins and mallow cloth

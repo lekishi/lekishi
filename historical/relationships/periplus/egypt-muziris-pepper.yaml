@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Ships from Egypt sail about July for Muziris and Nelcynda with coin, metals, glass and wine,
+  and load pepper, pearls, ivory, silk, spikenard and gems.
+types: [trade]
+from: place:berenice
+to: place:muziris
+directionality: directed
+causality: not_asserted
+date:
+  value: 58..62
+  mode: window
+  calendar: julian
+  as_written: no date; the text speaks of the present
+  cite:
+    - id: egypt-muziris-pepper-time
+      says:
+        The Periplus describes this as present at the time of the voyage it was written from, which
+        it does not date; Schoff puts that voyage between the summers of 58 and 62 CE.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      sources:
+        - source: periplus-erythraean-sea
+          at: "56"
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+cite:
+  - id: egypt-muziris-pepper-basis
+    says: The Periplus says ships for these markets set out from Egypt about July.
+    source: periplus-erythraean-sea
+    at: "56"
+    quote:
+      They make the voyage to this place in a favorable season who set out from Egypt about the month
+      of July, that is Epiphi.
+notes: The Periplus says 'from Egypt'; Berenice stands for the Egyptian ports so the arc can be drawn.

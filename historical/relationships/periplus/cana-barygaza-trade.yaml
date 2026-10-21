@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: Cana, the frankincense port, trades with Barygaza.
+types: [trade]
+from: place:cana
+to: place:bharukaccha
+directionality: mutual
+causality: not_asserted
+date:
+  value: 58..62
+  mode: window
+  calendar: julian
+  as_written: no date; the text speaks of the present
+  cite:
+    - id: cana-barygaza-trade-time
+      says:
+        The Periplus describes this as present at the time of the voyage it was written from, which
+        it does not date; Schoff puts that voyage between the summers of 58 and 62 CE.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      sources:
+        - source: periplus-erythraean-sea
+          at: "27"
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+cite:
+  - id: cana-barygaza-trade-basis
+    says: The Periplus says Cana trades with Barygaza, Scythia, Ommana and the coast of Persia.
+    source: periplus-erythraean-sea
+    at: "27"
+    quote:
+      And this place has a trade also with the far-side ports, with Barygaza and Scythia and Ommana
+      and the neighboring coast of Persia.

@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Fourteen years after his consecration Aśoka enlarges for the second time the stūpa of the former Buddha
+  Konākamana, near the later pillar at Nigālī Sāgar.
+types: [founding]
+date:
+  value: 255 BCE
+  mode: window
+  calendar: regnal
+  as_written: when he had been consecrated fourteen years (Nigālī Sāgar pillar)
+  cite:
+    - id: konakamana-time
+      says: >-
+        The pillar records the second enlargement of the stūpa when the king had been consecrated fourteen
+        years.
+      source: asoka-inscriptions
+      at: Nigālī Sāgar (Niglīva) pillar inscription
+      quote: >-
+        when he had been consecrated fourteen years, enlarged for the second time the stûpa of Buddha Konâkamana
+    - id: konakamana-conversion
+      says: >-
+        Smith's chronology converts the regnal year to 255 BCE, counting the consecration as year 1 in 269
+        BCE; he calls the Indian dates merely approximate.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. I, Chronology of the Maurya Period
+      quote: enlargement for second time of stûpa of Konâkamana Buddha near Kapilavastu
+places:
+  - place: nigali-sagar
+    role: site
+    note: The pillar has been moved; the stūpa's site is not known exactly.
+participants:
+  - actor: ashoka
+    role: leader
+notes: >-
+  Evidence of the cult of the former Buddhas in Aśoka's time. The inscription dates itself by years since
+  the consecration; the BCE year is Smith's conversion and inherits the uncertainty of his 269 BCE epoch.

@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Rock Edict III: twelve years after his consecration Aśoka orders his officials, the governor and the
+  district officer, to go on circuit every five years to teach the Law of Piety as well as for their other
+  business.
+types: [occurrence]
+date:
+  value: 257 BCE
+  mode: window
+  calendar: regnal
+  as_written: When I had been consecrated twelve years (Rock Edict III)
+  cite:
+    - id: tours-time
+      says: Rock Edict III dates the order to twelve years after the consecration.
+      source: asoka-inscriptions
+      at: Rock Edict III, Girnar text
+      quote: When I had been consecrated twelve years this command was issued by me
+    - id: tours-conversion
+      says: >-
+        Smith's chronology converts the regnal year to 257 BCE, counting the consecration as year 1 in 269
+        BCE; he calls the Indian dates merely approximate.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. I, Chronology of the Maurya Period
+      quote: instituted quinquennial transfers of officials
+places:
+  - place: girnar
+    role: other
+    note: The text Smith translates.
+participants:
+  - actor: ashoka
+    role: leader
+  - actor: maurya-empire
+    role: participant
+notes: >-
+  An institutional change across the empire, drawn only at the rock whose text is translated. The inscription
+  dates itself by years since the consecration; the BCE year is Smith's conversion and inherits the uncertainty
+  of his 269 BCE epoch.

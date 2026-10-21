@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Ptolemy II Philadelphos sends Dionysios as his envoy to India. Smith thinks he went to the Maurya court
+  and arrived under either Bindusāra or Aśoka.
+types: [mission]
+date:
+  value: 285 BCE..247 BCE
+  mode: window
+  calendar: julian
+  as_written: sent ... by Ptolemy Philadelphos, King of Egypt (B. C. 285—247)
+  cite:
+    - id: dionysios-mission-time
+      says: >-
+        Smith dates the mission only by the reign of the king who sent it, 285–247 BCE, and says it must
+        have arrived under Bindusāra or Aśoka.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      source: smith-asoka-1920
+      at: ch. I, The History of Asoka
+      quote: must have arrived in the reign of either Bindusâra or his son Asoka.
+places:
+  - place: pataliputra
+    role: end
+    note: >-
+      Smith's 'no doubt to the Maurya court'; the court was at Pāṭaliputra, but the arrival is inferred,
+      not recorded.
+participants:
+  - actor: dionysios
+    role: leader
+  - actor: ptolemy-ii
+    role: other
+    note: The sender.
+  - actor: ashoka
+    role: host
+    note: Or Bindusāra; Smith cannot say which.
+notes: >-
+  A Greek envoy at the Maurya court, known to Smith from the classical writers. The window is the sending
+  king's reign; whether Aśoka received him is undecided.
+cite:
+  - id: dionysios-mission-basis
+    says: >-
+      Smith says Dionysios was sent to India, no doubt to the Maurya court, by Ptolemy Philadelphos.
+    source: smith-asoka-1920
+    at: ch. I, The History of Asoka
+    quote: >-
+      The mission of Dionysios, who was sent to India, and no doubt to the Maurya court, by Ptolemy Philadelphos

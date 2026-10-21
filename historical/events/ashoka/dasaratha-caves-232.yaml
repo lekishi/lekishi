@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Aśoka's grandson Daśaratha, immediately after his consecration, assigns the Vahiyakā, Gopikā and Vaḍathikā
+  caves in the Nāgārjunī hills to the Ājīvikas, as his grandfather had done in the Barābar hills beside
+  them.
+types: [other]
+date:
+  value: 232 BCE
+  mode: window
+  calendar: regnal
+  as_written: immediately after his consecration (Nāgārjunī dedications)
+  cite:
+    - id: dasaratha-time
+      says: >-
+        The dedication says the cave was assigned immediately after Daśaratha's consecration.
+      source: asoka-inscriptions
+      at: Nāgārjunī cave dedication I (Vahiyakā cave)
+      quote: >-
+        immediately after his consecration, to the venerable. Âjîvikas, for as long as sun and moon endure
+    - id: dasaratha-conversion
+      says: Smith dates Daśaratha's succession in the eastern provinces to about 232 BCE.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. V, The Pillar and Miscellaneous Inscriptions (the Daśaratha dedications)
+      quote: >-
+        Dasaratha, a grandson of Asoka, succeeded his grandfather in the eastern provinces about 232 B.
+        C.
+places:
+  - place: nagarjuni-hills
+    role: site
+participants:
+  - actor: dasaratha
+    role: leader
+  - actor: ajivikas
+    role: guest
+notes: >-
+  The chapter's coda: the Maurya gifts to the Ājīvikas continue into the next reign.

@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  On the Allahabad pillar Aśoka orders the high officers everywhere to reckon any gift of the second queen,
+  Kāruvākī, mother of Tīvara, as her own: a mango garden, pleasure grove, almshouse or anything else.
+types: [occurrence]
+date:
+  value: 242 BCE..232 BCE
+  mode: window
+  calendar: julian
+  as_written: undated; the closing years of the reign (Smith)
+  cite:
+    - id: queens-time
+      says: >-
+        Smith dates the Queen's Edict to the closing years of the reign and thinks it the latest record
+        extant.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      source: smith-asoka-1920
+      at: ch. V, The Pillar and Miscellaneous Inscriptions (comment on the Queen's Edict)
+      quote: I would date the inscription in the closing years of Asoka's reign.
+places:
+  - place: allahabad-pillar
+    role: site
+participants:
+  - actor: ashoka
+    role: leader
+  - actor: karuvaki
+    role: subject
+  - actor: tivara
+    role: other
+notes: The only edict that names a queen and a son.
+cite:
+  - id: queens-basis
+    says: The edict reckons the second queen's gifts as hers.
+    source: asoka-inscriptions
+    at: Queen's Edict, Allahabad pillar
+    quote: >-
+      Whatever gift has been given here by the Second Queen—be it a mango-garden, or pleasure-grove, or
+      almshouse, or aught else—is reckoned as proceeding from that queen.

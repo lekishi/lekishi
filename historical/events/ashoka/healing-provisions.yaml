@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Rock Edict II: everywhere in Aśoka's dominions and among his frontagers, the Cholas, Pāṇḍyas, Satiyaputra
+  and Keralaputra, Antiochos the Greek king and his neighbours, the king has provided medical care for
+  men and beasts, imported and planted medicinal herbs, roots and fruits, and dug wells and planted trees
+  on the roads.
+types: [occurrence]
+date:
+  value: 257 BCE..256 BCE
+  mode: window
+  calendar: julian
+  as_written: >-
+    undated; the Fourteen Rock Edicts were issued from the 12th to the 13th year after consecration
+  cite:
+    - id: healing-time
+      says: >-
+        The edict is undated. Its series carries dates from twelve to thirteen years after the consecration,
+        which Smith's chronology puts in 257–256 BCE.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      source: smith-asoka-1920
+      at: ch. I, Chronology of the Maurya Period
+      quote: Completion of Fourteen Rock Edicts
+places:
+  - place: girnar
+    role: other
+    note: The text Smith translates.
+participants:
+  - actor: ashoka
+    role: leader
+  - actor: cholas
+    role: other
+  - actor: pandyas
+    role: other
+  - actor: satiyaputras
+    role: other
+  - actor: keralaputras
+    role: other
+  - actor: antiochus-ii
+    role: other
+    note: Named as the Greek king beyond the western frontier.
+notes: >-
+  A claim about provisions beyond the frontier, which the edict makes and no other source checks.
+cite:
+  - id: healing-basis
+    says: >-
+      The edict says the healing arrangements were made in two kinds, for men and for beasts.
+    source: asoka-inscriptions
+    at: Rock Edict II, Girnar text
+    quote: >-
+      everywhere have been made the healing arrangements of His Sacred and Gracious Majesty the King in
+      two kinds

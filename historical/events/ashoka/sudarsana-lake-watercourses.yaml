@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Under Aśoka his Yavana governor Tuṣāspha equips the Sudarśana lake at Girnar, embanked under Chandragupta,
+  with watercourses, according to the later Girnar inscription of Rudradāman.
+types: [other]
+date:
+  value: 273 BCE..232 BCE
+  mode: window
+  calendar: unknown
+  as_written: under Asoka (Rudradāman inscription, about 152 CE)
+  cite:
+    - id: sudarsana-time
+      says: >-
+        Smith reports the work as done under Aśoka; no year is given, so the window is his reign in Smith's
+        chronology.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      source: smith-asoka-1920
+      at: ch. II, Extent and Administration of the Empire
+      quote: >-
+        under Asoka's Persian (Yavana) Râjâ, Tushasphâ, had equipped it with the needful watercourses
+places:
+  - place: sudarsana-lake
+    role: site
+  - place: girnar
+    role: context
+participants:
+  - actor: tushaspha
+    role: leader
+  - actor: maurya-empire
+    role: participant
+notes: >-
+  Public works under Aśoka known only from an inscription four centuries later. The window is the whole
+  reign and must never be read as continuous activity.

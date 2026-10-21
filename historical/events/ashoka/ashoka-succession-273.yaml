@@ -1,0 +1,61 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Aśoka succeeds his father Bindusāra. In the Ceylon chronicles he leaves his viceroyalty at Ujjain for
+  Pāṭaliputra at news of his father's illness and kills his brothers to take the throne; Smith thinks
+  a prolonged struggle unlikely.
+types: [occurrence]
+date:
+  value: 273 BCE
+  mode: window
+  calendar: julian
+  as_written: Accesion of Asoka—vardhana Maurya
+  cite:
+    - id: succession-time
+      says: Smith's chronology dates Aśoka's accession to 273 BCE.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      source: smith-asoka-1920
+      at: ch. I, Chronology of the Maurya Period
+      quote: Accesion of Asoka—vardhana Maurya.
+places:
+  - place: ujjayini
+    role: start
+    note: Only in the chronicles, which make him viceroy there.
+  - place: pataliputra
+    role: end
+participants:
+  - actor: ashoka
+    role: subject
+  - actor: bindusara
+    role: other
+notes: >-
+  The accession is dated only by Smith's reconstruction; no inscription records it.
+dispute:
+  status: disputed
+  summary: >-
+    The Ceylon chronicles have Aśoka kill ninety-nine brothers to seize the throne; Smith thinks it unlikely
+    that a prolonged struggle was needed, and the edicts mention his living brothers and sisters. The
+    chapter records the succession and keeps the massacre as the chronicles' account.
+cite:
+  - id: succession-ujjain
+    says: >-
+      Smith's retelling of the chronicles says Aśoka quitted Ujjain for Pāṭaliputra on news of Bindusāra's
+      mortal illness.
+    source: smith-asoka-1920
+    at: ch. VI, The Ceylonese Legend of Asoka
+    quote: >-
+      On receiving news of King Bindusâra's mortal illness, Asoka quitted Ujjain, the seat of his government,
+      and hastened to Pâtaliputra (Patna), the capital of the empire.
+  - id: succession-fratricide
+    says: >-
+      The retelling says he slew his eldest brother Sumana and ninety-eight other brothers.
+    role: conflicting
+    source: smith-asoka-1920
+    at: ch. VI, The Ceylonese Legend of Asoka
+    quote: he slew his eldest brother Sumana, and ninety-eight other brothers
+  - id: succession-smith
+    says: Smith judges a prolonged struggle for the succession unlikely.
+    role: supporting
+    source: smith-asoka-1920
+    at: ch. I, The History of Asoka
+    quote: it seems unlikely that a prolonged struggle was needed to ensure the succession

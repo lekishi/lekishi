@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  In the Minor Pillar Edicts at Sārnāth, Sāñchī and Kauśāmbī, Aśoka orders that any monk or nun who splits
+  the Order be dressed in white and made to live outside it, so that the Order may be united and endure.
+types: [occurrence]
+date:
+  value: 242 BCE..232 BCE
+  mode: window
+  calendar: julian
+  as_written: undated; later than the 28th regnal year (Smith)
+  cite:
+    - id: schism-time
+      says: >-
+        Smith argues the schism edicts are later than the Pillar Edicts of the twenty-eighth regnal year
+        (242 BCE) and before Aśoka's death in 232 BCE.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      source: smith-asoka-1920
+      at: ch. V, The Pillar and Miscellaneous Inscriptions (comment on the Kausâmbî edict)
+      quote: >-
+        it shows that that ordinance also must be later in date than the 28th regnal year
+places:
+  - place: sarnath
+    role: site
+  - place: sanchi
+    role: site
+  - place: allahabad-pillar
+    role: site
+    note: The Kauśāmbī version.
+  - place: kausambi
+    role: context
+    note: The version is addressed to the high officers of Kosambi.
+  - place: pataliputra
+    role: context
+    note: Smith restores Pāṭaliputra in the Sārnāth text.
+participants:
+  - actor: ashoka
+    role: leader
+  - actor: buddhist-sangha
+    role: subject
+notes: "A window, not a date: one occurrence somewhere in Aśoka's last ten years."
+cite:
+  - id: schism-purpose
+    says: The Sāñchī version gives the edict's purpose.
+    source: asoka-inscriptions
+    at: Sāñchī schism edict
+    quote: For what is my desire? That the Samgha may be united and of long duration.
+  - id: schism-kosambi
+    says: The Kauśāmbī version is addressed to the high officers of Kosambi.
+    role: supporting
+    source: asoka-inscriptions
+    at: Kauśāmbī schism edict, Allahabad pillar
+    quote: His Sacred Majesty, [Devânaṁpi]ye, commands the High Officers of Kosambi.

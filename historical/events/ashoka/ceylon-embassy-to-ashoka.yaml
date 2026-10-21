@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Devānaṃpiya Tissa, newly king of Lanka, sends his nephew Mahā Ariṭṭha with gifts to Aśoka: seven days
+  to the port of Tāmralipti, seven more to the court, five months there, and a return with gifts of equal
+  value and Aśoka's message urging him to take refuge in the Buddha, the Law and the Order.
+types: [mission, journey, exchange]
+date:
+  value: 252 BCE
+  mode: window
+  calendar: regnal
+  as_written: In the same year (as the council) King Devânampiya Tissa ascended the throne
+  cite:
+    - id: embassy-time
+      says: >-
+        Smith's retelling puts the embassy in the year Devānampiya Tissa ascended the throne, the year the
+        chronicles give the council, about 252 BCE on Smith's epoch.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      source: smith-asoka-1920
+      at: ch. VI, The Ceylonese Legend of Asoka
+      quote: In the same year King Devânampiya Tissa (Tishya) ascended the throne of Ceylon
+places:
+  - place: lanka
+    role: start
+  - place: tamralipti
+    role: waypoint
+  - place: pataliputra
+    role: end
+    note: The 'Imperial Court'.
+participants:
+  - actor: maha-arittha
+    role: leader
+  - actor: devanampiya-tissa
+    role: other
+    note: The sender.
+  - actor: ashoka
+    role: host
+notes: >-
+  From the Ceylon chronicles in Smith's retelling, which he relates as legend. The BCE year converts the
+  chronicle's regnal year with Smith's epoch, which the chronicles themselves do not use.
+cite:
+  - id: embassy-route
+    says: The retelling gives the stages of the journey.
+    source: smith-asoka-1920
+    at: ch. VI, The Ceylonese Legend of Asoka
+    quote: >-
+      In seven days the envoys reached the port of Tâmalipti (Tamlûk in Bengal), and in seven days more
+      arrived at the Imperial Court.
+  - id: embassy-gifts
+    says: The retelling says Aśoka returned gifts of equal value.
+    role: supporting
+    source: smith-asoka-1920
+    at: ch. VI, The Ceylonese Legend of Asoka
+    quote: in return for which he sent gifts of equal value

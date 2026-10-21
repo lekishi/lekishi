@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Aśoka is consecrated (abhiṣeka), the moment from which every dated inscription counts its years. Smith
+  dates it to 269 BCE; the Ceylon chronicles put it in the fourth year after his accession and 218 years
+  after the Buddha's death.
+types: [occurrence]
+date:
+  value: 269 BCE
+  mode: window
+  calendar: julian
+  as_written: Consecration (abhisheka = coronation) of Asoka; regnal year 1
+  cite:
+    - id: consecration-time
+      says: Smith's chronology puts the consecration in 269 BCE and makes it regnal year 1.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      source: smith-asoka-1920
+      at: ch. I, Chronology of the Maurya Period
+      quote: Consecration (abhisheka = coronation) of Asoka.
+places:
+  - place: pataliputra
+    role: site
+    note: The capital; no source names the place of the ceremony.
+participants:
+  - actor: ashoka
+    role: subject
+notes: >-
+  The chapter's epoch. If it moves, every regnal date in the chapter moves with it.
+cite:
+  - id: consecration-chronicle
+    says: >-
+      Smith's retelling of the chronicles puts the coronation in the fourth year after the accession.
+    source: smith-asoka-1920
+    at: ch. VI, The Ceylonese Legend of Asoka
+    quote: >-
+      These things happened in the fourth year after the accession of King Asoka, who in the same year celebrated
+      his solemn coronation
+  - id: consecration-ab
+    says: The retelling dates the consecration 218 years after the Buddha's death.
+    role: supporting
+    source: smith-asoka-1920
+    at: ch. VI, The Ceylonese Legend of Asoka
+    quote: two hundred and eighteen years after the death of the perfect Buddha

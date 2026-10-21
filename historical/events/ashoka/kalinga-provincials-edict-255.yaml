@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  The second Kalinga Edict tells the town officers that imprisonment or torture without due cause must
+  end, and promises an inspecting officer every five years, with the princes at Ujjain and Taxila sending
+  theirs every three.
+types: [occurrence]
+date:
+  value: 255 BCE
+  mode: window
+  calendar: julian
+  as_written: undated; Smith's 15th regnal year, queried
+  cite:
+    - id: provincials-time
+      says: >-
+        Smith's chronology places the Kalinga Provincials' Edict, with a query, in 255 BCE.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      source: smith-asoka-1920
+      at: ch. I, Chronology of the Maurya Period
+      quote: (?) Kalinga Provincials' Edict
+places:
+  - place: dhauli
+    role: site
+  - place: jaugada
+    role: site
+  - place: ujjayini
+    role: context
+  - place: taxila
+    role: context
+participants:
+  - actor: ashoka
+    role: leader
+notes: >-
+  The edict names two of the four viceroyalties the inscriptions know, Ujjain and Taxila.
+cite:
+  - id: provincials-ujjain
+    says: >-
+      The edict says the prince at Ujjain will send a similar body of officials and not let three years
+      pass, and the same from Taxila.
+    source: asoka-inscriptions
+    at: Kalinga Edict II (Provincials' Edict), Dhauli text
+    quote: >-
+      From Ujjain, however, the Prince for this purpose will send out a similar body [of officials], and
+      will not over-pass three years.
+  - id: provincials-taxila
+    says: The same passage adds Taxila.
+    role: supporting
+    source: asoka-inscriptions
+    at: Kalinga Edict II (Provincials' Edict), Dhauli text
+    quote: In the same way—from Taxila.

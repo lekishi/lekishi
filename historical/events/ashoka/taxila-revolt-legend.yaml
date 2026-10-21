@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  In the northern legend, Bindusāra sends his despised son Aśoka, ill supplied, to besiege rebellious
+  Taxila; the citizens come out to meet him and submit, saying their quarrel is with oppressive ministers.
+types: [campaign]
+date:
+  value: 301 BCE..273 BCE
+  mode: window
+  calendar: unknown
+  as_written: It came to pass that King Bindusâra desired to besiege Taxila
+  cite:
+    - id: taxila-revolt-time
+      says: >-
+        Smith's retelling of the Aśokāvadāna places the siege in Bindusāra's reign, which his chronology
+        sets at 301–273 BCE.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      source: smith-asoka-1920
+      at: ch. VII, The Indian Legends of Asoka
+      quote: >-
+        It came to pass that King Bindusâra desired to besiege Taxila, which was in rebellion.
+places:
+  - place: taxila
+    role: site
+participants:
+  - actor: ashoka
+    role: leader
+  - actor: bindusara
+    role: other
+    note: Sends him.
+notes: >-
+  A legend, which Smith relates without judging its historical value. The window is only the reign it
+  is set in.
+cite:
+  - id: taxila-revolt-basis
+    says: >-
+      The retelling says Taxila and the kingdom of the Svasas made their submission to the prince.
+    source: smith-asoka-1920
+    at: ch. VII, The Indian Legends of Asoka
+    quote: Taxila and the kingdom of the Svasas made their submission to the prince

@@ -1,0 +1,82 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  The first Minor Rock Edict, which Smith takes for the earliest of the inscriptions: the king says he
+  was a lay disciple for more than two and a half years without much effort and then, for more than a
+  year, joined the Order and exerted himself, and he orders the text to be written on rocks and stone
+  pillars. It survives in seven places, from Rūpnāth and Sasaram to the Mysore rocks addressed from Suvarṇagiri.
+types: [occurrence]
+date:
+  value: 257 BCE
+  mode: window
+  calendar: julian
+  as_written: no regnal year in the text; Smith's 13th regnal year
+  cite:
+    - id: mre-time
+      says: >-
+        Smith's chronology puts the composition of Minor Rock Edict I in 257 BCE; the edict itself gives
+        no regnal year.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      source: smith-asoka-1920
+      at: ch. I, Chronology of the Maurya Period
+      quote: Asoka composed Minor Rock Edict I and Rock Edicts III and IV
+places:
+  - place: rupnath
+    role: site
+  - place: sasaram
+    role: site
+  - place: bairat
+    role: site
+  - place: maski
+    role: site
+    note: The one text that names Aśoka.
+  - place: brahmagiri
+    role: site
+  - place: siddapura
+    role: site
+    note: Smith thinks Isila, the town addressed, was here.
+  - place: jatinga-rameshwara
+    role: site
+  - place: suvarnagiri
+    role: context
+    note: >-
+      The Mysore texts are issued in the words of the prince and high officers of Suvarṇagiri.
+participants:
+  - actor: ashoka
+    role: leader
+  - actor: buddhist-sangha
+    role: other
+    note: The Order he says he joined.
+notes: >-
+  The undated edict is placed in 257 BCE by Smith's argument that it is the earliest. The Mysore copies
+  add the second Minor Rock Edict and the scribe Paḍa's signature, whose last word is written in Kharoṣṭhī.
+cite:
+  - id: mre-lay
+    says: >-
+      The Rūpnāth text gives the king's account of his lay discipleship and his joining the Order.
+    source: asoka-inscriptions
+    at: Minor Rock Edict I, Rūpnāth text
+    quote: >-
+      For more than two-and-a-half years I was a lay disciple, without, however, exerting myself strenuously.
+  - id: mre-rocks
+    says: The Rūpnāth text orders the purpose to be written on rocks and on stone pillars.
+    role: supporting
+    source: asoka-inscriptions
+    at: Minor Rock Edict I, Rūpnāth text
+    quote: And this purpose must be written on the rocks as opportunity offers (vâlata).
+  - id: mre-suvarnagiri
+    says: >-
+      The Brahmagiri text is addressed from the prince and officers of Suvarṇagiri to the officers in Isila.
+    role: supporting
+    source: asoka-inscriptions
+    at: Minor Rock Edict I, Brahmagiri text
+    quote: >-
+      According to the words of the Prince and High officers of Suvarnagiri the High officers in Isila are
+      to be addressed
+cites:
+  places:
+    - id: mre-places
+      says: Smith lists the localities of the Minor Rock Edicts.
+      source: smith-asoka-1920
+      at: ch. III, The Monuments (the Minor Rock Edicts)
+      quote: Variant recensions of Edict I occur at Sahasram

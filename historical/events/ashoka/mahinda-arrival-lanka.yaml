@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Mahinda and his companions fly to Lanka and alight on the Missa mountain; his first discourse converts
+  King Devānaṃpiya Tissa and forty thousand of his followers.
+types: [mission]
+date:
+  value: 252 BCE
+  mode: window
+  calendar: regnal
+  as_written: after the six months at Vedisagiri and a further month (chronicles)
+  cite:
+    - id: arrival-time
+      says: Smith's retelling sends Mahinda to Lanka a month after the visit to Vedisagiri.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      source: smith-asoka-1920
+      at: ch. VI, The Ceylonese Legend of Asoka
+      quote: After this event Mahendra lingered for another month
+places:
+  - place: lanka
+    role: end
+    note: The Missa mountain, which the cited source does not locate.
+participants:
+  - actor: mahinda
+    role: leader
+  - actor: devanampiya-tissa
+    role: host
+notes: >-
+  From the Ceylon chronicles in Smith's retelling, which he relates as legend. The BCE year converts the
+  chronicle's regnal year with Smith's epoch, which the chronicles themselves do not use. The flight is
+  the chronicles' and is reported, not drawn as a route.
+cite:
+  - id: arrival-basis
+    says: >-
+      The retelling says Mahendra arrived in Ceylon and alighted upon the Missa mountain.
+    source: smith-asoka-1920
+    at: ch. VI, The Ceylonese Legend of Asoka
+    quote: arrived in Ceylon, and alighted upon the Missa mountain.
+  - id: arrival-conversion
+    says: >-
+      The retelling says the first discourse converted the king and forty thousand followers.
+    role: supporting
+    source: smith-asoka-1920
+    at: ch. VI, The Ceylonese Legend of Asoka
+    quote: >-
+      The first discourse pronounced by the leader of the mission converted the king, with forty thousand
+      of his followers.

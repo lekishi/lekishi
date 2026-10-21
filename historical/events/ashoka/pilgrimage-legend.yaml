@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  In the northern legend (the Aśokāvadāna), the saint Upagupta comes by boat from Mathurā to Pāṭaliputra
+  and guides Aśoka, escorted by a great army, to the holy places in order: the Lumbinī garden, Kapilavastu,
+  the bodhi tree, Ṛṣipatana (Sārnāth), Kuśinagara and Śrāvastī.
+types: [journey]
+date:
+  value: 249 BCE
+  mode: window
+  calendar: julian
+  as_written: undated legend; Smith's table places the pilgrimage in 249 BCE
+  cite:
+    - id: pilgrimage-time
+      says: >-
+        Smith's chronology puts the pilgrimage to the Buddhist holy places in 249 BCE, the year of the Tarai
+        pillar inscriptions.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      source: smith-asoka-1920
+      at: ch. I, Chronology of the Maurya Period
+      quote: Pilgrimage to Buddhist holy places.
+places:
+  - place: mathura
+    role: context
+    note: Upagupta's home in the legend.
+  - place: pataliputra
+    role: start
+  - place: lumbini
+    role: waypoint
+  - place: kapilavastu
+    role: waypoint
+  - place: bodh-gaya
+    role: waypoint
+  - place: sarnath
+    role: waypoint
+  - place: kusinagara
+    role: waypoint
+  - place: sravasti
+    role: waypoint
+participants:
+  - actor: ashoka
+    role: leader
+  - actor: upagupta
+    role: leader
+    note: Guide.
+notes: >-
+  A legend, told by Smith without judgement. The order of the stops is the legend's; only Lumbinī is confirmed
+  by an inscription, which Smith links to the words the legend gives Upagupta. Kapilavastu, Sārnāth, Kuśinagara
+  and Śrāvastī are anchored by their own records, from the 玄奘 chapter.
+cite:
+  - id: pilgrimage-basis
+    says: >-
+      Smith's retelling says the king, escorted by a mighty army, visited all the holy places in order.
+    source: smith-asoka-1920
+    at: ch. VII, The Indian Legends of Asoka
+    quote: Escorted by a mighty army the monarch-visited all the holy places in order.
+  - id: pilgrimage-lumbini
+    says: The retelling makes the Lumbinī garden the first stop.
+    role: supporting
+    source: smith-asoka-1920
+    at: ch. VII, The Indian Legends of Asoka
+    quote: The first place visited was the Lumbini Garden.

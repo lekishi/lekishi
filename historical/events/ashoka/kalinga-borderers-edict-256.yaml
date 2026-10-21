@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  The first Kalinga Edict, cut at Dhauli and Jaugada after the Fourteen Rock Edicts: Aśoka tells the high
+  officers that all men are his children and that the unsubdued borderers should trust him and not fear
+  him, and orders it to be recited every four months on the Tiṣya day.
+types: [occurrence]
+date:
+  value: 256 BCE
+  mode: window
+  calendar: julian
+  as_written: undated; Smith's 14th regnal year
+  cite:
+    - id: borderers-time
+      says: Smith's chronology puts the Kalinga Borderers' Edict in 256 BCE.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      source: smith-asoka-1920
+      at: ch. I, Chronology of the Maurya Period
+      quote: Completion of Fourteen Rock Edicts; Kalinga. Borderers' Edict
+places:
+  - place: dhauli
+    role: site
+  - place: jaugada
+    role: site
+  - place: tosali
+    role: context
+    note: The Dhauli text is addressed to the prince and high officers at Tosalī.
+  - place: kalinga
+    role: context
+participants:
+  - actor: ashoka
+    role: leader
+notes: Written for the newly conquered province only and not published elsewhere.
+cite:
+  - id: borderers-children
+    says: The edict tells the officials that all men are the king's children.
+    source: asoka-inscriptions
+    at: Kalinga Edict I (Borderers' Edict), Jaugada text
+    quote: '"All men are my children;" and, just as I desire for my children'
+  - id: borderers-addressees
+    says: >-
+      Smith says the Dhauli text is addressed to the prince and officers at Tosali, the capital of the newly
+      annexed province, and the Jaugada text to the officers of Samāpā.
+    role: supporting
+    source: smith-asoka-1920
+    at: ch. IV, The Rock Edicts (comment on the Kalinga Edicts)
+    quote: >-
+      the Dhauli proclamation is addressed to the Prince and High Officers at Tosali, the capital of the
+      newly-annexed province

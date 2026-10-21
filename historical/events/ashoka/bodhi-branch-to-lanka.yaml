@@ -1,0 +1,58 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  At the Lanka king's request Aśoka severs a branch of the bodhi tree and sends it with Saṅghamittā, escorting
+  it himself to the port of Tāmralipti; it is planted in the Mahāmegha garden, and Saṅghamittā ordains
+  the first nuns of the island.
+types: [journey, exchange]
+date:
+  value: 252 BCE
+  mode: window
+  calendar: regnal
+  as_written: dispatched in the eighteenth year of the reign of Asoka the Pious
+  cite:
+    - id: bodhi-time
+      says: >-
+        Smith's retelling says the branch was dispatched in the eighteenth year of the reign; 252 BCE is
+        that year on Smith's 269 BCE epoch.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      source: smith-asoka-1920
+      at: ch. VI, The Ceylonese Legend of Asoka
+      quote: was dispatched in the eighteenth year of the reign of Asoka the Pious
+places:
+  - place: bodh-gaya
+    role: start
+    note: The holy tree, which the retelling does not name by place.
+  - place: tamralipti
+    role: waypoint
+  - place: lanka
+    role: end
+    note: The Mahāmegha garden.
+participants:
+  - actor: sanghamitta
+    role: leader
+  - actor: ashoka
+    role: participant
+    note: Escorts it to the port.
+  - actor: maha-arittha
+    role: participant
+  - actor: devanampiya-tissa
+    role: host
+notes: >-
+  From the Ceylon chronicles in Smith's retelling, which he relates as legend. The BCE year converts the
+  chronicle's regnal year with Smith's epoch, which the chronicles themselves do not use. The start at
+  Bodh Gayā is an editorial reading of 'the holy tree'.
+cite:
+  - id: bodhi-escort
+    says: >-
+      The retelling says the envoys and Sanghamitrā were escorted by an army commanded by Aśoka in person.
+    source: smith-asoka-1920
+    at: ch. VI, The Ceylonese Legend of Asoka
+    quote: escorted by an army commanded by King Asoka in person.
+  - id: bodhi-planting
+    says: The retelling says the branch was planted in the Mahāmegha garden.
+    role: supporting
+    source: smith-asoka-1920
+    at: ch. VI, The Ceylonese Legend of Asoka
+    quote: >-
+      was planted in the Mahâmegha garden, which the king had dedicated to the use of the Order.

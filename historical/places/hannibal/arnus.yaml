@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Arno (Arnus), whose flooded lower course Livy names for the marshes Hannibal crossed in the
+  spring of 217 BCE; Polybius speaks only of marshes on the way into Etruria.
+types: [landform]
+names:
+  - form: Arnus
+    lang: la
+    script: Latn
+    cite:
+      - id: arnus-name-livy
+        says: Livy records Hannibal taking the nearer road through the marshes where the Arnus had
+          flooded more than usual.
+        source: livy
+        at: "22.2.2"
+        quote: propiorem viam per paludes petit, qua fluvius Arnus per eos dies solito magis inundaverat
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [10.276623, 43.68061]
+    notes:
+      Label anchor near the river's mouth as Wikidata records it. The marshes are not mapped, and
+      the reach the army crossed is unknown.
+    cite:
+      - id: arnus-anchor
+        says:
+          The label anchor is placed at the coordinate the dataset records; no historical site is
+          asserted.
+        source: wikidata
+        at: Q115457 (P625), revision 2521603936
+modern:
+  - form: Arno
+    lang: it
+    script: Latn
+    note: Modern name of the river.
+external_ids:
+  - system: wikidata
+    id: Q115457
+    license: CC0-1.0
+  - system: pleiades
+    id: "403181"
+    license: CC BY 3.0
+notes:
+  Polybius describes the route as the one through the marshes into Etruria and does not name the
+  river; Livy's naming of the Arnus is kept as his.
+cites:
+  notes:
+    - id: arnus-polybius-marshes
+      says:
+        Polybius describes a short, unexpected road through marshes leading into Etruria and names
+        no river.
+      source: polybius
+      at: "3.78.6"
+      quote: τὴν δὲ διὰ τῶν ἑλῶν εἰς Τυρρηνίαν φέρουσαν δυσχερῆ μὲν σύντομον δὲ

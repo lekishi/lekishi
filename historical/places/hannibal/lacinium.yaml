@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Lacinium, the promontory near Croton with the sanctuary of Juno (Hera) Lacinia, where Hannibal set
+  up a bronze tablet recording his forces, which Polybius read.
+types: [religious_site, landform]
+names:
+  - form: Λακίνιον
+    lang: grc
+    script: Grek
+    cite:
+      - id: lacinium-name-polybius
+        says: Polybius says he found Hannibal's record set up on bronze at Λακίνιον.
+        source: polybius
+        at: "3.33.18"
+        quote: ἡμεῖς γὰρ εὑρόντες ἐπὶ Λακινίῳ τὴν γραφὴν ταύτην ἐν χαλκώματι κατατεταγμένην ὑπʼ Ἀννίβου
+  - form: Iunonis Laciniae templum
+    lang: la
+    script: Latn
+    cite:
+      - id: lacinium-name-livy
+        says:
+          Livy names the temple of Juno Lacinia near which Hannibal spent the summer and dedicated
+          an altar with an inscription.
+        source: livy
+        at: "28.46.16"
+        quote: propter Iunonis Laciniae templum aestatem Hannibal egit
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [17.204753, 39.02649]
+    notes:
+      An approximate placement at the sanctuary at Capo Colonna, which Pleiades identifies as the
+      temple of Hera Lacinia. Where the tablet stood is not recorded.
+    cite:
+      - id: lacinium-identification
+        says: Pleiades locates the ancient place (Temple of Hera Lacinia) at the site whose modern
+          coordinate Wikidata records; the point is the Wikidata coordinate (CC0), an approximate
+          placement of the ancient town, not a surveyed site.
+        basis: interpretation
+        attributed_to: Pleiades
+        sources:
+          - source: pleiades
+            at: place 452332 (Temple of Hera Lacinia), reprLatLong, dump 2026-10-21
+          - source: wikidata
+            at: Q3621968 (P625), revision 2536866890
+modern:
+  - form: Capo Colonna
+    lang: it
+    script: Latn
+    note: Modern name of the promontory.
+external_ids:
+  - system: wikidata
+    id: Q3621968
+    license: CC0-1.0
+  - system: pleiades
+    id: "452332"
+    license: CC BY 3.0

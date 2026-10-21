@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Gades, the Phoenician city beyond the strait where Livy records Hannibal paying his vows to
+  Hercules before the march.
+types: [settlement, religious_site]
+names:
+  - form: Gades
+    lang: la
+    script: Latn
+    cite:
+      - id: gades-name-livy
+        says: Livy records Hannibal going to Gades to pay his vows to Hercules.
+        source: livy
+        at: "21.21.9"
+        quote: Gadis profectus Herculi vota exsolvit
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [-6.298979, 36.534789]
+    notes:
+      An approximate placement at the ancient city under modern Cádiz, which Pleiades identifies as
+      Gadeira/Gades. Livy names the city, not the sanctuary, so no temple site is asserted.
+    cite:
+      - id: gades-identification
+        says:
+          Pleiades locates the ancient place (Gadeira/Gades/Col. Augusta Gaditana) at the site whose
+          modern coordinate Wikidata records; the point is the Wikidata coordinate (CC0), an
+          approximate placement of the ancient town, not a surveyed site.
+        basis: interpretation
+        attributed_to: Pleiades
+        sources:
+          - source: pleiades
+            at: place 256177 (Gadeira/Gades/Col. Augusta Gaditana), reprLatLong, dump 2026-10-21
+          - source: wikidata
+            at: Q3094251 (P625), revision 2522185929
+modern:
+  - form: Cádiz
+    lang: es
+    script: Latn
+    note: Modern city on the site, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q3094251
+    license: CC0-1.0
+  - system: pleiades
+    id: "256177"
+    license: CC BY 3.0

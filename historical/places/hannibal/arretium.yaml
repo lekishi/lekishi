@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Arretium, the Etruscan city before which the consul Flaminius was encamped when Hannibal came out
+  of the marshes in 217 BCE.
+types: [settlement]
+names:
+  - form: Arretium
+    lang: la
+    script: Latn
+    cite:
+      - id: arretium-name-livy
+        says: Livy records the Roman army encamped about the walls of Arretium.
+        source: livy
+        at: "22.3.1"
+        quote: exercitum Romanum circa Arreti moenia esse
+  - form: Ἀρρητίνων πόλις
+    lang: grc
+    script: Grek
+    note: Polybius names the city by its people.
+    cite:
+      - id: arretium-name-polybius
+        says: Polybius records Flaminius encamped before the city of the Arretines.
+        source: polybius
+        at: "3.80.1"
+        quote: καταλαβὼν ἐν Τυρρηνίᾳ τὸν Φλαμίνιον στρατοπεδεύοντα πρὸ τῆς τῶν Ἀρρητίνων πόλεως
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [11.878056, 43.463056]
+    notes:
+      An approximate placement at the ancient city under modern Arezzo, which Pleiades identifies as
+      Arretium.
+    cite:
+      - id: arretium-identification
+        says:
+          Pleiades locates the ancient place (Arretium) at the site whose modern coordinate Wikidata
+          records; the point is the Wikidata coordinate (CC0), an approximate placement of the
+          ancient town, not a surveyed site.
+        basis: interpretation
+        attributed_to: Pleiades
+        sources:
+          - source: pleiades
+            at: place 413032 (Arretium), reprLatLong, dump 2026-10-21
+          - source: wikidata
+            at: Q9160295 (P625), revision 2526629510
+modern:
+  - form: Arezzo
+    lang: it
+    script: Latn
+    note: Modern city on the site, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q9160295
+    license: CC0-1.0
+  - system: pleiades
+    id: "413032"
+    license: CC BY 3.0

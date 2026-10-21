@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Ticinus (Τίκινος), the left-bank tributary of the Po by which the cavalry battle of 218 BCE
+  was fought; the battlefield is not located.
+types: [landform]
+names:
+  - form: Ticinus
+    lang: la
+    script: Latn
+    cite:
+      - id: ticinus-name-livy
+        says: Livy names the Ticinus as the river by which one consul fought Hannibal.
+        source: livy
+        at: "21.15.4"
+        quote: alter ad Ticinum amnem
+  - form: Τίκινος
+    lang: grc
+    script: Grek
+    cite:
+      - id: ticinus-name-polybius
+        says: Polybius records Publius deciding to cross the Τίκινος and having it bridged.
+        source: polybius
+        at: "3.64.1"
+        quote: τὸν δὲ Τίκινον κρίνων εἰς τοὔμπροσθεν διαβαίνειν
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [9.234722222, 45.141388888]
+    notes: Label anchor at the river's confluence with the Po as Wikidata records it. The battle was
+      fought on the plain west of the river, at a place no source fixes.
+    cite:
+      - id: ticinus-anchor
+        says:
+          The label anchor is placed at the coordinate the dataset records; no historical site is
+          asserted.
+        source: wikidata
+        at: Q14366 (P625), revision 2522185130
+modern:
+  - form: Ticino
+    lang: it
+    script: Latn
+    note: Modern name of the river.
+external_ids:
+  - system: wikidata
+    id: Q14366
+    license: CC0-1.0
+  - system: pleiades
+    id: "383799"
+    license: CC BY 3.0

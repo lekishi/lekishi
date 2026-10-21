@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Kissa (Κίσσα, Cissis), the town north of the Ebro near which Gnaeus Scipio defeated Hanno in 218
+  BCE and which he took by assault; it is unlocated.
+types: [settlement]
+names:
+  - form: Κίσσα
+    lang: grc
+    script: Grek
+    cite:
+      - id: kissa-name-polybius
+        says: Polybius records the Carthaginians encamping against the Romans near a town called Κίσσα.
+        source: polybius
+        at: "3.76.5"
+        quote: ἀντιστρατοπεδευσάντων αὐτοῖς περὶ πόλιν προσαγορευομένην Κίσσαν
+  - form: Cissis
+    lang: la
+    script: Latn
+    cite:
+      - id: kissa-name-livy
+        says: Livy records Cissis, a town near the camp, being taken by assault.
+        source: livy
+        at: "21.60.7"
+        quote: et Cissis, propinquum castris oppidum, expugnatur
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: No coordinate is asserted. Pleiades records the town as unlocated near Tarraco; a modern
+      proposal is not adopted.
+    cite:
+      - id: kissa-unlocated
+        says: Livy calls Cissis a town near the Carthaginian camp and gives no other position.
+        source: livy
+        at: "21.60.7"
+        quote: Cissis, propinquum castris oppidum
+external_ids:
+  - system: pleiades
+    id: "246452"
+    license: CC BY 3.0

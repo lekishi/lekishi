@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Capua (Καπύη), the chief city of Campania, which went over to Hannibal after Cannae in 216 BCE on
+  terms Livy records.
+types: [settlement]
+names:
+  - form: Capua
+    lang: la
+    script: Latn
+    cite:
+      - id: capua-name-livy
+        says: Livy records Hannibal turning toward Capua.
+        source: livy
+        at: "23.2.1"
+        quote: inde Capuam flectit iter
+  - form: Καπύη
+    lang: grc
+    script: Grek
+    cite:
+      - id: capua-name-polybius
+        says: Polybius names the plains about Καπύη.
+        source: polybius
+        at: "3.90.10"
+        quote: εἰς τὰ περὶ Καπύην πεδία
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [14.250357, 41.086242]
+    notes:
+      An approximate placement at ancient Capua, at modern Santa Maria Capua Vetere, which Pleiades
+      identifies as Capua (not modern Capua, the later Casilinum).
+    cite:
+      - id: capua-identification
+        says:
+          Pleiades locates the ancient place (Capua) at the site whose modern coordinate Wikidata
+          records; the point is the Wikidata coordinate (CC0), an approximate placement of the
+          ancient town, not a surveyed site.
+        basis: interpretation
+        attributed_to: Pleiades
+        sources:
+          - source: pleiades
+            at: place 432754 (Capua), reprLatLong, dump 2026-10-21
+          - source: wikidata
+            at: Q3136685 (P625), revision 2522090547
+modern:
+  - form: Santa Maria Capua Vetere
+    lang: it
+    script: Latn
+    note: Modern town on the ancient site, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q3136685
+    license: CC0-1.0
+  - system: pleiades
+    id: "432754"
+    license: CC BY 3.0

@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Ebro (Polybius' Ἴβηρ, Livy's Hiberus), the river Hannibal's army crossed in 218 BCE; the
+  crossing place is not recorded.
+types: [landform]
+names:
+  - form: Hiberus
+    lang: la
+    script: Latn
+    cite:
+      - id: ebro-name-livy
+        says: Livy records Hannibal taking his forces across the Hiberus in three columns.
+        source: livy
+        at: "21.23.1"
+        quote: tripertito Hiberum copias traiecit
+  - form: Ἴβηρ
+    lang: grc
+    script: Grek
+    cite:
+      - id: ebro-name-polybius
+        says: Polybius records Hannibal crossing the river Ἴβηρ.
+        source: polybius
+        at: "3.35.2"
+        quote: καὶ διαβὰς τὸν Ἴβηρα ποταμὸν
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [0.869293, 40.728527]
+    notes:
+      Label anchor at the river's mouth as Wikidata records it. Neither source names the crossing
+      place, so the anchor asserts no crossing site.
+    cite:
+      - id: ebro-anchor
+        says:
+          The label anchor is placed at the coordinate the dataset records; no historical site is
+          asserted.
+        source: wikidata
+        at: Q10965 (P625), revision 2554394384
+modern:
+  - form: Ebro
+    lang: es
+    script: Latn
+    note: Modern name of the river.
+external_ids:
+  - system: wikidata
+    id: Q10965
+    license: CC0-1.0
+  - system: pleiades
+    id: "246418"
+    license: CC BY 3.0

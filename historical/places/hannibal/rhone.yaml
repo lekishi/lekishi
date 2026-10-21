@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: The Rhône (Ῥοδανός, Rhodanus), the river Hannibal crossed in 218 BCE and up whose valley he
+  marched toward the Alps; Publius Scipio landed at its easternmost mouth.
+types: [landform]
+names:
+  - form: Rhodanus
+    lang: la
+    script: Latn
+    cite:
+      - id: rhone-name-livy
+        says: Livy records Scipio camping at the nearest mouth of the Rhodanus.
+        source: livy
+        at: "21.26.3"
+        quote: ad proxumum ostium Rhodani
+  - form: Ῥοδανός
+    lang: grc
+    script: Grek
+    cite:
+      - id: rhone-name-polybius
+        says: Polybius names the river Ῥοδανός that Hannibal led his army toward.
+        source: polybius
+        at: "3.35.7"
+        quote: ἐπὶ τὴν τοῦ Ῥοδανοῦ καλουμένου ποταμοῦ διάβασιν
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [4.8442, 43.3342]
+    notes: Label anchor near the river's mouth as Wikidata records it. It marks the river, not the
+      crossing or the landing.
+    cite:
+      - id: rhone-anchor
+        says:
+          The label anchor is placed at the coordinate the dataset records; no historical site is
+          asserted.
+        source: wikidata
+        at: Q602 (P625), revision 2547403618
+modern:
+  - form: Rhône
+    lang: fr
+    script: Latn
+    note: Modern name of the river.
+external_ids:
+  - system: wikidata
+    id: Q602
+    license: CC0-1.0
+  - system: pleiades
+    id: "148168"
+    license: CC BY 3.0

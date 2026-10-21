@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Placentia, the Roman colony founded south of the Po in 218 BCE, where the survivors of the Trebia
+  withdrew.
+types: [settlement, fortification]
+names:
+  - form: Placentia
+    lang: la
+    script: Latn
+    cite:
+      - id: placentia-name-livy
+        says: Livy names Placentia as one of the two colonies lately planted by the Po on Gallic land.
+        source: livy
+        at: "21.25.2"
+        quote: nuper circa Padum Placentiam Cremonamque colonias in agrum Gallicum deductas
+  - form: Πλακεντία
+    lang: grc
+    script: Grek
+    cite:
+      - id: placentia-name-polybius
+        says: Polybius records the colony south of the Po being named Πλακεντία.
+        source: polybius
+        at: "3.40.5"
+        quote: ὧν τὴν μὲν μίαν ἔκτιζον ἐπὶ τάδε τοῦ Πάδου ποταμοῦ, προσαγορεύσαντες Πλακεντίαν
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [9.7, 45.05]
+    notes:
+      An approximate placement at modern Piacenza, which Pleiades identifies with Placentia; the
+      coordinate is the modern city's.
+    cite:
+      - id: placentia-identification
+        says: Pleiades locates the ancient place (Placentia) at the site whose modern coordinate
+          Wikidata records; the point is the Wikidata coordinate (CC0), an approximate placement of
+          the ancient town, not a surveyed site.
+        basis: interpretation
+        attributed_to: Pleiades
+        sources:
+          - source: pleiades
+            at: place 383741 (Placentia), reprLatLong, dump 2026-10-21
+          - source: wikidata
+            at: Q13329 (P625), revision 2546111854
+modern:
+  - form: Piacenza
+    lang: it
+    script: Latn
+    note: Modern city on the site, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q13329
+    license: CC0-1.0
+  - system: pleiades
+    id: "383741"
+    license: CC BY 3.0

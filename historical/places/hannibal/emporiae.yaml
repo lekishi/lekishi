@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Emporiae (Polybius' Ἐμπόριον), the Greek coastal town in Iberia where Gnaeus Scipio landed the
+  Roman fleet in 218 BCE.
+types: [settlement, port]
+names:
+  - form: Emporiae
+    lang: la
+    script: Latn
+    cite:
+      - id: emporiae-name-livy
+        says: Livy records Gnaeus Scipio bringing the fleet in to Emporiae.
+        source: livy
+        at: "21.60.2"
+        quote: Emporias adpulisset classem
+  - form: Ἐμπόριον
+    lang: grc
+    script: Grek
+    cite:
+      - id: emporiae-name-polybius
+        says: Polybius records the fleet putting in at the region of Ἐμπόριον.
+        source: polybius
+        at: "3.76.1"
+        quote: προσέσχε τῆς Ἰβηρίας πρὸς τοὺς κατὰ τὸ καλούμενον Ἐμπόριον τόπους
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [3.120556, 42.134722]
+    notes: An approximate placement at the excavated town of Empúries, which Pleiades identifies as
+      Emporiae.
+    cite:
+      - id: emporiae-identification
+        says:
+          Pleiades locates the ancient place (Emporiae) at the site whose modern coordinate Wikidata
+          records; the point is the Wikidata coordinate (CC0), an approximate placement of the
+          ancient town, not a surveyed site.
+        basis: interpretation
+        attributed_to: Pleiades
+        sources:
+          - source: pleiades
+            at: place 246382 (Emporiae), reprLatLong, dump 2026-10-21
+          - source: wikidata
+            at: Q1229367 (P625), revision 2526158902
+modern:
+  - form: Empúries
+    lang: ca
+    script: Latn
+    note: Modern name of the archaeological site.
+external_ids:
+  - system: wikidata
+    id: Q1229367
+    license: CC0-1.0
+  - system: pleiades
+    id: "246382"
+    license: CC BY 3.0

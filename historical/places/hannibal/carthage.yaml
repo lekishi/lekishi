@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Carthage, the city on the gulf of Tunis whose council received the Roman embassy of 218 BCE and
+  accepted war.
+types: [capital, port]
+names:
+  - form: Carthago
+    lang: la
+    script: Latn
+    cite:
+      - id: carthage-name-livy
+        says: Livy names Carthage as the city the Roman envoys were to cross to in Africa.
+        source: livy
+        at: "21.6.4"
+        quote: Carthaginem in Africam traicerent
+  - form: Καρχηδών
+    lang: grc
+    script: Grek
+    cite:
+      - id: carthage-name-polybius
+        says: Polybius names Καρχηδών as the city to which Hannibal sent troops from Iberia.
+        source: polybius
+        at: "3.33.12"
+        quote: τινὰς δʼ εἰς αὐτὴν Καρχηδόνα κατέταξεν
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [10.323461, 36.852558]
+    notes:
+      An approximate placement at the archaeological site of Carthage, which Pleiades identifies as
+      Carthago. The point is the city, not the council's meeting place.
+    cite:
+      - id: carthage-identification
+        says:
+          Pleiades locates the ancient place (Carthago) at the site whose modern coordinate Wikidata
+          records; the point is the Wikidata coordinate (CC0), an approximate placement of the
+          ancient town, not a surveyed site.
+        basis: interpretation
+        attributed_to: Pleiades
+        sources:
+          - source: pleiades
+            at: place 314921 (Carthago), reprLatLong, dump 2026-10-21
+          - source: wikidata
+            at: Q6343 (P625), revision 2544642967
+modern:
+  - form: قرطاج
+    lang: ar
+    script: Arab
+    note: Modern municipality on the site (Carthage), recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q6343
+    license: CC0-1.0
+  - system: pleiades
+    id: "314921"
+    license: CC BY 3.0

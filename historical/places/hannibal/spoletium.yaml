@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Spoletium, the Latin colony in Umbria that Livy says beat off Hannibal's attack after Trasimene.
+types: [settlement, fortification]
+names:
+  - form: Spoletium
+    lang: la
+    script: Latn
+    cite:
+      - id: spoletium-name-livy
+        says: Livy records Hannibal marching straight through Umbria to Spoletium.
+        source: livy
+        at: "22.9.1"
+        quote: Hannibal recto itinere per Umbriam usque ad Spoletium venit
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [12.73846229, 42.73440954]
+    notes: An approximate placement at modern Spoleto, which Pleiades identifies with Spoletium; the
+      coordinate is the modern town's.
+    cite:
+      - id: spoletium-identification
+        says: Pleiades locates the ancient place (Spoletium) at the site whose modern coordinate
+          Wikidata records; the point is the Wikidata coordinate (CC0), an approximate placement of
+          the ancient town, not a surveyed site.
+        basis: interpretation
+        attributed_to: Pleiades
+        sources:
+          - source: pleiades
+            at: place 413320 (Spoletium), reprLatLong, dump 2026-10-21
+          - source: wikidata
+            at: Q20571 (P625), revision 2527345896
+modern:
+  - form: Spoleto
+    lang: it
+    script: Latn
+    note: Modern town on the site, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q20571
+    license: CC0-1.0
+  - system: pleiades
+    id: "413320"
+    license: CC BY 3.0

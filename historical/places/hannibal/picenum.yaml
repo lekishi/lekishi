@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Picene country by the Adriatic, where Hannibal rested his army, cured his horses and rearmed
+  his Libyans after Trasimene.
+types: [region]
+names:
+  - form: ager Picenus
+    lang: la
+    script: Latn
+    cite:
+      - id: picenum-name-livy
+        says: Livy records Hannibal turning into the Picene country, rich in crops and plunder.
+        source: livy
+        at: "22.9.2"
+        quote: in agrum Picenum avertit iter
+  - form: ἡ παρὰ τὸν Ἀδρίαν χώρα
+    lang: grc
+    script: Grek
+    note: Polybius describes the country; he does not name Picenum here.
+    cite:
+      - id: picenum-name-polybius
+        says: Polybius records Hannibal lingering in the country along the Adriatic.
+        source: polybius
+        at: "3.88.1"
+        quote: ἐνδιέτριβε τῇ παρὰ τὸν Ἀδρίαν χώρᾳ
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: "No coordinate is asserted: the sources name a region by the Adriatic and give no camp site."
+    cite:
+      - id: picenum-unlocated
+        says: Polybius describes Hannibal's camp only as by the Adriatic, in a country rich in every
+          crop.
+        source: polybius
+        at: "3.87.1"
+        quote: καταστρατοπεδεύσας παρὰ τὸν Ἀδρίαν ἐν χώρᾳ πρὸς πάντα τὰ γεννήματα διαφερούσῃ

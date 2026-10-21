@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The chief town of the Taurini, at the foot of the Alps, which Hannibal took after a three-day
+  siege in 218 BCE. Neither source names it.
+types: [settlement]
+names:
+  - form: Taurinorum urbs
+    lang: la
+    script: Latn
+    note: A descriptive phrase from Livy, not a recorded name.
+    cite:
+      - id: taurini-town-name-livy
+        says: Livy calls it a town of the Taurini, the head of that people.
+        source: livy
+        at: "21.39.4"
+        quote:
+          Taurinorumque unam urbem, caput gentis eius, quia volentes in amicitiam non veniebant, vi
+          expugnarat
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [7.685833333, 45.071666666]
+    notes:
+      Label anchor at Augusta Taurinorum, the later Roman town at Turin. The identification of the
+      Taurini's town with that site is a convention, not a source statement, so no site is asserted.
+    cite:
+      - id: taurini-town-anchor
+        says:
+          The label anchor is placed at the coordinate the dataset records; no historical site is
+          asserted.
+        source: wikidata
+        at: Q11907223 (P625), revision 2557335014
+cites:
+  summary:
+    - id: taurini-town-polybius
+      says:
+        Polybius calls it the most important town of the Taurini and says Hannibal took it in three
+        days.
+      source: polybius
+      at: "3.60.9"
+      quote: περιστρατοπεδεύσας τὴν βαρυτάτην πόλιν ἐν τρισὶν ἡμέραις ἐξεπολιόρκησεν

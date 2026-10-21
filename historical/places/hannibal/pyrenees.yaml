@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Pyrenees, the range Hannibal's army crossed in 218 BCE on the way to the Rhône; the pass is
+  not recorded.
+types: [landform, region]
+names:
+  - form: Pyrenaei montes
+    lang: la
+    script: Latn
+    cite:
+      - id: pyrenees-name-livy
+        says: Livy names the Pyrenaei montes that the consul doubted Hannibal had yet crossed.
+        source: livy
+        at: "21.26.4"
+        quote: vixdum satis credens Hannibalem superasse Pyrenaeos montis
+  - form: Πυρήνη
+    lang: grc
+    script: Grek
+    cite:
+      - id: pyrenees-name-polybius
+        says: Polybius names the range Πυρήνη, up to which Hannibal subdued the peoples north of the
+          Ebro.
+        source: polybius
+        at: "3.35.2"
+        quote: μέχρι τῆς προσαγορευομένης Πυρήνης
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [0.6, 42.7]
+    notes: Region-level label anchor for the range. The sources do not say which pass the army used.
+    cite:
+      - id: pyrenees-anchor
+        says:
+          The label anchor is placed at the coordinate the dataset records; no historical site is
+          asserted.
+        source: wikidata
+        at: Q12431 (P625), revision 2557657639
+external_ids:
+  - system: wikidata
+    id: Q12431
+    license: CC0-1.0
+  - system: pleiades
+    id: "246582"
+    license: CC BY 3.0

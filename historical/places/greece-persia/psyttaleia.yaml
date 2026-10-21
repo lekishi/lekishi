@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Psyttaleia, the islet between Salamis and the mainland where Xerxes landed Persians before the
+  battle and Aristeides's men killed them.
+types: [landform]
+names:
+  - form: Ψυττάλεια
+    lang: grc
+    script: Grek
+    roman: Psyttaleia
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: psyttaleia-greek-name
+        says: Pleiades records the ancient Greek name Ψυττάλεια for this place.
+        source: pleiades
+        at: place 580094, name /places/580094/psyttaleia, dump 2026-10-21
+      - id: psyttaleia-name
+        says: Herodotus places Psyttaleia between Salamis and the mainland.
+        source: herodotus
+        at: VIII.76
+        quote:
+          landed first a large number of Persians in the small island of Psyttaleia, which lies between
+          Salamis and the mainland
+        role: supporting
+  - form: Psyttaleia
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: psyttaleia-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [23.58839, 37.94089]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: psyttaleia-location
+        says:
+          Pleiades identifies the place and gives its representative point as 37.940890668, 23.5883896217
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 580094 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "580094"
+    url: https://pleiades.stoa.org/places/580094
+    license: CC BY 3.0

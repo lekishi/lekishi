@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Plataea in Boeotia, below Kithairon, near which the Greeks defeated Mardonios in 479 BCE.
+types: [settlement]
+names:
+  - form: Πλάταιαι
+    lang: grc
+    script: Grek
+    roman: Plataia
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: plataea-greek-name
+        says: Pleiades records the ancient Greek name Πλάταιαι for this place.
+        source: pleiades
+        at: place 541063, name /places/541063/plataiai, dump 2026-10-21
+      - id: plataea-name
+        says: Herodotus records the Greeks moving down toward Plataia to encamp.
+        source: herodotus
+        at: IX.25
+        quote:
+          After this they resolved to come down further towards Plataia; for the region of Plataia was
+          seen to be much more convenient for them to encamp in than that of Erythrai
+        role: supporting
+  - form: Plataia
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: plataea-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [23.27354, 38.22108]
+    notes:
+      The gazetteer's point for the city of Plataea. The battle was fought in the Plataian land along
+      the Asopos; the point is the city, not the battlefield.
+    cite:
+      - id: plataea-location
+        says:
+          Pleiades identifies the place and gives its representative point as 38.2210753, 23.27353775
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 541063 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "541063"
+    url: https://pleiades.stoa.org/places/541063
+    license: CC BY 3.0

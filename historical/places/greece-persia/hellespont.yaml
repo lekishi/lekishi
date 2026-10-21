@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Hellespont, the strait between Asia and Europe that Xerxes bridged in 481–480 BCE and Alexander
+  crossed in 334 BCE.
+types: [landform]
+names:
+  - form: Ἑλλήσποντός
+    lang: grc
+    script: Grek
+    roman: Hellespont
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: hellespont-greek-name
+        says: Pleiades records the ancient Greek name Ἑλλήσποντός for this place.
+        source: pleiades
+        at: place 501434, name /places/501434/hellespontos, dump 2026-10-21
+      - id: hellespont-name
+        says: Herodotus records the bridging of the Hellespont from Asia to Europe.
+        source: herodotus
+        at: VII.33
+        quote: meanwhile they were bridging over the Hellespont from Asia to Europe
+        role: supporting
+  - form: Hellespont
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: hellespont-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [26.47687, 40.21881]
+    notes:
+      The gazetteer's representative point for the strait. It is a label position for a body of water,
+      not a crossing point.
+    cite:
+      - id: hellespont-location
+        says:
+          Pleiades identifies the place and gives its representative point as 40.2188080193, 26.4768660982
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 501434 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "501434"
+    url: https://pleiades.stoa.org/places/501434
+    license: CC BY 3.0

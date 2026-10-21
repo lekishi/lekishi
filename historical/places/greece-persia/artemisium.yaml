@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Artemision, the shore of northern Euboea named after its temple of Artemis, where the Greek fleet
+  fought Xerxes' fleet in 480 BCE on the same days as Thermopylae.
+types: [religious_site]
+names:
+  - form: Artemision
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: artemisium-name
+        says:
+          Herodotus records the Hellenes resolving to station the fleet at Artemision, in the territory
+          of Histiaia.
+        source: herodotus
+        at: VII.175
+        quote: they resolved that the fleet should sail to Artemision in the territory of Histiaia
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [23.22138, 39.01405]
+    notes:
+      The gazetteer's point for the possible site of the temple of Artemis Proseoa. The sea battles
+      were fought off this shore; the point is not where the fleets met.
+    cite:
+      - id: artemisium-location
+        says:
+          Pleiades identifies the place and gives its representative point as 39.0140455, 23.2213755 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 540667 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "540667"
+    url: https://pleiades.stoa.org/places/540667
+    license: CC BY 3.0

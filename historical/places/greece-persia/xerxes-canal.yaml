@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The canal Xerxes had dug across the isthmus of the Athos peninsula so that the fleet would not
+  have to round the cape where Mardonios's fleet had been wrecked in 492 BCE.
+types: [other]
+names:
+  - form: the channel through the isthmus of Athos
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: xerxes-canal-name
+        says: Herodotus reports the channel at Athos and its embankments completed before the march.
+        source: herodotus
+        at: VII.37
+        quote:
+          the works about Athos, both the embankments about the mouths of the channel, which were made
+          because of the breaking of the sea upon the beach, that the mouths of it might not be filled up,
+          and the channel itself, were reported to be fully completed
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [23.92283, 40.37287]
+    notes:
+      The gazetteer's point for the excavated canal at Nea Rhode. It is an identification by modern
+      survey, not a position the ancient text states.
+    cite:
+      - id: xerxes-canal-location
+        says:
+          Pleiades identifies the place and gives its representative point as 40.3728660411, 23.9228255041
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 503587 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "503587"
+    url: https://pleiades.stoa.org/places/503587
+    license: CC BY 3.0
+notes:
+  Typed other because the place vocabulary has no type for a canal or other made waterway; the chapter's
+  feasibility note proposes one.

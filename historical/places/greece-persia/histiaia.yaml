@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Histiaia in northern Euboea, which Xerxes' fleet occupied after the Greek fleet left Artemision.
+types: [settlement]
+names:
+  - form: Histiaia
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: histiaia-name
+        says: Herodotus records the fleet passing over to Histiaia and staying there three days.
+        source: herodotus
+        at: VIII.66
+        quote: having passed over from thence to Histiaia, after staying three days sailed through Euripos
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [23.09053, 38.9466]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: histiaia-location
+        says:
+          Pleiades identifies the place and gives its representative point as 38.946604, 23.090527 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 540817 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "540817"
+    url: https://pleiades.stoa.org/places/540817
+    license: CC BY 3.0

@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Thermopylae, the narrow pass between the mountains and the Malian gulf where Leonidas held Xerxes'
+  army for three days in 480 BCE.
+types: [landform, fortification]
+names:
+  - form: Θερμοπύλαι
+    lang: grc
+    script: Grek
+    roman: Thermopylai
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: thermopylae-greek-name
+        says: Pleiades records the ancient Greek name Θερμοπύλαι for this place.
+        source: pleiades
+        at: place 541140, name /places/541140/thermopylai, dump 2026-10-21
+      - id: thermopylae-name
+        says: Herodotus gives the pass's names, Thermopylai and Pylai.
+        source: herodotus
+        at: VII.201
+        quote:
+          This place is called by the Hellenes in general Thermopylai, but by the natives of the place
+          and those who dwell in the country round it is called Pylai.
+        role: supporting
+  - form: Thermopylai
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: thermopylae-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [22.54364, 38.796]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: thermopylae-location
+        says:
+          Pleiades identifies the place and gives its representative point as 38.796, 22.543644 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 541140 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "541140"
+    url: https://pleiades.stoa.org/places/541140
+    license: CC BY 3.0

@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Elaius at the tip of the Thracian Chersonese, with the shrine of Protesilaos. The triremes that
+  served the Athos canal works were based there.
+types: [settlement]
+names:
+  - form: Ἐλαιοῦς
+    lang: grc
+    script: Grek
+    roman: Elaius
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: elaius-greek-name
+        says: Pleiades records the ancient Greek name Ἐλαιοῦς for this place.
+        source: pleiades
+        at: place 501411, name /places/501411/elaious, dump 2026-10-21
+      - id: elaius-name
+        says: Herodotus names Elaius in the Chersonese as the base for the canal works.
+        source: herodotus
+        at: VII.22
+        quote:
+          for triremes lay at anchor at Elaius in the Chersonese, and with this for their starting point
+          men of all nations belonging to the army worked at digging
+        role: supporting
+  - form: Elaius
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: elaius-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [26.22333, 40.05446]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: elaius-location
+        says:
+          Pleiades identifies the place and gives its representative point as 40.054457, 26.223326 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 501411 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "501411"
+    url: https://pleiades.stoa.org/places/501411
+    license: CC BY 3.0

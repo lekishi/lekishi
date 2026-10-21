@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Mount Mycale in Ionia, opposite Samos, where the Greek fleet landed and defeated the Persian
+  force on the day of Plataea in 479 BCE.
+types: [landform]
+names:
+  - form: Μυκάλη
+    lang: grc
+    script: Grek
+    roman: Mycale
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: mycale-greek-name
+        says: Pleiades records the ancient Greek name Μυκάλη for this place.
+        source: pleiades
+        at: place 599805, name /places/599805/Mycale-M, dump 2026-10-21
+      - id: mycale-name
+        says: Herodotus places the second defeat at Mycale in Ionia.
+        source: herodotus
+        at: IX.90
+        quote:
+          Now on the same day on which the defeat took place at Plataia, another took place also, as
+          fortune would have it, at Mycale in Ionia.
+        role: supporting
+  - form: Mycale
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: mycale-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [27.08333, 37.66667]
+    notes:
+      The gazetteer's point for the mountain. The battle was fought on the shore below it; the point
+      is the mountain, not the battlefield.
+    cite:
+      - id: mycale-location
+        says:
+          Pleiades identifies the place and gives its representative point as 37.666667, 27.083333 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 599805 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "599805"
+    url: https://pleiades.stoa.org/places/599805
+    license: CC BY 3.0

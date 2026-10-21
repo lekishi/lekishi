@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Isthmus of Corinth, where the Hellenes who resisted Xerxes met in council in 481–480 BCE
+  and where the Peloponnesians walled the land route in 480 BCE.
+types: [landform]
+names:
+  - form: the Isthmus
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: isthmus-of-corinth-name
+        says: Herodotus records the Hellenes deliberating at the Isthmus.
+        source: herodotus
+        at: VII.175
+        quote:
+          When the Hellenes had returned to the Isthmus, they deliberated, having regard to that which
+          had been said by Alexander, where and in what regions they should set the war on foot
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [22.98778, 37.94139]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: isthmus-of-corinth-location
+        says:
+          Pleiades identifies the place and gives its representative point as 37.941389, 22.987778 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 570317 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "570317"
+    url: https://pleiades.stoa.org/places/570317
+    license: CC BY 3.0

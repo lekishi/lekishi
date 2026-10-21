@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Doriscos in Thrace, a beach and plain at the mouth of the Hebros with a Persian royal fortress,
+  where Xerxes numbered his army and the fleet was beached in 480 BCE.
+types: [fortification]
+names:
+  - form: Doriscos
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: doriscus-name
+        says: Herodotus describes Doriscos as a beach and plain in Thrace on the Hebros with a royal fortress.
+        source: herodotus
+        at: VII.59
+        quote:
+          "Now Doriscos is a sea-beach and plain of great extent in Thrace, and through it flows the
+          great river Hebros: here a royal fortress had been built"
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [26.16401, 40.87362]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: doriscus-location
+        says:
+          Pleiades identifies the place and gives its representative point as 40.873623, 26.164008 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 501402 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "501402"
+    url: https://pleiades.stoa.org/places/501402
+    license: CC BY 3.0

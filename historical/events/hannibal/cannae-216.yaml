@@ -1,0 +1,135 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  On his day of command, Varro leads the Roman army across the Aufidus at dawn and draws it up
+  facing south. Hannibal's centre gives way while his African infantry and cavalry close round the
+  Romans; Aemilius Paullus, Servilius and Minucius fall, and the Roman army is all but destroyed.
+  Varro escapes to Venusia.
+types: [occurrence]
+date:
+  value: "216 BCE"
+  calendar: regnal
+  as_written:
+    ante diem quartum Nonas Sextiles (Q. Claudius, in Gellius 5.17.5); L. Aemilius Paullus C.
+    Terentius Varro consules
+  cite:
+    - id: cannae-time
+      says:
+        Polybius records Gaius taking the command the next day and moving the army out of both camps
+        at sunrise.
+      source: polybius
+      at: "3.113.1"
+      quote:
+        ὁ δὲ Γάιος ἅμα τῷ παραλαβεῖν τῇ κατὰ πόδας ἡμέρᾳ τὴν ἀρχήν, ἄρτι τῆς κατὰ τὸν ἥλιον ἀνατολῆς
+        ἐπιφαινομένης, ἐκίνει τὴν δύναμιν
+    - id: cannae-day
+      says:
+        Gellius reports Q. Claudius dating the disaster at Cannae to the fourth day before the Nones
+        of Sextilis.
+      role: supporting
+      source: gellius
+      at: "5.17.5"
+      quote:
+        nisi quod Q. Claudius Annaliun quinto cladem illam pugnae Cannensis vastissimam factam dicit
+        ante diem quartum Nonas Sextiles
+places:
+  - place: cannae
+    role: site
+    note: The town's point; which bank of the Aufidus the battle was fought on is disputed.
+participants:
+  - actor: hannibal
+    role: leader
+  - actor: c-terentius-varro
+    role: leader
+  - actor: l-aemilius-paullus
+    role: leader
+    note: Killed.
+  - actor: cn-servilius-geminus
+    role: participant
+    note: Killed.
+  - actor: m-minucius-rufus
+    role: participant
+    note: Killed.
+  - actor: mago-barca
+    role: participant
+  - actor: hasdrubal-cavalry-commander
+    role: leader
+    note: Led the left-wing cavalry.
+  - actor: maharbal
+    role: participant
+    note: Livy's commander of the right wing.
+  - actor: hanno-son-of-bomilcar
+    role: participant
+    note: Polybius' commander of the right wing.
+notes:
+  "The Roman calendar date (2 Sextilis on Claudius' report) is not converted: the civil calendar of
+  216 BCE was not aligned with the Julian year, so the record keeps year precision. Year only. The
+  sources date by Roman consular year and by season; v0 has no Roman republican calendar, so the
+  date is the Julian year the consular year falls in, and no month or day is asserted."
+dispute:
+  status: disputed
+  summary:
+    "The sources differ on who led the Carthaginian right wing (Polybius: Hanno; Livy: Maharbal) and
+    on the losses (Polybius about 70,000 dead and about 10,000 captured; Livy 45,500 foot and 2,700
+    horse killed, 3,000 foot and 1,500 horse captured). The record keeps both."
+cite:
+  - id: cannae-wings-polybius
+    says: Polybius gives the Carthaginian left to Hasdrubal, the right to Hanno, and the centre to
+      Hannibal and his brother Mago.
+    source: polybius
+    at: "3.114.7"
+    quote: τῶν δὲ Καρχηδονίων τὸ μὲν εὐώνυμον Ἀσδρούβας εἶχε, τὸ δὲ δεξιὸν Ἄννων· ἐπὶ δὲ τοῖς μέσοις
+      αὐτὸς ἦν Ἀννίβας, ἔχων μεθʼ ἑαυτοῦ Μάγωνα τὸν ἀδελφόν
+  - id: cannae-wings-livy
+    says: Livy gives the left to Hasdrubal and the right to Maharbal.
+    role: conflicting
+    source: livy
+    at: "22.46.7"
+    quote:
+      duces cornibus praeerant sinistro Hasdrubal, dextro Maharbal; mediam aciem Hannibal ipse cum
+      fratre Magone tenuit
+  - id: cannae-facing
+    says:
+      Both historians record the Romans facing south and the Carthaginians north, so the rising sun
+      troubled neither.
+    role: supporting
+    sources:
+      - source: polybius
+        at: "3.114.8"
+        quote: βλεπούσης δὲ τῆς μὲν τῶν Ῥωμαίων τάξεως πρὸς μεσημβρίαν
+      - source: livy
+        at: "22.46.8"
+        quote: Romanis in meridiem, Poenis in septentrionem versis
+  - id: cannae-paullus
+    says: Polybius records Lucius Aemilius killed in the fighting.
+    role: supporting
+    source: polybius
+    at: "3.116.9"
+    quote: ἐν ᾧ καιρῷ καὶ Λεύκιος Αἰμίλιος περιπεσὼν βιαίοις πληγαῖς ἐν χειρῶν νόμῳ μετήλλαξε τὸν βίον
+  - id: cannae-consulars
+    says: Polybius records Marcus and Gnaeus, the consuls of the previous year, falling with the
+      encircled Romans.
+    role: supporting
+    source: polybius
+    at: "3.116.11"
+    quote: τέλος αὐτοῦ πάντες, ἐν οἷς καὶ Μάρκος καὶ Γνάιος, ἔπεσον, οἱ τὸ πρότερον ἔτος ὕπατοι γεγονότες
+  - id: cannae-dead-polybius
+    says: Polybius gives about ten thousand infantry captured and the rest, about seventy thousand,
+      killed.
+    role: supporting
+    source: polybius
+    at: "3.117.4"
+    quote: οἱ δὲ λοιποὶ πάντες, ὄντες εἰς ἑπτὰ μυριάδας, ἀπέθανον εὐγενῶς
+  - id: cannae-dead-livy
+    says: Livy gives 45,500 infantry and 2,700 cavalry killed.
+    role: conflicting
+    source: livy
+    at: "22.49.15"
+    quote:
+      quadraginta quinque milia quingenti pedites, duo milia septingenti equites et tantadem prope
+      civium sociorumque pars caesi dicuntur
+  - id: cannae-varro
+    says: Polybius records a few escaping to Venusia, among them the consul Gaius Terentius.
+    role: supporting
+    source: polybius
+    at: "3.116.13"
+    quote: ὀλίγοι δέ τινες εἰς Οὐενουσίαν διέφυγον, ἐν οἷς ἦν καὶ Γάιος Τερέντιος ὁ τῶν Ῥωμαίων στρατηγός

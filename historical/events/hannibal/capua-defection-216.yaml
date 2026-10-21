@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "Capua's envoys make a treaty with Hannibal: no Carthaginian magistrate is to have any authority
+  over a Campanian, no Campanian is to serve against his will, Capua keeps its laws and magistrates,
+  and Hannibal gives 300 Roman prisoners to exchange for Campanian horsemen in Sicily. Hannibal is
+  received in Capua and promises it will be the capital of Italy."
+types: [council]
+date:
+  value: "216 BCE"
+  calendar: regnal
+  as_written: after Cannae (Livy 23.7); L. Aemilius Paullus C. Terentius Varro consules
+  cite:
+    - id: capua-time
+      says: Livy records the envoys coming to Hannibal and making peace on these terms.
+      source: livy
+      at: "23.7.1"
+      quote:
+        legati ad Hannibalem venerunt pacemque cum eo condicionibus his fecerunt, ne quis imperator
+        magistratusve Poenorum ius ullum in civem Campanum haberet, neve civis Campanus invitus
+        militaret munusve faceret
+places:
+  - place: capua
+    role: site
+participants:
+  - actor: campani
+    role: participant
+  - actor: hannibal
+    role: participant
+notes:
+  Polybius notes only that some of the Capuans called Hannibal in after Cannae. Livy adds that the
+  Campanian commons shut Roman citizens in the baths, where they suffocated. Year only. The sources
+  date by Roman consular year and by season; v0 has no Roman republican calendar, so the date is the
+  Julian year the consular year falls in, and no month or day is asserted.
+cite:
+  - id: capua-terms
+    says:
+      Livy records Capua keeping its own laws and magistrates and receiving 300 Roman prisoners to
+      exchange.
+    source: livy
+    at: "23.7.2"
+    quote:
+      ut suae leges, sui magistratus Capuae essent; ut trecentos ex Romanis captivis Poenus daret
+      Campanis
+  - id: capua-polybius
+    says: Polybius records some of the Capuans calling Hannibal in after Cannae.
+    role: supporting
+    source: polybius
+    at: "3.118.3"
+    quote: Ἀργυριππανοὶ δὲ καὶ Καπυανῶν τινες ἐκάλουν τὸν Ἀννίβαν
+  - id: capua-capital
+    says: Livy records Hannibal promising that Capua would soon be the capital of all Italy.
+    role: supporting
+    source: livy
+    at: "23.10.2"
+    quote: pollicitus brevi caput Italiae omni Capuam fore

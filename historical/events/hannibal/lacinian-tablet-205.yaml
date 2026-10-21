@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At the temple of Juno Lacinia, Hannibal sets up an altar with a long inscription in Punic and
+  Greek recording his deeds. Polybius read its bronze tablet and took from it his figures for the
+  troops of 218 BCE.
+types: [founding]
+date:
+  value: "205 BCE"
+  calendar: regnal
+  as_written: propter Iunonis Laciniae templum aestatem Hannibal egit
+  cite:
+    - id: tablet-time
+      says:
+        Livy records Hannibal spending the summer near the temple of Juno Lacinia and dedicating an
+        altar with a great inscription in Punic and Greek.
+      source: livy
+      at: "28.46.16"
+      quote:
+        propter Iunonis Laciniae templum aestatem Hannibal egit, ibique aram condidit dedicavitque
+        cum ingenti rerum ab se gestarum titulo, Punicis Graecisque litteris insculpto
+places:
+  - place: lacinium
+    role: site
+participants:
+  - actor: hannibal
+    role: leader
+notes:
+  "A coda: the dedication falls in 205 BCE (Livy dates it among that year's events), well after the
+  chapter's window, but it is the source of Polybius' troop figures. Livy's year is used; Polybius
+  gives no date. Year only. The sources date by Roman consular year and by season; v0 has no Roman
+  republican calendar, so the date is the Julian year the consular year falls in, and no month or
+  day is asserted."
+cite:
+  - id: tablet-polybius
+    says: Polybius says he found the record on a bronze tablet set up by Hannibal at Lacinium and
+      followed it.
+    source: polybius
+    at: "3.33.18"
+    quote: ἡμεῖς γὰρ εὑρόντες ἐπὶ Λακινίῳ τὴν γραφὴν ταύτην ἐν χαλκώματι κατατεταγμένην ὑπʼ Ἀννίβου
+  - id: tablet-numbers
+    says: Polybius cites the inscription at Lacinium for the army's numbers on reaching Italy.
+    role: supporting
+    source: polybius
+    at: "3.56.4"
+    quote: ὡς αὐτὸς ἐν τῇ στήλῃ τῇ περὶ τοῦ πλήθους ἐχούσῃ τὴν ἐπιγραφὴν ἐπὶ Λακινίῳ διασαφεῖ

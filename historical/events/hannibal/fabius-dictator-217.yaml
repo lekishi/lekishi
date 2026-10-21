@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  After Trasimene and the loss of Centenius' cavalry, Rome names Q. Fabius Maximus dictator, with M.
+  Minucius Rufus as master of horse. With the consul away and Italy cut off, Livy says, the people
+  elected the dictator, which had never been done before.
+types: [council]
+date:
+  value: "217 BCE"
+  calendar: regnal
+  as_written: dictatorem populus creavit Q. Fabium Maximum
+  cite:
+    - id: fabius-time
+      says:
+        Livy records that, the consul being absent, the people created Fabius dictator and Minucius
+        master of horse.
+      source: livy
+      at: "22.8.6"
+      quote: quod numquam ante eam diem factum erat, dictatorem populus creavit Q. Fabium Maximum et
+        magistrum equitum M. Minucium Rufum
+places:
+  - place: rome
+    role: site
+participants:
+  - actor: q-fabius-maximus
+    role: subject
+  - actor: m-minucius-rufus
+    role: subject
+  - actor: roman-republic
+    role: participant
+notes:
+  Polybius explains the dictator's twenty-four axes and supreme command. Year only. The sources date
+  by Roman consular year and by season; v0 has no Roman republican calendar, so the date is the
+  Julian year the consular year falls in, and no month or day is asserted.
+cite:
+  - id: fabius-polybius
+    says: Polybius records the Romans appointing Quintus Fabius dictator, a man of outstanding
+      judgement.
+    source: polybius
+    at: "3.87.6"
+    quote:
+      Ῥωμαῖοι δὲ δικτάτορα μὲν κατέστησαν Κόιντον Φάβιον, ἄνδρα καὶ φρονήσει διαφέροντα καὶ πεφυκότα
+      καλῶς
+  - id: fabius-minucius
+    says: Polybius records Marcus Minucius appointed master of horse with the dictator.
+    role: supporting
+    source: polybius
+    at: "3.87.9"
+    quote: ἅμα δὲ τῷ δικτάτορι κατέστησαν ἱππάρχην Μάρκον Μινύκιον

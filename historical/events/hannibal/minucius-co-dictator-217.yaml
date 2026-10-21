@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  After a success by Minucius near Gerunium, the people, impatient with Fabius' caution, give the
+  master of horse a command equal to the dictator's, so that for the first time Rome has two
+  dictators for the same war.
+types: [council, occurrence]
+date:
+  value: "217 BCE"
+  calendar: regnal
+  as_written: δύο δικτάτορες ἐγεγόνεισαν; de aequando magistri equitum et dictatoris iure
+  cite:
+    - id: co-dictator-time
+      says: Polybius records the Romans making Marcus dictator as well, so that there were two
+        dictators, which had never happened before.
+      source: polybius
+      at: "3.103.4"
+      quote:
+        καὶ δὴ δύο δικτάτορες ἐγεγόνεισαν ἐπὶ τὰς αὐτὰς πράξεις, ὃ πρότερον οὐδέποτε συνεβεβήκει
+        παρὰ Ῥωμαίοις
+places:
+  - place: rome
+    role: site
+participants:
+  - actor: m-minucius-rufus
+    role: subject
+  - actor: q-fabius-maximus
+    role: subject
+  - actor: roman-republic
+    role: participant
+notes:
+  Livy has a tribune propose 'equalizing the right' of the master of horse and the dictator. Year
+  only. The sources date by Roman consular year and by season; v0 has no Roman republican calendar,
+  so the date is the Julian year the consular year falls in, and no month or day is asserted.
+cite:
+  - id: co-dictator-blame
+    says: Polybius records everyone blaming Fabius for timidity and exalting Marcus.
+    source: polybius
+    at: "3.103.3"
+    quote: διὸ καὶ τὸν μὲν Φάβιον ᾐτιῶντο καὶ κατεμέμφοντο πάντες ὡς ἀτόλμως χρώμενον τοῖς καιροῖς
+  - id: co-dictator-livy
+    says: Livy records the proposal to equalize the right of the master of horse and the dictator.
+    role: supporting
+    source: livy
+    at: "22.25.10"
+    quote: nunc modicam rogationem promulgaturum de aequando magistri equitum et dictatoris iure
+  - id: co-dictator-unprecedented
+    says:
+      Livy has Fabius' critics call it unrecorded in the annals that a master of horse be made equal
+      to a dictator.
+    role: supporting
+    source: livy
+    at: "22.27.3"
+    quote: quod nulla memoria habeat annalium, iussu populi aequatum

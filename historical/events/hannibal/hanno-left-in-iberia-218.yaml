@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Hannibal leaves Hanno in command of the country north of the Ebro with 10,000 foot and 1,000
+  horse, and with the baggage of the army marching for Italy; he distrusts the Bargusii for their
+  goodwill toward Rome.
+types: [occurrence]
+date:
+  value: "218 BCE"
+  calendar: regnal
+  as_written: after the Ebro crossing (Polybius 3.35)
+  cite:
+    - id: hanno-left-time
+      says: Polybius records Hanno left as governor of all the country this side of the river, and
+        master of the Bargusii.
+      source: polybius
+      at: "3.35.4"
+      quote:
+        ἡγεμόνα μὲν ἐπὶ πάσης κατέλιπε τῆς ἐπὶ τάδε τοῦ ποταμοῦ χώρας Ἄννωνα, τῶν δὲ Βαργουσίων καὶ
+        δεσπότην
+places:
+  - place: ebro
+    role: context
+    note: The command covered the land between the Ebro and the Pyrenees.
+participants:
+  - actor: hannibal
+    role: leader
+  - actor: hanno-iberia
+    role: subject
+notes: The baggage left with Hanno is what Gnaeus Scipio captured at Kissa later in 218 BCE (see
+  kissa-218). Year only. The sources date by Roman consular year and by season; v0 has no Roman
+  republican calendar, so the date is the Julian year the consular year falls in, and no month or
+  day is asserted.
+cite:
+  - id: hanno-left-force
+    says: Both historians give Hanno 10,000 foot and 1,000 horse.
+    sources:
+      - source: polybius
+        at: "3.35.5"
+        quote: τῷ μὲν Ἄννωνι πεζοὺς μυρίους ἱππεῖς δὲ χιλίους καὶ τὰς ἀποσκευὰς ἀπέλιπε
+      - source: livy
+        at: "21.23.3"
+        quote: decem milia peditum Hannoni ad praesidium obtinendae regionis data et mille equites

@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Determined to force a battle, Hannibal seizes the citadel of Cannae, a razed town where the Romans
+  gathered grain and supplies from the Canusium district, throwing the Roman army into confusion.
+types: [occurrence]
+date:
+  value: "216 BCE"
+  calendar: regnal
+  as_written: ἐπιγενομένης δὲ τῆς ὥρας (Polybius 3.107.1)
+  cite:
+    - id: depot-time
+      says: Polybius records Hannibal seizing the citadel of the town called Cannae.
+      source: polybius
+      at: "3.107.2"
+      quote:
+        κρίνων δὲ συμφέρειν τὸ κατὰ πάντα τρόπον ἀναγκάσαι μάχεσθαι τοὺς πολεμίους, καταλαμβάνει τὴν
+        τῆς Κάννης προσαγορευομένης πόλεως ἄκραν
+places:
+  - place: cannae
+    role: site
+  - place: canusium
+    role: context
+    note: The district whose grain was stored there.
+participants:
+  - actor: hannibal
+    role: leader
+notes: Year only. The sources date by Roman consular year and by season; v0 has no Roman republican
+  calendar, so the date is the Julian year the consular year falls in, and no month or day is
+  asserted.
+cite:
+  - id: depot-store
+    says:
+      Polybius records that the grain and supplies from the Canusium district were gathered there
+      for the Roman army.
+    source: polybius
+    at: "3.107.3"
+    quote:
+      εἰς γὰρ ταύτην συνέβαινε τόν τε σῖτον καὶ τὰς λοιπὰς χορηγίας ἁθροίζεσθαι τοῖς Ῥωμαίοις ἐκ τῶν
+      περὶ Κανύσιον τόπων
+  - id: depot-confusion
+    says:
+      Polybius records the town razed before and the seizure causing great confusion in the Roman
+      army.
+    role: supporting
+    source: polybius
+    at: "3.107.4"
+    quote:
+      τὴν μὲν οὖν πόλιν ἔτι πρότερον συνέβαινε κατεσκάφθαι, τῆς παρασκευῆς δὲ καὶ τῆς ἄκρας τότε
+      καταληφθείσης, οὐ μικρὰν συνέπεσε ταραχὴν γενέσθαι

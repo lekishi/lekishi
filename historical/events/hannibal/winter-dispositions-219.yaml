@@ -1,0 +1,58 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Wintering at New Carthage, Hannibal sends the Iberians home, instructs his brother Hasdrubal on
+  governing Iberia, and exchanges troops between Africa and Iberia so that each country's soldiers
+  hold the other as hostages for its loyalty; he leaves Hasdrubal a fleet, cavalry, infantry and 21
+  elephants.
+types: [process]
+date:
+  value: "219 BCE..218 BCE"
+  mode: duration
+  calendar: regnal
+  as_written: Ἀννίβας δὲ παραχειμάζων ἐν Καινῇ πόλει
+  cite:
+    - id: winter-dispositions-time
+      says: Polybius records Hannibal wintering at New Town and dismissing the Iberians to their cities.
+      source: polybius
+      at: "3.33.5"
+      quote: Ἀννίβας δὲ παραχειμάζων ἐν Καινῇ πόλει πρῶτον μὲν διαφῆκε τοὺς Ἴβηρας ἐπὶ τὰς ἑαυτῶν πόλεις
+places:
+  - place: carthago-nova
+    role: site
+  - place: carthage
+    role: context
+    note: Some of the troops sent to Africa were stationed at Carthage itself.
+participants:
+  - actor: hannibal
+    role: leader
+  - actor: hasdrubal-barca
+    role: participant
+    note: Left in command of Iberia.
+notes: Polybius says he took these figures from the bronze tablet Hannibal set up at the Lacinian
+  promontory (see lacinian-tablet-205), which is why they are so exact. Year only. The sources date
+  by Roman consular year and by season; v0 has no Roman republican calendar, so the date is the
+  Julian year the consular year falls in, and no month or day is asserted.
+cite:
+  - id: winter-dispositions-exchange
+    says:
+      Polybius records Hannibal moving soldiers from Africa to Iberia and from Iberia to Africa to
+      bind each to the other's loyalty.
+    source: polybius
+    at: "3.33.8"
+    quote: ἐκ μὲν Λιβύης εἰς Ἰβηρίαν, ἐκ δʼ Ἰβηρίας εἰς Λιβύην διεβίβαζε στρατιώτας, ἐκδεσμεύων τὴν
+      ἑκατέρων πίστιν εἰς ἀλλήλους
+  - id: winter-dispositions-fleet
+    says: "Polybius lists the ships Hannibal left his brother in Iberia: fifty quinqueremes, two
+      quadriremes and five triremes, of which thirty-two quinqueremes and five triremes were manned."
+    role: supporting
+    source: polybius
+    at: "3.33.14"
+    quote: ἐπὶ δὲ τῆς Ἰβηρίας ἀπέλιπεν Ἀσδρούβᾳ τἀδελφῷ πεντήρεις μὲν πεντήκοντα
+  - id: winter-dispositions-army
+    says: Polybius lists the infantry and elephants left with Hasdrubal, including twenty-one elephants.
+    role: supporting
+    source: polybius
+    at: "3.33.16"
+    quote:
+      πεζοὺς δὲ Λιβύων μυρίους χιλίους ὀκτακοσίους πεντήκοντα, Λιγυστίνους τριακοσίους, Βαλιαρεῖς
+      πεντακοσίους, ἐλέφαντας εἴκοσι καὶ ἕνα

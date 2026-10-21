@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  On the descent a landslip blocks the only path. Livy tells that the soldiers felled trees, burned
+  a great fire against the rock and, pouring on vinegar, split the heated stone so that a road could
+  be cut for the pack animals and elephants; Polybius says only that the path was rebuilt.
+types: [occurrence]
+part_of: [hannibal-march-218]
+date:
+  value: "218 BCE"
+  calendar: regnal
+  as_written: τριταῖος ἀπὸ τῶν προειρημένων κρημνῶν (Polybius 3.56.1)
+  cite:
+    - id: descent-time
+      says: Polybius records the army reaching the plains on the third day from the precipices.
+      source: polybius
+      at: "3.56.1"
+      quote: κατέβαινε καὶ τριταῖος ἀπὸ τῶν προειρημένων κρημνῶν διανύσας ἥψατο τῶν ἐπιπέδων
+places:
+  - place: alps
+    role: site
+participants:
+  - actor: hannibal
+    role: leader
+notes: The vinegar story is Livy's alone. Year only. The sources date by Roman consular year and by
+  season; v0 has no Roman republican calendar, so the date is the Julian year the consular year
+  falls in, and no month or day is asserted.
+cite:
+  - id: descent-vinegar
+    says: Livy records the soldiers heating the rock with a great fire and crumbling it with vinegar.
+    source: livy
+    at: "21.37.2"
+    quote: ardentiaque saxa infuso aceto putrefaciunt
+  - id: descent-road
+    says: Livy records the road being opened and graded so that even the elephants could be brought
+      down.
+    role: supporting
+    source: livy
+    at: "21.37.3"
+    quote: molliuntque anfractibus modicis clivos, ut non iumenta solum sed elephanti etiam deduci
+      possent

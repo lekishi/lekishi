@@ -1,0 +1,84 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Encouraged by Carthaginian envoys, the Boii, joined by the Insubres, rise against Rome's new
+  colonies of Placentia and Cremona, drive the land commissioners to Mutina and besiege it, and
+  ambush the praetor L. Manlius' relief column in the woods.
+types: [campaign]
+date:
+  value: "218 BCE"
+  calendar: regnal
+  as_written: κατὰ τοὺς αὐτοὺς καιροὺς (while the consuls were enrolling their legions)
+  cite:
+    - id: boii-revolt-time
+      says: Polybius places the revolt while the consuls were enrolling their legions, after the
+        colonies had been settled.
+      source: polybius
+      at: "3.40.6"
+      quote: ἤδη δὲ τούτων συνῳκισμένων, οἱ Βοῖοι καλούμενοι Γαλάται
+places:
+  - place: mutina
+    role: site
+    note: The colony where the fugitives were besieged.
+  - place: placentia
+    role: context
+  - place: cremona
+    role: context
+participants:
+  - actor: boii
+    role: leader
+  - actor: insubres
+    role: participant
+  - actor: roman-republic
+    role: subject
+notes: Polybius names the commissioners C. Lutatius and two men of praetorian rank; Livy names C.
+  Lutatius, C. Servilius and M. Annius and notes other annalists' different names. The Roman force
+  was later relieved; the legions raised for Publius Scipio were sent instead, which delayed his
+  departure. Year only. The sources date by Roman consular year and by season; v0 has no Roman
+  republican calendar, so the date is the Julian year the consular year falls in, and no month or
+  day is asserted.
+dispute:
+  status: disputed
+  summary:
+    "The names of the land commissioners besides C. Lutatius differ between annalists, as Livy
+    reports: C. Servilius and M. Annius, M'. Acilius and C. Herennium, or P. Cornelius Asina and C.
+    Papirius Maso. The record names only Lutatius, on whom all agree."
+cite:
+  - id: boii-revolt-mutina
+    says: Both historians record the Boii and Insubres attacking the colonists' land and the
+      commissioners fleeing to Mutina.
+    sources:
+      - source: polybius
+        at: "3.40.8"
+        quote:
+          κατέσυραν τὴν κατακεκληρουχημένην χώραν ὑπὸ Ῥωμαίων καὶ τοὺς φεύγοντας συνδιώξαντες εἰς
+          Μοτίνην, ἀποικίαν ὑπάρχουσαν Ῥωμαίων, ἐπολιόρκουν
+      - source: livy
+        at: "21.25.3"
+        quote: ipsi triumviri Romani, qui ad agrum venerant adsignandum, diffisi Placentiae moenibus
+          Mutinam confugerint
+  - id: boii-revolt-colonies
+    says:
+      Polybius records the two colonies of six thousand settlers each, Placentia south of the Po and
+      Cremona north of it.
+    role: supporting
+    source: polybius
+    at: "3.40.5"
+    quote:
+      ὧν τὴν μὲν μίαν ἔκτιζον ἐπὶ τάδε τοῦ Πάδου ποταμοῦ, προσαγορεύσαντες Πλακεντίαν, τὴν δʼ ἄλλην
+      ἐπὶ θάτερα, κατονομάσαντες Κρεμώνην
+  - id: boii-revolt-ambush
+    says: Polybius records the Boii ambushing Manlius' relief force in the woods and killing many.
+    role: supporting
+    source: polybius
+    at: "3.40.12"
+    quote:
+      ἔν τισι δρυμοῖς ἑτοιμάσαντες ἐνέδρας ἅμα τῷ παρελθεῖν εἰς τοὺς ὑλώδεις τόπους πανταχόθεν ἅμα
+      προσπεσόντες πολλοὺς ἀπέκτειναν τῶν Ῥωμαίων
+  - id: boii-revolt-names
+    says: Livy says Lutatius' name is certain but annalists differ on the other two commissioners.
+    role: alternative
+    source: livy
+    at: "21.25.4"
+    quote:
+      Lutati nomen haud dubium est; pro Annio Servilioque M’. Acilium et C. Herennium habent quidam
+      annales

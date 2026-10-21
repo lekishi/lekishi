@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "Fabius Pictor returns from Delphi and reads the oracle's response in Latin translation: the gods
+  to be supplicated, a promise of victory, and an offering to Pythian Apollo from the spoils.
+  Crowned with laurel, he lays the wreath on Apollo's altar in Rome."
+types: [mission]
+date:
+  value: "216 BCE"
+  calendar: regnal
+  as_written: dum haec geruntur (Livy 23.11.1)
+  cite:
+    - id: pictor-return-time
+      says: Livy records Pictor returning from Delphi to Rome and reading out the response from writing.
+      source: livy
+      at: "23.11.1"
+      quote:
+        dum haec geruntur, Q. Fabius Pictor legatus a Delphis Romam rediit responsumque ex scripto
+        recitavit
+places:
+  - place: delphi
+    role: start
+  - place: rome
+    role: end
+participants:
+  - actor: q-fabius-pictor
+    role: participant
+    note: Envoy to the oracle.
+notes:
+  Livy says the response was in Greek verse, which Pictor translated. Year only. The sources date by
+  Roman consular year and by season; v0 has no Roman republican calendar, so the date is the Julian
+  year the consular year falls in, and no month or day is asserted.
+cite:
+  - id: pictor-oracle
+    says: Livy quotes the response promising victory to the Roman people.
+    source: livy
+    at: "23.11.2"
+    quote: magisque ex sententia res publica vestra vobis procedet, victoriaque duelli populi Romani erit
+  - id: pictor-apollo
+    says: Livy quotes the instruction to send a gift to Pythian Apollo from the spoils.
+    role: supporting
+    source: livy
+    at: "23.11.3"
+    quote: Pythio Apollini re publica vestra bene gesta servataque de lucris meritis donum mittitote
+  - id: pictor-laurel
+    says: Livy records Pictor laying the laurel wreath on Apollo's altar in Rome.
+    role: supporting
+    source: livy
+    at: "23.11.6"
+    quote:
+      se, quaecumque imperata sint, cum summa religione ac diligentia exsecutum coronam Romae in ara
+      Apollinis deposuisse

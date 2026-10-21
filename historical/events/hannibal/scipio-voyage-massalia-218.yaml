@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The consul Publius Scipio sails with sixty ships along the Ligurian coast, reaches the Massalia
+  district in five days from Pisae, and lands his army at the easternmost mouth of the Rhône,
+  believing Hannibal still far off.
+types: [journey]
+date:
+  value: "218 BCE"
+  calendar: regnal
+  as_written: ἐπὶ τὴν ὡραίαν (at the start of the sailing season)
+  cite:
+    - id: scipio-voyage-time
+      says: Polybius records the consuls sailing at the start of the season, Publius for Iberia with
+        sixty ships.
+      source: polybius
+      at: "3.41.2"
+      quote:
+        ἐξέπλεον ἐπὶ τὴν ὡραίαν ἐπὶ τὰς προκειμένας πράξεις, Πόπλιος μὲν οὖν εἰς Ἰβηρίαν ἑξήκοντα
+        ναυσί
+places:
+  - place: rome
+    role: start
+    note: Livy has him set out from the city.
+  - place: massalia
+    role: waypoint
+  - place: rhone
+    role: end
+    note: He anchored at the first, 'Massaliot', mouth of the Rhône.
+participants:
+  - actor: p-cornelius-scipio
+    role: leader
+notes:
+  Polybius counts the five days from Pisae; Livy traces the route along Etruria, Liguria and the
+  Salluvian mountains from Rome. Year only. The sources date by Roman consular year and by season;
+  v0 has no Roman republican calendar, so the date is the Julian year the consular year falls in,
+  and no month or day is asserted.
+cite:
+  - id: scipio-voyage-landing
+    says: Polybius records Publius reaching the Massalia district from Pisae on the fifth day and
+      anchoring at the first, 'Massaliot', mouth of the Rhône.
+    source: polybius
+    at: "3.41.5"
+    quote: καὶ καθορμισθεὶς πρὸς τὸ πρῶτον στόμα τοῦ Ῥοδανοῦ, τὸ Μασσαλιωτικὸν προσαγορευόμενον
+  - id: scipio-voyage-livy
+    says: Livy traces the voyage from the city along Etruria and Liguria to Massilia and the nearest
+      mouth of the Rhône.
+    role: supporting
+    source: livy
+    at: "21.26.3"
+    quote:
+      profectus ab urbe sexaginta longis navibus praeter oram Etruriae Ligurumque et inde Salluvium
+      montis pervenit Massiliam et ad proxumum ostium Rhodani
+  - id: scipio-voyage-belief
+    says:
+      Polybius records Publius believing Hannibal was still far off because of the rough country and
+      the Celts between them.
+    role: supporting
+    source: polybius
+    at: "3.41.6"
+    quote:
+      πεπεισμένος δʼ ἔτι μακρὰν ἀπέχειν αὐτὸν διά τε τὰς δυσχωρίας τῶν τόπων καὶ διὰ τὸ πλῆθος τῶν
+      μεταξὺ κειμένων Κελτῶν

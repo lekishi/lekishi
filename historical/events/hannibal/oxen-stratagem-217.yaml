@@ -1,0 +1,61 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Trapped in the Falernian plain with Fabius holding the pass, Hannibal has Hasdrubal tie torches to
+  the horns of about 2,000 oxen and drive them up the heights by night. The Roman guards leave the
+  pass to meet the lights, and the army and its plunder slip through.
+types: [occurrence]
+date:
+  value: "217 BCE"
+  calendar: regnal
+  as_written: ἅμα δὲ τῷ κλῖναι τὸ τρίτον μέρος τῆς νυκτὸς; primis tenebris
+  cite:
+    - id: oxen-time
+      says:
+        Polybius records the torches lit and the oxen driven up the ridges at the end of the third
+        watch.
+      source: polybius
+      at: "3.93.7"
+      quote: ἅμα δὲ τῷ κλῖναι τὸ τρίτον μέρος τῆς νυκτὸς εὐθέως ἐξῆγε τοὺς λειτουργοὺς καὶ προσδεῖν
+        ἐκέλευσε πρὸς τὰ κέρατα τοῖς βουσὶ τὰς λαμπάδας
+places:
+  - place: ager-falernus
+    role: site
+    note: The pass out of the plain is not located.
+participants:
+  - actor: hannibal
+    role: leader
+  - actor: q-fabius-maximus
+    role: leader
+notes:
+  Polybius' Hasdrubal is the officer in charge of the service corps; whether he is the Hasdrubal who
+  led the cavalry at Cannae is not decided, so he is not linked as a participant. Year only. The
+  sources date by Roman consular year and by season; v0 has no Roman republican calendar, so the
+  date is the Julian year the consular year falls in, and no month or day is asserted.
+cite:
+  - id: oxen-two-thousand
+    says: Both historians give about two thousand oxen and the task to Hasdrubal.
+    sources:
+      - source: polybius
+        at: "3.93.4"
+        quote: ἀνακαλεσάμενος δὲ τὸν ἐπὶ τῶν λειτουργιῶν τεταγμένον Ἀσδρούβαν παρήγγειλε λαμπάδας
+          δεσμεύειν
+      - source: livy
+        at: "22.16.8"
+        quote: ad duo milia ferme boum effecta; Hasdrubalique negotium datum, ut nocte id armentum
+          accensis cornibus ad montis ageret
+  - id: oxen-guards
+    says:
+      Polybius records the Roman guards leaving the pass to help at the heights when they saw the
+      lights.
+    role: supporting
+    source: polybius
+    at: "3.94.1"
+    quote:
+      νομίσαντες ταύτῃ ποιεῖσθαι τὴν ὁρμὴν τὸν Ἀννίβαν, ἀπολιπόντες τὰς δυσχωρίας παρεβοήθουν τοῖς
+      ἄκροις
+  - id: oxen-through
+    says: Polybius records Hannibal bringing his army and plunder safely through the defile.
+    role: supporting
+    source: polybius
+    at: "3.94.5"
+    quote: τήν τε δύναμιν διεκόμισε διὰ τῶν στενῶν μετʼ ἀσφαλείας καὶ τὴν λείαν

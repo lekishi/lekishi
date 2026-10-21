@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Reaching the Adriatic through Umbria and Picenum on the tenth day, laden with plunder, Hannibal
+  rests his army in the rich country by the sea, cures his horses' mange by washing them in old
+  wine, and rearms his Africans with captured Roman weapons.
+types: [process]
+date:
+  value: "217 BCE"
+  mode: duration
+  calendar: regnal
+  as_written: ἧκεν δεκαταῖος πρὸς τοὺς κατὰ τὸν Ἀδρίαν τόπους
+  cite:
+    - id: picenum-time
+      says:
+        Polybius records Hannibal crossing Umbria and Picenum and reaching the Adriatic on the tenth
+        day.
+      source: polybius
+      at: "3.86.9"
+      quote:
+        διανύσας τε τήν τε τῶν Ὄμβρων καλουμένην χώραν καὶ τὴν τῶν Πικέντων ἧκεν δεκαταῖος πρὸς τοὺς
+        κατὰ τὸν Ἀδρίαν τόπους
+places:
+  - place: picenum
+    role: site
+participants:
+  - actor: hannibal
+    role: leader
+notes: Year only. The sources date by Roman consular year and by season; v0 has no Roman republican
+  calendar, so the date is the Julian year the consular year falls in, and no month or day is
+  asserted.
+cite:
+  - id: picenum-rearm
+    says:
+      Polybius records Hannibal restoring his horses and men and rearming the Africans in the Roman
+      manner with captured arms.
+    source: polybius
+    at: "3.87.3"
+    quote: μετακαθώπλισε δὲ τοὺς Λίβυας εἰς τὸν Ῥωμαϊκὸν τρόπον ἐκλεκτοῖς ὅπλοις
+  - id: picenum-wine
+    says: Polybius records the horses bathed in old wine to cure their mange.
+    role: supporting
+    source: polybius
+    at: "3.88.1"
+    quote:
+      τοὺς μὲν ἵππους ἐκλούων τοῖς παλαιοῖς οἴνοις διὰ τὸ πλῆθος ἐξεθεράπευσε τὴν καχεξίαν αὐτῶν καὶ
+      τὴν ψώραν
+  - id: picenum-livy
+    says: Livy records some days of rest in Picenum, which was rich in crops and plunder.
+    role: supporting
+    source: livy
+    at: "22.9.4"
+    quote: ibi per dies aliquot stativa habita, refectusque miles hibernis itineribus ac palustri via

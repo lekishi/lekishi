@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  As the army enters the Pyrenean pass, 3,000 Carpetanian foot turn back; Hannibal sends home more
+  than 7,000 others whom he sees are unwilling, pretending he had dismissed the Carpetani too, and
+  leads the rest, some 50,000 foot and 9,000 horse, over the Pyrenees toward the Rhône.
+types: [journey]
+part_of: [hannibal-march-218]
+date:
+  value: "218 BCE"
+  calendar: regnal
+  as_written: after the Ebro crossing (Polybius 3.35; Livy 21.23)
+  cite:
+    - id: pyrenees-time
+      says:
+        Polybius records Hannibal leading the remaining army, lightly equipped, through the Pyrenees
+        toward the crossing of the Rhône.
+      source: polybius
+      at: "3.35.7"
+      quote: τὴν δὲ λοιπὴν στρατιὰν ἀναλαβὼν εὔζωνον πεζοὺς μὲν πεντακισμυρίους ἱππεῖς δὲ πρὸς
+        ἐννακισχιλίους ἦγεν διὰ τῶν Πυρηναίων λεγομένων ὀρῶν
+places:
+  - place: pyrenees
+    role: site
+participants:
+  - actor: hannibal
+    role: leader
+notes:
+  Polybius has Hannibal send home a contingent equal to Hanno's force, to leave them well disposed;
+  Livy tells of the Carpetanian desertion and the dismissal of more than 7,000. Year only. The
+  sources date by Roman consular year and by season; v0 has no Roman republican calendar, so the
+  date is the Julian year the consular year falls in, and no month or day is asserted.
+cite:
+  - id: pyrenees-carpetani
+    says: Livy records 3,000 Carpetanian foot turning back once the crossing of the Pyrenean pass began.
+    source: livy
+    at: "21.23.4"
+    quote: postquam per Pyrenaeum saltum traduci exercitus est coeptus rumorque per barbaros manavit
+      certior de bello Romano, tria milia inde Carpetanorum peditum iter averterunt
+  - id: pyrenees-dismissed
+    says:
+      Livy records Hannibal sending home more than seven thousand men, pretending the Carpetani had
+      been dismissed too.
+    role: supporting
+    source: livy
+    at: "21.23.6"
+    quote:
+      supra septem milia hominum domos remisit, quos et ipsos gravari militia senserat, Carpetanos
+      quoque ab se dimissos simulans

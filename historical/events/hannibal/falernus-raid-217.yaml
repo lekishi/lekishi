@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Seeing that Fabius will not fight, Hannibal crosses from Samnium into the Falernian plain near
+  Capua, camps by the Volturnus and ravages the plain, to force a battle or show that the Romans
+  have yielded the open country.
+types: [campaign]
+date:
+  value: "217 BCE"
+  calendar: regnal
+  as_written: aestatis reliquum (Livy 22.15.1)
+  cite:
+    - id: falernus-time
+      says:
+        Polybius records Hannibal advancing boldly into the plains about Capua, to the place called
+        Falernus.
+      source: polybius
+      at: "3.90.10"
+      quote: ὥρμησε τολμηρῶς εἰς τὰ περὶ Καπύην πεδία, καὶ τούτων εἰς τὸν προσαγορευόμενον Φάλερνον τόπον
+places:
+  - place: ager-falernus
+    role: site
+  - place: capua
+    role: context
+participants:
+  - actor: hannibal
+    role: leader
+  - actor: q-fabius-maximus
+    role: leader
+notes: Year only. The sources date by Roman consular year and by season; v0 has no Roman republican
+  calendar, so the date is the Julian year the consular year falls in, and no month or day is
+  asserted.
+cite:
+  - id: falernus-aim
+    says:
+      "Polybius records Hannibal's reasoning: force the enemy to fight or show all that the Romans
+      had yielded the open country."
+    source: polybius
+    at: "3.90.11"
+    quote: ἢ μάχεσθαι τοὺς πολεμίους ἀναγκάσειν ἢ πᾶσι δῆλον ποιήσειν ὅτι κρατεῖ τῶν ὅλων
+  - id: falernus-camp
+    says:
+      Polybius records Hannibal camping by the Volturnus, which divides the plain, and ravaging it
+      freely.
+    role: supporting
+    source: polybius
+    at: "3.92.1"
+    quote: κατεστρατοπέδευσε παρὰ τὸν Ἄθυρνον ποταμόν, ὃς σχεδὸν δίχα διαιρεῖ τὰ προειρημένα πεδία
+  - id: falernus-cunctator
+    says:
+      Livy records Fabius drawing out the rest of the summer although his delay was already scorned
+      in camp and at Rome.
+    role: supporting
+    source: livy
+    at: "22.15.1"
+    quote:
+      quamquam probe scit non in castris modo suis sed iam etiam Romae infamem suam cunctationem
+      esse, obstinatus tamen tenore eodem consiliorum aestatis reliquum extraxit

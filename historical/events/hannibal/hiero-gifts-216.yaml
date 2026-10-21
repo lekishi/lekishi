@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  A fleet from King Hiero of Syracuse lands at Ostia with supplies. His envoys tell the senate of
+  his grief at Flaminius' defeat and offer a golden Victory of 220 pounds, 300,000 modii of wheat
+  and 200,000 of barley, archers and slingers. The senate accepts the Victory as an omen and places
+  it on the Capitol.
+types: [exchange, mission]
+date:
+  value: "216 BCE"
+  calendar: regnal
+  as_written: per eosdem dies (Livy 22.37.1)
+  cite:
+    - id: hiero-time
+      says: Livy records Hiero's fleet arriving at Ostia with a great store of supplies.
+      source: livy
+      at: "22.37.1"
+      quote: per eosdem dies ab Hierone classis Ostia cum magno commeatu accessit
+places:
+  - place: syracuse
+    role: start
+  - place: ostia
+    role: end
+  - place: rome
+    role: context
+    note: The envoys addressed the senate and the Victory was set up on the Capitol.
+participants:
+  - actor: hiero-ii
+    role: leader
+  - actor: roman-republic
+    role: host
+notes:
+  Livy alone tells it. Year only. The sources date by Roman consular year and by season; v0 has no
+  Roman republican calendar, so the date is the Julian year the consular year falls in, and no month
+  or day is asserted.
+cite:
+  - id: hiero-victory
+    says: Livy records the envoys bringing a golden Victory of 220 pounds as an omen.
+    source: livy
+    at: "22.37.5"
+    quote: iam omnium primum ominis causa Victoriam auream pondo ducentum ac viginti adferre sese
+  - id: hiero-grain
+    says: Livy records 300,000 modii of wheat and 200,000 of barley.
+    role: supporting
+    source: livy
+    at: "22.37.6"
+    quote: advexisse etiam trecenta milia modium tritici, ducenta hordei
+  - id: hiero-capitol
+    says: Livy records the senate accepting the Victory and the omen and giving it a seat on the
+      Capitol.
+    role: supporting
+    source: livy
+    at: "22.37.12"
+    quote:
+      victoriam omenque accipere sedemque ei se divae dare dicare Capitolium, templum Iouis optimi
+      maximi

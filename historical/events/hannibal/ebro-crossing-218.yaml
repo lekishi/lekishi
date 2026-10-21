@@ -1,0 +1,58 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Hannibal crosses the Ebro in three columns and subdues the peoples between the river and the
+  Pyrenees, the Ilergetes, Bargusii, Aerenosii and Andosini, taking some towns by storm at heavy
+  cost.
+types: [journey, campaign]
+part_of: [hannibal-march-218]
+date:
+  value: "218 BCE"
+  calendar: regnal
+  as_written: after the departure in spring (Polybius 3.35)
+  cite:
+    - id: ebro-crossing-time
+      says:
+        Both historians record the crossing of the Ebro with about 90,000 foot and 12,000 horse and
+        the subjection of the peoples beyond it.
+      sources:
+        - source: polybius
+          at: "3.35.2"
+          quote: καὶ διαβὰς τὸν Ἴβηρα ποταμὸν κατεστρέφετο τό τε τῶν Ἰλουργητῶν ἔθνος καὶ Βαργουσίων
+        - source: livy
+          at: "21.23.1"
+          quote: nonaginta milia peditum, duodecim milia equitum Hiberum traduxit
+places:
+  - place: ebro
+    role: site
+    note: The river is placed by a label anchor only; the crossing point is not known.
+participants:
+  - actor: hannibal
+    role: leader
+notes:
+  The Ebro was the line of the Roman treaty with Hasdrubal, so the crossing is the step the Romans
+  heard of as the start of the invasion (Polybius 3.40.2). The two historians list the subdued
+  peoples differently. Year only. The sources date by Roman consular year and by season; v0 has no
+  Roman republican calendar, so the date is the Julian year the consular year falls in, and no month
+  or day is asserted.
+dispute:
+  status: disputed
+  summary:
+    "Polybius and Livy name different peoples subdued between the Ebro and the Pyrenees (Polybius:
+    Ilergetes, Bargusii, Aerenosii, Andosini; Livy: Ilergetes, Bargusii, Ausetani, Lacetania). The
+    record publishes Polybius' list and keeps Livy's as an alternative."
+cite:
+  - id: ebro-crossing-cost
+    says: Polybius records that the subjugation was quick but cost many hard fights and heavy losses.
+    source: polybius
+    at: "3.35.3"
+    quote: μετὰ πολλῶν δὲ καὶ μεγάλων ἀγώνων ἔτι δὲ πολλῆς καταφθορᾶς ἀνδρῶν
+  - id: ebro-crossing-livy-peoples
+    says:
+      Livy names the Ilergetes, Bargusii, Ausetani and Lacetania below the Pyrenees as the peoples
+      subdued.
+    role: alternative
+    source: livy
+    at: "21.23.2"
+    quote:
+      Ilergetes inde Bargusiosque et Ausetanos et Lacetaniam, quae subiecta Pyrenaeis montibus est,
+      subegit

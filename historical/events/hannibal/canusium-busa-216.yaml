@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Survivors who reach Canusium are let in by the townspeople, and an Apulian woman of rank and
+  wealth named Busa gives them grain, clothing and money for the road; after the war the senate
+  honours her.
+types: [occurrence]
+date:
+  value: "216 BCE"
+  calendar: regnal
+  as_written: after Cannae (Livy 22.52)
+  cite:
+    - id: busa-time
+      says: Livy records Busa helping the survivors who had fled to Canusium.
+      source: livy
+      at: "22.52.7"
+      quote:
+        eos, qui Canusium perfugerant, mulier Apula nomine Busa, genere clara ac divitiis, moenibus
+        tantum tectisque a Canusinis acceptos, frumento veste viatico etiam iuvit
+places:
+  - place: canusium
+    role: site
+participants:
+  - actor: busa
+    role: host
+notes:
+  Livy alone tells it. The senate's honours came after the war, outside this chapter's span. Year
+  only. The sources date by Roman consular year and by season; v0 has no Roman republican calendar,
+  so the date is the Julian year the consular year falls in, and no month or day is asserted.

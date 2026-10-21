@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The consul Servilius, at Ariminum, sends C. Centenius ahead with 4,000 horse to help Flaminius.
+  After Trasimene, Maharbal intercepts them, kills nearly half in the first clash, and takes the
+  rest the next day.
+types: [occurrence]
+date:
+  value: "217 BCE"
+  calendar: regnal
+  as_written: κατὰ δὲ τοὺς τῆς μάχης καιροὺς
+  cite:
+    - id: centenius-time
+      says:
+        Polybius records Servilius sending Centenius ahead with four thousand horse at the time of
+        the battle.
+      source: polybius
+      at: "3.86.3"
+      quote: Γάιον Κεντήνιον κατὰ σπουδὴν δοὺς τετρακισχιλίους ἱππεῖς προεξαπέστειλε
+places:
+  - place: ariminum
+    role: start
+    note: Servilius' base.
+participants:
+  - actor: c-centenius
+    role: leader
+  - actor: maharbal
+    role: leader
+  - actor: cn-servilius-geminus
+    role: participant
+notes:
+  Livy places the disaster in Umbria and calls Centenius propraetor; the site is not recorded as a
+  place here. Year only. The sources date by Roman consular year and by season; v0 has no Roman
+  republican calendar, so the date is the Julian year the consular year falls in, and no month or
+  day is asserted.
+cite:
+  - id: centenius-maharbal
+    says: Polybius records Maharbal's force destroying nearly half at the first clash and taking the
+      rest the next day.
+    source: polybius
+    at: "3.86.5"
+    quote:
+      ἐν αὐτῇ μὲν τῇ πρώτῃ συμπλοκῇ σχεδὸν τοὺς ἡμίσεις αὐτῶν διέφθειραν, τοὺς δὲ λοιποὺς εἴς τινα
+      λόφον συνδιώξαντες τῇ κατὰ πόδας ἡμέρᾳ πάντας ἔλαβον ὑποχειρίους
+  - id: centenius-umbria
+    says:
+      Livy records the four thousand horse with C. Centenius, propraetor, surrounded by Hannibal in
+      Umbria.
+    role: supporting
+    source: livy
+    at: "22.8.1"
+    quote:
+      quattuor milia equitum cum C. Centenio propraetore missa ad collegam ab Servilio consule in
+      Umbria, quo post pugnam ad Trasumennum auditam averterant iter, ab Hannibale circumventa

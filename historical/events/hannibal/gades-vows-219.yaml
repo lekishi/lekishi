@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Before the march, Hannibal goes to Gades, pays his vows to Hercules and binds himself with new
+  vows for the success of what is to come.
+types: [occurrence]
+date:
+  value: "219 BCE..218 BCE"
+  mode: window
+  calendar: regnal
+  as_written: in the winter after Saguntum (Livy 21.21)
+  cite:
+    - id: gades-vows-time
+      says:
+        Livy places the visit after Hannibal's review of the allied contingents in the winter before
+        the march.
+      source: livy
+      at: "21.21.9"
+      quote: Hannibal cum recensuisset omnium gentium auxilia, Gadis profectus Herculi vota exsolvit
+        novisque se obligat votis, si cetera prospera evenissent
+places:
+  - place: gades
+    role: site
+participants:
+  - actor: hannibal
+    role: leader
+notes:
+  Livy alone tells it. 'Hercules' is Livy's name for the god of the Gades sanctuary. Year only. The
+  sources date by Roman consular year and by season; v0 has no Roman republican calendar, so the
+  date is the Julian year the consular year falls in, and no month or day is asserted.

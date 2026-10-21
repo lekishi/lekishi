@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "As the officers congratulate Hannibal and urge rest, Maharbal urges him to march on Rome at once:
+  'in five days you will dine on the Capitol.' When Hannibal asks for time, Maharbal answers that
+  Hannibal knows how to win a victory but not how to use one."
+types: [occurrence]
+date:
+  value: "216 BCE"
+  calendar: regnal
+  as_written: the day of the battle (Livy 22.51)
+  cite:
+    - id: maharbal-time
+      says: Livy sets the exchange on the day of the victory, as the others urged Hannibal to rest.
+      source: livy
+      at: "22.51.1"
+      quote: Hannibali victori cum ceteri circumfusi gratularentur suaderentque, ut tanto perfunctus
+        bello diei quod reliquum esset noctisque insequentis quietem et ipse sibi sumeret
+places:
+  - place: cannae
+    role: site
+participants:
+  - actor: maharbal
+    role: participant
+  - actor: hannibal
+    role: participant
+notes: Livy alone reports the exchange, which may be a literary set piece; it is presented as Livy's
+  account. Year only. The sources date by Roman consular year and by season; v0 has no Roman
+  republican calendar, so the date is the Julian year the consular year falls in, and no month or
+  day is asserted.
+cite:
+  - id: maharbal-capitol
+    says: Livy has Maharbal say Hannibal would dine as victor on the Capitol in five days.
+    source: livy
+    at: "22.51.2"
+    quote: die quinto” inquit “victor in Capitolio epulaberis
+  - id: maharbal-retort
+    says: Livy has Maharbal say Hannibal knew how to win but not how to use a victory.
+    role: supporting
+    source: livy
+    at: "22.51.4"
+    quote: vincere scis, Hannibal, victoria uti nescis

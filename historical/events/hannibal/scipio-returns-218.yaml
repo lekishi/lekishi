@@ -1,0 +1,58 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Publius Scipio reaches the crossing three days after Hannibal has left. Astonished that the enemy
+  dared that route, he hurries back to his ships, sends his brother Gnaeus with most of the army to
+  Iberia, and sails back to Italy to meet Hannibal at the foot of the Alps.
+types: [journey]
+date:
+  value: "218 BCE"
+  calendar: regnal
+  as_written: ἡμέραις ὕστερον τρισὶ τῆς ἀναζυγῆς; triduo fere post
+  cite:
+    - id: scipio-returns-time
+      says: Both historians record Publius reaching the crossing about three days after Hannibal had
+        left.
+      sources:
+        - source: polybius
+          at: "3.49.1"
+          quote: Πόπλιος μὲν ὁ τῶν Ῥωμαίων στρατηγὸς ἡμέραις ὕστερον τρισὶ τῆς ἀναζυγῆς τῆς τῶν
+            Καρχηδονίων παραγενόμενος ἐπὶ τὴν τοῦ ποταμοῦ διάβασιν
+        - source: livy
+          at: "21.32.1"
+          quote: P. Cornelius consul triduo fere post, quam Hannibal a ripa Rhodani movit, quadrato
+            agmine ad castra hostium venerat
+places:
+  - place: rhone-crossing
+    role: start
+  - place: massalia
+    role: waypoint
+    note: He returned to his ships at the river mouth.
+participants:
+  - actor: p-cornelius-scipio
+    role: leader
+  - actor: cn-cornelius-scipio
+    role: participant
+    note: Sent on to Iberia with most of the army.
+notes:
+  Livy has Scipio land at Genua; Polybius says only that he sailed back to Italy through Etruria.
+  Year only. The sources date by Roman consular year and by season; v0 has no Roman republican
+  calendar, so the date is the Julian year the consular year falls in, and no month or day is
+  asserted.
+cite:
+  - id: scipio-returns-split
+    says: Polybius records Publius sending his brother to Iberia and himself sailing back to Italy.
+    source: polybius
+    at: "3.49.4"
+    quote:
+      καὶ τὸν μὲν ἀδελφὸν ἐξέπεμπεν ἐπὶ τὰς ἐν Ἰβηρίᾳ πράξεις, αὐτὸς δὲ πάλιν ὑποστρέψας εἰς Ἰταλίαν
+      ἐποιεῖτο τὸν πλοῦν
+  - id: scipio-returns-genua
+    says:
+      Livy records Publius making for Genua with very few troops to defend Italy with the army on
+      the Po.
+    role: supporting
+    source: livy
+    at: "21.32.5"
+    quote:
+      ipse cum admodum exiguis copiis Genuam repetit, eo, qui circa Padum erat exercitus, Italiam
+      defensurus

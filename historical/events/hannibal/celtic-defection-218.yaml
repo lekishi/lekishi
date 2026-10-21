@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The Celts serving in the Roman camp near Placentia rise before dawn, kill and wound many of the
+  Romans camped beside them, and go over to Hannibal with the heads of the dead, about 2,000 foot
+  and nearly 200 horse; Hannibal sends them home to win over their towns.
+types: [occurrence]
+date:
+  value: "218 BCE"
+  calendar: regnal
+  as_written: after the Ticinus (Polybius 3.67)
+  cite:
+    - id: defection-time
+      says: Polybius records the Celts with the Romans attacking at the morning watch.
+      source: polybius
+      at: "3.67.2"
+      quote: καθωπλισμένοι περὶ τὴν ἑωθινὴν φυλακὴν ἐπιτίθενται τοῖς σύνεγγυς τῶν Ῥωμαίων
+        παραστρατοπεδεύουσι
+places:
+  - place: placentia
+    role: site
+    note: Scipio's camp was near the colony.
+participants:
+  - actor: hannibal
+    role: host
+notes: Year only. The sources date by Roman consular year and by season; v0 has no Roman republican
+  calendar, so the date is the Julian year the consular year falls in, and no month or day is
+  asserted.
+cite:
+  - id: defection-heads
+    says:
+      Polybius records the deserters cutting off the heads of the dead and going over, about 2,000
+      foot and nearly 200 horse.
+    source: polybius
+    at: "3.67.3"
+    quote:
+      τέλος δὲ τὰς κεφαλὰς ἀποτεμόντες τῶν τεθνεώτων ἀπεχώρουν πρὸς τοὺς Καρχηδονίους, ὄντες πεζοὶ
+      μὲν εἰς δισχιλίους, ἱππεῖς δὲ μικρῷ λείποντες διακοσίων
+  - id: defection-sent-home
+    says: Polybius records Hannibal sending them back to their cities to report and win support.
+    role: supporting
+    source: polybius
+    at: "3.67.4"
+    quote:
+      ἐξέπεμψεν εἰς τὰς αὑτῶν πόλεις, δηλώσοντας μὲν τὰ πεπραγμένα τοῖς πολίταις, παρακαλέσοντας δὲ
+      πρὸς τὴν αὑτοῦ συμμαχίαν

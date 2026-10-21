@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In early summer Hasdrubal sails north from New Carthage with forty ships while his army marches
+  along the shore. Gnaeus Scipio, with thirty-five ships and Massaliot scouts, surprises the fleet
+  at the Ebro mouth, and captures twenty-five ships after the crews flee to the beach.
+types: [occurrence]
+date:
+  value: "217 BCE"
+  calendar: regnal
+  as_written: ἀρχομένης τῆς θερείας
+  cite:
+    - id: ebro-naval-time
+      says:
+        Polybius records Hasdrubal putting to sea from New Town with forty decked ships at the start
+        of summer.
+      source: polybius
+      at: "3.95.2"
+      quote: ἀρχομένης τῆς θερείας ἀνήχθη τετταράκοντα ναυσὶ καταφράκτοις ἐκ Καινῆς πόλεως
+places:
+  - place: ebro
+    role: site
+    note: Off the river mouth.
+  - place: tarraco
+    role: start
+    note: Gnaeus sailed from Tarraco.
+  - place: carthago-nova
+    role: context
+    note: Hasdrubal's fleet sailed from there.
+participants:
+  - actor: cn-cornelius-scipio
+    role: leader
+  - actor: hasdrubal-barca
+    role: leader
+notes:
+  Polybius praises the Massaliots as Rome's most loyal allies in the war. Year only. The sources
+  date by Roman consular year and by season; v0 has no Roman republican calendar, so the date is the
+  Julian year the consular year falls in, and no month or day is asserted.
+cite:
+  - id: ebro-naval-gnaeus
+    says:
+      Polybius records Gnaeus manning thirty-five ships and reaching the Ebro from Tarraco on the
+      second day.
+    source: polybius
+    at: "3.95.5"
+    quote: ἀνήχθη καὶ κατῆρε δευτεραῖος ἐκ Ταρράκωνος εἰς τοὺς περὶ τὸν Ἴβηρα ποταμὸν τόπους
+  - id: ebro-naval-massaliots
+    says: Polybius records two fast Massaliot ships sent ahead to scout.
+    role: supporting
+    source: polybius
+    at: "3.95.6"
+    quote: προαπέστειλε κατασκεψομένας δύο ναῦς ταχυπλοούσας Μασσαλιητικάς
+  - id: ebro-naval-result
+    says: Polybius records the Romans towing off twenty-five of the enemy ships and holding the sea.
+    role: supporting
+    source: polybius
+    at: "3.96.6"
+    quote:
+      νενικηκότες μὲν ἐξ ἐφόδου τοὺς ὑπεναντίους, κρατοῦντες δὲ τῆς θαλάττης, εἴκοσι δὲ καὶ πέντε
+      ναῦς ἔχοντες τῶν πολεμίων

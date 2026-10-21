@@ -1,0 +1,69 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Gnaeus Scipio lands at Emporion, wins over or subdues the coast as far as the Ebro, and defeats
+  Hanno near Kissa, capturing Hanno, the Iberian chief Andobales, and the baggage the army bound for
+  Italy had left behind.
+types: [campaign]
+date:
+  value: "218 BCE"
+  calendar: regnal
+  as_written: κατὰ δὲ τοὺς αὐτοὺς καιροὺς (as the Trebia)
+  cite:
+    - id: kissa-time
+      says: Polybius places Gnaeus' campaign at the same time as the events in Italy.
+      source: polybius
+      at: "3.76.1"
+      quote:
+        κατὰ δὲ τοὺς αὐτοὺς καιροὺς Γνάιος Κορνήλιος ὁ καταλειφθεὶς ὑπὸ τἀδελφοῦ Ποπλίου στρατηγὸς
+        ἐπὶ τῆς ναυτικῆς δυνάμεως
+places:
+  - place: kissa
+    role: site
+    note: Unlocated.
+  - place: emporiae
+    role: start
+    note: Gnaeus' landing.
+participants:
+  - actor: cn-cornelius-scipio
+    role: leader
+  - actor: hanno-iberia
+    role: subject
+  - actor: andobales
+    role: subject
+notes:
+  Livy calls the town Cissis and gives 6,000 dead and 2,000 captured. Polybius names Andobales among
+  the prisoners; Livy says only that the commander and some chiefs were taken. Year only. The
+  sources date by Roman consular year and by season; v0 has no Roman republican calendar, so the
+  date is the Julian year the consular year falls in, and no month or day is asserted.
+cite:
+  - id: kissa-battle
+    says:
+      Polybius records Gnaeus defeating the Carthaginians near the town called Κίσσα and taking all
+      the baggage left by the army bound for Italy.
+    source: polybius
+    at: "3.76.5"
+    quote: ἀντιστρατοπεδευσάντων αὐτοῖς περὶ πόλιν προσαγορευομένην Κίσσαν, συμβαλὼν ὁ Γνάιος ἐκ
+      παρατάξεως καὶ νικήσας
+  - id: kissa-captives
+    says: Polybius records Hanno and the Iberian Andobales taken alive.
+    role: supporting
+    source: polybius
+    at: "3.76.6"
+    quote: ζωγρίᾳ δὲ τόν τε τῶν Καρχηδονίων στρατηγὸν Ἄννωνα καὶ τὸν τῶν Ἰβήρων Ἀνδοβάλην ἔλαβε
+  - id: kissa-livy
+    says: Livy records 6,000 enemy killed, 2,000 captured, the camp and its commander taken, and the
+      town of Cissis stormed.
+    role: supporting
+    source: livy
+    at: "21.60.7"
+    quote: sex milia hostium caesa, duo capta cum praesidio castrorum; nam et castra expugnata sunt,
+      atque ipse dux cum aliquot principibus capiuntur, et Cissis, propinquum castris oppidum,
+      expugnatur
+  - id: kissa-landing
+    says: Polybius records Gnaeus sailing from the Rhône mouths to the region of Emporion.
+    role: supporting
+    source: polybius
+    at: "3.76.1"
+    quote:
+      ἀναχθεὶς ἀπὸ τῶν τοῦ Ῥοδανοῦ στομάτων παντὶ τῷ στόλῳ προσέσχε τῆς Ἰβηρίας πρὸς τοὺς κατὰ τὸ
+      καλούμενον Ἐμπόριον τόπους

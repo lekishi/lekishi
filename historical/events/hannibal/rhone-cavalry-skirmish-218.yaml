@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Hannibal's Numidian scouts meet the 300 Roman horse and Massaliot-hired Celts sent out by Scipio;
+  about 140 Romans and Celts and more than 200 Numidians fall. Scipio, warned, marches up the river,
+  while Hannibal moves his infantry off toward the Alps.
+types: [occurrence]
+date:
+  value: "218 BCE"
+  calendar: regnal
+  as_written: after the assembly (Polybius 3.45)
+  cite:
+    - id: skirmish-time
+      says:
+        Polybius records the Numidian scouts returning after the assembly, having lost most of their
+        number.
+      source: polybius
+      at: "3.45.1"
+      quote:
+        λυθείσης δὲ τῆς ἐκκλησίας ἧκον τῶν Νομάδων οἱ προαποσταλέντες ἐπὶ τὴν κατασκοπήν, τοὺς μὲν
+        πλείστους αὑτῶν ἀπολωλεκότες
+places:
+  - place: rhone
+    role: context
+    note: Fought not far from the Carthaginian camp by the river; no site is named.
+participants:
+  - actor: p-cornelius-scipio
+    role: leader
+  - actor: hannibal
+    role: leader
+notes:
+  The first clash of the war between Roman and Carthaginian troops. Year only. The sources date by
+  Roman consular year and by season; v0 has no Roman republican calendar, so the date is the Julian
+  year the consular year falls in, and no month or day is asserted.
+cite:
+  - id: skirmish-scouts
+    says: Polybius records Publius sending out his three hundred bravest horse with Celtic guides
+      serving Massalia as mercenaries.
+    source: polybius
+    at: "3.41.9"
+    quote:
+      τριακοσίους δὲ τῶν ἱππέων ἐξαπέστειλε τοὺς ἀνδρωδεστάτους, συστήσας μετʼ αὐτῶν καθηγεμόνας ἅμα
+      καὶ συναγωνιστὰς Κελτούς
+  - id: skirmish-marching
+    says: Polybius records Publius embarking his baggage and marching up the river to engage.
+    role: supporting
+    source: polybius
+    at: "3.45.4"
+    quote:
+      Πόπλιος δὲ παραυτίκα τὴν ἀποσκευὴν ἀναθέμενος ἐπὶ τὰς ναῦς ἀνέζευξε παντὶ τῷ στρατεύματι καὶ
+      προῆγε παρὰ τὸν ποταμόν

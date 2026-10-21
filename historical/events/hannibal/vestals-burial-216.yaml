@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Amid the disasters two Vestals, Opimia and Floronia, are convicted of unchastity; one is buried
+  alive by the Colline Gate and the other kills herself. The books are consulted, and among
+  extraordinary sacrifices a Gaulish man and woman and a Greek man and woman are buried alive in the
+  Forum Boarium.
+types: [occurrence]
+date:
+  value: "216 BCE"
+  calendar: regnal
+  as_written: eo anno (Livy 22.57.2)
+  cite:
+    - id: vestals-time
+      says: Livy records the two Vestals convicted that year, one buried at the Colline Gate and one
+        dead by her own hand.
+      source: livy
+      at: "22.57.2"
+      quote:
+        duae Vestales eo anno, Opimia atque Floronia, stupri compertae altera sub terra, uti mos
+        est, ad portam Collinam necata fuerat, altera sibimet ipsa mortem consciverat
+places:
+  - place: rome
+    role: site
+participants:
+  - actor: roman-republic
+    role: participant
+notes:
+  Livy calls the human burial 'hardly a Roman rite'. Year only. The sources date by Roman consular
+  year and by season; v0 has no Roman republican calendar, so the date is the Julian year the
+  consular year falls in, and no month or day is asserted.
+cite:
+  - id: vestals-burial
+    says: Livy records a Gaulish man and woman and a Greek man and woman buried alive in the Forum
+      Boarium.
+    source: livy
+    at: "22.57.6"
+    quote:
+      inter quae Gallus et Galla, Graecus et Graeca in foro bovario sub terram vivi demissi sunt in
+      locum saxo consaeptum, iam ante hostiis humanis, minime Romano sacro, inbutum

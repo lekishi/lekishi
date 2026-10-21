@@ -1,0 +1,64 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: Roman envoys at Carthage demand that Hannibal and his council be surrendered. When the
+  Carthaginians refuse, the senior envoy holds out a fold of his toga, says it carries war and
+  peace, and lets fall war, which the council accepts.
+types: [mission, council]
+date:
+  value: "219 BCE..218 BCE"
+  mode: window
+  calendar: regnal
+  as_written: after news of Saguntum's fall; P. Cornelius Ti. Sempronius consules (Livy 21.15.4)
+  cite:
+    - id: roman-embassy-time
+      says:
+        Polybius records that the Romans, on hearing of Saguntum's fall, at once chose envoys and
+        sent them in haste to Carthage.
+      source: polybius
+      at: "3.20.6"
+      quote: παραχρῆμα πρεσβευτὰς ἑλόμενοι κατὰ σπουδὴν ἐξαπέστειλαν εἰς τὴν Καρχηδόνα
+places:
+  - place: carthage
+    role: site
+participants:
+  - actor: roman-republic
+    role: participant
+    note: The senate sent the embassy.
+  - actor: carthage-state
+    role: host
+    note: The Carthaginian council received it.
+notes:
+  "The fold-of-the-toga scene is told by both historians; Polybius gives the gesture to the eldest
+  envoy and the reply to the Carthaginian 'king' (the presiding magistrate). The date is a window:
+  after Saguntum fell and before Hannibal left New Carthage. Year only. The sources date by Roman
+  consular year and by season; v0 has no Roman republican calendar, so the date is the Julian year
+  the consular year falls in, and no month or day is asserted."
+cite:
+  - id: roman-embassy-demand
+    says:
+      "Polybius records the two alternatives the envoys offered: surrender Hannibal and his council,
+      or war."
+    source: polybius
+    at: "3.20.8"
+    quote:
+      ἢ γὰρ τὸν στρατηγὸν Ἀννίβαν καὶ τοὺς μετʼ αὐτοῦ συνέδρους ἐκδότους διδόναι Ῥωμαίοις ἐπέταττον,
+      ἢ προήγγελλον τὸν πόλεμον
+  - id: roman-embassy-toga
+    says:
+      Both historians tell of the envoy showing the fold of his garment, offering war or peace, and
+      the Carthaginians accepting war.
+    role: supporting
+    sources:
+      - source: polybius
+        at: "3.33.2"
+        quote: ὁ δὲ πρεσβύτατος αὐτῶν δείξας τοῖς ἐν τῷ συνεδρίῳ τὸν κόλπον ἐνταῦθα καὶ τὸν πόλεμον
+          αὐτοῖς ἔφη καὶ τὴν εἰρήνην φέρειν
+      - source: livy
+        at: "21.18.13"
+        quote: "tum Romanus sinu ex toga facto “Hic” inquit “vobis bellum et pacem portamus: utrum
+          placet, sumite.”"
+  - id: roman-embassy-accept
+    says: Livy records that when the envoy let fall war, the council answered that they accepted it.
+    role: supporting
+    source: livy
+    at: "21.18.14"
+    quote: et cum is iterum sinu effuso bellum dare dixisset accipere se omnes responderunt

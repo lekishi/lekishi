@@ -1,0 +1,73 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "Hannibal comes down into the plains of the Po and the country of the Insubres with what survives:
+  12,000 African and 8,000 Iberian foot and no more than 6,000 horse, by his own inscription at the
+  Lacinian promontory. Livy records very different figures in other writers."
+types: [journey]
+part_of: [hannibal-march-218]
+date:
+  value: "218 BCE"
+  calendar: regnal
+  as_written: ἐν πέντε μησὶ … ἡμέραις δεκαπέντε
+  cite:
+    - id: arrival-time
+      says: Polybius records the descent into the Po plains five months after leaving New Town and
+        fifteen days after starting the Alpine crossing.
+      source: polybius
+      at: "3.56.3"
+      quote: κατῆρε τολμηρῶς εἰς τὰ περὶ τὸν Πάδον πεδία καὶ τὸ τῶν Ἰνσόμβρων ἔθνος
+places:
+  - place: padus
+    role: end
+  - place: alps
+    role: start
+participants:
+  - actor: hannibal
+    role: leader
+  - actor: insubres
+    role: host
+    note: The descent is into their country.
+notes: The arrival figures are disputed in antiquity. Polybius cites the Lacinian inscription; Livy
+  records writers giving from 100,000 foot and 20,000 horse down to 20,000 foot and 6,000 horse, and
+  L. Cincius Alimentus, a prisoner of Hannibal, giving 80,000 foot and 10,000 horse including Gauls
+  and Ligurians and losses of 36,000 since the Rhône. Year only. The sources date by Roman consular
+  year and by season; v0 has no Roman republican calendar, so the date is the Julian year the
+  consular year falls in, and no month or day is asserted.
+dispute:
+  status: disputed
+  summary:
+    "The army's strength on arrival is disputed: Polybius, from Hannibal's inscription, gives 12,000
+    African and 8,000 Iberian foot and at most 6,000 horse; Livy's authorities range from 20,000
+    foot and 6,000 horse to 100,000 foot and 20,000 horse. The record publishes Polybius' figures."
+cite:
+  - id: arrival-numbers
+    says: Polybius gives the surviving force from Hannibal's own inscription at the Lacinian promontory.
+    source: polybius
+    at: "3.56.4"
+    quote:
+      ἔχων τὸ διασῳζόμενον μέρος τῆς μὲν τῶν Λιβύων δυνάμεως πεζοὺς μυρίους καὶ δισχιλίους, τῆς δὲ
+      τῶν Ἰβήρων εἰς ὀκτακισχιλίους, ἱππεῖς δὲ τοὺς πάντας οὐ πλείους ἑξακισχιλίων
+  - id: arrival-livy-range
+    says: Livy says the writers disagree, the highest giving 100,000 foot and 20,000 horse and the
+      lowest 20,000 foot and 6,000 horse.
+    role: conflicting
+    source: livy
+    at: "21.38.2"
+    quote: qui plurimum, centum milia peditum, viginti equitum fuisse scribunt, qui minimum, viginti
+      milia peditum, sex equitum
+  - id: arrival-cincius
+    says:
+      Livy reports L. Cincius Alimentus, who says he heard from Hannibal himself that 36,000 men had
+      been lost since the Rhône crossing.
+    role: alternative
+    source: livy
+    at: "21.38.5"
+    quote: ex ipso autem audisse Hannibale, postquam Rhodanum transierit, triginta sex milia hominum
+      ingentemque numerum equorum et aliorum iumentorum amisisse
+  - id: arrival-pass
+    says: Livy wonders that the pass is disputed, most saying the Poenine and Coelius the Cremonis
+      ridge.
+    role: supporting
+    source: livy
+    at: "21.38.6"
+    quote: eo magis miror ambigi, quanam Alpis transierit, et vulgo credere Poenino

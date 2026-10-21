@@ -1,0 +1,68 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Hannibal frees the allied prisoners without ransom and tells the Romans he is fighting for honour
+  and empire, not to destroy them. He lets them send ten envoys to Rome about ransom, with Carthalo
+  to offer terms; a lictor orders Carthalo out of Roman territory, and the senate refuses to ransom
+  the prisoners.
+types: [mission, council]
+date:
+  value: "216 BCE"
+  calendar: regnal
+  as_written: secundum tam prosperam ad Cannas pugnam
+  cite:
+    - id: prisoners-time
+      says:
+        Livy records Hannibal, after the victory at Cannae, addressing the Roman prisoners mildly as
+        he never had before.
+      source: livy
+      at: "22.58.2"
+      quote: Romanos quoque vocatos, quod numquam alias antea, satis miti sermone adloquitur
+places:
+  - place: cannae
+    role: start
+  - place: rome
+    role: end
+participants:
+  - actor: hannibal
+    role: leader
+  - actor: carthalo
+    role: participant
+    note: Sent with the ten envoys to offer terms.
+  - actor: roman-republic
+    role: participant
+notes: Year only. The sources date by Roman consular year and by season; v0 has no Roman republican
+  calendar, so the date is the Julian year the consular year falls in, and no month or day is
+  asserted.
+cite:
+  - id: prisoners-honour
+    says: Livy has Hannibal say his war with Rome is not one of extermination but over honour and
+      empire.
+    source: livy
+    at: "22.58.3"
+    quote: non internecivum sibi esse cum Romanis bellum; de dignitate atque imperio certare
+  - id: prisoners-carthalo
+    says:
+      Livy records Carthalo, a Carthaginian noble, sent with the ten to offer terms if Rome inclined
+      to peace.
+    role: supporting
+    source: livy
+    at: "22.58.7"
+    quote:
+      missus cum his Carthalo, nobilis Carthaginiensis, qui, si forte ad pacem inclinarent animos,
+      condiciones ferret
+  - id: prisoners-lictor
+    says:
+      Livy records a lictor ordering Carthalo in the dictator's name to leave Roman territory before
+      nightfall.
+    role: supporting
+    source: livy
+    at: "22.58.9"
+    quote:
+      Carthaloni obviam lictor missus, qui dictatoris verbis nuntiaret, ut ante noctem excederet
+      finibus Romanis
+  - id: prisoners-refused
+    says: Livy records the senate deciding not to ransom the prisoners.
+    role: supporting
+    source: livy
+    at: "22.61.7"
+    quote: nec censuisse redimendos senatum

@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  太宗 receives 玄奘 at 洛陽, pardons the unauthorized departure, and commissions the 西域記 and the translation
+  at 弘福寺.
+types: [contact]
+from: tang-taizong
+to: xuanzang
+date:
+  value: 645..646
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: 二月己亥，見於儀鸞殿
+cite:
+  - id: taizong-audience-basis
+    says: The biography records the emperor's question why he left without word.
+    source: cien-zhuan
+    at: 卷六（帝曰：師去何不相報？）
+    quote: 帝曰：“師去何不相報？”

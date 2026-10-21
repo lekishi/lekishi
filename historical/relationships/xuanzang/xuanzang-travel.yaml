@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  玄奘 travels from 長安 to India and back, 629–645, by the oases north of the 塔里木 basin and the Turks'
+  lands on the way out and over the 蔥嶺 and 于闐 on the way home. The relationship records the documented
+  movement only and draws no route.
+types: [travel]
+from: xuanzang
+to: nalanda
+date:
+  value: 629..645
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: 貞觀三年秋八月 — 貞觀十九年春正月
+notes:
+  "No geometry is attached: the stops are the dated events of the chapter, and the journey record
+  that would order them waits on the journey kind (RFD 2)."
+cite:
+  - id: xuanzang-travel-basis
+    says: The memorial from 于闐 sums up the journey from 長安 to 王舍新城 and back by the 蔥嶺 and the 波謎羅川.
+    source: cien-zhuan
+    at: 卷五（始自長安神邑）
+    quote: 始自長安神邑，終於王舍新城，中間所經五萬餘里

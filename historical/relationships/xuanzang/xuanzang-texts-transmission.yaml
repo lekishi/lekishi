@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  玄奘 brings 657 Indian texts in 520 bundles, relics and images to 長安 and translates them at the
+  弘福寺. The relationship records the documented transfer, not an assessment of its later influence.
+types: [transmission]
+from: xuanzang
+to: changan
+date:
+  value: 645..664
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: 凡五百二十夾，六百五十七部
+cite:
+  - id: xuanzang-texts-basis
+    says: The biography itemizes the texts brought back.
+    source: cien-zhuan
+    at: 卷六（凡五百二十夾）
+    quote: 凡五百二十夾，六百五十七部，以二十疋馬負而至
+  - id: xuanzang-texts-history
+    says: The official history records the 657 texts translated at the 弘福寺.
+    role: supporting
+    source: jiu-tangshu-fangji
+    at: 卷一九一 方伎 僧玄奘
+    quote: 於是詔將梵本六百五十七部於弘福寺翻譯

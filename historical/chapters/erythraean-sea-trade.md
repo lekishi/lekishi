@@ -11,13 +11,15 @@ approved; the owner approves the manifest with `pnpm approvals`.
 Feasible, and the best arc test so far. The Periplus of the Erythraean Sea is a
 Greek merchant's handbook to every port from the Red Sea to southern India:
 who rules it, what it buys and sells, and when to sail. It links ports to each
-other explicitly, so the chapter has fourteen trade arcs across nearly 70 degrees of
-longitude, from Berenice to Muziris and from Taprobane to Rome. Pliny, writing
+other explicitly, so the chapter has thirteen trade arcs and one diplomatic
+arc across nearly 70 degrees of longitude, from Egypt to Muziris and from
+Taprobane to Rome. Pliny, writing
 in the same decades, gives the route from Alexandria to Muziris in days.
 
 - 23 events (the Periplus voyage and 11 ports, Pliny's route and 5 legs, the
   Hippalus crossing, the destruction of Eudaemon Arabia, the freedman's drift
-  and the Taprobane embassy), 26 places, 15 actors, 14 relationships.
+  and the Taprobane embassy), 27 places, 15 actors, 14 relationships (13
+  trade, 1 diplomacy).
 - A proposed v1 journey in
   [`historical/journeys/pliny-india-route.yaml`](../journeys/pliny-india-route.yaml),
   not compiled.

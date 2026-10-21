@@ -11,13 +11,15 @@ approves the manifest with `pnpm approvals`.
 Feasible, and the hardest test of places so far. The Periplus of Hanno is a
 short Greek account of a Carthaginian voyage down the Atlantic coast of Africa,
 in eighteen sections, counting days' sailing between stages and giving no
-year. Of the sixteen places the chapter records, six carry a gazetteer
+year. Of the fifteen places the chapter records, five carry a gazetteer
 coordinate and ten do not; every one of them has been identified differently by different
 scholars. The chapter is worth having for exactly that: an engine that draws
 this chapter honestly can draw any disputed geography.
 
-- 19 events (the voyage, 17 stages, and Pliny's skins in the temple), 16
-  places, 4 actors, 2 relationships.
+- 19 events (the voyage, 17 stages, and Pliny's skins in the temple), 15
+  places, 4 actors, 2 relationships. The relationships join actors
+  (Hanno with the Lixitae and with the Gorillai), and no actor has an
+  anchor place, so the map draws no arc for them; they show on the cards.
 - A proposed v1 journey in
   [`historical/journeys/hanno-voyage.yaml`](../journeys/hanno-voyage.yaml),
   not compiled.
@@ -30,8 +32,8 @@ this chapter honestly can draw any disputed geography.
 | Schoff's commentary | `schoff-hanno` | "The Geography of the Voyage" and "Carthaginian Chronology", 1913 | Public domain | Identifications and the 470 BCE date, as interpretation |
 | Pliny, Natural History | `pliny-natural-history` | Bostock and Riley 1855, Perseus | Public domain; transcription CC BY-SA | II.67, V.1, VI.36, and the translators' notes as 1855 scholarship |
 | Pleiades | `pleiades` | Dump of 2026-10-21 | CC BY 3.0 | Every identification, and the coordinates of the places minted here |
-| Wikidata | `wikidata` | Pinned revisions, 2026-10-21 | CC0 | The coordinates of the shared `carthage` and `gades` |
-| Livy; Polybius | `livy`, `polybius` | Teubner editions, Perseus | Public domain; transcription CC BY-SA | Reached through the shared `carthage` and `gades`, not cited by this chapter's own records |
+| Wikidata | `wikidata` | Pinned revisions, 2026-10-21 | CC0 | The coordinate of the shared `carthage` |
+| Livy; Polybius | `livy`, `polybius` | Teubner editions, Perseus | Public domain; transcription CC BY-SA | Reached through the shared `carthage`, not cited by this chapter's own records |
 
 Every quotation was checked by script against the downloaded texts on
 2026-10-21. The Greek is Schoff's text as Wikisource transcribes it, accents
@@ -49,7 +51,7 @@ reported in the temple of Juno run to the fall of Carthage in 146 BCE.
 
 ## Places
 
-Drawn only where a gazetteer gives a point: Carthage, the Pillars, Gades,
+Drawn only where a gazetteer gives a point: Carthage, the Pillars,
 Soloeis (Cape Spartel), Cerne (Mogador) and the Chariot of the Gods (Mount
 Cameroon), the last three at region precision. Every other place is `unknown`,
 with a main "unlocated" claim, the commentators' identifications as
@@ -78,7 +80,8 @@ Proposed to the owner, not built:
 
 `carthage` and `gades` are byte-for-byte copies of the Hannibal thread's files
 (PR #40), with the sources they cite (`livy`, `polybius`), so the branches merge
-cleanly; the Hanno and Pliny name forms live in the events that cite them.
+cleanly. No record of this chapter reaches `gades` (Pliny's Gades is named in
+his text, not placed), so it is carried only to keep the copy whole; the Hanno and Pliny name forms live in the events that cite them.
 `pliny-natural-history` is the merged record the Nile thread wrote for both
 chapters, copied byte for byte. `pleiades` is
 byte-identical across branches.

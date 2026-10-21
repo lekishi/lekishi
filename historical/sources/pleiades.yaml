@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../schema/source.schema.json
+locator: dataset_row
+kind: gazetteer
+title: Pleiades, a gazetteer of past places
+edition: Pleiades daily data dump of 2026-10-21 (pleiades-places-20261021.csv.gz and
+  pleiades-names-20261021.csv.gz from atlantides.org); each citation names the place id, the
+  field read, and the dump date
+author: Pleiades contributors (Ancient World Mapping Center and Institute for the Study of the
+  Ancient World)
+language: en
+identifiers:
+  - system: url
+    value: https://pleiades.stoa.org/
+  - system: url
+    value: https://atlantides.org/downloads/pleiades/dumps/
+license:
+  status: recorded
+  license_id: other
+  license_url: https://creativecommons.org/licenses/by/3.0/
+  attribution_text:
+    Pleiades contributors, Ancient World Mapping Center and Institute for the Study of the Ancient
+    World, CC BY 3.0
+  redistribution: permitted_with_attribution
+  quotation_permitted: true
+  reviewed_by: Lekishi editorial preparation
+  reviewed_at: 2026-10-21T15:00:00Z
+  notes:
+    "The site footer, read on 2026-10-21, states: sharing and remixing permitted under the Creative
+    Commons Attribution 3.0 License (cc-by). The register adopted it on 2026-10-10. The maintainers
+    ask to be told of reuse by email; that notice is an owner action before release."
+notes:
+  A scholarly gazetteer of ancient places. Its representative point and location precision are the
+  gazetteer's identification of where a named ancient place was, so a coordinate taken from it is
+  published as an interpretation attributed to Pleiades, never as a statement of the ancient text.
+  A citation pins the dated dump, because places are edited daily and the dump is the reproducible
+  read.

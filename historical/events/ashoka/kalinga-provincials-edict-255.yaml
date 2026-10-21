@@ -5,7 +5,7 @@ summary: >-
   theirs every three.
 types: [occurrence]
 date:
-  value: 255 BCE
+  value: 258 BCE..252 BCE
   mode: window
   calendar: julian
   as_written: undated; Smith's 15th regnal year, queried
@@ -18,6 +18,16 @@ date:
       source: smith-asoka-1920
       at: ch. I, Chronology of the Maurya Period
       quote: (?) Kalinga Provincials' Edict
+    - id: kalinga-provincials-edict-255-error-bound
+      says: >-
+        Smith holds that the error in his dates for the reign cannot exceed three years, so the
+        support runs three years either side of his year.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. I, The History of Asoka
+      quote: the error in any case cannot exceed three years
 places:
   - place: dhauli
     role: site

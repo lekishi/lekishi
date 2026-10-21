@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In 80 CE 徐幹 arrived with a thousand convicts and volunteers. 莎車 had meanwhile gone over to 龜茲 and
+  the 疏勒 officer 番辰 had rebelled; 班超 and 徐幹 beat 番辰, taking more than a thousand heads.
+types: [campaign]
+date:
+  value: 80
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 建初五年
+  cite:
+    - id: fanchen-defeat-time
+      says: The biography records 徐幹's arrival in 建初五年 and the defeat of 番辰.
+      sources:
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超 建初五年
+          quote: 五年，遂以幹爲假司馬
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超（超遂與幹擊番辰）
+          quote: 會徐幹適至，超遂與幹擊番辰，大破之，斬首千餘級，多獲生口。
+places:
+  - place: kashgar
+    role: site
+participants:
+  - actor: ban-chao
+    role: leader
+  - actor: xu-gan
+    role: participant

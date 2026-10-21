@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In 91 CE 龜茲, 姑墨 and 溫宿 submitted. 班超 was made 都護 of the Western Regions, set up 白霸 as king of
+  龜茲 in place of 尤利多, and lived at 龜茲's 它乾城, with 徐幹 at 疏勒. Only 焉耆, 危須 and 尉犂, which
+  had killed the last 都護, held out.
+types: [occurrence]
+date:
+  value: 91
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 永元三年
+  cite:
+    - id: protector-general-time
+      says: The 西域傳 dates 班超's settlement of the Western Regions and his appointment as 都護 residing in 龜茲 to 永元三年.
+      source: hou-hanshu
+      at: 卷八十八 西域傳 序（三年，班超遂定西域）
+      quote: 三年，班超遂定西域，因以超為都護，居龜茲。
+    - id: protector-general-account
+      says: The biography records the submission of the three kingdoms, his appointment, and his residence at 它乾城.
+      role: supporting
+      sources:
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超（乃以超爲都護）
+          quote: 明年，龜茲、姑墨、溫宿皆降，乃以超爲都護，徐幹爲長史。
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超（超居龜茲它乾城）
+          quote: 超居龜茲它乾城，徐幹屯疏勒。西域唯焉耆、危須、尉犂以前沒都護，懷二心，其餘悉定。
+places:
+  - place: kucha
+    role: site
+participants:
+  - actor: ban-chao
+    role: leader
+  - actor: xu-gan
+    role: participant

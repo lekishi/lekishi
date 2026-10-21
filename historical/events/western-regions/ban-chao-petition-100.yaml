@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In 100 CE 班超, old and longing for home, petitioned the throne, writing "I dare not hope to reach 酒泉; I
+  only wish to enter the 玉門關 alive." He sent his son 勇 east with the tribute so that the boy might
+  see China while his father lived. His sister 班昭 petitioned for him as well; the emperor was moved
+  and recalled him.
+types: [occurrence]
+date:
+  value: 100
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 永元十二年
+  cite:
+    - id: ban-chao-petition-time
+      says: The biography dates the petition to 永元十二年 and quotes its wish to enter the 玉門關 alive.
+      sources:
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超 永元十二年
+          quote: 年老思土。十二年，上疏曰
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超 永元十二年 上疏（但願生入玉門關）
+          quote: 臣不敢望到酒泉郡，但願生入玉門關。
+    - id: ban-chao-petition-sister
+      says: The biography records 班昭's petition and the emperor recalling 班超 after reading it.
+      role: supporting
+      sources:
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超（超妹同郡曹壽妻昭亦上書）
+          quote: 而超妹同郡曹壽妻昭亦上書請超曰
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超（書奏，帝感其言，乃徵超還）
+          quote: 書奏，帝感其言，乃徵超還。
+places:
+  - place: kucha
+    role: site
+    note: 班超's seat as 都護 when he wrote; the petition names no place of writing.
+participants:
+  - actor: ban-chao
+    role: leader
+  - actor: ban-zhao
+    role: participant
+notes:
+  The biography does not date 班昭's petition separately; she writes that her brother had waited three
+  years for an answer, so the recall came some time after 永元十二年.

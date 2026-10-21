@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The new emperor, fearing 班超 could not hold out alone, recalled him. At 疏勒 an officer killed
+  himself rather than see the Han envoy go; at 于窴 the king and nobles wept and clung to his horse's
+  legs. 班超 turned back to 疏勒, where two towns had gone over to 龜茲; he executed the rebels, beat
+  尉頭, and restored order.
+types: [journey]
+date:
+  value: 75..76
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 肅宗初即位
+  cite:
+    - id: ban-chao-turns-back-account
+      says: The biography records the recall, the scene at 于窴, and 班超's return to 疏勒.
+      sources:
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超（肅宗初即位…下詔徵超）
+          quote: 肅宗初即位，以陳睦新沒，恐超單危不能自立，下詔徵超。
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超（超還至于窴）
+          quote: 超還至于窴，王侯以下皆號泣曰：「依漢使如父母，誠不可去。」互抱超馬腳，不得行。
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超（乃更還疏勒）
+          quote: 超恐于窴終不聽其東，又欲遂本志，乃更還疏勒。
+places:
+  - place: kashgar
+    role: start
+  - place: khotan
+    role: waypoint
+participants:
+  - actor: ban-chao
+    role: leader
+  - actor: guangde
+    role: host
+    note: The biography names "the king and nobles" of 于窴, not 廣德.
+notes:
+  "章帝 (肅宗) came to the throne on 明帝's death in 75 CE; the recall followed his accession and the
+  year-plus siege at 疏勒, so the record gives the window 75–76. The journey turned back at 于窴 and
+  ended where it began."

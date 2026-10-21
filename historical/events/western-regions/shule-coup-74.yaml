@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  龜茲, a 匈奴 ally, had killed the king of 疏勒 and installed one of its own men, 兜題. 班超 came by a
+  back road and sent his officer 田慮 ahead, who seized 兜題 while he was off guard. 班超 gathered the
+  疏勒 officers and made 忠, nephew of the former king, their king; he let 兜題 go to show good faith.
+types: [occurrence]
+date:
+  value: 74
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 明年春（永平十七年）
+  cite:
+    - id: shule-coup-biography
+      says: The biography dates 班超's arrival at 疏勒 to the spring after the 鄯善 and 于窴 events.
+      source: hou-hanshu
+      at: 卷四十七 班梁列傳 班超（明年春，超從閒道至疏勒）
+      quote: 明年春，超從閒道至疏勒。
+    - id: shule-coup-installed
+      says: The biography records 忠, the former king's nephew, being made king.
+      role: supporting
+      source: hou-hanshu
+      at: 卷四十七 班梁列傳 班超（因立其故王兄子忠爲王）
+      quote: 因立其故王兄子忠爲王
+    - id: shule-coup-annals
+      says: The 疏勒 entry dates 龜茲's killing of the king to 永平十六年 and 班超's seizure of 兜題 to the winter of the same year.
+      role: conflicting
+      source: hou-hanshu
+      at: 卷八十八 西域傳 疏勒國
+      quote: 明帝永平十六年，龜茲王建攻殺疏勒王成，自以龜茲左侯兜題為疏勒王。冬，漢遣軍司馬班超劫縛兜題，而立成之兄子忠為疏勒王。
+places:
+  - place: kashgar
+    role: site
+participants:
+  - actor: ban-chao
+    role: leader
+  - actor: shule-king-zhong
+    role: subject
+dispute:
+  status: disputed
+  summary:
+    "The two chapters of the 後漢書 date the seizure of 兜題 differently: the biography to the spring
+    after 永平十六年 (74 CE), the 疏勒 entry to the winter of 永平十六年 (late 73 or early 74 CE). The
+    record publishes the biography's year and keeps the 西域傳's date as a conflicting claim."

@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At 鄯善, when the king's courtesy cooled, 班超 guessed that 匈奴 envoys had arrived, tricked a servant
+  into confirming it, and roused his thirty-six men, saying "without entering the tiger's den you cannot
+  take its cubs". On a windy night they set fire to the envoys' camp, beat drums behind it, and
+  killed the envoy and more than a hundred of his men. The king of 鄯善 sent a son as hostage.
+types: [occurrence]
+date:
+  value: 73
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 永平十六年（固以爲能，遣與從事郭恂俱使西域。超到鄯善）
+  cite:
+    - id: shanshan-night-attack-account
+      says: The biography records the cooling of the king's courtesy, 班超's speech to his thirty-six men, and the night attack by fire.
+      sources:
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超（不入虎穴，不得虎子）
+          quote: 超曰：「不入虎穴，不得虎子。當今之計，獨有因夜以火攻虜，使彼不知我多少，必大震怖，可殄盡也。
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超（超乃順風縱火）
+          quote: 超乃順風縱火，前後鼓噪。虜衆驚亂，超手格殺三人，吏兵斬其使及從士三十餘級，餘衆百許人悉燒死。
+    - id: shanshan-hostage
+      says: The biography records the king of 鄯善 being shown the envoy's head and giving a son as hostage.
+      role: supporting
+      source: hou-hanshu
+      at: 卷四十七 班梁列傳 班超（遂納子爲質）
+      quote: 超於是召鄯善王廣，以虜使首示之，一國震怖。超曉告撫慰，遂納子爲質。
+places:
+  - place: shanshan
+    role: site
+participants:
+  - actor: ban-chao
+    role: leader
+  - actor: xiongnu
+    role: participant
+    note: The 匈奴 envoy's party.
+notes:
+  The biography does not date the attack separately; it follows directly on the mission that 竇固 sent
+  after the 蒲類海 battle of 永平十六年, so the record gives it that year.

@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Alexander besieges Halicarnassus, held by Memnon and a Persian and Greek garrison; the defenders
+  burn and abandon the city, and Alexander gives Caria to its queen Ada.
+types: [occurrence]
+part_of: [alexander-campaigns-334]
+date:
+  value: 334 BCE..333 BCE
+  mode: window
+  calendar: julian
+  as_written: he encamped near the latter city … as if he expected a long siege
+  cite:
+    - id: halicarnassus-siege-334-time
+      says:
+        Chinnock dates the crossing to the spring of 334 BCE and the battle of Issus to the end of October
+        or beginning of November 333 BCE; this stage lies between.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+      sources:
+        - source: arrian-anabasis
+          at: I.11
+          quote: (B.C. 334.) At the beginning of the spring he marched towards the Hellespont
+        - source: arrian-anabasis
+          at: II.11, note 266
+          quote: B.C. 333; end of October or beginning of November.
+    - id: halicarnassus-siege-334-text
+      says: Arrian records Alexander encamping before Halicarnassus for a long siege.
+      source: arrian-anabasis
+      at: I.20
+      quote:
+        he encamped near the latter city, at a distance from it of about five stades, as if he expected
+        a long siege.
+      role: supporting
+places:
+  - place: halicarnassus
+    role: site
+participants:
+  - actor: alexander-the-great
+    role: leader
+  - actor: persian-empire
+    role: participant
+cites:
+  summary:
+    - id: halicarnassus-siege-334-ada
+      says: Arrian records Alexander giving Ada the rule of Caria.
+      source: arrian-anabasis
+      at: I.23
+      quote:
+        when he had captured Halicarnassus and become master of the rest of Caria, he granted her the
+        privilege of ruling over the whole country.

@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In the spring Alexander takes the rock in Sogdiana where many Sogdianians and the family of Oxyartes
+  had taken refuge, and marries Oxyartes's daughter Roxana.
+types: [occurrence]
+part_of: [alexander-campaigns-334]
+date:
+  value: 327 BCE
+  mode: window
+  calendar: julian
+  as_written: At the first appearance of spring
+  cite:
+    - id: sogdian-rock-327-time
+      says: Chinnock glosses 'the first appearance of spring' as the spring of 327 BCE.
+      source: arrian-anabasis
+      at: IV.18, note 580
+      quote: Of the year 327 B.C.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+    - id: sogdian-rock-327-text
+      says: Arrian records the advance on the rock in spring.
+      source: arrian-anabasis
+      at: IV.18
+      quote: At the first appearance of spring, he advanced towards the rock in Sogdiana
+      role: supporting
+places:
+  - place: sogdian-rock
+    role: site
+participants:
+  - actor: alexander-the-great
+    role: leader
+  - actor: roxana
+    role: participant
+cites:
+  summary:
+    - id: sogdian-rock-327-roxana
+      says: Arrian names Roxana, Oxyartes's daughter.
+      source: arrian-anabasis
+      at: IV.19
+      quote: This chief had a daughter, a maiden of marriageable age, named Roxana

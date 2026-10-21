@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At Babylon, while preparing an expedition to Arabia, Alexander falls ill with fever after a banquet
+  and dies, aged thirty-two.
+types: [occurrence]
+part_of: [alexander-campaigns-334]
+date:
+  value: 323 BCE
+  mode: window
+  calendar: julian
+  as_written: in the hundred and fourteenth Olympiad, in the archonship of Hegesias at Athens
+  cite:
+    - id: alexander-death-323-time
+      says: Chinnock converts Arrian's Olympiad and archon year to June 323 BCE.
+      source: arrian-anabasis
+      at: VII.28, note 976
+      quote: June, 323 B.C.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+    - id: alexander-death-323-text
+      says: Arrian dates Alexander's death by Olympiad and archon.
+      source: arrian-anabasis
+      at: VII.28
+      quote: Alexander died in the hundred and fourteenth Olympiad, in the archonship of Hegesias at Athens.
+      role: supporting
+places:
+  - place: babylon
+    role: site
+participants:
+  - actor: alexander-the-great
+    role: subject
+cites:
+  summary:
+    - id: alexander-death-323-fever
+      says: Arrian records the fever.
+      source: arrian-anabasis
+      at: VII.25
+      quote: The fever now raged the whole night without intermission.

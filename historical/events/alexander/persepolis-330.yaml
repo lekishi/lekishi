@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Alexander forces the Persian Gates against Ariobarzanes, reaches Persepolis before its treasury
+  can be plundered, takes the treasure of Pasargadae, and burns the palace against Parmenio's advice.
+types: [occurrence]
+part_of: [alexander-campaigns-334]
+date:
+  value: 331 BCE..330 BCE
+  mode: window
+  calendar: julian
+  as_written: He burnt down the Persian palace
+  cite:
+    - id: persepolis-330-time
+      says:
+        Chinnock dates Gaugamela to September 331 BCE and Darius's death to Hecatombaion (July) 330
+        BCE; this stage lies between.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+      sources:
+        - source: arrian-anabasis
+          at: III.15, note 426
+          quote: September 331 B.C.
+        - source: arrian-anabasis
+          at: III.22, note 467
+          quote: In the year B.C. 330, the first of Hecatombaion fell on the first of July.
+    - id: persepolis-330-text
+      says: Arrian records the burning of the palace.
+      source: arrian-anabasis
+      at: III.18
+      quote: He burnt down the Persian palace, though Parmenio advised him to preserve it
+      role: supporting
+places:
+  - place: susa
+    role: start
+  - place: persepolis
+    role: site
+  - place: pasargadae
+    role: context
+    note: Its treasure was taken at the same time.
+participants:
+  - actor: alexander-the-great
+    role: leader
+  - actor: parmenio
+    role: participant
+cites:
+  summary:
+    - id: persepolis-330-gates
+      says: Arrian records Ariobarzanes holding the Persian Gates.
+      source: arrian-anabasis
+      at: III.18
+      quote:
+        But when he arrived at the Persian Gates, he found that Ariobarzanes, the viceroy of Persis,
+        with 40,000 infantry and 700 cavalry, had built a wall across the pass
+  places:
+    - id: persepolis-330-pasargadae
+      says: Arrian records the capture of the treasure at Pasargadae.
+      source: arrian-anabasis
+      at: III.18
+      quote: He also captured the money which was at Pasargadae in the treasury of the first Cyrus

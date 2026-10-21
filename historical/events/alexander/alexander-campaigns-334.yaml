@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "Alexander's campaigns from the crossing of the Hellespont in the spring of 334 BCE to his death
+  at Babylon in June 323 BCE: the conquest of the Persian Empire, the campaigns in Bactria, Sogdiana and
+  India, and the return. The stages are separate events; this event carries the span and asserts no continuous
+  route."
+types: [campaign]
+date:
+  value: 334 BCE..323 BCE
+  mode: duration
+  calendar: julian
+  as_written:
+    At the beginning of the spring he marched towards the Hellespont … Alexander died in the
+    hundred and fourteenth Olympiad
+  cite:
+    - id: alexander-campaigns-334-time
+      says:
+        Chinnock dates the march to the Hellespont to the spring of 334 BCE and Alexander's death to
+        June 323 BCE.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+      sources:
+        - source: arrian-anabasis
+          at: I.11
+          quote: (B.C. 334.) At the beginning of the spring he marched towards the Hellespont
+        - source: arrian-anabasis
+          at: VII.28, note 976
+          quote: June, 323 B.C.
+places:
+  - place: abydos-hellespont
+    role: start
+  - place: hyphasis-river
+    role: waypoint
+    note: The easternmost point of the march.
+  - place: babylon
+    role: end
+participants:
+  - actor: alexander-the-great
+    role: leader
+  - actor: macedonian-kingdom
+    role: participant
+  - actor: persian-empire
+    role: participant
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      No route geometry is asserted. The campaigns are drawn only through their dated, placed child
+      events.
+    cite:
+      - id: alexander-campaigns-334-no-route
+        says:
+          Arrian narrates the campaigns as a sequence of marches; the chapter asserts no route geometry
+          for them as a whole.
+        source: arrian-anabasis
+        at: I.11
+        quote: At the beginning of the spring he marched towards the Hellespont
+notes:
+  Arrian dates by Athenian archons and months; the years BCE are Chinnock's conversions in his headings
+  and notes, cited as his interpretation.

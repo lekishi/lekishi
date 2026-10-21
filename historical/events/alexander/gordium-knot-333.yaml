@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At Gordium Alexander goes up to the citadel to see the wagon of Gordius, whose knot was said
+  to give the rule of Asia to whoever loosed it. Accounts differ on how he undid it.
+types: [occurrence]
+part_of: [alexander-campaigns-334]
+date:
+  value: 334 BCE..333 BCE
+  mode: window
+  calendar: julian
+  as_written: When Alexander arrived at Gordium
+  cite:
+    - id: gordium-knot-333-time
+      says:
+        Chinnock dates the crossing to the spring of 334 BCE and the battle of Issus to the end of October
+        or beginning of November 333 BCE; this stage lies between.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+      sources:
+        - source: arrian-anabasis
+          at: I.11
+          quote: (B.C. 334.) At the beginning of the spring he marched towards the Hellespont
+        - source: arrian-anabasis
+          at: II.11, note 266
+          quote: B.C. 333; end of October or beginning of November.
+    - id: gordium-knot-333-text
+      says: Arrian records Alexander at Gordium.
+      source: arrian-anabasis
+      at: II.3
+      quote: When Alexander arrived at Gordium, he was seized with an ardent desire to go up into the citadel
+      role: supporting
+places:
+  - place: gordium
+    role: site
+participants:
+  - actor: alexander-the-great
+    role: leader
+dispute:
+  status: disputed
+  summary: Arrian gives two accounts of how the knot was undone and says he cannot affirm either.
+cites:
+  summary:
+    - id: gordium-knot-333-sword
+      says: Arrian reports that some say Alexander cut the knot with his sword.
+      source: arrian-anabasis
+      at: II.3
+      quote: he struck the cord with his sword and cut it through, saying that it had been untied by him.
+    - id: gordium-knot-333-pin
+      says: Arrian reports Aristobulus's account that Alexander pulled out the pin of the pole.
+      source: arrian-anabasis
+      at: II.3
+      quote:
+        But Aristobulus says that he pulled out the pin of the wagon-pole, which was a wooden peg driven
+        right through it, holding the cord together.
+      role: alternative

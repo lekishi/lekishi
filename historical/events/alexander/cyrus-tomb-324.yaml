@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At Pasargadae Alexander finds the tomb of Cyrus the Great broken into and plundered, and commissions
+  Aristobulus to restore it.
+types: [occurrence]
+part_of: [alexander-campaigns-334]
+date:
+  value: 325 BCE..323 BCE
+  mode: window
+  calendar: julian
+  as_written: He was grieved by the outrage committed upon the tomb of Cyrus
+  cite:
+    - id: cyrus-tomb-324-time
+      says:
+        Chinnock dates the march toward Persis to the winter of 325 BCE and Alexander's death to June
+        323 BCE; this stage lies between.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+      sources:
+        - source: arrian-anabasis
+          at: VI.28, note 814
+          quote: B.C. 325.
+        - source: arrian-anabasis
+          at: VII.28, note 976
+          quote: June, 323 B.C.
+    - id: cyrus-tomb-324-text
+      says: Arrian records the plundered tomb.
+      source: arrian-anabasis
+      at: VI.29
+      quote: He was grieved by the outrage committed upon the tomb of Cyrus, son of Cambyses
+      role: supporting
+places:
+  - place: pasargadae
+    role: site
+participants:
+  - actor: alexander-the-great
+    role: leader
+cites:
+  summary:
+    - id: cyrus-tomb-324-restore
+      says: Arrian records Aristobulus's commission to restore the tomb.
+      source: arrian-anabasis
+      at: VI.29
+      quote: Aristobulus says that he was himself commissioned by Alexander to restore the tomb for Cyrus

@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Alexander besieges Miletus while his fleet holds Lade and shuts the Persian fleet out of the
+  harbour; the city is taken and its surviving citizens freed.
+types: [occurrence]
+part_of: [alexander-campaigns-334]
+date:
+  value: 334 BCE..333 BCE
+  mode: window
+  calendar: julian
+  as_written: SIEGE AND CAPTURE OF MILETUS
+  cite:
+    - id: miletus-siege-334-time
+      says:
+        Chinnock dates the crossing to the spring of 334 BCE and the battle of Issus to the end of October
+        or beginning of November 333 BCE; this stage lies between.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+      sources:
+        - source: arrian-anabasis
+          at: I.11
+          quote: (B.C. 334.) At the beginning of the spring he marched towards the Hellespont
+        - source: arrian-anabasis
+          at: II.11, note 266
+          quote: B.C. 333; end of October or beginning of November.
+    - id: miletus-siege-334-text
+      says: Arrian records the capture of Miletus and the pardon of its citizens.
+      source: arrian-anabasis
+      at: I.19
+      quote:
+        He likewise pardoned all the citizens of Miletus who had escaped death in the capture of the
+        city, and he granted them their freedom.
+      role: supporting
+places:
+  - place: miletus
+    role: site
+participants:
+  - actor: alexander-the-great
+    role: leader
+  - actor: persian-empire
+    role: participant

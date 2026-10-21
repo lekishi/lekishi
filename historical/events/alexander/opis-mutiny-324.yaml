@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At Opis Alexander announces the discharge of the old and disabled Macedonians; the army protests,
+  he gives commands to Persians, and the two are reconciled.
+types: [occurrence]
+part_of: [alexander-campaigns-334]
+date:
+  value: 325 BCE..323 BCE
+  mode: window
+  calendar: julian
+  as_written: When he arrived at Opis
+  cite:
+    - id: opis-mutiny-324-time
+      says:
+        Chinnock dates the march toward Persis to the winter of 325 BCE and Alexander's death to June
+        323 BCE; this stage lies between.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+      sources:
+        - source: arrian-anabasis
+          at: VI.28, note 814
+          quote: B.C. 325.
+        - source: arrian-anabasis
+          at: VII.28, note 976
+          quote: June, 323 B.C.
+    - id: opis-mutiny-324-text
+      says: Arrian records the announcement at Opis.
+      source: arrian-anabasis
+      at: VII.8
+      quote:
+        When he arrived at Opis, he collected the Macedonians and announced that he intended to discharge
+        from the army those who were useless for military service
+      role: supporting
+places:
+  - place: opis
+    role: site
+participants:
+  - actor: alexander-the-great
+    role: leader
+  - actor: macedonian-kingdom
+    role: participant
+cites:
+  summary:
+    - id: opis-mutiny-324-kiss
+      says: Arrian records the reconciliation.
+      source: arrian-anabasis
+      at: VII.11
+      quote: When he had said this, Callines advanced and saluted him with a kiss

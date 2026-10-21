@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Pursuing Darius into Media, Alexander reaches Ecbatana and sends the Thessalian cavalry and the
+  other Greek allies home with their pay and a gift of 2,000 talents.
+types: [occurrence]
+part_of: [alexander-campaigns-334]
+date:
+  value: 331 BCE..330 BCE
+  mode: window
+  calendar: julian
+  as_written: When Alexander reached Ecbatana
+  cite:
+    - id: ecbatana-330-time
+      says:
+        Chinnock dates Gaugamela to September 331 BCE and Darius's death to Hecatombaion (July) 330
+        BCE; this stage lies between.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+      sources:
+        - source: arrian-anabasis
+          at: III.15, note 426
+          quote: September 331 B.C.
+        - source: arrian-anabasis
+          at: III.22, note 467
+          quote: In the year B.C. 330, the first of Hecatombaion fell on the first of July.
+    - id: ecbatana-330-text
+      says: Arrian records the dismissal of the allies at Ecbatana.
+      source: arrian-anabasis
+      at: III.19
+      quote:
+        When Alexander reached Ecbatana, he sent the Thessalian cavalry and the other Grecian allies
+        back to the sea
+      role: supporting
+places:
+  - place: ecbatana
+    role: site
+participants:
+  - actor: alexander-the-great
+    role: leader

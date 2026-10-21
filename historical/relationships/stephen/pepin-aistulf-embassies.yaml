@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Pepin's embassies to Aistulf in 754, sent two and three times at the pope's urging, asking him to
+  keep the peace with Rome and restore the property of the Roman church, with promises of gifts; the
+  king refused.
+types: [diplomacy]
+from: actor:pepin-the-short
+to: actor:aistulf
+date:
+  value: "754"
+  calendar: julian
+  as_written: bis et tertio … eum deprecatus est
+cite:
+  - id: pepin-aistulf-embassies-basis
+    says: The life says the king sent envoys to Aistulf for the peace and the restoration of the church's rights, two and three times, promising gifts, and that Aistulf would not obey.
+    source: liber-pontificalis
+    at: direxit suos missos Aistulfo nequissimo Langobardorum regi, propter pacis foedera … atque bis et tertio … eum deprecatus est et plura ei pollicitus est munera
+  - id: pepin-aistulf-embassies-fredegar
+    says: The continuations say the king sent an embassy asking Aistulf not to come against Rome in arms, out of reverence for the apostles.
+    role: supporting
+    source: fredegar-continuations
+    at: CXIX
+    quote: Legationem ad Aistulfum regem Langobardorum mittens, petens ut propter reverentiam beatissimorum apostolorum Petri et Pauli in partibus Romae hostiliter non ambularet
+notes: The year is editorial, from the embassies' place between the pope's arrival and the campaign.

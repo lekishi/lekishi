@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Stephen reaches Pavia. Aistulf's envoys meet him on the road to forbid him to ask for Ravenna and
+  the exarchate; at court he gives the king gifts and begs with tears for the return of what was
+  taken, and the imperial envoy presents the emperor's letters, without result. The Frankish envoys
+  press the king to let the pope go on to Francia.
+types: [journey, mission]
+part_of: [stephen-journey-753]
+date:
+  value: 753-10-14..753-11-15
+  mode: window
+  calendar: julian
+  as_written: Coniungente vero eo Papiam in civitatem
+  cite:
+    - id: pavia-arrival-753-time
+      says: The life gives no date for the arrival; it falls between the departure from Rome on 14 October and the departure from Pavia on 15 November.
+      source: liber-pontificalis
+      at: Coniungente vero eo Papiam in civitatem et praedicto nefando regi praesentao, plura illi tribuit munera
+places:
+  - place: pavia
+    role: site
+participants:
+  - actor: stephen-ii
+    role: guest
+  - actor: aistulf
+    role: host
+  - actor: john-the-silentiary
+    role: participant
+  - actor: chrodegang-of-metz
+    role: participant
+  - actor: autchar
+    role: participant
+cites:
+  summary:
+    - id: pavia-arrival-753-refusal
+      says: The life says neither the pope's entreaties nor the imperial envoy's letters obtained anything from the king, and that the Frankish envoys pressed him to release the pope for Francia.
+      source: liber-pontificalis
+      at: Sed nullo modo apud eum impetrare valuit. Nam et imperialis missus … nihil obtinere potuit. Praedicti vero Francorum missi inminebant fortiter apud eundem Aistulfum ut praefatum sanctissimum papam Franciam pergere relaxaret
+notes:
+  The life also reports a fiery sign in the sky about forty miles before the Lombard border; it is a
+  portent in a partisan account and is not recorded as an event.

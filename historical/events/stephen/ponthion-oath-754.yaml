@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In the palace oratory at Ponthion the pope begs Pepin with tears to settle the cause of St Peter
+  and of the respublica, and the king swears to obey him in everything and to restore the exarchate
+  of Ravenna and the rights and places of the respublica.
+types: [exchange]
+date:
+  value: 754-01-06
+  calendar: julian
+  as_written: Ibique intus oratorium pariter consedentes
+  cite:
+    - id: ponthion-oath-754-time
+      says: The life places the oath in the palace oratory on the day of the meeting.
+      source: liber-pontificalis
+      at: Ibique intus oratorium pariter consedentes, mox ibidem beatissimus papa praefatum christianissimum regem lacrimabiliter deprecatus est
+places:
+  - place: ponthion
+    role: site
+participants:
+  - actor: pepin-the-short
+    role: leader
+  - actor: stephen-ii
+    role: participant
+cites:
+  summary:
+    - id: ponthion-oath-754-oath
+      says: The life says the king swore to obey the pope's commands and to restore the exarchate of Ravenna and the rights and places of the respublica.
+      source: liber-pontificalis
+      at: Qui de praesenti iureiurando eundem beatissimum papam satisfecit … et ut illi placitum fuerit exarchatum Ravennae et reipublice iura seu loca reddere modis omnibus
+notes: The oath is reported only by the papal life. The Frankish sources say the pope asked for help
+  against the Lombards; they do not report an oath at Ponthion.

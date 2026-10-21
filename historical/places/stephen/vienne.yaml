@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Vienne on the Rhône, on the army's road in the first campaign, where the monk Carloman stayed ill with Queen Bertrada and died.
+types: [settlement]
+names:
+  - form: Vienna
+    lang: la
+    script: Latn
+    cite:
+      - id: vienne-name
+        says: The annals name the city of Vienna where Carloman stayed.
+        source: annales-regni-francorum
+        at: "s.a. 755: Carlomannus autem monachus Vienna civitate remansit"
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [4.8747, 45.5256]
+    notes: Placed at the coordinate Wikidata records for Vienne (Q26849), the modern locality identified with the place the sources name.
+    cite:
+      - id: vienne-point
+        says: The point is the coordinate Wikidata records for Vienne; the identification with the place the sources name is editorial.
+        source: wikidata
+        at: Q26849 (P625), revision 2550823548
+modern:
+  - form: Vienne
+    lang: fr
+    script: Latn
+    note: Modern town, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q26849
+    url: https://www.wikidata.org/wiki/Q26849
+    license: CC0-1.0

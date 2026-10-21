@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The imperial envoys sail to Marseille, where they learn that Pepin has already entered Lombard
+  territory, and try to hold back the pope's envoy there so that he does not reach the king.
+types: [journey, mission]
+date:
+  value: 754..755
+  mode: window
+  calendar: julian
+  as_written: Et pergentes marino itinere quantotius Maxiliam advenerunt
+  cite:
+    - id: imperial-envoys-marseille-754-time
+      says: The life gives no date; the window is the campaign's.
+      source: liber-pontificalis
+      at: Et pergentes marino itinere quantotius Maxiliam advenerunt. In quam ingredientes, didicerunt iam praedictum Francorum regem Langobardorum fines fuisse ingressum
+places:
+  - place: massalia
+    role: site
+participants:
+  - actor: george-protoasecretis
+    role: leader
+  - actor: john-the-silentiary
+    role: participant
+cites:
+  summary:
+    - id: imperial-envoys-marseille-754-detain
+      says: The life says the envoys, saddened, tried to keep the pope's envoy at Marseille so that he would not hurry to the king.
+      source: liber-pontificalis
+      at: nitebantur dolore missum apostolice sedis detinere Maxiliam, ut minime ad praedictum properaret regem
+notes: The sea leg from Rome to Marseille is stated ("marino itinere"); no route is drawn.

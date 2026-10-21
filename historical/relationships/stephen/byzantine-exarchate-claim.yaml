@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  The emperor's claim, made through George the protoasecretis near Pavia, that Ravenna and the cities
+  of the exarchate be returned to imperial rule; Pepin refused it.
+types: [diplomacy]
+from: actor:byzantine-empire
+to: actor:pepin-the-short
+date:
+  value: 754..755
+  mode: window
+  calendar: julian
+  as_written: ut Ravennantium urbem vel cetera eiusdem exarcatus civitates et castra imperiali tribuens concederet ditioni
+cite:
+  - id: byzantine-exarchate-claim-basis
+    says: The life says George begged the king, promising imperial gifts, to grant Ravenna and the other cities and forts of the exarchate to the emperor's rule, and could not move him.
+    source: liber-pontificalis
+    at: nimis eum deprecans atque plura spondens tribui imperialia munera ut Ravennantium urbem vel cetera eiusdem exarcatus civitates et castra imperiali tribuens concederet ditioni. Et nequaquam valuit

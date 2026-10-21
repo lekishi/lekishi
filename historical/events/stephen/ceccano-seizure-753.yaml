@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  While the Lombards press on Rome and all its forts, they seize the fort of Ceccano, which belonged
+  to the tenants of the holy church of God.
+types: [occurrence]
+date:
+  value: 752..753
+  mode: window
+  calendar: julian
+  as_written: ita etiam ut et Ciccanense castellum … usurparet
+  cite:
+    - id: ceccano-seizure-753-time
+      says: The life places the seizure just before John the silentiary came back from Constantinople; it gives no date.
+      source: liber-pontificalis
+      at: ita etiam ut et Ciccanense castellum, quod colonorum sanctae Dei ecclesiae existebat, usurparet ilico a regia urbe coniunxit sepefatus Iohannis
+places:
+  - place: ceccano
+    role: site
+participants:
+  - actor: lombard-kingdom
+    role: leader
+cites:
+  places:
+    - id: ceccano-seizure-753-place
+      says: The life names the Ciccanense castellum as a fort of the church's tenants taken by the Lombards.
+      source: liber-pontificalis
+      at: Ciccanense castellum, quod colonorum sanctae Dei ecclesiae existebat

@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Aistulf sues for peace a second time. By the judgement of the Franks and the bishops he hands over a
+  third of the treasure in Pavia and larger gifts than before, renews his oaths and hostages, agrees
+  to pay a yearly tribute, and gives up Ravenna, the Pentapolis and the whole exarchate, which Pepin
+  hands to St Peter.
+types: [exchange, campaign]
+part_of: [second-italian-campaign-756]
+date:
+  value: "756"
+  calendar: julian
+  as_written: s.a. 756 (the annals)
+  cite:
+    - id: pavia-peace-756-time
+      says: The annals record under 756 that the king took Ravenna with the Pentapolis and all the exarchate and handed them to St Peter.
+      source: annales-regni-francorum
+      at: "s.a. 756: et insuper Ravennam cum Pentapolim et omni Exarcatu conquisivit et sancto Petro tradidit"
+places:
+  - place: pavia
+    role: site
+participants:
+  - actor: pepin-the-short
+    role: leader
+  - actor: aistulf
+    role: participant
+cites:
+  summary:
+    - id: pavia-peace-756-treasure
+      says: The continuations say Aistulf gave the king a third of the treasure at Ticinum and agreed that the Lombards would pay their old yearly tribute.
+      source: fredegar-continuations
+      at: CXXI
+      quote: thesaurum qui in Ticino erat, id est tertiam partem, praedicto regi tradidit; et tributa quae Langobardi regi Francorum a longo tempore dederant, annis singulis per missos suos desolvere deberent

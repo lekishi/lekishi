@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Aistulf, king of the Lombards from 749 to 756. The papal life makes him the aggressor who broke a
+  forty-year peace, threatened Rome with a poll tax, and received Stephen at Pavia in 753 without
+  yielding. Defeated by the Franks at the Alpine passes and besieged in Pavia in 754 and 756, he
+  promised to restore Ravenna and the cities of the exarchate, and died in a hunting accident in
+  756.
+types: [person]
+names:
+  - form: Aistulfus
+    lang: la
+    script: Latn
+    cite:
+      - id: aistulf-name
+        says: The papal life calls him Aistulfus, king of the Lombards.
+        source: liber-pontificalis
+        at: dum magna persecutio a Langobardorum rege Aistulfo in hac Romana urbe … extitisset
+  - form: Haistulfus
+    lang: la
+    script: Latn
+    role: alternate
+    note: The spelling of the Royal Frankish Annals.
+    cite:
+      - id: aistulf-name-annals
+        says: The Frankish annals spell the name Haistolfus and Haistulfus.
+        source: annales-regni-francorum
+        at: "s.a. 755: Haistolfus Langobardorum rex; Incluso vero Haistulfo rege in Papia civitate"
+roles:
+  - role: ruler
+    note: King of the Lombards; documented in the chapter from 752 to his death in 756.
+    date:
+      value: 752..756
+      mode: duration
+      calendar: julian
+      as_written: Langobardorum rex (the life, 752–756)
+    cite:
+      - id: aistulf-role
+        says:
+          The life calls him king of the Lombards from the peace of Stephen's first months to his
+          death while hunting.
+        source: liber-pontificalis
+        at: ad eundem Langobardorum Aistulfum regem ob pacis ordinandum; ipse infelix Aistulfus quodam loco in venatione pergens, divino ictu percussus defunctus est
+notes:
+  Every source the chapter uses is papal or Frankish and hostile to him; no Lombard account of these
+  years survives in the chapter's sources.

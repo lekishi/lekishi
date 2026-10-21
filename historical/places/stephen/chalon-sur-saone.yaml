@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Chalon on the Saône, on Pepin's road through Burgundy in the second campaign.
+types: [settlement]
+names:
+  - form: Cavalonnum
+    lang: la
+    script: Latn
+    cite:
+      - id: chalon-sur-saone-name
+        says: The continuations name the city of Cavalonnum on the road through Burgundy.
+        source: fredegar-continuations
+        at: CXXI
+        quote: per Burgundiam, per Cavalonnum urbem
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [4.8539, 46.7811]
+    notes: Placed at the coordinate Wikidata records for Chalon-sur-Saône (Q203645), the modern locality identified with the place the sources name.
+    cite:
+      - id: chalon-sur-saone-point
+        says: The point is the coordinate Wikidata records for Chalon-sur-Saône; the identification with the place the sources name is editorial.
+        source: wikidata
+        at: Q203645 (P625), revision 2529367101
+modern:
+  - form: Chalon-sur-Saône
+    lang: fr
+    script: Latn
+    note: Modern town, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q203645
+    url: https://www.wikidata.org/wiki/Q203645
+    license: CC0-1.0

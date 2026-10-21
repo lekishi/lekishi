@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  John the silentiary comes back to Rome from Constantinople with the pope's envoys and Aistulf's
+  envoy, bringing an imperial order that the pope himself go to the Lombard king to recover Ravenna
+  and its cities. Stephen sends to Aistulf for a safe-conduct.
+types: [mission]
+date:
+  value: "753"
+  calendar: julian
+  as_written: ilico a regia urbe coniunxit sepefatus Iohannis imperialis silentiarius
+  cite:
+    - id: john-silentiary-return-753-time
+      says:
+        The life has the silentiarius return, the safe-conduct sought and the Frankish envoys arrive
+        in quick succession just before the pope set out in October 753; the year is editorial.
+      source: liber-pontificalis
+      at: ilico a regia urbe coniunxit sepefatus Iohannis imperialis silentiarius cum missis ipsius sanctissimi pontificis; ipsoque reverso, extemplo et missi iamfati Pippini regis Francorum coniunxerunt
+places:
+  - place: rome
+    role: site
+participants:
+  - actor: john-the-silentiary
+    role: participant
+  - actor: stephen-ii
+    role: host
+cites:
+  summary:
+    - id: john-silentiary-return-753-order
+      says: The life says the imperial order told the pope to go to the Lombard king to recover the city of Ravenna and the cities belonging to it.
+      source: liber-pontificalis
+      at: simul et iussionem imperialem in qua inherit insertum ad Langobardorum regem eundem sanctissimus papam esse properaturum, ob recipiendum Ravennantium urbem et civitates ei pertinentes

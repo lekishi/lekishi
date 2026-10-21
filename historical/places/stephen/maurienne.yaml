@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: The Maurienne, the valley of the Arc below the Mont Cenis, where the Frankish host halted in both campaigns.
+types: [region]
+names:
+  - form: Maurienna
+    lang: la
+    script: Latn
+    cite:
+      - id: maurienne-name
+        says: The continuations say the host came as far as the Maurienne.
+        source: fredegar-continuations
+        at: CXX
+        quote: usque Mauriennam pervenerunt
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [6.6667, 45.2]
+    notes: Placed at the coordinate Wikidata records for Maurienne (Q1242274), the modern area identified with the place the sources name.
+    cite:
+      - id: maurienne-point
+        says: The point is the coordinate Wikidata records for Maurienne; the identification with the place the sources name is editorial.
+        source: wikidata
+        at: Q1242274 (P625), revision 2553156055
+modern:
+  - form: Maurienne
+    lang: fr
+    script: Latn
+    note: The modern name of the valley.
+external_ids:
+  - system: wikidata
+    id: Q1242274
+    url: https://www.wikidata.org/wiki/Q1242274
+    license: CC0-1.0
+notes: A valley, placed by a single point at region precision; no extent is drawn.

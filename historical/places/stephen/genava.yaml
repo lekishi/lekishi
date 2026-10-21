@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Geneva, read for the continuations' Janua on Pepin's road from Chalon to the Maurienne in 756.
+types: [settlement]
+names:
+  - form: Janua
+    lang: la
+    script: Latn
+    note: The continuations' form; read here as Geneva (Genava), not Genoa.
+    cite:
+      - id: genava-name
+        says: The continuations name Janua between Chalon and the Maurienne.
+        source: fredegar-continuations
+        at: CXXI
+        quote: et inde per Januam usque Mauriennam veniens
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [6.15, 46.2]
+    notes: Placed at the coordinate Wikidata records for Geneva (Q71), the modern locality identified with the place the sources name.
+    cite:
+      - id: genava-point
+        says: The point is the coordinate Wikidata records for Geneva; the identification with the place the sources name is editorial.
+        source: wikidata
+        at: Q71 (P625), revision 2559280890
+modern:
+  - form: Genève
+    lang: fr
+    script: Latn
+    note: Modern city, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q71
+    url: https://www.wikidata.org/wiki/Q71
+    license: CC0-1.0
+notes: Janua usually names Genoa, which is off this road. Between Chalon and the Maurienne the place is read as Geneva; the reading is editorial.

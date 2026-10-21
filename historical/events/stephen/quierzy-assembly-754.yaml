@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Pepin goes to Quierzy, gathers all the great men of his realm, and resolves with them to carry out
+  what he had agreed with the pope.
+types: [council]
+date:
+  value: "754"
+  calendar: julian
+  as_written: in loco qui Carisiacus appellatur pergens ibique congregans cunctos proceres regiae suae potestatis
+  cite:
+    - id: quierzy-assembly-754-time
+      says: The life places the assembly after the anointing and the pope's illness at Saint-Denis; it gives no date.
+      source: liber-pontificalis
+      at: Pippinus vero iamfatus rex … in loco qui Carisiacus appellatur pergens ibique congregans cunctos proceres regiae suae potestatis
+places:
+  - place: quierzy
+    role: site
+participants:
+  - actor: pepin-the-short
+    role: leader
+  - actor: frankish-kingdom
+    role: participant
+cites:
+  summary:
+    - id: quierzy-assembly-754-resolve
+      says: The life says he resolved with them to carry out what he had once decreed with the pope.
+      source: liber-pontificalis
+      at: statuit cum eis que semel Christo favente una cum eodem beatissimo papa decreverat perficere
+notes: The life tells the anointing before the Quierzy assembly; the chapter does not order the two
+  within 754. Later tradition calls what was agreed here the Donation of Pepin, a name the sources
+  used here do not give.

@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Rome, the city of the popes, from which Stephen II set out on 14 October 753 and to which he returned with a Frankish escort after the peace of Pavia. Aistulf besieged it for three months before the second Frankish campaign.
+types: [settlement]
+names:
+  - form: Roma
+    lang: la
+    script: Latn
+    cite:
+      - id: rome-name
+        says: The life names the city Roma, the Romana urbs from which the pope set out.
+        source: liber-pontificalis
+        at: Et dum haec agerentur, coniunxit Roma Iohannis, imperialis silentiarius
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [12.4828, 41.8931]
+    notes: Placed at the coordinate Wikidata records for Rome (Q220), the modern locality identified with the place the sources name.
+    cite:
+      - id: rome-point
+        says: The point is the coordinate Wikidata records for Rome; the identification with the place the sources name is editorial.
+        source: wikidata
+        at: Q220 (P625), revision 2556161741
+modern:
+  - form: Roma
+    lang: it
+    script: Latn
+    note: Modern city, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q220
+    url: https://www.wikidata.org/wiki/Q220
+    license: CC0-1.0

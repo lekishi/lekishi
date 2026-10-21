@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  George the protoasecretis, going ahead of the pope's envoy, overtakes Pepin inside Lombard
+  territory not far from Pavia and begs him, with promises of imperial gifts, to give Ravenna and the
+  cities of the exarchate back to the emperor. Pepin refuses: he fought, he says, for St Peter and
+  would not take back what he had offered him.
+types: [mission]
+date:
+  value: 754..755
+  mode: window
+  calendar: julian
+  as_written: Quem et in finibus Langobardorum non procul a Papia repperit civitate
+  cite:
+    - id: george-meets-pepin-754-time
+      says: The life gives no date; George found the king during the siege of Pavia.
+      source: liber-pontificalis
+      at: celeriter praenominatum Francorum adsecutus est christianissimum regem. Quem et in … finibus Langobardorum non procul a Papia repperit civitate
+places:
+  - place: pavia
+    role: context
+    note: The life says only "not far from Pavia", so the meeting is not placed at the city.
+participants:
+  - actor: george-protoasecretis
+    role: guest
+  - actor: pepin-the-short
+    role: host
+  - actor: byzantine-empire
+    role: participant
+cites:
+  summary:
+    - id: george-meets-pepin-754-refusal
+      says: The life says the king answered that on no account would those cities be taken from the power of St Peter and the Roman church, and sent the envoy home by another road.
+      source: liber-pontificalis
+      at: asserens isdem Dei cultor mitissimus rex nulla penitus ratione easdem civitates a potestate beati Petri et iure ecclesie Romanae … alienari; continuo eum ad propria remeandum per aliam viam absolsit
+notes:
+  The life is the only source and states the papal claim to the exarchate in the king's mouth; it is
+  evidence of the papal position, not of Pepin's words.

@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  After Aistulf's death the duke Desiderius seizes the kingship with the army of Tuscia. Opposed by
+  Ratchis, he asks the pope's help and swears to return the remaining cities; the pope sends his
+  brother Paul and Fulrad to him, and Desiderius becomes king without bloodshed.
+types: [occurrence]
+date:
+  value: 756..757
+  mode: window
+  calendar: julian
+  as_written: ut sine ulla animarum periclitatione antefatus Desiderius … adsumeret regalem dignitatem
+  cite:
+    - id: desiderius-accession-757-time
+      says: The life tells the accession after Aistulf's death in 756 and before Stephen's own death in April 757.
+      source: liber-pontificalis
+      at: Dum ergo haec agerentur, ipse infelix Aistulfus … defunctus est. Tunc Desiderius quidam dux Langobardorum … regni Langobardorum arripere nisus est fastigium
+participants:
+  - actor: desiderius
+    role: leader
+  - actor: ratchis
+    role: participant
+  - actor: stephen-ii
+    role: participant
+  - actor: paul-i
+    role: participant
+  - actor: fulrad
+    role: participant
+cites:
+  summary:
+    - id: desiderius-accession-757-oath
+      says: The life says Desiderius swore in a written page to fulfil his promise and that he professed he would restore the cities that remained.
+      source: liber-pontificalis
+      at: Cum quo loquentes confestim conscriptam paginam terribili iuramento isdem Desiderius cunctam professus est superius adnexam sponsionem adimplere
+    - id: desiderius-accession-757-revised
+      says: The revised annals say Desiderius, Aistulf's constable, succeeded him.
+      role: supporting
+      source: annales-qui-dicuntur-einhardi
+      at: "s.a. 756: Cui Desiderius, qui comes stabuli eius erat, successit in regnum"
+notes: The life gives no place for the accession; Tuscia is named only as Desiderius's command.

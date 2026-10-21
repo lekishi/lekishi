@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Because winter is coming on, Pepin asks the pope to winter with all his company at the monastery of
+  St Denis near Paris, and has him lodged there with great care.
+types: [journey]
+part_of: [stephen-journey-753]
+date:
+  value: 754-01-06..754-12-31
+  mode: window
+  calendar: julian
+  as_written: Sed quia tempus inminebat hyemalis
+  cite:
+    - id: saint-denis-winter-754-time
+      says: The life has the pope go to Saint-Denis after the meeting of 6 January because winter was at hand; it gives no date for the arrival.
+      source: liber-pontificalis
+      at: Sed quia tempus inminebat hyemalis, eundem sanctissimum papam cum suis omnibus in Parisio apud venerabilem monasterium beati Dionisii ad exhibernandum pergere rogavit
+places:
+  - place: saint-denis-abbey
+    role: end
+participants:
+  - actor: stephen-ii
+    role: guest
+  - actor: pepin-the-short
+    role: host
+cites:
+  places:
+    - id: saint-denis-winter-754-place
+      says: The continuations say the king ordered the pope to winter near the city of Paris in the monastery of St Denis the martyr.
+      source: fredegar-continuations
+      at: CXIX
+      quote: Tunc Pippinus rex praefato Stephano papa apud Parisius civitatem in monasterio sancti Dionysii martyris, cum ingenti cura et multa diligentia, hiemare praecepit
+notes:
+  This event is the pope's arrival to winter; the window is the year because the sources give no
+  day. The revised annals say only that he stayed the winter in Francia.

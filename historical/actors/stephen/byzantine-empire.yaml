@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  The Roman empire ruled from Constantinople (the "regia urbs"), whose envoys brought the emperor's
+  orders to Rome in 752–753 and asked Pepin in 754 to return Ravenna to imperial rule. The papal
+  life calls its territory in Italy the "respublica".
+types: [state]
+names:
+  - form: respublica Romanorum
+    lang: la
+    script: Latn
+    cite:
+      - id: byzantine-empire-name
+        says:
+          The life speaks of the imperial envoys and of the rights and places of the respublica that
+          Aistulf had seized.
+        source: liber-pontificalis
+        at: reipublicae loca diabolico ab eo usurpata ingenio proprio restituerent dominio
+  - form: Byzantine Empire
+    lang: en
+    script: Latn
+    role: alternate
+    note: The modern name; the sources say empire, emperor and respublica.
+    claim: byzantine-empire-name
+notes: "The state actor carries no roles: the role vocabulary is person-oriented."

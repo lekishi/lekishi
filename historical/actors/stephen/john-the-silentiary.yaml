@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  John, imperial silentiarius, the Byzantine envoy who brought the emperor's orders to Rome in 752
+  or 753, went with Stephen's brother Paul to Aistulf at Ravenna, returned with the order that the
+  pope go to the Lombard king, accompanied him to Pavia, and came west again with George in 754.
+types: [person]
+names:
+  - form: Iohannis
+    lang: la
+    script: Latn
+    cite:
+      - id: john-silentiary-name
+        says: The life names Iohannis, the imperial silentiarius, bringing the emperor's order to Rome.
+        source: liber-pontificalis
+        at: coniunxit Roma Iohannis, imperialis silentiarius, deferens eidem sanctissimo pontifici iussionem
+roles:
+  - role: envoy
+    note: Imperial silentiarius (a palace official) sent by the emperor.
+    date:
+      value: 752..755
+      mode: duration
+      calendar: julian
+      as_written: Iohannis imperialis silentiarius
+    cite:
+      - id: john-the-silentiary-role
+        says: The life names Iohannis, the imperial silentiarius, bringing the emperor's order to Rome.
+        source: liber-pontificalis
+        at: coniunxit Roma Iohannis, imperialis silentiarius, deferens eidem sanctissimo pontifici iussionem

@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Stephen leads a penitential litany through Rome, carrying on his own shoulder the icon of the
+  Saviour called acheiropoieta, barefoot with all the people, to the church of the Mother of God ad
+  Praesepem, with the broken treaty tied to the cross.
+types: [occurrence]
+date:
+  value: 752..753
+  mode: window
+  calendar: julian
+  as_written: In una vero dierum cum multa humilitate solite procedens in letania
+  cite:
+    - id: acheiropoieta-procession-752-time
+      says: The life places the litany during Aistulf's threats, before the journey; it gives no date.
+      source: liber-pontificalis
+      at: In una vero dierum cum multa humilitate solite procedens in letania cum sacralissima imagine domini Dei et salvatoris nostri Iesu Christi quae acheropsita nuncupatur
+places:
+  - place: santa-maria-maggiore
+    role: end
+participants:
+  - actor: stephen-ii
+    role: leader
+cites:
+  places:
+    - id: acheiropoieta-procession-752-place
+      says: The life says the procession went barefoot, with ashes on every head, to the church of the holy Mother of God called ad Praesepem.
+      source: liber-pontificalis
+      at: in ecclesia sanctae Dei genetricia quae ad Praesepem nuncupatur posita in omnium capitibus populorum cinere
+  summary:
+    - id: acheiropoieta-procession-752-treaty
+      says: The life says the pope fastened to the cross the pact the Lombard king had broken.
+      source: liber-pontificalis
+      at: alligans connectensque adorande cruci domini Dei nostri pactum scilicet illum quem nefandus rex Langobardorum disruperat
+notes:
+  A religious act in the city, not a journey; the procession's route through Rome is not given and is
+  not drawn.

@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: The church of the holy Mother of God ad Praesepem in Rome, the goal of Stephen II's barefoot litany with the acheiropoieta icon before the journey.
+types: [religious_site]
+names:
+  - form: sancta Dei genetrix ad Praesepem
+    lang: la
+    script: Latn
+    cite:
+      - id: santa-maria-maggiore-name
+        says: The life names the church of the holy Mother of God called ad Praesepem.
+        source: liber-pontificalis
+        at: in ecclesia sanctae Dei genetricia quae ad Praesepem nuncupatur
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [12.4986, 41.8975]
+    notes: Placed at the coordinate Wikidata records for Basilica di Santa Maria Maggiore (Q186282), the modern site identified with the place the sources name.
+    cite:
+      - id: santa-maria-maggiore-point
+        says: The point is the coordinate Wikidata records for Basilica di Santa Maria Maggiore; the identification with the place the sources name is editorial.
+        source: wikidata
+        at: Q186282 (P625), revision 2532140452
+modern:
+  - form: Basilica di Santa Maria Maggiore
+    lang: it
+    script: Latn
+    note: The same church, the modern name.
+external_ids:
+  - system: wikidata
+    id: Q186282
+    url: https://www.wikidata.org/wiki/Q186282
+    license: CC0-1.0

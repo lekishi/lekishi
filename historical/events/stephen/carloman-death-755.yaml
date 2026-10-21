@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: Carloman dies at Vienne after a long illness, before the king comes back from Italy.
+types: [occurrence]
+date:
+  value: 754..755
+  mode: window
+  calendar: julian
+  as_written: languebat dies multos et obiit in pace (s.a. 755)
+  cite:
+    - id: carloman-death-755-time
+      says: The annals record his death at Vienne in their entry for 755; the revised annals say he died of a fever before the king returned from Italy.
+      sources:
+        - source: annales-regni-francorum
+          at: "s.a. 755: Carlomannus autem monachus Vienna civitate remansit … languebat dies multos et obiit in pace"
+        - source: annales-qui-dicuntur-einhardi
+          at: "s.a. 755: priusquam rex de Italia reverteretur febre correptus, diem obiit"
+places:
+  - place: vienne
+    role: site
+participants:
+  - actor: carloman-mayor
+    role: subject
+notes:
+  The window covers the annals' 755 and the papal life's order, which tells his death before the
+  campaign; the chapter does not choose a year.

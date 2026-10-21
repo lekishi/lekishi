@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The pope and the king, agreeing that Carloman had vowed himself to the monastic life, place him in a
+  monastery in Francia. The annals say he stayed at Vienne with Queen Bertrada, ill, while the king
+  was in Italy.
+types: [occurrence]
+date:
+  value: 754..755
+  mode: window
+  calendar: julian
+  as_written: in monasterio eum illuc Franciam collocaverunt (the life); Vienna civitate remansit (s.a. 755)
+  cite:
+    - id: carloman-vienne-754-time
+      says: The annals record the stay at Vienne in their entry for 755, the year they give the first Italian campaign.
+      source: annales-regni-francorum
+      at: "s.a. 755: Carlomannus autem monachus Vienna civitate remansit una cum Bertradane reginae infirmus, languebat dies multos"
+places:
+  - place: vienne
+    role: site
+participants:
+  - actor: carloman-mayor
+    role: subject
+  - actor: bertrada-of-laon
+    role: participant
+cites:
+  summary:
+    - id: carloman-vienne-754-life
+      says: The life says the pope and the king agreed to place him in a monastery in Francia, since he had vowed the monastic life.
+      source: liber-pontificalis
+      at: iuxta id quod praefatus Carolomannus Deo se devoverat monachicam degere vitam, in monasterio eum illuc Franciam collocaverunt
+notes:
+  The life does not name the monastery; the annals name Vienne. The two are recorded as one stay
+  because both put it between his coming and his death.

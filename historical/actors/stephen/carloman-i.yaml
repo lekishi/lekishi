@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Carloman, Pepin's younger son, anointed king with his father and brother by Stephen II in 754.
+  Not to be confused with his uncle Carloman, the monk of Monte Cassino who came to Francia to oppose
+  the pope.
+types: [person]
+names:
+  - form: Carlomannus
+    lang: la
+    script: Latn
+    cite:
+      - id: carloman-i-name
+        says: The annals name Carlomannus as the second of Pepin's two sons anointed by Stephen.
+        source: annales-regni-francorum
+        at: "s.a. 754: cum eo inunxit duos filios eius, domnum Carolum et Carlomannum, in regibus"
+  - form: Carloman I
+    lang: en
+    script: Latn
+    role: alternate
+    note: The modern numbering, which keeps him apart from his uncle.
+    claim: carloman-i-name

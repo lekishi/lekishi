@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  The Roman church, the see of St Peter, in whose name Stephen II sought "the rights of St Peter" and
+  to which Pepin handed Ravenna and the cities of the exarchate in 756.
+types: [religious_body]
+names:
+  - form: sancta Romana ecclesia
+    lang: la
+    script: Latn
+    cite:
+      - id: roman-church-name
+        says:
+          The life records Aistulf's written donation of the returned cities to St Peter and the holy
+          Roman church, kept in the church's archive.
+        source: liber-pontificalis
+        at: donationem in scriptis beato Petro atque sancte Romane ecclesiae vel omnibus in perpetuum pontificibus apostolice sedis emisit possidendas
+  - form: Roman church
+    lang: en
+    script: Latn
+    role: alternate
+    claim: roman-church-name
+notes: Recorded as a religious body rather than a state. The papal state that grew from the 754–756
+  donations is a later, interpreted category and is not asserted here.

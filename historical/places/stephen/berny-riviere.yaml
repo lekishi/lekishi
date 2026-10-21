@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Berny (Bernacum), the royal estate where Pepin summoned the Franks on the Kalends of March.
+types: [settlement]
+names:
+  - form: Bernacum
+    lang: la
+    script: Latn
+    cite:
+      - id: berny-riviere-name
+        says: The continuations name the royal estate of Bernacum.
+        source: fredegar-continuations
+        at: CXX
+        quote: Bernaco villa publica ad se venire praecepit
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [3.14, 49.4067]
+    notes: Placed at the coordinate Wikidata records for Berny-Rivière (Q334226), the modern locality identified with the place the sources name.
+    cite:
+      - id: berny-riviere-point
+        says: The point is the coordinate Wikidata records for Berny-Rivière; the identification with the place the sources name is editorial.
+        source: wikidata
+        at: Q334226 (P625), revision 2545808248
+modern:
+  - form: Berny-Rivière
+    lang: fr
+    script: Latn
+    note: The modern village, with which the estate is identified.
+external_ids:
+  - system: wikidata
+    id: Q334226
+    url: https://www.wikidata.org/wiki/Q334226
+    license: CC0-1.0
+notes: The identification of Bernacum with Berny-Rivière (Aisne) is editorial.

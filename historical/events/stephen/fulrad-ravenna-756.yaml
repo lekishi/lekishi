@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Pepin sends his counsellor Abbot Fulrad to receive the cities. With Aistulf's envoys he goes to
+  Ravenna and enters each city of the Pentapolis and the Emilia in turn, taking hostages and the
+  leading men and the keys of the gates.
+types: [journey, mission]
+date:
+  value: "756"
+  calendar: julian
+  as_written: Ravennantium partes cum missis iamfati Aistulfi regis coniungens et per singulas ingrediens civitates
+  cite:
+    - id: fulrad-ravenna-756-time
+      says: The life tells Fulrad's mission after the second peace; it gives no date, and the year is the annals' for the peace.
+      source: liber-pontificalis
+      at: Praenominatus autem Fulradus venerabilis abbas et presbiter, Ravennantium partes cum missis iamfati Aistulfi regis coniungens et per singulas ingrediens civitates, tam Pentapoleos et Emiliae
+places:
+  - place: ravenna
+    role: site
+participants:
+  - actor: fulrad
+    role: leader
+cites:
+  summary:
+    - id: fulrad-ravenna-756-keys
+      says: The life says he took hostages from each city and brought their chief men and the keys of their gates with him.
+      source: liber-pontificalis
+      at: easque recipiens et obsides per unamquamque auferens atque primatos secum una cum claves portarum civitatum deferens, Romam coniunxit
+notes:
+  The life names twenty-two cities and Narni; only Ravenna has a place record, and the tour of the
+  other cities is not drawn.

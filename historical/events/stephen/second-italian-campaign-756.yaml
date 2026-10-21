@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Pepin's second Italian campaign: through Burgundy by Chalon and Geneva to the Maurienne, over the
+  Mont Cenis to the Lombard passes, which the Franks force again, and on to a second siege of Pavia,
+  where Aistulf yields a third of his treasure and the cities of the exarchate.
+types: [campaign]
+date:
+  value: "756"
+  calendar: julian
+  as_written: s.a. 756 (the annals)
+  cite:
+    - id: second-italian-campaign-756-time
+      says: The annals record the second campaign and siege of Pavia under 756.
+      source: annales-regni-francorum
+      at: "s.a. 756: iterum iter peragens in Italiam Papiam obsedit, Haistulfum inclusit"
+places:
+  - place: chalon-sur-saone
+    role: waypoint
+  - place: genava
+    role: waypoint
+  - place: maurienne
+    role: waypoint
+  - place: mont-cenis-pass
+    role: waypoint
+  - place: susa-valley
+    role: waypoint
+  - place: pavia
+    role: end
+participants:
+  - actor: pepin-the-short
+    role: leader
+  - actor: tassilo-iii
+    role: participant
+  - actor: aistulf
+    role: participant
+cites:
+  places:
+    - id: second-italian-campaign-756-places
+      says: The continuations give the road through Burgundy, by the city of Chalon and by Janua (Geneva), to the Maurienne, and over the Mont Cenis to the passes.
+      source: fredegar-continuations
+      at: CXXI
+      quote: commoto iterum omni exercitu Francorum per Burgundiam, per Cavalonnum urbem, et inde per Januam usque Mauriennam veniens; Rex Pippinus cum exercitu suo, monte Cinisio transacto, usque ad Clusas
+notes: The pope was in Rome during this campaign; it is part of the chapter's coda, not of his journey.

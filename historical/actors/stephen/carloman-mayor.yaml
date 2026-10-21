@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Carloman, Pepin's elder brother, once mayor of the palace, who became a monk at Monte Cassino in
+  the 740s. He came to Francia while Stephen II was there, to oppose the pope's request; he was kept
+  in a monastery, stayed ill at Vienne with Queen Bertrada, and died there, and his body was taken
+  back to Monte Cassino.
+types: [person]
+names:
+  - form: Carlomannus
+    lang: la
+    script: Latn
+    cite:
+      - id: carloman-mayor-name
+        says: The annals name Carlomannus, monk and brother of King Pepin, coming to Francia.
+        source: annales-regni-francorum
+        at: "s.a. 753: similiter et Carlomannus, monachus et germanus supradicti Pippini regis, per iussionem abbatis sui in Franciam venit"
+  - form: Carloman
+    lang: en
+    script: Latn
+    role: alternate
+    note: The former mayor of the palace; kept apart from his nephew Carloman I.
+    claim: carloman-mayor-name
+roles:
+  - role: monk
+    note: A monk of the monastery of St Benedict (Monte Cassino) since the 740s.
+    date:
+      value: 753..755
+      mode: duration
+      calendar: julian
+      as_written: monachus (s.a. 753, 755)
+    cite:
+      - id: carloman-mayor-role
+        says:
+          The annals record his monastic profession at St Benedict's at Monte Cassino and call him
+          monk when he comes to Francia and when he dies at Vienne.
+        source: annales-regni-francorum
+        at: "s.a. 746: ad sanctum Benedictum in Casinum usque pervenit et ibi monachus effectus est; s.a. 755: Carlomannus autem monachus Vienna civitate remansit"

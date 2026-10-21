@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Droctegang, abbot (of Jumièges), Pepin's envoy to Rome before the journey. The life records his
+  coming, and Stephen II's first letter to Pepin was carried back by him.
+types: [person]
+names:
+  - form: Trottigangus
+    lang: la
+    script: Latn
+    cite:
+      - id: droctegang-name
+        says: The life records the arrival of the Frankish king's envoy, Abbot Trottigangus.
+        source: liber-pontificalis
+        at: subito coniunxit missus iamfati regis Francorum, nomine Trottigangus abbas
+  - form: Droctegangus
+    lang: la
+    script: Latn
+    role: alternate
+    note: The letter's spelling.
+    cite:
+      - id: droctegang-name-letter
+        says: Stephen's letter to Pepin names the abbot Droctegangus as the king's faithful envoy.
+        source: codex-carolinus
+        at: "Ep. I: Presens Droctegangus abbas sacris liminibus … praesentatus; Etenim praesens Droctegangus, fidelis tuus missus"
+roles:
+  - role: envoy
+    date:
+      value: 752..753
+      mode: window
+      calendar: julian
+      as_written: Trottigangus abbas
+    cite:
+      - id: droctegang-role
+        says: The life records the arrival of the Frankish king's envoy, Abbot Trottigangus.
+        source: liber-pontificalis
+        at: subito coniunxit missus iamfati regis Francorum, nomine Trottigangus abbas
+notes: Neither source names his abbey; the identification with Jumièges is editorial.

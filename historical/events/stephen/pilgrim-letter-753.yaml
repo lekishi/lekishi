@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Finding no help from the emperor, Stephen sends a letter secretly by a pilgrim to Pepin, king of
+  the Franks, as his predecessors had written to Charles Martel, and keeps asking the king to send
+  envoys to fetch him.
+types: [exchange]
+date:
+  value: 752..753
+  mode: window
+  calendar: julian
+  as_written: clam per quendam peregrinum suas misit litteras Pippino, regi Francorum
+  cite:
+    - id: pilgrim-letter-753-time
+      says: The life places the secret letter after the litanies and before the coming of the Frankish envoys; it gives no date.
+      source: liber-pontificalis
+      at: ita et modo et ipse venerabilis pater, divina gratia inspirante, clam per quendam peregrinum suas misit litteras Pippino, regi Francorum
+places:
+  - place: rome
+    role: start
+participants:
+  - actor: stephen-ii
+    role: leader
+  - actor: pepin-the-short
+    role: subject
+cites:
+  summary:
+    - id: pilgrim-letter-753-precedent
+      says: The life compares the appeal with those of Gregory, Gregory and Zacharias to Charles, king of the Franks, against the Lombards.
+      source: liber-pontificalis
+      at: quemadmodum praedecessores eius beate memoriae domni Gregorius et Gregorius atque domnus Zacharias beatissimi pontifices Carolo excellentissime memorie regi Francorum direxerunt
+notes:
+  The letter itself does not survive in the Codex Carolinus. The pilgrim is unnamed and is not an
+  actor.

@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: The Ciccanense castellum, a fort of the Roman church's tenants seized by the Lombards in 752–753.
+types: [fortification]
+names:
+  - form: Ciccanense castellum
+    lang: la
+    script: Latn
+    cite:
+      - id: ceccano-name
+        says: The life names the Ciccanense castellum as a fort of the church's tenants.
+        source: liber-pontificalis
+        at: Ciccanense castellum, quod colonorum sanctae Dei ecclesiae existebat
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [13.3333, 41.5667]
+    notes: Placed at the coordinate Wikidata records for Ceccano (Q116706), the modern locality identified with the place the sources name.
+    cite:
+      - id: ceccano-point
+        says: The point is the coordinate Wikidata records for Ceccano; the identification with the place the sources name is editorial.
+        source: wikidata
+        at: Q116706 (P625), revision 2554403419
+modern:
+  - form: Ceccano
+    lang: it
+    script: Latn
+    note: The modern town, with which the castellum is identified.
+external_ids:
+  - system: wikidata
+    id: Q116706
+    url: https://www.wikidata.org/wiki/Q116706
+    license: CC0-1.0
+notes: The identification of the castellum with Ceccano is editorial; the point is the modern town.

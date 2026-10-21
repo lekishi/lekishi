@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Carloman, Pepin's brother and a monk of Monte Cassino, comes from his monastery to Francia to
+  oppose the pope's request and works hard to overturn the cause of the Roman church, but cannot move
+  the king.
+types: [journey]
+date:
+  value: 753..754
+  mode: window
+  calendar: julian
+  as_written: Eodemque anno … Carlomannus … in Franciam venit (s.a. 753); Interea … Franciae provinciam … direxit (the life)
+  cite:
+    - id: carloman-arrival-754-time
+      says:
+        The annals put his coming in the year of the pope's coming (753); the life puts it during the
+        assembly at Quierzy (754).
+      sources:
+        - source: annales-regni-francorum
+          at: "s.a. 753: similiter et Carlomannus, monachus et germanus supradicti Pippini regis, per iussionem abbatis sui in Franciam venit, quasi ad conturbandam petitionem apostolicam"
+        - source: liber-pontificalis
+          at: Interea nefandissimus Aistulfus Carolomannum fratrem benignissimi Pippini regis, a monasterio beati Benedicti … Franciae provinciam … direxit
+places:
+  - place: monte-cassino
+    role: start
+participants:
+  - actor: carloman-mayor
+    role: leader
+  - actor: pepin-the-short
+    role: subject
+cites:
+  participants:
+    - id: carloman-arrival-754-sender-life
+      says: The life says Aistulf sent him from the monastery of St Benedict, persuading him with diabolical counsel.
+      source: liber-pontificalis
+      at: Interea nefandissimus Aistulfus Carolomannum fratrem benignissimi Pippini regis, a monasterio beati Benedicti … diabolicis eum suasionibus suadens
+    - id: carloman-arrival-754-sender-annals
+      says: The annals say he came by order of his abbot.
+      role: alternative
+      source: annales-regni-francorum
+      at: "s.a. 753: per iussionem abbatis sui in Franciam venit"
+    - id: carloman-arrival-754-sender-revised
+      says: The revised annals say his abbot ordered it because the abbot dared not refuse the Lombard king, and that Carloman is thought to have come unwillingly.
+      role: supporting
+      source: annales-qui-dicuntur-einhardi
+      at: "s.a. 753: invitus tamen hoc fecisse putatur, quia nec ille abbatis sui iussa contempnere, nec abbas ille praeceptis regis Langobardorum, qui ei hoc imperavit, audebat resistere"
+dispute:
+  status: disputed
+  summary:
+    Who sent Carloman. The papal life says Aistulf sent him; the annals say his abbot ordered it; the
+    revised annals reconcile the two, with the abbot obeying the Lombard king. The chapter gives the
+    life's account first and keeps the others beside it.
+notes: Where in Francia he came to is not stated; the event records only his setting out from Monte
+  Cassino.

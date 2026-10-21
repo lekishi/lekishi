@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: The monastery of St Denis near Paris, where Stephen II wintered in 754, fell ill, and anointed Pepin and his sons.
+types: [religious_site]
+names:
+  - form: monasterium beati Dionisii
+    lang: la
+    script: Latn
+    cite:
+      - id: saint-denis-abbey-name
+        says: The life names the venerable monastery of blessed Denis at Paris.
+        source: liber-pontificalis
+        at: in Parisio apud venerabilem monasterium beati Dionisii ad exhibernandum
+  - form: monasterium sancti Dionysii
+    lang: la
+    script: Latn
+    role: alternate
+    note: The continuations' spelling.
+    cite:
+      - id: saint-denis-abbey-name-2
+        says: The continuations name the monastery of St Denis the martyr near Paris.
+        source: fredegar-continuations
+        at: CXIX
+        quote: apud Parisius civitatem in monasterio sancti Dionysii martyris
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [2.3597, 48.9356]
+    notes: Placed at the coordinate Wikidata records for Basilica of Saint-Denis (Q184407), the modern site identified with the place the sources name.
+    cite:
+      - id: saint-denis-abbey-point
+        says: The point is the coordinate Wikidata records for Basilica of Saint-Denis; the identification with the place the sources name is editorial.
+        source: wikidata
+        at: Q184407 (P625), revision 2551222896
+modern:
+  - form: Basilique Saint-Denis
+    lang: fr
+    script: Latn
+    note: The abbey church on the same site, rebuilt from the twelfth century.
+external_ids:
+  - system: wikidata
+    id: Q184407
+    url: https://www.wikidata.org/wiki/Q184407
+    license: CC0-1.0

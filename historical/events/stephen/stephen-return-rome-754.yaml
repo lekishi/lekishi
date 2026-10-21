@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  After the peace, the king sends the pope back to Rome with Fulrad and other Frankish envoys, and a
+  sizeable Frankish escort, and Stephen returns to the holy see.
+types: [journey]
+part_of: [first-italian-campaign-754]
+date:
+  value: 754..755
+  mode: window
+  calendar: julian
+  as_written: Eodemque anno Stephanus papa reductus est ad sanctam sedem (s.a. 755)
+  cite:
+    - id: stephen-return-rome-754-time
+      says: The annals put the pope's return under 755, the same year as the campaign.
+      source: annales-regni-francorum
+      at: "s.a. 755: Eodemque anno Stephanus papa reductus est ad sanctam sedem per missos domni regis Pippini, Folradum et reliquis, qui cum eo erant"
+places:
+  - place: rome
+    role: end
+participants:
+  - actor: stephen-ii
+    role: leader
+  - actor: fulrad
+    role: participant
+cites:
+  participants:
+    - id: stephen-return-rome-754-escort
+      says: The revised annals say the king sent Pope Stephen back to Rome with Fulrad the chaplain and no small band of Franks.
+      source: annales-qui-dicuntur-einhardi
+      at: "s.a. 755: et Stephanum papam cum Folrado presbytero capellano et non minima Francorum manu Romam remisit"
+notes:
+  The continuations add that he was restored to the apostolic see unharmed, with great honour and
+  many gifts. The road from Pavia to Rome is not described.

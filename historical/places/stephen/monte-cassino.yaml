@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: The monastery of St Benedict at Monte Cassino, where Pepin's brother Carloman was a monk and to which his body was carried back.
+types: [religious_site]
+names:
+  - form: monasterium beati Benedicti
+    lang: la
+    script: Latn
+    cite:
+      - id: monte-cassino-name
+        says: The life names the monastery of blessed Benedict where Carloman lived as a monk.
+        source: liber-pontificalis
+        at: a monasterio beati Benedicti, in quo devote per evolutum temporis spatium monachice degebat
+  - form: Casinum
+    lang: la
+    script: Latn
+    role: alternate
+    note: The annals' name.
+    cite:
+      - id: monte-cassino-name-2
+        says: The annals say Carloman went to St Benedict's at Casinum and became a monk.
+        source: annales-regni-francorum
+        at: "s.a. 746: inde ad sanctum Benedictum in Casinum usque pervenit et ibi monachus effectus est"
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [13.8139, 41.49]
+    notes: Placed at the coordinate Wikidata records for Monte Cassino (Q154372), the modern site identified with the place the sources name.
+    cite:
+      - id: monte-cassino-point
+        says: The point is the coordinate Wikidata records for Monte Cassino; the identification with the place the sources name is editorial.
+        source: wikidata
+        at: Q154372 (P625), revision 2532318373
+modern:
+  - form: Abbazia di Montecassino
+    lang: it
+    script: Latn
+    note: The abbey on the same site, rebuilt after 1944.
+external_ids:
+  - system: wikidata
+    id: Q154372
+    url: https://www.wikidata.org/wiki/Q154372
+    license: CC0-1.0

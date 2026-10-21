@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Stephen II, bishop of Rome from 752 to 757. In 753 he left Rome for the court of the Lombard king
+  Aistulf at Pavia and went on over the Alps to the Frankish king Pepin, whom he met at Ponthion at
+  Epiphany 754 and anointed king at Saint-Denis. He returned to Rome with a Frankish escort after
+  Pepin's first Italian campaign and was buried at St Peter's in 757.
+types: [person]
+names:
+  - form: Stephanus
+    lang: la
+    script: Latn
+    cite:
+      - id: stephen-ii-name
+        says: The papal life names him Stephanus, a Roman, son of Constantinus.
+        source: liber-pontificalis
+        at: STEPHANUS, natione Romanus, ex patre Constantino, sedit ann. V dies XXVIIII
+  - form: Stephen II
+    lang: en
+    script: Latn
+    role: alternate
+    note:
+      The usual English numbering. Some lists call him Stephen III, counting the priest Stephen who
+      was elected in 752 and died before his consecration.
+    claim: stephen-ii-name
+roles:
+  - role: other
+    note: Bishop of Rome (pope). The role vocabulary has no bishop; the office is stated here.
+    date:
+      value: 752..757
+      mode: duration
+      calendar: julian
+      as_written: sedit ann. V dies XXVIIII; sepultus est … VI kal. mai, indictione X
+    cite:
+      - id: stephen-ii-pontificate
+        says: The life gives his pontificate as five years and twenty-nine days and his burial at St
+          Peter's on the sixth day before the Kalends of May in the tenth indiction (26 April 757).
+        source: liber-pontificalis
+        at: sedit ann. V dies XXVIIII; Sepultus est in basilica beati Petri apostolorum principis, VI kal. mai, indictione X
+notes:
+  The life was written in his own circle and is the main source for his acts; the Frankish annals
+  and the continuations of Fredegar confirm the journey, the anointing and the return from the
+  Frankish side.

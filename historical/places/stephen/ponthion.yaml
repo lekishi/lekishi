@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Ponthion, the royal palace where Pepin received Stephen II on 6 January 754 and swore to restore the exarchate.
+types: [settlement]
+names:
+  - form: Ponticone
+    lang: la
+    script: Latn
+    cite:
+      - id: ponthion-name
+        says: The life names the king's palace in the place called Ponticone.
+        source: liber-pontificalis
+        at: in palatio suo, in loco qui vocatur Ponticone
+  - form: Pons Ugonis
+    lang: la
+    script: Latn
+    role: alternate
+    note: The continuations' form, villa publica.
+    cite:
+      - id: ponthion-name-2
+        says: The continuations call it the royal estate Pons Ugonis.
+        source: fredegar-continuations
+        at: CXIX
+        quote: qui usque ad Pontem Ugone, villa publica, ad ejus praesentiam adducere deberet
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [4.7114, 48.7583]
+    notes: Placed at the coordinate Wikidata records for Ponthion (Q681255), the modern locality identified with the place the sources name.
+    cite:
+      - id: ponthion-point
+        says: The point is the coordinate Wikidata records for Ponthion; the identification with the place the sources name is editorial.
+        source: wikidata
+        at: Q681255 (P625), revision 2526946170
+modern:
+  - form: Ponthion
+    lang: fr
+    script: Latn
+    note: The modern village, with which the palace is identified.
+external_ids:
+  - system: wikidata
+    id: Q681255
+    url: https://www.wikidata.org/wiki/Q681255
+    license: CC0-1.0
+notes: The palace's site is not located; the point is the modern village at locality precision.

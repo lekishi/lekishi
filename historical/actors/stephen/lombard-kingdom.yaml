@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  The kingdom of the Lombards (Langobardi), ruled from Pavia. Under Aistulf it held Ravenna and the
+  exarchate and pressed on Rome; the papal life and the Frankish sources call it the "gens
+  Langobardorum".
+types: [state]
+names:
+  - form: Langobardi
+    lang: la
+    script: Latn
+    cite:
+      - id: lombard-kingdom-name
+        says: The continuations of Fredegar speak of the people of the Lombards and their king Aistulf.
+        source: fredegar-continuations
+        at: CXIX
+        quote: auxilium petens contra gentem Langobardorum et eorum regem Aistulfum
+  - form: Lombards
+    lang: en
+    script: Latn
+    role: alternate
+    claim: lombard-kingdom-name
+notes: "The state actor carries no roles: the role vocabulary is person-oriented. Its acts are on the events and relationships."

@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Marseille, where the imperial envoys landed in 754 on their way to the Frankish king.
+types: [port]
+names:
+  - form: Maxilia
+    lang: la
+    script: Latn
+    cite:
+      - id: massalia-name
+        says: The life says the envoys came by sea to Maxilia.
+        source: liber-pontificalis
+        at: Et pergentes marino itinere quantotius Maxiliam advenerunt
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [5.3764, 43.2967]
+    notes: Placed at the coordinate Wikidata records for Marseille (Q23482), the modern locality identified with the place the sources name.
+    cite:
+      - id: massalia-point
+        says: The point is the coordinate Wikidata records for Marseille; the identification with the place the sources name is editorial.
+        source: wikidata
+        at: Q23482 (P625), revision 2553170403
+modern:
+  - form: Marseille
+    lang: fr
+    script: Latn
+    note: Modern city, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q23482
+    url: https://www.wikidata.org/wiki/Q23482
+    license: CC0-1.0

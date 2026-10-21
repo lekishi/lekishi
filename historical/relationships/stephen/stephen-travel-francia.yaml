@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: Stephen II travels from Rome by Pavia and the Alps to Pepin at Ponthion and on to winter at
+  Saint-Denis. The relationship records documented movement only and draws no route.
+types: [travel]
+from: actor:stephen-ii
+to: place:saint-denis-abbey
+date:
+  value: 753..754
+  mode: duration
+  calendar: julian
+  as_written: XIIII die octobrii mensis, indictionis VII — apud venerabilem monasterium beati Dionisii ad exhibernandum
+cite:
+  - id: stephen-travel-francia-basis
+    says: The life records his leaving Rome, his departure from Pavia, his arrival at Saint-Maurice, the meeting at Ponthion and his going to winter at Saint-Denis.
+    source: liber-pontificalis
+    at: egressus est ab hac Romana urbe … XIIII die octobrii; XV die novembris … a civitate Papia movens; ad venerabile monasterium … Mauricii; in loco qui vocatur Ponticone; apud venerabilem monasterium beati Dionisii
+notes: The dated stops are the journey's events; no geometry is attached.

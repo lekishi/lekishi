@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At the monastery of St Denis, Stephen II anoints Pepin king of the Franks, and with him his two
+  sons, Charles and Carloman.
+types: [occurrence]
+date:
+  value: "754"
+  calendar: julian
+  as_written: s.a. 754 (the annals); post aliquantos dies (the life)
+  cite:
+    - id: anointing-saint-denis-754-time
+      says: The annals record the anointing under 754.
+      source: annales-regni-francorum
+      at: "s.a. 754: Supradictus apostolicus Stephanus confirmavit Pippinum unctione sancta in regem et cum eo inunxit duos filios eius, domnum Carolum et Carlomannum, in regibus"
+places:
+  - place: saint-denis-abbey
+    role: site
+participants:
+  - actor: stephen-ii
+    role: leader
+  - actor: pepin-the-short
+    role: subject
+  - actor: charlemagne
+    role: subject
+  - actor: carloman-i
+    role: subject
+cites:
+  places:
+    - id: anointing-saint-denis-754-place
+      says: The life says that some days after the pope came to the monastery of St Denis, Pepin and his two sons were anointed kings of the Franks by him.
+      source: liber-pontificalis
+      at: Quo peracto et eo in eodem venerabile monasterio cum iamfato christianissimo Pippino coniungente … post aliquantos dies hisdem christianissimus Pippinus rex ab eodem sanctissimo papa … cum duobus filiis suis reges uncti sunt Francorum
+  summary:
+    - id: anointing-saint-denis-754-revised
+      says: The revised annals say the pope consecrated him king after receiving his promise to defend the Roman church.
+      role: supporting
+      source: annales-qui-dicuntur-einhardi
+      at: "s.a. 754: Stephanus papa postquam a rege Pippino ecclesiae Romanae defensionis firmitatem accepit, ipsum sacra unctione ad regiae dignitatis honorem consecravit"
+notes:
+  Pepin had already been anointed by Boniface in 750 (the annals' date); this is a second anointing,
+  by the pope. A later note from Saint-Denis gives a day in July and adds Queen Bertrada's blessing;
+  it is not among the chapter's sources yet, so the event keeps the year only.

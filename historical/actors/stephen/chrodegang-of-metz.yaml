@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Chrodegang, bishop (of Metz), one of the two Frankish envoys who came to Rome in 753 to bring
+  Stephen II to the king, and who was with him at Pavia before Aistulf.
+types: [person]
+names:
+  - form: Rodigangus
+    lang: la
+    script: Latn
+    cite:
+      - id: chrodegang-name
+        says:
+          The papal life names the king's envoys as Bishop Rodigangus and Duke Autcharius, sent to
+          bring the pope to the Frankish king.
+        source: liber-pontificalis
+        at: missi iamfati Pippini regis Francorum coniunxerunt, id est Rodigangus episcopus et Autcharius dux
+  - form: Chrodegang
+    lang: en
+    script: Latn
+    role: alternate
+    note:
+      The usual modern form. The life does not name his see; the identification with Chrodegang of
+      Metz is the standard editorial one.
+    claim: chrodegang-name
+roles:
+  - role: envoy
+    note: Pepin's envoy to Rome and companion of the pope to Pavia, 753.
+    date:
+      value: "753"
+      calendar: julian
+      as_written: Rodigangus episcopus (753)
+    cite:
+      - id: chrodegang-role
+        says: The life has the bishop present at Pavia when Aistulf asked the pope whether he meant to go to Francia.
+        source: liber-pontificalis
+        at: Alio vero die, praesente Rodigando sanctissimo episcopo, interrogavit eundem beatissimum papam

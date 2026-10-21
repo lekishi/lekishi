@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Stephen II goes back to Italy with Pepin's army, through Lyon, Vienne and the Maurienne to the
+  siege of Pavia, and is escorted from there to Rome by Fulrad. Documented movement only; no route.
+types: [travel]
+from: actor:stephen-ii
+to: place:rome
+date:
+  value: 754..755
+  mode: window
+  calendar: julian
+  as_written: cum Stephano papa … per Lugdunum Galliae et Viennam; Stephanus papa reductus est ad sanctam sedem (s.a. 755)
+cite:
+  - id: stephen-return-travel-basis
+    says: The continuations have the pope march with the Franks through Lyon and Vienne to the Maurienne; the annals have him brought back to the holy see by Fulrad.
+    sources:
+      - source: fredegar-continuations
+        at: CXX
+        quote: cum Stephano papa … per Lugdunum Galliae et Viennam pergentes, usque Mauriennam pervenerunt
+      - source: annales-regni-francorum
+        at: "s.a. 755: Eodemque anno Stephanus papa reductus est ad sanctam sedem per missos domni regis Pippini, Folradum"

@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  While Pepin is nearing the Lombard passes, the imperial envoys George the protoasecretis and John
+  the silentiarius arrive in Rome on their way to the Frankish king. The pope tells them of the
+  king's march, which they doubt, and sends them on with an envoy of his own.
+types: [mission]
+date:
+  value: 754..755
+  mode: window
+  calendar: julian
+  as_written: Etenim dum ad praedictas Langobardorum clusas iamfatus christianissimus Pippinus Francorum adpropinquaret rex
+  cite:
+    - id: imperial-envoys-rome-754-time
+      says: The life dates their coming only by the Frankish king's approach to the Lombard passes.
+      source: liber-pontificalis
+      at: Etenim dum ad praedictas Langobardorum clusas iamfatus christianissimus Pippinus Francorum adpropinquaret rex, coniunxerunt in hac Romana urbe imperiales missi
+places:
+  - place: rome
+    role: start
+participants:
+  - actor: george-protoasecretis
+    role: leader
+  - actor: john-the-silentiary
+    role: participant
+  - actor: byzantine-empire
+    role: participant
+notes:
+  The life has the pope receive them in Rome, though it also has him travelling in the king's train
+  to Pavia. The chapter records the arrival as the life gives it and does not resolve this.

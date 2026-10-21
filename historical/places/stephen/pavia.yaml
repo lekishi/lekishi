@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Pavia (Ticinum), the Lombard capital, where Stephen II met Aistulf in vain in 753 and which Pepin besieged in 754 and again in 756.
+types: [capital]
+names:
+  - form: Papia
+    lang: la
+    script: Latn
+    cite:
+      - id: pavia-name
+        says: The life names the city Papia, where the pope met the king.
+        source: liber-pontificalis
+        at: Coniungente vero eo Papiam in civitatem et praedicto nefando regi praesentao
+  - form: Ticinum
+    lang: la
+    script: Latn
+    role: alternate
+    note: The continuations' name for the city.
+    cite:
+      - id: pavia-name-2
+        says: The continuations call it Ticinum, Aistulf's city.
+        source: fredegar-continuations
+        at: CXX
+        quote: Ticinum urbem suam cum paucis venit
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [9.155, 45.1853]
+    notes: Placed at the coordinate Wikidata records for Pavia (Q6259), the modern locality identified with the place the sources name.
+    cite:
+      - id: pavia-point
+        says: The point is the coordinate Wikidata records for Pavia; the identification with the place the sources name is editorial.
+        source: wikidata
+        at: Q6259 (P625), revision 2552529838
+modern:
+  - form: Pavia
+    lang: it
+    script: Latn
+    note: Modern city, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q6259
+    url: https://www.wikidata.org/wiki/Q6259
+    license: CC0-1.0

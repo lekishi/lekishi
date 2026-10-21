@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Quierzy (Carisiacus), the royal estate on the Oise where Pepin gathered his great men in 754; the revised annals make it the place of the pope's meeting with the king.
+types: [settlement]
+names:
+  - form: Carisiacus
+    lang: la
+    script: Latn
+    cite:
+      - id: quierzy-name
+        says: The life names the place called Carisiacus.
+        source: liber-pontificalis
+        at: in loco qui Carisiacus appellatur pergens
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [3.1442, 49.5714]
+    notes: Placed at the coordinate Wikidata records for Quierzy (Q176873), the modern locality identified with the place the sources name.
+    cite:
+      - id: quierzy-point
+        says: The point is the coordinate Wikidata records for Quierzy; the identification with the place the sources name is editorial.
+        source: wikidata
+        at: Q176873 (P625), revision 2556147516
+modern:
+  - form: Quierzy
+    lang: fr
+    script: Latn
+    note: The modern village, with which the estate is identified.
+external_ids:
+  - system: wikidata
+    id: Q176873
+    url: https://www.wikidata.org/wiki/Q176873
+    license: CC0-1.0

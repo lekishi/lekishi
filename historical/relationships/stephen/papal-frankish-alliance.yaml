@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  The alliance between Stephen II and Pepin, sworn at Ponthion in January 754 and carried through the
+  two Italian campaigns of 754 and 756, in which the king took up the "rights of St Peter" against the
+  Lombards.
+types: [alliance, diplomacy]
+from: actor:stephen-ii
+to: actor:pepin-the-short
+directionality: mutual
+date:
+  value: 754..756
+  mode: duration
+  calendar: julian
+  as_written: de praesenti iureiurando (754) — iterum cum Dei virtute generalem faciens motionem (756)
+cite:
+  - id: papal-frankish-alliance-oath
+    says: The life says the king swore at Ponthion to obey the pope and to restore the exarchate of Ravenna.
+    source: liber-pontificalis
+    at: Qui de praesenti iureiurando eundem beatissimum papam satisfecit omnibus eius mandatis et ammonitionibus sese totis nisibus oboedire
+  - id: papal-frankish-alliance-annals
+    role: supporting
+    says: The annals say the pope came into Francia seeking help for the rights of St Peter, and that the king went to Italy at the pope's invitation.
+    sources:
+      - source: annales-regni-francorum
+        at: "s.a. 753: adiutorium et solatium quaerendo pro iustitiis sancti Petri"
+      - source: annales-regni-francorum
+        at: "s.a. 755: Pippinus rex per apostolicam invitationem in Italiam iter peragens"

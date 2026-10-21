@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Pepin's son Charles, with some of the nobles, meets the pope on the road almost a hundred miles out
+  and brings him towards the king at Ponthion.
+types: [mission]
+part_of: [stephen-journey-753]
+date:
+  value: 753-11-15..754-01-06
+  mode: window
+  calendar: julian
+  as_written: fere ad centum milia filium suum nomine Karolum in occursum ipsius … papae direxit
+  cite:
+    - id: charles-meets-stephen-753-time
+      says: The life gives no date; the meeting on the road came before the king's own meeting with the pope on 6 January.
+      source: liber-pontificalis
+      at: Pro quo et fere ad centum milia filium suum nomine Karolum in occursum ipsius quoangelici papae direxit, cum aliquibus ex suis obtimatibus
+places:
+  - place: ponthion
+    role: context
+    note: The place of the meeting on the road is not named; Ponthion is where Charles was to bring him.
+participants:
+  - actor: charlemagne
+    role: host
+  - actor: stephen-ii
+    role: guest
+cites:
+  participants:
+    - id: charles-meets-stephen-753-who
+      says: The continuations say the king sent his son Charles to meet the pope and bring him to the royal estate of Ponthion.
+      source: fredegar-continuations
+      at: CXIX
+      quote: filio suo Carolo ei obviam ire praecepit, qui usque ad Pontem Ugone, villa publica, ad ejus praesentiam adducere deberet
+notes: The place of the meeting is unknown (the life's "almost a hundred miles" is a distance, not a
+  place), so this event is not a located stop.

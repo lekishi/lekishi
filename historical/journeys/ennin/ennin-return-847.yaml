@@ -1,0 +1,57 @@
+# Proposed journey record (RFD 2, "Proposed: the journey record", draft PR #26).
+# The compiler does not read historical/journeys/ until the owner accepts the shape.
+title: 圓仁's return to Japan, 847
+summary: >-
+  Unable to sail from 赤山, 圓仁 goes south along the coast to 楚州 hoping for a Japanese ship, turns
+  back north when 金珍's ship comes looking for him, boards it at 乳山, and crosses by the islands of
+  Silla's 武州 to 肥前國 and the 鴻臚館 at 博多.
+travellers:
+  - actor: ennin
+    role: leader
+  - actor: weizheng
+    role: participant
+  - actor: tei-yuman
+    role: participant
+  - actor: kim-jin
+    role: participant
+    note: Joins at 乳山; the ship is his.
+stops:
+  - ennin-chishan-departure-847
+  - event: ennin-mizhou-847
+    by: land
+    cite:
+      says: He loaded his baggage on a cart hired from a Silla man and went along the coast toward 密州.
+      source: nitto-guho-junrei-gyoki
+      at: 卷四 會昌七年閏三月
+      quote: 雇新羅人鄭客車。載衣物。傍海望密州界去。
+  - event: ennin-haizhou-847
+    by: sea
+  - event: ennin-chuzhou-847
+    by: sea
+  - ennin-chuzhou-departure-847
+  - event: ennin-boards-kim-jin-847
+    by: sea
+  - event: ennin-sails-home-847
+    by: sea
+  - event: ennin-gaoyi-847
+    by: sea
+  - event: ennin-huangmao-847
+    by: sea
+  - event: ennin-yan-island-847
+    by: sea
+  - event: ennin-kashima-847
+    by: sea
+  - event: ennin-tachibana-847
+    by: sea
+  - event: ennin-noko-847
+    by: sea
+  - event: ennin-korokan-847
+    by: sea
+cite:
+  - id: ennin-return-sequence
+    says: >-
+      The diary records the departure from 赤山 in 閏三月, 密州, 海州, 楚州, the boarding of 金珍's ship at 乳山,
+      the crossing from 赤浦 by the islands of 武州 and 鴈嶋 to 鹿嶋, 橘浦, 能舉嶋 and the 鴻臚館, in this
+      order and by day.
+    source: nitto-guho-junrei-gyoki
+    at: 卷四 會昌七年閏三月二日 — 九月十八日

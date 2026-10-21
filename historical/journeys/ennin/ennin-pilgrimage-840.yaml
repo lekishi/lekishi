@@ -1,0 +1,54 @@
+# Proposed journey record (RFD 2, "Proposed: the journey record", draft PR #26).
+# The compiler does not read historical/journeys/ until the owner accepts the shape.
+title: 圓仁's pilgrimage to 五臺山 and 長安, 840
+summary: >-
+  On foot from the 赤山 cloister by 文登, 登州, 萊州 and 青州 across the plain to 鎮州 and up into the
+  hills to 五臺山; then, after two months on the mountain, south-west by 太原, 汾州 and 晉州, over the
+  黃河 at 河中府, and by 同州 to 長安.
+travellers:
+  - actor: ennin
+    role: leader
+  - actor: weizheng
+    role: participant
+  - actor: weixiao
+    role: participant
+  - actor: tei-yuman
+    role: participant
+stops:
+  - ennin-chishan-departure-840
+  - event: ennin-wendeng-840
+    by: land
+  - event: ennin-dengzhou-840
+    by: land
+  - event: ennin-laizhou-840
+    by: land
+  - event: ennin-qingzhou-840
+    by: land
+  - event: ennin-zhenzhou-840
+    by: land
+  - event: ennin-wutai-arrival-840
+    by: land
+  - ennin-wutai-departure-840
+  - event: ennin-taiyuan-840
+    by: land
+  - event: ennin-fenzhou-840
+    by: land
+  - event: ennin-jinzhou-840
+    by: land
+  - event: ennin-yellow-river-crossing-840
+    by: land
+  - event: ennin-tongzhou-840
+    by: land
+  - event: ennin-changan-arrival-840
+    by: land
+cite:
+  - id: ennin-pilgrimage-sequence
+    says: >-
+      The diary records each day's walk in 里 from the 赤山 cloister to 五臺山, counting 2,300 里 and 44
+      days of travel, and from 五臺山 to 長安, naming the stops in this order.
+    sources:
+      - source: nitto-guho-junrei-gyoki
+        at: 卷二 開成五年二月十九日 — 四月廿八日
+        quote: 自去二月十九日。離赤山院。直至此間。行二千三百餘里。
+      - source: nitto-guho-junrei-gyoki
+        at: 卷三 開成五年七月一日 — 八月廿日

@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Alba Longa, the Latin city that Livy says Ascanius founded under the Alban mount and that Tullus
+  Hostilius destroyed, moving its people to Rome. No excavation has found the city; its place on the
+  Alban hills is a tradition and a scholarly identification.
+types: [settlement]
+names:
+  - form: Alba Longa
+    lang: la
+    script: Latn
+    cite:
+      - id: alba-longa-name
+        says:
+          Livy tells that Ascanius founded a new city under the Alban mount, called Longa Alba from
+          its site stretched along the ridge.
+        source: livy
+        at: "1.3"
+        quote:
+          novam ipse aliam sub Albano monte condidit quae ab situ porrectae in dorso urbis Longa
+          Alba appellata.
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [12.64968, 41.74448]
+    notes:
+      "The gazetteer places the city above the Alban lake near Castel Gandolfo. No excavated site
+      has been identified as Alba Longa, so the record keeps region precision: the point says where
+      the tradition puts the city, not that its remains are known."
+    cite:
+      - id: alba-longa-location
+        says: Pleiades gives this representative point for Alba Longa, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 422824 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "422824"

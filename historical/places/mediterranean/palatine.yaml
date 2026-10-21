@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Palatine hill in Rome. Livy tells that Romulus fortified it first, because he had been brought
+  up there; it is the founding site of the tradition.
+types: [landform]
+names:
+  - form: Palatium
+    lang: la
+    script: Latn
+    cite:
+      - id: palatine-name
+        says: Livy tells that Romulus fortified the Palatium first, where he had been brought up.
+        source: livy
+        at: "1.7"
+        quote: Palatium primum, in quo ipse erat educatus, muniit.
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [12.48711, 41.88931]
+    notes: The gazetteer's point for the hill. It locates the hill, which is not in doubt; it is not
+      evidence that the founding Livy tells took place.
+    cite:
+      - id: palatine-location
+        says:
+          Pleiades gives this representative point for the Palatine hill (Palatinus Mons), with its
+          location precision recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 971691208 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "971691208"

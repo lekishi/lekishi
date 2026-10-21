@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Campus Martius, the plain of Mars beside the Tiber, outside the early city. Livy tells that
+  Servius Tullius assembled all the citizens there under arms to close the first census with a
+  lustrum.
+types: [landform]
+names:
+  - form: Campus Martius
+    lang: la
+    script: Latn
+    cite:
+      - id: campus-martius-name
+        says:
+          Livy tells that Servius ordered every Roman citizen, horse and foot, to assemble in the
+          Campus Martius at first light.
+        source: livy
+        at: "1.44"
+        quote: in campo Martio prima luce adessent
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [12.47755, 41.89832]
+    notes:
+      A representative point for a plain; the gazetteer derives it from related features, so the
+      record keeps region precision.
+    cite:
+      - id: campus-martius-location
+        says: Pleiades gives this representative point for the Campus Martius, with its location
+          precision recorded as "related".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 422863 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "422863"

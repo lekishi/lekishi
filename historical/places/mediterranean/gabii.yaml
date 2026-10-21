@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Gabii, a Latin city east of Rome. Livy tells that Tarquinius Superbus failed to take it by force
+  and won it by the treachery of his son Sextus.
+types: [settlement]
+names:
+  - form: Gabii
+    lang: la
+    script: Latn
+    cite:
+      - id: gabii-name
+        says: Livy calls Gabii a neighbouring city that Tarquinius attacked in vain by force.
+        source: livy
+        at: "1.53"
+        quote: Gabios, propinquam urbem, nequiquam vi adortus
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [12.71973, 41.88737]
+    notes: The gazetteer's point for the excavated city by the former lake of Castiglione.
+    cite:
+      - id: gabii-location
+        says:
+          Pleiades gives this representative point for ancient Gabii, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 422932 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "422932"

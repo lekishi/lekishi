@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Collatia, a small Latin town east of Rome, the home of Tarquinius Collatinus and Lucretia in
+  Livy's story.
+types: [settlement]
+names:
+  - form: Collatia
+    lang: la
+    script: Latn
+    cite:
+      - id: collatia-name
+        says:
+          Livy tells that the young men rode on to Collatia and found Lucretia at her spinning late
+          at night.
+        source: livy
+        at: "1.57"
+        quote: pergunt inde Collatiam
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [12.66708, 41.92525]
+    notes: The gazetteer's point near Lunghezza, east of Rome. The town is known from texts; the
+      identification of its site is the gazetteer's.
+    cite:
+      - id: collatia-location
+        says: Pleiades gives this representative point for Collatia, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 422898 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "422898"

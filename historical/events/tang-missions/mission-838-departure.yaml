@@ -1,7 +1,5 @@
 # yaml-language-server: $schema=../../schema/event.schema.json
-summary:
-  大宰府 reports that the first and fourth ships have sailed; the second follows later that month.
-  圓仁 is aboard the first.
+summary: 大宰府 reports that the first and fourth ships have sailed; the second follows later that month.
 types: [journey]
 date:
   value: 838-07
@@ -24,9 +22,7 @@ places:
 participants:
   - actor: fujiwara-no-tsunetsugu
     role: leader
-  - actor: ennin
-    role: participant
-    note: His diary tells the voyage from on board.
 notes:
-  The chronicle does not name 圓仁 here; his presence is from his own diary, cited by the ennin- records.
-  This event is the court's view of the departure.
+  The chronicle does not name 圓仁 here, so he is not recorded as a participant; his own diary tells
+  the voyage from on board, and its events belong to his story. This event is the court's view of
+  the departure.

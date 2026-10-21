@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Crossing 匈奴 land, 張騫's party was caught and sent to the 單于, who asked how the Han could send an
+  envoy to the 月氏, north of him, when he could not send one to 越. He held 張騫 for more than ten
+  years and gave him a wife, with whom he had a son; 張騫 kept the Han envoy's staff.
+types: [occurrence]
+date:
+  value: 140 BCE..135 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 建元中（出隴西，經匈奴，匈奴得之）
+  cite:
+    - id: zhang-qian-captured-time
+      says: The 大宛列傳 records the capture on the way through 匈奴 land, the 單于's question, and the detention of more than ten years.
+      source: shiji-han-frontiers
+      at: 卷一百二十三 大宛列傳（留騫十餘歲）
+      quote: 單于留之，曰：「月氏在吾北，漢何以得往使？吾欲使越，漢肯聽我乎？」留騫十餘歲，與妻，有子，然騫持漢節不失。
+places:
+  - place: chanyu-court
+    role: site
+participants:
+  - actor: zhang-qian
+    role: subject
+  - actor: ganfu
+    role: participant
+  - actor: junchen-chanyu
+    role: host
+    note: The 單于 of those years by the 匈奴列傳's sequence; the 大宛列傳 says only 單于.
+  - actor: xiongnu
+    role: participant
+notes: The capture is dated with the departure, since the party was taken on its way through; the
+  detention ran on for "more than ten years" and is not given dates of its own.

@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At 烏孫 the 昆莫 received 張騫 with the rite due a 單于; 張騫, ashamed, said the emperor's gifts would go
+  back unless the king bowed, and the 昆莫 rose and bowed. 張騫 offered a Han princess as the 昆莫's
+  wife if 烏孫 moved east to the 渾邪王's land, but the kingdom was divided among the old king's sons,
+  its great men feared the 匈奴, and 張騫 got no commitment.
+types: [mission]
+date:
+  value: 119 BCE..115 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 騫既至烏孫
+  cite:
+    - id: wusun-audience-account
+      says: The 大宛列傳 records the audience, the proposal of a princess, and that 張騫 could not get a commitment.
+      sources:
+        - source: shiji-han-frontiers
+          at: 卷一百二十三 大宛列傳（騫既至烏孫）
+          quote: 騫既至烏孫，烏孫王昆莫見漢使如單于禮，騫大慚，知蠻夷貪，乃曰：「天子致賜，王不拜則還賜。」昆莫起拜賜，其他如故。
+        - source: shiji-han-frontiers
+          at: 卷一百二十三 大宛列傳（騫不得其要領）
+          quote: 其大臣皆畏胡，不欲移徙，王不能專制。騫不得其要領。
+places:
+  - place: wusun
+    role: site
+participants:
+  - actor: zhang-qian
+    role: guest
+  - actor: kunmo
+    role: host
+  - actor: wusun-state
+    role: participant

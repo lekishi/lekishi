@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  烏孫 sent 張騫 home with guides and interpreters and with some tens of its own envoys and horses, to
+  thank the emperor and to see the Han's size for themselves. On his return 張騫 was made 大行, one of
+  the nine ministers. He died a year or so later; later envoys called themselves 博望侯 to be trusted
+  abroad.
+types: [journey]
+date:
+  value: 119 BCE..115 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 騫還到，拜為大行，列於九卿。歲餘，卒。
+  cite:
+    - id: zhang-qian-final-return-account
+      says: The 大宛列傳 records 烏孫's envoys escorting him home, his appointment as 大行, and his death a year or so later.
+      sources:
+        - source: shiji-han-frontiers
+          at: 卷一百二十三 大宛列傳（烏孫發導譯送騫還）
+          quote: 烏孫發導譯送騫還，騫與烏孫遣使數十人，馬數十匹報謝，因令窺漢，知其廣大。
+        - source: shiji-han-frontiers
+          at: 卷一百二十三 大宛列傳（騫還到，拜為大行）
+          quote: 騫還到，拜為大行，列於九卿。歲餘，卒。
+    - id: zhang-qian-final-return-legacy
+      says: The 大宛列傳 records that later envoys all called themselves 博望侯 to be trusted abroad.
+      role: supporting
+      source: shiji-han-frontiers
+      at: 卷一百二十三 大宛列傳（然張騫鑿空）
+      quote: 然張騫鑿空，其後使往者皆稱博望侯，以為質於外國，外國由此信之。
+places:
+  - place: wusun
+    role: start
+  - place: han-changan
+    role: end
+    note: The court that appointed him; the text names no arrival place.
+participants:
+  - actor: zhang-qian
+    role: leader
+  - actor: wusun-state
+    role: participant
+    note: Its envoys travelled with him.
+notes:
+  "The 史記 gives no year for the return. The 漢書's table of officials is the usual source for his
+  appointment as 大行 in 元鼎二年 (115 BCE) and his death in 元鼎三年; it is not cited yet, so the record
+  keeps the window the narrative supports and does not record the death as a separate event."

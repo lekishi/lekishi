@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Riblah "in the land of Hamath", where the books of Kings and Jeremiah record Zedekiah brought
+  before the king of Babylon for judgment, and the leading men of Jerusalem put to death.
+types: [settlement]
+names:
+  - form: Riblah
+    lang: en
+    script: Latn
+    cite:
+      - id: riblah-name
+        says: Jeremiah places Riblah in the land of Hamath and has Zedekiah carried there to the king of Babylon.
+        source: bible-kjv
+        at: Jeremiah 52:9
+        quote: unto the king of Babylon to Riblah in the land of Hamath
+  - form: Rablê
+    lang: akk
+    script: Latn
+    note: The form under which the Pleiades gazetteer records the town from Neo-Assyrian sources.
+    claim: riblah-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [36.5491417, 34.4321487]
+    notes:
+      The gazetteer's point for Rablê, which it identifies with the modern site of Riblah south of
+      Homs.
+    cite:
+      - says:
+          The Pleiades gazetteer records Rablê, a town of the Neo-Assyrian sources, and identifies it
+          with the modern site of Riblah about 35 km south of Homs, with a precise point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/431124909 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "431124909"
+    url: https://pleiades.stoa.org/places/431124909
+    license: CC-BY-3.0
+    note: Rablê
+notes:
+  The land of Hamath is the region around the city of Hamath; the chapter records no separate place
+  for it.

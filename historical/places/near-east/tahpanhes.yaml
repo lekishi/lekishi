@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Tahpanhes, in Egypt, to which Jeremiah records Johanan son of Kareah leading the remnant of Judah,
+  and Jeremiah with them, after Gedaliah's murder. The record's only position is a label anchor.
+types: [settlement]
+names:
+  - form: Tahpanhes
+    lang: en
+    script: Latn
+    cite:
+      - id: tahpanhes-name
+        says: Jeremiah names Tahpanhes as where the remnant of Judah came in Egypt.
+        source: bible-kjv
+        at: Jeremiah 43:7
+        quote: thus came they even to Tahpanhes
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [32.1734853, 30.8600223]
+    notes:
+      Label anchor at the gazetteer's Daphnai (Tell Defenneh) in the eastern Delta. The chapter has
+      not cited an identification of Tahpanhes with Daphnai, so no coordinate is asserted.
+    cite:
+      - says: The label anchor is placed at the Pleiades point for Daphnai; no identification is asserted.
+        source: pleiades
+        at: places/727103 (reprLat, reprLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "727103"
+    url: https://pleiades.stoa.org/places/727103
+    license: CC-BY-3.0
+    note: Daphnai.

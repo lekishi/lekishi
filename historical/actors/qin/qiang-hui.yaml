@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "羌瘣, a Qin general the annals record attacking Zhao in 229 BCE and, with 王翦, taking the Zhao land of 東陽 and its king in 228 BCE."
+types: [person]
+names:
+  - form: "羌瘣"
+    lang: lzh
+    script: Hani
+    roman: "Qiang Hui"
+    scheme: pinyin
+    cite:
+      - says: "The annals name 羌瘣 among the generals who attacked Zhao in 十八年 (229 BCE)."
+        source: shiji
+        at: "卷六 秦始皇本紀 十八年（羌瘣伐趙）"
+        quote: "王翦將上地，下井陘，端和將河內，羌瘣伐趙，端和圍邯鄲城。"
+roles:
+  - role: soldier
+    note: "Named in the 229 and 228 BCE notices only."
+    cite:
+      - says: "The annals record 王翦 and 羌瘣 taking 東陽 and the king of Zhao."
+        source: shiji
+        at: "卷六 秦始皇本紀 十九年（王翦、羌瘣盡定取趙地東陽）"
+        quote: "十九年，王翦、羌瘣盡定取趙地東陽，得趙王。"
+notes: "Known only from these notices in the cited sources."

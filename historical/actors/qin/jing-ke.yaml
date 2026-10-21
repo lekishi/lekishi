@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "荊軻, a man of 衛 whom the Yan crown prince 丹 sent to the king of Qin. The biography of the assassins records his farewell at the 易水 and his attempt on the king in the 咸陽宮 in 227 BCE, where he was killed."
+types: [person]
+names:
+  - form: "荊軻"
+    lang: lzh
+    script: Hani
+    roman: "Jing Ke"
+    scheme: pinyin
+    cite:
+      - says: "The annals record 丹 sending 荊軻 to stab the king and the king dismembering him."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十年（使荊軻刺秦王）"
+        quote: "使荊軻刺秦王。秦王覺之，體解軻以徇"
+roles:
+  - role: envoy
+    note: "Received as Yan's envoy, carrying 樊於期's head and the map of 督亢."
+    cite:
+      - says: "The biography records him presenting the head and the map as Yan's envoy."
+        source: shiji-six-states
+        at: "卷八十六 刺客列傳（荊軻奉樊於期頭函）"
+        quote: "荊軻奉樊於期頭函，而秦舞陽奉地圖柙，以次進。"
+notes: "The biography calls him a man of 衛; the comprehensive mirror calls him 衛人荊軻."

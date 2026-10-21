@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "王翦, the Qin general of 頻陽 whom the annals and his biography record leading the conquest of Zhao (229–228 BCE), the attack on Yan and the taking of 薊 (227–226 BCE), and after his recall the conquest of Chu (224–223 BCE) and the lands south of the Yangzi (222 BCE)."
+types: [person]
+names:
+  - form: "王翦"
+    lang: lzh
+    script: Hani
+    roman: "Wang Jian"
+    scheme: pinyin
+    cite:
+      - says: "The biography records 王翦 as a man of 頻陽 who served the First Emperor and attacked Zhao in the eighteenth year."
+        source: shiji-six-states
+        at: "卷七十三 白起王翦列傳（王翦者，頻陽東鄉人也）"
+        quote: "王翦者，頻陽東鄉人也。少而好兵，事秦始皇。"
+roles:
+  - role: soldier
+    note: "Commander in the annals' notices of 229, 228, 227, 226, 224, 223 and 222 BCE. The sources record the campaigns by year and state no continuous command, so the role carries no interval; he retired in 226 BCE and was recalled."
+    cite:
+      - says: "The biography records his campaigns against Zhao, Yan and Chu."
+        source: shiji-six-states
+        at: "卷七十三 白起王翦列傳（十八年，翦將攻趙）"
+        quote: "十八年，翦將攻趙。歲餘，遂拔趙，趙王降，盡定趙地為郡。"
+notes: "The biography and the annals sometimes name him where another source names his son 王賁 (for example the taking of 薊, which the cited historical geography gives to 王賁); each event records whom its sources name."

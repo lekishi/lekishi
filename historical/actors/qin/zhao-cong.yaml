@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "趙蔥, the Zhao commander who replaced 李牧 in 229 BCE. The biography records 王翦 killing him three months later; the hereditary house writes his name 趙怱."
+types: [person]
+names:
+  - form: "趙蔥"
+    lang: lzh
+    script: Hani
+    roman: "Zhao Cong"
+    scheme: pinyin
+    cite:
+      - says: "The biography records the king sending 趙蔥 and 顏聚 to replace 李牧, and 王翦 killing 趙蔥."
+        source: shiji-six-states
+        at: "卷八十一 廉頗藺相如列傳（大破殺趙蔥）"
+        quote: "後三月，王翦因急撃趙，大破殺趙蔥，虜趙王遷及其將顏聚，遂滅趙。"
+  - form: "趙怱"
+    lang: lzh
+    script: Hani
+    note: "The hereditary house's form."
+    cite:
+      - says: "The hereditary house's form."
+        source: shiji-six-states
+        at: "卷四十三 趙世家 幽繆王七年（趙怱及齊將顏聚代之）"
+        quote: "趙怱及齊將顏聚代之。"
+roles:
+  - role: soldier
+    note: "Commander for the months between 李牧's removal and the Zhao defeat."
+    cite:
+      - says: "The hereditary house records 趙怱's army broken."
+        source: shiji-six-states
+        at: "卷四十三 趙世家 幽繆王七年（趙怱軍破）"
+        quote: "趙怱軍破，顏聚亡去。"
+notes: "The two forms are recorded rather than corrected."

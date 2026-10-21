@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "嘉, the Zhao prince (趙公子嘉) who after 邯鄲 fell in 228 BCE went to 代 and made himself king, joining Yan against Qin. The annals record 王賁 capturing him in 222 BCE."
+types: [person]
+names:
+  - form: "代王嘉"
+    lang: lzh
+    script: Hani
+    roman: "Dai Wang Jia"
+    scheme: pinyin
+    cite:
+      - says: "The annals record 趙公子嘉 making himself king of 代."
+        source: shiji
+        at: "卷六 秦始皇本紀 十九年（自立為代王）"
+        quote: "趙公子嘉率其宗數百人之代，自立為代王，東與燕合兵，軍上谷。"
+roles:
+  - role: ruler
+    note: "The six-states table counts 代王嘉元年 in 227 BCE and his sixth year, the capture, in 222 BCE; the annals record him proclaiming himself in 228 BCE."
+    date:
+      value: "227 BCE..222 BCE"
+      mode: duration
+      calendar: chinese_lunisolar
+      as_written: "代王嘉元年; 六年"
+    cite:
+      - says: "The table records 王賁 capturing king 嘉 in his sixth year and counts it the end of Zhao."
+        source: shiji
+        at: "卷十五 六國年表 秦始皇二十五年（趙 六）"
+        quote: "六。秦將王賁虜王嘉，秦滅趙。"
+notes: "The hereditary house of Zhao's closing comment records that he had been set aside as heir in favour of 遷 and that the exiled Zhao officials made him king; the cited historical geography calls him 公子和, a variant the record does not adopt."

@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "李信, a young Qin general who, the biography of 王翦 records, pursued the Yan crown prince to the 衍水, then promised to take Chu with two hundred thousand men and was routed by the Chu army near 城父."
+types: [person]
+names:
+  - form: "李信"
+    lang: lzh
+    script: Hani
+    roman: "Li Xin"
+    scheme: pinyin
+    cite:
+      - says: "The biography records 李信 pursuing 丹 to the 衍水 and the king judging him brave."
+        source: shiji-six-states
+        at: "卷七十三 白起王翦列傳（秦將李信者）"
+        quote: "秦將李信者，年少壯勇，嘗以兵數千逐燕太子丹至於衍水中，卒破得丹，始皇以為賢勇。"
+roles:
+  - role: soldier
+    note: "General in the Yan pursuit (226 BCE) and the first invasion of Chu (225 BCE in the comprehensive mirror)."
+    cite:
+      - says: "The biography records his defeat by the Chu army."
+        source: shiji-six-states
+        at: "卷七十三 白起王翦列傳（大破李信軍）"
+        quote: "荊人因隨之，三日三夜不頓舍，大破李信軍，入兩壁，殺七都尉，秦軍走。"
+notes: "The biography of the assassins records him pressing the pursuit of the Yan king; the biography of 王翦 records him later breaking Yan and Qi with 王賁."

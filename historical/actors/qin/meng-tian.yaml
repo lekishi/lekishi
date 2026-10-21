@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "蒙恬, a Qin general of the 蒙 family. The biography of 王翦 names him as 李信's colleague in the failed first invasion of Chu, attacking 寢; the comprehensive mirror's editor reads 蒙武 there instead."
+types: [person]
+names:
+  - form: "蒙恬"
+    lang: lzh
+    script: Hani
+    roman: "Meng Tian"
+    scheme: pinyin
+    cite:
+      - says: "The biography records 蒙恬 attacking 寢 while 李信 attacked 平與."
+        source: shiji-six-states
+        at: "卷七十三 白起王翦列傳（蒙恬攻寢）"
+        quote: "李信攻平與，蒙恬攻寢，大破荊軍。"
+roles:
+  - role: soldier
+    note: "Named in the biography for the 225 BCE invasion; the reading is disputed."
+    cite:
+      - says: "The biography names him commanding beside 李信 against Chu."
+        source: shiji-six-states
+        at: "卷七十三 白起王翦列傳（遂使李信及蒙恬將二十萬南伐荊）"
+        quote: "遂使李信及蒙恬將二十萬南伐荊。"
+notes: "The comprehensive mirror's transcription replaces 恬 with 武 in this campaign on the authority of 梁玉繩's 史記志疑; the chapter cites the 史記's reading and records the editor's correction in the notes only. His later career (the northern frontier, the 直道) belongs to other chapters."

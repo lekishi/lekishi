@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "項燕, the Chu general. The accounts differ on his end: the annals record him making 昌平君 king and rebelling south of the 淮 in 224 BCE and killing himself in 223 BCE; the six-states table, the hereditary house of Chu and the biography of 王翦 record him killed by Qin, at or south of 蘄, in 224 BCE."
+types: [person]
+names:
+  - form: "項燕"
+    lang: lzh
+    script: Hani
+    roman: "Xiang Yan"
+    scheme: pinyin
+    cite:
+      - says: "The annals record 項燕 setting up 昌平君 as king of Chu."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十三年（荊將項燕立昌平君為荊王）"
+        quote: "荊將項燕立昌平君為荊王，反秦於淮南。"
+roles:
+  - role: soldier
+    note: "General of Chu (荊將)."
+    cite:
+      - says: "The annals call him a general of Chu (荊將)."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十三年（荊將項燕）"
+notes: "His death is a disputed event of the chapter (xiang-yan-death)."

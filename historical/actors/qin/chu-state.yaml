@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "楚, one of the six states Qin conquered, which the annals call 荊. They record the Chu campaigns of 224–223 BCE; the hereditary house of Chu records its king captured and the state destroyed in his fifth year (223 BCE)."
+types: [state]
+names:
+  - form: "楚"
+    lang: lzh
+    script: Hani
+    roman: Chu
+    scheme: pinyin
+    cite:
+      - says: "The hereditary house of Chu records 王翦 and 蒙武 destroying 楚 and capturing king 負芻 in the fifth year."
+        source: shiji-six-states
+        at: "卷四十 楚世家 王負芻五年（虜楚王負芻）"
+        quote: "五年，秦將王翦、蒙武遂破楚國，虜楚王負芻"
+  - form: "荊"
+    lang: lzh
+    script: Hani
+    note: "The annals' name for the state."
+    cite:
+      - says: "The annals call the state 荊 when Qin attacks it."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十三年（使將擊荊）"
+        quote: "秦王復召王翦，彊起之，使將擊荊。"
+notes: "The state across its history. The annals of the First Emperor write 荊 for 楚 throughout, a usage explained in later commentary by a taboo on the name of the king's father; the record keeps both forms and does not cite the explanation."

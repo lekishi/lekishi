@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: The standing hostility 經行記 reports between 拂菻 and 大食, with 拂菻's million troops "always holding off 大食". The fragment names no battle and gives no date.
+types: [conflict]
+from: fulin-state
+to: dashi
+directionality: mutual
+cite:
+  - id: fulin-dashi-conflict-basis
+    says: 經行記 says 拂菻 has about a million troops and is always holding off 大食.
+    source: tongdian
+    at: 卷一九三 邊防九 大秦（杜環經行記云：拂菻國在苫國西）
+    quote: 勝兵約有百萬，常與大食相禦。
+notes: A report of a standing state, not of events, so it carries no validity interval.

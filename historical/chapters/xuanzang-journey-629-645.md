@@ -19,7 +19,7 @@ follow-ups are in
 
 | Kind | Count | Folder | Notes |
 | --- | --- | --- | --- |
-| Places | 77 | `places/xuanzang/` | 53 with a Wikidata display anchor, 24 with an `unknown` position. 長安 and 洛陽 are the shared records in `places/ennin/`. |
+| Places | 77 | `places/xuanzang/` | 55 with a Wikidata display anchor, 22 with an `unknown` position. 長安 and 洛陽 are the shared records in `places/ennin/`. |
 | Actors | 16 | `actors/xuanzang/` | 玄奘, the emperor 太宗, the kings 麴文泰, 戒日王 and 鳩摩羅王, the 葉護可汗, the teachers 戒賢, 勝軍, 般若羯羅 and 僧稱, and the officials and guides on the way. |
 | Events | 98 | `events/xuanzang/` | One per stop or incident. Each has exactly one `site` place. |
 | Relationships | 9 | `relationships/xuanzang/` | Travel, the 高昌 brotherhood and letters, three teachings, two royal patronages, the audience, and the transmission of the texts. |
@@ -34,7 +34,7 @@ follow-ups are in
   the 645 return, the 646 presentation and the 664 death carry a source date.
 - **Two disputes** are recorded and not merged: the departure month (八月,
   四月 or 貞觀初) and the death year (664 or 661).
-- **No route is drawn.** Display anchors are label positions only, and 24
+- **No route is drawn.** Display anchors are label positions only, and 22
   places have no position at all.
 - Wonders, dreams and the desert deity belong to the biography's devotional
   frame. The records report movements, meetings, teachings and gifts, not

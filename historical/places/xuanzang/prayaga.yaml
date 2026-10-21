@@ -22,13 +22,28 @@ names:
         at: 卷第五 缽邏耶伽國
         quote: 缽邏耶伽國周五千餘里。國大都城據兩河交，周二十餘里，稼穡滋盛，果木扶疏。
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
+    point: [81.85, 25.45]
     notes:
-      The confluence is a well-known modern place, but no anchor could be read from Wikidata on 2026-10-21;
-      the record asserts no coordinate until one is cited.
+      Label anchor at Prayagraj as recorded in Wikidata (Q162442). It is not an asserted historical
+      coordinate; the identification of 缽羅耶伽 with the modern place is the conventional modern reading, not
+      a statement of the cited sources.
     cite:
-      - id: prayaga-unlocated
-        says: The biography names 缽羅耶伽 but the cited passages state no site for it.
-        source: cien-zhuan
-        at: 卷三（渡克伽河南、閻牟那河北）
+      - id: prayaga-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q162442 (P625), revision 2552209884
+modern:
+  - form: 普拉亞格拉吉
+    lang: zh-Hant
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q162442
+    url: https://www.wikidata.org/wiki/Q162442
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

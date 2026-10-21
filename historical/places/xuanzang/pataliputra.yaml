@@ -21,13 +21,24 @@ names:
     note: The older name the biography gives the city.
     claim: pataliputra-name
 at:
-  - interpretation: unknown
+  - interpretation: display_anchor
     precision: unspecified
+    point: [85.144, 25.611]
     notes:
-      The ancient city lies under modern Patna, but no anchor could be read from Wikidata on 2026-10-21;
-      the record asserts no coordinate until one is cited.
+      Label anchor at Pataliputra as recorded in Wikidata (Q389755). It is not an asserted historical
+      coordinate; the identification of 波吒釐子 with the modern place is the conventional modern reading, not
+      a statement of the cited sources.
     cite:
-      - id: pataliputra-unlocated
-        says: The biography names 波吒釐子 but the cited passages state no site for it.
-        source: cien-zhuan
-        at: 卷三（法師在小城停七日）
+      - id: pataliputra-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q389755 (P625), revision 2531341082
+external_ids:
+  - system: wikidata
+    id: Q389755
+    url: https://www.wikidata.org/wiki/Q389755
+    license: CC0-1.0
+    note: The modern place used for the label anchor.
+notes: The ancient city lies under modern Patna.

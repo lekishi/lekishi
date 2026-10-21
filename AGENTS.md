@@ -38,8 +38,8 @@ rules below when updating project-specific guidance.
 - Run `pnpm verify` when you are done with all changes (format check, `svelte-check`, unit and contract tests, then the static build with its invariant) and fix any pending issues. `pnpm e2e` runs the browser checks.
 - Use Conventional Commits for commit messages and pull request titles (`type(optional-scope): description`), for example `feat(atlas): add event selection` or `docs(rfd): document historical time semantics`.
 - Add intent-focused comments around domain rules, historical invariants, normalization, prerendering constraints, and non-obvious UI state. Explain why the choice exists and what must not regress; avoid restating the next line of code.
-- The browser keeps one thing: the last position per chapter in `localStorage` (`$lib/atlas/memory.ts`), guarded so a blocked or corrupt store reads as empty. Anything more needs an owner decision.
-- Keep the artifact free of secrets and provider credentials. There is no `.env` file, no token, and no account; nothing may be introduced that requires one without an explicit owner decision.
+- The browser keeps one thing: the last position per chapter in `localStorage` (`$lib/atlas/memory.ts`), guarded so a blocked or corrupt store reads as empty. A signed-in member also holds the session cookie and its readable `lekishi_member` hint (RFD 6). Anything more needs an owner decision.
+- Keep the artifact free of secrets and provider credentials. The only secrets are members' sign-in's (`GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, `SESSION_SECRET`), set in the Pages dashboard for Production; locally they go in `.dev.vars`, which Git ignores. Nothing else may require a secret, token or account without an explicit owner decision.
 
 ### Version control guidelines
 
@@ -54,10 +54,11 @@ rules below when updating project-specific guidance.
 
 ### Static-site boundaries
 
-- There is no server: every route is prerendered (`src/routes/+layout.ts` sets `prerender = true`) and the artifact is plain files. Do not add a runtime server, an adapter that needs one, server-only data loading, or a dependency that requires a database or secret.
+- The reader site has no server: every public route is prerendered (`src/routes/+layout.ts` sets `prerender = true`) and served as plain files. The one exception is the Cloudflare Pages worker that `@sveltejs/adapter-cloudflare` emits, authorized by the owner on 2026-10-21 for [RFD 6](rfd/0006/README.adoc): it answers sign-in under `/auth/` and the drafts a signed-in member of the `lekishi` organization may open, and nothing else. `build/_routes.json` sends it `/chapters/*`, `/auth/*` and `/drafts*` only and excludes every prerendered page; the build invariant checks both. Do not route anything else to it, add a database, or render a public page at runtime.
+- Unapproved content is server-only. A production build compiles the chapters it leaves out into `virtual:lekishi-drafts`, which only `src/lib/server/` may import, and `scripts/check-static-build.mjs` fails if any file in `build/` names one. Chapter data reaches the browser through the chapter route's server load (`__data.json`), never as a client chunk.
 - Nothing may touch `window`, `document`, or WebGL at module scope: SvelteKit renders the pages on the server while prerendering. Browser-only work belongs in `onMount` or behind an explicit `typeof window` guard (`src/lib/atlas/entry.ts` does both).
 - One page has one workspace. `src/lib/atlas/entry.ts` is the only module that mounts it, it refuses to mount a second workspace, and the chapter route releases it on teardown. Do not mount the workspace from anywhere else, and keep the regression coverage for it.
-- The site is served from the domain root. The globe reads its tiles from `/globe/`; if a deployment ever moves under a sub-path, that URL (in `globe-renderer.ts`) and `static/_redirects` must move with it.
+- The site is served from the domain root. The globe reads its tiles from `/globe/`; if a deployment ever moves under a sub-path, that URL (in `globe-renderer.ts`) and `_redirects` must move with it.
 - No tile service, account, token, or third-party provider. Elevation and imagery are built offline from open data and shipped in the artifact. Keep it that way unless the owner authorizes a provider, and keep attribution visible where it is shown today, with the full text at `/globe/ATTRIBUTION.txt`.
 
 ### SvelteKit guidelines

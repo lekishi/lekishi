@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: The monastery of St Maurice at Agaune in the Valais, where Stephen II was to meet the Frankish king and where Fulrad and Rothard met him instead.
+types: [religious_site]
+names:
+  - form: monasterium sancti Mauricii
+    lang: la
+    script: Latn
+    cite:
+      - id: saint-maurice-agaune-name
+        says: The life names the venerable monastery of St Maurice, Christ's martyr.
+        source: liber-pontificalis
+        at: ad venerabile monasterium sancti Christi martyris Mauricii
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [7.0033, 46.2194]
+    notes: Placed at the coordinate Wikidata records for Territorial Abbey of Saint-Maurice (Q334174), the modern site identified with the place the sources name.
+    cite:
+      - id: saint-maurice-agaune-point
+        says: The point is the coordinate Wikidata records for Territorial Abbey of Saint-Maurice; the identification with the place the sources name is editorial.
+        source: wikidata
+        at: Q334174 (P625), revision 2522330043
+modern:
+  - form: Abbaye de Saint-Maurice d'Agaune
+    lang: fr
+    script: Latn
+    note: The abbey on the same site, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q334174
+    url: https://www.wikidata.org/wiki/Q334174
+    license: CC0-1.0

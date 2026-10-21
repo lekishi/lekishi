@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Mons Iovis, the Alpine pass the continuations of Fredegar say Stephen II had crossed before the news of his coming reached Pepin.
+types: [landform, route_node]
+names:
+  - form: mons Iovis
+    lang: la
+    script: Latn
+    cite:
+      - id: great-st-bernard-pass-name
+        says: The continuations say the pope had already crossed mons Iovis.
+        source: fredegar-continuations
+        at: CXIX
+        quote: jam monte Jovis transmeato
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [7.1704, 45.8691]
+    notes: Placed at the coordinate Wikidata records for Great St Bernard Pass (Q623424), the modern locality identified with the place the sources name.
+    cite:
+      - id: great-st-bernard-pass-point
+        says: The point is the coordinate Wikidata records for Great St Bernard Pass; the identification with the place the sources name is editorial.
+        source: wikidata
+        at: Q623424 (P625), revision 2558541294
+modern:
+  - form: Col du Grand-Saint-Bernard
+    lang: fr
+    script: Latn
+    note: The modern pass, identified with mons Iovis.
+  - form: Colle del Gran San Bernardo
+    lang: it
+    script: Latn
+    note: The modern pass, identified with mons Iovis.
+external_ids:
+  - system: wikidata
+    id: Q623424
+    url: https://www.wikidata.org/wiki/Q623424
+    license: CC0-1.0
+notes: Mons Iovis is identified with the Great St Bernard, the pass between Aosta and the Valais; the identification is the standard editorial one.

@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: The basilica of St Peter outside the walls of Rome, where Stephen II began his journey, where Fulrad laid the keys of the exarchate's cities at the apostle's confessio in 756, and where Stephen was buried in 757.
+types: [religious_site]
+names:
+  - form: basilica beati Petri
+    lang: la
+    script: Latn
+    cite:
+      - id: old-st-peters-name
+        says: The life names the basilica of blessed Peter, prince of the apostles, as the pope's burial place.
+        source: liber-pontificalis
+        at: Sepultus est in basilica beati Petri apostolorum principis, VI kal. mai, indictione X
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [12.4533, 41.9022]
+    notes: Placed at the coordinate Wikidata records for Old St. Peter's Basilica (Q810126), the modern site identified with the place the sources name.
+    cite:
+      - id: old-st-peters-point
+        says: The point is the coordinate Wikidata records for Old St. Peter's Basilica; the identification with the place the sources name is editorial.
+        source: wikidata
+        at: Q810126 (P625), revision 2557481747
+modern:
+  - form: Basilica di San Pietro in Vaticano
+    lang: it
+    script: Latn
+    note: The present basilica, built on the site of the old one from the sixteenth century.
+external_ids:
+  - system: wikidata
+    id: Q810126
+    url: https://www.wikidata.org/wiki/Q810126
+    license: CC0-1.0
+notes: The Constantinian basilica was replaced by the present building; the point is the site, which both share.

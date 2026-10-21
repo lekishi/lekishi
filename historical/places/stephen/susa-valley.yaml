@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: The Susa valley (Valle Seusana), where the Lombards held the clusae, the barriers closing the road into Italy, and where the Franks broke through in 754 and again in 756.
+types: [region]
+names:
+  - form: Vallis Seusana
+    lang: la
+    script: Latn
+    cite:
+      - id: susa-valley-name
+        says: The continuations name the passes called Valle Seusana.
+        source: fredegar-continuations
+        at: CXX
+        quote: usque ad Clusas, quae cognominatur Valle Seusana
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [7.05, 45.1333]
+    notes: Placed at the coordinate Wikidata records for Susa Valley (Q1434647), the modern area identified with the place the sources name.
+    cite:
+      - id: susa-valley-point
+        says: The point is the coordinate Wikidata records for Susa Valley; the identification with the place the sources name is editorial.
+        source: wikidata
+        at: Q1434647 (P625), revision 2550119124
+modern:
+  - form: Val di Susa
+    lang: it
+    script: Latn
+    note: The modern name of the valley.
+external_ids:
+  - system: wikidata
+    id: Q1434647
+    url: https://www.wikidata.org/wiki/Q1434647
+    license: CC0-1.0
+notes: A valley, placed by a single point at region precision; the site of the clusae is not located.

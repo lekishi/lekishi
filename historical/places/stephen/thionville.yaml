@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Thionville, the royal estate on the Moselle where Pepin heard that the pope had crossed the Alps.
+types: [settlement]
+names:
+  - form: Theudone villa
+    lang: la
+    script: Latn
+    cite:
+      - id: thionville-name
+        says: The continuations name the royal estate of Theudone on the Moselle.
+        source: fredegar-continuations
+        at: CXIX
+        quote: Theudone villa publica super Mosella resedisset
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [6.1683, 49.3581]
+    notes: Placed at the coordinate Wikidata records for Thionville (Q22640), the modern locality identified with the place the sources name.
+    cite:
+      - id: thionville-point
+        says: The point is the coordinate Wikidata records for Thionville; the identification with the place the sources name is editorial.
+        source: wikidata
+        at: Q22640 (P625), revision 2558010689
+modern:
+  - form: Thionville
+    lang: fr
+    script: Latn
+    note: The modern town, with which the estate is identified.
+external_ids:
+  - system: wikidata
+    id: Q22640
+    url: https://www.wikidata.org/wiki/Q22640
+    license: CC0-1.0

@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Ravenna, the former seat of the imperial exarch, held by Aistulf in 752–753; the cities of its exarchate were the object of the whole dispute, and Fulrad received them for St Peter in 756.
+types: [settlement]
+names:
+  - form: Ravenna
+    lang: la
+    script: Latn
+    cite:
+      - id: ravenna-name
+        says: The life names Ravenna as where the pope's envoys found Aistulf.
+        source: liber-pontificalis
+        at: ad eundem misit nequissimus Aistulfum Ravennam
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [12.2017, 44.4161]
+    notes: Placed at the coordinate Wikidata records for Ravenna (Q13364), the modern locality identified with the place the sources name.
+    cite:
+      - id: ravenna-point
+        says: The point is the coordinate Wikidata records for Ravenna; the identification with the place the sources name is editorial.
+        source: wikidata
+        at: Q13364 (P625), revision 2547065640
+modern:
+  - form: Ravenna
+    lang: it
+    script: Latn
+    note: Modern city, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q13364
+    url: https://www.wikidata.org/wiki/Q13364
+    license: CC0-1.0

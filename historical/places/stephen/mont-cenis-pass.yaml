@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: The Mont Cenis, the pass between the Maurienne and the Susa valley that Pepin crossed in 756.
+types: [landform, route_node]
+names:
+  - form: mons Cinisius
+    lang: la
+    script: Latn
+    cite:
+      - id: mont-cenis-pass-name
+        says: The continuations say the king crossed mons Cinisius.
+        source: fredegar-continuations
+        at: CXXI
+        quote: monte Cinisio transacto
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [6.9577, 45.2064]
+    notes: Placed at the coordinate Wikidata records for Mont Cenis (Q7984158), the modern locality identified with the place the sources name.
+    cite:
+      - id: mont-cenis-pass-point
+        says: The point is the coordinate Wikidata records for Mont Cenis; the identification with the place the sources name is editorial.
+        source: wikidata
+        at: Q7984158 (P625), revision 2550939976
+modern:
+  - form: Col du Mont-Cenis
+    lang: fr
+    script: Latn
+    note: The modern pass.
+external_ids:
+  - system: wikidata
+    id: Q7984158
+    url: https://www.wikidata.org/wiki/Q7984158
+    license: CC0-1.0

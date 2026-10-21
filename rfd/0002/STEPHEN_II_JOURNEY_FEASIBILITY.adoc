@@ -1,0 +1,189 @@
+= Stephen II's journey to the Franks: source-feasibility note
+:state: desk-research note for owner review; the chapter it describes is a draft, not approved content, and this note is not an RFD decision
+:prepared-from: origin/main @ 026fc7b
+:research-window: single bounded pass, 2026-10-21
+:toc:
+:toclevels: 2
+
+This note answers the "half-day feasibility note before the owner picks" step
+of the chapter-selection method of 2026-10-21, for the first-ranked candidate:
+Pope Stephen II's journey from Rome to the Frankish king Pepin, 753–754. The
+owner asked on 2026-10-21 for as many chapters and events as possible, to test
+both the data model and the engine, so the pass also authored the chapter as a
+draft: `historical/chapters/stephen-ii-journey-753-754.yaml` and the records it
+reaches. Nothing in it is approved; the owner approves it, or not, with `pnpm
+approvals`.
+
+Where the note states a historical fact, a record cites a source and a locator
+for it. Where it describes an identification or a reading, it says so.
+
+== Verdict
+
+Feasible, and a good second journey for the engine. The journey has a
+followable shape with dated stops at both ends (14 October 753 from Rome,
+15 November from Pavia, 6 January 754 at Ponthion), named stops between them,
+and a return with the army through named places. All four primary texts are
+public domain and reachable as transcriptions, and every place has a continuous
+modern identity, so the stops can carry asserted coordinates rather than
+display anchors. The sources disagree in three places that the contract's
+dispute and window mechanisms already express.
+
+The weak points are the editions. Every passage was read in an unproofread
+transcription, the life of Stephen in a reading copy with no paragraph numbers,
+and none was checked against a critical edition, because the scans refused the
+container. That check is the first item before release.
+
+== Sources and access
+
+[cols="2,2,3",options="header"]
+|===
+|Work |Read in (2026-10-21) |Use
+
+|_Liber pontificalis_, life of Stephen II (ed. Duchesne, 1886)
+|Fontistoriche reading copy (no paragraph numbers)
+|The spine: the only continuous narrative, with the three exact dates, the companions' names, the Ponthion meeting and oath, Saint-Denis, Quierzy, Carloman, both campaigns, the imperial envoys, Fulrad and the keys, the burial date.
+
+|_Annales regni Francorum_
+|Latin Wikisource (75% proofread, edition not named)
+|Frankish dating: Stephen's coming (753), the anointing (754), the first campaign, the return and Carloman's death (755), the second campaign and Aistulf's death (756).
+
+|Revised annals (_Annales qui dicuntur Einhardi_), Migne PL 104
+|Latin Wikisource
+|The conflicting meeting place (Quierzy), the escort under Fulrad, Carloman's fever and burial at Monte Cassino, Desiderius as constable.
+
+|Continuations of Fredegar
+|The Latin Library (chapters CXIX–CXXII)
+|The Frankish side of the road: Thionville, mons Iovis, Ponthion as a royal estate, Saint-Denis "apud Parisius", Berny, Lyon, Vienne, the Maurienne, the Susa valley, and in 756 Chalon, Janua, the Mont Cenis.
+
+|_Codex Carolinus_, letter I of Stephen II
+|Latin Wikisource (from ALIM)
+|Only Abbot Droctegang's mission.
+|===
+
+Refused or not read from the container on 2026-10-21: the Internet Archive
+(connection reset), HathiTrust and Gallica (403), so neither Duchesne's nor any
+MGH scan could be read; Wikidata and Wikipedia rate-limited the container for
+part of the pass (429), so coordinates were read one item at a time. dMGH
+answered but its terms were not read, so it is a `?` row in the register.
+
+*Reuse.* The works are public domain and are quoted as works, with the edition
+cited and the transcription noted, under the register's rule. The register has
+new or widened rows for Latin Wikisource, Duchesne's edition, Fontistoriche
+(site CC BY-NC-SA, which claims no rights over the texts it shows), the Latin
+Library (no licence stated), and dMGH (unread). Wikidata (CC0) gives only the
+modern coordinates and identifiers, each pinned to the item revision read.
+
+== What the chapter holds
+
+* *56 events* in four parts: the prelude in Rome (752–753, 10 events), the
+  journey to Saint-Denis and the winter in Francia (753–754, 18), the first
+  campaign and the return (754 or 755, 13), and a coda (756–757, 15).
+* *22 places*, all with asserted points (`approximate_point`): five at site
+  precision (St Peter's, Santa Maria Maggiore, Saint-Maurice, Saint-Denis,
+  Monte Cassino), fifteen at locality precision, and two valleys at region
+  precision (the Maurienne, the Susa valley).
+* *23 actors*: 19 people, the Lombard and Frankish kingdoms, the empire, and
+  the Roman church.
+* *8 relationships*: conflict, alliance, travel (out and back), diplomacy
+  (Pepin to Aistulf, the empire to Pepin), the 756 donation as a change of
+  boundaries, and the pope's support for Desiderius.
+* *5 sources*, and 3 disputes kept as disputes or windows.
+
+== Disputes and uncertainty
+
+[cols="1,3",options="header"]
+|===
+|Question |How the chapter keeps it
+
+|Where the pope met the king
+|The life has Ponthion and the continuations have Charles bring him there; the revised annals (after 814) have Quierzy. `ponthion-meeting-754` is disputed, with the revised annals as a conflicting claim.
+
+|Who sent Carloman
+|The life says Aistulf, the annals his abbot, the revised annals the abbot at the Lombard king's order. `carloman-arrival-754` is disputed and keeps all three.
+
+|The year of the first campaign and the return
+|The annals put them in 755; the life tells them straight after the 754 anointing and assembly. Every campaign event carries the window `754..755` instead of a year.
+
+|Janua in 756
+|Usually Genoa, but on the road from Chalon to the Maurienne it is read as Geneva. Editorial, said on the place and the event.
+
+|The year of the Berny assembly
+|"Evoluto anno … ad Kalendas Martias": dated 1 March 754 by the life's order; the reading is stated on the event.
+
+|The imperial envoys "in this city of Rome"
+|The life has the pope receive them in Rome while it also has him with the army. Recorded as the life gives it, not resolved.
+|===
+
+Dates are written in the Julian calendar. The life dates by indiction: the
+seventh indiction began on 1 September 753, which fixes 14 October and
+15 November to 753 and the following 6 January to 754.
+
+== Fit with journeys as their own kind (PR #26)
+
+The stops are modelled for the proposed journey record: each stop is an event
+with exactly one `site`, `start`, `end` or `waypoint` place, and everything
+else is `context`. Two events are deliberately not stops because their place is
+not stated (`charles-meets-stephen-753`, and `george-meets-pepin-754`, "not far
+from Pavia"). Once the kind exists, these journeys follow from the records
+without new events:
+
+[source,yaml]
+----
+# historical/journeys/stephen-to-francia-753.yaml (proposed, not written)
+travellers: [{ actor: stephen-ii, role: leader }]
+stops:
+  - rome-departure-753
+  - pavia-arrival-753
+  - pavia-departure-753
+  - great-st-bernard-crossing-753
+  - saint-maurice-arrival-753
+  - ponthion-meeting-754
+  - saint-denis-winter-754
+cite: [{ source: liber-pontificalis, at: XIIII die octobrii … ad exhibernandum }]
+
+# stephen-return-754: saint-denis-winter-754, lyon-march-754, vienne-march-754,
+#   maurienne-camp-754, pavia-siege-754, stephen-return-rome-754
+# imperial-envoys-754: imperial-envoys-rome-754, imperial-envoys-marseille-754
+#   (by: sea — "marino itinere" is stated), george-meets-pepin-754 (context: breaks)
+# pepin-campaign-756: chalon-march-756, geneva-march-756, maurienne-march-756,
+#   mont-cenis-crossing-756, susa-clusae-756, pavia-siege-756
+# carloman-754: carloman-arrival-754, carloman-vienne-754, carloman-burial-755
+#   (place: vienne, then place: monte-cassino)
+----
+
+What it exercises that the Tang voyage does not: a land journey whose every
+stop has an asserted point, so legs are drawn end to end; two journeys sharing
+stops (the pope's return and the first campaign); a sea leg stated by the
+source on another party's journey; a journey ending at a stop that is the
+start of another (Pavia); and a party whose order is attested but whose dates
+are windows that overlap (Pavia to Ponthion), so the playhead has to show order
+without false sub-year precision. The one open question in PR #26 this chapter
+answers by example is `by`: no leg of the pope's journey states its mode, and
+none can be inferred from an island, so a strict rule would leave every leg
+unstated.
+
+== What else it tests in the engine
+
+* The first chapter in Latin and in the Julian calendar, with Latin name forms
+  and no romanization.
+* Dense places: Rome carries nine events and Pavia seven, and Rome and St
+  Peter's are under 3 km apart, so labels and markers have to cluster.
+* Windows of very different widths beside exact days, including several
+  `754..755` windows overlapping the day-precise 754 events.
+* Region-precision points (two valleys) beside site-precision ones.
+* A chapter whose map runs from Marseille to the Moselle and from the Seine to
+  Monte Cassino, so the home view is a European region rather than a sea.
+
+== Gaps and follow-ups
+
+. Re-check every locator against Duchesne (the life), Kurze (both annals),
+  Krusch (the continuations) and Gundlach (the letter), and give the life
+  Duchesne's paragraph numbers. Read dMGH's terms first.
+. Add the _Clausula de unctione Pippini_ (767), which dates the anointing to a
+  day in July 754 and adds Queen Bertrada's blessing; it is not cited yet, so
+  the anointing keeps the year.
+. Add the Codex Carolinus letters of 755–756 to the coda, and San Vincenzo al
+  Volturno, Comacchio and Narni as places.
+. A specialist review of the identifications (Ponthion, Berny, Janua, the
+  clusae) and of the 754/755 chronology.
+. The journey records above, once PR #26's kind is accepted and built.

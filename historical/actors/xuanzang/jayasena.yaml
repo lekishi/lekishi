@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  勝軍, the lay scholar of 杖林山 who refused the offices of two kings; 玄奘 studied with him for two
+  years.
+types: [person]
+names:
+  - form: 勝軍
+    lang: lzh
+    script: Hani
+    roman: Shengjun
+    scheme: pinyin
+    cite:
+      - id: jayasena-name
+        says: The biography names the lay teacher of 杖林山 as 勝軍.
+        source: cien-zhuan
+        at: 卷四（從此複往杖林山居士勝軍論師所）
+        quote: 從此複往杖林山居士勝軍論師所
+roles:
+  - role: scholar
+    cite:
+      - id: jayasena-role
+        says: The biography records 玄奘 studying with him for two years.
+        source: cien-zhuan
+        at: 卷四（法師就之，首末二年）
+        quote: 法師就之，首末二年

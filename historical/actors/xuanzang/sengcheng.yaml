@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  僧稱, the nearly seventy-year-old master of 迦濕彌羅 who lectured to 玄奘 on the 俱舍, the 順正理, 因明 and
+  聲明.
+types: [person]
+names:
+  - form: 僧稱
+    lang: lzh
+    script: Hani
+    roman: Sengcheng
+    scheme: pinyin
+    cite:
+      - id: sengcheng-name
+        says: The biography names the master of 迦濕彌羅 as 僧稱.
+        source: cien-zhuan
+        at: 卷二（彼僧稱法師者）
+        quote: 彼僧稱法師者，高行之人
+roles:
+  - role: monk
+    cite:
+      - id: sengcheng-role
+        says: The biography records his daily lectures for 玄奘.
+        source: cien-zhuan
+        at: 卷二（自午已前講《俱舍論》）
+        quote: 自午已前講《俱舍論》，午已後講《順正理論》

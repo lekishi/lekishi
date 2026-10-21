@@ -1,0 +1,63 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  玄奘, the monk of 長安 who left for India against the court's ban in 貞觀三年 (629), studied at 那爛陀 under
+  戒賢, travelled the subcontinent, won 戒日王's assembly at 曲女城, and came back over the 蔥嶺 to 長安 in 貞觀十九年
+  (645) with 657 texts. He translated them at 弘福寺 and 玉華宮 and died at 玉華寺; the biography dates his death
+  麟德元年 (664) and the official history 顯慶六年 (661).
+types: [person]
+names:
+  - form: 玄奘
+    lang: lzh
+    script: Hani
+    roman: Xuanzang
+    scheme: pinyin
+    cite:
+      - id: xuanzang-name
+        says: The biography opens with his religious name 玄奘 and his family name 陳.
+        source: cien-zhuan
+        at: 卷一（法師諱玄奘，俗姓陳，陳留人也）
+        quote: 法師諱玄奘，俗姓陳，陳留人也
+      - id: xuanzang-name-history
+        says: The official history names him 僧玄奘, of the 陳 family of 洛州偃師.
+        role: supporting
+        source: jiu-tangshu-fangji
+        at: 卷一九一 方伎 僧玄奘
+        quote: 僧玄奘，姓陳氏，洛州偃師人
+  - form: 摩訶耶那提婆
+    lang: lzh
+    script: Hani
+    note: The title 大乘天 that the Mahāyāna monks gave him after the 曲女城 assembly.
+    cite:
+      - id: xuanzang-title
+        says: The biography records the Mahāyāna assembly naming him 摩訶耶那提婆, 大乘天.
+        source: cien-zhuan
+        at: 卷五（大乘眾號曰摩訶耶那提婆）
+        quote: 大乘眾號曰“摩訶耶那提婆”，此云“大乘天”
+  - form: 大乘天
+    lang: lzh
+    script: Hani
+    note: The Chinese rendering of the same title.
+    claim: xuanzang-title
+  - form: 三藏法師
+    lang: lzh
+    script: Hani
+    note: The form of address in the biography's title.
+    claim: xuanzang-name
+roles:
+  - role: monk
+    note: The chapter documents him from the 629 departure to the 664 death notice.
+    date:
+      value: 629..664
+      mode: duration
+      calendar: chinese_lunisolar
+      as_written: 貞觀三年秋八月 — 麟德元年二月五日夜半
+    cite:
+      - id: xuanzang-role
+        says: The biography follows him from the 貞觀三年 departure to his death at 玉華寺.
+        source: cien-zhuan
+        at: 卷一（貞觀三年秋八月）
+        quote: 貞觀三年秋八月，將欲首塗
+notes:
+  The biography is by his disciples and is devotional; the chapter records the movements, meetings
+  and studies it reports and leaves out its dreams and wonders. His origin is 陳留 and 緱氏 in the biography
+  and 洛州偃師 in the official history; the chapter keeps both as written.

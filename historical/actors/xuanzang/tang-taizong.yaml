@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  太宗 (文武聖皇帝), the second Tang emperor, whose ban 玄奘 broke in 629 and who welcomed him back at 洛陽
+  in 貞觀十九年 (645), urged him to return to lay life and asked him to write the 西域記.
+types: [person]
+names:
+  - form: 太宗
+    lang: lzh
+    script: Hani
+    roman: Taizong
+    scheme: pinyin
+    cite:
+      - id: tang-taizong-name
+        says: The official history records 太宗 receiving 玄奘 on his return.
+        source: jiu-tangshu-fangji
+        at: 卷一九一 方伎 僧玄奘
+        quote: 太宗見之，大悅，與之談論
+  - form: 文武聖皇帝
+    lang: lzh
+    script: Hani
+    note: The title the biography uses for him at the 洛陽 audience.
+    cite:
+      - id: tang-taizong-title
+        says: The biography records 玄奘 presenting himself to 文武聖皇帝 at the 洛陽宮.
+        source: cien-zhuan
+        at: 卷六（壬辰，法師謁文武聖皇帝於洛陽宮）
+        quote: 壬辰，法師謁文武聖皇帝於洛陽宮
+  - form: 秦王
+    lang: lzh
+    script: Hani
+    note: His title before he took the throne, which 玄奘 explains to 戒日王.
+    cite:
+      - id: tang-taizong-qinwang
+        says: The biography records 玄奘 telling 戒日王 that the 秦王 of the song is the present emperor.
+        source: cien-zhuan
+        at: 卷五（秦王者，即支那國今之天子也）
+        quote: 秦王者，即支那國今之天子也
+roles:
+  - role: ruler
+    note: The chapter documents his reign only where it touches 玄奘, 629–649.
+    cite:
+      - id: tang-taizong-role
+        says: The biography records the emperor receiving 玄奘 in the 儀鸞殿.
+        source: cien-zhuan
+        at: 卷六（二月己亥，見於儀鸞殿，帝迎慰甚厚）
+        quote: 二月己亥，見於儀鸞殿，帝迎慰甚厚

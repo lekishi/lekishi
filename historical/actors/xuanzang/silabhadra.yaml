@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: 戒賢, the head of 那爛陀 (正法藏), who taught 玄奘 the 瑜伽師地論, three times, and let him go home to translate.
+types: [person]
+names:
+  - form: 戒賢
+    lang: lzh
+    script: Hani
+    roman: Jiexian
+    scheme: pinyin
+    cite:
+      - id: silabhadra-name
+        says: The biography names the head of 那爛陀 as 戒賢, called 正法藏.
+        source: cien-zhuan
+        at: 卷三（即戒賢法師也）
+        quote: 即戒賢法師也，眾共尊重，不斥其名，號為正法藏
+  - form: 正法藏
+    lang: lzh
+    script: Hani
+    note: The title the monks used instead of his name.
+    claim: silabhadra-name
+roles:
+  - role: monk
+    cite:
+      - id: silabhadra-role
+        says: The biography records 戒賢 lecturing on the 瑜伽論 to thousands.
+        source: cien-zhuan
+        at: 卷三（方請戒賢法師講《瑜伽論》）
+        quote: 方請戒賢法師講《瑜伽論》，同聽者數千人

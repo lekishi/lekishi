@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  石盤陀, the young foreigner at 瓜州 who took the five precepts from 玄奘, guided him across the river
+  past 玉門關, and turned back before the beacons.
+types: [person]
+names:
+  - form: 石盤陀
+    lang: lzh
+    script: Hani
+    roman: Shi Pantuo
+    scheme: pinyin
+    note: The transcription writes 姓石字盤陀.
+    cite:
+      - id: shi-pantuo-name
+        says: The biography names the foreigner who came to worship as 石盤陀.
+        source: cien-zhuan
+        at: 卷一（問其姓名，云姓石字盤陀）
+        quote: 問其姓名，云姓石字盤陀
+roles:
+  - role: other
+    note: Guide across the frontier river.
+    cite:
+      - id: shi-pantuo-role
+        says: The biography records him promising to take 玄奘 past the five beacons.
+        source: cien-zhuan
+        at: 卷一（胡人許諾，言送師過五烽）
+        quote: 胡人許諾，言送師過五烽

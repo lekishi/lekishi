@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Discrete horizons of brief human activity at Monte Verde, Chile, with stone artifacts, faunal
+  remains and burned areas dated between at least about 18,500 and 14,500 cal BP, which the excavators
+  argue are probably anthropogenic.
+types:
+  - occurrence
+date:
+  value: 16551 BCE..12551 BCE
+  mode: window
+  calendar: julian
+  as_written: between at least ~18,500 and 14,500 cal BP
+  cite:
+    - id: monte-verde-early-time
+      says:
+        Dillehay and colleagues date discrete horizons of ephemeral human activity by radiocarbon and
+        luminescence to between at least about 18,500 and 14,500 cal BP.
+      basis: interpretation
+      attributed_to: Dillehay et al. 2015
+      source: dillehay-2015-monte-verde
+      at: abstract
+      quote:
+        New evidence of stone artifacts, faunal remains, and burned areas suggests discrete horizons
+        of ephemeral human activity in a sandur plain setting radiocarbon and luminescence dated between
+        at least ~18,500 and 14,500 cal BP.
+places:
+  - place: monte-verde
+    role: site
+    note:
+      The horizons lie across about 500 m between the MV-I and Chinchihuapi sites, which the record
+      does not place separately.
+notes:
+  The excavators present the horizons as probable, not certain, evidence of human activity, and the
+  window holds several episodes. The source gives the age in years before present (BP, counted back from
+  1950); the date converts it to civil years without a year zero (N BP is N − 1949 BCE), keeps the source's
+  own figures in as_written, and adds no precision of its own.

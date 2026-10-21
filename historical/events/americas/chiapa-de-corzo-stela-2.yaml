@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Stela 2 at Chiapa de Corzo, a fragmentary monument found beneath Mound 5b, carries the Long Count
+  date 7.16.3.2.13 6 Ben 16 Xul, read as 36 BC, the earliest Long Count date then known in Mesoamerica.
+types:
+  - occurrence
+date:
+  value: 36 BCE
+  calendar: julian
+  as_written: 7.16.3.2.13 6 Ben 16 Xul
+  cite:
+    - id: chiapa-stela-time
+      says: Guerrero reads the stela's date as 7.16.3.2.13 6 Ben 16 Xul, 36 BC.
+      basis: interpretation
+      attributed_to: Guerrero Orozco 2010
+      source: guerrero-2010-olmec-writing
+      at: p. 1065
+    - id: chiapa-stela-earliest
+      says:
+        Bachand, Lowe and Gallaga state that the fragmentary Stela 2, found beneath Mound 5b, shows
+        the earliest Long Count date yet found in Mesoamerica, 36 BC.
+      basis: interpretation
+      attributed_to: Bachand, Lowe and Gallaga Murrieta 2009
+      role: supporting
+      source: bachand-2009-chiapa-de-corzo
+      at: p. 546
+places:
+  - place: chiapa-de-corzo
+    role: site
+    note: Found beneath Mound 5b, which is not placed separately.
+participants:
+  - actor: epi-olmec-culture
+    role: other
+notes:
+  The date is read from a Long Count, a day count the contract has no calendar for. The record writes
+  the year the cited reading gives, as a Julian year, and keeps the Long Count in as_written; the reading
+  depends on a correlation constant the source does not name.

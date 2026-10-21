@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Stela C at Tres Zapotes in Veracruz, a basalt monument carved in the Isthmian or Epi-Olmec manner,
+  carries the Long Count date 7.16.6.16.18 6 Etznab 1 Uo, read as 32 BC.
+types:
+  - occurrence
+date:
+  value: 32 BCE
+  calendar: julian
+  as_written: 7.16.6.16.18 6 Etznab 1 Uo
+  cite:
+    - id: tres-zapotes-time
+      says: Guerrero reads the stela's date as 7.16.6.16.18 6 Etznab 1 Uo, 5 September 32 BC.
+      basis: interpretation
+      attributed_to: Guerrero Orozco 2010
+      source: guerrero-2010-olmec-writing
+      at: p. 1065
+places:
+  - place: tres-zapotes
+    role: site
+participants:
+  - actor: epi-olmec-culture
+    role: other
+notes:
+  Guerrero gives a day, 5 September 32 BC, without naming the calendar or the correlation; the record
+  keeps the year only. The date is read from a Long Count, a day count the contract has no calendar for.
+  The record writes the year the cited reading gives, as a Julian year, and keeps the Long Count in as_written;
+  the reading depends on a correlation constant the source does not name.
+dispute:
+  status: disputed
+  summary:
+    "The sources give different years for the same Long Count: Guerrero reads 7.16.6.16.18 as 32
+    BC, and the INAH site-museum guide gives the stela's date as 32 CE. The chapter shows the scholarly
+    reading and keeps the guide's year as a conflicting account; Guerrero also notes that the monument
+    may have been reused at a later time."
+cite:
+  - id: tres-zapotes-time-guide
+    says: The INAH site-museum guide states that the stela's other face carries the Long Count date 32 CE.
+    role: conflicting
+    source: inah-tres-zapotes-guide
+    at: p. 1

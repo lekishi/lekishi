@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Teotihuacan, in the Teotihuacan Valley of Mexico, is a flourishing metropolis from CE 1 to 550,
+  one of the largest pre-Columbian cities of the Americas.
+types:
+  - process
+date:
+  value: 1..550
+  mode: duration
+  calendar: julian
+  as_written: from CE 1–550
+  cite:
+    - id: teotihuacan-time
+      says:
+        Sugiyama and colleagues describe the Teotihuacan Valley as the site of a flourishing metropolis
+        from CE 1–550.
+      basis: interpretation
+      attributed_to: Sugiyama et al. 2021
+      source: sugiyama-2021-teotihuacan
+      at: Introduction
+      quote: the Teotihuacan Valley, the site of a flourishing metropolis from CE 1–550
+places:
+  - place: teotihuacan
+    role: site
+notes:
+  The span runs past this chapter's end at 100 CE; only its first century belongs to the chapter's
+  era.

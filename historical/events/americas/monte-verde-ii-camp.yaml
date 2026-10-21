@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Monte Verde II, a campsite on the north terrace of Chinchihuapi Creek in Chile dated about 14,500
+  cal BP, with a long tent-like dwelling, hearths, human footprints, economic plants and wood, reed, bone
+  and stone artifacts.
+types:
+  - occurrence
+date:
+  value: 12551 BCE
+  calendar: julian
+  as_written: ~14,500 cal BP
+  cite:
+    - id: monte-verde-ii-time
+      says:
+        Dillehay and colleagues restate that earlier work found one valid human site, MV-II, dated about
+        14,500 cal BP.
+      basis: interpretation
+      attributed_to: Dillehay et al. 2015
+      source: dillehay-2015-monte-verde
+      at: Introduction
+      quote:
+        Previous work at Monte Verde revealed one valid human site (MV-II) dated ~14,500 cal BP and
+        adapted to a cool, temperate rainforest
+places:
+  - place: monte-verde
+    role: site
+notes:
+  The source gives one approximate date, written here as a single year because the record notation
+  cannot yet mark a date as approximate; it is not a claim about that year. The source gives the age in
+  years before present (BP, counted back from 1950); the date converts it to civil years without a year
+  zero (N BP is N − 1949 BCE), keeps the source's own figures in as_written, and adds no precision of
+  its own.
+cites:
+  summary:
+    id: monte-verde-ii-summary
+    says:
+      Dillehay and colleagues describe MV-II as a campsite buried in the creek's north terrace with
+      a tent-like dwelling, hearths, footprints, plants and artifacts.
+    source: dillehay-2015-monte-verde
+    at: Introduction
+    quote:
+      MV-II is a campsite buried in the north terrace of Chinchihuapi Creek, which formed around
+      15,000 cal BP, and associated with the remains of a long tent-like dwelling, the foundation of another
+      structure, hearths, human footprints, economic plants, and wood, reed, bone, and stone artifacts.

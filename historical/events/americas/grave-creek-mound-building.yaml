@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Adena builders raise Grave Creek Mound in West Virginia, a large earthen burial mound encircled
+  by a moat, in 2250–2150 BP.
+types:
+  - process
+date:
+  value: 301 BCE..201 BCE
+  mode: window
+  calendar: julian
+  as_written: 2250-2150 BP
+  cite:
+    - id: grave-creek-time
+      says: The nomination dates Grave Creek Mound to 2250–2150 BP.
+      basis: interpretation
+      attributed_to: Poverty Point World Heritage nomination (2013)
+      source: poverty-point-nomination
+      at: PDF p. 115, 3.2 Comparative analysis (Adena)
+places:
+  - place: grave-creek-mound
+    role: site
+participants:
+  - actor: adena-culture
+    role: participant
+notes:
+  The source gives the age in years before present (BP, counted back from 1950); the date converts
+  it to civil years without a year zero (N BP is N − 1949 BCE), keeps the source's own figures in as_written,
+  and adds no precision of its own.

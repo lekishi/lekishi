@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Maya hieroglyphic writing on painted walls and plaster fragments inside the Las Pinturas pyramid
+  at San Bartolo, Guatemala, with carbonized wood dated 200–300 B.C., shows a developed script centuries
+  earlier than had been thought.
+types:
+  - occurrence
+date:
+  value: 300 BCE..200 BCE
+  mode: window
+  calendar: julian
+  as_written: calibrated radiocarbon dates of 200 to 300 B.C.
+  cite:
+    - id: san-bartolo-writing-time
+      says:
+        Saturno, Stuart and Beltrán report calibrated radiocarbon dates of 200 to 300 B.C. on carbonized
+        wood closely associated with the writing.
+      basis: interpretation
+      attributed_to: Saturno, Stuart and Beltrán 2006
+      source: saturno-2006-san-bartolo
+      at: abstract
+places:
+  - place: san-bartolo-guatemala
+    role: site
+participants:
+  - actor: maya-civilization
+    role: other

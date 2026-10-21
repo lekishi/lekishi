@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Human footprints in the sediments of a playa at White Sands, New Mexico, lie between seed layers
+  whose calibrated radiocarbon ages fall between about 23,000 and 21,000 years ago, placing people in
+  North America during the Last Glacial Maximum.
+types:
+  - occurrence
+date:
+  value: 21051 BCE..19051 BCE
+  mode: window
+  calendar: julian
+  as_written: calibrated radiocarbon ages between ~23 and 21 thousand years ago
+  cite:
+    - id: white-sands-time
+      says:
+        Bennett and colleagues report footprints stratigraphically bracketed by seed layers with calibrated
+        radiocarbon ages between about 23 and 21 thousand years ago.
+      basis: interpretation
+      attributed_to: Bennett et al. 2021
+      source: bennett-2021-white-sands
+      at: abstract
+    - id: white-sands-time-park
+      says: The park page gives the calibrated seed dates as 22,860 (∓320) and 21,130 (∓250) years ago.
+      role: supporting
+      source: nps-white-sands-footprints
+      at: Fossilized Footprints
+      quote: It was revealed that the calibrated dates were of 22,860 (∓320) and 21,130 (∓250) years ago.
+    - id: white-sands-time-retest
+      says:
+        Pigati and colleagues test the seed ages, questioned for a possible old-carbon reservoir effect,
+        with pollen and luminescence ages and find the chronology robust.
+      basis: interpretation
+      attributed_to: Pigati et al. 2023
+      role: supporting
+      source: pigati-2023-white-sands
+      at: abstract
+places:
+  - place: white-sands
+    role: site
+    note: The footprints were found in trenches on the park's western playa; the record places no trench.
+notes:
+  The footprints lie in several layers, so the window holds more than one episode of walking and
+  is not one moment. The seed ages were questioned for a possible old-carbon reservoir effect; the 2023
+  retest with terrestrial pollen and luminescence found the original chronology robust, and the record
+  keeps the retest as supporting evidence rather than marking a dispute. The source gives the age in years
+  before present (BP, counted back from 1950); the date converts it to civil years without a year zero
+  (N BP is N − 1949 BCE), keeps the source's own figures in as_written, and adds no precision of its own.

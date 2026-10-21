@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Radiocarbon dates from Caral in the Supe Valley of Peru place monumental architecture, urban
+  settlement and irrigation agriculture there between 2627 and 1977 cal BC; Caral is one of 18 large preceramic
+  sites in the valley.
+types:
+  - process
+date:
+  value: 2627 BCE..1977 BCE
+  mode: duration
+  calendar: julian
+  as_written:
+    4090 years before the present (2627 calibrated years B.C.) to 3640 years before the present
+    (1977 calibrated years B.C.)
+  cite:
+    - id: caral-time
+      says:
+        Shady Solis, Haas and Creamer date monumental architecture, urban settlement and irrigation
+        agriculture at Caral to 2627–1977 cal BC.
+      basis: interpretation
+      attributed_to: Shady Solis, Haas and Creamer 2001
+      source: shady-2001-caral
+      at: abstract
+    - id: caral-time-nomination
+      says:
+        The nomination dates Caral-Supe more broadly, to 4950–3750 BP, within a Late Archaic Supe Valley
+        settlement of about 5000–3800 BP.
+      basis: interpretation
+      attributed_to: Poverty Point World Heritage nomination (2013)
+      role: supporting
+      source: poverty-point-nomination
+      at: PDF p. 131, 3.2 Comparative analysis (Caral-Supe)
+places:
+  - place: caral
+    role: site
+notes:
+  "The two cited spans differ in scope: the 2001 dates are the radiocarbon range from the excavations
+  then published, and the nomination's 4950–3750 BP (3001–1801 BCE) is a later summary of the site's
+  occupation. The record shows the dated range and keeps the summary as support; neither is presented
+  as the city's founding date."

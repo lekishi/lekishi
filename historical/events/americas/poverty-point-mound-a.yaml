@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The platform of Mound A at Poverty Point, one of the largest earthen mounds in North America,
+  is raised in one continuous effort, probably in less than three months, sometime after about 3400 BP.
+types:
+  - occurrence
+part_of:
+  - poverty-point-earthworks
+date:
+  value: 1451 BCE..1151 BCE
+  mode: window
+  calendar: julian
+  as_written: the most likely start time for Mound A’s construction was sometime after ca. 3400 BP
+  cite:
+    - id: mound-a-time
+      says:
+        The nomination reports that the summed submound dates put Mound A's most likely start after
+        about 3400 BP, and that it was the last Poverty Point-aged mound built, within the site's 3700–3100
+        BP span.
+      basis: interpretation
+      attributed_to: Poverty Point World Heritage nomination (2013), after Kidder et al. 2008, 2009
+      source: poverty-point-nomination
+      at: PDF p. 54, 2.a Description (Mound A)
+places:
+  - place: poverty-point
+    role: site
+    note: Mound A is not placed separately from the site.
+notes:
+  The window's start is the dated lower bound (after about 3400 BP, 1451 BCE) and its end the close
+  of the site's Poverty Point span (3100 BP, 1151 BCE); the three-month build happened somewhere inside
+  it. The source gives the age in years before present (BP, counted back from 1950); the date converts
+  it to civil years without a year zero (N BP is N − 1949 BCE), keeps the source's own figures in as_written,
+  and adds no precision of its own.
+cites:
+  summary:
+    id: mound-a-speed
+    says:
+      The nomination reports Kidder and colleagues' conclusion that the platform was built over a
+      very short span, probably less than three months.
+    basis: interpretation
+    attributed_to: Kidder et al. 2008, 2009, as reported by the nomination
+    source: poverty-point-nomination
+    at: PDF p. 54, 2.a Description (Mound A)

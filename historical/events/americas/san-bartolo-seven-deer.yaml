@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  A day sign reading 7 Deer in the 260-day calendar, on mural fragments from an early phase of
+  the Las Pinturas pyramid at San Bartolo, is assigned to 300–200 BCE, the earliest securely dated example
+  of the Maya calendar.
+types:
+  - occurrence
+date:
+  value: 300 BCE..200 BCE
+  mode: window
+  calendar: julian
+  as_written: between 300 and 200 BCE
+  cite:
+    - id: seven-deer-time
+      says:
+        Stuart and colleagues assign the fragments, from their sealed contexts, to between 300 and 200
+        BCE.
+      basis: interpretation
+      attributed_to: Stuart et al. 2022
+      source: stuart-2022-san-bartolo
+      at: abstract
+places:
+  - place: san-bartolo-guatemala
+    role: site
+participants:
+  - actor: maya-civilization
+    role: other
+notes:
+  7 Deer is a day of the 260-day count, not a date in years; the year span comes from the fragments'
+  archaeological context.

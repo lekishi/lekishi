@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  An earthen ball court at Paso de la Amada in the Soconusco region of Chiapas, dated to about
+  1400 BC in uncalibrated radiocarbon years, at least five centuries older than any other excavated Mesoamerican
+  ball court.
+types:
+  - founding
+date:
+  value: 1400 BCE
+  calendar: unknown
+  as_written: approximately 1400 BC (uncalibrated)
+  cite:
+    - id: ballcourt-time
+      says: Hill, Blake and Clark date the ball court to approximately 1400 BC, uncalibrated.
+      basis: interpretation
+      attributed_to: Hill, Blake and Clark 1998
+      source: hill-1998-paso-de-la-amada
+      at: abstract
+places:
+  - place: paso-de-la-amada
+    role: site
+notes:
+  "The source's year is an uncalibrated radiocarbon age, which is not a calendar year: calibration
+  would move it earlier. The record keeps the source's figure, marks the calendar unknown rather than
+  claiming a civil year, and does not calibrate it."

@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  People now called the Hopewell Culture build the ceremonial earthworks of southern Ohio between
+  1,600 and 2,000 years ago, laying out precise squares, circles and octagons with a standard unit of
+  measure and interacting with people as far away as the Yellowstone basin and Florida.
+types:
+  - process
+date:
+  value: 23..423
+  mode: duration
+  calendar: julian
+  as_written: Built between 1,600 and 2,000 years ago
+  cite:
+    - id: hopewell-time
+      says:
+        The park page states that the earthworks were built between 1,600 and 2,000 years ago by people
+        now referred to as the Hopewell Culture.
+      source: nps-hopewell-world-heritage
+      at: World Heritage Designation
+      quote: Built between 1,600 and 2,000 years ago by people now referred to as the Hopewell Culture
+places:
+  - place: hopewell-earthworks
+    role: site
+    note: The World Heritage property comprises eight earthwork sites, which the record does not place separately.
+participants:
+  - actor: hopewell-culture
+    role: participant
+notes:
+  The span runs past this chapter's end at 100 CE; it is included because it begins before. The source
+  gives the age in years before its own publication (2023); the date converts it to civil years without
+  a year zero and keeps the source's own expression in as_written. The page was written after the 2023
+  inscription, so 2023 is the year counted from.
+cites:
+  summary:
+    id: hopewell-scale
+    says:
+      The park page describes the earthworks' standard unit of measure, their squares, circles and
+      octagons, and their builders' contact with people as far away as the Yellowstone basin and Florida.
+    source: nps-hopewell-world-heritage
+    at: World Heritage Designation
+    quote:
+      Artifacts, which are among the most outstanding art objects produced in pre-Columbian North
+      America, show that those who built the earthworks interacted with people as far away as the Yellowstone
+      basin and Florida.

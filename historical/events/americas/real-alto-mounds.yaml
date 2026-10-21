@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Real Alto in coastal Ecuador, a residential site with two platform mounds and plazas around a
+  raised U-shaped habitation area, dated 5000–3400 BP and listed as the oldest earthen mounds in South
+  America.
+types:
+  - process
+date:
+  value: 3051 BCE..1451 BCE
+  mode: duration
+  calendar: julian
+  as_written: 5000-3400 BP
+  cite:
+    - id: real-alto-time
+      says: The nomination dates Real Alto to 5000–3400 BP.
+      basis: interpretation
+      attributed_to: Poverty Point World Heritage nomination (2013)
+      source: poverty-point-nomination
+      at: PDF pp. 134–135, 3.2 Comparative analysis (Real Alto) and Table 3.7
+places:
+  - place: real-alto
+    role: site
+notes:
+  The U-shaped habitation area is an accretional deposit rather than a built one, and the role of
+  maize in the diet is disputed, as the nomination notes. The source gives the age in years before present
+  (BP, counted back from 1950); the date converts it to civil years without a year zero (N BP is N − 1949
+  BCE), keeps the source's own figures in as_written, and adds no precision of its own.

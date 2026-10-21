@@ -1,0 +1,199 @@
+= The missions to Tang, 630–894, as a network: feasibility note
+:toc: macro
+
+Status:: Note, 2026-10-21. Records drafted; no manifest changed and nothing
+approved.
+Belongs to:: link:README.adoc[RFD 2] (sources and authoring); the story joins
+the Tang chapter under the owner's decision of 2026-10-21 that the chapter
+holds several stories (link:CHAPTER_STORIES.adoc[several stories in one
+chapter], proposed on its own branch).
+
+toc::[]
+
+== Purpose
+
+The owner asked for the Japanese missions to Tang to be added to the Tang
+chapter as a further story, around the 750–754 embassy, and for as much
+content as possible to test the data and the engine with. This note records
+what the sources support, what was authored, what is missing, and what the
+records ask of the engine.
+
+== What was authored
+
+All records sit under `historical/*/tang-missions/`. No chapter reaches them
+yet, so the build compiles none of them and nothing is published.
+
+[cols="1,1,3",options="header"]
+|===
+|Kind |Count |Notes
+
+|Sources |3
+|日本書紀, 日本後紀, 續日本後紀. 續日本紀, 舊唐書, 新唐書 and 東征傳 already exist.
+
+|Events |123
+|Every dated step of eleven embassies, 623–839. Ids are `mission-<year>-<what>`.
+
+|Relationships |16
+|One diplomacy relationship per embassy, the 778 Tang return mission, and four
+ties: 道昭 studying under 玄奘, 阿倍仲麻呂 in Tang service, the 761 ox-horn
+request, 平群廣成's return through 渤海.
+
+|Actors |49
+|Envoys, students and monks; the Tang envoys 高表仁, 劉德高, 沈惟岳, 趙寳英,
+孫興進; the emperors 高宗, 則天武后, 德宗; and Silla, 渤海, 耽羅 and the 蝦夷.
+
+|Places |24
+|Courts, harbours and landfalls no other record set owns. See <<places>>.
+|===
+
+Every claim carries a quote, and every quote was checked as a verbatim
+substring of the transcription it cites before the files were written. A
+scratch compile of all of it under a throwaway manifest, with the records it
+borrows from other branches (<<dependencies>>), passes the publication checks
+with no errors.
+
+== Sources and access
+
+* *日本書紀* 卷廿二–廿九 for 623–670, including 伊吉連博德書, the envoy's own
+  account of the 659 embassy, which the compilers quote in notes. It is cited
+  as quoted there.
+* *續日本紀* for 701–781.
+* *日本後紀* for 801–806. Only parts of the work survive. 卷十 and 卷十一 on
+  Wikisource are reconstructed from quotations (逸文), so some entries have no
+  day; 卷十二 holds 藤原葛野麻呂's report of the 804 crossing, the longest
+  first-hand account in the set.
+* *續日本後紀* for 834–839.
+* *舊唐書* 卷一九九上 and *新唐書* 卷二二〇 for the Tang side.
+
+All are public-domain works in Wikisource transcriptions, which the register's
+Wikisource row already covers (cite the work and the edition, quote only the
+classical text). `docs/SOURCE_REGISTER.adoc` needs no new row.
+
+The existing `jiu-tangshu` source is titled for its 日本國 section; these
+records also cite its 倭國 section. Broadening the title to the whole 東夷
+chapter fits better, but that source is part of the approved chapter, so it is
+left for the next re-approval rather than changed here.
+
+== Conflicts kept
+
+Where two sources disagree, both are recorded and the event carries a visible
+dispute. Neither account is preferred.
+
+* `mission-633-gao-biaoren-departure`: 日本書紀 records a ceremonious visit;
+  both Tang histories record 高表仁 quarrelling over ritual and leaving
+  without delivering his message.
+* `mission-659-iwashiki-wreck`: 伊吉博德 says the islanders of 爾加委
+  destroyed the ship; 難波吉士男人 says it struck an island and capsized.
+* `mission-703-wu-zetian-banquet`: 舊唐書 dates 粟田眞人's embassy to
+  長安三年 (703); 新唐書 to 長安元年 (701), the year it was appointed.
+* `mission-778-xuanzheng-audience`: the two returning envoys' reports date
+  the audience with the emperor to 3/22 and 3/24.
+* `mission-806-takashina-request`: 舊唐書 has 高階真人 ask to take the
+  students home because they had made progress; 新唐書 has them wishing to
+  stay, after "more than twenty years".
+
+== Gaps
+
+* *894.* The cancelled embassy of 菅原道真 is not authored. Its sources
+  (日本紀略 and 菅家文草) could not be fetched: Wikimedia rate-limited this
+  machine for the whole session.
+* *653, second ship.* The chronicle's notice of the wreck of 高田根麻呂's
+  ship is not in the Wikisource transcription of 卷廿五. The dispatch event
+  says so and nothing is invented for it.
+* *752.* The 750–754 embassy is the existing story. This set does not repeat
+  it; its relationships end where that chapter begins.
+* *Embassies that never sailed.* The 762 embassy, cut back after a ship
+  split its stern, is recorded (`mission-762-cancelled`). Other appointments
+  that came to nothing were not searched for.
+* *Damaged characters.* The transcription writes ■ for missing characters.
+  Quotes keep them; where a name is damaged (the Tang monk 道■ of 736) the
+  record does not name the person.
+* *Day precision in 801.* 日本後紀's 逸文 give 延暦廿年 with a day but no
+  month for the appointment, so it is recorded at year precision.
+
+[[places]]
+== Places
+
+No Wikidata coordinates could be read this session (every request returned
+429), so all 24 new places carry an `unknown` position for now. The generator
+upgrades each to a display anchor citing `wikidata` "Q… (P625), revision N"
+as soon as the lookup runs. Two stay unknown on purpose:
+
+* `nikawe-island` (爾加委): no modern identification is sourced.
+* `kunlun` (崑崙國): a general name for the lands of the southern sea; which
+  coast 平群廣成 reached is not sourced.
+
+A stop at an unknown place breaks a journey's line, so until the anchors land
+most of these journeys draw only their Chinese legs.
+
+[[dependencies]]
+== Records borrowed from other branches
+
+The records reuse ids that other drafts own, so they are written once:
+
+* From the 圓仁 draft: `ennin`, `changan`, `luoyang`, `chuzhou`, `dengzhou`,
+  `hailing`, `laizhou`, `tachibana-ura`, `kashima-hizen`.
+* From the 鑒眞 crossings draft: `yuezhou`, `fuzhou`.
+* From the 玄奘 draft: `xuanzang`, `tang-taizong`.
+
+Until those branches merge, these references dangle. The build does not
+notice, because only records a manifest reaches are resolved (see
+<<engine>>).
+
+== Draft story for the several-stories manifest
+
+Proposed key `tang-missions-630-894`, title "The missions to Tang, 630–894",
+span `623..839` until the 894 records exist. The steps run in date order,
+grouped here by embassy; the sixteen relationships go in `include`. Captions
+are written when the manifest change is drafted.
+
+* 623–640, the first mission and the students: `mission-623-students-return`, `mission-630-dispatch`, `mission-631-tang-reception`, `mission-632-tsushima-arrival`, `mission-632-naniwa-reception`, `mission-633-gao-biaoren-departure`, `mission-640-students-return`
+* 653–655, two embassies under 孝德: `mission-653-dispatch`, `mission-654-laizhou-landfall`, `mission-654-dispatch`, `mission-654-nagani-return`, `mission-654-audience`, `mission-654-takamuko-death`, `mission-655-return`
+* 658–661, 伊吉博德's account of the 659 embassy: `mission-658-chitsu-chitatsu`, `mission-659-dispatch`, `mission-659-naniwa-departure`, `mission-659-tsukushi-departure`, `mission-659-iwashiki-wreck`, `mission-659-yuezhou-landfall`, `mission-659-kuozhou-escape`, `mission-659-gaozong-audience`, `mission-659-luoyang-arrival`, `mission-659-winter-solstice`, `mission-659-detention`, `mission-660-release`, `mission-661-yuezhou-return`, `mission-661-tamna`, `mission-661-yuezhou-departure`, `mission-661-asakura-report`
+* 665–670, after 白村江: `mission-665-escort-dispatch`, `mission-665-liu-degao-arrival`, `mission-667-fasong`, `mission-669-dispatch`, `mission-670-goguryeo-congratulation`
+* 701–707, 粟田眞人 in 大周: `mission-701-appointment`, `mission-701-sekito`, `mission-702-tsukushi-departure`, `mission-702-yancheng-landfall`, `mission-703-wu-zetian-banquet`, `mission-704-awata-return`, `mission-707-koze-return`, `mission-707-captives-return`
+* 716–719, the 717 embassy: `mission-716-appointment`, `mission-717-classics-lesson`, `mission-717-sekito`, `mission-718-dazaifu-return`, `mission-719-tang-robes`
+* 732–739, 多治比廣成, 崑崙 and 渤海: `mission-732-appointment`, `mission-733-naniwa-departure`, `mission-734-suzhou-departure`, `mission-734-tane-arrival`, `mission-735-kunlun-drift`, `mission-735-return`, `mission-736-heguri-nakamaro`, `mission-736-nashiro-return`, `mission-738-dengzhou-departure`, `mission-739-dewa-landing`, `mission-739-heguri-audience`
+* 759–764, fetching 藤原清河: `mission-759-appointment`, `mission-759-zenjo-return`, `mission-760-kiyokawa-letter`, `mission-761-suzhou-departure`, `mission-761-dazaifu-arrival`, `mission-762-shen-weiyue-dispute`, `mission-762-cancelled`, `mission-763-kaiyu-oki`, `mission-764-tang-inquiry`
+* 775–781, the 777 embassy and 趙寳英: `mission-775-appointment`, `mission-776-sekito`, `mission-776-matsura-wait`, `mission-777-imaemishi-stays`, `mission-777-departure`, `mission-777-hailing-landfall`, `mission-777-yangzhou-arrival`, `mission-778-changan-arrival`, `mission-778-xuanzheng-audience`, `mission-778-zhao-baoying-sent`, `mission-778-third-ship-matsura`, `mission-778-second-ship-izumi`, `mission-778-fourth-ship-tamna`, `mission-778-first-ship-breaks`, `mission-778-tsuguhito-amakusa`, `mission-779-honours`, `mission-779-tang-envoys-court`, `mission-779-tang-envoys-depart`, `mission-779-mikari-return`, `mission-780-xingneng-tribute`, `mission-781-kiyonao-return`
+* 801–806, 葛野麻呂, 空海 and 最澄: `mission-801-appointment`, `mission-803-farewell`, `mission-803-naniwa-storm`, `mission-804-tang-reception`, `mission-804-matsura-departure`, `mission-804-chian-landfall`, `mission-804-mingzhou-second-ship`, `mission-804-fuzhou-arrival`, `mission-804-changan-arrival`, `mission-804-audience`, `mission-805-dezong-death`, `mission-805-leave`, `mission-805-yuezhou`, `mission-805-mingzhou-departure`, `mission-805-second-ship-return`, `mission-805-tsushima-return`, `mission-805-third-ship-lost`, `mission-805-saicho-images`, `mission-806-takashina-request`
+* 834–839, the last embassy: `mission-834-appointment`, `mission-836-sekito`, `mission-836-posthumous-honours`, `mission-836-silla-notice`, `mission-836-first-attempt`, `mission-836-third-ship-wreck`, `mission-837-second-attempt`, `mission-838-takamura-refuses`, `mission-838-departure`, `mission-838-takamura-exile`, `mission-839-tang-tribute`, `mission-839-silla-ships`, `mission-839-matsura-return`, `mission-839-tang-letter`, `mission-839-hakata-last-ship`
+
+123 steps fit under the schema's 200. The 838 embassy meets the 圓仁 story at
+`mission-838-departure`, where 圓仁 is a participant; the diary's own events
+stay in that story.
+
+== Journey candidates for PR #26
+
+The events are shaped as dated stops, so these can become journeys once the
+kind is decided:
+
+* 659, 伊吉博德's ship: 難波 → 筑紫大津 → 越州 → 洛陽, with 石布's ship
+  breaking off to 爾加委 and five survivors reaching 括州.
+* 702, 粟田眞人: 筑紫 → 楚州塩城縣.
+* 734–739, 平群廣成: 蘇州 → 崑崙 → 長安 → 登州 → 渤海 → 出羽. The longest
+  single voyage in the set, and the only one through 渤海.
+* 777–778, out and back, with the four ships home by four routes (松浦,
+  出水, 耽羅, and the broken first ship's halves at 甑嶋 and 天草).
+* 804–805, 葛野麻呂: 松浦 → 赤岸鎭 → 福州 → 長安 → 越州 → 明州 → 對馬.
+
+[[engine]]
+== What the records ask of the engine
+
+* *Unreached records are never checked for references.* A record no manifest
+  reaches can point at an id that does not exist, and the build passes. With
+  four drafts sharing ids across branches this is easy to hit. A tree-wide
+  reference check, separate from compiling, would catch it.
+* *One main claim per field.* The publication checks allow one `main` claim
+  per pointer, so two claims that each support part of a field (one per
+  participant, say) must mark all but one `supporting`. Per-participant
+  citation would say this more exactly.
+* *Disputes are per event.* An event with a conflicting claim on one field is
+  marked disputed as a whole. That is right for these five events, but a
+  field-level dispute would let the reader show which part is contested.
+* *Court acts.* 28 events are court acts the entry gives no place for; each
+  is anchored at the court's seat with the same note. A place role
+  for this, or a chapter-level default, would remove the repetition.
+* *Unknown places in journeys.* Several landfalls (爾加委, 崑崙, and every
+  place still waiting for its anchor) break a journey's line. PR #26 should
+  say how a journey shows a leg it cannot draw.

@@ -138,7 +138,7 @@ session.
 
 === The gate
 
-==== A. Sign in with GitHub in the SvelteKit app (recommended)
+==== A. Sign in with GitHub in the SvelteKit app (chosen)
 
 The auth is renga's, adapted:
 
@@ -302,6 +302,16 @@ truth.
 * Session length: 12 hours proposed, a week in renga.
 * OAuth App now and a GitHub App later, or the GitHub App from the start.
 * Where the "Sign in" control lives, for RFD 5.
+
+== Owner decisions
+
+* *2026-10-21, the gate:* option A, sign-in with GitHub in the SvelteKit app as
+  renga-dcim/rfd does, on `adapter-cloudflare` with the public routes still
+  prerendered. This authorizes the adapter change and the worker for the drafts
+  and `/auth/*`, superseding RFD 3's static architecture decision for those
+  routes only; the OAuth App and its secrets are created by the owner.
+* *Defaults taken until the owner says otherwise:* 12-hour sessions, an OAuth App
+  with `read:org`, and a 404 for a stale chapter's public URL.
 
 == Implementation
 

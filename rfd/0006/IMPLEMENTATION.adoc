@@ -1,13 +1,12 @@
 = RFD 0006 implementation checklist
 
 Implements link:README.adoc[RFD 6: Signed-in drafts on the published site]. The
-RFD is in `discussion`; nothing below starts before the owner chooses the
-gate.
+RFD is in `discussion`. The owner chose option A on 2026-10-21.
 
 == Decide
 
-- [ ] Owner chooses the gate: A (GitHub sign-in in the SvelteKit app, after renga-dcim/rfd), B (Cloudflare Access) or C (a separate drafts deployment).
-- [ ] Owner authorizes `adapter-cloudflare`, the worker and the secrets the gate needs, and the session cookies, as exceptions to `AGENTS.md`'s static-site rules and a supersession of part of RFD 3's static architecture decision.
+- [x] Owner chooses the gate (2026-10-21: A): A (GitHub sign-in in the SvelteKit app, after renga-dcim/rfd), B (Cloudflare Access) or C (a separate drafts deployment).
+- [x] Owner authorizes `adapter-cloudflare`, the worker and the secrets the gate needs, and the session cookies, as exceptions to `AGENTS.md`'s static-site rules and a supersession of part of RFD 3's static architecture decision (2026-10-21, with the choice of A).
 - [ ] Owner answers the open questions: a stale chapter's public URL, previews, session length, OAuth App or GitHub App.
 
 == Build

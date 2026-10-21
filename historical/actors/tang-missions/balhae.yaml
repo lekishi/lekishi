@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  "渤海, the kingdom north of Silla whose envoys carried Japanese envoys and letters to and from
+  唐 when the sea routes failed: in 738–739, 759–760 and 763. The chronicle also calls it 高麗."
+types: [state]
+names:
+  - form: 渤海
+    lang: lzh
+    script: Hani
+    roman: Balhae
+    scheme: other
+    cite:
+      - id: balhae-name
+        says: The chronicle names 渤海 as the route home of 平郡廣成 in 738.
+        source: shoku-nihongi
+        at: 卷第十三 天平十一年十一月辛夘
+        quote: 請取渤海路歸朝
+  - form: 高麗
+    lang: lzh
+    script: Hani
+    note: The chronicle's usual name for 渤海 in these years.
+    claim: balhae-name
+notes: The romanization Balhae is the conventional Korean form, an editorial reading aid.

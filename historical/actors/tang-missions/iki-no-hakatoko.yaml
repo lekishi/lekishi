@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  伊吉連博德, envoy in 659 and author of the account of that mission the 日本書紀 quotes; escort of the
+  Tang garrison's envoy in 667, and later one of the compilers of the 大寶 code.
+types: [person]
+names:
+  - form: 伊吉連博德
+    lang: ja
+    script: Hani
+    roman: Iki no Hakatoko
+    scheme: hepburn
+    cite:
+      - id: iki-no-hakatoko-name
+        says: The chronicle quotes 伊吉連博德書, the envoy's own account of the 659 mission.
+        source: nihon-shoki
+        at: 卷第廿六 齊明天皇五年七月戊寅 注
+        quote: 『伊吉連博德書』曰
+  - form: 伊吉連博得
+    lang: ja
+    script: Hani
+    claim: iki-no-hakatoko-name
+  - form: 伊岐連博得
+    lang: ja
+    script: Hani
+    claim: iki-no-hakatoko-name
+roles:
+  - role: envoy
+    note: Envoy in 659–661; escort (送使) in 667.
+notes: The 大寶 code compilers are listed in 續日本紀 卷第一 文武天皇四年六月甲午 as 伊岐連博得.

@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  山上憶良, the poet, who went to 唐 as junior secretary (少録) of the 701 embassy, written 无位山於億良 in
+  the appointment.
+types: [person]
+names:
+  - form: 山於億良
+    lang: ja
+    script: Hani
+    roman: Yamanoue no Okura
+    scheme: hepburn
+    cite:
+      - id: yamanoue-no-okura-name
+        says: The chronicle lists 无位山於億良 as 少録 of the embassy on 大寶元年正月丁酉.
+        source: shoku-nihongi
+        at: 卷第二 大寶元年正月丁酉
+        quote: 无位山於億良爲少録
+  - form: 山上憶良
+    lang: ja
+    script: Hani
+    claim: yamanoue-no-okura-name
+roles:
+  - role: official
+    note: 少録 of the 701 embassy.

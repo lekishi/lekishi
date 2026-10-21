@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  橘逸勢, a student who went to 唐 with the 804 embassy, written 橘免勢 in the Tang histories, and returned
+  in 806.
+types: [person]
+names:
+  - form: 橘免勢
+    lang: ja
+    script: Hani
+    roman: Tachibana no Hayanari
+    scheme: hepburn
+    cite:
+      - id: tachibana-no-hayanari-name
+        says: The 舊唐書 names 留學生橘免勢.
+        source: jiu-tangshu
+        at: 卷199上 東夷 日本國
+        quote: 留學生橘免勢
+  - form: 橘逸勢
+    lang: ja
+    script: Hani
+    claim: tachibana-no-hayanari-name
+roles:
+  - role: scholar
+    note: Student.
+notes:
+  橘逸勢 is the form in Japanese sources; the Tang histories write 免勢. The identity is the standard
+  reading, not stated in either history.

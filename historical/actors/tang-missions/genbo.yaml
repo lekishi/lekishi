@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  玄昉, a monk who went to 唐 in 717, was honoured by the Tang emperor with the purple robe, and returned
+  in 735 with more than five thousand scrolls; later 僧正 and a power at court.
+types: [person]
+names:
+  - form: 玄昉
+    lang: ja
+    script: Hani
+    roman: Genbō
+    scheme: hepburn
+    cite:
+      - id: genbo-name
+        says:
+          The chronicle's obituary of 天平十八年六月己亥 names 僧玄■ (玄昉, the second character damaged in the transcription)
+          and gives his journey to 唐.
+        source: shoku-nihongi
+        at: 卷第十六 天平十八年六月己亥
+        quote: 僧玄■死。玄■俗姓阿刀氏。靈龜二年入唐學問。
+roles:
+  - role: monk
+notes:
+  The transcription writes the second character as ■; the name 玄昉 is restored from the critical editions
+  and must be re-checked there.

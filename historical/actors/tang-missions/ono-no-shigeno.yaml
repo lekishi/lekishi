@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  小野朝臣滋野, judge of the 777 embassy, whose report on the third ship's return is the fuller of the
+  two accounts.
+types: [person]
+names:
+  - form: 小野朝臣滋野
+    lang: ja
+    script: Hani
+    roman: Ono no Shigeno
+    scheme: hepburn
+    cite:
+      - id: ono-no-shigeno-name
+        says: The chronicle names 小野朝臣滋野 as the judge reporting the third ship's arrival.
+        source: shoku-nihongi
+        at: 卷第卅五 寶龜九年十月乙未
+        quote: 判官勅旨大丞正六位上兼下総權介小野朝臣滋野上奏言
+roles:
+  - role: envoy
+    note: 判官.

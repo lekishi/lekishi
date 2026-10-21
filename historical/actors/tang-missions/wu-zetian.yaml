@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: 武則天 (則天武后), who ruled as 聖神皇帝 and renamed the state 大周; she banqueted 粟田眞人 in the 麟德殿.
+types: [person]
+names:
+  - form: 則天
+    lang: lzh
+    script: Hani
+    roman: Wu Zetian
+    scheme: pinyin
+    cite:
+      - id: wu-zetian-name
+        says: The 舊唐書 names 則天 as giving 粟田眞人 a banquet in the 麟德殿.
+        source: jiu-tangshu
+        at: 卷199上 東夷 日本國
+        quote: 則天宴之於麟德殿
+  - form: 武后
+    lang: lzh
+    script: Hani
+    claim: wu-zetian-name
+  - form: 聖神皇帝
+    lang: lzh
+    script: Hani
+    claim: wu-zetian-name
+roles:
+  - role: ruler

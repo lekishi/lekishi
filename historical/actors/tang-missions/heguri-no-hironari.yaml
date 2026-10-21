@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  平群朝臣廣成, a judge of the 733 embassy, whose ship was driven to 崑崙國 in 734; one of four survivors,
+  he came home by 長安, 渤海 and 出羽 in 739.
+types: [person]
+names:
+  - form: 平郡朝臣廣成
+    lang: ja
+    script: Hani
+    roman: Heguri no Hironari
+    scheme: hepburn
+    cite:
+      - id: heguri-no-hironari-name
+        says: The chronicle names 平郡朝臣廣成 paying court on 天平十一年十一月辛夘.
+        source: shoku-nihongi
+        at: 卷第十三 天平十一年十一月辛夘
+        quote: 平郡朝臣廣成拜朝
+  - form: 平羣朝臣廣成
+    lang: ja
+    script: Hani
+    claim: heguri-no-hironari-name
+roles:
+  - role: envoy
+    note: 判官 of the 733 embassy.
+notes: The chronicle writes 平郡 here and 平羣 in the rank list of 天平九年九月.

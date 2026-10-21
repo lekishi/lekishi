@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  最澄, a monk who went to 唐 with the 804 embassy as a short-term scholar (請益) and came back with
+  it in 805, presenting Tang Buddhist images at court.
+types: [person]
+names:
+  - form: 最澄
+    lang: ja
+    script: Hani
+    roman: Saichō
+    scheme: hepburn
+    cite:
+      - id: saicho-name
+        says: The chronicle names 入唐求法僧最澄 presenting Tang images at court.
+        source: nihon-koki
+        at: 卷第十三 延暦廿四年八月乙巳
+        quote: 請入唐求法僧最澄於殿上
+roles:
+  - role: monk

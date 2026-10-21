@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  空海, a monk who went to 唐 with the 804 embassy and was fetched home in 806; the Tang histories
+  name him among those who stayed to study.
+types: [person]
+names:
+  - form: 空海
+    lang: ja
+    script: Hani
+    roman: Kūkai
+    scheme: hepburn
+    cite:
+      - id: kukai-name
+        says: The 舊唐書 names 學問僧空海 as staying after the embassy of 貞元二十年.
+        source: jiu-tangshu
+        at: 卷199上 東夷 日本國
+        quote: 學問僧空海
+roles:
+  - role: monk

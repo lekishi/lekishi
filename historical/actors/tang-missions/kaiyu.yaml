@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  戒融, a monk who studied in 唐 and came home through 渤海 in 763; a Tang envoy later asked after his
+  safe arrival.
+types: [person]
+names:
+  - form: 戒融
+    lang: ja
+    script: Hani
+    roman: Kaiyū
+    scheme: hepburn
+    cite:
+      - id: kaiyu-name
+        says: The chronicle names 入唐學問僧戒融 among those who returned through 渤海.
+        source: shoku-nihongi
+        at: 卷第廿四 天平寶字七年十月乙亥
+        quote: 并入唐學問僧戒融
+roles:
+  - role: monk

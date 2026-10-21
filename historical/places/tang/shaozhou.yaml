@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 韶州, where in 天寶九載 (750) 普照 took leave of 鑒眞 to go north, and where the biography says 鑒眞's sight failed.
+types: [region]
+names:
+  - form: 韶州
+    lang: lzh
+    script: Hani
+    roman: Shaozhou
+    scheme: pinyin
+    cite:
+      - id: shaozhou-name
+        says: The biography records 鑒眞 going up the river more than 700 li from 廣州 to 韶州.
+        source: toseiden
+        at: 乘江七百餘里，至韶州禪居寺，留住三日
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [113.59271, 24.80113]
+    notes: Label anchor at the modern city of 韶關 (Wikidata Q59107). It is not an asserted historical coordinate.
+    cite:
+      - id: shaozhou-anchor
+        says: The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate is asserted.
+        source: wikidata
+        at: Q59107 (P625), revision 2527813545

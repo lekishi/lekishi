@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 湖州, one of the prefectures that invited 鑒眞 to lecture on the vinaya in 744.
+types: [region]
+names:
+  - form: 湖州
+    lang: lzh
+    script: Hani
+    roman: Huzhou
+    scheme: pinyin
+    cite:
+      - id: huzhou-name
+        says: The biography names 湖州 among the prefectures that invited 鑒眞 after 越州.
+        source: toseiden
+        at: 更有杭州、湖州、宣州並來請
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [120.095833333, 30.869444444]
+    notes: Label anchor at the coordinate Wikidata records for the historical prefecture 湖州 (Q15942265). It is not an asserted historical coordinate.
+    cite:
+      - id: huzhou-anchor
+        says: The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate is asserted.
+        source: wikidata
+        at: Q15942265 (P625), revision 1742298581

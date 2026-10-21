@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 溫州, the prefecture 鑒眞 was setting out for on the morning the 江東道 commissioner's warrant reached him at 禪林寺 in 744.
+types: [region]
+names:
+  - form: 溫州
+    lang: lzh
+    script: Hani
+    roman: Wenzhou
+    scheme: pinyin
+    cite:
+      - id: wenzhou-name
+        says: The biography records that the party, about to leave for 溫州 after breakfast, was overtaken by the commissioner's warrant.
+        source: toseiden
+        at: 明朝，早食發，欲向溫州，忽有採訪使牒來追
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [120.656075, 27.999128]
+    notes: Label anchor at the modern city of 溫州 (Wikidata Q42635). It is not an asserted historical coordinate.
+    cite:
+      - id: wenzhou-anchor
+        says: The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate is asserted.
+        source: wikidata
+        at: Q42635 (P625), revision 2540444617
+notes: An intended destination only.

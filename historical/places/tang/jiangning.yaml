@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 潤州江寧縣, where 鑒眞 climbed the pavilion of 瓦官寺 and his disciple 靈祐 came from 棲霞寺 to meet him.
+types: [settlement]
+names:
+  - form: 江寧縣
+    lang: lzh
+    script: Hani
+    roman: Jiangning Xian
+    scheme: pinyin
+    cite:
+      - id: jiangning-name
+        says: The biography records 鑒眞 reaching 潤州江寧縣 seven days from 九江 and entering 瓦官寺.
+        source: toseiden
+        at: 從此七日至潤州江寧縣，入瓦官寺登寶閣
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [118.83492, 31.95478]
+    notes: Label anchor at the modern 江寧區 of 南京 (Wikidata Q1331311). It is not an asserted historical coordinate.
+    cite:
+      - id: jiangning-anchor
+        says: The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate is asserted.
+        source: wikidata
+        at: Q1331311 (P625), revision 2526580208
+notes: 瓦官寺 and 棲霞寺 are named in the biography; neither temple's site is placed, and both stay in the event's notes.

@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 杭州, one of the prefectures that invited 鑒眞 to lecture in 744, and where 榮叡, sent under guard toward the capital, was let go after a feigned death from illness.
+types: [region]
+names:
+  - form: 杭州
+    lang: lzh
+    script: Hani
+    roman: Hangzhou
+    scheme: pinyin
+    cite:
+      - id: hangzhou-name
+        says: The biography names 杭州 among the prefectures that invited 鑒眞 after 越州, and as the place 榮叡 was released.
+        source: toseiden
+        at: 更有杭州、湖州、宣州並來請; ［還］至杭州。榮叡師卧病
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [120.1675, 30.25]
+    notes: Label anchor at the modern city of 杭州 (Wikidata Q4970). It is not an asserted historical coordinate.
+    cite:
+      - id: hangzhou-anchor
+        says: The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate is asserted.
+        source: wikidata
+        at: Q4970 (P625), revision 2552031403

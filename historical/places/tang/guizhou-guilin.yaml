@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 桂州 (始安郡), where the governor-general 馮古璞 met 鑒眞 outside the walls and lodged him at 開元寺 for a year.
+types: [region]
+names:
+  - form: 桂州
+    lang: lzh
+    script: Hani
+    roman: Guizhou
+    scheme: pinyin
+    cite:
+      - id: guizhou-guilin-name
+        says: The biography records the governor of 始安郡 receiving 鑒眞 after the journey through the prefectures to 桂州.
+        source: toseiden
+        at: 梧州、桂州等官人、僧、道父老迎送禮拜; 始安［郡］都督上黨公馮古璞等步出［城］外
+  - form: 始安郡
+    lang: lzh
+    script: Hani
+    cite:
+      - id: guizhou-guilin-name-alt
+        says: The biography names the governor's command as 始安郡, the commandery name of 桂州.
+        source: toseiden
+        at: 始安［郡］都督上黨公馮古璞
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [110.286388888, 25.281944444]
+    notes: Label anchor at the modern city of 桂林 (Wikidata Q189633), which Wikidata's item for the prefecture 桂州 (Q10353160) describes as its centre. It is not an asserted historical coordinate.
+    cite:
+      - id: guizhou-guilin-anchor
+        says: The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate is asserted.
+        source: wikidata
+        at: Q189633 (P625), revision 2540542996

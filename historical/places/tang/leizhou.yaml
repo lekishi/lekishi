@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 雷州, which the party reached after three days and three nights by boat from 崖州, then went on overland through 羅州, 辨州, 象州, 白州, 傭州, 藤州 and 梧州 to 桂州.
+types: [region]
+names:
+  - form: 雷州
+    lang: lzh
+    script: Hani
+    roman: Leizhou
+    scheme: pinyin
+    cite:
+      - id: leizhou-name
+        says: The biography records the party reaching 雷州 after three days and three nights.
+        source: toseiden
+        at: 三日三夜，便達雷州
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [110.08058, 20.91471]
+    notes: Label anchor at the modern city of 雷州 (Wikidata Q1209167). It is not an asserted historical coordinate.
+    cite:
+      - id: leizhou-anchor
+        says: The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate is asserted.
+        source: wikidata
+        at: Q1209167 (P625), revision 2554762707

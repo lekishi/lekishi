@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 廬山東林寺, the temple of the Jin monk 慧遠, where 鑒眞 stayed three days on his way back to 揚州.
+types: [religious_site]
+names:
+  - form: 東林寺
+    lang: lzh
+    script: Hani
+    roman: Donglin Si
+    scheme: pinyin
+    cite:
+      - id: donglin-temple-name
+        says: The biography records 鑒眞 going to 江州 and reaching 廬山東林寺, the seat of 慧遠.
+        source: toseiden
+        at: 從此向江州，至廬山東林寺，是晉代慧遠法師之所居也
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [115.9441, 29.6011]
+    notes: Label anchor at the modern 東林寺 at 九江 (Wikidata Q2449364). It is not an asserted historical coordinate.
+    cite:
+      - id: donglin-temple-anchor
+        says: The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate is asserted.
+        source: wikidata
+        at: Q2449364 (P625), revision 2493113464
+notes: The modern temple carries the name; the record does not assert that its buildings stand on the eighth-century site.

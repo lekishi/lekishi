@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 越州, the prefecture whose 龍興寺 invited 鑒眞 to lecture in 天寶三載 (744), and whose monks then denounced 榮叡 to the prefectural officials.
+types: [region]
+names:
+  - form: 越州
+    lang: lzh
+    script: Hani
+    roman: Yuezhou
+    scheme: pinyin
+    cite:
+      - id: yuezhou-name
+        says: The biography names the monks of 越州龍興寺 as inviting 鑒眞 to lecture on the vinaya in 天寶三載.
+        source: toseiden
+        at: 天寶三載，歲次甲申，越州龍興寺衆僧請大和上講律受戒
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [120.5782, 30.00451]
+    notes: Label anchor at the coordinate Wikidata records for the historical prefecture 越州 (Q17164288). It is not an asserted historical coordinate.
+    cite:
+      - id: yuezhou-anchor
+        says: The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate is asserted.
+        source: wikidata
+        at: Q17164288 (P625), revision 2472447888

@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  The war between the Persian Empire and the Hellenes allied against it, from Xerxes' march in
+  the spring of 480 BCE to the end of Herodotus's narrative in the autumn of 479 BCE. The relationship
+  asserts no cause.
+types: [conflict]
+from: persian-empire
+to: hellenic-alliance
+directionality: mutual
+causality: not_asserted
+date:
+  value: 480 BCE..479 BCE
+  mode: duration
+  calendar: julian
+  as_written: the Hellenes who took up war with the Barbarian
+  cite:
+    - id: persia-hellenes-war-480-span
+      says:
+        Grote dates the start of the march against Greece to the beginning of spring 480 BCE, and the
+        Greek fleet's arrival at the Hellespont, the last campaign Herodotus narrates, to September 479
+        BCE.
+      basis: interpretation
+      attributed_to: George Grote
+      sources:
+        - source: grote-history-of-greece
+          at: vol. V, ch. XXXVIII
+          quote:
+            but the whole was united at Sardis and ready to march against Greece, at the beginning of
+            spring, 480 B. C.
+        - source: grote-history-of-greece
+          at: vol. V, ch. XLII
+          quote:
+            for so imperfect was their information, that they believed this bridge to be still firm and
+            in passable condition in September, 479 B. C.
+notes: The war went on after 479 BCE; the span is the chapter's, set by where Herodotus stops.
+cite:
+  - id: persia-hellenes-war-480-basis
+    says: Herodotus names the Hellenes who took up war with the Barbarian as a body bound by an oath.
+    source: herodotus
+    at: VII.132
+    quote: Against these the Hellenes who took up war with the Barbarian made an oath

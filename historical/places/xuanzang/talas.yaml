@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 呾邏斯城, a hundred and fifty 里 west of the 千泉.
+types: [settlement]
+names:
+  - form: 呾邏斯
+    lang: lzh
+    script: Hani
+    roman: Daluosi
+    scheme: pinyin
+    cite:
+      - id: talas-name
+        says: The biography records 玄奘 reaching 呾邏斯城 a hundred and fifty 里 west of 屏聿.
+        source: cien-zhuan
+        at: 卷二（自屏聿西百五十里）
+        quote: 自屏聿西百五十里，至呾邏斯城
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [71.3667, 42.8833]
+    notes:
+      Label anchor at Taraz as recorded in Wikidata (Q486545). It is not an asserted historical coordinate;
+      the identification of 呾邏斯 with the modern place is the conventional modern reading, not a statement
+      of the cited sources.
+    cite:
+      - id: talas-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q486545 (P625), revision 2548272316
+modern:
+  - form: 塔拉茲
+    lang: zh-Hant
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q486545
+    url: https://www.wikidata.org/wiki/Q486545
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: Antigonos Gonatas, king of Macedonia, named Aṃtikini in Rock Edict XIII.
+types: [person]
+names:
+  - form: Antigonos
+    lang: en
+    script: Latn
+    cite:
+      - id: antigonus-name
+        says: Smith identifies the edict's Aṃtikini with Antigonos Gonatas of Macedonia.
+        source: smith-asoka-1920
+        at: ch. IV, The Rock Edicts (comment on Rock Edict XIII)
+        quote: Antigonos (Aṁtikini), scil. Gonatas of Macedonia
+  - form: Aṁtikini
+    lang: pra
+    script: Latn
+    claim: antigonus-name
+roles:
+  - role: ruler
+    note: Smith gives the accession as 278 or 277; the record writes 277.
+    date:
+      value: 277 BCE..239 BCE
+      mode: duration
+      calendar: julian
+      as_written: 278 or 277–239 B. C.
+    cite:
+      - id: antigonus-reign
+        says: Smith dates Antigonos Gonatas to 278 or 277–239 BCE.
+        basis: interpretation
+        attributed_to: Vincent A. Smith (1920)
+        source: smith-asoka-1920
+        at: ch. IV, The Rock Edicts (comment on Rock Edict XIII)
+        quote: Gonatas of Macedonia (278 or 277–239 B. C. )

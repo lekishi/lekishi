@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  Magas of Cyrene, half-brother of Ptolemy Philadelphos, named Maka in Rock Edict XIII. Smith dates his
+  death to 258 BCE, close to the edict's own date, so whether he was alive when it was written is uncertain.
+types: [person]
+names:
+  - form: Magas
+    lang: en
+    script: Latn
+    cite:
+      - id: magas-name
+        says: Smith identifies the edict's Maka with Magas of Cyrene.
+        source: smith-asoka-1920
+        at: ch. IV, The Rock Edicts (comment on Rock Edict XIII)
+        quote: >-
+          Magas (Maka) of Cyrênê to the west of Egypt, half-brother of Ptolemy Philadelphos
+  - form: Maka
+    lang: pra
+    script: Latn
+    claim: magas-name
+roles:
+  - role: ruler
+    note: >-
+      Smith says he declared his independence of Egypt about 285 BCE and died in 258 BCE.

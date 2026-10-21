@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  Mahinda (Smith's Mahendra), Aśoka's son by Devī of Vedisagiri in the Ceylon chronicles, who is ordained
+  in Aśoka's sixth year and leads the mission that converts Lanka.
+types: [person]
+names:
+  - form: Mahendra
+    lang: sa
+    script: Latn
+    note: Smith's form; the Pali chronicles write Mahinda.
+    cite:
+      - id: mahinda-name
+        says: >-
+          Smith's retelling of the chronicles says Devī bore Aśoka a son named Mahendra at Ujjain.
+        source: smith-asoka-1920
+        at: ch. VI, The Ceylonese Legend of Asoka
+        quote: and there bore to him a son named Mahendra
+roles:
+  - role: monk
+    cite:
+      - id: mahinda-monk
+        says: Smith's retelling says Mahendra was ordained in the sixth year of the reign.
+        source: smith-asoka-1920
+        at: ch. VI, The Ceylonese Legend of Asoka
+        quote: Mahendra was ordained in the sixth year of the king's reign
+notes: Known only from the chronicles; no inscription names him.

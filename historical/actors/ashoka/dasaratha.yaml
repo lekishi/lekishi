@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  Daśaratha, Aśoka's grandson, who succeeded him in the eastern provinces about 232 BCE and assigned caves
+  in the Nāgārjunī hills to the Ājīvikas immediately after his consecration.
+types: [person]
+names:
+  - form: Dasaratha
+    lang: en
+    script: Latn
+    cite:
+      - id: dasaratha-name
+        says: >-
+          The dedication names Daśaratha, His Sacred Majesty, as the donor of the Vahiyakā cave.
+        source: asoka-inscriptions
+        at: Nāgārjunī cave dedication I (Vahiyakā cave)
+        quote: >-
+          'The Vahiyakâ Cave was assigned by Dasaratha, His Sacred Majesty (Devânaṁ piyenâ), immediately after
+          his consecration
+roles:
+  - role: ruler
+    note: >-
+      Accession only; Smith's guess that the empire was divided with another grandson is not followed.
+    date:
+      value: 232 BCE
+      mode: window
+      calendar: julian
+    cite:
+      - id: dasaratha-reign
+        says: >-
+          Smith says Daśaratha succeeded his grandfather in the eastern provinces about 232 BCE.
+        basis: interpretation
+        attributed_to: Vincent A. Smith (1920)
+        source: smith-asoka-1920
+        at: ch. V, The Pillar and Miscellaneous Inscriptions (the Daśaratha dedications)
+        quote: >-
+          Dasaratha, a grandson of Asoka, succeeded his grandfather in the eastern provinces about 232 B.
+          C.

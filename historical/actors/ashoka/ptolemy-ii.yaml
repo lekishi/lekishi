@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  Ptolemy II Philadelphos, king of Egypt, named Turumaye in Rock Edict XIII, who also sent Dionysios as
+  his envoy to India.
+types: [person]
+names:
+  - form: Ptolemy
+    lang: en
+    script: Latn
+    cite:
+      - id: ptolemy-ii-name
+        says: Smith identifies the edict's Turumaye with Ptolemy Philadelphos of Egypt.
+        source: smith-asoka-1920
+        at: ch. IV, The Rock Edicts (comment on Rock Edict XIII)
+        quote: Ptolemy (Turumaye), scil. Philadelphos of Egypt
+  - form: Turumaye
+    lang: pra
+    script: Latn
+    claim: ptolemy-ii-name
+roles:
+  - role: ruler
+    date:
+      value: 285 BCE..247 BCE
+      mode: duration
+      calendar: julian
+      as_written: 285–247 B. C.
+    cite:
+      - id: ptolemy-ii-reign
+        says: Smith dates Ptolemy Philadelphos to 285–247 BCE.
+        basis: interpretation
+        attributed_to: Vincent A. Smith (1920)
+        source: smith-asoka-1920
+        at: ch. IV, The Rock Edicts (comment on Rock Edict XIII)
+        quote: Philadelphos of Egypt (285–247 B. C. )

@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "上谷, where the annals record the new king of 代 joining his army to Yan's in 228 BCE. The record's label anchor is region-level, at modern 懷來, in whose area the cited historical geography places 沮陽, the Han seat of 上谷郡."
+types: [region]
+names:
+  - form: "上谷"
+    lang: lzh
+    script: Hani
+    roman: Shanggu
+    scheme: pinyin
+    cite:
+      - says: "The annals record 代王嘉 joining Yan's army and camping at 上谷."
+        source: shiji
+        at: "卷六 秦始皇本紀 十九年（軍上谷）"
+        quote: "東與燕合兵，軍上谷。"
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [115.51688, 40.4048]
+    notes: "Label anchor at modern 懷來縣, Wikidata Q1197061. It is not an asserted historical coordinate: the primary entries name the place and state no site, and the anchor places no wall, palace or battlefield. The seat it records is Han; the record asserts no seat or extent for 228 BCE."
+    cite:
+      - says: "The historical geography records 沮陽 as the Han county that was the seat of 上谷郡, and records 懷來 as formerly 沮陽 land."
+        role: supporting
+        source: dushi-fangyu-jiyao-six-states
+        at: "卷十七 北直八 保安州（沮陽城）"
+        quote: "漢縣，上谷郡治此。"
+      - says: "The label anchor is placed at the coordinate Wikidata (CC0) records for the modern place; no historical coordinate is asserted."
+        source: wikidata
+        at: "Q1197061 (P625), revision 2526577303"
+modern:
+  - form: "懷來縣"
+    lang: zh-Hant
+    script: Hani
+    note: "Modern county recorded for orientation only."
+notes: "Region-level: the camp is not placed."

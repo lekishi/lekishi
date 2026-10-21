@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "會稽郡, the commandery the annals record Qin making in 222 BCE after 王翦 settled the Chu lands south of the Yangzi and the lord of 越 submitted. The record's label anchor is region-level, at modern 蘇州, which the cited historical geography records as 吳, the commandery's seat."
+types: [region]
+names:
+  - form: "會稽郡"
+    lang: lzh
+    script: Hani
+    roman: "Kuaiji Jun"
+    scheme: pinyin
+    cite:
+      - says: "The annals record 王翦 settling the Chu lands south of the Yangzi, the lord of 越 submitting, and the 會稽 commandery being set up."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十五年（置會稽郡）"
+        quote: "王翦遂定荊江南地；降越君，置會稽郡。"
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [120.61944, 31.3]
+    notes: "Label anchor at modern 蘇州市, Wikidata Q42622. It is not an asserted historical coordinate: the primary entries name the place and state no site, and the anchor places no wall, palace or battlefield. It is a region-level label at the city that carries the seat's place; no extent is asserted."
+    cite:
+      - says: "The historical geography records 吳 as the old Wu capital and the Qin county that was the seat of 會稽郡."
+        role: supporting
+        source: dushi-fangyu-jiyao-six-states
+        at: "卷二十四 南直六 蘇州府 吳縣"
+        quote: "故吳都。秦置吳縣，為會稽郡治。"
+      - says: "The label anchor is placed at the coordinate Wikidata (CC0) records for the modern place; no historical coordinate is asserted."
+        source: wikidata
+        at: "Q42622 (P625), revision 2527812164"
+modern:
+  - form: "蘇州市"
+    lang: zh-Hant
+    script: Hani
+    note: "Modern city recorded for orientation only."
+notes: "The commandery, not the mountain 會稽山 near modern 紹興, which is a separate place."

@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "淮南, the land south of the 淮 river where the annals record 項燕 making 昌平君 king of Chu and rising against Qin in 224 BCE. The sources state no extent, and the record carries no position."
+types: [region]
+names:
+  - form: "淮南"
+    lang: lzh
+    script: Hani
+    roman: Huainan
+    scheme: pinyin
+    cite:
+      - says: "The annals record 項燕 setting up 昌平君 as king of Chu and rebelling against Qin south of the 淮."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十三年（反秦於淮南）"
+        quote: "荊將項燕立昌平君為荊王，反秦於淮南。"
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: "The annals name the land and state no extent or seat, so the record asserts no position."
+    cite:
+      - says: "The annals name 淮南 and give no extent."
+        role: supporting
+        source: shiji
+        at: "卷六 秦始皇本紀 二十三年（反秦於淮南）"
+notes: "A region with no position."

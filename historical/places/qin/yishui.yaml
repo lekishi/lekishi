@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "易水, the river on Yan's southern frontier. The biography of the assassins records 荊軻's farewell on its bank, and the annals record Qin breaking the Yan army west of it in 227 BCE. The record's label anchor sits at modern 易縣, the county named for the river."
+types: [landform]
+names:
+  - form: "易水"
+    lang: lzh
+    script: Hani
+    roman: "Yi Shui"
+    scheme: pinyin
+    cite:
+      - says: "The annals record Qin's army breaking Yan west of the 易水 in 二十年 (227 BCE)."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十年（秦軍破燕易水之西）"
+        quote: "燕、代發兵擊秦軍，秦軍破燕易水之西。"
+      - says: "The biography records the crown prince and his guests seeing 荊軻 off on the bank of the 易水."
+        role: supporting
+        source: shiji-six-states
+        at: "卷八十六 刺客列傳（至易水之上）"
+        quote: "至易水之上，既祖，取道"
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [115.49596, 39.34991]
+    notes: "Label anchor at modern 易縣, the county named for the river, Wikidata Q197865. It is not an asserted historical coordinate: the primary entries name the place and state no site, and the anchor places no wall, palace or battlefield. A river has no point: the anchor is where the label is drawn, the Wikidata item for the river (Q30011894) records no coordinate, and neither the farewell nor the battle has a site."
+    cite:
+      - says: "The historical geography records an 易水 thirty 里 south of its own 易州, rising in the western hills and flowing east, and notes that the 易水 in that prefecture's territory are three."
+        role: supporting
+        source: dushi-fangyu-jiyao-six-states
+        at: "卷十二 北直三 保定府 易州（易水）"
+        quote: "州南三十里。源出西山，東流經州境，入定興縣，合於拒馬河。"
+      - says: "The label anchor is placed at the coordinate Wikidata (CC0) records for the modern place; no historical coordinate is asserted."
+        source: wikidata
+        at: "Q197865 (P625), revision 2526608588"
+modern:
+  - form: "易縣"
+    lang: zh-Hant
+    script: Hani
+    note: "Modern county recorded for orientation only."
+notes: "The historical geography records several 易水 and places the farewell tradition at more than one; the record chooses none of them."

@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "頻陽, 王翦's home, where the biography records him retiring on grounds of illness and the king of Qin riding to ask him back. The record's label anchor sits at modern 富平縣, in whose north-east the historical geography places the old county."
+types: [settlement]
+names:
+  - form: "頻陽"
+    lang: lzh
+    script: Hani
+    roman: Pinyang
+    scheme: pinyin
+    cite:
+      - says: "The biography records 王翦 as a man of 頻陽 and records him retiring to 頻陽."
+        source: shiji-six-states
+        at: "卷七十三 白起王翦列傳（歸老於頻陽）"
+        quote: "王翦言不用，因謝病，歸老於頻陽。"
+      - says: "The comprehensive mirror records 王翦 retiring to 頻陽 on grounds of illness in 始皇帝二十一年 (226 BCE)."
+        role: supporting
+        source: zizhi-tongjian-qin-ji-2
+        at: "卷七 秦紀二 始皇帝二十一年（王翦因謝病歸頻陽）"
+        quote: "王翦因謝病歸頻陽。"
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [109.17558, 34.74878]
+    notes: "Label anchor at modern 富平縣, Wikidata Q127137. It is not an asserted historical coordinate: the primary entries name the place and state no site, and the anchor places no wall, palace or battlefield. The anchor is region-level: the historical geography places the old city about sixty 里 from the modern county seat."
+    cite:
+      - says: "The historical geography records the old city of 頻陽 sixty 里 north-east of its own 富平縣 and that 王翦 retired there."
+        role: supporting
+        source: dushi-fangyu-jiyao-six-states
+        at: "卷五十三 陝西二 西安府 富平縣（頻陽城）"
+        quote: "在縣東北六十里。秦厲公二十一年初縣頻陽，以在頻水南而名。"
+      - says: "The label anchor is placed at the coordinate Wikidata (CC0) records for the modern place; no historical coordinate is asserted."
+        source: wikidata
+        at: "Q127137 (P625), revision 2526580039"
+modern:
+  - form: "富平縣"
+    lang: zh-Hant
+    script: Hani
+    note: "Modern county recorded for orientation only."
+notes: "The record keeps the biography's and the mirror's naming; no site is asserted."

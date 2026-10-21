@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "臨淄, the capital of 齊. The hereditary house of Qi records Qin's army finally entering 臨淄 in 221 BCE with no one among the people daring to resist. The record's label anchor sits at the archaeological site Wikidata records as the old city of Qi."
+types: [capital]
+names:
+  - form: "臨淄"
+    lang: lzh
+    script: Hani
+    roman: Linzi
+    scheme: pinyin
+    cite:
+      - says: "The hereditary house of Qi records Qin's army entering 臨淄 and no one among the people resisting."
+        source: shiji-six-states
+        at: "卷四十六 田敬仲完世家 王建四十四年（秦兵卒入臨淄）"
+        quote: "五國已亡，秦兵卒入臨淄，民莫敢格者。"
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [118.33791, 36.88976]
+    notes: "Label anchor at the archaeological site Wikidata records as the old city of Qi (臨淄齊國故城), Wikidata Q865988. It is not an asserted historical coordinate: the primary entries name the place and state no site, and the anchor places no wall, palace or battlefield."
+    cite:
+      - says: "The historical geography records 臨淄 as the old Qi capital, to which 齊獻公 moved from 薄姑."
+        role: supporting
+        source: dushi-fangyu-jiyao-six-states
+        at: "卷三十五 山東六 青州府 臨淄縣"
+        quote: "古齊都也。齊獻公自薄姑徙臨淄，即此。"
+      - says: "The label anchor is placed at the coordinate Wikidata (CC0) records for the modern place; no historical coordinate is asserted."
+        source: wikidata
+        at: "Q865988 (P625), revision 2516713533"
+modern:
+  - form: "臨淄齊國故城"
+    lang: zh-Hant
+    script: Hani
+    note: "The archaeological site, recorded for orientation."
+notes: "The record is the city across its history as Qi's capital; the chapter cites it only for 221 BCE."

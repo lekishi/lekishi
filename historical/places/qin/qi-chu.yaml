@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "蘄, the Chu town south of which the biography of 王翦 records the Chu general 項燕 killed, and where the hereditary house of Chu records 王翦 breaking the Chu army. The record's label anchor sits at modern 蘄縣鎮."
+types: [settlement]
+names:
+  - form: "蘄"
+    lang: lzh
+    script: Hani
+    roman: Qi
+    scheme: pinyin
+    cite:
+      - says: "The biography records 王翦 pursuing the Chu army to south of 蘄 and killing its general 項燕."
+        source: shiji-six-states
+        at: "卷七十三 白起王翦列傳（至蘄南，殺其將軍項燕）"
+        quote: "至蘄南，殺其將軍項燕，荊兵遂敗走。"
+      - says: "The hereditary house of Chu records 王翦 breaking the Chu army at 蘄 and killing 項燕 in the king's fourth year."
+        role: supporting
+        source: shiji-six-states
+        at: "卷四十 楚世家 王負芻四年（秦將王翦破我軍於蘄）"
+        quote: "四年，秦將王翦破我軍於蘄，而殺將軍項燕。"
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [117.01645, 33.44483]
+    notes: "Label anchor at modern 蘄縣鎮, Wikidata Q14363075. It is not an asserted historical coordinate: the primary entries name the place and state no site, and the anchor places no wall, palace or battlefield."
+    cite:
+      - says: "The historical geography records 蘄城 south of its own 宿州 as a Chu town, citing the hereditary house of Chu for 項燕's death south of it."
+        role: supporting
+        source: dushi-fangyu-jiyao-six-states
+        at: "卷二十一 南直三 鳳陽府 宿州（蘄城）"
+        quote: "州南三十六里。楚邑也。"
+      - says: "The label anchor is placed at the coordinate Wikidata (CC0) records for the modern place; no historical coordinate is asserted."
+        source: wikidata
+        at: "Q14363075 (P625), revision 2523458206"
+modern:
+  - form: "蘄縣鎮"
+    lang: zh-Hant
+    script: Hani
+    note: "Modern town recorded for orientation only."
+notes: "The record is the town; the battle is placed 'south of 蘄' in the biography and 'at 蘄' in the hereditary house, and the chapter asserts no battlefield."

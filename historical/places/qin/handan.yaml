@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "邯鄲, the capital of 趙. The annals record 端和 besieging it in 229 BCE and the king of Qin going there after Zhao fell; the hereditary house of Zhao records it becoming Qin's in the tenth month of the king's eighth year (228 BCE). The record's label anchor sits at the archaeological site Wikidata records as the Zhao capital."
+types: [capital]
+names:
+  - form: "邯鄲"
+    lang: lzh
+    script: Hani
+    roman: Handan
+    scheme: pinyin
+    cite:
+      - says: "The annals record 端和 besieging the city of 邯鄲 in 十八年 (229 BCE)."
+        source: shiji
+        at: "卷六 秦始皇本紀 十八年（端和圍邯鄲城）"
+        quote: "王翦將上地，下井陘，端和將河內，羌瘣伐趙，端和圍邯鄲城。"
+      - says: "The hereditary house of Zhao records 邯鄲 becoming Qin's in the tenth month of the eighth year."
+        role: supporting
+        source: shiji-six-states
+        at: "卷四十三 趙世家 幽繆王八年（邯鄲爲秦）"
+        quote: "八年十月，邯鄲爲秦。"
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [114.43568, 36.57274]
+    notes: "Label anchor at the archaeological site Wikidata records as the Zhao capital (趙邯鄲故城), Wikidata Q15927358. It is not an asserted historical coordinate: the primary entries name the place and state no site, and the anchor places no wall, palace or battlefield."
+    cite:
+      - says: "The historical geography records 邯鄲縣 as the Zhao capital of the Warring States and the seat of the Qin 邯鄲郡."
+        role: supporting
+        source: dushi-fangyu-jiyao-six-states
+        at: "卷十五 北直六 廣平府 邯鄲縣"
+        quote: "春秋時衛地，戰國時趙都也。秦置邯鄲郡於此。"
+      - says: "The label anchor is placed at the coordinate Wikidata (CC0) records for the modern place; no historical coordinate is asserted."
+        source: wikidata
+        at: "Q15927358 (P625), revision 2484474066"
+modern:
+  - form: "趙邯鄲故城"
+    lang: zh-Hant
+    script: Hani
+    note: "The archaeological site, recorded for orientation; the anchor places no wall or palace."
+notes: "The historical geography also records that Qin made a 邯鄲郡 here; the primary entries cited in this chapter do not name the commandery, so the record does not assert it."

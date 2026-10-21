@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "鄢郢, which the biography of 王翦 records 李信 attacking and breaking in the first invasion of Chu. The record carries no position: the name may be one place or two, and the reading the cited historical geography reports splits it into 鄢 and 郢 without the chapter deciding."
+types: [settlement]
+names:
+  - form: "鄢郢"
+    lang: lzh
+    script: Hani
+    roman: "Yan Ying"
+    scheme: pinyin
+    cite:
+      - says: "The biography records 李信 attacking 鄢郢 and breaking it."
+        source: shiji-six-states
+        at: "卷七十三 白起王翦列傳（信又攻鄢郢，破之）"
+        quote: "信又攻鄢郢，破之，於是引兵而西，與蒙恬會城父。"
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: "The biography names 鄢郢 and states no location. The historical geography reports 胡三省's reading that 鄢 is the old 鄢 by its own 鄢陵 and 郢 is 陳, the Chu capital of the time; the reading is an interpretation of a compound name, so the record asserts no position."
+    cite:
+      - says: "The historical geography reports 胡三省's reading that, Chu having moved to 壽春, 鄢 is the 鄢 by its own 鄢陵 and 郢 is 陳州."
+        role: supporting
+        source: dushi-fangyu-jiyao-six-states
+        at: "卷四十七 河南二 開封府 鄢陵縣"
+        quote: "時楚遷壽春，所謂鄢者即此；郢，謂陳州也。"
+        basis: interpretation
+        attributed_to: "胡三省, as reported by 讀史方輿紀要"
+notes: "A name the chapter keeps unlocated on purpose: it may name one place or two."

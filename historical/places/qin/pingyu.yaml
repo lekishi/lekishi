@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "平輿, a Chu town. The annals record 王翦 taking the land from 陳 south to 平輿 in 224 BCE, and the biography of 王翦 records 李信 attacking 平與 in the failed first invasion. The record's label anchor sits at modern 平輿縣."
+types: [settlement]
+names:
+  - form: "平輿"
+    lang: lzh
+    script: Hani
+    roman: Pingyu
+    scheme: pinyin
+    cite:
+      - says: "The annals record Qin taking the land from 陳 south to 平輿 in 二十三年 (224 BCE)."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十三年（取陳以南至平輿）"
+        quote: "取陳以南至平輿，虜荊王。"
+  - form: "平與"
+    lang: lzh
+    script: Hani
+    note: "The biography's form; the two forms are recorded rather than corrected."
+    cite:
+      - says: "The biography of 王翦 writes the town 平與 when 李信 attacks it."
+        source: shiji-six-states
+        at: "卷七十三 白起王翦列傳（李信攻平與）"
+        quote: "李信攻平與，蒙恬攻寢，大破荊軍。"
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [114.6331, 32.95597]
+    notes: "Label anchor at modern 平輿縣, Wikidata Q1198765. It is not an asserted historical coordinate: the primary entries name the place and state no site, and the anchor places no wall, palace or battlefield."
+    cite:
+      - says: "The historical geography records the old city of 平輿 south-east of its own 汝寧 prefecture on the north bank of the 汝, and records 李信's attack and 王翦's taking of the land to 平輿."
+        role: supporting
+        source: dushi-fangyu-jiyao-six-states
+        at: "卷五十 河南五 汝寧府 汝陽縣（平輿城）"
+        quote: "秦始皇二十二年李信攻楚平輿。明年，王翦擊荊，取陳以南，至平輿。"
+      - says: "The label anchor is placed at the coordinate Wikidata (CC0) records for the modern place; no historical coordinate is asserted."
+        source: wikidata
+        at: "Q1198765 (P625), revision 2536048897"
+modern:
+  - form: "平輿縣"
+    lang: zh-Hant
+    script: Hani
+    note: "Modern county recorded for orientation only."
+notes: "The anchor is a region-level label at the modern county, not the old city's site."

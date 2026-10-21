@@ -33,19 +33,20 @@ export const DEV_ROUTE_DIRECTORY = "[dev=dev]"
  * pull-request previews), never production, which serves approved chapters
  * only.
  *
- * `LEKISHI_DRAFTS=1` opts any build or test run in. CI's checks use it (the
- * owner's decision of 2026-10-21), so a content change is checked as the draft
- * it is until the owner approves it, and the approval is its own check, the
- * `publication` job, which runs the chapter gate without it. Vitest serves no
- * drafts otherwise, so a plain `pnpm test` keeps the production view, and the
- * build's chapter gate (`scripts/check-chapter.mjs`) opts in on a build that
- * serves drafts, so the gate checks the chapters that build ships.
+ * A missing approval never fails a build or a check (the owner's decision of
+ * 2026-10-21): it only decides what production serves. So test runs serve
+ * drafts, and every chapter's content is tested whether or not it is approved;
+ * the build's chapter gate (`scripts/check-chapter.mjs`) runs that way in every
+ * build, and `scripts/check-static-build.mjs` checks that a production artifact
+ * leaves the unapproved chapters out. `LEKISHI_DRAFTS=1` opts any build in, as
+ * CI's preview build does; `LEKISHI_DRAFTS=0` opts any build or test run out.
  *
  * @param {{ command?: "serve" | "build"; env?: NodeJS.ProcessEnv }} [options]
  * @returns {boolean}
  */
 export function draftChaptersServed({ command = "build", env = process.env } = {}) {
   if (env.LEKISHI_DRAFTS === "1") return true
-  if (env.VITEST) return false
+  if (env.LEKISHI_DRAFTS === "0") return false
+  if (env.VITEST) return true
   return devPagesEnabled({ command, env })
 }

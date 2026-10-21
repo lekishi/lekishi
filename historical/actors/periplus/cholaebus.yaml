@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: Cholaebus, the vassal-chief of Mapharitis at Saua, three days inland from Muza.
+types: [person]
+names:
+  - form: Cholaebus
+    lang: en
+    script: Latn
+    cite:
+      - id: cholaebus-name
+        says: The Periplus says a vassal-chief named Cholaebus lives at Saua in Mapharitis.
+        source: periplus-erythraean-sea
+        at: "22"
+        quote: there is a vassal-chief named Cholaebus who lives in that city
+roles:
+  - role: ruler
+    cite:
+      - id: cholaebus-role
+        says: The Periplus says a vassal-chief named Cholaebus lives at Saua in Mapharitis.
+        source: periplus-erythraean-sea
+        at: "22"
+        quote: there is a vassal-chief named Cholaebus who lives in that city

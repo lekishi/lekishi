@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: The emperor Claudius, in whose reign Pliny says the embassy from Taprobane came to Rome.
+types: [person]
+names:
+  - form: Claudius
+    lang: en
+    script: Latn
+    cite:
+      - id: claudius-name
+        says: Pliny dates the embassy from Taprobane to the reign of the emperor Claudius.
+        source: pliny-natural-history
+        at: VI.24
+        quote: during the reign of the Emperor Claudius
+roles:
+  - role: ruler
+    cite:
+      - id: claudius-role
+        says: Pliny dates the embassy from Taprobane to the reign of the emperor Claudius.
+        source: pliny-natural-history
+        at: VI.24
+        quote: during the reign of the Emperor Claudius

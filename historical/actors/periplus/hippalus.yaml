@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Hippalus, the pilot who the Periplus says first worked out how to sail straight across the ocean
+  to India, and whose name was given to the south-west wind.
+types: [person]
+names:
+  - form: Hippalus
+    lang: en
+    script: Latn
+    cite:
+      - id: hippalus-name
+        says:
+          The Periplus says Hippalus was the pilot who first discovered how to lay his course straight
+          across the ocean.
+        source: periplus-erythraean-sea
+        at: "57"
+        quote:
+          Hippalus was the pilot who by observing the location of the ports and the conditions of the
+          sea, first discovered how to lay his course straight across the ocean
+roles:
+  - role: other
+    cite:
+      - id: hippalus-role
+        says:
+          The Periplus says Hippalus was the pilot who first discovered how to lay his course straight
+          across the ocean.
+        source: periplus-erythraean-sea
+        at: "57"
+        quote:
+          Hippalus was the pilot who by observing the location of the ports and the conditions of the
+          sea, first discovered how to lay his course straight across the ocean
+    note: The Periplus calls him the pilot; the role vocabulary has no pilot.
+notes: Known only from the Periplus and from Pliny, who names the wind but not the man.

@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Nambanus, whose kingdom the Periplus says begins at the gulf of Barygaza, the beginning of all
+  India.
+types: [person]
+names:
+  - form: Nambanus
+    lang: en
+    script: Latn
+    cite:
+      - id: nambanus-name
+        says: The Periplus says the coast of Ariaca is the beginning of the Kingdom of Nambanus.
+        source: periplus-erythraean-sea
+        at: "41"
+        quote: which is the beginning of the Kingdom of Nambanus and of all India
+roles:
+  - role: ruler
+    cite:
+      - id: nambanus-role
+        says: The Periplus says the coast of Ariaca is the beginning of the Kingdom of Nambanus.
+        source: periplus-erythraean-sea
+        at: "41"
+        quote: which is the beginning of the Kingdom of Nambanus and of all India
+notes:
+  Boyer identified him with the Western Satrap Nahapana and dated the Periplus about 90 CE on that
+  basis (Schoff, Date of the Periplus).

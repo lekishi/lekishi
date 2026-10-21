@@ -671,6 +671,7 @@ const devRouteMarker = "data-dev-route"
 const devPages = [
   { file: "dev.html", page: "index" },
   { file: "dev/design.html", page: "design" },
+  { file: "dev/wikidata.html", page: "wikidata" },
 ]
 
 if (devPagesEnabled()) {

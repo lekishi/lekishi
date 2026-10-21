@@ -13,10 +13,13 @@ range of calibrated radiocarbon or U/Th dates for when an archaeological signal
 begins at a site, and the scholars who model them disagree by up to two
 centuries. That is the chapter's value: it tests the engine on wide,
 overlapping, probabilistic windows, on places that are islands and island
-groups rather than towns, and on undated arcs.
+groups rather than towns, and on undated relationships.
 
 - 10 events (the expansion, 9 dated settlements and phases), 14 places, 1 actor
-  (the Lapita culture), 4 obsidian arcs.
+  (the Lapita culture), 4 obsidian relationships, all undated: one trade arc
+  to Bukit Tengkorak, whose source calls it exchange, and three provenance
+  links (`other`) to Lapita sites, which say obsidian arrived but not how and
+  are listed on the cards, not drawn.
 - A proposed v1 journey in
   [`historical/journeys/lapita-expansion.yaml`](../journeys/lapita-expansion.yaml)
   with the one `reconstructed_route` leg, not compiled.

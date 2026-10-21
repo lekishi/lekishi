@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In the third month of his pontificate Stephen II sends his brother, the deacon Paul, and the
+  primicerius Ambrose with many gifts to the Lombard king Aistulf, and they confirm a peace with him
+  for forty years.
+types: [mission]
+date:
+  value: "752"
+  calendar: julian
+  as_written: tertio apostolatus ordinationis suae mense
+  cite:
+    - id: aistulf-peace-752-time
+      says:
+        The life dates the embassy to the third month of Stephen's pontificate. The year is editorial,
+        reckoned back from his burial in April 757 after a pontificate of five years and twenty-nine
+        days.
+      source: liber-pontificalis
+      at: ilico isdem beatissimus papa, tertio apostolatus ordinationis suae mense, disponens suum germanum
+participants:
+  - actor: stephen-ii
+    role: leader
+  - actor: paul-i
+    role: participant
+  - actor: ambrose-primicerius
+    role: participant
+  - actor: aistulf
+    role: host
+cites:
+  participants:
+    - id: aistulf-peace-752-participants
+      says: The life names Paul the deacon and Ambrose the primicerius as the envoys, and says they
+        confirmed a pact of peace with Aistulf for forty years.
+      source: liber-pontificalis
+      at: in quadraginta annorum spatia pacti foedus cum eo ordinantes confirmaverunt
+notes: The life does not say where the envoys met the king, so the event has no place.

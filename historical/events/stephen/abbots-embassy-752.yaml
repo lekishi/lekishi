@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Stephen sends the abbots of the monasteries of St Vincent and St Benedict to Aistulf to ask for the
+  peace to be kept. The king scorns them and sends them back to their monasteries, forbidding them to
+  call on the pope.
+types: [mission]
+date:
+  value: 752..753
+  mode: window
+  calendar: julian
+  as_written: magnopere ad se accersitis venerabilium monasteriorum sanctorum Vincentii et Benedicti religiosis abbatibus
+  cite:
+    - id: abbots-embassy-752-time
+      says: The life places the abbots' embassy after the broken peace and before the coming of John the silentiary; it gives no date.
+      source: liber-pontificalis
+      at: Cernens vero isdem sanctissimus papa valide praefati regis perniciosa inminere sevitia, magnopere ad se accersitis … abbatibus
+places:
+  - place: monte-cassino
+    role: context
+    note: The monastery of St Benedict is the abbots' house, not the place of the meeting.
+participants:
+  - actor: stephen-ii
+    role: leader
+  - actor: aistulf
+    role: host
+cites:
+  summary:
+    - id: abbots-embassy-752-refused
+      says: The life says the king scorned their counsel and sent them back to their monasteries without result.
+      source: liber-pontificalis
+      at: eorum sprevit monita et ad suae animae detrimentum sine effectu causae confusos ad propria absolsit monasteria
+notes:
+  The monastery of St Vincent is San Vincenzo al Volturno; it has no place record yet, so only the
+  monastery of St Benedict (Monte Cassino) is linked, as context.

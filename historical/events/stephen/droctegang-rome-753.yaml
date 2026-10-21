@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Pepin's envoy, Abbot Droctegang, arrives in Rome and is received by the pope, who sends him back to
+  the king with an answer; Stephen's first surviving letter to Pepin was carried by him.
+types: [mission]
+date:
+  value: 752..753
+  mode: window
+  calendar: julian
+  as_written: subito coniunxit missus iamfati regis Francorum, nomine Trottigangus abbas
+  cite:
+    - id: droctegang-rome-753-time
+      says: The life places the abbot's coming after the secret letter and before the seizure of Ceccano; the letter is undated.
+      source: liber-pontificalis
+      at: Et dum valide ab eodem Langobardorum rege civitates et provincia ista Romanorum opprimerentur, subito coniunxit missus iamfati regis Francorum, nomine Trottigangus abbas
+places:
+  - place: rome
+    role: site
+participants:
+  - actor: droctegang
+    role: guest
+  - actor: stephen-ii
+    role: host
+cites:
+  summary:
+    - id: droctegang-rome-753-letter
+      says: Stephen's letter says the abbot Droctegang was presented at the threshold of St Peter and before the pope, and that the pope sent back his answer by him.
+      source: codex-carolinus
+      at: "Ep. I: Presens Droctegangus abbas sacris liminibus protectoris tui, beati apostolorum principis Petri, et nostris obtutibus praesentatus; congruum per eum … remisimus responsum"
+notes:
+  The reading copy of the life breaks off in the middle of this sentence ("per quem mi…"), so what
+  the life says the abbot carried is not quoted; re-check against Duchesne.

@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Pepin's envoys, Bishop Chrodegang and Duke Autchar, arrive in Rome to bring the pope to the Frankish
+  king, and find him already preparing to go to the Lombard king.
+types: [mission]
+date:
+  value: 753-09..753-10
+  mode: window
+  calendar: julian
+  as_written: extemplo et missi iamfati Pippini regis Francorum coniunxerunt
+  cite:
+    - id: frankish-envoys-rome-753-time
+      says: The life has the envoys arrive just before the pope left Rome on 14 October 753; the month window is editorial.
+      source: liber-pontificalis
+      at: ipsoque reverso, extemplo et missi iamfati Pippini regis Francorum coniunxerunt
+places:
+  - place: rome
+    role: site
+participants:
+  - actor: chrodegang-of-metz
+    role: guest
+  - actor: autchar
+    role: guest
+  - actor: stephen-ii
+    role: host
+cites:
+  participants:
+    - id: frankish-envoys-rome-753-who
+      says: The life names Bishop Rodigangus and Duke Autcharius, sent to take the pope to their king, as he had asked.
+      source: liber-pontificalis
+      at: id est Rodigangus episcopus et Autcharius dux, quatenus praedictum sanctissimum papam, iuxta quod petendo miserat, ad suum Francie regem deducerent

@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  About four months later Aistulf breaks the peace, threatens the pope and the Roman people, and
+  demands a yearly poll tax of one gold solidus a head from the inhabitants of Rome, claiming the city
+  and its forts for his own jurisdiction.
+types: [occurrence]
+date:
+  value: 752..753
+  mode: window
+  calendar: julian
+  as_written: ipsa foedera pacis post poene IIII menses … disrupit
+  cite:
+    - id: aistulf-breaks-peace-752-time
+      says:
+        The life says Aistulf broke the peace after almost four months; it gives no other date, so the
+        window runs to the journey of 753.
+      source: liber-pontificalis
+      at: ipsa foedera pacis post poene IIII menses; in periurii incidens reatu, disrupit
+places:
+  - place: rome
+    role: context
+participants:
+  - actor: aistulf
+    role: leader
+  - actor: stephen-ii
+    role: subject
+cites:
+  summary:
+    - id: aistulf-breaks-peace-752-tax
+      says:
+        The life says he tried to impose a heavy tribute on the inhabitants of Rome, one gold solidus
+        a head each year, and to subject the city and its forts to his jurisdiction.
+      source: liber-pontificalis
+      at: per unumquemque scilicet caput singulos auri solidos annue auferre iniabat et sui iurisdictione civitatem hanc Romanam vel subiacentes ei castra subdere
+notes:
+  The papal life is the only source and is hostile to Aistulf. Rome is the object of the threat, not
+  the place of an act, so it is a context place.

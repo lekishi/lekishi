@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  John the imperial silentiarius arrives in Rome with the emperor's order that Aistulf restore the
+  places of the respublica. Stephen sends him with his brother Paul to Aistulf at Ravenna; the king
+  sends them back with an empty answer and his own envoy to Constantinople.
+types: [mission]
+date:
+  value: 752..753
+  mode: window
+  calendar: julian
+  as_written: Et dum haec agerentur, coniunxit Roma Iohannis, imperialis silentiarius
+  cite:
+    - id: ravenna-embassy-752-time
+      says: The life places the silentiarius's first coming after the abbots' embassy; it gives no date.
+      source: liber-pontificalis
+      at: Et dum haec agerentur, coniunxit Roma Iohannis, imperialis silentiarius
+places:
+  - place: ravenna
+    role: site
+  - place: rome
+    role: context
+participants:
+  - actor: john-the-silentiary
+    role: participant
+  - actor: paul-i
+    role: participant
+  - actor: aistulf
+    role: host
+cites:
+  places:
+    - id: ravenna-embassy-752-place
+      says: The life says the pope sent the imperial envoy with his brother Paul to Aistulf at Ravenna, and that they returned to Rome having achieved nothing.
+      source: liber-pontificalis
+      at: ad eundem misit nequissimus Aistulfum Ravennam. Quibus susceptis, cum inani absolsit responso; Reversisque Romam … enarraverunt nihil se egisse
+notes:
+  Ravenna, the seat of the former exarchate, was in Aistulf's hands; the life does not say when he
+  took it.

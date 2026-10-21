@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At Comari, at India's southern tip, men and women come to bathe and live the rest of their lives
+  in celibacy, because a goddess was said to have bathed there.
+types: [occurrence]
+part_of: [periplus-voyage]
+date:
+  value: 58..62
+  mode: window
+  calendar: julian
+  as_written: no date; the text speaks of the present
+  cite:
+    - id: comari-bathing-time
+      says:
+        The Periplus describes this as present at the time of the voyage it was written from, which
+        it does not date; Schoff puts that voyage between the summers of 58 and 62 CE.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      sources:
+        - source: periplus-erythraean-sea
+          at: "58"
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+places:
+  - place: comari
+    role: site
+cite:
+  - id: comari-bathing-account
+    says:
+      The Periplus says men and women come to Comari to consecrate themselves, bathe and live in celibacy,
+      because a goddess was said to have bathed there.
+    source: periplus-erythraean-sea
+    at: "58"
+    quote:
+      hither come those men who wish to consecrate themselves for the rest of their lives, and bathe
+      and dwell in celibacy; and women also do the same; for it is told that a goddess once dwelt here and
+      bathed.

@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Muziris and Nelcynda, the leading markets of Damirica, in the kingdoms of Cerobothra and the
+  Pandians, receive large ships for their pepper and malabathrum, loading at Bacare.
+types: [exchange]
+part_of: [periplus-voyage]
+date:
+  value: 58..62
+  mode: window
+  calendar: julian
+  as_written: no date; the text speaks of the present
+  cite:
+    - id: malabar-pepper-time
+      says:
+        The Periplus describes this as present at the time of the voyage it was written from, which
+        it does not date; Schoff puts that voyage between the summers of 58 and 62 CE.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      sources:
+        - source: periplus-erythraean-sea
+          at: 53–56
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+places:
+  - place: muziris
+    role: site
+  - place: nelcynda
+    role: site
+  - place: bacare
+    role: site
+participants:
+  - actor: cerobothra
+    role: host
+  - actor: pandian-kingdom
+    role: host
+cite:
+  - id: malabar-pepper-account
+    says:
+      The Periplus says large ships are sent to these market-towns for the great quantity and bulk of
+      pepper and malabathrum.
+    source: periplus-erythraean-sea
+    at: 53–56
+    quote:
+      They send large ships to these market-towns on account of the great quantity and bulk of pepper
+      and malabathrum.

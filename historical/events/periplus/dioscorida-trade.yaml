@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  On Dioscorida, a mixed settlement of Arabs, Indians and Greeks trades tortoise-shell to ships
+  from Muza, Damirica and Barygaza, under the king of the Frankincense Country.
+types: [exchange]
+part_of: [periplus-voyage]
+date:
+  value: 58..62
+  mode: window
+  calendar: julian
+  as_written: no date; the text speaks of the present
+  cite:
+    - id: dioscorida-trade-time
+      says:
+        The Periplus describes this as present at the time of the voyage it was written from, which
+        it does not date; Schoff puts that voyage between the summers of 58 and 62 CE.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      sources:
+        - source: periplus-erythraean-sea
+          at: 30–31
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+places:
+  - place: dioscorida
+    role: site
+participants:
+  - actor: eleazus
+    role: other
+    note:
+      The island is subject to the king of the Frankincense Country; the Periplus does not name him
+      here.
+cite:
+  - id: dioscorida-trade-account
+    says:
+      The Periplus says the island's few inhabitants are foreigners, Arabs, Indians and Greeks, who
+      emigrated there to trade.
+    source: periplus-erythraean-sea
+    at: 30–31
+    quote:
+      They are foreigners, a mixture of Arabs and Indians and Greeks, who have emigrated to carry on
+      trade there.

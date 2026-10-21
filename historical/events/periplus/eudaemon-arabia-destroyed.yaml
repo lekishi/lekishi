@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Charibael destroys Eudaemon Arabia, the old meeting place of the trades of India and Egypt, not
+  long before the Periplus was written.
+types: [occurrence]
+date:
+  value: 50..62
+  mode: window
+  calendar: julian
+  as_written: not long before our own time
+  cite:
+    - id: eudaemon-destroyed-time
+      says:
+        Schoff says Arabian history gives no positive date for the destruction, but Glaser's inscriptions
+        point to a time after the middle of the first century; the window runs from then to Schoff's latest
+        date for the voyage.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912), after E. Glaser
+      sources:
+        - source: periplus-erythraean-sea
+          at: "26"
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+places:
+  - place: eudaemon-arabia
+    role: site
+participants:
+  - actor: charibael
+    role: leader
+cite:
+  - id: eudaemon-destroyed-account
+    says: The Periplus says Charibael destroyed the place not long before the author's time.
+    source: periplus-erythraean-sea
+    at: "26"
+    quote: But not long before our own time Charibael destroyed the place.

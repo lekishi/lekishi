@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Calliena, a lawful market under the elder Saraganus, is obstructed now that Sandares holds it,
+  and Greek ships landing there may be taken to Barygaza under guard.
+types: [occurrence]
+part_of: [periplus-voyage]
+date:
+  value: 58..62
+  mode: window
+  calendar: julian
+  as_written: no date; the text speaks of the present
+  cite:
+    - id: calliena-obstructed-time
+      says:
+        The Periplus describes this as present at the time of the voyage it was written from, which
+        it does not date; Schoff puts that voyage between the summers of 58 and 62 CE.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      sources:
+        - source: periplus-erythraean-sea
+          at: "52"
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+places:
+  - place: calliena
+    role: site
+participants:
+  - actor: sandares
+    role: subject
+  - actor: saraganus
+    role: other
+    note: The earlier ruler under whom the port was lawful.
+cite:
+  - id: calliena-obstructed-account
+    says: The Periplus says Greek ships landing at Calliena may be taken to Barygaza under guard.
+    source: periplus-erythraean-sea
+    at: "52"
+    quote: Greek ships landing there may chance to be taken to Barygaza under guard.

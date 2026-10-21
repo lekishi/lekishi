@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Ships leave India for home at the beginning of Tybis (December), or at least before 6 Mechir,
+  so as to go and return within the year.
+types: [journey]
+part_of: [pliny-india-route]
+date:
+  value: 48..77
+  mode: window
+  calendar: julian
+  as_written:
+    at the beginning of the Egyptian month Tybis … or at all events before the sixth day of
+    … Mechir
+  cite:
+    - id: pliny-route-time
+      says:
+        Pliny describes the route as it runs as he writes; the Natural History was dedicated in 77 CE.
+        Pliny's translators record Marcus's argument that the coincidence of 6 Mechir with the Ides of January
+        shows the passage was written between 48 and 51 CE. The window encloses both readings.
+      basis: interpretation
+      attributed_to: J. Bostock and H. T. Riley (1855), citing Marcus
+      sources:
+        - source: pliny-natural-history
+          at: VI.26
+        - source: pliny-natural-history
+          at: VI.26, note 36
+places:
+  - place: muziris
+    role: start
+  - place: berenice
+    role: end
+    note:
+      Pliny says 'on their return to Europe'; Berenice is the Egyptian port he names for the outward
+      leg.
+cite:
+  - id: pliny-return-sailing-account
+    says: Pliny says travellers sail home from India at the beginning of Tybis, or before 6 Mechir.
+    source: pliny-natural-history
+    at: VI.26
+    quote:
+      Travellers set sail from India on their return to Europe, at the beginning of the Egyptian month
+      Tybis, which is our December, or at all events before the sixth day of the Egyptian month Mechir,
+      the same as36 our ides of January

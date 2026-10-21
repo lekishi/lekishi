@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Moved by the freedman's account of Rome, the king of Taprobane sends four envoys, led by Rachias,
+  to the emperor Claudius at Rome.
+types: [mission]
+date:
+  value: 41..54
+  mode: window
+  calendar: julian
+  as_written: during the reign of the Emperor Claudius
+  cite:
+    - id: taprobane-embassy-time
+      says:
+        Pliny places the drift and the embassy in the reign of Claudius, which Schoff says began in
+        41; Nero's reign followed from 54.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      sources:
+        - source: pliny-natural-history
+          at: VI.24
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+places:
+  - place: lanka
+    role: start
+  - place: rome
+    role: end
+participants:
+  - actor: rachias
+    role: leader
+  - actor: claudius
+    role: host
+cite:
+  - id: taprobane-embassy-account
+    says: Pliny says the king of Taprobane sent to Rome an embassy of four, the chief of whom was Itachias.
+    source: pliny-natural-history
+    at: VI.24
+    quote:
+      the king was prompted to form an alliance with the Romans, and accordingly sent to Rome an embassy,
+      consisting of four persons, the chief of whom was Itachias.

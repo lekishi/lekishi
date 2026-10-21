@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: From Juliopolis by Alexandria up the Nile to Coptos, twelve days when the Etesian winds blow.
+types: [journey]
+part_of: [pliny-india-route]
+date:
+  value: 48..77
+  mode: window
+  calendar: julian
+  as_written: twelve days
+  cite:
+    - id: pliny-route-time
+      says:
+        Pliny describes the route as it runs as he writes; the Natural History was dedicated in 77 CE.
+        Pliny's translators record Marcus's argument that the coincidence of 6 Mechir with the Ides of January
+        shows the passage was written between 48 and 51 CE. The window encloses both readings.
+      basis: interpretation
+      attributed_to: J. Bostock and H. T. Riley (1855), citing Marcus
+      sources:
+        - source: pliny-natural-history
+          at: VI.26
+        - source: pliny-natural-history
+          at: VI.26, note 36
+places:
+  - place: alexandria
+    role: start
+  - place: coptos
+    role: end
+cite:
+  - id: pliny-nile-leg-account
+    says: Pliny says the voyage up the Nile to Coptos takes twelve days with the Etesian winds.
+    source: pliny-natural-history
+    at: VI.26
+    quote:
+      The distance thence to Coptos, up the Nile, is three hundred and eight miles; the voyage is performed,
+      when the Etesian winds are blowing, in twelve days.

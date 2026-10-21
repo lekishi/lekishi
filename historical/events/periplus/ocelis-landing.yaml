@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Through the strait at Ocelis, the anchorage and watering-place that is the first landing for
+  those sailing into the gulf.
+types: [occurrence]
+part_of: [periplus-voyage]
+date:
+  value: 58..62
+  mode: window
+  calendar: julian
+  as_written: no date; the text speaks of the present
+  cite:
+    - id: ocelis-landing-time
+      says:
+        The Periplus describes this as present at the time of the voyage it was written from, which
+        it does not date; Schoff puts that voyage between the summers of 58 and 62 CE.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      sources:
+        - source: periplus-erythraean-sea
+          at: "25"
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+places:
+  - place: ocelis
+    role: waypoint
+cite:
+  - id: ocelis-landing-account
+    says:
+      The Periplus says Ocelis is not so much a market-town as an anchorage, a watering-place and the
+      first landing.
+    source: periplus-erythraean-sea
+    at: "25"
+    quote:
+      which is not so much a market-town as it is an anchorage and watering-place and the first landing
+      for those sailing into the gulf.

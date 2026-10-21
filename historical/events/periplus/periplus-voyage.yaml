@@ -1,0 +1,83 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The voyage around the Erythraean Sea that the Periplus was written from: from the Egyptian ports
+  down the Red Sea, along the coasts of Africa and Arabia, across to the Indus and Barygaza, and down
+  the Malabar coast to Comari and round to Poduca, with hearsay of the Ganges, Chryse and Thinae beyond."
+types: [journey, exchange]
+date:
+  value: 58..62
+  mode: window
+  calendar: julian
+  as_written:
+    '"not later than the summer of 62 and not earlier than the summer of 58"; "The nearest single
+    year … is, therefore, 60 A. D." (Schoff)'
+  cite:
+    - id: periplus-voyage-time
+      says:
+        Schoff fixes the date of the Periplus, or at any rate of the voyage it was based on, between
+        the summers of 58 and 62 CE, and names 60 CE as the nearest single year.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      source: schoff-periplus
+      at: Date and Authorship of the Periplus
+      quote:
+        the date of the Periplus, or at any rate the date of the voyage on which it was based, can
+        probably be fixed at not later than the summer of 62 and not earlier than the summer of 58
+    - id: periplus-voyage-time-malichas
+      says:
+        The commentators of Schoff's first group date the Periplus before Pliny, no later than the end
+        of Malichas's reign, which de Vogüé's inscriptions put between 40 and 70 CE.
+      basis: interpretation
+      role: supporting
+      attributed_to: M. de Vogüé (1869) and others, as listed by W. H. Schoff (1912)
+      source: schoff-periplus
+      at: Date of the Periplus as Determined by Various Commentators
+    - id: periplus-voyage-time-muller
+      says:
+        Müller, following Salt's dates for Za Hakale, put the Periplus at 80–89 CE, and others of Schoff's
+        second group between 75 and 105 CE.
+      basis: interpretation
+      role: alternative
+      attributed_to: C. Müller (1855) and others, as listed by W. H. Schoff (1912)
+      source: schoff-periplus
+      at: Date of the Periplus as Determined by Various Commentators
+    - id: periplus-voyage-time-late
+      says:
+        Schoff's third group, reading the 'emperors' of § 23 as joint rulers, put the Periplus in the
+        second or third century, as late as 246–247 CE under Philip and his son (Reinaud).
+      basis: interpretation
+      role: alternative
+      attributed_to: H. Dodwell, J. T. Reinaud and others, as listed by W. H. Schoff (1912)
+      source: schoff-periplus
+      at: Date of the Periplus as Determined by Various Commentators
+places:
+  - place: myos-hormos
+    role: start
+    note:
+      The first of the designated ports, where the description begins; the author's own port of departure
+      is not stated.
+  - place: poduca
+    role: end
+    note: The furthest port the text describes as a market; the Ganges, Chryse and This are hearsay.
+participants:
+  - actor: periplus-author
+    role: leader
+    note: The author speaks in the first person plural of the course 'we hold'.
+cite:
+  - id: periplus-voyage-account
+    says:
+      The Periplus begins with the designated ports on the Erythraean Sea and the market-towns around
+      it, the first being Mussel Harbor.
+    source: periplus-erythraean-sea
+    at: "1"
+    quote:
+      Of the designated ports on the Erythraean Sea, and the market-towns around it, the first is the
+      Egyptian port of Mussel Harbor.
+dispute:
+  status: disputed
+  summary:
+    The text is undated. Schoff fixes the voyage at 58–62 CE; other commentators range from 40–70
+    (before Pliny) through 80–89 (Müller) to 246–247 CE (Reinaud). The window follows Schoff.
+notes:
+  Every port below is a part of this voyage and shares its window, as the Periplus describes them
+  in the present tense. The order is the text's, along the coasts, not a sequence in time.

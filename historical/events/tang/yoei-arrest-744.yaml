@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: Monks of 越州 who learn that 鑒眞 means to go to Japan tell the prefecture that 榮叡 is luring him away. The 山陰縣 sheriff's men find 榮叡 in hiding and send him in a cangue toward the capital; at 杭州 he falls ill, asks leave for treatment, and is let go after being reported dead of the illness.
+types: [occurrence]
+date:
+  value: 744..745
+  mode: window
+  calendar: chinese_lunisolar
+  cite:
+    - id: yoei-arrest-time
+      says: The biography tells the accusation after the 天寶三載 lectures, without a date of its own.
+      source: toseiden
+      at: 時越州僧等知大和上欲往日本國，告州官曰
+places:
+  - place: yuezhou
+    role: site
+  - place: hangzhou
+    role: site
+    note: Where he was released.
+participants:
+  - actor: yoei
+    role: subject
+notes: The biography dates the lectures to 天寶三載 and gives no further year until 天寶七載, so this event is an occurrence window over 744–745 rather than a dated instant.
+cites:
+  summary:
+    - id: yoei-arrest-release
+      says: The biography records his illness at 杭州 and his release after a long time, once he was said to have died of it.
+      source: toseiden
+      at: 榮叡師卧病，請［假］療治，經多時，云病死乃得放出

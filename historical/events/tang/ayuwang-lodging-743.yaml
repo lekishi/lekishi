@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: On the coast patrol's report the prefect of 明州 lodges 鑒眞's party at 阿育王寺 on the mountain of 鄮縣.
+types: [occurrence]
+date:
+  value: 743..744
+  mode: window
+  calendar: chinese_lunisolar
+  cite:
+    - id: ayuwang-lodging-time
+      says: The biography records the prefect's order after the wreck without a date of its own.
+      source: toseiden
+      at: 申［諜］明州；［明州太］守處分，安置鄮縣山阿育王寺
+places:
+  - place: ayuwang-temple
+    role: site
+participants:
+  - actor: jianzhen
+    role: guest
+notes: The biography's account of the 阿育王塔, the Buddha's footprints and the sacred well is kept out of the chapter as hagiographic description.

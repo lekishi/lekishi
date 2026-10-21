@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: With the ship repaired, the party sails on, cannot go beyond 大板山 and waits a month at 下嶼山 for a fair wind. Making for 桑石山, the ship is driven onto rocks and broken. The party goes three days without water or food until fishermen bring both; five days later a coast patrol reports them to 明州.
+types: [journey]
+date:
+  value: 743..744
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 住一月，待好風發，欲到桑石山
+  cite:
+    - id: sangshi-wreck-time
+      says: The biography records the month at 下嶼山 and the wreck on the way to 桑石山 after the 天寶二載十二月 sailing, without a further date.
+      source: toseiden
+      at: 住一月，待好風發，欲到桑石山。風急浪高
+places:
+  - place: xiayu-shan
+    role: waypoint
+  - place: sangshi-shan
+    role: context
+    note: The ship's goal; the wreck happened on the way to it.
+participants:
+  - actor: jianzhen
+    role: subject
+notes: The biography gives no date after the sailing in 天寶二載十二月, so the wreck is an occurrence window over 743–744.

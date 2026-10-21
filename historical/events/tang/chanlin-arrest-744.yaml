@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "From 國清寺 the party goes on through 臨海 and 黃岩 and takes the 永嘉郡 road to 禪林寺. The next morning, about to leave for 溫州, it is overtaken by the 江東道採訪使's warrant: 靈祐 and the temple officers of 揚州 had petitioned to keep 鑒眞 in Tang. He is taken under guard to the commissioner."
+types: [occurrence]
+date:
+  value: 744..745
+  mode: window
+  calendar: chinese_lunisolar
+  cite:
+    - id: chanlin-arrest-time
+      says: The biography records the warrant arriving at 禪林寺, without a date of its own.
+      source: toseiden
+      at: 明朝，早食發，欲向溫州，忽有採訪使牒來追
+places:
+  - place: huangyan
+    role: waypoint
+  - place: wenzhou
+    role: context
+    note: Where the party was about to go; it did not get there.
+participants:
+  - actor: jianzhen
+    role: subject
+  - actor: lingyou
+    role: participant
+    note: His petition, made from 揚州, set the warrant in motion.
+notes: The biography dates the lectures to 天寶三載 and gives no further year until 天寶七載, so this event is an occurrence window over 744–745 rather than a dated instant. 禪林寺 lay on the 永嘉郡 road beyond 黃岩; its site is not identified, so the event places 黃岩 as the last named stop.
+cites:
+  participants:
+    - id: chanlin-arrest-petition
+      says: The biography records 靈祐 and the temple officers of 揚州 petitioning to keep him, and his arrest at 禪林寺.
+      source: toseiden
+      at: 在揚州和上弟子僧靈佑及諸寺三綱衆僧，同議曰; 尋蹤至禪林寺，捉得大和上

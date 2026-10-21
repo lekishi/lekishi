@@ -1,12 +1,15 @@
-import adapter from "@sveltejs/adapter-static"
+import adapter from "@sveltejs/adapter-cloudflare"
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte"
 import { BUILD_ROUTES_DIRECTORY } from "./scripts/build-app.mjs"
 import { DEV_ROUTE_DIRECTORY } from "./scripts/dev-pages.mjs"
 
 /**
- * The site is a static artifact: every route is prerendered at build time and
- * the output directory is a plain file tree with no server process. Cloudflare
- * Pages (or any static host) serves `build/` directly.
+ * The reader site is a static artifact: every public route is prerendered at
+ * build time and served by Cloudflare Pages as a plain file. A small Pages
+ * worker answers only what cannot be a file (RFD 6, owner's decision of
+ * 2026-10-21): sign-in under `/auth/`, and the drafts a signed-in member of the
+ * `lekishi` organization may open. `wrangler.jsonc` points the adapter's output
+ * at `build/`.
  */
 export default {
   preprocess: vitePreprocess(),
@@ -19,11 +22,16 @@ export default {
       routes: process.env.LEKISHI_BUILD_ROUTES === "1" ? BUILD_ROUTES_DIRECTORY : "src/routes",
     },
     adapter: adapter({
-      pages: "build",
-      assets: "build",
-      // No SPA fallback: both routes are prerendered, so a direct request for
-      // `/atlas` is served from `atlas.html` and an unknown path is a real 404.
-      strict: true,
+      // The worker runs for these paths only, so every other request is a file
+      // and costs no invocation. The adapter's default (`/*` with every static
+      // file excluded) would need a rule per globe bundle, and past
+      // `_routes.json`'s 100 rules it drops exclusions, sending prerendered
+      // pages through the worker. Prerendered chapters are excluded by name;
+      // `scripts/check-static-build.mjs` fails if any served chapter is not.
+      routes: {
+        include: ["/chapters/*", "/auth/*", "/drafts.json", "/drafts/*"],
+        exclude: ["<prerendered>"],
+      },
     }),
     prerender: {
       // Unseen routes still fail the build, as by default. A `vite build` run

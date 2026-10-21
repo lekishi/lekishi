@@ -241,7 +241,7 @@ test("serves the artifact as plain files, with clean URLs and a real 404 page", 
 }) => {
   // The static target is a file-only server rooted at `build/`, so this test is
   // about the deployment: extension-less paths resolve to their `.html` file
-  // (the rule `static/_redirects` states for `/atlas`), and every other path is
+  // (the rule `_redirects` states for `/atlas`), and every other path is
   // the artifact's own 404 page. The development server renders its own 404, so
   // the check is static-only.
   test.skip(mode === "dev", "the file-only server is the static target")

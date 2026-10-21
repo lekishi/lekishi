@@ -353,11 +353,24 @@ if (!/["'`]\/globe\/["'`]/.test(scriptText)) {
 // be projected, so a build that got this far has representable chapters. These
 // are sentinel checks on what the artifact actually contains — each chapter's own
 // id and a published record id — so replacing or renaming a chapter fails this
-// check until the invariant is updated with it.
+// check until the invariant is updated with it. The chapter's data is the
+// route's server load, prerendered beside its page as `__data.json` (RFD 6), so
+// no chapter's content is a script.
+const chapterData = new Map()
+
 for (const chapter of CHAPTERS) {
+  const file = path.join(buildDirectory, "chapters", chapter.id, "__data.json")
+
+  if (!requireFile(file)) continue
+
+  const data = read(file)
+  chapterData.set(chapter.id, data)
+
   for (const marker of [chapter.id, chapter.event]) {
-    if (!scriptText.includes(marker)) {
-      fail(`the built scripts do not carry the served chapter: ${marker} is missing`)
+    if (!data.includes(marker)) {
+      fail(
+        `chapters/${chapter.id}/__data.json does not carry the served chapter: ${marker} is missing`,
+      )
     }
   }
 }
@@ -366,7 +379,7 @@ for (const chapter of CHAPTERS) {
 // tests only. These sentinels are its own strings; they are a tripwire, not a
 // proof that no fixture content could ever reach the artifact, which is what the
 // browser checks are for.
-const applicationText = `${scriptText}\n${[indexHtml, notFoundHtml, ...chapterHtml.values()].join("\n")}`
+const applicationText = `${scriptText}\n${[indexHtml, notFoundHtml, ...chapterHtml.values(), ...chapterData.values()].join("\n")}`
 
 for (const marker of [
   "Synthetic foundation fixture",
@@ -556,14 +569,61 @@ if (files.length > MAX_FILES) {
   fail(`the artifact has ${files.length} files; Cloudflare Pages accepts at most ${MAX_FILES}`)
 }
 
-// --- no server process --------------------------------------------------------
+// --- the worker ---------------------------------------------------------------
+
+// The reader site is files. The Pages worker (`_worker.js`, RFD 6) answers
+// sign-in and members' drafts only: `_routes.json` sends it exactly those
+// paths and excludes every prerendered page by name, so a served chapter is
+// never a worker invocation. The adapter drops exclusions beyond the file's
+// 100 rules, which would quietly route chapters through the worker, so the
+// count is checked too.
+const WORKER_ROUTES = ["/chapters/*", "/auth/*", "/drafts.json", "/drafts/*"]
 
 if (existsSync(path.join(buildDirectory, "server"))) {
-  fail("build/server exists: the artifact must not contain a server runtime")
+  fail("build/server exists: the server bundle belongs outside the artifact")
+}
+
+const workerFile = path.join(buildDirectory, "_worker.js")
+
+// The worker entry imports the server bundle from `.svelte-kit/`, which Pages
+// bundles at deploy time; nothing of the server, drafts included, is a file
+// the static host could serve.
+if (requireFile(workerFile) && !read(workerFile).includes(".svelte-kit/output/server/")) {
+  fail("_worker.js does not import the server bundle from .svelte-kit/output/server")
+}
+
+const routesFile = path.join(buildDirectory, "_routes.json")
+
+if (requireFile(routesFile)) {
+  try {
+    const routes = JSON.parse(read(routesFile))
+
+    if (JSON.stringify(routes.include) !== JSON.stringify(WORKER_ROUTES)) {
+      fail(
+        `_routes.json includes ${JSON.stringify(routes.include)}, expected ${JSON.stringify(WORKER_ROUTES)}`,
+      )
+    }
+
+    if (routes.include.length + routes.exclude.length > 100) {
+      fail(
+        `_routes.json has ${routes.include.length + routes.exclude.length} rules; Pages accepts 100`,
+      )
+    }
+
+    for (const chapter of [...states.keys()].filter(served)) {
+      for (const route of [`/chapters/${chapter}`, `/chapters/${chapter}/__data.json`]) {
+        if (!routes.exclude.includes(route)) {
+          fail(`_routes.json does not exclude ${route}, so the worker would answer it`)
+        }
+      }
+    }
+  } catch (error) {
+    fail(`_routes.json is not valid: ${error instanceof Error ? error.message : error}`)
+  }
 }
 
 const strayScripts = files.filter(
-  (file) => file.endsWith(".js") && !inBuild(file).startsWith("_app/"),
+  (file) => file.endsWith(".js") && !inBuild(file).startsWith("_app/") && file !== workerFile,
 )
 
 if (strayScripts.length > 0) {
@@ -631,5 +691,5 @@ if (problems.length > 0) {
 }
 
 console.log(
-  `Static build verified: ${files.length} files, globe tiles and tile worker included, no server runtime.`,
+  `Static build verified: ${files.length} files, globe tiles and tile worker included, the worker routed to sign-in and drafts only.`,
 )

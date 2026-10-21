@@ -17,4 +17,10 @@ export const DEV_PAGES: readonly DevPage[] = [
     description:
       "Every token and $lib/ui primitive in its states, on real chapter content (RFD 5).",
   },
+  {
+    slug: "wikidata",
+    title: "Wikidata before 100 CE",
+    description:
+      "The atlas on about 700 unreviewed Wikidata items dated before 100 CE, for stress tests. Not content.",
+  },
 ]

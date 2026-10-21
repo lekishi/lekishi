@@ -1,0 +1,163 @@
+:authors: Darwin D Wu <darwin67@users.noreply.github.com>
+:state: discussion
+:labels: history, data, authoring, navigation
+
+= RFD 2 several stories in one chapter
+
+== Provenance
+
+link:../0001/README.adoc[RFD 1] decided to widen the Tang chapter to its
+network. Around the 750–754 embassy, the chapter adds three things: the dated
+missions to Tang of 630–894 as a sparse network layer, 鑒眞's five failed
+crossings of 743–748 as a second story, and 圓仁's 838–847 diary as a third.
+A chapter manifest holds exactly one `story` today
+(link:AUTHORING_FORMAT.adoc[the authoring format], "Decided: the chapter
+manifest").
+
+On 2026-10-21 the owner chose between two ways to add the crossings. One was a
+new chapter manifest. The other was several stories in the Tang manifest. The
+owner chose several stories, which is the reading RFD 1 gives. This record
+proposes how that works.
+
+Everything below is *proposed*. Nothing is implemented, and the Tang manifest
+does not change until the owner decides on this record.
+
+== What stays as it is
+
+* *Records.* The world-first tree is unchanged. The crossing records are
+  added with this record as ordinary records that no chapter reaches yet: 33
+  events, 28 places and 13 actors under `historical/*/tang/`.
+  An event can stand in several stories. For example, the envoys' 753 visit
+  to 延光寺 (`yangzhou-invitation-753`) is the embassy's turning point, and it
+  is also the coda of the crossings, where the envoys say they know of his
+  five attempts.
+* *One approval per chapter.* RFD 2 decided on one owner approval per
+  chapter, and that stands. The digest already covers everything a manifest
+  reaches, so several stories only make the closure larger. The digest
+  algorithm (`lekishi-chapter-digest/2`) does not change.
+* *Journeys.* They are their own kind, as proposed in PR #26. A story steps
+  through events and relationships, and a journey draws the legs between the
+  events. The two are independent.
+
+== Proposed: the manifest
+
+`story:` stays valid as the form for a single story, so the Qin manifest and
+its approval do not change. A chapter with more than one story writes
+`stories:` instead, and the first story is the one the chapter opens on.
+
+[source,yaml]
+----
+title: The embassy to Tang China
+summary: …
+window: 750..754                  # the first story's opening window
+stories:
+  - key: tang-mission-750-754     # the existing story; its id stays lks:story:tang-mission-750-754
+    title: The embassy of 750–754
+    summary: …
+    span: 750..779
+    coverage: …
+    steps: [ … ]                  # unchanged
+  - key: jianzhen-crossings-742-753
+    title: 鑒眞's five attempts to cross, 742–753
+    summary: …
+    window: 743..748              # optional; defaults to the span
+    span: 742..753
+    coverage: …
+    notes: …
+    steps:
+      - daming-invitation-742: 榮叡 and 普照 invite 鑒眞 at 大明寺, 742
+      - langgou-wreck-743: The ship breaks at 狼溝浦, 743
+      # …
+      - yangzhou-invitation-753: "Coda — 753: the envoys know of his five attempts"
+----
+
+* *Keys.* A story's `key` is its id (`lks:story:<key>`). Keys are unique
+  across the project, like every other id. The first story keeps its current
+  id, so nothing published under it moves.
+* *Titles.* A story has its own `title`, because the switcher needs a name
+  shorter than the summary. The chapter's `title` and `summary` stay the card
+  text.
+* *Windows.* The chapter's `window` is the window the chapter opens on. Each
+  story may give its own `window`, which defaults to its `span`, and switching
+  stories moves to it. A story at 838–847 is then no stranger than the coda
+  nodes of 779 are today.
+* *Captions.* Today every published event needs a caption, and only a story
+  step supplies one. An event listed in two stories may carry a different
+  caption in each. Event `title`, which the authoring format decided but has
+  not built, would make the caption an override, as decided. This proposal
+  does not need it.
+* *Limits.* The schema allows 200 steps per story. It now also allows up to 8
+  stories per chapter, which leaves room for RFD 1's three stories plus the
+  embassy.
+
+== Proposed: what the compiler emits
+
+* One v0 story record per story, with the steps, span and coverage as today.
+  v0 needs no change: a publication set can publish several story records.
+* A list of the chapter's stories (key, title, window, span) on the compiled
+  chapter entry, so the reader can build the switcher without reading v0.
+* `pnpm approvals` shows the changes story by story. A diff that adds a story
+  reads as one block, so it isn't a long list of `steps[n]` lines.
+
+== Proposed: the reader
+
+* *Address.* `?story=<key>` joins `?event=`, `?place=`, `?step=` and
+  `?from=`/`?to=` (link:../0005/README.adoc[RFD 5]'s query parameters on the
+  chapter URL). It is left out for the first story, so every address that
+  exists today still means what it means today. `?step=` counts within the
+  story named.
+* *Switcher.* The chapter panel shows the stories as a short list (title and
+  span) above the step list. It is one control built from the design system's
+  primitives and works at 320 px. Picking a story sets the window, resets the
+  step and writes the address with `pushState`.
+* *Map.* The map draws the places and journeys of the active story. Places
+  that other stories in the chapter reach stay hidden until an era view
+  exists. This keeps the 743 coast and the 838 Shandong coast from crowding
+  the 753 landfall.
+* *Event links.* Search and an `?event=` link open the story that lists the
+  event: the active story if it does, otherwise the first story that does.
+  The search index records an event's stories, so a result can say where it
+  will open.
+* *Memory.* The remembered position (`$lib/atlas/memory.ts`) gains the story
+  key, so returning to the chapter reopens the story the reader left. This
+  stays the one thing the browser keeps.
+
+== What it costs
+
+* Every new story makes the approved Tang chapter stale until the owner
+  approves again, and production keeps serving the last approved content until
+  then. That is the decided gate, applied to a larger chapter.
+* Three threads are adding stories to one manifest. The manifest change should
+  land once, carrying all the stories that are ready, so the owner approves
+  one diff rather than three.
+* The chapter bundle grows. At the 200+ events RFD 1 targets, it is still one
+  file per chapter. Splitting a bundle per story can wait until a measurement
+  calls for it.
+
+== Alternatives
+
+A chapter per story::
+  Needs no code change and leaves the approved chapter alone. It departs from
+  RFD 1 and puts three more cards on the home page. The owner did not choose it
+  on 2026-10-21.
+
+An approval per story::
+  Would let a new story ship without re-approving the embassy. It breaks the
+  decided rule of one approval per chapter, and one story's change could
+  then reach a shared place another story uses without re-opening that
+  story's approval. Not proposed.
+
+A story by query (all events with a `part_of`)::
+  Weighed and rejected for the single story on 2026-10-18. That reasoning
+  holds for each story here.
+
+== Open questions
+
+* *The chapter's name and id.* `tang-mission-750-754` and "The embassy to Tang
+  China" no longer describe a chapter that runs from 630 to 894. Proposed: keep
+  the id for now, because addresses and approvals hang on it, and retitle the
+  card when the second story lands. If the id changes later, it changes with
+  a redirect in `static/_redirects`.
+* *Which stories land first.* Proposed: the crossings, then the missions
+  network, then 圓仁, each as soon as its records pass the contract. Any
+  story that is ready at the same time goes in the same manifest change.

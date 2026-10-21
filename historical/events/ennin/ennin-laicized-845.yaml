@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The commissioner's order lists 39 monks of 資聖寺 without certificates, the two Japanese among them; 圓仁 takes leave of the monks and puts on lay clothes. He welcomes the order as his only way home.
+types: [occurrence]
+date:
+  value: 845-05-13
+  calendar: chinese_lunisolar
+  as_written: 會昌五年五月十三日
+  cite:
+    - id: ennin-laicized-845-time
+      says: The diary records taking leave of the temple's monks in the evening of the 13th and putting on lay clothes.
+      source: nitto-guho-junrei-gyoki
+      at: 卷四 會昌五年五月十三日
+      quote: 晚際。辭一寺僧了。便著俗衣。
+places:
+  - place: changan
+    role: site
+participants:
+  - actor: ennin
+    role: subject
+  - actor: weizheng
+    role: subject
+cites:
+  summary:
+    - id: ennin-laicized-joy
+      says: The diary says that only through the laicization of monks and nuns could he go home, 'one grief, one joy'.
+      source: nitto-guho-junrei-gyoki
+      at: 卷四 會昌五年五月十四日
+      quote: 今因僧尼還俗之難。方得歸國。一悲一喜。

@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: Tang envoys on their way to Silla object to a local ship carrying foreigners across the sea, and 張詠 dare not defy them; 圓仁 decides to go south to 明州 to catch a Japanese ship.
+types: [exchange]
+date:
+  value: 847-03..847-04
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 閏三月
+  cite:
+    - id: ennin-ship-plan-fails-847-time
+      says: The diary records that the plan to cross from 文登 came to nothing.
+      source: nitto-guho-junrei-gyoki
+      at: 卷四 會昌七年閏三月
+      quote: 仍從文登界過海歸國之事不成矣。
+places:
+  - place: chishan
+    role: site
+participants:
+  - actor: ennin
+    role: leader
+  - actor: zhang-yong
+    role: other
+notes: 閏三月, the intercalary third month, cannot be written as a month in the notation; the window from the third to the fourth month contains it.

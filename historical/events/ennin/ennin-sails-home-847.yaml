@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: At noon 金珍's ship leaves 赤山浦 by the 莫琊 strait and sails due east for Silla.
+types: [journey]
+date:
+  value: 847-09-02
+  calendar: chinese_lunisolar
+  as_written: 會昌七年九月二日午時
+  cite:
+    - id: ennin-sails-home-847-time
+      says: The diary records crossing from 赤浦 at noon on 九月二日, leaving by the 莫琊 mouth of 赤山 and heading due east.
+      source: nitto-guho-junrei-gyoki
+      at: 卷四 會昌七年九月二日
+      quote: 午時從赤浦渡海。出赤山莫琊口。向正東行。
+places:
+  - place: chishan
+    role: start
+participants:
+  - actor: ennin
+    role: leader
+  - actor: weizheng
+    role: participant
+  - actor: tei-yuman
+    role: participant
+  - actor: kim-jin
+    role: leader

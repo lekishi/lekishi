@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: At the eastern capital 圓仁 delivers 楊敬之's letter at the house of the 崔太傅, who sends a bolt of silk.
+types: [journey]
+date:
+  value: 845-06-01
+  calendar: chinese_lunisolar
+  as_written: 會昌五年六月一日
+  cite:
+    - id: ennin-luoyang-845-time
+      says: The diary records reaching the eastern capital on 六月一日 and delivering 楊卿's letter.
+      source: nitto-guho-junrei-gyoki
+      at: 卷四 會昌五年六月一日
+      quote: 六月一日。到東都崔太傅宅。送楊卿書。
+places:
+  - place: luoyang
+    role: waypoint
+participants:
+  - actor: ennin
+    role: leader
+  - actor: weizheng
+    role: participant
+  - actor: tei-yuman
+    role: participant

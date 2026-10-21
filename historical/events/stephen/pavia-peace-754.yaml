@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Besieged in Pavia, Aistulf asks for peace through the Frankish bishops and nobles. A written pact is
+  made between the Romans, the Franks and the Lombards: Aistulf gives hostages and swears to restore
+  Ravenna with other cities, and the king spares his life and kingdom.
+types: [exchange, campaign]
+part_of: [first-italian-campaign-754]
+date:
+  value: 754..755
+  mode: window
+  calendar: julian
+  as_written: in scripto foedera pactum adfirmantes inter Romanos Francos et Langobardos
+  cite:
+    - id: pavia-peace-754-time
+      says: The annals record the peace and the forty hostages under 755.
+      source: annales-regni-francorum
+      at: "s.a. 755: Incluso vero Haistulfo rege in Papia civitate, iustitiam sancti Petri pollicitus est faciendi; unde rex Pippinus obsides XL receptos et cum sacramenta firmata"
+places:
+  - place: pavia
+    role: site
+participants:
+  - actor: pepin-the-short
+    role: leader
+  - actor: aistulf
+    role: participant
+  - actor: stephen-ii
+    role: participant
+cites:
+  summary:
+    - id: pavia-peace-754-pact
+      says: The life says peace was made and a pact confirmed in writing between Romans, Franks and Lombards, with Lombard hostages, and that Aistulf swore to restore the city of Ravenna with other cities.
+      source: liber-pontificalis
+      at: Deo dilectam pacem inientes atque in scripto foedera pactum adfirmantes inter Romanos Francos et Langobardos, et obsides Langobardorum hisdem Francorum rex abstollens; adfirmavit se ilico redditurum civitatem Ravennantium cum diversis civitatibus
+    - id: pavia-peace-754-fredegar
+      says: The continuations say Aistulf promised to make full amends for what he had done against the Roman church, gave oaths and hostages, and that the king granted him life and kingdom.
+      role: supporting
+      source: fredegar-continuations
+      at: CXX
+      quote: Sacramenta et obsides ibidem donat, ut nunquam a Francorum ditione se abstraheret; Praefatus rex Pippinus clemens ut erat, misericordia motus, vitam et regnum ei concessit

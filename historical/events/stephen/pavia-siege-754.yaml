@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Pepin and the pope come up to the walls of Pavia, and the Frankish army besieges the city for some
+  days, laying waste the country around it.
+types: [occurrence, campaign]
+part_of: [first-italian-campaign-754]
+date:
+  value: 754..755
+  mode: window
+  calendar: julian
+  as_written: usque ad muros civitatis Papiae utrique pervenerunt; quam et obsidentes aliquantos dies
+  cite:
+    - id: pavia-siege-754-time
+      says: The life says the king and the pope both came to the walls of Pavia and besieged it for some days; it gives no date.
+      source: liber-pontificalis
+      at: Coniungens vero christianissimus Pippinus Francorum rex, sequipes etiam eius et antefatus beatissimus papa factus, usque ad muros civitatis Papiae utrique pervenerunt; quam et obsidentes aliquantos dies
+places:
+  - place: pavia
+    role: site
+participants:
+  - actor: pepin-the-short
+    role: leader
+  - actor: stephen-ii
+    role: participant
+  - actor: aistulf
+    role: subject
+cites:
+  summary:
+    - id: pavia-siege-754-ravage
+      says: The continuations say the king camped before Ticinum and laid waste everything around it.
+      source: fredegar-continuations
+      at: CXX
+      quote: usque ad Ticinum peraccessit, castra metatus est, undique omnia quae in gyro fuerunt vastans

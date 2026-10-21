@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At the Lombard passes in the Susa valley, Aistulf attacks the small Frankish vanguard at dawn and is
+  routed. He loses most of his army, escapes with difficulty over a mountain and shuts himself in
+  Pavia.
+types: [occurrence, campaign]
+part_of: [first-italian-campaign-754]
+date:
+  value: 754..755
+  mode: window
+  calendar: julian
+  as_written: subito aperiens clusas, super eos diluculo cum plurimis irruit exercitibus (the life)
+  cite:
+    - id: susa-clusae-battle-754-time
+      says: The annals record the battle at the Lombard passes under 755; the life tells it after the 754 anointing.
+      source: annales-regni-francorum
+      at: "s.a. 755: Haistolfus Langobardorum rex supradictam iustitiam vetando clusas Langobardorum petiit, obviam Pippino regi et Francis venit. Et inierunt bellum"
+places:
+  - place: susa-valley
+    role: site
+participants:
+  - actor: aistulf
+    role: leader
+  - actor: lombard-kingdom
+    role: participant
+  - actor: frankish-kingdom
+    role: participant
+cites:
+  places:
+    - id: susa-clusae-battle-754-place
+      says: The continuations place the Lombard camp and the battle at the passes called Valle Seusana, the Susa valley.
+      source: fredegar-continuations
+      at: CXX
+      quote: usque ad Clusas, quae cognominatur Valle Seusana, veniens, ibi cum omni exercitu suo castra metatus est
+  summary:
+    - id: susa-clusae-battle-754-rout
+      says: The life says Aistulf, trusting in his numbers, fell on the few Franks at dawn, was beaten, and fled to Pavia without his arms.
+      source: liber-pontificalis
+      at: subito aperiens clusas, super eos diluculo cum plurimis irruit exercitibus; ita ut ipse Aistulfus, fugam arreptus … usque Papiam … in civitatem absque armis fugam arripuisset
+notes:
+  The exact site of the clusae (the barriers closing the valley) is not given; the event is placed at
+  the valley, not at a fortification.

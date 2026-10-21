@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Pepin's first Italian campaign, with the pope in his train: the march through Lyon and Vienne to
+  the Maurienne, the Frankish victory at the Lombard passes in the Susa valley, the siege of Pavia,
+  and the peace in which Aistulf promised to restore Ravenna and the other cities. The stops are
+  separate events; this event carries the span and asserts no route.
+types: [campaign]
+date:
+  value: 754..755
+  mode: window
+  calendar: julian
+  as_written: s.a. 755 (the annals); eo tempore, quo solent reges ad bella procedere (the continuations)
+  cite:
+    - id: first-italian-campaign-754-time
+      says:
+        The annals put the campaign in 755. The papal life tells it after the 754 anointing and the
+        Quierzy assembly, and the continuations after the March assembly at Berny, "at the time when
+        kings go to war"; the window keeps both.
+      sources:
+        - source: annales-regni-francorum
+          at: "s.a. 755: Pippinus rex per apostolicam invitationem in Italiam iter peragens"
+        - source: fredegar-continuations
+          at: CXX
+          quote: Initoque consilio cum proceribus suis, eo tempore, quo solent reges ad bella procedere
+places:
+  - place: lyon
+    role: waypoint
+  - place: vienne
+    role: waypoint
+  - place: maurienne
+    role: waypoint
+  - place: susa-valley
+    role: waypoint
+  - place: pavia
+    role: end
+participants:
+  - actor: pepin-the-short
+    role: leader
+  - actor: stephen-ii
+    role: participant
+  - actor: aistulf
+    role: participant
+  - actor: frankish-kingdom
+    role: participant
+  - actor: lombard-kingdom
+    role: participant
+cites:
+  places:
+    - id: first-italian-campaign-754-places
+      says: The continuations say the Franks went with Pope Stephen through Lyon and Vienne as far as the Maurienne, and that Aistulf camped at the passes in the Susa valley.
+      source: fredegar-continuations
+      at: CXX
+      quote: cum Stephano papa … per Lugdunum Galliae et Viennam pergentes, usque Mauriennam pervenerunt. Aistulfus … usque ad Clusas, quae cognominatur Valle Seusana, veniens
+notes:
+  The annals' year for the campaign (755) and the order of the papal life (754) disagree by a year;
+  every event of the campaign keeps the window 754..755 rather than choosing.

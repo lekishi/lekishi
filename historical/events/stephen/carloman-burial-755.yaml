@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: By the king's order Carloman's body is carried back to the monastery of St Benedict at Monte Cassino, where he had become a monk.
+types: [journey]
+date:
+  value: 754..755
+  mode: window
+  calendar: julian
+  as_written: cuius corpus iussu regis ad monasterium sancti Benedicti … relatum est
+  cite:
+    - id: carloman-burial-755-time
+      says: The revised annals record the return of his body under 755, after his death at Vienne.
+      source: annales-qui-dicuntur-einhardi
+      at: "s.a. 755: cuius corpus iussu regis ad monasterium sancti Benedicti, in quo monachicum habitum susceperat, relatum est"
+places:
+  - place: vienne
+    role: start
+  - place: monte-cassino
+    role: end
+participants:
+  - actor: carloman-mayor
+    role: subject
+  - actor: pepin-the-short
+    role: leader
+notes: Only the revised annals report this. Neither the route nor the date of arrival is given.

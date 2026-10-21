@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The host reaches the Maurienne and halts there, unable to get through the narrow valleys and rocks;
+  only a few Franks break through by the mountains into the Susa valley.
+types: [journey, campaign]
+part_of: [first-italian-campaign-754]
+date:
+  value: 754..755
+  mode: window
+  calendar: julian
+  as_written: Et cum supra scriptus rex Pippinus Mauriennam cum exercitu suo resedisset
+  cite:
+    - id: maurienne-camp-754-time
+      says: The continuations give no date; the window is the campaign's.
+      source: fredegar-continuations
+      at: CXX
+      quote: Et cum supra scriptus rex Pippinus Mauriennam cum exercitu suo resedisset … et propter angusta vallium, montes rupesque exercitus praedicti regis minime transire potuissent
+places:
+  - place: maurienne
+    role: site
+participants:
+  - actor: pepin-the-short
+    role: leader
+  - actor: stephen-ii
+    role: participant
+notes:
+  The continuations do not name the pass between the Maurienne and the Susa valley in 754; in 756
+  they name the Mont Cenis.

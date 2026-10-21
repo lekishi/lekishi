@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Babylonia under Nebuchadnezzar II, "the Chaldees" of the books of Kings, whose army took Jerusalem
+  in 597 BCE and besieged and destroyed it after Zedekiah's rebellion.
+types: [state]
+names:
+  - form: Babylon
+    lang: en
+    script: Latn
+    cite:
+      - id: neo-babylonian-empire-name
+        says: The books of Kings call Nebuchadnezzar king of Babylon.
+        source: bible-kjv
+        at: 2 Kings 24:1
+        quote: Nebuchadnezzar king of Babylon
+  - form: Chaldeans
+    lang: en
+    script: Latn
+    note: The books of Kings write Chaldees.
+    cite:
+      - says: Jeremiah calls the besieging army the Chaldeans.
+        source: bible-kjv
+        at: Jeremiah 52:7
+        quote: now the Chaldeans were by the city round about
+  - form: Akkad
+    lang: en
+    script: Latn
+    note: The chronicle's name for the land.
+    claim: neo-babylonian-empire-name
+    cite:
+      - says: The chronicle styles Nebuchadnezzar "king of Akkad".
+        source: livius-abc-5
+        at: Rev. 11'
+notes:
+  '"Neo-Babylonian" is the modern name for the state of Nabopolassar and his successors; the sources
+  say Babylon, Akkad or the Chaldeans.'

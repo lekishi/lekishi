@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Gedaliah son of Ahikam, whom the king of Babylon made governor over the people left in Judah
+  after the fall of Jerusalem, and who was killed at Mizpah by Ishmael son of Nethaniah.
+types: [person]
+names:
+  - form: Gedaliah
+    lang: en
+    script: Latn
+    cite:
+      - id: gedaliah-name
+        says: The books of Kings name Gedaliah son of Ahikam, made ruler over those left in Judah.
+        source: bible-kjv
+        at: 2 Kings 25:22
+        quote: even over them he made Gedaliah the son of Ahikam, the son of Shaphan, ruler
+roles:
+  - role: official
+    note: Governor over the cities of Judah for the king of Babylon.
+    cite:
+      says: Jeremiah calls Gedaliah governor over the cities of Judah.
+      source: bible-kjv
+      at: Jeremiah 40:5
+      quote: whom the king of Babylon hath made governor over the cities of Judah

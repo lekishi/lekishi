@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Evil-merodach, king of Babylon after Nebuchadnezzar II, who in the year he began to reign released
+  Jehoiachin from prison.
+types: [person]
+names:
+  - form: Evil-merodach
+    lang: en
+    script: Latn
+    cite:
+      - id: evil-merodach-name
+        says: The books of Kings name Evilmerodach king of Babylon.
+        source: bible-kjv
+        at: 2 Kings 25:27
+        quote: that Evilmerodach king of Babylon in the year that he began to reign
+roles:
+  - role: ruler
+    note:
+      King of Babylon; the Jewish Encyclopedia calls him Nebuchadnezzar's son and successor. The chapter
+      dates no reign.
+    cite:
+      says: The Jewish Encyclopedia says Nebuchadnezzar was succeeded by his son Evil-merodach.
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: He was succeeded by his son Evil-merodach.
+notes: The KJV writes Evilmerodach; the hyphenated form is the Jewish Encyclopedia's.

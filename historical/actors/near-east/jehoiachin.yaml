@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Jehoiachin, king of Judah for three months, who went out to the king of Babylon when Jerusalem
+  was taken in 597 BCE, was carried to Babylon, and in the thirty-seventh year of his captivity was released
+  from prison by Evil-merodach.
+types: [person]
+names:
+  - form: Jehoiachin
+    lang: en
+    script: Latn
+    cite:
+      - id: jehoiachin-name
+        says: The books of Kings name Jehoiachin king of Judah.
+        source: bible-kjv
+        at: 2 Kings 24:12
+        quote: And Jehoiachin the king of Judah went out to the king of Babylon
+roles:
+  - role: ruler
+    note: King of Judah for three months, as the books of Kings record; the chapter dates no reign.
+    cite:
+      says: The books of Kings record Jehoiachin reigning three months in Jerusalem.
+      source: bible-kjv
+      at: 2 Kings 24:8
+      quote: he reigned in Jerusalem three months

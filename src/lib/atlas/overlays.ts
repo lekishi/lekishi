@@ -1,4 +1,3 @@
-import { QIN_CHAPTER, TANG_CHAPTER } from "./chapter-registry"
 import type { Chapter, GeoPoint, HistoricalEvent, Place, Relationship } from "./domain"
 import type { AtlasState, LayerId } from "./state"
 import { overlapsWindow } from "./time"
@@ -8,9 +7,10 @@ import { overlapsWindow } from "./time"
  * arcs, territory snapshots and dioramas (RFD 1, "Show, then qualify").
  *
  * The contract publishes events, places and relationships, not lines. A line
- * on the map is therefore a presentation of published records, and this module
- * is where each one is defined, in the open, so a reviewer can read exactly
- * what the map connects and why:
+ * on the map is therefore a presentation of published records. This module
+ * says what each kind of line means and draws them; `overlay-definitions.ts`
+ * defines each chapter's, in the open, so a reviewer can read exactly what the
+ * map connects and why:
  *
  * - A journey is a list of a chapter's own events in the order the story
  *   tells them, each at its published place. The map draws a dashed line
@@ -18,7 +18,7 @@ import { overlapsWindow } from "./time"
  *   line connects attested places and is not an itinerary between them.
  * - An arc is a published relationship drawn between two places. A place end is
  *   the record's own place. An actor end is drawn at a published place that
- *   stands for the actor (a state at its court), named here and stated on the
+ *   stands for the actor (a state at its court), named there and stated on the
  *   map as schematic. A relationship whose ends have no such place, or whose
  *   ends meet at one place, is not drawn; the card still lists it.
  * - Neither served chapter publishes a territory snapshot, so there are none.
@@ -112,100 +112,6 @@ export type ChapterOverlays = {
   readonly dioramas: readonly DioramaDefinition[]
 }
 
-const NO_OVERLAYS: ChapterOverlays = {
-  journeys: [],
-  actorAnchors: {},
-  endAnchors: {},
-  dioramas: [],
-}
-
-/**
- * The served chapters' overlays.
- *
- * Tang: 鑒眞's travel to Japan is a published relationship (`jianzhen-travel`,
- * 753–754), and its stops are the chapter's own events for him and for the
- * second ship he sailed on, at their published places. 大伴古麻呂's stops are
- * the events that name him as a participant. The two courts stand for the two
- * states. The transmission to 東大寺 starts at 揚州, where the chapter's events
- * place 鑒眞 before the voyage.
- *
- * Qin: 韓非's embassy runs from 新鄭 to 雲陽, the two events that name him. 新鄭
- * (Han's capital) stands for 韓, and 雲陽, where Qin held 韓非, stands for 秦;
- * the chapter publishes no place for Qin's capital, and the map says the ends
- * are schematic.
- */
-export const CHAPTER_OVERLAYS: Readonly<Record<string, ChapterOverlays>> = {
-  [TANG_CHAPTER]: {
-    journeys: [
-      {
-        id: "jianzhen-voyage",
-        label: "鑒眞's voyage to Japan, 753–754",
-        relationshipId: "lks:relationship:jianzhen-travel",
-        stops: [
-          { eventId: "lks:event:longxing-departure-753", vessel: "party" },
-          { eventId: "lks:event:return-voyage-753", vessel: "ship" },
-          { eventId: "lks:event:ajinawa-arrival-753", vessel: "ship" },
-          { eventId: "lks:event:yaku-arrival-753", vessel: "ship" },
-          { eventId: "lks:event:yaku-departure-753", vessel: "ship" },
-          { eventId: "lks:event:akimeya-landfall-753", vessel: "ship" },
-          { eventId: "lks:event:dazaifu-entry-753", vessel: "party" },
-          { eventId: "lks:event:naniwa-754", vessel: "party" },
-          { eventId: "lks:event:todaiji-installation-754", vessel: "party" },
-        ],
-      },
-      {
-        id: "komaro-embassy",
-        label: "大伴古麻呂's embassy, 752–754",
-        relationshipId: "lks:relationship:japan-tang-embassy",
-        stops: [
-          { eventId: "lks:event:sekito-752", vessel: "party" },
-          { eventId: "lks:event:tang-new-year-audience-753", vessel: "party" },
-          { eventId: "lks:event:yangzhou-invitation-753", vessel: "party" },
-          { eventId: "lks:event:return-report-754", vessel: "party" },
-        ],
-      },
-    ],
-    actorAnchors: {
-      "lks:actor:japan-state": "lks:place:heijo-palace",
-      "lks:actor:tang-dynasty": "lks:place:hanyuan-hall",
-    },
-    endAnchors: {
-      "lks:relationship:jianzhen-transmission": { from: "lks:place:yangzhou" },
-    },
-    dioramas: [
-      {
-        id: "akimeya",
-        placeId: "lks:place:akimeya",
-        url: "/dioramas/akimeya.json",
-        showBelowMeters: 220_000,
-      },
-    ],
-  },
-  [QIN_CHAPTER]: {
-    journeys: [
-      {
-        id: "hanfei-embassy",
-        label: "韓非's embassy to Qin, 233 BCE",
-        relationshipId: null,
-        stops: [
-          { eventId: "lks:event:han-submission-233", vessel: "party" },
-          { eventId: "lks:event:hanfei-death-233", vessel: "party" },
-        ],
-      },
-    ],
-    actorAnchors: {
-      "lks:actor:han-state": "lks:place:xinzheng",
-      "lks:actor:qin-state": "lks:place:yunyang",
-    },
-    endAnchors: {},
-    dioramas: [],
-  },
-}
-
-export function chapterOverlays(chapterId: string): ChapterOverlays {
-  return CHAPTER_OVERLAYS[chapterId] ?? NO_OVERLAYS
-}
-
 /** One stop of a journey as the map draws it. */
 export type SceneJourneyStop = {
   readonly eventId: string
@@ -290,7 +196,7 @@ export function sceneJourneys(state: AtlasState, chapter: Chapter): SceneJourney
   const events = eventById(chapter)
   const playhead = Math.round(state.playhead)
 
-  return chapterOverlays(chapter.id).journeys.flatMap((journey) => {
+  return chapter.overlays.journeys.flatMap((journey) => {
     const stops = journey.stops.flatMap((stop) => {
       const event = events.get(stop.eventId)
 
@@ -356,7 +262,7 @@ function endPlace(
   end: "from" | "to",
   places: Map<string, Place>,
 ): Place | null {
-  const overlays = chapterOverlays(chapter.id)
+  const overlays = chapter.overlays
   const endpoint = relationship[end]
   const placeId =
     overlays.endAnchors[relationship.id]?.[end] ??
@@ -422,7 +328,7 @@ export function sceneArcs(state: AtlasState, chapter: Chapter): SceneArc[] {
 export function sceneDioramas(chapter: Chapter): SceneDiorama[] {
   const places = placeById(chapter)
 
-  return chapterOverlays(chapter.id).dioramas.flatMap((diorama) => {
+  return chapter.overlays.dioramas.flatMap((diorama) => {
     const position = places.get(diorama.placeId)?.position
 
     return position
@@ -462,7 +368,7 @@ export function layerOptions(chapter: Chapter): LayerOption[] {
       return family !== null && from !== null && to !== null && from.id !== to.id ? [family] : []
     }),
   )
-  const journeys = chapterOverlays(chapter.id).journeys.length > 0
+  const journeys = chapter.overlays.journeys.length > 0
   const fixed: LayerOption[] = [
     { id: "journeys", available: journeys },
     { id: "transmission", available: drawable.has("transmission") },

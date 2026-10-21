@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Jáltipan, a municipality of Veracruz, Mexico, where the Cascajal block was found.
+types:
+  - region
+names:
+  - form: Jáltipan
+    lang: es
+    script: Latn
+    cite:
+      id: jaltipan-name
+      says: Guerrero states that the Cascajal block was found at Jaltipan, Veracruz.
+      source: guerrero-2010-olmec-writing
+      at: p. 1066
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point:
+      - -94.72638888888889
+      - 17.85861111111111
+    notes:
+      Label anchor at the municipality's coordinate in Wikidata. The cited sources give no find spot,
+      so the record places none.
+    cite:
+      id: jaltipan-anchor
+      says:
+        The label anchor is placed at the coordinate recorded in Wikidata (CC0) for Q4140454; no historical
+        coordinate is asserted.
+      source: wikidata
+      at: Q4140454 (P625), revision 2521686915
+external_ids:
+  - system: wikidata
+    id: Q4140454

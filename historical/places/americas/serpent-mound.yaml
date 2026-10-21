@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Serpent Mound, a serpent effigy earthwork in Ohio.
+types:
+  - other
+names:
+  - form: Serpent Mound
+    lang: en
+    script: Latn
+    cite:
+      id: serpent-mound-name
+      says:
+        The park page names Serpent Mound as the largest documented surviving example of an ancient
+        effigy mound in the world.
+      source: nps-hopewell-world-heritage
+      at: Is Serpent Mound part of the inscription?
+      quote:
+        Serpent Mound, probably built several hundred years before or after the Hopewell-era sites,
+        is the largest documented surviving example of an ancient effigy mound in the world.
+at:
+  - interpretation: approximate_point
+    precision: site
+    point:
+      - -83.4305
+      - 39.0253
+    notes:
+      The coordinate marks the effigy; Wikidata records a second, coarser coordinate for the item,
+      which the record does not use.
+    cite:
+      id: serpent-mound-point
+      says:
+        The point is the site coordinate recorded in Wikidata (CC0) for Q968802; it marks the archaeological
+        site as a whole and no feature within it.
+      basis: interpretation
+      attributed_to: Wikidata contributors
+      source: wikidata
+      at: Q968802 (P625), revision 2511945257
+external_ids:
+  - system: wikidata
+    id: Q968802
+notes:
+  "The place type is other: the place is an effigy earthwork, and the contract's place vocabulary
+  has no type for an archaeological site or an earthwork."

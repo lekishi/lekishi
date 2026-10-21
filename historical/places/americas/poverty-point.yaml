@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Poverty Point, the Monumental Earthworks of Poverty Point in West Carroll Parish, northeastern
+  Louisiana, on elevated land overlooking the Mississippi River floodplain.
+types:
+  - other
+names:
+  - form: Poverty Point
+    lang: en
+    script: Latn
+    cite:
+      id: poverty-point-name
+      says:
+        The nomination places the Monumental Earthworks of Poverty Point in northeastern Louisiana on
+        elevated land overlooking the Mississippi River floodplain.
+      source: poverty-point-nomination
+      at: PDF p. 11, 3.1.a Brief synthesis
+at:
+  - interpretation: approximate_point
+    precision: site
+    point:
+      - -91.4114
+      - 32.6367
+    notes: The coordinate stands for the 163-hectare complex as a whole and places no single ridge or mound.
+    cite:
+      id: poverty-point-point
+      says:
+        The point is the site coordinate recorded in Wikidata (CC0) for Q964745; it marks the archaeological
+        site as a whole and no feature within it.
+      basis: interpretation
+      attributed_to: Wikidata contributors
+      source: wikidata
+      at: Q964745 (P625), revision 2481135903
+external_ids:
+  - system: wikidata
+    id: Q964745
+notes:
+  "The place type is other: the place is an earthwork complex, and the contract's place vocabulary
+  has no type for an archaeological site or an earthwork."

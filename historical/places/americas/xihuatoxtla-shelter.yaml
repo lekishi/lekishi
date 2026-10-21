@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: The Xihuatoxtla shelter, a rock shelter in the Central Balsas Valley of Guerrero, Mexico.
+types:
+  - other
+names:
+  - form: Xihuatoxtla shelter
+    lang: en
+    script: Latn
+    cite:
+      id: xihuatoxtla-shelter-name
+      says: Piperno and colleagues locate the Xihuatoxtla shelter in Guerrero, in the Central Balsas Valley.
+      source: piperno-2009-xihuatoxtla
+      at: Introduction
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      The cited article names the shelter, its state and its valley but the chapter has no cited coordinate
+      for it, so the shelter is unplaced rather than given a regional point.
+    cite:
+      - id: xihuatoxtla-shelter-location
+        says:
+          The cited article locates the shelter in Guerrero, in the Central Balsas Valley, and gives no
+          coordinate, so the record carries none.
+        source: piperno-2009-xihuatoxtla
+        at: Introduction
+notes:
+  "The place type is other: the place is a rock shelter, and the contract's place vocabulary has
+  no type for an archaeological site or an earthwork."

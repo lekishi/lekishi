@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Watson Brake, an earthen mound complex of eleven mounds in northeastern Louisiana, about 80 km
+  southwest of Poverty Point.
+types:
+  - other
+names:
+  - form: Watson Brake
+    lang: en
+    script: Latn
+    cite:
+      id: watson-brake-name
+      says:
+        The nomination names Watson Brake in northeastern Louisiana, about 80 km southwest of Poverty
+        Point, with eleven earthen mounds.
+      source: poverty-point-nomination
+      at: PDF p. 116, 3.2 Comparative analysis, Table 3.2
+at:
+  - interpretation: approximate_point
+    precision: site
+    point:
+      - -92.1314
+      - 32.3684
+    notes:
+      The coordinate marks the mound complex as a whole; Wikidata records a second, coarser coordinate
+      for the item, which the record does not use.
+    cite:
+      id: watson-brake-point
+      says:
+        The point is the site coordinate recorded in Wikidata (CC0) for Q2552689; it marks the archaeological
+        site as a whole and no feature within it.
+      basis: interpretation
+      attributed_to: Wikidata contributors
+      source: wikidata
+      at: Q2552689 (P625), revision 2409476527
+external_ids:
+  - system: wikidata
+    id: Q2552689
+notes:
+  "The place type is other: the place is an earthen mound complex, and the contract's place vocabulary
+  has no type for an archaeological site or an earthwork."

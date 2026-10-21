@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: The Isthmian or Epi-Olmec tradition, whose monuments at Chiapa de Corzo and Tres Zapotes
+  carry the earliest Long Count dates in this chapter.
+types: [culture]
+names:
+  - form: Epi-Olmec
+    lang: en
+    script: Latn
+    cite:
+      id: epi-olmec-name
+      says: Guerrero describes Tres Zapotes Stela C as written in the Isthmian or Epi-Olmec manner
+        with full use of the Long Count.
+      source: guerrero-2010-olmec-writing
+      at: p. 1065
+  - form: istmeña
+    lang: es
+    script: Latn
+    role: alternate
+    claim: epi-olmec-name
+external_ids:
+  - system: wikidata
+    id: Q2527515
+notes: A scholarly grouping of a script and its monuments; the record asserts no polity and no
+  language.

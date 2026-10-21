@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Chiapa de Corzo, a center in Chiapas, Mexico, with a 3,000-year occupation sequence.
+types:
+  - settlement
+names:
+  - form: Chiapa de Corzo
+    lang: es
+    script: Latn
+    cite:
+      id: chiapa-de-corzo-name
+      says:
+        Bachand, Lowe and Gallaga describe Chiapa de Corzo as a key archaeological center with an occupation
+        sequence of 3,000 years.
+      source: bachand-2009-chiapa-de-corzo
+      at: p. 546
+at:
+  - interpretation: approximate_point
+    precision: site
+    point:
+      - -93.003733333333
+      - 16.703152777778
+    notes:
+      The coordinate marks the archaeological zone, which modern housing and commerce now cover in
+      part.
+    cite:
+      id: chiapa-de-corzo-point
+      says:
+        The point is the site coordinate recorded in Wikidata (CC0) for Q4384315; it marks the archaeological
+        site as a whole and no feature within it.
+      basis: interpretation
+      attributed_to: Wikidata contributors
+      source: wikidata
+      at: Q4384315 (P625), revision 2439622031
+external_ids:
+  - system: wikidata
+    id: Q4384315

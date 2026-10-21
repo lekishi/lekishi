@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Teotihuacan, the city in the Teotihuacan Valley of Mexico.
+types:
+  - settlement
+names:
+  - form: Teotihuacan
+    lang: es
+    script: Latn
+    cite:
+      id: teotihuacan-name
+      says: Sugiyama and colleagues describe the Teotihuacan Valley as the site of a flourishing metropolis.
+      source: sugiyama-2021-teotihuacan
+      at: Introduction
+      quote: the Teotihuacan Valley, the site of a flourishing metropolis from CE 1–550
+at:
+  - interpretation: approximate_point
+    precision: site
+    point:
+      - -98.843888888889
+      - 19.6925
+    notes: The coordinate marks the site; the city's extent is not drawn.
+    cite:
+      id: teotihuacan-point
+      says:
+        The point is the site coordinate recorded in Wikidata (CC0) for Q172613; it marks the archaeological
+        site as a whole and no feature within it.
+      basis: interpretation
+      attributed_to: Wikidata contributors
+      source: wikidata
+      at: Q172613 (P625), revision 2557710256
+external_ids:
+  - system: wikidata
+    id: Q172613

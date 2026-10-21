@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Horr's Island, a coastal shell ring and mound complex on the Gulf coast of Florida.
+types:
+  - other
+names:
+  - form: Horr's Island
+    lang: en
+    script: Latn
+    cite:
+      id: horrs-island-name
+      says:
+        The nomination names Horr's Island on the Gulf coast of Florida as probably the most complex
+        Middle Archaic shell work.
+      source: poverty-point-nomination
+      at: PDF p. 113, 3.2 Comparative analysis (Horr’s Island)
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      Wikidata's item for the site (Q3140711, revision 2188010877) records no coordinate, and the cited
+      nomination gives none, so the site is unplaced.
+    cite:
+      - id: horrs-island-location
+        says:
+          The cited nomination locates Horr's Island on the Gulf coast of Florida and gives no coordinate,
+          and the site's Wikidata item records none, so the record carries none.
+        sources:
+          - source: poverty-point-nomination
+            at: PDF p. 113, 3.2 Comparative analysis (Horr’s Island)
+          - source: wikidata
+            at: Q3140711 (no P625), revision 2188010877
+external_ids:
+  - system: wikidata
+    id: Q3140711
+notes:
+  "The place type is other: the place is a shell ring and mound complex, and the contract's place
+  vocabulary has no type for an archaeological site or an earthwork."

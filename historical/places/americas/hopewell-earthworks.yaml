@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Hopewell Ceremonial Earthworks, a World Heritage property of monumental earthen enclosures
+  and mounds in southern Ohio.
+types:
+  - region
+names:
+  - form: Hopewell Ceremonial Earthworks
+    lang: en
+    script: Latn
+    cite:
+      id: hopewell-earthworks-name
+      says:
+        The park page describes the earthworks as built on an enormous scale using a standard unit of
+        measure, forming squares, circles, and octagons and a hilltop sculpted to enclose a plaza.
+      source: nps-hopewell-world-heritage
+      at: World Heritage Designation
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point:
+      - -82.4460611111111
+      - 40.05365833333333
+    notes:
+      Label anchor at the coordinate Wikidata records for the World Heritage property, which comprises
+      several separate earthwork sites; no single site is asserted.
+    cite:
+      id: hopewell-earthworks-anchor
+      says:
+        The label anchor is placed at the coordinate recorded in Wikidata (CC0) for Q10525989; no historical
+        coordinate is asserted.
+      source: wikidata
+      at: Q10525989 (P625), revision 2468703387
+external_ids:
+  - system: wikidata
+    id: Q10525989

@@ -15,6 +15,13 @@ date:
       source: pliny-letters
       at: "6.20.6"
       quote: "Iam hora diei prima, et adhuc dubius et quasi languidus dies."
+    - id: younger-pliny-flees-misenum-79-anchor-day
+      says: "Pliny dates the sighting of the cloud, and so his uncle's voyage the same afternoon, to
+        the ninth day before the Kalends of September; this event is the next morning."
+      role: supporting
+      source: pliny-letters
+      at: "6.16.4"
+      quote: Nonum Kal. Septembres hora fere septima
     - id: younger-pliny-flees-misenum-79-year
       says: "Foster's translation of Dio dates the chapters on the eruption, by a sidenote, to A.D.
         79."
@@ -24,6 +31,12 @@ date:
       source: cassius-dio
       at: "LXVI.16 (A.D. 79), translator's sidenote"
       quote: A.D. 79 (a.u. 832)
+    - id: younger-pliny-flees-misenum-79-dio-autumn
+      says: "Dio, in Foster's translation, says the fire began just at the end of autumn."
+      role: conflicting
+      source: cassius-dio
+      at: LXVI.21 (A.D. 79)
+      quote: A great fire was suddenly created just at the end of autumn.
 places:
   - place: misenum
     role: site
@@ -53,3 +66,10 @@ cite:
     quote: agebam enim duodevicensimum annum
 notes: "Pliny the Younger's own account, written about twenty-five years later. The day is counted
   from the letters: the morning after his uncle sailed. The year is an interpretation."
+dispute:
+  status: disputed
+  summary: "The day is counted from Pliny's letters as the morning after 24 August, the ninth day
+    before the Kalends of September, so this event inherits the dispute over the eruption's date.
+    Dio, in Foster's translation, puts the outbreak at the end of autumn; translators render the
+    phrase differently, so whether Dio conflicts with Pliny turns on the Greek. If the absolute date
+    moves, the sequence of the letters does not: this is still the morning after the voyage."

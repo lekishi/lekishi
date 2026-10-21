@@ -14,8 +14,10 @@ places:
   - place: punt
     role: end
   - place: thebes
-    role: start
-    note: The fleet returned to the temple landing at Thebes; the port it sailed from is unknown.
+    role: context
+    note:
+      The fleet returned to the temple landing at Thebes, which the return step records; the port it
+      sailed from is unknown, so the expedition has no start.
 participants:
   - actor: hatshepsut
     role: leader

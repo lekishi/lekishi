@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "At Rome Paul lives two whole years in his own rented house under guard, receiving all who
+  come and preaching openly, where Acts ends."
+types: [occurrence]
+date:
+  value: "60..62"
+  mode: window
+  calendar: julian
+  as_written: "Prat (1911): captivity at Rome, 60-62"
+  cite:
+    - id: paul-in-rome-date
+      says: "Prat's chronology of 1911 dates Paul's captivity at Rome to 60–62."
+      basis: interpretation
+      attributed_to: F. Prat (1911)
+      source: catholic-encyclopedia
+      at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+      quote: "captivity at Rome, 60-62"
+places:
+  - place: rome
+    role: site
+participants:
+  - actor: paul-the-apostle
+    role: subject
+cite:
+  - id: rome-dwelt
+    says: Acts tells that Paul was allowed to live by himself with a soldier guarding him.
+    source: bible-kjv
+    at: "Acts 28:16"
+    quote: but Paul was suffered to dwell by himself with a soldier that kept him.
+  - id: rome-two-years
+    says: Acts tells that Paul lived two whole years in his own hired house and received all who came.
+    role: supporting
+    source: bible-kjv
+    at: "Acts 28:30"
+    quote: "And Paul dwelt two whole years in his own hired house, and received all that came in
+      unto him,"
+notes: "Acts ends here and does not tell Paul's death. The dates are Prat's 1911 reckoning, an
+  interpretation."

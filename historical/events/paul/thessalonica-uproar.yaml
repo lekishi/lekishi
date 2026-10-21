@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "At Thessalonica Paul preaches three sabbaths in the synagogue; some believe, and a crowd
+  raised against them assaults the house of Jason, so the brethren send Paul and Silas away by
+  night."
+types: [mission]
+part_of:
+  - paul-second-journey
+date:
+  value: "50..53"
+  mode: window
+  calendar: julian
+  as_written: "Prat (1911): second mission, 50-53"
+  cite:
+    - id: thessalonica-uproar-date
+      says: "Prat's chronology of 1911 dates Paul's second mission to 50–53."
+      basis: interpretation
+      attributed_to: F. Prat (1911)
+      source: catholic-encyclopedia
+      at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+      quote: "second mission, 50-53"
+places:
+  - place: thessalonica
+    role: site
+participants:
+  - actor: paul-the-apostle
+    role: leader
+  - actor: silas
+    role: participant
+cite:
+  - id: thessalonica-arrival
+    says: "Acts tells that through Amphipolis and Apollonia they came to Thessalonica, where there
+      was a synagogue."
+    source: bible-kjv
+    at: "Acts 17:1"
+    quote: "Now when they had passed through Amphipolis and Apollonia, they came to Thessalonica,
+      where was a synagogue of the Jews:"
+  - id: thessalonica-uproar
+    says: Acts tells that a gathered company set the city in an uproar and assaulted the house of Jason.
+    role: supporting
+    source: bible-kjv
+    at: "Acts 17:5"
+    quote: "set all the city on an uproar, and assaulted the house of Jason"
+notes: "Acts tells it, and the dates are Prat's 1911 reckoning, an interpretation: Acts gives no
+  years."

@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Beating slowly west the ship reaches Fair Havens on Crete after the autumn fast, when
+  sailing is dangerous; Paul warns against going on, but they make for Phoenix to winter and a
+  northeaster, Euroclydon, drives them out to sea for fourteen days."
+types: [occurrence]
+part_of:
+  - paul-voyage-to-rome
+date:
+  value: "59..60"
+  mode: window
+  calendar: julian
+  as_written: "Prat (1911): departure for Rome, 59; captivity at Rome, 60-62"
+  cite:
+    - id: fair-havens-and-storm-date
+      says: "Prat's chronology of 1911 dates the departure for Rome to 59 and the captivity at Rome
+        from 60, so the voyage and the winter on Malta fall between."
+      basis: interpretation
+      attributed_to: F. Prat (1911)
+      sources:
+        - source: catholic-encyclopedia
+          at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+          quote: "arrival of Festus, departure for Rome, 59"
+        - source: catholic-encyclopedia
+          at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+          quote: "captivity at Rome, 60-62"
+places:
+  - place: fair-havens
+    role: site
+participants:
+  - actor: paul-the-apostle
+    role: subject
+cite:
+  - id: fair-havens-arrival
+    says: Acts tells that they came to a place called the Fair Havens near Lasea.
+    source: bible-kjv
+    at: "Acts 27:8"
+    quote: came unto a place which is called The fair havens; nigh whereunto was the city of Lasea.
+  - id: fair-havens-season
+    says: Acts tells that sailing was now dangerous because the fast was already past.
+    role: supporting
+    source: bible-kjv
+    at: "Acts 27:9"
+    quote: "and when sailing was now dangerous, because the fast was now already past"
+  - id: fair-havens-storm
+    says: Acts tells that a tempestuous wind called Euroclydon arose.
+    role: supporting
+    source: bible-kjv
+    at: "Acts 27:14"
+    quote: "But not long after there arose against it a tempestuous wind, called Euroclydon."
+notes: "Acts tells it, and the dates are Prat's 1911 reckoning, an interpretation: Acts gives no
+  years."

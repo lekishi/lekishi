@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 'The silversmith Demetrius, who made silver shrines of Artemis, rouses the craftsmen against Paul; the city fills with confusion, the crowd rushes into the theatre and for two hours shouts "Great is Diana of the Ephesians" until the town clerk quiets it.'
+types: [occurrence]
+part_of:
+  - paul-third-journey
+date:
+  value: "53..57"
+  mode: window
+  calendar: julian
+  as_written: "Prat (1911): third mission, 53-57"
+  cite:
+    - id: ephesus-riot-date
+      says: "Prat's chronology of 1911 dates Paul's third mission to 53–57."
+      basis: interpretation
+      attributed_to: F. Prat (1911)
+      source: catholic-encyclopedia
+      at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+      quote: "third mission, 53-57"
+places:
+  - place: ephesus
+    role: site
+participants:
+  - actor: paul-the-apostle
+    role: leader
+cite:
+  - id: ephesus-riot-demetrius
+    says: "Acts tells that a silversmith named Demetrius, who made silver shrines for Diana, brought
+      much trade to the craftsmen."
+    source: bible-kjv
+    at: "Acts 19:24"
+    quote: "For a certain man named Demetrius, a silversmith, which made silver shrines for Diana,
+      brought no small gain unto the craftsmen;"
+  - id: ephesus-riot-theatre
+    says: Acts tells that the whole city was filled with confusion and the crowd rushed into the theatre.
+    role: supporting
+    source: bible-kjv
+    at: "Acts 19:29"
+    quote: And the whole city was filled with confusion
+  - id: ephesus-riot-departure
+    says: Acts tells that after the uproar Paul left for Macedonia.
+    role: supporting
+    source: bible-kjv
+    at: "Acts 20:1"
+    quote: "And after the uproar was ceased, Paul called unto him the disciples, and embraced them,
+      and departed for to go into Macedonia."
+notes: "Acts tells it, and the dates are Prat's 1911 reckoning, an interpretation: Acts gives no
+  years."

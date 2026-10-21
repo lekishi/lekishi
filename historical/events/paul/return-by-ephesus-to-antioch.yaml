@@ -1,0 +1,61 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Paul sails from Cenchreae with Aquila and Priscilla, leaves them at Ephesus after
+  reasoning in the synagogue, lands at Caesarea, goes up to greet the church, and returns to
+  Antioch."
+types: [journey]
+part_of:
+  - paul-second-journey
+date:
+  value: "53"
+  mode: window
+  calendar: julian
+  as_written: "Prat (1911): fourth visit to Jerusalem, 53"
+  cite:
+    - id: return-by-ephesus-to-antioch-date
+      says: "Prat's chronology of 1911 dates Paul's fourth visit to Jerusalem, at the end of the
+        second mission, to 53."
+      basis: interpretation
+      attributed_to: F. Prat (1911)
+      source: catholic-encyclopedia
+      at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+      quote: "fourth visit to Jerusalem, 53"
+places:
+  - place: cenchreae
+    role: start
+  - place: ephesus
+    role: waypoint
+  - place: caesarea-maritima
+    role: waypoint
+  - place: antioch-on-the-orontes
+    role: end
+participants:
+  - actor: paul-the-apostle
+    role: leader
+  - actor: aquila
+    role: participant
+  - actor: priscilla
+    role: participant
+cite:
+  - id: return-cenchrea
+    says: "Acts tells that Paul sailed for Syria with Priscilla and Aquila, having cut his hair at
+      Cenchrea for a vow."
+    source: bible-kjv
+    at: "Acts 18:18"
+    quote: "and sailed thence into Syria, and with him Priscilla and Aquila; having shorn his head
+      in Cenchrea: for he had a vow."
+  - id: return-ephesus
+    says: Acts tells that he came to Ephesus and left them there.
+    role: supporting
+    source: bible-kjv
+    at: "Acts 18:19"
+    quote: "And he came to Ephesus, and left them there"
+  - id: return-caesarea
+    says: "Acts tells that he landed at Caesarea, went up and greeted the church, and went down to
+      Antioch."
+    role: supporting
+    source: bible-kjv
+    at: "Acts 18:22"
+    quote: "And when he had landed at Caesarea, and gone up, and saluted the church, he went down to
+      Antioch."
+notes: "Acts tells it, and the dates are Prat's 1911 reckoning, an interpretation: Acts gives no
+  years."

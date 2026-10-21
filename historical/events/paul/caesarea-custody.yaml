@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Under escort Paul is taken to Caesarea and held by the procurator Felix, who hears him and
+  his accusers but leaves him in custody for two years until Porcius Festus succeeds him."
+types: [occurrence]
+date:
+  value: "57..59"
+  mode: window
+  calendar: julian
+  as_written: "Prat (1911): arrest, 57; arrival of Festus, 59"
+  cite:
+    - id: caesarea-custody-date
+      says: "Prat's chronology of 1911 dates the arrest to 57 and the arrival of Festus to 59, so
+        the custody at Caesarea falls between them."
+      basis: interpretation
+      attributed_to: F. Prat (1911)
+      sources:
+        - source: catholic-encyclopedia
+          at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+          quote: "fifth visit to Jerusalem, arrest, 57"
+        - source: catholic-encyclopedia
+          at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+          quote: "arrival of Festus, departure for Rome, 59"
+places:
+  - place: caesarea-maritima
+    role: site
+participants:
+  - actor: paul-the-apostle
+    role: subject
+  - actor: antonius-felix
+    role: host
+  - actor: porcius-festus
+    role: participant
+cite:
+  - id: custody-presented
+    says: Acts tells that the escort came to Caesarea and presented Paul to the governor.
+    source: bible-kjv
+    at: "Acts 23:33"
+    quote: "Who, when they came to Caesarea and delivered the epistle to the governor, presented
+      Paul also before him."
+  - id: custody-two-years
+    says: "Acts tells that after two years Porcius Festus succeeded Felix, who left Paul bound."
+    role: supporting
+    source: bible-kjv
+    at: "Acts 24:27"
+    quote: "But after two years Porcius Festus came into Felix’ room: and Felix, willing to shew the
+      Jews a pleasure, left Paul bound."
+notes: "Acts tells it, and the dates are Prat's 1911 reckoning, an interpretation: Acts gives no
+  years."

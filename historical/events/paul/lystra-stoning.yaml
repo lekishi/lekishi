@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "At Lystra Paul heals a man lame from birth; the crowd hails Barnabas as Jupiter and Paul
+  as Mercury, then Jews from Antioch and Iconium turn them, and Paul is stoned and dragged out of
+  the city for dead."
+types: [occurrence]
+part_of:
+  - paul-first-journey
+date:
+  value: "45..49"
+  mode: window
+  calendar: julian
+  as_written: "Prat (1911): first mission, 45-49"
+  cite:
+    - id: lystra-stoning-date
+      says: "Prat's chronology of 1911 dates Paul's first mission to 45–49."
+      basis: interpretation
+      attributed_to: F. Prat (1911)
+      source: catholic-encyclopedia
+      at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+      quote: "first mission, 45-49"
+places:
+  - place: lystra
+    role: site
+participants:
+  - actor: paul-the-apostle
+    role: leader
+  - actor: barnabas
+    role: participant
+cite:
+  - id: lystra-gods
+    says: Acts tells that the people called Barnabas Jupiter and Paul Mercury.
+    source: bible-kjv
+    at: "Acts 14:12"
+    quote: "And they called Barnabas, Jupiter; and Paul, Mercurius, because he was the chief
+      speaker."
+  - id: lystra-stoned
+    says: "Acts tells that Jews from Antioch and Iconium persuaded the people, who stoned Paul and
+      dragged him out of the city."
+    role: supporting
+    source: bible-kjv
+    at: "Acts 14:19"
+    quote: "having stoned Paul, drew him out of the city, supposing he had been dead."
+notes: "Acts tells it, and the dates are Prat's 1911 reckoning, an interpretation: Acts gives no
+  years."

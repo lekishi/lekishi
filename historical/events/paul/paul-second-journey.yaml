@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Paul's second mission with Silas: overland through Syria and Cilicia to Derbe and Lystra,
+  across Anatolia to Troas, over the sea to Macedonia (Philippi, Thessalonica, Beroea), to Athens
+  and a year and a half at Corinth, and home by Ephesus, Caesarea and Jerusalem to Antioch."
+types: [journey, mission]
+date:
+  value: "50..53"
+  mode: window
+  calendar: julian
+  as_written: "Prat (1911): second mission, 50-53"
+  cite:
+    - id: paul-second-journey-date
+      says: "Prat's chronology of 1911 dates Paul's second mission to 50–53."
+      basis: interpretation
+      attributed_to: F. Prat (1911)
+      source: catholic-encyclopedia
+      at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+      quote: "second mission, 50-53"
+places:
+  - place: antioch-on-the-orontes
+    role: start
+  - place: corinth
+    role: waypoint
+    note: The longest stay of the journey.
+  - place: antioch-on-the-orontes
+    role: end
+participants:
+  - actor: paul-the-apostle
+    role: leader
+  - actor: silas
+    role: participant
+cite:
+  - id: paul-second-journey-start
+    says: "Acts tells that Paul chose Silas, set out, and went through Syria and Cilicia."
+    source: bible-kjv
+    at: "Acts 15:41"
+    quote: "And he went through Syria and Cilicia, confirming the churches."
+  - id: paul-second-journey-end
+    says: Acts tells that after landing at Caesarea and greeting the church Paul went down to Antioch.
+    role: supporting
+    source: bible-kjv
+    at: "Acts 18:22"
+    quote: "And when he had landed at Caesarea, and gone up, and saluted the church, he went down to
+      Antioch."
+notes: "Acts tells it, and the dates are Prat's 1911 reckoning, an interpretation: Acts gives no
+  years."

@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Sailing from Paphos, Paul and his company land in Pamphylia and come to Perga, where John
+  Mark leaves them and returns to Jerusalem."
+types: [occurrence]
+part_of:
+  - paul-first-journey
+date:
+  value: "45..49"
+  mode: window
+  calendar: julian
+  as_written: "Prat (1911): first mission, 45-49"
+  cite:
+    - id: perga-mark-departs-date
+      says: "Prat's chronology of 1911 dates Paul's first mission to 45–49."
+      basis: interpretation
+      attributed_to: F. Prat (1911)
+      source: catholic-encyclopedia
+      at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+      quote: "first mission, 45-49"
+places:
+  - place: paphos
+    role: start
+  - place: perga
+    role: end
+participants:
+  - actor: paul-the-apostle
+    role: leader
+  - actor: barnabas
+    role: participant
+cite:
+  - id: perga-mark
+    says: "Acts tells that they came from Paphos to Perga in Pamphylia, and that John left them
+      there for Jerusalem."
+    source: bible-kjv
+    at: "Acts 13:13"
+    quote: "Now when Paul and his company loosed from Paphos, they came to Perga in Pamphylia: and
+      John departing from them returned to Jerusalem."
+notes: "Acts tells it, and the dates are Prat's 1911 reckoning, an interpretation: Acts gives no
+  years."

@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "李牧, the Zhao general who had repulsed Qin at 肥 and 番吾. His biography and the hereditary house of Zhao record him resisting 王翦 in 229 BCE, slandered through Qin's bribes to the favourite 郭開, and put to death on the king's order."
+types: [person]
+names:
+  - form: "李牧"
+    lang: lzh
+    script: Hani
+    roman: "Li Mu"
+    scheme: pinyin
+    cite:
+      - says: "The biography records Zhao sending 李牧 and 司馬尚 against 王翦 in the king's seventh year."
+        source: shiji-six-states
+        at: "卷八十一 廉頗藺相如列傳（趙使李牧、司馬尚禦之）"
+        quote: "趙王遷七年，秦使王翦攻趙，趙使李牧、司馬尚禦之。"
+roles:
+  - role: soldier
+    note: "Zhao's great general in the cited notices; the biography records him enfeoffed as 武安君 after the victory over Qin at 宜安."
+    cite:
+      - says: "The hereditary house records 李牧 repelling Qin at 肥 and being enfeoffed as 武安君."
+        source: shiji-six-states
+        at: "卷四十三 趙世家 幽繆王三年（封牧爲武安君）"
+        quote: "三年，秦攻赤麗、宜安，李牧率師與戰肥下，卻之。封牧爲武安君。"
+notes: "His death is an event of the chapter (li-mu-death-229)."

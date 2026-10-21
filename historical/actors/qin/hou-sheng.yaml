@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "后勝, chancellor of Qi. The hereditary house of Qi records him taking Qin's gold and advising the king not to fight, and surrendering to Qin in 221 BCE."
+types: [person]
+names:
+  - form: "后勝"
+    lang: lzh
+    script: Hani
+    roman: "Hou Sheng"
+    scheme: pinyin
+    cite:
+      - says: "The hereditary house records the king following 后勝's advice and surrendering without a fight."
+        source: shiji-six-states
+        at: "卷四十六 田敬仲完世家 王建四十四年（齊王聽相后勝計）"
+        quote: "齊王聽相后勝計，不戰，以兵降秦。"
+roles:
+  - role: official
+    note: "Chancellor (相) of Qi."
+    cite:
+      - says: "The annals record king 建 and his chancellor 后勝 guarding the western border."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十六年（齊王建與其相后勝）"
+        quote: "二十六年，齊王建與其相后勝發兵守其西界，不通秦。"
+notes: "The transcription of the hereditary house wraps 后 in its conversion markup; the quotation is the text as it renders."

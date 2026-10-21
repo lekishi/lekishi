@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "綰, chancellor (丞相) of Qin in 221 BCE, whom the annals record proposing the title 泰皇 and asking that the emperor's sons be made kings of the distant lands."
+types: [person]
+names:
+  - form: "綰"
+    lang: lzh
+    script: Hani
+    roman: Wan
+    scheme: pinyin
+    cite:
+      - says: "The annals record 丞相綰 among those proposing the title and later urging kings for 燕, 齊 and 荊."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十六年（丞相綰等言）"
+        quote: "丞相綰等言：「諸侯初破，燕、齊、荊地遠，不為置王，毋以填之。"
+roles:
+  - role: official
+    note: "丞相 in the 221 BCE notices."
+    cite:
+      - says: "The annals call him 丞相 in 221 BCE."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十六年（丞相綰）"
+notes: "The 221 BCE notices give the given name only; the surname 王 appears in the annals' later inscriptions, which this chapter does not cite, so the primary form is 綰 and the id follows the conventional name."

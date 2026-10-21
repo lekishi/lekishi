@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "負芻, the last king of Chu, who killed his half-brother 哀王 and took the throne in 228 BCE. The annals record him captured in 224 BCE; the six-states table and the hereditary house of Chu record it in his fifth year, 223 BCE."
+types: [person]
+names:
+  - form: "楚王負芻"
+    lang: lzh
+    script: Hani
+    roman: "Chu Wang Fuchu"
+    scheme: pinyin
+    cite:
+      - says: "The hereditary house records 負芻 killing 哀王 and taking the throne."
+        source: shiji-six-states
+        at: "卷四十 楚世家 哀王（負芻之徒襲殺哀王）"
+        quote: "哀王立二月餘，哀王庶兄負芻之徒襲殺哀王而立負芻爲王。"
+roles:
+  - role: ruler
+    note: "The six-states table counts his 元年 in 227 BCE and the capture in his fifth year, 223 BCE."
+    date:
+      value: "227 BCE..223 BCE"
+      mode: duration
+      calendar: chinese_lunisolar
+      as_written: "王負芻元年; 五年"
+    cite:
+      - says: "The table records the capture and the end of Chu in his fifth year."
+        source: shiji
+        at: "卷十五 六國年表 秦始皇二十四年（楚 五）"
+        quote: "五。秦虜王負芻。秦滅楚。"
+notes: "His capture is a disputed event of the chapter (chu-king-captured)."

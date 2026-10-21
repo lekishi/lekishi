@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  長安, the Western Han capital, from which the court sent 張騫 west and to which he returned. The
+  record's point is the excavated walled city of Han 長安, northwest of modern 西安; the sources
+  cited here name the city and state no site within it. The Sui and Tang city (`changan`) was built
+  to the southeast and is a separate record.
+types: [capital]
+names:
+  - form: 長安
+    lang: lzh
+    script: Hani
+    roman: Chang'an
+    scheme: pinyin
+    cite:
+      - id: chang-an-name
+        says: The 大宛列傳 gives the distance from the 鹽澤 to 長安 as about five thousand 里.
+        source: shiji-han-frontiers
+        at: 卷一百二十三 大宛列傳（鹽澤去長安可五千里）
+        quote: 鹽澤去長安可五千里
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [108.85863, 34.30502]
+    notes: An approximate placement at the site of the Han walled city of 長安, which survives as an
+      excavated and protected site northwest of modern 西安. The point marks the walled city, not a
+      palace or the court where an envoy was received.
+    cite:
+      - id: chang-an-site
+        says:
+          The site of the Han city of 長安 is the archaeological site recorded in Wikidata (CC0) as the
+          ruins of Han 長安城; the point is that item's coordinate.
+        basis: interpretation
+        attributed_to: Wikidata contributors (archaeological site item)
+        source: wikidata
+        at: Q11133390 (P625), revision 2515969088
+modern:
+  - form: 漢長安城遺址
+    lang: zh-Hans
+    script: Hani
+    note: The protected archaeological site of the walled city, in 西安市未央區.
+external_ids:
+  - system: wikidata
+    id: Q11133390
+    url: https://www.wikidata.org/wiki/Q11133390
+    license: CC0-1.0
+    note: The item whose coordinate places the point.

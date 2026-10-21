@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  羌中, the land of the 羌 along the southern mountains, by which 張騫 tried to return from 大夏 and
+  where the 匈奴 caught him again. The sources name a people's land, not a place, and the record
+  carries no position.
+types: [region]
+names:
+  - form: 羌中
+    lang: lzh
+    script: Hani
+    roman: Qiangzhong
+    scheme: pinyin
+    cite:
+      - id: qiang-zhong-name
+        says: The 大宛列傳 records that 張騫 went along the southern mountains meaning to return through 羌中, and was caught again by the 匈奴.
+        source: shiji-han-frontiers
+        at: 卷一百二十三 大宛列傳（欲從羌中歸）
+        quote: 留歲餘，還，并南山，欲從羌中歸，復為匈奴所得。
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: No position is asserted; the text names the 羌's land and the 南山 without a site.
+    cite:
+      - id: qiang-zhong-unplaced
+        says: The cited entry names 羌中 and states no site for it, so no position is asserted.
+        source: shiji-han-frontiers
+        at: 卷一百二十三 大宛列傳（欲從羌中歸）

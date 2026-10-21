@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  康居, the mobile country about two thousand 里 north-west of 大宛, which passed 張騫 on to the 大月氏.
+  The sources give only its position relative to its neighbours, and the record carries no position.
+types: [region]
+names:
+  - form: 康居
+    lang: lzh
+    script: Hani
+    roman: Kangju
+    scheme: pinyin
+    cite:
+      - id: kangju-name
+        says: The 大宛列傳 places 康居 about two thousand 里 north-west of 大宛 and calls it a mobile country.
+        source: shiji-han-frontiers
+        at: 卷一百二十三 大宛列傳（康居在大宛西北可二千里）
+        quote: 康居在大宛西北可二千里，行國，與月氏大同俗。
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      The 大宛列傳 gives a bearing and a distance from 大宛 and describes a mobile people; it names no
+      town. No position is asserted, so a journey through 康居 is not drawn through a point.
+    cite:
+      - id: kangju-unknown
+        says: The 大宛列傳 records that 大宛 sent 張騫 on to 康居 and that 康居 passed him to the 大月氏, naming no town.
+        source: shiji-han-frontiers
+        at: 卷一百二十三 大宛列傳（抵康居，康居傳致大月氏）
+        quote: 抵康居，康居傳致大月氏

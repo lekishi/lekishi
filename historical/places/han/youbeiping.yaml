@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  右北平, the north-eastern frontier commandery out of which 李廣 and 張騫 rode against the 左賢王 in the
+  summer of 121 BCE. The label anchor sits at the modern 寧城縣, the area usually identified with the
+  Western Han seat 平剛; it asserts no site.
+types: [region]
+names:
+  - form: 右北平
+    lang: lzh
+    script: Hani
+    roman: Youbeiping
+    scheme: pinyin
+    cite:
+      - id: youbeiping-name
+        says: The 匈奴列傳 records the 博望侯 and 李廣 riding out of 右北平 against the 左賢王.
+        source: shiji-han-frontiers
+        at: 卷一百十 匈奴列傳（漢使博望侯及李將軍廣出右北平）
+        quote: 漢使博望侯及李將軍廣出右北平，擊匈奴左賢王。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [119.33287, 41.59381]
+    notes:
+      Region-level label anchor at the modern 寧城縣, the area usually identified with the seat 平剛;
+      the identification is not cited here and the anchor asserts no site or extent.
+    cite:
+      - id: youbeiping-anchor
+        says:
+          The label anchor is placed at the modern county's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q1354147 (P625), revision 2526581716
+external_ids:
+  - system: wikidata
+    id: Q1354147
+    url: https://www.wikidata.org/wiki/Q1354147
+    license: CC0-1.0
+    note: The item whose coordinate places the point.

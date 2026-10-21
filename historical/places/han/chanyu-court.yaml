@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The 單于's court (單于庭), where 張騫 was brought after the 匈奴 caught him and where he was held for
+  more than ten years. The 匈奴列傳 places the court facing 代 and 雲中 and describes a people that moved
+  with grass and water; no source fixes where 張騫 was held, so the record carries no position.
+types: [other]
+names:
+  - form: 單于庭
+    lang: lzh
+    script: Hani
+    roman: Chanyu Ting
+    scheme: pinyin
+    cite:
+      - id: chanyu-court-name
+        says: The 匈奴列傳 records that the 單于's court faced 代 and 雲中, and that each part moved with the grass and water.
+        source: shiji-han-frontiers
+        at: 卷一百十 匈奴列傳（單于之庭直代、雲中）
+        quote: 而單于之庭直代、雲中：各有分地，逐水草移徙。
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      The 大宛列傳 says only that 張騫 was sent on to the 單于 and held there; the 匈奴列傳 gives a
+      direction relative to the frontier, not a site, and the court moved. No position is asserted.
+    cite:
+      - id: chanyu-court-unknown
+        says: The 大宛列傳 records that the 匈奴 caught 張騫 on the way and sent him on to the 單于, without naming a place.
+        source: shiji-han-frontiers
+        at: 卷一百二十三 大宛列傳（傳詣單于）
+        quote: 經匈奴，匈奴得之，傳詣單于。
+notes:
+  The type is `other` because the 單于's court was a moving camp, not a settlement, a capital with a
+  fixed seat, or a landform; the vocabulary has no type for a mobile court.

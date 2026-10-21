@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  居延, the land of the 居延 marshes at the end of the 弱水, which 霍去病 passed in the summer of 121 BCE
+  on his way to 祁連山. The label anchor sits at the modern 居延海; it asserts no site of the Han
+  passage.
+types: [region]
+names:
+  - form: 居延
+    lang: lzh
+    script: Hani
+    roman: Juyan
+    scheme: pinyin
+    cite:
+      - id: juyan-name
+        says: The 衛將軍驃騎列傳 records the 驃騎將軍 crossing 居延 and reaching 祁連山.
+        source: shiji-han-frontiers
+        at: 卷一百十一 衛將軍驃騎列傳（驃騎將軍踰居延至祁連山）
+        quote: 驃騎將軍踰居延至祁連山，捕首虜甚多
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [101.26, 42.29]
+    notes: Region-level label anchor at the modern lake 居延海 (額濟納旗); the anchor asserts no site or extent.
+    cite:
+      - id: juyan-anchor
+        says:
+          The label anchor is placed at the modern lake's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q2406225 (P625), revision 2515921800
+external_ids:
+  - system: wikidata
+    id: Q2406225
+    url: https://www.wikidata.org/wiki/Q2406225
+    license: CC0-1.0
+    note: The item whose coordinate places the point.

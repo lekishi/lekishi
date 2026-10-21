@@ -1,4 +1,4 @@
-= The edicts of Aśoka, 261–232 BCE: feasibility note
+= Aśoka and his edicts, 273–232 BCE: feasibility note
 :state: Desk-research note for the owner's review of a draft chapter; not published atlas content, not an RFD decision
 :prepared-from: claude/project-thread-o83o18 @ b9429622 (玄奘 thread's shared Indian places)
 :research-window: single pass, 2026-10-21
@@ -6,7 +6,7 @@
 :toclevels: 2
 
 This note goes with the draft chapter
-link:../../historical/chapters/ashoka-edicts-261-232.yaml[`ashoka-edicts-261-232`],
+link:../../historical/chapters/ashoka-edicts-273-232.yaml[`ashoka-edicts-273-232`],
 candidate 4 of the 2026-10-21 chapter selection. It says what the sources
 support, where the chapter had to make editorial choices, and what would raise
 its quality before the owner approves it. The chapter is a draft: it has no
@@ -119,6 +119,12 @@ What this chapter asks of the engine, for the follow-up work:
 . *Relationships in the story.* The manifest puts relationships (the Kalinga
   annexation, the diplomacy of Rock Edict XIII) between events as steps, which
   is worth checking in the step UI.
+. *Prologue nodes.* The chapter first opened at 261 BCE, with the succession
+  and consecration as scene-setting steps before it. The atlas projection
+  accepts an event outside the window only as a step captioned "Coda —", so
+  the preview build failed, and the window now opens at the succession in
+  273 BCE. A prologue label, and running the projection in `pnpm test` for
+  every chapter, would catch this before a preview build does.
 
 == What would raise quality before approval
 

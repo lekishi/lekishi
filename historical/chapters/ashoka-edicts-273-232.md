@@ -1,6 +1,6 @@
-# The edicts of Aśoka, 261–232 BCE
+# Aśoka and his edicts, 273–232 BCE
 
-The manifest is [`ashoka-edicts-261-232.yaml`](ashoka-edicts-261-232.yaml),
+The manifest is [`ashoka-edicts-273-232.yaml`](ashoka-edicts-273-232.yaml),
 a **draft** with no approval block. Dev and pull-request previews serve it, and
 production builds do not. What the sources support, the editorial choices, and the
 follow-ups are in
@@ -8,10 +8,12 @@ follow-ups are in
 
 ## Coverage model
 
-- **Window 261–232 BCE**, from the conquest of Kalinga to Aśoka's death.
-- **Story span 301–232 BCE.** Three opening steps (Dionysios' embassy, the
-  Taxila legend, the succession and consecration) set the scene before the
-  window.
+- **Window 273–232 BCE**, from Aśoka's succession to his death. The edicts
+  begin after the Kalinga war of 261 BCE; the years before it hold the
+  succession, the consecration and Mahinda's ordination.
+- **Story span 301–232 BCE.** The two opening steps (Dionysios' embassy and
+  the Taxila legend) may fall in Bindusāra's reign and overlap the window only
+  in part.
 - **Step order is presentation order**, not a claim that one event caused
   another. Relationships sit between events as steps where they explain one.
 

@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Hammurabi captures Uruk (Erech) and Isin. L. W. King reads the year-name of Hammurabi's seventh
+  year as recording their capture, after Isin had changed hands between Babylon and Larsa.
+types: [occurrence]
+part_of: [hammurabi-reign]
+date:
+  value: 1792 BCE..1750 BCE
+  mode: window
+  calendar: regnal
+  as_written: the year of his capture of Erech and Isin (year 7)
+  cite:
+    - says: The Louvre dates Hammurabi's reign, and the stele, to -1792/-1750, the modern middle chronology.
+      basis: interpretation
+      attributed_to: Musée du Louvre
+      source: louvre-code-of-hammurabi
+      at: "caption: Code de Hammurabi, -1792 / -1750"
+places:
+  - place: uruk
+    role: site
+  - place: isin
+    role: site
+participants:
+  - actor: hammurabi
+    role: leader
+  - actor: first-dynasty-of-babylon
+    role: participant
+  - actor: larsa-kingdom
+    role: participant
+    note: The power that held Isin before, by King's reading.
+cite:
+  - says: King reads a contract of Hammurabi's reign as dated in the year of his capture of Erech and Isin.
+    basis: interpretation
+    attributed_to: L. W. King (1910)
+    source: king-sumer-akkad
+    at: chapter XI (the rise of Babylon), note 43
+    quote: a contract of Hammurabi's reign dated in the year of his capture of Erech and Isin
+  - says: King says Isin was retaken by Larsa and recaptured in Hammurabi's seventh year.
+    role: supporting
+    basis: interpretation
+    attributed_to: L. W. King (1910)
+    source: king-sumer-akkad
+    at: chapter XI (the rise of Babylon)
+    quote: before being again recaptured in Hammurabi's seventh year
+notes:
+  King notes that the date list is damaged here, and that the reading of "capture" rather than "building
+  of the wall" rests on a contract's formula. The text dates the event by the year-name of Hammurabi's
+  seventh year. No cited source converts that year to a BCE year, so the date is the reign's window in
+  the middle chronology the Louvre uses; a regnal calendar with a cited epoch would narrow it to one year.
+  The year depends on the chronology, which the reign records as a dispute.

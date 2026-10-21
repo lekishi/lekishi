@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Hammurabi's war on Elam, which by the cited readings ended Babylonia's vassalage to Elam with
+  the defeat of the Elamite army in his thirtieth year.
+types: [conflict]
+from: first-dynasty-of-babylon
+to: elam
+date:
+  value: 1792 BCE..1750 BCE
+  mode: window
+  calendar: regnal
+  as_written: the thirtieth year of his reign, by its date-formula
+  cite:
+    - says: The Louvre dates Hammurabi's reign, and the stele, to -1792/-1750, the modern middle chronology.
+      basis: interpretation
+      attributed_to: Musée du Louvre
+      source: louvre-code-of-hammurabi
+      at: "caption: Code de Hammurabi, -1792 / -1750"
+cite:
+  - says: The Catholic Encyclopedia says Hammurabi freed Babylonia from the Elamite yoke.
+    basis: interpretation
+    attributed_to: C. L. Souvay, Catholic Encyclopedia (1910)
+    source: catholic-encyclopedia
+    at: Hammurabi (Charles L. Souvay)
+    quote: it was reserved to him to free it from the foreign yoke

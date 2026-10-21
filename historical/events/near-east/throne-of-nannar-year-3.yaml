@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: Hammurabi's third year is named for the making of a throne for Nannar, the moon god.
+types: [other]
+part_of: [hammurabi-reign]
+date:
+  value: 1792 BCE..1750 BCE
+  mode: window
+  calendar: regnal
+  as_written: the year in which the throne of Nannar was made (year 3)
+  cite:
+    - says: The Louvre dates Hammurabi's reign, and the stele, to -1792/-1750, the modern middle chronology.
+      basis: interpretation
+      attributed_to: Musée du Louvre
+      source: louvre-code-of-hammurabi
+      at: "caption: Code de Hammurabi, -1792 / -1750"
+participants:
+  - actor: hammurabi
+    role: leader
+cite:
+  - says: The Hastings dictionary gives the third year-name.
+    source: hastings-dictionary-bible
+    at: Assyria and Babylonia, Chronology, (a) Year-names
+    quote: the year in which the throne of Nannar was made
+notes:
+  The year-name says nothing of where the throne stood, so no place is recorded. The text dates the
+  event by the year-name of Hammurabi's third year. No cited source converts that year to a BCE year,
+  so the date is the reign's window in the middle chronology the Louvre uses; a regnal calendar with a
+  cited epoch would narrow it to one year. The year depends on the chronology, which the reign records
+  as a dispute.

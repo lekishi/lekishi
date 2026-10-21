@@ -1,0 +1,100 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Hammurabi adds the land of Emutbal to his dominions and conquers Larsa. An early chronicle in
+  King and Hall's account says he attacked Rim-Sin, captured Ur and Larsa and carried their spoil to Babylon;
+  the Catholic Encyclopedia says he then took the title of king of Sumer and Akkad.
+types: [occurrence]
+part_of: [hammurabi-reign]
+date:
+  value: 1792 BCE..1750 BCE
+  mode: window
+  calendar: regnal
+  as_written: the following year, the thirty-first, by its date-formula
+  cite:
+    - says: The Louvre dates Hammurabi's reign, and the stele, to -1792/-1750, the modern middle chronology.
+      basis: interpretation
+      attributed_to: Musée du Louvre
+      source: louvre-code-of-hammurabi
+      at: "caption: Code de Hammurabi, -1792 / -1750"
+places:
+  - place: larsa
+    role: site
+  - place: ur
+    role: site
+  - place: emutbal
+    role: context
+    note: The land added to Hammurabi's dominions; no extent is drawn.
+  - place: babylon
+    role: end
+    note: Where the chronicle says the spoil was carried.
+participants:
+  - actor: hammurabi
+    role: leader
+  - actor: first-dynasty-of-babylon
+    role: participant
+  - actor: rim-sin
+    role: subject
+  - actor: larsa-kingdom
+    role: participant
+cite:
+  - says: King and Hall say that in the following year Hammurabi added the land of E'mutbal to his dominions.
+    basis: interpretation
+    attributed_to: L. W. King and H. R. Hall (1906)
+    source: king-hall-history
+    at: chapter V (Elam and Babylon)
+    quote: in the following year we gather that he added the land of E’mutbal
+  - says:
+      The Catholic Encyclopedia says that in the next year he conquered Iamutbala and Larsa and took
+      the title of King of Sumer and Akkad.
+    role: supporting
+    basis: interpretation
+    attributed_to: C. L. Souvay, Catholic Encyclopedia (1910)
+    source: catholic-encyclopedia
+    at: Hammurabi (Charles L. Souvay)
+    quote:
+      the ensuing year he completed this success by conquering the lands of Iamutbala (W. of Elam)
+      and Larsa, and taking, in consequence, the title of King of Sumer and Akkad
+  - says:
+      King and Hall report an unpublished chronicle in which Hammurabi captured Ur and Larsa and carried
+      their spoil to Babylon.
+    role: supporting
+    basis: interpretation
+    attributed_to: L. W. King and H. R. Hall (1906)
+    source: king-hall-history
+    at: chapter V (Elam and Babylon)
+    quote: after capturing the cities of Ur and Larsam, carried their spoil to Babylon
+  - says:
+      King and Hall read the same chronicle as showing that Rim-Sin was only crippled and retired beyond
+      the Elamite frontier.
+    role: conflicting
+    basis: interpretation
+    attributed_to: L. W. King and H. R. Hall (1906)
+    source: king-hall-history
+    at: chapter V (Elam and Babylon)
+    quote:
+      But Rîm-Sin was only crippled for the time, and, on being driven from Ur and Larsam, he retired
+      beyond the Elamite frontier
+  - says:
+      King says Rim-Sin was not finally defeated in Hammurabi's thirty-first year but lived on into
+      the reign of Samsu-iluna.
+    role: supporting
+    basis: interpretation
+    attributed_to: L. W. King (1910)
+    source: king-sumer-akkad
+    at: chapter XI (the rise of Babylon)
+    quote:
+      he was not finally defeated in Hammurabi's thirty-first year, but lived on into the reign of
+      Samsu-iluna
+dispute:
+  status: disputed
+  summary:
+    Whether this was Rim-Sin's overthrow. King and Hall put his overthrow in the thirtieth year's
+    formulas and the conquest of Emutbal in the thirty-first; the Catholic Encyclopedia puts Larsa's conquest
+    in the thirty-first. The chronicle they cite says Rim-Sin survived, retired beyond the Elamite frontier
+    and fought again under Samsu-iluna. The chapter publishes the conquest of Larsa and keeps the claim
+    of a final overthrow as conflicting.
+notes:
+  The text dates the event by the year-name of Hammurabi's thirty-first year. No cited source converts
+  that year to a BCE year, so the date is the reign's window in the middle chronology the Louvre uses;
+  a regnal calendar with a cited epoch would narrow it to one year. The year depends on the chronology,
+  which the reign records as a dispute.

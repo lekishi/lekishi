@@ -1,0 +1,42 @@
+# Proposed journey record (RFD 2, "Proposed: the journey record", PR #26).
+# The compiler does not read historical/journeys/ until the owner accepts the shape.
+title: 玄奘's travels in India from 那爛陀, 636–643
+summary: >-
+  From 那爛陀, 玄奘 visits 王舍城 and studies five years under 戒賢, then goes east by 伊爛拏 and 瞻波 to
+  三摩呾吒 and 耽摩栗底, south down the east coast to 馱那羯磔迦 and 建志補羅, north-west by 跋祿羯呫婆 and
+  伐臘毗 to 缽伐多, and back to 那爛陀 and 勝軍 at 杖林山; 鳩摩羅王 summons him to 迦摩縷波, and he goes with
+  戒日王 from 羯朱嗢祇羅 to the assembly at 曲女城 and the great distribution at 缽羅耶伽.
+travellers:
+  - actor: xuanzang
+    role: leader
+stops:
+  - nalanda-arrival-636
+  - rajagriha-visit-637
+  # The five years of study at 那爛陀 after the visit to 王舍城, before he leaves for the east.
+  - nalanda-yogacara-637
+  - hiranyaparvata-stay-638
+  - champa-638
+  - pundravardhana-638
+  - samatata-638
+  - tamralipti-638
+  - dhanyakataka-stay-639
+  - kanchipuram-639
+  - bharukaccha-640
+  - valabhi-640
+  - parvata-stay-640
+  - nalanda-return-641
+  - yashtivana-stay-641
+  # Back at 那爛陀 from 杖林山: the biography has him write the 會宗論 there before the summons.
+  - huizong-treatise-642
+  - kamarupa-invitation-642
+  - kajangala-meeting-642
+  - kanyakubja-assembly-642
+  - prayaga-distribution-643
+cite:
+  - id: xuanzang-india-sequence
+    says: >-
+      The biography narrates 玄奘's settling at 那爛陀, his visit to 王舍城, his circuit of eastern, southern
+      and western India back to 那爛陀, his years with 勝軍, and his going to 迦摩縷波, to 戒日王, to 曲女城 and
+      to 缽羅耶伽, in this order.
+    source: cien-zhuan
+    at: 卷三（法師於那爛陀寺安置已）— 卷五（至二十一日，發引向缽羅耶伽國就大）

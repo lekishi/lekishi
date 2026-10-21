@@ -1,0 +1,39 @@
+# Proposed journey record (RFD 2, "Proposed: the journey record", PR #26).
+# The compiler does not read historical/journeys/ until the owner accepts the shape.
+title: 玄奘's return from 缽羅耶伽 to 長安, 643–645
+summary: >-
+  玄奘 takes the northern road home from 缽羅耶伽 by 憍賞彌 and 闍爛達那 to 呾叉始羅, loses books crossing
+  the 信度河 to 烏鐸迦漢荼, recrosses the Hindu Kush by 迦畢試 to 活國, goes by 達摩悉鐵帝 up the 波謎羅川 and
+  over the 蔥嶺 to 朅盤陀, 佉沙, 斫句迦 and 于闐, and along the southern rim of the 流沙 by 沙州 to 長安.
+travellers:
+  - actor: xuanzang
+    role: leader
+# The loss in the 信度河 (indus-loss-643) is not a stop: it happened mid-river, and its only
+# place, 烏鐸迦漢荼, is context; the stay there is udakhand-stay-643.
+stops:
+  - prayaga-departure-643
+  - kausambi-return-643
+  - jalandhara-return-643
+  - taxila-return-643
+  - udakhand-stay-643
+  - kapisa-return-643
+  - hindu-kush-crossing-643
+  - kunduz-return-643
+  - wakhan-643
+  - pamir-643
+  - tashkurgan-644
+  - kashgar-644
+  - karghalik-644
+  - khotan-arrival-644
+  - niya-644
+  - cherchen-644
+  - loulan-644
+  - shazhou-memorial-644
+  - changan-arrival-645
+cite:
+  - id: xuanzang-return-sequence
+    says: >-
+      The biography narrates the return from 缽羅耶伽 by the northern road, over the 蔥嶺, by 于闐 and
+      沙州 to the arrival at 長安, in this order.
+    source: cien-zhuan
+    at: 卷五（今者還須北路而去）— 卷六（貞觀十九年春正月景子）

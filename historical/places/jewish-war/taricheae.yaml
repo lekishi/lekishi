@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Taricheae on the western shore of the Sea of Galilee, usually identified with Magdala, where the
+  rebels gathered with a fleet of boats and were defeated on land and on the lake in 67 CE.
+types: [settlement]
+names:
+  - form: Taricheae
+    lang: en
+    script: Latn
+    cite:
+      - id: taricheae-name
+        says:
+          Josephus tells that the rebels had gathered at Taricheae, relying on the city and the lake
+          beside it.
+        source: josephus-jewish-war
+        at: "3.10.1"
+        quote:
+          for all the innovators had gotten together at Taricheae, as relying upon the strength of
+          the city, and on the lake that lay by it.
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [35.52058, 32.81449]
+    notes: The gazetteer's point for Magdala, which it equates with Taricheae.
+    cite:
+      - id: taricheae-location
+        says: Pleiades gives this representative point for Magdala/Taricheai, with its location
+          precision recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 678272 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "678272"
+notes: The identification of Taricheae with Magdala is the gazetteer's, and is not certain.

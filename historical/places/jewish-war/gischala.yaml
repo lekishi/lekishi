@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Gischala, a small city of upper Galilee and the home of John of Gischala, the last place in
+  Galilee to hold out in 67 CE.
+types: [settlement]
+names:
+  - form: Gischala
+    lang: en
+    script: Latn
+    cite:
+      - id: gischala-name
+        says: Josephus calls Gischala the only place in Galilee that remained to be taken.
+        source: josephus-jewish-war
+        at: "4.2.1"
+        quote: Now no place of Galilee remained to be taken but the small city of Gischala
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [35.44831, 33.02472]
+    notes: The gazetteer's point for the ancient town at modern Jish.
+    cite:
+      - id: gischala-location
+        says: Pleiades gives this representative point for Gischala, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 678165 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "678165"

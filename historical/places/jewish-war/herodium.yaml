@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Herodium, Herod's palace fortress on an artificial cone south of Bethlehem, taken by Lucilius
+  Bassus after the fall of Jerusalem.
+types: [fortification]
+names:
+  - form: Herodium
+    lang: en
+    script: Latn
+    cite:
+      - id: herodium-name
+        says: Josephus tells that Lucilius Bassus took the citadel in Herodium with its garrison.
+        source: josephus-jewish-war
+        at: "7.6.1"
+        quote: took that citadel which was in Herodium, together with the garrison that was in it
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [35.24181, 31.66567]
+    notes: The gazetteer's point for the excavated fortress.
+    cite:
+      - id: herodium-location
+        says: Pleiades gives this representative point for Herodeion, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 687916 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "687916"

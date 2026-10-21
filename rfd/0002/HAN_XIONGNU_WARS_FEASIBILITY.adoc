@@ -1,0 +1,68 @@
+= The Han–匈奴 wars, 133–119 BCE: source-feasibility note
+:state: Preparation note for the draft chapter `han-xiongnu-wars-133-119`; not an RFD decision and not an approval
+:research-window: single pass, 2026-10-21
+:toc:
+
+This note records what the draft chapter
+link:../../historical/chapters/han-xiongnu-wars-133-119.yaml[`han-xiongnu-wars-133-119`]
+is built from, how its places are positioned, and where its sources disagree.
+The chapter is a draft. Only the owner approves it, with `pnpm approvals`.
+
+== Finding
+
+The wars are well served by public-domain primary text. 史記 tells them twice,
+in the 匈奴列傳 (卷110) as a year-by-year sequence anchored on 元朔二年 and
+元鼎三年, and in the 衛將軍驃騎列傳 (卷111) as the two generals' campaigns
+with the court's citations. 漢書 卷六 武帝紀 dates the same campaigns in its
+annals. Every claim cites one of these with a locator and a short quotation,
+and every quotation was checked by script against the Wikisource
+transcriptions on 2026-10-21.
+
+The sources carry a dated, cited story of 17 events from the 馬邑 ambush to
+the 漠北 campaign and the sacrifice at 狼居胥山. They do not carry routes or
+borders: they name commanderies, mountains and the 單于's court, not lines.
+
+== What the chapter holds
+
+[cols="1,1,3"]
+|===
+|Kind |Count |Notes
+
+|Events |17 |One dispute (<<disputes>>).
+|Relationships |4 |The war itself (`han-xiongnu-war`), the recovery of the 河南 land, the 渾邪王's submission and 趙信's defection, listed under `include`.
+|Places |18 |10 with a label anchor, 8 with no position.
+|Actors |13 |The emperor, the generals, the 單于 and the 匈奴 kings. `shanggu` and `dai` are reused from the six-states chapter without edits.
+|===
+
+== Placement
+
+Display anchors sit at modern places of the same name or at the modern
+county that holds the Han commandery's name, pinned to a Wikidata revision:
+馬邑 (朔州), 河南地 (the Ordos plateau), 定襄 (和林格爾), 祁連山, 居延, 右北平 (寧城), 河西 (the corridor) and 隴西 (臨洮), plus `shanggu` and `dai` from the six-states chapter. None
+asserts a historical site.
+
+No position is asserted for 龍城, 朔方, 高闕, the 單于庭, 趙信城, 狼居胥山,
+北地 and 焉支山. Wikidata has no coordinate for 焉支山, and the others are
+named without a site. The map therefore cannot draw the 漠北 campaign: its
+end points are unknown, which is the honest state.
+
+[[disputes]]
+== Disputes
+
+`hexi-commanderies`:: 漢書's annals put the founding of 武威 and 酒泉 in
+元狩二年 (121 BCE); the 匈奴列傳 places the commanderies after 渾邪王's
+surrender in the reign of 烏維單于. Both are cited, the second as the
+conflicting claim, and the record does not choose.
+
+== Dates
+
+Han reign years began in the tenth month until 104 BCE. A reign year is
+given as the Julian year of its main part, and the source wording is kept in
+`as_written`. Where the 匈奴列傳 gives only "the next year", the date is
+derived from its anchor years and the record says so in its notes.
+
+== What the chapter is good for
+
+The chapter is a test case for a war told through many unplaced places. Over
+half its stops cannot be drawn, so the map, the story list and the cards have
+to cope with a chapter whose most important places are unknown.

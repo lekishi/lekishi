@@ -1,0 +1,53 @@
+= 秦始皇's tours, 220–210 BCE: source-feasibility note
+:state: Preparation note for the draft chapter `qin-shihuang-tours-220-210`; not an RFD decision and not an approval
+:research-window: single pass, 2026-10-21
+:toc:
+
+This note records what the draft chapter
+link:../../historical/chapters/qin-shihuang-tours-220-210.yaml[`qin-shihuang-tours-220-210`]
+is built from. The chapter is a draft. Only the owner approves it.
+
+== Finding
+
+史記 卷六 秦始皇本紀 narrates all five tours in order, with the places of each
+stage. It is the existing `shiji` source, and citing it does not change that
+record, so the approved Han chapter stays approved. All 61 quotations were
+checked against the Wikisource transcription, which writes 瑯邪 for 琅邪; the
+records keep the transcription's form.
+
+The chapter has 22 events, 25 new places and 4 new actors (胡亥, 趙高, 徐巿 and
+盧生). It reuses the six-states records `xianyang`, `jingxing`, `shangjun`,
+`li-si`, `wang-ben`, `meng-tian` and `qin-king-zheng` without edits.
+
+== Placement
+
+* 22 places are display anchors pinned to Wikidata revisions: 泰山, 鄒嶧山,
+  成山, 之罘, the 琅琊臺 site, 彭城, 湘山 (君山島), 南郡 (江陵), 武關, 博狼沙
+  (原陽), 上黨 (長治), 碣石 (昌黎), 九疑山, 錢唐 (杭州), 會稽山, 吳 (蘇州),
+  平原津, 沙丘 (廣宗), 九原 (包頭) and the reused ones.
+* 雞頭山, 回中, 梁父, 雲夢, 丹陽 and 江乘 have no position. Wikidata gives no
+  coordinate for 梁父, and the modern 丹陽市 is not the Qin 丹陽, so it is not
+  used.
+* 碣石's identification is disputed in modern work. The anchor at 昌黎 asserts
+  none.
+
+== Dates
+
+Qin years began in the tenth month, so the last tour's 三十七年十月癸丑 fell
+late in 211 BCE. The day is not converted without a Qin calendar table, so the
+record gives the window November to December 211. The death on 七月丙寅 is 10 September 210 BCE, the only 丙寅 day
+in August and September of that year. The events between 雲夢 and 沙丘 share
+one window.
+
+== Journey sketches
+
+`qin-shihuang-eastern-tour-219.yaml` and `qin-shihuang-last-tour-211.yaml` in
+`historical/journeys/` give two tours in the proposed v1 shape (PR #26),
+with `by: river` legs where the annals say 浮江. The last tour tests a journey
+that outlives its leader: the cortege carries the body back to 咸陽.
+
+== What the chapter is good for
+
+The chapter is the densest in places: 30 places in 22 events, most of them
+anchored. It is a good test for map clutter along the eastern coast, where
+之罘 and 瑯邪 each recur on three tours.

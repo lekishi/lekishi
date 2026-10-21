@@ -5,14 +5,6 @@ summary:
   envoys landed there on their way to the Frankish king.
 types: [settlement, port]
 names:
-  - form: Maxilia
-    lang: la
-    script: Latn
-    cite:
-      - id: massalia-name
-        says: The life says the envoys came by sea to Maxilia.
-        source: liber-pontificalis
-        at: Et pergentes marino itinere quantotius Maxiliam advenerunt
   - form: Massilia
     lang: la
     script: Latn
@@ -31,6 +23,16 @@ names:
         source: polybius
         at: "3.41.4"
         quote: ἧκε πεμπταῖος ἀπὸ Πισῶν εἰς τοὺς κατὰ Μασσαλίαν τόπους
+  - form: Maxilia
+    lang: la
+    script: Latn
+    note: The medieval Latin form the Liber pontificalis uses for 754. The classical Massilia is the
+      label because the record is shared by chapters from 218 BCE onward.
+    cite:
+      - id: massalia-name
+        says: The life says the envoys came by sea to Maxilia.
+        source: liber-pontificalis
+        at: Et pergentes marino itinere quantotius Maxiliam advenerunt
 at:
   - interpretation: approximate_point
     precision: locality

@@ -1,9 +1,9 @@
 # yaml-language-server: $schema=../../schema/place.schema.json
 summary:
-  Rome, the city on the Tiber. In the tradition Livy tells, Romulus fortified the Palatine first,
-  and the city grew hill by hill under its seven kings; it was the capital of the Roman state under
-  the kings, the Republic and the Empire, and later the city of the popes, from which Stephen II set
-  out on 14 October 753.
+  Rome, the city on the Tiber; the capital of the Roman Republic, at war with Carthage from 218 BCE,
+  and later the city of the popes, from which Stephen II set out on 14 October 753 and to which he
+  returned with a Frankish escort after the peace of Pavia. Aistulf besieged it for three months
+  before the second Frankish campaign.
 types: [capital, settlement]
 names:
   - form: Roma
@@ -14,20 +14,14 @@ names:
         says: The life names the city Roma, the Romana urbs from which the pope set out.
         source: liber-pontificalis
         at: Et dum haec agerentur, coniunxit Roma Iohannis, imperialis silentiarius
-      - id: rome-name-livy
-        says: Livy names the city Roma, which grew on the ruins of Alba under Tullus Hostilius.
-        role: supporting
-        source: livy
-        at: "1.30.1"
-        quote: "Roma interim crescit Albae ruinis."
 at:
   - interpretation: approximate_point
     precision: locality
     point: [12.4828, 41.8931]
     notes:
       Placed at the coordinate Wikidata records for Rome (Q220), the modern locality identified with
-      the place the sources name. It marks the city as a whole, not a building or the founding site,
-      which the Palatine record carries.
+      the place the sources name. It marks the city as a whole, not a building or a
+      hill.
     cite:
       - id: rome-point
         says: The point is the coordinate Wikidata records for Rome; the identification with the place the sources name is editorial.

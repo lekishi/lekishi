@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The pope sends envoys to Francia by sea, with Warnarius, a religious man the king had sent to Rome,
+  to report what Aistulf has done and to adjure Pepin to fulfil his promise to St Peter.
+types: [mission]
+date:
+  value: 755..756
+  mode: window
+  calendar: julian
+  as_written: per marinum iter suos ordinans et ad eum Franciam dirigens missos
+  cite:
+    - id: papal-envoys-by-sea-756-time
+      says: The life tells the embassy after the siege of Rome; it gives no date.
+      source: liber-pontificalis
+      at: sed et beatissimus pontifex per marinum iter suos ordinans et ad eum Franciam dirigens missos, una cum quodam religioso viro Warnario nomine
+places:
+  - place: rome
+    role: start
+participants:
+  - actor: stephen-ii
+    role: leader
+  - actor: pepin-the-short
+    role: subject
+notes:
+  The letters of 756 in the Codex Carolinus belong to this appeal; the chapter cites only the life
+  for it for now. Warnarius has no actor record.

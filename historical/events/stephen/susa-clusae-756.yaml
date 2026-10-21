@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At the passes the Franks again break through by the mountains and rocks into Aistulf's kingdom,
+  killing the Lombards they find there; the rest barely escape.
+types: [occurrence, campaign]
+part_of: [second-italian-campaign-756]
+date:
+  value: "756"
+  calendar: julian
+  as_written: per montes et rupes erumpentes, in regnum Aistulfi … intrant
+  cite:
+    - id: susa-clusae-756-time
+      says: The continuations give no date; the annals record that the king broke the Lombard passes in the second campaign.
+      source: fredegar-continuations
+      at: CXXI
+      quote: statim Franci solito more, ut edocti erant, per montes et rupes erumpentes, in regnum Aistulfi cum multa ira et furore intrant, Langobardos quos ibi repererunt interficiunt
+places:
+  - place: susa-valley
+    role: site
+participants:
+  - actor: frankish-kingdom
+    role: leader
+  - actor: lombard-kingdom
+    role: participant
+cites:
+  summary:
+    - id: susa-clusae-756-life
+      says: The life says the king entered the Lombards' land and overthrew their passes completely.
+      source: liber-pontificalis
+      at: Langobardorum partes coniuncxit et clusas funditus eorundem evertit Langobardorum
+notes: The continuations name no valley in 756; the passes are taken to be those of the Susa valley named in 754.

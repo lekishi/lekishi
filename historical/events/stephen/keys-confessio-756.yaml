@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Fulrad comes to Rome and lays the keys of Ravenna and the other cities of the exarchate, with the
+  king's written donation of them, at the confessio of St Peter, handing them to the apostle, the
+  pope and his successors for ever.
+types: [exchange]
+date:
+  value: "756"
+  calendar: julian
+  as_written: in confessione beati Petri ponens
+  cite:
+    - id: keys-confessio-756-time
+      says: The life tells the laying of the keys after Fulrad's tour of the cities; it gives no date, and the year is the annals' for the peace.
+      source: liber-pontificalis
+      at: Et ipsas claves tam Ravennantium urbis quamque diversarum civitatum ipsius Ravennantium exarchatus una cum suprascripta donatione de eis a suo rege emissa in confessione beati Petri ponens
+places:
+  - place: old-st-peters
+    role: site
+participants:
+  - actor: fulrad
+    role: leader
+  - actor: roman-church
+    role: participant
+cites:
+  summary:
+    - id: keys-confessio-756-cities
+      says: The life lists the cities handed over, from Ravenna, Rimini, Pesaro and Fano to Gubbio and Comacchio, with Narni.
+      source: liber-pontificalis
+      at: "id est: Ravenna, Arimino, Pensauro, Conca, Fano, Cesinas, Sinogalias, Esis, Forumpopuli, Forumolivi … Egubio, seu Comiaclo; necnon et civitatem Narniensem"
+notes:
+  This is the written donation later called the Donation of Pepin. The life says it was kept in the
+  church's archive; the document itself does not survive.

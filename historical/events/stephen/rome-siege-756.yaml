@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Some time after the pope's return, Aistulf, having kept none of his promises, comes against Rome
+  with all the Lombards and besieges it for three months, laying waste everything outside the walls
+  with fire and sword and digging up the bodies of saints from the cemeteries.
+types: [occurrence, campaign]
+date:
+  value: 755..756
+  mode: window
+  calendar: julian
+  as_written: Quam et trium mensuum spatia obsidens atque ex omni circumdans parte
+  cite:
+    - id: rome-siege-756-time
+      says: The life places the three-month siege some time after the pope's return to Rome; the continuations call it the following year. Neither gives a year.
+      sources:
+        - source: liber-pontificalis
+          at: Dum enim saepefatus sanctissimus papa coniungeret Romam, post aliquanta temporum spatia … contra hanc Romanam advenit urbem. Quam et trium mensuum spatia obsidens
+        - source: fredegar-continuations
+          at: CXXI
+          quote: Sequenti anno Aistulfus rex Langobardorum fidem suam, quam regi Pippino promiserat, peccatis facientibus fefellit. Iterum ad Romam cum exercitu suo veniens
+places:
+  - place: rome
+    role: site
+  - place: old-st-peters
+    role: context
+    note: The continuations say he burned the houses he found at the church of St Peter, outside the walls.
+participants:
+  - actor: aistulf
+    role: leader
+  - actor: lombard-kingdom
+    role: participant
+cites:
+  summary:
+    - id: rome-siege-756-relics
+      says: The life says he took away many bodies of saints, digging up their cemeteries.
+      source: liber-pontificalis
+      at: Nam et multa corpora sanctorum, effodiens eorum sacra cymiteria, ad magnum anime sue detrimentum abstulit

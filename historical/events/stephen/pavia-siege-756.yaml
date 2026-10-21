@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Pepin, with his nephew Tassilo, duke of the Bavarians, comes to Pavia again, ravages the country,
+  and pitches his tents on both sides of the walls so that no one can get out.
+types: [occurrence, campaign]
+part_of: [second-italian-campaign-756]
+date:
+  value: "756"
+  calendar: julian
+  as_written: s.a. 756 (the annals)
+  cite:
+    - id: pavia-siege-756-time
+      says: The annals record the second siege of Pavia under 756.
+      source: annales-regni-francorum
+      at: "s.a. 756: iterum iter peragens in Italiam Papiam obsedit, Haistulfum inclusit"
+places:
+  - place: pavia
+    role: site
+participants:
+  - actor: pepin-the-short
+    role: leader
+  - actor: tassilo-iii
+    role: participant
+  - actor: aistulf
+    role: subject
+cites:
+  summary:
+    - id: pavia-siege-756-tents
+      says: The continuations say the king came to Ticinum again with Tassilo and pitched his tents around the walls on both sides so that no one could escape.
+      source: fredegar-continuations
+      at: CXXI
+      quote: Rex Pippinus cum nepote suo Tassilone, Bajoariorum duce, partibus Italiae usque ad Ticinum iterum accessit, … circa muros Ticini utraque parte fixit tentoria, ita ut nullus exinde evadere potuisset

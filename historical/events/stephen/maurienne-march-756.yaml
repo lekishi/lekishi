@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The host comes to the Maurienne a second time.
+types: [journey, campaign]
+part_of: [second-italian-campaign-756]
+date:
+  value: "756"
+  calendar: julian
+  as_written: usque Mauriennam veniens
+  cite:
+    - id: maurienne-march-756-time
+      says: The continuations give no date for the march; the year is the annals' for the campaign.
+      source: fredegar-continuations
+      at: CXXI
+      quote: per Januam usque Mauriennam veniens
+places:
+  - place: maurienne
+    role: waypoint
+participants:
+  - actor: pepin-the-short
+    role: leader

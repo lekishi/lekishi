@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: Aistulf dies after an accident while hunting, thrown from his horse against a tree.
+types: [occurrence]
+date:
+  value: "756"
+  calendar: julian
+  as_written: Quodam die venationem fecit et percussus est Dei iudicio, vitam finivit (s.a. 756)
+  cite:
+    - id: aistulf-death-756-time
+      says: The annals record his death while hunting under 756.
+      source: annales-regni-francorum
+      at: "s.a. 756: Quodam die venationem fecit et percussus est Dei iudicio, vitam finivit"
+participants:
+  - actor: aistulf
+    role: subject
+cites:
+  summary:
+    - id: aistulf-death-756-horse
+      says: The continuations say he was thrown from his horse against a tree while hunting in a forest; the revised annals say he fell from his horse and died within a few days.
+      sources:
+        - source: fredegar-continuations
+          at: CXXII
+          quote: dum venationem in quadam silva exerceret, divino judicio, de equo quo sedebat super quamdam arborem projectus, vitam et regnum crudeliter digna morte amisit
+        - source: annales-qui-dicuntur-einhardi
+          at: "s.a. 756: in venatione de equo suo casu prolapsus est; atque ex hoc aegritudine contracta, intra paucos dies vivendi terminum fecit"
+notes: Every source calls the death a judgement of God; the chapter records the accident, not the
+  judgement. No source names the place.

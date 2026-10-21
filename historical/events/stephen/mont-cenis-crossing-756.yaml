@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: Pepin crosses the Mont Cenis with his army and comes down to the passes where the Lombards try to hold him.
+types: [journey, campaign]
+part_of: [second-italian-campaign-756]
+date:
+  value: "756"
+  calendar: julian
+  as_written: monte Cinisio transacto
+  cite:
+    - id: mont-cenis-crossing-756-time
+      says: The continuations give no date for the crossing; the year is the annals' for the campaign.
+      source: fredegar-continuations
+      at: CXXI
+      quote: Rex Pippinus cum exercitu suo, monte Cinisio transacto, usque ad Clusas, ubi Langobardi ei resistere nitebantur, perveniens
+places:
+  - place: mont-cenis-pass
+    role: waypoint
+participants:
+  - actor: pepin-the-short
+    role: leader

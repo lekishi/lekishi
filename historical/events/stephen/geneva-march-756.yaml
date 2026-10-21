@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The host goes on by Janua, read as Geneva, towards the Maurienne.
+types: [journey, campaign]
+part_of: [second-italian-campaign-756]
+date:
+  value: "756"
+  calendar: julian
+  as_written: et inde per Januam usque Mauriennam veniens
+  cite:
+    - id: geneva-march-756-time
+      says: The continuations give no date for the march; the year is the annals' for the campaign.
+      source: fredegar-continuations
+      at: CXXI
+      quote: et inde per Januam usque Mauriennam veniens
+places:
+  - place: genava
+    role: waypoint
+participants:
+  - actor: pepin-the-short
+    role: leader
+notes: >-
+  "Janua" usually names Genoa, which is off this road; between Chalon and the Maurienne it is read
+  as Geneva (Genava). The reading is editorial and is recorded on the place.

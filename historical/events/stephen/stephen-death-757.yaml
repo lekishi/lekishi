@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: Stephen II dies and is buried in the basilica of St Peter on 26 April 757.
+types: [occurrence]
+date:
+  value: 757-04-26
+  calendar: julian
+  as_written: Sepultus est in basilica beati Petri apostolorum principis, VI kal. mai, indictione X
+  cite:
+    - id: stephen-death-757-time
+      says:
+        The life gives his burial in the basilica of St Peter on the sixth day before the Kalends of
+        May in the tenth indiction, which is 26 April 757.
+      source: liber-pontificalis
+      at: Sepultus est in basilica beati Petri apostolorum principis, VI kal. mai, indictione X
+places:
+  - place: old-st-peters
+    role: site
+participants:
+  - actor: stephen-ii
+    role: subject
+notes:
+  The date is the burial's; the life gives no separate day of death. The tenth indiction ran from
+  September 756 to August 757.

@@ -141,8 +141,8 @@ the point is that item's Wikidata coordinate, pinned by revision. Each cite is
 * *Region precision* for the islands (壹伎, 對馬, 隱岐, 耽羅, 値賀, 甑嶋), the
   districts and provinces (天草郡, 出水郡, 松浦郡, 筑紫, 出羽國), the Tang
   prefectures and counties (蘇州, 明州, 括州, 鹽城縣, and 赤岸 in 霞浦), and two
-  harder cases: 博多大津 at the 鴻臚館跡, the house where missions made ready,
-  whose page does not name the harbour; and 朝倉橘廣庭宮, whose site is
+  harder cases: 博多大津, identified as the old port of 博多 by two reference
+  works and placed at the 鴻臚館跡 beside it; and 朝倉橘廣庭宮, whose site is
   disputed, at the 朝倉 area.
 * CHGIS and its TGAZ gazetteer would identify every Tang unit, but the
   link:../../docs/SOURCE_REGISTER.adoc[source register] does not allow them,
@@ -161,7 +161,7 @@ A stop at either of these breaks a journey's line.
 
 The records reuse ids that other drafts own, so they are written once:
 
-* From the 圓仁 draft: `ennin`, `changan`, `luoyang`, `chuzhou`, `dengzhou`,
+* From the 圓仁 draft: `changan`, `luoyang`, `chuzhou`, `dengzhou`,
   `hailing`, `laizhou`, `tachibana-ura`, `kashima-hizen`.
 * From the 鑒眞 crossings draft: `yuezhou`, `fuzhou`.
 * From the 玄奘 draft: `xuanzang`, `tang-taizong`.
@@ -175,7 +175,7 @@ notice, because only records a manifest reaches are resolved (see
 
 On 2026-10-21, after the rebase onto `main` at 4a7d53a and the review fixes,
 every record was compiled under a throwaway manifest listing all 123 events
-and 16 relationships as steps, in a copy of the tree with the 13 borrowed
+and 16 relationships as steps, in a copy of the tree with the 12 borrowed
 records taken from those branches (PR #36, #27 and #32) and the sources they
 cite. `Publication.checkAll` reported no errors and no warnings. The manifest
 and the copy were not committed.

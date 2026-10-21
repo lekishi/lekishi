@@ -5,7 +5,8 @@ Mediterranean chapter to test data and engine against. It has no approval: the
 dev server and pull-request previews show it under the Draft banner, production
 does not. The manifest is [`hannibal-italy-218-216.yaml`](hannibal-italy-218-216.yaml);
 the records are under `historical/*/hannibal/`, with the shared `rome` and
-`roman-republic` under `historical/*/mediterranean/`.
+`massalia` under `historical/places/stephen/` and `roman-republic` under
+`historical/actors/mediterranean/`.
 
 ## Scope
 

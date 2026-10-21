@@ -1,6 +1,9 @@
 # yaml-language-server: $schema=../../schema/place.schema.json
-summary: Marseille, where the imperial envoys landed in 754 on their way to the Frankish king.
-types: [port]
+summary:
+  Massalia (Latin Massilia, medieval Maxilia), the Greek city near the Rhône's eastern mouth, now
+  Marseille. Rome's ally in 218 BCE, when Publius Scipio landed his army near it; in 754 the imperial
+  envoys landed there on their way to the Frankish king.
+types: [settlement, port]
 names:
   - form: Maxilia
     lang: la
@@ -10,16 +13,44 @@ names:
         says: The life says the envoys came by sea to Maxilia.
         source: liber-pontificalis
         at: Et pergentes marino itinere quantotius Maxiliam advenerunt
+  - form: Massilia
+    lang: la
+    script: Latn
+    cite:
+      - id: massalia-name-livy
+        says: Livy records Publius Scipio sailing along the coast to Massilia.
+        source: livy
+        at: "21.26.3"
+        quote: pervenit Massiliam
+  - form: Μασσαλία
+    lang: grc
+    script: Grek
+    cite:
+      - id: massalia-name-polybius
+        says: Polybius records Publius reaching the region of Μασσαλία on the fifth day from Pisa.
+        source: polybius
+        at: "3.41.4"
+        quote: ἧκε πεμπταῖος ἀπὸ Πισῶν εἰς τοὺς κατὰ Μασσαλίαν τόπους
 at:
   - interpretation: approximate_point
     precision: locality
     point: [5.3764, 43.2967]
-    notes: Placed at the coordinate Wikidata records for Marseille (Q23482), the modern locality identified with the place the sources name.
+    notes: Placed at the coordinate Wikidata records for Marseille (Q23482), the modern locality
+      identified with the place the sources name, which Pleiades identifies as ancient
+      Massalia/Massilia. Scipio's landing in 218 BCE was at the Rhône mouth, not in the city's
+      harbour.
     cite:
       - id: massalia-point
         says: The point is the coordinate Wikidata records for Marseille; the identification with the place the sources name is editorial.
         source: wikidata
         at: Q23482 (P625), revision 2553170403
+      - id: massalia-identification
+        says: Pleiades identifies the ancient city Massalia/Massilia with the site under modern Marseille.
+        role: supporting
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 148127 (Massalia/Massilia), reprLatLong, dump 2026-10-21
 modern:
   - form: Marseille
     lang: fr
@@ -30,3 +61,6 @@ external_ids:
     id: Q23482
     url: https://www.wikidata.org/wiki/Q23482
     license: CC0-1.0
+  - system: pleiades
+    id: "148127"
+    license: CC BY 3.0

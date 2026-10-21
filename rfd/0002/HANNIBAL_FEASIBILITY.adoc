@@ -20,8 +20,8 @@ the owner may write one.
 |Sources |4
 |`polybius`, `livy`, `gellius` (primary, `locator: section`), and `pleiades` (shared with other chapters; dump of 2026-10-21).
 
-|Places |43
-|25 approximate points (towns identified by Pleiades, coordinate from Wikidata), 12 display anchors (rivers, mountains, regions, Gerunium, the Taurini's town), 6 unknown (the Rhône crossing, the Island, the Alpine pass, Picenum, Kissa, the Silva Litana). `rome` lives in `places/mediterranean/`.
+|Places |41
+|23 approximate points (towns identified by Pleiades, coordinate from Wikidata), 12 display anchors (rivers, mountains, regions, Gerunium, the Taurini's town), 6 unknown (the Rhône crossing, the Island, the Alpine pass, Picenum, Kissa, the Silva Litana). `rome` and `massalia` are the shared records in `places/stephen/`, with this chapter's names and Pleiades identifications folded in.
 
 |Actors |36
 |Commanders, magistrates, envoys and peoples on both sides. `roman-republic` lives in `actors/mediterranean/`.
@@ -149,7 +149,9 @@ stops is also a question for the proposal.
 
 == Shared records
 
-`rome` and `roman-republic` use the ids and paths the Rome chapter announced;
-whichever PR lands second drops its copy. `syracuse`, `delphi`, `massalia` and
-`carthage` are minted here for other chapters to reuse, and `pleiades` matches
+`rome` and `massalia` landed first with the Stephen II chapter (#45), so this
+chapter folds its names and Pleiades identifications into those records and
+keeps their Wikidata points. `roman-republic` uses the id and path the Rome
+chapter announced; whichever PR lands second drops its copy. `syracuse`,
+`delphi` and `carthage` are minted here for other chapters to reuse, and `pleiades` matches
 the other branches' source record apart from formatting.

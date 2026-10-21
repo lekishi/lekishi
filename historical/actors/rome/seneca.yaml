@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Lucius Annaeus Seneca (died 65 CE), philosopher and Nero's former tutor, who wrote in the Natural
+  Questions that he had heard the two centurions Nero sent to find the sources of the Nile.
+types: [person]
+names:
+  - form: Lucius Annaeus Seneca
+    lang: la
+    script: Latn
+    cite:
+      - id: seneca-name
+        says: Seneca writes that he heard the story from the two officers themselves.
+        source: seneca-natural-questions
+        at: VI.8.3
+        quote:
+          I have myself heard from their own lips the story told by the two non-commissioned officers
+          sent to investigate the sources of the Nile by our good Emperor Nero
+roles:
+  - role: scholar
+    note: Author of the Natural Questions, usually dated 62–64 CE.

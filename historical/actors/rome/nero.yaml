@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Nero, emperor 54–68 CE. Pliny records that he sent praetorians under a tribune up the Nile while
+  contemplating a war against Ethiopia; Seneca, his former tutor, heard two centurions he had sent to
+  find the sources of the Nile.
+types: [person]
+names:
+  - form: Nero
+    lang: la
+    script: Latn
+    cite:
+      - id: nero-name
+        says: Pliny names the Emperor Nero as sending praetorian troops under a tribune.
+        source: pliny-natural-history
+        at: VI.35 (§181)
+        quote:
+          the prætorian troops that were sent by the Emperor Nero under the command of a tribune, for
+          the purposes of enquiry, when, among his other wars, he was contemplating an expedition against
+          Æthiopia
+roles:
+  - role: ruler
+    date:
+      value: 54-10..68-06
+      mode: duration
+      calendar: julian
+    note: Emperor from October 54 CE to his death in June 68 CE.

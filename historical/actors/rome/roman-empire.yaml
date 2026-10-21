@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  The Roman state under the emperors, from Augustus's settlement of 27 BCE. In this chapter it
+  holds Egypt as a province governed by a prefect, fights Kush in 25–21 BCE, and under Nero sends men
+  up the Nile to Meroë.
+types: [state]
+names:
+  - form: imperium populi Romani
+    lang: la
+    script: Latn
+    note: The Res Gestae's phrase for the empire to which Augustus says he added Egypt.
+    cite:
+      - id: roman-empire-name
+        says: The Res Gestae records that Augustus added Egypt to the empire of the Roman people.
+        source: res-gestae-divi-augusti
+        at: "27.1"
+        quote: Aegyptum imperio populi Romani adieci.
+notes:
+  The actor stands for the imperial Roman state from 27 BCE. The Republic before it is a separate
+  actor (roman-republic), because a state actor is one polity.

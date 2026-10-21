@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Petronius, prefect of Egypt under Augustus, who drove the Kushite invaders back from Syene, took
+  Pselchis and Premnis, razed Napata, garrisoned Premnis and relieved it. Dio calls him Gaius Petronius;
+  Pliny's text has P. Petronius.
+types: [person]
+names:
+  - form: Gaius Petronius
+    lang: la
+    script: Latn
+    cite:
+      - id: petronius-name
+        says: Dio names Gaius Petronius as the governor of Egypt who advanced against the Ethiopians.
+        source: cassius-dio
+        at: LIV.5 (B.C. 22)
+        quote:
+          On learning that Gaius Petronius, the governor of Egypt, was approaching and somewhere near,
+          they hastily retreated
+  - form: P. Petronius
+    lang: la
+    script: Latn
+    role: alternate
+    note: Pliny's praenomen, which disagrees with Dio's.
+    cite:
+      - id: petronius-pliny-name
+        says: Pliny names P. Petronius, a man of equestrian rank and prefect of Egypt, as the commander.
+        role: alternative
+        source: pliny-natural-history
+        at: VI.35 (§181)
+        quote:
+          The Roman arms also penetrated into these regions in the time of the late Emperor Augustus,
+          under the command of P. Petronius, a man of Equestrian rank, and prefect of Egypt.
+roles:
+  - role: official
+    note:
+      Prefect (governor) of Egypt. The sources give no years for his tenure; the campaign falls in 25–21
+      BCE.
+    cite:
+      - id: petronius-role
+        says: Pliny calls him prefect of Egypt; Strabo has him return to Alexandria after the campaign.
+        source: pliny-natural-history
+        at: VI.35 (§181)
+        quote: a man of Equestrian rank, and prefect of Egypt
+dispute:
+  status: disputed
+  summary:
+    "The praenomen differs: Dio gives Gaius, Pliny's text P. (Publius). The record names him Gaius
+    after Dio and keeps Pliny's form as an alternative."

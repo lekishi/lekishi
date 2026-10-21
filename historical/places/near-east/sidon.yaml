@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Sidon, the Phoenician coastal city whose king Lulê fled by sea before Sennacherib in 701 BCE,
+  after which the prism records Tuba'lu set on its throne.
+types: [port]
+names:
+  - form: Sidon
+    lang: en
+    script: Latn
+    cite:
+      - id: sidon-name
+        says: The prism names Lulê as king of Sidon.
+        source: luckenbill-annals-sennacherib
+        at: p. 29, Oriental Institute prism col. II 38
+        quote: Lulê, king of Sidon
+  - form: Ṣidunnu
+    lang: akk
+    script: Latn
+    note: The prism writes the name Ṣi-du-un-ni; the form is an editorial normalization.
+    claim: sidon-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [35.3727895, 33.5619473]
+    notes: The gazetteer's point for the ancient city; it places no harbour or palace.
+    cite:
+      - says: The Pleiades gazetteer records Sidon/Col. Aurelia Pia with a precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/678393 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "678393"
+    url: https://pleiades.stoa.org/places/678393
+    license: CC-BY-3.0
+    note: Sidon/Col. Aurelia Pia
+notes:
+  The prism lists Great Sidon and Little Sidon among Lulê's cities. This record is the city of Sidon;
+  Little Sidon is not separately placed.

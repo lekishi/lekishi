@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Ekron, the Philistine city whose officials put their king Padi in fetters and handed him to Hezekiah,
+  and which Sennacherib punished in 701 BCE before restoring Padi to its throne.
+types: [settlement]
+names:
+  - form: Ekron
+    lang: en
+    script: Latn
+    cite:
+      - id: ekron-name
+        says: The prism names the officials, nobles and people of Ekron.
+        source: luckenbill-annals-sennacherib
+        at: p. 31, Oriental Institute prism col. II 73
+        quote: The officials, nobles and people of Ekron,
+  - form: Amqarruna
+    lang: akk
+    script: Latn
+    note: The prism writes the name Am-ḳar-ru-na; the form is an editorial normalization.
+    claim: ekron-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [34.851016, 31.7804585]
+    notes: The gazetteer's point for Ekron, later Akkaron.
+    cite:
+      - says: The Pleiades gazetteer records Ekron/Akkaron with a precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/687888 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "687888"
+    url: https://pleiades.stoa.org/places/687888
+    license: CC-BY-3.0
+    note: Ekron/Akkaron

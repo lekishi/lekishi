@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Akzib, one of the strong, walled cities of Lulê that the prism records submitting to Sennacherib
+  in 701 BCE. The record's only position is a label anchor.
+types: [settlement]
+names:
+  - form: Akzib
+    lang: en
+    script: Latn
+    cite:
+      - id: akzib-name
+        says: The prism names Akzib among Lulê's walled cities.
+        source: luckenbill-annals-sennacherib
+        at: p. 29, Oriental Institute prism col. II 43
+        quote: Ushu, Akzib, Akko,
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [35.108399, 33.047809]
+    notes:
+      Label anchor at the gazetteer's Ekdippa, the classical city on the coast north of Akko. The chapter
+      has not yet cited an identification of the prism's Akzib with Ekdippa, so no coordinate is asserted.
+    cite:
+      - says: The label anchor is placed at the Pleiades point for Ekdippa; no identification is asserted.
+        source: pleiades
+        at: places/678128 (reprLat, reprLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "678128"
+    url: https://pleiades.stoa.org/places/678128
+    license: CC-BY-3.0
+    note: Ekdippa

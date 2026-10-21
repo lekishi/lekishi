@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Beth-Dagon, one of the cities of Sidka of Ashkelon that the prism records Sennacherib besieging
+  and conquering in 701 BCE.
+types: [settlement]
+names:
+  - form: Beth-Dagon
+    lang: en
+    script: Latn
+    cite:
+      - id: beth-dagon-name
+        says: The prism names Beth-Dagon among the cities of Sidka.
+        source: luckenbill-annals-sennacherib
+        at: p. 31, Oriental Institute prism col. II 69–71
+        quote: Beth-Dagon, Joppa, Banaibarka, Asuru, cities of Sidka
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [34.832044, 32.010099]
+    notes:
+      The gazetteer's point for Beth Dagon, after the Barrington Atlas; the chapter takes it to be
+      the prism's Beth-Dagon by name and region, which the gazetteer itself does not state.
+    cite:
+      - says:
+          The Pleiades gazetteer records Beth Dagon, after the Barrington Atlas, with a precise point
+          near Joppa.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/687852 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "687852"
+    url: https://pleiades.stoa.org/places/687852
+    license: CC-BY-3.0
+    note: Beth Dagon

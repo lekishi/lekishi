@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Nineveh, the Assyrian royal city on the Tigris. Sennacherib's prism records Hezekiah's tribute
+  brought after him to Nineveh, "my royal city", and the books of Kings record Sennacherib returning there
+  after the campaign in Judah.
+types: [capital]
+names:
+  - form: Nineveh
+    lang: en
+    script: Latn
+    cite:
+      - id: nineveh-name
+        says: The books of Kings record Sennacherib returning to Nineveh and staying there.
+        source: bible-kjv
+        at: 2 Kings 19:36
+        quote: So Sennacherib king of Assyria departed, and went and returned, and dwelt at Nineveh.
+      - says: The prism calls Nineveh Sennacherib's royal city.
+        role: supporting
+        source: luckenbill-annals-sennacherib
+        at: p. 34, Oriental Institute prism col. III 47–48
+        quote: to Nineveh, my royal city
+  - form: Ninua
+    lang: akk
+    script: Latn
+    note: The prism writes the name Ninua with the city determinative; the form is an editorial normalization.
+    claim: nineveh-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [43.1599369, 36.3607615]
+    notes:
+      The gazetteer's point for the city, opposite modern Mosul; it marks the city as a whole and places
+      no palace.
+    cite:
+      - says: The Pleiades gazetteer records Nineveh/Ninos with a precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/874621 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+modern:
+  - form: Mosul
+    lang: en
+    note: The modern city across the Tigris, recorded for orientation only.
+external_ids:
+  - system: pleiades
+    id: "874621"
+    url: https://pleiades.stoa.org/places/874621
+    license: CC-BY-3.0
+    note: Nineveh/Ninos

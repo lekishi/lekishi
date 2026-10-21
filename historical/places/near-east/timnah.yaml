@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Timnah, the town the prism records Sennacherib besieging and capturing with Eltekeh in 701 BCE.
+types: [settlement]
+names:
+  - form: Timnah
+    lang: en
+    script: Latn
+    cite:
+      - id: timnah-name
+        says: The prism names Timnah beside Eltekeh.
+        source: luckenbill-annals-sennacherib
+        at: p. 32, Oriental Institute prism col. III 6
+        quote: Eltekeh (and) Timnah
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [34.9115833, 31.785337]
+    notes: The gazetteer identifies Timnah with Tel Batash in the Sorek Valley; the point is that site.
+    cite:
+      - says: The Pleiades gazetteer records Tel Batash in the Sorek Valley as Timnah, with a precise point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/925655548 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "925655548"
+    url: https://pleiades.stoa.org/places/925655548
+    license: CC-BY-3.0
+    note: Tel Batash (Timnah)

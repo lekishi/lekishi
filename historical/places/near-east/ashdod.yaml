@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Ashdod, the Philistine city whose king Mitinti brought tribute to Sennacherib in 701 BCE and
+  received cities taken from Hezekiah.
+types: [settlement]
+names:
+  - form: Ashdod
+    lang: en
+    script: Latn
+    cite:
+      - id: ashdod-name
+        says: The prism names Mitinti as king of Ashdod.
+        source: luckenbill-annals-sennacherib
+        at: p. 33, Oriental Institute prism col. III 32
+        quote: to Mitinti, king of Ashdod,
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [34.6580571, 31.7559372]
+    notes: The gazetteer's point for the Philistine city and its tell.
+    cite:
+      - says: The Pleiades gazetteer records Ashdod/Azotos (Mesogeios) with a precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/687838 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "687838"
+    url: https://pleiades.stoa.org/places/687838
+    license: CC-BY-3.0
+    note: Ashdod/Azotos (Mesogeios)

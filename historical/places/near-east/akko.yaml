@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Akko, one of the strong, walled cities of Lulê that the prism records submitting to Sennacherib
+  in 701 BCE.
+types: [port]
+names:
+  - form: Akko
+    lang: en
+    script: Latn
+    cite:
+      - id: akko-name
+        says: The prism names Akko among Lulê's walled cities.
+        source: luckenbill-annals-sennacherib
+        at: p. 29, Oriental Institute prism col. II 43
+        quote: Ushu, Akzib, Akko,
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [35.079835, 32.9212868]
+    notes: The gazetteer's point for the Phoenician city of Akko, later Ptolemais.
+    cite:
+      - says:
+          The Pleiades gazetteer records the Phoenician city of Akko, re-founded as Ptolemais, with a
+          precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/678010 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "678010"
+    url: https://pleiades.stoa.org/places/678010
+    license: CC-BY-3.0
+    note: Ake/Ptolemais

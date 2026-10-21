@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Ashkelon, the Philistine coastal city whose king Sidka the prism records carried off to Assyria
+  in 701 BCE, and over which Sennacherib set Sharru-lu-dari.
+types: [port]
+names:
+  - form: Ashkelon
+    lang: en
+    script: Latn
+    cite:
+      - id: ashkelon-name
+        says: The prism records Sennacherib setting Sharru-lu-dari over the people of Ashkelon.
+        source: luckenbill-annals-sennacherib
+        at: p. 31, Oriental Institute prism col. II 66
+        quote: I set over the people of Ashkelon
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [34.5505215, 31.6647972]
+    notes: The gazetteer's point for the ancient city on the coast between Ashdod and Gaza.
+    cite:
+      - says: The Pleiades gazetteer records Ashqelon/Ascalon with a precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/687839 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "687839"
+    url: https://pleiades.stoa.org/places/687839
+    license: CC-BY-3.0
+    note: Ashqelon/Ascalon

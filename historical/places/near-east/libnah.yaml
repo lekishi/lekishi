@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Libnah, the town the books of Kings record the king of Assyria warring against after he left
+  Lachish. The record asserts no position.
+types: [settlement]
+names:
+  - form: Libnah
+    lang: en
+    script: Latn
+    cite:
+      - id: libnah-name
+        says: The books of Kings record the king of Assyria warring against Libnah after leaving Lachish.
+        source: bible-kjv
+        at: 2 Kings 19:8
+        quote:
+          "found the king of Assyria warring against Libnah: for he had heard that he was departed from
+          Lachish"
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      The passage names Libnah without locating it, and the Pleiades dump read for this chapter has
+      no record of it. The record asserts no coordinate.
+    cite:
+      - says: The books of Kings name Libnah without locating it.
+        source: bible-kjv
+        at: 2 Kings 19:8
+        quote: warring against Libnah

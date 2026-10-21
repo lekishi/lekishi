@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Arvad, the island city whose king Abdi-liti the prism lists among the western kings who brought
+  tribute to Sennacherib in 701 BCE.
+types: [port]
+names:
+  - form: Arvad
+    lang: en
+    script: Latn
+    cite:
+      - id: arvad-name
+        says: The prism calls Abdi-liti the Arvadite.
+        source: luckenbill-annals-sennacherib
+        at: p. 30, Oriental Institute prism col. II 52
+        quote: Abdi-liti, the Arvadite,
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [35.8594313, 34.8575865]
+    notes: The gazetteer's point for the island city of Arados, modern Arwad.
+    cite:
+      - says:
+          The Pleiades gazetteer records Arados, modern Arwad, an island city, with a precise representative
+          point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/668197 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "668197"
+    url: https://pleiades.stoa.org/places/668197
+    license: CC-BY-3.0
+    note: Arados

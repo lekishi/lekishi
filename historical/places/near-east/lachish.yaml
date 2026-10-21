@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Lachish, the city of Judah whose booty the epigraph over Sennacherib's relief shows passing before
+  him, and to which the books of Kings record Hezekiah sending to the king of Assyria.
+types: [fortification]
+names:
+  - form: Lachish
+    lang: en
+    script: Latn
+    cite:
+      - id: lachish-name
+        says: The epigraph over the relief names the booty of Lachish passing before Sennacherib.
+        source: luckenbill-annals-sennacherib
+        at: p. 156, epigraph XXV, lines 1–4
+        quote:
+          Sennacherib, king of the universe, king of Assyria, sat upon a throne (lit. standing-chair)
+          (while) the booty of Lachish passed before him.
+      - says: The books of Kings record Hezekiah sending to the king of Assyria at Lachish.
+        role: supporting
+        source: bible-kjv
+        at: 2 Kings 18:14
+        quote: And Hezekiah king of Judah sent to the king of Assyria to Lachish
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [34.8491898, 31.5655212]
+    notes: The gazetteer's point for Lachish, after the Barrington Atlas.
+    cite:
+      - says: The Pleiades gazetteer records Lachish with a precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/687951 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "687951"
+    url: https://pleiades.stoa.org/places/687951
+    license: CC-BY-3.0
+    note: Lachish

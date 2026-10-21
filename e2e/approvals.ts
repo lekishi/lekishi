@@ -1,3 +1,5 @@
+import { existsSync } from "node:fs"
+import { fileURLToPath } from "node:url"
 import { compileAll } from "../src/lib/historical/authoring/compile"
 import { readTree } from "../src/lib/historical/authoring/tree"
 
@@ -43,4 +45,22 @@ export function approved(chapter: string): boolean {
 /** The prerendered decision element, stating `line`. */
 export function decisionElement(line: string): RegExp {
   return new RegExp(`id="chapter-decision"[^>]*>\\s*${line}`)
+}
+
+/**
+ * The chapters the atlas under test serves. A static artifact serves the
+ * chapters it prerendered: every manifest when it was built with drafts (as CI
+ * builds it), the approved ones otherwise. The development server, and a base
+ * URL with no local artifact, serve drafts, so every manifest. Read when a test
+ * runs, after the web server has built the artifact.
+ */
+export function servedChapters(): string[] {
+  const chapters = fileURLToPath(new URL("../build/chapters/", import.meta.url))
+  const ids = [...STATES.keys()]
+
+  if (process.env.LEKISHI_E2E_MODE === "dev" || !existsSync(chapters)) {
+    return ids
+  }
+
+  return ids.filter((id) => existsSync(`${chapters}${id}.html`))
 }

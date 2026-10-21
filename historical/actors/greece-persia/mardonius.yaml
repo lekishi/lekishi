@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Mardonios son of Gobryas, Xerxes' cousin and general, who urged the invasion, commanded the army
+  left in Hellas after Salamis, and was killed at Plataea in 479 BCE.
+types: [person]
+names:
+  - form: Mardonios
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: mardonius-name
+        says: Herodotus introduces Mardonios as Gobryas's son and Xerxes' cousin.
+        source: herodotus
+        at: VII.5
+        quote:
+          Mardonios however, the son of Gobryas, who was a cousin of Xerxes, being sister's son to Dareios,
+          was ever at his side
+roles:
+  - role: soldier
+    note: Commander of the Persian army in Hellas, 480–479 BCE.
+    cite:
+      - id: mardonius-role
+        says: Herodotus records Mardonios commanding at Plataea and falling there.
+        source: herodotus
+        at: IX.63
+        quote:
+          but when Mardonios was slain and the men who were ranged about his person, which was the strongest
+          portion of the whole army, had fallen, then the others too turned and gave way before the Lacedemonians

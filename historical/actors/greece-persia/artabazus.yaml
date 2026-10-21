@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Artabazos son of Pharnakes, the Persian commander who escorted Xerxes to the Hellespont, besieged
+  Potidaea, and led his corps away from Plataea before the rout.
+types: [person]
+names:
+  - form: Artabazos
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: artabazus-name
+        says: Herodotus introduces Artabazos son of Pharnakes.
+        source: herodotus
+        at: VIII.126
+        quote:
+          Artabazos meanwhile the son of Pharnakes, a man who was held in esteem among the Persians even
+          before this and came to be so yet more after the events about Plataia
+roles:
+  - role: soldier
+    note: Persian commander, 480–479 BCE.

@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Xerxes, son of Darius and Atossa, king of the Persians, who led the invasion of Hellas in 480
+  BCE and returned to Asia after Salamis.
+types: [person]
+names:
+  - form: Xerxes
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: xerxes-name
+        says: Herodotus records the kingdom passing from Darius to his son Xerxes.
+        source: herodotus
+        at: VII.5
+        quote: Dareios being dead the kingdom passed to his son Xerxes.
+roles:
+  - role: ruler
+    note: King of the Persians; cited here for the invasion of 480–479 BCE only.
+    cite:
+      - id: xerxes-role
+        says: Herodotus records Xerxes succeeding Darius as king.
+        source: herodotus
+        at: VII.5
+        quote: Dareios being dead the kingdom passed to his son Xerxes.

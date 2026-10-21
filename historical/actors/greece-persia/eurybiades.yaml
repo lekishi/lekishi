@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Eurybiades son of Eurycleides, the Spartan who held the supreme command of the Greek fleet at
+  Artemisium and Salamis.
+types: [person]
+names:
+  - form: Eurybiades
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: eurybiades-name
+        says: Herodotus names Eurybiades son of Eurycleides as the fleet's supreme commander.
+        source: herodotus
+        at: VIII.2
+        quote:
+          the commander who had the supreme power was furnished by the Spartans, namely Eurybiades son
+          of Eurycleides
+roles:
+  - role: soldier
+    note: Admiral of the Greek fleet, 480 BCE.

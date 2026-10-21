@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Elephant River of the Greco-Roman sailors, near Ras el-Fil on the Somali coast, where Maspero
+  proposed the Egyptian fleet sailed upriver and anchored by a village of Punt.
+types: [landform]
+names:
+  - form: the Elephant River
+    lang: en
+    script: Latn
+    cite:
+      - id: elephant-river-name
+        says:
+          Maspero identifies the landing with the creek the Greco-Roman merchants called the Elephant
+          River, near Ras el-Fîl.
+        source: maspero-history-of-egypt
+        at: "vol. IV, ch. III: the landing place"
+        quote:
+          Since then I have sought to identify the landing-place of the Egyptians with the most important
+          of the creeks mentioned by the Græco-Roman merchants as accessible for their vessels, viz. that
+          which they called the Elephant River, near to the present Ras el-Fîl.
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [50.6327, 11.93942]
+    notes:
+      A display anchor at Pleiades' Elephant Cape, near which Maspero puts the river. Pleiades has
+      no record for the river itself, and the landing place is Maspero's proposal, not a fact of the reliefs.
+    cite:
+      - id: elephant-river-identification
+        says:
+          Pleiades identifies Elephas Promontorium on the Somali coast (Barrington Atlas 4 D3) and gives
+          this representative point (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 39340 (reprLatLong, version 3), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "39340"
+    url: https://pleiades.stoa.org/places/39340
+    license: CC-BY-3.0
+    note: Elephas Pr., the cape; used as an anchor for the river named after it.

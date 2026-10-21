@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The ship anchors at the river mouth of 振州. The vice-prefect 馮崇債 sends four hundred soldiers to meet the party, receives 鑒眞 in his house, holds an ordination in the prefect's hall, and lodges the monks at the prefecture's 大雲寺.
+types: [journey, exchange]
+date:
+  value: 748-11..748-12
+  mode: window
+  calendar: chinese_lunisolar
+  cite:
+    - id: zhenzhou-arrival-time
+      says: The biography records the arrival three days after the landfall of the eleventh month.
+      source: toseiden
+      at: 夜發，經三日乃到振州江口泊舟
+places:
+  - place: zhenzhou
+    role: site
+participants:
+  - actor: jianzhen
+    role: guest
+  - actor: feng-chongzhai
+    role: host
+notes: Three days after a landfall in the eleventh month may fall in the twelfth, so the arrival is a window over the two months.
+cites:
+  participants:
+    - id: zhenzhou-arrival-host
+      says: The biography records 馮崇債 sending soldiers, the ordination in the prefect's hall and the lodging at 大雲寺.
+      source: toseiden
+      at: 於大守廳內，設會授戒，仍入州大雲寺安置

@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: With a wind the next day the ship reaches 三塔山 on the border of 越州 and waits there a month; with a fair wind it goes on to 署風山 and waits another month.
+types: [journey]
+date:
+  value: 748-06..748-10
+  mode: window
+  calendar: chinese_lunisolar
+  cite:
+    - id: santa-shan-time
+      says: The biography records a month at 三塔山 and a month at 署風山 between the departure of 六月廿七日 and the sailing of 十月十六日.
+      source: toseiden
+      at: 明日得風，至越州界三塔山。停住一月，得好風，發至署風山，停住一月
+places:
+  - place: santa-shan
+    role: waypoint
+  - place: shufeng-shan
+    role: waypoint
+participants:
+  - actor: jianzhen
+    role: leader
+notes: The window runs from the departure to the sailing of 十月十六日; the biography gives no day for either arrival.

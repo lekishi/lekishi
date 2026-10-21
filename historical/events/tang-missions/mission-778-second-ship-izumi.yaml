@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The second ship reaches 出水郡 in 薩摩.
+types: [journey]
+date:
+  value: 778-11
+  calendar: regnal
+  as_written: 寶龜九年十一月乙夘
+  cite:
+    - id: mission-778-second-time
+      says: The chronicle records the second ship's arrival on 寶龜九年十一月乙夘.
+      source: shoku-nihongi
+      at: 卷第卅五 寶龜九年十一月乙夘
+      quote: 乙夘。第二船到泊薩摩國出水郡。
+places:
+  - place: izumi-satsuma
+    role: end
+participants:
+  - actor: japan-state
+    role: other
+notes:
+  The 副使 大神末足 reports to the court in 寶龜十年三月; which ship he sailed on is not stated in the entries
+  read.

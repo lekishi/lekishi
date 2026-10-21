@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  平群廣成's party sails from 登州 and in the fifth month reaches the borders of 渤海, where the king 大欽茂
+  is about to send envoys to Japan; they leave together.
+types: [journey]
+date:
+  value: 738-03
+  calendar: regnal
+  as_written: 十年三月。從登州入海。
+  cite:
+    - id: mission-738-dengzhou-time
+      says: 平郡廣成's report dates the sailing from 登州 to the third month of 天平十年.
+      source: shoku-nihongi
+      at: 卷第十三 天平十一年十一月辛夘
+      quote: 十年三月。從登州入海。五月到渤海界。適遇其王大欽茂差使。欲聘我朝。即時同發。
+places:
+  - place: dengzhou
+    role: start
+participants:
+  - actor: heguri-no-hironari
+    role: leader
+  - actor: balhae
+    role: host
+    note: The king 大欽茂.
+notes: The report names no place in 渤海, so the 渤海 stop has no event of its own.

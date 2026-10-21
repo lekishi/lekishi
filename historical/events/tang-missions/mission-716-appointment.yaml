@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The court appoints 多治比眞人縣守 as 遣唐押使, with 阿倍朝臣安麻呂 as ambassador (replaced the next month by 大伴宿祢山守)
+  and 藤原朝臣馬養 as vice-envoy.
+types: [mission]
+date:
+  value: 716-08
+  calendar: regnal
+  as_written: 靈龜二年八月癸亥
+  cite:
+    - id: mission-716-appointment-time
+      says: The chronicle records the appointment on 靈龜二年八月癸亥.
+      source: shoku-nihongi
+      at: 卷第七 靈龜二年八月癸亥
+      quote: 以從四位下多治比眞人縣守爲遣唐押使。從五位上阿倍朝臣安麻呂爲大使。正六位下藤原朝臣馬養爲副使。
+places:
+  - place: heijo-palace
+    role: site
+    note:
+      The entry names no place. A court act happens at the court, so the record anchors it at the court's
+      seat for display only; it asserts no site for the act.
+participants:
+  - actor: tajihi-no-agatamori
+    role: leader
+    note: 遣唐押使.
+  - actor: japan-state
+    role: host
+cites:
+  participants:
+    - id: mission-716-yamamori
+      says: The chronicle records 大伴宿祢山守 replacing 阿倍安麻呂 as ambassador.
+      source: shoku-nihongi
+      at: 卷第七 靈龜二年九月丙子
+      quote: 九月丙子。以從五位下大伴宿祢山守。代爲遣唐大使。

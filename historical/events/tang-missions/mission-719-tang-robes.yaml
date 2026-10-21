@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The returned envoys pay court in the court robes the Tang court gave them.
+types: [exchange]
+date:
+  value: 719-01
+  calendar: regnal
+  as_written: 養老三年正月己亥
+  cite:
+    - id: mission-719-robes-time
+      says: The chronicle records the audience on 養老三年正月己亥.
+      source: shoku-nihongi
+      at: 卷第八 養老三年正月己亥
+      quote: 己亥。入唐使等拜見。皆着唐國所授朝服。
+places:
+  - place: heijo-palace
+    role: site
+    note:
+      The entry names no place. A court act happens at the court, so the record anchors it at the court's
+      seat for display only; it asserts no site for the act.
+participants:
+  - actor: tajihi-no-agatamori
+    role: leader
+  - actor: japan-state
+    role: host
+notes: The court's own record of the return to the capital is 養老二年十二月壬申 (自唐國至).

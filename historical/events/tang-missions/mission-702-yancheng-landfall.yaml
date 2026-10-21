@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The envoys land and ask where they are. They are told: 鹽城縣 of 楚州 in 大周. 'It used to be 大唐;
+  why the new name?' The reply: since 永淳二年 the empress has reigned as 聖神皇帝 and named the state 大周."
+types: [occurrence]
+date:
+  value: 702..704
+  mode: window
+  calendar: regnal
+  as_written: 初至唐時（慶雲元年七月甲申朔 粟田眞人歸朝記事）
+  cite:
+    - id: mission-702-yancheng-time
+      says:
+        The chronicle reports the landfall in 粟田眞人's return notice of 慶雲元年七月, without a date of its
+        own.
+      source: shoku-nihongi
+      at: 卷第三 慶雲元年七月甲申朔
+      quote: 初至唐時。有人來問曰。何處使人。荅曰。日本國使。我使反問曰。此是何州界。荅曰。是大周楚州塩城縣界也。
+places:
+  - place: yancheng
+    role: site
+participants:
+  - actor: awata-no-mahito
+    role: leader
+  - actor: tang-dynasty
+    role: host
+    note: The state is named 大周 in this exchange.
+notes:
+  The envoys answer that they are envoys of 日本國, the first use of that name to China in the chronicle's
+  telling. The date is a window between the sailing and the return; the landfall is in 702 on the usual
+  reading, but the notice does not say so.
+cites:
+  summary:
+    - id: mission-702-dazhou
+      says: The notice records the exchange on why 大唐 was now called 大周.
+      source: shoku-nihongi
+      at: 卷第三 慶雲元年七月甲申朔
+      quote: 更問。先是大唐。今稱大周。國号縁何改稱。荅曰。永淳二年。天皇太帝崩。皇太后登位。稱号聖神皇帝。國号大周。

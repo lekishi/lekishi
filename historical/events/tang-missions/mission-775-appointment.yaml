@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The court appoints 佐伯宿祢今毛人 as 遣唐大使, with 大伴益立 and 藤原鷹取 as vice-envoys, and orders four ships
+  built in 安藝.
+types: [mission]
+date:
+  value: 775-06
+  calendar: regnal
+  as_written: 寶龜六年六月辛巳
+  cite:
+    - id: mission-775-appointment-time
+      says: The chronicle records the appointment on 寶龜六年六月辛巳.
+      source: shoku-nihongi
+      at: 卷第卅三 寶龜六年六月辛巳
+      quote: 辛巳。以正四位下佐伯宿祢今毛人爲遣唐大使。正五位上大伴宿祢益立。從五位下藤原朝臣鷹取爲副。判官録事各四人。造使船四隻於安藝國。
+places:
+  - place: heijo-palace
+    role: site
+    note:
+      The entry names no place. A court act happens at the court, so the record anchors it at the court's
+      seat for display only; it asserts no site for the act.
+participants:
+  - actor: saeki-no-imaemishi
+    role: leader
+  - actor: japan-state
+    role: host

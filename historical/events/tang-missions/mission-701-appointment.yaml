@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The court appoints 粟田朝臣眞人 as 遣唐執節使, with 高橋朝臣笠間 as ambassador and 坂合部宿祢大分 as vice-envoy; the
+  junior secretary (少録) is 山於億良, the poet 山上憶良. It is the first embassy in over thirty years.
+types: [mission]
+date:
+  value: 701-01
+  calendar: regnal
+  as_written: 大寶元年正月丁酉
+  cite:
+    - id: mission-701-appointment-time
+      says: The chronicle records the appointment on 大寶元年正月丁酉.
+      source: shoku-nihongi
+      at: 卷第二 大寶元年正月丁酉
+      quote: 丁酉。以守民部尚書直大貳粟田朝臣眞人。爲遣唐執節使。左大辨直廣參高橋朝臣笠間爲大使。右兵衛率直廣肆坂合部宿祢大分爲副使。
+places:
+  - place: fujiwara-kyo
+    role: site
+    note:
+      The entry names no place. A court act happens at the court, so the record anchors it at the court's
+      seat for display only; it asserts no site for the act.
+participants:
+  - actor: awata-no-mahito
+    role: leader
+    note: 遣唐執節使.
+  - actor: yamanoue-no-okura
+    role: participant
+    note: 少録, written 无位山於億良.
+  - actor: japan-state
+    role: host
+notes:
+  The entry gives a sexagenary day (丁酉); v0 normalizes it to the month. The thirty years are counted
+  from the 669 embassy and are an editorial reading aid, not a source claim.
+cites:
+  participants:
+    - id: mission-701-okura
+      says: The entry lists 无位山於億良 as 少録.
+      source: shoku-nihongi
+      at: 卷第二 大寶元年正月丁酉
+      quote: 无位山於億良爲少録。

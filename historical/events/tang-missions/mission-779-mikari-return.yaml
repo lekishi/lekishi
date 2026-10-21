@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The envoy sent to Silla brings 海上三狩 home from 耽羅. In 780 the Silla envoys tell the court they
+  had searched him out and sent him on, and are thanked.
+types: [journey]
+date:
+  value: 779-07
+  calendar: regnal
+  as_written: 寶龜十年七月丁丑
+  cite:
+    - id: mission-779-mikari-time
+      says: The chronicle records 三狩's return with the Silla envoy on 寶龜十年七月丁丑.
+      source: shoku-nihongi
+      at: 卷第卅五 寶龜十年七月丁丑
+      quote: 丁丑。大宰府言。遣新羅使下道朝臣長人等。率遣唐判官海上眞人三狩等來歸。
+places:
+  - place: dazaifu
+    role: end
+    note: The report comes from 大宰府.
+participants:
+  - actor: unakami-no-mikari
+    role: participant
+  - actor: silla
+    role: other
+cites:
+  participants:
+    - id: mission-779-silla-found
+      says: The Silla envoys of 寶龜十一年正月 say they searched out 海上三狩 and sent him with the envoys.
+      source: shoku-nihongi
+      at: 卷第卅六 寶龜十一年正月辛未
+      quote: 又訪得遣唐判官海上三狩等。隨使進之。

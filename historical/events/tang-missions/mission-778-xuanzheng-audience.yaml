@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The envoys are received in the 宣政殿, though the emperor does not hold court, and present the state
+  gifts, which he is pleased to show his ministers. On 3/22 they see him in the 延英殿, all their requests
+  are granted and a banquet is given.
+types: [mission]
+date:
+  value: 778-01-15
+  calendar: chinese_lunisolar
+  as_written: 十五日。於宣政殿礼見。天子不衙。
+  cite:
+    - id: mission-778-audience-time
+      says: 滋野's report dates the reception in the 宣政殿 to the 15th of the first month.
+      source: shoku-nihongi
+      at: 卷第卅五 寶龜九年十月乙未 小野滋野奏
+      quote: 十五日。於宣政殿礼見。天子不衙。是日。進國信及別貢等物。天子非分喜觀。班示群臣。
+places:
+  - place: changan
+    role: site
+    note: The 宣政殿 is a hall of the 大明宮 in 長安.
+participants:
+  - actor: ono-no-iwane
+    role: guest
+  - actor: tang-dynasty
+    role: host
+notes:
+  "The two reports differ: 滋野 records the 宣政殿 reception on 1/15 and an audience in the 延英殿 on 3/22;
+  繼人 records only an audience on 3/24 (對龍顏奏事). The record keeps 滋野's dates and 繼人's as a conflicting
+  claim on the later audience."
+dispute:
+  status: disputed
+  summary: 滋野 dates the audience in the 延英殿 to 3/22; 繼人 dates his audience with the emperor to 3/24.
+cites:
+  notes:
+    - id: mission-778-yanying
+      says: 滋野 records the audience in the 延英殿 on the 22nd of the third month.
+      source: shoku-nihongi
+      at: 卷第卅五 寶龜九年十月乙未 小野滋野奏
+      quote: 三月廿二日。於延英殿。對見。所請並允。即於内裏設宴。官賞有差。
+    - id: mission-778-tsuguhito-audience
+      says: 繼人 dates the audience with the emperor to the 24th of the third month.
+      role: conflicting
+      source: shoku-nihongi
+      at: 卷第卅五 寶龜九年十一月乙夘 大伴繼人奏
+      quote: 三月廿四日。乃對龍顏奏事。

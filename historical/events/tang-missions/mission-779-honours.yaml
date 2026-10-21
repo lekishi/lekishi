@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The court posthumously promotes 藤原清河, dead in 唐 more than ten years before, and the vice-envoy
+  小野石根, drowned with the Tang envoy 趙寳英 when the first ship broke up.
+types: [occurrence]
+date:
+  value: 779-02
+  calendar: regnal
+  as_written: 寶龜十年二月乙亥
+  cite:
+    - id: mission-779-honours-time
+      says: The chronicle records the honours on 寶龜十年二月乙亥.
+      source: shoku-nihongi
+      at: 卷第卅五 寶龜十年二月乙亥
+      quote: 寳龜八年。任副使入唐。事畢而歸。海中船斷。石根及唐送使趙寳英等六十三人。同時沒死。故並有此贈也。
+places:
+  - place: heijo-palace
+    role: site
+    note:
+      The entry names no place. A court act happens at the court, so the record anchors it at the court's
+      seat for display only; it asserts no site for the act.
+participants:
+  - actor: ono-no-iwane
+    role: subject
+  - actor: zhao-baoying
+    role: subject
+notes:
+  This is the same court act as the 750–754 embassy's coda kiyokawa-honours-779, seen from 石根's side;
+  that event keeps 清河's part.

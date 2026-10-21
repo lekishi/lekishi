@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The 渤海 envoy 高南申 presents at court a memorial from 藤原清河 in 唐, which the 渤海 king 大欽茂 had undertaken
+  to deliver. The emperor says he has long grieved that 清河 has not come home.
+types: [exchange]
+date:
+  value: 760-01
+  calendar: regnal
+  as_written: 天平寶字四年正月丁夘
+  cite:
+    - id: mission-760-letter-time
+      says: The chronicle records 高南申's audience on 天平寶字四年正月丁夘.
+      source: shoku-nihongi
+      at: 卷第廿二 天平寶字四年正月丁夘
+      quote: 國王大欽茂言。爲獻日本朝遣唐大使特進兼秘書監藤原朝臣河清上表并恒貢物。差輔國大將軍高南申等。充使入朝。
+places:
+  - place: heijo-palace
+    role: site
+    note:
+      The entry names no place. A court act happens at the court, so the record anchors it at the court's
+      seat for display only; it asserts no site for the act.
+participants:
+  - actor: balhae
+    role: guest
+  - actor: fujiwara-no-kiyokawa
+    role: subject
+    note: The author of the memorial, in 唐.

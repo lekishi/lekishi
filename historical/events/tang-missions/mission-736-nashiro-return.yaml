@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The vice-envoy 中臣名代 pays court with three Tang men and a Persian. In the tenth month the court
+  gives seasonal robes to a Tang monk and to 菩提, a Brahmin monk, and in the eleventh it gives rank to
+  the Tang man 皇甫東朝 and the Persian 李密翳.
+types: [exchange]
+date:
+  value: 736-08
+  calendar: regnal
+  as_written: 天平八年八月庚午
+  cite:
+    - id: mission-736-nashiro-time
+      says: The chronicle records 名代's audience with the foreigners on 天平八年八月庚午.
+      source: shoku-nihongi
+      at: 卷第十二 天平八年八月庚午
+      quote: 八月庚午。入唐副使從五位上中臣朝臣名代等。率唐人三人波斯人一人拜朝。
+places:
+  - place: heijo-palace
+    role: site
+    note:
+      The entry names no place. A court act happens at the court, so the record anchors it at the court's
+      seat for display only; it asserts no site for the act.
+participants:
+  - actor: nakatomi-no-nashiro
+    role: leader
+  - actor: li-miyi
+    role: guest
+    note: The Persian, named in the rank entry.
+  - actor: huangfu-dongchao
+    role: guest
+    note: A Tang man, named in the rank entry.
+  - actor: bodhisena
+    role: guest
+    note: 波羅門僧菩提, given robes in the tenth month.
+notes:
+  The Tang monk given robes is named 道■ in the transcription, a damaged character, so the record
+  does not name him. The three Tang men are not all named.
+cites:
+  participants:
+    - id: mission-736-bodhi
+      says: The chronicle records robes for a Tang monk and the Brahmin monk 菩提.
+      source: shoku-nihongi
+      at: 卷第十二 天平八年十月戊申
+      quote: 冬十月戊申。施唐僧道■。波羅門僧菩提等時服。
+    - id: mission-736-rank
+      says: The chronicle records rank given to the Tang man 皇甫東朝 and the Persian 李密翳.
+      role: supporting
+      source: shoku-nihongi
+      at: 卷第十二 天平八年十一月戊寅
+      quote: 唐人皇甫東朝。波斯人李密翳等授位有差。

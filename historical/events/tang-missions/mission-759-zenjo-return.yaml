@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The mission's judge 內藏全成 comes back from 渤海, is driven by wind to 對馬, and arrives with the 渤海
+  envoy 高南申. 渤海's letter explains that with 安祿山 and 史思明 in revolt it let only 高元度 and ten others go on
+  to 唐 and sent the rest home.
+types: [journey]
+date:
+  value: 759-10
+  calendar: regnal
+  as_written: 天平寶字三年十月辛亥
+  cite:
+    - id: mission-759-zenjo-time
+      says: The chronicle records 全成's return on 天平寶字三年十月辛亥.
+      source: shoku-nihongi
+      at: 卷第廿二 天平寶字三年十月辛亥
+      quote: 辛亥。迎藤原河清使判官内藏忌寸全成。自渤海却廻。海中遭風。漂着對馬。
+places:
+  - place: tsushima
+    role: end
+    note: A drift, not a chosen landfall.
+participants:
+  - actor: balhae
+    role: host
+  - actor: ko-no-gendo
+    role: other
+    note: Goes on to 唐 with ten others.
+notes: The chronicle writes 藤原河清 for 藤原清河 in these entries.
+cites:
+  summary:
+    - id: mission-759-balhae-letter
+      says:
+        渤海's letter, quoted in the entry, records that of 99 people only 高元度 and ten others were let
+        go on to 唐 because of the rebellion.
+      source: shoku-nihongi
+      at: 卷第廿二 天平寶字三年十月辛亥
+      quote: 迎藤原河清使惣九十九人。大唐祿山先爲逆命。思明後作乱常。内外騷荒。未有平殄。即欲放還。恐被害殘。又欲勒還。慮違隣意。仍放頭首高元度等十一人。往大唐迎河清。

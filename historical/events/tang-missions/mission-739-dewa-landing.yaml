@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Crossing the sea, one 渤海 ship capsizes and its ambassador 胥要徳 and others drown. 廣成 leads the
+  rest ashore in 出羽國.
+types: [journey]
+date:
+  value: 738..739
+  mode: window
+  calendar: regnal
+  as_written: 及渡沸海。渤海一船遇浪傾覆。大使胥要徳等■人沒死。廣成等率遣衆。到著出羽國。
+  cite:
+    - id: mission-739-dewa-time
+      says: 平郡廣成's report records the landing in 出羽國 without its own date.
+      source: shoku-nihongi
+      at: 卷第十三 天平十一年十一月辛夘
+      quote: 及渡沸海。渤海一船遇浪傾覆。大使胥要徳等■人沒死。廣成等率遣衆。到著出羽國。
+places:
+  - place: dewa
+    role: end
+participants:
+  - actor: heguri-no-hironari
+    role: leader
+  - actor: balhae
+    role: participant
+    note: The 渤海 embassy crosses with him.
+notes:
+  The window runs from the sailing of 天平十年三月 to the entry into the capital in 天平十一年十月; the number
+  drowned is damaged in the transcription (■人).

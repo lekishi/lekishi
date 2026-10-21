@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The first and third ships reach 海陵縣 in 揚州.
+types: [journey]
+date:
+  value: 777-07-03
+  calendar: chinese_lunisolar
+  as_written: 七月三日。与第一船同到揚州海陵縣。
+  cite:
+    - id: mission-777-hailing-time
+      says: Both reports date the landfall at 揚州海陵縣 to the third of the seventh month.
+      sources:
+        - source: shoku-nihongi
+          at: 卷第卅五 寶龜九年十月乙未 小野滋野奏
+          quote: 七月三日。与第一船同到揚州海陵縣。
+        - source: shoku-nihongi
+          at: 卷第卅五 寶龜九年十一月乙夘 大伴繼人奏
+          quote: 七月三日着泊揚州海陵縣。
+places:
+  - place: hailing
+    role: site
+participants:
+  - actor: ono-no-iwane
+    role: leader
+  - actor: ono-no-shigeno
+    role: participant

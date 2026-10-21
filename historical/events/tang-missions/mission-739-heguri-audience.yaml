@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  平群廣成 pays court, five years after leaving 蘇州, having entered the capital with the 渤海 envoys the
+  month before.
+types: [mission]
+date:
+  value: 739-11
+  calendar: regnal
+  as_written: 天平十一年十一月辛夘
+  cite:
+    - id: mission-739-audience-time
+      says: The chronicle records 廣成's audience on 天平十一年十一月辛夘.
+      source: shoku-nihongi
+      at: 卷第十三 天平十一年十一月辛夘
+      quote: 十一月辛夘。平郡朝臣廣成拜朝。
+places:
+  - place: heijo-palace
+    role: site
+    note:
+      The entry names no place. A court act happens at the court, so the record anchors it at the court's
+      seat for display only; it asserts no site for the act.
+participants:
+  - actor: heguri-no-hironari
+    role: leader
+  - actor: japan-state
+    role: host
+cites:
+  summary:
+    - id: mission-739-enter
+      says: The chronicle records 廣成 entering the capital with the 渤海 envoys on 天平十一年十月丙戌.
+      source: shoku-nihongi
+      at: 卷第十三 天平十一年十月丙戌
+      quote: 丙戌。入唐使判官外從五位下平郡朝臣廣成。并渤海客等入京。

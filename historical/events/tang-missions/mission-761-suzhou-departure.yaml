@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "Their business done, 高元度's party is sent home by the southern route: a Tang official takes
+  them to 蘇州, where a ship eight 丈 long is built and 沈惟岳 and forty men of 越州 crew it. 藤原清河 stays: the
+  emperor fears the roads are not yet safe."
+types: [journey]
+date:
+  value: "761"
+  calendar: regnal
+  as_written: 元度宜取南路先歸復命。即令中謁者謝時和押領元度等向蘇州。（天平寶字五年八月甲子條）
+  cite:
+    - id: mission-761-suzhou-time
+      says:
+        The chronicle reports the departure from 蘇州 in 高元度's return notice of 天平寶字五年八月, without its
+        own date.
+      source: shoku-nihongi
+      at: 卷第廿三 天平寶字五年八月甲子
+      quote: 元度宜取南路先歸復命。即令中謁者謝時和押領元度等向蘇州。与刺史李■平章。造船一隻長八丈。
+places:
+  - place: suzhou
+    role: start
+participants:
+  - actor: ko-no-gendo
+    role: leader
+  - actor: shen-weiyue
+    role: leader
+    note: Commands the Tang crew.
+  - actor: tang-dynasty
+    role: host
+cites:
+  summary:
+    - id: mission-761-kiyokawa-stays
+      says:
+        The Tang emperor's message, quoted in the notice, says 清河 will be sent home but the remaining
+        rebels make the road dangerous, so 元度 should go first by the southern route.
+      source: shoku-nihongi
+      at: 卷第廿三 天平寶字五年八月甲子
+      quote: 特進秘書監藤原河清。今依使奏。欲遣歸朝。唯恐殘賊未平。道路多難。

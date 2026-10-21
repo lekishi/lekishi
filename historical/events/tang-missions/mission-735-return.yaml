@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  多治比廣成 comes back from 唐國 to the court and returns the 節刀. With him come 吉備眞備, who presents books
+  of Tang ritual, a calendar, a sundial rod, pitch pipes, a book on music, bows and arrows, and 玄昉, with
+  more than five thousand scrolls of sutras and treatises.
+types: [journey]
+date:
+  value: 735-03
+  calendar: regnal
+  as_written: 天平七年三月丙寅
+  cite:
+    - id: mission-735-return-time
+      says: The chronicle records the return and the 節刀 on 天平七年三月丙寅.
+      source: shoku-nihongi
+      at: 卷第十二 天平七年三月丙寅
+      quote: 三月丙寅。入唐大使從四位上多治比眞人廣成等。自唐國至進節刀。
+places:
+  - place: heijo-palace
+    role: end
+    note:
+      The entry names no place. A court act happens at the court, so the record anchors it at the court's
+      seat for display only; it asserts no site for the act.
+participants:
+  - actor: tajihi-no-hironari
+    role: leader
+  - actor: kibi-no-makibi
+    role: participant
+  - actor: genbo
+    role: participant
+cites:
+  participants:
+    - id: mission-735-makibi-gifts
+      says:
+        The chronicle records 下道朝臣眞備 presenting 唐禮, the 大衍暦, a measuring rod, pitch pipes and other
+        objects on 天平七年四月辛亥.
+      source: shoku-nihongi
+      at: 卷第十二 天平七年四月辛亥
+      quote: 辛亥。入唐留學生從八位下下道朝臣眞備獻唐禮一百卅卷。太衍暦經一卷太衍暦立成十二卷。測影鐵尺一枚。銅律管一部。
+    - id: mission-735-genbo-return
+      says:
+        玄昉's obituary records that he returned with 多治比廣成 in 天平七年, bringing more than five thousand
+        scrolls of sutras and treatises and images.
+      role: supporting
+      source: shoku-nihongi
+      at: 卷第十六 天平十八年六月己亥
+      quote: 天平七年隨大使多治比眞人廣成還歸。齎經論五千餘卷及諸佛像來。

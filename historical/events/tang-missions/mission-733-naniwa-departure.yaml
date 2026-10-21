@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The four ships of the embassy leave 難波津.
+types: [journey]
+date:
+  value: 733-04
+  calendar: regnal
+  as_written: 天平五年夏四月己亥
+  cite:
+    - id: mission-733-departure-time
+      says: The chronicle records the departure on 天平五年四月己亥.
+      source: shoku-nihongi
+      at: 卷第十一 天平五年四月己亥
+      quote: 夏四月己亥。遣唐四船自難波津進發。
+places:
+  - place: naniwa
+    role: start
+    note: The entry names 難波津.
+participants:
+  - actor: tajihi-no-hironari
+    role: leader
+notes: 多治比廣成 received the 節刀 on 天平五年閏三月癸巳.

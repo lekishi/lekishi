@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The emperor gives the 節刀 and charges the envoys to keep the peace; they also carry a letter to
+  藤原清河, still in 唐, telling him to come home with them, with silk, cloth and a hundred ounces of gold
+  dust.
+types: [mission]
+date:
+  value: 776-04
+  calendar: regnal
+  as_written: 寶龜七年四月壬申
+  cite:
+    - id: mission-776-sekito-time
+      says: The chronicle records the 節刀 on 寶龜七年四月壬申.
+      source: shoku-nihongi
+      at: 卷第卅四 寶龜七年四月壬申
+      quote: 壬申。御前殿賜遣唐使節刀。
+places:
+  - place: heijo-palace
+    role: site
+    note:
+      The entry names no place. A court act happens at the court, so the record anchors it at the court's
+      seat for display only; it asserts no site for the act.
+participants:
+  - actor: saeki-no-imaemishi
+    role: leader
+  - actor: fujiwara-no-kiyokawa
+    role: subject
+    note: The addressee of the letter.
+cites:
+  summary:
+    - id: mission-776-letter
+      says: The chronicle quotes the letter to 藤原河清 telling him to return with the envoys.
+      source: shoku-nihongi
+      at: 卷第卅四 寶龜七年四月壬申
+      quote: 賜前入唐大使藤原河清書曰。汝奉使絶域。久經年序。忠誠遠著。消息有聞。故今因聘使。便命迎之。

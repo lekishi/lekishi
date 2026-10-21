@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The monk 戒融, who had gone to 唐 to study, comes home through 渤海 with the student 高内弓's family.
+  In a storm the helmsman 板振鎌束 throws 内弓's wife, baby, its nurse and a lay devotee into the sea, blaming
+  them for the wind; the ship drifts for ten days to 隱岐國.
+types: [journey]
+date:
+  value: 763-10
+  calendar: regnal
+  as_written: 天平寶字七年十月乙亥
+  cite:
+    - id: mission-763-kaiyu-time
+      says:
+        The chronicle records 鎌束's return and imprisonment on 天平寶字七年十月乙亥, telling the voyage in the
+        same entry.
+      source: shoku-nihongi
+      at: 卷第廿四 天平寶字七年十月乙亥
+      quote: 并入唐學問僧戒融。優婆塞一人。轉自渤海相隨歸朝。海中遭風所向迷方。
+places:
+  - place: oki
+    role: end
+participants:
+  - actor: kaiyu
+    role: participant
+  - actor: balhae
+    role: other
+    note: They come by way of 渤海.
+notes:
+  "A drift: 'they lost their bearings' (所向迷方). The landfall precedes the entry; the record dates
+  the event to the entry's month."
+cites:
+  summary:
+    - id: mission-763-overboard
+      says:
+        The entry records 鎌束 having the four thrown overboard and the ship reaching 隱岐國 after more than
+        ten days.
+      source: shoku-nihongi
+      at: 卷第廿四 天平寶字七年十月乙亥
+      quote: 乃使水手撮内弓妻并緑兒乳母優婆塞四人。擧而擲海。風勢猶猛。漂流十餘日。着隱岐國。

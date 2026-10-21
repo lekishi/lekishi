@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Having put to sea from 筑紫 the year before and been unable to cross in violent wind and waves,
+  the embassy finally sails.
+types: [journey]
+date:
+  value: 702-06
+  calendar: regnal
+  as_written: 大寶二年六月乙丑
+  cite:
+    - id: mission-702-departure-time
+      says: The chronicle records the sailing on 大寶二年六月乙丑, after the failed attempt of the year before.
+      source: shoku-nihongi
+      at: 卷第二 大寶二年六月乙丑
+      quote: 乙丑。遣唐使等去年從筑紫而入海。風浪暴險不得渡海。至是乃發。
+places:
+  - place: tsukushi
+    role: start
+    note:
+      The entry names 筑紫 for the attempt of 701; the record assumes the 702 sailing left from there
+      too, as the entry implies.
+participants:
+  - actor: awata-no-mahito
+    role: leader
+notes: The entry does not say exactly where in 筑紫 the ships waited.

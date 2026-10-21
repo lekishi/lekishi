@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The envoys reach 長安 and are lodged outside the palace, where the eunuch 趙寳英 meets them with horses.
+types: [journey]
+date:
+  value: 778-01-13
+  calendar: chinese_lunisolar
+  as_written: 正月十三日。到長安城。
+  cite:
+    - id: mission-778-changan-time
+      says: Both reports date the arrival at 長安 to the 13th of the first month.
+      sources:
+        - source: shoku-nihongi
+          at: 卷第卅五 寶龜九年十月乙未 小野滋野奏
+          quote: 正月十三日。到長安城。即於外宅安置供給。
+        - source: shoku-nihongi
+          at: 卷第卅五 寶龜九年十一月乙夘 大伴繼人奏
+          quote: 正月十三日。到長安。即遣内使趙寳英。將馬迎接。安置外宅。
+places:
+  - place: changan
+    role: end
+participants:
+  - actor: ono-no-iwane
+    role: leader
+  - actor: zhao-baoying
+    role: host

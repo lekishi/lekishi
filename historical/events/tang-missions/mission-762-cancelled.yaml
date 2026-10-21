@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The embassy meant to take 沈惟岳 home is cut back after one of its new ships runs aground at the
+  mouth of the 難波 river and splits its stern; under 中臣鷹主 it waits through the summer but finds no wind
+  to cross.
+types: [mission]
+date:
+  value: 762-07
+  calendar: regnal
+  as_written: 天平寶字六年七月 是月
+  cite:
+    - id: mission-762-cancelled-time
+      says: The chronicle records the failure to cross in the seventh month of 天平寶字六年.
+      source: shoku-nihongi
+      at: 卷第廿四 天平寶字六年七月
+      quote: 是月。送唐人使從五位下中臣朝臣鷹主等。風波無便不得渡海。
+places:
+  - place: naniwa
+    role: context
+    note: The ship runs aground at 難波江口 in the fourth month; the entry of the seventh names no place.
+participants:
+  - actor: japan-state
+    role: host
+notes:
+  The original ambassador 仲眞人石伴 was appointed on 天平寶字五年十月癸酉; the ship's damage and the reduction
+  to two ships are recorded on 天平寶字六年四月丙寅. 沈惟岳 stays in Japan.
+cites:
+  summary:
+    - id: mission-762-aground
+      says: The chronicle records the ship aground at 難波江口 and the embassy cut to two ships under 中臣朝臣鷹主.
+      source: shoku-nihongi
+      at: 卷第廿四 天平寶字六年四月丙寅
+      quote: 遣唐使駕船一隻自安藝國到于難波江口。著灘不浮。其柁亦復不得發出。爲浪所搖。船尾破裂。於是。■節使人限以兩船。

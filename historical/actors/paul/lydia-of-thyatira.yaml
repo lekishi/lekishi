@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Lydia, a seller of purple cloth from Thyatira living at Philippi, the first person in
+  Europe that Acts names as baptised by Paul; her house was the church's meeting place there."
+types: [person]
+names:
+  - form: Lydia
+    lang: en
+    script: Latn
+    cite:
+      - id: lydia-of-thyatira-name
+        says: "Acts names Lydia, a seller of purple from the city of Thyatira."
+        source: bible-kjv
+        at: "Acts 16:14"
+        quote: "a certain woman named Lydia, a seller of purple, of the city of Thyatira"
+roles:
+  - role: merchant
+    note: A seller of purple cloth.

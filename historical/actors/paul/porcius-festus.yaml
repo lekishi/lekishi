@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Porcius Festus, Felix's successor as procurator of Judaea, to whom Paul appealed to
+  Caesar."
+types: [person]
+names:
+  - form: Porcius Festus
+    lang: en
+    script: Latn
+    cite:
+      - id: porcius-festus-name
+        says: Acts tells that after two years Porcius Festus succeeded Felix.
+        source: bible-kjv
+        at: "Acts 24:27"
+        quote: But after two years Porcius Festus came into Felix’ room
+roles:
+  - role: official
+    note: Procurator of Judaea.

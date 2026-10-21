@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Lucius Junius Gallio, brother of the philosopher Seneca, proconsul of Achaia at Corinth,
+  who in Acts refused to judge the charge brought against Paul."
+types: [person]
+names:
+  - form: Gallio
+    lang: en
+    script: Latn
+    cite:
+      - id: gallio-name
+        says: Acts tells that the Jews brought Paul to the judgment seat when Gallio was the deputy of Achaia.
+        source: bible-kjv
+        at: "Acts 18:12"
+        quote: And when Gallio was the deputy of Achaia
+roles:
+  - role: official
+    note: 'Proconsul of Achaia ("deputy" in the King James text).'
+notes: "His year as proconsul is the main anchor for dating Paul's stay at Corinth; the chapter
+  dates the stay by Prat's 1911 chronology and records the anchor as a gap."

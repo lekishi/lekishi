@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Aquila, a Jew born in Pontus and a tentmaker, who had left Rome with his wife Priscilla
+  when Claudius expelled the Jews; Paul lodged and worked with them at Corinth."
+types: [person]
+names:
+  - form: Aquila
+    lang: en
+    script: Latn
+    cite:
+      - id: aquila-name
+        says: "Acts tells that at Corinth Paul found a Jew named Aquila, born in Pontus, lately come
+          from Italy."
+        source: bible-kjv
+        at: "Acts 18:2"
+        quote: "And found a certain Jew named Aquila, born in Pontus, lately come from Italy"
+roles:
+  - role: artisan
+    note: "A tentmaker, in Acts."

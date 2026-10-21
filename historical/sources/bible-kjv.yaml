@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../schema/source.schema.json
+locator: verse
+kind: primary
+title: The Bible, King James Version (2 Kings, 2 Chronicles, Isaiah, Jeremiah, Ezekiel)
+edition:
+  The King James Version of 1611 in the Project Gutenberg text (eBook 10), read 2026-10-21.
+  Locators are book, chapter and verse.
+author: The books' authors and compilers; translated by the King James translators
+issued:
+  year: 1611
+  era: ce
+language: en
+identifiers:
+  - system: url
+    value: https://www.gutenberg.org/ebooks/10
+license:
+  status: recorded
+  license_id: public-domain
+  attribution_text: The Bible, King James Version (1611), Project Gutenberg eBook 10
+  redistribution: permitted
+  quotation_permitted: true
+  reviewed_by: Lekishi editorial preparation
+  reviewed_at: 2026-10-21T16:00:00Z
+  notes:
+    "The translation is public domain. In the United Kingdom the Crown's letters patent cover
+    printing the text, not quoting it, so the records quote short passages. Quotations follow the
+    Gutenberg text, and verse numbers are the citation's locator."
+notes:
+  "The books of Kings and Chronicles narrate the kingdom of Judah from its own side, and Jeremiah
+  and Ezekiel are prophetic books that carry dated notices. They were compiled long after some of
+  the events and they explain events theologically. The records cite what each passage says, keep
+  its numbers and dates as the passage gives them, and never present a miraculous account as an
+  established event. The Hebrew text, not this translation, is the critical witness, so a locator
+  should be re-checked against a critical edition before release."

@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Babylon, the royal city of Nebuchadnezzar II on the Euphrates, to which the books of Kings and
+  Jeremiah record Jehoiachin, Zedekiah and the people of Jerusalem carried captive, and where Evil-merodach
+  released Jehoiachin from prison.
+types: [capital]
+names:
+  - form: Babylon
+    lang: en
+    script: Latn
+    cite:
+      - id: babylon-name
+        says: The books of Kings record the captives carried from Jerusalem to Babylon.
+        source: bible-kjv
+        at: 2 Kings 24:15
+        quote: those carried he into captivity from Jerusalem to Babylon
+  - form: Bābili
+    lang: akk
+    script: Latn
+    note:
+      The city's Akkadian name, an editorial normalization; the chronicle's "king of Akkad" names the
+      land, not the city.
+    claim: babylon-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [44.4249782, 32.5372969]
+    notes:
+      The gazetteer's point for the ancient city as a whole; it places no palace, gate or quarter of
+      Nebuchadnezzar's time.
+    cite:
+      - says: The Pleiades gazetteer records Babylon with a precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/893951 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "893951"
+    url: https://pleiades.stoa.org/places/893951
+    license: CC-BY-3.0
+    note: Babylon
+notes: Shared by every chapter that reaches Babylon; its names and point stay neutral between periods.

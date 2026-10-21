@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Gaza, on the coast of southern Canaan, where Thutmose III arrived on the feast of his coronation,
+  the 4th day of the first month of the third season of year 23, and which he left the next day.
+types: [settlement]
+names:
+  - form: Gaza
+    lang: egy
+    script: Latn
+    note: Breasted's form; the Egyptian is written Gdt.
+    cite:
+      - id: gaza-name
+        says: The annals record the king arriving at Gaza, "the possession of the ruler".
+        source: breasted-ancient-records
+        at: "II, Annals of Thutmose III, first campaign: Year 23, I Shemu 4 (Gaza)"
+        quote:
+          Year 23, first month of the third season, on the fourth day, the day of the feast of the king's
+          coronation, he arrived at the city, the possession of the ruler, Gaza.
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [34.45172, 31.52021]
+    notes:
+      Pleiades' representative point for the ancient town of Gaza. The Bronze Age tell lies within
+      the modern city; the point marks the town, not a building.
+    cite:
+      - id: gaza-identification
+        says:
+          Pleiades identifies Gaza as the ancient settlement and port on the coast of Palestine and gives
+          this representative point (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 687902 (reprLatLong, version 13), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "687902"
+    url: https://pleiades.stoa.org/places/687902
+    license: CC-BY-3.0

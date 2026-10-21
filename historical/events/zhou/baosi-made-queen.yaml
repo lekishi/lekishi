@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  幽王 sets aside his queen, the daughter of 申侯, and her son 宜臼, and makes 褒姒 queen and her son
+  伯服 heir. The annals tell it under his third year; the Bamboo Annals date the new heir to the
+  seventh year of 晉文侯.
+types: [occurrence]
+date:
+  value: 779 BCE..774 BCE
+  mode: window
+  calendar: regnal
+  as_written: 幽王三年（周本紀）; 晉文侯七年（竹書紀年）
+  cite:
+    - id: baosi-queen-date-779
+      says: >-
+        The annals tell the change of queen and heir under 幽王's third year, which the table's count
+        from 841 BCE puts in 779 BCE. This is the window's early end.
+      source: shiji-yin-zhou
+      at: 卷四 周本紀 幽王 三年（當幽王三年）
+      quote: 當幽王三年，王之後宮見而愛之，生子伯服，竟廢申后及太子，以褒姒為后，伯服為太子。
+    - id: baosi-queen-date-774
+      says: >-
+        The Bamboo Annals date 伯服's appointment as heir to the seventh year of 晉文侯, whose tenth
+        year the 晉 house and the table put in 771 BCE, so the seventh is 774 BCE, the window's late
+        end. 王國維 notes a variant reading 八年.
+      role: alternative
+      source: guben-zhushu-jinian
+      at: 晉紀 文侯 七年（幽王立褒姒之子伯服以爲太子）
+      quote: 幽王立褒姒之子伯服以爲太子。
+participants:
+  - actor: zhou-you-wang
+    role: leader
+  - actor: bao-si
+    role: subject
+  - actor: bo-fu
+    role: subject
+  - actor: zhou-ping-wang
+    role: subject
+dispute:
+  status: disputed
+  summary: >-
+    The annals and the Bamboo Annals put the new heir five years apart. The record keeps the
+    annals' 779 BCE as the editorial anchor and the Bamboo Annals' 774 BCE as an alternative.
+cite:
+  - id: baosi-queen-annals
+    says: The annals record that 幽王 wanted to set aside the queen from 申 and the heir 宜臼, and to make 褒姒 queen and 伯服 heir.
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 幽王 三年（欲廢申后，并去太子宜臼）
+    quote: 後幽王得褒姒，愛之，欲廢申后，并去太子宜臼，以褒姒為后，以伯服為太子。

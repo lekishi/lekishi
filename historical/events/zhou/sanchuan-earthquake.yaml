@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  In 幽王's second year the three rivers of Western 周 shake. 伯陽甫 reads it as the sign of a
+  dynasty's end and says 周 will fall within ten years; that year the rivers dry up and 岐山
+  collapses.
+types: [occurrence]
+date:
+  value: 780 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 幽王二年
+  cite:
+    - id: sanchuan-date
+      says: >-
+        The annals date the earthquake to 幽王's second year. The table of the twelve lords counts
+        幽王's first year sixty years after the first year of the 共和 regency, 841 BCE, so his second
+        year is 780 BCE.
+      sources:
+        - source: shiji-yin-zhou
+          at: 卷四 周本紀 幽王 二年（西周三川皆震）
+          quote: 幽王二年，西周三川皆震。
+        - source: shiji-chunqiu
+          at: 卷十四 十二諸侯年表 周（幽王元年）
+          quote: 幽王元年
+places:
+  - place: mount-qi
+    role: site
+    note: The mountain that collapsed; the annals give no epicentre for the shaking of the three rivers.
+participants:
+  - actor: bo-yang-fu
+    role: witness
+  - actor: zhou-you-wang
+    role: subject
+cite:
+  - id: sanchuan-omen
+    says: The annals record 伯陽甫 saying that 周 would fall when the three rivers shook.
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 幽王 二年（伯陽甫曰：「周將亡矣」）
+    quote: 幽王二年，西周三川皆震。伯陽甫曰：「周將亡矣。
+  - id: sanchuan-collapse
+    says: The annals record that in the same year the three rivers dried up and 岐山 collapsed.
+    role: supporting
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 幽王 二年（岐山崩）
+    quote: 是歲也，三川竭，岐山崩。

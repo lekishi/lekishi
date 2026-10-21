@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  For fighting to save 周 and escorting 平王 east, 秦襄公 is made a lord of the 周 and given the land
+  west of 岐, which the 戎 hold: if 秦 can drive them out, it may keep it. 秦 becomes a state and
+  opens embassies with the other lords.
+types: [founding]
+date:
+  value: 771 BCE..770 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 秦襄公七年（始列為諸侯）; after 平王's move east (秦本紀)
+  cite:
+    - id: qin-made-lord-date
+      says: >-
+        The table enters 秦襄公 first ranked among the lords in the year of 幽王's death, 771 BCE; the
+        秦 annals tell the grant after the escort of 平王 to 雒邑, which the table puts in 770 BCE.
+        The window holds both.
+      sources:
+        - source: shiji-chunqiu
+          at: 卷十四 十二諸侯年表 秦 襄公 七年（始列為諸侯）
+          quote: 七始列為諸侯。
+        - source: shiji-chunqiu
+          at: 卷十四 十二諸侯年表 周 平王 元年（東徙雒邑）
+          quote: 平王元年東徙雒邑。
+places:
+  - place: mount-qi
+    role: context
+    note: The grant was of the land west of 岐; no seat is named.
+participants:
+  - actor: zhou-ping-wang
+    role: leader
+  - actor: qin-xiang-gong
+    role: subject
+  - actor: qin-state
+    role: subject
+cite:
+  - id: qin-made-lord-annals
+    says: >-
+      The 秦 annals record that 平王 made 襄公 a lord, gave him the land west of 岐, and swore that 秦
+      could keep the 岐 and 豐 lands it took from the 戎.
+    source: shiji-chunqiu
+    at: 卷五 秦本紀 襄公 七年（平王封襄公為諸侯）
+    quote: 平王封襄公為諸侯，賜之岐以西之地。曰：「戎無道，侵奪我岐、豐之地，秦能攻逐戎，即有其地。」與誓，封爵之。
+  - id: qin-made-lord-jin
+    says: The 晉 house records 秦襄公 first ranked among the lords in the year 周 moved east.
+    role: supporting
+    source: shiji-chunqiu
+    at: 卷三十九 晉世家 文侯 十年（秦襄公始列爲諸侯）
+    quote: 而秦襄公始列爲諸侯。

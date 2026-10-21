@@ -1,0 +1,80 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  申侯, angry at the setting aside of his daughter and grandson, attacks 幽王 with 繒 and the western
+  犬戎. 幽王 lights the beacons and no troops come. He is killed at the foot of 驪山 — at 戲, the
+  Bamboo Annals say, with his heir 伯盤 — 褒姒 is carried off, and the 周 treasure is taken. 鄭桓公 dies
+  with him.
+types: [campaign]
+date:
+  value: 771 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 幽王十一年（十二諸侯年表）; 晉文侯十年（竹書紀年）
+  cite:
+    - id: youwang-killed-date
+      says: >-
+        The table of the twelve lords puts 幽王's death in his eleventh year, which its count from the
+        first year of the 共和 regency (841 BCE) sets in 771 BCE.
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 周 幽王 十一年（幽王為犬戎所殺）
+      quote: 十一幽王為犬戎所殺。
+    - id: youwang-killed-jin
+      says: The Bamboo Annals put the deaths at 戲 in 晉文侯's tenth year, the same year in the table's count.
+      role: supporting
+      source: guben-zhushu-jinian
+      at: 晉紀 文侯 十年（伯盤與幽王倶死于戲）
+      quote: 伯盤與幽王倶死于戲。
+places:
+  - place: mount-li
+    role: site
+    note: The annals' place of death, at the foot of 驪山.
+  - place: xi
+    role: other
+    note: The Bamboo Annals' place of death, kept as an alternative account; the geography puts the 戲 river beside 驪山.
+participants:
+  - actor: shen-hou
+    role: leader
+  - actor: quanrong
+    role: participant
+  - actor: zeng-state
+    role: participant
+  - actor: zhou-you-wang
+    role: subject
+  - actor: bo-fu
+    role: subject
+  - actor: bao-si
+    role: subject
+  - actor: zheng-huan-gong
+    role: subject
+dispute:
+  status: disputed
+  summary: >-
+    The annals put 幽王's death at the foot of 驪山 and the Bamboo Annals at 戲. The two lie close
+    together and the geography quotes a poem that joins them, but the sources name different places;
+    the chapter publishes the annals' place and keeps the other.
+cite:
+  - id: youwang-killed-annals
+    says: >-
+      The annals record that 申侯 attacked 幽王 with 繒 and the 犬戎, that the beacons brought no
+      troops, and that 幽王 was killed at the foot of 驪山 and 褒姒 taken.
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 幽王（申侯怒，與繒、西夷犬戎攻幽王）
+    quote: 申侯怒，與繒、西夷犬戎攻幽王。幽王舉烽火徵兵，兵莫至。遂殺幽王驪山下，虜褒姒，盡取周賂而去。
+  - id: youwang-killed-xi
+    says: The Bamboo Annals record that 伯盤 and 幽王 died together at 戲.
+    role: alternative
+    source: guben-zhushu-jinian
+    at: 晉紀 文侯 十年（伯盤與幽王倶死于戲）
+    quote: 伯盤與幽王倶死于戲。
+  - id: youwang-killed-qin
+    says: The 秦 annals record the western 戎 and the 犬戎 attacking 周 with 申侯 and killing 幽王 at the foot of 驪山.
+    role: supporting
+    source: shiji-chunqiu
+    at: 卷五 秦本紀 襄公 七年（殺幽王酈山下）
+    quote: 西戎犬戎與申侯伐周，殺幽王酈山下。
+  - id: youwang-killed-zheng
+    says: The 鄭 house records that the 犬戎 killed 幽王 at the foot of 驪山 and killed 桓公 with him.
+    role: supporting
+    source: shiji-chunqiu
+    at: 卷四十二 鄭世家 桓公（并殺桓公）
+    quote: 二歳，犬戎殺幽王於驪山下，并殺桓公。

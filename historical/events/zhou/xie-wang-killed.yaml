@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  In the twenty-first year of 晉文侯, 760 BCE, the lord of 晉 kills 攜王, and the eleven years of
+  two 周 kings end. Only the Bamboo Annals record it.
+types: [occurrence]
+date:
+  value: 760 BCE
+  mode: window
+  calendar: regnal
+  as_written: 晉文侯二十一年
+  cite:
+    - id: xie-wang-killed-date
+      says: >-
+        The Bamboo Annals enter the killing in 晉文侯's twenty-first year. The 晉 house puts 幽王's
+        death in 文侯's tenth year, which the table sets in 771 BCE, so the twenty-first is 760 BCE.
+      sources:
+        - source: shiji-chunqiu
+          at: 卷三十九 晉世家 文侯 十年（犬戎殺幽王）
+          quote: 文侯十年，周幽王無道，犬戎殺幽王，周東徙。
+        - source: shiji-chunqiu
+          at: 卷十四 十二諸侯年表 周 幽王 十一年（幽王為犬戎所殺）
+          quote: 十一幽王為犬戎所殺。
+participants:
+  - actor: jin-wen-hou
+    role: leader
+  - actor: xie-wang
+    role: subject
+notes: >-
+  The transcription prints the year as 二十—年, with a dash where 王國維's text has 一; the record
+  reads it as 二十一年. The entry names no place. It calls the killer 晉文公, which the record reads
+  as 文侯, the 晉 lord of that year.
+cite:
+  - id: xie-wang-killed-basis
+    says: The Bamboo Annals record that 攜王 was killed by the lord of 晉.
+    source: guben-zhushu-jinian
+    at: 晉紀 文侯 二十一年（攜王爲晉文公所殺）
+    quote: 攜王爲晉文公所殺。

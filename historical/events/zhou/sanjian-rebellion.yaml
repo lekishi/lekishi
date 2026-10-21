@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  After 武王's death, with 成王 a child and 周公 ruling for him, 管叔 and 蔡叔 suspect 周公 and rise
+  with 武庚 against 周. 周公, on 成王's orders, kills 武庚 and 管叔 and banishes 蔡叔; the annals say the
+  war took three years.
+types: [campaign]
+date:
+  value: 1044 BCE..1018 BCE
+  mode: window
+  calendar: regnal
+  as_written: (under 周公's regency; 三年而畢定)
+  cite:
+    - id: sanjian-date
+      says: >-
+        The annals put 武王's death at least two years after the conquest, and give 周公 seven years of
+        regency. The window runs from two years after the conquest's earliest year to nine years after
+        its latest, 1044 to 1018 BCE, under the conquest's two cited ends.
+      sources:
+        - source: shiji-yin-zhou
+          at: 卷四 周本紀 武王（武王已克殷，後二年）
+          quote: 武王已克殷，後二年，問箕子殷所以亡。
+        - source: shiji-yin-zhou
+          at: 卷四 周本紀 成王（周公行政七年）
+          quote: 周公行政七年，成王長，周公反政成王，北面就群臣之位。
+participants:
+  - actor: zhou-gong-dan
+    role: leader
+  - actor: zhou-cheng-wang
+    role: participant
+  - actor: wu-geng
+    role: subject
+  - actor: guan-shu
+    role: subject
+  - actor: cai-shu
+    role: subject
+notes: >-
+  The three years are stated, but the record is a window, not a three-year duration, because no
+  source gives the year it began. The annals name no battlefield, so the event has no place.
+cite:
+  - id: sanjian-rising
+    says: The annals record that 管叔 and 蔡叔 suspected 周公, rebelled with 武庚, and were defeated by 周公 on 成王's orders.
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 成王（管叔、蔡叔群弟疑周公）
+    quote: 管叔、蔡叔群弟疑周公，與武庚作亂，畔周。周公奉成王命，伐誅武庚、管叔，放蔡叔。
+  - id: sanjian-three-years
+    says: The annals record that the punitive war took three years to settle.
+    role: supporting
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 成王（三年而畢定）
+    quote: 初，管、蔡畔周，周公討之，三年而畢定，故初作《大誥》，次作《微子之命》，次《歸禾》，次《嘉禾》，次《康誥》、《酒誥》、《梓材》，其事在周公之篇。

@@ -1,0 +1,68 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  紂 flees back into the city, climbs the 鹿臺, puts on his jade and burns himself to death; 武王
+  shoots the body, cuts off the head and hangs it on a white banner. The Bamboo Annals tell a
+  different end: 武王 captured him himself at the terrace of 南單.
+types: [occurrence]
+date:
+  value: 1046 BCE..1027 BCE
+  mode: window
+  calendar: regnal
+  as_written: 甲子日（the day of the battle）
+  cite:
+    - id: di-xin-death-date-1046
+      says: >-
+        The 夏商周斷代工程 dates the conquest to 1046 BCE by astronomical calculation; its 2022 report gives
+        20 January 1046 BCE. This is the window's early end.
+      basis: interpretation
+      attributed_to: 夏商周斷代工程《夏商周斷代工程報告》(2022)
+      source: chinadaily-muye-2023
+      at: paragraphs 1–2
+    - id: di-xin-death-date-1027
+      says: >-
+        The Bamboo Annals count 257 years from 武王's conquest to 幽王. Counted back from 幽王's death in
+        771 BCE, that puts the conquest in 1027 BCE, the window's late end.
+      role: alternative
+      source: guben-zhushu-jinian
+      at: 幽王（自武王滅殷，以至幽王，凡二百五十七年）
+      quote: 自武王滅殷，以至幽王，凡二百五十七年。
+places:
+  - place: chaoge
+    role: site
+participants:
+  - actor: di-xin
+    role: subject
+  - actor: zhou-wu-wang
+    role: participant
+dispute:
+  status: disputed
+  summary: >-
+    The Han annals record that 紂 burned himself on the 鹿臺; the Bamboo Annals record that 武王
+    captured him at the terrace of 南單. The chapter publishes the annals' account and keeps the other.
+cite:
+  - id: di-xin-death-fire
+    says: The annals record that 紂 fled into the city, climbed the 鹿臺 in his jade and died in the fire.
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 武王（紂走，反入登于鹿臺之上）
+    quote: 紂走，反入登于鹿臺之上，蒙衣其殊玉，自燔于火而死。
+  - id: di-xin-death-head
+    says: The 殷 annals record the same death by fire and that 武王 cut off his head and hung it on a white banner.
+    role: supporting
+    source: shiji-yin-zhou
+    at: 卷三 殷本紀 帝辛（入登鹿臺）
+    quote: 紂走，入登鹿臺，衣其寶玉衣，赴火而死。周武王遂斬紂頭，縣之大白旗。
+  - id: di-xin-death-capture
+    says: The Bamboo Annals record that the king himself captured 帝受辛 at the terrace of 南單.
+    role: conflicting
+    source: guben-zhushu-jinian
+    at: 武王（王親禽帝受辛于南單之臺）
+    quote: 王親禽帝受辛于南單之臺，遂分天之明。
+cites:
+  places:
+    - id: di-xin-death-place
+      says: >-
+        The annals name the 鹿臺 inside the 商 city; the historical geography records the 鹿臺 in the
+        north-east of 淇縣, in the old 朝歌.
+      source: dushi-fangyu-jiyao-zhou
+      at: 卷四十九 河南四 衛輝府 淇縣（鹿臺）
+      quote: 鹿臺，在縣東北。劉向曰：「朝歌城中有鹿臺，大三里，高千尺。」

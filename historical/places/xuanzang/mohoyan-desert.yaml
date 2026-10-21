@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  莫賀延磧, the desert of more than eight hundred 里 between the beacons and 伊吾, where 玄奘 lost his water
+  and went four nights and five days without drinking.
+types: [landform]
+names:
+  - form: 莫賀延磧
+    lang: lzh
+    script: Hani
+    roman: Mohoyan Qi
+    scheme: pinyin
+    cite:
+      - id: mohoyan-desert-name
+        says: The biography names 莫賀延磧, more than eight hundred 里 long and called 沙河 of old.
+        source: cien-zhuan
+        at: 卷一（從此已去，即莫賀延磧，長八百餘里）
+        quote: 從此已去，即莫賀延磧，長八百餘里，古曰沙河
+  - form: 沙河
+    lang: lzh
+    script: Hani
+    note: The older name the biography gives.
+    claim: mohoyan-desert-name
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      A desert region whose extent the biography does not state; the record asserts no coordinate or
+      area.
+    cite:
+      - id: mohoyan-desert-unlocated
+        says: The biography names 莫賀延磧 but the cited passages state no site for it.
+        source: cien-zhuan
+        at: 卷一（從此已去，即莫賀延磧，長八百餘里）

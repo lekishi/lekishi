@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 拘尸那揭羅, the desolate city near the 娑羅林 where the Buddha entered nirvāṇa.
+types: [settlement, religious_site]
+names:
+  - form: 拘尸那揭羅
+    lang: lzh
+    script: Hani
+    roman: Jushinajieluo
+    scheme: pinyin
+    cite:
+      - id: kusinagara-name
+        says: The biography records 玄奘 coming out of the forest at 拘尸那揭羅.
+        source: cien-zhuan
+        at: 卷三（出此林已，至拘屍那揭羅國）
+        quote: 出此林已，至拘屍那揭羅國
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [83.8889, 26.7403]
+    notes:
+      Label anchor at Kushinagar as recorded in Wikidata (Q825673). It is not an asserted historical
+      coordinate; the identification of 拘尸那揭羅 with the modern place is the conventional modern reading,
+      not a statement of the cited sources.
+    cite:
+      - id: kusinagara-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q825673 (P625), revision 2554081994
+modern:
+  - form: 拘尸那揭罗
+    lang: zh-Hans
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q825673
+    url: https://www.wikidata.org/wiki/Q825673
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

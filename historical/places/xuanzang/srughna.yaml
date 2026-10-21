@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 窣祿勤那, on the 殑伽河 east of 薩他泥濕伐羅, where 玄奘 spent a winter and half a spring studying with 闍耶鞠多.
+types: [region]
+names:
+  - form: 窣祿勤那
+    lang: lzh
+    script: Hani
+    roman: Suluqinna
+    scheme: pinyin
+    cite:
+      - id: srughna-name
+        says: The biography records 玄奘 staying a winter and half a spring there.
+        source: cien-zhuan
+        at: 卷二（法師遂住一冬半春）
+        quote: 法師遂住一冬半春
+      - id: srughna-xiyu
+        says: The 西域記 opens its account of the country with this sentence.
+        role: supporting
+        source: xiyu-ji
+        at: 卷第四 窣祿勤那國
+        quote: 。
+  - form: 祿勒那
+    lang: lzh
+    script: Hani
+    note: The spelling of this transcription of the biography.
+    claim: srughna-name
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: The cited sources name the kingdom but do not identify its site; the record asserts no coordinate.
+    cite:
+      - id: srughna-unlocated
+        says: The biography names 窣祿勤那 but the cited passages state no site for it.
+        source: cien-zhuan
+        at: 卷二（法師遂住一冬半春）

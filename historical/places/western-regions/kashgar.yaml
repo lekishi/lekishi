@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=../../schema/place.schema.json
-summary: 疏勒, the kingdom at the western end of the northern road where 班超 set up 忠 as king and held 盤橐城 for years. The label anchor sits at the modern 喀什市, the usual identification; it asserts no site of 盤橐城.
+summary: 疏勒, the kingdom at the western end of the northern road where 班超 set up 忠 as king and held 盤橐城 for years. The label anchor sits at the modern 喀什市, the usual identification; it asserts no site of 盤橐城. As 佉沙, it lay north of 烏鎩 on 玄奘's road to 斫句迦.
 types: [region]
 names:
   - form: 疏勒
@@ -13,6 +13,28 @@ names:
         source: hou-hanshu
         at: 卷四十七 班梁列傳 班超（超守盤橐城）
         quote: 超守盤橐城，與忠爲首尾，士吏單少，拒守歲餘。
+  - form: 佉沙
+    lang: lzh
+    script: Hani
+    roman: Qusha
+    scheme: pinyin
+    cite:
+      - id: kashgar-name
+        says: The biography of 玄奘 records him reaching 佉沙.
+        source: cien-zhuan
+        at: 卷五（從此北行五百餘里）
+        quote: 從此北行五百餘里，至怯沙國
+      - id: kashgar-xiyu
+        says: The 西域記 opens its account of the country with this sentence.
+        role: supporting
+        source: xiyu-ji
+        at: 卷十二 佉沙國
+        quote: 佉沙國周五千餘里，多沙磧，少壤土。
+  - form: 怯沙
+    lang: lzh
+    script: Hani
+    note: The spelling of this transcription of the 玄奘 biography.
+    claim: kashgar-name
 at:
   - interpretation: display_anchor
     precision: unspecified
@@ -25,6 +47,11 @@ at:
           historical coordinate is asserted.
         source: wikidata
         at: Q170521 (P625), revision 2550839165
+modern:
+  - form: 喀什市
+    lang: zh-Hant
+    script: Hani
+    note: Modern place recorded for orientation only.
 external_ids:
   - system: wikidata
     id: Q170521

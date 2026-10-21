@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  波吒釐子, 無憂王's capital south of the 殑伽河, by 玄奘's time a small town among ruins, where he stayed
+  seven days at the sites.
+types: [settlement]
+names:
+  - form: 波吒釐子
+    lang: lzh
+    script: Hani
+    roman: Bozhalizi
+    scheme: pinyin
+    cite:
+      - id: pataliputra-name
+        says: The biography records 玄奘 staying seven days at the little town by the old palace.
+        source: cien-zhuan
+        at: 卷三（法師在小城停七日）
+        quote: 法師在小城停七日，巡禮聖跡
+  - form: 拘蘇摩補羅
+    lang: lzh
+    script: Hani
+    note: The older name the biography gives the city.
+    claim: pataliputra-name
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      The ancient city lies under modern Patna, but no anchor could be read from Wikidata on 2026-10-21;
+      the record asserts no coordinate until one is cited.
+    cite:
+      - id: pataliputra-unlocated
+        says: The biography names 波吒釐子 but the cited passages state no site for it.
+        source: cien-zhuan
+        at: 卷三（法師在小城停七日）

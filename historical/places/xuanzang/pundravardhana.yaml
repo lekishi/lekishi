@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 奔那伐彈那, across the 殑伽河 to the east, with the 跋吉婆 monastery.
+types: [region]
+names:
+  - form: 奔那伐彈那
+    lang: lzh
+    script: Hani
+    roman: Bennafadanna
+    scheme: pinyin
+    cite:
+      - id: pundravardhana-name
+        says: The biography records 玄奘 reaching 奔那伐彈那.
+        source: cien-zhuan
+        at: 卷四（自此東度克伽河）
+        quote: 自此東度克伽河，行六百餘里，至奔那伐彈那國
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [89.3428, 24.9611]
+    notes:
+      Label anchor at Mahasthangarh, the archaeological site conventionally identified with the kingdom's
+      capital. It is not an asserted historical coordinate. (Wikidata Q3085127)
+    cite:
+      - id: pundravardhana-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q3085127 (P625), revision 2525909860
+external_ids:
+  - system: wikidata
+    id: Q3085127
+    url: https://www.wikidata.org/wiki/Q3085127
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

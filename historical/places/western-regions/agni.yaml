@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=../../schema/place.schema.json
-summary: 焉耆, the kingdom behind its mountains and the 葦橋 crossing that killed the 都護 陳睦 in 75 CE and that 班超 conquered in 94 CE. The record carries no position, because the cited sources do not locate the royal town 南河城.
+summary: 焉耆, the kingdom behind its mountains and the 葦橋 crossing that killed the 都護 陳睦 in 75 CE and that 班超 conquered in 94 CE. The record carries no position, because the cited sources do not locate the royal town 南河城. As 阿耆尼, its king, resentful of 高昌's raids, refused 玄奘 horses, and 玄奘 stayed one night.
 types: [region]
 names:
   - form: 焉耆
@@ -13,6 +13,23 @@ names:
         source: hou-hanshu
         at: 卷八十八 西域傳 焉耆國
         quote: 焉耆國王居南河城
+  - form: 阿耆尼
+    lang: lzh
+    script: Hani
+    roman: Agni
+    scheme: pinyin
+    cite:
+      - id: agni-name
+        says: The biography of 玄奘 records the king of 阿耆尼 coming out to meet him near his capital.
+        source: cien-zhuan
+        at: 卷二（漸去遙見王都）
+        quote: 漸去遙見王都，阿耆尼王與諸臣來迎
+      - id: agni-xiyu
+        says: The 西域記 opens its account of the country with this sentence.
+        role: supporting
+        source: xiyu-ji
+        at: 卷第一 阿耆尼國
+        quote: 阿耆尼國東西六百餘里，南北四百餘里。
 at:
   - interpretation: unknown
     precision: unspecified

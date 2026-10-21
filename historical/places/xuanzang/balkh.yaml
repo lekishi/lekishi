@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  縛喝, called the little 王舍城, with the 納縛伽藍 and its relics, where 玄奘 read the 毗婆沙論 with 般若羯羅 for
+  more than a month.
+types: [settlement]
+names:
+  - form: 縛喝
+    lang: lzh
+    script: Hani
+    roman: Fuhe
+    scheme: pinyin
+    cite:
+      - id: balkh-name
+        says: The biography records the 設 naming 縛喝, north of the 縛芻河, called the little 王舍城.
+        source: cien-zhuan
+        at: 卷二（弟子所部有縛喝國）
+        quote: 弟子所部有縛喝國，北臨縛芻河，人謂小王舍城
+      - id: balkh-xiyu
+        says: The 西域記 opens its account of the country with this sentence.
+        role: supporting
+        source: xiyu-ji
+        at: 卷第一 縛喝國
+        quote: 縛喝國。東西八百餘里。南北四百餘里。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [66.8989, 36.7581]
+    notes:
+      Label anchor at Balkh as recorded in Wikidata (Q182159). It is not an asserted historical coordinate;
+      the identification of 縛喝 with the modern place is the conventional modern reading, not a statement
+      of the cited sources.
+    cite:
+      - id: balkh-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q182159 (P625), revision 2544486272
+modern:
+  - form: 巴尔赫
+    lang: zh-Hans
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q182159
+    url: https://www.wikidata.org/wiki/Q182159
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

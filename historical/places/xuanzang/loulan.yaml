@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  納縛波, the deserted former kingdom the biography identifies with the land of 樓蘭, the last stop
+  before Tang territory.
+types: [region]
+names:
+  - form: 納縛波
+    lang: lzh
+    script: Hani
+    roman: Nafubo
+    scheme: pinyin
+    cite:
+      - id: loulan-name
+        says: The biography records 玄奘 reaching the old kingdom of 納縛波, the land of 樓蘭.
+        source: cien-zhuan
+        at: 卷五（至納縛波故國）
+        quote: 至納縛波故國，即樓蘭地
+  - form: 樓蘭
+    lang: lzh
+    script: Hani
+    roman: Loulan
+    scheme: pinyin
+    note: The Chinese name the biography gives.
+    claim: loulan-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [89.8406, 40.5276]
+    notes:
+      Label anchor at the Loulan site as Wikidata records it. The biography speaks of a deserted country,
+      not a town, and no historical coordinate is asserted. (Wikidata Q1057551)
+    cite:
+      - id: loulan-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q1057551 (P625), revision 2559344006
+external_ids:
+  - system: wikidata
+    id: Q1057551
+    url: https://www.wikidata.org/wiki/Q1057551
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

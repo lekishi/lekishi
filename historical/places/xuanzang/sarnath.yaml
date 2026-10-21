@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  鹿野伽藍, north-east of 婆羅痆斯, where the Buddha first turned the wheel of the law, with fifteen hundred
+  monks.
+types: [religious_site]
+names:
+  - form: 鹿野伽藍
+    lang: lzh
+    script: Hani
+    roman: Luye Qielan
+    scheme: pinyin
+    cite:
+      - id: sarnath-name
+        says: The biography records 玄奘 crossing the 婆羅痆斯河 to reach the 鹿野伽藍.
+        source: cien-zhuan
+        at: 卷三（渡婆羅痆斯河東北行十餘里）
+        quote: 渡婆羅痆斯河東北行十餘里，至鹿野伽藍
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [83.0214, 25.3811]
+    notes:
+      Label anchor at Sarnath as recorded in Wikidata (Q324394). It is not an asserted historical coordinate;
+      the identification of 鹿野伽藍 with the modern place is the conventional modern reading, not a statement
+      of the cited sources.
+    cite:
+      - id: sarnath-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q324394 (P625), revision 2556327257
+modern:
+  - form: 鹿野苑
+    lang: zh-Hans
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q324394
+    url: https://www.wikidata.org/wiki/Q324394
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

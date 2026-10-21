@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 折摩馱那, the deserted former kingdom the biography identifies with the land of 沮末.
+types: [region]
+names:
+  - form: 折摩馱那
+    lang: lzh
+    script: Hani
+    roman: Zhemotuona
+    scheme: pinyin
+    cite:
+      - id: cherchen-name
+        says: The biography records 玄奘 reaching the old kingdom of 折摩馱那, the land of 沮末.
+        source: cien-zhuan
+        at: 卷五（至折摩馱那故國）
+        quote: 至折摩馱那故國，即沮沫地
+  - form: 沮末
+    lang: lzh
+    script: Hani
+    note: The Chinese name the biography gives.
+    claim: cherchen-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [85.5287, 38.138]
+    notes:
+      Label anchor at Qiemo County as recorded in Wikidata (Q643714). It is not an asserted historical
+      coordinate; the identification of 折摩馱那 with the modern place is the conventional modern reading, not
+      a statement of the cited sources.
+    cite:
+      - id: cherchen-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q643714 (P625), revision 2530165441
+modern:
+  - form: 且末县
+    lang: zh-Hans
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q643714
+    url: https://www.wikidata.org/wiki/Q643714
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

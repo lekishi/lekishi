@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  高昌, the kingdom whose king 麴文泰 brought 玄奘 from 伊吾, kept him by force until he fasted, swore brotherhood
+  with him, and equipped him with letters to twenty-four rulers and to the 葉護可汗.
+types: [capital, settlement]
+names:
+  - form: 高昌
+    lang: lzh
+    script: Hani
+    roman: Gaochang
+    scheme: pinyin
+    cite:
+      - id: gaochang-name
+        says: The biography records 玄奘 reaching the royal city of 高昌 at midnight.
+        source: cien-zhuan
+        at: 卷一（即以其夜半到王城）
+        quote: 即以其夜半到王城
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [89.5206, 42.8468]
+    notes:
+      Label anchor at Gaochang as recorded in Wikidata (Q16078256). It is not an asserted historical
+      coordinate; the identification of 高昌 with the modern place is the conventional modern reading, not
+      a statement of the cited sources.
+    cite:
+      - id: gaochang-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q16078256 (P625), revision 2515980430
+modern:
+  - form: 高昌故城
+    lang: zh-Hans
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q16078256
+    url: https://www.wikidata.org/wiki/Q16078256
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

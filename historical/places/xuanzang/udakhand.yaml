@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  烏鐸迦漢荼城, the town on the 信度河 crossing where, on the way home, 玄奘 lost fifty bundles of sūtras
+  in the river and waited more than fifty days for copies.
+types: [settlement, port]
+names:
+  - form: 烏鐸迦漢荼
+    lang: lzh
+    script: Hani
+    roman: Wuduojiahantu
+    scheme: pinyin
+    cite:
+      - id: udakhand-name
+        says: The biography records the king of 迦畢試 waiting at 烏鐸迦漢茶城 when 玄奘 crossed the river.
+        source: cien-zhuan
+        at: 卷五（時迦畢試王先在烏鐸迦漢茶城）
+        quote: 時迦畢試王先在烏鐸迦漢茶城
+  - form: 烏鐸迦漢茶
+    lang: lzh
+    script: Hani
+    note: The spelling of the return passage in this transcription.
+    claim: udakhand-name
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      The biography places the town at the 信度河 crossing but gives no further location; no modern anchor
+      is used yet and no coordinate is asserted.
+    cite:
+      - id: udakhand-unlocated
+        says: The biography names 烏鐸迦漢荼 but the cited passages state no site for it.
+        source: cien-zhuan
+        at: 卷五（時迦畢試王先在烏鐸迦漢茶城）

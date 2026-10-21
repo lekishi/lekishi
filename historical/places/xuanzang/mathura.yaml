@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 秣菟羅, with the stūpas of the Buddha's disciples that each school venerates.
+types: [settlement]
+names:
+  - form: 秣菟羅
+    lang: lzh
+    script: Hani
+    roman: Motuluo
+    scheme: pinyin
+    cite:
+      - id: mathura-name
+        says: The biography records 玄奘 reaching 秣兔羅.
+        source: cien-zhuan
+        at: 卷二（從此東行五百餘里）
+        quote: 從此東行五百餘里，至秣兔羅國
+      - id: mathura-xiyu
+        says: The 西域記 opens its account of the country with this sentence.
+        role: supporting
+        source: xiyu-ji
+        at: 卷第四 秣菟羅國
+        quote: 。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [77.6737, 27.4924]
+    notes:
+      Label anchor at Mathura as recorded in Wikidata (Q200311). It is not an asserted historical coordinate;
+      the identification of 秣菟羅 with the modern place is the conventional modern reading, not a statement
+      of the cited sources.
+    cite:
+      - id: mathura-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q200311 (P625), revision 2559347183
+modern:
+  - form: 马图拉
+    lang: zh-Hans
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q200311
+    url: https://www.wikidata.org/wiki/Q200311
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

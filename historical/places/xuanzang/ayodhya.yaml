@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 阿踰陀, where 世親 and 無著 taught; 玄奘 took a boat down the 殑伽河 from here and was seized by river pirates.
+types: [settlement]
+names:
+  - form: 阿踰陀
+    lang: lzh
+    script: Hani
+    roman: Ayutuo
+    scheme: pinyin
+    cite:
+      - id: ayodhya-name
+        says: The biography records 玄奘 crossing the 殑伽河 to reach 阿腧陀.
+        source: cien-zhuan
+        at: 卷三（自此東南行六百餘里）
+        quote: 自此東南行六百餘里，渡克伽河，南至阿腧陀國
+      - id: ayodhya-xiyu
+        says: The 西域記 opens its account of the country with this sentence.
+        role: supporting
+        source: xiyu-ji
+        at: 卷第五 阿逾陁國
+        quote: 。
+  - form: 阿腧陀
+    lang: lzh
+    script: Hani
+    note: The spelling of this transcription of the biography.
+    claim: ayodhya-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [82.2044, 26.7992]
+    notes:
+      Label anchor at the modern town of Ayodhya. The identification of 玄奘's 阿踰陀 with it is debated,
+      and no historical coordinate is asserted. (Wikidata Q186040)
+    cite:
+      - id: ayodhya-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q186040 (P625), revision 2559271974
+external_ids:
+  - system: wikidata
+    id: Q186040
+    url: https://www.wikidata.org/wiki/Q186040
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

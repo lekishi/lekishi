@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  羯若鞠闍 (曲女城), the capital of 戒日王 on the 殑伽河, where 玄奘 studied three months on the way east and
+  where 戒日王 later held the great debate assembly.
+types: [capital, settlement]
+names:
+  - form: 羯若鞠闍
+    lang: lzh
+    script: Hani
+    roman: Jieruojushe
+    scheme: pinyin
+    cite:
+      - id: kanyakubja-name
+        says: The biography records 玄奘 reaching 羯若鞠闍.
+        source: cien-zhuan
+        at: 卷二（從此西北行二百里）
+        quote: 從此西北行二百里，至羯若鞠闍國
+      - id: kanyakubja-xiyu
+        says: The 西域記 opens its account of the country with this sentence.
+        role: supporting
+        source: xiyu-ji
+        at: 卷第五 羯若鞠阇國
+        quote: 。
+  - form: 曲女城
+    lang: lzh
+    script: Hani
+    roman: Qunü Cheng
+    scheme: pinyin
+    note: The Chinese name the biography gives.
+    claim: kanyakubja-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [79.922, 27.0313]
+    notes:
+      Label anchor at Kannauj as recorded in Wikidata (Q614890). It is not an asserted historical coordinate;
+      the identification of 羯若鞠闍 with the modern place is the conventional modern reading, not a statement
+      of the cited sources.
+    cite:
+      - id: kanyakubja-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q614890 (P625), revision 2550646321
+modern:
+  - form: 根瑙杰
+    lang: zh-Hans
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q614890
+    url: https://www.wikidata.org/wiki/Q614890
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  伊爛拏缽伐多, where a neighbouring king had given the capital to the monks; 玄奘 stayed a year there
+  reading the 毗婆沙 and 順正理.
+types: [region]
+names:
+  - form: 伊爛拏
+    lang: lzh
+    script: Hani
+    roman: Yilanna
+    scheme: pinyin
+    cite:
+      - id: hiranyaparvata-name
+        says: The biography records 玄奘 reaching 伊爛拏.
+        source: cien-zhuan
+        at: 卷三（自此漸去至伊爛孥國）
+        quote: 自此漸去至伊爛孥國
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [86.465, 25.381]
+    notes:
+      Label anchor at the modern town of Munger, the conventional identification. It is not an asserted
+      historical coordinate. (Wikidata Q36796)
+    cite:
+      - id: hiranyaparvata-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q36796 (P625), revision 2536204490
+external_ids:
+  - system: wikidata
+    id: Q36796
+    url: https://www.wikidata.org/wiki/Q36796
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

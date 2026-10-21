@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  活國, south of the 縛芻河, seat of the 葉護可汗's eldest son 呾度設, husband of the king of 高昌's sister;
+  玄奘 stayed there twice.
+types: [settlement]
+names:
+  - form: 活國
+    lang: lzh
+    script: Hani
+    roman: Huoguo
+    scheme: pinyin
+    cite:
+      - id: kunduz-name
+        says: The biography records 玄奘 crossing the 縛芻河 to reach 活國.
+        source: cien-zhuan
+        at: 卷二（自此數百里渡縛芻河）
+        quote: 自此數百里渡縛芻河，至活國
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [68.8569, 36.7289]
+    notes:
+      Label anchor at Kunduz as recorded in Wikidata (Q108155). It is not an asserted historical coordinate;
+      the identification of 活國 with the modern place is the conventional modern reading, not a statement
+      of the cited sources.
+    cite:
+      - id: kunduz-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q108155 (P625), revision 2546707994
+modern:
+  - form: 昆都士
+    lang: zh-Hans
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q108155
+    url: https://www.wikidata.org/wiki/Q108155
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

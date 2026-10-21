@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  闍爛達那, where 玄奘 studied four months with 旃達羅伐摩 on the way east and, on the way home, the royal
+  seat of 烏地多 where he stayed a month.
+types: [settlement]
+names:
+  - form: 闍爛達那
+    lang: lzh
+    script: Hani
+    roman: Shelandana
+    scheme: pinyin
+    cite:
+      - id: jalandhara-name
+        says: The biography records 玄奘 reaching 闍爛連那.
+        source: cien-zhuan
+        at: 卷二（從此東北行百四五十里）
+        quote: 從此東北行百四五十里，至闍爛連那國
+      - id: jalandhara-xiyu
+        says: The 西域記 opens its account of the country with this sentence.
+        role: supporting
+        source: xiyu-ji
+        at: 卷第四 阇爛達羅國
+        quote: 。
+  - form: 闍蘭逢
+    lang: lzh
+    script: Hani
+    note: The spelling of the return passage in this transcription.
+    claim: jalandhara-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [75.5792, 31.3256]
+    notes:
+      Label anchor at Jalandhar as recorded in Wikidata (Q33377). It is not an asserted historical
+      coordinate; the identification of 闍爛達那 with the modern place is the conventional modern reading, not
+      a statement of the cited sources.
+    cite:
+      - id: jalandhara-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q33377 (P625), revision 2558870333
+modern:
+  - form: 贾朗达尔
+    lang: zh-Hans
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q33377
+    url: https://www.wikidata.org/wiki/Q33377
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

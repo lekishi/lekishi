@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 耽摩栗底, the port by the sea where 玄奘 meant to sail for 僧伽羅 and was persuaded to go overland instead.
+types: [port, settlement]
+names:
+  - form: 耽摩栗底
+    lang: lzh
+    script: Hani
+    roman: Danmolidi
+    scheme: pinyin
+    cite:
+      - id: tamralipti-name
+        says: The biography records 玄奘 reaching 耽摩栗底.
+        source: cien-zhuan
+        at: 卷四（自此三摩怛吒國西行九百餘里）
+        quote: 自此三摩怛吒國西行九百餘里，至耽摩栗底國
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [87.9167, 22.3]
+    notes:
+      Label anchor at Tamluk as recorded in Wikidata (Q118278). It is not an asserted historical coordinate;
+      the identification of 耽摩栗底 with the modern place is the conventional modern reading, not a statement
+      of the cited sources.
+    cite:
+      - id: tamralipti-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q118278 (P625), revision 2554048298
+modern:
+  - form: 坦姆卢克
+    lang: zh-Hans
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q118278
+    url: https://www.wikidata.org/wiki/Q118278
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

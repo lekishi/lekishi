@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 姑栗陀羅矩吒山 (鷲峰), north-east of the palace city of 王舍城, where the Buddha preached the 法華.
+types: [landform, religious_site]
+names:
+  - form: 鷲峰
+    lang: lzh
+    script: Hani
+    roman: Jiufeng
+    scheme: pinyin
+    cite:
+      - id: vulture-peak-name
+        says: The biography records the 鷲峰 fourteen or fifteen 里 north-east of the palace city.
+        source: cien-zhuan
+        at: 卷三（宮城東北行十四五里）
+        quote: 宮城東北行十四五里，至姑栗陀羅矩吒山
+  - form: 耆闍崛山
+    lang: lzh
+    script: Hani
+    roman: Qisheju Shan
+    scheme: pinyin
+    note: The older name, which the biography calls a corruption.
+    claim: vulture-peak-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [85.4464, 25.0017]
+    notes:
+      Label anchor at Vulture Peak as recorded in Wikidata (Q19755572). It is not an asserted historical
+      coordinate; the identification of 鷲峰 with the modern place is the conventional modern reading, not
+      a statement of the cited sources.
+    cite:
+      - id: vulture-peak-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q19755572 (P625), revision 2522242943
+external_ids:
+  - system: wikidata
+    id: Q19755572
+    url: https://www.wikidata.org/wiki/Q19755572
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

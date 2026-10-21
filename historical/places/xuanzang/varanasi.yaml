@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 婆羅痆斯, on the 殑伽河, with thirty monasteries.
+types: [settlement]
+names:
+  - form: 婆羅痆斯
+    lang: lzh
+    script: Hani
+    roman: Poluonisi
+    scheme: pinyin
+    cite:
+      - id: varanasi-name
+        says: The biography records 玄奘 reaching 婆羅痆斯 through a great forest.
+        source: cien-zhuan
+        at: 卷三（從此複大林中經五百餘里）
+        quote: 從此複大林中經五百餘里，至婆羅痆
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [83.0128, 25.3189]
+    notes:
+      Label anchor at Varanasi as recorded in Wikidata (Q79980). It is not an asserted historical coordinate;
+      the identification of 婆羅痆斯 with the modern place is the conventional modern reading, not a statement
+      of the cited sources.
+    cite:
+      - id: varanasi-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q79980 (P625), revision 2559348666
+modern:
+  - form: 瓦拉纳西
+    lang: zh-Hans
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q79980
+    url: https://www.wikidata.org/wiki/Q79980
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

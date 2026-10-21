@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  沙州 (敦煌), the first Tang prefecture on the way home, from which 玄奘 sent a second memorial to the
+  emperor at 洛陽.
+types: [settlement]
+names:
+  - form: 沙州
+    lang: lzh
+    script: Hani
+    roman: Shazhou
+    scheme: pinyin
+    cite:
+      - id: shazhou-name
+        says: The biography records 玄奘 reaching 沙州 and sending another memorial.
+        source: cien-zhuan
+        at: 卷五（既至沙州，又附表）
+        quote: 既至沙州，又附表
+  - form: 燉煌
+    lang: lzh
+    script: Hani
+    roman: Dunhuang
+    scheme: pinyin
+    note: The name the biography uses for the commandery in 卷一.
+    claim: shazhou-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [94.6639, 40.1411]
+    notes:
+      Label anchor at Dunhuang as recorded in Wikidata (Q319114). It is not an asserted historical
+      coordinate; the identification of 沙州 with the modern place is the conventional modern reading, not
+      a statement of the cited sources.
+    cite:
+      - id: shazhou-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q319114 (P625), revision 2526610342
+modern:
+  - form: 敦煌市
+    lang: zh-Hans
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q319114
+    url: https://www.wikidata.org/wiki/Q319114
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

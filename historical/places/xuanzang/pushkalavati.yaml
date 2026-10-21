@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  布色羯邏伐底城, across a great river north-east of 迦膩色迦's monastery, with stūpas the biography attributes
+  to 無憂王.
+types: [settlement]
+names:
+  - form: 布色羯邏伐底
+    lang: lzh
+    script: Hani
+    roman: Busejieluofadi
+    scheme: pinyin
+    cite:
+      - id: pushkalavati-name
+        says: The biography records 玄奘 crossing a great river to 布色羯邏伐底城.
+        source: cien-zhuan
+        at: 卷二（渡大河至布色羯邏伐底城）
+        quote: 渡大河至布色羯邏伐底城
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [71.736, 34.168]
+    notes:
+      Label anchor at Pushkalavati as recorded in Wikidata (Q625407). It is not an asserted historical
+      coordinate; the identification of 布色羯邏伐底 with the modern place is the conventional modern reading,
+      not a statement of the cited sources.
+    cite:
+      - id: pushkalavati-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q625407 (P625), revision 2546869923
+external_ids:
+  - system: wikidata
+    id: Q625407
+    url: https://www.wikidata.org/wiki/Q625407
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

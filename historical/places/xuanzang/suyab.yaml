@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  素葉城, where 玄奘 met the 葉護可汗 of the Turks out hunting, was received in his great tent, and was
+  given an interpreter and letters for the road to 迦畢試.
+types: [settlement]
+names:
+  - form: 素葉城
+    lang: lzh
+    script: Hani
+    roman: Suye Cheng
+    scheme: pinyin
+    cite:
+      - id: suyab-name
+        says: The biography records 玄奘 following the lake north-west to 素葉城 and meeting the 葉護可汗 there.
+        source: cien-zhuan
+        at: 卷二（循海西北行五百餘里）
+        quote: 循海西北行五百餘里，至素葉城，逢突厥葉護可汗
+  - form: 碎葉
+    lang: lzh
+    script: Hani
+    roman: Suiye
+    scheme: pinyin
+    note: The Tang name for the city, recorded for search.
+    claim: suyab-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [75.2667, 42.8]
+    notes:
+      Label anchor at Suyab as recorded in Wikidata (Q413452). It is not an asserted historical coordinate;
+      the identification of 素葉城 with the modern place is the conventional modern reading, not a statement
+      of the cited sources.
+    cite:
+      - id: suyab-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q413452 (P625), revision 2535761047
+external_ids:
+  - system: wikidata
+    id: Q413452
+    url: https://www.wikidata.org/wiki/Q413452
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  凌山, the glaciated northern spur of the 蔥嶺 that took seven days to cross; the biography says three
+  or four in ten of the party froze to death.
+types: [landform]
+names:
+  - form: 凌山
+    lang: lzh
+    script: Hani
+    roman: Lingshan
+    scheme: pinyin
+    cite:
+      - id: bedel-pass-name
+        says: The biography names 凌山 as the northern corner of the 蔥嶺.
+        source: cien-zhuan
+        at: 卷二（至淩山，即蔥嶺北隅也）
+        quote: 至淩山，即蔥嶺北隅也
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [78.4083, 41.4083]
+    notes:
+      Label anchor at the Bedel Pass, the crossing conventionally identified with 凌山 in modern readings.
+      The identification is not the biography's, and no route over the range is asserted. (Wikidata Q2330389)
+    cite:
+      - id: bedel-pass-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q2330389 (P625), revision 2439418558
+external_ids:
+  - system: wikidata
+    id: Q2330389
+    url: https://www.wikidata.org/wiki/Q2330389
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

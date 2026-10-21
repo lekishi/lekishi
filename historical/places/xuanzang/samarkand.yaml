@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 颯秣建 (康國), whose fire-worshipping king received 玄奘 coldly and, after hearing him, took the precepts.
+types: [capital, settlement]
+names:
+  - form: 颯秣建
+    lang: lzh
+    script: Hani
+    roman: Samojian
+    scheme: pinyin
+    cite:
+      - id: samarkand-name
+        says: The biography records 玄奘 reaching 颯秣建 across the desert.
+        source: cien-zhuan
+        at: 卷二（五百餘里，至颯秣建國）
+        quote: 五百餘里，至颯秣建國
+      - id: samarkand-xiyu
+        says: The 西域記 opens its account of the country with this sentence.
+        role: supporting
+        source: xiyu-ji
+        at: 卷第一 颯秣建國
+        quote: 颯秣建國。周千六七百里。東西長南北狹。
+  - form: 康國
+    lang: lzh
+    script: Hani
+    roman: Kangguo
+    scheme: pinyin
+    note: The Chinese name the biography gives.
+    claim: samarkand-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [66.9758, 39.6547]
+    notes:
+      Label anchor at Samarkand as recorded in Wikidata (Q5753). It is not an asserted historical coordinate;
+      the identification of 颯秣建 with the modern place is the conventional modern reading, not a statement
+      of the cited sources.
+    cite:
+      - id: samarkand-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q5753 (P625), revision 2532334582
+modern:
+  - form: 撒马尔罕
+    lang: zh-Hans
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q5753
+    url: https://www.wikidata.org/wiki/Q5753
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

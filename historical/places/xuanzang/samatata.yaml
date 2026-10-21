@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 三摩呾吒, by the sea, from where 玄奘 heard of six countries further east he did not visit.
+types: [region]
+names:
+  - form: 三摩呾吒
+    lang: lzh
+    script: Hani
+    roman: Sanmodazha
+    scheme: pinyin
+    cite:
+      - id: samatata-name
+        says: The biography records 玄奘 reaching 三摩呾吒 by the sea.
+        source: cien-zhuan
+        at: 卷四（從此東南出至三摩怛吒國）
+        quote: 從此東南出至三摩怛吒國
+  - form: 三摩怛吒
+    lang: lzh
+    script: Hani
+    note: The spelling of this transcription of the biography.
+    claim: samatata-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [91, 23.5]
+    notes:
+      Label anchor at Samatata as recorded in Wikidata (Q3470658). It is not an asserted historical
+      coordinate; the identification of 三摩呾吒 with the modern place is the conventional modern reading, not
+      a statement of the cited sources.
+    cite:
+      - id: samatata-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q3470658 (P625), revision 2533283370
+external_ids:
+  - system: wikidata
+    id: Q3470658
+    url: https://www.wikidata.org/wiki/Q3470658
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

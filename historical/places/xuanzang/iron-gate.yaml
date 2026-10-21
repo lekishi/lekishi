@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  鐵門, the defile with iron-hung gates that the biography calls the Turks' frontier pass, on the
+  road south to 睹貨羅.
+types: [fortification, landform]
+names:
+  - form: 鐵門
+    lang: lzh
+    script: Hani
+    roman: Tiemen
+    scheme: pinyin
+    cite:
+      - id: iron-gate-name
+        says: The biography records 玄奘 entering 鐵門 after three hundred 里 in the mountains.
+        source: cien-zhuan
+        at: 卷二（山行三百餘里）
+        quote: 山行三百餘里，入鐵門
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [66.9068, 38.2216]
+    notes:
+      Label anchor at Iron Gate as recorded in Wikidata (Q3399252). It is not an asserted historical
+      coordinate; the identification of 鐵門 with the modern place is the conventional modern reading, not
+      a statement of the cited sources.
+    cite:
+      - id: iron-gate-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q3399252 (P625), revision 2541683576
+external_ids:
+  - system: wikidata
+    id: Q3399252
+    url: https://www.wikidata.org/wiki/Q3399252
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

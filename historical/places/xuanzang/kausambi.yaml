@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  憍賞彌, with the sandalwood image of 鄔陀衍那王; 玄奘 visited it going east and again seven days after
+  leaving 缽羅耶伽 on the way home.
+types: [settlement]
+names:
+  - form: 憍賞彌
+    lang: lzh
+    script: Hani
+    roman: Jiaoshangmi
+    scheme: pinyin
+    cite:
+      - id: kausambi-name
+        says: The biography records 玄奘 reaching 憍賞彌 through a great forest.
+        source: cien-zhuan
+        at: 卷三（經五百餘里，至懦賞彌國）
+        quote: 經五百餘里，至懦賞彌國
+      - id: kausambi-xiyu
+        says: The 西域記 opens its account of the country with this sentence.
+        role: supporting
+        source: xiyu-ji
+        at: 卷第五 憍賞彌國
+        quote: 憍賞彌國周六千餘里。國大都城周三十餘里。
+  - form: 懦賞彌
+    lang: lzh
+    script: Hani
+    note: The spelling of this transcription of the biography.
+    claim: kausambi-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [81.3929, 25.339]
+    notes:
+      Label anchor at Kauśāmbī as recorded in Wikidata (Q1194868). It is not an asserted historical
+      coordinate; the identification of 憍賞彌 with the modern place is the conventional modern reading, not
+      a statement of the cited sources.
+    cite:
+      - id: kausambi-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q1194868 (P625), revision 2553990498
+external_ids:
+  - system: wikidata
+    id: Q1194868
+    url: https://www.wikidata.org/wiki/Q1194868
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 室羅伐悉底 (舍衛), the city of 勝軍王 with the 逝多林, the 給孤獨園, in ruins.
+types: [settlement, religious_site]
+names:
+  - form: 室羅伐悉底
+    lang: lzh
+    script: Hani
+    roman: Shiluofaxidi
+    scheme: pinyin
+    cite:
+      - id: sravasti-name
+        says: The biography records 玄奘 reaching 室羅伐悉底.
+        source: cien-zhuan
+        at: 卷三（從此東北行五百餘里）
+        quote: 從此東北行五百餘里，至室羅伐悉底國
+  - form: 舍衛
+    lang: lzh
+    script: Hani
+    roman: Shewei
+    scheme: pinyin
+    note: The older name, which the biography calls a corruption.
+    claim: sravasti-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [82.0506, 27.5171]
+    notes:
+      Label anchor at Shravasti as recorded in Wikidata (Q2594448). It is not an asserted historical
+      coordinate; the identification of 室羅伐悉底 with the modern place is the conventional modern reading,
+      not a statement of the cited sources.
+    cite:
+      - id: sravasti-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q2594448 (P625), revision 2541565822
+modern:
+  - form: 舍卫城
+    lang: zh-Hans
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q2594448
+    url: https://www.wikidata.org/wiki/Q2594448
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

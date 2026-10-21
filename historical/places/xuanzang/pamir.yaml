@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 波謎羅川, the high valley in the middle of the 蔥嶺, a thousand 里 from east to west, with a great lake.
+types: [landform]
+names:
+  - form: 波謎羅川
+    lang: lzh
+    script: Hani
+    roman: Bomiluo Chuan
+    scheme: pinyin
+    cite:
+      - id: pamir-name
+        says: The biography records 玄奘 reaching the 波謎羅川.
+        source: cien-zhuan
+        at: 卷五（從此複東山行七百餘里）
+        quote: 從此複東山行七百餘里，至波謎羅川
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [71.9998, 39.0019]
+    notes:
+      Label anchor at the Pamir range as Wikidata records it; the valley and its lake are not placed.
+      (Wikidata Q161750)
+    cite:
+      - id: pamir-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q161750 (P625), revision 2548099967
+external_ids:
+  - system: wikidata
+    id: Q161750
+    url: https://www.wikidata.org/wiki/Q161750
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

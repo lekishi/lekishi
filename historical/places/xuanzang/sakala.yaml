@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  奢羯羅, the old city of 磔迦 where 世親 wrote the 勝義諦論; beyond it, in the 波羅奢 forest, robbers stripped
+  玄奘's party.
+types: [settlement]
+names:
+  - form: 奢羯羅
+    lang: lzh
+    script: Hani
+    roman: Shejieluo
+    scheme: pinyin
+    cite:
+      - id: sakala-name
+        says: The biography records 玄奘 reaching 奢羯羅城.
+        source: cien-zhuan
+        at: 卷二（後日進到奢羯羅城）
+        quote: 後日進到奢羯羅城
+      - id: sakala-xiyu
+        says: The 西域記 opens its account of the country with this sentence.
+        role: supporting
+        source: xiyu-ji
+        at: 卷第四 磔迦國
+        quote: 。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [74.5333, 32.5]
+    notes:
+      Label anchor at Sialkot as recorded in Wikidata (Q643883). It is not an asserted historical coordinate;
+      the identification of 奢羯羅 with the modern place is the conventional modern reading, not a statement
+      of the cited sources.
+    cite:
+      - id: sakala-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q643883 (P625), revision 2537606936
+external_ids:
+  - system: wikidata
+    id: Q643883
+    url: https://www.wikidata.org/wiki/Q643883
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 吠舍釐, the ruined city of 毗摩羅詰.
+types: [settlement, religious_site]
+names:
+  - form: 吠舍釐
+    lang: lzh
+    script: Hani
+    roman: Feisheli
+    scheme: pinyin
+    cite:
+      - id: vaisali-name
+        says: The biography records 玄奘 crossing the 殑伽河 to reach 吠舍釐.
+        source: cien-zhuan
+        at: 卷三（從此東北渡克伽河行百四五十里）
+        quote: 從此東北渡克伽河行百四五十里，至吠舍厘國
+  - form: 吠舍厘
+    lang: lzh
+    script: Hani
+    note: The spelling of this transcription of the biography.
+    claim: vaisali-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [85.1256, 25.9866]
+    notes:
+      Label anchor at Vaishali as recorded in Wikidata (Q1509463). It is not an asserted historical
+      coordinate; the identification of 吠舍釐 with the modern place is the conventional modern reading, not
+      a statement of the cited sources.
+    cite:
+      - id: vaisali-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q1509463 (P625), revision 2536208042
+external_ids:
+  - system: wikidata
+    id: Q1509463
+    url: https://www.wikidata.org/wiki/Q1509463
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

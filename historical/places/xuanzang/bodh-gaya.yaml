@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The 菩提樹 and the 金剛座, where the Buddha attained enlightenment; 玄奘 arrived as the rains retreat
+  ended and stayed eight or nine days.
+types: [religious_site]
+names:
+  - form: 菩提樹
+    lang: lzh
+    script: Hani
+    roman: Puti Shu
+    scheme: pinyin
+    cite:
+      - id: bodh-gaya-name
+        says: The biography records 玄奘 going south to the 菩提樹.
+        source: cien-zhuan
+        at: 卷三（從此又南行百餘里）
+        quote: 從此又南行百餘里，到菩提樹
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [84.9914, 24.696]
+    notes:
+      Label anchor at the Mahābodhi temple, the site of the 菩提樹 today. It is not an asserted historical
+      coordinate. (Wikidata Q4513)
+    cite:
+      - id: bodh-gaya-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q4513 (P625), revision 2556210404
+modern:
+  - form: 摩诃菩提寺
+    lang: zh-Hans
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q4513
+    url: https://www.wikidata.org/wiki/Q4513
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

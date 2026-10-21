@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 伐臘毗, whose king 杜魯婆跋吒 was a son-in-law of 戒日王.
+types: [settlement]
+names:
+  - form: 伐臘毗
+    lang: lzh
+    script: Hani
+    roman: Falapi
+    scheme: pinyin
+    cite:
+      - id: valabhi-name
+        says: The biography records 玄奘 reaching 伐臘毗.
+        source: cien-zhuan
+        at: 卷四（自此北行千餘里）
+        quote: 自此北行千餘里，至伐臘毗國
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [71.8795, 21.8878]
+    notes:
+      Label anchor at Vallabhi as recorded in Wikidata (Q2772307). It is not an asserted historical
+      coordinate; the identification of 伐臘毗 with the modern place is the conventional modern reading, not
+      a statement of the cited sources.
+    cite:
+      - id: valabhi-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q2772307 (P625), revision 2523949222
+external_ids:
+  - system: wikidata
+    id: Q2772307
+    url: https://www.wikidata.org/wiki/Q2772307
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

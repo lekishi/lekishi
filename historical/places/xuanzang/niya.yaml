@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 泥壤城, at the edge of the 流沙 east of 媲摩.
+types: [settlement]
+names:
+  - form: 泥壤
+    lang: lzh
+    script: Hani
+    roman: Nirang
+    scheme: pinyin
+    cite:
+      - id: niya-name
+        says: The biography records 玄奘 reaching 泥壤城 across the desert from 媲摩.
+        source: cien-zhuan
+        at: 卷五（從媲摩城入沙磧）
+        quote: 從媲摩城入沙磧，行二百餘里，至泥壤城
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [82.7719, 37.8227]
+    notes:
+      Label anchor at Niya ruins as recorded in Wikidata (Q1329268). It is not an asserted historical
+      coordinate; the identification of 泥壤 with the modern place is the conventional modern reading, not
+      a statement of the cited sources.
+    cite:
+      - id: niya-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q1329268 (P625), revision 2515901668
+modern:
+  - form: 尼雅遺址
+    lang: zh-Hans
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q1329268
+    url: https://www.wikidata.org/wiki/Q1329268
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

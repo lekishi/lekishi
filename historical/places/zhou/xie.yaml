@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  攜, where the Bamboo Annals say 虢公翰 made 王子餘臣 king after 幽王's death, so that two 周 kings
+  reigned at once. The text gives no position, and the record asserts none.
+types: [other]
+names:
+  - form: 攜
+    lang: lzh
+    script: Hani
+    roman: Xie
+    scheme: pinyin
+    cite:
+      - id: xie-name
+        says: The Bamboo Annals record that 虢公翰 made 王子餘臣 king at 攜.
+        source: guben-zhushu-jinian
+        at: 晉紀 文侯 十年（虢公翰又立王子餘臣于攜）
+        quote: 幽王既死，而虢公翰又立王子餘臣于攜，周二王並立。
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: The entry names 攜 only, and the geographies cited here do not identify it.
+    cite:
+      - id: xie-unknown
+        says: The cited entry names 攜 and states no position.
+        source: guben-zhushu-jinian
+        at: 晉紀 文侯 十年（虢公翰又立王子餘臣于攜）
+notes: Typed other because the entry does not say whether 攜 was a city or a district.

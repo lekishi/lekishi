@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  伯服, the son of 幽王 and 褒姒, made heir in place of 宜臼. The Bamboo Annals call him 伯盤 and say he died
+  with his father at 戲.
+types: [person]
+names:
+  - form: 伯服
+    lang: lzh
+    script: Hani
+    roman: Bo Fu
+    scheme: pinyin
+    cite:
+      - id: bo-fu-name
+        says: The annals record that 褒姒 bore 伯服 and that 幽王 wanted to set the heir aside.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 幽王 三年（褒姒生子伯服）
+        quote: 褒姒生子伯服，幽王欲廢太子。
+  - form: 伯盤
+    lang: lzh
+    script: Hani
+    note: The Bamboo Annals' name for him.
+    cite:
+      - id: bo-fu-bopan
+        says: The Bamboo Annals record that 伯盤 and 幽王 died together at 戲.
+        source: guben-zhushu-jinian
+        at: 晉紀 文侯 十年（伯盤與幽王倶死于戲）
+        quote: 伯盤與幽王倶死于戲。

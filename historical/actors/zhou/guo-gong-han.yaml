@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  虢公翰, the lord of 虢 who, after 幽王's death, made 王子餘臣 king at 攜 against 平王, as the Bamboo Annals
+  record.
+types: [person]
+names:
+  - form: 虢公翰
+    lang: lzh
+    script: Hani
+    roman: Guo Gong Han
+    scheme: pinyin
+    cite:
+      - id: guo-gong-han-name
+        says: The Bamboo Annals record that 虢公翰 made 王子餘臣 king at 攜, so that two kings reigned.
+        source: guben-zhushu-jinian
+        at: 晉紀 文侯 十年（虢公翰又立王子餘臣于攜）
+        quote: 幽王既死，而虢公翰又立王子餘臣于攜，周二王並立。
+roles:
+  - role: ruler
+    note: Lord of 虢.
+    cite:
+      - id: guo-gong-han-role
+        says: The Bamboo Annals record that 虢公翰 made 王子餘臣 king at 攜, so that two kings reigned.
+        source: guben-zhushu-jinian
+        at: 晉紀 文侯 十年（虢公翰又立王子餘臣于攜）

@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  戲, where the Bamboo Annals say 幽王 and his heir 伯盤 died together. The historical geography
+  puts the 戲 river thirty 里 east of 臨潼, flowing from 驪山 past the 戲 pavilion to the 渭; the
+  record asserts no point.
+types: [other]
+names:
+  - form: 戲
+    lang: lzh
+    script: Hani
+    roman: Xi
+    scheme: pinyin
+    cite:
+      - id: xi-name
+        says: The Bamboo Annals record that 伯盤 and 幽王 died together at 戲.
+        source: guben-zhushu-jinian
+        at: 晉紀 文侯 十年（伯盤與幽王倶死于戲）
+        quote: 伯盤與幽王倶死于戲。
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: >-
+      The geography locates the 戲 river and the 戲 pavilion east of 臨潼 but gives no coordinate,
+      and the Bamboo Annals do not say whether 戲 means the river or the pavilion.
+    cite:
+      - id: xi-river
+        says: The historical geography places the 戲 river thirty 里 east of 臨潼, rising at 驪山 and flowing past the 戲 pavilion into the 渭.
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷五十三 陝西二 西安府 臨潼縣（戲水）
+        quote: 戲水，縣東三十里。源出驪山鴻谷，東經戲亭，北入渭。
+notes: >-
+  Typed other because 戲 may be the river or the pavilion beside it. 潘岳's 西征賦, as the geography
+  quotes it, joins the two accounts: the army broke on the 戲 and the king died north of 驪山.

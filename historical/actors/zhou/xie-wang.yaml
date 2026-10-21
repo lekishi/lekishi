@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  攜王, 王子餘臣, the rival king set up at 攜 by 虢公翰 after 幽王's death, who reigned beside 平王 until 晉文侯
+  killed him in the twenty-first year of 晉文侯, 760 BCE. Only the Bamboo Annals record him.
+types: [person]
+names:
+  - form: 攜王
+    lang: lzh
+    script: Hani
+    roman: Xie Wang
+    scheme: pinyin
+    cite:
+      - id: xie-wang-name
+        says: The Bamboo Annals record that 攜王 was killed by the lord of 晉.
+        source: guben-zhushu-jinian
+        at: 晉紀 文侯 二十一年（攜王爲晉文公所殺）
+        quote: 攜王爲晉文公所殺。
+  - form: 王子餘臣
+    lang: lzh
+    script: Hani
+    note: His name before he was made king.
+    cite:
+      - id: xie-wang-yuchen
+        says: The Bamboo Annals record that 虢公翰 made 王子餘臣 king at 攜.
+        source: guben-zhushu-jinian
+        at: 晉紀 文侯 十年（虢公翰又立王子餘臣于攜）
+        quote: 幽王既死，而虢公翰又立王子餘臣于攜，周二王並立。
+roles:
+  - role: ruler
+    note: A rival 周 king, 771 to 760 BCE.
+    cite:
+      - id: xie-wang-role
+        says: The Bamboo Annals record that two 周 kings reigned at once.
+        source: guben-zhushu-jinian
+        at: 晉紀 文侯 十年（周二王並立）

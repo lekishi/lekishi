@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  平王, 宜臼, the son of 幽王 and his queen from 申, set aside as heir, made king by 申侯 and the lords after
+  his father's death, and the king who moved the 周 court east to 雒邑 in 770 BCE.
+types: [person]
+names:
+  - form: 平王
+    lang: lzh
+    script: Hani
+    roman: Ping Wang
+    scheme: pinyin
+    cite:
+      - id: zhou-ping-wang-name
+        says: The annals record that the lords joined 申侯 in making 幽王's former heir 宜臼 king, as 平王.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 幽王（共立故幽王太子宜臼，是為平王）
+        quote: 於是諸侯乃即申侯而共立故幽王太子宜臼，是為平王，以奉周祀。
+  - form: 宜臼
+    lang: lzh
+    script: Hani
+    note: His personal name.
+    cite:
+      - id: zhou-ping-wang-yijiu
+        says: The annals record that 幽王 wanted to set aside the queen from 申 and the heir 宜臼.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 幽王 三年（并去太子宜臼）
+        quote: 欲廢申后，并去太子宜臼，以褒姒為后，以伯服為太子。
+roles:
+  - role: ruler
+    note: King of 周 from 770 BCE.
+    cite:
+      - id: zhou-ping-wang-role
+        says: The annals record that 平王 moved east to 雒邑 on his accession, to escape the 戎.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 平王（平王立，東遷于雒邑）
+        quote: 平王立，東遷于雒邑，辟戎寇。

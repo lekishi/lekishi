@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  申, the state of 平王's mother, where the Bamboo Annals say 宜臼 fled and was made king, and whose
+  lord led the 犬戎 against 幽王. The Bamboo Annals call it 西申; the historical geography puts the
+  周 state of 申 at 南陽. The record asserts no position.
+types: [region]
+names:
+  - form: 申
+    lang: lzh
+    script: Hani
+    roman: Shen
+    scheme: pinyin
+    cite:
+      - id: shen-name
+        says: The Bamboo Annals record that 申侯, 魯侯 and 許文公 made 平王 king at 申.
+        source: guben-zhushu-jinian
+        at: 晉紀 文侯 十年（立平王于申）
+        quote: 先是申侯、魯侯及許文公立平王于申
+  - form: 西申
+    lang: lzh
+    script: Hani
+    note: The Bamboo Annals' name for the 申 to which 平王 fled.
+    cite:
+      - id: shen-xi
+        says: The Bamboo Annals record that 平王 fled to 西申.
+        source: guben-zhushu-jinian
+        at: 晉紀 文侯 七年（平王奔西申）
+        quote: 平王奔西申。
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: >-
+      The historical geography identifies the 周 state of 申 with 南陽, but the Bamboo Annals' 西申
+      implies a western 申 distinct from it, and neither text places the one 平王 fled to.
+    cite:
+      - id: shen-nanyang
+        says: The historical geography identifies the 南陽 county seat as the 周 state of 申, later taken by 楚.
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷五十一 河南六 南陽府 南陽縣（周申國）
+        quote: 南陽縣，附郭。周申國。楚文王滅申，爲楚邑。
+notes: >-
+  Typed region because 申 names a state's land, not a city; recorded as a place because the
+  enthronement is drawn there. Whether there were one or two 申 is a question of later scholarship,
+  none of which is adopted here.

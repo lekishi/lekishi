@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  桓公, 友, a younger son of 周厲王 enfeoffed at 鄭, who served 幽王 as 司徒, moved his people east of 雒, and
+  was killed with 幽王 by the 犬戎.
+types: [person]
+names:
+  - form: 鄭桓公
+    lang: lzh
+    script: Hani
+    roman: Zheng Huan Gong
+    scheme: pinyin
+    cite:
+      - id: zheng-huan-gong-name
+        says: The 鄭 house records that 鄭桓公友 was the youngest son of 周厲王 and a younger half-brother of 宣王.
+        source: shiji-chunqiu
+        at: 卷四十二 鄭世家 桓公（鄭桓公友者）
+        quote: 鄭桓公友者，周厲王少子而宣王庶弟也。
+roles:
+  - role: official
+    note: 司徒 to 幽王.
+    cite:
+      - id: zheng-huan-gong-role
+        says: The 鄭 house records that 幽王 made him 司徒.
+        source: shiji-chunqiu
+        at: 卷四十二 鄭世家 桓公（幽王以爲司徒）
+        quote: 幽王以爲司徒。

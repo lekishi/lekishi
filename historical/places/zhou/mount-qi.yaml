@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  岐山, the two-peaked mountain above the plain of 周原, the old home of the 周, which the annals say
+  collapsed in 幽王's second year. The label sits at the modern 岐山 county.
+types: [landform]
+names:
+  - form: 岐山
+    lang: lzh
+    script: Hani
+    roman: Qishan
+    scheme: pinyin
+    cite:
+      - id: mount-qi-name
+        says: The annals record that in that year the three rivers dried up and 岐山 collapsed.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 幽王 二年（岐山崩）
+        quote: 是歲也，三川竭，岐山崩。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [107.62093, 34.44482]
+    notes: >-
+      Label anchor at the modern 岐山 county, which carries the mountain's name. The geography puts
+      the mountain ten 里 north-east of the county seat; no summit is asserted.
+    cite:
+      - id: mount-qi-anchor
+        says: The anchor is the coordinate Wikidata (CC0) records for the modern 岐山 county.
+        source: wikidata
+        at: Q1201047 (P625), revision 2526579168
+      - id: mount-qi-identification
+        says: The historical geography places 岐山 ten 里 north-east of the county and records the collapse under 幽王.
+        role: supporting
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷五十五 陝西四 鳳翔府 岐山縣（岐山）
+        quote: 岐山，在縣東北十里。山有兩岐，故名。
+modern:
+  - form: 岐山縣
+    lang: zh-Hans
+    script: Hani
+    note: Modern county recorded for orientation only.

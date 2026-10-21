@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Decimus Iunius Brutus Albinus, the young officer Caesar put in command of the fleet against the Veneti in 56 BCE."
+types: [person]
+names:
+  - form: D. Brutus
+    lang: la
+    script: Latn
+    cite:
+      - id: decimus-junius-brutus-name
+        says: "Caesar tells that he put the young D. Brutus in command of the fleet and of the Gallic ships, with orders to sail against the Veneti."
+        source: caesar-gallic-war
+        at: "3.11"
+        quote: "D. Brutum adulescentem classi Gallicisque navibus, quas ex Pictonibus et Santonis reliquisque pacatis regionibus convenire iusserat, praeficit"
+roles:
+  - role: soldier
+    note: Commander of the fleet in 56 BCE.

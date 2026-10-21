@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Lucius Aurunculeius Cotta, Caesar's legate and Sabinus's fellow commander at Atuatuca, who opposed leaving the camp and died fighting in 54 BCE."
+types: [person]
+names:
+  - form: L. Aurunculeius Cotta
+    lang: la
+    script: Latn
+    cite:
+      - id: lucius-aurunculeius-cotta-name
+        says: Caesar tells that he put the legates Quintus Titurius Sabinus and Lucius Aurunculeius Cotta in command of these troops.
+        source: caesar-gallic-war
+        at: "5.24"
+        quote: Eis militibus Quintum Titurium Sabinum et Lucium Aurunculeium Cottam legatos praeesse iussit.
+roles:
+  - role: soldier
+    note: Legate.

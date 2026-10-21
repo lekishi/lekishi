@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Ariovistus, king of the Germans (Suebi) settled west of the Rhine, whom Caesar defeated in 58 BCE; he escaped across the Rhine in a small boat."
+types: [person]
+names:
+  - form: Ariovistus
+    lang: la
+    script: Latn
+    cite:
+      - id: ariovistus-name
+        says: Caesar tells that Ariovistus escaped across the Rhine in a small boat he found tied to the bank.
+        source: caesar-gallic-war
+        at: "1.53"
+        quote: "In his fuit Ariovistus, qui naviculam deligatam ad ripam nactus ea profugit"
+roles:
+  - role: ruler
+    note: "King of the Germans in Caesar's account."

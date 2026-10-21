@@ -1,0 +1,76 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Cedar Forest, the farthest point of the lands Enlil gave Sargon in his Nippur inscriptions.
+  L. W. King weighs the Amanus, where Gudea cut his cedars, against the Lebanon farther south; the record
+  keeps both as candidates.
+types: [landform]
+names:
+  - form: Cedar Forest
+    lang: en
+    script: Latn
+    cite:
+      - id: cedar-forest-name
+        says: Sargon's inscription names the Cedar Forest as the limit of his march west.
+        source: king-legends-babylon-egypt
+        at: Lecture I
+        quote:
+          gave him the upper land, Mari, Iarmuti, and Ibla, as far as the Cedar Forest and the Silver
+          Mountains
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [36.333333, 36.75]
+    notes:
+      The Pleiades point for the Amanus range, where King says Gudea felled his cedars. It is the first
+      of King's two candidates; the other is the Lebanon, farther south, and the record decides neither.
+    cite:
+      - id: cedar-forest-amanus
+        says: The Pleiades gazetteer records the Amanus range along the Cilician-Syrian border with a point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/658376 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+      - says: King notes that Gudea took his cedar beams from the Amanus, which Gudea calls the cedar mountains.
+        role: supporting
+        basis: interpretation
+        attributed_to: L. W. King (1918)
+        source: king-legends-babylon-egypt
+        at: Lecture I
+        quote: Gudea obtained his cedar beams from the Amanus range
+  - interpretation: approximate_point
+    precision: region
+    point: [36.116667, 34.3]
+    notes:
+      The Pleiades point for the Lebanon range; King's second candidate, if Sargon reached the coast
+      farther south.
+    cite:
+      - id: cedar-forest-lebanon
+        says: The Pleiades gazetteer records the Lebanon range (Libanus) with a point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/678267 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+      - says: King says Sargon's Cedar Forest may have lain farther south, perhaps as far as the Lebanon.
+        role: alternative
+        basis: interpretation
+        attributed_to: L. W. King (1918)
+        source: king-legends-babylon-egypt
+        at: Lecture I
+        quote: his "Cedar Forest" may have lain farther to the south, perhaps as far south as the Lebanon
+external_ids:
+  - system: pleiades
+    id: "658376"
+    url: https://pleiades.stoa.org/places/658376
+    license: CC-BY-3.0
+    note: Amanus (mountain range), first candidate.
+  - system: pleiades
+    id: "678267"
+    url: https://pleiades.stoa.org/places/678267
+    license: CC-BY-3.0
+    note: Libanus M., second candidate.
+dispute:
+  status: disputed
+  summary:
+    "King (1918) gives two candidates: the Amanus, by analogy with Gudea, or the Lebanon, if Sargon
+    reached the coast farther south. The record keeps both points, each a whole mountain range, and decides
+    neither."

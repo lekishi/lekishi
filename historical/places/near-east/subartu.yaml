@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Subartu, the northern land whose army the Chronicle of Early Kings says attacked Sargon and was
+  destroyed. The record asserts no position or extent.
+types: [region]
+names:
+  - form: Subartu
+    lang: en
+    script: Latn
+    cite:
+      - id: subartu-name
+        says: King notes the late tradition that Sargon conquered Subartu and Kazallu.
+        basis: interpretation
+        attributed_to: L. W. King (1910)
+        source: king-sumer-akkad
+        at: chapter VIII (the empire of Akkad)
+        quote: the late tradition records that Sargon conquered Subartu and Kazallu
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      A land with no cited extent; the Pleiades dump read for this chapter has no record of it. The
+      chapter draws no point or boundary.
+    cite:
+      - says: The chronicle names Subartu without locating it.
+        source: livius-abc-20
+        at: tablet A, lines 14–17

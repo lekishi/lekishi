@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Silver Mountains, named with the Cedar Forest as the limit of Sargon's march west, which
+  L. W. King identifies with the Taurus.
+types: [landform]
+names:
+  - form: Silver Mountains
+    lang: en
+    script: Latn
+    cite:
+      - id: silver-mountains-name
+        says: Sargon's inscription names the Silver Mountains with the Cedar Forest.
+        source: king-legends-babylon-egypt
+        at: Lecture I
+        quote:
+          gave him the upper land, Mari, Iarmuti, and Ibla, as far as the Cedar Forest and the Silver
+          Mountains
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [34.63, 37.4]
+    notes:
+      The Pleiades point for the Taurus range, which King identifies with Sargon's Silver Mountains;
+      the point marks the range, not a mine.
+    cite:
+      - says: The Pleiades gazetteer records the Taurus range in southern Turkey with a point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/648792 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+      - says: King says the Silver Mountains can only be the Taurus, where silver was mined in antiquity.
+        role: supporting
+        basis: interpretation
+        attributed_to: L. W. King (1918)
+        source: king-legends-babylon-egypt
+        at: Lecture I
+        quote: The "Silver Mountains" can only be identified with the Taurus
+external_ids:
+  - system: pleiades
+    id: "648792"
+    url: https://pleiades.stoa.org/places/648792
+    license: CC-BY-3.0
+    note: Taurus (mountain range)

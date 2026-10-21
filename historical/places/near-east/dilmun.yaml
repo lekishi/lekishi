@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Dilmun, the land on the Persian Gulf that the Legend of Sargon, in George Smith's translation,
+  says submitted when Sargon advanced to the sea coast.
+types: [region]
+names:
+  - form: Dilvun
+    lang: en
+    script: Latn
+    note: Smith's 1880 reading of the name.
+    cite:
+      - id: dilmun-name
+        says: The legend says Dilvun submitted, which Smith glosses as in the Persian Gulf.
+        source: smith-chaldean-genesis
+        at: chapter XVII (the Legend of Sargon), line 17
+        quote: To the sea coast three times I advanced, Dilvun (in the Persian Gulf) submitted
+  - form: Dilmun
+    lang: en
+    script: Latn
+    note: The modern scholarly form.
+    claim: dilmun-name
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [48.2153745, 29.3794557]
+    notes: The Pleiades point for the region of Dilmun on the Persian Gulf; it marks the region, not a city.
+    cite:
+      - says: The Pleiades gazetteer records Dilmun as a region near the Persian Gulf, with a label point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/912837 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "912837"
+    url: https://pleiades.stoa.org/places/912837
+    license: CC-BY-3.0
+    note: Dilmun (region)

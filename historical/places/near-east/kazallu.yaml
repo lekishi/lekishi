@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Kazallu, a city of northern Babylonia that the Chronicle of Early Kings says Sargon turned into
+  a ruin heap. The record asserts no position.
+types: [settlement]
+names:
+  - form: Kazallu
+    lang: en
+    script: Latn
+    cite:
+      - id: kazallu-name
+        says: King notes the late tradition that Sargon conquered Subartu and Kazallu.
+        basis: interpretation
+        attributed_to: L. W. King (1910)
+        source: king-sumer-akkad
+        at: chapter VIII (the empire of Akkad)
+        quote: the late tradition records that Sargon conquered Subartu and Kazallu
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      The chronicle names Kazallu without locating it, and the Pleiades dump read for this chapter
+      has no record of it. The chapter asserts no coordinate.
+    cite:
+      - says: The chronicle names Kazallu without locating it.
+        source: livius-abc-20
+        at: tablet A, lines 9–10

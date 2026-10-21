@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Lucius Tarquinius Superbus, the seventh and last king of Rome in the tradition, who took
+  the throne by killing Servius Tullius and was barred from the city after the death of Lucretia."
+types: [person]
+names:
+  - form: L. Tarquinius Superbus
+    lang: la
+    script: Latn
+    cite:
+      - id: tarquinius-superbus-name
+        says: "Livy tells that Lucius Tarquinius began to reign and that his deeds gave him the name
+          Superbus."
+        source: livy
+        at: "1.49"
+        quote: "Inde L. Tarquinius regnare occepit, cui Superbo cognomen facta indiderunt"
+roles:
+  - role: ruler
+    note: "The seventh king, in the tradition."

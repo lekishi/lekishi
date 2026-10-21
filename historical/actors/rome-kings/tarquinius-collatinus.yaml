@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Lucius Tarquinius Collatinus, Lucretia's husband in Livy's tradition and one of the first
+  two consuls."
+types: [person]
+names:
+  - form: L. Tarquinius Collatinus
+    lang: la
+    script: Latn
+    cite:
+      - id: tarquinius-collatinus-name
+        says: "Livy names L. Tarquinius Collatinus as one of the first two consuls."
+        source: livy
+        at: "1.60"
+        quote: "L. Iunius Brutus et L. Tarquinius Collatinus."
+roles:
+  - role: official
+    note: "One of the first two consuls, in the tradition."

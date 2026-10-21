@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Rome under its kings, as the Roman tradition tells it: seven kings from Romulus to
+  Tarquinius Superbus over 244 years, ending when the last king was barred from the city and two
+  consuls were elected."
+types: [state]
+names:
+  - form: Roma
+    lang: la
+    script: Latn
+    note: "The tradition speaks of the city and its kings; the state takes the city's name."
+    cite:
+      - id: roman-kingdom-name
+        says: "Livy reckons the kings' rule at Rome, from the city's founding to its liberation, at
+          244 years."
+        source: livy
+        at: "1.60"
+        quote: "Regnatum Romae ab condita urbe ad liberatam annos ducentos quadraginta quattuor."
+notes:
+  The kingdom is known only from a tradition written down centuries later. The record is the state
+  the tradition describes; it asserts no date, ruler list, or extent beyond what the cited sources
+  tell, and every event that involves it is labelled as tradition.

@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Tullus Hostilius, the third king of Rome in the tradition, fiercer than Romulus in Livy's
+  telling; he fought Alba Longa, destroyed it, and brought the Albans to Rome."
+types: [person]
+names:
+  - form: Tullus Hostilius
+    lang: la
+    script: Latn
+    cite:
+      - id: tullus-hostilius-name
+        says: "Livy tells that the people made Tullus Hostilius, grandson of Hostius Hostilius,
+          king."
+        source: livy
+        at: "1.22"
+        quote: "Inde Tullum Hostilium, nepotem Hostili, cuius in infima arce clara pugna adversus
+          Sabinos fuerat, regem populus iussit"
+roles:
+  - role: ruler
+    note: "The third king, in the tradition."

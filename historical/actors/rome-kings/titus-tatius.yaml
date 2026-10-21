@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Titus Tatius, king of the Sabines in Livy's tradition, who made war on Romulus after the
+  seizure of the Sabine women and then shared the kingship with him."
+types: [person]
+names:
+  - form: T. Tatius
+    lang: la
+    script: Latn
+    cite:
+      - id: titus-tatius-name
+        says: "Livy tells that embassies gathered to Titus Tatius, king of the Sabines, whose name
+          was the greatest in those parts."
+        source: livy
+        at: "1.10"
+        quote: "congregabantur undique ad T. Tatium regem Sabinorum"
+roles:
+  - role: ruler
+    note: "King of the Sabines, then joint king at Rome, in the tradition."

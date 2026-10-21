@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Servius Tullius, the sixth king of Rome in the tradition, raised in the palace of
+  Tarquinius Priscus; Livy credits him with the census, the classes and centuries, and the enlarged
+  city."
+types: [person]
+names:
+  - form: Ser. Tullius
+    lang: la
+    script: Latn
+    cite:
+      - id: servius-tullius-name
+        says: "Livy tells that Servius Tullius reigned forty-four years."
+        source: livy
+        at: "1.48"
+        quote: "Ser. Tullius regnavit annos quattuor et quadraginta"
+roles:
+  - role: ruler
+    note: "The sixth king, in the tradition."

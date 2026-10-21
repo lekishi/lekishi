@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "After the deaths of Nero and Galba and the rise of Vitellius, Vespasian's soldiers in
+  Judaea declare him emperor; he accepts, the eastern legions swear to him, and he moves from
+  Caesarea to Berytus and then Alexandria, leaving the war to Titus."
+types: [occurrence]
+date:
+  value: "69"
+  mode: window
+  calendar: julian
+  as_written: after Vitellius was made emperor (Josephus gives no date)
+  cite:
+    - id: vespasian-proclaimed-emperor-69-year
+      says: "Hoeber's 1910 article on Josephus dates Vespasian's becoming emperor to 69."
+      basis: interpretation
+      attributed_to: K. Hoeber (1910)
+      source: catholic-encyclopedia
+      at: "Flavius Josephus, by K. Hoeber (vol. 8, 1910)"
+      quote: "it was only in the year 69, after he had actually become emperor, that he restored to
+        Josephus his liberty"
+places:
+  - place: caesarea-maritima
+    role: site
+participants:
+  - actor: vespasian
+    role: subject
+cite:
+  - id: vespasian-declared
+    says: Josephus tells that the soldiers declared Vespasian emperor and urged him to save the government.
+    source: josephus-jewish-war
+    at: "4.10.4"
+    quote: they declared Vespasian emperor
+  - id: vespasian-leaves-caesarea
+    says: Josephus tells that Vespasian then moved from Caesarea to Berytus.
+    role: supporting
+    source: josephus-jewish-war
+    at: "4.10.6"
+    quote: Vespasian then removed from Cesarea to Berytus
+notes: "Josephus's account. He tells the proclamation among the army in Judaea; other ancient
+  writers put the first oath at Alexandria, which this chapter does not cite. The year is an
+  interpretation."

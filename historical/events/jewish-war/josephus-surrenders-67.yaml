@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Found in a cave after the fall of Jotapata, Josephus survives his companions' suicide
+  pact, surrenders, and before Vespasian and Titus foretells that Vespasian will be emperor;
+  Vespasian keeps him in chains but treats him well."
+types: [occurrence]
+date:
+  value: "67"
+  mode: window
+  calendar: julian
+  as_written: "two days after the fall of Jotapata, on the first of Panemus in the thirteenth year
+    of Nero"
+  cite:
+    - id: josephus-surrenders-67-year
+      says: "Meistermann's 1910 history of Jerusalem dates the campaign in Galilee to 67."
+      basis: interpretation
+      attributed_to: B. Meistermann (1910)
+      source: catholic-encyclopedia
+      at: "Jerusalem (Before A.D. 71), by B. Meistermann (vol. 8, 1910), Herod Agrippa I to the
+        destruction"
+      quote: "invaded Galilee, in A.D. 67, with an army of 60,000 men"
+places:
+  - place: jotapata
+    role: site
+participants:
+  - actor: flavius-josephus
+    role: subject
+  - actor: vespasian
+    role: host
+  - actor: titus
+    role: witness
+cite:
+  - id: josephus-led-to-vespasian
+    says: Josephus tells that he was led by Nicanor to Vespasian.
+    source: josephus-jewish-war
+    at: "3.8.8"
+    quote: and was led by Nicanor to Vespasian.
+  - id: josephus-prophecy
+    says: Josephus tells that he said to Vespasian that he and his son would be Caesar and emperor.
+    role: supporting
+    source: josephus-jewish-war
+    at: "3.8.9"
+    quote: "Thou, O Vespasian, art Caesar and emperor, thou, and this thy son."
+notes: "Josephus tells his own surrender and prophecy, and they serve him; the record keeps them as
+  his account. The year is an interpretation."

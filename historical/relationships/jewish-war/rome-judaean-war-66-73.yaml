@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "The first Jewish–Roman war: the revolt of Judaea against Roman rule from 66 CE, put down
+  by Vespasian and Titus with the destruction of Jerusalem and its Temple in 70 and ended with the
+  fall of Masada."
+types: [conflict]
+from: roman-empire
+to: judaean-rebels
+date:
+  value: "66..73"
+  mode: window
+  calendar: julian
+  as_written: from the twelfth year of Nero to the fall of Masada
+  cite:
+    - id: rome-judaean-war-years
+      says: "Hoeber's 1910 article on Josephus gives the war as 66–73."
+      basis: interpretation
+      attributed_to: K. Hoeber (1910)
+      source: catholic-encyclopedia
+      at: "Flavius Josephus, by K. Hoeber (vol. 8, 1910)"
+      quote: during the war of independence (66-73)
+notes: "Josephus's account of the war; the years are an interpretation."
+cite:
+  id: rome-judaean-war-basis
+  says: Josephus tells that the war began in the twelfth year of Nero.
+  source: josephus-jewish-war
+  at: "2.14.4"
+  quote: "at the same time began the war, in the twelfth year of the reign of Nero"

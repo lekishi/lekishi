@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Sent by Nero to put down the revolt, Vespasian marches from Antioch to Ptolemais, where
+  Titus brings the fifth and tenth legions from Alexandria to join the fifteenth; the army sets out
+  into Galilee."
+types: [campaign]
+date:
+  value: "67"
+  mode: window
+  calendar: julian
+  as_written: the spring after the defeat of Cestius (Josephus gives no regnal year here)
+  cite:
+    - id: vespasian-musters-at-ptolemais-67-year
+      says: "Meistermann's 1910 history of Jerusalem dates Vespasian's invasion of Galilee to 67."
+      basis: interpretation
+      attributed_to: B. Meistermann (1910)
+      source: catholic-encyclopedia
+      at: "Jerusalem (Before A.D. 71), by B. Meistermann (vol. 8, 1910), Herod Agrippa I to the
+        destruction"
+      quote: "invaded Galilee, in A.D. 67, with an army of 60,000 men"
+places:
+  - place: akko
+    role: site
+participants:
+  - actor: vespasian
+    role: leader
+  - actor: titus
+    role: participant
+  - actor: nero
+    role: other
+cite:
+  - id: ptolemais-legions
+    says: Josephus tells that Titus came to Ptolemais and joined the fifth and tenth legions to the fifteenth with his father.
+    source: josephus-jewish-war
+    at: "3.4.2"
+    quote: "he came suddenly to Ptolemais, and there finding his father, together with the two
+      legions, the fifth and the tenth, which were the most eminent legions of all, he joined them
+      to that fifteenth legion which was with his father"
+notes: "Josephus's account: he was a commander on the Jewish side until Jotapata and on the Roman
+  side after, and his numbers are his. The year is an interpretation; Josephus dates by month and
+  regnal year."

@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Gamala, on a steep ridge across the lake, holds out against Vespasian; after one assault
+  fails, the Romans break in, and Josephus says four thousand were killed and five thousand threw
+  themselves from the heights."
+types: [campaign]
+date:
+  value: "67"
+  mode: window
+  calendar: julian
+  as_written: "on the three and twentieth day of the month Hyperbereteus, [Tisri,]"
+  cite:
+    - id: gamala-taken-67-year
+      says: "Meistermann's 1910 history of Jerusalem dates the campaign in Galilee and the north to
+        67."
+      basis: interpretation
+      attributed_to: B. Meistermann (1910)
+      source: catholic-encyclopedia
+      at: "Jerusalem (Before A.D. 71), by B. Meistermann (vol. 8, 1910), Herod Agrippa I to the
+        destruction"
+      quote: "invaded Galilee, in A.D. 67, with an army of 60,000 men"
+    - id: gamala-date
+      says: Josephus dates the taking of Gamala to the twenty-third of Hyperberetaeus.
+      role: supporting
+      source: josephus-jewish-war
+      at: "4.1.10"
+      quote: "And thus was Gamala taken on the three and twentieth day of the month Hyperbereteus,
+        [Tisri,]"
+places:
+  - place: gamala
+    role: site
+participants:
+  - actor: vespasian
+    role: leader
+  - actor: titus
+    role: participant
+  - actor: judaean-rebels
+    role: participant
+cite:
+  - id: gamala-dead
+    says: Josephus gives four thousand killed by the Romans and five thousand who threw themselves down.
+    source: josephus-jewish-war
+    at: "4.1.10"
+    quote: "while the Romans slew but four thousand, whereas the number of those that had thrown
+      themselves down was found to be five thousand"
+notes: "Josephus's account: he was a commander on the Jewish side until Jotapata and on the Roman
+  side after, and his numbers are his. The year is an interpretation; Josephus dates by month and
+  regnal year."

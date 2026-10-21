@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Flavius Silva besieges Masada, the last stronghold, held by the Sicarii under Eleazar;
+  when the ramp reaches the wall, Josephus says the defenders killed their families and themselves,
+  960 in all, and the Romans found the place silent on the fifteenth of Xanthicus."
+types: [campaign]
+date:
+  value: "73"
+  mode: window
+  calendar: julian
+  as_written: "on the fifteenth day of the month Xanthicus [Nisan] (Josephus gives no year)"
+  cite:
+    - id: masada-falls-73-year
+      says: "Hoeber's 1910 article on Josephus gives the war of independence as 66–73, ending it
+        with Masada."
+      basis: interpretation
+      attributed_to: K. Hoeber (1910)
+      source: catholic-encyclopedia
+      at: "Flavius Josephus, by K. Hoeber (vol. 8, 1910)"
+      quote: during the war of independence (66-73)
+    - id: masada-date
+      says: Josephus dates the slaughter to the fifteenth of Xanthicus.
+      role: supporting
+      source: josephus-jewish-war
+      at: "7.9.1"
+      quote: "This calamitous slaughter was made on the fifteenth day of the month Xanthicus
+        [Nisan]."
+places:
+  - place: masada
+    role: site
+participants:
+  - actor: flavius-silva
+    role: leader
+  - actor: eleazar-ben-yair
+    role: leader
+  - actor: judaean-rebels
+    role: participant
+cite:
+  - id: masada-last
+    says: "Josephus tells that Silva gathered his army against the one stronghold still in
+      rebellion, Masada."
+    source: josephus-jewish-war
+    at: "7.8.1"
+    quote: "there was but one only strong hold that was still in rebellion, he got all his army
+      together that lay in different places, and made an expedition against it. This fortress was
+      called Masada."
+  - id: masada-count
+    says: "Josephus gives 960 dead, women and children included."
+    role: supporting
+    source: josephus-jewish-war
+    at: "7.9.1"
+    quote: "Those others were nine hundred and sixty in number, the women and children being withal
+      included in that computation."
+notes: "Josephus's account; he was not there, and he tells that two women and five children who had
+  hidden in caverns survived. The year is an interpretation: Josephus gives the month and day only,
+  and some modern historians prefer 74, which no source cited here states."

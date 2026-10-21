@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Vespasian camps between Tiberias and Taricheae, where the rebels have gathered with boats
+  on the Sea of Galilee; Titus takes the town, and Vespasian's rafts pursue the boats and destroy
+  them until the lake is red with blood."
+types: [campaign]
+date:
+  value: "67"
+  mode: window
+  calendar: julian
+  as_written: "after Jotapata, in the thirteenth year of Nero (Josephus gives no day)"
+  cite:
+    - id: taricheae-and-the-lake-67-year
+      says: "Meistermann's 1910 history of Jerusalem dates the campaign in Galilee to 67."
+      basis: interpretation
+      attributed_to: B. Meistermann (1910)
+      source: catholic-encyclopedia
+      at: "Jerusalem (Before A.D. 71), by B. Meistermann (vol. 8, 1910), Herod Agrippa I to the
+        destruction"
+      quote: "invaded Galilee, in A.D. 67, with an army of 60,000 men"
+places:
+  - place: taricheae
+    role: site
+participants:
+  - actor: vespasian
+    role: leader
+  - actor: titus
+    role: participant
+  - actor: judaean-rebels
+    role: participant
+cite:
+  - id: taricheae-gathered
+    says: "Josephus tells that the rebels had gathered at Taricheae, relying on the city and the
+      lake."
+    source: josephus-jewish-war
+    at: "3.10.1"
+    quote: "for all the innovators had gotten together at Taricheae, as relying upon the strength of
+      the city, and on the lake that lay by it."
+  - id: taricheae-lake
+    says: Josephus tells that the lake was all bloody and full of dead bodies.
+    role: supporting
+    source: josephus-jewish-war
+    at: "3.10.9"
+    quote: "one might then see the lake all bloody, and full of dead bodies"
+notes: "Josephus's account: he was a commander on the Jewish side until Jotapata and on the Roman
+  side after, and his numbers are his. The year is an interpretation; Josephus dates by month and
+  regnal year."

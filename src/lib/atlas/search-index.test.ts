@@ -19,7 +19,15 @@ function titles(query: string, options = {}) {
 
 describe("the search index", () => {
   it("covers every served chapter, oldest first", () => {
-    expect(index.chapters.map((chapter) => chapter.id)).toEqual([QIN_CHAPTER, TANG_CHAPTER])
+    // Drafts are served too, so the list is the registry's, oldest window first;
+    // the two approved chapters pin that the order is by window, not by name.
+    const oldestFirst = [...SERVED_CHAPTERS]
+      .sort((a, b) => a.coverage.defaultWindow.start - b.coverage.defaultWindow.start)
+      .map((served) => served.id)
+    const ids = index.chapters.map((chapter) => chapter.id)
+
+    expect(ids).toEqual(oldestFirst)
+    expect(ids.indexOf(QIN_CHAPTER)).toBeLessThan(ids.indexOf(TANG_CHAPTER))
     for (const chapter of index.chapters) {
       expect(index.entries.some((entry) => entry.chapterId === chapter.id)).toBe(true)
     }

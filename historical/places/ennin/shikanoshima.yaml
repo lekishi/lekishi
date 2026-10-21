@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 志賀嶋, the island at the mouth of 博多's bay. The embassy's first ship lay in the sea east of it for five days in 承和五年六月 (838) waiting for a wind.
+types: [landform]
+names:
+  - form: 志賀嶋
+    lang: lzh
+    script: Hani
+    roman: Shikanoshima
+    scheme: hepburn
+    cite:
+      - id: shikanoshima-name
+        says: The diary records the ship reaching the sea east of 志賀嶋 on the 17th.
+        source: nitto-guho-junrei-gyoki
+        at: 卷一 承和五年六月十七日
+        quote: 巳時到志賀嶋東海。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [130.3, 33.675]
+    notes: Label anchor at the modern island of 志賀島 (Wikidata Q3077260). It is not an asserted historical coordinate.
+    cite:
+      - id: shikanoshima-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the island of 志賀島; no historical coordinate is asserted.
+        source: wikidata
+        at: Q3077260 (P625), revision 2241909021
+modern:
+  - form: 志賀島
+    lang: ja
+    script: Hani
+    note: Modern island recorded for orientation; the name is the diary's.
+external_ids:
+  - system: wikidata
+    id: Q3077260
+    url: https://www.wikidata.org/wiki/Q3077260
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

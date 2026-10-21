@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 泗州, on the 淮, whose famous 普光王寺 圓仁 found stripped of its estates and awaiting demolition on 會昌五年六月廿二日 (845).
+types: [settlement]
+names:
+  - form: 泗州
+    lang: lzh
+    script: Hani
+    roman: Sizhou
+    scheme: pinyin
+    cite:
+      - id: sizhou-name
+        says: The diary names 泗州's 普光王寺 as a famous place now stripped by the state.
+        source: nitto-guho-junrei-gyoki
+        at: 卷四 會昌五年六月廿二日
+        quote: 泗州普光王寺。是天下著名之處。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [117.88, 33.479166666]
+    notes: Label anchor at the historical prefecture of 泗州 (Wikidata Q10379854). It is not an asserted historical coordinate.
+    cite:
+      - id: sizhou-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the historical prefecture of 泗州; no historical coordinate is asserted.
+        source: wikidata
+        at: Q10379854 (P625), revision 2473309515
+external_ids:
+  - system: wikidata
+    id: Q10379854
+    url: https://www.wikidata.org/wiki/Q10379854
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.
+notes: The transcription writes the arrival as 到西州; the same entry names 泗州, and the record uses that.

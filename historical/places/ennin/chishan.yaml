@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 赤山, the headland of 文登縣's 清寧鄉 with the anchorage of 赤山浦 and the 赤山法花院, the Silla cloister founded by 張寶高 where 圓仁 lived from 839 to 840 and near which he waited from 845 to 847.
+types: [landform, port, religious_site]
+names:
+  - form: 赤山
+    lang: lzh
+    script: Hani
+    roman: Chishan
+    scheme: pinyin
+    cite:
+      - id: chishan-name
+        says: The diary places 赤山 in 清寧鄉 of 文登縣.
+        source: nitto-guho-junrei-gyoki
+        at: 卷二 開成四年六月七日
+        quote: 即文登縣清寧鄉赤山村。
+  - form: 赤山法花院
+    lang: lzh
+    script: Hani
+    note: The cloister on the hill, recorded as a name of the place rather than a separate site.
+    cite:
+      - id: chishan-fahuayuan
+        says: The diary names the cloister 赤山法花院 and says 張寶高 first built it.
+        source: nitto-guho-junrei-gyoki
+        at: 卷二 開成四年六月七日
+        quote: 山裏有寺。名赤山法花院。本張寶高初所建也。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [122.3917, 36.9073]
+    notes: Label anchor at the mountain Wikidata records as 赤山 (Wikidata Q17040046). It is not an asserted historical coordinate.
+    cite:
+      - id: chishan-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the mountain 赤山 in Rongcheng; no historical coordinate is asserted.
+        source: wikidata
+        at: Q17040046 (P625), revision 1909409558
+modern:
+  - form: 赤山
+    lang: zh-Hans
+    script: Hani
+    note: The modern mountain of the same name in 荣成, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q17040046
+    url: https://www.wikidata.org/wiki/Q17040046
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.
+notes: The anchorage (赤山浦), the village and the cloister are one record because the diary uses them together and no site is placed. In 845 the cloister had been demolished, and 圓仁 lodged at its estate.

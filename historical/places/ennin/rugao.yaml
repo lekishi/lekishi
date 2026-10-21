@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 如皐, a garrison town (如皐鎮) on the canal from the coast to 揚州, which the 838 embassy's barges reached on 七月廿日.
+types: [settlement]
+names:
+  - form: 如皐鎮
+    lang: lzh
+    script: Hani
+    roman: Rugao zhen
+    scheme: pinyin
+    cite:
+      - id: rugao-name
+        says: The diary records being told at 赤岸村 that 如皐鎮 lay 120 里 ahead.
+        source: nitto-guho-junrei-gyoki
+        at: 卷一 承和五年七月廿日
+        quote: 從此間行百廿里。有如皐鎮。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [120.5634, 32.38521]
+    notes: Label anchor at the modern city of 如皋 (Wikidata Q1023796). It is not an asserted historical coordinate.
+    cite:
+      - id: rugao-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the city of Rugao; no historical coordinate is asserted.
+        source: wikidata
+        at: Q1023796 (P625), revision 2526542148
+modern:
+  - form: 如皋市
+    lang: zh-Hans
+    script: Hani
+    note: Modern city recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q1023796
+    url: https://www.wikidata.org/wiki/Q1023796
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

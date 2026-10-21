@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 鴻臚館, the 大宰府's guest house for foreign envoys at 博多, which 圓仁 reached on 會昌七年九月十八日 (847) and entered the next day.
+types: [settlement]
+names:
+  - form: 鴻臚館
+    lang: lzh
+    script: Hani
+    roman: Kōrokan
+    scheme: hepburn
+    cite:
+      - id: korokan-name
+        says: The diary records arriving before the 鴻臚館 on the 18th.
+        source: nitto-guho-junrei-gyoki
+        at: 卷四 會昌七年九月十八日
+        quote: 十八日到鴻臚館前。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [130.385694444, 33.5865]
+    notes: Label anchor at the site Wikidata records for the 鴻臚館 at Fukuoka (Wikidata Q11675677). It is not an asserted historical coordinate.
+    cite:
+      - id: korokan-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the 鴻臚館 of 筑紫; no historical coordinate is asserted.
+        source: wikidata
+        at: Q11675677 (P625), revision 2557596639
+modern:
+  - form: 鴻臚館跡
+    lang: ja
+    script: Hani
+    note: The excavated site, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q11675677
+    url: https://www.wikidata.org/wiki/Q11675677
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.
+notes: A separate record from the city-level 博多 (hakata), by agreement with the missions records.

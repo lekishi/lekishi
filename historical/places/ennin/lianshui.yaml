@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 漣水縣, on the lower 淮. The embassy's ships stopped south of it in 839, and 圓仁 passed through its Silla ward in 845.
+types: [settlement]
+names:
+  - form: 漣水縣
+    lang: lzh
+    script: Hani
+    roman: Lianshui xian
+    scheme: pinyin
+    cite:
+      - id: lianshui-name
+        says: The diary records reaching the south of 漣水縣 on the 25th.
+        source: nitto-guho-junrei-gyoki
+        at: 卷一 開成四年三月廿五日
+        quote: 到徐州管內漣水縣南。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [119.27129, 33.77539]
+    notes: Label anchor at the modern county of 涟水 (Wikidata Q937314). It is not an asserted historical coordinate.
+    cite:
+      - id: lianshui-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for Lianshui County; no historical coordinate is asserted.
+        source: wikidata
+        at: Q937314 (P625), revision 2526615289
+modern:
+  - form: 涟水县
+    lang: zh-Hans
+    script: Hani
+    note: Modern county recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q937314
+    url: https://www.wikidata.org/wiki/Q937314
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.
+notes: The 839 entry writes 徐州管內 and the 845 entry says the county belongs to 泗州; both are kept in the events' quotations.

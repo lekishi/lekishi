@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 萊州, the prefecture west of 登州 that 圓仁 crossed in 840; he lodged at its ruined 龍興寺.
+types: [settlement]
+names:
+  - form: 萊州
+    lang: lzh
+    script: Hani
+    roman: Laizhou
+    scheme: pinyin
+    cite:
+      - id: laizhou-name
+        says: The diary records reaching 萊州 on the 15th.
+        source: nitto-guho-junrei-gyoki
+        at: 卷二 開成五年三月十五日
+        quote: 齋後行十五里到萊州。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [119.933333333, 37.179166666]
+    notes: Label anchor at the historical prefecture of 萊州 (Wikidata Q10507824). It is not an asserted historical coordinate.
+    cite:
+      - id: laizhou-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the historical prefecture of 萊州; no historical coordinate is asserted.
+        source: wikidata
+        at: Q10507824 (P625), revision 1989354290
+modern:
+  - form: 莱州市
+    lang: zh-Hans
+    script: Hani
+    note: Modern city recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q10507824
+    url: https://www.wikidata.org/wiki/Q10507824
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

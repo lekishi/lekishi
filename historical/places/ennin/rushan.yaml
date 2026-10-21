@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 乳山, the peak and anchorage on the coast of 登州 where 圓仁's ship put in on 開成四年四月廿六日 (839) and where, in 847, he boarded 金珍's ship at 長淮浦.
+types: [landform, port]
+names:
+  - form: 乳山
+    lang: lzh
+    script: Hani
+    roman: Rushan
+    scheme: pinyin
+    cite:
+      - id: rushan-name
+        says: The diary records sighting 乳山 close to the west on the 26th.
+        source: nitto-guho-junrei-gyoki
+        at: 卷二 開成四年四月廿六日
+        quote: 望見乳山。近在西方。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [121.5, 36.9]
+    notes: Label anchor at the modern city of 乳山 (Wikidata Q1241830). It is not an asserted historical coordinate.
+    cite:
+      - id: rushan-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the city of Rushan; no historical coordinate is asserted.
+        source: wikidata
+        at: Q1241830 (P625), revision 2526579944
+modern:
+  - form: 乳山市
+    lang: zh-Hans
+    script: Hani
+    note: Modern city recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q1241830
+    url: https://www.wikidata.org/wiki/Q1241830
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

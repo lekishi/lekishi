@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 鄭州, on the road between the two capitals, where officials who knew 圓仁 in 長安 gave him silk and saw him off in 845.
+types: [settlement]
+names:
+  - form: 鄭州
+    lang: lzh
+    script: Hani
+    roman: Zhengzhou
+    scheme: pinyin
+    cite:
+      - id: zhengzhou-name
+        says: The diary records reaching the 刺史 of 鄭州 on the 9th.
+        source: nitto-guho-junrei-gyoki
+        at: 卷四 會昌五年六月九日
+        quote: 九日到鄭州刺史李舍人處。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [113.660555555, 34.749166666]
+    notes: Label anchor at the historical prefecture of 鄭州 (Wikidata Q17163669). It is not an asserted historical coordinate.
+    cite:
+      - id: zhengzhou-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the historical prefecture of 鄭州; no historical coordinate is asserted.
+        source: wikidata
+        at: Q17163669 (P625), revision 2170041410
+modern:
+  - form: 郑州市
+    lang: zh-Hans
+    script: Hani
+    note: Modern city recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q17163669
+    url: https://www.wikidata.org/wiki/Q17163669
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

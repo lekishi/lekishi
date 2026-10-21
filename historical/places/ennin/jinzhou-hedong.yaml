@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 晉州, on the 汾 in 河東, where 圓仁 lodged at the 普通院 west of the market on 開成五年八月七日 (840).
+types: [settlement]
+names:
+  - form: 晉州
+    lang: lzh
+    script: Hani
+    roman: Jinzhou
+    scheme: pinyin
+    cite:
+      - id: jinzhou-hedong-name
+        says: The diary records lodging at the 普通院 west of the market inside 晉州 on the 7th.
+        source: nitto-guho-junrei-gyoki
+        at: 卷三 開成五年八月七日
+        quote: 到晉州城內市西普通院宿。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [111.50865, 36.08121]
+    notes: Label anchor at the modern city of 臨汾 (Wikidata Q73156). It is not an asserted historical coordinate.
+    cite:
+      - id: jinzhou-hedong-anchor
+        says: Wikidata describes the prefecture 晋州 (Q11514505) as centred on present-day Linfen; the label anchor is placed at Linfen's coordinate. Both are CC0 data, and no historical coordinate is asserted.
+        sources:
+          - source: wikidata
+            at: Q11514505 (description), revision 2241944361
+          - source: wikidata
+            at: Q73156 (P625), revision 2529206198
+modern:
+  - form: 临汾市
+    lang: zh-Hans
+    script: Hani
+    note: Modern city recorded for orientation; Wikidata's description is the identification.
+external_ids:
+  - system: wikidata
+    id: Q73156
+    url: https://www.wikidata.org/wiki/Q73156
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.
+notes: The id carries a suffix because other 晉州 existed; this is the prefecture of 河東.

@@ -16,19 +16,30 @@ names:
         at: 卷第十三 天平十一年十一月辛夘
         quote: 四船同發從蘇州入海。
 at:
-  - interpretation: display_anchor
-    precision: unspecified
+  - interpretation: approximate_point
+    precision: region
     point: [120.619444, 31.3]
-    notes: Label anchor at the modern city of 蘇州 (Wikidata Q42622). It is not an asserted historical coordinate.
+    notes:
+      A region-level placement standing for the prefecture, at modern 蘇州, the city that bore the
+      prefecture's name from the Sui. The point is the modern city's coordinate; it places no harbour or river
+      mouth the ships sailed from or waited at.
     cite:
-      - id: suzhou-anchor
+      - id: suzhou-identification
         says:
-          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
-          is asserted.
-        source: wikidata
-        at: Q42622 (P625), revision 2527812164
+          The city of 蘇州 in 江蘇省 took the name 蘇州 in the Sui, when the 吳 commandery was renamed, and
+          under the Tang was the prefecture of 吳縣 and six other counties. The point is the modern city's
+          coordinate from Wikidata (CC0), placed to stand for the prefecture.
+        basis: interpretation
+        attributed_to: 小学館 (日本大百科全書, 林和生)
+        sources:
+          - source: nipponica-suzhou
+            at: 蘇州 歴史
+          - source: wikidata
+            at: Q42622 (P625), revision 2527812164
 modern:
   - form: 蘇州市
     lang: zh
     script: Hani
-    note: Modern name recorded for orientation; the cited passages do not state a site identification.
+    note:
+      The modern city that bore the prefecture's name from the Sui; recorded as the identification the
+      placement rests on.

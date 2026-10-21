@@ -23,14 +23,22 @@ names:
         at: 卷第廿七 天智天皇三年 是歲
         quote: 是歲，於對馬嶋、壹岐嶋、筑紫國等，置防與烽。
 at:
-  - interpretation: display_anchor
-    precision: unspecified
+  - interpretation: approximate_point
+    precision: region
     point: [129.716667, 33.783333]
-    notes: Label anchor at 壱岐島 (Wikidata Q494914). It is not an asserted historical coordinate.
+    notes:
+      A region-level placement standing for the whole island of 壹伎嶋, the present-day 壱岐島. The point
+      is the island's modern coordinate; it asserts no harbour or landing place on the island.
     cite:
-      - id: iki-anchor
+      - id: iki-identification
         says:
-          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
-          is asserted.
-        source: wikidata
-        at: Q494914 (P625), revision 2551775883
+          The reference work identifies 壱岐国 as the 西海道 island that is present-day 壱岐市, where guards
+          and beacons were placed in antiquity. The point is the island's modern coordinate from
+          Wikidata (CC0), placed to stand for the island as a whole.
+        basis: interpretation
+        attributed_to: 山川出版社「山川 日本史小辞典 改訂新版」「壱岐国」
+        sources:
+          - source: yamakawa-nihonshi-iki
+            at: 壱岐国
+          - source: wikidata
+            at: Q494914 (P625), revision 2551775883

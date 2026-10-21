@@ -14,21 +14,30 @@ names:
         at: 卷第卅五 寶龜九年十一月乙夘
         quote: 乘其舳而着肥後國天草郡。
 at:
-  - interpretation: display_anchor
-    precision: unspecified
+  - interpretation: approximate_point
+    precision: region
     point: [130.0475, 32.508056]
     notes:
-      Label anchor at the modern 天草郡 district (Wikidata Q1132472). It is not an asserted historical
-      coordinate.
+      A region-level placement standing for the whole of 肥後國天草郡, the district that covered the
+      天草諸島, 長島 included. The point is the coordinate Wikidata records for the modern 天草郡, which
+      lies within the old district; it asserts no shore the bow came to.
     cite:
-      - id: amakusa-anchor
+      - id: amakusa-identification
         says:
-          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
-          is asserted.
-        source: wikidata
-        at: Q1132472 (P625), revision 2549707901
+          The reference work states that from the 律令 settlement the whole of the 天草諸島 formed the one
+          district 肥後國天草郡, until 長島 and 獅子島 passed to 薩摩國出水郡 in 1581. The point is the
+          modern 天草郡's coordinate from Wikidata (CC0), placed to stand for the old district as a whole.
+        basis: interpretation
+        attributed_to: 小学館「日本大百科全書(ニッポニカ)」「天草諸島」
+        sources:
+          - source: nipponica-amakusa
+            at: 天草諸島
+          - source: wikidata
+            at: Q1132472 (P625), revision 2549707901
 modern:
   - form: 天草市
     lang: ja
     script: Hani
-    note: Modern name recorded for orientation; the cited passages do not state a site identification.
+    note:
+      Modern city recorded for orientation; the old district covered the whole 天草諸島, now divided
+      among 天草市, 上天草市, 苓北町 and, for 長島, Kagoshima Prefecture.

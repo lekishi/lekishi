@@ -14,16 +14,24 @@ names:
         at: 卷第廿五 白雉五年七月丁酉
         quote: 西海使吉士長丹等，共百濟、新羅送使泊于筑紫。
 at:
-  - interpretation: display_anchor
-    precision: unspecified
+  - interpretation: approximate_point
+    precision: region
     point: [130.489, 33.5961]
     notes:
-      Label anchor at the province of 筑前 (Wikidata Q1047664). It is not an asserted historical coordinate.
-      筑紫 also covered the later province of 筑後; the anchor marks the northern half.
+      A region-level placement standing for 筑紫 in its narrower sense, the later provinces of 筑前 and
+      筑後. The point is the coordinate Wikidata records for 筑前, the northern half, on whose coast the
+      ships put in; it asserts no harbour, and 筑紫 in its wider sense of all 九州 is not placed.
     cite:
-      - id: tsukushi-anchor
+      - id: tsukushi-identification
         says:
-          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
-          is asserted.
-        source: wikidata
-        at: Q1047664 (P625), revision 2462678915
+          The reference work describes 筑紫 as the ancient name for all 九州 and, more narrowly, for
+          northern 九州 centred on the later 筑前 and 筑後, the 筑紫國 the 律令 settlement divided into those
+          two provinces. The point is 筑前's coordinate from Wikidata (CC0), placed to stand for that
+          region.
+        basis: interpretation
+        attributed_to: 平凡社「改訂新版 世界大百科事典」「筑紫」 (倉住靖彦)
+        sources:
+          - source: sekai-daihyakka-tsukushi
+            at: 筑紫
+          - source: wikidata
+            at: Q1047664 (P625), revision 2462678915

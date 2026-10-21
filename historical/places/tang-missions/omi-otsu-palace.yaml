@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=../../schema/place.schema.json
-summary: 近江大津宮, 天智's court from 667, where the 669 mission was sent from.
+summary: 近江大津宮, 天智's court from 667, the seat of the court that sent the 669 mission.
 types: [capital]
 names:
   - form: 近江
@@ -14,22 +14,30 @@ names:
         at: 卷第廿七 天智天皇六年三月己卯
         quote: 三月辛酉朔己卯，遷都于近江。
 at:
-  - interpretation: display_anchor
-    precision: unspecified
+  - interpretation: approximate_point
+    precision: locality
     point: [135.855, 35.028306]
     notes:
-      Label anchor at the 近江大津宮 palace site (Wikidata Q11638487). It is not an asserted historical
-      coordinate.
+      An approximate placement at the 近江大津宮錦織遺跡, the excavated remains at 錦織 identified as the
+      palace, partly a national Historic Site. The point marks the 錦織 site as a whole and places no
+      building; the identification closed a long debate only provisionally, in the museum's words.
     cite:
-      - id: omi-otsu-palace-anchor
+      - id: omi-otsu-palace-identification
         says:
-          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
-          is asserted.
-        source: wikidata
-        at: Q11638487 (P625), revision 2550208019
+          近江大津宮 was 天智's capital from 667 until the 壬申 war of 672; its location was long debated
+          until a large post-built structure found at 錦織 in 1974 was identified as the 内裏 south gate,
+          which settled the debate for the time being. The point is the coordinate Wikidata records for
+          近江大津宮 (CC0), at 錦織.
+        basis: interpretation
+        attributed_to: 大津市歴史博物館
+        sources:
+          - source: otsu-rekihaku-nishikori
+            at: 近江大津宮錦織遺跡
+          - source: wikidata
+            at: Q11638487 (P625), revision 2550208019
 modern:
   - form: 大津市
     lang: ja
     script: Hani
-    note: Modern name recorded for orientation; the cited passages do not state a site identification.
+    note: Modern city recorded for orientation; the 近江大津宮錦織遺跡 lies at its 錦織.
 notes: The cited entry writes only 近江; the palace is known as 近江大津宮.

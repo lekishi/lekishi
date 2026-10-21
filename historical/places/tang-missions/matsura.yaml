@@ -14,16 +14,24 @@ names:
         at: 卷第卅四 寶龜七年閏八月庚寅
         quote: 遣唐使船到肥前國松浦郡合蚕田浦。
 at:
-  - interpretation: display_anchor
-    precision: unspecified
+  - interpretation: approximate_point
+    precision: region
     point: [129.709111, 33.340972]
     notes:
-      Label anchor at the modern city of 松浦 (Wikidata Q850465). It is not an asserted historical coordinate.
-      The modern city covers only part of the old district.
+      A region-level placement standing for the whole of 肥前國松浦郡, at the modern city of 松浦, which
+      lies within the old district. The district also took in 平戸島 and the 五島 islands, so the point
+      places neither 合蚕田浦 nor any other harbour the ships waited in.
     cite:
-      - id: matsura-anchor
+      - id: matsura-identification
         says:
-          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
-          is asserted.
-        source: wikidata
-        at: Q850465 (P625), revision 2556936862
+          The reference work describes 肥前國松浦郡 as the district of northern and western 肥前, the 北松浦
+          peninsula with 平戸島, the 五島列島 and other islands, spreading over present-day 松浦市, 平戸市,
+          佐世保市 and neighbouring areas. The point is 松浦市's modern coordinate from Wikidata (CC0),
+          placed to stand for the district as a whole.
+        basis: interpretation
+        attributed_to: 平凡社「日本歴史地名大系」「松浦郡」
+        sources:
+          - source: chimei-taikei-matsura
+            at: 松浦郡
+          - source: wikidata
+            at: Q850465 (P625), revision 2556936862

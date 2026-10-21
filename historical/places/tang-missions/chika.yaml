@@ -23,22 +23,30 @@ names:
         at: 卷第五 承和三年七月甲申
         quote: 宜値嘉嶋涯畔可着船處。
 at:
-  - interpretation: display_anchor
-    precision: unspecified
+  - interpretation: approximate_point
+    precision: region
     point: [129.05, 32.9]
     notes:
-      Label anchor at the 五島列島 (Wikidata Q1333790). It is not an asserted historical coordinate. That
-      値賀嶋 covers the 五島 islands is a common modern reading the record does not source; the anchor is for
-      display only.
+      A region-level placement standing for the 値賀嶋 islands, centred on the present-day 五島列島. The
+      point is the island chain's modern coordinate; the cited work also counts 平戸島 with 値嘉 in 876,
+      and no island, harbour or landing place is asserted.
     cite:
-      - id: chika-anchor
+      - id: chika-identification
         says:
-          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
-          is asserted.
-        source: wikidata
-        at: Q1333790 (P625), revision 2544236760
+          The reference work describes 値嘉島 as a historical place name centred on the present-day
+          五島列島, the 値嘉郷 of 肥前國松浦郡, with harbours the 遣唐使 ships called at. The point is the
+          island chain's modern coordinate from Wikidata (CC0), placed to stand for the islands as a
+          whole.
+        basis: interpretation
+        attributed_to: 平凡社「改訂新版 世界大百科事典」「値嘉島」 (井上辰雄)
+        sources:
+          - source: sekai-daihyakka-chika
+            at: 値嘉島
+          - source: wikidata
+            at: Q1333790 (P625), revision 2544236760
 modern:
   - form: 五島列島
     lang: ja
     script: Hani
-    note: Modern name recorded for orientation; the cited passages do not state a site identification.
+    note: The island chain the reference work centres 値嘉島 on; recorded as the identification the
+      placement rests on.

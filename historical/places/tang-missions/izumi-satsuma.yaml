@@ -14,21 +14,32 @@ names:
         at: 卷第卅五 寶龜九年十一月乙夘
         quote: 第二船到泊薩摩國出水郡。
 at:
-  - interpretation: display_anchor
-    precision: unspecified
-    point: [130.152, 32.179]
+  - interpretation: approximate_point
+    precision: region
+    point: [130.352667, 32.090444]
     notes:
-      Label anchor at the modern 出水郡 district (Wikidata Q1043795). It is not an asserted historical
-      coordinate.
+      A region-level placement standing for the whole of 薩摩國出水郡, at the modern city of 出水, whose
+      own history names 出水郡 and this 778 arrival. It asserts no harbour the second ship put in at. The
+      modern 出水郡's coordinate (Wikidata Q1043795) is no longer used, because since 2006 that district
+      is only 長島町, whose 長島 and 獅子島 belonged to 肥後國天草郡 until 1581.
     cite:
-      - id: izumi-satsuma-anchor
+      - id: izumi-satsuma-identification
         says:
-          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
-          is asserted.
-        source: wikidata
-        at: Q1043795 (P625), revision 2539042126
+          The city of 出水 dates the first appearance of its name to the 續日本紀 entry on a 遣唐使 ship
+          that came to 出水 in 778, and describes the 出水郡 of the time as five 郷 under the 和名類聚抄. The
+          point is the city's modern coordinate from Wikidata (CC0), the first of the two the item
+          records, placed to stand for the district as a whole.
+        basis: interpretation
+        attributed_to: 出水市
+        sources:
+          - source: izumi-city-history
+            at: 飛鳥・奈良・平安時代
+          - source: wikidata
+            at: Q15734 (P625), revision 2550079104
 modern:
   - form: 出水市
     lang: ja
     script: Hani
-    note: Modern name recorded for orientation; the cited passages do not state a site identification.
+    note:
+      The modern city whose own history identifies it with the 出水 of the 778 arrival; recorded as the
+      identification the placement rests on.

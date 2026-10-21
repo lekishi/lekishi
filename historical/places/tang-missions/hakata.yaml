@@ -32,19 +32,29 @@ names:
         at: 卷第八 承和六年十月丁巳
         quote: 皈着筑前國博多津。
 at:
-  - interpretation: display_anchor
-    precision: unspecified
-    point: [130.414722, 33.591389]
-    notes: Label anchor at 博多區 of 福岡 (Wikidata Q1330839). It is not an asserted historical coordinate.
+  - interpretation: approximate_point
+    precision: region
+    point: [130.385694, 33.5865]
+    notes:
+      A region-level placement standing for the harbour of 博多大津 on 博多灣, at the 鴻臚館跡, the
+      excavated site of the 筑紫館 where missions made ready for the crossing. The cited page does not
+      name 博多大津 or locate its anchorage; the point places neither, nor any landing.
     cite:
-      - id: hakata-anchor
+      - id: hakata-identification
         says:
-          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
-          is asserted.
-        source: wikidata
-        at: Q1330839 (P625), revision 2550907041
+          The 鴻臚館跡 at 福岡市中央区城内 is the site of the 鴻臚館, called 筑紫館 before the Heian period,
+          the 大宰府's reception house for foreign envoys and the place where the 遣唐使 made ready to go
+          abroad; excavation from 1987 confirmed its location. The point is the site's modern coordinate
+          from Wikidata (CC0), placed to stand for the harbour area the missions used.
+        basis: interpretation
+        attributed_to: 福岡市 (経済観光文化局 文化財活用課)
+        sources:
+          - source: fukuoka-bunkazai-korokan
+            at: 鴻臚館跡
+          - source: wikidata
+            at: Q11675677 (P625), revision 2557596639
 modern:
   - form: 福岡市
     lang: ja
     script: Hani
-    note: Modern name recorded for orientation; the cited passages do not state a site identification.
+    note: Modern city recorded for orientation; the 鴻臚館跡 lies in its 中央区, within the 福岡城跡.

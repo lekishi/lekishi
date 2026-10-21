@@ -14,19 +14,30 @@ names:
         at: 卷第卅五 寶龜九年十一月壬子
         quote: 遣唐第四船來泊薩摩國甑嶋郡。
 at:
-  - interpretation: display_anchor
-    precision: unspecified
+  - interpretation: approximate_point
+    precision: region
     point: [129.784239, 31.753281]
-    notes: Label anchor at the 甑島列島 (Wikidata Q49515). It is not an asserted historical coordinate.
+    notes:
+      A region-level placement standing for the whole of 甑嶋郡, the island district that is the
+      present-day 甑島列島. The point is the island chain's modern coordinate; no island or harbour the
+      ships came in at is asserted.
     cite:
-      - id: koshikijima-anchor
+      - id: koshikijima-identification
         says:
-          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
-          is asserted.
-        source: wikidata
-        at: Q49515 (P625), revision 2559120919
+          The reference work describes the 甑島列島, the 上甑島, 中甑島 and 下甑島 group, as having belonged
+          to 薩摩國甑嶋郡 and records that 遣唐使 ships came ashore there. The point is the island chain's
+          modern coordinate from Wikidata (CC0), placed to stand for the district as a whole.
+        basis: interpretation
+        attributed_to: 平凡社「百科事典マイペディア」「甑島列島」
+        sources:
+          - source: mypedia-koshikijima
+            at: 甑島列島
+          - source: wikidata
+            at: Q49515 (P625), revision 2559120919
 modern:
   - form: 甑島列島
     lang: ja
     script: Hani
-    note: Modern name recorded for orientation; the cited passages do not state a site identification.
+    note:
+      The island chain the reference work places in 甑嶋郡, now part of 薩摩川内市; recorded as the
+      identification the placement rests on.

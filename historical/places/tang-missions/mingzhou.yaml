@@ -14,19 +14,27 @@ names:
         at: 卷第十二 延暦廿四年六月乙巳
         quote: 至管内明州發遣。
 at:
-  - interpretation: display_anchor
-    precision: unspecified
+  - interpretation: approximate_point
+    precision: region
     point: [121.549167, 29.875]
-    notes: Label anchor at the modern city of 寧波 (Wikidata Q42780). It is not an asserted historical coordinate.
+    notes:
+      A region-level placement standing for the prefecture, at modern 寧波, whose old name is 明州. The
+      point is the modern city's coordinate; it places no harbour the ships came in at or sailed from.
+      The prefecture's seat moved within the area in 771, and the point does not choose between them.
     cite:
-      - id: mingzhou-anchor
+      - id: mingzhou-identification
         says:
-          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
-          is asserted.
-        source: wikidata
-        at: Q42780 (P625), revision 2548007870
+          明州 is the old name of 寧波, the name the city bore in the Tang and Song. The point is the
+          modern city's coordinate from Wikidata (CC0), placed to stand for the prefecture.
+        basis: interpretation
+        attributed_to: 平凡社 (百科事典マイペディア)
+        sources:
+          - source: mypedia-mingzhou
+            at: 明州
+          - source: wikidata
+            at: Q42780 (P625), revision 2548007870
 modern:
   - form: 寧波市
     lang: zh
     script: Hani
-    note: Modern name recorded for orientation; the cited passages do not state a site identification.
+    note: The modern city whose old name is 明州; recorded as the identification the placement rests on.

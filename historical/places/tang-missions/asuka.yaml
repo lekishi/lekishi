@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../../schema/place.schema.json
 summary:
-  飛鳥岡本, the site in 飛鳥 where 舒明 held court at 岡本宮 from 630 and 齊明 at 後飛鳥岡本宮 from 656. Court acts
-  of the 630 and 659 missions are anchored here for display.
+  飛鳥岡本, the site in 飛鳥 where 舒明 held court at 岡本宮 from 630 and 齊明 at 後飛鳥岡本宮 from 656. The 659
+  mission's dispatch names it as the court's seat, as context.
 types: [capital]
 names:
   - form: 岡本宮
@@ -25,20 +25,35 @@ names:
         at: 卷第廿六 齊明天皇二年 是歲
         quote: 天皇乃遷，號曰後飛鳥岡本宮。
 at:
-  - interpretation: display_anchor
-    precision: unspecified
+  - interpretation: approximate_point
+    precision: locality
     point: [135.820833, 34.473333]
-    notes: Label anchor at the 飛鳥宮 palace site (Wikidata Q11665955). It is not an asserted historical coordinate.
+    notes:
+      An approximate placement at the 飛鳥宮跡, the excavated site of superimposed palaces at 明日香村岡.
+      Its excavators identify the lowest remains (period I) with 舒明's 岡本宮 and the upper ones
+      (period III) with 齊明's 後飛鳥岡本宮; the period I palace is known only from small trenches and
+      its plan is unknown. The point marks the site as a whole and places no building of either palace.
     cite:
-      - id: asuka-anchor
+      - id: asuka-identification
         says:
-          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
-          is asserted.
-        source: wikidata
-        at: Q11665955 (P625), revision 2548187177
+          The 飛鳥宮跡 at 明日香村岡 and 飛鳥 holds palace remains of three periods, identified from 木簡 and
+          pottery dates with 舒明's 飛鳥岡本宮 (I), 皇極's 飛鳥板蓋宮 (II), and 齊明's 後飛鳥岡本宮 with the
+          飛鳥浄御原宮 (III). The point is the site's modern coordinate from Wikidata (CC0), recorded there
+          as 飛鳥京跡, the excavation's name.
+        basis: interpretation
+        attributed_to: 奈良県立橿原考古学研究所
+        sources:
+          - source: kashikoken-asuka-palace
+            at: 飛鳥宮跡
+          - source: wikidata
+            at: Q11665955 (P625), revision 2548187177
 modern:
-  - form: 明日香村
+  - form: 飛鳥宮跡
     lang: ja
     script: Hani
-    note: Modern name recorded for orientation; the cited passages do not state a site identification.
-notes: One record serves both palaces because the chronicle sets them on the same ground.
+    note:
+      The excavated palace site in 明日香村, a national Historic Site; recorded as the identification
+      the placement rests on.
+notes: One record serves both palaces because the chronicle sets them on the same ground and the
+  excavators find both at the 飛鳥宮跡. The identification of each period with a named palace is the
+  excavators' interpretation from dated finds, not a source statement.

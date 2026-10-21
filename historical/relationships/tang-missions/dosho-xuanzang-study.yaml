@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  道昭, who sailed with the 653 embassy, studies under 玄奘, who keeps him in his own room. Reported
+  in 道昭's obituary in 續日本紀 (700).
+types: [transmission]
+from: xuanzang
+to: dosho
+date:
+  value: 653..661
+  mode: window
+  calendar: regnal
+  as_written: 白雉四年 隨使入唐。適遇玄弉三藏。師受業焉（文武天皇四年三月己未 卒傳）
+  cite:
+    - id: dosho-xuanzang-time
+      says: The obituary dates 道昭's departure to 白雉四年; the study has no dates of its own.
+      source: shoku-nihongi
+      at: 卷第一 文武天皇四年三月己未
+      quote: 初孝徳天皇白雉四年。隨使入唐。適遇玄弉三藏。師受業焉。三藏特愛。令住同房。
+notes:
+  "An obituary written about 47 years after the events, with an anecdote (the pear) that the record
+  does not publish. The window's end is an editorial bound, not a sourced date: the obituary gives no
+  return year."
+cite:
+  - id: dosho-xuanzang-basis
+    says:
+      The obituary records that 道昭 went to 唐 with the 653 embassy, met 玄奘 and studied under him, and
+      that 玄奘 had him live in the same room.
+    source: shoku-nihongi
+    at: 卷第一 文武天皇四年三月己未

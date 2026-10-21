@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "The first mission from 日本國 (倭國 in the Tang history) to 唐: 犬上三田耜 is sent in 630, the Tang court
+  receives the embassy in 631, and the Tang envoy 高表仁 escorts him back in 632 and leaves in 633."
+types: [diplomacy]
+from: japan-state
+to: tang-dynasty
+date:
+  value: 630..633
+  mode: duration
+  calendar: regnal
+  as_written: 舒明天皇二年八月 遣於大唐; 貞觀五年 遣使獻方物; 舒明天皇五年正月 高表仁歸國
+  cite:
+    - id: japan-tang-mission-630-time
+      says: The chronicle dates the dispatch to 舒明天皇二年 and 高表仁's departure to 舒明天皇五年.
+      source: nihon-shoki
+      at: 卷第廿三 舒明天皇二年八月丁酉; 舒明天皇五年正月甲辰
+notes:
+  Directional and asserts no causation. The Japanese and Tang accounts of 高表仁's visit differ and
+  are kept apart on mission-633-gao-biaoren-departure.
+cite:
+  - id: japan-tang-mission-630-basis
+    says:
+      The chronicle records the dispatch and the return with 高表仁; the Tang history records the embassy
+      of 貞觀五年.
+    sources:
+      - source: nihon-shoki
+        at: 卷第廿三 舒明天皇二年八月丁酉; 舒明天皇四年八月
+      - source: jiu-tangshu
+        at: 卷199上 東夷 倭國（貞觀五年，遣使獻方物）

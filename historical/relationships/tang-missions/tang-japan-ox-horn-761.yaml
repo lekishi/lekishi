@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  The Tang emperor asks Japan for ox horn to make bows after the rebellion's losses, and the court
+  orders 7,800 horns to be sent with its next envoys.
+types: [trade]
+from: tang-dynasty
+to: japan-state
+date:
+  value: "761"
+  calendar: regnal
+  as_written: 天平寶字五年十月辛酉
+  cite:
+    - id: tang-japan-ox-horn-time
+      says: The chronicle records the order on 天平寶字五年十月辛酉.
+      source: shoku-nihongi
+      at: 卷第廿三 天平寶字五年十月辛酉
+notes:
+  A request and a requisition; the chronicle records no delivery, because the embassy of 762 never
+  sailed.
+cite:
+  - id: tang-japan-ox-horn-basis
+    says: The chronicle records the order for 7,800 ox horns and the Tang emperor's request behind it.
+    source: shoku-nihongi
+    at: 卷第廿三 天平寶字五年十月辛酉
+    quote: 仰東海。東山。北陸。山陰。山陽。南海等道諸國。貢牛角七千八百隻。

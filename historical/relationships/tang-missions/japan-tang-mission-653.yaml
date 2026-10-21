@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "The two embassies of 653 and 654 from 日本國 to 唐: 吉士長丹's of 653, returned in 654, and 高向玄理's
+  of 654 by the Silla route, whose leader died in 唐 and whose envoys returned in 655."
+types: [diplomacy]
+from: japan-state
+to: tang-dynasty
+date:
+  value: 653..655
+  mode: duration
+  calendar: regnal
+  as_written: 白雉四年五月 發遣大唐大使; 齊明天皇元年八月 河邊臣麻呂等自大唐還
+  cite:
+    - id: japan-tang-mission-653-time
+      says: The chronicle dates the first dispatch to 白雉四年 and the last return to 齊明天皇元年.
+      source: nihon-shoki
+      at: 卷第廿五 白雉四年五月壬戌; 卷第廿六 齊明天皇元年八月戊戌朔
+notes:
+  Two dispatches a year apart, kept in one relationship because the chronicle reports them as consecutive
+  embassies of one reign; each has its own events. Directional, no causation asserted. The 新唐書 notices
+  the reign (永徽初, 白雉) and gifts of amber and agate without naming either embassy.
+cite:
+  - id: japan-tang-mission-653-basis
+    says: The chronicle records both dispatches and both returns.
+    source: nihon-shoki
+    at: 卷第廿五 白雉四年五月壬戌; 白雉五年二月; 白雉五年七月丁酉

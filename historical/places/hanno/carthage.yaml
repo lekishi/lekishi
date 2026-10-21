@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Carthage, the North African city whose people the Periplus of Hanno says resolved to send Hanno
+  beyond the Pillars of Heracles, and where the account says the skins were brought and the record
+  of the voyage dedicated.
+types: [settlement, port]
+names:
+  - form: Καρχηδών
+    lang: grc
+    script: Grek
+    roman: Karchēdōn
+    scheme: unspecified-editorial
+    note: Nominative of the Καρχηδόνος the account writes; the Greek form, not the Punic name.
+    cite:
+      - id: carthage-name
+        says: The account says the voyage from Carthage to the Pillars equalled the voyage from the
+          Pillars to Cerne, and that the skins were brought to Carthage.
+        source: hanno-periplus
+        at: "8; 18"
+        quote: ἐῴκει γὰρ ὁ πλοῦς ἔκ τε Καρχηδόνος ἐπὶ Στήλας κἀκεῖθεν ἐπὶ Κέρνην.
+  - form: Carthago
+    lang: la
+    script: Latn
+    cite:
+      - id: carthage-latin-name
+        says: Pliny names the city in Latin as Carthago and dates the voyage to the height of its power.
+        role: supporting
+        source: pliny-natural-history
+        at: II.67
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [10.323056, 36.853056]
+    notes: The gazetteer's representative point for ancient Carthage, in modern Tunis. An
+      identification by the gazetteer, not a statement of the account.
+    cite:
+      - id: carthage-location
+        says: Pleiades identifies ancient Carthago with the site in modern Tunis and gives this
+          representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 314921 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "314921"
+    url: https://pleiades.stoa.org/places/314921
+    license: CC BY 3.0
+notes: A shared place. Other chapters on Carthage, the Punic wars and Rome should reuse this record
+  rather than mint another.

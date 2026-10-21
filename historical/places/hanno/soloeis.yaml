@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Soloeis, the wooded Libyan promontory where the account says the fleet founded a sanctuary of
+  Poseidon. Schoff places it at Cape Cantin; the Pleiades gazetteer identifies it with Cape
+  Spartel near Tangier.
+types: [landform, religious_site]
+names:
+  - form: Σολόεις
+    lang: grc
+    script: Grek
+    roman: Soloeis
+    scheme: unspecified-editorial
+    cite:
+      - id: soloeis-name
+        says: The account says the fleet sailed west to Soloeis, a Libyan promontory thick with trees.
+        source: hanno-periplus
+        at: "3"
+        quote: Κἄπειτα πρὸς ἑσπέραν ἁναχθέντες ἐπὶ Σολόεντα, Λυβικὸν ἀκρωτήριον λάσιον δένδρεσι, συνήλθομεν.
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [-5.9236482, 35.7910308]
+    notes: Drawn at the gazetteer's identification, Cape Spartel, at region precision. Schoff's Cape
+      Cantin (about 32° 30′ N) is kept as an alternative identification and not drawn.
+    cite:
+      - id: soloeis-spartel
+        says: Pleiades identifies Soloeis (Ampelusia) with modern Cap Spartel, about 12 km west of Tangier.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 275724 (reprLatLong), dump 2026-10-21
+      - id: soloeis-cantin
+        says: Schoff says the promontory of Solois is probably Cape Cantin at 32° 30′ N.
+        basis: interpretation
+        role: alternative
+        attributed_to: W. H. Schoff (1913)
+        source: schoff-hanno
+        at: The Geography of the Voyage of Hanno, § 3
+        quote: The Promontory of Solois is probably the same as Cape Cantin at 32° 30' N.
+external_ids:
+  - system: pleiades
+    id: "275724"
+    url: https://pleiades.stoa.org/places/275724
+    license: CC BY 3.0
+dispute:
+  status: disputed
+  summary:
+    Two identifications far apart on the coast. Pleiades places Soloeis at Cape Spartel, by the strait;
+    Schoff at Cape Cantin, south of Safi. The map shows the first and the card names both.

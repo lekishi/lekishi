@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Chretes, the great river through which the account says the fleet reached a lake with three
+  islands larger than Cerne. Müller, through Schoff, identifies it with the St. Jean at 19° 25′ N;
+  nothing is drawn.
+types: [landform]
+names:
+  - form: Χρέτης
+    lang: grc
+    script: Grek
+    roman: Chretēs
+    scheme: unspecified-editorial
+    cite:
+      - id: chretes-name
+        says:
+          The account says the fleet reached a lake by sailing through a great river named Chretes,
+          and that the lake had three islands larger than Cerne.
+        source: hanno-periplus
+        at: "9"
+        quote: εἰς λίμνην ἀφικόμεθα, διά τινος ποταμοῦ μεγάλου διαπλεύσαντες, [ᾧ ὄνομα] Χρέτης
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: Not drawn. Schoff gives Müller's identification and no other.
+    cite:
+      - id: chretes-unlocated
+        says:
+          The account places the Chretes only as a great river leading to a lake, which locates it on no map; the record asserts no
+          coordinate.
+        source: hanno-periplus
+        at: "9"
+      - id: chretes-st-jean
+        says:
+          Schoff reports that Müller identifies the Chretes with the St. Jean at 19° 25′ N, at the
+          mouth of which three islands exist as the text describes.
+        basis: interpretation
+        role: alternative
+        attributed_to: K. Müller, as reported by W. H. Schoff (1913)
+        source: schoff-hanno
+        at: The Geography of the Voyage of Hanno, § 9
+        quote: The Chretes River Müller identifies with the modern St. Jean at 19° 25', at the mouth of which the three islands exist as the text describes.
+notes: The name is bracketed in the Greek Schoff prints ([ᾧ ὄνομα] Χρέτης), an editor's supplement.
+dispute:
+  status: disputed
+  summary:
+    The site is unidentified. The record draws nothing and keeps each commentator's identification
+    as an alternative.

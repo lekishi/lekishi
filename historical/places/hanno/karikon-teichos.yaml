@@ -1,0 +1,63 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Caricus Murus, the first of the five cities by the sea the account says the fleet settled a day's sail
+  beyond the elephant marsh. No site is known.
+types: [settlement]
+names:
+  - form: Καρικὸν τεῖχος
+    lang: grc
+    script: Grek
+    roman: Karikon teichos
+    scheme: unspecified-editorial
+    cite:
+      - id: karikon-teichos-name
+        says: The account names five cities the fleet settled by the sea beyond the marsh — Karikon
+          teichos, Gytte, Akra, Melitta and Arambys.
+        source: hanno-periplus
+        at: "5"
+        quote: κατῳκίσαμεν πόλεις πρὸς τῇ θαλάττῃ καλουμένας Καρικόν τε τείχος καὶ Γύττην καὶ Ἄκραν καὶ Μέλιτταν καὶ Ἄραμβυν.
+  - form: Caricus Murus
+    lang: en
+    script: Latn
+    cite:
+      - id: karikon-teichos-translation
+        says: Schoff's translation writes the name Caricus Murus.
+        role: supporting
+        source: hanno-periplus
+        at: "5"
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      No site is known and none is drawn. Schoff gives Müller's guess and calls the five locations
+      uncertain.
+    cite:
+      - id: karikon-teichos-unlocated
+        says:
+          The account places Karikon teichos a day's sail beyond the marsh, which locates it on no map; the record asserts no
+          coordinate.
+        source: hanno-periplus
+        at: "5"
+      - id: karikon-teichos-mueller
+        says: "Schoff calls the five colonies' locations uncertain and reports Müller's guess: Müller places the first at the ruins of Agouz, 32° 5' at the mouth, of the Tensift River."
+        basis: interpretation
+        role: alternative
+        attributed_to: K. Müller, as reported by W. H. Schoff (1913)
+        source: schoff-hanno
+        at: The Geography of the Voyage of Hanno, § 5
+        quote: "Müller places the first at the ruins of Agouz, 32° 5' at the mouth, of the Tensift River."
+      - id: karikon-teichos-pleiades-unlocated
+        says: Pleiades lists Karikon teichos as unlocated, after the Barrington Atlas.
+        role: supporting
+        source: pleiades
+        at: 278617 (locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "278617"
+    url: https://pleiades.stoa.org/places/278617
+    license: CC BY 3.0
+dispute:
+  status: disputed
+  summary:
+    The site is unidentified. The record draws nothing and keeps each commentator's identification
+    as an alternative.

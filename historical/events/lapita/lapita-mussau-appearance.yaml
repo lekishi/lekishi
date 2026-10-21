@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Lapita pottery appears on Mussau, the earliest in the Bismarck Archipelago in Denham, Bronk Ramsey
+  and Specht's Bayesian model.
+types: [occurrence]
+part_of: [lapita-expansion]
+date:
+  value: 1521 BCE..1301 BCE
+  mode: window
+  calendar: julian
+  as_written: 3470–3250 cal BP
+  cite:
+    - id: mussau-appearance-time
+      says:
+        Denham, Bronk Ramsey and Specht model the earliest Lapita on Mussau at 3470–3250 cal BP, converted
+        from cal BP as BCE = BP − 1949 (1950 CE is 0 BP; there is no year zero).
+      basis: interpretation
+      attributed_to: T. Denham, C. Bronk Ramsey and J. Specht (2012)
+      source: denham-2012-lapita
+      at: 39 (abstract)
+places:
+  - place: mussau-island
+    role: site
+notes:
+  The model is built on charcoal dates, which Petchey and colleagues (2015, p. 103) argue over-estimate
+  the age of Lapita events; no site-based re-dating of Mussau is recorded here.
+participants:
+  - actor: lapita-culture
+    role: participant

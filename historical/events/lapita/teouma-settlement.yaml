@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: Lapita settlers begin to use the site at Teouma on Efate, the start of its midden deposits.
+types: [founding]
+part_of: [lapita-expansion]
+date:
+  value: 971 BCE..921 BCE
+  mode: window
+  calendar: julian
+  as_written: 2920–2870 cal BP (most likely start, 68.2%); possibly as early as 3000 cal BP
+  cite:
+    - id: teouma-start-time
+      says:
+        Petchey and colleagues' Bayesian model gives a most likely start for the Lapita deposits of
+        2920–2870 cal BP, with use possibly as early as 3000 cal BP, converted from cal BP as BCE = BP −
+        1949 (1950 CE is 0 BP; there is no year zero).
+      basis: interpretation
+      attributed_to: F. Petchey, M. Spriggs, S. Bedford and F. Valentin (2015)
+      source: petchey-2015-teouma
+      at: 95 (abstract); 103
+    - id: teouma-start-preliminary
+      says:
+        Petchey and colleagues report that preliminary charcoal dating suggested first use about 3200–3000
+        cal BP (1251 BCE..1051 BCE).
+      basis: interpretation
+      role: alternative
+      attributed_to: S. Bedford et al. (2006), as reported by F. Petchey et al. (2015)
+      source: petchey-2015-teouma
+      at: "96"
+places:
+  - place: teouma
+    role: site
+dispute:
+  status: disputed
+  summary:
+    The first charcoal dates put first use at about 3200–3000 cal BP; the 2015 model, which screens
+    samples for inbuilt age, puts it at 2920–2870 cal BP. The model's maximum range for the deposits is
+    3000–2560 cal BP.
+notes: The model's end date for the deposits is 2870–2750 cal BP (921 BCE..801 BCE).
+participants:
+  - actor: lapita-culture
+    role: participant

@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Lapita pottery appears across the rest of the Bismarck Archipelago, beginning a formative phase
+  of some 130–290 years before the crossing into Remote Oceania.
+types: [process]
+part_of: [lapita-expansion]
+date:
+  value: 1411 BCE..1291 BCE
+  mode: window
+  calendar: julian
+  as_written: 3360–3240 cal BP
+  cite:
+    - id: bismarck-appearance-time
+      says:
+        Denham, Bronk Ramsey and Specht model the appearance of Lapita in the rest of the Bismarcks
+        at 3360–3240 cal BP, converted from cal BP as BCE = BP − 1949 (1950 CE is 0 BP; there is no year
+        zero).
+      basis: interpretation
+      attributed_to: T. Denham, C. Bronk Ramsey and J. Specht (2012)
+      source: denham-2012-lapita
+      at: 39 (abstract)
+    - id: bismarck-appearance-summerhayes
+      says:
+        Petchey and colleagues report Summerhayes's earlier division of Bismarck Lapita into phases,
+        with Early Lapita at 3300–3000 BP, which Denham and colleagues' model revised.
+      basis: interpretation
+      role: alternative
+      attributed_to: G. Summerhayes (2009), as reported by F. Petchey et al. (2015)
+      source: petchey-2015-teouma
+      at: "103"
+places:
+  - place: bismarck-archipelago
+    role: site
+dispute:
+  status: disputed
+  summary:
+    Denham and colleagues' model puts the appearance at 3360–3240 cal BP; Summerhayes's phases
+    put Early Lapita at 3300–3000 BP. Both rest partly on charcoal, which later work treats as too old.
+cites:
+  summary:
+    - id: bismarck-formative-phase
+      says:
+        Petchey and colleagues report that Denham and colleagues found a Bismarck formative phase of
+        about 130–290 years before the spread into Remote Oceania.
+      basis: interpretation
+      attributed_to: T. Denham, C. Bronk Ramsey and J. Specht (2012)
+      source: petchey-2015-teouma
+      at: "103"
+participants:
+  - actor: lapita-culture
+    role: participant

@@ -1,0 +1,58 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Lapita settlers reach 'Upolu in Sāmoa and make dentate-stamped pottery at Mulifanua, the eastern-most
+  Lapita site; its date is poorly fixed.
+types: [founding]
+part_of: [lapita-expansion]
+date:
+  value: 1071 BCE..811 BCE
+  mode: window
+  calendar: julian
+  as_written: 3020–2760 cal BP (68%), from one bone date, NZA-4780, 3062±66 BP
+  cite:
+    - id: mulifanua-time
+      says:
+        Petchey and Kirch recalibrate the Mulifanua age on a single bone date (NZA-4780, 3062±66 BP)
+        with a new reservoir offset, giving 3020–2760 cal BP at 68% probability, converted from cal BP as
+        BCE = BP − 1949 (1950 CE is 0 BP; there is no year zero).
+      basis: interpretation
+      attributed_to: F. Petchey and P. V. Kirch (2019)
+      source: petchey-kirch-2019
+      at: Discussion
+      quote:
+        The age for the Mulifanua Lapita site on ‘Upolu Island is now based on a single bone date (NZA-4780;
+        3062 ± 66 BP) rather than the more precise pooled result calculated by Petchey [ 16 ], and has shifted
+        to a slightly older age range (3020–2760 cal BP, 68% probability)
+    - id: mulifanua-time-2001
+      says:
+        Petchey's 2001 pooled result put the occupation at about 2880–2750 cal BP (930–800 BC in the
+        paper; 931 BCE..801 BCE by the atlas's conversion).
+      basis: interpretation
+      role: alternative
+      attributed_to: F. Petchey (2001)
+      source: petchey-2001-mulifanua
+      at: 63 (abstract)
+places:
+  - place: mulifanua
+    role: site
+dispute:
+  status: disputed
+  summary:
+    Petchey's 2001 pooled date gave 2880–2750 cal BP; Petchey and Kirch (2019), using one bone
+    date and a different reservoir offset, give 3020–2760 cal BP. They call the site poorly dated and
+    its age far from ideal.
+notes:
+  Petchey and Kirch call the site poorly dated; its overlap with the earliest Polynesian Plainware
+  at To'aga cannot be confirmed.
+cites:
+  notes:
+    - id: mulifanua-poorly-dated
+      says: Petchey and Kirch say Mulifanua is poorly dated, so its overlap with To'aga cannot be confirmed.
+      source: petchey-kirch-2019
+      at: Discussion
+      quote:
+        because the site of Mulifanua is poorly dated we cannot confirm an overlap between To’aga and
+        Sāmoan Lapita settlement
+participants:
+  - actor: lapita-culture
+    role: participant

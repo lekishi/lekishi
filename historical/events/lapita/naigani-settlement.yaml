@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "Lapita settlers reach Fiji: the Matanamuani site on Naigani holds the earliest securely dated
+  Lapita settlement in the islands."
+types: [founding]
+part_of: [lapita-expansion]
+date:
+  value: 1070 BCE..914 BCE
+  mode: window
+  calendar: julian
+  as_written: 3019–2863 cal BP (Matanamuani, VL 21/5)
+  cite:
+    - id: naigani-time
+      says:
+        Petchey and colleagues report the earliest Fijian dates, from Matanamuani on Naigani, as 3019–2863
+        cal BP, converted from cal BP as BCE = BP − 1949 (1950 CE is 0 BP; there is no year zero).
+      basis: interpretation
+      attributed_to:
+        F. Petchey et al. (2015), citing Irwin et al. (2011), Nunn and Petchey (2013) and Sheppard
+        et al. (2015)
+      source: petchey-2015-teouma
+      at: 103–104
+    - id: naigani-earliest
+      says:
+        Nunn and Petchey hold that Naigani's Matanamuani site remains the earliest securely dated Lapita
+        site in Fiji.
+      basis: interpretation
+      role: supporting
+      attributed_to: P. D. Nunn and F. Petchey (2013)
+      source: nunn-petchey-2013-bourewa
+      at: 21 (abstract)
+    - id: fiji-time-denham
+      says:
+        Denham, Bronk Ramsey and Specht's model has Lapita reaching Fiji by 3130–3010 cal BP (1181 BCE..1061
+        BCE).
+      basis: interpretation
+      role: conflicting
+      attributed_to: T. Denham, C. Bronk Ramsey and J. Specht (2012)
+      source: denham-2012-lapita
+      at: 39 (abstract)
+places:
+  - place: naigani-island
+    role: site
+dispute:
+  status: disputed
+  summary:
+    The site-based dates put the first Fijian settlement at 3019–2863 cal BP; Denham et al.'s charcoal
+    model puts Lapita in Fiji by 3130–3010 cal BP.
+participants:
+  - actor: lapita-culture
+    role: participant

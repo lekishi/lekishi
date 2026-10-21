@@ -1,0 +1,68 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "Lapita voyagers cross from the Solomons chain into Remote Oceania, perhaps leapfrogging to the
+  Reef–Santa Cruz group and on to Vanuatu: the first people on islands no one had reached before."
+types: [process]
+part_of: [lapita-expansion]
+date:
+  value: 1051 BCE
+  mode: instant
+  calendar: julian
+  as_written: around 3000 BP
+  cite:
+    - id: crossing-time
+      says:
+        Petchey and colleagues say the site-based chronologies indicate the culture spread through the
+        Solomons chain and on to Vanuatu around 3000 BP. The contract has no 'about' marker, so the record
+        writes the year 3000 BP converts to, converted from cal BP as BCE = BP − 1949 (1950 CE is 0 BP;
+        there is no year zero).
+      basis: interpretation
+      attributed_to:
+        F. Petchey et al. (2015), summarizing Sheppard et al. (2015), Nunn and Petchey (2013)
+        and Burley et al. (2015)
+      source: petchey-2015-teouma
+      at: "103"
+    - id: crossing-time-sheppard
+      says:
+        Sheppard, Chiu and Walter's re-dating of SE-SZ-8 points to an initial settlement of Remote Oceania
+        not much more than 3000 BP, later than the routinely repeated 3200 cal BP.
+      basis: interpretation
+      role: supporting
+      attributed_to: P. J. Sheppard, S. Chiu and R. Walter (2015)
+      source: sheppard-2015-santa-cruz
+      at: 26 (abstract)
+    - id: crossing-time-denham
+      says:
+        Denham, Bronk Ramsey and Specht's model has Lapita reaching Vanuatu by 3250–3100 cal BP (1301
+        BCE..1151 BCE), two centuries earlier.
+      basis: interpretation
+      role: conflicting
+      attributed_to: T. Denham, C. Bronk Ramsey and J. Specht (2012)
+      source: denham-2012-lapita
+      at: 39 (abstract)
+places:
+  - place: bismarck-archipelago
+    role: start
+  - place: santa-cruz-islands
+    role: waypoint
+  - place: vanuatu
+    role: end
+cites:
+  places:
+    - id: crossing-route
+      says:
+        Petchey and colleagues say the culture spread through the Solomon Islands chain, perhaps by
+        leapfrogging to the Reefs–Santa Cruz group, and on to Vanuatu.
+      basis: interpretation
+      attributed_to: F. Petchey et al. (2015), citing P. Sheppard and R. Walter (2006)
+      source: petchey-2015-teouma
+      at: "103"
+dispute:
+  status: disputed
+  summary:
+    "When: around 3000 BP in the site-based chronologies (Sheppard et al., Petchey et al.), or
+    3250–3100 cal BP for Vanuatu in Denham et al.'s charcoal model. The often-repeated 3200 cal BP rests
+    on Green's Reef/Santa Cruz excavations."
+participants:
+  - actor: lapita-culture
+    role: participant

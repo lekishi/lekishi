@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 鑒眞 goes on to 江州 and stays three days at 廬山東林寺, the seat of 慧遠, then at 龍泉寺. The prefect of 江州 gathers the clergy and people to welcome him and sees him off at 九江驛.
+types: [journey]
+date:
+  value: 750..753
+  mode: window
+  calendar: chinese_lunisolar
+  cite:
+    - id: lushan-time
+      says: The biography records the stay at 東林寺 and the farewell at 九江驛, without a date.
+      source: toseiden
+      at: 和上留連此地，已經三日，卽向潯陽龍泉寺
+places:
+  - place: donglin-temple
+    role: site
+  - place: jiangzhou
+    role: site
+participants:
+  - actor: jianzhen
+    role: guest
+notes: The biography gives no year after 天寶九載 (750) at 韶州; the envoys find him back in 揚州 in 天寶十二載 (753), so this is an occurrence window over 750–753. The biography's 天寶九載 at 東林寺 dates another monk's ordination there, not 鑒眞's visit.
+cites:
+  places:
+    - id: lushan-places
+      says: The biography records the prefect of 江州 seeing him off at 九江驛.
+      source: toseiden
+      at: 太守親從潯陽縣至九江驛，大和上乘舟與太守別去

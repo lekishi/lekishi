@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: Summoned to 廣州 by 盧奐, 鑒眞 goes down the 桂江 to 梧州 and on to 端州's 龍興寺, where 榮叡 dies. 鑒眞 mourns him and accompanies the bier.
+types: [occurrence]
+date:
+  value: 749..750
+  mode: window
+  calendar: chinese_lunisolar
+  cite:
+    - id: yoei-death-time
+      says: The biography records 榮叡's death at 端州龍興寺 on the way to 廣州, without a date.
+      source: toseiden
+      at: 次至端州龍興寺。榮叡師奄然遷化，大和上哀慟悲切，送喪而去
+    - id: yoei-death-chronicle
+      says: The chronicle's notice records 榮叡's death after the drift of 七載.
+      role: supporting
+      source: shoku-nihongi
+      at: 卷第廿四 天平寶字七年五月戊申
+      quote: 時榮叡物故。
+places:
+  - place: duanzhou
+    role: site
+participants:
+  - actor: yoei
+    role: subject
+  - actor: jianzhen
+    role: witness
+notes: The biography gives no year between the 748 landfall and 天寶九載 (750) at 韶州; after the year at 振州 this falls in an occurrence window over 749–750.

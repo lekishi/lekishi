@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: Three days and three nights by boat bring the party to 雷州. It goes on through 羅州, 辨州, 象州, 白州, 傭州, 藤州 and 梧州 to 桂州, met and seen off at each by officials, monks and elders.
+types: [journey]
+date:
+  value: 749..750
+  mode: window
+  calendar: chinese_lunisolar
+  cite:
+    - id: leizhou-time
+      says: The biography records the crossing and the prefectures passed, without a date.
+      source: toseiden
+      at: 三日三夜，便達雷州。羅州、辨州、象州、白州、傭州、藤州、梧州、桂州等官人、僧、道父老迎送禮拜
+places:
+  - place: leizhou
+    role: start
+  - place: guizhou-guilin
+    role: end
+participants:
+  - actor: jianzhen
+    role: leader
+notes: The biography gives no year between the 748 landfall and 天寶九載 (750) at 韶州; after the year at 振州 this falls in an occurrence window over 749–750. The prefectures between 雷州 and 桂州 are named in this order in the biography; they are kept here rather than given records.

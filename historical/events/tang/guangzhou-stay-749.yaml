@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The governor 盧奐 meets 鑒眞 outside 廣州 and lodges him at 大雲寺, where he confers the precepts. The biography describes the river full of Brahman, Persian and Kunlun ships laden with aromatics and treasure. He stays one spring.
+types: [exchange]
+date:
+  value: 749..750
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 大和上住此一春
+  cite:
+    - id: guangzhou-stay-time
+      says: The biography records one spring at 廣州 before the move to 韶州 in 天寶九載.
+      source: toseiden
+      at: 大和上住此一春，發向韶州
+places:
+  - place: guangzhou
+    role: site
+participants:
+  - actor: jianzhen
+    role: guest
+  - actor: lu-huan
+    role: host
+notes: The biography gives no year between the 748 landfall and 天寶九載 (750) at 韶州; after the year at 振州 this falls in an occurrence window over 749–750.
+cites:
+  summary:
+    - id: guangzhou-ships
+      says: The biography describes the foreign ships on the river.
+      source: toseiden
+      at: 江中有婆羅門、波斯、崑崙等舶，不知其數

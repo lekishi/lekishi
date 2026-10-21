@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: After conferring the precepts at 靈鷲寺 and 廣果寺, 鑒眞 crosses the 大庾嶺 by way of 湞昌縣 to 虔州's 開元寺, where the demoted minister 鍾紹京 invites him to set up an ordination platform at his house.
+types: [journey, exchange]
+date:
+  value: 750..753
+  mode: window
+  calendar: chinese_lunisolar
+  cite:
+    - id: qianzhou-time
+      says: The biography records the crossing of the 大庾嶺 after 韶州, without a date.
+      source: toseiden
+      at: 至湞昌縣，過大庾嶺，至虔州開元寺
+places:
+  - place: shaozhou
+    role: start
+  - place: qianzhou
+    role: site
+participants:
+  - actor: jianzhen
+    role: leader
+notes: The biography gives no year after 天寶九載 (750) at 韶州; the envoys find him back in 揚州 in 天寶十二載 (753), so this is an occurrence window over 750–753. The 大庾嶺 pass is named here and given no record.

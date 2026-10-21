@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 鑒眞 crosses the river to 新河 and 既濟寺, where the clergy and people of 江都 crowd the roads and the river with boats, and returns to his own 龍興寺. He resumes lecturing and conferring the precepts at 龍興寺, 崇福寺, 大明寺 and 延光寺.
+types: [journey]
+date:
+  value: 750..753
+  mode: window
+  calendar: chinese_lunisolar
+  cite:
+    - id: yangzhou-return-time
+      says: The biography records the return to 揚州 after 江寧, without a date.
+      source: toseiden
+      at: 過江至新河岸，卽入揚子亭既濟寺
+places:
+  - place: jiangning
+    role: start
+  - place: yangzhou
+    role: end
+    note: The biography names 既濟寺 and 龍興寺 within 揚州.
+participants:
+  - actor: jianzhen
+    role: subject
+notes: The biography gives no year after 天寶九載 (750) at 韶州; the envoys find him back in 揚州 in 天寶十二載 (753), so this is an occurrence window over 750–753.
+cites:
+  summary:
+    - id: yangzhou-return-lectures
+      says: The biography records him lecturing again at the four temples of 揚州.
+      source: toseiden
+      at: 今亦於龍興、崇福、大明、［延］光等寺講律授戒

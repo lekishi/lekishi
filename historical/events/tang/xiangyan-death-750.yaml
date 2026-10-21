@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: At 吉州, 祥彥, sitting upright on the boat, asks 思託 whether 鑒眞 is awake and says it is time to part. 鑒眞 burns incense and has him lean on an armrest facing west; 祥彥 calls the Buddha's name once and dies.
+types: [occurrence]
+date:
+  value: 750..753
+  mode: window
+  calendar: chinese_lunisolar
+  cite:
+    - id: xiangyan-death-time
+      says: The biography records 祥彥's death on the boat at 吉州, without a date.
+      source: toseiden
+      at: 次至吉州，僧祥彥於舟上端坐，問思託師云
+places:
+  - place: jizhou-jian
+    role: site
+participants:
+  - actor: xiangyan
+    role: subject
+  - actor: situo
+    role: witness
+  - actor: jianzhen
+    role: witness
+notes: The biography gives no year after 天寶九載 (750) at 韶州; the envoys find him back in 揚州 in 天寶十二載 (753), so this is an occurrence window over 750–753.

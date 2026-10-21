@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: Seven days from 九江 he reaches 江寧縣 in 潤州 and climbs the pavilion of 瓦官寺. His disciple 靈祐 comes from 棲霞寺, prostrates himself and weeps that he had not thought to see his master again, and takes him to 棲霞寺 for three days.
+types: [journey]
+date:
+  value: 750..753
+  mode: window
+  calendar: chinese_lunisolar
+  cite:
+    - id: jiangning-time
+      says: The biography records the seven days from 九江 to 江寧, without a date.
+      source: toseiden
+      at: 從此七日至潤州江寧縣，入瓦官寺登寶閣
+places:
+  - place: jiangning
+    role: site
+participants:
+  - actor: jianzhen
+    role: guest
+  - actor: lingyou
+    role: host
+notes: The biography gives no year after 天寶九載 (750) at 韶州; the envoys find him back in 揚州 in 天寶十二載 (753), so this is an occurrence window over 750–753.
+cites:
+  participants:
+    - id: jiangning-lingyou
+      says: The biography records 靈祐 coming from 棲霞寺 to meet him.
+      source: toseiden
+      at: 和上之弟子僧靈祐承大和上來，遠從棲霞寺迎來

@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  洛陽, Tang's eastern capital (東都). The diary names it for its ordination platform in 838 and
+  records 圓仁 reaching 東都 on 會昌五年六月一日 (845), on the road east after his expulsion from
+  長安.
+types: [capital, settlement]
+names:
+  - form: 洛陽
+    lang: lzh
+    script: Hani
+    roman: Luoyang
+    scheme: pinyin
+    cite:
+      - id: luoyang-name
+        says: The diary names 洛陽 as the seat of one of the two ordination platforms still permitted.
+        source: nitto-guho-junrei-gyoki
+        at: 卷一 承和五年十月十九日
+        quote: 唯有五臺山戒壇一處。洛陽終山瑠璃壇一處。
+  - form: 東都
+    lang: lzh
+    script: Hani
+    roman: Dongdu
+    scheme: pinyin
+    note: The eastern capital, the name the diary uses for 圓仁's arrival in 845.
+    cite:
+      - id: luoyang-dongdu
+        says: The diary records 圓仁 reaching 東都 on 會昌五年六月一日 and delivering 楊敬之's letter.
+        source: nitto-guho-junrei-gyoki
+        at: 卷四 會昌五年六月一日
+        quote: 六月一日。到東都崔太傅宅。送楊卿書。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [112.4245, 34.6587]
+    notes: Label anchor at the modern city of Luoyang (Wikidata Q187136). It is not an asserted
+      historical coordinate for the Tang city.
+    cite:
+      - id: luoyang-anchor
+        says:
+          The label anchor is placed at the modern city's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q187136 (P625), revision 2540529799
+modern:
+  - form: 洛阳市
+    lang: zh-Hans
+    script: Hani
+    note: Modern city recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q187136
+    url: https://www.wikidata.org/wiki/Q187136
+    license: CC0-1.0
+    note: The modern city, used for the label anchor.

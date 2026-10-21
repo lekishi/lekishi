@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  太原府, the seat of 河東道 that the diary calls the northern capital (北京). 圓仁 reached it on
+  開成五年七月十三日 (840) on his way from 五臺山 to 長安 and lodged at 華嚴下寺.
+types: [settlement]
+names:
+  - form: 太原府
+    lang: lzh
+    script: Hani
+    roman: Taiyuan fu
+    scheme: pinyin
+    cite:
+      - id: taiyuan-name
+        says: The diary names 太原府, in 河東道, as the northern capital 圓仁 reached on 開成五年七月十三日.
+        source: nitto-guho-junrei-gyoki
+        at: 卷三 開成五年七月十三日
+        quote: 行十五里到太原府。屬河東道。此則北京。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [112.5425, 37.8733]
+    notes: Label anchor at the modern city of Taiyuan (Wikidata Q72778). It is not an asserted
+      historical coordinate for the Tang city.
+    cite:
+      - id: taiyuan-anchor
+        says:
+          The label anchor is placed at the modern city's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q72778 (P625), revision 2526614020
+modern:
+  - form: 太原市
+    lang: zh-Hans
+    script: Hani
+    note: Modern city recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q72778
+    url: https://www.wikidata.org/wiki/Q72778
+    license: CC0-1.0
+    note: The modern city, used for the label anchor.

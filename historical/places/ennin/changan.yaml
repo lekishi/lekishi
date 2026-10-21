@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  長安, the Tang capital. 圓仁 reached it on 開成五年八月廿日 (840), lived there until the 會昌
+  persecution sent foreign monks home, and left it on 會昌五年五月十五日 (845).
+types: [capital, settlement]
+names:
+  - form: 長安
+    lang: lzh
+    script: Hani
+    roman: Chang'an
+    scheme: pinyin
+    cite:
+      - id: changan-name
+        says: The diary names 長安城 as the city 圓仁 reached on 開成五年八月廿日, after 灞橋 and 滻水橋.
+        source: nitto-guho-junrei-gyoki
+        at: 卷三 開成五年八月廿日
+        quote: 西行十里。到長安城東章敬寺前歇。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [108.9422, 34.2611]
+    notes: Label anchor at the modern city of Xi'an (Wikidata Q5826). It is not an asserted
+      historical coordinate, and no ward, gate or temple of the Tang city is placed.
+    cite:
+      - id: changan-anchor
+        says:
+          The label anchor is placed at the modern city's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q5826 (P625), revision 2541772944
+modern:
+  - form: 西安市
+    lang: zh-Hans
+    script: Hani
+    note: Modern city recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q5826
+    url: https://www.wikidata.org/wiki/Q5826
+    license: CC0-1.0
+    note: The modern city, used for the label anchor.
+notes:
+  The diary names many sites inside the city (春明門, 通化門, 大興善寺, 資聖寺, 青龍寺); they stay in
+  event notes rather than becoming separate site records until a chapter needs them on the map.

@@ -74,7 +74,8 @@ A chapter is published only by the `approval` block in its manifest: the
 digest of the manifest and of every record and source the chapter reaches,
 who approved it, and on which day. Only the owner writes it. `pnpm approvals`
 lists every chapter as approved, draft, or stale and shows the field-level
-changes since the last approval.
+changes since the last approval; `pnpm approvals approve all` goes through each
+chapter awaiting approval and asks the owner `y` or `n`.
 
 - A chapter without an approval is a draft: it compiles and faces every
   contract test as a preview, and production does not serve it. Development

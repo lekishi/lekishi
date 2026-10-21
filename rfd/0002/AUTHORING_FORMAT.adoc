@@ -554,6 +554,23 @@ without changing the decisions above:
   approvals, while development and pull-request previews validate and serve the
   changed content under a non-owner draft preview set.
 
+== Decided: approving one by one, with a yes — 2026-10-21
+
+The owner found approving chapter by chapter, each by typing its id back, too
+cumbersome, and asked on 2026-10-21 for one command that goes through every
+chapter awaiting approval. This supersedes the "chapter id typed back" rule in
+"Implemented on 2026-10-18"; the rest of that rule stands.
+
+* `pnpm approvals approve all` lists every chapter, then shows each draft or
+  stale chapter's changes in turn and asks `[y/N]`. Only `y` or `yes` approves;
+  Enter or any other answer leaves the chapter as it is and moves on. Each
+  approval pins the digest of the content shown above its question.
+* `pnpm approvals approve <chapter>` asks the same `[y/N]` question for one
+  chapter.
+* Both still need an interactive terminal, so a script or an agent that pipes
+  an answer in cannot approve a chapter. The approver and the date are named in
+  the question, as before.
+
 == Alternatives
 
 Chapter folders with a shared catalog for places, actors, and sources only::

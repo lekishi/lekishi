@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: Hanno of Carthage, whom the Periplus's heading calls king of the Carthaginians and Pliny a
+  Carthaginian general, sent with sixty fifty-oared ships beyond the Pillars of Heracles to found
+  cities. When he lived is not known; commentators put the voyage anywhere from the sixth to the
+  fifth century BCE.
+types: [person]
+names:
+  - form: Ἅννων
+    lang: grc
+    script: Grek
+    roman: Hannōn
+    scheme: unspecified-editorial
+    cite:
+      - id: hanno-name
+        says:
+          The account says it pleased the Carthaginians that Hanno should sail outside the Pillars
+          of Heracles and found cities of the Libyphoenicians.
+        source: hanno-periplus
+        at: "1"
+        quote: Ἔδοξε Καρχηδονίοις Ἅννωνα πλεῖν ἔξω Στηλῶν Ἡρακλείων καὶ πόλεις κτίζειν Λίβυφοινίων.
+  - form: Hanno
+    lang: la
+    script: Latn
+    cite:
+      - id: hanno-latin-name
+        says: Pliny names Hanno, a general of the Carthaginians, as the author of commentaries on a
+          voyage along the coast of Africa.
+        role: supporting
+        source: pliny-natural-history
+        at: V.1
+roles:
+  - role: other
+    note:
+      The heading calls him βασιλεύς, king; Pliny calls him a general commanded to explore the coast.
+      Pliny's translators suggest the title meant a magistrate (suffete).
+    cite:
+      - id: hanno-title-heading
+        says: The account's heading calls him Hanno, king of the Carthaginians.
+        source: hanno-periplus
+        at: title
+        quote: ΑΝΝΩΝΟΣ ΚΑΡΧΗΔΟΝΙΩΝ ΒΑΣΙΛΕΩΣ ΠΕΡΙΠΛΟΥΣ
+      - id: hanno-title-pliny
+        says: Pliny calls him a Carthaginian general commanded, in the most flourishing times of the
+          Punic state, to explore the coast of Africa.
+        role: supporting
+        source: pliny-natural-history
+        at: V.1
+        quote: There formerly existed some Commentaries written by Hanno, a Carthaginian general, who was commanded, in the most flourishing times of the Punic state, to explore the sea-coast of Africa.
+notes:
+  Pliny's 1855 translators note that he has been identified with the Hanno who was father or son of
+  the Hamilcar killed at Himera in 480 BCE; the chapter records that as their report, not as an
+  identification it makes.
+cites:
+  notes:
+    - id: hanno-himera-identification
+      says:
+        Pliny's translators say some critics identify him with Hanno, father or son of the Hamilcar
+        killed at Himera in 480 BCE, and that he probably held the office of suffete.
+      basis: interpretation
+      attributed_to: J. Bostock and H. T. Riley (1855)
+      source: pliny-natural-history
+      at: V.1, note 24

@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Colossae in Phrygia, on the Lycus above the Maeander valley, which Cyrus's army reached one stage
+  after crossing the Maeander in 401 BCE.
+types: [settlement]
+names:
+  - form: Colossae
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: colossae-name
+        says: Xenophon records the army reaching Colossae one stage beyond the Maeander.
+        source: xenophon-anabasis
+        at: I.2
+        quote: Crossing it, he marched through Phrygia a single stage, of eight parasangs, to Colossae
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [29.25992, 37.78679]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: colossae-location
+        says:
+          Pleiades identifies the place and gives its representative point as 37.7867946862, 29.2599208967
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 638811 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "638811"
+    url: https://pleiades.stoa.org/places/638811
+    license: CC BY 3.0

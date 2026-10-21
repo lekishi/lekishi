@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Opis, a large city on the Tigris that the Greeks passed on their march north in 401 BCE; Alexander's
+  army mutinied there in 324 BCE.
+types: [settlement]
+names:
+  - form: Ὦπις
+    lang: grc
+    script: Grek
+    roman: Opis
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: opis-greek-name
+        says: Pleiades records the ancient Greek name Ὦπις for this place.
+        source: pleiades
+        at: place 894056, name /places/894056/opis, dump 2026-10-21
+      - id: opis-name
+        says: Xenophon names Opis as a large and populous city on the Greeks' route.
+        source: xenophon-anabasis
+        at: II.4
+        quote: Here lay a large and populous city named Opis
+        role: supporting
+  - form: Opis
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: opis-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [44.7015, 33.1844]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: opis-location
+        says:
+          Pleiades identifies the place and gives its representative point as 33.1844, 44.7015 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 894056 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "894056"
+    url: https://pleiades.stoa.org/places/894056
+    license: CC BY 3.0

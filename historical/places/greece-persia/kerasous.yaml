@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Cerasus, a Greek colony of Sinope on the Black Sea coast west of Trapezus, where the Greeks mustered
+  and divided their spoils in 400 BCE.
+types: [settlement, port]
+names:
+  - form: Cerasus
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: kerasous-name
+        says: Xenophon describes Cerasus as a Greek city on the sea, a colony of Sinope.
+        source: xenophon-anabasis
+        at: V.3
+        quote:
+          on the third they reached Cerasus, a Hellenic city on the sea, and a colony of Sinope, in the
+          country of the Colchians.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [39.31903, 41.05814]
+    notes:
+      The gazetteer has two places named Kerasous on this coast; this record takes the one nearer Trapezus,
+      three days' march away as Xenophon says. The identification is uncertain.
+    cite:
+      - id: kerasous-location
+        says:
+          Pleiades identifies the place and gives its representative point as 41.05814, 39.319029 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 857183 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "857183"
+    url: https://pleiades.stoa.org/places/857183
+    license: CC BY 3.0

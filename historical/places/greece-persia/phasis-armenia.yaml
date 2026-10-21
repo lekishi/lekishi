@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The river Xenophon calls the Phasis, in Armenia, which the Greeks reached in the winter of 401–400
+  BCE. It is not the Phasis of Colchis.
+types: [landform]
+names:
+  - form: Phasis
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: phasis-armenia-name
+        says: Xenophon records the Greeks reaching the river Phasis.
+        source: xenophon-anabasis
+        at: IV.6
+        quote:
+          After this they marched seven stages at the rate of five parasangs a day, to the banks of the
+          river Phasis
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [41.5, 39.5]
+    notes: The gazetteer's rough point for the Armenian Phasis. It is a label position for a river.
+    cite:
+      - id: phasis-armenia-location
+        says:
+          Pleiades identifies the place and gives its representative point as 39.5, 41.5 (latitude, longitude),
+          with location precision rough.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 874645 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "874645"
+    url: https://pleiades.stoa.org/places/874645
+    license: CC BY 3.0

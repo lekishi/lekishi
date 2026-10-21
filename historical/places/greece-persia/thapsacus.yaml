@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Thapsacus, a large city on the Euphrates where Cyrus's army forded the river in 401 BCE and Alexander
+  crossed it in 331 BCE. Its site is not known.
+types: [settlement]
+names:
+  - form: Thapsacus
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: thapsacus-name
+        says: Xenophon describes Thapsacus as a large city on the Euphrates.
+        source: xenophon-anabasis
+        at: I.4
+        quote: A large and flourishing city, named Thapsacus, stands on its banks.
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      "Unlocated: the gazetteer says the site of Thapsacus is no longer known; its coordinates for
+      the place are a coarse placeholder and are not drawn."
+    cite:
+      - id: thapsacus-unlocated
+        says:
+          Pleiades says the location of Thapsacus is no longer known, only that it lay on the western
+          bank of the Euphrates.
+        source: pleiades
+        at: "place 674270 (locationPrecision: rough), dump 2026-10-21"
+external_ids:
+  - system: pleiades
+    id: "674270"
+    url: https://pleiades.stoa.org/places/674270
+    license: CC BY 3.0

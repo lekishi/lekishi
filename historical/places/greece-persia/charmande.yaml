@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Charmande, a large city across the Euphrates from the line of Cyrus's desert march, where the
+  soldiers crossed on skin rafts to buy food in 401 BCE.
+types: [settlement]
+names:
+  - form: Charmande
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: charmande-name
+        says: Xenophon names Charmande as a large city across the Euphrates from the march.
+        source: xenophon-anabasis
+        at: I.5
+        quote:
+          On the opposite side of the Euphrates to the point reached on one of these desert stages, was
+          a large and flourishing city named Charmande.
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: "Unlocated: the gazetteer records Charmande without a position. No point is drawn."
+    cite:
+      - id: charmande-unlocated
+        says: Pleiades records Charmande as unlocated.
+        source: pleiades
+        at: "place 897753 (locationPrecision: unlocated), dump 2026-10-21"
+external_ids:
+  - system: pleiades
+    id: "897753"
+    url: https://pleiades.stoa.org/places/897753
+    license: CC BY 3.0

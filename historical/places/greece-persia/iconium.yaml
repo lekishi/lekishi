@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Iconium, which Xenophon calls the last city of Phrygia, where Cyrus halted three days in 401
+  BCE before marching through Lycaonia.
+types: [settlement]
+names:
+  - form: Iconium
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: iconium-name
+        says: Xenophon records the army reaching Iconium, the last city of Phrygia.
+        source: xenophon-anabasis
+        at: I.2
+        quote:
+          From this place he marched on three stages--twenty parasangs--to Iconium, the last city of
+          Phrygia, where he remained three days.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [32.4923, 37.87246]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: iconium-location
+        says:
+          Pleiades identifies the place and gives its representative point as 37.8724559041, 32.4922950123
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 648647 (reprLatLong, locationPrecision), dump 2026-10-21
+modern:
+  - form: Konya
+    lang: tr
+    note: The modern city on the site.
+external_ids:
+  - system: pleiades
+    id: "648647"
+    url: https://pleiades.stoa.org/places/648647
+    license: CC BY 3.0

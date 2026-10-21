@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Tyana in Cappadocia, which Xenophon calls Dana, a large and flourishing city where Cyrus halted
+  three days in 401 BCE and put a Persian officer to death.
+types: [settlement]
+names:
+  - form: Τύανα
+    lang: grc
+    script: Grek
+    roman: Dana
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: tyana-greek-name
+        says: Pleiades records the ancient Greek name Τύανα for this place.
+        source: pleiades
+        at: place 648801, name /places/648801/tyana, dump 2026-10-21
+      - id: tyana-name
+        says: Xenophon records the army reaching Dana in Cappadocia.
+        source: xenophon-anabasis
+        at: I.2
+        quote:
+          With the rest of the troops he continued his march through Cappadocia four stages--twenty-five
+          parasangs--to Dana, a populous city, large and flourishing.
+        role: supporting
+  - form: Dana
+    lang: en
+    script: Latn
+    role: alternate
+    note: Xenophon's form in Dakyns's translation; the gazetteer lists Dana among the names of Tyana.
+    claim: tyana-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [34.57222, 37.82315]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: tyana-location
+        says:
+          Pleiades identifies the place and gives its representative point as 37.823151, 34.57222 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 648801 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "648801"
+    url: https://pleiades.stoa.org/places/648801
+    license: CC BY 3.0

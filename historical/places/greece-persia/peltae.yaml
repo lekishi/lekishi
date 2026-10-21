@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Peltae, a populous city of Phrygia two stages beyond Celaenae, where Cyrus halted three days
+  while the Arcadian Xenias celebrated the Lycaea with games.
+types: [settlement]
+names:
+  - form: Peltae
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: peltae-name
+        says:
+          Xenophon names Peltae, two stages beyond Celaenae, as a populous city where Cyrus halted three
+          days.
+        source: xenophon-anabasis
+        at: I.2
+        quote:
+          From this place he continued his march two stages--ten parasangs--to the populous city of Peltae,
+          where he remained three days
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      "Unlocated: the record names no gazetteer entry for Peltae, and Xenophon gives only its distance
+      in stages from Celaenae. No point is drawn."
+    cite:
+      - id: peltae-unlocated
+        says: Xenophon places Peltae two stages, ten parasangs, beyond Celaenae and gives no other position.
+        source: xenophon-anabasis
+        at: I.2

@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The country of the Taochians, a people of strongholds in north-east Anatolia whom the Greeks
+  fought for supplies in the winter of 401–400 BCE.
+types: [region]
+names:
+  - form: Τάοχοι
+    lang: grc
+    script: Grek
+    roman: the country of the Taochians
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: taochoi-greek-name
+        says: Pleiades records the ancient Greek name Τάοχοι for this place.
+        source: pleiades
+        at: place 857343, name /places/857343/tauchoi, dump 2026-10-21
+      - id: taochoi-name
+        says: Xenophon records the Greeks entering the country of the Taochians.
+        source: xenophon-anabasis
+        at: IV.7
+        quote:
+          After this they marched into the country of the Taochians five stages--thirty parasangs--and
+          provisions failed
+        role: supporting
+  - form: the country of the Taochians
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: taochoi-name
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [41.66921, 40.57848]
+    notes: The gazetteer's label point for the people. It marks a region, not a settlement.
+    cite:
+      - id: taochoi-location
+        says:
+          Pleiades identifies the place and gives its representative point as 40.5784818904, 41.669213866
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 857343 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "857343"
+    url: https://pleiades.stoa.org/places/857343
+    license: CC BY 3.0

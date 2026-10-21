@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Heraclea on the Black Sea, a colony of Megara among the Mariandynians, where the Greek army split
+  into three bodies in 400 BCE.
+types: [settlement, port]
+names:
+  - form: Heraclea
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: heraclea-pontica-name
+        says: Xenophon describes Heraclea as a Greek city, a colony of Megara.
+        source: xenophon-anabasis
+        at: VI.2
+        quote:
+          they reached Heraclea , a Hellenic city and a colony of the Megarians, situated in the territory
+          of the Mariandynians.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [31.41741, 41.28326]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: heraclea-pontica-location
+        says:
+          Pleiades identifies the place and gives its representative point as 41.2832553333, 31.4174136667
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 844944 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "844944"
+    url: https://pleiades.stoa.org/places/844944
+    license: CC BY 3.0

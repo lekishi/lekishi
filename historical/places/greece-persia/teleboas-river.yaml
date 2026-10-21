@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The river Teleboas in western Armenia, which the Greeks reached in the snow of the winter of
+  401–400 BCE.
+types: [landform]
+names:
+  - form: Teleboas
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: teleboas-river-name
+        says: Xenophon records the Greeks reaching the river Teleboas.
+        source: xenophon-anabasis
+        at: IV.4
+        quote: and from this point they marched three stages--fifteen parasangs--to the river Teleboas.
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [41.5, 38.5]
+    notes:
+      The gazetteer marks its identification with a question mark and gives a rough point. It is a
+      label position for a river.
+    cite:
+      - id: teleboas-river-location
+        says:
+          Pleiades identifies the place and gives its representative point as 38.5, 41.5 (latitude, longitude),
+          with location precision rough.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 874721 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "874721"
+    url: https://pleiades.stoa.org/places/874721
+    license: CC BY 3.0

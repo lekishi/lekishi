@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The river Zapatas, the Great Zab, where the Greeks halted three days in 401 BCE and Tissaphernes
+  seized their generals.
+types: [landform]
+names:
+  - form: Zapatas
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: zapatas-river-name
+        says: Xenophon records the Greeks reaching the Zapatas and halting there three days.
+        source: xenophon-anabasis
+        at: II.5
+        quote:
+          After this they reached the river Zapatas , which is four hundred feet broad, and here they
+          halted three days.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [43.91603, 37.18899]
+    notes:
+      The gazetteer's representative point for the river. It is a label position for a river, not the
+      place of the camp.
+    cite:
+      - id: zapatas-river-location
+        says:
+          Pleiades identifies the place and gives its representative point as 37.1889895414, 43.9160345743
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 894183 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "894183"
+    url: https://pleiades.stoa.org/places/894183
+    license: CC BY 3.0

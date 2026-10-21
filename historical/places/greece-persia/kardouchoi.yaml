@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The mountain country of the Carduchians north of the Tigris, which the Greeks crossed in seven
+  days of continuous fighting in 401 BCE.
+types: [region]
+names:
+  - form: the country of the Carduchians
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: kardouchoi-name
+        says: Xenophon names the country of the Carduchians beyond the Centrites.
+        source: xenophon-anabasis
+        at: IV.3
+        quote: It is the frontier river between Armenia and the country of the Carduchians.
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [42.17627, 37.55635]
+    notes: The gazetteer's label point for the people. It marks a region, not a settlement.
+    cite:
+      - id: kardouchoi-location
+        says:
+          Pleiades identifies the place and gives its representative point as 37.5563535339, 42.1762666698
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 874541 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "874541"
+    url: https://pleiades.stoa.org/places/874541
+    license: CC BY 3.0

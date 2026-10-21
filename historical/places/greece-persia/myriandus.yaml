@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Myriandus, a Phoenician port on the Syrian coast where Cyrus's army halted seven days in 401
+  BCE and two Greek generals sailed home.
+types: [settlement, port]
+names:
+  - form: Μυρίανδρος
+    lang: grc
+    script: Grek
+    roman: Myriandus
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: myriandus-greek-name
+        says: Pleiades records the ancient Greek name Μυρίανδρος for this place.
+        source: pleiades
+        at: place 658541, name /places/658541/myriandros, dump 2026-10-21
+      - id: myriandus-name
+        says: Xenophon describes Myriandus as a city of Phoenicians on the coast of Syria.
+        source: xenophon-anabasis
+        at: I.4
+        quote:
+          From this point Cyrus pursued his march, through Syria a single stage--five parasangs--to Myriandus,
+          a city inhabited by Phoenicians, on the sea-coast.
+        role: supporting
+  - form: Myriandus
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: myriandus-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [36.11036, 36.56585]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: myriandus-location
+        says:
+          Pleiades identifies the place and gives its representative point as 36.565848, 36.110356 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 658541 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "658541"
+    url: https://pleiades.stoa.org/places/658541
+    license: CC BY 3.0

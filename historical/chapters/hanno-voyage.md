@@ -77,7 +77,6 @@ Proposed to the owner, not built:
 `carthage` and `gades` are byte-for-byte copies of the Hannibal thread's files
 (PR #40), with the sources they cite (`livy`, `polybius`), so the branches merge
 cleanly; the Hanno and Pliny name forms live in the events that cite them.
-`pliny-natural-history` is also minted on the Nile thread's branch, from
-another edition; whichever PR merges second must fold its record into the
-first, and the build fails on the duplicate id until it does. `pleiades` is
+`pliny-natural-history` is the merged record the Nile thread wrote for both
+chapters, copied byte for byte. `pleiades` is
 byte-identical across branches.

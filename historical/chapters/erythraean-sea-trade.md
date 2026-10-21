@@ -64,8 +64,8 @@ its notes.
 Three places use the ids other branches mint for the same place, so that the
 duplicate fails the build and is merged rather than living as two records:
 `bharukaccha` (Barygaza; the 玄奘 chapter), `ujjayini` (Ozene; the Ashoka
-chapter) and `lanka` (Taprobane; the Ashoka chapter). `pliny-natural-history`
-collides in the same way with the Nile chapter.
+chapter) and `lanka` (Taprobane; the Ashoka chapter). `pliny-natural-history` is the
+merged record the Nile thread wrote for both chapters, copied byte for byte.
 
 `rome` is the record the Stephen II chapter minted on `main`; this chapter
 folded into it its Pliny name, the Rome thread's (PR #30) Livy citation and the

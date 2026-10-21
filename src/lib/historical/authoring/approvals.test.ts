@@ -1,15 +1,22 @@
 import { describe, expect, it } from "vitest"
 import { type JsonObject } from "../contract/types"
 import {
+  approveEach,
   chapterViews,
   compareViews,
+  confirmed,
   findBaseline,
   viewsOf,
   where,
   withApproval,
   type History,
 } from "./approvals"
-import { compileChapter, historicalChapterDigestV1, type ChapterBundle } from "./compile"
+import {
+  compileChapter,
+  historicalChapterDigestV1,
+  type Approval,
+  type ChapterBundle,
+} from "./compile"
 import { buildTree, readFiles, type TreeFile } from "./tree"
 
 /**
@@ -345,5 +352,66 @@ describe("pnpm approvals", () => {
     expect(where(before, after)).toBe(
       `…${"a".repeat(25)} the [-old-]{+new+} reading ${"z".repeat(21)}…`,
     )
+  })
+
+  it("approves only on an explicit yes", () => {
+    for (const answer of ["y", "Y", " yes ", "YES"]) {
+      expect(confirmed(answer)).toBe(true)
+    }
+
+    for (const answer of ["", "n", "no", "yy", TANG, "approve"]) {
+      expect(confirmed(answer)).toBe(false)
+    }
+  })
+
+  it("asks about each chapter in turn and writes an approval only for a yes", async () => {
+    const tang = compiled(files())
+    const other = { ...tang, id: "other-chapter", digest: `sha256:${"1".repeat(64)}` }
+    const questions: string[] = []
+    const written: [string, Approval][] = []
+    const out: string[] = []
+    const answers = ["y", ""]
+
+    const code = await approveEach([tang, other], {
+      approver: "Example Owner",
+      on: "2026-10-21",
+      ask: async (question) => {
+        questions.push(question)
+        return answers.shift() as string
+      },
+      show: (bundle) => `changes of ${bundle.id}`,
+      write: (bundle, approval) => {
+        written.push([bundle.id, approval])
+        return "approved"
+      },
+      out: (text) => out.push(text),
+    })
+
+    expect(code).toBe(0)
+    expect(questions).toHaveLength(2)
+    expect(questions[0]).toContain(`${TANG} (1 of 2) at ${tang.digest}`)
+    expect(questions[0]).toMatch(/as Example Owner, on 2026-10-21\? \[y\/N\] $/)
+    expect(out.indexOf(`changes of ${TANG}`)).toBeLessThan(out.indexOf("changes of other-chapter"))
+    expect(written).toEqual([
+      [TANG, { digest: tang.digest, by: "Example Owner", on: "2026-10-21" }],
+    ])
+    expect(out).toContain(`Approved ${TANG}.`)
+    expect(out).toContain("Not approved: other-chapter.")
+  })
+
+  it("fails when a written approval does not compile as approved", async () => {
+    const out: string[] = []
+    const code = await approveEach([compiled(files())], {
+      approver: "Example Owner",
+      on: "2026-10-21",
+      ask: async () => "y",
+      show: () => "",
+      write: () => "stale",
+      out: (text) => out.push(text),
+    })
+
+    expect(code).toBe(1)
+    expect(out.join("\n")).toContain(`${TANG} is stale`)
+    expect(out.join("\n")).not.toContain("Approved")
   })
 })

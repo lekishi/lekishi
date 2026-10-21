@@ -44,9 +44,11 @@ import {
  * reads as unchanged.
  *
  * `pnpm approvals approve <chapter>` writes the approval, and only for a person:
- * it needs an interactive terminal and the chapter id typed back. It names the
- * approver from `git config user.name` unless `--by` gives a name, and dates the
- * approval in UTC, as the build's gate does.
+ * it needs an interactive terminal and a typed `y` after the changes it shows.
+ * `pnpm approvals approve all` asks the same about every chapter awaiting
+ * approval, one at a time. It names the approver from `git config user.name`
+ * unless `--by` gives a name, and dates the approval in UTC, as the build's gate
+ * does.
  */
 
 /** Reads the repository's history. Split out so the comparison can be tested without Git. */
@@ -541,6 +543,7 @@ export function formatChanges(
   changes: readonly DocumentChange[],
   history: History,
   paint: Paint = painter(false),
+  hint = true,
 ): string {
   const counts = { added: 0, removed: 0, changed: 0 }
 
@@ -586,11 +589,12 @@ export function formatChanges(
     }
   }
 
-  lines.push(
-    "",
-    `  This content is ${bundle.digest}.`,
-    `  To approve it: pnpm approvals approve ${bundle.id}`,
-  )
+  lines.push("", `  This content is ${bundle.digest}.`)
+
+  // The approval prompt follows the changes directly, so it needs no pointer to itself.
+  if (hint) {
+    lines.push(`  To approve it: pnpm approvals approve ${bundle.id}`)
+  }
 
   return lines.join("\n")
 }
@@ -667,71 +671,147 @@ export function gitHistory(root: string): History {
 const USAGE = `Usage:
   pnpm approvals                     list every chapter, with the changes awaiting approval
   pnpm approvals diff <chapter>      show one chapter's changes since its last approval
+  pnpm approvals approve all [--by "Name"]
+                                     go through every chapter awaiting approval, one by one
   pnpm approvals approve <chapter> [--by "Name"]
-                                     approve a chapter's current content (the owner only,
-                                     in an interactive terminal)`
+                                     approve one chapter's current content
+                                     (approving is for the owner, in an interactive terminal)`
 
 function today(): string {
   return new Date().toISOString().slice(0, 10)
 }
 
+/** Only an explicit yes approves; Enter, or any other answer, leaves the chapter as it is. */
+export function confirmed(answer: string): boolean {
+  return /^y(es)?$/i.test(answer.trim())
+}
+
+export type ApprovalSession = {
+  readonly approver: string
+  readonly on: string
+  /** Asks one question and resolves to the typed answer. */
+  readonly ask: (question: string) => Promise<string>
+  /** The chapter's changes since its last approval, shown before its question. */
+  readonly show: (bundle: ChapterBundle) => string
+  /** Writes the approval and returns the chapter's state as the build then compiles it. */
+  readonly write: (bundle: ChapterBundle, approval: Approval) => ChapterBundle["state"]
+  readonly out: (text: string) => void
+}
+
+/**
+ * Asks about each chapter in turn, showing its changes first, and writes an
+ * approval only on a yes. Each approval pins the digest of the content shown
+ * above its question, never content compiled after it was asked.
+ */
+export async function approveEach(
+  bundles: readonly ChapterBundle[],
+  session: ApprovalSession,
+): Promise<number> {
+  const approved: string[] = []
+  const skipped: string[] = []
+  let failed = false
+
+  for (const [index, bundle] of bundles.entries()) {
+    const counter = bundles.length > 1 ? ` (${index + 1} of ${bundles.length})` : ""
+
+    session.out("")
+    session.out(session.show(bundle))
+
+    const answer = await session.ask(
+      `\nApprove ${bundle.id}${counter} at ${bundle.digest}\nas ${session.approver}, on ${session.on}? [y/N] `,
+    )
+
+    if (!confirmed(answer)) {
+      skipped.push(bundle.id)
+      continue
+    }
+
+    // The written file must compile to an approval of exactly what was shown.
+    const state = session.write(bundle, {
+      digest: bundle.digest,
+      by: session.approver,
+      on: session.on,
+    })
+
+    if (state === "approved") {
+      approved.push(bundle.id)
+    } else {
+      failed = true
+      session.out(
+        `The approval was written but does not match: ${bundle.id} is ${state}. Check historical/chapters/${bundle.id}.yaml.`,
+      )
+    }
+  }
+
+  session.out("")
+
+  if (approved.length > 0) {
+    session.out(`Approved ${approved.join(", ")}.`)
+    session.out(
+      `Commit ${approved.map((id) => `historical/chapters/${id}.yaml`).join(" and ")}; nothing else changed.`,
+    )
+  }
+
+  if (skipped.length > 0) {
+    session.out(`Not approved: ${skipped.join(", ")}.`)
+  }
+
+  return failed ? 1 : 0
+}
+
+function approverName(root: string, by: string | undefined): string {
+  if (by !== undefined) {
+    return by
+  }
+
+  try {
+    return execFileSync("git", ["config", "user.name"], { cwd: root }).toString("utf8").trim()
+  } catch {
+    return ""
+  }
+}
+
 async function approve(
   root: string,
-  bundle: ChapterBundle,
+  bundles: readonly ChapterBundle[],
   by: string | undefined,
+  show: (bundle: ChapterBundle) => string,
   out: (text: string) => void,
 ): Promise<number> {
+  // The terminal check keeps approval a person's act: a script or an agent
+  // piping "y" in cannot approve a chapter.
   if (!process.stdin.isTTY || !process.stdout.isTTY) {
-    out(
-      "Approval needs an interactive terminal: only the owner approves a chapter, by typing its id.",
-    )
+    out("Approval needs an interactive terminal: only the owner approves a chapter.")
     return 1
   }
 
-  const approver =
-    by ??
-    (() => {
-      try {
-        return execFileSync("git", ["config", "user.name"], { cwd: root }).toString("utf8").trim()
-      } catch {
-        return ""
-      }
-    })()
+  const approver = approverName(root, by)
 
   if (approver === "") {
     out('Give your name with --by "Name"; git config user.name is not set.')
     return 1
   }
 
-  const approval: Approval = { digest: bundle.digest, by: approver, on: today() }
-  const file = path.join(historicalDirectory(), `chapters/${bundle.id}.yaml`)
   const prompt = createInterface({ input: process.stdin, output: process.stdout })
-  const answer = await prompt.question(
-    `\nApprove ${bundle.id} at ${bundle.digest}\nas ${approver}, on ${approval.on}? Type the chapter id to confirm: `,
-  )
 
-  prompt.close()
+  try {
+    return await approveEach(bundles, {
+      approver,
+      on: today(),
+      ask: (question) => prompt.question(question),
+      show,
+      write(bundle, approval) {
+        const file = path.join(historicalDirectory(), `chapters/${bundle.id}.yaml`)
 
-  if (answer.trim() !== bundle.id) {
-    out("Not approved: the id did not match.")
-    return 1
+        writeFileSync(file, withApproval(readFileSync(file, "utf8"), approval))
+
+        return compileChapter(buildTree(readFiles()), bundle.id).state
+      },
+      out,
+    })
+  } finally {
+    prompt.close()
   }
-
-  writeFileSync(file, withApproval(readFileSync(file, "utf8"), approval))
-
-  // The written file must compile to an approval of exactly what was shown.
-  const check = compileChapter(buildTree(readFiles()), bundle.id)
-
-  if (check.state !== "approved") {
-    out(
-      `The approval was written but does not match: ${check.id} is ${check.state}. Check historical/chapters/${bundle.id}.yaml.`,
-    )
-    return 1
-  }
-
-  out(`Approved. Commit historical/chapters/${bundle.id}.yaml; nothing else changed.`)
-
-  return 0
 }
 
 /** Runs the command line; returns the exit code. */
@@ -745,7 +825,7 @@ export async function main(
   const tree = buildTree(readFiles())
   const bundles = compileAll(tree)
   const history = gitHistory(root)
-  const changesOf = (bundle: ChapterBundle) => {
+  const changesOf = (bundle: ChapterBundle, hint = true) => {
     const baseline = findBaseline(history, bundle)
     const before = baseline.kind === "none" ? new Map<string, View>() : baseline.views
 
@@ -755,19 +835,45 @@ export async function main(
       compareViews(before, chapterViews(tree, bundle)),
       history,
       paint,
+      hint,
     )
+  }
+  const by = (args: readonly string[]) => {
+    const index = args.indexOf("--by")
+
+    return index === -1 ? undefined : args[index + 1]
   }
   const named = (id: string | undefined) => bundles.find((bundle) => bundle.id === id)
 
   if (command === undefined || command === "list") {
+    const pending = bundles.filter((entry) => entry.state !== "approved")
+
     out(formatList(bundles, paint))
 
-    for (const bundle of bundles.filter((entry) => entry.state !== "approved")) {
+    for (const bundle of pending) {
       out("")
       out(changesOf(bundle))
     }
 
+    if (pending.length > 1) {
+      out("")
+      out("To go through them one by one: pnpm approvals approve all")
+    }
+
     return 0
+  }
+
+  if (command === "approve" && chapter === "all") {
+    const pending = bundles.filter((bundle) => bundle.state !== "approved")
+
+    if (pending.length === 0) {
+      out("Every chapter is approved at its current content.")
+      return 0
+    }
+
+    out(formatList(bundles, paint))
+
+    return approve(root, pending, by(rest), (bundle) => changesOf(bundle, false), out)
   }
 
   if ((command === "diff" || command === "approve") && named(chapter) === undefined) {
@@ -782,16 +888,13 @@ export async function main(
 
   if (command === "approve") {
     const bundle = named(chapter) as ChapterBundle
-    const byIndex = rest.indexOf("--by")
 
     if (bundle.state === "approved") {
       out(`${bundle.id} is already approved at its current content.`)
       return 0
     }
 
-    out(changesOf(bundle))
-
-    return approve(root, bundle, byIndex === -1 ? undefined : rest[byIndex + 1], out)
+    return approve(root, [bundle], by(rest), (entry) => changesOf(entry, false), out)
   }
 
   out(USAGE)

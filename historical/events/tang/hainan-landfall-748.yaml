@@ -11,7 +11,7 @@ date:
       source: toseiden
       at: 是時，冬十一月，華［蘂］開敷，樹實竹筍，不辨於夏
     - id: hainan-landfall-chronicle
-      says: The chronicle's notice records that in 七載 he sailed again and was driven by the wind and waves to 日南.
+      says: The chronicle's notice records that he sailed again in 七載 and was driven ashore; it supports the year 748, not the month or the place.
       role: supporting
       source: shoku-nihongi
       at: 卷第廿四 天平寶字七年五月戊申
@@ -23,4 +23,19 @@ places:
 participants:
   - actor: jianzhen
     role: subject
-notes: The biography gives the month, not the day. The chronicle names the end of the drift 日南, a name for the far south, not a prefecture in this chapter.
+notes: The biography gives the month, not the day. The chronicle names the end of the drift 日南; no identification of 日南 with the biography's unnamed landfall or with 振州 is established here, so the event keeps the chronicle's place as an alternative claim and locates neither.
+dispute:
+  status: disputed
+  summary: The biography brings the ship to an unnamed landfall and, three days on, to 振州江口; the chronicle's notice says only that it drifted to 日南. The event follows the biography's sequence and keeps the chronicle's 日南 as an alternative, without reconciling the two places.
+cites:
+  places:
+    - id: hainan-landfall-place
+      says: The biography records the landfall without naming it and the arrival at 振州江口 three days later.
+      source: toseiden
+      at: 夜發，經三日乃到振州江口泊舟
+    - id: hainan-landfall-chronicle-place
+      says: The chronicle's notice names 日南 as where the drift ended and does not mention 振州.
+      role: alternative
+      source: shoku-nihongi
+      at: 卷第廿四 天平寶字七年五月戊申
+      quote: 亦遭風浪漂着日南。

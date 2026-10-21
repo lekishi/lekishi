@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The front of the army clears the pass as the shadow turns, and at the seventh hour the king reaches
+  the brook of Kina south of Megiddo and pitches camp for battle in the morning.
+types: [campaign]
+part_of:
+  - megiddo-campaign
+date:
+  value: 1482 BCE..1457 BCE
+  mode: window
+  calendar: regnal
+  as_written: the seventh hour, after year 23, I Shemu 19
+places:
+  - place: kina-brook
+    role: site
+  - place: megiddo
+    role: context
+participants:
+  - actor: thutmose-iii
+    role: leader
+  - actor: egypt-new-kingdom
+    role: participant
+cite:
+  - id: kina-camp
+    says:
+      The annals record the arrival at the brook of Kina at the seventh hour and the camp for the next
+      day's battle.
+    source: breasted-ancient-records
+    at: "II, Annals of Thutmose III, first campaign: the exit from the pass (Kina)"
+    quote:
+      Behold, when the front had reached the exit upon this road, the shadow had turned, and when his
+      majesty arrived at the south of Megiddo on the bank of the brook of Kina, the seventh hour was turning,
+      measured by the sun.
+notes:
+  The annals do not say whether this was the 19th or the 20th day; the record leaves the day unstated.
+  The annals date by regnal year and the civil calendar, and the conversion to a BCE year depends on which
+  chronology of the Eighteenth Dynasty is used. The window spans the dates usually given for year 23 of
+  Thutmose III, from about 1482 BCE (a higher chronology) to about 1457 BCE (the lower one most used today);
+  Breasted's own 1906 table is within it. It is an editorial bound that a cited chronology must replace
+  before approval.

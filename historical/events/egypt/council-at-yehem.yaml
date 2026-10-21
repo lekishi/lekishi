@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At Yehem the king holds a council of war. The chief of Kadesh is in Megiddo with the chiefs of
+  every land as far as Naharin. The officers fear the narrow Aruna road and urge the roads by Taanach
+  or north of Zefti; the king swears he will go by Aruna, and leads the way himself.
+types: [council]
+part_of:
+  - megiddo-campaign
+date:
+  value: 1482 BCE..1457 BCE
+  mode: window
+  calendar: regnal
+  as_written: after year 23, I Shemu 16, at Yehem
+places:
+  - place: yehem
+    role: site
+  - place: aruna
+    role: context
+  - place: taanach
+    role: context
+  - place: zefti
+    role: context
+  - place: megiddo
+    role: context
+participants:
+  - actor: thutmose-iii
+    role: leader
+  - actor: chief-of-kadesh
+    role: subject
+  - actor: megiddo-coalition
+    role: subject
+cite:
+  - id: council-basis
+    says:
+      The annals report the council, the officers' preference for the other two roads, and the king's
+      oath to take the Aruna road.
+    source: breasted-ancient-records
+    at: "II, Annals of Thutmose III, first campaign: the council at Yehem"
+    quote:
+      They spoke in the presence of his majesty, "How is it, that we should go upon this road, which
+      threatens to be narrow? While they come and say that the enemy is there waiting, holding the way against
+      a multitude. Will not horse come behind horse and man behind man likewise?
+  - id: council-oath
+    says: The king swears he will go by the road of Aruna.
+    role: supporting
+    source: breasted-ancient-records
+    at: "II, Annals of Thutmose III, first campaign: the council at Yehem (the oath)"
+    quote:
+      I swear, as Re loves me, as my father Amon, favors me, as my nostrils are rejuvenated with satisfying
+      life, my majesty will proceed upon this road of Aruna.
+notes:
+  The speeches are the royal annals' own composition and present the king's choice as wise; the record
+  reports what the annals say. The annals date by regnal year and the civil calendar, and the conversion
+  to a BCE year depends on which chronology of the Eighteenth Dynasty is used. The window spans the dates
+  usually given for year 23 of Thutmose III, from about 1482 BCE (a higher chronology) to about 1457 BCE
+  (the lower one most used today); Breasted's own 1906 table is within it. It is an editorial bound that
+  a cited chronology must replace before approval.

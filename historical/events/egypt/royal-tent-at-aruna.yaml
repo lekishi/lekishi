@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  On the 19th day the royal tent stands at Aruna. The army files through the narrow pass, horse
+  behind horse, and at the officers' request the king halts at the exit to cover the rear.
+types: [campaign]
+part_of:
+  - megiddo-campaign
+date:
+  value: 1482 BCE..1457 BCE
+  mode: window
+  calendar: regnal
+  as_written: year 23, I Shemu 19
+  cite:
+    - id: aruna-date
+      says: The annals date this to year 23, I Shemu 19.
+      source: breasted-ancient-records
+      at: "II, Annals of Thutmose III, first campaign: Year 23, I Shemu 19 (Aruna)"
+      quote:
+        Year 23, first month of the third season, on the nineteenth day; the watch in safety in the
+        royal tent was at the city of Aruna.
+places:
+  - place: aruna
+    role: waypoint
+participants:
+  - actor: thutmose-iii
+    role: leader
+  - actor: egypt-new-kingdom
+    role: participant
+cite:
+  - id: aruna-camp
+    says: The annals record the royal tent at Aruna and the army in the valley.
+    source: breasted-ancient-records
+    at: "II, Annals of Thutmose III, first campaign: Year 23, I Shemu 19 (Aruna)"
+    quote:
+      Year 23, first month of the third season, on the nineteenth day; the watch in safety in the royal
+      tent was at the city of Aruna.
+  - id: aruna-rear
+    says: The annals record the king halting to protect the rear of the army as it came out of the pass.
+    role: supporting
+    source: breasted-ancient-records
+    at: "II, Annals of Thutmose III, first campaign: the exit from the pass"
+    quote: His majesty halted outside and waited there, protecting the rear of his victorious army.
+notes:
+  The annals date by regnal year and the civil calendar, and the conversion to a BCE year depends
+  on which chronology of the Eighteenth Dynasty is used. The window spans the dates usually given for
+  year 23 of Thutmose III, from about 1482 BCE (a higher chronology) to about 1457 BCE (the lower one
+  most used today); Breasted's own 1906 table is within it. It is an editorial bound that a cited chronology
+  must replace before approval.

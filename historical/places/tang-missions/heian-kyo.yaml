@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 平安宮, the palace of 平安京, where the court acts of the 801–839 missions are anchored for display.
+types: [capital]
+names:
+  - form: 平安宮
+    lang: ja
+    script: Hani
+    roman: Heian-kyū
+    scheme: hepburn
+    cite:
+      - id: heian-kyo-name
+        says: The eulogy at 桓武's funeral names 平安宮 as where the emperor reigned.
+        source: nihon-koki
+        at: 卷第十三 大同元年四月甲午朔
+        quote: 畏哉平安宮《爾》御坐《志》天皇
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    cite:
+      - id: heian-kyo-location
+        says: The text names the place but the record asserts no coordinates for it.
+        source: nihon-koki
+        at: 卷第十三 大同元年四月甲午朔
+modern:
+  - form: 京都市
+    lang: ja
+    script: Hani
+    note: Modern name recorded for orientation; the cited passages do not state a site identification.

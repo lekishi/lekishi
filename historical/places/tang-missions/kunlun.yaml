@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 崑崙國, the country 平群廣成's ship was blown to on the way home in 734.
+types: [region]
+names:
+  - form: 崑崙國
+    lang: ja
+    script: Hani
+    roman: Konron-koku
+    scheme: hepburn
+    cite:
+      - id: kunlun-name
+        says: 平群廣成's report says his ship of 115 drifted to 崑崙國.
+        source: shoku-nihongi
+        at: 卷第十三 天平十一年十一月辛夘
+        quote: 廣成之船一百一十五人漂着崑崙國。
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      崑崙 is a general Tang name for the lands of the southern sea; which coast the ship reached is
+      not sourced, so no coordinates are asserted.
+    cite:
+      - id: kunlun-location
+        says: The text names the place but the record asserts no coordinates for it.
+        source: shoku-nihongi
+        at: 卷第十三 天平十一年十一月辛夘

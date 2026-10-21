@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 値賀嶋, the islands west of 肥前國松浦郡, the last Japanese landfall on the southern route.
+types: [landform]
+names:
+  - form: 値賀嶋
+    lang: ja
+    script: Hani
+    roman: Chika-no-shima
+    scheme: hepburn
+    cite:
+      - id: chika-name
+        says: The 大宰府 report says the second ship was driven to 値賀嶋.
+        source: shoku-nihon-koki
+        at: 卷第六 承和四年七月癸未
+        quote: 第二舶左右方便漂着値賀嶋。
+  - form: 値嘉嶋
+    lang: ja
+    script: Hani
+    cite:
+      - id: chika-name-1
+        says: The 836 edict asks for landing places on the shores of 値嘉嶋.
+        source: shoku-nihon-koki
+        at: 卷第五 承和三年七月甲申
+        quote: 宜値嘉嶋涯畔可着船處。
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    cite:
+      - id: chika-location
+        says: The text names the place but the record asserts no coordinates for it.
+        source: shoku-nihon-koki
+        at: 卷第六 承和四年七月癸未
+modern:
+  - form: 五島列島
+    lang: ja
+    script: Hani
+    note: Modern name recorded for orientation; the cited passages do not state a site identification.

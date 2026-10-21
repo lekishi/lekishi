@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 壹伎嶋, the island off 肥前 where two of the 837 ships were blown back.
+types: [landform]
+names:
+  - form: 壹伎嶋
+    lang: ja
+    script: Hani
+    roman: Iki
+    scheme: hepburn
+    cite:
+      - id: iki-name
+        says: The 大宰府 report says the first and fourth ships were driven to 壹伎嶋.
+        source: shoku-nihon-koki
+        at: 卷第六 承和四年七月癸未
+        quote: 第一第四舶。忽遇逆風。流着壹伎嶋。
+  - form: 壹岐嶋
+    lang: ja
+    script: Hani
+    cite:
+      - id: iki-name-1
+        says: The chronicle lists 壹岐嶋 among the places given guards and beacons in 664.
+        source: nihon-shoki
+        at: 卷第廿七 天智天皇三年 是歲
+        quote: 是歲，於對馬嶋、壹岐嶋、筑紫國等，置防與烽。
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    cite:
+      - id: iki-location
+        says: The text names the place but the record asserts no coordinates for it.
+        source: shoku-nihon-koki
+        at: 卷第六 承和四年七月癸未

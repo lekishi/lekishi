@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 明州, the Tang port the 804 second ship came in at and the 805 fleet sailed home from.
+types: [region, port]
+names:
+  - form: 明州
+    lang: lzh
+    script: Hani
+    roman: Mingzhou
+    scheme: pinyin
+    cite:
+      - id: mingzhou-name
+        says: 葛野麻呂's report says 越州 sent the party under escort to 明州 to be sent off.
+        source: nihon-koki
+        at: 卷第十二 延暦廿四年六月乙巳
+        quote: 至管内明州發遣。
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    cite:
+      - id: mingzhou-location
+        says: The text names the place but the record asserts no coordinates for it.
+        source: nihon-koki
+        at: 卷第十二 延暦廿四年六月乙巳
+modern:
+  - form: 寧波市
+    lang: zh
+    script: Hani
+    note: Modern name recorded for orientation; the cited passages do not state a site identification.

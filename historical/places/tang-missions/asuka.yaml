@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  飛鳥岡本, the site in 飛鳥 where 舒明 held court at 岡本宮 from 630 and 齊明 at 後飛鳥岡本宮 from 656. Court acts
+  of the 630 and 659 missions are anchored here for display.
+types: [capital]
+names:
+  - form: 岡本宮
+    lang: ja
+    script: Hani
+    roman: Okamoto-no-miya
+    scheme: hepburn
+    cite:
+      - id: asuka-name
+        says: The chronicle records 舒明 moving to 飛鳥岡 and calls the palace 岡本宮.
+        source: nihon-shoki
+        at: 卷第廿三 舒明天皇二年十月癸卯
+        quote: 天皇遷於飛鳥岡傍。是謂岡本宮。
+  - form: 後飛鳥岡本宮
+    lang: ja
+    script: Hani
+    cite:
+      - id: asuka-name-1
+        says: The chronicle records 齊明 building a new palace at 飛鳥岡本 and naming it 後飛鳥岡本宮.
+        source: nihon-shoki
+        at: 卷第廿六 齊明天皇二年 是歲
+        quote: 天皇乃遷，號曰後飛鳥岡本宮。
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    cite:
+      - id: asuka-location
+        says: The text names the place but the record asserts no coordinates for it.
+        source: nihon-shoki
+        at: 卷第廿三 舒明天皇二年十月癸卯
+modern:
+  - form: 明日香村
+    lang: ja
+    script: Hani
+    note: Modern name recorded for orientation; the cited passages do not state a site identification.
+notes: One record serves both palaces because the chronicle sets them on the same ground.

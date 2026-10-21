@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 耽羅, the island south of the peninsula where ships of 661 and 778 came ashore.
+types: [landform]
+names:
+  - form: 耽羅之嶋
+    lang: ja
+    script: Hani
+    roman: Tamna
+    scheme: hepburn
+    cite:
+      - id: tamna-island-name
+        says: 伊吉博德's account says the ship reached 耽羅之嶋 after nine days and eight nights.
+        source: nihon-shoki
+        at: 卷第廿六 齊明天皇七年五月 注 伊吉連博得書
+        quote: 九日八夜，僅到耽羅之嶋。
+  - form: 耽羅嶋
+    lang: ja
+    script: Hani
+    cite:
+      - id: tamna-island-name-1
+        says: The chronicle records 海上三狩's party drifting to 耽羅嶋 in 778.
+        source: shoku-nihongi
+        at: 卷第卅五 寶龜九年十一月壬子
+        quote: 其判官海上眞人三狩等漂着耽羅嶋。
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    cite:
+      - id: tamna-island-location
+        says: The text names the place but the record asserts no coordinates for it.
+        source: nihon-shoki
+        at: 卷第廿六 齊明天皇七年五月 注 伊吉連博得書
+modern:
+  - form: 濟州島
+    lang: ko
+    script: Hani
+    note: Modern name recorded for orientation; the cited passages do not state a site identification.

@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 博多大津, the harbour of 筑紫 that missions sailed from and returned to; 伊吉博德 calls it 筑紫大津之浦.
+types: [port]
+names:
+  - form: 筑紫大津之浦
+    lang: ja
+    script: Hani
+    roman: Tsukushi no Ōtsu no ura
+    scheme: hepburn
+    cite:
+      - id: hakata-name
+        says: 伊吉博德's account dates the departure from 筑紫大津之浦 to the eleventh day of the eighth month.
+        source: nihon-shoki
+        at: 卷第廿六 齊明天皇五年七月戊寅 注 伊吉連博德書
+        quote: 八月十一日，發自筑紫大津之浦。
+  - form: 博多大津
+    lang: ja
+    script: Hani
+    cite:
+      - id: hakata-name-1
+        says: The chronicle records the 776 ships pulling back to 博多大津.
+        source: shoku-nihongi
+        at: 卷第卅四 寶龜七年閏八月庚寅
+        quote: 乃引還於博多大津。
+  - form: 博多津
+    lang: ja
+    script: Hani
+    cite:
+      - id: hakata-name-2
+        says: The chronicle records a returning 新羅 ship reaching 博多津 in 筑前國.
+        source: shoku-nihon-koki
+        at: 卷第八 承和六年十月丁巳
+        quote: 皈着筑前國博多津。
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    cite:
+      - id: hakata-location
+        says: The text names the place but the record asserts no coordinates for it.
+        source: nihon-shoki
+        at: 卷第廿六 齊明天皇五年七月戊寅 注 伊吉連博德書
+modern:
+  - form: 福岡市
+    lang: ja
+    script: Hani
+    note: Modern name recorded for orientation; the cited passages do not state a site identification.

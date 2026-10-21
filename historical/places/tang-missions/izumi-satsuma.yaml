@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 出水郡 of 薩摩國, where the second ship came in in 778.
+types: [region]
+names:
+  - form: 出水郡
+    lang: ja
+    script: Hani
+    roman: Izumi-gun
+    scheme: hepburn
+    cite:
+      - id: izumi-satsuma-name
+        says: The chronicle records the second ship putting in at 出水郡 on 寶龜九年十一月乙夘.
+        source: shoku-nihongi
+        at: 卷第卅五 寶龜九年十一月乙夘
+        quote: 第二船到泊薩摩國出水郡。
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: No display anchor is recorded yet; the Wikidata lookup for it is still to do.
+    cite:
+      - id: izumi-satsuma-location
+        says: The text names the place but the record asserts no coordinates for it.
+        source: shoku-nihongi
+        at: 卷第卅五 寶龜九年十一月乙夘
+modern:
+  - form: 出水市
+    lang: ja
+    script: Hani
+    note: Modern name recorded for orientation; the cited passages do not state a site identification.

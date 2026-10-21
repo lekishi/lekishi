@@ -3,10 +3,9 @@ import { readTree } from "../src/lib/historical/authoring/tree"
 
 /**
  * Every chapter's approval state, compiled from the record files as the build
- * compiles them. CI builds the artifact with drafts served (the owner's
- * decision of 2026-10-21), so a chapter awaiting approval is served as a draft
- * and the checks expect its draft line; the approval itself is CI's
- * `publication` job.
+ * compiles them. CI builds the artifact with drafts served, and a missing
+ * approval fails nothing (the owner's decision of 2026-10-21), so a chapter
+ * awaiting approval is served as a draft and the checks expect its draft line.
  */
 const STATES = new Map(compileAll(readTree()).map((bundle) => [bundle.id, bundle]))
 

@@ -571,26 +571,33 @@ chapter awaiting approval. This supersedes the "chapter id typed back" rule in
   an answer in cannot approve a chapter. The approver and the date are named in
   the question, as before.
 
-== Decided: CI checks drafts; the approval is its own check — 2026-10-21
+== Decided: a missing approval never fails a build — 2026-10-21
 
 The owner observed on 2026-10-21 that every content change failed CI until the
 owner approved it, because `verify` and `build` ran the production gate. That
 hid real failures behind the expected one and made a content pull request red
-by design. The owner asked whether CI should run against drafts.
+by design. The owner first agreed that CI should check drafts with the approval
+as its own check, then decided the same day that builds should not fail for
+lack of an approval at all.
 
-* `verify` runs the tests and `build` builds the artifact with
-  `LEKISHI_DRAFTS=1`, as a pull-request preview does: a chapter whose approval
-  does not match its content is checked, built, and browser-tested as the
-  draft it is. They fail only for a real problem.
-* A separate `publication` job lists the chapters with `pnpm approvals` and
-  runs the chapter gate (`scripts/check-chapter.mjs`) without drafts, exactly
-  as production does. It is red while a chapter awaits the owner's approval
-  and says which; only the owner turns it green. Making it a required check
-  keeps unapproved content from merging.
-* Production is unchanged: the Cloudflare build of `main` serves no draft and
-  refuses a stale chapter, so even a merge past a red `publication` job ships
-  nothing unapproved; the site keeps its last good deploy.
-* A plain `pnpm test` or `pnpm verify` keeps the production view, as before.
+* Test runs serve drafts by default, so `pnpm test`, `verify`, and the build's
+  chapter gate (`scripts/check-chapter.mjs`) check every chapter's content,
+  approved or not. They fail only for a real problem. `LEKISHI_DRAFTS=0` opts a
+  test run out.
+* CI's `build` builds the artifact with `LEKISHI_DRAFTS=1`, as a pull-request
+  preview does, and the browser checks run on it.
+* A production build leaves out every chapter whose approval does not match
+  its content, a draft or a stale one, index and title included, and prints
+  which and why instead of failing. `scripts/check-static-build.mjs` checks that
+  no unapproved chapter's page is in a production artifact. An edit to approved
+  content still never reaches readers without a new approval; the chapter is
+  absent until the owner approves it. (Proposed to the owner on 2026-10-21
+  against serving the last approved version or keeping the failure; built as
+  the recommended option while the owner decides.)
+* CI's `production` job runs that production build and lists what awaits
+  approval in its summary. It does not fail for a missing approval.
+* An approval must still be well formed: dated, not before the record files
+  existed or after today, and naming who approved it.
 
 == Alternatives
 

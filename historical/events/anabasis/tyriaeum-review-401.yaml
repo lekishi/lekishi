@@ -1,0 +1,74 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  From Ceramon-agora, the last city on the borders of Mysia, Cyrus marches to Caystru-pedion and
+  halts five days, and the Cilician queen Epyaxa comes to him there; he marches on by Thymbrium to
+  Tyriaeum and reviews his Greeks and Asians in the plain to show them to her.
+types: [occurrence]
+part_of: [cyrus-expedition-401]
+date:
+  value: 401 BCE
+  mode: window
+  calendar: julian
+  as_written: held a review of the Hellenes and barbarians in the plain
+  cite:
+    - id: tyriaeum-review-401-time
+      says:
+        Grote dates the start of the march from Sardis to about March or April 401 BCE and the battle
+        of Kunaxa to about September or October of the same year; the stage falls between them.
+      basis: interpretation
+      attributed_to: George Grote
+      sources:
+        - source: grote-history-of-greece
+          at: vol. IX, ch. LXIX
+          quote: was commenced about March or April in the year 401 B.C.
+        - source: grote-history-of-greece
+          at: vol. IX, ch. LXIX
+          quote:
+            It was about six months afterwards, in the month of September or October of the same year,
+            that the battle of Kunaxa was fought
+    - id: tyriaeum-review-401-text
+      says: Xenophon records the review at Tyriaeum.
+      source: xenophon-anabasis
+      at: I.2
+      quote:
+        The latter being only too glad to make such an exhibition, held a review of the Hellenes and
+        barbarians in the plain.
+      role: supporting
+places:
+  - place: keramon-agora
+    role: start
+  - place: kaystrou-pedion
+    role: waypoint
+  - place: thymbrion
+    role: waypoint
+  - place: tyriaion
+    role: site
+participants:
+  - actor: cyrus-the-younger
+    role: leader
+  - actor: cyreans
+    role: participant
+cites:
+  summary:
+    - id: tyriaeum-review-401-epyaxa
+      says: Xenophon records Epyaxa visiting Cyrus at Caystru-pedion.
+      source: xenophon-anabasis
+      at: I.2
+      quote:
+        At this point Epyaxa, the wife of Syennesis, the king of the Cilicians, arrived on a visit
+        to Cyrus
+  places:
+    - id: tyriaeum-review-401-places
+      says:
+        Xenophon records the stages from Ceramon-agora to Caystru-pedion, with its five-day halt, and
+        on by Thymbrium to Tyriaeum.
+      sources:
+        - source: xenophon-anabasis
+          at: I.2
+          quote:
+            Ceramon-agora, a populous city, the last on the confines of Mysia. Thence a march of three
+            stages--thirty parasangs--brought him to Caystru-pedion, a populous city. Here Cyrus halted
+            five days
+        - source: xenophon-anabasis
+          at: I.2
+          quote: From this place he marched two stages--ten parasangs--to Tyriaeum, a populous city.

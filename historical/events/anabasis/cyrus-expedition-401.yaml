@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Cyrus the Younger's expedition against his brother Artaxerxes II and the march of its Greek mercenaries
+  back to the sea, from Sardis in the spring of 401 BCE to their entry into Spartan service at Pergamus
+  in 399 BCE. The stages are separate events; this event carries the span and asserts no continuous route.
+types: [campaign]
+date:
+  value: 401 BCE..399 BCE
+  mode: duration
+  calendar: julian
+  as_written: the expedition and retreat, from Sardis to Pergamus
+  cite:
+    - id: cyrus-expedition-401-time
+      says: Grote dates the expedition and retreat from about April 401 BCE to June 399 BCE.
+      source: grote-history-of-greece
+      at: vol. IX, ch. LXXII
+      quote: occupying the two years intervening between about April 401 B.C. and June 399 B.C.
+      basis: interpretation
+      attributed_to: George Grote
+places:
+  - place: sardis
+    role: start
+  - place: cunaxa
+    role: site
+  - place: trapezus
+    role: waypoint
+  - place: byzantium
+    role: waypoint
+  - place: pergamon
+    role: end
+participants:
+  - actor: cyrus-the-younger
+    role: leader
+  - actor: cyreans
+    role: participant
+  - actor: artaxerxes-ii
+    role: participant
+  - actor: xenophon
+    role: participant
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: No route geometry is asserted. The march is drawn only through its dated, placed child events.
+    cite:
+      - id: cyrus-expedition-401-no-route
+        says:
+          Xenophon's text gives the journey as stages and distances; the chapter asserts no route geometry
+          for it as a whole.
+        source: xenophon-anabasis
+        at: VII.8
+        quote: The entire journey, ascent and descent, consisted of two hundred and fifteen stages
+notes:
+  Xenophon gives no years; the span is Grote's reckoning. The closing summary of stages in Dakyns's
+  text may be an editor's addition, and is cited only for its statement that the journey was counted in
+  stages.

@@ -1,0 +1,61 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Cyrus sets out from Sardis, crosses the Maeander, passes Colossae, and halts thirty days at Celaenae,
+  where Clearchus joins him with his troops.
+types: [journey]
+part_of: [cyrus-expedition-401]
+date:
+  value: 401 BCE
+  mode: window
+  calendar: julian
+  as_written: With such means Cyrus set forth … from Sardis
+  cite:
+    - id: sardis-to-celaenae-401-time
+      says: Grote dates Cyrus's departure from Sardis to March or April 401 BCE.
+      source: grote-history-of-greece
+      at: vol. IX, ch. LXIX
+      quote: With such means Cyrus set forth, (March or April, 401 B.C.), from Sardis.
+      basis: interpretation
+      attributed_to: George Grote
+    - id: sardis-to-celaenae-401-text
+      says: Xenophon records Cyrus setting out from Sardis.
+      source: xenophon-anabasis
+      at: I.2
+      quote: Thus Cyrus, with the troops which I have named, set out from Sardis
+      role: supporting
+places:
+  - place: sardis
+    role: start
+  - place: colossae
+    role: waypoint
+  - place: kelainai
+    role: end
+participants:
+  - actor: cyrus-the-younger
+    role: leader
+  - actor: clearchus
+    role: participant
+    note: Joined at Celaenae.
+  - actor: cyreans
+    role: participant
+notes:
+  "Xenophon gives the distances: three stages, twenty-two parasangs, to the Maeander; one stage to
+  Colossae; three stages, twenty parasangs, to Celaenae. The parasang is a Persian road measure of about
+  30 stades, and the chapter does not convert it."
+cites:
+  summary:
+    - id: sardis-to-celaenae-401-halt
+      says: Xenophon records the thirty-day halt at Celaenae and Clearchus's arrival.
+      source: xenophon-anabasis
+      at: I.2
+      quote:
+        Here Cyrus remained for thirty days, during which Clearchus the Lacedaemonian arrived with
+        one thousand hoplites
+  places:
+    - id: sardis-to-celaenae-401-places
+      says: Xenophon records the march from Colossae to Celaenae.
+      source: xenophon-anabasis
+      at: I.2
+      quote:
+        From this place he marched three stages, twenty parasangs in all, to Celaenae, a populous city
+        of Phrygia, large and prosperous.

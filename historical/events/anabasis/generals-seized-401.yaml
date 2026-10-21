@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At the Zapatas Tissaphernes invites the Greek generals to his quarters, seizes Clearchus, Proxenus,
+  Menon, Agias and Socrates, and cuts down the captains waiting outside.
+types: [occurrence]
+part_of: [cyrus-expedition-401]
+date:
+  value: 401 BCE
+  mode: window
+  calendar: julian
+  as_written: at one and the same signal, those within were seized
+  cite:
+    - id: generals-seized-401-time
+      says:
+        Grote dates Kunaxa to about September or October 401 BCE and the Greeks' entry into Armenia
+        to December; the seizure lies between.
+      basis: interpretation
+      attributed_to: George Grote
+      sources:
+        - source: grote-history-of-greece
+          at: vol. IX, ch. LXIX
+          quote:
+            It was about six months afterwards, in the month of September or October of the same year,
+            that the battle of Kunaxa was fought
+        - source: grote-history-of-greece
+          at: vol. IX, ch. LXX
+          quote: extremely cold at the season when they entered it,—December
+places:
+  - place: zapatas-river
+    role: site
+participants:
+  - actor: tissaphernes
+    role: leader
+  - actor: clearchus
+    role: subject
+  - actor: cyreans
+    role: participant
+cites:
+  summary:
+    - id: generals-seized-401-names
+      says: Xenophon names the five generals summoned inside.
+      source: xenophon-anabasis
+      at: II.5
+      quote:
+        They were Proxenus the Boeotian, Menon the Thessalian, Agias the Arcadian, Clearchus the Laconian,
+        and Socrates the Achaean
+    - id: generals-seized-401-signal
+      says: Xenophon records the generals seized and the captains cut down.
+      source: xenophon-anabasis
+      at: II.5
+      quote:
+        Not long after that, at one and the same signal, those within were seized and those without
+        cut down
+      role: supporting

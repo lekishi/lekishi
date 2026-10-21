@@ -1,0 +1,58 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At Thapsacus on the Euphrates Cyrus tells the generals that the march is against the great king
+  at Babylon; Menon's men cross first, and the army fords the river on foot.
+types: [occurrence]
+part_of: [cyrus-expedition-401]
+date:
+  value: 401 BCE
+  mode: window
+  calendar: julian
+  as_written: the advance was now to be upon Babylon, against the great king
+  cite:
+    - id: thapsacus-crossing-401-time
+      says:
+        Grote dates the start of the march from Sardis to about March or April 401 BCE and the battle
+        of Kunaxa to about September or October of the same year; the stage falls between them.
+      basis: interpretation
+      attributed_to: George Grote
+      sources:
+        - source: grote-history-of-greece
+          at: vol. IX, ch. LXIX
+          quote: was commenced about March or April in the year 401 B.C.
+        - source: grote-history-of-greece
+          at: vol. IX, ch. LXIX
+          quote:
+            It was about six months afterwards, in the month of September or October of the same year,
+            that the battle of Kunaxa was fought
+    - id: thapsacus-crossing-401-text
+      says: Xenophon records Cyrus revealing at Thapsacus that the march was against the king.
+      source: xenophon-anabasis
+      at: I.4
+      quote:
+        Here they halted five days, and here Cyrus sent for the generals of the Hellenes, and told
+        them that the advance was now to be upon Babylon, against the great king
+      role: supporting
+places:
+  - place: myriandus
+    role: start
+  - place: thapsacus
+    role: site
+participants:
+  - actor: cyrus-the-younger
+    role: leader
+  - actor: cyreans
+    role: participant
+cites:
+  summary:
+    - id: thapsacus-crossing-401-ford
+      says: Xenophon records the army fording the Euphrates.
+      source: xenophon-anabasis
+      at: I.4
+      quote: As they forded, never a man was wetted above the chest
+  places:
+    - id: thapsacus-crossing-401-place
+      says: Xenophon names Thapsacus on the Euphrates.
+      source: xenophon-anabasis
+      at: I.4
+      quote: A large and flourishing city, named Thapsacus, stands on its banks.

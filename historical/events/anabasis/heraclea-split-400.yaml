@@ -1,0 +1,58 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At Heraclea the Arcadians and Achaeans break away and choose their own generals; the army goes
+  on in three divisions, under them, under Cheirisophus, and under Xenophon.
+types: [occurrence]
+part_of: [cyrus-expedition-401]
+date:
+  value: 400 BCE
+  mode: window
+  calendar: julian
+  as_written: the army was now split up into three divisions
+  cite:
+    - id: heraclea-split-400-time
+      says:
+        Grote dates the sight of the sea to February 400 BCE and the crossing to Byzantium to October
+        or November 400 BCE; the split lies between.
+      basis: interpretation
+      attributed_to: George Grote
+      sources:
+        - source: grote-history-of-greece
+          at: vol. IX, ch. LXX
+          quote: in the first half of February, the time of Xenophon’s visit
+        - source: grote-history-of-greece
+          at: vol. IX, ch. LXIX
+          quote:
+            and ultimately brought them across the Bosphorus of Thrace to Byzantium, in October or November,
+            400 B.C.
+    - id: heraclea-split-400-text
+      says: Xenophon records the army splitting into three.
+      source: xenophon-anabasis
+      at: VI.2
+      quote: In this way the army was now split up into three divisions .
+      role: supporting
+places:
+  - place: heraclea-pontica
+    role: site
+participants:
+  - actor: cyreans
+    role: participant
+  - actor: cheirisophus
+    role: leader
+  - actor: xenophon
+    role: leader
+cites:
+  summary:
+    - id: heraclea-split-400-arcadians
+      says: Xenophon records the Arcadians and Achaeans choosing their own generals.
+      source: xenophon-anabasis
+      at: VI.2
+      quote:
+        All the Arcadians and Achaeans who chanced to be with Cheirisophus left him and Xenophon, setting
+        up for themselves and choosing ten generals of their own.
+  places:
+    - id: heraclea-split-400-place
+      says: Xenophon records the arrival at Heraclea.
+      source: xenophon-anabasis
+      at: VI.2
+      quote: they reached Heraclea

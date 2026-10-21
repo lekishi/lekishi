@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Alexandria in Egypt, on the coast west of the Canopic mouth of the Nile, which Alexander founded
+  in 331 BCE and named after himself. Distinct from the other Alexandrias he founded.
+types: [settlement, port, capital]
+names:
+  - form: Alexandria
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: alexandria-egypt-name
+        says: Arrian records Alexander landing where Alexandria, named after him, now stands.
+        source: arrian-anabasis
+        at: III.1
+        quote: and disembarked where now is situated the city of Alexandria, which takes its name from him.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [29.90977, 31.20144]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: alexandria-egypt-location
+        says:
+          Pleiades identifies the place and gives its representative point as 31.201435, 29.909773 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 727070 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "727070"
+    url: https://pleiades.stoa.org/places/727070
+    license: CC BY 3.0

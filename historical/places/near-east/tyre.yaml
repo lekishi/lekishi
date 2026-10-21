@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Tyre, the Phoenician island city that refused Alexander entry and fell to him in 332 BCE after
+  a seven-month siege and the building of a mole from the mainland.
+types: [settlement, port]
+names:
+  - form: Τύρος
+    lang: grc
+    script: Grek
+    roman: Tyre
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: tyre-greek-name
+        says: Pleiades records the ancient Greek name Τύρος for this place.
+        source: pleiades
+        at: place 678437, name /places/678437/tyros, dump 2026-10-21
+      - id: tyre-name
+        says: Arrian records the capture of Tyre.
+        source: arrian-anabasis
+        at: II.24
+        quote: Thus then was Tyre captured in the month Hecatombaion, when Anicetus was archon at Athens.
+        role: supporting
+  - form: Tyre
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: tyre-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [35.20183, 33.26934]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: tyre-location
+        says:
+          Pleiades identifies the place and gives its representative point as 33.2693355, 35.201829 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 678437 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "678437"
+    url: https://pleiades.stoa.org/places/678437
+    license: CC BY 3.0
+notes:
+  Mesopotamia and the Levant owns this id; this copy is carried until that record is merged, and
+  whichever is merged second drops its copy.

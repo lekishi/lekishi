@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Maracanda (Samarkand), the capital of Sogdiana, Alexander's base in 329–328 BCE, where he killed
+  Clitus at a banquet.
+types: [capital]
+names:
+  - form: Μαράκανδα
+    lang: grc
+    script: Grek
+    roman: Maracanda
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: maracanda-greek-name
+        says: Pleiades records the ancient Greek name Μαράκανδα for this place.
+        source: pleiades
+        at: place 59915, name /places/59915/marakanda, dump 2026-10-21
+      - id: maracanda-name
+        says: Arrian names Maracanda as the capital of the Sogdianians.
+        source: arrian-anabasis
+        at: III.30
+        quote: He then led his army to Maracanda, which is the capital of the land of the Sogdianians.
+        role: supporting
+  - form: Maracanda
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: maracanda-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [66.94722, 39.6565]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: maracanda-location
+        says:
+          Pleiades identifies the place and gives its representative point as 39.656498, 66.947223 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 59915 (reprLatLong, locationPrecision), dump 2026-10-21
+modern:
+  - form: Samarkand
+    lang: en
+    note: The modern city on the site.
+external_ids:
+  - system: pleiades
+    id: "59915"
+    url: https://pleiades.stoa.org/places/59915
+    license: CC BY 3.0

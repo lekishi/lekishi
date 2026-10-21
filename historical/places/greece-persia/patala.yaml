@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Patala at the head of the Indus delta, which Alexander found deserted in 325 BCE and made the
+  base for exploring the river's mouths.
+types: [settlement]
+names:
+  - form: Πάταλα
+    lang: grc
+    script: Grek
+    roman: Patala
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: patala-greek-name
+        says: Pleiades records the ancient Greek name Πάταλα for this place.
+        source: pleiades
+        at: place 59987, name /places/59987/patala, dump 2026-10-21
+      - id: patala-name
+        says: Arrian records Alexander finding Patala deserted.
+        source: arrian-anabasis
+        at: VI.17
+        quote:
+          and when he arrived at Patala, he found both the country and the city deserted by the inhabitants
+          and tillers of the soil.
+        role: supporting
+  - form: Patala
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: patala-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [68.06508, 24.72237]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: patala-location
+        says:
+          Pleiades identifies the place and gives its representative point as 24.72237, 68.065079 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 59987 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "59987"
+    url: https://pleiades.stoa.org/places/59987
+    license: CC BY 3.0

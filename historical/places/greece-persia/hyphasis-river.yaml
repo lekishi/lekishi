@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The river Hyphasis (the Beas), the easternmost point of Alexander's march, where his army refused
+  to go further in 326 BCE.
+types: [landform]
+names:
+  - form: Hyphasis
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: hyphasis-river-name
+        says: Arrian records Alexander advancing to the Hyphasis.
+        source: arrian-anabasis
+        at: V.24
+        quote:
+          whilst he himself, with his army, advanced to the river Hyphasis, to subjugate the Indians
+          beyond it.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [75.54716, 31.73014]
+    notes:
+      The gazetteer's representative point for the river. It is a label position for a river, not the
+      place of the altars.
+    cite:
+      - id: hyphasis-river-location
+        says:
+          Pleiades identifies the place and gives its representative point as 31.7301386754, 75.5471608271
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 59839 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "59839"
+    url: https://pleiades.stoa.org/places/59839
+    license: CC BY 3.0

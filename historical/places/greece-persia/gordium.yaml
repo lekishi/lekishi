@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Gordium in Phrygia, the old capital of Gordius and Midas, where Alexander undid the knot on the
+  wagon of Gordius in 333 BCE.
+types: [settlement]
+names:
+  - form: Γόρδιον
+    lang: grc
+    script: Grek
+    roman: Gordium
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: gordium-greek-name
+        says: Pleiades records the ancient Greek name Γόρδιον for this place.
+        source: pleiades
+        at: place 609393, name /places/609393/gordion, dump 2026-10-21
+      - id: gordium-name
+        says: Arrian records Alexander at Gordium wanting to see the palace of Gordius and Midas.
+        source: arrian-anabasis
+        at: II.3
+        quote:
+          When Alexander arrived at Gordium, he was seized with an ardent desire to go up into the citadel,
+          which contained the palace of Gordius and his son Midas.
+        role: supporting
+  - form: Gordium
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: gordium-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [31.97848, 39.65031]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: gordium-location
+        says:
+          Pleiades identifies the place and gives its representative point as 39.6503052703, 31.9784831233
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 609393 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "609393"
+    url: https://pleiades.stoa.org/places/609393
+    license: CC BY 3.0

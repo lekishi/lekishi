@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Halicarnassus in Caria, which Alexander besieged in 334 BCE against Memnon and the Persian garrison
+  and destroyed; he gave Caria to its queen Ada.
+types: [settlement, port]
+names:
+  - form: Ἁλικαρνασσός
+    lang: grc
+    script: Grek
+    roman: Halicarnassus
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: halicarnassus-greek-name
+        says: Pleiades records the ancient Greek name Ἁλικαρνασσός for this place.
+        source: pleiades
+        at: place 599636, name /places/599636/halikarnassos, dump 2026-10-21
+      - id: halicarnassus-name
+        says: Arrian records the Persian force gathered in Halicarnassus.
+        source: arrian-anabasis
+        at: I.20
+        quote: a considerable force, both of foreigners and of Grecian auxiliaries, had collected in Halicarnassus.
+        role: supporting
+  - form: Halicarnassus
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: halicarnassus-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [27.42215, 37.0404]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: halicarnassus-location
+        says:
+          Pleiades identifies the place and gives its representative point as 37.0404005, 27.4221505 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 599636 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "599636"
+    url: https://pleiades.stoa.org/places/599636
+    license: CC BY 3.0

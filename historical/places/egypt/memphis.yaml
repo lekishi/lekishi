@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Memphis, the old capital of Egypt on the Nile above the Delta, where Alexander sacrificed to
+  Apis and received the Greek embassies in 332–331 BCE.
+types: [capital]
+names:
+  - form: Memphis
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: memphis-name
+        says: Arrian records Alexander crossing the Nile and coming to Memphis.
+        source: arrian-anabasis
+        at: III.1
+        quote: Thence he crossed the stream and came to Memphis
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [31.25506, 29.84949]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: memphis-location
+        says:
+          Pleiades identifies the place and gives its representative point as 29.849491, 31.255061 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 736963 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "736963"
+    url: https://pleiades.stoa.org/places/736963
+    license: CC BY 3.0
+notes:
+  Egypt and the Nile owns this id; this copy is carried until that record is merged, and whichever
+  is merged second drops its copy.

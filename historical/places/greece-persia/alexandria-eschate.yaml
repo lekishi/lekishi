@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Alexandria Eschate ('the farthest'), the city Alexander founded on the river he calls the Tanais,
+  the Jaxartes, in 329 BCE.
+types: [settlement]
+names:
+  - form: the city near the river Tanais
+    lang: en
+    script: Latn
+    note:
+      Arrian does not give the city's name here, only that it was to be named after Alexander; 'Eschate'
+      is the gazetteer's name.
+    cite:
+      - id: alexandria-eschate-name
+        says: Arrian records Alexander's plan to found a city on the Tanais named after himself.
+        source: arrian-anabasis
+        at: IV.1
+        quote: He formed a plan of founding a city near the river Tanais, which was to be named after himself
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [69.64056, 40.2648]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: alexandria-eschate-location
+        says:
+          Pleiades identifies the place and gives its representative point as 40.264798, 69.640562 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 59672 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "59672"
+    url: https://pleiades.stoa.org/places/59672
+    license: CC BY 3.0

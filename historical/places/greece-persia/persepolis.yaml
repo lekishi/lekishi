@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Persepolis, the Persian royal city whose treasury Alexander seized and whose palace he burned
+  in 330 BCE against Parmenio's advice.
+types: [capital]
+names:
+  - form: Persepolis
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: persepolis-name
+        says: Arrian records Alexander reaching Persepolis before its treasury could be plundered.
+        source: arrian-anabasis
+        at: III.18
+        quote:
+          Thence he again continued his march to Persepolis, so that he arrived before the guards of
+          the city could pillage the treasury.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [52.89043, 29.9352]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: persepolis-location
+        says:
+          Pleiades identifies the place and gives its representative point as 29.9351972978, 52.8904279399
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 922695 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "922695"
+    url: https://pleiades.stoa.org/places/922695
+    license: CC BY 3.0

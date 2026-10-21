@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The river Hydaspes (the Jhelum), where Alexander crossed against Porus and defeated him in 326
+  BCE.
+types: [landform]
+names:
+  - form: Ὑδάσπης
+    lang: grc
+    script: Grek
+    roman: Hydaspes
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: hydaspes-river-greek-name
+        says: Pleiades records the ancient Greek name Ὑδάσπης for this place.
+        source: pleiades
+        at: place 59837, name /places/59837/hydaspes, dump 2026-10-21
+      - id: hydaspes-river-name
+        says: Arrian records Alexander marching to the Hydaspes.
+        source: arrian-anabasis
+        at: V.8
+        quote: and then marched towards the river Hydaspes.
+        role: supporting
+  - form: Hydaspes
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: hydaspes-river-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [73.63349, 33.2566]
+    notes:
+      The gazetteer's representative point for the river. It is a label position for a river, not the
+      battlefield.
+    cite:
+      - id: hydaspes-river-location
+        says:
+          Pleiades identifies the place and gives its representative point as 33.2565955284, 73.6334874609
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 59837 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "59837"
+    url: https://pleiades.stoa.org/places/59837
+    license: CC BY 3.0

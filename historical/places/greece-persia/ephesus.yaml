@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Ephesus, the Ionian city of the temple of Artemis, which Alexander entered four days after leaving
+  Sardis in 334 BCE and where he recalled the exiles.
+types: [settlement, port]
+names:
+  - form: Ἔφεσος
+    lang: grc
+    script: Grek
+    roman: Ephesus
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: ephesus-greek-name
+        says: Pleiades records the ancient Greek name Ἔφεσος for this place.
+        source: pleiades
+        at: place 599612, name /places/599612/ephesos, dump 2026-10-21
+      - id: ephesus-name
+        says: Arrian records Alexander reaching Ephesus on the fourth day.
+        source: arrian-anabasis
+        at: I.17
+        quote: On the fourth day Alexander arrived at Ephesus
+        role: supporting
+  - form: Ephesus
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: ephesus-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [27.3424, 37.94016]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: ephesus-location
+        says:
+          Pleiades identifies the place and gives its representative point as 37.940164272, 27.342402982
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 599612 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "599612"
+    url: https://pleiades.stoa.org/places/599612
+    license: CC BY 3.0

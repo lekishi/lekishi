@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Miletus, the Ionian port whose Persian garrison Alexander besieged and took in 334 BCE while
+  his fleet held the island of Lade.
+types: [settlement, port]
+names:
+  - form: Μίλητος
+    lang: grc
+    script: Grek
+    roman: Miletus
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: miletus-greek-name
+        says: Pleiades records the ancient Greek name Μίλητος for this place.
+        source: pleiades
+        at: place 599799, name /places/599799/miletos, dump 2026-10-21
+      - id: miletus-name
+        says: Arrian records the Persian king's garrison in Miletus.
+        source: arrian-anabasis
+        at: I.18
+        quote: for Hegesistratus, to whom the king Darius had entrusted the command of the garrison in Miletus
+        role: supporting
+  - form: Miletus
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: miletus-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [27.27881, 37.53046]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: miletus-location
+        says:
+          Pleiades identifies the place and gives its representative point as 37.53046444, 27.2788084839
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 599799 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "599799"
+    url: https://pleiades.stoa.org/places/599799
+    license: CC BY 3.0

@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Susa, a royal city of the Persian kings, which surrendered to Alexander with its treasure in
+  331 BCE and where he held the mass weddings of 324 BCE.
+types: [capital]
+names:
+  - form: Σοῦσα
+    lang: grc
+    script: Grek
+    roman: Susa
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: susa-greek-name
+        says: Pleiades records the ancient Greek name Σοῦσα for this place.
+        source: pleiades
+        at: place 912936, name /places/912936/sousa, dump 2026-10-21
+      - id: susa-name
+        says: Arrian names Babylon and Susa as the prizes of the war.
+        source: arrian-anabasis
+        at: III.16
+        quote: and besides Babylon and Susa appeared to be the prizes of the war
+        role: supporting
+  - form: Susa
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: susa-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [48.25354, 32.18993]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: susa-location
+        says:
+          Pleiades identifies the place and gives its representative point as 32.1899344716, 48.2535370543
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 912936 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "912936"
+    url: https://pleiades.stoa.org/places/912936
+    license: CC BY 3.0
+notes:
+  Mesopotamia and the Levant owns this id; this copy is carried until that record is merged, and
+  whichever is merged second drops its copy.

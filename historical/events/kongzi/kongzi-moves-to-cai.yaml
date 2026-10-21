@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  The year after 冉求 leaves, Confucius moves from 陳 to 蔡. 蔡昭公 is killed by his own officers for fear of
+  another move toward 吳.
+types: [occurrence]
+date:
+  value: 491 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: (the year after 冉求's recall)
+  cite:
+    - id: kongzi-moves-to-cai-date
+      says: >-
+        The 孔子世家 puts the move in the year after 冉求's recall, which followed 季桓子's death in 魯哀公三年, 492 BCE;
+        so 491 BCE.
+      source: shiji-chunqiu
+      at: 卷四十七 孔子世家（冉求既去，明年）
+      quote: 冉求既去，明年，孔子自陳遷于蔡。
+places:
+  - place: chen
+    role: start
+  - place: cai-shangcai
+    role: end
+    note: "Which 蔡 is disputed: the state had moved its seat to 州來 two years before."
+participants:
+  - actor: kongzi
+    role: leader
+  - actor: cai-state
+    role: host
+cite:
+  - id: kongzi-moves-to-cai-basis
+    says: The 孔子世家 records the move from 陳 to 蔡, and 蔡昭公 about to go to 吳 at 吳's summons.
+    source: shiji-chunqiu
+    at: 卷四十七 孔子世家（孔子自陳遷于蔡）
+    quote: 冉求既去，明年，孔子自陳遷于蔡。蔡昭公將如吳，吳召之也。

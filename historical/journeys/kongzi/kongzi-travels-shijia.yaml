@@ -1,0 +1,39 @@
+# Proposed journey record (RFD 2, "Proposed: the journey record", draft PR #26).
+# The compiler does not read historical/journeys/ until the owner accepts the shape.
+title: Confucius's travels, as the 孔子世家 tells them, 498–484 BCE
+summary: >-
+  From 魯 to 衛; by 匡 back to 衛; by 曹, 宋 and 鄭 to 陳; by 蒲 to 衛 again and back to 陳; to 蔡 and
+  葉 and back toward 蔡; out of the siege with 楚's help; to 衛 once more, and home to 魯.
+travellers:
+  - actor: kongzi
+    role: leader
+  - actor: zi-lu
+    role: participant
+stops:
+  - kongzi-leaves-lu
+  - kongzi-first-in-wey
+  - kuang-detained
+  - nanzi-audience
+  - kongzi-at-cao
+  - huan-tui-tree
+  - zheng-east-gate
+  - kongzi-arrives-chen
+  - pu-covenant
+  - lingong-asks-battle
+  - kongzi-back-in-chen
+  - event: kongzi-moves-to-cai
+    place: cai-shangcai
+  - kongzi-at-ye
+  - kongzi-returns-wey
+  - event: kongzi-returns-lu
+    place: qufu
+cite:
+  - id: kongzi-travels-shijia-sequence
+    says: >-
+      The 孔子世家 narrates the travels in this order, from the departure from 魯 to the return
+      after fourteen years. The siege between 陳 and 蔡 and the rescue by 楚 have no place and are
+      not stops; the leg from 葉 to 衛 passes through them.
+    sources:
+      - source: shiji-chunqiu
+        at: 卷四十七 孔子世家（孔子遂適衞 … 孔子之去魯凡十四歲而反乎魯）
+        quote: 孔子之去魯凡十四歲而反乎魯。

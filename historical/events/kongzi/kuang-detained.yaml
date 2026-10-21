@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  On the way to 陳, Confucius passes 匡. The people take him for 陽虎, who had once wronged them, and hold
+  him for five days. 顏淵 falls behind and is feared dead. Confucius says that if heaven has not abandoned
+  the culture of 文王, the people of 匡 can do nothing to him.
+types: [occurrence]
+date:
+  value: 497 BCE..495 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: (after the first stay in 衛, before 魯定公's death)
+  cite:
+    - id: kuang-detained-date
+      says: >-
+        The 孔子世家 tells 匡 after the ten months in 衛, which the table begins in 497 BCE, and before the visit
+        to 曹 in the year 魯定公 died, 495 BCE.
+      sources:
+        - source: shiji-chunqiu
+          at: 卷十四 十二諸侯年表 衛 靈公 三十八年（孔子來，祿之如魯）
+          quote: 三十八孔子來，祿之如魯。
+        - source: shiji-chunqiu
+          at: 卷四十七 孔子世家（是歲，魯定公卒）
+          quote: 於是醜之，去衞，過曹。是歲，魯定公卒。
+places:
+  - place: kuang
+    role: site
+participants:
+  - actor: kongzi
+    role: leader
+  - actor: yan-hui
+    role: participant
+cite:
+  - id: kuang-detained-shijia
+    says: The 孔子世家 records that the people of 匡 took Confucius for 陽虎 and held him five days.
+    source: shiji-chunqiu
+    at: 卷四十七 孔子世家（匡人聞之，以為魯之陽虎）
+    quote: 匡人聞之，以為魯之陽虎。陽虎嘗暴匡人，匡人於是遂止孔子。孔子狀類陽虎，拘焉五日
+  - id: kuang-detained-lunyu
+    says: >-
+      The 論語 records his saying at 匡 that the people of 匡 could do nothing to him if heaven had not abandoned
+      this culture.
+    role: supporting
+    source: lunyu
+    at: 子罕第九（子畏於匡）
+    quote: 天之未喪斯文也，匡人其如予何？
+  - id: kuang-detained-yan
+    says: The 論語 records that 顏淵 fell behind at 匡.
+    role: supporting
+    source: lunyu
+    at: 先進第十一（子畏於匡，顏淵後）
+    quote: 子畏於匡，顏淵後。

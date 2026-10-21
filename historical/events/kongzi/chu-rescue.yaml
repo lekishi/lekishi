@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Confucius sends 子貢 to 楚, and 楚昭王 sends troops to bring him out. The king thinks of giving him seven
+  hundred 里 of land; his chief minister 子西 talks him out of it. That autumn the king dies at 城父, and the
+  madman 接輿 sings to Confucius that the phoenix's virtue has declined.
+types: [mission]
+date:
+  value: 489 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: (the autumn 楚昭王 died)
+  cite:
+    - id: chu-rescue-date
+      says: The 孔子世家 tells the rescue in the year 楚昭王 died at 城父, the year of the siege.
+      source: shiji-chunqiu
+      at: 卷四十七 孔子世家（其秋，楚昭王卒于城父）
+      quote: 其秋，楚昭王卒于城父。
+participants:
+  - actor: zigong
+    role: leader
+  - actor: chu-zhao-wang
+    role: leader
+  - actor: kongzi
+    role: subject
+  - actor: jieyu
+    role: witness
+  - actor: chu-state
+    role: participant
+notes: >-
+  No place: the text does not say where the troops met him; 城父, where the king died, is named in the summary
+  only.
+cite:
+  - id: chu-rescue-basis
+    says: The 孔子世家 records 子貢's mission and 楚昭王's troops.
+    source: shiji-chunqiu
+    at: 卷四十七 孔子世家（於是使子貢至楚）
+    quote: 於是使子貢至楚。楚昭王興師迎孔子，然後得免。
+  - id: chu-rescue-jieyu
+    says: The 論語 records the madman of 楚, 接輿, singing as he passed Confucius.
+    role: supporting
+    source: lunyu
+    at: 微子第十八（楚狂接輿）
+    quote: 楚狂接輿，歌而過孔子，曰：「鳳兮！鳳兮！何德之衰？

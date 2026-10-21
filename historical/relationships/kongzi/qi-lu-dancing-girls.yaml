@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: >-
+  齊's gift of dancing girls and horses to 魯, meant, the 孔子世家 says, to draw 魯's rulers away
+  from Confucius's government.
+types: [diplomacy]
+from: qi-state
+to: lu-state
+date:
+  value: 498 BCE..496 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 定公十二年（年表）; after 定公十四年（孔子世家）
+  cite:
+    - id: qi-lu-dancing-girls-date-498
+      says: The table enters the gift in 定公's twelfth year, 498 BCE in its count.
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 魯 定公 十二年（齊來歸女樂）
+      quote: 十二齊來歸女樂，季桓子受之，孔子行。
+    - id: qi-lu-dancing-girls-date-496
+      says: The 孔子世家 tells the gift after 定公's fourteenth year, 496 BCE.
+      role: alternative
+      source: shiji-chunqiu
+      at: 卷四十七 孔子世家（定公十四年，孔子年五十六）
+      quote: 定公十四年，孔子年五十六，由大司寇行攝相事，有喜色。
+dispute:
+  status: disputed
+  summary: >-
+    The table and the 孔子世家 date the gift two years apart; the record keeps the table's year as
+    the anchor.
+cite:
+  - id: qi-lu-dancing-girls-basis
+    says: The 孔子世家 records 齊 choosing eighty dancing girls and thirty teams of horses as a gift to the lord of 魯.
+    source: shiji-chunqiu
+    at: 卷四十七 孔子世家（於是選齊國中女子好者八十人）
+    quote: 於是選齊國中女子好者八十人，皆衣文衣而舞康樂，文馬三十駟，遺魯君。

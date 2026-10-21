@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Confucius reaches 陳 and lodges with the city master 貞子. He stays three years, through the attacks of
+  吳, 晉 and 楚, and answers the lord's question about a falcon shot with an arrow of the 肅慎.
+types: [occurrence]
+date:
+  value: 496 BCE..493 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 陳湣公六年（年表）; after 鄭（孔子世家）
+  cite:
+    - id: kongzi-arrives-chen-date-496
+      says: >-
+        The table enters Confucius's coming to 陳 in 湣公's sixth year, 496 BCE in its count: the window's
+        early end.
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 陳 湣公 六年（孔子來）
+      quote: 六孔子來。
+    - id: kongzi-arrives-chen-date-493
+      says: >-
+        The 孔子世家 brings him to 陳 only after 曹, 宋 and 鄭, in or after 495 BCE; the window closes at the departure
+        three years into the table's stay.
+      role: alternative
+      source: shiji-chunqiu
+      at: 卷四十七 孔子世家（孔子遂至陳）
+      quote: 孔子遂至陳，主於司城貞子家。
+places:
+  - place: chen
+    role: site
+    note: The capital of the state the text names; the text names only the state.
+participants:
+  - actor: kongzi
+    role: leader
+  - actor: chen-state
+    role: host
+dispute:
+  status: disputed
+  summary: >-
+    The table brings Confucius to 陳 in 496 BCE, before 宋; the 孔子世家 only after 宋 and 鄭. The record keeps
+    the table's year as the anchor and the biography's order as an alternative.
+cite:
+  - id: kongzi-arrives-chen-basis
+    says: The 孔子世家 records that he lodged in 陳 with the city master 貞子 and stayed three years.
+    source: shiji-chunqiu
+    at: 卷四十七 孔子世家（孔子居陳三歲）
+    quote: 孔子居陳三歲，會晉楚爭彊，更伐陳，及吳侵陳，陳常被寇。

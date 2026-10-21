@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Confucius goes back from 楚 to 衛, where many of his disciples serve 出公. Asked what he would do first
+  if given the government, he says: set the names right.
+types: [occurrence]
+date:
+  value: 489 BCE..485 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 魯哀公六年（孔子世家）; 衛出公八年（年表）
+  cite:
+    - id: kongzi-returns-wey-date-489
+      says: "The 孔子世家 puts the return to 衛 in 魯哀公's sixth year, 489 BCE: the window's early end."
+      source: shiji-chunqiu
+      at: 卷四十七 孔子世家（是歲也，孔子年六十三，而魯哀公六年也）
+      quote: 於是孔子自楚反乎衞。是歲也，孔子年六十三，而魯哀公六年也。
+    - id: kongzi-returns-wey-date-485
+      says: >-
+        The table enters Confucius coming to 衛 from 陳 in 出公's eighth year, 485 BCE in its count: the window's
+        late end.
+      role: alternative
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 衛 出公 八年（孔子自陳來）
+      quote: 八孔子自陳來。
+places:
+  - place: wey-diqiu
+    role: site
+    note: The capital of the state the text names; the text names only the state.
+participants:
+  - actor: kongzi
+    role: leader
+  - actor: zi-lu
+    role: participant
+  - actor: wey-state
+    role: host
+dispute:
+  status: disputed
+  summary: >-
+    The 孔子世家 brings Confucius to 衛 from 楚 in 489 BCE; the table and the 衛 house bring him from 陳 in 485
+    BCE. The record keeps the biography's year as the anchor and keeps the others.
+cite:
+  - id: kongzi-returns-wey-basis
+    says: The 孔子世家 records his return from 楚 to 衛.
+    source: shiji-chunqiu
+    at: 卷四十七 孔子世家（於是孔子自楚反乎衞）
+    quote: 於是孔子自楚反乎衞。
+  - id: kongzi-returns-wey-house
+    says: The 衛 house says Confucius came to 衛 from 陳, not from 楚, before 出公's ninth year.
+    role: conflicting
+    source: shiji-chunqiu
+    at: 卷三十七 衛康叔世家 出公（孔子自陳入衞）
+    quote: 孔子自陳入衞。

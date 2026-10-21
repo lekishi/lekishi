@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Back in 衛, Confucius is summoned by 南子, the wife of 靈公, and sees her through a curtain. 子路 is displeased
+  and Confucius swears to him by heaven. A month later 靈公 rides out with 南子 and makes Confucius follow
+  in the second carriage, and he leaves.
+types: [occurrence]
+date:
+  value: 497 BCE..495 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: (after 匡, before 魯定公's death)
+  cite:
+    - id: nanzi-audience-date
+      says: >-
+        The 孔子世家 tells the audience after 匡 and before the departure for 曹 in the year 魯定公 died, 495 BCE;
+        the window opens with the first arrival in 衛 in the table's 497 BCE.
+      source: shiji-chunqiu
+      at: 卷四十七 孔子世家（是歲，魯定公卒）
+      quote: 於是醜之，去衞，過曹。是歲，魯定公卒。
+places:
+  - place: wey-diqiu
+    role: site
+    note: The capital of the state the text names; the text names only the state.
+participants:
+  - actor: kongzi
+    role: leader
+  - actor: nanzi
+    role: host
+  - actor: zi-lu
+    role: witness
+  - actor: wey-ling-gong
+    role: participant
+cite:
+  - id: nanzi-audience-shijia
+    says: The 孔子世家 records 南子 receiving Confucius from behind a curtain, and 子路's displeasure.
+    source: shiji-chunqiu
+    at: 卷四十七 孔子世家（夫人在絺帷中）
+    quote: 夫人在絺帷中。孔子入門，北面稽首。夫人自帷中再拜，環珮玉聲璆然。
+  - id: nanzi-audience-carriage
+    says: The 孔子世家 records 靈公 riding with his wife and placing Confucius in the second carriage.
+    role: supporting
+    source: shiji-chunqiu
+    at: 卷四十七 孔子世家（使孔子為次乘）
+    quote: 靈公與夫人同車，宦者雍渠參乘，出，使孔子為次乘，招搖市過之。

@@ -1,0 +1,41 @@
+# Proposed journey record (RFD 2, "Proposed: the journey record", draft PR #26).
+# The compiler does not read historical/journeys/ until the owner accepts the shape.
+title: Confucius's travels, as the table of the twelve lords enters them, 498–484 BCE
+summary: >-
+  The table's shorter account: 魯 in 498 BCE, 衛 in 497, 陳 in 496, 宋 in 492, 衛 again "from 陳" in
+  485, and 魯 in 484. It visits 宋 after 陳, where the 孔子世家 has it before.
+travellers:
+  - actor: kongzi
+    role: leader
+stops:
+  - kongzi-leaves-lu
+  - kongzi-first-in-wey
+  - kongzi-arrives-chen
+  - huan-tui-tree
+  - kongzi-returns-wey
+  - event: kongzi-returns-lu
+    place: qufu
+cite:
+  - id: kongzi-travels-table-sequence
+    says: >-
+      The table enters Confucius in 魯's, 衛's, 陳's, 宋's, 衛's and 魯's columns in these years,
+      which gives this order.
+    sources:
+      - source: shiji-chunqiu
+        at: 卷十四 十二諸侯年表 魯 定公 十二年（孔子行）
+        quote: 十二齊來歸女樂，季桓子受之，孔子行。
+      - source: shiji-chunqiu
+        at: 卷十四 十二諸侯年表 衛 靈公 三十八年（孔子來）
+        quote: 三十八孔子來，祿之如魯。
+      - source: shiji-chunqiu
+        at: 卷十四 十二諸侯年表 陳 湣公 六年（孔子來）
+        quote: 六孔子來。
+      - source: shiji-chunqiu
+        at: 卷十四 十二諸侯年表 宋 景公 二十五年（孔子過宋）
+        quote: 二十五孔子過宋，桓魋惡之。
+      - source: shiji-chunqiu
+        at: 卷十四 十二諸侯年表 衛 出公 八年（孔子自陳來）
+        quote: 八孔子自陳來。
+      - source: shiji-chunqiu
+        at: 卷十四 十二諸侯年表 魯 哀公 十一年（孔子歸）
+        quote: 十一齊伐我。冉有言，故迎孔子，孔子歸。

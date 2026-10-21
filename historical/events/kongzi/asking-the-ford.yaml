@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Going back from 葉 to 蔡, Confucius passes two men ploughing, 長沮 and 桀溺, and sends 子路 to ask the way to
+  the ford. They tell him that the whole world is a flood, and ask why he follows a man who avoids men
+  rather than one who avoids the world.
+types: [occurrence]
+date:
+  value: 490 BCE..489 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: (between 葉 and the siege)
+  cite:
+    - id: asking-the-ford-date
+      says: The 孔子世家 tells the ford on the way back from 葉, 490 BCE, and before the siege of 489 BCE.
+      source: shiji-chunqiu
+      at: 卷四十七 孔子世家（去葉，反于蔡）
+      quote: 去葉，反于蔡。長沮、桀溺耦而耕
+participants:
+  - actor: kongzi
+    role: leader
+  - actor: zi-lu
+    role: participant
+notes: "No place: the text puts the ford between 葉 and 蔡 and names no river."
+cite:
+  - id: asking-the-ford-lunyu
+    says: The 論語 records 長沮 and 桀溺 ploughing and 子路 asking them the way to the ford.
+    source: lunyu
+    at: 微子第十八（長沮、桀溺耦而耕）
+    quote: 長沮、桀溺耦而耕。孔子過之，使子路問津焉。

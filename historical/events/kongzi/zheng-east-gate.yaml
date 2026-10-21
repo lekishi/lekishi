@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  In 鄭 Confucius loses his disciples and stands alone at the east gate. Someone tells 子貢 that the man
+  there has a forehead like 堯 and looks as lost as a dog from a house in mourning; Confucius laughs and
+  says that much is true.
+types: [occurrence]
+date:
+  value: 495 BCE..492 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: (after 宋)
+  cite:
+    - id: zheng-east-gate-date
+      says: The 孔子世家 tells 鄭 after 宋 and before the stay in 陳; the window is the 宋 visit's.
+      source: shiji-chunqiu
+      at: 卷四十七 孔子世家（孔子適鄭）
+      quote: 孔子適鄭，與弟子相失，孔子獨立郭東門。
+places:
+  - place: xinzheng
+    role: site
+    note: The capital of the state the text names; the text names only the state.
+participants:
+  - actor: kongzi
+    role: leader
+  - actor: zigong
+    role: participant
+  - actor: zheng-state
+    role: host
+cite:
+  - id: zheng-east-gate-basis
+    says: >-
+      The 孔子世家 records the man of 鄭 calling him as lost as a dog from a house in mourning, and Confucius
+      agreeing.
+    source: shiji-chunqiu
+    at: 卷四十七 孔子世家（纍纍若喪家之狗）
+    quote: 纍纍若喪家之狗。」子貢以實告孔子。孔子欣然笑曰：「形狀，末也。而謂似喪家之狗，然哉！然哉！」

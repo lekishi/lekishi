@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: Leaving 衛 in disgust, Confucius passes through 曹. That year 魯定公 dies.
+types: [occurrence]
+date:
+  value: 495 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 魯定公十五年
+  cite:
+    - id: kongzi-at-cao-date
+      says: >-
+        The 孔子世家 puts 曹 in the year 魯定公 died; the 左傳 enters his death in the fifth month of his fifteenth
+        year, 495 BCE in the table's count.
+      source: zuozhuan
+      at: 定公十五年（夏．五月．壬申．公薨）
+      quote: 夏．五月．壬申．公薨．
+places:
+  - place: cao-taoqiu
+    role: site
+    note: The capital of the state the text names; the text names only the state.
+participants:
+  - actor: kongzi
+    role: leader
+  - actor: cao-state
+    role: host
+cite:
+  - id: kongzi-at-cao-basis
+    says: The 孔子世家 records that he left 衛 and passed through 曹 in the year 魯定公 died.
+    source: shiji-chunqiu
+    at: 卷四十七 孔子世家（去衞，過曹）
+    quote: 於是醜之，去衞，過曹。是歲，魯定公卒。

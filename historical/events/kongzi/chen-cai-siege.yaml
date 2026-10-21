@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  When 吳 attacks 陳 and 楚 comes to its aid, 楚 invites Confucius. Fearing a 楚 that employs him, the officers
+  of 陳 and 蔡 surround him in the open country. The food runs out and the followers fall ill; Confucius
+  goes on teaching and singing. He asks 子路, 子貢 and 顏回 in turn whether his way is wrong.
+types: [occurrence]
+date:
+  value: 489 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 魯哀公六年
+  cite:
+    - id: chen-cai-siege-date
+      says: >-
+        The 孔子世家 puts the siege when 吳 attacked 陳 and 楚 came to its aid; the 左傳 enters that war in 哀公's
+        sixth year, 489 BCE in the table's count.
+      source: zuozhuan
+      at: 哀公六年（吳伐陳）
+      quote: 吳伐陳．
+participants:
+  - actor: kongzi
+    role: leader
+  - actor: zi-lu
+    role: participant
+  - actor: zigong
+    role: participant
+  - actor: yan-hui
+    role: participant
+  - actor: chen-state
+    role: participant
+  - actor: cai-state
+    role: participant
+notes: "No place: the text says only 'the open country between 陳 and 蔡'."
+cite:
+  - id: chen-cai-siege-shijia
+    says: >-
+      The 孔子世家 records the officers of 陳 and 蔡 surrounding Confucius in the open and the food running out.
+    source: shiji-chunqiu
+    at: 卷四十七 孔子世家（乃相與發徒役圍孔子於野）
+    quote: 於是乃相與發徒役圍孔子於野。不得行，絕糧。
+  - id: chen-cai-siege-lunyu
+    says: The 論語 records that the food ran out in 陳 and the followers fell ill.
+    role: supporting
+    source: lunyu
+    at: 衞靈公第十五（在陳絕糧）
+    quote: 在陳絕糧。從者病，莫能興。

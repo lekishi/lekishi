@@ -1,0 +1,280 @@
+:authors: Darwin D Wu <darwin67@users.noreply.github.com>
+:state: prediscussion
+:discussion:
+:labels: auth, publication, drafts, delivery, cloudflare
+
+= RFD 6 Signed-in drafts on the published site
+
+== Why now
+
+The owner asked on 2026-10-21 for sign-in on the site, so that members of the
+`lekishi` GitHub organization can see draft and unapproved chapters on the
+published site while everyone else sees only approved ones. GitHub is the first
+identity provider; other providers and OIDC come later. Pull-request previews
+keep showing every draft without sign-in. The owner added the same day that a
+missing approval must never fail a build.
+
+Today the published site cannot do this. It is a static artifact
+(link:../0003/STATIC_ARCHITECTURE.adoc[RFD 3's static architecture decision])
+and a production build leaves drafts out at build time, so there is nothing
+behind which to put a sign-in. This RFD proposes what a production build ships
+for members, what gates it, and how that sits with the publication gate of
+link:../0002/AUTHORING_FORMAT.adoc[RFD 2's authoring format].
+
+== Where things stand
+
+* *Publication.* A chapter is published when its manifest carries the owner's
+  digest approval of its exact content. `pnpm approvals` lists and diffs the
+  chapters; only the owner approves. `.github/CODEOWNERS` requires the owner's
+  review on every manifest.
+* *Production* (`main`, `lekishi.pages.dev`) serves approved chapters only. Until
+  now a stale approval failed the production build. Per the owner's message of
+  2026-10-21, PR #26 is changing that: a production build drops a draft or stale
+  chapter with a warning, and CI's `publication` job reports pending approvals
+  without going red. This RFD builds on that rule: _an unapproved chapter is never
+  in the public site, and never a build failure_.
+* *Previews* (the dev server and every non-`main` Cloudflare Pages build,
+  `draftChaptersServed()` in `scripts/dev-pages.mjs`) serve every chapter, drafts
+  under a Draft banner and pill, by the owner's decision of 2026-10-18.
+* *Exposure today.* The repository is private, but preview URLs
+  (`<branch>.lekishi.pages.dev`) are public: anyone holding one sees the drafts
+  of that branch. Signing in on production therefore protects the published
+  site's reading of the history, not the secrecy of the drafts. This RFD keeps
+  previews open, as asked; gating them is a separate, later choice (see
+  <<Open questions>>).
+
+== What stays public
+
+Unchanged for a reader who is not signed in:
+
+* the home page, its cards and `/search-index.json`, listing approved chapters only;
+* every approved chapter at `/chapters/<id>` and its deep links;
+* the globe tiles, fonts, brand assets, attribution and `404.html`.
+
+New and public: a quiet "Sign in" control (placement is RFD 5's call) and the
+`/auth/*` endpoints behind it. Nothing else.
+
+Not public, and checked by the build invariant: a draft's id, title, summary or
+any of its data. Today the `virtual:lekishi-chapters` index lists every manifest,
+drafts included, so a production build already ships draft titles in public
+JavaScript; the first step of the implementation closes that.
+
+== Proposal
+
+The proposal has two halves. The first is how a production build carries the
+drafts; it is the same whichever gate is chosen. The second is the gate, where
+the alternatives differ.
+
+=== The drafts tier
+
+A production build emits two trees from one SvelteKit build:
+
+* the *public tree*, exactly as today: approved chapters only;
+* the *drafts tree*, everything under one prefix, `/drafts/`: a prerendered page
+  per draft or stale chapter at `/drafts/chapters/<id>`, its data at
+  `/drafts/data/<id>.json`, a `/drafts/chapters.json` for the home page's draft
+  cards, and a `/drafts/search-index.json`.
+
+The drafts tree is compiled with the preview set (`compileAll` with
+`preview: true`), the same content a pull-request preview shows, so what a member
+sees on production is what the owner is asked to approve.
+
+Draft data must not reach `_app/immutable/`. Every hashed chunk there is public
+and listed from public JavaScript, so a draft bundled as a chunk would be
+readable by anyone. The drafts route therefore loads its chapter with `fetch`
+from `/drafts/data/<id>.json`, a prerendered `+server.ts` endpoint like
+`/search-index.json` today, never through the virtual module's dynamic imports.
+The public tree's `virtual:lekishi-chapters` carries served chapters only.
+
+A member reaches a draft three ways:
+
+* *the home page*: after mount, when the session hint cookie is present (see
+  <<Sessions>>), it fetches `/drafts/chapters.json` and adds the drafts' cards with
+  the Draft pill. Anonymous readers make no extra request;
+* *search*: the dialog merges `/drafts/search-index.json` under the same hint;
+* *a shared link*: `/chapters/<id>` for a draft is a 404 in the public tree; the
+  404 page, under the hint, offers "Open the draft" at `/drafts/chapters/<id>`.
+  Once a chapter is approved, `/drafts/chapters/<id>` redirects to
+  `/chapters/<id>`, so a member's link keeps working across approval.
+
+The drafts pages say they are drafts. `release.ts`'s `DRAFT_SCOPE` reads "This
+build is a preview" today; on production the line becomes "Visible to signed-in
+lekishi members; not published." Every other draft statement stays as is.
+
+Previews are unchanged: drafts stay inline at `/chapters/<id>` under the banner,
+there is no drafts tree and no sign-in.
+
+=== The gate
+
+Something has to stand in front of `/drafts/*` on production. Three ways were
+weighed; the recommendation is A.
+
+==== A. Sign in with GitHub, in a Pages Function (recommended)
+
+A Cloudflare Pages Function in the repository (`functions/`) runs only on
+`/auth/*` and `/drafts/*`, as listed in the build's `_routes.json`; every other
+request is a plain static file, as now.
+
+* `/auth/login` redirects to GitHub with a `state` value and PKCE;
+  `/auth/callback` exchanges the code, checks the user is an active member of the
+  `lekishi` organization, and sets the session; `/auth/logout` (a POST) clears it.
+* `/drafts/*` serves the asset when the session is valid and answers 404
+  otherwise, so the tree's existence is not confirmed to anyone else. Responses
+  carry `Cache-Control: private, no-store` and `X-Robots-Tag: noindex`.
+* The identity is a GitHub App owned by the `lekishi` organization with the
+  organization's Members permission read-only, rather than an OAuth App, whose
+  `read:org` scope reads every organization the user belongs to. The exact
+  membership endpoint for a GitHub App user token is to be confirmed when
+  implementing.
+* The provider sits behind one small interface (authorize URL, code exchange,
+  "is this user allowed"), so OIDC later is a second implementation plus an
+  allow-list or group claim, not a rewrite.
+
+Pros:
+
+* It is what the owner asked for: a sign-in inside the app, on the same site.
+* Everything is in the repository: reviewed, tested in Vitest with a mocked
+  `env`, versioned with the build that relies on it.
+* Works on `lekishi.pages.dev` as it is, with no custom domain or Zero Trust
+  account.
+* Previews are untouched: the function's secrets are set for the Production
+  environment only, and without them `/auth/*` answers 404.
+
+Cons:
+
+* It is the site's first runtime code and its first secrets (the App's client
+  secret and a session signing key, as Pages production secrets). That reverses
+  two standing rules in `AGENTS.md`, "no runtime server" and "no secret, token or
+  account", for this one path. The static artifact stays the whole reader site.
+* We own security-sensitive code: state and PKCE, cookie signing, expiry.
+  It is small, but a bug in it is a leak.
+* Function requests count against the Workers free quota (100,000 a day), a
+  non-issue at members-only traffic since only `/auth/*` and `/drafts/*` invoke it.
+* A removed member keeps access until their session expires.
+
+==== B. Cloudflare Access in front of `/drafts/*`
+
+A Cloudflare Zero Trust application covers `lekishi.pages.dev/drafts/*` with
+GitHub as the identity provider and a "member of GitHub organization `lekishi`"
+rule. The site has no auth code: the home page tells a member from a stranger by
+whether `/drafts/chapters.json` answers or redirects, and "Sign in" is a link
+into `/drafts/`, which Access bounces through GitHub.
+
+Pros:
+
+* No auth code, no session cryptography of ours.
+* Other providers and OIDC later are a dashboard change, with groups, audit logs
+  and immediate revocation.
+* The free Zero Trust plan covers up to 50 users.
+
+Cons:
+
+* A Cloudflare Zero Trust account and its configuration, which live outside the
+  repository unless kept in Terraform, so they drift unreviewed.
+* Access on a `*.pages.dev` production hostname, scoped to a path, has documented
+  quirks; it needs a trial before relying on it.
+* The sign-in is Access's interstitial rather than the app's, and detecting it
+  from the page relies on reading a redirect.
+* Locks the gate to Cloudflare; moving hosts means redoing it.
+
+==== C. A separate drafts deployment
+
+Keep production exactly as it is, and deploy `main` a second time with drafts
+on, for example as a `drafts` branch alias (`drafts.lekishi.pages.dev`) that CI
+moves to `main` on every merge, optionally behind Access.
+
+Pros:
+
+* No change to the production artifact or its rules; the existing preview build
+  already does the work. Its own 20,000-file budget.
+
+Cons:
+
+* It is not sign-in on the published site; members use another address and links
+  differ between the two.
+* Without Access it is just another public preview, so it does not meet the ask;
+  with Access it carries B's costs as well.
+
+Rejected outright: encrypting draft data in the static artifact with a shared
+passphrase (no identity, no revocation, and the key ends up in chat), and storing
+drafts in KV or R2 instead of the artifact (more infrastructure for the same
+gate).
+
+=== Sessions
+
+The session is a cookie, `__Host-lekishi_session`: the GitHub login, the time of
+the membership check and an expiry of 12 hours, signed with HMAC-SHA-256.
+`Secure`, `HttpOnly`, `SameSite=Lax`, `Path=/`. Membership is checked at sign-in
+only, so revocation takes effect within 12 hours. A second, readable cookie,
+`lekishi_member=1`, holds no credential; it only tells the page to ask for the
+drafts tier, so anonymous readers make no extra request. It is the site's second
+piece of browser state after the last position in `localStorage`, which
+`AGENTS.md` says needs the owner's decision; this RFD asks for it.
+
+=== The publication gate
+
+Nothing about approval changes. The owner still approves a digest with
+`pnpm approvals`, CODEOWNERS still requires the owner on manifests, and no one
+else writes an approval. What changes is where an unapproved chapter goes:
+
+[cols="1,1,1",options="header"]
+|===
+|Chapter state |Public site |Members (production)
+|approved |served |served (it is public)
+|draft (no approval) |absent |`/drafts/chapters/<id>`
+|stale (approval no longer matches) |absent, with a build warning |`/drafts/chapters/<id>`, stating what changed since the approval
+|===
+
+A consequence to accept: editing a published chapter on `main` takes it off the
+public site until it is approved again, so a reader's link to it 404s in the
+meantime. Today that edit fails the build and the previous deployment stays up;
+under PR #26 and this RFD it deploys without the chapter. See <<Open questions>>.
+
+The build invariant (`scripts/check-static-build.mjs`) gains checks:
+
+* no file outside `/drafts/` contains a draft's id, title or summary;
+* every file under `/drafts/` is matched by the gate's routes in `_routes.json`,
+  so no draft is ever served as a plain static file;
+* a production build with a drafts tree has the gate, and a preview build has no
+  drafts tree.
+
+=== The 20,000-file limit
+
+The drafts tree adds about two files per unapproved chapter (its page and its
+data) and two indexes. It reuses the public tree's `_app` code, globe tiles and
+fonts, so nothing is duplicated. At the planned scale of a few dozen chapters
+that is under a hundred files against an artifact of about 1,500
+(link:../0003/GLOBE_RENDERER.adoc[the globe renderer record]). The Pages Function
+is a Worker bundle, not a static asset. The invariant's limit stays where it is
+and covers both trees.
+
+== Alternatives and trade-offs
+
+Option A against B is the main choice: in-repository code we own against a
+managed gate configured elsewhere. A wins on reviewability, on matching the
+owner's request, and on working with the current hostname; B wins on code we
+do not have to get right and on adding providers later. Since previews already
+expose drafts to anyone with a link, the stakes of a bug in A are a draft seen
+early on the published host, which supports choosing the in-repository option.
+C avoids every change to production but is not what was asked.
+
+A per-chapter flag instead of the approval state was not considered: members see
+exactly what the publication gate has not published, so there is one source of
+truth.
+
+== Open questions
+
+* Should a stale chapter's public URL show a "being revised" page instead of a
+  404 until it is re-approved? Serving the last approved content would mean
+  building it from the approved revision in Git, which is possible but larger.
+* Should previews later sit behind the same sign-in? The owner wants them open
+  now.
+* Session length: 12 hours is proposed; longer is more convenient and slower to
+  revoke.
+* Where the "Sign in" control lives, for RFD 5.
+
+== Implementation
+
+See link:IMPLEMENTATION.adoc[RFD 6 implementation checklist]. RFD 2 owns the
+publication gate this tiers on; RFD 3 owns delivery, and the static architecture
+decision stands for the reader site; RFD 5 owns the sign-in control's design.

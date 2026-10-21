@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../schema/chapter.schema.json
+title: 重耳's nineteen years in exile
+summary: >-
+  The prince of 晉 who fled over a wall in 655 BCE and came home at sixty-two: twelve years among the
+  狄, a clod of earth at 五鹿, a wife and a drunken departure in 齊, insults at 衛, 曹 and 鄭, horses
+  from 宋, a promise to the king of 楚, five wives in 秦, and a jade thrown into the Yellow River.
+window: 655 BCE..636 BCE
+story:
+  summary: >-
+    重耳's flight from 蒲 in 655 BCE, his wandering among the 春秋 states, and his return with a 秦
+    army to take the seat of 晉 in 636 BCE.
+  span: 655 BCE..636 BCE
+  coverage: >-
+    The exile as the 左傳 and the 晉 house of 史記 tell it, with the years of the table of the twelve
+    lords, which puts most of the wandering in a single year, 637 BCE. The table and the 左傳
+    disagree on when 重耳 passed through 衛, and both accounts are kept as events and as journeys.
+    Excluded: the 驪姬 affair before the flight, the 介子推 legend after the return, and 城濮.
+  notes: >-
+    Step order is the 左傳's. The 637 BCE events share one year and the table does not order
+    them; their order comes from the narrative. Two journey records, one per account, are proposed
+    beside the chapter and wait on the journey kind (draft PR #26). This is a draft for data and
+    engine testing; no release decision has been taken.
+  steps:
+    - chonger-flees-pu: 重耳 goes over the wall at 蒲 and flees to the 狄
+    - chonger-among-di: Twelve years among the 狄
+    - chonger-leaves-di: 重耳 leaves the 狄 for 齊
+    - chonger-at-wey: 衛 refuses him courtesy
+    - wulu-clod: A clod of earth at 五鹿
+    - chonger-in-qi: Five years in 齊
+    - chonger-leaves-qi: Carried out of 齊 drunk
+    - chonger-at-wey-637: 衛, in the table's account
+    - chonger-at-cao: 曹共公 watches him bathe
+    - chonger-at-song: 宋 gives him horses
+    - chonger-at-zheng: 鄭 refuses him courtesy
+    - chonger-at-chu: A promise to the king of 楚
+    - chonger-chu-promise: 重耳's promise to 楚
+    - chonger-in-qin: Five wives in 秦
+    - qin-backs-chonger: 秦 backs 重耳
+    - chonger-crosses-he: The jade in the river
+    - xun-covenant: The covenant at 郇
+    - chonger-enthroned: 重耳 becomes lord of 晉
+    - chonger-rules-jin: 重耳 rules 晉

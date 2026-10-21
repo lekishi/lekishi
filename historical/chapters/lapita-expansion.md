@@ -67,7 +67,7 @@ events.
 |---|---|---|
 | Lapita on Mussau | 1521–1301 BCE (Denham) | — |
 | Across the Bismarcks | 1411–1291 BCE (Denham) | Early Lapita 3300–3000 BP (Summerhayes) |
-| Into Remote Oceania | 1051 BCE, "around 3000 BP" (Petchey; Sheppard) | Vanuatu by 1301–1151 BCE (Denham) |
+| Into Remote Oceania | 1301–921 BCE, an editorial window around "about 3000 BP" (Petchey; Sheppard) | Vanuatu by 1301–1151 BCE (Denham) |
 | Teouma settled | 971–921 BCE | 1251–1051 BCE, the first charcoal dates |
 | Teouma cemetery | 991–771 BCE | — |
 | Naigani, Fiji | 1070–914 BCE | Fiji by 1181–1061 BCE (Denham) |
@@ -90,9 +90,12 @@ Proposed to the owner, not built:
    nothing for "3470–3250 cal BP at 68.2% probability". A calibrated range
    with its probability and its BP figures, converted for the timeline but
    shown as a range, would stop these reading as documentary dates.
-2. **An approximate year.** "Around 3000 BP" has to be written as the single
-   year 1051 BCE, which reads more exact than the source. A circa marker, or a
-   window the source states only loosely, would carry it.
+2. **An approximate year.** No source bounds "around 3000 BP", so the
+   crossing carries an editorial window, 1301–921 BCE, from the earliest cited
+   model for Vanuatu (Denham) to the end of Teouma's most likely start, the
+   earliest latest bound among the Remote Oceania settlements it precedes. The window is defensible but much wider than the
+   source's figure, and the single year 1051 BCE would read more exact than
+   the source. A circa marker would carry "around 3000 BP" as written.
 
 ## Findings for the journey proposal
 

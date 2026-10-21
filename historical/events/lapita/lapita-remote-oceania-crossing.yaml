@@ -5,23 +5,31 @@ summary:
 types: [process]
 part_of: [lapita-expansion]
 date:
-  value: 1051 BCE
-  mode: instant
+  value: 1301 BCE..921 BCE
+  mode: window
   calendar: julian
-  as_written: around 3000 BP
+  as_written: around 3000 BP (site-based chronologies); Vanuatu by 3250–3100 cal BP (Denham et al.)
   cite:
     - id: crossing-time
       says:
         Petchey and colleagues say the site-based chronologies indicate the culture spread through the
-        Solomons chain and on to Vanuatu around 3000 BP. The contract has no 'about' marker, so the record
-        writes the year 3000 BP converts to, converted from cal BP as BCE = BP − 1949 (1950 CE is 0 BP;
-        there is no year zero).
+        Solomons chain and on to Vanuatu around 3000 BP (about 1051 BCE). No source bounds that "around",
+        so the window is editorial, between two cited figures, converted from cal BP as BCE = BP − 1949
+        (1950 CE is 0 BP; there is no year zero). It opens at 3250 cal BP (1301 BCE), the earliest date any
+        cited model gives for reaching Vanuatu (Denham et al.), and closes at 2870 cal BP (921 BCE), the end
+        of Teouma's most likely start; the crossing precedes every Remote Oceania settlement in the chapter,
+        and Teouma's is the earliest of their latest bounds.
       basis: interpretation
       attributed_to:
-        F. Petchey et al. (2015), summarizing Sheppard et al. (2015), Nunn and Petchey (2013)
-        and Burley et al. (2015)
-      source: petchey-2015-teouma
-      at: "103"
+        F. Petchey et al. (2015), summarizing Sheppard et al. (2015), Nunn and Petchey (2013) and Burley
+        et al. (2015); T. Denham, C. Bronk Ramsey and J. Specht (2012)
+      sources:
+        - source: petchey-2015-teouma
+          at: "103"
+        - source: petchey-2015-teouma
+          at: 95 (abstract)
+        - source: denham-2012-lapita
+          at: 39 (abstract)
     - id: crossing-time-sheppard
       says:
         Sheppard, Chiu and Walter's re-dating of SE-SZ-8 points to an initial settlement of Remote Oceania

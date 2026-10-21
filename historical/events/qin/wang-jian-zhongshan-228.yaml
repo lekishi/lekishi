@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "In 228 BCE, with Zhao taken, the annals record 王翦's army stationed at 中山 meaning to attack Yan; the comprehensive mirror says it was stationed there to bear down on Yan."
+types: [campaign]
+date:
+  value: "228 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "十九年（屯中山）; 始皇帝十九年（王翦屯中山以臨燕）"
+  cite:
+    - says: "The annals record the army, meaning to attack Yan, stationed at 中山 in 十九年 (228 BCE)."
+      source: shiji
+      at: "卷六 秦始皇本紀 十九年（引兵欲攻燕，屯中山）"
+      quote: "引兵欲攻燕，屯中山。"
+    - says: "The comprehensive mirror records 王翦 stationed at 中山 to bear down on Yan."
+      role: supporting
+      source: zizhi-tongjian
+      at: "卷六 秦紀一 始皇帝十九年（王翦屯中山以臨燕）"
+      quote: "王翦屯中山以臨燕。"
+places:
+  - place: zhongshan
+    role: site
+    note: "The region the army was stationed in; the camp is not placed."
+participants:
+  - actor: wang-jian
+    role: leader

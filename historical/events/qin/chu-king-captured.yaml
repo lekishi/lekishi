@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "The last king of Chu, 負芻, was captured and Chu destroyed. The six-states table, the hereditary house of Chu and the comprehensive mirror date it to 223 BCE; the annals put the capture in their 224 BCE notice."
+types: [campaign]
+date:
+  value: "223 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "秦始皇二十四年（虜其王負芻）; 王負芻五年（虜楚王負芻）; 始皇帝二十四年（王翦、蒙武虜楚王負芻）; 二十三年（虜荊王）"
+  cite:
+    - says: "The six-states table records 王翦 and 蒙武 capturing king 負芻 under 秦始皇二十四年 (223 BCE)."
+      source: shiji
+      at: "卷十五 六國年表 秦始皇二十四年（虜其王負芻）"
+      quote: "二十四。王翦、蒙武破楚，虜其王負芻。"
+    - says: "The hereditary house of Chu records the capture in the king's fifth year."
+      role: supporting
+      source: shiji-six-states
+      at: "卷四十 楚世家 王負芻五年（虜楚王負芻）"
+      quote: "五年，秦將王翦、蒙武遂破楚國，虜楚王負芻"
+    - says: "The comprehensive mirror records the capture under 始皇帝二十四年."
+      role: supporting
+      source: zizhi-tongjian-qin-ji-2
+      at: "卷七 秦紀二 始皇帝二十四年（虜楚王負芻）"
+      quote: "王翦、蒙武虜楚王負芻"
+participants:
+  - actor: wang-jian
+    role: leader
+  - actor: meng-wu
+    role: leader
+  - actor: chu-king-fuchu
+    role: subject
+  - actor: chu-state
+    role: subject
+notes: "No source names the place of the capture, so the event carries none. The biography of 王翦 says it came a year after 項燕's death (歲餘). The mirror's transcription deletes 楚 from 以其地置(楚)郡 because the thirty-six commanderies have no 楚郡; the chapter quotes no bracketed text and asserts no commandery."
+dispute:
+  status: disputed
+  summary: "The annals' 二十三年 (224 BCE) notice records the capture (虜荊王); the six-states table, the hereditary house of Chu and the comprehensive mirror date it to 223 BCE. The chapter publishes 223 BCE and keeps the annals' year as a claim."
+cite:
+  - says: "The annals record the capture of the king of Chu in their 二十三年 (224 BCE) notice."
+    role: conflicting
+    source: shiji
+    at: "卷六 秦始皇本紀 二十三年（虜荊王）"
+    quote: "取陳以南至平輿，虜荊王。"

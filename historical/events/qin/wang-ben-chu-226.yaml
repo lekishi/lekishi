@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "In 226 BCE 王賁 attacked Chu. The six-states table's Chu column records Qin breaking the Chu army and taking ten cities; the comprehensive mirror says more than ten."
+types: [campaign]
+date:
+  value: "226 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "秦始皇二十一年（王賁擊楚）; 王負芻二年（秦大破我，取十城）; 始皇帝二十一年（王賁伐楚，取十餘城）"
+  cite:
+    - says: "The six-states table records 王賁 attacking Chu in 秦始皇二十一年 (226 BCE)."
+      source: shiji
+      at: "卷十五 六國年表 秦始皇二十一年（王賁擊楚）"
+      quote: "二十一。王賁擊楚。"
+    - says: "The table's Chu column records Qin breaking the Chu army and taking ten cities in the king's second year."
+      role: supporting
+      source: shiji
+      at: "卷十五 六國年表 秦始皇二十一年（楚 二）"
+      quote: "二。秦大破我，取十城。"
+    - says: "The comprehensive mirror records more than ten cities taken."
+      role: supporting
+      source: zizhi-tongjian-qin-ji-2
+      at: "卷七 秦紀二 始皇帝二十一年（王賁伐楚）"
+      quote: "王賁伐楚，取十餘城。"
+participants:
+  - actor: wang-ben
+    role: leader
+  - actor: chu-state
+    role: subject
+notes: "The sources name no city, so the event carries no place. The annals' notice for this year reads 王賁攻（薊）［荊］ in the transcription, an editor's correction, so the chapter cites the table instead. The hereditary house of Chu records the defeat under the king's second year with 亡十餘城."

@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "In 224 BCE 王翦 took the Chu land from 陳 south to 平輿. Facing the whole Chu army he fortified his camp and would not fight, resting and feeding his men until they were throwing stones and jumping for sport; when the Chu army withdrew east he pursued it and broke it south of 蘄."
+types: [campaign]
+date:
+  value: "224 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "二十三年（取陳以南至平輿）; 秦始皇二十三年（王翦、蒙武擊破楚軍）; 始皇帝二十三年（王翦取陳以南至平輿）"
+  cite:
+    - says: "The annals record 王翦 taking the land from 陳 south to 平輿 in 二十三年 (224 BCE)."
+      source: shiji
+      at: "卷六 秦始皇本紀 二十三年（取陳以南至平輿）"
+      quote: "取陳以南至平輿，虜荊王。"
+    - says: "The six-states table records 王翦 and 蒙武 breaking the Chu army under 秦始皇二十三年."
+      role: supporting
+      source: shiji
+      at: "卷十五 六國年表 秦始皇二十三年（王翦、蒙武擊破楚軍）"
+      quote: "二十三。王翦、蒙武擊破楚軍，殺其將項燕。"
+    - says: "The comprehensive mirror records the same advance and the pursuit to south of 蘄 under 始皇帝二十三年."
+      role: supporting
+      source: zizhi-tongjian-qin-ji-2
+      at: "卷七 秦紀二 始皇帝二十三年（王翦取陳以南至平輿）"
+      quote: "王翦取陳以南至平輿。"
+places:
+  - place: chen
+    role: waypoint
+    note: "The northern end of the land taken."
+  - place: pingyu
+    role: waypoint
+    note: "The southern end of the land taken."
+  - place: qi-chu
+    role: site
+    note: "The army was broken south of it, in the biography and the mirror."
+participants:
+  - actor: wang-jian
+    role: leader
+  - actor: meng-wu
+    role: leader
+    note: "Named by the table."
+  - actor: xiang-yan
+    role: participant
+    note: "Commanded the Chu army."
+  - actor: chu-state
+    role: subject
+notes: "The annals put the capture of the Chu king in this year's notice; the table and the hereditary house of Chu put it in the next, and the chapter records it as its own disputed event."
+cite:
+  - says: "The biography records the fortified camp, the games, the pursuit and the victory south of 蘄."
+    role: supporting
+    source: shiji-six-states
+    at: "卷七十三 白起王翦列傳（王翦至，堅壁而守之）"
+    quote: "王翦至，堅壁而守之，不肯戰。荊兵數出挑戰，終不出。"

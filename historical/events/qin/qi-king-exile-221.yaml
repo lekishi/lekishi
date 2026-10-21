@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Qin moved the captured king of Qi, 建, to 共. The comprehensive mirror records him kept among pines and cypresses until he starved, and the people of Qi singing 'Pines? Cypresses? Who settled 建 at 共? The guests!', blaming the advisers who had kept him from joining the other states."
+types: [occurrence]
+date:
+  value: "221 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "王建四十四年（遷之共）; 始皇帝二十六年（秦遷之共）"
+  cite:
+    - says: "The hereditary house of Qi records Qin capturing king 建 and moving him to 共 in his forty-fourth year (221 BCE)."
+      source: shiji-six-states
+      at: "卷四十六 田敬仲完世家 王建四十四年（遷之共）"
+      quote: "秦虜王建，遷之共。遂滅齊爲郡。"
+    - says: "The comprehensive mirror records him settled among pines and cypresses and dying of hunger."
+      role: supporting
+      source: zizhi-tongjian-qin-ji-2
+      at: "卷七 秦紀二 始皇帝二十六年（處之松柏之間，餓而死）"
+      quote: "齊王遂降，秦遷之共，處之松柏之間，餓而死。"
+places:
+  - place: gong
+    role: end
+    note: "Where he was moved."
+participants:
+  - actor: qi-king-jian
+    role: subject
+notes: "The removal is dated with the surrender; the death has no date of its own and is not a separate event. The hereditary house records the song but not the starvation."
+cite:
+  - says: "The hereditary house records the song of the people of Qi."
+    role: supporting
+    source: shiji-six-states
+    at: "卷四十六 田敬仲完世家 王建四十四年（松耶柏耶）"
+    quote: "松耶柏耶？住建共者客耶？"

@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Returning from 遼東 in 222 BCE, 王賁 attacked 代 and captured its king 嘉, the Zhao prince; the six-states table counts this as the end of Zhao."
+types: [campaign]
+date:
+  value: "222 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "二十五年（還攻代，虜代王嘉）; 代王嘉六年（秦將王賁虜王嘉，秦滅趙）"
+  cite:
+    - says: "The annals record the attack on 代 and the capture of its king in 二十五年 (222 BCE)."
+      source: shiji
+      at: "卷六 秦始皇本紀 二十五年（還攻代，虜代王嘉）"
+      quote: "還攻代，虜代王嘉。"
+    - says: "The six-states table records 王賁 capturing king 嘉 and Qin destroying Zhao."
+      role: supporting
+      source: shiji
+      at: "卷十五 六國年表 秦始皇二十五年（趙 六）"
+      quote: "六。秦將王賁虜王嘉，秦滅趙。"
+    - says: "The comprehensive mirror records the same under 始皇帝二十五年."
+      role: supporting
+      source: zizhi-tongjian-qin-ji-2
+      at: "卷七 秦紀二 始皇帝二十五年（王賁攻代）"
+      quote: "王賁攻代，虜代王嘉。"
+places:
+  - place: dai
+    role: site
+    note: "The kingdom; no court site is asserted."
+participants:
+  - actor: wang-ben
+    role: leader
+  - actor: dai-king-jia
+    role: subject
+  - actor: dai-state
+    role: subject

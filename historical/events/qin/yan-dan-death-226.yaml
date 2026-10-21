@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "The Yan crown prince 丹 died in 226 BCE, and the accounts disagree on who killed him. The annals record Qin obtaining his head when 薊 fell; the biography of the assassins and the comprehensive mirror record that, on 代王嘉's advice, the king of Yan sent men to behead him at the 衍水 to offer to Qin; the biography of 王翦 credits 李信 with catching him."
+types: [occurrence]
+date:
+  value: "226 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "二十一年（得太子丹之首）; 燕王喜二十九年（斬丹以獻秦）; 始皇帝二十一年（燕王使使斬丹）"
+  cite:
+    - says: "The annals record Qin obtaining 丹's head in 二十一年 (226 BCE)."
+      source: shiji
+      at: "卷六 秦始皇本紀 二十一年（得太子丹之首）"
+      quote: "遂破燕太子軍，取燕薊城，得太子丹之首。"
+    - says: "The six-states table records Qin obtaining 太子丹 in Yan's twenty-ninth year."
+      role: supporting
+      source: shiji
+      at: "卷十五 六國年表 秦始皇二十一年（燕 二十九）"
+      quote: "二十九。秦拔我薊，得太子丹。"
+places:
+  - place: yanshui
+    role: site
+    note: "Where the biography of the assassins and the mirror place the beheading; it has no position."
+participants:
+  - actor: yan-dan
+    role: subject
+  - actor: yan-king-xi
+    role: other
+    note: "Ordered the beheading, in two accounts."
+  - actor: dai-king-jia
+    role: other
+    note: "Advised it, in two accounts."
+  - actor: li-xin
+    role: other
+    note: "Caught him, in the biography of 王翦."
+notes: "The annals' notice does not say who killed 丹; the other accounts are specific and differ. The 衍水 is named but not located, so the event shows no map position."
+dispute:
+  status: disputed
+  summary: "The annals record Qin obtaining 丹's head when 薊 fell; the hereditary house of Yan says the king beheaded 丹 to offer him to Qin; the biography of the assassins and the comprehensive mirror add that 代王嘉 advised it and that 丹 was hiding in the 衍水; the biography of 王翦 records 李信 pursuing him to the 衍水 and catching him. The chapter publishes the annals' year, keeps every account as a claim, and decides no killer."
+cite:
+  - says: "The hereditary house of Yan records the king beheading 丹 to offer him to Qin."
+    role: conflicting
+    source: shiji-six-states
+    at: "卷三十四 燕召公世家 燕王喜二十九年（斬丹以獻秦）"
+    quote: "二十九年，秦攻拔我薊，燕王亡，徙居遼東，斬丹以獻秦。"
+  - says: "The biography of the assassins records 代王嘉's letter, 丹 hiding in the 衍水, and the king sending men to behead him."
+    role: conflicting
+    source: shiji-six-states
+    at: "卷八十六 刺客列傳（丹匿衍水中）"
+    quote: "其後李信追丹，丹匿衍水中，燕王乃使使斬太子丹，欲獻之秦。"
+  - says: "The comprehensive mirror records the same as the biography of the assassins."
+    role: conflicting
+    source: zizhi-tongjian-qin-ji-2
+    at: "卷七 秦紀二 始皇帝二十一年（燕王使使斬丹）"
+    quote: "代王嘉遺燕王書，令殺太子丹以獻。丹匿衍水中，燕王使使斬丹，欲以獻王，王復進兵攻之。"
+  - says: "The biography of 王翦 records 李信 pursuing 丹 to the 衍水 and catching him."
+    role: conflicting
+    source: shiji-six-states
+    at: "卷七十三 白起王翦列傳（逐燕太子丹至於衍水中，卒破得丹）"
+    quote: "嘗以兵數千逐燕太子丹至於衍水中，卒破得丹"

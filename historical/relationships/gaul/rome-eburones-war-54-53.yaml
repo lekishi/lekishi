@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: The Eburones under Ambiorix destroy a Roman legion and a half at Atuatuca; the next year Caesar invites the neighbouring peoples to plunder their land so that the people and its name are wiped out.
+types: [conflict]
+from: roman-republic
+to: eburones
+date:
+  value: 54 BCE..53 BCE
+  mode: window
+  calendar: julian
+  as_written: the years of books V and VI
+notes: "Caesar's own account of a war he commanded."
+cite:
+  id: rome-eburones-war-54-53-basis
+  says: "Caesar tells that he called the neighbouring peoples to plunder the Eburones, so that the stock and name of the people would be destroyed."
+  source: caesar-gallic-war
+  at: "6.34"
+  quote: omnes ad se vocat spe praedae ad diripiendos Eburones

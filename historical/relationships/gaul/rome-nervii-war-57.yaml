@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "Rome makes war on the Belgic Nervii, whose army is almost destroyed at the Sambre; their elders surrender to Caesar."
+types: [conflict]
+from: roman-republic
+to: nervii
+date:
+  value: 57 BCE
+  mode: window
+  calendar: julian
+  as_written: the year of book II
+notes: "Caesar's own account of a war he commanded."
+cite:
+  id: rome-nervii-war-57-basis
+  says: Caesar tells that after the battle the surviving elders sent envoys and surrendered to him.
+  source: caesar-gallic-war
+  at: "2.28"
+  quote: omnium qui supererant consensu legatos ad Caesarem miserunt seque ei dediderunt

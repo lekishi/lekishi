@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "Rome makes war on the seafaring Veneti of Armorica after they hold Roman officers; when their fleet is lost they surrender, and Caesar has their council killed and the rest sold."
+types: [conflict]
+from: roman-republic
+to: veneti
+date:
+  value: 56 BCE
+  mode: window
+  calendar: julian
+  as_written: the year of book III
+notes: "Caesar's own account of a war he commanded."
+cite:
+  id: rome-veneti-war-56-basis
+  says: Caesar tells that he put their whole council to death and sold the rest as slaves.
+  source: caesar-gallic-war
+  at: "3.16"
+  quote: Itaque omni senatu necato reliquos sub corona vendidit.

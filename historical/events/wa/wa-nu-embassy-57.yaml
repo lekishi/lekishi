@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In the first month of 建武中元二年 (57 CE) an envoy of the 倭奴國 came to the Han court at 洛陽 with
+  tribute and New Year greetings. He called himself 大夫. The annals enter the embassy among the
+  month's events, a few weeks before 光武帝's death.
+types: [mission]
+date:
+  value: 57-02..57-03
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 二年春正月……東夷倭奴國主遣使奉獻
+  cite:
+    - id: wa-nu-embassy-time
+      says: The annals enter the 倭奴國 ruler's embassy in the first month of 中元二年, after the 辛未 day.
+      sources:
+        - source: hou-hanshu
+          at: 卷一下 光武帝紀下 中元二年正月
+          quote: 二年春正月辛未，初立北郊，祀后土。
+        - source: hou-hanshu
+          at: 卷一下 光武帝紀下 中元二年正月
+          quote: 東夷倭奴國主遣使奉獻。
+    - id: wa-nu-embassy-account
+      says: The 東夷列傳 records the 倭奴國 bringing tribute and greetings in 建武中元二年 and the envoy calling himself 大夫.
+      role: supporting
+      source: hou-hanshu
+      at: 卷八十五 東夷列傳 倭（建武中元二年）
+      quote: 建武中元二年，倭奴國奉貢朝賀，使人自稱大夫
+places:
+  - place: wa-nu
+    role: start
+  - place: han-luoyang
+    role: end
+    note: The capital; the sources name no hall.
+participants:
+  - actor: wa-nu-state
+    role: guest
+  - actor: guangwu-emperor
+    role: host
+notes:
+  The window is the first month of 中元二年. 二月戊戌 fell on 29 March 57 (Julian) and 正月辛未 on 2
+  March, so the month fell within February and March; the annals give the embassy no
+  day. The route by sea and through 樂浪 is not recorded, and no line is drawn.

@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  光武帝 (劉秀), the first emperor of the Eastern Han, whose court at 洛陽 received the 倭奴國 envoy in
+  the first month of 建武中元二年 (57 CE) and who, by the 東夷列傳's account, gave the envoy a seal and
+  cord. He died in the second month of the same year.
+types: [person]
+names:
+  - form: 光武帝
+    lang: lzh
+    script: Hani
+    roman: Guangwudi
+    scheme: pinyin
+    note: The temple name the 後漢書 uses in its 東夷列傳 entry; the annals call him 帝.
+    cite:
+      - id: guangwu-emperor-name
+        says: The 東夷列傳 names 光武 as the emperor who gave the 倭奴國 envoy a seal and cord.
+        source: hou-hanshu
+        at: 卷八十五 東夷列傳 倭（光武賜以印綬）
+        quote: 光武賜以印綬
+roles:
+  - role: ruler
+    note: Only the reign's end is cited here; its start (25 CE) is outside the chapter.
+    date:
+      value: 57-03-29
+      calendar: chinese_lunisolar
+      as_written: 二月戊戌，帝崩於南宮前殿
+    cite:
+      - id: guangwu-emperor-death
+        says: The annals record the emperor dying in the 南宮前殿 on the 戊戌 day of the second month, aged sixty-two.
+        source: hou-hanshu
+        at: 卷一下 光武帝紀下 中元二年二月
+        quote: 二月戊戌，帝崩於南宮前殿，年六十二。
+notes:
+  The role's date is the day of his death, 二月戊戌 of 中元二年, which falls on 29 March 57 in the
+  Julian calendar.

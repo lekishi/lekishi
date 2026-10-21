@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "Zhao's land passing to Qin in 228 BCE with the capture of its king at 邯鄲. The Zhao prince 嘉 kept a kingdom at Dai until 222 BCE, which the six-states table counts as the end of Zhao."
+types: [changed_boundaries]
+from: zhao-state
+to: qin-state
+date:
+  value: "228 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "秦始皇十九年（王翦拔趙）; 遂滅趙"
+notes: "The relationship records that the state's land passed to Qin; it draws no boundary, because the chapter has no cited territory geometry, and it asserts no causation."
+dispute:
+  status: disputed
+  summary: "The sources date the end of Zhao differently: the biographies end Zhao with king 遷's capture in 228 BCE; the six-states table carries the Zhao column on through Dai and writes 秦滅趙 at the capture of 嘉 in 222 BCE. The chapter dates the annexation of Zhao's land to 228 BCE and keeps Dai as its own relationship."
+cite:
+  - says: "The biography of 李牧 records 王翦 capturing the Zhao king and destroying Zhao."
+    source: shiji-six-states
+    at: "卷八十一 廉頗藺相如列傳（後三月）"
+    quote: "後三月，王翦因急撃趙，大破殺趙蔥，虜趙王遷及其將顏聚，遂滅趙。"
+  - says: "The biography of 荊軻 records 王翦 taking all of Zhao's land."
+    role: supporting
+    source: shiji-six-states
+    at: "卷八十六 刺客列傳（秦將王翦破趙，虜趙王）"
+    quote: "秦將王翦破趙，虜趙王，盡收入其地，進兵北略地至燕南界。"
+  - says: "The six-states table writes 秦滅趙 in the Zhao column under 222 BCE, at the capture of the Dai king 嘉."
+    role: conflicting
+    source: shiji
+    at: "卷十五 六國年表 秦始皇二十五年（趙 六）"
+    quote: "六。秦將王賁虜王嘉，秦滅趙。"

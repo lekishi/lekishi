@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "Yan's land passing to Qin in 222 BCE, when 王賁 took 遼東 and captured its king 喜."
+types: [changed_boundaries]
+from: yan-state
+to: qin-state
+date:
+  value: "222 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "燕王喜三十三年（卒滅燕）; 秦始皇二十五年（秦滅燕）"
+notes: "The relationship records that the state's land passed to Qin; it draws no boundary, because the chapter has no cited territory geometry, and it asserts no causation."
+cite:
+  - says: "The hereditary house records Qin taking 遼東, capturing the king and at last destroying Yan."
+    source: shiji-six-states
+    at: "卷三十四 燕召公世家 燕王喜三十三年（秦拔遼東）"
+    quote: "三十三年，秦拔遼東，虜燕王喜，卒滅燕。"
+  - says: "The six-states table records Qin capturing the king, taking 遼東 and destroying Yan."
+    role: supporting
+    source: shiji
+    at: "卷十五 六國年表 秦始皇二十五年（燕 三十三）"
+    quote: "三十三。秦虜王喜，拔遼東，秦滅燕。"

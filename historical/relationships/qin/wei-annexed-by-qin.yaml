@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "Wei's land passing to Qin in 225 BCE: after the flood of 大梁 the annals record Qin taking all its land, and the hereditary house records Wei made into commanderies and counties."
+types: [changed_boundaries]
+from: wei-state
+to: qin-state
+date:
+  value: "225 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "二十二年（盡取其地）; 王假三年（遂滅魏以爲郡縣）"
+notes: "The sources name no commandery for Wei's land in this year. The relationship records that the state's land passed to Qin; it draws no boundary, because the chapter has no cited territory geometry, and it asserts no causation."
+cite:
+  - says: "The annals record the king's surrender and Qin taking all Wei's land."
+    source: shiji
+    at: "卷六 秦始皇本紀 二十二年（引河溝灌大梁）"
+    quote: "二十二年，王賁攻魏，引河溝灌大梁，大梁城壞，其王請降，盡取其地。"
+  - says: "The hereditary house records Wei destroyed and made into commanderies and counties."
+    role: supporting
+    source: shiji-six-states
+    at: "卷四十四 魏世家 王假三年（秦灌大梁，虜王假）"
+    quote: "三年，秦灌大梁，虜王假，遂滅魏以爲郡縣。"

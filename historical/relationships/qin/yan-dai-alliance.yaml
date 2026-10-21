@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "Dai and Yan joining forces in 228 BCE: after the fall of 邯鄲 the Zhao prince 嘉 made himself king of Dai and joined armies with Yan, camping at 上谷."
+types: [alliance]
+from: dai-state
+to: yan-state
+directionality: mutual
+date:
+  value: "228 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "十九年（東與燕合兵）; 始皇帝十九年（與燕合兵）"
+notes: "The date is the year the sources record the armies joined; the alliance is not given an end, though both kings were captured in 222 BCE. It carries no geometry; 上谷 is in the place records."
+cite:
+  - says: "The annals record 嘉 making himself king of Dai and joining armies with Yan to the east, camping at 上谷."
+    source: shiji
+    at: "卷六 秦始皇本紀 十九年（自立為代王）"
+    quote: "趙公子嘉率其宗數百人之代，自立為代王，東與燕合兵，軍上谷。"
+  - says: "The comprehensive mirror records the same, adding that Zhao officials gradually came over to him."
+    role: supporting
+    source: zizhi-tongjian
+    at: "卷六 秦紀一 始皇帝十九年（趙公子嘉帥其宗族數百人奔代）"
+    quote: "趙公子嘉帥其宗族數百人奔代，自立為代王，趙之亡，大夫稍稍歸之，與燕合兵，軍上谷。"

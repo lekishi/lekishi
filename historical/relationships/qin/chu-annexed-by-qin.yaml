@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "Chu's land passing to Qin with the capture of its king 負芻. The six-states table writes 秦滅楚 under 223 BCE; the lands south of the 江 followed in 222 BCE, when 王翦 set up the 會稽 commandery."
+types: [changed_boundaries]
+from: chu-state
+to: qin-state
+date:
+  value: "223 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "秦始皇二十四年（虜其王負芻）; 王負芻五年（秦滅楚）"
+notes: "The year follows the six-states table, the hereditary house and the comprehensive mirror; the annals' earlier year is kept as a conflicting claim, as on the event chu-king-captured. The 會稽 commandery is its own relationship. The relationship records that the state's land passed to Qin; it draws no boundary, because the chapter has no cited territory geometry, and it asserts no causation."
+dispute:
+  status: disputed
+  summary: "The annals record the Chu king's capture under 二十三年 (224 BCE); the six-states table, the hereditary house and the comprehensive mirror under the following year (223 BCE). The chapter dates the annexation to 223 BCE."
+cite:
+  - says: "The six-states table records the Chu king captured and Chu destroyed in its fifth year (223 BCE)."
+    source: shiji
+    at: "卷十五 六國年表 秦始皇二十四年（楚 五）"
+    quote: "五。秦虜王負芻。秦滅楚。"
+  - says: "The annals record the capture of the Chu king under 二十三年 (224 BCE)."
+    role: conflicting
+    source: shiji
+    at: "卷六 秦始皇本紀 二十三年（虜荊王）"
+    quote: "取陳以南至平輿，虜荊王。"

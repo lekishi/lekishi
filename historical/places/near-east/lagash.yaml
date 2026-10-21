@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Lagash, the Sumerian city for which, with Girsu, the prologue says Hammurabi provided food and
+  drink.
+types: [settlement]
+names:
+  - form: Lagash
+    lang: en
+    script: Latn
+    cite:
+      - id: lagash-name
+        says: The prologue names Lagash with Girsu.
+        source: king-code-of-hammurabi
+        at: prologue
+        quote: who provided food and drink for Lagash and Girsu
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [46.40968, 31.4193425]
+    notes: The gazetteer's point for the ancient city as a whole; it places no temple or wall.
+    cite:
+      - says: The Pleiades gazetteer records Lagash with a precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/959120263 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "959120263"
+    url: https://pleiades.stoa.org/places/959120263
+    license: CC-BY-3.0
+    note: Lagash

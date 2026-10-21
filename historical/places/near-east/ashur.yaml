@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Ashur, the city of the god Ashur on the Tigris, to which the prologue says Hammurabi gave back
+  its protecting god.
+types: [religious_site]
+names:
+  - form: Ashur
+    lang: en
+    script: Latn
+    cite:
+      - id: ashur-name
+        says: The prologue names the city of Ashur.
+        source: king-code-of-hammurabi
+        at: prologue
+        quote: who gave back to the city of Ashur its protecting god
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [43.2613013, 35.4555732]
+    notes: The gazetteer's point for the ancient city as a whole; it places no temple or wall.
+    cite:
+      - says:
+          The Pleiades gazetteer records Aššur, modern Qal'at Sherqat, on the west bank of the Tigris,
+          with a precise point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/893945 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "893945"
+    url: https://pleiades.stoa.org/places/893945
+    license: CC-BY-3.0
+    note: Ashur/‘Lamban’?/‘Liba(nai)’?
+notes: Shared by every chapter that reaches Ashur.

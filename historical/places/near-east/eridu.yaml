@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Eridu, the ancient city of the god Ea and his temple E-apsu, which the prologue of Hammurabi's
+  code says he reestablished.
+types: [religious_site]
+names:
+  - form: Eridu
+    lang: en
+    script: Latn
+    cite:
+      - id: eridu-name
+        says: The prologue names Eridu, reestablished by Hammurabi.
+        source: king-code-of-hammurabi
+        at: prologue
+        quote: who reestablished Eridu and purified the worship of E-apsu
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [45.995643, 30.8199906]
+    notes: The gazetteer's point for the ancient city as a whole; it places no temple or wall.
+    cite:
+      - says: The Pleiades gazetteer records Eridu with a precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/912845 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "912845"
+    url: https://pleiades.stoa.org/places/912845
+    license: CC-BY-3.0
+    note: Eridu

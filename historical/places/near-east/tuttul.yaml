@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Tuttul, on the Balikh near its meeting with the Euphrates, whose people, with Mari's, the prologue
+  says Hammurabi spared.
+types: [settlement]
+names:
+  - form: Tutul
+    lang: en
+    script: Latn
+    cite:
+      - id: tuttul-name
+        says: The prologue names Tutul with Mera.
+        source: king-code-of-hammurabi
+        at: prologue
+        quote: who spared the inhabitants of Mera and Tutul
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [39.0472331, 35.9580749]
+    notes: The gazetteer's point for the ancient city as a whole; it places no temple or wall.
+    cite:
+      - says:
+          The Pleiades gazetteer records Tuttul, associated with Tell Bi'a in Raqqa province, with a precise
+          point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/582993625 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "582993625"
+    url: https://pleiades.stoa.org/places/582993625
+    license: CC-BY-3.0
+    note: Tuttul

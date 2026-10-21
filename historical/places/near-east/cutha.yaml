@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Cutha, the city of the god Nergal and his temple E-shidlam, whose power the prologue says Hammurabi
+  increased.
+types: [religious_site]
+names:
+  - form: Cuthah
+    lang: en
+    script: Latn
+    cite:
+      - id: cutha-name
+        says: The prologue names Cuthah.
+        source: king-code-of-hammurabi
+        at: prologue
+        quote: who increased the power of Cuthah
+  - form: Kutha
+    lang: en
+    script: Latn
+    note: The modern scholarly form.
+    claim: cutha-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [44.6113935, 32.7607098]
+    notes: The gazetteer's point for the ancient city as a whole; it places no temple or wall.
+    cite:
+      - says: The Pleiades gazetteer records Cutha with a precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/893977 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "893977"
+    url: https://pleiades.stoa.org/places/893977
+    license: CC-BY-3.0
+    note: Cutha

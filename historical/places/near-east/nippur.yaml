@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Nippur, the city of the god Bel (Enlil) and his temple E-kur, which the prologue of Hammurabi's
+  code says he enriched.
+types: [religious_site]
+names:
+  - form: Nippur
+    lang: en
+    script: Latn
+    cite:
+      - id: nippur-name
+        says: The prologue names Nippur, enriched by Hammurabi, and its temple E-kur.
+        source: king-code-of-hammurabi
+        at: prologue
+        quote: enriching Nippur and Dur-ilu beyond compare, sublime patron of E-kur
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [45.2305635, 32.1267626]
+    notes: The gazetteer's point for the ancient city as a whole; it places no temple or wall.
+    cite:
+      - says: The Pleiades gazetteer records Nippur/Nufar/‘Hippareni’ with a precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/912910 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "912910"
+    url: https://pleiades.stoa.org/places/912910
+    license: CC-BY-3.0
+    note: Nippur/Nufar/‘Hippareni’

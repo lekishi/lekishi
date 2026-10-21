@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Uruk (Erech), which Hammurabi captured with Isin in his seventh year by L. W. King's reading,
+  and to which the prologue says he granted new life.
+types: [settlement]
+names:
+  - form: Uruk
+    lang: en
+    script: Latn
+    cite:
+      - id: uruk-name
+        says: The prologue names Uruk, granted new life by Hammurabi.
+        source: king-code-of-hammurabi
+        at: prologue
+        quote: the lord who granted new life to Uruk
+  - form: Erech
+    lang: en
+    script: Latn
+    note: The biblical form, used by King.
+    claim: uruk-name
+    cite:
+      - says: King names the city Erech in the year-name of Hammurabi's seventh year.
+        basis: interpretation
+        attributed_to: L. W. King (1910)
+        source: king-sumer-akkad
+        at: chapter XI (the rise of Babylon), note 43
+        quote: Hammurabi's reign dated in the year of his capture of Erech and Isin
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [45.6390522, 31.323375]
+    notes: The gazetteer's point for the ancient city as a whole; it places no temple or wall.
+    cite:
+      - says: The Pleiades gazetteer records Uruk/Orchoe/Erech/Orikut with a precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/912986 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "912986"
+    url: https://pleiades.stoa.org/places/912986
+    license: CC-BY-3.0
+    note: Uruk/Orchoe/Erech/Orikut

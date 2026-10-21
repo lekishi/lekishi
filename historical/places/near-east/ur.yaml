@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Ur, the city of the moon god Sin, which the prologue says Hammurabi enriched, and which an early
+  chronicle says he captured from Rim-Sin.
+types: [settlement]
+names:
+  - form: Ur
+    lang: en
+    script: Latn
+    cite:
+      - id: ur-name
+        says: The prologue names Ur, enriched by Hammurabi.
+        source: king-code-of-hammurabi
+        at: prologue
+        quote: the royal scion whom Sin made; who enriched Ur
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [46.1054198, 30.9613179]
+    notes: The gazetteer's point for the ancient city as a whole; it places no temple or wall.
+    cite:
+      - says: The Pleiades gazetteer records Ur(i) with a precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/912985 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "912985"
+    url: https://pleiades.stoa.org/places/912985
+    license: CC-BY-3.0
+    note: Ur(i)
+notes: Shared by every chapter that reaches Ur; its names and point stay neutral between periods.

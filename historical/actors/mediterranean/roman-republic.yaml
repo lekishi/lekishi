@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  The Roman Republic, the Roman state governed by annually elected magistrates from the expulsion
+  of the kings to the principate of Augustus. Livy tells that its first two consuls were elected
+  after the last king was barred from the city.
+types: [state]
+names:
+  - form: res publica Romana
+    lang: la
+    script: Latn
+    note:
+      An editorial Latin name for the state; Livy speaks of the consuls and the city. The record is
+      the state, and the city is the place record rome.
+    cite:
+      - id: roman-republic-name
+        says:
+          Livy tells that two consuls were then elected by the centuriate assembly, L. Iunius Brutus
+          and L. Tarquinius Collatinus.
+        source: livy
+        at: "1.60.4"
+        quote: "duo consules inde comitiis centuriatis a praefecto urbis ex commentariis Servi Tulli
+          creati sunt, L. Iunius Brutus et L. Tarquinius Conlatinus."
+notes: Shared by every chapter in which the Republic acts. Its start is the tradition's date for the
+  first consuls (509 BCE in the Varronian reckoning, 508/507 BCE in Dionysius) and its end is
+  Augustus's settlement of 27 BCE; the Empire is the separate actor roman-empire.

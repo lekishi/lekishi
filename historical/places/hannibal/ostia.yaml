@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Ostia, Rome's harbour town at the Tiber mouth, where Hiero's fleet landed grain and a golden
+  Victory for Rome in 216 BCE.
+types: [settlement, port]
+names:
+  - form: Ostia
+    lang: la
+    script: Latn
+    cite:
+      - id: ostia-name-livy
+        says: Livy records Hiero's fleet arriving at Ostia with a great store of supplies.
+        source: livy
+        at: "22.37.1"
+        quote: ab Hierone classis Ostia cum magno commeatu accessit
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [12.2875, 41.754166666]
+    notes:
+      An approximate placement at the excavated town of Ostia Antica, which Pleiades identifies with
+      the ancient town; the harbour of 216 BCE is not drawn.
+    cite:
+      - id: ostia-identification
+        says:
+          Pleiades locates the ancient place (Ostia) at the site whose modern coordinate Wikidata
+          records; the point is the Wikidata coordinate (CC0), an approximate placement of the
+          ancient town, not a surveyed site.
+        basis: interpretation
+        attributed_to: Pleiades
+        sources:
+          - source: pleiades
+            at: place 422995 (Ostia), reprLatLong, dump 2026-10-21
+          - source: wikidata
+            at: Q1012797 (P625), revision 2522091984
+modern:
+  - form: Ostia Antica
+    lang: it
+    script: Latn
+    note: Modern name of the archaeological site.
+external_ids:
+  - system: wikidata
+    id: Q1012797
+    license: CC0-1.0
+  - system: pleiades
+    id: "422995"
+    license: CC BY 3.0

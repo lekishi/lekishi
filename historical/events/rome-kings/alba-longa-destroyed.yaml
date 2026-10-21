@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "As Livy tells it, after the combat of the Horatii and the Curiatii and the treachery of the
+  Alban dictator Mettius Fufetius, Tullus Hostilius sent horsemen ahead to bring the Alban people
+  to Rome and legions to pull down the city, sparing only the temples. Rome doubled its citizens,
+  the Caelian hill was added to the city, and the leading Alban families entered the senate."
+types: [occurrence]
+date:
+  value: 671 BCE..639 BCE
+  mode: window
+  calendar: julian
+  as_written: in the reign of Tullus Hostilius
+  cite:
+    id: alba-longa-destroyed-reign
+    says: Livy dates the destruction only to the reign of Tullus Hostilius, which he gives as
+      thirty-two years; Dionysius dates Tullus's accession to 671/670 BCE and Ancus's to 639/638
+      BCE.
+    sources:
+      - source: livy
+        at: "1.31"
+        quote: Tullus magna gloria belli regnavit annos duos et triginta.
+      - source: dionysius-roman-antiquities
+        at: "3.1"
+        quote: The year in which he assumed the sovereignty was the second of the twenty-seventh Olympiad,
+places:
+  - place: alba-longa
+    role: site
+    cite:
+      id: alba-longa-destroyed-site
+      says:
+        Livy tells that horsemen were sent ahead to Alba to bring the people to Rome, and legions were
+        led in to pull down the city.
+      source: livy
+      at: "1.29"
+      quote:
+        Inter haec iam praemissi Albam erant equites qui multitudinem traducerent Romam. Legiones
+        deinde ductae ad diruendam urbem.
+  - place: rome
+    role: end
+    cite:
+      id: alba-longa-destroyed-rome
+      says: Livy tells that Rome grew on the ruins of Alba and the number of its citizens doubled.
+      source: livy
+      at: "1.30"
+      quote: Roma interim crescit Albae ruinis. Duplicatur civium numerus
+participants:
+  - actor: tullus-hostilius
+    role: leader
+  - actor: albans
+    role: subject
+notes: Tradition, not record. No excavation has identified Alba Longa, so the event's site is the
+  gazetteer's placement of the city the tradition names. The Albans' move to Rome is also recorded
+  as a relationship between the two places.

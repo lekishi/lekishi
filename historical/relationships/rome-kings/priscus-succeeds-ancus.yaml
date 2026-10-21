@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "In Livy's tradition Tarquinius Priscus succeeds Ancus Marcius, elected by the people while
+  Ancus's sons were away hunting."
+types: [successor_of]
+from: tarquinius-priscus
+to: ancus-marcius
+notes: Tradition, not record. The succession is the tradition's king list; the accession events carry its dates.
+cite:
+  id: priscus-succeeds-ancus-basis
+  says: "In Livy's tradition Tarquinius Priscus succeeds Ancus Marcius, elected by the people while
+    Ancus's sons were away hunting."
+  source: livy
+  at: "1.35"
+  quote: "Haec eum haud falsa memorantem ingenti consensu populus Romanus regnare iussit."

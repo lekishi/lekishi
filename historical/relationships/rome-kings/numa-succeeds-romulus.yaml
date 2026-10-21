@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "In Livy's tradition Numa Pompilius succeeds Romulus as king after a year's interregnum."
+types: [successor_of]
+from: numa-pompilius
+to: romulus
+notes: Tradition, not record. The succession is the tradition's king list; the accession events carry its dates.
+cite:
+  id: numa-succeeds-romulus-basis
+  says: "In Livy's tradition Numa Pompilius succeeds Romulus as king after a year's interregnum."
+  source: livy
+  at: "1.21"
+  quote: "Romulus septem et triginta regnavit annos, Numa tres et quadraginta."

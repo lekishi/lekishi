@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "As Livy tells it, after a year's interregnum the senators chose the Sabine Numa Pompilius of
+  Cures, famed for justice and piety, and he was brought to Rome and inaugurated as king on the
+  citadel. Dionysius dates the embassy that brought him to the third year of the sixteenth
+  Olympiad."
+types: [mission]
+date:
+  value: 714 BCE..713 BCE
+  mode: window
+  calendar: julian
+  as_written: in the third year of the sixteenth Olympiad (Dionysius)
+  cite:
+    id: numa-accession-date
+    says: Dionysius dates the embassy that brought Numa to Rome to the third year of the sixteenth
+      Olympiad (714/713 BCE).
+    source: dionysius-roman-antiquities
+    at: "2.58"
+    quote: This happened in the third year of the sixteenth Olympiad,
+places:
+  - place: cures
+    role: start
+    cite:
+      id: numa-accession-cures
+      says: Livy tells that Numa lived at Cures, among the Sabines.
+      source: livy
+      at: "1.18"
+      quote: Curibus Sabinis habitabat
+  - place: rome
+    role: end
+participants:
+  - actor: numa-pompilius
+    role: subject
+    cite:
+      id: numa-accession-decree
+      says: Livy tells that the senators all decreed that the kingship be offered to Numa Pompilius.
+      source: livy
+      at: "1.18"
+      quote: ad unum omnes Numae Pompilio regnum deferendum decernunt.
+  - actor: roman-kingdom
+    role: host
+notes: Tradition, not record. Dionysius's Olympiad date converts to a span of two Julian years; Livy
+  gives no year and records only the year-long interregnum before Numa.

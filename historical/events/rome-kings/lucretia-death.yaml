@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "As Livy tells it, during the siege of Ardea the king's sons and Collatinus rode to Rome and
+  Collatia to compare their wives, and found only Lucretia at her spinning. Days later Sextus
+  Tarquinius came to Collatia and raped her. She summoned her father and husband, told them what
+  had happened, and stabbed herself; Brutus drew the knife from the wound and swore to drive out
+  the king and his family."
+types: [occurrence]
+date:
+  value: 508 BCE..507 BCE
+  mode: window
+  calendar: julian
+  as_written: at the beginning of the sixty-eighth Olympiad (Dionysius, for the end of the kings)
+  cite:
+    id: lucretia-death-date
+    says:
+      Dionysius dates the overthrow of the kings, which followed Lucretia's death at once, to the
+      beginning of the sixty-eighth Olympiad (508/507 BCE).
+    source: dionysius-roman-antiquities
+    at: "5.1"
+    quote: was overthrown for the reasons stated and by the men named, at the beginning of the
+      sixty-eighth Olympiad
+places:
+  - place: collatia
+    role: site
+    cite:
+      id: lucretia-death-site
+      says: Livy tells that Sextus Tarquinius came to Collatia with one companion, without Collatinus's knowledge.
+      source: livy
+      at: "1.58"
+      quote: Sex. Tarquinius inscio Collatino cum comite uno Collatiam venit.
+  - place: ardea
+    role: context
+    cite:
+      id: lucretia-death-ardea
+      says: Livy tells that the Rutuli held Ardea and that the king's war on it was the occasion.
+      source: livy
+      at: "1.57"
+      quote: Ardeam Rutuli habebant
+participants:
+  - actor: lucretia
+    role: subject
+  - actor: sextus-tarquinius
+    role: participant
+  - actor: tarquinius-collatinus
+    role: witness
+  - actor: lucius-junius-brutus
+    role: witness
+cite:
+  - id: lucretia-death-act
+    says: Livy tells that Lucretia drove the knife she had hidden under her dress into her heart.
+    source: livy
+    at: "1.58"
+    quote: Cultrum, quem sub veste abditum habebat, eum in corde defigit, prolapsaque in volnus moribunda cecidit.
+  - id: lucretia-death-oath
+    role: supporting
+    says: Livy tells that Brutus, holding the knife drawn from her wound, swore to pursue Lucius
+      Tarquinius Superbus, his wife and all his children, and to let no one reign at Rome.
+    source: livy
+    at: "1.59"
+    quote:
+      'Brutus illis luctu occupatis cultrum ex volnere Lucretiae extractum, manantem cruore prae se
+      tenens, "Per hunc" inquit "castissimum ante regiam iniuriam sanguinem iuro'
+notes: Tradition, not record. Livy gives no date; the window is Dionysius's date for the end of the
+  kings, which Livy and Dionysius both place directly after Lucretia's death.

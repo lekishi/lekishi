@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "As Livy tells it, when Tarquinius Priscus was murdered, his queen Tanaquil hid his death
+  and had Servius Tullius rule in his name until he held power; he was the first to reign without
+  the people's vote. Dionysius dates his accession to the fourth year of the fiftieth Olympiad."
+types: [occurrence]
+date:
+  value: 577 BCE..576 BCE
+  mode: window
+  calendar: julian
+  as_written: in the fourth year of the fiftieth Olympiad (Dionysius)
+  cite:
+    id: servius-tullius-accession-date
+    says: "Dionysius dates Servius Tullius's accession to the fourth year of the fiftieth Olympiad
+      (577/576 BCE)."
+    source: dionysius-roman-antiquities
+    at: "4.1"
+    quote: succeeded him in the sovereignty in the fourth year of the fiftieth Olympiad
+places:
+  - place: rome
+    role: site
+participants:
+  - actor: servius-tullius
+    role: subject
+  - actor: roman-kingdom
+    role: other
+cite:
+  id: servius-tullius-accession-livy
+  says: "Livy tells that Servius, protected by a strong guard, was the first to reign without the
+    order of the people, by the will of the senators."
+  source: livy
+  at: "1.41"
+  quote: "Servius praesidio firmo munitus, primus iniussu populi, voluntate patrum regnavit."
+notes:
+  "Tradition, not record. Dionysius dates every king's accession by Olympiad year; each converts to a
+  span of two Julian years, because the Olympic year began at midsummer. Livy gives regnal lengths
+  but no years."

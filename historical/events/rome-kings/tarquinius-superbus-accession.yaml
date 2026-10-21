@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "As Livy tells it, Lucius Tarquinius took the throne by having Servius Tullius killed,
+  denied his father-in-law burial, and earned the name Superbus. Dionysius dates his seizure of
+  power, by arms and not by law, to the fourth year of the sixty-first Olympiad."
+types: [occurrence]
+date:
+  value: 533 BCE..532 BCE
+  mode: window
+  calendar: julian
+  as_written: in the fourth year of the sixty-first Olympiad (Dionysius)
+  cite:
+    id: tarquinius-superbus-accession-date
+    says: "Dionysius dates Tarquinius Superbus's seizure of power, by arms and not by law, to the
+      fourth year of the sixty-first Olympiad (533/532 BCE)."
+    source: dionysius-roman-antiquities
+    at: "4.41"
+    quote: who obtained it, not in accordance with the laws, but by arms, in the fourth year of the sixty-first Olympiad
+places:
+  - place: rome
+    role: site
+participants:
+  - actor: tarquinius-superbus
+    role: subject
+  - actor: roman-kingdom
+    role: other
+cite:
+  id: tarquinius-superbus-accession-livy
+  says: "Livy tells that Lucius Tarquinius began to reign and was called Superbus for his deeds,
+    beginning with denying his father-in-law burial."
+  source: livy
+  at: "1.49"
+  quote: "Inde L. Tarquinius regnare occepit, cui Superbo cognomen facta indiderunt, quia socerum
+    gener sepultura prohibuit"
+notes:
+  "Tradition, not record. Dionysius dates every king's accession by Olympiad year; each converts to a
+  span of two Julian years, because the Olympic year began at midsummer. Livy gives regnal lengths
+  but no years."

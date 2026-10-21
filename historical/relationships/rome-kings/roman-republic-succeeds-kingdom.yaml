@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  The Republic of annually elected consuls succeeds the rule of the kings at Rome, in the tradition
+  Livy and Dionysius tell, when the last king is barred from the city.
+types: [successor_of]
+from: roman-republic
+to: roman-kingdom
+date:
+  value: 508 BCE..507 BCE
+  mode: window
+  calendar: julian
+  as_written: at the beginning of the sixty-eighth Olympiad (Dionysius); 509 BCE in Varro's era
+notes:
+  Tradition, not record. The date is Dionysius's, as on the event of the expulsion, which also keeps
+  the Varronian 509 BCE.
+cite:
+  id: roman-republic-succeeds-kingdom-basis
+  says: Livy tells that after 244 years of kings two consuls were elected, and Dionysius dates the
+    overthrow of the kings to the beginning of the sixty-eighth Olympiad.
+  sources:
+    - source: livy
+      at: "1.60"
+      quote: Regnatum Romae ab condita urbe ad liberatam annos ducentos quadraginta quattuor.
+    - source: dionysius-roman-antiquities
+      at: "5.1"
+      quote: was overthrown for the reasons stated and by the men named, at the beginning of the
+        sixty-eighth Olympiad

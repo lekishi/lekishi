@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "In Livy's tradition Tullus Hostilius succeeds Numa as king after an interregnum."
+types: [successor_of]
+from: tullus-hostilius
+to: numa-pompilius
+notes: Tradition, not record. The succession is the tradition's king list; the accession events carry its dates.
+cite:
+  id: tullus-succeeds-numa-basis
+  says: "In Livy's tradition Tullus Hostilius succeeds Numa as king after an interregnum."
+  source: livy
+  at: "1.22"
+  quote: "Numae morte ad interregnum res rediit. Inde Tullum Hostilium, nepotem Hostili, cuius in
+    infima arce clara pugna adversus Sabinos fuerat, regem populus iussit"

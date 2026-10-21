@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "In Livy's tradition Tarquinius Superbus succeeds Servius Tullius by having him killed."
+types: [successor_of]
+from: tarquinius-superbus
+to: servius-tullius
+notes: Tradition, not record. The succession is the tradition's king list; the accession events carry its dates.
+cite:
+  id: superbus-succeeds-servius-basis
+  says: "In Livy's tradition Tarquinius Superbus succeeds Servius Tullius by having him killed."
+  source: livy
+  at: "1.49"
+  quote: "Inde L. Tarquinius regnare occepit, cui Superbo cognomen facta indiderunt, quia socerum
+    gener sepultura prohibuit"

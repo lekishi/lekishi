@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "As Livy tells it, Numa set out to found the city anew on law and custom: he built the shrine
+  of Janus at the foot of the Argiletum as a sign of peace and war, open in war and closed in
+  peace, closed it after making treaties with all his neighbours, and divided the year into twelve
+  lunar months. Livy adds that it was closed only twice after Numa, the second time by Augustus
+  after Actium."
+types: [founding]
+date:
+  value: 714 BCE..671 BCE
+  mode: window
+  calendar: julian
+  as_written: in the reign of Numa
+  cite:
+    id: janus-reign
+    says: Livy dates the shrine only to Numa's reign, which he gives as forty-three years; Dionysius
+      dates Numa's coming to 714/713 BCE and Tullus's accession to 671/670 BCE.
+    sources:
+      - source: livy
+        at: "1.21"
+        quote: Romulus septem et triginta regnavit annos, Numa tres et quadraginta.
+      - source: dionysius-roman-antiquities
+        at: "2.58"
+        quote: This happened in the third year of the sixteenth Olympiad,
+places:
+  - place: rome
+    role: site
+participants:
+  - actor: numa-pompilius
+    role: leader
+cite:
+  id: janus-shrine
+  says:
+    Livy tells that Numa made the Janus at the foot of the Argiletum a sign of peace and war, open
+    when the state was at war and closed when all the peoples around were at peace.
+  source: livy
+  at: "1.19"
+  quote:
+    Ianum ad infimum Argiletum indicem pacis bellique fecit, apertus ut in armis esse civitatem,
+    clausus pacatos circa omnes populos significaret.
+notes:
+  Tradition, not record. The Janus shrine stood in the Forum in Livy's day; that Numa founded it is
+  the tradition's claim. The place is the city, because the record asserts no site for the shrine.

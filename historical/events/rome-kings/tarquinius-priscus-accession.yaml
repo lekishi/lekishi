@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "As Livy tells it, after Ancus's death Tarquinius, the first to canvass for the kingship,
+  was elected by a great majority of the people. Dionysius dates his accession to about the second
+  year of the forty-first Olympiad."
+types: [occurrence]
+date:
+  value: 615 BCE..614 BCE
+  mode: window
+  calendar: julian
+  as_written: about the second year of the forty-first Olympiad (Dionysius)
+  cite:
+    id: tarquinius-priscus-accession-date
+    says: "Dionysius dates Tarquinius Priscus's accession to about the second year of the
+      forty-first Olympiad (615/614 BCE)."
+    source: dionysius-roman-antiquities
+    at: "3.46"
+    quote: Tarquinius took over the sovereignty about the second year of the forty-first Olympiad
+places:
+  - place: rome
+    role: site
+participants:
+  - actor: tarquinius-priscus
+    role: subject
+  - actor: roman-kingdom
+    role: other
+cite:
+  id: tarquinius-priscus-accession-livy
+  says: "Livy tells that the Roman people, by a great majority, ordered Tarquinius to reign."
+  source: livy
+  at: "1.35"
+  quote: "Haec eum haud falsa memorantem ingenti consensu populus Romanus regnare iussit."
+notes:
+  "Tradition, not record. Dionysius dates every king's accession by Olympiad year; each converts to a
+  span of two Julian years, because the Olympic year began at midsummer. Livy gives regnal lengths
+  but no years."

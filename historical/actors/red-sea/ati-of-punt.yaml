@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Ati, the wife of Parihu, who came to meet the Egyptians riding on a donkey, and whose figure
+  in the Deir el-Bahari reliefs is one of the best known images of Punt.
+types: [person]
+names:
+  - form: Ati
+    lang: egy
+    script: Latn
+    note: Maspero's form.
+    cite:
+      - id: ati-name
+        says: Maspero says Parihû was accompanied by his wife Ati.
+        source: maspero-history-of-egypt
+        at: "vol. IV, ch. III: the meeting"
+        quote:
+          He was accompanied by his wife Ati, riding on an ass, from which she alighted in order to gain
+          a closer view of the strangers.
+roles:
+  - role: member
+    note: Wife of the chief of Punt.
+notes: The id names Punt to keep her apart from others named Ati.

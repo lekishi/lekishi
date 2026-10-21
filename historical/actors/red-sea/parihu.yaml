@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Parihu, the chief of the people of Punt who met the Egyptian envoy, shown in the reliefs with
+  a boomerang, a dagger and a necklace of beads.
+types: [person]
+names:
+  - form: Parihû
+    lang: egy
+    script: Latn
+    note: Maspero's transliteration of the name in the reliefs.
+    cite:
+      - id: parihu-name
+        says: Maspero names Parihû as the chief of the people of Punt.
+        source: maspero-history-of-egypt
+        at: "vol. IV, ch. III: the meeting"
+        quote:
+          The name of their chief was Parihû, who was distinguished from his subjects by the boomerang
+          which he carried, and also by his dagger and necklace of beads
+roles:
+  - role: ruler
+    note: Chief of a Punt village; the reliefs call him a great one of Punt.

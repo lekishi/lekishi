@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Cestius Gallus, the Roman legate of Syria, who marched on Jerusalem in the autumn of 66 CE
+  and lost much of his army in the retreat through Beth-horon."
+types: [person]
+names:
+  - form: Cestius
+    lang: en
+    script: Latn
+    cite:
+      - id: cestius-gallus-name
+        says: Josephus tells that Cestius took the twelfth legion entire out of Antioch.
+        source: josephus-jewish-war
+        at: "2.18.9"
+        quote: so he took out of Antioch the twelfth legion entire
+roles:
+  - role: official
+    note: Legate of Syria.

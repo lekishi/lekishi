@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Gessius Florus, the last Roman procurator of Judaea before the revolt, whose extortion
+  Josephus blames for driving the Jews to war."
+types: [person]
+names:
+  - form: Gessius Florus
+    lang: en
+    script: Latn
+    cite:
+      - id: gessius-florus-name
+        says: Josephus tells that Gessius Florus succeeded Albinus as procurator.
+        source: josephus-jewish-war
+        at: "2.14.2"
+        quote: yet did Gessius Florus
+roles:
+  - role: official
+    note: Procurator of Judaea.

@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Simon son of Giora, of Gerasa, a rebel leader who held the upper and lower city of
+  Jerusalem against John and then against Titus, and was led in the Roman triumph."
+types: [person]
+names:
+  - form: "Simon, son of Giora"
+    lang: en
+    script: Latn
+    cite:
+      - id: simon-bar-giora-name
+        says: "Josephus introduces Simon, a son of Giora, by birth of Gerasa."
+        source: josephus-jewish-war
+        at: "4.9.3"
+        quote: "There was a son of Giora, one Simon, by birth of Gerasa"
+roles:
+  - role: soldier
+    note: Rebel leader in Jerusalem.

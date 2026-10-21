@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Titus Flavius Vespasianus (9–79 CE), the general Nero sent against the Jewish revolt in
+  67, proclaimed emperor by the armies of the East in 69, and emperor until his death; founder of
+  the Flavian dynasty."
+types: [person]
+names:
+  - form: Vespasian
+    lang: en
+    script: Latn
+    cite:
+      - id: vespasian-name
+        says: Josephus tells that Nero found no one but Vespasian equal to the war.
+        source: josephus-jewish-war
+        at: "3.1.2"
+        quote: he found no one but Vespasian equal to the task
+roles:
+  - role: soldier
+    note: "Commander in Judaea, 67–69 CE."
+  - role: ruler
+    note: "Emperor, 69–79 CE."
+notes: Shared by every chapter in which Vespasian acts.

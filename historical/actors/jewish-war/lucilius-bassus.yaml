@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Lucilius Bassus, sent as legate to Judaea after the fall of Jerusalem, who took Herodium
+  and Machaerus."
+types: [person]
+names:
+  - form: Lucilius Bassus
+    lang: en
+    script: Latn
+    cite:
+      - id: lucilius-bassus-name
+        says: Josephus tells that Lucilius Bassus was sent as legate into Judea.
+        source: josephus-jewish-war
+        at: "7.6.1"
+        quote: Now Lucilius Bassus was sent as legate into Judea
+roles:
+  - role: official
+    note: Legate of Judaea.

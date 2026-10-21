@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Flavius Silva, who succeeded Bassus in Judaea and besieged Masada, the last stronghold of
+  the revolt."
+types: [person]
+names:
+  - form: Flavius Silva
+    lang: en
+    script: Latn
+    cite:
+      - id: flavius-silva-name
+        says: Josephus tells that Flavius Silva succeeded Bassus as procurator.
+        source: josephus-jewish-war
+        at: "7.8.1"
+        quote: Flavius Silva succeeded him as procurator there
+roles:
+  - role: official
+    note: Governor of Judaea.

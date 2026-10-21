@@ -9,18 +9,22 @@ date:
   as_written: 白雉五年二月
   cite:
     - id: mission-654-dispatch-time
-      says:
-        The chronicle dates the embassy to the second month of 白雉五年; a variant (或本) gives the fifth
-        month.
+      says: The chronicle dates the embassy to the second month of 白雉五年.
       source: nihon-shoki
       at: 卷第廿五 白雉五年二月
       quote: 二月，遣大唐押使大錦上高向史玄理，
+    - id: mission-654-dispatch-variant
+      says: A variant the chronicle quotes (或本) dates the sending of 高向玄理 to the fifth month.
+      role: conflicting
+      source: nihon-shoki
+      at: 卷第廿五 白雉五年二月 注
+      quote: 或本云，夏五月，遣大唐押使大花下高向玄理。
 places:
   - place: naniwa
-    role: site
+    role: context
     note:
-      The entry names no place of dispatch; the court of this reign sits at 難波, and the anchor is for
-      display only.
+      The entry names no place. The court sat here in this reign, so the record names its seat as
+      context; it asserts no site for the act.
 participants:
   - actor: takamuko-no-kuromaro
     role: leader
@@ -30,7 +34,12 @@ participants:
     note: 副使, on his second mission.
   - actor: japan-state
     role: host
-notes: The chronicle's variant reading (或本云，夏五月) is kept in the cite, not merged.
+notes:
+  The record keeps the chronicle's main text, the second month, as its date; the variant reading
+  (或本云，夏五月) stays visible as a conflicting claim, not merged.
+dispute:
+  status: disputed
+  summary: The chronicle dates the embassy to the second month of 白雉五年; a variant it quotes gives the fifth.
 cites:
   participants:
     - id: mission-654-envoys

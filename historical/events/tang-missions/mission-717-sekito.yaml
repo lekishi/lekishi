@@ -15,32 +15,31 @@ date:
       quote: 己酉。遣唐押使從四位下多治比眞人縣守賜節刀。
 places:
   - place: heijo-palace
-    role: site
+    role: context
     note:
-      The entry names no place. A court act happens at the court, so the record anchors it at the court's
-      seat for display only; it asserts no site for the act.
+      The entry names no place. The court sat here in this reign, so the record names its seat as
+      context; it asserts no site for the act.
 participants:
   - actor: tajihi-no-agatamori
     role: leader
   - actor: kibi-no-makibi
     role: participant
     note: Sails as a student (留學).
+    cite:
+      - id: mission-717-makibi
+        says: 吉備眞備's obituary records that in 靈龜二年, aged 22, he went to 唐 with the envoys and stayed to study.
+        source: shoku-nihongi
+        at: 卷第卅三 寶龜六年十月壬戌
+        quote: 靈龜二年。年廿二。從使入唐。留學受業。研覽經史。該渉衆藝。
   - actor: genbo
     role: participant
     note: Sails as a student monk.
+    cite:
+      - id: mission-717-genbo
+        says: 玄昉's obituary records that he went to 唐 to study in 靈龜二年.
+        source: shoku-nihongi
+        at: 卷第十六 天平十八年六月己亥
+        quote: 靈龜二年入唐學問。
 notes:
   The students' sailing with this embassy is stated in their obituaries, which give the year as 靈龜二年
   (the year of appointment), not in the entry itself.
-cites:
-  participants:
-    - id: mission-717-makibi
-      says: 吉備眞備's obituary records that in 靈龜二年, aged 22, he went to 唐 with the envoys and stayed to study.
-      source: shoku-nihongi
-      at: 卷第卅三 寶龜六年十月壬戌
-      quote: 靈龜二年。年廿二。從使入唐。留學受業。研覽經史。該渉衆藝。
-    - id: mission-717-genbo
-      says: 玄昉's obituary records that he went to 唐 to study in 靈龜二年.
-      role: supporting
-      source: shoku-nihongi
-      at: 卷第十六 天平十八年六月己亥
-      quote: 靈龜二年入唐學問。

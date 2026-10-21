@@ -13,12 +13,6 @@ date:
       source: nihon-shoki
       at: 卷第廿三 舒明天皇二年八月丁酉
       quote: 秋八月癸巳朔丁酉，以大仁犬上君三田耜、大仁藥師惠日，遣於大唐。
-places:
-  - place: asuka
-    role: site
-    note:
-      The entry names no place. A court act happens at the court, so the record anchors it at the court's
-      seat for display only; it asserts no site for the act.
 participants:
   - actor: inukami-no-mitasuki
     role: leader
@@ -29,8 +23,9 @@ participants:
   - actor: japan-state
     role: host
 notes:
-  The entry gives a sexagenary day (丁酉); v0 normalizes it to the month. The court's seat is 飛鳥 in
-  this reign; the anchor is for display and asserts no site.
+  "The entry gives a sexagenary day (丁酉); v0 normalizes it to the month. The entry names no place,
+  and the record names none: the court moved to 岡本宮 only in the tenth month of this year, so the
+  seat of 八月 is not the one the `asuka` record identifies."
 cites:
   participants:
     - id: mission-630-dispatch-envoys

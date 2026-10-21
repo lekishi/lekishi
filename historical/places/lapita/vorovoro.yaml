@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Vorovoro, an island off Vanua Levu, Fiji, near whose Lapita site a flake of Kutau/Bao obsidian
+  was found.
+types: [landform]
+names:
+  - form: Vorovoro
+    lang: en
+    script: Latn
+    cite:
+      - id: vorovoro-name
+        says: Pofatu records three flakes from the Vorovoro site on Vanua Levu, from the old tombolo area.
+        source: pofatu
+        at: ross-sheppard2013_1, _2, _3 (location_subregion, site_name, location_comment), v1.4
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [179.317, -16.344]
+    notes: The location Pofatu records for the Vorovoro flakes.
+    cite:
+      - id: vorovoro-location
+        says: Pofatu records the Vorovoro site at this point.
+        source: pofatu
+        at: ross-sheppard2013_1 (location_latitude, location_longitude), v1.4

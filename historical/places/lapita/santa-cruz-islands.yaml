@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Santa Cruz Islands in the south-east Solomons, on the western edge of Remote Oceania, where
+  the Lapita site SE-SZ-8 (Nanngu) was re-dated to just after 3000 BP.
+types: [region]
+names:
+  - form: Santa Cruz
+    lang: en
+    script: Latn
+    cite:
+      - id: santa-cruz-name
+        says:
+          Sheppard, Chiu and Walter re-date SE-SZ-8 on Santa Cruz, in the Temotu Province of the Solomon
+          Islands, on the western margin of Remote Oceania.
+        source: sheppard-2015-santa-cruz
+        at: 26 (abstract)
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [166.37633, -11.3328]
+    notes:
+      The gazetteer's point for the island group; SE-SZ-8 is on Nendö, the main island, and is not
+      separately located.
+    cite:
+      - id: santa-cruz-location
+        says: GeoNames records the Santa Cruz Islands at this point.
+        source: geonames
+        at: 2178509 (Santa Cruz Islands; latitude, longitude), dump 2026-10-21
+external_ids:
+  - system: geonames
+    id: "2178509"
+    url: https://www.geonames.org/2178509
+    license: CC BY 4.0

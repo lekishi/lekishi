@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Bismarck Archipelago, the islands north and east of New Guinea where Lapita pottery first
+  appears and from which the expansion into Remote Oceania set out.
+types: [region]
+names:
+  - form: Bismarck Archipelago
+    lang: en
+    script: Latn
+    cite:
+      - id: bismarck-name
+        says:
+          Petchey and Kirch say the Lapita culture is argued to have begun in the Bismarck Archipelago,
+          possibly as early as 3350 years ago.
+        source: petchey-kirch-2019
+        at: Introduction
+        quote:
+          This Lapita culture is argued to have begun in the Bismarck Archipelago possibly as early as
+          3350 years ago
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [150.0, -5.0]
+    notes:
+      A label anchor at the gazetteer's point for the archipelago, which spans about 800 km; not a
+      location of any site.
+    cite:
+      - id: bismarck-location
+        says: GeoNames records the Bismarck Archipelago at this point.
+        source: geonames
+        at: 2099398 (Bismarck Archipelago; latitude, longitude), dump 2026-10-21
+external_ids:
+  - system: geonames
+    id: "2099398"
+    url: https://www.geonames.org/2099398
+    license: CC BY 4.0

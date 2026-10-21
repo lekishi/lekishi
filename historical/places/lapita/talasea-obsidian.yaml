@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Talasea obsidian sources on the Willaumez Peninsula of New Britain, Kutau/Bao among them,
+  from which obsidian reached Lapita sites thousands of kilometres away.
+types: [landform]
+names:
+  - form: Talasea
+    lang: en
+    script: Latn
+    cite:
+      - id: talasea-name
+        says:
+          Sand and Sheppard's contribution says five obsidian flakes from Lapita contexts in New Caledonia
+          are sourced to the Talasea region of New Britain.
+        source: pofatu
+        at: contribution sand2000 (contribution_description), v1.4
+        quote:
+          PIXE-PIGME of 5 obsidian flakes from Lapita contexts in New Caledonia are sourced to the Talasea
+          region of New Britain.
+  - form: Kutau/Bao
+    lang: en
+    script: Latn
+    note: The source area within the Talasea group to which the Vorovoro flake is assigned.
+    cite:
+      - id: kutau-bao-name
+        says:
+          Ross-Sheppard and colleagues source the Vorovoro flake to the Kutau/Bao area on the Willaumez
+          Peninsula of New Britain.
+        source: pofatu
+        at: contribution ross-sheppard2013 (contribution_description), v1.4
+        quote:
+          The authors source the obsidian flake found on Vorovoro Island to the Kutau/Bao area on the
+          Willaumez Peninsula or New Britain
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [149.98, -5.3]
+    notes:
+      The location Pofatu records for its Kutau/Mt Bao reference samples. Talasea is a group of several
+      flows; the point stands for the group.
+    cite:
+      - id: talasea-location
+        says: Pofatu records reference samples from the Kutau/Mt Bao source on New Britain at this point.
+        source: pofatu
+        at: bedford2026_ANU9000 (location_latitude, location_longitude), v1.4
+notes:
+  "One place for the source group: the contributions assign artefacts to Talasea or to Kutau/Bao
+  within it, and the atlas does not split what they do not split."

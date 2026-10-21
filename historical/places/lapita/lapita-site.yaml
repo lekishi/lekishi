@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  "Lapita (WKO013A) on the Foué peninsula near Koné, New Caledonia: the site that gave the culture
+  and its pottery their name, where flakes of New Britain obsidian were found."
+types: [settlement]
+names:
+  - form: Lapita
+    lang: fr
+    script: Latn
+    cite:
+      - id: lapita-site-name
+        says: Pofatu records an obsidian flake from the Lapita site, WKO-13A, on the Foué peninsula at Koné.
+        source: pofatu
+        at: sand2000_PS-2 (location_subregion, location_locality, site_name, site_code), v1.4
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [164.822032, -21.099074]
+    notes: The location Pofatu records for the flake from Zone II F1 at the site.
+    cite:
+      - id: lapita-site-location
+        says: Pofatu records the Lapita site, WKO-13A, at this point.
+        source: pofatu
+        at: sand2000_PS-2 (location_latitude, location_longitude), v1.4

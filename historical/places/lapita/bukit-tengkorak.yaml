@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Bukit Tengkorak, a rockshelter in Sabah, Borneo, whose obsidian includes pieces assigned to Talasea
+  in New Britain, about 3,600 km to the east.
+types: [other]
+names:
+  - form: Bukit Tengkorak
+    lang: ms
+    script: Latn
+    cite:
+      - id: bukit-tengkorak-name
+        says:
+          Tykot and Chia's contribution documents long-distance exchange between Bukit Tengkorak on Borneo
+          and the Talaud group and Talasea.
+        source: pofatu
+        at: contribution tykot1996 (contribution_description), v1.4
+        quote:
+          Long-distance exchange documented between Bukit Tengkorak (Borneo Island) and Talaud group
+          (Sulawesi) and Talasea (New Britain).
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [118.620815, 4.438813]
+    notes: The location Pofatu records for the rockshelter.
+    cite:
+      - id: bukit-tengkorak-location
+        says: Pofatu records the Bukit Tengkorak rockshelter at this point.
+        source: pofatu
+        at: tykot1996_J19/445 (location_latitude, location_longitude), v1.4
+notes: The 3,600 km is a straight-line figure from the two points, not a claim of any source.

@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Bourewa, a Lapita settlement on the Rove Peninsula of south-western Viti Levu, Fiji, occupied
+  from about 2814 to 2657 cal BP in Nunn and Petchey's model.
+types: [settlement]
+names:
+  - form: Bourewa
+    lang: en
+    script: Latn
+    cite:
+      - id: bourewa-name
+        says:
+          Nunn and Petchey analyse the Lapita occupation at Bourewa and nearby sites on the Rove Peninsula,
+          Viti Levu.
+        source: nunn-petchey-2013-bourewa
+        at: 21 (title and abstract)
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [178.0, -18.0]
+    notes:
+      A label anchor at Viti Levu's gazetteer point. No coordinate for the site itself was found in
+      an open gazetteer, so the record says only that it is on Viti Levu, as the cited title does.
+    cite:
+      - id: bourewa-anchor
+        says: GeoNames records the island of Viti Levu at this point; Bourewa is on its Rove Peninsula.
+        source: geonames
+        at: 2196625 (Viti Levu; latitude, longitude), dump 2026-10-21
+notes:
+  "A known site without an open coordinate: a case for the engine's label anchors, which must not
+  read as a located site."

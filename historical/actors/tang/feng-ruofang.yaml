@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  馮若芳, the 大首領 (great chieftain) of 萬安州 who hosted 鑒眞's party for three days. The biography
+  says he seized two or three Persian ships every year and held their crews as slaves.
+types: [person]
+names:
+  - form: 馮若芳
+    lang: lzh
+    script: Hani
+    roman: Feng Ruofang
+    scheme: pinyin
+    cite:
+      - id: feng-ruofang-name
+        says: The biography names 萬安州's 大首領 as 馮若芳.
+        source: toseiden
+        at: 州大首領馮若芳請住其家，三日供養
+roles:
+  - role: other
+    note: 大首領 of 萬安州; the biography describes him seizing Persian ships (波斯舶).
+    cite:
+      - id: feng-ruofang-role
+        says:
+          The biography records that each year he seized two or three Persian ships, took their goods
+          and made their people his slaves.
+        source: toseiden
+        at: 若芳每年常刼取波斯舶二三艘，取物爲己貨，掠人爲奴婢

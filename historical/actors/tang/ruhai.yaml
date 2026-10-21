@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  如海, a monk from 高麗 whom 榮叡 and 普照 recruited for the voyage. When 道航 proposed leaving the
+  less learned behind, 如海 falsely told the 淮南道採訪使 that 道航 was in league with pirates, and
+  the 743 preparations were seized.
+types: [person]
+names:
+  - form: 如海
+    lang: lzh
+    script: Hani
+    roman: Ruhai
+    scheme: pinyin
+    cite:
+      - id: ruhai-name
+        says: The biography names 高麗僧如海 among the monks 榮叡 and 普照 recruited.
+        source: toseiden
+        at: 請西京安國寺僧道航、澄觀，東都僧德清，高麗僧如海
+roles:
+  - role: monk
+    note: Laicized, beaten sixty strokes and sent home for the false accusation.
+    cite:
+      - id: ruhai-role
+        says:
+          The biography records that, for the false accusation, 如海 was laicized, given sixty strokes
+          and sent back to his home register.
+        source: toseiden
+        at: 其誣告僧如海與反坐，還俗，決杖六十，［還］送本貫

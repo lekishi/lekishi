@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  榮叡, a Japanese monk who went to Tang to study with the embassy of 天平五年 (733). With 普照 he
+  invited 鑒眞 at 大明寺 in 揚州 and, by the biography's account, stayed with the attempts to sail
+  until he died at 端州 on the way back from 振州.
+types: [person]
+names:
+  - form: 榮叡
+    lang: ja
+    script: Hani
+    roman: Yōei
+    scheme: hepburn
+    note: The Japanese reading is an editorial reading aid, not a claim about his own pronunciation.
+    cite:
+      - id: yoei-name
+        says:
+          The biography names 沙門榮叡 and 普照 as the monks who went to Tang with the embassy of 天平五年 to
+          study.
+        source: toseiden
+        at: 日本［國］天平五年，歲次癸酉，沙門榮叡、普照等隨遣唐大使丹墀真人廣成，至唐國留學
+roles:
+  - role: monk
+    note: A student monk (留學) in Tang from 733 until his death on the return from 振州.
+    date:
+      value: 733..749
+      mode: duration
+      calendar: chinese_lunisolar
+      as_written: 天平五年 至唐國留學; 次至端州龍興寺。榮叡師奄然遷化
+    cite:
+      - id: yoei-role
+        says:
+          The biography records his arrival as a student monk in 天平五年 and his death at 端州龍興寺 after
+          the stay at 桂州.
+        source: toseiden
+        at: 天平五年…至唐國留學; 次至端州龍興寺。榮叡師奄然遷化
+notes: The biography gives no date for his death. The event that records it is an occurrence window
+  bounded by the 748 drift and the 天寶九載 (750) parting at 韶州. The chronicle's death notice for
+  鑒眞 also records 榮叡's death (物故) after the 七載 drift.

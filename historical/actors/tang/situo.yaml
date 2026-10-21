@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  思託, a disciple of 鑒眞 who volunteered at 大明寺, sailed on the 743 and 748 attempts, and was with
+  祥彥 when he died at 吉州. The biography lists him among the disciples who sailed in 753 as
+  台州開元寺僧思託.
+types: [person]
+names:
+  - form: 思託
+    lang: lzh
+    script: Hani
+    roman: Situo
+    scheme: pinyin
+    cite:
+      - id: situo-name
+        says: The biography names 思託 among the twenty-one monks who vowed at 大明寺 to go with 鑒眞.
+        source: toseiden
+        at: 爰有僧道興、道航…思託等二十一人，願同心隨大和上去
+roles:
+  - role: monk
+    cite:
+      - id: situo-role
+        says: The biography lists 台州開元寺僧思託 among the disciples who went with 鑒眞 in 天寶十二載.
+        source: toseiden
+        at: 相隨弟子：…台州開元寺僧思託

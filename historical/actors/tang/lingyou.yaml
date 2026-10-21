@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  靈祐, a disciple of 鑒眞 in 揚州 who, with the temple officers, petitioned the authorities to stop
+  him from leaving, which ended the 744 attempt at 禪林寺. He later met 鑒眞 again at 江寧 on the
+  way back from the south.
+types: [person]
+names:
+  - form: 靈祐
+    lang: lzh
+    script: Hani
+    roman: Lingyou
+    scheme: pinyin
+    cite:
+      - id: lingyou-name
+        says: The biography names 鑒眞's disciple 靈祐 as the one he rebuked for the petition.
+        source: toseiden
+        at: 獨大和上憂愁，呵責靈祐，不賜開顏
+  - form: 靈佑
+    lang: lzh
+    script: Hani
+    note: The transcription writes 靈佑 once, where the petition is first described.
+    cite:
+      - id: lingyou-variant
+        says: The transcription writes the name 靈佑 in the passage on the petition.
+        source: toseiden
+        at: 在揚州和上弟子僧靈佑及諸寺三綱衆僧，同議曰
+roles:
+  - role: monk
+    cite:
+      - id: lingyou-role
+        says: The biography lists 洛州福［先］寺僧靈祐 among 鑒眞's outstanding disciples.
+        source: toseiden
+        at: 洛州福［先］寺僧靈祐
+notes:
+  The record assumes that the 靈佑 of the petition and the 靈祐 of the rebuke and the 江寧 meeting are one
+  person, because the biography tells them as one sequence; the variant form is kept.

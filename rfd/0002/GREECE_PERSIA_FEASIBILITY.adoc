@@ -1,0 +1,166 @@
+= Greece and Persia chapters: feasibility and findings
+:state: Draft chapters for testing data and engine work — findings for owner review; not published atlas content, not an RFD decision
+:research-window: single pass, 2026-10-21
+:toc:
+:toclevels: 2
+
+This note goes with three draft chapters written on 2026-10-21 in the world-first
+layout of link:AUTHORING_FORMAT.adoc[the authoring format]: Xerxes' invasion
+(480–479 BCE), the march of the Ten Thousand (401–399 BCE), and Alexander's
+campaigns (335–323 BCE). They are candidates #15–#17 of the chapter-selection
+survey. None carries an approval. The aim was volume: enough records, of enough
+different shapes, to test the data format and the engine, not to publish.
+
+Each chapter rests on one ancient narrative read in a public-domain English
+translation, with places identified through Pleiades. Every quotation in the
+records was checked against the text it cites.
+
+== What was written
+
+Records each chapter's manifest reaches, counted by following its references
+(shared records count in every chapter that reaches them). Each chapter's scope,
+inventory and review history are in its notes beside the manifest:
+link:../../historical/chapters/xerxes-invasion-480-479.md[Xerxes],
+link:../../historical/chapters/ten-thousand-401-399.md[the Ten Thousand] and
+link:../../historical/chapters/alexander-campaigns-335-323.md[Alexander].
+
+[cols="3,1,1,1,1,3",options="header"]
+|===
+|Chapter |Places |Actors |Events |Relationships |Narrative source
+
+|`xerxes-invasion-480-479`
+|32
+|15
+|30
+|5
+|Herodotus VII–IX (Macaulay, 1890)
+
+|`ten-thousand-401-399`
+|41
+|13
+|30
+|5
+|Xenophon, _Anabasis_ (Dakyns, 1890)
+
+|`alexander-campaigns-335-323`
+|39, 6 of them shared with other region branches
+|11
+|36
+|5
+|Arrian, _Anabasis of Alexander_ (Chinnock, 1884)
+|===
+
+Across the three chapters the branch adds 101 place files, 35 actors, 96
+events and 15 relationships. Places are shared across the three where the same place recurs (Sardis,
+Kelainai, Abydos, Sestos, Elaius, Tarsus, Issus, Thapsacus, Opis, Thebes) and
+with other region chapters (see <<shared-ids>>).
+
+== Sources
+
+* *Herodotus*, *Xenophon*, *Arrian*: the works and these translations are public
+  domain in the United States. Chinnock's death date is not yet confirmed, so
+  the Arrian translation's worldwide status is open; it must be settled before
+  release.
+* *Grote*, _History of Greece_: cited only as `interpretation`, for turning
+  Herodotus's seasons and Xenophon's halts into years BCE.
+* *Chinnock's headings and notes*: cited only as `interpretation`, for turning
+  Arrian's Athenian archons, months and Olympiads into years BCE.
+* *Pleiades*: one dataset source whose citations pin a place id and the daily
+  dump of 2026-10-21. The register asks for numbered releases; before release
+  the citations should be re-pinned to the current numbered release. The
+  maintainers ask for an email notice of reuse, which is an outward step for
+  the owner to take.
+
+The source register now has one row for the Project Gutenberg translations.
+
+== Dating
+
+None of the three narratives gives years. Herodotus names one archon (Calliades,
+VIII.51); Xenophon gives distances in stages and parasangs and halts in days;
+Arrian dates some events by archon and month. Every year BCE in these chapters
+is therefore a modern conversion, cited as the interpretation of a named scholar
+(Grote or Chinnock), with the ancient passage as a supporting claim. The one
+exception is the start of the Athos canal, which Grote does not date: about 483
+BCE is an editorial count of Herodotus's "about three years" back from Grote's
+date for the march, cited as such.
+
+Most stages fall *between* two anchors rather than at one. For those, the date is
+a `window` from the earlier anchor's year to the later one's, and its claim cites
+both anchors in one claim with two sources. That keeps one main claim per field,
+which the contract requires, but it reads as "somewhere in this span", which is
+weaker than the text supports: the sources give a sequence and day counts that
+an engine could use to order and interpolate. See <<proposals>>.
+
+Recorded discrepancies:
+
+* The Gutenberg text of Macaulay reads "five-and-thirty days" at VIII.115, where
+  the Greek reads forty-five. The figure is not published until the printed
+  edition is checked; the event's notes say so.
+* Chinnock dates Gaugamela to September 331 BCE in one note and the eclipse
+  eleven days before it to 20 September in another. The event keeps the year
+  only and records both.
+
+== Placement
+
+Every located place carries Pleiades' representative point as an
+`approximate_point`, with precision mapped from Pleiades' location precision.
+Eleven places are unlocated, either because Pleiades has no position (Critalla,
+Ceramon-agora, Caystru-pedion, Thymbrium, Corsote, Charmande, the Sogdian rock,
+Pura) or no
+entry that could be matched with confidence (Peltae, Kunaxa), or because its
+point is a placeholder (Thapsacus). No route geometry is drawn anywhere: each
+campaign is an event whose span covers its stages, and the stages are separate
+events at their places. In the Ten Thousand every stage points to the campaign
+with `part_of`; in Alexander every stage but the destruction of Thebes does; in
+Xerxes only the twelve stages of the march and the voyage do, and the battles
+and the preparations of 483–481 BCE stand beside the campaign event in the
+window.
+
+== Findings for the engine and the data format
+
+. *Journeys.* The owner decided on 2026-10-21 (#26) that journeys are their own
+  record kind under contract v1; the record's shape is still proposed and the
+  compiler does not accept it yet. All three chapters are journeys in that
+  sense, and the Anabasis is the clearest attested itinerary the period has:
+  every stage has a distance and most have a halt. Until the kind is built, the
+  chapters use campaign events with `part_of`. A journey should add a cited
+  sequence of stops over these events, not replace them: the stage events
+  already carry start, waypoint and end places in order.
+. *Parallel legs.* Xerxes' army and fleet moved separately and met at Therma and
+  Phaleron. The events say so in prose; a journey with two legs would show it.
+. *Disputes and alternatives.* The Gordian knot carries a `disputed` status with
+  Aristobulus's account as an `alternative` claim; the attack on Delphi carries a
+  `conflicting` claim from Grote. Both are good fixtures for the dispute UI.
+. *Shared records.* Copying another thread's file byte for byte works, but it
+  cascades: a copied place brings its sources with it, and one copied source
+  failed `prettier --check` on its own branch.
+
+[[proposals]]
+== Proposals for the owner
+
+Nothing below is implemented. Each needs a decision.
+
+. *Vocabulary.* Five records use `other` because the vocabulary lacks a type:
+  a canal (the Athos canal), a battlefield (Kunaxa), an army as an actor (the
+  Ten Thousand), and two relationship kinds, mercenary service (with Seuthes)
+  and marriage (Alexander and Roxana). Proposed additions: place types `canal`
+  and `battlefield`; actor type `army`; relationship types `service` and
+  `marriage`.
+. *An evidence state for conventional chronology.* Converting an archon year or a
+  season into a year BCE is standard, but `interpretation` attributed to one
+  scholar makes it look contested. A distinct basis such as `conventional`
+  would say "a standard conversion" and let the reader see where real disputes
+  are.
+. *Dates between anchors.* A date mode that names its two anchoring claims and
+  the source's sequence or day count would let the engine order and interpolate
+  stages instead of showing a multi-year window.
+
+[[shared-ids]]
+== Shared ids
+
+Agreed with the other region threads on 2026-10-21 and kept in the project's
+shared memory: `samos`, `ephesus`, `miletus`, `athens` and `corinth` are this
+branch's and are copied by others; `babylon` and `pelusium` (Mesopotamia and
+the Levant) and `gaza` (Egypt and the Nile) are copied here byte for byte;
+`tyre` and `susa` are carried at Mesopotamia's paths and `memphis` at Egypt's,
+for those threads to copy. Whichever branch merges second drops its copies.

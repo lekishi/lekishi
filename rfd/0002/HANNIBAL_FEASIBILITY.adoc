@@ -27,13 +27,13 @@ the owner may write one.
 |Commanders, magistrates, envoys and peoples on both sides. `roman-republic` lives in `actors/mediterranean/`.
 
 |Events |56
-|219 BCE (Saguntum) to 216 BCE (Capua, the Silva Litana), with codas in 215 BCE (the Philip V treaty) and 205 BCE (the Lacinian inscription). 11 are disputed.
+|219 BCE (Saguntum) to 216 BCE (Capua, the Silva Litana), with codas in 215 BCE (the Philip V treaty) and 205 BCE (the Lacinian inscription). 10 are disputed.
 
 |Relationships |9
 |The war, the alliances each side won or kept, Capua's break with Rome, Rome's consultation of Delphi.
 |===
 
-Every quotation (434 in all) was checked by script against the transcription at
+Every quotation (435 in all) was checked by script against the transcription at
 its locator.
 
 == Sources
@@ -49,7 +49,9 @@ its locator.
   keep as attributed claims.
 * *Gellius* 5.17.5 is the only source here for Cannae's Roman date.
 * Both main texts were read in the Perseus Digital Library's TEI transcriptions,
-  which are CC BY-SA 4.0 over public-domain Teubner editions. That is the same
+  which are CC BY-SA 4.0 over public-domain Teubner editions: Polybius by the
+  licence statement in its TEI header, Livy and Gellius (whose headers state
+  none) by the canonical-latinLit repository's default. That is the same
   conditional status as Wikisource, now in
   link:../../docs/SOURCE_REGISTER.adoc[the source register]. The OCR has errors
   (Livy 22.49.11 is garbled and not quoted); every locator still needs the
@@ -58,7 +60,9 @@ its locator.
   id. The register asks for numbered releases; a numbered release should
   replace the dump citation before release.
 
-Feasibility: high. Two independent, detailed ancient narratives, public-domain,
+Feasibility: high. Two detailed surviving narratives, with Livy drawing partly on
+Polybius and partly on Roman annalistic traditions, so their agreement is not
+independent confirmation; public-domain,
 with section-level locators, give more events than any chapter so far. The
 weakness is geography, below.
 
@@ -76,7 +80,7 @@ weakness is geography, below.
   within a year, so the story's order is presentation only. Polybius gives
   relative order ("on the third night", "ten days along the river", "fifteen
   days over the Alps"); a relative-order or season precision would capture it.
-. *Journey legs break almost everywhere.* Under the journey proposal (PR #26) a
+. *Journey legs break almost everywhere.* Under the proposed journey record (#26) a
   leg is drawn only between two located stops. The march's stops sit at
   display anchors or unknown places from the Ebro to the Po, so not one leg of
   the 218 BCE march would be drawn, and the 217 BCE route only between
@@ -98,16 +102,19 @@ weakness is geography, below.
   publication test: a record-level `cite` may have only one `main` claim, and a
   `dispute` needs at least one alternative or conflicting claim.
 . *A coda is a caption convention.* A step whose event falls wholly outside
-  the manifest `window` must have a caption starting "Coda — ", and only the
-  draft-serving preview build checks it (`pnpm test` and a production build do
-  not). Saguntum (219 BCE) is a prelude, not a coda, so the window opens in
+  the manifest `window` must have a caption starting "Coda — ". The projection
+  checks it for every served chapter, so a draft faces it in `pnpm test` and in
+  the build's publication gate, which both serve drafts. Saguntum (219 BCE) is a prelude, not a coda, so the window opens in
   219 BCE; a `prelude` label, or a coda flag on the step rather than in its
   caption, would say this better.
 
 == Proposed journeys
 
-If PR #26's journey kind is accepted, the chapter would add these three; nothing
-is written until then.
+The owner decided on 2026-10-21 that journeys are their own record kind (#26),
+but the record's shape is still proposed and nothing of it is built: there is no
+`historical/journeys/` directory or schema yet. Once it is implemented, the
+chapter would add these three, with the unlocated stops left as breaks rather
+than drawn legs; nothing is written until then.
 
 [source,yaml]
 ----

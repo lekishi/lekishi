@@ -6,25 +6,24 @@ gate.
 
 == Decide
 
-- [ ] Owner chooses the gate: A (GitHub sign-in in a Pages Function), B (Cloudflare Access) or C (a separate drafts deployment).
-- [ ] Owner authorizes the runtime and secrets the chosen gate needs, and the session cookies, as exceptions to `AGENTS.md`'s static-site rules.
-- [ ] Owner answers the open questions: a stale chapter's public URL, previews, session length.
+- [ ] Owner chooses the gate: A (GitHub sign-in in the SvelteKit app, after renga-dcim/rfd), B (Cloudflare Access) or C (a separate drafts deployment).
+- [ ] Owner authorizes `adapter-cloudflare`, the worker and the secrets the gate needs, and the session cookies, as exceptions to `AGENTS.md`'s static-site rules and a supersession of part of RFD 3's static architecture decision.
+- [ ] Owner answers the open questions: a stale chapter's public URL, previews, session length, OAuth App or GitHub App.
 
 == Build
 
 - [ ] A production build drops unapproved chapters with a warning instead of failing (PR #26).
 - [ ] The public `virtual:lekishi-chapters` index lists served chapters only, so no draft title reaches public JavaScript.
-- [ ] The drafts tree: `/drafts/chapters/<id>`, `/drafts/data/<id>.json`, `/drafts/chapters.json`, `/drafts/search-index.json`, loaded by `fetch`, never as a chunk.
-- [ ] `/drafts/chapters/<id>` of an approved chapter redirects to `/chapters/<id>`.
+- [ ] Move to `adapter-cloudflare` with every public route prerendered; the build invariant, `pnpm preview` and the e2e static mode read `.svelte-kit/cloudflare`. Record the file count and payload before and after.
+- [ ] The chapter route loads on the server with `prerender = "auto"`: approved chapters prerendered, drafts rendered for members, 404 otherwise.
+- [ ] `/drafts.json` and `/drafts/search-index.json` for members; home cards and search read them under the hint cookie.
 - [ ] The production draft wording in `release.ts`.
-- [ ] Build invariant: no draft id, title or summary outside `/drafts/`; every `/drafts/` file gated by `_routes.json`; a preview build has no drafts tree.
+- [ ] Build invariant: no draft id, title or summary in any static file or client chunk; every prerendered chapter approved and excluded from the worker; a preview build prerenders every chapter.
 
 == Gate (option A)
 
-- [ ] GitHub App owned by the `lekishi` organization, Members read-only; owner creates it and sets the Production secrets.
-- [ ] `functions/` with `/auth/login`, `/auth/callback`, `/auth/logout` and the `/drafts/*` guard; provider behind one interface.
-- [ ] Signed `__Host-lekishi_session` and the `lekishi_member` hint; Vitest coverage for expiry, tampering, non-members and the 404 for anonymous requests.
-- [ ] Home cards, search and the 404 page read the drafts tier under the hint.
+- [ ] OAuth App owned by the `lekishi` organization; owner creates it and sets the Production secrets.
+- [ ] `src/lib/server/github.ts` and `session.ts` after renga's, `src/hooks.server.ts`, and the `/auth/*` routes, with Vitest coverage for expiry, tampering, non-members and the 404 for anonymous requests.
 - [ ] "Sign in" control placed per RFD 5.
 - [ ] Verified on production after the owner's go-ahead: anonymous sees no draft, a member sees every draft, previews unchanged.
 

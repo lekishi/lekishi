@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 圓仁 goes up to 竹林寺, the temple of the 般舟 practice hall of 法照, and stays there through the first half of the fifth month.
+types: [occurrence]
+date:
+  value: 840-05-01
+  calendar: chinese_lunisolar
+  as_written: 開成五年五月一日
+  cite:
+    - id: ennin-zhulin-temple-840-time
+      says: The diary records reaching 竹林寺 for the midday meal on 五月一日.
+      source: nitto-guho-junrei-gyoki
+      at: 卷二 開成五年五月一日
+      quote: 行到竹林寺斷中。
+places:
+  - place: wutaishan
+    role: site
+    note: 竹林寺 is not placed separately.
+participants:
+  - actor: ennin
+    role: leader

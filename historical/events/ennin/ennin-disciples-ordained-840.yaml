@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 惟正 and 惟曉 take the full precepts with dozens of novices on the 白玉壇 at 竹林寺.
+types: [occurrence]
+date:
+  value: 840-05-14
+  calendar: chinese_lunisolar
+  as_written: 開成五年五月十四日夜
+  cite:
+    - id: ennin-disciples-ordained-840-time
+      says: The diary records 惟正 and 惟曉 receiving the full precepts on the 白玉壇 on the night of the 14th.
+      source: nitto-guho-junrei-gyoki
+      at: 卷三 開成五年五月十四日
+      quote: 十四日夜。惟正惟曉。共數十人。於白玉壇上受具足戒。
+places:
+  - place: wutaishan
+    role: site
+participants:
+  - actor: weizheng
+    role: subject
+  - actor: weixiao
+    role: subject
+  - actor: ennin
+    role: witness
+notes: Ordination had been refused them at 揚州 in 838; the diary then said only 五臺山 and 洛陽 kept platforms.

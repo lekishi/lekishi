@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The commissioner for religious affairs (功德使) assigns 圓仁's party to lodge at 資聖寺, which stays their home until 845.
+types: [occurrence]
+date:
+  value: 840-08-25
+  calendar: chinese_lunisolar
+  as_written: 開成五年八月廿五日
+  cite:
+    - id: ennin-zisheng-temple-840-time
+      says: The diary copies the commissioner's order of the 25th that they lodge provisionally at 資聖寺.
+      source: nitto-guho-junrei-gyoki
+      at: 卷三 開成五年八月廿五日
+      quote: 權寄住資聖寺。仰綱維供給者。
+places:
+  - place: changan
+    role: site
+    note: 資聖寺 is not placed separately.
+participants:
+  - actor: ennin
+    role: leader
+  - actor: weizheng
+    role: participant
+  - actor: weixiao
+    role: participant
+  - actor: tei-yuman
+    role: participant

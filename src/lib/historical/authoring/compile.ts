@@ -55,7 +55,7 @@ export type Approval = { readonly digest: string; readonly by: string; readonly 
  * A chapter's approval state:
  * - `approved`: the approval pins exactly the content the chapter reaches now;
  * - `draft`: no approval, so the chapter is not served;
- * - `stale`: the approval pins different content, which fails the build.
+ * - `stale`: the approval pins different content; production leaves it out.
  */
 export type ApprovalState = "approved" | "draft" | "stale"
 

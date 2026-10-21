@@ -15,22 +15,23 @@ import { objectOf } from "./types"
  *
  * A chapter is published only by the owner's approval in its manifest: a
  * digest of the manifest and of every record and source the chapter reaches,
- * with who approved it and on which day. This suite fails `pnpm build` through
- * `scripts/check-chapter.mjs` when that approval does not hold:
+ * with who approved it and on which day. This suite runs in `pnpm build`
+ * through `scripts/check-chapter.mjs` and holds that:
  *
- * - every chapter the site serves is approved at exactly its current content;
- * - no chapter is stale, so an edit to approved content, a shared place
- *   included, cannot reach readers until the owner approves again;
+ * - every chapter the site serves is approved at exactly its current content,
+ *   so a stale chapter (an edit to approved content, a shared place included)
+ *   is left out of production until the owner approves again;
  * - an approval is dated, and not before the record files existed or after
  *   today;
  * - the approval lives in the manifest only, never in a record.
  *
- * A chapter without an approval is a draft: it compiles and faces every
- * contract test as a preview, but it is not served. Only a build that serves
- * drafts (development and pull-request previews; the build's gate runs this
- * suite with `LEKISHI_DRAFTS=1` there) serves it, stale ones included, under
- * its draft preview set; production and every plain test run keep the rules
- * above. The gate cannot tell who
+ * A missing or stale approval is never a failure (the owner's decision of
+ * 2026-10-21): it only decides what production serves. A chapter without a
+ * matching approval compiles and faces every contract test as a preview, but
+ * production does not serve it. Only a build that serves drafts (development
+ * and pull-request previews; the build's gate runs this suite with
+ * `LEKISHI_DRAFTS=1` there) serves it, under its draft preview set. The gate
+ * cannot tell who
  * wrote an approval, so `.github/CODEOWNERS` requires the owner's review on
  * every manifest, and `pnpm approvals` shows the owner what changed since the
  * last approval. Nothing here, and no agent, writes an approval for the owner.
@@ -75,26 +76,12 @@ function compiled(source: TreeFile[], chapter: string): ChapterBundle {
   return compileChapter(buildTree(source), chapter)
 }
 
-/**
- * The chapters the gate would let the site serve: approved, never stale. A build
- * that serves drafts serves a stale chapter as a draft, so only its approval's
- * date and name can fail there.
- */
-function approvalViolations(
-  bundles: readonly ChapterBundle[],
-  today: string,
-  { drafts = false }: { drafts?: boolean } = {},
-): string[] {
+/** An approval's date and name, which must hold whether or not it still matches. */
+function approvalViolations(bundles: readonly ChapterBundle[], today: string): string[] {
   const violations: string[] = []
   const adopted = RECORD_FILES_ADOPTED_AT.slice(0, 10)
 
   for (const bundle of bundles) {
-    if (bundle.state === "stale" && !drafts) {
-      violations.push(
-        `${bundle.id}: approved ${String(bundle.approval?.digest)}, but the content is now ${bundle.digest}; run \`pnpm approvals\` to see what changed`,
-      )
-    }
-
     if (bundle.approval !== null) {
       if (bundle.approval.on < adopted) {
         violations.push(
@@ -137,8 +124,8 @@ describe("publication approval gate", () => {
   // bundles' approval states remain the production gate's source of truth.
   const bundles = compileAll(buildTree(files()), { preview: true })
 
-  it("leaves no chapter stale and no approval misdated", () => {
-    expect(approvalViolations(bundles, TODAY, { drafts: DRAFTS_SERVED })).toEqual([])
+  it("leaves no approval misdated", () => {
+    expect(approvalViolations(bundles, TODAY)).toEqual([])
   })
 
   it("serves exactly the approved chapters, and the drafts only on a build that serves drafts", () => {
@@ -225,7 +212,7 @@ story:
     expect(objectOf(bundle.sets[0]["review"])["independence"]).toBe("self_review")
   })
 
-  it("fails an approved chapter when a record it reaches changes", () => {
+  it("makes an approved chapter stale, with nothing to serve, when a record it reaches changes", () => {
     const digest = compiled(files(), TANG).digest
     const changed = edit(approve(files(), TANG, digest), TANG_RECORD, (text) =>
       text.replace(/summary: (.*)/, "summary: $1 Edited after the approval."),
@@ -234,10 +221,9 @@ story:
 
     expect(bundle.state).toBe("stale")
     expect(bundle.sets).toEqual([])
-    expect(approvalViolations([bundle], TODAY).join("\n")).toContain("pnpm approvals")
   })
 
-  it("fails an approved chapter when its manifest's card text changes", () => {
+  it("makes an approved chapter stale when its manifest's card text changes", () => {
     const digest = compiled(files(), TANG).digest
     const changed = edit(approve(files(), TANG, digest), `chapters/${TANG}.yaml`, (text) =>
       text.replace(/^title: (.*)$/m, "title: $1, edited"),
@@ -246,7 +232,7 @@ story:
     expect(compiled(changed, TANG).state).toBe("stale")
   })
 
-  it("fails an approved chapter when a source it cites changes", () => {
+  it("makes an approved chapter stale when a source it cites changes", () => {
     const digest = compiled(files(), TANG).digest
     const changed = edit(approve(files(), TANG, digest), "sources/wikidata.yaml", (text) =>
       text.replace(/^title: (.*)$/m, "title: $1 (edited)"),
@@ -266,7 +252,7 @@ story:
     expect(compiled(added, TANG).state).toBe("approved")
   })
 
-  it("fails an approval of other content, and does not serve a draft", () => {
+  it("treats an approval of other content as stale, and does not serve a draft", () => {
     const other = `sha256:${"0".repeat(64)}`
     const stale = compiled(approve(files(), TANG, other), TANG)
     const draft = compiled(
@@ -290,8 +276,7 @@ story:
     )
 
     expect(stale.state).toBe("stale")
-    expect(approvalViolations([stale], TODAY, { drafts: true })).toEqual([])
-    expect(approvalViolations([stale], TODAY).join("\n")).toContain("pnpm approvals")
+    expect(approvalViolations([stale], TODAY)).toEqual([])
     expect(objectOf(stale.sets[0]["published_by"])["role"]).toBe("draft preview, not approved")
   })
 
@@ -305,7 +290,7 @@ story:
     const stale = compileChapter(buildTree(changed), QIN, { preview: true })
 
     expect(stale.state).toBe("stale")
-    expect(approvalViolations([stale], TODAY, { drafts: true })).toEqual([])
+    expect(approvalViolations([stale], TODAY)).toEqual([])
     expect(contractViolations([stale])).toEqual([])
   })
 
@@ -316,8 +301,6 @@ story:
     const future = { ...bundle, approval: { ...bundle.approval!, on: "2999-01-01" } }
 
     expect(approvalViolations([early], TODAY).join("\n")).toContain("before the record files")
-    expect(approvalViolations([future], TODAY, { drafts: true }).join("\n")).toContain(
-      "in the future",
-    )
+    expect(approvalViolations([future], TODAY).join("\n")).toContain("in the future")
   })
 })

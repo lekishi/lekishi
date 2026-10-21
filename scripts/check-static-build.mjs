@@ -112,10 +112,20 @@ const drafts = draftChaptersServed()
 const states = new Map((await compileChapters()).map((bundle) => [bundle.id, bundle]))
 
 /**
+ * Whether this build serves `chapter`: an approved one always, the rest only on
+ * a build that serves drafts. Production leaves a draft or stale chapter out
+ * instead of failing (the owner's decision of 2026-10-21).
+ *
+ * @param {string} chapter
+ */
+function served(chapter) {
+  return drafts || states.get(chapter)?.state === "approved"
+}
+
+/**
  * The decision line a served chapter states: the date of the owner's approval in
  * its manifest, or, on a build that serves drafts, the draft line for a chapter
- * whose approval does not match. Production serves no draft, so a chapter
- * without a matching approval has no line there and fails below.
+ * whose approval does not match.
  *
  * @param {string} chapter
  */
@@ -130,7 +140,7 @@ function decisionLine(chapter) {
     return `Draft: changed since the owner's approval of ${bundle.approval?.on}, not approved for release`
   }
 
-  return drafts ? "Draft, not approved for release" : `${chapter} has no matching approval`
+  return "Draft, not approved for release"
 }
 
 /**
@@ -143,7 +153,7 @@ function decisionLine(chapter) {
  * manifest's approval records (read from the manifest, so a new approval needs
  * no edit here), and one published record id the built scripts must carry.
  */
-const CHAPTERS = [
+const SENTINELS = [
   {
     id: "tang-mission-750-754",
     name: "The embassy to Tang China",
@@ -160,6 +170,9 @@ const CHAPTERS = [
   },
 ]
 
+/** The sentinels for the chapters this build serves. */
+const CHAPTERS = SENTINELS.filter((chapter) => served(chapter.id))
+
 /**
  * The routes that used to serve a chapter and now redirect to it: `/atlas` was
  * the launch chapter's route, and `/compare/qin` the bounded chapter's review
@@ -167,15 +180,27 @@ const CHAPTERS = [
  * as if it were a chapter.
  */
 const REDIRECTS = [
-  { file: "atlas.html", target: "/chapters/tang-mission-750-754" },
-  { file: "compare/qin.html", target: "/chapters/qin-conquest-han-233-226" },
-]
+  { file: "atlas.html", chapter: "tang-mission-750-754" },
+  { file: "compare/qin.html", chapter: "qin-conquest-han-233-226" },
+].map(({ file, chapter }) => ({
+  file,
+  // A chapter a production build leaves out sends its legacy route home.
+  target: served(chapter) ? `/chapters/${chapter}` : "/",
+}))
 
 const indexHtml = read(path.join(buildDirectory, "index.html"))
 const notFoundHtml = read(path.join(buildDirectory, "404.html"))
 const chapterHtml = new Map()
 
-// Every chapter is prerendered as real content: the HTML a static host returns
+// A chapter this build leaves out has no page at all: nothing unapproved
+// reaches a production artifact.
+for (const chapter of SENTINELS.filter((entry) => !served(entry.id))) {
+  if (existsSync(path.join(buildDirectory, "chapters", `${chapter.id}.html`))) {
+    fail(`chapters/${chapter.id}.html is in the artifact, but ${chapter.id} is not approved`)
+  }
+}
+
+// Every served chapter is prerendered as real content: the HTML a static host returns
 // already names the chapter, its window, and the decision recorded on it, before
 // any script runs.
 for (const chapter of CHAPTERS) {
@@ -234,7 +259,8 @@ for (const chapter of CHAPTERS) {
   }
 }
 
-// The legacy routes still resolve, and they resolve to the chapter they served.
+// The legacy routes still resolve, and they resolve to the chapter they served
+// when this build serves it.
 for (const redirect of REDIRECTS) {
   const file = path.join(buildDirectory, redirect.file)
 
@@ -244,7 +270,7 @@ for (const redirect of REDIRECTS) {
 
   const html = read(file)
 
-  if (!html.includes(redirect.target)) {
+  if (!html.includes(`url=${redirect.target}"`)) {
     fail(`${redirect.file} does not redirect to ${redirect.target}`)
   }
 

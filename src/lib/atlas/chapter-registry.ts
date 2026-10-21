@@ -5,10 +5,10 @@ import type { ChapterCoverage } from "./projection"
  * The chapters the site serves.
  *
  * The list is the chapter manifests in `historical/chapters/` whose approval
- * matches their content (RFD 2): an approved chapter is served, a draft is not,
- * and a stale approval fails the build before this module exists. A build that
- * serves drafts (development and pull-request previews, never production) also
- * serves every other chapter, and `release.ts` states on each of them that it
+ * matches their content (RFD 2): an approved chapter is served, and a draft or
+ * stale chapter is left out of a production build, this list included. A build
+ * that serves drafts (development and pull-request previews, never production)
+ * also serves every other chapter, and `release.ts` states on each of them that it
  * is a draft. The chapter
  * route enumerates this list to prerender, the root page's cards are keyed by
  * these ids, and search covers exactly these chapters, so the list is exactly
@@ -24,7 +24,7 @@ export const TANG_CHAPTER = "tang-mission-750-754"
 /** The Qin chapter: the end of the state of Han, 233–226 BCE. */
 export const QIN_CHAPTER = "qin-conquest-han-233-226"
 
-/** Every chapter manifest, served or not, as the build compiled it. */
+/** Every chapter manifest the build serves: the approved ones, and on a draft build all of them. */
 export const CHAPTER_MANIFESTS: readonly ChapterEntry[] = MANIFESTS
 
 /** Whether this build serves the chapters without a matching approval, as drafts. */

@@ -9,10 +9,13 @@
  *   Vite emits as one chunk: content costs one deployed file per chapter however
  *   many records it has.
  *
- * A chapter is served when its approval matches its content. A draft is listed
- * but not served. A stale approval fails the build here, before anything is
- * bundled, and fails the dev server's page with the same message, because an
- * edit to approved content must never reach readers without a new approval.
+ * A chapter is served when its approval matches its content. A draft or a
+ * stale chapter is left out of a production build entirely, index included, so
+ * neither its content nor its title reaches the public bundle, and the build
+ * warns instead of failing (the owner's decision of 2026-10-21: a missing
+ * approval never fails a build). An edit to approved content still never
+ * reaches readers without a new approval; the chapter is simply absent until
+ * the owner approves it.
  *
  * A build that serves drafts (development and pull-request previews, never
  * production; see `draftChaptersServed` in `scripts/dev-pages.mjs`) also serves
@@ -72,13 +75,14 @@ export async function compileChapters(drafts = false) {
   return compiler.compileAll(tree.readTree(), { preview: drafts })
 }
 
-/** @param {ChapterBundle[]} stale */
-function staleMessage(stale) {
+/** @param {ChapterBundle[]} unserved */
+function unservedMessage(unserved) {
   return [
-    "A chapter's approval no longer matches its content, so it cannot be served:",
-    ...stale.map(
-      (bundle) =>
-        `  - ${bundle.id}: approved ${String(bundle.approval?.digest)}, content is now ${bundle.digest}`,
+    "These chapters have no approval matching their content, so this build leaves them out:",
+    ...unserved.map((bundle) =>
+      bundle.state === "stale"
+        ? `  - ${bundle.id}: approved ${String(bundle.approval?.digest)}, content is now ${bundle.digest}`
+        : `  - ${bundle.id}: draft, never approved`,
     ),
     "Run `pnpm approvals` to see what changed. Only the owner approves a chapter.",
   ].join("\n")
@@ -93,21 +97,23 @@ export function historicalChapters({ drafts = false } = {}) {
   /** @type {Promise<ChapterBundle[]> | undefined} */
   let bundles
 
-  async function compiled() {
-    bundles ??= compileChapters(drafts)
-
-    const all = await bundles
-    const stale = all.filter((bundle) => bundle.state === "stale")
-
-    if (stale.length > 0 && !drafts) {
-      throw new Error(staleMessage(stale))
-    }
-
-    return all
-  }
-
   /** @param {ChapterBundle} bundle */
   const served = (bundle) => bundle.state === "approved" || drafts
+
+  /** The chapters this build serves; the rest are left out with a warning. */
+  async function compiled() {
+    if (bundles === undefined) {
+      bundles = compileChapters(drafts)
+
+      const unserved = (await bundles).filter((bundle) => !served(bundle))
+
+      if (unserved.length > 0) {
+        console.warn(unservedMessage(unserved))
+      }
+    }
+
+    return (await bundles).filter(served)
+  }
 
   /** @param {import("vite").ViteDevServer} server */
   function invalidate(server) {
@@ -142,12 +148,10 @@ export function historicalChapters({ drafts = false } = {}) {
           served: served(bundle),
           approval: bundle.approval,
         }))
-        const loaders = all
-          .filter(served)
-          .map(
-            (bundle) =>
-              `  ${JSON.stringify(bundle.id)}: () => import(${JSON.stringify(`${INDEX_ID}/${bundle.id}`)}),`,
-          )
+        const loaders = all.map(
+          (bundle) =>
+            `  ${JSON.stringify(bundle.id)}: () => import(${JSON.stringify(`${INDEX_ID}/${bundle.id}`)}),`,
+        )
 
         return [
           `export const CHAPTERS = ${JSON.stringify(index)}`,
@@ -162,7 +166,7 @@ export function historicalChapters({ drafts = false } = {}) {
 
       if (id.startsWith(`${RESOLVED}/`)) {
         const name = id.slice(`${RESOLVED}/`.length)
-        const bundle = (await compiled()).find((entry) => entry.id === name && served(entry))
+        const bundle = (await compiled()).find((entry) => entry.id === name)
 
         if (bundle === undefined) {
           throw new Error(`${name} is not a served chapter`)

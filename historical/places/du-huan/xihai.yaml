@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  西海, "the western sea", which 杜佑 says his kinsman 杜環 reached in 天寶十載 (751) with 高仙芝's western
+  campaign, and which 經行記 uses as the far edge of the lands it describes ("從此至西海"). The name
+  marks a direction, not a located sea, and the record asserts no position.
+types: [region]
+names:
+  - form: 西海
+    lang: lzh
+    script: Hani
+    roman: Xihai
+    scheme: pinyin
+    cite:
+      - id: xihai-name
+        says: 杜佑's preface records 杜環 reaching 西海 in 天寶十載 with 高仙芝's western campaign.
+        source: tongdian
+        at: 卷一九一 邊防七 西戎總序（族子環隨鎮西節度使高仙芝西征）
+        quote: 族子環隨鎮西節度使高仙芝西征，天寶十載至西海，寶應初，因賈商船舶自廣州而回，著經行記。
+      - id: xihai-usage
+        says: 經行記 uses 西海 as the far limit of the lands it describes, and of 大食's conquests.
+        role: supporting
+        source: tongdian
+        at: 卷一九三 邊防九 大食（今吞滅四五十國……其境盡於西海焉）
+        quote: 今吞滅四五十國，皆為所役屬，多分其兵鎮守，其境盡於西海焉。
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      "No position: in these texts 西海 is the sea at the western end of the known world, used for
+      more than one water, and the preface does not say which one 杜環 reached."
+    cite:
+      - id: xihai-unknown
+        says:
+          The preface names 西海 without placing it, and 經行記 uses it as a limit, so the record carries
+          unknown geometry.
+        source: tongdian
+        at: 卷一九一 邊防七 西戎總序（天寶十載至西海）
+notes:
+  A journey stop at 西海 is the case of a stop the map cannot draw; it stays in the list and on the
+  card.

@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  "亞俱羅, which 經行記 gives as another name of 大食 and as the seat of the 大食 king (暮門): a city of markets
+  and a prayer hall holding tens of thousands, where it names Chinese painters and weavers at work.
+  The record's only placement is a label anchor at Kufa, with which 亞俱羅 is usually identified; that
+  identification is not yet cited here."
+types: [capital]
+names:
+  - form: 亞俱羅
+    lang: lzh
+    script: Hani
+    roman: Yajuluo
+    scheme: pinyin
+    cite:
+      - id: kufa-name
+        says: 經行記, quoted under 大食, gives 亞俱羅 as another name of 大食 and says the 大食 king, 暮門, has his seat there.
+        source: tongdian
+        at: 卷一九三 邊防九 大食（杜環經行記云：一名亞俱羅）
+        quote: 一名亞俱羅。其大食王號暮門，都此處。
+      - id: kufa-river
+        says: 經行記's entry for 苫國 says a great river flows east into 亞俱羅 and merchants trade along it.
+        role: supporting
+        source: tongdian
+        at: 卷一九三 邊防九 大食（又云：苫國在大食西界）
+        quote: 有大川東流入亞俱羅，商客糴此糶彼，往來相繼。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [44.4, 32.03]
+    notes:
+      "Label anchor at Kufa's coordinate in Wikidata (Q186234). The identification of 亞俱羅 with Kufa
+      (the 'Āqūlā of Syriac usage) is the usual modern reading but is not yet cited in this chapter,
+      so the anchor asserts no identification and no historical coordinate. 經行記 does not name the
+      city in any other way."
+    cite:
+      - id: kufa-anchor
+        says: The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical
+          coordinate or identification is asserted.
+        source: wikidata
+        at: Q186234 (P625), revision 2545064471
+modern:
+  - form: Kufa
+    lang: en
+    script: Latn
+    note: The city the anchor uses, recorded for orientation only.
+notes:
+  "經行記 uses 亞俱羅 both for the land of 大食 and for the king's seat. The record keeps the city
+  reading because the passage describes a walled city with markets and a prayer hall; the Abbasid
+  move to Baghdad (from 762) is not in the cited sources and is not drawn."

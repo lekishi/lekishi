@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  苫國, which 經行記 places on the western border of 大食, a land several thousand 里 around with tiled
+  houses and stone walls, a great river flowing east to 亞俱羅, five commands and over ten thousand
+  troops, bordering the 可薩 Turks to the north. 苫 is usually read as al-Shām (Syria); that reading is
+  not yet cited here, and the record asserts no position.
+types: [region]
+names:
+  - form: 苫國
+    lang: lzh
+    script: Hani
+    roman: Shanguo
+    scheme: pinyin
+    cite:
+      - id: sham-name
+        says: 經行記 places 苫國 on the western border of 大食, several thousand 里 around.
+        source: tongdian
+        at: 卷一九三 邊防九 大食（又云：苫國在大食西界）
+        quote: 苫國在大食西界，周迴數千里。造屋兼瓦，壘石為壁。
+      - id: sham-name-xin
+        says: The Song history's entry for 苫 repeats the account, with the river flowing east into 亞俱羅.
+        role: supporting
+        source: xin-tangshu-tang-west
+        at: 卷二二一下 西域下 大食（大食之西有苫者）
+        quote: 大食之西有苫者，亦自國。北距突厥可薩部，地數千里。有五節度，勝兵萬人。
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      "No position: the sources give 苫國's place only relative to 大食 and 亞俱羅, and the usual reading
+      of 苫 as al-Shām is not yet cited in this chapter. A cited identification is what would place
+      it."
+    cite:
+      - id: sham-unknown
+        says:
+          The entries place 苫國 only relative to 大食 and 亞俱羅 and state no city, so the record carries
+          unknown geometry.
+        source: tongdian
+        at: 卷一九三 邊防九 大食（又云：苫國在大食西界）
+notes:
+  The 新唐書 entry repeats 經行記 nearly word for word and is a supporting witness, not independent
+  evidence.

@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  師子國 (新檀, 婆羅門), the island 經行記 calls south India, hot and dry in its north and rainy in its
+  south, where Buddhist temples begin. The record's only placement is a label anchor on
+  Sri Lanka, with which 師子國 is identified.
+types: [region]
+names:
+  - form: 師子國
+    lang: lzh
+    script: Hani
+    roman: Shiziguo
+    scheme: pinyin
+    cite:
+      - id: sri-lanka-name
+        says: 經行記, quoted under 師子國, says it is also called 新檀 and 婆羅門, and is south India.
+        source: tongdian
+        at: 卷一九三 邊防九 師子國（杜環記云）
+        quote: 師子國亦曰新檀，又曰婆羅門，即南天竺也。
+  - form: 新檀
+    lang: lzh
+    script: Hani
+    claim: sri-lanka-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [81, 7]
+    notes: Label anchor at the coordinate Wikidata records for Sri Lanka (Q854). It places no
+      port, temple or landing and asserts no historical coordinate.
+    cite:
+      - id: sri-lanka-anchor
+        says: The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical
+          coordinate is asserted.
+        source: wikidata
+        at: Q854 (P625), revision 2559349656
+modern:
+  - form: Sri Lanka
+    lang: en
+    script: Latn
+    note: Recorded for orientation only.
+notes:
+  經行記's entry does not say when or why 杜環 was there. A stop on his sea voyage home is the usual
+  reading and is not asserted by this chapter.

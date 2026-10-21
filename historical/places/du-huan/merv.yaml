@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  末祿, the walled city 經行記 describes seven hundred 里 south-west of 亞梅國, with iron gates, a salt
+  pool, two Buddhist temples and a river divided into hundreds of channels, where the 大食 envoy for
+  the eastern road was stationed. The record's only placement is a label anchor at Merv, with which
+  末祿 is usually identified; that identification is not yet cited here.
+types: [settlement]
+names:
+  - form: 末祿
+    lang: lzh
+    script: Hani
+    roman: Molu
+    scheme: pinyin
+    cite:
+      - id: merv-name
+        says:
+          經行記, quoted under 大食, names 末祿國, seven hundred 里 south-west of 亞梅國, with a city fifteen 里
+          square and gates of iron.
+        source: tongdian
+        at: 卷一九三 邊防九 大食（又云：末祿國在亞梅國西南七百餘里）
+        quote: 末祿國在亞梅國西南七百餘里。胡姓末者，茲土人也。其城方十五里，用鐵為城門。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [62.1925, 37.662777777778]
+    notes: "Label anchor at the archaeological site of Merv recorded in Wikidata (Q193325). The
+      identification of 末祿 with Merv is the usual modern reading but is not yet cited in this
+      chapter, so the anchor asserts no identification and no historical coordinate."
+    cite:
+      - id: merv-anchor
+        says: The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical
+          coordinate or identification is asserted.
+        source: wikidata
+        at: Q193325 (P625), revision 2523331459
+modern:
+  - form: Merv
+    lang: en
+    script: Latn
+    note: The archaeological site the anchor uses, recorded for orientation only.
+notes:
+  亞梅國, the reference point of 經行記's distance, is not identified and has no record. The 大食東道使
+  stationed at 末祿 is recorded on the event that cites it.

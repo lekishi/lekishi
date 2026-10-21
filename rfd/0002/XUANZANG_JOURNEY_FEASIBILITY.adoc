@@ -1,6 +1,6 @@
 = 玄奘's journey to India, 629–645: feasibility note
 :state: Desk-research note for the owner's review of a draft chapter; not published atlas content, not an RFD decision
-:prepared-from: claude/project-thread-j8nxta @ 2c0f5ab7 (圓仁 thread's 長安, 洛陽 and 太原)
+:prepared-from: stacked on PR #36 (claude/project-thread-j8nxta @ 495320d), whose 長安, 洛陽 and 太原 it reuses
 :research-window: single pass, 2026-10-21
 :toc:
 :toclevels: 2
@@ -16,9 +16,10 @@ approval block, and dev and pull-request previews serve it.
 
 Feasible, and a good test chapter. The sources are public domain and narrate
 every stop, so the chapter has 98 events in one traveller's order across about
-seventy places from 秦州 to 于闐. What it does not have is a calendar: between
-the departure from 涼州 in 629 and the memorial from 于闐 in 644, no source
-gives a month or a year. That gap is the reason it is worth having. It tests the
+seventy places from 秦州 to 于闐. What it does not have is a calendar: after
+the departure from 長安 in 629, no source gives a month or a year until the
+return to 長安 in the first month of 645; even the memorial from 于闐 carries no
+date of its own. That gap is the reason it is worth having. It tests the
 engine on long runs of undated, overlapping windows, on many stops without a
 cited position, and on a journey kind that has to break its line where
 positions are missing.
@@ -35,7 +36,7 @@ positions are missing.
 
 |大唐西域記, 玄奘 and 辯機, 646 (T.2087)
 |`xiyu-ji`
-|Supporting name cites for 27 countries, taken from the opening sentence of each country's section.
+|Supporting name cites for 27 countries, taken from passages in the relevant country's section, usually its opening sentence.
 
 |舊唐書 卷一九一 方伎 僧玄奘, 945
 |`jiu-tangshu-fangji`
@@ -52,7 +53,10 @@ never the page, as the register's Wikisource row requires. CBETA and SAT carry
 the same texts with better proofreading, but their terms rule them out as data
 (see the register), so the quotations have to be re-checked against a printed
 critical edition before content freeze. Every quotation in the records was
-checked mechanically against the downloaded transcription.
+checked mechanically against the downloaded transcription. A substring check
+cannot tell a sentence from a stray mark, so nine 西域記 name cites that had
+been reduced to a lone 。 were found in review and replaced with passages from
+the relevant sections.
 
 == Chronology
 
@@ -69,7 +73,7 @@ The biography is not consistent with itself.
 
 So every stop from 高昌 to 于闐 carries an editorial window reckoned from the
 stays, with a note that says so. There are eight windows (629..630 out to
-迦畢試, through 643..645 for the desert), and they overlap on purpose. Step
+迦畢試, through 644..645 for the desert), and they overlap on purpose. Step
 order is the biography's narrative order, which the manifest's notes say is
 presentation order. Only seven events carry a source date: the departure in 629,
 the four steps of the return in 645, the 西域記 in 646 and the death in 664.
@@ -103,16 +107,38 @@ identification is the conventional modern reading. The other 22 carry an
 * Wikidata rate-limited this environment (HTTP 429) before the lookup could be
   made, for example 迦畢試, 那揭羅喝 and 迦摩縷波.
 
-The 長安 and 洛陽 records are shared and belong to the 圓仁 chapter.
+The 長安 and 洛陽 records are shared and belong to the 圓仁 chapter. With them
+the chapter shows 79 places, 57 anchored, and reaches five sources: the three
+above, Wikidata, and 圓仁's diary, which the shared places cite.
 
 == Fit with the journey kind (PR #26)
 
-Each stop is modelled as an event with exactly one `site` place, so a journey
-record can list the stops directly once the kind lands. Two of the travel
-relationships (`xuanzang-travel`, `xuanzang-texts-transmission`) would become
-that journey. Under PR #26's rule, legs are drawn only between places located
-at approximate_point or better, so today the journey would draw no legs at
-all: display anchors break the line.
+PR #26 made journeys a record kind of their own; the record's shape is still
+proposed, and the compiler does not read `historical/journeys/` until the
+owner accepts it. The chapter's movement is drafted in that shape as three
+journeys in `historical/journeys/xuanzang/`, so it is ready when the kind is
+built:
+
+* `xuanzang-outbound-629`: 長安 to 那爛陀, 48 stops.
+* `xuanzang-india-636`: from 那爛陀 around India to 缽羅耶伽, 20 stops.
+* `xuanzang-return-643`: 缽羅耶伽 to 長安, 19 stops.
+
+Every stop is an event of this chapter with exactly one `site`, `start` or
+`end` place, and each journey's order is cited to the biography's narrative.
+No stop is strictly earlier than the one before it under v0's partial
+ordering, though the overlapping windows mean the check proves little here.
+Three events are not stops, because their only place is context: the night
+crossing below 玉門關, which he saw and bypassed; the 波羅奢 forest robbery,
+east of 奢羯羅; and the loss in the 信度河, mid-river, before the stay at
+烏鐸迦漢荼.
+No leg states `by`: the biography rarely says how a stage was travelled, and
+whether `by` may be inferred is still open for the owner. The journeys name
+only 玄奘 as a traveller, because his companions changed from stage to stage.
+
+`xuanzang-travel` stays as the relationship the chapter's step names. Under
+PR #26's rule, legs are drawn only between places located at
+approximate_point or better, so today the journeys would draw no legs at all:
+display anchors break the line.
 
 == Follow-ups, in order of value
 
@@ -122,7 +148,8 @@ all: display anchors break the line.
   domain and identify most of the Indian and Central Asian stops.
 . Retry the Wikidata lookups for the places listed above, once the rate limit
   clears.
-. Write the journey record once PR #26 is merged.
+. Add the journeys to the chapter's `include` once the compiler reads the
+  journey kind, and add `by` where the biography states how a stage went.
 . Re-check the quotations against a critical edition, such as the 中華書局
   edition, which is consulted only, under the register's rule.
 . Cite a calendar table for day-level dates of the cyclic days.

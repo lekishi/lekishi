@@ -14,12 +14,17 @@ import { defineConfig, devices } from "@playwright/test"
  * `LEKISHI_E2E_BASE_URL` points the checks at an already-running server and
  * disables the managed one; `LEKISHI_SKIP_BUILD=1` reuses an existing artifact
  * instead of rebuilding it.
+ *
+ * The checks expect every chapter served, drafts included (`e2e/approvals.ts`),
+ * as CI's artifact and the development server serve them, so the managed build
+ * sets `LEKISHI_DRAFTS=1`. A reused artifact or an external server must serve
+ * drafts too. Production's default, approved chapters only, is unchanged.
  */
 const mode = process.env.LEKISHI_E2E_MODE ?? "static"
 const port = Number(process.env.LEKISHI_E2E_PORT ?? (mode === "dev" ? 5173 : 4111))
 const baseURL = process.env.LEKISHI_E2E_BASE_URL ?? `http://127.0.0.1:${port}`
 
-const build = process.env.LEKISHI_SKIP_BUILD === "1" ? "" : "pnpm build && "
+const build = process.env.LEKISHI_SKIP_BUILD === "1" ? "" : "LEKISHI_DRAFTS=1 pnpm build && "
 const serve =
   mode === "dev"
     ? `pnpm sync:globe && pnpm sync:fonts && pnpm exec vite dev --port ${port} --strictPort --host 127.0.0.1`

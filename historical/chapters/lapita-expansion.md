@@ -37,13 +37,18 @@ groups rather than towns, and on undated arcs.
 
 The cite-only articles are never quoted; their figures are paraphrased as
 interpretations attributed to their authors. Quotations from the two open
-articles and from Pofatu were checked by script against the downloaded texts.
+articles were checked by script against the downloaded texts; Pofatu is
+paraphrased, not quoted, while its terms are unresolved.
 Wikidata was rate-limited for this whole pass (HTTP 429), so GeoNames and
 Pofatu stand in for it.
 
-**Pofatu needs an owner check:** its Zenodo release, metadata and website say
-CC BY 4.0, but the GitHub repository's LICENSE file says CC BY-NC 4.0. The
-register marks it conditional until the maintainers confirm.
+**Pofatu needs an owner decision before approval:** its Zenodo release,
+metadata and website say CC BY 4.0, but the GitHub repository's LICENSE file
+says CC BY-NC 4.0. The register's rule does not adopt a source with a possible
+non-commercial term by default, so the source record claims only what both
+readings allow (attributed, non-commercial sharing, no quotation), and the
+chapter is not ready for approval until the owner records a decision, the
+maintainers resolve the LICENSE, or the Pofatu claims are replaced.
 
 ## Dates
 

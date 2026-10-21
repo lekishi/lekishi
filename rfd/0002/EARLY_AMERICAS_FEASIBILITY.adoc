@@ -35,8 +35,11 @@ Scope performed:
 
 Not performed: purchases, logins, library visits, specialist contact, and any
 reading of paywalled full texts. UNESCO's site, Science's site, Cambridge Core and
-the Internet Archive were not reachable from this orb, so works hosted there
-were read through Europe PMC, OpenAlex, Crossref or RePEc.
+the Internet Archive were not reachable from the orb that wrote the draft, so works
+hosted there were read through Europe PMC, OpenAlex, Crossref or RePEc. The review
+of 2026-10-21 read UNESCO's Hopewell decision, the introduction and Table 1 of
+Splitstoser and colleagues (2016), Blomster and Salazar Chávez (2020) through
+PubMed Central, and Herrmann and colleagues (2014) through the authors' upload.
 
 == What the sources support
 
@@ -56,7 +59,7 @@ place is a site.
 
 |North America, earthworks
 |8
-|Watson Brake, Indian Knoll, Horr's Island, Poverty Point and Mound A, Grave Creek (Poverty Point nomination); Serpent Mound (Herrmann 2014; Lepper 2020, two papers); Hopewell (UNESCO 2023, NPS)
+|Watson Brake, Indian Knoll, Horr's Island, Poverty Point and Mound A, Grave Creek (Poverty Point nomination); Serpent Mound (Romain 2017, Herrmann 2014; Lepper 2020, two papers); Hopewell (UNESCO 2023, NPS)
 
 |Mesoamerica
 |13
@@ -88,10 +91,10 @@ facts, which the claim states in its own words with a locator.
   Lorenzo, Grave Creek and Nasca. Each of those should be checked against a
   primary site report before release.
 * *Most journal sources were read as abstracts.* The claims say only what the
-  abstract says.
+  abstract says, except where the chapter notes record further full-text or partial-text reading.
 * *Long Count readings depend on a correlation.* Chiapa de Corzo Stela 2 (36 BCE)
-  and Tres Zapotes Stela C (32 BCE) follow the correlation their sources use.
-  The INAH guide gives Stela C as 32 CE.
+  and Tres Zapotes Stela C (32 BCE) are the years their sources give; neither
+  source names the correlation it uses. The INAH guide gives Stela C as 32 CE.
 
 == Disputes
 
@@ -101,8 +104,8 @@ and authenticity), Serpent Mound (Adena against Fort Ancient) and Tres Zapotes
 Stela C (32 BCE against 32 CE). The chapter notes give each one's sources.
 
 Serpent Mound is an editorial choice the owner should check. The draft takes
-the Adena date as the main claim, which puts the mound inside the chapter; the
-fuller source read (Lepper 2020) favors the Fort Ancient date, after 100 CE.
+the Adena date as the main claim, which puts the mound inside the chapter; Lepper
+(2020) favors the Fort Ancient date, after 100 CE.
 
 == What the format cannot yet say
 
@@ -110,7 +113,7 @@ Writing these records found seven gaps. Each record's notes say how it worked
 around the gap.
 
 [[gap-approximate]]
-=== 1. "About" dates, centuries, and open bounds (notation only)
+=== 1. "About" dates, centuries, and open bounds
 
 Nearly every date in the chapter is approximate: "about 14,500 cal BP", "ca.
 1000 BC", "the first century BCE", "after about 3400 BP". Contract v0 can store
@@ -119,6 +122,11 @@ can be `decade` or `century`, and `bounds` can be `lower_only` or `upper_only`
 (link:CONTRACTS.adoc[CONTRACTS], "Explicit endpoint semantics"). The
 link:AUTHORING_FORMAT.adoc[date notation] cannot write any of them. The draft
 writes exact converted years and says in the notes that they are approximate.
+Open bounds also need the atlas: its projection refuses an open-ended occurrence,
+so a notation for one would not be enough on its own. Serpent Mound shows why it
+matters: Herrmann and colleagues' model dates only its earliest possible
+construction (after 321 BC), and the draft takes its year from a later paper's
+"around 320 BC" instead.
 
 Proposal (decision card 1): extend the notation, with no contract change. For
 example `~1000 BCE` for an approximate endpoint, `1st c. BCE` or `100 BCE..1 BCE

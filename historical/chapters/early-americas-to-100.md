@@ -2,8 +2,9 @@
 
 > **Draft.** This chapter is the manifest
 > [`early-americas-to-100.yaml`](early-americas-to-100.yaml) and the record files it
-> reaches. It has no approval, so it is served only by the dev server and
-> Cloudflare PR previews, under the Draft banner. It was written on 2026-10-21 as
+> reaches. It has no approval, so it is not public: the dev server and Cloudflare
+> PR previews serve it under the Draft banner, and production serves it only to
+> signed-in members of the `lekishi` organization ([RFD 6](../../rfd/0006/README.adoc)). It was written on 2026-10-21 as
 > candidate #31 ("Early Mesoamerica and the Andes, to 100 CE") of
 > [Choosing Lekishi's next chapters](https://claude.ai/artifact/LRQKGU2H9qoKtyYS62t2QV),
 > to give the data and the engine a large, varied set of early records to test
@@ -14,8 +15,9 @@
 
 Thirty events at twenty-five places in North, Central and South America, from the
 White Sands footprints (about 23,000–21,000 years ago) to the Long Count stelae of
-Chiapa de Corzo (36 BCE) and Tres Zapotes (32 BCE). Three spans begin before 100 CE
-and run past it: the Nasca geoglyphs, the Hopewell earthworks and Teotihuacan.
+Chiapa de Corzo (36 BCE) and Tres Zapotes (32 BCE). Four spans begin before 100 CE
+and run past it: the Mirador basin, the Nasca geoglyphs, the Hopewell earthworks
+and Teotihuacan.
 
 The chapter has one story, in chronological order by the start of each event's
 span. The order is not a claim that one event led to another. The only link
@@ -44,7 +46,7 @@ only for tidiness. Ids are global, and none of them existed before this chapter.
 | Places        |    25 | `historical/places/americas/`             |
 | Actors        |     8 | `historical/actors/americas/` (cultures)  |
 | Relationships |     1 | `historical/relationships/americas/`      |
-| Sources       |    25 | `historical/sources/` (plus `wikidata`)   |
+| Sources       |    30 | `historical/sources/` (plus `wikidata`)   |
 
 The actors are archaeological cultures (`types: [culture]`): Olmec, Maya,
 epi-Olmec, Poverty Point, Adena, Hopewell, Fort Ancient and Clovis. Each event
@@ -80,7 +82,8 @@ notes say how it was converted.
   calibrated 1650 BCE that Blomster and Salazar Chávez (2020) give; the Fort
   Ancient charcoal dates for Serpent Mound appear only in its dispute.
 - **Long Count dates** are written as Julian years with the Long Count in
-  `as_written`, following the correlation the source uses.
+  `as_written`, as the source reads them; neither stela's source names the
+  correlation it uses.
 - A span whose ends bound the event is `mode: window`; a span the event filled
   is `mode: duration`.
 
@@ -104,8 +107,13 @@ good single source for dates and context, but it is a secondary summary; each of
 those sites should get its own primary report before release.
 
 Most journal sources were read as abstracts, through Europe PMC, OpenAlex,
-Crossref or RePEc. Only the PLOS ONE articles, the Simposio papers, the Ohio
-Archaeological Council papers, the nomination and the NPS pages were read in full.
+Crossref or RePEc. The PLOS ONE articles, the Simposio papers, the Ohio
+Archaeological Council papers, the nomination, the NPS pages and the UNESCO
+decision were read in full, as were Blomster and Salazar Chávez (2020, through
+PubMed Central) and Herrmann and colleagues (2014, through the authors' upload); Romain and
+colleagues (2017) were read as an abstract;
+the introduction and Table 1 of Splitstoser and colleagues (2016) were read for
+the Huaca Prieta date.
 
 ## Disputes
 
@@ -117,7 +125,9 @@ Four records carry a dispute with a conflicting claim:
   millennium BCE; Ann Cyphers, as reported by Guerrero (2010, p. 1066), questions
   its context and so its authenticity.
 - **Serpent Mound.** Herrmann and colleagues (2014) date its first construction to
-  after about 321 BCE, 381–44 BCE at 95% probability (Adena); Fletcher and colleagues (1996) obtained charcoal
+  about 2,300 years ago (Adena), and Romain and colleagues (2017) give it as
+  around 320 BCE, the record's date; the 2014 model dates only the earliest
+  possible construction (after 321 BCE); Fletcher and colleagues (1996) obtained charcoal
   dates of 920 ± 70 BP (Fort Ancient). Lepper (2020) argues the sediment dates
   are unreliable.
 - **Tres Zapotes Stela C.** Guerrero reads its Long Count as 32 BCE; the INAH site
@@ -127,8 +137,7 @@ Four records carry a dispute with a conflicting claim:
 
 - **Serpent Mound's main claim is an editorial choice.** The draft makes the
   Adena date the main claim and the Fort Ancient date the conflicting one, which
-  places the mound inside the chapter's era. Lepper (2020), the fuller of the two
-  sources read, favors Fort Ancient. If the owner prefers that reading, the event
+  places the mound inside the chapter's era. Lepper (2020) favors Fort Ancient. If the owner prefers that reading, the event
   falls after 100 CE and should leave the chapter, or stay with the dispute
   leading.
 - **Poverty Point Mound A** is a part of the earthworks event (`part_of`), dated

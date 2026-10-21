@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The second ship, under the judge 菅原清公, has reached 明州; its 27 envoys set out for the capital
+  on 9/1 and reach 長安 on 11/15, where they wait for the ambassador.
+types: [journey]
+date:
+  value: 804-09-01
+  calendar: chinese_lunisolar
+  as_written: 第二船判官菅原朝臣清公等廿七人。去九月一日從明州入京。
+  cite:
+    - id: mission-804-mingzhou-time
+      says:
+        葛野麻呂's report dates the second ship's party leaving 明州 for the capital to the first of the ninth
+        month.
+      source: nihon-koki
+      at: 卷第十二 延暦廿四年六月乙巳 藤原葛野麻呂奏
+      quote: 第二船判官菅原朝臣清公等廿七人。去九月一日從明州入京。十一月十五日到長安城。於同宅相待。
+places:
+  - place: mingzhou
+    role: start
+participants:
+  - actor: sugawara-no-kiyokimi
+    role: leader
+  - actor: saicho
+    role: participant
+    note: On the second ship, by tradition; not named in the report.
+notes: The report does not say when the second ship reached 明州.

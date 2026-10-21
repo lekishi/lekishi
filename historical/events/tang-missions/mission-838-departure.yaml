@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  大宰府 reports that the first and fourth ships have sailed; the second follows later that month.
+  圓仁 is aboard the first.
+types: [journey]
+date:
+  value: 838-07
+  calendar: regnal
+  as_written: 承和五年七月庚申
+  cite:
+    - id: mission-838-departure-time
+      says: The chronicle records 大宰府's report on 承和五年七月庚申 and the second ship's on 七月甲申.
+      sources:
+        - source: shoku-nihon-koki
+          at: 卷第七 承和五年七月庚申
+          quote: 庚申。大宰府奏。遣唐使第一四舶進發。
+        - source: shoku-nihon-koki
+          at: 卷第七 承和五年七月甲申
+          quote: 大宰府奏。遣唐第二舶進發。
+places:
+  - place: dazaifu
+    role: context
+    note: The reports come from 大宰府; the harbour is not named.
+participants:
+  - actor: fujiwara-no-tsunetsugu
+    role: leader
+  - actor: ennin
+    role: participant
+    note: His diary tells the voyage from on board.
+notes:
+  The chronicle does not name 圓仁 here; his presence is from his own diary, cited by the ennin- records.
+  This event is the court's view of the departure.

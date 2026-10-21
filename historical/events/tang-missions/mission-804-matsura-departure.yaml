@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The four ships leave 田浦 in 松浦郡 of 肥前. On the next night the third and fourth ships stop answering
+  the fire signals.
+types: [journey]
+date:
+  value: 804-07-06
+  calendar: chinese_lunisolar
+  as_written: 去年七月六日。發從肥前国松浦郡田浦。四船入海。
+  cite:
+    - id: mission-804-departure-time
+      says:
+        葛野麻呂's report dates the sailing from 田浦 to the sixth of the seventh month of the year before
+        (延暦廿三年).
+      source: nihon-koki
+      at: 卷第十二 延暦廿四年六月乙巳 藤原葛野麻呂奏
+      quote: 去年七月六日。發從肥前国松浦郡田浦。四船入海。七日戌剋。第三第四兩船。火信不應。
+places:
+  - place: matsura
+    role: start
+    note: 田浦 in 松浦郡.
+participants:
+  - actor: fujiwara-no-kadonomaro
+    role: leader
+  - actor: kukai
+    role: participant
+    note: On the first ship, by later tradition; the report does not name him.
+notes:
+  空海 sailed on 葛野麻呂's first ship and 最澄 on 菅原清公's second ship by well-attested tradition, but this
+  report names neither, so their participation here is noted, not cited.

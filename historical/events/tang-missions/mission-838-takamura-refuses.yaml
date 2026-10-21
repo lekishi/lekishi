@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The court's inspector reports that the vice-envoy 小野篁 cannot sail, pleading illness. The chronicle
+  later explains: after the first failure 常嗣 had the ships re-ranked and took the sound second ship as
+  his own, and 篁, angry, stayed behind and wrote a song mocking the embassy."
+types: [occurrence]
+date:
+  value: 838-06
+  calendar: regnal
+  as_written: 承和五年六月戊申
+  cite:
+    - id: mission-838-refuses-time
+      says: The chronicle records the report on 承和五年六月戊申.
+      source: shoku-nihon-koki
+      at: 卷第七 承和五年六月戊申
+      quote: 戊申。勘發遣唐使右近衛中將藤原朝臣助奏。副使小野朝臣篁依病不能進發。
+places:
+  - place: dazaifu
+    role: context
+    note: The ships are in 大宰府's waters; the entry names no place.
+participants:
+  - actor: ono-no-takamura
+    role: subject
+  - actor: fujiwara-no-tsunetsugu
+    role: participant
+cites:
+  summary:
+    - id: mission-838-reranking
+      says:
+        The sentence of 承和五年十二月己亥 explains the re-ranking of the ships, 篁's feigned illness and his
+        song 西道謠.
+      source: shoku-nihon-koki
+      at: 卷第七 承和五年十二月己亥
+      quote: 一漂廻後。大使上奏。更復卜定。換其次第。第二舶改爲第一。大使駕之。於是副使篁怨■。陽病而留。遂懷幽憤。作西道謠。以刺遣唐之役也。

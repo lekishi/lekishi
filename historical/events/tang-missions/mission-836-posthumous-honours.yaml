@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Before the 836 embassy sails, the court sends promotions for eight envoys and students who died
+  in 唐 on earlier missions, among them 藤原清河, 阿倍仲麻呂 (朝衡) and 石川道益, the 804 vice-envoy who fell ill and
+  died before he reached the capital.
+types: [occurrence]
+date:
+  value: 836-05
+  calendar: regnal
+  as_written: 承和三年五月戊申
+  cite:
+    - id: mission-836-honours-time
+      says: The chronicle records the posthumous honours on 承和三年五月戊申.
+      source: shoku-nihon-koki
+      at: 卷第五 承和三年五月戊申
+      quote: 戊申。便附聘唐使。贈遣往歳銜本朝命入唐使并留學等。在彼身歿者八人位記。以慰幽魂。
+places:
+  - place: heian-kyo
+    role: site
+    note:
+      The entry names no place. A court act happens at the court, so the record anchors it at the court's
+      seat for display only; it asserts no site for the act.
+participants:
+  - actor: fujiwara-no-kiyokawa
+    role: subject
+  - actor: abe-no-nakamaro
+    role: subject
+  - actor: ishikawa-no-michimasu
+    role: subject
+notes:
+  The patents travel with the 836 embassy to be read for the dead in 唐. 石川道益's death is dated by
+  this patent only to the 804 embassy.
+cites:
+  participants:
+    - id: mission-836-michimasu
+      says:
+        The patent for 石川道益 records that he went to 唐 as envoy, fell ill on the hard road and died before
+        reaching the capital.
+      source: shoku-nihon-koki
+      at: 卷第五 承和三年五月戊申
+      quote: 故入唐使贈從四品下石川朝臣道益可贈從四品上。忘躯徇節。奉使先朝。履義資忠。修聘唐國。路甞艱苦。泊遘沈痾。未達於中京。奄淪於下・。

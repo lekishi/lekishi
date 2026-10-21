@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "A palace commissioner brings the return gifts and the emperor's message: the envoys came far
+  and met a time of state mourning; since they ask to leave early, they may go home and tell their king
+  of it."
+types: [journey]
+date:
+  value: 805-02-10
+  calendar: chinese_lunisolar
+  as_written: 二月十日監使高品宋惟澄。領答信物來。
+  cite:
+    - id: mission-805-leave-time
+      says: 葛野麻呂's report dates the return gifts and leave to the tenth of the second month.
+      source: nihon-koki
+      at: 卷第十二 延暦廿四年六月乙巳 藤原葛野麻呂奏
+      quote: 縁卿等頻奏早歸。因茲賜纒頭物。兼設宴。宜知之。却廻本郷。傳此国喪。
+places:
+  - place: changan
+    role: start
+participants:
+  - actor: fujiwara-no-kadonomaro
+    role: leader
+  - actor: tang-dynasty
+    role: host

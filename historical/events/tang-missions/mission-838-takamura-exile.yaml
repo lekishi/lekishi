@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The court sentences 小野篁 to death for refusing the emperor's mission, commutes it by one degree,
+  and exiles him to 隱岐國; the retired emperor 嵯峨 had read his song and been enraged.
+types: [occurrence]
+date:
+  value: 838-12
+  calendar: regnal
+  as_written: 承和五年十二月己亥
+  cite:
+    - id: mission-838-exile-time
+      says: The chronicle records the sentence on 承和五年十二月己亥.
+      source: shoku-nihon-koki
+      at: 卷第七 承和五年十二月己亥
+      quote: 小野篁。内含綸旨。出使外境。空稱病故。不遂國命。准據律條。可處絞刑。宜降死一等。處之遠流。仍配流隱岐國。
+places:
+  - place: oki
+    role: end
+    note: The place of exile.
+participants:
+  - actor: ono-no-takamura
+    role: subject
+cites:
+  summary:
+    - id: mission-838-saga
+      says: The entry records that 嵯峨太上天皇 read the song, was enraged, and had his crime judged.
+      source: shoku-nihon-koki
+      at: 卷第七 承和五年十二月己亥
+      quote: 其詞牽興多犯忌諱。嵯峨太上天皇覽之。大怒令論其罪。故有此竄謫。

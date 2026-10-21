@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At 明州 the envoys find the first ship, which a secretary had sailed round from 福州 in 56 days.
+  On 5/18 the two ships cast off.
+types: [journey]
+date:
+  value: 805-05-18
+  calendar: chinese_lunisolar
+  as_written: 五月十八日於州下□縣。兩船解纜。
+  cite:
+    - id: mission-805-mingzhou-time
+      says: 葛野麻呂's report dates the sailing from 明州 to the 18th of the fifth month.
+      source: nihon-koki
+      at: 卷第十二 延暦廿四年六月乙巳 藤原葛野麻呂奏
+      quote: 三日到明州郭下。於寺裏安置。五月十八日於州下□縣。兩船解纜。
+places:
+  - place: mingzhou
+    role: start
+    note: The county name is damaged in the transcription (州下□縣).
+participants:
+  - actor: fujiwara-no-kadonomaro
+    role: leader
+cites:
+  summary:
+    - id: mission-805-ship-round
+      says:
+        The report records that the secretary 山田大庭, left to sail the ship round to 明州, set out from
+        福州 on 2/5 and arrived after 56 days.
+      source: nihon-koki
+      at: 卷第十二 延暦廿四年六月乙巳 藤原葛野麻呂奏
+      quote: 留録事山田大庭等。從去二月五日發福州。海行五十六日。此日到來。

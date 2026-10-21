@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The secretary 山代氏益's Silla ship comes in to 博多津, the last of the hired ships recorded.
+types: [journey]
+date:
+  value: 839-10
+  calendar: regnal
+  as_written: 承和六年十月丁巳
+  cite:
+    - id: mission-839-hakata-time
+      says: The chronicle records the arrival on 承和六年十月丁巳.
+      source: shoku-nihon-koki
+      at: 卷第八 承和六年十月丁巳
+      quote: 丁巳。遣唐使録事正六位上山代宿祢氏益所駕新羅船一隻。皈着筑前國博多津。
+places:
+  - place: hakata
+    role: end
+    note: The entry names 筑前國博多津.
+participants:
+  - actor: silla
+    role: other
+    note: A hired Silla ship.

@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The court appoints 藤原朝臣葛野麻呂 as 遣唐大使 and 石川道益 as vice-envoy, with four judges and four secretaries.
+types: [mission]
+date:
+  value: "801"
+  calendar: regnal
+  as_written: 延暦廿年 庚子（逸文）
+  cite:
+    - id: mission-801-appointment-time
+      says:
+        The chronicle records the appointment on 庚子 in the reconstructed volume beginning 延暦廿年七月, without
+        a month of its own in the transcription.
+      source: nihon-koki
+      at: 卷第十逸文 延暦廿年 庚子
+      quote: 庚子。従四位下藤原朝臣葛野麻呂、為遣唐大使。従五位下石川道益為副。判官録事各四人。
+places:
+  - place: heian-kyo
+    role: site
+    note:
+      The entry names no place. A court act happens at the court, so the record anchors it at the court's
+      seat for display only; it asserts no site for the act.
+participants:
+  - actor: fujiwara-no-kadonomaro
+    role: leader
+  - actor: ishikawa-no-michimasu
+    role: participant
+  - actor: japan-state
+    role: host
+notes:
+  The transcription of this reconstructed volume heads only the seventh month, so the event is dated
+  to the year; a critical edition is needed for the month.

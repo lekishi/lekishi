@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  常嗣 brings seven ships in to 生属嶋 in 松浦郡 of 肥前, eight with 宗雄's. To spare the harvest the court
+  has the party come to the capital in stages, the goods by land.
+types: [journey]
+date:
+  value: 839-08
+  calendar: regnal
+  as_written: 承和六年八月甲戌
+  cite:
+    - id: mission-839-matsura-time
+      says: The chronicle records the court's order on 承和六年八月甲戌.
+      source: shoku-nihon-koki
+      at: 卷第八 承和六年八月甲戌
+      quote: 知遣唐大使藤原常嗣朝臣等率七隻船。廻着肥前國松浦郡生属嶋。与先到録事大神宗雄船。總是八艘。
+places:
+  - place: matsura
+    role: end
+    note: 生属嶋 in 松浦郡.
+participants:
+  - actor: fujiwara-no-tsunetsugu
+    role: leader
+  - actor: fujiwara-no-sadatoshi
+    role: participant
+    note: Named among the officers, 准判官藤原貞敏.
+notes: "Two ships were still missing at this report: the second, and one more."

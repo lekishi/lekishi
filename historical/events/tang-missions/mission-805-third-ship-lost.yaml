@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The third ship, sailing again from 庇良嶋 for 遠値嘉嶋, is blown onto a rock. The judge 三棟今嗣 and others
+  save themselves and abandon the ship with its cargo and a few archers; the line parts and it drifts
+  away. The emperor orders them punished.
+types: [occurrence]
+date:
+  value: 805-07
+  calendar: regnal
+  as_written: 延暦廿四年七月癸未
+  cite:
+    - id: mission-805-third-time
+      says: 大宰府's report is recorded on 癸未 in the volume beginning 延暦廿四年七月.
+      source: nihon-koki
+      at: 卷第十三 延暦廿四年七月癸未
+      quote: 遣唐使第三船。今月四日發自肥前国松浦郡庇良嶋。指遠値嘉嶋。忽遭南風。漂著孤嶋。船居巌間。
+places:
+  - place: matsura
+    role: start
+    note: 庇良嶋 in 松浦郡.
+participants:
+  - actor: japan-state
+    role: other
+notes:
+  The third ship had been driven back in 804; this is its second attempt. The 'lone island' is not
+  named.

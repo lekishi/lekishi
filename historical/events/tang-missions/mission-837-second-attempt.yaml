@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The three remaining ships leave 旻樂埼 in 松浦郡 together. Contrary winds drive the first and fourth
+  to 壹伎嶋 and the second to 値賀嶋.
+types: [journey]
+date:
+  value: 837-07
+  calendar: regnal
+  as_written: 承和四年七月癸未
+  cite:
+    - id: mission-837-time
+      says: 大宰府's report is recorded on 承和四年七月癸未.
+      source: shoku-nihon-koki
+      at: 卷第六 承和四年七月癸未
+      quote: 大宰府馳傳言。遣唐三ケ舶。共指松浦郡旻樂埼發行。第一第四舶。忽遇逆風。流着壹伎嶋。第二舶左右方便漂着値賀嶋。
+places:
+  - place: matsura
+    role: start
+    note: 旻樂埼 in 松浦郡.
+  - place: iki
+    role: end
+    note: First and fourth ships.
+  - place: chika
+    role: end
+    note: Second ship.
+participants:
+  - actor: fujiwara-no-tsunetsugu
+    role: leader
+  - actor: ono-no-takamura
+    role: participant
+notes: The ambassador left the capital on 承和四年三月壬午 and 篁 on 三月丁亥 (卷第六).

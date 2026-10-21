@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  高階真人 (高階遠成), an envoy's judge, petitions the Tang court that the student and the monk left in
+  804 have made progress and may go home with him. The emperor agrees.
+types: [mission]
+date:
+  value: "806"
+  calendar: chinese_lunisolar
+  as_written: 元和元年
+  cite:
+    - id: mission-806-request-time
+      says: The 舊唐書 dates the petition to 元和元年.
+      source: jiu-tangshu
+      at: 卷199上 東夷 日本國
+      quote: 元和元年，日本國使判官高階真人上言：「前件學生，藝業稍成，願歸本國，便請與臣同歸。」從之。
+places:
+  - place: changan
+    role: context
+    note: The history names no place; the Tang court sat at 長安.
+participants:
+  - actor: kukai
+    role: subject
+  - actor: tachibana-no-hayanari
+    role: subject
+  - actor: tang-dynasty
+    role: host
+notes:
+  "The 新唐書 tells it differently: the students wanted to stay and had been there 'more than twenty
+  years' (歷二十餘年) when 高階真人 asked for them, though they had arrived in 804. Both are kept."
+dispute:
+  status: disputed
+  summary:
+    The 舊唐書 has 高階真人 report that the students had made progress and ask to take them home; the
+    新唐書 has them wishing to stay and gives more than twenty years before the request.
+cites:
+  notes:
+    - id: mission-806-xin
+      says:
+        The 新唐書 records that the student 橘免勢 and the monk 空海 wished to stay and study, and that after
+        more than twenty years the envoy 高階真人 asked for their return.
+      role: conflicting
+      source: xin-tangshu
+      at: 卷220 東夷 日本
+      quote: 其學子橘免勢、浮屠空海願留肄業，歷二十餘年，使者高階真人來請免勢等俱還，詔可。

@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The envoys reach the 永寧驛 of 越州, where their escort hands over the imperial letter and returns
+  to the capital.
+types: [journey]
+date:
+  value: 805-03-29
+  calendar: chinese_lunisolar
+  as_written: 三月廿九日。到越州永寧驛。
+  cite:
+    - id: mission-805-yuezhou-time
+      says: 葛野麻呂's report dates the arrival at 越州 to the 29th of the third month.
+      source: nihon-koki
+      at: 卷第十二 延暦廿四年六月乙巳 藤原葛野麻呂奏
+      quote: 三月廿九日。到越州永寧驛。越州即觀察府也。
+places:
+  - place: yuezhou
+    role: waypoint
+participants:
+  - actor: fujiwara-no-kadonomaro
+    role: leader

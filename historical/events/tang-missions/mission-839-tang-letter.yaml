@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At the 紫宸殿 the minister presents the Tang emperor's letter, and 常嗣 alone is called up beside
+  the throne, tells of the embassy and its hardships, and is given robes.
+types: [mission]
+date:
+  value: 839-09
+  calendar: regnal
+  as_written: 承和六年九月乙未
+  cite:
+    - id: mission-839-letter-time
+      says: The chronicle records the presentation on 承和六年九月乙未.
+      source: shoku-nihon-koki
+      at: 卷第八 承和六年九月乙未
+      quote: 乙未。天皇御紫宸殿。右大臣從二位兼行皇太子傅藤原朝臣三守奏大唐勅書。獨召大使藤原朝臣常嗣。昇自東階。
+places:
+  - place: heian-kyo
+    role: site
+    note: The entry names the 紫宸殿 of the palace.
+participants:
+  - actor: fujiwara-no-tsunetsugu
+    role: leader
+  - actor: japan-state
+    role: host
+cites:
+  summary:
+    - id: mission-839-letter-report
+      says: The entry records 常嗣 reporting the embassy's business and the hardships of the road.
+      source: shoku-nihon-koki
+      at: 卷第八 承和六年九月乙未
+      quote: 于時使旨及路中艱難。一々以聞。

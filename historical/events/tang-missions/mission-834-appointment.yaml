@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The court appoints 藤原朝臣常嗣 as 持節大使 and 小野朝臣篁 as vice-envoy, with four judges and three secretaries:
+  the last embassy to Tang that sailed."
+types: [mission]
+date:
+  value: 834-01
+  calendar: regnal
+  as_written: 承和元年正月庚午
+  cite:
+    - id: mission-834-appointment-time
+      says: The chronicle records the appointment on 承和元年正月庚午.
+      source: shoku-nihon-koki
+      at: 卷第三 承和元年正月庚午
+      quote: 任遣唐使。以參議從四位上右大弁兼行相摸守藤原朝臣常嗣爲持節大使。從五位下彈正少弼兼行美作介小野朝臣篁爲副使。判官四人。録事三人。
+places:
+  - place: heian-kyo
+    role: site
+    note:
+      The entry names no place. A court act happens at the court, so the record anchors it at the court's
+      seat for display only; it asserts no site for the act.
+participants:
+  - actor: fujiwara-no-tsunetsugu
+    role: leader
+  - actor: ono-no-takamura
+    role: participant
+  - actor: japan-state
+    role: host
+notes: "'The last that sailed' is said of the embassies recorded in this story: the 894 appointment
+  never sailed."

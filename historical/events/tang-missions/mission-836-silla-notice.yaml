@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The 太政官 sends a letter to Silla's 執事省 asking it, if an embassy ship drifts to its shores, to
+  help it on its way. The envoy 紀三津 later reports that Silla doubted the letter and he lost his way in
+  answering.
+types: [exchange]
+date:
+  value: 836-05
+  calendar: regnal
+  as_written: 承和三年閏五月辛巳
+  cite:
+    - id: mission-836-silla-time
+      says: The chronicle records the letter on 承和三年閏五月辛巳.
+      source: shoku-nihon-koki
+      at: 卷第五 承和三年閏五月辛巳
+      quote: 恐遣唐使舶風涛或變漂着新羅境。所以太政官准舊例。牒彼國執事省。
+places:
+  - place: heian-kyo
+    role: site
+    note:
+      The entry names no place. A court act happens at the court, so the record anchors it at the court's
+      seat for display only; it asserts no site for the act.
+participants:
+  - actor: silla
+    role: guest
+  - actor: japan-state
+    role: host
+notes:
+  v0 has no intercalary-month notation, so 閏五月 is normalized to the fifth month and kept in the as-written
+  expression. 三津's report is on 承和三年十二月丁酉.
+cites:
+  summary:
+    - id: mission-836-mitsu-report
+      says:
+        The chronicle records 紀三津 reporting that he misrepresented his mission and that Silla's 執事省
+        questioned the letter.
+      source: shoku-nihon-koki
+      at: 卷第五 承和三年十二月丁酉
+      quote: 遣新羅國使紀三津復命。三津自失使旨。被新羅誣刧皈來。

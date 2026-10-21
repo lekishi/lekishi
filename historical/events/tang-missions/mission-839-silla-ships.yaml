@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Distrusting their own ships, the embassy hires nine Silla ships at 楚州 and sails home along Silla's
+  south coast. The secretary 大神宗雄's ship, the sixth, is the first in.
+types: [journey]
+date:
+  value: 839-08
+  calendar: regnal
+  as_written: 承和六年八月己巳
+  cite:
+    - id: mission-839-silla-time
+      says: The chronicle records 宗雄's report on 承和六年八月己巳.
+      source: shoku-nihon-koki
+      at: 卷第八 承和六年八月己巳
+      quote: 知入唐三箇船嫌本舶之不完。倩駕楚州新羅船九隻。傍新羅南以歸朝。其第六船。宗雄所駕是也。
+places:
+  - place: chuzhou
+    role: start
+    note: The Silla ships are hired at 楚州.
+participants:
+  - actor: fujiwara-no-tsunetsugu
+    role: leader
+  - actor: silla
+    role: other
+    note: The ships are Silla's, hired at 楚州.
+notes:
+  The hire is undated in the entry; the event is dated by the report of the first ship's arrival.
+  圓仁's diary tells the hire from 楚州 in detail.

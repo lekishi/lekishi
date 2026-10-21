@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The first ship reaches 福州. The new governor 閻濟美 reports to the throne and lets 23 of them go
+  on to the capital, 7,520 里 away.
+types: [journey]
+date:
+  value: 804-10-03
+  calendar: chinese_lunisolar
+  as_written: 十月三日到州
+  cite:
+    - id: mission-804-fuzhou-time
+      says: 葛野麻呂's report dates the arrival at 福州 to the third of the tenth month.
+      source: nihon-koki
+      at: 卷第十二 延暦廿四年六月乙巳 藤原葛野麻呂奏
+      quote: 十月三日到州。新除觀察使兼剌史閻濟美處分。且奏。且放廿三人入京。
+places:
+  - place: fuzhou
+    role: site
+participants:
+  - actor: fujiwara-no-kadonomaro
+    role: leader
+  - actor: tang-dynasty
+    role: host

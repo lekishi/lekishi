@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At sunrise Xerxes pours a libation from a golden cup into the Hellespont and prays to the Sun;
+  the army crosses the bridges into Europe over seven days and seven nights without a pause.
+types: [journey]
+part_of: [xerxes-invasion-480]
+date:
+  value: 480 BCE
+  mode: window
+  calendar: julian
+  as_written: his army crossed over in seven days and seven nights
+  cite:
+    - id: hellespont-crossing-480-time
+      says: Grote dates the crossing to the beginning of 480 BCE.
+      source: grote-history-of-greece
+      at: vol. V, ch. XXXIX
+      quote:
+        It was near the time when Xerxes was about to pass the Hellespont, in the beginning of 480
+        B. C.
+      basis: interpretation
+      attributed_to: George Grote
+    - id: hellespont-crossing-480-text
+      says: Herodotus records the crossing lasting seven days and seven nights.
+      source: herodotus
+      at: VII.56
+      quote:
+        When Xerxes had crossed over into Europe, he gazed upon the army crossing under the lash; and
+        his army crossed over in seven days and seven nights, going on continuously without any pause.
+      role: supporting
+places:
+  - place: abydos-hellespont
+    role: start
+  - place: hellespont
+    role: waypoint
+  - place: sestos
+    role: end
+    note: The bridges' European end, on the foreland between Sestos and Madytos.
+participants:
+  - actor: xerxes
+    role: leader
+  - actor: persian-empire
+    role: participant
+cites:
+  summary:
+    - id: hellespont-crossing-480-libation
+      says: Herodotus records the libation and prayer at sunrise.
+      source: herodotus
+      at: VII.54
+      quote:
+        Then, as the Sun was rising, Xerxes made libation from a golden cup into the sea, and prayed
+        to the Sun, that no accident might befall him such as should cause him to cease from subduing Europe,
+        until he had come to its furthest limits.
+  places:
+    - id: hellespont-crossing-480-places
+      says: Herodotus places the European bridgehead between Sestos and Madytos, opposite Abydos.
+      source: herodotus
+      at: VII.33
+      quote:
+        Now there is in the Chersonese of the Hellespont between the city of Sestos and Madytos, a
+        broad foreland running down into the sea right opposite Abydos

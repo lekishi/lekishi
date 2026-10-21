@@ -1,0 +1,66 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Three months after the crossing of the Hellespont, Xerxes reaches Attica in the archonship of
+  Calliades, takes the deserted lower city, storms the Acropolis by the precipitous side near the temple
+  of Aglauros, and burns it.
+types: [occurrence]
+part_of: [xerxes-invasion-480]
+date:
+  value: 480 BCE
+  mode: window
+  calendar: julian
+  as_written: in the year when Calliades was archon of the Athenians
+  cite:
+    - id: athens-capture-480-time
+      says:
+        Herodotus dates the arrival in Attica by the Athenian archon Calliades and three months after
+        the crossing.
+      source: herodotus
+      at: VIII.51
+      quote:
+        So in three months from the crossing of the Hellespont, whence the Barbarians began their march,
+        after having stayed there one month while they crossed over into Europe, they had reached Attica,
+        in the year when Calliades was archon of the Athenians.
+    - id: athens-capture-480-year
+      says:
+        Grote reckons Xerxes' arrival at Athens four months after the departure from Asia, in 480 BCE;
+        the archon year of Calliades is 480–479 BCE in the conventional list.
+      source: grote-history-of-greece
+      at: vol. V, ch. XLI
+      quote:
+        Four months had elapsed since the departure from Asia when Xerxes reached Athens, the last
+        term of his advance.
+      basis: interpretation
+      attributed_to: George Grote
+      role: supporting
+places:
+  - place: athens
+    role: site
+participants:
+  - actor: xerxes
+    role: leader
+  - actor: persian-empire
+    role: participant
+  - actor: athens-state
+    role: participant
+    note: The few Athenians left on the Acropolis.
+notes:
+  The archon Calliades is the one absolute synchronism Herodotus gives for the invasion. Herodotus
+  counts three months from the crossing, Grote four from the departure from Asia; the two are not merged.
+cites:
+  summary:
+    - id: athens-capture-480-acropolis
+      says: Herodotus records the ascent to the Acropolis by the temple of Aglauros.
+      source: herodotus
+      at: VIII.53
+      quote:
+        here men ascended by the temple of Aglauros the daughter of Kecrops, although indeed the place
+        is precipitous
+    - id: athens-capture-480-report
+      says: Herodotus records Xerxes sending news of the capture to Susa.
+      source: herodotus
+      at: VIII.54
+      quote:
+        Then Xerxes, having fully taken possession of Athens, sent to Susa a mounted messenger to report
+        to Artabanos the good success which they had.
+      role: supporting

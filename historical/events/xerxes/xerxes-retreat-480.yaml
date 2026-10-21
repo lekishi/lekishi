@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  A few days after Salamis Xerxes marches back through Boeotia to Thessaly, leaves Mardonios there
+  with a picked army, and goes on in haste to the Hellespont; finding the bridges broken by a storm, the
+  army crosses to Abydos by ship and the rest go on with him to Sardis.
+types: [journey]
+part_of: [xerxes-invasion-480]
+date:
+  value: 480 BCE
+  mode: window
+  calendar: julian
+  as_written: Xerxes meanwhile with his army stayed for a few days after the sea-fight
+  cite:
+    - id: xerxes-retreat-480-time
+      says: Grote dates Xerxes' recrossing of the strait to about November 480 BCE.
+      source: grote-history-of-greece
+      at: vol. V, ch. XLII
+      quote:
+        though it had been broken and useless at the time when Xerxes crossed the strait in his retreat,
+        ten months before, about November, 480 B. C.
+      basis: interpretation
+      attributed_to: George Grote
+    - id: xerxes-retreat-480-text
+      says: Herodotus records the march back a few days after the battle.
+      source: herodotus
+      at: VIII.113
+      quote:
+        Xerxes meanwhile with his army stayed for a few days after the sea-fight, and then they all
+        began to march forth towards Boeotia by the same way by which they had come
+      role: supporting
+places:
+  - place: athens
+    role: start
+  - place: abydos-hellespont
+    role: waypoint
+  - place: sardis
+    role: end
+participants:
+  - actor: xerxes
+    role: leader
+  - actor: mardonius
+    role: participant
+    note: Escorted the king to Thessaly and stayed there.
+  - actor: artabazus
+    role: participant
+    note: Escorted the king to the passage.
+notes:
+  Herodotus gives the length of the march from Thessaly to the passage in days (VIII.115). The Gutenberg
+  text of Macaulay reads five-and-thirty days, where the Greek reads forty-five; the figure is not published
+  until the printed edition is checked.
+cites:
+  places:
+    - id: xerxes-retreat-480-crossing
+      says: Herodotus records the crossing to Abydos by ship.
+      source: herodotus
+      at: VIII.117
+      quote:
+        they crossed over the Hellespont in haste to Abydos by means of the ships, for they did not
+        find the floating-bridges still stretched across but broken up by a storm
+    - id: xerxes-retreat-480-sardis
+      says: Herodotus records the arrival at Sardis.
+      source: herodotus
+      at: VIII.117
+      quote: The rest arrived with Xerxes at Sardis.
+      role: supporting

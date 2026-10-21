@@ -1,0 +1,83 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  After days facing each other across the Asopos, the Greek army under Pausanias is attacked during
+  a night withdrawal; the Spartans and Tegeans defeat the Persian infantry, Mardonios is killed, and the
+  Persian stockade is stormed with the Athenians' help.
+types: [occurrence]
+date:
+  value: 479 BCE
+  mode: window
+  calendar: julian
+  as_written: on the same day on which the defeat took place at Plataia
+  cite:
+    - id: plataea-479-time
+      says:
+        Grote dates Mycale, and Plataea that same morning, to the fourth of Boedromion, about September
+        479 BCE.
+      source: grote-history-of-greece
+      at: vol. V, ch. XLII
+      quote:
+        the fourth of the month Boëdromion (about September) 479 B. C. By a remarkable coincidence,
+        the victory of Platæa in Bœotia had been gained by Pausanias that very morning.
+      basis: interpretation
+      attributed_to: George Grote
+    - id: plataea-479-text
+      says: Herodotus places Plataea in the morning of the day of Mycale.
+      source: herodotus
+      at: IX.101
+      quote:
+        for that which was done at Plataia came about while it was yet early morning, but the fighting
+        at Mycale took place in the afternoon
+      role: supporting
+places:
+  - place: plataea
+    role: site
+  - place: thebes-boeotia
+    role: context
+    note: Mardonios's base and the refuge of part of his army.
+participants:
+  - actor: pausanias-regent
+    role: leader
+  - actor: mardonius
+    role: leader
+  - actor: artabazus
+    role: participant
+  - actor: hellenic-alliance
+    role: participant
+  - actor: sparta-state
+    role: participant
+  - actor: athens-state
+    role: participant
+  - actor: thebes-state
+    role: participant
+    note: Fought on the Persian side.
+  - actor: persian-empire
+    role: participant
+notes:
+  The Attic month Boedromion is Grote's reading of Plutarch and corresponds only roughly to September;
+  the record keeps the year.
+cites:
+  summary:
+    - id: plataea-479-mardonius
+      says: Herodotus records the death of Mardonios and the Persian rout.
+      source: herodotus
+      at: IX.63
+      quote:
+        but when Mardonios was slain and the men who were ranged about his person, which was the strongest
+        portion of the whole army, had fallen, then the others too turned and gave way before the Lacedemonians
+    - id: plataea-479-victory
+      says: Herodotus credits the victory to Pausanias.
+      source: herodotus
+      at: IX.64
+      quote:
+        and the most famous victory of all those about which we have knowledge was gained by Pausanias
+        the son of Cleombrotos
+      role: supporting
+  places:
+    - id: plataea-479-place
+      says: Herodotus records the Greeks moving to the region of Plataea.
+      source: herodotus
+      at: IX.25
+      quote:
+        After this they resolved to come down further towards Plataia; for the region of Plataia was
+        seen to be much more convenient for them to encamp in than that of Erythrai

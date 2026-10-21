@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Returning from escorting Xerxes, Artabazos takes Olynthos and gives it to the Chalcidians, then
+  besieges Potidaea for three months; an attempt to cross the shallows at an ebb tide ends when a flood
+  tide drowns many of his men, and he leads the rest to Mardonios in Thessaly.
+types: [occurrence]
+date:
+  value: 480 BCE..479 BCE
+  mode: window
+  calendar: julian
+  as_written: when three months had gone by while Artabazos was besieging the town
+  cite:
+    - id: potidaea-siege-480-time
+      says:
+        Grote dates Artabazos's escort of Xerxes, after which the siege began, from the beginning of
+        September 480 BCE; three months of siege run into the winter of 480–479 BCE.
+      source: grote-history-of-greece
+      at: vol. V, ch. XLI
+      quote:
+        But as it was now the beginning of September, and as sixty thousand out of his forces, under
+        Artabazus, were destined to escort Xerxes himself to the Hellespont, Mardonius proposed to Winter
+        in Thessaly
+      basis: interpretation
+      attributed_to: George Grote
+    - id: potidaea-siege-480-text
+      says: Herodotus gives the siege three months.
+      source: herodotus
+      at: VIII.129
+      quote:
+        and when three months had gone by while Artabazos was besieging the town, there came to be
+        a great ebb of the sea backwards, which lasted for a long time
+      role: supporting
+places:
+  - place: potidaea
+    role: site
+  - place: olynthus
+    role: site
+participants:
+  - actor: artabazus
+    role: leader
+  - actor: persian-empire
+    role: participant
+notes:
+  Herodotus reports the Potidaeans' explanation of the flood, that the drowned men had profaned a
+  statue of Poseidon (VIII.129), as theirs.
+cites:
+  places:
+    - id: potidaea-siege-480-olynthus
+      says: Herodotus records the sieges of Potidaea and Olynthos.
+      source: herodotus
+      at: VIII.127
+      quote:
+        So upon this Artabazos began to besiege Potidaia, and suspecting that the men of Olynthos also
+        were intending revolt from the king, he began to besiege this city too

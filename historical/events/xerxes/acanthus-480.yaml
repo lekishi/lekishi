@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The army reaches Acanthos at the neck of Athos. Xerxes orders the fleet to sail on through the
+  canal and wait at Therma while he takes the land army inland by the shortest way.
+types: [occurrence]
+part_of: [xerxes-invasion-480]
+date:
+  value: 480 BCE
+  mode: window
+  calendar: julian
+  as_written: and so came to Acanthos
+  cite:
+    - id: acanthus-480-time
+      says:
+        Grote dates the crossing, after which the army marched west through Thrace, to the beginning
+        of 480 BCE.
+      source: grote-history-of-greece
+      at: vol. V, ch. XXXIX
+      quote:
+        It was near the time when Xerxes was about to pass the Hellespont, in the beginning of 480
+        B. C.
+      basis: interpretation
+      attributed_to: George Grote
+    - id: acanthus-480-text
+      says: Herodotus records the army coming to Acanthos.
+      source: herodotus
+      at: VII.115
+      quote: passing by Stageiros a Hellenic city, and so came to Acanthos
+      role: supporting
+places:
+  - place: acanthus
+    role: site
+participants:
+  - actor: xerxes
+    role: leader
+cites:
+  summary:
+    - id: acanthus-480-orders
+      says: Herodotus records the fleet and army parting at Acanthos.
+      source: herodotus
+      at: VII.121
+      quote:
+        from Acanthos Xerxes, after having commanded the generals to wait for the fleet at Therma,
+        let the ships take their course apart from himself

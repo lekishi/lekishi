@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  From Sardis Xerxes sends heralds to the Hellenic states to demand earth and water, the tokens
+  of submission, except to Athens and Sparta.
+types: [mission]
+date:
+  value: 481 BCE
+  mode: window
+  calendar: julian
+  as_written: Having come to Sardis he proceeded first to send heralds to Hellas
+  cite:
+    - id: xerxes-heralds-481-time
+      says: Grote dates the heralds' dispatch from Sardis to the autumn of 481 BCE.
+      source: grote-history-of-greece
+      at: vol. V, ch. XXXIX
+      quote:
+        Accordingly, when the first heralds despatched by Xerxes from Sardis in the autumn of 481 B.
+        C., a little before his march to the Hellespont, addressed themselves to the different cities with
+        demand of earth and water, many were disposed to comply.
+      basis: interpretation
+      attributed_to: George Grote
+    - id: xerxes-heralds-481-text
+      says: Herodotus records Xerxes sending heralds from Sardis to every state but Athens and Lacedemon.
+      source: herodotus
+      at: VII.32
+      quote:
+        Having come to Sardis he proceeded first to send heralds to Hellas, to ask for earth and water,
+        and also to give notice beforehand to prepare meals for the king; except that he sent neither to
+        Athens nor Lacedemon to ask for earth, but to all the other States
+      role: supporting
+places:
+  - place: sardis
+    role: start
+    note:
+      Where the heralds were sent from; the states they went to are many and are not separate places
+      here.
+participants:
+  - actor: xerxes
+    role: leader
+cites:
+  places:
+    - id: xerxes-heralds-481-place
+      says: Herodotus records the heralds being sent from Sardis.
+      source: herodotus
+      at: VII.32
+      quote: Having come to Sardis he proceeded first to send heralds to Hellas

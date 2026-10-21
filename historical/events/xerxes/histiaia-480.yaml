@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Told by a man of Histiaia that the Greeks have gone, Xerxes' fleet sails to Artemision, then
+  takes Histiaia and overruns the coast villages of Hellopia.
+types: [occurrence]
+part_of: [xerxes-invasion-480]
+date:
+  value: 480 BCE
+  mode: window
+  calendar: julian
+  as_written: they sailed to Histaia, and there arrived they took possession of the city
+  cite:
+    - id: histiaia-480-time
+      says:
+        Grote dates the fighting at Artemisium, which this followed, to about the latter part of June
+        480 BCE.
+      source: grote-history-of-greece
+      at: vol. V, ch. XL
+      quote:
+        the land-force under the Spartan king Leonidas, the naval force under the Spartan commander
+        Eurybiadês, apparently about the latter part of the month of June.
+      basis: interpretation
+      attributed_to: George Grote
+    - id: histiaia-480-text
+      says: Herodotus records the fleet taking Histiaia.
+      source: herodotus
+      at: VIII.23
+      quote: after this they sailed to Histaia, and there arrived they took possession of the city of Histaia
+      role: supporting
+places:
+  - place: histiaia
+    role: site
+  - place: artemisium
+    role: waypoint
+participants:
+  - actor: persian-empire
+    role: participant
+notes:
+  The edition spells the city Histaia in this chapter and Histiaia elsewhere (VII.175, VIII.66);
+  both are kept as written.
+cites:
+  places:
+    - id: histiaia-480-places
+      says: Herodotus records the fleet sailing to Artemision before Histiaia.
+      source: herodotus
+      at: VIII.23
+      quote: the whole armament sailed in a body to Artemision; and having stayed at this place till mid-day

@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Phoenicians and Egyptians bridge the Hellespont from Abydos to the foreland between Sestos and
+  Madytos; a storm breaks the first bridges, Xerxes has the strait scourged and the overseers beheaded,
+  and new bridges are built on ships.
+types: [process]
+date:
+  value: 481 BCE
+  mode: window
+  calendar: julian
+  as_written: meanwhile they were bridging over the Hellespont from Asia to Europe
+  cite:
+    - id: hellespont-bridges-481-time
+      says: Grote dates the report that the bridges were ready to the beginning of winter 481–480 BCE.
+      source: grote-history-of-greece
+      at: vol. V, ch. XXXVIII
+      quote:
+        were both announced to Xerxes as completed and ready for passage, on his arrival at Sardis
+        at the beginning of winter, 481-480 B. C.
+      basis: interpretation
+      attributed_to: George Grote
+    - id: hellespont-bridges-481-text
+      says: Herodotus places the bridging while Xerxes was at Sardis preparing the march.
+      source: herodotus
+      at: VII.33
+      quote:
+        "After this he made his preparations intending to march to Abydos: and meanwhile they were
+        bridging over the Hellespont from Asia to Europe."
+      role: supporting
+places:
+  - place: hellespont
+    role: site
+  - place: abydos-hellespont
+    role: start
+  - place: sestos
+    role: end
+    note: The bridges reached the foreland between Sestos and Madytos.
+participants:
+  - actor: xerxes
+    role: leader
+notes:
+  The scourging and the branding of the strait are reported by Herodotus, who says of the branders
+  only that he has heard it; they are told as his report, not as fact.
+cites:
+  summary:
+    - id: hellespont-bridges-481-storm
+      says: Herodotus records the storm breaking the first bridges and Xerxes ordering the strait scourged.
+      source: herodotus
+      at: VII.34
+      quote:
+        But when the strait had been bridged over, a great storm came on and dashed together all the
+        work that had been made and broke it up. Then when Xerxes heard it he was exceedingly enraged, and
+        bade them scourge the Hellespont with three hundred strokes of the lash
+  places:
+    - id: hellespont-bridges-481-places
+      says: Herodotus records the bridges running from Abydos to the foreland.
+      source: herodotus
+      at: VII.34
+      quote:
+        To this foreland they on whom this work was laid were making their bridges, starting from Abydos,
+        the Phenicians constructing the one with ropes of white flax, and the Egyptians the other, which
+        was made with papyrus rope.

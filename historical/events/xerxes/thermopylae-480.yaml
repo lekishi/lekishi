@@ -1,0 +1,71 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Leonidas holds the pass of Thermopylae against Xerxes for two days; on the third, Epialtes leads
+  Hydarnes's troops by the mountain path around the pass, Leonidas sends most of the allies away, and
+  he and those who stay are killed.
+types: [occurrence]
+date:
+  value: 480 BCE
+  mode: window
+  calendar: julian
+  as_written: these battles at sea and the battles on land at Thermopylai took place on the same days
+  cite:
+    - id: thermopylae-480-time
+      says:
+        Grote dates the occupation of the pass to about the latter part of June 480 BCE; the battle
+        followed after Xerxes waited four days (VII.210).
+      source: grote-history-of-greece
+      at: vol. V, ch. XL
+      quote:
+        the land-force under the Spartan king Leonidas, the naval force under the Spartan commander
+        Eurybiadês, apparently about the latter part of the month of June.
+      basis: interpretation
+      attributed_to: George Grote
+    - id: thermopylae-480-text
+      says: Herodotus synchronizes the fighting at Thermopylae with the sea fights at Artemision.
+      source: herodotus
+      at: VIII.15
+      quote:
+        Now it so happened that these battles at sea and the battles on land at Thermopylai took place
+        on the same days
+      role: supporting
+places:
+  - place: thermopylae
+    role: site
+participants:
+  - actor: leonidas
+    role: leader
+  - actor: xerxes
+    role: leader
+  - actor: hellenic-alliance
+    role: participant
+  - actor: persian-empire
+    role: participant
+notes: "Herodotus gives two accounts of the allies' departure (VII.219–220): that they left of their
+  own accord, or that Leonidas sent them away; he prefers the second. The record keeps his preference
+  as his. His figures for the armies are not published as numbers."
+cites:
+  summary:
+    - id: thermopylae-480-path
+      says: Herodotus records Epialtes telling Xerxes of the mountain path.
+      source: herodotus
+      at: VII.213
+      quote:
+        and this man told him of the path which leads over the mountain to Thermopylai, and brought
+        about the destruction of those Hellenes who remained in that place
+    - id: thermopylae-480-death
+      says: Herodotus records the death of Leonidas.
+      source: herodotus
+      at: VII.224
+      quote:
+        and in this fighting fell Leonidas, having proved himself a very good man, and others also
+        of the Spartans with him
+      role: supporting
+  places:
+    - id: thermopylae-480-place
+      says: Herodotus places the Greeks within the pass and Xerxes at Trachis.
+      source: herodotus
+      at: VII.201
+      quote:
+        King Xerxes, I say, was encamped within the region of Trachis in the land of the Malians, and
+        the Hellenes within the pass.

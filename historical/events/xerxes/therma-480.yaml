@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Xerxes encamps the army along the coast from Therma to the Haliacmon while the fleet waits about
+  the Axios; a third of the army cuts a road over the Macedonian mountains, and the heralds return with
+  earth and water from some states.
+types: [occurrence]
+part_of: [xerxes-invasion-480]
+date:
+  value: 480 BCE
+  mode: window
+  calendar: julian
+  as_written: When Xerxes had reached Therma he established the army there
+  cite:
+    - id: therma-480-time
+      says:
+        Grote ties the Greek occupation of Thermopylae and Artemisium, which he puts about the latter
+        part of June 480 BCE, to the news that Xerxes had reached the Thermaic gulf.
+      source: grote-history-of-greece
+      at: vol. V, ch. XL
+      quote:
+        their troops and their fleet did not actually occupy these positions until Xerxes was known
+        to have reached the Thermaic gulf.
+      basis: interpretation
+      attributed_to: George Grote
+    - id: therma-480-text
+      says: Herodotus records the army encamping at Therma.
+      source: herodotus
+      at: VII.127
+      quote: When Xerxes had reached Therma he established the army there
+      role: supporting
+places:
+  - place: therma
+    role: site
+participants:
+  - actor: xerxes
+    role: leader
+  - actor: persian-empire
+    role: participant
+cites:
+  summary:
+    - id: therma-480-heralds
+      says: Herodotus records the road-building and the heralds' return.
+      source: herodotus
+      at: VII.131
+      quote:
+        "for the road over the mountains of Macedonia was being cut meanwhile by a third part of his
+        army, that all the host might pass over by this way into the land of the Perraibians: and now the
+        heralds returned who had been sent to Hellas to demand the gift of earth, some empty-handed and
+        others bearing earth and water"

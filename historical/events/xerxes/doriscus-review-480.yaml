@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  On the beach and plain of Doriscos at the mouth of the Hebros, Xerxes numbers the land army and
+  has the fleet drawn up on the shore; he then drives through the army by nations and sails along the
+  prows of the ships.
+types: [occurrence]
+part_of: [xerxes-invasion-480]
+date:
+  value: 480 BCE
+  mode: window
+  calendar: julian
+  as_written:
+    It seemed then to Xerxes that the place was convenient to order his army and to number it
+    throughout
+  cite:
+    - id: doriscus-review-480-time
+      says: Grote dates the crossing, after which the army reached Doriscos, to the beginning of 480 BCE.
+      source: grote-history-of-greece
+      at: vol. V, ch. XXXIX
+      quote:
+        It was near the time when Xerxes was about to pass the Hellespont, in the beginning of 480
+        B. C.
+      basis: interpretation
+      attributed_to: George Grote
+    - id: doriscus-review-480-text
+      says: Herodotus records the numbering at Doriscos.
+      source: herodotus
+      at: VII.59
+      quote:
+        It seemed then to Xerxes that the place was convenient to order his army and to number it throughout,
+        and so he proceeded to do.
+      role: supporting
+places:
+  - place: doriscus
+    role: site
+participants:
+  - actor: xerxes
+    role: leader
+  - actor: persian-empire
+    role: participant
+notes:
+  Herodotus's count of the army at Doriscos (VII.60) and his totals are his figures and are not published
+  as numbers; modern scholarship regards them as greatly exaggerated, which the chapter notes record without
+  a cited figure of its own.
+cites:
+  summary:
+    - id: doriscus-review-480-inspection
+      says: Herodotus records Xerxes inspecting the fleet from a Sidonian ship.
+      source: herodotus
+      at: VII.100
+      quote:
+        When he had done this, the ships were drawn down into the sea, and Xerxes changing from his
+        chariot to a ship of Sidon sat down under a golden canopy and sailed along by the prows of the ships

@@ -1,0 +1,66 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  On the afternoon of the day of Plataea, the Greek fleet under Leotychides, having sailed from
+  Delos to Samos, lands at Mycale; the Athenians and their wing break the Persian line, the Ionians turn
+  against the Persians, and the Greeks burn the beached ships and the stockade.
+types: [occurrence]
+date:
+  value: 479 BCE
+  mode: window
+  calendar: julian
+  as_written: on the same day on which the defeat took place at Plataia, another took place also
+  cite:
+    - id: mycale-479-time
+      says: Grote dates Mycale to the afternoon of the fourth of Boedromion, about September 479 BCE.
+      source: grote-history-of-greece
+      at: vol. V, ch. XLII
+      quote:
+        But it was the afternoon of an ever-memorable day,—the fourth of the month Boëdromion (about
+        September) 479 B. C.
+      basis: interpretation
+      attributed_to: George Grote
+    - id: mycale-479-text
+      says: Herodotus places Mycale on the day of Plataea.
+      source: herodotus
+      at: IX.90
+      quote:
+        Now on the same day on which the defeat took place at Plataia, another took place also, as
+        fortune would have it, at Mycale in Ionia.
+      role: supporting
+places:
+  - place: mycale
+    role: site
+  - place: delos
+    role: start
+    note: The fleet's station before it sailed.
+  - place: samos
+    role: waypoint
+participants:
+  - actor: leotychides
+    role: leader
+  - actor: xanthippus
+    role: participant
+  - actor: hellenic-alliance
+    role: participant
+  - actor: persian-empire
+    role: participant
+notes:
+  Herodotus tells of a rumour of the victory at Plataea reaching the army as it advanced, and a herald's
+  staff found on the beach (IX.100); they stay his report.
+cites:
+  summary:
+    - id: mycale-479-burning
+      says: Herodotus records the Greeks burning the ships and the wall.
+      source: herodotus
+      at: IX.106
+      quote:
+        they set fire to the ships and to the whole of the wall, having first brought out the spoil
+        to the sea-shore
+  places:
+    - id: mycale-479-places
+      says: Herodotus records the fleet sailing from Delos to Samos.
+      source: herodotus
+      at: IX.96
+      quote:
+        they put their ships to sea from Delos to go to Samos; and having arrived off Calamisa in Samos,
+        they moored their ships there

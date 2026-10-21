@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  After wintering at Sardis, the army sets out at the beginning of spring for Abydos. As it starts,
+  the sun is darkened in a clear sky, and the Magians read it as an omen against the Hellenes.
+types: [journey]
+part_of: [xerxes-invasion-480]
+date:
+  value: 480 BCE
+  mode: window
+  calendar: julian
+  as_written:
+    after they had passed the winter at Sardis, the army set forth from thence fully equipped,
+    at the beginning of spring
+  cite:
+    - id: sardis-departure-480-time
+      says: Grote dates the start of the march from Sardis to the beginning of spring 480 BCE.
+      source: grote-history-of-greece
+      at: vol. V, ch. XXXVIII
+      quote:
+        but the whole was united at Sardis and ready to march against Greece, at the beginning of spring,
+        480 B. C.
+      basis: interpretation
+      attributed_to: George Grote
+    - id: sardis-departure-480-text
+      says: Herodotus records the army leaving Sardis at the beginning of spring.
+      source: herodotus
+      at: VII.37
+      quote:
+        then, after they had passed the winter at Sardis, the army set forth from thence fully equipped,
+        at the beginning of spring, to march to Abydos
+      role: supporting
+places:
+  - place: sardis
+    role: start
+  - place: abydos-hellespont
+    role: context
+    note: The march's destination, reached in a separate event.
+participants:
+  - actor: xerxes
+    role: leader
+  - actor: persian-empire
+    role: participant
+notes:
+  No solar eclipse visible at Sardis fits the spring of 480 BCE; Herodotus's darkening is kept as
+  his report and is not used to date the departure. That astronomical check is outside the cited sources
+  and is recorded in the chapter notes, not as a claim.
+cites:
+  summary:
+    - id: sardis-departure-480-omen
+      says: Herodotus records the sun disappearing as the army set out.
+      source: herodotus
+      at: VII.37
+      quote:
+        and when it had just set forth, the Sun left his place in the heaven and was invisible, though
+        there was no gathering of clouds and the sky was perfectly clear; and instead of day it became night

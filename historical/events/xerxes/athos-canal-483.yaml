@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Over about three years, gangs drawn from every nation of the army dig a ship canal across the
+  isthmus of Athos, so that the fleet need not round the cape where Mardonios's fleet had been wrecked.
+types: [process]
+date:
+  value: 483 BCE..480 BCE
+  mode: duration
+  calendar: julian
+  as_written: preparations had been going on for about three years past with regard to Athos
+  cite:
+    - id: athos-canal-483-time
+      says:
+        The span is an editorial reckoning on Grote's chronology. Grote dates the march across the
+        Hellespont to the beginning of 480 BCE and the report that the canal was ready to the winter
+        of 481–480 BCE, but gives no year for the start of the works; counting Herodotus's "about
+        three years" back from the march gives about 483 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on George Grote's chronology
+      sources:
+        - source: grote-history-of-greece
+          at: vol. V, ch. XXXVIII
+          quote: were both announced to Xerxes as completed and ready for passage, on his arrival at
+            Sardis at the beginning of winter, 481-480 B. C.
+        - source: grote-history-of-greece
+          at: vol. V, ch. XXXIX
+          quote:
+            It was near the time when Xerxes was about to pass the Hellespont, in the beginning of 480
+            B. C.
+    - id: athos-canal-483-duration
+      says:
+        Herodotus says the Athos works had been going on for about three years before the march; he
+        gives a duration, not a year.
+      source: herodotus
+      at: VII.22
+      quote:
+        since the former fleet had suffered disaster in sailing round Athos, preparations had been
+        going on for about three years past with regard to Athos
+      role: supporting
+places:
+  - place: xerxes-canal
+    role: site
+  - place: elaius
+    role: context
+    note: The triremes that served the works lay at Elaius.
+participants:
+  - actor: persian-empire
+    role: participant
+notes: "The duration is approximate on both ends: 'about three years' is Herodotus's, and the end is
+  the report of completion before the spring of 480 BCE. It must not be read as exact years."
+cites:
+  places:
+    - id: athos-canal-483-places
+      says: Herodotus records the diggers working from Elaius at Athos.
+      source: herodotus
+      at: VII.22
+      quote:
+        for triremes lay at anchor at Elaius in the Chersonese, and with this for their starting point
+        men of all nations belonging to the army worked at digging, compelled by the lash

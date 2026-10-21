@@ -1,0 +1,83 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Xerxes' invasion of Hellas, from the army's departure from Sardis in the spring of 480 BCE to
+  the Athenians' return from Sestos in the autumn of 479 BCE. The stages, battles and sieges are separate
+  events; this event carries the span and asserts no continuous route.
+types: [campaign]
+date:
+  value: 480 BCE..479 BCE
+  mode: duration
+  calendar: julian
+  as_written:
+    at the beginning of spring, to march to Abydos — and for that year nothing happened further
+    than this
+  cite:
+    - id: xerxes-invasion-480-span
+      says:
+        Grote dates the start of the march from Sardis to the beginning of spring 480 BCE, and the Greek
+        fleet's arrival at the Hellespont, before the siege of Sestos, to September 479 BCE.
+      basis: interpretation
+      attributed_to: George Grote
+      sources:
+        - source: grote-history-of-greece
+          at: vol. V, ch. XXXVIII
+          quote:
+            but the whole was united at Sardis and ready to march against Greece, at the beginning of
+            spring, 480 B. C.
+        - source: grote-history-of-greece
+          at: vol. V, ch. XLII
+          quote:
+            for so imperfect was their information, that they believed this bridge to be still firm and
+            in passable condition in September, 479 B. C.
+    - id: xerxes-invasion-480-text
+      says: Herodotus records the army leaving Sardis at the beginning of spring.
+      source: herodotus
+      at: VII.37
+      quote:
+        then, after they had passed the winter at Sardis, the army set forth from thence fully equipped,
+        at the beginning of spring, to march to Abydos
+      role: supporting
+    - id: xerxes-invasion-480-close
+      says: Herodotus closes the war's narrative with the Athenians sailing home from Sestos.
+      source: herodotus
+      at: IX.121
+      quote:
+        "Having so done, they sailed away to Hellas, taking with them, besides other things, the ropes
+        also of the bridges, in order to dedicate them as offerings in the temples: and for that year nothing
+        happened further than this."
+      role: supporting
+places:
+  - place: sardis
+    role: start
+  - place: hellespont
+    role: waypoint
+  - place: athens
+    role: site
+  - place: plataea
+    role: site
+  - place: mycale
+    role: site
+  - place: sestos
+    role: end
+participants:
+  - actor: xerxes
+    role: leader
+  - actor: persian-empire
+    role: participant
+  - actor: hellenic-alliance
+    role: participant
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: No route geometry is asserted. The campaign is drawn only through its dated, placed child events.
+    cite:
+      - id: xerxes-invasion-480-no-route
+        says:
+          The chapter asserts no route geometry for the campaign as a whole; Herodotus's stages are separate
+          events.
+        source: herodotus
+        at: VII.37
+        quote: the army set forth from thence fully equipped, at the beginning of spring, to march to Abydos
+notes:
+  The end is the close of Herodotus's narrative, not a treaty; the war between the Hellenes and Persia
+  went on for decades. The span's end in the autumn of 479 BCE is Grote's reckoning.

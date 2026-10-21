@@ -1,24 +1,30 @@
 # yaml-language-server: $schema=../../schema/event.schema.json
 summary:
-  Cotton fabrics about 6,000 years old from the Preceramic site of Huaca Prieta on the north coast
+  Cotton fabrics about 6,200 to 6,000 years old from the Preceramic site of Huaca Prieta on the north coast
   of Peru carry indigo, the earliest known use of the dye anywhere.
 types:
   - occurrence
 date:
-  value: 3985 BCE
+  value: 4251 BCE..4051 BCE
+  mode: window
   calendar: julian
-  as_written: 6000-year-old cotton fabrics
+  as_written: about 6200 to 6000 years old (stratum 44, between levels dated in cal BP)
   cite:
     - id: huaca-prieta-time
-      says: Splitstoser and colleagues describe the dyed fabrics as 6,000 years old.
+      says:
+        Splitstoser and colleagues date the earliest indigo-dyed fabrics, from stratum 44, to about 6200
+        to 6000 years old, between radiocarbon-dated levels whose ages they give in calibrated years
+        before present, and list the earliest analysed specimen as about 6200 cal BP.
       basis: interpretation
       attributed_to: Splitstoser et al. 2016
       source: splitstoser-2016-indigo
-      at: abstract
+      at: Introduction and Table 1
 places:
   - place: huaca-prieta
     role: site
 notes:
-  The date is approximate and written as a single year because the record notation cannot yet mark
-  a date as approximate. The source gives the age in years before its own publication (2016); the date
-  converts it to civil years without a year zero and keeps the source's own expression in as_written.
+  The abstract rounds the age to 6,000 years; the introduction brackets the stratum between levels
+  dated in calibrated years before present (6882–6657 cal BP below, 5848–5585 cal BP above), so the
+  ages are counted from 1950. The date converts 6200–6000 cal BP to civil years without a year zero
+  (N BP is N − 1949 BCE) and keeps the source's own expression in as_written. The ends are the
+  source's approximate bracket, not the stratum's measured limits.

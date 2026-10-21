@@ -6,15 +6,24 @@ summary:
 types:
   - process
 date:
-  value: 23..423
+  value: 1..400
   mode: duration
   calendar: julian
-  as_written: Built between 1,600 and 2,000 years ago
+  as_written: between 1 and 400 CE
   cite:
     - id: hopewell-time
       says:
+        The World Heritage Committee's Statement of Outstanding Universal Value describes the earthworks
+        as built between 2,000 and 1,600 years ago and places their builders between 1 and 400 CE.
+      basis: interpretation
+      attributed_to: UNESCO World Heritage Committee 2023
+      source: unesco-2023-hopewell-decision
+      at: Statement of Outstanding Universal Value, brief synthesis and criterion (iii)
+    - id: hopewell-time-park
+      says:
         The park page states that the earthworks were built between 1,600 and 2,000 years ago by people
         now referred to as the Hopewell Culture.
+      role: supporting
       source: nps-hopewell-world-heritage
       at: World Heritage Designation
       quote: Built between 1,600 and 2,000 years ago by people now referred to as the Hopewell Culture
@@ -26,10 +35,10 @@ participants:
   - actor: hopewell-culture
     role: participant
 notes:
-  The span runs past this chapter's end at 100 CE; it is included because it begins before. The source
-  gives the age in years before its own publication (2023); the date converts it to civil years without
-  a year zero and keeps the source's own expression in as_written. The page was written after the 2023
-  inscription, so 2023 is the year counted from.
+  The span runs past this chapter's end at 100 CE; it is included because it begins before. The park
+  page and the World Heritage decision give the age only in rounded years ago, which name no year to
+  count from, so the date takes the calendar years, 1 to 400 CE, that the decision gives for the
+  builders. The ends are the decision's round figures and add no precision of their own.
 cites:
   summary:
     id: hopewell-scale

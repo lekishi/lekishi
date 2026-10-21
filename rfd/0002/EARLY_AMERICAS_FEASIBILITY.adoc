@@ -56,11 +56,11 @@ place is a site.
 
 |North America, earthworks
 |8
-|Watson Brake, Indian Knoll, Horr's Island, Poverty Point and Mound A, Grave Creek (Poverty Point nomination); Serpent Mound (Lepper 2020, two papers); Hopewell (NPS)
+|Watson Brake, Indian Knoll, Horr's Island, Poverty Point and Mound A, Grave Creek (Poverty Point nomination); Serpent Mound (Herrmann 2014; Lepper 2020, two papers); Hopewell (UNESCO 2023, NPS)
 
 |Mesoamerica
 |13
-|Xihuatoxtla, Paso de la Amada, San Lorenzo, Cascajal, Aguada Fénix, formal complexes, El Mirador, Monte Albán, San Bartolo (two), Chiapa de Corzo, Tres Zapotes, Teotihuacan
+|Xihuatoxtla, Paso de la Amada (Blomster 2020, Hill 1998), San Lorenzo, Cascajal, Aguada Fénix, formal complexes, El Mirador, Monte Albán, San Bartolo (two), Chiapa de Corzo, Tres Zapotes, Teotihuacan
 
 |South America
 |7
@@ -128,8 +128,11 @@ precision: century` for a century, and `after 1451 BCE` for a lower bound.
 === 2. Years before present
 
 Most early dates are written by their sources as BP (before 1950) or as "years
-ago" (before the publication). The draft converts each to a civil year by hand:
-N BP is N − 1949 BCE, and N years ago in a work of year Y is N − Y + 1 BCE. The
+ago". The draft converts BP to a civil year by hand: N BP is N − 1949 BCE. "Years
+ago" names no epoch and does not say whether an age is calibrated, so the draft
+does not convert it on its own: it is read as cal BP only where the source shows
+that (Huaca Prieta), and otherwise the date is taken from a calendar or cal BP age
+that a cited source gives (Hopewell, Serpent Mound). The BP
 conversion is easy to get wrong by a year, and the authored year hides the
 source's precision. A notation such as `3400 BP` that the compiler converts
 would remove the arithmetic, at the cost of one more form to learn. This is
@@ -141,8 +144,10 @@ offered as an option on decision card 1.
 The `calendar` enum has no Long Count. The draft records Chiapa de Corzo Stela 2
 and Tres Zapotes Stela C as `julian` years with the Long Count and Calendar
 Round in `as_written` (`7.16.3.2.13 6 Ben 16 Xul`, `7.16.6.16.18 6 Etznab 1 Uo`).
-That loses the fact that the year depends on a correlation constant, which is
-the very reason the two sources for Stela C disagree.
+That loses the fact that the year depends on a correlation constant. Neither
+source for Stela C names the constant it uses, and the reason they differ (32 BCE
+against 32 CE) is not established; recording the correlation would at least say
+which one a date assumes.
 
 Proposal (decision card 2): add `mesoamerican_long_count` to the calendar enum
 in contract v1, with a required `correlation` field (for example GMT 584283 or
@@ -151,11 +156,15 @@ in contract v1, with a required `correlation` field (for example GMT 584283 or
 [[gap-radiocarbon]]
 === 4. Uncalibrated radiocarbon years
 
-Two dates are uncalibrated radiocarbon years (Paso de la Amada's ball court,
+Two sources give uncalibrated radiocarbon years (Paso de la Amada's ball court,
 "about 1400 BC"; the Fort Ancient charcoal dates for Serpent Mound, 920 ± 70 BP).
-They are not calendar years, and the draft marks them `calendar: unknown`. A
-radiocarbon calendar would need calibration, which the atlas should not do, so
-the draft's workaround may be the right answer. Recorded here, not proposed.
+They are not calendar years, and marking them `calendar: unknown` does not keep
+them off the timeline: the projection plots a date's year whatever its calendar.
+The draft therefore never dates an event from an uncalibrated age. The ball court
+takes the calibrated 1650 BCE that Blomster and Salazar Chávez (2020) give, with
+the uncalibrated figure as a second citation, and the Fort Ancient dates appear
+only in the Serpent Mound dispute. A radiocarbon calendar would need calibration,
+which the atlas should not do. Recorded here, not proposed.
 
 [[gap-dispute-date]]
 === 5. A dispute's alternative date is prose only

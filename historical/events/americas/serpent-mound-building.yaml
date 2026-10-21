@@ -1,15 +1,26 @@
 # yaml-language-server: $schema=../../schema/event.schema.json
 summary:
   Serpent Mound, the largest surviving ancient effigy mound, is built in Ohio. One reading of soil-core
-  dates puts its first construction about 2,300 years ago, in the Early Woodland (Adena) period; charcoal
-  dates of 920 ± 70 BP point instead to the much later Fort Ancient culture.
+  dates puts its first construction after about 321 BCE (381–44 BCE at 95% probability), in the Early
+  Woodland (Adena) period; charcoal dates of 920 ± 70 BP point instead to the much later Fort Ancient
+  culture.
 types:
   - occurrence
 date:
-  value: 287 BCE
+  value: 381 BCE..44 BCE
+  mode: window
   calendar: julian
-  as_written: initially constructed 2,300 years ago
+  as_written: after 321 BC (95% probability range of 381–44 BC)
   cite:
+    - id: serpent-mound-time-model
+      says:
+        Herrmann and colleagues' Bayesian model of the radiocarbon ages from the buried soil under the
+        mound places its burial, and the start of construction, after 321 BC, with a 95% probability
+        range of 381–44 BC.
+      basis: interpretation
+      attributed_to: Herrmann et al. 2014
+      source: herrmann-2014-serpent-mound
+      at: OxCal model of the submound paleosol, Fig. 2
     - id: serpent-mound-time
       says:
         Lepper reports Herrmann and colleagues' conclusion that Serpent Mound was first constructed
@@ -17,6 +28,7 @@ date:
         cores.
       basis: interpretation
       attributed_to: Herrmann et al. 2014, as reported by Lepper 2020
+      role: supporting
       source: lepper-2020-serpent-mound-sediment
       at: p. 1
 places:
@@ -32,15 +44,14 @@ participants:
 notes:
   "The National Park Service page leaves the age open: probably several hundred years before or after
   the Hopewell-era sites. The Fort Ancient dates are uncalibrated radiocarbon years and are kept as the
-  source states them. The main date is approximate and written as a single year because the record notation
-  cannot yet mark a date as approximate. The source gives the age in years before its own publication
-  (2014); the date converts it to civil years without a year zero and keeps the source's own expression
-  in as_written."
+  source states them, in the dispute only. The main date is the model's 95% range for the start of
+  construction (a window, not a span of building); Lepper's report rounds it to about 2,300 years
+  ago, a figure that names no year to count from, and is kept as the second citation."
 dispute:
   status: disputed
   summary:
     The age of Serpent Mound is contested. Herrmann and colleagues (2014) date its first construction
-    to about 2,300 years ago, in the Adena period, from bulk-sediment dates in soil cores. Fletcher and
+    to after about 321 BCE (381–44 BCE), in the Adena period, from bulk-sediment dates in soil cores. Fletcher and
     colleagues (1996) obtained charcoal dates of 920 ± 70 BP from the mound and attributed it to the Fort
     Ancient culture, and Lepper argues that dates on bulk sediment cannot establish its age. The chapter
     shows the early date because it is the account that places the mound in this chapter's era, and marks

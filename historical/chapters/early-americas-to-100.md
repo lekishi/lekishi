@@ -67,12 +67,18 @@ notes say how it was converted.
 
 - **Years before present (BP)** count back from 1950. N BP is written as
   N − 1949 BCE (there is no year zero), and N BP below 1950 as 1950 − N CE.
-- **"Years ago"** counts back from the publication year Y: N years ago is
-  N − Y + 1 BCE.
+- **"Years ago"** names no year to count from, and does not say whether the age
+  is calibrated, so it is never converted on its own. A "years ago" figure is
+  written as BP only where the source shows it is in calibrated years before
+  present (Huaca Prieta); otherwise the date comes from a calendar or cal BP age
+  the same or another cited source gives (Hopewell, Serpent Mound), and the
+  rounded figure stays in a citation.
 - **Calibrated BC dates** are written as the same BCE years.
-- **Uncalibrated radiocarbon years** (Paso de la Amada's 1400 BC, the Fort Ancient
-  charcoal dates for Serpent Mound) are kept as the source states them, with
-  calendar `unknown`, because they are not calendar years.
+- **Uncalibrated radiocarbon years** are not calendar years, and the atlas plots
+  a date's year whatever its calendar, so none is used as a date. Paso de la
+  Amada's 1400 BC (uncalibrated) is kept as a second citation beside the
+  calibrated 1650 BCE that Blomster and Salazar Chávez (2020) give; the Fort
+  Ancient charcoal dates for Serpent Mound appear only in its dispute.
 - **Long Count dates** are written as Julian years with the Long Count in
   `as_written`, following the correlation the source uses.
 - A span whose ends bound the event is `mode: window`; a span the event filled
@@ -111,7 +117,7 @@ Four records carry a dispute with a conflicting claim:
   millennium BCE; Ann Cyphers, as reported by Guerrero (2010, p. 1066), questions
   its context and so its authenticity.
 - **Serpent Mound.** Herrmann and colleagues (2014) date its first construction to
-  about 2,300 years ago (Adena); Fletcher and colleagues (1996) obtained charcoal
+  after about 321 BCE, 381–44 BCE at 95% probability (Adena); Fletcher and colleagues (1996) obtained charcoal
   dates of 920 ± 70 BP (Fort Ancient). Lepper (2020) argues the sediment dates
   are unreliable.
 - **Tres Zapotes Stela C.** Guerrero reads its Long Count as 32 BCE; the INAH site

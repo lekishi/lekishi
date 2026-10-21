@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Capua's break with Rome in 216 BCE, when it preferred Hannibal's friendship to the Roman alliance.
+  The relationship asserts no causation.
+types: [institutional_change]
+from: campani
+to: roman-republic
+date:
+  value: "216 BCE"
+  mode: window
+  calendar: regnal
+  as_written: after Cannae (Livy 23.10)
+cite:
+  - id: capua-leaves-rome-basis
+    says:
+      Livy records Hannibal thanking the Campanians for preferring his friendship to their alliance
+      with Rome.
+    source: livy
+    at: "23.10.1"
+    quote: quod amicitiam suam Romanae societati praeposuissent

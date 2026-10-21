@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Capua's alliance with Hannibal after Cannae, on terms that kept its laws and magistrates and
+  exempted Campanians from Carthaginian authority and compulsory service. The relationship asserts
+  no causation.
+types: [alliance]
+from: campani
+to: hannibal
+directionality: mutual
+date:
+  value: "216 BCE"
+  mode: window
+  calendar: regnal
+  as_written: after Cannae (Livy 23.7)
+cite:
+  - id: capua-hannibal-basis
+    says: Livy records Capua's envoys making peace with Hannibal on terms.
+    source: livy
+    at: "23.7.1"
+    quote: legati ad Hannibalem venerunt pacemque cum eo condicionibus his fecerunt
+  - id: capua-hannibal-thanks
+    says: Livy records Hannibal thanking the Campanians for preferring his friendship to the Roman
+      alliance.
+    role: supporting
+    source: livy
+    at: "23.10.1"
+    quote: qua gratias egit Campanis, quod amicitiam suam Romanae societati praeposuissent

@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Hiero II of Syracuse, Rome's ally since he entered its friendship, sent grain, troops and a golden
+  Victory in 216 BCE; the senate answered that he had kept faith at every time and place.
+types: [alliance]
+from: hiero-ii
+to: roman-republic
+directionality: mutual
+date:
+  value: "216 BCE"
+  mode: window
+  calendar: regnal
+  as_written: per eosdem dies (Livy 22.37.1)
+notes: The alliance dates from 263 BCE; the relationship is dated to the chapter's evidence for it.
+cite:
+  - id: hiero-rome-basis
+    says:
+      Livy records the senate calling Hiero a good man and an outstanding ally who had kept faith
+      since he entered Rome's friendship.
+    source: livy
+    at: "22.37.10"
+    quote: virum bonum egregiumque socium Hieronem esse atque uno tenore, ex quo in amicitiam populi
+      Romani venerit, fidem coluisse

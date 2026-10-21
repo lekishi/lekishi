@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "Massalia's alliance with Rome: Massaliot ships scouted for Gnaeus Scipio at the Ebro, and
+  Polybius calls the Massaliots Rome's most loyal partners in the Hannibalic war."
+types: [alliance]
+from: place:massalia
+to: roman-republic
+directionality: mutual
+date:
+  value: "218 BCE..217 BCE"
+  mode: duration
+  calendar: regnal
+  as_written: κατὰ τὸν Ἀννιβιακὸν πόλεμον
+notes: Massalia is recorded as a place, not an actor, so the relationship runs from the place; a
+  Massaliot state actor would be the better endpoint.
+cite:
+  - id: massalia-rome-basis
+    says: Polybius says the Massaliots shared Rome's fortunes nobly, above all in the Hannibalic war.
+    source: polybius
+    at: "3.95.7"
+    quote: εὐγενῶς γάρ, εἰ καί τινες ἕτεροι, κεκοινωνήκασι Ῥωμαίοις πραγμάτων καὶ Μασσαλιῶται

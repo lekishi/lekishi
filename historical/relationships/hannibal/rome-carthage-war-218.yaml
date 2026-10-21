@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  The war between the Roman Republic and Carthage that the Roman embassy declared at Carthage and
+  Hannibal carried into Italy (the Second Punic War), bounded here by the chapter's span. The
+  relationship asserts no causation.
+types: [conflict]
+from: roman-republic
+to: carthage-state
+directionality: mutual
+date:
+  value: "218 BCE..216 BCE"
+  mode: duration
+  calendar: regnal
+  as_written: P. Cornelius Ti. Sempronius consules … L. Aemilius Paullus C. Terentius Varro consules
+notes: The war lasted until 201 BCE; the span is the chapter's, not the war's.
+cite:
+  - id: rome-carthage-war-basis
+    says: Livy opens his account of the war the Carthaginians waged under Hannibal against the Roman
+      people.
+    source: livy
+    at: "21.1.1"
+    quote: quod Hannibale duce Carthaginienses cum populo Romano gessere
+  - id: rome-carthage-war-declared
+    says: Polybius records the Carthaginian council accepting war from the Roman envoy.
+    role: supporting
+    source: polybius
+    at: "3.33.4"
+    quote:
+      τοῦ δὲ Ῥωμαίου φήσαντος τὸν πόλεμον ἐκβαλεῖν, ἀνεφώνησαν ἅμα καὶ πλείους τῶν ἐκ τοῦ συνεδρίου,
+      δέχεσθαι φάσκοντες

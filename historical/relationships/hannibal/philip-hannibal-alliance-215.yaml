@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  The alliance sworn between Hannibal and Philip V of Macedon through Philip's envoy Xenophanes. Its
+  terms are disputed between Polybius' oath text and Livy's summary.
+types: [alliance]
+from: philip-v
+to: hannibal
+directionality: mutual
+date:
+  value: "215 BCE"
+  mode: window
+  calendar: regnal
+  as_written: after Cannae (Livy 23.33)
+notes:
+  That the two allied is not in question; the terms are, between Polybius' oath (a mutual defence
+  alliance) and Livy's (a Macedonian invasion of Italy and the division of Italy and Greece). The
+  disputed terms are kept on the event philip-treaty-215.
+cite:
+  - id: philip-hannibal-basis
+    says: Polybius preserves the oath Hannibal swore to Philip's envoy Xenophanes.
+    source: polybius
+    at: "7.9.1"
+    quote: πρὸς Ξενοφάνη Κλεομάχου Ἀθηναῖον πρεσβευτήν, ὃν ἀπέστειλε πρὸς ἡμᾶς Φίλιππος ὁ βασιλεὺς
+      Δημητρίου
+  - id: philip-hannibal-livy
+    says: Livy records Xenophanes making a treaty and friendship with Hannibal on terms he lists.
+    role: supporting
+    source: livy
+    at: "23.33.9"
+    quote: foedusque cum eo atque amicitiam iungit legibus his

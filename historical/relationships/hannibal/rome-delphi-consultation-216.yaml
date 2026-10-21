@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Rome's consultation of the oracle of Apollo at Delphi after Cannae, through Q. Fabius Pictor, and
+  its response promising victory. The relationship records religious contact and asserts no
+  causation.
+types: [contact]
+from: roman-republic
+to: delphi
+date:
+  value: "216 BCE"
+  mode: window
+  calendar: regnal
+  as_written: after Cannae (Livy 22.57; 23.11)
+cite:
+  - id: rome-delphi-basis
+    says: Livy records Pictor sent to Delphi and returning with the oracle's response.
+    sources:
+      - source: livy
+        at: "22.57.5"
+        quote: et Q. Fabius Pictor Delphos ad oraculum missus est
+      - source: livy
+        at: "23.11.1"
+        quote: Q. Fabius Pictor legatus a Delphis Romam rediit responsumque ex scripto recitavit

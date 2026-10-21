@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  The Boii, with the Insubres, broke with Rome in 218 BCE trusting in Carthaginian messages and the
+  coming of Hannibal's army, and fought on his side. The relationship asserts no causation.
+types: [alliance]
+from: boii
+to: hannibal
+date:
+  value: "218 BCE"
+  mode: window
+  calendar: regnal
+  as_written: κατὰ τοὺς αὐτοὺς καιροὺς (Polybius 3.40)
+cite:
+  - id: boii-hannibal-basis
+    says:
+      Polybius records the Boii revolting from Rome, trusting the messages about the Carthaginians'
+      coming.
+    source: polybius
+    at: "3.40.7"
+    quote:
+      μετεωριζόμενοι καὶ πιστεύοντες ἐκ τῶν διαπεμπομένων τῇ παρουσίᾳ τῶν Καρχηδονίων ἀπέστησαν ἀπὸ
+      Ῥωμαίων

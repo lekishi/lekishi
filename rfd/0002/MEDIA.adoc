@@ -1,0 +1,174 @@
+:authors: Darwin D Wu <darwin67@users.noreply.github.com>
+:state: discussion
+:labels: history, data, authoring, media, rights
+
+= RFD 2 media v1: images as records
+
+== Provenance
+
+link:../0001/README.adoc[RFD 1] sets a target of 20 or more cleared images for
+the Tang chapter. link:AUTHORING_FORMAT.adoc[The authoring format record] has
+proposed a media kind since 2026-10-14. A media file names the file, the
+source that carries its licence, the records it `depicts`, and a depiction
+label. That proposal says images arrive with contract v1, together with the
+first chapter that shows one. The owner chose on 2026-10-21 to make journeys
+their own v1 kind (PR #26), so v1 is now being specified. This record proposes
+the media half of it.
+
+Everything below is *proposed*. No image is added and no code is changed until
+the owner decides.
+
+== What the evidence rules require
+
+AGENTS.md and RFD 2 already settle the hard part:
+
+* An image is never evidence on its own account. A 1298 handscroll of the 748
+  storm shows how the story was told five centuries later. It does not show
+  the storm.
+* Generated visual concepts are design references, never historical content.
+  They cannot be media records.
+* Reuse rights are recorded per source, with the reviewer and the date. Text
+  only reaches readers when `redistribution` permits it.
+* No provider, account or token, and the site stays static.
+
+So a media record has to say three things, and the reader has to show them:
+what the image is, what it depicts and on whose word, and who may reuse it.
+
+== Proposed: the media record
+
+[source,yaml]
+----
+# historical/media/toseiden-emaki-storm.yaml
+title: The storm of 748 in the 東征伝絵巻
+file: toseiden-emaki-storm.jpg          # in historical/media/files/, see "Where files live"
+sha256: …                                # of the committed file, checked by the build
+alt: >-
+  A ship in high waves under a dark sky; monks crouch on deck while sailors
+  work the mast.
+depiction: later_depiction
+made:
+  value: "1298"
+  calendar: julian
+  cite: { source: commons-toseiden-emaki-storm, at: "Date" }
+depicts:
+  - record: south-drift-748
+    cite:
+      id: toseiden-emaki-storm-depicts
+      says: The holding institution's description identifies the scene as the 748 storm.
+      source: …                          # the catalogue or a cited study, never the editor
+      at: …
+creator: 蓮行 (painter)
+holder: 唐招提寺
+source: commons-toseiden-emaki-storm     # a source record of kind media, with the licence
+caption: >-
+  A later depiction, painted in 1298, of the storm in the biography. It is not
+  evidence of the event.
+----
+
+* *Depiction vocabulary.* `depiction` takes one of five values. The card
+  states it in words next to every image:
+  ** `contemporary_object`: an object from the period itself, such as the 8th-century
+     seated figure of 鑒眞. It is evidence of itself, not of the events
+     around it.
+  ** `later_depiction`: a later work that shows a historical subject, such as the
+     emaki. It is never evidence of the subject.
+  ** `site_photograph`: a modern photograph of a place as it is now.
+  ** `modern_reconstruction`: a replica or reconstruction, such as the
+     遣唐使船 replica at 平城宮跡.
+  ** `map_or_diagram`: a historical or modern map, drawn or reproduced.
+* *What it depicts is a claim.* `depicts` links to records, and each link
+  carries a cite like any other claim. The identification comes from the
+  holder's catalogue or from scholarship. A scene the editor recognises
+  without a source gets `basis: interpretation` and an `attributed_to`, or it
+  isn't linked.
+* *Two layers of rights.* The media source records the object's status (a 1298
+  scroll is public domain) and the reproduction's status. A faithful
+  photograph of a flat work is treated as public domain, following Wikimedia
+  Commons' PD-Art practice. A photograph of a statue or a building has its
+  own copyright, and its licence decides. Both layers must permit
+  redistribution, or the image isn't served.
+* *Licences accepted.* Public domain, CC0, CC BY and CC BY-SA. Not accepted:
+  non-commercial and no-derivatives licences, or "used with permission". The
+  same terms must hold for a future native app, and the site resizes every
+  image.
+* *Alt text is required.* It describes what is visible, not what the image is
+  claimed to depict.
+
+== Proposed: where files live
+
+* *Masters in the repository.* One master per image goes in
+  `historical/media/files/`, at most 3000 px on the long side and normally
+  well under 1 MB. Its `sha256` is in the record, so the approval digest
+  covers the exact pixels. At the 20-image target this adds roughly 10–15 MB
+  of history.
+* *Derivatives at build time.* `pnpm build` derives the sizes the site serves
+  (for example 480, 960 and 1600 px, in AVIF and JPEG) into a generated,
+  ignored directory, the way the globe tiles and fonts are built today. 20
+  images come to about 120 files, against the 20,000 limit. The build
+  invariant fails on a record whose file or hash doesn't match.
+* *Not chosen: fetching from Commons at build time.* It would keep the
+  repository small, but it makes every build depend on a third-party service,
+  and the images could change under an approval. RFD 2 and AGENTS.md rule out
+  both.
+
+== Proposed: the reader
+
+* The event card shows the images that depict the event, as thumbnails that
+  open full size. Under each image are its depiction label, creator, date
+  and licence line, and a link to the source.
+* The manifest's `hero:` names a media record for the chapter card. A
+  `later_depiction` hero carries its label on the card as well.
+* Images never go on the globe as markers, and they never stand in for a
+  place's position.
+* `/globe/ATTRIBUTION.txt` gains a sibling, `/media/ATTRIBUTION.txt`, with
+  every image's full credit. The build fails if an image is missing from it.
+
+== Contract v1
+
+Media adds a record kind, a depiction vocabulary, and depiction claims that link
+an image to the records it depicts. AGENTS.md requires new vectors for new
+rules, so v1 gains vectors such as these:
+
+* a media record without a source licence is rejected
+* a `non-commercial` licence is rejected
+* a `depicts` link without a cite is rejected
+* a `later_depiction` cannot support a claim about its subject
+* a file whose hash differs from the record fails
+
+v1 ships with the journeys kind (PR #26) as one contract version. Neither kind
+changes v0, and the 187 vectors stay as they are.
+
+== Candidates for the first set
+
+None of these is cleared yet. Clearing one means:
+
+. finding the file and recording its page revision
+. checking both rights layers and recording them in a media source with the
+  reviewer and the date
+. finding a catalogue or scholarly citation for what it depicts
+
+Wikimedia's API was rate-limiting this container on 2026-10-21, so the
+candidates below come from the editor's knowledge and must be checked before
+they count.
+
+[cols="2,1,2",options="header"]
+|===
+|Candidate |Depiction |Rights to check
+|東征伝絵巻 (1298, 唐招提寺): the 743 wreck, the 748 storm, the arrival at 振州, the 753 voyage |later_depiction |Object public domain; PD-Art scans on Commons
+|吉備大臣入唐絵巻 (12th c., Museum of Fine Arts, Boston): 吉備真備 in Tang |later_depiction, legendary |Object public domain; the museum's own image terms against Commons' copy
+|Seated figure of 鑒眞 (8th c., 唐招提寺) |contemporary_object |A photograph of a statue: needs a CC-licensed photograph
+|唐招提寺 金堂 (8th c.) |site_photograph |CC BY or CC BY-SA photograph from Commons
+|遣唐使船 replica at 平城宮跡 |modern_reconstruction |CC photograph; label as a reconstruction
+|大明寺 (揚州) and its 鑒眞 memorial hall |site_photograph |CC photograph
+|阿育王寺 (寧波), 國清寺 (天台山), 東林寺 (廬山) |site_photograph |CC photographs
+|坊津 (the 秋妻屋浦 identification) |site_photograph |CC photograph; caption carries the identification's citation
+|===
+
+== Open questions for the owner
+
+* Masters in the repository, as proposed, or kept outside it, which needs a
+  host and so an owner decision on a provider.
+* Whether site photographs count toward RFD 1's "20+ cleared images", or only
+  historical images do.
+* Whether CC BY-SA images are acceptable. Their share-alike applies only to
+  the image and its derivatives, not to the site.

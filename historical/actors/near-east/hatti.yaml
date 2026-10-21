@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Hatti, the kingdom of the Hittite great kings ruled from Hattusa, which held north Syria against
+  Egypt, fought Ramesses II at Kadesh, and made the treaty of his 21st year.
+types: [state]
+names:
+  - form: Kheta
+    lang: egy
+    script: Latn
+    note: Brugsch's reading of the Egyptian Ht; also written Khita.
+    cite:
+      - id: hatti-name
+        says: The treaty speaks of the great king of Kheta.
+        source: sayce-hittites
+        at: "ch. II: the treaty, the silver tablet"
+        quote:
+          This is the copy of the contents of the silver tablet, which the great king of Kheta, Kheta-sira,
+          had caused to be made, and which was presented to the Pharaoh by the hand of his ambassador Tartisebu
+          and his ambassador Ra-mes, to propose friendship with the king Ramessu Miamun
+  - form: Hatti
+    lang: en
+    script: Latn
+    role: alternate
+    note: The land's own name in the Hittite texts; its people are called Hittites.
+notes:
+  One actor for the Hittite kingdom of the empire period. The Neo-Hittite states of the Iron Age
+  are other actors.

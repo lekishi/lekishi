@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Ramesses II (Usermaatre Setepenre, Ramesses Meryamun), king of Egypt of the Nineteenth Dynasty,
+  who fought the Hittites at Kadesh in his fifth year, made the treaty with Hattusili III in his 21st,
+  and married a Hittite princess in his 34th.
+types: [person]
+names:
+  - form: Ramessu Miamun
+    lang: egy
+    script: Latn
+    note: Brugsch's rendering of Ramesses Meryamun, "beloved of Amun".
+    cite:
+      - id: ramesses-ii-name
+        says: The treaty is dated in the reign of King Ramessu Miamun.
+        source: sayce-hittites
+        at: "ch. II: the treaty, the date"
+        quote:
+          In the year twenty-one, in the month Tybi, on the 21st day of the month, in the reign of King
+          Ramessu Miamun
+  - form: Ramesses II
+    lang: en
+    script: Latn
+    role: alternate
+    note: The modern name and number.
+roles:
+  - role: ruler
+    note:
+      King of Egypt for about 66 years; the treaty names his father Seti I and grandfather Ramesses
+      I.

@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  The daughter of Hattusili III and Puduhepa who married Ramesses II in his 34th year and took
+  the Egyptian name Maathorneferure.
+types: [person]
+names:
+  - form: Ur-maa Noferu-Ra
+    lang: egy
+    script: Latn
+    note: Sayce's 1890 reading of her Egyptian name.
+    cite:
+      - id: maathorneferure-name
+        says: Sayce says she took the Egyptian name Ur-maa Noferu-Ra.
+        source: sayce-hittites
+        at: "ch. II: the marriage"
+        quote:
+          The treaty was ratified by the visit of the Hittite prince Kheta-sira to Egypt in his national
+          costume, and the marriage of his daughter to Ramses in the thirty-fourth year of the Pharaoh's reign
+          (B. C. 1354). She took the Egyptian name of Ur-maa Noferu-Ra
+  - form: Maathorneferure
+    lang: en
+    script: Latn
+    role: alternate
+    note: The modern reading.
+roles:
+  - role: member
+    note: A Hittite princess and a queen of Ramesses II.

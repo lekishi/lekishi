@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Tartisebu, one of the two Hittite envoys who brought the silver tablet of the treaty to Ramesses
+  II.
+types: [person]
+names:
+  - form: Tartisebu
+    lang: egy
+    script: Latn
+    note: Brugsch's reading; Garstang writes Tal-tisebu.
+    cite:
+      - id: tartisebu-name
+        says: The treaty says the tablet was presented by the hand of the ambassador Tartisebu.
+        source: sayce-hittites
+        at: "ch. II: the treaty, the silver tablet"
+        quote:
+          This is the copy of the contents of the silver tablet, which the great king of Kheta, Kheta-sira,
+          had caused to be made, and which was presented to the Pharaoh by the hand of his ambassador Tartisebu
+          and his ambassador Ra-mes, to propose friendship with the king Ramessu Miamun
+roles:
+  - role: envoy

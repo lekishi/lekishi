@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Hattusili III, brother of Muwatalli II and great king of Hatti after him, who made the treaty
+  with Ramesses II on the silver tablet and gave him his daughter in marriage.
+types: [person]
+names:
+  - form: Kheta-sira
+    lang: egy
+    script: Latn
+    note: Brugsch's reading of the Egyptian form of the name.
+    cite:
+      - id: hattusili-iii-name
+        says: The treaty names Kheta-sira, son of Maur-sira, as the great king of Kheta who proposed it.
+        source: sayce-hittites
+        at: "ch. II: the treaty, the parties"
+        quote:
+          The treaty which had been proposed by the great king of Kheta, Kheta-sira, the powerful, the
+          son of Maur-sira, the powerful, the son of the son of Sapalil, the great king of Kheta
+  - form: Hattusil
+    lang: en
+    script: Latn
+    role: alternate
+    note: Garstang's 1910 form, from the Boghazköy tablets.
+  - form: Hattusili III
+    lang: en
+    script: Latn
+    role: alternate
+    note: The modern form and number.
+roles:
+  - role: ruler
+    note:
+      Great king of Hatti; the treaty names his father Maur-sira (Mursili II) and grandfather Sapalil
+      (Suppiluliuma I).

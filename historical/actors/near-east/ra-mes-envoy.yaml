@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: Ra-mes, the second Hittite envoy who brought the silver tablet of the treaty to Ramesses II.
+types: [person]
+names:
+  - form: Ra-mes
+    lang: egy
+    script: Latn
+    note: Brugsch's reading; Garstang writes Rameses. The id sets him apart from the king.
+    cite:
+      - id: ra-mes-envoy-name
+        says: The treaty names Ra-mes as the second ambassador.
+        source: sayce-hittites
+        at: "ch. II: the treaty, the silver tablet"
+        quote:
+          This is the copy of the contents of the silver tablet, which the great king of Kheta, Kheta-sira,
+          had caused to be made, and which was presented to the Pharaoh by the hand of his ambassador Tartisebu
+          and his ambassador Ra-mes, to propose friendship with the king Ramessu Miamun
+roles:
+  - role: envoy

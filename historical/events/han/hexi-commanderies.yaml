@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  After the 渾邪王's surrender the Han made commanderies of the land west of the river. The 漢書 annals
+  record the 武威 and 酒泉 commanderies in the autumn of 121 BCE and the division of their land into
+  張掖 and 敦煌 in 元鼎六年 (111 BCE); the 匈奴列傳 instead tells of 酒泉 being set up to cut the 匈奴 off
+  from the 羌 in the years of 烏維單于, about a decade later. The record keeps the annals' date and
+  publishes the 史記's as a conflicting account.
+types: [founding]
+date:
+  value: 121 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 元狩二年 秋（以其地為武威、酒泉郡）
+  cite:
+    - id: hexi-commanderies-annals
+      says: The 漢書 annals record that the surrendered land was made into the 武威 and 酒泉 commanderies in the autumn of 元狩二年.
+      source: hanshu
+      at: 卷六 武帝紀 元狩二年 秋
+      quote: 以其地為武威、酒泉郡。
+    - id: hexi-commanderies-shiji
+      says:
+        The 匈奴列傳, in its account of 烏維單于's reign (114–105 BCE), records that the Han set up the
+        酒泉 commandery in the west to cut the road between the 匈奴 and the 羌.
+      role: conflicting
+      source: shiji-han-frontiers
+      at: 卷一百十 匈奴列傳 烏維（西置酒泉郡）
+      quote: 而西置酒泉郡以鬲絕胡與羌通之路
+    - id: hexi-commanderies-division
+      says: The 漢書 annals record 張掖 and 敦煌 being divided off from 武威 and 酒泉 in 元鼎六年.
+      role: supporting
+      source: hanshu
+      at: 卷六 武帝紀 元鼎六年 秋
+      quote: 乃分武威、酒泉地置張掖、敦煌郡，徙民以實之。
+places:
+  - place: hexi
+    role: site
+participants:
+  - actor: han-dynasty
+    role: leader
+dispute:
+  status: disputed
+  summary:
+    "The histories date the 河西 commanderies differently. The 漢書 annals put 武威 and 酒泉 in the autumn
+    of 121 BCE, straight after the surrender; the 匈奴列傳 places the founding of 酒泉 in 烏維單于's reign,
+    in the same passage as the commanderies of 朝鮮. Modern scholarship adds other dates from the 漢書's
+    treatise on geography, which is not cited here. The chapter publishes the annals' year and keeps
+    the 史記's account as a conflicting claim."
+notes: The commanderies are not recorded as places and no boundary is drawn.

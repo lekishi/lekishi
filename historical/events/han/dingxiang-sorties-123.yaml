@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In 123 BCE 衛青 twice led six generals out of 定襄. In the second sortie, in the fourth month, 趙信
+  and 蘇建 met the 單于's main force; 蘇建 escaped alone and 趙信 went over to the 匈奴. 霍去病, at
+  eighteen and leading eight hundred light horse as 剽姚校尉, won his first fief, and 張騫, as 校尉, was
+  made 博望侯 for knowing where water and grass were.
+types: [campaign]
+date:
+  value: 123 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 元朔六年 春二月; 夏四月
+  cite:
+    - id: dingxiang-sorties-time
+      says: The 漢書 annals record the sortie of the second month and the crossing of the desert in the fourth month of 元朔六年, with 趙信's defection.
+      sources:
+        - source: hanshu
+          at: 卷六 武帝紀 元朔六年 春二月
+          quote: 六年春二月，大將軍衛青將六將軍兵十餘萬騎出定襄，斬首三千餘級。
+        - source: hanshu
+          at: 卷六 武帝紀 元朔六年 夏四月
+          quote: 夏四月，衛青復將六將軍絕幕，大克獲。前將軍趙信軍敗，降匈奴。
+places:
+  - place: dingxiang
+    role: start
+participants:
+  - actor: wei-qing
+    role: leader
+  - actor: zhao-xin
+    role: participant
+    note: Defected to the 匈奴 when his column met the 單于's force.
+  - actor: huo-qubing
+    role: participant
+  - actor: zhang-qian
+    role: participant
+  - actor: xiongnu
+    role: participant
+cites:
+  participants:
+    - id: dingxiang-sorties-participants
+      says:
+        The 衛將軍驃騎列傳 records 去病 as 剽姚校尉 in this campaign, and the 大宛列傳 records 張騫 serving as 校尉
+        under the 大將軍 and being made 博望侯 that year.
+      sources:
+        - source: shiji-han-frontiers
+          at: 卷一百十一 衛將軍驃騎列傳（為剽姚校尉）
+          quote: 為剽姚校尉，與輕勇騎八百直棄大軍數百里赴利
+        - source: shiji-han-frontiers
+          at: 卷一百二十三 大宛列傳（乃封騫為博望侯。是歲元朔六年也）
+          quote: 乃封騫為博望侯。是歲元朔六年也。

@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In 133 BCE the Han hid more than three hundred thousand men around 馬邑 and used a man of the town to
+  lure the 單于 with a pretended sale of it. The 單于 crossed the 武州 frontier with a hundred thousand
+  horse, found herds grazing with no herders, took a frontier post, learned the plan from a captured
+  officer, and turned back. 王恢, who had proposed the attack and did not strike the retreating
+  baggage, was executed; the 匈奴 broke off the peace.
+types: [campaign]
+date:
+  value: 133 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 元光二年 夏六月
+  cite:
+    - id: mayi-ambush-time
+      says:
+        The 漢書 annals date the ambush to the summer, sixth month of 元光二年, naming the five generals
+        and the three hundred thousand men in the valleys of 馬邑.
+      source: hanshu
+      at: 卷六 武帝紀 元光二年 夏六月
+      quote: 夏六月，御史大夫韓安國為護軍將軍，衛尉李廣為驍騎將軍，太僕公孫賀為輕車將軍，大行王恢為將屯將軍，大中大夫李息為材官將軍，將三十萬眾屯馬邑谷中，誘致單于，欲襲擊之。
+    - id: mayi-ambush-account
+      says: The 匈奴列傳 tells how the 單于, a hundred 里 short of 馬邑, saw the herds untended, learned of the plan, and withdrew.
+      role: supporting
+      source: shiji-han-frontiers
+      at: 卷一百十 匈奴列傳（單于既入漢塞，未至馬邑百餘里）
+      quote: 單于既入漢塞，未至馬邑百餘里，見畜布野而無人牧者，怪之，乃攻亭。
+places:
+  - place: mayi
+    role: site
+    note: The intended trap; the 單于 turned back more than a hundred 里 short of it.
+participants:
+  - actor: han-anguo
+    role: leader
+  - actor: wang-hui
+    role: participant
+    note: The annals record him executed for proposing the attack and not advancing.
+  - actor: junchen-chanyu
+    role: subject
+    note: The 單于 of the time by the 匈奴列傳's sequence; the accounts say only 單于.
+  - actor: xiongnu
+    role: participant
+  - actor: han-dynasty
+    role: participant
+notes:
+  "The annals date the whole operation to 元光二年 and close it in the sixth month (六月，軍罷); the
+  Han year then began in the tenth month, so 元光二年's summer falls in 133 BCE. The 單于 never reached
+  the town: the event is placed at 馬邑 as the trap's site, not as a battle site."

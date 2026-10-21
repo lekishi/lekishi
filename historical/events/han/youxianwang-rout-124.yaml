@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In the spring of 124 BCE 衛青 led six generals and more than a hundred thousand men out of 朔方 and
+  高闕, rode six or seven hundred 里 beyond the frontier, and surrounded the 右賢王 at night while he lay
+  drunk; the king escaped, and the Han took fifteen thousand of his people and more than ten lesser
+  kings. 衛青 was made 大將軍.
+types: [campaign]
+date:
+  value: 124 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 元朔五年 春
+  cite:
+    - id: youxianwang-rout-time
+      says: The 漢書 annals date the expedition out of 朔方 and 高闕 to the spring of 元朔五年.
+      source: hanshu
+      at: 卷六 武帝紀 元朔五年 春
+      quote: 五年春，大旱。大將軍衛青將六將軍兵十餘萬人出朔方、高闕，獲首虜萬五千級。
+    - id: youxianwang-rout-account
+      says: The 匈奴列傳 records the night encirclement of the drunk 右賢王 and his escape.
+      role: supporting
+      source: shiji-han-frontiers
+      at: 卷一百十 匈奴列傳（夜圍右賢王）
+      quote: 右賢王以爲漢兵不能至，飲酒醉，漢兵出塞六七百里，夜圍右賢王。右賢王大驚，脫身逃走
+places:
+  - place: shuofang
+    role: start
+  - place: gaoque
+    role: waypoint
+participants:
+  - actor: wei-qing
+    role: leader
+  - actor: xiongnu
+    role: participant
+notes:
+  The place of the encirclement, six or seven hundred 里 beyond the frontier, is not named and is not
+  recorded as a place.

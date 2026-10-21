@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In the spring of 121 BCE 霍去病, newly 驃騎將軍, rode out of 隴西 with ten thousand horse, fought for
+  six days through five 匈奴 kingdoms, passed 焉支山 by more than a thousand 里, killed the 折蘭 and 盧胡
+  kings, took the 渾邪王's son, and carried off the 休屠王's gold figure for sacrificing to heaven.
+types: [campaign]
+date:
+  value: 121 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 元狩二年 春
+  cite:
+    - id: yanzhi-campaign-time
+      says: The 衛將軍驃騎列傳 dates 去病's appointment and his ride out of 隴西 to the spring of 元狩二年.
+      source: shiji-han-frontiers
+      at: 卷一百十一 衛將軍驃騎列傳 霍去病 元狩二年
+      quote: 春，以冠軍侯去病為驃騎將軍，將萬騎出隴西，有功
+    - id: yanzhi-campaign-account
+      says: The court's citation in the biography records six days of fighting, the passing of 焉支山, and the 休屠 gold figure.
+      role: supporting
+      source: shiji-han-frontiers
+      at: 卷一百十一 衛將軍驃騎列傳（轉戰六日，過焉支山千有餘里）
+      quote: 轉戰六日，過焉支山千有餘里，合短兵，殺折蘭王，斬盧胡王，誅全甲，執渾邪王子及相國、都尉，首虜八千餘級，收休屠祭天金人
+places:
+  - place: longxi
+    role: start
+  - place: yanzhi-shan
+    role: waypoint
+    note: The army passed the mountain by more than a thousand 里; the fighting is not placed at it.
+participants:
+  - actor: huo-qubing
+    role: leader
+  - actor: xiutu-king
+    role: subject
+    note: His gold figure for sacrificing to heaven was taken.
+  - actor: xiongnu
+    role: participant
+notes:
+  The 漢書 annals record the same ride as reaching 皋蘭 (至皋蘭，斬首八千餘級); 皋蘭 is not placed and is
+  not recorded as a separate place.

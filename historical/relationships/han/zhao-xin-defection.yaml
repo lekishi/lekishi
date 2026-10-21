@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  趙信, a former 匈奴 lesser king whom the Han had made 翕侯, went back over to the 單于 in 123 BCE,
+  became the 單于's 自次王 and brother-in-law, and advised him to withdraw north of the desert.
+types: [membership]
+from: zhao-xin
+to: xiongnu
+date:
+  value: 123 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 元朔六年 夏四月
+  cite:
+    - id: zhao-xin-defection-time
+      says: The 匈奴列傳 records the 單于 making 趙信 自次王, marrying him to his sister, and taking his advice to go north of the desert.
+      source: shiji-han-frontiers
+      at: 卷一百十 匈奴列傳（單于既得翕侯，以爲自次王）
+      quote: 單于既得翕侯，以爲自次王，用其姊妻之，與謀漢。信教單于益北絕幕，以誘罷漢兵，徼極而取之，無近塞。

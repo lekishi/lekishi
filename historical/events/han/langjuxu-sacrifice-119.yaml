@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In 119 BCE 霍去病 led the eastern army two thousand 里 out of 代, fought the 左賢王, took more than
+  seventy thousand heads and captives, made the 封 sacrifice at 狼居胥山 and the 禪 at 姑衍, and looked
+  out over the 翰海 before turning back.
+types: [campaign]
+date:
+  value: 119 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 元狩四年（夏）
+  cite:
+    - id: langjuxu-time
+      says: The 漢書 annals record 去病 fighting the 左賢王 and sacrificing at 狼居胥山 in 元狩四年.
+      source: hanshu
+      at: 卷六 武帝紀 元狩四年
+      quote: 去病與左賢王戰，斬獲首虜七萬餘級，封狼居胥山乃還。
+    - id: langjuxu-account
+      says: The 匈奴列傳 records the march out of 代, the battle with the 左賢王, and the sacrifices at 狼居胥山 and 姑衍.
+      role: supporting
+      source: shiji-han-frontiers
+      at: 卷一百十 匈奴列傳（漢驃騎將軍之出代二千餘里）
+      quote: 漢驃騎將軍之出代二千餘里，與左賢王接戰，漢兵得胡首虜凡七萬餘級，左賢王將皆遁走。
+places:
+  - place: dai
+    role: start
+  - place: langjuxu-shan
+    role: end
+participants:
+  - actor: huo-qubing
+    role: leader
+  - actor: xiongnu
+    role: participant

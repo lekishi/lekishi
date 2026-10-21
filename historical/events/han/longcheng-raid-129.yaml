@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In 129 BCE, after a 匈奴 raid on 上谷, four Han generals each rode out with ten thousand horse. 衛青
+  went from 上谷 to 蘢城, the 匈奴's sacrificial gathering place, and took seven hundred heads;
+  公孫賀 found nothing; 公孫敖 lost seven thousand men; 李廣 was captured and escaped.
+types: [campaign]
+date:
+  value: 129 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 元光六年 春
+  cite:
+    - id: longcheng-raid-time
+      says: The 漢書 annals send the four generals out in 元光六年 and record 衛青 reaching 龍城.
+      source: hanshu
+      at: 卷六 武帝紀 元光六年
+      quote: 遣車騎將軍衛青出上谷，騎將軍公孫敖出代，輕車將軍公孫賀出雲中，驍騎將軍李廣出雁門。青至龍城，獲首虜七百級。
+    - id: longcheng-raid-account
+      says: The 匈奴列傳 records, five years after 馬邑, 衛青 leaving 上谷 and reaching 蘢城.
+      role: supporting
+      source: shiji-han-frontiers
+      at: 卷一百十 匈奴列傳（將軍衛青出上谷，至蘢城）
+      quote: 將軍衛青出上谷，至蘢城，得胡首虜七百人。
+places:
+  - place: shanggu
+    role: start
+  - place: longcheng
+    role: end
+participants:
+  - actor: wei-qing
+    role: leader
+  - actor: li-guang
+    role: participant
+    note: Leading the 鴈門 column; captured and escaped.
+  - actor: xiongnu
+    role: participant
+notes:
+  "The 匈奴列傳 places the sortie in the autumn (自馬邑軍後五年之秋); the 漢書 annals list it among the
+  spring entries of 元光六年. Both put it in 129 BCE, and the record keeps the year without a season."

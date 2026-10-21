@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  張詠, the officer for the Silla households of 文登縣, as 圓仁's patron. He arranged his permits in 840,
+  sheltered and fed him from 845, and built a ship to send him home in 847.
+types: [contact]
+from: zhang-yong
+to: ennin
+date:
+  value: 840..847
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: 開成五年 — 會昌七年閏三月二日
+notes: Recorded as contact. The Silla community of the 山東 coast is the setting of 圓仁's years
+  there; this relationship does not claim it as a cause of anything later.
+cite:
+  - id: zhang-yong-ennin-contact-basis
+    says:
+      The diary records 張詠 recalling on 圓仁's return in 845 that he had arranged the permits of 840, and
+      offering to feed him until a ship was found.
+    source: nitto-guho-junrei-gyoki
+    at: 卷四 會昌五年八月廿七日
+    quote: 未歸國之間。每日齋粮。余情願自供。

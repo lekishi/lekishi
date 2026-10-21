@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  圓仁's return from 長安 to Japan. Expelled as a laicized foreign monk in 845, he is passed east and
+  north to 登州, waits at 赤山, and sails on 金珍's ship in 847 to the 鴻臚館. The relationship
+  records documented movement only and draws no route.
+types: [travel]
+from: ennin
+to: korokan
+date:
+  value: 845-05-15..847-09-18
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: 會昌五年五月十五日 出城 — 會昌七年九月十八日 到鴻臚館前
+cite:
+  - id: ennin-return-to-japan-basis
+    says: The diary records leaving 長安 on 會昌五年五月十五日 and arriving before the 鴻臚館 on 會昌七年九月十八日.
+    sources:
+      - source: nitto-guho-junrei-gyoki
+        at: 卷四 會昌五年五月十五日
+      - source: nitto-guho-junrei-gyoki
+        at: 卷四 會昌七年九月十八日

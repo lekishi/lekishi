@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  The 會昌 court's edicts laicize 圓仁 and 惟正 as foreign monks without Tang ordination certificates
+  and send them home under escort. Recorded as an institutional change acting on 圓仁.
+types: [institutional_change]
+from: tang-wuzong
+to: ennin
+date:
+  value: 845-04..845-05
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 會昌五年四月 — 五月
+cite:
+  - id: huichang-expulsion-basis
+    says:
+      The diary records that under the edict on foreign monks 圓仁 and 惟正, having no Tang 祠部牒, were put on
+      the laicization list and were to be sent home.
+    source: nitto-guho-junrei-gyoki
+    at: 卷四 會昌五年四月十五日
+    quote: 外國等。若无祠部牒者。亦勒還俗遞歸本國者。

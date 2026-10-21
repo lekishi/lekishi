@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  劉慎言 of the Silla ward of 楚州 as 圓仁's agent. He kept his books in 845, sent them on in 846 after
+  burning the mandalas, and received him again in 847.
+types: [contact]
+from: liu-shenyan
+to: ennin
+date:
+  value: 845-07..847-06
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: 會昌五年七月三日 — 會昌七年六月十八日
+cite:
+  - id: liu-shenyan-ennin-contact-basis
+    says: The diary records 劉慎言 receiving 圓仁 at the 新羅坊 in 845 and again as its head in 847.
+    sources:
+      - source: nitto-guho-junrei-gyoki
+        at: 卷四 會昌五年七月三日
+      - source: nitto-guho-junrei-gyoki
+        at: 卷四 會昌七年六月五日

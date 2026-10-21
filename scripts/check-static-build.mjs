@@ -112,10 +112,20 @@ const drafts = draftChaptersServed()
 const states = new Map((await compileChapters()).map((bundle) => [bundle.id, bundle]))
 
 /**
+ * Whether this build serves `chapter`: an approved one always, the rest only on
+ * a build that serves drafts. Production leaves a draft or stale chapter out
+ * instead of failing (the owner's decision of 2026-10-21).
+ *
+ * @param {string} chapter
+ */
+function served(chapter) {
+  return drafts || states.get(chapter)?.state === "approved"
+}
+
+/**
  * The decision line a served chapter states: the date of the owner's approval in
  * its manifest, or, on a build that serves drafts, the draft line for a chapter
- * whose approval does not match. Production serves no draft, so a chapter
- * without a matching approval has no line there and fails below.
+ * whose approval does not match.
  *
  * @param {string} chapter
  */
@@ -130,7 +140,7 @@ function decisionLine(chapter) {
     return `Draft: changed since the owner's approval of ${bundle.approval?.on}, not approved for release`
   }
 
-  return drafts ? "Draft, not approved for release" : `${chapter} has no matching approval`
+  return "Draft, not approved for release"
 }
 
 /**
@@ -143,7 +153,7 @@ function decisionLine(chapter) {
  * manifest's approval records (read from the manifest, so a new approval needs
  * no edit here), and one published record id the built scripts must carry.
  */
-const CHAPTERS = [
+const SENTINELS = [
   {
     id: "tang-mission-750-754",
     name: "The embassy to Tang China",
@@ -160,6 +170,9 @@ const CHAPTERS = [
   },
 ]
 
+/** The sentinels for the chapters this build serves. */
+const CHAPTERS = SENTINELS.filter((chapter) => served(chapter.id))
+
 /**
  * The routes that used to serve a chapter and now redirect to it: `/atlas` was
  * the launch chapter's route, and `/compare/qin` the bounded chapter's review
@@ -167,15 +180,27 @@ const CHAPTERS = [
  * as if it were a chapter.
  */
 const REDIRECTS = [
-  { file: "atlas.html", target: "/chapters/tang-mission-750-754" },
-  { file: "compare/qin.html", target: "/chapters/qin-conquest-han-233-226" },
-]
+  { file: "atlas.html", chapter: "tang-mission-750-754" },
+  { file: "compare/qin.html", chapter: "qin-conquest-han-233-226" },
+].map(({ file, chapter }) => ({
+  file,
+  // A chapter a production build leaves out sends its legacy route home.
+  target: served(chapter) ? `/chapters/${chapter}` : "/",
+}))
 
 const indexHtml = read(path.join(buildDirectory, "index.html"))
 const notFoundHtml = read(path.join(buildDirectory, "404.html"))
 const chapterHtml = new Map()
 
-// Every chapter is prerendered as real content: the HTML a static host returns
+// A chapter this build leaves out has no page at all: nothing unapproved
+// reaches a production artifact.
+for (const chapter of SENTINELS.filter((entry) => !served(entry.id))) {
+  if (existsSync(path.join(buildDirectory, "chapters", `${chapter.id}.html`))) {
+    fail(`chapters/${chapter.id}.html is in the artifact, but ${chapter.id} is not approved`)
+  }
+}
+
+// Every served chapter is prerendered as real content: the HTML a static host returns
 // already names the chapter, its window, and the decision recorded on it, before
 // any script runs.
 for (const chapter of CHAPTERS) {
@@ -234,7 +259,8 @@ for (const chapter of CHAPTERS) {
   }
 }
 
-// The legacy routes still resolve, and they resolve to the chapter they served.
+// The legacy routes still resolve, and they resolve to the chapter they served
+// when this build serves it.
 for (const redirect of REDIRECTS) {
   const file = path.join(buildDirectory, redirect.file)
 
@@ -244,7 +270,7 @@ for (const redirect of REDIRECTS) {
 
   const html = read(file)
 
-  if (!html.includes(redirect.target)) {
+  if (!html.includes(`url=${redirect.target}"`)) {
     fail(`${redirect.file} does not redirect to ${redirect.target}`)
   }
 
@@ -327,11 +353,24 @@ if (!/["'`]\/globe\/["'`]/.test(scriptText)) {
 // be projected, so a build that got this far has representable chapters. These
 // are sentinel checks on what the artifact actually contains — each chapter's own
 // id and a published record id — so replacing or renaming a chapter fails this
-// check until the invariant is updated with it.
+// check until the invariant is updated with it. The chapter's data is the
+// route's server load, prerendered beside its page as `__data.json` (RFD 6), so
+// no chapter's content is a script.
+const chapterData = new Map()
+
 for (const chapter of CHAPTERS) {
+  const file = path.join(buildDirectory, "chapters", chapter.id, "__data.json")
+
+  if (!requireFile(file)) continue
+
+  const data = read(file)
+  chapterData.set(chapter.id, data)
+
   for (const marker of [chapter.id, chapter.event]) {
-    if (!scriptText.includes(marker)) {
-      fail(`the built scripts do not carry the served chapter: ${marker} is missing`)
+    if (!data.includes(marker)) {
+      fail(
+        `chapters/${chapter.id}/__data.json does not carry the served chapter: ${marker} is missing`,
+      )
     }
   }
 }
@@ -340,7 +379,7 @@ for (const chapter of CHAPTERS) {
 // tests only. These sentinels are its own strings; they are a tripwire, not a
 // proof that no fixture content could ever reach the artifact, which is what the
 // browser checks are for.
-const applicationText = `${scriptText}\n${[indexHtml, notFoundHtml, ...chapterHtml.values()].join("\n")}`
+const applicationText = `${scriptText}\n${[indexHtml, notFoundHtml, ...chapterHtml.values(), ...chapterData.values()].join("\n")}`
 
 for (const marker of [
   "Synthetic foundation fixture",
@@ -530,18 +569,91 @@ if (files.length > MAX_FILES) {
   fail(`the artifact has ${files.length} files; Cloudflare Pages accepts at most ${MAX_FILES}`)
 }
 
-// --- no server process --------------------------------------------------------
+// --- the worker ---------------------------------------------------------------
+
+// The reader site is files. The Pages worker (`_worker.js`, RFD 6) answers
+// sign-in and members' drafts only: `_routes.json` sends it exactly those
+// paths and excludes every prerendered page by name, so a served chapter is
+// never a worker invocation. The adapter drops exclusions beyond the file's
+// 100 rules, which would quietly route chapters through the worker, so the
+// count is checked too.
+const WORKER_ROUTES = ["/chapters/*", "/auth/*", "/drafts.json", "/drafts/*"]
 
 if (existsSync(path.join(buildDirectory, "server"))) {
-  fail("build/server exists: the artifact must not contain a server runtime")
+  fail("build/server exists: the server bundle belongs outside the artifact")
+}
+
+const workerFile = path.join(buildDirectory, "_worker.js")
+
+// The worker entry imports the server bundle from `.svelte-kit/`, which Pages
+// bundles at deploy time; nothing of the server, drafts included, is a file
+// the static host could serve.
+if (requireFile(workerFile) && !read(workerFile).includes(".svelte-kit/output/server/")) {
+  fail("_worker.js does not import the server bundle from .svelte-kit/output/server")
+}
+
+const routesFile = path.join(buildDirectory, "_routes.json")
+
+if (requireFile(routesFile)) {
+  try {
+    const routes = JSON.parse(read(routesFile))
+
+    if (JSON.stringify(routes.include) !== JSON.stringify(WORKER_ROUTES)) {
+      fail(
+        `_routes.json includes ${JSON.stringify(routes.include)}, expected ${JSON.stringify(WORKER_ROUTES)}`,
+      )
+    }
+
+    if (routes.include.length + routes.exclude.length > 100) {
+      fail(
+        `_routes.json has ${routes.include.length + routes.exclude.length} rules; Pages accepts 100`,
+      )
+    }
+
+    for (const chapter of [...states.keys()].filter(served)) {
+      for (const route of [`/chapters/${chapter}`, `/chapters/${chapter}/__data.json`]) {
+        if (!routes.exclude.includes(route)) {
+          fail(`_routes.json does not exclude ${route}, so the worker would answer it`)
+        }
+      }
+    }
+  } catch (error) {
+    fail(`_routes.json is not valid: ${error instanceof Error ? error.message : error}`)
+  }
 }
 
 const strayScripts = files.filter(
-  (file) => file.endsWith(".js") && !inBuild(file).startsWith("_app/"),
+  (file) => file.endsWith(".js") && !inBuild(file).startsWith("_app/") && file !== workerFile,
 )
 
 if (strayScripts.length > 0) {
   fail(`unexpected scripts outside _app/: ${strayScripts.map(inBuild).join(", ")}`)
+}
+
+// --- members' drafts ------------------------------------------------------------
+
+// A production build leaves every unapproved chapter out of the public site,
+// and the worker shows it only to signed-in members (RFD 6). No file a static
+// host serves may name one: not its id, its title or its summary, in a page, a
+// script, a data file or the search index. Binary files (tiles, fonts, images)
+// cannot carry them and are skipped.
+const TEXT_FILE = /\.(html|js|json|css|txt|xml|svg|webmanifest)$/
+
+if (!drafts) {
+  const unserved = [...states.values()].filter((bundle) => !served(bundle.id))
+  const texts = files
+    .filter((file) => file !== workerFile && TEXT_FILE.test(file))
+    .map((file) => ({ file, text: read(file) }))
+
+  for (const bundle of unserved) {
+    for (const marker of [bundle.id, bundle.title, bundle.summary]) {
+      const leak = texts.find(({ text }) => text.includes(marker))
+
+      if (leak !== undefined) {
+        fail(`${inBuild(leak.file)} names the unapproved chapter ${bundle.id}: ${marker}`)
+      }
+    }
+  }
 }
 
 // --- the /dev pages ----------------------------------------------------------
@@ -605,5 +717,5 @@ if (problems.length > 0) {
 }
 
 console.log(
-  `Static build verified: ${files.length} files, globe tiles and tile worker included, no server runtime.`,
+  `Static build verified: ${files.length} files, globe tiles and tile worker included, the worker routed to sign-in and drafts only.`,
 )

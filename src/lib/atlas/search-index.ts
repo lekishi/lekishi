@@ -58,12 +58,15 @@ export type SearchIndex = {
   readonly entries: readonly SearchEntry[]
 }
 
+/** A chapter's display name: its card's, or the one a caller supplies for a chapter without a card. */
+type ChapterNamer = (chapter: Chapter) => string
+
 function chapterName(chapter: Chapter): string {
   return chapterPresentation(chapter.id)?.name ?? chapter.title
 }
 
 /** The entries for one chapter, in the story's order where the story names them. */
-export function chapterEntries(chapter: Chapter): SearchEntry[] {
+export function chapterEntries(chapter: Chapter, name: ChapterNamer = chapterName): SearchEntry[] {
   const href = chapterHref(chapter.id)
   const places = new Map(chapter.places.map((place) => [place.id, place]))
   const actors = new Map(chapter.actors.map((actor) => [actor.id, actor]))
@@ -80,9 +83,9 @@ export function chapterEntries(chapter: Chapter): SearchEntry[] {
       chapterId: chapter.id,
       kind: "chapter",
       id: chapter.id,
-      title: chapterName(chapter),
+      title: name(chapter),
       detail: windowLabel(chapter.defaultWindow),
-      names: [chapterName(chapter), chapter.title],
+      names: [name(chapter), chapter.title],
       text: [chapter.summary],
       href,
       disputed: false,
@@ -202,21 +205,28 @@ export function chapterEntries(chapter: Chapter): SearchEntry[] {
   return entries
 }
 
-export function buildSearchIndex(chapters: readonly Chapter[]): SearchIndex {
+/**
+ * `name` names a chapter that has no card in this build: a member's draft on the
+ * published site (RFD 6) is named by its manifest, which only the server knows.
+ */
+export function buildSearchIndex(
+  chapters: readonly Chapter[],
+  name: ChapterNamer = chapterName,
+): SearchIndex {
   const ordered = [...chapters].sort((a, b) => a.defaultWindow.start - b.defaultWindow.start)
 
   return {
     version: 1,
     chapters: ordered.map((chapter) => ({
       id: chapter.id,
-      name: chapterName(chapter),
+      name: name(chapter),
       window: windowLabel(chapter.defaultWindow),
       href: chapterHref(chapter.id),
       start: chapter.defaultWindow.start,
       home: chapter.homeView,
       events: chapter.events.filter((event) => !event.coda).length,
     })),
-    entries: ordered.flatMap(chapterEntries),
+    entries: ordered.flatMap((chapter) => chapterEntries(chapter, name)),
   }
 }
 

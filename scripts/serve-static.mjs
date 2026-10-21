@@ -10,7 +10,7 @@
  *   * it serves only files under the artifact directory (`build/` by default),
  *     and refuses a path that escapes it,
  *   * a request without an extension resolves to `<path>.html` (clean URLs; the
- *     same rule `static/_redirects` states explicitly for `/atlas`),
+ *     same rule `_redirects` states explicitly for `/atlas`),
  *   * a request for a directory or a trailing slash resolves to its `index.html`,
  *     and a trailing slash on a clean URL redirects to the slashless form: the
  *     artifact's asset references are relative, so serving `atlas.html` at

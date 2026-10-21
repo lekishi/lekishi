@@ -6,9 +6,11 @@ places and time. Product and architecture proposals live in the
 
 ## Architecture: a statically built SvelteKit site
 
-The site is a SvelteKit project built with `@sveltejs/adapter-static`. Every route
-is prerendered, so the deployable artifact is a directory of plain files with no
-application server, no database, and no BEAM runtime:
+The site is a SvelteKit project built with `@sveltejs/adapter-cloudflare`. Every
+public route is prerendered, so what a reader gets is a directory of plain files
+with no application server, no database, and no BEAM runtime. A small Cloudflare
+Pages worker answers only sign-in and the drafts that signed-in members of the
+`lekishi` organization may open ([RFD 6](rfd/0006/README.adoc)):
 
 | Owner                                                                                       | Responsibility                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | ------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -173,9 +175,16 @@ for the comparison fixture and the caller-supplied coverage window.
 The site is deployed from the `main` branch at <https://lekishi.pages.dev>.
 
 - Build command: `pnpm build`
-- Output directory: `build`
+- Output directory: `build` (set by `pages_build_output_dir` in `wrangler.jsonc`)
 - Node version: 24 (see `engines` in `package.json` and `.github/workflows/ci.yml`)
-- Environment variables: none
+- Secrets, Production only: `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET` and
+  `SESSION_SECRET`, for members' sign-in. Without them sign-in answers 503 and
+  the published site serves approved chapters only. See
+  [docs/members-sign-in.md](docs/members-sign-in.md).
+
+`build/_routes.json` sends the worker `/chapters/*`, `/auth/*` and `/drafts*`
+only, and excludes every prerendered page by name, so a reader's request is a
+file and never a worker invocation.
 
 Preview builds (any branch but `main`) also run
 `spikes/renderer/globe/preview-build.mjs`, which adds the renderer spike's
@@ -183,10 +192,12 @@ custom globe under `/spikes/` for testing on devices; it generates that page's
 tiles from open data during the build. Production builds skip it.
 
 Cloudflare Pages resolves `/atlas` to `atlas.html` with its default clean-URL
-behavior. `static/_redirects` only normalizes `/atlas/` to `/atlas`; rewriting
+behavior. `_redirects` (at the repository root, where the adapter reads it)
+only normalizes `/atlas/` to `/atlas`; rewriting
 `/atlas` to `/atlas.html` would loop because Pages redirects the file back to its
 clean URL. A path that is not in the artifact is answered from `404.html`, which
-static hosts serve by convention.
+static hosts serve by convention; a chapter address the artifact does not
+carry reaches the worker, which renders the same not-found page.
 
 ### A globe without a provider account
 

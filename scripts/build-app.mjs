@@ -54,18 +54,42 @@ async function build() {
 
   prepareBuildRoutes()
   let outcome
-  // A signal sent to this wrapper alone (a supervisor, `timeout`) is passed on
-  // to Vite, and the build then fails with it; Ctrl-C reaches both anyway.
-  // Either way the cleanup below runs instead of leaving the scratch tree.
+  // Vite runs as the leader of its own process group. adapter-cloudflare starts
+  // wrangler's platform proxy (a `workerd` process) to emulate Pages while
+  // prerendering and never disposes it, so each build would leave one running.
+  // Because the group is detached, Ctrl-C at a terminal reaches this wrapper
+  // only: SIGINT and SIGTERM are forwarded to the whole group, and a group that
+  // has not stopped 3 seconds later is killed, so the build then fails with the
+  // signal and the cleanup below still runs instead of leaving the scratch
+  // tree. Whatever is left in the group once Vite exits is stopped as well.
   let received
+  const group = (signal) => {
+    try {
+      process.kill(-child.pid, signal)
+      return true
+    } catch {
+      // Nothing left in the group.
+      return false
+    }
+  }
+  let force
   const forward = (signal) => {
     received = signal
-    child.kill(signal)
+    group(signal)
+    force ??= setTimeout(() => group("SIGKILL"), 3_000)
+  }
+  const stopGroup = async () => {
+    group("SIGTERM")
+    for (const deadline = Date.now() + 3_000; group(0) && Date.now() < deadline;) {
+      await new Promise((resolve) => setTimeout(resolve, 100))
+    }
+    group("SIGKILL")
   }
   const child = spawn(process.execPath, [vite, "build"], {
     cwd: root,
     env: { ...process.env, LEKISHI_BUILD_ROUTES: "1" },
     stdio: "inherit",
+    detached: true,
   })
   process.on("SIGINT", forward)
   process.on("SIGTERM", forward)
@@ -75,6 +99,9 @@ async function build() {
       child.once("exit", (code, signal) => resolve({ code, signal: received ?? signal }))
     })
   } finally {
+    await stopGroup()
+    // After the wait, so a timer armed by a signal during it is cleared too.
+    clearTimeout(force)
     rmSync(path.dirname(buildRoutes), { recursive: true, force: true })
     // The build pointed `.svelte-kit/`'s generated client modules and `$types`
     // at the copy it just removed. Regenerate them from `src/routes`, or a dev
@@ -95,6 +122,8 @@ async function build() {
     process.off("SIGTERM", forward)
   }
 
+  // A signal that arrived while the group was being stopped still fails the build.
+  outcome = { ...outcome, signal: received ?? outcome.signal }
   if (outcome.signal) {
     console.error(`vite build stopped by ${outcome.signal}`)
     process.exitCode = 128 + (constants.signals[outcome.signal] ?? 0)

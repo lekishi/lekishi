@@ -1,0 +1,32 @@
+= RFD 0006 implementation checklist
+
+Implements link:README.adoc[RFD 6: Signed-in drafts on the published site]. The
+RFD is in `discussion`. The owner chose option A on 2026-10-21.
+
+== Decide
+
+- [x] Owner chooses the gate (2026-10-21: A): A (GitHub sign-in in the SvelteKit app, after renga-dcim/rfd), B (Cloudflare Access) or C (a separate drafts deployment).
+- [x] Owner authorizes `adapter-cloudflare`, the worker and the secrets the gate needs, and the session cookies, as exceptions to `AGENTS.md`'s static-site rules and a supersession of part of RFD 3's static architecture decision (2026-10-21, with the choice of A).
+- [ ] Owner answers the open questions: a stale chapter's public URL, previews, session length, OAuth App or GitHub App.
+
+== Build
+
+- [x] A production build drops unapproved chapters with a warning instead of failing (from PR #26, carried here so it lands first).
+- [x] The public `virtual:lekishi-chapters` index lists served chapters only, so no draft title reaches public JavaScript.
+- [x] Move to `adapter-cloudflare` with every public route prerendered. `wrangler.jsonc` keeps the output in `build/`, so `pnpm preview`, the e2e static mode and CI are unchanged. A production build is 1,405 files with 12 `_routes.json` rules (2026-10-21); a chapter's data moves from a script chunk into its page and `__data.json` (Tang: 72 KB page, 60 KB data, uncompressed).
+- [x] The chapter route loads on the server with `prerender = "auto"`: approved chapters prerendered, drafts rendered for members, 404 otherwise.
+- [x] `/drafts.json` and `/drafts/search-index.json` for members; home cards and search read them under the hint cookie.
+- [x] The production draft wording in `release.ts` (`MEMBER_DRAFT_SCOPE`).
+- [x] Build invariant: no draft id, title or summary in any static file or client chunk; the worker's routes, every served chapter excluded from it, and at most 100 rules.
+
+== Gate (option A)
+
+- [ ] OAuth App owned by the `lekishi` organization; owner creates it and sets the Production secrets (link:../../docs/members-sign-in.md[the setup guide]).
+- [x] `src/lib/server/github.ts` and `session.ts` after renga's, `src/hooks.server.ts`, and the `/auth/*` routes, with Vitest coverage for expiry, tampering, non-members and the 404 for anonymous requests. Checked end to end under `wrangler pages dev` with a probe draft (2026-10-21).
+- [x] `scripts/check-worker.mjs` (`pnpm check:worker`, in CI's `production` job) checks a stale approved chapter through the built worker under `wrangler pages dev`. A member's session gets its page and data with overlays and `private, no-store`. No session, or a forged or expired one, gets exactly the unknown-chapter answer, and the drafts' cards and search answer 404. The script fails when a forged session is accepted or `Vary: Cookie` is dropped (2026-10-21).
+- [x] "Members sign in" in the home page's footer, and on a chapter address's not-found page. RFD 5 may move it.
+- [ ] Verified on production after the owner's go-ahead: anonymous sees no draft, a member sees every draft, previews unchanged.
+
+== Later
+
+- [ ] A second provider (OIDC) behind the same interface.

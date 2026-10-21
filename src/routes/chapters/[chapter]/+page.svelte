@@ -2,7 +2,7 @@
   import { untrack } from "svelte"
   import { afterNavigate, pushState, replaceState } from "$app/navigation"
   import { page } from "$app/state"
-  import { chapterHeading, chapterHref } from "$lib/atlas/chapters"
+  import { chapterHeading, chapterHref, type ChapterHeading } from "$lib/atlas/chapters"
   import type { Chapter } from "$lib/atlas/domain"
   import { navigateWorkspace, releaseWorkspace, startAtlasPage } from "$lib/atlas/entry"
   import { windowLabel } from "$lib/atlas/labels"
@@ -34,9 +34,14 @@
    * the workspace, and a link to the chapter already open moves the workspace
    * to it and says what it opened.
    */
-  let { data }: { data: { chapter: Chapter } } = $props()
+  let {
+    data,
+  }: { data: { chapter: Chapter; heading: ChapterHeading | null; scope: string | null } } = $props()
 
-  const heading = $derived(chapterHeading(data.chapter))
+  // A member's draft on the published site carries its own heading and says
+  // who can see it (RFD 6); every other chapter's comes from its card.
+  const heading = $derived(data.heading ?? chapterHeading(data.chapter))
+  const scope = $derived(data.scope ?? DRAFT_SCOPE)
   let mounted = $state(false)
 
   const history: AtlasHistory = {
@@ -46,9 +51,10 @@
 
   $effect(() => {
     const chapter = data.chapter
+    const opened = data.heading
 
     untrack(() => {
-      startAtlasPage(chapter, chapterHeading(chapter), history, page.url.search)
+      startAtlasPage(chapter, opened ?? chapterHeading(chapter), history, page.url.search)
       mounted = true
     })
 
@@ -85,7 +91,8 @@
 <main class="flex h-dvh min-h-0 flex-col overflow-hidden bg-abyss font-interface text-ink">
   {#if heading.draft}
     <!--
-      A draft chapter, served only by development and pull-request previews.
+      A draft chapter, served by development and pull-request previews, and on
+      the published site to signed-in members of the lekishi organization.
       The strip sits above the atlas rather than over it, so it stays on screen
       the whole time the chapter is open without covering any of the atlas's
       own regions, and it is in the prerendered HTML too. A phone keeps the
@@ -101,7 +108,7 @@
       >
         Draft
       </span>
-      <span>{heading.decision}<span class="max-sm:hidden">. {DRAFT_SCOPE}</span></span>
+      <span>{heading.decision}<span class="max-sm:hidden">. {scope}</span></span>
     </p>
   {/if}
 

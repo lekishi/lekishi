@@ -1,5 +1,5 @@
 import type { Actor, Chapter, HistoricalEvent, Place, Relationship } from "./domain"
-import { chapterOverlays, familyOf, type RelationshipFamily } from "./overlays"
+import { familyOf, type RelationshipFamily } from "./overlays"
 import { overlapsWindow } from "./time"
 import type { TimeWindow } from "./domain"
 
@@ -67,7 +67,7 @@ export function connectedEvents(chapter: Chapter, event: HistoricalEvent): Conne
     }
   }
 
-  for (const journey of chapterOverlays(chapter.id).journeys) {
+  for (const journey of chapter.overlays.journeys) {
     const index = journey.stops.findIndex((stop) => stop.eventId === event.id)
 
     if (index === -1) {

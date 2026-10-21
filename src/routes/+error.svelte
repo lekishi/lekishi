@@ -2,6 +2,8 @@
   import { page } from "$app/state"
   import { CHAPTERS } from "$lib/atlas/chapters"
   import { windowLabel } from "$lib/atlas/labels"
+  import { memberHinted, signInHref } from "$lib/atlas/members"
+  import { onMount } from "svelte"
   import SearchDialog from "$lib/atlas/navigation/SearchDialog.svelte"
   import { Icon, Logo, focusRing, transition } from "$lib/ui"
 
@@ -10,9 +12,21 @@
    * not part of the atlas, then offer the two ways on, search and the
    * chapters, rather than a dead end.
    */
-  let { status, error }: { status: number; error: { message: string } | null } = $props()
+  // SvelteKit gives an error page no props: the status and the error are the
+  // page state's. The worker renders this page for a chapter address it does
+  // not serve (RFD 6), so it must read them there.
+  const status = $derived(page.status)
+  const error = $derived(page.error)
 
   let searchOpen = $state(false)
+
+  // A chapter address that is not found may be a draft the published site
+  // shows only to signed-in members (RFD 6). The page cannot say which without
+  // telling a stranger that a draft exists, so it offers the sign-in to anyone
+  // not signed in, on chapter addresses only.
+  let member = $state(true)
+  onMount(() => (member = memberHinted()))
+  const chapterAddress = $derived(status === 404 && page.url.pathname.startsWith("/chapters/"))
 </script>
 
 <svelte:head>
@@ -44,6 +58,20 @@
         : (error?.message ?? "The page could not be rendered.")}
     </p>
     <p class="mt-1 truncate text-caption text-ink-faint">{page.url.pathname}</p>
+    {#if chapterAddress && !member}
+      <p class="mt-3 text-body-sm text-ink-dim">
+        Members of the lekishi organization can
+        <a
+          class={[
+            "rounded-control text-gold underline decoration-rule underline-offset-2 hover:text-gold-bright",
+            transition,
+            focusRing,
+          ]}
+          href={signInHref(page.url.pathname + page.url.search)}
+          data-sveltekit-reload>sign in</a
+        > to see drafts.
+      </p>
+    {/if}
 
     <button
       type="button"

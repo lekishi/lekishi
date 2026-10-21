@@ -14,6 +14,7 @@ import {
   type JsonObject,
   type JsonValue,
 } from "../historical/contract/types"
+import { overlayDefinitions } from "./overlay-definitions"
 import type {
   Actor,
   Chapter,
@@ -216,6 +217,7 @@ export function projectChapter(
       sources,
       story: storySteps,
       publication,
+      overlays: overlayDefinitions(name),
     },
   }
 }

@@ -1,8 +1,9 @@
 <script lang="ts">
   import { onMount } from "svelte"
   import { goto } from "$app/navigation"
-  import { CHAPTERS, chapterPresentation } from "$lib/atlas/chapters"
+  import { CHAPTERS, chapterPresentation, type ChapterCard } from "$lib/atlas/chapters"
   import { windowLabel } from "$lib/atlas/labels"
+  import { loadDraftCards, memberHinted, signInHref } from "$lib/atlas/members"
   import { lastPosition, type Position } from "$lib/atlas/memory"
   import ChapterGlobe from "$lib/atlas/navigation/ChapterGlobe.svelte"
   import SearchDialog from "$lib/atlas/navigation/SearchDialog.svelte"
@@ -45,9 +46,16 @@
   let searchOpen = $state(false)
   let query = $state("")
   let resume = $state<Position | null>(null)
+  // A signed-in member of the lekishi organization also sees the drafts the
+  // published site leaves out (RFD 6), after the approved chapters.
+  let drafts = $state.raw<readonly ChapterCard[]>([])
+  let member = $state(false)
+  const cards = $derived([...CHAPTERS, ...drafts])
 
   onMount(() => {
     resume = lastPosition()
+    member = memberHinted()
+    if (member) void loadDraftCards().then((loaded) => (drafts = loaded))
   })
 
   const resumeChapter = $derived(resume ? chapterPresentation(resume.chapterId) : undefined)
@@ -203,13 +211,13 @@
     >
       <div class="flex items-baseline justify-between gap-4">
         <h2 id="chapters-heading" class="font-display text-title text-ink">Chapters</h2>
-        <span class="text-caption text-ink-faint">{CHAPTERS.length} chapters</span>
+        <span class="text-caption text-ink-faint">{cards.length} chapters</span>
       </div>
       <div class="rounded-plate border border-rule bg-lacquer px-4 pt-3 pb-1 sm:px-6">
-        <TimeRibbon chapters={CHAPTERS} />
+        <TimeRibbon chapters={cards} />
       </div>
       <div class="grid gap-4 md:grid-cols-2">
-        {#each CHAPTERS as chapter (chapter.id)}
+        {#each cards as chapter (chapter.id)}
           <article
             class="group flex flex-col rounded-plate border border-rule bg-lacquer p-5 shadow-plate transition-[border-color] duration-(--motion-fast) ease-ui hover:border-frame"
             data-chapter-id={chapter.id}
@@ -217,7 +225,10 @@
             <p class="flex items-center gap-2 text-label font-semibold uppercase text-gold">
               <span class="tabular-nums">{windowLabel(chapter.window)}</span>
               {#if chapter.draft}
-                <!-- Only development and pull-request previews serve a draft. -->
+                <!--
+                  Development and pull-request previews serve drafts, and the
+                  published site shows them to signed-in members.
+                -->
                 <span
                   data-chapter-draft
                   class="rounded-control border border-current px-1.5 text-danger"
@@ -269,7 +280,32 @@
   <footer
     class="flex flex-wrap items-center justify-between gap-2 border-t border-rule px-4 py-4 text-caption text-ink-faint sm:px-8"
   >
-    <p>A static site: no account and no server.</p>
+    <div class="flex items-center gap-2">
+      <p>A static site: reading needs no account.</p>
+      {#if member}
+        <!-- A POST, so a link elsewhere cannot sign a member out. -->
+        <form method="POST" action="/auth/logout">
+          <button
+            type="submit"
+            class={[
+              "cursor-pointer rounded-control text-ink-dim underline decoration-rule underline-offset-2 hover:text-ink",
+              transition,
+              focusRing,
+            ]}>Sign out</button
+          >
+        </form>
+      {:else}
+        <a
+          class={[
+            "rounded-control text-ink-dim underline decoration-rule underline-offset-2 hover:text-ink",
+            transition,
+            focusRing,
+          ]}
+          href={signInHref("/")}
+          data-sveltekit-reload>Members sign in</a
+        >
+      {/if}
+    </div>
     <p>
       Elevation: Terrain Tiles (Mapzen and contributors) · Land cover: ESA WorldCover 2021 (CC BY
       4.0) · Imagery from Natural Earth II ·

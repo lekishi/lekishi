@@ -52,11 +52,55 @@ jobs:
       - name: Check Svelte and TypeScript
         run: pnpm check
 
+      # Test runs serve drafts, so every chapter is checked whether or not the
+      # owner has approved it, and a missing approval fails nothing (the owner's
+      # decision of 2026-10-21).
       - name: Run unit and contract tests
         run: pnpm test
 
       - name: Check generated brand assets
         run: pnpm brand:check
+
+  production:
+    # The build production runs, without drafts (RFD 2, "Decided: a missing
+    # approval never fails a build"). It leaves out every chapter whose approval
+    # does not match its content and still has to pass, and it lists what awaits
+    # the owner's approval in the job summary. Nothing here fails for a missing
+    # approval; only the owner approves, with `pnpm approvals`.
+    runs-on: blacksmith-4vcpu-ubuntu-2404
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          package_json_file: package.json
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: List the chapters and what awaits approval
+        run: pnpm approvals | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Build as production does
+        run: pnpm build
+
+      # The members' draft path through the built Pages worker (RFD 6): one
+      # approved chapter is made stale for this build only, and a member's
+      # session must open it while no session, a forged one or an expired one
+      # gets the same 404 as an unknown chapter. The tiles are already built, so
+      # only the app is rebuilt.
+      - name: Check the worker's drafts with a stale chapter
+        run: pnpm check:worker
 
   build:
     # Builds the static artifact once, with its build invariant, and hands it to
@@ -110,8 +154,14 @@ jobs:
           path: .cache/fonts/src
           key: font-sources-${{ hashFiles('scripts/fonts/sources.json') }}
 
+      # The artifact serves drafts, as a pull-request preview does, so the
+      # browser checks run on content awaiting approval. Production (the
+      # Cloudflare build of `main`) never sets this and leaves unapproved
+      # chapters out; the `production` job checks that build.
       - name: Build the static artifact
         run: pnpm build
+        env:
+          LEKISHI_DRAFTS: "1"
 
       - name: Upload the static artifact
         uses: actions/upload-artifact@v4

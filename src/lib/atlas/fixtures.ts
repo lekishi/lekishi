@@ -253,4 +253,5 @@ export const FIXTURE_CHAPTER: Chapter = {
     coverageNote: "Synthetic test content, not historical content.",
     reviewNotes: "Synthetic test content, not historical content.",
   },
+  overlays: { journeys: [], actorAnchors: {}, endAnchors: {}, dioramas: [] },
 }

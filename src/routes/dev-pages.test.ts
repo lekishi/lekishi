@@ -54,12 +54,15 @@ describe("draftChaptersServed", () => {
     ["a local production build", { env: {} }, false],
     ["the production deploy from main", { env: { CF_PAGES: "1", CF_PAGES_BRANCH: "main" } }, false],
     ["a pull-request preview", { env: { CF_PAGES: "1", CF_PAGES_BRANCH: "claude/x" } }, true],
-    ["a test run", { command: "serve" as const, env: { VITEST: "true" } }, false],
+    // The owner's decision of 2026-10-21: a missing approval fails nothing, so
+    // tests check every chapter, approved or not.
+    ["a test run", { command: "serve" as const, env: { VITEST: "true" } }, true],
     [
-      "a preview's chapter gate",
-      { command: "serve" as const, env: { VITEST: "true", LEKISHI_DRAFTS: "1" } },
-      true,
+      "a test run that opts out",
+      { command: "serve" as const, env: { VITEST: "true", LEKISHI_DRAFTS: "0" } },
+      false,
     ],
+    ["a build that opts in", { env: { LEKISHI_DRAFTS: "1" } }, true],
   ])("is %s: %s", (_, options, expected) => {
     expect(draftChaptersServed(options)).toBe(expected)
   })

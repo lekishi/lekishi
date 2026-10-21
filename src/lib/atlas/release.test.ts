@@ -15,11 +15,18 @@ import { chapterDraft, chapterRelease, draftStatement } from "./release"
  * actually carries.
  */
 
+/** Whether a chapter is approved at its current content. */
+function approved(id: string): boolean {
+  return CHAPTER_MANIFESTS.find((entry) => entry.id === id)?.state === "approved"
+}
+
 describe("the chapter cards' release statements", () => {
   it("states the decision and date each chapter's approval records", () => {
     expect(SERVED_CHAPTERS.length).toBeGreaterThan(0)
 
-    for (const { id } of SERVED_CHAPTERS) {
+    // A served chapter awaiting approval is a draft (CI serves drafts; the
+    // publication gate is its own check), and the draft tests below cover it.
+    for (const { id } of SERVED_CHAPTERS.filter(({ id }) => approved(id))) {
       const manifest = CHAPTER_MANIFESTS.find((entry) => entry.id === id)
       const release = chapterRelease(id)
 
@@ -37,7 +44,7 @@ describe("the chapter cards' release statements", () => {
   })
 
   it("describes each approved set as it is: self-review, not independent or specialist review", () => {
-    for (const { id } of SERVED_CHAPTERS) {
+    for (const { id } of SERVED_CHAPTERS.filter(({ id }) => approved(id))) {
       const bundle = chapterBundle(id)
       const release = chapterRelease(id)
 

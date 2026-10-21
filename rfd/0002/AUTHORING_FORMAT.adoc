@@ -571,6 +571,34 @@ chapter awaiting approval. This supersedes the "chapter id typed back" rule in
   an answer in cannot approve a chapter. The approver and the date are named in
   the question, as before.
 
+== Decided: a missing approval never fails a build — 2026-10-21
+
+The owner observed on 2026-10-21 that every content change failed CI until the
+owner approved it, because `verify` and `build` ran the production gate. That
+hid real failures behind the expected one and made a content pull request red
+by design. The owner first agreed that CI should check drafts with the approval
+as its own check, then decided the same day that builds should not fail for
+lack of an approval at all.
+
+* Test runs serve drafts by default, so `pnpm test`, `verify`, and the build's
+  chapter gate (`scripts/check-chapter.mjs`) check every chapter's content,
+  approved or not. They fail only for a real problem. `LEKISHI_DRAFTS=0` opts a
+  test run out.
+* CI's `build` builds the artifact with `LEKISHI_DRAFTS=1`, as a pull-request
+  preview does, and the browser checks run on it.
+* A production build leaves out every chapter whose approval does not match
+  its content, a draft or a stale one, index and title included, and prints
+  which and why instead of failing. `scripts/check-static-build.mjs` checks that
+  no unapproved chapter's page is in a production artifact. An edit to approved
+  content still never reaches readers without a new approval; the chapter is
+  absent until the owner approves it. (Proposed to the owner on 2026-10-21
+  against serving the last approved version or keeping the failure; built as
+  the recommended option while the owner decides.)
+* CI's `production` job runs that production build and lists what awaits
+  approval in its summary. It does not fail for a missing approval.
+* An approval must still be well formed: dated, not before the record files
+  existed or after today, and naming who approved it.
+
 == Alternatives
 
 Chapter folders with a shared catalog for places, actors, and sources only::

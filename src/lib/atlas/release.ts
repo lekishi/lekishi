@@ -73,16 +73,24 @@ export const DRAFT_SCOPE =
   "This build is a preview; the published site serves approved chapters only."
 
 /**
+ * What a draft's full line adds on the published site, where only signed-in
+ * members of the lekishi organization see drafts (RFD 6).
+ */
+export const MEMBER_DRAFT_SCOPE = "Visible to signed-in lekishi members; not published."
+
+/**
  * What a chapter without a matching approval states when a build serves it.
  * Exported so the wording can be pinned without a build that serves drafts.
+ * `scope` says who can see it: a preview's readers, or the published site's
+ * signed-in members.
  */
-export function draftStatement(manifest: ChapterEntry): ChapterDraft {
+export function draftStatement(manifest: ChapterEntry, scope: string = DRAFT_SCOPE): ChapterDraft {
   const decision =
     manifest.state === "stale" && manifest.approval !== null
       ? `Draft: changed since the owner's approval of ${manifest.approval.on}, not approved for release`
       : "Draft, not approved for release"
 
-  return { decision, status: `${decision}. ${DRAFT_SCOPE}` }
+  return { decision, status: `${decision}. ${scope}` }
 }
 
 /** The draft statement for a chapter id, or undefined for an approved or unserved chapter. */

@@ -2,8 +2,8 @@ import { beforeAll, describe, expect, it } from "vitest"
 import { loadServedChapter } from "./chapter-catalog"
 import { QIN_CHAPTER, SERVED_CHAPTERS, TANG_CHAPTER } from "./chapter-registry"
 import type { Chapter } from "./domain"
+import { CHAPTER_OVERLAYS } from "./overlay-definitions"
 import {
-  CHAPTER_OVERLAYS,
   layerOptions,
   relationshipFamily,
   sceneArcs,

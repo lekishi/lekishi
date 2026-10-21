@@ -348,6 +348,22 @@ export async function settledCenter(locator: Locator): Promise<{ x: number; y: n
   })
 }
 
+/**
+ * Folds the desktop legend, which sits open over the scene's lower left. On a
+ * short desktop viewport (Safari's and Firefox's 1280×720) with a preview's
+ * draft banner above the workspace, the scene is short enough that a selected
+ * place can sit under the open legend; checks that press a mark fold it first.
+ */
+export async function foldLegend(page: Page): Promise<void> {
+  const toggle = page.getByTestId("atlas-legend").getByRole("button", { name: "Legend" })
+
+  if ((await toggle.getAttribute("aria-expanded")) === "true") {
+    await toggle.click()
+  }
+
+  await expect(toggle).toHaveAttribute("aria-expanded", "false")
+}
+
 /** The drawn mark of a place on the globe (the marker's second span; the first is the pulse). */
 export function placeMark(page: Page, placeId: string): Locator {
   return page.locator(`[data-marker-id="${placeId}"] > span:nth-child(2)`)

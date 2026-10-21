@@ -8,10 +8,11 @@
  * what a reviewer opens as reviewed content — and because a Cloudflare Pages
  * build runs exactly this command.
  *
- * The gate also carries the publication approval checkpoint: a chapter whose
- * manifest approval no longer matches the digest of its record files fails
- * here, so no edit to approved content reaches readers until the owner approves
- * it again (RFD 2).
+ * A missing or stale approval does not fail here (the owner's decision of
+ * 2026-10-21): it only keeps the chapter out of a production build, which
+ * `scripts/historical-chapters.mjs` does and `scripts/check-static-build.mjs`
+ * checks. The gate checks every chapter's content, approved or not, and that
+ * each approval is well formed (RFD 2).
  *
  * The contract's validator needs `node:fs` (schemas) and `node:crypto`
  * (revision and source hashes), so it cannot run in the browser bundle. This
@@ -25,16 +26,12 @@
  * The three are separate on purpose: validation, representability, and
  * artifact contents.
  *
- * A build that serves drafts (a pull-request preview) runs the gate with
- * `LEKISHI_DRAFTS=1`, so it checks the chapters that build ships: the drafts
- * face the same contract and projection tests, and a stale approval is served
- * as a draft instead of failing. Every other build, and every plain test run,
- * keeps the production gate.
+ * The gate always runs with `LEKISHI_DRAFTS=1`, so the drafts face the same
+ * contract and projection tests as approved chapters in every build.
  */
 import { spawnSync } from "node:child_process"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
-import { draftChaptersServed } from "./dev-pages.mjs"
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 
@@ -54,7 +51,7 @@ const result = spawnSync(
   {
     cwd: repoRoot,
     stdio: "inherit",
-    env: draftChaptersServed() ? { ...process.env, LEKISHI_DRAFTS: "1" } : process.env,
+    env: { ...process.env, LEKISHI_DRAFTS: "1" },
   },
 )
 
@@ -66,9 +63,7 @@ if (result.error !== undefined) {
 
 if (result.status !== 0) {
   console.error("")
-  console.error("A reviewed chapter did not pass its own contract and projection tests.")
-  console.error(
-    "Refusing to build: the artifact must not ship content that review did not approve.",
-  )
+  console.error("A chapter did not pass its own contract and projection tests.")
+  console.error("Refusing to build: the artifact must not ship content that fails them.")
   process.exit(result.status ?? 1)
 }

@@ -1,0 +1,10 @@
+// The Cloudflare Pages project (RFD 6). `pages_build_output_dir` is where the
+// SvelteKit adapter writes the artifact and the worker, and where Pages deploys
+// from. Secrets (the GitHub OAuth App's and the session key) are set in the
+// Pages dashboard for Production only, never here.
+{
+  "name": "lekishi",
+  "pages_build_output_dir": "build",
+  "compatibility_date": "2026-09-24",
+  "compatibility_flags": ["nodejs_compat"],
+}

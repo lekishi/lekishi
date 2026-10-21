@@ -13,6 +13,8 @@
  * geometry asserts no position carries no coordinate.
  */
 
+import type { ChapterOverlays } from "./overlays"
+
 /** A longitude/latitude pair in decimal degrees (WGS 84). */
 export type GeoPoint = {
   readonly lon: number
@@ -295,6 +297,12 @@ export type Chapter = {
   /** The published story's steps, in the story's own presentation order. */
   readonly story: readonly StoryStep[]
   readonly publication: ChapterPublication
+  /**
+   * What the map draws besides places, defined per chapter in
+   * `overlay-definitions.ts`. It travels with the chapter's data rather than in
+   * a shared script, so no public script names a chapter (RFD 6).
+   */
+  readonly overlays: ChapterOverlays
 }
 
 /** An inclusive exploration window in years. */

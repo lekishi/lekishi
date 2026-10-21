@@ -64,9 +64,16 @@ its notes.
 Three places use the ids other branches mint for the same place, so that the
 duplicate fails the build and is merged rather than living as two records:
 `bharukaccha` (Barygaza; the 玄奘 chapter), `ujjayini` (Ozene; the Ashoka
-chapter) and `lanka` (Taprobane; the Ashoka chapter). `rome` and
-`pliny-natural-history` collide in the same way with the Rome and Nile
-chapters. `alexandria`, `coptos` and `berenice` are minted here first.
+chapter) and `lanka` (Taprobane; the Ashoka chapter). `pliny-natural-history`
+collides in the same way with the Nile chapter.
+
+`rome` is the record the Stephen II chapter minted on `main`; this chapter
+folded into it its Pliny name, the Rome thread's (PR #30) Livy citation and the
+Pleiades id, so PR #30 must fold into the same record when it merges.
+`alexandria-egypt` (from the Greece thread, PR #34) is a byte-for-byte copy of
+that thread's file, with the source it cites (`arrian-anabasis`), so the
+branches merge cleanly.
+`coptos` and `berenice` are minted here first.
 
 ## Evidence states the contract lacks
 

@@ -74,7 +74,10 @@ Proposed to the owner, not built:
 
 ## Shared ids
 
-`carthage`, `gades` and `pliny-natural-history` are minted on other branches
-too (the Hannibal and Nile threads). Whichever PR merges second must fold its
-names and cites into the first record; the build fails on the duplicate id
-until it does. `pleiades` is byte-identical across branches.
+`carthage` and `gades` are byte-for-byte copies of the Hannibal thread's files
+(PR #40), with the sources they cite (`livy`, `polybius`), so the branches merge
+cleanly; the Hanno and Pliny name forms live in the events that cite them.
+`pliny-natural-history` is also minted on the Nile thread's branch, from
+another edition; whichever PR merges second must fold its record into the
+first, and the build fails on the duplicate id until it does. `pleiades` is
+byte-identical across branches.

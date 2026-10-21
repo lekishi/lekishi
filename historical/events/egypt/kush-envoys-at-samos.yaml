@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Escorted by Petronius's men, the Candace's envoys reach Augustus at Samos as he is about to leave
+  for Syria. They obtain all they ask, and Caesar remits the tribute he had imposed.
+types: [mission]
+date:
+  value: 21 BCE..20 BCE
+  mode: window
+  calendar: julian
+  as_written:
+    "Strabo: at Samos, where Cæsar was … on the point of proceeding into Syria, having already
+    despatched Tiberius into Armenia"
+  cite:
+    - id: samos-winter
+      says:
+        Dio records Augustus sailing to Samos after settling Greece and wintering there, and proceeding
+        to Asia in the spring of 20 BCE.
+      source: cassius-dio
+      at: LIV.7 (B.C. 20)
+      quote:
+        As for Augustus, after setting the Greek world in order, he sailed to Samos, passed the winter
+        there, and in the spring when Marcus Apuleius and Publius Silius became consuls proceeded to Asia
+places:
+  - place: samos
+    role: site
+participants:
+  - actor: augustus
+    role: host
+  - actor: kush-kingdom
+    role: guest
+    note: The Candace's envoys.
+cite:
+  - id: samos-embassy
+    says:
+      Strabo records the envoys being conducted to Caesar at Samos, obtaining what they desired, and
+      the remission of the tribute.
+    source: strabo-geography
+    at: XVII.1.54 (C819–821)
+    quote:
+      on their replying, that they did not know who Cæsar was, nor where they were to find him, Petronius
+      appointed persons to conduct them to his presence. They arrived at Samos, where Cæsar was at that
+      time, and from whence he was on the point of proceeding into Syria, having already despatched Tiberius
+      into Armenia. The ambassadors obtained all that they desired, and Cæsar even remitted the tribute
+      which he had imposed.
+notes:
+  Strabo's detail that Tiberius had already been sent to Armenia fits Augustus's departure from Samos
+  in the spring of 20 BCE; Dio's consular years bound the window.

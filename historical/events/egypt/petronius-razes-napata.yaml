@@ -1,0 +1,81 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Petronius advances to Napata, the royal seat of the Candace. She sends envoys offering peace
+  and the return of the prisoners and statues, but he takes Napata, from which her son had fled, razes
+  it and turns back, judging the roads beyond impassable.
+types: [campaign]
+date:
+  value: 25 BCE..22 BCE
+  mode: window
+  calendar: julian
+  as_written:
+    "Strabo: while Ælius Gallus was engaged in war with the Arabs (no year); Dio: under B.C.
+    22 (a. u. 732)"
+  cite:
+    - id: kush-war-dio-year
+      says:
+        Dio tells the Ethiopian advance and Petronius's campaign under the year 22 BCE, "about this
+        same time".
+      source: cassius-dio
+      at: LIV.5 (B.C. 22)
+      quote:
+        About this same time the Ethiopians, who dwell beyond Egypt, advanced as far as the city called
+        Elephantine, with Candace as their leader, ravaging the whole region that they traversed.
+    - id: kush-war-strabo-gallus
+      says: Strabo dates the attack only by Aelius Gallus's Arabian war, which Dio narrates under 24 BCE.
+      role: alternative
+      source: strabo-geography
+      at: XVII.1.54 (C819–821)
+      quote:
+        The Ethiopians, emboldened in consequence of a part of the forces in Egypt being drawn off
+        by Ælius Gallus, who was engaged in war with the Arabs, invaded the Thebaïs
+places:
+  - place: napata
+    role: site
+participants:
+  - actor: gaius-petronius
+    role: leader
+  - actor: candace-of-kush
+    role: other
+    note: In a neighbouring stronghold; she sent envoys to treat for peace.
+  - actor: kush-kingdom
+    role: participant
+cite:
+  - id: napata-razed
+    says: Strabo records the envoys, the capture and razing of Napata, and the return with the booty.
+    source: strabo-geography
+    at: XVII.1.54 (C819–821)
+    quote:
+      Petronius attacked and took Napata, from which her son had fled, and then razed it. He made prisoners
+      of the inhabitants, and returned back again with the booty, as he judged any farther advance into
+      the country impracticable on account of the roads.
+  - id: napata-dio
+    says: Dio records that Petronius took Napata, the royal residence, and razed it to the ground.
+    role: supporting
+    source: cassius-dio
+    at: LIV.5 (B.C. 22)
+    quote:
+      There, too, he contended nobly and took among other cities Napata, the royal residence of that
+      tribe. This town was razed to the ground and a garrison left at another post.
+  - id: napata-pliny
+    says: Pliny records that Petronius sacked the town of Napata.
+    role: supporting
+    source: pliny-natural-history
+    at: VI.35 (§181)
+    quote: he also sacked the town of Napata.
+  - id: napata-res-gestae
+    says: Augustus's own account claims that an army sent on his order penetrated Ethiopia as far as Nabata.
+    role: supporting
+    source: res-gestae-divi-augusti
+    at: "26.5"
+    quote:
+      On my order and under my auspices two armies were led, at almost the same time, into Ethiopia
+      and into Arabia which is called the "Happy," and very large forces of the enemy of both races were
+      cut to pieces in battle and many towns were captured. Ethiopia was penetrated as far as the town of
+      Nabata, which is next to Meroë.
+dispute:
+  status: disputed
+  summary:
+    Neither account gives a year for the attack itself. Strabo sets it during Aelius Gallus's Arabian
+    war, which Dio tells under 24 BCE; Dio tells the attack and the campaign under 22 BCE. The record
+    gives a window over both and does not choose a year.

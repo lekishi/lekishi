@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In the epitome of Dio, Nero, though he had intended it, does not march against the Ethiopians
+  or the Caspian Gates, judging their conquest to need time and labour, and sends spies to both instead
+  before leaving for Greece.
+types: [mission]
+date:
+  value: 66..67
+  mode: window
+  calendar: julian
+  as_written: Dio LXIII.8, after the coronation of Tiridates and before Nero crossed into Greece
+  cite:
+    - id: nero-spies-year
+      says:
+        The epitome tells the decision after Tiridates' coronation at Rome and before the journey to
+        Greece.
+      source: cassius-dio
+      at: LXIII.8
+      quote: But he did cross over into Greece
+participants:
+  - actor: nero
+    role: leader
+  - actor: kush-kingdom
+    role: subject
+    note: The Ethiopians of the epitome.
+cite:
+  - id: nero-spies
+    says:
+      The epitome records that Nero did not sail against the Ethiopians as he had intended, but sent
+      spies.
+    source: cassius-dio
+    at: LXIII.8
+    quote:
+      Nero though angry at him did not sail against him, nor yet against the Ethiopians or the Caspian
+      Pylae, as he had intended. [He saw that the subjugation of these regions demanded time and labor and
+      hoped that they would submit to him of their own accord:] and he sent spies to both places.
+notes:
+  The bracketed words are the epitomator's, as Foster prints them. The year of the epitome's context
+  conflicts with Seneca, who died in 65 CE and had already heard the centurions, so this is kept as a
+  separate account and not dated onto their journey.

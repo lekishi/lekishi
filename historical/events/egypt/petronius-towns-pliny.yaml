@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "Pliny's list of the towns Petronius took, in order: Pselcis, Primis, Abuncis, Phthuris, Cambusis,
+  Atteva and Stadasis, where the Nile's thunder deafened the people; he adds the sack of Napata and puts
+  the farthest point 970 miles beyond Syene."
+types: [campaign]
+date:
+  value: 25 BCE..20 BCE
+  mode: window
+  calendar: julian
+  as_written: in the time of the late Emperor Augustus
+places:
+  - place: pselchis
+    role: waypoint
+  - place: premnis
+    role: waypoint
+  - place: napata
+    role: end
+  - place: syene
+    role: context
+    note: The point Pliny measures the 970 miles from.
+participants:
+  - actor: gaius-petronius
+    role: leader
+cite:
+  - id: pliny-towns
+    says: Pliny lists the towns Petronius took in order and the farthest distance beyond Syene.
+    source: pliny-natural-history
+    at: VI.35 (§181–182)
+    quote:
+      "That general took the following cities, the only ones we now find mentioned there, in the following
+      order; Pselcis, Primis, Abuncis, Phthuris, Cambusis, Atteva, and Stadasis, where the river Nile, as
+      it thunders down the precipices, has quite deprived the inhabitants of the power of hearing: he also
+      sacked the town of Napata. The extreme distance to which he penetrated beyond Syene was nine hundred
+      and seventy miles"
+notes:
+  "A second account, kept beside Strabo's rather than merged with it. Abuncis, Phthuris, Cambusis,
+  Atteva and Stadasis have no place records yet: Pleiades has entries for Abounkis and a Forum Cambusis?
+  whose placements are marked uncertain, and none for the other three. Pliny's 970 miles is far more
+  than his own 871 miles from Syene to Meroë, which lies beyond Napata."

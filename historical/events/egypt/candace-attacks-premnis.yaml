@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The Candace attacks the garrison at Premnis with many thousands. Petronius comes back, enters
+  the fort before the enemy arrives and holds it; when her envoys come he sends them on to Caesar.
+types: [campaign]
+date:
+  value: 22 BCE..21 BCE
+  mode: window
+  calendar: julian
+  as_written: "Strabo: in the mean time (no year); Dio: under B.C. 22"
+  cite:
+    - id: premnis-attack-year
+      says: Dio tells the attack on the garrisons and the terms with Candace at the end of his 22 BCE narrative.
+      source: cassius-dio
+      at: LIV.5 (B.C. 22)
+      quote:
+        At that the Ethiopians attacked the garrisons, but he again proceeded against them, rescued
+        his own men, and compelled Candace to make terms with him.
+places:
+  - place: premnis
+    role: site
+participants:
+  - actor: candace-of-kush
+    role: leader
+  - actor: gaius-petronius
+    role: leader
+  - actor: kush-kingdom
+    role: participant
+cite:
+  - id: premnis-attack
+    says:
+      Strabo records the Candace's attack on the garrison, Petronius's relief of it, and his sending
+      her envoys to Caesar.
+    source: strabo-geography
+    at: XVII.1.54 (C819–821)
+    quote:
+      In the mean time Candace attacked the garrison with an army of many thousand men. Petronius came
+      to its assistance, and entering the fortress before the approach of the enemy, secured the place by
+      many expedients. The enemy sent ambassadors, but he ordered them to repair to Cæsar
+notes:
+  Strabo names Premnis as the garrisoned place; Dio says only that a garrison was left "at another
+  post". The record follows Strabo for the place.

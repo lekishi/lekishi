@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  A plan of Ethiopia is laid before Nero. Pliny cites it for the scarcity of ebony between Syene
+  and Meroë, where only the palm grows, and for a distance of 896 miles between them.
+types: [other]
+part_of:
+  - nero-praetorians-sent
+date:
+  value: 54-10..65-04
+  mode: window
+  calendar: julian
+  as_written:
+    "Pliny: sent by the Emperor Nero … when he was contemplating an expedition against Æthiopia
+    (no year)"
+  cite:
+    - id: nero-mission-bound
+      says:
+        Seneca, who died in April 65 CE, says he heard the officers' report himself, so the return falls
+        within Nero's reign and before Seneca's death.
+      source: seneca-natural-questions
+      at: VI.8.3
+      quote:
+        I have myself heard from their own lips the story told by the two non-commissioned officers
+        sent to investigate the sources of the Nile by our good Emperor Nero
+places:
+  - place: syene
+    role: context
+  - place: meroe
+    role: context
+participants:
+  - actor: nero
+    role: other
+    note: The plan was laid before him.
+cite:
+  - id: nero-plan
+    says: Pliny records the plan of Ethiopia recently laid before Nero and what it showed.
+    source: pliny-natural-history
+    at: XII.8 (§19)
+    quote:
+      The plan of Æthiopia, which, as we have already mentioned, was recently laid before the Emperor
+      Nero, informs us, that this tree is very uncommon in the country that lies between Syene, the extreme
+      boundary of the empire, and Meroë, a distance of eight hundred and ninety-six miles; and that, in
+      fact, the only kind of tree that is to be found there, is the palm.
+notes:
+  "The plan is not located: the sources say only that it was laid before the emperor. The 896 miles
+  here and the 871 miles of Book VI are kept as Pliny wrote them."

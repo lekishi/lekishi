@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  From Pselchis Petronius crosses the sand hills to Premnis, a strong place, and takes it at the
+  first onset.
+types: [campaign]
+date:
+  value: 25 BCE..22 BCE
+  mode: window
+  calendar: julian
+  as_written:
+    "Strabo: while Ælius Gallus was engaged in war with the Arabs (no year); Dio: under B.C.
+    22 (a. u. 732)"
+  cite:
+    - id: kush-war-dio-year
+      says:
+        Dio tells the Ethiopian advance and Petronius's campaign under the year 22 BCE, "about this
+        same time".
+      source: cassius-dio
+      at: LIV.5 (B.C. 22)
+      quote:
+        About this same time the Ethiopians, who dwell beyond Egypt, advanced as far as the city called
+        Elephantine, with Candace as their leader, ravaging the whole region that they traversed.
+    - id: kush-war-strabo-gallus
+      says: Strabo dates the attack only by Aelius Gallus's Arabian war, which Dio narrates under 24 BCE.
+      role: alternative
+      source: strabo-geography
+      at: XVII.1.54 (C819–821)
+      quote:
+        The Ethiopians, emboldened in consequence of a part of the forces in Egypt being drawn off
+        by Ælius Gallus, who was engaged in war with the Arabs, invaded the Thebaïs
+places:
+  - place: premnis
+    role: site
+participants:
+  - actor: gaius-petronius
+    role: leader
+  - actor: kush-kingdom
+    role: participant
+cite:
+  - id: premnis-taken
+    says: Strabo records the march over the sand hills to Premnis and its capture at the first onset.
+    source: strabo-geography
+    at: XVII.1.54 (C819–821)
+    quote:
+      From Pselchis Petronius went to Premnis, a strong city, travelling over the hills of sand, beneath
+      which the army of Cambyses was overwhelmed by the setting in of a whirlwind. He took the fortress
+      at the first onset
+dispute:
+  status: disputed
+  summary:
+    Neither account gives a year for the attack itself. Strabo sets it during Aelius Gallus's Arabian
+    war, which Dio tells under 24 BCE; Dio tells the attack and the campaign under 22 BCE. The record
+    gives a window over both and does not choose a year.

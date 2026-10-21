@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "Contact between Nero's Rome and Kush: the king of Ethiopia helped Nero's centurions on their
+  way south, and the praetorians reported the queen and temple at Meroë."
+types: [contact]
+from: roman-empire
+to: kush-kingdom
+date:
+  value: 54-10..65-04
+  mode: window
+  calendar: julian
+  as_written:
+    "Pliny: sent by the Emperor Nero … when he was contemplating an expedition against Æthiopia
+    (no year)"
+  cite:
+    - id: nero-mission-bound
+      says:
+        Seneca, who died in April 65 CE, says he heard the officers' report himself, so the return falls
+        within Nero's reign and before Seneca's death.
+      source: seneca-natural-questions
+      at: VI.8.3
+      quote:
+        I have myself heard from their own lips the story told by the two non-commissioned officers
+        sent to investigate the sources of the Nile by our good Emperor Nero
+cite:
+  - id: nero-kush-contact
+    says:
+      Seneca reports that the king of Ethiopia supplied the centurions with assistance and letters of
+      introduction.
+    source: seneca-natural-questions
+    at: VI.8.3
+    quote:
+      The King of Ethiopia had supplied them with assistance and furnished letters of introduction
+      to the neighbouring kings

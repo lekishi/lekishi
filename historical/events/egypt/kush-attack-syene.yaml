@@ -1,0 +1,76 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The Ethiopians of Kush invade the Thebaïd, overwhelm the garrison of three cohorts near Syene,
+  and take Syene, Elephantine and Philae by surprise, enslaving the inhabitants and throwing down the
+  statues of Caesar.
+types: [campaign]
+date:
+  value: 25 BCE..22 BCE
+  mode: window
+  calendar: julian
+  as_written:
+    "Strabo: while Ælius Gallus was engaged in war with the Arabs (no year); Dio: under B.C.
+    22 (a. u. 732)"
+  cite:
+    - id: kush-war-dio-year
+      says:
+        Dio tells the Ethiopian advance and Petronius's campaign under the year 22 BCE, "about this
+        same time".
+      source: cassius-dio
+      at: LIV.5 (B.C. 22)
+      quote:
+        About this same time the Ethiopians, who dwell beyond Egypt, advanced as far as the city called
+        Elephantine, with Candace as their leader, ravaging the whole region that they traversed.
+    - id: kush-war-strabo-gallus
+      says: Strabo dates the attack only by Aelius Gallus's Arabian war, which Dio narrates under 24 BCE.
+      role: alternative
+      source: strabo-geography
+      at: XVII.1.54 (C819–821)
+      quote:
+        The Ethiopians, emboldened in consequence of a part of the forces in Egypt being drawn off
+        by Ælius Gallus, who was engaged in war with the Arabs, invaded the Thebaïs
+places:
+  - place: syene
+    role: site
+  - place: elephantine
+    role: site
+  - place: philae
+    role: site
+participants:
+  - actor: kush-kingdom
+    role: participant
+  - actor: candace-of-kush
+    role: leader
+    note: Dio names her as their leader; Strabo does not say who led the first attack.
+  - actor: roman-empire
+    role: subject
+    note: The garrison of three cohorts and the statues of Caesar.
+cite:
+  - id: kush-attack-strabo
+    says:
+      Strabo records the attack on the garrison near Syene and the taking of Syene, Elephantine and
+      Philae.
+    source: strabo-geography
+    at: XVII.1.54 (C819–821)
+    quote:
+      invaded the Thebaïs, and attacked the garrison, consisting of three cohorts, near Syene; surprised
+      and took Syene, Elephantina, and Philæ, by a sudden inroad; enslaved the inhabitants, and threw down
+      the statues of Cæsar.
+  - id: kush-attack-dio
+    says: Dio records the Ethiopians advancing as far as Elephantine with Candace as their leader.
+    role: supporting
+    source: cassius-dio
+    at: LIV.5 (B.C. 22)
+    quote:
+      the Ethiopians, who dwell beyond Egypt, advanced as far as the city called Elephantine, with
+      Candace as their leader, ravaging the whole region that they traversed.
+dispute:
+  status: disputed
+  summary:
+    Neither account gives a year for the attack itself. Strabo sets it during Aelius Gallus's Arabian
+    war, which Dio tells under 24 BCE; Dio tells the attack and the campaign under 22 BCE. The record
+    gives a window over both and does not choose a year.
+notes:
+  Strabo says the statues of Caesar were thrown down; a bronze head of Augustus excavated at Meroë
+  in 1910 is often linked to this raid, but that find has no record here yet and the link is scholarship,
+  not a statement of these sources.

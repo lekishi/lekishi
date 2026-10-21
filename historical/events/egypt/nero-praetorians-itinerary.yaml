@@ -1,0 +1,75 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The stages the praetorians measured from Syene to Meroë, 871 miles in all: Hiera Sycaminos 54
+  miles, Tama 72, the Evonymitae 120, Acina 54, Pittara 25, Tergedus 106, Napata 80, and the island of
+  Meroë 360, with Gagaudes halfway."
+types: [journey]
+part_of:
+  - nero-praetorians-sent
+date:
+  value: 54-10..65-04
+  mode: window
+  calendar: julian
+  as_written:
+    "Pliny: sent by the Emperor Nero … when he was contemplating an expedition against Æthiopia
+    (no year)"
+  cite:
+    - id: nero-mission-bound
+      says:
+        Seneca, who died in April 65 CE, says he heard the officers' report himself, so the return falls
+        within Nero's reign and before Seneca's death.
+      source: seneca-natural-questions
+      at: VI.8.3
+      quote:
+        I have myself heard from their own lips the story told by the two non-commissioned officers
+        sent to investigate the sources of the Nile by our good Emperor Nero
+places:
+  - place: syene
+    role: start
+  - place: hiera-sycaminos
+    role: waypoint
+  - place: tama
+    role: waypoint
+  - place: acina
+    role: waypoint
+  - place: pittara
+    role: waypoint
+  - place: tergedus
+    role: waypoint
+  - place: gagaudes
+    role: waypoint
+    note: Pliny says halfway between Syene and Meroë, without placing it between two stages.
+  - place: napata
+    role: waypoint
+  - place: meroe
+    role: end
+participants:
+  - actor: roman-empire
+    role: participant
+    note: The praetorians and their tribune.
+cite:
+  - id: nero-itinerary
+    says: Pliny gives the praetorians' total and their stage distances from Syene to Meroë.
+    source: pliny-natural-history
+    at: VI.35 (§184)
+    quote:
+      the persons sent by Nero for the purposes of discovery have reported that the distance from Syene
+      to Meroë is eight hundred and seventy-one miles, the following being the items. From Syene to Hiera
+      Sycaminos they make to be fifty-four miles, from thence to Tama seventy-two, to the country of the
+      Evonymitæ, the first region of Æthiopia, one hundred and twenty, to Acina fifty-four, to Pittara twenty-five,
+      and to Tergedus one hundred and six.
+  - id: nero-itinerary-napata
+    says:
+      Pliny gives the last stages, to Napata and to the island of Meroë, and says Napata was the only
+      town still standing.
+    role: supporting
+    source: pliny-natural-history
+    at: VI.35 (§185)
+    quote:
+      The distance from thence to Napata is eighty miles, that little town being the only one of all
+      of them that now survives. From thence to the island of Meroë the distance is three hundred and sixty
+      miles.
+notes:
+  Pliny gives distances, not dates, so the stages are ordered by the text and none is dated. His
+  stages add up to his stated 871 miles; his Book XII gives 896 for the same span, and the record keeps
+  both figures as written. The Evonymitae are a region, not a stop, and have no place record.

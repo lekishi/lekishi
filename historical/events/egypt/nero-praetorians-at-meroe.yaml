@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At Meroë the praetorians find few buildings, a queen named Candace ruling, as the name had passed
+  from queen to queen for many years, and a temple of Jupiter Hammon held in great veneration.
+types: [occurrence]
+part_of:
+  - nero-praetorians-sent
+date:
+  value: 54-10..65-04
+  mode: window
+  calendar: julian
+  as_written:
+    "Pliny: sent by the Emperor Nero … when he was contemplating an expedition against Æthiopia
+    (no year)"
+  cite:
+    - id: nero-mission-bound
+      says:
+        Seneca, who died in April 65 CE, says he heard the officers' report himself, so the return falls
+        within Nero's reign and before Seneca's death.
+      source: seneca-natural-questions
+      at: VI.8.3
+      quote:
+        I have myself heard from their own lips the story told by the two non-commissioned officers
+        sent to investigate the sources of the Nile by our good Emperor Nero
+places:
+  - place: meroe
+    role: site
+participants:
+  - actor: kush-kingdom
+    role: host
+    note: The queen called Candace of Nero's time.
+  - actor: roman-empire
+    role: guest
+    note: The praetorians.
+cite:
+  - id: meroe-report
+    says: Pliny reports what the praetorians said of the city of Meroë, its queen and its temple.
+    source: pliny-natural-history
+    at: VI.35 (§186)
+    quote:
+      The buildings in the city, they said, were but few in number, and they stated that a female,
+      whose name was Candace, ruled over the district, that name having passed from queen to queen for many
+      years. They related also that there was a temple of Jupiter Hammon there, held in great veneration,
+      besides smaller shrines erected in honour of him throughout all the country.
+notes:
+  Jupiter Hammon is the Roman name for Amun, whose great temple at Meroë is known from excavation;
+  the record keeps Pliny's name.

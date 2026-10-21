@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Alexander III of Macedon, son of Philip II, king from 336 BCE, who conquered the Persian Empire
+  and campaigned as far as the Hyphasis before dying at Babylon in 323 BCE.
+types: [person]
+names:
+  - form: Alexander
+    lang: en
+    script: Latn
+    note: Arrian calls him Alexander; 'the Great' is a later epithet.
+    cite:
+      - id: alexander-the-great-name
+        says: Arrian records Alexander, Philip's son, taking the kingship at about twenty.
+        source: arrian-anabasis
+        at: I.1
+        quote:
+          It is said that Philip died when Pythodemus was archon at Athens, and that his son Alexander,
+          being then about twenty years of age, marched into Peloponnesus as soon as he had secured the regal
+          power.
+roles:
+  - role: ruler
+    note: King of the Macedonians, 336–323 BCE.
+    cite:
+      - id: alexander-the-great-role
+        says: Arrian records Alexander securing the kingship after Philip's death.
+        source: arrian-anabasis
+        at: I.1
+        quote:
+          and that his son Alexander, being then about twenty years of age, marched into Peloponnesus
+          as soon as he had secured the regal power.
+  - role: soldier
+    note: Commander of his army in every campaign of the chapter.

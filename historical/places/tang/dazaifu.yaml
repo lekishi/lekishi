@@ -16,24 +16,34 @@ names:
         source: toseiden
         at: 天寶十二載 十二月廿六日辛卯
 at:
-  - interpretation: display_anchor
-    precision: unspecified
+  - interpretation: approximate_point
+    precision: locality
     point: [130.5151, 33.5145]
     notes:
-      Label anchor at the modern site recorded in Wikidata as 大宰府 (Q144845). It is not an asserted
-      historical coordinate; the anchor marks the government seat for map readability.
+      An approximate placement at the 大宰府政庁跡, the excavated site of the government seat's central
+      compound, designated a Special Historic Site as 大宰府跡. The biography names 大宰府 without a
+      building; the point marks the compound, not where 鑒眞 was received.
     cite:
-      - id: dazaifu-anchor
+      - id: dazaifu-identification
         says:
-          The label anchor is placed at the modern site's coordinate recorded in Wikidata (CC0); no
-          historical coordinate is asserted.
-        source: wikidata
-        at: Q144845 (P625), revision 2513348828
+          The government office ruins at 太宰府市観世音寺 are the site of the 大宰府's administrative complex,
+          the seat of the court's power in Kyushu from the late seventh to the late twelfth century.
+          The point is the site's modern coordinate from Wikidata (CC0), which records the 特別史跡
+          大宰府跡 designation.
+        basis: interpretation
+        attributed_to: 太宰府市 (Dazaifu City Japan Heritage Utilization Council)
+        sources:
+          - source: dazaifu-heritage-seicho
+            at: Dazaifu Government Office Ruins
+          - source: wikidata
+            at: Q144845 (P625), revision 2513348828
 modern:
-  - form: 太宰府市
+  - form: 大宰府政庁跡
     lang: ja
     script: Hani
-    note: Modern city recorded for orientation; the cited passages do not state a site identification.
+    note:
+      The excavated site of the government compound, in 太宰府市; recorded as the identification the
+      placement rests on.
 notes:
   The 大宰府 is both a place in the voyage and the office whose reports the chronicle quotes. This
   record is the place; the office's reports are cited on the events they report.

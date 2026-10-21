@@ -15,23 +15,30 @@ names:
         source: toseiden
         at: 天平勝寶六年甲午 二月四日，入京…引入東大寺安置
 at:
-  - interpretation: display_anchor
-    precision: unspecified
+  - interpretation: approximate_point
+    precision: locality
     point: [135.8397, 34.6892]
-    notes: Label anchor at the temple site recorded in Wikidata (Q460367). It is not an asserted
-      historical coordinate; the temple is an existing site and the anchor only places the label.
+    notes:
+      An approximate placement at 東大寺 in Nara, the temple whose Great Buddha Hall stood by 751 and
+      whose precinct is the same today. The point marks the temple, not a building of 754.
     cite:
-      - id: todaiji-anchor
+      - id: todaiji-identification
         says:
-          The label anchor is placed at the temple site's coordinate recorded in Wikidata (CC0); no
-          historical coordinate is asserted.
-        source: wikidata
-        at: Q460367 (P625), revision 2543513396
+          東大寺 is the temple at 奈良市雑司町 whose Great Buddha was cast by 749, whose hall was built two
+          years later, and whose eye-opening was held in 752. The point is the temple's modern coordinate
+          from Wikidata (CC0).
+        basis: interpretation
+        attributed_to: 東大寺
+        sources:
+          - source: todaiji-history-nara
+            at: 東大寺の創建
+          - source: wikidata
+            at: Q460367 (P625), revision 2543513396
 external_ids:
   - system: wikidata
     id: Q460367
     url: https://www.wikidata.org/wiki/Q460367
     license: CC0-1.0
     note: External identifier found in the Wave 1A feasibility pass.
-notes: The place is a named site in the cited passages; the anchor is a label placement, not a
-  surveyed reconstruction of the eighth-century precinct.
+notes: The place is a named site in the cited passages. The placement rests on the temple's own
+  continuity at its precinct; it is not a surveyed reconstruction of the eighth-century precinct.

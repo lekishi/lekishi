@@ -7,6 +7,7 @@ import {
   card,
   collectProblems,
   expectFrameApart,
+  foldLegend,
   layoutOf,
   markPoint,
   openChapter,
@@ -480,6 +481,7 @@ test("fetches the 秋妻屋浦 diorama from the artifact when the camera comes d
   await page.emulateMedia({ reducedMotion: "reduce" })
   await openChapter(page, `${TANG}?event=akimeya-landfall-753`)
   await expect(card(page)).toBeVisible()
+  await foldLegend(page)
 
   // The diorama is fetched only when the camera is low over the place, never
   // with the chapter: zoom in over the landfall until it is.
@@ -499,6 +501,7 @@ test("fetches the 秋妻屋浦 diorama from the artifact when the camera comes d
 
   expect(diorama).toEqual({ url: expect.stringMatching(/\/dioramas\/akimeya\.json$/), status: 200 })
   // The legend says what the close-up is once it is in view.
+  await page.getByTestId("atlas-legend").getByRole("button", { name: "Legend" }).click()
   await expect(page.getByTestId("atlas-legend")).toContainText("秋妻屋浦")
 
   // One press takes the reader from the harbour back to the whole chapter:
@@ -781,6 +784,7 @@ test("selects a place by clicking its mark on the globe", async ({ page, hasTouc
   // Picking is under test, not flight timing: keep the target stationary.
   await page.emulateMedia({ reducedMotion: "reduce" })
   await mountAtlas(page)
+  await foldLegend(page)
 
   // The globe draws places, not events. A place with one event in the window
   // opens the event: 秋妻屋浦's landfall.

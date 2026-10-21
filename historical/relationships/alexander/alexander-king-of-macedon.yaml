@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: Alexander as king of the Macedonians after the death of his father Philip.
+types: [rulership]
+from: alexander-the-great
+to: macedonian-kingdom
+directionality: directed
+date:
+  value: 336 BCE..323 BCE
+  mode: duration
+  calendar: julian
+  as_written: as soon as he had secured the regal power
+  cite:
+    - id: alexander-king-of-macedon-time
+      says: Chinnock dates Philip's death, and so Alexander's accession, to 336 BCE.
+      source: arrian-anabasis
+      at: I.1, note 14
+      quote: B.C. 336.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+notes: The end of the reign is Alexander's death, dated in the death event.
+cite:
+  - id: alexander-king-of-macedon-basis
+    says: Arrian records Alexander securing the kingship after Philip's death.
+    source: arrian-anabasis
+    at: I.1
+    quote:
+      and that his son Alexander, being then about twenty years of age, marched into Peloponnesus as
+      soon as he had secured the regal power.

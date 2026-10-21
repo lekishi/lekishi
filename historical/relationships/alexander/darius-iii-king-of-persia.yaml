@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: Darius III as king of the Persians, from his accession to his death at the hands of his satraps.
+types: [rulership]
+from: darius-iii
+to: persian-empire
+directionality: directed
+date:
+  value: 336 BCE..330 BCE
+  mode: duration
+  calendar: julian
+  as_written: from the time when Darius began to reign over the Persians
+  cite:
+    - id: darius-iii-king-of-persia-time
+      says: Chinnock dates Darius's accession to 336 BCE and his death to July 330 BCE.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+      sources:
+        - source: arrian-anabasis
+          at: III.22, note 468
+          quote: Darius came to the throne B.C. 336.
+        - source: arrian-anabasis
+          at: III.22, note 467
+          quote: In the year B.C. 330, the first of Hecatombaion fell on the first of July.
+cite:
+  - id: darius-iii-king-of-persia-basis
+    says: Arrian refers to the start of Darius's reign over the Persians.
+    source: arrian-anabasis
+    at: II.14
+    quote: Alexander also, from the time when Darius began to reign over the Persians

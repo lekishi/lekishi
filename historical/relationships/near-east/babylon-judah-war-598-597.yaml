@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "Babylon's war on Judah in Nebuchadnezzar's seventh year: the siege and taking of Jerusalem,
+  the carrying off of Jehoiachin, and a king of Babylon's choosing set on the throne."
+types: [conflict]
+from: neo-babylonian-empire
+to: kingdom-of-judah
+date:
+  value: 598 BCE..597 BCE
+  mode: window
+  calendar: regnal
+  as_written: Kislīmu to Addaru, year 7 of Nebuchadnezzar (Babylonian Chronicle)
+  cite:
+    - says:
+        The chronicle has the king of Akkad muster his troops in Kislīmu of his seventh year and seize
+        the city of Judah in Addaru; the translation converts the year to 598/597 BCE.
+      basis: interpretation
+      attributed_to: Livius.org
+      source: livius-abc-5
+      at: Rev. 11'–12'
+    - says: The Jewish Encyclopedia dates Nebuchadnezzar's march west to 598.
+      role: supporting
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: In 598 Nebuchadnezzar himself came westward
+cite:
+  - says: The chronicle records the king of Akkad besieging and seizing the city of Judah.
+    source: livius-abc-5
+    at: Rev. 12'
+  - says: The books of Kings record the siege of Jerusalem.
+    source: bible-kjv
+    at: 2 Kings 24:10
+    quote:
+      At that time the servants of Nebuchadnezzar king of Babylon came up against Jerusalem, and the
+      city was besieged.
+    role: supporting

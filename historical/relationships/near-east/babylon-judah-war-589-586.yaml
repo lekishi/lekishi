@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "Babylon's war on Judah after Zedekiah's rebellion: the siege of Jerusalem, the breach of its
+  walls and the burning of the city. The two cited chronologies end it in 587 or 586 BCE."
+types: [conflict]
+from: neo-babylonian-empire
+to: kingdom-of-judah
+date:
+  value: 589 BCE..586 BCE
+  mode: window
+  calendar: regnal
+  as_written: tenth day of the tenth month, ninth year of Zedekiah, to the eleventh year (2 Kings 25:1–2)
+  cite:
+    - says: The Bible Journey dates Zedekiah's rebellion, and so the start of the war, to 589 BCE.
+      basis: interpretation
+      attributed_to: Chris and Jenifer Taylor, The Bible Journey
+      source: bible-journey-taylor
+      at: Jerusalem falls to the Babylonians, note on 2 Kings 25:1-21
+    - says:
+        The Jewish Encyclopedia dates the yielding of the wall, at the end of the eighteen-month siege,
+        to 586.
+      role: supporting
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: At the end of eighteen months (586) the wall yielded.
+cite:
+  - says: The books of Kings record Nebuchadnezzar coming against Jerusalem.
+    source: bible-kjv
+    at: 2 Kings 25:1
+    quote:
+      Nebuchadnezzar king of Babylon came, he, and all his host, against Jerusalem, and pitched against
+      it
+  - says: The books of Kings end the war with Judah carried away out of its land.
+    source: bible-kjv
+    at: 2 Kings 25:21
+    quote: So Judah was carried away out of their land.
+    role: supporting

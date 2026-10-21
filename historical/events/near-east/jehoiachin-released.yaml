@@ -1,0 +1,66 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In the thirty-seventh year of Jehoiachin's captivity, in the twelfth month, Evil-merodach king
+  of Babylon, in the year he began to reign, lifts up the head of Jehoiachin out of prison, sets his throne
+  above the other kings with him in Babylon, and gives him a daily allowance for life.
+types: [occurrence]
+date:
+  value: 562 BCE..561 BCE
+  mode: window
+  calendar: regnal
+  as_written:
+    twelfth month of the thirty-seventh year of the captivity, the 27th day (2 Kings 25:27)
+    or the 25th (Jeremiah 52:31)
+  cite:
+    - says:
+        The Jewish Encyclopedia says Nebuchadnezzar ruled until 561, which puts Evil-merodach's first
+        year in 561.
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: he ruled for forty-three years, or until 561
+    - says:
+        The Bible Journey dates Nebuchadnezzar's reign to 604–562 BCE, which puts Evil-merodach's first
+        year in 562.
+      role: alternative
+      basis: interpretation
+      attributed_to: Chris and Jenifer Taylor, The Bible Journey
+      source: bible-journey-taylor
+      at: The middle years of exile (586-539BC), note on Babylon
+    - says: The books of Kings give the 27th day of the twelfth month.
+      role: supporting
+      source: bible-kjv
+      at: 2 Kings 25:27
+      quote: in the twelfth month, on the seven and twentieth day of the month
+    - says: Jeremiah gives the 25th day.
+      role: conflicting
+      source: bible-kjv
+      at: Jeremiah 52:31
+      quote: in the twelfth month, in the five and twentieth day of the month
+places:
+  - place: babylon
+    role: site
+participants:
+  - actor: evil-merodach
+    role: leader
+  - actor: jehoiachin
+    role: subject
+cite:
+  - says: The books of Kings record Evilmerodach releasing Jehoiachin from prison in his first year.
+    source: bible-kjv
+    at: 2 Kings 25:27
+    quote:
+      that Evilmerodach king of Babylon in the year that he began to reign did lift up the head of
+      Jehoiachin king of Judah out of prison
+  - says: The books of Kings record Jehoiachin's throne set above the other kings in Babylon.
+    source: bible-kjv
+    at: 2 Kings 25:28
+    quote: set his throne above the throne of the kings that were with him in Babylon
+    role: supporting
+dispute:
+  status: disputed
+  summary:
+    "The books of Kings give the 27th day of the twelfth month, Jeremiah the 25th. The BCE year
+    depends on when Nebuchadnezzar's reign ended: 561 in the Jewish Encyclopedia, 562 in The Bible Journey.
+    The chapter keeps both days as written and a window over both years."

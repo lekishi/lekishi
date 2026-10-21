@@ -1,0 +1,71 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Nebuzaradan carries away the rest of the people left in the city and those who had fallen away
+  to the king of Babylon, and leaves the poor of the land as vinedressers and husbandmen. Jeremiah counts
+  832 persons from Jerusalem, in the eighteenth year.
+types: [journey]
+part_of: [nebuchadnezzar-campaign-589-586]
+date:
+  value: 587 BCE..586 BCE
+  mode: window
+  calendar: regnal
+  as_written:
+    fifth month, nineteenth year of Nebuchadnezzar (2 Kings 25:8); the eighteenth year (Jeremiah
+    52:29)
+  cite:
+    - says: The Bible Journey dates the breach of Jerusalem's walls to July 587 BCE.
+      basis: interpretation
+      attributed_to: Chris and Jenifer Taylor, The Bible Journey
+      source: bible-journey-taylor
+      at: Jerusalem falls to the Babylonians, note on 2 Kings 25:1-21
+    - says: The Jewish Encyclopedia dates the yielding of the wall to 586.
+      role: supporting
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: At the end of eighteen months (586) the wall yielded.
+    - says:
+        Jeremiah dates this deportation to Nebuchadrezzar's eighteenth year, against the nineteenth
+        of 2 Kings 25:8.
+      role: conflicting
+      source: bible-kjv
+      at: Jeremiah 52:29
+      quote:
+        In the eighteenth year of Nebuchadrezzar he carried away captive from Jerusalem eight hundred
+        thirty and two persons
+places:
+  - place: jerusalem
+    role: start
+  - place: babylon
+    role: end
+    note: Chronicles has them carried to Babylon.
+participants:
+  - actor: nebuzaradan
+    role: leader
+cite:
+  - says: The books of Kings record Nebuzaradan carrying away the rest of the people.
+    source: bible-kjv
+    at: 2 Kings 25:11
+    quote:
+      Now the rest of the people that were left in the city, and the fugitives that fell away to the
+      king of Babylon, with the remnant of the multitude, did Nebuzaradan the captain of the guard carry
+      away.
+  - says: The books of Kings record the poor of the land left behind.
+    source: bible-kjv
+    at: 2 Kings 25:12
+    quote: But the captain of the guard left of the poor of the land to be vinedressers and husbandmen.
+    role: supporting
+  - says: Chronicles records the survivors carried to Babylon.
+    source: bible-kjv
+    at: 2 Chronicles 36:20
+    quote: And them that had escaped from the sword carried he away to Babylon
+    role: supporting
+dispute:
+  status: disputed
+  summary:
+    The books of Kings place the carrying away in the nineteenth year, after the burning; Jeremiah
+    52:29 counts a deportation of 832 in the eighteenth year. The chapter publishes one deportation in
+    587/586 and keeps Jeremiah's year and count as its text gives them; it does not decide whether they
+    are the same.
+notes: Recorded as a journey with a start and an end; no route is drawn.

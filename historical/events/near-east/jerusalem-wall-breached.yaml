@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  On the ninth day of the fourth month of Zedekiah's eleventh year, with famine in the city, Jerusalem
+  is broken up and the men of war flee by night by the gate between two walls by the king's garden.
+types: [occurrence]
+part_of: [nebuchadnezzar-campaign-589-586]
+date:
+  value: 587 BCE..586 BCE
+  mode: window
+  calendar: regnal
+  as_written: ninth day of the fourth month, eleventh year of Zedekiah (Jeremiah 39:2)
+  cite:
+    - says: The Bible Journey dates the breach of Jerusalem's walls to July 587 BCE.
+      basis: interpretation
+      attributed_to: Chris and Jenifer Taylor, The Bible Journey
+      source: bible-journey-taylor
+      at: Jerusalem falls to the Babylonians, note on 2 Kings 25:1-21
+    - says: The Jewish Encyclopedia dates the yielding of the wall to 586.
+      role: alternative
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: At the end of eighteen months (586) the wall yielded.
+places:
+  - place: jerusalem
+    role: site
+participants:
+  - actor: neo-babylonian-empire
+    role: participant
+  - actor: kingdom-of-judah
+    role: participant
+cite:
+  - says: Jeremiah dates the breach to the ninth day of the fourth month of Zedekiah's eleventh year.
+    source: bible-kjv
+    at: Jeremiah 39:2
+    quote:
+      And in the eleventh year of Zedekiah, in the fourth month, the ninth day of the month, the city
+      was broken up.
+  - says: The books of Kings record the city broken up and the men of war fleeing by night.
+    source: bible-kjv
+    at: 2 Kings 25:4
+    quote:
+      And the city was broken up, and all the men of war fled by night by the way of the gate between
+      two walls
+    role: supporting
+  - says: The books of Kings record famine in the city before the breach.
+    source: bible-kjv
+    at: 2 Kings 25:3
+    quote: the famine prevailed in the city, and there was no bread for the people of the land
+    role: supporting
+dispute:
+  status: disputed
+  summary:
+    The texts date the breach by Zedekiah's regnal year. The Bible Journey dates it to July 587
+    BCE; the Jewish Encyclopedia to 586. The chapter keeps the day as written and the year as a window
+    over both.

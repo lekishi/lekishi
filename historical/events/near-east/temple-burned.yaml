@@ -1,0 +1,66 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In the fifth month of Nebuchadnezzar's nineteenth year, Nebuzaradan, captain of the guard, comes
+  to Jerusalem and burns the house of the LORD, the king's house and all the houses of Jerusalem, and
+  the army breaks down the walls round about.
+types: [occurrence]
+part_of: [nebuchadnezzar-campaign-589-586]
+date:
+  value: 587 BCE..586 BCE
+  mode: window
+  calendar: regnal
+  as_written:
+    fifth month, nineteenth year of Nebuchadnezzar (2 Kings 25:8); seventh day (2 Kings 25:8)
+    or tenth day (Jeremiah 52:12)
+  cite:
+    - says: The Bible Journey dates the breach of Jerusalem's walls to July 587 BCE.
+      basis: interpretation
+      attributed_to: Chris and Jenifer Taylor, The Bible Journey
+      source: bible-journey-taylor
+      at: Jerusalem falls to the Babylonians, note on 2 Kings 25:1-21
+    - says: The Jewish Encyclopedia dates the yielding of the wall to 586.
+      role: supporting
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: At the end of eighteen months (586) the wall yielded.
+    - says: The books of Kings date Nebuzaradan's coming to the seventh day of the fifth month.
+      role: supporting
+      source: bible-kjv
+      at: 2 Kings 25:8
+      quote: in the fifth month, on the seventh day of the month, which is the nineteenth year of king Nebuchadnezzar
+    - says: Jeremiah dates it to the tenth day of the fifth month.
+      role: conflicting
+      source: bible-kjv
+      at: Jeremiah 52:12
+      quote: in the fifth month, in the tenth day of the month, which was the nineteenth year of Nebuchadrezzar
+places:
+  - place: jerusalem
+    role: site
+participants:
+  - actor: nebuzaradan
+    role: leader
+  - actor: neo-babylonian-empire
+    role: participant
+cite:
+  - says: The books of Kings record the temple, the palace and the houses of Jerusalem burned.
+    source: bible-kjv
+    at: 2 Kings 25:9
+    quote: And he burnt the house of the LORD, and the king’s house, and all the houses of Jerusalem
+  - says: The books of Kings record the walls broken down.
+    source: bible-kjv
+    at: 2 Kings 25:10
+    quote: brake down the walls of Jerusalem round about
+    role: supporting
+  - says: Chronicles records the same.
+    source: bible-kjv
+    at: 2 Chronicles 36:19
+    quote: And they burnt the house of God, and brake down the wall of Jerusalem
+    role: supporting
+dispute:
+  status: disputed
+  summary:
+    The books of Kings give the seventh day of the fifth month, Jeremiah the tenth; both say Nebuchadnezzar's
+    nineteenth year. The BCE year is in the same dispute as the breach of the walls. The chapter keeps
+    both days as written.

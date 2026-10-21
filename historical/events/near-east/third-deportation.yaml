@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In the twenty-third year of Nebuchadrezzar, Nebuzaradan the captain of the guard carries away
+  745 more of the Jews; Jeremiah totals all the deportations at 4,600 persons.
+types: [journey]
+date:
+  value: 587 BCE..561 BCE
+  mode: window
+  calendar: regnal
+  as_written: the twenty-third year of Nebuchadrezzar (Jeremiah 52:30)
+  cite:
+    - says: The Bible Journey dates the fall of Jerusalem, before this deportation, to 587 BCE.
+      basis: interpretation
+      attributed_to: Chris and Jenifer Taylor, The Bible Journey
+      source: bible-journey-taylor
+      at: Jerusalem falls to the Babylonians, note on 2 Kings 25:1-21
+    - says:
+        The Jewish Encyclopedia dates the end of Nebuchadnezzar's reign, after which no year of his
+        can fall, to 561.
+      role: supporting
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: he ruled for forty-three years, or until 561
+places:
+  - place: babylon
+    role: context
+    note: Assumed from the earlier deportations; Jeremiah 52:30 names no destination.
+participants:
+  - actor: nebuzaradan
+    role: leader
+cite:
+  - says: Jeremiah records 745 carried away in the twenty-third year and totals 4,600.
+    source: bible-kjv
+    at: Jeremiah 52:30
+    quote:
+      "In the three and twentieth year of Nebuchadrezzar Nebuzaradan the captain of the guard carried
+      away captive of the Jews seven hundred forty and five persons: all the persons were four thousand
+      and six hundred."
+  - says: The Jewish Encyclopedia records the same deportation of 745.
+    role: supporting
+    basis: interpretation
+    attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+    source: jewish-encyclopedia
+    at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+    quote:
+      In the twenty-third year of his reign Nebuchadnezzar's captain of the guard carried away 745
+      Jews
+notes:
+  No cited source converts the twenty-third year to a BCE year, so the window runs from the fall
+  to the end of the reign. A regnal calendar with a cited epoch would narrow it; the chapter does not
+  compute one. The destination is not stated.

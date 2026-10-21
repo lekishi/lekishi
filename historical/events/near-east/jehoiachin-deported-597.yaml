@@ -1,0 +1,79 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Jehoiachin is carried to Babylon with the king's mother and wives, his officers and the mighty
+  of the land. The books of Kings count ten thousand captives, and again seven thousand men of might and
+  a thousand craftsmen; Jeremiah counts 3,023 in the seventh year.
+types: [journey]
+part_of: [nebuchadnezzar-campaign-598-597]
+date:
+  value: 597 BCE
+  mode: window
+  calendar: regnal
+  as_written: Addaru 2, year 7 of Nebuchadnezzar (Babylonian Chronicle)
+  cite:
+    - says:
+        The chronicle dates the seizing of "the city of Judah" to the second day of Addaru in Nebuchadnezzar's
+        seventh year, which the translation converts to February/March 597 BCE.
+      basis: interpretation
+      attributed_to: Livius.org
+      source: livius-abc-5
+      at: Rev. 12'
+    - says:
+        The Jewish Encyclopedia dates Zedekiah's enthronement, after Jehoiachin was carried off, to
+        597.
+      role: supporting
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: was put on the throne by Nebuchadnezzar in 597
+places:
+  - place: jerusalem
+    role: start
+  - place: babylon
+    role: end
+participants:
+  - actor: jehoiachin
+    role: subject
+  - actor: nebuchadnezzar-ii
+    role: leader
+cite:
+  - says: The books of Kings record Jehoiachin and his household carried to Babylon.
+    source: bible-kjv
+    at: 2 Kings 24:15
+    quote:
+      And he carried away Jehoiachin to Babylon, and the king’s mother, and the king’s wives, and his
+      officers, and the mighty of the land
+  - says: The books of Kings count ten thousand captives besides the craftsmen and smiths.
+    source: bible-kjv
+    at: 2 Kings 24:14
+    quote: even ten thousand captives, and all the craftsmen and smiths
+    role: supporting
+  - says: The books of Kings count again seven thousand men of might and a thousand craftsmen and smiths.
+    role: alternative
+    source: bible-kjv
+    at: 2 Kings 24:16
+    quote: And all the men of might, even seven thousand, and craftsmen and smiths a thousand
+  - says: Jeremiah counts 3,023 Jews carried away in the seventh year.
+    role: alternative
+    source: bible-kjv
+    at: Jeremiah 52:28
+    quote: in the seventh year three thousand Jews and three and twenty
+  - says:
+      The Jewish Encyclopedia takes the 3,023 to be carried off with Jehoiakim in 598 and the 10,000
+      with Jehoiachin.
+    role: supporting
+    basis: interpretation
+    attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+    source: jewish-encyclopedia
+    at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+    quote: He was taken with 10,000 of the best of the people of Jerusalem and carried to Babylon.
+dispute:
+  status: disputed
+  summary:
+    "The counts disagree: 10,000 (2 Kings 24:14), 7,000 men of might and 1,000 craftsmen (24:16),
+    and 3,023 in the seventh year (Jeremiah 52:28), which the Jewish Encyclopedia assigns to an earlier
+    deportation. The chapter publishes the deportation and keeps each count as its text gives it."
+notes:
+  "Recorded as a journey with a start and an end. No route is drawn: the texts name no stage between
+  Jerusalem and Babylon."

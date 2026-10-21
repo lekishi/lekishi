@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Thibron, the Spartan commander sent to make war on Tissaphernes in 399 BCE, who took the remains
+  of the Greek army into his forces.
+types: [person]
+names:
+  - form: Thibron
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: thibron-name
+        says: Xenophon names Thibron as the Spartan sent to conduct the war, wanting the army's troops.
+        source: xenophon-anabasis
+        at: VII.6
+        quote:
+          and that Thibron, who had set sail to conduct the war, was anxious to avail himself of the
+          troops.
+roles:
+  - role: soldier
+    note: Spartan commander in Asia, 399 BCE.

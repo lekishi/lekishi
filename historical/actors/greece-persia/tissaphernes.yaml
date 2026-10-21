@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Tissaphernes, the Persian satrap who accused Cyrus before the king, fought for Artaxerxes at
+  Cunaxa, and seized the Greek generals in 401 BCE.
+types: [person]
+names:
+  - form: Tissaphernes
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: tissaphernes-name
+        says: Xenophon records Tissaphernes accusing Cyrus before the king.
+        source: xenophon-anabasis
+        at: I.1
+        quote:
+          Tissaphernes brought slanderous accusations against Cyrus before his brother, the king, of
+          harbouring designs against him.
+roles:
+  - role: official
+    note: Persian satrap in western Asia Minor.

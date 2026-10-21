@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  The Greek mercenary army of Cyrus the Younger, about thirteen thousand men at the review at Celaenae,
+  remembered as the Ten Thousand, which fought at Cunaxa and marched back to the Black Sea and Thrace
+  in 401–399 BCE.
+types: [other]
+names:
+  - form: the Hellenes
+    lang: en
+    script: Latn
+    note: Xenophon calls them the Hellenes or the Cyreians; 'the Ten Thousand' is a later name.
+    cite:
+      - id: cyreans-name
+        says:
+          Xenophon records Cyrus numbering his Hellenes at eleven thousand hoplites and about two thousand
+          peltasts.
+        source: xenophon-anabasis
+        at: I.2
+        quote:
+          and here Cyrus held a review, and numbered his Hellenes in the park, and found that they amounted
+          in all to eleven thousand hoplites and about two thousand peltasts.
+notes:
+  Typed other because the actor vocabulary has no type for an army or a mercenary force; the chapter's
+  feasibility note proposes one.

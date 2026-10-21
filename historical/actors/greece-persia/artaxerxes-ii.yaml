@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Artaxerxes II, elder son of Darius II, king of the Persians from 404 BCE, who defeated his brother
+  Cyrus at Cunaxa in 401 BCE.
+types: [person]
+names:
+  - form: Artaxerxes
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: artaxerxes-ii-name
+        says: Xenophon names Artaxerxes as the elder son of Darius and Parysatis.
+        source: xenophon-anabasis
+        at: I.1
+        quote: "Darius and Parysatis had two sons: the elder was named Artaxerxes"
+roles:
+  - role: ruler
+    note: King of the Persians; cited here for 401–399 BCE only.
+    cite:
+      - id: artaxerxes-ii-role
+        says: Xenophon records Artaxerxes established as king after Darius's death.
+        source: xenophon-anabasis
+        at: I.1
+        quote: Now when Darius was dead, and Artaxerxes was established in the kingdom

@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=../../schema/relationship.schema.json
 summary: Ships with cargoes from Arabia come to Muziris.
 types: [trade]
-from: place:muza
+from: place:arabia
 to: place:muziris
 directionality: directed
 causality: not_asserted
@@ -30,6 +30,4 @@ cite:
     quote:
       Muziris, of the same Kingdom, abounds in ships sent there with cargoes from Arabia, and by the
       Greeks
-notes:
-  The Periplus says 'from Arabia'; Muza, the Arab ship-owners' port, stands for it so the arc can
-  be drawn.
+notes: The Periplus says 'from Arabia' and names no port, so the arc starts at Arabia's label anchor, not at Muza.

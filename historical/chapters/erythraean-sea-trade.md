@@ -56,8 +56,9 @@ reign, 41–54. The Hippalus crossing runs 41–58, from Vincent's reasoning (ab
 Pleiades gives a point for every port drawn. Places the text names but no
 gazetteer locates (Leuke Kome, Sabbatha, Moscha, Saua, Minnagara, Rhapta) are
 left out rather than drawn. Where the text names only a country ("from
-Egypt", "from Arabia"), the arc is drawn from Berenice or Muza and says so in
-its notes.
+Egypt", "from Arabia"), the arc starts at a region place for that country,
+`egypt` or `arabia`, whose GeoNames point is a label anchor that asserts no
+coordinate, rather than at a port the text does not name.
 
 ## Shared ids
 
@@ -73,10 +74,11 @@ Pleiades id, so PR #30 must fold into the same record when it merges.
 `alexandria-egypt` (from the Greece thread, PR #34) is a byte-for-byte copy of
 that thread's file, with the source it cites (`arrian-anabasis`), so the
 branches merge cleanly.
-`coptos` and `berenice` are minted here first.
+`coptos`, `berenice`, `egypt` and `arabia` are minted here first.
 
 ## Evidence states the contract lacks
 
-None new. The chapter needs "Egypt" as an arc end, which the records solve
-with a stand-in port, and a journey without travellers (Pliny's route), which
-is a finding for the journey proposal.
+None new. The chapter needs "Egypt" and "Arabia" as arc ends, which the
+records solve with region places drawn at a label anchor, and a journey
+without travellers (Pliny's route), which is a finding for the journey
+proposal.

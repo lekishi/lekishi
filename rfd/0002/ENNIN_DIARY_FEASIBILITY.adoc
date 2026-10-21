@@ -1,0 +1,141 @@
+= 圓仁's diary as a Tang story: feasibility note
+:toc: macro
+
+Status:: Note, 2026-10-21. Records drafted; no manifest changed and nothing
+approved.
+Belongs to:: link:README.adoc[RFD 2] (sources and authoring); the story joins
+the Tang chapter under the owner's decision of 2026-10-21 that the chapter
+holds several stories.
+
+toc::[]
+
+== Purpose
+
+The owner chose on 2026-10-21 to add 圓仁's journey of 838–847 to the Tang
+chapter as a further story, and asked for as much content as possible to test
+the data and the engine with. This note records what the diary supports, what
+was authored, what is missing, and what the engine has to handle that the 753
+voyage does not.
+
+== The source
+
+*入唐求法巡禮行記* (Nittō guhō junrei kōki), 圓仁's own diary in four 卷, from
+承和五年六月十三日 (838) to 會昌七年十二月十四日 (847). It is first-person and
+written day by day, so it is the best-dated itinerary of the period, but it is
+a single witness: it is evidence of what 圓仁 saw, heard and was told. Reports
+he only heard, such as the date of the 會昌 emperor's death, are marked as such
+on their records.
+
+* *Text read.* The Wikisource transcription, which reproduces the 大日本佛教全書
+  遊方傳叢書 edition of 1915 (高楠順次郎, based on the 東寺觀智院 manuscript with
+  the 池田本 for gaps). Wikisource marks it PD-old; the page text is also
+  CC BY-SA 4.0, so records quote the work and cite the edition, as with the
+  other Tang sources. Registered as `historical/sources/nitto-guho-junrei-gyoki.yaml`
+  and in link:../../docs/SOURCE_REGISTER.adoc[the source register].
+* *Excluded.* The transcription's bracketed collation notes, and the modern
+  afterword by 梁容若 appended to 卷四, which is not public domain on the
+  page's own evidence. Neither is quoted.
+* *Locator re-check.* Before release, against 小野勝年『入唐求法巡禮行記の研究』
+  (1964–69), which is copyrighted and is consulted, not quoted. Reischauer's
+  English translation (1955) is in the same position.
+* *Known transcription slips.* 泗州 is written 西州 once and 貝州 appears as
+  唐州; the 847 anchorage at 牢山 is an unencodable glyph, so that stop was left
+  out. The records quote only passages checked against the text.
+
+Every quotation in the new records (182 of them) was checked by script against
+the transcription before it was committed.
+
+== What was authored
+
+All records are world-first under `historical/*/ennin/`; none of them is
+reached by a chapter yet, so none affects the approved Tang chapter.
+
+[cols="1,1,4",options="header"]
+|===
+|Kind |Count |Notes
+
+|Places |35
+|長安, 洛陽 and 太原 are shared with the 玄奘 story. 22 have a display anchor
+from Wikidata; 13 are deliberately unlocated (below).
+
+|Actors |15
+|圓仁, 惟正, 惟曉, 丁雄滿, 圓載; the Silla network (張寶高, 張詠, 劉慎言, 金珍);
+officials (李德裕, 楊敬之); teachers (志遠, 元政, 法全); the 會昌 emperor.
+
+|Events |102
+|838 crossing and 揚州 (11), 839 to 赤山 (16), 840 pilgrimage to 五臺山 and
+長安 (25), 長安 and the persecution 840–845 (11), the 845 expulsion (15), 846
+(4), the 847 return (20).
+
+|Relationships |11
+|Travel, transmission (元政, 法全), contact (志遠, 張詠, 劉慎言, 張寶高), and the
+expulsion as an institutional change.
+
+|Journeys |5
+|Drafted in the shape proposed in draft PR #26 under `historical/journeys/`;
+the compiler does not read them until the owner accepts the shape.
+|===
+
+The missions records own the 838 embassy itself (its appointment, the
+ambassador 藤原常嗣, the court's side); the diary's events reference
+`fujiwara-no-tsunetsugu` from that work, so the Tang chapter needs both before
+it can reach these events.
+
+All records compile and pass the contract's publication check when a
+throwaway manifest reaches every one of them.
+
+== Dates
+
+* The diary dates by the Tang lunisolar calendar, and the records use its
+  month and day in the short notation, as the 753 voyage does. The 838 entries
+  before the landfall are dated by 承和 and recorded as `regnal`; the diary
+  itself notes that 七月二日 was the same day in both calendars.
+* 閏三月 of 847 cannot be written in the notation. The three events in that
+  month carry a window from the third to the fourth month and keep 閏三月 in
+  `as_written`. This is a real gap in the notation, not a guess.
+* The diary keeps writing 會昌七年 after recording the change to 大中元年; the
+  records keep its wording.
+
+== Places
+
+Display anchors follow the existing practice: a modern city or a Wikidata
+historical-prefecture item with a coordinate, never an asserted historical
+site. 晉州 is anchored at 臨汾 because Wikidata's own description of the
+prefecture says so.
+
+Thirteen places have no sourced identification and are recorded as
+`unknown`: 有救嶋, 鎮州, 汾州, 河中府, 同州, 汴州, 密州, the three Silla islands
+of 847, and 鹿嶋, 橘浦 and 能舉嶋 in Japan. Wikidata has items for most of the
+Tang prefectures but no coordinate on them. Closing this needs a gazetteer the
+register allows (the TGN or OpenHistoricalMap) or cited scholarship; CHGIS
+would answer most of them and is not adopted.
+
+== What the engine has to handle
+
+This story is a harder test than the 753 voyage, which is its value:
+
+* *Long journeys.* The 840 pilgrimage has 14 stops and the 847 return 14.
+* *Breaks in the line.* Unlocated stops in the middle of journeys (鎮州, 汾州,
+  河中府, 同州 in 840; the whole Silla leg in 847) exercise the rule that an
+  unlocated stop breaks the line on both sides.
+* *Repeated places.* A party that stays (海州 in 839: three stops in five
+  days) and a place visited twice in one journey (海陵縣 at the landfall and
+  again on the canal).
+* *Window-dated stops.* Two 閏三月 stops start the 847 return; PR #26's order
+  check can only order what v0 orders, so these test that limit.
+* *Mixed modes.* Sea, river (canal and 淮) and land legs in one journey, and a
+  driven leg (the 838 wreck drifting ashore), each with its own cite.
+* *Events without a place,* such as the wreck and the reported death of the
+  emperor, which must show in the list without a stop.
+* *A story far outside the chapter window* (838–847 against 750–754), which
+  the multi-story proposal has to give its own window.
+
+== Open for the owner
+
+* Whether 圓仁's story is one story or is split (crossing and 赤山; pilgrimage;
+  長安 and the persecution; expulsion and return). A manifest of 102 steps fits
+  the 200-step limit, but four shorter stories may read better.
+* Whether to adopt a gazetteer to place the 13 unlocated places, or publish
+  them unlocated.
+* The 長安 years are covered by selected events only; the diary has much more
+  (lectures, festivals, the 回鶻 war, the court) if the story should grow.

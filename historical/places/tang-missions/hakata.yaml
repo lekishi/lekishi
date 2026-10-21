@@ -36,19 +36,24 @@ at:
     precision: region
     point: [130.385694, 33.5865]
     notes:
-      A region-level placement standing for the harbour of 博多大津 on 博多灣, at the 鴻臚館跡, the
-      excavated site of the 筑紫館 where missions made ready for the crossing. The cited page does not
-      name 博多大津 or locate its anchorage; the point places neither, nor any landing.
+      A region-level placement standing for the harbour area of 博多 on 博多灣, in modern 福岡市. The
+      point is the coordinate of the 鴻臚館跡, the house near the harbour where missions made ready for
+      the crossing; it places no anchorage and no landing.
     cite:
       - id: hakata-identification
         says:
-          The 鴻臚館跡 at 福岡市中央区城内 is the site of the 鴻臚館, called 筑紫館 before the Heian period,
-          the 大宰府's reception house for foreign envoys and the place where the 遣唐使 made ready to go
-          abroad; excavation from 1987 confirmed its location. The point is the site's modern coordinate
-          from Wikidata (CC0), placed to stand for the harbour area the missions used.
+          博多津, which the 續日本紀 calls 博多大津, is the old name of the port of 博多 in 福岡市. Whether it
+          is the same harbour as the earlier 那津 (娜大津), presumed at the mouth of the 那珂川, is an open
+          question. The point is the coordinate of the 鴻臚館跡 from Wikidata (CC0); the 鴻臚館, called
+          筑紫館 before the Heian period, is where the 遣唐使 made ready to go abroad, and excavation from
+          1987 confirmed its location.
         basis: interpretation
-        attributed_to: 福岡市 (経済観光文化局 文化財活用課)
+        attributed_to: 小学館 (デジタル大辞泉); 千田稔 (世界大百科事典); 福岡市 (文化財活用課)
         sources:
+          - source: daijisen-hakata-no-tsu
+            at: 博多津
+          - source: sekai-daihyakka-nanotsu
+            at: 那津
           - source: fukuoka-bunkazai-korokan
             at: 鴻臚館跡
           - source: wikidata
@@ -58,3 +63,7 @@ modern:
     lang: ja
     script: Hani
     note: Modern city recorded for orientation; the 鴻臚館跡 lies in its 中央区, within the 福岡城跡.
+notes:
+  The record takes 伊吉博德's 筑紫大津之浦 and the chronicles' 博多大津 and 博多津 as one harbour, the 筑紫
+  harbour the missions used. The cited reference work leaves open whether the earlier 那津 (娜大津) is
+  the same harbour as 博多大津.

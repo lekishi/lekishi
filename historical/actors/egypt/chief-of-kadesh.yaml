@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  The unnamed ruler of Kadesh whom the annals call "that wretched foe", who gathered the chiefs
+  of the lands as far as Naharin at Megiddo against Thutmose III and was shut in the city after the battle.
+types: [person]
+names:
+  - form: the chief of Kadesh
+    lang: en
+    script: Latn
+    note: The annals never name him.
+    cite:
+      - id: chief-of-kadesh-name
+        says: The king names his enemy as the chief of Kadesh, who has entered Megiddo.
+        source: breasted-ancient-records
+        at: "II, Annals of Thutmose III, first campaign: the council at Yehem (Kadesh)"
+        quote:
+          That wretched enemy, the chief of Kadesh, has come and entered into Megiddo; he is there at
+          this moment.
+roles:
+  - role: ruler
+    note: Ruler of Kadesh; the annals give no reign or name.

@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Thutmose III (Menkheperre), king of Egypt of the Eighteenth Dynasty, co-regent with Hatshepsut
+  and then sole ruler. His annals at Karnak record seventeen campaigns in western Asia, the first of which
+  took him to Megiddo in his 23rd year.
+types: [person]
+names:
+  - form: Menkheperre
+    lang: egy
+    script: Latn
+    note: His throne name, as the annals' titulary gives it.
+    cite:
+      - id: thutmose-iii-name
+        says: The annals open with the king's titulary and his throne name Menkheperre.
+        source: breasted-ancient-records
+        at: "II, Annals of Thutmose III, first campaign: titulary"
+        quote:
+          Mighty Bull, Shining in Thebes; King of Upper and Lower Egypt, Lord of the Two Lands; Menkheperre;
+          Son of Re.
+  - form: Thutmose III
+    lang: en
+    script: Latn
+    role: alternate
+    note: The modern name and number.
+roles:
+  - role: ruler
+    note:
+      King of Egypt. He counted his years from his accession as a child; Hatshepsut reigned with him
+      for about twenty of them.

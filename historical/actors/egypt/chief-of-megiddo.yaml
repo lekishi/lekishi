@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  The unnamed ruler of Megiddo, whose gold-wrought chariot and bronze armour appear in the booty
+  after the battle.
+types: [person]
+names:
+  - form: the chief of Megiddo
+    lang: en
+    script: Latn
+    note: The annals never name him.
+    cite:
+      - id: chief-of-megiddo-name
+        says: The booty list names a chariot and a suit of armour belonging to the chief of Megiddo.
+        source: breasted-ancient-records
+        at: "II, Annals of Thutmose III, first campaign: the booty of Megiddo"
+        quote: a beautiful chariot, wrought with gold, belonging to the chief of Megiddo
+roles:
+  - role: ruler

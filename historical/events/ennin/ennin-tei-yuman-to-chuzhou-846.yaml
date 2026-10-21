@@ -1,23 +1,37 @@
 # yaml-language-server: $schema=../../schema/event.schema.json
-summary: 圓仁 sends 丁雄萬 on a ship to 楚州 to fetch the scriptures and paintings left with 劉慎言.
-types: [journey]
+summary:
+  圓仁 assigns 丁雄萬 to go to 楚州 on 閣方金's ship to fetch the scriptures and writings left with 劉慎言. The
+  assignment is made on 二月五日; the ship does not sail until 三月十三日.
+types: [occurrence]
 date:
   value: 846-02-05
   calendar: chinese_lunisolar
   as_written: 會昌六年二月五日
   cite:
     - id: ennin-tei-yuman-to-chuzhou-846-time
-      says: The diary records sending 丁雄萬 to 楚州 on 閣方金's ship on 二月五日.
+      says: The diary records, under 二月五日, assigning 丁雄萬 to go to 楚州 on 閣方金's ship.
       source: nitto-guho-junrei-gyoki
       at: 卷四 會昌六年二月五日
       quote: 差丁雄萬。就閣方金船。遣楚州。
 places:
   - place: chishan
-    role: start
+    role: site
+    note: Where 圓仁 was lodged for the winter at the cloister's estate (ennin-chishan-estate-845).
   - place: chuzhou
-    role: end
+    role: context
+    note: Where 丁雄萬 was sent; the diary records no arrival there.
 participants:
-  - actor: tei-yuman
-    role: leader
   - actor: ennin
     role: leader
+  - actor: tei-yuman
+    role: participant
+notes:
+  The 大使 saw to sending the ship, and it sailed on 三月十三日. The record dates the assignment, not the
+  sailing, and asserts no arrival at 楚州.
+cites:
+  notes:
+    - id: ennin-tei-yuman-to-chuzhou-846-sailing
+      says: The diary adds that the 大使 saw to sending the ship, which finished setting out on 三月十三日.
+      source: nitto-guho-junrei-gyoki
+      at: 卷四 會昌六年二月五日
+      quote: 大使勾當。發送其船。至三月十三日發訖。

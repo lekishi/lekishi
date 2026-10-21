@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The Hittite host, hidden north-west of Kadesh, breaks out and falls on the division of Re by
+  the Lake of the Amorites; foot and horse give way.
+types: [campaign]
+part_of:
+  - battle-of-kadesh
+date:
+  value: 1300 BCE..1274 BCE
+  mode: window
+  calendar: regnal
+  as_written: year 5 of Ramesses II
+places:
+  - place: kadesh
+    role: site
+  - place: lake-of-homs
+    role: site
+participants:
+  - actor: hatti
+    role: participant
+  - actor: hittite-allies-at-kadesh
+    role: participant
+  - actor: division-of-re
+    role: subject
+cite:
+  - id: ambush-basis
+    says: Sayce places the ambush north-west of Kadesh and the attack by the Lake of the Amorites.
+    source: sayce-hittites
+    at: "ch. II: Kadesh, the ambush"
+    quote:
+      The whole host was concealed in ambush on the north-west side of Kadesh. Suddenly they arose
+      and fell upon the terrified Egyptians by the waters of the Lake of the Amorites, the modern Lake of
+      Homs.
+  - id: ambush-legion
+    says: Sayce says the chariots charged the legion of Ra-Hormakhis and it gave way.
+    role: supporting
+    source: sayce-hittites
+    at: "ch. II: Kadesh, the ambush (the legion)"
+    quote:
+      The chariots and horses charged 'the legion of Ra-Hormakhis,' and 'foot and horse gave way before
+      them.'
+  - id: ambush-poem
+    says:
+      The poem has the ambush lie north-west of Kadesh while others go out south of it and strike the
+      legion.
+    role: supporting
+    source: petrie-victory-of-ramses
+    at: the stanza "So in ambush there they lay"
+    quote:
+      So in ambush there they lay, Northwest of Kadesh town; And while these were in their lair, Others
+      went forth south of Kadesh, on our midst, their charge was thrown With such weight, our men went down,
+      For they took us unaware, And the legion of Pra-Hormakhu gave way.
+notes:
+  "Garstang describes the same attack as a strategic and unforeseen onslaught on the Egyptian flank.
+  Ramesses II's regnal years convert to BCE according to the chronology used: his accession is put at
+  about 1304, 1290 or 1279 BCE (the low date most used today). The window spans those dates for the year
+  in question. Garstang's 1910 dates (Kadesh 1288 B.C., the treaty about 1271 B.C.) fall inside it; Sayce's
+  1890 dates (1383 and 1354 B.C.) follow an older scheme and fall outside. It is an editorial bound that
+  a cited chronology must replace before approval."

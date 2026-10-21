@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The German expedition under Hugo Winckler digs at Boghazköy, the site of the Hittite capital,
+  and recovers the archive of cuneiform tablets that gives the Hittite side of the treaty and of the reigns
+  after Kadesh.
+types: [other]
+date:
+  value: 1906..1907
+  mode: window
+  calendar: gregorian
+  as_written: before Winckler's preliminary report of December 1907
+places:
+  - place: hattusa
+    role: site
+cite:
+  - id: boghazkoy-basis
+    says:
+      Sayce's introduction to Garstang says the German expedition under Winckler excavated at Boghaz-Keui,
+      the site of the Hittite capital, and Garstang cites Winckler's preliminary report of 1907.
+    source: garstang-land-of-hittites
+    at: introduction; bibliography (Winckler, MDOG no. 35, Dec. 1907)
+notes:
+  A modern event, kept because it is how the treaty's Hittite version became known. The start of
+  the window (the first season in 1906) is editorial and needs a cite before approval.

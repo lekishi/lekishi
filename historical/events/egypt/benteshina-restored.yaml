@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Hattusili III restores Benteshina as king of Amurru as a vassal, and gives him a Hittite princess,
+  Gashuliawi, as wife.
+types: [occurrence]
+date:
+  value: 1300 BCE..1258 BCE
+  mode: window
+  calendar: regnal
+  as_written: early in the reign of Hattusili III
+participants:
+  - actor: hattusili-iii
+    role: leader
+  - actor: benteshina
+    role: subject
+  - actor: amurru-kingdom
+    role: participant
+cite:
+  - id: benteshina-restored-basis
+    says:
+      Garstang says one of Hattusil's first acts was to reinstate Put-akhi as chief of the Amorites,
+      married to a Hittite princess.
+    source: garstang-land-of-hittites
+    at: "ch. VI, pp. 346–352: Put-akhi restored, fn. 814"
+notes: "Garstang draws on Winckler's account of the vassal treaty found at Boghazköy. Ramesses II's
+  regnal years convert to BCE according to the chronology used: his accession is put at about 1304, 1290
+  or 1279 BCE (the low date most used today). The window spans those dates for the year in question. Garstang's
+  1910 dates (Kadesh 1288 B.C., the treaty about 1271 B.C.) fall inside it; Sayce's 1890 dates (1383
+  and 1354 B.C.) follow an older scheme and fall outside. It is an editorial bound that a cited chronology
+  must replace before approval."

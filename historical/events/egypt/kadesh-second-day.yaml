@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At daybreak the king renews the fight, and the Hittite king sends a messenger to plead with him,
+  calling him Ra-Hormakhis.
+types: [campaign]
+part_of:
+  - battle-of-kadesh
+date:
+  value: 1300 BCE..1274 BCE
+  mode: window
+  calendar: regnal
+  as_written: the morning after the battle, year 5
+places:
+  - place: kadesh
+    role: site
+participants:
+  - actor: ramesses-ii
+    role: leader
+  - actor: muwatalli-ii
+    role: leader
+cite:
+  - id: second-day-basis
+    says: Sayce says the king wanted to renew the fight at daybreak the next morning.
+    source: sayce-hittites
+    at: "ch. II: Kadesh, the second day"
+    quote: At daybreak the following morning he desired to renew the conflict.
+  - id: second-day-messenger
+    says: "Sayce quotes the poem: the Hittite king sent a messenger to entreat the king."
+    role: supporting
+    source: sayce-hittites
+    at: "ch. II: Kadesh, the second day (the messenger)"
+    quote:
+      Then the king of the hostile people of the Hittites sent a messenger to pray piteously to the
+      great name of the king
+notes: "Ramesses II's regnal years convert to BCE according to the chronology used: his accession is
+  put at about 1304, 1290 or 1279 BCE (the low date most used today). The window spans those dates for
+  the year in question. Garstang's 1910 dates (Kadesh 1288 B.C., the treaty about 1271 B.C.) fall inside
+  it; Sayce's 1890 dates (1383 and 1354 B.C.) follow an older scheme and fall outside. It is an editorial
+  bound that a cited chronology must replace before approval."

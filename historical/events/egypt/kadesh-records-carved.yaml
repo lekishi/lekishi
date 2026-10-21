@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Ramesses II has the poem of Kadesh and great reliefs of its scenes carved on the walls of his
+  temples, among them Karnak, the Ramesseum, Abu Simbel and Abydos.
+types: [other]
+date:
+  value: 1300 BCE..1213 BCE
+  mode: window
+  calendar: regnal
+  as_written: after year 5 of Ramesses II
+places:
+  - place: karnak
+    role: site
+  - place: ramesseum
+    role: site
+  - place: abu-simbel
+    role: site
+  - place: abydos-egypt
+    role: site
+participants:
+  - actor: ramesses-ii
+    role: leader
+cite:
+  - id: records-poem
+    says:
+      The 1914 headnote says the poem was inscribed by Rameses' order on the walls of five temples,
+      one at Karnak, with illustrations of its scenes.
+    source: petrie-victory-of-ramses
+    at: headnote
+    quote:
+      By order of Rameses, this poem was inscribed upon the walls of five temples, one of which was
+      at Karnak. On these walls were also engraved enormous illustrations of the scenes of the poem
+  - id: records-temples
+    says: Garstang names the Karnak, Ramesseum, Abu Simbel and Abydos records of the reign.
+    role: supporting
+    source: garstang-land-of-hittites
+    at: "ch. VI: fn. 710"
+notes:
+  Carving an inscription is not an event of the war; the record keeps where the story was published.
+  The window runs from the battle to the end of the reign in the editorial chronology (accession 1304
+  to 1279 BCE, a reign of about 66 years).

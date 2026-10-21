@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Hatti's overlordship of Amurru, broken by Amurru's revolt after Kadesh and restored by Hattusili
+  III with Benteshina as vassal king.
+types: [rulership]
+from: hatti
+to: amurru-kingdom
+date:
+  value: 1300 BCE..1258 BCE
+  mode: window
+  calendar: regnal
+  as_written: after Kadesh, renewed under Hattusili III
+cite:
+  - id: hatti-amurru-basis
+    says:
+      Garstang says Hattusil reinstated Put-akhi as chief of the Amorites under the same terms of vassalage
+      as before.
+    source: garstang-land-of-hittites
+    at: "ch. VI, pp. 346–352: Put-akhi restored, fn. 814"
+notes: "Ramesses II's regnal years convert to BCE according to the chronology used: his accession is
+  put at about 1304, 1290 or 1279 BCE (the low date most used today). The window spans those dates for
+  the year in question. Garstang's 1910 dates (Kadesh 1288 B.C., the treaty about 1271 B.C.) fall inside
+  it; Sayce's 1890 dates (1383 and 1354 B.C.) follow an older scheme and fall outside. It is an editorial
+  bound that a cited chronology must replace before approval."

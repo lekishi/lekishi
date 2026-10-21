@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Egypt against Hatti for the cities of Syria, from the reign of Seti I through Kadesh and the
+  campaigns after it, until the treaty of Ramesses II's 21st year.
+types: [conflict]
+from: egypt-new-kingdom
+to: hatti
+directionality: mutual
+date:
+  value: 1305 BCE..1258 BCE
+  mode: window
+  calendar: regnal
+  as_written: from Seti I to year 21 of Ramesses II
+cite:
+  - id: egypt-hatti-war-basis
+    says: The treaty recalls that in the times of Mautal the Hittite king was at war with the king of Egypt.
+    source: sayce-hittites
+    at: "ch. II: the treaty, the preamble"
+    quote:
+      To wit, in the times of Mautal, the great king of Kheta, my brother, he was at war with [Meneptah
+      Seti] the great prince of Egypt.
+notes:
+  "The window starts in the reign of Seti I, which the treaty names, and is editorial. Ramesses II's
+  regnal years convert to BCE according to the chronology used: his accession is put at about 1304, 1290
+  or 1279 BCE (the low date most used today). The window spans those dates for the year in question. Garstang's
+  1910 dates (Kadesh 1288 B.C., the treaty about 1271 B.C.) fall inside it; Sayce's 1890 dates (1383
+  and 1354 B.C.) follow an older scheme and fall outside. It is an editorial bound that a cited chronology
+  must replace before approval."

@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In his eighth year Ramesses II overruns Palestine and takes cities including Dapur in the land
+  of the Amorites; other campaigns go against Ashkelon in the south and Tunip in the north.
+types: [campaign]
+date:
+  value: 1297 BCE..1271 BCE
+  mode: window
+  calendar: regnal
+  as_written: year 8 of Ramesses II
+places:
+  - place: dapur
+    role: site
+  - place: tunip
+    role: site
+participants:
+  - actor: ramesses-ii
+    role: leader
+  - actor: egypt-new-kingdom
+    role: participant
+  - actor: amurru-kingdom
+    role: subject
+cite:
+  - id: year-8-basis
+    says:
+      Sayce dates the capture of Dapur to the eighth year and names the campaigns against Ashkelon and
+      Tunep.
+    source: sayce-hittites
+    at: "ch. II: the war after Kadesh"
+    quote:
+      in the eighth year of the Pharaoh's reign Palestine was overrun and certain cities captured,
+      including Dapur or Tabor 'in the land of the Amorites,' while other campaigns were directed against
+      Ashkelon, in the south, and the city of Tunep or Tennib, in the north.
+notes:
+  "Sayce gives the year for Dapur only; the Ashkelon and Tunip campaigns are undated in his account.
+  Ashkelon is not placed here. Ramesses II's regnal years convert to BCE according to the chronology
+  used: his accession is put at about 1304, 1290 or 1279 BCE (the low date most used today). The window
+  spans those dates for the year in question. Garstang's 1910 dates (Kadesh 1288 B.C., the treaty about
+  1271 B.C.) fall inside it; Sayce's 1890 dates (1383 and 1354 B.C.) follow an older scheme and fall
+  outside. It is an editorial bound that a cited chronology must replace before approval."

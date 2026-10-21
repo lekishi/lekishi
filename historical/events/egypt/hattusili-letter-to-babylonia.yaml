@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The king of Babylonia asks about the treaty, and Hattusili III answers that he and the king of
+  Egypt have made an alliance and become brothers against a common foe.
+types: [exchange]
+date:
+  value: 1284 BCE..1245 BCE
+  mode: window
+  calendar: regnal
+  as_written: after year 21 of Ramesses II
+places:
+  - place: hattusa
+    role: start
+participants:
+  - actor: hattusili-iii
+    role: leader
+  - actor: kassite-babylonia
+    role: participant
+cite:
+  - id: babylonia-letter-basis
+    says: Garstang gives Hattusil's reply to the king of Babylonia about the alliance with Egypt.
+    source: garstang-land-of-hittites
+    at: "ch. VI, pp. 346–352: the letter to Babylonia, fn. 822"
+notes:
+  "Garstang translates from Winckler's first reading of the tablet; the record does not quote it.
+  Ramesses II's regnal years convert to BCE according to the chronology used: his accession is put at
+  about 1304, 1290 or 1279 BCE (the low date most used today). The window spans those dates for the year
+  in question. Garstang's 1910 dates (Kadesh 1288 B.C., the treaty about 1271 B.C.) fall inside it; Sayce's
+  1890 dates (1383 and 1354 B.C.) follow an older scheme and fall outside. It is an editorial bound that
+  a cited chronology must replace before approval."

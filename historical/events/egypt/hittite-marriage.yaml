@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In Ramesses II's 34th year a daughter of Hattusili III marries the king and takes the name Maathorneferure.
+  Sayce and Garstang both say the Hittite king came to Egypt with her.
+types: [occurrence]
+date:
+  value: 1271 BCE..1245 BCE
+  mode: window
+  calendar: regnal
+  as_written: year 34 of Ramesses II
+  cite:
+    - id: marriage-date
+      says: Sayce dates the marriage to the 34th year of the reign.
+      source: sayce-hittites
+      at: "ch. II: the marriage"
+      quote:
+        The treaty was ratified by the visit of the Hittite prince Kheta-sira to Egypt in his national
+        costume, and the marriage of his daughter to Ramses in the thirty-fourth year of the Pharaoh's reign
+        (B. C. 1354). She took the Egyptian name of Ur-maa Noferu-Ra
+participants:
+  - actor: ramesses-ii
+    role: host
+  - actor: maathorneferure
+    role: participant
+  - actor: hattusili-iii
+    role: guest
+cite:
+  - id: marriage-basis
+    says:
+      Sayce says the treaty was ratified by Kheta-sira's visit and the marriage of his daughter, who
+      took the name Ur-maa Noferu-Ra.
+    source: sayce-hittites
+    at: "ch. II: the marriage"
+    quote:
+      The treaty was ratified by the visit of the Hittite prince Kheta-sira to Egypt in his national
+      costume, and the marriage of his daughter to Ramses in the thirty-fourth year of the Pharaoh's reign
+      (B. C. 1354). She took the Egyptian name of Ur-maa Noferu-Ra
+  - id: marriage-garstang
+    says:
+      Garstang says the Hittite king accompanied the princess up the Nile and visited Rameses in his
+      capital, and that Rameses recorded it.
+    role: supporting
+    source: garstang-land-of-hittites
+    at: "ch. VI, pp. 346–352: the marriage, fn. 825"
+notes:
+  "Whether Hattusili himself made the journey is doubted in later scholarship; no source read for
+  this chapter is cited for that, so the record reports the two accounts. The record names no place, since
+  neither source says where the wedding was. Ramesses II's regnal years convert to BCE according to the
+  chronology used: his accession is put at about 1304, 1290 or 1279 BCE (the low date most used today).
+  The window spans those dates for the year in question. Garstang's 1910 dates (Kadesh 1288 B.C., the
+  treaty about 1271 B.C.) fall inside it; Sayce's 1890 dates (1383 and 1354 B.C.) follow an older scheme
+  and fall outside. It is an editorial bound that a cited chronology must replace before approval."

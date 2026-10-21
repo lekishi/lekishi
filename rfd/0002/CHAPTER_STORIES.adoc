@@ -80,7 +80,11 @@ stories:
 * *Windows.* The chapter's `window` is the window the chapter opens on. Each
   story may give its own `window`, which defaults to its `span`, and switching
   stories moves to it. A story at 838–847 is then no stranger than the coda
-  nodes of 779 are today.
+  nodes of 779 are today. The projection's coda rule, which today fails a
+  step wholly outside the chapter's `window` unless its caption starts
+  "Coda — " (`src/lib/atlas/projection.ts`), is checked against each step's
+  own story window. Without that change, every crossing step before 750
+  would fail the build.
 * *Captions.* Today every published event needs a caption, and only a story
   step supplies one. An event listed in two stories may carry a different
   caption in each. Event `title`, which the authoring format decided but has

@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Aziru's dealings with the Hittites, which the Egyptian court suspected and he explained away
+  as defence against Hittite invasions.
+types: [contact]
+from: aziru
+to: hatti
+date:
+  value: 1380 BCE..1330 BCE
+  mode: window
+  calendar: regnal
+  as_written: the reign of Amenophis IV
+cite:
+  - id: aziru-hatti
+    says: Niebuhr says Aziru conspired readily with the Hittite foes of the Court.
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. IV: Aziru and the Hittites"
+    quote:
+      This trusty vassal added to his other known faults the peculiarity of conspiring readily with
+      the Hittite foes of the Court.
+notes:
+  "The letters are undated but for a few dockets, and the reigns they fall in convert to BCE according
+  to the chronology used: Amenhotep III's accession is put between about 1410 and 1388 BCE, and the end
+  of Akhenaten's reign between about 1362 and 1334 BCE. The window spans those placements for the reign
+  in question; Niebuhr's 1903 dates (the archive about 1400 B.C., Akhetaten built about 1380 B.C.) fall
+  inside it. It is an editorial bound that a cited chronology must replace before approval."

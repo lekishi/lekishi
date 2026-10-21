@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  War between Mitanni and Hatti, from the Hittite invasion Tushratta claims to have destroyed to
+  the pressure that, by Niebuhr's account, left Mitanni nearing its fall.
+types: [conflict]
+from: hatti
+to: mitanni
+directionality: mutual
+date:
+  value: 1410 BCE..1330 BCE
+  mode: window
+  calendar: regnal
+  as_written: the reigns of Amenophis III and IV
+cite:
+  - id: mitanni-hatti
+    says: Tushratta writes that the whole army of the Hittites marched against his land.
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. III: Tushratta's first letter"
+    quote:
+      Know also, oh, my royal brother! that the whole army of the Hittites marched against my land.
+      But the God Teshup, the lord, delivered them into my hand and I destroyed them. Not one man from their
+      midst returned to his own land. And now I have sent to thee a chariot and two horses, a youth and
+      a maiden, the booty of the land of the Hittites.
+notes:
+  "The letters are undated but for a few dockets, and the reigns they fall in convert to BCE according
+  to the chronology used: Amenhotep III's accession is put between about 1410 and 1388 BCE, and the end
+  of Akhenaten's reign between about 1362 and 1334 BCE. The window spans those placements for the reign
+  in question; Niebuhr's 1903 dates (the archive about 1400 B.C., Akhetaten built about 1380 B.C.) fall
+  inside it. It is an editorial bound that a cited chronology must replace before approval."

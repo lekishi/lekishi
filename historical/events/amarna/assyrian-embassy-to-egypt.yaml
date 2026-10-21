@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Akhenaten receives an Assyrian embassy and sends gold to its prince, and Burnaburiash protests
+  that the Assyrians are his vassals. Ashur-uballit I's own letter speaks of regular messengers.
+types: [mission]
+part_of:
+  - amarna-letters-exchanged
+date:
+  value: 1380 BCE..1330 BCE
+  mode: window
+  calendar: regnal
+  as_written: the reign of Amenophis IV
+participants:
+  - actor: middle-assyrian-kingdom
+    role: participant
+  - actor: akhenaten
+    role: host
+  - actor: burnaburiash-ii
+    role: witness
+  - actor: ashur-uballit-i
+    role: participant
+cite:
+  - id: assyria-basis
+    says: Niebuhr says Napkhuria sent gold to Assurnadinakhi and received an Assyrian embassy.
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. III: Assyria"
+    quote:
+      Napkhuria sent a very large quantity of gold to the prince Assurnadinakhi and ostentatiously
+      received an Assyrian embassy.
+  - id: assyria-vassals
+    says: Burnaburiash writes that the Assyrians are his vassals.
+    role: supporting
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. III: Assyria (the protest)"
+    quote:
+      '"Now there are the Assyrians, my vassals. Have not I already written to thee in regard to them?
+      If thou lovest me they will gain nothing from thee. Let them depart unsuccessful."'
+notes:
+  "The letters are undated but for a few dockets, and the reigns they fall in convert to BCE according
+  to the chronology used: Amenhotep III's accession is put between about 1410 and 1388 BCE, and the end
+  of Akhenaten's reign between about 1362 and 1334 BCE. The window spans those placements for the reign
+  in question; Niebuhr's 1903 dates (the archive about 1400 B.C., Akhetaten built about 1380 B.C.) fall
+  inside it. It is an editorial bound that a cited chronology must replace before approval."

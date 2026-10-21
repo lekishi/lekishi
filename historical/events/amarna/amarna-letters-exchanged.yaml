@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The Amarna correspondence: letters in Babylonian cuneiform between the kings of Egypt and the
+  great kings of Babylon, Mitanni, Assyria, Hatti and Alashiya, and from the vassals of Canaan and Syria,
+  under Amenhotep III and Akhenaten."
+types: [process]
+date:
+  value: 1410 BCE..1330 BCE
+  mode: window
+  calendar: regnal
+  as_written: the reigns of Amenophis III and IV
+places:
+  - place: akhetaten
+    role: site
+  - place: thebes
+    role: site
+participants:
+  - actor: amenhotep-iii
+    role: participant
+  - actor: akhenaten
+    role: participant
+  - actor: egypt-new-kingdom
+    role: participant
+cite:
+  - id: letters-archive
+    says: Niebuhr says the tablets were part of the Egyptian state archives of Amenophis III and IV.
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. I: the archive"
+    quote:
+      The reading of the introductory lines on various tablets served to show that the find consisted
+      of part of the Egyptian state archives in the times of the two kings Amenophis III. and IV.
+  - id: letters-language
+    says: Niebuhr says the find showed Babylonian was the language of diplomacy about 1400 B.C.
+    role: supporting
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. I: the language"
+    quote:
+      Thus the first of the many startling discoveries that were to follow in such rapid succession
+      was made in the recognition that about 1400 B.C. the Semitic speech of Babylon served as the language
+      of diplomacy in the East.
+notes:
+  "An umbrella for the letters; its parts are the dated exchanges. The letters are undated but for
+  a few dockets, and the reigns they fall in convert to BCE according to the chronology used: Amenhotep
+  III's accession is put between about 1410 and 1388 BCE, and the end of Akhenaten's reign between about
+  1362 and 1334 BCE. The window spans those placements for the reign in question; Niebuhr's 1903 dates
+  (the archive about 1400 B.C., Akhetaten built about 1380 B.C.) fall inside it. It is an editorial bound
+  that a cited chronology must replace before approval."

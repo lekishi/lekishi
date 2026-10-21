@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The king of Alashiya sends 500 talents of copper and apologises that it is so little: the hand
+  of Nergal, the god of pestilence, has slain the workers, and the Egyptian messenger has had to stay
+  three years."
+types: [exchange]
+part_of:
+  - amarna-letters-exchanged
+date:
+  value: 1410 BCE..1330 BCE
+  mode: window
+  calendar: regnal
+  as_written: the reign of Amenophis III or IV
+participants:
+  - actor: alashiya
+    role: participant
+  - actor: egypt-new-kingdom
+    role: participant
+cite:
+  - id: alashiya-copper
+    says: Niebuhr quotes the king of Alashia on the copper and the plague.
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. III: Alashia"
+    quote:
+      '"Behold! my brother, I have sent thee five hundred talents of copper as a gift. Let it not grieve
+      my brother''s heart that it is too little. For in my land the hand of Nergal (the god of pestilence)
+      has slain all the workers, and copper cannot be produced.'
+notes:
+  "The king names neither himself nor the Egyptian king, so the reign is not known. The letters are
+  undated but for a few dockets, and the reigns they fall in convert to BCE according to the chronology
+  used: Amenhotep III's accession is put between about 1410 and 1388 BCE, and the end of Akhenaten's
+  reign between about 1362 and 1334 BCE. The window spans those placements for the reign in question;
+  Niebuhr's 1903 dates (the archive about 1400 B.C., Akhetaten built about 1380 B.C.) fall inside it.
+  It is an editorial bound that a cited chronology must replace before approval."

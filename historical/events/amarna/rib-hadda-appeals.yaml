@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Rib-Hadda of Byblos writes again and again for troops against Abdi-Ashirta and the Habiru, warns
+  he will abandon his city, and loses Simyra.
+types: [exchange]
+part_of:
+  - amarna-letters-exchanged
+date:
+  value: 1410 BCE..1330 BCE
+  mode: window
+  calendar: regnal
+  as_written: the reigns of Amenophis III and IV
+places:
+  - place: byblos
+    role: start
+  - place: simyra
+    role: context
+participants:
+  - actor: rib-hadda
+    role: leader
+  - actor: abdi-ashirta
+    role: subject
+  - actor: habiru
+    role: subject
+  - actor: yanhamu
+    role: subject
+cite:
+  - id: rib-hadda-habiri
+    says: Rib-Addi asks to be rescued from Abd-Ashera, with whom all the Habiri side.
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. IV: Rib-Addi to Amanappa"
+    quote:
+      "'Canst thou not rescue me from the hand of Abd-Ashera? All the Habiri are on his side; the
+      princes will hear no remonstrances, but are in alliance with him; thereby is he become mighty.'"
+  - id: rib-hadda-flee
+    says: Rib-Addi warns he will forsake his city if no troops come.
+    role: supporting
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. IV: Rib-Addi to Amanappa (the end)"
+    quote:
+      If I receive no troops I shall forsake my city, and flee, doing that which seems good to me to
+      preserve my life."
+  - id: rib-hadda-simyra
+    says: Rib-Addi writes that Simyra is lost to him.
+    role: supporting
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. IV: Rib-Addi on Yanhamu"
+    quote:
+      Furthermore, since Simyra is indeed lost to me, and Yanhamu hath received Bit-Arti, he ought
+      to send me provision of grain that I may defend the king's city for him.
+notes:
+  "The letters are undated but for a few dockets, and the reigns they fall in convert to BCE according
+  to the chronology used: Amenhotep III's accession is put between about 1410 and 1388 BCE, and the end
+  of Akhenaten's reign between about 1362 and 1334 BCE. The window spans those placements for the reign
+  in question; Niebuhr's 1903 dates (the archive about 1400 B.C., Akhetaten built about 1380 B.C.) fall
+  inside it. It is an editorial bound that a cited chronology must replace before approval."

@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  A letter from Naharin (Mitanni), brought by the messenger Pirizzi, is received at the southern
+  residence at Thebes in, as the docket is restored, the 32nd year of Amenhotep III.
+types: [mission]
+part_of:
+  - amarna-letters-exchanged
+date:
+  value: 1380 BCE..1357 BCE
+  mode: window
+  calendar: regnal
+  as_written: the [32nd] year of Nimmuria, first winter month, day 10
+  cite:
+    - id: docket-date
+      says: The hieratic docket on one of Tushratta's tablets dates its receipt.
+      source: niebuhr-tell-el-amarna-period
+      at: "ch. III: the docket"
+      quote:
+        '"[Received] in the two-[and-thirtieth year of the reign of Nimmuria], in the first winter
+        month, on the tenth day, the Court being at the southern residence (Thebes), in the Residence Ka-em-Ekhut.
+        Duplicate of the Naharina letter brought by the messenger Pirizzi and (another)."'
+places:
+  - place: thebes
+    role: end
+participants:
+  - actor: pirizzi
+    role: leader
+  - actor: tushratta
+    role: subject
+  - actor: amenhotep-iii
+    role: host
+cite:
+  - id: docket-basis
+    says: Niebuhr translates the red hieratic docket on a Tushratta tablet.
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. III: the docket"
+    quote:
+      '"[Received] in the two-[and-thirtieth year of the reign of Nimmuria], in the first winter month,
+      on the tenth day, the Court being at the southern residence (Thebes), in the Residence Ka-em-Ekhut.
+      Duplicate of the Naharina letter brought by the messenger Pirizzi and (another)."'
+notes:
+  "The regnal year is restored in the translation (in square brackets); the window is that of year
+  32 in the editorial chronology. The letters are undated but for a few dockets, and the reigns they fall
+  in convert to BCE according to the chronology used: Amenhotep III's accession is put between about
+  1410 and 1388 BCE, and the end of Akhenaten's reign between about 1362 and 1334 BCE. The window spans
+  those placements for the reign in question; Niebuhr's 1903 dates (the archive about 1400 B.C., Akhetaten
+  built about 1380 B.C.) fall inside it. It is an editorial bound that a cited chronology must replace
+  before approval."

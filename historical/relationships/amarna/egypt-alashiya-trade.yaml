@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "Trade between Alashiya and Egypt: copper and timber from Alashiya for silver, oil and textiles."
+types: [trade]
+from: alashiya
+to: egypt-new-kingdom
+directionality: mutual
+date:
+  value: 1410 BCE..1330 BCE
+  mode: window
+  calendar: regnal
+  as_written: the reigns of Amenophis III and IV
+cite:
+  - id: alashiya-trade
+    says: Niebuhr says the king of Alashia asked for silver in return for copper.
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. III: Alashia"
+    quote:
+      A prince of Alashia, who never mentions either his own name or that of the Egyptian king, wrote
+      short letters, for the most part of a business character.
+notes:
+  "The letters are undated but for a few dockets, and the reigns they fall in convert to BCE according
+  to the chronology used: Amenhotep III's accession is put between about 1410 and 1388 BCE, and the end
+  of Akhenaten's reign between about 1362 and 1334 BCE. The window spans those placements for the reign
+  in question; Niebuhr's 1903 dates (the archive about 1400 B.C., Akhetaten built about 1380 B.C.) fall
+  inside it. It is an editorial bound that a cited chronology must replace before approval."

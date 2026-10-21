@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Vassals besieging rebel cities in the land of Amki write that Itakama, prince of Kadesh, came
+  at the head of Hittites; Itakama answers that Namyawaza slandered him and gave the king's cities to
+  the Habiru.
+types: [campaign]
+date:
+  value: 1380 BCE..1330 BCE
+  mode: window
+  calendar: regnal
+  as_written: the reign of Amenophis IV
+places:
+  - place: kadesh
+    role: context
+participants:
+  - actor: itakama
+    role: leader
+  - actor: hatti
+    role: participant
+  - actor: habiru
+    role: subject
+cite:
+  - id: amki-basis
+    says: The vassals write that Itakama came at the head of Hittites.
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. IV: the letters from Amki"
+    quote:
+      '"Behold, we were besieging the cities of the king my lord in the land of Amki (i.e., cities
+      that had fallen away and had ceased to pay tribute). Then came Itakama, the Prince of Kinza (Kadesh),
+      at the head of Hittites.'
+  - id: itakama-reply
+    says: Itakama writes that Namyauza gave the king's cities in Kadesh and Ube to the Habiri.
+    role: supporting
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. IV: Itakama's letter"
+    quote:
+      Behold, now Namyauza hath delivered up to the Habiri all the king's cities in the land of Kadesh
+      and in Ube.
+notes:
+  "Amki, the Beqaa valley, is not placed. The letters are undated but for a few dockets, and the
+  reigns they fall in convert to BCE according to the chronology used: Amenhotep III's accession is put
+  between about 1410 and 1388 BCE, and the end of Akhenaten's reign between about 1362 and 1334 BCE.
+  The window spans those placements for the reign in question; Niebuhr's 1903 dates (the archive about
+  1400 B.C., Akhetaten built about 1380 B.C.) fall inside it. It is an editorial bound that a cited chronology
+  must replace before approval."

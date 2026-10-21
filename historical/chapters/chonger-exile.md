@@ -34,7 +34,8 @@ proposed journey records.
 - Relationships: `chonger-chu-promise` (diplomacy), `qin-backs-chonger` (alliance),
   `chonger-rules-jin` (rulership).
 - Journeys (proposed, not compiled): `chonger-exile-zuozhuan` and `chonger-exile-table`, under
-  `historical/journeys/jin/`, in the shape of draft PR #26. They are not in the manifest's `include`
+  `historical/journeys/jin/`, in the record shape RFD 2 still proposes (the journey kind was decided on
+  2026-10-21, in PR #26). They are not in the manifest's `include`
   because the compiler does not read journeys yet.
 - Places (new, under `places/chunqiu/`): `pu-jin`, `di`, `wey-chuqiu`, `wulu`, `cao-taoqiu`, `ying`,
   `yong`, `hequ`, `xun`, `quwo`; shared: `linzi` (six-states, PR #38), `xinzheng` (Qin),
@@ -54,7 +55,7 @@ PR #38 first.
   map must draw both, and the fork, without merging them.
 - **A whole year of stops.** Five stops share 637 BCE and v0 cannot order them; the journey's order
   check can catch nothing there.
-- **Broken lines.** Half the stops are unlocated or display anchors, so under PR #26's rules most
+- **Broken lines.** Half the stops are unlocated or display anchors, so under the proposed journey rules most
   legs are not drawn. This is the worst case for a journey and should still read as a route on
   the list and the card.
 - **Stays.** `chonger-among-di` and `chonger-in-qi` are durations of twelve and five years, the first

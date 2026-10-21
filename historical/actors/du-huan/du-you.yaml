@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  杜佑 of 京兆萬年, the official and historian who compiled 通典 in two hundred 卷 and sent it to the
+  court from 淮南 in 貞元十七年 (801). His 西戎 section quotes the 經行記 of his kinsman 杜環.
+types: [person]
+names:
+  - form: 杜佑
+    lang: lzh
+    script: Hani
+    roman: Du You
+    scheme: pinyin
+    cite:
+      - id: du-you-name
+        says: His biography names him 杜佑, courtesy name 君卿, of 京兆萬年.
+        source: jiu-tangshu-tang-west
+        at: 卷一四七 杜佑傳（杜佑，字君卿）
+        quote: 杜佑，字君卿，京兆萬年人。
+roles:
+  - role: scholar
+    note: Compiler of 通典.
+    cite:
+      - id: du-you-role
+        says: The biography records that he enlarged 劉秩's 政典 into a work of two hundred 卷 called 通典.
+        source: jiu-tangshu-tang-west
+        at: 卷一四七 杜佑傳（書成二百卷，號曰通典）
+        quote: 因而廣之，加以開元禮、樂，書成二百卷，號曰《通典》。
+external_ids:
+  - system: wikidata
+    id: Q712372
+    url: https://www.wikidata.org/wiki/Q712372
+    license: CC0-1.0
+    note: External identifier found on 2026-10-21.

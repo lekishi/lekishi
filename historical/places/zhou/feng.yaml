@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  豐, the city 文王 built and moved the 周 seat to from below 岐, the year before he died. With 鎬, 武王's
+  seat across the 灃 river, it is the twin capital of Western 周 that Wikidata records as 豐鎬, at the
+  site south-west of 西安.
+types: [capital]
+names:
+  - form: 豐
+    lang: lzh
+    script: Hani
+    roman: Feng
+    scheme: pinyin
+    cite:
+      - id: feng-name
+        says: The annals record that the 西伯 built the city of 豐 and moved his capital there from below 岐.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 西伯（而作豐邑）
+        quote: 而作豐邑，自岐下而徙都豐。
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [108.72, 34.21]
+    notes: >-
+      Wikidata's coordinate for 豐鎬, the site of the two Western 周 capitals, given to about a tenth of
+      a degree. It does not separate 豐 from 鎬, so the precision is region. The identification of the
+      site with the capitals is the dataset's.
+    cite:
+      - id: feng-point
+        says: Wikidata (CC0) records a coordinate for 豐鎬 and describes it as a capital of the 周 dynasty.
+        basis: interpretation
+        attributed_to: Wikidata contributors
+        source: wikidata
+        at: Q275515 (P625), revision 2541652769
+      - id: feng-identification
+        says: The historical geography quotes 班固 that 文王 built 豐 and 武王 governed from 鎬, west of 長安.
+        role: supporting
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷五十三 陝西二 西安府（文王作豐，武王治鎬）
+        quote: 太王徙岐，文王作豐，武王治鎬。
+external_ids:
+  - system: wikidata
+    id: Q275515
+    url: https://www.wikidata.org/wiki/Q275515
+    license: CC0-1.0

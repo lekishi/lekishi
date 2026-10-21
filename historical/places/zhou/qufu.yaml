@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  曲阜, where 武王 enfeoffed 周公旦 as lord of 魯, and the 魯 capital from then to the Warring States:
+  the home of Confucius, who left it in 497 BCE and returned in 484 BCE. Wikidata places it at the
+  excavated city of 魯 in modern 曲阜.
+types: [capital]
+names:
+  - form: 曲阜
+    lang: lzh
+    script: Hani
+    roman: Qufu
+    scheme: pinyin
+    cite:
+      - id: qufu-name
+        says: The annals record 武王 enfeoffing his brother 周公旦 at 曲阜, as 魯.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 武王（封弟周公旦於曲阜，曰魯）
+        quote: 封弟周公旦於曲阜，曰魯。
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [116.9972, 35.61734]
+    notes: >-
+      Wikidata's coordinate for the ruins of the 魯 capital at 曲阜, an excavated walled city. The
+      identification is the dataset's and agrees with the historical geography's.
+    cite:
+      - id: qufu-point
+        says: Wikidata (CC0) records the coordinate of the ruins of the capital of 魯 at 曲阜.
+        basis: interpretation
+        attributed_to: Wikidata contributors
+        source: wikidata
+        at: Q11090823 (P625), revision 2515967577
+      - id: qufu-identification
+        says: The historical geography records the 魯 city at the county seat of 曲阜 as the capital of 魯 from 周公's enfeoffment to the Warring States.
+        role: supporting
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷三十二 山東三 兗州府 曲阜縣（魯城）
+        quote: 自春秋至戰國，魯世世都之。
+external_ids:
+  - system: wikidata
+    id: Q11090823
+    url: https://www.wikidata.org/wiki/Q11090823
+    license: CC0-1.0

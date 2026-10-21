@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  武王, 發, the 周 king who reviewed his army at 盟津, crossed the river two years later, defeated 紂 at 牧野, and enfeoffed his brothers and allies before returning west. He laid out 雒邑 and died not long after the conquest.
+types: [person]
+names:
+  - form: 武王
+    lang: lzh
+    script: Hani
+    roman: Wu Wang
+    scheme: pinyin
+    cite:
+      - id: zhou-wu-wang-name
+        says: The annals record 武王 coming to the throne with 太公望 as his tutor and 周公旦 as his aide.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 武王（武王即位）
+        quote: 武王即位，太公望為師，周公旦為輔，召公、畢公之徒左右王，師修文王緒業。
+roles:
+  - role: ruler
+    note: King of 周 through the conquest.
+    cite:
+      - id: zhou-wu-wang-role
+        says: The annals record 武王 coming to the throne with 太公望 as his tutor and 周公旦 as his aide.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 武王（武王即位）

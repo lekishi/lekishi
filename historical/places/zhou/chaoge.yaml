@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  The 商 capital at the conquest, which the annals call 商 and 商邑 and later tradition 朝歌: where 紂
+  burned himself on the 鹿臺 and 武王 announced the end of 殷's mandate. The historical geography
+  records 朝歌 as 紂's capital, north-east of 淇縣. The label sits at modern 淇縣.
+types: [capital]
+names:
+  - form: 朝歌
+    lang: lzh
+    script: Hani
+    roman: Zhaoge
+    scheme: pinyin
+    cite:
+      - id: chaoge-name
+        says: The historical geography records that 紂 had his capital at 朝歌 and that 周 divided its land after the conquest.
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷四十九 河南四 衛輝府（殷紂所都）
+        quote: 《世紀》：「紂都朝歌，周滅殷，分殷都以北爲邶，西爲鄘，東爲衛。」
+  - form: 商國
+    lang: lzh
+    script: Hani
+    note: The annals' name for the city 武王 entered after the battle.
+    cite:
+      - id: chaoge-shangguo
+        says: The annals record 武王 reaching 商國 and its people waiting for him outside the walls.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 武王（武王至商國）
+        quote: 武王至商國，商國百姓咸待於郊。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [114.19579, 35.60548]
+    notes: >-
+      Label anchor at modern 淇縣, in whose north-east the historical geography records the old city
+      of 朝歌. The anchor asserts no city site. Whether the last 商 kings ruled from 朝歌 or from 殷 at 安陽
+      is itself disputed; the record follows the geography for the city of the conquest.
+    cite:
+      - id: chaoge-anchor
+        says: The anchor is the coordinate Wikidata (CC0) records for modern 淇縣.
+        source: wikidata
+        at: Q1152555 (P625), revision 2526576524
+      - id: chaoge-identification
+        says: The historical geography records 朝歌城 north-east of 淇縣 and calls it 紂's capital.
+        role: supporting
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷四十九 河南四 衛輝府 淇縣（朝歌城）
+        quote: 朝歌城，在縣東北。杜佑曰：「衛縣西二十里有朝歌古城。」《括地志》在衛州東北七十二里，即紂所都也。
+modern:
+  - form: 淇縣
+    lang: zh-Hans
+    script: Hani
+    note: Modern county recorded for orientation only.

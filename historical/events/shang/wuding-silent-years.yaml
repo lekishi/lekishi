@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  武丁 comes to the throne wanting to revive 殷 and, having found no helper, does not speak for three
+  years, leaving government to the chief steward while he watches the customs of the state. The Book
+  of Documents also tells of his three silent years.
+types: [occurrence]
+date:
+  value: 1300 BCE..1046 BCE
+  mode: window
+  calendar: regnal
+  as_written: 帝武丁即位（no year stated）
+  cite:
+    - id: wuding-silence-date
+      says: >-
+        The sources give no year. 武丁 reigned after 盤庚, whose move the 夏商周斷代工程 dates to about 1300
+        BCE, and before the fall of 商, which it dates to 1046 BCE; the window is that interval, under
+        that chronology.
+      basis: interpretation
+      attributed_to: 夏商周斷代工程《夏商周年表》(2000)
+      source: ourchinastory-xszc-chronology
+      at: paragraph 3
+participants:
+  - actor: wu-ding
+    role: subject
+notes: >-
+  The event has no place: the annals do not say where the king was, and placing it at 殷 would be an
+  inference. Its window is the span of the 殷 capital under a modern chronology, not a date for the
+  accession.
+cite:
+  - id: wuding-silence-annals
+    says: >-
+      The annals record that 武丁 wished to revive 殷 but had no helper, did not speak for three years,
+      and left decisions to the chief steward.
+    source: shiji-yin-zhou
+    at: 卷三 殷本紀 帝武丁（三年不言）
+    quote: 帝武丁即位，思復興殷，而未得其佐。三年不言，政事決定於冢宰，以觀國風。
+  - id: wuding-silence-documents
+    says: The 無逸 chapter says that when 高宗 came to the throne he kept silent for three years.
+    role: supporting
+    source: shangshu
+    at: 無逸（其在高宗）
+    quote: 作其即位，乃或（有）亮陰，三年不言；其惟不言，言乃雍。

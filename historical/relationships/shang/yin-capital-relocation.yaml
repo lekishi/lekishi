@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: >-
+  The 商 capital moving from 奄 to 殷 under 盤庚, as the Bamboo Annals record. The Han annals' account
+  of a move to 亳 is kept on the event as a conflicting claim and is not drawn.
+types: [relocated_to]
+from: shang-yan
+to: yinxu
+date:
+  value: 1300 BCE
+  mode: window
+  calendar: regnal
+  as_written: 盤庚（no year stated）; 盤庚遷殷約為公元前1300年（夏商周年表）
+  cite:
+    - id: yin-relocation-date
+      says: The 夏商周斷代工程's chronology, as reported, dates 盤庚's move to 殷 to about 1300 BCE.
+      basis: interpretation
+      attributed_to: 夏商周斷代工程《夏商周年表》(2000)
+      source: ourchinastory-xszc-chronology
+      at: paragraph 3
+notes: The relationship asserts no cause for the move; the annals' and the Bamboo Annals' reasons differ.
+cite:
+  - id: yin-relocation-basis
+    says: The Bamboo Annals record that 盤庚 moved from 奄 to 北蒙 and named it 殷.
+    source: guben-zhushu-jinian
+    at: 盤庚（盤庚旬自奄遷于北蒙）
+    quote: 盤庚旬自奄遷于北蒙，曰殷。

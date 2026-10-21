@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: >-
+  周 coming to the 商 court and receiving land, jade and horses from the 商 king, in the Bamboo
+  Annals' entry for 武乙's thirty-fourth year: diplomacy between the house that ruled and the house
+  that would replace it.
+types: [diplomacy]
+from: zhou-state
+to: shang-state
+date:
+  value: 1300 BCE..1046 BCE
+  mode: window
+  calendar: regnal
+  as_written: 武乙 三十四年
+  cite:
+    - id: zhou-shang-visit-date
+      says: >-
+        The entry is dated to 武乙's thirty-fourth year with no absolute year; the window is the span
+        of the 殷 capital under the 夏商周斷代工程's chronology.
+      basis: interpretation
+      attributed_to: 夏商周斷代工程《夏商周年表》(2000)
+      source: ourchinastory-xszc-chronology
+      at: paragraph 3
+cite:
+  - id: zhou-shang-visit-basis
+    says: The Bamboo Annals record 季歷 of 周 coming to court and the king's gifts of land, jade and horses.
+    source: guben-zhushu-jinian
+    at: 武乙 三十四年（周王季歷來朝）
+    quote: 三十四年，周王季歴來朝，王賜地三十里，玉十珏，馬八匹。

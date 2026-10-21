@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  婦好, a consort of 武丁, is buried in the tomb at 殷墟 that bears her name today. No text records the
+  burial: the event stands on the identification of the tomb, which the record cites from Wikidata,
+  and carries the 殷 window rather than a date of its own until the excavation report is read.
+types: [occurrence]
+date:
+  value: 1300 BCE..1046 BCE
+  mode: window
+  calendar: unknown
+  as_written: (no source date read)
+  cite:
+    - id: fu-hao-burial-date
+      says: >-
+        No read source dates the burial. The window is the span of the 殷 capital under the
+        夏商周斷代工程's chronology, which contains any date the tomb can have.
+      basis: interpretation
+      attributed_to: 夏商周斷代工程《夏商周年表》(2000)
+      source: ourchinastory-xszc-chronology
+      at: paragraph 3
+places:
+  - place: fu-hao-tomb
+    role: site
+participants:
+  - actor: fu-hao
+    role: subject
+notes: >-
+  This is the weakest event in the chapter and is kept on purpose, as a test of an excavated site
+  whose occupant no text names. It needs 中國社會科學院考古研究所《殷墟婦好墓》(1980) for the
+  identification and the dating, and the oracle-bone corpus for her life.
+cites:
+  places:
+    - id: fu-hao-burial-place
+      says: Wikidata (CC0) identifies the tomb at these coordinates as the tomb of 婦好, a 商 royal tomb.
+      basis: interpretation
+      attributed_to: Wikidata contributors
+      source: wikidata
+      at: Q6112269 (label, description, P625), revision 2551265098
+  participants:
+    - id: fu-hao-burial-person
+      says: The identification of the tomb names 婦好 as its occupant.
+      basis: interpretation
+      attributed_to: Wikidata contributors
+      source: wikidata
+      at: Q6112269 (label), revision 2551265098

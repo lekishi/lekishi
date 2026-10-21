@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  周, the western people and later royal house that rose under 季歷 and 文王, overthrew 商 at 牧野
+  under 武王, ruled from 豐 and 鎬 in the west until 771 BCE, and afterwards from 雒邑 in the east,
+  where its kings kept the title while the great states held the power.
+types: [state]
+names:
+  - form: 周
+    lang: lzh
+    script: Hani
+    roman: Zhou
+    scheme: pinyin
+    cite:
+      - id: zhou-state-name
+        says: The annals record that after the fall of 西周 the house of 周 declined and the strong states took over.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 平王（周室衰微）
+        quote: 平王之時，周室衰微，諸侯彊并弱，齊、楚、秦、晉始大，政由方伯。
+notes: >-
+  One actor for the 周 polity across the conquest and the move east, because the sources treat the
+  royal house as continuous; the chapters mark the change of capital as a relocation, not as a new
+  state.

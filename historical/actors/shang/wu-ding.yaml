@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  武丁, the 商 king the annals record reviving the state with 傅說 as minister, whose temple was named
+  高宗; the Book of Changes recalls his three-year war on 鬼方, and the Book of Documents gives him a
+  reign of fifty-nine years. The oracle-bone inscriptions of his reign at 殷 are the largest group
+  that survives.
+types: [person]
+names:
+  - form: 武丁
+    lang: lzh
+    script: Hani
+    roman: Wu Ding
+    scheme: pinyin
+    cite:
+      - id: wu-ding-name
+        says: The annals record 武丁 succeeding his father 小乙.
+        source: shiji-yin-zhou
+        at: 卷三 殷本紀 帝武丁（帝小乙崩，子帝武丁立）
+        quote: 帝小乙崩，子帝武丁立。
+  - form: 高宗
+    lang: lzh
+    script: Hani
+    roman: Gaozong
+    scheme: pinyin
+    note: The temple name the annals record 祖己 giving him.
+    cite:
+      - id: wu-ding-gaozong
+        says: The annals record that 祖己 named 武丁's temple 高宗.
+        source: shiji-yin-zhou
+        at: 卷三 殷本紀 帝祖庚（立其廟為高宗）
+        quote: 祖己嘉武丁之以祥雉為德，立其廟為高宗，遂作高宗肜日及訓。
+roles:
+  - role: ruler
+    note: King of 商. The Book of Documents gives fifty-nine years; no absolute years are stated.
+    cite:
+      - id: wu-ding-reign
+        says: The 無逸 chapter says that 高宗 held the state for fifty-nine years.
+        source: shangshu
+        at: 無逸（高宗之享國）
+        quote: 高宗之享國，五十有九年。

@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  武丁 dreams of a sage named 說, has his officers search the country, and finds him at 傅險 working as
+  a convict builder. He makes him chief minister, names him 傅說 after the place, and 殷 is well
+  governed.
+types: [occurrence]
+date:
+  value: 1300 BCE..1046 BCE
+  mode: window
+  calendar: regnal
+  as_written: 帝武丁（no year stated）
+  cite:
+    - id: fu-yue-found-date
+      says: >-
+        The annals give no year. The window is the span from 盤庚's move to 殷 to the fall of 商 under
+        the 夏商周斷代工程's chronology, within which 武丁 reigned.
+      basis: interpretation
+      attributed_to: 夏商周斷代工程《夏商周年表》(2000)
+      source: ourchinastory-xszc-chronology
+      at: paragraph 3
+places:
+  - place: fuxian
+    role: site
+    note: Where 說 was found.
+participants:
+  - actor: wu-ding
+    role: leader
+  - actor: fu-yue
+    role: subject
+cite:
+  - id: fu-yue-found-dream
+    says: The annals record that 武丁 dreamed of a sage named 說 and sought him among his officials in vain.
+    source: shiji-yin-zhou
+    at: 卷三 殷本紀 帝武丁（武丁夜夢得聖人）
+    quote: 武丁夜夢得聖人，名曰說。以夢所見視群臣百吏，皆非也。
+  - id: fu-yue-found-search
+    role: supporting
+    says: The annals record that the search found 說 at 傅險, where he was a convict building walls.
+    source: shiji-yin-zhou
+    at: 卷三 殷本紀 帝武丁（得說於傅險中）
+    quote: 於是迺使百工營求之野，得說於傅險中。是時說為胥靡，筑於傅險。
+  - id: fu-yue-found-minister
+    role: supporting
+    says: The annals record that 武丁 made him minister, that 殷 was well governed, and that he was named 傅說.
+    source: shiji-yin-zhou
+    at: 卷三 殷本紀 帝武丁（舉以為相）
+    quote: 得而與之語，果聖人，舉以為相，殷國大治。故遂以傅險姓之，號曰傅說。
+cites:
+  places:
+    - id: fu-yue-found-place
+      says: The annals name 傅險 as the place 說 was found, without a position.
+      source: shiji-yin-zhou
+      at: 卷三 殷本紀 帝武丁（得說於傅險中）

@@ -14,15 +14,17 @@ story:
   coverage: >-
     The travels as the 孔子世家 of 史記 tells them, checked against the table of the twelve lords,
     the 衛 house, the 左傳 and the 論語. The biography's order and the table's years disagree on the
-    departure, 宋, 陳 and the last return to 衛, and each disagreement is kept on its event.
+    departure, 宋, 陳 and the last return to 衛. Each disagreement is kept on its event, except the
+    last return, whose two accounts are two events: the 孔子世家's from 楚 in 489 BCE and the table's
+    from 陳 in 485 BCE, rival accounts of one return rather than two visits.
     Excluded: Confucius's career in 魯 before 498 BCE and his last years after 484 BCE, and the
     stories the 孔子世家 tells without a place, such as the lute lesson from 師襄子.
   notes: >-
-    Step order is the 孔子世家's. Three events have no place, because the texts give none: the
+    Step order is the 孔子世家's, with the table's rival return to 衛 after the biography's. Three events have no place, because the texts give none: the
     ford, the siege between 陳 and 蔡, and the rescue by 楚. 匡 and 蒲 share one display anchor. Two
-    journey records, one per account, are proposed beside the chapter and wait on the journey kind
-    (draft PR #26). This is a draft for data and engine testing; no release decision has been
-    taken.
+    journey records, one per account, are proposed beside the chapter and wait on the journey
+    record's shape, which is still proposed and not compiled. This is a draft for data and engine
+    testing; no release decision has been taken.
   steps:
     - qi-lu-dancing-girls: 齊 sends dancing girls to 魯
     - kongzi-leaves-lu: Confucius leaves 魯 over the dancing girls
@@ -42,4 +44,5 @@ story:
     - chen-cai-siege: Starving between 陳 and 蔡
     - chu-rescue: 楚 sends troops for him
     - kongzi-returns-wey: Back to 衛
+    - kongzi-returns-wey-485: Back to 衛, in the table's account
     - kongzi-returns-lu: Called home to 魯

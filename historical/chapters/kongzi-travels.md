@@ -19,19 +19,20 @@ table puts the departure there.
 | --- | --- |
 | Primary texts | 史記 孔子世家, 衛康叔世家 and 十二諸侯年表; 左傳 定公 and 哀公; 論語 述而, 子罕, 先進, 衞靈公 and 微子. All read on Wikisource. |
 | Dates | The table's years where it has them (departure 498, 衛 497, 陳 496, 宋 492, 衛 485, home 484 BCE); the 孔子世家's relative years ("the next year") elsewhere, anchored on 魯定公's death (495 BCE) and 季桓子's (492 BCE). |
-| Places | 衛 (帝丘), 匡, 蒲 and 葉 are display anchors; 蔡 is Wikidata's 蔡國故城 (CC0), which may be the wrong 蔡; 曲阜, 宋, 鄭 and 曹 come from the earlier chapters and 陳 from the six-states chapter. Three events have no place. |
+| Places | 衛 (帝丘), 匡, 蒲 and 葉 are display anchors; 蔡 is a display anchor at Wikidata's 蔡國故城 (CC0), the old capital, which may not be the 蔡 he reached; 曲阜, 宋, 鄭 and 曹 come from the earlier chapters and 陳 from the six-states chapter. Three events have no place. |
 | Rights | Every quoted source is public domain. |
-| Disputes | Five, each on its event: the year of the departure (498 or 496 BCE), whether 宋 came before or after 陳, the year of the arrival in 陳, the last return to 衛 (from 楚 in 489 or from 陳 in 485 BCE), and the year of the dancing girls. |
+| Disputes | Five, each on its event: the year of the departure (498 or 496 BCE), whether 宋 came before or after 陳, the year of the arrival in 陳, the last return to 衛 (from 楚 in 489 or from 陳 in 485 BCE, kept as two events), and the year of the dancing girls. |
 
 ## Inventory
 
-19 steps: 18 events and 1 relationship, reaching 10 places, 23 actors and 5 sources, plus two
+20 steps: 19 events and 1 relationship, reaching 10 places, 23 actors and 5 sources, plus two
 proposed journey records.
 
 - Events: `kongzi-leaves-lu`, `kongzi-first-in-wey`, `kuang-detained`, `nanzi-audience`,
   `kongzi-at-cao`, `huan-tui-tree`, `zheng-east-gate`, `kongzi-arrives-chen`, `pu-covenant`,
   `lingong-asks-battle`, `kongzi-back-in-chen`, `kongzi-moves-to-cai`, `kongzi-at-ye`,
-  `asking-the-ford`, `chen-cai-siege`, `chu-rescue`, `kongzi-returns-wey`, `kongzi-returns-lu`.
+  `asking-the-ford`, `chen-cai-siege`, `chu-rescue`, `kongzi-returns-wey`, `kongzi-returns-wey-485`,
+  `kongzi-returns-lu`.
 - Relationship: `qi-lu-dancing-girls` (diplomacy).
 - Journeys (proposed, not compiled): `kongzi-travels-shijia` and `kongzi-travels-table`, under
   `historical/journeys/kongzi/`.
@@ -51,7 +52,7 @@ proposed journey records.
 - **Journeys that disagree on order.** The two journeys share events but list 宋 and 陳 in opposite
   order. Their windows overlap, so v0's order check passes both; the contrast must be visible on
   the card, not only in the data.
-- **Places that may be wrong in a cited way.** `cai-shangcai` is Wikidata's 蔡, and the source
+- **Places that may be wrong in a cited way.** `cai-shangcai` is a display anchor at Wikidata's 蔡, and the source
   itself says the 蔡 court had moved. The place card must show that note.
 
 ## Evidence states the contract lacks
@@ -74,6 +75,7 @@ year; the 孔子家語, which is a later compilation.
 ## Before review
 
 - Decide whether the 孔子世家 or the table should anchor each disputed year; the record follows
-  the table where it has a year, except for 宋 and the last return to 衛.
+  the table where it has a year, except for 宋; the last return to 衛 is kept as two events, one per
+  account, rather than one event anchored on either year.
 - Re-check every locator against a critical edition, and the 左傳 哀公 transcription, which uses
   a different punctuation (．) from the other books.

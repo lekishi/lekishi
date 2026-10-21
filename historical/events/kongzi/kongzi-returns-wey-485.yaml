@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  The table of the twelve lords and the 衛 house bring Confucius back to 衛 from 陳, not from 楚, in 出公's
+  eighth year, 485 BCE: a different leg and a later year from the 孔子世家's.
+types: [occurrence]
+date:
+  value: 485 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 衛出公八年
+  cite:
+    - id: kongzi-returns-wey-485-date
+      says: The table enters it in 出公's eighth year, 485 BCE in its count from the 共和 regency (841 BCE).
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 衛 出公 八年（孔子自陳來）
+      quote: 八孔子自陳來。
+places:
+  - place: wey-diqiu
+    role: site
+    note: The capital of the state the text names; the text names only the state.
+participants:
+  - actor: kongzi
+    role: leader
+  - actor: wey-state
+    role: host
+dispute:
+  status: disputed
+  summary: >-
+    The table and the 衛 house bring Confucius back to 衛 from 陳 in 485 BCE; the 孔子世家 brings him from 楚
+    in 489 BCE (`kongzi-returns-wey`). They are rival accounts of the same last return, not two returns.
+cite:
+  - id: kongzi-returns-wey-485-basis
+    says: The table records that Confucius came to 衛 from 陳.
+    source: shiji-chunqiu
+    at: 卷十四 十二諸侯年表 衛 出公 八年（孔子自陳來）
+    quote: 八孔子自陳來。
+  - id: kongzi-returns-wey-485-house
+    says: The 衛 house also says Confucius came to 衛 from 陳, before 出公's ninth year.
+    role: supporting
+    source: shiji-chunqiu
+    at: 卷三十七 衛康叔世家 出公（孔子自陳入衞）
+    quote: 孔子自陳入衞。
+  - id: kongzi-returns-wey-485-from-chu
+    says: The 孔子世家 brings Confucius back to 衛 from 楚 in 魯哀公's sixth year, 489 BCE.
+    role: conflicting
+    source: shiji-chunqiu
+    at: 卷四十七 孔子世家（於是孔子自楚反乎衞）
+    quote: 於是孔子自楚反乎衞。是歲也，孔子年六十三，而魯哀公六年也。

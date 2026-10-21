@@ -16,17 +16,16 @@ names:
         at: 卷四十七 孔子世家（孔子自陳遷于蔡）
         quote: 冉求既去，明年，孔子自陳遷于蔡。
 at:
-  - interpretation: approximate_point
-    precision: locality
+  - interpretation: display_anchor
+    precision: unspecified
     point: [114.2481, 33.2749]
     notes: >-
-      Wikidata's coordinate for the 蔡國故城 at 上蔡, the dataset's identification of the 蔡 capital. The 孔子世家
-      itself records 蔡 moving to 州來 in 493 BCE, so the point may not be the 蔡 Confucius reached.
+      Label anchor at Wikidata's coordinate for the 蔡國故城 at 上蔡, the old 蔡 capital, for orientation
+      only. The 孔子世家 itself records 蔡 moving to 州來 in 493 BCE, so where Confucius reached 蔡 is not
+      asserted.
     cite:
       - id: cai-shangcai-point
-        says: Wikidata (CC0) records the 蔡國故城 with this coordinate.
-        basis: interpretation
-        attributed_to: Wikidata contributors
+        says: The anchor is the coordinate Wikidata (CC0) records for the 蔡國故城 at 上蔡.
         source: wikidata
         at: Q16078493 (P625), revision 2515980484
       - id: cai-shangcai-move

@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "城父, where the biography of 王翦 records 李信 joining 蒙恬 before the Chu army routed them. The record's label anchor sits at modern 城父鎮, which carries the name."
+types: [settlement]
+names:
+  - form: "城父"
+    lang: lzh
+    script: Hani
+    roman: Chengfu
+    scheme: pinyin
+    cite:
+      - says: "The biography records 李信 turning west to join 蒙恬 at 城父."
+        source: shiji-six-states
+        at: "卷七十三 白起王翦列傳（與蒙恬會城父）"
+        quote: "信又攻鄢郢，破之，於是引兵而西，與蒙恬會城父。"
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [115.97777, 33.63575]
+    notes: "Label anchor at modern 城父鎮, Wikidata Q10929963. It is not an asserted historical coordinate: the primary entries name the place and state no site, and the anchor places no wall, palace or battlefield."
+    cite:
+      - says: "The historical geography records 城父城 as a Spring-and-Autumn town of 陳, south-east of its own 亳州."
+        role: supporting
+        source: dushi-fangyu-jiyao-six-states
+        at: "卷二十一 南直三 鳳陽府（城父城）"
+        quote: "州東南七十里。春秋時陳邑。"
+      - says: "The label anchor is placed at the coordinate Wikidata (CC0) records for the modern place; no historical coordinate is asserted."
+        source: wikidata
+        at: "Q10929963 (P625), revision 2523412402"
+modern:
+  - form: "城父鎮"
+    lang: zh-Hant
+    script: Hani
+    note: "Modern town recorded for orientation only."
+notes: "The town carries the name; the record asserts no site for the Qin camp or the rout."

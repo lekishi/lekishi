@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "寢, which the biography of 王翦 records 蒙恬 attacking in the first invasion of Chu while 李信 attacked 平輿. The cited sources do not locate it, and the record carries no position."
+types: [settlement]
+names:
+  - form: "寢"
+    lang: lzh
+    script: Hani
+    roman: Qin
+    scheme: pinyin
+    cite:
+      - says: "The biography records 蒙恬 attacking 寢."
+        source: shiji-six-states
+        at: "卷七十三 白起王翦列傳（蒙恬攻寢）"
+        quote: "李信攻平與，蒙恬攻寢，大破荊軍。"
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: "The biography names the place and gives no location, and no source the chapter cites identifies it, so the record asserts no position."
+    cite:
+      - says: "The biography names 寢 and gives no location."
+        role: supporting
+        source: shiji-six-states
+        at: "卷七十三 白起王翦列傳（蒙恬攻寢）"
+notes: "A named place with no position."

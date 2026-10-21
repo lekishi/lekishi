@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "東陽, the Zhao land the annals record 王翦 and 羌瘣 taking entirely in 228 BCE, when they captured the king of Zhao. The sources state no extent, and the record carries no position."
+types: [region]
+names:
+  - form: "東陽"
+    lang: lzh
+    script: Hani
+    roman: Dongyang
+    scheme: pinyin
+    cite:
+      - says: "The annals record 王翦 and 羌瘣 taking all the Zhao land of 東陽 and capturing the king of Zhao."
+        source: shiji
+        at: "卷六 秦始皇本紀 十九年（盡定取趙地東陽）"
+        quote: "十九年，王翦、羌瘣盡定取趙地東陽，得趙王。"
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: "The annals name the region and state no extent, and no source the chapter cites identifies it, so the record asserts no position."
+    cite:
+      - says: "The annals name the Zhao land of 東陽 and give no extent."
+        role: supporting
+        source: shiji
+        at: "卷六 秦始皇本紀 十九年（盡定取趙地東陽）"
+notes: "The id carries `-zhao` because 東陽 names several places in other periods."

@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "遼東, the north-eastern land to which the king of Yan withdrew after 薊 fell in 226 BCE, and where the annals record 王賁 capturing him in 222 BCE. The record's label anchor is region-level, at modern 遼陽, which the cited historical geography records as the seat of the Han 遼東郡."
+types: [region]
+names:
+  - form: "遼東"
+    lang: lzh
+    script: Hani
+    roman: Liaodong
+    scheme: pinyin
+    cite:
+      - says: "The annals record the king of Yan taking 遼東 and ruling it after 薊 fell."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十一年（燕王東收遼東而王之）"
+        quote: "燕王東收遼東而王之。"
+      - says: "The annals record 王賁 attacking 遼東 and capturing the king of Yan in 二十五年 (222 BCE)."
+        role: supporting
+        source: shiji
+        at: "卷六 秦始皇本紀 二十五年（攻燕遼東，得燕王喜）"
+        quote: "大興兵，使王賁將，攻燕遼東，得燕王喜。"
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [123.1772, 41.26432]
+    notes: "Label anchor at modern 遼陽市, Wikidata Q75203. It is not an asserted historical coordinate: the primary entries name the place and state no site, and the anchor places no wall, palace or battlefield. It is a region-level label: no extent and no Yan court site is asserted."
+    cite:
+      - says: "The historical geography records 遼東 as Yan land in the Warring States and the Qin 遼東郡, and records 襄平, north of its own 遼陽, as the Han commandery's seat."
+        role: supporting
+        source: dushi-fangyu-jiyao-six-states
+        at: "卷三十七 山東八 遼東行都司"
+        quote: "春秋、戰國並屬燕。秦置遼東、遼西二郡。"
+      - says: "The label anchor is placed at the coordinate Wikidata (CC0) records for the modern place; no historical coordinate is asserted."
+        source: wikidata
+        at: "Q75203 (P625), revision 2558857855"
+modern:
+  - form: "遼陽市"
+    lang: zh-Hant
+    script: Hani
+    note: "Modern city recorded for orientation only."
+notes: "The sources give no extent; the record is a region with a label, not a territory."

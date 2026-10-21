@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "上郡, the Qin commandery north of the capital, through which the annals record the king returning from 邯鄲 in 228 BCE. The sources name it and state no seat or extent, and the record carries no position."
+types: [region]
+names:
+  - form: "上郡"
+    lang: lzh
+    script: Hani
+    roman: "Shang Jun"
+    scheme: pinyin
+    cite:
+      - says: "The annals record the king returning from 邯鄲 by way of 太原 and 上郡."
+        source: shiji
+        at: "卷六 秦始皇本紀 十九年（從太原、上郡歸）"
+        quote: "秦王還，從太原、上郡歸。"
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: "The primary entries name the commandery and state neither its seat nor its extent. The cited historical geography records 膚施 as the county belonging to 上郡 and the Han seat, which does not establish the Qin seat, so the record asserts no position."
+    cite:
+      - says: "The historical geography records 膚施 as a Qin county belonging to 上郡 and the Han seat of 上郡."
+        role: supporting
+        source: dushi-fangyu-jiyao-six-states
+        at: "卷五十七 陝西六 延安府 膚施縣"
+        quote: "秦置縣，屬上郡。漢爲上郡治。"
+notes: "A named commandery with no position."

@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "代, the northern land where the Zhao prince 嘉 made himself king after 邯鄲 fell in 228 BCE, and where the annals record 王賁 capturing him in 222 BCE. The record's label anchor sits at modern 代王城鎮, which carries the name of the old city the cited historical geography records."
+types: [region, capital]
+names:
+  - form: "代"
+    lang: lzh
+    script: Hani
+    roman: Dai
+    scheme: pinyin
+    cite:
+      - says: "The annals record 趙公子嘉 going to 代 with several hundred of his clan and making himself king of 代."
+        source: shiji
+        at: "卷六 秦始皇本紀 十九年（之代，自立為代王）"
+        quote: "趙公子嘉率其宗數百人之代，自立為代王，東與燕合兵，軍上谷。"
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [114.67202, 39.89166]
+    notes: "Label anchor at modern 代王城鎮, Wikidata Q10884436. It is not an asserted historical coordinate: the primary entries name the place and state no site, and the anchor places no wall, palace or battlefield. The same entry names the prince 公子和 where the annals name him 嘉; the record uses the gazetteer for the identification only."
+    cite:
+      - says: "The historical geography records the old city of 代王城 north-east of its own 蔚州 as the old state of 代, and records 王賁 capturing 代王嘉 there."
+        role: supporting
+        source: dushi-fangyu-jiyao-six-states
+        at: "卷四十四 山西六 大同府 蔚州（代王城）"
+        quote: "二十五年，王賁自燕還攻代，虜代王嘉。"
+      - says: "The label anchor is placed at the coordinate Wikidata (CC0) records for the modern place; no historical coordinate is asserted."
+        source: wikidata
+        at: "Q10884436 (P625), revision 2523401622"
+modern:
+  - form: "代王城鎮"
+    lang: zh-Hant
+    script: Hani
+    note: "Modern town recorded for orientation only."
+notes: "The record is both the land and the seat of 嘉's kingdom; the sources state neither an extent nor a court site."

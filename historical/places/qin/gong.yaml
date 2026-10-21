@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "共, where the hereditary house of Qi records Qin moving the captured king 建 in 221 BCE, and where the comprehensive mirror records him dying of hunger among pines and cypresses. The record's label anchor sits at modern 輝縣, which the cited historical geography records as the Han 共縣."
+types: [settlement]
+names:
+  - form: "共"
+    lang: lzh
+    script: Hani
+    roman: Gong
+    scheme: pinyin
+    cite:
+      - says: "The hereditary house of Qi records Qin capturing king 建 and moving him to 共."
+        source: shiji-six-states
+        at: "卷四十六 田敬仲完世家 王建四十四年（遷之共）"
+        quote: "秦虜王建，遷之共。遂滅齊爲郡。"
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [113.79748, 35.45991]
+    notes: "Label anchor at modern 輝縣市, Wikidata Q1207058. It is not an asserted historical coordinate: the primary entries name the place and state no site, and the anchor places no wall, palace or battlefield. Wikidata records two coordinates for the city; the anchor uses the first."
+    cite:
+      - says: "The historical geography records its own 輝縣 as the old 共伯 state and the Han 共縣."
+        role: supporting
+        source: dushi-fangyu-jiyao-six-states
+        at: "卷四十九 河南四 衛輝府 輝縣"
+        quote: "本共伯國，春秋時屬衛，戰國時屬魏。漢置共縣，屬河內郡。"
+      - says: "The label anchor is placed at the coordinate Wikidata (CC0) records for the modern place; no historical coordinate is asserted."
+        source: wikidata
+        at: "Q1207058 (P625), revision 2527525521"
+modern:
+  - form: "輝縣市"
+    lang: zh-Hant
+    script: Hani
+    note: "Modern city recorded for orientation only."
+notes: "The place of the king's exile; no site is asserted."

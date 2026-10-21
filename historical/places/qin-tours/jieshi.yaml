@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 碣石, on the 勃海 coast, where 始皇 had an inscription cut at the 碣石門 in 215 BCE and sent 盧生 to look for the immortals. The label anchor sits at the modern 碣石山 at 昌黎; it asserts no historical site.
+types: [landform]
+names:
+  - form: 碣石
+    lang: lzh
+    script: Hani
+    roman: Jieshi
+    scheme: pinyin
+    cite:
+      - id: jieshi-name
+        says: The annals record 始皇 going to 碣石 in his thirty-second year.
+        source: shiji
+        at: 卷六 秦始皇本紀 三十二年（始皇之碣石）
+        quote: 三十二年，始皇之碣石
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [119.14387, 39.80788]
+    notes: Label anchor at the modern 碣石山 at 昌黎 (Wikidata Q115739756). It is not an asserted historical coordinate.
+    cite:
+      - id: jieshi-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the modern 碣石山 at 昌黎; no historical coordinate is asserted.
+        source: wikidata
+        at: Q115739756 (P625), revision 2030226897
+external_ids:
+  - system: wikidata
+    id: Q115739756
+    url: https://www.wikidata.org/wiki/Q115739756
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

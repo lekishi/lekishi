@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 會稽, the mountain where 始皇 sacrificed to 大禹 in 210 BCE, looked out to the southern sea and set up his last inscribed stone. Not the commandery (kuaiji-jun). The label anchor sits at the modern 會稽山 south-east of 紹興; it asserts no historical site.
+types: [landform]
+names:
+  - form: 會稽
+    lang: lzh
+    script: Hani
+    roman: Kuaiji
+    scheme: pinyin
+    cite:
+      - id: kuaiji-shan-name
+        says: The annals record 始皇 climbing 會稽, sacrificing to 大禹 and gazing out to the southern sea.
+        source: shiji
+        at: 卷六 秦始皇本紀 三十七年（上會稽）
+        quote: 上會稽，祭大禹，望于南海
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [120.58044, 29.68806]
+    notes: Label anchor at the modern 會稽山 south-east of 紹興 (Wikidata Q1790816). It is not an asserted historical coordinate.
+    cite:
+      - id: kuaiji-shan-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the modern 會稽山 south-east of 紹興; no historical coordinate is asserted.
+        source: wikidata
+        at: Q1790816 (P625), revision 2515913223
+external_ids:
+  - system: wikidata
+    id: Q1790816
+    url: https://www.wikidata.org/wiki/Q1790816
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

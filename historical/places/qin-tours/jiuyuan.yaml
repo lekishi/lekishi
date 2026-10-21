@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 九原, on the northern bend of the 河, to which the funeral cortege went by way of 井陘 in 210 BCE before taking the 直道 south to 咸陽. The label anchor sits at the modern city of 包頭; it asserts no historical site.
+types: [region]
+names:
+  - form: 九原
+    lang: lzh
+    script: Hani
+    roman: Jiuyuan
+    scheme: pinyin
+    cite:
+      - id: jiuyuan-name
+        says: The annals record the cortege going by 井陘 to 九原.
+        source: shiji
+        at: 卷六 秦始皇本紀 三十七年（遂從井陘抵九原）
+        quote: 行，遂從井陘抵九原
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [109.83454, 40.65621]
+    notes: Label anchor at the modern city of 包頭 (Wikidata Q569907). It is not an asserted historical coordinate.
+    cite:
+      - id: jiuyuan-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the modern city of 包頭; no historical coordinate is asserted.
+        source: wikidata
+        at: Q569907 (P625), revision 2526612574
+external_ids:
+  - system: wikidata
+    id: Q569907
+    url: https://www.wikidata.org/wiki/Q569907
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

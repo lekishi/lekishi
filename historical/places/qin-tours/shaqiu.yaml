@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 沙丘平臺, the terrace at 沙丘 where 始皇 died in the seventh month of 210 BCE. The label anchor sits at the modern county of 廣宗; it asserts no historical site.
+types: [other]
+names:
+  - form: 沙丘平臺
+    lang: lzh
+    script: Hani
+    roman: Shaqiu Pingtai
+    scheme: pinyin
+    cite:
+      - id: shaqiu-name
+        says: The annals record 始皇 dying at the 沙丘平臺 on the 丙寅 day of the seventh month.
+        source: shiji
+        at: 卷六 秦始皇本紀 三十七年（始皇崩於沙丘平臺）
+        quote: 七月丙寅，始皇崩於沙丘平臺
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [115.13898, 37.07176]
+    notes: Label anchor at the modern county of 廣宗 (Wikidata Q1196437). It is not an asserted historical coordinate.
+    cite:
+      - id: shaqiu-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the modern county of 廣宗; no historical coordinate is asserted.
+        source: wikidata
+        at: Q1196437 (P625), revision 2526577040
+external_ids:
+  - system: wikidata
+    id: Q1196437
+    url: https://www.wikidata.org/wiki/Q1196437
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.
+notes: A palace terrace (平臺) at 沙丘 rather than a settlement; the type is other for that reason.

@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 吳, which 始皇 passed on the way back north in 210 BCE before crossing the 江 at 江乘. The label anchor sits at the modern city of 蘇州; it asserts no historical site.
+types: [settlement]
+names:
+  - form: 吳
+    lang: lzh
+    script: Hani
+    roman: Wu
+    scheme: pinyin
+    cite:
+      - id: wu-xian-name
+        says: The annals record 始皇 passing 吳 on his return and crossing at 江乘.
+        source: shiji
+        at: 卷六 秦始皇本紀 三十七年（還過吳）
+        quote: 還過吳，從江乘渡
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [120.61944, 31.3]
+    notes: Label anchor at the modern city of 蘇州 (Wikidata Q42622). It is not an asserted historical coordinate.
+    cite:
+      - id: wu-xian-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the modern city of 蘇州; no historical coordinate is asserted.
+        source: wikidata
+        at: Q42622 (P625), revision 2527812164
+external_ids:
+  - system: wikidata
+    id: Q42622
+    url: https://www.wikidata.org/wiki/Q42622
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

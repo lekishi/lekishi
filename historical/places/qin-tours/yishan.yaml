@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 鄒嶧山, the first mountain of the eastern tour of 219 BCE, where 始皇 set up a stone and debated the 封禪 rites with the 魯 scholars. The label anchor sits at the modern mountain 嶧山; it asserts no historical site.
+types: [landform]
+names:
+  - form: 鄒嶧山
+    lang: lzh
+    script: Hani
+    roman: Zou Yishan
+    scheme: pinyin
+    cite:
+      - id: yishan-name
+        says: The annals record 始皇 touring the eastern commanderies and climbing 鄒嶧山.
+        source: shiji
+        at: 卷六 秦始皇本紀 二十八年（上鄒嶧山）
+        quote: 二十八年，始皇東行郡縣，上鄒嶧山
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [117.03, 35.3308]
+    notes: Label anchor at the modern mountain 嶧山 (Wikidata Q28795588). It is not an asserted historical coordinate.
+    cite:
+      - id: yishan-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the modern mountain 嶧山; no historical coordinate is asserted.
+        source: wikidata
+        at: Q28795588 (P625), revision 2260837968
+external_ids:
+  - system: wikidata
+    id: Q28795588
+    url: https://www.wikidata.org/wiki/Q28795588
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

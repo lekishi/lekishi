@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 南郡, the commandery on the middle 江 through which 始皇 travelled in 219 BCE before returning by 武關. The label anchor sits at the modern county of 江陵; it asserts no historical site.
+types: [region]
+names:
+  - form: 南郡
+    lang: lzh
+    script: Hani
+    roman: Nanjun
+    scheme: pinyin
+    cite:
+      - id: nanjun-name
+        says: The annals record 始皇 crossing the 淮水 to the south-west and going to 衡山 and 南郡.
+        source: shiji
+        at: 卷六 秦始皇本紀 二十八年（之衡山、南郡）
+        quote: 乃西南渡淮水，之衡山、南郡
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [112.41094, 30.03414]
+    notes: Label anchor at the modern county of 江陵 (Wikidata Q1363632). It is not an asserted historical coordinate.
+    cite:
+      - id: nanjun-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the modern county of 江陵; no historical coordinate is asserted.
+        source: wikidata
+        at: Q1363632 (P625), revision 2526582203
+external_ids:
+  - system: wikidata
+    id: Q1363632
+    url: https://www.wikidata.org/wiki/Q1363632
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

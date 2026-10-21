@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 博狼沙, in 陽武, where 始皇's party was attacked by bandits in 218 BCE. The label anchor sits at the modern county of 原陽; it asserts no historical site.
+types: [other]
+names:
+  - form: 博狼沙
+    lang: lzh
+    script: Hani
+    roman: Bolangsha
+    scheme: pinyin
+    cite:
+      - id: bolangsha-name
+        says: The annals record 始皇 being alarmed by bandits in 博狼沙 in 陽武.
+        source: shiji
+        at: 卷六 秦始皇本紀 二十九年（至陽武博狼沙中）
+        quote: 至陽武博狼沙中，為盜所驚
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [113.95998, 35.05408]
+    notes: Label anchor at the modern county of 原陽 (Wikidata Q1198775). It is not an asserted historical coordinate.
+    cite:
+      - id: bolangsha-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the modern county of 原陽; no historical coordinate is asserted.
+        source: wikidata
+        at: Q1198775 (P625), revision 2528166633
+external_ids:
+  - system: wikidata
+    id: Q1198775
+    url: https://www.wikidata.org/wiki/Q1198775
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.
+notes: A sandy tract (沙) in 陽武 county rather than a settlement; the type is other for that reason.

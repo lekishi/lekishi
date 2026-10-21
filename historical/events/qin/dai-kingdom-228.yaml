@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "When Zhao fell in 228 BCE the Zhao prince 嘉 led several hundred of his clan to 代 and made himself king; the annals record him joining his army to Yan's and camping at 上谷, and the comprehensive mirror adds that Zhao's officials gradually came over to him."
+types: [founding]
+date:
+  value: "228 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "十九年（自立為代王）; 秦始皇十九年（公子嘉自立為代王）"
+  cite:
+    - says: "The annals record 趙公子嘉 going to 代 and making himself king, in 十九年 (228 BCE)."
+      source: shiji
+      at: "卷六 秦始皇本紀 十九年（自立為代王）"
+      quote: "趙公子嘉率其宗數百人之代，自立為代王，東與燕合兵，軍上谷。"
+    - says: "The six-states table records 公子嘉 making himself king of 代 under the same year."
+      role: supporting
+      source: shiji
+      at: "卷十五 六國年表 秦始皇十九年（趙 八）"
+      quote: "八。秦王翦虜王遷邯鄲。公子嘉自立為代王。"
+    - says: "The comprehensive mirror adds that Zhao's officials gradually came over to him."
+      role: supporting
+      source: zizhi-tongjian
+      at: "卷六 秦紀一 始皇帝十九年（趙公子嘉帥其宗族數百人奔代）"
+      quote: "趙公子嘉帥其宗族數百人奔代，自立為代王，趙之亡，大夫稍稍歸之，與燕合兵，軍上谷。"
+places:
+  - place: dai
+    role: site
+    note: "Where the prince made himself king."
+  - place: shanggu
+    role: other
+    note: "Where the joint army camped."
+participants:
+  - actor: dai-king-jia
+    role: leader
+  - actor: dai-state
+    role: subject
+    note: "The kingdom the act set up."
+notes: "The six-states table counts 代王嘉元年 from the next year, 227 BCE; the chapter dates the proclamation by the annals and the ruler's role by the table."

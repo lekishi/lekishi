@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Before 荊軻 left for Qin, the Yan crown prince and the guests who knew of the plan saw him off in white on the bank of the 易水; the biography of the assassins records 高漸離 playing the 筑 and 荊軻 singing that the wind was sighing and the 易水 cold, and the hero once gone would not return."
+types: [occurrence]
+date:
+  value: "228 BCE..227 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "undated in the biography: after 王翦 had taken Zhao (秦將王翦破趙，虜趙王) and before the attempt of 二十年"
+  cite:
+    - says: "The biography places the departure after 王翦 had taken Zhao and advanced to Yan's southern border, which the annals date to 228 BCE; the attempt itself is dated to 二十年 (227 BCE)."
+      source: shiji-six-states
+      at: "卷八十六 刺客列傳（秦將王翦破趙，虜趙王）"
+      quote: "秦將王翦破趙，虜趙王，盡收入其地，進兵北略地至燕南界。"
+    - says: "The annals date the attempt to 二十年 (227 BCE)."
+      role: supporting
+      source: shiji
+      at: "卷六 秦始皇本紀 二十年（使荊軻刺秦王）"
+      quote: "二十年，燕太子丹患秦兵至國，恐，使荊軻刺秦王。"
+places:
+  - place: yishui
+    role: site
+    note: "The river bank the biography names; no site is asserted."
+participants:
+  - actor: jing-ke
+    role: subject
+  - actor: yan-dan
+    role: host
+  - actor: gao-jianli
+    role: participant
+    note: "Played the 筑."
+  - actor: qin-wuyang
+    role: participant
+    note: "Went with 荊軻."
+notes: "The biography dates nothing in the farewell; the window runs from the fall of Zhao, which its narrative names as the spur, to the year of the attempt, and the event is never shown at a single point inside it."
+cites:
+  summary:
+    says: "The biography records the farewell, the music and the song."
+    source: shiji-six-states
+    at: "卷八十六 刺客列傳（至易水之上）"
+    quote: "太子及賓客知其事者，皆白衣冠以送之。至易水之上，既祖，取道，髙漸離撃筑，荊軻和而歌"

@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Gaius Plinius Caecilius Secundus (c. 61–c. 113 CE), the elder Pliny's nephew and adopted
+  son, who at seventeen watched the eruption from Misenum and decades later described it in two
+  letters to Tacitus."
+types: [person]
+names:
+  - form: C. Plinius
+    lang: la
+    script: Latn
+    note: 'The letters open "C. PLINIUS TACITO SUO S."; the full name is editorial.'
+    cite:
+      - id: pliny-the-younger-name
+        says: Pliny opens the letter to Tacitus in his own name.
+        source: pliny-letters
+        at: "6.16.1"
+        quote: Petis ut tibi avunculi mei exitum scribam
+roles:
+  - role: scholar
+    note: Author of the letters.
+notes: He is the author of the main source and a witness in it.

@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Stabiae, the town on the southern shore of the Bay of Naples where the elder Pliny joined
+  Pomponianus and died on the beach.
+types: [settlement]
+names:
+  - form: Stabiae
+    lang: la
+    script: Latn
+    cite:
+      - id: stabiae-name
+        says: Pliny tells that Pomponianus was at Stabiae, across the middle of the bay.
+        source: pliny-letters
+        at: "6.16.12"
+        quote: Stabiis erat diremptus sinu medio
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [14.49892, 40.70297]
+    notes: The gazetteer's point for the excavated villas at Castellammare di Stabia.
+    cite:
+      - id: stabiae-location
+        says:
+          Pleiades gives this representative point for Stabiae, with its location precision recorded
+          as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 433128 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "433128"

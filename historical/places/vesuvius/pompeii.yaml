@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Pompeii, the town south-east of Vesuvius buried by the eruption of 79 CE and excavated since the
+  eighteenth century.
+types: [settlement]
+names:
+  - form: Pompeii
+    lang: en
+    script: Latn
+    cite:
+      - id: pompeii-name
+        says: Dio, in Foster's translation, says the ash buried two whole cities, Herculaneum and
+          Pompeii.
+        source: cassius-dio
+        at: LXVI.23 (A.D. 79)
+        quote: it buried two whole cities, Herculaneum and Pompeii
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [14.48543, 40.74941]
+    notes: The gazetteer's point for the excavated town.
+    cite:
+      - id: pompeii-location
+        says:
+          Pleiades gives this representative point for Pompeii, with its location precision recorded
+          as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 433032 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "433032"
+notes: Pliny's letters do not name Pompeii; the name here is from Dio.

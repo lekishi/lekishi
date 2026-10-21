@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Vesuvius, the volcano above the Bay of Naples, whose eruption in 79 CE buried Pompeii, Herculaneum
+  and Stabiae.
+types: [landform]
+names:
+  - form: Vesuvius
+    lang: la
+    script: Latn
+    cite:
+      - id: vesuvius-name
+        says: Pliny tells that the cloud was later known to have come from Vesuvius.
+        source: pliny-letters
+        at: "6.16.5"
+        quote: Vesuvium fuisse postea cognitum est
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [14.4262, 40.8214]
+    notes: The gazetteer's point for the volcano's summit.
+    cite:
+      - id: vesuvius-location
+        says: Pleiades gives this representative point for Vesuvius, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 433189 (reprLatLong), dump 2026-10-21
+modern:
+  - form: Vesuvio
+    lang: it
+    note: The modern name.
+external_ids:
+  - system: pleiades
+    id: "433189"

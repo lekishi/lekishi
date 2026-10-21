@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Gaius Plinius Secundus (23/24–79 CE), author of the Natural History and commander of the
+  fleet at Misenum, who sailed into the eruption to watch it and to rescue those on the shore, and
+  died at Stabiae."
+types: [person]
+names:
+  - form: C. Plinius Secundus
+    lang: la
+    script: Latn
+    note: "The letters call him avunculus meus, my uncle; the full name is editorial."
+    cite:
+      - id: pliny-the-elder-name
+        says: Pliny calls him his uncle and tells that he commanded the fleet at Misenum in person.
+        source: pliny-letters
+        at: "6.16.4"
+        quote: Erat Miseni classemque imperio praesens regebat.
+roles:
+  - role: official
+    note: Prefect of the fleet at Misenum.
+  - role: scholar
+    note: Author of the Natural History.

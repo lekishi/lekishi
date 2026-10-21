@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Pepin hands Ravenna, the Pentapolis and the exarchate, taken from Aistulf, to St Peter, that is to
+  the Roman church; Fulrad lays the cities' keys and the written donation at St Peter's confessio.
+types: [changed_boundaries]
+from: actor:pepin-the-short
+to: actor:roman-church
+date:
+  value: "756"
+  calendar: julian
+  as_written: Ravennam cum Pentapolim et omni Exarcatu conquisivit et sancto Petro tradidit (s.a. 756)
+cite:
+  - id: exarchate-donation-756-annals
+    says: The annals say the king took Ravenna with the Pentapolis and all the exarchate and handed them to St Peter.
+    source: annales-regni-francorum
+    at: "s.a. 756: et insuper Ravennam cum Pentapolim et omni Exarcatu conquisivit et sancto Petro tradidit"
+  - id: exarchate-donation-756-life
+    role: supporting
+    says: The life says Fulrad laid the keys of the cities and the king's donation at the confessio of St Peter, to be held by the apostle and his vicars for ever.
+    source: liber-pontificalis
+    at: in confessione beati Petri ponens, eidem Dei apostolo et eius vicario sanctissimo papae adque omnibus eius successoribus pontificibus perenniter possidendas adque disponendas tradidit
+notes:
+  No boundary is drawn. The extent of what was handed over is the life's list of cities, which the
+  chapter keeps as text.

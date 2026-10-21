@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Stephen II's support for Desiderius's claim to the Lombard kingship against Ratchis, in return for
+  his sworn promise to restore the remaining cities.
+types: [alliance]
+from: actor:stephen-ii
+to: actor:desiderius
+date:
+  value: 756..757
+  mode: window
+  calendar: julian
+  as_written: per iamdicti coangelici papae concursum
+cite:
+  - id: desiderius-papal-support-basis
+    says: The life says Desiderius begged the pope's help to take the royal dignity, swearing to fulfil his will and restore the cities, and that he became king through the pope's help.
+    source: liber-pontificalis
+    at: obnixe praelatum beatissimum pontificem deprecatus est sibi auxilium, quatenus ipse regalem valeret adsumere dignitatem; per iamdicti coangelici papae concursum

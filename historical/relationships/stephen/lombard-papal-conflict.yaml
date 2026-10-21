@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  The Lombard kingdom's pressure on Rome and the Roman church under Aistulf, from the broken peace of
+  752 to the siege of Rome and the second Frankish campaign of 756, as the papal life reports it.
+types: [conflict]
+from: actor:lombard-kingdom
+to: actor:roman-church
+date:
+  value: 752..756
+  mode: duration
+  calendar: julian
+  as_written: magna persecutio a Langobardorum rege Aistulfo (752) — trium mensuum spatia obsidens (756)
+cite:
+  - id: lombard-papal-conflict-basis
+    says: The life describes a great persecution of Rome by Aistulf from the first year of Stephen's pontificate to the three-month siege of the city.
+    source: liber-pontificalis
+    at: dum magna persecutio a Langobardorum rege Aistulfo in hac Romana urbe vel subiacentibus ei civitatibus extitisset; Quam et trium mensuum spatia obsidens
+notes: Every source is papal or Frankish. The relationship records the reported hostility; it asserts no cause.

@@ -6,12 +6,20 @@ types: [mission]
 part_of:
   - amarna-letters-exchanged
 date:
-  value: 1380 BCE..1357 BCE
+  value: 1359 BCE..1358 BCE
   mode: window
   calendar: regnal
   as_written: the [32nd] year of Nimmuria, first winter month, day 10
   cite:
+    - id: tushratta-letter-at-thebes-shaw
+      says: On Shaw's chronology Amenhotep III reigned 1390–1352 BCE, so his year 32 falls in
+        1359–1358 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
     - id: docket-date
+      role: supporting
       says: The hieratic docket on one of Tushratta's tablets dates its receipt.
       source: niebuhr-tell-el-amarna-period
       at: "ch. III: the docket"
@@ -30,11 +38,8 @@ cite:
     says: Niebuhr translates the red hieratic docket on a Tushratta tablet.
     source: niebuhr-tell-el-amarna-period
     at: "ch. III: the docket"
-notes:
-  "The regnal year is restored in the translation (in square brackets); the window is that of year
-  32 in the editorial chronology. The letters are undated but for a few dockets, and the reigns they fall
-  in convert to BCE according to the chronology used: Amenhotep III's accession is put between about
-  1410 and 1388 BCE, and the end of Akhenaten's reign between about 1362 and 1334 BCE. The window spans
-  those placements for the reign in question; Niebuhr's 1903 dates (the archive about 1400 B.C., Akhetaten
-  built about 1380 B.C.) fall inside it. It is an editorial bound that a cited chronology must replace
-  before approval."
+notes: "The regnal year is restored in the translation (in square brackets); the window is that of
+  year 32 in the editorial chronology. The letters are undated but for a few dockets. Their reigns
+  follow Shaw's chronology (The Oxford History of Ancient Egypt, 2000): Amenhotep III 1390–1352 BCE
+  and Amenhotep IV (Akhenaten) 1352–1336 BCE. Niebuhr's 1903 dates (the archive about 1400 B.C.,
+  Akhetaten built about 1380 B.C.) follow an older, higher scheme."

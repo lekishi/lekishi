@@ -1,5 +1,5 @@
 :authors: Darwin D Wu <darwin67@users.noreply.github.com>
-:state: discussion
+:state: Decided 2026-10-22 (build as proposed); implemented in PR #27
 :labels: history, data, authoring, navigation
 
 = RFD 2 several stories in one chapter
@@ -19,8 +19,9 @@ new chapter manifest. The other was several stories in the Tang manifest. The
 owner chose several stories, which is the reading RFD 1 gives. This record
 proposes how that works.
 
-Everything below is *proposed*. Nothing is implemented, and the Tang manifest
-does not change until the owner decides on this record.
+On 2026-10-22 the owner decided to build it as proposed. The sections below
+keep their "Proposed" headings as the record of what was decided; what the
+build changed from them is under "Implemented on 2026-10-22".
 
 == What stays as it is
 
@@ -162,6 +163,34 @@ An approval per story::
 A story by query (all events with a `part_of`)::
   Weighed and rejected for the single story on 2026-10-18. That reasoning
   holds for each story here.
+
+== Implemented on 2026-10-22
+
+Built on the Tang branch (PR #27) as proposed, in this order: the schema and
+the compiler, the projection one story at a time, the switcher and
+`?story=`, search across stories, and then the crossings as the Tang
+chapter's second story. Where the build differs from the text above:
+
+* *The crossings' window is `742..750`, not `743..748`.* The story opens on
+  the 742 invitation, which is a step of the story rather than a coda, and
+  it closes with the return north to 揚州 by 750. The return is a 750–753
+  occurrence window, which overlaps the story's window, so it isn't a coda
+  either. Only the 753 invitation is, as the example shows. The story's
+  title follows the window: "鑒眞's attempts to cross, 742–750".
+* *The chapter keeps its title.* "The embassy to Tang China" stays on the
+  card, and the summary gains one sentence naming the second story.
+  Retitling it is the owner's call (see "Open questions").
+* *The embassy's tests read the first story.* The Tang chapter's coverage
+  model (the 750–754 window, the coda years, the excluded outbound voyage
+  of 752) is checked over the embassy's own events. The crossings' window
+  and their one coda year are checked on their own
+  (`src/lib/historical/contract/tang-chapter.test.ts`).
+* *The remembered position needed no change.* It stores the chapter's
+  address, and the address carries `?story=`.
+
+The Tang approval is stale until the owner approves the larger closure.
+Production leaves the chapter out until then. It was already stale on `main`
+before this change, because other chapters changed places it shares.
 
 == Open questions
 

@@ -20,7 +20,7 @@ import {
   sheet,
   sheetHandle,
 } from "./workspace"
-import { TANG_DECISION, decisionElement, servedChapters } from "./approvals"
+import { TANG_DECISION, decisionElement, servedChapters, sortedAttribute } from "./approvals"
 
 /**
  * Browser checks for the static atlas.
@@ -322,7 +322,12 @@ test("shows the not-found page as a way back into the atlas", async ({ page }) =
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible()
   await page.getByRole("link", { name: "Chapters" }).click()
   await expect(page).toHaveURL(/\/#chapters$/)
-  await expect(page.locator("[data-chapter-id]")).toHaveCount(servedChapters().length)
+  // A card for every chapter the server serves, drafts included where it serves them.
+  const served = await servedChapters(page.request)
+
+  await expect
+    .poll(() => sortedAttribute(page.locator("[data-chapter-id]"), "data-chapter-id"))
+    .toEqual(served)
 })
 
 test("mounts the workspace through the trailing-slash redirect", async ({ page }) => {

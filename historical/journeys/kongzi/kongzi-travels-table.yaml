@@ -1,6 +1,6 @@
-# Proposed journey record. The journey kind was decided on 2026-10-21 (RFD 2, "Decided: journeys are
-# their own kind"); the record shape ("Proposed: the journey record") is still proposed, and the
-# compiler does not read historical/journeys/ until the owner accepts it.
+# yaml-language-server: $schema=../../schema/journey.schema.json
+# Journey record (RFD 2, "Decided: the journey record"). No chapter includes it yet,
+# so it changes no chapter's digest; the tests still compile it and check it against the contract.
 title: Confucius's travels, as the table of the twelve lords enters them, 498–484 BCE
 summary: >-
   The table's shorter account: 魯 in 498 BCE, 衛 in 497, 陳 in 496, 宋 in 492, 衛 again "from 陳" in

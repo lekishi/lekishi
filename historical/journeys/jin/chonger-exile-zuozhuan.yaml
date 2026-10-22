@@ -1,6 +1,6 @@
-# Proposed journey record. The journey kind was decided on 2026-10-21 (RFD 2, "Decided: journeys are
-# their own kind"); the record shape ("Proposed: the journey record") is still proposed, and the
-# compiler does not read historical/journeys/ until the owner accepts it.
+# yaml-language-server: $schema=../../schema/journey.schema.json
+# Journey record (RFD 2, "Decided: the journey record"). No chapter includes it yet,
+# so it changes no chapter's digest; the tests still compile it and check it against the contract.
 title: 重耳's exile, as the 左傳 tells it, 655–636 BCE
 summary: >-
   From 蒲 over the wall to the 狄; after twelve years through 衛 and 五鹿 to 齊; carried out of 齊

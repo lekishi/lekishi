@@ -1,5 +1,6 @@
-# Proposed journey record (RFD 2, "Proposed: the journey record", PR #26).
-# The compiler does not read historical/journeys/ until the owner accepts the shape.
+# yaml-language-server: $schema=../../schema/journey.schema.json
+# Journey record (RFD 2, "Decided: the journey record"). No chapter includes it yet,
+# so it changes no chapter's digest; the tests still compile it and check it against the contract.
 title: 玄奘's travels in India from 那爛陀, 636–643
 summary: >-
   From 那爛陀, 玄奘 visits 王舍城 and studies five years under 戒賢, then goes east by 伊爛拏 and 瞻波 to

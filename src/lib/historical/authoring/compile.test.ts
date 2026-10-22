@@ -759,3 +759,105 @@ describe("compiling a conventional date", () => {
     ).toThrow(/example-landing\.yaml/)
   })
 })
+
+describe("compiling a territory snapshot", () => {
+  const STATE = `
+summary: An example state.
+types: [state]
+names:
+  - form: 例國
+    lang: lzh
+    script: Hani
+    cite:
+      says: The chronicle names the state.
+      source: example-chronicle
+      at: 卷一
+`
+  const TERRITORY = `
+summary: The places the example state held after the landing.
+controller: example-state
+date:
+  value: 753..754
+  mode: duration
+  calendar: chinese_lunisolar
+places:
+  - place: example-harbour
+    role: seat
+    gained: example-landing
+    note: Taken with the landing.
+  - example-unused
+cite:
+  says: The chronicle records the state holding the harbour and the coast.
+  source: example-chronicle
+  at: 卷二
+`
+  const tree = (territory: string = TERRITORY) =>
+    buildTree(
+      files({
+        "actors/example-state.yaml": STATE,
+        "territories/example/example-coast-753.yaml": territory,
+        "chapters/example-chapter.yaml": manifest("include: [example-coast-753]"),
+      }),
+    )
+
+  it("compiles the controller, the bounded window and each held place", () => {
+    const bundle = compileChapter(tree(), "example-chapter", { preview: true })
+    const snapshot = record(bundle.documents, "lks:territory:example-coast-753")
+
+    expect(snapshot["content"]).toEqual({
+      summary: "The places the example state held after the landing.",
+      controller_id: "lks:actor:example-state",
+      time: expect.objectContaining({
+        mode: "duration",
+        interval: expect.objectContaining({
+          bounds: "two_sided",
+          start: { year: 753, era: "ce" },
+          end: { year: 754, era: "ce" },
+        }),
+      }),
+      places: [
+        {
+          place_id: "lks:place:example-harbour",
+          role: "seat",
+          gained_record_id: "lks:event:example-landing",
+          note: "Taken with the landing.",
+        },
+        { place_id: "lks:place:example-unused", role: "held" },
+      ],
+    })
+    expect(Publication.checkAll(bundle.documents, bundle.sets)).toEqual(
+      expect.objectContaining({ ok: true }),
+    )
+  })
+
+  it("reaches the controller and every held place, which the chapter then publishes", () => {
+    const bundle = compileChapter(tree(), "example-chapter")
+    const ids = bundle.documents.map((document) => document["record_id"] ?? document["source_id"])
+
+    expect(ids).toEqual(
+      expect.arrayContaining([
+        "lks:actor:example-state",
+        "lks:place:example-unused",
+        "lks:territory:example-coast-753",
+      ]),
+    )
+  })
+
+  it("refuses a place gained by anything but an event or relationship", () => {
+    expect(() =>
+      compileChapter(
+        tree(TERRITORY.replace("gained: example-landing", "gained: example-unused")),
+        "example-chapter",
+      ),
+    ).toThrow(/example-coast-753\.yaml: places\[0\]\.gained: no event or relationship/)
+  })
+
+  it("refuses a controller that is not an actor", () => {
+    expect(() =>
+      compileChapter(
+        tree(TERRITORY.replace("controller: example-state", "controller: example-harbour")),
+        "example-chapter",
+      ),
+    ).toThrow(/controller: no actor record is named example-harbour/)
+  })
+})

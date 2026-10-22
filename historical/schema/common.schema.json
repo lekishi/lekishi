@@ -12,7 +12,7 @@
     "reference": {
       "description": "Another record by its file name. Where a field admits several kinds and two records share the name, write the kind first, as in actor:jianzhen.",
       "type": "string",
-      "pattern": "^((place|actor|event|relationship):)?[a-z0-9][a-z0-9-]{0,62}$"
+      "pattern": "^((place|actor|event|relationship|territory):)?[a-z0-9][a-z0-9-]{0,62}$"
     },
     "text": { "type": "string", "minLength": 1, "maxLength": 2000 },
     "note": { "type": "string", "minLength": 1, "maxLength": 500 },
@@ -82,6 +82,7 @@
         "places": { "$ref": "#/$defs/cite" },
         "participants": { "$ref": "#/$defs/cite" },
         "part_of": { "$ref": "#/$defs/cite" },
+        "controller": { "$ref": "#/$defs/cite" },
         "roles": { "$ref": "#/$defs/cite" },
         "at": { "$ref": "#/$defs/cite" },
         "modern": { "$ref": "#/$defs/cite" },

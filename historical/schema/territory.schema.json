@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lekishi/lekishi/historical/schema/territory.schema.json",
+  "title": "Lekishi record file: territory",
+  "description": "historical/territories/**/<id>.yaml: a dated control snapshot (rfd/0002/TERRITORIES.adoc). One controller, one bounded date, and the places a cited source records it holding then. It lists only places a source records held, never everything the controller held, and draws no border.",
+  "type": "object",
+  "required": ["summary", "controller", "date", "places", "cite"],
+  "additionalProperties": false,
+  "properties": {
+    "summary": { "$ref": "common.schema.json#/$defs/text" },
+    "controller": { "$ref": "common.schema.json#/$defs/name" },
+    "date": { "$ref": "common.schema.json#/$defs/date" },
+    "places": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 200,
+      "items": {
+        "anyOf": [
+          { "$ref": "common.schema.json#/$defs/name" },
+          {
+            "type": "object",
+            "required": ["place"],
+            "additionalProperties": false,
+            "properties": {
+              "place": { "$ref": "common.schema.json#/$defs/name" },
+              "role": {
+                "$ref": "../v0/schema/kinds.schema.json#/$defs/territory_content/properties/places/items/properties/role"
+              },
+              "gained": { "$ref": "common.schema.json#/$defs/reference" },
+              "note": { "$ref": "common.schema.json#/$defs/note" },
+              "cite": { "$ref": "common.schema.json#/$defs/cite" }
+            }
+          }
+        ]
+      }
+    },
+    "notes": { "$ref": "common.schema.json#/$defs/text" },
+    "dispute": { "$ref": "common.schema.json#/$defs/dispute" },
+    "cite": { "$ref": "common.schema.json#/$defs/cite" },
+    "cites": { "$ref": "common.schema.json#/$defs/cites" }
+  }
+}

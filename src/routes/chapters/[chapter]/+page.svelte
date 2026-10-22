@@ -36,7 +36,14 @@
    */
   let {
     data,
-  }: { data: { chapter: Chapter; heading: ChapterHeading | null; scope: string | null } } = $props()
+  }: {
+    data: {
+      chapter: Chapter
+      stories: Chapter[]
+      heading: ChapterHeading | null
+      scope: string | null
+    }
+  } = $props()
 
   // A member's draft on the published site carries its own heading and says
   // who can see it (RFD 6); every other chapter's comes from its card.
@@ -51,10 +58,11 @@
 
   $effect(() => {
     const chapter = data.chapter
+    const stories = data.stories
     const opened = data.heading
 
     untrack(() => {
-      startAtlasPage(chapter, opened ?? chapterHeading(chapter), history, page.url.search)
+      startAtlasPage(chapter, opened ?? chapterHeading(chapter), history, page.url.search, stories)
       mounted = true
     })
 

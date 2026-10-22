@@ -24,6 +24,13 @@ import {
  * The ids in the query are the records' own ids without their kind prefix
  * (`?event=akimeya-landfall-753`), so a link survives a retitle. One selection
  * at a time: `event` wins over `place`, and `place` over `step`.
+ *
+ * A chapter with several stories names the story with `?story=<key>`, left out
+ * for the story the chapter opens on, so every address written before a
+ * chapter had stories still means what it meant (rfd/0002/CHAPTER_STORIES.adoc).
+ * `?step=` counts within the story named. A link to an event or a place without
+ * a story opens the story the reader is in when it holds the record, otherwise
+ * the first story that does.
  */
 
 const EVENT_PREFIX = "lks:event:"
@@ -31,6 +38,8 @@ const PLACE_PREFIX = "lks:place:"
 
 /** The query as written, before it is checked against the chapter. */
 export type ChapterQuery = {
+  /** The story's key, or null for the story the chapter opens on. */
+  readonly story: string | null
   readonly event: string | null
   readonly place: string | null
   /** The story step, 1-based as a reader counts it. */
@@ -52,7 +61,10 @@ export type Arrival = {
   /** True when a linked event lay outside the window and the window widened to include it. */
   readonly widened: boolean
   /** The parameter that named something the chapter does not have, with its value. */
-  readonly notFound: { readonly kind: "event" | "place" | "step"; readonly value: string } | null
+  readonly notFound: {
+    readonly kind: "story" | "event" | "place" | "step"
+    readonly value: string
+  } | null
 }
 
 export function readChapterQuery(params: URLSearchParams): ChapterQuery {
@@ -62,6 +74,7 @@ export function readChapterQuery(params: URLSearchParams): ChapterQuery {
   }
 
   return {
+    story: value("story"),
     event: value("event"),
     place: value("place"),
     step: value("step"),
@@ -82,6 +95,44 @@ function asYear(value: string | null): number | null {
 /** The record id a query value names, accepting the full id as well as the short form. */
 function recordId(prefix: string, value: string): string {
   return value.startsWith(prefix) ? value : `${prefix}${value}`
+}
+
+/**
+ * The story a query opens: the one `story` names; for an event or a place, the
+ * story the reader is in (`active`) when it holds the record, otherwise the
+ * first story that does; and otherwise the story the chapter opens on.
+ * `missing` is the story key the chapter does not have, which opens the first.
+ */
+export function chooseStory(
+  stories: readonly Chapter[],
+  query: ChapterQuery,
+  active: string | null = null,
+): { readonly chapter: Chapter; readonly missing: string | null } {
+  const first = stories[0]
+
+  if (query.story !== null) {
+    const named = stories.find((chapter) => chapter.storyKey === query.story)
+
+    return named === undefined
+      ? { chapter: first, missing: query.story }
+      : { chapter: named, missing: null }
+  }
+
+  const holds = (chapter: Chapter) =>
+    query.event !== null
+      ? findEvent(chapter, recordId(EVENT_PREFIX, query.event)) !== null
+      : query.place !== null && findPlace(chapter, recordId(PLACE_PREFIX, query.place)) !== null
+
+  if (query.event === null && query.place === null) {
+    return { chapter: first, missing: null }
+  }
+
+  const current = stories.find((chapter) => chapter.storyKey === active)
+
+  return {
+    chapter: current !== undefined && holds(current) ? current : (stories.find(holds) ?? first),
+    missing: null,
+  }
 }
 
 /**
@@ -185,13 +236,18 @@ export function applyChapterQuery(
 }
 
 /**
- * The query for a state: the selection (event, else place, else the story step
- * the reader is at) and the window when it is not the chapter's default. The
+ * The query for a state: the story when it is not the one the chapter opens on,
+ * the selection (event, else place, else the story step the reader is at) and
+ * the window when it is not the story's own. The
  * playhead is not in the contract; a link opens at its selection's time.
  * Returns the search string with its `?`, or the empty string.
  */
 export function chapterQuery(state: AtlasState, chapter: Chapter): string {
   const params = new URLSearchParams()
+
+  if (chapter.storyKey !== chapter.stories[0]?.key) {
+    params.set("story", chapter.storyKey)
+  }
 
   if (state.selectedEventId !== null) {
     params.set("event", state.selectedEventId.replace(EVENT_PREFIX, ""))

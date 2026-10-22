@@ -34,6 +34,7 @@ let watching = false
 // The chapter and heading the page asked for, kept so a back/forward-cache
 // restore re-creates the same workspace rather than an empty or default one.
 let currentChapter: Chapter | null = null
+let currentStories: readonly Chapter[] | null = null
 let currentHeading: AtlasHeading | undefined
 let currentHistory: AtlasHistory | null = null
 // The address the page started at, used once: a restored page reads its own.
@@ -83,10 +84,16 @@ export function mountWorkspace(): void {
   try {
     // The address is read at mount time, not when the page started: a page
     // restored from the back/forward cache mounts at the address it shows.
-    workspace = mountAtlas(root, currentChapter, currentHeading, {
-      search: startSearch ?? window.location.search,
-      history: currentHistory,
-    })
+    workspace = mountAtlas(
+      root,
+      currentChapter,
+      currentHeading,
+      {
+        search: startSearch ?? window.location.search,
+        history: currentHistory,
+      },
+      currentStories ?? [currentChapter],
+    )
     startSearch = null
     window.__lekishiAtlas = workspace
   } catch (error) {
@@ -125,15 +132,18 @@ export function watchWorkspaceLifecycle(): void {
  * the reader's position into the address (the route supplies SvelteKit's
  * shallow routing), and `search` is the address the route is rendering, which
  * the router may not have written to `location` yet; without it the workspace
- * reads `location`.
+ * reads `location`. `stories` is every story's view of a chapter with several,
+ * `chapter` first.
  */
 export function startAtlasPage(
   chapter: Chapter,
   heading?: AtlasHeading,
   history: AtlasHistory | null = null,
   search: string | null = null,
+  stories: readonly Chapter[] | null = null,
 ): void {
   currentChapter = chapter
+  currentStories = stories
   currentHeading = heading
   currentHistory = history
   startSearch = search

@@ -26,6 +26,7 @@
   import {
     applyChapterQuery,
     chapterQuery,
+    chooseStory,
     isEmptyQuery,
     readChapterQuery,
     type Arrival,
@@ -68,18 +69,25 @@
    * The workspace renders whichever chapter it is mounted with and branches on
    * no chapter id. It is the single owner of the atlas state: selection, time,
    * playback, layers and camera follow change here and only here, and the
-   * renderer receives the derived scene. The state variable is not called
+   * renderer receives the derived scene. A chapter with several stories is
+   * mounted with a view of each (rfd/0002/CHAPTER_STORIES.adoc); the workspace
+   * shows one at a time, and choosing another resets the step and the window
+   * to that story's own. The state variable is not called
    * `state`: svelte-check would read `$state` as a store subscription and
    * stop type-checking the component.
    */
   let {
-    chapter,
-    name = chapter.title,
+    chapter: opened,
+    stories = [opened],
+    name = opened.title,
     decision = "",
     search = "",
     history = null,
   }: {
+    /** The chapter as the story it opens on shows it. */
     chapter: Chapter
+    /** Every story's view of the chapter, the one it opens on first. */
+    stories?: readonly Chapter[]
     name?: string
     decision?: string
     /** The address bar's query when the workspace mounts. */
@@ -89,7 +97,9 @@
 
   // `untrack`: the workspace is mounted once per page for one chapter, so its
   // first state comes from the chapter and the address it was mounted with.
-  const opening = untrack(() => arrive(atlas.createAtlasState(chapter), search))
+  const opening = untrack(() => arrive(search, null))
+  /** The story the reader is in, as its view of the chapter. */
+  let chapter: Chapter = $state.raw(untrack(() => opening.chapter))
   let atlasState: AtlasState = $state.raw(opening.state)
   let arrival = $state.raw(untrack(() => arrivalPlate(opening)))
   let arrivalFor: AtlasState | null = opening.state
@@ -245,7 +255,7 @@
   // The first state came from the address, so it is not written back: a
   // stale link stays in the bar until the reader moves, and the arrival plate
   // has already said what it opened instead.
-  let written = untrack(() => chapterQuery(opening.state, chapter))
+  let written = untrack(() => chapterQuery(opening.state, opening.chapter))
   let pushNext = false
 
   function positionLabel(state: AtlasState): string {
@@ -298,16 +308,47 @@
     )
   }
 
-  function arrive(base: AtlasState, query: string): Arrival {
+  type StoryArrival = Arrival & { readonly chapter: Chapter }
+
+  /**
+   * Where an address opens: its story, and the state the rest of it asks for
+   * there. `active` is the story the reader is in, which a link to an event or
+   * a place stays in when the story holds it.
+   */
+  function arrive(
+    query: string,
+    active: string | null,
+    start: (view: Chapter) => AtlasState = atlas.createAtlasState,
+  ): StoryArrival {
     const parsed = readChapterQuery(new URLSearchParams(query))
-    return isEmptyQuery(parsed)
-      ? { state: base, opened: null, widened: false, notFound: null }
-      : applyChapterQuery(base, chapter, parsed)
+    const chosen = chooseStory(stories, parsed, active)
+    const base = start(chosen.chapter)
+
+    if (chosen.missing !== null) {
+      return {
+        chapter: chosen.chapter,
+        state: base,
+        opened: null,
+        widened: false,
+        notFound: { kind: "story", value: chosen.missing },
+      }
+    }
+
+    return {
+      chapter: chosen.chapter,
+      ...(isEmptyQuery(parsed)
+        ? { state: base, opened: null, widened: false, notFound: null }
+        : applyChapterQuery(base, chosen.chapter, parsed)),
+    }
   }
 
-  function arrivalPlate(result: Arrival) {
+  function arrivalPlate(result: StoryArrival) {
+    const chapter = result.chapter
+
     if (result.notFound !== null) {
-      const what = { event: "event", place: "place", step: "story step" }[result.notFound.kind]
+      const what = { story: "story", event: "event", place: "place", step: "story step" }[
+        result.notFound.kind
+      ]
       return {
         tone: "missing" as const,
         playable: false,
@@ -358,10 +399,15 @@
   export function navigate(query: string, announce = false): void {
     const normalized = query === "?" ? "" : query
     if (normalized === written) return
-    const result = arrive(
-      { ...atlas.createAtlasState(chapter), layers: atlasState.layers },
-      normalized,
-    )
+    // Back and Forward return to the story the address was written in; a link
+    // to an event or a place stays in the reader's story when it holds it.
+    const result = arrive(normalized, announce ? chapter.storyKey : null, (view) => ({
+      ...atlas.createAtlasState(view),
+      layers: atlasState.layers,
+      homeToken: atlasState.homeToken + (view === chapter ? 0 : 1),
+    }))
+    if (result.chapter !== chapter) person = null
+    chapter = result.chapter
     written = chapterQuery(result.state, chapter)
     arrivalFor = result.state
     atlasState = result.state
@@ -375,6 +421,28 @@
   function update(next: AtlasState, jump = false) {
     if (jump) pushNext = true
     atlasState = next
+  }
+
+  /**
+   * Opens another story at its start: its own window, no step, and the globe
+   * flown to where it happens. The layers the reader chose stay as they are.
+   */
+  function enterStory(view: Chapter) {
+    chapter = view
+    person = null
+    atlasState = {
+      ...atlas.createAtlasState(view),
+      layers: atlasState.layers,
+      homeToken: atlasState.homeToken + 1,
+    }
+  }
+
+  function chooseStoryByKey(key: string) {
+    const view = stories.find((candidate) => candidate.storyKey === key)
+    if (view === undefined || view === chapter) return
+    pushNext = true
+    enterStory(view)
+    exploreTab = "story"
   }
 
   function selectEvent(eventId: string | null) {
@@ -408,6 +476,13 @@
 
   function openFromSearch(entry: SearchEntry) {
     const kind = entry.kind
+    // A record in another story opens that story first, as its link would.
+    const view = chooseStory(
+      stories,
+      readChapterQuery(new URL(entry.href, "https://lekishi.invalid").searchParams),
+      chapter.storyKey,
+    ).chapter
+    if (view !== chapter) enterStory(view)
     if (kind === "event") {
       update(atlas.jumpToEvent(atlasState, chapter, entry.id), true)
     } else if (kind === "place") {
@@ -536,6 +611,7 @@
     {person}
     onSelect={selectEvent}
     onJump={jumpToStep}
+    onStory={chooseStoryByKey}
     onClearPerson={() => (person = null)}
   />
 {/snippet}

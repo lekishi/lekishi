@@ -2,7 +2,13 @@ import { beforeAll, describe, expect, it } from "vitest"
 import { loadServedChapter } from "./chapter-catalog"
 import { QIN_CHAPTER, TANG_CHAPTER } from "./chapter-registry"
 import type { Chapter } from "./domain"
-import { applyChapterQuery, chapterQuery, isEmptyQuery, readChapterQuery } from "./query"
+import {
+  applyChapterQuery,
+  chapterQuery,
+  chooseStory,
+  isEmptyQuery,
+  readChapterQuery,
+} from "./query"
 import { createAtlasState, selectEvent, selectPlace, setTimeWindow } from "./state"
 
 let tang: Chapter
@@ -143,5 +149,65 @@ describe("writing the chapter query", () => {
     ]) {
       expect(chapterQuery(open(tang, search).state, tang)).toBe(search)
     }
+  })
+})
+
+describe("a chapter with several stories", () => {
+  // A second view made from the Tang chapter's own, holding three of its
+  // events: a fixture for choosing a story, not a story the chapter has.
+  const stories = () => {
+    const options = [
+      { key: TANG_CHAPTER, title: "The embassy", window: tang.defaultWindow },
+      { key: "example-second", title: "A second story", window: { start: 753, end: 754 } },
+    ]
+    const kept = new Set([
+      "lks:event:akimeya-landfall-753",
+      "lks:event:dazaifu-entry-753",
+      "lks:event:naniwa-754",
+    ])
+    const first: Chapter = { ...tang, stories: options }
+    const second: Chapter = {
+      ...tang,
+      storyKey: "example-second",
+      stories: options,
+      defaultWindow: { start: 753, end: 754 },
+      events: tang.events.filter((event) => kept.has(event.id)),
+      story: tang.story.filter((step) => kept.has(step.recordId)),
+    }
+
+    return [first, second]
+  }
+  const query = (search: string) => readChapterQuery(new URLSearchParams(search))
+
+  it("opens the story the address names, and the first when it names none", () => {
+    const [first, second] = stories()
+
+    expect(chooseStory([first, second], query("?story=example-second")).chapter).toBe(second)
+    expect(chooseStory([first, second], query("")).chapter).toBe(first)
+    expect(chooseStory([first, second], query("?step=2")).chapter).toBe(first)
+    expect(chooseStory([first, second], query("?story=nope"))).toEqual({
+      chapter: first,
+      missing: "nope",
+    })
+  })
+
+  it("opens a linked event in the reader's story when it holds it, else the first that does", () => {
+    const [first, second] = stories()
+    const shared = query("?event=naniwa-754")
+    const firstOnly = query("?event=appointment-750")
+
+    expect(chooseStory([first, second], shared, "example-second").chapter).toBe(second)
+    expect(chooseStory([first, second], shared, null).chapter).toBe(first)
+    expect(chooseStory([second, first], shared, null).chapter).toBe(second)
+    expect(chooseStory([first, second], firstOnly, "example-second").chapter).toBe(first)
+  })
+
+  it("writes the story only when it is not the one the chapter opens on", () => {
+    const [first, second] = stories()
+    const selected = selectEvent(createAtlasState(second), second, "lks:event:naniwa-754")
+
+    expect(chapterQuery(createAtlasState(first), first)).toBe("")
+    expect(chapterQuery(createAtlasState(second), second)).toBe("?story=example-second")
+    expect(chapterQuery(selected, second)).toBe("?story=example-second&event=naniwa-754")
   })
 })

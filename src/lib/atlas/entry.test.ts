@@ -76,7 +76,7 @@ describe("the chapter page bootstrap", () => {
     mountWorkspace()
 
     expect(mountAtlas).toHaveBeenCalledTimes(1)
-    expect(mountAtlas).toHaveBeenCalledWith(root, TANG, TANG_HEADING, ADDRESS)
+    expect(mountAtlas).toHaveBeenCalledWith(root, TANG, TANG_HEADING, ADDRESS, [TANG])
     expect(window.__lekishiAtlas).toBe(handle)
   })
 
@@ -107,7 +107,17 @@ describe("the chapter page bootstrap", () => {
       TANG,
       { name: "The embassy to Tang China", decision: "Owner-approved" },
       ADDRESS,
+      [TANG],
     )
+  })
+
+  it("mounts every story of a chapter the page names", () => {
+    const root = addMountPoint()
+    const second = { ...TANG, storyKey: "example-second" }
+
+    startAtlasPage(TANG, TANG_HEADING, null, null, [TANG, second])
+
+    expect(mountAtlas).toHaveBeenCalledWith(root, TANG, TANG_HEADING, ADDRESS, [TANG, second])
   })
 
   it("keeps the heading when a page is restored from the back/forward cache", () => {
@@ -119,7 +129,9 @@ describe("the chapter page bootstrap", () => {
     transition("pagehide")
     transition("pageshow")
 
-    expect(mountAtlas).toHaveBeenLastCalledWith(expect.anything(), TANG, TANG_HEADING, ADDRESS)
+    expect(mountAtlas).toHaveBeenLastCalledWith(expect.anything(), TANG, TANG_HEADING, ADDRESS, [
+      TANG,
+    ])
   })
 
   it("restores the chapter and heading a later page started", () => {
@@ -134,7 +146,7 @@ describe("the chapter page bootstrap", () => {
     startAtlasPage(QIN, QIN_HEADING)
     mountWorkspace()
 
-    expect(mountAtlas).toHaveBeenLastCalledWith(root, QIN, QIN_HEADING, ADDRESS)
+    expect(mountAtlas).toHaveBeenLastCalledWith(root, QIN, QIN_HEADING, ADDRESS, [QIN])
 
     // The restored page comes back as that chapter, not the first one: clear the
     // spy so the assertion cannot pass on the mount above.
@@ -142,7 +154,7 @@ describe("the chapter page bootstrap", () => {
     mountAtlas.mockClear()
     transition("pageshow")
 
-    expect(mountAtlas).toHaveBeenCalledWith(root, QIN, QIN_HEADING, ADDRESS)
+    expect(mountAtlas).toHaveBeenCalledWith(root, QIN, QIN_HEADING, ADDRESS, [QIN])
   })
 
   it("releases the workspace on teardown and restores one workspace on pageshow", () => {
@@ -203,10 +215,13 @@ describe("the chapter page bootstrap", () => {
     window.history.replaceState(null, "", "/?event=akimeya-landfall-753")
     startAtlasPage(TANG, TANG_HEADING, history)
 
-    expect(mountAtlas).toHaveBeenLastCalledWith(root, TANG, TANG_HEADING, {
-      search: "?event=akimeya-landfall-753",
-      history,
-    })
+    expect(mountAtlas).toHaveBeenLastCalledWith(
+      root,
+      TANG,
+      TANG_HEADING,
+      { search: "?event=akimeya-landfall-753", history },
+      [TANG],
+    )
     window.history.replaceState(null, "", "/")
   })
 

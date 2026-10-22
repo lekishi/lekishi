@@ -78,9 +78,8 @@ merged record the Nile thread wrote for both chapters, copied byte for byte.
 `rome` is the record the Stephen II chapter minted on `main`; this chapter
 folded into it its Pliny name, the Rome thread's (PR #30) Livy citation and the
 Pleiades id, so PR #30 must fold into the same record when it merges.
-`alexandria-egypt` (from the Greece thread, PR #34) is a byte-for-byte copy of
-that thread's file, with the source it cites (`arrian-anabasis`), so the
-branches merge cleanly.
+`alexandria-egypt` is the Greece and Persia chapter's record, now on `main`
+(PR #34), with the source it cites (`arrian-anabasis`).
 `coptos`, `berenice`, `egypt` and `arabia` are minted here first.
 
 ## Evidence states the contract lacks

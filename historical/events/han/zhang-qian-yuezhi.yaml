@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  大宛 sent 張騫 on with guides to 康居, and 康居 passed him on to the 大月氏, whose king the 匈奴 had
+  killed and whose new ruler, settled in a rich land north of the 媯水 with 大夏 as subject, had no
+  thought of revenge. 張騫 went on to 大夏 and stayed more than a year, but could not win the 月氏 to
+  an alliance.
+types: [journey, mission]
+date:
+  value: 140 BCE..127 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 抵康居，康居傳致大月氏…騫從月氏至大夏…留歲餘
+  cite:
+    - id: zhang-qian-yuezhi-time
+      says: The 大宛列傳 records the passage through 康居 to the 大月氏 and on to 大夏, and the failure to win the 月氏 over, without a year.
+      sources:
+        - source: shiji-han-frontiers
+          at: 卷一百二十三 大宛列傳（抵康居，康居傳致大月氏）
+          quote: 大宛以為然，遣騫，為發導繹，抵康居，康居傳致大月氏。
+        - source: shiji-han-frontiers
+          at: 卷一百二十三 大宛列傳（騫從月氏至大夏）
+          quote: 騫從月氏至大夏，竟不能得月氏要領。
+    - id: zhang-qian-yuezhi-reason
+      says: The 大宛列傳 records that the 月氏, settled in a rich and safe land and far from the Han, had no thought of revenge on the 胡.
+      role: supporting
+      source: shiji-han-frontiers
+      at: 卷一百二十三 大宛列傳（殊無報胡之心）
+      quote: 既臣大夏而居，地肥饒，少寇，志安樂，又自以遠漢，殊無報胡之心。
+places:
+  - place: dayuan
+    role: start
+  - place: kangju
+    role: waypoint
+  - place: da-yuezhi
+    role: waypoint
+  - place: daxia
+    role: end
+participants:
+  - actor: zhang-qian
+    role: leader
+  - actor: ganfu
+    role: participant
+  - actor: da-yuezhi-state
+    role: host
+notes:
+  "The 大宛列傳 says the 月氏 king's heir (太子) was made king; the 漢書 says his wife (夫人). The record
+  names neither. 康居 and the 月氏 court are not located, so this leg has no drawable stops between
+  大宛 and 大夏."

@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  張騫, a man of 漢中 and a 郎 of 建元, who answered the court's call for an envoy to the 月氏, was
+  held by the 匈奴 for more than ten years, reached 大宛, 康居, the 大月氏 and 大夏, and returned after
+  thirteen years; later 博望侯, and envoy to 烏孫, he died a year after his return as 大行.
+types: [person]
+names:
+  - form: 張騫
+    lang: lzh
+    script: Hani
+    roman: Zhang Qian
+    scheme: pinyin
+    cite:
+      - id: zhang-qian-name
+        says: The 大宛列傳 opens its account by naming 張騫 of 漢中, a 郎 in the 建元 years.
+        source: shiji-han-frontiers
+        at: 卷一百二十三 大宛列傳 張騫
+        quote: 張騫，漢中人。建元中為郎。
+  - form: 博望侯
+    lang: lzh
+    script: Hani
+    note: His title from 元朔六年 (123 BCE), by which later envoys named themselves.
+    cite:
+      - id: zhang-qian-bowang
+        says: The 大宛列傳 records his enfeoffment as 博望侯 in 元朔六年.
+        source: shiji-han-frontiers
+        at: 卷一百二十三 大宛列傳（乃封騫為博望侯）
+        quote: 乃封騫為博望侯。是歲元朔六年也。
+roles:
+  - role: envoy
+    date:
+      value: 140 BCE..115 BCE
+      mode: duration
+      calendar: chinese_lunisolar
+      as_written: 建元中為郎…騫還到，拜為大行
+    cite:
+      - id: zhang-qian-envoy
+        says:
+          The 大宛列傳 records him answering the call for an envoy to the 月氏 as a 郎, and, after the
+          烏孫 mission, being made 大行 and dying a year later.
+        sources:
+          - source: shiji-han-frontiers
+            at: 卷一百二十三 大宛列傳（騫以郎應募，使月氏）
+            quote: 騫以郎應募，使月氏
+          - source: shiji-han-frontiers
+            at: 卷一百二十三 大宛列傳（騫還到，拜為大行）
+            quote: 騫還到，拜為大行，列於九卿。歲餘，卒。
+  - role: soldier
+    note: As 校尉 under 衛青 in 123 BCE and as 衛尉 out of 右北平 in 121 BCE.
+    date:
+      value: 123 BCE..121 BCE
+      mode: duration
+      calendar: chinese_lunisolar
+    cite:
+      - id: zhang-qian-soldier
+        says: The 大宛列傳 records him serving as 校尉 under the 大將軍 and finding water and grass for the army.
+        source: shiji-han-frontiers
+        at: 卷一百二十三 大宛列傳（騫以校尉從大將軍擊匈奴）
+        quote: 騫以校尉從大將軍擊匈奴，知水草處，軍得以不乏
+notes:
+  The role's span begins at 建元 (140 BCE) because the sources date the departure only as 建元中; the
+  departure year 139 or 138 BCE often given is a reckoning back from the return, not a source date.

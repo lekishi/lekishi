@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "丹, crown prince of Yan, who had been a hostage in Qin. The annals and the biography of the assassins record him sending 荊軻 to kill the king of Qin in 227 BCE; the accounts differ on how he died in 226 BCE."
+types: [person]
+names:
+  - form: "燕太子丹"
+    lang: lzh
+    script: Hani
+    roman: "Yan Taizi Dan"
+    scheme: pinyin
+    cite:
+      - says: "The annals record 燕太子丹 fearing Qin's army and sending 荊軻 to stab the king."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十年（燕太子丹患秦兵至國）"
+        quote: "二十年，燕太子丹患秦兵至國，恐，使荊軻刺秦王。"
+roles:
+  - role: other
+    note: "Crown prince; the biography records his escape home from hostageship in Qin."
+    cite:
+      - says: "The biography records 丹 fleeing home from hostageship in Qin."
+        source: shiji-six-states
+        at: "卷八十六 刺客列傳（燕太子丹質秦亡歸燕）"
+        quote: "居頃之，會燕太子丹質秦亡歸燕。"
+notes: "His death is a disputed event of the chapter (yan-dan-death-226)."

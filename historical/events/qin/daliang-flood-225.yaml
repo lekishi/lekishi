@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "In 225 BCE 王賁 attacked Wei and turned the waters of the 河溝 onto its capital 大梁 until the wall broke. The annals record the king asking to surrender and Qin taking all his land; the accounts differ on what became of the king."
+types: [campaign]
+date:
+  value: "225 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "二十二年（引河溝灌大梁）; 王假三年（秦灌大梁，虜王假）; 始皇帝二十二年三月（城壞）"
+  cite:
+    - says: "The annals record the flooding, the broken wall, and the surrender request in 二十二年 (225 BCE)."
+      source: shiji
+      at: "卷六 秦始皇本紀 二十二年（引河溝灌大梁）"
+      quote: "二十二年，王賁攻魏，引河溝灌大梁，大梁城壞，其王請降，盡取其地。"
+    - says: "The six-states table records 王賁 taking king 假 and all his land under 秦始皇二十二年."
+      role: supporting
+      source: shiji
+      at: "卷十五 六國年表 秦始皇二十二年（王賁擊魏，得其王假）"
+      quote: "二十二。王賁擊魏，得其王假，盡取其地。"
+    - says: "The hereditary house of Wei records the flooding and the capture in the king's third year."
+      role: supporting
+      source: shiji-six-states
+      at: "卷四十四 魏世家 王假三年（秦灌大梁，虜王假）"
+      quote: "三年，秦灌大梁，虜王假，遂滅魏以爲郡縣。"
+places:
+  - place: daliang
+    role: site
+    note: "The capital flooded."
+participants:
+  - actor: wang-ben
+    role: leader
+  - actor: wei-king-jia
+    role: subject
+  - actor: wei-state
+    role: subject
+notes: "The mirror dates the breach to the third month (三月，城壞); the hereditary house's closing comment, quoting the people of the ruined city, says the wall broke after three months (三月城壞). The same two characters are read as a month in one and a duration in the other; the event is dated to the year."
+dispute:
+  status: disputed
+  summary: "The accounts differ on the king's fate: the annals record that he asked to surrender, the six-states table and the hereditary house that Qin captured him, and the comprehensive mirror that he surrendered and was killed. The chapter publishes the annals' account and keeps the others as claims."
+cite:
+  - says: "The comprehensive mirror records that the king surrendered and was killed."
+    role: conflicting
+    source: zizhi-tongjian-qin-ji-2
+    at: "卷七 秦紀二 始皇帝二十二年（魏王假降，殺之）"
+    quote: "城壞。魏王假降，殺之，遂滅魏。"
+  - says: "The hereditary house's closing comment records the flooding and the wall breaking after three months."
+    role: supporting
+    source: shiji-six-states
+    at: "卷四十四 魏世家 太史公曰（三月城壞）"
+    quote: "秦之破梁，引河溝而灌大梁，三月城壞，王請降，遂滅魏。"

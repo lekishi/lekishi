@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "建, the last king of Qi, who reigned more than forty years without war. The hereditary house of Qi records him surrendering on his chancellor 后勝's advice in 221 BCE and being moved to 共."
+types: [person]
+names:
+  - form: "齊王建"
+    lang: lzh
+    script: Hani
+    roman: "Qi Wang Jian"
+    scheme: pinyin
+    cite:
+      - says: "The annals record 王賁 capturing 齊王建."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十六年（得齊王建）"
+        quote: "秦使將軍王賁從燕南攻齊，得齊王建。"
+roles:
+  - role: ruler
+    note: "The span runs from his first year to the forty-fourth, aligned with 264–221 BCE by the six-states table."
+    date:
+      value: "264 BCE..221 BCE"
+      mode: duration
+      calendar: chinese_lunisolar
+      as_written: "王建立; 四十四年"
+    cite:
+      - says: "The table records his forty-fourth year in 221 BCE and the end of Qi."
+        source: shiji
+        at: "卷十五 六國年表 秦始皇二十六年（齊 四十四）"
+        quote: "四十四。秦虜王建。秦滅齊。"
+notes: "The comprehensive mirror adds that he died of hunger at 共; the hereditary house does not record his death."

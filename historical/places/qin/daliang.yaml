@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "大梁, the capital of 魏. The annals record 王賁 flooding it with the waters of the 河溝 in 225 BCE until its wall broke and the king asked to surrender. The record's label anchor sits at the modern city of 開封, near which the cited historical geography places it."
+types: [capital]
+names:
+  - form: "大梁"
+    lang: lzh
+    script: Hani
+    roman: Daliang
+    scheme: pinyin
+    cite:
+      - says: "The annals record 王賁 flooding 大梁 in 二十二年 (225 BCE), the wall breaking, and the king asking to surrender."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十二年（引河溝灌大梁）"
+        quote: "王賁攻魏，引河溝灌大梁，大梁城壞，其王請降，盡取其地。"
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [114.345, 34.795]
+    notes: "Label anchor at the modern city of 開封, Wikidata Q208471. It is not an asserted historical coordinate: the primary entries name the place and state no site, and the anchor places no wall, palace or battlefield. The same gazetteer entry dates the flooding to 始皇三十二年, a copying error for 二十二年, so the record uses it only for the identification."
+    cite:
+      - says: "The historical geography records the abandoned 浚儀 county, north-west of its own 開封 city, as the 大梁 where 魏惠王 first made his capital."
+        role: supporting
+        source: dushi-fangyu-jiyao-six-states
+        at: "卷四十七 河南二 開封府（浚儀廢縣）"
+        quote: "在今城西北。漢縣治此。故曰大梁，魏惠王始都此。"
+      - says: "The label anchor is placed at the coordinate Wikidata (CC0) records for the modern place; no historical coordinate is asserted."
+        source: wikidata
+        at: "Q208471 (P625), revision 2526608843"
+modern:
+  - form: "開封市"
+    lang: zh-Hant
+    script: Hani
+    note: "Modern city recorded for orientation only."
+notes: "The anchor is a region-level label: the historical geography places the old city north-west of the walled city it knew, and no site is asserted."

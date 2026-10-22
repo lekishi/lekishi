@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 九疑山, where 虞舜 was held to be buried; 始皇 sacrificed to 舜 from afar at 雲夢 in 210 BCE. The label anchor sits at the modern 九嶷山 range; it asserts no historical site.
+types: [landform]
+names:
+  - form: 九疑山
+    lang: lzh
+    script: Hani
+    roman: Jiuyi Shan
+    scheme: pinyin
+    cite:
+      - id: jiuyi-shan-name
+        says: The annals record 始皇 sacrificing from afar to 虞舜 at 九疑山.
+        source: shiji
+        at: 卷六 秦始皇本紀 三十七年（望祀虞舜於九疑山）
+        quote: 望祀虞舜於九疑山
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [112.0, 25.23611]
+    notes: Label anchor at the modern 九嶷山 range (Wikidata Q6203443). It is not an asserted historical coordinate.
+    cite:
+      - id: jiuyi-shan-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the modern 九嶷山 range; no historical coordinate is asserted.
+        source: wikidata
+        at: Q6203443 (P625), revision 2393831532
+external_ids:
+  - system: wikidata
+    id: Q6203443
+    url: https://www.wikidata.org/wiki/Q6203443
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

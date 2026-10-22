@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The 月氏, refused a Han princess, sent their 副王 謝 with seventy thousand men over the 葱領 against
+  班超 in 90 CE. 班超 told his frightened men that an army without supply lines would starve, gathered
+  the grain and held fast, and ambushed the riders 謝 sent to 龜茲 for food. 謝 asked leave to go home,
+  and the 月氏 sent tribute every year after.
+types: [campaign]
+date:
+  value: 90
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 永元二年
+  cite:
+    - id: yuezhi-attack-time
+      says: The biography dates the 月氏 attack to 永元二年 and records 謝 asking to go home and the 月氏's yearly tribute.
+      sources:
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超 永元二年
+          quote: 月氏遣其副王謝將兵七萬攻超。超衆少，皆大恐。
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超（月氏由是大震）
+          quote: 謝大驚，即遣使請罪，願得生歸。超縱遣之。月氏由是大震，歲奉貢獻。
+places:
+  - place: kashgar
+    role: site
+    note: The biography does not say where 班超 held out; 疏勒 was his base in these years.
+participants:
+  - actor: ban-chao
+    role: leader
+  - actor: yuezhi-viceroy-xie
+    role: leader
+  - actor: da-yuezhi-state
+    role: participant
+    note: The 後漢書 calls them 月氏; this is the same people as the 大月氏 of the 史記, by then the Kushan state.
+cites:
+  places:
+    - id: yuezhi-attack-place
+      says: The biography records 班超 telling his men to gather the grain and hold fast, without naming the town.
+      source: hou-hanshu
+      at: 卷四十七 班梁列傳 班超（但當收穀堅守）
+      quote: 但當收穀堅守，彼飢窮自降，不過數十日決矣。
+notes:
+  The identification of this 月氏 with the Kushan state is the usual one in modern scholarship and is
+  not cited here; the record treats them as the 大月氏 the sources name.

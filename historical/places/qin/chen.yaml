@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "陳, the old capital of the state of 陳 and later a Chu capital, which the annals call 郢陳. They record 王翦 taking the land from 陳 south to 平輿 in 224 BCE and the king of Qin travelling to 郢陳. The record's label anchor sits at modern 淮陽, which carries the name the historical geography records for the place."
+types: [capital, settlement]
+names:
+  - form: "陳"
+    lang: lzh
+    script: Hani
+    roman: Chen
+    scheme: pinyin
+    cite:
+      - says: "The annals record Qin taking the land from 陳 south to 平輿 in 二十三年 (224 BCE)."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十三年（取陳以南至平輿）"
+        quote: "取陳以南至平輿，虜荊王。秦王游至郢陳。"
+  - form: "郢陳"
+    lang: lzh
+    script: Hani
+    note: "The annals' name for the city as a Chu capital (郢 being the name Chu gave its capitals)."
+    cite:
+      - says: "The annals call the city 郢陳 when the king of Qin travels there in 224 BCE."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十三年（秦王游至郢陳）"
+        quote: "秦王游至郢陳。"
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [114.86686, 33.73344]
+    notes: "Label anchor at modern 淮陽區, Wikidata Q1198882. It is not an asserted historical coordinate: the primary entries name the place and state no site, and the anchor places no wall, palace or battlefield. The same entry records the Chu king moving here from 郢 after Chu destroyed 陳; its transcription reads 項襄王 for 頃襄王, so that clause is not quoted."
+    cite:
+      - says: "The historical geography records 陳州 as the place where 媯滿 was enfeoffed as the state of 陳, and its seat 宛丘 as the Han 陳縣."
+        role: supporting
+        source: dushi-fangyu-jiyao-six-states
+        at: "卷四十七 河南二 開封府 陳州"
+        quote: "周初封舜後媯滿於此，爲陳國。"
+      - says: "The label anchor is placed at the coordinate Wikidata (CC0) records for the modern place; no historical coordinate is asserted."
+        source: wikidata
+        at: "Q1198882 (P625), revision 2549929717"
+modern:
+  - form: "淮陽區"
+    lang: zh-Hant
+    script: Hani
+    note: "Modern district recorded for orientation only."
+notes: "The record covers the city under both names. Whether the annals' 226 BCE 郢 (昌平君徙於郢) is this city is not decided here."

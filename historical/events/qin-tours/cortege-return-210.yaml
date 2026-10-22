@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The cortege went on by 井陘 to 九原, in summer heat, with a cart of salted fish to hide the smell, then took the 直道 to 咸陽, where the death was announced and 胡亥 succeeded as 二世皇帝.
+types: [journey]
+date:
+  value: 210-09 BCE..210-10 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 三十七年
+  cite:
+    - id: cortege-return-210-account
+      says: The annals record the route by 井陘 and 九原, the 直道 to 咸陽 and the announcement of the death.
+      sources:
+        - source: shiji
+          at: 卷六 秦始皇本紀 三十七年（遂從井陘抵九原）
+          quote: 行，遂從井陘抵九原。
+        - source: shiji
+          at: 卷六 秦始皇本紀 三十七年（行從直道至咸陽）
+          quote: 行從直道至咸陽，發喪。太子胡亥襲位，為二世皇帝。
+places:
+  - place: shaqiu
+    role: start
+  - place: jingxing
+    role: waypoint
+  - place: jiuyuan
+    role: waypoint
+  - place: xianyang
+    role: end
+participants:
+  - actor: hu-hai
+    role: participant
+notes: The burial at 酈山 in the ninth month bounds the window; the 直道's course is not drawn.

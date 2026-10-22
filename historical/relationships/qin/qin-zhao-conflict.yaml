@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "Qin's war on Zhao: the great levy of 229 BCE, the siege of 邯鄲, and the capture of the Zhao king in 228 BCE. The relationship asserts no causation and draws no route."
+types: [conflict]
+from: qin-state
+to: zhao-state
+notes: "The relationship records two dated Qin acts. It carries no validity interval, because the sources establish separately dated acts and not a continuous war, and it carries no geometry. It asserts no causation."
+cite:
+  - says: "The annals record the great levy against Zhao and the siege of 邯鄲 in 十八年."
+    source: shiji
+    at: "卷六 秦始皇本紀 十八年（大興兵攻趙）"
+    quote: "十八年，大興兵攻趙，王翦將上地，下井陘，端和將河內，羌瘣伐趙，端和圍邯鄲城。"
+  - says: "The six-states table records 王翦 taking Zhao and capturing the king at 邯鄲 in 秦始皇十九年."
+    role: supporting
+    source: shiji
+    at: "卷十五 六國年表 秦始皇十九年（王翦拔趙，虜王遷邯鄲）"
+    quote: "十九。王翦拔趙，虜王遷邯鄲。帝太后薨。"

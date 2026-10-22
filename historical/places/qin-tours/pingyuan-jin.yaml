@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 平原津, the ford where 始皇 fell ill in 210 BCE. The label anchor sits at the modern county of 平原; it asserts no historical site.
+types: [route_node]
+names:
+  - form: 平原津
+    lang: lzh
+    script: Hani
+    roman: Pingyuan Jin
+    scheme: pinyin
+    cite:
+      - id: pingyuan-jin-name
+        says: The annals record 始皇 falling ill on reaching 平原津.
+        source: shiji
+        at: 卷六 秦始皇本紀 三十七年（至平原津而病）
+        quote: 至平原津而病
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [116.43333, 37.16667]
+    notes: Label anchor at the modern county of 平原 (Wikidata Q1198034). It is not an asserted historical coordinate.
+    cite:
+      - id: pingyuan-jin-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the modern county of 平原; no historical coordinate is asserted.
+        source: wikidata
+        at: Q1198034 (P625), revision 2535788790
+external_ids:
+  - system: wikidata
+    id: Q1198034
+    url: https://www.wikidata.org/wiki/Q1198034
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

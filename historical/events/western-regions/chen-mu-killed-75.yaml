@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  When 明帝 died in 75 CE, 焉耆 and 龜茲 used the mourning to attack and kill the 都護 陳睦 and his
+  deputy 郭恂 with two thousand men. 班超, isolated in 疏勒, held 盤橐城 for more than a year against
+  龜茲 and 姑墨.
+types: [campaign]
+date:
+  value: 75
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 永平十八年
+  cite:
+    - id: chen-mu-killed-time
+      says: The biography dates the emperor's death and the killing of 陳睦 to 永平十八年.
+      source: hou-hanshu
+      at: 卷四十七 班梁列傳 班超 永平十八年
+      quote: 十八年，帝崩。焉耆以中國大喪，遂攻沒都護陳睦。
+    - id: chen-mu-killed-account
+      says: The 焉耆 entry records 焉耆 and 龜茲 together killing 陳睦, 郭恂 and two thousand men.
+      role: supporting
+      source: hou-hanshu
+      at: 卷八十八 西域傳 焉耆國
+      quote: 永平末，焉耆與龜茲共攻沒都護陳睦、副校尉郭恂，殺吏士二千餘人。
+places:
+  - place: agni
+    role: other
+    note: The attackers' kingdom; the sources do not name where the 都護 was killed.
+participants:
+  - actor: chen-mu
+    role: subject

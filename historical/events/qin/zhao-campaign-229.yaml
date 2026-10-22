@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "In 229 BCE Qin raised a great army against Zhao in three columns: the annals record 王翦 leading the 上地 army down through the 井陘 pass, 端和 leading the 河內 army, 羌瘣 attacking Zhao, and 端和 besieging the city of 邯鄲."
+types: [campaign]
+date:
+  value: "229 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "十八年（大興兵攻趙）; 始皇帝十八年（王翦將上地，兵下井陘）"
+  cite:
+    - says: "The annals record the great levy against Zhao and the three commands in 十八年 (229 BCE)."
+      source: shiji
+      at: "卷六 秦始皇本紀 十八年（大興兵攻趙）"
+      quote: "十八年，大興兵攻趙，王翦將上地，下井陘，端和將河內，羌瘣伐趙，端和圍邯鄲城。"
+    - says: "The comprehensive mirror records 王翦 leading the 上地 army down through 井陘 in 始皇帝十八年."
+      role: supporting
+      source: zizhi-tongjian
+      at: "卷六 秦紀一 始皇帝十八年（王翦將上地）"
+      quote: "王翦將上地，兵下井陘"
+places:
+  - place: jingxing
+    role: waypoint
+    note: "The pass the annals record 王翦's column coming down through."
+  - place: handan
+    role: site
+    note: "The Zhao capital the annals record 端和 besieging."
+participants:
+  - actor: wang-jian
+    role: leader
+    note: "Led the 上地 column."
+  - actor: yang-duanhe
+    role: leader
+    note: "Led the 河內 column and the siege; the notice writes 端和."
+  - actor: qiang-hui
+    role: leader
+  - actor: zhao-state
+    role: subject
+notes: "The mirror's transcription supplies 羌瘣 and 楊 in brackets from the annals and moves the defeat of 趙蔥 into this year from the next; the chapter quotes only its unbracketed text and takes the commands from the annals. The routes of the three columns are not drawn: the sources name a pass and a city, not a road."
+cites:
+  places:
+    says: "The annals name the 井陘 pass and the city of 邯鄲 and no other place for the campaign."
+    source: shiji
+    at: "卷六 秦始皇本紀 十八年（下井陘；圍邯鄲城）"

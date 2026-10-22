@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 湘山, whose shrine 始皇 reached by river in 219 BCE; angered by a storm, he had three thousand convicts strip the hill of its trees. The label anchor sits at the modern 君山島 in 洞庭湖; it asserts no historical site.
+types: [landform]
+names:
+  - form: 湘山
+    lang: lzh
+    script: Hani
+    roman: Xiangshan
+    scheme: pinyin
+    cite:
+      - id: xiangshan-name
+        says: The annals record 始皇 sailing the river to the 湘山 shrine.
+        source: shiji
+        at: 卷六 秦始皇本紀 二十八年（至湘山祠）
+        quote: 浮江，至湘山祠
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [113.0025, 29.355]
+    notes: Label anchor at the modern 君山島 in 洞庭湖 (Wikidata Q6314334). It is not an asserted historical coordinate.
+    cite:
+      - id: xiangshan-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the modern 君山島 in 洞庭湖; no historical coordinate is asserted.
+        source: wikidata
+        at: Q6314334 (P625), revision 2127472900
+external_ids:
+  - system: wikidata
+    id: Q6314334
+    url: https://www.wikidata.org/wiki/Q6314334
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

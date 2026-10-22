@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 江乘, where 始皇 crossed the 江 northward in 210 BCE. The record carries no position.
+types: [route_node]
+names:
+  - form: 江乘
+    lang: lzh
+    script: Hani
+    roman: Jiangcheng
+    scheme: pinyin
+    cite:
+      - id: jiangcheng-name
+        says: The annals record 始皇 crossing at 江乘 after passing 吳.
+        source: shiji
+        at: 卷六 秦始皇本紀 三十七年（從江乘渡）
+        quote: 還過吳，從江乘渡
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: The annals name 江乘 on the route and give no site for it, and no anchor is cited, so no position is asserted.
+    cite:
+      - id: jiangcheng-unplaced
+        says: The annals name 江乘 and state no site for it, so no position is asserted.
+        source: shiji
+        at: 卷六 秦始皇本紀 三十七年（從江乘渡）

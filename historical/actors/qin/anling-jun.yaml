@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "The lord of 安陵, whom the comprehensive mirror records refusing in 225 BCE to exchange his fief for five hundred 里 offered by the king of Qin, and the king respecting the refusal."
+types: [person]
+names:
+  - form: "安陵君"
+    lang: lzh
+    script: Hani
+    roman: "Anling Jun"
+    scheme: pinyin
+    cite:
+      - says: "The comprehensive mirror records the lord of 安陵 declining the exchange."
+        source: zizhi-tongjian-qin-ji-2
+        at: "卷七 秦紀二 始皇帝二十二年（安陵君曰）"
+        quote: "臣受地於魏之先王，願終守之，弗敢易。"
+roles:
+  - role: ruler
+    note: "Lord of a small fief held from the kings of Wei."
+    cite:
+      - says: "The comprehensive mirror records him saying he received the land from the former kings of Wei."
+        source: zizhi-tongjian-qin-ji-2
+        at: "卷七 秦紀二 始皇帝二十二年（臣受地於魏之先王）"
+notes: "Named by title only."

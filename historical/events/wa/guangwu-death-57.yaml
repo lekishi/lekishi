@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  光武帝 died in the front hall of the southern palace at 洛陽 on the 戊戌 day of the second month of
+  中元二年 (29 March 57), aged sixty-two, a few weeks after the 倭奴國 envoy's audience.
+types: [occurrence]
+date:
+  value: 57-03-29
+  calendar: chinese_lunisolar
+  as_written: 二月戊戌
+  cite:
+    - id: guangwu-death-time
+      says: The annals record the emperor dying in the 南宮前殿 on the 戊戌 day of the second month, aged sixty-two.
+      source: hou-hanshu
+      at: 卷一下 光武帝紀下 中元二年二月
+      quote: 二月戊戌，帝崩於南宮前殿，年六十二。
+places:
+  - place: han-luoyang
+    role: site
+    note: The 南宮前殿, which is not placed within the city.
+participants:
+  - actor: guangwu-emperor
+    role: subject
+notes: 二月戊戌 of 中元二年 is 29 March 57 in the Julian calendar.

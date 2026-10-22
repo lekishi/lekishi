@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "The Chu general 項燕 died in the last Chu campaign. The six-states table, the hereditary house of Chu and the comprehensive mirror record Qin killing him in 224 BCE, at or south of 蘄; the biography of 王翦 records the same killing south of 蘄, more than a year before the Chu king's capture, and gives no year. The annals record that he killed himself in 223 BCE, after 昌平君's death."
+types: [occurrence]
+date:
+  value: "224 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "秦始皇二十三年（殺其將項燕）; 王負芻四年（殺將軍項燕）; 二十四年（項燕遂自殺）"
+  cite:
+    - says: "The six-states table records 王翦 and 蒙武 killing 項燕 under 秦始皇二十三年 (224 BCE)."
+      source: shiji
+      at: "卷十五 六國年表 秦始皇二十三年（殺其將項燕）"
+      quote: "二十三。王翦、蒙武擊破楚軍，殺其將項燕。"
+    - says: "The hereditary house of Chu records 王翦 breaking the Chu army at 蘄 and killing 項燕 in the king's fourth year."
+      role: supporting
+      source: shiji-six-states
+      at: "卷四十 楚世家 王負芻四年（殺將軍項燕）"
+      quote: "四年，秦將王翦破我軍於蘄，而殺將軍項燕。"
+    - says: "The comprehensive mirror records him killed south of 蘄 under 始皇帝二十三年."
+      role: supporting
+      source: zizhi-tongjian-qin-ji-2
+      at: "卷七 秦紀二 始皇帝二十三年（殺其將軍項燕）"
+      quote: "王翦追之，令壯士擊，大破楚師，至蘄南，殺其將軍項燕，楚師遂敗走。"
+places:
+  - place: qi-chu
+    role: site
+    note: "At 蘄 in the hereditary house, south of it in the biography and the mirror."
+participants:
+  - actor: xiang-yan
+    role: subject
+  - actor: wang-jian
+    role: other
+  - actor: meng-wu
+    role: other
+    note: "Named by the table."
+notes: "The chapter publishes the year the table, the hereditary house and the mirror give, and the manner they share with the biography of 王翦, which dates the death only relative to the Chu king's capture; the annals' account is kept as a conflicting claim, with 昌平君's death that it records beside it."
+dispute:
+  status: disputed
+  summary: "The annals record 項燕 making 昌平君 king in 224 BCE and killing himself after 昌平君's death in 223 BCE (二十四年); the six-states table, the hereditary house of Chu and the comprehensive mirror record Qin killing him in 224 BCE at or south of 蘄, and the biography of 王翦 records the same killing without a year. The chapter publishes 224 BCE and death in battle, and keeps the annals' year and suicide as a claim."
+cite:
+  - says: "The biography of 王翦 records him pursuing the Chu army to south of 蘄 and killing 項燕, and the Chu king's capture more than a year (歲餘) later; it gives the death no year."
+    role: supporting
+    source: shiji-six-states
+    at: "卷七十三 白起王翦列傳（至蘄南，殺其將軍項燕）"
+    quote: "至蘄南，殺其將軍項燕，荊兵遂敗走。秦因乘勝略定荊地城邑。歲餘，虜荊王負芻"
+  - says: "The annals record 王翦 and 蒙武 breaking the Chu army, 昌平君's death, and 項燕's suicide in 二十四年 (223 BCE)."
+    role: conflicting
+    source: shiji
+    at: "卷六 秦始皇本紀 二十四年（項燕遂自殺）"
+    quote: "二十四年，王翦、蒙武攻荊，破荊軍，昌平君死，項燕遂自殺。"

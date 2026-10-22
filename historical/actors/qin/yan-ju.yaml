@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "顏聚, a general from 齊 serving Zhao who replaced 李牧 with 趙蔥. The hereditary house records him fleeing; the biography of 李牧 records him captured with the king. The accounts differ and both are kept."
+types: [person]
+names:
+  - form: "顏聚"
+    lang: lzh
+    script: Hani
+    roman: "Yan Ju"
+    scheme: pinyin
+    cite:
+      - says: "The hereditary house records 顏聚 fleeing when 趙怱's army broke."
+        source: shiji-six-states
+        at: "卷四十三 趙世家 幽繆王七年（顏聚亡去）"
+        quote: "趙怱軍破，顏聚亡去。"
+roles:
+  - role: soldier
+    note: "Named only in the 229–228 BCE notices."
+    cite:
+      - says: "The biography records him captured with the king."
+        role: conflicting
+        source: shiji-six-states
+        at: "卷八十一 廉頗藺相如列傳（虜趙王遷及其將顏聚）"
+        quote: "虜趙王遷及其將顏聚，遂滅趙。"
+notes: "The hereditary house says he fled and the biography says he was captured; the record publishes neither outcome as decided."
+dispute:
+  status: disputed
+  summary: "The hereditary house of Zhao records 顏聚 fleeing when the Zhao army broke; the biography of 李牧 records him captured with the king. The record keeps both."

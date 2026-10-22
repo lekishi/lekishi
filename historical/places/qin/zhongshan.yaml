@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "中山, the land where the annals record 王翦 stationing his army in 228 BCE as he prepared to attack Yan. The record's label anchor is region-level, at modern 定州, which the cited historical geography records as the old 中山."
+types: [region]
+names:
+  - form: "中山"
+    lang: lzh
+    script: Hani
+    roman: Zhongshan
+    scheme: pinyin
+    cite:
+      - says: "The annals record 王翦's army, meaning to attack Yan, stationed at 中山."
+        source: shiji
+        at: "卷六 秦始皇本紀 十九年（屯中山）"
+        quote: "引兵欲攻燕，屯中山。"
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [114.98448, 38.51577]
+    notes: "Label anchor at modern 定州市, Wikidata Q645183. It is not an asserted historical coordinate: the primary entries name the place and state no site, and the anchor places no wall, palace or battlefield. It is a region-level label; the camp has no site."
+    cite:
+      - says: "The historical geography records its own 定州 as the land of the early Warring States 中山 and the Han 中山 kingdom."
+        role: supporting
+        source: dushi-fangyu-jiyao-six-states
+        at: "卷十四 北直五 真定府 定州"
+        quote: "戰國初爲中山國"
+      - says: "The label anchor is placed at the coordinate Wikidata (CC0) records for the modern place; no historical coordinate is asserted."
+        source: wikidata
+        at: "Q645183 (P625), revision 2526613175"
+modern:
+  - form: "定州市"
+    lang: zh-Hant
+    script: Hani
+    note: "Modern city recorded for orientation only."
+notes: "By 228 BCE 中山 was a region of Zhao, not a state; the record is the region."

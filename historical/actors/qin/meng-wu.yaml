@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "蒙武, the Qin general the annals, the six-states table and the hereditary house of Chu record with 王翦 breaking the Chu army in 224–223 BCE and capturing its king."
+types: [person]
+names:
+  - form: "蒙武"
+    lang: lzh
+    script: Hani
+    roman: "Meng Wu"
+    scheme: pinyin
+    cite:
+      - says: "The annals record 王翦 and 蒙武 attacking Chu and breaking its army in 二十四年 (223 BCE)."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十四年（王翦、蒙武攻荊）"
+        quote: "二十四年，王翦、蒙武攻荊，破荊軍，昌平君死，項燕遂自殺。"
+roles:
+  - role: soldier
+    note: "Second commander of the Chu campaign of 224–223 BCE."
+    cite:
+      - says: "The table records 王翦 and 蒙武 breaking the Chu army in 224 BCE."
+        source: shiji
+        at: "卷十五 六國年表 秦始皇二十三年（王翦、蒙武擊破楚軍）"
+        quote: "二十三。王翦、蒙武擊破楚軍，殺其將項燕。"
+notes: "The father of 蒙恬 in the biography of 蒙恬, which this chapter does not cite."

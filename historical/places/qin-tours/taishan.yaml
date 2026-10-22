@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 泰山, where 始皇 set up a stone and performed the 封 sacrifice in 219 BCE, sheltering from a storm under a tree on the way down. The label anchor sits at the modern mountain; it asserts no historical site.
+types: [landform]
+names:
+  - form: 泰山
+    lang: lzh
+    script: Hani
+    roman: Taishan
+    scheme: pinyin
+    cite:
+      - id: taishan-name
+        says: The annals record 始皇 climbing 泰山, setting up a stone and performing the 封 sacrifice.
+        source: shiji
+        at: 卷六 秦始皇本紀 二十八年（上泰山）
+        quote: 乃遂上泰山，立石，封，祠祀
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [117.1, 36.26667]
+    notes: Label anchor at the modern mountain (Wikidata Q216059). It is not an asserted historical coordinate.
+    cite:
+      - id: taishan-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the modern mountain; no historical coordinate is asserted.
+        source: wikidata
+        at: Q216059 (P625), revision 2558190425
+external_ids:
+  - system: wikidata
+    id: Q216059
+    url: https://www.wikidata.org/wiki/Q216059
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

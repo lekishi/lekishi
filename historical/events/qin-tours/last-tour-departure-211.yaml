@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: On the 癸丑 day of the tenth month of his thirty-seventh year, 始皇 set out on his last tour. 李斯, the 左丞相, went with him; 馮去疾 stayed to keep the capital; his youngest son 胡亥 asked to come and was allowed.
+types: [journey]
+date:
+  value: 211-11 BCE..211-12 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 三十七年十月癸丑
+  cite:
+    - id: last-tour-departure-211-account
+      says: The annals date the departure to 三十七年十月癸丑 and name who went and who stayed.
+      source: shiji
+      at: 卷六 秦始皇本紀 三十七年（始皇出游）
+      quote: 三十七年十月癸丑，始皇出游。左丞相斯從，右丞相去疾守。少子胡亥愛慕請從，上許之。
+places:
+  - place: xianyang
+    role: start
+    note: The annals do not name the starting point; 咸陽 is the capital the right chancellor stayed to keep.
+participants:
+  - actor: qin-king-zheng
+    role: leader
+  - actor: li-si
+    role: participant
+  - actor: hu-hai
+    role: participant
+notes: Qin years began in the tenth month, so the tenth month of the thirty-seventh year fell late in 211 BCE. The window spans the months in which it can fall; the 癸丑 day is not converted.

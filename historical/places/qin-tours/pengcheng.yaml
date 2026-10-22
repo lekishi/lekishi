@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 彭城, where 始皇 fasted and prayed in 219 BCE and sent a thousand men into the 泗水 for the lost 周 tripod. The label anchor sits at the modern city of 徐州; it asserts no historical site.
+types: [settlement]
+names:
+  - form: 彭城
+    lang: lzh
+    script: Hani
+    roman: Pengcheng
+    scheme: pinyin
+    cite:
+      - id: pengcheng-name
+        says: The annals record 始皇 passing 彭城 on his return and fasting and praying to bring the 周 tripod out of the 泗水.
+        source: shiji
+        at: 卷六 秦始皇本紀 二十八年（過彭城）
+        quote: 始皇還，過彭城，齋戒禱祠，欲出周鼎泗水
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [117.18587, 34.26104]
+    notes: Label anchor at the modern city of 徐州 (Wikidata Q57719). It is not an asserted historical coordinate.
+    cite:
+      - id: pengcheng-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the modern city of 徐州; no historical coordinate is asserted.
+        source: wikidata
+        at: Q57719 (P625), revision 2550387979
+external_ids:
+  - system: wikidata
+    id: Q57719
+    url: https://www.wikidata.org/wiki/Q57719
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

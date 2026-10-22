@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "Qi's land passing to Qin in 221 BCE, the last of the six: the hereditary house records Qi destroyed and made a commandery."
+types: [changed_boundaries]
+from: qi-state
+to: qin-state
+date:
+  value: "221 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "王建四十四年（遂滅齊爲郡）; 秦始皇二十六年（秦滅齊）"
+notes: "The commandery is not named in these entries. The relationship records that the state's land passed to Qin; it draws no boundary, because the chapter has no cited territory geometry, and it asserts no causation."
+cite:
+  - says: "The hereditary house records the king captured and removed to 共, and Qi destroyed and made a commandery."
+    source: shiji-six-states
+    at: "卷四十六 田敬仲完世家 王建四十四年（遷之共）"
+    quote: "秦虜王建，遷之共。遂滅齊爲郡。"
+  - says: "The six-states table records Qin capturing the king and destroying Qi."
+    role: supporting
+    source: shiji
+    at: "卷十五 六國年表 秦始皇二十六年（齊 四十四）"
+    quote: "四十四。秦虜王建。秦滅齊。"

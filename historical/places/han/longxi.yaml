@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  隴西, the commandery on the western frontier through which 張騫 left Han territory and from which
+  霍去病 rode out in the spring of 121 BCE; the Qin had held it before the Han. The sources name the
+  commandery and state no extent or seat. The label anchor sits at the modern 臨洮縣, the area of the
+  commandery's seat 狄道 in the usual identification; it asserts no site.
+types: [region]
+names:
+  - form: 隴西
+    lang: lzh
+    script: Hani
+    roman: Longxi
+    scheme: pinyin
+    cite:
+      - id: longxi-name
+        says: The 大宛列傳 records 張騫 and 甘父 leaving through 隴西.
+        source: shiji-han-frontiers
+        at: 卷一百二十三 大宛列傳（俱出隴西）
+        quote: 胡奴甘父俱出隴西
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [103.86126, 35.37731]
+    notes: Region-level label anchor at the modern 臨洮縣, the area usually identified with the
+      commandery's seat 狄道. It is not an asserted historical coordinate and asserts no extent.
+    cite:
+      - id: longxi-anchor
+        says:
+          The label anchor is placed at the modern county's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q632997 (P625), revision 2526613090
+modern:
+  - form: 臨洮縣
+    lang: zh-Hans
+    script: Hani
+    note: Modern county recorded for orientation only; the anchor is a label position.
+notes:
+  The identification of the seat with 狄道 is the usual one in historical geography and is not cited
+  here from a source; the record keeps the anchor a label position until a cited identification
+  replaces it.
+external_ids:
+  - system: wikidata
+    id: Q632997
+    url: https://www.wikidata.org/wiki/Q632997
+    license: CC0-1.0
+    note: The item whose coordinate places the point.

@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  大夏, the settled country of towns and traders south of the 媯水, subject to the 大月氏, where 張騫
+  saw 邛 bamboo staves and 蜀 cloth that had come by way of 身毒. Its capital, the 大宛列傳 says, was
+  藍市城. The label anchor sits at modern Balkh, the usual identification of the capital with
+  Bactra; it asserts no site.
+types: [region]
+names:
+  - form: 大夏
+    lang: lzh
+    script: Hani
+    roman: Daxia
+    scheme: pinyin
+    cite:
+      - id: daxia-name
+        says: The 大宛列傳 places 大夏 more than two thousand 里 south-west of 大宛, south of the 媯水, and names its capital 藍市城.
+        sources:
+          - source: shiji-han-frontiers
+            at: 卷一百二十三 大宛列傳（大夏在大宛西南二千餘里媯水南）
+            quote: 大夏在大宛西南二千餘里媯水南。
+          - source: shiji-han-frontiers
+            at: 卷一百二十三 大宛列傳（其都曰藍市城）
+            quote: 其都曰藍市城，有市販賈諸物。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [66.8989, 36.7581]
+    notes:
+      Region-level label anchor at the modern town of Balkh. 藍市城 is usually identified with Bactra,
+      whose ruins lie at Balkh, but the identification is not cited here from a source and the anchor
+      asserts no site.
+    cite:
+      - id: daxia-anchor
+        says:
+          The label anchor is placed at the modern town's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q182159 (P625), revision 2544486272
+external_ids:
+  - system: wikidata
+    id: Q182159
+    url: https://www.wikidata.org/wiki/Q182159
+    license: CC0-1.0
+    note: The item whose coordinate places the point.

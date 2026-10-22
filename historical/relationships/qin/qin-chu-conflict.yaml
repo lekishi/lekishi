@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "Qin's war on Chu: 王賁's raid of 226 BCE, 李信's defeat of 225 BCE, 王翦's campaign of 224 BCE, and the capture of the Chu king. The relationship asserts no causation and draws no route."
+types: [conflict]
+from: qin-state
+to: chu-state
+notes: "The relationship records separately dated acts on both sides; Chu's defeat of 李信 is a Chu act within the same war. It carries no validity interval, because the sources establish separately dated acts and not a continuous war, and it carries no geometry. It asserts no causation."
+cite:
+  - says: "The six-states table records 王賁 attacking Chu in 秦始皇二十一年."
+    source: shiji
+    at: "卷十五 六國年表 秦始皇二十一年（王賁擊楚）"
+    quote: "二十一。王賁擊楚。"
+  - says: "The biography records Chu routing 李信's army."
+    role: supporting
+    source: shiji-six-states
+    at: "卷七十三 白起王翦列傳（李信攻平與，蒙恬攻寢）"
+    quote: "李信攻平與，蒙恬攻寢，大破荊軍。信又攻鄢郢，破之，於是引兵而西，與蒙恬會城父。荊人因隨之，三日三夜不頓舍，大破李信軍，入兩壁，殺七都尉，秦軍走。"
+  - says: "The six-states table records 王翦 and 蒙武 defeating Chu and capturing its king 負芻 in 秦始皇二十四年."
+    role: supporting
+    source: shiji
+    at: "卷十五 六國年表 秦始皇二十四年（虜其王負芻）"
+    quote: "二十四。王翦、蒙武破楚，虜其王負芻。"

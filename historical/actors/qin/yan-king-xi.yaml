@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "喜, the last king of Yan. After 薊 fell in 226 BCE he withdrew to 遼東; the annals record 王賁 capturing him there in 222 BCE."
+types: [person]
+names:
+  - form: "燕王喜"
+    lang: lzh
+    script: Hani
+    roman: "Yan Wang Xi"
+    scheme: pinyin
+    cite:
+      - says: "The annals record 王賁 capturing 燕王喜 in 遼東."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十五年（得燕王喜）"
+        quote: "大興兵，使王賁將，攻燕遼東，得燕王喜。"
+roles:
+  - role: ruler
+    note: "The span runs from the hereditary house's first year to the thirty-third, aligned with 254–222 BCE by the six-states table."
+    date:
+      value: "254 BCE..222 BCE"
+      mode: duration
+      calendar: chinese_lunisolar
+      as_written: "今王喜元年; 三十三年"
+    cite:
+      - says: "The table records his thirty-third year in 222 BCE and the end of Yan."
+        source: shiji
+        at: "卷十五 六國年表 秦始皇二十五年（燕 三十三）"
+        quote: "三十三。秦虜王喜，拔遼東，秦滅燕。"
+notes: "The hereditary house calls him 今王喜."

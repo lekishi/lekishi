@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In 73 CE the 奉車都尉 竇固 attacked the 匈奴 and gave 班超, until then a copyist in 洛陽, the rank of
+  假司馬. 班超 led a separate force against 伊吾, fought at 蒲類海, and came back with many heads and
+  captives; 竇固 judged him capable and sent him with 郭恂 to the Western Regions.
+types: [campaign]
+date:
+  value: 73
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 永平十六年
+  cite:
+    - id: puleihai-time
+      says: The biography dates 竇固's attack and 班超's battle at 蒲類海 to 永平十六年.
+      source: hou-hanshu
+      at: 卷四十七 班梁列傳 班超 永平十六年
+      quote: 十六年，奉車都尉竇固出擊匈奴，以超爲假司馬，將兵別擊伊吾，戰於蒲類海，多斬首虜而還。
+places:
+  - place: yiwu
+    role: other
+    note: The objective of 班超's separate column.
+  - place: pulei-hai
+    role: site
+participants:
+  - actor: ban-chao
+    role: leader
+  - actor: dou-gu
+    role: leader
+  - actor: xiongnu
+    role: participant
+notes: "The 西域傳 records the same year as the Han taking 伊吾盧 and reopening the Western Regions (明帝永平十六年，漢取伊吾盧，通西域)."

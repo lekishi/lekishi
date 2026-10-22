@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In 127 BCE 衛青 and 李息 rode out of 雲中 to 高闕 and west, struck the 樓煩 and 白羊 kings in the 河南
+  land, and took it; the Han set up the 朔方 and 五原 commanderies there, repaired 蒙恬's old Qin
+  frontier along the river, and gave up a remote county of 上谷 to the 匈奴.
+types: [campaign]
+date:
+  value: 127 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 元朔二年
+  cite:
+    - id: henan-recovery-time
+      says: The 漢書 annals record 衛青 and 李息 going out of 雲中 to 高闕 and the commanderies being set up in the 河南 land in 元朔二年.
+      source: hanshu
+      at: 卷六 武帝紀 元朔二年
+      quote: 遣將軍衛青、李息出雲中，至高闕，遂西至符離，獲首虜數千級。數河南地，置朔方、五原郡。
+    - id: henan-recovery-account
+      says: The 匈奴列傳 records the Han taking the 河南 land, building 朔方, repairing 蒙恬's Qin frontier, and names the year 元朔二年.
+      role: supporting
+      sources:
+        - source: shiji-han-frontiers
+          at: 卷一百十 匈奴列傳（於是漢遂取河南地）
+          quote: 於是漢遂取河南地
+        - source: shiji-han-frontiers
+          at: 卷一百十 匈奴列傳（是歳，漢之元朔二年也）
+          quote: 是歳，漢之元朔二年也。
+places:
+  - place: henan-di
+    role: site
+  - place: shuofang
+    role: other
+    note: The commandery set up in the taken land.
+participants:
+  - actor: wei-qing
+    role: leader
+  - actor: xiongnu
+    role: participant
+  - actor: han-dynasty
+    role: participant

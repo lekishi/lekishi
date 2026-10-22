@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "郭開, the favourite of the king of Zhao whom the biography of 李牧 records taking Qin's gold to slander 李牧 and 司馬尚 as plotting revolt."
+types: [person]
+names:
+  - form: "郭開"
+    lang: lzh
+    script: Hani
+    roman: "Guo Kai"
+    scheme: pinyin
+    cite:
+      - says: "The biography records Qin giving much gold to 郭開 to sow suspicion of 李牧 and 司馬尚."
+        source: shiji-six-states
+        at: "卷八十一 廉頗藺相如列傳（秦多與趙王寵臣郭開金）"
+        quote: "秦多與趙王寵臣郭開金，爲反間，言李牧、司馬尚欲反。"
+roles:
+  - role: official
+    note: "The king's favourite (寵臣); no office is named."
+    cite:
+      - says: "The hereditary house's closing comment records the king trusting 郭開."
+        source: shiji-six-states
+        at: "卷四十三 趙世家 太史公曰（用郭開）"
+        quote: "故誅其良將李牧，用郭開。"
+notes: "Known from the slander only."

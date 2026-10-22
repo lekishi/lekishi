@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "In 229 BCE the Zhao general 李牧, resisting 王翦 with 司馬尚, was replaced by 趙蔥 and 顏聚 and put to death. His biography records that Qin bribed the king's favourite 郭開 to say the two generals meant to revolt, and that when 李牧 refused the order he was seized and beheaded."
+types: [occurrence]
+date:
+  value: "229 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "幽繆王七年（李牧誅）; 趙王遷七年（趙使人微捕得李牧，斬之）; 始皇帝十八年（趙人捕而殺之）"
+  cite:
+    - says: "The hereditary house records, in the king's seventh year, 李牧 put to death and 司馬尚 dismissed."
+      source: shiji-six-states
+      at: "卷四十三 趙世家 幽繆王七年（李牧誅）"
+      quote: "七年，秦人攻趙，趙大將李牧、將軍司馬尚將，撃之。李牧誅，司馬尚免"
+    - says: "The comprehensive mirror records the bribe, the replacement, and 李牧 seized and killed, in 始皇帝十八年."
+      role: supporting
+      source: zizhi-tongjian
+      at: "卷六 秦紀一 始皇帝十八年（趙人捕而殺之）"
+      quote: "李牧不受命，趙人捕而殺之；廢司馬尚。"
+participants:
+  - actor: li-mu
+    role: subject
+  - actor: sima-shang
+    role: other
+    note: "Dismissed."
+  - actor: guo-kai
+    role: other
+    note: "Took Qin's gold and slandered the generals, in the biography."
+  - actor: zhao-cong
+    role: other
+    note: "Replaced 李牧."
+  - actor: yan-ju
+    role: other
+    note: "Replaced 李牧 with 趙蔥."
+  - actor: zhao-king-qian
+    role: leader
+    note: "Ordered the replacement."
+notes: "The sources name no place for the arrest or the death, so the event carries none. The hereditary house's seventh year is aligned with 229 BCE by the six-states table; the biography records Qin's bribe, which the hereditary house does not."
+cite:
+  - says: "The biography records Qin's gold to 郭開, the replacement, and 李牧's seizure and beheading."
+    role: supporting
+    source: shiji-six-states
+    at: "卷八十一 廉頗藺相如列傳（趙使人微捕得李牧，斬之）"
+    quote: "秦多與趙王寵臣郭開金，爲反間，言李牧、司馬尚欲反。趙王乃使趙蔥及齊將顏聚代李牧。李牧不受命，趙使人微捕得李牧，斬之。"

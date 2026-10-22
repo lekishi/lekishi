@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 錢唐, on the 浙江, which 始皇 reached in 210 BCE before crossing the river upstream where the water was calmer. The label anchor sits at the modern city of 杭州; it asserts no historical site.
+types: [settlement]
+names:
+  - form: 錢唐
+    lang: lzh
+    script: Hani
+    roman: Qiantang
+    scheme: pinyin
+    cite:
+      - id: qiantang-name
+        says: The annals record 始皇 passing 丹陽 and reaching 錢唐.
+        source: shiji
+        at: 卷六 秦始皇本紀 三十七年（至錢唐）
+        quote: 過丹陽，至錢唐
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [120.1675, 30.25]
+    notes: Label anchor at the modern city of 杭州 (Wikidata Q4970). It is not an asserted historical coordinate.
+    cite:
+      - id: qiantang-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the modern city of 杭州; no historical coordinate is asserted.
+        source: wikidata
+        at: Q4970 (P625), revision 2552031403
+external_ids:
+  - system: wikidata
+    id: Q4970
+    url: https://www.wikidata.org/wiki/Q4970
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

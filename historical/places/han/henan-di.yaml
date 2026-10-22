@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  河南地, the land within the great northern bend of the Yellow River, which 蒙恬 had taken for Qin,
+  the 匈奴 had recovered, and 衛青 took back in 127 BCE, after which the Han built 朔方. The label anchor
+  sits on the Ordos Plateau; it asserts no extent.
+types: [region]
+names:
+  - form: 河南
+    lang: lzh
+    script: Hani
+    roman: Henan
+    scheme: pinyin
+    note: Not the modern province; the land "south of the river" inside the bend.
+    cite:
+      - id: henan-di-name
+        says: The 匈奴列傳 records 衛青 striking the 樓煩 and 白羊 kings in 河南 and the Han taking the 河南 land.
+        source: shiji-han-frontiers
+        at: 卷一百十 匈奴列傳（於是漢遂取河南地）
+        quote: 擊胡之樓煩、白羊王於河南，得胡首虜數千，牛羊百餘萬。於是漢遂取河南地
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [109.0, 39.0]
+    notes: Region-level label anchor on the Ordos Plateau inside the bend; it asserts no extent.
+    cite:
+      - id: henan-di-anchor
+        says:
+          The label anchor is placed at the modern plateau's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q621143 (P625), revision 2515875266
+external_ids:
+  - system: wikidata
+    id: Q621143
+    url: https://www.wikidata.org/wiki/Q621143
+    license: CC0-1.0
+    note: The item whose coordinate places the point.

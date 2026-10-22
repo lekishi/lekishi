@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "The king of Qin's offer to the lord of 安陵 in 225 BCE: five hundred li of land in exchange for 安陵. The lord refused, saying he held the land from the former kings of Wei, and the comprehensive mirror records the king accepting the refusal."
+types: [diplomacy]
+from: qin-state
+to: anling-jun
+date:
+  value: "225 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "始皇帝二十二年（王使人謂安陵君）"
+notes: "The exchange is told in the comprehensive mirror, which follows the 戰國策; the annals and the six-states table do not record it. It carries no geometry."
+cite:
+  - says: "The comprehensive mirror records the king's offer to the lord of 安陵."
+    source: zizhi-tongjian-qin-ji-2
+    at: "卷七 秦紀二 始皇帝二十二年（王使人謂安陵君曰）"
+    quote: "王使人謂安陵君曰：「寡人欲以五百里地易安陵。」"
+  - says: "The comprehensive mirror records the king accepting the refusal as just."
+    role: supporting
+    source: zizhi-tongjian-qin-ji-2
+    at: "卷七 秦紀二 始皇帝二十二年（王義而許之）"
+    quote: "王義而許之。"

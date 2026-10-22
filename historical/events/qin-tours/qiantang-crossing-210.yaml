@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 始皇 sailed down the 江, viewed 籍柯 and crossed 海渚, passed 丹陽 and came to 錢唐. The 浙江 ran rough, so he went 120 里 west and crossed at a narrow point.
+types: [journey]
+date:
+  value: 211-12 BCE..210-09 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 三十七年
+  cite:
+    - id: qiantang-crossing-210-account
+      says: The annals record the voyage down the 江, 丹陽, 錢唐 and the crossing of the 浙江 upstream.
+      source: shiji
+      at: 卷六 秦始皇本紀 三十七年（過丹陽，至錢唐）
+      quote: 浮江下，觀籍柯，渡海渚。過丹陽，至錢唐。臨浙江，水波惡，乃西百二十里從狹中渡。
+places:
+  - place: danyang
+    role: waypoint
+  - place: qiantang
+    role: waypoint
+participants:
+  - actor: qin-king-zheng
+    role: leader
+notes: The window runs from 雲夢 in the eleventh month to the death in the seventh, which fell on 10 September 210 BCE, so it ends with September; the annals give no month for the stops between. 籍柯 and 海渚 are not recorded as places.

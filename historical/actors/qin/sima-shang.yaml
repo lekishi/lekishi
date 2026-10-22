@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "司馬尚, a Zhao general the biography of 李牧 and the hereditary house of Zhao record resisting Qin with 李牧 in 229 BCE and being dismissed."
+types: [person]
+names:
+  - form: "司馬尚"
+    lang: lzh
+    script: Hani
+    roman: "Sima Shang"
+    scheme: pinyin
+    cite:
+      - says: "The hereditary house records 李牧 and 司馬尚 commanding against Qin, and 司馬尚 dismissed."
+        source: shiji-six-states
+        at: "卷四十三 趙世家 幽繆王七年（李牧誅，司馬尚免）"
+        quote: "李牧誅，司馬尚免，趙怱及齊將顏聚代之。"
+roles:
+  - role: soldier
+    note: "Named only in the 229 BCE notice."
+    cite:
+      - says: "The biography records him dismissed."
+        source: shiji-six-states
+        at: "卷八十一 廉頗藺相如列傳（廢司馬尚）"
+        quote: "趙使人微捕得李牧，斬之。廢司馬尚。"
+notes: "Known only from the 229 BCE notices in the cited sources."

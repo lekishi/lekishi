@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "昌平君, a lord who had served Qin as chancellor (相國) against 嫪毐 in 238 BCE. The annals record him moved to 郢 in 226 BCE, made king of Chu by 項燕 in 224 BCE, and dead in 223 BCE."
+types: [person]
+names:
+  - form: "昌平君"
+    lang: lzh
+    script: Hani
+    roman: "Changping Jun"
+    scheme: pinyin
+    cite:
+      - says: "The annals record the king ordering the chancellor 昌平君 and 昌文君 to raise troops against 嫪毐."
+        source: shiji
+        at: "卷六 秦始皇本紀 九年（令相國昌平君、昌文君發卒攻毐）"
+        quote: "王知之，令相國昌平君、昌文君發卒攻毐。"
+roles:
+  - role: official
+    note: "Chancellor of Qin in the 238 BCE notice."
+    cite:
+      - says: "The annals call him chancellor (相國) in 238 BCE."
+        source: shiji
+        at: "卷六 秦始皇本紀 九年（相國昌平君）"
+  - role: ruler
+    note: "Made king of Chu (荊王) by 項燕 in the annals' 224 BCE notice; the sources give no reign and the hereditary house of Chu does not record it."
+    cite:
+      - says: "The annals record 項燕 making him king of Chu and his death the next year."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十三年、二十四年（立昌平君為荊王；昌平君死）"
+        quote: "荊將項燕立昌平君為荊王，反秦於淮南。"
+notes: "The annals do not name him; later tradition makes him a Chu prince, which the chapter does not cite."

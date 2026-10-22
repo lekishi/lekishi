@@ -1,0 +1,180 @@
+= Territories as control by place
+:state: Decided 2026-10-21 (control by place); the record shape below is proposed for the owner's review and not built
+:toc:
+:toclevels: 2
+
+This note belongs to link:README.adoc[RFD 2]. It settles the territories
+bullet of link:AUTHORING_FORMAT.adoc[the authoring format]'s *Proposed:
+journeys, territories, and media*. Journeys, media and per-claim credit are
+not covered here; journeys are specified in PR #26.
+
+== Decided: control by place, no borders — 2026-10-21
+
+The owner decided on 2026-10-21 that a territory is shown as the places a
+state held: the capitals, commanderies and cities that a cited source records
+under its control at a date. No border is drawn. Borders are a later follow-up
+(<<borders>>).
+
+Two other options were weighed and not chosen.
+
+Schematic areas we draw::
+  Polygons drawn by hand around the held places, labelled schematic. These read
+  as borders whatever the label says, and no source on usable terms supports
+  a line. OpenHistoricalMap has no Warring States polygons, 譚其驤's atlas is
+  in copyright, and historical-basemaps is GPL and too coarse for a ten-year
+  episode.
+Records only::
+  No territory kind yet; the annexations stay `changed_boundaries`
+  relationships. That is honest, but the map shows nothing of control, which
+  RFD 1 asks for.
+
+Why control by place: the sources name exactly this. 史記 and 資治通鑑 record
+邯鄲 taken, 薊 taken, 大梁 flooded and Wei's land made commanderies, and 會稽
+set up. They name no line. A held place is a cited claim the atlas can draw
+without inventing a boundary. The year-by-year table in
+link:QIN_UNIFICATION_FEASIBILITY.adoc[the six states' feasibility note] is the
+first content.
+
+The shape below is proposed for the owner's review. None of it is built until
+the owner accepts it.
+
+== Proposed: the territory record
+
+A territory record is a *dated control snapshot*: one controller, one date,
+and the places a source records it holding then. It is a new kind under
+contract *v1*, `historical/territories/<id>.yaml`, as the authoring format
+already reserves.
+
+[source,yaml]
+----
+# historical/territories/qin-held-225.yaml
+title: Places Qin held after the fall of Wei, 225 BCE
+summary: >-
+  With 大梁 flooded and Wei's land taken, Qin held the old capitals of Han,
+  Zhao and Wei. Yan's king held out at 遼東, Dai at 代, and Chu and Qi
+  remained unconquered.
+controller: qin-state
+date:
+  value: 225 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 二十二年（盡取其地）
+places:
+  - place: xianyang
+    role: seat
+    cite:
+      - says: The biography of 荊軻 records the king receiving the Yan envoys at 咸陽 in 227 BCE.
+        source: shiji-six-states
+        at: 卷八十六 刺客列傳（見燕使者咸陽宮）
+  - place: yingchuan        # gained 230 BCE: han-annexation-yingchuan
+  - place: handan           # gained 228 BCE: handan-fall-228
+  - place: ji-yan           # gained 226 BCE: ji-fall-226
+  - place: daliang
+    gained: daliang-flood-225
+cite:
+  - says: >-
+      The annals record Qin taking all Wei's land in 二十二年, after Han in
+      十七年, 邯鄲 in 十九年 and 薊 in 二十一年.
+    source: shiji
+    at: 卷六 秦始皇本紀 十七年–二十二年
+----
+
+*The record.*
+
+* `controller` is an actor: a state, a dynasty, or a polity. Religious presence
+  and cultural influence are not control and never use this kind (RFD 2,
+  "routes and areas are published with their interpretation").
+* `date` is the window the cited sources support, in the usual date grammar.
+  It must be bounded: an open-ended snapshot is an error, because "from then
+  on" is an inference no source states.
+* `places` lists what the controller held in that window. Each entry is a
+  place id, or an object with these fields:
+** `role`: `seat` for a capital or administrative seat, or `held` (the
+   default).
+** `gained`: the event or relationship id recording how the controller came to
+   hold the place. It lets the card say "taken in 228 BCE" without a second
+   claim.
+** `note` and `cite`, as on other references. Without its own `cite`, an entry
+   is supported by the snapshot's `cite`.
+* `cite` supports the snapshot as a whole: the controller, the window, and
+  every entry without its own cite. `dispute` works as it does on other kinds.
+* A snapshot lists only places a source records held. It is never "everything
+  Qin held", and the card says so.
+
+*What is drawn.*
+
+* Within the snapshot's window, each listed place with an asserted coordinate,
+  or with a `display_anchor`, gets the controller's tint and a "held by" mark
+  on its existing marker. A `seat` gets a distinct mark. Nothing is filled,
+  and no hull or line joins the places.
+* A listed place with `unknown` geometry is named on the card and not drawn.
+  東陽 and 淮南 are the cases.
+* Outside every snapshot's window, the atlas shows no control. It never
+  carries a snapshot forward and never interpolates between two snapshots
+  (RFD 1). A gap between snapshots is a gap in the evidence, and the card
+  says so.
+* Two controllers may hold one place in overlapping windows only when one of
+  the snapshots carries a `dispute`. The map then shows both, marked
+  disputed.
+
+*Chapters.* A chapter publishes a snapshot by listing it in the manifest's
+`include`. Every listed place, and every `gained` record, must also be reached
+by the chapter. A snapshot reached by an approved chapter is in that chapter's
+digest, like any other record.
+
+*Validation the compiler adds* (each becomes a v1 vector):
+
+. A controller that is not an actor, or a place or `gained` id that does not
+  exist.
+. No places, or one place listed twice in a snapshot.
+. An unbounded `date`.
+. A `gained` record dated after the snapshot's window ends.
+. One place held by two controllers in overlapping windows with no `dispute`
+  on either snapshot.
+
+== First content: the six states, 230–221 BCE
+
+Once the shape is accepted, the six states chapter gets one snapshot per state
+at each change the sources date. The places come from that chapter's existing
+records, except 壽春, Chu's last seat, which needs a new place record.
+
+[cols="1,3"]
+|===
+|Controller |Snapshots
+
+|Qin
+|230 (Han's land as 潁川), 228 (adds 邯鄲), 226 (adds 薊), 225 (adds 大梁),
+224 (adds 陳 and 平輿), 222 (adds 遼東, 代 and 會稽), 221 (adds 臨淄)
+
+|Zhao
+|229 (邯鄲 as seat)
+
+|Dai
+|228–222 (代 as seat, with 上谷 where the sources place the joint camp)
+
+|Yan
+|229–226 (薊 as seat); 226–222 (遼東)
+
+|Wei
+|229–225 (大梁 as seat)
+
+|Chu
+|229–223 (壽春 as seat, which needs a new place record; 陳 and 平輿 until 224)
+
+|Qi
+|229–221 (臨淄 as seat)
+|===
+
+The 224 and 223 snapshots of Chu carry the dispute over the year of the king's
+capture, as the event `chu-king-captured` already does.
+
+== Borders: a later follow-up
+
+[[borders]]
+Drawn borders are deferred, not refused. An `area:` field holding a GeoJSON
+file, with its `basis` and cite, can be added to the snapshot later without
+changing what a held place means. It needs a source for the line on usable
+terms. Candidates to look for: a public-domain atlas plate (for example a
+Qing or early Republican historical atlas), a CC0 or CC BY dataset, or an
+attributed scholarly reconstruction that we redraw and cite as interpretation.
+Until then, no polygon ships.

@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In 119 BCE, after 趙信 had advised the 單于 to wait north of the desert, 衛青 led the western army out
+  of 定襄 across it and met the 單于's picked troops. After a day's fighting a great wind rose at dusk;
+  the Han closed on both wings and the 單于 broke out to the north-west with a few hundred riders. The
+  army pursued through the night, reached 闐顏山 and the 趙信 town, fed on the 匈奴's stored grain, and
+  burned the rest. 李廣, lost on the eastern road, killed himself.
+types: [campaign]
+date:
+  value: 119 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 元狩四年（夏）
+  cite:
+    - id: mobei-battle-time
+      says: The 漢書 annals record 衛青 surrounding the 單于 north of the desert and turning back at 闐顏山 in 元狩四年.
+      source: hanshu
+      at: 卷六 武帝紀 元狩四年
+      quote: 大將軍衛青將四將軍出定襄，將軍去病出代，各將五萬騎。步兵踵軍後數十萬人。青至幕北圍單于，斬首萬九千級，至闐顏山乃還。
+    - id: mobei-battle-account
+      says: The 匈奴列傳 records the day's fighting, the wind at dusk, and the 單于's escape to the north-west.
+      role: supporting
+      source: shiji-han-frontiers
+      at: 卷一百十 匈奴列傳（與漢大將軍接戰一日）
+      quote: 與漢大將軍接戰一日，會暮，大風起，漢兵縱左右翼圍單于。單于自度戰不能如漢兵，單于遂獨身與壯騎數百潰漢圍西北遁走。
+places:
+  - place: dingxiang
+    role: start
+  - place: zhao-xin-cheng
+    role: end
+participants:
+  - actor: wei-qing
+    role: leader
+  - actor: yizhixie-chanyu
+    role: participant
+  - actor: li-guang
+    role: participant
+    note: Lost on the eastern road and late; the 衛將軍驃騎列傳 records that he killed himself.
+  - actor: xiongnu
+    role: participant
+notes:
+  "The annals list the campaign after the summer notices of 元狩四年 and give no season of its own. The
+  battlefield is not named and is not recorded; the event runs from 定襄 to the 趙信 town."

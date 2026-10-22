@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 馬邑, the frontier town in 鴈門 that the Han offered as bait in 133 BCE, with three hundred
+  thousand men hidden in the valleys around it. The label anchor sits at the modern 朔州市, whose
+  城區 carries the 馬邑 name in local history; it asserts no site.
+types: [settlement]
+names:
+  - form: 馬邑
+    lang: lzh
+    script: Hani
+    roman: Mayi
+    scheme: pinyin
+    cite:
+      - id: mayi-name
+        says: The 匈奴列傳 records the Han using a man of 馬邑 to pretend to sell the town to the 單于.
+        source: shiji-han-frontiers
+        at: 卷一百十 匈奴列傳（詳爲賣馬邑城以誘單于）
+        quote: 詳爲賣馬邑城以誘單于
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [112.42923, 39.34078]
+    notes:
+      Label anchor at the modern 朔州市. The identification of Han 馬邑 with the area of 朔州 is the usual
+      one and is not cited here from a source; the anchor asserts no wall or ambush site.
+    cite:
+      - id: mayi-anchor
+        says:
+          The label anchor is placed at the modern city's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q73020 (P625), revision 2549833401
+external_ids:
+  - system: wikidata
+    id: Q73020
+    url: https://www.wikidata.org/wiki/Q73020
+    license: CC0-1.0
+    note: The item whose coordinate places the point.

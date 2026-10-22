@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "王賁, son of 王翦 and Qin general. The annals record him attacking Chu in 226 BCE, flooding 大梁 in 225 BCE, capturing the kings of Yan and 代 in 222 BCE, and capturing the king of Qi in 221 BCE."
+types: [person]
+names:
+  - form: "王賁"
+    lang: lzh
+    script: Hani
+    roman: "Wang Ben"
+    scheme: pinyin
+    cite:
+      - says: "The annals record 王賁 flooding 大梁 in 二十二年 (225 BCE)."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十二年（王賁攻魏）"
+        quote: "王賁攻魏，引河溝灌大梁，大梁城壞，其王請降，盡取其地。"
+roles:
+  - role: soldier
+    note: "Commander in the notices of 226, 225, 222 and 221 BCE; no continuous command is asserted."
+    cite:
+      - says: "The biography records him as 王翦's son and his breaking of Chu and settling of Wei."
+        source: shiji-six-states
+        at: "卷七十三 白起王翦列傳（秦使翦子王賁擊荊）"
+        quote: "秦使翦子王賁擊荊，荊兵敗。還擊魏，魏王降，遂定魏地。"
+notes: "The annals' 226 BCE notice reads 王賁攻（薊）［荊］ in the transcription, an editor's correction; the chapter cites the six-states table (王賁擊楚) for that year instead."

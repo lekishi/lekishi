@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "After Wei fell in 225 BCE the king of Qin offered the lord of 安陵 five hundred 里 of land in exchange for his small fief. The comprehensive mirror records the lord declining, since he had received it from the former kings of Wei, and the king respecting his loyalty and agreeing."
+types: [exchange]
+date:
+  value: "225 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "始皇帝二十二年（欲以五百里地易安陵）"
+  cite:
+    - says: "The comprehensive mirror records the offer and the refusal under 始皇帝二十二年 (225 BCE)."
+      source: zizhi-tongjian-qin-ji-2
+      at: "卷七 秦紀二 始皇帝二十二年（王使人謂安陵君曰）"
+      quote: "王使人謂安陵君曰：「寡人欲以五百里地易安陵。」"
+places:
+  - place: anling
+    role: site
+    note: "The fief offered for exchange."
+participants:
+  - actor: qin-king-zheng
+    role: leader
+  - actor: anling-jun
+    role: participant
+notes: "An act of diplomacy, not war. The annals do not record it; the mirror's account belongs to the 戰國策 tradition, and in the mirror the king accepts the refusal (王義而許之). The cited historical geography repeats the offer under its 安陵城 entry."
+cite:
+  - says: "The comprehensive mirror records the king accepting the refusal."
+    role: supporting
+    source: zizhi-tongjian-qin-ji-2
+    at: "卷七 秦紀二 始皇帝二十二年（王義而許之）"
+    quote: "王義而許之。"

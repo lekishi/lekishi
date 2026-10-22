@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "薊, the capital of 燕. The annals record Qin taking the city of 薊 in 226 BCE, and the hereditary house of Yan records it under the king's twenty-ninth year. The record's label anchor sits where Wikidata places the old city, inside modern Beijing."
+types: [capital]
+names:
+  - form: "薊"
+    lang: lzh
+    script: Hani
+    roman: Ji
+    scheme: pinyin
+    cite:
+      - says: "The annals record Qin breaking the Yan crown prince's army and taking the city of 薊 in 二十一年 (226 BCE)."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十一年（取燕薊城）"
+        quote: "乃益發卒詣王翦軍，遂破燕太子軍，取燕薊城，得太子丹之首。"
+      - says: "The hereditary house of Yan records Qin taking 薊 in the twenty-ninth year."
+        role: supporting
+        source: shiji-six-states
+        at: "卷三十四 燕召公世家 燕王喜二十九年（秦攻拔我薊）"
+        quote: "二十九年，秦攻拔我薊，燕王亡，徙居遼東，斬丹以獻秦。"
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [116.38242, 39.89426]
+    notes: "Label anchor at the coordinate Wikidata records for the old city of 薊 in Beijing, Wikidata Q6192085. It is not an asserted historical coordinate: the primary entries name the place and state no site, and the anchor places no wall, palace or battlefield. The historical geography's entry names 王賁 as the general who took the city, where the annals and the comprehensive mirror name 王翦; the record does not use the gazetteer for the general."
+    cite:
+      - says: "The historical geography records 薊城 as the old Yan capital, east of its own prefectural seat."
+        role: supporting
+        source: dushi-fangyu-jiyao-six-states
+        at: "卷十一 北直二 順天府 宛平縣（薊城）"
+        quote: "今府治東。古燕都也。"
+      - says: "The label anchor is placed at the coordinate Wikidata (CC0) records for the modern place; no historical coordinate is asserted."
+        source: wikidata
+        at: "Q6192085 (P625), revision 2482494659"
+modern:
+  - form: "北京"
+    lang: zh-Hant
+    script: Hani
+    note: "Recorded for orientation; the old city's extent is not asserted."
+notes: "The record names the city 薊; the annals' form is 燕薊城."

@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In the summer of 121 BCE 李廣 and 張騫 rode out of 右北平 by separate roads. In the 史記's account
+  李廣, ahead with four thousand horse, was surrounded by the 左賢王's tens of thousands and fought for
+  two days, losing more than half his men, until 張騫 arrived with ten thousand and the 匈奴 withdrew;
+  the 漢書 annals instead record that 李廣 lost his whole force of four thousand and escaped alone. Both
+  record 張騫 condemned for coming late and buying his life by becoming a commoner.
+types: [campaign]
+date:
+  value: 121 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 元狩二年（匈奴入鴈門…遣衛尉張騫、郎中令李廣皆出右北平）
+  cite:
+    - id: youbeiping-battle-time
+      says: The 漢書 annals record 張騫 and 李廣 going out of 右北平 in 元狩二年.
+      source: hanshu
+      at: 卷六 武帝紀 元狩二年
+      quote: 遣衛尉張騫、郎中令李廣皆出右北平。
+places:
+  - place: youbeiping
+    role: start
+participants:
+  - actor: li-guang
+    role: leader
+  - actor: zhang-qian
+    role: leader
+  - actor: xiongnu
+    role: participant
+dispute:
+  status: disputed
+  summary:
+    "The histories differ on how 李廣's column ended. The 衛將軍驃騎列傳 has him surrounded for two days,
+    losing more than half his men, until 張騫's arrival made the 匈奴 withdraw; the 漢書 annals record
+    that he lost all four thousand men and came back alone, and say nothing of 張騫 relieving him. The
+    chapter publishes the 史記's account and keeps the annals' as a conflicting claim."
+cite:
+  - id: youbeiping-battle-account
+    says: The 衛將軍驃騎列傳 records 李廣 surrounded for two days, losing more than half his men, the 匈奴 withdrawing when the 博望侯 arrived, and the 博望侯 condemned for delay.
+    source: shiji-han-frontiers
+    at: 卷一百十一 衛將軍驃騎列傳（郎中令與戰二日）
+    quote: 匈奴左賢王將數萬騎圍郎中令，郎中令與戰二日，死者過半，所殺亦過當。博望侯至，匈奴兵引去。博望侯坐行留，當斬，贖為庶人。
+  - id: youbeiping-battle-annals
+    says: The 漢書 annals record that 李廣 killed more than three thousand 匈奴 but lost his whole force of four thousand and escaped alone, and that 張騫 was condemned for coming late.
+    role: conflicting
+    source: hanshu
+    at: 卷六 武帝紀 元狩二年
+    quote: 廣殺匈奴三千餘人，盡亡其軍四千人，獨身脫還，及公孫敖、張騫皆後期，當斬，贖為庶人。
+notes:
+  The place of the two-day battle is not named and is not recorded; the event is placed only at the
+  commandery the two columns left from.

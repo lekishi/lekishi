@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "咸陽, the Qin capital. The biography of the assassins records the king receiving 荊軻 as Yan's envoy in the 咸陽宮 in 227 BCE, and the annals record the weapons of the conquered states gathered there and twelve myriad wealthy households moved there in 221 BCE. The record's label anchor sits at the archaeological site Wikidata records as the Qin capital; no site is asserted."
+types: [capital]
+names:
+  - form: "咸陽"
+    lang: lzh
+    script: Hani
+    roman: Xianyang
+    scheme: pinyin
+    cite:
+      - says: "The biography records the king receiving Yan's envoys in the 咸陽宮."
+        source: shiji-six-states
+        at: "卷八十六 刺客列傳（見燕使者咸陽宮）"
+        quote: "秦王聞之，大喜，乃朝服，設九賓，見燕使者咸陽宮。"
+      - says: "The annals record the weapons of the realm gathered at 咸陽 after the unification."
+        role: supporting
+        source: shiji
+        at: "卷六 秦始皇本紀 二十六年（收天下兵，聚之咸陽）"
+        quote: "收天下兵，聚之咸陽，銷以為鐘鐻，金人十二"
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [108.85778, 34.41389]
+    notes: "Label anchor at the archaeological site Wikidata records as the Qin capital (秦咸陽城), Wikidata Q2360265. It is not an asserted historical coordinate: the primary entries name the place and state no site, and the anchor places no wall, palace or battlefield."
+    cite:
+      - says: "The historical geography records three old cities at 咸陽, the one thirty 里 east of its own county seat being the Qin capital."
+        role: supporting
+        source: dushi-fangyu-jiyao-six-states
+        at: "卷五十三 陝西二 西安府 咸陽縣（咸陽城）"
+        quote: "其一在今縣東三十里，秦所都也"
+      - says: "The label anchor is placed at the coordinate Wikidata (CC0) records for the modern place; no historical coordinate is asserted."
+        source: wikidata
+        at: "Q2360265 (P625), revision 2515921031"
+modern:
+  - form: "秦咸陽城遺址"
+    lang: zh-Hant
+    script: Hani
+    note: "The archaeological site, recorded for orientation; the anchor is a label position, not an identification of any palace."
+notes: "The capital is named in the biography (the 咸陽宮) and the annals; neither states a site. The anchor uses the archaeological site's dataset coordinate, and the identification of the Qin city is the historical geography's, recorded as that work's statement."

@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: 廣德, king of 于窴, who had broken 莎車 and dominated the southern road when 班超 arrived in 73 CE; after 班超 killed his shaman he killed the 匈奴 envoys and submitted.
+types: [person]
+names:
+  - form: 廣德
+    lang: lzh
+    script: Hani
+    roman: Guangde
+    scheme: pinyin
+    cite:
+      - id: guangde-name
+        says: The biography records that the 于窴 king 廣德 had just broken 莎車 and dominated the southern road.
+        source: hou-hanshu
+        at: 卷四十七 班梁列傳 班超（于窴王廣德新攻破莎車）
+        quote: 是時于窴王廣德新攻破莎車，遂雄張南道
+roles:
+  - role: ruler
+    cite:
+      - id: guangde-ruler
+        says: The 于窴 entry records 廣德, nephew of 休莫霸, being made king and then destroying 莎車.
+        source: hou-hanshu
+        at: 卷八十八 西域傳 于窴國
+        quote: 休莫霸死，兄子廣德立，後遂滅莎車，其國轉盛。

@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "After 李信's defeat the king rode to 頻陽 to apologise to 王翦 and ask him back. 王翦 agreed only with six hundred thousand men; the king saw him off at 霸上, where 王翦 asked for fine fields and houses so the king would not suspect a general holding the whole army. The comprehensive mirror dates the recall to 225 BCE, the annals to 224 BCE."
+types: [occurrence, council]
+date:
+  value: "225 BCE..224 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "始皇帝二十二年（王送至霸上）; 二十三年（秦王復召王翦，彊起之）"
+  cite:
+    - says: "The comprehensive mirror records the recall and the farewell at 霸上 under 始皇帝二十二年 (225 BCE)."
+      source: zizhi-tongjian-qin-ji-2
+      at: "卷七 秦紀二 始皇帝二十二年（王送至霸上）"
+      quote: "於是王翦將六十萬人伐楚。王送至霸上，王翦請美田宅甚眾。"
+    - says: "The annals record the king recalling 王翦 and forcing him to take command in 二十三年 (224 BCE)."
+      role: conflicting
+      source: shiji
+      at: "卷六 秦始皇本紀 二十三年（秦王復召王翦）"
+      quote: "二十三年，秦王復召王翦，彊起之，使將擊荊。"
+places:
+  - place: pinyang
+    role: site
+    note: "Where the king went to ask him back."
+  - place: bashang
+    role: end
+    note: "Where the king saw him off; it has no position."
+participants:
+  - actor: qin-king-zheng
+    role: leader
+  - actor: wang-jian
+    role: subject
+notes: "The window spans the two years the sources give, and the event is never shown at a point inside it. The cited historical geography also dates the farewell at 霸上 to 始皇二十二年."
+dispute:
+  status: disputed
+  summary: "The comprehensive mirror places the recall and the farewell in 始皇帝二十二年 (225 BCE), and the historical geography follows it; the annals place the recall in 二十三年 (224 BCE); the biography of 王翦 gives no year. The chapter keeps both years as a window and decides neither."
+cite:
+  - says: "The biography records the king riding to 頻陽 and seeing 王翦 off at 灞上."
+    role: supporting
+    source: shiji-six-states
+    at: "卷七十三 白起王翦列傳（始皇自送至灞上）"
+    quote: "於是王翦將兵六十萬人，始皇自送至灞上。"

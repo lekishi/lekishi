@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  蘢城, the place where the 匈奴 held their great gathering of the fifth month to sacrifice to their
+  ancestors, heaven and earth, and which 衛青 reached in 129 BCE. Its site is unknown.
+types: [religious_site]
+names:
+  - form: 蘢城
+    lang: lzh
+    script: Hani
+    roman: Longcheng
+    scheme: pinyin
+    cite:
+      - id: longcheng-name
+        says: The 匈奴列傳 records that the 匈奴 gathered at 蘢城 in the fifth month to sacrifice to their ancestors, heaven and earth, and spirits.
+        source: shiji-han-frontiers
+        at: 卷一百十 匈奴列傳（五月，大會蘢城）
+        quote: 五月，大會蘢城，祭其先、天地、鬼神。
+  - form: 龍城
+    lang: lzh
+    script: Hani
+    note: The 漢書 annals' spelling.
+    cite:
+      - id: longcheng-hanshu
+        says: The 漢書 annals record 衛青 reaching 龍城 and taking seven hundred heads.
+        source: hanshu
+        at: 卷六 武帝紀 元光六年
+        quote: 青至龍城，獲首虜七百級
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: Neither history places 蘢城, and no position is asserted.
+    cite:
+      - id: longcheng-unplaced
+        says: The cited entry names 蘢城 and states no site for it, so no position is asserted.
+        source: shiji-han-frontiers
+        at: 卷一百十 匈奴列傳（五月，大會蘢城）

@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "假, the last king of Wei. The annals record him asking to surrender when 大梁's wall broke in 225 BCE; the comprehensive mirror records that he surrendered and was killed."
+types: [person]
+names:
+  - form: "魏王假"
+    lang: lzh
+    script: Hani
+    roman: "Wei Wang Jia"
+    scheme: pinyin
+    cite:
+      - says: "The hereditary house of Wei records Qin flooding 大梁 and capturing king 假 in his third year."
+        source: shiji-six-states
+        at: "卷四十四 魏世家 王假三年（秦灌大梁，虜王假）"
+        quote: "三年，秦灌大梁，虜王假，遂滅魏以爲郡縣。"
+roles:
+  - role: ruler
+    note: "The span runs from the hereditary house's 元年 (227 BCE in the six-states table) to his third year."
+    date:
+      value: "227 BCE..225 BCE"
+      mode: duration
+      calendar: chinese_lunisolar
+      as_written: "王假元年; 三年"
+    cite:
+      - says: "The table records his capture in his third year."
+        source: shiji
+        at: "卷十五 六國年表 秦始皇二十二年（魏 三）"
+        quote: "三。秦虜王假。"
+notes: "The sources differ on his fate after the surrender (captured, or surrendered and killed); see the event daliang-flood-225."

@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "辛勝, a Qin general the annals name with 王翦 attacking Yan in 227 BCE."
+types: [person]
+names:
+  - form: "辛勝"
+    lang: lzh
+    script: Hani
+    roman: "Xin Sheng"
+    scheme: pinyin
+    cite:
+      - says: "The annals record the king sending 王翦 and 辛勝 against Yan."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十年（使王翦、辛勝攻燕）"
+        quote: "而使王翦、辛勝攻燕。"
+roles:
+  - role: soldier
+    note: "Named only in the 227 BCE notice."
+    cite:
+      - says: "The annals name him as a general sent against Yan."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十年（使王翦、辛勝攻燕）"
+notes: "Known from this notice only."

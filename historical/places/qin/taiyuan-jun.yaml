@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "太原, the Qin commandery in the north-west of the old Zhao lands. The annals record the king of Qin returning home from 邯鄲 by way of 太原 and 上郡 in 228 BCE. The record's label anchor is region-level, at modern 太原."
+types: [region]
+names:
+  - form: "太原"
+    lang: lzh
+    script: Hani
+    roman: Taiyuan
+    scheme: pinyin
+    cite:
+      - says: "The annals record the king returning from 邯鄲 by way of 太原 and 上郡."
+        source: shiji
+        at: "卷六 秦始皇本紀 十九年（從太原、上郡歸）"
+        quote: "秦王還，從太原、上郡歸。"
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [112.54245, 37.87326]
+    notes: "Label anchor at modern 太原市, Wikidata Q72778. It is not an asserted historical coordinate: the primary entries name the place and state no site, and the anchor places no wall, palace or battlefield. It is a region-level label; the route of the king's return is not drawn."
+    cite:
+      - says: "The historical geography records 蒙驁 settling 太原 for Qin in 莊襄王二年."
+        role: supporting
+        source: dushi-fangyu-jiyao-six-states
+        at: "卷四十 山西二 太原府"
+        quote: "秦莊襄王二年，蒙驁擊趙，定太原"
+      - says: "The label anchor is placed at the coordinate Wikidata (CC0) records for the modern place; no historical coordinate is asserted."
+        source: wikidata
+        at: "Q72778 (P625), revision 2526614020"
+modern:
+  - form: "太原市"
+    lang: zh-Hant
+    script: Hani
+    note: "Modern city recorded for orientation only."
+notes: "The annals' opening already lists 太原 among Qin's commanderies when 政 became king; the record is the commandery region."

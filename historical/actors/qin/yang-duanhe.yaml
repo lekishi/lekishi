@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "楊端和, the Qin general the annals call 端和 when he leads the 河內 army and besieges 邯鄲 in 229 BCE."
+types: [person]
+names:
+  - form: "楊端和"
+    lang: lzh
+    script: Hani
+    roman: "Yang Duanhe"
+    scheme: pinyin
+    cite:
+      - says: "The annals name 楊端和 among the generals who attacked 鄴 in 十一年 (236 BCE)."
+        source: shiji
+        at: "卷六 秦始皇本紀 十一年（王翦、桓齮、楊端和攻鄴）"
+        quote: "十一年，王翦、桓齮、楊端和攻鄴，取九城。"
+  - form: "端和"
+    lang: lzh
+    script: Hani
+    note: "The form the 229 BCE notice uses."
+    cite:
+      - says: "The annals' 229 BCE form."
+        source: shiji
+        at: "卷六 秦始皇本紀 十八年（端和圍邯鄲城）"
+        quote: "端和圍邯鄲城。"
+roles:
+  - role: soldier
+    note: "Besieger of 邯鄲 in 229 BCE in the annals."
+    cite:
+      - says: "The annals record 端和 leading the 河內 army and besieging 邯鄲."
+        source: shiji
+        at: "卷六 秦始皇本紀 十八年（端和圍邯鄲城）"
+        quote: "端和將河內，羌瘣伐趙，端和圍邯鄲城。"
+notes: "The 229 BCE notice writes 端和 without the surname; the record identifies him with the 楊端和 of the annals' earlier notices, as an editorial reading."

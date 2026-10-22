@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 之罘, the coastal hill 始皇 climbed in 219 and 218 BCE and again in 210 BCE, where he set up inscribed stones and, on the last tour, shot a great fish. The label anchor sits at the modern island 芝罘島; it asserts no historical site.
+types: [landform]
+names:
+  - form: 之罘
+    lang: lzh
+    script: Hani
+    roman: Zhifu
+    scheme: pinyin
+    cite:
+      - id: zhifu-name
+        says: The annals record 始皇 climbing 之罘 and setting up a stone praising Qin.
+        source: shiji
+        at: 卷六 秦始皇本紀 二十八年（登之罘）
+        quote: 登之罘，立石頌秦德焉而去
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [121.37953, 37.61206]
+    notes: Label anchor at the modern island 芝罘島 (Wikidata Q1351822). It is not an asserted historical coordinate.
+    cite:
+      - id: zhifu-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the modern island 芝罘島; no historical coordinate is asserted.
+        source: wikidata
+        at: Q1351822 (P625), revision 2515902959
+external_ids:
+  - system: wikidata
+    id: Q1351822
+    url: https://www.wikidata.org/wiki/Q1351822
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

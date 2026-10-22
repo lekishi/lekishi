@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  班超 (字 仲升), of 扶風 平陵, younger brother of the historian 班固, who left copying documents in 洛陽 to
+  fight under 竇固 in 73 CE, spent thirty-one years in the Western Regions with a few dozen men and
+  allied troops, became 都護 in 91 and 定遠侯 in 95, and came home to 洛陽 to die in 102 at
+  seventy-one.
+types: [person]
+names:
+  - form: 班超
+    lang: lzh
+    script: Hani
+    roman: Ban Chao
+    scheme: pinyin
+    cite:
+      - id: ban-chao-name
+        says: The biography opens by naming 班超, styled 仲升, of 扶風 平陵, the youngest son of 班彪.
+        source: hou-hanshu
+        at: 卷四十七 班梁列傳 班超 篇首
+        quote: 班超字仲升，扶風平陵人，徐令彪之少子也。
+  - form: 定遠侯
+    lang: lzh
+    script: Hani
+    note: His title from 永元七年 (95 CE).
+    cite:
+      - id: ban-chao-dingyuan
+        says: The decree quoted in the biography enfeoffs him as 定遠侯 with a thousand households.
+        source: hou-hanshu
+        at: 卷四十七 班梁列傳 班超（其封超爲定遠侯）
+        quote: 其封超爲定遠侯，邑千戶。
+roles:
+  - role: envoy
+    note: Sent with 郭恂 to the Western Regions after the 蒲類海 battle; later 軍司馬, 將兵長史 and 都護.
+    date:
+      value: 73..102
+      mode: duration
+      calendar: chinese_lunisolar
+      as_written: 十六年…超在西域三十一歲。十四年八月至洛陽
+    cite:
+      - id: ban-chao-years
+        says: The biography records thirty-one years in the Western Regions and his arrival at 洛陽 in the eighth month of 永元十四年.
+        source: hou-hanshu
+        at: 卷四十七 班梁列傳 班超（超在西域三十一歲）
+        quote: 超在西域三十一歲。十四年八月至洛陽，拜爲射聲校尉。
+  - role: official
+    note: 西域都護 from 永元三年 (91 CE), residing at 龜茲's 它乾城.
+    date:
+      value: 91..102
+      mode: duration
+      calendar: chinese_lunisolar
+      as_written: 明年（永元三年），龜茲、姑墨、溫宿皆降，乃以超爲都護
+    cite:
+      - id: ban-chao-protector
+        says: The biography records that when 龜茲, 姑墨 and 溫宿 submitted he was made 都護 and lived at 它乾城.
+        source: hou-hanshu
+        at: 卷四十七 班梁列傳 班超（乃以超爲都護）
+        quote: 明年，龜茲、姑墨、溫宿皆降，乃以超爲都護，徐幹爲長史。

@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "趙王遷 (幽繆王), the last king of Zhao at 邯鄲. The six-states table records 王翦 capturing him at 邯鄲 in his eighth year (228 BCE); the hereditary house records him surrendering."
+types: [person]
+names:
+  - form: "趙王遷"
+    lang: lzh
+    script: Hani
+    roman: "Zhao Wang Qian"
+    scheme: pinyin
+    cite:
+      - says: "The six-states table records 王翦 capturing king 遷 at 邯鄲."
+        source: shiji
+        at: "卷十五 六國年表 秦始皇十九年（王翦拔趙，虜王遷邯鄲）"
+        quote: "十九。王翦拔趙，虜王遷邯鄲。帝太后薨。"
+  - form: "幽繆王"
+    lang: lzh
+    script: Hani
+    note: "The hereditary house's title."
+    cite:
+      - says: "The hereditary house's title for him."
+        source: shiji-six-states
+        at: "卷四十三 趙世家 幽繆王遷元年"
+        quote: "幽繆王遷元年，城柏人。"
+roles:
+  - role: ruler
+    note: "The span runs from the hereditary house's 元年 to the eighth year, aligned with 235–228 BCE by the six-states table."
+    date:
+      value: "235 BCE..228 BCE"
+      mode: duration
+      calendar: chinese_lunisolar
+      as_written: "幽繆王遷元年; 八年"
+    cite:
+      - says: "The table records his eighth year in 228 BCE, with 公子嘉 making himself king of 代."
+        source: shiji
+        at: "卷十五 六國年表 秦始皇十九年（趙 八）"
+        quote: "八。秦王翦虜王遷邯鄲。公子嘉自立為代王。"
+notes: "The hereditary house calls him 幽繆王; the closing comment records that his father set aside the heir 嘉 for him."

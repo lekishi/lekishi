@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  The Han protectorate of the Western Regions under 班超, who as 都護 from 91 CE lived at 龜茲 and
+  oversaw the kingdoms that had submitted; more than fifty sent hostages after 94 CE. The
+  relationship records an office and its seat, not a territory.
+types: [institutional_change, rulership]
+from: han-dynasty
+to: kucha
+date:
+  value: 91..102
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: 永元三年…十四年
+  cite:
+    - id: protectorate-span
+      says:
+        The 西域傳 records 班超 made 都護 residing in 龜茲 in 永元三年 and more than fifty kingdoms giving
+        hostages after 永元六年; the biography records his recall and arrival at 洛陽 in 永元十四年.
+      sources:
+        - source: hou-hanshu
+          at: 卷八十八 西域傳 序（三年，班超遂定西域）
+          quote: 三年，班超遂定西域，因以超為都護，居龜茲。
+        - source: hou-hanshu
+          at: 卷八十八 西域傳 序（六年，班超復擊破焉耆）
+          quote: 六年，班超復擊破焉耆，於是五十餘國悉納質內屬。
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超（十四年八月至洛陽）
+          quote: 十四年八月至洛陽
+notes:
+  The span ends with 班超's recall; the protectorate itself continued under 任尚 until it was abolished
+  in 永初元年 (107 CE), which is outside the chapter.

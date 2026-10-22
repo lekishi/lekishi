@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  祁連山, the mountains 霍去病 attacked in the summer of 121 BCE, which the 大宛列傳 names as the range
+  near which the 月氏 had lived with 敦煌 before the 匈奴 drove them out. The label anchor sits at the
+  modern Qilian range; some scholars place the 史記's 祁連 at the 天山 instead, and the anchor asserts no
+  identification.
+types: [landform]
+names:
+  - form: 祁連山
+    lang: lzh
+    script: Hani
+    roman: Qilian Shan
+    scheme: pinyin
+    cite:
+      - id: qilian-shan-name
+        says: The 匈奴列傳 records the 驃騎將軍 passing 居延 and attacking 祁連山 in the summer.
+        source: shiji-han-frontiers
+        at: 卷一百十 匈奴列傳（過居延，攻祁連山）
+        quote: 過居延，攻祁連山，得胡首虜三萬餘人
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [98.75, 38.75]
+    notes:
+      Label anchor at the modern Qilian range. Whether the 史記's 祁連 is this range or the 天山 is
+      debated in scholarship not cited here; the anchor asserts neither.
+    cite:
+      - id: qilian-shan-anchor
+        says:
+          The label anchor is placed at the modern range's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q1072879 (P625), revision 2533887015
+external_ids:
+  - system: wikidata
+    id: Q1072879
+    url: https://www.wikidata.org/wiki/Q1072879
+    license: CC0-1.0
+    note: The item whose coordinate places the point.

@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The country of the 大月氏, with its royal court north of the 媯水, which 張騫 reached on his first
+  mission and could not win to an alliance. The 大宛列傳 places it two or three thousand 里 west of 大宛;
+  it names the river but not the court's town, and the record carries no position.
+types: [region]
+names:
+  - form: 大月氏
+    lang: lzh
+    script: Hani
+    roman: Da Yuezhi
+    scheme: pinyin
+    cite:
+      - id: da-yuezhi-place-name
+        says: The 大宛列傳 places the 大月氏 two or three thousand 里 west of 大宛, living north of the 媯水.
+        source: shiji-han-frontiers
+        at: 卷一百二十三 大宛列傳（大月氏在大宛西可二三千里）
+        quote: 大月氏在大宛西可二三千里，居媯水北。
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      The 媯水 is usually identified with the Amu Darya, but the sources place the court only "north of
+      the 媯水", which spans hundreds of kilometres, so no point is asserted.
+    cite:
+      - id: da-yuezhi-place-unknown
+        says: The 大宛列傳 records that the 大月氏 made their court north of the 媯水, without naming a town.
+        source: shiji-han-frontiers
+        at: 卷一百二十三 大宛列傳（遂都媯水北，為王庭）
+        quote: 遂都媯水北，為王庭

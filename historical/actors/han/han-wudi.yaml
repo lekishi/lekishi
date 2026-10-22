@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  漢武帝 (孝武皇帝), the Han emperor from 141 to 87 BCE, whose court sent 張騫 to the 月氏 and to 烏孫
+  and ordered the campaigns against the 匈奴 from 133 BCE. The 史記, written in his reign, calls him
+  今帝 or 天子; the 漢書 calls him 孝武皇帝.
+types: [person]
+names:
+  - form: 漢武帝
+    lang: lzh
+    script: Hani
+    roman: Han Wudi
+    scheme: pinyin
+    note: The conventional form; the 漢書 annals open with 孝武皇帝.
+    cite:
+      - id: han-wudi-name
+        says: The 漢書 annals open by naming 孝武皇帝 as 景帝's middle son.
+        source: hanshu
+        at: 卷六 武帝紀 篇首
+        quote: 孝武皇帝，景帝中子也
+  - form: 天子
+    lang: lzh
+    script: Hani
+    note: How the 史記 names him in the accounts of 張騫 and of the wars.
+    cite:
+      - id: han-wudi-tianzi
+        says: The 大宛列傳 has the 天子 accept 張騫's proposal and make him 中郎將 for the 烏孫 mission.
+        source: shiji-han-frontiers
+        at: 卷一百二十三 大宛列傳（天子以為然，拜騫為中郎將）
+        quote: 天子以為然，拜騫為中郎將
+roles:
+  - role: ruler
+    note: The span is the reign, from the accession the annals date to 景帝's death.
+    date:
+      value: 141 BCE..87 BCE
+      mode: duration
+      calendar: chinese_lunisolar
+      as_written: 後三年正月，景帝崩。甲子，太子即皇帝位
+    cite:
+      - id: han-wudi-accession
+        says: The annals record that the heir took the throne in the first month of 景帝's 後三年.
+        source: hanshu
+        at: 卷六 武帝紀 篇首（太子即皇帝位）
+        quote: 十六歲，後三年正月，景帝崩。甲子，太子即皇帝位
+notes: The reign's end (87 BCE) is outside the chapters that reach this record and is not cited here.

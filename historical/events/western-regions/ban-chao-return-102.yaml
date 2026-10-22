@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  After thirty-one years in the Western Regions 班超 reached 洛陽 in the eighth month of 102 CE and was
+  made 射聲校尉. His chest illness grew worse; the emperor sent a palace eunuch with medicine, and he
+  died in the ninth month at seventy-one.
+types: [journey]
+date:
+  value: 102-08..102-09
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 十四年八月至洛陽…其年九月卒
+  cite:
+    - id: ban-chao-return-time
+      says: The biography records his arrival at 洛陽 in the eighth month of 永元十四年 and his death in the ninth month at seventy-one.
+      sources:
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超（十四年八月至洛陽）
+          quote: 超在西域三十一歲。十四年八月至洛陽，拜爲射聲校尉。
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超（其年九月卒，年七十一）
+          quote: 其年九月卒，年七十一。
+places:
+  - place: kucha
+    role: start
+    note: His seat as 都護; the biography does not name where he set out from.
+  - place: han-luoyang
+    role: end
+participants:
+  - actor: ban-chao
+    role: leader
+notes:
+  The months are those of the Chinese lunisolar calendar as written; the record does not convert them
+  to Julian months, so the month-precision dates here are the source's months.

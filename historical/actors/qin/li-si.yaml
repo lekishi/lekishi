@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "李斯, the Qin minister. The annals name him as 廷尉 (chief of justice) in 221 BCE, joining the proposal of the imperial title and arguing successfully against enfeoffing the emperor's sons."
+types: [person]
+names:
+  - form: "李斯"
+    lang: lzh
+    script: Hani
+    roman: "Li Si"
+    scheme: pinyin
+    cite:
+      - says: "The annals record the chief of justice 斯 arguing against setting up kings."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十六年（廷尉李斯議曰）"
+        quote: "廷尉李斯議曰：「周文武所封子弟同姓甚眾"
+roles:
+  - role: official
+    note: "廷尉 in the 221 BCE notices; his later offices belong to other chapters."
+    cite:
+      - says: "The annals list 廷尉斯 among those proposing the title."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十六年（丞相綰、御史大夫劫、廷尉斯等）"
+        quote: "丞相綰、御史大夫劫、廷尉斯等皆曰"
+notes: "The annals' 233 BCE notice on 韓非 also names him; that record is the Han chapter's and is not changed here."

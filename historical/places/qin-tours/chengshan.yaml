@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 成山, the headland at the far eastern end of the 219 BCE tour along the 勃海 coast. The label anchor sits at the modern cape 成山頭; it asserts no historical site.
+types: [landform]
+names:
+  - form: 成山
+    lang: lzh
+    script: Hani
+    roman: Chengshan
+    scheme: pinyin
+    cite:
+      - id: chengshan-name
+        says: The annals record 始皇 passing 黃 and 腄 and going to the end of 成山.
+        source: shiji
+        at: 卷六 秦始皇本紀 二十八年（窮成山）
+        quote: 過黃、腄，窮成山，登之罘
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [122.70564, 37.39555]
+    notes: Label anchor at the modern cape 成山頭 (Wikidata Q11074544). It is not an asserted historical coordinate.
+    cite:
+      - id: chengshan-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the modern cape 成山頭; no historical coordinate is asserted.
+        source: wikidata
+        at: Q11074544 (P625), revision 2263292212
+external_ids:
+  - system: wikidata
+    id: Q11074544
+    url: https://www.wikidata.org/wiki/Q11074544
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

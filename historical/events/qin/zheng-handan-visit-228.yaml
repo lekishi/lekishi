@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "After Zhao fell in 228 BCE the king of Qin went to 邯鄲, where he had been born, and had buried alive everyone who had feuded with his mother's family when he lived there; he returned by way of 太原 and 上郡."
+types: [journey]
+date:
+  value: "228 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "十九年（秦王之邯鄲）; 始皇帝十九年（王如邯鄲）"
+  cite:
+    - says: "The annals record the king going to 邯鄲, the killings, and the return by 太原 and 上郡 in 十九年 (228 BCE)."
+      source: shiji
+      at: "卷六 秦始皇本紀 十九年（秦王之邯鄲）"
+      quote: "秦王之邯鄲，諸嘗與王生趙時母家有仇怨，皆阬之。秦王還，從太原、上郡歸。"
+    - says: "The comprehensive mirror records the same visit and return in 始皇帝十九年."
+      role: supporting
+      source: zizhi-tongjian
+      at: "卷六 秦紀一 始皇帝十九年（王如邯鄲）"
+      quote: "王如邯鄲，故與母家有仇怨者皆殺之。還，從太原、上郡歸。"
+places:
+  - place: handan
+    role: site
+    note: "Where the annals record the killings."
+  - place: taiyuan-jun
+    role: waypoint
+    note: "Named for the return."
+  - place: shangjun
+    role: waypoint
+    note: "Named for the return; it has no position."
+participants:
+  - actor: qin-king-zheng
+    role: leader
+notes: "The annals name two commanderies for the return, not a road: the chapter lists them as stops in the order written and draws no route. The annals say the enemies were buried alive (阬); the mirror says killed (殺)."

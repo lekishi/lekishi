@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "霸上, east of the Qin capital, where the biography of 王翦 and the comprehensive mirror record the king seeing 王翦 off to the Chu war. The sources name it and state no site, and the record carries no position."
+types: [landform]
+names:
+  - form: "霸上"
+    lang: lzh
+    script: Hani
+    roman: Bashang
+    scheme: pinyin
+    cite:
+      - says: "The comprehensive mirror records the king seeing 王翦 off at 霸上."
+        source: zizhi-tongjian-qin-ji-2
+        at: "卷七 秦紀二 始皇帝二十二年（王送至霸上）"
+        quote: "王送至霸上，王翦請美田宅甚眾。"
+  - form: "灞上"
+    lang: lzh
+    script: Hani
+    note: "The biography's form of the name."
+    cite:
+      - says: "The biography writes the place 灞上."
+        source: shiji-six-states
+        at: "卷七十三 白起王翦列傳（始皇自送至灞上）"
+        quote: "於是王翦將兵六十萬人，始皇自送至灞上。"
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: "The sources name the place and state no site. The cited historical geography describes 霸上 as the stretch where the 霸 river passes the 白鹿原 east of 長安 and gives no point, and the Wikidata item for 灞上 records no coordinate, so the record asserts none."
+    cite:
+      - says: "The historical geography records that the 霸 river passing the 白鹿原 is called 霸上, and records the king seeing 王翦 off there."
+        role: supporting
+        source: dushi-fangyu-jiyao-six-states
+        at: "卷五十三 陝西二 西安府 咸寧縣（霸水）"
+        quote: "始皇二十二年命王翦伐楚，送至霸上。"
+notes: "A named place with no position: the chapter shows the farewell in the event list and the details, not on the map."

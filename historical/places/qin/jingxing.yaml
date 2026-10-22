@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "井陘, the pass through the 太行 mountains that the annals record 王翦 coming down through to attack Zhao in 229 BCE. The record's label anchor sits at modern 井陘縣."
+types: [landform, route_node]
+names:
+  - form: "井陘"
+    lang: lzh
+    script: Hani
+    roman: Jingxing
+    scheme: pinyin
+    cite:
+      - says: "The annals record 王翦 leading the 上地 army down through 井陘 in 十八年 (229 BCE)."
+        source: shiji
+        at: "卷六 秦始皇本紀 十八年（下井陘）"
+        quote: "王翦將上地，下井陘，端和將河內，羌瘣伐趙，端和圍邯鄲城。"
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [114.13881, 38.03143]
+    notes: "Label anchor at modern 井陘縣, Wikidata Q1362567. It is not an asserted historical coordinate: the primary entries name the place and state no site, and the anchor places no wall, palace or battlefield. The pass is a route through the mountains, not a point; no road is drawn."
+    cite:
+      - says: "The historical geography records the 井陘 pass, also called 土門關, west of its own 獲鹿縣."
+        role: supporting
+        source: dushi-fangyu-jiyao-six-states
+        at: "卷十四 北直五 真定府 獲鹿縣（土門關）"
+        quote: "即井陘關，亦曰井陘口。"
+      - says: "The label anchor is placed at the coordinate Wikidata (CC0) records for the modern place; no historical coordinate is asserted."
+        source: wikidata
+        at: "Q1362567 (P625), revision 2526582178"
+modern:
+  - form: "井陘縣"
+    lang: zh-Hant
+    script: Hani
+    note: "Modern county recorded for orientation only."
+notes: "A pass recorded as a place; the chapter draws no route through it."

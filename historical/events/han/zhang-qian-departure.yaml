@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In the 建元 years the Han court heard from 匈奴 deserters that the 匈奴 had killed the 月氏 king and
+  made a drinking vessel of his skull, and that the 月氏 had fled bearing a grudge. Looking for an ally,
+  it called for an envoy to go through 匈奴 land. 張騫, a 郎, answered, and left through 隴西 with 甘父,
+  a 胡 bondsman of the 堂邑 household, and a party of more than a hundred.
+types: [mission, journey]
+date:
+  value: 140 BCE..135 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 建元中
+  cite:
+    - id: zhang-qian-departure-time
+      says: The 大宛列傳 dates 張騫's service as a 郎 to the 建元 years and records him answering the call and leaving through 隴西.
+      sources:
+        - source: shiji-han-frontiers
+          at: 卷一百二十三 大宛列傳 張騫
+          quote: 張騫，漢中人。建元中為郎。
+        - source: shiji-han-frontiers
+          at: 卷一百二十三 大宛列傳（騫以郎應募，使月氏）
+          quote: 騫以郎應募，使月氏，與堂邑氏（故）胡奴甘父俱出隴西。
+    - id: zhang-qian-departure-reason
+      says: The 大宛列傳 records the deserters' report that the 匈奴 had killed the 月氏 king and that the 月氏 bore a grudge.
+      role: supporting
+      source: shiji-han-frontiers
+      at: 卷一百二十三 大宛列傳（皆言匈奴破月氏王）
+      quote: 皆言匈奴破月氏王，以其頭為飲器，月氏遁逃而常怨仇匈奴，無與共擊之。
+places:
+  - place: han-changan
+    role: start
+    note: The court that called for the envoy; the text names no place of departure before 隴西.
+  - place: longxi
+    role: waypoint
+participants:
+  - actor: zhang-qian
+    role: leader
+  - actor: ganfu
+    role: participant
+  - actor: han-wudi
+    role: other
+    note: The 天子 who sought the alliance; the text says the court (漢) called for an envoy.
+notes:
+  "The sources date the departure only to the 建元 years (140–135 BCE). The year 139 or 138 BCE often
+  given reckons back thirteen years from a return in 126 BCE; the record keeps the source's window.
+  The party size comes from the 大宛列傳's closing line (初，騫行時百餘人，去十三歲，唯二人得還)."

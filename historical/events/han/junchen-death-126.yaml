@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In the winter after 元朔二年 the 單于 軍臣 died. His younger brother, the 左谷蠡王 伊稚斜, made himself
+  單于 and defeated the heir 於單, who fled to the Han and died within months. The 大宛列傳 records that
+  張騫 used the disorder of this succession to escape.
+types: [occurrence]
+date:
+  value: 127 BCE..126 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: （元朔二年）其後冬
+  cite:
+    - id: junchen-death-time
+      says: The 匈奴列傳 records 軍臣單于's death in the winter after the entry it dates to 元朔二年, and 伊稚斜 seizing the title.
+      source: shiji-han-frontiers
+      at: 卷一百十 匈奴列傳（其後冬，匈奴軍臣單于死）
+      quote: 其後冬，匈奴軍臣單于死。軍臣單于弟左谷蠡王伊稚斜自立爲單于，攻破軍臣單于太子於單。
+places:
+  - place: chanyu-court
+    role: site
+    note: The succession took place among the 匈奴; no site is named.
+participants:
+  - actor: junchen-chanyu
+    role: subject
+  - actor: yizhixie-chanyu
+    role: leader
+  - actor: xiongnu
+    role: participant
+notes:
+  "The winter after 元朔二年 is the start of the Han year 元朔三年, which began in the tenth month, so
+  the death falls in late 127 or early 126 BCE; the record keeps both years as a window. The 大宛列傳
+  ties 張騫's escape to the same disorder (單于死，左谷蠡王攻其太子自立，國內亂)."

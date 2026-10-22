@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  The 渾邪王's surrender to the Han in the autumn of 121 BCE, with the people of his own and the
+  休屠王's land, whom the Han settled in five dependent states.
+types: [diplomacy, membership]
+from: hunye-king
+to: han-dynasty
+date:
+  value: 121 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 元狩二年 秋
+  cite:
+    - id: hunye-submission-time
+      says: The 漢書 annals record the surrender and the five dependent states in the autumn of 元狩二年.
+      source: hanshu
+      at: 卷六 武帝紀 元狩二年 秋
+      quote: 置五屬國以處之

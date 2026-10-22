@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 瑯邪, on the southern Shandong coast, where 始皇 stayed three months in 219 BCE, built the 瑯邪臺 and moved thirty thousand households, and from where 徐巿 sailed. The label anchor sits at the 琅琊臺 historical site; it asserts no historical site.
+types: [settlement]
+names:
+  - form: 瑯邪
+    lang: lzh
+    script: Hani
+    roman: Langya
+    scheme: pinyin
+    cite:
+      - id: langya-name
+        says: The annals record 始皇 going south to 瑯邪, delighting in it and staying three months.
+        source: shiji
+        at: 卷六 秦始皇本紀 二十八年（南登瑯邪）
+        quote: 南登瑯邪，大樂之，留三月
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [119.90204, 35.64944]
+    notes: Label anchor at the 琅琊臺 historical site (Wikidata Q17060348). It is not an asserted historical coordinate.
+    cite:
+      - id: langya-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the 琅琊臺 historical site; no historical coordinate is asserted.
+        source: wikidata
+        at: Q17060348 (P625), revision 2372668312
+external_ids:
+  - system: wikidata
+    id: Q17060348
+    url: https://www.wikidata.org/wiki/Q17060348
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

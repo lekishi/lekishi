@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 上黨, the commandery through which 始皇 went home from 瑯邪 in 218 BCE. The label anchor sits at the modern city of 長治; it asserts no historical site.
+types: [region]
+names:
+  - form: 上黨
+    lang: lzh
+    script: Hani
+    roman: Shangdang
+    scheme: pinyin
+    cite:
+      - id: shangdang-name
+        says: The annals record 始皇 turning to 瑯邪 and returning by way of 上黨.
+        source: shiji
+        at: 卷六 秦始皇本紀 二十九年（道上黨入）
+        quote: 旋，遂之瑯邪，道上黨入
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [113.11111, 36.195]
+    notes: Label anchor at the modern city of 長治 (Wikidata Q72945). It is not an asserted historical coordinate.
+    cite:
+      - id: shangdang-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the modern city of 長治; no historical coordinate is asserted.
+        source: wikidata
+        at: Q72945 (P625), revision 2526614046
+external_ids:
+  - system: wikidata
+    id: Q72945
+    url: https://www.wikidata.org/wiki/Q72945
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

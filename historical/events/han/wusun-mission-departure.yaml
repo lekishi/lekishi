@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  After the battles north of the desert, 張騫, who had lost his marquisate, proposed winning 烏孫 to
+  settle the land the 渾邪王 had left empty and become the Han's ally, "cutting off the 匈奴's right
+  arm". The emperor made him 中郎將 and sent him with three hundred men, two horses each, tens of
+  thousands of cattle and sheep, gold and silk, and many deputy envoys with staffs to send on to other
+  countries.
+types: [mission, journey]
+date:
+  value: 119 BCE..115 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 其後二年，漢擊走單于於幕北。是後天子數問騫大夏之屬
+  cite:
+    - id: wusun-departure-time
+      says: The 大宛列傳 places the emperor's questions and 張騫's proposal after the 單于 was driven north of the desert.
+      source: shiji-han-frontiers
+      at: 卷一百二十三 大宛列傳（是後天子數問騫大夏之屬）
+      quote: 其後二年，漢擊走單于於幕北。是後天子數問騫大夏之屬。
+    - id: wusun-departure-party
+      says: The 大宛列傳 records his appointment as 中郎將 and the size and goods of the mission.
+      role: supporting
+      source: shiji-han-frontiers
+      at: 卷一百二十三 大宛列傳（拜騫為中郎將，將三百人）
+      quote: 天子以為然，拜騫為中郎將，將三百人，馬各二匹，牛羊以萬數，齎金幣帛直數千巨萬，多持節副使，道可使，使遺之他旁國。
+places:
+  - place: han-changan
+    role: start
+    note: The court that sent him; the text names no place of departure.
+participants:
+  - actor: zhang-qian
+    role: leader
+  - actor: han-wudi
+    role: other
+    note: Accepted the proposal and appointed him.
+notes:
+  The text gives no year for the departure. The window runs from the battles north of the desert
+  (119 BCE) to the latest year of the return the record accepts.

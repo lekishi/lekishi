@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Zhao fell in 228 BCE. The annals record 王翦 and 羌瘣 taking all the Zhao land of 東陽 and the king; the six-states table records 王翦 capturing king 遷 at 邯鄲; the hereditary house of Zhao records the king's surrender under its seventh year and 邯鄲 becoming Qin's in the tenth month of the eighth."
+types: [campaign]
+date:
+  value: "228 BCE"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: "十九年（得趙王）; 秦始皇十九年（虜王遷邯鄲）; 幽繆王八年十月（邯鄲爲秦）"
+  cite:
+    - says: "The six-states table records 王翦 taking Zhao and capturing king 遷 at 邯鄲 in 秦始皇十九年 (228 BCE)."
+      source: shiji
+      at: "卷十五 六國年表 秦始皇十九年（王翦拔趙，虜王遷邯鄲）"
+      quote: "十九。王翦拔趙，虜王遷邯鄲。帝太后薨。"
+    - says: "The annals record 王翦 and 羌瘣 taking all the Zhao land of 東陽 and the king in 十九年."
+      role: supporting
+      source: shiji
+      at: "卷六 秦始皇本紀 十九年（盡定取趙地東陽，得趙王）"
+      quote: "十九年，王翦、羌瘣盡定取趙地東陽，得趙王。"
+    - says: "The hereditary house records 邯鄲 becoming Qin's in the tenth month of the eighth year."
+      role: supporting
+      source: shiji-six-states
+      at: "卷四十三 趙世家 幽繆王八年（邯鄲爲秦）"
+      quote: "八年十月，邯鄲爲秦。"
+places:
+  - place: handan
+    role: site
+    note: "The capital the table names for the capture."
+  - place: dongyang-zhao
+    role: context
+    note: "The Zhao land the annals record taken; it has no position."
+participants:
+  - actor: wang-jian
+    role: leader
+  - actor: qiang-hui
+    role: leader
+    note: "Named by the annals."
+  - actor: zhao-king-qian
+    role: subject
+    note: "Captured, or surrendered, as the accounts differ."
+  - actor: zhao-state
+    role: subject
+notes: "The hereditary house's 十月 is a month of a calendar whose year may begin before the Julian year the table aligns it with, so the event is dated to the year only and the month is kept as written."
+dispute:
+  status: disputed
+  summary: "The accounts differ on the king's end and its year. The annals and the six-states table place the capture in 秦始皇十九年 (228 BCE), the table at 邯鄲; the hereditary house records the surrender (以王遷降) under the seventh year (229 BCE) and 邯鄲 becoming Qin's in the eighth; the biography of 李牧 records 王翦 capturing the king three months after 李牧's death. The chapter publishes the table's year and place and keeps the others as claims."
+cite:
+  - says: "The hereditary house records the king surrendering under the seventh year, after 趙怱's defeat."
+    role: conflicting
+    source: shiji-six-states
+    at: "卷四十三 趙世家 幽繆王七年（以王遷降）"
+    quote: "趙怱軍破，顏聚亡去。以王遷降。"
+  - says: "The biography records 王翦 capturing the king three months after 李牧's death."
+    role: conflicting
+    source: shiji-six-states
+    at: "卷八十一 廉頗藺相如列傳（後三月）"
+    quote: "後三月，王翦因急撃趙，大破殺趙蔥，虜趙王遷及其將顏聚，遂滅趙。"

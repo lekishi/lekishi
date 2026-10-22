@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  From 烏孫 張騫 sent his deputy envoys on to 大宛, 康居, the 大月氏, 大夏, 安息, 身毒, 于窴 and other
+  countries round about. A year or so after his own return, many of them came back with people from
+  those countries, and "the countries of the north-west began to have dealings with the Han".
+types: [mission]
+date:
+  value: 119 BCE..115 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 騫因分遣副使使大宛、康居、大月氏、大夏、安息、身毒、于窴
+  cite:
+    - id: deputy-envoys-account
+      says: The 大宛列傳 records the deputies sent from 烏孫 to 大宛, 康居, the 大月氏, 大夏, 安息, 身毒, 于窴 and further countries.
+      source: shiji-han-frontiers
+      at: 卷一百二十三 大宛列傳（騫因分遣副使）
+      quote: 騫因分遣副使使大宛、康居、大月氏、大夏、安息、身毒、于窴
+    - id: deputy-envoys-result
+      says: The 大宛列傳 records the deputies returning with people of those countries a year or so later, and the opening of contact.
+      role: supporting
+      source: shiji-han-frontiers
+      at: 卷一百二十三 大宛列傳（於是西北國始通於漢矣）
+      quote: 其後歲餘，騫所遣使通大夏之屬者皆頗與其人俱來，於是西北國始通於漢矣。
+places:
+  - place: wusun
+    role: start
+  - place: dayuan
+    role: context
+  - place: kangju
+    role: context
+  - place: da-yuezhi
+    role: context
+  - place: daxia
+    role: context
+  - place: khotan
+    role: context
+participants:
+  - actor: zhang-qian
+    role: leader
+notes:
+  "The destinations are context places: the source names where the deputies were sent, not where
+  each arrived, and the record draws no line to them. 安息, 身毒 and the further
+  countries the passage names are not recorded as places.
+  The 漢書 lists only 大宛, 康居, 月氏 and 大夏."

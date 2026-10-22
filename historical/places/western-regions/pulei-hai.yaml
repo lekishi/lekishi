@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 蒲類海, the lake north of the 天山 where 班超 fought the 匈奴 in 73 CE. The label anchor sits at the modern 巴里坤湖, the lake usually identified with it; it asserts no battle site.
+types: [landform]
+names:
+  - form: 蒲類海
+    lang: lzh
+    script: Hani
+    roman: Pulei Hai
+    scheme: pinyin
+    cite:
+      - id: pulei-hai-name
+        says: The biography records the battle at 蒲類海 and the many heads and captives taken.
+        source: hou-hanshu
+        at: 卷四十七 班梁列傳 班超 永平十六年（戰於蒲類海）
+        quote: 戰於蒲類海，多斬首虜而還
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [92.78722, 43.65694]
+    notes: Label anchor at the modern lake 巴里坤湖; the identification is the usual one and is not cited here, and the anchor asserts no battle site.
+    cite:
+      - id: pulei-hai-anchor
+        says:
+          The label anchor is placed at the modern lake's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q7238981 (P625), revision 2515951115
+external_ids:
+  - system: wikidata
+    id: Q7238981
+    url: https://www.wikidata.org/wiki/Q7238981
+    license: CC0-1.0
+    note: The item whose coordinate places the point.

@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Byzantium on the European side of the Bosporus, a Spartan-held city in 400 BCE, which the army
+  entered by force when shut out of it.
+types: [settlement, port]
+names:
+  - form: Byzantium
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: byzantium-name
+        says: Xenophon records the whole army crossing to Byzantium.
+        source: xenophon-anabasis
+        at: VII.1
+        quote: After this the whole body of troops crossed to Byzantium.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [28.97388, 41.0059]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: byzantium-location
+        says:
+          Pleiades identifies the place and gives its representative point as 41.005902, 28.9738815 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 520985 (reprLatLong, locationPrecision), dump 2026-10-21
+modern:
+  - form: İstanbul
+    lang: tr
+    note: The modern city on the site.
+external_ids:
+  - system: pleiades
+    id: "520985"
+    url: https://pleiades.stoa.org/places/520985
+    license: CC BY 3.0

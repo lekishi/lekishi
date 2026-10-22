@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Thebes revolts against Alexander on a false report of his death; he marches south, takes the
+  city, and the allies vote to raze it to the ground, sparing the house of Pindar.
+types: [occurrence]
+date:
+  value: 335 BCE
+  mode: window
+  calendar: julian
+  as_written: to raze the city to the ground
+  cite:
+    - id: thebes-destroyed-335-time
+      says:
+        Chinnock dates Alexander's northern campaign, after which Thebes revolted, to the spring of
+        335 BCE and the march to the Hellespont to the spring of 334 BCE; the destruction of Thebes lies
+        between.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+      sources:
+        - source: arrian-anabasis
+          at: I.1
+          quote: However, at the approach of spring (B.C. 335), he marched towards
+        - source: arrian-anabasis
+          at: I.11
+          quote: (B.C. 334.) At the beginning of the spring he marched towards the Hellespont
+    - id: thebes-destroyed-335-text
+      says: Arrian records the decision to raze Thebes.
+      source: arrian-anabasis
+      at: I.9
+      quote: to raze the city to the ground
+      role: supporting
+places:
+  - place: thebes-boeotia
+    role: site
+participants:
+  - actor: alexander-the-great
+    role: leader
+  - actor: thebes-state
+    role: subject
+  - actor: macedonian-kingdom
+    role: participant
+cites:
+  summary:
+    - id: thebes-destroyed-335-revolt
+      says: Arrian records Alexander learning of the Theban revolt.
+      source: arrian-anabasis
+      at: I.7
+      quote:
+        When Alexander heard what was being done at Thebes, he thought it was a movement not at all
+        to be slighted

@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The river Granicus in the Troad, on whose banks Alexander defeated the Persian satraps in 334
+  BCE.
+types: [landform]
+names:
+  - form: Granicus
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: granicus-river-name
+        says: Arrian records Alexander advancing to the river Granicus in battle order.
+        source: arrian-anabasis
+        at: I.13
+        quote: Meantime Alexander was advancing to the river Granicus, with his army arranged for battle
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [27.12703, 40.10705]
+    notes:
+      The gazetteer's representative point for the river. It is a label position for a river, not the
+      battlefield, which the gazetteer records separately.
+    cite:
+      - id: granicus-river-location
+        says:
+          Pleiades identifies the place and gives its representative point as 40.1070547168, 27.1270290442
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 511260 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "511260"
+    url: https://pleiades.stoa.org/places/511260
+    license: CC BY 3.0

@@ -1,0 +1,64 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "West along the coast: the army musters at Cerasus, eight thousand six hundred men, and reaches
+  Cotyora, where it halts forty-five days. Here the march by land ends."
+types: [journey]
+part_of: [cyrus-expedition-401]
+date:
+  value: 400 BCE
+  mode: window
+  calendar: julian
+  as_written: Here they halted forty-five days
+  cite:
+    - id: coast-to-cotyora-400-time
+      says:
+        Grote dates the sight of the sea to February 400 BCE and the crossing to Byzantium to October
+        or November 400 BCE; the coastal march lies between.
+      basis: interpretation
+      attributed_to: George Grote
+      sources:
+        - source: grote-history-of-greece
+          at: vol. IX, ch. LXX
+          quote: in the first half of February, the time of Xenophon’s visit
+        - source: grote-history-of-greece
+          at: vol. IX, ch. LXIX
+          quote:
+            and ultimately brought them across the Bosphorus of Thrace to Byzantium, in October or November,
+            400 B.C.
+    - id: coast-to-cotyora-400-text
+      says: Xenophon records the forty-five-day halt at Cotyora.
+      source: xenophon-anabasis
+      at: V.5
+      quote: Here they halted forty-five days
+      role: supporting
+places:
+  - place: trapezus
+    role: start
+  - place: kerasous
+    role: waypoint
+  - place: kotyora
+    role: end
+participants:
+  - actor: cyreans
+    role: participant
+cites:
+  summary:
+    - id: coast-to-cotyora-400-muster
+      says: Xenophon records the count at Cerasus.
+      source: xenophon-anabasis
+      at: V.3
+      quote:
+        there was a review and numbering of the troops under arms, when there were found to be eight
+        thousand six hundred men.
+  places:
+    - id: coast-to-cotyora-400-cerasus
+      says: Xenophon records the arrival at Cerasus.
+      source: xenophon-anabasis
+      at: V.3
+      quote: on the third they reached Cerasus
+    - id: coast-to-cotyora-400-cotyora
+      says: Xenophon records the arrival at Cotyora.
+      source: xenophon-anabasis
+      at: V.5
+      quote: in two days reached Cotyora
+      role: supporting

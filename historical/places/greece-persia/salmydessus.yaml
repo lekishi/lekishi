@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Salmydessus on the Thracian coast of the Black Sea, where Seuthes and the Greeks campaigned in
+  the winter of 400–399 BCE.
+types: [settlement]
+names:
+  - form: Σαλμυδησσός
+    lang: grc
+    script: Grek
+    roman: Salmydessus
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: salmydessus-greek-name
+        says: Pleiades records the ancient Greek name Σαλμυδησσός for this place.
+        source: pleiades
+        at: place 511404, name /places/511404/salmydessos, dump 2026-10-21
+      - id: salmydessus-name
+        says: Xenophon records the march reaching Salmydessus.
+        source: xenophon-anabasis
+        at: VII.5
+        quote:
+          Keeping the Pontus on their right, they passed through the millet-eating Thracians, as they
+          are called, and reached Salmydessus.
+        role: supporting
+  - form: Salmydessus
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: salmydessus-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [28.09573, 41.63475]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: salmydessus-location
+        says:
+          Pleiades identifies the place and gives its representative point as 41.6347531, 28.0957289 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 511404 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "511404"
+    url: https://pleiades.stoa.org/places/511404
+    license: CC BY 3.0

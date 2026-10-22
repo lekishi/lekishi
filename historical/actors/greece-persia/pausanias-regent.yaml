@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Pausanias son of Cleombrotos, guardian of Leonidas's young son, who led the Spartans and the
+  Greek army to victory at Plataea in 479 BCE.
+types: [person]
+names:
+  - form: Pausanias
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: pausanias-regent-name
+        says:
+          Herodotus records Pausanias son of Cleombrotos leading the Spartans as guardian of Leonidas's
+          son.
+        source: herodotus
+        at: IX.10
+        quote:
+          appointing Pausanias the son of Cleombrotos to lead them forth. Now the leadership belonged
+          to Pleistarchos the son of Leonidas; but he was yet a boy, and the other was his guardian and cousin
+roles:
+  - role: official
+    note: Regent for Pleistarchos and commander at Plataea.

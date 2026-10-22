@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Cyrus the Younger, son of Darius II and Parysatis, satrap in western Asia Minor, who marched
+  inland in 401 BCE with Greek mercenaries to take the throne from his brother Artaxerxes II and was killed
+  at Cunaxa.
+types: [person]
+names:
+  - form: Cyrus
+    lang: en
+    script: Latn
+    note: Xenophon calls him Cyrus; 'the Younger' is the modern way to tell him from Cyrus the Great.
+    cite:
+      - id: cyrus-the-younger-name
+        says: Xenophon names Cyrus as the brother of the king.
+        source: xenophon-anabasis
+        at: I.1
+        quote: Tissaphernes brought slanderous accusations against Cyrus before his brother, the king
+roles:
+  - role: official
+    note:
+      Satrap appointed by his father Darius II, and general of the forces that muster in the plain of
+      the Castolus.
+    cite:
+      - id: cyrus-the-younger-role
+        says: Xenophon records Darius having made Cyrus satrap of a province.
+        source: xenophon-anabasis
+        at: I.1
+        quote: but Cyrus he must needs send for from the province over which he had made him satrap

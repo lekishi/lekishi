@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Pura, the capital of the Gadrosians, which the army reached sixty days after leaving Ora in 325
+  BCE.
+types: [capital]
+names:
+  - form: Pura
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: pura-name
+        says: Arrian names Pura as the capital of the Gadrosians.
+        source: arrian-anabasis
+        at: VI.24
+        quote: He then advanced towards the capital of the Gadrosians, which was named Pura
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: "Unlocated: the gazetteer records Pura without a position. No point is drawn."
+    cite:
+      - id: pura-unlocated
+        says: Pleiades records Poura as unlocated.
+        source: pleiades
+        at: "place 30258 (locationPrecision: unlocated), dump 2026-10-21"
+external_ids:
+  - system: pleiades
+    id: "30258"
+    url: https://pleiades.stoa.org/places/30258
+    license: CC BY 3.0

@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Therma on the Thermaic gulf, where Xerxes encamped his army and the fleet waited in 480 BCE before
+  the advance into Thessaly.
+types: [settlement, port]
+names:
+  - form: Therma
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: therma-name
+        says: Herodotus identifies Therma as the city on the Thermaic gulf.
+        source: herodotus
+        at: VII.121
+        quote:
+          now this Therma is that which is situated on the Thermaic gulf, from which also this gulf has
+          its name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [22.94402, 40.58155]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: therma-location
+        says:
+          Pleiades identifies the place and gives its representative point as 40.58155, 22.94402 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 491740 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "491740"
+    url: https://pleiades.stoa.org/places/491740
+    license: CC BY 3.0

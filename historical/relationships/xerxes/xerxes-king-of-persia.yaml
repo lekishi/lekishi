@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: Xerxes as king of the Persians, succeeding his father Dareios.
+types: [rulership]
+from: xerxes
+to: persian-empire
+directionality: directed
+notes:
+  Herodotus gives no year for the succession, and none is asserted here; the relationship is undated
+  rather than given a year from outside the cited sources.
+cite:
+  - id: xerxes-king-of-persia-basis
+    says: Herodotus records the kingdom passing to Xerxes at Dareios's death.
+    source: herodotus
+    at: VII.5
+    quote: Dareios being dead the kingdom passed to his son Xerxes.

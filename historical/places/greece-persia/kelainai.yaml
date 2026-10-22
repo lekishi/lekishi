@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Kelainai in Phrygia, at the springs of the Maeander, on the road from the Halys to Sardis. Xerxes'
+  army passed through it in 481 BCE; Xenophon calls it Celaenae and records Cyrus halting there for thirty
+  days in 401 BCE.
+types: [settlement]
+names:
+  - form: Κελαιναί
+    lang: grc
+    script: Grek
+    roman: Kelainai
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: kelainai-greek-name
+        says: Pleiades records the ancient Greek name Κελαιναί for this place.
+        source: pleiades
+        at: place 638751, name /places/638751/kelainai, dump 2026-10-21
+      - id: kelainai-name
+        says: Herodotus records the army reaching Kelainai, where the Maeander rises.
+        source: herodotus
+        at: VII.26
+        quote:
+          marching through this land they came to Kelainai, where the springs of the river Maiander come
+          up
+        role: supporting
+  - form: Kelainai
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in Macaulay's translation; Dakyns's Xenophon writes Celaenae.
+    claim: kelainai-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [30.17162, 38.07008]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: kelainai-location
+        says:
+          Pleiades identifies the place and gives its representative point as 38.07007556, 30.1716213761
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 638751 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "638751"
+    url: https://pleiades.stoa.org/places/638751
+    license: CC BY 3.0

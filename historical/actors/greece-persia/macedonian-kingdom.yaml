@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  The kingdom of Macedon, ruled by Philip II and then Alexander, whose army conquered the Persian
+  Empire in 334–330 BCE.
+types: [state]
+names:
+  - form: Macedonia
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: macedonian-kingdom-name
+        says: Arrian records Alexander leaving Antipater in charge of Macedonia and Greece.
+        source: arrian-anabasis
+        at: I.11
+        quote:
+          At the beginning of the spring he marched towards the Hellespont, entrusting the affairs of
+          Macedonia and Greece to Antipater.
+notes:
+  One actor for the Macedonian kingdom; Alexander's conquests are recorded as events and relationships,
+  not as a separate empire.

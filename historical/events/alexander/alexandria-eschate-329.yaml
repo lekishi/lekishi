@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  On the river Arrian calls the Tanais (the Jaxartes) Alexander founds and fortifies in twenty
+  days a city named after himself, and defeats the Scythians across the river.
+types: [founding]
+part_of: [alexander-campaigns-334]
+date:
+  value: 330 BCE..327 BCE
+  mode: window
+  calendar: julian
+  as_written: In twenty days he fortified the city
+  cite:
+    - id: alexandria-eschate-329-time
+      says:
+        Chinnock dates Darius's death to July 330 BCE and the advance on the Sogdian rock to the spring
+        of 327 BCE; this stage lies between.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+      sources:
+        - source: arrian-anabasis
+          at: III.22, note 467
+          quote: In the year B.C. 330, the first of Hecatombaion fell on the first of July.
+        - source: arrian-anabasis
+          at: IV.18, note 580
+          quote: Of the year 327 B.C.
+    - id: alexandria-eschate-329-text
+      says: Arrian records the twenty-day fortification of the city.
+      source: arrian-anabasis
+      at: IV.4
+      quote: In twenty days he fortified the city which he was projecting
+      role: supporting
+places:
+  - place: alexandria-eschate
+    role: site
+participants:
+  - actor: alexander-the-great
+    role: leader

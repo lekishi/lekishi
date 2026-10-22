@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Corinth, beside the Isthmus, one of the cities of the Hellenic alliance against Xerxes.
+types: [settlement]
+names:
+  - form: Κόρινθος
+    lang: grc
+    script: Grek
+    roman: Corinth
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: corinth-greek-name
+        says: Pleiades records the ancient Greek name Κόρινθος for this place.
+        source: pleiades
+        at: place 570182, name /places/570182/korinthos, dump 2026-10-21
+      - id: corinth-name
+        says: Herodotus records the Theban leaders being taken to Corinth and put to death there.
+        source: herodotus
+        at: IX.88
+        quote: and then took the men to Corinth and put them to death there
+        role: supporting
+  - form: Corinth
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: corinth-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [22.87861, 37.90564]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: corinth-location
+        says:
+          Pleiades identifies the place and gives its representative point as 37.9056416435, 22.8786143909
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 570182 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "570182"
+    url: https://pleiades.stoa.org/places/570182
+    license: CC BY 3.0

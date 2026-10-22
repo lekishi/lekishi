@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  After burying their dead at Plataea, the Greeks besiege Thebes to demand those who took the Persian
+  side; on the twentieth day the Thebans give up their leaders, whom Pausanias takes to Corinth and puts
+  to death.
+types: [occurrence]
+date:
+  value: 479 BCE
+  mode: window
+  calendar: julian
+  as_written:
+    When the Hellenes had buried their dead at Plataia, forthwith they determined in common
+    council to march upon Thebes
+  cite:
+    - id: thebes-siege-479-time
+      says: Grote dates Plataea, which the siege of Thebes followed, to about September 479 BCE.
+      source: grote-history-of-greece
+      at: vol. V, ch. XLII
+      quote:
+        the fourth of the month Boëdromion (about September) 479 B. C. By a remarkable coincidence,
+        the victory of Platæa in Bœotia had been gained by Pausanias that very morning.
+      basis: interpretation
+      attributed_to: George Grote
+    - id: thebes-siege-479-text
+      says: Herodotus records the march on Thebes after the burial.
+      source: herodotus
+      at: IX.86
+      quote:
+        When the Hellenes had buried their dead at Plataia, forthwith they determined in common council
+        to march upon Thebes
+      role: supporting
+places:
+  - place: thebes-boeotia
+    role: site
+  - place: corinth
+    role: end
+    note: Where the surrendered leaders were put to death.
+participants:
+  - actor: pausanias-regent
+    role: leader
+  - actor: hellenic-alliance
+    role: participant
+  - actor: thebes-state
+    role: participant
+cites:
+  places:
+    - id: thebes-siege-479-corinth
+      says: Herodotus records the Theban leaders being put to death at Corinth.
+      source: herodotus
+      at: IX.88
+      quote: and then took the men to Corinth and put them to death there

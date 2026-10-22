@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Calpe Haven in Asiatic Thrace, midway between Byzantium and Heraclea, where the divided army
+  came together again in 400 BCE.
+types: [port]
+names:
+  - form: Calpe Haven
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: kalpe-name
+        says: Xenophon places Calpe Haven midway between Byzantium and Heraclea.
+        source: xenophon-anabasis
+        at: VI.4
+        quote: Now the haven of Calpe lies exactly midway, halving the voyage between Byzantium and Heraclea.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [30.19652, 41.14352]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: kalpe-location
+        says:
+          Pleiades identifies the place and gives its representative point as 41.1435155, 30.1965195 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 511285 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "511285"
+    url: https://pleiades.stoa.org/places/511285
+    license: CC BY 3.0

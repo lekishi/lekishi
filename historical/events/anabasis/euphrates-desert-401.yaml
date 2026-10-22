@@ -1,0 +1,66 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The army marches down the Euphrates through the desert, past the deserted city of Corsote and
+  across the river from Charmande, to the Gates of Babylonia.
+types: [journey]
+part_of: [cyrus-expedition-401]
+date:
+  value: 401 BCE
+  mode: window
+  calendar: julian
+  as_written: thirteen desert stages--ninety parasangs
+  cite:
+    - id: euphrates-desert-401-time
+      says:
+        Grote dates the start of the march from Sardis to about March or April 401 BCE and the battle
+        of Kunaxa to about September or October of the same year; the stage falls between them.
+      basis: interpretation
+      attributed_to: George Grote
+      sources:
+        - source: grote-history-of-greece
+          at: vol. IX, ch. LXIX
+          quote: was commenced about March or April in the year 401 B.C.
+        - source: grote-history-of-greece
+          at: vol. IX, ch. LXIX
+          quote:
+            It was about six months afterwards, in the month of September or October of the same year,
+            that the battle of Kunaxa was fought
+    - id: euphrates-desert-401-text
+      says: Xenophon records the desert march to the Gates.
+      source: xenophon-anabasis
+      at: I.5
+      quote:
+        Thence they continued their march thirteen desert stages--ninety parasangs--with the Euphrates
+        still on their right, until they reached the Gates.
+      role: supporting
+places:
+  - place: thapsacus
+    role: start
+  - place: korsote
+    role: waypoint
+  - place: charmande
+    role: context
+    note: Across the river from one of the stages.
+participants:
+  - actor: cyreans
+    role: participant
+  - actor: cyrus-the-younger
+    role: leader
+notes:
+  "The Gates (Pylae) are not a separate place here: the gazetteer has no entry that can be matched
+  to them with confidence."
+cites:
+  places:
+    - id: euphrates-desert-401-corsote
+      says: Xenophon records the deserted city of Corsote on the march.
+      source: xenophon-anabasis
+      at: I.5
+      quote: Here stood a big deserted city called Corsote
+    - id: euphrates-desert-401-charmande
+      says: Xenophon places Charmande across the river from a stage of the march.
+      source: xenophon-anabasis
+      at: I.5
+      quote:
+        On the opposite side of the Euphrates to the point reached on one of these desert stages, was
+        a large and flourishing city named Charmande.
+      role: supporting

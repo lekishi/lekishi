@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The remnant of Xerxes' fleet, having ferried the king's army from the Chersonese to Abydos, winters
+  at Kyme and assembles at Samos in the spring under Mardontes, Artayntes and Ithamitres.
+types: [occurrence]
+date:
+  value: 480 BCE..479 BCE
+  mode: duration
+  calendar: julian
+  as_written: "passed the winter at Kyme: and when spring dawned upon it, it assembled early at Samos"
+  cite:
+    - id: fleet-winters-kyme-480-time
+      says: Grote dates the crossing the fleet ferried to about November 480 BCE; the winter at Kyme followed.
+      source: grote-history-of-greece
+      at: vol. V, ch. XLII
+      quote:
+        though it had been broken and useless at the time when Xerxes crossed the strait in his retreat,
+        ten months before, about November, 480 B. C.
+      basis: interpretation
+      attributed_to: George Grote
+    - id: fleet-winters-kyme-480-text
+      says: Herodotus records the fleet wintering at Kyme and assembling at Samos in spring.
+      source: herodotus
+      at: VIII.130
+      quote:
+        "passed the winter at Kyme: and when spring dawned upon it, it assembled early at Samos, where
+        some of the ships had even passed the winter"
+      role: supporting
+places:
+  - place: kyme-aeolis
+    role: site
+  - place: samos
+    role: end
+participants:
+  - actor: persian-empire
+    role: participant

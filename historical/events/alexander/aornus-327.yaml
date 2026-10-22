@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The people of the region flee to the rock of Aornus above the Indus, which legend said Heracles
+  could not take; Alexander takes it.
+types: [occurrence]
+part_of: [alexander-campaigns-334]
+date:
+  value: 327 BCE..326 BCE
+  mode: window
+  calendar: julian
+  as_written: the rock which is in their land, and is called Aornus
+  cite:
+    - id: aornus-327-time
+      says:
+        Chinnock dates the Sogdian rock to the spring of 327 BCE and the Hydaspes to April–May 326 BCE;
+        this stage lies between.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+      sources:
+        - source: arrian-anabasis
+          at: IV.18, note 580
+          quote: Of the year 327 B.C.
+        - source: arrian-anabasis
+          at: V.19
+          quote: (18 April to 18 May, 326 B.C.)
+    - id: aornus-327-text
+      says: Arrian records the flight to Aornus.
+      source: arrian-anabasis
+      at: IV.28
+      quote:
+        For all the inhabitants deserted the cities and began to flee to the rock which is in their
+        land, and is called Aornus.
+      role: supporting
+places:
+  - place: aornus
+    role: site
+participants:
+  - actor: alexander-the-great
+    role: leader

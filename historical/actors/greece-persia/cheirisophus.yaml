@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Cheirisophus the Lacedaemonian, who brought seven hundred hoplites to Cyrus by sea, led the van
+  in the retreat, and was chosen sole commander at Sinope in 400 BCE.
+types: [person]
+names:
+  - form: Cheirisophus
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: cheirisophus-name
+        says: Xenophon records the Lacedaemonian Cheirisophus arriving with the fleet and seven hundred hoplites.
+        source: xenophon-anabasis
+        at: I.4
+        quote:
+          There was a third officer on board the fleet, the Lacedaemonian Cheirisophus, who had been
+          sent for by Cyrus, and had brought with him seven hundred hoplites
+roles:
+  - role: soldier
+    note: General in Cyrus's army and of the retreat, 401–400 BCE.
+    cite:
+      - id: cheirisophus-role
+        says: Xenophon records the army choosing Cheirisophus as commander.
+        source: xenophon-anabasis
+        at: VI.1
+        quote: Under these circumstances they chose Cheirisophus

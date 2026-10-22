@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At the Hyphasis the army refuses to go further east; after three days Alexander announces the
+  return and raises twelve great altars on the bank.
+types: [occurrence]
+part_of: [alexander-campaigns-334]
+date:
+  value: 326 BCE..325 BCE
+  mode: window
+  calendar: julian
+  as_written: he made known to the army that he had resolved to march back again
+  cite:
+    - id: hyphasis-mutiny-326-time
+      says:
+        Chinnock dates the Hydaspes to April–May 326 BCE and the fleet's arrival at Patala to July 325
+        BCE; the turn at the Hyphasis lies between.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+      sources:
+        - source: arrian-anabasis
+          at: V.19
+          quote: (18 April to 18 May, 326 B.C.)
+        - source: arrian-anabasis
+          at: VI.17, note 773
+          quote: the fleet arriving at Patala about the time of the rising of Sirius, or July, 325 B.C.
+    - id: hyphasis-mutiny-326-text
+      says: Arrian records the announcement of the return.
+      source: arrian-anabasis
+      at: V.28
+      quote: he made known to the army that he had resolved to march back again.
+      role: supporting
+places:
+  - place: hyphasis-river
+    role: site
+participants:
+  - actor: alexander-the-great
+    role: leader
+  - actor: macedonian-kingdom
+    role: participant
+cites:
+  summary:
+    - id: hyphasis-mutiny-326-altars
+      says: Arrian records the twelve altars.
+      source: arrian-anabasis
+      at: V.29
+      quote: ordered twelve altars to be prepared, equal in height to very large towers

@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The island of Salamis off Attica, where the Athenians took refuge and the Greek fleet gathered
+  and fought Xerxes' fleet in 480 BCE. Distinct from Salamis in Cyprus.
+types: [landform]
+names:
+  - form: Salamis
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: salamis-name
+        says: Herodotus records the Greek fleet putting in at Salamis.
+        source: herodotus
+        at: VIII.40
+        quote:
+          Meanwhile the fleet of the Hellenes after leaving Artemision put in to land at Salamis at the
+          request of the Athenians
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [23.48434, 37.94267]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: salamis-location
+        says:
+          Pleiades identifies the place and gives its representative point as 37.9426651222, 23.4843388039
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 580101 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "580101"
+    url: https://pleiades.stoa.org/places/580101
+    license: CC BY 3.0

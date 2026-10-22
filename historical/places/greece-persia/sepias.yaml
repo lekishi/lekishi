@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The headland of Sepias in Magnesia, by whose beach Xerxes' fleet was moored when the storm of
+  480 BCE wrecked part of it.
+types: [landform]
+names:
+  - form: the headland of Sepias
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: sepias-name
+        says: Herodotus places the fleet's anchorage at the beach between Casthanaia and the headland of Sepias.
+        source: herodotus
+        at: VII.188
+        quote:
+          when it had put in to land in the region of Magnesia at the beach which is between the city
+          of Casthanaia and the headland of Sepias
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [23.09627, 39.49927]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: sepias-location
+        says:
+          Pleiades identifies the place and gives its representative point as 39.499269, 23.096269 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 541097 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "541097"
+    url: https://pleiades.stoa.org/places/541097
+    license: CC BY 3.0

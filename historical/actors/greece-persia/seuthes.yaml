@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Seuthes the Thracian, an Odrysian prince who hired the Greek army to recover his father's lands
+  in the winter of 400–399 BCE.
+types: [person]
+names:
+  - form: Seuthes
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: seuthes-name
+        says: Xenophon names Seuthes the Thracian sending his envoy to Xenophon.
+        source: xenophon-anabasis
+        at: VII.1
+        quote:
+          Now Seuthes the Thracian sent Medosades and begged Xenophon to use his influence to get the
+          army across.
+roles:
+  - role: ruler
+    note: Thracian prince, later king of the Odrysians.

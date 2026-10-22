@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Sinope, the Milesian colony on the Black Sea that founded Trapezus, Cerasus and Cotyora; the
+  Greeks put in at its harbour of Harmene in 400 BCE.
+types: [settlement, port]
+names:
+  - form: Σινώπη
+    lang: grc
+    script: Grek
+    roman: Sinope
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: sinope-greek-name
+        says: Pleiades records the ancient Greek name Σινώπη for this place.
+        source: pleiades
+        at: place 857321, name /places/857321/sinope, dump 2026-10-21
+      - id: sinope-name
+        says: Xenophon describes the Sinopeans as Milesian colonists in Paphlagonia.
+        source: xenophon-anabasis
+        at: VI.1
+        quote: The Sinopeans, though inhabitants of Paphlagonia, are really colonists of the Milesians.
+        role: supporting
+  - form: Sinope
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: sinope-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [35.14304, 42.02578]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: sinope-location
+        says:
+          Pleiades identifies the place and gives its representative point as 42.025776, 35.143037 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 857321 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "857321"
+    url: https://pleiades.stoa.org/places/857321
+    license: CC BY 3.0

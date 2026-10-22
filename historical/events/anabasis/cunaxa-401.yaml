@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The king's army meets Cyrus's in Babylonia. The Greeks rout the troops in front of them, but
+  Cyrus charges the king's centre, wounds Artaxerxes, and is killed.
+types: [occurrence]
+part_of: [cyrus-expedition-401]
+date:
+  value: 401 BCE
+  mode: window
+  calendar: julian
+  as_written: So died Cyrus
+  cite:
+    - id: cunaxa-401-time
+      says: Grote dates the battle of Kunaxa to about September or October 401 BCE.
+      source: grote-history-of-greece
+      at: vol. IX, ch. LXIX
+      quote:
+        It was about six months afterwards, in the month of September or October of the same year,
+        that the battle of Kunaxa was fought
+      basis: interpretation
+      attributed_to: George Grote
+    - id: cunaxa-401-text
+      says: Xenophon records Cyrus's death in the battle.
+      source: xenophon-anabasis
+      at: I.9
+      quote: So died Cyrus
+      role: supporting
+places:
+  - place: cunaxa
+    role: site
+participants:
+  - actor: cyrus-the-younger
+    role: leader
+  - actor: artaxerxes-ii
+    role: leader
+  - actor: cyreans
+    role: participant
+  - actor: clearchus
+    role: participant
+  - actor: ariaeus
+    role: participant
+  - actor: tissaphernes
+    role: participant
+notes: Xenophon does not name the battlefield; the name Kunaxa is Plutarch's, used by Grote.
+cites:
+  summary:
+    - id: cunaxa-401-charge
+      says: Xenophon records Cyrus charging the king.
+      source: xenophon-anabasis
+      at: I.8
+      quote:
+        It was then that Cyrus, in apprehension lest the king might get round to the rear and cut to
+        pieces the Hellenic body, charged to meet him.
+    - id: cunaxa-401-death
+      says: Xenophon records Cyrus falling.
+      source: xenophon-anabasis
+      at: I.8
+      quote: On the other, Cyrus himself fell, and eight of his bravest companions lay on the top of him.
+      role: supporting

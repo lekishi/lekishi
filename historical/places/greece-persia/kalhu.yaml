@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Kalhu (Nimrud), the old Assyrian royal city on the Tigris, which Xenophon saw in 401 BCE as a
+  large deserted city called Larissa.
+types: [settlement]
+names:
+  - form: Larissa
+    lang: en
+    script: Latn
+    note: Xenophon's name for the ruins in Dakyns's translation.
+    cite:
+      - id: kalhu-name
+        says: Xenophon records the Greeks reaching a large deserted city called Larissa.
+        source: xenophon-anabasis
+        at: III.4
+        quote: Here they came upon a large deserted city, the name of which was Larissa
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [43.33154, 36.09998]
+    notes:
+      The gazetteer's point for Nimrud. The identification of Xenophon's Larissa with Nimrud is the
+      translator's and modern scholarship's, not Xenophon's.
+    cite:
+      - id: kalhu-location
+        says:
+          Pleiades identifies the place and gives its representative point as 36.0999751709, 43.3315352658
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 894019 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "894019"
+    url: https://pleiades.stoa.org/places/894019
+    license: CC BY 3.0

@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Kyme in Aeolis, where the remnant of Xerxes' fleet wintered in 480–479 BCE. Distinct from Cumae
+  in Campania.
+types: [settlement, port]
+names:
+  - form: Κύμη
+    lang: grc
+    script: Grek
+    roman: Kyme
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: kyme-aeolis-greek-name
+        says: Pleiades records the ancient Greek name Κύμη for this place.
+        source: pleiades
+        at: place 550506, name /places/550506/cyme, dump 2026-10-21
+      - id: kyme-aeolis-name
+        says: Herodotus records the fleet wintering at Kyme.
+        source: herodotus
+        at: VIII.130
+        quote: passed the winter at Kyme
+        role: supporting
+  - form: Kyme
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: kyme-aeolis-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [26.93832, 38.76019]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: kyme-aeolis-location
+        says:
+          Pleiades identifies the place and gives its representative point as 38.7601928185, 26.938319355
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 550506 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "550506"
+    url: https://pleiades.stoa.org/places/550506
+    license: CC BY 3.0

@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Alexander crosses the desert to the temple of Ammon to consult the oracle, as Perseus and Heracles
+  were said to have done, and returns to Memphis.
+types: [journey]
+part_of: [alexander-campaigns-334]
+date:
+  value: 332 BCE..331 BCE
+  mode: window
+  calendar: julian
+  as_written: Alexander was seized by an ardent desire to visit Ammon in Libya
+  cite:
+    - id: siwa-oracle-331-time
+      says:
+        Chinnock dates the fall of Tyre to the end of July or beginning of August 332 BCE and the arrival
+        at Thapsacus to June–July 331 BCE; this stage lies between.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+      sources:
+        - source: arrian-anabasis
+          at: II.24, note 331
+          quote: The end of July and beginning of August B.C. 332.
+        - source: arrian-anabasis
+          at: III.7, note 381
+          quote: June-July, B.C. 331.
+    - id: siwa-oracle-331-text
+      says: Arrian records the decision to go to Ammon.
+      source: arrian-anabasis
+      at: III.3
+      quote: After these transactions, Alexander was seized by an ardent desire to visit Ammon in Libya
+      role: supporting
+places:
+  - place: alexandria-egypt
+    role: start
+  - place: siwa
+    role: site
+  - place: memphis
+    role: end
+participants:
+  - actor: alexander-the-great
+    role: leader
+notes:
+  Arrian names a return to Memphis; some authors he mentions had Alexander go back by a different
+  road. The route through the desert is not drawn.
+cites:
+  summary:
+    - id: siwa-oracle-331-purpose
+      says: Arrian gives Alexander's purpose in going to Ammon.
+      source: arrian-anabasis
+      at: III.3
+      quote:
+        Accordingly he made the expedition to Ammon with the design of learning his own origin more
+        certainly

@@ -1,0 +1,67 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Off Artemision the Greek fleet under Eurybiades fights Xerxes' fleet from Aphetai on three days,
+  the same days as Thermopylae; after the third day's drawn battle and the news from Thermopylae, it withdraws
+  south.
+types: [occurrence]
+date:
+  value: 480 BCE
+  mode: window
+  calendar: julian
+  as_written: these battles at sea and the battles on land at Thermopylai took place on the same days
+  cite:
+    - id: artemisium-480-time
+      says: Grote dates the Greek fleet's arrival at Artemisium to about the latter part of June 480 BCE.
+      source: grote-history-of-greece
+      at: vol. V, ch. XL
+      quote:
+        the land-force under the Spartan king Leonidas, the naval force under the Spartan commander
+        Eurybiadês, apparently about the latter part of the month of June.
+      basis: interpretation
+      attributed_to: George Grote
+    - id: artemisium-480-text
+      says: Herodotus synchronizes the sea fights with Thermopylae.
+      source: herodotus
+      at: VIII.15
+      quote:
+        Now it so happened that these battles at sea and the battles on land at Thermopylai took place
+        on the same days
+      role: supporting
+places:
+  - place: artemisium
+    role: site
+  - place: aphetai
+    role: context
+    note: The Persian fleet's anchorage, from which it sailed out.
+participants:
+  - actor: eurybiades
+    role: leader
+  - actor: themistocles
+    role: participant
+  - actor: hellenic-alliance
+    role: participant
+  - actor: persian-empire
+    role: participant
+cites:
+  summary:
+    - id: artemisium-480-third
+      says: Herodotus records the third day's battle as nearly equal.
+      source: herodotus
+      at: VIII.16
+      quote:
+        Then the Hellenes put out to sea and engaged with them; and in this battle the two sides were
+        nearly equal to one another
+    - id: artemisium-480-withdrawal
+      says: Herodotus records the news from Thermopylae reaching the fleet.
+      source: herodotus
+      at: VIII.21
+      quote:
+        This Abronichos then had arrived, and he proceeded to signify to them that which had come to
+        pass about Leonidas and his army
+      role: supporting
+  places:
+    - id: artemisium-480-places
+      says: Herodotus names Artemision and Aphetai as the two fleets' stations.
+      source: herodotus
+      at: VIII.11
+      quote: The Hellenes accordingly sailed away to Artemision and the Barbarians to Aphetai

@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Bessus, satrap of Bactria, who seized Darius III in 330 BCE, claimed the kingship, and was handed
+  over to Alexander in 329 BCE.
+types: [person]
+names:
+  - form: Bessus
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: bessus-name
+        says: Arrian records Bessus, viceroy of Bactria, joining in the arrest of Darius.
+        source: arrian-anabasis
+        at: III.21
+        quote:
+          Bessus, viceroy of Bactria, and Barsaëntes, viceroy of the Arachotians and Drangians, had jointly
+          arrested the king.
+roles:
+  - role: official
+    note: Persian satrap (viceroy) of Bactria.

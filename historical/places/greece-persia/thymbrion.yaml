@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Thymbrium, a populous city of Phrygia on Cyrus's road east in 401 BCE.
+types: [settlement]
+names:
+  - form: Thymbrium
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: thymbrion-name
+        says: Xenophon records the army reaching Thymbrium, a populous city.
+        source: xenophon-anabasis
+        at: I.2
+        quote: From this place he marched two stages--ten parasangs--to Thymbrium, a populous city.
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: "Unlocated: the gazetteer records Thymbrium without a position. No point is drawn."
+    cite:
+      - id: thymbrion-unlocated
+        says: Pleiades records Thymbrion as unlocated.
+        source: pleiades
+        at: "place 614857 (locationPrecision: unlocated), dump 2026-10-21"
+external_ids:
+  - system: pleiades
+    id: "614857"
+    url: https://pleiades.stoa.org/places/614857
+    license: CC BY 3.0

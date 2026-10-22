@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Alexander's marriage to Roxana, daughter of the Bactrian Oxyartes, after the taking of the Sogdian
+  rock.
+types: [other]
+from: alexander-the-great
+to: roxana
+directionality: mutual
+date:
+  value: 327 BCE
+  mode: window
+  calendar: julian
+  as_written: He had already married Roxana
+  cite:
+    - id: alexander-marries-roxana-327-time
+      says:
+        Chinnock dates the advance on the Sogdian rock, where Roxana was captured, to the spring of
+        327 BCE.
+      source: arrian-anabasis
+      at: IV.18, note 580
+      quote: Of the year 327 B.C.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+notes:
+  Typed other because the relationship vocabulary has no type for a marriage; the chapter's feasibility
+  note proposes one.
+cite:
+  - id: alexander-marries-roxana-327-basis
+    says: Arrian records that Alexander had married Roxana, daughter of Oxyartes.
+    source: arrian-anabasis
+    at: VII.4
+    quote: He had already married Roxana, daughter of Oxyartes the Bactrian.

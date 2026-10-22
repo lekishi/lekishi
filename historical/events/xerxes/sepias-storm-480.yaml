@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Moored eight deep off the beach by the headland of Sepias, Xerxes' fleet is caught at dawn by
+  an east wind, the Hellespontias; by the lowest report at least four hundred ships are lost.
+types: [occurrence]
+part_of: [xerxes-invasion-480]
+date:
+  value: 480 BCE
+  mode: window
+  calendar: julian
+  as_written: at early dawn, after clear sky and windless calm, the sea began to be violently agitated
+  cite:
+    - id: sepias-storm-480-time
+      says:
+        Grote dates the Greek occupation of Thermopylae and Artemisium, which preceded the storm, to
+        about the latter part of June 480 BCE.
+      source: grote-history-of-greece
+      at: vol. V, ch. XL
+      quote:
+        the land-force under the Spartan king Leonidas, the naval force under the Spartan commander
+        Eurybiadês, apparently about the latter part of the month of June.
+      basis: interpretation
+      attributed_to: George Grote
+    - id: sepias-storm-480-text
+      says: Herodotus records the storm breaking at dawn after the first night at the anchorage.
+      source: herodotus
+      at: VII.188
+      quote:
+        For that night they lay thus; but at early dawn, after clear sky and windless calm, the sea
+        began to be violently agitated and a great storm fell upon them with a strong East Wind
+      role: supporting
+places:
+  - place: sepias
+    role: site
+participants:
+  - actor: persian-empire
+    role: participant
+notes:
+  The loss is Herodotus's lowest reported figure, not a count; the storm lasted three days in his
+  account (VII.191).
+cites:
+  summary:
+    - id: sepias-storm-480-losses
+      says: Herodotus gives at least four hundred ships lost, by the lowest report.
+      source: herodotus
+      at: VII.190
+      quote:
+        In this disaster the number of the ships which were lost was not less than four hundred, according
+        to the report of those who state the number which is lowest

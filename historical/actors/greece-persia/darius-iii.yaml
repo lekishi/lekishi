@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Darius III, the last Achaemenid king, defeated by Alexander at Issus in 333 BCE and at Gaugamela
+  in 331 BCE, and killed by his own satraps in 330 BCE.
+types: [person]
+names:
+  - form: Darius
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: darius-iii-name
+        says: Arrian records the end of Darius.
+        source: arrian-anabasis
+        at: III.22
+        quote: Such was the end of Darius, in the archonship of Aristophon at Athens, in the month Hecatombaion.
+roles:
+  - role: ruler
+    note: King of the Persians, about 336–330 BCE.
+    cite:
+      - id: darius-iii-role
+        says: Arrian refers to the start of Darius's reign over the Persians.
+        source: arrian-anabasis
+        at: II.14
+        quote: Alexander also, from the time when Darius began to reign over the Persians

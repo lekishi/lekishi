@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "Sparta's support for Cyrus in 401 BCE: a Peloponnesian fleet under a Lacedaemonian admiral
+  joins him at Issus."
+types: [alliance]
+from: sparta-state
+to: cyrus-the-younger
+directionality: directed
+causality: not_asserted
+date:
+  value: 401 BCE
+  mode: window
+  calendar: julian
+  as_written: thirty-five ships from Peloponnesus
+  cite:
+    - id: sparta-aids-cyrus-401-time
+      says:
+        Grote dates the start of Cyrus's march to March or April 401 BCE; the fleet joined at Issus
+        during it.
+      source: grote-history-of-greece
+      at: vol. IX, ch. LXIX
+      quote: With such means Cyrus set forth, (March or April, 401 B.C.), from Sardis.
+      basis: interpretation
+      attributed_to: George Grote
+cite:
+  - id: sparta-aids-cyrus-401-basis
+    says: Xenophon records Peloponnesian ships under a Lacedaemonian admiral joining Cyrus.
+    source: xenophon-anabasis
+    at: I.4
+    quote:
+      There were thirty-five ships from Peloponnesus, with the Lacedaemonian admiral Pythagoras on
+      board.

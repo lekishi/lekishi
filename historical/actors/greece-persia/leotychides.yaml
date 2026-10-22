@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Leotychides, the Spartan king who commanded the Greek fleet in 479 BCE, from Aegina and Delos
+  to Mycale.
+types: [person]
+names:
+  - form: Leotychides
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: leotychides-name
+        says: Herodotus names Leotychides as commander and admiral of the fleet.
+        source: herodotus
+        at: VIII.131
+        quote:
+          when the fleet arrived at Egina, in number one hundred and ten ships, and the commander and
+          admiral was Leotychides
+roles:
+  - role: ruler
+    note: King of the Lacedemonians.

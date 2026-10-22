@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The land army that is to march with Xerxes assembles at Critalla in Cappadocia, crosses the Halys,
+  passes Kelainai in Phrygia, and reaches Sardis.
+types: [campaign]
+date:
+  value: 481 BCE
+  mode: window
+  calendar: julian
+  as_written:
+    the land army assembles at Critalla and marches to Sardis (Herodotus); the autumn of 481
+    B. C. (Grote)
+  cite:
+    - id: xerxes-muster-481-time
+      says:
+        Grote dates the army's arrival at Sardis, after its assembly at Critalla, to the autumn of 481
+        BCE.
+      source: grote-history-of-greece
+      at: vol. V, ch. XXXVIII
+      quote:
+        In the autumn of the year 481 B. C., the vast army thus raised by Xerxes arrived, from all
+        quarters of the empire, at or near to Sardis; a large portion of it having been directed to assemble
+        at Kritala in Kappadokia
+      basis: interpretation
+      attributed_to: George Grote
+    - id: xerxes-muster-481-text
+      says: Herodotus records the land army marching with Xerxes from Critalla to Sardis; he gives no year.
+      source: herodotus
+      at: VII.26
+      quote:
+        the whole land-army had been assembled together and was marching with Xerxes to Sardis, setting
+        forth from Critalla in Cappadokia
+      role: supporting
+places:
+  - place: kritalla
+    role: start
+  - place: kelainai
+    role: waypoint
+  - place: sardis
+    role: end
+participants:
+  - actor: xerxes
+    role: leader
+  - actor: persian-empire
+    role: participant
+notes:
+  Herodotus says only that the army set out from Critalla and came to Sardis; he gives no date, and
+  the autumn of 481 BCE is Grote's reckoning. Critalla is unlocated, so no line is drawn from it.
+cites:
+  places:
+    - id: xerxes-muster-481-places
+      says:
+        Herodotus names Critalla as the start, the crossing of the Halys, and Kelainai on the way to
+        Sardis.
+      source: herodotus
+      at: VII.26
+      quote:
+        Then after they had crossed the river Halys and had entered Phrygia, marching through this
+        land they came to Kelainai, where the springs of the river Maiander come up

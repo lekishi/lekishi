@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The wall of Media, a long wall across the plain between the Euphrates and the Tigris that the
+  Greeks passed within during their march north after Cunaxa in 401 BCE.
+types: [fortification]
+names:
+  - form: the wall of Media
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: wall-of-media-name
+        says: Xenophon records the Greeks reaching and passing within the wall of Media.
+        source: xenophon-anabasis
+        at: II.4
+        quote:
+          Three stages they had accomplished ere they reached the wall of Media, as it is called, and
+          passed within it.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [44.2698, 33.1216]
+    notes:
+      The gazetteer's point for the wall at Habl as-Sahr. It is the gazetteer's identification for
+      a long work, not a position the text states.
+    cite:
+      - id: wall-of-media-location
+        says:
+          Pleiades identifies the place and gives its representative point as 33.1216, 44.2698 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 896945 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "896945"
+    url: https://pleiades.stoa.org/places/896945
+    license: CC BY 3.0

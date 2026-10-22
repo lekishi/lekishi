@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Caystru-pedion, 'the plain of the Cayster', a populous city where Cyrus halted five days in 401
+  BCE and the Cilician queen Epyaxa came to visit him.
+types: [settlement]
+names:
+  - form: Caystru-pedion
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: kaystrou-pedion-name
+        says: Xenophon records the army reaching Caystru-pedion, a populous city.
+        source: xenophon-anabasis
+        at: I.2
+        quote: Thence a march of three stages--thirty parasangs--brought him to Caystru-pedion
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: "Unlocated: the gazetteer records the place without a position. No point is drawn."
+    cite:
+      - id: kaystrou-pedion-unlocated
+        says: Pleiades records Kaystrou Pedion as unlocated.
+        source: pleiades
+        at: "place 614693 (locationPrecision: unlocated), dump 2026-10-21"
+external_ids:
+  - system: pleiades
+    id: "614693"
+    url: https://pleiades.stoa.org/places/614693
+    license: CC BY 3.0

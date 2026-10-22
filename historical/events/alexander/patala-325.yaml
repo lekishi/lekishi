@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  After the voyage down the Indus, and a near-fatal wound among the Mallians, Alexander reaches
+  Patala at the head of the delta and finds it deserted.
+types: [occurrence]
+part_of: [alexander-campaigns-334]
+date:
+  value: 325 BCE
+  mode: window
+  calendar: julian
+  as_written: when he arrived at Patala
+  cite:
+    - id: patala-325-time
+      says:
+        Chinnock reports Aristobulus's statement that the fleet reached Patala about the rising of Sirius,
+        July 325 BCE.
+      source: arrian-anabasis
+      at: VI.17, note 773
+      quote: the fleet arriving at Patala about the time of the rising of Sirius, or July, 325 B.C.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+    - id: patala-325-text
+      says: Arrian records the arrival at Patala.
+      source: arrian-anabasis
+      at: VI.17
+      quote: and when he arrived at Patala, he found both the country and the city deserted
+      role: supporting
+places:
+  - place: patala
+    role: site
+participants:
+  - actor: alexander-the-great
+    role: leader
+cites:
+  summary:
+    - id: patala-325-wound
+      says: Arrian records Alexander's wound among the Mallians.
+      source: arrian-anabasis
+      at: VI.10
+      quote:
+        Alexander himself also was wounded with an arrow under the breast through his breastplate into
+        the chest

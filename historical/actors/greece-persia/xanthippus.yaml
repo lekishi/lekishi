@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Xanthippos son of Ariphron, who commanded the Athenians at Mycale and in the siege of Sestos
+  in 479 BCE.
+types: [person]
+names:
+  - form: Xanthippos
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: xanthippus-name
+        says: Herodotus names Xanthippos as the Athenians' commander at the Hellespont.
+        source: herodotus
+        at: IX.114
+        quote:
+          while the Athenians and Xanthippos their commander determined to stay behind there and to make
+          an attempt upon the Chersonese
+roles:
+  - role: soldier
+    note: Athenian commander, 479 BCE.

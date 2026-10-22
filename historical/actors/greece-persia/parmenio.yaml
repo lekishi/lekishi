@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Parmenio, Philip's and Alexander's senior general, who ferried the army across the Hellespont
+  in 334 BCE, commanded the left at Issus and Gaugamela, and was put to death in 330 BCE after his son
+  Philotas.
+types: [person]
+names:
+  - form: Parmenio
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: parmenio-name
+        says: Arrian records Parmenio ferrying the army from Sestus to Abydus.
+        source: arrian-anabasis
+        at: I.11
+        quote:
+          He then committed to Parmenio the duty of conveying the cavalry and the greater part of the
+          infantry from Sestus to Abydus
+roles:
+  - role: soldier
+    note: General of Alexander, 334–330 BCE.

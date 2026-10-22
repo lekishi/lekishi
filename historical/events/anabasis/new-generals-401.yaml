@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  That night the leaderless Greeks choose new generals; Xenophon the Athenian is chosen in place
+  of his friend Proxenus.
+types: [council]
+part_of: [cyrus-expedition-401]
+date:
+  value: 401 BCE
+  mode: window
+  calendar: julian
+  as_written: After this the generals were chosen
+  cite:
+    - id: new-generals-401-time
+      says:
+        Grote dates Kunaxa to about September or October 401 BCE and the Greeks' entry into Armenia
+        to December; the election lies between.
+      basis: interpretation
+      attributed_to: George Grote
+      sources:
+        - source: grote-history-of-greece
+          at: vol. IX, ch. LXIX
+          quote:
+            It was about six months afterwards, in the month of September or October of the same year,
+            that the battle of Kunaxa was fought
+        - source: grote-history-of-greece
+          at: vol. IX, ch. LXX
+          quote: extremely cold at the season when they entered it,—December
+places:
+  - place: zapatas-river
+    role: site
+participants:
+  - actor: xenophon
+    role: leader
+  - actor: cheirisophus
+    role: participant
+  - actor: cyreans
+    role: participant
+cites:
+  summary:
+    - id: new-generals-401-chosen
+      says: Xenophon records the choosing of new generals.
+      source: xenophon-anabasis
+      at: III.1
+      quote: After this the generals were chosen.
+    - id: new-generals-401-xenophon
+      says: Xenophon records himself chosen in place of Proxenus.
+      source: xenophon-anabasis
+      at: III.1
+      quote: and in place of Proxenus, Xenophon the Athenian.
+      role: supporting

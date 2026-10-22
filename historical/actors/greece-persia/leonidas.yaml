@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Leonidas son of Anaxandrides, king of the Lacedemonians, who led the Greek force at Thermopylae
+  and was killed there in 480 BCE.
+types: [person]
+names:
+  - form: Leonidas
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: leonidas-name
+        says: Herodotus names Leonidas son of Anaxandrides as leader of the whole Greek army at Thermopylae.
+        source: herodotus
+        at: VII.204
+        quote:
+          he who was most held in regard and who was leader of the whole army was the Lacedemonian Leonidas
+          son of Anaxandrides
+roles:
+  - role: ruler
+    note: King of the Lacedemonians.

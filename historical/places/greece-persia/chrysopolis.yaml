@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Chrysopolis in the territory of Chalcedon, on the Asian shore of the Bosporus opposite Byzantium,
+  which the army reached in 400 BCE.
+types: [settlement, port]
+names:
+  - form: Chrysopolis
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: chrysopolis-name
+        says: Xenophon records the army reaching Chrysopolis in the territory of Chalcedon.
+        source: xenophon-anabasis
+        at: VI.6
+        quote: and on the sixth day reached Chrysopolis in Chalcedonia .
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [29.01286, 41.02064]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: chrysopolis-location
+        says:
+          Pleiades identifies the place and gives its representative point as 41.020639, 29.012856 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 520995 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "520995"
+    url: https://pleiades.stoa.org/places/520995
+    license: CC BY 3.0

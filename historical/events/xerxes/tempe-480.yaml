@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  About ten thousand Greek hoplites sail through the Euripus, land at Alos and occupy the pass
+  of Tempe with the Thessalian cavalry; warned that the pass can be turned, they withdraw to the Isthmus,
+  and the Thessalians go over to the Persians.
+types: [campaign]
+date:
+  value: 480 BCE
+  mode: window
+  calendar: julian
+  as_written:
+    which took place when the king was about to cross over from Asia to Europe and was already
+    at Abydos
+  cite:
+    - id: tempe-480-time
+      says: Grote dates the expedition to Tempe to the beginning of 480 BCE.
+      source: grote-history-of-greece
+      at: vol. V, ch. XXXIX
+      quote:
+        It was near the time when Xerxes was about to pass the Hellespont, in the beginning of 480
+        B. C., that the first actual step for resistance was taken, at the instigation of the Thessalians.
+      basis: interpretation
+      attributed_to: George Grote
+    - id: tempe-480-text
+      says: Herodotus times the expedition to when Xerxes was at Abydos.
+      source: herodotus
+      at: VII.174
+      quote:
+        Such was the expedition to Thessaly, which took place when the king was about to cross over
+        from Asia to Europe and was already at Abydos.
+      role: supporting
+places:
+  - place: tempe
+    role: site
+  - place: isthmus-of-corinth
+    role: end
+    note: Where the force returned.
+participants:
+  - actor: hellenic-alliance
+    role: participant
+  - actor: themistocles
+    role: leader
+    note: Herodotus names him commander of the Athenians.
+cites:
+  places:
+    - id: tempe-480-places
+      says: Herodotus records the Hellenes encamping at Tempe.
+      source: herodotus
+      at: VII.173
+      quote:
+        and arrived at Tempe, the pass which leads from lower Macedonia into Thessaly by the river
+        Peneios, going between the mountains of Olympos and Ossa. There the Hellenes encamped, being assembled
+        to the number of about ten thousand hoplites
+  participants:
+    - id: tempe-480-commanders
+      says: Herodotus names Themistocles as commander of the Athenians at Tempe.
+      source: herodotus
+      at: VII.173
+      quote: and of the Athenians Themistocles the

@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Artemisia, daughter of Lygdamis, ruler of Halicarnassus, who commanded ships in Xerxes' fleet
+  and, in Herodotus's account, advised him against fighting at Salamis.
+types: [person]
+names:
+  - form: Artemisia
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: artemisia-name
+        says: Herodotus names Artemisia, daughter of Lygdamis, of Halicarnassus.
+        source: herodotus
+        at: VII.99
+        quote:
+          Now her name, as I said, was Artemisia and she was the daughter of Lygdamis, and by descent
+          she was of Halicarnassos on the side of her father, but of Crete by her mother.
+roles:
+  - role: ruler
+    note: Ruler of Halicarnassus under the Persian king, in Herodotus's account.

@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Ceramon-agora, 'the market of the Ceramians', a populous city on the borders of Mysia that Cyrus's
+  army reached in 401 BCE. It is known only from Xenophon.
+types: [settlement]
+names:
+  - form: Κεράμων ἀγορά
+    lang: grc
+    script: Grek
+    roman: Ceramon-agora
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: keramon-agora-greek-name
+        says: Pleiades records the ancient Greek name Κεράμων ἀγορά for this place.
+        source: pleiades
+        at: place 614696, name /places/614696/keramon-agora, dump 2026-10-21
+      - id: keramon-agora-name
+        says: Xenophon names Ceramon-agora as a populous city, the last on the borders of Mysia.
+        source: xenophon-anabasis
+        at: I.2
+        quote:
+          From this place the march was continued two stages--twelve parasangs--to Ceramon-agora, a populous
+          city, the last on the confines of Mysia.
+        role: supporting
+  - form: Ceramon-agora
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: keramon-agora-name
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: "Unlocated: the gazetteer records Ceramon-agora without a position. No point is drawn."
+    cite:
+      - id: keramon-agora-unlocated
+        says: Pleiades records Keramon Agora as unlocated.
+        source: pleiades
+        at: "place 614696 (locationPrecision: unlocated), dump 2026-10-21"
+external_ids:
+  - system: pleiades
+    id: "614696"
+    url: https://pleiades.stoa.org/places/614696
+    license: CC BY 3.0

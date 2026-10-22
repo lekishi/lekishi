@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: The oasis of Ammon (Siwa) in the Libyan desert, whose oracle Alexander consulted in 331 BCE.
+types: [religious_site, settlement]
+names:
+  - form: Ammon
+    lang: en
+    script: Latn
+    note: Arrian names the place by its god; Siwa is its modern name.
+    cite:
+      - id: siwa-name
+        says: Arrian describes the site of the temple of Ammon in the desert.
+        source: arrian-anabasis
+        at: III.4
+        quote:
+          The place where the temple of Ammon is located is entirely surrounded by a desert of far-stretching
+          sand, which is destitute of water.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [25.54351, 29.20517]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: siwa-location
+        says:
+          Pleiades identifies the place and gives its representative point as 29.2051737961, 25.5435073559
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 716520 (reprLatLong, locationPrecision), dump 2026-10-21
+modern:
+  - form: Siwa
+    lang: en
+    note: The modern oasis on the site.
+external_ids:
+  - system: pleiades
+    id: "716520"
+    url: https://pleiades.stoa.org/places/716520
+    license: CC BY 3.0

@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Ecbatana, the Median royal city, where Alexander sent the Greek allies home in 330 BCE and where
+  Hephaestion died in 324 BCE.
+types: [capital]
+names:
+  - form: Ἐκβάτανα
+    lang: grc
+    script: Grek
+    roman: Ecbatana
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: ecbatana-greek-name
+        says: Pleiades records the ancient Greek name Ἐκβάτανα for this place.
+        source: pleiades
+        at: place 903021, name /places/903021/ekbatana, dump 2026-10-21
+      - id: ecbatana-name
+        says: Arrian records Alexander reaching Ecbatana and sending the Greek allies home.
+        source: arrian-anabasis
+        at: III.19
+        quote:
+          When Alexander reached Ecbatana, he sent the Thessalian cavalry and the other Grecian allies
+          back to the sea
+        role: supporting
+  - form: Ecbatana
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: ecbatana-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [48.51641, 34.80556]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: ecbatana-location
+        says:
+          Pleiades identifies the place and gives its representative point as 34.80555515, 48.51640575
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 903021 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "903021"
+    url: https://pleiades.stoa.org/places/903021
+    license: CC BY 3.0

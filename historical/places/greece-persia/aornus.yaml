@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The rock of Aornus above the Indus, to which the people of the region fled and which Alexander
+  took in 327–326 BCE. Distinct from the Bactrian city Arrian also calls Aornus.
+types: [fortification, landform]
+names:
+  - form: Aornus
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: aornus-name
+        says: Arrian records the inhabitants fleeing to the rock called Aornus.
+        source: arrian-anabasis
+        at: IV.28
+        quote:
+          For all the inhabitants deserted the cities and began to flee to the rock which is in their
+          land, and is called Aornus.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [73.28464, 34.72192]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: aornus-location
+        says:
+          Pleiades identifies the place and gives its representative point as 34.72192, 73.28464 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 59687 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "59687"
+    url: https://pleiades.stoa.org/places/59687
+    license: CC BY 3.0

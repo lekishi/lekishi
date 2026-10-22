@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At a banquet at Maracanda Clitus, angered by flattery of Alexander, praises Philip over him;
+  Alexander kills him with a pike and then mourns him.
+types: [occurrence]
+part_of: [alexander-campaigns-334]
+date:
+  value: 330 BCE..327 BCE
+  mode: window
+  calendar: julian
+  as_written: THE MURDER OF CLITUS
+  cite:
+    - id: clitus-killed-328-time
+      says:
+        Chinnock dates Darius's death to July 330 BCE and the advance on the Sogdian rock to the spring
+        of 327 BCE; this stage lies between.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+      sources:
+        - source: arrian-anabasis
+          at: III.22, note 467
+          quote: In the year B.C. 330, the first of Hecatombaion fell on the first of July.
+        - source: arrian-anabasis
+          at: IV.18, note 580
+          quote: Of the year 327 B.C.
+    - id: clitus-killed-328-text
+      says: Arrian introduces the death of Clitus.
+      source: arrian-anabasis
+      at: IV.8
+      quote: Here also I shall give an account of the tragic fate of Clitus, son of Dropidas
+      role: supporting
+places:
+  - place: maracanda
+    role: site
+participants:
+  - actor: alexander-the-great
+    role: participant
+  - actor: clitus-the-black
+    role: subject
+notes: Arrian places the episode out of order, saying he tells it here though it happened a little later.
+cites:
+  summary:
+    - id: clitus-killed-328-pike
+      says: Arrian reports Alexander killing Clitus with a guard's pike.
+      source: arrian-anabasis
+      at: IV.8
+      quote:
+        according to others, a long pike from one of his ordinary guards, with which he struck Clitus
+        and killed him.

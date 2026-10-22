@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  After viewing the dead at Thermopylae, the fleet crosses to Histiaia, waits three days, sails
+  through the Euripus and in three more days reaches Phaleron.
+types: [journey]
+part_of: [xerxes-invasion-480]
+date:
+  value: 480 BCE
+  mode: window
+  calendar: julian
+  as_written:
+    after staying three days sailed through Euripos, and in other three days they had reached
+    Phaleron
+  cite:
+    - id: fleet-at-phaleron-480-time
+      says:
+        Grote places the arrival at Athens, which the fleet's arrival at Phaleron accompanied, in 480
+        BCE.
+      source: grote-history-of-greece
+      at: vol. V, ch. XLI
+      quote:
+        Four months had elapsed since the departure from Asia when Xerxes reached Athens, the last
+        term of his advance.
+      basis: interpretation
+      attributed_to: George Grote
+    - id: fleet-at-phaleron-480-text
+      says: Herodotus records the fleet's passage from Histiaia to Phaleron in six days.
+      source: herodotus
+      at: VIII.66
+      quote:
+        having passed over from thence to Histiaia, after staying three days sailed through Euripos,
+        and in other three days they had reached Phaleron
+      role: supporting
+places:
+  - place: histiaia
+    role: start
+  - place: phaleron
+    role: end
+participants:
+  - actor: persian-empire
+    role: participant

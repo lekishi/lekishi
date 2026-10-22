@@ -1,0 +1,92 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  After a night move by the Persian fleet to close the straits and Themistocles's message to Xerxes,
+  the Greek fleet fights in the narrows off Salamis; the Persian line falls into disorder, Ariabignes
+  the king's brother is killed, and Aristeides's hoplites kill the Persians landed on Psyttaleia.
+types: [occurrence]
+date:
+  value: 480 BCE
+  mode: window
+  calendar: julian
+  as_written: as the dawn appeared, they made an assembly of those who fought on board the ships
+  cite:
+    - id: salamis-480-time
+      says:
+        Grote places the battle a few days before Xerxes' withdrawal from Attica, which he dates to
+        the beginning of September 480 BCE.
+      source: grote-history-of-greece
+      at: vol. V, ch. XLI
+      quote:
+        The intimation sent by Themistoklês perhaps had the effect of hastening the departure of Xerxes,
+        who remained in Attica only a few days after the battle of Salamis
+      basis: interpretation
+      attributed_to: George Grote
+    - id: salamis-480-text
+      says: Herodotus records the Greeks preparing to fight at dawn.
+      source: herodotus
+      at: VIII.83
+      quote:
+        "The Hellenes then, since they believed that which was said by the Tenians, were preparing
+        for a sea-fight: and as the dawn appeared, they made an assembly of those who fought on board the
+        ships"
+      role: supporting
+places:
+  - place: salamis
+    role: site
+  - place: psyttaleia
+    role: site
+  - place: phaleron
+    role: context
+    note: The Persian fleet's anchorage before the battle.
+participants:
+  - actor: eurybiades
+    role: leader
+  - actor: themistocles
+    role: participant
+  - actor: artemisia
+    role: participant
+  - actor: xerxes
+    role: witness
+  - actor: hellenic-alliance
+    role: participant
+  - actor: athens-state
+    role: participant
+  - actor: persian-empire
+    role: participant
+notes:
+  Herodotus records the Athenian and the Aeginetan claims about which ship began the battle (VIII.84)
+  and the Athenian charge against the Corinthians that the Corinthians deny (VIII.94); both stay his reports.
+cites:
+  summary:
+    - id: salamis-480-disorder
+      says: Herodotus explains the outcome by the Persian line's disorder.
+      source: herodotus
+      at: VIII.86
+      quote:
+        for since the Hellenes fought in order and ranged in their places, while the Barbarians were
+        no longer ranged in order nor did anything with design, it was likely that there would be some such
+        result as in fact followed
+    - id: salamis-480-ariabignes
+      says: Herodotus records the death of Ariabignes.
+      source: herodotus
+      at: VIII.89
+      quote:
+        And meanwhile in this struggle there was slain the commander Ariabignes, son of Dareios and
+        brother of Xerxes
+      role: supporting
+    - id: salamis-480-psyttaleia
+      says: Herodotus records the killing of the Persians on Psyttaleia.
+      source: herodotus
+      at: VIII.95
+      quote:
+        with them he disembarked on the island of Psyttaleia; and these slew all the Persians who were
+        in this islet
+      role: supporting
+  places:
+    - id: salamis-480-places
+      says: Herodotus places Psyttaleia between Salamis and the mainland.
+      source: herodotus
+      at: VIII.76
+      quote:
+        landed first a large number of Persians in the small island of Psyttaleia, which lies between
+        Salamis and the mainland

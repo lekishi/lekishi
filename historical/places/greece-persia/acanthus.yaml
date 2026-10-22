@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Acanthos, a Greek city at the neck of the Athos peninsula where Xerxes' army halted and from
+  which the fleet sailed through the canal toward Therma.
+types: [settlement]
+names:
+  - form: Ἄκανθος
+    lang: grc
+    script: Grek
+    roman: Acanthos
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: acanthus-greek-name
+        says: Pleiades records the ancient Greek name Ἄκανθος for this place.
+        source: pleiades
+        at: place 501339, name /places/501339/akanthos, dump 2026-10-21
+      - id: acanthus-name
+        says: Herodotus records the army reaching Acanthos.
+        source: herodotus
+        at: VII.115
+        quote: passing by Stageiros a Hellenic city, and so came to Acanthos
+        role: supporting
+  - form: Acanthos
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: acanthus-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [23.88668, 40.39336]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: acanthus-location
+        says:
+          Pleiades identifies the place and gives its representative point as 40.3933576, 23.88668405
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 501339 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "501339"
+    url: https://pleiades.stoa.org/places/501339
+    license: CC BY 3.0

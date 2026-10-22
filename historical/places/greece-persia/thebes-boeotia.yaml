@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Thebes in Boeotia, which sided with the Persians, served as Mardonios's base in 479 BCE, and
+  was besieged by the Greeks after Plataea. Distinct from Thebes in Egypt.
+types: [settlement]
+names:
+  - form: Θῆβαι
+    lang: grc
+    script: Grek
+    roman: Thebes
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: thebes-boeotia-greek-name
+        says: Pleiades records the ancient Greek name Θῆβαι for this place.
+        source: pleiades
+        at: place 541138, name /places/541138/thebai, dump 2026-10-21
+      - id: thebes-boeotia-name
+        says: Herodotus records the Greeks resolving to march on Thebes after Plataea.
+        source: herodotus
+        at: IX.86
+        quote:
+          forthwith they determined in common council to march upon Thebes and to ask the Thebans to
+          surrender those who had taken the side of the Medes
+        role: supporting
+  - form: Thebes
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: thebes-boeotia-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [23.31765, 38.31995]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: thebes-boeotia-location
+        says:
+          Pleiades identifies the place and gives its representative point as 38.3199488333, 23.3176534333
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 541138 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "541138"
+    url: https://pleiades.stoa.org/places/541138
+    license: CC BY 3.0

@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Sailing down from Memphis to Canopus, Alexander marks out a city on the coast by Lake Mareotis
+  and names it after himself.
+types: [founding]
+part_of: [alexander-campaigns-334]
+date:
+  value: 332 BCE..331 BCE
+  mode: window
+  calendar: julian
+  as_written: where now is situated the city of Alexandria
+  cite:
+    - id: alexandria-founded-331-time
+      says:
+        Chinnock dates the fall of Tyre to the end of July or beginning of August 332 BCE and the arrival
+        at Thapsacus to June–July 331 BCE; this stage lies between.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+      sources:
+        - source: arrian-anabasis
+          at: II.24, note 331
+          quote: The end of July and beginning of August B.C. 332.
+        - source: arrian-anabasis
+          at: III.7, note 381
+          quote: June-July, B.C. 331.
+    - id: alexandria-founded-331-text
+      says: Arrian records the founding site.
+      source: arrian-anabasis
+      at: III.1
+      quote: and disembarked where now is situated the city of Alexandria, which takes its name from him.
+      role: supporting
+places:
+  - place: memphis
+    role: start
+  - place: alexandria-egypt
+    role: site
+participants:
+  - actor: alexander-the-great
+    role: leader
+cites:
+  summary:
+    - id: alexandria-founded-331-wall
+      says: Arrian records the marking out of the city's circuit.
+      source: arrian-anabasis
+      at: III.2
+      quote:
+        and thus the circle of the fortification which he was making for the city was completely marked
+        out.

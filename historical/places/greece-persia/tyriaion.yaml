@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Tyriaeum in Phrygia, where Cyrus reviewed his Greeks and barbarians in the plain to show them
+  to the Cilician queen in 401 BCE.
+types: [settlement]
+names:
+  - form: Τοριαῖον
+    lang: grc
+    script: Grek
+    roman: Tyriaeum
+    scheme: other
+    note:
+      The Greek form the gazetteer records for the place; Xenophon's manuscripts spell it differently,
+      and the reading aid is Dakyns's form.
+    cite:
+      - id: tyriaion-greek-name
+        says: Pleiades records the ancient Greek name Τοριαῖον for this place.
+        source: pleiades
+        at: place 609564, name /places/609564/toriaion, dump 2026-10-21
+      - id: tyriaion-name
+        says: Xenophon records the army reaching Tyriaeum, a populous city.
+        source: xenophon-anabasis
+        at: I.2
+        quote: From this place he marched two stages--ten parasangs--to Tyriaeum, a populous city.
+        role: supporting
+  - form: Tyriaeum
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: tyriaion-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [31.9043, 38.28255]
+    notes:
+      The gazetteer marks its identification of this place with a question mark; the point is the gazetteer's,
+      not the text's.
+    cite:
+      - id: tyriaion-location
+        says:
+          Pleiades identifies the place and gives its representative point as 38.282553, 31.904303 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 609564 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "609564"
+    url: https://pleiades.stoa.org/places/609564
+    license: CC BY 3.0

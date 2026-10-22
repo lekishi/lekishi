@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Alexander leads the army back west through the desert of the Gadrosians, with great losses of
+  men and animals, reaching their capital Pura sixty days after leaving Ora.
+types: [journey]
+part_of: [alexander-campaigns-334]
+date:
+  value: 325 BCE
+  mode: window
+  calendar: julian
+  as_written: a route most of which was desert
+  cite:
+    - id: gedrosia-325-time
+      says:
+        Chinnock dates the arrival at Patala to July 325 BCE and the march through Carmania toward Persis
+        to the winter of 325 BCE; the Gadrosian march lies between.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+      sources:
+        - source: arrian-anabasis
+          at: VI.17, note 773
+          quote: the fleet arriving at Patala about the time of the rising of Sirius, or July, 325 B.C.
+        - source: arrian-anabasis
+          at: VI.28, note 814
+          quote: B.C. 325.
+    - id: gedrosia-325-text
+      says: Arrian records the march through the Gadrosian desert.
+      source: arrian-anabasis
+      at: VI.22
+      quote: advanced into the land of the Gadrosians by a route most of which was desert.
+      role: supporting
+places:
+  - place: patala
+    role: start
+  - place: gedrosia
+    role: waypoint
+  - place: pura
+    role: end
+participants:
+  - actor: alexander-the-great
+    role: leader
+cites:
+  places:
+    - id: gedrosia-325-pura
+      says: Arrian records the march to Pura.
+      source: arrian-anabasis
+      at: VI.24
+      quote: He then advanced towards the capital of the Gadrosians, which was named Pura

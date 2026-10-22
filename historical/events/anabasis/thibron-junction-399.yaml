@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Called by Thibron for the Spartan war against Tissaphernes, the army crosses to Lampsacus and
+  marches to Pergamus in Mysia, where Thibron takes it into his forces.
+types: [occurrence]
+part_of: [cyrus-expedition-401]
+date:
+  value: 399 BCE
+  mode: window
+  calendar: julian
+  as_written: Meanwhile Thibron arrived and received the troops
+  cite:
+    - id: thibron-junction-399-time
+      says: Grote ends the expedition and retreat about June 399 BCE.
+      source: grote-history-of-greece
+      at: vol. IX, ch. LXXII
+      quote: occupying the two years intervening between about April 401 B.C. and June 399 B.C.
+      basis: interpretation
+      attributed_to: George Grote
+    - id: thibron-junction-399-text
+      says: Xenophon records Thibron receiving the troops.
+      source: xenophon-anabasis
+      at: VII.8
+      quote:
+        Meanwhile Thibron arrived and received the troops which he incorporated with the rest of his
+        Hellenic forces
+      role: supporting
+places:
+  - place: lampsacus
+    role: waypoint
+  - place: pergamon
+    role: end
+participants:
+  - actor: thibron
+    role: leader
+  - actor: cyreans
+    role: participant
+  - actor: xenophon
+    role: participant
+cites:
+  places:
+    - id: thibron-junction-399-lampsacus
+      says: Xenophon records the crossing to Lampsacus.
+      source: xenophon-anabasis
+      at: VII.8
+      quote: From this place they sailed across to Lampsacus
+    - id: thibron-junction-399-pergamus
+      says: Xenophon records the arrival at Pergamus.
+      source: xenophon-anabasis
+      at: VII.8
+      quote: and so reached Pergamus in Mysia.
+      role: supporting

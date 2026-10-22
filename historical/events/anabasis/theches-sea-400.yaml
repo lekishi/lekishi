@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  On the fifth day from Gymnias the van reaches the top of Mount Theches, sees the sea, and raises
+  the cry 'The sea!', which runs back down the column.
+types: [occurrence]
+part_of: [cyrus-expedition-401]
+date:
+  value: 400 BCE
+  mode: window
+  calendar: julian
+  as_written: On the fifth day they reached the mountain
+  cite:
+    - id: theches-sea-400-time
+      says: Grote dates Xenophon's view of the sea from Theches to the first half of February 400 BCE.
+      source: grote-history-of-greece
+      at: vol. IX, ch. LXX
+      quote: in the first half of February, the time of Xenophon’s visit
+      basis: interpretation
+      attributed_to: George Grote
+    - id: theches-sea-400-text
+      says: Xenophon records the arrival at Theches.
+      source: xenophon-anabasis
+      at: IV.7
+      quote: On the fifth day they reached the mountain, the name of which was Theches .
+      role: supporting
+places:
+  - place: theches
+    role: site
+participants:
+  - actor: cyreans
+    role: participant
+  - actor: xenophon
+    role: witness
+cites:
+  summary:
+    - id: theches-sea-400-cry
+      says: Xenophon records the cry when the van saw the sea.
+      source: xenophon-anabasis
+      at: IV.7
+      quote: No sooner had the men in front ascended it and caught sight of the sea than a great cry arose

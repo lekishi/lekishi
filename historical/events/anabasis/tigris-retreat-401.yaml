@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The Greeks cross the Zapatas and march up the Tigris under attack from Tissaphernes, passing
+  the deserted cities Xenophon calls Larissa and Mespila.
+types: [journey]
+part_of: [cyrus-expedition-401]
+date:
+  value: 401 BCE
+  mode: window
+  calendar: julian
+  as_written: they breakfasted and crossed the river Zapatas
+  cite:
+    - id: tigris-retreat-401-time
+      says:
+        Grote dates Kunaxa to about September or October 401 BCE and the Greeks' entry into Armenia
+        to December; the retreat up the Tigris lies between.
+      basis: interpretation
+      attributed_to: George Grote
+      sources:
+        - source: grote-history-of-greece
+          at: vol. IX, ch. LXIX
+          quote:
+            It was about six months afterwards, in the month of September or October of the same year,
+            that the battle of Kunaxa was fought
+        - source: grote-history-of-greece
+          at: vol. IX, ch. LXX
+          quote: extremely cold at the season when they entered it,—December
+    - id: tigris-retreat-401-text
+      says: Xenophon records the crossing of the Zapatas.
+      source: xenophon-anabasis
+      at: III.3
+      quote: After this, they breakfasted and crossed the river Zapatas, marching in regular order
+      role: supporting
+places:
+  - place: zapatas-river
+    role: start
+  - place: kalhu
+    role: waypoint
+  - place: mespila
+    role: waypoint
+participants:
+  - actor: cyreans
+    role: participant
+  - actor: tissaphernes
+    role: participant
+  - actor: xenophon
+    role: leader
+cites:
+  places:
+    - id: tigris-retreat-401-larissa
+      says: Xenophon records the deserted city of Larissa.
+      source: xenophon-anabasis
+      at: III.4
+      quote: Here they came upon a large deserted city, the name of which was Larissa
+    - id: tigris-retreat-401-mespila
+      says: Xenophon records the city of Mespila.
+      source: xenophon-anabasis
+      at: III.4
+      quote: and the name of that city was Mespila
+      role: supporting

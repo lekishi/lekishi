@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Darius III comes down behind Alexander to Issus; the armies meet on the river Pinarus, Alexander
+  breaks the Persian left, and Darius flees, leaving his mother, wife and children in the camp.
+types: [occurrence]
+part_of: [alexander-campaigns-334]
+date:
+  value: 333 BCE
+  mode: window
+  calendar: julian
+  as_written: in the month Maimacterion, when Nicostratus was archon of the Athenians
+  cite:
+    - id: issus-333-time
+      says:
+        Chinnock converts the month Maimacterion in the archonship of Nicostratus to the end of October
+        or beginning of November 333 BCE.
+      source: arrian-anabasis
+      at: II.11, note 266
+      quote: B.C. 333; end of October or beginning of November.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+    - id: issus-333-text
+      says: Arrian dates the battle by the Athenian month and archon.
+      source: arrian-anabasis
+      at: II.11
+      quote:
+        Such was the result of this famous battle (which was fought) in the month Maimacterion, when
+        Nicostratus was archon of the Athenians.
+      role: supporting
+places:
+  - place: issus
+    role: site
+participants:
+  - actor: alexander-the-great
+    role: leader
+  - actor: darius-iii
+    role: leader
+  - actor: parmenio
+    role: participant
+  - actor: hephaestion
+    role: participant
+cites:
+  summary:
+    - id: issus-333-flight
+      says: Arrian records Darius fleeing in his chariot.
+      source: arrian-anabasis
+      at: II.11
+      quote:
+        without any further delay he began to flee in his chariot along with the first, just as he
+        was.

@@ -1,0 +1,72 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Finding the bridges gone, Leotychides and the Peloponnesians sail home, while Xanthippos and
+  the Athenians besiege Sestos into the autumn; the Persians escape by night, Artayctes is caught near
+  Aigospotamoi and put to death, and the Athenians sail home with the bridges' cables.
+types: [occurrence]
+date:
+  value: 479 BCE
+  mode: window
+  calendar: julian
+  as_written: and for that year nothing happened further than this
+  cite:
+    - id: sestos-siege-479-time
+      says: Grote dates the Greek fleet's arrival at the Hellespont to September 479 BCE.
+      source: grote-history-of-greece
+      at: vol. V, ch. XLII
+      quote:
+        for so imperfect was their information, that they believed this bridge to be still firm and
+        in passable condition in September, 479 B. C.
+      basis: interpretation
+      attributed_to: George Grote
+    - id: sestos-siege-479-text
+      says: Herodotus ends the year's events with the Athenians sailing home with the cables.
+      source: herodotus
+      at: IX.121
+      quote:
+        "Having so done, they sailed away to Hellas, taking with them, besides other things, the ropes
+        also of the bridges, in order to dedicate them as offerings in the temples: and for that year nothing
+        happened further than this."
+      role: supporting
+places:
+  - place: sestos
+    role: site
+  - place: abydos-hellespont
+    role: start
+    note: Where the Greeks found the bridges broken.
+participants:
+  - actor: xanthippus
+    role: leader
+  - actor: leotychides
+    role: participant
+    note: Sailed home with the Peloponnesians before the siege.
+  - actor: athens-state
+    role: participant
+  - actor: persian-empire
+    role: participant
+notes:
+  Herodotus ends his history with these events and a story about Cyrus; the end of the war is not
+  a single event in his account.
+cites:
+  summary:
+    - id: sestos-siege-479-split
+      says: Herodotus records the Peloponnesians leaving and the Athenians staying to besiege the Chersonese.
+      source: herodotus
+      at: IX.114
+      quote:
+        So the Peloponnesians which Leotychides resolved to sail back to Hellas, while the Athenians
+        and Xanthippos their commander determined to stay behind there and to make an attempt upon the Chersonese.
+    - id: sestos-siege-479-escape
+      says: Herodotus records the Persian garrison's escape by night.
+      source: herodotus
+      at: IX.118
+      quote:
+        then the Persians and with them Artaÿctes and Oiobazos ran away and departed in the night,
+        climbing down by the back part of the wall
+      role: supporting
+  places:
+    - id: sestos-siege-479-places
+      says: Herodotus records the Greeks finding the bridges broken at Abydos.
+      source: herodotus
+      at: IX.114
+      quote: and thence they came to Abydos and found that the bridges had been broken up

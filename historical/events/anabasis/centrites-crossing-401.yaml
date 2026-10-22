@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The Greeks force the crossing of the Centrites, the frontier river, against Armenian troops in
+  front and Carduchians behind, and enter Armenia.
+types: [occurrence]
+part_of: [cyrus-expedition-401]
+date:
+  value: 401 BCE
+  mode: window
+  calendar: julian
+  as_written: It is the frontier river between Armenia and the country of the Carduchians
+  cite:
+    - id: centrites-crossing-401-time
+      says: Grote dates the Greeks' entry into Armenia to December 401 BCE.
+      source: grote-history-of-greece
+      at: vol. IX, ch. LXX
+      quote: extremely cold at the season when they entered it,—December
+      basis: interpretation
+      attributed_to: George Grote
+    - id: centrites-crossing-401-text
+      says: Xenophon describes the Centrites as the frontier with Armenia.
+      source: xenophon-anabasis
+      at: IV.3
+      quote: It is the frontier river between Armenia and the country of the Carduchians.
+      role: supporting
+places:
+  - place: kentrites-river
+    role: site
+participants:
+  - actor: cyreans
+    role: participant
+  - actor: carduchians
+    role: participant

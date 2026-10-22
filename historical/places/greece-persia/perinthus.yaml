@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Perinthus on the Propontis, where the army lay after leaving Byzantium in 400 BCE before taking
+  service with Seuthes.
+types: [settlement, port]
+names:
+  - form: Perinthus
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: perinthus-name
+        says: Xenophon records the Greeks going to Perinthus.
+        source: xenophon-anabasis
+        at: VII.2
+        quote: and with this answer Medosades departed, and the Hellenes proceeded to Perinthus.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [27.95297, 40.97101]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: perinthus-location
+        says:
+          Pleiades identifies the place and gives its representative point as 40.971013, 27.952973 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 511357 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "511357"
+    url: https://pleiades.stoa.org/places/511357
+    license: CC BY 3.0

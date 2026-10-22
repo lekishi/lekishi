@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  The Achaemenid Persian empire, ruled from Susa and Persepolis, whose kings Xerxes (480–479 BCE)
+  and Artaxerxes II (401 BCE) appear in these chapters and whose last king, Darius III, Alexander defeated
+  (334–330 BCE).
+types: [state]
+names:
+  - form: the Persians
+    lang: en
+    script: Latn
+    note:
+      Herodotus names the state by its people, the Persians; the record uses one actor for the Achaemenid
+      state across its reigns.
+    cite:
+      - id: persian-empire-name
+        says: Herodotus refers to the Persian kingship and its custom of designating a successor.
+        source: herodotus
+        at: VII.2
+        quote:
+          they said that he must not make his expeditions until he had designated one of them to be king,
+          according to the custom of the Persians
+notes:
+  One actor for the Achaemenid state from Cyrus to Darius III. Its reigns are the kings' roles, not
+  separate states.

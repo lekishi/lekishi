@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The river Centrites (the Botan), the frontier between Armenia and the Carduchian country, which
+  the Greeks forced against Armenian troops in 401 BCE.
+types: [landform]
+names:
+  - form: Centrites
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: kentrites-river-name
+        says: Xenophon describes the Centrites as the frontier river between Armenia and the Carduchians.
+        source: xenophon-anabasis
+        at: IV.3
+        quote: It is the frontier river between Armenia and the country of the Carduchians.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [42.3421, 37.91809]
+    notes:
+      The gazetteer's representative point for the river. It is a label position for a river, not the
+      crossing place.
+    cite:
+      - id: kentrites-river-location
+        says:
+          Pleiades identifies the place and gives its representative point as 37.9180876724, 42.342103952
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 874545 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "874545"
+    url: https://pleiades.stoa.org/places/874545
+    license: CC BY 3.0

@@ -1,0 +1,71 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The Hellenes who resolve to resist meet in council, exchange pledges, end their wars with one
+  another, and send spies to Sardis and envoys to Argos, Sicily, Corcyra and Crete.
+types: [council]
+date:
+  value: 481 BCE
+  mode: window
+  calendar: julian
+  as_written: when those Hellenes who had the better mind about Hellas came together to one place
+  cite:
+    - id: hellenic-alliance-481-time
+      says: Grote dates the confederated Greeks' embassies from the Isthmus to the autumn of 481 BCE.
+      source: grote-history-of-greece
+      at: vol. V, ch. XLIII
+      quote:
+        towards the autumn of 481 B. C., when the Greeks from the isthmus of Corinth, confederated
+        to resist Xerxes, sent to solicit his aid
+      basis: interpretation
+      attributed_to: George Grote
+    - id: hellenic-alliance-481-text
+      says: Herodotus places the council while Xerxes was at Sardis.
+      source: herodotus
+      at: VII.145
+      quote:
+        After this, being informed that Xerxes was with his army at Sardis, they determined to send
+        spies to Asia to make observation of the power of the king; and moreover they resolved to send envoys
+        to Argos to form an alliance against the Persian, and to send others to Sicily to Gelon
+      role: supporting
+places:
+  - place: isthmus-of-corinth
+    role: site
+    note:
+      Herodotus says only 'to one place' here; he names the Isthmus as the Hellenes' meeting place at
+      VII.175.
+participants:
+  - actor: hellenic-alliance
+    role: participant
+  - actor: athens-state
+    role: participant
+  - actor: sparta-state
+    role: participant
+notes:
+  Herodotus does not name the place of the first meeting in VII.145; the Isthmus is the place he
+  gives for the Hellenes' later deliberations, and Grote calls the confederates the Greeks from the isthmus.
+  The site therefore rests on Grote's reading.
+cites:
+  summary:
+    - id: hellenic-alliance-481-council
+      says: Herodotus records the council resolving to end the wars among its members first.
+      source: herodotus
+      at: VII.145
+      quote:
+        they thought it well first of all things to reconcile the enmities and bring to an end the
+        wars which they had with one another
+  places:
+    - id: hellenic-alliance-481-place
+      says: Herodotus names the Isthmus as the place the Hellenes returned to and deliberated in 480 BCE.
+      source: herodotus
+      at: VII.175
+      quote: When the Hellenes had returned to the Isthmus, they deliberated
+      role: supporting
+    - id: hellenic-alliance-481-place-grote
+      says: Grote calls the confederated Greeks of 481 BCE the Greeks from the isthmus of Corinth.
+      source: grote-history-of-greece
+      at: vol. V, ch. XLIII
+      quote:
+        towards the autumn of 481 B. C., when the Greeks from the isthmus of Corinth, confederated
+        to resist Xerxes, sent to solicit his aid
+      basis: interpretation
+      attributed_to: George Grote

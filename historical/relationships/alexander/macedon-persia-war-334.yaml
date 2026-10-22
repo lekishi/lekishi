@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  The war between Macedon under Alexander and the Persian Empire under Darius III, from the crossing
+  into Asia in 334 BCE to Darius's death in 330 BCE. The relationship asserts no cause.
+types: [conflict]
+from: macedonian-kingdom
+to: persian-empire
+directionality: mutual
+causality: not_asserted
+date:
+  value: 334 BCE..330 BCE
+  mode: duration
+  calendar: julian
+  as_written: had crossed over into Asia with his army
+  cite:
+    - id: macedon-persia-war-334-time
+      says:
+        Chinnock dates the crossing into Asia to the spring of 334 BCE and Darius's death to July 330
+        BCE.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+      sources:
+        - source: arrian-anabasis
+          at: I.11
+          quote: (B.C. 334.) At the beginning of the spring he marched towards the Hellespont
+        - source: arrian-anabasis
+          at: III.22, note 467
+          quote: In the year B.C. 330, the first of Hecatombaion fell on the first of July.
+cite:
+  - id: macedon-persia-war-334-basis
+    says:
+      Arrian gives Darius's complaint that Alexander had crossed into Asia and done the Persians much
+      harm.
+    source: arrian-anabasis
+    at: II.14
+    quote: but had crossed over into Asia with his army and had inflicted much injury upon the Persians.

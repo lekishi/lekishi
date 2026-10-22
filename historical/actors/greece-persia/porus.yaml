@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Porus, the Indian king beyond the Hydaspes who fought Alexander in 326 BCE and was confirmed
+  in his kingdom as Alexander's ally.
+types: [person]
+names:
+  - form: Porus
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: porus-name
+        says: Arrian records Porus waiting with his army beyond the Hydaspes.
+        source: arrian-anabasis
+        at: V.8
+        quote: For he was informed that Porus, with the whole of his army was on the other side of that river
+roles:
+  - role: ruler
+    note: King of the Indians beyond the Hydaspes.

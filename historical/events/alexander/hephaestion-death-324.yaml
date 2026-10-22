@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At Ecbatana Hephaestion falls sick and dies before Alexander can reach him; the accounts of Alexander's
+  grief differ.
+types: [occurrence]
+part_of: [alexander-campaigns-334]
+date:
+  value: 325 BCE..323 BCE
+  mode: window
+  calendar: julian
+  as_written: At this time Hephaestion fell sick
+  cite:
+    - id: hephaestion-death-324-time
+      says:
+        Chinnock dates the march toward Persis to the winter of 325 BCE and Alexander's death to June
+        323 BCE; this stage lies between.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+      sources:
+        - source: arrian-anabasis
+          at: VI.28, note 814
+          quote: B.C. 325.
+        - source: arrian-anabasis
+          at: VII.28, note 976
+          quote: June, 323 B.C.
+    - id: hephaestion-death-324-text
+      says: Arrian records Hephaestion's death.
+      source: arrian-anabasis
+      at: VII.14
+      quote:
+        When Alexander was informed that Hephaestion was in a critical state, he went to him without
+        delay, but found him no longer alive.
+      role: supporting
+places:
+  - place: ecbatana
+    role: site
+participants:
+  - actor: hephaestion
+    role: subject
+  - actor: alexander-the-great
+    role: participant

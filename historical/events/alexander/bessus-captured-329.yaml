@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "Over the Hindu Kush to Bactra, across the Oxus, and on into Sogdiana: Bessus is handed over
+  by his own followers, and Alexander occupies Maracanda."
+types: [journey]
+part_of: [alexander-campaigns-334]
+date:
+  value: 330 BCE..327 BCE
+  mode: window
+  calendar: julian
+  as_written: After passing over the river Oxus
+  cite:
+    - id: bessus-captured-329-time
+      says:
+        Chinnock dates Darius's death to July 330 BCE and the advance on the Sogdian rock to the spring
+        of 327 BCE; this stage lies between.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+      sources:
+        - source: arrian-anabasis
+          at: III.22, note 467
+          quote: In the year B.C. 330, the first of Hecatombaion fell on the first of July.
+        - source: arrian-anabasis
+          at: IV.18, note 580
+          quote: Of the year 327 B.C.
+    - id: bessus-captured-329-text
+      says: Arrian records the crossing of the Oxus in pursuit of Bessus.
+      source: arrian-anabasis
+      at: III.29
+      quote:
+        After passing over the river Oxus, he made a forced march to the place where he heard that
+        Bessus was with his forces
+      role: supporting
+places:
+  - place: bactra
+    role: start
+  - place: maracanda
+    role: end
+participants:
+  - actor: alexander-the-great
+    role: leader
+  - actor: bessus
+    role: subject
+cites:
+  places:
+    - id: bessus-captured-329-bactra
+      says: Arrian records the march to Bactra.
+      source: arrian-anabasis
+      at: III.29
+      quote: he marched to Aornus and Bactra, which are the largest cities in the land of the Bactrians.
+    - id: bessus-captured-329-maracanda
+      says: Arrian records the march to Maracanda.
+      source: arrian-anabasis
+      at: III.30
+      quote: He then led his army to Maracanda, which is the capital of the land of the Sogdianians.
+      role: supporting

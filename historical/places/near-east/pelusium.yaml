@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Pelusium, the Egyptian frontier city at the easternmost mouth of the Nile where Herodotus sets
+  the camp of the Egyptian king against "Sanacharib".
+types: [fortification]
+names:
+  - form: Pelusion
+    lang: en
+    script: Latn
+    cite:
+      - id: pelusium-name
+        says: Herodotus has the Egyptian king encamp at Pelusion, "for by this way the invasion came".
+        source: herodotus
+        at: II.141
+        quote: encamped in Pelusion, for by this way the invasion came
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [32.5471045, 31.0426271]
+    notes: The gazetteer's point for the fortified city at the mouth of the easternmost branch of the Nile.
+    cite:
+      - says: The Pleiades gazetteer records Pelusium with a precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/727192 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "727192"
+    url: https://pleiades.stoa.org/places/727192
+    license: CC-BY-3.0
+    note: Pelusium

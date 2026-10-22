@@ -1,0 +1,64 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Under a truce the Greeks march north with Tissaphernes, within the wall of Media, across the
+  Tigris and past Opis, to the river Zapatas.
+types: [journey]
+part_of: [cyrus-expedition-401]
+date:
+  value: 401 BCE
+  mode: window
+  calendar: julian
+  as_written: Three stages they had accomplished ere they reached the wall of Media
+  cite:
+    - id: march-to-zapatas-401-time
+      says:
+        Grote dates Kunaxa to about September or October 401 BCE and the Greeks' entry into Armenia
+        to December; the march north lies between.
+      basis: interpretation
+      attributed_to: George Grote
+      sources:
+        - source: grote-history-of-greece
+          at: vol. IX, ch. LXIX
+          quote:
+            It was about six months afterwards, in the month of September or October of the same year,
+            that the battle of Kunaxa was fought
+        - source: grote-history-of-greece
+          at: vol. IX, ch. LXX
+          quote: extremely cold at the season when they entered it,—December
+    - id: march-to-zapatas-401-text
+      says: Xenophon records the march to the wall of Media.
+      source: xenophon-anabasis
+      at: II.4
+      quote:
+        Three stages they had accomplished ere they reached the wall of Media, as it is called, and
+        passed within it.
+      role: supporting
+places:
+  - place: cunaxa
+    role: start
+  - place: wall-of-media
+    role: waypoint
+  - place: opis
+    role: waypoint
+  - place: zapatas-river
+    role: end
+participants:
+  - actor: cyreans
+    role: participant
+  - actor: tissaphernes
+    role: participant
+  - actor: clearchus
+    role: leader
+cites:
+  places:
+    - id: march-to-zapatas-401-opis
+      says: Xenophon names Opis on the march.
+      source: xenophon-anabasis
+      at: II.4
+      quote: Here lay a large and populous city named Opis
+    - id: march-to-zapatas-401-zapatas
+      says: Xenophon records the Greeks reaching the Zapatas.
+      source: xenophon-anabasis
+      at: II.5
+      quote: After this they reached the river Zapatas
+      role: supporting

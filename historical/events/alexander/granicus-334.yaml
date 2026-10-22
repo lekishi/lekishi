@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At the river Granicus Alexander leads the cavalry across against the Persian satraps' army drawn
+  up on the far bank and routs it; many Persian commanders fall.
+types: [occurrence]
+part_of: [alexander-campaigns-334]
+date:
+  value: 334 BCE
+  mode: window
+  calendar: julian
+  as_written: BATTLE OF THE GRANICUS
+  cite:
+    - id: granicus-334-time
+      says: Chinnock dates the battle of the Granicus to 334 BCE in his chapter heading.
+      source: arrian-anabasis
+      at: I.13
+      quote: BATTLE OF THE GRANICUS (B.C. 334)
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+    - id: granicus-334-text
+      says: Arrian records the advance to the Granicus.
+      source: arrian-anabasis
+      at: I.13
+      quote: Meantime Alexander was advancing to the river Granicus, with his army arranged for battle
+      role: supporting
+places:
+  - place: granicus-river
+    role: site
+participants:
+  - actor: alexander-the-great
+    role: leader
+  - actor: persian-empire
+    role: participant
+  - actor: clitus-the-black
+    role: participant
+cites:
+  summary:
+    - id: granicus-334-dead
+      says: Arrian lists the Persian leaders who fell.
+      source: arrian-anabasis
+      at: I.16
+      quote: The following leaders of the Persians also fell in the battle

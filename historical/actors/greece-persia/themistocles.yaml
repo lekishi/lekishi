@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Themistocles son of Neocles, the Athenian who read the 'wooden wall' oracle as the fleet and
+  argued for fighting at Salamis.
+types: [person]
+names:
+  - form: Themistocles
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: themistocles-name
+        says: Herodotus introduces Themistocles son of Neocles.
+        source: herodotus
+        at: VII.143
+        quote:
+          Now there was one man of the Athenians who had lately been coming forward to take a place among
+          the first, whose name was Themistocles, called son of Neocles.
+roles:
+  - role: official
+    note: Athenian commander at Artemisium and Salamis.

@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Kunaxa, the place in Babylonia where Cyrus the Younger met his brother Artaxerxes II in battle
+  in 401 BCE and was killed. Xenophon does not name it; the name is Plutarch's, used by Grote.
+types: [other]
+names:
+  - form: Kunaxa
+    lang: en
+    script: Latn
+    note: Grote's spelling. Xenophon gives the battlefield no name.
+    cite:
+      - id: cunaxa-name
+        says: Grote names the battle of Cyrus's army against the king the battle of Kunaxa.
+        source: grote-history-of-greece
+        at: vol. IX, ch. LXIX
+        quote:
+          It was about six months afterwards, in the month of September or October of the same year,
+          that the battle of Kunaxa was fought
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      "Unlocated: Xenophon gives distances in stages and parasangs but no site, and the record names
+      no gazetteer entry. No point is drawn."
+    cite:
+      - id: cunaxa-unlocated
+        says: Grote names the battlefield but neither he nor Xenophon fixes its position.
+        source: grote-history-of-greece
+        at: vol. IX, ch. LXIX
+notes:
+  Typed other because the place vocabulary has no type for a battlefield; the chapter's feasibility
+  note proposes one.

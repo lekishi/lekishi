@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Across the Indus Alexander reaches Taxila, the largest city between the Indus and the Hydaspes,
+  sacrifices and holds games, and leaves a garrison.
+types: [occurrence]
+part_of: [alexander-campaigns-334]
+date:
+  value: 327 BCE..326 BCE
+  mode: window
+  calendar: julian
+  as_written: he arrived at Taxila
+  cite:
+    - id: taxila-326-time
+      says:
+        Chinnock dates the Sogdian rock to the spring of 327 BCE and the Hydaspes to April–May 326 BCE;
+        this stage lies between.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+      sources:
+        - source: arrian-anabasis
+          at: IV.18, note 580
+          quote: Of the year 327 B.C.
+        - source: arrian-anabasis
+          at: V.19
+          quote: (18 April to 18 May, 326 B.C.)
+    - id: taxila-326-text
+      says: Arrian records the arrival at Taxila.
+      source: arrian-anabasis
+      at: V.8
+      quote: Then starting from the Indus, he arrived at Taxila
+      role: supporting
+places:
+  - place: taxila
+    role: site
+participants:
+  - actor: alexander-the-great
+    role: leader

@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Ariaeus, Cyrus's second in command, who led the Asian troops on the left at Cunaxa and after
+  Cyrus's death made his peace with the king.
+types: [person]
+names:
+  - form: Ariaeus
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: ariaeus-name
+        says: Xenophon names Ariaeus as Cyrus's second in command.
+        source: xenophon-anabasis
+        at: I.8
+        quote: On the left was Ariaeus, Cyrus's second in command, and the rest of the barbarian host.
+roles:
+  - role: soldier
+    note: Commander of Cyrus's Asian troops, 401 BCE.

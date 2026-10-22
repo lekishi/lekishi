@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Critalla in Cappadocia, where Herodotus says the land army that marched with Xerxes was ordered
+  to assemble. Its site is not known.
+types: [settlement]
+names:
+  - form: Critalla
+    lang: en
+    script: Latn
+    note: The form in the cited English translation; the gazetteer records no Greek form for this place.
+    cite:
+      - id: kritalla-name
+        says: Herodotus names Critalla in Cappadocia as the assembly point of the land army.
+        source: herodotus
+        at: VII.26
+        quote:
+          setting forth from Critalla in Cappadokia; for there it had been ordered that the whole army
+          should assemble
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      "Unlocated: the gazetteer records Critalla without a position, and Herodotus names only the region,
+      Cappadocia. No point is drawn."
+    cite:
+      - id: kritalla-unlocated
+        says: Pleiades records Critalla as unlocated.
+        source: pleiades
+        at: "place 631218 (locationPrecision: unlocated), dump 2026-10-21"
+external_ids:
+  - system: pleiades
+    id: "631218"
+    url: https://pleiades.stoa.org/places/631218
+    license: CC BY 3.0

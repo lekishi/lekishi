@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Xenophon the Athenian, who joined Cyrus's expedition at the invitation of his friend Proxenus,
+  was chosen general after the generals were seized in 401 BCE, and wrote the Anabasis.
+types: [person]
+names:
+  - form: Xenophon
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: xenophon-name
+        says:
+          Xenophon introduces himself as having come with Cyrus at his friend Proxenus's invitation, holding
+          no rank.
+        source: xenophon-anabasis
+        at: III.1
+        quote:
+          Xenophon, who had accompanied Cyrus, neither as a general, nor as an officer, nor yet as a
+          private soldier, but simply on the invitation of an old friend, Proxenus.
+roles:
+  - role: soldier
+    note: General of Proxenus's division from 401 BCE.
+    cite:
+      - id: xenophon-role
+        says: Xenophon records himself chosen general in place of Proxenus.
+        source: xenophon-anabasis
+        at: III.1
+        quote: and in place of Proxenus, Xenophon the Athenian.
+  - role: scholar
+    note: Author of the Anabasis, the source of this chapter.

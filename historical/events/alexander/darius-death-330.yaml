@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Bessus and his fellow satraps arrest Darius and, as Alexander closes on them, kill him; Alexander
+  sends the body to be buried in the royal tombs of Persis.
+types: [occurrence]
+part_of: [alexander-campaigns-334]
+date:
+  value: 330 BCE
+  mode: window
+  calendar: julian
+  as_written: in the archonship of Aristophon at Athens, in the month Hecatombaion
+  cite:
+    - id: darius-death-330-time
+      says: Chinnock notes that in 330 BCE the month Hecatombaion began on the first of July.
+      source: arrian-anabasis
+      at: III.22, note 467
+      quote: In the year B.C. 330, the first of Hecatombaion fell on the first of July.
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+    - id: darius-death-330-text
+      says: Arrian dates Darius's death by the Athenian month and archon.
+      source: arrian-anabasis
+      at: III.22
+      quote: Such was the end of Darius, in the archonship of Aristophon at Athens, in the month Hecatombaion.
+      role: supporting
+places:
+  - place: ecbatana
+    role: context
+    note: Arrian places the death on the road east of the Caspian Gates; no place is named, so none is drawn.
+participants:
+  - actor: darius-iii
+    role: subject
+  - actor: bessus
+    role: leader
+  - actor: alexander-the-great
+    role: participant
+cites:
+  summary:
+    - id: darius-death-330-arrest
+      says: Arrian records the satraps arresting Darius.
+      source: arrian-anabasis
+      at: III.21
+      quote:
+        Bessus, viceroy of Bactria, and Barsaëntes, viceroy of the Arachotians and Drangians, had jointly
+        arrested the king.
+    - id: darius-death-330-burial
+      says: Arrian records Alexander sending the body for royal burial.
+      source: arrian-anabasis
+      at: III.22
+      quote:
+        Alexander sent the body of Darius into Persis, with orders that it should be buried in the
+        royal sepulchre
+      role: supporting

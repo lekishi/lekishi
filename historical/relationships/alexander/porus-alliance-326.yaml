@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "Alexander's settlement with Porus after the Hydaspes: Porus keeps the rule of his Indians,
+  with more land added, as Alexander's ally."
+types: [alliance]
+from: alexander-the-great
+to: porus
+directionality: mutual
+date:
+  value: 326 BCE
+  mode: window
+  calendar: julian
+  as_written: not only granted him the rule over his own Indians
+  cite:
+    - id: porus-alliance-326-time
+      says: Chinnock's gloss dates the battle at the Hydaspes to 18 April to 18 May 326 BCE.
+      source: arrian-anabasis
+      at: V.19
+      quote: (18 April to 18 May, 326 B.C.)
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+cite:
+  - id: porus-alliance-326-basis
+    says: Arrian records Alexander restoring Porus's rule and enlarging it.
+    source: arrian-anabasis
+    at: V.19
+    quote:
+      not only granted him the rule over his own Indians, but also added another country to that which
+      he had before, of larger extent than the former.

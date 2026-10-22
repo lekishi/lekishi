@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Alexander crosses the Hydaspes upstream by night in a storm and defeats Porus and his elephants;
+  Porus asks to be treated as a king and is given back his kingdom, enlarged.
+types: [occurrence]
+part_of: [alexander-campaigns-334]
+date:
+  value: 326 BCE
+  mode: window
+  calendar: julian
+  as_written: in the archonship of Hegemon at Athens, in the month Munychion
+  cite:
+    - id: hydaspes-326-time
+      says:
+        Chinnock's gloss in the text converts the month Munychion in the archonship of Hegemon to 18
+        April to 18 May 326 BCE.
+      source: arrian-anabasis
+      at: V.19
+      quote: (18 April to 18 May, 326 B.C.)
+      basis: interpretation
+      attributed_to: E. J. Chinnock
+    - id: hydaspes-326-text
+      says: Arrian dates the battle by the Athenian month and archon.
+      source: arrian-anabasis
+      at: V.19
+      quote: which was fought in the archonship of Hegemon at Athens, in the month Munychion
+      role: supporting
+places:
+  - place: hydaspes-river
+    role: site
+participants:
+  - actor: alexander-the-great
+    role: leader
+  - actor: porus
+    role: leader
+cites:
+  summary:
+    - id: hydaspes-326-kingly
+      says: Arrian reports Porus asking to be treated as a king.
+      source: arrian-anabasis
+      at: V.19
+      quote: "The report goes that Porus replied: “Treat me, O Alexander, in a kingly way!”"

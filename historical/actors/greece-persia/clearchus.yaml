@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Clearchus the Lacedaemonian, the leading Greek general of Cyrus's army, seized by Tissaphernes
+  at the Zapatas in 401 BCE and put to death.
+types: [person]
+names:
+  - form: Clearchus
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: clearchus-name
+        says: Xenophon records Clearchus the Lacedaemonian joining Cyrus at Celaenae with his troops.
+        source: xenophon-anabasis
+        at: I.2
+        quote:
+          Here Cyrus remained for thirty days, during which Clearchus the Lacedaemonian arrived with
+          one thousand hoplites and eight hundred Thracian peltasts and two hundred Cretan archers.
+roles:
+  - role: soldier
+    note: General of Cyrus's Greek mercenaries, 401 BCE.

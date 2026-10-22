@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Hephaestion, Alexander's closest companion, who commanded much of the army in the east and died
+  at Ecbatana in 324 BCE.
+types: [person]
+names:
+  - form: Hephaestion
+    lang: en
+    script: Latn
+    note: The form in the cited English translation.
+    cite:
+      - id: hephaestion-name
+        says: Arrian names Hephaestion as one of Alexander's Companions.
+        source: arrian-anabasis
+        at: II.12
+        quote: accompanied alone by Hephaestion, one of his Companions.
+roles:
+  - role: soldier
+    note: Companion and commander under Alexander.

@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Gedrosia, the desert land the army crossed with great losses on the march back from India in
+  325 BCE.
+types: [region]
+names:
+  - form: Γεδρωσία
+    lang: grc
+    script: Grek
+    roman: the land of the Gadrosians
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: gedrosia-greek-name
+        says: Pleiades records the ancient Greek name Γεδρωσία for this place.
+        source: pleiades
+        at: place 29573, name /places/29573/name.2015-02-01.8346878396, dump 2026-10-21
+      - id: gedrosia-name
+        says: Arrian records the march into the land of the Gadrosians, mostly through desert.
+        source: arrian-anabasis
+        at: VI.22
+        quote: advanced into the land of the Gadrosians by a route most of which was desert.
+        role: supporting
+  - form: the land of the Gadrosians
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: gedrosia-name
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [63.89582, 26.60833]
+    notes: The gazetteer's label point for the region. It marks a region, not a route.
+    cite:
+      - id: gedrosia-location
+        says:
+          Pleiades identifies the place and gives its representative point as 26.6083300854, 63.895823413
+          (latitude, longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 29573 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "29573"
+    url: https://pleiades.stoa.org/places/29573
+    license: CC BY 3.0

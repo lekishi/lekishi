@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Aphetai on the Magnesian coast, where Xerxes' fleet moored after the storm and faced the Greek
+  fleet at Artemision. The gazetteer marks its identification as uncertain.
+types: [port]
+names:
+  - form: Ἀφέται
+    lang: grc
+    script: Grek
+    roman: Aphetai
+    scheme: other
+    note: The Greek form as the gazetteer records it; the reading aid is the form in the cited translation.
+    cite:
+      - id: aphetai-greek-name
+        says: Pleiades records the ancient Greek name Ἀφέται for this place.
+        source: pleiades
+        at: place 540645, name /places/540645/aphetai, dump 2026-10-21
+      - id: aphetai-name
+        says: Herodotus names Aphetai as the fleet's mooring.
+        source: herodotus
+        at: VII.193
+        quote:
+          and from this the place has come to have the name Aphetai. Here then the fleet of Xerxes took
+          up its moorings.
+        role: supporting
+  - form: Aphetai
+    lang: en
+    script: Latn
+    role: alternate
+    note: The form in the cited English translation.
+    claim: aphetai-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [23.3124, 39.14629]
+    notes:
+      "The gazetteer's representative point for the place (location precision: precise). It is the
+      gazetteer's identification of the ancient place, not a position the ancient text states."
+    cite:
+      - id: aphetai-location
+        says:
+          Pleiades identifies the place and gives its representative point as 39.146291, 23.312404 (latitude,
+          longitude), with location precision precise.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 540645 (reprLatLong, locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "540645"
+    url: https://pleiades.stoa.org/places/540645
+    license: CC BY 3.0
+notes: Pleiades titles the place 'Aphetai?', marking the identification of the site as uncertain.

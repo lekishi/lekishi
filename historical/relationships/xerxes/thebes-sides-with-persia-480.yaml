@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Thebes gives earth and water to Xerxes' heralds and then fights on the Persian side, advising
+  Mardonios on the order of battle at Plataea.
+types: [diplomacy, alliance]
+from: thebes-state
+to: persian-empire
+directionality: directed
+causality: not_asserted
+date:
+  value: 480 BCE..479 BCE
+  mode: duration
+  calendar: julian
+  as_written: among those who gave that which was demanded were … Thebans
+  cite:
+    - id: thebes-sides-with-persia-480-span
+      says:
+        Grote dates the start of the march against Greece to the beginning of spring 480 BCE, and the
+        Greek fleet's arrival at the Hellespont, the last campaign Herodotus narrates, to September 479
+        BCE.
+      basis: interpretation
+      attributed_to: George Grote
+      sources:
+        - source: grote-history-of-greece
+          at: vol. V, ch. XXXVIII
+          quote:
+            but the whole was united at Sardis and ready to march against Greece, at the beginning of
+            spring, 480 B. C.
+        - source: grote-history-of-greece
+          at: vol. V, ch. XLII
+          quote:
+            for so imperfect was their information, that they believed this bridge to be still firm and
+            in passable condition in September, 479 B. C.
+notes:
+  Herodotus says the Thebans were among those who gave earth and water but not when; the span is
+  the war's.
+cite:
+  - id: thebes-sides-with-persia-480-submission
+    says: Herodotus lists the Thebans among those who gave earth and water.
+    source: herodotus
+    at: VII.132
+    quote:
+      And among those who gave that which was demanded were the following, namely the Thessalians,
+      Dolopians, Enianians, Perraibians, Locrians, Megnesians, Malians, Achaians of Phthiotis, and Thebans
+  - id: thebes-sides-with-persia-480-plataea
+    says: Herodotus records Mardonios ordering his line at Plataea on the Thebans' advice.
+    source: herodotus
+    at: IX.31
+    quote: This he did on the information and suggestion of the Thebans.
+    role: supporting

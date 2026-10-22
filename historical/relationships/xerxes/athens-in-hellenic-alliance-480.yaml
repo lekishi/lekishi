@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Athens as a member of the Hellenic alliance, furnishing the largest contingent of the allied
+  fleet in 480 BCE.
+types: [membership]
+from: athens-state
+to: hellenic-alliance
+directionality: directed
+date:
+  value: 480 BCE
+  mode: window
+  calendar: julian
+  as_written: Those of the Hellenes who had been appointed to serve in the fleet
+  cite:
+    - id: hellenic-fleet-480-time
+      says: Grote dates the allied fleet at Artemisium to about the latter part of June 480 BCE.
+      source: grote-history-of-greece
+      at: vol. V, ch. XL
+      quote:
+        the land-force under the Spartan king Leonidas, the naval force under the Spartan commander
+        Eurybiadês, apparently about the latter part of the month of June.
+      basis: interpretation
+      attributed_to: George Grote
+notes:
+  Dated by the fleet list at Artemisium, the first place Herodotus counts the allies' ships; membership
+  is older and outlasts the chapter.
+cite:
+  - id: athens-in-hellenic-alliance-480-basis
+    says: Herodotus lists the Athenians first among the Hellenes who served in the allied fleet.
+    source: herodotus
+    at: VIII.1
+    quote:
+      Those of the Hellenes who had been appointed to serve in the fleet were these:—the Athenians
+      furnished a hundred and twenty-seven ships

@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=../schema/chapter.schema.json
+title: The march of the Ten Thousand
+summary: In 401 BCE Cyrus the Younger led Greek mercenaries inland from Sardis to take his brother's
+  throne and was killed at Kunaxa. Follow Xenophon's stage-by-stage account of the march up the
+  Euphrates and the Greeks' retreat through the mountains and snow of Armenia to the Black Sea.
+window: 401 BCE..399 BCE
+story:
+  summary: "The march of the Ten Thousand, 401–399 BCE, as Xenophon tells it in the Anabasis: Cyrus's
+    march from Sardis to Babylonia, the battle and his death, the seizure of the generals, and the
+    retreat north to Trapezus, along the Black Sea coast, and into Thrace and Spartan service."
+  span: 401 BCE..399 BCE
+  coverage: "Episode window 401–399 BCE, from Cyrus's departure from Sardis to Thibron taking the
+    army into his forces at Pergamus. Included: each stage Xenophon describes with its halts, the
+    reviews and the mutiny, the battle, the seizure of the generals and the election of new ones,
+    the retreat through the Carduchian country and Armenia, the sea at Theches, the coastal march
+    and voyage, Byzantium, and the service with Seuthes. Excluded: Cyrus's earlier career and the
+    war at Miletus, the speeches, Xenophon's later life, and the war Thibron fought. No route
+    geometry is drawn: the campaign event carries the span and its stages are separate events at
+    their places. Places carry the Pleiades representative point as an approximate point; Peltae,
+    Ceramon-agora, Caystru-pedion, Thymbrium, Thapsacus, Corsote, Charmande and Kunaxa are
+    unlocated."
+  notes: "Step order is presentation order and follows Xenophon's sequence. Xenophon gives distances
+    in stages and parasangs and halts in days, but no years; every year and season here is George
+    Grote's reckoning, cited as his interpretation, and most stages are dated only to the window
+    between two of his anchors. This chapter is a draft for testing data and engine work, and has
+    not been reviewed for publication."
+  steps:
+    - cyrus-expedition-401: The expedition and retreat, 401–399 BCE
+    - cyrus-against-artaxerxes-401: Cyrus against his brother the king
+    - artaxerxes-king-of-persia: Artaxerxes II, king of the Persians
+    - sardis-to-celaenae-401: From Sardis to Celaenae, spring 401 BCE
+    - celaenae-review-401: The review at Celaenae
+    - peltae-lycaea-401: The Lycaea at Peltae
+    - tyriaeum-review-401: Epyaxa and the review at Tyriaeum
+    - tyriaeum-to-tarsus-401: Over the Taurus to Tarsus
+    - tarsus-mutiny-401: The Greeks refuse to go on
+    - issus-fleet-401: The fleet joins at Issi
+    - sparta-aids-cyrus-401: Sparta's ships for Cyrus
+    - myriandus-desertion-401: Two generals sail home from Myriandus
+    - thapsacus-crossing-401: The Euphrates forded and the real purpose told
+    - euphrates-desert-401: The desert march down the Euphrates
+    - cunaxa-401: Kunaxa and the death of Cyrus
+    - march-to-zapatas-401: North under truce to the Zapatas
+    - generals-seized-401: The generals seized
+    - new-generals-401: New generals, Xenophon among them
+    - tigris-retreat-401: Up the Tigris past Larissa and Mespila
+    - carduchian-mountains-401: Seven days through the Carduchian mountains
+    - centrites-crossing-401: The crossing into Armenia
+    - armenia-snow-401: Armenia in the snow
+    - phasis-to-gymnias-400: Through the Taochians and Chalybes to Gymnias
+    - theches-sea-400: '"The sea!"'
+    - trapezus-400: Trapezus
+    - coast-to-cotyora-400: Along the coast to Cotyora
+    - sinope-command-400: Cheirisophus chosen at Sinope
+    - heraclea-split-400: The army splits at Heraclea
+    - calpe-400: Reunited at Calpe Haven
+    - chrysopolis-400: To Chrysopolis
+    - byzantium-400: Shut out of Byzantium
+    - seuthes-service-400: A winter in Seuthes's service
+    - cyreans-serve-seuthes-400: The terms of service
+    - thibron-junction-399: To Pergamus and Thibron
+    - cyreans-join-thibron-399: The army joins the Spartans

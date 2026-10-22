@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: >-
+  The 周 royal seat moving from 鎬 in the west to 雒邑 in the east under 平王 in 770 BCE: the line
+  between Western and Eastern 周.
+types: [relocated_to]
+from: haojing
+to: luoyi
+date:
+  value: 770 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 平王元年
+  cite:
+    - id: zhou-capital-moves-date
+      says: The table enters the move east to 雒邑 in 平王's first year, which its count from 841 BCE sets in 770 BCE.
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 周 平王 元年（東徙雒邑）
+      quote: 平王元年東徙雒邑。
+notes: >-
+  The sources name 雒邑 as the destination and do not name the western city the court left; 鎬 is
+  the editorial origin, as the capital of Western 周.
+cite:
+  - id: zhou-capital-moves-basis
+    says: The annals record that 平王 moved east to 雒邑 on his accession, to escape the 戎.
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 平王（平王立，東遷于雒邑）
+    quote: 平王立，東遷于雒邑，辟戎寇。

@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  伯陽甫, the 周 officer who read the earthquake of 幽王's second year as a sign that 周 would fall within
+  ten years.
+types: [person]
+names:
+  - form: 伯陽甫
+    lang: lzh
+    script: Hani
+    roman: Bo Yang Fu
+    scheme: pinyin
+    cite:
+      - id: bo-yang-fu-name
+        says: The annals record that when the three rivers of Western 周 shook in 幽王's second year, 伯陽甫 said 周 would fall.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 幽王 二年（伯陽甫曰）
+        quote: 幽王二年，西周三川皆震。伯陽甫曰
+roles:
+  - role: official
+    note: An officer of the 周 court; the annals also name a 太史伯陽.
+    cite:
+      - id: bo-yang-fu-role
+        says: The annals record the 周 grand scribe 伯陽 reading the records and saying 周 was finished.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 幽王 三年（周太史伯陽讀史記）
+        quote: 周太史伯陽讀史記曰：「周亡矣。」

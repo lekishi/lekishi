@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  傅說, the convict labourer the annals say 武丁 saw in a dream, had found at 傅險, and made his chief
+  minister, naming him after the place.
+types: [person]
+names:
+  - form: 傅說
+    lang: lzh
+    script: Hani
+    roman: Fu Yue
+    scheme: pinyin
+    cite:
+      - id: fu-yue-name
+        says: The annals record that 武丁 made 說 his minister and named him 傅說 after 傅險.
+        source: shiji-yin-zhou
+        at: 卷三 殷本紀 帝武丁（號曰傅說）
+        quote: 得而與之語，果聖人，舉以為相，殷國大治。故遂以傅險姓之，號曰傅說。
+  - form: 說
+    lang: lzh
+    script: Hani
+    note: The personal name in the dream story.
+    claim: fu-yue-name
+roles:
+  - role: official
+    note: Chief minister (相) under 武丁, as the annals record.
+    cite:
+      - id: fu-yue-role
+        says: The annals record 武丁 raising 說 to be his minister.
+        source: shiji-yin-zhou
+        at: 卷三 殷本紀 帝武丁（舉以為相）

@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  盟津, the Yellow River crossing north of 雒 where the annals say 武王 reviewed his troops and was met
+  by eight hundred lords, and where he crossed two years later to attack 商. The label sits at the
+  modern 孟津 district, which carries the name; no crossing point is asserted.
+types: [route_node]
+names:
+  - form: 盟津
+    lang: lzh
+    script: Hani
+    roman: Mengjin
+    scheme: pinyin
+    cite:
+      - id: mengjin-name
+        says: The annals record 武王 going east to review his troops and reaching 盟津.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 武王 九年（至于盟津）
+        quote: 九年，武王上祭于畢。東觀兵，至于盟津。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [112.43908, 34.82615]
+    notes: >-
+      Label anchor at the modern 孟津 district of 洛陽, which carries the crossing's name. It is not an
+      asserted crossing point.
+    cite:
+      - id: mengjin-anchor
+        says: The anchor is the coordinate Wikidata (CC0) records for the modern 孟津 district.
+        source: wikidata
+        at: Q1335956 (P625), revision 2526580808
+modern:
+  - form: 孟津區
+    lang: zh-Hans
+    script: Hani
+    note: Modern district recorded for orientation only.

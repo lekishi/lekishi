@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  文侯, 仇, the lord of 晉 from 780 BCE who seized his seat from his uncle 殤叔, ruled through the fall of
+  Western 周, and, in the Bamboo Annals, killed the rival king 攜王.
+types: [person]
+names:
+  - form: 晉文侯
+    lang: lzh
+    script: Hani
+    roman: Jin Wen Hou
+    scheme: pinyin
+    cite:
+      - id: jin-wen-hou-name
+        says: The 晉 house records that 穆侯's heir 仇 attacked 殤叔 with his followers and took the seat as 文侯.
+        source: shiji-chunqiu
+        at: 卷三十九 晉世家 殤叔 四年（是爲文侯）
+        quote: 四年，穆侯太子仇率其徒襲殤叔而立，是爲文侯。
+  - form: 晉文公
+    lang: lzh
+    script: Hani
+    note: The Bamboo Annals' title for him in the 攜王 entry.
+    cite:
+      - id: jin-wen-hou-wengong
+        says: The Bamboo Annals record that 攜王 was killed by 晉文公.
+        source: guben-zhushu-jinian
+        at: 晉紀 文侯 二十一年（攜王爲晉文公所殺）
+        quote: 攜王爲晉文公所殺。
+roles:
+  - role: ruler
+    note: Lord of 晉, 780 to 746 BCE.
+    cite:
+      - id: jin-wen-hou-role
+        says: The 晉 house records 文侯 ruling until his thirty-fifth year.
+        source: shiji-chunqiu
+        at: 卷三十九 晉世家 文侯（三十五年，文侯仇卒）
+        quote: 三十五年，文侯仇卒，子昭侯伯立。
+notes: >-
+  The Bamboo Annals write 晉文公; the 晉 lord of 760 BCE was 文侯, and the record follows the 晉 house's
+  title. He is a different person from 重耳, 晉文公 of 636 BCE.

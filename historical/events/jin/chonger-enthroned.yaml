@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  On 丙午 重耳 enters 曲沃; on 丁未 he pays court at the 武宮, the temple of his great-grandfather, and takes the
+  seat as lord of 晉, 文公, after nineteen years in exile. On 戊申 he has 懷公 killed at 高梁.
+types: [founding]
+date:
+  value: 636 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 二月丙午、丁未（左傳）; 文公元年（晉世家）
+  cite:
+    - id: chonger-enthroned-date
+      says: The table enters 晉文公's first year in its 636 BCE row.
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 晉 文公 元年（誅子圉）
+      quote: 晉文公元年誅子圉。
+places:
+  - place: quwo
+    role: site
+participants:
+  - actor: chonger
+    role: leader
+  - actor: jin-huai-gong
+    role: subject
+  - actor: jin-state
+    role: subject
+cite:
+  - id: chonger-enthroned-zuo
+    says: The 左傳 records 重耳 entering 曲沃, paying court at the 武宮, and having 懷公 killed at 高梁.
+    source: zuozhuan
+    at: 僖公二十四年（丙午，入于曲沃）
+    quote: 丙午，入于曲沃。丁未，朝于武宮。戊申，使殺懷公于高梁。
+  - id: chonger-enthroned-jin
+    says: >-
+      The 晉 house records that he took the seat as 文公 and that he had been in exile nineteen years.
+    role: supporting
+    source: shiji-chunqiu
+    at: 卷三十九 晉世家 文公元年（是爲文公）
+    quote: 丁未，朝于武宮，卽位爲晉君，是爲文公。
+  - id: chonger-enthroned-years
+    says: The 晉 house records that he returned after nineteen years in exile, at sixty-two.
+    role: supporting
+    source: shiji-chunqiu
+    at: 卷三十九 晉世家 文公（重耳出亡凡十九歳而得入）
+    quote: 重耳出亡凡十九歳而得入，時年六十二矣，晉人多附焉。

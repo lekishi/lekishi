@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  商丘, the capital of 宋, the state 周 gave to 微子 to carry on the sacrifices of 殷. 重耳 passed
+  through it in exile and Confucius was threatened there by 桓魋. Wikidata places it at the excavated
+  city of 宋 south of modern 商丘.
+types: [capital]
+names:
+  - form: 商丘
+    lang: lzh
+    script: Hani
+    roman: Shangqiu
+    scheme: pinyin
+    cite:
+      - id: song-shangqiu-name
+        says: The historical geography records 商丘 as the old seat that 周武王 gave to 微子啓 as the state of 宋.
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷五十 河南五 歸德府（周武王以封微子啓）
+        quote: 古曰商丘《左傳》：「高辛氏子閼伯居商丘。商湯爲亳邑地。周武王以封微子啓，是爲宋國。
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [115.582321, 34.367751]
+    notes: >-
+      Wikidata's coordinate for the ruins of the capital of 宋. The identification is the dataset's;
+      the geography places the 宋 capital at 商丘 without a coordinate.
+    cite:
+      - id: song-shangqiu-point
+        says: Wikidata (CC0) records the coordinate of the ruins of the capital of 宋.
+        basis: interpretation
+        attributed_to: Wikidata contributors
+        source: wikidata
+        at: Q55698024 (P625), revision 2372780168
+      - id: song-shangqiu-identification
+        says: The historical geography records 商丘 county as the old 商丘 and the capital of 宋 in the Spring and Autumn period.
+        role: supporting
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷五十 河南五 歸德府 商丘縣
+        quote: 古商丘，爲閼伯之墟。春秋宋國都也。
+external_ids:
+  - system: wikidata
+    id: Q55698024
+    url: https://www.wikidata.org/wiki/Q55698024
+    license: CC0-1.0
+notes: >-
+  The historical geography says 周 gave 商丘 to 微子 at the conquest; the 周 annals record 微子 receiving
+  宋 only after the rebellion of 武庚. The difference is kept on the event.

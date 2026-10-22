@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "秦 backing 重耳: a marriage into the 秦 house and an army to put him on the 晉 seat in 636 BCE."
+types: [alliance]
+from: qin-state
+to: chonger
+date:
+  value: 637 BCE..636 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 秦穆公二十三年至二十四年
+  cite:
+    - id: qin-backs-chonger-date
+      says: >-
+        The table enters 秦 receiving 重耳 and giving him a wife in 637 BCE, and sending him home with troops
+        in 636 BCE.
+      sources:
+        - source: shiji-chunqiu
+          at: 卷十四 十二諸侯年表 秦 穆公 二十三年（迎重耳於楚）
+          quote: 二十三迎重耳於楚，厚禮之，妻之女。重耳願歸。
+        - source: shiji-chunqiu
+          at: 卷十四 十二諸侯年表 秦 穆公 二十四年（以兵送重耳）
+          quote: 二十四以兵送重耳。
+cite:
+  - id: qin-backs-chonger-basis
+    says: The 晉 house records that the lord of 秦 sent troops home to 晉 with 重耳.
+    source: shiji-chunqiu
+    at: 卷三十九 晉世家 文公（秦繆公乃發兵與重耳歸晉）
+    quote: 於是秦繆公乃發兵與重耳歸晉。

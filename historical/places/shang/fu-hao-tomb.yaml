@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  The tomb at 殷墟 that Wikidata records as the tomb of 婦好, a royal tomb of the 商 dynasty. No
+  transmitted text names it; the identification is the excavators', from the name cast on its
+  bronzes, and the record cites it as an identification.
+types: [religious_site]
+names:
+  - form: 婦好墓
+    lang: zh
+    script: Hani
+    roman: Fu Hao mu
+    scheme: pinyin
+    cite:
+      - id: fu-hao-tomb-name
+        says: Wikidata (CC0) labels the item 婦好墓 and describes it as a 商 dynasty royal tomb.
+        basis: interpretation
+        attributed_to: Wikidata contributors
+        source: wikidata
+        at: Q6112269 (label, description), revision 2551265098
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [114.316206, 36.121031]
+    notes: >-
+      The coordinate Wikidata records for the tomb, inside the 殷墟 site near 小屯. It is a modern
+      survey point for an excavated grave, not a claim about anything the texts say.
+    cite:
+      - id: fu-hao-tomb-point
+        says: Wikidata (CC0) records the coordinate of the tomb of 婦好.
+        basis: interpretation
+        attributed_to: Wikidata contributors
+        source: wikidata
+        at: Q6112269 (P625), revision 2551265098
+external_ids:
+  - system: wikidata
+    id: Q6112269
+    url: https://www.wikidata.org/wiki/Q6112269
+    license: CC0-1.0
+notes: >-
+  The excavation report, 中國社會科學院考古研究所《殷墟婦好墓》(1980), is the evidence for the tomb's
+  contents and date and has not been read for this record; until it is, the record cites only the
+  dataset's identification and coordinate, and the burial event carries the reign window, not a
+  date of its own.

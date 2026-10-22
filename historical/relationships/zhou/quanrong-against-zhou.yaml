@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: >-
+  The 犬戎 against 周: the attack, with 申 and 繒, that killed 幽王 in 771 BCE and drove the court
+  east.
+types: [conflict]
+from: quanrong
+to: zhou-state
+date:
+  value: 771 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 幽王十一年
+  cite:
+    - id: quanrong-against-zhou-date
+      says: >-
+        The table of the twelve lords puts 幽王's death in his eleventh year, which its count from the
+        first year of the 共和 regency (841 BCE) sets in 771 BCE.
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 周 幽王 十一年（幽王為犬戎所殺）
+      quote: 十一幽王為犬戎所殺。
+notes: >-
+  The relationship records the 犬戎's attack only; 申侯's part is on the event `youwang-killed`,
+  where he is the leader.
+cite:
+  - id: quanrong-against-zhou-basis
+    says: The 秦 annals record the western 戎 and the 犬戎 attacking 周 with 申侯 and killing 幽王.
+    source: shiji-chunqiu
+    at: 卷五 秦本紀 襄公 七年（西戎犬戎與申侯伐周）
+    quote: 西戎犬戎與申侯伐周，殺幽王酈山下。

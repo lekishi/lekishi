@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: 文公, lord of 衛 from 659 BCE, who rebuilt 衛 at 楚丘 and refused 重耳 courtesy.
+types: [person]
+names:
+  - form: 衛文公
+    lang: lzh
+    script: Hani
+    roman: Wey Wen Gong
+    scheme: pinyin
+    cite:
+      - id: wey-wen-gong-name
+        says: The 左傳 records that 衛文公 refused 重耳 courtesy.
+        source: zuozhuan
+        at: 僖公二十三年（過衛，衛文公不禮焉）
+        quote: 過衛，衛文公不禮焉。
+roles:
+  - role: ruler
+    note: Lord of 衛.
+    cite:
+      - id: wey-wen-gong-role
+        says: The 左傳 records that 衛文公 refused 重耳 courtesy.
+        source: zuozhuan
+        at: 僖公二十三年（過衛，衛文公不禮焉）
+notes: Romanised Wey to keep 衛 apart from 魏 (Wei).

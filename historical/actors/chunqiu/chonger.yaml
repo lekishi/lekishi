@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  重耳, a son of 晉獻公, who fled to the 狄 in 655 BCE, wandered through 衛, 齊, 曹, 宋, 鄭, 楚 and 秦 for nineteen
+  years, and returned with a 秦 army in 636 BCE to rule 晉 as 文公, the second leader of the 春秋 lords.
+types: [person]
+names:
+  - form: 重耳
+    lang: lzh
+    script: Hani
+    roman: Chong'er
+    scheme: pinyin
+    cite:
+      - id: chonger-name
+        says: The 晉 house records 晉文公重耳 as a son of 晉獻公.
+        source: shiji-chunqiu
+        at: 卷三十九 晉世家 文公（晉文公重耳）
+        quote: 晉文公重耳，晉獻公之子也。
+  - form: 晉文公
+    lang: lzh
+    script: Hani
+    note: His title as lord of 晉, from 636 BCE.
+    cite:
+      - id: chonger-wengong
+        says: The 晉 house records that on 丁未 he paid court at the 武宮 and took the seat as 文公.
+        source: shiji-chunqiu
+        at: 卷三十九 晉世家 文公元年（是爲文公）
+        quote: 丁未，朝于武宮，卽位爲晉君，是爲文公。
+roles:
+  - role: ruler
+    note: Lord of 晉 from 636 BCE.
+    cite:
+      - id: chonger-role
+        says: The 晉 house records that on 丁未 he paid court at the 武宮 and took the seat as 文公.
+        source: shiji-chunqiu
+        at: 卷三十九 晉世家 文公元年（是爲文公）

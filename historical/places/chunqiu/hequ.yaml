@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  河曲, the bend of the Yellow River where, the Bamboo Annals say, 秦穆公 brought 重耳 across into 晉 in 636 BCE.
+  The annals say only that 秦 escorted him to the river.
+types: [route_node]
+names:
+  - form: 河曲
+    lang: lzh
+    script: Hani
+    roman: Hequ
+    scheme: pinyin
+    cite:
+      - id: hequ-name
+        says: The Bamboo Annals record that 秦穆公 led an army escorting 重耳 and crossed at 河曲.
+        source: guben-zhushu-jinian
+        at: 晉紀 惠公 十五年（渉自河曲）
+        quote: 十五年，秦穆公帥師送公子重耳，渉自河曲。
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: The entry names the bend and no crossing point.
+    cite:
+      - id: hequ-unknown
+        says: The cited entry names 河曲 and states no position.
+        source: guben-zhushu-jinian
+        at: 晉紀 惠公 十五年（渉自河曲）

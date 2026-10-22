@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  穆公 (繆公), lord of 秦, who gave 重耳 five women of his house, among them 懷嬴, and sent him home with an army
+  in 636 BCE.
+types: [person]
+names:
+  - form: 秦穆公
+    lang: lzh
+    script: Hani
+    roman: Qin Mu Gong
+    scheme: pinyin
+    cite:
+      - id: qin-mu-gong-name
+        says: The Bamboo Annals record 秦穆公 leading an army to escort 重耳.
+        source: guben-zhushu-jinian
+        at: 晉紀 惠公 十五年（秦穆公帥師送公子重耳）
+        quote: 十五年，秦穆公帥師送公子重耳，渉自河曲。
+  - form: 秦繆公
+    lang: lzh
+    script: Hani
+    note: The 史記 spelling.
+    cite:
+      - id: qin-mu-gong-mu
+        says: The 晉 house, writing 繆, records that the lord of 秦 sent troops home with 重耳.
+        source: shiji-chunqiu
+        at: 卷三十九 晉世家 文公（秦繆公乃發兵與重耳歸晉）
+        quote: 於是秦繆公乃發兵與重耳歸晉。
+roles:
+  - role: ruler
+    note: Lord of 秦.
+    cite:
+      - id: qin-mu-gong-role
+        says: The 晉 house records that the lord of 秦 sent troops home with 重耳.
+        source: shiji-chunqiu
+        at: 卷三十九 晉世家 文公（秦繆公乃發兵與重耳歸晉）

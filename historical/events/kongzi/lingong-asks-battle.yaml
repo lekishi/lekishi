@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  衛靈公, old and idle, will not employ Confucius. One day he asks about the order of battle; Confucius answers
+  that he has learned the ritual vessels, not armies. The next day, when the lord looks up at a passing
+  goose instead of at him, Confucius leaves for 陳 again.
+types: [occurrence]
+date:
+  value: 493 BCE..492 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: (before 靈公's death in the summer)
+  cite:
+    - id: lingong-asks-battle-date
+      says: >-
+        The 孔子世家 tells the question just before 靈公's death in the summer. The table's 衛 column puts that
+        death in 493 BCE; the 孔子世家 says the year was 魯哀公三年, 492 BCE.
+      sources:
+        - source: shiji-chunqiu
+          at: 卷十四 十二諸侯年表 衛 出公 元年
+          quote: 衛出公輒元年
+        - source: shiji-chunqiu
+          at: 卷四十七 孔子世家（是歲魯哀公三年）
+          quote: 是歲魯哀公三年，而孔子年六十矣。
+places:
+  - place: wey-diqiu
+    role: start
+    note: The capital of the state the text names; the text names only the state.
+participants:
+  - actor: kongzi
+    role: leader
+  - actor: wey-ling-gong
+    role: participant
+cite:
+  - id: lingong-asks-battle-lunyu
+    says: The 論語 records 衛靈公 asking about the order of battle and Confucius leaving the next day.
+    source: lunyu
+    at: 衞靈公第十五（衞靈公問陳於孔子）
+    quote: 衞靈公問陳於孔子。孔子對曰：「俎豆之事，則嘗聞之矣；軍旅之事，未之學也。」明日遂行。
+  - id: lingong-asks-battle-shijia
+    says: The 孔子世家 records the goose and that Confucius went back to 陳.
+    role: supporting
+    source: shiji-chunqiu
+    at: 卷四十七 孔子世家（孔子遂行，復如陳）
+    quote: 明日，與孔子語，見蜚鴈，仰視之，色不在孔子。孔子遂行，復如陳。

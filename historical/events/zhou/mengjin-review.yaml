@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  In his ninth year 武王 sacrifices at 畢, then marches east to review his troops at 盟津, carrying 文王's
+  tablet in a chariot. Eight hundred lords come to him unbidden and say 紂 can be attacked; 武王 says
+  heaven's mandate is not yet known, and takes the army home.
+types: [campaign]
+date:
+  value: 1048 BCE..1029 BCE
+  mode: window
+  calendar: regnal
+  as_written: 九年（周本紀）
+  cite:
+    - id: mengjin-review-date
+      says: >-
+        The annals put the review in the ninth year and the conquest two years later. The window is
+        the conquest's window, 1046 to 1027 BCE, moved back two years; it inherits that window's two
+        cited ends.
+      source: shiji-yin-zhou
+      at: 卷四 周本紀 武王（居二年）
+      quote: 居二年，聞紂昏亂暴虐滋甚，殺王子比干，囚箕子。
+places:
+  - place: mengjin
+    role: site
+participants:
+  - actor: zhou-wu-wang
+    role: leader
+  - actor: shi-shangfu
+    role: participant
+cite:
+  - id: mengjin-review-march
+    says: The annals record the sacrifice at 畢 and the march east to review the troops at 盟津 in the ninth year.
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 武王 九年（東觀兵，至于盟津）
+    quote: 九年，武王上祭于畢。東觀兵，至于盟津。
+  - id: mengjin-review-lords
+    says: The annals record eight hundred lords meeting him at 盟津 and 武王 turning the army back.
+    role: supporting
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 武王（諸侯不期而會盟津者八百諸侯）
+    quote: 是時，諸侯不期而會盟津者八百諸侯。諸侯皆曰：「紂可伐矣。」武王曰：「女未知天命，未可也。」乃還師歸。

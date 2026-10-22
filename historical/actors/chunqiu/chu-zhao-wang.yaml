@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  昭王, king of 楚, who sent troops to free Confucius between 陳 and 蔡, thought of giving him land, was dissuaded
+  by 子西, and died at 城父 in 489 BCE.
+types: [person]
+names:
+  - form: 楚昭王
+    lang: lzh
+    script: Hani
+    roman: Chu Zhao Wang
+    scheme: pinyin
+    cite:
+      - id: chu-zhao-wang-name
+        says: The 孔子世家 records that 楚昭王 sent troops to meet Confucius and freed him.
+        source: shiji-chunqiu
+        at: 卷四十七 孔子世家（楚昭王興師迎孔子）
+        quote: 楚昭王興師迎孔子，然後得免。
+roles:
+  - role: ruler
+    note: King of 楚 until 489 BCE.
+    cite:
+      - id: chu-zhao-wang-role
+        says: The 孔子世家 records that 楚昭王 died at 城父 that autumn.
+        source: shiji-chunqiu
+        at: 卷四十七 孔子世家（其秋，楚昭王卒于城父）
+        quote: 其秋，楚昭王卒于城父。

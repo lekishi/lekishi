@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  驪山, the mountain east of 鎬 at whose foot the annals say 申侯 and the 犬戎 killed 幽王 in 771 BCE.
+  The historical geography places it just south-east of 臨潼, and Wikidata gives the modern
+  mountain's coordinate.
+types: [landform]
+names:
+  - form: 驪山
+    lang: lzh
+    script: Hani
+    roman: Lishan
+    scheme: pinyin
+    cite:
+      - id: mount-li-name
+        says: The annals record that 幽王 was killed at the foot of 驪山.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 幽王（遂殺幽王驪山下）
+        quote: 遂殺幽王驪山下，虜褒姒，盡取周賂而去。
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [109.21048611111, 34.358686111111]
+    notes: >-
+      Wikidata's coordinate for the modern 驪山. That it is the mountain of the annals is the
+      identification of the dataset and of the historical geography; the place of 幽王's death at its
+      foot is not located.
+    cite:
+      - id: mount-li-point
+        says: Wikidata (CC0) records 驪山 (Mount Li) as a mountain with this coordinate.
+        basis: interpretation
+        attributed_to: Wikidata contributors
+        source: wikidata
+        at: Q844360 (P625), revision 2515884793
+      - id: mount-li-identification
+        says: >-
+          The historical geography places 驪山 two 里 south-east of 臨潼 and identifies it with the
+          mountain where 申侯 and the 犬戎 killed 幽王.
+        role: supporting
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷五十三 陝西二 西安府 臨潼縣（驪山）
+        quote: 驪山，縣東南二里，因驪戎所居而名。
+external_ids:
+  - system: wikidata
+    id: Q844360
+    url: https://www.wikidata.org/wiki/Q844360
+    license: CC0-1.0

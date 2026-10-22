@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  高宗, the temple name of 武丁, attacks 鬼方 and overcomes it after three years, as the third line of
+  the 既濟 hexagram in the Book of Changes recalls. It is a line of an oracle text, not a chronicle,
+  and it gives no route, place or year.
+types: [campaign]
+date:
+  value: 1300 BCE..1046 BCE
+  mode: window
+  calendar: regnal
+  as_written: 高宗伐鬼方，三年克之
+  cite:
+    - id: guifang-war-date
+      says: >-
+        The line gives three years for the war but no year. The window is the span of the 殷 capital
+        under the 夏商周斷代工程's chronology, within which 武丁 reigned.
+      basis: interpretation
+      attributed_to: 夏商周斷代工程《夏商周年表》(2000)
+      source: ourchinastory-xszc-chronology
+      at: paragraph 3
+places:
+  - place: guifang
+    role: other
+    note: The enemy the line names; its position is unknown.
+participants:
+  - actor: wu-ding
+    role: leader
+notes: >-
+  The three years of the war are stated, but the record is an occurrence window, not a three-year
+  duration placed somewhere, because the line gives no starting year. The identification of 高宗 with
+  武丁 is the annals' (卷三 殷本紀, 帝祖庚).
+cite:
+  - id: guifang-war-line
+    says: The third line of the 既濟 hexagram says that 高宗 attacked 鬼方 and overcame it in three years.
+    source: zhouyi
+    at: 既濟 九三
+    quote: 九三：高宗伐鬼方，三年克之，小人勿用。
+  - id: guifang-war-gaozong
+    says: The annals record that 高宗 was the temple name given to 武丁.
+    role: supporting
+    source: shiji-yin-zhou
+    at: 卷三 殷本紀 帝祖庚（立其廟為高宗）
+    quote: 祖己嘉武丁之以祥雉為德，立其廟為高宗，遂作高宗肜日及訓。

@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  寺人披, the eunuch, called 履鞮 in the 晉 house, whom 獻公 sent to kill 重耳 at 蒲 and who cut off his sleeve as
+  he went over the wall; later he warned 文公 of the plot to burn his palace.
+types: [person]
+names:
+  - form: 寺人披
+    lang: lzh
+    script: Hani
+    roman: Siren Pi
+    scheme: pinyin
+    cite:
+      - id: si-ren-pi-name
+        says: The 左傳 records that 獻公 sent 寺人披 to attack 蒲.
+        source: zuozhuan
+        at: 僖公五年（公使寺人披伐蒲）
+        quote: 及難，公使寺人披伐蒲。
+  - form: 履鞮
+    lang: lzh
+    script: Hani
+    note: His name in the 晉 house.
+    cite:
+      - id: si-ren-pi-ludi
+        says: The 晉 house records that 獻公 sent the eunuch 履鞮 to kill 重耳.
+        source: shiji-chunqiu
+        at: 卷三十九 晉世家 文公（獻公使宦者履鞮趣殺重耳）
+        quote: 獻公二十二年，獻公使宦者履鞮趣殺重耳。
+roles:
+  - role: official
+    note: Palace eunuch of 晉.
+    cite:
+      - id: si-ren-pi-role
+        says: The 左傳 records that 獻公 sent 寺人披 to attack 蒲.
+        source: zuozhuan
+        at: 僖公五年（公使寺人披伐蒲）

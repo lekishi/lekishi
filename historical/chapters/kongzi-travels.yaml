@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../schema/chapter.schema.json
+title: Confucius's travels among the states
+summary: >-
+  Fourteen years on the road: in 498 BCE Confucius leaves 魯 over a gift of dancing girls, is held
+  at 匡, meets 南子 in 衛, escapes 桓魋 in 宋, stands lost at the gate of 鄭, lives three years in 陳,
+  starves between 陳 and 蔡, is rescued by 楚, and is called home in 484 BCE. The sources disagree
+  on almost every year.
+window: 498 BCE..484 BCE
+story:
+  summary: >-
+    Confucius's travels from his departure from 魯, in 498 or 496 BCE, to his recall in 484 BCE,
+    as the 孔子世家 tells them, with the table's and the 左傳's years where they differ.
+  span: 498 BCE..484 BCE
+  coverage: >-
+    The travels as the 孔子世家 of 史記 tells them, checked against the table of the twelve lords,
+    the 衛 house, the 左傳 and the 論語. The biography's order and the table's years disagree on the
+    departure, 宋, 陳 and the last return to 衛. Each disagreement is kept on its event, except the
+    last return, whose two accounts are two events: the 孔子世家's from 楚 in 489 BCE and the table's
+    from 陳 in 485 BCE, rival accounts of one return rather than two visits.
+    Excluded: Confucius's career in 魯 before 498 BCE and his last years after 484 BCE, and the
+    stories the 孔子世家 tells without a place, such as the lute lesson from 師襄子.
+  notes: >-
+    Step order is the 孔子世家's, with the table's rival return to 衛 after the biography's. Three events have no place, because the texts give none: the
+    ford, the siege between 陳 and 蔡, and the rescue by 楚. 匡 and 蒲 share one display anchor. Two
+    journey records, one per account, are proposed beside the chapter and wait on the journey
+    record's shape, which is still proposed and not compiled. This is a draft for data and engine
+    testing; no release decision has been taken.
+  steps:
+    - qi-lu-dancing-girls: 齊 sends dancing girls to 魯
+    - kongzi-leaves-lu: Confucius leaves 魯 over the dancing girls
+    - kongzi-first-in-wey: Ten months in 衛
+    - kuang-detained: Held at 匡
+    - nanzi-audience: 南子 behind the curtain
+    - kongzi-at-cao: Through 曹, the year 定公 dies
+    - huan-tui-tree: 桓魋 pulls up the tree
+    - zheng-east-gate: A lost dog at the gate of 鄭
+    - kongzi-arrives-chen: Three years in 陳
+    - pu-covenant: A forced oath at 蒲
+    - lingong-asks-battle: 衛靈公 asks about battle
+    - kongzi-back-in-chen: Back in 陳, the 魯 temples burn
+    - kongzi-moves-to-cai: From 陳 to 蔡
+    - kongzi-at-ye: 葉公 asks about government
+    - asking-the-ford: Asking the way to the ford
+    - chen-cai-siege: Starving between 陳 and 蔡
+    - chu-rescue: 楚 sends troops for him
+    - kongzi-returns-wey: Back to 衛
+    - kongzi-returns-wey-485: Back to 衛, in the table's account
+    - kongzi-returns-lu: Called home to 魯

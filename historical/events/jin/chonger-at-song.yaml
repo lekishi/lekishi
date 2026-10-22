@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  At 宋, 襄公, still hurt from his defeat by 楚 at the 泓, receives 重耳 with the courtesy of a state and gives
+  him twenty teams of horses; his minister 公孫固 advises 重耳 that 宋 is too weak to help and he should go
+  to a great state.
+types: [occurrence]
+date:
+  value: 638 BCE..637 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: (after the 泓, before 襄公's death)
+  cite:
+    - id: chonger-at-song-date
+      says: >-
+        The visit follows 襄公's wound at the 泓, which the table enters in 638 BCE, and precedes his death
+        of that wound in the fifth month of the next year, 637 BCE.
+      sources:
+        - source: shiji-chunqiu
+          at: 卷十四 十二諸侯年表 宋 襄公 十三年（泓之戰）
+          quote: 十三泓之戰，楚敗公。
+        - source: zuozhuan
+          at: 僖公二十三年（宋襄公卒，傷於泓故也）
+          quote: 夏，五月，宋襄公卒，傷於泓故也。
+places:
+  - place: song-shangqiu
+    role: site
+    note: The 宋 capital; the texts name only the state.
+participants:
+  - actor: chonger
+    role: leader
+  - actor: song-xiang-gong
+    role: host
+  - actor: song-state
+    role: host
+cite:
+  - id: chonger-at-song-zuo
+    says: The 左傳 records that 宋襄公 gave 重耳 twenty teams of horses.
+    source: zuozhuan
+    at: 僖公二十三年（及宋）
+    quote: 及宋，宋襄公贈之以馬二十乘。
+  - id: chonger-at-song-jin
+    says: >-
+      The 晉 house records that 宋襄公, newly wounded by 楚 at the 泓, received 重耳 with the courtesy of a state.
+    role: supporting
+    source: shiji-chunqiu
+    at: 卷三十九 晉世家 文公（宋襄公新困兵於楚）
+    quote: 宋襄公新困兵於楚，傷於泓，聞重耳賢，乃以國禮禮於重耳。

@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: 重耳 as lord of 晉, from his enthronement at the 武宮 in 636 BCE.
+types: [rulership]
+from: chonger
+to: jin-state
+date:
+  value: 636 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 文公元年
+  cite:
+    - id: chonger-rules-jin-date
+      says: The table enters 晉文公's first year in its 636 BCE row.
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 晉 文公 元年（誅子圉）
+      quote: 晉文公元年誅子圉。
+notes: >-
+  The relationship marks the start of his rule only; his death in 628 BCE is outside the chapter.
+cite:
+  - id: chonger-rules-jin-basis
+    says: The 晉 house records that he took the seat as lord of 晉, 文公.
+    source: shiji-chunqiu
+    at: 卷三十九 晉世家 文公元年（是爲文公）
+    quote: 丁未，朝于武宮，卽位爲晉君，是爲文公。

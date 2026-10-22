@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  帝辛, called 紂, the last 商 king. The annals describe his cruelty and his feasts at 沙丘, record his army breaking at 牧野, and say he burned himself to death on the 鹿臺; the Bamboo Annals say 武王 captured him at the terrace of 南單.
+types: [person]
+names:
+  - form: 帝辛
+    lang: lzh
+    script: Hani
+    roman: Di Xin
+    scheme: pinyin
+    cite:
+      - id: di-xin-name
+        says: The annals record that 帝乙's son 辛 came to the throne as 帝辛 and that the world called him 紂.
+        source: shiji-yin-zhou
+        at: 卷三 殷本紀 帝乙（子辛立，是為帝辛）
+        quote: 帝乙崩，子辛立，是為帝辛，天下謂之紂。
+roles:
+  - role: ruler
+    note: The last king of 商.
+    cite:
+      - id: di-xin-role
+        says: The annals record that 帝乙's son 辛 came to the throne as 帝辛 and that the world called him 紂.
+        source: shiji-yin-zhou
+        at: 卷三 殷本紀 帝乙（子辛立，是為帝辛）

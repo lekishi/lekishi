@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: >-
+  武庚, heir of 殷, rising against 周 with 管叔 and 蔡叔, and 周公's three-year war to put the rising
+  down.
+types: [conflict]
+from: wu-geng
+to: zhou-state
+date:
+  value: 1044 BCE..1018 BCE
+  mode: window
+  calendar: regnal
+  as_written: (under 周公's regency; 三年而畢定)
+  cite:
+    - id: sanjian-against-zhou-date
+      says: >-
+        The annals put 武王's death at least two years after the conquest, and give 周公 seven years of
+        regency. The window runs from two years after the conquest's earliest year to nine years after
+        its latest, 1044 to 1018 BCE, under the conquest's two cited ends.
+      sources:
+        - source: shiji-yin-zhou
+          at: 卷四 周本紀 武王（武王已克殷，後二年）
+          quote: 武王已克殷，後二年，問箕子殷所以亡。
+        - source: shiji-yin-zhou
+          at: 卷四 周本紀 成王（周公行政七年）
+          quote: 周公行政七年，成王長，周公反政成王，北面就群臣之位。
+cite:
+  - id: sanjian-against-zhou-basis
+    says: The annals record that 管叔 and 蔡叔 rose with 武庚 against 周.
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 成王（與武庚作亂，畔周）
+    quote: 管叔、蔡叔群弟疑周公，與武庚作亂，畔周。

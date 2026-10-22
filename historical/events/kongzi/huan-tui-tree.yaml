@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  In 宋 Confucius practises ritual with his disciples under a great tree. The marshal 桓魋, wanting to kill
+  him, has the tree pulled up. Urged to hurry, Confucius says that heaven gave him his virtue: what can
+  桓魋 do to him?
+types: [occurrence]
+date:
+  value: 495 BCE..492 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: (after 曹, 孔子世家); 宋景公二十五年（年表）
+  cite:
+    - id: huan-tui-tree-date-495
+      says: "The 孔子世家 tells 宋 straight after 曹, in or after 495 BCE: the window's early end."
+      source: shiji-chunqiu
+      at: 卷四十七 孔子世家（孔子去曹適宋）
+      quote: 孔子去曹適宋，與弟子習禮大樹下。
+    - id: huan-tui-tree-date-492
+      says: >-
+        The table enters Confucius passing 宋 and 桓魋's hostility in 景公's twenty-fifth year, 492 BCE in its
+        count: the window's late end.
+      role: alternative
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 宋 景公 二十五年（孔子過宋，桓魋惡之）
+      quote: 二十五孔子過宋，桓魋惡之。
+places:
+  - place: song-shangqiu
+    role: site
+    note: The capital of the state the text names; the text names only the state.
+participants:
+  - actor: kongzi
+    role: leader
+  - actor: zi-lu
+    role: participant
+  - actor: huan-tui
+    role: participant
+  - actor: song-state
+    role: host
+dispute:
+  status: disputed
+  summary: >-
+    The 孔子世家 puts 宋 in about 495 BCE, on the way from 曹 to 陳; the table puts it in 492 BCE, after 陳. The
+    record keeps the biography's order as the anchor and the table's year as an alternative.
+cite:
+  - id: huan-tui-tree-shijia
+    says: The 孔子世家 records 桓魋 pulling up the tree to kill Confucius.
+    source: shiji-chunqiu
+    at: 卷四十七 孔子世家（宋司馬桓魋欲殺孔子）
+    quote: 宋司馬桓魋欲殺孔子，拔其樹。孔子去。
+  - id: huan-tui-tree-lunyu
+    says: The 論語 records the saying that heaven gave him his virtue and 桓魋 could do nothing to him.
+    role: supporting
+    source: lunyu
+    at: 述而第七（桓魋其如予何）
+    quote: 桓魋其如予何！

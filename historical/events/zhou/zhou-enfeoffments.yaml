@@ -1,0 +1,63 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Back from the east, 武王 enfeoffs the descendants of the ancient sage kings and then his own
+  followers: 師尚父 first, at 營丘 as 齊; his brother 周公旦 at 曲阜 as 魯; 召公奭 in 燕; and his
+  brothers 叔鮮 at 管 and 叔度 at 蔡. The annals tell it as one act; the states took shape over
+  generations.
+types: [founding]
+date:
+  value: 1046 BCE..1027 BCE
+  mode: window
+  calendar: regnal
+  as_written: (after the return west, in the same passage)
+  cite:
+    - id: enfeoffments-date-1046
+      says: >-
+        The 夏商周斷代工程 dates the conquest to 1046 BCE by astronomical calculation; its 2022 report gives
+        20 January 1046 BCE. This is the window's early end.
+      basis: interpretation
+      attributed_to: 夏商周斷代工程《夏商周斷代工程報告》(2022)
+      source: chinadaily-muye-2023
+      at: paragraphs 1–2
+    - id: enfeoffments-date-1027
+      says: >-
+        The Bamboo Annals count 257 years from 武王's conquest to 幽王. Counted back from 幽王's death in
+        771 BCE, that puts the conquest in 1027 BCE, the window's late end.
+      role: alternative
+      source: guben-zhushu-jinian
+      at: 幽王（自武王滅殷，以至幽王，凡二百五十七年）
+      quote: 自武王滅殷，以至幽王，凡二百五十七年。
+places:
+  - place: qufu
+    role: site
+    note: 周公旦's fief, the one of the named fiefs the chapter locates.
+participants:
+  - actor: zhou-wu-wang
+    role: leader
+  - actor: shi-shangfu
+    role: subject
+  - actor: zhou-gong-dan
+    role: subject
+  - actor: zhao-gong-shi
+    role: subject
+  - actor: guan-shu
+    role: subject
+  - actor: cai-shu
+    role: subject
+notes: >-
+  營丘, 燕, 管 and 蔡 are named but not recorded as places here: 營丘's identification is disputed,
+  and the others are outside this chapter. 周公 himself stayed at court; 魯 was ruled by his son.
+dispute:
+  status: disputed
+  summary: >-
+    The year depends on the disputed year of the conquest. The record keeps the 夏商周斷代工程's
+    1046 BCE as the editorial anchor and the Bamboo Annals' count, which gives 1027 BCE, as an
+    alternative, and decides nothing between them.
+cite:
+  - id: enfeoffments-basis
+    says: >-
+      The annals record that 武王 enfeoffed his ministers, 師尚父 first at 營丘 as 齊, 周公旦 at 曲阜 as
+      魯, 召公奭 in 燕, and his brothers at 管 and 蔡.
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 武王（於是封功臣謀士）
+    quote: 於是封功臣謀士，而師尚父為首封。封尚父於營丘，曰齊。封弟周公旦於曲阜，曰魯。封召公奭於燕。封弟叔鮮于管，弟叔度於蔡。

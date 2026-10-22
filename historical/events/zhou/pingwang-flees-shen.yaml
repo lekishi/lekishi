@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Set aside as heir, 宜臼 flees to his mother's people at 西申. Only the Bamboo Annals record the
+  flight.
+types: [occurrence]
+date:
+  value: 774 BCE..771 BCE
+  mode: window
+  calendar: regnal
+  as_written: (no year; entered after 晉文侯七年)
+  cite:
+    - id: pingwang-flees-date
+      says: >-
+        The Bamboo Annals enter the flight after 伯服's appointment in 晉文侯's seventh year, 774 BCE,
+        and before 幽王's death in the tenth, 771 BCE.
+      sources:
+        - source: guben-zhushu-jinian
+          at: 晉紀 文侯 七年（幽王立褒姒之子伯服以爲太子）
+          quote: 幽王立褒姒之子伯服以爲太子。
+        - source: guben-zhushu-jinian
+          at: 晉紀 文侯 十年（伯盤與幽王倶死于戲）
+          quote: 伯盤與幽王倶死于戲。
+places:
+  - place: shen
+    role: end
+participants:
+  - actor: zhou-ping-wang
+    role: leader
+notes: >-
+  王國維 collects the entry from the 正義 commentary on 左傳 昭公二十六年, which places it beside the
+  appointment of 伯盤; the record follows that order.
+cite:
+  - id: pingwang-flees-basis
+    says: The Bamboo Annals record that 平王 fled to 西申.
+    source: guben-zhushu-jinian
+    at: 晉紀 文侯 七年（平王奔西申）
+    quote: 平王奔西申。

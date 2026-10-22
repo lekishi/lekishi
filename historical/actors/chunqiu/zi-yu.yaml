@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: 子玉, 成得臣, the 楚 commander who asked leave to kill 重耳 for his answer to the king.
+types: [person]
+names:
+  - form: 子玉
+    lang: lzh
+    script: Hani
+    roman: Ziyu
+    scheme: pinyin
+    cite:
+      - id: zi-yu-name
+        says: The 左傳 records that 子玉 asked to kill 重耳.
+        source: zuozhuan
+        at: 僖公二十三年（子玉請殺之）
+        quote: 子玉請殺之。
+roles:
+  - role: soldier
+    note: Commander of 楚.
+    cite:
+      - id: zi-yu-role
+        says: The 晉 house calls 子玉 a 楚 general.
+        source: shiji-chunqiu
+        at: 卷三十九 晉世家 文公（楚將子玉怒曰）
+        quote: 楚將子玉怒曰

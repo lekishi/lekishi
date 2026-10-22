@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Two years after the review, hearing that 紂 has killed 比干 and imprisoned 箕子, 武王 sets out east
+  with three hundred chariots, three thousand 虎賁 and forty-five thousand armoured men. On 戊午 in the
+  twelfth month the whole army has crossed at 盟津 and the lords have joined it.
+types: [campaign]
+date:
+  value: 1047 BCE..1027 BCE
+  mode: window
+  calendar: regnal
+  as_written: 十一年十二月戊午
+  cite:
+    - id: mengjin-crossing-date
+      says: >-
+        The annals date the crossing to 戊午 of the twelfth month of the eleventh year, before the
+        battle on 甲子 of the second month. Whether the twelfth month falls in the battle's year or the
+        year before depends on the calendar's new year, so the window opens a year before the
+        conquest's.
+      source: shiji-yin-zhou
+      at: 卷四 周本紀 武王（十一年十二月戊午）
+      quote: 十一年十二月戊午，師畢渡盟津，諸侯咸會。
+places:
+  - place: mengjin
+    role: waypoint
+participants:
+  - actor: zhou-wu-wang
+    role: leader
+cite:
+  - id: mengjin-crossing-army
+    says: The annals give the army as three hundred chariots, three thousand 虎賁 and forty-five thousand armoured men.
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 武王（遂率戎車三百乘）
+    quote: 乃遵文王，遂率戎車三百乘，虎賁三千人，甲士四萬五千人，以東伐紂。
+  - id: mengjin-crossing-entry
+    says: The annals record that on 戊午 of the twelfth month of the eleventh year the army had crossed at 盟津.
+    role: supporting
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 武王（十一年十二月戊午）
+    quote: 十一年十二月戊午，師畢渡盟津，諸侯咸會。

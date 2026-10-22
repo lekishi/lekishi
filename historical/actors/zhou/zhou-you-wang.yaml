@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  幽王, the last king of Western 周, who favoured 褒姒, set aside his queen from 申 and her son 宜臼, and
+  was killed at the foot of 驪山 in 771 BCE by 申侯 and the 犬戎.
+types: [person]
+names:
+  - form: 幽王
+    lang: lzh
+    script: Hani
+    roman: You Wang
+    scheme: pinyin
+    cite:
+      - id: zhou-you-wang-name
+        says: The annals record that in his third year 幽王 fell for 褒姒.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 幽王 三年（幽王嬖愛褒姒）
+        quote: 三年，幽王嬖愛褒姒。
+roles:
+  - role: ruler
+    note: King of 周 from 781 to 771 BCE.
+    cite:
+      - id: zhou-you-wang-role
+        says: The annals record that 幽王 made 虢石父 his minister and the people resented it.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 幽王（幽王以虢石父為卿）
+        quote: 幽王以虢石父為卿，用事，國人皆怨。

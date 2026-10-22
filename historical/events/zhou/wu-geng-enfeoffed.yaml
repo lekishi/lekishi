@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  武王 enfeoffs 紂's son 祿父 over the remaining people of 殷, to continue its sacrifices, and, because
+  殷 is not yet settled, sets his brothers 管叔鮮 and 蔡叔度 to help him govern. He frees 箕子, honours
+  比干's grave, opens the granaries of 鉅橋, and goes back west.
+types: [founding]
+date:
+  value: 1046 BCE..1027 BCE
+  mode: window
+  calendar: regnal
+  as_written: (after the battle, in the same passage)
+  cite:
+    - id: wu-geng-date-1046
+      says: >-
+        The 夏商周斷代工程 dates the conquest to 1046 BCE by astronomical calculation; its 2022 report gives
+        20 January 1046 BCE. This is the window's early end.
+      basis: interpretation
+      attributed_to: 夏商周斷代工程《夏商周斷代工程報告》(2022)
+      source: chinadaily-muye-2023
+      at: paragraphs 1–2
+    - id: wu-geng-date-1027
+      says: >-
+        The Bamboo Annals count 257 years from 武王's conquest to 幽王. Counted back from 幽王's death in
+        771 BCE, that puts the conquest in 1027 BCE, the window's late end.
+      role: alternative
+      source: guben-zhushu-jinian
+      at: 幽王（自武王滅殷，以至幽王，凡二百五十七年）
+      quote: 自武王滅殷，以至幽王，凡二百五十七年。
+places:
+  - place: chaoge
+    role: context
+    note: The land of 殷 that 祿父 was given; the annals name no seat for him.
+participants:
+  - actor: zhou-wu-wang
+    role: leader
+  - actor: wu-geng
+    role: subject
+  - actor: guan-shu
+    role: participant
+  - actor: cai-shu
+    role: participant
+dispute:
+  status: disputed
+  summary: >-
+    The year depends on the disputed year of the conquest. The record keeps the 夏商周斷代工程's
+    1046 BCE as the editorial anchor and the Bamboo Annals' count, which gives 1027 BCE, as an
+    alternative, and decides nothing between them.
+cite:
+  - id: wu-geng-enfeoffed-basis
+    says: The annals record 武王 enfeoffing 祿父 over the 殷 people and setting 管叔 and 蔡叔 to help him govern.
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 武王（封商紂子祿父殷之餘民）
+    quote: 封商紂子祿父殷之餘民。武王為殷初定未集，乃使其弟管叔鮮、蔡叔度相祿父治殷。
+  - id: wu-geng-enfeoffed-yin
+    says: The 殷 annals record the enfeoffment as continuing the sacrifices of 殷 and say the 殷 people were pleased.
+    role: supporting
+    source: shiji-yin-zhou
+    at: 卷三 殷本紀 帝辛（封紂子武庚祿父）
+    quote: 封紂子武庚祿父，以續殷祀，令修行盤庚之政。殷民大說。

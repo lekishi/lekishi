@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  商, also called 殷 after its last capital: the royal house and state that the Han annals trace from
+  成湯 to 帝辛 (紂), and that the 周 overthrew at 牧野. Its later kings ruled from 殷, the site at 安陽
+  whose oracle-bone inscriptions are the earliest Chinese writing.
+types: [state]
+names:
+  - form: 殷
+    lang: lzh
+    script: Hani
+    roman: Yin
+    scheme: pinyin
+    cite:
+      - id: shang-state-yin
+        says: The annals call the house 殷 and record its kings reviving and declining under that name.
+        source: shiji-yin-zhou
+        at: 卷三 殷本紀 帝盤庚（殷道復興）
+        quote: 乃遂涉河南，治亳，行湯之政，然後百姓由寧，殷道復興。
+  - form: 商
+    lang: lzh
+    script: Hani
+    roman: Shang
+    scheme: pinyin
+    note: The name the 周 texts use for the state and its capital, as in 商郊牧野.
+    cite:
+      - id: shang-state-shang
+        says: The 周 annals call the enemy's land 商 and its outskirts 商郊.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 武王（二月甲子昧爽）
+        quote: 二月甲子昧爽，武王朝至于商郊牧野，乃誓。
+notes: >-
+  The state actor carries no roles, as the role vocabulary is person-oriented. Its kings are separate
+  actor records.

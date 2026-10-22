@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  At 楚, 成王 feasts 重耳 and asks what he will give in return. 重耳 promises that if their armies ever meet
+  on the plain, he will withdraw three days' march. 子玉 asks leave to kill him; the king refuses, and after
+  some months sends him on to 秦.
+types: [occurrence]
+date:
+  value: 637 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 楚成王三十五年
+  cite:
+    - id: chonger-at-chu-date
+      says: >-
+        The table enters it in the 637 BCE row, the year its count from the 共和 regency (841 BCE) gives.
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 楚 成王 三十五年（重耳過，厚禮之）
+      quote: 三十五重耳過，厚禮之。
+places:
+  - place: ying
+    role: site
+    note: "The 楚 capital, an editorial placement: the texts name only the state."
+participants:
+  - actor: chonger
+    role: leader
+  - actor: chu-cheng-wang
+    role: host
+  - actor: zi-yu
+    role: participant
+  - actor: chu-state
+    role: host
+notes: >-
+  The texts say 楚, not 郢. The record places the visit at the capital because the king received him, and
+  says so on the place.
+cite:
+  - id: chonger-at-chu-zuo
+    says: The 左傳 records 重耳's promise to withdraw three marches if 晉 and 楚 met in the field.
+    source: zuozhuan
+    at: 僖公二十三年（其辟君三舍）
+    quote: 若以君之靈，得反晉國，晉楚治兵，遇於中原，其辟君三舍。
+  - id: chonger-at-chu-ziyu
+    says: The 左傳 records 子玉 asking to kill him and the king sending him to 秦.
+    role: supporting
+    source: zuozhuan
+    at: 僖公二十三年（子玉請殺之）
+    quote: 子玉請殺之。

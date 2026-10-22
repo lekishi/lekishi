@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  孔子, 孔丘, 仲尼, the 魯 teacher and minister who left 魯 when its ruler took a gift of dancing girls from 齊,
+  travelled among 衛, 宋, 鄭, 陳, 蔡, 葉 and 楚 for fourteen years looking for a lord who would employ him, and
+  came home in 484 BCE.
+types: [person]
+names:
+  - form: 孔子
+    lang: lzh
+    script: Hani
+    roman: Kongzi
+    scheme: pinyin
+    cite:
+      - id: kongzi-name
+        says: The 孔子世家 records that 孔子 returned to 魯 after fourteen years away.
+        source: shiji-chunqiu
+        at: 卷四十七 孔子世家（孔子之去魯凡十四歲而反乎魯）
+        quote: 孔子之去魯凡十四歲而反乎魯。
+  - form: 仲尼
+    lang: lzh
+    script: Hani
+    note: His courtesy name.
+    cite:
+      - id: kongzi-zhongni
+        says: The 左傳 records 孔文子 consulting 仲尼 before attacking 大叔.
+        source: zuozhuan
+        at: 哀公十一年（訪於仲尼）
+        quote: 孔文子之將攻大叔也．訪於仲尼．
+  - form: 孔丘
+    lang: lzh
+    script: Hani
+    note: His personal name.
+    cite:
+      - id: kongzi-kongqiu
+        says: The 論語 records 子路 naming his master to 長沮 as 孔丘.
+        source: lunyu
+        at: 微子第十八（爲孔丘）
+        quote: 子路曰：「爲孔丘。」
+roles:
+  - role: official
+    note: Minister of justice of 魯 before the travels.
+    cite:
+      - id: kongzi-role
+        says: >-
+          The 孔子世家 records that in 定公's fourteenth year 孔子 acted as chancellor from the post of minister of
+          justice.
+        source: shiji-chunqiu
+        at: 卷四十七 孔子世家（由大司寇行攝相事）
+        quote: 定公十四年，孔子年五十六，由大司寇行攝相事，有喜色。
+  - role: scholar
+    note: Teacher of disciples who travelled with him.
+    cite:
+      - id: kongzi-scholar
+        says: The 孔子世家 records 孔子 practising ritual with his disciples under a great tree in 宋.
+        source: shiji-chunqiu
+        at: 卷四十七 孔子世家（與弟子習禮大樹下）
+        quote: 孔子去曹適宋，與弟子習禮大樹下。

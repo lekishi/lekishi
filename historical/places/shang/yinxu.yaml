@@ -1,0 +1,82 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  殷, the 商 capital that the Bamboo Annals record 盤庚 moving to, and that a later note kept in the
+  annals' reconstruction says no king left until the fall of the dynasty; the site north of 安陽 called 殷墟, "the ruins of 殷". The Han annals tell
+  the move differently and place 盤庚's capital at 亳, south of the Yellow River. The point is the
+  archaeological site's coordinate in Wikidata, an identification of the ruins with the capital
+  that the cited historical geography also makes.
+types: [capital]
+names:
+  - form: 殷
+    lang: lzh
+    script: Hani
+    roman: Yin
+    scheme: pinyin
+    cite:
+      - id: yin-name
+        says: The Bamboo Annals record that 盤庚 moved from 奄 to 北蒙 and named it 殷.
+        source: guben-zhushu-jinian
+        at: 盤庚（盤庚旬自奄遷于北蒙）
+        quote: 盤庚旬自奄遷于北蒙，曰殷。
+  - form: 北蒙
+    lang: lzh
+    script: Hani
+    roman: Beimeng
+    scheme: pinyin
+    note: The place name the Bamboo Annals give before 盤庚 named it 殷.
+    claim: yin-name
+  - form: 殷墟
+    lang: lzh
+    script: Hani
+    roman: Yinxu
+    scheme: pinyin
+    note: The later name of the ruins, which the historical geography records north of 安陽.
+    cite:
+      - id: yinxu-name
+        says: >-
+          The historical geography records 殷墟 north of the prefectural city of 彰德府 (安陽), quotes the
+          Bamboo Annals for 盤庚's move to it, and quotes a local survey calling 安陽 the capital of 紂.
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷四十九 河南四 彰德府 安陽縣（殷墟）
+        quote: 殷墟，在府城北。《汲冢古文》：「盤庚自奄遷北塚，曰殷虛。虛，與墟同。」
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [114.31861111111111, 36.1225]
+    notes: >-
+      The coordinate Wikidata records for the archaeological site of 殷墟 at 安陽, which it describes as
+      the last capital of the 商 dynasty. It is a point for a site that covers many square
+      kilometres, so the precision is locality. The identification of the ruins with the capital
+      the texts call 殷 is the historical geography's and the dataset's, not a source statement of the
+      period.
+    cite:
+      - id: yinxu-point
+        says: >-
+          Wikidata (CC0) records the coordinate of the archaeological site of 殷墟 and describes it as
+          the site of the last capital of the 商 dynasty.
+        basis: interpretation
+        attributed_to: Wikidata contributors
+        source: wikidata
+        at: Q464904 (P625), revision 2551228305
+      - id: yinxu-identification
+        says: The historical geography places 殷墟 north of the city of 安陽 and between the 淇 and 洹 rivers.
+        role: supporting
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷四十九 河南四 彰德府 安陽縣（殷墟）
+        quote: 《戰國策》曰：「紂聚兵百萬，左飲淇水竭，右飲洹水不流。今邑在二水間。」
+modern:
+  - form: 殷墟
+    lang: zh-Hans
+    script: Hani
+    note: The archaeological site at 安陽, 河南, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q464904
+    url: https://www.wikidata.org/wiki/Q464904
+    license: CC0-1.0
+notes: >-
+  The Bamboo Annals and the Han annals disagree on where 盤庚 settled: the annals say he crossed to
+  the south of the Yellow River and governed from 亳, while the Bamboo Annals name 殷, and a later note kept
+  in their reconstruction says no king moved the capital again until the fall. The ruins at 安陽 lie north of the river, which is why the
+  historical geography follows the Bamboo Annals; the record keeps the annals' account on the event
+  as a conflicting claim and does not decide it.

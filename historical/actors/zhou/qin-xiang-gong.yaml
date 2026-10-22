@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  襄公, the lord of 秦 who fought to save 周 in 771 BCE, escorted 平王 east, and was made a lord of the 周
+  with the land west of 岐, so that 秦 first became a state.
+types: [person]
+names:
+  - form: 秦襄公
+    lang: lzh
+    script: Hani
+    roman: Qin Xiang Gong
+    scheme: pinyin
+    cite:
+      - id: qin-xiang-gong-name
+        says: The 秦 annals record that 秦襄公 led troops to save 周 and fought hard.
+        source: shiji-chunqiu
+        at: 卷五 秦本紀 襄公 七年（秦襄公將兵救周）
+        quote: 而秦襄公將兵救周，戰甚力，有功。
+roles:
+  - role: ruler
+    note: Lord of 秦, made a 周 lord in 771 BCE.
+    cite:
+      - id: qin-xiang-gong-role
+        says: The 秦 annals record that 平王 made 襄公 a lord and gave him the land west of 岐.
+        source: shiji-chunqiu
+        at: 卷五 秦本紀 襄公 七年（平王封襄公為諸侯）
+        quote: 平王封襄公為諸侯，賜之岐以西之地。

@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  秦穆公 gives 重耳 five women of his house, among them 懷嬴, once the wife of 晉's fugitive heir. When 懷嬴 is
+  slighted she rebukes him, and he strips and submits. At a feast 趙衰 has him answer the lord's ode with
+  a bow.
+types: [occurrence]
+date:
+  value: 637 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 秦穆公二十三年
+  cite:
+    - id: chonger-in-qin-date
+      says: >-
+        The table enters it in the 637 BCE row, the year its count from the 共和 regency (841 BCE) gives.
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 秦 穆公 二十三年（迎重耳於楚）
+      quote: 二十三迎重耳於楚，厚禮之，妻之女。重耳願歸。
+places:
+  - place: yong
+    role: site
+    note: The 秦 capital; the texts name only the state.
+participants:
+  - actor: chonger
+    role: leader
+  - actor: qin-mu-gong
+    role: host
+  - actor: huai-ying
+    role: participant
+  - actor: zhao-shuai
+    role: participant
+  - actor: qin-state
+    role: host
+cite:
+  - id: chonger-in-qin-zuo
+    says: The 左傳 records that the lord of 秦 gave 重耳 five women, 懷嬴 among them.
+    source: zuozhuan
+    at: 僖公二十三年（秦伯納女五人）
+    quote: 秦伯納女五人，懷嬴與焉。
+  - id: chonger-in-qin-table
+    says: The table records that 秦 brought 重耳 from 楚, treated him generously and gave him a wife.
+    role: supporting
+    source: shiji-chunqiu
+    at: 卷十四 十二諸侯年表 秦 穆公 二十三年（迎重耳於楚）
+    quote: 二十三迎重耳於楚，厚禮之，妻之女。重耳願歸。

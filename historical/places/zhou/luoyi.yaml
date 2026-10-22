@@ -1,0 +1,69 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  雒邑, the eastern city 武王 chose by the 雒 and 伊 rivers, which 成王 had 召公 and 周公 build, and to
+  which 平王 moved the court in 770 BCE. Wikidata places it at the 周 王城 site in 洛陽.
+types: [capital]
+names:
+  - form: 雒邑
+    lang: lzh
+    script: Hani
+    roman: Luoyi
+    scheme: pinyin
+    cite:
+      - id: luoyi-name
+        says: The annals record that 武王 laid out a 周 residence at 雒邑 before leaving.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 武王（營周居于雒邑而後去）
+        quote: 營周居于雒邑而後去。
+  - form: 洛邑
+    lang: lzh
+    script: Hani
+    note: The same name written with 洛, as the annals write it for 成王's building.
+    cite:
+      - id: luoyi-luo
+        says: The annals record 成王 sending 召公 to lay out 洛邑 again, as 武王 had intended.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 成王（使召公復營洛邑）
+        quote: 成王在豐，使召公復營洛邑，如武王之意。
+  - form: 成周
+    lang: lzh
+    script: Hani
+    note: >-
+      The historical geography names the 王城 and the lower city where the 殷 people were settled
+      together as 成周.
+    cite:
+      - id: luoyi-chengzhou
+        says: The historical geography records a lower city east of the 王城 where the 殷 people lived, both called 成周.
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷四十八 河南三 河南府（下都城）
+        quote: 又下都城，在王城東四十里 在今城東二十里，下都居殷民，與王城俱曰成周
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [112.41452, 34.66768]
+    notes: >-
+      Wikidata's coordinate for 雒邑, which it labels the 王城 and dates from 1021 BCE. The
+      identification of the excavated 東周 王城 with the city the texts describe is the dataset's and
+      the geography's, not a source statement of the period.
+    cite:
+      - id: luoyi-point
+        says: Wikidata (CC0) records 雒邑 (Wangcheng) as a Chinese city with this coordinate.
+        basis: interpretation
+        attributed_to: Wikidata contributors
+        source: wikidata
+        at: Q10565818 (P625), revision 2516937802
+      - id: luoyi-identification
+        says: The historical geography records that 成王 built the 王城 west of the later city, and that 平王 lived there after moving east.
+        role: supporting
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷四十八 河南三 河南府（成王營洛爲王城）
+        quote: 成王營洛爲王城 謂之東都，在今城西偏 ，平王東遷居于此。
+external_ids:
+  - system: wikidata
+    id: Q10565818
+    url: https://www.wikidata.org/wiki/Q10565818
+    license: CC0-1.0
+notes: >-
+  One record for the eastern capital across its names. The transcription of this part of the
+  historical geography renders its notes inline without markers, so the quoted fragments include
+  them as the page shows them.

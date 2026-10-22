@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  文丁 (the Han annals' 太丁), the 商 king whom the Bamboo Annals record killing 季歷 of 周.
+types: [person]
+names:
+  - form: 文丁
+    lang: lzh
+    script: Hani
+    roman: Wen Ding
+    scheme: pinyin
+    cite:
+      - id: wen-ding-name
+        says: The Bamboo Annals record that 文丁 killed 季歷.
+        source: guben-zhushu-jinian
+        at: 大丁（文丁殺季歷）
+        quote: 文丁殺季歴。
+  - form: 太丁
+    lang: lzh
+    script: Hani
+    note: The annals' name for the king between 武乙 and 帝乙; the Bamboo Annals' heading writes 大丁.
+    cite:
+      - id: wen-ding-taiding
+        says: The annals record 太丁 succeeding 武乙 and 帝乙 succeeding 太丁.
+        source: shiji-yin-zhou
+        at: 卷三 殷本紀 帝武乙（子帝太丁立）
+        quote: 子帝太丁立。帝太丁崩，子帝乙立。
+roles:
+  - role: ruler
+    note: King of 商.
+    cite:
+      - id: wen-ding-role
+        says: The annals record 太丁 as king between 武乙 and 帝乙.
+        source: shiji-yin-zhou
+        at: 卷三 殷本紀 帝武乙（子帝太丁立）
+notes: >-
+  The record follows the Bamboo Annals' reconstruction, which files the 文丁 entries under the
+  heading 大丁, in treating 文丁 and the annals' 太丁 as one king. That equation is the reconstruction's,
+  and is recorded rather than argued.

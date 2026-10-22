@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  With 幽王 dead, 虢公翰 makes 王子餘臣 king at 攜, so that two 周 kings reign at once, 平王 at 申 and
+  攜王 at 攜. Only the Bamboo Annals record it.
+types: [founding]
+date:
+  value: 771 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 晉文侯十年（幽王既死）
+  cite:
+    - id: xie-wang-enthroned-date
+      says: >-
+        The table of the twelve lords puts 幽王's death in his eleventh year, which its count from the
+        first year of the 共和 regency (841 BCE) sets in 771 BCE.
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 周 幽王 十一年（幽王為犬戎所殺）
+      quote: 十一幽王為犬戎所殺。
+places:
+  - place: xie
+    role: site
+participants:
+  - actor: guo-gong-han
+    role: leader
+  - actor: xie-wang
+    role: subject
+notes: >-
+  The entry says only that it happened after 幽王 died; the record dates it to the year of the
+  death because the entry stands under that year.
+cite:
+  - id: xie-wang-enthroned-basis
+    says: The Bamboo Annals record that after 幽王's death 虢公翰 made 王子餘臣 king at 攜, and that two kings reigned.
+    source: guben-zhushu-jinian
+    at: 晉紀 文侯 十年（虢公翰又立王子餘臣于攜）
+    quote: 幽王既死，而虢公翰又立王子餘臣于攜，周二王並立。

@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  召公奭, 武王's ally, enfeoffed in 燕, who freed 箕子 after the conquest and under 成王 laid out 洛邑 and served as guardian (保).
+types: [person]
+names:
+  - form: 召公奭
+    lang: lzh
+    script: Hani
+    roman: Zhaogong Shi
+    scheme: pinyin
+    cite:
+      - id: zhao-gong-shi-name
+        says: The annals record that 成王 had 召公 lay out 洛邑 again, as 武王 had intended.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 成王（使召公復營洛邑）
+        quote: 成王在豐，使召公復營洛邑，如武王之意。
+roles:
+  - role: official
+    note: Guardian (保) under 成王.
+    cite:
+      - id: zhao-gong-shi-role
+        says: The annals record that 成王 had 召公 lay out 洛邑 again, as 武王 had intended.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 成王（使召公復營洛邑）

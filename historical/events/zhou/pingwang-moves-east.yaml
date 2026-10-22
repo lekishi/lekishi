@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  In his first year 平王 moves the 周 court east from 鎬 to 雒邑 to escape the 戎, with 秦襄公's troops
+  as escort. From here the house of 周 declines and the great states, 齊, 楚, 秦 and 晉, rise.
+types: [journey]
+date:
+  value: 770 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 平王元年
+  cite:
+    - id: pingwang-moves-date
+      says: The table enters the move east to 雒邑 in 平王's first year, which its count from 841 BCE sets in 770 BCE.
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 周 平王 元年（東徙雒邑）
+      quote: 平王元年東徙雒邑。
+places:
+  - place: haojing
+    role: start
+    note: The annals name no point of departure; 鎬 is the western capital the court left.
+  - place: luoyi
+    role: end
+participants:
+  - actor: zhou-ping-wang
+    role: leader
+  - actor: qin-xiang-gong
+    role: participant
+cite:
+  - id: pingwang-moves-annals
+    says: The annals record that 平王 moved east to 雒邑 on his accession, to escape the 戎.
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 平王（平王立，東遷于雒邑）
+    quote: 平王立，東遷于雒邑，辟戎寇。
+  - id: pingwang-moves-escort
+    says: The 秦 annals record that 周 moved east to 雒邑 to avoid the 犬戎 and that 襄公 escorted 平王 with troops.
+    role: supporting
+    source: shiji-chunqiu
+    at: 卷五 秦本紀 襄公 七年（襄公以兵送周平王）
+    quote: 周避犬戎難，東徙雒邑，襄公以兵送周平王。
+cites:
+  places:
+    - id: pingwang-moves-start
+      says: The historical geography records that 平王 lived at the 王城 of 雒邑 after moving east.
+      source: dushi-fangyu-jiyao-zhou
+      at: 卷四十八 河南三 河南府（成王營洛爲王城）
+      quote: 成王營洛爲王城 謂之東都，在今城西偏 ，平王東遷居于此。

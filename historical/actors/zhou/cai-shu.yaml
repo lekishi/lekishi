@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  蔡叔度, 武王's brother, enfeoffed at 蔡 and set with 管叔 to oversee 武庚. He joined the rebellion and was banished.
+types: [person]
+names:
+  - form: 蔡叔度
+    lang: lzh
+    script: Hani
+    roman: Caishu Du
+    scheme: pinyin
+    cite:
+      - id: cai-shu-name
+        says: The annals record that 武王 set his brothers 管叔鮮 and 蔡叔度 to assist 祿父 in governing 殷.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 武王（乃使其弟管叔鮮、蔡叔度相祿父治殷）
+        quote: 武王為殷初定未集，乃使其弟管叔鮮、蔡叔度相祿父治殷。
+roles:
+  - role: official
+    note: Overseer of 殷 for 周.
+    cite:
+      - id: cai-shu-role
+        says: The annals record that 武王 set his brothers 管叔鮮 and 蔡叔度 to assist 祿父 in governing 殷.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 武王（乃使其弟管叔鮮、蔡叔度相祿父治殷）

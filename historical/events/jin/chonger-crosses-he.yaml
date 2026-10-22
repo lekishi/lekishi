@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  In the first month of 636 BCE 秦 brings 重耳 to the Yellow River. 子犯 offers him a jade and asks leave to
+  go; 重耳 swears by the river to share with him and throws the jade in. The 秦 army crosses, besieges 令狐,
+  enters 桑泉 and takes 臼衰.
+types: [campaign]
+date:
+  value: 636 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 僖公二十四年春王正月（左傳）; 文公元年春（晉世家）; 惠公十五年（竹書紀年）
+  cite:
+    - id: chonger-crosses-he-date
+      says: >-
+        The table enters 秦 sending 重耳 home with troops in 穆公's twenty-fourth year, 636 BCE in its count.
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 秦 穆公 二十四年（以兵送重耳）
+      quote: 二十四以兵送重耳。
+places:
+  - place: hequ
+    role: site
+    note: The Bamboo Annals' crossing; the 左傳 and the 晉 house say only 'the river'.
+participants:
+  - actor: chonger
+    role: leader
+  - actor: qin-mu-gong
+    role: leader
+  - actor: hu-yan
+    role: participant
+  - actor: jie-zitui
+    role: participant
+  - actor: qin-state
+    role: participant
+notes: >-
+  令狐, 桑泉 and 臼衰 are named in the summary and not minted as places; the historical geography puts all three
+  near 解 and 猗氏.
+cite:
+  - id: chonger-crosses-he-zuo
+    says: The 左傳 records 子犯's jade at the river, the oath, and the crossing that took 令狐, 桑泉 and 臼衰.
+    source: zuozhuan
+    at: 僖公二十四年（及河，子犯以璧授公子）
+    quote: 公子曰：「所不與舅氏同心者，有如白水。」投其璧于河。
+  - id: chonger-crosses-he-towns
+    says: The 左傳 records that after crossing the river they besieged 令狐, entered 桑泉 and took 臼衰.
+    role: supporting
+    source: zuozhuan
+    at: 僖公二十四年（濟河）
+    quote: 濟河，圍令狐，入桑泉，取臼衰。
+  - id: chonger-crosses-he-zhushu
+    says: The Bamboo Annals record that 秦穆公 led an army escorting 重耳 and crossed at 河曲.
+    role: supporting
+    source: guben-zhushu-jinian
+    at: 晉紀 惠公 十五年（渉自河曲）
+    quote: 十五年，秦穆公帥師送公子重耳，渉自河曲。

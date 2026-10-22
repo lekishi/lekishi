@@ -1,0 +1,58 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  The day after the battle, 武王 enters the 商 city in state, with 周公 and 畢公 bearing axes at his
+  side, stands south of the earth altar, and hears the scribe 尹佚 read the charge against 紂. He bows
+  and declares that he has received the great mandate and changed 殷's.
+types: [occurrence]
+date:
+  value: 1046 BCE..1027 BCE
+  mode: window
+  calendar: regnal
+  as_written: 其明日（the day after the battle）
+  cite:
+    - id: altar-date-1046
+      says: >-
+        The 夏商周斷代工程 dates the conquest to 1046 BCE by astronomical calculation; its 2022 report gives
+        20 January 1046 BCE. This is the window's early end.
+      basis: interpretation
+      attributed_to: 夏商周斷代工程《夏商周斷代工程報告》(2022)
+      source: chinadaily-muye-2023
+      at: paragraphs 1–2
+    - id: altar-date-1027
+      says: >-
+        The Bamboo Annals count 257 years from 武王's conquest to 幽王. Counted back from 幽王's death in
+        771 BCE, that puts the conquest in 1027 BCE, the window's late end.
+      role: alternative
+      source: guben-zhushu-jinian
+      at: 幽王（自武王滅殷，以至幽王，凡二百五十七年）
+      quote: 自武王滅殷，以至幽王，凡二百五十七年。
+places:
+  - place: chaoge
+    role: site
+participants:
+  - actor: zhou-wu-wang
+    role: leader
+  - actor: zhou-gong-dan
+    role: participant
+  - actor: shi-shangfu
+    role: participant
+  - actor: zhao-gong-shi
+    role: participant
+dispute:
+  status: disputed
+  summary: >-
+    The year depends on the disputed year of the conquest. The record keeps the 夏商周斷代工程's
+    1046 BCE as the editorial anchor and the Bamboo Annals' count, which gives 1027 BCE, as an
+    alternative, and decides nothing between them.
+cite:
+  - id: altar-procession
+    says: The annals record that on the next day the road was cleared and the earth altar and the palace of 紂 were repaired.
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 武王（其明日，除道）
+    quote: 其明日，除道，修社及商紂宮。
+  - id: altar-mandate
+    says: The annals record 武王 bowing and declaring that he had received the great mandate and changed 殷's.
+    role: supporting
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 武王（膺更大命，革殷）
+    quote: 於是武王再拜稽首，曰：「膺更大命，革殷，受天明命。」

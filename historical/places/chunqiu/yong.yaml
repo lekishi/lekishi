@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  雍, the 秦 capital from 677 BCE, where 秦穆公 married 重耳 to five women of his house and sent him home with
+  an army. Wikidata gives the coordinate of the excavated city.
+types: [capital]
+names:
+  - form: 雍
+    lang: lzh
+    script: Hani
+    roman: Yong
+    scheme: pinyin
+    cite:
+      - id: yong-name
+        says: The historical geography records the old city of 雍 south of 鳳翔, where 秦德公 first lived.
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷五十五 陝西四 鳳翔府（雍城）
+        quote: 雍城，在府城南。《括地志》：「雍縣南七里，有故雍城。秦德公年，初居雍城大鄭宮，是也。
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [107.35907, 34.46669]
+    notes: >-
+      Wikidata's coordinate for the 雍城 site. The exile texts name only 秦; the point is the dataset's identification
+      of the capital.
+    cite:
+      - id: yong-point
+        says: Wikidata (CC0) records 雍城 as a Chinese city with this coordinate.
+        basis: interpretation
+        attributed_to: Wikidata contributors
+        source: wikidata
+        at: Q7196928 (P625), revision 2463212866
+      - id: yong-identification
+        says: >-
+          The historical geography places the old 雍 seven 里 south of 雍 county, south of the prefectural city.
+        role: supporting
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷五十五 陝西四 鳳翔府（雍城）
+        quote: 雍城，在府城南。
+external_ids:
+  - system: wikidata
+    id: Q7196928
+    url: https://www.wikidata.org/wiki/Q7196928
+    license: CC0-1.0

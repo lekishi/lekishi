@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  孔文子 of 衛 asks Confucius how to attack 大叔. Confucius says he knows ritual vessels, not weapons, and orders
+  his carriage: the bird chooses the tree. As 孔文子 begs him to stay, 魯 sends gifts to call him home, and
+  after fourteen years he goes back.
+types: [journey]
+date:
+  value: 484 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 魯哀公十一年
+  cite:
+    - id: kongzi-returns-lu-date
+      says: >-
+        The table enters 魯's welcome and Confucius's return in 哀公's eleventh year, 484 BCE in its count.
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 魯 哀公 十一年（迎孔子，孔子歸）
+      quote: 十一齊伐我。冉有言，故迎孔子，孔子歸。
+places:
+  - place: wey-diqiu
+    role: start
+    note: The capital of the state the text names; the text names only the state.
+  - place: qufu
+    role: end
+participants:
+  - actor: kongzi
+    role: leader
+  - actor: kong-wenzi
+    role: participant
+  - actor: ji-kang-zi
+    role: participant
+  - actor: ran-qiu
+    role: participant
+  - actor: lu-state
+    role: host
+cite:
+  - id: kongzi-returns-lu-zuo
+    says: >-
+      The 左傳 records 孔文子 consulting 仲尼, his refusal and departure, and 魯 calling him home with gifts.
+    source: zuozhuan
+    at: 哀公十一年（魯人以幣召之．乃歸）
+    quote: 孔文子之將攻大叔也．訪於仲尼．仲尼曰．胡簋之事．則嘗學之矣．甲兵之事．未之聞也．退命駕而行．曰．鳥則擇木．木豈能擇鳥．
+  - id: kongzi-returns-lu-recall
+    says: The 左傳 records that 魯 called him with gifts and he went home.
+    role: supporting
+    source: zuozhuan
+    at: 哀公十一年（魯人以幣召之．乃歸）
+    quote: 魯人以幣召之．乃歸．
+  - id: kongzi-returns-lu-years
+    says: The 孔子世家 records that he came back after fourteen years away.
+    role: supporting
+    source: shiji-chunqiu
+    at: 卷四十七 孔子世家（孔子之去魯凡十四歲而反乎魯）
+    quote: 孔子之去魯凡十四歲而反乎魯。

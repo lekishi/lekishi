@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  鎬, or 鎬京, 武王's seat east of 豐 and the royal capital of Western 周, the 宗周 of the Book of
+  Documents. The historical geography records that its site was lost when 漢武帝 dug the 昆明 lake.
+types: [capital]
+names:
+  - form: 鎬京
+    lang: lzh
+    script: Hani
+    roman: Haojing
+    scheme: pinyin
+    cite:
+      - id: haojing-name
+        says: >-
+          The historical geography quotes the Odes on 鎬京 as the capital, and records that 鎬 lay east of
+          豐, about twenty-five li apart.
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷五十三 陝西二 西安府 長安縣（鎬池）
+        quote: 鄭康成曰：「鎬在豐東，豐、鎬相去蓋二十五里。
+  - form: 宗周
+    lang: lzh
+    script: Hani
+    roman: Zongzhou
+    scheme: pinyin
+    note: The name the annals use for the western royal seat to which 成王 returned.
+    cite:
+      - id: haojing-zongzhou
+        says: The annals record 成王 returning from 奄 to 宗周.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 成王（成王自奄歸，在宗周）
+        quote: 成王自奄歸，在宗周，作《多方》。
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [108.75, 34.233333333333334]
+    notes: >-
+      Wikidata's coordinate for 鎬京 as an archaeological site, given to about a minute of arc. The
+      historical geography says the site itself was destroyed under 秦 and lost under 漢, so the point
+      is the modern identification, not a surviving city.
+    cite:
+      - id: haojing-point
+        says: Wikidata (CC0) records 鎬京 as a former 周 capital, now an archaeological site, with this coordinate.
+        basis: interpretation
+        attributed_to: Wikidata contributors
+        source: wikidata
+        at: Q3818368 (P625), revision 2479354001
+      - id: haojing-lost
+        says: The historical geography records that the old site of 鎬京 was destroyed under 秦 and could no longer be traced after 漢武帝 dug the 昆明 lake.
+        role: supporting
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷五十三 陝西二 西安府 長安縣（鎬池）
+        quote: 秦始皇時，鎬京故址毀。漢武帝穿昆明池，而故址益無可究。
+external_ids:
+  - system: wikidata
+    id: Q3818368
+    url: https://www.wikidata.org/wiki/Q3818368
+    license: CC0-1.0

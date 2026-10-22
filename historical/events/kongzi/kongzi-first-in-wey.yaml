@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  In 衛 Confucius lodges with 顏濁鄒, 子路's brother-in-law. 衛靈公 gives him the sixty thousand measures of grain
+  he had in 魯, but someone slanders him, an officer is set to watch his comings and goings, and after
+  ten months he leaves.
+types: [process]
+date:
+  value: 497 BCE..496 BCE
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: 衛靈公三十八年（年表）
+  cite:
+    - id: kongzi-first-in-wey-date
+      says: >-
+        The table enters Confucius's coming to 衛, paid as in 魯, in 靈公's thirty-eighth year, 497 BCE in its
+        count; the ten months the 孔子世家 gives end in 496 BCE.
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 衛 靈公 三十八年（孔子來，祿之如魯）
+      quote: 三十八孔子來，祿之如魯。
+places:
+  - place: wey-diqiu
+    role: site
+    note: The capital of the state the text names; the text names only the state.
+participants:
+  - actor: kongzi
+    role: leader
+  - actor: zi-lu
+    role: participant
+  - actor: wey-ling-gong
+    role: host
+  - actor: wey-state
+    role: host
+notes: >-
+  The duration starts at the table's year; under the 孔子世家's later departure from 魯 the whole stay would
+  fall a year or two later, which the window of `kongzi-leaves-lu` already carries.
+cite:
+  - id: kongzi-first-in-wey-basis
+    says: >-
+      The 孔子世家 records 衛靈公 paying him sixty thousand measures of grain, and that he left after ten months
+      for fear of offence.
+    source: shiji-chunqiu
+    at: 卷四十七 孔子世家（衞人亦致粟六萬）
+    quote: 衞靈公問孔子：「居魯得祿幾何？」對曰：「奉粟六萬。」衞人亦致粟六萬。
+  - id: kongzi-first-in-wey-ten
+    says: The 孔子世家 records that he feared he would be blamed and left 衛 after ten months.
+    role: supporting
+    source: shiji-chunqiu
+    at: 卷四十七 孔子世家（居十月，去衞）
+    quote: 孔子恐獲罪焉，居十月，去衞。

@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  牧野, the open ground outside the 商 capital where 武王 swore his army and defeated the forces of 紂.
+  The historical geography places it north-east of 衛輝府 and quotes 司馬彪 that it lay seventeen li
+  south of 朝歌. The label sits at modern 新鄉; no battlefield is asserted.
+types: [region]
+names:
+  - form: 牧野
+    lang: lzh
+    script: Hani
+    roman: Muye
+    scheme: pinyin
+    cite:
+      - id: muye-name
+        says: The annals record that 武王 reached 牧野, the outskirts of 商, at dawn on the day 甲子.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 武王（二月甲子昧爽）
+        quote: 二月甲子昧爽，武王朝至于商郊牧野，乃誓。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [113.88515, 35.29917]
+    notes: >-
+      Label anchor at the modern city of 新鄉, whose 衛輝 district is the 汲縣 that the historical
+      geography calls the old 牧野. The geography describes a plain, not a point, and the anchor
+      asserts no battlefield.
+    cite:
+      - id: muye-anchor
+        says: The anchor is the coordinate Wikidata (CC0) records for the modern city of 新鄉.
+        source: wikidata
+        at: Q404362 (P625), revision 2526611100
+      - id: muye-identification
+        says: The historical geography places 牧野 north-east of the prefectural city, seventeen li south of 朝歌.
+        role: supporting
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷四十九 河南四 衛輝府 汲縣（牧野）
+        quote: 牧野，在府東北。司馬彪曰：「北去朝歌十七里。周武王伐紂，陳師牧野。」
+modern:
+  - form: 新鄉市
+    lang: zh-Hans
+    script: Hani
+    note: Modern city recorded for orientation only.

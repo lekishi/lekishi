@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  周公旦, 武王's brother and aide, enfeoffed at 曲阜 as lord of 魯. After 武王's death he ruled as regent for the young 成王, put down the rebellion of 武庚, 管叔 and 蔡叔, and built 雒邑, then returned the government.
+types: [person]
+names:
+  - form: 周公旦
+    lang: lzh
+    script: Hani
+    roman: Zhougong Dan
+    scheme: pinyin
+    cite:
+      - id: zhou-gong-dan-name
+        says: The annals record that 成王 was young and 周公 took over the government for fear the lords would rebel.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 成王（公乃攝行政當國）
+        quote: 成王少，周初定天下，周公恐諸侯畔周，公乃攝行政當國。
+roles:
+  - role: official
+    note: Regent for 成王; the annals give the regency seven years.
+    cite:
+      - id: zhou-gong-dan-role
+        says: The annals record that 成王 was young and 周公 took over the government for fear the lords would rebel.
+        source: shiji-yin-zhou
+        at: 卷四 周本紀 成王（公乃攝行政當國）

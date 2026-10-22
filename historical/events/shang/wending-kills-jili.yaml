@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  The Bamboo Annals record that the 商 king 文丁 killed 季歷 of 周, after a series of 周 victories over
+  the 戎 peoples and 季歷's appointment as 殷牧師. The Han annals say nothing of it.
+types: [occurrence]
+date:
+  value: 1300 BCE..1046 BCE
+  mode: window
+  calendar: regnal
+  as_written: 文丁殺季歷（no year stated）
+  cite:
+    - id: wending-kills-date
+      says: >-
+        The entry has no year. The window is the span of the 殷 capital under the 夏商周斷代工程's
+        chronology, within which 文丁 reigned.
+      basis: interpretation
+      attributed_to: 夏商周斷代工程《夏商周年表》(2000)
+      source: ourchinastory-xszc-chronology
+      at: paragraph 3
+participants:
+  - actor: wen-ding
+    role: leader
+  - actor: zhou-ji-li
+    role: subject
+notes: >-
+  The entry gives no place or manner. Later writers took the killing as the grievance behind the
+  周 conquest; the record asserts no such link.
+cite:
+  - id: wending-kills-entry
+    says: The Bamboo Annals record that 文丁 killed 季歷.
+    source: guben-zhushu-jinian
+    at: 大丁（文丁殺季歷）
+    quote: 文丁殺季歴。
+  - id: wending-kills-context
+    says: The Bamboo Annals record that, after a 周 victory over the 余無 戎, 季歷 was made 殷牧師.
+    role: supporting
+    source: guben-zhushu-jinian
+    at: 大丁 四年（周王季命爲殷牧師）
+    quote: 四年，周人伐餘無之戎，克之，周王季命爲殷牧師。

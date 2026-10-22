@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Back in 陳, Confucius hears that the temples of 桓公 and 僖公 in 魯 have burned and guesses which they are
+  before the news confirms it. That autumn 季桓子 dies; his heir 季康子 calls home 冉求, and Confucius says: let
+  us go home.
+types: [occurrence]
+date:
+  value: 492 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 魯哀公三年
+  cite:
+    - id: kongzi-back-in-chen-date
+      says: >-
+        The 左傳 enters the temple fire, with Confucius in 陳, in 哀公's third year, 492 BCE in the table's count.
+      source: zuozhuan
+      at: 哀公三年（孔子在陳．聞火）
+      quote: 孔子在陳．聞火．曰．其桓僖乎．
+places:
+  - place: chen
+    role: site
+    note: The capital of the state the text names; the text names only the state.
+participants:
+  - actor: kongzi
+    role: leader
+  - actor: ran-qiu
+    role: participant
+  - actor: ji-kang-zi
+    role: participant
+cite:
+  - id: kongzi-back-in-chen-zuo
+    says: The 左傳 records that Confucius, in 陳, heard of the fire and named the temples of 桓 and 僖.
+    source: zuozhuan
+    at: 哀公三年（孔子在陳．聞火）
+    quote: 孔子在陳．聞火．曰．其桓僖乎．
+  - id: kongzi-back-in-chen-ranqiu
+    says: The 孔子世家 records 季康子 summoning 冉求.
+    role: supporting
+    source: shiji-chunqiu
+    at: 卷四十七 孔子世家（於是使使召冉求）
+    quote: 於是使使召冉求。

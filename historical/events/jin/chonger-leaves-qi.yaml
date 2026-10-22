@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  His followers plot under a mulberry to leave; a silkworm maid overhears and tells 姜氏, who kills her
+  and urges 重耳 to go. He refuses, so 姜氏 and 子犯 make him drunk and carry him off. Waking, he goes for 子犯
+  with a spear.
+types: [occurrence]
+date:
+  value: 640 BCE..637 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: (no year)
+  cite:
+    - id: chonger-leaves-qi-date
+      says: >-
+        He left after five years in 齊, so no earlier than about 640 BCE, and was in 曹 in the table's 637
+        BCE.
+      sources:
+        - source: shiji-chunqiu
+          at: 卷三十九 晉世家 文公（留齊凡五歳）
+          quote: 留齊凡五歳。
+        - source: shiji-chunqiu
+          at: 卷十四 十二諸侯年表 曹 共公 十六年（重耳過）
+          quote: 十六重耳過，無禮，僖負羈私善。
+places:
+  - place: linzi
+    role: start
+participants:
+  - actor: chonger
+    role: leader
+  - actor: qi-jiang
+    role: leader
+  - actor: hu-yan
+    role: participant
+cite:
+  - id: chonger-leaves-qi-zuo
+    says: >-
+      The 左傳 records the plot under the mulberry, 姜氏 killing the maid, and 重耳 being made drunk and sent
+      off.
+    source: zuozhuan
+    at: 僖公二十三年（謀於桑下）
+    quote: 將行，謀於桑下。蠶妾在其上，以告姜氏。姜氏殺之
+  - id: chonger-leaves-qi-drunk
+    says: >-
+      The 左傳 records that 姜氏 and 子犯 made him drunk and sent him away, and that he woke and chased 子犯 with
+      a spear.
+    role: supporting
+    source: zuozhuan
+    at: 僖公二十三年（醉而遣之）
+    quote: 姜與子犯謀，醉而遣之。醒，以戈逐子犯。

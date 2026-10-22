@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  懷公, 圉, the son of 晉惠公, who fled his hostageship in 秦 and became lord in 637 BCE, and was killed at 高梁
+  on 重耳's orders in 636 BCE.
+types: [person]
+names:
+  - form: 晉懷公
+    lang: lzh
+    script: Hani
+    roman: Jin Huai Gong
+    scheme: pinyin
+    cite:
+      - id: jin-huai-gong-name
+        says: The 左傳 records 重耳 having 懷公 killed at 高梁 on 戊申.
+        source: zuozhuan
+        at: 僖公二十四年（戊申，使殺懷公于高梁）
+        quote: 戊申，使殺懷公于高梁。
+roles:
+  - role: ruler
+    note: Lord of 晉, 637 to 636 BCE.
+    cite:
+      - id: jin-huai-gong-role
+        says: The 左傳 records 懷公 ordering that no one follow the exile.
+        source: zuozhuan
+        at: 僖公二十三年（懷公命無從亡人）
+        quote: 懷公命無從亡人。

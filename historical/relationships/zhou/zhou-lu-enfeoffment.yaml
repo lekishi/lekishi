@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: >-
+  周 granting 魯 at 曲阜 to 周公旦, one of the conquest enfeoffments with which the 周 kings set their
+  kin and ministers over the east.
+types: [institutional_change]
+from: zhou-state
+to: lu-state
+date:
+  value: 1046 BCE..1027 BCE
+  mode: window
+  calendar: regnal
+  as_written: 二月甲子（周本紀）
+  cite:
+    - id: zhou-lu-enfeoffment-date-1046
+      says: >-
+        The 夏商周斷代工程 dates the conquest to 1046 BCE by astronomical calculation; its 2022 report gives
+        20 January 1046 BCE. This is the window's early end.
+      basis: interpretation
+      attributed_to: 夏商周斷代工程《夏商周斷代工程報告》(2022)
+      source: chinadaily-muye-2023
+      at: paragraphs 1–2
+    - id: zhou-lu-enfeoffment-date-1027
+      says: >-
+        The Bamboo Annals count 257 years from 武王's conquest to 幽王, which counted back from 771 BCE
+        puts the conquest in 1027 BCE, the window's late end.
+      role: alternative
+      source: guben-zhushu-jinian
+      at: 幽王（自武王滅殷，以至幽王，凡二百五十七年）
+      quote: 自武王滅殷，以至幽王，凡二百五十七年。
+notes: >-
+  The relationship records the grant, not who ruled 魯 in person; the 魯 house's own annals, not yet
+  cited here, say 周公 stayed at court.
+dispute:
+  status: disputed
+  summary: >-
+    The year depends on the disputed year of the conquest. The record keeps the 夏商周斷代工程's
+    1046 BCE as the editorial anchor and the Bamboo Annals' count, which gives 1027 BCE, as an
+    alternative, and decides nothing between them.
+cite:
+  - id: zhou-lu-enfeoffment-basis
+    says: The annals record 武王 enfeoffing his brother 周公旦 at 曲阜 as 魯.
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 武王（封弟周公旦於曲阜，曰魯）
+    quote: 封弟周公旦於曲阜，曰魯。

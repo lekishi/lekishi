@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: >-
+  晉 against the rival king 攜王, whom 晉文侯 killed in 760 BCE, ending the eleven years in which two
+  周 kings reigned.
+types: [conflict]
+from: jin-state
+to: xie-wang
+date:
+  value: 760 BCE
+  mode: window
+  calendar: regnal
+  as_written: 晉文侯二十一年
+  cite:
+    - id: jin-against-xie-wang-date
+      says: >-
+        The Bamboo Annals enter the killing in 晉文侯's twenty-first year. The 晉 house puts 幽王's
+        death in 文侯's tenth year, which the table sets in 771 BCE, so the twenty-first is 760 BCE.
+      sources:
+        - source: shiji-chunqiu
+          at: 卷三十九 晉世家 文侯 十年（犬戎殺幽王）
+          quote: 文侯十年，周幽王無道，犬戎殺幽王，周東徙。
+        - source: shiji-chunqiu
+          at: 卷十四 十二諸侯年表 周 幽王 十一年（幽王為犬戎所殺）
+          quote: 十一幽王為犬戎所殺。
+cite:
+  - id: jin-against-xie-wang-basis
+    says: The Bamboo Annals record that 攜王 was killed by the lord of 晉.
+    source: guben-zhushu-jinian
+    at: 晉紀 文侯 二十一年（攜王爲晉文公所殺）
+    quote: 攜王爲晉文公所殺。

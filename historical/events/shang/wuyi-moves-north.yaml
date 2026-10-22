@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Under 武乙, the Han annals record, 殷 left 亳 again and moved north of the Yellow River. The Bamboo
+  Annals instead record 武乙 coming to the throne and living at 殷, as every king since 盤庚 had. The
+  two accounts disagree on whether there was a move at all.
+types: [occurrence]
+date:
+  value: 1300 BCE..1046 BCE
+  mode: window
+  calendar: regnal
+  as_written: 帝武乙立（no year stated）
+  cite:
+    - id: wuyi-move-date
+      says: >-
+        No year is stated. 武乙 reigned after 盤庚 and before the fall of 商; the window is that span
+        under the 夏商周斷代工程's chronology.
+      basis: interpretation
+      attributed_to: 夏商周斷代工程《夏商周年表》(2000)
+      source: ourchinastory-xszc-chronology
+      at: paragraph 3
+places:
+  - place: shang-bo
+    role: start
+    note: The annals' 亳, which they say 殷 left.
+participants:
+  - actor: wu-yi
+    role: leader
+  - actor: shang-state
+    role: subject
+notes: >-
+  The annals name no destination beyond "north of the river", so the event has a start and no end;
+  the record does not equate "north of the river" with 殷 at 安陽.
+dispute:
+  status: disputed
+  summary: >-
+    The Han annals record a move from 亳 to the north of the Yellow River under 武乙; the Bamboo
+    Annals record 武乙 living at 殷 and no move. The chapter keeps both.
+cite:
+  - id: wuyi-move-annals
+    says: The annals record that 殷 left 亳 again and moved north of the river when 武乙 came to the throne.
+    source: shiji-yin-zhou
+    at: 卷三 殷本紀 帝庚丁（殷復去亳，徙河北）
+    quote: 帝庚丁崩，子帝武乙立。殷復去亳，徙河北。
+  - id: wuyi-move-bamboo
+    says: The Bamboo Annals record that 武乙 came to the throne and lived at 殷.
+    role: conflicting
+    source: guben-zhushu-jinian
+    at: 武乙（武乙即位居殷）
+    quote: 武乙即位居殷。

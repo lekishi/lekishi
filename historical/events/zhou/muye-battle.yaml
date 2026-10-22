@@ -1,0 +1,85 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  At dawn on the day 甲子, 武王 reaches 牧野 outside the 商 capital, swears his army and its allies
+  from the west, and attacks. The annals say 紂 met him with seven hundred thousand men who had no
+  will to fight and turned their weapons to let 周 in. The 牧誓 of the Book of Documents is the oath.
+types: [campaign]
+date:
+  value: 1046 BCE..1027 BCE
+  mode: window
+  calendar: regnal
+  as_written: 二月甲子昧爽（周本紀）; 時甲子昧爽（牧誓）; 甲子日，紂兵敗（殷本紀）
+  cite:
+    - id: muye-date-1046
+      says: >-
+        The 夏商周斷代工程 dates the conquest to 1046 BCE by astronomical calculation; its 2022 report gives
+        20 January 1046 BCE. This is the window's early end.
+      basis: interpretation
+      attributed_to: 夏商周斷代工程《夏商周斷代工程報告》(2022)
+      source: chinadaily-muye-2023
+      at: paragraphs 1–2
+    - id: muye-date-1027
+      says: >-
+        The Bamboo Annals count 257 years from 武王's conquest to 幽王. Counted back from 幽王's death in
+        771 BCE, that puts the conquest in 1027 BCE, the window's late end.
+      role: alternative
+      source: guben-zhushu-jinian
+      at: 幽王（自武王滅殷，以至幽王，凡二百五十七年）
+      quote: 自武王滅殷，以至幽王，凡二百五十七年。
+places:
+  - place: muye
+    role: site
+participants:
+  - actor: zhou-wu-wang
+    role: leader
+  - actor: shi-shangfu
+    role: participant
+  - actor: di-xin
+    role: leader
+  - actor: zhou-state
+    role: participant
+  - actor: shang-state
+    role: participant
+notes: >-
+  The day is attested as 甲子 by the annals and the oath, but no source gives the year, and dozens
+  of years have been proposed. The record carries a window between the two proposals it cites, 1046
+  and 1027 BCE, and says so; other proposals fall outside it and are named in the chapter notes.
+  The 利簋 bronze, cast days after the battle, also names a 甲子 morning; its inscription is not yet
+  cited.
+dispute:
+  status: disputed
+  summary: >-
+    The year of the conquest is disputed. The record keeps the 夏商周斷代工程's 1046 BCE as the
+    editorial anchor and the Bamboo Annals' count, which gives 1027 BCE, as an alternative, and
+    decides nothing between them.
+cite:
+  - id: muye-battle-dawn
+    says: The annals record 武王 reaching 牧野 outside 商 at dawn on 甲子 and swearing his army.
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 武王（二月甲子昧爽）
+    quote: 二月甲子昧爽，武王朝至于商郊牧野，乃誓。
+  - id: muye-battle-oath
+    says: The 牧誓 gives the same dawn of 甲子 at 牧野 for the oath.
+    role: supporting
+    source: shangshu
+    at: 牧誓（時甲子昧爽）
+    quote: 時甲子昧爽，王朝至于商郊牧野，乃誓。
+  - id: muye-battle-rout
+    says: The annals record that 紂's army had no will to fight, turned their weapons to open the way, and broke.
+    role: supporting
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 武王（紂師皆倒兵以戰）
+    quote: 紂師雖眾，皆無戰之心，心欲武王亟入。紂師皆倒兵以戰，以開武王。武王馳之，紂兵皆崩畔紂。
+  - id: muye-battle-yin-annals
+    says: The 殷 annals record that 紂 sent troops to meet 周 at 牧野 and that they were defeated on the day 甲子.
+    role: supporting
+    source: shiji-yin-zhou
+    at: 卷三 殷本紀 帝辛（甲子日，紂兵敗）
+    quote: 紂亦發兵距之牧野。甲子日，紂兵敗。
+cites:
+  participants:
+    - id: muye-battle-allies
+      says: The oath names the western peoples who came with 周, among them 庸, 蜀 and 羌.
+      source: shiji-yin-zhou
+      at: 卷四 周本紀 武王（及庸、蜀、羌、髳、微、纑、彭、濮人）
+      quote: 及庸、蜀、羌、髳、微、纑、彭、濮人，稱爾戈，比爾干，立爾矛，予其誓。

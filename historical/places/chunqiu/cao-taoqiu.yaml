@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  陶丘, the 曹 capital, where 曹共公 spied on 重耳 in the bath to see his joined ribs. The label sits at the modern
+  定陶 district.
+types: [capital]
+names:
+  - form: 曹
+    lang: lzh
+    script: Hani
+    roman: Cao
+    scheme: pinyin
+    note: The texts name the state; the city is not named in the exile.
+    cite:
+      - id: cao-taoqiu-name
+        says: The 左傳 records that 曹共公 had heard of 重耳's joined ribs and wanted to see him naked.
+        source: zuozhuan
+        at: 僖公二十三年（及曹）
+        quote: 及曹，曹共公聞其駢脅，欲觀其裸。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [115.59111111111, 35.1425]
+    notes: >-
+      Label anchor at the modern 定陶 district, the conventional site of the 曹 capital 陶丘. No site is asserted,
+      and no cited text places the capital.
+    cite:
+      - id: cao-taoqiu-anchor
+        says: The anchor is the coordinate Wikidata (CC0) records for the modern 定陶 district.
+        source: wikidata
+        at: Q1198464 (P625), revision 2526578066
+modern:
+  - form: 定陶區
+    lang: zh-Hans
+    script: Hani
+    note: Modern district recorded for orientation only.

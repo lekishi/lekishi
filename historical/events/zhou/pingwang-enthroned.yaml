@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  申侯 and the lords make 宜臼, 幽王's set-aside heir, king as 平王 to continue the 周 sacrifices. The
+  annals put it after 幽王's death; the Bamboo Annals say 申侯, 魯侯 and 許文公 had already made him
+  king at 申.
+types: [founding]
+date:
+  value: 774 BCE..771 BCE
+  mode: window
+  calendar: regnal
+  as_written: (after 幽王's death, 周本紀); 先是 (before it, 竹書紀年)
+  cite:
+    - id: pingwang-enthroned-date
+      says: >-
+        The table of the twelve lords puts 幽王's death in his eleventh year, which its count from the
+        first year of the 共和 regency (841 BCE) sets in 771 BCE.
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 周 幽王 十一年（幽王為犬戎所殺）
+      quote: 十一幽王為犬戎所殺。
+    - id: pingwang-enthroned-before
+      says: >-
+        The Bamboo Annals say 平王 had been made king before 幽王 died, after his flight to 西申,
+        which they enter after 晉文侯's seventh year, 774 BCE: the window's early end.
+      role: alternative
+      source: guben-zhushu-jinian
+      at: 晉紀 文侯 十年（先是申侯、魯侯及許文公立平王于申）
+      quote: 先是申侯、魯侯及許文公立平王于申
+places:
+  - place: shen
+    role: site
+    note: The Bamboo Annals' place; the annals name none.
+participants:
+  - actor: shen-hou
+    role: leader
+  - actor: lu-state
+    role: participant
+  - actor: zhou-ping-wang
+    role: subject
+dispute:
+  status: disputed
+  summary: >-
+    The annals have the lords make 平王 king after 幽王's death; the Bamboo Annals have him made king
+    at 申 before it, so that for a time there was a king against a living king. The chapter keeps
+    the annals' 771 BCE as the anchor and the earlier enthronement as an alternative.
+cite:
+  - id: pingwang-enthroned-annals
+    says: The annals record that the lords joined 申侯 in making 幽王's former heir 宜臼 king, as 平王, to continue the 周 sacrifices.
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 幽王（共立故幽王太子宜臼，是為平王）
+    quote: 於是諸侯乃即申侯而共立故幽王太子宜臼，是為平王，以奉周祀。

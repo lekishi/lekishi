@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  褒姒 does not laugh. 幽王 has beacons and drums set to summon the lords when raiders come; the
+  lords arrive to find no raiders, 褒姒 laughs, and 幽王 lights the beacons again and again until the
+  lords stop believing them.
+types: [process]
+date:
+  value: 779 BCE..771 BCE
+  mode: window
+  calendar: regnal
+  as_written: (no year; told after 幽王三年 and before his death)
+  cite:
+    - id: beacon-fires-date
+      says: >-
+        The annals tell the story without a year, after 褒姒 is made queen in 幽王's third year and
+        before 幽王's death in his eleventh. The table's count from 841 BCE puts those years in 779
+        and 771 BCE.
+      sources:
+        - source: shiji-yin-zhou
+          at: 卷四 周本紀 幽王 三年（當幽王三年）
+          quote: 當幽王三年，王之後宮見而愛之
+        - source: shiji-chunqiu
+          at: 卷十四 十二諸侯年表 周 幽王 十一年（幽王為犬戎所殺）
+          quote: 十一幽王為犬戎所殺。
+participants:
+  - actor: zhou-you-wang
+    role: leader
+  - actor: bao-si
+    role: witness
+notes: >-
+  The annals are the only source cited for the story; the Bamboo Annals, as 王國維 collects them,
+  do not have it. The record is the annals' account and makes no claim that it happened. The
+  annals name no place, so the event has none.
+cite:
+  - id: beacon-fires-annals
+    says: The annals record the beacons, the lords coming to no raiders, 褒姒's laughter and the repeated lighting.
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 幽王（幽王為烽燧大鼓）
+    quote: 幽王為烽燧大鼓，有寇至則舉烽火。諸侯悉至，至而無寇，褒姒乃大笑。幽王說之，為數舉烽火。其後不信，諸侯益亦不至。

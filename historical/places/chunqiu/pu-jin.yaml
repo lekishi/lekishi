@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  蒲, the 晉 border city that 重耳 held for his father, from which he fled over the wall to the 狄 in 655 BCE.
+  The historical geography identifies it with 隰州; the label sits at the modern 隰縣.
+types: [settlement]
+names:
+  - form: 蒲城
+    lang: lzh
+    script: Hani
+    roman: Pucheng
+    scheme: pinyin
+    cite:
+      - id: pu-jin-name
+        says: The 晉 house records that 重耳 left without taking leave and held 蒲城.
+        source: shiji-chunqiu
+        at: 卷三十九 晉世家 文公（不辭獻公而守蒲城）
+        quote: 獻公二十一年，獻公殺太子申生，驪姬讒之，恐，不辭獻公而守蒲城。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [110.93063, 36.68996]
+    notes: >-
+      Label anchor at the modern 隰縣, which the geography identifies with the 晉 蒲城. No city site is asserted.
+    cite:
+      - id: pu-jin-anchor
+        says: The anchor is the coordinate Wikidata (CC0) records for the modern 隰縣.
+        source: wikidata
+        at: Q1197338 (P625), revision 2526577399
+      - id: pu-jin-identification
+        says: The historical geography records 隰州 as the 晉 蒲城 of the 春秋 period.
+        role: supporting
+        source: dushi-fangyu-jiyao-zhou
+        at: 卷四十一 山西三 平陽府 隰州
+        quote: 春秋時，晉之蒲城也。
+modern:
+  - form: 隰縣
+    lang: zh-Hans
+    script: Hani
+    note: Modern county recorded for orientation only.
+notes: Not the 衛 town of 蒲 that Confucius passed, which is `pu-wey`.

@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  季歷, the 周 leader and father of 文王 whom the Bamboo Annals record visiting the 商 king 武乙, waging
+  wars on the western 戎 peoples, being named 殷牧師, and being killed by 文丁.
+types: [person]
+names:
+  - form: 季歷
+    lang: lzh
+    script: Hani
+    roman: Ji Li
+    scheme: pinyin
+    cite:
+      - id: zhou-ji-li-name
+        says: The Bamboo Annals record 周王季歷 coming to the 商 court in 武乙's thirty-fourth year.
+        source: guben-zhushu-jinian
+        at: 武乙 三十四年（周王季歷來朝）
+        quote: 三十四年，周王季歴來朝，王賜地三十里，玉十珏，馬八匹。
+roles:
+  - role: ruler
+    note: Leader of 周 under the 商 kings; the annals call him 周王季.
+    cite:
+      - id: zhou-ji-li-role
+        says: The Bamboo Annals record that after a victory over the 余無 戎 the 周 leader 季 was made 殷牧師.
+        source: guben-zhushu-jinian
+        at: 大丁 四年（周王季命爲殷牧師）
+        quote: 四年，周人伐餘無之戎，克之，周王季命爲殷牧師。

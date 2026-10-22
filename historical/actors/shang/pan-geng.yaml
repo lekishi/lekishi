@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  盤庚, the 商 king whom the Bamboo Annals record moving the capital from 奄 to 殷, and whom the Han
+  annals record crossing south of the Yellow River to 成湯's old seat at 亳 against the people's
+  wishes.
+types: [person]
+names:
+  - form: 盤庚
+    lang: lzh
+    script: Hani
+    roman: Pan Geng
+    scheme: pinyin
+    cite:
+      - id: pan-geng-name
+        says: The annals record 盤庚 succeeding his brother 陽甲.
+        source: shiji-yin-zhou
+        at: 卷三 殷本紀 帝盤庚（帝陽甲崩）
+        quote: 帝陽甲崩，弟盤庚立，是為帝盤庚。
+roles:
+  - role: ruler
+    note: King of 商; the cited entries give no length of reign.
+    cite:
+      - id: pan-geng-role
+        says: The annals record 盤庚 as king of 殷.
+        source: shiji-yin-zhou
+        at: 卷三 殷本紀 帝盤庚（帝陽甲崩）

@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  子路, 仲由, Confucius's oldest disciple, who travelled with him, asked the farmers the way to the ford,
+  and complained at the starvation between 陳 and 蔡.
+types: [person]
+names:
+  - form: 子路
+    lang: lzh
+    script: Hani
+    roman: Zilu
+    scheme: pinyin
+    cite:
+      - id: zi-lu-name
+        says: The 論語 records 子路 asking the way to the ford for Confucius.
+        source: lunyu
+        at: 微子第十八（使子路問津焉）
+        quote: 長沮、桀溺耦而耕。孔子過之，使子路問津焉。
+  - form: 仲由
+    lang: lzh
+    script: Hani
+    note: His personal name.
+    cite:
+      - id: zi-lu-zhongyou
+        says: The 論語 records 子路 giving his name to 桀溺 as 仲由.
+        source: lunyu
+        at: 微子第十八（爲仲由）
+        quote: 曰：「爲仲由。」

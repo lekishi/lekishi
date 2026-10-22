@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  The 晉 army camps at 廬柳 against 秦, then falls back to 郇, where 狐偃 swears a covenant with the 秦 and 晉
+  officers. The next day 重耳 enters the 晉 army.
+types: [council]
+date:
+  value: 636 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 二月甲午、辛丑、壬寅（左傳）
+  cite:
+    - id: xun-covenant-date
+      says: >-
+        The 左傳 enters the covenant on 辛丑 of the second month of the year 魯 counts as 僖公二十四年, 636 BCE in
+        the table's count.
+      source: zuozhuan
+      at: 僖公二十四年（辛丑，狐偃及秦、晉之大夫盟于郇）
+      quote: 辛丑，狐偃及秦、晉之大夫盟于郇。壬寅，公子入于晉師。
+places:
+  - place: xun
+    role: site
+participants:
+  - actor: hu-yan
+    role: leader
+  - actor: chonger
+    role: participant
+  - actor: jin-state
+    role: participant
+  - actor: qin-state
+    role: participant
+notes: >-
+  The 左傳 gives days in the sexagenary cycle within a month, and the 晉 house agrees; the record carries
+  only the year, because the date notation has no lunisolar day.
+cite:
+  - id: xun-covenant-zuo
+    says: The 左傳 records the 晉 army at 廬柳, its retreat to 郇, and the covenant there.
+    source: zuozhuan
+    at: 僖公二十四年（二月，甲午，晉師軍于廬柳）
+    quote: 二月，甲午，晉師軍于廬柳。秦伯使公子縶如晉師。師退，軍于郇。

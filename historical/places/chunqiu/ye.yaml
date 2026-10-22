@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  葉, the 楚 town on the northern frontier whose lord, 葉公, asked Confucius about government. The label sits
+  at the modern 葉縣.
+types: [settlement]
+names:
+  - form: 葉
+    lang: lzh
+    script: Hani
+    roman: Ye
+    scheme: pinyin
+    cite:
+      - id: ye-name
+        says: The 孔子世家 records that Confucius went from 蔡 to 葉, and that 葉公 asked him about government.
+        source: shiji-chunqiu
+        at: 卷四十七 孔子世家（孔子自蔡如葉）
+        quote: 明年，孔子自蔡如葉。葉公問政
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [113.35516, 33.62268]
+    notes: Label anchor at the modern 葉縣, which carries the name. No city site is asserted.
+    cite:
+      - id: ye-anchor
+        says: The anchor is the coordinate Wikidata (CC0) records for the modern 葉縣.
+        source: wikidata
+        at: Q1337567 (P625), revision 2526580928
+modern:
+  - form: 葉縣
+    lang: zh-Hans
+    script: Hani
+    note: Modern place recorded for orientation only.

@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  At 成王's command, 召公 lays out 洛邑 again as 武王 had intended, and 周公 divines, inspects and
+  completes it, setting the nine cauldrons there: "the centre of the world, where tribute from all
+  sides travels the same distance." The 召誥 and 洛誥 of the Book of Documents are its records.
+types: [founding]
+date:
+  value: 1044 BCE..1018 BCE
+  mode: window
+  calendar: regnal
+  as_written: (under 周公's regency; 召誥 and 洛誥 give months and days, not the year)
+  cite:
+    - id: chengzhou-date
+      says: >-
+        The annals put 武王's death at least two years after the conquest, and give 周公 seven years of
+        regency. The window runs from two years after the conquest's earliest year to nine years after
+        its latest, 1044 to 1018 BCE, under the conquest's two cited ends.
+      sources:
+        - source: shiji-yin-zhou
+          at: 卷四 周本紀 武王（武王已克殷，後二年）
+          quote: 武王已克殷，後二年，問箕子殷所以亡。
+        - source: shiji-yin-zhou
+          at: 卷四 周本紀 成王（周公行政七年）
+          quote: 周公行政七年，成王長，周公反政成王，北面就群臣之位。
+places:
+  - place: luoyi
+    role: site
+participants:
+  - actor: zhou-cheng-wang
+    role: leader
+  - actor: zhao-gong-shi
+    role: participant
+  - actor: zhou-gong-dan
+    role: participant
+cite:
+  - id: chengzhou-annals
+    says: The annals record 召公 laying out 洛邑 and 周公 completing it and setting the nine cauldrons there.
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 成王（使召公復營洛邑）
+    quote: 成王在豐，使召公復營洛邑，如武王之意。周公復卜申視，卒營筑，居九鼎焉。曰：「此天下之中，四方入貢道里均。」

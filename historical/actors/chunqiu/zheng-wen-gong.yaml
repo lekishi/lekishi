@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: 文公, lord of 鄭, who refused 重耳 courtesy against the advice of 叔詹.
+types: [person]
+names:
+  - form: 鄭文公
+    lang: lzh
+    script: Hani
+    roman: Zheng Wen Gong
+    scheme: pinyin
+    cite:
+      - id: zheng-wen-gong-name
+        says: The 左傳 records that 鄭文公 too refused 重耳 courtesy.
+        source: zuozhuan
+        at: 僖公二十三年（及鄭）
+        quote: 及鄭，鄭文公亦不禮焉。
+roles:
+  - role: ruler
+    note: Lord of 鄭.
+    cite:
+      - id: zheng-wen-gong-role
+        says: The 左傳 records that 鄭文公 too refused 重耳 courtesy.
+        source: zuozhuan
+        at: 僖公二十三年（及鄭）

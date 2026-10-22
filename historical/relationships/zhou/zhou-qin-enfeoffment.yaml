@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: >-
+  周 making 秦 a state: 平王's grant to 秦襄公 of the rank of lord and of the land west of 岐, still
+  held by the 戎, in return for the escort east.
+types: [institutional_change]
+from: zhou-state
+to: qin-state
+date:
+  value: 771 BCE..770 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 秦襄公七年
+  cite:
+    - id: zhou-qin-enfeoffment-date
+      says: >-
+        The table enters 秦襄公 first ranked among the lords in 771 BCE; the 秦 annals tell the grant
+        after the escort to 雒邑, which the table puts in 770 BCE. The window holds both.
+      sources:
+        - source: shiji-chunqiu
+          at: 卷十四 十二諸侯年表 秦 襄公 七年（始列為諸侯）
+          quote: 七始列為諸侯。
+        - source: shiji-chunqiu
+          at: 卷十四 十二諸侯年表 周 平王 元年（東徙雒邑）
+          quote: 平王元年東徙雒邑。
+cite:
+  - id: zhou-qin-enfeoffment-basis
+    says: The 秦 annals record that 平王 made 襄公 a lord and gave him the land west of 岐.
+    source: shiji-chunqiu
+    at: 卷五 秦本紀 襄公 七年（平王封襄公為諸侯）
+    quote: 平王封襄公為諸侯，賜之岐以西之地。

@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: >-
+  重耳's promise to 楚成王: if 晉 and 楚 met in the field, he would withdraw three days' march before fighting.
+types: [diplomacy]
+from: chonger
+to: chu-state
+date:
+  value: 637 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 楚成王三十五年
+  cite:
+    - id: chonger-chu-promise-date
+      says: The table enters 重耳's visit to 楚 in its 637 BCE row.
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 楚 成王 三十五年（重耳過，厚禮之）
+      quote: 三十五重耳過，厚禮之。
+notes: The promise was kept at 城濮 in 632 BCE, outside the chapter.
+cite:
+  - id: chonger-chu-promise-basis
+    says: The 左傳 records the promise to withdraw three marches.
+    source: zuozhuan
+    at: 僖公二十三年（其辟君三舍）
+    quote: 若以君之靈，得反晉國，晉楚治兵，遇於中原，其辟君三舍。

@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  武乙, a later 商 king. The Han annals record him leaving 亳 for the north of the Yellow River and
+  dying by lightning; the Bamboo Annals record him living at 殷 and receiving 季歷 of 周.
+types: [person]
+names:
+  - form: 武乙
+    lang: lzh
+    script: Hani
+    roman: Wu Yi
+    scheme: pinyin
+    cite:
+      - id: wu-yi-name
+        says: The annals record 武乙 succeeding his father 庚丁 and leaving 亳 for the north of the river.
+        source: shiji-yin-zhou
+        at: 卷三 殷本紀 帝庚丁（子帝武乙立）
+        quote: 帝庚丁崩，子帝武乙立。殷復去亳，徙河北。
+roles:
+  - role: ruler
+    note: King of 商.
+    cite:
+      - id: wu-yi-role
+        says: The Bamboo Annals record 武乙 coming to the throne and living at 殷.
+        source: guben-zhushu-jinian
+        at: 武乙（武乙即位居殷）
+        quote: 武乙即位居殷。

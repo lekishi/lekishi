@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  The day after 武丁 sacrifices to 成湯, a pheasant flies onto the ear of a ritual cauldron and cries,
+  and the king is afraid. 祖己 tells him to set his government in order; 武丁 reforms and 殷 revives.
+  The Book of Documents chapter 高宗肜日 was later written about it.
+types: [occurrence]
+date:
+  value: 1300 BCE..1046 BCE
+  mode: window
+  calendar: regnal
+  as_written: 帝武丁祭成湯，明日（no year stated）
+  cite:
+    - id: pheasant-omen-date
+      says: >-
+        The annals give no year. The window is the span of the 殷 capital under the 夏商周斷代工程's
+        chronology, within which 武丁 reigned.
+      basis: interpretation
+      attributed_to: 夏商周斷代工程《夏商周年表》(2000)
+      source: ourchinastory-xszc-chronology
+      at: paragraph 3
+participants:
+  - actor: wu-ding
+    role: subject
+  - actor: zu-ji
+    role: participant
+notes: The annals do not say where the sacrifice took place, so the event has no place.
+cite:
+  - id: pheasant-omen-omen
+    says: The annals record the pheasant on the cauldron's ear the day after the sacrifice to 成湯, and the king's fear.
+    source: shiji-yin-zhou
+    at: 卷三 殷本紀 帝武丁（有飛雉登鼎耳而呴）
+    quote: 帝武丁祭成湯，明日，有飛雉登鼎耳而呴，武丁懼。
+  - id: pheasant-omen-reform
+    role: supporting
+    says: The annals record that 武丁 reformed his government and that the way of 殷 revived.
+    source: shiji-yin-zhou
+    at: 卷三 殷本紀 帝武丁（武丁修政行德）
+    quote: 武丁修政行德，天下咸驩，殷道復興。

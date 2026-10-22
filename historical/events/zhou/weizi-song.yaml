@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  With 武庚 dead, 周公 sets 微子開 in his place as heir of 殷, with his state at 宋, and gives the
+  remaining 殷 people to 武王's youngest brother 封 as 衛康叔. The historical geography instead says
+  武王 gave 商丘 to 微子 at the conquest.
+types: [founding]
+date:
+  value: 1044 BCE..1018 BCE
+  mode: window
+  calendar: regnal
+  as_written: (after the rebellion, under 周公's regency)
+  cite:
+    - id: weizi-song-date
+      says: >-
+        The annals put 武王's death at least two years after the conquest, and give 周公 seven years of
+        regency. The window runs from two years after the conquest's earliest year to nine years after
+        its latest, 1044 to 1018 BCE, under the conquest's two cited ends.
+      sources:
+        - source: shiji-yin-zhou
+          at: 卷四 周本紀 武王（武王已克殷，後二年）
+          quote: 武王已克殷，後二年，問箕子殷所以亡。
+        - source: shiji-yin-zhou
+          at: 卷四 周本紀 成王（周公行政七年）
+          quote: 周公行政七年，成王長，周公反政成王，北面就群臣之位。
+places:
+  - place: song-shangqiu
+    role: site
+participants:
+  - actor: zhou-gong-dan
+    role: leader
+  - actor: weizi-qi
+    role: subject
+dispute:
+  status: disputed
+  summary: >-
+    The annals have 周公 set 微子 at 宋 after 武庚's rising; the historical geography has 武王 give
+    him 商丘 at the conquest. The chapter publishes the annals' account and keeps the other.
+cite:
+  - id: weizi-song-annals
+    says: The annals record 微子開 replacing 武庚 as heir of 殷 with his state at 宋, and 康叔 receiving the rest of the 殷 people as 衛.
+    source: shiji-yin-zhou
+    at: 卷四 周本紀 成王（以微子開代殷後，國於宋）
+    quote: 以微子開代殷後，國於宋。頗收殷餘民，以封武王少弟封為衛康叔。
+  - id: weizi-song-yin
+    says: The 殷 annals record that 成王 had 周公 put down 武庚 and set 微子 up in 宋 to continue 殷.
+    role: supporting
+    source: shiji-yin-zhou
+    at: 卷三 殷本紀 帝辛（而立微子於宋）
+    quote: 周武王崩，武庚與管叔、蔡叔作亂，成王命周公誅之，而立微子於宋，以續殷後焉。
+  - id: weizi-song-geography
+    says: The historical geography says that 周武王 gave 商丘 to 微子啓 as the state of 宋.
+    role: conflicting
+    source: dushi-fangyu-jiyao-zhou
+    at: 卷五十 河南五 歸德府（周武王以封微子啓）
+    quote: 周武王以封微子啓，是爲宋國。

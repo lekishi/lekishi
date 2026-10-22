@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: >-
+  商 against 周 in the Bamboo Annals' entry that 文丁 killed 季歷. A conflict between the two houses, which
+  the record does not make the cause of the later war.
+types: [conflict]
+from: shang-state
+to: zhou-state
+date:
+  value: 1300 BCE..1046 BCE
+  mode: window
+  calendar: regnal
+  as_written: 文丁殺季歷（no year stated）
+  cite:
+    - id: shang-zhou-killing-date
+      says: The entry has no year; the window is the span of the 殷 capital under the 夏商周斷代工程's chronology.
+      basis: interpretation
+      attributed_to: 夏商周斷代工程《夏商周年表》(2000)
+      source: ourchinastory-xszc-chronology
+      at: paragraph 3
+cite:
+  - id: shang-zhou-killing-basis
+    says: The Bamboo Annals record that 文丁 killed 季歷.
+    source: guben-zhushu-jinian
+    at: 大丁（文丁殺季歷）
+    quote: 文丁殺季歴。

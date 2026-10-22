@@ -1,0 +1,73 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  盤庚 moves the 商 capital. The Bamboo Annals record that he moved from 奄 to 北蒙 and called it 殷;
+  a later note kept in the annals' reconstruction adds that no king moved the capital again until
+  the fall of the dynasty. The Han annals tell it
+  differently: the 殷 already had their capital north of the Yellow River, and 盤庚 crossed to the
+  south and governed from 成湯's old seat at 亳, against the people's wishes.
+types: [founding]
+date:
+  value: 1300 BCE
+  mode: window
+  calendar: regnal
+  as_written: 盤庚（no year stated）; 盤庚遷殷約為公元前1300年（夏商周年表）
+  cite:
+    - id: pangeng-move-date
+      says: >-
+        The 夏商周斷代工程's 2000 chronology, as reported, dates 盤庚's move to 殷 to about 1300 BCE.
+        The year is approximate in the table and the record keeps it as a one-year window only because
+        the notation cannot yet write "about".
+      basis: interpretation
+      attributed_to: 夏商周斷代工程《夏商周年表》(2000)
+      source: ourchinastory-xszc-chronology
+      at: paragraph 3
+places:
+  - place: yinxu
+    role: end
+    note: The Bamboo Annals' destination, 北蒙, which 盤庚 named 殷.
+  - place: shang-yan
+    role: start
+    note: The Bamboo Annals' point of departure.
+  - place: shang-bo
+    role: other
+    note: The Han annals' account of where 盤庚 governed, kept as a conflicting account.
+participants:
+  - actor: pan-geng
+    role: leader
+  - actor: shang-state
+    role: subject
+notes: >-
+  The two accounts cannot both be right about where the capital went, and the record does not merge
+  them. It publishes the Bamboo Annals' 奄 to 殷 as the main account, because the ruins of 殷 lie north
+  of the river at 安陽, and keeps the annals' 亳 as a conflicting claim. The annals and the Bamboo
+  Annals give no year; the window comes from a modern chronology and is approximate.
+dispute:
+  status: disputed
+  summary: >-
+    The Bamboo Annals record a move from 奄 to 殷 (北蒙); the Han annals record a crossing to the south
+    of the Yellow River and a return to 亳. The chapter publishes the first as the main account and
+    keeps the second as a conflicting one.
+cite:
+  - id: pangeng-move-annals
+    says: The Bamboo Annals record that 盤庚 moved from 奄 to 北蒙 and named it 殷.
+    source: guben-zhushu-jinian
+    at: 盤庚（盤庚旬自奄遷于北蒙）
+    quote: 盤庚旬自奄遷于北蒙，曰殷。
+  - id: pangeng-move-no-later-move
+    says: >-
+      A note the Bamboo Annals' reconstruction includes says that from 盤庚's move to 殷 to the fall of
+      紂 the capital was not moved again; 王國維 judges it a commentator's note, not the annals' text,
+      and the number of years is corrupt.
+    role: supporting
+    source: guben-zhushu-jinian
+    at: 盤庚（自盤庚徙殷，至紂之滅）
+    quote: 自盤庚徙殷，至紂之滅，七百七十三年，更不徙都。
+  - id: pangeng-move-shiji
+    says: >-
+      The Han annals record that the 殷 capital was then north of the river, that 盤庚 crossed to the
+      south, returned to 成湯's old seat, and governed from 亳 although the people did not want to
+      move.
+    role: conflicting
+    source: shiji-yin-zhou
+    at: 卷三 殷本紀 帝盤庚（盤庚渡河南）
+    quote: 帝盤庚之時，殷已都河北，盤庚渡河南，復居成湯之故居，迺五遷，無定處。殷民咨胥皆怨，不欲徙。

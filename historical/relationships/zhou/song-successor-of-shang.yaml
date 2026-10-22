@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: >-
+  宋 continuing the line of 殷: after 武庚's rising, 周 set 微子開 at 宋 to keep up the 殷 sacrifices,
+  so the 商 house survived as a 周 state.
+types: [successor_of]
+from: song-state
+to: shang-state
+date:
+  value: 1044 BCE..1018 BCE
+  mode: window
+  calendar: regnal
+  as_written: (after the rebellion, under 周公's regency)
+  cite:
+    - id: song-successor-date
+      says: >-
+        The annals put 武王's death at least two years after the conquest, and give 周公 seven years of
+        regency. The window runs from two years after the conquest's earliest year to nine years after
+        its latest, 1044 to 1018 BCE, under the conquest's two cited ends.
+      sources:
+        - source: shiji-yin-zhou
+          at: 卷四 周本紀 武王（武王已克殷，後二年）
+          quote: 武王已克殷，後二年，問箕子殷所以亡。
+        - source: shiji-yin-zhou
+          at: 卷四 周本紀 成王（周公行政七年）
+          quote: 周公行政七年，成王長，周公反政成王，北面就群臣之位。
+notes: >-
+  The historical geography dates the grant of 商丘 to 武王 instead; that claim is kept on
+  `weizi-song` and not repeated here.
+cite:
+  - id: song-successor-basis
+    says: The 殷 annals record that 微子 was set up in 宋 to continue the line of 殷.
+    source: shiji-yin-zhou
+    at: 卷三 殷本紀 帝辛（而立微子於宋）
+    quote: 而立微子於宋，以續殷後焉。

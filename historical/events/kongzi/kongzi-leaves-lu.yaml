@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  齊, afraid of a 魯 governed by Confucius, sends eighty dancing girls and a hundred and twenty horses.
+  季桓子 goes to watch them again and again and accepts them; for three days no court is held, and at the
+  suburban sacrifice the meat is not shared with the officers. Confucius leaves.
+types: [occurrence]
+date:
+  value: 498 BCE..496 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 定公十二年（年表）; after 定公十四年（孔子世家）
+  cite:
+    - id: kongzi-leaves-lu-date-498
+      says: >-
+        The table enters the dancing girls and Confucius's departure in 定公's twelfth year, 498 BCE in its
+        count. This is the window's early end.
+      source: shiji-chunqiu
+      at: 卷十四 十二諸侯年表 魯 定公 十二年（孔子行）
+      quote: 十二齊來歸女樂，季桓子受之，孔子行。
+    - id: kongzi-leaves-lu-date-496
+      says: >-
+        The 孔子世家 tells the gift and the departure after 孔子's acting chancellorship in 定公's fourteenth year,
+        496 BCE, the window's late end.
+      role: alternative
+      source: shiji-chunqiu
+      at: 卷四十七 孔子世家（定公十四年，孔子年五十六）
+      quote: 定公十四年，孔子年五十六，由大司寇行攝相事，有喜色。
+places:
+  - place: qufu
+    role: start
+participants:
+  - actor: kongzi
+    role: leader
+  - actor: zi-lu
+    role: participant
+  - actor: ji-huan-zi
+    role: subject
+  - actor: qi-state
+    role: participant
+  - actor: lu-state
+    role: subject
+dispute:
+  status: disputed
+  summary: >-
+    The table puts the departure in 498 BCE and the 孔子世家 after 496 BCE. The record keeps the table's year
+    as the anchor and the biography's as an alternative.
+cite:
+  - id: kongzi-leaves-lu-lunyu
+    says: >-
+      The 論語 records that 齊 sent dancing girls, that 季桓子 accepted them and held no court for three days,
+      and that Confucius left.
+    source: lunyu
+    at: 微子第十八（齊人歸女樂）
+    quote: 齊人歸女樂，季桓子受之，三日不朝。孔子行。
+  - id: kongzi-leaves-lu-shijia
+    says: >-
+      The 孔子世家 records that 桓子 accepted the dancing girls, held no court for three days, did not share the
+      sacrificial meat, and that Confucius left.
+    role: supporting
+    source: shiji-chunqiu
+    at: 卷四十七 孔子世家（桓子卒受齊女樂）
+    quote: 桓子卒受齊女樂，三日不聽政；郊，又不致膰俎於大夫。孔子遂行，宿乎屯。

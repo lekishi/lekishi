@@ -120,6 +120,12 @@ short quoted text.
   sources (the passage and a reference that states the year), asserts only a
   time object, and is never an alternative or conflicting claim, nor a claim on
   a pointer that another claim disputes.
+* `basis: tradition` is what a source passes on as the received story of a
+  time it did not witness, such as a founding legend or the reigns of kings
+  known only from much later writers (link:TRADITION_BASIS.adoc[a tradition
+  basis for received stories]). It cites the passage that tells it, needs no
+  attribution, may take any role, and never shares a pointer with a
+  `conventional` claim.
 * `role: main` is the presented account for that pointer; at most one main claim
   may assert the same pointer. `supporting`, `alternative`, and `conflicting`
   claims carry the rest.
@@ -411,6 +417,7 @@ assert that every code a vector expects is documented. Representative codes:
 |conventional_single_citation |A conventional date does not cite both the passage and a reference
 |conventional_outside_time |A conventional claim asserts something other than a time
 |conventional_in_dispute |A conventional claim is part of a dispute, or sits on a disputed pointer
+|conventional_in_tradition |A conventional date sits on a pointer that a tradition asserts
 |territory_time_unbounded |A territory snapshot's time is open at one end
 |territory_place_repeated |A territory snapshot lists the same place twice
 |territory_gained_kind_mismatch |A held place's gain names a record that is not an event or relationship
@@ -448,7 +455,7 @@ inclusive window boundaries, duration versus uncertain occurrence, playback
 states and playhead validation, undated exclusion, open-ended bounds, partial
 ordering and ordering graphs (including day-precision records inside one year),
 name and romanization rules, geometry interpretation and invented precision,
-renderer independence, claim evidence and disputes, conventional dates,
+renderer independence, claim evidence and disputes, conventional dates, traditions,
 territory snapshots, license
 and quotation gates, source sealing and set pins, editorial timestamp
 validation, and publication, mirror, and correction-history behavior.

@@ -297,6 +297,9 @@ Conventions:
 * *Basis.* `basis` defaults to `attested`. An interpretation says
   `basis: interpretation` and cites the scholarship, and compiles to the
   contract's `cited_interpretation`.
+  A date that standard chronologies agree on says `basis: conventional` with
+  a `convention:`. What a source passes on as legend says `basis: tradition`
+  (link:TRADITION_BASIS.adoc[a tradition basis for received stories]).
 * *Locators.* A source declares its locator kind once (`entry`, `page`,
   `juan`, `dataset_row`), so a citation gives only `at:`.
 * *Disputes.* A disputed value carries `alternatives:` beside the main value,

@@ -728,6 +728,7 @@
     {marks}
     journeys={scene.journeys.length > 0}
     {families}
+    territories={scene.territories}
     diorama={dioramaInView}
     {folded}
   />

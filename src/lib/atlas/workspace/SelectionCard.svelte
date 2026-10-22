@@ -3,6 +3,7 @@
   import { focusRing, transition } from "$lib/ui"
   import {
     connectedEvents,
+    controlOf,
     eventsAtPlace,
     nearbyEvents,
     placeEvidence,
@@ -87,6 +88,7 @@
   )
   const relationships = $derived(relationshipsFor(chapter, selectionRecords(atlasState, chapter)))
   const placeEvents = $derived(place === null ? [] : eventsAtPlace(chapter, place.id))
+  const control = $derived(place === null ? [] : controlOf(chapter, place.id))
   const evidence = $derived(
     (eventPlace ?? place) === null ? null : placeEvidence((eventPlace ?? place)!),
   )
@@ -315,6 +317,29 @@
             {@render eventLink(row, span(row.occurrence.startYear, row.occurrence.endYear))}
           {/each}
         </section>
+        {#if control.length > 0}
+          <section aria-label="Held by" class="flex flex-col gap-1" data-testid="atlas-control">
+            <SectionLabel text="Held by" count={control.length} level={3} />
+            {#each control as row (row.territory.id)}
+              <div class="flex flex-col gap-0.5 rounded-plate border border-rule px-3 py-2">
+                <p class="flex flex-wrap items-center gap-x-2 text-body-sm">
+                  <span class="font-serif text-ink">{row.controllerLabel}</span>
+                  <span class="text-caption tabular-nums text-ink-dim"
+                    >{span(row.territory.span.startYear, row.territory.span.endYear)}</span
+                  >
+                  {#if row.role === "seat"}<span class="text-caption text-ink-dim">· seat</span
+                    >{/if}
+                  {#if row.territory.dispute}<Badge kind="disputed" />{/if}
+                </p>
+                {#if row.note}<p class="text-body-sm text-ink-dim">{row.note}</p>{/if}
+              </div>
+            {/each}
+            <p class="text-caption text-ink-faint">
+              The years a source records it held; no border is drawn, and nothing is assumed between
+              them.
+            </p>
+          </section>
+        {/if}
       {/if}
 
       {#if connected.length > 0}

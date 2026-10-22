@@ -2,6 +2,7 @@ import { beforeAll, describe, expect, it } from "vitest"
 import {
   chapterFacts,
   connectedEvents,
+  controlOf,
   distanceKm,
   eventsAtPlace,
   nearbyEvents,
@@ -10,7 +11,7 @@ import {
 } from "./card"
 import { loadServedChapter } from "./chapter-catalog"
 import { TANG_CHAPTER } from "./chapter-registry"
-import type { Chapter, HistoricalEvent } from "./domain"
+import type { Chapter, HistoricalEvent, Territory } from "./domain"
 
 let tang: Chapter
 
@@ -92,5 +93,44 @@ describe("the frame's chapter facts", () => {
 
   it("measures great-circle distance", () => {
     expect(distanceKm({ lon: 0, lat: 0 }, { lon: 0, lat: 1 })).toBeCloseTo(111.2, 0)
+  })
+})
+
+describe("the place card's control rows", () => {
+  // Synthetic snapshots over the Tang chapter's places: not historical content.
+  const snapshot = (id: string, startYear: number, role: "seat" | "held"): Territory => ({
+    id,
+    controllerId: "lks:actor:tang-dynasty",
+    summary: "A synthetic snapshot.",
+    span: {
+      startYear,
+      endYear: startYear,
+      precision: "year",
+      mode: "duration",
+      sourceExpression: null,
+    },
+    places: [{ placeId: "lks:place:yangzhou", role, gainedRecordId: null, note: "A note." }],
+    dispute: null,
+    citations: [],
+  })
+
+  it("lists every snapshot that holds the place, in date order, with its role", () => {
+    const content: Chapter = {
+      ...tang,
+      territories: [
+        snapshot("lks:territory:test-b", 754, "held"),
+        snapshot("lks:territory:test-a", 753, "seat"),
+      ],
+    }
+    const rows = controlOf(content, "lks:place:yangzhou")
+
+    expect(rows.map((row) => [row.territory.id, row.role, row.note])).toEqual([
+      ["lks:territory:test-a", "seat", "A note."],
+      ["lks:territory:test-b", "held", "A note."],
+    ])
+    expect(rows[0].controllerLabel).toBe(
+      tang.actors.find((a) => a.id === "lks:actor:tang-dynasty")?.label,
+    )
+    expect(controlOf(content, "lks:place:dazaifu")).toEqual([])
   })
 })

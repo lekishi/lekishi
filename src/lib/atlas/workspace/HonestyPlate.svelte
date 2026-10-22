@@ -2,19 +2,23 @@
   /**
    * What the view in front of the reader is made of (RFD 1, "Honest
    * rendering"): the terrain is real elevation, every line is schematic, an
-   * anchor names an area without asserting a site, and the close-up diorama is
+   * anchor names an area without asserting a site, a tinted place is one a
+   * source records held, with no border between, and the close-up diorama is
    * an illustration. The plate states only what is on screen, so a reader who
    * zooms into the diorama is told it is a drawing at the moment it appears.
    */
   let {
     lines,
     anchors,
+    control = false,
     diorama,
   }: {
     /** A journey or an arc is drawn. */
     lines: boolean
     /** A display anchor is drawn. */
     anchors: boolean
+    /** A territory snapshot tints held places. */
+    control?: boolean
     /** The diorama in view, by its place's name, or null. */
     diorama: string | null
   } = $props()
@@ -27,6 +31,12 @@
   {/if}
   {#if anchors}
     <li>A diamond names an area; it asserts no site.</li>
+  {/if}
+  {#if control}
+    <li>
+      A tinted place is one a source records held in that year; no border is drawn, and other places
+      may have been held too.
+    </li>
   {/if}
   {#if diorama}
     <li class="text-gold-bright">

@@ -75,10 +75,10 @@ describe("the overlay definitions", () => {
 })
 
 describe("journeys", () => {
-  it("draws 鑒眞's voyage through its dated stops with the vessel at the playhead", () => {
+  it("draws 鑒眞's journey record through its dated stops with the vessel at the playhead", () => {
     const tang = chapter(TANG_CHAPTER)
     const before = sceneJourneys(setPlayhead(createAtlasState(tang), tang, 752), tang)
-    const voyage = before.find((journey) => journey.id === "jianzhen-voyage")
+    const voyage = before.find((journey) => journey.id === "lks:journey:jianzhen-to-nara-753")
 
     expect(voyage?.stops.map((stop) => stop.label)).toEqual([
       "揚州",
@@ -91,21 +91,56 @@ describe("journeys", () => {
       "難波",
       "東大寺",
     ])
+    // The arrival at and departure from 益救島 are one vertex, so no leg joins them.
+    expect(voyage?.legs.map((leg) => [leg.from, leg.to, leg.drift])).toEqual([
+      [0, 1, false],
+      [1, 2, false],
+      [2, 3, false],
+      [4, 5, false],
+      [5, 6, false],
+      [6, 7, false],
+      [7, 8, false],
+    ])
     // Before 753 the journey has not started, so no vessel is drawn.
     expect(voyage?.vessel).toBeNull()
 
     const at754 = sceneJourneys(setPlayhead(createAtlasState(tang), tang, 754), tang)
 
-    expect(at754.find((journey) => journey.id === "jianzhen-voyage")?.vessel).toEqual({
+    // How he reached 東大寺 is not stated, so the playhead shows a plain marker.
+    expect(
+      at754.find((journey) => journey.id === "lks:journey:jianzhen-to-nara-753")?.vessel,
+    ).toEqual({
       stop: 8,
-      kind: "party",
+      kind: "marker",
     })
+  })
+
+  it("draws a drift as a drift, and never draws a leg to an unlocated place", () => {
+    const tang = chapter(TANG_CHAPTER)
+    const journeys = sceneJourneys(setPlayhead(createAtlasState(tang), tang, 753), tang)
+    const kibi = journeys.find((journey) => journey.id === "lks:journey:kibi-no-makibi-753")
+
+    expect(kibi?.stops.map((stop) => stop.label)).toEqual(["蘇州黃泗浦", "益救島", "紀伊國牟漏埼"])
+    expect(kibi?.legs).toEqual([
+      { from: 0, to: 1, drift: false },
+      { from: 1, to: 2, drift: true },
+    ])
+    // 驩州 asserts no coordinate, so 藤原清河's journey has one placeable stop
+    // and nothing to draw; the card still lists it.
+    expect(journeys.map((journey) => journey.id)).not.toContain(
+      "lks:journey:fujiwara-no-kiyokawa-753",
+    )
+    expect(tang.overlays.journeys.map((journey) => journey.id)).toContain(
+      "lks:journey:fujiwara-no-kiyokawa-753",
+    )
   })
 
   it("moves the vessel to a selected stop, so the year's stops can be read in turn", () => {
     const tang = chapter(TANG_CHAPTER)
     const selected = selectEvent(createAtlasState(tang), tang, "lks:event:akimeya-landfall-753")
-    const voyage = sceneJourneys(selected, tang).find((journey) => journey.id === "jianzhen-voyage")
+    const voyage = sceneJourneys(selected, tang).find(
+      (journey) => journey.id === "lks:journey:jianzhen-to-nara-753",
+    )
 
     expect(voyage?.selected).toBe(true)
     expect(voyage?.vessel).toEqual({ stop: 5, kind: "ship" })
@@ -120,7 +155,7 @@ describe("journeys", () => {
       sceneJourneys(selectEvent(off, tang, "lks:event:yaku-departure-753"), tang).map(
         (journey) => journey.id,
       ),
-    ).toEqual(["jianzhen-voyage"])
+    ).toEqual(["lks:journey:jianzhen-to-nara-753"])
   })
 })
 

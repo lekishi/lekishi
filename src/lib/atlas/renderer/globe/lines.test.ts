@@ -9,12 +9,14 @@ import {
   greatCircle,
   hiddenByEarth,
   journeyLine,
+  legStyles,
   midpoint,
   offsetRun,
   pathData,
   pointsAlong,
   raisedArc,
   runLength,
+  styledRuns,
   visibleRuns,
 } from "./lines"
 
@@ -221,5 +223,45 @@ describe("line styles", () => {
 
   it("dashes journeys with RFD 5's schematic pattern", () => {
     expect(JOURNEY_DASH).toBe("8 6")
+  })
+})
+
+describe("journey legs", () => {
+  const p = (x: number) => ({ x, y: 0 })
+
+  it("styles only the drawn legs, so an undrawn leg is a gap in the line", () => {
+    // Stops at samples 0, 2, 4 and 5: legs 0→1 drawn, 1→2 not, 2→3 a drift.
+    const styles = legStyles(
+      [0, 2, 4, 5],
+      [
+        { from: 0, to: 1, drift: false },
+        { from: 2, to: 3, drift: true },
+      ],
+      6,
+    )
+
+    expect(styles).toEqual(["none", "line", "line", "none", "none", "drift"])
+
+    const points = [0, 1, 2, 3, 4, 5].map(p)
+
+    expect(styledRuns(points, styles, (style) => style === "line")).toEqual([[p(0), p(1), p(2)]])
+    expect(styledRuns(points, styles, (style) => style === "drift")).toEqual([[p(4), p(5)]])
+    expect(styledRuns(points, styles, (style) => style !== "none")).toEqual([
+      [p(0), p(1), p(2)],
+      [p(4), p(5)],
+    ])
+  })
+
+  it("breaks a run at a hidden sample and splits at the vessel", () => {
+    const styles = legStyles([0, 4], [{ from: 0, to: 1, drift: false }], 5)
+    const points = [p(0), p(1), null, p(3), p(4)]
+
+    expect(styledRuns(points, styles, (style) => style === "line")).toEqual([
+      [p(0), p(1)],
+      [p(3), p(4)],
+    ])
+    expect(styledRuns([0, 1, 2, 3, 4].map(p), styles, () => true, 0, 2)).toEqual([
+      [p(0), p(1), p(2)],
+    ])
   })
 })

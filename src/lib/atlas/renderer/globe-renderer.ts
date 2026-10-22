@@ -79,11 +79,12 @@ export function markerFor(place: ScenePlace): GlobeMarker {
   }
 }
 
-/** A journey's line: its stops' positions, in story order, and where the vessel is. */
+/** A journey's line: its stops' positions in order, the legs drawn between them, and where the vessel is. */
 export function journeyFor(journey: SceneJourney): GlobeJourney {
   return {
     id: journey.id,
     stops: journey.stops.map((stop) => stop.position),
+    legs: journey.legs,
     vessel: journey.vessel,
     selected: journey.selected,
   }

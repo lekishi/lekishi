@@ -727,7 +727,8 @@
 {#snippet legend(folded: boolean)}
   <Legend
     {marks}
-    journeys={scene.journeys.length > 0}
+    journeys={scene.journeys.some((journey) => journey.legs.some((leg) => !leg.drift))}
+    drift={scene.journeys.some((journey) => journey.legs.some((leg) => leg.drift))}
     {families}
     territories={scene.territories}
     diorama={dioramaInView}

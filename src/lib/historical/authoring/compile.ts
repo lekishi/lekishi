@@ -8,7 +8,7 @@ import type { AuthoringFile, AuthoringTree } from "./tree"
  * The compiler from record files to the v0 contract (RFD 2, "Decided: the
  * compiler and what ships").
  *
- * A chapter compiles to one bundle: the manifest's story, the closure of every
+ * A chapter compiles to one bundle: the manifest's stories, the closure of every
  * record and source it reaches, and, when the chapter carries a matching
  * approval, the publication set that approval stands for. The bundle holds
  * complete v0 documents, so `Publication.checkAll`, the vectors and the
@@ -59,12 +59,32 @@ export type Approval = { readonly digest: string; readonly by: string; readonly 
  */
 export type ApprovalState = "approved" | "draft" | "stale"
 
+/** An inclusive window in astronomical year ordinals (233 BCE is -232). */
+export type YearWindow = { readonly start: number; readonly end: number }
+
+/**
+ * One of a chapter's stories, as the reader's story switcher lists it
+ * (rfd/0002/CHAPTER_STORIES.adoc). The story itself is the v0 story record
+ * `lks:story:<key>`; this is what the switcher needs without reading v0.
+ */
+export type ChapterStory = {
+  readonly key: string
+  /** The story's name in the switcher; a chapter with one story uses the chapter's title. */
+  readonly title: string
+  /** The window the story opens on, against which its coda steps are checked. */
+  readonly window: YearWindow
+  /** The story's span, as its story record publishes it. */
+  readonly span: YearWindow
+}
+
 export type ChapterBundle = {
   readonly id: string
   readonly title: string
   readonly summary: string
   /** The window the chapter opens on, in astronomical year ordinals (233 BCE is -232). */
-  readonly window: { readonly start: number; readonly end: number }
+  readonly window: YearWindow
+  /** The chapter's stories, the one it opens on first. */
+  readonly stories: readonly ChapterStory[]
   /** The digest of the chapter's content closure as it stands. */
   readonly digest: string
   readonly approval: Approval | null
@@ -82,6 +102,13 @@ function ordinal(point: JsonObject): number {
   const year = Number(point["year"])
 
   return point["era"] === "bce" ? 1 - year : year
+}
+
+function yearWindow(window: JsonObject): YearWindow {
+  return {
+    start: ordinal(window["start"] as JsonObject),
+    end: ordinal(window["end"] as JsonObject),
+  }
 }
 
 function lookupFor(tree: AuthoringTree): Lookup {
@@ -194,11 +221,88 @@ function sourceDocument(file: AuthoringFile): JsonObject {
 
 type Step = { readonly record: string; readonly caption: string | undefined }
 
-function steps(manifest: AuthoringFile, lookup: Lookup): Step[] {
-  const story = manifest.data["story"] as JsonObject
+/** One story as its manifest writes it, with where it is written for messages. */
+type WrittenStory = {
+  readonly key: string
+  readonly title: string
+  readonly content: JsonObject
+  /** The manifest's window for the first story, else the story's own, else its span. */
+  readonly window: JsonValue
+  /** Where the story sits in the manifest, as in `stories[1]`. */
+  readonly at: string
+}
 
-  return (story["steps"] as JsonValue[]).map((entry, index) => {
-    const where = `${manifest.path}: story.steps[${index}]`
+/**
+ * A manifest's stories. A manifest with one story writes `story:`, whose key is
+ * the chapter id and whose title is the chapter's; a manifest with several
+ * writes `stories:`, and the first opens on the chapter's `window`.
+ */
+export function writtenStories(manifest: AuthoringFile): WrittenStory[] {
+  const data = manifest.data
+
+  if (!isList(data["stories"])) {
+    return [
+      {
+        key: manifest.name,
+        title: String(data["title"]),
+        content: data["story"] as JsonObject,
+        window: data["window"] as JsonValue,
+        at: "story",
+      },
+    ]
+  }
+
+  return data["stories"].filter(isObject).map((story, index) => {
+    if (index === 0 && story["window"] !== undefined) {
+      throw new Error(
+        `${manifest.path}: stories[0] opens on the chapter's window; write it as the manifest's \`window\``,
+      )
+    }
+
+    return {
+      key: String(story["key"]),
+      title: String(story["title"]),
+      content: story,
+      window: (index === 0 ? data["window"] : (story["window"] ?? story["span"])) as JsonValue,
+      at: `stories[${index}]`,
+    }
+  })
+}
+
+/**
+ * Fails when a story key is written twice, in this manifest or any other: a
+ * story's key is its record id, `lks:story:<key>`, and ids are unique across the
+ * project. A one-story manifest's key is its chapter id.
+ */
+function checkStoryKeys(tree: AuthoringTree, manifest: AuthoringFile, stories: WrittenStory[]) {
+  const seen = new Set<string>()
+
+  for (const story of stories) {
+    if (seen.has(story.key)) {
+      throw new Error(`${manifest.path}: two stories have the key ${story.key}`)
+    }
+
+    seen.add(story.key)
+  }
+
+  for (const other of tree.chapters.values()) {
+    if (other.name === manifest.name) {
+      continue
+    }
+
+    const keys = isList(other.data["stories"])
+      ? other.data["stories"].filter(isObject).map((story) => String(story["key"]))
+      : [other.name]
+
+    for (const key of keys.filter((candidate) => seen.has(candidate))) {
+      throw new Error(`${manifest.path}: the story key ${key} is already a story in ${other.path}`)
+    }
+  }
+}
+
+function steps(manifest: AuthoringFile, story: WrittenStory, lookup: Lookup): Step[] {
+  return (story.content["steps"] as JsonValue[]).map((entry, index) => {
+    const where = `${manifest.path}: ${story.at}.steps[${index}]`
 
     if (typeof entry === "string") {
       return { record: lookup.record(entry, ["event", "relationship"], where), caption: undefined }
@@ -396,8 +500,11 @@ export function compileChapter(
   }
 
   const lookup = lookupFor(tree)
-  const story = manifest.data["story"] as JsonObject
-  const storySteps = steps(manifest, lookup)
+  const stories = writtenStories(manifest)
+
+  checkStoryKeys(tree, manifest, stories)
+
+  const storySteps = stories.map((story) => steps(manifest, story, lookup))
   const records = new Map<string, JsonObject>()
   const reached: AuthoringFile[] = []
   const claimOrder = new Map<string, string[]>()
@@ -411,7 +518,7 @@ export function compileChapter(
         `${manifest.path}: include[${index}]`,
       ),
   )
-  const pending = [...storySteps.map((step) => step.record), ...included]
+  const pending = [...storySteps.flat().map((step) => step.record), ...included]
   const sourceNames = new Set<string>()
 
   while (pending.length > 0) {
@@ -461,33 +568,44 @@ export function compileChapter(
     return file
   })
 
-  const storyId = `lks:story:${id}`
-  const storyContent: JsonObject = {
-    summary: story["summary"] as string,
-    window: compileWindow(story["span"]),
-    steps: storySteps.map((step, index) => ({
-      record_id: step.record,
-      // The first step is where the story starts; the contract has no other role.
-      role: index === 0 ? "start" : "step",
-      ...(step.caption === undefined ? {} : { caption: step.caption }),
-    })),
-  }
+  // One v0 story record per story; v0 publishes several in one set unchanged.
+  const chapterStories = stories.map((story, index): ChapterStory => {
+    const storyId = `lks:story:${story.key}`
+    const span = compileWindow(story.content["span"])
+    const storyContent: JsonObject = {
+      summary: story.content["summary"] as string,
+      window: span,
+      steps: storySteps[index].map((step, position) => ({
+        record_id: step.record,
+        // The first step is where the story starts; the contract has no other role.
+        role: position === 0 ? "start" : "step",
+        ...(step.caption === undefined ? {} : { caption: step.caption }),
+      })),
+    }
 
-  if (story["coverage"] !== undefined) {
-    storyContent["coverage_note"] = story["coverage"]
-  }
+    if (story.content["coverage"] !== undefined) {
+      storyContent["coverage_note"] = story.content["coverage"]
+    }
 
-  if (story["notes"] !== undefined) {
-    storyContent["editorial_notes"] = story["notes"]
-  }
+    if (story.content["notes"] !== undefined) {
+      storyContent["editorial_notes"] = story.content["notes"]
+    }
 
-  records.set(storyId, {
-    contract: CONTRACT,
-    document: "record",
-    kind: "story",
-    record_id: storyId,
-    revisions: [revision(storyContent, [], undefined, id)],
-    publication: null,
+    records.set(storyId, {
+      contract: CONTRACT,
+      document: "record",
+      kind: "story",
+      record_id: storyId,
+      revisions: [revision(storyContent, [], undefined, story.key)],
+      publication: null,
+    })
+
+    return {
+      key: story.key,
+      title: story.title,
+      window: yearWindow(compileWindow(story.window)),
+      span: yearWindow(span),
+    }
   })
 
   const digest = chapterDigest(manifest, [...reached, ...sourceFiles], claimOrder)
@@ -526,16 +644,12 @@ export function compileChapter(
     }
   }
 
-  const window = compileWindow(manifest.data["window"])
-
   return {
     id,
     title,
     summary: String(manifest.data["summary"]),
-    window: {
-      start: ordinal(window["start"] as JsonObject),
-      end: ordinal(window["end"] as JsonObject),
-    },
+    window: yearWindow(compileWindow(manifest.data["window"])),
+    stories: chapterStories,
     digest,
     approval,
     state,

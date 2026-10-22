@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest"
+import { parse, stringify } from "yaml"
 import { type JsonObject } from "../contract/types"
 import {
   approveEach,
@@ -326,6 +327,37 @@ describe("pnpm approvals", () => {
     expect(landfall?.fields.map((field) => field.field)).toEqual([
       "claim_order[0]",
       "claim_order[1]",
+    ])
+  })
+
+  it("reads an added story as one added block, with the first story still paired", () => {
+    const beforeTree = buildTree(files())
+    const before = compileChapter(beforeTree, TANG, { preview: true })
+    const afterTree = buildTree(
+      edit(files(), MANIFEST, (text) => {
+        const { story, ...manifest } = parse(text) as JsonObject
+
+        return stringify({
+          ...manifest,
+          stories: [
+            { key: TANG, title: "The embassy", ...(story as JsonObject) },
+            {
+              key: "example-second-story",
+              title: "A second story",
+              summary: "A story that exists only to test the comparison.",
+              span: "753",
+              steps: [{ "yangzhou-invitation-753": "The invitation, told again" }],
+            },
+          ],
+        })
+      }),
+    )
+    const after = compileChapter(afterTree, TANG, { preview: true })
+    const changes = compareViews(chapterViews(beforeTree, before), chapterViews(afterTree, after))
+
+    expect(after.digest).not.toBe(before.digest)
+    expect(changes.map((change) => [change.label, change.status, change.file])).toEqual([
+      ["lks:story:example-second-story (a story)", "added", MANIFEST],
     ])
   })
 

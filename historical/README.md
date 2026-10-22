@@ -38,7 +38,7 @@ historical/places/ actors/ events/ relationships/
                        the file name is the id, subfolders (tang/, qin/) are tidiness
 historical/sources/    one YAML file per cited work or dataset, with its reuse terms
 historical/chapters/
-  tang-mission-750-754.yaml      a chapter manifest: card text, window, story, approval
+  tang-mission-750-754.yaml      a chapter manifest: card text, window, stories, approval
   tang-mission-750-754.md        the chapter's scope, evidence and review notes
   qin-conquest-han-233-226.yaml  the bounded Qin chapter
   qin-conquest-han-233-226.md
@@ -56,8 +56,11 @@ synthetic, and they must never be imported as atlas content or cited as evidence
 Chapter content is authored as record files and compiled, never written as v0
 JSON by hand. `src/lib/historical/authoring/` reads the tree, checks every file
 against `historical/schema`, and compiles a chapter into complete v0 documents:
-its manifest's story, every record and source the story and `include` reach,
-one generated revision per record, and a publication set. The site compiles
+its manifest's stories, every record and source the stories and `include` reach,
+one generated revision per record, and a publication set. A manifest with one
+story writes `story:`; a chapter with several writes `stories:`, each with a
+`key`, a `title` for the reader's story switcher and its own steps, and the
+first is the story the chapter opens on (`rfd/0002/CHAPTER_STORIES.adoc`). The site compiles
 the chapters at build time (`scripts/historical-chapters.mjs`) and ships one chunk per chapter;
 nothing compiled is checked in. The Node content boundary,
 `src/lib/historical/chapter.ts`, compiles the same bundles for the contract and

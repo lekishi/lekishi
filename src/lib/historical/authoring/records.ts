@@ -44,12 +44,13 @@ export type CompiledRecord = {
 
 /**
  * The author's spelling of a claim basis; `interpretation` is v0's
- * `cited_interpretation`, and `conventional` is v1's.
+ * `cited_interpretation`, and `conventional` and `tradition` keep their names.
  */
 const BASES: Record<string, string> = {
   attested: "attested",
   interpretation: "cited_interpretation",
   conventional: "conventional",
+  tradition: "tradition",
 }
 
 /** Fields that compile to a differently named v0 field (`types` is per kind). */
@@ -138,7 +139,7 @@ class Claims {
 
     if (basis === undefined) {
       throw new Error(
-        `${where}: basis is attested, interpretation or conventional, not ${String(entry["basis"])}`,
+        `${where}: basis is attested, interpretation, conventional or tradition, not ${String(entry["basis"])}`,
       )
     }
 

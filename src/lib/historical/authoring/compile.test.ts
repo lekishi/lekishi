@@ -760,6 +760,48 @@ describe("compiling a conventional date", () => {
   })
 })
 
+describe("compiling a tradition", () => {
+  const told = (cite: string) =>
+    EVENT.replace(
+      "  cite:\n    says: The chronicle dates the landing.\n    source: example-chronicle\n    at: 卷一\n",
+      cite,
+    )
+
+  it("compiles the basis unchanged and needs no attribution", () => {
+    const bundle = compileChapter(
+      buildTree(
+        files({
+          "events/example/deep/example-landing.yaml": told(
+            "  cite:\n    says: The chronicle tells the landing as the founders' story.\n    basis: tradition\n    source: example-chronicle\n    at: 卷一\n",
+          ),
+        }),
+      ),
+      "example-chapter",
+      { preview: true },
+    )
+    const claims = record(bundle.documents, "lks:event:example-landing")["claims"] as JsonObject[]
+    const time = claims.find((claim) => claim["asserts"] === "/time")
+
+    expect(time).toMatchObject({ basis: "tradition" })
+    expect(time).not.toHaveProperty("attributed_to")
+    expect(Publication.checkAll(bundle.documents, bundle.sets)).toEqual(
+      expect.objectContaining({ ok: true }),
+    )
+  })
+
+  it("refuses an unknown basis by name", () => {
+    expect(() =>
+      buildTree(
+        files({
+          "events/example/deep/example-landing.yaml": told(
+            "  cite:\n    says: The chronicle dates the landing.\n    basis: legend\n    source: example-chronicle\n    at: 卷一\n",
+          ),
+        }),
+      ),
+    ).toThrow(/example-landing\.yaml/)
+  })
+})
+
 describe("compiling a territory snapshot", () => {
   const STATE = `
 summary: An example state.

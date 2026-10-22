@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: On the morning of the sixteenth day of the tenth month the ship sets out from 署風山, making for 頂岸山. Away from the shore the wind rises and the sea turns black as ink.
+types: [journey]
+date:
+  value: 748-10-16
+  calendar: chinese_lunisolar
+  as_written: 十月十六日晨朝
+  cite:
+    - id: shufeng-departure-time
+      says: The biography dates the sailing to the morning of 十月十六日.
+      source: toseiden
+      at: 十月十六日晨朝
+places:
+  - place: shufeng-shan
+    role: start
+participants:
+  - actor: jianzhen
+    role: leader
+notes: 頂岸山, the ship's heading, is named only here and given no record. The biography's dream and omens of that morning are left out of the chapter.
+cites:
+  summary:
+    - id: shufeng-departure-storm
+      says: The biography records the rising wind and the black water once the shore was far off.
+      source: toseiden
+      at: 去岸漸遠，風急波峻，水黑如墨

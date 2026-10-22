@@ -2,6 +2,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 import { loadServedChapter } from "./chapter-catalog"
 import { QIN_CHAPTER, TANG_CHAPTER } from "./chapter-registry"
+import type { Chapter } from "./domain"
 import { mountAtlas } from "./mount"
 
 /**
@@ -239,6 +240,105 @@ describe("mountAtlas", () => {
     )
 
     handle.dispose()
+  })
+
+  describe("a chapter with several stories", () => {
+    // A second view made from the Tang chapter's own, holding three of its
+    // events: a fixture for the story list, not a story the chapter has.
+    const options = [
+      { key: TANG_CHAPTER, title: "The embassy", window: { start: 750, end: 754 } },
+      { key: "example-second", title: "A second story", window: { start: 753, end: 754 } },
+    ]
+    const kept = new Set([
+      "lks:event:akimeya-landfall-753",
+      "lks:event:dazaifu-entry-753",
+      "lks:event:naniwa-754",
+    ])
+    const first: Chapter = { ...TANG, stories: options }
+    const second: Chapter = {
+      ...TANG,
+      storyKey: "example-second",
+      stories: options,
+      defaultWindow: { start: 753, end: 754 },
+      events: TANG.events.filter((event) => kept.has(event.id)),
+      story: TANG.story.filter((step) => kept.has(step.recordId)),
+    }
+    const steps = () => root.querySelectorAll('[data-testid="atlas-story-step"]')
+    const option = (key: string) =>
+      root.querySelector<HTMLButtonElement>(
+        `[data-testid="atlas-story-option"][data-story="${key}"]`,
+      )
+
+    it("lists no stories for a chapter with one", async () => {
+      const handle = mountAtlas(root, QIN)
+      await flush()
+
+      expect(root.querySelector('[data-testid="atlas-stories"]')).toBeNull()
+
+      handle.dispose()
+    })
+
+    it("lists the stories above the journal and opens one at its start", async () => {
+      const history = { push: vi.fn(), replace: vi.fn() }
+      const handle = mountAtlas(root, first, undefined, { search: "", history }, [first, second])
+      await flush()
+
+      expect(root.querySelectorAll('[data-testid="atlas-story-option"]')).toHaveLength(2)
+      expect(option(TANG_CHAPTER)?.getAttribute("aria-current")).toBe("true")
+      expect(option("example-second")?.textContent).toContain("753–754")
+      expect(steps()).toHaveLength(TANG.story.length)
+
+      option("example-second")?.click()
+      await flush()
+
+      expect(option("example-second")?.getAttribute("aria-current")).toBe("true")
+      expect(steps()).toHaveLength(3)
+      expect(history.push).toHaveBeenLastCalledWith("?story=example-second")
+
+      // Back to an address without a story is the story the chapter opens on.
+      handle.navigate("")
+      await flush()
+      expect(option(TANG_CHAPTER)?.getAttribute("aria-current")).toBe("true")
+      expect(steps()).toHaveLength(TANG.story.length)
+
+      handle.dispose()
+    })
+
+    it("opens the story an address names, with the step counted in that story", async () => {
+      const handle = mountAtlas(
+        root,
+        first,
+        undefined,
+        { search: "?story=example-second&step=2", history: null },
+        [first, second],
+      )
+      await flush()
+
+      expect(option("example-second")?.getAttribute("aria-current")).toBe("true")
+      expect(root.querySelector('[data-testid="atlas-arrival"]')?.textContent).toContain(
+        "Story 2 of 3",
+      )
+
+      handle.dispose()
+    })
+
+    it("says so when an address names a story the chapter does not have", async () => {
+      const handle = mountAtlas(
+        root,
+        first,
+        undefined,
+        { search: "?story=not-a-story", history: null },
+        [first, second],
+      )
+      await flush()
+
+      expect(option(TANG_CHAPTER)?.getAttribute("aria-current")).toBe("true")
+      expect(root.querySelector('[data-testid="atlas-arrival"]')?.textContent).toContain(
+        "no story “not-a-story”",
+      )
+
+      handle.dispose()
+    })
   })
 
   it("writes the reader's moves to the address: a jump pushes, a selection replaces", async () => {

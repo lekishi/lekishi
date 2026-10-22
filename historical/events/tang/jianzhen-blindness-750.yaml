@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: Worn by repeated heat, 鑒眞's sight dims at 韶州; a foreigner (胡人) who says he can cure eyes treats them, and he loses his sight. The chronicle's notice instead records that he wept for 榮叡 and lost his sight.
+types: [occurrence]
+date:
+  value: "750"
+  calendar: chinese_lunisolar
+  as_written: 是歲，天寶九載也。時大和上頻經炎熱，眼光暗昧
+  cite:
+    - id: jianzhen-blindness-time
+      says: The biography records the failing sight and the treatment at 韶州 in the year of the parting, 天寶九載.
+      source: toseiden
+      at: 時大和上頻經炎熱，眼光暗昧，爰有胡人言能治目，遂加療治，眼遂失明
+    - id: jianzhen-blindness-chronicle
+      says: The chronicle's notice records that, at 榮叡's death, he wept and lost his sight.
+      role: conflicting
+      source: shoku-nihongi
+      at: 卷第廿四 天平寶字七年五月戊申
+      quote: 時榮叡物故。和上悲泣失明。
+places:
+  - place: shaozhou
+    role: site
+participants:
+  - actor: jianzhen
+    role: subject
+dispute:
+  status: disputed
+  summary: The biography attributes the blindness to the southern heat and a failed treatment at 韶州 in 750; the chronicle's notice ties it to his grief at 榮叡's death and names no place. The event publishes both accounts and does not choose.

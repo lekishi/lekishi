@@ -408,6 +408,136 @@ describe("compiling a chapter", () => {
   })
 })
 
+describe("compiling a chapter with several stories", () => {
+  const STORIES = `
+title: An example chapter
+summary: A chapter that exists only to test the compiler.
+window: 750..754
+stories:
+  - key: example-chapter
+    title: The landing
+    summary: The example story.
+    span: 750..779
+    steps:
+      - example-landing: The envoy lands
+  - key: example-arrival-story
+    title: The arrival
+    summary: A second example story.
+    span: 740..760
+    window: 745..755
+    coverage: The arrival only.
+    steps:
+      - example-arrival: The envoy arrives
+      - example-landing: "The landing, again"
+`
+
+  function compiled(text = STORIES, overrides: Record<string, string | null> = {}) {
+    return compileChapter(
+      buildTree(files({ "chapters/example-chapter.yaml": text, ...overrides })),
+      "example-chapter",
+      { preview: true },
+    )
+  }
+
+  it("publishes one story record per story, keyed by the story", () => {
+    const bundle = compiled()
+    const ids = bundle.documents.map((document) => document["record_id"] ?? document["source_id"])
+
+    expect(ids).toContain("lks:story:example-chapter")
+    expect(ids).toContain("lks:story:example-arrival-story")
+    expect(ids).toContain("lks:relationship:example-arrival")
+    expect(record(bundle.documents, "lks:story:example-arrival-story")["content"]).toMatchObject({
+      coverage_note: "The arrival only.",
+      steps: [
+        { record_id: "lks:relationship:example-arrival", role: "start" },
+        { record_id: "lks:event:example-landing", role: "step", caption: "The landing, again" },
+      ],
+    })
+    expect(Publication.checkAll(bundle.documents, bundle.sets)).toEqual(
+      expect.objectContaining({ ok: true }),
+    )
+  })
+
+  it("lists the stories for the switcher, the first opening on the chapter's window", () => {
+    expect(compiled().stories).toEqual([
+      {
+        key: "example-chapter",
+        title: "The landing",
+        window: { start: 750, end: 754 },
+        span: { start: 750, end: 779 },
+      },
+      {
+        key: "example-arrival-story",
+        title: "The arrival",
+        window: { start: 745, end: 755 },
+        span: { start: 740, end: 760 },
+      },
+    ])
+  })
+
+  it("defaults a later story's window to its span", () => {
+    const bundle = compiled(STORIES.replace("    window: 745..755\n", ""))
+
+    expect(bundle.stories[1].window).toEqual({ start: 740, end: 760 })
+  })
+
+  it("gives a one-story chapter one story under the chapter's id and title", () => {
+    const bundle = compileChapter(buildTree(files()), "example-chapter")
+
+    expect(bundle.stories).toEqual([
+      {
+        key: "example-chapter",
+        title: "An example chapter",
+        window: { start: 750, end: 754 },
+        span: { start: 750, end: 779 },
+      },
+    ])
+  })
+
+  it("refuses a window on the first story, which opens on the chapter's", () => {
+    const text = STORIES.replace(
+      "    span: 750..779\n",
+      "    span: 750..779\n    window: 751..752\n",
+    )
+
+    expect(() => compiled(text)).toThrow(/stories\[0\] opens on the chapter's window/)
+  })
+
+  it("refuses a story key another story already has", () => {
+    expect(() =>
+      compiled(STORIES.replace("key: example-arrival-story", "key: example-chapter")),
+    ).toThrow(/two stories have the key example-chapter/)
+    expect(() =>
+      compiled(STORIES, {
+        "chapters/example-other.yaml": manifest().replace("An example chapter", "Another"),
+      }),
+    ).not.toThrow()
+    expect(() =>
+      compiled(STORIES.replace("key: example-arrival-story", "key: example-other"), {
+        "chapters/example-other.yaml": manifest(),
+      }),
+    ).toThrow(/the story key example-other is already a story in chapters\/example-other.yaml/)
+  })
+
+  it("refuses a manifest that writes both one story and several", () => {
+    expect(() => compiled(`${manifest()}\n${STORIES.split("\n").slice(4).join("\n")}`)).toThrow(
+      /chapters\/example-chapter.yaml: \/ oneOf/,
+    )
+  })
+
+  it("names the story when a step names nothing", () => {
+    expect(() => compiled(STORIES.replace("- example-arrival:", "- example-missing:"))).toThrow(
+      /stories\[1\]\.steps\[0\]: no event or relationship record is named example-missing/,
+    )
+  })
+
+  it("moves the digest when a story is added", () => {
+    const one = compileChapter(buildTree(files()), "example-chapter").digest
+
+    expect(compiled().digest).not.toBe(one)
+  })
+})
+
 describe("the digest an approval pins", () => {
   const digest = compileChapter(buildTree(files()), "example-chapter").digest
 

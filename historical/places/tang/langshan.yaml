@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 常州界狼山, where the ship of the 748 attempt, a day out from 揚州's 新河, was caught by wind and waves and turned about among three hills.
+types: [landform]
+names:
+  - form: 狼山
+    lang: lzh
+    script: Hani
+    roman: Langshan
+    scheme: pinyin
+    cite:
+      - id: langshan-name
+        says: The biography records the ship going down from 揚州新河 to 狼山 on the border of 常州, where the wind was high and it circled three hills.
+        source: toseiden
+        at: 乘舟下至常州界［狼］山，風急浪高，旋轉三山
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [120.898, 31.965]
+    notes: Label anchor at 狼山 in 南通 (Wikidata Q6486478), the hill of that name by the Yangtze mouth. It is not an asserted historical coordinate.
+    cite:
+      - id: langshan-anchor
+        says: The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate is asserted.
+        source: wikidata
+        at: Q6486478 (P625), revision 2276445742
+notes: Identifying the biography's 常州界狼山 with the hill at 南通 is the editor's reading for the map, not a cited identification; the anchor asserts no historical coordinate.

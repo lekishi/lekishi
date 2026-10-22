@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The monks of 越州's 龍興寺 invite 鑒眞 to lecture on the vinaya and confer the precepts; 杭州, 湖州 and 宣州 then invite him in turn, and he returns to 阿育王寺.
+types: [exchange]
+date:
+  value: "744"
+  calendar: chinese_lunisolar
+  as_written: 天寶三載，歲次甲申
+  cite:
+    - id: yuezhou-lectures-time
+      says: The biography dates the invitation from 越州 to 天寶三載.
+      source: toseiden
+      at: 天寶三載，歲次甲申，越州龍興寺衆僧請大和上講律受戒
+places:
+  - place: yuezhou
+    role: site
+  - place: hangzhou
+    role: site
+  - place: huzhou
+    role: site
+  - place: xuanzhou
+    role: site
+  - place: ayuwang-temple
+    role: end
+participants:
+  - actor: jianzhen
+    role: leader
+cites:
+  places:
+    - id: yuezhou-lectures-places
+      says: The biography names 杭州, 湖州 and 宣州 as inviting him after 越州, and his return to 阿育王寺.
+      source: toseiden
+      at: 更有杭州、湖州、宣州並來請。大和上依次巡遊、開講、受戒，還至鄮山阿育王寺

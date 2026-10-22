@@ -1,5 +1,5 @@
 import { json } from "@sveltejs/kit"
-import { loadServedChapter } from "$lib/atlas/chapter-catalog"
+import { loadServedStories } from "$lib/atlas/chapter-catalog"
 import { SERVED_CHAPTERS } from "$lib/atlas/chapter-registry"
 import { buildSearchIndex } from "$lib/atlas/search-index"
 
@@ -12,7 +12,7 @@ import { buildSearchIndex } from "$lib/atlas/search-index"
 export const prerender = true
 
 export async function GET(): Promise<Response> {
-  const chapters = await Promise.all(SERVED_CHAPTERS.map((served) => loadServedChapter(served.id)))
+  const chapters = await Promise.all(SERVED_CHAPTERS.map((served) => loadServedStories(served.id)))
 
   return json(buildSearchIndex(chapters))
 }

@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  道航, a monk of 安國寺 in 長安 and house monk of 李林宗, brother of the chief minister 李林甫. His
+  remark that the less learned should stay behind provoked 如海's false accusation in 743, and his
+  letters from 李林宗 cleared him.
+types: [person]
+names:
+  - form: 道航
+    lang: lzh
+    script: Hani
+    roman: Daohang
+    scheme: pinyin
+    cite:
+      - id: daohang-name
+        says: The biography names 西京安國寺僧道航 among the monks 榮叡 and 普照 recruited.
+        source: toseiden
+        at: 請西京安國寺僧道航、澄觀
+roles:
+  - role: monk
+    cite:
+      - id: daohang-role
+        says:
+          Under questioning 道航 said he was the house monk of 李林宗, brother of the chief minister
+          李林甫, and that two letters from 李林宗 were with the granary officer.
+        source: toseiden
+        at: 航是宰相李林甫之兄林宗家僧

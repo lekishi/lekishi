@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest"
+import { parse, stringify } from "yaml"
 import { type JsonObject } from "../contract/types"
 import {
   approveEach,
@@ -105,7 +106,9 @@ function history(
 
 const edited = (text: string) => text.replace(/summary: (.*)/, "summary: $1 Edited.")
 
-describe("pnpm approvals", () => {
+// Each test compiles the whole tree several times, which outgrows vitest's
+// 5 s default on a GitHub runner as chapters are added.
+describe("pnpm approvals", { timeout: 30_000 }, () => {
   const digest = compiled(files()).digest
 
   it("compares a stale chapter with the commit that holds the content its approval pins", () => {
@@ -326,6 +329,39 @@ describe("pnpm approvals", () => {
     expect(landfall?.fields.map((field) => field.field)).toEqual([
       "claim_order[0]",
       "claim_order[1]",
+    ])
+  })
+
+  it("reads an added story as one added block, with the first story still paired", () => {
+    // The chapter with its first story only, then with a fixture story added.
+    const withStories = (...added: JsonObject[]) =>
+      edit(files(), MANIFEST, (text) => {
+        const { story, stories, ...manifest } = parse(text) as JsonObject
+        const first = (stories as JsonObject[] | undefined)?.[0] ?? {
+          key: TANG,
+          title: "The embassy",
+          ...(story as JsonObject),
+        }
+
+        return stringify({ ...manifest, stories: [first, ...added] })
+      })
+    const beforeTree = buildTree(withStories())
+    const before = compileChapter(beforeTree, TANG, { preview: true })
+    const afterTree = buildTree(
+      withStories({
+        key: "example-second-story",
+        title: "A second story",
+        summary: "A story that exists only to test the comparison.",
+        span: "753",
+        steps: [{ "yangzhou-invitation-753": "The invitation, told again" }],
+      }),
+    )
+    const after = compileChapter(afterTree, TANG, { preview: true })
+    const changes = compareViews(chapterViews(beforeTree, before), chapterViews(afterTree, after))
+
+    expect(after.digest).not.toBe(before.digest)
+    expect(changes.map((change) => [change.label, change.status, change.file])).toEqual([
+      ["lks:story:example-second-story (a story)", "added", MANIFEST],
     ])
   })
 

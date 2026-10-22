@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 馮崇債 escorts the party with eight hundred of his own soldiers for more than forty days to 萬安州, where the chieftain 馮若芳, who seizes Persian ships, hosts them for three days.
+types: [journey]
+date:
+  value: 749..750
+  mode: window
+  calendar: chinese_lunisolar
+  cite:
+    - id: wananzhou-time
+      says: The biography records the escort after the year at 振州, without a date of its own.
+      source: toseiden
+      at: 別駕馮崇債自備甲兵八百餘人送，經四十餘日，至萬安州
+places:
+  - place: zhenzhou
+    role: start
+  - place: wananzhou
+    role: site
+participants:
+  - actor: jianzhen
+    role: guest
+  - actor: feng-chongzhai
+    role: leader
+  - actor: feng-ruofang
+    role: host
+notes: The biography gives no year between the 748 landfall and 天寶九載 (750) at 韶州; after the year at 振州 this falls in an occurrence window over 749–750.

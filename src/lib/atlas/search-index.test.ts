@@ -35,7 +35,9 @@ describe("the search index", () => {
 
   it("links every entry to a chapter URL with the query that opens it", () => {
     for (const entry of index.entries) {
-      expect(entry.href).toMatch(/^\/chapters\/[\w-]+(\?(event|place|step)=[\w-]+)?$/)
+      expect(entry.href).toMatch(
+        /^\/chapters\/[\w-]+(\?(story=[\w-]+&)?(event|place|step)=[\w-]+)?$/,
+      )
     }
   })
 
@@ -74,5 +76,50 @@ describe("the search index", () => {
 
   it("matches nothing for an empty query", () => {
     expect(searchIndex(index, "  ")).toEqual([])
+  })
+})
+
+describe("a chapter with several stories", () => {
+  it("lists each record once, from the first story that reaches it, and says which story", async () => {
+    const tang = await loadServedChapter(TANG_CHAPTER)
+    // A fixture split of the Tang chapter's own records into two stories.
+    const options = [
+      { key: TANG_CHAPTER, title: "The embassy", window: tang.defaultWindow },
+      { key: "example-second", title: "A second story", window: { start: 753, end: 754 } },
+    ]
+    const moved = new Set(["lks:event:akimeya-landfall-753", "lks:event:naniwa-754"])
+    const first = {
+      ...tang,
+      stories: options,
+      events: tang.events.filter((event) => !moved.has(event.id)),
+    }
+    const second = {
+      ...tang,
+      storyKey: "example-second",
+      stories: options,
+      events: tang.events.filter(
+        (event) => moved.has(event.id) || event.id === "lks:event:dazaifu-entry-753",
+      ),
+    }
+    const built = buildSearchIndex([[first, second]])
+    const entries = (id: string) => built.entries.filter((entry) => entry.id === id)
+
+    expect(built.chapters).toHaveLength(1)
+    expect(entries(TANG_CHAPTER)).toHaveLength(1)
+    expect(entries("lks:event:dazaifu-entry-753")).toHaveLength(1)
+    expect(entries("lks:event:dazaifu-entry-753")[0].detail).toContain("in “The embassy”")
+    expect(entries("lks:event:naniwa-754")[0]).toMatchObject({
+      href: `/chapters/${TANG_CHAPTER}?event=naniwa-754`,
+    })
+    expect(entries("lks:event:naniwa-754")[0].detail).toContain("in “A second story”")
+    expect(
+      built.entries.filter((entry) => entry.kind === "step" && entry.href.includes("story=")),
+    ).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          href: expect.stringMatching(/\?story=example-second&step=\d+$/),
+        }),
+      ]),
+    )
   })
 })

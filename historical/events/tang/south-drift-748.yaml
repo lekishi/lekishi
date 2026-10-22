@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: For fourteen days the ship is driven before the storm. With no water on board the monks chew raw rice they cannot swallow and drink sea water, until rain falls and they catch it in bowls.
+types: [journey]
+date:
+  value: 748-10..748-11
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: 凡在海中經十四日
+  cite:
+    - id: south-drift-time
+      says: The biography gives fourteen days at sea before landfall.
+      source: toseiden
+      at: 凡在海中經十四日，方得著岸
+participants:
+  - actor: jianzhen
+    role: subject
+notes: No place is named between 署風山 and the landfall, so the drift carries no places and no route. The biography's seas of snakes, flying fish and birds, its dreams and its guardian fish are left out of the chapter.
+cites:
+  summary:
+    - id: south-drift-thirst
+      says: The biography records the thirst, the raw rice and the sea water.
+      source: toseiden
+      at: 舟上無水，嚼米，喉乾咽不入，吐不出；飲鹹水，腹卽脹

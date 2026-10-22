@@ -2,15 +2,17 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/lekishi/lekishi/historical/schema/chapter.schema.json",
   "title": "Lekishi chapter manifest",
-  "description": "historical/chapters/<id>.yaml: what a chapter is called, the window it opens on, its story as an ordered list of event and relationship ids, and the owner's approval. The approval pins a digest of the manifest and every record and source it reaches; `pnpm approvals` shows what changed since the last approval and prints the digest. The owner writes the approval; no one else does.",
+  "description": "historical/chapters/<id>.yaml: what a chapter is called, the window it opens on, its story, or its stories, as ordered lists of event and relationship ids, and the owner's approval. The approval pins a digest of the manifest and every record and source it reaches; `pnpm approvals` shows what changed since the last approval and prints the digest. The owner writes the approval; no one else does.",
   "type": "object",
-  "required": ["title", "summary", "window", "story"],
+  "required": ["title", "summary", "window"],
+  "oneOf": [{ "required": ["story"] }, { "required": ["stories"] }],
   "additionalProperties": false,
   "properties": {
     "title": { "type": "string", "minLength": 1, "maxLength": 200 },
     "summary": { "$ref": "common.schema.json#/$defs/text" },
     "window": { "$ref": "common.schema.json#/$defs/date_value" },
     "story": {
+      "description": "The chapter's story, when it has one. A chapter with several writes `stories` instead.",
       "type": "object",
       "required": ["summary", "span", "steps"],
       "additionalProperties": false,
@@ -28,6 +30,38 @@
             "type": "object",
             "additionalProperties": { "type": "string", "minLength": 1, "maxLength": 500 }
           }
+        }
+      }
+    },
+    "stories": {
+      "description": "A chapter's stories, when it has more than one (rfd/0002/CHAPTER_STORIES.adoc). The first is the story the chapter opens on. Each is published as its own story record, `lks:story:<key>`, and one approval covers them all.",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "required": ["key", "title", "summary", "span", "steps"],
+        "additionalProperties": false,
+        "properties": {
+          "key": {
+            "description": "The story's id, `lks:story:<key>`, unique across the project. A chapter that had one story keeps its chapter id as the first story's key, so nothing published under it moves.",
+            "$ref": "common.schema.json#/$defs/name"
+          },
+          "title": {
+            "description": "The story's name in the chapter's story switcher, shorter than its summary.",
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "summary": { "$ref": "common.schema.json#/$defs/text" },
+          "window": {
+            "description": "The window the story opens on, by default its `span`. The first story opens on the chapter's `window` and does not write one. A step wholly outside a story's window is a coda step, and its caption starts \"Coda — \".",
+            "$ref": "common.schema.json#/$defs/date_value"
+          },
+          "span": { "$ref": "common.schema.json#/$defs/date_value" },
+          "coverage": { "$ref": "common.schema.json#/$defs/text" },
+          "notes": { "$ref": "common.schema.json#/$defs/text" },
+          "steps": { "$ref": "#/properties/story/properties/steps" }
         }
       }
     },

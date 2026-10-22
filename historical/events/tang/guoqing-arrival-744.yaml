@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: From 寧海 the party crosses steep ridges in falling snow, wading knee-deep streams, and reaches 國清寺 at dusk on the following day.
+types: [journey]
+date:
+  value: 744..748
+  mode: window
+  calendar: chinese_lunisolar
+  cite:
+    - id: guoqing-arrival-time
+      says: The biography records the snow crossing and the arrival at 國清寺, without a date of its own.
+      source: toseiden
+      at: 明日度嶺，入［始豐縣］，日暮至國清寺
+places:
+  - place: guoqing-temple
+    role: site
+participants:
+  - actor: jianzhen
+    role: leader
+notes: The biography dates the lectures to 天寶三載 and gives no further year until 天寶七載, so this event is an occurrence window over 744–748, bounded by those two years, rather than a dated instant. The snow suggests winter, which the biography does not state.
+cites:
+  summary:
+    - id: guoqing-arrival-snow
+      says: The biography describes the night crossing in snow.
+      source: toseiden
+      at: 日暮夜暗，澗水没膝，飛雪迷眼

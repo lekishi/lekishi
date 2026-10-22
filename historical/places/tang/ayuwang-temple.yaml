@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 阿育王寺 on 鄮山 in 鄮縣, 明州, where the prefect lodged 鑒眞's party after the 743 wreck and from which he later set out for 福州.
+types: [religious_site]
+names:
+  - form: 阿育王寺
+    lang: lzh
+    script: Hani
+    roman: Ayuwang Si
+    scheme: pinyin
+    cite:
+      - id: ayuwang-temple-name
+        says: The biography records the 明州 prefect lodging the party at 阿育王寺 on the mountain of 鄮縣, a temple with an 阿育王塔.
+        source: toseiden
+        at: 安置鄮縣山阿育王寺，寺有阿育王塔
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [121.739166, 29.849165]
+    notes: Label anchor at the modern 阿育王寺 in 寧波 (Wikidata Q726233). It is not an asserted historical coordinate.
+    cite:
+      - id: ayuwang-temple-anchor
+        says: The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate is asserted.
+        source: wikidata
+        at: Q726233 (P625), revision 2515880590
+notes: The modern temple carries the name; the record does not assert that its buildings stand on the eighth-century site.

@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  普照, a Japanese monk who went to Tang with 榮叡 in 天平五年 (733) to study and invited 鑒眞 with him.
+  The biography records him on the 748 voyage and parting from 鑒眞 at 韶州 in 天寶九載 (750). It
+  records him again joining 吉備真備's ship in 753.
+types: [person]
+names:
+  - form: 普照
+    lang: ja
+    script: Hani
+    roman: Fushō
+    scheme: hepburn
+    note: The Japanese reading is an editorial reading aid, not a claim about his own pronunciation.
+    cite:
+      - id: fusho-name
+        says:
+          The biography names 普照 with 榮叡 as the monks who went to Tang with the embassy of 天平五年 to
+          study.
+        source: toseiden
+        at: 日本［國］天平五年，歲次癸酉，沙門榮叡、普照等隨遣唐大使丹墀真人廣成，至唐國留學
+roles:
+  - role: monk
+    note: A student monk (留學) in Tang from 733; the biography last places him on 吉備真備's ship in 753.
+    date:
+      value: 733..753
+      mode: duration
+      calendar: chinese_lunisolar
+      as_written: 天平五年 至唐國留學; 十三日，普照師從越餘姚郡來，乘吉備副使舟
+    cite:
+      - id: fusho-role
+        says:
+          The biography records his arrival as a student monk in 天平五年 and, in 天寶十二載, his coming
+          from 越州餘姚郡 to board 吉備真備's ship.
+        source: toseiden
+        at: 天平五年…至唐國留學; 十三日，普照師從越餘姚郡來，乘吉備副使舟
+notes:
+  The chronicle's death notice for 鑒眞 names the inviting monks as 榮叡 and 業行, not 普照. The
+  invitation event keeps both accounts rather than choosing between them.

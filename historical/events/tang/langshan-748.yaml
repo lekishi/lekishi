@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: Going down from 新河, the ship reaches 狼山 on the border of 常州, where high wind and waves turn it about among three hills.
+types: [journey]
+date:
+  value: 748-06..748-07
+  mode: window
+  calendar: chinese_lunisolar
+  cite:
+    - id: langshan-time
+      says: The biography tells the passage at 狼山 after the departure of 六月廿七日 and before the next day's wind.
+      source: toseiden
+      at: 乘舟下至常州界［狼］山，風急浪高，旋轉三山
+places:
+  - place: langshan
+    role: waypoint
+participants:
+  - actor: jianzhen
+    role: leader

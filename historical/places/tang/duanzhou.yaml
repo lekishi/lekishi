@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 端州, where 榮叡 died at 龍興寺 on the way from 桂州 to 廣州.
+types: [region]
+names:
+  - form: 端州
+    lang: lzh
+    script: Hani
+    roman: Duanzhou
+    scheme: pinyin
+    cite:
+      - id: duanzhou-name
+        says: The biography records the party going on to 端州龍興寺, where 榮叡 died.
+        source: toseiden
+        at: 下桂江，七日至梧州，次至端州龍興寺。榮叡師奄然遷化
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [112.466666666, 23.05]
+    notes: Label anchor at the modern city of 肇慶 (Wikidata Q59164), whose central district keeps the name 端州. It is not an asserted historical coordinate.
+    cite:
+      - id: duanzhou-anchor
+        says: The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate is asserted.
+        source: wikidata
+        at: Q59164 (P625), revision 2557777371

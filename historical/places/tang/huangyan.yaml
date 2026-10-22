@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 黃岩縣, the county 鑒眞's party passed through on the overland journey toward 福州 before taking the 永嘉郡 road to 禪林寺, where the commissioner's men caught up with him.
+types: [settlement]
+names:
+  - form: 黃岩縣
+    lang: lzh
+    script: Hani
+    roman: Huangyan Xian
+    scheme: pinyin
+    cite:
+      - id: huangyan-name
+        says: The biography records the party passing through 臨海縣 and reaching 黃岩縣 before taking the 永嘉郡 road.
+        source: toseiden
+        at: 遂至黃岩縣；便取永嘉郡路，到禪林寺宿
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [121.25867, 28.64815]
+    notes: Label anchor at the modern 黃岩區 of 台州 (Wikidata Q1027910). It is not an asserted historical coordinate.
+    cite:
+      - id: huangyan-anchor
+        says: The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate is asserted.
+        source: wikidata
+        at: Q1027910 (P625), revision 2526542437
+notes: 禪林寺, where he was stopped, lay on the 永嘉郡 road beyond 黃岩; its site is not identified here and it stays in the event's notes.

@@ -75,6 +75,7 @@ describe("the chapter cards' release statements", () => {
       title: "An example",
       summary: "",
       window: { start: 750, end: 754 },
+      stories: [],
       served: true,
     }
     const draft = draftStatement({ ...entry, state: "draft", approval: null })

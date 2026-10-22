@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "福州, where 鑒眞 sent 法進 to buy a ship after the 744 lectures. The party never reached it: the overland journey was stopped at 禪林寺 on the road to 溫州."
+types: [region]
+names:
+  - form: 福州
+    lang: lzh
+    script: Hani
+    roman: Fuzhou
+    scheme: pinyin
+    cite:
+      - id: fuzhou-name
+        says: The biography records 鑒眞 sending 法進 with light goods to 福州 to buy a ship and provisions.
+        source: toseiden
+        at: 乃遣僧法進及二近事，將輕貨往福州買舟，具辦糧用
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [119.291666666, 26.076944444]
+    notes: Label anchor at the modern city of 福州 (Wikidata Q68481). It is not an asserted historical coordinate.
+    cite:
+      - id: fuzhou-anchor
+        says: The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate is asserted.
+        source: wikidata
+        at: Q68481 (P625), revision 2526613483
+notes: "An intended port only: the record asserts no arrival of 鑒眞 there."

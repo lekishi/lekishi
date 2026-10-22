@@ -65,9 +65,59 @@ function chapterName(chapter: Chapter): string {
   return chapterPresentation(chapter.id)?.name ?? chapter.title
 }
 
-/** The entries for one chapter, in the story's order where the story names them. */
-export function chapterEntries(chapter: Chapter, name: ChapterNamer = chapterName): SearchEntry[] {
+/**
+ * The entries for one chapter, in the story's order where the story names them.
+ *
+ * A chapter with several stories is given as each story's view, the one it
+ * opens on first. A record is listed once, from the first story that reaches
+ * it, which is the story its link opens when the reader is in none of the
+ * stories that hold it; a chapter with several stories says which story that
+ * is in the row (rfd/0002/CHAPTER_STORIES.adoc).
+ */
+export function chapterEntries(
+  chapter: Chapter | readonly Chapter[],
+  name: ChapterNamer = chapterName,
+): SearchEntry[] {
+  const stories = storiesOf(chapter)
+  const first = stories[0]
+  const seen = new Set<string>()
+
+  return [
+    {
+      chapterId: first.id,
+      kind: "chapter",
+      id: first.id,
+      title: name(first),
+      detail: windowLabel(first.defaultWindow),
+      names: [name(first), first.title],
+      text: [first.summary],
+      href: chapterHref(first.id),
+      disputed: false,
+      year: first.defaultWindow.start,
+    },
+    ...stories.flatMap((view) => storyEntries(view, stories.length > 1, seen)),
+  ]
+}
+
+/** A chapter given as one view, or as every story's. */
+function storiesOf(chapter: Chapter | readonly Chapter[]): readonly Chapter[] {
+  return "storyKey" in chapter ? [chapter] : chapter
+}
+
+/** One story's entries, leaving out the records an earlier story listed. */
+function storyEntries(chapter: Chapter, several: boolean, seen: Set<string>): SearchEntry[] {
   const href = chapterHref(chapter.id)
+  const first = chapter.storyKey === chapter.stories[0]?.key
+  const storyParam = first ? "" : `story=${encodeURIComponent(chapter.storyKey)}&`
+  const where = several
+    ? `in “${chapter.stories.find((story) => story.key === chapter.storyKey)?.title ?? chapter.storyKey}”`
+    : null
+  const unseen = <T extends { readonly id: string }>(records: readonly T[]) =>
+    records.filter((record) => {
+      if (seen.has(record.id)) return false
+      seen.add(record.id)
+      return true
+    })
   const places = new Map(chapter.places.map((place) => [place.id, place]))
   const actors = new Map(chapter.actors.map((actor) => [actor.id, actor]))
   const storyOrder = new Map(chapter.story.map((step, index) => [step.recordId, index]))
@@ -78,22 +128,9 @@ export function chapterEntries(chapter: Chapter, name: ChapterNamer = chapterNam
       a.occurrence.startYear - b.occurrence.startYear,
   )
 
-  const entries: SearchEntry[] = [
-    {
-      chapterId: chapter.id,
-      kind: "chapter",
-      id: chapter.id,
-      title: name(chapter),
-      detail: windowLabel(chapter.defaultWindow),
-      names: [name(chapter), chapter.title],
-      text: [chapter.summary],
-      href,
-      disputed: false,
-      year: chapter.defaultWindow.start,
-    },
-  ]
+  const entries: SearchEntry[] = []
 
-  for (const event of byStory) {
+  for (const event of unseen(byStory)) {
     const place = event.placement.label
 
     entries.push({
@@ -104,6 +141,7 @@ export function chapterEntries(chapter: Chapter, name: ChapterNamer = chapterNam
       detail: [
         windowLabel({ start: event.occurrence.startYear, end: event.occurrence.endYear }),
         place,
+        where,
       ]
         .filter((part) => part !== null && part !== "")
         .join(" · "),
@@ -129,7 +167,7 @@ export function chapterEntries(chapter: Chapter, name: ChapterNamer = chapterNam
     })
   }
 
-  for (const place of chapter.places) {
+  for (const place of unseen(chapter.places)) {
     const placed = byStory.find((event) => event.placeIds.includes(place.id))
 
     entries.push({
@@ -140,6 +178,7 @@ export function chapterEntries(chapter: Chapter, name: ChapterNamer = chapterNam
       detail: [
         place.aliases.find((alias) => alias !== place.label && /\p{Script=Latin}/u.test(alias)),
         place.position === null ? "location not identified" : null,
+        where,
       ]
         .filter((part): part is string => typeof part === "string")
         .join(" · "),
@@ -151,10 +190,10 @@ export function chapterEntries(chapter: Chapter, name: ChapterNamer = chapterNam
     })
   }
 
-  for (const actor of chapter.actors) {
+  for (const actor of unseen(chapter.actors)) {
     // An actor has no card of its own yet, so a person or a state opens the
     // first event the story gives them, and the row says so.
-    const first = byStory.find((event) =>
+    const opens = byStory.find((event) =>
       event.participants.some((participant) => participant.actorId === actor.id),
     )
     const romanized = actor.aliases.find(
@@ -166,14 +205,14 @@ export function chapterEntries(chapter: Chapter, name: ChapterNamer = chapterNam
       kind: actor.types.includes("person") ? "person" : "state",
       id: actor.id,
       title: actor.label,
-      detail: [romanized, first === undefined ? null : `first in “${first.title}”`]
+      detail: [romanized, opens === undefined ? null : `first in “${opens.title}”`]
         .filter((part): part is string => typeof part === "string")
         .join(" · "),
       names: [actor.label, ...actor.aliases],
       text: [],
-      href: first === undefined ? href : `${href}?event=${shortId(first.id)}`,
+      href: opens === undefined ? href : `${href}?event=${shortId(opens.id)}`,
       disputed: false,
-      year: first?.occurrence.startYear ?? null,
+      year: opens?.occurrence.startYear ?? null,
     })
   }
 
@@ -189,14 +228,21 @@ export function chapterEntries(chapter: Chapter, name: ChapterNamer = chapterNam
       kind: "step",
       id: step.recordId,
       title: step.caption,
-      detail: `Story step ${index + 1}${
+      detail: [
+        `Story step ${index + 1}`,
+        where,
         relationship?.validity
-          ? ` · ${windowLabel({ start: relationship.validity.startYear, end: relationship.validity.endYear })}`
-          : ""
-      }`,
+          ? windowLabel({
+              start: relationship.validity.startYear,
+              end: relationship.validity.endYear,
+            })
+          : null,
+      ]
+        .filter((part) => part !== null)
+        .join(" · "),
       names: [],
       text: [step.caption, relationship?.summary ?? ""],
-      href: `${href}?step=${index + 1}`,
+      href: `${href}?${storyParam}step=${index + 1}`,
       disputed: false,
       year: relationship?.validity?.startYear ?? null,
     })
@@ -210,23 +256,34 @@ export function chapterEntries(chapter: Chapter, name: ChapterNamer = chapterNam
  * published site (RFD 6) is named by its manifest, which only the server knows.
  */
 export function buildSearchIndex(
-  chapters: readonly Chapter[],
+  chapters: readonly (Chapter | readonly Chapter[])[],
   name: ChapterNamer = chapterName,
 ): SearchIndex {
-  const ordered = [...chapters].sort((a, b) => a.defaultWindow.start - b.defaultWindow.start)
+  const ordered = chapters
+    .map((chapter) => storiesOf(chapter))
+    .sort((a, b) => a[0].defaultWindow.start - b[0].defaultWindow.start)
 
   return {
     version: 1,
-    chapters: ordered.map((chapter) => ({
-      id: chapter.id,
-      name: name(chapter),
-      window: windowLabel(chapter.defaultWindow),
-      href: chapterHref(chapter.id),
-      start: chapter.defaultWindow.start,
-      home: chapter.homeView,
-      events: chapter.events.filter((event) => !event.coda).length,
-    })),
-    entries: ordered.flatMap((chapter) => chapterEntries(chapter, name)),
+    chapters: ordered.map((stories) => {
+      const chapter = stories[0]
+      const inWindow = new Set(
+        stories.flatMap((view) =>
+          view.events.filter((event) => !event.coda).map((event) => event.id),
+        ),
+      )
+
+      return {
+        id: chapter.id,
+        name: name(chapter),
+        window: windowLabel(chapter.defaultWindow),
+        href: chapterHref(chapter.id),
+        start: chapter.defaultWindow.start,
+        home: chapter.homeView,
+        events: inWindow.size,
+      }
+    }),
+    entries: ordered.flatMap((stories) => chapterEntries(stories, name)),
   }
 }
 

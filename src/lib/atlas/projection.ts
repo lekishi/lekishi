@@ -33,6 +33,7 @@ import type {
   Relationship,
   RelationshipEndpoint,
   Source,
+  StoryOption,
   StoryStep,
   TimeWindow,
 } from "./domain"
@@ -73,6 +74,12 @@ export type ProjectionResult = { ok: true; chapter: Chapter } | { ok: false; err
  */
 export type ChapterCoverage = {
   readonly defaultWindow: TimeWindow
+  /**
+   * The chapter's stories in the manifest's order, as the chapter index lists
+   * them (rfd/0002/CHAPTER_STORIES.adoc). Without the list, the chapter
+   * publishes exactly one story, which opens on `defaultWindow`.
+   */
+  readonly stories?: readonly StoryOption[]
 }
 
 const POINT_INTERPRETATIONS: ReadonlyMap<string, PointPlacement> = new Map([
@@ -109,12 +116,166 @@ type PublishedRevision = {
   readonly content: JsonObject
 }
 
+export type StoriesResult = { ok: true; chapters: Chapter[] } | { ok: false; errors: string[] }
+
+/**
+ * Projects one story of a chapter, by default the one it opens on.
+ *
+ * A chapter with several stories is read one story at a time: the view holds
+ * that story's steps and the events, relationships, places, people and sources
+ * it reaches, opens on the story's window, and checks its coda steps against
+ * that window. Everything else the chapter publishes stays out of the view, so
+ * the 743 coast never crowds the 753 landfall.
+ */
 export function projectChapter(
   name: string,
   documents: JsonValue[],
   sets: JsonValue[],
   coverage: ChapterCoverage,
+  storyKey?: string,
 ): ProjectionResult {
+  const projected = projectViews(name, documents, sets, coverage, storyKey ?? null)
+
+  return projected.ok ? { ok: true, chapter: projected.chapters[0] } : projected
+}
+
+/** Projects every story of a chapter, in the manifest's order. */
+export function projectStories(
+  name: string,
+  documents: JsonValue[],
+  sets: JsonValue[],
+  coverage: ChapterCoverage,
+): StoriesResult {
+  return projectViews(name, documents, sets, coverage, undefined)
+}
+
+const STORY_PREFIX = "lks:story:"
+
+/**
+ * The stories a chapter publishes, matched to the stories its index lists. A
+ * chapter without a list publishes one story, named by its record and opening
+ * on the chapter's window; its title is the chapter's.
+ */
+function storyOptions(
+  stories: PublishedRevision[],
+  coverage: ChapterCoverage,
+  errors: string[],
+): { option: StoryOption; record: PublishedRevision }[] {
+  if (coverage.stories === undefined) {
+    if (stories.length > 1) {
+      errors.push(
+        `the chapter publishes ${stories.length} stories, but its index lists none, so the atlas cannot order them`,
+      )
+      return []
+    }
+
+    return stories.map((record) => ({
+      option: {
+        key: record.recordId.slice(STORY_PREFIX.length),
+        title: chapterTitle(stringOrUndefined(record.content["summary"]) ?? ""),
+        window: coverage.defaultWindow,
+      },
+      record,
+    }))
+  }
+
+  // A chapter that publishes no story at all says so once, below.
+  if (stories.length === 0) return []
+
+  const byId = new Map(stories.map((record) => [record.recordId, record]))
+  const listed = new Set(coverage.stories.map((option) => `${STORY_PREFIX}${option.key}`))
+
+  for (const record of stories.filter((candidate) => !listed.has(candidate.recordId))) {
+    errors.push(`${record.recordId} is published, but the chapter's index does not list it`)
+  }
+
+  return coverage.stories.flatMap((option) => {
+    const record = byId.get(`${STORY_PREFIX}${option.key}`)
+
+    if (record === undefined) {
+      errors.push(
+        `the chapter's index lists the story ${option.key}, which it publishes no revision of`,
+      )
+      return []
+    }
+
+    return [{ option, record }]
+  })
+}
+
+/**
+ * The records each story reaches: the records its steps name, and the places
+ * and people those name, with the places the chapter's overlays anchor them to.
+ * A record no story reaches belongs to the chapter's first story, where a record
+ * the manifest only `include`s has always been shown, and where an event no
+ * story captions fails as it always has.
+ */
+function storyReach(
+  name: string,
+  stories: { record: PublishedRevision }[],
+  published: PublishedRevision[],
+): Set<string>[] {
+  const byId = new Map(published.map((entry) => [entry.recordId, entry]))
+  const overlays = overlayDefinitions(name)
+  const extend = (reached: Set<string>, ids: (string | undefined)[]) => {
+    for (const id of ids) {
+      const entry = id === undefined ? undefined : byId.get(id)
+
+      if (entry === undefined) continue
+
+      reached.add(entry.recordId)
+
+      if (entry.kind === "event") {
+        for (const reference of listOf(entry.content["places"]).map(objectOf)) {
+          add(reached, stringOrUndefined(reference["place_id"]))
+        }
+
+        for (const participant of listOf(entry.content["participants"]).map(objectOf)) {
+          add(reached, stringOrUndefined(participant["actor_id"]))
+        }
+      }
+
+      if (entry.kind === "relationship") {
+        for (const end of ["from", "to"] as const) {
+          const endId = stringOrUndefined(entry.content[end])
+
+          add(reached, endId)
+          add(reached, endId === undefined ? undefined : overlays.actorAnchors[endId])
+          add(reached, overlays.endAnchors[entry.recordId]?.[end])
+        }
+      }
+    }
+
+    return reached
+  }
+  const add = (reached: Set<string>, id: string | undefined) => {
+    if (id !== undefined && byId.has(id)) reached.add(id)
+  }
+  const reach = stories.map(({ record }) =>
+    extend(
+      new Set(),
+      listOf(record.content["steps"]).map((step) => stringOrUndefined(objectOf(step)["record_id"])),
+    ),
+  )
+  const reachedByAny = new Set(reach.flatMap((reached) => [...reached]))
+
+  extend(
+    reach[0],
+    published
+      .filter((entry) => entry.kind !== "story" && !reachedByAny.has(entry.recordId))
+      .map((entry) => entry.recordId),
+  )
+
+  return reach
+}
+
+function projectViews(
+  name: string,
+  documents: JsonValue[],
+  sets: JsonValue[],
+  coverage: ChapterCoverage,
+  only: string | null | undefined,
+): StoriesResult {
   const errors: string[] = []
   const records = documents.filter(
     (document): document is JsonObject => isObject(document) && document["document"] === "record",
@@ -123,7 +284,73 @@ export function projectChapter(
   const published = records
     .map((record) => publishedRevisionOf(record, current, errors))
     .filter((entry): entry is PublishedRevision => entry !== null)
+  const reported = errors.length
+  const stories = storyOptions(
+    published.filter((entry) => entry.kind === "story"),
+    coverage,
+    errors,
+  )
 
+  if (stories.length === 0) {
+    // Unless the stories are there and only cannot be ordered.
+    if (errors.length === reported) {
+      errors.push(
+        "the chapter publishes no story record, so the atlas has no presentation order or captions",
+      )
+    }
+
+    return { ok: false, errors }
+  }
+
+  const reach = storyReach(name, stories, published)
+  const options = stories.map((story) => story.option)
+  const openingSummary = stringOrUndefined(stories[0].record.content["summary"]) ?? ""
+  const chosen = only === null ? 0 : options.findIndex((option) => option.key === only)
+  const wanted = only === undefined ? stories.map((_, index) => index) : [chosen]
+  const chapters: Chapter[] = []
+
+  if (chosen === -1 && only !== undefined) {
+    return { ok: false, errors: [`the chapter has no story ${only}`] }
+  }
+
+  for (const index of wanted) {
+    const story = stories[index]
+    const view = published.filter(
+      (entry) => entry.recordId === story.record.recordId || reach[index].has(entry.recordId),
+    )
+    const projected = projectView(
+      name,
+      view,
+      documents,
+      sets,
+      current,
+      story.option,
+      options,
+      chapterTitle(openingSummary),
+    )
+
+    if (projected.ok) {
+      chapters.push(projected.chapter)
+    } else {
+      errors.push(...projected.errors.filter((error) => !errors.includes(error)))
+    }
+  }
+
+  return errors.length > 0 ? { ok: false, errors } : { ok: true, chapters }
+}
+
+function projectView(
+  name: string,
+  published: PublishedRevision[],
+  documents: JsonValue[],
+  sets: JsonValue[],
+  current: Map<string, CurrentPublished>,
+  option: StoryOption,
+  options: readonly StoryOption[],
+  chapterName: string,
+): ProjectionResult {
+  const errors: string[] = []
+  const coverage: ChapterCoverage = { defaultWindow: option.window }
   const story = published.find((entry) => entry.kind === "story")
   const places = new Map<string, Place>()
 
@@ -202,13 +429,18 @@ export function projectChapter(
     return { ok: false, errors }
   }
 
+  const eventIds = new Set(events.map((event) => event.id))
+  const overlays = overlayDefinitions(name)
+
   return {
     ok: true,
     chapter: {
       id: name,
-      title: chapterTitle(summary),
+      title: chapterName,
       summary,
       defaultWindow: coverage.defaultWindow,
+      storyKey: option.key,
+      stories: options,
       homeView: boundingBoxCenter(mapped),
       places: [...places.values()],
       actors: [...actors.values()],
@@ -217,7 +449,15 @@ export function projectChapter(
       sources,
       story: storySteps,
       publication,
-      overlays: overlayDefinitions(name),
+      // The overlays this story can draw: a journey with two of its stops in
+      // the story, and a diorama of one of its places.
+      overlays: {
+        ...overlays,
+        journeys: overlays.journeys.filter(
+          (journey) => journey.stops.filter((stop) => eventIds.has(stop.eventId)).length >= 2,
+        ),
+        dioramas: overlays.dioramas.filter((diorama) => places.has(diorama.placeId)),
+      },
     },
   }
 }

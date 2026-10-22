@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 榮叡 and 普照 come to 鑒眞 at 大明寺 in 揚州, where he is lecturing on the vinaya, and ask him to go east to transmit the precepts. When none of his monks answers, he says he will go himself; 祥彥 says he will follow, and twenty-one monks, 思託 among them, vow to go with him.
+types: [mission, exchange]
+date:
+  value: 742-10
+  calendar: chinese_lunisolar
+  as_written: 唐天寶元載冬十月（東征傳）; 天寶二載（續日本紀）
+  cite:
+    - id: daming-invitation-time
+      says: The biography dates the two monks' arrival in 揚州 to the tenth month of 天寶元載, when 鑒眞 was lecturing at 大明寺.
+      source: toseiden
+      at: 是歲，唐天寶元載冬十月
+    - id: daming-invitation-chronicle-time
+      says: The chronicle's death notice for 鑒眞 dates the request to 天寶二載.
+      role: conflicting
+      source: shoku-nihongi
+      at: 卷第廿四 天平寶字七年五月戊申
+      quote: 天寶二載。留學僧榮叡業行等白和上曰。佛法東流至於本國。雖有其教無人傳授。幸願。和上東遊興化。
+places:
+  - place: yangzhou
+    role: site
+    note: The biography names 大明寺 within 揚州.
+participants:
+  - actor: jianzhen
+    role: host
+  - actor: yoei
+    role: guest
+  - actor: fusho
+    role: guest
+    note: Named in the biography; the chronicle's notice names 業行 instead, which the event keeps as an alternative claim rather than a participant.
+  - actor: xiangyan
+    role: participant
+  - actor: situo
+    role: participant
+notes: The biography's speeches are its own composition; the event publishes the request, his consent and the vow of the twenty-one monks, which the biography reports, and not the words as spoken.
+dispute:
+  status: disputed
+  summary: The biography dates the request to 天寶元載 (742) and names 榮叡 and 普照; the chronicle's notice dates it to 天寶二載 (743) and names 榮叡 and 業行. The event publishes the biography's month and keeps the chronicle's account as a conflicting claim.
+cites:
+  participants:
+    - id: daming-invitation-participants
+      says: The biography records 榮叡 and 普照 coming to 大明寺, 祥彥's answer, and the twenty-one monks, 思託 among them, who vowed to go.
+      source: toseiden
+      at: 榮叡、普照至大明寺，頂禮大和上足下; 爰有僧道興、道航…思託等二十一人，願同心隨大和上去
+    - id: daming-invitation-chronicle-participants
+      says: The chronicle's notice names the monks who asked as 榮叡 and 業行.
+      role: alternative
+      source: shoku-nihongi
+      at: 卷第廿四 天平寶字七年五月戊申

@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: In the spring of 天寶七載 榮叡 and 普照 come from 同安郡 to 鑒眞 at 崇福寺, and a ship and supplies are prepared as in 天寶二載. Fourteen monks and lay followers, eighteen sailors and others, thirty-five in all, leave 崇福寺 on the twenty-seventh day of the sixth month and board at 揚州's 新河.
+types: [journey]
+date:
+  value: 748-06-27
+  calendar: chinese_lunisolar
+  as_written: 天寶七載…六月廿七日
+  cite:
+    - id: chongfu-departure-time
+      says: The biography dates the departure from 崇福寺 to the twenty-seventh day of the sixth month of 天寶七載.
+      source: toseiden
+      at: 六月廿七日，發自崇福寺
+places:
+  - place: yangzhou
+    role: start
+    note: The biography names 崇福寺 and 新河 within 揚州.
+participants:
+  - actor: jianzhen
+    role: leader
+  - actor: xiangyan
+    role: participant
+  - actor: yoei
+    role: participant
+  - actor: fusho
+    role: participant
+  - actor: situo
+    role: participant
+cites:
+  participants:
+    - id: chongfu-departure-participants
+      says: The biography lists 祥彥, 榮叡, 普照 and 思託 among the fourteen and gives thirty-five people in all.
+      source: toseiden
+      at: 同行人僧祥彥、神侖、光演、頓悟、道祖、如高、德清、日悟、榮叡、普照、思託等道俗一十四人

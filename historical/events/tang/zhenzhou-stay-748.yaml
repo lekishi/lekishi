@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The party stays a year at 振州, where the monks give their own robes and goods to rebuild the ruined Buddha hall of 大雲寺.
+types: [process]
+date:
+  value: 748..749
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: 住一年造了
+  cite:
+    - id: zhenzhou-stay-time
+      says: The biography records the year it took to rebuild the hall.
+      source: toseiden
+      at: 其寺佛殿壞廢，衆僧各捨衣物造佛殿，住一年造了
+places:
+  - place: zhenzhou
+    role: site
+participants:
+  - actor: jianzhen
+    role: leader

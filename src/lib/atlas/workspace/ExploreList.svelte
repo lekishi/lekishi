@@ -11,6 +11,7 @@
   import EventRow from "./EventRow.svelte"
   import Journal from "./Journal.svelte"
   import SourceList from "./SourceList.svelte"
+  import StoryChoice from "./StoryChoice.svelte"
 
   /**
    * The non-map list (RFD 5's `ExploreList`): the story as a journal, the
@@ -21,6 +22,9 @@
    * Search covers the whole chapter, not only the window: a result outside the
    * window says so, and selecting it keeps its card with the outside-window
    * notice. A person filter (from the pennants) narrows the events to theirs.
+   *
+   * A chapter with several stories lists them above the journal, and the
+   * journal, the events and the sources are the chosen story's.
    */
   let {
     chapter,
@@ -32,6 +36,7 @@
     onSelect,
     onJump,
     onClearPerson,
+    onStory = () => {},
   }: {
     chapter: Chapter
     scene: AtlasScene
@@ -43,6 +48,8 @@
     onSelect: (eventId: string) => void
     onJump: (index: number) => void
     onClearPerson: () => void
+    /** Opens another of the chapter's stories, by its key. */
+    onStory?: (key: string) => void
   } = $props()
 
   const searching = $derived(query.trim() !== "")
@@ -83,6 +90,9 @@
   {#snippet children(id)}
     <div class="flex h-full min-h-0 flex-col" data-testid="atlas-explore-{id}">
       {#if id === "story"}
+        {#if chapter.stories.length > 1}
+          <StoryChoice stories={chapter.stories} current={chapter.storyKey} {onStory} />
+        {/if}
         <div class="-mr-2 min-h-0 flex-1 overflow-y-auto pr-2">
           <Journal steps={chapter.story} current={atlasState.storyStep} {onJump} />
         </div>

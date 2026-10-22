@@ -1,5 +1,6 @@
 import { DRAFT_CHAPTERS, loadDraftBundle } from "virtual:lekishi-drafts"
-import { projectChapterContent } from "$lib/atlas/chapter-catalog"
+import { projectChapterStories } from "$lib/atlas/chapter-catalog"
+import { coverageOf } from "$lib/atlas/chapter-registry"
 import type { ChapterCard, ChapterHeading } from "$lib/atlas/chapters"
 import { chapterHref } from "$lib/atlas/chapters"
 import type { Chapter } from "$lib/atlas/domain"
@@ -18,6 +19,8 @@ import { MEMBER_DRAFT_SCOPE, draftStatement } from "$lib/atlas/release"
 /** A member's draft: the projected chapter and what its page states about it. */
 export type MemberDraft = {
   readonly chapter: Chapter
+  /** Every story of the chapter, `chapter` first. */
+  readonly stories: Chapter[]
   readonly heading: ChapterHeading
   readonly scope: string
 }
@@ -29,11 +32,11 @@ export function memberDraft(id: string): MemberDraft | undefined {
   if (manifest === undefined || bundle === undefined) return undefined
 
   const statement = draftStatement(manifest, MEMBER_DRAFT_SCOPE)
+  const stories = projectChapterStories(id, bundle.documents, bundle.sets, coverageOf(manifest))
 
   return {
-    chapter: projectChapterContent(id, bundle.documents, bundle.sets, {
-      defaultWindow: manifest.window,
-    }),
+    chapter: stories[0],
+    stories,
     heading: {
       name: manifest.title,
       decision: statement.decision,
@@ -57,9 +60,12 @@ export function memberDraftCards(): ChapterCard[] {
   }))
 }
 
-/** Every draft, projected, for the members' search index. */
-export function memberDraftChapters(): Chapter[] {
-  return DRAFT_CHAPTERS.flatMap((manifest) => memberDraft(manifest.id)?.chapter ?? [])
+/** Every draft, projected story by story, for the members' search index. */
+export function memberDraftChapters(): Chapter[][] {
+  return DRAFT_CHAPTERS.flatMap((manifest) => {
+    const draft = memberDraft(manifest.id)
+    return draft === undefined ? [] : [draft.stories]
+  })
 }
 
 /** A draft's display name, its manifest's title, for the members' search index. */

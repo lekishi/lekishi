@@ -51,11 +51,13 @@ export function mountAtlas(
   chapter: Chapter,
   heading?: AtlasHeading,
   address?: AtlasAddress,
+  stories?: readonly Chapter[],
 ): AtlasHandle {
   const component = mount(AtlasWorkspace, {
     target: root,
     props: {
       chapter,
+      stories: stories ?? [chapter],
       name: heading?.name ?? chapter.title,
       decision: heading?.decision ?? "",
       search: address?.search ?? "",

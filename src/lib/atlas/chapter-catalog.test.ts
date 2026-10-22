@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { listChapters, loadChapter } from "../historical/chapter"
+import { chapterBundle, listChapters, loadChapter } from "../historical/chapter"
 import { loadChapterContent, loadServedChapter, projectChapterContent } from "./chapter-catalog"
 import {
   QIN_CHAPTER,
@@ -22,9 +22,33 @@ import { projectChapter } from "./projection"
  * fails instead of rendering nothing.
  */
 
-/** The windows the two manifests write, in astronomical ordinals (233 BCE is -232). */
-const TANG_COVERAGE = { defaultWindow: { start: 750, end: 754 } }
-const QIN_COVERAGE = { defaultWindow: { start: -232, end: -225 } }
+/** The windows the two manifests write, in astronomical ordinals (233 BCE is -232), and their stories. */
+const TANG_COVERAGE = {
+  defaultWindow: { start: 750, end: 754 },
+  stories: [
+    { key: TANG_CHAPTER, title: "The embassy of 750–754", window: { start: 750, end: 754 } },
+    {
+      key: "jianzhen-crossings-742-753",
+      title: "鑒眞's attempts to cross, 742–750",
+      window: { start: 742, end: 750 },
+    },
+  ],
+}
+/**
+ * Qin writes a single `story:`, so its story's title is the manifest's title,
+ * read from the manifest: `scripts/check-worker.mjs` marks that title to build
+ * the chapter stale, and the windows are what this suite pins.
+ */
+const QIN_COVERAGE = {
+  defaultWindow: { start: -232, end: -225 },
+  stories: [
+    {
+      key: QIN_CHAPTER,
+      title: chapterBundle(QIN_CHAPTER).stories[0]?.title ?? "",
+      window: { start: -232, end: -225 },
+    },
+  ],
+}
 
 describe("the served chapter catalog", () => {
   it("loads the Tang chapter through the same path every chapter uses", async () => {

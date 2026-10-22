@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  祥彥, a monk of 鑒眞's community in 揚州 who answered the invitation at 大明寺 by saying he would go
+  if 鑒眞 went. He sailed on the 743 and 748 attempts and died sitting upright on the boat at 吉州
+  on the way back to 揚州.
+types: [person]
+names:
+  - form: 祥彥
+    lang: lzh
+    script: Hani
+    roman: Xiangyan
+    scheme: pinyin
+    cite:
+      - id: xiangyan-name
+        says:
+          The biography names the monk 祥彥 as the one who first answered at 大明寺 and said he would go
+          if 鑒眞 went.
+        source: toseiden
+        at: 良久，有僧祥彥進曰; 大和上若去，彥亦隨去
+roles:
+  - role: monk
+    note: The biography's list of eminent disciples names him as 揚州崇福寺僧祥彥.
+    cite:
+      - id: xiangyan-role
+        says: The biography lists 揚州崇福寺僧祥彥 first among 鑒眞's outstanding disciples.
+        source: toseiden
+        at: 揚州崇福寺僧祥彥、潤州天響寺僧道金

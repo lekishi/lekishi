@@ -8,6 +8,7 @@ import {
   compileAll,
   compileChapter,
   historicalChapterDigestV1,
+  writtenStories,
   type Approval,
   type ChapterBundle,
 } from "./compile"
@@ -128,12 +129,29 @@ function claimsByField(claims: JsonValue | undefined): JsonObject {
   return keyed
 }
 
-/** The comparable part of each record and source, keyed so one chapter's story pairs with another's. */
+/**
+ * The comparable part of each record and source, keyed so one chapter's story
+ * pairs with another's. The story the chapter opens on (`firstStory`, or the
+ * only one) pairs by its role, so a renamed story reads as one changed record;
+ * every further story pairs by its id, so an added story reads as one added
+ * block rather than as changes to the first.
+ */
 export function viewsOf(
   documents: readonly JsonObject[],
   fileOf: (id: string) => string | undefined = () => undefined,
+  firstStory?: string,
 ): Map<string, View> {
   const views = new Map<string, View>()
+  const stories = documents.filter(
+    (document) => document["document"] === "record" && document["kind"] === "story",
+  )
+  const ids = stories.map((story) => String(story["record_id"]))
+  const opening =
+    firstStory !== undefined && ids.includes(`lks:story:${firstStory}`)
+      ? `lks:story:${firstStory}`
+      : ids.length === 1
+        ? ids[0]
+        : undefined
 
   for (const document of documents) {
     if (document["document"] === "record") {
@@ -150,12 +168,12 @@ export function viewsOf(
         value["dispute"] = revision["dispute"]
       }
 
-      // A chapter has one story; pairing it by role keeps a renamed story
-      // readable as one changed record.
-      views.set(document["kind"] === "story" ? STORY : id, {
-        label: document["kind"] === "story" ? `${id} (the story)` : id,
+      const story = document["kind"] === "story"
+
+      views.set(id === opening ? STORY : id, {
+        label: id === opening ? `${id} (the story)` : story ? `${id} (a story)` : id,
         file: fileOf(id),
-        value: document["kind"] === "story" ? { record_id: id, ...value } : value,
+        value: story ? { record_id: id, ...value } : value,
       })
     } else if (document["document"] === "source") {
       const id = String(document["source_id"])
@@ -182,12 +200,22 @@ function cardView(manifest: JsonObject | undefined, file: string): View {
   }
 }
 
+/** The manifest that writes a story, whose key is its chapter id or one of its `stories`. */
+function storyManifest(tree: AuthoringTree, key: string): string | undefined {
+  return (
+    tree.chapters.get(key)?.path ??
+    [...tree.chapters.values()].find((manifest) =>
+      writtenStories(manifest).some((story) => story.key === key),
+    )?.path
+  )
+}
+
 function fileLookup(tree: AuthoringTree): (id: string) => string | undefined {
   return (id) =>
     tree.records.get(id)?.path ??
-    // A chapter's story is written in its manifest.
+    // A chapter's stories are written in its manifest.
     (id.startsWith("lks:story:")
-      ? tree.chapters.get(id.slice("lks:story:".length))?.path
+      ? storyManifest(tree, id.slice("lks:story:".length))
       : undefined) ??
     (id.startsWith("lks:source:")
       ? tree.sources.get(id.slice("lks:source:".length))?.path
@@ -196,7 +224,7 @@ function fileLookup(tree: AuthoringTree): (id: string) => string | undefined {
 
 /** A compiled chapter's views, its card included. */
 export function chapterViews(tree: AuthoringTree, bundle: ChapterBundle): Map<string, View> {
-  const views = viewsOf(bundle.documents, fileLookup(tree))
+  const views = viewsOf(bundle.documents, fileLookup(tree), bundle.stories[0]?.key)
 
   views.set(CARD, cardView(tree.chapters.get(bundle.id)?.data, `chapters/${bundle.id}.yaml`))
 
@@ -398,7 +426,7 @@ export function findBaseline(history: History, bundle: ChapterBundle): Baseline 
     )
     // The hand-written chapters had no card in their content (the card text was
     // code), so the card shows as added: the owner approves it for the first time.
-    const views = viewsOf(documents)
+    const views = viewsOf(documents, undefined, bundle.stories[0]?.key)
 
     return {
       kind: "legacy",

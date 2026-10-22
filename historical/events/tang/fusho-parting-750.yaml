@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: At 韶州 普照 takes leave of 鑒眞 to go north to 阿育王寺 in 明州. Holding his hand, 鑒眞 weeps that he vowed to cross the sea to transmit the precepts and has not reached Japan.
+types: [occurrence]
+date:
+  value: "750"
+  calendar: chinese_lunisolar
+  as_written: 是歲，天寶九載也
+  cite:
+    - id: fusho-parting-time
+      says: The biography dates the parting to 天寶九載.
+      source: toseiden
+      at: 普照師從此辭和上向嶺北去，［至］明州阿育王寺。是歲，天寶九載也
+places:
+  - place: shaozhou
+    role: site
+participants:
+  - actor: jianzhen
+    role: subject
+  - actor: fusho
+    role: subject
+cites:
+  summary:
+    - id: fusho-parting-words
+      says: The biography records 鑒眞's words at the parting.
+      source: toseiden
+      at: 爲傳戒律，發願過海，遂不至日本國，本願不遂

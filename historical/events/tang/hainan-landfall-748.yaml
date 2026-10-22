@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The ship comes to land in the eleventh month, where flowers are open and bamboo shoots growing as in summer. Local guides lead it to an inlet, warning that the people there are dangerous, and three days on it reaches the river mouth of 振州.
+types: [journey]
+date:
+  value: 748-11
+  calendar: chinese_lunisolar
+  as_written: 是時，冬十一月（東征傳）; 七載…漂着日南（續日本紀）
+  cite:
+    - id: hainan-landfall-time
+      says: The biography gives the season of the landfall as the eleventh month of winter.
+      source: toseiden
+      at: 是時，冬十一月，華［蘂］開敷，樹實竹筍，不辨於夏
+    - id: hainan-landfall-chronicle
+      says: The chronicle's notice records that he sailed again in 七載 and was driven ashore; it supports the year 748, not the month or the place.
+      role: supporting
+      source: shoku-nihongi
+      at: 卷第廿四 天平寶字七年五月戊申
+      quote: 至於七載更復渡海。亦遭風浪漂着日南。
+places:
+  - place: zhenzhou
+    role: context
+    note: The landfall itself is unnamed; 振州江口 was three days on.
+participants:
+  - actor: jianzhen
+    role: subject
+notes: The biography gives the month, not the day. The chronicle names the end of the drift 日南; no identification of 日南 with the biography's unnamed landfall or with 振州 is established here, so the event keeps the chronicle's place as an alternative claim and locates neither.
+dispute:
+  status: disputed
+  summary: The biography brings the ship to an unnamed landfall and, three days on, to 振州江口; the chronicle's notice says only that it drifted to 日南. The event follows the biography's sequence and keeps the chronicle's 日南 as an alternative, without reconciling the two places.
+cites:
+  places:
+    - id: hainan-landfall-place
+      says: The biography records the landfall without naming it and the arrival at 振州江口 three days later.
+      source: toseiden
+      at: 夜發，經三日乃到振州江口泊舟
+    - id: hainan-landfall-chronicle-place
+      says: The chronicle's notice names 日南 as where the drift ended and does not mention 振州.
+      role: alternative
+      source: shoku-nihongi
+      at: 卷第廿四 天平寶字七年五月戊申
+      quote: 亦遭風浪漂着日南。

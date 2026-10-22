@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: At 崖州, where 榮叡 and 普照 arrive after more than forty days by sea, the 遊奕大使 張雲 lodges the party at 開元寺. After a fire burns the temple, 鑒眞 rebuilds it with timber the 振州 vice-prefect sends, confers the precepts, and is put on a boat by the magistrate of 澄邁縣.
+types: [founding, exchange]
+date:
+  value: 749..750
+  mode: window
+  calendar: chinese_lunisolar
+  cite:
+    - id: yazhou-time
+      says: The biography records the stay at 崖州 after 萬安州, without a date of its own.
+      source: toseiden
+      at: 榮叡、普照師從海路經四十餘日，到崖州
+places:
+  - place: yazhou
+    role: site
+participants:
+  - actor: jianzhen
+    role: leader
+  - actor: yoei
+    role: participant
+  - actor: fusho
+    role: participant
+  - actor: feng-chongzhai
+    role: participant
+    note: Sent timber for the rebuilding.
+notes: The biography gives no year between the 748 landfall and 天寶九載 (750) at 韶州; after the year at 振州 this falls in an occurrence window over 749–750.
+cites:
+  summary:
+    - id: yazhou-rebuilding
+      says: The biography records the fire, the timber from 振州 and the rebuilding.
+      source: toseiden
+      at: 彼州遭火，寺［並］被燒，和上受大使請造寺。振州別駕聞和上造寺，卽遣諸奴，各令進一椽

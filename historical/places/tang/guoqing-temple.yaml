@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 國清寺 on 天台山, where 鑒眞's party arrived at dusk after crossing the snowbound ridges from 寧海 on the overland journey toward 福州.
+types: [religious_site]
+names:
+  - form: 國清寺
+    lang: lzh
+    script: Hani
+    roman: Guoqing Si
+    scheme: pinyin
+    cite:
+      - id: guoqing-temple-name
+        says: The biography records the party reaching 國清寺 at dusk after crossing the ridge into 始豐縣.
+        source: toseiden
+        at: 明日度嶺，入［始豐縣］，日暮至國清寺
+  - form: 天台山國清寺
+    lang: lzh
+    script: Hani
+    cite:
+      - id: guoqing-temple-name-alt
+        says: The biography also names the temple as 天台山國清寺 when 榮叡 and 普照 give out that the provisions are for its monks.
+        source: toseiden
+        at: 云將供具往天台山國清寺，供養衆僧
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [121.042213888, 29.178844444]
+    notes: Label anchor at 天台山 (Wikidata Q1146118), the mountain the biography names with the temple (天台山國清寺). It is not an asserted historical coordinate.
+    cite:
+      - id: guoqing-temple-anchor
+        says: The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate is asserted.
+        source: wikidata
+        at: Q1146118 (P625), revision 2549927154
+notes: The anchor is the mountain's label point, not the temple's site.

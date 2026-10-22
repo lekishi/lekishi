@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  業行, a Japanese student monk whom the chronicle's death notice for 鑒眞 names with 榮叡 as the monks who
+  asked him to come to Japan in 天寶二載 (743). The biography names 普照 in that place instead.
+types: [person]
+names:
+  - form: 業行
+    lang: ja
+    script: Hani
+    roman: Gyōgyō
+    scheme: hepburn
+    note: The Japanese reading is an editorial reading aid.
+    cite:
+      - id: gyogyo-name
+        says: The chronicle's notice names 留學僧榮叡業行 as the monks who asked 鑒眞 to come to Japan.
+        source: shoku-nihongi
+        at: 卷第廿四 天平寶字七年五月戊申
+        quote: 天寶二載。留學僧榮叡業行等白和上曰。佛法東流至於本國。雖有其教無人傳授。
+roles:
+  - role: monk
+    note: Recorded only in the chronicle's notice; nothing further is published.
+notes:
+  Only the chronicle names him in the invitation. The record publishes the notice's naming and does
+  not decide between it and the biography. The invitation event follows the biography's party and
+  keeps the chronicle's naming as an alternative claim, so no event lists him as a participant; a
+  chapter that shows him reaches him through its `include`.

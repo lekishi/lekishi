@@ -1150,3 +1150,33 @@ test("offers to continue where the reader left off", async ({ page }) => {
   await expect(page).toHaveURL(new RegExp(`${QIN}\\?event=han-nanyang-cession-231(&|$)`))
   await expect(cardTitle(page)).toContainText("Han cedes 南陽")
 })
+
+test("switches between the Tang chapter's stories, with the story in the address", async ({
+  page,
+}) => {
+  const crossings = "jianzhen-crossings-742-753"
+  const option = (key: string) =>
+    page.locator(`[data-testid="atlas-story-option"][data-story="${key}"]`)
+
+  await openChapter(page, TANG)
+  await openExplore(page, "story")
+
+  await expect(page.getByTestId("atlas-story-option")).toHaveCount(2)
+  await expect(option("tang-mission-750-754")).toHaveAttribute("aria-current", "true")
+
+  await option(crossings).click()
+
+  await expect(page).toHaveURL(new RegExp(`[?&]story=${crossings}(&|$)`))
+  await expect(option(crossings)).toHaveAttribute("aria-current", "true")
+  await expect(page.getByTestId("atlas-story-step").first()).toContainText("大明寺")
+
+  // The first story is the chapter's own address, without `?story=`.
+  await page.goBack()
+  await expect(page).not.toHaveURL(/[?&]story=/)
+  await expect(option("tang-mission-750-754")).toHaveAttribute("aria-current", "true")
+
+  // The address alone opens the story it names.
+  await openChapter(page, `${TANG}?story=${crossings}`)
+  await openExplore(page, "story")
+  await expect(option(crossings)).toHaveAttribute("aria-current", "true")
+})

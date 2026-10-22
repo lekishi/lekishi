@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 吉州, where 祥彥 died sitting upright on the boat, reciting the name of Amitābha.
+types: [region]
+names:
+  - form: 吉州
+    lang: lzh
+    script: Hani
+    roman: Jizhou
+    scheme: pinyin
+    cite:
+      - id: jizhou-jian-name
+        says: The biography records the party reaching 吉州, where 祥彥 died on the boat.
+        source: toseiden
+        at: 次至吉州，僧祥彥於舟上端坐
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [114.97927, 27.11716]
+    notes: Label anchor at the modern city of 吉安 (Wikidata Q363262). It is not an asserted historical coordinate.
+    cite:
+      - id: jizhou-jian-anchor
+        says: The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate is asserted.
+        source: wikidata
+        at: Q363262 (P625), revision 2526610557
+notes: Wikidata records the prefecture as Q6844708 without a coordinate; the modern city is the editor's anchor for map readability.

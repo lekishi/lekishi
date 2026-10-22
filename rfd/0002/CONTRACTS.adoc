@@ -189,8 +189,13 @@ boundary is rejected rather than normalized into a 101-year span.
 
 Every time keeps the source's own expression (`source_expression`) next to the
 normalized interval. `calendar` records the source calendar (`julian`,
-`gregorian`, `islamic`, `chinese_lunisolar`, `regnal`, or `unknown`), and
+`gregorian`, `islamic`, `chinese_lunisolar`, `regnal`,
+`mesoamerican_long_count`, or `unknown`), and
 `precision` is `day`, `month`, `year`, `decade`, `century`, or `unspecified`.
+A Long Count date with an interval also carries `correlation`, the Julian day
+number of 0.0.0.0.0 the source's conversion uses (584283 is the GMT
+correlation), or `null` when the source states none; its interval is the
+source's converted civil year, and no other calendar carries a correlation.
 Precision constrains the endpoints: a year-precision claim may not carry a month
 or day, month precision requires a month and forbids a day, and day precision
 requires both. A year-only claim therefore never becomes January 1, and no

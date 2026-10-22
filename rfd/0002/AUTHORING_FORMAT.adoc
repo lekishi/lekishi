@@ -374,14 +374,16 @@ extending v0's fields to adding a `BP` form; a BP age is still converted to a
 civil year by the author, cited to a calibrated or calendar date where the
 source gives one, with the source's own figure in `as_written`.
 
-== Decided: a Mesoamerican Long Count calendar in contract v1 — 2026-10-22
+== Decided: a Mesoamerican Long Count calendar — 2026-10-22
 
-v0's `calendar` enum has no Long Count. The early Americas chapter therefore
-records Chiapa de Corzo Stela 2 and Tres Zapotes Stela C as `julian` years with
-the Long Count and Calendar Round in `as_written`. The owner chose to add the
-calendar in contract v1, with a correlation:
+v0's `calendar` enum had no Long Count, so the early Americas chapter recorded
+Chiapa de Corzo Stela 2 and Tres Zapotes Stela C as `julian` years with the Long
+Count and Calendar Round in `as_written`. The owner chose to add the calendar
+with a correlation. It was first planned for a contract v1; the owner then
+decided that, until the atlas launches, v0 is amended in place (2026-10-22), so
+it is part of v0:
 
-* `calendar: mesoamerican_long_count` joins the enum in v1.
+* `calendar: mesoamerican_long_count` joins the enum.
 * A time whose calendar is `mesoamerican_long_count` and which carries an
   interval must also carry `correlation`: the Julian day number the source's
   conversion uses for 0.0.0.0.0, written as an integer (for example `584283`,
@@ -389,14 +391,17 @@ calendar in contract v1, with a correlation:
   as for every other calendar, so matching and playback do not change.
 * `correlation` is refused on any other calendar.
 * A source that gives a Long Count date without its correlation is recorded as
-  the source gives it: its interval is the source's own civil year, and the
-  record says that the correlation is not stated. The atlas never chooses a
-  correlation the source did not.
+  the source gives it: its interval is the source's own civil year, and its
+  `correlation` is `null`, which says that the correlation is not stated. The
+  atlas never chooses a correlation the source did not.
 * The record file writes it as `correlation:` in the date block, beside
-  `calendar:` and `as_written:`.
+  `calendar:` and `as_written:`: an integer, or `not stated`, which compiles to
+  `null`. A Long Count date block without one fails to compile, so an author
+  always says which it is.
 
-This lands with contract v1. Until then the two stelae keep `julian` and their
-notes, and are moved to the new calendar in the same change that brings v1.
+`historical/v0/vectors/calendars.json` pins the rules. Chiapa de Corzo Stela 2
+and Tres Zapotes Stela C use the calendar with `correlation: not stated`,
+because neither cited reading names its constant.
 
 == Proposed: journeys, territories, and media
 

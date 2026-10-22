@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "As Livy tells it, after Numa's death and an interregnum the people made Tullus Hostilius
+  king, and the senators ratified the choice. Dionysius dates his accession to the second year of
+  the twenty-seventh Olympiad."
+types: [occurrence]
+date:
+  value: 671 BCE..670 BCE
+  mode: window
+  calendar: julian
+  as_written: the second of the twenty-seventh Olympiad (Dionysius)
+  cite:
+    id: tullus-hostilius-accession-date
+    basis: tradition
+    says: "Dionysius dates Tullus Hostilius's accession to the second year of the twenty-seventh
+      Olympiad (671/670 BCE)."
+    source: dionysius-roman-antiquities
+    at: "3.1"
+    quote: The year in which he assumed the sovereignty was the second of the twenty-seventh Olympiad,
+places:
+  - place: rome
+    role: site
+participants:
+  - actor: tullus-hostilius
+    role: subject
+  - actor: roman-kingdom
+    role: other
+cite:
+  id: tullus-hostilius-accession-livy
+  basis: tradition
+  says: "Livy tells that the people made Tullus Hostilius king and the senators ratified it."
+  source: livy
+  at: "1.22.1–2"
+  quote: "inde Tullum Hostilium, nepotem Hostili, cuius in infima arce clara pugna adversus Sabinos
+    fuerat, regem populus iussit; patres auctores facti."
+notes:
+  "Tradition, not record. Dionysius dates every king's accession by Olympiad year; each converts to a
+  span of two Julian years, because the Olympic year began at midsummer. Livy gives regnal lengths
+  but no years."

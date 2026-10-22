@@ -12,6 +12,7 @@ const marker = (overrides: Partial<GlobeMarker> = {}): GlobeMarker => ({
   emphasis: "base",
   count: 1,
   disputed: false,
+  tradition: false,
   control: null,
   ...overrides,
 })
@@ -58,6 +59,16 @@ describe("place marks", () => {
       const look = markerLook(marker({ mark, precision: "locality", disputed: true }))
       expect(look.mark, mark).toMatch(/linear-gradient\(90deg,.*_50%,transparent_50%\)/)
     }
+  })
+
+  it("dots the name of a place where a tradition is told, and leaves its mark alone", () => {
+    const base = markerLook(marker())
+    const told = markerLook(marker({ tradition: true }))
+
+    expect(classes(told.label)).toContain("decoration-dotted")
+    expect(classes(base.label)).not.toContain("decoration-dotted")
+    expect(told.mark).toBe(base.mark)
+    expect(told.core).toBe(base.core)
   })
 
   it("shows the selection gold-bright and larger, with a pulse that respects reduced motion", () => {

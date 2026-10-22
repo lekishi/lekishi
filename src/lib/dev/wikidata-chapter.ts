@@ -123,6 +123,7 @@ export function wikidataChapter(snapshot: WikidataSnapshot): Chapter {
       occurrence: occurrenceOf(item),
       note: item.classes.length > 0 ? item.classes.join(", ") : "No class on Wikidata.",
       dispute: null,
+      tradition: false,
       coda: false,
       participants: [],
       citations: [

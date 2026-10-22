@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  In Livy's tradition the people of Alba Longa are moved to Rome when Tullus Hostilius destroys
+  their city, and the Caelian hill is added to Rome for them.
+types: [relocated_to]
+from: alba-longa
+to: rome
+notes:
+  Tradition, not record. The relationship records the move of the city's people that Livy tells; it
+  draws no route and asserts no date beyond the reign of Tullus Hostilius, which the event carries.
+cite:
+  id: albans-moved-to-rome-basis
+  basis: tradition
+  says:
+    Livy tells that Rome grew on Alba's ruins, its citizens doubled, and the Caelian hill was added
+    to the city.
+  source: livy
+  at: "1.30.1"
+  quote: "Roma interim crescit Albae ruinis. duplicatur civium numerus; Caelius additur urbi mons"

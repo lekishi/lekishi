@@ -1,0 +1,58 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Titus marches on Jerusalem with four legions and camps on Mount Scopus at Passover, when
+  pilgrims crowd the city and three rebel parties hold its quarters; the Romans take the walls one
+  by one, build a wall of circumvallation, and starve the city."
+types: [campaign]
+date:
+  value: "70"
+  mode: window
+  calendar: julian
+  as_written: "from the feast of unleavened bread, the fourteenth of Xanthicus, in the second year
+    of Vespasian"
+  cite:
+    - id: siege-of-jerusalem-70-year
+      says: "Whiston's note dates the seventeenth of Panemus, in the middle of the siege, to A.D.
+        70."
+      basis: conventional
+      convention: Josephus's order of the war on the standard chronology of Nero's and Vespasian's reigns
+      sources:
+        - source: josephus-jewish-war
+          at: "5.3.1"
+        - source: josephus-jewish-war
+          at: "6.2.1, Whiston's note 5"
+          quote: "the seventeenth of Panemuns. [Footnote Tamuz,] A.D. 70"
+places:
+  - place: jerusalem
+    role: site
+participants:
+  - actor: titus
+    role: leader
+  - actor: john-of-gischala
+    role: participant
+  - actor: simon-bar-giora
+    role: participant
+  - actor: judaean-rebels
+    role: participant
+cite:
+  - id: siege-scopus
+    says: "Josephus tells that Titus ordered a camp fortified on Scopus, seven furlongs from the
+      city."
+    source: josephus-jewish-war
+    at: "5.2.3"
+    quote: And here it was that Titus ordered a camp to be fortified for two legions
+  - id: siege-passover
+    says: Josephus tells that the feast of unleavened bread fell on the fourteenth of Xanthicus.
+    role: supporting
+    source: josephus-jewish-war
+    at: "5.3.1"
+    quote: "on the feast of unleavened bread, which was now come, it being the fourteenth day of the
+      month Xanthicus, [Nisan,]"
+  - id: siege-numbers
+    says: Josephus gives ninety-seven thousand captives in the whole war and eleven hundred thousand dead in the siege.
+    role: supporting
+    source: josephus-jewish-war
+    at: "6.9.3"
+    quote: was collected to be ninety-seven thousand; as was the number of those that perished during the whole siege eleven hundred thousand
+notes: "Josephus's account: he was a commander on the Jewish side until Jotapata and on the Roman
+  side after, and his numbers are his. The year is an interpretation; Josephus dates by month and
+  regnal year."

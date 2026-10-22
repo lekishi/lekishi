@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "In Livy's tradition Ancus Marcius, Numa's grandson, succeeds Tullus Hostilius as king."
+types: [successor_of]
+from: ancus-marcius
+to: tullus-hostilius
+notes: Tradition, not record. The succession is the tradition's king list; the accession events carry its dates.
+cite:
+  id: ancus-succeeds-tullus-basis
+  basis: tradition
+  says: "In Livy's tradition Ancus Marcius, Numa's grandson, succeeds Tullus Hostilius as king."
+  source: livy
+  at: "1.32.1"
+  quote: "Ancum Marcium regem populus creavit; patres fuere auctores. Numae Pompili regis nepos,
+    filia ortus, Ancus Marcius erat."

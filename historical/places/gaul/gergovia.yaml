@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Gergovia, the oppidum of the Arverni on a high hill, where Vercingetorix repulsed Caesar's assault
+  in 52 BCE. The site is identified, on excavation evidence, with the plateau of Gergovie south of
+  Clermont-Ferrand.
+types: [settlement, fortification]
+names:
+  - form: Gergovia
+    lang: la
+    script: Latn
+    cite:
+      - id: gergovia-name
+        says: Caesar tells that he reached Gergovia in five marches and saw that the town, on a very
+          high hill, was hard to approach on every side.
+        source: caesar-gallic-war
+        at: "7.36"
+        quote: Caesar ex eo loco quintis castris Gergoviam pervenit
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [3.12414, 45.71817]
+    notes:
+      The gazetteer's point on the plateau of Gergovie. Pleiades marks the identification with a
+      query; excavations of the Roman camps support it, but the record keeps it an interpretation.
+    cite:
+      - id: gergovia-location
+        says:
+          Pleiades gives this representative point for Gergovia, which the gazetteer queries,, with
+          its location precision recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 138373 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "138373"

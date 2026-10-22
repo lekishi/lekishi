@@ -1,0 +1,92 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "As Livy tells it, Brutus roused Rome against the king while the army was at Ardea. The king
+  hurried back to Rome and found the gates shut and his exile decreed, while Brutus rode to the
+  camp, which welcomed him; the king went into exile at Caere with two of his sons. The centuriate
+  assembly then elected the first two consuls, Lucius Iunius Brutus and Lucius Tarquinius
+  Collatinus, after 244 years of kings."
+types: [occurrence]
+date:
+  value: 508 BCE..507 BCE
+  mode: window
+  calendar: julian
+  as_written:
+    at the beginning of the sixty-eighth Olympiad (Dionysius); 244 years from the founding (Livy),
+    which in Varro's era is 509 BCE
+  cite:
+    - id: kings-expelled-dionysius
+      basis: tradition
+      says: Dionysius dates the overthrow of the kings to the beginning of the sixty-eighth Olympiad
+        (508/507 BCE), when Isagoras was archon at Athens.
+      source: dionysius-roman-antiquities
+      at: "5.1"
+      quote: was overthrown for the reasons stated and by the men named, at the beginning of the
+        sixty-eighth Olympiad
+    - id: kings-expelled-varro
+      basis: tradition
+      says: Livy reckons the rule of the kings at 244 years from the founding; counted from Varro's
+        753 BCE, which Censorinus records, the liberation falls in 509 BCE, the conventional date.
+      role: alternative
+      sources:
+        - source: livy
+          at: "1.60.3"
+          quote: "regnatum Romae ab condita urbe ad liberatam annos ducentos quadraginta quattuor."
+        - source: censorinus
+          at: "21.6"
+          quote: a Roma autem condita nongentesimus nonagensimus primus, et quidem ex Parilibus
+places:
+  - place: rome
+    role: site
+    cite:
+      id: kings-expelled-gates
+      basis: tradition
+      says:
+        Livy tells that Brutus reached Ardea and the king Rome by different roads at about the same
+        time, and that the gates were shut on Tarquinius and his exile decreed.
+      source: livy
+      at: "1.60.1"
+      quote: "eodemque fere tempore diversis itineribus Brutus Ardeam, Tarquinius Romam venerunt.
+        Tarquinio clausae portae exiliumque indictum"
+  - place: ardea
+    role: other
+    note: The army's camp before Ardea, which welcomed Brutus.
+  - place: caere
+    role: end
+    cite:
+      id: kings-expelled-caere
+      basis: tradition
+      says: Livy tells that two of the king's sons followed him into exile at Caere, among the Etruscans.
+      source: livy
+      at: "1.60.2"
+      quote: "duo patrem secuti sunt, qui exulatum Caere in Etruscos ierunt."
+participants:
+  - actor: tarquinius-superbus
+    role: subject
+  - actor: lucius-junius-brutus
+    role: leader
+  - actor: tarquinius-collatinus
+    role: participant
+  - actor: roman-kingdom
+    role: subject
+  - actor: roman-republic
+    role: other
+cite:
+  id: kings-expelled-consuls
+  basis: tradition
+  says:
+    Livy tells that two consuls were then elected by the centuriate assembly, L. Iunius Brutus and
+    L. Tarquinius Collatinus.
+  source: livy
+  at: "1.60.4"
+  quote: "duo consules inde comitiis centuriatis a praefecto urbis ex commentariis Servi Tulli
+    creati sunt, L. Iunius Brutus et L. Tarquinius Conlatinus."
+notes:
+  "Tradition, not record. The chapter shows Dionysius's 508/507 BCE, the date its other steps use,
+  and keeps the conventional 509 BCE (Varro's era with Livy's 244 years) as an alternative. The
+  first consuls open the Republic; the consular lists that follow are the first Roman dates that
+  later historians treated as records."
+dispute:
+  status: disputed
+  summary:
+    The tradition's year for the first consuls differs by reckoning, 508/507 BCE in Dionysius and
+    509 BCE in Varro's era; both are later computations from the consular lists.

@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Cures, a town of the Sabines. Livy tells that Numa Pompilius lived at Cures before he was called
+  to be king, and that the Romans took the name Quirites from it when the Sabines and the Romans
+  became one people.
+types: [settlement]
+names:
+  - form: Cures
+    lang: la
+    script: Latn
+    cite:
+      - id: cures-name
+        says: Livy tells that Numa Pompilius lived at Cures, among the Sabines.
+        source: livy
+        at: "1.18.1"
+        quote: "Curibus Sabinis habitabat"
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [12.68544, 42.18027]
+    notes: The gazetteer's point for the excavated Sabine town near Fara in Sabina.
+    cite:
+      - id: cures-location
+        says:
+          Pleiades gives this representative point for ancient Cures, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 413114 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "413114"

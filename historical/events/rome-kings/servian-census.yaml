@@ -1,0 +1,63 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "As Livy tells it, Servius Tullius instituted the census, on which service in war and peace
+  was assessed by wealth, divided the people into classes and centuries, and closed the first
+  census by ordering every citizen, horse and foot, to assemble in arms in the Campus Martius at
+  first light for the lustrum. Eighty thousand citizens are said to have been counted."
+types: [council]
+date:
+  value: 577 BCE..533 BCE
+  mode: window
+  calendar: julian
+  as_written: in the reign of Servius Tullius
+  cite:
+    id: servian-census-reign
+    says: Livy dates the census only to the reign of Servius Tullius, which he gives as forty-four
+      years; Dionysius dates Servius's accession to 577/576 BCE and Tarquinius Superbus's to
+      533/532 BCE.
+    basis: interpretation
+    attributed_to: Lekishi editorial reckoning on Dionysius's Olympiad dates for the reigns
+    sources:
+      - source: livy
+        at: "1.48.7–8"
+        quote: "Servius Tullius regnavit annos quattuor et quadraginta"
+      - source: dionysius-roman-antiquities
+        at: "4.1"
+        quote: succeeded him in the sovereignty in the fourth year of the fiftieth Olympiad
+places:
+  - place: campus-martius
+    role: site
+    cite:
+      id: servian-census-place
+      basis: tradition
+      says:
+        Livy tells that Servius ordered all Roman citizens, horse and foot, each in his century, to
+        assemble in the Campus Martius at first light.
+      source: livy
+      at: "1.44.1"
+      quote: "edixit, ut omnes cives Romani, equites peditesque, in suis quisque centuriis in campo
+        Martio prima luce adessent."
+participants:
+  - actor: servius-tullius
+    role: leader
+cite:
+  - id: servian-census-institution
+    basis: tradition
+    says:
+      Livy tells that Servius instituted the census, by which the duties of war and peace were set
+      by wealth, and drew the classes and centuries from it.
+    source: livy
+    at: "1.42.5"
+    quote: "census enim instituit, rem saluberrimam tanto futuro imperio, ex quo belli pacisque
+      munia non viritim, ut ante, sed pro habitu pecuniarum fierent"
+  - id: servian-census-count
+    basis: tradition
+    says: Livy reports that eighty thousand citizens are said to have been counted, and that Fabius
+      Pictor adds these were the men able to bear arms.
+    role: supporting
+    source: livy
+    at: "1.44.2"
+    quote: "milia octoginta eo lustro civium censa dicuntur; adicit scriptorum antiquissimus Fabius
+      Pictor, eorum, qui arma ferre possent, eum numerum fuisse."
+notes:
+  Tradition, not record. The census figure is Livy's report of what was said and of Fabius Pictor's
+  gloss; the chapter publishes it as the tradition's number, not a population.

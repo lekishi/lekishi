@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Barnabas and Saul preach in the synagogues at Salamis and cross Cyprus to Paphos, where
+  the proconsul Sergius Paulus sends for them and, in Acts, believes after Paul blinds the sorcerer
+  Bar-jesus."
+types: [mission]
+part_of:
+  - paul-first-journey
+date:
+  value: "45..49"
+  mode: window
+  calendar: julian
+  as_written: "Prat (1911): first mission, 45-49"
+  cite:
+    - id: cyprus-salamis-to-paphos-date
+      says: "Prat's chronology of 1911 dates Paul's first mission to 45–49."
+      basis: interpretation
+      attributed_to: F. Prat (1911)
+      source: catholic-encyclopedia
+      at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+      quote: "first mission, 45-49"
+places:
+  - place: salamis-cyprus
+    role: start
+  - place: paphos
+    role: end
+participants:
+  - actor: paul-the-apostle
+    role: leader
+  - actor: barnabas
+    role: participant
+  - actor: sergius-paulus
+    role: host
+cite:
+  - id: cyprus-salamis
+    says: Acts tells that at Salamis they preached in the synagogues of the Jews.
+    source: bible-kjv
+    at: "Acts 13:5"
+    quote: "And when they were at Salamis, they preached the word of God in the synagogues of the
+      Jews"
+  - id: cyprus-paphos-proconsul
+    says: "Acts tells that the proconsul, seeing what was done, believed."
+    role: supporting
+    source: bible-kjv
+    at: "Acts 13:12"
+    quote: "Then the deputy, when he saw what was done, believed, being astonished at the doctrine
+      of the Lord."
+notes: "Acts tells it, and the dates are Prat's 1911 reckoning, an interpretation: Acts gives no
+  years."

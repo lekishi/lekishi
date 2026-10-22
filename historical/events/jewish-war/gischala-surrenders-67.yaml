@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Titus rides to Gischala, the last city of Galilee in revolt, and offers terms; John son of
+  Levi slips away by night to Jerusalem, and the town opens its gates."
+types: [occurrence]
+date:
+  value: "67"
+  mode: window
+  calendar: julian
+  as_written: "after Gamala, at the end of the campaign in Galilee"
+  cite:
+    - id: gischala-surrenders-67-year
+      says: "Meistermann's 1910 history of Jerusalem dates the campaign in Galilee to 67."
+      basis: conventional
+      convention: Josephus's order of the war on the standard chronology of Nero's and Vespasian's reigns
+      sources:
+        - source: josephus-jewish-war
+          at: "4.2.1"
+        - source: catholic-encyclopedia
+          at: "Jerusalem (Before A.D. 71), by B. Meistermann (vol. 8, 1910), Herod Agrippa I to the
+            destruction"
+          quote: "invaded Galilee, in A.D. 67, with an army of 60,000 men"
+places:
+  - place: gischala
+    role: site
+  - place: jerusalem
+    role: end
+    note: Where John escapes to.
+participants:
+  - actor: titus
+    role: leader
+  - actor: john-of-gischala
+    role: participant
+  - actor: judaean-rebels
+    role: participant
+cite:
+  - id: gischala-last
+    says: Josephus tells that no place of Galilee remained to be taken but Gischala.
+    source: josephus-jewish-war
+    at: "4.2.1"
+    quote: Now no place of Galilee remained to be taken but the small city of Gischala
+  - id: gischala-john-escapes
+    says: "Josephus tells that Titus's horsemen could not overtake John, who had reached Jerusalem."
+    role: supporting
+    source: josephus-jewish-war
+    at: "4.2.5"
+    quote: "sent part of his horsemen to pursue after John, but they could not overtake him, for he
+      was gotten to Jerusalem before"
+notes: "Josephus's account: he was a commander on the Jewish side until Jotapata and on the Roman
+  side after, and his numbers are his. The year is an interpretation; Josephus dates by month and
+  regnal year."

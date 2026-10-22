@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Rhegium, the Greek city on the Strait of Messina, where the ship called on its way from Syracuse
+  to Puteoli.
+types: [port, settlement]
+names:
+  - form: Rhegium
+    lang: en
+    script: Latn
+    cite:
+      - id: rhegium-name
+        says: Acts tells that from Syracuse they came to Rhegium.
+        source: bible-kjv
+        at: "Acts 28:13"
+        quote: and came to Rhegium
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [15.64393, 38.10928]
+    notes: The gazetteer's point for the ancient city under modern Reggio Calabria.
+    cite:
+      - id: rhegium-location
+        says:
+          Pleiades gives this representative point for Rhegion, with its location precision recorded
+          as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 452416 (reprLatLong), dump 2026-10-21
+modern:
+  - form: Reggio Calabria
+    lang: it
+    note: The modern town.
+external_ids:
+  - system: pleiades
+    id: "452416"

@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "The Roman soldiers besieged in the towers of Jerusalem surrender on a sworn promise of
+  their lives, lay down their arms, and are cut down; only their commander Metilius is spared, after
+  promising to become a Jew."
+types: [occurrence]
+date:
+  value: "66"
+  mode: window
+  calendar: julian
+  as_written: in the same year as the outbreak at Caesarea (Josephus gives no separate date)
+  cite:
+    - id: jerusalem-garrison-massacred-66-year
+      says: "Meistermann's 1910 history of Jerusalem places the massacre of the Roman garrison in
+        the revolt of 66."
+      basis: conventional
+      convention: Josephus's order of the war on the standard chronology of Nero's and Vespasian's reigns
+      sources:
+        - source: josephus-jewish-war
+          at: "2.17.10"
+        - source: catholic-encyclopedia
+          at: "Jerusalem (Before A.D. 71), by B. Meistermann (vol. 8, 1910), Herod Agrippa I to the
+            destruction"
+          quote: "Gessius Florus (66) surpassed the wickedness of his predecessors, and drove the
+            people to revolt against the Roman domination"
+        - source: catholic-encyclopedia
+          at: "Jerusalem (Before A.D. 71), by B. Meistermann (vol. 8, 1910), Herod Agrippa I to the
+            destruction"
+          quote: "massacred the Roman garrison, and set fire to the palaces"
+places:
+  - place: jerusalem
+    role: site
+participants:
+  - actor: judaean-rebels
+    role: participant
+  - actor: roman-empire
+    role: subject
+cite:
+  - id: garrison-massacred
+    says: "Josephus tells that the soldiers were murdered after laying down their arms, except
+      Metilius, who promised to turn Jew."
+    source: josephus-jewish-war
+    at: "2.17.10"
+    quote: "And thus were all these men barbarously murdered, excepting Metilius; for when he
+      entreated for mercy, and promised that he would turn Jew, and be circumcised, they saved him
+      alive, but none else."
+notes: "Josephus's account: he was a commander on the Jewish side until Jotapata and on the Roman
+  side after, and his numbers are his. The year is an interpretation; Josephus dates by month and
+  regnal year."

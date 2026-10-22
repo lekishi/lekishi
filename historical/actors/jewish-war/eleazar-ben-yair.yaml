@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Eleazar, a descendant of Judas the Galilean and commander of the Sicarii who held Masada;
+  Josephus gives him the speeches that persuade the defenders to die rather than surrender."
+types: [person]
+names:
+  - form: Eleazar
+    lang: en
+    script: Latn
+    cite:
+      - id: eleazar-ben-yair-name
+        says: "Josephus names Eleazar, commander of the Sicarii, as the man who had seized Masada."
+        source: josephus-jewish-war
+        at: "7.8.1"
+        quote: "It was one Eleazar, a potent man, and the commander of these Sicarii, that had
+          seized upon it."
+roles:
+  - role: soldier
+    note: Commander of the Sicarii at Masada.

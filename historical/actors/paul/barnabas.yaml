@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Barnabas, a Levite from Cyprus in the church of Antioch, who brought Paul there and went
+  with him on the first mission; they parted before the second."
+types: [person]
+names:
+  - form: Barnabas
+    lang: en
+    script: Latn
+    cite:
+      - id: barnabas-name
+        says: "Acts tells that Joses, surnamed Barnabas by the apostles, was a Levite of Cyprus."
+        source: bible-kjv
+        at: "Acts 4:36"
+        quote: "And Joses, who by the apostles was surnamed Barnabas"
+roles:
+  - role: other
+    note: "Missionary of the church of Antioch, in Acts."

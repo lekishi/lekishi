@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Quintus Titurius Sabinus, Caesar's legate, joint commander of the force that wintered at
+  Atuatuca in 54 BCE; he was killed while negotiating with Ambiorix."
+types: [person]
+names:
+  - form: Q. Titurius Sabinus
+    lang: la
+    script: Latn
+    cite:
+      - id: quintus-titurius-sabinus-name
+        says: Caesar tells that he put the legates Quintus Titurius Sabinus and Lucius Aurunculeius Cotta in command of these troops.
+        source: caesar-gallic-war
+        at: "5.24"
+        quote: Eis militibus Quintum Titurium Sabinum et Lucium Aurunculeium Cottam legatos praeesse iussit.
+roles:
+  - role: soldier
+    note: Legate.

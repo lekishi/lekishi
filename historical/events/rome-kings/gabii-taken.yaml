@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "As Livy tells it, Tarquinius Superbus attacked the neighbouring Latin city of Gabii in vain
+  and then took it by fraud: his son Sextus fled there pretending to escape his father's cruelty,
+  won the Gabines' trust and the command of their army, and had their leading men killed or
+  exiled, until the city, stripped of counsel, was handed to the Roman king without a fight."
+types: [campaign]
+date:
+  value: 533 BCE..508 BCE
+  mode: window
+  calendar: julian
+  as_written: in the reign of Tarquinius Superbus
+  cite:
+    id: gabii-taken-reign
+    says: Livy dates the capture only to the reign of Tarquinius Superbus, which he gives as
+      twenty-five years; Dionysius dates its beginning to 533/532 BCE and the end of the kings to
+      the beginning of the sixty-eighth Olympiad (508/507 BCE).
+    basis: interpretation
+    attributed_to: Lekishi editorial reckoning on Dionysius's Olympiad dates for the reigns
+    sources:
+      - source: livy
+        at: "1.60.2–3"
+        quote: "L. Tarquinius Superbus regnavit annos quinque et viginti."
+      - source: dionysius-roman-antiquities
+        at: "4.41"
+        quote: in the fourth year of the sixty-first Olympiad
+places:
+  - place: gabii
+    role: site
+    cite:
+      id: gabii-taken-site
+      basis: tradition
+      says: Livy calls Gabii a neighbouring city that Tarquinius attacked in vain by force.
+      source: livy
+      at: "1.53.4"
+      quote: "Gabios, propinquam urbem, nequiquam vi adortus"
+participants:
+  - actor: tarquinius-superbus
+    role: leader
+  - actor: sextus-tarquinius
+    role: participant
+cite:
+  id: gabii-taken-outcome
+  basis: tradition
+  says: Livy tells that the state of Gabii, robbed of counsel and help, was handed over to the Roman
+    king without a battle.
+  source: livy
+  at: "1.54.10"
+  quote: "donec orba consilio auxilioque Gabina res regi Romano sine ulla dimicatione in manum
+    traditur."
+notes:
+  Tradition, not record. Livy's story of Sextus's feigned flight echoes Herodotus's Zopyrus, which is
+  one reason scholars read it as literary; the chapter tells it as Livy's.

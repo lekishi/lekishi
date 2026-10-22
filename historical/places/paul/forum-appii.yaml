@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Forum Appii, a station on the Via Appia about forty Roman miles from Rome, where brethren from
+  Rome came out to meet Paul.
+types: [route_node]
+names:
+  - form: Appii forum
+    lang: en
+    script: Latn
+    cite:
+      - id: forum-appii-name
+        says: Acts tells that the brethren came to meet them as far as Appii forum.
+        source: bible-kjv
+        at: "Acts 28:15"
+        quote: they came to meet us as far as Appii forum
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [12.9975, 41.46639]
+    notes: The gazetteer's point for the station on the Via Appia.
+    cite:
+      - id: forum-appii-location
+        says: Pleiades gives this representative point for Forum Appii, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 422927 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "422927"

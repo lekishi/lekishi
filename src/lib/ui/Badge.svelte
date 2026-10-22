@@ -4,7 +4,7 @@
   /**
    * Every badge kind with its glyph and default word. The evidence kinds are
    * RFD 1's visual forms; the rest are states that modify a record (at the
-   * playhead, possible, disputed, outside the window, coda). Each pairs a glyph
+   * playhead, possible, disputed, tradition, outside the window, coda). Each pairs a glyph
    * with a word, so no kind is told apart by its hue alone.
    */
   export const BADGES = {
@@ -18,6 +18,7 @@
     active: { icon: "playhead", text: "at the playhead" },
     possible: { icon: "possible", text: "possible" },
     disputed: { icon: "disputed", text: "disputed account" },
+    tradition: { icon: "tradition", text: "tradition" },
     outside: { icon: "outside", text: "outside the window" },
     coda: { icon: "coda", text: "coda" },
   } as const satisfies Record<string, { icon: IconName; text: string }>
@@ -59,6 +60,7 @@
     kind === "active" && "border-gold bg-gold-tint text-gold-bright",
     kind === "possible" && "border-dashed border-ink-faint text-ink-dim",
     kind === "disputed" && "border-ink-dim text-ink",
+    kind === "tradition" && "border-dotted border-ink-dim text-ink",
     (kind === "outside" || kind === "coda") && "border-rule text-ink-faint",
     className,
   ]}

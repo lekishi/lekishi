@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Lucius Tarquinius Priscus, the fifth king of Rome in the tradition: born Lucumo at
+  Tarquinii, the son of Demaratus of Corinth, he moved to Rome under Ancus Marcius and was elected
+  king after him."
+types: [person]
+names:
+  - form: L. Tarquinius Priscus
+    lang: la
+    script: Latn
+    cite:
+      - id: tarquinius-priscus-name
+        basis: tradition
+        says: "Livy tells that on settling in Rome he gave his name as L. Tarquinius Priscus."
+        source: livy
+        at: "1.34.10"
+        quote: "L. Tarquinium Priscum edidere nomen."
+roles:
+  - role: ruler
+    note: "The fifth king, in the tradition."

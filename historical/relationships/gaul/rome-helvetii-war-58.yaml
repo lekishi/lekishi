@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "Rome, under Caesar as proconsul, makes war on the migrating Helvetii, turns them back at
+  the Rhône, defeats them, and sends the survivors home."
+types: [conflict]
+from: roman-republic
+to: helvetii
+date:
+  value: 58 BCE
+  mode: window
+  calendar: julian
+  as_written: the year of book I
+notes: "Caesar's own account of a war he commanded."
+cite:
+  id: rome-helvetii-war-58-basis
+  says: "Caesar tells that he accepted the surrender of the rest of the Helvetii once they had
+    handed over hostages, arms and deserters."
+  source: caesar-gallic-war
+  at: "1.28"
+  quote: "reliquos omnes obsidibus, armis, perfugis traditis in deditionem accepit."

@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Jotapata (Yodfat), the Galilean hill town on a precipice that Josephus defended against Vespasian
+  for forty-seven days in 67 CE.
+types: [settlement, fortification]
+names:
+  - form: Jotapata
+    lang: en
+    script: Latn
+    cite:
+      - id: jotapata-name
+        says: Josephus describes Jotapata as built almost entirely on a precipice.
+        source: josephus-jewish-war
+        at: "3.7.7"
+        quote: Now Jotapata is almost all of it built on a precipice
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [35.27762, 32.83227]
+    notes: The gazetteer's point for the excavated site at Tel Yodfat.
+    cite:
+      - id: jotapata-location
+        says: Pleiades gives this representative point for Iotapata, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 678201 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "678201"

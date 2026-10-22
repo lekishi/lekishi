@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Britannia, the island Caesar crossed to in 55 and 54 BCE. He landed on its south-east coast, whose
+  exact landing place is disputed.
+types: [region]
+names:
+  - form: Britannia
+    lang: la
+    script: Latn
+    cite:
+      - id: britannia-name
+        says: Caesar tells that at about the fourth hour he reached Britain with the first ships.
+        source: caesar-gallic-war
+        at: "4.23"
+        quote: ipse hora diei circiter IIII. cum primis navibus Britanniam attigit
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [-2.422, 53.826]
+    notes:
+      The island's representative point, far inland; it marks the island, not the landing, which
+      Caesar does not locate.
+    cite:
+      - id: britannia-location
+        says:
+          Pleiades gives this representative point for the island of Britannia, with its location
+          precision recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 20419 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "20419"

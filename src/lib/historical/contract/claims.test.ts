@@ -8,7 +8,9 @@ import { load, runBang } from "./vectors"
  * conversions"): a date that standard reference chronologies agree on, derived
  * from a source that gives a sequence rather than a calendar date. It names its
  * conversion, cites the passage and the reference, asserts a time, and is never
- * one side of a dispute.
+ * one side of a dispute. And the tradition basis (RFD 2, "A tradition basis for
+ * received stories"): what a source passes on as legend, which needs no
+ * attribution and never shares a pointer with a conventional date.
  */
 
 describe("the claim-basis vectors", () => {
@@ -23,7 +25,7 @@ describe("the claim-basis vectors", () => {
     }
 
     expect(new Set(vectors.map((vector) => vector["id"])).size).toBe(vectors.length)
-    expect(vectors.length).toBe(8)
+    expect(vectors.length).toBe(12)
   })
 })
 

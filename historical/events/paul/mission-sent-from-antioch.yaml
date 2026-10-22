@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "The church at Antioch lays hands on Barnabas and Saul and sends them out; they go down to
+  Seleucia, its port, and sail for Cyprus."
+types: [mission]
+part_of:
+  - paul-first-journey
+date:
+  value: "45..49"
+  mode: window
+  calendar: julian
+  as_written: "Prat (1911): first mission, 45-49"
+  cite:
+    - id: mission-sent-from-antioch-date
+      says: "Prat's chronology of 1911 dates Paul's first mission to 45–49."
+      basis: interpretation
+      attributed_to: F. Prat (1911)
+      source: catholic-encyclopedia
+      at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+      quote: "first mission, 45-49"
+places:
+  - place: antioch-on-the-orontes
+    role: start
+  - place: seleucia-pieria
+    role: end
+participants:
+  - actor: paul-the-apostle
+    role: leader
+  - actor: barnabas
+    role: participant
+cite:
+  - id: mission-sent-seleucia
+    says: "Acts tells that, sent out by the Holy Ghost, they went down to Seleucia and sailed from
+      there to Cyprus."
+    source: bible-kjv
+    at: "Acts 13:4"
+    quote: "So they, being sent forth by the Holy Ghost, departed unto Seleucia; and from thence
+      they sailed to Cyprus."
+notes: "Acts tells it, and the dates are Prat's 1911 reckoning, an interpretation: Acts gives no
+  years."

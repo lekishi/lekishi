@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Going up the Via Appia from Puteoli, Paul is met by brethren from Rome at Forum Appii and
+  again at the Three Taverns, and enters Rome, where the centurion hands the prisoners over."
+types: [journey]
+part_of:
+  - paul-voyage-to-rome
+date:
+  value: "59..60"
+  mode: window
+  calendar: julian
+  as_written: "Prat (1911): departure for Rome, 59; captivity at Rome, 60-62"
+  cite:
+    - id: via-appia-to-rome-date
+      says: "Prat's chronology of 1911 dates the departure for Rome to 59 and the captivity at Rome
+        from 60, so the voyage and the winter on Malta fall between."
+      basis: interpretation
+      attributed_to: F. Prat (1911)
+      sources:
+        - source: catholic-encyclopedia
+          at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+          quote: "arrival of Festus, departure for Rome, 59"
+        - source: catholic-encyclopedia
+          at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+          quote: "captivity at Rome, 60-62"
+places:
+  - place: puteoli
+    role: start
+  - place: forum-appii
+    role: waypoint
+  - place: three-taverns
+    role: waypoint
+  - place: rome
+    role: end
+participants:
+  - actor: paul-the-apostle
+    role: subject
+cite:
+  - id: appian-way-meeting
+    says: Acts tells that the brethren came out to meet them as far as Appii forum and the Three Taverns.
+    source: bible-kjv
+    at: "Acts 28:15"
+    quote: "they came to meet us as far as Appii forum, and The three taverns"
+  - id: appian-way-rome
+    says: Acts tells that when they came to Rome the centurion delivered the prisoners to the captain of the guard.
+    role: supporting
+    source: bible-kjv
+    at: "Acts 28:16"
+    quote: "And when we came to Rome, the centurion delivered the prisoners to the captain of the
+      guard"
+notes: "Acts tells it, and the dates are Prat's 1911 reckoning, an interpretation: Acts gives no
+  years."

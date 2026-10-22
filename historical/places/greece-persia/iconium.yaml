@@ -1,7 +1,8 @@
 # yaml-language-server: $schema=../../schema/place.schema.json
 summary:
   Iconium, which Xenophon calls the last city of Phrygia, where Cyrus halted three days in 401
-  BCE before marching through Lycaonia.
+  BCE before marching through Lycaonia, and where Paul and Barnabas later preached until a plot
+  to stone them drove them out.
 types: [settlement]
 names:
   - form: Iconium
@@ -16,6 +17,12 @@ names:
         quote:
           From this place he marched on three stages--twenty parasangs--to Iconium, the last city of
           Phrygia, where he remained three days.
+      - id: iconium-name-acts
+        says: Acts tells that Paul and Barnabas came to Iconium.
+        source: bible-kjv
+        at: "Acts 13:51"
+        quote: and came unto Iconium.
+        role: supporting
 at:
   - interpretation: approximate_point
     precision: locality

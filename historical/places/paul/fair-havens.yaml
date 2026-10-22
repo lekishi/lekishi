@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Fair Havens, an anchorage on the south coast of Crete near Lasea, where the ship sheltered until
+  sailing had become dangerous, before a storm drove it west.
+types: [port]
+names:
+  - form: The fair havens
+    lang: en
+    script: Latn
+    cite:
+      - id: fair-havens-name
+        says: Acts tells that they came to a place called the Fair Havens, near the city of Lasea.
+        source: bible-kjv
+        at: "Acts 27:8"
+        quote: came unto a place which is called The fair havens; nigh whereunto was the city of Lasea.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [24.81228, 34.93182]
+    notes: The gazetteer's point for the bay that keeps the name, Kali Limenes.
+    cite:
+      - id: fair-havens-location
+        says:
+          Pleiades gives this representative point for Kaloi Limenes, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 589834 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "589834"

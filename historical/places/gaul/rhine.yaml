@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: The Rhenus (Rhine), which Caesar treats as the boundary between Gauls and Germans. He drove
+  Ariovistus back across it in 58 BCE, bridged it in 55 and again in 53 BCE.
+types: [landform]
+names:
+  - form: Rhenus
+    lang: la
+    script: Latn
+    cite:
+      - id: rhine-name
+        says:
+          Caesar tells that the defeated Germans did not stop fleeing until they reached the river
+          Rhine.
+        source: caesar-gallic-war
+        at: "1.53"
+        quote:
+          nec prius fugere destiterunt quam ad flumen Rhenum milia passuum ex eo loco circiter L
+          pervenerunt.
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [7.46057, 49.63808]
+    notes:
+      A river's representative point, in the middle Rhine; it marks the river, not a crossing or a
+      bridge.
+    cite:
+      - id: rhine-location
+        says:
+          Pleiades gives this representative point for the river Rhenus, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 109277 (reprLatLong), dump 2026-10-21
+modern:
+  - form: Rhein
+    lang: de
+    note: The modern river.
+external_ids:
+  - system: pleiades
+    id: "109277"

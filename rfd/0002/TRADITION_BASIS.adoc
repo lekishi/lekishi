@@ -1,0 +1,130 @@
+= A tradition basis for received stories
+:state: decided; the owner chose a per-claim basis on 2026-10-22, and it is built in contract v0
+:toc:
+:toclevels: 2
+
+On 2026-10-22 the owner chose to add a claim basis for what a source passes on
+as tradition: the received story of a time the writer did not witness and that
+no record of the time confirms. The question came from the kings of Rome
+(chapter `rome-kings-753-509-bce`). Three options were put to the owner: a basis
+per claim, a flag on the whole event, or no contract change. The owner chose
+the basis per claim. This record gives the rule and the contract change.
+
+== The problem
+
+A claim has one of three bases (link:CONTRACTS.adoc[contract v0]):
+
+* `attested`: what a source reports.
+* `cited_interpretation`: an interpretation advanced in cited scholarship.
+* `conventional`: a date that standard reference chronologies agree on
+  (link:CONVENTIONAL_DATES.adoc[a conventional basis for standard date
+  conversions]).
+
+Livy and Dionysius wrote under Augustus about kings they dated seven centuries
+earlier. "Romulus fortified the Palatine" is what Livy reports, so today it is
+`attested`. Caesar's account of his own campaign in Gaul is `attested` in the
+same way. A reader and a reviewer cannot tell an eyewitness from a legend
+without reading every record's notes. Until now the kings chapter said
+"tradition" only in its titles and summaries, and the founding was marked
+disputed so that the date would not read as settled.
+
+The places are not the problem. The Palatine, Alba Longa and Ostia are real
+sites, located by gazetteers. The legend is in the acts and their dates.
+
+== Decided: the rule
+
+The test for a claim is: *does the source pass this on as what was told of a
+time before any record it could check?*
+
+* `tradition` (new): the source reports the claim as received story. Examples
+  are the founding of a city by its eponymous hero, the acts and reigns of kings
+  known only from much later writers, and birth legends. The claim cites the
+  passage that tells it, as an attested claim would.
+* `attested`: the source reports it as record. That covers a witness, a
+  contemporary document, or a later writer working from records of the time.
+  It is still not proof.
+
+Tradition is about who could have known, not about whether the story is true.
+A tradition can preserve a real event, and the basis does not deny it.
+
+When in doubt, take `tradition`. A record wrongly labelled tradition invites
+the reader to look at its sources. A record wrongly labelled attested presents
+a legend as record.
+
+Places keep their own evidence. A place record's location and names are cited
+from gazetteers and are not tradition. Within an event, the link to the place
+("Romulus fortified the Palatine") is part of the story and takes the story's
+basis.
+
+== Decided: the contract change
+
+`tradition` joins the claim-basis vocabulary in contract *v0*, which the owner
+extends in place until launch (link:CONTRACTS.adoc[contract v0]).
+
+A `tradition` claim:
+
+. needs no `attributed_to`, because it is what the source tells, not a
+  scholar's reading. That is the same as an attested claim;
+. may take any role. The competing founding dates are all traditions, so a
+  tradition can be one side of a dispute;
+. is not itself a dispute. An undisputed record may be told wholly as tradition;
+. never shares a pointer with a `conventional` claim. A year that a tradition
+  gives is not a standard conversion, even when reference works repeat it (the
+  founding of Rome in 753 BCE is Varro's era, not a chronology). The code is
+  `conventional_in_tradition`.
+
+Four vectors in `historical/v0/vectors/claims.json` pin the rule:
+
+* a tradition claim needs no attribution and no dispute;
+* traditions can be the alternatives of a dispute;
+* a conventional date on a pointer a tradition asserts is refused
+  (`conventional_in_tradition`);
+* a conventional date beside a tradition on another pointer is valid.
+
+*Authoring.* Authors write `basis: tradition` on a cite. The compiler maps it
+through unchanged.
+
+[source,yaml]
+----
+# historical/events/rome-kings/rome-founding.yaml
+participants:
+  - actor: romulus
+    role: leader
+    cite:
+      id: rome-founding-romulus
+      says: Livy tells that Romulus alone took power and the city was named after its founder.
+      basis: tradition
+      source: livy
+      at: "1.7.3"
+      quote: "ita solus potitus imperio Romulus; condita urbs conditoris nomine appellata."
+----
+
+== Decided: what the atlas shows
+
+An event is shown as tradition when any of its main claims is a tradition. That
+is the same reading as for disputes, and it never overstates a record:
+
+* *Card.* A `tradition` badge and one sentence: "Told as tradition: the sources
+  pass this on as the received story of a time they did not witness."
+* *Event list and search.* The `tradition` badge beside the disputed badge.
+* *Map.* A place's name is underlined with dots when an event placed there in
+  the window is tradition. The marker keeps the place's own evidence form, so a
+  real site stays an attested ring. The legend shows the badge with the words
+  "tradition, dotted name" when the view draws one.
+
+== What moved
+
+* Contract v0 gains:
+** the basis;
+** one code, `conventional_in_tradition`;
+** four vectors (the pinned total goes from 216 to 220).
+* The authoring compiler gains one basis.
+* The atlas gains the tradition flag on an event, the badge, the card section,
+  and the dotted place name.
+* The kings chapter is re-cited. The founding, the accessions and every act of
+  the kings and their families become `tradition`. The reign windows stay
+  editorial interpretations, and the founding and the expulsion keep their
+  disputes. Place records do not change.
+
+Other chapters can adopt the basis when their threads re-cite. Candidates are
+Sargon's birth legend and the Trojan War.

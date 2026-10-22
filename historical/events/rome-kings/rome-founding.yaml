@@ -1,0 +1,85 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "As Livy tells it, the twins Romulus and Remus resolved to found a city where they had been
+  exposed and raised; they disputed the augury, Remus was killed, and Romulus, ruling alone,
+  fortified the Palatine and named the city after himself. This is the Roman tradition, written
+  down some seven centuries later, and the founding date is a later reckoning: the conventional 753
+  BCE is Varro's era, and Dionysius reports four other dates."
+types: [founding]
+date:
+  value: 753 BCE
+  mode: window
+  calendar: julian
+  as_written:
+    a Roma autem condita nongentesimus nonagensimus primus, et quidem ex Parilibus (Censorinus, of
+    238 CE); in the first year of the seventh Olympiad (Dionysius)
+  cite:
+    - id: rome-founding-varro
+      basis: tradition
+      says: Censorinus counts 238 CE as the 991st year from the founding of Rome, reckoned from the
+        Parilia, after Varro's chronology; the count puts the founding in 753 BCE.
+      source: censorinus
+      at: "21.6"
+      quote:
+        a Roma autem condita nongentesimus nonagensimus primus, et quidem ex Parilibus, unde urbis
+        anni numerantur
+    - id: rome-founding-dionysius
+      basis: tradition
+      says: Dionysius dates Romulus's first year to the first year of the seventh Olympiad (752/751
+        BCE), which he derives from Cato's 432 years after Troy and Eratosthenes's chronicles.
+      role: alternative
+      source: dionysius-roman-antiquities
+      at: "1.75"
+      quote: Romulus, the first ruler of the city, began his reign in the first year of the seventh
+        Olympiad, when Charops at Athens was in the first year of his ten-year term as archon.
+    - id: rome-founding-fabius-cincius
+      basis: tradition
+      says: Dionysius reports that Cincius placed the founding about the fourth year of the twelfth
+        Olympiad (729/728 BCE) and Fabius in the first year of the eighth (748/747 BCE).
+      role: alternative
+      source: dionysius-roman-antiquities
+      at: "1.74"
+      quote: Lucius Cincius, a member of the senate, places it about the fourth year of the twelfth
+        Olympiad,
+    - id: rome-founding-timaeus
+      basis: tradition
+      says: Dionysius reports that Timaeus placed the founding with that of Carthage, in the
+        thirty-eighth year before the first Olympiad (814/813 BCE).
+      role: alternative
+      source: dionysius-roman-antiquities
+      at: "1.74"
+      quote:
+        places it at the same time as the founding of Carthage, that is, in the thirty-eighth year
+        before the first Olympiad;
+places:
+  - place: palatine
+    role: site
+    cite:
+      id: rome-founding-palatine
+      basis: tradition
+      says: Livy tells that Romulus fortified the Palatine first, where he had been brought up.
+      source: livy
+      at: "1.7.3"
+      quote: "Palatium primum, in quo ipse erat educatus, muniit."
+  - place: rome
+    role: context
+participants:
+  - actor: romulus
+    role: leader
+    cite:
+      id: rome-founding-romulus
+      basis: tradition
+      says: Livy tells that Romulus alone took power and the city was named after its founder.
+      source: livy
+      at: "1.7.3"
+      quote: "ita solus potitus imperio Romulus; condita urbs conditoris nomine appellata."
+notes:
+  "Tradition, not record: Livy and Dionysius wrote under Augustus from annalists of the third and
+  second centuries BCE. The chapter keeps Varro's 753 BCE as the date shown, because it is the era
+  the Romans counted from, and keeps Dionysius's 752/751, Fabius's 748/747, Cincius's 729/728, and
+  Timaeus's 814/813 beside it. Olympiad years run from midsummer to midsummer, so each converts to a
+  span of two Julian years."
+dispute:
+  status: disputed
+  summary:
+    The ancient writers disagree on the founding year by more than eighty years, and none of them
+    records it; every date is a later reckoning of a tradition.

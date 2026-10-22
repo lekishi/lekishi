@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Ancus Marcius, the fourth king of Rome in the tradition, Numa's grandson, who restored the
+  public rites, took Latin towns, and founded Ostia at the mouth of the Tiber."
+types: [person]
+names:
+  - form: Ancus Marcius
+    lang: la
+    script: Latn
+    cite:
+      - id: ancus-marcius-name
+        basis: tradition
+        says: "Livy tells that the people elected Ancus Marcius king, with the senators' sanction."
+        source: livy
+        at: "1.32.1"
+        quote: "Ancum Marcium regem populus creavit"
+roles:
+  - role: ruler
+    note: "The fourth king, in the tradition."

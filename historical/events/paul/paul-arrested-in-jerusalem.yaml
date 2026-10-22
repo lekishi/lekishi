@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "In Jerusalem Jews from Asia stir up the crowd against Paul in the temple; he is dragged
+  out and beaten, and the Roman tribune of the garrison takes him and binds him with two chains."
+types: [occurrence]
+date:
+  value: "57"
+  mode: window
+  calendar: julian
+  as_written: "Prat (1911): fifth visit to Jerusalem, arrest, 57"
+  cite:
+    - id: paul-arrested-in-jerusalem-date
+      says: "Prat's chronology of 1911 dates Paul's last visit to Jerusalem and his arrest to 57."
+      basis: interpretation
+      attributed_to: F. Prat (1911)
+      source: catholic-encyclopedia
+      at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+      quote: "fifth visit to Jerusalem, arrest, 57"
+places:
+  - place: jerusalem
+    role: site
+participants:
+  - actor: paul-the-apostle
+    role: subject
+cite:
+  - id: arrest-temple
+    says: Acts tells that the people took Paul and drew him out of the temple.
+    source: bible-kjv
+    at: "Acts 21:30"
+    quote: "they took Paul, and drew him out of the temple: and forthwith the doors were shut."
+  - id: arrest-chains
+    says: Acts tells that the chief captain took him and had him bound with two chains.
+    role: supporting
+    source: bible-kjv
+    at: "Acts 21:33"
+    quote: "Then the chief captain came near, and took him, and commanded him to be bound with two
+      chains"
+notes: "Acts tells it, and the dates are Prat's 1911 reckoning, an interpretation: Acts gives no
+  years."

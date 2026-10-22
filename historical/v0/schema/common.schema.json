@@ -137,7 +137,7 @@
       }
     },
     "claim": {
-      "description": "An assertion with its evidentiary basis. attested records what a source reports; cited_interpretation is an interpretation advanced in cited scholarship and must name who advances it; conventional is a date that standard reference chronologies agree on, derived from a source that gives a sequence rather than a calendar date, and names the conversion in convention. asserts is a JSON Pointer into this revision's content (empty string for the whole content) naming the field the claim supports, so one source need not support every field.",
+      "description": "An assertion with its evidentiary basis. attested records what a source reports; cited_interpretation is an interpretation advanced in cited scholarship and must name who advances it; conventional is a date that standard reference chronologies agree on, derived from a source that gives a sequence rather than a calendar date, and names the conversion in convention. tradition is what a source passes on as the received story of a time it did not witness, such as a founding legend; it never shares a pointer with a conventional claim. asserts is a JSON Pointer into this revision's content (empty string for the whole content) naming the field the claim supports, so one source need not support every field.",
       "type": "object",
       "required": ["claim_id", "statement", "asserts", "basis", "role", "citations"],
       "additionalProperties": false,
@@ -145,7 +145,7 @@
         "claim_id": {"$ref": "#/$defs/claim_id"},
         "statement": {"type": "string", "minLength": 1, "maxLength": 2000},
         "asserts": {"type": "string", "pattern": "^(|/.*)$", "maxLength": 200},
-        "basis": {"enum": ["attested", "cited_interpretation", "conventional"]},
+        "basis": {"enum": ["attested", "cited_interpretation", "conventional", "tradition"]},
         "role": {"enum": ["main", "supporting", "alternative", "conflicting"]},
         "attributed_to": {"type": ["string", "null"], "maxLength": 300},
         "convention": {

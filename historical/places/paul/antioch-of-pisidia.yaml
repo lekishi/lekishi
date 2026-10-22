@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Antioch in Pisidia, a Roman colony on the Anatolian plateau, where Paul preached in the synagogue
+  and was driven out.
+types: [settlement]
+names:
+  - form: Antioch in Pisidia
+    lang: en
+    script: Latn
+    cite:
+      - id: antioch-pisidia-name
+        says: Acts tells that from Perga they came to Antioch in Pisidia.
+        source: bible-kjv
+        at: "Acts 13:14"
+        quote: they came to Antioch in Pisidia
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [31.18987, 38.30537]
+    notes: The gazetteer's point for the excavated colony near Yalvaç.
+    cite:
+      - id: antioch-of-pisidia-location
+        says: Pleiades gives this representative point for Antiochia in Pisidia, with its location
+          precision recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 609307 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "609307"

@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Puteoli, the main port of Italy for the Alexandrian grain ships, on the Bay of Naples, where Paul
+  landed and stayed a week with the brethren.
+types: [port, settlement]
+names:
+  - form: Puteoli
+    lang: en
+    script: Latn
+    cite:
+      - id: puteoli-name
+        says: Acts tells that the next day they came to Puteoli.
+        source: bible-kjv
+        at: "Acts 28:13"
+        quote: we came the next day to Puteoli
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [14.12174, 40.82584]
+    notes: The gazetteer's point for the ancient port under modern Pozzuoli.
+    cite:
+      - id: puteoli-location
+        says:
+          Pleiades gives this representative point for Puteoli, with its location precision recorded
+          as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 432815 (reprLatLong), dump 2026-10-21
+modern:
+  - form: Pozzuoli
+    lang: it
+    note: The modern town.
+external_ids:
+  - system: pleiades
+    id: "432815"

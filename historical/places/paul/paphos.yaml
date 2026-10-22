@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Paphos (Nea Paphos), the seat of the Roman governor of Cyprus, where Acts tells that the proconsul
+  Sergius Paulus believed.
+types: [capital, port, settlement]
+names:
+  - form: Paphos
+    lang: en
+    script: Latn
+    cite:
+      - id: paphos-name
+        says: Acts tells that they went through the island to Paphos.
+        source: bible-kjv
+        at: "Acts 13:6"
+        quote: And when they had gone through the isle unto Paphos
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [32.40659, 34.75721]
+    notes: The gazetteer's point for the excavated city at Kato Paphos.
+    cite:
+      - id: paphos-location
+        says: Pleiades gives this representative point for Nea Paphos, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 707586 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "707586"

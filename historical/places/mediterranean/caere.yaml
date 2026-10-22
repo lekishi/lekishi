@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Caere, an Etruscan city north-west of Rome. Livy tells that the expelled king Tarquinius Superbus
+  went into exile there with two of his sons.
+types: [settlement]
+names:
+  - form: Caere
+    lang: la
+    script: Latn
+    cite:
+      - id: caere-name
+        says:
+          Livy tells that two of the king's sons followed their father into exile at Caere, among
+          the Etruscans.
+        source: livy
+        at: "1.60.2"
+        quote: "duo patrem secuti sunt, qui exulatum Caere in Etruscos ierunt."
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [12.10778, 42.00249]
+    notes: The gazetteer's point for the city at modern Cerveteri.
+    cite:
+      - id: caere-location
+        says:
+          Pleiades gives this representative point for the Etruscan city of Caere, with its location
+          precision recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 422859 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "422859"

@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Derbe in Lycaonia, the furthest point of the first mission, from which Paul and Barnabas turned
+  back through the cities they had visited.
+types: [settlement]
+names:
+  - form: Derbe
+    lang: en
+    script: Latn
+    cite:
+      - id: derbe-name
+        says: Acts tells that the day after the stoning Paul left with Barnabas for Derbe.
+        source: bible-kjv
+        at: "Acts 14:20"
+        quote: the next day he departed with Barnabas to Derbe.
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [33.36178, 37.34921]
+    notes: The gazetteer's point for the mound identified as Derbe.
+    cite:
+      - id: derbe-location
+        says:
+          Pleiades gives this representative point for Derbe, with its location precision recorded
+          as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 648620 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "648620"

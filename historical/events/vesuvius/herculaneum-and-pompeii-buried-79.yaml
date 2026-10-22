@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "The eruption buries Herculaneum and Pompeii under ash; Dio says the people of one were in
+  the theatre, and that the ash reached Africa, Syria, Egypt and Rome."
+types: [occurrence]
+date:
+  value: "79"
+  mode: window
+  calendar: julian
+  as_written: "just at the end of autumn (Dio, in Foster's translation)"
+  cite:
+    - id: herculaneum-and-pompeii-buried-79-year
+      says: "Foster's translation of Dio dates the chapters on the eruption, by a sidenote, to A.D.
+        79."
+      basis: conventional
+      convention: Dio's order of Titus's reign on the standard chronology of the emperors
+      sources:
+        - source: cassius-dio
+          at: LXVI.23 (A.D. 79)
+        - source: cassius-dio
+          at: "LXVI.16 (A.D. 79), translator's sidenote"
+          quote: A.D. 79 (a.u. 832)
+places:
+  - place: herculaneum
+    role: site
+  - place: pompeii
+    role: site
+  - place: vesuvius
+    role: context
+cite:
+  - id: buried-cities
+    says: "Dio, in Foster's translation, says the ash buried two whole cities, Herculaneum and
+      Pompeii, while the people sat in the theatre."
+    source: cassius-dio
+    at: LXVI.23 (A.D. 79)
+    quote: "it buried two whole cities, Herculaneum and Pompeii, while the populace was seated in
+      the theatre."
+  - id: buried-rome
+    says: "Dio, in Foster's translation, says some of the dust reached Africa, Syria, Egypt and
+      Rome."
+    role: supporting
+    source: cassius-dio
+    at: LXVI.23 (A.D. 79)
+    quote: "some of it reached Africa and Syria and Egypt, and it also entered Rome"
+notes: "Dio's account, written about a century and a half later, with portents (giants in the smoke)
+  that the record leaves out. Pliny's letters do not name Pompeii or Herculaneum. The year is an
+  interpretation; the season is disputed (see the eruption events)."

@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Josephus son of Matthias, a priest of Jerusalem made governor of both Galilees in 66, who
+  defended Jotapata, surrendered to Vespasian, and wrote the history of the war in Rome as Flavius
+  Josephus."
+types: [person]
+names:
+  - form: Josephus
+    lang: en
+    script: Latn
+    cite:
+      - id: flavius-josephus-name
+        says: "Josephus tells that Josephus, the son of Matthias, was made governor of both the
+          Galilees."
+        source: josephus-jewish-war
+        at: "2.20.4"
+        quote: "as was Josephus, the son of Matthias, of both the Galilees."
+roles:
+  - role: soldier
+    note: "Commander in Galilee, 66–67 CE."
+  - role: scholar
+    note: Historian of the war.
+notes: "He is the author of the source this chapter cites, and an actor in it."

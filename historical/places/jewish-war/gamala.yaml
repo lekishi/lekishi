@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Gamala, a city on a steep ridge in Lower Gaulanitis east of the Sea of Galilee, taken by Vespasian
+  in 67 CE after a hard siege.
+types: [settlement, fortification]
+names:
+  - form: Gamala
+    lang: en
+    script: Latn
+    cite:
+      - id: gamala-name
+        says: Josephus tells that Gamala relied on the difficulty of its site, greater than that of
+          Jotapata.
+        source: josephus-jewish-war
+        at: "4.1.1"
+        quote:
+          yet did not Gamala accede to them, but relied upon the difficulty of the place, which was
+          greater than that of Jotapata
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [35.73789, 32.9014]
+    notes: The gazetteer's point for the excavated site on the ridge in the Golan.
+    cite:
+      - id: gamala-location
+        says:
+          Pleiades gives this representative point for Gamala, with its location precision recorded
+          as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 678146 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "678146"

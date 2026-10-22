@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Masada, Herod's fortress on a rock above the Dead Sea, held by the Sicarii under Eleazar until the
+  Roman siege under Flavius Silva ended the war.
+types: [fortification]
+names:
+  - form: Masada
+    lang: en
+    script: Latn
+    cite:
+      - id: masada-name
+        says: Josephus names the last stronghold still in rebellion as Masada.
+        source: josephus-jewish-war
+        at: "7.8.1"
+        quote: This fortress was called Masada.
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [35.35371, 31.31636]
+    notes: The gazetteer's point for the excavated fortress.
+    cite:
+      - id: masada-location
+        says:
+          Pleiades gives this representative point for Masada, with its location precision recorded
+          as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 687968 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "687968"

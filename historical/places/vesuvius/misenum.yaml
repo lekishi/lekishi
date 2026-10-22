@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Misenum, the base of the Roman fleet at the northern cape of the Bay of Naples, where the elder
+  Pliny commanded and the younger Pliny watched the eruption.
+types: [port, settlement]
+names:
+  - form: Misenum
+    lang: la
+    script: Latn
+    cite:
+      - id: misenum-name
+        says: Pliny tells that his uncle was at Misenum, commanding the fleet in person.
+        source: pliny-letters
+        at: "6.16.4"
+        quote: Erat Miseni classemque imperio praesens regebat.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [14.08488, 40.78628]
+    notes: The gazetteer's point for the Roman town and harbour at Capo Miseno.
+    cite:
+      - id: misenum-location
+        says:
+          Pleiades gives this representative point for Misenum, with its location precision recorded
+          as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 432941 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "432941"

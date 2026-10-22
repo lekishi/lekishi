@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "At Caesarea, where Nero had given the Greeks control of the city, a Greek sacrifices birds
+  on an upturned pot at the entrance of the synagogue on the sabbath; the fighting that follows is
+  where Josephus begins the war, under the procurator Gessius Florus."
+types: [occurrence]
+date:
+  value: "66"
+  mode: window
+  calendar: julian
+  as_written: "in the twelfth year of the reign of Nero, and the seventeenth of the reign of
+    Agrippa, in the month of Artemisius [Jyar.]"
+  cite:
+    - id: war-begins-month
+      says: Josephus dates the beginning of the war to the month Artemisius in the twelfth year of Nero.
+      source: josephus-jewish-war
+      at: "2.14.4"
+      quote: "at the same time began the war, in the twelfth year of the reign of Nero, and the
+        seventeenth of the reign of Agrippa, in the month of Artemisius [Jyar.]"
+    - id: war-begins-at-caesarea-66-year
+      says: "Meistermann's 1910 history of Jerusalem dates Gessius Florus's provocation of the
+        revolt to 66."
+      basis: interpretation
+      attributed_to: B. Meistermann (1910)
+      role: supporting
+      source: catholic-encyclopedia
+      at: "Jerusalem (Before A.D. 71), by B. Meistermann (vol. 8, 1910), Herod Agrippa I to the
+        destruction"
+      quote: "Gessius Florus (66) surpassed the wickedness of his predecessors, and drove the people
+        to revolt against the Roman domination"
+places:
+  - place: caesarea-maritima
+    role: site
+participants:
+  - actor: gessius-florus
+    role: other
+  - actor: judaean-rebels
+    role: participant
+cite:
+  - id: war-begins-synagogue
+    says: Josephus tells that a man of Caesarea set an earthen vessel upside down at the entrance of the synagogue and sacrificed birds on it.
+    source: josephus-jewish-war
+    at: "2.14.5"
+    quote: "a certain man of Cesarea, of a seditious temper, got an earthen vessel, and set it with
+      the bottom upward, at the entrance of that synagogue, and sacrificed birds."
+notes: "Josephus's account: he was a commander on the Jewish side until Jotapata and on the Roman
+  side after, and his numbers are his. The year is an interpretation; Josephus dates by month and
+  regnal year."

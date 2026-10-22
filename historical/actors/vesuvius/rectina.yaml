@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Rectina, whose villa lay at the foot of Vesuvius and whose message asking to be rescued
+  turned the elder Pliny's voyage of study into a rescue."
+types: [person]
+names:
+  - form: Rectina
+    lang: la
+    script: Latn
+    note: 'The transcription reads "Rectinae Tasci", Rectina, wife of Tascus; re-check the reading against a critical edition.'
+    cite:
+      - id: rectina-name
+        says: "Pliny tells that a note came from Rectina, terrified by the danger, because her villa
+          lay below the mountain."
+        source: pliny-letters
+        at: "6.16.8"
+        quote: accipit codicillos Rectinae Tasci imminenti periculo exterritae

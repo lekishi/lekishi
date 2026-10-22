@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Cenchreae, the eastern port of Corinth on the Saronic Gulf, where Paul cut his hair for a vow
+  before sailing for Syria.
+types: [port, settlement]
+names:
+  - form: Cenchrea
+    lang: en
+    script: Latn
+    cite:
+      - id: cenchreae-name
+        says: Acts tells that Paul had shorn his head in Cenchrea, for he had a vow.
+        source: bible-kjv
+        at: "Acts 18:18"
+        quote: "having shorn his head in Cenchrea: for he had a vow."
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [22.99253, 37.88239]
+    notes: The gazetteer's point for the excavated harbour at Kechries.
+    cite:
+      - id: cenchreae-location
+        says: Pleiades gives this representative point for Kenchreai, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 570347 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "570347"

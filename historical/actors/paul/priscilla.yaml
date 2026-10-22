@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Priscilla, Aquila's wife, who left Rome with him under Claudius's expulsion, worked with
+  Paul at Corinth and went with him to Ephesus."
+types: [person]
+names:
+  - form: Priscilla
+    lang: en
+    script: Latn
+    cite:
+      - id: priscilla-name
+        says: Acts names Priscilla as the wife of Aquila.
+        source: bible-kjv
+        at: "Acts 18:2"
+        quote: with his wife Priscilla
+roles:
+  - role: artisan
+    note: "A tentmaker, in Acts."

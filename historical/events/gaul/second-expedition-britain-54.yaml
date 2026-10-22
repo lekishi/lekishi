@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "In 54 BCE Caesar crossed again with five legions and about 2,000 cavalry, drifted past
+  Britain in the night, and landed unopposed at midday. He forced the Thames at the one ford against
+  Cassivellaunus, whom the Britons had made their leader, received the surrender of the Trinovantes
+  and others, and imposed hostages and a yearly tribute before returning to Gaul near the equinox."
+types: [journey, campaign]
+date:
+  value: 54 BCE
+  mode: window
+  calendar: julian
+  as_written: L. Domitio Ap. Claudio consulibus
+  cite:
+    - id: second-expedition-year
+      says: Caesar dates book V to the consulship of L. Domitius and Ap. Claudius (54 BCE).
+      source: caesar-gallic-war
+      at: "5.1"
+      quote: "L. Domitio Ap. Claudio consulibus, discedens ab hibernis Caesar in Italiam"
+places:
+  - place: morini-coast
+    role: start
+  - place: britannia
+    role: waypoint
+    cite:
+      id: second-expedition-landing
+      says: Caesar tells that all the ships reached Britain at about midday.
+      source: caesar-gallic-war
+      at: "5.8"
+      quote: Accessum est ad Britanniam omnibus navibus meridiano fere tempore
+  - place: thames
+    role: site
+    cite:
+      id: second-expedition-thames
+      says: "Caesar tells that he led the army to the Thames, which can be forded in one place only,
+        and with difficulty."
+      source: caesar-gallic-war
+      at: "5.18"
+      quote: "quod flumen uno omnino loco pedibus, atque hoc aegre, transiri potest."
+participants:
+  - actor: julius-caesar
+    role: leader
+  - actor: cassivellaunus
+    role: subject
+cite:
+  - id: second-expedition-tribute
+    says: Caesar tells that he demanded hostages and fixed the tribute Britain should pay the Roman people each year.
+    source: caesar-gallic-war
+    at: "5.22"
+    quote: obsides imperat et quid in annos singulos vectigalis populo Romano Britannia penderet constituit
+notes: "Caesar's own account. Neither the landing nor the Thames ford is located; the places are the
+  coast, the island and the river."

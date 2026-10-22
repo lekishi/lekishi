@@ -374,6 +374,7 @@ describe("the evidence grammar", () => {
         precision: place.precision,
         count: place.eventCount,
         disputed: place.disputed,
+        tradition: place.tradition,
         tone: place.tone,
       })
     }

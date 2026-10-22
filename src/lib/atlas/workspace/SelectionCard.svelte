@@ -31,7 +31,7 @@
    * to, what is merely nearby, its relationships and its sources.
    *
    * What the history depends on is in words, not colour: a disputed account
-   * shows both readings, an occurrence window says it is one occurrence inside
+   * shows both readings, a record told as tradition says so, an occurrence window says it is one occurrence inside
    * the span, a place without an identification says the map claims no
    * position, and a selection outside the window keeps its card and offers the
    * explicit time change RFD 1 asks for.
@@ -198,6 +198,20 @@
         <p class="font-serif text-body text-ink" data-testid="atlas-selection-note">
           {event.note}
         </p>
+
+        {#if event.tradition}
+          <section
+            class="flex flex-col gap-2 rounded-plate border border-dotted border-ink-dim px-3 py-2.5"
+            data-testid="atlas-tradition"
+            aria-label="Told as tradition"
+          >
+            <Badge kind="tradition" class="self-start" />
+            <p class="text-body-sm text-ink">
+              Told as tradition: the sources pass this on as the received story of a time they did
+              not witness.
+            </p>
+          </section>
+        {/if}
 
         {#if event.dispute}
           <section

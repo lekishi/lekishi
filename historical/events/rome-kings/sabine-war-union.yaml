@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "As Livy tells it, the Sabines under Titus Tatius took the citadel by Tarpeia's treachery and
+  fought the Romans in the valley between the Palatine and the Capitol, until the seized women ran
+  between the lines and begged their fathers and husbands to stop. The leaders made a treaty, the
+  two peoples became one state with its seat at Rome, and the citizens were called Quirites after
+  the Sabine town of Cures."
+types: [campaign, council]
+date:
+  value: 752 BCE..716 BCE
+  mode: window
+  calendar: julian
+  as_written: in the reign of Romulus
+  cite:
+    - id: sabine-war-reign
+      says: Livy dates the war only to the reign of Romulus, which he gives as thirty-seven years;
+        Dionysius begins that reign in 752/751 BCE, so the window is 752–716 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Dionysius's Olympiad dates for the reigns
+      sources:
+        - source: livy
+          at: "1.21.6"
+          quote: "Romulus septem et triginta regnavit annos"
+        - source: dionysius-roman-antiquities
+          at: "1.75"
+          quote: began his reign in the first year of the seventh Olympiad
+places:
+  - place: rome
+    role: site
+    cite:
+      id: sabine-war-place
+      basis: tradition
+      says: Livy tells that the Romans and Sabines renewed the battle in the valley between the two
+        hills.
+      source: livy
+      at: "1.12.10"
+      quote: "Romani Sabinique in media convalle duorum montium redintegrant proelium."
+participants:
+  - actor: romulus
+    role: leader
+  - actor: titus-tatius
+    role: leader
+  - actor: sabines
+    role: participant
+cite:
+  - id: sabine-war-union-treaty
+    basis: tradition
+    says: Livy tells that the leaders made not only peace but one state out of two, shared the
+      kingship, and moved all government to Rome; the citizens were called Quirites from Cures.
+    source: livy
+    at: "1.13.5"
+    quote: "nec pacem modo, sed civitatem unam ex duabus faciunt. regnum consociant; imperium omne
+      conferunt Romam. ita geminata urbe, ut Sabinis tamen aliquid daretur, Quirites a Curibus
+      appellati."
+notes:
+  Tradition, not record. Livy and Dionysius place the war after the seizure of the women and date
+  it only to Romulus's reign, so the window is the whole reign.

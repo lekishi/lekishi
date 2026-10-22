@@ -1,0 +1,71 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "The elder Pliny orders a light ship to go and look; a message from Rectina, whose villa
+  lies below the mountain, turns it into a rescue. He launches the quadriremes, steers into the
+  falling ash and pumice, cannot land on the blocked shore, and runs on with the wind to Pomponianus
+  at Stabiae."
+types: [journey]
+date:
+  value: "79-08-24"
+  calendar: julian
+  as_written: the same afternoon (Nonum Kal. Septembres)
+  cite:
+    - id: sails-day
+      says: Pliny tells the voyage as following at once on the sighting of the cloud on the ninth day before the Kalends of September.
+      source: pliny-letters
+      at: "6.16.4"
+      quote: Nonum Kal. Septembres hora fere septima
+    - id: pliny-sails-to-stabiae-79-year
+      says: "Foster's translation of Dio dates the chapters on the eruption, by a sidenote, to A.D.
+        79."
+      basis: interpretation
+      attributed_to: H. B. Foster (1906)
+      role: supporting
+      source: cassius-dio
+      at: "LXVI.16 (A.D. 79), translator's sidenote"
+      quote: A.D. 79 (a.u. 832)
+    - id: pliny-sails-to-stabiae-79-dio-autumn
+      says: "Dio, in Foster's translation, says the fire began just at the end of autumn."
+      role: conflicting
+      source: cassius-dio
+      at: LXVI.21 (A.D. 79)
+      quote: A great fire was suddenly created just at the end of autumn.
+places:
+  - place: misenum
+    role: start
+  - place: stabiae
+    role: end
+participants:
+  - actor: pliny-the-elder
+    role: leader
+  - actor: rectina
+    role: other
+  - actor: pomponianus
+    role: host
+cite:
+  - id: sails-rectina
+    says: "Pliny tells that a note came from Rectina, terrified by the danger."
+    source: pliny-letters
+    at: "6.16.8"
+    quote: accipit codicillos Rectinae Tasci imminenti periculo exterritae
+  - id: sails-quadriremes
+    says: Pliny tells that his uncle launched the quadriremes and went aboard to bring help to many.
+    role: supporting
+    source: pliny-letters
+    at: "6.16.9"
+    quote: "Deducit quadriremes, ascendit ipse non Rectinae modo sed multis"
+  - id: sails-pomponianus
+    says: "Pliny tells that his uncle, told to turn back, said fortune favours the brave and made
+      for Pomponianus."
+    role: supporting
+    source: pliny-letters
+    at: "6.16.11"
+    quote: "'Fortes' inquit 'fortuna iuvat: Pomponianum pete.'"
+notes: "Pliny the Younger's account, written about twenty-five years later for Tacitus; he was at
+  Misenum, and tells his uncle's last hours from those who were with him. The year is an
+  interpretation."
+dispute:
+  status: disputed
+  summary: "Pliny's letter gives the ninth day before the Kalends of September (24 August), and the
+    chapter shows that day. Dio, in Foster's translation, puts the outbreak at the end of autumn;
+    translators render the phrase differently, so whether Dio conflicts with Pliny turns on the
+    Greek. Modern arguments for an autumn date from the finds at Pompeii are not cited here."

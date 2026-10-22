@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../schema/chapter.schema.json
+title: Caesar in Gaul
+summary: "Caesar's eight years in Gaul as he reported them to Rome, from 58 BCE to 51 BCE: the Helvetii turned back,
+  Ariovistus, the Belgae and the Nervii, the Veneti's fleet, the Rhine bridge, two crossings to
+  Britain, the loss at Atuatuca, and Vercingetorix's revolt from Cenabum to Alesia."
+window: 58 BCE..51 BCE
+story:
+  summary: "The Gallic War as Caesar and Hirtius tell it in the Commentaries, one book a year from 58
+    to 51 BCE: a commander's own account of his campaigns, with his numbers, from the Rhône at
+    Genava to Uxellodunum."
+  span: 58 BCE..51 BCE
+  coverage: "From the Helvetii's gathering on the Rhône in March 58 BCE to the fall of Uxellodunum in
+    51 BCE, as books I–VIII of the Commentaries tell it. Excluded: the winter politics in Italy,
+    the campaigns of Caesar's legates that he only reports (Crassus in Aquitania, Labienus against
+    the Treveri and at Lutetia, Sabinus against the Venelli), the Bellovaci in book VIII, the
+    ethnography of book VI, and the civil war that followed. Battles are shown at the nearest place
+    the gazetteer locates; no march route, front or territory is drawn."
+  notes: "Every event is Caesar's own report, written as a dispatch for Rome by the man who commanded
+    the army; his numbers of enemies and dead are his, and the chapter says so rather than
+    correcting them. Dates are years: Caesar dates three books by the consuls and Hirtius says
+    there was one book a year, so each event is dated to its book's year. Only the Helvetii's
+    gathering has a day, given in the pre-Julian Roman calendar."
+  steps:
+    - helvetii-stopped-at-genava-58: Caesar stops the Helvetii at the Rhône by Genava
+    - tigurini-at-the-saone-58: The Tigurini are cut down at the Saône crossing
+    - helvetii-defeated-near-bibracte-58: The Helvetii are defeated on the road to Bibracte
+    - rome-helvetii-war-58: The Helvetii surrender and are sent home
+    - vesontio-occupied-58: Caesar seizes Vesontio ahead of Ariovistus
+    - ariovistus-defeated-58: Ariovistus's Germans are routed towards the Rhine
+    - belgae-at-the-aisne-57: The Belgic army breaks up at the Aisne
+    - nervii-battle-sambre-57: The Nervii nearly overwhelm the legions at the Sambre
+    - atuatuci-oppidum-taken-57: The Atuatuci's stronghold is taken and its people sold
+    - veneti-fleet-destroyed-56: The Veneti's fleet is destroyed off Armorica
+    - rhine-bridge-55: Caesar bridges the Rhine in ten days
+    - first-landing-britain-55: The first landing in Britain
+    - second-expedition-britain-54: The second expedition crosses the Thames
+    - cassivellaunus-submits-54: Cassivellaunus gives hostages and tribute is fixed
+    - atuatuca-disaster-54: Sabinus and Cotta's legions are destroyed at Atuatuca
+    - second-rhine-crossing-53: A second Rhine bridge, and the hunt for Ambiorix
+    - cenabum-massacre-52: The Carnutes kill the Roman traders at Cenabum
+    - vercingetorix-raises-revolt-52: Vercingetorix raises the revolt from the Arverni
+    - avaricum-taken-52: Avaricum is stormed after a long siege
+    - gergovia-repulse-52: Caesar is thrown back at Gergovia
+    - alesia-siege-52: Alesia is enclosed and the relief army beaten off
+    - vercingetorix-surrenders-52: Vercingetorix surrenders
+    - uxellodunum-taken-51: Uxellodunum falls when its spring is cut off
+include:
+  - rome-nervii-war-57
+  - rome-veneti-war-56
+  - rome-eburones-war-54-53
+  - rome-arverni-war-52

@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Sabis (Sambre), where the Nervii and their allies waited in the woods in 57 BCE and fell on
+  Caesar's army as it made camp, in the hardest battle of his Gallic book II.
+types: [landform]
+names:
+  - form: Sabis
+    lang: la
+    script: Latn
+    cite:
+      - id: sambre-name
+        says: Caesar learned from prisoners that the river Sabis was no more than ten miles from his
+          camp.
+        source: caesar-gallic-war
+        at: "2.16"
+        quote: inveniebat ex captivis Sabim flumen a castris suis non amplius milibus passuum X abesse
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [4.16233, 50.28473]
+    notes: A river's representative point; the battlefield on the Sambre is not identified with
+      certainty.
+    cite:
+      - id: sambre-location
+        says:
+          Pleiades gives this representative point for the river Sabis, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 109299 (reprLatLong), dump 2026-10-21
+modern:
+  - form: Sambre
+    lang: fr
+    note: The modern river.
+external_ids:
+  - system: pleiades
+    id: "109299"

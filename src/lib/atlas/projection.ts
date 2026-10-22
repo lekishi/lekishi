@@ -924,6 +924,9 @@ function projectEvent(
     occurrence,
     note,
     dispute: projectDispute(entry, errors),
+    tradition: listOf(entry.revision["claims"])
+      .map(objectOf)
+      .some((claim) => claim["role"] === "main" && claim["basis"] === "tradition"),
     coda: labelledCoda,
     placeIds: eventPlaces.placeIds,
     participants: projectParticipants(entry, actors, errors),

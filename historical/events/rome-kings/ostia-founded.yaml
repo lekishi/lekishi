@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "As Livy tells it, Ancus Marcius extended Roman rule to the sea, founded the city of Ostia at
+  the mouth of the Tiber, and set up salt works around it. The excavated Ostia is no older than the
+  fourth century BCE, so the regal foundation is the tradition's claim, not the date of the remains."
+types: [founding]
+date:
+  value: 639 BCE..615 BCE
+  mode: window
+  calendar: julian
+  as_written: in the reign of Ancus Marcius
+  cite:
+    id: ostia-founded-reign
+    says: Livy dates the founding only to the reign of Ancus Marcius, which he gives as twenty-four
+      years; Dionysius dates Ancus's accession to 639/638 BCE and Tarquinius Priscus's to 615/614
+      BCE.
+    basis: interpretation
+    attributed_to: Lekishi editorial reckoning on Dionysius's Olympiad dates for the reigns
+    sources:
+      - source: livy
+        at: "1.35.1"
+        quote: "regnavit Ancus annos quattuor et viginti"
+      - source: dionysius-roman-antiquities
+        at: "3.36"
+        quote: entered upon the government in the second year of the thirty-fifth Olympiad
+places:
+  - place: ostia
+    role: site
+    cite:
+      id: ostia-founded-site
+      basis: tradition
+      says:
+        Livy tells that Roman rule was carried to the sea, Ostia founded at the mouth of the Tiber,
+        and salt works made around it.
+      source: livy
+      at: "1.33.9"
+      quote: "in ore Tiberis Ostia urbs condita, salinae circa factae"
+participants:
+  - actor: ancus-marcius
+    role: leader
+notes:
+  Tradition, not record. The point is the excavated Roman city, which the gazetteer locates; it is
+  not evidence of a regal foundation, and the summary says so.

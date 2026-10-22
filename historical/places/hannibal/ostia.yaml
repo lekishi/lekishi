@@ -1,7 +1,8 @@
 # yaml-language-server: $schema=../../schema/place.schema.json
 summary:
-  Ostia, Rome's harbour town at the Tiber mouth, where Hiero's fleet landed grain and a golden
-  Victory for Rome in 216 BCE.
+  Ostia, Rome's harbour town at the Tiber mouth. Livy tells that Ancus Marcius founded it when Roman
+  rule reached the sea; the excavated city is later, and its oldest remains date from the fourth
+  century BCE. Hiero's fleet landed grain and a golden Victory for Rome there in 216 BCE.
 types: [settlement, port]
 names:
   - form: Ostia
@@ -13,6 +14,13 @@ names:
         source: livy
         at: "22.37.1"
         quote: ab Hierone classis Ostia cum magno commeatu accessit
+      - id: ostia-name
+        says: Livy tells that under Ancus Marcius the city of Ostia was founded at the mouth of the
+          Tiber.
+        role: supporting
+        source: livy
+        at: "1.33.9"
+        quote: "in ore Tiberis Ostia urbs condita"
 at:
   - interpretation: approximate_point
     precision: locality

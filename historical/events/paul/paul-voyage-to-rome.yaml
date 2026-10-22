@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Paul's voyage to Rome as a prisoner in the custody of the centurion Julius: from Caesarea
+  by Sidon and Myra to Crete, fourteen days adrift in a storm, shipwreck on Malta and a winter
+  there, then by Syracuse, Rhegium and Puteoli and up the Via Appia to Rome."
+types: [journey]
+date:
+  value: "59..60"
+  mode: duration
+  calendar: julian
+  as_written: "Prat (1911): departure for Rome, 59; captivity at Rome, 60-62"
+  cite:
+    - id: paul-voyage-to-rome-date
+      says: "Prat's chronology of 1911 dates the departure for Rome to 59 and the captivity at Rome
+        from 60, so the voyage and the winter on Malta fall between."
+      basis: interpretation
+      attributed_to: F. Prat (1911)
+      sources:
+        - source: catholic-encyclopedia
+          at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+          quote: "arrival of Festus, departure for Rome, 59"
+        - source: catholic-encyclopedia
+          at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+          quote: "captivity at Rome, 60-62"
+places:
+  - place: caesarea-maritima
+    role: start
+  - place: melita
+    role: waypoint
+    note: The wreck and the winter.
+  - place: rome
+    role: end
+participants:
+  - actor: paul-the-apostle
+    role: leader
+cite:
+  - id: paul-voyage-to-rome-start
+    says: "Acts tells that when it was decided they should sail to Italy, Paul and other prisoners
+      were handed to a centurion named Julius."
+    source: bible-kjv
+    at: "Acts 27:1"
+    quote: "they delivered Paul and certain other prisoners unto one named Julius, a centurion of
+      Augustus’ band."
+  - id: paul-voyage-to-rome-end
+    says: Acts tells that when they came to Rome the centurion delivered the prisoners to the captain of the guard.
+    role: supporting
+    source: bible-kjv
+    at: "Acts 28:16"
+    quote: "And when we came to Rome, the centurion delivered the prisoners to the captain of the
+      guard"
+notes: "Acts tells it, and the dates are Prat's 1911 reckoning, an interpretation: Acts gives no
+  years."

@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: The Arverni under Vercingetorix lead the revolt of Gaul against Rome; after Alesia they send envoys promising obedience and give many hostages.
+types: [conflict]
+from: roman-republic
+to: arverni
+date:
+  value: 52 BCE
+  mode: window
+  calendar: julian
+  as_written: the year of book VII
+notes: "Caesar's own account of a war he commanded."
+cite:
+  id: rome-arverni-war-52-basis
+  says: "Caesar tells that envoys of the Arverni promised to do what he ordered, and that he
+    demanded a great number of hostages."
+  source: caesar-gallic-war
+  at: "7.90"
+  quote: Eo legati ab Arvernis missi quae imperaret se facturos pollicentur. Imperat magnum numerum obsidum.

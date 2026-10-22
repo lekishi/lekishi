@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Melita (Malta), the island where the ship from Alexandria ran aground and Paul and the crew
+  wintered for three months.
+types: [region]
+names:
+  - form: Melita
+    lang: en
+    script: Latn
+    cite:
+      - id: melita-name
+        says: Acts tells that when they had escaped they learned the island was called Melita.
+        source: bible-kjv
+        at: "Acts 28:1"
+        quote: then they knew that the island was called Melita.
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [14.43845, 35.88781]
+    notes: The gazetteer's representative point for the island; the bay of the wreck is not identified.
+    cite:
+      - id: melita-location
+        says: Pleiades gives this representative point for the island of Melita, with its location
+          precision recorded as "related".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 462311 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "462311"
+notes: Most identify Melita with Malta; Acts gives no place on the island for the wreck.

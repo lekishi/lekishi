@@ -186,6 +186,10 @@
     { kind: "active", meaning: "The record spans the playhead." },
     { kind: "possible", meaning: "Uncertain at the playhead: a hollow marker at 55 % opacity." },
     { kind: "disputed", meaning: "The sources disagree: a split marker and the word." },
+    {
+      kind: "tradition",
+      meaning: "Told as legend: a dotted place name and the word; the marker keeps its evidence.",
+    },
     { kind: "outside", meaning: "Excluded by the window, said in words, dimmed." },
     { kind: "coda", meaning: "Presented after the chapter's main story." },
   ]

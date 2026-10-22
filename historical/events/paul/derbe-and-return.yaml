@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Paul and Barnabas preach at Derbe, then turn back through Lystra, Iconium and Antioch in
+  Pisidia, preach at Perga, and sail from Attalia to Antioch."
+types: [mission]
+part_of:
+  - paul-first-journey
+date:
+  value: "45..49"
+  mode: window
+  calendar: julian
+  as_written: "Prat (1911): first mission, 45-49"
+  cite:
+    - id: derbe-and-return-date
+      says: "Prat's chronology of 1911 dates Paul's first mission to 45–49."
+      basis: interpretation
+      attributed_to: F. Prat (1911)
+      source: catholic-encyclopedia
+      at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+      quote: "first mission, 45-49"
+places:
+  - place: derbe
+    role: start
+  - place: lystra
+    role: waypoint
+  - place: iconium
+    role: waypoint
+  - place: antioch-of-pisidia
+    role: waypoint
+  - place: perga
+    role: waypoint
+  - place: attalia
+    role: waypoint
+  - place: antioch-on-the-orontes
+    role: end
+participants:
+  - actor: paul-the-apostle
+    role: leader
+  - actor: barnabas
+    role: participant
+cite:
+  - id: derbe-return
+    says: "Acts tells that after preaching at Derbe they returned to Lystra, Iconium and Antioch."
+    source: bible-kjv
+    at: "Acts 14:21"
+    quote: "they returned again to Lystra, and to Iconium, and Antioch"
+  - id: derbe-attalia
+    says: Acts tells that after preaching in Perga they went down to Attalia.
+    role: supporting
+    source: bible-kjv
+    at: "Acts 14:25"
+    quote: "And when they had preached the word in Perga, they went down into Attalia"
+notes: "Acts tells it, and the dates are Prat's 1911 reckoning, an interpretation: Acts gives no
+  years."

@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Neapolis, the port of Philippi on the Macedonian coast, where Paul first landed in Europe.
+types: [port, settlement]
+names:
+  - form: Neapolis
+    lang: en
+    script: Latn
+    cite:
+      - id: neapolis-macedonia-name
+        says: Acts tells that from Troas they ran by Samothrace and next day reached Neapolis.
+        source: bible-kjv
+        at: "Acts 16:11"
+        quote: and the next day to Neapolis
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [24.41404, 40.93432]
+    notes: The gazetteer's point for the ancient port under modern Kavala.
+    cite:
+      - id: neapolis-macedonia-location
+        says: Pleiades gives this representative point for Neapolis, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 501523 (reprLatLong), dump 2026-10-21
+modern:
+  - form: Kavala
+    lang: el
+    note: The modern town.
+external_ids:
+  - system: pleiades
+    id: "501523"

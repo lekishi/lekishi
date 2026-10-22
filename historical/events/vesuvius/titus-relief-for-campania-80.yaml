@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Titus sends two former consuls to Campania to oversee the resettlement of the survivors
+  and gives them money, including the estates of those who died without heirs; while he is away on
+  this business a great fire burns much of Rome."
+types: [occurrence]
+date:
+  value: "80"
+  mode: window
+  calendar: julian
+  as_written: in the following year
+  cite:
+    - id: titus-relief-year
+      says: "Foster's translation of Dio dates the following chapter, the fire at Rome and the
+        relief of Campania, by a sidenote, to A.D. 80."
+      basis: conventional
+      convention: Dio's order of Titus's reign on the standard chronology of the emperors
+      sources:
+        - source: cassius-dio
+          at: LXVI.24 (A.D. 80)
+        - source: cassius-dio
+          at: "LXVI.24 (A.D. 80), translator's sidenote"
+          quote: A.D. 80 (a.u. 833)
+places:
+  - place: vesuvius
+    role: context
+    note: "The region of the disaster; Dio names Campania, not a town."
+  - place: rome
+    role: context
+    note: The fire at Rome broke out while Titus was away.
+participants:
+  - actor: titus
+    role: leader
+cite:
+  - id: relief-consuls
+    says: "Dio, in Foster's translation, says Titus sent two ex-consuls to the Campanians to
+      supervise the founding of settlements."
+    source: cassius-dio
+    at: LXVI.24 (A.D. 80)
+    quote: "Titus, accordingly, sent two exconsuls to the Campanians to supervise the founding of
+      settlements"
+  - id: relief-fire
+    says: "Dio, in Foster's translation, says the fire spread over much of Rome while Titus was
+      absent on the business of the Campanian disaster."
+    role: supporting
+    source: cassius-dio
+    at: LXVI.24 (A.D. 80)
+    quote: while Titus was absent on business connected with the catastrophe that had befallen in Campania
+notes: "Dio's account. The year is an interpretation from the translator's sidenote."

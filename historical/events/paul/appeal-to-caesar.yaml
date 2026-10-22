@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Before Festus at Caesarea, rather than be sent to Jerusalem for trial, Paul appeals to
+  Caesar, and Festus, after consulting his council, grants it."
+types: [occurrence]
+date:
+  value: "59"
+  mode: window
+  calendar: julian
+  as_written: "Prat (1911): arrival of Festus, departure for Rome, 59"
+  cite:
+    - id: appeal-to-caesar-date
+      says: "Prat's chronology of 1911 dates the arrival of Festus and Paul's departure for Rome to
+        59."
+      basis: interpretation
+      attributed_to: F. Prat (1911)
+      source: catholic-encyclopedia
+      at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+      quote: "arrival of Festus, departure for Rome, 59"
+places:
+  - place: caesarea-maritima
+    role: site
+participants:
+  - actor: paul-the-apostle
+    role: subject
+  - actor: porcius-festus
+    role: leader
+cite:
+  - id: appeal-made
+    says: "Acts tells that Paul said: I appeal unto Caesar."
+    source: bible-kjv
+    at: "Acts 25:11"
+    quote: I appeal unto Caesar.
+  - id: appeal-granted
+    says: Acts tells that Festus answered that he should go to Caesar.
+    role: supporting
+    source: bible-kjv
+    at: "Acts 25:12"
+    quote: Hast thou appealed unto Caesar? unto Caesar shalt thou go.
+notes: "Acts tells it, and the dates are Prat's 1911 reckoning, an interpretation: Acts gives no
+  years."

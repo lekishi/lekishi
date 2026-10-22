@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Paul (Saul) of Tarsus, a Jew of Tarsus in Cilicia and a Roman citizen by birth in Acts,
+  who after his conversion carried the Christian mission through Cyprus, Anatolia, Macedonia and
+  Greece, and was sent to Rome as a prisoner."
+types: [person]
+names:
+  - form: Paul
+    lang: en
+    script: Latn
+    note: "Acts calls him Saul until Acts 13:9 and Paul after."
+    cite:
+      - id: paul-the-apostle-name
+        says: "Acts gives Saul his second name, Paul, at Paphos."
+        source: bible-kjv
+        at: "Acts 13:9"
+        quote: "Then Saul, (who also is called Paul,)"
+roles:
+  - role: other
+    note: "Missionary of the church of Antioch, in Acts."
+notes: "Acts is the narrative source for every event of the chapter; Paul's own letters are not
+  cited here."

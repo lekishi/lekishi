@@ -29,14 +29,14 @@
       }
     },
     "claim": {
-      "description": "One claim about the field this cite is attached to. `says` is what the reader is told the source says. Give one source inline (source, at, quote) or several under `sources`. `basis: interpretation` is an interpretation advanced in cited scholarship and names who advances it in `attributed_to`. `basis: conventional` is a date that standard reference chronologies agree on, for a source that gives a sequence rather than a calendar date; it names the conversion in `convention` and cites the passage and a reference under `sources`.",
+      "description": "One claim about the field this cite is attached to. `says` is what the reader is told the source says. Give one source inline (source, at, quote) or several under `sources`. `basis: interpretation` is an interpretation advanced in cited scholarship and names who advances it in `attributed_to`. `basis: conventional` is a date that standard reference chronologies agree on, for a source that gives a sequence rather than a calendar date; it names the conversion in `convention` and cites the passage and a reference under `sources`. `basis: tradition` is what a source passes on as legend, the received story of a time it did not witness.",
       "type": "object",
       "required": ["says"],
       "additionalProperties": false,
       "properties": {
         "id": { "$ref": "#/$defs/name" },
         "says": { "$ref": "#/$defs/text" },
-        "basis": { "enum": ["attested", "interpretation", "conventional"] },
+        "basis": { "enum": ["attested", "interpretation", "conventional", "tradition"] },
         "role": { "$ref": "../v0/schema/common.schema.json#/$defs/claim/properties/role" },
         "attributed_to": { "type": "string", "minLength": 1, "maxLength": 300 },
         "convention": { "type": "string", "minLength": 1, "maxLength": 200 },

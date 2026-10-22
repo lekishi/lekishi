@@ -2,7 +2,7 @@
   "contract": "lekishi-historical-contract/v0",
   "document": "test_vectors",
   "area": "claims",
-  "description": "Claim-basis vectors: the conventional basis, for a date that standard reference chronologies agree on, derived from a source that gives a sequence rather than a calendar date. The vectors pin that it names its conversion, cites the passage and the reference, asserts a time, and is never one side of a dispute.",
+  "description": "Claim-basis vectors: the conventional basis, for a date that standard reference chronologies agree on, derived from a source that gives a sequence rather than a calendar date. The vectors pin that it names its conversion, cites the passage and the reference, asserts a time, and is never one side of a dispute. They also pin the tradition basis: what a source passes on as legend needs no attribution, is not itself a dispute, may be one side of one, and never shares a pointer with a conventional date.",
   "vectors": [
     {
       "id": "claims/a-conventional-date-is-valid",
@@ -766,6 +766,393 @@
         "codes": [
           "schema_violation"
         ]
+      }
+    },
+    {
+      "id": "claims/a-tradition-needs-no-attribution-or-dispute",
+      "why": "A tradition is what the source tells, not a scholar's reading, so it names no one; and a record told wholly as tradition is not thereby disputed.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-a",
+            "kind": "primary"
+          },
+          {
+            "source_id": "lks:source:vector-b",
+            "kind": "scholarly"
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-founding",
+            "published": true,
+            "content": {
+              "summary": "A founding the sources tell as tradition.",
+              "event_types": [
+                "founding"
+              ],
+              "time": {
+                "source_expression": "from the founding of the city",
+                "calendar": "julian",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 753,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 753,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-1",
+                "statement": "The source tells that the hero founded the city on the hill.",
+                "asserts": "",
+                "basis": "tradition",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "1.7.3"
+                    }
+                  }
+                ]
+              },
+              {
+                "claim_id": "lks:claim:vector-2",
+                "statement": "The source counts the city's years from a founding in 753 BCE.",
+                "asserts": "/time",
+                "basis": "tradition",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "21.6"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": true
+      }
+    },
+    {
+      "id": "claims/traditions-can-be-the-sides-of-a-dispute",
+      "why": "Ancient writers who disagree on a legendary date each pass on a tradition; the alternatives keep that basis under the record's dispute.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-a",
+            "kind": "primary"
+          },
+          {
+            "source_id": "lks:source:vector-b",
+            "kind": "scholarly"
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-founding",
+            "published": true,
+            "content": {
+              "summary": "A founding whose year the traditions disagree on.",
+              "event_types": [
+                "founding"
+              ],
+              "time": {
+                "source_expression": "from the founding of the city",
+                "calendar": "julian",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 753,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 753,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-1",
+                "statement": "The source tells that the hero founded the city on the hill.",
+                "asserts": "",
+                "basis": "tradition",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "1.7.3"
+                    }
+                  }
+                ]
+              },
+              {
+                "claim_id": "lks:claim:vector-2",
+                "statement": "The source counts the city's years from a founding in 753 BCE.",
+                "asserts": "/time",
+                "basis": "tradition",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "21.6"
+                    }
+                  }
+                ]
+              },
+              {
+                "claim_id": "lks:claim:vector-3",
+                "statement": "Another writer the source reports puts the founding in 814 BCE.",
+                "asserts": "/time",
+                "basis": "tradition",
+                "role": "alternative",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "1.74"
+                    }
+                  }
+                ]
+              }
+            ],
+            "dispute": {
+              "status": "disputed",
+              "summary": "The ancient writers disagree on the founding year by more than sixty years."
+            }
+          }
+        ]
+      },
+      "expect": {
+        "valid": true
+      }
+    },
+    {
+      "id": "claims/a-tradition-year-is-not-conventional",
+      "why": "Reference works repeat 753 BCE for the founding of Rome, but it is an ancient reckoning of a legend, not a standard conversion of a dated record; a year that a tradition gives stays tradition.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-a",
+            "kind": "primary"
+          },
+          {
+            "source_id": "lks:source:vector-b",
+            "kind": "scholarly"
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-founding",
+            "published": true,
+            "content": {
+              "summary": "A founding the sources tell as tradition.",
+              "event_types": [
+                "founding"
+              ],
+              "time": {
+                "source_expression": "from the founding of the city",
+                "calendar": "julian",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 753,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 753,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-1",
+                "statement": "The source tells that the hero founded the city on the hill.",
+                "asserts": "",
+                "basis": "tradition",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "1.7.3"
+                    }
+                  }
+                ]
+              },
+              {
+                "claim_id": "lks:claim:vector-2",
+                "statement": "Reference works give the founding as 753 BCE.",
+                "asserts": "/time",
+                "basis": "conventional",
+                "role": "main",
+                "convention": "the Varronian era",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "21.6"
+                    }
+                  },
+                  {
+                    "source_id": "lks:source:vector-b",
+                    "locator": {
+                      "kind": "section",
+                      "value": "s.v. Rome"
+                    }
+                  }
+                ]
+              },
+              {
+                "claim_id": "lks:claim:vector-3",
+                "statement": "The source counts the city's years from a founding in 753 BCE.",
+                "asserts": "/time",
+                "basis": "tradition",
+                "role": "supporting",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "21.6"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "codes": [
+          "conventional_in_tradition"
+        ]
+      }
+    },
+    {
+      "id": "claims/a-conventional-date-beside-a-tradition-is-valid",
+      "why": "A record can join a traditional story to a datable year: the rule bars a conventional claim only on the pointer a tradition asserts, not on the whole record.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-a",
+            "kind": "primary"
+          },
+          {
+            "source_id": "lks:source:vector-b",
+            "kind": "scholarly"
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-founding",
+            "published": true,
+            "content": {
+              "summary": "A dedication the source dates by sequence, at a shrine whose founding it tells as tradition.",
+              "event_types": [
+                "founding"
+              ],
+              "time": {
+                "source_expression": "in the year after the war",
+                "calendar": "julian",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 479,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 479,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-1",
+                "statement": "The source tells that the hero first set up the shrine.",
+                "asserts": "",
+                "basis": "tradition",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "IX.80"
+                    }
+                  }
+                ]
+              },
+              {
+                "claim_id": "lks:claim:vector-2",
+                "statement": "The source places the dedication in the year after the war; the standard chronology dates it to 479 BCE.",
+                "asserts": "/time",
+                "basis": "conventional",
+                "role": "main",
+                "convention": "the standard chronology of the Persian Wars",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "IX.81"
+                    }
+                  },
+                  {
+                    "source_id": "lks:source:vector-b",
+                    "locator": {
+                      "kind": "section",
+                      "value": "vol. V, ch. XLII"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": true
       }
     }
   ]

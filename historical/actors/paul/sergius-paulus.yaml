@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Sergius Paulus, the Roman proconsul of Cyprus at Paphos, who in Acts called for Barnabas
+  and Saul and believed."
+types: [person]
+names:
+  - form: Sergius Paulus
+    lang: en
+    script: Latn
+    cite:
+      - id: sergius-paulus-name
+        says: "Acts calls Sergius Paulus the deputy of the country, a prudent man."
+        source: bible-kjv
+        at: "Acts 13:7"
+        quote: "the deputy of the country, Sergius Paulus, a prudent man"
+roles:
+  - role: official
+    note: 'Proconsul of Cyprus ("deputy" in the King James text).'

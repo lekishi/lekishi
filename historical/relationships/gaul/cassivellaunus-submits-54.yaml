@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "Cassivellaunus, leading the Britons against Caesar, sues for terms; Caesar takes hostages,
+  fixes a yearly tribute for Britain to pay the Roman people, and forbids him to harm the
+  Trinovantes."
+types: [diplomacy]
+from: cassivellaunus
+to: roman-republic
+date:
+  value: 54 BCE
+  mode: window
+  calendar: julian
+  as_written: L. Domitio Ap. Claudio consulibus
+notes: "Caesar's own account of a war he commanded."
+cite:
+  id: cassivellaunus-submits-54-basis
+  says: Caesar tells that he ordered hostages and fixed what Britain was to pay the Roman people each year.
+  source: caesar-gallic-war
+  at: "5.22"
+  quote: obsides imperat et quid in annos singulos vectigalis populo Romano Britannia penderet constituit

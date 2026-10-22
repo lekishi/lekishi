@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  In Livy's tradition Tullus Hostilius makes war on Alba Longa, decides it by the combat of the
+  Horatii and the Curiatii, and destroys the city after the Alban dictator's betrayal.
+types: [conflict]
+from: roman-kingdom
+to: albans
+notes: Tradition, not record. Dated with the destruction of Alba Longa, to the reign of Tullus Hostilius.
+cite:
+  id: rome-alba-war-basis
+  basis: tradition
+  says:
+    Livy tells that Roman and Alban envoys were sent to demand redress at about the same time, and
+    that the Romans declared war when the Alban refused.
+  source: livy
+  at: "1.22.5"
+  quote: "tantisper Romani et res repetiverant priores et neganti Albano bellum in tricesimum diem
+    indixerant."

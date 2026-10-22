@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Beth-horon, the villages at the head and foot of the pass that climbs from the coastal plain to
+  Jerusalem, where in 66 CE the retreating army of Cestius Gallus was trapped in the narrow descent
+  and routed.
+types: [route_node, settlement]
+names:
+  - form: Bethoron
+    lang: en
+    script: Latn
+    cite:
+      - id: beth-horon-name
+        says: Josephus tells that Cestius marched his army on as far as Bethoron.
+        source: josephus-jewish-war
+        at: "2.19.8"
+        quote: He then made his army march on as far as Bethoron.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [35.12412, 31.87921]
+    notes:
+      The gazetteer's point for Upper Beth-horon, at the head of the pass; the rout happened in the
+      descent below it.
+    cite:
+      - id: beth-horon-location
+        says:
+          Pleiades gives this representative point for Upper Beth-horon, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 687857 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "687857"
+notes:
+  Pleiades also records Lower Beth-horon (687858); the record uses the upper village to stand for
+  the pass.

@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Paul and Barnabas go up from Antioch to the apostles and elders at Jerusalem over whether
+  Gentile converts must be circumcised; the council sends them back with Judas Barsabas and Silas
+  and a letter to the Gentile brethren of Antioch, Syria and Cilicia."
+types: [council]
+date:
+  value: "49..50"
+  mode: window
+  calendar: julian
+  as_written: "Prat (1911): third visit to Jerusalem, 49 or 50"
+  cite:
+    - id: council-of-jerusalem-date
+      says: "Prat's chronology of 1911 dates Paul's third visit to Jerusalem, the council, to 49 or
+        50."
+      basis: interpretation
+      attributed_to: F. Prat (1911)
+      source: catholic-encyclopedia
+      at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+      quote: "third visit to Jerusalem, 49 or 50"
+places:
+  - place: jerusalem
+    role: site
+participants:
+  - actor: paul-the-apostle
+    role: leader
+  - actor: barnabas
+    role: participant
+  - actor: silas
+    role: participant
+cite:
+  - id: council-sent-up
+    says: Acts tells that Paul and Barnabas were sent up to Jerusalem to the apostles and elders about this question.
+    source: bible-kjv
+    at: "Acts 15:2"
+    quote: "they determined that Paul and Barnabas, and certain other of them, should go up to
+      Jerusalem unto the apostles and elders about this question."
+  - id: council-met
+    says: Acts tells that the apostles and elders came together to consider the matter.
+    role: supporting
+    source: bible-kjv
+    at: "Acts 15:6"
+    quote: And the apostles and elders came together for to consider of this matter.
+  - id: council-letter
+    says: "Acts tells that the apostles and elders wrote to the Gentile brethren in Antioch, Syria
+      and Cilicia."
+    role: supporting
+    source: bible-kjv
+    at: "Acts 15:23"
+    quote: The apostles and elders and brethren send greeting unto the brethren which are of the Gentiles in Antioch and Syria and Cilicia.
+notes: "Acts tells it; Paul's own account in Galatians 2 is not cited here. The date is Prat's 1911
+  reckoning, an interpretation."

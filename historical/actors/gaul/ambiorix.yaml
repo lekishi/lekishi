@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Ambiorix, joint king of the Eburones, who began the revolt of the winter of 54 BCE, drew
+  Sabinus and Cotta out of their camp at Atuatuca, and destroyed their force; he escaped Caesar's
+  pursuit."
+types: [person]
+names:
+  - form: Ambiorix
+    lang: la
+    script: Latn
+    cite:
+      - id: ambiorix-name
+        says: Caesar tells that the sudden rising began with Ambiorix and Catuvolcus about fifteen days after the legions reached winter quarters.
+        source: caesar-gallic-war
+        at: "5.26"
+        quote: "Diebus circiter XV, quibus in hiberna ventum est, initium repentini tumultus ac
+          defectionis ortum est ab Ambiorige et Catuvolco"
+roles:
+  - role: ruler
+    note: Joint king of the Eburones.

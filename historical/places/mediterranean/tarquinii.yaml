@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Tarquinii, an Etruscan city. Livy tells that Lucumo, the son of Demaratus of Corinth, could win no
+  honour there and left it for Rome, where he became king as Lucius Tarquinius Priscus.
+types: [settlement]
+names:
+  - form: Tarquinii
+    lang: la
+    script: Latn
+    cite:
+      - id: tarquinii-name
+        says: Livy tells that Lucumo, unhonoured at Tarquinii, resolved to leave it.
+        source: livy
+        at: "1.34.5"
+        quote: "consilium migrandi ab Tarquiniis cepit."
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [11.79145, 42.25725]
+    notes:
+      The gazetteer's point for the city and its landscape, on the plateau of Pian di Civita near
+      modern Tarquinia.
+    cite:
+      - id: tarquinii-location
+        says:
+          Pleiades gives this representative point for the Etruscan city of Tarchna/Tarquinii, with
+          its location precision recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 413332 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "413332"

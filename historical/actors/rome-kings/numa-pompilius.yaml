@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Numa Pompilius, the second king of Rome in the tradition: a Sabine of Cures known for
+  justice and piety, whom Livy credits with the temple of Janus, the priesthoods and a calendar of
+  twelve months."
+types: [person]
+names:
+  - form: Numa Pompilius
+    lang: la
+    script: Latn
+    cite:
+      - id: numa-pompilius-name
+        basis: tradition
+        says: "Livy tells that the senators all decreed that the kingship be offered to Numa
+          Pompilius."
+        source: livy
+        at: "1.18.5"
+        quote: "ad unum omnes Numae Pompilio regnum deferendum decernunt."
+roles:
+  - role: ruler
+    note: "The second king, in the tradition."

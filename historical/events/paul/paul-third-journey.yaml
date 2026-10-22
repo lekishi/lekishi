@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Paul's third mission: from Antioch through Galatia and Phrygia to two years and more at
+  Ephesus, then through Macedonia and Greece, and back by Troas, Miletus, Tyre and Caesarea to
+  Jerusalem."
+types: [journey, mission]
+date:
+  value: "53..57"
+  mode: duration
+  calendar: julian
+  as_written: "Prat (1911): third mission, 53-57"
+  cite:
+    - id: paul-third-journey-date
+      says: "Prat's chronology of 1911 dates Paul's third mission to 53–57."
+      basis: interpretation
+      attributed_to: F. Prat (1911)
+      source: catholic-encyclopedia
+      at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+      quote: "third mission, 53-57"
+places:
+  - place: antioch-on-the-orontes
+    role: start
+  - place: ephesus
+    role: waypoint
+    note: The longest stay of the journey.
+  - place: jerusalem
+    role: end
+participants:
+  - actor: paul-the-apostle
+    role: leader
+cite:
+  - id: paul-third-journey-ephesus
+    says: Acts tells that Paul passed through the upper country and came to Ephesus.
+    source: bible-kjv
+    at: "Acts 19:1"
+    quote: Paul having passed through the upper coasts came to Ephesus
+  - id: paul-third-journey-end
+    says: Acts tells that after those days they went up to Jerusalem.
+    role: supporting
+    source: bible-kjv
+    at: "Acts 21:15"
+    quote: "And after those days we took up our carriages, and went up to Jerusalem."
+notes: "Acts tells it, and the dates are Prat's 1911 reckoning, an interpretation: Acts gives no
+  years."

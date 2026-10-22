@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Beroea in Macedonia, where Acts says the Jews were more noble than those in Thessalonica, until
+  men from Thessalonica followed Paul there.
+types: [settlement]
+names:
+  - form: Berea
+    lang: en
+    script: Latn
+    cite:
+      - id: beroea-name
+        says: Acts tells that the brethren sent Paul and Silas away by night to Berea.
+        source: bible-kjv
+        at: "Acts 17:10"
+        quote: sent away Paul and Silas by night unto Berea
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [22.20149, 40.52213]
+    notes: The gazetteer's point for the ancient town under modern Veria.
+    cite:
+      - id: beroea-location
+        says:
+          Pleiades gives this representative point for Beroia, with its location precision recorded
+          as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 491546 (reprLatLong), dump 2026-10-21
+modern:
+  - form: Βέροια
+    lang: el
+    note: The modern town.
+external_ids:
+  - system: pleiades
+    id: "491546"

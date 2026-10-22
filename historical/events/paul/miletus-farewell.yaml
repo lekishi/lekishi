@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Hurrying to reach Jerusalem by Pentecost, Paul sails past Ephesus by Assos, Mitylene,
+  Chios and Samos to Miletus, sends for the elders of the Ephesian church, and takes his leave of
+  them."
+types: [occurrence]
+part_of:
+  - paul-third-journey
+date:
+  value: "53..57"
+  mode: window
+  calendar: julian
+  as_written: "Prat (1911): third mission, 53-57"
+  cite:
+    - id: miletus-farewell-date
+      says: "Prat's chronology of 1911 dates Paul's third mission to 53–57."
+      basis: interpretation
+      attributed_to: F. Prat (1911)
+      source: catholic-encyclopedia
+      at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+      quote: "third mission, 53-57"
+places:
+  - place: alexandria-troas
+    role: start
+  - place: miletus
+    role: site
+  - place: ephesus
+    role: context
+    note: Paul sails past Ephesus and summons its elders to Miletus.
+participants:
+  - actor: paul-the-apostle
+    role: leader
+cite:
+  - id: miletus-arrival
+    says: Acts tells that they came by Chios and Samos to Miletus.
+    source: bible-kjv
+    at: "Acts 20:15"
+    quote: and the next day we came to Miletus.
+  - id: miletus-elders
+    says: Acts tells that from Miletus Paul sent to Ephesus for the elders of the church.
+    role: supporting
+    source: bible-kjv
+    at: "Acts 20:17"
+    quote: "And from Miletus he sent to Ephesus, and called the elders of the church."
+notes: "Acts tells it, and the dates are Prat's 1911 reckoning, an interpretation: Acts gives no
+  years."

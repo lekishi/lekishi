@@ -231,6 +231,7 @@
     attested: scene.places.some((place) => place.mark === "attested"),
     identified: scene.places.some((place) => place.mark === "identified"),
     anchor: scene.places.some((place) => place.mark === "anchor"),
+    tradition: scene.places.some((place) => place.tradition),
   })
   const families = $derived(
     RELATIONSHIP_FAMILIES.filter((family) => scene.arcs.some((arc) => arc.family === family)),

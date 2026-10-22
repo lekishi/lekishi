@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Lucilius Bassus, the new legate, takes the fortress of Herodium and then besieges
+  Machaerus east of the Dead Sea, whose defenders surrender it to save the young Eleazar from
+  crucifixion."
+types: [campaign]
+date:
+  value: "70..73"
+  mode: window
+  calendar: julian
+  as_written: after the fall of Jerusalem and before Masada (Josephus gives no date)
+  cite:
+    - id: herodium-and-machaerus-taken-year
+      says: "Whiston dates the siege of Jerusalem to A.D. 70 and Hoeber ends the war in 73, so the
+        campaign of Bassus falls between."
+      basis: interpretation
+      attributed_to: W. Whiston (1737) and K. Hoeber (1910)
+      sources:
+        - source: josephus-jewish-war
+          at: "6.2.1, Whiston's note 5"
+          quote: "the seventeenth of Panemuns. [Footnote Tamuz,] A.D. 70"
+        - source: catholic-encyclopedia
+          at: "Flavius Josephus, by K. Hoeber (vol. 8, 1910)"
+          quote: during the war of independence (66-73)
+places:
+  - place: herodium
+    role: site
+  - place: machaerus
+    role: site
+participants:
+  - actor: lucilius-bassus
+    role: leader
+  - actor: judaean-rebels
+    role: participant
+cite:
+  - id: herodium-taken
+    says: Josephus tells that Bassus took the citadel in Herodium with its garrison.
+    source: josephus-jewish-war
+    at: "7.6.1"
+    quote: "took that citadel which was in Herodium, together with the garrison that was in it"
+  - id: machaerus-surrendered
+    says: Josephus tells that the Jews treated for the surrender of the citadel so that Eleazar might go with them.
+    role: supporting
+    source: josephus-jewish-war
+    at: "7.6.4"
+    quote: "in order to a surrender of the citadel to them, and desired that they might be permitted
+      to go away, and take Eleazar along with them."
+notes: "Josephus's account: he was a commander on the Jewish side until Jotapata and on the Roman
+  side after, and his numbers are his. The year is an interpretation; Josephus dates by month and
+  regnal year."

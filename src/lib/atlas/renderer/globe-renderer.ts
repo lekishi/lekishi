@@ -55,7 +55,7 @@ export type GlobeRendererOptions = {
 /**
  * The marker a scene place draws: its form is the evidence (attested ring,
  * identified halo, display-anchor diamond), its fill the certainty, its size
- * the emphasis, and a disc under it the controller of a drawn territory
+ * the emphasis, a dotted name an event told as tradition, and a disc under it the controller of a drawn territory
  * snapshot. The scene only carries places with a published position, so
  * no coordinate is invented for a list-only event.
  */
@@ -71,6 +71,7 @@ export function markerFor(place: ScenePlace): GlobeMarker {
     emphasis: place.selected ? "selected" : place.playback === "active" ? "active" : "base",
     count: place.eventCount,
     disputed: place.disputed,
+    tradition: place.tradition,
     control:
       place.control === null
         ? null

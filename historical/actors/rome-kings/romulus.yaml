@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Romulus, the founder and first king of Rome in the Roman tradition: Livy tells that he and
+  his twin Remus were nursed by a she-wolf, that he fortified the Palatine and named the city after
+  himself, and that he vanished in a storm after a reign of thirty-seven years."
+types: [person]
+names:
+  - form: Romulus
+    lang: la
+    script: Latn
+    cite:
+      - id: romulus-name
+        basis: tradition
+        says: "Livy tells that Romulus alone took power and the city was named after its founder."
+        source: livy
+        at: "1.7.3"
+        quote: "ita solus potitus imperio Romulus; condita urbs conditoris nomine appellata."
+roles:
+  - role: ruler
+    note: "The first king, in the tradition."

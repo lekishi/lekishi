@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Titus Flavius Vespasianus (39–81 CE), Vespasian's elder son, who brought legions from
+  Alexandria in 67, commanded the siege of Jerusalem in 70, and was emperor from 79 to 81, when
+  Vesuvius erupted."
+types: [person]
+names:
+  - form: Titus
+    lang: en
+    script: Latn
+    cite:
+      - id: titus-name
+        says: Josephus tells that Vespasian sent his son Titus from Achaia to Alexandria to bring the fifth and tenth legions.
+        source: josephus-jewish-war
+        at: "3.1.3"
+        quote: "So Vespasian sent his son Titus from Achaia, where he had been with Nero, to
+          Alexandria"
+roles:
+  - role: soldier
+    note: "Commander at the siege of Jerusalem, 70 CE."
+  - role: ruler
+    note: "Emperor, 79–81 CE."
+notes: Shared by every chapter in which Titus acts.

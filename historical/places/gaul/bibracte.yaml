@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Bibracte, on Mont Beuvray, the greatest and richest oppidum of the Aedui in Caesar's words. He
+  turned towards it for grain in 58 BCE, and the Helvetii attacked him on the way; in 52 BCE the
+  Gallic council there gave Vercingetorix the supreme command.
+types: [settlement, fortification]
+names:
+  - form: Bibracte
+    lang: la
+    script: Latn
+    cite:
+      - id: bibracte-name
+        says:
+          Caesar calls Bibracte by far the largest and richest oppidum of the Aedui, no more than
+          eighteen miles away.
+        source: caesar-gallic-war
+        at: "1.23"
+        quote:
+          a Bibracte, oppido Haeduorum longe maximo et copiosissimo, non amplius milibus passuum
+          XVIII aberat
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [4.03559, 46.92583]
+    notes: The gazetteer's point for the excavated oppidum on Mont Beuvray.
+    cite:
+      - id: bibracte-location
+        says: Pleiades gives this representative point for Bibracte, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 177473 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "177473"

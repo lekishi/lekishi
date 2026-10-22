@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Judging it beneath Rome's dignity to cross by boat, Caesar bridged the Rhine with timber
+  piles driven at a slant against the current; the bridge was finished ten days after the timber
+  began to arrive. He spent eighteen days across the river, burned the villages of the Sugambri, and
+  returned, breaking the bridge behind him."
+types: [campaign]
+date:
+  value: 55 BCE
+  mode: window
+  calendar: julian
+  as_written: "Cn. Pompeio, M. Crasso consulibus"
+  cite:
+    - id: rhine-bridge-year
+      says: Caesar dates book IV to the winter and year when Cn. Pompeius and M. Crassus were consuls (55 BCE).
+      source: caesar-gallic-war
+      at: "4.1"
+      quote: "Ea quae secuta est hieme, qui fuit annus Cn. Pompeio, M. Crasso consulibus"
+places:
+  - place: rhine
+    role: site
+    note: "The bridge's site is not identified; the stretch near Neuwied and Koblenz is often
+      proposed."
+participants:
+  - actor: julius-caesar
+    role: leader
+cite:
+  - id: rhine-bridge-ten-days
+    says: "Caesar tells that ten days after the timber began to be brought, the work was complete
+      and the army crossed."
+    source: caesar-gallic-war
+    at: "4.18"
+    quote: "Diebus X, quibus materia coepta erat comportari, omni opere effecto exercitus
+      traducitur."
+notes: "Caesar's own account: he commanded the army and wrote the report, and the numbers in it are
+  his."

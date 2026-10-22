@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "As Livy tells it, after Tullus Hostilius died the people elected Ancus Marcius, Numa's
+  grandson, king, and the senators ratified it. Dionysius dates his accession to the second year of
+  the thirty-fifth Olympiad."
+types: [occurrence]
+date:
+  value: 639 BCE..638 BCE
+  mode: window
+  calendar: julian
+  as_written: in the second year of the thirty-fifth Olympiad (Dionysius)
+  cite:
+    id: ancus-marcius-accession-date
+    basis: tradition
+    says: "Dionysius dates Ancus Marcius's accession to the second year of the thirty-fifth Olympiad
+      (639/638 BCE)."
+    source: dionysius-roman-antiquities
+    at: "3.36"
+    quote: entered upon the government in the second year of the thirty-fifth Olympiad
+places:
+  - place: rome
+    role: site
+participants:
+  - actor: ancus-marcius
+    role: subject
+  - actor: roman-kingdom
+    role: other
+cite:
+  id: ancus-marcius-accession-livy
+  basis: tradition
+  says: "Livy tells that the people elected Ancus Marcius king and the senators ratified it."
+  source: livy
+  at: "1.32.1"
+  quote: "quo comitia habente Ancum Marcium regem populus creavit; patres fuere auctores."
+notes:
+  "Tradition, not record. Dionysius dates every king's accession by Olympiad year; each converts to a
+  span of two Julian years, because the Olympic year began at midsummer. Livy gives regnal lengths
+  but no years."

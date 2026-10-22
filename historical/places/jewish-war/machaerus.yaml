@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Machaerus, Herod's fortress on a hill east of the Dead Sea, surrendered to Lucilius Bassus to save
+  the young defender Eleazar from the cross.
+types: [fortification]
+names:
+  - form: Machaerus
+    lang: en
+    script: Latn
+    cite:
+      - id: machaerus-name
+        says: Josephus tells that Bassus resolved to make war on Machaerus.
+        source: josephus-jewish-war
+        at: "7.6.1"
+        quote: resolved to make war upon Machaerus
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [35.62411, 31.56737]
+    notes: The gazetteer's point for the excavated fortress at Mukawir.
+    cite:
+      - id: machaerus-location
+        says: Pleiades gives this representative point for Machairous, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 697700 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "697700"

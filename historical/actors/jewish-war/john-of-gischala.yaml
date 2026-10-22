@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "John son of Levi, of Gischala, who drew his city into the revolt, escaped to Jerusalem
+  when Titus took it, and held the Temple during the siege."
+types: [person]
+names:
+  - form: "John, the son of Levi"
+    lang: en
+    script: Latn
+    cite:
+      - id: john-of-gischala-name
+        says: "Josephus tells that John, the son of a man named Levi, drew Gischala into the
+          rebellion."
+        source: josephus-jewish-war
+        at: "4.2.1"
+        quote: "It was John, the son of a certain man whose name was Levi, that drew them into this
+          rebellion"
+roles:
+  - role: soldier
+    note: Rebel leader in Jerusalem.

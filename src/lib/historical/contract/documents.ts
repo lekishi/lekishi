@@ -198,6 +198,7 @@ export function codes(): string[] {
     "conventional_single_citation",
     "conventional_outside_time",
     "conventional_in_dispute",
+    "conventional_in_tradition",
     "claim_without_dispute",
     "multiple_main_claims_for_pointer",
     "unresolved_claim_reference",
@@ -490,7 +491,9 @@ function claimErrors(
  * on, derived from a source that gives a sequence rather than a calendar date.
  * It names its conversion, cites both the passage that places the event and a
  * reference that states the year, asserts a time, and is never one side of a
- * dispute: a year that is disputed is not conventional.
+ * dispute: a year that is disputed is not conventional. Nor is a year that a
+ * tradition gives (rfd/0002/TRADITION_BASIS.adoc), even when reference works
+ * repeat it.
  */
 function conventionalErrors(
   claim: JsonObject,
@@ -505,6 +508,10 @@ function conventionalErrors(
       isObject(other) &&
       (other["role"] === "alternative" || other["role"] === "conflicting") &&
       other["asserts"] === claim["asserts"],
+  )
+  const told = claims.some(
+    (other) =>
+      isObject(other) && other["basis"] === "tradition" && other["asserts"] === claim["asserts"],
   )
 
   flag(
@@ -534,6 +541,13 @@ function conventionalErrors(
     "conventional_in_dispute",
     claimPath,
     "a disputed date is not conventional; cite each account as an interpretation",
+  )
+  flag(
+    errors,
+    told,
+    "conventional_in_tradition",
+    claimPath,
+    "a year that a tradition gives is not a standard conversion; cite it as tradition",
   )
 
   return errors

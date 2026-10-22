@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: "Antonius Felix, Roman procurator of Judaea, who held Paul at Caesarea for two years and
+  left him in custody for his successor."
+types: [person]
+names:
+  - form: Felix
+    lang: en
+    script: Latn
+    cite:
+      - id: antonius-felix-name
+        says: Acts tells that the soldiers were to bring Paul safe to Felix the governor.
+        source: bible-kjv
+        at: "Acts 23:24"
+        quote: bring him safe unto Felix the governor.
+roles:
+  - role: official
+    note: Procurator of Judaea.

@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Vespasian levels a road to Jotapata, the hill town where Josephus has shut himself in, and
+  besieges it for forty-seven days; the town is taken on the first of Panemus and demolished, and
+  Josephus gives the dead as forty thousand."
+types: [campaign]
+date:
+  value: "67"
+  mode: window
+  calendar: julian
+  as_written: "in the thirteenth year of the reign of Nero, on the first day of the month Panemus
+    [Tamuz]"
+  cite:
+    - id: jotapata-date
+      says: Josephus dates the fall of Jotapata to the first of Panemus in the thirteenth year of Nero.
+      source: josephus-jewish-war
+      at: "3.7.36"
+      quote: "And thus was Jotapata taken, in the thirteenth year of the reign of Nero, on the first
+        day of the month Panemus [Tamuz]."
+    - id: jotapata-siege-67-year
+      says: "Meistermann's 1910 history dates the invasion of Galilee to 67, and Hoeber's 1910
+        article on Josephus puts his six-week defence of Jotapata in it."
+      basis: interpretation
+      attributed_to: B. Meistermann and K. Hoeber (1910)
+      role: supporting
+      sources:
+        - source: catholic-encyclopedia
+          at: "Jerusalem (Before A.D. 71), by B. Meistermann (vol. 8, 1910), Herod Agrippa I to the
+            destruction"
+          quote: "invaded Galilee, in A.D. 67, with an army of 60,000 men"
+        - source: catholic-encyclopedia
+          at: "Flavius Josephus, by K. Hoeber (vol. 8, 1910)"
+          quote: For six weeks Josephus and the boldest spirits among the insurgents defended themselves in the almost impregnable fortress of Jotapata.
+places:
+  - place: jotapata
+    role: site
+participants:
+  - actor: vespasian
+    role: leader
+  - actor: flavius-josephus
+    role: leader
+  - actor: judaean-rebels
+    role: participant
+cite:
+  - id: jotapata-josephus-arrives
+    says: Josephus tells that on the twenty-first of Artemisius he came from Tiberias into Jotapata.
+    source: josephus-jewish-war
+    at: "3.7.3"
+    quote: "On the fifth day, which was the twenty-first of the month Artemisius, [Jyar,] Josephus
+      prevented him, and came from Tiberias, and went into Jotapata"
+  - id: jotapata-demolished
+    says: Josephus tells that Vespasian ordered the city entirely demolished and its fortifications burned.
+    role: supporting
+    source: josephus-jewish-war
+    at: "3.7.36"
+    quote: "So Vespasian gave order that the city should be entirely demolished, and all the
+      fortifications burnt down."
+notes: "Josephus's account: he was a commander on the Jewish side until Jotapata and on the Roman
+  side after, and his numbers are his. The year is an interpretation; Josephus dates by month and
+  regnal year."

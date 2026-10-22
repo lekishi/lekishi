@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Arar (Saône), the river so slow, Caesar says, that the eye cannot tell which way it flows. In
+  58 BCE he caught the Tigurini still on its near bank while the rest of the Helvetii had crossed.
+types: [landform]
+names:
+  - form: Arar
+    lang: la
+    script: Latn
+    cite:
+      - id: saone-name
+        says: Caesar tells that a quarter of the Helvetii were still on the near side of the Arar.
+        source: caesar-gallic-war
+        at: "1.12"
+        quote: quartam vero partem citra flumen Ararim reliquam esse
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [5.41682, 47.15426]
+    notes:
+      A river's representative point, not the crossing; Caesar gives no place on the river for the
+      attack.
+    cite:
+      - id: saone-location
+        says:
+          Pleiades gives this representative point for the river Arar, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 167652 (reprLatLong), dump 2026-10-21
+modern:
+  - form: Saône
+    lang: fr
+    note: The modern river.
+external_ids:
+  - system: pleiades
+    id: "167652"

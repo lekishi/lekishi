@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "The first mission of Barnabas and Saul, sent out by the church of Antioch: by sea to
+  Cyprus, across the island from Salamis to Paphos, then to Perga and the cities of the Anatolian
+  plateau as far as Derbe, and back by the same cities to Attalia and Antioch."
+types: [journey, mission]
+date:
+  value: "45..49"
+  mode: duration
+  calendar: julian
+  as_written: "Prat (1911): first mission, 45-49"
+  cite:
+    - id: paul-first-journey-date
+      says: "Prat's chronology of 1911 dates Paul's first mission to 45–49."
+      basis: interpretation
+      attributed_to: F. Prat (1911)
+      source: catholic-encyclopedia
+      at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+      quote: "first mission, 45-49"
+places:
+  - place: antioch-on-the-orontes
+    role: start
+  - place: derbe
+    role: waypoint
+    note: The furthest city of the journey.
+  - place: antioch-on-the-orontes
+    role: end
+participants:
+  - actor: paul-the-apostle
+    role: leader
+  - actor: barnabas
+    role: participant
+cite:
+  - id: paul-first-journey-sent
+    says: Acts tells that the Holy Ghost told the church at Antioch to set apart Barnabas and Saul for the work.
+    source: bible-kjv
+    at: "Acts 13:2"
+    quote: Separate me Barnabas and Saul for the work whereunto I have called them.
+  - id: paul-first-journey-return
+    says: "Acts tells that from Attalia they sailed back to Antioch, where they had been commended
+      for the work."
+    role: supporting
+    source: bible-kjv
+    at: "Acts 14:26"
+    quote: "And thence sailed to Antioch, from whence they had been recommended to the grace of God
+      for the work which they fulfilled."
+notes: "Acts tells it, and the dates are Prat's 1911 reckoning, an interpretation: Acts gives no
+  years."

@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "In Jerusalem Eleazar son of the high priest Ananias, captain of the Temple, persuades the
+  priests to accept no gift or sacrifice from a foreigner, and so to stop the sacrifice offered for
+  the emperor; Josephus calls this the true beginning of the war."
+types: [occurrence]
+date:
+  value: "66"
+  mode: window
+  calendar: julian
+  as_written: in the same year as the outbreak at Caesarea (Josephus gives no separate date)
+  cite:
+    - id: sacrifice-for-caesar-stopped-66-year
+      says: "Meistermann's 1910 history of Jerusalem dates the revolt under Gessius Florus to 66."
+      basis: conventional
+      convention: Josephus's order of the war on the standard chronology of Nero's and Vespasian's reigns
+      sources:
+        - source: josephus-jewish-war
+          at: "2.17.2"
+        - source: catholic-encyclopedia
+          at: "Jerusalem (Before A.D. 71), by B. Meistermann (vol. 8, 1910), Herod Agrippa I to the
+            destruction"
+          quote:
+            "Gessius Florus (66) surpassed the wickedness of his predecessors, and drove the people
+            to revolt against the Roman domination"
+places:
+  - place: jerusalem
+    role: site
+participants:
+  - actor: eleazar-son-of-ananias
+    role: leader
+  - actor: judaean-rebels
+    role: participant
+cite:
+  - id: sacrifice-stopped
+    says: "Josephus tells that Eleazar persuaded those officiating to receive no gift or sacrifice
+      from a foreigner, and calls this the true beginning of the war."
+    source: josephus-jewish-war
+    at: "2.17.2"
+    quote: persuaded those that officiated in the Divine service to receive no gift or sacrifice for any foreigner. And this was the true beginning of our war with the Romans; for they rejected the sacrifice of Caesar on this account
+notes: "Josephus's account: he was a commander on the Jewish side until Jotapata and on the Roman
+  side after, and his numbers are his. The year is an interpretation; Josephus dates by month and
+  regnal year."

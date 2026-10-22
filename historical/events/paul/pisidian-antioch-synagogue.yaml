@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "At Antioch in Pisidia Paul preaches in the synagogue on the sabbath; when many Gentiles
+  follow, the Jews stir up the leading men and women of the city and Paul and Barnabas are
+  expelled."
+types: [mission]
+part_of:
+  - paul-first-journey
+date:
+  value: "45..49"
+  mode: window
+  calendar: julian
+  as_written: "Prat (1911): first mission, 45-49"
+  cite:
+    - id: pisidian-antioch-synagogue-date
+      says: "Prat's chronology of 1911 dates Paul's first mission to 45–49."
+      basis: interpretation
+      attributed_to: F. Prat (1911)
+      source: catholic-encyclopedia
+      at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+      quote: "first mission, 45-49"
+places:
+  - place: antioch-of-pisidia
+    role: site
+participants:
+  - actor: paul-the-apostle
+    role: leader
+  - actor: barnabas
+    role: participant
+cite:
+  - id: pisidian-antioch-arrival
+    says: Acts tells that they came to Antioch in Pisidia and went into the synagogue on the sabbath.
+    source: bible-kjv
+    at: "Acts 13:14"
+    quote: "they came to Antioch in Pisidia, and went into the synagogue on the sabbath day, and sat
+      down."
+  - id: pisidian-antioch-expelled
+    says: Acts tells that persecution was raised against Paul and Barnabas and they were expelled from the district.
+    role: supporting
+    source: bible-kjv
+    at: "Acts 13:50"
+    quote: "raised persecution against Paul and Barnabas, and expelled them out of their coasts."
+notes: "Acts tells it, and the dates are Prat's 1911 reckoning, an interpretation: Acts gives no
+  years."

@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../schema/source.schema.json
+locator: section
+kind: primary
+title: Flavius Josephus, The Wars of the Jews (Bellum Judaicum), translated by William Whiston
+edition: Whiston's translation (1737) with his notes, Project Gutenberg eBook 2850, read 2026-10-21.
+  Locators give Whiston's book, chapter and section; a note is cited by the section it annotates
+author: Flavius Josephus; translated by William Whiston
+issued:
+  year: 75
+  era: ce
+  endpoint_certainty: approximate
+language: en
+identifiers:
+  - system: url
+    value: https://www.gutenberg.org/ebooks/2850
+license:
+  status: recorded
+  license_id: public-domain
+  attribution_text: Josephus, The Wars of the Jews, tr. William Whiston (1737), Project Gutenberg eBook 2850
+  redistribution: permitted
+  quotation_permitted: true
+  reviewed_by: Lekishi editorial preparation
+  reviewed_at: 2026-10-21T17:00:00Z
+  notes:
+    The work and Whiston's translation and notes are public domain. Quotations follow the Gutenberg
+    text, including its spellings; the Greek text (Niese) is the critical witness, so re-check each
+    locator against it before release.
+notes:
+  "Josephus commanded the Jewish forces in Galilee, surrendered to Vespasian at Jotapata in 67, and
+  watched the siege of Jerusalem from the Roman side; he wrote the history in Rome under Flavian
+  patronage within a decade of the war. He is an eyewitness for much of it and an interested party
+  for all of it, and his numbers are his. He dates events by Macedonian months and the regnal years
+  of Nero, Agrippa and Vespasian; Whiston adds the Hebrew month in brackets. Modern editions also
+  cite Niese's running paragraph numbers, which these book, chapter and section locators do not
+  give."

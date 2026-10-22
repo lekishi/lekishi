@@ -1,7 +1,16 @@
 # yaml-language-server: $schema=../../schema/place.schema.json
-summary: Geneva, read for the continuations' Janua on Pepin's road from Chalon to the Maurienne in 756.
+summary: Genava (Geneva), the Allobrogan town at the outflow of the Rhône from Lake Geneva. Caesar tells that he hurried there in 58 BCE, broke the bridge, and walled the river bank to stop the Helvetii crossing the Roman province. It is also read for the continuations' Janua on Pepin's road from Chalon to the Maurienne in 756.
 types: [settlement]
 names:
+  - form: Genava
+    lang: la
+    script: Latn
+    cite:
+      - id: genava-name-caesar
+        says: Caesar tells that he reached Genava by forced marches.
+        source: caesar-gallic-war
+        at: "1.7"
+        quote: in Galliam ulteriorem contendit et ad Genavam pervenit.
   - form: Janua
     lang: la
     script: Latn
@@ -28,6 +37,8 @@ modern:
     script: Latn
     note: Modern city, recorded for orientation.
 external_ids:
+  - system: pleiades
+    id: "177528"
   - system: wikidata
     id: Q71
     url: https://www.wikidata.org/wiki/Q71

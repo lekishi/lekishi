@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Herculaneum, the town on the coast west of Vesuvius buried by the eruption of 79 CE.
+types: [settlement]
+names:
+  - form: Herculaneum
+    lang: en
+    script: Latn
+    cite:
+      - id: herculaneum-name
+        says: Dio, in Foster's translation, says the ash buried two whole cities, Herculaneum and
+          Pompeii.
+        source: cassius-dio
+        at: LXVI.23 (A.D. 79)
+        quote: it buried two whole cities, Herculaneum and Pompeii
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [14.34738, 40.80541]
+    notes: The gazetteer's point for the excavated town at Ercolano.
+    cite:
+      - id: herculaneum-location
+        says: Pleiades gives this representative point for Herculaneum, with its location precision
+          recorded as "precise".
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 432873 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "432873"

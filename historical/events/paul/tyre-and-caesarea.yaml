@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "By Cos, Rhodes and Patara the company sails to Tyre and stays seven days, then by
+  Ptolemais to Caesarea, where in the house of Philip the prophet Agabus binds himself with Paul's
+  girdle to foretell his arrest."
+types: [journey]
+part_of:
+  - paul-third-journey
+date:
+  value: "53..57"
+  mode: window
+  calendar: julian
+  as_written: "Prat (1911): third mission, 53-57"
+  cite:
+    - id: tyre-and-caesarea-date
+      says: "Prat's chronology of 1911 dates Paul's third mission to 53–57."
+      basis: interpretation
+      attributed_to: F. Prat (1911)
+      source: catholic-encyclopedia
+      at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+      quote: "third mission, 53-57"
+places:
+  - place: tyre
+    role: waypoint
+  - place: caesarea-maritima
+    role: site
+participants:
+  - actor: paul-the-apostle
+    role: leader
+cite:
+  - id: tyre-landed
+    says: "Acts tells that they sailed into Syria and landed at Tyre, where the ship was to unload."
+    source: bible-kjv
+    at: "Acts 21:3"
+    quote: "and sailed into Syria, and landed at Tyre: for there the ship was to unlade her burden."
+  - id: caesarea-agabus
+    says: "Acts tells that Agabus bound his hands and feet with Paul's girdle and foretold that the
+      Jews at Jerusalem would bind its owner."
+    role: supporting
+    source: bible-kjv
+    at: "Acts 21:11"
+    quote: So shall the Jews at Jerusalem bind the man that owneth this girdle
+notes: "Acts tells it, and the dates are Prat's 1911 reckoning, an interpretation: Acts gives no
+  years."

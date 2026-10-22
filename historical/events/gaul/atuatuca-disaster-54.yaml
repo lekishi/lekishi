@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "In the winter of 54 BCE, about fifteen days after the legions reached winter quarters,
+  Ambiorix and Catuvolcus of the Eburones attacked the camp of Sabinus and Cotta at Atuatuca, then
+  persuaded Sabinus to march out under a promise of safe passage. The column was ambushed two miles
+  from camp; Sabinus was killed in a parley, Cotta fighting, and the survivors took their own lives
+  in the camp that night. A legion and five cohorts were lost."
+types: [campaign]
+date:
+  value: 54 BCE
+  mode: window
+  calendar: julian
+  as_written: L. Domitio Ap. Claudio consulibus
+  cite:
+    - id: atuatuca-disaster-year
+      says: Caesar dates book V to the consulship of L. Domitius and Ap. Claudius (54 BCE).
+      source: caesar-gallic-war
+      at: "5.1"
+      quote: "L. Domitio Ap. Claudio consulibus, discedens ab hibernis Caesar in Italiam"
+places:
+  - place: atuatuca
+    role: site
+    cite:
+      id: atuatuca-disaster-place
+      says: Caesar names Aduatuca as the stronghold where Titurius and Aurunculeius had wintered.
+      source: caesar-gallic-war
+      at: "6.32"
+      quote: "Id castelli nomen est. Hoc fere est in mediis Eburonum finibus, ubi Titurius atque
+        Aurunculeius hiemandi causa consederant."
+participants:
+  - actor: ambiorix
+    role: leader
+  - actor: eburones
+    role: participant
+  - actor: quintus-titurius-sabinus
+    role: subject
+  - actor: lucius-aurunculeius-cotta
+    role: subject
+cite:
+  - id: atuatuca-disaster-start
+    says: Caesar tells that the rising began with Ambiorix and Catuvolcus about fifteen days after the army reached winter quarters.
+    source: caesar-gallic-war
+    at: "5.26"
+    quote: "Diebus circiter XV, quibus in hiberna ventum est, initium repentini tumultus ac
+      defectionis ortum est ab Ambiorige et Catuvolco"
+  - id: atuatuca-disaster-end
+    says: "Caesar tells that the survivors, despairing, all took their own lives in the night."
+    role: supporting
+    source: caesar-gallic-war
+    at: "5.37"
+    quote: noctu ad unum omnes desperata salute se ipsi interficiunt.
+notes: "Caesar's account of a defeat he did not witness, from survivors. The camp is named only in
+  book VI and is not found; the event is shown at a label position, not a site."

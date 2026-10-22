@@ -1,0 +1,58 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Cestius Gallus, legate of Syria, marches on Jerusalem with the twelfth legion, attacks the
+  Temple, then withdraws; in the narrow descent of Beth-horon the Jews almost destroy his army,
+  which flees by night leaving its siege engines."
+types: [campaign]
+date:
+  value: "66"
+  mode: window
+  calendar: julian
+  as_written: "on the eighth day of the month Dius, [Marchesvan,] in the twelfth year of the reign
+    of Nero"
+  cite:
+    - id: beth-horon-date
+      says: Josephus dates the defeat to the eighth of Dius in the twelfth year of Nero.
+      source: josephus-jewish-war
+      at: "2.19.9"
+      quote: "This defeat happened on the eighth day of the month Dius, [Marchesvan,] in the twelfth
+        year of the reign of Nero."
+    - id: cestius-defeated-at-beth-horon-66-year
+      says: "Meistermann's 1910 history of Jerusalem dates Cestius's arrival before Jerusalem and
+        his repulse to the autumn of 66."
+      basis: interpretation
+      attributed_to: B. Meistermann (1910)
+      role: supporting
+      source: catholic-encyclopedia
+      at: "Jerusalem (Before A.D. 71), by B. Meistermann (vol. 8, 1910), Herod Agrippa I to the
+        destruction"
+      quote: "Cestius Gallus, President of Syria, arrived on 30 October, 66, with the Twelfth
+        Legion, but only met with repulses, and had to retire"
+places:
+  - place: beth-horon
+    role: site
+  - place: jerusalem
+    role: context
+    note: Cestius attacked the city before withdrawing.
+participants:
+  - actor: cestius-gallus
+    role: leader
+  - actor: judaean-rebels
+    role: participant
+cite:
+  - id: beth-horon-trapped
+    says: "Josephus tells that the Jews almost took Cestius's whole army prisoner in the passes,
+      until night came and the Romans fled to Bethoron."
+    source: josephus-jewish-war
+    at: "2.19.8"
+    quote: "the Jews had almost taken Cestius's entire army prisoners, had not the night come on,
+      when the Romans fled to Bethoron"
+  - id: beth-horon-losses
+    says: "Josephus gives the Roman losses as 5,300 foot and 380 horse."
+    role: supporting
+    source: josephus-jewish-war
+    at: "2.19.9"
+    quote: "had slain of the Romans five thousand and three hundred footmen, and three hundred and
+      eighty horsemen."
+notes: "Josephus's account: he was a commander on the Jewish side until Jotapata and on the Roman
+  side after, and his numbers are his. The year is an interpretation; Josephus dates by month and
+  regnal year."

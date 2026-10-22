@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: At Iconium Paul and Barnabas preach to Jews and Greeks until a plot by Gentiles and Jews to stone them makes them flee to Lystra and Derbe.
+types: [mission]
+part_of:
+  - paul-first-journey
+date:
+  value: "45..49"
+  mode: window
+  calendar: julian
+  as_written: "Prat (1911): first mission, 45-49"
+  cite:
+    - id: iconium-flight-date
+      says: "Prat's chronology of 1911 dates Paul's first mission to 45–49."
+      basis: interpretation
+      attributed_to: F. Prat (1911)
+      source: catholic-encyclopedia
+      at: "St. Paul, by F. Prat (vol. 11, 1911), Chronology"
+      quote: "first mission, 45-49"
+places:
+  - place: iconium
+    role: site
+participants:
+  - actor: paul-the-apostle
+    role: leader
+  - actor: barnabas
+    role: participant
+cite:
+  - id: iconium-preaching
+    says: Acts tells that at Iconium a great multitude of Jews and Greeks believed.
+    source: bible-kjv
+    at: "Acts 14:1"
+    quote: "And it came to pass in Iconium, that they went both together into the synagogue of the
+      Jews"
+  - id: iconium-fled
+    says: Acts tells that they learned of the plot and fled to Lystra and Derbe.
+    role: supporting
+    source: bible-kjv
+    at: "Acts 14:6"
+    quote: "They were ware of it, and fled unto Lystra and Derbe, cities of Lycaonia"
+notes: "Acts tells it, and the dates are Prat's 1911 reckoning, an interpretation: Acts gives no
+  years."

@@ -138,8 +138,10 @@ owner weighed, and what the owner added.
   consistent with the new format, including its sources
   (<<Decided: one Wikidata source, pinned per citation>>).
 
-Still proposed: journey curation, territories, media, per-claim credit, and
-contract v1 (<<Proposed: journeys, territories, and media>>). The existing
+Still proposed: journey curation, media, per-claim credit, and
+contract v1 (<<Proposed: journeys, territories, and media>>). Territories are
+decided and built in v0 (link:TERRITORIES.adoc[territories as control by
+place]). The existing
 publication gate stays authoritative until the digest check is built, enforces
 the same invariant, and the owner approves the switch; no step of this work
 records an approval for the owner.
@@ -157,7 +159,7 @@ historical/
   actors/
   relationships/
   sources/
-  territories/                   with contract v1, see below
+  territories/                   dated control snapshots, contract v0
   media/                         with contract v1, see below
   chapters/
     tang-mission-750-754.yaml    the chapter manifest
@@ -406,8 +408,9 @@ because neither cited reading names its constant.
 == Proposed: journeys, territories, and media
 
 For journeys, this section is superseded by
-<<Decided: journeys are their own kind — 2026-10-21>>; territories and media
-stay proposed here.
+<<Decided: journeys are their own kind — 2026-10-21>>, and for territories by
+link:TERRITORIES.adoc[territories as control by place]; media stays proposed
+here.
 
 * *Journey membership is not a route.* `part_of` can suggest candidate events,
   but the compiler must not connect all of their places or sort them into a
@@ -419,7 +422,9 @@ stay proposed here.
   account identity, and unsupported order. A route reconstructed in scholarship
   is an explicit `route:` on the event, with its own GeoJSON file and citation,
   compiled to `reconstructed_route`.
-* *Territories are a proposed new authoring kind.* A territory file holds a
+* *Territories are a new authoring kind* (superseded: decided 2026-10-22 as
+  control by place, with no GeoJSON and no border, and built in v0; see
+  link:TERRITORIES.adoc[territories as control by place]). A territory file holds a
   dated control snapshot: whose control (an actor), the snapshot's date, a
   GeoJSON file, its basis, and its citation. v0 already admits a polygon with a
   validity date; the proposed kind adds the control semantics and authoring and
@@ -429,11 +434,10 @@ stay proposed here.
   "a later depiction, not evidence").
 
 Dedicated territory records with actor-control semantics, media depiction
-links, and per-claim credit are new rules. Under AGENTS.md they mean a new
-contract version, *v1*, with new vectors, not an edit to v0. The proposal is to
-specify them in this record now and implement v1 with the first chapter that
-draws a territory or shows an image, so that v1 lands with real content to test
-against. Until then the compiler targets v0.
+links, and per-claim credit are new rules. The proposal was a new contract
+version, *v1*; the owner ruled on 2026-10-22 that until launch a new kind or
+vocabulary amends v0 in place with new vectors (AGENTS.md), and territories are
+the first kind built that way.
 
 == Decided: journeys are their own kind — 2026-10-21
 

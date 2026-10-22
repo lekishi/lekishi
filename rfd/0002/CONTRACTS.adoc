@@ -126,8 +126,8 @@ short quoted text.
 * Alternative or conflicting claims require `dispute.status: "disputed"` with a
   summary, and a dispute requires at least one such claim. An undisputed record
   may not carry an alternative account.
-* Every published place, actor, event, and relationship needs at least one claim
-  with a citation. Stories are curation and carry no such requirement.
+* Every published place, actor, event, relationship, and territory needs at
+  least one claim with a citation. Stories are curation and carry no such requirement.
 * Sources record their reuse terms. A cited source whose license status is not
   `recorded` blocks publication of that content, and quoted text additionally
   requires recorded permission to quote. This encodes RFD 2's rule that open
@@ -356,6 +356,27 @@ record, because presentation order is not a claim about precedence, and a step
 cannot embed a copy of a record: stories are selections over the same records,
 not parallel content.
 
+== Decision: territories are dated control snapshots — 2026-10-22
+
+A territory record says that one actor held a set of named places for a closed
+range of years, as a cited source records it
+(link:TERRITORIES.adoc[territories as control by place]). The owner accepted
+the shape on 2026-10-22 and ruled that it amends v0 in place: the project is
+not live, so nothing is sealed until the owner agrees, and no new contract
+version is cut for it.
+
+* `controller_id` is an actor, `time` must normalize with both bounds, and
+  `places` lists 1 to 200 places, each once, with `role` `seat` or `held`.
+* A place may name the event or relationship by which the controller gained it
+  (`gained_record_id`); that record must be published, and it may not begin
+  after the snapshot ends.
+* Two published snapshots by different controllers may hold the same place in
+  overlapping years only when one of them is disputed.
+* A snapshot asserts no border and no area, and lists only places a source
+  names, never all the controller held. The atlas draws it inside its own
+  window only, and never carries it forward or interpolates between snapshots
+  (RFD 1).
+
 == Error codes as contract surface
 
 The reference semantics report named codes so a wrong interpretation is
@@ -390,6 +411,11 @@ assert that every code a vector expects is documented. Representative codes:
 |conventional_single_citation |A conventional date does not cite both the passage and a reference
 |conventional_outside_time |A conventional claim asserts something other than a time
 |conventional_in_dispute |A conventional claim is part of a dispute, or sits on a disputed pointer
+|territory_time_unbounded |A territory snapshot's time is open at one end
+|territory_place_repeated |A territory snapshot lists the same place twice
+|territory_gained_kind_mismatch |A held place's gain names a record that is not an event or relationship
+|territory_gained_after_window |A held place was gained after the snapshot that holds it ends
+|territory_overlap_without_dispute |Two controllers hold the same place in overlapping years and neither snapshot is disputed
 |claim_without_dispute, dispute_summary_missing |A competing account is not visibly disputed
 |published_record_without_citation |A published place, actor, event, or relationship has no cited claim
 |unrecorded_source_license |A cited source has no recorded reuse terms
@@ -422,7 +448,8 @@ inclusive window boundaries, duration versus uncertain occurrence, playback
 states and playhead validation, undated exclusion, open-ended bounds, partial
 ordering and ordering graphs (including day-precision records inside one year),
 name and romanization rules, geometry interpretation and invented precision,
-renderer independence, claim evidence and disputes, conventional dates, license
+renderer independence, claim evidence and disputes, conventional dates,
+territory snapshots, license
 and quotation gates, source sealing and set pins, editorial timestamp
 validation, and publication, mirror, and correction-history behavior.
 

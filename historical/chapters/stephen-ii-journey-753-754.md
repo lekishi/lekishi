@@ -40,6 +40,7 @@ are in
 | Places | 22 | `historical/places/stephen/` |
 | Actors | 23 | `historical/actors/stephen/` |
 | Sources | 5 new, plus `wikidata` | `historical/sources/` |
+| Journeys | 6 | `historical/journeys/stephen/` |
 
 The places, actors, and sources are written once for the whole atlas, so a
 later chapter on Rome, the Lombards, or the Carolingians reuses them by id.
@@ -54,8 +55,9 @@ later chapter on Rome, the Lombards, or the Carolingians reuses them by id.
   coordinate Wikidata records for the modern place identified with it, pinned
   to the item revision read on 2026-10-21. The identification is editorial and
   each place says so; two valleys are at region precision.
-- No route geometry is asserted. The journey events carry the span and the
-  named places; the drawn line waits for the journey record kind.
+- No route geometry is asserted. Six journey records in
+  `historical/journeys/stephen/` order the stops; every leg is schematic, and
+  only the envoys' leg to Marseille states its mode (by sea).
 - Three questions are kept open rather than chosen: the meeting place
   (Ponthion or Quierzy), who sent Carloman, and the year of the first campaign.
 

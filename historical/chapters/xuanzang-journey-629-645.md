@@ -19,12 +19,12 @@ follow-ups are in
 
 | Kind | Count | Folder | Notes |
 | --- | --- | --- | --- |
-| Places | 77 + 2 | `places/xuanzang/` | 55 of the 77 with a Wikidata display anchor, 22 with an `unknown` position. The chapter also reaches 長安 and 洛陽, the shared records in `places/ennin/`, so it shows 79 places, 57 of them anchored. |
+| Places | 77 + 2 | `places/xuanzang/`, `places/western-regions/` | 55 of the 77 with a Wikidata display anchor, 22 with an `unknown` position. Six of them (焉耆, 姑墨, 疏勒, 于窴, 龜茲, 伊吾) are the 班超 chapter's records in `places/western-regions/`, with this chapter's names folded in; the other 71 are in `places/xuanzang/`. The chapter also reaches 長安 and 洛陽, the shared records in `places/ennin/`, so it shows 79 places, 57 of them anchored. |
 | Actors | 16 | `actors/xuanzang/` | 玄奘, the emperor 太宗, the kings 麴文泰, 戒日王 and 鳩摩羅王, the 葉護可汗, the teachers 戒賢, 勝軍, 般若羯羅 and 僧稱, and the officials and guides on the way. |
 | Events | 98 | `events/xuanzang/` | One per stop or incident. Each has exactly one `site`, `start` or `end` place, except three whose only place is context: the night crossing below 玉門關, the 波羅奢 forest robbery and the loss in the 信度河. |
 | Journeys | 3 | `journeys/xuanzang/` | The outbound journey, the travels in India and the return, in the shape PR #26 proposes. The compiler does not read them until the owner accepts that shape. |
 | Relationships | 9 | `relationships/xuanzang/` | Travel, the 高昌 brotherhood and letters, two teachings, two royal patronages, the audience, and the transmission of the texts. |
-| Sources | 3 + 2 | `sources/` | `cien-zhuan`, `xiyu-ji` and `jiu-tangshu-fangji` are new. The chapter also reaches `wikidata` and, through the shared 長安 and 洛陽, 圓仁's diary `nitto-guho-junrei-gyoki`. |
+| Sources | 3 + 3 | `sources/` | `cien-zhuan`, `xiyu-ji` and `jiu-tangshu-fangji` are new. The chapter also reaches `wikidata`, 圓仁's diary `nitto-guho-junrei-gyoki` through the shared 長安 and 洛陽, and `hou-hanshu` through the shared western-regions places. |
 
 ## Evidence and uncertainty
 

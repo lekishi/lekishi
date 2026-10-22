@@ -95,7 +95,7 @@ calendar table.
 
 == Places
 
-Of the 77 places, 55 carry a Wikidata display anchor. That is a label
+Of the 77 places on the route, 55 carry a Wikidata display anchor. That is a label
 position, not an asserted historical coordinate, and its notes say the
 identification is the conventional modern reading. The other 22 carry an
 `unknown` position, for one of three reasons:
@@ -107,9 +107,17 @@ identification is the conventional modern reading. The other 22 carry an
 * Wikidata rate-limited this environment (HTTP 429) before the lookup could be
   made, for example 迦畢試, 那揭羅喝 and 迦摩縷波.
 
+Six of the 77 are shared with the 班超 chapter, which landed first: 焉耆
+(`agni`), 姑墨 (`baluka`), 疏勒 (`kashgar`), 于窴 (`khotan`), 龜茲 (`kucha`) and
+伊吾 (`yiwu`). Their records live in `places/western-regions/`, with this
+chapter's names and cites folded in, so `places/xuanzang/` holds the other 71.
+Main's 焉耆 record already gave a cited reason for having no position, and it
+keeps that reason.
+
 The 長安 and 洛陽 records are shared and belong to the 圓仁 chapter. With them
-the chapter shows 79 places, 57 anchored, and reaches five sources: the three
-above, Wikidata, and 圓仁's diary, which the shared places cite.
+the chapter shows 79 places, 57 anchored, and reaches six sources: the three
+above, Wikidata, 圓仁's diary, which the shared 長安 and 洛陽 cite, and the
+後漢書, which the shared western-regions places cite.
 
 == Fit with the journey kind (PR #26)
 
@@ -159,6 +167,7 @@ display anchors break the line.
 == Cross-chapter links
 
 * 長安 and 洛陽 are shared with the 圓仁 chapter.
+* 焉耆, 姑墨, 疏勒, 于窴, 龜茲 and 伊吾 are shared with the 班超 chapter.
 * The Tang chapter's `jianzhen-transmission` lists 玄奘法師《西域記》 among
   the works 鑒眞 brought to Japan in 754. The 646 event
   `xiyu-ji-presented-646` is that work's origin.

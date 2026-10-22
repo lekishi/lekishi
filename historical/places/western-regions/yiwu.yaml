@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 伊吾, the land the Han took from the 匈奴 in 73 CE, where 班超, as 假司馬 under 竇固, fought his first battle. The label anchor sits at the modern 哈密市, the oasis usually identified with 伊吾盧; it asserts no site.
+types: [region]
+names:
+  - form: 伊吾
+    lang: lzh
+    script: Hani
+    roman: Yiwu
+    scheme: pinyin
+    cite:
+      - id: yiwu-name
+        says: The biography records 班超 attacking 伊吾 separately and fighting at 蒲類海.
+        source: hou-hanshu
+        at: 卷四十七 班梁列傳 班超 永平十六年
+        quote: 將兵別擊伊吾，戰於蒲類海
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [93.5155, 42.8322]
+    notes: Label anchor at the modern 哈密市; the identification of 伊吾 with the Hami oasis is the usual one and is not cited here.
+    cite:
+      - id: yiwu-anchor
+        says:
+          The label anchor is placed at the modern city's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q989892 (P625), revision 2526615620
+external_ids:
+  - system: wikidata
+    id: Q989892
+    url: https://www.wikidata.org/wiki/Q989892
+    license: CC0-1.0
+    note: The item whose coordinate places the point.

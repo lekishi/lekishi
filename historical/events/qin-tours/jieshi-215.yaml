@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: In 215 BCE 始皇 went to 碣石, sent 盧生 of 燕 to look for the immortals 羨門 and 高誓, and had an inscription cut on the gate of 碣石. City walls were pulled down and dikes cut through.
+types: [occurrence]
+date:
+  value: 215 BCE
+  calendar: chinese_lunisolar
+  as_written: 三十二年
+  cite:
+    - id: jieshi-215-account
+      says: The annals record the visit to 碣石, the mission of 盧生 and the inscription.
+      source: shiji
+      at: 卷六 秦始皇本紀 三十二年（始皇之碣石）
+      quote: 三十二年，始皇之碣石，使燕人盧生求羨門、高誓。刻碣石門。壞城郭，決通隄防。
+places:
+  - place: jieshi
+    role: site
+participants:
+  - actor: qin-king-zheng
+    role: leader
+  - actor: lu-sheng
+    role: participant
+    note: Sent to seek the immortals.

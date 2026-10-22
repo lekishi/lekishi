@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 始皇 toured the northern frontier and came home by 上郡.
+types: [journey]
+date:
+  value: 215 BCE
+  calendar: chinese_lunisolar
+  as_written: 三十二年
+  cite:
+    - id: northern-border-215-account
+      says: The annals record the northern tour and the return by 上郡.
+      source: shiji
+      at: 卷六 秦始皇本紀 三十二年（始皇巡北邊）
+      quote: 始皇巡北邊，從上郡入。
+places:
+  - place: shangjun
+    role: end
+participants:
+  - actor: qin-king-zheng
+    role: leader
+notes: The route along the frontier is not recorded.

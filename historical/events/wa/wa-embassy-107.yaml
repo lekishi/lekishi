@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Fifty years later, in the first year of 永初 (107 CE), 帥升 and others, as 倭國王, presented 160
+  captives (生口) to the Han court and asked for an audience. A coda to the 57 CE embassy, from the
+  same 東夷列傳 entry.
+types: [mission]
+date:
+  value: 107
+  calendar: chinese_lunisolar
+  as_written: 安帝永初元年
+  cite:
+    - id: wa-embassy-107-account
+      says: The 東夷列傳 records 帥升 and others presenting 160 captives in 永初元年 and asking for an audience.
+      source: hou-hanshu
+      at: 卷八十五 東夷列傳 倭（安帝永初元年）
+      quote: 安帝永初元年，倭國王帥升等獻生口百六十人，願請見。
+places:
+  - place: han-luoyang
+    role: end
+participants:
+  - actor: shuaisheng
+    role: leader
+notes:
+  A coda node outside the chapter window. The entry says 倭國, not 倭奴國, and the record does not
+  link the two polities.

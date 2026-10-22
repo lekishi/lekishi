@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  伊稚斜單于, 軍臣單于's younger brother, the 左谷蠡王 who made himself 單于 by defeating his brother's
+  heir 於單, and whom 衛青 drove from the field north of the desert in 119 BCE. The 匈奴列傳 records
+  his death after thirteen years, in 元鼎三年 (114 BCE).
+types: [person]
+names:
+  - form: 伊稚斜單于
+    lang: lzh
+    script: Hani
+    roman: Yizhixie Chanyu
+    scheme: pinyin
+    cite:
+      - id: yizhixie-name
+        says: The 匈奴列傳 records the 左谷蠡王 伊稚斜 making himself 單于 and defeating 軍臣's heir 於單.
+        source: shiji-han-frontiers
+        at: 卷一百十 匈奴列傳（伊稚斜自立爲單于）
+        quote: 軍臣單于弟左谷蠡王伊稚斜自立爲單于，攻破軍臣單于太子於單。
+roles:
+  - role: ruler
+    date:
+      value: 126 BCE..114 BCE
+      mode: duration
+      calendar: chinese_lunisolar
+      as_written: 伊稚斜單于立十三年死…是歲，漢元鼎三年也
+    cite:
+      - id: yizhixie-reign
+        says: The 匈奴列傳 records that 伊稚斜單于 died after thirteen years and that the year was 元鼎三年.
+        source: shiji-han-frontiers
+        at: 卷一百十 匈奴列傳（伊稚斜單于立十三年死）
+        quote: 伊稚斜單于立十三年死，子烏維立爲單于。是歳，漢元鼎三年也。
+notes:
+  The 大宛列傳 says only that the 左谷蠡王 attacked the heir and made himself 單于; the name comes from
+  the 匈奴列傳.

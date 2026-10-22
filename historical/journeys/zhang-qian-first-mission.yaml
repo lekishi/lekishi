@@ -1,0 +1,40 @@
+# Proposed contract v1 journey record (RFD 2, "Proposed: the journey record", draft PR #26).
+# Not compiled yet: the compiler reads no historical/journeys/ folder until v1 lands, so this
+# file is test data for that work and changes no chapter's digest.
+title: 張騫's first mission to the 月氏, 140s–126 BCE
+summary: >-
+  張騫 leaves 長安 through 隴西, is caught and held at the 匈奴 court for more than ten years,
+  escapes west to 大宛, goes on through 康居 to the 大月氏 and 大夏, is caught again by the 匈奴 on the
+  way back, and returns to 長安 after thirteen years.
+travellers:
+  - actor: zhang-qian
+    role: leader
+  - actor: ganfu
+    role: participant
+stops:
+  - event: zhang-qian-departure
+    place: han-changan
+  - zhang-qian-captured
+  - event: zhang-qian-dayuan
+    place: dayuan
+  - event: zhang-qian-yuezhi
+    place: daxia
+  - event: zhang-qian-return-126
+    place: han-changan
+cite:
+  - id: zhang-qian-first-mission-sequence
+    says: >-
+      The 大宛列傳 narrates the departure through 隴西, the capture, the escape to 大宛, the journey
+      through 康居 to the 大月氏 and 大夏, the return along the 南山 meaning to cross 羌中, the second
+      capture, and the return home, in this order.
+    source: shiji-han-frontiers
+    at: 卷一百二十三 大宛列傳 篇首（大宛之跡，見自張騫）
+notes: >-
+  Test case for the drawing rules with windows: every stop before the return shares the window
+  140–127 BCE, so v0 can order none of them, and the order rests on the journey's cite alone. Only
+  長安, 大宛 and 大夏 carry a point, and 大宛 and 大夏 are display anchors, so nothing is drawn: the
+  journey is a list and a card. The 大月氏 and 康居 are waypoints of zhang-qian-yuezhi and cannot be
+  separate stops of one event; the stop takes its end place, 大夏. 隴西 is likewise a waypoint of the
+  departure. The second capture is not a stop: the source says he meant to return through 羌中,
+  not where the 匈奴 took him, so the event has no place that puts the party anywhere, and the
+  journey keeps it in the summary until a cited place is found.

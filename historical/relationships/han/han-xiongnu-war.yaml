@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  The war between the Han and the 匈奴 that began when the 馬邑 ambush ended the peace in 133 BCE,
+  through the campaigns of 衛青 and 霍去病 to the battles north of the desert in 119 BCE. The
+  relationship asserts no causation between its campaigns and draws no front.
+types: [conflict]
+from: han-dynasty
+to: xiongnu
+directionality: mutual
+date:
+  value: 133 BCE..119 BCE
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: 元光二年（馬邑）至元狩四年（幕北）
+  cite:
+    - id: han-xiongnu-war-span
+      says:
+        The 匈奴列傳 records that after 馬邑 the 匈奴 broke off the peace and raided the frontier past
+        counting, and that after the battles north of the desert the Han, short of horses, did not
+        strike north again for a long time.
+      sources:
+        - source: shiji-han-frontiers
+          at: 卷一百十 匈奴列傳（自是之後，匈奴絕和親）
+          quote: 自是之後，匈奴絕和親，攻當路塞，往往入盜於漢邊，不可勝數。
+        - source: shiji-han-frontiers
+          at: 卷一百十 匈奴列傳（於是漢久不北擊胡）
+          quote: 會驃騎將軍去病死，於是漢久不北擊胡。
+notes: The span is the chapter's, from the end of the peace to the last great campaign; the 匈奴列傳
+  continues the war under later 單于, and the record does not claim that fighting stopped in 119 BCE.

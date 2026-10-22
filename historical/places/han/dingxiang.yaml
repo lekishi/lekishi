@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  定襄, the frontier commandery from which 衛青 led the sorties of 123 BCE and the march north across
+  the desert in 119 BCE. The label anchor sits at the modern 和林格爾縣, the area of the commandery's
+  seat 成樂 in the usual identification; it asserts no site.
+types: [region]
+names:
+  - form: 定襄
+    lang: lzh
+    script: Hani
+    roman: Dingxiang
+    scheme: pinyin
+    cite:
+      - id: dingxiang-name
+        says: The 漢書 annals record 衛青 leading six generals out of 定襄 in the second month of 元朔六年.
+        source: hanshu
+        at: 卷六 武帝紀 元朔六年 春二月
+        quote: 大將軍衛青將六將軍兵十餘萬騎出定襄，斬首三千餘級
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [111.81765, 40.37764]
+    notes:
+      Region-level label anchor at the modern 和林格爾縣, the area usually identified with the seat 成樂;
+      the identification is not cited here and the anchor asserts no site or extent.
+    cite:
+      - id: dingxiang-anchor
+        says:
+          The label anchor is placed at the modern county's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q1354720 (P625), revision 2539134118
+external_ids:
+  - system: wikidata
+    id: Q1354720
+    url: https://www.wikidata.org/wiki/Q1354720
+    license: CC0-1.0
+    note: The item whose coordinate places the point.

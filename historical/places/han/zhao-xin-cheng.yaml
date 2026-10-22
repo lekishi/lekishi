@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  闐顏山 and 趙信城, the mountain and the walled 匈奴 granary named after 趙信, north of the desert, which
+  衛青 reached after the 單于 fled in 119 BCE and whose grain he burned. Its site is unknown.
+types: [fortification]
+names:
+  - form: 趙信城
+    lang: lzh
+    script: Hani
+    roman: Zhao Xin Cheng
+    scheme: pinyin
+    cite:
+      - id: zhao-xin-cheng-name
+        says: The 衛將軍驃騎列傳 records the army reaching 窴顏山 趙信城 and feeding on the 匈奴's stored grain.
+        source: shiji-han-frontiers
+        at: 卷一百十一 衛將軍驃騎列傳（遂至窴顏山趙信城）
+        quote: 遂至窴顏山趙信城，得匈奴積粟食軍。
+  - form: 闐顏山
+    lang: lzh
+    script: Hani
+    note: The mountain, written 闐顏 in the 匈奴列傳 and the 漢書 annals and 窴顏 in the biography.
+    cite:
+      - id: tianyan-shan-name
+        says: The 匈奴列傳 records the Han going north as far as 闐顏山 趙信城 and turning back.
+        source: shiji-han-frontiers
+        at: 卷一百十 匈奴列傳（北至闐顏山趙信城而還）
+        quote: 北至闐顏山趙信城而還。
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: Neither history places the mountain or the town beyond "north of the desert"; no position is asserted.
+    cite:
+      - id: zhao-xin-cheng-unplaced
+        says: The cited entry names 趙信城 and states no site for it, so no position is asserted.
+        source: shiji-han-frontiers
+        at: 卷一百十一 衛將軍驃騎列傳（遂至窴顏山趙信城）

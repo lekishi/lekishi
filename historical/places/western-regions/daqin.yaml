@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  大秦, "the country west of the sea", the destination 甘英 was sent toward in 97 CE and never reached.
+  The 西域傳 describes four hundred walled towns, chosen kings and rich goods; the name is usually read
+  as the Roman empire. The record carries no position.
+types: [region]
+names:
+  - form: 大秦
+    lang: lzh
+    script: Hani
+    roman: Daqin
+    scheme: pinyin
+    cite:
+      - id: daqin-name
+        says: The 大秦 entry records that the country is also called 犂鞬 and 海西國, because it lies west of the sea.
+        source: hou-hanshu
+        at: 卷八十八 西域傳 大秦國
+        quote: 大秦國，一名犂鞬，以在海西，亦云海西國。
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      The usual reading of 大秦 as the Roman empire is not cited here, and an empire is not a point;
+      no position is asserted, so a journey toward 大秦 is never drawn to it.
+    cite:
+      - id: daqin-unplaced
+        says: The 大秦 entry places the country west of the sea and gives no position that fixes it.
+        source: hou-hanshu
+        at: 卷八十八 西域傳 大秦國

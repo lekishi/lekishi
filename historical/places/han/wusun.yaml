@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  烏孫, the country of the 昆莫 about two thousand 里 north-east of 大宛, to which 張騫 led three hundred
+  men on his second mission. The label anchor sits at Lake Issyk-Kul, near which the 烏孫 royal seat is
+  usually placed; it asserts no site.
+types: [region]
+names:
+  - form: 烏孫
+    lang: lzh
+    script: Hani
+    roman: Wusun
+    scheme: pinyin
+    cite:
+      - id: wusun-place-name
+        says: The 大宛列傳 records 張騫 arriving in 烏孫 and the 昆莫 receiving him with the rite due a 單于.
+        source: shiji-han-frontiers
+        at: 卷一百二十三 大宛列傳（騫既至烏孫）
+        quote: 騫既至烏孫，烏孫王昆莫見漢使如單于禮
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [77.25, 42.4167]
+    notes:
+      Region-level label anchor at Lake Issyk-Kul. The 漢書 names the royal seat 赤谷城, which is usually
+      placed near the lake, but neither the town nor the identification is cited here, and the anchor
+      asserts no site.
+    cite:
+      - id: wusun-anchor
+        says:
+          The label anchor is placed at the modern lake's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q42191 (P625), revision 2550271906
+external_ids:
+  - system: wikidata
+    id: Q42191
+    url: https://www.wikidata.org/wiki/Q42191
+    license: CC0-1.0
+    note: The item whose coordinate places the point.

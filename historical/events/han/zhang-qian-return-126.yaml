@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  When the 單于 died and the 左谷蠡王 seized the throne, 張騫 escaped in the disorder with his 匈奴 wife
+  and 堂邑父 and came back to the Han, thirteen years after he set out. Of more than a hundred men, two
+  returned. The court made him 太中大夫 and 堂邑父 奉使君, and he described to the emperor the countries he
+  had seen and five or six he had heard of.
+types: [journey]
+date:
+  value: 127 BCE..126 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 單于死，左谷蠡王攻其太子自立，國內亂（元朔二年其後冬）
+  cite:
+    - id: zhang-qian-return-time
+      says: The 大宛列傳 ties the escape to the 單于's death and the 左谷蠡王's seizure of the throne.
+      source: shiji-han-frontiers
+      at: 卷一百二十三 大宛列傳（單于死，左谷蠡王攻其太子自立）
+      quote: 留歲餘，單于死，左谷蠡王攻其太子自立，國內亂，騫與胡妻及堂邑父俱亡歸漢。
+    - id: zhang-qian-return-dating
+      says: The 匈奴列傳 places that death and seizure in the winter after 元朔二年.
+      role: supporting
+      source: shiji-han-frontiers
+      at: 卷一百十 匈奴列傳（其後冬，匈奴軍臣單于死）
+      quote: 其後冬，匈奴軍臣單于死。軍臣單于弟左谷蠡王伊稚斜自立爲單于
+    - id: zhang-qian-return-count
+      says: The 大宛列傳 records that more than a hundred set out and two returned after thirteen years.
+      role: supporting
+      source: shiji-han-frontiers
+      at: 卷一百二十三 大宛列傳（去十三歲，唯二人得還）
+      quote: 初，騫行時百餘人，去十三歲，唯二人得還。
+places:
+  - place: chanyu-court
+    role: start
+  - place: han-changan
+    role: end
+    note: The text says he returned to the Han and was given office at court; the capital is the court's seat, not a stated arrival place.
+participants:
+  - actor: zhang-qian
+    role: leader
+  - actor: ganfu
+    role: participant
+cites:
+  places:
+    - id: zhang-qian-return-places
+      says: The 大宛列傳 records his return to the Han and his appointment as 太中大夫, naming no place.
+      source: shiji-han-frontiers
+      at: 卷一百二十三 大宛列傳（漢拜騫為太中大夫）
+      quote: 漢拜騫為太中大夫，堂邑父為奉使君。
+notes:
+  The date joins two sources. The 大宛列傳 does not date the escape; the 匈奴列傳 dates the death and
+  seizure it names to the winter after 元朔二年, which falls in late 127 or early 126 BCE.

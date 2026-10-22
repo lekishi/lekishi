@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 安息, the Parthian kingdom, whose court the 後漢書 places at 和櫝城 twenty-five thousand 里 from 洛陽, and whose sailors on its western edge turned 甘英 back. The label anchor sits at the coordinate Wikidata gives for Hecatompylos, the Parthian city often read as 和櫝; it asserts no identification.
+types: [region]
+names:
+  - form: 安息
+    lang: lzh
+    script: Hani
+    roman: Anxi
+    scheme: pinyin
+    cite:
+      - id: anxi-name
+        says: The 安息 entry records that the kingdom's court was at 和櫝城, twenty-five thousand 里 from 洛陽.
+        source: hou-hanshu
+        at: 卷八十八 西域傳 安息國
+        quote: 安息國，居和櫝城，去洛陽二萬五千里。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [54.10367, 35.95305]
+    notes: Region-level label anchor at the coordinate Wikidata records for Hecatompylos. The identification of 和櫝 with Hecatompylos is not cited here, and the anchor does not assert it.
+    cite:
+      - id: anxi-anchor
+        says:
+          The label anchor is placed at the coordinate Wikidata (CC0) records for Hecatompylos; no
+          historical coordinate for 安息 or 和櫝 is asserted.
+        source: wikidata
+        at: Q1518300 (P625), revision 2516741819
+external_ids:
+  - system: wikidata
+    id: Q1518300
+    url: https://www.wikidata.org/wiki/Q1518300
+    license: CC0-1.0
+    note: The item whose coordinate places the point.

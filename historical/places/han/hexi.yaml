@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  河西, the corridor west of the Yellow River and north of the 南山, emptied of 匈奴 after the 渾邪王's
+  surrender in 121 BCE, where the Han made the 武威 and 酒泉 commanderies. The label anchor sits in the
+  Hexi Corridor; it asserts no extent.
+types: [region]
+names:
+  - form: 河西
+    lang: lzh
+    script: Hani
+    roman: Hexi
+    scheme: pinyin
+    cite:
+      - id: hexi-name
+        says: The 大宛列傳 records that after the 渾邪王's surrender 金城 and 河西 to the 鹽澤 were empty of 匈奴.
+        source: shiji-han-frontiers
+        at: 卷一百二十三 大宛列傳（金城、河西西并南山至鹽澤空無匈奴）
+        quote: 而金城、河西西并南山至鹽澤空無匈奴
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [100.0, 39.0]
+    notes: Region-level label anchor in the Hexi Corridor; it asserts no extent and no commandery boundary.
+    cite:
+      - id: hexi-anchor
+        says:
+          The label anchor is placed at the modern corridor's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q1052359 (P625), revision 2526852920
+external_ids:
+  - system: wikidata
+    id: Q1052359
+    url: https://www.wikidata.org/wiki/Q1052359
+    license: CC0-1.0
+    note: The item whose coordinate places the point.

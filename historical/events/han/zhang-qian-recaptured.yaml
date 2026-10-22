@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  After more than a year in the west, 張騫 turned back along the southern mountains, meaning to come
+  home through the 羌's land and avoid the 匈奴, but the 匈奴 caught him again and held him more than a
+  year.
+types: [occurrence]
+date:
+  value: 140 BCE..127 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 留歲餘，還，并南山，欲從羌中歸，復為匈奴所得。留歲餘
+  cite:
+    - id: zhang-qian-recaptured-time
+      says: The 大宛列傳 records the return by the southern mountains toward 羌中 and the second capture, without a year.
+      source: shiji-han-frontiers
+      at: 卷一百二十三 大宛列傳（欲從羌中歸）
+      quote: 留歲餘，還，并南山，欲從羌中歸，復為匈奴所得。
+places:
+  - place: qiang-zhong
+    role: context
+    note: The land he meant to cross, not where he was taken; the text names no place for the capture.
+participants:
+  - actor: zhang-qian
+    role: subject
+  - actor: xiongnu
+    role: participant

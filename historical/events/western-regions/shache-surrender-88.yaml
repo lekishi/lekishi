@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  With twenty-five thousand men from 于窴 and its neighbours 班超 marched on 莎車; 龜茲 sent fifty
+  thousand from 溫宿, 姑墨 and 尉頭 to relieve it. 班超 announced a retreat, let prisoners escape with the
+  news, and when the 龜茲 and 溫宿 kings rode off to cut him off, attacked the 莎車 camp at cockcrow,
+  killed five thousand, and took its surrender.
+types: [campaign]
+date:
+  value: 87..88
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 明年（元和四年、章和元年後三年之明年）
+  cite:
+    - id: shache-surrender-account
+      says: The biography records the feint, the dawn attack on the 莎車 camp, and 莎車's surrender.
+      sources:
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超（雞鳴馳赴莎車營）
+          quote: 超知二虜已出，密召諸部勒兵，雞鳴馳赴莎車營，胡大驚亂奔走，追斬五千餘級，大獲其馬畜財物。
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超（莎車遂降）
+          quote: 莎車遂降，龜茲等因各退散，自是威震西域。
+places:
+  - place: shache
+    role: site
+participants:
+  - actor: ban-chao
+    role: leader
+notes:
+  "The biography dates the campaign only by a chain of relative years from 建初八年 (83 CE): the next
+  year, three years later, and the next year again, which reaches 87 or 88 CE depending on how the
+  half-year siege of 烏即城 is counted. The record keeps both years as a window."

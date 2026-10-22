@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: 趙高, the 中車府令 who held the seals on the last tour and, with 胡亥 and 李斯, suppressed 始皇's letter to 扶蘇 at 沙丘.
+types: [person]
+names:
+  - form: 趙高
+    lang: lzh
+    script: Hani
+    roman: Zhao Gao
+    scheme: pinyin
+    cite:
+      - id: zhao-gao-name
+        says: The annals record the sealed letter lying with the 中車府令 趙高, who kept the tallies and seals.
+        source: shiji
+        at: 卷六 秦始皇本紀 三十七年（中車府令趙高）
+        quote: 在中車府令趙高行符璽事所
+roles:
+  - role: official
+    note: The office is named in the account of 210 BCE; the record gives it no span.
+    date:
+      value: 210 BCE
+      calendar: chinese_lunisolar
+      as_written: 三十七年
+    cite:
+      - id: zhao-gao-office
+        says: The annals name 趙高 as 中車府令 in the account of 始皇's death.
+        source: shiji
+        at: 卷六 秦始皇本紀 三十七年（中車府令趙高）
+        quote: 在中車府令趙高行符璽事所

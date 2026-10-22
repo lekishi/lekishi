@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 始皇 died at the 沙丘平臺 on the 丙寅 day of the seventh month. 李斯 kept the death secret, and the body travelled on in a closed carriage with meals still served.
+types: [occurrence]
+date:
+  value: 210-09-10 BCE
+  calendar: chinese_lunisolar
+  as_written: 七月丙寅
+  cite:
+    - id: shihuang-death-210-account
+      says: The annals record the death at 沙丘平臺 on 七月丙寅 and 李斯 concealing it.
+      source: shiji
+      at: 卷六 秦始皇本紀 三十七年（始皇崩於沙丘平臺）
+      quote: 七月丙寅，始皇崩於沙丘平臺。丞相斯為上崩在外，恐諸公子及天下有變，乃祕之，不發喪。
+places:
+  - place: shaqiu
+    role: site
+participants:
+  - actor: qin-king-zheng
+    role: subject
+  - actor: li-si
+    role: participant
+notes: 10 September 210 BCE is the only 丙寅 day in August and September 210 BCE (Julian); the seventh month falls within those weeks.

@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 姑墨, the kingdom on the northern road whose 石城 班超 stormed in 78 CE with troops from 疏勒, 康居, 于窴 and 拘彌. The label anchor sits at the modern 阿克蘇市, the usual identification; it asserts no site of 石城.
+types: [region]
+names:
+  - form: 姑墨
+    lang: lzh
+    script: Hani
+    roman: Gumo
+    scheme: pinyin
+    cite:
+      - id: gumo-name
+        says: The biography records 班超 leading ten thousand men of four kingdoms against 姑墨's 石城 in 建初三年.
+        source: hou-hanshu
+        at: 卷四十七 班梁列傳 班超 建初三年
+        quote: 超率疏勒、康居、于窴、拘彌兵一萬人攻姑墨石城，破之，斬首七百級。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [80.25, 41.1664]
+    notes: Label anchor at the modern 阿克蘇市 in the Aksu oasis; the anchor asserts no site of 石城.
+    cite:
+      - id: gumo-anchor
+        says:
+          The label anchor is placed at the modern city's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q421648 (P625), revision 2549821773
+external_ids:
+  - system: wikidata
+    id: Q421648
+    url: https://www.wikidata.org/wiki/Q421648
+    license: CC0-1.0
+    note: The item whose coordinate places the point.

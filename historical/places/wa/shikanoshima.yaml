@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  志賀島, the island at the mouth of 博多 bay where the gold seal inscribed 漢委奴國王 was found in
+  1784. The precise find-spot on the island is not recorded here.
+types: [landform]
+names:
+  - form: 志賀島
+    lang: ja
+    script: Hani
+    roman: Shikanoshima
+    scheme: hepburn
+    cite:
+      - id: shikanoshima-wikidata-name
+        says: Wikidata (CC0) records 志賀島 as the place where the King of Na gold seal was discovered.
+        source: wikidata
+        at: Q2975212 (P189), revision 2554271092
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [130.3, 33.675]
+    notes: Label anchor at the modern island of 志賀島 (Wikidata Q3077260). It is not the find-spot.
+    cite:
+      - id: shikanoshima-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the island of 志賀島; no historical coordinate is asserted.
+        source: wikidata
+        at: Q3077260 (P625), revision 2241909021
+external_ids:
+  - system: wikidata
+    id: Q3077260
+    url: https://www.wikidata.org/wiki/Q3077260
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

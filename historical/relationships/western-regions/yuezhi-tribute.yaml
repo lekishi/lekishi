@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  After their failed attack of 90 CE the 月氏 sent tribute to the Han every year, as the biography
+  records; before it they had asked for a Han princess and been refused.
+types: [diplomacy]
+from: da-yuezhi-state
+to: han-dynasty
+date:
+  value: 90
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 永元二年（月氏由是大震，歲奉貢獻）
+  cite:
+    - id: yuezhi-tribute-time
+      says: The biography records the 月氏's request for a princess, its refusal, and the yearly tribute after the failed attack.
+      sources:
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超（因求漢公主。超拒還其使）
+          quote: 是歲貢奉珍寶、符拔、師子，因求漢公主。超拒還其使，由是怨恨。
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超（月氏由是大震，歲奉貢獻）
+          quote: 月氏由是大震，歲奉貢獻。

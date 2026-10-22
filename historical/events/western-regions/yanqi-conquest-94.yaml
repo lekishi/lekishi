@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In the autumn of 94 CE 班超 led seventy thousand men from eight kingdoms against 焉耆. Its king cut the
+  葦橋; 班超 forded elsewhere and camped twenty 里 from the city. He summoned the kings to a feast,
+  seized the 焉耆 and 尉犂 kings, beheaded them where 陳睦 had died, and sent their heads to the capital;
+  more than fifty kingdoms then sent hostages and submitted.
+types: [campaign]
+date:
+  value: 94
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 永元六年 秋；七月晦，到焉耆
+  cite:
+    - id: yanqi-conquest-time
+      says: The biography dates the campaign to the autumn of 永元六年 and the arrival at 焉耆 to the last day of the seventh month.
+      sources:
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超 永元六年
+          quote: 六年秋，超遂發龜茲、鄯善等八國兵合七萬人，及吏士賈客千四百人討焉耆。
+        - source: hou-hanshu
+          at: 卷四十七 班梁列傳 班超（七月晦，到焉耆）
+          quote: 七月晦，到焉耆，去城二十里，營大澤中。
+    - id: yanqi-conquest-result
+      says: The biography records the execution of the kings at the old city of 陳睦 and more than fifty kingdoms submitting.
+      role: supporting
+      source: hou-hanshu
+      at: 卷四十七 班梁列傳 班超（於是西域五十餘國悉皆納質內屬焉）
+      quote: 超留焉耆半歲，慰撫之。於是西域五十餘國悉皆納質內屬焉。
+places:
+  - place: kucha
+    role: start
+  - place: agni
+    role: end
+participants:
+  - actor: ban-chao
+    role: leader

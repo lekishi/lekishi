@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  The 河南 land inside the river bend passed from the 匈奴 to the Han in 127 BCE, when 衛青 took it and
+  the Han set up the 朔方 commandery; in the same entry the Han gave up a remote county of 上谷 to the
+  匈奴. No boundary is drawn.
+types: [changed_boundaries]
+from: xiongnu
+to: han-dynasty
+date:
+  value: 127 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 元朔二年
+  cite:
+    - id: henan-transfer-time
+      says: The 匈奴列傳 records the taking of the 河南 land, the repair of the old Qin frontier, and the cession of a 上谷 county, and dates them to 元朔二年.
+      source: shiji-han-frontiers
+      at: 卷一百十 匈奴列傳（漢亦棄上谷之什辟縣造陽地以予胡）
+      quote: 復繕故秦時蒙恬所爲塞，因河爲固。漢亦棄上谷之什辟縣造陽地以予胡。是歳，漢之元朔二年也。
+notes: The relationship concerns the place recorded as `henan-di`; the change of control is not drawn as a territory.

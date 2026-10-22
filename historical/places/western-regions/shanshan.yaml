@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 鄯善, the kingdom on the southern road, formerly 樓蘭, where 班超 and thirty-six men burned the 匈奴 envoys' camp in 73 CE. The label anchor sits at the modern 若羌縣, near which the kingdom's later seat is often placed; the identification is debated and the anchor asserts no site.
+types: [region]
+names:
+  - form: 鄯善
+    lang: lzh
+    script: Hani
+    roman: Shanshan
+    scheme: pinyin
+    cite:
+      - id: shanshan-name
+        says: The biography records 班超 reaching 鄯善 and its king 廣 receiving him with full courtesy.
+        source: hou-hanshu
+        at: 卷四十七 班梁列傳 班超（超到鄯善）
+        quote: 超到鄯善，鄯善王廣奉超禮敬甚備，後忽更踈懈。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [88.16899, 39.02049]
+    notes: Region-level label anchor at the modern 若羌縣. Where the kingdom's seat stood in the first century is debated, and the anchor asserts no site.
+    cite:
+      - id: shanshan-anchor
+        says:
+          The label anchor is placed at the modern county's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q1023120 (P625), revision 2526542092
+external_ids:
+  - system: wikidata
+    id: Q1023120
+    url: https://www.wikidata.org/wiki/Q1023120
+    license: CC0-1.0
+    note: The item whose coordinate places the point.

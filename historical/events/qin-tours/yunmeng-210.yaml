@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: In the eleventh month 始皇 reached 雲夢 and sacrificed from afar to 虞舜 at 九疑山.
+types: [occurrence]
+date:
+  value: 211-12 BCE..210-01 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 十一月
+  cite:
+    - id: yunmeng-210-account
+      says: The annals record the arrival at 雲夢 and the sacrifice to 虞舜 at 九疑山.
+      source: shiji
+      at: 卷六 秦始皇本紀 三十七年（行至雲夢）
+      quote: 十一月，行至雲夢，望祀虞舜於九疑山。
+places:
+  - place: yunmeng
+    role: site
+  - place: jiuyi-shan
+    role: context
+    note: Sacrificed to from afar, not visited.
+participants:
+  - actor: qin-king-zheng
+    role: leader

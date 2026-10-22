@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: Returning, 始皇 passed 彭城, fasted and prayed, and sent a thousand men diving into the 泗水 for the 周 tripod. They did not find it.
+types: [occurrence]
+date:
+  value: 219 BCE
+  calendar: chinese_lunisolar
+  as_written: 二十八年
+  cite:
+    - id: pengcheng-tripod-219-account
+      says: The annals record the search for the 周 tripod in the 泗水 at 彭城.
+      source: shiji
+      at: 卷六 秦始皇本紀 二十八年（過彭城）
+      quote: 始皇還，過彭城，齋戒禱祠，欲出周鼎泗水。使千人沒水求之，弗得。
+places:
+  - place: pengcheng
+    role: site
+participants:
+  - actor: qin-king-zheng
+    role: leader

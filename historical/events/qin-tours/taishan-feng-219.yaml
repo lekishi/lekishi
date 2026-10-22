@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 始皇 climbed 泰山, set up a stone and performed the 封 sacrifice. A storm caught him on the descent and he sheltered under a tree, which he ennobled as 五大夫. He performed the 禪 sacrifice at 梁父 and had the stone inscribed.
+types: [occurrence]
+date:
+  value: 219 BCE
+  calendar: chinese_lunisolar
+  as_written: 二十八年
+  cite:
+    - id: taishan-feng-219-account
+      says: The annals record the 封 on 泰山, the storm, the ennobled tree and the 禪 at 梁父.
+      source: shiji
+      at: 卷六 秦始皇本紀 二十八年（上泰山）
+      quote: 乃遂上泰山，立石，封，祠祀。下，風雨暴至，休於樹下，因封其樹為五大夫。禪梁父。
+places:
+  - place: taishan
+    role: site
+  - place: liangfu
+    role: site
+participants:
+  - actor: qin-king-zheng
+    role: leader

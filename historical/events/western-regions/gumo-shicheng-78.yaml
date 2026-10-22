@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In 78 CE 班超 led ten thousand men from 疏勒, 康居, 于窴 and 拘彌 against 姑墨's 石城, took it, and cut
+  off seven hundred heads. He then asked the throne for troops, arguing that with 龜茲 taken the
+  Western Regions would be won, and that the states could be set against one another.
+types: [campaign]
+date:
+  value: 78
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 建初三年
+  cite:
+    - id: gumo-shicheng-time
+      says: The biography dates the attack on 姑墨's 石城 to 建初三年.
+      source: hou-hanshu
+      at: 卷四十七 班梁列傳 班超 建初三年
+      quote: 超率疏勒、康居、于窴、拘彌兵一萬人攻姑墨石城，破之，斬首七百級。
+    - id: gumo-shicheng-petition
+      says: In the petition that follows, 班超 argues that once 龜茲 is taken hardly one in a hundred states will remain unsubmitted.
+      role: supporting
+      source: hou-hanshu
+      at: 卷四十七 班梁列傳 班超 建初三年 上疏
+      quote: 若得龜茲，則西域未服者百分之一耳。
+places:
+  - place: kashgar
+    role: start
+  - place: baluka
+    role: site
+participants:
+  - actor: ban-chao
+    role: leader

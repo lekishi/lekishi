@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 武關, the pass by which 始皇 returned from 南郡 to the Qin heartland in 219 BCE. The label anchor sits at the modern pass of 武關; it asserts no historical site.
+types: [fortification]
+names:
+  - form: 武關
+    lang: lzh
+    script: Hani
+    roman: Wuguan
+    scheme: pinyin
+    cite:
+      - id: wuguan-name
+        says: The annals record 始皇 returning from 南郡 by way of 武關.
+        source: shiji
+        at: 卷六 秦始皇本紀 二十八年（由武關歸）
+        quote: 上自南郡由武關歸
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [110.617, 33.6]
+    notes: Label anchor at the modern pass of 武關 (Wikidata Q3431367). It is not an asserted historical coordinate.
+    cite:
+      - id: wuguan-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the modern pass of 武關; no historical coordinate is asserted.
+        source: wikidata
+        at: Q3431367 (P625), revision 2024069973
+external_ids:
+  - system: wikidata
+    id: Q3431367
+    url: https://www.wikidata.org/wiki/Q3431367
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

@@ -1,0 +1,48 @@
+= 張騫's missions, 140–115 BCE: source-feasibility note
+:state: Preparation note for the draft chapter `zhang-qian-missions-140-115`; not an RFD decision and not an approval
+:research-window: single pass, 2026-10-21
+:toc:
+
+This note records what the draft chapter
+link:../../historical/chapters/zhang-qian-missions-140-115.yaml[`zhang-qian-missions-140-115`]
+is built from. The chapter is a draft. Only the owner approves it.
+
+== Finding
+
+The 大宛列傳 (史記 卷123) is the account of both missions and is enough on
+its own for the order of events. It dates almost nothing: the first mission
+leaves "in the 建元 years" and returns thirteen years later. The return is
+dated to 126 BCE by joining it to the 匈奴列傳's death of 軍臣單于. The 漢書
+biography (卷61) is cited as supporting text. The 西南夷列傳 (卷116) dates the
+search for a road to 身毒 through 蜀 to 元狩元年.
+
+== What the chapter holds
+
+13 events, 13 places (7 label anchors, one approximate point at the Han city
+of 長安, 5 with no position) and 12 actors. The campaigns of 123 and 121 BCE
+are shared with the Han–匈奴 wars chapter, so one event belongs to two
+stories.
+
+== Placement and dates
+
+* 康居, the 大月氏 court, the 單于庭, 羌中 and 犍為 have no position. 大宛,
+  大夏 and 烏孫 are display anchors at the Fergana basin, Balkh and Issyk-Kul.
+  `daxia` and `wusun` use the same Wikidata pins as the 玄奘 PR's `balkh` and
+  `issyk-kul`.
+* Every event of the first mission shares the window 140–127 BCE, because the
+  source gives no years in between. v0 cannot order them, so the story order
+  is presentation order only.
+* The 烏孫 mission's return is a window, 119–115 BCE. The 漢書's 百官公卿表
+  (卷19) dates 張騫 as 大行 and would narrow it, but its transcription could
+  not be fetched on 2026-10-21.
+
+== Journey sketch
+
+`historical/journeys/zhang-qian-first-mission.yaml` gives the first mission
+in the proposed v1 shape (PR #26). Nothing in it can be drawn under the
+proposed rules, so it tests the list-and-card case.
+
+== What the chapter is good for
+
+The chapter tests a story whose events are almost all undatable inside one
+long window and whose places are mostly unknown.

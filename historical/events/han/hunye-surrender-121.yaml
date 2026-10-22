@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In the autumn of 121 BCE the 渾邪王 and the 休屠王, fearing the 單于 would execute them for the year's
+  losses, planned to surrender. 霍去病 went to meet them; the 渾邪王 killed the 休屠王 and brought both
+  peoples over, some forty thousand, said to be a hundred thousand. The Han settled them in five
+  dependent states, and the land west of the river was left nearly free of 匈奴 raids.
+types: [occurrence]
+date:
+  value: 121 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 元狩二年 秋
+  cite:
+    - id: hunye-surrender-time
+      says: The 漢書 annals date the surrender to the autumn of 元狩二年 and record the five dependent states.
+      source: hanshu
+      at: 卷六 武帝紀 元狩二年 秋
+      quote: 秋，匈奴昆邪王殺休屠王，并將其眾合四萬餘人來降，置五屬國以處之。
+    - id: hunye-surrender-account
+      says: The 匈奴列傳 records the kings' fear of the 單于, the 驃騎將軍 sent to meet them, and the killing of the 休屠王.
+      role: supporting
+      source: shiji-han-frontiers
+      at: 卷一百十 匈奴列傳（渾邪王與休屠王恐，謀降漢）
+      quote: 渾邪王與休屠王恐，謀降漢，漢使驃騎將軍往迎之。渾邪王殺休屠王，并將其眾降漢。
+places:
+  - place: hexi
+    role: site
+    note: The two kings' land west of the river; the meeting place is not named.
+participants:
+  - actor: hunye-king
+    role: leader
+  - actor: xiutu-king
+    role: subject
+  - actor: huo-qubing
+    role: host
+  - actor: xiongnu
+    role: participant
+  - actor: han-dynasty
+    role: participant

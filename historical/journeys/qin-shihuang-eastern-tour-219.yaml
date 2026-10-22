@@ -1,0 +1,38 @@
+# Proposed contract v1 journey record (RFD 2, "Proposed: the journey record", draft PR #26).
+# Not compiled yet: the compiler reads no historical/journeys/ folder until v1 lands, so this
+# file is test data for that work and changes no chapter's digest.
+title: 秦始皇's eastern tour, 219 BCE
+summary: >-
+  始皇 climbs 鄒嶧山 and 泰山, follows the 勃海 coast east to 成山 and 之罘, stays three months at 瑯邪,
+  turns back by 彭城, and sails the 江 to the 湘山 shrine before going home by 武關.
+travellers:
+  - actor: qin-king-zheng
+    role: leader
+stops:
+  - yishan-stele-219
+  - event: taishan-feng-219
+    place: taishan
+  - event: chengshan-zhifu-219
+    place: zhifu
+  - langya-terrace-219
+  - pengcheng-tripod-219
+  - event: xiangshan-storm-219
+    place: xiangshan
+    by: river
+    cite:
+      id: qin-shihuang-219-river
+      says: The annals record 始皇 sailing the 江 to the 湘山 shrine.
+      source: shiji
+      at: 卷六 秦始皇本紀 二十八年（至湘山祠）
+cite:
+  - id: qin-shihuang-219-sequence
+    says: >-
+      The annals narrate 鄒嶧山, 泰山 and 梁父, the coast to 成山 and 之罘, 瑯邪, the return by 彭城,
+      and the river journey to 湘山, in this order.
+    source: shiji
+    at: 卷六 秦始皇本紀 二十八年
+notes: >-
+  Test case for a journey through display anchors only: every stop sits at a modern place of the
+  same name, so under the drawing rules no leg is drawn and the tour is a list and a card. All six
+  stops share the year 219 BCE, so v0 orders none of them. 梁父, 成山 and 武關 are second places of
+  their events and are not stops.

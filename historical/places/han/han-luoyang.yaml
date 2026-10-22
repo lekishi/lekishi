@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  洛陽, the Eastern Han capital, where the 倭奴國 envoy came to court in 57 CE and where 班超 returned
+  to die in 102 CE. The record's point is the excavated walled city of Han and Wei 洛陽, east of the
+  modern city; the sources cited here name the capital and state no site within it. The Sui and Tang eastern
+  capital (`luoyang`) stood to the west and is a separate record.
+types: [capital]
+names:
+  - form: 洛陽
+    lang: lzh
+    script: Hani
+    roman: Luoyang
+    scheme: pinyin
+    cite:
+      - id: luoyang-name
+        says: The biography records 班超 arriving at 洛陽 in the eighth month of 永元十四年.
+        source: hou-hanshu
+        at: 卷四十七 班梁列傳 班超（十四年八月至洛陽）
+        quote: 十四年八月至洛陽，拜爲射聲校尉。
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [112.6183, 34.71948]
+    notes:
+      An approximate placement at the site of the Han and Wei walled city of 洛陽, an excavated and
+      protected site east of the modern city. The point marks the walled city, not a palace or the
+      court where an envoy was received.
+    cite:
+      - id: luoyang-site
+        says:
+          The site of the Eastern Han capital is the archaeological site recorded in Wikidata (CC0) as
+          the ruins of Han and Wei 洛陽; the point is that item's coordinate.
+        basis: interpretation
+        attributed_to: Wikidata contributors (archaeological site item)
+        source: wikidata
+        at: Q11133430 (P625), revision 2474740835
+modern:
+  - form: 漢魏洛陽故城
+    lang: zh-Hans
+    script: Hani
+    note: The protected archaeological site of the walled city, east of modern 洛陽市.
+external_ids:
+  - system: wikidata
+    id: Q11133430
+    url: https://www.wikidata.org/wiki/Q11133430
+    license: CC0-1.0
+    note: The item whose coordinate places the point.

@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  On 12 April 1784 (天明四年二月二十三日) a gold seal inscribed 漢委奴國王 was found on 志賀島 at the
+  mouth of 博多 bay. It passed to the 黒田 lords of 福岡 and is now held by the 福岡市博物館. A coda
+  node, 1,727 years after the 57 CE embassy.
+types: [occurrence]
+date:
+  value: 1784-04-12
+  calendar: gregorian
+  cite:
+    - id: seal-found-time
+      says: Wikidata (CC0) records the King of Na gold seal's time of discovery as 12 April 1784 (Gregorian).
+      source: wikidata
+      at: Q2975212 (P575), revision 2554271092
+places:
+  - place: shikanoshima
+    role: site
+    note: The island; the find-spot on it is not placed.
+cites:
+  places:
+    - id: seal-found-place
+      says: Wikidata (CC0) records 志賀島 as the seal's location of discovery.
+      source: wikidata
+      at: Q2975212 (P189), revision 2554271092
+notes:
+  The date, the find-place and the seal's later history come from Wikidata, whose statements here
+  carry no reference; no contemporary account of the find (the 甚兵衛 口上書) is cited. The record
+  does not claim that this seal is the one the 東夷列傳 says 光武 gave in 57 CE.

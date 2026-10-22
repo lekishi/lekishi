@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  霍去病, 衛青's nephew, who first fought as 剽姚校尉 in 123 BCE, led the two 121 BCE campaigns past
+  焉支山 and to 祁連山 as 驃騎將軍, and in 119 BCE sacrificed at 狼居胥山 before dying in 元狩六年 (117 BCE).
+types: [person]
+names:
+  - form: 霍去病
+    lang: lzh
+    script: Hani
+    roman: Huo Qubing
+    scheme: pinyin
+    cite:
+      - id: huo-qubing-name
+        says: The biography records 去病 being made 驃騎將軍 in the spring of 元狩二年.
+        source: shiji-han-frontiers
+        at: 卷一百十一 衛將軍驃騎列傳 霍去病 元狩二年
+        quote: 春，以冠軍侯去病為驃騎將軍，將萬騎出隴西，有功
+roles:
+  - role: soldier
+    date:
+      value: 123 BCE..119 BCE
+      mode: duration
+      calendar: chinese_lunisolar
+      as_written: 剽姚校尉 (元朔六年); 驃騎將軍 (元狩二年–元狩四年)
+    cite:
+      - id: huo-qubing-first
+        says:
+          The biography records 去病, at eighteen, serving under 衛青 as 剽姚校尉 with eight hundred
+          light horse.
+        source: shiji-han-frontiers
+        at: 卷一百十一 衛將軍驃騎列傳（為剽姚校尉）
+        quote: 為剽姚校尉，與輕勇騎八百直棄大軍數百里赴利
+notes:
+  "The biography writes 剽姚校尉 where its 索隱 eulogy writes 嫖姚; the record keeps the biography's
+  form. His death in 元狩六年 is recorded in the biography and is outside the chapter's window."

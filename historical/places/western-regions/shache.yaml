@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 莎車, the kingdom of the southern road that went over to 龜茲 and surrendered to 班超 in the late 80s after his feint. The label anchor sits at the modern 莎車縣, the usual identification; it asserts no site.
+types: [region]
+names:
+  - form: 莎車
+    lang: lzh
+    script: Hani
+    roman: Shache
+    scheme: pinyin
+    cite:
+      - id: shache-name
+        says: The biography records 莎車 surrendering after 班超's night attack on its camp.
+        source: hou-hanshu
+        at: 卷四十七 班梁列傳 班超（莎車遂降）
+        quote: 莎車遂降，龜茲等因各退散，自是威震西域。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [77.24964, 38.41446]
+    notes: Label anchor at the modern 莎車縣 in the Yarkand oasis; the anchor asserts no site.
+    cite:
+      - id: shache-anchor
+        says:
+          The label anchor is placed at the modern county's coordinate recorded in Wikidata (CC0); no
+          historical coordinate is asserted.
+        source: wikidata
+        at: Q857618 (P625), revision 2539004663
+external_ids:
+  - system: wikidata
+    id: Q857618
+    url: https://www.wikidata.org/wiki/Q857618
+    license: CC0-1.0
+    note: The item whose coordinate places the point.

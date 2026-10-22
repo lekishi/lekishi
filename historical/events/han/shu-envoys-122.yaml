@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  張騫 told the emperor that in 大夏 he had seen 邛 bamboo staves and 蜀 cloth bought in 身毒, and argued
+  that a road through 蜀 would reach 大夏 without the 羌 or the 匈奴. In 元狩元年 the court sent envoys
+  from 蜀 and 犍為 by four roads to look for 身毒; the 昆明 people closed the way, and none got through,
+  but the search opened contact with 滇.
+types: [mission]
+date:
+  value: 122 BCE
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 元狩元年
+  cite:
+    - id: shu-envoys-time
+      says: The 西南夷列傳 dates 張騫's report of 蜀 cloth and 邛 bamboo in 大夏, and the envoys sent to find 身毒, to 元狩元年.
+      source: shiji-han-frontiers
+      at: 卷一百十六 西南夷列傳 元狩元年
+      quote: 博望侯張騫使大夏來，言居大夏時見蜀布、邛竹、杖，使問所從來，曰「從東南身毒國，可數千里，得蜀賈人市」。
+    - id: shu-envoys-roads
+      says: The 大宛列傳 records the four roads from 蜀 and 犍為 and the 昆明 closing the way.
+      role: supporting
+      source: shiji-han-frontiers
+      at: 卷一百二十三 大宛列傳（四道并出）
+      quote: 乃令騫因蜀犍為發閒使，四道并出：出駹，出冉，出徙，出邛、僰，皆各行一二千里。其北方閉氐、筰，南方閉巂、昆明。
+places:
+  - place: jianwei
+    role: start
+participants:
+  - actor: zhang-qian
+    role: other
+    note: His report prompted the search; the 西南夷列傳 names other envoys who went.
+  - actor: han-wudi
+    role: leader
+notes:
+  "The 西南夷列傳 writes 及元狩元年，博望侯張騫使大夏來, naming him by the title he received in 123 BCE; the
+  record dates the envoys, not his return. It does not record 身毒 or 滇 as places, because no envoy of
+  this search reached 身毒."

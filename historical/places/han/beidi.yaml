@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  北地, the frontier commandery north-west of the capital region, out of which 霍去病 and 公孫敖 rode
+  in the summer of 121 BCE; the Qin had held it before the Han. The sources name the commandery and
+  state no seat; the record carries no position.
+types: [region]
+names:
+  - form: 北地
+    lang: lzh
+    script: Hani
+    roman: Beidi
+    scheme: pinyin
+    cite:
+      - id: beidi-name
+        says: The 漢書 annals record 去病 and 公孫敖 riding out of 北地 more than two thousand 里 and passing 居延.
+        source: hanshu
+        at: 卷六 武帝紀 元狩二年 夏
+        quote: 將軍去病、公孫敖出北地二千餘里，過居延，斬首虜三萬餘級。
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: The commandery's seat changed between Qin and Han and is not named in the cited entries; no position is asserted.
+    cite:
+      - id: beidi-unplaced
+        says: The cited entry names 北地 and states no site for it, so no position is asserted.
+        source: hanshu
+        at: 卷六 武帝紀 元狩二年 夏

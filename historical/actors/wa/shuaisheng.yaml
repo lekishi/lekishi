@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  帥升, named by the 東夷列傳 as 倭國王 when 倭 presented 160 captives to the Han court in the first
+  year of 永初 (107 CE) and asked for an audience.
+types: [person]
+names:
+  - form: 帥升
+    lang: lzh
+    script: Hani
+    roman: Shuaisheng
+    scheme: pinyin
+    cite:
+      - id: shuaisheng-name
+        says: The 東夷列傳 names 帥升 as 倭國王 in 永初元年.
+        source: hou-hanshu
+        at: 卷八十五 東夷列傳 倭（安帝永初元年）
+        quote: 安帝永初元年，倭國王帥升等獻生口百六十人，願請見。
+roles:
+  - role: ruler
+    note: The source calls him 倭國王 in the entry for 107 and gives no reign.
+    date:
+      value: 107
+      calendar: chinese_lunisolar
+      as_written: 安帝永初元年
+    cite:
+      - id: shuaisheng-king
+        says: The 東夷列傳 calls 帥升 倭國王 in the entry for 永初元年.
+        source: hou-hanshu
+        at: 卷八十五 東夷列傳 倭（安帝永初元年）
+        quote: 倭國王帥升等獻生口百六十人

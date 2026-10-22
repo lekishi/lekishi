@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In 97 CE 班超 sent his clerk 甘英 as envoy to 大秦. 甘英 reached 條支 on the shore of a great sea; the
+  sailors at the western edge of 安息 told him the crossing took three months with a good wind and up
+  to two years with a poor one, that travellers carried three years' grain, and that the sea made men
+  homesick and many died. Hearing this, he turned back. The 西域傳 says he went further than anyone
+  before and brought back the customs and wonders of the lands he passed.
+types: [mission, journey]
+date:
+  value: 97
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 和帝永元九年
+  cite:
+    - id: gan-ying-mission-time
+      says: The 安息 entry records the mission to 大秦 in 永元九年, the arrival at 條支, the sailors' warning, and 甘英 turning back.
+      sources:
+        - source: hou-hanshu
+          at: 卷八十八 西域傳 安息國（都護班超遣甘英使大秦，抵條支）
+          quote: 和帝永元九年，都護班超遣甘英使大秦，抵條支。臨大海欲度，而安息西界船人謂英曰
+        - source: hou-hanshu
+          at: 卷八十八 西域傳 安息國（英聞之乃止）
+          quote: 海中善使人思土戀慕，數有死亡者。」英聞之乃止。
+    - id: gan-ying-mission-reach
+      says: The 西域傳's preface records that 甘英 went as far as the western sea and back, further than anyone before.
+      role: supporting
+      source: hou-hanshu
+      at: 卷八十八 西域傳 序（九年，班超遣掾甘英窮臨西海而還）
+      quote: 九年，班超遣掾甘英窮臨西海而還。皆前世所不至
+places:
+  - place: kucha
+    role: start
+    note: 班超's seat as 都護; the sources do not say where 甘英 set out from.
+  - place: anxi
+    role: waypoint
+  - place: tiaozhi
+    role: end
+  - place: daqin
+    role: context
+    note: The intended destination, never reached.
+participants:
+  - actor: gan-ying
+    role: leader
+  - actor: ban-chao
+    role: other
+    note: Sent him.
+notes:
+  "The record does not say which sea 甘英 faced or where 條支 was: both are disputed and 條支 carries no
+  position. 大秦 is a context place, not a stop. The 安息 entry's route from 安息 to the sea is given in
+  distances (阿蠻, 斯賓, 于羅) that the record does not attribute to 甘英's journey."

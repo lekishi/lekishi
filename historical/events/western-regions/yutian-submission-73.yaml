@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At 于窴, whose king 廣德 had broken 莎車 and was watched by a 匈奴 envoy, a shaman demanded 班超's
+  black-muzzled horse for a sacrifice. 班超 told the shaman to come for it himself, cut off his head,
+  and sent it to the king. 廣德, who had heard what happened at 鄯善, killed the 匈奴 envoy and
+  submitted.
+types: [occurrence]
+date:
+  value: 73
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 是時（永平十六年）
+  cite:
+    - id: yutian-submission-account
+      says: The biography records the shaman's demand, his execution, and 廣德 killing the 匈奴 envoy and submitting.
+      source: hou-hanshu
+      at: 卷四十七 班梁列傳 班超（即攻殺匈奴使者而降超）
+      quote: 有頃，巫至，超即斬其首以送廣德，因辭讓之。廣德素聞超在鄯善誅滅虜使，大惶恐，即攻殺匈奴使者而降超。
+places:
+  - place: khotan
+    role: site
+participants:
+  - actor: ban-chao
+    role: leader
+  - actor: guangde
+    role: subject
+  - actor: xiongnu
+    role: participant
+notes:
+  The biography gives no year of its own; the next entry is dated "the following spring" from the
+  same year, which places the submission in 永平十六年.

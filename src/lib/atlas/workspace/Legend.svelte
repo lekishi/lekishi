@@ -21,7 +21,12 @@
     diorama,
     folded = false,
   }: {
-    marks: { readonly attested: boolean; readonly identified: boolean; readonly anchor: boolean }
+    marks: {
+      readonly attested: boolean
+      readonly identified: boolean
+      readonly anchor: boolean
+      readonly tradition: boolean
+    }
     journeys: boolean
     families: readonly RelationshipFamily[]
     /** The territory snapshots the map is drawing at the playhead. */
@@ -91,6 +96,7 @@
         {#if marks.attested}<li><Badge kind="attested" text="attested site" /></li>{/if}
         {#if marks.identified}<li><Badge kind="identified" text="identified locality" /></li>{/if}
         {#if marks.anchor}<li><Badge kind="anchor" /></li>{/if}
+        {#if marks.tradition}<li><Badge kind="tradition" text="tradition, dotted name" /></li>{/if}
         {#if journeys}<li><Badge kind="schematic" text="journey, schematic" /></li>{/if}
       </ul>
       {#if families.length > 0}

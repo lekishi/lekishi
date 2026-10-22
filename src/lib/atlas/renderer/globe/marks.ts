@@ -12,6 +12,9 @@
  *   places the name and asserts no historical coordinate;
  * - possible: the mark goes hollow at 55 % opacity;
  * - disputed: the mark is split, half filled;
+ * - tradition (an event here is told as legend): the name is underlined with
+ *   dots; the mark keeps the place's own evidence, because a real site is not
+ *   a legend;
  * - selected: gold-bright, larger, with a ring that pulses unless the reader
  *   asked for reduced motion; active (at the playhead): a little larger and
  *   brighter;
@@ -41,6 +44,7 @@ export type GlobeMarker = {
   /** The events at the place; more than one shows a count beside the mark. */
   readonly count: number
   readonly disputed: boolean
+  readonly tradition: boolean
   /** The controller holding the place in a drawn territory snapshot, or null. */
   readonly control: {
     readonly tint: number
@@ -207,6 +211,9 @@ export function markerLook(marker: GlobeMarker): MarkerLook {
     label: [
       LABEL,
       selected ? "text-body font-semibold text-gold-bright" : "text-body-sm text-ink",
+      marker.tradition
+        ? "underline decoration-dotted decoration-ink-dim decoration-2 underline-offset-4"
+        : "",
     ].join(" "),
     count:
       marker.count > 1

@@ -265,6 +265,7 @@
                         ]}>{hit.entry.title}</span
                       >
                       {#if hit.entry.disputed}<Badge kind="disputed" text="disputed" />{/if}
+                      {#if hit.entry.tradition}<Badge kind="tradition" />{/if}
                     </span>
                     <span class="block truncate text-caption text-ink-dim">
                       {kindLabel(hit.entry.kind)}{hit.entry.detail ? ` · ${hit.entry.detail}` : ""}

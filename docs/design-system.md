@@ -62,9 +62,10 @@ through, so its contrast depends on the terrain beneath: tertiary text on glass
 uses `ink-dim` too (a glass `Plate` already does this for its count), and
 `ink-faint` stays on solid `lacquer`.
 
-"Possible", "disputed" and "outside the window" are **states**, not hues. They
-modify whatever mark they apply to (hollow, split, dimmed) and always say so in
-words.
+"Possible", "disputed", "tradition" and "outside the window" are **states**, not
+hues. They modify whatever mark they apply to (hollow, split, a dotted name,
+dimmed) and always say so in words. Tradition dots the place's name and leaves
+the marker alone, because a real site does not become a legend.
 
 ## Typography
 
@@ -200,7 +201,8 @@ selects, what the playhead does) lives in the atlas compositions in
 ## Accessibility
 
 - Every state has a non-colour cue, and the states the history depends on are
-  in words: "disputed account", "outside the window", "not yet covered".
+  in words: "disputed account", "tradition", "outside the window", "not yet
+  covered".
 - Every control has an accessible name; every region has a label.
 - Every interactive element shows the focus ring.
 - Layouts are checked at 1440, 820, 390 and 320 px with no horizontal scroll and

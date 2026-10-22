@@ -8,7 +8,7 @@
    * events. Both surfaces describe the same event, so they render the same row:
    * the title in the serif (the name leads), the place as the record states it,
    * the year span, and the cues a reader has to see, each a glyph and a word: at
-   * the playhead, possible, disputed account, coda, outside the window, and no
+   * the playhead, possible, disputed account, tradition, coda, outside the window, and no
    * sourced position. A display anchor is never described as a location.
    */
   let {
@@ -62,6 +62,9 @@
     {/if}
     {#if event.dispute}
       <span data-testid="atlas-dispute-badge"><Badge kind="disputed" /></span>
+    {/if}
+    {#if event.tradition}
+      <span data-testid="atlas-tradition-badge"><Badge kind="tradition" /></span>
     {/if}
     {#if event.coda}
       <Badge kind="coda" />

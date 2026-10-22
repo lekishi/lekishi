@@ -200,6 +200,42 @@ describe("mountAtlas", () => {
     }
   })
 
+  it("says in the list and the card that an event is told as tradition", async () => {
+    // No served chapter is tradition yet, so the Qin chapter is retold: one
+    // event's main claims become tradition, and only that row and card say so.
+    const eventId = "lks:event:hanfei-death-233"
+    const retold: Chapter = {
+      ...QIN,
+      events: QIN.events.map((event) =>
+        event.id === eventId ? { ...event, tradition: true } : event,
+      ),
+    }
+    const host = document.createElement("div")
+    document.body.append(host)
+    const handle = mountAtlas(host, retold)
+    await flush()
+    await openTab(host, "events")
+
+    const badges = host.querySelectorAll('[data-testid="atlas-tradition-badge"]')
+
+    expect(badges).toHaveLength(1)
+    expect(
+      badges[0]?.closest('[data-testid="atlas-event-item"]')?.getAttribute("data-event-id"),
+    ).toBe(eventId)
+
+    host
+      .querySelector<HTMLElement>(`[data-testid="atlas-event-item"][data-event-id="${eventId}"]`)
+      ?.click()
+    await flush()
+
+    expect(host.querySelector('[data-testid="atlas-tradition"]')?.textContent).toContain(
+      "Told as tradition",
+    )
+
+    handle.dispose()
+    host.remove()
+  })
+
   it("opens at the address it is mounted with and says what it opened", async () => {
     const handle = mountAtlas(root, TANG, undefined, {
       search: "?event=akimeya-landfall-753",

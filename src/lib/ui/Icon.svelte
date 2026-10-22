@@ -27,6 +27,7 @@
     identified: "M12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6zM12 4a8 8 0 1 1 0 16 8 8 0 0 1 0-16z",
     possible: "M12 6a6 6 0 1 1 0 12 6 6 0 0 1 0-12z",
     disputed: "M12 5a7 7 0 1 1 0 14 7 7 0 0 1 0-14zM12 5v14",
+    tradition: "M5 17c2-1 3-3 3-6H5V7h5v4c0 4-2 6-5 6zM14 17c2-1 3-3 3-6h-3V7h5v4c0 4-2 6-5 6z",
     outside: "M4 12h4M16 12h4M12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8z",
     schematic: "M3 12h4M10 12h4M17 12h4",
     overland: "M4 12h.01M9 12h.01M14 12h.01M19 12h.01",

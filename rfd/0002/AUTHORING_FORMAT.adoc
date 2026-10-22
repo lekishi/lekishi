@@ -138,10 +138,12 @@ owner weighed, and what the owner added.
   consistent with the new format, including its sources
   (<<Decided: one Wikidata source, pinned per citation>>).
 
-Still proposed: journey curation, media, per-claim credit, and
-contract v1 (<<Proposed: journeys, territories, and media>>). Territories are
-decided and built in v0 (link:TERRITORIES.adoc[territories as control by
-place]). The existing
+Journeys were decided later, as a kind added to v0
+(<<Decided: journeys are their own kind — 2026-10-21>>,
+<<Decided: the journey record — 2026-10-22>>). Territories are decided and built
+in v0 (link:TERRITORIES.adoc[territories as control by place]). Still proposed:
+media and per-claim credit
+(<<Proposed: journeys, territories, and media>>). The existing
 publication gate stays authoritative until the digest check is built, enforces
 the same invariant, and the owner approves the switch; no step of this work
 records an approval for the owner.
@@ -160,7 +162,7 @@ historical/
   relationships/
   sources/
   territories/                   dated control snapshots, contract v0
-  media/                         with contract v1, see below
+  media/                         proposed, see below
   chapters/
     tang-mission-750-754.yaml    the chapter manifest
 ----
@@ -307,7 +309,7 @@ Conventions:
   requires.
 * *Credit.* `contributed_by` and `reviewed_by` are set at the file level and
   can be overridden per field. They are new to the contract (v0 has
-  `reviewed_by` only on licences), so they arrive with v1, below.
+  `reviewed_by` only on licences), so they arrive with the proposals below.
 * *Vocabularies.* The geometry interpretations, place and actor types, roles,
   and relationship types keep the v0 vocabulary. The format is shorter, not
   looser.
@@ -437,22 +439,24 @@ here.
   "a later depiction, not evidence").
 
 Dedicated territory records with actor-control semantics, media depiction
-links, and per-claim credit are new rules. The proposal was a new contract
-version, *v1*; the owner ruled on 2026-10-22 that until launch a new kind or
-vocabulary amends v0 in place with new vectors (AGENTS.md), and territories are
-the first kind built that way.
+links, and per-claim credit are new rules. Until the atlas launches, new rules
+amend v0 in place, with new vectors (owner decision, 2026-10-22; see
+link:CONTRACTS.adoc[the contract record]); after launch they would need a new
+contract version. Territories were the first kind built that way, and journeys
+followed. The proposal is to specify the rest in this record now and add them
+with the first chapter that shows an image, so that they land with real content
+to test against.
 
 == Decided: journeys are their own kind — 2026-10-21
 
 The owner decided on 2026-10-21 that a journey is a record kind of its own,
-`historical/journeys/<id>.yaml`, under contract *v1*. This supersedes, for
-journeys only, the first bullet of
-<<Proposed: journeys, territories, and media>>; territories, media, and
-per-claim credit stay proposed there. It also supersedes that section's timing
-for v1, which proposed introducing it with the first chapter that draws a
-territory or shows an image: v1 now arrives with the first published journey,
-and territories, media, and per-claim credit join it as further rules once
-they are agreed.
+`historical/journeys/<id>.yaml`. This supersedes, for journeys only, the first
+bullet of <<Proposed: journeys, territories, and media>>; media and per-claim
+credit stay proposed there, and territories were decided separately
+(link:TERRITORIES.adoc[territories as control by place]). The decision first placed the kind in
+a new contract version, v1. On 2026-10-22 the owner decided instead that until
+the atlas launches, a new kind amends v0 in place, so the journey kind is part
+of v0.
 
 Two other homes were weighed and not chosen:
 
@@ -477,10 +481,10 @@ already the hard case: four ships leave 黃泗浦 together, the first is driven 
 "this happened here"; a journey says "this party moved through these events",
 with each leg's own meaning.
 
-The shape below is proposed for the owner's review. Nothing of it is built
-until the owner accepts it.
+The owner accepted the shape below on 2026-10-22 ("build it as proposed"),
+together with the proposal's answers to its two open questions.
 
-== Proposed: the journey record
+== Decided: the journey record — 2026-10-22
 
 A journey is one party's movement through an ordered list of stops. A stop is
 an event: the dated, cited evidence that the party was at a place. The journey
@@ -588,7 +592,7 @@ that chapter, so a chapter never draws through an event it does not publish. A
 journey reached by an approved chapter is in that chapter's digest, so editing
 a stop reopens the approval like any other record.
 
-*Validation the compiler adds* (each becomes a v1 vector):
+*Validation the compiler adds* (each becomes a vector):
 
 . Fewer than two stops.
 . A stop whose event is missing, or whose place is `context`, ambiguous
@@ -602,15 +606,16 @@ a stop reopens the approval like any other record.
   at the two stops' points.
 . A journey included by a chapter that does not reach all its stops.
 
-*Contract v1.* v1 is v0 plus the journey kind: `lks:journey:<id>`, a revision
-whose content holds the travellers, the stops (event id, place id, and the
-arriving leg's mode, drift flag, intended place, and geometry), and the claims
-the compiler generates from the cites. Each drawn leg compiles to a v0
-`geometry` entry with its interpretation and two `waypoints` carrying the
-stops' place ids and times. v0's schemas, examples, and 187 vectors stay as
-they are and keep passing; v1 adds its schema and vectors under
-`historical/v1/`, and a v0 document is a valid v1 document. The compiler emits
-v1 bundles once the first journey is published.
+*Contract.* The journey kind is added to v0 in place (owner decision,
+2026-10-22: until the atlas launches, a new kind amends v0 rather than starting
+a new version): `lks:journey:<id>`, a revision whose content holds the
+travellers, the stops (event id, place id, and the arriving leg's mode, drift
+flag, intended place, and geometry), and the claims the compiler generates from
+the cites. Each drawn leg compiles to a v0 `geometry` entry with its
+interpretation and two `waypoints` carrying the stops' place ids and times.
+v0's existing schemas, examples, and 187 vectors keep passing unchanged; the
+journey content joins `historical/v0/schema/kinds.schema.json`, and its rules
+are pinned by 21 vectors in `historical/v0/vectors/journeys.json`.
 
 *What moves.* The hand-written journeys in
 `src/lib/atlas/overlay-definitions.ts` (鑒眞's and 大伴古麻呂's for Tang,
@@ -623,12 +628,14 @@ hand-written until they are authored, then go too. Journey records keep that
 boundary: they compile into their chapter's bundle, so a left-out chapter's
 journeys are as server-only as its events.
 
-*Open for the owner.*
+*Settled with the shape.* Both questions left open in the proposal were
+settled with the proposal's own answers:
 
-* Whether `by` may be inferred from the places (an island reached from the
-  mainland) or must always be stated by a source.
-* Whether a journey whose stops are all unlocated (the 743 crossing) is worth
-  publishing for its list and card alone. The proposal is yes.
+* `by` may be stated when a source says so or when the places leave no other
+  way (an island reached from the mainland); it is never filled in by the
+  compiler.
+* A journey whose stops are all unlocated (the 743 crossing) is published for
+  its list and card alone; the map draws no leg of it.
 
 == Decided: the compiler and what ships
 

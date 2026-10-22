@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=../../schema/place.schema.json
-summary: 于窴, the oasis kingdom of the southern road whose king 廣德 submitted to 班超 in 73 CE after 班超 killed his shaman. The label anchor sits at the modern 和田市; it asserts no site of the royal town 西城.
+summary: 于窴, the oasis kingdom of the southern road whose king 廣德 submitted to 班超 in 73 CE after 班超 killed his shaman. The label anchor sits at the modern 和田市; it asserts no site of the royal town 西城. As 瞿薩旦那 (于闐), it is where 玄奘 waited seven or eight months for the emperor's answer to his memorial, lecturing to the monks.
 types: [region]
 names:
   - form: 于窴
@@ -13,6 +13,30 @@ names:
         source: hou-hanshu
         at: 卷四十七 班梁列傳 班超（超旣西，先至于窴）
         quote: 超旣西，先至于窴。廣德禮意甚踈。
+  - form: 瞿薩旦那
+    lang: lzh
+    script: Hani
+    roman: Qusadanna
+    scheme: pinyin
+    cite:
+      - id: khotan-name
+        says: The biography records 玄奘 reaching 瞿薩旦那 eight hundred 里 east of 斫句迦.
+        source: cien-zhuan
+        at: 卷五（從此東行八百餘里）
+        quote: 從此東行八百餘里，至瞿薩旦那國
+      - id: khotan-xiyu
+        says: The 西域記 opens its account of the country with this sentence.
+        role: supporting
+        source: xiyu-ji
+        at: 卷十二 瞿薩旦那國
+        quote: 瞿薩旦那國周四千餘里，沙磧太半，壤土隘狹。
+  - form: 于闐
+    lang: lzh
+    script: Hani
+    roman: Yutian
+    scheme: pinyin
+    note: The name the 玄奘 biography's memorial and edict use.
+    claim: khotan-name
 at:
   - interpretation: display_anchor
     precision: unspecified
@@ -25,6 +49,11 @@ at:
           historical coordinate is asserted.
         source: wikidata
         at: Q235389 (P625), revision 2549978239
+modern:
+  - form: 和田市
+    lang: zh-Hant
+    script: Hani
+    note: Modern place recorded for orientation only.
 external_ids:
   - system: wikidata
     id: Q235389

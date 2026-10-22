@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  麹文泰 and 玄奘 swear to be brothers before the queen mother of 高昌; the king equips him, and 玄奘 promises
+  to stay three years on his way back. On leaving India 玄奘 cites the promise for going home by the north.
+types: [alliance]
+from: qu-wentai
+to: xuanzang
+directionality: mutual
+date:
+  value: 630..643
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: 約為兄弟; 今者還須北路而去
+cite:
+  - id: qu-wentai-brotherhood-oath
+    says: The biography records the oath of brotherhood.
+    source: cien-zhuan
+    at: 卷一（對母張太妃共法師約為兄弟）
+    quote: 對母張太妃共法師約為兄弟，任師求法
+  - id: qu-wentai-brotherhood-promise
+    says: The biography has 玄奘 tell 戒日王 he must go home by the north for the king of 高昌.
+    role: supporting
+    source: cien-zhuan
+    at: 卷五（願法師還日相過）
+    quote: 願法師還日相過，情不能違

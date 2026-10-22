@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 瞻波, three hundred 里 east along the 殑伽河.
+types: [settlement]
+names:
+  - form: 瞻波
+    lang: lzh
+    script: Hani
+    roman: Zhanbo
+    scheme: pinyin
+    cite:
+      - id: champa-name
+        says: The biography records 玄奘 reaching 瞻波.
+        source: cien-zhuan
+        at: 卷四（自此順克伽河南岸東行三百餘里）
+        quote: 自此順克伽河南岸東行三百餘里，至瞻波國
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [86.9417, 25.2374]
+    notes:
+      Label anchor at Champapuri as recorded in Wikidata (Q5069932). It is not an asserted historical
+      coordinate; the identification of 瞻波 with the modern place is the conventional modern reading, not
+      a statement of the cited sources.
+    cite:
+      - id: champa-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q5069932 (P625), revision 2554060054
+external_ids:
+  - system: wikidata
+    id: Q5069932
+    url: https://www.wikidata.org/wiki/Q5069932
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

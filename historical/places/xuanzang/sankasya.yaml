@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 劫比他, with the 三寶階, where the Buddha is said to have come down from the 忉利天.
+types: [religious_site, settlement]
+names:
+  - form: 劫比他
+    lang: lzh
+    script: Hani
+    roman: Jiebita
+    scheme: pinyin
+    cite:
+      - id: sankasya-name
+        says: The biography records 玄奘 reaching 劫比他.
+        source: cien-zhuan
+        at: 卷二（又東行二百餘里）
+        quote: 又東行二百餘里，至劫比他國
+      - id: sankasya-xiyu
+        says: The 西域記 opens its account of the country with this sentence.
+        role: supporting
+        source: xiyu-ji
+        at: 卷第四 劫比他國
+        quote: 劫比他國周二千餘里，國大都城周二十餘里。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [79.2711, 27.3339]
+    notes:
+      Label anchor at Sankassa as recorded in Wikidata (Q864810). It is not an asserted historical
+      coordinate; the identification of 劫比他 with the modern place is the conventional modern reading, not
+      a statement of the cited sources.
+    cite:
+      - id: sankasya-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q864810 (P625), revision 2554000143
+external_ids:
+  - system: wikidata
+    id: Q864810
+    url: https://www.wikidata.org/wiki/Q864810
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

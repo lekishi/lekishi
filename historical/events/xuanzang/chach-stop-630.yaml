@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 玄奘 passes 赭時 on the 葉河.
+types: [journey]
+date:
+  value: 629..630
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 又西二百里，至赭時國
+  cite:
+    - id: chach-stop-630-time
+      says: The biography records 赭時 without a date.
+      source: cien-zhuan
+      at: 卷二（又西二百里，至赭時國）
+      quote: 又西二百里，至赭時國
+places:
+  - place: chach
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

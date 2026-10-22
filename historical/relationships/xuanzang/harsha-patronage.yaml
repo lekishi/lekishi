@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  戒日王 meets 玄奘 at 羯朱嗢祇羅, holds the 曲女城 assembly for his treatise, takes him to 缽羅耶伽 and sends him
+  home with letters to every country on the way.
+types: [contact]
+from: harsha
+to: xuanzang
+date:
+  value: 641..644
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 至羯朱咀隻羅國，遂即參及 — 王以素氈作書
+notes:
+  The biography gives no year for this episode. The window is the chapter's reckoning, aligned with
+  the events from 羯朱嗢祇羅 to the departure from 缽羅耶伽; the episode falls somewhere inside it, and the window is not its length.
+cite:
+  - id: harsha-patronage-basis
+    says: The biography records the king's letters for 玄奘's way home.
+    source: cien-zhuan
+    at: 卷五（使達官奉書送法師所經諸國）
+    quote: 使達官奉書送法師所經諸國，令發乘遞送，終至漢境

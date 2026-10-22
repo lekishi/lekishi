@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  朅盤陀, the mountain kingdom whose king claimed descent from the Han and the sun god, where 玄奘 stayed
+  more than twenty days.
+types: [capital, settlement]
+names:
+  - form: 朅盤陀
+    lang: lzh
+    script: Hani
+    roman: Qiepantuo
+    scheme: pinyin
+    cite:
+      - id: tashkurgan-name
+        says: The biography records 玄奘 reaching 盤陀 five hundred 里 east of the 波謎羅川.
+        source: cien-zhuan
+        at: 卷五（從此川東出，登危履雪，行五百餘里）
+        quote: 從此川東出，登危履雪，行五百餘里，至盤陀國
+      - id: tashkurgan-xiyu
+        says: The 西域記 opens its account of the country with this sentence.
+        role: supporting
+        source: xiyu-ji
+        at: 卷十二 朅盤陁國
+        quote: 朅盤陁國周二千餘里，國大都城基大石嶺，背徒多河，周二十餘里。
+  - form: 盤陀
+    lang: lzh
+    script: Hani
+    note: The spelling of this transcription of the biography.
+    claim: tashkurgan-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [75.2286, 37.7706]
+    notes:
+      Label anchor at Tashkorgan as recorded in Wikidata (Q979927). It is not an asserted historical
+      coordinate; the identification of 朅盤陀 with the modern place is the conventional modern reading, not
+      a statement of the cited sources.
+    cite:
+      - id: tashkurgan-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q979927 (P625), revision 2515494388
+modern:
+  - form: 塔什庫爾干
+    lang: zh-Hant
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q979927
+    url: https://www.wikidata.org/wiki/Q979927
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

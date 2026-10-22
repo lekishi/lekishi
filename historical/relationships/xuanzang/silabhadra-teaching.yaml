@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  戒賢 teaches 玄奘 the 瑜伽師地論 at 那爛陀. The relationship records the teaching the biography reports,
+  not its later influence.
+types: [transmission]
+from: silabhadra
+to: xuanzang
+date:
+  value: 636..642
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 十五月講徹; 法師在寺聽《瑜伽》三遍
+notes:
+  The biography gives no year for this episode. The window is the chapter's reckoning, aligned with
+  the years of study at 那爛陀; the episode falls somewhere inside it, and the window is not its length.
+cite:
+  - id: silabhadra-teaching-basis
+    says: The biography records 戒賢's lectures on the 瑜伽論 for 玄奘.
+    source: cien-zhuan
+    at: 卷三（方請戒賢法師講《瑜伽論》）
+    quote: 方請戒賢法師講《瑜伽論》，同聽者數千人

@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  呾叉始羅, across the 信度河, with the stūpa where the 月光王 of the jātaka gave away a thousand heads;
+  玄奘 passed it going and coming.
+types: [settlement]
+names:
+  - form: 呾叉始羅
+    lang: lzh
+    script: Hani
+    roman: Dachashiluo
+    scheme: pinyin
+    cite:
+      - id: taxila-name
+        says: The biography records 玄奘 crossing the 信度河 to reach 呾叉始羅.
+        source: cien-zhuan
+        at: 卷二（渡此河至呾叉始羅國）
+        quote: 渡此河至呾叉始羅國
+      - id: taxila-xiyu
+        says: The 西域記 opens its account of the country with this sentence.
+        role: supporting
+        source: xiyu-ji
+        at: 卷第三 呾叉始羅國
+        quote: 呾叉始羅國周二千餘里，國大都城周十餘里。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [72.7875, 33.7458]
+    notes:
+      Label anchor at Taxila as recorded in Wikidata (Q156093). It is not an asserted historical coordinate;
+      the identification of 呾叉始羅 with the modern place is the conventional modern reading, not a statement
+      of the cited sources.
+    cite:
+      - id: taxila-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q156093 (P625), revision 2559177217
+modern:
+  - form: 塔克西拉
+    lang: zh-Hant
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q156093
+    url: https://www.wikidata.org/wiki/Q156093
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

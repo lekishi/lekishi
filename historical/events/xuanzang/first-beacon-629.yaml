@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At the first beacon, eighty 里 on, arrows are shot at 玄奘 as he draws water; the commander 王祥 hears
+  his purpose, lets him go and sends him to his kinsman at the fourth beacon.
+types: [occurrence]
+date:
+  value: 629..630
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 逕八十餘里，見第一烽
+  cite:
+    - id: first-beacon-629-time
+      says: The biography records the first beacon without a date.
+      source: cien-zhuan
+      at: 卷一（逕八十餘里，見第一烽）
+      quote: 逕八十餘里，見第一烽
+places:
+  - place: first-beacon
+    role: site
+participants:
+  - actor: xuanzang
+    role: subject
+  - actor: wang-xiang
+    role: host
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

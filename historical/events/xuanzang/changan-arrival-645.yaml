@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Hurrying to see the emperor before the eastern campaign, 玄奘 arrives at the 漕 canal before the
+  officials are ready; crowds fill the streets, and in 貞觀十九年正月 房玄齡 sends officers to bring him and his
+  books and images to the 都亭驛.
+types: [journey]
+date:
+  value: 645-01
+  calendar: chinese_lunisolar
+  as_written: 貞觀十九年春正月景子
+  cite:
+    - id: changan-arrival-645-time
+      says: The biography dates the reception in 長安 to the first month of 貞觀十九年, on the day 景子.
+      source: cien-zhuan
+      at: 卷六（貞觀十九年春正月景子）
+      quote: 貞觀十九年春正月景子，京城留守左仆射梁國公房玄齡等承法師裔經、像至
+places:
+  - place: changan
+    role: end
+    note: He stopped at the 漕 canal outside the city and lodged at the 都亭驛.
+participants:
+  - actor: xuanzang
+    role: leader
+  - actor: fang-xuanling
+    role: host
+notes:
+  景子 is the Tang writing of the cyclic day 丙子, avoiding a taboo character. The day of the month needs
+  a calendar table the chapter does not cite yet, so the date is kept at month precision.
+cite:
+  - id: changan-arrival-canal
+    says: The biography records him arriving at the 漕 before the officials could meet him.
+    source: cien-zhuan
+    at: 卷五（乃倍途而進，奄至漕上）
+    quote: 乃倍途而進，奄至漕上
+  - id: changan-arrival-history
+    says: The official history dates his return to the capital to 貞觀十九年.
+    role: supporting
+    source: jiu-tangshu-fangji
+    at: 卷一九一 方伎 僧玄奘
+    quote: 貞觀十九年，歸至京師

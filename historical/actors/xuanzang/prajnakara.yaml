@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  般若羯羅 (慧性), a Hīnayāna master from 磔迦 with whom 玄奘 read the 毗婆沙論 at 縛喝 and travelled to 梵衍那 and
+  迦畢試.
+types: [person]
+names:
+  - form: 般若羯羅
+    lang: lzh
+    script: Hani
+    roman: Bore Jieluo
+    scheme: pinyin
+    cite:
+      - id: prajnakara-name
+        says: The biography names the master from 磔迦 at the 納縛伽藍 as 般若羯羅.
+        source: cien-zhuan
+        at: 卷二（納縛伽藍有磔迦國小乘三藏名般若羯）
+        quote: 納縛伽藍有磔迦國小乘三藏名般若羯羅
+  - form: 慧性
+    lang: lzh
+    script: Hani
+    note: The Chinese rendering the biography gives.
+    claim: prajnakara-name
+roles:
+  - role: monk
+    cite:
+      - id: prajnakara-role
+        says: The biography records 玄奘 staying more than a month to read the 毗婆沙論 with him.
+        source: cien-zhuan
+        at: 卷二（遂停月餘，就讀《毗婆沙論》）
+        quote: 遂停月餘，就讀《毗婆沙論》

@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  瓜州, the last prefecture before the frontier, where 玄奘 waited more than a month, found a guide,
+  and the clerk 李昌 destroyed the warrant for his arrest.
+types: [settlement]
+names:
+  - form: 瓜州
+    lang: lzh
+    script: Hani
+    roman: Guazhou
+    scheme: pinyin
+    cite:
+      - id: guazhou-name
+        says: The biography records 玄奘 travelling by night to reach 瓜州.
+        source: cien-zhuan
+        at: 卷一（乃晝伏夜行，遂至瓜州）
+        quote: 乃晝伏夜行，遂至瓜州
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [95.7806, 40.5148]
+    notes:
+      Label anchor at Guazhou as recorded in Wikidata (Q1201947). It is not an asserted historical
+      coordinate; the identification of 瓜州 with the modern place is the conventional modern reading, not
+      a statement of the cited sources.
+    cite:
+      - id: guazhou-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q1201947 (P625), revision 2556271426
+modern:
+  - form: 瓜州縣
+    lang: zh-Hant
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q1201947
+    url: https://www.wikidata.org/wiki/Q1201947
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

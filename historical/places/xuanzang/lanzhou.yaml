@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 蘭州, where 玄奘 stayed one night and joined men of 涼州 returning official horses.
+types: [settlement]
+names:
+  - form: 蘭州
+    lang: lzh
+    script: Hani
+    roman: Lanzhou
+    scheme: pinyin
+    cite:
+      - id: lanzhou-name
+        says: The biography records 玄奘 going on to 蘭州 and staying one night.
+        source: cien-zhuan
+        at: 卷一（又隨去至蘭州。一宿）
+        quote: 又隨去至蘭州。一宿，遇涼州人送官馬歸
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [103.8318, 36.0617]
+    notes:
+      Label anchor at Lanzhou as recorded in Wikidata (Q183584). It is not an asserted historical coordinate;
+      the identification of 蘭州 with the modern place is the conventional modern reading, not a statement
+      of the cited sources.
+    cite:
+      - id: lanzhou-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q183584 (P625), revision 2532008329
+modern:
+  - form: 蘭州市
+    lang: zh-Hant
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q183584
+    url: https://www.wikidata.org/wiki/Q183584
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

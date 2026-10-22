@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  麹文泰, king of 高昌, who brought 玄奘 from 伊吾, tried to keep him, swore brotherhood with him before
+  his mother 張太妃, and sent him on with an escort, funds for twenty years and letters to twenty-four rulers.
+types: [person]
+names:
+  - form: 麹文泰
+    lang: lzh
+    script: Hani
+    roman: Qu Wentai
+    scheme: pinyin
+    cite:
+      - id: qu-wentai-name
+        says: The biography names the king of 高昌 as 麹文泰.
+        source: cien-zhuan
+        at: 卷一（時高昌王麹文泰使人先在伊吾）
+        quote: 時高昌王麹文泰使人先在伊吾
+roles:
+  - role: ruler
+    cite:
+      - id: qu-wentai-role
+        says: The biography records the king's offer to make the whole kingdom 玄奘's disciples.
+        source: cien-zhuan
+        at: 卷一（令一國人皆為師弟子）
+        quote: 令一國人皆為師弟子

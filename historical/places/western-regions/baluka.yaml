@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=../../schema/place.schema.json
-summary: 姑墨, the kingdom on the northern road whose 石城 班超 stormed in 78 CE with troops from 疏勒, 康居, 于窴 and 拘彌. The label anchor sits at the modern 阿克蘇市, the usual identification; it asserts no site of 石城.
+summary: 姑墨, the kingdom on the northern road whose 石城 班超 stormed in 78 CE with troops from 疏勒, 康居, 于窴 and 拘彌. The label anchor sits at the modern 阿克蘇市, the usual identification; it asserts no site of 石城. As 跋祿迦, it is where 玄奘 stayed one night before the climb to 凌山.
 types: [region]
 names:
   - form: 姑墨
@@ -13,6 +13,23 @@ names:
         source: hou-hanshu
         at: 卷四十七 班梁列傳 班超 建初三年
         quote: 超率疏勒、康居、于窴、拘彌兵一萬人攻姑墨石城，破之，斬首七百級。
+  - form: 跋祿迦
+    lang: lzh
+    script: Hani
+    roman: Baluka
+    scheme: pinyin
+    cite:
+      - id: baluka-name
+        says: The biography of 玄奘 records him crossing a small desert to reach 跋祿迦 and staying one night.
+        source: cien-zhuan
+        at: 卷二（又前行六百里渡小磧）
+        quote: 又前行六百里渡小磧，至跋祿迦國
+      - id: baluka-xiyu
+        says: The 西域記 opens its account of the country with this sentence.
+        role: supporting
+        source: xiyu-ji
+        at: 卷第一 跋禄迦國
+        quote: 跋禄迦國。東西六百餘里。南北三百餘里。
 at:
   - interpretation: display_anchor
     precision: unspecified
@@ -25,6 +42,11 @@ at:
           historical coordinate is asserted.
         source: wikidata
         at: Q421648 (P625), revision 2549821773
+modern:
+  - form: 阿克蘇市
+    lang: zh-Hant
+    script: Hani
+    note: Modern place recorded for orientation only.
 external_ids:
   - system: wikidata
     id: Q421648

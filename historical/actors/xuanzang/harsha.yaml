@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  戒日王 (尸羅阿迭多), king of 羯若鞠闍, who demanded 玄奘 from 鳩摩羅王, held the 曲女城 assembly for him and took
+  him to the sixth great distribution at 缽羅耶伽.
+types: [person]
+names:
+  - form: 戒日王
+    lang: lzh
+    script: Hani
+    roman: Jieri Wang
+    scheme: pinyin
+    cite:
+      - id: harsha-name
+        says: The biography names the king of 羯若鞠闍 as 戒日 (屍羅阿迭多).
+        source: cien-zhuan
+        at: 卷二（共立其弟屍羅阿迭多）
+        quote: 共立其弟屍羅阿迭多
+  - form: 尸羅阿迭多
+    lang: lzh
+    script: Hani
+    note: The name the biography transcribes; 戒日 renders it.
+    claim: harsha-name
+  - form: 曷利沙伐彈那
+    lang: lzh
+    script: Hani
+    note: The biography gives this as the name of his elder brother's line (喜增).
+    claim: harsha-name
+roles:
+  - role: ruler
+    cite:
+      - id: harsha-role
+        says: The biography records him telling 玄奘 he has ruled for more than thirty years.
+        source: cien-zhuan
+        at: 卷五（弟子嗣承宗廟）
+        quote: 弟子嗣承宗廟，為天下主，三十餘年
+notes:
+  The biography's account of the dynasty gives 曷利沙伐彈那 (喜增) and 屍羅阿迭多 (戒日) in one passage; the record
+  keeps the forms as written and does not resolve which is a personal name and which a title.

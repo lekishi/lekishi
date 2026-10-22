@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The crossing of 凌山 takes seven days over ice and snow; three or four in ten of the party freeze
+  to death, and more of the oxen and horses.
+types: [journey]
+date:
+  value: 629..630
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 七日之後方始出山，徒侶之中矮凍死者十有三四，牛馬逾甚
+  cite:
+    - id: lingshan-crossing-630-time
+      says: The biography records the seven-day crossing without a date.
+      source: cien-zhuan
+      at: 卷二（七日之後方始出山）
+      quote: 七日之後方始出山，徒侶之中矮凍死者十有三四，牛馬逾甚
+places:
+  - place: bedel-pass
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

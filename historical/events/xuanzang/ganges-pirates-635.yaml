@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Going down the 殑伽河 from 阿踰陀 with eighty others, 玄奘 is seized by river pirates who worship 突伽
+  and want him as an autumn sacrifice; a sudden storm frightens them, and they repent and take the precepts.
+types: [occurrence]
+date:
+  value: 632..637
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 法師自阿腧陀國禮聖跡，順克伽河與八十餘人同船東下
+  cite:
+    - id: ganges-pirates-635-time
+      says: The biography records the attack without a year; it says the pirates sacrificed in autumn.
+      source: cien-zhuan
+      at: 卷三（法師自阿腧陀國禮聖跡）
+      quote: 法師自阿腧陀國禮聖跡，順克伽河與八十餘人同船東下
+places:
+  - place: ayodhya
+    role: start
+    note: The boat left from 阿踰陀; the attack came about a hundred 里 downstream.
+participants:
+  - actor: xuanzang
+    role: subject
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

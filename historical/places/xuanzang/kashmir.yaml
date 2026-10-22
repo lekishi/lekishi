@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  迦濕彌羅 (罽賓), whose king met 玄奘 with a thousand followers and gave him twenty copyists; he studied
+  there under 僧稱 for two years.
+types: [region]
+names:
+  - form: 迦濕彌羅
+    lang: lzh
+    script: Hani
+    roman: Jiashimiluo
+    scheme: pinyin
+    cite:
+      - id: kashmir-name
+        says:
+          The biography records 玄奘 crossing an iron bridge and reaching 迦濕彌羅 after more than a thousand
+          里.
+        source: cien-zhuan
+        at: 卷二（行千餘里，至迦濕彌羅國）
+        quote: 行千餘里，至迦濕彌羅國
+      - id: kashmir-xiyu
+        says: The 西域記 opens its account of the country with this sentence.
+        role: supporting
+        source: xiyu-ji
+        at: 卷第三 迦濕彌羅國
+        quote: 迦濕彌羅國周七千餘里，四境負山。
+  - form: 罽賓
+    lang: lzh
+    script: Hani
+    roman: Jibin
+    scheme: pinyin
+    note: The older name, which the biography calls a corruption.
+    claim: kashmir-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [74.8, 34.05]
+    notes:
+      Label anchor at the Kashmir valley as Wikidata records it; the capital where 玄奘 stayed is not
+      placed. (Wikidata Q2361576)
+    cite:
+      - id: kashmir-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q2361576 (P625), revision 2556724834
+external_ids:
+  - system: wikidata
+    id: Q2361576
+    url: https://www.wikidata.org/wiki/Q2361576
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

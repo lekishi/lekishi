@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: From 媲摩 玄奘 goes two hundred 里 into the desert to 泥壤城, at the edge of the 流沙.
+types: [journey]
+date:
+  value: 644..645
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 從媲摩城入沙磧，行二百餘里，至泥壤城
+  cite:
+    - id: niya-644-time
+      says: The biography records 泥壤 without a date.
+      source: cien-zhuan
+      at: 卷五（從媲摩城入沙磧）
+      quote: 從媲摩城入沙磧，行二百餘里，至泥壤城
+places:
+  - place: niya
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

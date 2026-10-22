@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  麹文泰 gives 玄奘 four novices, thirty robes, gold, silver and silk for twenty years, thirty horses
+  and twenty-five men, and letters to twenty-four kingdoms and to the 葉護可汗; the whole city sees him off.
+types: [journey, exchange]
+date:
+  value: 629..630
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 發日，王與諸僧、大臣、百姓等傾都送出城西
+  cite:
+    - id: gaochang-departure-630-time
+      says: The biography records the departure from 高昌 without a date.
+      source: cien-zhuan
+      at: 卷一（發日，王與諸僧、大臣、百姓等傾都）
+      quote: 發日，王與諸僧、大臣、百姓等傾都送出城西
+places:
+  - place: gaochang
+    role: start
+participants:
+  - actor: xuanzang
+    role: leader
+  - actor: qu-wentai
+    role: host
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.
+cite:
+  - id: gaochang-letters
+    says: The biography records the twenty-four letters, each with a bolt of silk.
+    source: cien-zhuan
+    at: 卷一（又作二十四封書）
+    quote: 又作二十四封書，通屈支等二十四國

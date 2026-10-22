@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  那爛陀寺 (施無厭寺), the great monastery of ten thousand monks where 玄奘 studied the 瑜伽師地論 under 戒賢 for
+  five years and to which he returned before leaving India.
+types: [religious_site]
+names:
+  - form: 那爛陀
+    lang: lzh
+    script: Hani
+    roman: Nalantuo
+    scheme: pinyin
+    cite:
+      - id: nalanda-name
+        says: The biography records the monks of 那爛陀 escorting 玄奘 into the monastery.
+        source: cien-zhuan
+        at: 卷三（讚歎圍繞入那爛陀）
+        quote: 讚歎圍繞入那爛陀
+  - form: 施無厭寺
+    lang: lzh
+    script: Hani
+    note: The Chinese name the biography gives.
+    claim: nalanda-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [85.4438, 25.1368]
+    notes:
+      Label anchor at Nalanda Mahavihara as recorded in Wikidata (Q216243). It is not an asserted historical
+      coordinate; the identification of 那爛陀 with the modern place is the conventional modern reading, not
+      a statement of the cited sources.
+    cite:
+      - id: nalanda-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q216243 (P625), revision 2546963795
+modern:
+  - form: 那爛陀寺
+    lang: zh-Hant
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q216243
+    url: https://www.wikidata.org/wiki/Q216243
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

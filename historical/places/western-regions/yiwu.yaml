@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=../../schema/place.schema.json
-summary: 伊吾, the land the Han took from the 匈奴 in 73 CE, where 班超, as 假司馬 under 竇固, fought his first battle. The label anchor sits at the modern 哈密市, the oasis usually identified with 伊吾盧; it asserts no site.
+summary: 伊吾, the land the Han took from the 匈奴 in 73 CE, where 班超, as 假司馬 under 竇固, fought his first battle. The label anchor sits at the modern 哈密市, the oasis usually identified with 伊吾盧; it asserts no site. It was also the oasis at the end of 玄奘's desert crossing, where three Chinese monks met him and the envoy of 高昌 heard of him.
 types: [region]
 names:
   - form: 伊吾
@@ -13,6 +13,12 @@ names:
         source: hou-hanshu
         at: 卷四十七 班梁列傳 班超 永平十六年
         quote: 將兵別擊伊吾，戰於蒲類海
+      - id: yiwu-xuanzang
+        says: The biography of 玄奘 records him reaching 伊吾 and staying at a monastery.
+        role: supporting
+        source: cien-zhuan
+        at: 卷一（既至伊吾，止一寺）
+        quote: 既至伊吾，止一寺
 at:
   - interpretation: display_anchor
     precision: unspecified
@@ -25,6 +31,11 @@ at:
           historical coordinate is asserted.
         source: wikidata
         at: Q989892 (P625), revision 2526615620
+modern:
+  - form: 哈密市
+    lang: zh-Hant
+    script: Hani
+    note: Modern place recorded for orientation only.
 external_ids:
   - system: wikidata
     id: Q989892

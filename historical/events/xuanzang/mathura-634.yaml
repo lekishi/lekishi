@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: At 秣菟羅 玄奘 sees the stūpas of the Buddha's disciples, each venerated by its own school.
+types: [journey]
+date:
+  value: 632..637
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 從此東行五百餘里，至秣兔羅國
+  cite:
+    - id: mathura-634-time
+      says: The biography records 秣菟羅 without a date.
+      source: cien-zhuan
+      at: 卷二（從此東行五百餘里）
+      quote: 從此東行五百餘里，至秣兔羅國
+places:
+  - place: mathura
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

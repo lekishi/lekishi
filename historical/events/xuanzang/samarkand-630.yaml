@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At 颯秣建 the fire-worshipping king receives 玄奘 coldly, then takes the precepts; when men burn out
+  玄奘's novices from a temple, he spares the culprits' hands at 玄奘's plea.
+types: [occurrence]
+date:
+  value: 629..630
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 五百餘里，至颯秣建國
+  cite:
+    - id: samarkand-630-time
+      says: The biography records 颯秣建 without a date.
+      source: cien-zhuan
+      at: 卷二（五百餘里，至颯秣建國）
+      quote: 五百餘里，至颯秣建國
+places:
+  - place: samarkand
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

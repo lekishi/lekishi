@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 玄奘 goes east along the 殑伽河 to 瞻波.
+types: [journey]
+date:
+  value: 636..642
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 自此順克伽河南岸東行三百餘里，至瞻波國
+  cite:
+    - id: champa-638-time
+      says: The biography records 瞻波 without a date.
+      source: cien-zhuan
+      at: 卷四（自此順克伽河南岸東行三百餘里）
+      quote: 自此順克伽河南岸東行三百餘里，至瞻波國
+places:
+  - place: champa
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

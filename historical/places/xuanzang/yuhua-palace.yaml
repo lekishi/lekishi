@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  玉華宮 (玉華寺), the former summer palace in the mountains north of 長安 where 玄奘 translated the 大般若經
+  from 659 and died in 664.
+types: [religious_site]
+names:
+  - form: 玉華宮
+    lang: lzh
+    script: Hani
+    roman: Yuhua Gong
+    scheme: pinyin
+    cite:
+      - id: yuhua-palace-name
+        says: The biography records 玄奘 asking to translate at 玉華宮 and the emperor agreeing.
+        source: cien-zhuan
+        at: 卷十（乃請就於玉華宮翻譯）
+        quote: 乃請就於玉華宮翻譯，帝許焉
+  - form: 玉華寺
+    lang: lzh
+    script: Hani
+    note: The monastery the palace became, named in the death account.
+    claim: yuhua-palace-name
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      No anchor could be read from Wikidata on 2026-10-21; the record asserts no coordinate until one
+      is cited.
+    cite:
+      - id: yuhua-palace-unlocated
+        says: The biography names 玉華宮 but the cited passages state no site for it.
+        source: cien-zhuan
+        at: 卷十（乃請就於玉華宮翻譯）

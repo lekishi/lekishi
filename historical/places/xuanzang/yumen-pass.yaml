@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  玉門關, the frontier pass on the 瓠蘆河 north of 瓜州 that 玄奘 slipped past by night, crossing the river
+  ten 里 upstream.
+types: [fortification]
+names:
+  - form: 玉門關
+    lang: lzh
+    script: Hani
+    roman: Yumen Guan
+    scheme: pinyin
+    cite:
+      - id: yumen-pass-name
+        says: The biography records 玄奘 reaching the river in the third watch and seeing 玉門關 in the distance.
+        source: cien-zhuan
+        at: 卷一（三更許到河，遙見玉門關）
+        quote: 三更許到河，遙見玉門關
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      The biography places the Tang pass on a river some fifty 里 north of 瓜州. The Han-period site that
+      Wikidata records as Yumen Pass, west of 敦煌, is a different place, so no modern anchor is used and
+      no coordinate is asserted.
+    cite:
+      - id: yumen-pass-unlocated
+        says: The biography names 玉門關 but the cited passages state no site for it.
+        source: cien-zhuan
+        at: 卷一（三更許到河，遙見玉門關）

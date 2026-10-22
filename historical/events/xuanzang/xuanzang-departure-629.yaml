@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "玄奘 sets out from 長安 for India in the autumn of 貞觀三年 (629), at twenty-six, without the court's
+  permission: his petition with other monks had been refused, and he went alone. The biography's own
+  memorial gives the fourth month."
+types: [journey]
+date:
+  value: 629-08
+  calendar: chinese_lunisolar
+  as_written: 貞觀三年秋八月
+  cite:
+    - id: xuanzang-departure-629-time
+      says: The biography dates the start of the journey to the eighth month of 貞觀三年.
+      source: cien-zhuan
+      at: 卷一（貞觀三年秋八月）
+      quote: 貞觀三年秋八月，將欲首塗
+    - id: xuanzang-departure-age
+      says: The biography records that he was twenty-six when he set out.
+      role: supporting
+      source: cien-zhuan
+      at: 卷一（遂即行矣。時年二十六也）
+      quote: 遂即行矣。時年二十六也
+places:
+  - place: changan
+    role: start
+    note: The biography has him leave from the capital; it names no gate or temple.
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  Both the narrative and the memorial name 貞觀三年; they disagree on the month. The petition the court
+  refused is not dated in the biography and is not a separate event.
+dispute:
+  status: disputed
+  summary:
+    The biography's narrative dates the departure to 貞觀三年秋八月, the memorial it quotes to 貞觀三年四月,
+    and the official history to 貞觀初 only. The chapter publishes the narrative's month and keeps the other
+    two as conflicting claims.
+cite:
+  - id: xuanzang-departure-memorial
+    says:
+      玄奘's own memorial from 于闐, quoted in the biography, dates the departure to the fourth month of
+      貞觀三年.
+    role: conflicting
+    source: cien-zhuan
+    at: 卷五（遂以貞觀三年四月）
+    quote: 遂以貞觀三年四月，冒越憲章，私往天竺
+  - id: xuanzang-departure-history
+    says: The official history says only that he went with merchants early in the 貞觀 era.
+    role: conflicting
+    source: jiu-tangshu-fangji
+    at: 卷一九一 方伎 僧玄奘
+    quote: 貞觀初，隨商人往游西域

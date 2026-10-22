@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  王祥, commander (校尉) of the first beacon, a man of 燉煌, who caught 玄奘 at the water, let him go on
+  and sent him to his kinsman at the fourth beacon.
+types: [person]
+names:
+  - form: 王祥
+    lang: lzh
+    script: Hani
+    roman: Wang Xiang
+    scheme: pinyin
+    cite:
+      - id: wang-xiang-name
+        says: The biography names the commander of the first beacon as 校尉王祥.
+        source: cien-zhuan
+        at: 卷一（將入見校尉王祥）
+        quote: 將入見校尉王祥
+roles:
+  - role: soldier
+    cite:
+      - id: wang-xiang-role
+        says: The biography records 王祥 sending 玄奘 on toward the fourth beacon.
+        source: cien-zhuan
+        at: 卷一（師從此路徑向第四烽）
+        quote: 師從此路徑向第四烽

@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  East of 奢羯羅, in the 波羅奢 forest, fifty robbers strip 玄奘's party and drive them to a dry pond to
+  be killed; they escape through a gap and villagers rescue the rest.
+types: [occurrence]
+date:
+  value: 632..637
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 逢群賊五十餘人，法師及伴所將衣資劫奪都盡
+  cite:
+    - id: sakala-robbery-633-time
+      says: The biography records the robbery without a date.
+      source: cien-zhuan
+      at: 卷二（逢群賊五十餘人）
+      quote: 逢群賊五十餘人，法師及伴所將衣資劫奪都盡
+places:
+  - place: sakala
+    role: context
+    note: The robbery was beyond 奢羯羅, in a forest east of 那羅僧訶城.
+participants:
+  - actor: xuanzang
+    role: subject
+notes:
+  "The record names 奢羯羅 as context only: the biography places the forest east of 那羅僧訶城, which has
+  no record. The biography gives no date for this stop. The window is the chapter's reckoning from the
+  stays and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's
+  own chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint."

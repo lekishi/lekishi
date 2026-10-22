@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 玄奘 crosses the 波謎羅川, the high valley in the middle of the 蔥嶺 with its great lake.
+types: [journey]
+date:
+  value: 642..644
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 從此複東山行七百餘里，至波謎羅川
+  cite:
+    - id: pamir-643-time
+      says: The biography records the 波謎羅川 without a date.
+      source: cien-zhuan
+      at: 卷五（從此複東山行七百餘里）
+      quote: 從此複東山行七百餘里，至波謎羅川
+places:
+  - place: pamir
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

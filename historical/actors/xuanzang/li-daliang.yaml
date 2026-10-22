@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: 李大亮, governor of 涼州, who enforced the ban on leaving the country and ordered 玄奘 back to the capital.
+types: [person]
+names:
+  - form: 李大亮
+    lang: lzh
+    script: Hani
+    roman: Li Daliang
+    scheme: pinyin
+    cite:
+      - id: li-daliang-name
+        says: The biography names 李大亮 as governor of 涼州 under strict orders.
+        source: cien-zhuan
+        at: 卷一（時李大亮為涼州都督）
+        quote: 時李大亮為涼州都督，既奉嚴敕，防禁特切
+roles:
+  - role: official
+    cite:
+      - id: li-daliang-role
+        says: The biography records him ordering 玄奘 back to the capital.
+        source: cien-zhuan
+        at: 卷一（亮聞之，逼還京）
+        quote: 亮聞之，逼還京

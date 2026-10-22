@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  木叉鞠多, the senior monk of 屈支 who had studied twenty years in India and whom 玄奘 out-argued on the
+  俱舍.
+types: [person]
+names:
+  - form: 木叉鞠多
+    lang: lzh
+    script: Hani
+    roman: Mucha Juduo
+    scheme: pinyin
+    cite:
+      - id: mokshagupta-name
+        says: The biography names 木叉鞠多 among the monks who met 玄奘 at 屈支.
+        source: cien-zhuan
+        at: 卷二（王與群臣及大德僧木叉鞠多等來迎）
+        quote: 王與群臣及大德僧木叉鞠多等來迎
+roles:
+  - role: monk
+    cite:
+      - id: mokshagupta-role
+        says: The biography records his twenty years of study in India.
+        source: cien-zhuan
+        at: 卷二（遊學印度二十餘載）
+        quote: 遊學印度二十餘載

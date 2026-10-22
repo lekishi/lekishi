@@ -1,0 +1,176 @@
+= 玄奘's journey to India, 629–645: feasibility note
+:state: Desk-research note for the owner's review of a draft chapter; not published atlas content, not an RFD decision
+:prepared-from: stacked on PR #36 (claude/project-thread-j8nxta @ 495320d), whose 長安, 洛陽 and 太原 it reuses
+:research-window: single pass, 2026-10-21
+:toc:
+:toclevels: 2
+
+This note goes with the draft chapter
+link:../../historical/chapters/xuanzang-journey-629-645.yaml[`xuanzang-journey-629-645`],
+candidate 3 of the 2026-10-21 chapter selection. It says what the sources
+support, where the chapter had to make editorial choices, and what would raise
+its quality before the owner approves it. The chapter is a draft: it has no
+approval block, and dev and pull-request previews serve it.
+
+== Verdict
+
+Feasible, and a good test chapter. The sources are public domain and narrate
+every stop, so the chapter has 98 events in one traveller's order across about
+seventy places from 秦州 to 于闐. What it does not have is a calendar: after
+the departure from 長安 in 629, no source gives a month or a year until the
+return to 長安 in the first month of 645; even the memorial from 于闐 carries no
+date of its own. That gap is the reason it is worth having. It tests the
+engine on long runs of undated, overlapping windows, on many stops without a
+cited position, and on a journey kind that has to break its line where
+positions are missing.
+
+== Sources and rights
+
+[cols="2,1,3",options="header"]
+|===
+|Source |Id |Use
+
+|大唐大慈恩寺三藏法師傳, 慧立 and 彥悰, 688 (T.2053)
+|`cien-zhuan`
+|The spine: order, stays and their lengths, the dated anchors at both ends. Every event cites it.
+
+|大唐西域記, 玄奘 and 辯機, 646 (T.2087)
+|`xiyu-ji`
+|Supporting name cites for 27 countries, taken from passages in the relevant country's section, usually its opening sentence.
+
+|舊唐書 卷一九一 方伎 僧玄奘, 945
+|`jiu-tangshu-fangji`
+|Conflicting claims only: origin, departure year and death year.
+
+|Wikidata
+|`wikidata`
+|Display anchors for 55 places, each with a Q-id and revision.
+|===
+
+All three texts are public domain. They are quoted from the Wikisource
+transcription, which is CC BY-SA, so the records cite the work and its 卷 and
+never the page, as the register's Wikisource row requires. CBETA and SAT carry
+the same texts with better proofreading, but their terms rule them out as data
+(see the register), so the quotations have to be re-checked against a printed
+critical edition before content freeze. Every quotation in the records was
+checked mechanically against the downloaded transcription. A substring check
+cannot tell a sentence from a stray mark, so nine 西域記 name cites that had
+been reduced to a lone 。 were found in review and replaced with passages from
+the relevant sections.
+
+== Chronology
+
+The biography is not consistent with itself.
+
+* It dates the departure 貞觀三年秋八月, while 玄奘's own memorial from
+  于闐 in 卷五 says 貞觀三年四月, and the 舊唐書 says only 貞觀初. The
+  departure event publishes 629-08 and records the dispute. The 627 departure
+  that modern scholars often argue for has no cited source here, so it is
+  not in the records.
+* The stays it states (two years at 迦濕彌羅, fourteen months at 至那僕底, five
+  years at 那爛陀, two years at 缽伐多 and two with 勝軍, and so on) add up to
+  more than the sixteen years between the fixed ends.
+
+So every stop from 高昌 to 于闐 carries an editorial window reckoned from the
+stays, with a note that says so. There are eight windows (629..630 out to
+迦畢試, through 644..645 for the desert), and they overlap on purpose. Step
+order is the biography's narrative order, which the manifest's notes say is
+presentation order. Only seven events carry a source date: the departure in 629,
+the four steps of the return in 645, the 西域記 in 646 and the death in 664.
+The first stops in the northwest (秦州, 蘭州, 涼州) sit in a 629 window.
+
+Cyclic days (景子 for 丙子, 己亥, 己巳) are kept in `as_written`. The records
+convert them only to the month, because a day-level conversion needs a cited
+calendar table.
+
+== Disputes
+
+* *Departure*: 八月 against 四月 against 貞觀初 (`xuanzang-departure-629`).
+* *Death*: the biography's 麟德元年二月五日 (664) against the 舊唐書's
+  顯慶六年 (661) at 56 (`xuanzang-death-664`).
+* *Origin*: the 舊唐書's 洛州偃師 is noted on the actor.
+* *Which khagan*: the biography's 葉護可汗 at 素葉 is not identified with
+  統葉護 in the records. Wikidata ends 統葉護's reign in 628, which would
+  conflict with a 629 departure, so the identification needs a cited source.
+
+== Places
+
+Of the 77 places on the route, 55 carry a Wikidata display anchor. That is a label
+position, not an asserted historical coordinate, and its notes say the
+identification is the conventional modern reading. The other 22 carry an
+`unknown` position, for one of three reasons:
+
+* The site has no agreed identification, for example 劫比羅伐窣堵
+  (Tilaurakot or Piprahwa), 缽伐多, 至那僕底 and 秣底補羅.
+* The obvious Wikidata item is a different place. The Han 玉門關 west of
+  敦煌 is not the Tang pass north of 瓜州.
+* Wikidata rate-limited this environment (HTTP 429) before the lookup could be
+  made, for example 迦畢試, 那揭羅喝 and 迦摩縷波.
+
+Six of the 77 are shared with the 班超 chapter, which landed first: 焉耆
+(`agni`), 姑墨 (`baluka`), 疏勒 (`kashgar`), 于窴 (`khotan`), 龜茲 (`kucha`) and
+伊吾 (`yiwu`). Their records live in `places/western-regions/`, with this
+chapter's names and cites folded in, so `places/xuanzang/` holds the other 71.
+Main's 焉耆 record already gave a cited reason for having no position, and it
+keeps that reason.
+
+The 長安 and 洛陽 records are shared and belong to the 圓仁 chapter. With them
+the chapter shows 79 places, 57 anchored, and reaches six sources: the three
+above, Wikidata, 圓仁's diary, which the shared 長安 and 洛陽 cite, and the
+後漢書, which the shared western-regions places cite.
+
+== Fit with the journey kind (PR #26)
+
+PR #26 made journeys a record kind of their own; the record's shape is still
+proposed, and the compiler does not read `historical/journeys/` until the
+owner accepts it. The chapter's movement is drafted in that shape as three
+journeys in `historical/journeys/xuanzang/`, so it is ready when the kind is
+built:
+
+* `xuanzang-outbound-629`: 長安 to 那爛陀, 48 stops.
+* `xuanzang-india-636`: from 那爛陀 around India to 缽羅耶伽, 20 stops.
+* `xuanzang-return-643`: 缽羅耶伽 to 長安, 19 stops.
+
+Every stop is an event of this chapter with exactly one `site`, `start` or
+`end` place, and each journey's order is cited to the biography's narrative.
+No stop is strictly earlier than the one before it under v0's partial
+ordering, though the overlapping windows mean the check proves little here.
+Three events are not stops, because their only place is context: the night
+crossing below 玉門關, which he saw and bypassed; the 波羅奢 forest robbery,
+east of 奢羯羅; and the loss in the 信度河, mid-river, before the stay at
+烏鐸迦漢荼.
+No leg states `by`: the biography rarely says how a stage was travelled, and
+whether `by` may be inferred is still open for the owner. The journeys name
+only 玄奘 as a traveller, because his companions changed from stage to stage.
+
+`xuanzang-travel` stays as the relationship the chapter's step names. Under
+PR #26's rule, legs are drawn only between places located at
+approximate_point or better, so today the journeys would draw no legs at all:
+display anchors break the line.
+
+== Follow-ups, in order of value
+
+. Cite public-domain identifications to raise positions to
+  approximate_point. Cunningham's _Ancient Geography of India_ (1871) and
+  Watters's _On Yuan Chwang's Travels in India_ (1904–05) are both public
+  domain and identify most of the Indian and Central Asian stops.
+. Retry the Wikidata lookups for the places listed above, once the rate limit
+  clears.
+. Add the journeys to the chapter's `include` once the compiler reads the
+  journey kind, and add `by` where the biography states how a stage went.
+. Re-check the quotations against a critical edition, such as the 中華書局
+  edition, which is consulted only, under the register's rule.
+. Cite a calendar table for day-level dates of the cyclic days.
+. Cite a modern study for the 葉護可汗 identification and for the 627 departure
+  thesis, so that both can enter as alternative claims.
+
+== Cross-chapter links
+
+* 長安 and 洛陽 are shared with the 圓仁 chapter.
+* 焉耆, 姑墨, 疏勒, 于窴, 龜茲 and 伊吾 are shared with the 班超 chapter.
+* The Tang chapter's `jianzhen-transmission` lists 玄奘法師《西域記》 among
+  the works 鑒眞 brought to Japan in 754. The 646 event
+  `xiyu-ji-presented-646` is that work's origin.
+* `tang-taizong` is shared with the Tang missions network chapter.
+* 素葉, 呾邏斯, 赭時, 颯秣建 and 屈支 are shared with the 杜環 chapter.
+* The Indian places are shared with the 阿育王 chapter.

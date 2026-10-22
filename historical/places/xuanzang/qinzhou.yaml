@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  "秦州, the first stop the biography names after 長安: 玄奘 travelled there with the monk 孝達 and stayed
+  one night."
+types: [settlement]
+names:
+  - form: 秦州
+    lang: lzh
+    script: Hani
+    roman: Qinzhou
+    scheme: pinyin
+    cite:
+      - id: qinzhou-name
+        says: The biography records 玄奘 reaching 秦州 with 孝達 and staying one night.
+        source: cien-zhuan
+        at: 卷一（至秦州，停一宿，逢蘭州伴，又隨去）
+        quote: 至秦州，停一宿，逢蘭州伴，又隨去至蘭州
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [105.7311, 34.5809]
+    notes:
+      Label anchor at Tianshui as recorded in Wikidata (Q533157). It is not an asserted historical
+      coordinate; the identification of 秦州 with the modern place is the conventional modern reading, not
+      a statement of the cited sources.
+    cite:
+      - id: qinzhou-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q533157 (P625), revision 2532009722
+modern:
+  - form: 天水市
+    lang: zh-Hant
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q533157
+    url: https://www.wikidata.org/wiki/Q533157
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Crossing the 莫賀延磧 alone, 玄奘 misses 野馬泉 and spills his water; he turns back, then west again,
+  and goes four nights and five days without water until his horse finds grass and a pool. Two days later
+  he reaches 伊吾.
+types: [journey]
+date:
+  value: 629..630
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 是時四夜五日無一滴沾喉
+  cite:
+    - id: mohoyan-crossing-629-time
+      says: The biography records the desert crossing without a date.
+      source: cien-zhuan
+      at: 卷一（是時四夜五日無一滴沾喉）
+      quote: 是時四夜五日無一滴沾喉
+places:
+  - place: mohoyan-desert
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The biography's account includes visions and a dream; the record keeps only the crossing. The biography
+  gives no date for this stop. The window is the chapter's reckoning from the stays and seasons the biography
+  reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own chronology is not consistent
+  (see the chapter notes), so the window is wide and the stop must never be shown at a midpoint.

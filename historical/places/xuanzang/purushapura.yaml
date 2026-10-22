@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 布路沙布邏, the capital of 健陀邏, with 迦膩色迦王's great stūpa and the 畢缽羅 tree.
+types: [capital, settlement]
+names:
+  - form: 布路沙布邏
+    lang: lzh
+    script: Hani
+    roman: Bulushabuluo
+    scheme: pinyin
+    cite:
+      - id: purushapura-name
+        says: The biography names 布路沙布羅 as the capital of 健陀邏, east to the 信度河.
+        source: cien-zhuan
+        at: 卷二（其國東臨信度河）
+        quote: 其國東臨信度河，都城號布路沙布羅
+      - id: purushapura-xiyu
+        says: The 西域記 opens its account of the country with this sentence.
+        role: supporting
+        source: xiyu-ji
+        at: 卷第二 健馱邏國
+        quote: 健馱邏國東西千餘里，南北八百餘里，東臨信度河。
+  - form: 健陀邏
+    lang: lzh
+    script: Hani
+    roman: Jiantuoluo
+    scheme: pinyin
+    note: The kingdom, named by the biography; the record covers its capital.
+    claim: purushapura-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [71.5675, 34.0144]
+    notes:
+      Label anchor at Peshawar as recorded in Wikidata (Q1113311). It is not an asserted historical
+      coordinate; the identification of 布路沙布邏 with the modern place is the conventional modern reading,
+      not a statement of the cited sources.
+    cite:
+      - id: purushapura-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q1113311 (P625), revision 2532483533
+modern:
+  - form: 白沙瓦
+    lang: zh-Hant
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q1113311
+    url: https://www.wikidata.org/wiki/Q1113311
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

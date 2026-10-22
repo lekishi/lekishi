@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 劫比羅伐窣堵 (迦毗羅衛), the ruined city of the Buddha's father 淨飯王.
+types: [settlement, religious_site]
+names:
+  - form: 劫比羅伐窣堵
+    lang: lzh
+    script: Hani
+    roman: Jiebiluofasudu
+    scheme: pinyin
+    cite:
+      - id: kapilavastu-name
+        says: The biography records 玄奘 reaching 劫比羅伐窣堵.
+        source: cien-zhuan
+        at: 卷三（從此東南行八百餘里）
+        quote: 從此東南行八百餘里，至劫比羅伐窣堵國
+  - form: 迦毗羅衛
+    lang: lzh
+    script: Hani
+    roman: Jiapiluowei
+    scheme: pinyin
+    note: The older name the biography gives.
+    claim: kapilavastu-name
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      The site is disputed between two modern candidates, and the cited sources do not decide it; the
+      record asserts no coordinate.
+    cite:
+      - id: kapilavastu-unlocated
+        says: The biography names 劫比羅伐窣堵 but the cited passages state no site for it.
+        source: cien-zhuan
+        at: 卷三（從此東南行八百餘里）

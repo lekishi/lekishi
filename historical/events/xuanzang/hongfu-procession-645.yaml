@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The books and images are carried in procession from 朱雀街 to the 弘福寺: 150 relics, seven images,
+  and 657 texts in 520 bundles, brought on twenty horses."
+types: [exchange]
+date:
+  value: 645-01
+  calendar: chinese_lunisolar
+  as_written: 貞觀十九年春正月 — 二十八日旦並集朱雀街
+  cite:
+    - id: hongfu-procession-645-time
+      says: The biography records the procession in the first month of 貞觀十九年.
+      source: cien-zhuan
+      at: 卷六（凡五百二十夾）
+      quote: 凡五百二十夾，六百五十七部，以二十疋馬負而至
+places:
+  - place: changan
+    role: site
+    note: From 朱雀街 to the 弘福寺 inside the city.
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The biography gives the assembly on the twenty-eighth; the record keeps the month only, as the
+  reception does.

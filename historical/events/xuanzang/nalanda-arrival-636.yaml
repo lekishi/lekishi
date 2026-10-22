@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Four monks of 那爛陀 come for 玄奘 and two hundred more escort him in; he is presented to 戒賢, who
+  says he has waited three years for a monk from China. Asked how long he has been on the road, 玄奘 says
+  three years.
+types: [journey]
+date:
+  value: 632..637
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 至第十日，那爛陀寺眾差四大德來迎
+  cite:
+    - id: nalanda-arrival-636-time
+      says: The biography records the arrival without a date.
+      source: cien-zhuan
+      at: 卷三（至第十日，那爛陀寺眾差四大德來迎）
+      quote: 至第十日，那爛陀寺眾差四大德來迎
+places:
+  - place: nalanda
+    role: site
+participants:
+  - actor: xuanzang
+    role: guest
+  - actor: silabhadra
+    role: host
+notes:
+  玄奘's answer of three years does not fit the stays the biography itself reports between 迦濕彌羅 and
+  那爛陀, which add up to more; this is one of the inconsistencies behind the chapter's wide windows. The
+  biography gives no date for this stop. The window is the chapter's reckoning from the stays and seasons
+  the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own chronology
+  is not consistent (see the chapter notes), so the window is wide and the stop must never be shown at
+  a midpoint.
+cite:
+  - id: nalanda-three-years
+    says: The biography has 玄奘 tell 戒賢 he has been three years on the road.
+    source: cien-zhuan
+    at: 卷三（法師汝在路幾年？答：三年）
+    quote: 法師汝在路幾年？”答：“三年

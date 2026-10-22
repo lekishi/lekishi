@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At 涼州 玄奘 stays more than a month and lectures on the 涅槃, 攝論 and 般若; merchants from the western
+  countries carry his name home.
+types: [journey, exchange]
+date:
+  value: "629"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 停月餘日，道俗請開《涅槃》、《攝論》及《般若經》，法師皆為開發
+  cite:
+    - id: liangzhou-lectures-629-time
+      says: The biography records the month at 涼州 without a date, after the 貞觀三年 departure.
+      source: cien-zhuan
+      at: 卷一（停月餘日，道俗請開《涅槃》、《攝）
+      quote: 停月餘日，道俗請開《涅槃》、《攝論》及《般若經》，法師皆為開發
+places:
+  - place: liangzhou
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes: Dated to 貞觀三年 by the departure; the biography gives no day.

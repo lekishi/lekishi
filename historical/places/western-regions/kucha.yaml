@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=../../schema/place.schema.json
-summary: 龜茲, the strongest kingdom of the northern road, a 匈奴 ally until it submitted in 91 CE; 班超 then lived as 都護 at its 它乾城. The label anchor sits at the modern 庫車市, the usual identification; it asserts no site of 它乾城.
+summary: 龜茲, the strongest kingdom of the northern road, a 匈奴 ally until it submitted in 91 CE; 班超 then lived as 都護 at its 它乾城. The label anchor sits at the modern 庫車市, the usual identification; it asserts no site of 它乾城. As 屈支, it is where 玄奘 debated the monk 木叉鞠多 and waited more than sixty days for the snow road over 凌山 to open.
 types: [region]
 names:
   - form: 龜茲
@@ -13,6 +13,23 @@ names:
         source: hou-hanshu
         at: 卷四十七 班梁列傳 班超（超居龜茲它乾城）
         quote: 超居龜茲它乾城，徐幹屯疏勒。
+  - form: 屈支
+    lang: lzh
+    script: Hani
+    roman: Quzhi
+    scheme: pinyin
+    cite:
+      - id: kucha-name
+        says: The biography of 玄奘 records him crossing a great river and entering the land of 屈支.
+        source: cien-zhuan
+        at: 卷二（前渡一大河，西履平川，行數百里）
+        quote: 前渡一大河，西履平川，行數百里，入屈支國界
+      - id: kucha-xiyu
+        says: The 西域記 opens its account of the country with this sentence.
+        role: supporting
+        source: xiyu-ji
+        at: 卷第一 屈支國
+        quote: 屈支國。東西千餘里。南北六百餘里。
 at:
   - interpretation: display_anchor
     precision: unspecified
@@ -25,6 +42,11 @@ at:
           historical coordinate is asserted.
         source: wikidata
         at: Q1328546 (P625), revision 2523055382
+modern:
+  - form: 庫車市
+    lang: zh-Hant
+    script: Hani
+    note: Modern place recorded for orientation only.
 external_ids:
   - system: wikidata
     id: Q1328546

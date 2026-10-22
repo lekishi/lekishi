@@ -1,0 +1,70 @@
+# Proposed journey record (RFD 2, "Proposed: the journey record", PR #26).
+# The compiler does not read historical/journeys/ until the owner accepts the shape.
+title: 玄奘's journey from 長安 to 那爛陀, 629–636
+summary: >-
+  玄奘 leaves 長安 without leave, goes by 秦州, 蘭州 and 涼州 to 瓜州, crosses the 莫賀延磧 alone to 伊吾
+  and 高昌, follows the oases to 屈支, crosses the 凌山 to the 葉護可汗 at 素葉, goes south by 颯秣建 and
+  the 鐵門 into 睹貨羅, over the Hindu Kush by 梵衍那 to 迦畢試, and through 健陀邏, 迦濕彌羅 and the
+  Ganges plain to 那爛陀.
+travellers:
+  - actor: xuanzang
+    role: leader
+# Two events are not stops because their only place is context: the night crossing below
+# 玉門關 (yumen-crossing-629), which he saw but bypassed, and the 波羅奢 forest robbery
+# (sakala-robbery-633), east of 奢羯羅, not at it.
+stops:
+  - xuanzang-departure-629
+  - qinzhou-stop-629
+  - lanzhou-stop-629
+  - liangzhou-lectures-629
+  - guazhou-stay-629
+  - first-beacon-629
+  - fourth-beacon-629
+  - mohoyan-crossing-629
+  - yiwu-arrival-629
+  - gaochang-arrival-630
+  - gaochang-departure-630
+  - agni-stop-630
+  - kucha-stay-630
+  - baluka-stop-630
+  - lingshan-crossing-630
+  - issyk-kul-630
+  - suyab-khagan-630
+  - talas-stop-630
+  - chach-stop-630
+  - samarkand-630
+  - iron-gate-630
+  - kunduz-stay-630
+  - balkh-stay-630
+  - bamiyan-630
+  - kapisa-retreat-630
+  - nagarahara-631
+  - purushapura-631
+  - pushkalavati-631
+  - taxila-631
+  - kashmir-stay-631
+  - cinabhukti-stay-633
+  - jalandhara-stay-634
+  - mathura-634
+  - srughna-stay-634
+  - matipura-stay-635
+  - sankasya-635
+  - kanyakubja-stay-635
+  - ganges-pirates-635
+  - prayaga-635
+  - kausambi-635
+  - sravasti-635
+  - kapilavastu-636
+  - kusinagara-636
+  - sarnath-636
+  - vaisali-636
+  - pataliputra-636
+  - bodh-gaya-636
+  - nalanda-arrival-636
+cite:
+  - id: xuanzang-outbound-sequence
+    says: >-
+      The biography narrates the journey from the departure from 長安 to the welcome at 那爛陀 country by
+      country, in this order.
+    source: cien-zhuan
+    at: 卷一（貞觀三年秋八月）— 卷三（至第十日，那爛陀寺眾差四大德來迎）

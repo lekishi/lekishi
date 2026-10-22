@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "麹文泰 tries to keep 玄奘 by force; 玄奘 refuses food for three days, and the king gives way. Before
+  the queen mother 張太妃 they swear to be brothers: 玄奘 will lecture a month and stay three years on his
+  way back."
+types: [occurrence]
+date:
+  value: 629..630
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 對母張太妃共法師約為兄弟，任師求法
+  cite:
+    - id: gaochang-brotherhood-630-time
+      says: The biography records the oath without a date.
+      source: cien-zhuan
+      at: 卷一（對母張太妃共法師約為兄弟）
+      quote: 對母張太妃共法師約為兄弟，任師求法
+places:
+  - place: gaochang
+    role: site
+participants:
+  - actor: xuanzang
+    role: participant
+  - actor: qu-wentai
+    role: participant
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.
+cite:
+  - id: gaochang-fast
+    says: The biography records 玄奘 taking no water for three days.
+    source: cien-zhuan
+    at: 卷一（於是端坐，水漿不涉於口三日）
+    quote: 於是端坐，水漿不涉於口三日

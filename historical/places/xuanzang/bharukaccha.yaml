@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 跋祿羯呫婆, across the 耐秣陀河 on the western road.
+types: [port, settlement]
+names:
+  - form: 跋祿羯呫婆
+    lang: lzh
+    script: Hani
+    roman: Balujiechanpo
+    scheme: pinyin
+    cite:
+      - id: bharukaccha-name
+        says: The biography records 玄奘 crossing the 耐秣陀河 to reach 跋祿羯呫婆.
+        source: cien-zhuan
+        at: 卷四（自此西北行千餘里）
+        quote: 自此西北行千餘里，渡耐秣陀河，至跋祿羯咕婆國
+  - form: 跋祿羯咕婆
+    lang: lzh
+    script: Hani
+    note: The spelling of this transcription of the biography.
+    claim: bharukaccha-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [72.9667, 21.7]
+    notes:
+      Label anchor at Bharuch as recorded in Wikidata (Q760153). It is not an asserted historical coordinate;
+      the identification of 跋祿羯呫婆 with the modern place is the conventional modern reading, not a statement
+      of the cited sources.
+    cite:
+      - id: bharukaccha-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q760153 (P625), revision 2554081502
+modern:
+  - form: 珀魯傑
+    lang: zh-Hant
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q760153
+    url: https://www.wikidata.org/wiki/Q760153
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

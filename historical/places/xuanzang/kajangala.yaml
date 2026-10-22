@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 羯朱嗢祇羅, on the 殑伽河, where 戒日王 and 鳩摩羅王 met and 戒日王 first saw 玄奘.
+types: [region]
+names:
+  - form: 羯朱嗢祇羅
+    lang: lzh
+    script: Hani
+    roman: Jiezhuwaqiluo
+    scheme: pinyin
+    cite:
+      - id: kajangala-name
+        says: The biography records 玄奘 passing 羯朱嗢祇羅 on his way east.
+        source: cien-zhuan
+        at: 卷四（自此東行四百餘里）
+        quote: 自此東行四百餘里，至羯朱嗢隻羅國
+  - form: 羯朱咀隻羅
+    lang: lzh
+    script: Hani
+    note: The spelling of the meeting passage in this transcription.
+    claim: kajangala-name
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: The cited sources do not identify the site; the record asserts no coordinate.
+    cite:
+      - id: kajangala-unlocated
+        says: The biography names 羯朱嗢祇羅 but the cited passages state no site for it.
+        source: cien-zhuan
+        at: 卷四（自此東行四百餘里）

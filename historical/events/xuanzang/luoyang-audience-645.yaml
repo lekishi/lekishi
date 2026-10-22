@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At the 儀鸞殿 of the 洛陽宮 the emperor receives 玄奘, asks why he left without telling him, questions
+  him about the west, asks him to write an account of it, and urges him to return to lay life; 玄奘 declines.
+types: [occurrence]
+date:
+  value: 645-02
+  calendar: chinese_lunisolar
+  as_written: 貞觀十九年二月己亥
+  cite:
+    - id: luoyang-audience-645-time
+      says: The biography dates the audience to the day 己亥 of the second month of 貞觀十九年.
+      source: cien-zhuan
+      at: 卷六（二月己亥，見於儀鸞殿，帝迎慰甚厚）
+      quote: 二月己亥，見於儀鸞殿，帝迎慰甚厚
+places:
+  - place: luoyang
+    role: site
+participants:
+  - actor: xuanzang
+    role: guest
+  - actor: tang-taizong
+    role: host
+cite:
+  - id: luoyang-audience-account
+    says: The biography records the emperor asking him to write an account of the countries.
+    source: cien-zhuan
+    at: 卷六（師既親都，宜修一傳，以示未聞）
+    quote: 師既親都，宜修一傳，以示未聞

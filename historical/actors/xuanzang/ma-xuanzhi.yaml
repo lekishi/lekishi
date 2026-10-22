@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: 馬玄智, a layman of 高昌 who carried 玄奘's memorial from 于闐 to the court with a merchant caravan.
+types: [person]
+names:
+  - form: 馬玄智
+    lang: lzh
+    script: Hani
+    roman: Ma Xuanzhi
+    scheme: pinyin
+    cite:
+      - id: ma-xuanzhi-name
+        says: The memorial names its bearer as 高昌俗人馬玄智.
+        source: cien-zhuan
+        at: 卷五（謹遣高昌俗人馬玄智隨商侶奉表先聞）
+        quote: 謹遣高昌俗人馬玄智隨商侶奉表先聞
+roles:
+  - role: envoy
+    cite:
+      - id: ma-xuanzhi-role
+        says: The biography records the memorial going with a 高昌 youth and the merchants.
+        source: cien-zhuan
+        at: 卷五（因修表使高昌小兒逐商伴入朝）
+        quote: 因修表使高昌小兒逐商伴入朝

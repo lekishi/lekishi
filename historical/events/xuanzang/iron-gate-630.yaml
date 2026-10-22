@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 玄奘 passes through 鐵門, the defile with iron-bound gates at the Turks' frontier, into 睹貨羅.
+types: [journey]
+date:
+  value: 629..630
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 山行三百餘里，入鐵門
+  cite:
+    - id: iron-gate-630-time
+      says: The biography records 鐵門 without a date.
+      source: cien-zhuan
+      at: 卷二（山行三百餘里）
+      quote: 山行三百餘里，入鐵門
+places:
+  - place: iron-gate
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  梵衍那, the kingdom in the snow mountains whose capital had a standing stone image a hundred and
+  fifty 尺 high in the hillside north-east of the royal city.
+types: [capital, settlement]
+names:
+  - form: 梵衍那
+    lang: lzh
+    script: Hani
+    roman: Fanyanna
+    scheme: pinyin
+    cite:
+      - id: bamiyan-name
+        says: The biography records 玄奘 reaching the capital of 梵衍那.
+        source: cien-zhuan
+        at: 卷二（如是漸到梵衍都城）
+        quote: 如是漸到梵衍都城
+      - id: bamiyan-xiyu
+        says: The 西域記 opens its account of the country with this sentence.
+        role: supporting
+        source: xiyu-ji
+        at: 卷第一 梵衍那國
+        quote: 梵衍那國。東西二千餘里。南北三百餘里。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [67.8167, 34.8167]
+    notes:
+      Label anchor at Bamyan as recorded in Wikidata (Q214495). It is not an asserted historical coordinate;
+      the identification of 梵衍那 with the modern place is the conventional modern reading, not a statement
+      of the cited sources.
+    cite:
+      - id: bamiyan-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q214495 (P625), revision 2558718510
+modern:
+  - form: 巴米揚
+    lang: zh-Hant
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q214495
+    url: https://www.wikidata.org/wiki/Q214495
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

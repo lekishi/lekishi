@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At 縛喝, the little 王舍城, 玄奘 sees the relics of the 納縛伽藍 and reads the 毗婆沙論 with 般若羯羅 for more than
+  a month.
+types: [journey, exchange]
+date:
+  value: 629..630
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 遂停月餘，就讀《毗婆沙論》
+  cite:
+    - id: balkh-stay-630-time
+      says: The biography records the month at 縛喝 without a date.
+      source: cien-zhuan
+      at: 卷二（遂停月餘，就讀《毗婆沙論》）
+      quote: 遂停月餘，就讀《毗婆沙論》
+places:
+  - place: balkh
+    role: site
+participants:
+  - actor: xuanzang
+    role: guest
+  - actor: prajnakara
+    role: participant
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.

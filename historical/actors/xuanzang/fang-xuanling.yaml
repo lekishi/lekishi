@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  房玄齡, minister and regent of the capital (京城留守) while the emperor was at 洛陽, who sent officials
+  to receive 玄奘 in 645.
+types: [person]
+names:
+  - form: 房玄齡
+    lang: lzh
+    script: Hani
+    roman: Fang Xuanling
+    scheme: pinyin
+    cite:
+      - id: fang-xuanling-name
+        says: The biography names the regent of the capital as 房玄齡.
+        source: cien-zhuan
+        at: 卷六（京城留守左仆射梁國公房玄齡等承法）
+        quote: 京城留守左仆射梁國公房玄齡等承法師裔經、像至
+roles:
+  - role: official
+    cite:
+      - id: fang-xuanling-role
+        says: The biography records the emperor ordering 房玄齡 to receive 玄奘.
+        source: cien-zhuan
+        at: 卷五（敕西京留守左仆射梁國公房玄齡使有）
+        quote: 敕西京留守左仆射梁國公房玄齡使有司迎待

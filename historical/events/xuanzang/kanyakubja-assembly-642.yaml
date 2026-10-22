@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "戒日王 calls the religious of the five Indias to 曲女城 to hear 玄奘's treatise: eighteen kings, three
+  thousand monks and two thousand brahmins and others. For eighteen days no one rises to refute it, and
+  the Mahāyāna monks name him 大乘天."
+types: [council]
+date:
+  value: 641..643
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 法師自冬初共王逆河而進，至臘月方到會場
+  cite:
+    - id: kanyakubja-assembly-642-time
+      says:
+        The biography records the journey to the assembly from the beginning of winter to the twelfth
+        month, without a year.
+      source: cien-zhuan
+      at: 卷五（法師自冬初共王逆河而進）
+      quote: 法師自冬初共王逆河而進，至臘月方到會場
+places:
+  - place: kanyakubja
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+  - actor: harsha
+    role: host
+  - actor: bhaskaravarman
+    role: participant
+notes:
+  The biography gives no date for this stop. The window is the chapter's reckoning from the stays
+  and seasons the biography reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own
+  chronology is not consistent (see the chapter notes), so the window is wide and the stop must never
+  be shown at a midpoint.
+cite:
+  - id: kanyakubja-eighteen-days
+    says: The biography records eighteen days without a challenger.
+    source: cien-zhuan
+    at: 卷五（自是邪徒戢翼）
+    quote: 自是邪徒戢翼，竟十八日無人發論

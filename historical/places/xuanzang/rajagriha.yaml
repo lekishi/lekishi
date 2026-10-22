@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 王舍城, the old and new cities of 摩揭陀's early kings, with the 竹園 and the cave of the first council.
+types: [settlement, religious_site]
+names:
+  - form: 王舍城
+    lang: lzh
+    script: Hani
+    roman: Wangshe Cheng
+    scheme: pinyin
+    cite:
+      - id: rajagriha-name
+        says: The biography records 玄奘 going from 那爛陀 to 王舍城 to visit its sites.
+        source: cien-zhuan
+        at: 卷三（法師於那爛陀寺安置已）
+        quote: 法師於那爛陀寺安置已，向王舍城觀禮聖跡
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [85.42, 25.03]
+    notes:
+      Label anchor at Rajgir as recorded in Wikidata (Q863683). It is not an asserted historical coordinate;
+      the identification of 王舍城 with the modern place is the conventional modern reading, not a statement
+      of the cited sources.
+    cite:
+      - id: rajagriha-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q863683 (P625), revision 2554082622
+modern:
+  - form: 王舍城
+    lang: zh-Hant
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q863683
+    url: https://www.wikidata.org/wiki/Q863683
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

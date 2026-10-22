@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  涼州, which the biography calls the great city of 河西, where 玄奘 lectured for more than a month and
+  the governor 李大亮 ordered him back to the capital.
+types: [settlement]
+names:
+  - form: 涼州
+    lang: lzh
+    script: Hani
+    roman: Liangzhou
+    scheme: pinyin
+    cite:
+      - id: liangzhou-name
+        says: The biography describes 涼州 as the great city of 河西, on the merchants' road to the western countries.
+        source: cien-zhuan
+        at: 卷一（涼州為河西都會）
+        quote: 涼州為河西都會，襟帶西蕃、蔥右諸國，商侶往來，無有停絕
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [102.6329, 37.9278]
+    notes:
+      Label anchor at Wuwei as recorded in Wikidata (Q249007). It is not an asserted historical coordinate;
+      the identification of 涼州 with the modern place is the conventional modern reading, not a statement
+      of the cited sources.
+    cite:
+      - id: liangzhou-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q249007 (P625), revision 2550822084
+modern:
+  - form: 武威市
+    lang: zh-Hant
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q249007
+    url: https://www.wikidata.org/wiki/Q249007
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

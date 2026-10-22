@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: At 蘭州 玄奘 stays one night and joins men of 涼州 returning official horses.
+types: [journey]
+date:
+  value: "629"
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 又隨去至蘭州。一宿，遇涼州人送官馬歸
+  cite:
+    - id: lanzhou-stop-629-time
+      says: The biography records the night at 蘭州 without a date, after the 貞觀三年 departure.
+      source: cien-zhuan
+      at: 卷一（又隨去至蘭州。一宿）
+      quote: 又隨去至蘭州。一宿，遇涼州人送官馬歸
+places:
+  - place: lanzhou
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes: Dated to 貞觀三年 by the departure; the biography gives no day.

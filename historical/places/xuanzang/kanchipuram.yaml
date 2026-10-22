@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  建志補羅, the capital of 達羅毗荼 and the southern port for 僧伽羅, where three hundred monks fleeing famine
+  in 僧伽羅 met 玄奘 and he gave up the crossing.
+types: [capital, port]
+names:
+  - form: 建志補羅
+    lang: lzh
+    script: Hani
+    roman: Jianzhi Buluo
+    scheme: pinyin
+    cite:
+      - id: kanchipuram-name
+        says: The biography names 建志補羅 as the capital of 達羅毗荼.
+        source: cien-zhuan
+        at: 卷四（國大都城號建誌補羅）
+        quote: 國大都城號建誌補羅
+  - form: 建誌補羅
+    lang: lzh
+    script: Hani
+    note: The spelling of this transcription of the biography.
+    claim: kanchipuram-name
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      No anchor could be read from Wikidata on 2026-10-21; the record asserts no coordinate until one
+      is cited.
+    cite:
+      - id: kanchipuram-unlocated
+        says: The biography names 建志補羅 but the cited passages state no site for it.
+        source: cien-zhuan
+        at: 卷四（國大都城號建誌補羅）

@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  缽羅耶伽, at the meeting of the 殑伽河 and the 閻牟那河, with the great field of giving where 戒日王 held his
+  sixth seventy-five-day distribution with 玄奘 present.
+types: [religious_site, settlement]
+names:
+  - form: 缽羅耶伽
+    lang: lzh
+    script: Hani
+    roman: Boluoyejia
+    scheme: pinyin
+    cite:
+      - id: prayaga-name
+        says: The biography records 玄奘 reaching 缽羅耶伽 between the 殑伽河 and the 閻牟那河.
+        source: cien-zhuan
+        at: 卷三（渡克伽河南、閻牟那河北）
+        quote: 渡克伽河南、閻牟那河北，至缽羅耶伽國
+      - id: prayaga-xiyu
+        says: The 西域記 opens its account of the country with this sentence.
+        role: supporting
+        source: xiyu-ji
+        at: 卷第五 缽邏耶伽國
+        quote: 缽邏耶伽國周五千餘里。國大都城據兩河交，周二十餘里，稼穡滋盛，果木扶疏。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [81.85, 25.45]
+    notes:
+      Label anchor at Prayagraj as recorded in Wikidata (Q162442). It is not an asserted historical
+      coordinate; the identification of 缽羅耶伽 with the modern place is the conventional modern reading, not
+      a statement of the cited sources.
+    cite:
+      - id: prayaga-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q162442 (P625), revision 2552209884
+modern:
+  - form: 普拉亞格拉吉
+    lang: zh-Hant
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q162442
+    url: https://www.wikidata.org/wiki/Q162442
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

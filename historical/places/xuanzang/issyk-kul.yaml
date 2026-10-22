@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  大清池 (熱海), the great lake beyond 凌山 that the biography measures at fourteen or fifteen hundred
+  里 around; 玄奘 followed its shore north-west.
+types: [landform]
+names:
+  - form: 大清池
+    lang: lzh
+    script: Hani
+    roman: Da Qingchi
+    scheme: pinyin
+    cite:
+      - id: issyk-kul-name
+        says: The biography records 玄奘 reaching a clear lake after leaving the mountains.
+        source: cien-zhuan
+        at: 卷二（出山後至一清池）
+        quote: 出山後至一清池
+  - form: 熱海
+    lang: lzh
+    script: Hani
+    roman: Rehai
+    scheme: pinyin
+    note: The other name the biography gives, explaining that the lake does not freeze.
+    claim: issyk-kul-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [77.25, 42.4167]
+    notes:
+      Label anchor at Issyk-Kul as recorded in Wikidata (Q42191). It is not an asserted historical
+      coordinate; the identification of 大清池 with the modern place is the conventional modern reading, not
+      a statement of the cited sources.
+    cite:
+      - id: issyk-kul-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q42191 (P625), revision 2550271906
+modern:
+  - form: 伊塞克湖
+    lang: zh-Hant
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q42191
+    url: https://www.wikidata.org/wiki/Q42191
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

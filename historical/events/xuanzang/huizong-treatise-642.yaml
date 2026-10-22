@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Back at 那爛陀, 玄奘 writes the 會宗論 in three thousand verses to reconcile the 中觀 and 瑜伽 schools, and
+  the 破惡見論 against a Hīnayāna attack on the Mahāyāna.
+types: [other]
+date:
+  value: 641..643
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 乃著《會宗論》三千頌
+  cite:
+    - id: huizong-treatise-642-time
+      says: The biography records the treatise without a date.
+      source: cien-zhuan
+      at: 卷四（乃著《會宗論》三千頌）
+      quote: 乃著《會宗論》三千頌
+places:
+  - place: nalanda
+    role: site
+participants:
+  - actor: xuanzang
+    role: leader
+notes:
+  The type is other because the event vocabulary has no kind for writing a work. The biography gives
+  no date for this stop. The window is the chapter's reckoning from the stays and seasons the biography
+  reports between the 貞觀三年 departure and the 貞觀十九年 return; the biography's own chronology is not consistent
+  (see the chapter notes), so the window is wide and the stop must never be shown at a midpoint.
+cite:
+  - id: huizong-poejian
+    says: The biography records the 破惡見論 of 1,600 verses.
+    source: cien-zhuan
+    at: 卷四（為一千六百頌）
+    quote: 為一千六百頌，名《破惡見諭》

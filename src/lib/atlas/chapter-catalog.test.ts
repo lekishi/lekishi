@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { listChapters, loadChapter } from "../historical/chapter"
+import { chapterBundle, listChapters, loadChapter } from "../historical/chapter"
 import { loadChapterContent, loadServedChapter, projectChapterContent } from "./chapter-catalog"
 import {
   QIN_CHAPTER,
@@ -34,12 +34,17 @@ const TANG_COVERAGE = {
     },
   ],
 }
+/**
+ * Qin writes a single `story:`, so its story's title is the manifest's title,
+ * read from the manifest: `scripts/check-worker.mjs` marks that title to build
+ * the chapter stale, and the windows are what this suite pins.
+ */
 const QIN_COVERAGE = {
   defaultWindow: { start: -232, end: -225 },
   stories: [
     {
       key: QIN_CHAPTER,
-      title: "The end of the state of Han",
+      title: chapterBundle(QIN_CHAPTER).stories[0]?.title ?? "",
       window: { start: -232, end: -225 },
     },
   ],

@@ -842,7 +842,7 @@ describe("the Tang chapter fixture", () => {
       "lks:place:wananzhou",
       "lks:place:xiayu-shan",
       "lks:place:yazhou",
-      "lks:place:zhenzhou",
+      "lks:place:zhenzhou-hainan",
     ])
   })
 

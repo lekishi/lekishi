@@ -155,6 +155,7 @@
             name={place.label}
             lang={place.lang ?? "und"}
             romanization={place.romanization ?? undefined}
+            modern={place.modern}
             size="title"
           />
         {/if}

@@ -6,7 +6,8 @@ types:
   - occurrence
 date:
   value: 36 BCE
-  calendar: julian
+  calendar: mesoamerican_long_count
+  correlation: not stated
   as_written: 7.16.3.2.13 6 Ben 16 Xul
   cite:
     - id: chiapa-stela-time
@@ -32,6 +33,6 @@ participants:
   - actor: epi-olmec-culture
     role: other
 notes:
-  The date is read from a Long Count, a day count the contract has no calendar for. The record writes
-  the year the cited reading gives, as a Julian year, and keeps the Long Count in as_written; the reading
-  depends on a correlation constant the source does not name.
+  The date is a Long Count. The record writes the year the cited reading gives and keeps the Long Count
+  in as_written; the reading depends on a correlation constant the source does not name, so the
+  correlation is not stated.

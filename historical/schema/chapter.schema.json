@@ -10,7 +10,7 @@
   "properties": {
     "title": { "type": "string", "minLength": 1, "maxLength": 200 },
     "summary": { "$ref": "common.schema.json#/$defs/text" },
-    "window": { "$ref": "common.schema.json#/$defs/date_value" },
+    "window": { "$ref": "common.schema.json#/$defs/span_value" },
     "story": {
       "description": "The chapter's story, when it has one. A chapter with several writes `stories` instead.",
       "type": "object",
@@ -18,7 +18,7 @@
       "additionalProperties": false,
       "properties": {
         "summary": { "$ref": "common.schema.json#/$defs/text" },
-        "span": { "$ref": "common.schema.json#/$defs/date_value" },
+        "span": { "$ref": "common.schema.json#/$defs/span_value" },
         "coverage": { "$ref": "common.schema.json#/$defs/text" },
         "notes": { "$ref": "common.schema.json#/$defs/text" },
         "steps": {

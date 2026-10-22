@@ -31,7 +31,8 @@ historical/v0/
     sources/                    two cited works with different reuse terms
     publication-sets/           one set publishing every example revision and pinning both sources
   vectors/             machine-readable boundary vectors with expected results
-    time.json ordering.json names.json geometry.json documents.json publication.json
+    time.json calendars.json claims.json ordering.json names.json geometry.json
+    documents.json publication.json
 historical/schema/     JSON Schema for the record files an author writes
 historical/places/ actors/ events/ relationships/
                        one YAML record per file, written once for every chapter;
@@ -45,7 +46,9 @@ historical/chapters/
 ```
 
 The contract version string is `lekishi-historical-contract/v0`. Every document
-carries it, and extending a vocabulary or a rule requires a new version.
+carries it. Until the atlas launches, extending a vocabulary or a rule amends v0
+in place, because no published content depends on it yet (owner decision,
+2026-10-22); after launch it requires a new version.
 
 ## Examples are synthetic, chapters are reviewed content
 
@@ -101,9 +104,9 @@ compiled set needs a row in it.
 pnpm test
 ```
 
-The suite validates the examples as one content tree, runs every vector (187
-cases across `time`, `ordering`, `names`, `geometry`, `documents`, and
-`publication`), checks that every code and caveat the vectors expect is
+The suite validates the examples as one content tree, runs every vector (201
+cases across `time`, `calendars`, `claims`, `ordering`, `names`, `geometry`,
+`documents`, and `publication`), checks that every code and caveat the vectors expect is
 documented by the reference semantics, and validates the compiled Tang chapter
 with its own coverage, coda, and exclusion checks. The Qin chapter has its own
 suite with scope, exclusion, uncertainty, dispute, and geometry checks. The

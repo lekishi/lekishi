@@ -81,16 +81,18 @@ notes say how it was converted.
   Amada's 1400 BC (uncalibrated) is kept as a second citation beside the
   calibrated 1650 BCE that Blomster and Salazar Chávez (2020) give; the Fort
   Ancient charcoal dates for Serpent Mound appear only in its dispute.
-- **Long Count dates** are written as Julian years with the Long Count in
-  `as_written`, as the source reads them; neither stela's source names the
-  correlation it uses.
+- **Long Count dates** use the contract's `mesoamerican_long_count` calendar
+  (decided 2026-10-22), with the year the source reads and the Long Count in
+  `as_written`. Neither stela's source names the correlation it uses, so both
+  write `correlation: not stated`.
 - A span whose ends bound the event is `mode: window`; a span the event filled
   is `mode: duration`.
 
-The notation cannot yet mark a date as approximate or give a century
-precision, though contract v0 can store both. Every "about" date is therefore
-written as an exact year or range, and the record's notes say it is
-approximate. This is the first question for the owner in the feasibility note.
+- **"About" dates** carry `~` on each approximate endpoint (since 2026-10-22),
+  so "ca. 1200–400 BCE" is `~1200 BCE..~400 BCE`. The support does not move;
+  the endpoint is only described as approximate. Xihuatoxtla's "by 8,700 cal
+  BP" is a latest date the notation can now write as `before`, but the atlas
+  cannot yet draw an open-ended occurrence, so it stays a single year.
 
 ## Sources
 

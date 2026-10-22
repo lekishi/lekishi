@@ -89,12 +89,22 @@
       }
     },
     "date_value": {
-      "description": "753-12-20, 753-12 or 753; a range 750..754; years before the common era as 233 BCE, 233-10 BCE, or 233 BCE..226 BCE.",
+      "description": "753-12-20, 753-12 or 753; a range 750..754; years before the common era as 233 BCE, 233-10 BCE, or 233 BCE..226 BCE. ~ marks an approximate endpoint (~1000 BCE); 730s or 730s BCE is one decade and 8th century or 1st century BCE one century; after 1451 BCE and before 300 are one-sided.",
       "anyOf": [
         { "type": "integer", "minimum": 1 },
         {
           "type": "string",
-          "pattern": "^[1-9][0-9]*(-[0-9]{2}(-[0-9]{2})?)?( BCE)?(\\.\\.[1-9][0-9]*(-[0-9]{2}(-[0-9]{2})?)?( BCE)?)?$"
+          "pattern": "^((after|before) ~?([1-9][0-9]*(-[0-9]{2}(-[0-9]{2})?)?|[1-9][0-9]*0s|[1-9][0-9]*(st|nd|rd|th) century)( BCE)?|~?([1-9][0-9]*(-[0-9]{2}(-[0-9]{2})?)?|[1-9][0-9]*0s|[1-9][0-9]*(st|nd|rd|th) century)( BCE)?(\\.\\.~?([1-9][0-9]*(-[0-9]{2}(-[0-9]{2})?)?|[1-9][0-9]*0s|[1-9][0-9]*(st|nd|rd|th) century)( BCE)?)?)$"
+        }
+      ]
+    },
+    "span_value": {
+      "description": "A chapter window or story span: a year or a two-sided range of years, 750..779 or 233 BCE..226 BCE, never approximate or one-sided.",
+      "anyOf": [
+        { "type": "integer", "minimum": 1 },
+        {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*( BCE)?(\\.\\.[1-9][0-9]*( BCE)?)?$"
         }
       ]
     },
@@ -107,9 +117,16 @@
         "value": { "$ref": "#/$defs/date_value" },
         "mode": { "enum": ["instant", "window", "duration"] },
         "calendar": { "$ref": "../v0/schema/common.schema.json#/$defs/time/properties/calendar" },
+        "correlation": {
+          "description": "A mesoamerican_long_count date only: the Julian day number of 0.0.0.0.0 the source's conversion uses, such as 584283, or `not stated` when the source gives none.",
+          "anyOf": [{ "type": "integer", "minimum": 0 }, { "const": "not stated" }]
+        },
         "as_written": { "type": "string", "minLength": 1, "maxLength": 500 },
         "cite": { "$ref": "#/$defs/cite" }
-      }
+      },
+      "if": { "properties": { "calendar": { "const": "mesoamerican_long_count" } } },
+      "then": { "required": ["correlation"] },
+      "else": { "not": { "required": ["correlation"] } }
     },
     "local_name": {
       "description": "A name form. The first name is the primary one unless `role` says otherwise. `roman` is an editorial reading aid, never a claim about historical pronunciation. A name links to its own first main claim unless `claim` names another of the record's claims.",

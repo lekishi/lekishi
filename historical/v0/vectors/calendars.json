@@ -1,0 +1,694 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "test_vectors",
+  "area": "calendars",
+  "description": "Calendar vectors: the Mesoamerican Long Count calendar and its correlation, the Julian day number of 0.0.0.0.0 a source's conversion uses. The interval stays the converted civil year, so matching and playback are unchanged.",
+  "vectors": [
+    {
+      "id": "calendars/a-long-count-date-with-its-correlation-is-valid",
+      "why": "A Long Count date names the Julian day number of 0.0.0.0.0 its source's conversion uses, here the GMT correlation, and keeps the converted civil year as its interval.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-a",
+            "kind": "primary"
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-harbour",
+            "published": true,
+            "content": {
+              "summary": "The place vector-harbour.",
+              "place_types": [
+                "port"
+              ],
+              "names": [],
+              "geometry": [
+                {
+                  "claim_id": "lks:claim:vector-90",
+                  "interpretation": "approximate_point",
+                  "geojson": {
+                    "type": "Point",
+                    "coordinates": [
+                      121.0,
+                      31.0
+                    ]
+                  },
+                  "precision": "locality",
+                  "notes": "placed at the locality the source names"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-90",
+                "statement": "The source names vector-harbour.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "entry",
+                      "value": "entry 90"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-stela",
+            "published": true,
+            "content": {
+              "summary": "A stela with a Long Count date.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "7.16.3.2.13 6 Ben 16 Xul",
+                "calendar": "mesoamerican_long_count",
+                "precision": "year",
+                "mode": "instant",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 36,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 36,
+                    "era": "bce"
+                  }
+                },
+                "correlation": 584283
+              },
+              "places": [
+                {
+                  "place_id": "lks:place:vector-harbour",
+                  "role": "site"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-91",
+                "statement": "The source reads the stela's Long Count as 36 BCE.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "entry",
+                      "value": "entry 91"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": true
+      }
+    },
+    {
+      "id": "calendars/a-long-count-date-may-state-no-correlation",
+      "why": "A source that converts a Long Count without naming its correlation is recorded as it stands: the correlation is null and the interval is the source's own year, never one the atlas chose.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-a",
+            "kind": "primary"
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-harbour",
+            "published": true,
+            "content": {
+              "summary": "The place vector-harbour.",
+              "place_types": [
+                "port"
+              ],
+              "names": [],
+              "geometry": [
+                {
+                  "claim_id": "lks:claim:vector-90",
+                  "interpretation": "approximate_point",
+                  "geojson": {
+                    "type": "Point",
+                    "coordinates": [
+                      121.0,
+                      31.0
+                    ]
+                  },
+                  "precision": "locality",
+                  "notes": "placed at the locality the source names"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-90",
+                "statement": "The source names vector-harbour.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "entry",
+                      "value": "entry 90"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-stela",
+            "published": true,
+            "content": {
+              "summary": "A stela with a Long Count date.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "7.16.3.2.13 6 Ben 16 Xul",
+                "calendar": "mesoamerican_long_count",
+                "precision": "year",
+                "mode": "instant",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 36,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 36,
+                    "era": "bce"
+                  }
+                },
+                "correlation": null
+              },
+              "places": [
+                {
+                  "place_id": "lks:place:vector-harbour",
+                  "role": "site"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-91",
+                "statement": "The source reads the stela's Long Count as 36 BCE.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "entry",
+                      "value": "entry 91"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": true
+      }
+    },
+    {
+      "id": "calendars/a-long-count-date-needs-its-correlation",
+      "why": "A converted Long Count date without a correlation field could be read as using whichever constant a reader assumes, so the field is required, null when the source states none.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-a",
+            "kind": "primary"
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-harbour",
+            "published": true,
+            "content": {
+              "summary": "The place vector-harbour.",
+              "place_types": [
+                "port"
+              ],
+              "names": [],
+              "geometry": [
+                {
+                  "claim_id": "lks:claim:vector-90",
+                  "interpretation": "approximate_point",
+                  "geojson": {
+                    "type": "Point",
+                    "coordinates": [
+                      121.0,
+                      31.0
+                    ]
+                  },
+                  "precision": "locality",
+                  "notes": "placed at the locality the source names"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-90",
+                "statement": "The source names vector-harbour.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "entry",
+                      "value": "entry 90"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-stela",
+            "published": true,
+            "content": {
+              "summary": "A stela with a Long Count date.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "7.16.3.2.13 6 Ben 16 Xul",
+                "calendar": "mesoamerican_long_count",
+                "precision": "year",
+                "mode": "instant",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 36,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 36,
+                    "era": "bce"
+                  }
+                }
+              },
+              "places": [
+                {
+                  "place_id": "lks:place:vector-harbour",
+                  "role": "site"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-91",
+                "statement": "The source reads the stela's Long Count as 36 BCE.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "entry",
+                      "value": "entry 91"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "codes": [
+          "schema_violation"
+        ]
+      }
+    },
+    {
+      "id": "calendars/a-correlation-is-a-julian-day-number",
+      "why": "The correlation is an integer day number such as 584283 or 584285, not the name of a correlation.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-a",
+            "kind": "primary"
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-harbour",
+            "published": true,
+            "content": {
+              "summary": "The place vector-harbour.",
+              "place_types": [
+                "port"
+              ],
+              "names": [],
+              "geometry": [
+                {
+                  "claim_id": "lks:claim:vector-90",
+                  "interpretation": "approximate_point",
+                  "geojson": {
+                    "type": "Point",
+                    "coordinates": [
+                      121.0,
+                      31.0
+                    ]
+                  },
+                  "precision": "locality",
+                  "notes": "placed at the locality the source names"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-90",
+                "statement": "The source names vector-harbour.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "entry",
+                      "value": "entry 90"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-stela",
+            "published": true,
+            "content": {
+              "summary": "A stela with a Long Count date.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "7.16.3.2.13 6 Ben 16 Xul",
+                "calendar": "mesoamerican_long_count",
+                "precision": "year",
+                "mode": "instant",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 36,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 36,
+                    "era": "bce"
+                  }
+                },
+                "correlation": "GMT"
+              },
+              "places": [
+                {
+                  "place_id": "lks:place:vector-harbour",
+                  "role": "site"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-91",
+                "statement": "The source reads the stela's Long Count as 36 BCE.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "entry",
+                      "value": "entry 91"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "codes": [
+          "schema_violation"
+        ]
+      }
+    },
+    {
+      "id": "calendars/an-undated-long-count-needs-no-correlation",
+      "why": "With no interval nothing is converted, so there is no correlation to state.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-a",
+            "kind": "primary"
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-harbour",
+            "published": true,
+            "content": {
+              "summary": "The place vector-harbour.",
+              "place_types": [
+                "port"
+              ],
+              "names": [],
+              "geometry": [
+                {
+                  "claim_id": "lks:claim:vector-90",
+                  "interpretation": "approximate_point",
+                  "geojson": {
+                    "type": "Point",
+                    "coordinates": [
+                      121.0,
+                      31.0
+                    ]
+                  },
+                  "precision": "locality",
+                  "notes": "placed at the locality the source names"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-90",
+                "statement": "The source names vector-harbour.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "entry",
+                      "value": "entry 90"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-stela",
+            "published": true,
+            "content": {
+              "summary": "A stela with a Long Count date.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "7.16.3.2.13 6 Ben 16 Xul",
+                "calendar": "mesoamerican_long_count",
+                "precision": "unspecified",
+                "mode": "unknown",
+                "interval": null
+              },
+              "places": [
+                {
+                  "place_id": "lks:place:vector-harbour",
+                  "role": "site"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-91",
+                "statement": "The source reads the stela's Long Count as 36 BCE.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "entry",
+                      "value": "entry 91"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": true
+      }
+    },
+    {
+      "id": "calendars/only-the-long-count-has-a-correlation",
+      "why": "A correlation means nothing on another calendar, so a Julian date that carries one is refused.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-a",
+            "kind": "primary"
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-harbour",
+            "published": true,
+            "content": {
+              "summary": "The place vector-harbour.",
+              "place_types": [
+                "port"
+              ],
+              "names": [],
+              "geometry": [
+                {
+                  "claim_id": "lks:claim:vector-90",
+                  "interpretation": "approximate_point",
+                  "geojson": {
+                    "type": "Point",
+                    "coordinates": [
+                      121.0,
+                      31.0
+                    ]
+                  },
+                  "precision": "locality",
+                  "notes": "placed at the locality the source names"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-90",
+                "statement": "The source names vector-harbour.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "entry",
+                      "value": "entry 90"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-stela",
+            "published": true,
+            "content": {
+              "summary": "A stela with a Long Count date.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "7.16.3.2.13 6 Ben 16 Xul",
+                "calendar": "julian",
+                "precision": "year",
+                "mode": "instant",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 36,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 36,
+                    "era": "bce"
+                  }
+                },
+                "correlation": 584283
+              },
+              "places": [
+                {
+                  "place_id": "lks:place:vector-harbour",
+                  "role": "site"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-91",
+                "statement": "The source reads the stela's Long Count as 36 BCE.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "entry",
+                      "value": "entry 91"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "codes": [
+          "schema_violation"
+        ]
+      }
+    }
+  ]
+}

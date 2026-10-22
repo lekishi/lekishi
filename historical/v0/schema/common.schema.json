@@ -89,12 +89,27 @@
       "additionalProperties": false,
       "properties": {
         "source_expression": {"type": ["string", "null"], "maxLength": 500},
-        "calendar": {"enum": ["julian", "gregorian", "islamic", "chinese_lunisolar", "regnal", "unknown"]},
+        "calendar": {"enum": ["julian", "gregorian", "islamic", "chinese_lunisolar", "regnal", "mesoamerican_long_count", "unknown"]},
+        "correlation": {
+          "description": "For a Mesoamerican Long Count date only: the Julian day number of 0.0.0.0.0 that the source's conversion uses (584283 is the GMT correlation), or null when the source does not state one. The interval is still the source's civil year.",
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
         "precision": {"enum": ["day", "month", "year", "decade", "century", "unspecified"]},
         "mode": {"enum": ["instant", "occurrence_window", "duration", "unknown"]},
         "interval": {"anyOf": [{"$ref": "#/$defs/interval"}, {"type": "null"}]},
         "ordering": {"type": "array", "maxItems": 20, "items": {"$ref": "#/$defs/ordering"}}
-      }
+      },
+      "allOf": [
+        {
+          "if": {"required": ["interval"], "properties": {"calendar": {"const": "mesoamerican_long_count"}, "interval": {"type": "object"}}},
+          "then": {"required": ["correlation"]}
+        },
+        {
+          "if": {"not": {"properties": {"calendar": {"const": "mesoamerican_long_count"}}}},
+          "then": {"not": {"required": ["correlation"]}}
+        }
+      ]
     },
     "locator": {
       "type": "object",

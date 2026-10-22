@@ -6,7 +6,8 @@ types:
   - occurrence
 date:
   value: 32 BCE
-  calendar: julian
+  calendar: mesoamerican_long_count
+  correlation: not stated
   as_written: 7.16.6.16.18 6 Etznab 1 Uo
   cite:
     - id: tres-zapotes-time
@@ -23,9 +24,9 @@ participants:
     role: other
 notes:
   Guerrero gives a day, 5 September 32 BC, without naming the calendar or the correlation; the record
-  keeps the year only. The date is read from a Long Count, a day count the contract has no calendar for.
-  The record writes the year the cited reading gives, as a Julian year, and keeps the Long Count in as_written;
-  the reading depends on a correlation constant the source does not name.
+  keeps the year only. The date is a Long Count. The record writes the year the cited reading gives and
+  keeps the Long Count in as_written; the reading depends on a correlation constant the source does not
+  name, so the correlation is not stated.
 dispute:
   status: disputed
   summary:

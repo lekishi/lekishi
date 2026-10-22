@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  圓仁 travels with the 838 embassy from Japan to 揚州, by way of the wreck on the 海陵 coast and the
+  canal from 如皐. The relationship records documented movement only and draws no route.
+types: [travel]
+from: ennin
+to: yangzhou
+date:
+  value: 838-06..838-07
+  mode: duration
+  calendar: regnal
+  as_written: 承和五年六月十三日 — 開成三年七月廿五日
+notes: "No geometry is attached: the documented movements are the dated events and the named places."
+cite:
+  - id: ennin-travel-to-tang-basis
+    says:
+      The diary narrates the boarding, the crossing, the landfall in 海陵縣 and the arrival at 揚州 in
+      this order.
+    source: nitto-guho-junrei-gyoki
+    at: 卷一 承和五年六月十三日 — 七月廿五日

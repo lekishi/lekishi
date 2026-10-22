@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The party reaches 萊州 and lodges at its 龍興寺, whose pagoda and cloisters lie in ruin with only two monks left.
+types: [journey]
+date:
+  value: 840-03-15
+  calendar: chinese_lunisolar
+  as_written: 開成五年三月十五日
+  cite:
+    - id: ennin-laizhou-840-time
+      says: The diary records reaching 萊州 after the meal on the 15th.
+      source: nitto-guho-junrei-gyoki
+      at: 卷二 開成五年三月十五日
+      quote: 齋後行十五里到萊州。
+places:
+  - place: laizhou
+    role: waypoint
+participants:
+  - actor: ennin
+    role: leader
+  - actor: weizheng
+    role: participant
+  - actor: weixiao
+    role: participant
+  - actor: tei-yuman
+    role: participant

@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 海陵縣, the county of 揚州 on whose coast the 838 embassy's first ship was wrecked. Its 白潮鎮 took in the party, and the boats passed the county seat on their way up the canal to 揚州.
+types: [region]
+names:
+  - form: 海陵縣
+    lang: lzh
+    script: Hani
+    roman: Hailing xian
+    scheme: pinyin
+    cite:
+      - id: hailing-name
+        says: The diary records the party reaching a garrison village in 白潮鎮 of 海陵縣 on 七月三日.
+        source: nitto-guho-junrei-gyoki
+        at: 卷一 承和五年七月三日
+        quote: 午時僅到海陵縣白潮鎮管內守捉軍中村。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [119.91505, 32.49245]
+    notes: Label anchor at the modern 海陵区 of 泰州 (Wikidata Q1197445). It is not an asserted historical coordinate.
+    cite:
+      - id: hailing-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for Hailing District of Taizhou; no historical coordinate is asserted.
+        source: wikidata
+        at: Q1197445 (P625), revision 2555045848
+modern:
+  - form: 海陵区
+    lang: zh-Hans
+    script: Hani
+    note: Modern district recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q1197445
+    url: https://www.wikidata.org/wiki/Q1197445
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.
+notes: The county is the region the landfall villages (東梁豐村, 守捉軍中村) lay in; the villages themselves are not placed.

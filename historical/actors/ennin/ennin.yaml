@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  圓仁, the Tendai monk who sailed with the 838 embassy as a short-term scholar monk (還學僧, 請益僧),
+  stayed behind in Tang when it sailed home in 839, went on pilgrimage to 五臺山 and studied in 長安
+  until the 會昌 persecution expelled foreign monks in 845, and returned to Japan in 847. His diary is
+  the source of every record in this story.
+types: [person]
+names:
+  - form: 圓仁
+    lang: lzh
+    script: Hani
+    roman: Ennin
+    scheme: hepburn
+    note: The Japanese reading is given as the reading aid; the diary writes only the characters.
+    cite:
+      - id: ennin-name
+        says:
+          The 揚府's reply of 承和五年八月四日 names 還學僧圓仁 with his novices 惟正 and 惟曉 and the sailor 丁雄滿
+          as asking to go to 國清寺 in 台州.
+        source: nitto-guho-junrei-gyoki
+        at: 卷一 承和五年八月四日
+        quote: 還學僧圓仁。沙彌惟正惟曉。水手丁雄滿右請往台州國清寺尋師。
+roles:
+  - role: monk
+    note: The diary records him as a monk seeking the Dharma (求法僧) from the 838 crossing to the
+      847 return.
+    date:
+      value: 838..847
+      mode: duration
+      calendar: regnal
+      as_written: 承和五年六月十三日 — 會昌七年十二月十四日
+    cite:
+      - id: ennin-role
+        says:
+          The diary opens with the embassy's ships on 承和五年六月十三日 and closes on 會昌七年十二月十四日 at
+          大宰府; throughout, 圓仁 signs his petitions 日本國求法僧圓仁.
+        sources:
+          - source: nitto-guho-junrei-gyoki
+            at: 卷一 承和五年六月十三日
+          - source: nitto-guho-junrei-gyoki
+            at: 卷四 會昌七年十二月十四日
+notes:
+  The diary gives his age as 50 in a list of 會昌二年五月 and 51 in 會昌三年五月. His later career
+  (the title 慈覺大師, the 天台座主) is outside the diary and is not recorded here.
+cites:
+  notes:
+    - id: ennin-age
+      says: The resident lists of 會昌二年 and 會昌三年 give 圓仁's age as 50 and then 51.
+      sources:
+        - source: nitto-guho-junrei-gyoki
+          at: 卷三 會昌二年五月 (資聖寺 list)
+        - source: nitto-guho-junrei-gyoki
+          at: 卷三 會昌三年五月 (資聖寺 list)

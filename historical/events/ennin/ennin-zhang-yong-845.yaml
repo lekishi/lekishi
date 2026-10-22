@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 張詠, who had arranged his permits in 840, recognizes him with joy, takes him in, and promises to feed him until a ship for Japan can be found.
+types: [journey, exchange]
+date:
+  value: 845-08-27
+  calendar: chinese_lunisolar
+  as_written: 會昌五年八月廿七日
+  cite:
+    - id: ennin-zhang-yong-845-time
+      says: The diary records reaching the office in charge of the Silla households on the 27th.
+      source: nitto-guho-junrei-gyoki
+      at: 卷四 會昌五年八月廿七日
+      quote: 廿七日到勾當新羅所。
+places:
+  - place: wendeng
+    role: end
+    note: The office lay 70 里 south-east of the county seat, in 青寧鄉.
+participants:
+  - actor: ennin
+    role: leader
+  - actor: weizheng
+    role: participant
+  - actor: tei-yuman
+    role: participant
+  - actor: zhang-yong
+    role: host

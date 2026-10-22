@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "圓仁 walks the terraces of 五臺山 over four days: the central, western and northern terraces, then the eastern terrace and the 金剛窟, back to 大華嚴寺."
+types: [journey]
+date:
+  value: 840-05-20..840-05-23
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: 開成五年五月廿日 — 廿三日
+  cite:
+    - id: ennin-five-terraces-840-time
+      says: The diary records setting out to tour the terraces on the 20th; the entries to the 23rd describe the circuit.
+      source: nitto-guho-junrei-gyoki
+      at: 卷三 開成五年五月廿日
+      quote: 廿日始巡臺去。
+places:
+  - place: wutaishan
+    role: site
+participants:
+  - actor: ennin
+    role: leader
+  - actor: weizheng
+    role: participant
+  - actor: weixiao
+    role: participant

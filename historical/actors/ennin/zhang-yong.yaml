@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  張詠, the 押衙 in charge of the Silla households of 文登縣 (勾當新羅押衙). He obtained 圓仁's county
+  permit in 840, took him in again when he came back as a laicized monk in 845, and built the ship
+  meant to carry him home in 847.
+types: [person]
+names:
+  - form: 張詠
+    lang: lzh
+    script: Hani
+    roman: Zhang Yong
+    scheme: pinyin
+    cite:
+      - id: zhang-yong-name
+        says: The diary names the prefecture's 軍事押衙張詠, to whom the 赤山院 sent 圓仁's request in 840.
+        source: nitto-guho-junrei-gyoki
+        at: 卷二 開成五年正月廿日
+        quote: 報當州軍事押衙張詠宅去。
+roles:
+  - role: official
+    note: 平盧軍節度同十將兼登州諸軍事押衙, in charge of the Silla households of 文登縣.
+    date:
+      value: 840..847
+      mode: duration
+      calendar: chinese_lunisolar
+      as_written: 開成五年正月廿日 — 會昌七年閏三月二日
+    cite:
+      - id: zhang-yong-role
+        says:
+          The diary gives his title on 圓仁's return to his office on 會昌五年八月廿七日 and records that he
+          had handled the permits of 840.
+        source: nitto-guho-junrei-gyoki
+        at: 卷四 會昌五年八月廿七日
+        quote: 勑平盧軍節度同十將兼登州諸軍事押衙張詠。勾當文登縣界新羅人戶

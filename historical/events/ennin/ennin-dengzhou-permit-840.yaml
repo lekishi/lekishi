@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 登州's government issues a document forwarding 圓仁's request for a permit to visit 五臺山 to the 節度使 at 青州.
+types: [exchange]
+date:
+  value: 840-03-11
+  calendar: chinese_lunisolar
+  as_written: 開成五年三月十一日
+  cite:
+    - id: ennin-dengzhou-permit-840-time
+      says: The diary records receiving two documents from the prefecture on the 11th.
+      source: nitto-guho-junrei-gyoki
+      at: 卷二 開成五年三月十一日
+      quote: 得州牒兩道
+places:
+  - place: dengzhou
+    role: site
+participants:
+  - actor: ennin
+    role: leader

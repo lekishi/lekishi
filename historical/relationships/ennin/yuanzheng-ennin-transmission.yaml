@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  元政 of 大興善寺 transmits the 金剛界 teaching to 圓仁, beginning with consecration on 開成五年十月廿九日
+  and ending with the copying of his texts in 會昌元年四月.
+types: [transmission]
+from: yuanzheng
+to: ennin
+date:
+  value: 840-10-29..841-04-22
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: 開成五年十月廿九日 始受金剛界大法 — 四月廿二日寫了 (會昌元年)
+cite:
+  - id: yuanzheng-ennin-transmission-basis
+    says:
+      The diary records 圓仁 beginning to receive the 金剛界 teaching from 元政 and, in 會昌元年, 元政 saying he
+      had handed on all he knew of it.
+    sources:
+      - source: nitto-guho-junrei-gyoki
+        at: 卷三 開成五年十月廿九日
+        quote: 參見元政和尚。始受金剛界大法。
+      - source: nitto-guho-junrei-gyoki
+        at: 卷三 會昌元年四月
+        quote: 余所解金剛界大法。盡付囑了。

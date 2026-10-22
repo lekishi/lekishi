@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: At 赤山 圓仁 hears that the emperor has been dead for months and that the prefectures have finished their mourning.
+types: [occurrence]
+date:
+  value: 846-04-15
+  calendar: chinese_lunisolar
+  as_written: 會昌六年四月十五日
+  cite:
+    - id: ennin-hears-of-death-846-time
+      says: The diary records hearing on 四月十五日 that the emperor had died some months before.
+      source: nitto-guho-junrei-gyoki
+      at: 卷四 會昌六年四月十五日
+      quote: 四月十五日。聞天子崩來數月諸道州縣舉哀着孝訖。
+places:
+  - place: chishan
+    role: site
+participants:
+  - actor: ennin
+    role: leader

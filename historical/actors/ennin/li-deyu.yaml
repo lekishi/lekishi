@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  李德裕, military governor of 淮南 at 揚州 when the embassy arrived in 838; the diary calls him 李相公.
+  He refused to send 圓仁 to 台州 without imperial leave, and in 840 he was recalled to court as chief
+  minister.
+types: [person]
+names:
+  - form: 李德裕
+    lang: lzh
+    script: Hani
+    roman: Li Deyu
+    scheme: pinyin
+    cite:
+      - id: li-deyu-name
+        says:
+          The diary records that 李德裕, the governor at 揚州, was summoned to the capital and made chief
+          minister on 九月三日.
+        source: nitto-guho-junrei-gyoki
+        at: 卷三 開成五年九月五日
+        quote: 揚州節度使繫李德裕。有勑令入京。九月三日。入內任宰相。
+  - form: 李相公
+    lang: lzh
+    script: Hani
+    note: How the diary refers to him in 838–839.
+    cite:
+      - id: li-deyu-title
+        says: The diary's 838 entries call the governor at 揚府 李相公.
+        source: nitto-guho-junrei-gyoki
+        at: 卷一 承和五年八月四日
+roles:
+  - role: official
+    note: 淮南節度使 at 揚州, then 宰相 from 開成五年九月 (840).
+    cite:
+      - id: li-deyu-role
+        says: The diary records him as governor at 揚州 and then as chief minister.
+        source: nitto-guho-junrei-gyoki
+        at: 卷三 開成五年九月五日
+notes:
+  The diary's 李相公 of 838 is identified with 李德裕 by the 840 entry, which names 揚州節度使李德裕; the
+  838 entries themselves give only the title.

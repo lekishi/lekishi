@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: Over the winter the diary records the 赤山院's lectures and rites, held in the Silla manner and with Silla chant rather than Tang chant.
+types: [process]
+date:
+  value: 839-11
+  calendar: chinese_lunisolar
+  as_written: 開成四年十一月
+  cite:
+    - id: ennin-silla-rites-839-time
+      says: The diary describes the cloister's lecture ritual, noting that the chant followed Silla usage rather than Tang.
+      source: nitto-guho-junrei-gyoki
+      at: 卷二 開成四年十一月 (赤山院講經儀式)
+      quote: 音曲一依新羅。不似唐音。
+places:
+  - place: chishan
+    role: site
+participants:
+  - actor: ennin
+    role: witness
+notes: "Month precision: the ritual descriptions sit between dated entries of 十一月."

@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: Escorted from county to county with nineteen Tang monks also being sent home, 圓仁 passes 潼關.
+types: [journey]
+date:
+  value: 845-05-22
+  calendar: chinese_lunisolar
+  as_written: 會昌五年五月廿二日
+  cite:
+    - id: ennin-tongguan-845-time
+      says: The diary records passing 潼關, 'the throat of the capital', on the 22nd.
+      source: nitto-guho-junrei-gyoki
+      at: 卷四 會昌五年五月廿二日
+      quote: 廿二日過潼關。是國城之咽喉也。
+places:
+  - place: tongguan
+    role: waypoint
+participants:
+  - actor: ennin
+    role: leader
+  - actor: weizheng
+    role: participant
+  - actor: tei-yuman
+    role: participant

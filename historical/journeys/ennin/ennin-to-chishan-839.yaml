@@ -1,0 +1,49 @@
+# Journey record in the shape RFD 2 proposes (AUTHORING_FORMAT.adoc, "Proposed: the journey record").
+# The kind was decided on 2026-10-21; the shape is not yet accepted, and the compiler does not read
+# historical/journeys/ until it is.
+title: 圓仁 from 揚州 to 赤山, 839
+summary: >-
+  圓仁 goes north with the returning embassy by the canal to 楚州 and down the 淮 to the sea, goes
+  ashore at 海州 to stay in Tang, is sent back to the second ship, and is carried up the coast to 乳山
+  and 赤山, where the ship leaves him behind.
+travellers:
+  - actor: ennin
+    role: leader
+  - actor: weizheng
+    role: participant
+  - actor: weixiao
+    role: participant
+  - actor: tei-yuman
+    role: participant
+stops:
+  - ennin-yangzhou-departure-839
+  - event: ennin-chuzhou-arrival-839
+    by: river
+  - ennin-chuzhou-departure-839
+  - event: ennin-lianshui-839
+    by: river
+    cite:
+      says: The ships went out of the canal into the 淮 and sailed east down it.
+      source: nitto-guho-junrei-gyoki
+      at: 卷一 開成四年三月廿五日
+      quote: 乘淮東行。
+  - event: ennin-donghai-anchorage-839
+    by: sea
+  - ennin-stays-ashore-839
+  - ennin-haizhou-escort-839
+  - ennin-reboards-839
+  - event: ennin-rushan-839
+    by: sea
+  - event: ennin-chishan-arrival-839
+    by: sea
+cite:
+  - id: ennin-to-chishan-sequence
+    says: >-
+      The diary narrates the departure from 揚州, 楚州, the 淮, the anchorage at 東海山, the attempt to
+      stay ashore, the return to the second ship, 乳山 and the anchorage at 赤山, in this order and by
+      day.
+    sources:
+      - source: nitto-guho-junrei-gyoki
+        at: 卷一 開成四年二月廿一日 — 四月十八日
+      - source: nitto-guho-junrei-gyoki
+        at: 卷二 開成四年四月十九日 — 六月七日

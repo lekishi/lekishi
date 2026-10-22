@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 大興善寺, the temple in 長安 whose 翻經院 had been the translation hall of 金剛智 and 不空, where 圓仁 received the 金剛界 teaching from 元政 in 840.
+types: [religious_site]
+names:
+  - form: 大興善寺
+    lang: lzh
+    script: Hani
+    roman: Daxingshan si
+    scheme: pinyin
+    cite:
+      - id: daxingshan-temple-name
+        says: The diary records going to 大興善寺 and entering its 翻經院 on the 29th.
+        source: nitto-guho-junrei-gyoki
+        at: 卷三 開成五年十月廿九日
+        quote: 往大興善寺。入勑翻經院。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [108.938753403, 34.228466602]
+    notes: Label anchor at the modern temple of 大兴善寺 in Xi'an (Wikidata Q4155168). It is not an asserted historical coordinate.
+    cite:
+      - id: daxingshan-temple-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the temple building in Xi'an; no historical coordinate is asserted.
+        source: wikidata
+        at: Q4155168 (P625), revision 2541772745
+modern:
+  - form: 大兴善寺
+    lang: zh-Hans
+    script: Hani
+    note: The modern temple of the same name, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q4155168
+    url: https://www.wikidata.org/wiki/Q4155168
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

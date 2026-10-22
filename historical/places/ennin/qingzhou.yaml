@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 青州, seat of the 節度使 for the peninsula, where 圓仁 waited ten days in 840 for the permit that let him travel to 五臺山.
+types: [settlement]
+names:
+  - form: 青州
+    lang: lzh
+    script: Hani
+    roman: Qingzhou
+    scheme: pinyin
+    cite:
+      - id: qingzhou-name
+        says: The diary records reaching 青州 and lodging at its 龍興寺.
+        source: nitto-guho-junrei-gyoki
+        at: 卷二 開成五年三月廿一日
+        quote: 到青州府龍興寺宿。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [118.479722222, 36.696666666]
+    notes: Label anchor at the modern city of 青州 (Wikidata Q1360781). It is not an asserted historical coordinate.
+    cite:
+      - id: qingzhou-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the city of Qingzhou; no historical coordinate is asserted.
+        source: wikidata
+        at: Q1360781 (P625), revision 2526582053
+modern:
+  - form: 青州市
+    lang: zh-Hans
+    script: Hani
+    note: Modern city recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q1360781
+    url: https://www.wikidata.org/wiki/Q1360781
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

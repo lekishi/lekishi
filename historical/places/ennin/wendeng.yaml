@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 文登縣, the county of 登州 that held 赤山 and its Silla households. It issued 圓仁's first travel permit in 840 and received him back in 845.
+types: [settlement]
+names:
+  - form: 文登縣
+    lang: lzh
+    script: Hani
+    roman: Wendeng xian
+    scheme: pinyin
+    cite:
+      - id: wendeng-name
+        says: The diary records reaching 文登縣 by night on the 20th.
+        source: nitto-guho-junrei-gyoki
+        at: 卷二 開成五年二月廿日
+        quote: 夜到文登縣。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [122.05, 37.2]
+    notes: Label anchor at the modern district of 文登 (Wikidata Q1207049). It is not an asserted historical coordinate.
+    cite:
+      - id: wendeng-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for Wendeng District; no historical coordinate is asserted.
+        source: wikidata
+        at: Q1207049 (P625), revision 2526579573
+modern:
+  - form: 文登区
+    lang: zh-Hans
+    script: Hani
+    note: Modern district recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q1207049
+    url: https://www.wikidata.org/wiki/Q1207049
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

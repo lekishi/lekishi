@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 五臺山 (清凉山), the mountain of 文殊 with its five terraces, one of the two ordination platforms the diary says Tang still allowed. 圓仁 reached it on 開成五年四月廿八日 (840), walked its terraces, and stayed until 七月一日.
+types: [landform, religious_site]
+names:
+  - form: 五臺山
+    lang: lzh
+    script: Hani
+    roman: Wutai shan
+    scheme: pinyin
+    cite:
+      - id: wutaishan-name
+        says: The diary names 五臺山 as one of the two places with an ordination platform.
+        source: nitto-guho-junrei-gyoki
+        at: 卷一 承和五年十月十九日
+        quote: 唯有五臺山戒壇一處。
+  - form: 清凉山
+    lang: lzh
+    script: Hani
+    note: The mountain's other name, used when 圓仁 first sees the central terrace.
+    cite:
+      - id: wutaishan-qingliang
+        says: On first seeing the central terrace the diary calls the place 清凉山, the golden world of 文殊.
+        source: nitto-guho-junrei-gyoki
+        at: 卷二 開成五年四月廿八日
+        quote: 此即清凉山金色世界。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [113.566944444, 39.081388888]
+    notes: Label anchor at the mountain Wikidata records as 五台山 (Wikidata Q120314). It is not an asserted historical coordinate.
+    cite:
+      - id: wutaishan-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for Mount Wutai; no historical coordinate is asserted.
+        source: wikidata
+        at: Q120314 (P625), revision 2551138416
+modern:
+  - form: 五台山
+    lang: zh-Hans
+    script: Hani
+    note: Modern name recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q120314
+    url: https://www.wikidata.org/wiki/Q120314
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.
+notes: 竹林寺, 大華嚴寺 and the five terraces are named in event notes; none is placed separately.

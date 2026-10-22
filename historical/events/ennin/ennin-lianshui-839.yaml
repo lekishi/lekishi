@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: Sailing down the 淮, the ships stop south of 漣水縣.
+types: [journey]
+date:
+  value: 839-03-25
+  calendar: chinese_lunisolar
+  as_written: 開成四年三月廿五日未時
+  cite:
+    - id: ennin-lianshui-839-time
+      says: The diary records reaching the south of 漣水縣 on the 25th.
+      source: nitto-guho-junrei-gyoki
+      at: 卷一 開成四年三月廿五日
+      quote: 到徐州管內漣水縣南。
+places:
+  - place: lianshui
+    role: waypoint
+participants:
+  - actor: ennin
+    role: leader

@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: 金珍's ship carries 圓仁 from the 山東 coast by way of Silla's islands to 肥前國 and 博多, 847.
+types: [travel]
+from: kim-jin
+to: ennin
+date:
+  value: 847-07-20..847-09-18
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: 會昌七年七月廿日 上船 — 九月十八日 到鴻臚館前
+cite:
+  - id: kim-jin-ennin-travel-basis
+    says: The diary records boarding 金珍's ship at 長淮浦 on 七月廿日 and arriving before the 鴻臚館 on 九月十八日.
+    sources:
+      - source: nitto-guho-junrei-gyoki
+        at: 卷四 會昌七年七月廿日
+      - source: nitto-guho-junrei-gyoki
+        at: 卷四 會昌七年九月十八日

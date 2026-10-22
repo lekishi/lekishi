@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: At 漣水縣 the Silla ward gives him a cool welcome; a former 清海鎮 officer he had met at 赤山 is his contact.
+types: [journey]
+date:
+  value: 845-07-09
+  calendar: chinese_lunisolar
+  as_written: 會昌五年七月九日
+  cite:
+    - id: ennin-lianshui-845-time
+      says: The diary records reaching 漣水縣 at mealtime on the 9th.
+      source: nitto-guho-junrei-gyoki
+      at: 卷四 會昌五年七月九日
+      quote: 九日齋時。到漣水縣。
+places:
+  - place: lianshui
+    role: waypoint
+participants:
+  - actor: ennin
+    role: leader
+  - actor: weizheng
+    role: participant
+  - actor: tei-yuman
+    role: participant

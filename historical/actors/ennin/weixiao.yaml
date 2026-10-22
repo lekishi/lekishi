@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  惟曉, 圓仁's second disciple. He was tonsured in 揚州 in 838, took the full precepts at 五臺山 in 840,
+  and died in 長安 on 會昌三年七月廿四日 (843) after eight months of illness; 圓仁 buried him outside
+  春明門.
+types: [person]
+names:
+  - form: 惟曉
+    lang: lzh
+    script: Hani
+    roman: Igyō
+    scheme: hepburn
+    note: The Japanese reading is an editorial aid.
+    cite:
+      - id: weixiao-name
+        says: The 揚府's reply of 承和五年八月四日 names the novices 惟正 and 惟曉 with 圓仁.
+        source: nitto-guho-junrei-gyoki
+        at: 卷一 承和五年八月四日
+  - form: 惟晈
+    lang: lzh
+    script: Hani
+    note: The form the transcription writes in the 838 tonsure and ordination entries.
+    cite:
+      - id: weixiao-variant
+        says:
+          The entries of 承和五年十月 write the name 惟晈 when he is tonsured and his ordination is
+          requested.
+        source: nitto-guho-junrei-gyoki
+        at: 卷一 承和五年十月十三日; 十月十九日
+roles:
+  - role: monk
+    date:
+      value: 838..843
+      mode: duration
+      calendar: regnal
+      as_written: 承和五年八月四日 沙彌惟曉 — 會昌三年七月廿四日 身亡
+    cite:
+      - id: weixiao-role
+        says: The diary names him as a novice in 838 and records his death on 會昌三年七月廿四日.
+        sources:
+          - source: nitto-guho-junrei-gyoki
+            at: 卷一 承和五年八月四日
+          - source: nitto-guho-junrei-gyoki
+            at: 卷四 會昌三年七月廿四日

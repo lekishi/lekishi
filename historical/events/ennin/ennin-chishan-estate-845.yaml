@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: With the 赤山 cloister demolished under the edicts, 張詠 lodges 圓仁 for the winter in a room at its estate and feeds him himself.
+types: [occurrence]
+date:
+  value: 845-09-22
+  calendar: chinese_lunisolar
+  as_written: 會昌五年九月廿二日
+  cite:
+    - id: ennin-chishan-estate-845-time
+      says: The diary records that, the cloister having been demolished under the edict, 張詠 lodged him in a room of the temple estate and fed him.
+      source: nitto-guho-junrei-gyoki
+      at: 卷四 會昌五年九月廿二日
+      quote: 緣州縣准勅毀折盡无房舍可居。大使處分。於寺莊中一房安置。飯食大使供也。
+places:
+  - place: chishan
+    role: site
+participants:
+  - actor: ennin
+    role: leader
+  - actor: zhang-yong
+    role: host

@@ -1,0 +1,43 @@
+# Journey record in the shape RFD 2 proposes (AUTHORING_FORMAT.adoc, "Proposed: the journey record").
+# The kind was decided on 2026-10-21; the shape is not yet accepted, and the compiler does not read
+# historical/journeys/ until it is.
+title: 圓仁's crossing to 揚州, 838
+summary: >-
+  The embassy's first ship, with 圓仁 aboard, waits at 志賀嶋, leaves 有救嶋 for the open sea, is
+  wrecked off the 海陵 coast and drifts ashore; barges then carry the party up the canal by 如皐 and
+  海陵縣 to 揚州.
+travellers:
+  - actor: ennin
+    role: participant
+  - actor: fujiwara-no-tsunetsugu
+    role: leader
+stops:
+  - ennin-shikanoshima-838
+  - event: ennin-ukujima-838
+    by: sea
+  - event: ennin-landfall-838
+    by: sea
+    driven: true
+    cite:
+      says: After the ship ran aground and its mast and rudder were cut away, it drifted with the waves.
+      source: nitto-guho-junrei-gyoki
+      at: 卷一 承和五年六月廿八日
+      quote: 仍截桅弃柂。舶即隨濤漂蕩。
+  - event: ennin-rugao-838
+    by: river
+    cite:
+      says: The party's goods and people went up from the coast by water on barges towed by buffalo.
+      source: nitto-guho-junrei-gyoki
+      at: 卷一 承和五年七月十八日
+      quote: 巳時錄事以下水手已上從水路向州去。
+  - event: ennin-hailing-838
+    by: river
+  - event: ennin-yangzhou-arrival-838
+    by: river
+cite:
+  - id: ennin-to-yangzhou-sequence
+    says: >-
+      The diary narrates 志賀嶋, 有救嶋, the wreck, the landfall in 白潮鎮, the canal journey by 如皐 and
+      海陵縣, and the arrival at 揚州, in this order and by day.
+    source: nitto-guho-junrei-gyoki
+    at: 卷一 承和五年六月十三日 — 七月廿五日

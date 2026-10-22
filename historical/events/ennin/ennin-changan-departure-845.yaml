@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: With travel papers from the 京兆府, 圓仁 leaves 長安 in the evening; 楊敬之's messenger and the officer 李元佐 see him past 春明門 and spend the night with him at 長樂坡.
+types: [journey]
+date:
+  value: 845-05-15
+  calendar: chinese_lunisolar
+  as_written: 會昌五年五月十五日
+  cite:
+    - id: ennin-changan-departure-845-time
+      says: The diary records leaving the city in the evening of the 15th.
+      source: nitto-guho-junrei-gyoki
+      at: 卷四 會昌五年五月十五日
+      quote: 晚際出城。
+places:
+  - place: changan
+    role: start
+participants:
+  - actor: ennin
+    role: leader
+  - actor: weizheng
+    role: participant
+  - actor: tei-yuman
+    role: participant
+  - actor: yang-jingzhi
+    role: other
+    note: Sent letters for officials on the road.

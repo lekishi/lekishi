@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 海州 and its 東海縣, where 圓仁 went ashore to stay in Tang in 開成四年四月 (839) and was sent back to the ships, and where he passed again in 845 and 847.
+types: [region]
+names:
+  - form: 海州
+    lang: lzh
+    script: Hani
+    roman: Haizhou
+    scheme: pinyin
+    cite:
+      - id: haizhou-name
+        says: The diary records anchoring on the east side of 東海山 in 海州's 東海縣.
+        source: nitto-guho-junrei-gyoki
+        at: 卷一 開成四年三月廿九日
+        quote: 到海州管內東海縣東海山東邊。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [119.133055555, 34.5725]
+    notes: Label anchor at the historical prefecture of 海州 (Wikidata Q10387506). It is not an asserted historical coordinate.
+    cite:
+      - id: haizhou-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the historical prefecture of 海州; no historical coordinate is asserted.
+        source: wikidata
+        at: Q10387506 (P625), revision 2459489892
+modern:
+  - form: 海州区
+    lang: zh-Hans
+    script: Hani
+    note: Modern district of 連雲港 recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q10387506
+    url: https://www.wikidata.org/wiki/Q10387506
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.
+notes: 東海山, 宿城村, the 海龍王廟 and the 田灣浦 anchorage are named in event notes; none is placed.

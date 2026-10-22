@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The party walks north and reaches 文登縣 by night, lodging at 惠海寺.
+types: [journey]
+date:
+  value: 840-02-20
+  calendar: chinese_lunisolar
+  as_written: 開成五年二月廿日
+  cite:
+    - id: ennin-wendeng-840-time
+      says: The diary records reaching 文登縣 at night on the 20th.
+      source: nitto-guho-junrei-gyoki
+      at: 卷二 開成五年二月廿日
+      quote: 夜到文登縣。
+places:
+  - place: wendeng
+    role: waypoint
+participants:
+  - actor: ennin
+    role: leader
+  - actor: weizheng
+    role: participant
+  - actor: weixiao
+    role: participant
+  - actor: tei-yuman
+    role: participant

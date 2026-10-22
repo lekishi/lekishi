@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: At dawn 對馬 is in sight to the east, at noon the mountains of Japan, and at nightfall the ship anchors at 鹿嶋 in 肥前國.
+types: [journey]
+date:
+  value: 847-09-10
+  calendar: chinese_lunisolar
+  as_written: 會昌七年九月十日
+  cite:
+    - id: ennin-kashima-847-time
+      says: The diary records sighting 對馬 at dawn and the mountains of Japan at noon on the 10th.
+      source: nitto-guho-junrei-gyoki
+      at: 卷四 會昌七年九月十日
+      quote: 向東遙見對馬嶋。午時。前路見本國山。
+places:
+  - place: kashima-hizen
+    role: waypoint
+participants:
+  - actor: ennin
+    role: leader
+  - actor: weizheng
+    role: participant
+  - actor: tei-yuman
+    role: participant
+cites:
+  places:
+    - id: ennin-kashima-place
+      says: The diary records anchoring at 鹿嶋 in the north of 松浦郡 of 肥前國.
+      source: nitto-guho-junrei-gyoki
+      at: 卷四 會昌七年九月十日
+      quote: 到肥前國松浦郡北界鹿嶋泊船。

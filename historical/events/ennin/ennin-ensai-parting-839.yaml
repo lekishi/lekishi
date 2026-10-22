@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The long-term student monk 圓載 leaves 楚州 by boat for 揚州, on his way to 台州; 圓仁 stays with the returning embassy.
+types: [journey]
+date:
+  value: 839-02-28
+  calendar: chinese_lunisolar
+  as_written: 開成四年二月廿八日
+  cite:
+    - id: ennin-ensai-parting-839-time
+      says: The diary records the long-term student monk and two attendants setting out for 揚州 on the 28th.
+      source: nitto-guho-junrei-gyoki
+      at: 卷一 開成四年二月廿八日
+      quote: 留學僧并傔從二人。與勾當王友真駕船。向揚州發去。
+places:
+  - place: chuzhou
+    role: start
+participants:
+  - actor: ensai
+    role: leader
+  - actor: ennin
+    role: leader

@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  丁雄滿, a sailor of the embassy assigned to 圓仁 as his attendant (行者). He stayed in Tang with him
+  from 839 to 847 and carried letters and goods between 赤山 and 楚州 in 846–847.
+types: [person]
+names:
+  - form: 丁雄滿
+    lang: ja
+    script: Hani
+    note: No reading is given; the name's Japanese reading is not settled by the diary.
+    cite:
+      - id: tei-yuman-name
+        says:
+          The 揚府's reply of 承和五年八月四日 names the sailor 丁雄滿 among those asking to go to 台州 with
+          圓仁.
+        source: nitto-guho-junrei-gyoki
+        at: 卷一 承和五年八月四日
+  - form: 丁雄萬
+    lang: ja
+    script: Hani
+    note: The form the diary's petitions and permits write from 839 on.
+    cite:
+      - id: tei-yuman-variant
+        says: The travel permits of 開成五年 name the attendant 丁雄萬.
+        source: nitto-guho-junrei-gyoki
+        at: 卷二 開成五年三月 (登州都督府牒)
+roles:
+  - role: other
+    note: A sailor (水手) of the embassy in 838, then 圓仁's lay attendant (行者).
+    cite:
+      - id: tei-yuman-role
+        says: The diary calls him a sailor (水手) in 838 and an attendant (行者) in the 840 permits.
+        sources:
+          - source: nitto-guho-junrei-gyoki
+            at: 卷一 承和五年八月四日
+          - source: nitto-guho-junrei-gyoki
+            at: 卷二 開成五年三月 (登州都督府牒)

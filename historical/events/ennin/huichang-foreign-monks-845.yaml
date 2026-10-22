@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "As the laicizations reach monks over fifty without ordination certificates, an edict extends them to foreign monks: 圓仁 and 惟正, with no Tang 祠部牒, are put on the list to be laicized and sent home."
+types: [occurrence]
+date:
+  value: 845-04..845-05
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 會昌五年四月一日起首 — 五月十一日起首
+  cite:
+    - id: huichang-foreign-monks-845-time
+      says: The diary records that 圓仁 and 惟正, having no Tang ordination certificate, were put on the laicization list by the commissioner under the edict.
+      source: nitto-guho-junrei-gyoki
+      at: 卷四 會昌五年四月十五日
+      quote: 日本國僧圓仁。惟正亦无唐國祠部牒。功德使准勑。配入還俗例。
+places:
+  - place: changan
+    role: site
+participants:
+  - actor: ennin
+    role: subject
+  - actor: weizheng
+    role: subject
+  - actor: tang-wuzong
+    role: leader
+notes: The entry narrates the stages from 四月一日 to 五月十一日; the edict on foreign monks falls somewhere in that window.

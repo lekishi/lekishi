@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 楚州, on the 淮 and the Grand Canal. The 838 embassy hired its nine ships home here in 839, and its Silla ward (新羅坊) sheltered 圓仁's books in 845 and his last attempt to sail in 847.
+types: [settlement]
+names:
+  - form: 楚州
+    lang: lzh
+    script: Hani
+    roman: Chuzhou
+    scheme: pinyin
+    cite:
+      - id: chuzhou-name
+        says: The diary records reaching the city of 楚州 on the 24th.
+        source: nitto-guho-junrei-gyoki
+        at: 卷一 開成四年二月廿四日
+        quote: 申後。到楚州城。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [119.14, 33.505277777]
+    notes: Label anchor at the historical prefecture of 楚州 (Wikidata Q11119793). It is not an asserted historical coordinate.
+    cite:
+      - id: chuzhou-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the historical prefecture of 楚州; no historical coordinate is asserted.
+        source: wikidata
+        at: Q11119793 (P625), revision 1952531269
+modern:
+  - form: 淮安区
+    lang: zh-Hans
+    script: Hani
+    note: The modern district of 淮安 is recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q11119793
+    url: https://www.wikidata.org/wiki/Q11119793
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.
+notes: The 新羅坊 (Silla ward) and its interpreter 劉慎言 stay in event notes and the actor record.

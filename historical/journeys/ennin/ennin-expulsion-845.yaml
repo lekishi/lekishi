@@ -1,0 +1,57 @@
+# Journey record in the shape RFD 2 proposes (AUTHORING_FORMAT.adoc, "Proposed: the journey record").
+# The kind was decided on 2026-10-21; the shape is not yet accepted, and the compiler does not read
+# historical/journeys/ until it is.
+title: 圓仁's expulsion from 長安 to 赤山, 845
+summary: >-
+  Laicized and passed from county to county under escort, 圓仁 goes east by 潼關, 洛陽 and 鄭州, down the
+  汴河 to 泗州, is turned aside to 揚州, refused passage at 楚州, and walks north by 海州 and 密州 to
+  登州 and the Silla office of 文登縣.
+travellers:
+  - actor: ennin
+    role: leader
+  - actor: weizheng
+    role: participant
+  - actor: tei-yuman
+    role: participant
+stops:
+  - ennin-changan-departure-845
+  - ennin-tongguan-845
+  - ennin-luoyang-845
+  - ennin-zhengzhou-845
+  - ennin-bianzhou-845
+  - event: ennin-sizhou-845
+    by: river
+    cite:
+      says: From 汴州 the escort sent him on by boat down the 汴河.
+      source: nitto-guho-junrei-gyoki
+      at: 卷四 會昌五年六月十三日
+      quote: 發去汴河
+  - event: ennin-yangzhou-845
+    by: land
+    cite:
+      says: From 盱眙 to 揚州 there was no waterway for nine post stages, and he hired donkeys at each.
+      source: nitto-guho-junrei-gyoki
+      at: 卷四 會昌五年六月廿三日
+      quote: 從煦眙縣至揚州。九驛无水路。
+  - ennin-chuzhou-refused-845
+  - ennin-lianshui-845
+  - ennin-haizhou-845
+  - event: ennin-mizhou-845
+    by: land
+    cite:
+      says: North of 海州 there was no waterway, and the road ran along the coast without sight of the sea.
+      source: nitto-guho-junrei-gyoki
+      at: 卷四 會昌五年七月十七日
+      quote: 從海州向北无水路。
+  - event: ennin-dengzhou-845
+    by: land
+  - event: ennin-wendeng-845
+    by: land
+  - ennin-zhang-yong-845
+cite:
+  - id: ennin-expulsion-sequence
+    says: >-
+      The diary records leaving 長安 on 五月十五日 and the stops by 潼關, 東都, 鄭州, 汴州, 泗州, 揚州, 楚州, 漣水,
+      海州, 密州, 登州 and 文登縣 to the Silla office on 八月廿七日, in this order and by day.
+    source: nitto-guho-junrei-gyoki
+    at: 卷四 會昌五年五月十五日 — 八月廿七日

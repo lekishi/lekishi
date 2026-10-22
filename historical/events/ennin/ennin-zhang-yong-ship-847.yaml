@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 張詠 finishes the ship he has built since the winter to send 圓仁 home; the era has changed to 大中.
+types: [occurrence]
+date:
+  value: 847-01..847-02
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 會昌七年正月中。改為大中元年 — 至今年二月功畢
+  cite:
+    - id: ennin-zhang-yong-ship-847-time
+      says: The diary records 張詠 building a ship from the previous winter to the second month to carry 圓仁 home.
+      source: nitto-guho-junrei-gyoki
+      at: 卷四 會昌七年正月
+      quote: 張大使。從去年冬造船。至今年二月功畢。專擬載圓仁等。發送歸國。
+places:
+  - place: chishan
+    role: site
+participants:
+  - actor: zhang-yong
+    role: leader
+  - actor: ennin
+    role: leader
+notes: The diary keeps writing 會昌七年 after noting the change to 大中元年.

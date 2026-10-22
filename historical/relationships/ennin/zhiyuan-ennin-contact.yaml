@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  圓仁's stay with 志遠 at 大華嚴寺 on 五臺山, where he presented the 延暦寺's unresolved questions and
+  copied Tendai texts. Recorded as contact; the diary does not call it a transmission.
+types: [contact]
+from: zhiyuan
+to: ennin
+date:
+  value: 840-05-16..840-07-01
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: 開成五年五月十六日 — 七月一日
+cite:
+  - id: zhiyuan-ennin-contact-basis
+    says:
+      The diary records meeting 志遠 on 五月十六日, presenting him the thirty questions of 延暦寺 the next
+      day, and taking leave of him on 七月一日.
+    sources:
+      - source: nitto-guho-junrei-gyoki
+        at: 卷三 開成五年五月十六日
+      - source: nitto-guho-junrei-gyoki
+        at: 卷三 開成五年五月十七日
+        quote: 十七日將延曆寺未決三十條。呈上志遠和
+      - source: nitto-guho-junrei-gyoki
+        at: 卷三 開成五年七月一日

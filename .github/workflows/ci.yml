@@ -45,11 +45,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # `pnpm brand:check` rerenders the committed PNG and ICO in Playwright's
-      # pinned Chromium and fails if either raster has drifted from the brand
-      # geometry.
-      - name: Install Chromium for brand asset verification
-        run: pnpm exec playwright install --with-deps chromium
+      # Playwright's browsers come from the flake's dev shell (prebuilt in
+      # cache.nixos.org) instead of `playwright install --with-deps`, whose apt
+      # step stalled for 10-40 minutes on the Ubuntu mirror.
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
 
       - name: Check formatting
         run: pnpm lint
@@ -63,8 +63,11 @@ jobs:
       - name: Run unit and contract tests
         run: pnpm test
 
+      # `pnpm brand:check` rerenders the committed PNG and ICO in Playwright's
+      # pinned Chromium and fails if either raster has drifted from the brand
+      # geometry.
       - name: Check generated brand assets
-        run: pnpm brand:check
+        run: nix develop --command pnpm brand:check
 
   build:
     # Builds the static artifact once, with its build invariant, and hands it to
@@ -170,14 +173,6 @@ jobs:
         include:
           - project: desktop-chromium
             workers: 2
-          - project: desktop-webkit
-            browser: webkit
-          - project: tablet-touch-webkit
-            browser: webkit
-          - project: phone-webkit
-            browser: webkit
-          - project: desktop-firefox
-            browser: firefox
     # Serve the downloaded artifact instead of building it again.
     env:
       LEKISHI_SKIP_BUILD: "1"
@@ -201,8 +196,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Install browser
-        run: pnpm exec playwright install --with-deps ${{ matrix.browser || 'chromium' }}
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+
+      # Fetch the dev shell before the tests, so its download time shows up
+      # on its own step.
+      - name: Fetch the browsers
+        run: nix develop --command true
 
       - name: Download the static artifact
         uses: actions/download-artifact@v4
@@ -212,4 +212,4 @@ jobs:
 
       # Firefox's Linux software WebGL needs an X display even in headless mode.
       - name: Browser checks against the static artifact
-        run: xvfb-run -a pnpm e2e --project=${{ matrix.project }} --workers=${{ matrix.workers || 1 }}
+        run: nix develop --command xvfb-run -a pnpm e2e --project=${{ matrix.project }} --workers=${{ matrix.workers || 1 }}

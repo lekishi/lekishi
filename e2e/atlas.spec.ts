@@ -703,6 +703,10 @@ test("stops camera following on manual input without pausing playback", async ({
   hasTouch,
 }) => {
   test.skip(hasTouch, "Desktop pointer drag; the touch projects cover taps.")
+  // A flight, playback, a drag and four toggles on software WebGL: on a slow
+  // runner this takes close to two minutes, so it needs more than the default
+  // budget.
+  test.setTimeout(240_000)
 
   await countDraws(page)
   const problems = collectProblems(page)

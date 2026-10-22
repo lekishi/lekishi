@@ -81,11 +81,10 @@ notes say how it was converted.
   Amada's 1400 BC (uncalibrated) is kept as a second citation beside the
   calibrated 1650 BCE that Blomster and Salazar Chávez (2020) give; the Fort
   Ancient charcoal dates for Serpent Mound appear only in its dispute.
-- **Long Count dates** are written as Julian years with the Long Count in
-  `as_written`, as the source reads them; neither stela's source names the
-  correlation it uses. Contract v1 will add a `mesoamerican_long_count`
-  calendar with a correlation field (decided 2026-10-22), and the two stelae
-  move to it then.
+- **Long Count dates** use the contract's `mesoamerican_long_count` calendar
+  (decided 2026-10-22), with the year the source reads and the Long Count in
+  `as_written`. Neither stela's source names the correlation it uses, so both
+  write `correlation: not stated`.
 - A span whose ends bound the event is `mode: window`; a span the event filled
   is `mode: duration`.
 

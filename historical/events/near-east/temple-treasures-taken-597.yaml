@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Nebuchadnezzar carries off the treasures of the house of the LORD and of the king's house, and
+  cuts in pieces the gold vessels Solomon had made; the chronicle records heavy tribute sent to Babylon.
+types: [exchange]
+part_of: [nebuchadnezzar-campaign-598-597]
+date:
+  value: 597 BCE
+  mode: window
+  calendar: regnal
+  as_written: Addaru 2, year 7 of Nebuchadnezzar (Babylonian Chronicle)
+  cite:
+    - says:
+        The chronicle dates the seizing of "the city of Judah" to the second day of Addaru in Nebuchadnezzar's
+        seventh year, which the translation converts to February/March 597 BCE.
+      basis: interpretation
+      attributed_to: Livius.org
+      source: livius-abc-5
+      at: Rev. 12'
+    - says:
+        The Jewish Encyclopedia dates Zedekiah's enthronement, after Jehoiachin was carried off, to
+        597.
+      role: supporting
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: was put on the throne by Nebuchadnezzar in 597
+places:
+  - place: jerusalem
+    role: start
+  - place: babylon
+    role: end
+    note: Chronicles and the chronicle send the treasure to Babylon.
+participants:
+  - actor: nebuchadnezzar-ii
+    role: leader
+cite:
+  - says: The books of Kings record the treasures of the temple and the palace carried out.
+    source: bible-kjv
+    at: 2 Kings 24:13
+    quote:
+      And he carried out thence all the treasures of the house of the LORD, and the treasures of the
+      king’s house
+  - says: Chronicles records the vessels of the temple brought to Babylon with Jehoiachin.
+    source: bible-kjv
+    at: 2 Chronicles 36:10
+    quote: brought him to Babylon, with the goodly vessels of the house of the LORD
+    role: supporting
+  - says: The chronicle records the king receiving heavy tribute and sending it to Babylon.
+    source: livius-abc-5
+    at: Rev. 13'
+    role: supporting

@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The king of Babylon makes Mattaniah, Jehoiachin's uncle, king in his place and renames him Zedekiah.
+  The chronicle says the king chose him.
+types: [occurrence]
+part_of: [nebuchadnezzar-campaign-598-597]
+date:
+  value: 597 BCE
+  mode: window
+  calendar: regnal
+  as_written: Addaru 2, year 7 of Nebuchadnezzar (Babylonian Chronicle)
+  cite:
+    - says:
+        The chronicle dates the seizing of "the city of Judah" to the second day of Addaru in Nebuchadnezzar's
+        seventh year, which the translation converts to February/March 597 BCE.
+      basis: interpretation
+      attributed_to: Livius.org
+      source: livius-abc-5
+      at: Rev. 12'
+    - says:
+        The Jewish Encyclopedia dates Zedekiah's enthronement, after Jehoiachin was carried off, to
+        597.
+      role: supporting
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: was put on the throne by Nebuchadnezzar in 597
+places:
+  - place: jerusalem
+    role: site
+participants:
+  - actor: zedekiah
+    role: subject
+  - actor: nebuchadnezzar-ii
+    role: leader
+cite:
+  - says: The books of Kings record Mattaniah made king and renamed Zedekiah.
+    source: bible-kjv
+    at: 2 Kings 24:17
+    quote:
+      And the king of Babylon made Mattaniah his father’s brother king in his stead, and changed his
+      name to Zedekiah.
+  - says: The chronicle records that the king appointed in the city a king he had chosen.
+    source: livius-abc-5
+    at: Rev. 13'
+    role: supporting
+  - says: Chronicles calls Zedekiah Jehoiachin's brother.
+    role: conflicting
+    source: bible-kjv
+    at: 2 Chronicles 36:10
+    quote: and made Zedekiah his brother king over Judah and Jerusalem
+dispute:
+  status: disputed
+  summary:
+    The books of Kings make Zedekiah Jehoiachin's uncle ("his father's brother"); Chronicles calls
+    him his brother. The chapter follows neither on kinship and records both.

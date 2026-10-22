@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Hammurabi, king of Babylon, the sixth king of its first dynasty, whose year-names record the
+  destruction of the wall of Malgium, the capture of Uruk and Isin, the defeat of Elam's army and the
+  conquest of Emutbal and Larsa, and whose law code's prologue names the cities he claimed from Eridu
+  to Mari and Nineveh.
+types: [person]
+names:
+  - form: Hammurabi
+    lang: en
+    script: Latn
+    cite:
+      - id: hammurabi-name
+        says: The Catholic Encyclopedia names Hammurabi the sixth king of the first Babylonian dynasty.
+        basis: interpretation
+        attributed_to: C. L. Souvay, Catholic Encyclopedia (1910)
+        source: catholic-encyclopedia
+        at: Hammurabi (Charles L. Souvay)
+        quote: Hammurabi (Ha-am-mu-ra-bi), the sixth king of the first Babylonian dynasty
+      - says: The prologue names its king Hammurabi.
+        role: supporting
+        source: king-code-of-hammurabi
+        at: prologue
+        quote: Hammurabi, the prince, called of Bel am I
+roles:
+  - role: ruler
+    note:
+      King of Babylon; the reign's dates depend on the chronology, which the reign event records as
+      a dispute.
+    cite:
+      says: The prologue calls Hammurabi the sun of Babylon and king of Sumer and Akkad.
+      source: king-code-of-hammurabi
+      at: prologue
+      quote: the mighty monarch, the sun of Babylon, whose rays shed light over the land of Sumer and Akkad

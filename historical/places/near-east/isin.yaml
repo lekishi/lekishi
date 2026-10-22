@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Isin, which changed hands three times between Larsa and Babylon by L. W. King's reading, and
+  was captured again in Hammurabi's seventh year; the prologue says he reunited its scattered people.
+types: [settlement]
+names:
+  - form: Isin
+    lang: en
+    script: Latn
+    cite:
+      - id: isin-name
+        says: The prologue names Isin, whose scattered people Hammurabi reunited.
+        source: king-code-of-hammurabi
+        at: prologue
+        quote: who reunited the scattered inhabitants of Isin
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [45.2692726, 31.8853153]
+    notes: The gazetteer's point for the ancient city as a whole; it places no temple or wall.
+    cite:
+      - says: The Pleiades gazetteer records Isin with a precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/912868 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "912868"
+    url: https://pleiades.stoa.org/places/912868
+    license: CC-BY-3.0
+    note: Isin

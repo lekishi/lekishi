@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Zedekiah goes out by the way of the plain; the army of the Chaldees pursues and overtakes him
+  in the plains of Jericho, and all his army is scattered from him.
+types: [journey]
+part_of: [nebuchadnezzar-campaign-589-586]
+date:
+  value: 587 BCE..586 BCE
+  mode: window
+  calendar: regnal
+  as_written: ninth day of the fourth month, eleventh year of Zedekiah (Jeremiah 39:2)
+  cite:
+    - says: The Bible Journey dates the breach of Jerusalem's walls to July 587 BCE.
+      basis: interpretation
+      attributed_to: Chris and Jenifer Taylor, The Bible Journey
+      source: bible-journey-taylor
+      at: Jerusalem falls to the Babylonians, note on 2 Kings 25:1-21
+    - says: The Jewish Encyclopedia dates the yielding of the wall to 586.
+      role: supporting
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: At the end of eighteen months (586) the wall yielded.
+places:
+  - place: jerusalem
+    role: start
+  - place: jericho
+    role: end
+    note: The plains of Jericho, not the town.
+participants:
+  - actor: zedekiah
+    role: subject
+  - actor: neo-babylonian-empire
+    role: participant
+cite:
+  - says: The books of Kings record Zedekiah overtaken in the plains of Jericho.
+    source: bible-kjv
+    at: 2 Kings 25:5
+    quote:
+      "And the army of the Chaldees pursued after the king, and overtook him in the plains of Jericho:
+      and all his army were scattered from him."
+  - says: Jeremiah gives the same place.
+    source: bible-kjv
+    at: Jeremiah 52:8
+    quote: overtook Zedekiah in the plains of Jericho
+    role: supporting
+notes:
+  'No route is drawn: the texts give "the way of the plain" and no stage between the city and the
+  plains of Jericho.'

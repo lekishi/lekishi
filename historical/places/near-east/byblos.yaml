@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Byblos, the city whose king Uru-milki the prism calls "the Gublite", among the western kings
+  who brought tribute to Sennacherib in 701 BCE.
+types: [port]
+names:
+  - form: Byblos
+    lang: en
+    script: Latn
+    cite:
+      - id: byblos-name
+        says: The prism calls Uru-milki the Gublite, the king of Gubla.
+        source: luckenbill-annals-sennacherib
+        at: p. 30, Oriental Institute prism col. II 53
+        quote: Uru-milki, the Gublite,
+  - form: Gubla
+    lang: akk
+    script: Latn
+    note: The city name behind the prism's "Gublite"; Pleiades records the city's older name as Gebal.
+    claim: byblos-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [35.6461247, 34.1192488]
+    notes: The gazetteer's point for the ancient city, historically called Gebal.
+    cite:
+      - says:
+          The Pleiades gazetteer records Byblos, originally called Gebal, with a precise representative
+          point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/668216 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "668216"
+    url: https://pleiades.stoa.org/places/668216
+    license: CC-BY-3.0
+    note: Byblos

@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Hammurabi's war on Rim-Sin's Larsa, which ended with the conquest of Larsa and Ur and the governorship
+  of Sin-idinnam.
+types: [conflict]
+from: first-dynasty-of-babylon
+to: larsa-kingdom
+date:
+  value: 1792 BCE..1750 BCE
+  mode: window
+  calendar: regnal
+  as_written: the thirtieth and thirty-first years of his reign, by their date-formulae
+  cite:
+    - says: The Louvre dates Hammurabi's reign, and the stele, to -1792/-1750, the modern middle chronology.
+      basis: interpretation
+      attributed_to: Musée du Louvre
+      source: louvre-code-of-hammurabi
+      at: "caption: Code de Hammurabi, -1792 / -1750"
+cite:
+  - says: King and Hall say Hammurabi attacked Rim-Sin and captured Ur and Larsa.
+    basis: interpretation
+    attributed_to: L. W. King and H. R. Hall (1906)
+    source: king-hall-history
+    at: chapter V (Elam and Babylon)
+    quote: Hammurabi attacked Rim-Sin, and, after capturing the cities of Ur and Larsam

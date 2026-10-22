@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Sennacherib draws near to Ekron, slays the governors and nobles who had rebelled and hangs their
+  bodies on stakes around the city, counts the guilty citizens as spoil, and pardons the rest.
+types: [occurrence]
+part_of: [sennacherib-third-campaign-701]
+date:
+  value: 701 BCE
+  mode: window
+  calendar: regnal
+  as_written: ina šalši girriya (in my third campaign)
+  cite:
+    - says: The prism numbers the campaign as Sennacherib's third and gives no year.
+      source: luckenbill-annals-sennacherib
+      at: p. 29, Oriental Institute prism col. II 37
+      quote: In my third campaign I went against the Hittite-land.
+    - says: Luckenbill dates the third campaign, and the siege of Jerusalem in it, to 701 BCE.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 12 (introduction)
+      quote: According to the Assyrian account this siege, conducted in 701, led to the submission of Hezekiah
+places:
+  - place: ekron
+    role: site
+participants:
+  - actor: sennacherib
+    role: leader
+  - actor: ekron-kingdom
+    role: subject
+cite:
+  - says: The prism records the killing of Ekron's rebel governors and nobles and the display of their bodies.
+    source: luckenbill-annals-sennacherib
+    at: p. 32, Oriental Institute prism col. III 8–14
+    quote:
+      I drew near to Ekron and slew the governors and nobles who had committed sin (that is, rebelled),
+      and hung their bodies on stakes around the city.
+  - says: The prism records the pardon of the citizens who had not rebelled.
+    source: luckenbill-annals-sennacherib
+    at: p. 32, Oriental Institute prism col. III 12–14
+    quote:
+      The rest of them, who were not guilty (carriers) of sin and contempt, for whom there was no punishment,—
+      I spoke their pardon.
+    role: supporting

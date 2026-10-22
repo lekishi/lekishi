@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Larsa, the city of Rim-Sin, which Hammurabi conquered in his thirty-first year by the cited readings
+  of his year-names, and which the prologue says he guarded.
+types: [capital]
+names:
+  - form: Larsa
+    lang: en
+    script: Latn
+    cite:
+      - id: larsa-name
+        says: The prologue names Larsa, guarded by Hammurabi.
+        source: king-code-of-hammurabi
+        at: prologue
+        quote: the warrior who guarded Larsa and renewed E-babbar
+  - form: Larsam
+    lang: en
+    script: Latn
+    note: King and Hall's spelling.
+    cite:
+      - says: King and Hall write the name Larsam.
+        basis: interpretation
+        attributed_to: L. W. King and H. R. Hall (1906)
+        source: king-hall-history
+        at: chapter V (Elam and Babylon)
+        quote: after capturing the cities of Ur and Larsam
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [45.85245, 31.2832165]
+    notes: The gazetteer's point for the ancient city as a whole; it places no temple or wall.
+    cite:
+      - says: The Pleiades gazetteer records Larsa with a precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/912897 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "912897"
+    url: https://pleiades.stoa.org/places/912897
+    license: CC-BY-3.0
+    note: Larsa

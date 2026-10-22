@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "Nebuchadnezzar's campaign of his seventh year against Jerusalem: the siege, the taking of the
+  city and of Jehoiachin, the carrying off of the temple's treasures and the captives, and the setting
+  of Zedekiah on the throne."
+types: [campaign]
+date:
+  value: 598 BCE..597 BCE
+  mode: window
+  calendar: regnal
+  as_written: Kislīmu to Addaru, year 7 of Nebuchadnezzar (Babylonian Chronicle)
+  cite:
+    - says:
+        The chronicle has the king of Akkad muster his troops in Kislīmu of his seventh year and seize
+        the city of Judah in Addaru; the translation converts the year to 598/597 BCE.
+      basis: interpretation
+      attributed_to: Livius.org
+      source: livius-abc-5
+      at: Rev. 11'–12'
+    - says: The Jewish Encyclopedia dates Nebuchadnezzar's march west to 598.
+      role: supporting
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: In 598 Nebuchadnezzar himself came westward
+places:
+  - place: babylon
+    role: context
+    note: The chronicle has the king march from Akkad to the Hatti-land; it names no starting city.
+  - place: jerusalem
+    role: end
+participants:
+  - actor: nebuchadnezzar-ii
+    role: leader
+  - actor: neo-babylonian-empire
+    role: participant
+cite:
+  - says:
+      The chronicle records the king of Akkad mustering his troops, marching to the Hatti-land and besieging
+      the city of Judah.
+    source: livius-abc-5
+    at: Rev. 11'–12'
+  - says:
+      The books of Kings record Nebuchadnezzar coming against Jerusalem while his servants besieged
+      it.
+    source: bible-kjv
+    at: 2 Kings 24:11
+    quote: And Nebuchadnezzar king of Babylon came against the city, and his servants did besiege it.
+    role: supporting
+notes:
+  "No route is drawn: the chronicle names the Hatti-land and the city of Judah, and gives no stage
+  between."

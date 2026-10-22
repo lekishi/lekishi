@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Adab, a Sumerian city to which the prologue says Hammurabi granted life.
+types: [settlement]
+names:
+  - form: Adab
+    lang: en
+    script: Latn
+    cite:
+      - id: adab-name
+        says: The prologue names Adab.
+        source: king-code-of-hammurabi
+        at: prologue
+        quote: the king who granted life to the city of Adab
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [45.6233388, 31.9509003]
+    notes: The gazetteer's point for the ancient city as a whole; it places no temple or wall.
+    cite:
+      - says: The Pleiades gazetteer records Adab with a precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/787747618 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "787747618"
+    url: https://pleiades.stoa.org/places/787747618
+    license: CC-BY-3.0
+    note: Adab

@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Malgium, a city on the Tigris whose wall Hammurabi destroyed in his fourth year, by the year-name
+  the Hastings dictionary gives. The record asserts no position.
+types: [fortification]
+names:
+  - form: Malga
+    lang: en
+    script: Latn
+    cite:
+      - id: malgium-name
+        says: The Hastings dictionary gives the fourth year-name as the year the wall of Malga was destroyed.
+        source: hastings-dictionary-bible
+        at: Assyria and Babylonia, Chronology, (a) Year-names
+        quote: the year in which the wall of Malga was destroyed
+  - form: Malgium
+    lang: en
+    script: Latn
+    note: The modern scholarly form.
+    claim: malgium-name
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      The year-name names Malga without locating it, and the Pleiades dump read for this chapter has
+      no record of it. The chapter asserts no coordinate.
+    cite:
+      - says: The year-name names the wall of Malga, without locating it.
+        source: hastings-dictionary-bible
+        at: Assyria and Babylonia, Chronology, (a) Year-names
+        quote: the year in which the wall of Malga was destroyed

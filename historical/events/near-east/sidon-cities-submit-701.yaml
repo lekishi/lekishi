@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Lulê's strong, walled cities, Great Sidon, Little Sidon, Bit-Zitti, Zaribtu, Mahalliba, Ushu,
+  Akzib and Akko, bow in submission, and Sennacherib seats Tuba'lu on the royal throne over them with
+  a tribute imposed for all time.
+types: [occurrence]
+part_of: [sennacherib-third-campaign-701]
+date:
+  value: 701 BCE
+  mode: window
+  calendar: regnal
+  as_written: ina šalši girriya (in my third campaign)
+  cite:
+    - says: The prism numbers the campaign as Sennacherib's third and gives no year.
+      source: luckenbill-annals-sennacherib
+      at: p. 29, Oriental Institute prism col. II 37
+      quote: In my third campaign I went against the Hittite-land.
+    - says: Luckenbill dates the third campaign, and the siege of Jerusalem in it, to 701 BCE.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 12 (introduction)
+      quote: According to the Assyrian account this siege, conducted in 701, led to the submission of Hezekiah
+places:
+  - place: sidon
+    role: site
+  - place: akzib
+    role: site
+  - place: akko
+    role: site
+participants:
+  - actor: sennacherib
+    role: leader
+  - actor: tubalu-of-sidon
+    role: subject
+    note: Seated on the throne over the cities.
+cite:
+  - says: The prism lists Lulê's strong, walled cities.
+    source: luckenbill-annals-sennacherib
+    at: p. 29, Oriental Institute prism col. II 41–43
+    quote: Great Sidon, Little Sidon, Bît-Zitti, Zaribtu, Mahalliba, Ushu, Akzib, Akko,
+  - says:
+      The prism records the cities bowing in submission and Tuba'lu set on the throne over them, with
+      tribute imposed.
+    source: luckenbill-annals-sennacherib
+    at: p. 30, Oriental Institute prism col. II 46–49
+    quote:
+      my lord, overpowered them and they bowed in submission at my feet. Tuba'lu I seated on the royal
+      throne over them, and tribute, gift(s) for my majesty, I imposed upon him for all time, without ceasing.
+    role: supporting
+notes:
+  Only Sidon, Akzib and Akko are separate places; the other five cities the prism names are not yet
+  placed and are kept in the summary.

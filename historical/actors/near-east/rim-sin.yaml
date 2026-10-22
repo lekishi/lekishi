@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Rim-Sin, king of Larsa, whom Hammurabi overthrew in his thirtieth or thirty-first year by the
+  cited readings, and who, by an early chronicle, retired beyond the Elamite frontier and fought again
+  under Hammurabi's son.
+types: [person]
+names:
+  - form: Rim-Sin
+    lang: en
+    script: Latn
+    cite:
+      - id: rim-sin-name
+        says: King and Hall name Rim-Sin, the son of Kudur-mabug.
+        basis: interpretation
+        attributed_to: L. W. King and H. R. Hall (1906)
+        source: king-hall-history
+        at: chapter V (Elam and Babylon)
+        quote: Elam was not signally defeated in the reign of Kudur-mabug, but in that of his son Rim-Sin
+roles:
+  - role: ruler
+    note: King of Larsa; the chapter dates no reign.
+    cite:
+      says: King and Hall say Hammurabi attacked Rim-Sin and captured Ur and Larsa.
+      basis: interpretation
+      attributed_to: L. W. King and H. R. Hall (1906)
+      source: king-hall-history
+      at: chapter V (Elam and Babylon)
+      quote: Hammurabi attacked Rim-Sin, and, after capturing the cities of Ur and Larsam

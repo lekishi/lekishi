@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Nebuchadnezzar II, king of Babylon, who took Jerusalem in 597 BCE and carried Jehoiachin to Babylon,
+  set Zedekiah on the throne, and after Zedekiah's rebellion besieged the city again until its walls were
+  breached and its temple burned.
+types: [person]
+names:
+  - form: Nebuchadnezzar
+    lang: en
+    script: Latn
+    cite:
+      - id: nebuchadnezzar-ii-name
+        says: The books of Kings name Nebuchadnezzar king of Babylon.
+        source: bible-kjv
+        at: 2 Kings 24:1
+        quote: In his days Nebuchadnezzar king of Babylon came up
+  - form: Nebuchadrezzar
+    lang: en
+    script: Latn
+    note: Jeremiah's and Ezekiel's spelling, closer to the Akkadian.
+    cite:
+      - says: Jeremiah spells the name Nebuchadrezzar.
+        source: bible-kjv
+        at: Jeremiah 52:4
+        quote: Nebuchadrezzar king of Babylon came, he and all his army, against Jerusalem
+  - form: Nabû-kudurri-uṣur
+    lang: akk
+    script: Latn
+    note: The Akkadian name; the Jewish Encyclopedia writes Nabu-kudurri-uṣur.
+    claim: nebuchadnezzar-ii-name
+    cite:
+      - says: The Jewish Encyclopedia gives the Akkadian name and its meaning.
+        basis: interpretation
+        attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+        source: jewish-encyclopedia
+        at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+        quote: Nabu-kudurri-uṣur" = "Nebo, defend my boundary
+roles:
+  - role: ruler
+    note:
+      King of Babylon; the cited datings of his reign differ (the Jewish Encyclopedia to 561, The Bible
+      Journey to 562), so the chapter dates no reign.
+    cite:
+      says: The Jewish Encyclopedia says he became king of Babylon in 604 B.C. and died in 561.
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: became king of Babylon in 604 B.C.
+notes: '"II" distinguishes him from the earlier king of the same name; the sources here just say Nebuchadnezzar.'

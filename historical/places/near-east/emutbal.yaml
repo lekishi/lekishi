@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Emutbal (Iamutbal), the land east of the Tigris that King and Hall call "the western district
+  of Elam", which Hammurabi added to his dominions in his thirty-first year. The record asserts no position
+  or extent.
+types: [region]
+names:
+  - form: E'mutbal
+    lang: en
+    script: Latn
+    cite:
+      - id: emutbal-name
+        says: King and Hall name the land of E'mutbal.
+        basis: interpretation
+        attributed_to: L. W. King and H. R. Hall (1906)
+        source: king-hall-history
+        at: chapter V (Elam and Babylon)
+        quote: he added the land of E’mutbal
+  - form: Iamutbala
+    lang: en
+    script: Latn
+    claim: emutbal-name
+    cite:
+      - says: The Catholic Encyclopedia writes Iamutbala, west of Elam.
+        basis: interpretation
+        attributed_to: C. L. Souvay, Catholic Encyclopedia (1910)
+        source: catholic-encyclopedia
+        at: Hammurabi (Charles L. Souvay)
+        quote: Iamutbala (W. of Elam)
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      A region with no cited extent; the Pleiades dump read for this chapter has no record of it. The
+      chapter draws no point or boundary.
+    cite:
+      - says: King and Hall locate E'mutbal only as the western district of Elam.
+        basis: interpretation
+        attributed_to: L. W. King and H. R. Hall (1906)
+        source: king-hall-history
+        at: chapter V (Elam and Babylon)
+        quote: that is, the western district of Elam

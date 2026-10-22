@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  While the king of Babylon's army fights against Jerusalem, Lachish and Azekah remain of the defenced
+  cities of Judah.
+types: [occurrence]
+part_of: [nebuchadnezzar-campaign-589-586]
+date:
+  value: 589 BCE..586 BCE
+  mode: window
+  calendar: unknown
+  as_written: not dated; during the siege (Jeremiah 34:7)
+  cite:
+    - says: The Bible Journey dates Zedekiah's rebellion, and so the start of the war, to 589 BCE.
+      basis: interpretation
+      attributed_to: Chris and Jenifer Taylor, The Bible Journey
+      source: bible-journey-taylor
+      at: Jerusalem falls to the Babylonians, note on 2 Kings 25:1-21
+    - says:
+        The Jewish Encyclopedia dates the yielding of the wall, at the end of the eighteen-month siege,
+        to 586.
+      role: supporting
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: At the end of eighteen months (586) the wall yielded.
+places:
+  - place: lachish
+    role: site
+  - place: azekah
+    role: site
+participants:
+  - actor: neo-babylonian-empire
+    role: participant
+  - actor: kingdom-of-judah
+    role: participant
+cite:
+  - says:
+      Jeremiah records Lachish and Azekah as the last defenced cities of Judah left while the army fought
+      against Jerusalem.
+    source: bible-kjv
+    at: Jeremiah 34:7
+    quote:
+      "When the king of Babylon’s army fought against Jerusalem, and against all the cities of Judah
+      that were left, against Lachish, and against Azekah: for these defenced cities remained of the cities
+      of Judah."

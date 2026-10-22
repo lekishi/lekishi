@@ -1,0 +1,63 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Called on by Ekron, the Egyptian kings and the bowmen, chariots and horses of the king of Meluhha
+  draw up before Sennacherib in the neighbourhood of Eltekeh. The prism claims their defeat and the capture
+  alive of the Egyptian charioteers and princes and the charioteers of the Ethiopian king.
+types: [campaign]
+part_of: [sennacherib-third-campaign-701]
+date:
+  value: 701 BCE
+  mode: window
+  calendar: regnal
+  as_written: ina šalši girriya (in my third campaign)
+  cite:
+    - says: The prism numbers the campaign as Sennacherib's third and gives no year.
+      source: luckenbill-annals-sennacherib
+      at: p. 29, Oriental Institute prism col. II 37
+      quote: In my third campaign I went against the Hittite-land.
+    - says: Luckenbill dates the third campaign, and the siege of Jerusalem in it, to 701 BCE.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 12 (introduction)
+      quote: According to the Assyrian account this siege, conducted in 701, led to the submission of Hezekiah
+places:
+  - place: eltekeh
+    role: site
+participants:
+  - actor: sennacherib
+    role: leader
+  - actor: kushite-egypt
+    role: participant
+cite:
+  - says: The prism places the battle in the neighbourhood of Eltekeh.
+    source: luckenbill-annals-sennacherib
+    at: p. 31–32, Oriental Institute prism col. II 82–III 5
+    quote: In the neighborhood of Eltekeh, their ranks being drawn up before me, they offered battle.
+  - says: The prism claims the capture alive of the Egyptian and Ethiopian charioteers.
+    source: luckenbill-annals-sennacherib
+    at: p. 32, Oriental Institute prism col. III 3–5
+    quote:
+      The Egyptian charioteers and princes, together with the charioteers of the Ethiopian king, my
+      hands took alive in the midst of the battle.
+    role: supporting
+dispute:
+  status: disputed
+  summary:
+    The prism claims a victory and places the battle before the siege of Jerusalem. Luckenbill
+    argues the battle may have been a drawn one that came at the close of the campaign and was why the
+    siege of Jerusalem was abandoned. The chapter publishes the prism's account as the prism's claim.
+cites:
+  summary:
+    - says:
+        Luckenbill argues that the battle may have been fought to a standstill at the close of the campaign
+        and may be why Sennacherib abandoned the siege of Jerusalem.
+      role: conflicting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 13 (introduction)
+      quote:
+        it is altogether possible that this battle, in which he may have been fought to a standstill,
+        came at the close of the campaign and was the reason for his abandonment of the siege.

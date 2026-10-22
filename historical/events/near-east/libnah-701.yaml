@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Returning from Jerusalem, Rabshakeh finds the king of Assyria warring against Libnah, for he
+  had left Lachish.
+types: [campaign]
+part_of: [sennacherib-third-campaign-701]
+date:
+  value: 701 BCE
+  mode: window
+  calendar: unknown
+  as_written: not dated
+  cite:
+    - says: The prism numbers the campaign as Sennacherib's third and gives no year.
+      source: luckenbill-annals-sennacherib
+      at: p. 29, Oriental Institute prism col. II 37
+      quote: In my third campaign I went against the Hittite-land.
+    - says: Luckenbill dates the third campaign, and the siege of Jerusalem in it, to 701 BCE.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 12 (introduction)
+      quote: According to the Assyrian account this siege, conducted in 701, led to the submission of Hezekiah
+places:
+  - place: libnah
+    role: site
+  - place: lachish
+    role: start
+    note: The passage says the king had departed from Lachish.
+participants:
+  - actor: sennacherib
+    role: leader
+cite:
+  - says: The books of Kings record the king of Assyria warring against Libnah after leaving Lachish.
+    source: bible-kjv
+    at: 2 Kings 19:8
+    quote:
+      "So Rabshakeh returned, and found the king of Assyria warring against Libnah: for he had heard
+      that he was departed from Lachish."

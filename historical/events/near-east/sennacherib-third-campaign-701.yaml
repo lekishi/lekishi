@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  'Sennacherib''s third campaign, against "the Hittite-land": the flight of Lulê of Sidon, the
+  submission and tribute of the western kings, the deportation of Sidka of Ashkelon, the battle at Eltekeh,
+  the punishment of Ekron, the taking of Judah''s walled cities and the shutting up of Hezekiah in Jerusalem.
+  The prism gives no year; Luckenbill dates it to 701 BCE.'
+types: [campaign]
+date:
+  value: 701 BCE
+  mode: window
+  calendar: regnal
+  as_written: ina šalši girriya (in my third campaign)
+  cite:
+    - says: The prism numbers the campaign as Sennacherib's third and gives no year.
+      source: luckenbill-annals-sennacherib
+      at: p. 29, Oriental Institute prism col. II 37
+      quote: In my third campaign I went against the Hittite-land.
+    - says: Luckenbill dates the third campaign, and the siege of Jerusalem in it, to 701 BCE.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 12 (introduction)
+      quote: According to the Assyrian account this siege, conducted in 701, led to the submission of Hezekiah
+participants:
+  - actor: sennacherib
+    role: leader
+  - actor: neo-assyrian-empire
+    role: participant
+notes:
+  The campaign is the frame the other events are part of. Its order of episodes is the prism's narrative
+  order, which Luckenbill notes need not be the order of events (p. 13); the story keeps that order and
+  claims no sequence of its own.

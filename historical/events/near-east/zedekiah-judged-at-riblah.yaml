@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Zedekiah is brought to the king of Babylon at Riblah, who gives judgment on him, slays his sons
+  before his eyes, puts out his eyes and binds him in fetters.
+types: [occurrence]
+part_of: [nebuchadnezzar-campaign-589-586]
+date:
+  value: 587 BCE..586 BCE
+  mode: window
+  calendar: regnal
+  as_written: ninth day of the fourth month, eleventh year of Zedekiah (Jeremiah 39:2)
+  cite:
+    - says: The Bible Journey dates the breach of Jerusalem's walls to July 587 BCE.
+      basis: interpretation
+      attributed_to: Chris and Jenifer Taylor, The Bible Journey
+      source: bible-journey-taylor
+      at: Jerusalem falls to the Babylonians, note on 2 Kings 25:1-21
+    - says: The Jewish Encyclopedia dates the yielding of the wall to 586.
+      role: supporting
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: At the end of eighteen months (586) the wall yielded.
+places:
+  - place: riblah
+    role: site
+participants:
+  - actor: nebuchadnezzar-ii
+    role: leader
+  - actor: zedekiah
+    role: subject
+cite:
+  - says: Jeremiah records the king of Babylon slaying Zedekiah's sons and the princes of Judah at Riblah.
+    source: bible-kjv
+    at: Jeremiah 52:10
+    quote:
+      "And the king of Babylon slew the sons of Zedekiah before his eyes: he slew also all the princes
+      of Judah in Riblah."
+  - says: The books of Kings record Zedekiah's sons slain and his eyes put out.
+    source: bible-kjv
+    at: 2 Kings 25:7
+    quote:
+      And they slew the sons of Zedekiah before his eyes, and put out the eyes of Zedekiah, and bound
+      him with fetters of brass
+    role: supporting

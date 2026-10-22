@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Dilbat, a city south of Babylon whose fields the prologue says Hammurabi broadened.
+types: [settlement]
+names:
+  - form: Dilbat
+    lang: en
+    script: Latn
+    cite:
+      - id: dilbat-name
+        says: The prologue names Dilbat.
+        source: king-code-of-hammurabi
+        at: prologue
+        quote: who broadened the fields of Dilbat
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [44.4668935, 32.2957952]
+    notes: The gazetteer's point for the ancient city as a whole; it places no temple or wall.
+    cite:
+      - says: The Pleiades gazetteer records Dilbat with a precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/893987 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "893987"
+    url: https://pleiades.stoa.org/places/893987
+    license: CC-BY-3.0
+    note: Dilbat

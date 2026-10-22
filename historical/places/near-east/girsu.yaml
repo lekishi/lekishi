@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Girsu (Tello), the city of the god Ningirsu, for which, with Lagash, the prologue says Hammurabi
+  provided food and drink.
+types: [religious_site]
+names:
+  - form: Girsu
+    lang: en
+    script: Latn
+    cite:
+      - id: girsu-name
+        says: The prologue names Girsu with Lagash.
+        source: king-code-of-hammurabi
+        at: prologue
+        quote: who provided food and drink for Lagash and Girsu
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [46.1776353, 31.5603861]
+    notes: The gazetteer's point for the ancient city as a whole; it places no temple or wall.
+    cite:
+      - says: The Pleiades gazetteer records [Girsu]/Tello(h) with a precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/912855 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "912855"
+    url: https://pleiades.stoa.org/places/912855
+    license: CC-BY-3.0
+    note: "[Girsu]/Tello(h)"

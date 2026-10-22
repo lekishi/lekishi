@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Zedekiah, born Mattaniah, Jehoiachin's uncle, whom the king of Babylon made king of Judah in
+  597 BCE, who rebelled, fled when the walls were breached, and was blinded at Riblah and carried to Babylon
+  in chains.
+types: [person]
+names:
+  - form: Zedekiah
+    lang: en
+    script: Latn
+    cite:
+      - id: zedekiah-name
+        says: The books of Kings record the king of Babylon making Mattaniah king and renaming him Zedekiah.
+        source: bible-kjv
+        at: 2 Kings 24:17
+        quote:
+          And the king of Babylon made Mattaniah his father’s brother king in his stead, and changed
+          his name to Zedekiah.
+  - form: Mattaniah
+    lang: en
+    script: Latn
+    note: His name before the king of Babylon changed it.
+    claim: zedekiah-name
+roles:
+  - role: ruler
+    note: King of Judah, set up by the king of Babylon; the chapter dates no reign.
+    cite:
+      says: The books of Kings record Zedekiah reigning eleven years in Jerusalem.
+      source: bible-kjv
+      at: 2 Kings 24:18
+      quote: he reigned eleven years in Jerusalem

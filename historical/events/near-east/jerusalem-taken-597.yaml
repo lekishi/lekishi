@@ -1,0 +1,70 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Jerusalem is taken. The Babylonian Chronicle says the king of Akkad seized "the city of Judah"
+  and captured its king; the books of Kings say Jehoiachin went out to the king of Babylon with his mother,
+  servants, princes and officers, and was taken in the eighth year of the king's reign.
+types: [occurrence]
+part_of: [nebuchadnezzar-campaign-598-597]
+date:
+  value: 597 BCE
+  mode: window
+  calendar: regnal
+  as_written:
+    Addaru 2, year 7 of Nebuchadnezzar (Babylonian Chronicle); the eighth year of his reign
+    (2 Kings 24:12)
+  cite:
+    - says:
+        The chronicle dates the seizing of "the city of Judah" to the second day of Addaru in Nebuchadnezzar's
+        seventh year, which the translation converts to February/March 597 BCE.
+      basis: interpretation
+      attributed_to: Livius.org
+      source: livius-abc-5
+      at: Rev. 12'
+    - says:
+        The Jewish Encyclopedia dates Zedekiah's enthronement, after Jehoiachin was carried off, to
+        597.
+      role: supporting
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: was put on the throne by Nebuchadnezzar in 597
+    - says: The books of Kings date the taking of Jehoiachin to the eighth year of the king of Babylon.
+      role: conflicting
+      source: bible-kjv
+      at: 2 Kings 24:12
+      quote: and the king of Babylon took him in the eighth year of his reign
+    - says:
+        Jeremiah dates a deportation to Nebuchadrezzar's seventh year, agreeing with the chronicle's
+        year.
+      role: supporting
+      source: bible-kjv
+      at: Jeremiah 52:28
+      quote: in the seventh year three thousand Jews and three and twenty
+places:
+  - place: jerusalem
+    role: site
+    note: The chronicle calls it "the city of Judah"; the books of Kings name Jerusalem.
+participants:
+  - actor: nebuchadnezzar-ii
+    role: leader
+  - actor: jehoiachin
+    role: subject
+cite:
+  - says: The chronicle records the king seizing the city of Judah and capturing its king.
+    source: livius-abc-5
+    at: Rev. 12'
+  - says: The books of Kings record Jehoiachin going out to the king of Babylon with his household and officers.
+    source: bible-kjv
+    at: 2 Kings 24:12
+    quote:
+      And Jehoiachin the king of Judah went out to the king of Babylon, he, and his mother, and his
+      servants, and his princes, and his officers
+    role: supporting
+dispute:
+  status: disputed
+  summary:
+    The chronicle and Jeremiah 52:28 put the capture in Nebuchadnezzar's seventh year; 2 Kings
+    24:12 says his eighth. The year 597 BCE is the chronicle's, as converted by the cited translation;
+    the chapter keeps the eighth-year reading as a conflicting claim and does not decide how the two reckonings
+    relate.

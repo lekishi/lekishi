@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Ekron's officials, nobles and people throw their king Padi, bound by the oath and curse of Assyria,
+  into fetters of iron and hand him over to Hezekiah, who keeps him in confinement in Jerusalem.
+types: [occurrence]
+date:
+  value: 705 BCE..701 BCE
+  mode: window
+  calendar: regnal
+  as_written: not dated; the prism tells it before the battle at Eltekeh
+  cite:
+    - says: The prism records Ekron's officials handing Padi in fetters to Hezekiah, without a date.
+      source: luckenbill-annals-sennacherib
+      at: p. 31, Oriental Institute prism col. II 73–77
+      quote:
+        who had thrown Padi, their king, bound by (lit. lord of) oath and curse of Assyria, into fetters
+        of iron and had given him over to Hezekiah, the Jew,—he kept him in confinement like an enemy,—
+    - says:
+        Luckenbill sets the western revolt, in which Padi was handed to Hezekiah, after the news of
+        Sargon's death and Sennacherib's accession in 705 BCE and before the campaign of 701 BCE.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: pp. 9–11 (introduction)
+      quote:
+        The trouble in the west had doubtless begun as soon as the reports of Sargon's violent death
+        reached these regions.
+places:
+  - place: ekron
+    role: start
+  - place: jerusalem
+    role: end
+    note: Where Padi was held; the prism has Sennacherib bring him out of Jerusalem.
+participants:
+  - actor: ekron-kingdom
+    role: participant
+  - actor: padi-of-ekron
+    role: subject
+  - actor: hezekiah
+    role: host
+    note: He held Padi in confinement.
+notes:
+  The window runs from Sennacherib's accession, as Luckenbill dates it, to the campaign; the prism
+  dates neither the deposition nor the handover.

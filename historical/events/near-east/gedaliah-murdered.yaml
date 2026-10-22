@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In the seventh month Ishmael son of Nethaniah, of the seed royal, comes with ten men to Gedaliah
+  at Mizpah, and after they eat bread together smites him with the sword, and the Jews and Chaldeans with
+  him.
+types: [occurrence]
+date:
+  value: 586 BCE
+  mode: window
+  calendar: unknown
+  as_written: the seventh month; no year given (2 Kings 25:25; Jeremiah 41:1)
+  cite:
+    - says: The Bible Journey dates Gedaliah's murder to 586 BCE.
+      basis: interpretation
+      attributed_to: Chris and Jenifer Taylor, The Bible Journey
+      source: bible-journey-taylor
+      at: Gedeliah is murdered & Jeremiah goes to Egypt, note on Jer 41:1-18
+    - says: The books of Kings give the month and no year.
+      role: supporting
+      source: bible-kjv
+      at: 2 Kings 25:25
+      quote: But it came to pass in the seventh month
+places:
+  - place: mizpah
+    role: site
+participants:
+  - actor: ishmael-son-of-nethaniah
+    role: leader
+  - actor: gedaliah
+    role: subject
+cite:
+  - says: Jeremiah records Ishmael and ten men killing Gedaliah.
+    source: bible-kjv
+    at: Jeremiah 41:2
+    quote:
+      Then arose Ishmael the son of Nethaniah, and the ten men that were with him, and smote Gedaliah
+      the son of Ahikam the son of Shaphan with the sword, and slew him
+  - says: The books of Kings record Gedaliah killed at Mizpah with the Jews and Chaldees with him.
+    source: bible-kjv
+    at: 2 Kings 25:25
+    quote:
+      came, and ten men with him, and smote Gedaliah, that he died, and the Jews and the Chaldees that
+      were with him at Mizpah
+    role: supporting
+notes: The year is The Bible Journey's alone; no other cited source dates the murder.

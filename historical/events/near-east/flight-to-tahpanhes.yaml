@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  For fear of the Chaldeans, Johanan son of Kareah and the captains take the remnant of Judah,
+  men, women and children, the king's daughters, Jeremiah and Baruch, into the land of Egypt, as far as
+  Tahpanhes.
+types: [journey]
+date:
+  value: 586 BCE
+  mode: window
+  calendar: unknown
+  as_written: not dated (Jeremiah 43:5–7)
+  cite:
+    - says: The Bible Journey dates the flight to Egypt, after Gedaliah's murder, to 586 BCE.
+      basis: interpretation
+      attributed_to: Chris and Jenifer Taylor, The Bible Journey
+      source: bible-journey-taylor
+      at: Jerusalem falls to the Babylonians, note on 2 Kings 25:22-27
+places:
+  - place: mizpah
+    role: start
+    note:
+      Jeremiah has them gather near Bethlehem first (41:17); the chapter starts the journey where Gedaliah
+      ruled.
+  - place: tahpanhes
+    role: end
+participants:
+  - actor: johanan-son-of-kareah
+    role: leader
+  - actor: jeremiah
+    role: subject
+cite:
+  - says: Jeremiah records Johanan and the captains taking the remnant of Judah.
+    source: bible-kjv
+    at: Jeremiah 43:5
+    quote: But Johanan the son of Kareah, and all the captains of the forces, took all the remnant of Judah
+  - says: Jeremiah records them coming into Egypt as far as Tahpanhes.
+    source: bible-kjv
+    at: Jeremiah 43:7
+    quote:
+      "So they came into the land of Egypt: for they obeyed not the voice of the LORD: thus came they
+      even to Tahpanhes."
+    role: supporting
+  - says: The books of Kings record the people and the captains going to Egypt for fear of the Chaldees.
+    source: bible-kjv
+    at: 2 Kings 25:26
+    quote:
+      "And all the people, both small and great, and the captains of the armies, arose, and came to
+      Egypt: for they were afraid of the Chaldees."
+    role: supporting
+notes: "No route is drawn: Jeremiah names no stage between Judah and Tahpanhes."

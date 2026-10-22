@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Sennacherib cuts the cities he had despoiled off from Hezekiah's land and gives them to Mitinti,
+  king of Ashdod, Padi, king of Ekron, and Silli-bêl, king of Gaza, and adds to Judah's former tribute.
+types: [occurrence]
+part_of: [sennacherib-third-campaign-701]
+date:
+  value: 701 BCE
+  mode: window
+  calendar: regnal
+  as_written: ina šalši girriya (in my third campaign)
+  cite:
+    - says: The prism numbers the campaign as Sennacherib's third and gives no year.
+      source: luckenbill-annals-sennacherib
+      at: p. 29, Oriental Institute prism col. II 37
+      quote: In my third campaign I went against the Hittite-land.
+    - says: Luckenbill dates the third campaign, and the siege of Jerusalem in it, to 701 BCE.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 12 (introduction)
+      quote: According to the Assyrian account this siege, conducted in 701, led to the submission of Hezekiah
+participants:
+  - actor: sennacherib
+    role: leader
+  - actor: kingdom-of-judah
+    role: subject
+  - actor: mitinti-of-ashdod
+    role: participant
+  - actor: padi-of-ekron
+    role: participant
+  - actor: silli-bel-of-gaza
+    role: participant
+places:
+  - place: ashdod
+    role: context
+    note: Mitinti's city.
+  - place: ekron
+    role: context
+    note: Padi's city.
+  - place: gaza
+    role: context
+    note: Silli-bêl's city.
+cite:
+  - says:
+      The prism records Hezekiah's despoiled cities given to the kings of Ashdod, Ekron and Gaza, and
+      the tribute increased.
+    source: luckenbill-annals-sennacherib
+    at: p. 33, Oriental Institute prism col. III 31–36
+    quote:
+      The cities of his, which I had despoiled, I cut off from his land and to Mitinti, king of Ashdod,
+      Padi, king of Ekron, and Silli-bêl king of Gaza, I gave. And (thus) I diminished his land. I added
+      to the former tribute,
+notes: A transfer of territory with no named cities and no extent, so nothing is drawn.

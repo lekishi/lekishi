@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Mari, on the middle Euphrates, whose people, with Tuttul's, the prologue says Hammurabi spared.
+types: [capital]
+names:
+  - form: Mera
+    lang: en
+    script: Latn
+    cite:
+      - id: mari-name
+        says: The prologue names Mera, which is Mari, with Tutul.
+        source: king-code-of-hammurabi
+        at: prologue
+        quote: who spared the inhabitants of Mera and Tutul
+  - form: Mari
+    lang: en
+    script: Latn
+    note: The modern form; King's 1910 translation writes Mera.
+    claim: mari-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [40.8886204, 34.550339]
+    notes: The gazetteer's point for the ancient city as a whole; it places no temple or wall.
+    cite:
+      - says: The Pleiades gazetteer records Māri (Tell Hariri), a city on the Euphrates, with a precise point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/286681704 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "286681704"
+    url: https://pleiades.stoa.org/places/286681704
+    license: CC-BY-3.0
+    note: Māri
+notes:
+  The 1910 translation's Mera is taken to be Mari; that identification is editorial and should be
+  checked against a modern translation.

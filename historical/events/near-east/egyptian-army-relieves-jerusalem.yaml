@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Pharaoh's army comes out of Egypt, and the Chaldeans besieging Jerusalem hear of it and depart
+  for a time. The Jewish Encyclopedia says they raised the siege long enough to repulse the Egyptians
+  and came back.
+types: [occurrence]
+part_of: [nebuchadnezzar-campaign-589-586]
+date:
+  value: 589 BCE..586 BCE
+  mode: window
+  calendar: unknown
+  as_written: not dated; during the siege (Jeremiah 37:5)
+  cite:
+    - says: The Bible Journey dates Zedekiah's rebellion, and so the start of the war, to 589 BCE.
+      basis: interpretation
+      attributed_to: Chris and Jenifer Taylor, The Bible Journey
+      source: bible-journey-taylor
+      at: Jerusalem falls to the Babylonians, note on 2 Kings 25:1-21
+    - says:
+        The Jewish Encyclopedia dates the yielding of the wall, at the end of the eighteen-month siege,
+        to 586.
+      role: supporting
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: At the end of eighteen months (586) the wall yielded.
+places:
+  - place: jerusalem
+    role: site
+participants:
+  - actor: saite-egypt
+    role: participant
+  - actor: neo-babylonian-empire
+    role: participant
+cite:
+  - says: Jeremiah records the Chaldeans departing from Jerusalem on news of Pharaoh's army.
+    source: bible-kjv
+    at: Jeremiah 37:5
+    quote:
+      "Then Pharaoh’s army was come forth out of Egypt: and when the Chaldeans that besieged Jerusalem
+      heard tidings of them, they departed from Jerusalem."
+  - says: Jeremiah records the siege broken up for fear of Pharaoh's army.
+    source: bible-kjv
+    at: Jeremiah 37:11
+    quote: when the army of the Chaldeans was broken up from Jerusalem for fear of Pharaoh’s army
+    role: supporting
+  - says:
+      The Jewish Encyclopedia says the Babylonians raised the siege long enough to repulse the Egyptians
+      and came back.
+    role: supporting
+    basis: interpretation
+    attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+    source: jewish-encyclopedia
+    at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+    quote: The Babylonians raised the siege (Jer. xxxvii. 3-5) long enough to repulse the Egyptian arms
+  - says: The Bible Journey says Pharaoh Hophra came to Judah's aid for several months.
+    role: supporting
+    basis: interpretation
+    attributed_to: Chris and Jenifer Taylor, The Bible Journey
+    source: bible-journey-taylor
+    at: Jerusalem falls to the Babylonians, note on 2 Kings 25:1-21
+notes:
+  "No battle is recorded: Jeremiah tells only of the Chaldeans departing, and the cited reading of
+  a repulse is the Jewish Encyclopedia's."

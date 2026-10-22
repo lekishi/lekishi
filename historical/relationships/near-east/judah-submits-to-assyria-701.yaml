@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  'Hezekiah''s submission to Sennacherib: tribute and servitude in the prism, "I have offended"
+  and tribute in the books of Kings. The two accounts differ on where and how much.'
+types: [diplomacy]
+from: kingdom-of-judah
+to: neo-assyrian-empire
+date:
+  value: 701 BCE
+  mode: window
+  calendar: regnal
+  as_written: ina šalši girriya (in my third campaign)
+  cite:
+    - says: The prism numbers the campaign as Sennacherib's third and gives no year.
+      source: luckenbill-annals-sennacherib
+      at: p. 29, Oriental Institute prism col. II 37
+      quote: In my third campaign I went against the Hittite-land.
+    - says: Luckenbill dates the third campaign, and the siege of Jerusalem in it, to 701 BCE.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 12 (introduction)
+      quote: According to the Assyrian account this siege, conducted in 701, led to the submission of Hezekiah
+cite:
+  - says: The prism records Hezekiah sending messengers to pay tribute and accept servitude.
+    source: luckenbill-annals-sennacherib
+    at: p. 34, Oriental Institute prism col. III 48–49
+    quote: To pay tribute and to accept (lit. do) servitude, he dispatched his messenger(s).
+  - says: The books of Kings record Hezekiah's submission at Lachish.
+    role: supporting
+    source: bible-kjv
+    at: 2 Kings 18:14
+    quote: "I have offended; return from me: that which thou puttest on me will I bear."

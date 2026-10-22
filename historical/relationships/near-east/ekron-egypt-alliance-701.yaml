@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Ekron's appeal to the Egyptian kings and the king of Meluhha, whose army came to its aid and
+  fought Sennacherib at Eltekeh.
+types: [alliance]
+from: ekron-kingdom
+to: kushite-egypt
+date:
+  value: 701 BCE
+  mode: window
+  calendar: regnal
+  as_written: ina šalši girriya (in my third campaign)
+  cite:
+    - says: The prism numbers the campaign as Sennacherib's third and gives no year.
+      source: luckenbill-annals-sennacherib
+      at: p. 29, Oriental Institute prism col. II 37
+      quote: In my third campaign I went against the Hittite-land.
+    - says: Luckenbill dates the third campaign, and the siege of Jerusalem in it, to 701 BCE.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 12 (introduction)
+      quote: According to the Assyrian account this siege, conducted in 701, led to the submission of Hezekiah
+cite:
+  - says: The prism records Ekron calling on the Egyptian kings, who came to its aid.
+    source: luckenbill-annals-sennacherib
+    at: p. 31, Oriental Institute prism col. II 78–81
+    quote: they (lit. their heart) became afraid, and called upon the Egyptian kings,
+notes: Recorded as an appeal answered by an army, as the prism tells it; the prism states no treaty.

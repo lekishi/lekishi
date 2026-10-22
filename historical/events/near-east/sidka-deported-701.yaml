@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Sidka, king of Ashkelon, who had not submitted, is carried off to Assyria with the gods of his
+  father-house, his wife, his sons, his daughters and his brothers, and Sharru-lu-dari, son of Rukibti,
+  their former king, is set over Ashkelon under tribute.
+types: [occurrence]
+part_of: [sennacherib-third-campaign-701]
+date:
+  value: 701 BCE
+  mode: window
+  calendar: regnal
+  as_written: ina šalši girriya (in my third campaign)
+  cite:
+    - says: The prism numbers the campaign as Sennacherib's third and gives no year.
+      source: luckenbill-annals-sennacherib
+      at: p. 29, Oriental Institute prism col. II 37
+      quote: In my third campaign I went against the Hittite-land.
+    - says: Luckenbill dates the third campaign, and the siege of Jerusalem in it, to 701 BCE.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 12 (introduction)
+      quote: According to the Assyrian account this siege, conducted in 701, led to the submission of Hezekiah
+places:
+  - place: ashkelon
+    role: site
+participants:
+  - actor: sennacherib
+    role: leader
+  - actor: sidka-of-ashkelon
+    role: subject
+  - actor: sharru-lu-dari
+    role: subject
+    note: Set over Ashkelon.
+cite:
+  - says: The prism records Sidka of Ashkelon and his family carried off to Assyria.
+    source: luckenbill-annals-sennacherib
+    at: p. 30, Oriental Institute prism col. II 60–64
+    quote:
+      But Sidka, king of Ashkelon, who had not submitted to my yoke,—the gods of his father-house,
+      himself, his wife, his sons, his daughters, his brothers, the seed of his father-house, I tore away
+      and brought to Assyria.
+  - says: The prism records Sharru-lu-dari set over Ashkelon under tribute.
+    source: luckenbill-annals-sennacherib
+    at: p. 30–31, Oriental Institute prism col. II 65–67
+    quote:
+      Sharru-lu-dari, son of Rukibti, their former king, I set over the people of Ashkelon and I imposed
+      upon him the payment of tribute
+    role: supporting
+notes:
+  A forced removal of a king and his house. The prism names Assyria as the destination and no city,
+  so no journey is drawn.

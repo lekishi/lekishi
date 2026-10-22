@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Nebuzaradan takes Seraiah the chief priest, Zephaniah the second priest, the three keepers of
+  the door, an officer over the men of war, men of the king's presence, the principal scribe of the host
+  and sixty men of the people of the land to the king of Babylon at Riblah, who puts them to death.
+types: [occurrence]
+part_of: [nebuchadnezzar-campaign-589-586]
+date:
+  value: 587 BCE..586 BCE
+  mode: window
+  calendar: regnal
+  as_written: fifth month, nineteenth year of Nebuchadnezzar (2 Kings 25:8)
+  cite:
+    - says: The Bible Journey dates the breach of Jerusalem's walls to July 587 BCE.
+      basis: interpretation
+      attributed_to: Chris and Jenifer Taylor, The Bible Journey
+      source: bible-journey-taylor
+      at: Jerusalem falls to the Babylonians, note on 2 Kings 25:1-21
+    - says: The Jewish Encyclopedia dates the yielding of the wall to 586.
+      role: supporting
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: At the end of eighteen months (586) the wall yielded.
+places:
+  - place: jerusalem
+    role: start
+  - place: riblah
+    role: end
+participants:
+  - actor: nebuzaradan
+    role: leader
+  - actor: nebuchadnezzar-ii
+    role: participant
+cite:
+  - says: The books of Kings record the king of Babylon putting them to death at Riblah.
+    source: bible-kjv
+    at: 2 Kings 25:21
+    quote: And the king of Babylon smote them, and slew them at Riblah in the land of Hamath.
+  - says: The books of Kings count five men of the king's presence.
+    source: bible-kjv
+    at: 2 Kings 25:19
+    quote: five men of them that were in the king’s presence
+    role: supporting
+  - says: Jeremiah counts seven.
+    role: alternative
+    source: bible-kjv
+    at: Jeremiah 52:25
+    quote: seven men of them that were near the king’s person
+dispute:
+  status: disputed
+  summary:
+    The books of Kings count five men of the king's presence, Jeremiah seven. The chapter keeps
+    both counts.

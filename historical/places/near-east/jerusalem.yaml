@@ -1,0 +1,69 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Jerusalem, the royal city of the kings of Judah. Sennacherib's prism records that he shut
+  Hezekiah up in it in 701 BCE, and the books of Kings record Nebuchadnezzar II's capture of it in
+  597 BCE and its burning by his captain of the guard. The point is the ancient city as the Pleiades
+  gazetteer places it.
+types: [capital]
+names:
+  - form: Jerusalem
+    lang: en
+    script: Latn
+    cite:
+      - id: jerusalem-name
+        says:
+          The books of Kings name Jerusalem as the city Nebuchadnezzar II's servants besieged and as
+          Hezekiah's city.
+        sources:
+          - source: bible-kjv
+            at: 2 Kings 24:10
+            quote:
+              At that time the servants of Nebuchadnezzar king of Babylon came up against Jerusalem,
+              and the city was besieged.
+          - source: bible-kjv
+            at: 2 Kings 18:17
+            quote: And they went up and came to Jerusalem.
+  - form: Ursalimmu
+    lang: akk
+    script: Latn
+    note: Sennacherib's prism writes the name Ur-sa-li-im-mu; the form here is an editorial
+      normalization of that spelling.
+    cite:
+      - id: jerusalem-name-prism
+        says: Sennacherib's prism names Jerusalem as Hezekiah's royal city, in which he shut him up.
+        source: luckenbill-annals-sennacherib
+        at: p. 33, Oriental Institute prism col. III 27–28
+        quote: Himself, like a caged bird I shut up in Jerusalem his royal city.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [35.234978, 31.7771895]
+    notes:
+      The gazetteer's representative point for the ancient city. It marks the city as a whole; it
+      places no wall line, gate, palace or temple of the eighth or sixth century BCE.
+    cite:
+      - id: jerusalem-identification
+        says:
+          The Pleiades gazetteer records the ancient city of Jerusalem with a precise representative
+          point at the old city.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/687928 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+modern:
+  - form: Jerusalem
+    lang: en
+    note: The modern city, recorded for orientation; the point lies in its old city.
+external_ids:
+  - system: pleiades
+    id: "687928"
+    url: https://pleiades.stoa.org/places/687928
+    license: CC-BY-3.0
+    note: Ierusalem/Hierosolyma/Col. Aelia Capitolina.
+  - system: wikidata
+    id: Q1218
+    url: https://www.wikidata.org/wiki/Q1218
+    license: CC0-1.0
+    note: External identifier only; no Wikidata value is used.
+notes:
+  The place is shared by every chapter that reaches Jerusalem, so its names and point stay neutral
+  between periods. Each chapter's events say what happened there and when.

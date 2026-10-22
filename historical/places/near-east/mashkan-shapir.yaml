@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Mashkan-shapir, a city on the Tigris side of Babylonia whose inhabitants the prologue says Hammurabi
+  granted life.
+types: [settlement]
+names:
+  - form: Mashkanshabri
+    lang: en
+    script: Latn
+    cite:
+      - id: mashkan-shapir-name
+        says: The prologue names Mashkanshabri.
+        source: king-code-of-hammurabi
+        at: prologue
+        quote: who granted life to the inhabitants of Mashkanshabri
+  - form: Mashkan-shapir
+    lang: en
+    script: Latn
+    note: The modern scholarly form.
+    claim: mashkan-shapir-name
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [45.2207, 32.4055]
+    notes: The gazetteer's point for the ancient city as a whole; it places no temple or wall.
+    cite:
+      - says: The Pleiades gazetteer records Mashkan-Shapir with a precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/715980704 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "715980704"
+    url: https://pleiades.stoa.org/places/715980704
+    license: CC-BY-3.0
+    note: Mashkan-Shapir

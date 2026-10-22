@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Sennacherib shuts Hezekiah up in Jerusalem, his royal city, "like a caged bird", throws up earthworks
+  against him, and the Urbi (Arabs) and mercenary troops Hezekiah had brought in desert him. The prism
+  claims no capture of the city.
+types: [occurrence]
+part_of: [sennacherib-third-campaign-701]
+date:
+  value: 701 BCE
+  mode: window
+  calendar: regnal
+  as_written: ina šalši girriya (in my third campaign)
+  cite:
+    - says: The prism numbers the campaign as Sennacherib's third and gives no year.
+      source: luckenbill-annals-sennacherib
+      at: p. 29, Oriental Institute prism col. II 37
+      quote: In my third campaign I went against the Hittite-land.
+    - says: Luckenbill dates the third campaign, and the siege of Jerusalem in it, to 701 BCE.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 12 (introduction)
+      quote: According to the Assyrian account this siege, conducted in 701, led to the submission of Hezekiah
+places:
+  - place: jerusalem
+    role: site
+participants:
+  - actor: sennacherib
+    role: leader
+  - actor: hezekiah
+    role: subject
+cite:
+  - says: The prism records Hezekiah shut up in Jerusalem and earthworks thrown up against him.
+    source: luckenbill-annals-sennacherib
+    at: p. 33, Oriental Institute prism col. III 27–30
+    quote:
+      Himself, like a caged bird I shut up in Jerusalem his royal city. Earthworks I threw up against
+      him,— the one coming out of the city-gate, I turned back to his misery.
+  - says: The prism records the desertion of the troops Hezekiah had brought into Jerusalem.
+    source: luckenbill-annals-sennacherib
+    at: p. 33–34, Oriental Institute prism col. III 37–41
+    quote:
+      the Urbi (Arabs) and his mercenary(?) troops which he had brought in to strengthen Jerusalem,
+      his royal city, deserted him
+    role: supporting
+  - says: Luckenbill observes that the prism does not mention the capture of the city.
+    role: supporting
+    basis: interpretation
+    attributed_to: D. D. Luckenbill (1924)
+    source: luckenbill-annals-sennacherib
+    at: p. 12 (introduction)
+    quote:
+      According to the Assyrian account this siege, conducted in 701, led to the submission of Hezekiah
+      (it does not mention the capture of the city)

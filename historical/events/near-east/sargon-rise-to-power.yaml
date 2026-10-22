@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Sargon comes to power as king of Agade. The Chronicle of Early Kings says only that he came to
+  power and had no rival; King (1910) notes the tradition that Ishtar raised him to the throne; the Legend
+  of Sargon tells a birth in secret, a basket of rushes on the Euphrates and his upbringing by Akki the
+  irrigator.
+types: [occurrence]
+date:
+  value: 2334 BCE..2279 BCE
+  mode: window
+  calendar: unknown
+  as_written: not dated in the chronicle
+  cite:
+    - says: The Livius translation dates Sargon's reign to 2334–2279 BCE in the middle chronology.
+      basis: interpretation
+      attributed_to: Livius.org
+      source: livius-abc-20
+      at: tablet A, line 1, note
+places:
+  - place: agade
+    role: site
+participants:
+  - actor: sargon-of-akkad
+    role: subject
+cite:
+  - says: The chronicle says Sargon, king of Agade, came to power and had neither rival nor equal.
+    source: livius-abc-20
+    at: tablet A, lines 1–2
+  - says: King notes the tradition that the goddess Ishtar supported Sargon in raising him to the throne.
+    role: supporting
+    basis: interpretation
+    attributed_to: L. W. King (1910)
+    source: king-sumer-akkad
+    at: chapter VIII (the empire of Akkad)
+    quote: the goddess Ishtar is stated to have given Sargon, both in raising him to the throne
+  - says:
+      The legend has his mother place him in a basket of rushes sealed with bitumen and launch him on
+      the river.
+    role: conflicting
+    source: smith-chaldean-genesis
+    at: chapter XVII (the Legend of Sargon), line 5
+    quote: She placed me in a basket of rushes, with bitumen my exit she sealed up.
+  - says: The legend has the river carry him to Akki the irrigator, who brought him up.
+    role: conflicting
+    source: smith-chaldean-genesis
+    at: chapter XVII (the Legend of Sargon), line 7
+    quote: The river carried me, to Akki the irrigator it brought me.
+dispute:
+  status: disputed
+  summary:
+    The chronicle gives no origin; the legend from Ashurbanipal's library tells a birth story that
+    Smith compares with Moses in the ark. The chapter publishes his coming to power and keeps the legend's
+    story as a claim about what the legend says, not as events.
+notes: The legend names the city of his birth Azupiranu, on the Euphrates; it is not recorded as a place.
+part_of: [sargon-reign]

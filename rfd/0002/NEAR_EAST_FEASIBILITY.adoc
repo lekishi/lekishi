@@ -1,0 +1,235 @@
+= Mesopotamia and the Levant chapters: feasibility and findings
+:state: Draft chapters for testing data and engine work — findings for owner review; not published atlas content, not an RFD decision
+:research-window: single pass, 2026-10-21
+:toc:
+:toclevels: 2
+
+This note covers four draft chapters written in one pass for the owner's
+request of 2026-10-21: as many chapters and events before 100 CE as
+possible, to test the data format and the engine. It records, for each
+chapter, which sources were reachable and usable under the source register's
+commercial-use rule, what the sources let the records say about dates and
+places, and where the contract could not hold what the sources say.
+
+Nothing here is published atlas content. The four manifests are drafts with
+no approval block; none has been approved, and approval is the owner's step,
+in each manifest (link:AUTHORING_FORMAT.adoc[the authoring format record]).
+Until then production leaves the chapters out and names them in no public
+file; previews show them under the draft banner, and signed-in members of
+the `lekishi` organization may open them (link:../0006/README.adoc[RFD 6]).
+
+== What was written
+
+All records are in the world-first tree under the `near-east/` subfolders.
+Ids are global, so the shared places (Jerusalem, Babylon, Nineveh, Ur, Ashur,
+Mari and others) are minted once and copied byte for byte by the other
+regional threads that reach them.
+
+[cols="3,1,1,1,1,1",options="header"]
+|===
+|Chapter (manifest) |Places |Actors |Events |Relationships |Steps
+
+|Sennacherib's campaign to Judah (`sennacherib-judah-701`)
+|20 |20 |21 |3 |23
+
+|Nebuchadnezzar II takes Jerusalem (`nebuchadnezzar-jerusalem-597-586`)
+|8 |13 |22 |3 |23
+
+|Hammurabi's conquests by year name (`hammurabi-year-names`)
+|23 |7 |12 |2 |12
+
+|Sargon of Akkad's campaigns (`sargon-of-akkad`)
+|10 |3 |11 |1 |11
+|===
+
+Place counts include places reused from another chapter. Gaza and Joppa are
+copied from the Egypt and the Nile branch with their sources, unchanged.
+
+== Sources
+
+Every quotation is from a public-domain work. Modern pages under copyright
+are cited without quotation, for the dates and identifications they state.
+The register rows are in link:../../docs/SOURCE_REGISTER.adoc[the source
+register] under "Primary texts and editions".
+
+[cols="2,2,1,3",options="header"]
+|===
+|Source |Used for |Terms |Notes
+
+|The Bible, King James Version (Gutenberg eBook 10)
+|Kings, Chronicles, Jeremiah, Isaiah; Acts for the Rome thread
+|Public domain
+|The Crown's letters patent in the UK cover printing, not quotation. The Hebrew and Greek texts are the critical witnesses.
+
+|Luckenbill, _The Annals of Sennacherib_ (1924)
+|The Oriental Institute prism, the Lachish epigraph
+|Work public domain; ISAC's scan labelled CC BY-NC-ND 4.0
+|Quote the work, never redistribute the scan. Quotes checked against the OCR and page images.
+
+|Herodotus, Macaulay's translation (Gutenberg)
+|II.141, the mice at Pelusion
+|Public domain
+|Shared with the Greece thread.
+
+|_Jewish Encyclopedia_ (1906)
+|BCE years for 598, 597, 586 and 561
+|Work public domain; site "all rights reserved"
+|Quote the 1906 text; the signing authors' datings are cited as interpretation.
+
+|_Catholic Encyclopedia_ (1910), "Hammurabi" by C. L. Souvay
+|Six competing datings of Hammurabi's reign; years 30 and 31
+|Work public domain; site copyright on its presentation
+|Datings cited as Souvay's interpretation.
+
+|Hastings, _Dictionary of the Bible_ (1909)
+|The year-names of Hammurabi's years 1–4; 43 year-names against the king list's 55 years
+|Public domain
+|OCR page text; quote only clean passages.
+
+|L. W. King, translation of the Code of Hammurabi (1910), Avalon Project text
+|The prologue's roll of cities
+|Public domain
+|The prologue is a royal claim of dominion, not a dated record.
+
+|King and Hall (1906); King, _Sumer and Akkad_ (1910); King, _Legends of Babylon and Egypt_ (1918); Smith and Sayce, _The Chaldean Account of Genesis_ (1880)
+|Year-formulas, Hammurabi's letters, Sargon's Nippur inscriptions (after Poebel 1914), the Omens and the Chronicle as King reports them, the Legend of Sargon, and four datings of Sargon
+|Public domain (Gutenberg)
+|Readings of their day, cited as interpretation; several are now overtaken, and the records say so.
+
+|Livius.org, ABC 5 and ABC 20 translations
+|The Babylonian Chronicle for 598–597; the Chronicle of Early Kings for Sargon; middle-chronology conversions
+|"All content copyright" (read 2026-10-21)
+|Cite only, no quotation.
+
+|Chris and Jenifer Taylor, _The Bible Journey_
+|The 587 BCE chronology, Gedaliah 587/586, Nebuchadnezzar 604–562
+|"© 2026" (read 2026-10-21)
+|Cite only. A popular reference; the only cited source for 587 and for Gedaliah's year.
+
+|Musée du Louvre, "The Code of Hammurabi"
+|The middle-chronology reign 1792–1750 and "engraved around 1750"
+|Legal notice forbids reproduction and commercial reuse (read 2026-10-21)
+|Cite only, for the dates.
+
+|Pleiades (dump of 2026-10-21)
+|Points for 40 places
+|CC BY 3.0
+|Shared bytes with the other threads.
+|===
+
+Not reachable in this pass: archive.org, CDLI (Oxford wiki and UCLA), ETCSL,
+HathiTrust, the British Museum collection pages, USCCB and Britannica. That
+cost two things. There is no public-domain list of Hammurabi's 43 year-names,
+so the chapter has years 1–4, 7, 30 and 31 only; and there is no modern
+quotable translation of any Akkadian text in the four chapters except through
+1906–1924 editions.
+
+== Dating
+
+The chapters were picked to stress dating, and they do.
+
+* *Regnal years with no Babylonian calendar.* The prism numbers campaigns,
+  the Chronicle and the biblical books give regnal years, months and days,
+  and Hammurabi's years are named, not numbered. The contract's calendars are
+  julian, gregorian, islamic, chinese_lunisolar, regnal and unknown. Every
+  date keeps its day or year-name in `as_written` and takes its BCE year from
+  a cited conversion, at year precision.
+* *No conversion from a regnal year with a cited epoch.* Only one source in
+  the four chapters converts a single regnal year: the Livius note putting
+  Sargon's eleventh year in 2323 BCE. Every other year-named or year-numbered
+  event carries the window of its reign (1792–1750 for Hammurabi, 2334–2279
+  for Sargon) or of the cited bounds (587–561 for the third deportation).
+  The two reign events themselves are durations, activity across the whole
+  span, while the events inside them are windows, one occurrence somewhere
+  in it.
+* *Competing chronologies.* Hammurabi's reign is dated 1792–1750 (Louvre),
+  2130–2088, 2121–2066, 1990–1950 and from 2342, 2056 or 2041 (Catholic
+  Encyclopedia, 1910). Sargon's is 2334–2279 (middle chronology), about 2650
+  (King 1910), about 3800 (King and Hall, after Nabonidus) and about 1800
+  (Smith 1880). The contract can hold one date value per record, so the
+  other datings are alternative claims whose numbers live only in their
+  `says` text, carried once on a reign event.
+* *Disputed days and years inside one source tradition.* The temple burned on
+  the 7th (2 Kings 25:8) or the 10th (Jeremiah 52:12) of the fifth month;
+  Jehoiachin was released on the 27th or the 25th; Jerusalem was taken in
+  Nebuchadnezzar's 7th year (Chronicle, Jeremiah 52:28) or his 8th (2 Kings
+  24:12). These are conflicting claims on the date, with a dispute.
+* *587 against 586.* The fall of Jerusalem is a window `587 BCE..586 BCE`
+  with a dispute, and every event that follows it inherits the window.
+* *"About".* The Louvre's "around 1750" and King's "about 2650" cannot be
+  written in the date notation, although v0 has `endpoint_certainty`.
+
+== Placement
+
+* Of 54 place records, 40 take a Pleiades point. Three take a display
+  anchor only, because the chapter has no cited identification: Akzib (at
+  Ekdippa), Tahpanhes (at Daphnai) and Ebla (Sargon's Ibla, at Tell Mardikh).
+* Eleven are `unknown`: Banai-barqa, Azuru, Eltekeh, Libnah, Azekah, Agade,
+  Malgium, Emutbal, Iarmuti, Kazallu and Subartu. The plains of Jericho are
+  carried by the town's point, with a note.
+* The Cedar Forest has two candidate positions, the Amanus and the Lebanon,
+  as King weighs them in 1918, with a dispute on the place. It is the first
+  place in the tree with two positions. Checked on 2026-10-21: the atlas's
+  projection keeps only the first position (the Amanus) and does not carry
+  the place's dispute, so the first position's note names the Lebanon as the
+  other candidate, which is all a reader sees of it.
+* A start or end the sources do not name is a `context` place, never a
+  `start` or `end`, because the atlas places an event at its first located
+  non-context place: Babylon on Nebuchadnezzar's march west and on the third
+  deportation, Agade on Sargon's march, and the city of Ashur for the
+  King's Company, whose letter names the country.
+* Hammurabi's prologue gives one event 21 context places. It is a test of a
+  claim of dominion drawn as places, not as a territory.
+* No route and no territory is drawn in any of the four chapters: the
+  sources give stops (Sargon's march, Zedekiah's flight, the deportations)
+  but no stages, and no extent.
+
+== Disputes, legend and identity
+
+* Miraculous and legendary accounts are claims about what a text says, never
+  events: the angel of the LORD and Herodotus' mice (701), Marduk's
+  punishment of Sargon, and the Legend of Sargon's basket of rushes.
+* Sargon's identity is a dispute on the actor: King and Hall (1906) take the
+  Shargani-shar-ali of the inscriptions for Sargon, King (1910) argues the
+  traditional Sargon is Shar-Gani-sharri under an older king's name, and King
+  (1918) quotes Sargon's own inscriptions as Sharru-kin's. The chapter
+  follows 1918.
+* Overtaken scholarship is cited as its author's, with the year: King and
+  Hall's reading of a Hammurabi letter as proof that Assyria was a Babylonian
+  province, and every pre-1920 chronology.
+
+== Findings for the engine and the data format
+
+Proposals only; none is built.
+
+. *A `tradition` (or `legend`) evidence state.* Legendary and miraculous
+  accounts are now `conflicting` claims, which overstates them: they do not
+  contest the event, they explain it. A separate state would let the reader
+  show them as tradition.
+. *Competing chronologies as structured sibling dates.* An alternative claim
+  could carry its own date value, so the viewer can switch a chapter between
+  the middle chronology and others, or show the spread.
+. *A regnal calendar with a cited epoch.* "Year 30 of Hammurabi" plus a cited
+  accession year under a named chronology would give a one-year window
+  instead of the whole reign.
+. *A Babylonian lunisolar calendar*, so day dates like Addaru 2, year 7, can
+  be stored as dates, not only as text.
+. *"About" in the date notation*, mapping to v0's `endpoint_certainty`.
+. *Hebrew script in the fonts*, so names can be given in Hebrew; for now they
+  are Latin-script forms.
+. *Alternative positions for one place*, so a place with two cited
+  candidates (the Cedar Forest) shows both, with its dispute, rather than
+  the first.
+. *Media for the Lachish reliefs and the Hammurabi stele*, once media
+  records exist; both are central images and both are held by museums whose
+  terms need reading.
+
+== Shared ids
+
+Other threads should copy these files byte for byte rather than mint their
+own: places `jerusalem`, `babylon`, `nineveh`, `sidon`, `byblos`, `arvad`,
+`pelusium`, `ur`, `uruk`, `nippur`, `ashur`, `mari`, `agade`, `susa` (held by
+the Greece thread), `gaza` and `joppa` (held by the Egypt thread); actors
+`kingdom-of-judah`, `neo-assyrian-empire`, `neo-babylonian-empire`, `elam`;
+sources `bible-kjv`, `luckenbill-annals-sennacherib`, `jewish-encyclopedia`,
+`king-sumer-akkad`, `king-hall-history`.

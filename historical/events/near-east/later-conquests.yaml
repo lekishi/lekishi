@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "After Larsa, the Catholic Encyclopedia lists further triumphs: Rabiqu, Dupliash, Kar-Shamash,
+  possibly Turukku, Kakmum and Sube fell to Hammurabi, so that by the end of his life he had joined northern
+  and southern Babylonia into one empire."
+types: [campaign]
+part_of: [hammurabi-reign]
+date:
+  value: 1792 BCE..1750 BCE
+  mode: window
+  calendar: unknown
+  as_written: not dated by year in the cited source
+  cite:
+    - says: The Louvre dates Hammurabi's reign, and the stele, to -1792/-1750, the modern middle chronology.
+      basis: interpretation
+      attributed_to: Musée du Louvre
+      source: louvre-code-of-hammurabi
+      at: "caption: Code de Hammurabi, -1792 / -1750"
+participants:
+  - actor: hammurabi
+    role: leader
+  - actor: first-dynasty-of-babylon
+    role: participant
+cite:
+  - says:
+      The Catholic Encyclopedia lists the later conquests and says Hammurabi knit north and south Babylonia
+      into one empire.
+    basis: interpretation
+    attributed_to: C. L. Souvay, Catholic Encyclopedia (1910)
+    source: catholic-encyclopedia
+    at: Hammurabi (Charles L. Souvay)
+    quote:
+      "Other triumphs followed: Rabiqu, Dupliash, Kar-Shamash, possibly Turukku, Kakmum, and Sube fell
+      into his power"
+notes:
+  "The six places are not recorded as places: the cited source does not locate them, and the chapter
+  has no gazetteer record for them. The text dates the event by the year-name of Hammurabi's thirty-second
+  to forty-third year. No cited source converts that year to a BCE year, so the date is the reign's window
+  in the middle chronology the Louvre uses; a regnal calendar with a cited epoch would narrow it to one
+  year. The year depends on the chronology, which the reign records as a dispute."

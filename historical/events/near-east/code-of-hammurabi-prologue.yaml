@@ -1,0 +1,97 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Hammurabi's law code is engraved on a basalt stele whose prologue names the cities he claims
+  to have cared for, from Eridu and Ur in the south to Mari and Tuttul on the Euphrates and Ashur and
+  Nineveh on the Tigris. The Louvre dates the engraving to around 1750 BCE.
+types: [other]
+part_of: [hammurabi-reign]
+date:
+  value: 1750 BCE
+  mode: window
+  calendar: unknown
+  as_written: not dated in the text
+  cite:
+    - says: The Louvre says the text was engraved around 1750 BCE.
+      basis: interpretation
+      attributed_to: Musée du Louvre
+      source: louvre-code-of-hammurabi
+      at: introduction, first paragraph
+places:
+  - place: nippur
+    role: context
+    note: 'Prologue: "enriching Nippur and Dur-ilu beyond compare".'
+  - place: eridu
+    role: context
+    note: 'Prologue: "who reestablished Eridu".'
+  - place: babylon
+    role: context
+    note: 'Prologue: "made great the name of Babylon".'
+  - place: ur
+    role: context
+    note: 'Prologue: "who enriched Ur".'
+  - place: sippar
+    role: context
+    note: 'Prologue: "who again laid the foundations of Sippara".'
+  - place: larsa
+    role: context
+    note: 'Prologue: "the warrior who guarded Larsa".'
+  - place: uruk
+    role: context
+    note: 'Prologue: "the lord who granted new life to Uruk".'
+  - place: isin
+    role: context
+    note: 'Prologue: "who reunited the scattered inhabitants of Isin".'
+  - place: kish
+    role: context
+    note: 'Prologue: "who firmly founded the farms of Kish".'
+  - place: cutha
+    role: context
+    note: 'Prologue: "who increased the power of Cuthah".'
+  - place: borsippa
+    role: context
+    note: 'Prologue: "who rejoiced the inhabitants of Borsippa".'
+  - place: dilbat
+    role: context
+    note: 'Prologue: "who broadened the fields of Dilbat".'
+  - place: lagash
+    role: context
+    note: 'Prologue: "who provided food and drink for Lagash and Girsu".'
+  - place: girsu
+    role: context
+    note: 'Prologue: "who provided food and drink for Lagash and Girsu".'
+  - place: adab
+    role: context
+    note: 'Prologue: "the king who granted life to the city of Adab".'
+  - place: mashkan-shapir
+    role: context
+    note: 'Prologue: "who granted life to the inhabitants of Mashkanshabri".'
+  - place: mari
+    role: context
+    note: 'Prologue: "who spared the inhabitants of Mera and Tutul".'
+  - place: tuttul
+    role: context
+    note: 'Prologue: "who spared the inhabitants of Mera and Tutul".'
+  - place: agade
+    role: context
+    note: 'Prologue: "in the suburb of Agade".'
+  - place: ashur
+    role: context
+    note: 'Prologue: "who gave back to the city of Ashur its protecting god".'
+  - place: nineveh
+    role: context
+    note: 'Prologue: "who let the name of Ishtar of Nineveh remain in E-mish-mish".'
+participants:
+  - actor: hammurabi
+    role: leader
+cite:
+  - says:
+      The prologue names the cities whose gods and people Hammurabi claims to have honoured, and calls
+      him the king obeyed by the four quarters of the world.
+    source: king-code-of-hammurabi
+    at: prologue
+    quote: the king, obeyed by the four quarters of the world
+notes:
+  The prologue is a royal claim of dominion, not a dated record of conquests; each place keeps its
+  phrase. The Louvre's "around" cannot be written in the date notation, so the year is given as a window
+  of one year. The stele was carried to Susa in the twelfth century BCE; that later history is not part
+  of this chapter.

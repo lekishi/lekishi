@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../schema/chapter.schema.json
+title: Hammurabi's conquests by year name
+summary: Hammurabi of Babylon, king from 1792 BCE in the middle chronology, named each year of his
+  reign for a deed. Follow his year-names from his accession through the wall of Malgium, Uruk and Isin,
+  the defeat of Elam and the conquest of Larsa, to the cities his law code claims, with the reign dated
+  five centuries apart by the chronologies cited.
+window: 1792 BCE..1750 BCE
+story:
+  summary: 'The reign of Hammurabi told by its year-names: four early years, the capture of Uruk and Isin,
+    the wars with Elam and Larsa, the governorship at Larsa, the later conquests and the cities of the
+    code''s prologue.'
+  span: 1792 BCE..1750 BCE
+  coverage: 'Hammurabi''s year-names for years 1–4 (Hastings 1909), 7 (King 1910), 30 and 31 (King and
+    Hall 1906, Catholic Encyclopedia 1910), the later conquests the Catholic Encyclopedia lists, one letter
+    to Sin-idinnam, and the prologue of the code (King''s translation, 1910). Excluded: the laws themselves,
+    the other year-names (no public-domain list was reachable), the wars with Eshnunna and Mari that modern
+    year-name lists record, the Amraphel identification, and the stele''s later history at Susa. No route
+    is drawn, and no territory.'
+  notes: Every year-named event carries the middle-chronology window of the whole reign, because no cited
+    source converts single regnal years and the contract has no regnal calendar with an epoch. The reign
+    event keeps the competing chronologies of 1910 as alternative claims.
+  steps:
+  - hammurabi-reign: The reign, dated five ways
+  - hammurabi-accession: 'Year 1: Hammurabi becomes king'
+  - hammurabi-righteousness-year-2: 'Year 2: the heart of the land in righteousness'
+  - throne-of-nannar-year-3: 'Year 3: a throne for Nannar'
+  - malgium-wall-destroyed: 'Year 4: the wall of Malgium destroyed'
+  - uruk-isin-captured: 'Year 7: Uruk and Isin captured'
+  - elam-army-defeated: 'Year 30: the army of Elam defeated'
+  - emutbal-larsa-conquered: 'Year 31: Emutbal and Larsa conquered'
+  - sin-idinnam-governs-larsa: Sin-idinnam governs Larsa
+  - kings-company-from-ashur: The King's Company from Ashur
+  - later-conquests: The later conquests
+  - code-of-hammurabi-prologue: The cities of the code's prologue
+include: [babylon-elam-war-hammurabi, babylon-larsa-war-hammurabi]

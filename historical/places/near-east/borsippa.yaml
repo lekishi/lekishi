@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Borsippa, the city of the god Nebo and his temple E-zida, whose inhabitants the prologue says
+  Hammurabi rejoiced.
+types: [religious_site]
+names:
+  - form: Borsippa
+    lang: en
+    script: Latn
+    cite:
+      - id: borsippa-name
+        says: The prologue names Borsippa.
+        source: king-code-of-hammurabi
+        at: prologue
+        quote: who rejoiced the inhabitants of Borsippa
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [44.3434, 32.3924]
+    notes: The gazetteer's point for the ancient city as a whole; it places no temple or wall.
+    cite:
+      - says: The Pleiades gazetteer records Borsippa/Burs with a precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/893964 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "893964"
+    url: https://pleiades.stoa.org/places/893964
+    license: CC-BY-3.0
+    note: Borsippa/Burs

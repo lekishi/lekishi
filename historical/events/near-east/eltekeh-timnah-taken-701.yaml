@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: Sennacherib besieges and captures Eltekeh and Timnah and carries off their spoil.
+types: [campaign]
+part_of: [sennacherib-third-campaign-701]
+date:
+  value: 701 BCE
+  mode: window
+  calendar: regnal
+  as_written: ina šalši girriya (in my third campaign)
+  cite:
+    - says: The prism numbers the campaign as Sennacherib's third and gives no year.
+      source: luckenbill-annals-sennacherib
+      at: p. 29, Oriental Institute prism col. II 37
+      quote: In my third campaign I went against the Hittite-land.
+    - says: Luckenbill dates the third campaign, and the siege of Jerusalem in it, to 701 BCE.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 12 (introduction)
+      quote: According to the Assyrian account this siege, conducted in 701, led to the submission of Hezekiah
+places:
+  - place: eltekeh
+    role: site
+  - place: timnah
+    role: site
+participants:
+  - actor: sennacherib
+    role: leader
+cite:
+  - says: The prism records the capture of Eltekeh and Timnah.
+    source: luckenbill-annals-sennacherib
+    at: p. 32, Oriental Institute prism col. III 6–7
+    quote: Eltekeh (and) Timnah I besieged, I captured and took away their spoil.

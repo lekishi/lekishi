@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Hammurabi places Sin-idinnam in authority over Larsa as governor, and writes him the letters
+  that King and Hall call abundant evidence of a strict administration of southern Babylonia.
+types: [occurrence]
+part_of: [hammurabi-reign]
+date:
+  value: 1792 BCE..1750 BCE
+  mode: window
+  calendar: unknown
+  as_written: not dated; after the conquest of Larsa
+  cite:
+    - says: The Louvre dates Hammurabi's reign, and the stele, to -1792/-1750, the modern middle chronology.
+      basis: interpretation
+      attributed_to: Musée du Louvre
+      source: louvre-code-of-hammurabi
+      at: "caption: Code de Hammurabi, -1792 / -1750"
+places:
+  - place: larsa
+    role: site
+participants:
+  - actor: sin-idinnam
+    role: subject
+  - actor: hammurabi
+    role: leader
+cite:
+  - says:
+      King and Hall say Hammurabi placed Sin-idinnam in authority over Larsa and that his letters show
+      a strict administration.
+    basis: interpretation
+    attributed_to: L. W. King and H. R. Hall (1906)
+    source: king-hall-history
+    at: chapter V (Elam and Babylon)
+    quote:
+      the letters of Hammurabi to Sin-idinnam, the governor whom he placed in authority over Larsam,
+      afford abundant evidence of the stringency of the administrative control
+notes:
+  The text dates the event by the year-name of Hammurabi's thirty-first or a later year. No cited
+  source converts that year to a BCE year, so the date is the reign's window in the middle chronology
+  the Louvre uses; a regnal calendar with a cited epoch would narrow it to one year. The year depends
+  on the chronology, which the reign records as a dispute.

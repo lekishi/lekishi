@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Over the people left in Judah the king of Babylon makes Gedaliah son of Ahikam governor; the
+  captains and their men come to him at Mizpah, and Jeremiah dwells with him there.
+types: [occurrence]
+date:
+  value: 587 BCE..586 BCE
+  mode: window
+  calendar: unknown
+  as_written: not dated (2 Kings 25:22; Jeremiah 40:5)
+  cite:
+    - says: The Bible Journey dates Gedaliah's appointment to 587 BCE.
+      basis: interpretation
+      attributed_to: Chris and Jenifer Taylor, The Bible Journey
+      source: bible-journey-taylor
+      at: Jerusalem falls to the Babylonians, note on 2 Kings 25:22-27
+    - says: The Jewish Encyclopedia places the appointment after the fall in 586.
+      role: alternative
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: He placed Gedaliah in authority over the Jews who remained in the land.
+places:
+  - place: mizpah
+    role: site
+participants:
+  - actor: gedaliah
+    role: subject
+  - actor: nebuchadnezzar-ii
+    role: leader
+  - actor: jeremiah
+    role: participant
+  - actor: johanan-son-of-kareah
+    role: participant
+  - actor: ishmael-son-of-nethaniah
+    role: participant
+cite:
+  - says: The books of Kings record Gedaliah made ruler over the people left in Judah.
+    source: bible-kjv
+    at: 2 Kings 25:22
+    quote: even over them he made Gedaliah the son of Ahikam, the son of Shaphan, ruler
+  - says: The books of Kings record the captains coming to Gedaliah at Mizpah.
+    source: bible-kjv
+    at: 2 Kings 25:23
+    quote: there came to Gedaliah to Mizpah, even Ishmael the son of Nethaniah, and Johanan the son of Careah
+    role: supporting
+  - says: Jeremiah records the prophet going to Gedaliah at Mizpah.
+    source: bible-kjv
+    at: Jeremiah 40:6
+    quote:
+      Then went Jeremiah unto Gedaliah the son of Ahikam to Mizpah; and dwelt with him among the people
+      that were left in the land.
+    role: supporting
+dispute:
+  status: disputed
+  summary:
+    The texts give no year. The Bible Journey dates it to 587 BCE; the Jewish Encyclopedia sets
+    it after a fall in 586. The chapter keeps a window over both.

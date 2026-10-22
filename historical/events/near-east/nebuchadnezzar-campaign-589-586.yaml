@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "Nebuchadnezzar's war on Zedekiah after his rebellion: the siege of Jerusalem from the ninth
+  year of Zedekiah to the eleventh, the breach of the walls, Zedekiah's flight and capture, the burning
+  of the temple and the carrying away of the people."
+types: [campaign]
+date:
+  value: 589 BCE..586 BCE
+  mode: window
+  calendar: regnal
+  as_written: tenth day of the tenth month, ninth year of Zedekiah, to the eleventh year (2 Kings 25:1–2)
+  cite:
+    - says: The Bible Journey dates Zedekiah's rebellion, and so the start of the war, to 589 BCE.
+      basis: interpretation
+      attributed_to: Chris and Jenifer Taylor, The Bible Journey
+      source: bible-journey-taylor
+      at: Jerusalem falls to the Babylonians, note on 2 Kings 25:1-21
+    - says:
+        The Jewish Encyclopedia dates the yielding of the wall, at the end of the eighteen-month siege,
+        to 586.
+      role: supporting
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: At the end of eighteen months (586) the wall yielded.
+places:
+  - place: riblah
+    role: context
+    note:
+      The Jewish Encyclopedia calls Riblah Nebuchadnezzar's base; the books of Kings bring captives
+      to him there.
+  - place: jerusalem
+    role: end
+participants:
+  - actor: nebuchadnezzar-ii
+    role: leader
+  - actor: neo-babylonian-empire
+    role: participant
+  - actor: zedekiah
+    role: subject
+cite:
+  - says: The books of Kings record Zedekiah's rebellion against the king of Babylon.
+    source: bible-kjv
+    at: 2 Kings 24:20
+    quote: that Zedekiah rebelled against the king of Babylon
+  - says: The Jewish Encyclopedia says Nebuchadnezzar made Riblah his base and went south to besiege Jerusalem.
+    role: supporting
+    basis: interpretation
+    attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+    source: jewish-encyclopedia
+    at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+    quote: He placed his base of action at Riblah in the north, and went southward and laid siege to Jerusalem.
+notes:
+  The window runs from The Bible Journey's year for the rebellion to the Jewish Encyclopedia's year
+  for the fall; the two sources disagree on the end, which the breach of the walls records as a dispute.

@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Jericho, in the Jordan valley, in whose plains the books of Kings and Jeremiah record the Chaldean
+  army overtaking the fleeing Zedekiah.
+types: [settlement]
+names:
+  - form: Jericho
+    lang: en
+    script: Latn
+    cite:
+      - id: jericho-name
+        says: The books of Kings name the plains of Jericho as where Zedekiah was overtaken.
+        source: bible-kjv
+        at: 2 Kings 25:5
+        quote: overtook him in the plains of Jericho
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [35.4441417, 31.8710168]
+    notes:
+      The gazetteer's point for the tell of ancient Jericho. The passages name its plains, not the
+      town, so the point is where the plains are labelled, not where Zedekiah was taken.
+    cite:
+      - says: The Pleiades gazetteer records Jericho with a precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/687917 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "687917"
+    url: https://pleiades.stoa.org/places/687917
+    license: CC-BY-3.0
+    note: Jericho

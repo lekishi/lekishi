@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Agade (Akkad), the capital of the kings of Akkad, in whose suburb the prologue says Hammurabi
+  provided for the goddess Anunit. Its site is not known, so the record asserts no position.
+types: [capital]
+names:
+  - form: Agade
+    lang: en
+    script: Latn
+    cite:
+      - id: agade-name
+        says: The prologue names Agade.
+        source: king-code-of-hammurabi
+        at: prologue
+        quote: who provided for Anunit in the temple of Dumash in the suburb of Agade
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      The Pleiades gazetteer records Agade as unlocated; its point for Agade is only that of the region
+      of Akkad. The record therefore asserts no coordinate.
+    cite:
+      - says: The Pleiades gazetteer records Agade, the capital of the Akkadian state, as unlocated.
+        source: pleiades
+        at: places/63806066 (featureTypes unlocated), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "63806066"
+    url: https://pleiades.stoa.org/places/63806066
+    license: CC-BY-3.0
+    note: Agade
+notes: Shared with the chapter on Sargon of Akkad, whose capital it was.

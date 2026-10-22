@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In the ninth year of Zedekiah, on the tenth day of the tenth month, Nebuchadnezzar and all his
+  host come against Jerusalem, pitch against it and build forts round about it.
+types: [occurrence]
+part_of: [nebuchadnezzar-campaign-589-586]
+date:
+  value: 589 BCE..588 BCE
+  mode: window
+  calendar: regnal
+  as_written: tenth day of the tenth month, ninth year of Zedekiah (2 Kings 25:1)
+  cite:
+    - says: The Bible Journey dates Zedekiah's rebellion and the start of the siege to 589 BCE.
+      basis: interpretation
+      attributed_to: Chris and Jenifer Taylor, The Bible Journey
+      source: bible-journey-taylor
+      at: Jerusalem falls to the Babylonians, note on 2 Kings 25:1-21
+    - says:
+        The Jewish Encyclopedia counts eighteen months of siege to the wall's yielding in 586, which
+        puts the start in 588.
+      role: alternative
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: At the end of eighteen months (586) the wall yielded.
+places:
+  - place: jerusalem
+    role: site
+participants:
+  - actor: nebuchadnezzar-ii
+    role: leader
+  - actor: neo-babylonian-empire
+    role: participant
+cite:
+  - says:
+      The books of Kings date the start of the siege to the tenth day of the tenth month of Zedekiah's
+      ninth year.
+    source: bible-kjv
+    at: 2 Kings 25:1
+    quote:
+      in the ninth year of his reign, in the tenth month, in the tenth day of the month, that Nebuchadnezzar
+      king of Babylon came, he, and all his host, against Jerusalem
+  - says: Jeremiah gives the same year and month.
+    source: bible-kjv
+    at: Jeremiah 39:1
+    quote:
+      In the ninth year of Zedekiah king of Judah, in the tenth month, came Nebuchadrezzar king of
+      Babylon and all his army against Jerusalem
+    role: supporting
+dispute:
+  status: disputed
+  summary:
+    The texts date the siege by Zedekiah's regnal year. The Bible Journey converts it to 589 BCE;
+    the Jewish Encyclopedia's fall in 586 after eighteen months implies 588. The chapter keeps the day
+    as written and the year as a window.

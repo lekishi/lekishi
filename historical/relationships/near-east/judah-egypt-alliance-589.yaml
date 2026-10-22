@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Zedekiah's league with Egypt, which the Jewish Encyclopedia makes the cause of his rebellion
+  against Babylon, and whose army came out while the Chaldeans besieged Jerusalem.
+types: [alliance]
+from: kingdom-of-judah
+to: saite-egypt
+date:
+  value: 589 BCE..586 BCE
+  mode: window
+  calendar: unknown
+  as_written: not dated; "by the ninth year of his reign" in the Jewish Encyclopedia
+  cite:
+    - says: The Bible Journey dates Zedekiah's rebellion, and so the start of the war, to 589 BCE.
+      basis: interpretation
+      attributed_to: Chris and Jenifer Taylor, The Bible Journey
+      source: bible-journey-taylor
+      at: Jerusalem falls to the Babylonians, note on 2 Kings 25:1-21
+    - says:
+        The Jewish Encyclopedia dates the yielding of the wall, at the end of the eighteen-month siege,
+        to 586.
+      role: supporting
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: At the end of eighteen months (586) the wall yielded.
+cite:
+  - says: The Jewish Encyclopedia says Zedekiah made a league with the Egyptians and thereupon rebelled.
+    basis: interpretation
+    attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+    source: jewish-encyclopedia
+    at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+    quote:
+      Zedekiah became so friendly with the Egyptians that he made a league with them and thereupon
+      rebelled against the King of Babylon
+  - says: Jeremiah records Pharaoh's army coming out during the siege.
+    role: supporting
+    source: bible-kjv
+    at: Jeremiah 37:5
+    quote: Then Pharaoh’s army was come forth out of Egypt
+notes: The biblical texts record Egypt's army coming out, not a treaty; the league is the cited interpretation.

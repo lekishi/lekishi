@@ -1,0 +1,79 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The reign of Hammurabi, king of Babylon, dated by his year-names. The cited chronologies disagree
+  by more than five centuries: the Louvre gives the modern 1792–1750 BCE, and the Catholic Encyclopedia
+  of 1910 lists accessions from 2342 to 2041 and reigns from 2130–2088 to 1990–1950."
+types: [process]
+date:
+  value: 1792 BCE..1750 BCE
+  mode: duration
+  calendar: regnal
+  as_written: 43 year-names, from "the year in which Hammurabi became king"
+  cite:
+    - says: The Louvre dates Hammurabi's reign to -1792/-1750.
+      basis: interpretation
+      attributed_to: Musée du Louvre
+      source: louvre-code-of-hammurabi
+      at: "caption: Code de Hammurabi, -1792 / -1750"
+    - says: The Catholic Encyclopedia says the king lists would put his accession in 2342 B.C.
+      role: alternative
+      basis: interpretation
+      attributed_to: C. L. Souvay, Catholic Encyclopedia (1910)
+      source: catholic-encyclopedia
+      at: Hammurabi (Charles L. Souvay)
+      quote: The King-lists would suggest 2342 B.C. as the date of his accession
+    - says:
+        The Catholic Encyclopedia reports Thureau-Dangin and Ungnad placing the reign in 2130–2088 B.C.
+        and Toffteen in 2121–2066.
+      role: alternative
+      basis: interpretation
+      attributed_to: C. L. Souvay, Catholic Encyclopedia (1910)
+      source: catholic-encyclopedia
+      at: Hammurabi (Charles L. Souvay)
+      quote:
+        Thureau-Dangin and Ungnad place the reign of Hammurabi between 2130 and 2088 B.C.; Toffteen
+        adopts the dates 2121-2066 B.C.
+    - says:
+        The Catholic Encyclopedia reports King suggesting 1990–1950 B.C., and Scheil and Dhorme putting
+        the accession in 2056 and 2041.
+      role: alternative
+      basis: interpretation
+      attributed_to: C. L. Souvay, Catholic Encyclopedia (1910)
+      source: catholic-encyclopedia
+      at: Hammurabi (Charles L. Souvay)
+      quote:
+        King suggests 1990-1950 B.C.; Father Scheil, O.P., says 2056 B.C. is the probable date of the
+        king’s accession, which Father Dhorme places in 2041.
+    - says:
+        The Hastings dictionary notes that the king list gives Hammurabi 55 years, against the 43 year-names
+        of the date list.
+      role: conflicting
+      source: hastings-dictionary-bible
+      at: Assyria and Babylonia, Chronology, (a) Year-names
+      quote: the King's List gives him a reign of 55 years
+places:
+  - place: babylon
+    role: site
+participants:
+  - actor: hammurabi
+    role: leader
+  - actor: first-dynasty-of-babylon
+    role: participant
+cite:
+  - says:
+      The Hastings dictionary explains that the Babylonians named each year, and that the date list
+      counts Hammurabi's reign in year-names.
+    source: hastings-dictionary-bible
+    at: Assyria and Babylonia, Chronology, (a) Year-names
+    quote: The Babylonians gave each year a name.
+dispute:
+  status: disputed
+  summary:
+    Competing chronologies. The modern middle chronology, which the Louvre uses, gives 1792–1750
+    BCE; the 1910 encyclopedia lists six earlier datings, all before 1990 BCE, and the king list's 55
+    years against 43 year-names. The chapter publishes the middle chronology as its window and keeps every
+    other dating as an alternative claim. The contract has no way to switch chronologies, so all the year-named
+    events below inherit this window.
+notes:
+  Recorded to carry the chronology dispute once for the chapter. The low and high chronologies of
+  modern scholarship are not cited here.

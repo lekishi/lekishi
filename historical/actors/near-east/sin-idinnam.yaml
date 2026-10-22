@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Sin-idinnam, the governor Hammurabi placed over Larsa after its conquest, to whom many of Hammurabi's
+  surviving letters are addressed.
+types: [person]
+names:
+  - form: Sin-idinnam
+    lang: en
+    script: Latn
+    cite:
+      - id: sin-idinnam-name
+        says: King and Hall name Sin-idinnam, Hammurabi's governor of Larsa.
+        basis: interpretation
+        attributed_to: L. W. King and H. R. Hall (1906)
+        source: king-hall-history
+        at: chapter V (Elam and Babylon)
+        quote: the letters of Hammurabi to Sin-idinnam, the governor whom he placed in authority over Larsam
+roles:
+  - role: official
+    note: Governor of Larsa for Hammurabi.
+    cite:
+      says: King and Hall call Sin-idinnam the governor Hammurabi placed over Larsa.
+      basis: interpretation
+      attributed_to: L. W. King and H. R. Hall (1906)
+      source: king-hall-history
+      at: chapter V (Elam and Babylon)
+      quote: the governor whom he placed in authority over Larsam

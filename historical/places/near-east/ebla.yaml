@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Ebla, the city the Pleiades gazetteer places at Tell Mardikh in northern Syria. Sargon's Nippur
+  inscriptions name Ibla among the lands Enlil gave him; L. W. King placed that Ibla near the Taurus.
+  The record's only position is a label anchor.
+types: [settlement]
+names:
+  - form: Ibla
+    lang: en
+    script: Latn
+    note:
+      The form in Sargon's inscription as King quotes it; the chapter has not cited the identification
+      of this Ibla with Ebla at Tell Mardikh.
+    cite:
+      - id: ebla-name
+        says: Sargon's inscription names Ibla among the lands Enlil gave him.
+        source: king-legends-babylon-egypt
+        at: Lecture I
+        quote:
+          gave him the upper land, Mari, Iarmuti, and Ibla, as far as the Cedar Forest and the Silver
+          Mountains
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [36.7983329, 35.7990223]
+    notes:
+      Label anchor at the gazetteer's Ebla (Tell Mardikh). King (1918) put Ibla north of Iarmuti, "perhaps
+      on the southern slopes of Taurus"; the chapter cites no identification with Tell Mardikh, so no coordinate
+      is asserted.
+    cite:
+      - says: The label anchor is placed at the Pleiades point for Ebla; no identification is asserted.
+        source: pleiades
+        at: places/869702586 (reprLat, reprLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "869702586"
+    url: https://pleiades.stoa.org/places/869702586
+    license: CC-BY-3.0
+    note: Ebla

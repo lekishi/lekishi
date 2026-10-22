@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Sin-muballit, king of Babylon, Hammurabi's father, whose year-names record a defeat of the army
+  of Ur and the capture of Isin.
+types: [person]
+names:
+  - form: Sin-muballit
+    lang: en
+    script: Latn
+    cite:
+      - id: sin-muballit-name
+        says: The prologue calls Hammurabi the mighty son of Sin-muballit.
+        source: king-code-of-hammurabi
+        at: prologue
+        quote: the mighty son of Sin-muballit
+roles:
+  - role: ruler
+    note: King of Babylon before Hammurabi.
+    cite:
+      says: King and Hall call Sin-muballit Hammurabi's father and predecessor on the throne of Babylon.
+      basis: interpretation
+      attributed_to: L. W. King and H. R. Hall (1906)
+      source: king-hall-history
+      at: chapter V (Elam and Babylon)
+      quote: Hammurabi’s father and predecessor on the throne of Babylon

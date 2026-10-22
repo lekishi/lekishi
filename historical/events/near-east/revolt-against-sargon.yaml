@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In Sargon's old age all the lands rebel and surround him in Agade; he goes out to fight, defeats
+  them and overpowers their army, by the Chronicle of Early Kings.
+types: [occurrence]
+date:
+  value: 2334 BCE..2279 BCE
+  mode: window
+  calendar: unknown
+  as_written: '"in his old age" (Chronicle of Early Kings, line 11)'
+  cite:
+    - says: The Livius translation dates Sargon's reign to 2334–2279 BCE in the middle chronology.
+      basis: interpretation
+      attributed_to: Livius.org
+      source: livius-abc-20
+      at: tablet A, line 1, note
+places:
+  - place: agade
+    role: site
+participants:
+  - actor: sargon-of-akkad
+    role: leader
+  - actor: akkadian-empire
+    role: participant
+cite:
+  - says:
+      The chronicle says that in his old age all the lands rebelled and surrounded him in Agade, and
+      that he defeated them.
+    source: livius-abc-20
+    at: tablet A, lines 11–13
+  - says:
+      "King quotes the Neo-Babylonian chronicle: in Sargon's old age all the lands revolted against
+      him."
+    role: supporting
+    basis: interpretation
+    attributed_to: L. W. King (1910)
+    source: king-sumer-akkad
+    at: chapter VIII (the empire of Akkad)
+    quote: which states that in Sargon's old age "all the lands revolted against him."
+  - says:
+      King notes that Manishtusu's monument uses the same phrase, which could suggest the tradition
+      confused one king's revolt with another's, though he treats the likeness as chance.
+    role: supporting
+    basis: interpretation
+    attributed_to: L. W. King (1910)
+    source: king-sumer-akkad
+    at: chapter VIII (the empire of Akkad)
+    quote: the view that facts as well as names had been confused in the later tradition
+part_of: [sargon-reign]

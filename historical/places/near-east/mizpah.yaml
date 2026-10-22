@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Mizpah, where Gedaliah governed the people left in Judah after the fall of Jerusalem, where Jeremiah
+  came to him, and where Ishmael son of Nethaniah killed him.
+types: [settlement]
+names:
+  - form: Mizpah
+    lang: en
+    script: Latn
+    cite:
+      - id: mizpah-name
+        says: Jeremiah records the prophet going to Gedaliah at Mizpah.
+        source: bible-kjv
+        at: Jeremiah 40:6
+        quote: Then went Jeremiah unto Gedaliah the son of Ahikam to Mizpah
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [35.2165359, 31.8854357]
+    notes:
+      The gazetteer's point for Tell en-Nasbeh, about 12 km north of Jerusalem, which it says is often
+      identified with biblical Mizpah. The identification is the gazetteer's, and is not certain.
+    cite:
+      - says:
+          The Pleiades gazetteer records Tell en-Nasbeh, about 12 km north of Jerusalem, and says it is
+          often identified with the biblical Mizpah in Benjamin.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/666067876 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "666067876"
+    url: https://pleiades.stoa.org/places/666067876
+    license: CC-BY-3.0
+    note: Tell en-Nasbeh.

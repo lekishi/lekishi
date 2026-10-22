@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Sennacherib brings Padi out of Jerusalem, sets him on the royal throne over Ekron again, and
+  imposes his tribute on him.
+types: [occurrence]
+part_of: [sennacherib-third-campaign-701]
+date:
+  value: 701 BCE
+  mode: window
+  calendar: regnal
+  as_written: ina šalši girriya (in my third campaign)
+  cite:
+    - says: The prism numbers the campaign as Sennacherib's third and gives no year.
+      source: luckenbill-annals-sennacherib
+      at: p. 29, Oriental Institute prism col. II 37
+      quote: In my third campaign I went against the Hittite-land.
+    - says: Luckenbill dates the third campaign, and the siege of Jerusalem in it, to 701 BCE.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 12 (introduction)
+      quote: According to the Assyrian account this siege, conducted in 701, led to the submission of Hezekiah
+places:
+  - place: jerusalem
+    role: start
+  - place: ekron
+    role: end
+participants:
+  - actor: sennacherib
+    role: leader
+  - actor: padi-of-ekron
+    role: subject
+cite:
+  - says: The prism records Padi brought out of Jerusalem and restored to the throne of Ekron.
+    source: luckenbill-annals-sennacherib
+    at: p. 32, Oriental Institute prism col. III 14–17
+    quote:
+      Padi, their king, I brought out of Jerusalem, set him on the royal throne over them and imposed
+      upon him my kingly tribute.
+notes:
+  The prism does not say how Padi was released from Jerusalem; Luckenbill reads it as Hezekiah's
+  release of him (p. 13).

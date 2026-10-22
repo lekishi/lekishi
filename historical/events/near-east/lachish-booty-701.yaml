@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The epigraph over the relief of Lachish shows Sennacherib seated on a throne while the booty
+  of Lachish passes before him.
+types: [occurrence]
+part_of: [sennacherib-third-campaign-701]
+date:
+  value: 701 BCE
+  mode: window
+  calendar: regnal
+  as_written: undated epigraph on the relief
+  cite:
+    - says: The prism numbers the campaign as Sennacherib's third and gives no year.
+      source: luckenbill-annals-sennacherib
+      at: p. 29, Oriental Institute prism col. II 37
+      quote: In my third campaign I went against the Hittite-land.
+    - says: Luckenbill dates the third campaign, and the siege of Jerusalem in it, to 701 BCE.
+      role: supporting
+      basis: interpretation
+      attributed_to: D. D. Luckenbill (1924)
+      source: luckenbill-annals-sennacherib
+      at: p. 12 (introduction)
+      quote: According to the Assyrian account this siege, conducted in 701, led to the submission of Hezekiah
+    - says: The books of Kings place the king of Assyria at Lachish during the invasion of Judah.
+      role: supporting
+      source: bible-kjv
+      at: 2 Kings 18:14
+      quote: And Hezekiah king of Judah sent to the king of Assyria to Lachish
+places:
+  - place: lachish
+    role: site
+participants:
+  - actor: sennacherib
+    role: leader
+cite:
+  - says:
+      The epigraph over the relief records the booty of Lachish passing before Sennacherib, seated on
+      a throne.
+    source: luckenbill-annals-sennacherib
+    at: p. 156, epigraph XXV, lines 1–4
+    quote:
+      Sennacherib, king of the universe, king of Assyria, sat upon a throne (lit. standing-chair) (while)
+      the booty of Lachish passed before him.
+notes: "The annals do not mention Lachish; the relief and its epigraph, from Sennacherib's palace at
+  Nineveh, are the Assyrian evidence for it, and Luckenbill notes the silence (p. 13). The relief itself
+  is not shown: media is not yet a record kind."

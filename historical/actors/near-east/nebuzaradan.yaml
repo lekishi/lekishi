@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Nebuzaradan, captain of the guard to the king of Babylon, who burned the temple, the king's house
+  and the houses of Jerusalem, carried away the people left in the city, and brought its leading men to
+  Riblah.
+types: [person]
+names:
+  - form: Nebuzaradan
+    lang: en
+    script: Latn
+    cite:
+      - id: nebuzaradan-name
+        says: The books of Kings name Nebuzaradan, captain of the guard.
+        source: bible-kjv
+        at: 2 Kings 25:8
+        quote: came Nebuzaradan, captain of the guard, a servant of the king of Babylon, unto Jerusalem
+roles:
+  - role: official
+    note: Captain of the guard, a servant of the king of Babylon.
+    cite:
+      says: The books of Kings call Nebuzaradan captain of the guard.
+      source: bible-kjv
+      at: 2 Kings 25:8
+      quote: Nebuzaradan, captain of the guard, a servant of the king of Babylon

@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "Sargon's war on Elam, as the Omens of Sargon tell it: an invasion of the country and the conquest
+  of the Elamites."
+types: [conflict]
+from: akkadian-empire
+to: elam
+date:
+  value: 2334 BCE..2279 BCE
+  mode: window
+  calendar: unknown
+  as_written: not dated in the omens
+  cite:
+    - says: The Livius translation dates Sargon's reign to 2334–2279 BCE in the middle chronology.
+      basis: interpretation
+      attributed_to: Livius.org
+      source: livius-abc-20
+      at: tablet A, line 1, note
+cite:
+  - says: King reports the Omen-tablet's record of Sargon's invasion of Elam.
+    basis: interpretation
+    attributed_to: L. W. King (1910)
+    source: king-sumer-akkad
+    at: chapter VIII (the empire of Akkad)
+    quote: The Omen-tablet opens with the record of Sargon's invasion of the country

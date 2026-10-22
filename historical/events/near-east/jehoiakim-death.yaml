@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The end of Jehoiakim. The books of Kings say he "slept with his fathers" and his son reigned;
+  Chronicles says Nebuchadnezzar bound him in fetters to carry him to Babylon; the Jewish Encyclopedia
+  supposes that Nebuchadnezzar took him in 598 and probably slew him.
+types: [occurrence]
+date:
+  value: 598 BCE
+  mode: window
+  calendar: unknown
+  as_written: not dated in Kings or Chronicles
+  cite:
+    - says: The Jewish Encyclopedia sets the taking of Jehoiakim in 598.
+      basis: interpretation
+      attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+      source: jewish-encyclopedia
+      at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+      quote: In 598 Nebuchadnezzar himself came westward, took Jehoiakim
+    - says:
+        The chronicle's campaign of year 7 begins in Kislīmu, converted to December 598, with a king
+        of Judah captured, unnamed, in Addaru.
+      role: supporting
+      source: livius-abc-5
+      at: Rev. 11'–12'
+participants:
+  - actor: jehoiakim
+    role: subject
+  - actor: nebuchadnezzar-ii
+    role: participant
+    note: Only in the Chronicles account and the Jewish Encyclopedia's reading.
+cite:
+  - says: The books of Kings record Jehoiakim's death and his son's succession, and no violence.
+    source: bible-kjv
+    at: 2 Kings 24:6
+    quote: "So Jehoiakim slept with his fathers: and Jehoiachin his son reigned in his stead."
+  - says:
+      Chronicles records Nebuchadnezzar binding Jehoiakim in fetters to carry him to Babylon, and does
+      not say he died.
+    role: conflicting
+    source: bible-kjv
+    at: 2 Chronicles 36:6
+    quote:
+      Against him came up Nebuchadnezzar king of Babylon, and bound him in fetters, to carry him to
+      Babylon.
+  - says:
+      The Jewish Encyclopedia reads the accounts as Nebuchadnezzar taking Jehoiakim and probably slaying
+      him, his body cast out unburied.
+    role: alternative
+    basis: interpretation
+    attributed_to: E. G. Hirsch and I. M. Price, Jewish Encyclopedia (1905)
+    source: jewish-encyclopedia
+    at: Nebuchadnezzar, Biblical Data (E. G. H., I. M. P.)
+    quote: took Jehoiakim (II Chron. xxxvi. 6) and probably slew him, casting out his dead body unburied
+dispute:
+  status: disputed
+  summary:
+    The books of Kings report a natural death, Chronicles a captive king in fetters, and the Jewish
+    Encyclopedia a probable killing in 598. The chapter publishes the end of his reign and keeps the three
+    accounts of how it ended.
+notes: "No place is asserted: none of the accounts says where he died."

@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Kish, the city of the god Zamama, whose farms the prologue says Hammurabi firmly founded.
+types: [settlement]
+names:
+  - form: Kish
+    lang: en
+    script: Latn
+    cite:
+      - id: kish-name
+        says: The prologue names Kish.
+        source: king-code-of-hammurabi
+        at: prologue
+        quote: who firmly founded the farms of Kish
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [44.5931639, 32.5460878]
+    notes: The gazetteer's point for the ancient city as a whole; it places no temple or wall.
+    cite:
+      - says: The Pleiades gazetteer records Kish with a precise representative point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: places/894028 (reprLat, reprLong; locationPrecision precise), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "894028"
+    url: https://pleiades.stoa.org/places/894028
+    license: CC-BY-3.0
+    note: Kish

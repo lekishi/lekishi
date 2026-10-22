@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Jehoiakim, king of Judah, who served Nebuchadnezzar three years and then rebelled. The books
+  of Kings, Chronicles and the Jewish Encyclopedia give different ends for him.
+types: [person]
+names:
+  - form: Jehoiakim
+    lang: en
+    script: Latn
+    cite:
+      - id: jehoiakim-name
+        says: The books of Kings record Jehoiakim serving Nebuchadnezzar and rebelling.
+        source: bible-kjv
+        at: 2 Kings 24:1
+        quote: "Jehoiakim became his servant three years: then he turned and rebelled against him"
+roles:
+  - role: ruler
+    note: King of Judah; the chapter dates no reign.
+    cite:
+      says: Chronicles records Jehoiakim reigning eleven years in Jerusalem.
+      source: bible-kjv
+      at: 2 Chronicles 36:5
+      quote: he reigned eleven years in Jerusalem

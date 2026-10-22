@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Obsidian from the Talasea sources of New Britain reaches the Lapita type site at Koné, New Caledonia,
+  about 2,400 km away.
+types: [other]
+from: place:talasea-obsidian
+to: place:lapita-site
+directionality: directed
+causality: not_asserted
+cite:
+  - id: talasea-lapita-site
+    says:
+      Sand and Sheppard source an obsidian flake from Zone II at the Lapita site (WKO-13A) to the Talasea
+      region of New Britain.
+    sources:
+      - source: pofatu
+        at: sand2000_PS-2 (site_name, site_code, location_comment), v1.4
+      - source: pofatu
+        at: contribution sand2000 (contribution_description), v1.4
+notes:
+  "Material provenance, typed other rather than trade: the record asserts that obsidian from the source
+  reached the site, not how, and exchange, gift or settlers carrying it are all open. The atlas draws no
+  arc for it and lists it on the places' cards. Undated: the contribution dates no flake, only its Lapita
+  context."

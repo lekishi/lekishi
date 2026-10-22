@@ -1,0 +1,63 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Melitta, the fourth of the five cities by the sea the account says the fleet settled a day's sail
+  beyond the elephant marsh. No site is known.
+types: [settlement]
+names:
+  - form: Μέλιττα
+    lang: grc
+    script: Grek
+    roman: Melitta
+    scheme: unspecified-editorial
+    cite:
+      - id: melitta-name
+        says: The account names five cities the fleet settled by the sea beyond the marsh — Karikon
+          teichos, Gytte, Akra, Melitta and Arambys.
+        source: hanno-periplus
+        at: "5"
+        quote: κατῳκίσαμεν πόλεις πρὸς τῇ θαλάττῃ καλουμένας Καρικόν τε τείχος καὶ Γύττην καὶ Ἄκραν καὶ Μέλιτταν καὶ Ἄραμβυν.
+  - form: Melitta
+    lang: en
+    script: Latn
+    cite:
+      - id: melitta-translation
+        says: Schoff's translation writes the name Melitta.
+        role: supporting
+        source: hanno-periplus
+        at: "5"
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      No site is known and none is drawn. Schoff gives Müller's guess and calls the five locations
+      uncertain.
+    cite:
+      - id: melitta-unlocated
+        says:
+          The account places Melitta a day's sail beyond the marsh, which locates it on no map; the record asserts no
+          coordinate.
+        source: hanno-periplus
+        at: "5"
+      - id: melitta-mueller
+        says: "Schoff calls the five colonies' locations uncertain and reports Müller's guess: The fourth at the mouth of the Messa River, 30° 5'."
+        basis: interpretation
+        role: alternative
+        attributed_to: K. Müller, as reported by W. H. Schoff (1913)
+        source: schoff-hanno
+        at: The Geography of the Voyage of Hanno, § 5
+        quote: "The fourth at the mouth of the Messa River, 30° 5'."
+      - id: melitta-pleiades-unlocated
+        says: Pleiades lists Melitta as unlocated, after the Barrington Atlas.
+        role: supporting
+        source: pleiades
+        at: 278624 (locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "278624"
+    url: https://pleiades.stoa.org/places/278624
+    license: CC BY 3.0
+dispute:
+  status: disputed
+  summary:
+    The site is unidentified. The record draws nothing and keeps each commentator's identification
+    as an alternative.

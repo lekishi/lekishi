@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "From Cerne the fleet sails south twelve days along a coast peopled by Aithiopes who flee and will not wait, and whose speech even the Lixitae cannot understand."
+types: [journey]
+part_of: [hanno-voyage]
+date:
+  value: 570 BCE..470 BCE
+  mode: window
+  calendar: julian
+  as_written: "δώδεκα ἡμέρας (twelve days)"
+  cite:
+    - id: aithiopes-coast-time
+      says: "The account dates none of its stages; this one belongs to the undated voyage, whose window the cited commentators set between about 570 and 470 BCE."
+      basis: interpretation
+      attributed_to: W. H. Schoff (1913); J. Bostock and H. T. Riley (1855)
+      sources:
+        - source: hanno-periplus
+          at: "11"
+        - source: schoff-hanno
+          at: Carthaginian Chronology
+places:
+  - place: cerne
+    role: start
+participants:
+  - actor: hanno
+    role: leader
+notes: "Αἰθίοπες is the Greek word for the dark-skinned peoples south of Libya; the record keeps it as the account's word and mints no actor for it."
+cite:
+  - id: aithiopes-coast-account
+    says: "The account says the fleet sailed south twelve days along a land of Aithiopes who fled, and whose speech the Lixitae with the fleet could not understand."
+    source: hanno-periplus
+    at: "11"
+    quote: "ἐπὶ μεσημβρίαν ἐπλεύσαμεν δώδεκα ήμέρας, τὴν γῆν παραλεγόμενοι, ἣν πᾶσαν κατῴκουν Αἰθίοπες φεύγοντες ἡμᾶς καὶ οὐχ ὑπομένοντες"

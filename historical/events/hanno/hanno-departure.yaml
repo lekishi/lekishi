@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "The Carthaginians resolve that Hanno should sail outside the Pillars of Heracles and found cities of the Libyphoenicians; he sets out with sixty fifty-oared ships, thirty thousand men and women, and wheat and other provisions."
+types: [mission, journey]
+part_of: [hanno-voyage]
+date:
+  value: 570 BCE..470 BCE
+  mode: window
+  calendar: julian
+  as_written: "Ἔδοξε Καρχηδονίοις (it pleased the Carthaginians)"
+  cite:
+    - id: hanno-departure-time
+      says: "The account dates none of its stages; this one belongs to the undated voyage, whose window the cited commentators set between about 570 and 470 BCE."
+      basis: interpretation
+      attributed_to: W. H. Schoff (1913); J. Bostock and H. T. Riley (1855)
+      sources:
+        - source: hanno-periplus
+          at: "1"
+        - source: schoff-hanno
+          at: Carthaginian Chronology
+places:
+  - place: carthage
+    role: start
+    note: "The city that sent the voyage; the account does not name the harbour it left from."
+participants:
+  - actor: hanno
+    role: leader
+  - actor: carthage-state
+    role: participant
+    note: "Its resolution sends the voyage."
+notes: "The figures are the account's. Thirty thousand people in sixty fifty-oared ships is the kind of number commentators doubt; the record reports it and does not endorse it."
+cite:
+  - id: hanno-departure-account
+    says: "The account says it pleased the Carthaginians that Hanno should sail outside the Pillars and found cities, and that he sailed with sixty pentekonters and thirty thousand men and women."
+    source: hanno-periplus
+    at: "1"
+    quote: "Ἔδοξε Καρχηδονίοις Ἅννωνα πλεῖν ἔξω Στηλῶν Ἡρακλείων καὶ πόλεις κτίζειν Λίβυφοινίων. Καὶ ἔπλευσε πεντηκοντόρους ἑξήκοντα ἄγων"

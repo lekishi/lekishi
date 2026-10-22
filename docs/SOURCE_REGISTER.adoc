@@ -102,9 +102,15 @@ count as read.
 
 |GeoNames
 |Modern place names and coordinates, worldwide
-|CC BY 4.0 from memory
-|? unread
-|Modern equivalents only; never a historical claim.
+|Creative Commons Attribution, per the About page; the export is CC BY 4.0 (2026-10-21)
+|✓ allowed
+|Modern equivalents only; never a historical claim. In use as `geonames` for the Lapita chapter's islands and island groups, cited by geonameid and dump date, while Wikidata was rate-limited.
+
+|Pofatu (Hermann, Forkel et al.)
+|Geochemical sourcing of Pacific stone and obsidian artefacts, with site coordinates per sample
+|CC BY 4.0 on the Zenodo v1.4 release, its metadata.json and pofatu.clld.org; the GitHub repository's LICENSE file says CC BY-NC 4.0 (2026-10-21, conflicting)
+|⚠ conditional
+|Not adopted: a possible non-commercial term needs the owner's decision under the rule above. The source record `pofatu` keeps the conservative reading (`license_id: other`, attributed redistribution, no quotation) and is cited only by the Lapita obsidian records, which no chapter reaches, so nothing served draws on it. Adopting it needs the owner's decision recorded here, or the maintainers' resolution of the LICENSE and a re-pinned record; the obsidian relationships then return to `lapita-expansion`'s `include`.
 
 |Digital Atlas of the Roman Empire
 |Roman-era places and map tiles
@@ -475,6 +481,25 @@ count as read.
 |Legal notice forbids reproduction and commercial reuse of content (2026-10-21)
 |✗ not allowed
 |Cite only, for the dates; images need a separate rights request.
+
+|Periplus of Hanno, Greek text and translation (W. H. Schoff, 1913), English Wikisource
+|The account of Hanno's voyage, in eighteen sections
+|Work public domain; Schoff's 1913 edition public domain; transcription CC BY-SA (2026-10-21)
+|⚠ conditional
+|Sources `hanno-periplus` and `schoff-hanno` (his commentary chapters), for the Hanno chapter. Wikisource row's condition applies. The Greek in §8 reads two days where the translation reads twelve; the record keeps both.
+
+|Pliny the Elder, Natural History, tr. Bostock and Riley (1855), Perseus Digital Library
+|Pliny on Hanno (II.67, V.1, VI.36) and on the route to India and the Taprobane embassy (VI.24, VI.26)
+|Work and 1855 translation public domain; the Perseus transcription is CC BY-SA (2026-10-21)
+|⚠ conditional
+|Source `pliny-natural-history`. Quote the 1855 translation, cite book and chapter, never the Perseus page; the translators' notes are 1855 scholarship, cited as interpretation. The record is shared with the Nile chapter, which also reads the translation in Project Gutenberg eBooks 60230 and 59131.
+
+|Periplus of the Erythraean Sea, tr. W. H. Schoff (1912), English Wikisource
+|The merchant's handbook to the ports from Egypt to India, and Schoff's dating chapters
+|Work public domain; translation published 1912, Schoff died 1932; transcription CC BY-SA (2026-10-21)
+|⚠ conditional
+|Sources `periplus-erythraean-sea` and `schoff-periplus`, for the Erythraean Sea chapter. Wikisource row's condition applies. Eggermont (1960) judged the Greek edition Schoff translated untrustworthy; re-check against Frisk (1927) or Casson (1989) before release.
+
 |===
 
 == Archaeology and scholarship
@@ -547,6 +572,35 @@ locator, and quotes nothing from it.
 |No licence stated on the PDFs (2026-10-21)
 |⚠ conditional
 |Cite-only.
+|===
+
+== Scholarship cited for dates and identifications
+
+Modern scholarship is cited for what it argues, as an interpretation attributed
+to its authors. An article under an open licence may be quoted; an article
+without one is cited and paraphrased, never quoted or reproduced.
+
+[cols="2,2,2,1,2",options="header"]
+|===
+|Source |What it gives |Terms (verified) |Status |Notes
+
+|Burley, Weisler and Zhao 2012, PLOS ONE 7(11): e48769
+|U/Th date for the founding of Nukuleka, Tonga
+|Creative Commons Attribution License, version not stated (2026-10-21, article)
+|✓ allowed
+|Source `burley-2012-nukuleka`. Quoted with credit.
+
+|Petchey and Kirch 2019, PLOS ONE 14(9)
+|Recalibrated Lapita dates for Tonga and Sāmoa, including Mulifanua
+|CC0 public domain dedication (2026-10-21, article)
+|✓ allowed
+|Source `petchey-kirch-2019`. Quoted with credit.
+
+|Denham, Bronk Ramsey and Specht 2012; Petchey, Spriggs, Bedford and Valentin 2015; Nunn and Petchey 2013; Petchey 2001; Sheppard, Chiu and Walter 2015
+|Modelled Lapita dates for the Bismarcks, Vanuatu, Fiji, Sāmoa and Santa Cruz
+|No reuse licence found; treated as all rights reserved (2026-10-21)
+|⚠ conditional
+|Sources `denham-2012-lapita`, `petchey-2015-teouma`, `nunn-petchey-2013-bourewa`, `petchey-2001-mulifanua`, `sheppard-2015-santa-cruz`. Cite-only: dates and arguments are paraphrased as attributed interpretations, never quoted.
 |===
 
 == Images, maps, and media

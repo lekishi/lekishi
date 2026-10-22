@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Egypt, the country from which, the Periplus says, ships sailed for Adulis, Barbaricum, Barygaza
+  and Muziris. The text names the country, not a port, so the atlas places only a label.
+types: [region]
+names:
+  - form: Egypt
+    lang: en
+    script: Latn
+    cite:
+      - id: egypt-name
+        says: The Periplus says most goods come to Adulis from Egypt between January and September.
+        source: periplus-erythraean-sea
+        at: "6"
+        quote:
+          The most from Egypt is brought to this market from the month of January, to September, that is,
+          from Tybi to Thoth
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [30, 27]
+    notes:
+      A label anchor at the gazetteer's point for the modern country; not a port. The Periplus names
+      the country, and the atlas does not choose a harbour for it.
+    cite:
+      - id: egypt-location
+        says: GeoNames records the Arab Republic of Egypt at this point.
+        source: geonames
+        at: 357994 (Arab Republic of Egypt; latitude, longitude), dump 2026-10-21
+external_ids:
+  - system: geonames
+    id: "357994"
+    url: https://www.geonames.org/357994
+    license: CC BY 4.0
+  - system: pleiades
+    id: "981503"
+    url: https://pleiades.stoa.org/places/981503
+    license: CC BY 3.0
+notes:
+  The trade arcs from Egypt end here rather than at Berenice, because the text does not say which
+  Egyptian port the ships left from.

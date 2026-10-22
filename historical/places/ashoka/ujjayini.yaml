@@ -1,7 +1,9 @@
 # yaml-language-server: $schema=../../schema/place.schema.json
 summary: >-
   Ujjain, the seat of the western viceroyalty: the Provincials' Edict names a prince sending officials
-  from it, and the Ceylon chronicles make Aśoka viceroy there under his father.
+  from it, and the Ceylon chronicles make Aśoka viceroy there under his father. The Periplus knows it as
+  Ozene, a former royal capital inland from Barygaza, from which agate, carnelian, muslins and spikenard
+  came down to the port.
 types: [capital, settlement]
 names:
   - form: Ujjain
@@ -14,6 +16,15 @@ names:
         source: asoka-inscriptions
         at: Kalinga Edict II (Provincials' Edict), Dhauli text
         quote: From Ujjain, however, the Prince for this purpose will send out a similar body
+  - form: Ozene
+    lang: en
+    script: Latn
+    cite:
+      - id: ozene-name
+        says: The Periplus says Ozene, inland and to the east of Barygaza, was formerly a royal capital.
+        source: periplus-erythraean-sea
+        at: "48"
+        quote: Inland from this place and to the east, is the city called Ozene, formerly a royal capital
 at:
   - interpretation: display_anchor
     precision: unspecified
@@ -26,5 +37,18 @@ at:
           claim.
         source: wikidata
         at: Q200119 (P625), revision 2547472059
+      - id: ozene-location
+        says: Pleiades identifies Ozene with Ujjain, with a representative point at the modern city.
+        role: supporting
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 59972 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "59972"
+    url: https://pleiades.stoa.org/places/59972
+    license: CC BY 3.0
 notes: >-
-  Ujjayinī is the Sanskrit form; the chapter writes the name as the translation does.
+  Ujjayinī is the Sanskrit form; the chapter writes the name as the translation does. A shared place, minted by the Ashoka chapter. The Erythraean Sea trade chapter folded in its
+  Ozene name and the Pleiades identification rather than minting a second record.

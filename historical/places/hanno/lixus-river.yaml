@@ -1,0 +1,61 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Lixus, "a great river flowing from Libya", where the account says the fleet stayed some time
+  with the pastoral Lixitae and took interpreters from them. Schoff identifies it with the Draa;
+  the Punic and Roman town of Lixus stood on the Loukkos near Larache.
+types: [landform]
+names:
+  - form: Λίξος
+    lang: grc
+    script: Grek
+    roman: Lixos
+    scheme: unspecified-editorial
+    cite:
+      - id: lixus-name
+        says:
+          The account says the fleet came to the Lixus, a great river flowing from Libya, by which
+          the nomad Lixitae pastured their flocks.
+        source: hanno-periplus
+        at: "6"
+        quote: ἤλθομεν ἐπὶ μέγαν ποταμὸν Λίξον, ἀπὸ τῆς Λιβύης ῥέοντα.
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: Not drawn. Schoff identifies the river with the Wadi Draa (mouth at about 28° 30′ N); the
+      better-known town of Lixus, which Pleiades locates near Larache on the Loukkos, would put the
+      river far to the north, by the strait. The record does not choose.
+    cite:
+      - id: lixus-river-unlocated
+        says:
+          The account places the Lixus only as a great river flowing from Libya, which locates it on no map; the record asserts no
+          coordinate.
+        source: hanno-periplus
+        at: "6"
+      - id: lixus-draa
+        says:
+          Schoff says the Lixus river is "quite certainly" the Wadi Draa, which reaches the ocean
+          at about 28° 30′ N.
+        basis: interpretation
+        role: alternative
+        attributed_to: W. H. Schoff (1913)
+        source: schoff-hanno
+        at: The Geography of the Voyage of Hanno, § 6
+        quote: The Lixus River is quite certainly the modern Wadi Draa, emptying into the ocean at 28° 30'.
+      - id: lixus-loukkos
+        says: Pleiades locates the settlement of Lixus, a Punic port founded as early as the eighth
+          century BCE, near Larache on the Loukkos.
+        basis: interpretation
+        role: alternative
+        attributed_to: Pleiades
+        source: pleiades
+        at: 275666 (reprLatLong, description), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "275666"
+    url: https://pleiades.stoa.org/places/275666
+    license: CC BY 3.0
+    note: The town of Lixus; the account's river may or may not be the one it stood on.
+dispute:
+  status: disputed
+  summary: Schoff's Draa and the Loukkos at the town of Lixus lie at opposite ends of the Moroccan
+    Atlantic coast; the account's day counts do not settle which river it means.

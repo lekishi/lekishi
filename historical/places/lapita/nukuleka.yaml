@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  "Nukuleka on Tongatapu, Tonga: the founder settlement of the first Lapita voyagers into Polynesia,
+  dated by U/Th on coral files to 2838±8 BP."
+types: [settlement]
+names:
+  - form: Nukuleka
+    lang: en
+    script: Latn
+    cite:
+      - id: nukuleka-name
+        says:
+          Burley, Weisler and Zhao say earlier studies document Nukuleka in Tonga as a founder colony
+          for the first settlement of Polynesia by Lapita peoples.
+        source: burley-2012-nukuleka
+        at: Abstract
+        quote:
+          Previous studies document Nukuleka in the Kingdom of Tonga as a founder colony for first settlement
+          of Polynesia by Lapita peoples.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [-175.12674, -21.15191]
+    notes:
+      The modern village of Nukuleka on Tongatapu, which the cited study names for the site; the
+      excavated site lies at the village, so the point is approximate.
+    cite:
+      - id: nukuleka-location
+        says: GeoNames records Nukuleka at this point.
+        source: geonames
+        at: 4032395 (Nukuleka; latitude, longitude), dump 2026-10-21
+external_ids:
+  - system: geonames
+    id: "4032395"
+    url: https://www.geonames.org/4032395
+    license: CC BY 4.0

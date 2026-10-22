@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The route from Egypt to India as Pliny gives it: up the Nile to Coptos, across the desert by
+  camel to Berenice, down the Red Sea to Ocelis or Cane, and with the Hippalus wind across to Muziris,
+  returning in December or January to be home within the year."
+types: [journey, exchange]
+date:
+  value: 48..77
+  mode: window
+  calendar: julian
+  as_written: '"At the present day voyages are made to India every year"'
+  cite:
+    - id: pliny-route-time
+      says:
+        Pliny describes the route as it runs as he writes; the Natural History was dedicated in 77 CE.
+        Pliny's translators record Marcus's argument that the coincidence of 6 Mechir with the Ides of January
+        shows the passage was written between 48 and 51 CE. The window encloses both readings.
+      basis: interpretation
+      attributed_to: J. Bostock and H. T. Riley (1855), citing Marcus
+      sources:
+        - source: pliny-natural-history
+          at: VI.26
+        - source: pliny-natural-history
+          at: VI.26, note 36
+places:
+  - place: alexandria-egypt
+    role: start
+    note: Pliny starts from Juliopolis, two miles from Alexandria.
+  - place: muziris
+    role: end
+cite:
+  - id: pliny-india-route-account
+    says: Pliny says voyages are made to India every year, with companies of archers on board against pirates.
+    source: pliny-natural-history
+    at: VI.26
+    quote:
+      "At the present day voyages are made to India every year: and companies of archers are carried
+      on board the vessels, as those seas are greatly infested with pirates."
+cites:
+  summary:
+    - id: pliny-india-drain
+      says:
+        Pliny says India drains the empire of no less than five hundred and fifty million sesterces
+        a year in Bostock and Riley's translation; the figure's reading in the Latin is debated.
+      source: pliny-natural-history
+      at: VI.26
+      quote: in no year does India drain our empire of less than five hundred and fifty millions23 of sesterces
+notes:
+  "A second account of the same trade as the Periplus. The two agree on the July sailing and the
+  Hippalus wind and differ in their ports: Pliny embarks at Ocelis, the Periplus starts the crossing from
+  Cana or the Cape of Spices."

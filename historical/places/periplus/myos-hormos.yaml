@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Mussel Harbor (Myos Hormos), the first of the designated Egyptian ports on the Erythraean Sea
+  in the Periplus.
+types: [port]
+names:
+  - form: Mussel Harbor
+    lang: en
+    script: Latn
+    note: Schoff translates the Greek Μυὸς Ὅρμος; the Greek name is not quoted from the 1912 text.
+    cite:
+      - id: myos-hormos-name
+        says:
+          The Periplus names the Egyptian port of Mussel Harbor as the first of the designated ports on
+          the Erythraean Sea.
+        source: periplus-erythraean-sea
+        at: "1"
+        quote: the first is the Egyptian port of Mussel Harbor
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [34.24401, 26.156611]
+    notes:
+      The gazetteer's point, which it marks as an uncertain identification (its title ends with a question
+      mark).
+    cite:
+      - id: myos-hormos-location
+        says: Pleiades gives this point for Myos Hormos and marks the identification with a question mark.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 786069 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "786069"
+    url: https://pleiades.stoa.org/places/786069
+    license: CC BY 3.0

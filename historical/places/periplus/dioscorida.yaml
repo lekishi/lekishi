@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Dioscorida (Socotra), the large island off Syagrus whose few inhabitants the Periplus calls Arabs,
+  Indians and Greeks settled there to trade, and whose tortoise-shell went to Muza, Damirica and Barygaza.
+types: [landform]
+names:
+  - form: Dioscorida
+    lang: en
+    script: Latn
+    cite:
+      - id: dioscorida-name
+        says: The Periplus says the island called Dioscorida is very large but desert and marshy.
+        source: periplus-erythraean-sea
+        at: "30"
+        quote: it is called Dioscorida, and is very large but desert and marshy
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [53.9093200007, 12.5300991019]
+    notes: The gazetteer's point for the island, drawn at region precision.
+    cite:
+      - id: dioscorida-location
+        says: Pleiades identifies Dioskourides with Socotra and gives this point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 39338 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "39338"
+    url: https://pleiades.stoa.org/places/39338
+    license: CC BY 3.0

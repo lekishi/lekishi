@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  A freedman of Annius Plocamus, sailing around Arabia, is blown by a north wind past Carmania
+  and in fifteen days drifts to Hippuros in Taprobane, where the king receives him.
+types: [journey]
+date:
+  value: 41..54
+  mode: window
+  calendar: julian
+  as_written: during the reign of the Emperor Claudius
+  cite:
+    - id: plocamus-drift-time
+      says:
+        Pliny places the drift and the embassy in the reign of Claudius, which Schoff says began in
+        41; Nero's reign followed from 54.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      sources:
+        - source: pliny-natural-history
+          at: VI.24
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+places:
+  - place: lanka
+    role: end
+    note: Pliny's Hippuros, a port of Taprobane, is not separately located.
+participants:
+  - actor: plocamus-freedman
+    role: subject
+  - actor: annius-plocamus
+    role: other
+    note: His patron, the farmer of the Red Sea revenues.
+cite:
+  - id: plocamus-drift-account
+    says:
+      Pliny says that in fifteen days the freedman drifted to Hippuros, a port of Taprobane, and was
+      kindly received by the king.
+    source: pliny-natural-history
+    at: VI.24
+    quote:
+      In the course of fifteen days he had drifted to Hippuros, a port of Taprobane, where he was most
+      kindly and hospitably received by the king
+notes:
+  "A drift, not a chosen course: the case the journey record's `driven` flag is for. Where it began
+  is not stated beyond 'sailing around Arabia', so the record has no start place."

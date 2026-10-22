@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../schema/source.schema.json
+locator: dataset_row
+kind: dataset
+title: "Pofatu: a curated and open-access database for geochemical sourcing of archaeological materials"
+edition:
+  pofatu-data release v1.4, samples table (samples.csv) at commit a79d2999684f00f2f25542d046afa36f09030425,
+  read 2026-10-21. A citation names the sample ID and the columns read.
+author: A. Hermann, R. Forkel, A. McAlister et al. and the Pofatu contributors (Sci Data 7, 141, 2020)
+language: en
+identifiers:
+  - system: url
+    value: https://pofatu.clld.org/
+  - system: url
+    value: https://zenodo.org/records/21217159
+  - system: doi
+    value: 10.1038/s41597-020-0485-8
+license:
+  status: recorded
+  license_id: other
+  attribution_text: Pofatu database (Hermann, Forkel et al.), release v1.4; terms unresolved (CC BY 4.0 or CC BY-NC 4.0)
+  redistribution: permitted_with_attribution
+  quotation_permitted: false
+  reviewed_by: Lekishi editorial preparation
+  reviewed_at: "2026-10-21T23:30:00Z"
+  notes:
+    The terms conflict at the pinned commit a79d299, read 2026-10-21. dist/metadata.json, the Zenodo v1.4
+    release and pofatu.clld.org state CC BY 4.0; the repository's LICENSE file states CC BY-NC 4.0. The record claims
+    no more than both allow and quotes nothing. Under the register's rule a source with a possible
+    non-commercial term is not adopted without the owner's decision, so no chapter reaches a record that
+    cites it until the owner records one or the maintainers resolve the LICENSE.
+notes:
+  A compilation of geochemical sourcing studies of Pacific stone and obsidian artefacts. Each contribution
+  is a published study; a sample row gives the artefact's site and coordinates. Coordinates are the contributors'
+  site locations, sometimes per test pit, and are used as approximate site points.

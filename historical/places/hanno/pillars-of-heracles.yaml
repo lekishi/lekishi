@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Pillars of Heracles, the strait at the western end of the Mediterranean that the account
+  says Hanno's fleet passed before founding its first city two days beyond.
+types: [landform]
+names:
+  - form: Στῆλαι Ἡράκλειαι
+    lang: grc
+    script: Grek
+    roman: Stēlai Hērakleiai
+    scheme: unspecified-editorial
+    cite:
+      - id: pillars-name
+        says: The account says the Carthaginians resolved that Hanno should sail outside the Pillars
+          of Heracles, and that the fleet passed them.
+        source: hanno-periplus
+        at: "1; 2"
+        quote: Ἔδοξε Καρχηδονίοις Ἅννωνα πλεῖν ἔξω Στηλῶν Ἡρακλείων
+  - form: Columnae Herculis
+    lang: la
+    script: Latn
+    cite:
+      - id: pillars-latin-name
+        says: Pleiades records the Latin name Columnae Herculis for the promontories flanking the
+          Strait of Gibraltar.
+        role: supporting
+        source: pleiades
+        at: 275614 (title), dump 2026-10-21
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [-5.37119316667, 36.0000788333]
+    notes:
+      The gazetteer's point for the twin promontories of the Strait of Gibraltar, which it gives
+      with "related" rather than precise location precision; drawn at region precision.
+    cite:
+      - id: pillars-location
+        says: Pleiades identifies the Pillars with the promontories flanking the Strait of Gibraltar
+          (the rock of Gibraltar and a debated southern promontory), and Schoff says they are "of
+          course" the Straits of Gibraltar.
+        basis: interpretation
+        attributed_to: Pleiades; W. H. Schoff (1913)
+        sources:
+          - source: pleiades
+            at: 275614 (reprLatLong), dump 2026-10-21
+          - source: schoff-hanno
+            at: The Geography of the Voyage of Hanno, § 1
+            quote: The Pillars of Hercules are, of course, the Straits of Gibraltar.
+external_ids:
+  - system: pleiades
+    id: "275614"
+    url: https://pleiades.stoa.org/places/275614
+    license: CC BY 3.0

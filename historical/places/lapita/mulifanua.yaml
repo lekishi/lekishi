@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "Mulifanua on 'Upolu, Sāmoa: a submerged Lapita site found in 1973 in the spoil dredged for
+  the inter-island ferry berth, the only Sāmoan site with dentate-stamped Lapita pottery."
+types: [settlement]
+names:
+  - form: Mulifanua
+    lang: en
+    script: Latn
+    cite:
+      - id: mulifanua-name
+        says:
+          Petchey and Kirch say Lapita colonizers reached 'Upolu, where classic dentate-stamped Lapita
+          ceramics of local manufacture were found at the submerged coastal site of Mulifanua (SU-17-1).
+        source: petchey-kirch-2019
+        at: Introduction
+        quote:
+          There is no doubt that Lapita colonizers reached the island of 'Upolu in Western Sāmoa, where
+          classic dentate-stamped Lapita ceramics of local manufacture were found at the submerged coastal
+          site of Mulifanua (SU-17-1)
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [-172.03602, -13.83183]
+    notes:
+      The modern village of Mulifanua on Upolu; the Lapita deposit lies under the lagoon off it, so the
+      point is approximate.
+    cite:
+      - id: mulifanua-location
+        says: GeoNames records Mulifanua at this point.
+        source: geonames
+        at: 4035196 (Mulifanua; latitude, longitude), dump 2026-10-21
+external_ids:
+  - system: geonames
+    id: "4035196"
+    url: https://www.geonames.org/4035196
+    license: CC BY 4.0

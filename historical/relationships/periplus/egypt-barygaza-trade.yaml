@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Ships from Egypt sail for Barygaza about July with wine, metals and coin, and bring back spikenard,
+  ivory, agate, cotton, silk and long pepper.
+types: [trade]
+from: place:egypt
+to: place:bharukaccha
+directionality: directed
+causality: not_asserted
+date:
+  value: 58..62
+  mode: window
+  calendar: julian
+  as_written: no date; the text speaks of the present
+  cite:
+    - id: egypt-barygaza-trade-time
+      says:
+        The Periplus describes this as present at the time of the voyage it was written from, which
+        it does not date; Schoff puts that voyage between the summers of 58 and 62 CE.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      sources:
+        - source: periplus-erythraean-sea
+          at: "49"
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+cite:
+  - id: egypt-barygaza-trade-basis
+    says: The Periplus says those bound for Barygaza from Egypt sail about July.
+    source: periplus-erythraean-sea
+    at: "49"
+    quote:
+      Those bound for this market-town from Egypt make the voyage favorably about the month of July,
+      that is Epiphi.
+notes: The Periplus says 'from Egypt' and names no port, so the arc starts at Egypt's label anchor, not at a harbour.

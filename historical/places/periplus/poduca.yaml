@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Poduca, among the most important harbours of the east coast of India, where ships came from Damirica
+  and the north and the great colandia sailed for Chryse and the Ganges.
+types: [port]
+names:
+  - form: Poduca
+    lang: en
+    script: Latn
+    cite:
+      - id: poduca-name
+        says:
+          The Periplus lists Camara, Poduca and Sopatma, in order, as the most important market-towns
+          and harbours of these countries.
+        source: periplus-erythraean-sea
+        at: "60"
+        quote: the most important are, in order as they lie, first Camara, then Poduca, then Sopatma
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [79.8197504517, 11.9022991555]
+    notes:
+      The gazetteer's representative point; an identification by the gazetteer, not a statement of
+      the Periplus.
+    cite:
+      - id: poduca-location
+        says:
+          Pleiades identifies Podouke with the archaeological site of Arikamedu near Puducherry and gives
+          this point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 50221 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "50221"
+    url: https://pleiades.stoa.org/places/50221
+    license: CC BY 3.0

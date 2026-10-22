@@ -1,7 +1,8 @@
 # yaml-language-server: $schema=../../schema/place.schema.json
 summary: >-
   The island the chronicles call Laṅkā and Smith calls Ceylon, whose king Devānaṃpiya Tissa received Mahinda's
-  mission and the branch of the bodhi tree.
+  mission and the branch of the bodhi tree. It is the Taprobane of the Periplus, which says it yields
+  pearls, gems, muslins and tortoise-shell, and from it, Pliny says, an embassy came to Rome under Claudius.
 types: [region]
 names:
   - form: Ceylon
@@ -14,6 +15,25 @@ names:
         source: smith-asoka-1920
         at: ch. VI, The Ceylonese Legend of Asoka
         quote: King Devânampiya Tissa (Tishya) ascended the throne of Ceylon
+  - form: Taprobane
+    lang: en
+    script: Latn
+    cite:
+      - id: taprobane-name
+        says: The Periplus says the island Palaesimundu was called by the ancients Taprobane.
+        source: periplus-erythraean-sea
+        at: "61"
+        quote: the island Palaesimundu, called by the ancients Taprobane
+  - form: Palaesimundu
+    lang: en
+    script: Latn
+    note: Pliny gives Palæsimundus as the name of its chief city.
+    cite:
+      - id: palaesimundu-name
+        says: The Periplus gives Palaesimundu as the island's present name.
+        source: periplus-erythraean-sea
+        at: "61"
+        quote: the island Palaesimundu
 at:
   - interpretation: display_anchor
     precision: unspecified
@@ -29,7 +49,20 @@ at:
           claim.
         source: wikidata
         at: Q854 (P625), revision 2559349656
+      - id: lanka-location
+        says: Pleiades identifies Taprobane with the island of Sri Lanka.
+        role: supporting
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 50298 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "50298"
+    url: https://pleiades.stoa.org/places/50298
+    license: CC BY 3.0
 notes: >-
   A deliberately coarse place: the cited retelling names the island, the Missa mountain, the Mahāmegha
   garden and the Mahāvihāra, and the chapter does not locate them more closely than the island without
-  a source.
+  a source. A shared place, minted by the Ashoka chapter. The Erythraean Sea trade chapter folded in its
+  Taprobane and Palaesimundu names and the Pleiades identification rather than minting a second record.

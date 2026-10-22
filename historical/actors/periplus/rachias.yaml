@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Rachias (Itachias in Pliny's text), chief of the four envoys the king of Taprobane sent to Rome
+  under Claudius.
+types: [person]
+names:
+  - form: Itachias
+    lang: en
+    script: Latn
+    cite:
+      - id: itachias-name
+        says: Pliny says the king of Taprobane sent an embassy of four to Rome, the chief of whom was Itachias.
+        source: pliny-natural-history
+        at: VI.24
+        quote: sent to Rome an embassy, consisting of four persons, the chief of whom was Itachias.
+  - form: Rachias
+    lang: en
+    script: Latn
+    cite:
+      - id: rachias-name
+        says:
+          Later in the chapter Pliny calls him Rachias, saying the father of Rachias had often visited
+          the Seres.
+        source: pliny-natural-history
+        at: VI.24
+        quote: the father of Rachias had frequently visited their country
+roles:
+  - role: envoy
+    cite:
+      - id: itachias-role
+        says: Pliny says the king of Taprobane sent an embassy of four to Rome, the chief of whom was Itachias.
+        source: pliny-natural-history
+        at: VI.24
+        quote: sent to Rome an embassy, consisting of four persons, the chief of whom was Itachias.
+notes:
+  Pliny's translators record Parisot's suggestion that the word is the title Rajah, taken by Pliny
+  for a name (VI.24, note 9).

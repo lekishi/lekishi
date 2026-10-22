@@ -1,0 +1,63 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Arambys, the fifth of the five cities by the sea the account says the fleet settled a day's sail
+  beyond the elephant marsh. No site is known.
+types: [settlement]
+names:
+  - form: Ἄραμβυς
+    lang: grc
+    script: Grek
+    roman: Arambys
+    scheme: unspecified-editorial
+    cite:
+      - id: arambys-name
+        says: The account names five cities the fleet settled by the sea beyond the marsh — Karikon
+          teichos, Gytte, Akra, Melitta and Arambys.
+        source: hanno-periplus
+        at: "5"
+        quote: κατῳκίσαμεν πόλεις πρὸς τῇ θαλάττῃ καλουμένας Καρικόν τε τείχος καὶ Γύττην καὶ Ἄκραν καὶ Μέλιτταν καὶ Ἄραμβυν.
+  - form: Arambys
+    lang: en
+    script: Latn
+    cite:
+      - id: arambys-translation
+        says: Schoff's translation writes the name Arambys.
+        role: supporting
+        source: hanno-periplus
+        at: "5"
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      No site is known and none is drawn. Schoff gives Müller's guess and calls the five locations
+      uncertain.
+    cite:
+      - id: arambys-unlocated
+        says:
+          The account places Arambys a day's sail beyond the marsh, which locates it on no map; the record asserts no
+          coordinate.
+        source: hanno-periplus
+        at: "5"
+      - id: arambys-mueller
+        says: "Schoff calls the five colonies' locations uncertain and reports Müller's guess: The fifth, perhaps, at the mouth of the Gueder River, 29° 10', or at Araouas, 29°."
+        basis: interpretation
+        role: alternative
+        attributed_to: K. Müller, as reported by W. H. Schoff (1913)
+        source: schoff-hanno
+        at: The Geography of the Voyage of Hanno, § 5
+        quote: "The fifth, perhaps, at the mouth of the Gueder River, 29° 10', or at Araouas, 29°."
+      - id: arambys-pleiades-unlocated
+        says: Pleiades lists Arambys as unlocated, after the Barrington Atlas.
+        role: supporting
+        source: pleiades
+        at: 278600 (locationPrecision), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "278600"
+    url: https://pleiades.stoa.org/places/278600
+    license: CC BY 3.0
+dispute:
+  status: disputed
+  summary:
+    The site is unidentified. The record draws nothing and keeps each commentator's identification
+    as an alternative.

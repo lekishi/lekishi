@@ -1,5 +1,8 @@
 # yaml-language-server: $schema=../../schema/place.schema.json
-summary: 跋祿羯呫婆, across the 耐秣陀河 on the western road.
+summary:
+  跋祿羯呫婆, across the 耐秣陀河 on the western road; the Barygaza of the Periplus, the great market
+  of north-western India on the gulf of Cambay, to which the goods of Ozene, Paethana and Tagara came
+  down and the ships of Egypt and Arabia sailed in July.
 types: [port, settlement]
 names:
   - form: 跋祿羯呫婆
@@ -18,6 +21,19 @@ names:
     script: Hani
     note: The spelling of this transcription of the biography.
     claim: bharukaccha-name
+  - form: Barygaza
+    lang: en
+    script: Latn
+    cite:
+      - id: barygaza-name
+        says:
+          The Periplus names the gulf and market-town of Barygaza at the beginning of the kingdom of Nambanus
+          and of all India.
+        source: periplus-erythraean-sea
+        at: "41"
+        quote:
+          Beyond the gulf of Baraca is that of Barygaza and the coast of the country of Ariaca, which
+          is the beginning of the Kingdom of Nambanus and of all India.
 at:
   - interpretation: display_anchor
     precision: unspecified
@@ -33,6 +49,13 @@ at:
           is asserted.
         source: wikidata
         at: Q760153 (P625), revision 2554081502
+      - id: barygaza-location
+        says: Pleiades places Barygaza on the Gulf of Cambay, with a representative point at Bharuch.
+        role: supporting
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 59737 (reprLatLong), dump 2026-10-21
 modern:
   - form: 珀魯傑
     lang: zh-Hant
@@ -44,3 +67,10 @@ external_ids:
     url: https://www.wikidata.org/wiki/Q760153
     license: CC0-1.0
     note: The modern place used for the label anchor.
+  - system: pleiades
+    id: "59737"
+    url: https://pleiades.stoa.org/places/59737
+    license: CC BY 3.0
+notes:
+  A shared place, minted by the 玄奘 chapter. The Erythraean Sea trade chapter folded in its Barygaza
+  name and the Pleiades identification rather than minting a second record.

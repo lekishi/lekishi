@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Lapita settlers found Bourewa on the Rove Peninsula of Viti Levu, a settlement they occupy for
+  about a century and a half.
+types: [founding]
+part_of: [lapita-expansion]
+date:
+  value: 888 BCE..837 BCE
+  mode: window
+  calendar: julian
+  as_written: 2814±25 cal BP; 2837–2786 cal BP (68.2%), 2865–2770 cal BP (95.4%)
+  cite:
+    - id: bourewa-time
+      says:
+        Nunn and Petchey model the initial occupation of Bourewa at 2814±25 cal BP, 2837–2786 cal BP
+        at 68.2% probability, converted from cal BP as BCE = BP − 1949 (1950 CE is 0 BP; there is no year
+        zero).
+      basis: interpretation
+      attributed_to: P. D. Nunn and F. Petchey (2013)
+      source: nunn-petchey-2013-bourewa
+      at: 21 (abstract)
+    - id: bourewa-time-2015
+      says: Petchey and colleagues give the earliest Bourewa range as 2838–2787 cal BP.
+      basis: interpretation
+      role: supporting
+      attributed_to: F. Petchey et al. (2015)
+      source: petchey-2015-teouma
+      at: "103"
+places:
+  - place: bourewa
+    role: site
+notes: Nunn and Petchey model the end of the Lapita occupation at 2657±20 cal BP (about 708 BCE).
+participants:
+  - actor: lapita-culture
+    role: participant

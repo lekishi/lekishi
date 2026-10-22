@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Lapita voyagers land at Nukuleka on Tongatapu and found the first settlement in Polynesia, a
+  founder colony through which the settlement of the rest of West Polynesia was funnelled.
+types: [founding]
+part_of: [lapita-expansion]
+date:
+  value: 897 BCE..881 BCE
+  mode: window
+  calendar: julian
+  as_written: 2838±8 BP (U/Th, coral file 2011-036, Stratum IV)
+  cite:
+    - id: nukuleka-time
+      says:
+        Burley, Weisler and Zhao identify the founder event at Nukuleka by a U/Th date of 2838±8 BP
+        on a coral file, converted from cal BP as BCE = BP − 1949 (1950 CE is 0 BP; there is no year zero).
+      basis: interpretation
+      attributed_to: D. Burley, M. I. Weisler and J.-x. Zhao (2012)
+      source: burley-2012-nukuleka
+      at: Abstract; Discussion
+    - id: nukuleka-time-2015
+      says:
+        Petchey and colleagues report Burley and colleagues' later refinement of first landfall in Tonga
+        to 2846–2839 cal BP (95.4%).
+      basis: interpretation
+      role: supporting
+      attributed_to: D. Burley et al. (2015), as reported by F. Petchey et al. (2015)
+      source: petchey-2015-teouma
+      at: "104"
+places:
+  - place: nukuleka
+    role: site
+cite:
+  - id: nukuleka-founder
+    says:
+      Burley, Weisler and Zhao say Nukuleka is the founder colony through which first settlement in
+      Polynesia was funnelled, and date its development over the following 250 years.
+    source: burley-2012-nukuleka
+    at: Abstract
+    quote:
+      Previous studies document Nukuleka in the Kingdom of Tonga as a founder colony for first settlement
+      of Polynesia by Lapita peoples.
+participants:
+  - actor: lapita-culture
+    role: participant

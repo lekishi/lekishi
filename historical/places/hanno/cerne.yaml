@@ -1,0 +1,76 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Cerne, the small island in the recess of a bay that the account says the fleet settled, judging
+  it to lie opposite Carthage; the base it twice returned to. Its identification has been argued
+  for two centuries, from Fedallah to Arguin.
+types: [landform, settlement]
+names:
+  - form: Κέρνη
+    lang: grc
+    script: Grek
+    roman: Kernē
+    scheme: unspecified-editorial
+    cite:
+      - id: cerne-name
+        says:
+          The account says the fleet found a small island five stades round in the recess of a bay,
+          settled it and named it Cerne.
+        source: hanno-periplus
+        at: "8"
+        quote: ἐν μυχῷ τινος κόλπου νῆσον μικράν, κύκλον ἔχουσαν σταδίων πέντε· ἣν κατῳκίσαμεν, Κέρνην ὀνομάσαντες.
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [-9.78657571951, 31.4970339428]
+    notes: Drawn at the gazetteer's identification, the island of Mogador off Essaouira, at region
+      precision. Schoff's Herne Island at the Rio de Oro and the older identifications are kept as
+      alternatives and not drawn.
+    cite:
+      - id: cerne-mogador
+        says: Pleiades says Cerne is probably to be associated with modern Mogador, off the Moroccan
+          coast near Essaouira.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 13728494 (reprLatLong, description), dump 2026-10-21
+      - id: cerne-herne
+        says: Schoff identifies Cerne with Herne Island within the mouth of the Rio de Oro at about
+          23° 45′ N.
+        basis: interpretation
+        role: alternative
+        attributed_to: W. H. Schoff (1913)
+        source: schoff-hanno
+        at: The Geography of the Voyage of Hanno, § 8
+        quote: The island of Cerne, lying in the recess of a bay, is identified with the modern Herne Island within the mouth of the Rio de Oro at about 23° 45' N.
+      - id: cerne-older-identifications
+        says: Pliny's 1855 translators list earlier identifications — Fedallah on the coast of Fez
+          (Gosselin), Arguin at about 20° 5′ N (Rennell), and Agadir (Heeren, Mannert) — and say
+          nothing certain was known of it in Pliny's day.
+        basis: interpretation
+        role: alternative
+        attributed_to: J. Bostock and H. T. Riley (1855), citing Gosselin, Rennell, Heeren and Mannert
+        source: pliny-natural-history
+        at: VI.36, note 2
+external_ids:
+  - system: pleiades
+    id: "13728494"
+    url: https://pleiades.stoa.org/places/13728494
+    license: CC BY 3.0
+dispute:
+  status: disputed
+  summary:
+    "Five identifications span the coast from Fedallah to Arguin: Fedallah, Mogador (Pleiades, drawn), Agadir, Herne
+    Island at Dakhla (Schoff) and Arguin. The account's own clue — that Cerne lies as far beyond the
+    Pillars as Carthage lies short of them — is what each reading interprets."
+cites:
+  notes:
+    - id: cerne-opposite-carthage
+      says:
+        The account says the fleet judged Cerne to lie opposite Carthage, because the voyage from
+        Carthage to the Pillars equalled the voyage from the Pillars to Cerne.
+      source: hanno-periplus
+      at: "8"
+      quote: Ἐτεκμαιρόμεθα δ᾽ αὐτὴν ἐκ τοῦ περίπλου κατ᾽ εὐθὺ κεῖσθαι Καρχηδόνος
+notes:
+  The account's reasoning about Cerne's position is a navigator's estimate by sailing time, not a
+  measurement, and is what every identification interprets.

@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  At the Horn of the South Hanno's crew pursues the people the interpreters call Gorillae; the men
+  escape by climbing and throwing stones, and three women are taken, killed and flayed.
+types: [conflict]
+from: hanno
+to: gorillai
+directionality: directed
+causality: not_asserted
+date:
+  value: 570 BCE..470 BCE
+  mode: window
+  calendar: julian
+  as_written: Τριταῖοι δ᾽ ἐκεῖθεν … ἀφικόμεθα εἰς κόλπον Νότου Κέρας
+  cite:
+    - id: hanno-gorillai-time
+      says:
+        The account dates the encounter no more closely than the undated voyage, whose window the
+        cited commentators set between about 570 and 470 BCE.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1913)
+      sources:
+        - source: hanno-periplus
+          at: "18"
+        - source: schoff-hanno
+          at: Carthaginian Chronology
+cite:
+  - id: hanno-gorillai-account
+    says: The account says the crew could not take the men, who escaped by climbing the cliffs and
+      defending themselves with stones, but took three women, killed and flayed them.
+    source: hanno-periplus
+    at: "18"
+    quote: Διώκοντες δὲ ἄνδρας μὲν συλλαβεῖν οὐκ ἠδυνήθημεν, ἀλλὰ πάντες (μὲν) ἐξέφυγον, κρημνοβάται ὄντες καὶ τοῖς πέτροις ἀμυνόμενοι

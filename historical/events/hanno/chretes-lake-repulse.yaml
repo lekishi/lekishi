@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Through the great river Chretes the fleet reaches a lake with three islands; at its far end, under great mountains, men in the skins of wild beasts drive it off with stones and stop it from landing."
+types: [occurrence]
+part_of: [hanno-voyage]
+date:
+  value: 570 BCE..470 BCE
+  mode: window
+  calendar: julian
+  as_written: "ἡμερήσιον πλοῦν (a day's sail beyond the islands)"
+  cite:
+    - id: chretes-lake-repulse-time
+      says: "The account dates none of its stages; this one belongs to the undated voyage, whose window the cited commentators set between about 570 and 470 BCE."
+      basis: interpretation
+      attributed_to: W. H. Schoff (1913); J. Bostock and H. T. Riley (1855)
+      sources:
+        - source: hanno-periplus
+          at: "9"
+        - source: schoff-hanno
+          at: Carthaginian Chronology
+places:
+  - place: chretes
+    role: site
+participants:
+  - actor: hanno
+    role: leader
+cite:
+  - id: chretes-repulse-account
+    says: "The account says men wearing the skins of wild beasts threw stones and drove the fleet off, preventing it from landing."
+    source: hanno-periplus
+    at: "9"
+    quote: "μεστὰ ἀνθρώπων ἀγρίων, δέρματα θήρεια ἐνημμένων, οἳ πέτροις βάλλοντες ἀπήραξαν ἡμᾶς, κωλύοντες ἐκβῆναι."

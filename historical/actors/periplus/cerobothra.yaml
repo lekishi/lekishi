@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: Cerobothra, the kingdom of Tyndis and Muziris; Pliny names the king of Muziris as Cælobothras.
+types: [dynasty]
+names:
+  - form: Cerobothra
+    lang: en
+    script: Latn
+    cite:
+      - id: cerobothra-name
+        says: The Periplus says Tyndis is of the Kingdom of Cerobothra.
+        source: periplus-erythraean-sea
+        at: "54"
+        quote: Tyndis is of the Kingdom of Cerobothra
+  - form: Cælobothras
+    lang: en
+    script: Latn
+    note: Pliny treats it as a king's name; the Periplus as the kingdom's.
+    cite:
+      - id: caelobothras-name
+        says: Pliny says that as he writes, the king of Muziris is Cælobothras.
+        source: pliny-natural-history
+        at: VI.26
+        quote: At the moment that I am writing these pages, the name of the king of this place is Cælobothras.
+notes:
+  The Periplus uses the name for the kingdom and Pliny for its king; the record keeps both readings
+  and asserts no person.

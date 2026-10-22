@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Arabia, from which, the Periplus says, ships came with cargoes to Muziris. The text names the
+  country, not a port, so the atlas places only a label.
+types: [region]
+names:
+  - form: Arabia
+    lang: en
+    script: Latn
+    cite:
+      - id: arabia-name
+        says: The Periplus says Muziris abounds in ships from Arabia and from the Greeks.
+        source: periplus-erythraean-sea
+        at: "54"
+        quote:
+          Muziris, of the same Kingdom, abounds in ships sent there with cargoes from Arabia, and by the
+          Greeks
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [45, 25]
+    notes:
+      A label anchor at the gazetteer's point for the Arabian Peninsula; not a port. The Periplus names
+      the country, and the atlas does not choose a harbour for it.
+    cite:
+      - id: arabia-location
+        says: GeoNames records the Arabian Peninsula at this point.
+        source: geonames
+        at: 6957697 (Arabian Peninsula; latitude, longitude), dump 2026-10-21
+external_ids:
+  - system: geonames
+    id: "6957697"
+    url: https://www.geonames.org/6957697
+    license: CC BY 4.0
+notes:
+  The trade arc from Arabia to Muziris starts here rather than at Muza, because the text does not say
+  which Arabian port the ships left from.

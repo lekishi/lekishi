@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Ships from Muza, and those calling on the voyage from Damirica and Barygaza, take tortoise-shell
+  from Dioscorida for rice, wheat, Indian cloth and slaves.
+types: [trade]
+from: place:dioscorida
+to: place:muza
+directionality: mutual
+causality: not_asserted
+date:
+  value: 58..62
+  mode: window
+  calendar: julian
+  as_written: no date; the text speaks of the present
+  cite:
+    - id: dioscorida-tortoise-shell-time
+      says:
+        The Periplus describes this as present at the time of the voyage it was written from, which
+        it does not date; Schoff puts that voyage between the summers of 58 and 62 CE.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      sources:
+        - source: periplus-erythraean-sea
+          at: "31"
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+cite:
+  - id: dioscorida-tortoise-shell-basis
+    says: The Periplus says people from Muza and ships from Damirica and Barygaza trade at Dioscorida.
+    source: periplus-erythraean-sea
+    at: "31"
+    quote:
+      Trade is also carried on there by some people from Muza and by those who chance to call there
+      on the voyage from Damirica and Barygaza

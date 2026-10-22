@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The Lapita expansion: from the Bismarck Archipelago, makers of dentate-stamped pottery crossed
+  into Remote Oceania and settled the Santa Cruz Islands, Vanuatu, New Caledonia, Fiji, Tonga and Sāmoa
+  within a few centuries, the first people to live on any of them."
+types: [process]
+date:
+  value: 1521 BCE..801 BCE
+  mode: duration
+  calendar: julian
+  as_written: 3470–3250 cal BP (Mussau, Denham et al.) to 2900–2750 BP (Tonga and Sāmoa, Petchey and Kirch)
+  cite:
+    - id: lapita-expansion-time
+      says:
+        The span runs from the earliest Lapita dates on Mussau in Denham, Bronk Ramsey and Specht's
+        model to the eastern-most extent in Tonga and Sāmoa that Petchey and Kirch give, converted from
+        cal BP as BCE = BP − 1949 (1950 CE is 0 BP; there is no year zero).
+      basis: interpretation
+      attributed_to: T. Denham, C. Bronk Ramsey and J. Specht (2012); F. Petchey and P. V. Kirch (2019)
+      sources:
+        - source: denham-2012-lapita
+          at: 39 (abstract)
+        - source: petchey-kirch-2019
+          at: Introduction
+places:
+  - place: bismarck-archipelago
+    role: start
+  - place: mulifanua
+    role: end
+    note: The eastern-most Lapita site with dentate-stamped pottery.
+cite:
+  - id: lapita-expansion-account
+    says:
+      Petchey and Kirch say the culture began in the Bismarcks and reached its eastern-most extent in
+      Tonga and Sāmoa.
+    source: petchey-kirch-2019
+    at: Introduction
+    quote:
+      This Lapita culture is argued to have begun in the Bismarck Archipelago possibly as early as
+      3350 years ago, reaching its eastern-most extent in the Tongan and Sāmoan archipelagos around 2900–2750
+      BP.
+notes:
+  Every date below is a calibrated radiocarbon or U/Th range, and each is converted to BCE years
+  for the timeline. The ranges are model outputs at a stated probability, not documentary dates; the contract
+  has no state for them yet, so the probability and the original BP figures are kept in as_written.
+participants:
+  - actor: lapita-culture
+    role: participant

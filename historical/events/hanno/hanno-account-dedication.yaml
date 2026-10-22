@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Hanno dedicates the account of the voyage in the precinct of Kronos at Carthage — the Greek heading's word for the god Schoff translates as Baal."
+types: [occurrence]
+part_of: [hanno-voyage]
+date:
+  value: 570 BCE..470 BCE
+  mode: window
+  calendar: julian
+  as_written: "Ὃν καὶ άνέθηκε ἐν τῷ τοῦ Κρόνου τεμένει"
+  cite:
+    - id: hanno-dedication-time
+      says: "The heading does not date the dedication; it follows the undated voyage, whose window the cited commentators set between about 570 and 470 BCE."
+      basis: interpretation
+      attributed_to: W. H. Schoff (1913)
+      sources:
+        - source: hanno-periplus
+          at: title
+        - source: schoff-hanno
+          at: Carthaginian Chronology
+places:
+  - place: carthage
+    role: site
+participants:
+  - actor: hanno
+    role: leader
+notes: "The heading's claim is how the text explains its own existence: a public record set up in a sanctuary, which a Greek writer later translated. Kronos is the Greek name the heading gives the Carthaginian god."
+cite:
+  - id: hanno-dedication-heading
+    says: "The heading says Hanno dedicated the account, setting out these things, in the precinct of Kronos."
+    source: hanno-periplus
+    at: title
+    quote: "Ὃν καὶ άνέθηκε ἐν τῷ τοῦ Κρόνου τεμένει, δηλοῦντα τάδε"
+  - id: hanno-dedication-translation
+    says: "Schoff's translation renders the precinct of Kronos as the Temple of Baal."
+    role: supporting
+    source: hanno-periplus
+    at: title
+    quote: "which he dedicated also in the Temple of Baal, affixing this"

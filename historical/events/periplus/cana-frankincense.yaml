@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At Cana, the frankincense of Eleazus's country comes in on rafts of inflated skins and by boat,
+  and goes out to Barygaza, Scythia, Ommana and Persia.
+types: [exchange]
+part_of: [periplus-voyage]
+date:
+  value: 58..62
+  mode: window
+  calendar: julian
+  as_written: no date; the text speaks of the present
+  cite:
+    - id: cana-frankincense-time
+      says:
+        The Periplus describes this as present at the time of the voyage it was written from, which
+        it does not date; Schoff puts that voyage between the summers of 58 and 62 CE.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      sources:
+        - source: periplus-erythraean-sea
+          at: 27–29
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+places:
+  - place: cana
+    role: site
+participants:
+  - actor: eleazus
+    role: host
+cite:
+  - id: cana-frankincense-account
+    says:
+      The Periplus says all the frankincense is brought by camel to Sabbatha and to Cana on rafts of
+      inflated skins and in boats.
+    source: periplus-erythraean-sea
+    at: 27–29
+    quote:
+      All the frankincense produced in the country is brought by camels to that place to be stored,
+      and to Cana on rafts held up by inflated skins after the manner of the country, and in boats.

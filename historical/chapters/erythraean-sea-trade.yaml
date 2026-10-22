@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=../schema/chapter.schema.json
+title: The Erythraean Sea trade, Rome to India
+summary: "Between 41 and 77 CE, a Greek merchant of Roman Egypt wrote a handbook to every port from the Red Sea to southern India: who ruled each one, what it bought and sold, and when to sail. Pliny, writing at the same time, gives the route from Alexandria to Muziris in days. Follow the ports, the goods and the Hippalus wind, and the embassy that came from Taprobane to Claudius."
+window: 41..77
+include:
+  [
+    egypt-adulis-trade,
+    axum-adulis-ivory,
+    muza-barygaza-trade,
+    cana-barygaza-trade,
+    cana-barbaricum-trade,
+    dioscorida-tortoise-shell,
+    egypt-barbaricum-trade,
+    egypt-barygaza-trade,
+    ozene-barygaza-goods,
+    paethana-barygaza-carnelian,
+    tagara-barygaza-cloth,
+    egypt-muziris-pepper,
+    arabia-muziris-trade,
+    taprobane-rome-embassy,
+  ]
+story:
+  summary: "The Erythraean Sea trade, 41–77 CE: the Taprobane embassy under Claudius, the Hippalus crossing, Pliny's route from Alexandria to Muziris, and the ports of the Periplus from Mussel Harbor to Poduca, with the goods that moved between them."
+  span: 41..77
+  coverage: "The Periplus of the Erythraean Sea (Schoff's 1912 translation), the ports and rulers it names that a gazetteer locates, and Pliny's Natural History VI.24 and VI.26. Dates: the Periplus is undated; every port follows Schoff's 58–62 CE for the voyage, with the other commentators' dates (40–70, 80–89, up to 246–247 CE) as alternatives on the voyage. Pliny's route shares a window of 48–77 CE between his translators' reading and his dedication. Places: Pleiades identifications for the ports, the shared Rome record's Wikidata point, and label anchors only for Egypt and Arabia; unlocated places (Leuke Kome, Sabbatha, Moscha, Rhapta and the far coast of Africa) are left out rather than drawn. Trade: one arc per pair of places the text links; where the text names only a country ('from Egypt', 'from Arabia'), the arc starts at that country's label anchor, never at a chosen port. Excluded: the African coast beyond Adulis, the Persian Gulf, the hearsay of the Ganges, Chryse and Thinae, and the Roman finds in India."
+  notes: "The Periplus speaks in the present tense, so every port is one moment, Schoff's window, and the order of the steps is the text's coastal order, not time. Arcs 'from Egypt' and 'from Arabia' start at a label anchor for the country, which asserts no coordinate. Three places reuse ids other branches mint for the same place (bharukaccha, ujjayini, lanka) so that the duplicate surfaces as a build error and is merged, not left as two records."
+  steps:
+    - taprobane-embassy: Under Claudius, an embassy from Taprobane to Rome
+    - plocamus-freedman-drift: A freedman drifts to Taprobane in fifteen days
+    - taprobane-rome-embassy: Taprobane and Rome, an alliance sought
+    - hippalus-crossing: Hippalus crosses the open ocean
+    - pliny-india-route: Pliny's route to India, every year
+    - pliny-nile-leg: Up the Nile to Coptos in twelve days
+    - pliny-desert-leg: Across the desert to Berenice in twelve days
+    - pliny-red-sea-leg: Down the Red Sea in thirty days
+    - pliny-ocean-leg: To Muziris in forty days with the Hippalus wind
+    - pliny-return-sailing: Home in December or January
+    - periplus-voyage: The Periplus, a merchant's handbook, about 58–62 CE
+    - egyptian-ports: Mussel Harbor and Berenice
+    - adulis-ivory-market: Adulis and the ivory of Axum
+    - egypt-adulis-trade: Egypt and Adulis
+    - muza-market: Muza and its Arab ship-owners
+    - muza-barygaza-trade: Muza and Barygaza
+    - ocelis-landing: Through the strait at Ocelis
+    - eudaemon-arabia-destroyed: Eudaemon Arabia, destroyed by Charibael
+    - cana-frankincense: Frankincense at Cana
+    - cana-barygaza-trade: Cana and Barygaza
+    - dioscorida-trade: Arabs, Indians and Greeks on Dioscorida
+    - barbaricum-market: Barbaricum at the mouth of the Indus
+    - barygaza-market: Barygaza, and the drachmae of Menander
+    - ozene-barygaza-goods: From Ozene down to Barygaza
+    - paethana-barygaza-carnelian: Carnelian by wagon from Paethana
+    - calliena-obstructed: Calliena under Sandares
+    - malabar-pepper: Pepper at Muziris and Nelcynda
+    - egypt-muziris-pepper: Egypt and Muziris
+    - comari-bathing: The bathers at Comari
+    - poduca-harbour: Poduca and the ships for the Ganges

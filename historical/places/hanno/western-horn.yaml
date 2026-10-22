@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Horn of the West, the great bay the interpreters named, with an island holding a sea-lake and
+  a second island, where the account says the crew heard pipes, cymbals and drums by night and the
+  soothsayers ordered them away. Schoff places it at the Bissagos Islands.
+types: [landform]
+names:
+  - form: Ἑσπέρου Κέρας
+    lang: grc
+    script: Grek
+    roman: Hesperou Keras
+    scheme: unspecified-editorial
+    cite:
+      - id: western-horn-name
+        says: The account says that after five days' sailing the fleet reached a great bay that the
+          interpreters said was called the Horn of the West.
+        source: hanno-periplus
+        at: "14"
+        quote: ἄχρι ἤλθομεν εἰς μέγαν κόλπον, ὃν ἔφασαν οἱ ἑρμηνέες καλεῖσθαι Ἑσπέρου Κέρας.
+  - form: Hesperu Ceras
+    lang: la
+    script: Latn
+    cite:
+      - id: western-horn-pliny
+        says: Pliny names a promontory Hesperu Ceras, facing which lie the Gorgades, where Hanno
+          penetrated.
+        role: supporting
+        source: pliny-natural-history
+        at: VI.36
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: Not drawn. Schoff's identification with the Bissagos is kept as an alternative.
+    cite:
+      - id: western-horn-unlocated
+        says:
+          The account places the Horn of the West five days beyond the opening of the sea, which locates it on no map; the record asserts no
+          coordinate.
+        source: hanno-periplus
+        at: "14"
+      - id: western-horn-bissagos
+        says:
+          Schoff says the bay called Horn of the West reaches from 12° to 11° N and that its islands
+          are the modern Bissagos.
+        basis: interpretation
+        role: alternative
+        attributed_to: W. H. Schoff (1913)
+        source: schoff-hanno
+        at: The Geography of the Voyage of Hanno, § 14
+        quote: The bay called Horn of the West reaches from 12° to to 11° N. and the islands are the modern Bissagos.
+dispute:
+  status: disputed
+  summary:
+    The site is unidentified. The record draws nothing and keeps each commentator's identification
+    as an alternative.

@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The city of the Auxumites, five days beyond Coloe, to which the Periplus says all the ivory from
+  beyond the Nile was brought before going down to Adulis.
+types: [capital]
+names:
+  - form: Auxumites
+    lang: en
+    script: Latn
+    note: The Periplus names the people, not the city.
+    cite:
+      - id: axum-name
+        says:
+          The Periplus says the city of the people called Auxumites lies five days beyond Coloe, and all
+          the ivory is brought there.
+        source: periplus-erythraean-sea
+        at: "4"
+        quote: From that place to the city of the people called Auxumites there is a five days' journey more
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [38.7212920204, 14.1338504591]
+    notes:
+      The gazetteer's representative point; an identification by the gazetteer, not a statement of
+      the Periplus.
+    cite:
+      - id: axum-location
+        says: Pleiades identifies the city with present-day Aksum in Ethiopia and gives this point.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 39303 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "39303"
+    url: https://pleiades.stoa.org/places/39303
+    license: CC BY 3.0

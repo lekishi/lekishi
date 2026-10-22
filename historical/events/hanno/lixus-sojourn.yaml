@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "At the great river Lixus the fleet stays some time with the nomad Lixitae, becoming friends, hears of the hostile Aithiopes and fleet-footed cave-dwellers beyond the mountains, and takes interpreters from them."
+types: [exchange]
+part_of: [hanno-voyage]
+date:
+  value: 570 BCE..470 BCE
+  mode: window
+  calendar: julian
+  as_written: "ἐμείναμεν ἄχρι τινός (we stayed some time)"
+  cite:
+    - id: lixus-sojourn-time
+      says: "The account dates none of its stages; this one belongs to the undated voyage, whose window the cited commentators set between about 570 and 470 BCE."
+      basis: interpretation
+      attributed_to: W. H. Schoff (1913); J. Bostock and H. T. Riley (1855)
+      sources:
+        - source: hanno-periplus
+          at: "6–8"
+        - source: schoff-hanno
+          at: Carthaginian Chronology
+places:
+  - place: lixus-river
+    role: site
+participants:
+  - actor: hanno
+    role: guest
+  - actor: lixitae
+    role: host
+notes: "Contact and exchange, not war: the account's one friendly encounter, and the source of the interpreters who later name the Horn of the West and the Gorillae."
+cite:
+  - id: lixus-sojourn-account
+    says: "The account says the fleet stayed some time with the Lixitae by the Lixus and became friends with them."
+    source: hanno-periplus
+    at: "6"
+    quote: "παρ᾽ οἷς ἐμείναμεν ἄχρι τινός, φίλοι γενόμενοι."
+  - id: lixus-sojourn-interpreters
+    says: "The account says the fleet took interpreters from the Lixitae before sailing on."
+    role: supporting
+    source: hanno-periplus
+    at: "8"
+    quote: "Λαβόντες δὲ παρ᾽ αὐτῶν ἑρμηνέας"

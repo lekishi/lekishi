@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  The Pandian kingdom of Nelcynda and of the coast from Comari to the pearl-fisheries of Colchi;
+  Pliny says king Pandion once reigned at Modiera.
+types: [dynasty]
+names:
+  - form: Pandian
+    lang: en
+    script: Latn
+    cite:
+      - id: pandian-name
+        says: The Periplus says Nelcynda is of another kingdom, the Pandian.
+        source: periplus-erythraean-sea
+        at: "54"
+        quote: and is of another Kingdom, the Pandian
+  - form: Pandion
+    lang: en
+    script: Latn
+    cite:
+      - id: pandion-name
+        says: Pliny says king Pandion used to reign at Modiera, inland from the mart.
+        source: pliny-natural-history
+        at: VI.26
+        quote:
+          Here king Pandion used to reign, dwelling at a considerable distance from the mart in the interior,
+          at a city known as Modiera.

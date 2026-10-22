@@ -1,7 +1,8 @@
 # yaml-language-server: $schema=../../schema/actor.schema.json
 summary:
-  "Carthage as a state: its council and citizens, who accepted war with Rome in 218 BCE and heard
-  Mago's report of Cannae in 216 BCE."
+  "Carthage as a state: its council and citizens, whose resolution the Periplus of Hanno says sent
+  the voyage out beyond the Pillars to found cities, and who accepted war with Rome in 218 BCE and
+  heard Mago's report of Cannae in 216 BCE."
 types: [state]
 names:
   - form: Carthaginienses
@@ -22,5 +23,12 @@ names:
         source: polybius
         at: "3.17.7"
         quote: τὴν εὔνοιαν τῶν ἐν οἴκῳ Καρχηδονίων
+      - id: carthage-state-name-hanno
+        role: supporting
+        says: The account opens with the resolution of the Carthaginians that Hanno should sail and
+          found cities.
+        source: hanno-periplus
+        at: "1"
+        quote: Ἔδοξε Καρχηδονίοις
 notes: "The state actor carries no roles: the role vocabulary is person-oriented. The city is the
-  separate place record carthage."
+  separate place record carthage. Shared by the Hannibal and Hanno chapters."

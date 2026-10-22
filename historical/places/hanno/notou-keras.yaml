@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Horn of the South, the bay three days beyond the Chariot of the Gods where the account says
+  the crew took three of the hairy people the interpreters called Gorillae and then turned back for
+  want of provisions. Schoff places it at Sherbro Sound in Sierra Leone.
+types: [landform]
+names:
+  - form: Νότου Κέρας
+    lang: grc
+    script: Grek
+    roman: Notou Keras
+    scheme: unspecified-editorial
+    cite:
+      - id: notou-keras-name
+        says:
+          The account says that three days beyond the Chariot of the Gods the fleet came to a bay
+          called the Horn of the South.
+        source: hanno-periplus
+        at: "17"
+        quote: ἀφικόμεθα εἰς κόλπον Νότου Κέρας λεγόμενον.
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      Not drawn. Schoff's Sherbro Sound is kept as an alternative; anyone who puts the Chariot of
+      the Gods at Mount Cameroon puts this bay further south and east. Pleiades' "Notou Keras /
+      Aromata" is Cape Guardafui in Somalia, a different place of the same Greek name.
+    cite:
+      - id: notou-keras-unlocated
+        says:
+          The account places the Horn of the South three days beyond the Chariot of the Gods, which locates it on no map; the record asserts no
+          coordinate.
+        source: hanno-periplus
+        at: "17"
+      - id: notou-keras-sherbro
+        says: Schoff says the island within the bay called Horn of the South is, as all commentators
+          now agree, Sherbro Sound in Sierra Leone, about 7° 30′ N.
+        basis: interpretation
+        role: alternative
+        attributed_to: W. H. Schoff (1913)
+        source: schoff-hanno
+        at: The Geography of the Voyage of Hanno, §§ 17 and 18
+        quote: The island enclosed within the bay called Horn of the South, it is now agreed by all commentators, is the modern Sherboro Sound in the British colony of Sierra Leone, about 7° 30' N.
+notes: Not to be confused with the Notou Keras of the Erythraean Sea at Cape Guardafui.
+dispute:
+  status: disputed
+  summary:
+    The site is unidentified. The record draws nothing and keeps each commentator's identification
+    as an alternative.

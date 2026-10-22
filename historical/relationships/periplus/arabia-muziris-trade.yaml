@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: Ships with cargoes from Arabia come to Muziris.
+types: [trade]
+from: place:arabia
+to: place:muziris
+directionality: directed
+causality: not_asserted
+date:
+  value: 58..62
+  mode: window
+  calendar: julian
+  as_written: no date; the text speaks of the present
+  cite:
+    - id: arabia-muziris-trade-time
+      says:
+        The Periplus describes this as present at the time of the voyage it was written from, which
+        it does not date; Schoff puts that voyage between the summers of 58 and 62 CE.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      sources:
+        - source: periplus-erythraean-sea
+          at: "54"
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+cite:
+  - id: arabia-muziris-trade-basis
+    says: The Periplus says Muziris abounds in ships from Arabia and from the Greeks.
+    source: periplus-erythraean-sea
+    at: "54"
+    quote:
+      Muziris, of the same Kingdom, abounds in ships sent there with cargoes from Arabia, and by the
+      Greeks
+notes: The Periplus says 'from Arabia' and names no port, so the arc starts at Arabia's label anchor, not at Muza.

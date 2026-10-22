@@ -1,0 +1,54 @@
+# A contract v1 journey record. The owner decided on 2026-10-21 that journeys are their own kind
+# (RFD 2, "Decided: journeys are their own kind"); the record's shape is still proposed there
+# ("Proposed: the journey record").
+# A conforming case: one party's voyage, written to the proposed shape.
+# Not compiled yet: the compiler reads no historical/journeys/ folder until v1 lands, so this
+# file is test data for that work and changes no chapter's digest.
+title: Hanno's voyage beyond the Pillars
+summary: >-
+  Hanno's fleet sails from Carthage through the Pillars, founds Thymiaterium, a sanctuary at
+  Soloeis and five cities, stays with the Lixitae, settles Cerne, goes south to a river of
+  crocodiles and back to Cerne, then sails south past the Horn of the West and the Chariot of the
+  Gods to the Horn of the South, where provisions fail.
+travellers:
+  - actor: hanno
+    role: leader
+stops:
+  - hanno-departure
+  - event: hanno-pillars-passage
+    by: sea
+  - event: thymiaterium-founding
+    by: sea
+  - event: soloeis-sanctuary
+    by: sea
+  - event: lixus-sojourn
+    by: sea
+  - event: cerne-founding
+    by: sea
+  - event: chretes-lake-repulse
+    by: sea
+  - event: cerne-return
+    by: sea
+  - event: aithiopes-coast
+  - event: western-horn-landing
+    by: sea
+  - event: burning-coast
+    by: sea
+  - event: southern-horn-capture
+    by: sea
+cite:
+  - id: hanno-voyage-sequence
+    says: >-
+      The account narrates the stages in this order, each reached by sailing (ἐπλεύσαμεν,
+      παρεπλέομεν), counting days between them.
+    source: hanno-periplus
+    at: 1–18
+notes: >-
+  Test case for the drawing rules. The stops at Thymiaterium, the Lixus, the Chretes, the Horn of
+  the West and the Horn of the South are at unknown places, so the line breaks at each of them;
+  only Carthage–Pillars–Soloeis and Cerne (Mogador) and the Chariot of the Gods carry coordinates.
+  Cerne is two stops at one place (founding and return). aithiopes-coast is a departure from Cerne
+  (its place role is start), so its leg has no `by` of its own. The five cities' event is left out:
+  it has five sites and the account gives no order among them. The undated window gives every stop
+  the same time, so v0 can check no order here, which is the case the validation's third rule
+  describes.

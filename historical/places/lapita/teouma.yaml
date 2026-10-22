@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  "Teouma, on Efate in Vanuatu: a Lapita settlement and cemetery whose extinct fauna, early pottery
+  and New Britain obsidian mark it as a first-settlement site for Efate."
+cites:
+  summary:
+    - id: teouma-first-settlement
+      says:
+        Petchey and colleagues say Teouma has numerous indicators of being an initial colonization site
+        for Efate, including extinct fauna, early ceramics and New Britain obsidian.
+      source: petchey-2015-teouma
+      at: "103"
+types: [settlement]
+names:
+  - form: Teouma
+    lang: en
+    script: Latn
+    cite:
+      - id: teouma-name
+        says: Petchey, Spriggs, Bedford and Valentin date deposits across the Teouma site on Efate in Vanuatu.
+        source: petchey-2015-teouma
+        at: 95 (abstract)
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [168.38333, -17.78333]
+    notes: The modern locality Téouma on Efate, which the cited dating study names for the site; the
+      excavated site lies at the locality, so the point is approximate.
+    cite:
+      - id: teouma-location
+        says: GeoNames records Téouma at this point.
+        source: geonames
+        at: 2134592 (Téouma; latitude, longitude), dump 2026-10-21
+external_ids:
+  - system: geonames
+    id: "2134592"
+    url: https://www.geonames.org/2134592
+    license: CC BY 4.0

@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Eudaemon Arabia (Aden), the village by the shore that had once been the meeting place of the
+  India and Egypt trades, until Charibael destroyed it not long before the Periplus was written.
+types: [port, settlement]
+names:
+  - form: Eudaemon Arabia
+    lang: en
+    script: Latn
+    cite:
+      - id: eudaemon-arabia-name
+        says:
+          The Periplus says Eudaemon Arabia is a village by the shore, of the kingdom of Charibael, with
+          good anchorages.
+        source: periplus-erythraean-sea
+        at: "26"
+        quote: there is Eudaemon Arabia, a village by the shore, also of the Kingdom of Charibael
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [45.038928, 12.771651]
+    notes:
+      The gazetteer's representative point; an identification by the gazetteer, not a statement of
+      the Periplus.
+    cite:
+      - id: eudaemon-arabia-location
+        says: Pleiades gives this point for Adane, Athenae or Eudaimon Arabia.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 39269 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "39269"
+    url: https://pleiades.stoa.org/places/39269
+    license: CC BY 3.0

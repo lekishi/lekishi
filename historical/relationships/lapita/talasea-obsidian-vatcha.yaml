@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Obsidian from the Talasea sources of New Britain reaches Vatcha on the Île des Pins, about 2,700
+  km away.
+types: [other]
+from: place:talasea-obsidian
+to: place:vatcha
+directionality: directed
+causality: not_asserted
+cite:
+  - id: talasea-vatcha
+    says:
+      Sand and Sheppard source four obsidian flakes from Saint-Maurice-Vatcha to the Talasea region
+      of New Britain.
+    sources:
+      - source: pofatu
+        at: sand2000_PS-1, PS-3, PS-4, PS-5 (site_name, site_code), v1.4
+      - source: pofatu
+        at: contribution sand2000 (contribution_description), v1.4
+notes:
+  "Material provenance, typed other rather than trade: the record asserts that obsidian from the source
+  reached the site, not how, and exchange, gift or settlers carrying it are all open. The atlas draws no
+  arc for it and lists it on the places' cards. Undated: the contribution dates no flake, only its Lapita
+  context."

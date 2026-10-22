@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Chariot of the Gods, the very high mountain the account says the crew saw by night as one
+  great fire seeming to touch the stars. Pleiades notes the identification with Mount Cameroon;
+  Müller, through Schoff, identified it with Mount Kakoulima in Guinea.
+types: [landform]
+names:
+  - form: Θεῶν ὄχημα
+    lang: grc
+    script: Grek
+    roman: Theōn ochēma
+    scheme: unspecified-editorial
+    cite:
+      - id: theon-ochema-name
+        says: The account says that by day the great fire was seen to be a very high mountain called
+          the Chariot of the Gods.
+        source: hanno-periplus
+        at: "16"
+        quote: Τοῦτο δ᾽ ἡμέρας ὄρος ἐφαίνετο μέγιστον, Θεῶν ὄχημα καλούμενον.
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [9.1733628, 4.2180273]
+    notes:
+      Drawn at Mount Cameroon, the identification Pleiades reports, at region precision. Müller's
+      Kakoulima (about 9° 30′ N) is kept as an alternative and not drawn; the two are about 2,500 km
+      apart in a straight line, which is the whole question of how far the voyage went.
+    cite:
+      - id: theon-ochema-cameroon
+        says:
+          Pleiades says some scholars identify the Chariot of the Gods with Mount Cameroon and gives
+          this representative point.
+        basis: interpretation
+        attributed_to: Pleiades, reporting "some scholars"
+        source: pleiades
+        at: 790672218 (reprLatLong, description), dump 2026-10-21
+      - id: theon-ochema-kakoulima
+        says: Schoff reports that Müller identifies the Chariot of the Gods with Mount Kakoulima at
+          9° 30′ N.
+        basis: interpretation
+        role: alternative
+        attributed_to: K. Müller, as reported by W. H. Schoff (1913)
+        source: schoff-hanno
+        at: The Geography of the Voyage of Hanno, § 16
+        quote: The high mountain called Chariot of the Gods, Müller identifies with Mt. Kakulima at 9° 30' N.
+external_ids:
+  - system: pleiades
+    id: "790672218"
+    url: https://pleiades.stoa.org/places/790672218
+    license: CC BY 3.0
+dispute:
+  status: disputed
+  summary:
+    Mount Cameroon (drawn) or Mount Kakoulima. The choice sets where the voyage turned back, so the
+    southern end of the route is an identification, not a fact.

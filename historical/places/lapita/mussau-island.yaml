@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Mussau, the island at the northern edge of the Bismarck Archipelago whose sites hold the earliest-dated
+  Lapita pottery in Denham, Bronk Ramsey and Specht's model.
+types: [landform]
+names:
+  - form: Mussau
+    lang: en
+    script: Latn
+    cite:
+      - id: mussau-name
+        says:
+          Denham, Bronk Ramsey and Specht name Mussau as the island with the earliest Lapita dates in
+          the Bismarcks.
+        source: denham-2012-lapita
+        at: 39 (abstract)
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [149.61214, -1.43262]
+    notes:
+      The modern island's gazetteer point, drawn at region precision. The Lapita sites (Talepakemalai
+      and others) are on and around it; no single site is asserted.
+    cite:
+      - id: mussau-location
+        says: GeoNames records Mussau Island at this point.
+        source: geonames
+        at: 2090176 (Mussau Island; latitude, longitude), dump 2026-10-21
+external_ids:
+  - system: geonames
+    id: "2090176"
+    url: https://www.geonames.org/2090176
+    license: CC BY 4.0

@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Pliny's account: Hanno placed the skins of two of the hairy women in the temple of Juno at Carthage, where they could be seen until the city was taken."
+types: [occurrence]
+date:
+  value: 570 BCE..146 BCE
+  mode: duration
+  calendar: julian
+  as_written: "which were to be seen there until the capture of Carthage"
+  cite:
+    - id: hanno-skins-time
+      says: "Pliny says the skins could be seen until the capture of Carthage, which Schoff's chronology dates to 146 BCE; the start is the voyage's own undated window."
+      basis: interpretation
+      attributed_to: W. H. Schoff (1913)
+      sources:
+        - source: pliny-natural-history
+          at: VI.36
+        - source: schoff-hanno
+          at: 'Carthaginian Chronology, "Capture and destruction of both Carthage and Corinth … 146"'
+places:
+  - place: carthage
+    role: site
+participants:
+  - actor: hanno
+    role: leader
+notes: "Pliny's account, written over two centuries after the city fell, and the only source for the skins' display. It disagrees with the Periplus on the number (two, not three) and names Juno — the Roman name for the Carthaginian goddess — where the Periplus's heading names Kronos for the dedication. The start of the span is as uncertain as the voyage."
+dispute:
+  status: disputed
+  summary: "Pliny's two skins in the temple of Juno against the Periplus's three skins brought to Carthage; the record keeps both."
+cite:
+  - id: hanno-skins-pliny
+    says: "Pliny says Hanno placed the skins of two of these women in the temple of Juno as evidence, and that they could be seen there until the capture of Carthage."
+    source: pliny-natural-history
+    at: VI.36
+    quote: "he placed the skins of two of these females in the temple of Juno, which were to be seen there until the capture of Carthage."
+  - id: hanno-skins-periplus
+    says: The Periplus says the skins of three women, not two, were brought to Carthage, and names no temple for them.
+    role: conflicting
+    source: hanno-periplus
+    at: "18"
+    quote: "γυναῖκας δὲ τρεῖς … ἐξεδείραμεν καὶ τὰς δορὰς ἐκομίσαμεν εἰς Καρχηδόνα."

@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Syagrus, the great promontory facing east, with a fort, a harbour and a storehouse for frankincense,
+  and the cape from which ships for India later set straight out across the ocean.
+types: [landform, fortification]
+names:
+  - form: Syagrus
+    lang: en
+    script: Latn
+    cite:
+      - id: syagrus-name
+        says:
+          The Periplus says the great promontory called Syagrus has a fort, a harbour and a storehouse
+          for frankincense.
+        source: periplus-erythraean-sea
+        at: "30"
+        quote:
+          there is a very great promontory facing the east, called Syagrus; on which is a fort for the
+          defense of the country, and a harbor and storehouse for the frankincense that is collected
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [52.223611, 15.635278]
+    notes: The gazetteer's point, which it marks as an uncertain identification.
+    cite:
+      - id: syagrus-location
+        says:
+          Pleiades gives this point for the promontory Syagros and marks the identification with a question
+          mark.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: 39428 (reprLatLong), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "39428"
+    url: https://pleiades.stoa.org/places/39428
+    license: CC BY 3.0

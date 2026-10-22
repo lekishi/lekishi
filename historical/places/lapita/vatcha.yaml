@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Saint-Maurice–Vatcha (KVO003) on the Île des Pins, New Caledonia, a Lapita site placed shortly
+  after 3000 cal BP, where four flakes of Talasea obsidian were found.
+cites:
+  summary:
+    - id: vatcha-date
+      says:
+        Petchey and colleagues report that Sheppard, Chiu and Walter's Bayesian evaluation placed the
+        occupation of Vatcha shortly after 3000 cal BP.
+      basis: interpretation
+      attributed_to: P. J. Sheppard, S. Chiu and R. Walter (2015), pp. 33–34
+      source: petchey-2015-teouma
+      at: "103"
+types: [settlement]
+names:
+  - form: Saint-Maurice-Vatcha
+    lang: fr
+    script: Latn
+    cite:
+      - id: vatcha-name
+        says: Pofatu records obsidian flakes from the Saint-Maurice-Vatcha site, KVO-003, on the Île des Pins.
+        source: pofatu
+        at: sand2000_PS-1, PS-3, PS-4, PS-5 (location_subregion, site_name, site_code), v1.4
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [167.496368, -22.672176]
+    notes: The location Pofatu records for flake PS-4 (location 2); the other test pits lie within 300 m.
+    cite:
+      - id: vatcha-location
+        says: Pofatu records the Saint-Maurice-Vatcha site at this point.
+        source: pofatu
+        at: sand2000_PS-4 (location_latitude, location_longitude), v1.4

@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Naigani, an island off eastern Viti Levu whose Matanamuani site (VL 21/5) holds the earliest
+  securely dated Lapita settlement in Fiji.
+types: [landform]
+names:
+  - form: Naigani
+    lang: en
+    script: Latn
+    cite:
+      - id: naigani-name
+        says:
+          Nunn and Petchey hold that Naigani's Matanamuani site remains the earliest securely dated Lapita
+          site in Fiji.
+        source: nunn-petchey-2013-bourewa
+        at: 21 (abstract)
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [178.67503, -17.57898]
+    notes: The island's gazetteer point; the Matanamuani site is on the island and not separately located.
+    cite:
+      - id: naigani-location
+        says: GeoNames records Naigani Island at this point.
+        source: geonames
+        at: 2203228 (Naigani Island; latitude, longitude), dump 2026-10-21
+external_ids:
+  - system: geonames
+    id: "2203228"
+    url: https://www.geonames.org/2203228
+    license: CC BY 4.0

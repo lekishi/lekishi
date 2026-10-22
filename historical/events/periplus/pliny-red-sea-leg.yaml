@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  From Berenice at midsummer, about the rising of the Dog-star, down the Red Sea to Ocelis or Cane
+  in about thirty days.
+types: [journey]
+part_of: [pliny-india-route]
+date:
+  value: 48..77
+  mode: window
+  calendar: julian
+  as_written:
+    at midsummer, before the rising of the Dog-star, or else immediately after; about thirty
+    days
+  cite:
+    - id: pliny-route-time
+      says:
+        Pliny describes the route as it runs as he writes; the Natural History was dedicated in 77 CE.
+        Pliny's translators record Marcus's argument that the coincidence of 6 Mechir with the Ides of January
+        shows the passage was written between 48 and 51 CE. The window encloses both readings.
+      basis: interpretation
+      attributed_to: J. Bostock and H. T. Riley (1855), citing Marcus
+      sources:
+        - source: pliny-natural-history
+          at: VI.26
+        - source: pliny-natural-history
+          at: VI.26, note 36
+places:
+  - place: berenice
+    role: start
+  - place: ocelis
+    role: end
+  - place: cana
+    role: other
+    note: Pliny's alternative landfall.
+cite:
+  - id: pliny-red-sea-leg-account
+    says: Pliny says passengers sail at midsummer and in about thirty days reach Ocelis or Cane.
+    source: pliny-natural-history
+    at: VI.26
+    quote:
+      Passengers generally set sail at midsummer, before the rising of the Dog-star, or else immediately
+      after, and in about thirty days arrive at Ocelis28 in Arabia, or else at Cane,29 in the region which
+      bears frankincense.

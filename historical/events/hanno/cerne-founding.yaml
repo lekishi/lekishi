@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: "Sailing south along a desert coast and then a day east, the fleet finds a small island in the recess of a bay, five stades round, settles it and names it Cerne, judging it to lie opposite Carthage."
+types: [founding]
+part_of: [hanno-voyage]
+date:
+  value: 570 BCE..470 BCE
+  mode: window
+  calendar: julian
+  as_written: "δύο ἡμέρας (two days, Greek) / twelve days (Schoff's translation); then ἡμέρας δρόμον (a day's run)"
+  cite:
+    - id: cerne-founding-time
+      says: "The account dates none of its stages; this one belongs to the undated voyage, whose window the cited commentators set between about 570 and 470 BCE."
+      basis: interpretation
+      attributed_to: W. H. Schoff (1913); J. Bostock and H. T. Riley (1855)
+      sources:
+        - source: hanno-periplus
+          at: "8"
+        - source: schoff-hanno
+          at: Carthaginian Chronology
+places:
+  - place: cerne
+    role: site
+participants:
+  - actor: hanno
+    role: leader
+dispute:
+  status: disputed
+  summary: "The sailing time to Cerne reads two days in the Greek Schoff prints and twelve days in his translation; the distance to Cerne, and so its identification, turns on it."
+cite:
+  - id: cerne-founding-account
+    says: "The account says the fleet settled a small island in the recess of a bay and named it Cerne."
+    source: hanno-periplus
+    at: "8"
+    quote: "ἣν κατῳκίσαμεν, Κέρνην ὀνομάσαντες."
+cites:
+  summary:
+    - id: cerne-days-greek
+      says: "The Greek Schoff prints says the fleet sailed two days south along the desert."
+      source: hanno-periplus
+      at: "8"
+      quote: "παρεπλέομεν τὴν ἐρήμην πρὸς μεσημβρίαν δύο ἡμέρας"
+    - id: cerne-days-translation
+      says: "Schoff's translation says twelve days south along a desert."
+      role: conflicting
+      source: hanno-periplus
+      at: "8"
+      quote: "we sailed twelve days toward the south along a desert"

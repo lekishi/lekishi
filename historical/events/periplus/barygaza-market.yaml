@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Barygaza, at the beginning of Nambanus's kingdom, takes wine, metals and coin, and sends out
+  spikenard, costus, ivory, agate, cotton and silk; old drachmae of Apollodotus and Menander are still
+  current there.
+types: [exchange]
+part_of: [periplus-voyage]
+date:
+  value: 58..62
+  mode: window
+  calendar: julian
+  as_written: no date; the text speaks of the present
+  cite:
+    - id: barygaza-market-time
+      says:
+        The Periplus describes this as present at the time of the voyage it was written from, which
+        it does not date; Schoff puts that voyage between the summers of 58 and 62 CE.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      sources:
+        - source: periplus-erythraean-sea
+          at: 41; 47–49
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+places:
+  - place: bharukaccha
+    role: site
+participants:
+  - actor: nambanus
+    role: host
+cite:
+  - id: barygaza-market-account
+    says:
+      The Periplus says old drachmae with Greek inscriptions and the devices of Apollodotus and Menander
+      are still current in Barygaza.
+    source: periplus-erythraean-sea
+    at: 41; 47–49
+    quote:
+      to the present day ancient drachma are current in Barygaza, coming from this country, bearing
+      inscriptions in Greek letters, and the devices of those who reigned after Alexander, Apollodotus and
+      Menander.

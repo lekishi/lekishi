@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: Carnelian in great quantity comes down by wagon from Paethana to Barygaza.
+types: [trade]
+from: place:paethana
+to: place:bharukaccha
+directionality: directed
+causality: not_asserted
+date:
+  value: 58..62
+  mode: window
+  calendar: julian
+  as_written: no date; the text speaks of the present
+  cite:
+    - id: paethana-barygaza-carnelian-time
+      says:
+        The Periplus describes this as present at the time of the voyage it was written from, which
+        it does not date; Schoff puts that voyage between the summers of 58 and 62 CE.
+      basis: interpretation
+      attributed_to: W. H. Schoff (1912)
+      sources:
+        - source: periplus-erythraean-sea
+          at: "51"
+        - source: schoff-periplus
+          at: Date and Authorship of the Periplus
+cite:
+  - id: paethana-barygaza-carnelian-basis
+    says: The Periplus says carnelian comes by wagon from Paethana to Barygaza.
+    source: periplus-erythraean-sea
+    at: "51"
+    quote:
+      There are brought down to Barygaza from these places by wagons and through great tracts without
+      roads, from Paethana carnelian in great quantity

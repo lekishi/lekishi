@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Vanuatu archipelago, reached early in the Lapita move into Remote Oceania; its first-settlement
+  dates are where Denham's model and the site-based chronologies part.
+types: [region]
+names:
+  - form: Vanuatu
+    lang: en
+    script: Latn
+    note: The modern name, used by the cited scholarship for the archipelago.
+    cite:
+      - id: vanuatu-name
+        says: Denham, Bronk Ramsey and Specht model Lapita's dispersal to Vanuatu.
+        source: denham-2012-lapita
+        at: 39 (abstract)
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [167.5, -16.3333]
+    notes:
+      A label anchor at the gazetteer's point for the modern country, which spans the archipelago;
+      not a site.
+    cite:
+      - id: vanuatu-location
+        says: GeoNames records the Republic of Vanuatu at this point.
+        source: geonames
+        at: 2134431 (Republic of Vanuatu; latitude, longitude), dump 2026-10-21
+external_ids:
+  - system: geonames
+    id: "2134431"
+    url: https://www.geonames.org/2134431
+    license: CC BY 4.0

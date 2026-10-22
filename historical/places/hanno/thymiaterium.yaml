@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Thymiaterium, the first city the account says Hanno founded, two days' sail beyond the Pillars,
+  with a great plain below it. Its site is not known; the commentators place it at the mouth of the
+  Sebou or at Tangier.
+types: [settlement]
+names:
+  - form: Θυμιατήριον
+    lang: grc
+    script: Grek
+    roman: Thymiatērion
+    scheme: unspecified-editorial
+    cite:
+      - id: thymiaterium-name
+        says: The account says the fleet founded its first city two days' sail beyond the Pillars
+          and named it Thymiaterium, with a great plain below it.
+        source: hanno-periplus
+        at: "2"
+        quote: ἐκτίσαμεν πρώτην πόλιν, ἥντινα ὠνομάσαμεν Θυμιατήριον· πεδίον δ᾽ αὐτῇ μέγα ὑπῆν.
+  - form: Thymiaterium
+    lang: en
+    script: Latn
+    cite:
+      - id: thymiaterium-translation
+        says: Schoff's translation writes the name Thymiaterium.
+        role: supporting
+        source: hanno-periplus
+        at: "2"
+        quote: we founded the first city, which we called Thymiaterium; it lay in the midst of a great plain.
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      No site is known. Schoff gives Müller's identification with Mehdia at the mouth of the Sebou
+      (about 34° 20′ N); the Pleiades gazetteer records Thymiaterion as a name of Tingi (Tangier).
+      The record draws neither.
+    cite:
+      - id: thymiaterium-unlocated
+        says:
+          The account places Θυμιατήριον two days' sail beyond the Pillars, which locates it on no map; the record asserts no
+          coordinate.
+        source: hanno-periplus
+        at: "2"
+      - id: thymiaterium-mehdia
+        says:
+          Schoff reports that Müller identifies Thymiaterium with Mehedia at the mouth of the Sbou
+          River at about 34° 20′ N.
+        basis: interpretation
+        role: alternative
+        attributed_to: K. Müller, as reported by W. H. Schoff (1913)
+        source: schoff-hanno
+        at: The Geography of the Voyage of Hanno, § 2
+        quote: The first city, called in the text Thymiaterium, is identified by Müller as Mehedia at the mouth of the Sbou River at about 34° 20' N.
+      - id: thymiaterium-tingi
+        says: Pleiades lists Thymiaterion among the names of Tingi, modern Tangier.
+        basis: interpretation
+        role: alternative
+        attributed_to: Pleiades
+        source: pleiades
+        at: 275736 (names), dump 2026-10-21
+dispute:
+  status: disputed
+  summary:
+    The site is unidentified. Müller (through Schoff) puts it at Mehdia on the Sebou; Pleiades
+    attaches the name to Tangier. Neither is drawn.

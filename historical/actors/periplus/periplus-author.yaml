@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  The unnamed Greek-speaking merchant of Roman Egypt who wrote the Periplus from his own voyages;
+  the manuscripts' attribution to Arrian is a mistake.
+types: [person]
+names:
+  - form: the author of the Periplus
+    lang: en
+    script: Latn
+    note: A descriptive label, not a name.
+    cite:
+      - id: periplus-author-name
+        says: Schoff says that as to the authorship it is best to admit that nothing is known.
+        source: schoff-periplus
+        at: Date and Authorship of the Periplus
+        quote: As to the authorship, it is best to admit that nothing is known.
+roles:
+  - role: merchant
+    cite:
+      - id: periplus-author-role
+        says:
+          Schoff judges from the text itself that the author was an Egyptian Greek and a merchant in
+          active trade who made the voyage to India himself.
+        basis: interpretation
+        attributed_to: W. H. Schoff (1912)
+        source: schoff-periplus
+        at: Date and Authorship of the Periplus
+        quote:
+          That the author was an Egyptian Greek, and a merchant in active trade who personally made the
+          voyage to India, is evident by the text itself

@@ -11,11 +11,14 @@ date:
     - id: herculaneum-and-pompeii-buried-79-year
       says: "Foster's translation of Dio dates the chapters on the eruption, by a sidenote, to A.D.
         79."
-      basis: interpretation
-      attributed_to: H. B. Foster (1906)
-      source: cassius-dio
-      at: "LXVI.16 (A.D. 79), translator's sidenote"
-      quote: A.D. 79 (a.u. 832)
+      basis: conventional
+      convention: Dio's order of Titus's reign on the standard chronology of the emperors
+      sources:
+        - source: cassius-dio
+          at: LXVI.23 (A.D. 79)
+        - source: cassius-dio
+          at: "LXVI.16 (A.D. 79), translator's sidenote"
+          quote: A.D. 79 (a.u. 832)
 places:
   - place: herculaneum
     role: site

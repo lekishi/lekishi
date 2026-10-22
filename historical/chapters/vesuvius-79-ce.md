@@ -24,7 +24,7 @@ day-level dispute visible.
 | Source | Edition read | Terms | Use |
 |---|---|---|---|
 | Pliny the Younger, *Epistulae* 6.16 and 6.20 | The Latin Library transcription, read 2026-10-21 (new `pliny-letters` source) | Work public domain; the site states no terms and names no edition | Quoted in Latin, cited by book, letter and section |
-| Cassius Dio, *Roman History* LXVI | Foster's translation (1905–1906), Project Gutenberg eBook 10890 (the shared `cassius-dio` source from the Egypt chapter) | Public domain | Quoted in English; Foster's year sidenotes as interpretations |
+| Cassius Dio, *Roman History* LXVI | Foster's translation (1905–1906), Project Gutenberg eBook 10890 (the shared `cassius-dio` source from the Egypt chapter) | Public domain | Quoted in English; Foster's year sidenotes as the reference for conventional years, and as interpretations where the day is disputed |
 | Pleiades | Daily dump of 2026-10-21 (shared `pleiades` source) | CC BY 3.0 | Every coordinate, as an interpretation attributed to Pleiades |
 
 Every quotation was checked by script against the downloaded text on
@@ -37,8 +37,12 @@ thread, which widened it to the whole work, book LXVI included.
 Pliny gives the day: "Nonum Kal. Septembres hora fere septima", the ninth day
 before the Kalends of September at about the seventh hour, which is 24 August
 in the Julian calendar. He does not give the year. Dio gives no day, and
-Foster's sidenote puts the chapters on the eruption under A.D. 79, so the year
-is an interpretation attributed to Foster. The events of the next morning are
+Foster's sidenote puts the chapters on the eruption under A.D. 79. Where Dio's
+order of Titus's reign is the only placing (the burial of the cities in 79, the
+relief of Campania in 80), the year is `conventional` under
+`rfd/0002/CONVENTIONAL_DATES.adoc`, citing Dio's chapter and the sidenote. On
+the four records that carry the disputed day, the year stays an interpretation
+attributed to Foster, because a disputed date is not conventional. The events of the next morning are
 dated 25 August by counting in the letters, and they carry the same dispute:
 the letters fix the sequence, not the absolute date.
 

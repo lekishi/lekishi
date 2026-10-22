@@ -12,11 +12,14 @@ date:
     - id: titus-relief-year
       says: "Foster's translation of Dio dates the following chapter, the fire at Rome and the
         relief of Campania, by a sidenote, to A.D. 80."
-      basis: interpretation
-      attributed_to: H. B. Foster (1906)
-      source: cassius-dio
-      at: "LXVI.24 (A.D. 80), translator's sidenote"
-      quote: A.D. 80 (a.u. 833)
+      basis: conventional
+      convention: Dio's order of Titus's reign on the standard chronology of the emperors
+      sources:
+        - source: cassius-dio
+          at: LXVI.24 (A.D. 80)
+        - source: cassius-dio
+          at: "LXVI.24 (A.D. 80), translator's sidenote"
+          quote: A.D. 80 (a.u. 833)
 places:
   - place: vesuvius
     role: context

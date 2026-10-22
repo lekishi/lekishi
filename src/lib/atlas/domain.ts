@@ -56,6 +56,15 @@ export type PointPlacement = "approximate" | "display-anchor"
 export type GeometryPrecision = "site" | "locality" | "region" | "unspecified"
 
 /**
+ * A modern name the record gives a place for orientation, with its language
+ * tag. It is an identification the record makes, not a historical name form.
+ */
+export interface ModernName {
+  readonly form: string
+  readonly lang: string
+}
+
+/**
  * A place the atlas can name, with its placement claim made explicit. The
  * second variant is the contract's `unknown` geometry: the place stays nameable
  * and listable, and no coordinate is invented for it.
@@ -71,6 +80,8 @@ export type Place =
       readonly romanization: string | null
       /** The primary name's language as the record tags it (`ja`, `lzh`), or null. */
       readonly lang: string | null
+      /** The record's modern equivalents, shown only on request. */
+      readonly modern: readonly ModernName[]
       readonly placement: PointPlacement
       readonly precision: GeometryPrecision
       readonly position: GeoPoint
@@ -87,6 +98,7 @@ export type Place =
       readonly aliases: readonly string[]
       readonly romanization: string | null
       readonly lang: string | null
+      readonly modern: readonly ModernName[]
       readonly placement: "unknown"
       readonly precision: "unspecified"
       readonly position: null

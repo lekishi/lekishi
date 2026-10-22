@@ -26,7 +26,12 @@ import { projectChapter } from "./projection"
 const TANG_COVERAGE = {
   defaultWindow: { start: 750, end: 754 },
   stories: [
-    { key: TANG_CHAPTER, title: "The embassy to Tang China", window: { start: 750, end: 754 } },
+    { key: TANG_CHAPTER, title: "The embassy of 750–754", window: { start: 750, end: 754 } },
+    {
+      key: "jianzhen-crossings-742-753",
+      title: "鑒眞's attempts to cross, 742–750",
+      window: { start: 742, end: 750 },
+    },
   ],
 }
 const QIN_COVERAGE = {

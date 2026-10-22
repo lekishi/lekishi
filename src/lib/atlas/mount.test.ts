@@ -270,7 +270,7 @@ describe("mountAtlas", () => {
       )
 
     it("lists no stories for a chapter with one", async () => {
-      const handle = mountAtlas(root, TANG)
+      const handle = mountAtlas(root, QIN)
       await flush()
 
       expect(root.querySelector('[data-testid="atlas-stories"]')).toBeNull()

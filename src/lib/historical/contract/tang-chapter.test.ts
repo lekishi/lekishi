@@ -22,6 +22,17 @@ import { isObject, listOf, objectOf, type JsonObject, type JsonValue } from "./t
 
 const CHAPTER = "tang-mission-750-754"
 
+/**
+ * The chapter's second story, 鑒眞's attempts to cross (742–750). The coverage
+ * model below is the embassy's, the first story's; the second story keeps its
+ * own window.
+ */
+const CROSSINGS = "jianzhen-crossings-742-753"
+
+/** The crossings story's primary window, and the one coda year it reaches. */
+const CROSSINGS_WINDOW = { startYear: 742, endYear: 750 }
+const CROSSINGS_CODA_YEARS = [753]
+
 /** The coverage model's primary mission window, inclusive at year granularity. */
 const PRIMARY_WINDOW = { startYear: 750, endYear: 754 }
 
@@ -46,6 +57,20 @@ function recordsOfKind(chapter: ChapterTree, kind: string): JsonObject[] {
   return chapter.documents.filter(
     (document) => document["document"] === "record" && document["kind"] === kind,
   )
+}
+
+/** The events a story's steps name, in its order. */
+function storyEventIds(chapter: ChapterTree, key: string): string[] {
+  return listOf(contentOf(recordById(chapter, `lks:story:${key}`))["steps"])
+    .map((step) => String(objectOf(step)["record_id"]))
+    .filter((recordId) => recordId.startsWith("lks:event:"))
+}
+
+/** The events of the embassy, the chapter's first story. */
+function embassyEvents(chapter: ChapterTree): JsonObject[] {
+  const ids = new Set(storyEventIds(chapter, CHAPTER))
+
+  return recordsOfKind(chapter, "event").filter((record) => ids.has(String(record["record_id"])))
 }
 
 function recordById(chapter: ChapterTree, recordId: string): JsonObject {
@@ -141,14 +166,16 @@ function spanKeys(time: Time.NormalizedTime): [number, number] {
 }
 
 /**
- * The chapter's coverage model: every event is either inside the primary
- * 750–754 window or an included coda node, and no event falls in the excluded
- * outbound voyage of 752.
+ * The embassy's coverage model: every event of the first story is either
+ * inside the primary 750–754 window or an included coda node, and none falls
+ * in the excluded outbound voyage of 752. The crossings' 750–753 occurrence
+ * windows overlap 752 without being about the outbound voyage, so the rule
+ * reads the embassy's events only.
  */
 function coverageViolations(chapter: ChapterTree): string[] {
   const violations: string[] = []
 
-  for (const record of recordsOfKind(chapter, "event")) {
+  for (const record of embassyEvents(chapter)) {
     const recordId = String(record["record_id"])
     const time = normalizedTime(record)
     const [start, end] = spanKeys(time)
@@ -399,7 +426,7 @@ describe("the Tang chapter fixture", () => {
     }
 
     expect(listChapters()).toContain(CHAPTER)
-    expect(Object.keys(result.currentPublished)).toHaveLength(66)
+    expect(Object.keys(result.currentPublished)).toHaveLength(140)
   })
 
   it("keeps the expected inventory and publishes each record once in the first set", () => {
@@ -412,7 +439,7 @@ describe("the Tang chapter fixture", () => {
       story: recordsOfKind(chapter, "story").length,
     }
 
-    expect(counts).toEqual({ place: 15, actor: 12, event: 29, relationship: 9, story: 1 })
+    expect(counts).toEqual({ place: 43, actor: 24, event: 62, relationship: 9, story: 2 })
     expect(chapter.documents.filter((document) => document["document"] === "source")).toHaveLength(
       18,
     )
@@ -422,9 +449,9 @@ describe("the Tang chapter fixture", () => {
       String(objectOf(member)["record_id"]),
     )
 
-    expect(memberIds).toHaveLength(66)
+    expect(memberIds).toHaveLength(140)
     expect(new Set(memberIds).size).toBe(memberIds.length)
-    expect(Publication.currentPublished(chapter.documents, chapter.sets).size).toBe(66)
+    expect(Publication.currentPublished(chapter.documents, chapter.sets).size).toBe(140)
   })
 
   it("publishes one revision per record in a single set", () => {
@@ -596,7 +623,7 @@ describe("the Tang chapter fixture", () => {
 
     const codaYears = [
       ...new Set(
-        recordsOfKind(chapter, "event")
+        embassyEvents(chapter)
           .filter(isCoda)
           .map((record) => normalizedTime(record).start?.year),
       ),
@@ -607,7 +634,7 @@ describe("the Tang chapter fixture", () => {
     // The excluded window is a real gap in the chronology: no event is dated
     // inside it, the last event before it is the 752 節刀, and the next
     // month/day-dated event is the 753 New Year audience.
-    const dated = recordsOfKind(chapter, "event")
+    const dated = embassyEvents(chapter)
       .map((record) => ({
         id: String(record["record_id"]),
         keys: spanKeys(normalizedTime(record)),
@@ -627,6 +654,45 @@ describe("the Tang chapter fixture", () => {
     expect(
       spanKeys(normalizedTime(recordById(chapter, "lks:event:tang-new-year-audience-753"))),
     ).toEqual([75301, 75301])
+  })
+
+  it("keeps the crossings to 742–750, with 753 as their only coda year", () => {
+    const chapter = tree()
+    const captions = new Map(
+      listOf(contentOf(recordById(chapter, `lks:story:${CROSSINGS}`))["steps"]).map((step) => [
+        String(objectOf(step)["record_id"]),
+        String(objectOf(step)["caption"]),
+      ]),
+    )
+    const events = recordsOfKind(chapter, "event").filter((record) =>
+      captions.has(String(record["record_id"])),
+    )
+    // An event is outside the window only when its whole span is: the return
+    // to 揚州 is a 750–753 occurrence window, so it stays in the story.
+    const outside = events.filter((record) => {
+      const time = normalizedTime(record)
+
+      return (
+        (time.end?.year ?? 0) < CROSSINGS_WINDOW.startYear ||
+        (time.start?.year ?? 0) > CROSSINGS_WINDOW.endYear
+      )
+    })
+
+    expect(events).toHaveLength(storyEventIds(chapter, CROSSINGS).length)
+    expect([...new Set(outside.map((record) => normalizedTime(record).start?.year))]).toEqual(
+      CROSSINGS_CODA_YEARS,
+    )
+    expect(
+      outside.filter((record) => !captions.get(String(record["record_id"]))?.startsWith("Coda — ")),
+    ).toEqual([])
+
+    // The one event both stories tell is the 753 invitation, where the
+    // crossings hand over to the embassy.
+    const embassy = new Set(storyEventIds(chapter, CHAPTER))
+
+    expect(
+      events.map((record) => record["record_id"]).filter((id) => embassy.has(String(id))),
+    ).toEqual(["lks:event:yangzhou-invitation-753"])
   })
 
   it("labels every coda node in the story and in its own record", () => {
@@ -764,8 +830,20 @@ describe("the Tang chapter fixture", () => {
 
     // The two identifications the owner asked to chase are published as
     // approximate locality-level placements; 驩州 keeps `unknown` geometry
-    // because no source in the set identifies its site.
-    expect(unlocated.map((record) => record["record_id"]).sort()).toEqual(["lks:place:huanzhou"])
+    // because no source in the set identifies its site. The crossings' coastal
+    // anchorages and the three Hainan prefectures stay `unknown` until a cited
+    // identification places them.
+    expect(unlocated.map((record) => record["record_id"]).sort()).toEqual([
+      "lks:place:huanzhou",
+      "lks:place:langgou-pu",
+      "lks:place:sangshi-shan",
+      "lks:place:santa-shan",
+      "lks:place:shufeng-shan",
+      "lks:place:wananzhou",
+      "lks:place:xiayu-shan",
+      "lks:place:yazhou",
+      "lks:place:zhenzhou",
+    ])
   })
 
   it("records the contributors' self-review, never independent or specialist review", () => {

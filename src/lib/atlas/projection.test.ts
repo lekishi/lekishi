@@ -20,8 +20,21 @@ import { projectChapter, type ProjectionResult } from "./projection"
 
 const CHAPTER = "tang-mission-750-754"
 
-/** The Tang chapter's own coverage model, as the production boundary passes it. */
-const COVERAGE = { defaultWindow: { start: 750, end: 754 } }
+/**
+ * The Tang chapter's own coverage model, as the production boundary passes it.
+ * The chapter has two stories; these tests read the first, the embassy.
+ */
+const COVERAGE = {
+  defaultWindow: { start: 750, end: 754 },
+  stories: [
+    { key: CHAPTER, title: "The embassy of 750–754", window: { start: 750, end: 754 } },
+    {
+      key: "jianzhen-crossings-742-753",
+      title: "鑒眞's attempts to cross, 742–750",
+      window: { start: 742, end: 750 },
+    },
+  ],
+}
 
 function tree(): ChapterTree {
   return loadChapter(CHAPTER)
@@ -221,8 +234,10 @@ describe("projecting the reviewed Tang chapter", () => {
 
     // The window is the caller's decision: a window the events do not fit in
     // fails the projection instead of being silently replaced.
+    const wrong = { start: 900, end: 950 }
     const wrongWindow = projectChapter(CHAPTER, tree().documents, tree().sets, {
-      defaultWindow: { start: 900, end: 950 },
+      defaultWindow: wrong,
+      stories: [{ ...COVERAGE.stories[0], window: wrong }, ...COVERAGE.stories.slice(1)],
     })
 
     expect(wrongWindow.ok).toBe(false)

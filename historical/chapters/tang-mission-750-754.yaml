@@ -3,57 +3,109 @@ title: The embassy to Tang China
 summary: In 750 the Japanese court appointed an embassy to Tang China. Follow 藤原朝臣清河's mission from
   the appointment and the audiences at court to the invitation to the monk 鑒眞, the return voyage
   that scattered its ships, and the ordinations of 754 — with the sources' own gaps and
-  disagreements kept visible.
+  disagreements kept visible. A second story follows 鑒眞's earlier attempts to cross, 742–750.
 window: 750..754
 include: [komaro-tang-contact]
-story:
-  summary: The 750–754 embassy of 藤原朝臣清河, from appointment through the return voyage and the 754
-    ordinations, with the included coda nodes of 758, 759, 763, and 779 presented after it.
-  span: 750..779
-  coverage: Primary mission window 750–754; included coda nodes outside it at 758, 759, 763, and 779,
-    separately sourced and labelled; the outbound voyage of 752 is excluded, so no outward leg or
-    route geometry exists in this chapter.
-  notes: Step order is presentation order, not a claim that one event preceded or caused another.
-    Uncertain occurrences (the two drifts) are not presented as continuous activity. The coda steps
-    are labelled in their captions and in the records' editorial notes.
-  steps:
-    - appointment-750: The court appoints the embassy, 750
-    - japan-tang-embassy: The diplomatic mission from Japan to Tang
-    - kibi-appointment-751: 吉備真備 is appointed vice-envoy, 751
-    - court-audience-752: The envoys pay court, 752
-    - sekito-752: The 節刀 grant and promotions, 752
-    - tang-new-year-audience-753: The Tang New Year audience at 蓬萊宮含元殿, 753
-    - yangzhou-invitation-753: The envoys invite 鑒眞 at 延光寺, 753
-    - kiyokawa-jianzhen-contact: The encounter at 延光寺
-    - longxing-departure-753: 鑒眞 leaves 龍興寺, 753
-    - return-voyage-753: "The return voyage, 753: documented landfalls only, no route drawn"
-    - ajinawa-arrival-753: The first and second ships reach 阿兒奈波島
-    - ships-separate-753: "The ships separate: the first aground, the second for 多禰島"
-    - yaku-arrival-753: The second ship reaches 益救島 (biography)
-    - kibi-yaku-arrival-753: 吉備真備's ship reaches 益久嶋 (chronicle); the sources are not merged
-    - yaku-departure-753: The second ship leaves 益救島
-    - akimeya-landfall-753: The landfall at 秋妻屋浦
-    - dazaifu-entry-753: 鑒眞 enters 大宰府
-    - kiyokawa-drift-753: 藤原清河's ship is driven to 驩州; an uncertain occurrence
-    - kibi-drift-753: 吉備真備's ship drifts to 紀伊國牟漏埼
-    - return-report-754: 古麻呂 returns with 鑒眞 and 法進, 754
-    - audience-report-754: 古麻呂 reports the audience to the court
-    - naniwa-754: 鑒眞 reaches 難波
-    - todaiji-installation-754: 鑒眞 enters the capital and is installed at 東大寺
-    - jianzhen-travel: 鑒眞's documented travel to Japan
-    - rewards-754: The mission's rewards, including the 222-person figure
-    - fourth-ship-754: The fourth ship arrives at 石籬浦
-    - ordination-754: The precepts platform and the 754 ordinations
-    - jianzhen-transmission: "The itemized transmission: 48 items"
-    - daikasho-title-758: "Coda — 758: the title 大和上 and the precept-study order"
-    - precept-study-order: Coda — the 758 court act toward 鑒眞
-    - toshodaiji-founding-759: "Coda — 759: the 唐招提寺 name is established"
-    - toshodaiji-foundation: Coda — the 759 temple foundation
-    - jianzhen-death-763: "Coda — 763: 鑒眞's death, with the sources' age variant"
-    - kiyokawa-honours-779: "Coda — 779: posthumous honours for 藤原清河"
-    - kiyokawa-commemoration: Coda — the 779 commemoration of 清河
-    - nakamaro-death-779: "Coda — 779: the report of 阿倍仲麻呂's death and the funeral grants"
-    - nakamaro-commemoration: Coda — the 779 grants to 仲麻呂's household
+stories:
+  - key: tang-mission-750-754
+    title: The embassy of 750–754
+    summary: The 750–754 embassy of 藤原朝臣清河, from appointment through the return voyage and the 754
+      ordinations, with the included coda nodes of 758, 759, 763, and 779 presented after it.
+    span: 750..779
+    coverage: Primary mission window 750–754; included coda nodes outside it at 758, 759, 763, and 779,
+      separately sourced and labelled; the outbound voyage of 752 is excluded, so no outward leg or
+      route geometry exists in this chapter.
+    notes: Step order is presentation order, not a claim that one event preceded or caused another.
+      Uncertain occurrences (the two drifts) are not presented as continuous activity. The coda steps
+      are labelled in their captions and in the records' editorial notes.
+    steps:
+      - appointment-750: The court appoints the embassy, 750
+      - japan-tang-embassy: The diplomatic mission from Japan to Tang
+      - kibi-appointment-751: 吉備真備 is appointed vice-envoy, 751
+      - court-audience-752: The envoys pay court, 752
+      - sekito-752: The 節刀 grant and promotions, 752
+      - tang-new-year-audience-753: The Tang New Year audience at 蓬萊宮含元殿, 753
+      - yangzhou-invitation-753: The envoys invite 鑒眞 at 延光寺, 753
+      - kiyokawa-jianzhen-contact: The encounter at 延光寺
+      - longxing-departure-753: 鑒眞 leaves 龍興寺, 753
+      - return-voyage-753: "The return voyage, 753: documented landfalls only, no route drawn"
+      - ajinawa-arrival-753: The first and second ships reach 阿兒奈波島
+      - ships-separate-753: "The ships separate: the first aground, the second for 多禰島"
+      - yaku-arrival-753: The second ship reaches 益救島 (biography)
+      - kibi-yaku-arrival-753: 吉備真備's ship reaches 益久嶋 (chronicle); the sources are not merged
+      - yaku-departure-753: The second ship leaves 益救島
+      - akimeya-landfall-753: The landfall at 秋妻屋浦
+      - dazaifu-entry-753: 鑒眞 enters 大宰府
+      - kiyokawa-drift-753: 藤原清河's ship is driven to 驩州; an uncertain occurrence
+      - kibi-drift-753: 吉備真備's ship drifts to 紀伊國牟漏埼
+      - return-report-754: 古麻呂 returns with 鑒眞 and 法進, 754
+      - audience-report-754: 古麻呂 reports the audience to the court
+      - naniwa-754: 鑒眞 reaches 難波
+      - todaiji-installation-754: 鑒眞 enters the capital and is installed at 東大寺
+      - jianzhen-travel: 鑒眞's documented travel to Japan
+      - rewards-754: The mission's rewards, including the 222-person figure
+      - fourth-ship-754: The fourth ship arrives at 石籬浦
+      - ordination-754: The precepts platform and the 754 ordinations
+      - jianzhen-transmission: "The itemized transmission: 48 items"
+      - daikasho-title-758: "Coda — 758: the title 大和上 and the precept-study order"
+      - precept-study-order: Coda — the 758 court act toward 鑒眞
+      - toshodaiji-founding-759: "Coda — 759: the 唐招提寺 name is established"
+      - toshodaiji-foundation: Coda — the 759 temple foundation
+      - jianzhen-death-763: "Coda — 763: 鑒眞's death, with the sources' age variant"
+      - kiyokawa-honours-779: "Coda — 779: posthumous honours for 藤原清河"
+      - kiyokawa-commemoration: Coda — the 779 commemoration of 清河
+      - nakamaro-death-779: "Coda — 779: the report of 阿倍仲麻呂's death and the funeral grants"
+      - nakamaro-commemoration: Coda — the 779 grants to 仲麻呂's household
+  - key: jianzhen-crossings-742-753
+    title: 鑒眞's attempts to cross, 742–750
+    summary: 鑒眞's attempts to cross to Japan after 榮叡 and 普照 invited him in 742, from the
+      denunciation of 743 to the storm of 748 that drove the ship to 振州, and the return north to
+      揚州 by 750, as 唐大和上東征傳 tells them, with 續日本紀's differing account kept visible.
+    window: 742..750
+    span: 742..753
+    coverage: The biography's account from the invitation of 742 to the return to 揚州 by 750; the
+      embassy's visit of 753, where the envoys say they know of his five attempts, is a coda step
+      outside that window. Undated episodes between 天寶三載 and 天寶七載 keep the windows their
+      dated anchors allow. Several places on the 748 voyage, and 振州, 萬安州 and 崖州, have no
+      identified location yet.
+    notes: Step order is the biography's narrative order, not a claim that one event caused
+      another. Where 續日本紀 differs (the year of the invitation, the place of the landfall, the
+      cause of the blindness), the events carry the dispute.
+    steps:
+      - daming-invitation-742: 榮叡 and 普照 invite 鑒眞 at 大明寺, 742
+      - ruhai-denunciation-743: 如海's denunciation ends the first preparations, 743
+      - yoei-fusho-detention-743: 榮叡 and 普照 are held at 揚州
+      - langgou-wreck-743: The ship breaks at 狼溝浦, 743
+      - sangshi-wreck-743: The repaired ship is wrecked making for 桑石山
+      - ayuwang-lodging-743: The party is lodged at 阿育王寺
+      - yuezhou-lectures-744: 鑒眞 lectures at 越州, 杭州, 湖州 and 宣州, 744
+      - yoei-arrest-744: 榮叡 is arrested on the 越州 monks' report
+      - ayuwang-departure-744: 鑒眞 leaves 阿育王寺 to take ship at 福州
+      - guoqing-arrival-744: The party reaches 國清寺 through the snow
+      - chanlin-arrest-744: The commissioner's warrant stops the party at 禪林寺
+      - lingyou-penance-744: 鑒眞 is sent back to 揚州, and 靈祐 does penance
+      - chongfu-departure-748: The ship leaves 崇福寺, 748
+      - langshan-748: Wind and waves turn the ship at 狼山
+      - santa-shan-748: The ship waits a month at 三塔山
+      - shufeng-departure-748: The ship sets out from 署風山
+      - south-drift-748: Fourteen days before the storm
+      - hainan-landfall-748: The landfall in the south; the sources differ on where
+      - zhenzhou-arrival-748: The ship anchors at the mouth of the 振州 river
+      - zhenzhou-stay-748: A year at 振州
+      - wananzhou-749: 馮崇債 escorts the party to 萬安州
+      - yazhou-749: The party at 崖州
+      - leizhou-749: By sea to 雷州
+      - guizhou-stay-749: A year at 桂州's 開元寺
+      - yoei-death-749: 榮叡 dies at 端州
+      - guangzhou-stay-749: 鑒眞 at 廣州's 大雲寺
+      - fusho-parting-750: 普照 takes leave of 鑒眞 at 韶州, 750
+      - jianzhen-blindness-750: 鑒眞 loses his sight; the sources differ on the cause
+      - qianzhou-750: Over the 大庾嶺 to 虔州
+      - xiangyan-death-750: 祥彥 dies at 吉州
+      - lushan-750: Three days at 廬山's 東林寺
+      - jiangning-750: At 江寧's 瓦官寺
+      - yangzhou-return-750: The return to 揚州
+      - yangzhou-invitation-753: "Coda — 753: the envoys know of his five attempts"
 approval:
   digest: sha256:629b185c302dd75a9f2f4bbbee194c5b6068898ebc980b9daebe3a4a50643bf3
   by: Darwin D Wu

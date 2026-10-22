@@ -63,6 +63,20 @@ reckonings and labels both:
 expression in `as_written`. The contract has no Olympiad calendar; see the
 gaps below.
 
+## Tradition
+
+The owner chose a per-claim `basis: tradition` on 2026-10-22
+(`rfd/0002/TRADITION_BASIS.adoc`), and every claim in the chapter's events,
+relationships and legendary people uses it: the founding and its dates, the
+accessions, the acts of the kings and their families, and the link from each
+act to its place. The Sabines and the Albans, as peoples, stay attested.
+The reign windows stay editorial interpretations, because the reckoning is the
+editors' own. The founding and the expulsion keep their disputes, so the
+competing ancient dates are traditions under a dispute. The atlas shows a
+tradition badge on every event and dots the names of the places where they
+happen. The place records do not change: the Palatine, Alba Longa and Ostia
+are located from gazetteers, and their markers keep their own evidence.
+
 ## Places
 
 Nine of the eleven places come from the Pleiades dump and are published as
@@ -76,24 +90,18 @@ precision because no excavated site has been identified as the city. No route, w
 
 ## Gaps and proposals for the owner
 
-1. **Tradition has no evidence state.** The contract knows `attested` and
-   `interpretation`. Every claim here is attested in the sense that Livy says
-   it, which reads the same as Caesar's eyewitness Gaul. Until the owner
-   decides (a card in the project thread offers a per-claim `basis: tradition`
-   in contract v1, an event flag, or no change), each record says "tradition,
-   not record" in its text and the founding and the expulsion are marked
-   disputed.
-2. **No Olympiad or Varronian calendar.** `calendar` offers julian, gregorian,
+1. **No Olympiad or Varronian calendar.** `calendar` offers julian, gregorian,
    islamic, chinese_lunisolar, regnal and unknown. An `olympiad` calendar would
    let the record keep the source's own date and let the compiler do the
    conversion, as the Tang chapter keeps the lunisolar date.
-3. **Reign windows are long.** Dating events to a whole reign gives windows of
+2. **Reign windows are long.** Dating events to a whole reign gives windows of
    up to 44 years. That is honest, but it tests how the timeline shows a long
    occurrence window next to a two-year one.
 
 ## What it tests in the engine
 
-- Legend clearly labelled, and how a card shows it.
+- Legend labelled by the `tradition` basis: the card's badge and section, and
+  the dotted place names on the map.
 - Competing chronologies as `alternative` claims on one date.
 - Olympiad-year dates that span two Julian years.
 - A succession chain of seven `successor_of` relationships, and a

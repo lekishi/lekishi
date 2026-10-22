@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Tres Zapotes, a center in southern Veracruz, Mexico, between the Sierra de los Tuxtlas and the
+  Papaloapan river.
+types:
+  - settlement
+names:
+  - form: Tres Zapotes
+    lang: es
+    script: Latn
+    cite:
+      id: tres-zapotes-name
+      says:
+        The INAH guide places Tres Zapotes in southern Veracruz, between the Sierra de los Tuxtlas and
+        the Papaloapan river.
+      source: inah-tres-zapotes-guide
+      at: Breve reseña histórica
+at:
+  - interpretation: approximate_point
+    precision: site
+    point:
+      - -95.43333333
+      - 18.46666667
+    notes:
+      Wikidata records the coordinate to the minute only, so the point stands for the site within about
+      two kilometres.
+    cite:
+      id: tres-zapotes-point
+      says:
+        The point is the site coordinate recorded in Wikidata (CC0) for Q508251; it marks the archaeological
+        site as a whole and no feature within it.
+      basis: interpretation
+      attributed_to: Wikidata contributors
+      source: wikidata
+      at: Q508251 (P625), revision 2412893340
+external_ids:
+  - system: wikidata
+    id: Q508251

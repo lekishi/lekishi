@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The lines and geoglyphs of Nasca and Pampas de Jumana, spread over about 450 km² of the desert
+  and foothills of Peru's coastal plain.
+types:
+  - region
+names:
+  - form: Nasca
+    lang: es
+    script: Latn
+    cite:
+      id: nazca-lines-name
+      says:
+        The nomination describes the lines and geoglyphs of Nasca and Pampas de Jumana in Peru's coastal
+        desert over an area of 450 km².
+      source: poverty-point-nomination
+      at: PDF p. 130, 3.2 Comparative analysis (Nasca)
+  - form: Nazca Lines
+    lang: en
+    script: Latn
+    role: alternate
+    cite:
+      id: nazca-lines-name-alternate
+      says: Wikidata labels the item Nazca Lines in English.
+      source: wikidata
+      at: Q2620036 (label, en), revision 2552547514
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point:
+      - -75.135
+      - -14.6975
+    notes:
+      Label anchor at the coordinate Wikidata records for the Nazca Lines. The geoglyphs cover about
+      450 km², and no extent is drawn.
+    cite:
+      id: nazca-lines-anchor
+      says:
+        The label anchor is placed at the coordinate recorded in Wikidata (CC0) for Q2620036; no historical
+        coordinate is asserted.
+      source: wikidata
+      at: Q2620036 (P625), revision 2552547514
+external_ids:
+  - system: wikidata
+    id: Q2620036

@@ -1,0 +1,237 @@
+= Early Americas source-feasibility note
+:state: Desk-research report written with the draft chapter; findings and proposals for owner review, not an RFD decision
+:prepared-from: origin/main @ 026fc7b
+:research-window: single bounded pass, 2026-10-21
+:toc:
+:toclevels: 2
+
+This note goes with the draft chapter
+link:../../historical/chapters/early-americas-to-100.yaml[`early-americas-to-100`],
+candidate #31 ("Early Mesoamerica and the Andes, to 100 CE") in
+https://claude.ai/artifact/LRQKGU2H9qoKtyYS62t2QV[Choosing Lekishi's next chapters].
+The owner asked on 2026-10-21 for as many chapters and events before 100 CE as
+possible, to test the data and the engine. This note says what the sources
+support, what the record format cannot yet say, and what it asks the owner to
+decide. The chapter's own notes are in
+link:../../historical/chapters/early-americas-to-100.md[`early-americas-to-100.md`].
+
+Nothing here is published atlas content. The chapter is a draft with no
+approval.
+
+== Scope and method
+
+Scope performed:
+
+* Read `AGENTS.md`, RFD 2's link:AUTHORING_FORMAT.adoc[authoring format] and
+  link:CONTRACTS.adoc[contract], the source register, and this RFD's
+  link:TANG_MISSION_FEASIBILITY.adoc[Tang feasibility note] for its structure.
+* Searched for well-dated, well-placed sites from before 100 CE in North,
+  Central and South America, and read each candidate's sources in accessible
+  digital form: full texts where open, otherwise the abstract.
+* Read each source's reuse terms on its own page or publisher record, and
+  recorded them in link:../../docs/SOURCE_REGISTER.adoc[the source register].
+* Checked every quotation against the downloaded text.
+* Took coordinates from Wikidata (CC0), pinned to each item's revision.
+
+Not performed: purchases, logins, library visits, specialist contact, and any
+reading of paywalled full texts. UNESCO's site, Science's site, Cambridge Core and
+the Internet Archive were not reachable from the orb that wrote the draft, so works
+hosted there were read through Europe PMC, OpenAlex, Crossref or RePEc. The review
+of 2026-10-21 read UNESCO's Hopewell decision, the introduction and Table 1 of
+Splitstoser and colleagues (2016), Blomster and Salazar Chávez (2020) through
+PubMed Central, and Herrmann and colleagues (2014) through the authors' upload.
+
+== What the sources support
+
+The Americas before 100 CE are well covered by archaeology and almost not at
+all by text. The only dated writing is the Long Count of the last century BCE.
+So every date in the chapter comes from radiocarbon or luminescence ages, from
+stylistic dating, or from a Long Count reading with its correlation, and every
+place is a site.
+
+[cols="2,1,3",options="header"]
+|===
+|Region |Events |Sources
+
+|North America, early presence
+|2
+|White Sands (Bennett 2021, Pigati 2023, NPS); Clovis (Waters 2020)
+
+|North America, earthworks
+|8
+|Watson Brake, Indian Knoll, Horr's Island, Poverty Point and Mound A, Grave Creek (Poverty Point nomination); Serpent Mound (Romain 2017, Herrmann 2014; Lepper 2020, two papers); Hopewell (UNESCO 2023, NPS)
+
+|Mesoamerica
+|13
+|Xihuatoxtla, Paso de la Amada (Blomster 2020, Hill 1998), San Lorenzo, Cascajal, Aguada Fénix, formal complexes, El Mirador, Monte Albán, San Bartolo (two), Chiapa de Corzo, Tres Zapotes, Teotihuacan
+
+|South America
+|7
+|Monte Verde (two), Huaca Prieta, Real Alto, Caral, Chavín de Huántar, Nasca
+|===
+
+=== Rights
+
+The commercial-use rule leaves few quotable sources for this period. National
+Park Service pages are public domain. Three journal articles are CC BY 4.0
+(Dillehay 2015 and Sugiyama 2021 in PLOS ONE, Hansen 2022 in _Ancient
+Mesoamerica_). Everything else is cited only: _Science_, _Nature_ and _PNAS_
+articles under publisher copyright, four articles under CC BY-NC or CC BY-NC-ND,
+conference proceedings and society papers without a stated licence, the Poverty
+Point nomination, and an INAH museum guide whose site terms were not read.
+
+Being cite-only costs the chapter little, because a date and a place are
+facts, which the claim states in its own words with a locator.
+
+=== Weak points
+
+* *One secondary source carries nine events.* The 2013 Poverty Point World
+  Heritage nomination dates Poverty Point itself and, in its comparative
+  analysis, Watson Brake, Indian Knoll, Horr's Island, Real Alto, Caral, San
+  Lorenzo, Grave Creek and Nasca. Each of those should be checked against a
+  primary site report before release.
+* *Most journal sources were read as abstracts.* The claims say only what the
+  abstract says, except where the chapter notes record further full-text or partial-text reading.
+* *Long Count readings depend on a correlation.* Chiapa de Corzo Stela 2 (36 BCE)
+  and Tres Zapotes Stela C (32 BCE) are the years their sources give; neither
+  source names the correlation it uses. The INAH guide gives Stela C as 32 CE.
+
+== Disputes
+
+Four events carry a dispute with a conflicting claim: the Poverty Point
+earthworks (nomination against the NPS Spanish page), the Cascajal block (date
+and authenticity), Serpent Mound (Adena against Fort Ancient) and Tres Zapotes
+Stela C (32 BCE against 32 CE). The chapter notes give each one's sources.
+
+Serpent Mound is an editorial choice the owner should check. The draft takes
+the Adena date as the main claim, which puts the mound inside the chapter; Lepper
+(2020) favors the Fort Ancient date, after 100 CE.
+
+== What the format cannot yet say
+
+Writing these records found seven gaps. Each record's notes say how it worked
+around the gap.
+
+[[gap-approximate]]
+=== 1. "About" dates, centuries, and open bounds
+
+Nearly every date in the chapter is approximate: "about 14,500 cal BP", "ca.
+1000 BC", "the first century BCE", "after about 3400 BP". Contract v0 can store
+this: `endpoint_certainty` is `exact`, `approximate` or `bounded`, `precision`
+can be `decade` or `century`, and `bounds` can be `lower_only` or `upper_only`
+(link:CONTRACTS.adoc[CONTRACTS], "Explicit endpoint semantics"). The
+link:AUTHORING_FORMAT.adoc[date notation] cannot write any of them. The draft
+writes exact converted years and says in the notes that they are approximate.
+Open bounds also need the atlas: its projection refuses an open-ended occurrence,
+so a notation for one would not be enough on its own. Serpent Mound shows why it
+matters: Herrmann and colleagues' model dates only its earliest possible
+construction (after 321 BC), and the draft takes its year from a later paper's
+"around 320 BC" instead.
+
+Proposal (decision card 1): extend the notation, with no contract change. For
+example `~1000 BCE` for an approximate endpoint, `1st c. BCE` or `100 BCE..1 BCE
+precision: century` for a century, and `after 1451 BCE` for a lower bound.
+
+[[gap-bp]]
+=== 2. Years before present
+
+Most early dates are written by their sources as BP (before 1950) or as "years
+ago". The draft converts BP to a civil year by hand: N BP is N − 1949 BCE. "Years
+ago" names no epoch and does not say whether an age is calibrated, so the draft
+does not convert it on its own: it is read as cal BP only where the source shows
+that (Huaca Prieta), and otherwise the date is taken from a calendar or cal BP age
+that a cited source gives (Hopewell, Serpent Mound). The BP
+conversion is easy to get wrong by a year, and the authored year hides the
+source's precision. A notation such as `3400 BP` that the compiler converts
+would remove the arithmetic, at the cost of one more form to learn. This is
+offered as an option on decision card 1.
+
+[[gap-long-count]]
+=== 3. No Mesoamerican calendar (contract v1)
+
+The `calendar` enum has no Long Count. The draft records Chiapa de Corzo Stela 2
+and Tres Zapotes Stela C as `julian` years with the Long Count and Calendar
+Round in `as_written` (`7.16.3.2.13 6 Ben 16 Xul`, `7.16.6.16.18 6 Etznab 1 Uo`).
+That loses the fact that the year depends on a correlation constant. Neither
+source for Stela C names the constant it uses, and the reason they differ (32 BCE
+against 32 CE) is not established; recording the correlation would at least say
+which one a date assumes.
+
+Proposal (decision card 2): add `mesoamerican_long_count` to the calendar enum
+in contract v1, with a required `correlation` field (for example GMT 584283 or
+584285) whenever the date is converted to a Julian year.
+
+[[gap-radiocarbon]]
+=== 4. Uncalibrated radiocarbon years
+
+Two sources give uncalibrated radiocarbon years (Paso de la Amada's ball court,
+"about 1400 BC"; the Fort Ancient charcoal dates for Serpent Mound, 920 ± 70 BP).
+They are not calendar years, and marking them `calendar: unknown` does not keep
+them off the timeline: the projection plots a date's year whatever its calendar.
+The draft therefore never dates an event from an uncalibrated age. The ball court
+takes the calibrated 1650 BCE that Blomster and Salazar Chávez (2020) give, with
+the uncalibrated figure as a second citation, and the Fort Ancient dates appear
+only in the Serpent Mound dispute. A radiocarbon calendar would need calibration,
+which the atlas should not do. Recorded here, not proposed.
+
+[[gap-dispute-date]]
+=== 5. A dispute's alternative date is prose only
+
+A dispute holds a summary and a conflicting claim, but the conflicting date is
+only in words. The timeline cannot show the other reading of Poverty Point,
+Serpent Mound or Stela C. A machine-readable date on a conflicting claim would
+let the reader see both. This touches the dispute model for every chapter, so
+it belongs with contract v1's other proposals.
+
+[[gap-place-type]]
+=== 6. No archaeological site or earthwork place type
+
+Eleven places are typed `other` with a note, because the place vocabulary has no
+type for an archaeological site, a mound or an earthwork, or a rock shelter. A
+`site` or `archaeological_site` type would cover all of them, and would serve the
+other chapters before 100 CE too.
+
+[[gap-scale]]
+=== 7. Deep time and placeless events (engine)
+
+These are not format gaps, but the chapter is built to test them:
+
+* The story spans 21051 BCE to 550 CE, about 21,600 years, while the densest part
+  is 2700 BCE to 100 CE. The timeline needs a scale that shows both.
+* The chapter window must hold every step that is not labelled a coda, so the
+  window opens on all 21,000 years. There is no way to open on the dense stretch
+  and label the earliest sites as a prelude, the counterpart of a coda.
+* The contract allows a relationship between two events, but the atlas projects
+  only relationships between actors and places. The San Lorenzo
+  `proposed_influence` record is therefore kept out of the story until the atlas
+  can show it.
+* Spans run from three months (Mound A, inside a 300-year window) to 4,000 years
+  (Monte Verde's early horizons).
+* The Clovis event has no place, and two places (Xihuatoxtla, Horr's Island) have
+  no position.
+* Six events overlap 300–200 BCE, and several long spans (El Mirador, Nasca,
+  Teotihuacan) overlap most of the later steps, so the reader's step list and map
+  must show many overlapping spans at once.
+
+== Owner decisions requested
+
+. *How should "about" dates and BP ages be written?* (<<gap-approximate>>,
+  <<gap-bp>>) Recommended: extend the notation to v0's approximate endpoints,
+  century precision and open bounds. Alternatives: keep exact converted years,
+  or also accept BP input.
+. *Should contract v1 add a Long Count calendar with a correlation?*
+  (<<gap-long-count>>) Recommended: yes.
+. *Serpent Mound's main claim.* Keep the Adena date as main, or lead with the
+  Fort Ancient date and move the event out of the chapter.
+
+Gaps 4 to 7 are recorded for the contract v1 and engine work and need no
+decision now.
+
+== Verification performed
+
+* `vitest run src/lib/historical`: the chapter compiles and passes every
+  contract test (17 files, 384 tests).
+* Every quotation was checked against the downloaded text of its source on
+  2026-10-21.
+* Every Wikidata coordinate is cited with the item revision it was read at.
+* The font subset covers every character the new records use.

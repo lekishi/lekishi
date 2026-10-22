@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Chavín de Huántar in the Peruvian Andes flourishes as a monumental center of the Middle–Late
+  Formative Period, about 1200–400 BCE; sealed deposits in an underground gallery hold bone tubes used
+  to take psychoactive plants in ritual.
+types:
+  - process
+date:
+  value: 1200 BCE..400 BCE
+  mode: duration
+  calendar: julian
+  as_written: Middle-Late Formative Period (ca. 1200-400 BCE)
+  cite:
+    - id: chavin-time
+      says:
+        Rick and colleagues date the monumental center of Chavín de Huántar to the Middle–Late Formative
+        Period, about 1200–400 BCE.
+      basis: interpretation
+      attributed_to: Rick et al. 2025
+      source: rick-2025-chavin
+      at: abstract
+places:
+  - place: chavin-de-huantar
+    role: site
+notes: The period's bounds are approximate, which the record notation cannot yet mark.

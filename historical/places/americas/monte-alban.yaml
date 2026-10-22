@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Monte Albán, a city in the Valley of Oaxaca, Mexico.
+types:
+  - settlement
+names:
+  - form: Monte Albán
+    lang: es
+    script: Latn
+    cite:
+      id: monte-alban-name
+      says: Winter names Monte Albán in the Valley of Oaxaca, founded in period I.
+      source: winter-1974-monte-alban
+      at: abstract
+at:
+  - interpretation: approximate_point
+    precision: site
+    point:
+      - -96.767777777778
+      - 17.043888888889
+    notes: The coordinate marks the site as a whole; the record places no residential unit.
+    cite:
+      id: monte-alban-point
+      says:
+        The point is the site coordinate recorded in Wikidata (CC0) for Q464899; it marks the archaeological
+        site as a whole and no feature within it.
+      basis: interpretation
+      attributed_to: Wikidata contributors
+      source: wikidata
+      at: Q464899 (P625), revision 2535379095
+external_ids:
+  - system: wikidata
+    id: Q464899

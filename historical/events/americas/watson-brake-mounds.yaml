@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Hunter-gatherers build Watson Brake in northeastern Louisiana, eleven earthen mounds dated 5400–5000
+  BP, the largest and most complex Middle Archaic mound complex in North America.
+types:
+  - process
+date:
+  value: 3451 BCE..3051 BCE
+  mode: duration
+  calendar: julian
+  as_written: 5400-5000 BP
+  cite:
+    - id: watson-brake-time
+      says: The nomination dates Watson Brake to 5400–5000 BP.
+      basis: interpretation
+      attributed_to: Poverty Point World Heritage nomination (2013)
+      source: poverty-point-nomination
+      at: PDF p. 113, 3.2 Comparative analysis (Watson Brake)
+places:
+  - place: watson-brake
+    role: site
+notes:
+  The source gives the age in years before present (BP, counted back from 1950); the date converts
+  it to civil years without a year zero (N BP is N − 1949 BCE), keeps the source's own figures in as_written,
+  and adds no precision of its own.

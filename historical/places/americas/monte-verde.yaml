@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Monte Verde, a late Pleistocene site on Chinchihuapi Creek in south-central Chile, with the MV-I
+  and MV-II sites and the nearby Chinchihuapi localities.
+types:
+  - other
+names:
+  - form: Monte Verde
+    lang: es
+    script: Latn
+    cite:
+      id: monte-verde-name
+      says:
+        Dillehay and colleagues describe Monte Verde II as a late Pleistocene site in south-central
+        Chile.
+      source: dillehay-2015-monte-verde
+      at: Introduction
+at:
+  - interpretation: approximate_point
+    precision: site
+    point:
+      - -73.204444444444
+      - -41.504722222222
+    notes:
+      The site coordinate stands for the Monte Verde locality as a whole; MV-I, MV-II and the Chinchihuapi
+      localities, about 500 m apart, are not placed separately.
+    cite:
+      id: monte-verde-point
+      says:
+        The point is the site coordinate recorded in Wikidata (CC0) for Q975775; it marks the archaeological
+        site as a whole and no feature within it.
+      basis: interpretation
+      attributed_to: Wikidata contributors
+      source: wikidata
+      at: Q975775 (P625), revision 2539657991
+external_ids:
+  - system: wikidata
+    id: Q975775
+notes:
+  "The place type is other: the place is an archaeological site, and the contract's place vocabulary
+  has no type for an archaeological site or an earthwork."

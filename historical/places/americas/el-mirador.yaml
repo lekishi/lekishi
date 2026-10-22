@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: El Mirador, a Preclassic Maya center of the Mirador-Calakmul Karst Basin in northern Guatemala.
+types:
+  - settlement
+names:
+  - form: El Mirador
+    lang: es
+    script: Latn
+    cite:
+      id: el-mirador-name
+      says:
+        Hansen and colleagues describe the Preclassic sites of the Mirador-Calakmul Karst Basin of northern
+        Guatemala connected by causeways.
+      source: hansen-2022-mirador
+      at: abstract
+at:
+  - interpretation: approximate_point
+    precision: site
+    point:
+      - -89.920430555556
+      - 17.75505
+    notes:
+      The coordinate marks El Mirador itself; the basin's other 416 sites and its causeways are not
+      drawn.
+    cite:
+      id: el-mirador-point
+      says:
+        The point is the site coordinate recorded in Wikidata (CC0) for Q504904; it marks the archaeological
+        site as a whole and no feature within it.
+      basis: interpretation
+      attributed_to: Wikidata contributors
+      source: wikidata
+      at: Q504904 (P625), revision 2559138013
+external_ids:
+  - system: wikidata
+    id: Q504904
+notes:
+  The cited abstract names the basin and its sites rather than El Mirador alone; the place stands
+  for the basin's principal center, which the record names from its Wikidata item.

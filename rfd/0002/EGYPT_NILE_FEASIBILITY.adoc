@@ -18,22 +18,22 @@ The five chapters, oldest first:
 
 |Hatshepsut's expedition to Punt (`punt-expedition`)
 |12
-|1505–1458 BCE
+|1473–1458 BCE
 |Maspero, _History of Egypt_ vol. IV (tr. McClure)
 
 |Thutmose III at Megiddo (`megiddo-campaign-1457bce`)
-|16
-|1482–1457 BCE
+|17
+|1458–1456 BCE
 |Breasted, _Ancient Records of Egypt_ II, the Karnak annals
 
 |The Amarna letters (`amarna-letters`)
 |32
-|1410–1330 BCE
+|1390–1336 BCE
 |Niebuhr, _The Tell el Amarna Period_ (tr. Hutchison, 1903)
 
 |Kadesh and the treaty with Hatti (`kadesh-and-the-treaty`)
 |22
-|1300–1245 BCE
+|1275–1245 BCE
 |Sayce, _The Hittites_ (1890); Garstang, _The Land of the Hittites_ (1910), cited only; the 1914 verse translation of the Kadesh poem
 
 |Rome and Kush (`rome-kush-25bce-65`)
@@ -73,18 +73,42 @@ chronologies differ by about 25 years. None of the sources read gives a
 chronology that is still accepted: Breasted (1906) and Garstang (1910) are
 close to the middle chronology, and Sayce (1890) is a century off.
 
-So every BCE date in the four chapters is an *editorial window* spanning the
-high to the low placement of the regnal year in question, with the source's
-own regnal date kept in `as_written`. Each event's notes say this, and that a
-cited chronology must replace the window before approval. Two things would
-fix it:
+The drafts first gave every BCE date an editorial window from the high to the
+low placement of the regnal year. On 2026-10-22 the owner chose to cite one
+modern chronology instead. The four chapters now follow Shaw's table in _The
+Oxford History of Ancient Egypt_ (2000), source
+`shaw-oxford-history-ancient-egypt`, which is cited and never quoted:
 
-. a cited modern chronology (for example a handbook table) adopted as a source,
-  so the windows can be narrowed and cited; and
-. a decision on the calendar. The contract's calendar list has no Egyptian civil
-  calendar, so these dates use `regnal`. An `egyptian_civil` value would let a
-  date say which calendar its day and month are in. That is a proposed
-  contract change for the owner to decide, not something the drafts assume.
+[cols="2,1",options="header"]
+|===
+|King |Reign (Shaw)
+
+|Hatshepsut |1473–1458 BCE
+|Thutmose III |1479–1425 BCE
+|Amenhotep III |1390–1352 BCE
+|Amenhotep IV (Akhenaten) |1352–1336 BCE
+|Seti I |1294–1279 BCE
+|Ramesses II |1279–1213 BCE
+|===
+
+A regnal year is counted from the accession year, so year _n_ of a king who
+came to the throne in year _A_ BCE falls in _A_−_n_+1 to _A_−_n_ BCE: Megiddo
+(Thutmose III's year 23) in 1457–1456 BCE, Kadesh (Ramesses II's year 5) in
+1275–1274 BCE, and the treaty (year 21) in 1259–1258 BCE. An undated event takes
+its king's reign. Each date carries a main claim with basis `interpretation`,
+attributed to a Lekishi editorial reckoning on Shaw's chronology, and the
+source's own regnal date stays in `as_written`, with its passage as a supporting
+claim where the record cites one. The `conventional` basis does not apply here,
+since reference chronologies disagree by up to about 25 years.
+
+The figures were read from a secondary report, the reign-date tables of
+P. Lundström's _Pharaohs of Ancient Egypt_ (pharaoh.se), which list them under
+Shaw. They must be checked against the printed table before approval.
+
+The calendar is still open. The contract's calendar list has no Egyptian civil
+calendar, so these dates use `regnal`. An `egyptian_civil` value would let a
+date say which calendar its day and month are in. That is a proposed contract
+change for the owner to decide, not something the drafts assume.
 
 The contract does not compare dates below the year, so the day-by-day order of
 the Megiddo campaign is carried by the step order, not by the dates.

@@ -106,7 +106,9 @@ function history(
 
 const edited = (text: string) => text.replace(/summary: (.*)/, "summary: $1 Edited.")
 
-describe("pnpm approvals", () => {
+// Each test compiles the whole tree several times, which outgrows vitest's
+// 5 s default on a GitHub runner as chapters are added.
+describe("pnpm approvals", { timeout: 30_000 }, () => {
   const digest = compiled(files()).digest
 
   it("compares a stale chapter with the commit that holds the content its approval pins", () => {

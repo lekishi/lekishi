@@ -43,6 +43,8 @@ export type SceneEvent = {
   readonly occurrence: Occurrence
   /** The published dispute, or null; the list and details surfaces show it verbatim. */
   readonly dispute: EventDispute | null
+  /** Some of the record's main claims are tradition; the list and the card say so. */
+  readonly tradition: boolean
   /** The event's relation to the window; `outside` only appears in search results. */
   readonly relation: OccurrenceRelation
   /** `active` at the playhead, `possible` for an uncertain occurrence window, or `inactive`. */
@@ -82,6 +84,8 @@ export type ScenePlace = {
   readonly selected: boolean
   /** An event here carries a disputed account. */
   readonly disputed: boolean
+  /** An event here is told as tradition; the name is dotted, the marker keeps the place's evidence. */
+  readonly tradition: boolean
   /**
    * The controller a drawn territory snapshot records holding the place, or
    * null. The marker takes the controller's tint and a seat is marked; when two
@@ -156,6 +160,7 @@ export function sceneEvent(
     placement: event.placement,
     occurrence: event.occurrence,
     dispute: event.dispute,
+    tradition: event.tradition,
     relation: relationToWindow(event.occurrence, state.timeWindow),
     playback: playbackState(state, event),
     selected: state.selectedEventId === event.id,
@@ -258,6 +263,7 @@ function scenePlaces(
             : "inactive",
         selected: place.id === selectedPlaceId,
         disputed: here.some((event) => event.dispute !== null),
+        tradition: here.some((event) => event.tradition),
         control: control.get(place.id) ?? null,
       },
     ]

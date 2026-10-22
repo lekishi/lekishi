@@ -902,6 +902,58 @@ describe("the projection's dispute rule", () => {
   })
 })
 
+describe("the projection's tradition rule", () => {
+  const QIN = "qin-conquest-han-233-226"
+  const QIN_COVERAGE = { defaultWindow: { start: -232, end: -225 } }
+  const DEATH = "lks:event:hanfei-death-233"
+
+  function retell(roles: readonly string[]): ProjectionResult {
+    const tree = loadChapter(QIN)
+    const record = tree.documents.find(
+      (document) => isObject(document) && document["record_id"] === DEATH,
+    )
+
+    for (const claim of listOf(publishedRevisionOf(objectOf(record))["claims"]).map(objectOf)) {
+      if (roles.includes(String(claim["role"]))) {
+        claim["basis"] = "tradition"
+      }
+    }
+
+    return projectChapter(QIN, tree.documents, tree.sets, QIN_COVERAGE)
+  }
+
+  it("marks no event of a recorded chapter as tradition", () => {
+    const result = retell([])
+
+    if (!result.ok) {
+      throw new Error(result.errors.join("\n"))
+    }
+
+    expect(result.chapter.events.some((event) => event.tradition)).toBe(false)
+  })
+
+  it("marks an event whose main claims are told as tradition", () => {
+    const result = retell(["main"])
+
+    if (!result.ok) {
+      throw new Error(result.errors.join("\n"))
+    }
+
+    expect(result.chapter.events.find((event) => event.id === DEATH)?.tradition).toBe(true)
+    expect(result.chapter.events.filter((event) => event.tradition)).toHaveLength(1)
+  })
+
+  it("does not mark an event whose traditions are only the other accounts", () => {
+    const result = retell(["alternative", "conflicting", "supporting"])
+
+    if (!result.ok) {
+      throw new Error(result.errors.join("\n"))
+    }
+
+    expect(result.chapter.events.find((event) => event.id === DEATH)?.tradition).toBe(false)
+  })
+})
+
 describe("the projection's relationships", () => {
   const QIN = "qin-conquest-han-233-226"
   const QIN_COVERAGE = { defaultWindow: { start: -232, end: -225 } }

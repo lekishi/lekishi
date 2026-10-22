@@ -165,6 +165,13 @@ export type HistoricalEvent = {
   readonly note: string
   /** The published dispute, or null when the record is undisputed. */
   readonly dispute: EventDispute | null
+  /**
+   * True when any of the record's main claims is a tradition: what its source
+   * passes on as the received story of a time it did not witness
+   * (rfd/0002/TRADITION_BASIS.adoc). Any one is enough, so a record that rests
+   * on legend in part is never shown as record.
+   */
+  readonly tradition: boolean
   /** True when the published record is a coda node outside the primary mission window. */
   readonly coda: boolean
   /**

@@ -36,6 +36,8 @@ export type SearchEntry = {
   /** Where Enter goes: the chapter URL with the query that opens the entry. */
   readonly href: string
   readonly disputed: boolean
+  /** An event told as tradition; the row says so beside its title. */
+  readonly tradition: boolean
   /** The entry's year for ordering, or null for an undated entry. */
   readonly year: number | null
 }
@@ -93,6 +95,7 @@ export function chapterEntries(
       text: [first.summary],
       href: chapterHref(first.id),
       disputed: false,
+      tradition: false,
       year: first.defaultWindow.start,
     },
     ...stories.flatMap((view) => storyEntries(view, stories.length > 1, seen)),
@@ -163,6 +166,7 @@ function storyEntries(chapter: Chapter, several: boolean, seen: Set<string>): Se
       ],
       href: `${href}?event=${shortId(event.id)}`,
       disputed: event.dispute !== null,
+      tradition: event.tradition,
       year: event.occurrence.startYear,
     })
   }
@@ -186,6 +190,7 @@ function storyEntries(chapter: Chapter, several: boolean, seen: Set<string>): Se
       text: place.placementNote === null ? [] : [place.placementNote],
       href: `${href}?place=${shortId(place.id)}`,
       disputed: false,
+      tradition: false,
       year: placed?.occurrence.startYear ?? null,
     })
   }
@@ -212,6 +217,7 @@ function storyEntries(chapter: Chapter, several: boolean, seen: Set<string>): Se
       text: [],
       href: opens === undefined ? href : `${href}?event=${shortId(opens.id)}`,
       disputed: false,
+      tradition: false,
       year: opens?.occurrence.startYear ?? null,
     })
   }
@@ -244,6 +250,7 @@ function storyEntries(chapter: Chapter, several: boolean, seen: Set<string>): Se
       text: [step.caption, relationship?.summary ?? ""],
       href: `${href}?${storyParam}step=${index + 1}`,
       disputed: false,
+      tradition: false,
       year: relationship?.validity?.startYear ?? null,
     })
   }

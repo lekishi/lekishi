@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/lekishi/lekishi/schema/v0/common.schema.json",
   "title": "Lekishi historical contract v0: shared definitions",
-  "description": "Shared definitions for the Lekishi historical interchange contract v0. Vocabulary lists are deliberately small and chapter-oriented; they are not a universal historical ontology. Unknown fields are rejected so presentation, renderer, and invented-precision state cannot enter the historical source of truth. Extending a vocabulary requires a new contract version.",
+  "description": "Shared definitions for the Lekishi historical interchange contract v0. Vocabulary lists are deliberately small and chapter-oriented; they are not a universal historical ontology. Unknown fields are rejected so presentation, renderer, and invented-precision state cannot enter the historical source of truth. Until the atlas launches, extending a vocabulary or adding a kind amends v0 in place; after launch, it requires a new contract version.",
   "$defs": {
     "contract": {
       "const": "lekishi-historical-contract/v0"

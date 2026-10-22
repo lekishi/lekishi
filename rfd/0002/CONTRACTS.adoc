@@ -14,8 +14,7 @@ a browser or renderer.
 
 The contract is an interchange format, not a database design and not a universal
 ontology. Vocabularies are small and chapter-oriented, every list has an `other`
-escape hatch that must be explained in `editorial_notes`, and extending a
-vocabulary requires a new contract version.
+escape hatch that must be explained in `editorial_notes`. Until the atlas launches, extending a vocabulary or adding a kind amends v0 in place, because no published content depends on it yet (owner decision, 2026-10-22). After launch, it requires a new contract version.
 
 == Where the contract lives
 
@@ -114,6 +113,13 @@ short quoted text.
   report undisputed or accurate.
 * `basis: cited_interpretation` is an interpretation advanced in cited
   scholarship and must name who advances it (`attributed_to`).
+* `basis: conventional` is a date that standard reference chronologies agree
+  on, converted from a source that gives a sequence rather than a calendar date
+  (link:CONVENTIONAL_DATES.adoc[a conventional basis for standard date
+  conversions]). It names its conversion in `convention`, cites at least two
+  sources (the passage and a reference that states the year), asserts only a
+  time object, and is never an alternative or conflicting claim, nor a claim on
+  a pointer that another claim disputes.
 * `role: main` is the presented account for that pointer; at most one main claim
   may assert the same pointer. `supporting`, `alternative`, and `conflicting`
   claims carry the rest.
@@ -375,6 +381,10 @@ assert that every code a vector expects is documented. Representative codes:
 |editorial_romanization_has_claim |An editorial reading aid was presented as source evidence
 |claim_pointer_unresolved |A claim points at a field that does not exist
 |interpretation_missing_attribution |A cited interpretation does not name who advances it
+|conventional_missing_convention |A conventional date does not name its conversion
+|conventional_single_citation |A conventional date does not cite both the passage and a reference
+|conventional_outside_time |A conventional claim asserts something other than a time
+|conventional_in_dispute |A conventional claim is part of a dispute, or sits on a disputed pointer
 |claim_without_dispute, dispute_summary_missing |A competing account is not visibly disputed
 |published_record_without_citation |A published place, actor, event, or relationship has no cited claim
 |unrecorded_source_license |A cited source has no recorded reuse terms
@@ -401,15 +411,15 @@ asserts nothing about the past. Example ids contain `example-`, their
 content.
 
 `historical/v0/vectors/` contains the boundary cases as data, each with the
-plausible wrong interpretation it separates from the contract. The vectors cover:
-BCE/CE boundaries and no year zero, precision and endpoint combinations,
+plausible wrong interpretation it separates from the contract. The vectors
+cover: BCE/CE boundaries and no year zero, precision and endpoint combinations,
 inclusive window boundaries, duration versus uncertain occurrence, playback
 states and playhead validation, undated exclusion, open-ended bounds, partial
 ordering and ordering graphs (including day-precision records inside one year),
 name and romanization rules, geometry interpretation and invented precision,
-renderer independence, claim evidence and disputes, license and quotation gates,
-source sealing and set pins, editorial timestamp validation, and publication,
-mirror, and correction-history behavior.
+renderer independence, claim evidence and disputes, conventional dates, license
+and quotation gates, source sealing and set pins, editorial timestamp
+validation, and publication, mirror, and correction-history behavior.
 
 == Validation
 

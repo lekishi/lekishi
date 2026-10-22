@@ -226,6 +226,24 @@ describe("the record-file tree", () => {
     ).toThrow(/events\/example\/deep\/example-landing\.yaml/)
     expect(() => buildTree(files({ "places/Example.yaml": PLACE }))).toThrow(/file name is the id/)
   })
+
+  it("reads a file once, reporting it at each path and keeping later trees unchanged", () => {
+    const invalid = EVENT.replace("types: [journey]", "types: [voyage]")
+
+    expect(() => buildTree(files({ "events/example-landing.yaml": invalid }))).toThrow(
+      /events\/example-landing\.yaml/,
+    )
+    expect(() => buildTree(files({ "events/example/deep/example-landing.yaml": invalid }))).toThrow(
+      /events\/example\/deep\/example-landing\.yaml/,
+    )
+
+    const place = buildTree(files()).records.get("lks:place:example-harbour")?.data as JsonObject
+
+    expect(buildTree(files()).records.get("lks:place:example-harbour")?.data).toBe(place)
+    expect(() => {
+      place["summary"] = "Changed by a caller."
+    }).toThrow(TypeError)
+  })
 })
 
 describe("compiling a record file", () => {

@@ -426,7 +426,7 @@ describe("the Tang chapter fixture", () => {
     }
 
     expect(listChapters()).toContain(CHAPTER)
-    expect(Object.keys(result.currentPublished)).toHaveLength(140)
+    expect(Object.keys(result.currentPublished)).toHaveLength(144)
   })
 
   it("keeps the expected inventory and publishes each record once in the first set", () => {
@@ -437,9 +437,17 @@ describe("the Tang chapter fixture", () => {
       event: recordsOfKind(chapter, "event").length,
       relationship: recordsOfKind(chapter, "relationship").length,
       story: recordsOfKind(chapter, "story").length,
+      journey: recordsOfKind(chapter, "journey").length,
     }
 
-    expect(counts).toEqual({ place: 43, actor: 24, event: 62, relationship: 9, story: 2 })
+    expect(counts).toEqual({
+      place: 43,
+      actor: 24,
+      event: 63,
+      relationship: 9,
+      story: 2,
+      journey: 3,
+    })
     expect(chapter.documents.filter((document) => document["document"] === "source")).toHaveLength(
       18,
     )
@@ -449,9 +457,9 @@ describe("the Tang chapter fixture", () => {
       String(objectOf(member)["record_id"]),
     )
 
-    expect(memberIds).toHaveLength(140)
+    expect(memberIds).toHaveLength(144)
     expect(new Set(memberIds).size).toBe(memberIds.length)
-    expect(Publication.currentPublished(chapter.documents, chapter.sets).size).toBe(140)
+    expect(Publication.currentPublished(chapter.documents, chapter.sets).size).toBe(144)
   })
 
   it("publishes one revision per record in a single set", () => {

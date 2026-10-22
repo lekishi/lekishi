@@ -26,8 +26,13 @@ function compiled(edit: Edit = () => {}, include: string[] = []) {
   const files = readFiles().map((file) => {
     if (file.path !== `chapters/${TANG}.yaml`) return file
 
-    const { story, approval, ...manifest } = parse(file.text) as JsonObject
+    const { story, stories, approval, ...manifest } = parse(file.text) as JsonObject
     void approval
+    const opening = (stories as JsonObject[] | undefined)?.[0] ?? {
+      key: TANG,
+      title: "The embassy",
+      ...(story as JsonObject),
+    }
     const second: JsonObject = {
       key: SECOND,
       title: "The attempts to cross",
@@ -50,7 +55,7 @@ function compiled(edit: Edit = () => {}, include: string[] = []) {
       text: stringify({
         ...manifest,
         include: [...((manifest["include"] as string[] | undefined) ?? []), ...include],
-        stories: [{ key: TANG, title: "The embassy", ...(story as JsonObject) }, second],
+        stories: [{ ...opening, title: "The embassy" }, second],
       }),
     }
   })

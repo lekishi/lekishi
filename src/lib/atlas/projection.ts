@@ -179,6 +179,9 @@ function storyOptions(
     }))
   }
 
+  // A chapter that publishes no story at all says so once, below.
+  if (stories.length === 0) return []
+
   const byId = new Map(stories.map((record) => [record.recordId, record]))
   const listed = new Set(coverage.stories.map((option) => `${STORY_PREFIX}${option.key}`))
 

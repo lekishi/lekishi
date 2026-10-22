@@ -145,12 +145,13 @@ export function viewsOf(
   const stories = documents.filter(
     (document) => document["document"] === "record" && document["kind"] === "story",
   )
+  const ids = stories.map((story) => String(story["record_id"]))
   const opening =
-    firstStory === undefined
-      ? stories.length === 1
-        ? String(stories[0]["record_id"])
+    firstStory !== undefined && ids.includes(`lks:story:${firstStory}`)
+      ? `lks:story:${firstStory}`
+      : ids.length === 1
+        ? ids[0]
         : undefined
-      : `lks:story:${firstStory}`
 
   for (const document of documents) {
     if (document["document"] === "record") {
@@ -425,7 +426,7 @@ export function findBaseline(history: History, bundle: ChapterBundle): Baseline 
     )
     // The hand-written chapters had no card in their content (the card text was
     // code), so the card shows as added: the owner approves it for the first time.
-    const views = viewsOf(documents)
+    const views = viewsOf(documents, undefined, bundle.stories[0]?.key)
 
     return {
       kind: "legacy",

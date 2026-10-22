@@ -32,9 +32,9 @@ Records the manifest reaches:
 | ------------- | ------- | -------------------------------------------------------------------------- |
 | Events        | 36      | `historical/events/alexander/`                                             |
 | Relationships | 5       | `historical/relationships/alexander/`                                      |
-| Places        | 39      | `historical/places/greece-persia/` (33), `near-east/` (4), `egypt/` (2)    |
+| Places        | 39      | `historical/places/greece-persia/` (32), `near-east/` (4), `egypt/` (2), `xuanzang/` (1) |
 | Actors        | 11      | `historical/actors/greece-persia/`                                         |
-| Sources       | 6       | `arrian-anabasis`, `herodotus`, `xenophon-anabasis`, `pleiades`, and two below |
+| Sources       | 9       | `arrian-anabasis`, `herodotus`, `xenophon-anabasis`, `pleiades`, and five below |
 
 Babylon, Pelusium and Gaza are byte-for-byte copies of records on the
 Mesopotamia and Egypt branches, and they bring their sources `bible-kjv` and
@@ -42,7 +42,8 @@ Mesopotamia and Egypt branches, and they bring their sources `bible-kjv` and
 Mesopotamia branch's paths and Memphis at the Egypt branch's. Whichever branch
 merges second drops its copies. Sardis, Abydos, Elaius, Sestos and Thebes are
 shared with the Xerxes chapter, and Tarsus, Issus, Thapsacus and Opis with the
-Ten Thousand.
+Ten Thousand. Taxila is the 玄奘 chapter's record, which this chapter reaches as
+it is; it brings `cien-zhuan`, `xiyu-ji` and `wikidata` with it.
 
 ## Evidence
 

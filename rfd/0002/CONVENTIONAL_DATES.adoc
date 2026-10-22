@@ -1,0 +1,177 @@
+= A conventional basis for standard date conversions
+:state: proposed for owner review; adopting a basis was decided by the owner on 2026-10-22, the shape and the rule below are not yet accepted and nothing is built
+:toc:
+:toclevels: 2
+
+On 2026-10-22 the owner chose to add a claim basis for dates that are standard
+conversions rather than one scholar's argument. The question came from the
+Greece and Persia chapters (link:GREECE_PERSIA_FEASIBILITY.adoc[feasibility
+note]). This document proposes the contract change and the rule for when to use
+it. Nothing here is built until the owner accepts it. After that, the year
+conversions in the three chapters are re-cited.
+
+== The problem
+
+A claim has one of two bases (link:CONTRACTS.adoc[contract v0]):
+
+* `attested`: what a source reports.
+* `cited_interpretation`: an interpretation advanced in cited scholarship, which
+  must name who advances it.
+
+Herodotus, Xenophon and Arrian give no years BCE. Every year in the three Greek
+chapters is a modern conversion of a season, a halt, an archon or a month. Today
+each is cited as the interpretation of the scholar whose book states it: 59 date
+claims attributed to Grote and 37 to Chinnock. That has three costs:
+
+* *Routine dates read as contested.* That Thermopylae was fought in 480 BCE is not
+  Grote's view; every reference work gives it. The few real disputes, such as the
+  Gordian knot, lose their weight among a hundred routine "interpretations".
+* *The same step is cited two ways.* The Qin and Tang chapters convert regnal
+  years (始皇帝十四年 to 233 BCE) and cite them as `attested`, with the source's
+  form in `as_written`. Arrian's "in the month Maimacterion, when Nicostratus was
+  archon" is the same kind of date, but it is cited as Chinnock's interpretation.
+* *Review cannot see the difference.* The publication checklist asks about
+  "attestation versus interpretation". A reviewer has no way to tell a standard
+  conversion from a scholar's reconstruction without reading every claim.
+
+The atlas does not show a claim's basis to readers today. The distinction matters
+first for review and for the evidence display that later RFDs will add.
+
+== Proposed: three cases, one test
+
+The test for a date claim is: *would a standard reference work give the same
+year, without argument?*
+
+[cols="1,2,2",options="header"]
+|===
+|Basis |When |Example
+
+|`attested`
+|The source states the date in its own calendar (a regnal year, an archon year,
+an Olympiad, an era year), and the conversion to a year BCE is not in dispute.
+The record keeps the source's form in `as_written`. Mapping a stated calendar
+date to a civil year is normalization, which v0 already defines; it is not
+interpretation.
+|Arrian: "in the month Maimacterion, when Nicostratus was archon" (Issus,
+333 BCE). 始皇帝十四年 (233 BCE).
+
+|`conventional` (new)
+|The source gives no calendar date, but places the event in a sequence that ties
+it to a dated anchor ("in the following spring", a count of stages or days), and
+standard reference chronologies agree on the year. The same applies to a window
+whose two ends are such anchors.
+|Herodotus: the fighting at Thermopylae falls on the days of the sea fights at
+Artemision (480 BCE). Xenophon: the army reaches Trapezus (400 BCE).
+
+|`interpretation`
+|Reference works disagree about the year, one scholar argues for it, or the year
+is an editorial reckoning that no reference states.
+|"About 483 BCE" for the start of the Athos canal, counted back from Herodotus's
+"about three years". Any year in a disputed chronology.
+|===
+
+When in doubt between two rows, take the lower row. A date that is wrongly
+labelled `interpretation` costs nothing but noise. A date wrongly labelled
+`conventional` hides a dispute.
+
+== Proposed: the contract change
+
+`conventional` joins the claim-basis vocabulary in contract *v1*, beside the
+journey kind. Under v0's rule, extending a vocabulary means a new contract
+version. v1 is already open, and v0 documents stay valid v1 documents.
+
+A `conventional` claim:
+
+. names its conversion in a new field, `convention`. The field is free text of
+  up to 200 characters, such as "Herodotean campaign seasons, standard
+  chronology" or "Xenophon's stages from the battle of Cunaxa, standard
+  chronology";
+. cites at least two sources: the passage that places the event (the input) and
+  a reference work that states the year (the output);
+. asserts only a time pointer (`/time` or a dated sub-field). Place
+  identifications are out of scope (see <<open>>);
+. has role `main` or `supporting`, never `alternative` or `conflicting`. A
+  record that disputes the same pointer may not carry a `conventional` claim on
+  it: if the year is disputed, it is not conventional.
+
+Each rule becomes a v1 vector, with these codes:
+
+* `conventional_missing_convention`
+* `conventional_single_citation`
+* `conventional_outside_time`
+* `conventional_in_dispute`
+
+*Authoring.* Authors write `basis: conventional` and `convention:`. The compiler
+maps the basis through unchanged and rejects a missing `convention`.
+
+[source,yaml]
+----
+# historical/events/xerxes/thermopylae-480.yaml, re-cited
+date:
+  value: 480 BCE
+  mode: window
+  as_written: these battles at sea and the battles on land at Thermopylai took place on the same days
+  cite:
+    - id: thermopylae-480-time
+      says: >-
+        Herodotus puts the fighting at Thermopylae on the same days as the sea fights at
+        Artemision; the standard chronology, as Grote gives it, dates both to 480 BCE.
+      basis: conventional
+      convention: Herodotean campaign seasons, standard chronology
+      sources:
+        - source: herodotus
+          at: VIII.15
+          quote: these battles at sea and the battles on land at Thermopylai took place on the same days
+        - source: grote-history-of-greece
+          at: vol. V, ch. XL
+----
+
+*Display.* Nothing changes now. When the atlas shows evidence on a card:
+
+* an attested or conventional date reads as a plain date;
+* an interpretation names its scholar ("dated by Grote");
+* a dispute keeps its own marker.
+
+== What it costs and what moves
+
+* Contract v1 gains:
+** the basis;
+** the `convention` field in the claim schema;
+** four vectors;
+** the matching checks in the reference semantics (`documents.ts`).
+* The authoring compiler gains one basis and one check.
+* The three Greek chapters' date claims are re-cited:
+** the seven archon-dated events in Arrian become `attested`, with the archon
+   and month in `as_written`;
+** most Grote and Chinnock conversions become `conventional`;
+** editorial reckonings, such as the Athos canal, and any year that reference
+   works disagree on, stay `interpretation`.
+* The Qin and Tang chapters do not change, so no approval reopens.
+* The other pre-100 CE chapter threads can use the basis once v1 lands. Until
+  then they keep citing such dates as `interpretation`.
+
+Pros: a reader and a reviewer can tell a routine date from a real dispute, and a
+regnal year and an archon year are treated alike.
+
+Cons:
+
+* A contract change, with four vectors to maintain.
+* A judgement call at the edge between `conventional` and `interpretation`. The
+  test and the rule to take the lower row are meant to keep that edge
+  conservative.
+
+[[open]]
+== Open for the owner
+
+* *`convention` or `attributed_to`.* A new field says what the conversion is.
+  Reusing `attributed_to` avoids a field, but it names a person, and a
+  convention has no single author. The proposal is a new field.
+* *Calendars for archon and Olympiad years.* v0's calendar vocabulary (`julian`,
+  `gregorian`, `islamic`, `chinese_lunisolar`, `regnal`, `unknown`) has no value
+  for eponymous years (Athenian archons, Roman consuls, Assyrian limmu) or for
+  Olympiads. The Arrian records now say `julian`, which describes the conversion
+  rather than the source. The proposal is to add `eponymous` and `olympiad` to v1
+  with the same change.
+* *Place identifications.* Identifying an ancient name with a site by a standard
+  gazetteer (Pleiades, Barrington) is the same kind of step. The proposal leaves
+  it out until a chapter needs it, so the first use of the basis stays narrow.

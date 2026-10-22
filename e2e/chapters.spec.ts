@@ -529,14 +529,20 @@ test("searches every chapter from the search dialog", async ({ page }) => {
   // its romanization find the same person, and Enter opens the active result.
   await page.goto("/")
   await expect(page.getByTestId("home-search")).toBeVisible()
-  await page.keyboard.press("/")
 
   const dialog = page.locator("dialog#search-dialog")
   const input = page.locator("#search-dialog-input")
   const hits = page.getByTestId("search-hit")
   const hrefs = () => hits.evaluateAll((links) => links.map((link) => link.getAttribute("href")))
 
-  await expect(dialog).toBeVisible()
+  // The home search is prerendered, so it is visible before the page hydrates
+  // and the `/` shortcut exists; a press in that gap does nothing. Press again
+  // until the dialog opens, skipping the press once it is visible. A stray `/`
+  // in the input would be harmless: the search below fills, not appends.
+  await expect(async () => {
+    if (!(await dialog.isVisible())) await page.keyboard.press("/")
+    await expect(dialog).toBeVisible({ timeout: 1_000 })
+  }).toPass()
   await expect(input).toBeFocused()
 
   // The person leads both result lists. The script form also matches the

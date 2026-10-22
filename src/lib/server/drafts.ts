@@ -60,9 +60,12 @@ export function memberDraftCards(): ChapterCard[] {
   }))
 }
 
-/** Every draft, projected, for the members' search index. */
-export function memberDraftChapters(): Chapter[] {
-  return DRAFT_CHAPTERS.flatMap((manifest) => memberDraft(manifest.id)?.chapter ?? [])
+/** Every draft, projected story by story, for the members' search index. */
+export function memberDraftChapters(): Chapter[][] {
+  return DRAFT_CHAPTERS.flatMap((manifest) => {
+    const draft = memberDraft(manifest.id)
+    return draft === undefined ? [] : [draft.stories]
+  })
 }
 
 /** A draft's display name, its manifest's title, for the members' search index. */

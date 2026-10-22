@@ -1,0 +1,263 @@
+= Egypt and the Nile: source feasibility for five draft chapters
+:state: desk-research notes for owner review; the chapters are drafts, not published atlas content, and nothing here is an RFD decision
+:research-window: single pass, 2026-10-21
+:toc:
+:toclevels: 2
+
+This annex records, for each of the five Egypt and Nile chapters drafted on
+2026-10-21, what the sources read support, what they do not, and what a later
+pass would need. The chapters are drafts under
+link:AUTHORING_FORMAT.adoc[the authoring format]. None is approved, and
+approval is the owner's.
+
+The five chapters, oldest first:
+
+[cols="2,1,1,3",options="header"]
+|===
+|Chapter (manifest) |Steps |Window |Main sources
+
+|Hatshepsut's expedition to Punt (`punt-expedition`)
+|12
+|1473–1458 BCE
+|Maspero, _History of Egypt_ vol. IV (tr. McClure)
+
+|Thutmose III at Megiddo (`megiddo-campaign-1457bce`)
+|17
+|1458–1456 BCE
+|Breasted, _Ancient Records of Egypt_ II, the Karnak annals
+
+|The Amarna letters (`amarna-letters`)
+|32
+|1390–1336 BCE
+|Niebuhr, _The Tell el Amarna Period_ (tr. Hutchison, 1903)
+
+|Kadesh and the treaty with Hatti (`kadesh-and-the-treaty`)
+|22
+|1275–1245 BCE
+|Sayce, _The Hittites_ (1890); Garstang, _The Land of the Hittites_ (1910), cited only; the 1914 verse translation of the Kadesh poem
+
+|Rome and Kush (`rome-kush-25bce-65`)
+|17
+|25 BCE–67 CE
+|Strabo XVII; Cassius Dio LIV and LXIII; Pliny VI; Seneca, _Natural Questions_ VI; _Res Gestae_ 26
+|===
+
+== Method and limits
+
+* Every text quoted is a public-domain work read in a Project Gutenberg or
+  Wikisource transcription, or on LacusCurtius. Following the
+  link:../../docs/SOURCE_REGISTER.adoc[source register]'s rule, the records
+  quote the work, cite the edition, and name the transcription.
+* Coordinates come from Pleiades (CC BY 3.0, the dump of 2026-10-21) or, where
+  Pleiades had no fitting record, from Wikidata (CC0). Each is published as
+  the gazetteer's identification (`basis: interpretation`), never as a
+  position the ancient text states.
+* Places that no source read here locates are published with
+  `interpretation: unknown` and no point, so nothing is drawn through them.
+* Wikimedia hosts rate-limited this environment for most of the pass (HTTP
+  429), and archive.org is blocked by the network policy. Breasted's volumes
+  II and III could not be downloaded, so the Megiddo chapter reads the annals
+  in the Wikisource transcription of Breasted's text, and Punt uses Maspero in
+  their place.
+* A source that reports an event is evidence of the report, not proof of the
+  event. Royal inscriptions (the annals, the Kadesh poem, the Punt reliefs) are
+  labelled as such in each event's notes.
+
+[[chronology]]
+== The chronology problem, common to the four Bronze Age chapters
+
+The sources date by regnal year and the Egyptian civil calendar ("year 23,
+first month of the third season, day 21"). Converting that to a BCE year
+depends on which chronology of the New Kingdom is used, and the high and low
+chronologies differ by about 25 years. None of the sources read gives a
+chronology that is still accepted: Breasted (1906) and Garstang (1910) are
+close to the middle chronology, and Sayce (1890) is a century off.
+
+The drafts first gave every BCE date an editorial window from the high to the
+low placement of the regnal year. On 2026-10-22 the owner chose to cite one
+modern chronology instead. The four chapters now follow Shaw's table in _The
+Oxford History of Ancient Egypt_ (2000), source
+`shaw-oxford-history-ancient-egypt`, which is cited and never quoted:
+
+[cols="2,1",options="header"]
+|===
+|King |Reign (Shaw)
+
+|Hatshepsut |1473–1458 BCE
+|Thutmose III |1479–1425 BCE
+|Amenhotep III |1390–1352 BCE
+|Amenhotep IV (Akhenaten) |1352–1336 BCE
+|Seti I |1294–1279 BCE
+|Ramesses II |1279–1213 BCE
+|===
+
+A regnal year is counted from the accession year, so year _n_ of a king who
+came to the throne in year _A_ BCE falls in _A_−_n_+1 to _A_−_n_ BCE: Megiddo
+(Thutmose III's year 23) in 1457–1456 BCE, Kadesh (Ramesses II's year 5) in
+1275–1274 BCE, and the treaty (year 21) in 1259–1258 BCE. An undated event takes
+its king's reign. Each date carries a main claim with basis `interpretation`,
+attributed to a Lekishi editorial reckoning on Shaw's chronology, and the
+source's own regnal date stays in `as_written`, with its passage as a supporting
+claim where the record cites one. The `conventional` basis does not apply here,
+since reference chronologies disagree by up to about 25 years.
+
+The figures were read from a secondary report, the reign-date tables of
+P. Lundström's _Pharaohs of Ancient Egypt_ (pharaoh.se), which list them under
+Shaw. They must be checked against the printed table before approval.
+
+The calendar is still open. The contract's calendar list has no Egyptian civil
+calendar, so these dates use `regnal`. An `egyptian_civil` value would let a
+date say which calendar its day and month are in. That is a proposed contract
+change for the owner to decide, not something the drafts assume.
+
+The contract does not compare dates below the year, so the day-by-day order of
+the Megiddo campaign is carried by the step order, not by the dates.
+
+== Hatshepsut's expedition to Punt
+
+What the sources support:: The episodes of the Deir el-Bahari reliefs as Maspero
+retells them: Amun's command at Karnak, five galleys under a royal envoy, the
+landing by a village on piles, the meeting with Parihu and Ati, the barter and
+its goods list, the Ilim on the way home, the return festival, the incense
+garden and the carving of the reliefs.
+What they do not:: A regnal year (Maspero gives none, only that the queen
+reigned at least eight years after), the port of departure, the route, or the
+commander's name. Maspero says the port and the course are unrecorded; the
+route in `punt-fleet-sails` is his reconstruction and is labelled so.
+Places:: Deir el-Bahari and the Red Sea from Pleiades. Punt and the Ilim are
+unlocated. Punt carries a `dispute` with the four views Maspero reports
+(Somali coast, Arabia, both shores, Suakin to Massawa). Maspero's proposed
+landing, the Elephant River near Ras el-Fil, is a separate place shown as a
+display anchor at Pleiades' Elephas Promontorium.
+Next sources:: Breasted, _Ancient Records_ II (the Punt reliefs) for the captions
+and the commander's name; Naville's _Deir el Bahari_ (1894–1908) for the
+plates. Both are public domain. The finds at Mersa Gawasis need a modern,
+cited source before they can enter.
+
+Journey stops, for when journeys exist (link:https://github.com/lekishi/lekishi/pull/26[PR #26]):
+Karnak (the command), an unknown port, the Red Sea, the Ilim, Punt (the
+landing), the Ilim, Thebes (the temple landing), Deir el-Bahari. Only the
+first, the Red Sea and the last two are placed.
+
+== Thutmose III at Megiddo
+
+What the sources support:: The annals' day-by-day first campaign: Tharu in year
+22, Gaza on the coronation feast, Yehem and the council of war, the Aruna
+pass, the camp at the brook of Kina, the battle on the new-moon feast, the
+siege wall, the submission, the booty lists and the goods of Yenoam, Nuges
+and Herenkeru.
+What they do not:: The length of the siege (other inscriptions give seven
+months; none is read yet), the fate of the chief of Kadesh, or a BCE date
+(<<chronology>>).
+Places:: Tharu, Gaza, Kadesh, Karnak and Thebes from Pleiades; Sharuhen,
+Taanach and Megiddo from Wikidata. Sharuhen's identification is disputed
+(Tell el-Far'ah South or Tell el-Ajjul) and is kept at locality precision.
+Yeraza, Yehem, Aruna, Zefti, the brook of Kina, Yenoam, Nuges and Herenkeru
+are unlocated, so the pass, which is the point of the story, cannot yet be
+drawn.
+Next sources:: the Gebel Barkal and Armant stelae (Breasted II), and a public
+domain topographical study of the Aruna road.
+
+Journey stops: Tharu (year 22, IV Peret 25), Gaza (year 23, I Shemu 4–5),
+Yehem (I Shemu 16), Aruna (I Shemu 19), the brook of Kina, Megiddo (I Shemu
+21). Every stop is dated to the day by the annals; four of six are unplaced.
+
+== The Amarna letters
+
+What the sources support:: Niebuhr's summaries of the letters of
+Kadashman-Enlil I, Burnaburiash II, Tushratta, the king of Alashiya and
+Ashur-uballit I, and of the vassals: Aziru, Rib-Hadda of Byblos, Abdi-Heba of
+Jerusalem, Milkilu, Tagi, Abi-Milku of Tyre, Itakama of Kadesh, Akizzi of
+Qatna, Yabitiri. One docket gives a date (a restored year 32 of Amenhotep
+III); the rest are undated. The records cite Niebuhr without quotation: the
+translator Jane Hutchison's dates are unknown, so the English is not shown to
+be public domain outside the US.
+What they do not:: Tablet numbers (Niebuhr predates Knudtzon's EA numbering), a
+date for any vassal letter, or which king most vassal letters went to. The
+records put a letter under Akhenaten only where the text makes it so.
+Places:: Akhetaten, Tyre, Simyra, Qatna and Joppa from Pleiades, Ugarit from
+Wikidata. Byblos, Sidon, Jerusalem, Nineveh and Ashkelon are shared with the
+Sennacherib chapter (copied byte for byte from that branch). Hinnatuni is
+unlocated. Babylon, Assur and Washukanni are left to the Mesopotamian
+chapters; Alashiya is an actor only, since its identification with Cyprus
+postdates Niebuhr and no source read states it.
+Identifications of their time:: Niebuhr equates the Habiri with the Hebrews and
+puts Alashiya in Cilicia. Both records say these are his, not settled.
+Next sources:: Conder's translations in _Egyptian Literature_ (1901, Wikisource,
+blocked during this pass) and Knudtzon's _Die El-Amarna-Tafeln_ (1907–1915,
+public domain) for tablet numbers and the letters Niebuhr only lists (Gezer,
+Lachish, Hazor, Arzawa).
+
+Journey stops: the statue of Ishtar, Nineveh to Thebes; Aziru summoned to
+Egypt (unplaced); the Babylonian caravan robbed at Hinnatuni (unplaced).
+The chapter is a network of letters, not a route; it is the test case for
+showing correspondence between places rather than travel.
+
+== Kadesh and the treaty with Hatti
+
+What the sources support:: Sayce's retelling of the Egyptian account of Kadesh in
+year 5 (the false spies, the ambush, the king alone, the second day),
+Brugsch's translation of the treaty of year 21 (date, place, envoys, silver
+tablet, clauses, the Storm-god seal), the year 8 campaigns and the marriage
+of year 34; and Garstang's reading of the first Boghazköy tablets (the
+Hittite losses, the Amurru revolt, the succession, Puduhepa's seal, the
+queens' letters and the letters to Babylonia).
+Disputes kept:: the outcome of the battle (the poem's victory against Sayce's
+"check" and Garstang's "indecisive"), and whether the poem's Hittite overtures
+belong to year 5 or year 21 (Müller against Garstang).
+Licence:: Garstang died in 1956, so his book is public domain in the US but
+protected in life-plus-70 countries until 2027-01-01. It is recorded with
+`quotation_permitted: false`, and every Garstang cite is a citation without a
+quote. It can be re-reviewed after that date.
+What they do not:: A modern account of the succession (Urhi-Teshub), a modern
+view of whether Hattusili travelled to Egypt, or the Hittite version of the
+treaty in its own words. The notes say where an early reading is likely
+superseded but assert no modern view without a source.
+Places:: Kadesh, Aleppo, the Orontes, Pi-Ramesses, Hattusa, Abydos, the
+Ramesseum and Abu Simbel from Pleiades. The Lake of Homs, Dapur and Tunip are
+unlocated.
+Next sources:: Breasted's _Battle of Kadesh_ (1903) and _Ancient Records_ III;
+Langdon and Gardiner's 1920 translation of the Hittite treaty text.
+
+Journey stops: the Hittite embassy, Hattusa to Pi-Ramesses, year 21; the
+Egyptian embassy to Hattusa; the princess's journey to Egypt in year 34
+(unplaced at the Egyptian end).
+
+== Rome and Kush
+
+What the sources support:: The Kushite attack on Syene, Elephantine and Philae;
+Petronius's counter-campaign to Pselchis, Premnis and Napata; the garrison at
+Premnis and the Candace's attack on it; the envoys at Samos and the terms;
+Nero's exploration (Pliny's praetorians and their itinerary, Seneca's two
+centurions at the marshes, Dio's spies). Strabo's and Dio's accounts of the
+terms differ and are kept as a dispute; Pliny's, Seneca's and Dio's accounts of
+Nero's mission are kept as separate accounts.
+What they do not:: Exact years for the war (the sources give consular years and
+the windows follow them), or the Meroitic side, which no public domain source
+read gives.
+Places:: Syene, Elephantine, Philae, Pselchis, Premnis, Napata, Meroë and Hiera
+Sycaminos from Pleiades. Samos is shared with the Xerxes chapter. Pliny's
+stages Tama, Acina, Pittara, Tergedus and Gagaudes, and the marshes, are
+unlocated.
+Next sources:: the Meroitic stelae (no public domain translation known) and the
+Hamadab stela.
+
+Journey stops: Petronius, Syene, Pselchis, Premnis, Napata (25–22 BCE, all
+placed). Nero's praetorians, Syene, Hiera Sycaminos, Tama, Acina, Pittara,
+Tergedus, Meroë (54–68, Nero's reign; three of seven placed). The centurions,
+Meroë to the marshes (unplaced).
+
+== Shared ids
+
+These ids were agreed with the threads drafting neighbouring chapters, and the
+file is identical on each branch so that either can merge first:
+
+* from the Xerxes chapter: `samos`, the source `herodotus`;
+* from the Sennacherib chapter: `byblos`, `sidon`, `jerusalem`, `nineveh`,
+  `ashkelon`, the sources `luckenbill-annals-sennacherib` and `bible-kjv`;
+* given to other chapters: `gaza`, `kadesh`, `megiddo`, `aleppo`, `hattusa`,
+  `egypt-new-kingdom`, `hatti`, `kassite-babylonia`, `amurru-kingdom`,
+  `roman-empire`, `augustus`, `nero`, and the source `breasted-ancient-records`.
+
+Egyptian Abydos is `abydos-egypt`, beside the Greek chapter's
+`abydos-hellespont`.

@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Hattusili III restores Benteshina as king of Amurru as a vassal, and gives him a Hittite princess,
+  Gashuliawi, as wife.
+types: [occurrence]
+date:
+  value: 1275 BCE..1258 BCE
+  mode: window
+  calendar: regnal
+  as_written: early in the reign of Hattusili III
+  cite:
+    - id: benteshina-restored-shaw
+      says: On Shaw's chronology Ramesses II reigned 1279–1213 BCE, so his year 5 falls in 1275–1274
+        BCE and his year 21 in 1259–1258 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Nineteenth Dynasty"
+participants:
+  - actor: hattusili-iii
+    role: leader
+  - actor: benteshina
+    role: subject
+  - actor: amurru-kingdom
+    role: participant
+cite:
+  - id: benteshina-restored-basis
+    says:
+      Garstang says one of Hattusil's first acts was to reinstate Put-akhi as chief of the Amorites,
+      married to a Hittite princess.
+    source: garstang-land-of-hittites
+    at: "ch. VI, pp. 346–352: Put-akhi restored, fn. 814"
+notes: "Garstang draws on Winckler's account of the vassal treaty found at Boghazköy. Ramesses II's
+  regnal years are converted on Shaw's chronology (The Oxford History of Ancient Egypt, 2000), which
+  puts his reign at 1279–1213 BCE; each regnal year spans two BCE years. Garstang's 1910 dates
+  (Kadesh 1288 B.C., the treaty about 1271 B.C.) and Sayce's 1890 dates (1383 and 1354 B.C.) follow
+  older schemes."

@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The chiefs of the country come out to do obeisance, bringing silver, gold, lapis lazuli and malachite,
+  grain, wine and cattle for the army, and the king appoints chiefs anew.
+types: [occurrence]
+part_of:
+  - megiddo-campaign
+date:
+  value: 1457 BCE..1456 BCE
+  mode: window
+  calendar: regnal
+  as_written: after the siege of Megiddo
+  cite:
+    - id: megiddo-surrender-shaw
+      says: On Shaw's chronology Thutmose III reigned 1479–1425 BCE, so his year 23 falls in
+        1457–1456 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+places:
+  - place: megiddo
+    role: site
+participants:
+  - actor: thutmose-iii
+    role: host
+  - actor: megiddo-coalition
+    role: participant
+cite:
+  - id: surrender-basis
+    says: The annals record the chiefs bringing their gifts and the king appointing chiefs anew.
+    source: breasted-ancient-records
+    at: "II, Annals of Thutmose III, first campaign: the submission"
+    quote:
+      Behold, the chiefs of this country came to render their portions, to do obeisance to the fame
+      of his majesty, to crave breath for their nostrils, because of the greatness of his power, because
+      of the might of the fame of his majesty the country came to his fame, bearing their gifts, consisting
+      of silver, gold, lapis lazuli, malachite
+notes: The annals present the surrender as homage; who the chiefs were and what became of the chief
+  of Kadesh is not said. The annals date by regnal year and the civil calendar. The BCE years follow
+  Shaw's chronology (The Oxford History of Ancient Egypt, 2000), which puts the accession of
+  Thutmose III in 1479 BCE, so year 22 falls in 1458–1457 BCE and year 23 in 1457–1456 BCE.
+  Breasted's own 1906 table follows an older, higher chronology.

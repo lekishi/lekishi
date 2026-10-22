@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: The Red Sea, down which Hatshepsut's five galleys sailed to Punt and back.
+types: [region]
+names:
+  - form: the Red Sea
+    lang: en
+    script: Latn
+    cite:
+      - id: red-sea-name
+        says: Maspero says the queen sent the fleet forth on the Red Sea in quest of incense.
+        source: maspero-history-of-egypt
+        at: "vol. IV, ch. III: the fleet"
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [39.5, 19.0]
+    notes:
+      Pleiades' representative point for the sea as a whole. It labels the sea, not the fleet's course,
+      which the sources do not give.
+    cite:
+      - id: red-sea-identification
+        says:
+          Pleiades identifies the Arabicus Sinus or Erythraean Sea, the Red Sea, and gives this representative
+          point (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 39290 (reprLatLong, version 18), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "39290"
+    url: https://pleiades.stoa.org/places/39290
+    license: CC-BY-3.0

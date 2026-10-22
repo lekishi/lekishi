@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Augustus (Imperator Caesar Augustus, emperor 27 BCE–14 CE), whom Strabo calls Caesar. His statues
+  at Syene were thrown down in the Kushite attack; he received the Candace's envoys at Samos and remitted
+  the tribute, and the Res Gestae claims the campaign to Napata as his.
+types: [person]
+names:
+  - form: Augustus
+    lang: la
+    script: Latn
+    cite:
+      - id: augustus-name
+        says: Dio names Augustus as wintering at Samos.
+        source: cassius-dio
+        at: LIV.7 (B.C. 20)
+        quote:
+          As for Augustus, after setting the Greek world in order, he sailed to Samos, passed the winter
+          there
+  - form: Καῖσαρ
+    lang: grc
+    script: Grek
+    roman: Kaisar
+    scheme: other
+    note: "Strabo's name for him: the statues of Caesar, the envoys sent to Caesar."
+roles:
+  - role: ruler
+    date:
+      value: 27 BCE..14
+      mode: duration
+      calendar: julian
+    note: Emperor from the settlement of January 27 BCE to his death in August 14 CE.

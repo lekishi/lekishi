@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  The Egyptian state of the New Kingdom (the Eighteenth to Twentieth Dynasties, about 1550–1070
+  BCE), ruled from Thebes and Memphis and later Pi-Ramesses, which campaigned in Canaan and Syria, traded
+  with Punt, and corresponded with Babylon, Mitanni, Hatti and Alashiya.
+types: [state]
+names:
+  - form: Egypt
+    lang: en
+    script: Latn
+    note: The annals speak of extending the boundaries of Egypt; the Egyptian name was Kemet.
+    cite:
+      - id: egypt-name
+        says: The annals describe the first campaign as one to extend the boundaries of Egypt.
+        source: breasted-ancient-records
+        at: "II, Annals of Thutmose III, first campaign: Year 22, IV Peret 25 (Tharu)"
+        quote:
+          Year 22, fourth month of the second season, on the twenty-fifth day his majesty was in Tharu
+          on the first victorious expedition to extend the boundaries of Egypt with might.
+notes:
+  One actor for the New Kingdom state, as one polity under successive kings. Egypt in other periods
+  (the Achaemenid satrapy, the Ptolemaic kingdom, the Roman province) is a different actor.

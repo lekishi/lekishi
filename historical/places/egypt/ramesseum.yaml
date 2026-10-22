@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Ramesseum, the memorial temple of Ramesses II on the west bank at Thebes, one of the temples
+  whose walls carry the Kadesh poem and reliefs.
+types: [religious_site]
+names:
+  - form: the Ramesseum
+    lang: en
+    script: Latn
+    note: The modern name.
+    cite:
+      - id: ramesseum-name
+        says: Garstang lists the Ramesseum at Thebes among the temples with the Kadesh records.
+        source: garstang-land-of-hittites
+        at: "ch. VI: fn. 710"
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [32.61023, 25.7278]
+    notes: Pleiades' point for the temple.
+    cite:
+      - id: ramesseum-identification
+        says:
+          Pleiades identifies the Ramesseum, the funerary temple of Ramesses II, and gives this representative
+          point (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 963047542 (reprLatLong, version 11), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "963047542"
+    url: https://pleiades.stoa.org/places/963047542
+    license: CC-BY-3.0

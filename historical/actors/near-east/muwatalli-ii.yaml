@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Muwatalli II, great king of Hatti, who led the Hittite army and its allies against Ramesses II
+  at Kadesh. The treaty calls him Mautal and the brother of Hattusili III.
+types: [person]
+names:
+  - form: Mautal
+    lang: egy
+    script: Latn
+    note: Brugsch's reading of the treaty's name for him.
+    cite:
+      - id: muwatalli-ii-name
+        says: The treaty says that in the times of Mautal, the great king of Kheta, he was at war with Egypt.
+        source: sayce-hittites
+        at: "ch. II: the treaty, the preamble"
+        quote:
+          To wit, in the times of Mautal, the great king of Kheta, my brother, he was at war with [Meneptah
+          Seti] the great prince of Egypt.
+  - form: Mutallu
+    lang: en
+    script: Latn
+    role: alternate
+    note: Garstang's 1910 form.
+  - form: Muwatalli II
+    lang: en
+    script: Latn
+    role: alternate
+    note: The modern form and number.
+roles:
+  - role: ruler
+    note: Great king of Hatti.

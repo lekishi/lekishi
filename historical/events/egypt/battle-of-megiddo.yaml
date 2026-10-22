@@ -1,0 +1,70 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  On the 21st day, the feast of the new moon, the king attacks in a chariot of electrum. The coalition
+  breaks and flees to Megiddo, abandoning horses and chariots; the townspeople, having shut the gates,
+  haul the fugitives up the walls by their clothing. The army stops to plunder and the city is not taken.
+types: [campaign]
+part_of:
+  - megiddo-campaign
+date:
+  value: 1457 BCE..1456 BCE
+  mode: window
+  calendar: regnal
+  as_written: year 23, I Shemu 21, the feast of the new moon
+  cite:
+    - id: battle-of-megiddo-shaw
+      says: On Shaw's chronology Thutmose III reigned 1479–1425 BCE, so his year 23 falls in
+        1457–1456 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+    - id: battle-date
+      role: supporting
+      says: The annals date this to year 23, I Shemu 21, the feast of the new moon.
+      source: breasted-ancient-records
+      at: "II, Annals of Thutmose III, first campaign: Year 23, I Shemu 21 (the battle)"
+      quote:
+        Year 23, first month of the third season, on the twenty-first day, the day of the feast of
+        the new moon, corresponding to the royal coronation, early in the morning, behold, command was given
+        to the entire army to move.
+places:
+  - place: megiddo
+    role: site
+  - place: kina-brook
+    role: context
+    note: The southern wing stood on a hill south of the brook.
+participants:
+  - actor: thutmose-iii
+    role: leader
+  - actor: egypt-new-kingdom
+    role: participant
+  - actor: chief-of-kadesh
+    role: participant
+  - actor: chief-of-megiddo
+    role: participant
+  - actor: megiddo-coalition
+    role: participant
+cite:
+  - id: battle-basis
+    says: The annals record the rout and the fugitives hauled up into Megiddo by their clothing.
+    source: breasted-ancient-records
+    at: "II, Annals of Thutmose III, first campaign: Year 23, I Shemu 21 (the battle)"
+    quote:
+      when they saw his majesty prevailing against them they fled headlong to Megiddo in fear, abandoning
+      their horses and their chariots of gold and silver. The people hauled them up, pulling them by their
+      clothing, into this city; the people of this city having closed it against them and lowered clothing
+      to pull them up into this city.
+  - id: battle-plunder
+    says: The annals say the city would have fallen had the army not turned to plunder.
+    role: supporting
+    source: breasted-ancient-records
+    at: "II, Annals of Thutmose III, first campaign: Year 23, I Shemu 21 (the plunder)"
+    quote:
+      Now, if only the army of his majesty had not given their heart to plundering the things of the
+      enemy, they would have captured Megiddo at this moment
+notes: The new-moon feast on I Shemu 21 is one of the astronomical anchors scholars use to choose
+  between the chronologies; the record keeps the annals' date as written. The annals date by regnal
+  year and the civil calendar. The BCE years follow Shaw's chronology (The Oxford History of Ancient
+  Egypt, 2000), which puts the accession of Thutmose III in 1479 BCE, so year 22 falls in 1458–1457
+  BCE and year 23 in 1457–1456 BCE. Breasted's own 1906 table follows an older, higher chronology.

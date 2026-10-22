@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  War between Mitanni and Hatti, from the Hittite invasion Tushratta claims to have destroyed to
+  the pressure that, by Niebuhr's account, left Mitanni nearing its fall.
+types: [conflict]
+from: hatti
+to: mitanni
+directionality: mutual
+date:
+  value: 1390 BCE..1336 BCE
+  mode: window
+  calendar: regnal
+  as_written: the reigns of Amenophis III and IV
+  cite:
+    - id: mitanni-hatti-war-shaw
+      says: On Shaw's chronology Amenhotep III reigned 1390–1352 BCE and Amenhotep IV (Akhenaten)
+        1352–1336 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+cite:
+  - id: mitanni-hatti
+    says: Tushratta writes that the whole army of the Hittites marched against his land.
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. III: Tushratta's first letter"
+notes: "The letters are undated but for a few dockets. Their reigns follow Shaw's chronology (The
+  Oxford History of Ancient Egypt, 2000): Amenhotep III 1390–1352 BCE and Amenhotep IV (Akhenaten)
+  1352–1336 BCE. Niebuhr's 1903 dates (the archive about 1400 B.C., Akhetaten built about 1380 B.C.)
+  follow an older, higher scheme."

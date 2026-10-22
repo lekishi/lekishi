@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Napata, the royal seat of the Candace in Strabo's account, which Petronius took and razed. The
+  Res Gestae calls it Nabata, "next to Meroë"; Pliny calls it the one town that still survived in Nero's
+  time.
+types: [capital]
+names:
+  - form: Νάπατα
+    lang: grc
+    script: Grek
+    roman: Napata
+    scheme: other
+    cite:
+      - id: napata-name
+        says: Strabo names Napata as the royal seat of Candace, where her son was.
+        source: strabo-geography
+        at: XVII.1.54 (C819–821)
+        quote:
+          afterwards advanced to Napata. This was the royal seat of Candace; and her son was there, but
+          she herself was in a neighbouring stronghold.
+  - form: Nabata
+    lang: la
+    script: Latn
+    note: The Res Gestae's form.
+    cite:
+      - id: napata-res-gestae-name
+        says: The Res Gestae records that Ethiopia was penetrated as far as the town of Nabata, next to Meroë.
+        source: res-gestae-divi-augusti
+        at: "26.5"
+        quote: Ethiopia was penetrated as far as the town of Nabata, which is next to Meroë.
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [31.85374, 18.56595]
+    notes:
+      Pleiades' representative point for Napata near Jebel Barkal and modern Karima. The point marks
+      the city, not the palace or the stronghold Strabo mentions.
+    cite:
+      - id: napata-identification
+        says:
+          Pleiades identifies Napata with the city on the west bank of the Nile below Jebel Barkal and
+          gives this representative point (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 805634 (reprLatLong, version 17), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "805634"
+    url: https://pleiades.stoa.org/places/805634
+    license: CC-BY-3.0

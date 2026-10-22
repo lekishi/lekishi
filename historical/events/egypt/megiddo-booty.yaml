@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The booty of Megiddo: 340 living prisoners and 83 hands; 2,041 mares, 191 foals and 6 stallions;
+  924 chariots, two of them gold-wrought, of the foe and of the chief of Megiddo; their bronze armour,
+  200 suits of armour, 502 bows; and 1,929 large cattle, 2,000 small cattle and 20,500 white small cattle."
+types: [exchange]
+part_of:
+  - megiddo-campaign
+date:
+  value: 1457 BCE..1456 BCE
+  mode: window
+  calendar: regnal
+  as_written: after the siege of Megiddo
+  cite:
+    - id: megiddo-booty-shaw
+      says: On Shaw's chronology Thutmose III reigned 1479–1425 BCE, so his year 23 falls in
+        1457–1456 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+places:
+  - place: megiddo
+    role: site
+participants:
+  - actor: egypt-new-kingdom
+    role: participant
+  - actor: chief-of-megiddo
+    role: subject
+cite:
+  - id: booty-basis
+    says: The annals list the prisoners, horses, chariots, armour and bows taken at Megiddo.
+    source: breasted-ancient-records
+    at: "II, Annals of Thutmose III, first campaign: the booty of Megiddo"
+    quote:
+      340 living prisoners; 83 hands; 2,041 mares; 191 foals; 6 stallions; a chariot, wrought with
+      gold, its pole of gold, belonging to that foe; a beautiful chariot, wrought with gold, belonging to
+      the chief of Megiddo; 892 chariots of his wretched army; total, 924 chariots
+  - id: booty-cattle
+    says: The annals list the cattle the army took.
+    role: supporting
+    source: breasted-ancient-records
+    at: "II, Annals of Thutmose III, first campaign: the booty of Megiddo (cattle)"
+    quote:
+      Behold, the army of his majesty took 1,929 large cattle, 2,000 small cattle, 20,500 white small
+      cattle.
+notes: The counts are the annals' own and are reported as such, not as verified numbers. The annals
+  date by regnal year and the civil calendar. The BCE years follow Shaw's chronology (The Oxford
+  History of Ancient Egypt, 2000), which puts the accession of Thutmose III in 1479 BCE, so year 22
+  falls in 1458–1457 BCE and year 23 in 1457–1456 BCE. Breasted's own 1906 table follows an older,
+  higher chronology.

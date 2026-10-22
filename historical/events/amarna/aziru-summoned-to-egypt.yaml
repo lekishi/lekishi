@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The king sends the messenger Hani to Aziru with demands; Aziru vanishes over the hills, protests
+  his loyalty, and is at last forced to go to Egypt, where he is held.
+types: [mission]
+date:
+  value: 1352 BCE..1336 BCE
+  mode: window
+  calendar: regnal
+  as_written: the reign of Amenophis IV
+  cite:
+    - id: aziru-summoned-to-egypt-shaw
+      says: On Shaw's chronology Amenhotep IV (Akhenaten) reigned 1352–1336 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+participants:
+  - actor: hani-messenger
+    role: leader
+  - actor: aziru
+    role: subject
+  - actor: akhenaten
+    role: participant
+cite:
+  - id: hani-basis
+    says: Niebuhr says Aziru vanished when Hani arrived.
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. IV: Hani and Aziru"
+  - id: aziru-reply
+    says: Aziru replies that he is the king's servant.
+    role: supporting
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. IV: Aziru's reply"
+  - id: aziru-arrest
+    says: Niebuhr says Aziru at last went to Egypt and was held under provisional arrest.
+    role: supporting
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. IV: Aziru in Egypt"
+notes: "Niebuhr does not name the king; the window is Akhenaten's. The letters are undated but for a
+  few dockets. Their reigns follow Shaw's chronology (The Oxford History of Ancient Egypt, 2000):
+  Amenhotep III 1390–1352 BCE and Amenhotep IV (Akhenaten) 1352–1336 BCE. Niebuhr's 1903 dates (the
+  archive about 1400 B.C., Akhetaten built about 1380 B.C.) follow an older, higher scheme."

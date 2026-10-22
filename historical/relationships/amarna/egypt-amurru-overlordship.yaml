@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Egypt's overlordship of Amurru, which Abdi-Ashirta and Aziru served on paper while taking their
+  neighbours' lands, until Aziru was summoned to Egypt.
+types: [rulership]
+from: egypt-new-kingdom
+to: amurru-kingdom
+date:
+  value: 1390 BCE..1336 BCE
+  mode: window
+  calendar: regnal
+  as_written: the reigns of Amenophis III and IV
+  cite:
+    - id: egypt-amurru-overlordship-shaw
+      says: On Shaw's chronology Amenhotep III reigned 1390–1352 BCE and Amenhotep IV (Akhenaten)
+        1352–1336 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+cite:
+  - id: amurru-overlordship
+    says: Aziru writes to the king as his servant.
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. IV: Aziru's reply"
+notes: "The letters are undated but for a few dockets. Their reigns follow Shaw's chronology (The
+  Oxford History of Ancient Egypt, 2000): Amenhotep III 1390–1352 BCE and Amenhotep IV (Akhenaten)
+  1352–1336 BCE. Niebuhr's 1903 dates (the archive about 1400 B.C., Akhetaten built about 1380 B.C.)
+  follow an older, higher scheme."

@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Abydos in Upper Egypt, the cult place of Osiris, where Ramesses II's temple carries reliefs of
+  the battle of Kadesh.
+types: [religious_site]
+names:
+  - form: Abydos
+    lang: en
+    script: Latn
+    note: Greek Abydos; Egyptian Abdju. The id names Egypt to set it apart from Abydos on the Hellespont.
+    cite:
+      - id: abydos-egypt-name
+        says: Garstang reproduces a Kadesh relief from the temple of Rameses II at Abydos.
+        source: garstang-land-of-hittites
+        at: "ch. VI: pl. LXXXVIII (facing p. 344)"
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [31.91762, 26.1851]
+    notes: Pleiades' point for the ancient city and cemetery; the temple of Ramesses II lies within it.
+    cite:
+      - id: abydos-egypt-identification
+        says:
+          Pleiades identifies Abydos (Ebot), the Egyptian cult city of Osiris, and gives this representative
+          point (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 756512 (reprLatLong, version 18), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "756512"
+    url: https://pleiades.stoa.org/places/756512
+    license: CC-BY-3.0

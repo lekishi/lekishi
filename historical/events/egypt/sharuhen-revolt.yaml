@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Before the campaign, by the annals' account, the Asiatics have fallen into strife and the people
+  of Sharuhen, from Yeraza to "the marshes of the earth", have begun to revolt against the king.
+types: [occurrence]
+date:
+  value: 1458 BCE..1457 BCE
+  mode: window
+  calendar: regnal
+  as_written: Now, at that period (before year 22, IV Peret 25)
+  cite:
+    - id: sharuhen-revolt-shaw
+      says: On Shaw's chronology Thutmose III reigned 1479–1425 BCE, so his year 22 falls in
+        1458–1457 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+places:
+  - place: sharuhen
+    role: site
+  - place: yeraza
+    role: context
+participants:
+  - actor: egypt-new-kingdom
+    role: subject
+cite:
+  - id: sharuhen-revolt-basis
+    says: The annals describe the disagreement among the Asiatics and the revolt from Sharuhen.
+    source: breasted-ancient-records
+    at: "II, Annals of Thutmose III, first campaign: the revolt (Sharuhen)"
+    quote:
+      Now, at that period the Asiatics had fallen into disagreement, each man fighting against his
+      neighbor. Now, it happened that the tribes - the people, who were there in the city of Sharuhen; behold,
+      from Yeraza to the marshes of the earth, they had begun to revolt against his majesty.
+notes: The passage is damaged and Breasted's rendering is tentative. The annals date by regnal year
+  and the civil calendar. The BCE years follow Shaw's chronology (The Oxford History of Ancient
+  Egypt, 2000), which puts the accession of Thutmose III in 1479 BCE, so year 22 falls in 1458–1457
+  BCE and year 23 in 1457–1456 BCE. Breasted's own 1906 table follows an older, higher chronology.

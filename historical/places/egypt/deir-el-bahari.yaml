@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Deir el-Bahari on the west bank at Thebes, where Hatshepsut built her funerary temple, carved
+  the story of the Punt expedition on its middle colonnade, and planted the incense trees in pits cut
+  in the rock.
+types: [religious_site]
+names:
+  - form: Deîr el-Baharî
+    lang: ar
+    script: Latn
+    note: Maspero's transliteration of the Arabic name of the site.
+    cite:
+      - id: deir-el-bahari-name
+        says: Maspero says the incense trees were planted at Deîr el-Baharî.
+        source: maspero-history-of-egypt
+        at: "vol. IV, ch. III: the incense garden"
+        quote:
+          The trees were planted at Deîr el-Baharî, where a sacred garden was prepared for them, square
+          trenches being cut in the rock and filled with earth, in which the sycomore, by frequent watering,
+          came to flourish well.
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [32.6075, 25.73755]
+    notes: Pleiades' point for the whole bay of temples; Hatshepsut's temple is the largest of them.
+    cite:
+      - id: deir-el-bahari-identification
+        says:
+          Pleiades identifies Deir el-Bahari, the complex of mortuary temples and tombs on the Theban
+          west bank, and gives this representative point (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 512504673 (reprLatLong, version 2), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "512504673"
+    url: https://pleiades.stoa.org/places/512504673
+    license: CC-BY-3.0

@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The land of the Ilim, west of the Bab el-Mandeb, which the Punt fleet visited on the way and
+  whose people added gold, ivory, skins, leopards and a giraffe to its cargo.
+types: [region]
+names:
+  - form: Ilîm
+    lang: egy
+    script: Latn
+    note: Maspero's transliteration.
+    cite:
+      - id: ilim-name
+        says: Maspero says the fleet touched at the country of the Ilîm west of the Bab el-Mandeb.
+        source: maspero-history-of-egypt
+        at: "vol. IV, ch. III: the voyage"
+        quote:
+          it touched at the country of the Ilîm which lay to the west of the Bab el-Mandeb, went safely
+          through the Straits, and landed at last in the Land of Perfumes on the Somali coast.
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      Maspero places the Ilim only "to the west of the Bab el-Mandeb", and no gazetteer read for this
+      chapter locates them, so the record asserts no coordinate.
+    cite:
+      - id: ilim-unlocated
+        says: Maspero places the Ilîm only west of the Bab el-Mandeb.
+        source: maspero-history-of-egypt
+        at: "vol. IV, ch. III: the voyage"
+        quote:
+          it touched at the country of the Ilîm which lay to the west of the Bab el-Mandeb, went safely
+          through the Straits, and landed at last in the Land of Perfumes on the Somali coast.

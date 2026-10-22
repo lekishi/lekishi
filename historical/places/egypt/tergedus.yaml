@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Tergedus, a stage on the road Nero's praetorians measured from Syene to Meroë. Pliny gives only
+  its distance from the stage before; no gazetteer read for this chapter locates it.
+types: [route_node]
+names:
+  - form: Tergedus
+    lang: la
+    script: Latn
+    cite:
+      - id: tergedus-name
+        says:
+          Pliny gives Tergedus as the stage one hundred and six miles beyond Pittara, after which the
+          cynocephalus was seen.
+        source: pliny-natural-history
+        at: VI.35 (§184)
+        quote:
+          to the country of the Evonymitæ, the first region of Æthiopia, one hundred and twenty, to Acina
+          fifty-four, to Pittara twenty-five, and to Tergedus one hundred and six
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      Pliny gives Tergedus only as a distance on the praetorians' itinerary. Pleiades has no record
+      of the name in the 2026-10-21 dump, so the record asserts no coordinate, and a line drawn through
+      this stage would claim a path the sources do not give.
+    cite:
+      - id: tergedus-unlocated
+        says: Pliny records Tergedus as a stage of the itinerary without any other description.
+        source: pliny-natural-history
+        at: VI.35 (§184)

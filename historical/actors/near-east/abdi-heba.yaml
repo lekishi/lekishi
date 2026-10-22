@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: Abdi-Heba, the Egyptian king's man in Jerusalem, who complained of Milkilu, Tagi and the Habiru.
+types: [person]
+names:
+  - form: Abdikheba
+    lang: akk
+    script: Latn
+    note: Niebuhr's form.
+    cite:
+      - id: abdi-heba-name
+        says: Niebuhr says Jerusalem was under a royal captain named Abdikheba.
+        source: niebuhr-tell-el-amarna-period
+        at: "ch. IV: Jerusalem"
+  - form: Abdi-Heba
+    lang: en
+    script: Latn
+    role: alternate
+    note: The modern form.
+roles:
+  - role: ruler

@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Milkilu, a chief in the coastal plain near Gath, Abdi-Heba's opponent, who complained of the
+  Egyptian official Yanhamu.
+types: [person]
+names:
+  - form: Milki-El
+    lang: akk
+    script: Latn
+    note: Niebuhr's form.
+    cite:
+      - id: milkilu-name
+        says: Niebuhr names Milki-El and his father-in-law Tagi as Abdikheba's main opponents.
+        source: niebuhr-tell-el-amarna-period
+        at: "ch. IV: Milki-El and Tagi"
+  - form: Milkilu
+    lang: en
+    script: Latn
+    role: alternate
+    note: The modern form.
+roles:
+  - role: ruler

@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The first campaign of Thutmose III into Canaan, from Tharu by Gaza and Yehem through the Aruna
+  pass to the battle and siege of Megiddo against the coalition of the chief of Kadesh.
+types: [campaign]
+date:
+  value: 1458 BCE..1456 BCE
+  mode: window
+  calendar: regnal
+  as_written: year 22, IV Peret 25 – after year 23, I Shemu 21
+  cite:
+    - id: megiddo-campaign-shaw
+      says: On Shaw's chronology Thutmose III reigned 1479–1425 BCE, so his year 22 falls in
+        1458–1457 BCE and his year 23 in 1457–1456 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+places:
+  - place: tjaru
+    role: start
+  - place: megiddo
+    role: end
+participants:
+  - actor: thutmose-iii
+    role: leader
+  - actor: egypt-new-kingdom
+    role: participant
+  - actor: chief-of-kadesh
+    role: participant
+  - actor: megiddo-coalition
+    role: participant
+cite:
+  - id: campaign-basis
+    says: The annals call it the first victorious expedition to extend the boundaries of Egypt.
+    source: breasted-ancient-records
+    at: "II, Annals of Thutmose III, first campaign: Year 22, IV Peret 25 (Tharu)"
+    quote:
+      Year 22, fourth month of the second season, on the twenty-fifth day his majesty was in Tharu
+      on the first victorious expedition to extend the boundaries of Egypt with might.
+notes: An umbrella for the dated stops; it draws no route. The annals date by regnal year and the
+  civil calendar. The BCE years follow Shaw's chronology (The Oxford History of Ancient Egypt,
+  2000), which puts the accession of Thutmose III in 1479 BCE, so year 22 falls in 1458–1457 BCE and
+  year 23 in 1457–1456 BCE. Breasted's own 1906 table follows an older, higher chronology.

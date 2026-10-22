@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Early in his reign, by his own letter, Tushratta avenges his murdered brother and destroys a
+  Hittite army that invaded Mitanni, sending Amenhotep III a chariot, two horses, a youth and a maiden
+  from the booty.
+types: [campaign]
+date:
+  value: 1390 BCE..1352 BCE
+  mode: window
+  calendar: regnal
+  as_written: the reign of Amenophis III
+  cite:
+    - id: tushratta-defeats-hittites-shaw
+      says: On Shaw's chronology Amenhotep III reigned 1390–1352 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+participants:
+  - actor: tushratta
+    role: leader
+  - actor: mitanni
+    role: participant
+  - actor: hatti
+    role: participant
+cite:
+  - id: tushratta-hittites
+    says: Tushratta writes that Teshup delivered the Hittite army into his hand and sends booty.
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. III: Tushratta's first letter"
+  - id: tushratta-accession
+    says: Tushratta writes that he came to the throne young, after Pirhi had slain its lord.
+    role: supporting
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. III: Tushratta's first letter (the accession)"
+notes: "A king's own claim in a letter meant to win favour. The letters are undated but for a few
+  dockets. Their reigns follow Shaw's chronology (The Oxford History of Ancient Egypt, 2000):
+  Amenhotep III 1390–1352 BCE and Amenhotep IV (Akhenaten) 1352–1336 BCE. Niebuhr's 1903 dates (the
+  archive about 1400 B.C., Akhetaten built about 1380 B.C.) follow an older, higher scheme."

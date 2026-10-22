@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Aziru's dealings with the Hittites, which the Egyptian court suspected and he explained away
+  as defence against Hittite invasions.
+types: [contact]
+from: aziru
+to: hatti
+date:
+  value: 1352 BCE..1336 BCE
+  mode: window
+  calendar: regnal
+  as_written: the reign of Amenophis IV
+  cite:
+    - id: aziru-hatti-contact-shaw
+      says: On Shaw's chronology Amenhotep IV (Akhenaten) reigned 1352–1336 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+cite:
+  - id: aziru-hatti
+    says: Niebuhr says Aziru conspired readily with the Hittite foes of the Court.
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. IV: Aziru and the Hittites"
+notes: "The letters are undated but for a few dockets. Their reigns follow Shaw's chronology (The
+  Oxford History of Ancient Egypt, 2000): Amenhotep III 1390–1352 BCE and Amenhotep IV (Akhenaten)
+  1352–1336 BCE. Niebuhr's 1903 dates (the archive about 1400 B.C., Akhetaten built about 1380 B.C.)
+  follow an older, higher scheme."

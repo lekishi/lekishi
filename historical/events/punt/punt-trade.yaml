@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The Egyptians pitch a guarded tent for the barter and settle terms at a banquet. Over several
+  days they buy ivory, gold, ebony, cassia, myrrh, baboons and monkeys, greyhounds, leopard skins, cattle,
+  slaves and thirty-one living incense trees in baskets.
+types: [exchange]
+part_of:
+  - punt-expedition
+date:
+  value: 1473 BCE..1458 BCE
+  mode: window
+  calendar: regnal
+  as_written: later on, in the queen's reign
+  cite:
+    - id: punt-trade-shaw
+      says: On Shaw's chronology Hatshepsut reigned 1473–1458 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+places:
+  - place: punt
+    role: site
+participants:
+  - actor: punt-royal-envoy
+    role: leader
+  - actor: people-of-punt
+    role: participant
+  - actor: parihu
+    role: participant
+cite:
+  - id: trade-goods
+    says: Maspero lists the Egyptian purchases, among them thirty-one incense trees.
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the barter"
+    quote:
+      "The Egyptian purchases comprised the most varied objects: ivory tusks, gold, ebony, cassia,
+      myrrh, cynocephali and green monkeys, greyhounds, leopard skins, large oxen, slaves, and last, but
+      not least, thirty-one incense trees, with their roots surrounded by a ball of earth and placed in
+      large baskets."
+  - id: trade-tent
+    says: Maspero says the goods were laid out in a tent surrounded by troops.
+    role: supporting
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the barter (the tent)"
+    quote:
+      The Egyptians pitched a tent, in which they placed the objects of barter with which they were
+      provided, and to prevent these from being too great a temptation to the natives, they surrounded the
+      tent with a line of troops.
+  - id: trade-banquet
+    says: Maspero says the terms were arranged at a banquet.
+    role: supporting
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the barter (the banquet)"
+    quote:
+      The main conditions of the exchange were arranged at a banquet, in which they spread before the
+      barbarians a sumptuous display of Egyptian delicacies
+notes: "The list is the reliefs' and is reported as such. Maspero gives no regnal year for the
+  expedition, only that Hatshepsut reigned at least eight years after it. The window is her reign on
+  Shaw's chronology (The Oxford History of Ancient Egypt, 2000), 1473–1458 BCE."

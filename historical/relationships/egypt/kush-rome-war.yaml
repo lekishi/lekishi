@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "The war between Kush and Rome on the Nile frontier: the Kushite attack on Syene, Petronius's
+  campaign to Napata, and the Candace's attack on Premnis. The relationship asserts no continuous fighting
+  between the recorded acts."
+types: [conflict]
+from: kush-kingdom
+to: roman-empire
+directionality: mutual
+cite:
+  - id: kush-rome-war-basis
+    says: Strabo and Dio record the Ethiopians' attack and Petronius's campaign against them.
+    sources:
+      - source: strabo-geography
+        at: XVII.1.54 (C819–821)
+        quote:
+          The Ethiopians, emboldened in consequence of a part of the forces in Egypt being drawn off
+          by Ælius Gallus, who was engaged in war with the Arabs, invaded the Thebaïs
+      - source: cassius-dio
+        at: LIV.5 (B.C. 22)
+        quote:
+          On learning that Gaius Petronius, the governor of Egypt, was approaching and somewhere near,
+          they hastily retreated hoping to make good their escape.

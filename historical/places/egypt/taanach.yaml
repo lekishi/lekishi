@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Taanach, south-east of Megiddo, where one of the two easier roads the officers proposed came
+  out, and where the southern wing of the enemy stood.
+types: [settlement]
+names:
+  - form: Taanach
+    lang: egy
+    script: Latn
+    cite:
+      - id: taanach-name
+        says:
+          The officers name a road that comes forth at Taanach, and the annals place the enemy's southern
+          wing there.
+        source: breasted-ancient-records
+        at: "II, Annals of Thutmose III, first campaign: the council at Yehem (Taanach)"
+        quote:
+          "There are yet two other roads: one road, behold, it will carry us, for it comes forth at Taanach,
+          the other, behold, it will bring us upon the way noth of Zefti, so that we shall come out to the
+          north of Megiddo."
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [35.21912, 32.52153]
+    notes:
+      The point is Wikidata's coordinate for the tell of Taanach, which keeps its name in the Arabic
+      Ti'innik.
+    cite:
+      - id: taanach-identification
+        says: Wikidata records Taanach with this coordinate at the tell of Tell Ti'innik (CC0).
+        basis: interpretation
+        attributed_to: Wikidata contributors
+        source: wikidata
+        at: Q2920206 (P625), revision 2516922483
+external_ids:
+  - system: wikidata
+    id: Q2920206
+    url: https://www.wikidata.org/wiki/Q2920206
+    license: CC0-1.0

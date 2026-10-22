@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Contemplating, among his other wars, an expedition against Ethiopia, Nero sends praetorian troops
+  under a tribune up the Nile to enquire. They bring back word that they found nothing but desert.
+types: [mission]
+date:
+  value: 54-10..68-06
+  mode: window
+  calendar: julian
+  as_written:
+    "Pliny: sent by the Emperor Nero … when he was contemplating an expedition against Æthiopia
+    (no year)"
+  cite:
+    - id: nero-praetorians-bound
+      says:
+        Pliny says only that Nero sent the praetorians, so the mission falls within Nero's reign,
+        October 54 to June 68 CE. Seneca's earlier bound belongs to his centurions, whom the sources do
+        not identify with these praetorians.
+      source: pliny-natural-history
+      at: VI.35 (§181)
+      quote: the prætorian troops that were sent by the Emperor Nero under the command of a tribune
+places:
+  - place: syene
+    role: start
+    note: The point from which the praetorians' distances run.
+  - place: meroe
+    role: end
+participants:
+  - actor: nero
+    role: leader
+    note: Sent the mission; did not travel.
+  - actor: roman-empire
+    role: participant
+cite:
+  - id: nero-praetorians
+    says: Pliny records the praetorians Nero sent under a tribune and their report of deserts.
+    source: pliny-natural-history
+    at: VI.35 (§181)
+    quote:
+      at all events, the prætorian troops that were sent by the Emperor Nero under the command of a
+      tribune, for the purposes of enquiry, when, among his other wars, he was contemplating an expedition
+      against Æthiopia, brought back word that they had met with nothing but deserts on their route.
+notes:
+  Pliny's praetorians and Seneca's two centurions may be one mission or two; the sources do not say,
+  so the chapter keeps them as separate accounts and merges nothing. Dio's epitome, which tells Nero sending
+  spies to the Ethiopians in 66–67 CE, is a third account kept beside them.

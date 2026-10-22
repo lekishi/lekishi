@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The huge marshes that Nero's two centurions reported reaching far up the Nile, where the river
+  was so entangled with vegetation that only a one-man boat could pass. Clarke's 1910 note identifies
+  them with the sudd of the White Nile; the record keeps that as an interpretation and asserts no coordinate.
+types: [region]
+names:
+  - form: the huge marshes
+    lang: en
+    script: Latn
+    note: Clarke's rendering of the centurions' words as Seneca reports them; the Latin is immensas paludes.
+    cite:
+      - id: nile-marshes-name
+        says:
+          Seneca reports the centurions saying they came to huge marshes whose limit even the natives
+          did not know.
+        source: seneca-natural-questions
+        at: VI.8.3–4
+        quote:
+          “We came indeed,” I give their own words, “to huge marshes, the limit of which even the natives
+          did not know, and no one else could hope to know; so completely was the river entangled with vegetable
+          growth
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      The marshes are not located by the source. Clarke's note reads them as the sudd of the White
+      Nile in South Sudan, a vast region; no point or extent is asserted, because the account gives no distance
+      and the sudd's extent in the first century is not known from it.
+    cite:
+      - id: nile-marshes-sudd
+        says: The translator's note identifies the marshes as the so-called sudd.
+        source: seneca-natural-questions
+        at: VI.8.4, note 80
+        quote: The so-called “sudd.”

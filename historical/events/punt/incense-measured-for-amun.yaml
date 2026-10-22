@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Hatshepsut has the heaps of fresh resin measured for Amun with a bushel of electrum, the god
+  Thoth noting the quantities, and prepares an unguent from it with her own hands.
+types: [occurrence]
+part_of:
+  - punt-expedition
+date:
+  value: 1473 BCE..1458 BCE
+  mode: window
+  calendar: regnal
+  as_written: after the return of the fleet
+  cite:
+    - id: incense-measured-for-amun-shaw
+      says: On Shaw's chronology Hatshepsut reigned 1473–1458 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+places:
+  - place: karnak
+    role: context
+participants:
+  - actor: hatshepsut
+    role: leader
+cite:
+  - id: measured-basis
+    says: Maspero says the queen gave a bushel of electrum to measure the gum for Amun.
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the measuring of the incense"
+    quote:
+      Hâtshopsîtû gave a bushel made of electrum to gauge the mass of gum, it being the first time
+      that they had the joy of measuring the perfumes for Amon, lord of Karnak
+notes: "The scene is ritual: Thoth writing the amounts is the inscription's. Maspero gives no regnal
+  year for the expedition, only that Hatshepsut reigned at least eight years after it. The window is
+  her reign on Shaw's chronology (The Oxford History of Ancient Egypt, 2000), 1473–1458 BCE."

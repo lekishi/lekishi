@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  An Egyptian embassy is received at the Hittite capital during the treaty negotiations, which,
+  Garstang says, took many months.
+types: [mission]
+date:
+  value: 1259 BCE..1258 BCE
+  mode: window
+  calendar: regnal
+  as_written: about year 21 of Ramesses II
+  cite:
+    - id: egyptian-embassy-at-hattusa-shaw
+      says: On Shaw's chronology Ramesses II reigned 1279–1213 BCE, so his year 21 falls in
+        1259–1258 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Nineteenth Dynasty"
+places:
+  - place: hattusa
+    role: end
+participants:
+  - actor: egypt-new-kingdom
+    role: participant
+  - actor: hattusili-iii
+    role: host
+cite:
+  - id: egyptian-embassy-basis
+    says:
+      Garstang infers an exchange of copies from the reception of an Egyptian embassy in the Hittite
+      capital.
+    source: garstang-land-of-hittites
+    at: "ch. VI, p. 347: the treaty, fn. 817"
+notes: "Garstang does not name the envoys. Ramesses II's regnal years are converted on Shaw's
+  chronology (The Oxford History of Ancient Egypt, 2000), which puts his reign at 1279–1213 BCE;
+  each regnal year spans two BCE years. Garstang's 1910 dates (Kadesh 1288 B.C., the treaty about
+  1271 B.C.) and Sayce's 1890 dates (1383 and 1354 B.C.) follow older schemes."

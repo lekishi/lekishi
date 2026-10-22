@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Villagers digging for marl near the ruins of Akhetaten find wooden chests of clay tablets. Some
+  are broken up for sale; about eighty go to the British Museum, sixty stay at Boulaq and about 180 go
+  to Berlin.
+types: [other]
+date:
+  value: "1888"
+  calendar: gregorian
+  as_written: In the beginning of 1888
+  cite:
+    - id: tablets-found-date
+      says: Niebuhr dates the find to the beginning of 1888.
+      source: niebuhr-tell-el-amarna-period
+      at: "ch. I: the find"
+places:
+  - place: akhetaten
+    role: site
+cite:
+  - id: tablets-found-basis
+    says: Niebuhr tells of the fellahin finding the chests of tablets.
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. I: the find"
+  - id: tablets-dispersal
+    says: Niebuhr gives how the tablets were divided between London, Boulaq and Berlin.
+    role: supporting
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. I: the dispersal"
+notes:
+  A modern event, kept because it is how the correspondence became known. Later accounts often put
+  the find in late 1887; the record keeps Niebuhr's date.

@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "Near Kadesh two Bedouin are captured and tell Ramesses II that the Hittite king is far off in
+  the north at Aleppo. The story is false: the Hittite army is lying hidden close by."
+types: [occurrence]
+part_of:
+  - battle-of-kadesh
+date:
+  value: 1275 BCE..1274 BCE
+  mode: window
+  calendar: regnal
+  as_written: year 5 of Ramesses II
+  cite:
+    - id: kadesh-bedouin-spies-shaw
+      says: On Shaw's chronology Ramesses II reigned 1279–1213 BCE, so his year 5 falls in 1275–1274
+        BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Nineteenth Dynasty"
+places:
+  - place: kadesh
+    role: site
+  - place: aleppo
+    role: context
+    note: Where the spies said the Hittite king was encamped.
+participants:
+  - actor: ramesses-ii
+    role: subject
+cite:
+  - id: spies-basis
+    says: Sayce tells of the two Bedouin spies and their false report.
+    source: sayce-hittites
+    at: "ch. II: Kadesh, the spies"
+    quote:
+      There two Beduin spies were captured, who averred that the Hittite king was far away in the north
+      with his forces, encamped at Aleppo. But the intelligence was false.
+notes: "Sayce takes the story from the Egyptian poem and the reliefs, which say the Bedouin were
+  sent by the Hittite king to mislead Pharaoh. Ramesses II's regnal years are converted on Shaw's
+  chronology (The Oxford History of Ancient Egypt, 2000), which puts his reign at 1279–1213 BCE;
+  each regnal year spans two BCE years. Garstang's 1910 dates (Kadesh 1288 B.C., the treaty about
+  1271 B.C.) and Sayce's 1890 dates (1383 and 1354 B.C.) follow older schemes."

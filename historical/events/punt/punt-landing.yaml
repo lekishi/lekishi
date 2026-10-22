@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The fleet sails up a river beyond the tide and anchors before a village of round huts on piles
+  among sycomores and palms. The envoy lands with eight soldiers and an officer and lays out bracelets,
+  necklaces, a dagger, an axe and beads on a low table.
+types: [occurrence]
+part_of:
+  - punt-expedition
+date:
+  value: 1473 BCE..1458 BCE
+  mode: window
+  calendar: regnal
+  as_written: later on, in the queen's reign
+  cite:
+    - id: punt-landing-shaw
+      says: On Shaw's chronology Hatshepsut reigned 1473–1458 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+places:
+  - place: punt
+    role: site
+  - place: elephant-river
+    role: context
+    note: Maspero's proposed landing place.
+participants:
+  - actor: punt-royal-envoy
+    role: leader
+  - actor: people-of-punt
+    role: participant
+cite:
+  - id: landing-basis
+    says: Maspero says the vessels sailed up the river and anchored before a village.
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the landing"
+    quote:
+      The Egyptian vessels sailed up the river till they reached a place beyond the influence of the
+      tide, and then dropped anchor in front of a village scattered along a bank fringed with sycomores
+      and palms.
+  - id: landing-envoy
+    says: Maspero says the envoy landed with an escort and laid out presents.
+    role: supporting
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the landing (the envoy)"
+    quote:
+      The royal envoy landed under an escort of eight soldiers and an officer, but, to prove his pacific
+      intentions, he spread out upon a low table a variety of presents
+  - id: landing-river
+    says: Maspero identifies the river with the Elephant River near Ras el-Fîl.
+    role: supporting
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the landing place"
+    quote:
+      Since then I have sought to identify the landing-place of the Egyptians with the most important
+      of the creeks mentioned by the Græco-Roman merchants as accessible for their vessels, viz. that which
+      they called the Elephant River, near to the present Ras el-Fîl.
+notes: "Maspero gives no regnal year for the expedition, only that Hatshepsut reigned at least eight
+  years after it. The window is her reign on Shaw's chronology (The Oxford History of Ancient Egypt,
+  2000), 1473–1458 BCE."

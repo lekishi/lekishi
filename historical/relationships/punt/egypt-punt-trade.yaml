@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Trade between Egypt and Punt in incense, myrrh, ebony, ivory, gold and animals, renewed directly
+  by Hatshepsut's expedition after centuries in which the goods came through intermediaries.
+types: [trade]
+from: egypt-new-kingdom
+to: people-of-punt
+directionality: mutual
+date:
+  value: 1473 BCE..1458 BCE
+  mode: window
+  calendar: regnal
+  as_written: the queen's reign
+  cite:
+    - id: egypt-punt-trade-shaw
+      says: On Shaw's chronology Hatshepsut reigned 1473–1458 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+cite:
+  - id: egypt-punt-trade-basis
+    says: Maspero says the relations with the aromatic regions had been suspended for centuries.
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the incense trade"
+    quote:
+      But the relations maintained in former times with the people of these aromatic regions had been
+      suspended for centuries.
+notes: "The relationship covers the trade the expedition renewed; the older contacts of the Old and
+  Middle Kingdoms are not dated here. Maspero gives no regnal year for the expedition, only that
+  Hatshepsut reigned at least eight years after it. The window is her reign on Shaw's chronology
+  (The Oxford History of Ancient Egypt, 2000), 1473–1458 BCE."

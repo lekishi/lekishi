@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The Hittite dead at Kadesh, by Garstang's reading of the Egyptian record: two princes of the
+  royal blood, several chiefs, soldiers and charioteers, and the Kataonian chief, while the king of Aleppo
+  is drowned crossing the moat and marshes around Kadesh."
+types: [occurrence]
+part_of:
+  - battle-of-kadesh
+date:
+  value: 1275 BCE..1274 BCE
+  mode: window
+  calendar: regnal
+  as_written: year 5 of Ramesses II
+  cite:
+    - id: hittite-losses-at-kadesh-shaw
+      says: On Shaw's chronology Ramesses II reigned 1279–1213 BCE, so his year 5 falls in 1275–1274
+        BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Nineteenth Dynasty"
+places:
+  - place: kadesh
+    role: site
+participants:
+  - actor: hatti
+    role: subject
+  - actor: hittite-allies-at-kadesh
+    role: subject
+cite:
+  - id: losses-basis
+    says:
+      Garstang lists the Hittite princes and chiefs among the slain and says the king of Aleppo drowned
+      in the moat.
+    source: garstang-land-of-hittites
+    at: "ch. VI, pp. 343–346: the result of the battle"
+notes: "Garstang does not quote the reliefs' captions he draws on; the record reports his summary.
+  Ramesses II's regnal years are converted on Shaw's chronology (The Oxford History of Ancient
+  Egypt, 2000), which puts his reign at 1279–1213 BCE; each regnal year spans two BCE years.
+  Garstang's 1910 dates (Kadesh 1288 B.C., the treaty about 1271 B.C.) and Sayce's 1890 dates (1383
+  and 1354 B.C.) follow older schemes."

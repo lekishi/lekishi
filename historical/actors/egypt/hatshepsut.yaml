@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Hatshepsut (Maatkare), daughter of Thutmose I, who ruled Egypt as king beside the young Thutmose
+  III, built her temple at Deir el-Bahari, and sent the expedition to Punt.
+types: [person]
+names:
+  - form: Hâtshopsîtû
+    lang: egy
+    script: Latn
+    note: Maspero's transliteration.
+    cite:
+      - id: hatshepsut-name
+        says: Maspero says Hâtshopsîtû chose five galleys for Pûanît.
+        source: maspero-history-of-egypt
+        at: "vol. IV, ch. III: the fleet"
+        quote:
+          Hâtshopsîtû chose out five well-built galleys, and manned them with picked crews. She caused
+          them to be laden with such merchandise as would be most attractive to the barbarians, and placing
+          the vessels under the command of a royal envoy
+  - form: Hatshepsut
+    lang: en
+    script: Latn
+    role: alternate
+    note: The usual modern form.
+roles:
+  - role: ruler
+    note: King of Egypt, counting her years with those of Thutmose III.

@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "Egypt and Mitanni bound by marriages: the daughters of Artatama, Shuttarna and Tushratta sent
+  to the Egyptian harem, until the quarrel with Akhenaten."
+types: [alliance]
+from: mitanni
+to: egypt-new-kingdom
+directionality: mutual
+date:
+  value: 1390 BCE..1336 BCE
+  mode: window
+  calendar: regnal
+  as_written: the reigns of Amenophis III and IV
+  cite:
+    - id: egypt-mitanni-alliance-shaw
+      says: On Shaw's chronology Amenhotep III reigned 1390–1352 BCE and Amenhotep IV (Akhenaten)
+        1352–1336 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+cite:
+  - id: mitanni-alliance
+    says: Tushratta writes that his fathers kept fast friendship with the Egyptian king's fathers.
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. III: Letter VIII"
+notes: "The letters are undated but for a few dockets. Their reigns follow Shaw's chronology (The
+  Oxford History of Ancient Egypt, 2000): Amenhotep III 1390–1352 BCE and Amenhotep IV (Akhenaten)
+  1352–1336 BCE. Niebuhr's 1903 dates (the archive about 1400 B.C., Akhetaten built about 1380 B.C.)
+  follow an older, higher scheme."

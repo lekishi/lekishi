@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  The Candace, queen of the Ethiopians in Strabo's time, "a masculine woman, who had lost an eye",
+  whose generals Petronius captured, whose royal seat Napata he razed, and whose envoys reached Augustus
+  at Samos. Pliny says Candace was a name passed from queen to queen, so it is a royal title rather than
+  a personal name.
+types: [person]
+names:
+  - form: Κανδάκη
+    lang: grc
+    script: Grek
+    roman: Kandake
+    scheme: other
+    cite:
+      - id: candace-name
+        says:
+          Strabo names Candace, queen of the Ethiopians in his time, a masculine woman who had lost an
+          eye.
+        source: strabo-geography
+        at: XVII.1.54 (C819–821)
+        quote:
+          Among the fugitives, were the generals of Candace, queen of the Ethiopians in our time, a masculine
+          woman, and who had lost an eye.
+roles:
+  - role: ruler
+    date:
+      value: 25 BCE..20 BCE
+      mode: window
+      calendar: julian
+    note: Queen during the war with Rome; the sources give no reign dates.
+notes:
+  Scholarship identifies this Candace with a Meroitic queen known from inscriptions, most often Amanirenas;
+  no source read for this chapter makes that identification, so the record keeps the title the Greek and
+  Roman sources use. The Candace of Nero's time is a later queen and is not this actor.

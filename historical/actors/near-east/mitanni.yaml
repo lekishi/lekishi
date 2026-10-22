@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Mitanni (Naharin, Hanigalbat), the Hurrian kingdom of upper Mesopotamia and north Syria, which
+  allied with Egypt by marriage and was then destroyed between Hatti and Assyria.
+types: [state]
+names:
+  - form: Mitani
+    lang: akk
+    script: Latn
+    note: Niebuhr's spelling.
+    cite:
+      - id: mitanni-name
+        says: Niebuhr names Tushratta king of Mitani and says Egyptian texts call it Naharina.
+        source: niebuhr-tell-el-amarna-period
+        at: "ch. III: Tushratta"
+  - form: Naharina
+    lang: egy
+    script: Latn
+    role: alternate
+    note: The Egyptian name, "the land of the rivers".
+    claim: mitanni-name

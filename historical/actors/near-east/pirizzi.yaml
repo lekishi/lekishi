@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Pirizzi, Tushratta's messenger, whose arrival with a Naharina letter at Thebes the docket records,
+  and who carried the lament for Amenhotep III to Akhenaten.
+types: [person]
+names:
+  - form: Pirizzi
+    lang: akk
+    script: Latn
+    cite:
+      - id: pirizzi-name
+        says: The hieratic docket records the Naharina letter brought by the messenger Pirizzi.
+        source: niebuhr-tell-el-amarna-period
+        at: "ch. III: the docket"
+roles:
+  - role: envoy

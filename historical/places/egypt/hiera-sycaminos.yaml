@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Hiera Sycaminos, the first stage of the praetorians' measured road above Syene, 54 miles on by
+  Pliny's figures; it is placed at Maharraqa in Lower Nubia.
+types: [settlement]
+names:
+  - form: Hiera Sycaminos
+    lang: la
+    script: Latn
+    cite:
+      - id: hiera-sycaminos-name
+        says: Pliny gives the praetorians' first stage, from Syene to Hiera Sycaminos, as fifty-four miles.
+        source: pliny-natural-history
+        at: VI.35 (§184)
+        quote: From Syene to Hiera Sycaminos they make to be fifty-four miles
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [32.70323, 23.06131]
+    notes: Pleiades' representative point, taken from the Barrington Atlas; the site lies under Lake Nasser.
+    cite:
+      - id: hiera-sycaminos-identification
+        says:
+          Pleiades places Hierasykaminos (Barrington Atlas 81 C2) at Maharraqa in Lower Nubia and gives
+          this representative point (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 795815 (reprLatLong, version 11), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "795815"
+    url: https://pleiades.stoa.org/places/795815
+    license: CC-BY-3.0

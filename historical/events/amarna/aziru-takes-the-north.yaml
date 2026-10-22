@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "Aziru of Amurru seizes the lands of the chiefs on his northern border: he takes Nii and besieges
+  Simyra, and Tunip writes to the king that the city weeps."
+types: [campaign]
+date:
+  value: 1390 BCE..1336 BCE
+  mode: window
+  calendar: regnal
+  as_written: the reigns of Amenophis III and IV
+  cite:
+    - id: aziru-takes-the-north-shaw
+      says: On Shaw's chronology Amenhotep III reigned 1390–1352 BCE and Amenhotep IV (Akhenaten)
+        1352–1336 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+places:
+  - place: simyra
+    role: site
+  - place: tunip
+    role: context
+participants:
+  - actor: aziru
+    role: leader
+  - actor: amurru-kingdom
+    role: participant
+cite:
+  - id: aziru-north
+    says: Niebuhr says Tunip's letter tells of Aziru taking Nii and besieging Simyra.
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. IV: Aziru and Tunip"
+  - id: tunip-weeps
+    says: Tunip's letter ends that the city weeps with no help.
+    role: supporting
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. IV: Aziru and Tunip (the lament)"
+notes: "Nii is not placed. The letters are undated but for a few dockets. Their reigns follow Shaw's
+  chronology (The Oxford History of Ancient Egypt, 2000): Amenhotep III 1390–1352 BCE and Amenhotep
+  IV (Akhenaten) 1352–1336 BCE. Niebuhr's 1903 dates (the archive about 1400 B.C., Akhetaten built
+  about 1380 B.C.) follow an older, higher scheme."

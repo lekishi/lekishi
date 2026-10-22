@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "Kadashman-Enlil I of Babylon and Amenhotep III argue over marriages: the Babylonian asks for
+  an Egyptian princess and, refused, for any beautiful woman in her place; he complains his sister in the
+  Egyptian harem has not been shown to his envoys."
+types: [exchange]
+part_of:
+  - amarna-letters-exchanged
+date:
+  value: 1390 BCE..1352 BCE
+  mode: window
+  calendar: regnal
+  as_written: the reign of Amenophis III
+  cite:
+    - id: kadashman-enlil-marriage-letters-shaw
+      says: On Shaw's chronology Amenhotep III reigned 1390–1352 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+participants:
+  - actor: kadashman-enlil-i
+    role: participant
+  - actor: amenhotep-iii
+    role: participant
+  - actor: kassite-babylonia
+    role: participant
+cite:
+  - id: kadashman-reply
+    says: Niebuhr quotes the Babylonian's reply to the refusal of a princess.
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. III: Kadashman-Bel"
+  - id: kadashman-sister
+    says: Niebuhr says Kadashman-Bel complained his sister had never been seen by his envoys.
+    role: supporting
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. III: Kadashman-Bel (the sister)"
+notes: "No place: the letters went between Babylon and the Egyptian court, and Babylon is left to
+  the Mesopotamian chapters. The letters are undated but for a few dockets. Their reigns follow
+  Shaw's chronology (The Oxford History of Ancient Egypt, 2000): Amenhotep III 1390–1352 BCE and
+  Amenhotep IV (Akhenaten) 1352–1336 BCE. Niebuhr's 1903 dates (the archive about 1400 B.C.,
+  Akhetaten built about 1380 B.C.) follow an older, higher scheme."

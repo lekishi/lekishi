@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "Afterwards the king takes the household goods of the foe in Yenoam, Nuges and Herenkeru, with
+  the goods of the cities that submitted: lords, 87 children of the foe and the chiefs, 1,796 slaves,
+  and furniture of ivory, ebony and gold, among them a statue of the foe in ebony and gold."
+types: [exchange]
+part_of:
+  - megiddo-campaign
+date:
+  value: 1457 BCE..1456 BCE
+  mode: window
+  calendar: regnal
+  as_written: afterward
+  cite:
+    - id: goods-of-yenoam-shaw
+      says: On Shaw's chronology Thutmose III reigned 1479–1425 BCE, so his year 23 falls in
+        1457–1456 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+places:
+  - place: yenoam
+    role: site
+  - place: nuges
+    role: site
+  - place: herenkeru
+    role: site
+participants:
+  - actor: thutmose-iii
+    role: leader
+  - actor: chief-of-kadesh
+    role: subject
+cite:
+  - id: yenoam-goods
+    says: The annals list what was taken afterward from the foe's household in Yenoam, Nuges and Herenkeru.
+    source: breasted-ancient-records
+    at: "II, Annals of Thutmose III, first campaign: the later list (Yenoam, Nuges, Herenkeru)"
+    quote:
+      List of that which was afterward taken by the king, of the household goods of that foe who was
+      in the city of Yenoam, in Nuges, and in Herenkeru, together with all the goods of those cities which
+      submitted themselves
+notes: The annals date by regnal year and the civil calendar. The BCE years follow Shaw's chronology
+  (The Oxford History of Ancient Egypt, 2000), which puts the accession of Thutmose III in 1479 BCE,
+  so year 22 falls in 1458–1457 BCE and year 23 in 1457–1456 BCE. Breasted's own 1906 table follows
+  an older, higher chronology.

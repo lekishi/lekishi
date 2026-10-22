@@ -1,0 +1,58 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "The treaty of Ramesses II's 21st year between Egypt and Hatti: peace for ever, a defensive
+  alliance, and the return of fugitives, between equals. It is the earliest treaty of which both versions
+  survive."
+types: [alliance, diplomacy]
+from: hatti
+to: egypt-new-kingdom
+directionality: mutual
+date:
+  value: 1259 BCE..1258 BCE
+  mode: window
+  calendar: regnal
+  as_written: year 21, Tybi 21
+  cite:
+    - id: egypt-hatti-treaty-shaw
+      says: On Shaw's chronology Ramesses II reigned 1279–1213 BCE, so his year 21 falls in
+        1259–1258 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Nineteenth Dynasty"
+cite:
+  - id: treaty-alliance
+    says:
+      The treaty has the Hittite king declare that he will be the Egyptian king's ally and friend for
+      ever.
+    source: sayce-hittites
+    at: "ch. II: the treaty, the alliance"
+    quote: "He shall be my ally; he shall be my friend: I will be his ally; I will be his friend: for ever."
+  - id: treaty-aid
+    says: The treaty provides for aid against an enemy of either king.
+    role: supporting
+    source: sayce-hittites
+    at: "ch. II: the treaty, mutual aid"
+    quote:
+      'If another shall come as an enemy to the lands of Ramessu Miamun, the great prince of Egypt,
+      then let him send an embassy to the great king of Kheta to this effect: "Come! and make me stronger
+      than him."'
+  - id: treaty-fugitives
+    says: The treaty provides that fugitives from Egypt shall not be received in Hatti.
+    role: supporting
+    source: sayce-hittites
+    at: "ch. II: the treaty, fugitives"
+    quote:
+      "[If servants shall flee away] out of the territories of Ramessu Miamun, the great prince of
+      Egypt, to betake themselves to the great king of Kheta, the great king of Kheta shall not receive
+      them"
+  - id: treaty-border
+    says: Garstang says neither king was to invade the other's lands, with the border at the northern Lebanon.
+    role: supporting
+    source: garstang-land-of-hittites
+    at: "ch. VI, p. 347: the terms"
+notes:
+  'Sayce calls it "the first treaty of the kind of which we know". The northern Lebanon border is
+  Garstang''s reading, not a clause of the text Sayce gives. Ramesses II''s regnal years are converted
+  on Shaw''s chronology (The Oxford History of Ancient Egypt, 2000), which puts his reign at 1279–1213
+  BCE; each regnal year spans two BCE years. Garstang''s 1910 dates (Kadesh 1288 B.C., the treaty about
+  1271 B.C.) and Sayce''s 1890 dates (1383 and 1354 B.C.) follow older schemes.'

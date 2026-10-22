@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Five galleys with picked crews and trade goods sail under a royal envoy. By Maspero's reconstruction
+  they pass the old Twelfth Dynasty landfalls, touch at the land of the Ilim, pass the Bab el-Mandeb and
+  reach the Somali coast.
+types: [journey]
+part_of:
+  - punt-expedition
+date:
+  value: 1473 BCE..1458 BCE
+  mode: window
+  calendar: regnal
+  as_written: later on, in the queen's reign
+  cite:
+    - id: punt-fleet-sails-shaw
+      says: On Shaw's chronology Hatshepsut reigned 1473–1458 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+places:
+  - place: red-sea
+    role: waypoint
+  - place: ilim
+    role: waypoint
+  - place: punt
+    role: end
+participants:
+  - actor: punt-royal-envoy
+    role: leader
+  - actor: egypt-new-kingdom
+    role: participant
+cite:
+  - id: fleet-sails-basis
+    says: Maspero says the queen chose five galleys and placed them under a royal envoy.
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the fleet"
+    quote:
+      Hâtshopsîtû chose out five well-built galleys, and manned them with picked crews. She caused
+      them to be laden with such merchandise as would be most attractive to the barbarians, and placing
+      the vessels under the command of a royal envoy
+  - id: fleet-route
+    says: Maspero reconstructs the route past the Ilîm and the Bab el-Mandeb to the Somali coast.
+    role: supporting
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the voyage"
+    quote:
+      it touched at the country of the Ilîm which lay to the west of the Bab el-Mandeb, went safely
+      through the Straits, and landed at last in the Land of Perfumes on the Somali coast.
+  - id: fleet-unrecorded
+    says: Maspero says the port, the duration and the incidents of the voyage are unrecorded.
+    role: supporting
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the voyage"
+    quote:
+      We are not acquainted with the name of the port from which the fleet set sail, nor do we know
+      the number of weeks it took to reach the land of Pûanît, neither is there any record of the incidents
+      which befell it by the way.
+notes: "The route is Maspero's reconstruction from his view of where Punt lay, not something the
+  reliefs record. Maspero gives no regnal year for the expedition, only that Hatshepsut reigned at
+  least eight years after it. The window is her reign on Shaw's chronology (The Oxford History of
+  Ancient Egypt, 2000), 1473–1458 BCE."

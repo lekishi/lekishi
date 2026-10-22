@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  After the battle the two kings come to terms and the Egyptian army withdraws. Sayce calls it
+  a treaty soon broken; Garstang a truce sought by Muwatalli and readily accepted.
+types: [council]
+part_of:
+  - battle-of-kadesh
+date:
+  value: 1275 BCE..1274 BCE
+  mode: window
+  calendar: regnal
+  as_written: after the battle, year 5
+  cite:
+    - id: kadesh-truce-shaw
+      says: On Shaw's chronology Ramesses II reigned 1279–1213 BCE, so his year 5 falls in 1275–1274
+        BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Nineteenth Dynasty"
+places:
+  - place: kadesh
+    role: context
+participants:
+  - actor: ramesses-ii
+    role: participant
+  - actor: muwatalli-ii
+    role: participant
+cite:
+  - id: truce-basis
+    says: Sayce says a treaty was made but soon broken, and peace came sixteen years later.
+    source: sayce-hittites
+    at: "ch. II: Kadesh, the truce"
+    quote:
+      A treaty was accordingly made; but it was soon broken, and it was not until sixteen years later
+      that peace was finally established between the two rival powers.
+  - id: truce-garstang
+    says:
+      Garstang says Mutallu made overtures for a truce, which the Pharaoh accepted, and the Egyptian
+      forces were withdrawn.
+    role: supporting
+    source: garstang-land-of-hittites
+    at: "ch. VI, p. 343: the truce"
+  - id: truce-later
+    says:
+      Garstang notes Müller's view that the poem's passage on the overtures refers to Hattusil's approach
+      sixteen years later, and rejects it.
+    role: alternative
+    source: garstang-land-of-hittites
+    at: "ch. VI, p. 343: fn. 809"
+dispute:
+  status: disputed
+  summary:
+    "Whether the poem's Hittite overtures belong to the day after Kadesh or to the treaty sixteen
+    years later: Müller (1902) took the second view, Garstang (1910) the first."
+notes: "Ramesses II's regnal years are converted on Shaw's chronology (The Oxford History of Ancient
+  Egypt, 2000), which puts his reign at 1279–1213 BCE; each regnal year spans two BCE years.
+  Garstang's 1910 dates (Kadesh 1288 B.C., the treaty about 1271 B.C.) and Sayce's 1890 dates (1383
+  and 1354 B.C.) follow older schemes."

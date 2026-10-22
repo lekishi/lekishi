@@ -1,0 +1,97 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Punt (Pwenet, Maspero's Pûanît), the land of incense on the southern Red Sea, "the Ladders of
+  Incense", which Hatshepsut's fleet reached and traded with. Where it lay is argued.
+types: [region]
+names:
+  - form: Pûanît
+    lang: egy
+    script: Latn
+    note: Maspero's transliteration; usually written Punt.
+    cite:
+      - id: punt-name
+        says: Maspero says Amun commanded that the ways to Pûanît be explored.
+        source: maspero-history-of-egypt
+        at: "vol. IV, ch. III: the oracle"
+        quote:
+          a command was heard in the sanctuary, a behest of the god himself, that the ways which lead
+          to Pûanît should be explored, and that the roads to the Ladders of Incense should be trodden.
+  - form: Punt
+    lang: en
+    script: Latn
+    role: alternate
+    note: The usual modern form.
+  - form: the Ladders of Incense
+    lang: en
+    script: Latn
+    role: alternate
+    note: Maspero's translation of Khâtiû, the terraced incense country of Punt.
+    cite:
+      - id: punt-ladders
+        says: Maspero translates Khâtiû as the Ladders, the terraced country where the incense trees grew.
+        source: maspero-history-of-egypt
+        at: "vol. IV, ch. III: the oracle, note on the Ladders"
+        quote:
+          The word Ladders is the translation of the Egyptian word Khâtiû, employed in the text to designate
+          the country laid out in terraces where the incense trees grew
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      No coordinate is asserted, because the location of Punt is the dispute this record carries. The
+      landing that Maspero proposes is the separate place elephant-river.
+    cite:
+      - id: punt-unlocated
+        says: Maspero says the port, the length of the voyage and the incidents on the way are unrecorded.
+        source: maspero-history-of-egypt
+        at: "vol. IV, ch. III: the voyage"
+        quote:
+          We are not acquainted with the name of the port from which the fleet set sail, nor do we know
+          the number of weeks it took to reach the land of Pûanît, neither is there any record of the incidents
+          which befell it by the way.
+cite:
+  - id: punt-somaliland
+    says: Maspero holds with Mariette that the Punt where the Egyptians landed is the Somali coast.
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the voyage, note on Pûanît"
+    quote:
+      but I hold, with Mariette, that the Pûanît where the Egyptians of Hâtshopsîtûs time landed is
+      the present Somali-land
+  - id: punt-arabia
+    says: Maspero reports that Brugsch first put the landing in Arabia.
+    role: alternative
+    attributed_to: H. Brugsch
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the voyage, note on Pûanît"
+    quote:
+      That part of Pûanît where the Egyptians landed was at first located in Arabia by Brugsch, then
+      transferred to Somali-land by Mariette, whose opinion was accepted by most Egyptologists.
+  - id: punt-both-shores
+    says:
+      Maspero reports that Dümichen, followed by Lieblein and Meyer, applied the name to both the Arabian
+      and the African coast.
+    role: alternative
+    attributed_to: J. Dümichen
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the voyage, note on Pûanît"
+    quote:
+      Dumichen, basing his hypothesis on a passage where Pûanît is mentioned as being on both sides
+      of the sea, desired to apply the name to the Arabian as well as to the African coast
+  - id: punt-suakin
+    says: Maspero reports that Krall put Hatshepsut's Punt between Suakin and Massawa.
+    role: alternative
+    attributed_to: J. Krall
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the voyage, note on Pûanît"
+    quote:
+      Since then Krall has endeavoured to shorten the distance between this country and Egypt, and
+      he places the Pûanît of Hâtshopsîtû between Suakin and Massowah.
+dispute:
+  status: disputed
+  summary:
+    Where Punt lay. Maspero (with Mariette and Naville) puts the landing on the Somali coast; Brugsch
+    first put it in Arabia, Dümichen, Lieblein and Meyer on both shores of the sea, and Krall between
+    Suakin and Massawa. The record keeps all four as Maspero reports them.
+notes:
+  Later work, including finds at Mersa Gawasis on the Egyptian coast, has moved the debate on; no
+  source read for this chapter is cited for it yet.

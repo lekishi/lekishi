@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Zefti (Djefti), the place north of which the third road ran, bringing the army out north of Megiddo.
+types: [route_node]
+names:
+  - form: Zefti
+    lang: egy
+    script: Latn
+    cite:
+      - id: zefti-name
+        says: The officers name a road on the way north of Zefti.
+        source: breasted-ancient-records
+        at: "II, Annals of Thutmose III, first campaign: the council at Yehem (Zefti)"
+        quote:
+          "There are yet two other roads: one road, behold, it will carry us, for it comes forth at Taanach,
+          the other, behold, it will bring us upon the way noth of Zefti, so that we shall come out to the
+          north of Megiddo."
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      The annals give Zefti only as a landmark of the northern road, and no source read here locates
+      it.
+    cite:
+      - id: zefti-unlocated
+        says: The annals name Zefti only as a landmark of a road.
+        source: breasted-ancient-records
+        at: "II, Annals of Thutmose III, first campaign: the council at Yehem (Zefti)"

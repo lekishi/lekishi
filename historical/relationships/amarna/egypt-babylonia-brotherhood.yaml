@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "The brotherhood of the kings of Egypt and Kassite Babylonia: equal great kings exchanging
+  gifts, gold and princesses, and quarrelling over them."
+types: [diplomacy]
+from: egypt-new-kingdom
+to: kassite-babylonia
+directionality: mutual
+date:
+  value: 1390 BCE..1336 BCE
+  mode: window
+  calendar: regnal
+  as_written: the reigns of Amenophis III and IV
+  cite:
+    - id: egypt-babylonia-brotherhood-shaw
+      says: On Shaw's chronology Amenhotep III reigned 1390–1352 BCE and Amenhotep IV (Akhenaten)
+        1352–1336 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+cite:
+  - id: babylonia-brotherhood
+    says: Burnaburiash writes that their fathers lived on friendly terms and they should continue.
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. III: Burnaburiash"
+notes: "The letters are undated but for a few dockets. Their reigns follow Shaw's chronology (The
+  Oxford History of Ancient Egypt, 2000): Amenhotep III 1390–1352 BCE and Amenhotep IV (Akhenaten)
+  1352–1336 BCE. Niebuhr's 1903 dates (the archive about 1400 B.C., Akhetaten built about 1380 B.C.)
+  follow an older, higher scheme."

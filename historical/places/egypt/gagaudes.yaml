@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Gagaudes, the island that Pliny says lay halfway between Syene and Meroë, where the praetorians
+  first saw the parrot. Pleiades files it with Bagada at Barrington Atlas 82 A3.
+types: [settlement]
+names:
+  - form: Gagaudes
+    lang: la
+    script: Latn
+    cite:
+      - id: gagaudes-name
+        says:
+          Pliny reports that the island of Gagaudes lies at an equal distance from Syene and Meroë, and
+          that the parrot was first seen there.
+        source: pliny-natural-history
+        at: VI.35 (§184)
+        quote:
+          They state also that the island of Gagaudes lies at an equal distance from Syene and Meroë,
+          and that it is at this place that the bird called the parrot was first seen
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [30.71664, 18.34585]
+    notes:
+      An atlas placement of a name from Pliny, at locality precision. Pliny calls it an island; the
+      atlas point is on the river near Napata.
+    cite:
+      - id: gagaudes-identification
+        says:
+          Pleiades records Bagada/Gagauden at Barrington Atlas 82 A3 and gives this representative point
+          (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 805595 (reprLatLong, version 6), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "805595"
+    url: https://pleiades.stoa.org/places/805595
+    license: CC-BY-3.0

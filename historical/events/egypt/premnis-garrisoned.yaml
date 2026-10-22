@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Petronius fortifies Premnis, leaves a garrison of four hundred men with two years' provisions,
+  and returns to Alexandria. Some prisoners are sold as booty and a thousand are sent to Caesar, lately
+  returned from the Cantabrian war.
+types: [occurrence]
+date:
+  value: 25 BCE..22 BCE
+  mode: window
+  calendar: julian
+  as_written:
+    "Strabo: while Ælius Gallus was engaged in war with the Arabs (no year); Dio: under B.C.
+    22 (a. u. 732)"
+  cite:
+    - id: kush-war-dio-year
+      says:
+        Dio tells the Ethiopian advance and Petronius's campaign under the year 22 BCE, "about this
+        same time".
+      source: cassius-dio
+      at: LIV.5 (B.C. 22)
+      quote:
+        About this same time the Ethiopians, who dwell beyond Egypt, advanced as far as the city called
+        Elephantine, with Candace as their leader, ravaging the whole region that they traversed.
+    - id: kush-war-strabo-gallus
+      says: Strabo dates the attack only by Aelius Gallus's Arabian war, which Dio narrates under 24 BCE.
+      role: alternative
+      source: strabo-geography
+      at: XVII.1.54 (C819–821)
+      quote:
+        The Ethiopians, emboldened in consequence of a part of the forces in Egypt being drawn off
+        by Ælius Gallus, who was engaged in war with the Arabs, invaded the Thebaïs
+places:
+  - place: premnis
+    role: site
+participants:
+  - actor: gaius-petronius
+    role: leader
+  - actor: augustus
+    role: other
+    note: Received a thousand prisoners.
+cite:
+  - id: premnis-garrison
+    says:
+      Strabo records the fortification of Premnis, the garrison and its provisions, the return to Alexandria
+      and the prisoners sent to Caesar.
+    source: strabo-geography
+    at: XVII.1.54 (C819–821)
+    quote:
+      He strengthened, however, the fortifications of Premnis, and having placed a garrison there,
+      with two years’ provisions for four hundred men, returned to Alexandreia. Some of the prisoners were
+      publicly sold as booty, and a thousand were sent to Cæsar, who had lately returned from the Cantabrians
+dispute:
+  status: disputed
+  summary:
+    Neither account gives a year for the attack itself. Strabo sets it during Aelius Gallus's Arabian
+    war, which Dio tells under 24 BCE; Dio tells the attack and the campaign under 22 BCE. The record
+    gives a window over both and does not choose a year.
+notes:
+  Alexandria, where Petronius returned, has no place record in this chapter yet; it is to be shared
+  with the Greece and Persia chapters once their record lands.

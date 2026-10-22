@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Tharu (Tjaru), the frontier fortress on Egypt's eastern border where Thutmose III was on the
+  25th day of the fourth month of the second season of year 22, at the start of his first campaign. It
+  is the Sile of Greek and Roman sources.
+types: [fortification]
+names:
+  - form: Tharu
+    lang: egy
+    script: Latn
+    note: Breasted's rendering; Egyptologists also write Tjaru or Zaru.
+    cite:
+      - id: tjaru-name
+        says: The annals place the king at Tharu at the start of the first campaign.
+        source: breasted-ancient-records
+        at: "II, Annals of Thutmose III, first campaign: Year 22, IV Peret 25 (Tharu)"
+        quote:
+          Year 22, fourth month of the second season, on the twenty-fifth day his majesty was in Tharu
+          on the first victorious expedition to extend the boundaries of Egypt with might.
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [32.36698, 30.84957]
+    notes:
+      Pleiades' point for Sile, the later name of the border fortress. Recent excavation puts the New
+      Kingdom fortress at Tell Hebua nearby; the point is approximate at locality precision.
+    cite:
+      - id: tjaru-identification
+        says:
+          Pleiades places Sile (Barrington Atlas 74 G3) near modern Qantara and gives this representative
+          point (CC BY 3.0); the identification of Tharu with Sile is the Egyptological one.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 727231 (reprLatLong, version 5), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "727231"
+    url: https://pleiades.stoa.org/places/727231
+    license: CC-BY-3.0

@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Rib-Hadda, ruler of Byblos (Gebal), the most prolific writer in the archive, who begged for troops
+  against Abdi-Ashirta and Aziru and lost his cities.
+types: [person]
+names:
+  - form: Rib-Addi
+    lang: akk
+    script: Latn
+    note: Niebuhr's form.
+    cite:
+      - id: rib-hadda-name
+        says: Niebuhr names Rib-Addi of Gebal as the bitterest complainant against Aziru.
+        source: niebuhr-tell-el-amarna-period
+        at: "ch. IV: Rib-Addi"
+  - form: Rib-Hadda
+    lang: en
+    script: Latn
+    role: alternate
+    note: The modern form.
+roles:
+  - role: ruler

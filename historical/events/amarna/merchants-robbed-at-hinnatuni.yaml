@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  A Babylonian trading company in the Canaanite city of Hinnatuni is attacked and plundered after
+  the ambassador leaves; Burnaburiash II tells Akhenaten that Canaan is his land and demands the gold back
+  and the murderers slain.
+types: [occurrence]
+date:
+  value: 1352 BCE..1336 BCE
+  mode: window
+  calendar: regnal
+  as_written: the reign of Amenophis IV
+  cite:
+    - id: merchants-robbed-at-hinnatuni-shaw
+      says: On Shaw's chronology Amenhotep IV (Akhenaten) reigned 1352–1336 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+places:
+  - place: hinnatuni
+    role: site
+participants:
+  - actor: burnaburiash-ii
+    role: participant
+  - actor: kassite-babylonia
+    role: subject
+  - actor: akhenaten
+    role: participant
+cite:
+  - id: hinnatuni-basis
+    says: Niebuhr says Burnaburiash complained the company at Khinaton was attacked and plundered.
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. IV: the merchants of Burnaburiash"
+  - id: hinnatuni-canaan
+    says: Burnaburiash writes that Canaan is the Egyptian king's land.
+    role: supporting
+    source: niebuhr-tell-el-amarna-period
+    at: "ch. IV: the merchants of Burnaburiash (the demand)"
+notes: "The letters are undated but for a few dockets. Their reigns follow Shaw's chronology (The
+  Oxford History of Ancient Egypt, 2000): Amenhotep III 1390–1352 BCE and Amenhotep IV (Akhenaten)
+  1352–1336 BCE. Niebuhr's 1903 dates (the archive about 1400 B.C., Akhetaten built about 1380 B.C.)
+  follow an older, higher scheme."

@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Simyra (Sumur) on the north Phoenician coast, besieged by Aziru and lost to Rib-Hadda of Byblos.
+types: [settlement]
+names:
+  - form: Simyra
+    lang: en
+    script: Latn
+    note: The classical form Niebuhr uses; Sumur in the letters.
+    cite:
+      - id: simyra-name
+        says: Niebuhr says Tunip's letter tells of Aziru besieging Simyra in Phoenicia.
+        source: niebuhr-tell-el-amarna-period
+        at: "ch. IV: Aziru and Tunip"
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [35.98622, 34.70848]
+    notes:
+      Pleiades' point, which the gazetteer itself marks as uncertain with a question mark; it is usually
+      put at Tell Kazel. Kept at locality precision.
+    cite:
+      - id: simyra-identification
+        says:
+          Pleiades records Simyra?, with its question mark, at Barrington Atlas 68 B4, and gives this
+          representative point (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 668372 (reprLatLong, version 8), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "668372"
+    url: https://pleiades.stoa.org/places/668372
+    license: CC-BY-3.0

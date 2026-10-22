@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "The terms Kush obtained from Augustus at Samos: the envoys got all they asked and the tribute
+  was remitted. Dio says Petronius compelled the Candace to make terms; Strabo says the envoys obtained
+  all they desired. The two accounts are kept."
+types: [diplomacy]
+from: kush-kingdom
+to: roman-empire
+date:
+  value: 21 BCE..20 BCE
+  mode: window
+  calendar: julian
+cite:
+  - id: samos-terms
+    says: Strabo records the envoys obtaining all they desired and the remission of the tribute.
+    source: strabo-geography
+    at: XVII.1.54 (C819–821)
+    quote:
+      The ambassadors obtained all that they desired, and Cæsar even remitted the tribute which he
+      had imposed.
+  - id: samos-terms-dio
+    says: Dio says Petronius compelled Candace to make terms with him.
+    role: alternative
+    source: cassius-dio
+    at: LIV.5 (B.C. 22)
+    quote: compelled Candace to make terms with him.
+dispute:
+  status: disputed
+  summary:
+    Strabo presents the terms as granted to the envoys at Samos; Dio presents them as forced on
+    the Candace by Petronius. The record follows Strabo for the terms and keeps Dio as an alternative.

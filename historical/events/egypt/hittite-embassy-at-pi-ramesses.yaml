@@ -1,0 +1,78 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  On the 21st of Tybi in year 21, at the city of Ramses, the Hittite envoys Tartisebu and Ra-mes
+  present to Ramesses II the silver tablet of the treaty proposed by Hattusili III, with the image of
+  the Hittite Storm-god at its centre.
+types: [mission]
+date:
+  value: 1259 BCE..1258 BCE
+  mode: window
+  calendar: regnal
+  as_written: year 21, Tybi 21
+  cite:
+    - id: hittite-embassy-at-pi-ramesses-shaw
+      says: On Shaw's chronology Ramesses II reigned 1279–1213 BCE, so his year 21 falls in
+        1259–1258 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Nineteenth Dynasty"
+    - id: embassy-date
+      role: supporting
+      says: The treaty's Karnak copy is dated year 21, Tybi 21.
+      source: sayce-hittites
+      at: "ch. II: the treaty, the date"
+      quote:
+        In the year twenty-one, in the month Tybi, on the 21st day of the month, in the reign of King
+        Ramessu Miamun
+places:
+  - place: pi-ramesses
+    role: site
+  - place: hattusa
+    role: start
+participants:
+  - actor: tartisebu
+    role: leader
+  - actor: ra-mes-envoy
+    role: participant
+  - actor: ramesses-ii
+    role: host
+  - actor: hattusili-iii
+    role: subject
+cite:
+  - id: embassy-tablet
+    says: The treaty says the silver tablet was presented by the hand of the ambassadors Tartisebu and Ra-mes.
+    source: sayce-hittites
+    at: "ch. II: the treaty, the silver tablet"
+    quote:
+      This is the copy of the contents of the silver tablet, which the great king of Kheta, Kheta-sira,
+      had caused to be made, and which was presented to the Pharaoh by the hand of his ambassador Tartisebu
+      and his ambassador Ra-mes, to propose friendship with the king Ramessu Miamun
+  - id: embassy-city
+    says: The treaty puts the king in the city of Ramses that day.
+    role: supporting
+    source: sayce-hittites
+    at: "ch. II: the treaty, the setting"
+    quote:
+      On that day the king was in the city of Ramses, presenting his peace-offerings to his father
+      Amon-Ra
+  - id: embassy-seal
+    says: The treaty describes the likeness of Sutekh at the centre of the tablet's front.
+    role: supporting
+    source: sayce-hittites
+    at: "ch. II: the treaty, the seal"
+    quote:
+      'That which is in the middle of this silver tablet and on its front side is a likeness of the
+      god Sutekh ..., surrounded by an inscription to this effect: "This is the [picture] of the god Sutekh,
+      the king of heaven and [earth]."'
+  - id: embassy-reverse
+    says: Garstang says the reverse bore the seal of the sun-goddess of Arinna with the queen Putukhipa.
+    role: supporting
+    source: garstang-land-of-hittites
+    at: "ch. VI, pp. 346–352: the seals"
+notes: "Tybi is the later (Coptic) name of the fifth month of the civil year, the first of the
+  second season. The Egyptian text is the Karnak copy of the Egyptian version; the Akkadian version
+  from Hattusa is a separate record of the same treaty. Ramesses II's regnal years are converted on
+  Shaw's chronology (The Oxford History of Ancient Egypt, 2000), which puts his reign at 1279–1213
+  BCE; each regnal year spans two BCE years. Garstang's 1910 dates (Kadesh 1288 B.C., the treaty
+  about 1271 B.C.) and Sayce's 1890 dates (1383 and 1354 B.C.) follow older schemes."

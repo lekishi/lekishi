@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Karnak, the great temple of Amun at Thebes, where Thutmose III had his campaigns set down on
+  the walls of the temple he built for Amun, and where the annals of the Megiddo campaign are carved.
+types: [religious_site]
+names:
+  - form: Karnak
+    lang: en
+    script: Latn
+    note: The modern name; the annals call it the temple which his majesty made for his father, Amon.
+    cite:
+      - id: karnak-name
+        says: The annals say the king had his victories recorded upon a tablet in the temple he made for Amun.
+        source: breasted-ancient-records
+        at: "II, Annals of Thutmose III, first campaign: preamble"
+        quote:
+          His Majesty commanded to cause to be recorded his victories which his father, Amon, gave to
+          him, upon a tablet in the temple which his majesty made for his father, Amon
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [32.65813, 25.71822]
+    notes: Pleiades' point for the Karnak complex; the annals are in the halls around the sanctuary of Amun.
+    cite:
+      - id: karnak-identification
+        says:
+          Pleiades identifies Karnak, the temple complex at Thebes, and gives this representative point
+          (CC BY 3.0).
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 786050 (reprLatLong, version 14), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "786050"
+    url: https://pleiades.stoa.org/places/786050
+    license: CC-BY-3.0

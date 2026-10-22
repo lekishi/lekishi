@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "Contact between Nero's Rome and Kush: the king of Ethiopia helped Nero's centurions on their
+  way south, and the praetorians reported the queen and temple at Meroë."
+types: [contact]
+from: roman-empire
+to: kush-kingdom
+date:
+  value: 54-10..68-06
+  mode: window
+  calendar: julian
+  as_written: "Pliny: sent by the Emperor Nero; Seneca: sent … by our good Emperor Nero (no year in either)"
+  cite:
+    - id: nero-praetorians-bound
+      says:
+        Pliny says only that Nero sent the praetorians, so their contact falls within Nero's reign,
+        October 54 to June 68 CE; Seneca's centurions, who reported before his death in April 65 CE,
+        fall within the same window.
+      source: pliny-natural-history
+      at: VI.35 (§181)
+      quote: the prætorian troops that were sent by the Emperor Nero under the command of a tribune
+cite:
+  - id: nero-kush-contact
+    says:
+      Seneca reports that the king of Ethiopia supplied the centurions with assistance and letters of
+      introduction.
+    source: seneca-natural-questions
+    at: VI.8.3
+    quote:
+      The King of Ethiopia had supplied them with assistance and furnished letters of introduction
+      to the neighbouring kings

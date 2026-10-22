@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Thutmose III has his victories, campaign by campaign with their plunder, set down on a tablet
+  in the temple he built for Amun at Karnak, from the daily records of the campaigns.
+types: [other]
+date:
+  value: 1457 BCE..1425 BCE
+  mode: window
+  calendar: regnal
+  as_written: His Majesty commanded to cause to be recorded his victories (no date)
+  cite:
+    - id: annals-at-karnak-shaw
+      says: On Shaw's chronology Thutmose III reigned 1479–1425 BCE, so the span from his year 23
+        (1457–1456 BCE) to the end of the reign is 1457–1425 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+places:
+  - place: karnak
+    role: site
+  - place: thebes
+    role: context
+participants:
+  - actor: thutmose-iii
+    role: leader
+cite:
+  - id: annals-basis
+    says:
+      The annals' preamble says the king commanded his victories to be recorded on a tablet in the temple
+      he made for Amun, each expedition by name with its plunder.
+    source: breasted-ancient-records
+    at: "II, Annals of Thutmose III, first campaign: preamble"
+    quote:
+      His Majesty commanded to cause to be recorded his victories which his father, Amon, gave to him,
+      upon a tablet in the temple which his majesty made for his father, Amon, setting forth each expedition
+      by its name, together with the plunder which his majesty carried away therein.
+notes: The annals cover campaigns into the king's fourth decade, so they were carved years after
+  Megiddo; the window runs from the campaign to the end of the reign, 1425 BCE on Shaw's chronology.

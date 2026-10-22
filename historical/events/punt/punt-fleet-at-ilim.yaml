@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  On the way home the fleet touches at the coast of the Ilim, who add gold, ivory and skins, live
+  leopards, a giraffe and unfamiliar plants to a cargo already full.
+types: [exchange]
+part_of:
+  - punt-expedition
+date:
+  value: 1473 BCE..1458 BCE
+  mode: window
+  calendar: regnal
+  as_written: later on, in the queen's reign
+  cite:
+    - id: punt-fleet-at-ilim-shaw
+      says: On Shaw's chronology Hatshepsut reigned 1473–1458 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+places:
+  - place: ilim
+    role: site
+participants:
+  - actor: punt-royal-envoy
+    role: leader
+  - actor: egypt-new-kingdom
+    role: participant
+cite:
+  - id: ilim-cargo
+    says: Maspero says the Ilîm added gold, ivory, skins, leopards and a giraffe.
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the return voyage"
+    quote:
+      it consisted not only of the inevitable gold, ivory, and skins, but also of live leopards and
+      a giraffe, together with plants and fruits unknown on the banks of the Nile.
+  - id: ilim-single
+    says: Maspero says the completed text shows a single expedition that visited both Pûanît and the Ilîm.
+    role: supporting
+    source: maspero-history-of-egypt
+    at: "vol. IV, ch. III: the return voyage, note"
+    quote:
+      The completed text proves that there was but a single expedition, and that the explorers of Pûanît
+      visited the Ilîm also.
+notes: "Maspero notes that Lieblein and Meyer took the Ilim to have been reached by a separate
+  overland party. Maspero gives no regnal year for the expedition, only that Hatshepsut reigned at
+  least eight years after it. The window is her reign on Shaw's chronology (The Oxford History of
+  Ancient Egypt, 2000), 1473–1458 BCE."

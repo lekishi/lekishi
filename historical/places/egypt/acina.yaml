@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  "Acina, a stage on the praetorians' measured road between the Evonymitae and Pittara. Pleiades
+  carries two records for the name: one placed by the Barrington Atlas in Upper Nubia, used here, and
+  one unlocated (798038)."
+types: [settlement]
+names:
+  - form: Acina
+    lang: la
+    script: Latn
+    cite:
+      - id: acina-name
+        says: Pliny gives the stage from the country of the Evonymitae to Acina as fifty-four miles.
+        source: pliny-natural-history
+        at: VI.35 (§184)
+        quote:
+          to the country of the Evonymitæ, the first region of Æthiopia, one hundred and twenty, to Acina
+          fifty-four, to Pittara twenty-five, and to Tergedus one hundred and six
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [30.28707, 19.93213]
+    notes:
+      An atlas placement of a name from an itinerary, not an excavated site. Because Pleiades itself
+      keeps a second, unlocated record of the name, the point is approximate at locality precision.
+    cite:
+      - id: acina-identification
+        says:
+          Pleiades places Acina at Barrington Atlas 82 A2, in the Dongola reach, and gives this representative
+          point (CC BY 3.0); it keeps a second, unlocated Acina (798038) from the atlas's map 81.
+        basis: interpretation
+        attributed_to: Pleiades
+        source: pleiades
+        at: place 805589 (reprLatLong, version 4), dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "805589"
+    url: https://pleiades.stoa.org/places/805589
+    license: CC-BY-3.0

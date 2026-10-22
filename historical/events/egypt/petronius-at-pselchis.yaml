@@ -1,0 +1,66 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Petronius, with under 10,000 foot and 800 horse against 30,000, forces the invaders back to Pselchis,
+  demands what they took, and when they stall attacks and routs them. He captures the Candace's generals,
+  who had fled to an island, sends them to Alexandria, and takes Pselchis.
+types: [campaign]
+date:
+  value: 25 BCE..22 BCE
+  mode: window
+  calendar: julian
+  as_written:
+    "Strabo: while Ælius Gallus was engaged in war with the Arabs (no year); Dio: under B.C.
+    22 (a. u. 732)"
+  cite:
+    - id: kush-war-dio-year
+      says:
+        Dio tells the Ethiopian advance and Petronius's campaign under the year 22 BCE, "about this
+        same time".
+      source: cassius-dio
+      at: LIV.5 (B.C. 22)
+      quote:
+        About this same time the Ethiopians, who dwell beyond Egypt, advanced as far as the city called
+        Elephantine, with Candace as their leader, ravaging the whole region that they traversed.
+    - id: kush-war-strabo-gallus
+      says: Strabo dates the attack only by Aelius Gallus's Arabian war, which Dio narrates under 24 BCE.
+      role: alternative
+      source: strabo-geography
+      at: XVII.1.54 (C819–821)
+      quote:
+        The Ethiopians, emboldened in consequence of a part of the forces in Egypt being drawn off
+        by Ælius Gallus, who was engaged in war with the Arabs, invaded the Thebaïs
+places:
+  - place: pselchis
+    role: site
+participants:
+  - actor: gaius-petronius
+    role: leader
+  - actor: kush-kingdom
+    role: participant
+cite:
+  - id: pselchis-battle
+    says:
+      Strabo records Petronius forcing the retreat to Pselchis, the parley, the battle, the capture
+      of the Candace's generals and the taking of Pselchis.
+    source: strabo-geography
+    at: XVII.1.54 (C819–821)
+    quote:
+      Among the fugitives, were the generals of Candace, queen of the Ethiopians in our time, a masculine
+      woman, and who had lost an eye. Petronius, pursuing them in rafts and ships, took them all and despatched
+      them immediately to Alexandreia. He then attacked Pselchis and took it.
+  - id: pselchis-dio
+    says: Dio records the invaders retreating, being overtaken on the road and defeated.
+    role: supporting
+    source: cassius-dio
+    at: LIV.5 (B.C. 22)
+    quote: Overtaken on the road, however, they suffered defeat and then drew him on into their own country.
+dispute:
+  status: disputed
+  summary:
+    Neither account gives a year for the attack itself. Strabo sets it during Aelius Gallus's Arabian
+    war, which Dio tells under 24 BCE; Dio tells the attack and the campaign under 22 BCE. The record
+    gives a window over both and does not choose a year.
+notes:
+  "Strabo puts the parley before the battle: the Ethiopians blamed the nomarchs, and Petronius answered
+  that Caesar, not the nomarchs, was sovereign. The record keeps the account's numbers as Strabo's,
+  not as counts."

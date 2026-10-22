@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  On the 4th day of the first month of the third season of year 23, the feast of his coronation,
+  Thutmose III reaches Gaza, "the possession of the ruler".
+types: [campaign]
+part_of:
+  - megiddo-campaign
+date:
+  value: 1457 BCE..1456 BCE
+  mode: window
+  calendar: regnal
+  as_written: year 23, I Shemu 4, the feast of the king's coronation
+  cite:
+    - id: thutmose-at-gaza-shaw
+      says: On Shaw's chronology Thutmose III reigned 1479–1425 BCE, so his year 23 falls in
+        1457–1456 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
+    - id: gaza-date
+      role: supporting
+      says: The annals date this to year 23, I Shemu 4, the feast of the king's coronation.
+      source: breasted-ancient-records
+      at: "II, Annals of Thutmose III, first campaign: Year 23, I Shemu 4 (Gaza)"
+      quote:
+        Year 23, first month of the third season, on the fourth day, the day of the feast of the king's
+        coronation, he arrived at the city, the possession of the ruler, Gaza.
+places:
+  - place: gaza
+    role: waypoint
+participants:
+  - actor: thutmose-iii
+    role: leader
+  - actor: egypt-new-kingdom
+    role: participant
+cite:
+  - id: gaza-arrival
+    says: The annals record the arrival at Gaza on the coronation feast.
+    source: breasted-ancient-records
+    at: "II, Annals of Thutmose III, first campaign: Year 23, I Shemu 4 (Gaza)"
+    quote:
+      Year 23, first month of the third season, on the fourth day, the day of the feast of the king's
+      coronation, he arrived at the city, the possession of the ruler, Gaza.
+notes: The regnal year turns on the coronation anniversary, so year 22, IV Peret 25 and year 23, I
+  Shemu 4 are about ten days apart, not a year. The annals date by regnal year and the civil
+  calendar. The BCE years follow Shaw's chronology (The Oxford History of Ancient Egypt, 2000),
+  which puts the accession of Thutmose III in 1479 BCE, so year 22 falls in 1458–1457 BCE and year
+  23 in 1457–1456 BCE. Breasted's own 1906 table follows an older, higher chronology.

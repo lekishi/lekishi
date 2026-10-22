@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  The kingdom of Kush, centred on Meroë and Napata, whose people the Greek and Roman sources call
+  Ethiopians. It fought Rome in 25–21 BCE, made terms with Augustus at Samos, and in Nero's time helped
+  his centurions travel south.
+types: [state]
+names:
+  - form: Αἰθίοπες
+    lang: grc
+    script: Grek
+    roman: Aithiopes
+    scheme: other
+    note: "The Ethiopians of Strabo and Dio: the people of Kush, not modern Ethiopia."
+    cite:
+      - id: kush-name
+        says:
+          Strabo records that the Ethiopians invaded the Thebaïd while part of the forces in Egypt was
+          away in Arabia.
+        source: strabo-geography
+        at: XVII.1.54 (C819–821)
+        quote:
+          The Ethiopians, emboldened in consequence of a part of the forces in Egypt being drawn off
+          by Ælius Gallus, who was engaged in war with the Arabs, invaded the Thebaïs
+external_ids:
+  - system: pleiades
+    id: "827790769"
+    url: https://pleiades.stoa.org/places/827790769
+    license: CC-BY-3.0
+    note: Pleiades' record of the kingdom as a place.
+notes:
+  Meroitic sources name the kingdom in their own language; this chapter reads only the Greek and
+  Latin accounts, so the record uses their name and says what it means.

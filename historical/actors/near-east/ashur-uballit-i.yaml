@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: Ashur-uballit I, king of Assyria, whose letter to Egypt speaks of a regular exchange of messengers.
+types: [person]
+names:
+  - form: Assuruballit
+    lang: akk
+    script: Latn
+    note: Niebuhr's form.
+    cite:
+      - id: ashur-uballit-i-name
+        says: Niebuhr cites a letter of the Assyrian king Assuruballit.
+        source: niebuhr-tell-el-amarna-period
+        at: "ch. III: Assyria"
+  - form: Ashur-uballit I
+    lang: en
+    script: Latn
+    role: alternate
+    note: The modern form.
+roles:
+  - role: ruler

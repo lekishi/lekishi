@@ -1,8 +1,10 @@
 # yaml-language-server: $schema=../schema/source.schema.json
 locator: chapter
 kind: primary
-title: 舊唐書 卷一九九上 東夷 日本國
-edition: Wikisource digital transcription (unproofread); locators re-checked against it on 2026-09-24
+title: 舊唐書
+edition:
+  Wikisource digital transcription (unproofread); locators re-checked against it on 2026-09-24
+  (卷一九九上) and 2026-10-21 (卷九, 十, 一〇四, 一〇九, 一四七, 一九八)
 author: 劉昫 et al.
 issued:
   year: 945
@@ -11,6 +13,18 @@ language: lzh
 identifiers:
   - system: url
     value: https://zh.wikisource.org/wiki/舊唐書/卷199上
+  - system: url
+    value: https://zh.wikisource.org/wiki/舊唐書/卷9
+  - system: url
+    value: https://zh.wikisource.org/wiki/舊唐書/卷10
+  - system: url
+    value: https://zh.wikisource.org/wiki/舊唐書/卷104
+  - system: url
+    value: https://zh.wikisource.org/wiki/舊唐書/卷109
+  - system: url
+    value: https://zh.wikisource.org/wiki/舊唐書/卷147
+  - system: url
+    value: https://zh.wikisource.org/wiki/舊唐書/卷198
 license:
   status: recorded
   license_id: public-domain
@@ -19,8 +33,12 @@ license:
   quotation_permitted: true
   reviewed_by: Lekishi editorial preparation
   reviewed_at: 2026-09-24T05:00:00Z
-  notes:
-    Text public domain. The chapter uses the Tang-court notice of the 天寶十二年 embassy and the
-    outline of 朝衡's career; it does not use the compilation's later, legendary material.
-notes: Tang-court-centred history compiled in 945. It reports the embassy from the Tang side, at
-  year granularity, and describes 朝臣仲滿 (阿倍仲麻呂) under his adopted name 朝衡.
+  notes: Text public domain. Records quote short passages of the annals, biographies and
+    foreign-peoples entries; they do not use the compilation's later, legendary material.
+notes:
+  "Tang-court-centred history compiled in 945. One source for the whole work; each cite's locator
+  names the 卷 and the entry. 卷一九九上 東夷 reports the Japanese embassies from the Tang side, at
+  year granularity, and describes 朝臣仲滿 (阿倍仲麻呂) under his adopted name 朝衡. The annals (卷九,
+  十), the biographies of 高仙芝, 李嗣業 and 杜佑 (卷一〇四, 一〇九, 一四七) and 卷一九八 西戎 are used for
+  the 石國 campaign, 怛邏斯 and after, the court notices of 至德二載 and 乾元元年, the presentation of
+  通典, and the western-regions account of 大食 and of the 乾元元年 raid on 廣州."

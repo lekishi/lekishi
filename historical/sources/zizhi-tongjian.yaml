@@ -1,9 +1,9 @@
 # yaml-language-server: $schema=../schema/source.schema.json
 locator: entry
 kind: primary
-title: 資治通鑑 卷六 秦紀一
+title: 資治通鑑
 edition: Wikisource digital transcription (unproofread, with later annotations); locators re-checked
-  against it on 2026-09-25
+  against it on 2026-09-25 (卷六) and 2026-10-21 (卷二一五–二二一)
 author: 司馬光
 issued:
   year: 1084
@@ -12,6 +12,18 @@ language: lzh
 identifiers:
   - system: url
     value: https://zh.wikisource.org/wiki/資治通鑑/卷006
+  - system: url
+    value: https://zh.wikisource.org/wiki/資治通鑑/卷215
+  - system: url
+    value: https://zh.wikisource.org/wiki/資治通鑑/卷216
+  - system: url
+    value: https://zh.wikisource.org/wiki/資治通鑑/卷217
+  - system: url
+    value: https://zh.wikisource.org/wiki/資治通鑑/卷219
+  - system: url
+    value: https://zh.wikisource.org/wiki/資治通鑑/卷220
+  - system: url
+    value: https://zh.wikisource.org/wiki/資治通鑑/卷221
 license:
   status: recorded
   license_id: public-domain
@@ -22,9 +34,16 @@ license:
   reviewed_at: 2026-09-25T03:00:00Z
   notes:
     Text public domain. The transcription includes later annotations and text-critical notes (for
-    example the correction of 勝 to 騰 in the 230 BCE entry); the fixture cites the main text only,
-    and the annotations are not used as evidence.
+    example the correction of 勝 to 騰 in the 230 BCE entry, and conversion markup for variant and
+    supplied characters in the Tang annals); records cite the main text only, quote characters as
+    they render, and do not use the annotations as evidence.
 notes:
-  "The Song comprehensive mirror, used for the 始皇帝十四年, 十六年, and 十七年 entries: the submission and
-  embassy, the cession of 南陽, and the annexation with the 潁川 commandery. Its absolute years are the
-  fixture's dating basis for the events the annals date by reign year."
+  "The Song comprehensive mirror. One source for the whole work; each cite's locator names the 卷 and
+  the year entry. 卷六 秦紀一 is used for the 始皇帝十四年, 十六年, and 十七年 entries: the submission
+  and embassy, the cession of 南陽, and the annexation with the 潁川 commandery. Its absolute years
+  are the dating basis for the events the annals date by reign year. 卷二一五–二二一 唐紀三十一–三十七
+  (744–759) are used for the dated notices of 杜環's west: 和義公主's marriage, 高仙芝's 石國 raid and
+  his presentation of captives, the battle at 恆羅斯城 and 李嗣業's retreat, 高仙芝's execution, the
+  western troops of 至德二載, the 香積寺 battle, the 廣州 report of 乾元元年, and 李嗣業's death. A
+  notice's month is the month heading it is entered under; the mirror sometimes gathers a frontier
+  episode under the month its report arrived, so such notices are dated to the year."

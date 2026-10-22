@@ -2,8 +2,8 @@
 summary:
   苫國, which 經行記 places on the western border of 大食, a land several thousand 里 around with tiled
   houses and stone walls, a great river flowing east to 亞俱羅, five commands and over ten thousand
-  troops, bordering the 可薩 Turks to the north. 苫 is usually read as al-Shām (Syria); that reading is
-  not yet cited here, and the record asserts no position.
+  troops, bordering the 可薩 Turks to the north. Hirth and Rockhill (1911) read 苫 as Sham (al-Shām,
+  Syria); the record places it at region precision as their reading.
 types: [region]
 names:
   - form: 苫國
@@ -18,25 +18,40 @@ names:
         at: 卷一九三 邊防九 大食（又云：苫國在大食西界）
         quote: 苫國在大食西界，周迴數千里。造屋兼瓦，壘石為壁。
       - id: sham-name-xin
-        says: The Song history's entry for 苫 repeats the account, with the river flowing east into 亞俱羅.
+        says: 新唐書's entry for 苫 repeats the account, with the river flowing east into 亞俱羅.
         role: supporting
         source: xin-tangshu
         at: 卷二二一下 西域下 大食（大食之西有苫者）
         quote: 大食之西有苫者，亦自國。北距突厥可薩部，地數千里。有五節度，勝兵萬人。
 at:
-  - interpretation: unknown
-    precision: unspecified
+  - interpretation: approximate_point
+    precision: region
+    point: [36, 34]
     notes:
-      "No position: the sources give 苫國's place only relative to 大食 and 亞俱羅, and the usual reading
-      of 苫 as al-Shām is not yet cited in this chapter. A cited identification is what would place
-      it."
+      "A region-wide placement in Syria, following Hirth and Rockhill's reading of 苫 as Sham; the
+      point is the coordinate Wikidata gives the region (Q13415123) and stands for the land as a
+      whole, not a city. The sources give 苫國 no bounds, so no area is drawn."
     cite:
-      - id: sham-unknown
+      - id: sham-identification
         says:
-          The entries place 苫國 only relative to 大食 and 亞俱羅 and state no city, so the record carries
-          unknown geometry.
-        source: tongdian
-        at: 卷一九三 邊防九 大食（又云：苫國在大食西界）
+          Hirth and Rockhill read 苫 as a transcription of Sham (al-Shām), Syria, whose capital was
+          then Damascus; the point is the coordinate Wikidata records for the region of Syria (CC0),
+          a placement of the land as a whole, not of any site.
+        basis: interpretation
+        attributed_to: Hirth and Rockhill
+        sources:
+          - source: hirth-rockhill-chau-ju-kua
+            at: pp. 108–110, note 14 to the 大秦 chapter
+            quote: the country of Chan (Sham, or Syria, of which Damascus was then the capital) is on the western boundary of the Ta-shi
+          - source: wikidata
+            at: Q13415123 (P625), revision 2550736767
+modern:
+  - form: Syria (region)
+    lang: en
+    script: Latn
+    note: The historical region Hirth and Rockhill identify 苫國 with, not the modern state.
 notes:
-  The 新唐書 entry repeats 經行記 nearly word for word and is a supporting witness, not independent
-  evidence.
+  "The 新唐書 entry repeats 經行記 nearly word for word and is a supporting witness, not independent
+  evidence. Hirth and Rockhill take 杜環's 大食 to be the Abbasid lands and 苫 their western
+  neighbour, still resisting the Abbasid armies in the 750s; that reading is theirs and the chapter
+  asserts no event from it."

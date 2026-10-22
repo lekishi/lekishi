@@ -2,8 +2,8 @@
 summary:
   "亞俱羅, which 經行記 gives as another name of 大食 and as the seat of the 大食 king (暮門): a city of markets
   and a prayer hall holding tens of thousands, where it names Chinese painters and weavers at work.
-  The record's only placement is a label anchor at Kufa, with which 亞俱羅 is usually identified; that
-  identification is not yet cited here."
+  Hirth and Rockhill (1911) identify it with Kufa, the seat of the first Abbasid caliph, from the
+  city's Syriac name Akula; the record places it there as their reading."
 types: [capital]
 names:
   - form: 亞俱羅
@@ -24,26 +24,34 @@ names:
         at: 卷一九三 邊防九 大食（又云：苫國在大食西界）
         quote: 有大川東流入亞俱羅，商客糴此糶彼，往來相繼。
 at:
-  - interpretation: display_anchor
-    precision: unspecified
+  - interpretation: approximate_point
+    precision: locality
     point: [44.4, 32.03]
     notes:
-      "Label anchor at Kufa's coordinate in Wikidata (Q186234). The identification of 亞俱羅 with Kufa
-      (the 'Āqūlā of Syriac usage) is the usual modern reading but is not yet cited in this chapter,
-      so the anchor asserts no identification and no historical coordinate. 經行記 does not name the
-      city in any other way."
+      "An approximate placement at Kufa, following Hirth and Rockhill's identification of 亞俱羅; the
+      point is Kufa's modern coordinate in Wikidata (Q186234), not a surveyed eighth-century site.
+      經行記 does not name the city in any other way."
     cite:
-      - id: kufa-anchor
-        says: The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical
-          coordinate or identification is asserted.
-        source: wikidata
-        at: Q186234 (P625), revision 2545064471
+      - id: kufa-identification
+        says:
+          Hirth and Rockhill read 亞俱羅 as Kufa, the residence of Abu'l-'Abbās, whose Syriac name was
+          Akula; the point is the coordinate Wikidata records for Kufa (CC0), an approximate placement
+          of the city, not a surveyed site.
+        basis: interpretation
+        attributed_to: Hirth and Rockhill
+        sources:
+          - source: hirth-rockhill-chau-ju-kua
+            at: p. 110, note 14 to the 大秦 chapter
+            quote: This can be none other than the city of Kufa, the residence of Abu'l-'Abbas
+          - source: wikidata
+            at: Q186234 (P625), revision 2545064471
 modern:
   - form: Kufa
     lang: en
     script: Latn
-    note: The city the anchor uses, recorded for orientation only.
+    note: The city Hirth and Rockhill identify 亞俱羅 with.
 notes:
   "經行記 uses 亞俱羅 both for the land of 大食 and for the king's seat. The record keeps the city
-  reading because the passage describes a walled city with markets and a prayer hall; the Abbasid
-  move to Baghdad (from 762) is not in the cited sources and is not drawn."
+  reading because the passage describes a walled city with markets and a prayer hall. Hirth and
+  Rockhill add that 杜環 shows no knowledge of Baghdad, founded in 762, the year he sailed home; the
+  Abbasid move there is not in the cited sources and is not drawn."

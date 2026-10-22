@@ -1,0 +1,79 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Ten years after his consecration Aśoka goes out to Sambodhi, and his 'tours of piety' replace the royal
+  pleasure tours with visits to ascetics, Brahmans and elders and instruction of the country people in
+  the Law.
+types: [journey]
+date:
+  value: 262 BCE..256 BCE
+  mode: window
+  calendar: regnal
+  as_written: after he had been consecrated ten years (Rock Edict VIII)
+  cite:
+    - id: sambodhi-time
+      says: >-
+        Rock Edict VIII says the king went out to Sambodhi after he had been consecrated ten years.
+      source: asoka-inscriptions
+      at: Rock Edict VIII, Shāhbāzgaṛhi text
+      quote: after he had been consecrated ten years went out to Bôdh Gaya
+    - id: sambodhi-conversion
+      says: >-
+        Smith's chronology converts the regnal year to 259 BCE, counting the consecration as year 1 in 269
+        BCE; he calls the Indian dates merely approximate.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. I, Chronology of the Maurya Period
+      quote: >-
+        Asoka entered the Buddhist Order as a monk, abolished Royal Hunt, established 'pious tours,' and
+        dispatched missionaries.
+    - id: sambodhi-tour-259-error-bound
+      says: >-
+        Smith holds that the error in his dates for the reign cannot exceed three years, so the
+        support runs three years either side of his year.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. I, The History of Asoka
+      quote: the error in any case cannot exceed three years
+places:
+  - place: bodh-gaya
+    role: end
+    note: Only on Bhandarkar's reading of sambodhi as a place; see the dispute.
+participants:
+  - actor: ashoka
+    role: leader
+notes: >-
+  Smith translates 'went out to Bôdh Gaya' but, in his comment, prefers the general opinion that the words
+  mean the king set out on the path to supreme knowledge.
+dispute:
+  status: disputed
+  summary: >-
+    The words nikrami sambodhiṃ are read two ways. Most scholars, and Smith, take them to mean that Aśoka
+    set out on the path towards supreme knowledge; D. R. Bhandarkar takes them physically, as a journey
+    to the bodhi tree or the temple at Bodh Gayā. The chapter draws Bodh Gayā as the destination only
+    as that alternative.
+cite:
+  - id: sambodhi-path
+    says: >-
+      Smith reports that most scholars read the words as entering the path to supreme knowledge.
+    source: smith-asoka-1920
+    at: ch. IV, The Rock Edicts (comment on Rock Edict VIII)
+    quote: Most scholars take them to mean that Asoka entered on the 'eight-fold path'
+  - id: sambodhi-place
+    says: >-
+      Smith reports Bhandarkar's physical reading, as a visit to the bodhi tree or the Mahābodhi temple.
+    role: alternative
+    source: smith-asoka-1920
+    at: ch. IV, The Rock Edicts (comment on Rock Edict VIII)
+    quote: >-
+      But D. R. Bhandarkar contends that the verbs must be interpreted in a physical sense
+  - id: sambodhi-practice
+    says: The edict describes the practice of the tours of piety.
+    role: supporting
+    source: asoka-inscriptions
+    at: Rock Edict VIII, Shāhbāzgaṛhi text
+    quote: >-
+      In them this is the practice—visiting ascetics and Brahmans, with liberality to them

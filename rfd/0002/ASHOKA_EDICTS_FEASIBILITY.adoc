@@ -1,0 +1,146 @@
+= Aśoka and his edicts, 273–232 BCE: feasibility note
+:state: Desk-research note for the owner's review of a draft chapter; not published atlas content, not an RFD decision
+:prepared-from: claude/project-thread-o83o18 @ b9429622 (玄奘 thread's shared Indian places)
+:research-window: single pass, 2026-10-21
+:toc:
+:toclevels: 2
+
+This note goes with the draft chapter
+link:../../historical/chapters/ashoka-edicts-273-232.yaml[`ashoka-edicts-273-232`],
+candidate 4 of the 2026-10-21 chapter selection. It says what the sources
+support, where the chapter had to make editorial choices, and what would raise
+its quality before the owner approves it. The chapter is a draft: it has no
+approval block, and dev and pull-request previews serve it.
+
+== Verdict
+
+Feasible, and a useful test chapter because its evidence is mostly physical.
+The inscriptions are dated, located and still standing, so the chapter has 36
+events across 33 new places from the Peshawar valley to Mysore and Lanka, with
+the five Hellenistic kings of Rock Edict XIII as actors. What it lacks is an
+absolute calendar: the inscriptions count years from Aśoka's consecration, and
+every BCE year is a modern conversion. That makes it a good test of regnal
+dating, of monuments that were moved after the event, and of legend kept apart
+from inscription.
+
+== Sources and rights
+
+[cols="2,1,3",options="header"]
+|===
+|Source |Id |Use
+
+|The inscriptions of Aśoka, in V. A. Smith's translation (1920), chapters IV and V
+|`asoka-inscriptions`
+|The primary record. Every edict event cites the inscription and the site of the text Smith translates. Locator kind `inscription`.
+
+|V. A. Smith, _Asoka, the Buddhist Emperor of India_, 3rd ed. (1920)
+|`smith-asoka-1920`
+|The chronology (consecration as regnal year 1 in 269 BCE), the monuments' locations, the identifications of Tosali, Samāpā and Suvarṇagiri, and his retellings of the Ceylon chronicles and the Aśokāvadāna. Cited as interpretation, attributed to Smith.
+
+|Wikidata
+|`wikidata`
+|Positions for 31 places, each with a Q-id and item revision.
+|===
+
+Smith died in 1920 and the book was published that year, so both sources are
+public domain. They are quoted from the English Wikisource transcription,
+which is CC BY-SA, so the records cite the work and its chapter, never the
+page, as the register's Wikisource row requires. Every quotation in the records
+was checked mechanically against the downloaded transcription (revisions are
+listed in each source's notes).
+
+Hultzsch's _Corpus Inscriptionum Indicarum_ I (1925) is the standard edition
+and is likely public domain (published 1925, Hultzsch died 1927), but archive.org was unreachable from
+the research machine on 2026-10-21. The quotations need to be re-checked
+against it before release, and the register lists it as unread.
+
+== Chronology
+
+* *Regnal years are the source dates.* Nineteen events carry
+  `calendar: regnal` with the inscription's own words in `as_written` ("when I
+  had been consecrated twelve years"). The BCE window beside them is Smith's
+  conversion and is cited as his interpretation.
+* *The epoch is uncertain.* Smith puts the consecration in 269 BCE and calls
+  the Indian dates "merely approximate". Other scholars put it a few years
+  either side; no second chronology is cited here, so none is published as an
+  alternative. A second edition (Hultzsch, or a modern synthesis with clear
+  terms) is what would let the chapter record that spread.
+* *All 36 events are windows, widened by Smith's own error.* Smith writes that
+  the error in his dates for the reign "cannot exceed three years", so every
+  BCE year or range converted from his chronology runs three years either side
+  (a dated edict of 249 BCE is published as 252–246 BCE), with that sentence
+  cited on the date. The window also covers a regnal year straddling two
+  Julian years. Only Dionysios' embassy, dated by Ptolemy II's reign, keeps its
+  Greek dates. Aśoka's rule, a duration, keeps Smith's 273–232 BCE, since
+  widening a duration would assert rule across years the evidence does not
+  support.
+* *Five disputes are recorded, not merged:* the chronicles' massacre of
+  ninety-nine brothers at the succession, whether _sambodhi_ means a journey
+  to Bodh Gayā or a turn towards enlightenment, the chronicles' date for the
+  third council against Smith's, the length of the reign (thirty-seven or
+  fifty-four years), and which Alexander Rock Edict XIII means (Epirus, or
+  Beloch's Corinth).
+
+== Places
+
+* *Thirty-three new places*, most of them inscribed rocks and pillars. Seven
+  have an `approximate_point` at the monument itself; 24 have a
+  `display_anchor` at the nearest settlement or site; two (Suvarṇagiri and
+  Jatinga-Rāmeshwara) have an `unknown` position with Smith's description.
+  Siddapura uses Smith's own degrees and minutes.
+* *The monuments are typed `other`.* The v0 place types have no inscription
+  or monument type, so each such record says so in its notes.
+* *Moved pillars.* Fīrōz Tughlak moved the Topra and Meerut pillars to Delhi
+  in the fourteenth century, and the Allahabad pillar probably came from
+  Kauśāmbī. The records anchor them where they stand today as a
+  `display_anchor`, not an asserted position, and say so; v0 has no way to give
+  a place a different position at the time of the event.
+* *Regions as points.* Kalinga and Lanka are regions anchored at a point.
+  They want territories, which are still only proposed for contract v1.
+* *Shared places.* Pāṭaliputra, Bodh Gayā, Sārnāth, Kauśāmbī, Taxila,
+  Tāmralipti, Kapilavastu, Kuśinagara, Śrāvastī, Mathurā and Kashmir are the 玄奘
+  thread's records and are reused, not minted again.
+
+== Legend
+
+The Ceylon chronicles and the northern Aśokāvadāna supply the council, the
+mission to Lanka, Mahinda and Saṅghamittā, and the pilgrimage with Upagupta.
+Smith relates the northern stories "simply as legends". Thirteen events rest
+on them in whole or in part; each says so in its summary and cites Smith's
+retelling, never the chronicle itself, which the chapter has not read. Where a chronicle's own year
+disagrees with Smith's table, the record keeps the chronicle's year and notes
+the disagreement.
+
+== Engine findings
+
+What this chapter asks of the engine, for the follow-up work:
+
+. *Regnal calendars.* A regnal year should display as the source gives it,
+  with the conversion as a secondary, cited reading.
+. *A legend basis.* Legend is marked only in prose. A claim basis or event flag
+  for tradition and legend would let the atlas style it.
+. *Positions at a time.* Moved monuments need a position for the event's
+  time and one for today.
+. *Coincident points.* Barābar and Nāgārjunī share one Wikidata coordinate, and
+  several edicts share a site, so labels and markers need to separate.
+. *A monument place type.* Most of the chapter's places are `other`.
+. *Relationships in the story.* The manifest puts relationships (the Kalinga
+  annexation, the diplomacy of Rock Edict XIII) between events as steps, which
+  is worth checking in the step UI.
+. *Prologue nodes.* The chapter first opened at 261 BCE, with the succession
+  and consecration as scene-setting steps before it. The atlas projection
+  accepts an event outside the window only as a step captioned "Coda —", so
+  the preview build failed, and the window now opens at the succession in
+  273 BCE. A prologue label, and running the projection in `pnpm test` for
+  every chapter, would catch this before a preview build does.
+
+== What would raise quality before approval
+
+* Re-check every quotation against Hultzsch's 1925 edition.
+* Add the inscriptions found after 1920 (Erragudi, Kandahar, Laghman, Gujarra,
+  Ahraura, Sannati and others) from a source with clear commercial terms.
+* Cite a second chronology for the consecration, so the epoch can be recorded
+  as a dispute.
+* Locate Suvarṇagiri, and give the Mahāvihāra and Anurādhapura their own
+  places (the mission events now sit at Lanka, a region point, and at
+  Mihintale).

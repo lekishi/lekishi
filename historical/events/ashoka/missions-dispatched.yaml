@@ -1,0 +1,63 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  In the Ceylon chronicles, as Smith retells them, Moggaliputta Tissa sends missionaries after the council
+  to Kashmir and Gandhāra, Mahiṣamaṇḍala, Vanavāsī, Aparāntaka, Mahārāṣṭra, the Yavana country, the
+  Himalaya, Suvarṇabhūmi and Lanka; the Lanka mission is Mahinda's.
+types: [mission]
+date:
+  value: 255 BCE..249 BCE
+  mode: window
+  calendar: regnal
+  as_written: After the close of the Third Council (chronicles)
+  cite:
+    - id: missions-time
+      says: >-
+        Smith's retelling sends the missions after the close of the council, which the chronicles date seventeen
+        and a half years after the coronation, about 252 BCE on Smith's epoch.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      source: smith-asoka-1920
+      at: ch. VI, The Ceylonese Legend of Asoka
+      quote: After the close of the Third Council, which remained in session for nine months
+    - id: missions-dispatched-error-bound
+      says: >-
+        Smith holds that the error in his dates for the reign cannot exceed three years, so the
+        support runs three years either side of his year.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. I, The History of Asoka
+      quote: the error in any case cannot exceed three years
+places:
+  - place: pataliputra
+    role: start
+  - place: kashmir
+    role: end
+    note: Kashmir and Gandhāra.
+  - place: lanka
+    role: end
+participants:
+  - actor: moggaliputta-tissa
+    role: leader
+  - actor: mahinda
+    role: participant
+notes: >-
+  From the Ceylon chronicles in Smith's retelling, which he relates as legend. The BCE year converts the
+  chronicle's regnal year with Smith's epoch, which the chronicles themselves do not use. Only Kashmir
+  and Lanka are drawn; the other regions have no record in the project. Smith doubts the mission to Suvarṇabhūmi
+  (Pegu).
+cite:
+  - id: missions-basis
+    says: The retelling lists the regions to which the missionaries were dispatched.
+    source: smith-asoka-1920
+    at: ch. VI, The Ceylonese Legend of Asoka
+    quote: >-
+      dispatched missionaries to Kashmîr and Gandhâra; to Mahîshamandala (Mysore); to Vanavâsi (North Kanara);
+      to Aparântaka (coast north of Bombay)
+  - id: missions-lanka
+    says: The retelling says the Lanka mission was Mahendra and five colleagues.
+    role: supporting
+    source: smith-asoka-1920
+    at: ch. VI, The Ceylonese Legend of Asoka
+    quote: The mission to Ceylon consisted of Prince Mahendra and five colleagues

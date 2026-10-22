@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  Siddapura in the Chitaldrug district of Mysore, one of the three Mysore localities of the Minor Rock
+  Edicts. Smith thinks the town of Isila, named in the edict's address, was at or near it.
+types: [other]
+names:
+  - form: Siddapura
+    lang: en
+    script: Latn
+    cite:
+      - id: siddapura-name
+        says: >-
+          Smith lists Siddapura with its latitude and longitude among the Mysore localities.
+        source: smith-asoka-1920
+        at: ch. III, The Monuments (the Minor Rock Edicts)
+        quote: namely, Siddapura (N. lat. 14° 49′, E. long. 76° 47′)
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [76.7833, 14.8167]
+    notes: >-
+      Smith's own coordinate, 14° 49′ N, 76° 47′ E, converted to decimal degrees. It is a 1920 published
+      position, not a survey of the rock.
+    cite:
+      - id: siddapura-anchor
+        says: Smith gives Siddapura's position as N. lat. 14° 49′, E. long. 76° 47′.
+        source: smith-asoka-1920
+        at: ch. III, The Monuments (the Minor Rock Edicts)
+        quote: namely, Siddapura (N. lat. 14° 49′, E. long. 76° 47′)
+notes: >-
+  The one place in the chapter positioned from the 1920 book rather than Wikidata; the dataset's Siddapura
+  items are other towns of the name.

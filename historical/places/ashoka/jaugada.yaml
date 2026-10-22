@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  The rock in the ancient walled town of Jaugada in Ganjam, carrying the southern Kalinga version of the
+  rock edicts. Smith identifies the town with Samāpā, whose high officers the Jaugada Kalinga Edicts address.
+types: [other, settlement]
+names:
+  - form: Jaugada
+    lang: en
+    script: Latn
+    cite:
+      - id: jaugada-name
+        says: >-
+          Smith places the southern version on a rock near the centre of the ancient walled town of Jaugada,
+          which he takes to be Samâpâ.
+        source: smith-asoka-1920
+        at: ch. III, The Monuments
+        quote: which probably is the town Samâpâ mentioned in the local edicts
+  - form: Samāpā
+    lang: pra
+    script: Latn
+    note: >-
+      The town the Jaugada edicts address. Smith's identification of it with Jaugada is an interpretation.
+    cite:
+      - id: samapa-name
+        says: >-
+          The Jaugada text of the Borderers' Edict is addressed to the high officers at Samapa.
+        source: asoka-inscriptions
+        at: Kalinga Edict I (Borderers' Edict), Jaugada text
+        quote: At Samapa the High Officers are to be addressed in the King's words
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [84.75, 19.51666667]
+    notes: >-
+      The coordinate is the inscribed rock's modern position recorded in Wikidata (CC0). Smith gives 19°
+      33′ N, 84° 50′ E.
+    cite:
+      - id: jaugada-anchor
+        says: >-
+          The coordinate is the modern position recorded in Wikidata (CC0); it is a map reference, not a historical
+          claim.
+        source: wikidata
+        at: Q97147597 (P625), revision 1575351153
+notes: >-
+  Typed other: the place is an inscribed monument (a rock, boulder or pillar bearing Aśoka's edicts),
+  which the v0 place types do not name.

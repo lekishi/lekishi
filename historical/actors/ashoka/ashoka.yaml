@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  Aśoka Maurya, the third Maurya emperor, who styles himself Devānaṃpiya Piyadasi in his inscriptions
+  and is named Aśoka in only one of them, at Maski. His edicts record the conquest of Kalinga, his turn
+  to the Buddhist Law of Piety (dhamma), and the officials, tours and envoys through which he spread it.
+types: [person]
+names:
+  - form: Asoka
+    lang: en
+    script: Latn
+    note: Smith's spelling; Aśoka in standard transliteration.
+    cite:
+      - id: ashoka-name
+        says: >-
+          Smith notes that the Maski version of the first Minor Rock Edict alone gives the emperor's personal
+          name, Asoka.
+        source: smith-asoka-1920
+        at: ch. IV, The Rock Edicts (comment on Minor Rock Edict I)
+        quote: No other inscription gives the emperor's personal name Asoka.
+  - form: Devānaṃpiya
+    lang: pra
+    script: Latn
+    note: >-
+      The royal style, which Smith translates His Sacred Majesty; Rock Edict VIII shows earlier kings bore
+      it too.
+    cite:
+      - id: ashoka-devanampiya
+        says: The Brahmagiri text gives the instructions in the name of Devānaṃpiya.
+        source: asoka-inscriptions
+        at: Minor Rock Edict I, Brahmagiri text
+        quote: "'His Sacred Majesty (Devânaṁpiya) gives these instructions:"
+  - form: Priyadasi
+    lang: pra
+    script: Latn
+    note: The style of the Bhābrū Edict, Priyadasi lājā Māgadhe, the King of Magadha.
+    cite:
+      - id: ashoka-priyadasi
+        says: Smith reads the Bhābrū Edict's royal style as Priyadasi, Rājā of Magadha.
+        source: smith-asoka-1920
+        at: ch. IV, The Rock Edicts (comment on the Bhâbrû Edict)
+        quote: Asoka calls himself Priyadasi lâjâ Mâgadhe
+roles:
+  - role: ruler
+    note: >-
+      Accession to death in Smith's chronology; the inscriptions count years from the consecration, which
+      Smith puts in 269 BCE.
+    date:
+      value: 273 BCE..232 BCE
+      mode: duration
+      calendar: julian
+      as_written: Accesion of Asoka—vardhana Maurya (273); Death of Asoka (232)
+    cite:
+      - id: ashoka-reign
+        says: >-
+          Smith's chronology dates Aśoka's accession to 273 BCE, his consecration to 269 BCE and his death
+          to 232 BCE, and calls the Indian dates merely approximate.
+        basis: interpretation
+        attributed_to: Vincent A. Smith (1920)
+        source: smith-asoka-1920
+        at: ch. I, Chronology of the Maurya Period
+        quote: (Indian dates merely approximate)
+notes: >-
+  The inscriptions date themselves by years since the consecration (abhiṣeka), never by an era. Every
+  BCE year in the chapter is Smith's conversion with the consecration as regnal year 1 in 269 BCE, and
+  moves with any revision of that epoch.

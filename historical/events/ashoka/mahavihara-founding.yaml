@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  In the Ceylon chronicles, as Smith retells them, the king of Lanka builds the Mahāvihāra for Mahinda, the
+  island's first monastery, and soon after the Chetiyagiri monastery at Mihintale.
+types: [founding]
+date:
+  value: 255 BCE..249 BCE
+  mode: window
+  calendar: regnal
+  as_written: In those days also (chronicles)
+  cite:
+    - id: mahavihara-time
+      says: >-
+        Smith's retelling puts the founding 'in those days', the time of the bodhi branch.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      source: smith-asoka-1920
+      at: ch. VI, The Ceylonese Legend of Asoka
+      quote: In those days also the king of Ceylon built for Mahendra the Mahavihara
+    - id: mahavihara-founding-error-bound
+      says: >-
+        Smith holds that the error in his dates for the reign cannot exceed three years, so the
+        support runs three years either side of his year.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. I, The History of Asoka
+      quote: the error in any case cannot exceed three years
+places:
+  - place: lanka
+    role: site
+    note: The Mahāvihāra, not located by the cited source.
+  - place: mihintale
+    role: site
+    note: The Chetiyagiri monastery.
+participants:
+  - actor: devanampiya-tissa
+    role: leader
+  - actor: mahinda
+    role: guest
+notes: >-
+  From the Ceylon chronicles in Smith's retelling, which he relates as legend. The BCE year converts the
+  chronicle's regnal year with Smith's epoch, which the chronicles themselves do not use.
+cite:
+  - id: mahavihara-chetiyagiri
+    says: >-
+      The retelling names the Chetiyagiri (Mihintalé) monastery as following soon after.
+    source: smith-asoka-1920
+    at: ch. VI, The Ceylonese Legend of Asoka
+    quote: the construction of the Chetiyagiri (Mihintalé) monastery followed soon after

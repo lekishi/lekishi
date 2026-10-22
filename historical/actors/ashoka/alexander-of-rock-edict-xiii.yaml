@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  The Alexander named as the fourth of the western kings in Rock Edict XIII. Smith reports that he is
+  usually identified with Alexander II of Epirus, while Beloch prefers Alexander of Corinth; the record
+  keeps both readings.
+types: [person]
+names:
+  - form: Alexander
+    lang: en
+    script: Latn
+    cite:
+      - id: alexander-name
+        says: >-
+          Smith reports that the edict's Alexander is usually identified with a king of Epirus.
+        source: smith-asoka-1920
+        at: ch. IV, The Rock Edicts (comment on Rock Edict XIII)
+        quote: Alexander is usually identified with a king of Epirus
+cites:
+  summary:
+    - id: alexander-epirus
+      says: >-
+        Smith reports the usual identification of the edict's Alexander with a king of Epirus who opposed
+        Antigonos Gonatas.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      source: smith-asoka-1920
+      at: ch. IV, The Rock Edicts (comment on Rock Edict XIII)
+      quote: Alexander is usually identified with a king of Epirus
+    - id: alexander-corinth
+      says: Smith reports that Beloch prefers to read the name as Alexander of Corinth.
+      basis: interpretation
+      attributed_to: Karl Julius Beloch, as reported by Vincent A. Smith (1920)
+      role: alternative
+      source: smith-asoka-1920
+      at: ch. IV, The Rock Edicts (comment on Rock Edict XIII)
+      quote: but Beloch prefers to see a reference to a certain Alexander of Corinth
+roles:
+  - role: ruler
+    note: Smith gives Epirus 272–? 258 BCE for the usual identification.
+dispute:
+  status: disputed
+  summary: >-
+    Rock Edict XIII names only Alexander. Smith reports the usual identification with Alexander II of
+    Epirus (272–? 258 BCE) and Beloch's alternative, Alexander of Corinth; the chapter does not choose
+    between them and keeps one record for the edict's Alexander.

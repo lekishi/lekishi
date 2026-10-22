@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  Sopara north of Bombay, the ancient port and mart of Sopāraka, where a fragment of the eighth Rock Edict
+  shows that a copy of the Fourteen Rock Edicts once stood.
+types: [port, settlement]
+names:
+  - form: Sopara
+    lang: en
+    script: Latn
+    cite:
+      - id: sopara-name
+        says: Smith records the fragment found at Sopâra and the town's ancient names.
+        source: smith-asoka-1920
+        at: ch. III, The Monuments
+        quote: >-
+          Sopâra, still a prosperous country town (N. lat. 19° 25’, E. long. 72° 48’), was an important port
+          and mart under the name of Sopâraka
+  - form: Sopāraka
+    lang: pra
+    script: Latn
+    note: Smith's Sopâraka, Sûpâraka or Shurpâraka.
+    claim: sopara-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [72.8, 19.47]
+    notes: >-
+      Label anchor at Wikidata's coordinate for the historical settlement of Sopara. The fragment's find-spot
+      is not separately located.
+    cite:
+      - id: sopara-anchor
+        says: >-
+          The coordinate is the modern position recorded in Wikidata (CC0); it is a map reference, not a historical
+          claim.
+        source: wikidata
+        at: Q7562815 (P625), revision 2420987869
+modern:
+  - form: Nala Sopara, Maharashtra
+    lang: en
+    script: Latn
+    note: The modern town that succeeds Sopara.

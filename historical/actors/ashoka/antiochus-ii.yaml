@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  Antiochos II Theos, the Seleucid king of Syria and Western Asia, the Greek king the Rock Edicts II and
+  XIII name as Aśoka's neighbour on the west.
+types: [person]
+names:
+  - form: Antiochos
+    lang: en
+    script: Latn
+    cite:
+      - id: antiochus-ii-name
+        says: >-
+          Smith identifies the edict's Antiochos with Antiochos Theos, king of Syria or Western Asia.
+        source: smith-asoka-1920
+        at: ch. IV, The Rock Edicts (comment on Rock Edict II)
+        quote: Antiochos is A. Theos, king of Syria or Western Asia
+roles:
+  - role: ruler
+    date:
+      value: 261 BCE..246 BCE
+      mode: duration
+      calendar: julian
+      as_written: 261–246 B. C.
+    cite:
+      - id: antiochus-ii-reign
+        says: Smith dates Antiochos Theos to 261–246 BCE.
+        basis: interpretation
+        attributed_to: Vincent A. Smith (1920)
+        source: smith-asoka-1920
+        at: ch. IV, The Rock Edicts (comment on Rock Edict XIII)
+        quote: Antiochos, scil. Theos (261–246 B. C. )

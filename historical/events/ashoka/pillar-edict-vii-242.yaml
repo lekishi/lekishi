@@ -1,0 +1,61 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Twenty-seven years after his consecration Aśoka reviews his measures for spreading the Law within his
+  empire: pillars of the Law, Censors, shade trees and wells on the roads, almsgiving through the queens
+  and princes, and regulations, which he ranks below reflection.
+types: [occurrence]
+date:
+  value: 245 BCE..239 BCE
+  mode: window
+  calendar: regnal
+  as_written: When I had been consecrated twenty-seven years (Pillar Edict VII)
+  cite:
+    - id: pe7-time
+      says: The seventh Pillar Edict dates itself twenty-seven years after the consecration.
+      source: asoka-inscriptions
+      at: Pillar Edict VII, Delhi-Topra text
+      quote: >-
+        When I had been consecrated twenty-seven years I had this scripture of the Law Written.
+    - id: pe7-conversion
+      says: >-
+        Smith's chronology converts the regnal year to 242 BCE, counting the consecration as year 1 in 269
+        BCE; he calls the Indian dates merely approximate.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. I, Chronology of the Maurya Period
+      quote: Completion of Seven Pillar Edicts
+    - id: pillar-edict-vii-242-error-bound
+      says: >-
+        Smith holds that the error in his dates for the reign cannot exceed three years, so the
+        support runs three years either side of his year.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. I, The History of Asoka
+      quote: the error in any case cannot exceed three years
+places:
+  - place: delhi-topra-pillar
+    role: site
+    note: The only copy.
+participants:
+  - actor: ashoka
+    role: leader
+notes: >-
+  The latest dated inscription. Smith notes it is extant on a single monument, the Delhi-Topra pillar.
+cite:
+  - id: pe7-measures
+    says: The edict lists the pillars, Censors and proclamation among its measures.
+    source: asoka-inscriptions
+    at: Pillar Edict VII, Delhi-Topra text
+    quote: >-
+      I have set up pillars of the Law, appointed Censors (High Officers) of the Law, and made a proclamation
+      of the Law.
+  - id: pe7-single
+    says: Smith says the edict survives only on the Delhi-Topra pillar.
+    role: supporting
+    source: smith-asoka-1920
+    at: ch. V, The Pillar and Miscellaneous Inscriptions (comment on Pillar Edict VII)
+    quote: is extant only on a single monument, the Delhi-Topra pillar

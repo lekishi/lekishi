@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  In the Ceylon chronicles, as Smith retells them, Mahinda is ordained at the canonical age of twenty, at
+  the urging of Moggaliputta Tissa, and Saṅghamittā takes the robe, in the sixth year of the reign.
+types: [occurrence]
+date:
+  value: 267 BCE..261 BCE
+  mode: window
+  calendar: regnal
+  as_written: in the sixth year of the king's reign, dating from his coronation
+  cite:
+    - id: ordination-time
+      says: >-
+        Smith's retelling dates Mahinda's ordination to the sixth year of the reign, counted from the coronation;
+        264 BCE is that year on Smith's 269 BCE epoch.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      source: smith-asoka-1920
+      at: ch. VI, The Ceylonese Legend of Asoka
+      quote: >-
+        Mahendra was ordained in the sixth year of the king's reign, dating from his coronation.
+    - id: mahinda-ordination-264-error-bound
+      says: >-
+        Smith holds that the error in his dates for the reign cannot exceed three years, so the
+        support runs three years either side of his year.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. I, The History of Asoka
+      quote: the error in any case cannot exceed three years
+places:
+  - place: pataliputra
+    role: site
+participants:
+  - actor: mahinda
+    role: subject
+  - actor: sanghamitta
+    role: participant
+  - actor: moggaliputta-tissa
+    role: other
+    note: Persuades the king to allow it.
+notes: >-
+  From the chronicles only. The BCE year is the chapter's conversion of the chronicle's regnal year with
+  Smith's epoch.
+cite:
+  - id: ordination-basis
+    says: >-
+      The retelling says the king was persuaded by Tishya son of Moggali to permit the ordination of both
+      Mahendra and Sanghamitrā.
+    source: smith-asoka-1920
+    at: ch. VI, The Ceylonese Legend of Asoka
+    quote: >-
+      the king was persuaded to permit of the ordination both of Muhendra and his sister Sanghamitrâ

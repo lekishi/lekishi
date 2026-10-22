@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  Sāñchī in Bhopal, at whose great stūpa a fallen and broken pillar carries a version of the schism edict;
+  Smith thinks the splendid buildings there are the monastery the chronicles give to Mahinda's mother
+  at Vedisagiri.
+types: [religious_site]
+names:
+  - form: Sanchi
+    lang: en
+    script: Latn
+    note: Smith writes Sânchî.
+    cite:
+      - id: sanchi-name
+        says: >-
+          Smith's table places the pillar at the southern entrance to the great stūpa of Sāñchī.
+        source: smith-asoka-1920
+        at: ch. III, Existing Inscribed Pillars of Asoka
+        quote: At southern entrance to great stûpa of Sânchî, in Bhopâl State
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [77.73972222, 23.47944444]
+    notes: >-
+      Label anchor at Wikidata's coordinate for the Sanchi complex. Smith gives 23° 29′ N, 77° 45′ E for
+      the pillar.
+    cite:
+      - id: sanchi-anchor
+        says: >-
+          The coordinate is the modern position recorded in Wikidata (CC0); it is a map reference, not a historical
+          claim.
+        source: wikidata
+        at: Q181123 (P625), revision 2553719868

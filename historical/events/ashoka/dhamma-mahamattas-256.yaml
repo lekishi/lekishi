@@ -1,0 +1,61 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Rock Edict V: thirteen years after his consecration Aśoka creates the Censors of the Law of Piety (dhamma-mahāmātras),
+  a new office working among all sects, the western peoples, the prisons and the royal households, at
+  Pāṭaliputra and in every provincial town.
+types: [founding]
+date:
+  value: 259 BCE..253 BCE
+  mode: window
+  calendar: regnal
+  as_written: when I had been consecrated thirteen years (Rock Edict V)
+  cite:
+    - id: censors-time
+      says: >-
+        Rock Edict V says the Censors were created when the king had been consecrated thirteen years.
+      source: asoka-inscriptions
+      at: Rock Edict V, Mānsahra text
+      quote: such Censors were created by me when I had been consecrated thirteen years
+    - id: censors-conversion
+      says: >-
+        Smith's chronology converts the regnal year to 256 BCE, counting the consecration as year 1 in 269
+        BCE; he calls the Indian dates merely approximate.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. I, Chronology of the Maurya Period
+      quote: Completion of Fourteen Rock Edicts
+    - id: dhamma-mahamattas-256-error-bound
+      says: >-
+        Smith holds that the error in his dates for the reign cannot exceed three years, so the
+        support runs three years either side of his year.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. I, The History of Asoka
+      quote: the error in any case cannot exceed three years
+places:
+  - place: mansehra
+    role: other
+    note: The text Smith translates.
+  - place: pataliputra
+    role: context
+    note: The Girnar text names Pāṭaliputra.
+participants:
+  - actor: ashoka
+    role: leader
+  - actor: maurya-empire
+    role: participant
+notes: >-
+  Smith's table records the appointment of Censors in 256 BCE, his conversion of the thirteenth year after
+  consecration.
+cite:
+  - id: censors-new
+    says: The edict says no such officers had existed before.
+    source: asoka-inscriptions
+    at: Rock Edict V, Mānsahra text
+    quote: >-
+      Now in all the long time past, officers known as Censors [or “High Officers”] of the Law of Piety
+      never had existed

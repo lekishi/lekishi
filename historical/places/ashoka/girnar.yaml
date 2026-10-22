@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  The rock near Junagadh in Kathiawar (Surāṣṭra) on which the Fourteen Rock Edicts are incised. Smith
+  describes it as a granite mass that stood on the margin of the Sudarśana lake, with the later inscriptions
+  of Rudradāman and of Skandagupta's governor on other faces of the same rock.
+types: [other]
+names:
+  - form: Girnar
+    lang: en
+    script: Latn
+    note: Smith's Girnâr, written without the circumflex.
+    cite:
+      - id: girnar-name
+        says: >-
+          Smith names the Girnâr version of the Fourteen Rock Edicts and places the ancient town of Junagadh
+          between the Girnâr and Dâtâr hills.
+        source: smith-asoka-1920
+        at: ch. III, The Monuments
+        quote: The famous Girnar version, ﬁrst described by Colonel Tod in 1822
+at:
+  - interpretation: approximate_point
+    precision: site
+    point: [70.483055555, 21.525833333]
+    notes: >-
+      Position of the inscribed rock (Wikidata's item for the Girnar rock edict). It marks the extant monument;
+      Smith gives the town of Junagadh at 21° 31′ N, 70° 36′ E.
+    cite:
+      - id: girnar-anchor
+        says: >-
+          The coordinate is the modern position recorded in Wikidata (CC0); it is a map reference, not a historical
+          claim.
+        source: wikidata
+        at: Q63342996 (P625), revision 1575346314
+modern:
+  - form: Junagadh, Gujarat
+    lang: en
+    script: Latn
+    note: The modern town beside the rock.
+notes: >-
+  The rock is the extant monument, so its position is a modern survey of the stone, not a reconstruction.
+  The town, the lake and the rock are kept apart: the lake has its own record (sudarsana-lake).

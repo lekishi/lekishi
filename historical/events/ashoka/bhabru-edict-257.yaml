@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  At Bairāṭ the king of Magadha addresses the Buddhist Order directly, declares his faith in the Buddha,
+  the Law and the Order, and names seven passages of scripture he wants monks, nuns and lay people to
+  hear and meditate on.
+types: [occurrence]
+date:
+  value: 260 BCE..254 BCE
+  mode: window
+  calendar: julian
+  as_written: undated; Smith's 13th regnal year
+  cite:
+    - id: bhabru-time
+      says: >-
+        Smith thinks the two Bairāṭ inscriptions date from one year, most likely the thirteenth regnal year.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      source: smith-asoka-1920
+      at: ch. IV, The Rock Edicts (comment on the Bhâbrû Edict)
+      quote: >-
+        most likely the 13th regnal year, when Asoka began the publication of inscriptions
+    - id: bhabru-edict-257-error-bound
+      says: >-
+        Smith holds that the error in his dates for the reign cannot exceed three years, so the
+        support runs three years either side of his year.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. I, The History of Asoka
+      quote: the error in any case cannot exceed three years
+places:
+  - place: bairat
+    role: site
+    note: On a boulder from the Inscription Hill, now in the Indian Museum, Calcutta.
+participants:
+  - actor: ashoka
+    role: leader
+  - actor: buddhist-sangha
+    role: guest
+    note: Addressed.
+notes: >-
+  The one avowedly Buddhist edict, and an approximate date for a list of canonical texts. Smith's own
+  table marks it '(?)' under 256 BCE; his comment prefers 257 BCE.
+cite:
+  - id: bhabru-basis
+    says: The edict commends the seven passages to monks and nuns.
+    source: asoka-inscriptions
+    at: Bhābrū Edict, Bairāṭ
+    quote: >-
+      these, Reverend Sirs, I desire that many monks and nuns should frequently hear and meditate

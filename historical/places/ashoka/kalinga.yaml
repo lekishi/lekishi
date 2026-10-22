@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  Kalinga, the coastal country on the Bay of Bengal that Aśoka conquered in the eighth year after his
+  consecration. Smith describes it as lying between the Mahānadī and the Godāvarī, nearly equivalent to
+  Orissa. Rock Edict XIII, which records the war, was not published in Kalinga itself.
+types: [region]
+names:
+  - form: Kalinga
+    lang: en
+    script: Latn
+    cite:
+      - id: kalinga-name
+        says: >-
+          Smith glosses Kalinga as the province on the coast of the Bay of Bengal between the Mahânadî and
+          Godâvarî.
+        source: smith-asoka-1920
+        at: ch. IV, The Rock Edicts (comment on Rock Edict XIII)
+        quote: >-
+          the province on the coast of the Bay of Bengal between the Mahânadî and Godâvarî, nearly equivalent
+          to Orissa
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [85.5, 20.15]
+    notes: >-
+      Label anchor for the region at Wikidata's coordinate for historical Kalinga. No boundary is drawn:
+      Smith gives only the two rivers that bound it.
+    cite:
+      - id: kalinga-anchor
+        says: >-
+          The coordinate is the modern position recorded in Wikidata (CC0); it is a map reference, not a historical
+          claim.
+        source: wikidata
+        at: Q1150706 (P625), revision 2546615477
+notes: >-
+  A region without a drawn extent. The two edict rocks inside it, Dhauli and Jaugada, have their own records.

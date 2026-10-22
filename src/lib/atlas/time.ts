@@ -83,6 +83,11 @@ export function eventsInWindow(
 /**
  * The next (or previous) event boundary after the playhead, used for
  * chronological stepping. Returns `null` at the ends of the window.
+ *
+ * An event whose support runs past an edge of the window contributes that edge,
+ * not its own boundary: stepping must never move the playhead out of the
+ * window, and an uncertain date (a support wider than the window, as a
+ * converted regnal year's often is) must not be narrowed to make it fit.
  */
 export function stepToEventBoundary(
   events: readonly HistoricalEvent[],
@@ -92,6 +97,7 @@ export function stepToEventBoundary(
 ): number | null {
   const candidates = eventsInWindow(events, window)
     .flatMap((event) => [event.occurrence.startYear, event.occurrence.endYear])
+    .map((year) => clampToWindow(year, window))
     .filter((year) => (direction === 1 ? year > playhead : year < playhead))
     .sort((a, b) => (direction === 1 ? a - b : b - a))
 

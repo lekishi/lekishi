@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: >-
+  Aśoka's rule over the Maurya empire from his accession to his death, in Smith's chronology.
+types: [rulership]
+from: ashoka
+to: maurya-empire
+date:
+  value: 273 BCE..232 BCE
+  mode: duration
+  calendar: julian
+  as_written: 273 accession; 232 death
+cite:
+  - id: ashoka-rulership-basis
+    says: >-
+      Smith's chronology dates the reign from the accession in 273 BCE to the death in 232 BCE.
+    basis: interpretation
+    attributed_to: Vincent A. Smith (1920)
+    source: smith-asoka-1920
+    at: ch. I, Chronology of the Maurya Period
+    quote: Accesion of Asoka—vardhana Maurya.

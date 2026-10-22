@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Aśoka dies. Smith's chronology dates his death to 232 BCE; the Ceylon chronicles give him a reign of
+  thirty-seven years from his coronation, and Tibetan tradition fifty-four.
+types: [occurrence]
+date:
+  value: 235 BCE..229 BCE
+  mode: window
+  calendar: julian
+  as_written: Death of Asoka (Smith); having reigned thirty-seven years (chronicles)
+  cite:
+    - id: death-time
+      says: Smith's chronology dates Aśoka's death to 232 BCE.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      source: smith-asoka-1920
+      at: ch. I, Chronology of the Maurya Period
+      quote: Death of Asoka
+    - id: death-chronicle
+      says: >-
+        Smith's retelling of the chronicles says he died having reigned thirty-seven years.
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. VI, The Ceylonese Legend of Asoka
+      quote: having reigned thirty-seven years
+    - id: ashoka-death-232-error-bound
+      says: >-
+        Smith holds that the error in his dates for the reign cannot exceed three years, so the
+        support runs three years either side of his year.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. I, The History of Asoka
+      quote: the error in any case cannot exceed three years
+participants:
+  - actor: ashoka
+    role: subject
+notes: >-
+  No source names the place of death, so the event carries no place and is not drawn on the map.
+dispute:
+  status: disputed
+  summary: >-
+    The length of the reign differs: thirty-seven years in the Ceylon chronicles, fifty-four in the Tibetan
+    tradition that Smith cites. The chapter publishes Smith's 232 BCE.
+cite:
+  - id: death-tibetan
+    says: Smith notes the Tibetan tradition of a fifty-four-year reign.
+    role: conflicting
+    source: smith-asoka-1920
+    at: ch. VI, The Ceylonese Legend of Asoka
+    quote: According to the Tibetan tradition, Asoka reigned for fifty—four years

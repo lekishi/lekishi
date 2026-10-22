@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Twenty-six years after his consecration Aśoka has the first six Pillar Edicts written, on the protection,
+  regulation and happiness that come from the Law of Piety, the duties of his agents and wardens of the
+  marches, and the species exempt from slaughter.
+types: [occurrence]
+date:
+  value: 246 BCE..240 BCE
+  mode: window
+  calendar: regnal
+  as_written: When I had been consecrated twenty-six years (Pillar Edict I)
+  cite:
+    - id: pillar-edicts-time
+      says: The first Pillar Edict dates itself twenty-six years after the consecration.
+      source: asoka-inscriptions
+      at: Pillar Edict I, Delhi-Topra text
+      quote: >-
+        When I had been consecrated twenty-six years I caused this scripture of the Law of Piety to be written.
+    - id: pillar-edicts-conversion
+      says: >-
+        Smith's chronology converts the regnal year to 243 BCE, counting the consecration as year 1 in 269
+        BCE; he calls the Indian dates merely approximate.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. I, Chronology of the Maurya Period
+      quote: Composition of Pillar Edict VI.,
+    - id: pillar-edicts-243-error-bound
+      says: >-
+        Smith holds that the error in his dates for the reign cannot exceed three years, so the
+        support runs three years either side of his year.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. I, The History of Asoka
+      quote: the error in any case cannot exceed three years
+places:
+  - place: delhi-topra-pillar
+    role: site
+    note: Now at Delhi; set up at Topra.
+  - place: delhi-meerut-pillar
+    role: site
+    note: Now at Delhi; set up at Meerut.
+  - place: allahabad-pillar
+    role: site
+  - place: lauriya-araraj
+    role: site
+  - place: lauriya-nandangarh
+    role: site
+  - place: rampurva
+    role: site
+participants:
+  - actor: ashoka
+    role: leader
+notes: >-
+  Six surviving pillars carry Edicts I–VI. Two now stand at Delhi and one at Allahabad, moved from their
+  first sites; they are drawn where they stand. The inscription dates itself by years since the consecration;
+  the BCE year is Smith's conversion and inherits the uncertainty of his 269 BCE epoch.

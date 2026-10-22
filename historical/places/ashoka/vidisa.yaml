@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: >-
+  Vedisagiri, the home of Aśoka's consort Devī in the Ceylon chronicles, which Smith places at Besnagar
+  near Bhilsa, the modern Vidisha, a few miles from Sāñchī.
+types: [settlement]
+names:
+  - form: Vedisagiri
+    lang: pi
+    script: Latn
+    cite:
+      - id: vedisagiri-name
+        says: >-
+          Smith's retelling of the chronicles says Devī lived at Vedisagiri, which he glosses as Besnagar
+          near Bhilsā.
+        source: smith-asoka-1920
+        at: ch. VI, The Ceylonese Legend of Asoka
+        quote: named Devî, who resided at Vedisagiri (Besnagar near Bhilsâ)
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [77.8061, 23.5239]
+    notes: Label anchor at Wikidata's coordinate for the modern town of Vidisha (Bhilsa).
+    cite:
+      - id: vidisa-anchor
+        says: >-
+          The coordinate is the modern position recorded in Wikidata (CC0); it is a map reference, not a historical
+          claim.
+        source: wikidata
+        at: Q1637471 (P625), revision 2547426170
+modern:
+  - form: Vidisha, Madhya Pradesh
+    lang: en
+    script: Latn
+    note: Smith's Bhilsâ; Besnagar is nearby.

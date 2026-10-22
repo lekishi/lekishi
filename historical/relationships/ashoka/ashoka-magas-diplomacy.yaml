@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: >-
+  Aśoka's claim in Rock Edict XIII that his conquest by the Law of Piety reached the realm of a western
+  king it names. Smith dates Magas's death to 258 BCE.
+types: [diplomacy]
+from: ashoka
+to: magas-of-cyrene
+causality: not_asserted
+notes: >-
+  One-sided: the edict's claim, not a recorded reception. No arc is asserted as an attested journey.
+cite:
+  - id: ashoka-magas-diplomacy-basis
+    says: >-
+      Rock Edict XIII names the king among those whose realms the conquest by the Law reached.
+    source: asoka-inscriptions
+    at: Rock Edict XIII, Shāhbāzgaṛhi text
+    quote: the four (4) kings named severally Ptolemy, Antigonos, Magas, and Alexander
+  - id: ashoka-magas-diplomacy-envoys
+    says: >-
+      Smith reads the edict as showing that Aśoka's envoys carried his teaching among the peoples named.
+    basis: interpretation
+    attributed_to: Vincent A. Smith (1920)
+    role: supporting
+    source: smith-asoka-1920
+    at: ch. IV, The Rock Edicts (comment on Rock Edict XIII)
+    quote: >-
+      The next sentence shows that Asoka's envoys or missioners, dûta, carried on his propaganda among all
+      the peoples named.

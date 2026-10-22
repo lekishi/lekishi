@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: >-
+  Bindusāra, son of Chandragupta and father of Aśoka, the second Maurya emperor. The Ceylon chronicles
+  have Aśoka hurry from Ujjain to Pāṭaliputra at news of his mortal illness.
+types: [person]
+names:
+  - form: Bindusāra
+    lang: sa
+    script: Latn
+    cite:
+      - id: bindusara-name
+        says: Smith's chronology dates Bindusāra's accession to 301 BCE.
+        source: smith-asoka-1920
+        at: ch. I, Chronology of the Maurya Period
+        quote: Battle of Ipsos. Accession of Bindusâra.
+roles:
+  - role: ruler
+    date:
+      value: 301 BCE..273 BCE
+      mode: duration
+      calendar: julian
+      as_written: 301 Accession of Bindusâra; 273 Accesion of Asoka—vardhana Maurya
+    cite:
+      - id: bindusara-reign
+        says: >-
+          Smith's chronology puts Bindusāra's reign between his accession in 301 BCE and Aśoka's in 273 BCE.
+        basis: interpretation
+        attributed_to: Vincent A. Smith (1920)
+        source: smith-asoka-1920
+        at: ch. I, Chronology of the Maurya Period
+        quote: Battle of Ipsos. Accession of Bindusâra.

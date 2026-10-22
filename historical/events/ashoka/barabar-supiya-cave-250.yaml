@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Nineteen years after his consecration Aśoka grants a third cave in the Khalatika hill, the Supiyā cave,
+  for as long as sun and moon endure.
+types: [other]
+date:
+  value: 253 BCE..247 BCE
+  mode: window
+  calendar: regnal
+  as_written: when he had been consecrated nineteen years (Barābar dedication III)
+  cite:
+    - id: supiya-time
+      says: The third dedication is dated nineteen years after the consecration.
+      source: asoka-inscriptions
+      at: Barābar cave dedication III (Supiyā or Karṇa-chaupār cave)
+      quote: when he had been consecrated nineteen years, granted the (?) Supiyâ Cave
+    - id: supiya-conversion
+      says: >-
+        Smith's chronology converts the regnal year to 250 BCE, counting the consecration as year 1 in 269
+        BCE; he calls the Indian dates merely approximate.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. I, Chronology of the Maurya Period
+      quote: Dedication of Barâbar Cave No. 3 to the Âjîvikas.
+    - id: barabar-supiya-cave-250-error-bound
+      says: >-
+        Smith holds that the error in his dates for the reign cannot exceed three years, so the
+        support runs three years either side of his year.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. I, The History of Asoka
+      quote: the error in any case cannot exceed three years
+places:
+  - place: barabar-hills
+    role: site
+participants:
+  - actor: ashoka
+    role: leader
+  - actor: ajivikas
+    role: guest
+    note: Not named in this damaged text; Smith counts it among the Ājīvika dedications.
+notes: >-
+  The inscription is almost illegible, and the cave's name is queried in Smith's translation. The inscription
+  dates itself by years since the consecration; the BCE year is Smith's conversion and inherits the uncertainty
+  of his 269 BCE epoch.

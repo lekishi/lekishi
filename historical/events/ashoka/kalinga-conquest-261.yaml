@@ -1,0 +1,64 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Aśoka conquers Kalinga in the eighth year after his consecration. Rock Edict XIII counts 150,000 carried
+  away captive and 100,000 slain, and says that the conquest brought him remorse and a zealous devotion
+  to the Law of Piety.
+types: [campaign]
+date:
+  value: 264 BCE..258 BCE
+  mode: window
+  calendar: regnal
+  as_written: when he had been consecrated eight years (Rock Edict XIII)
+  cite:
+    - id: kalinga-time
+      says: >-
+        Rock Edict XIII dates the conquest to when the king had been consecrated eight years.
+      source: asoka-inscriptions
+      at: Rock Edict XIII, Shāhbāzgaṛhi text
+      quote: >-
+        conquered by His Sacred and Gracious Majesty the King when he had been consecrated eight years
+    - id: kalinga-conversion
+      says: Smith puts the ninth regnal year approximately in 261 BCE.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. IV, The Rock Edicts (comment on Rock Edict XIII)
+      quote: >-
+        The date of the conquest by Asoka in his ninth regnal year would fall approximately in 261 B. C.
+    - id: kalinga-conquest-261-error-bound
+      says: >-
+        Smith holds that the error in his dates for the reign cannot exceed three years, so the
+        support runs three years either side of his year.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. I, The History of Asoka
+      quote: the error in any case cannot exceed three years
+places:
+  - place: kalinga
+    role: site
+participants:
+  - actor: ashoka
+    role: leader
+  - actor: maurya-empire
+    role: participant
+notes: >-
+  Rock Edict XIII was not published in Kalinga: the two Kalinga rocks replace Edicts XI to XIII with the
+  Kalinga Edicts. The casualty figures are the edict's own.
+cite:
+  - id: kalinga-casualties
+    says: The edict counts the captives and the slain.
+    source: asoka-inscriptions
+    at: Rock Edict XIII, Shāhbāzgaṛhi text
+    quote: >-
+      One hundred and fifty thousand persons were thence carried away captive, one hundred thousand were
+      there slain, and many times that number died.
+  - id: kalinga-remorse
+    says: The edict records the king's remorse for the conquest.
+    role: supporting
+    source: asoka-inscriptions
+    at: Rock Edict XIII, Shāhbāzgaṛhi text
+    quote: >-
+      Thence arises the remorse of His Sacred Majesty for having conquered the Kalingas

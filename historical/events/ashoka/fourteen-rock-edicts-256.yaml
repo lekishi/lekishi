@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  The Fourteen Rock Edicts, which Rock Edict XIV calls a scripture of the Law written sometimes condensed
+  and sometimes expanded across a great dominion, stand complete on rocks from the Peshawar valley to
+  Kathiawar, the Yamunā and Kalinga.
+types: [occurrence]
+date:
+  value: 259 BCE..253 BCE
+  mode: window
+  calendar: julian
+  as_written: Completion of Fourteen Rock Edicts
+  cite:
+    - id: fourteen-time
+      says: Smith's chronology dates the completion of the Fourteen Rock Edicts to 256 BCE.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      source: smith-asoka-1920
+      at: ch. I, Chronology of the Maurya Period
+      quote: Completion of Fourteen Rock Edicts
+    - id: fourteen-rock-edicts-256-error-bound
+      says: >-
+        Smith holds that the error in his dates for the reign cannot exceed three years, so the
+        support runs three years either side of his year.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. I, The History of Asoka
+      quote: the error in any case cannot exceed three years
+places:
+  - place: girnar
+    role: site
+  - place: kalsi
+    role: site
+  - place: shahbazgarhi
+    role: site
+    note: In Kharoṣṭhī.
+  - place: mansehra
+    role: site
+    note: In Kharoṣṭhī.
+  - place: sopara
+    role: site
+    note: A fragment of Edict VIII only.
+  - place: dhauli
+    role: site
+    note: With the Kalinga Edicts in place of XI–XIII.
+  - place: jaugada
+    role: site
+    note: With the Kalinga Edicts in place of XI–XIII.
+participants:
+  - actor: ashoka
+    role: leader
+notes: >-
+  One event for a series inscribed at seven places, whose cutting dates are unknown individually. The
+  sites are the copies Smith knew in 1920; later finds are outside the cited edition.
+cite:
+  - id: fourteen-epilogue
+    says: The epilogue says the dominion is great and much has been and will be written.
+    source: asoka-inscriptions
+    at: Rock Edict XIV, Girnar text
+    quote: >-
+      For great is my dominion, and much has been written, and much shall I cause to be written.

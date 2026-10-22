@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: >-
+  Twelve years after his consecration Aśoka grants two caves in the Khalatika (Barābar) hill, the Banyan-tree
+  cave and the Khalatika cave, to the Ājīvika ascetics.
+types: [other]
+date:
+  value: 260 BCE..254 BCE
+  mode: window
+  calendar: regnal
+  as_written: when he had been consecrated twelve years (Barābar dedications I and II)
+  cite:
+    - id: barabar-257-time
+      says: >-
+        The dedication grants the Banyan-tree cave to the Ājīvikas when the king had been consecrated twelve
+        years.
+      source: asoka-inscriptions
+      at: Barābar cave dedication I (Banyan-tree or Sudāma cave)
+      quote: This Banyan—tree cave was granted to the Âjîvikas by the King's Grace
+    - id: barabar-257-conversion
+      says: >-
+        Smith's chronology converts the regnal year to 257 BCE, counting the consecration as year 1 in 269
+        BCE; he calls the Indian dates merely approximate.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. I, Chronology of the Maurya Period
+      quote: dedicated Barâbar Caves 1 and 2 to the Âjîvikas
+    - id: barabar-caves-257-error-bound
+      says: >-
+        Smith holds that the error in his dates for the reign cannot exceed three years, so the
+        support runs three years either side of his year.
+      basis: interpretation
+      attributed_to: Vincent A. Smith (1920)
+      role: supporting
+      source: smith-asoka-1920
+      at: ch. I, The History of Asoka
+      quote: the error in any case cannot exceed three years
+places:
+  - place: barabar-hills
+    role: site
+participants:
+  - actor: ashoka
+    role: leader
+  - actor: ajivikas
+    role: guest
+    note: The recipients.
+notes: >-
+  A royal grant to a non-Buddhist order, which the chapter keeps beside the Buddhist record. The inscription
+  dates itself by years since the consecration; the BCE year is Smith's conversion and inherits the uncertainty
+  of his 269 BCE epoch.
+cite:
+  - id: barabar-257-second
+    says: The second dedication grants a cave in the Khalatika hill to the Ājīvikas.
+    source: asoka-inscriptions
+    at: Barābar cave dedication II (Khalatika or Viśva-jhoprī cave)
+    quote: This cave in the Khalatikei Hill was granted to the Âjîvikas

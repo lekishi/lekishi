@@ -1,0 +1,3776 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "test_vectors",
+  "area": "territories",
+  "description": "Territory vectors: a territory is a dated control snapshot, one controller, one bounded window and the places a cited source records it holding (rfd/0002/TERRITORIES.adoc). The vectors pin that the window is bounded, each place appears once, the controller is an actor, a place is gained by an event or relationship no later than the snapshot, and two controllers share a place in overlapping windows only under a dispute.",
+  "vectors": [
+    {
+      "id": "territories/a-dated-snapshot-is-valid",
+      "why": "A snapshot names a state, a bounded window and the places a cited source records it holding, with the event by which it gained one.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-annals",
+            "kind": "primary"
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-qin",
+            "published": true,
+            "content": {
+              "summary": "Qin, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-record",
+                "statement": "The annals name Qin.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-chu",
+            "published": true,
+            "content": {
+              "summary": "Chu, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-chu-record",
+                "statement": "The annals name Chu.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-capital",
+            "published": true,
+            "content": {
+              "summary": "the capital, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-capital-record",
+                "statement": "The annals name the capital.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-city",
+            "published": true,
+            "content": {
+              "summary": "the city, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-record",
+                "statement": "The annals name the city.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-city-taken",
+            "published": true,
+            "content": {
+              "summary": "The city is taken.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-taken-record",
+                "statement": "The annals record the city taken.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "territory",
+            "record_id": "lks:territory:vector-qin-224",
+            "published": true,
+            "content": {
+              "summary": "The places the controller held.",
+              "controller_id": "lks:actor:vector-qin",
+              "time": {
+                "source_expression": "224–223 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "duration",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 223,
+                    "era": "bce"
+                  }
+                }
+              },
+              "places": [
+                {
+                  "place_id": "lks:place:vector-capital",
+                  "role": "seat"
+                },
+                {
+                  "place_id": "lks:place:vector-city",
+                  "role": "held",
+                  "gained_record_id": "lks:event:vector-city-taken"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-224-record",
+                "statement": "The annals record the controller holding these places.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": true
+      }
+    },
+    {
+      "id": "territories/an-undated-snapshot-is-refused",
+      "why": "A snapshot with no date would let the atlas show control at any time; held from when is what the record is for.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-annals",
+            "kind": "primary"
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-qin",
+            "published": true,
+            "content": {
+              "summary": "Qin, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-record",
+                "statement": "The annals name Qin.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-chu",
+            "published": true,
+            "content": {
+              "summary": "Chu, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-chu-record",
+                "statement": "The annals name Chu.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-capital",
+            "published": true,
+            "content": {
+              "summary": "the capital, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-capital-record",
+                "statement": "The annals name the capital.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-city",
+            "published": true,
+            "content": {
+              "summary": "the city, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-record",
+                "statement": "The annals name the city.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-city-taken",
+            "published": true,
+            "content": {
+              "summary": "The city is taken.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-taken-record",
+                "statement": "The annals record the city taken.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "territory",
+            "record_id": "lks:territory:vector-qin-undated",
+            "published": true,
+            "content": {
+              "summary": "The places the controller held.",
+              "controller_id": "lks:actor:vector-qin",
+              "time": null,
+              "places": [
+                {
+                  "place_id": "lks:place:vector-city",
+                  "role": "held"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-undated-record",
+                "statement": "The annals record the controller holding these places.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "codes": [
+          "territory_time_unbounded"
+        ]
+      }
+    },
+    {
+      "id": "territories/an-open-ended-snapshot-is-refused",
+      "why": "Held from 224 BCE on, with no end, is an inference no source states; the atlas never carries a snapshot forward, so its date must be bounded at both ends.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-annals",
+            "kind": "primary"
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-qin",
+            "published": true,
+            "content": {
+              "summary": "Qin, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-record",
+                "statement": "The annals name Qin.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-chu",
+            "published": true,
+            "content": {
+              "summary": "Chu, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-chu-record",
+                "statement": "The annals name Chu.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-capital",
+            "published": true,
+            "content": {
+              "summary": "the capital, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-capital-record",
+                "statement": "The annals name the capital.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-city",
+            "published": true,
+            "content": {
+              "summary": "the city, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-record",
+                "statement": "The annals name the city.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-city-taken",
+            "published": true,
+            "content": {
+              "summary": "The city is taken.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-taken-record",
+                "statement": "The annals record the city taken.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "territory",
+            "record_id": "lks:territory:vector-qin-open",
+            "published": true,
+            "content": {
+              "summary": "The places the controller held.",
+              "controller_id": "lks:actor:vector-qin",
+              "time": {
+                "source_expression": "from 224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "duration",
+                "interval": {
+                  "bounds": "lower_only",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": null
+                }
+              },
+              "places": [
+                {
+                  "place_id": "lks:place:vector-city",
+                  "role": "held"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-open-record",
+                "statement": "The annals record the controller holding these places.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "codes": [
+          "territory_time_unbounded"
+        ]
+      }
+    },
+    {
+      "id": "territories/a-place-is-listed-once",
+      "why": "A snapshot says a place was held, not how often; a repeated place is a copying error that would draw one mark twice.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-annals",
+            "kind": "primary"
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-qin",
+            "published": true,
+            "content": {
+              "summary": "Qin, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-record",
+                "statement": "The annals name Qin.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-chu",
+            "published": true,
+            "content": {
+              "summary": "Chu, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-chu-record",
+                "statement": "The annals name Chu.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-capital",
+            "published": true,
+            "content": {
+              "summary": "the capital, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-capital-record",
+                "statement": "The annals name the capital.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-city",
+            "published": true,
+            "content": {
+              "summary": "the city, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-record",
+                "statement": "The annals name the city.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-city-taken",
+            "published": true,
+            "content": {
+              "summary": "The city is taken.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-taken-record",
+                "statement": "The annals record the city taken.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "territory",
+            "record_id": "lks:territory:vector-qin-repeat",
+            "published": true,
+            "content": {
+              "summary": "The places the controller held.",
+              "controller_id": "lks:actor:vector-qin",
+              "time": {
+                "source_expression": "224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "duration",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              },
+              "places": [
+                {
+                  "place_id": "lks:place:vector-city",
+                  "role": "held"
+                },
+                {
+                  "place_id": "lks:place:vector-city",
+                  "role": "seat"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-repeat-record",
+                "statement": "The annals record the controller holding these places.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "codes": [
+          "territory_place_repeated"
+        ]
+      }
+    },
+    {
+      "id": "territories/a-snapshot-holds-at-least-one-place",
+      "why": "A snapshot with no place says nothing the map can show and nothing a source records.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-annals",
+            "kind": "primary"
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-qin",
+            "published": true,
+            "content": {
+              "summary": "Qin, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-record",
+                "statement": "The annals name Qin.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-chu",
+            "published": true,
+            "content": {
+              "summary": "Chu, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-chu-record",
+                "statement": "The annals name Chu.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-capital",
+            "published": true,
+            "content": {
+              "summary": "the capital, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-capital-record",
+                "statement": "The annals name the capital.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-city",
+            "published": true,
+            "content": {
+              "summary": "the city, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-record",
+                "statement": "The annals name the city.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-city-taken",
+            "published": true,
+            "content": {
+              "summary": "The city is taken.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-taken-record",
+                "statement": "The annals record the city taken.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "territory",
+            "record_id": "lks:territory:vector-qin-empty",
+            "published": true,
+            "content": {
+              "summary": "The places the controller held.",
+              "controller_id": "lks:actor:vector-qin",
+              "time": {
+                "source_expression": "224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "duration",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              },
+              "places": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-empty-record",
+                "statement": "The annals record the controller holding these places.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "codes": [
+          "schema_violation"
+        ]
+      }
+    },
+    {
+      "id": "territories/the-controller-is-an-actor",
+      "why": "Control is held by a state, a dynasty or a polity; a place cannot control places.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-annals",
+            "kind": "primary"
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-qin",
+            "published": true,
+            "content": {
+              "summary": "Qin, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-record",
+                "statement": "The annals name Qin.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-chu",
+            "published": true,
+            "content": {
+              "summary": "Chu, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-chu-record",
+                "statement": "The annals name Chu.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-capital",
+            "published": true,
+            "content": {
+              "summary": "the capital, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-capital-record",
+                "statement": "The annals name the capital.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-city",
+            "published": true,
+            "content": {
+              "summary": "the city, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-record",
+                "statement": "The annals name the city.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-city-taken",
+            "published": true,
+            "content": {
+              "summary": "The city is taken.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-taken-record",
+                "statement": "The annals record the city taken.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "territory",
+            "record_id": "lks:territory:vector-place-controls",
+            "published": true,
+            "content": {
+              "summary": "The places the controller held.",
+              "controller_id": "lks:place:vector-capital",
+              "time": {
+                "source_expression": "224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "duration",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              },
+              "places": [
+                {
+                  "place_id": "lks:place:vector-city",
+                  "role": "held"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-place-controls-record",
+                "statement": "The annals record the controller holding these places.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "codes": [
+          "reference_kind_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "territories/a-held-place-is-a-place",
+      "why": "A held entry names a place; an actor or event in its place would be drawn nowhere.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-annals",
+            "kind": "primary"
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-qin",
+            "published": true,
+            "content": {
+              "summary": "Qin, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-record",
+                "statement": "The annals name Qin.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-chu",
+            "published": true,
+            "content": {
+              "summary": "Chu, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-chu-record",
+                "statement": "The annals name Chu.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-capital",
+            "published": true,
+            "content": {
+              "summary": "the capital, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-capital-record",
+                "statement": "The annals name the capital.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-city",
+            "published": true,
+            "content": {
+              "summary": "the city, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-record",
+                "statement": "The annals name the city.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-city-taken",
+            "published": true,
+            "content": {
+              "summary": "The city is taken.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-taken-record",
+                "statement": "The annals record the city taken.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "territory",
+            "record_id": "lks:territory:vector-qin-holds-actor",
+            "published": true,
+            "content": {
+              "summary": "The places the controller held.",
+              "controller_id": "lks:actor:vector-qin",
+              "time": {
+                "source_expression": "224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "duration",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              },
+              "places": [
+                {
+                  "place_id": "lks:actor:vector-chu",
+                  "role": "held"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-holds-actor-record",
+                "statement": "The annals record the controller holding these places.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "codes": [
+          "reference_kind_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "territories/the-gaining-record-must-exist",
+      "why": "How a place was gained is a reference the card follows; one that resolves to nothing would leave the claim unsupported.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-annals",
+            "kind": "primary"
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-qin",
+            "published": true,
+            "content": {
+              "summary": "Qin, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-record",
+                "statement": "The annals name Qin.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-chu",
+            "published": true,
+            "content": {
+              "summary": "Chu, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-chu-record",
+                "statement": "The annals name Chu.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-capital",
+            "published": true,
+            "content": {
+              "summary": "the capital, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-capital-record",
+                "statement": "The annals name the capital.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-city",
+            "published": true,
+            "content": {
+              "summary": "the city, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-record",
+                "statement": "The annals name the city.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-city-taken",
+            "published": true,
+            "content": {
+              "summary": "The city is taken.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-taken-record",
+                "statement": "The annals record the city taken.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "territory",
+            "record_id": "lks:territory:vector-qin-missing",
+            "published": true,
+            "content": {
+              "summary": "The places the controller held.",
+              "controller_id": "lks:actor:vector-qin",
+              "time": {
+                "source_expression": "224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "duration",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              },
+              "places": [
+                {
+                  "place_id": "lks:place:vector-city",
+                  "role": "held",
+                  "gained_record_id": "lks:event:vector-missing"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-missing-record",
+                "statement": "The annals record the controller holding these places.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "codes": [
+          "unresolved_reference"
+        ]
+      }
+    },
+    {
+      "id": "territories/a-place-is-gained-by-an-event-or-relationship",
+      "why": "A place is gained by something that happened, an event or a relationship such as an annexation, never by a place or an actor.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-annals",
+            "kind": "primary"
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-qin",
+            "published": true,
+            "content": {
+              "summary": "Qin, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-record",
+                "statement": "The annals name Qin.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-chu",
+            "published": true,
+            "content": {
+              "summary": "Chu, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-chu-record",
+                "statement": "The annals name Chu.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-capital",
+            "published": true,
+            "content": {
+              "summary": "the capital, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-capital-record",
+                "statement": "The annals name the capital.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-city",
+            "published": true,
+            "content": {
+              "summary": "the city, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-record",
+                "statement": "The annals name the city.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-city-taken",
+            "published": true,
+            "content": {
+              "summary": "The city is taken.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-taken-record",
+                "statement": "The annals record the city taken.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "territory",
+            "record_id": "lks:territory:vector-qin-gained-place",
+            "published": true,
+            "content": {
+              "summary": "The places the controller held.",
+              "controller_id": "lks:actor:vector-qin",
+              "time": {
+                "source_expression": "224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "duration",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              },
+              "places": [
+                {
+                  "place_id": "lks:place:vector-city",
+                  "role": "held",
+                  "gained_record_id": "lks:place:vector-capital"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-gained-place-record",
+                "statement": "The annals record the controller holding these places.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "codes": [
+          "territory_gained_kind_mismatch"
+        ]
+      }
+    },
+    {
+      "id": "territories/a-place-is-not-gained-after-the-snapshot",
+      "why": "A snapshot ending in 225 BCE cannot hold a city by a capture of 224 BCE; the gain would postdate the control it explains.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-annals",
+            "kind": "primary"
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-qin",
+            "published": true,
+            "content": {
+              "summary": "Qin, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-record",
+                "statement": "The annals name Qin.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-chu",
+            "published": true,
+            "content": {
+              "summary": "Chu, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-chu-record",
+                "statement": "The annals name Chu.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-capital",
+            "published": true,
+            "content": {
+              "summary": "the capital, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-capital-record",
+                "statement": "The annals name the capital.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-city",
+            "published": true,
+            "content": {
+              "summary": "the city, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-record",
+                "statement": "The annals name the city.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-city-taken",
+            "published": true,
+            "content": {
+              "summary": "The city is taken.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-taken-record",
+                "statement": "The annals record the city taken.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "territory",
+            "record_id": "lks:territory:vector-qin-225",
+            "published": true,
+            "content": {
+              "summary": "The places the controller held.",
+              "controller_id": "lks:actor:vector-qin",
+              "time": {
+                "source_expression": "226–225 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "duration",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 226,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 225,
+                    "era": "bce"
+                  }
+                }
+              },
+              "places": [
+                {
+                  "place_id": "lks:place:vector-city",
+                  "role": "held",
+                  "gained_record_id": "lks:event:vector-city-taken"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-225-record",
+                "statement": "The annals record the controller holding these places.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "codes": [
+          "territory_gained_after_window"
+        ]
+      }
+    },
+    {
+      "id": "territories/two-controllers-overlapping-need-a-dispute",
+      "why": "Qin and Chu both holding the city in 224 BCE, with no dispute on either, would draw two tints as if both were certain.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-annals",
+            "kind": "primary"
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-qin",
+            "published": true,
+            "content": {
+              "summary": "Qin, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-record",
+                "statement": "The annals name Qin.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-chu",
+            "published": true,
+            "content": {
+              "summary": "Chu, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-chu-record",
+                "statement": "The annals name Chu.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-capital",
+            "published": true,
+            "content": {
+              "summary": "the capital, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-capital-record",
+                "statement": "The annals name the capital.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-city",
+            "published": true,
+            "content": {
+              "summary": "the city, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-record",
+                "statement": "The annals name the city.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-city-taken",
+            "published": true,
+            "content": {
+              "summary": "The city is taken.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-taken-record",
+                "statement": "The annals record the city taken.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "territory",
+            "record_id": "lks:territory:vector-qin-224",
+            "published": true,
+            "content": {
+              "summary": "The places the controller held.",
+              "controller_id": "lks:actor:vector-qin",
+              "time": {
+                "source_expression": "224–223 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "duration",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 223,
+                    "era": "bce"
+                  }
+                }
+              },
+              "places": [
+                {
+                  "place_id": "lks:place:vector-city",
+                  "role": "held"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-224-record",
+                "statement": "The annals record the controller holding these places.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "territory",
+            "record_id": "lks:territory:vector-chu-224",
+            "published": true,
+            "content": {
+              "summary": "The places the controller held.",
+              "controller_id": "lks:actor:vector-chu",
+              "time": {
+                "source_expression": "225–224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "duration",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 225,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              },
+              "places": [
+                {
+                  "place_id": "lks:place:vector-city",
+                  "role": "held"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-chu-224-record",
+                "statement": "The annals record the controller holding these places.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "codes": [
+          "territory_overlap_without_dispute"
+        ]
+      }
+    },
+    {
+      "id": "territories/a-disputed-overlap-is-valid",
+      "why": "When the accounts disagree on the year, one snapshot carries the dispute and the map shows both holders, marked disputed.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-annals",
+            "kind": "primary"
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-qin",
+            "published": true,
+            "content": {
+              "summary": "Qin, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-record",
+                "statement": "The annals name Qin.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-chu",
+            "published": true,
+            "content": {
+              "summary": "Chu, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-chu-record",
+                "statement": "The annals name Chu.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-capital",
+            "published": true,
+            "content": {
+              "summary": "the capital, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-capital-record",
+                "statement": "The annals name the capital.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-city",
+            "published": true,
+            "content": {
+              "summary": "the city, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-record",
+                "statement": "The annals name the city.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-city-taken",
+            "published": true,
+            "content": {
+              "summary": "The city is taken.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-taken-record",
+                "statement": "The annals record the city taken.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "territory",
+            "record_id": "lks:territory:vector-qin-224",
+            "published": true,
+            "content": {
+              "summary": "The places the controller held.",
+              "controller_id": "lks:actor:vector-qin",
+              "time": {
+                "source_expression": "224–223 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "duration",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 223,
+                    "era": "bce"
+                  }
+                }
+              },
+              "places": [
+                {
+                  "place_id": "lks:place:vector-city",
+                  "role": "held"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-224-record",
+                "statement": "The annals record the controller holding these places.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              },
+              {
+                "claim_id": "lks:claim:vector-qin-224-alt",
+                "statement": "Another account dates the capture a year later.",
+                "asserts": "/time",
+                "basis": "attested",
+                "role": "conflicting",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ],
+            "dispute": {
+              "status": "disputed",
+              "summary": "The accounts give 224 or 223 BCE for the capture."
+            }
+          },
+          {
+            "kind": "territory",
+            "record_id": "lks:territory:vector-chu-224",
+            "published": true,
+            "content": {
+              "summary": "The places the controller held.",
+              "controller_id": "lks:actor:vector-chu",
+              "time": {
+                "source_expression": "225–224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "duration",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 225,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              },
+              "places": [
+                {
+                  "place_id": "lks:place:vector-city",
+                  "role": "held"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-chu-224-record",
+                "statement": "The annals record the controller holding these places.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": true
+      }
+    },
+    {
+      "id": "territories/a-transfer-year-belongs-to-one-snapshot",
+      "why": "Chu holding the city until 225 BCE and Qin from 224 BCE do not overlap: in the year a place changes hands, the gaining controller's snapshot holds it.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-annals",
+            "kind": "primary"
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-qin",
+            "published": true,
+            "content": {
+              "summary": "Qin, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-record",
+                "statement": "The annals name Qin.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-chu",
+            "published": true,
+            "content": {
+              "summary": "Chu, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-chu-record",
+                "statement": "The annals name Chu.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-capital",
+            "published": true,
+            "content": {
+              "summary": "the capital, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-capital-record",
+                "statement": "The annals name the capital.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-city",
+            "published": true,
+            "content": {
+              "summary": "the city, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-record",
+                "statement": "The annals name the city.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-city-taken",
+            "published": true,
+            "content": {
+              "summary": "The city is taken.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-taken-record",
+                "statement": "The annals record the city taken.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "territory",
+            "record_id": "lks:territory:vector-chu-225",
+            "published": true,
+            "content": {
+              "summary": "The places the controller held.",
+              "controller_id": "lks:actor:vector-chu",
+              "time": {
+                "source_expression": "229–225 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "duration",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 229,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 225,
+                    "era": "bce"
+                  }
+                }
+              },
+              "places": [
+                {
+                  "place_id": "lks:place:vector-city",
+                  "role": "held"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-chu-225-record",
+                "statement": "The annals record the controller holding these places.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "territory",
+            "record_id": "lks:territory:vector-qin-224",
+            "published": true,
+            "content": {
+              "summary": "The places the controller held.",
+              "controller_id": "lks:actor:vector-qin",
+              "time": {
+                "source_expression": "224–223 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "duration",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 223,
+                    "era": "bce"
+                  }
+                }
+              },
+              "places": [
+                {
+                  "place_id": "lks:place:vector-city",
+                  "role": "held",
+                  "gained_record_id": "lks:event:vector-city-taken"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-224-record",
+                "statement": "The annals record the controller holding these places.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": true
+      }
+    },
+    {
+      "id": "territories/one-controller-may-repeat-a-place",
+      "why": "Successive snapshots of one state list the places it still held; the same controller in overlapping windows is not a conflict.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-annals",
+            "kind": "primary"
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-qin",
+            "published": true,
+            "content": {
+              "summary": "Qin, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-record",
+                "statement": "The annals name Qin.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-chu",
+            "published": true,
+            "content": {
+              "summary": "Chu, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-chu-record",
+                "statement": "The annals name Chu.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-capital",
+            "published": true,
+            "content": {
+              "summary": "the capital, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-capital-record",
+                "statement": "The annals name the capital.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-city",
+            "published": true,
+            "content": {
+              "summary": "the city, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-record",
+                "statement": "The annals name the city.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-city-taken",
+            "published": true,
+            "content": {
+              "summary": "The city is taken.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-taken-record",
+                "statement": "The annals record the city taken.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "territory",
+            "record_id": "lks:territory:vector-qin-225",
+            "published": true,
+            "content": {
+              "summary": "The places the controller held.",
+              "controller_id": "lks:actor:vector-qin",
+              "time": {
+                "source_expression": "225–224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "duration",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 225,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              },
+              "places": [
+                {
+                  "place_id": "lks:place:vector-capital",
+                  "role": "seat"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-225-record",
+                "statement": "The annals record the controller holding these places.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "territory",
+            "record_id": "lks:territory:vector-qin-224",
+            "published": true,
+            "content": {
+              "summary": "The places the controller held.",
+              "controller_id": "lks:actor:vector-qin",
+              "time": {
+                "source_expression": "224–223 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "duration",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 223,
+                    "era": "bce"
+                  }
+                }
+              },
+              "places": [
+                {
+                  "place_id": "lks:place:vector-capital",
+                  "role": "seat"
+                }
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-224-record",
+                "statement": "The annals record the controller holding these places.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": true
+      }
+    },
+    {
+      "id": "territories/a-published-snapshot-is-cited",
+      "why": "Control is a claim like any other: a published snapshot with no cited claim would draw control on no evidence.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-annals",
+            "kind": "primary"
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-qin",
+            "published": true,
+            "content": {
+              "summary": "Qin, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-qin-record",
+                "statement": "The annals name Qin.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "actor",
+            "record_id": "lks:actor:vector-chu",
+            "published": true,
+            "content": {
+              "summary": "Chu, a state.",
+              "names": [],
+              "actor_types": [
+                "state"
+              ]
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-chu-record",
+                "statement": "The annals name Chu.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-capital",
+            "published": true,
+            "content": {
+              "summary": "the capital, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-capital-record",
+                "statement": "The annals name the capital.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "place",
+            "record_id": "lks:place:vector-city",
+            "published": true,
+            "content": {
+              "summary": "the city, a city.",
+              "names": [],
+              "place_types": [
+                "settlement"
+              ],
+              "geometry": []
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-record",
+                "statement": "The annals name the city.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-city-taken",
+            "published": true,
+            "content": {
+              "summary": "The city is taken.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-city-taken-record",
+                "statement": "The annals record the city taken.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-annals",
+                    "locator": {
+                      "kind": "section",
+                      "value": "annals, year 17"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "kind": "territory",
+            "record_id": "lks:territory:vector-qin-uncited",
+            "published": true,
+            "content": {
+              "summary": "The places the controller held.",
+              "controller_id": "lks:actor:vector-qin",
+              "time": {
+                "source_expression": "224 BCE",
+                "calendar": "chinese_lunisolar",
+                "precision": "year",
+                "mode": "duration",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 224,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 224,
+                    "era": "bce"
+                  }
+                }
+              },
+              "places": [
+                {
+                  "place_id": "lks:place:vector-city",
+                  "role": "held"
+                }
+              ]
+            },
+            "claims": []
+          }
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "codes": [
+          "published_record_without_citation"
+        ]
+      }
+    }
+  ]
+}

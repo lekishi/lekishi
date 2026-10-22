@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/lekishi/lekishi/schema/v0/kinds.schema.json",
   "title": "Lekishi historical contract v0: record content per kind",
-  "description": "Content schemas for the five historical record kinds. Each content object is closed: unknown fields, including presentation or renderer state, are rejected. Vocabularies include other with an explanatory editorial note rather than claiming to be complete.",
+  "description": "Content schemas for the six historical record kinds. Each content object is closed: unknown fields, including presentation or renderer state, are rejected. Vocabularies include other with an explanatory editorial note rather than claiming to be complete.",
   "$defs": {
     "place_content": {
       "type": "object",
@@ -142,6 +142,34 @@
         "causality": {"enum": ["asserted", "not_asserted"]},
         "validity": {"$ref": "common.schema.json#/$defs/time"},
         "geometry": {"type": "array", "maxItems": 50, "items": {"$ref": "common.schema.json#/$defs/geometry"}},
+        "editorial_notes": {"type": "string", "maxLength": 2000}
+      }
+    },
+    "territory_content": {
+      "description": "A dated control snapshot: one controller, one bounded date, and the places a cited source records it holding then. It lists only places a source records held, never everything the controller held, and carries no geometry of its own: no border, hull or area is asserted.",
+      "type": "object",
+      "required": ["summary", "controller_id", "time", "places"],
+      "additionalProperties": false,
+      "properties": {
+        "summary": {"type": "string", "minLength": 1, "maxLength": 2000},
+        "controller_id": {"$ref": "common.schema.json#/$defs/record_id"},
+        "time": {"$ref": "common.schema.json#/$defs/time"},
+        "places": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 200,
+          "items": {
+            "type": "object",
+            "required": ["place_id", "role"],
+            "additionalProperties": false,
+            "properties": {
+              "place_id": {"$ref": "common.schema.json#/$defs/record_id"},
+              "role": {"enum": ["seat", "held"]},
+              "gained_record_id": {"$ref": "common.schema.json#/$defs/record_id"},
+              "note": {"type": "string", "maxLength": 500}
+            }
+          }
+        },
         "editorial_notes": {"type": "string", "maxLength": 2000}
       }
     },

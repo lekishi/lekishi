@@ -82,6 +82,7 @@
       playback: "inactive" as const,
       selected: false,
       disputed: false,
+      control: null,
     })),
     journeys: [],
     arcs: [],

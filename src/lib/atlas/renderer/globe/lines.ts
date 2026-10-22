@@ -4,7 +4,7 @@ import { surfaceDistance, type Vec3 } from "./geo"
 
 /**
  * Pure geometry and styling for the lines the globe draws over its canvas:
- * journeys through dated stops, relationship arcs, and territory rings (RFD 1,
+ * journeys through dated stops and relationship arcs (RFD 1,
  * "Show, then qualify"; RFD 5, "Evidence and relationship tokens").
  *
  * The lines are an SVG layer re-projected from sample points whenever a frame

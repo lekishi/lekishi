@@ -10,6 +10,7 @@ import {
   sceneArcs,
   sceneDioramas,
   sceneJourneys,
+  sceneTerritories,
   type SceneArc,
   type SceneDiorama,
   type SceneJourney,
@@ -81,6 +82,18 @@ export type ScenePlace = {
   readonly selected: boolean
   /** An event here carries a disputed account. */
   readonly disputed: boolean
+  /**
+   * The controller a drawn territory snapshot records holding the place, or
+   * null. The marker takes the controller's tint and a seat is marked; when two
+   * snapshots hold it, which the contract allows only under a dispute, the
+   * first is tinted and `disputed` says the holding is contested.
+   */
+  readonly control: {
+    readonly tint: number
+    readonly label: string
+    readonly seat: boolean
+    readonly disputed: boolean
+  } | null
 }
 
 /**
@@ -158,11 +171,42 @@ function placeMark(place: { placement: string; precision: string }): PlaceMark {
   return place.precision === "site" ? "attested" : "identified"
 }
 
-/** The places the scene's events stand at, plus a selected place with a position. */
+/** Who holds each place in the drawn snapshots, keyed by place id. */
+function controlByPlace(
+  territories: readonly SceneTerritory[],
+): Map<string, ScenePlace["control"]> {
+  const control = new Map<string, ScenePlace["control"]>()
+
+  for (const territory of territories) {
+    for (const held of territory.places) {
+      const existing = control.get(held.placeId)
+
+      control.set(
+        held.placeId,
+        existing === undefined || existing === null
+          ? {
+              tint: territory.tint,
+              label: territory.label,
+              seat: held.role === "seat",
+              disputed: territory.disputed,
+            }
+          : { ...existing, disputed: true },
+      )
+    }
+  }
+
+  return control
+}
+
+/**
+ * The places the scene's events stand at, the places a drawn snapshot holds,
+ * and a selected place with a position.
+ */
 function scenePlaces(
   state: AtlasState,
   chapter: Chapter,
   events: readonly SceneEvent[],
+  territories: readonly SceneTerritory[],
 ): ScenePlace[] {
   const selectedEvent = findEvent(chapter, state.selectedEventId)
   const selectedPlaceId =
@@ -178,6 +222,14 @@ function scenePlaces(
 
   if (selectedPlaceId !== null && !byPlace.has(selectedPlaceId)) {
     byPlace.set(selectedPlaceId, [])
+  }
+
+  const control = controlByPlace(territories)
+
+  for (const placeId of control.keys()) {
+    if (!byPlace.has(placeId)) {
+      byPlace.set(placeId, [])
+    }
   }
 
   return chapter.places.flatMap((place) => {
@@ -206,6 +258,7 @@ function scenePlaces(
             : "inactive",
         selected: place.id === selectedPlaceId,
         disputed: here.some((event) => event.dispute !== null),
+        control: control.get(place.id) ?? null,
       },
     ]
   })
@@ -245,6 +298,8 @@ export function buildScene(
     (a, b) => a.occurrence.startYear - b.occurrence.startYear || a.title.localeCompare(b.title),
   )
 
+  const territories = sceneTerritories(state, chapter)
+
   return {
     chapterId: chapter.id,
     homeView: chapter.homeView,
@@ -252,10 +307,10 @@ export function buildScene(
     playhead: state.playhead,
     playing: state.playing,
     events,
-    places: scenePlaces(state, chapter, events),
+    places: scenePlaces(state, chapter, events, territories),
     journeys: sceneJourneys(state, chapter),
     arcs: sceneArcs(state, chapter),
-    territories: [],
+    territories,
     dioramas: sceneDioramas(chapter),
     selectedEventId: state.selectedEventId,
     selectedPlaceId: state.selectedPlaceId,

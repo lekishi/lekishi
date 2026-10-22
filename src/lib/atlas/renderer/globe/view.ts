@@ -21,7 +21,7 @@ import { markerLook, type GlobeMarker, type MarkerLook } from "./marks"
 import { GlobeTiles, type Tileset } from "./tiles"
 
 export type { GlobeMarker } from "./marks"
-export type { GlobeOverlays, GlobeJourney, GlobeArc, GlobeTerritory } from "./line-layer"
+export type { GlobeOverlays, GlobeJourney, GlobeArc } from "./line-layer"
 export type { GlobeDiorama } from "./diorama"
 
 /**
@@ -63,7 +63,7 @@ export interface GlobeView {
   /** Flies the camera to straight above a point; input from the reader cancels it. */
   flyTo(target: GeoPoint, rangeM: number, durationMs: number): void
   setMarkers(markers: readonly GlobeMarker[]): void
-  /** Journeys, relationship arcs and territory rings, drawn under the markers. */
+  /** Journeys and relationship arcs, drawn under the markers. */
   setOverlays(overlays: GlobeOverlays): void
   /** The scene's dioramas; each is fetched the first time the camera is low over it. */
   setDioramas(dioramas: readonly GlobeDiorama[]): void
@@ -98,6 +98,7 @@ type MarkerEntry = {
   data: GlobeMarker
   look: MarkerLook
   readonly root: HTMLDivElement
+  readonly control: HTMLSpanElement
   readonly pulse: HTMLSpanElement
   readonly mark: HTMLSpanElement
   readonly core: HTMLSpanElement
@@ -461,7 +462,9 @@ class ThreeGlobeView implements GlobeView {
       root.append(span)
       return span
     }
-    // In drawing order: the selection's pulse under the mark, the label on top.
+    // In drawing order: a controller's disc and the selection's pulse under
+    // the mark, the label on top.
+    const control = part()
     const pulse = part()
     const mark = part()
     const core = part()
@@ -472,6 +475,7 @@ class ThreeGlobeView implements GlobeView {
       data,
       look: markerLook(data),
       root,
+      control,
       pulse,
       mark,
       core,
@@ -505,6 +509,13 @@ class ThreeGlobeView implements GlobeView {
     sized(entry.mark, look.mark, look.size)
     sized(entry.core, look.core, Math.max(4, Math.round(look.size * 0.42)))
     sized(entry.pulse, look.pulse, look.size + 10)
+    sized(entry.control, look.control, look.controlSize)
+
+    if (data.control === null) {
+      delete entry.root.dataset.control
+    } else {
+      entry.root.dataset.control = data.control.seat ? "seat" : "held"
+    }
 
     entry.count.className = look.count ?? "hidden"
     entry.count.style.left = `${Math.round(look.hitRadius + 3)}px`

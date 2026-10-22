@@ -1,7 +1,7 @@
 import { beforeAll, describe, expect, it } from "vitest"
 import { loadServedChapter } from "./chapter-catalog"
 import { QIN_CHAPTER, SERVED_CHAPTERS, TANG_CHAPTER } from "./chapter-registry"
-import type { Chapter } from "./domain"
+import type { Chapter, Occurrence, Territory } from "./domain"
 import { CHAPTER_OVERLAYS } from "./overlay-definitions"
 import {
   layerOptions,
@@ -9,6 +9,7 @@ import {
   sceneArcs,
   sceneDioramas,
   sceneJourneys,
+  sceneTerritories,
 } from "./overlays"
 import { buildScene } from "./scene"
 import { createAtlasState, selectEvent, selectPlace, setLayer, setPlayhead } from "./state"
@@ -166,7 +167,7 @@ describe("relationship arcs", () => {
     ).toContain("lks:relationship:qin-han-conflict")
   })
 
-  it("offers the orbs the chapter can draw, and shows territory as unavailable", () => {
+  it("offers the orbs the chapter can draw, and shows territory as unavailable without snapshots", () => {
     expect(layerOptions(chapter(TANG_CHAPTER))).toEqual([
       { id: "journeys", available: true },
       { id: "transmission", available: true },
@@ -226,5 +227,91 @@ describe("places first", () => {
       },
     ])
     expect(sceneDioramas(chapter(QIN_CHAPTER))).toEqual([])
+  })
+})
+
+describe("territory snapshots", () => {
+  // Synthetic snapshots over the Han chapter's places, for the drawing rules
+  // only: they are not historical content.
+  const span = (startYear: number, endYear: number): Occurrence => ({
+    startYear,
+    endYear,
+    precision: "year",
+    mode: "duration",
+    sourceExpression: null,
+  })
+  const snapshot = (
+    id: string,
+    controllerId: string,
+    years: Occurrence,
+    places: [string, "seat" | "held"][],
+  ): Territory => ({
+    id,
+    controllerId,
+    summary: "A synthetic snapshot.",
+    span: years,
+    places: places.map(([placeId, role]) => ({ placeId, role, gainedRecordId: null, note: null })),
+    dispute: null,
+    citations: [],
+  })
+  const held = (): Chapter => ({
+    ...chapter(QIN_CHAPTER),
+    territories: [
+      snapshot("lks:territory:test-han", "lks:actor:han-state", span(-232, -231), [
+        ["lks:place:xinzheng", "seat"],
+      ]),
+      snapshot("lks:territory:test-qin", "lks:actor:qin-state", span(-229, -228), [
+        ["lks:place:xinzheng", "held"],
+        ["lks:place:yunyang", "held"],
+      ]),
+    ],
+  })
+  const at = (content: Chapter, year: number) =>
+    setPlayhead(setLayer(createAtlasState(content), "territory", true), content, year)
+
+  it("enables the territory orb for a chapter with snapshots", () => {
+    expect(layerOptions(held()).find((option) => option.id === "territory")).toEqual({
+      id: "territory",
+      available: true,
+    })
+  })
+
+  it("draws nothing with the orb off", () => {
+    const content = held()
+
+    expect(sceneTerritories(createAtlasState(content), content)).toEqual([])
+  })
+
+  it("draws a snapshot only while the playhead is inside its own range", () => {
+    const content = held()
+    const ids = (year: number) => sceneTerritories(at(content, year), content).map((t) => t.id)
+
+    expect(ids(-232)).toEqual(["lks:territory:test-han"])
+    expect(ids(-231)).toEqual(["lks:territory:test-han"])
+    // The gap between the two snapshots is a gap in the evidence: nothing is
+    // carried forward from Han's and nothing borrowed from Qin's.
+    expect(ids(-230)).toEqual([])
+    expect(ids(-229)).toEqual(["lks:territory:test-qin"])
+    expect(ids(-226)).toEqual([])
+  })
+
+  it("tints each held place in its controller's colour and marks the seat", () => {
+    const content = held()
+    const early = buildScene(at(content, -232), content)
+    const late = buildScene(at(content, -229), content)
+    const place = (scene: typeof early, id: string) => scene.places.find((entry) => entry.id === id)
+
+    expect(early.territories[0]).toMatchObject({ label: "韓", dateLabel: "233 BCE–232 BCE" })
+    expect(place(early, "lks:place:xinzheng")?.control).toEqual({
+      tint: 0,
+      label: "韓",
+      seat: true,
+      disputed: false,
+    })
+    // A held place with no event in the window is still marked.
+    expect(place(late, "lks:place:yunyang")?.control).toMatchObject({ tint: 1, seat: false })
+    expect(place(late, "lks:place:xinzheng")?.control).toMatchObject({ tint: 1, seat: false })
+    // No line or area is drawn for a snapshot.
+    expect(late.arcs.every((arc) => !arc.id.startsWith("lks:territory:"))).toBe(true)
   })
 })

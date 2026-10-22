@@ -36,8 +36,8 @@ export type CameraFocusRequest = {
  * The map's optional layers (RFD 1's orbs). Journeys are on by default. A
  * relationship family that is off still draws the arcs that touch the
  * selection, because RFD 1 draws a relationship on selection; turning a family
- * on draws every arc of that family the window overlaps. Territory has no
- * snapshots in either served chapter, so its orb is shown disabled.
+ * on draws every arc of that family the window overlaps. Territory draws the
+ * snapshots at the playhead; a chapter with none shows its orb disabled.
  */
 export const LAYERS = [
   "journeys",

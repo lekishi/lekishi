@@ -22,7 +22,7 @@ import {
 
 /**
  * The SVG layer the globe draws its lines in, under the place markers:
- * journeys, relationship arcs and territory rings, plus the schematic vessel
+ * journeys and relationship arcs, plus the schematic vessel
  * at a journey's current stop and the small captions that qualify them.
  *
  * Lines are kept as world-space samples and re-projected only when the view
@@ -52,16 +52,9 @@ export type GlobeArc = {
   readonly caption: string
 }
 
-export type GlobeTerritory = {
-  readonly id: string
-  readonly dateLabel: string
-  readonly rings: readonly (readonly GeoPoint[])[]
-}
-
 export type GlobeOverlays = {
   readonly journeys: readonly GlobeJourney[]
   readonly arcs: readonly GlobeArc[]
-  readonly territories: readonly GlobeTerritory[]
 }
 
 /** Projects a world point to the canvas, or null when it is hidden. */
@@ -421,89 +414,24 @@ class ArcLine {
   }
 }
 
-class TerritoryShape {
-  readonly group = svg("g")
-  private readonly rings: Samples[]
-  private readonly edge = svg("path", { class: "fill-none stroke-ink-dim" })
-  private readonly hatch = svg("path", { class: "fill-none stroke-ink-dim" })
-  private readonly caption: Caption
-
-  constructor(
-    private readonly data: GlobeTerritory,
-    labels: HTMLElement,
-  ) {
-    this.rings = data.rings.map((ring) =>
-      samplesFrom(
-        ring.flatMap((point, i) =>
-          (i === 0 ? [point] : greatCircleTail(ring[i - 1], point)).map((p) => ({
-            ...p,
-            height: 0,
-          })),
-        ),
-      ),
-    )
-    this.edge.setAttribute("stroke-width", "1.25")
-    this.edge.setAttribute("stroke-opacity", "0.8")
-    // Short wide dashes along the edge read as hatching: the snapshot's edge,
-    // with no fill that would imply uniform control inside it (RFD 1).
-    this.hatch.setAttribute("stroke-width", "6")
-    this.hatch.setAttribute("stroke-dasharray", "1 5")
-    this.hatch.setAttribute("stroke-opacity", "0.6")
-    this.group.dataset.territoryId = data.id
-    this.group.append(this.edge, this.hatch)
-    this.caption = createCaption(
-      labels,
-      data.dateLabel,
-      `${CAPTION} font-interface text-caption tabular-nums text-ink-dim`,
-      CAPTION_HEIGHT,
-    )
-  }
-
-  place(projector: Projector): CaptionCandidate | null {
-    const runs = this.rings.flatMap((ring) => visibleRuns(project(ring, projector)))
-    const d = pathData(runs)
-    setPath(this.edge, d)
-    setPath(this.hatch, d)
-    const all = runs.flat()
-
-    // The date always travels with the snapshot: snapshots are never
-    // interpolated, so an undated shape would misstate what it is.
-    const at =
-      all.length === 0
-        ? null
-        : {
-            x: all.reduce((sum, p) => sum + p.x, 0) / all.length,
-            y: all.reduce((sum, p) => sum + p.y, 0) / all.length,
-          }
-    return captionAt(this.caption, `territory:${this.data.id}`, at === null ? [] : [at], 0)
-  }
-
-  dispose(): void {
-    this.group.remove()
-    this.caption.element.remove()
-  }
-}
-
 function greatCircleTail(a: GeoPoint, b: GeoPoint): GeoPoint[] {
   return journeyLine([a, b]).samples.slice(1)
 }
 
 export class LineLayer {
   private readonly root: SVGSVGElement
-  private readonly territoryGroup = svg("g")
   private readonly journeyGroup = svg("g")
   private readonly arcGroup = svg("g")
   /** Vessels and captions: HTML, so text is set by the browser in any script. */
   private readonly labels: HTMLDivElement
   private journeys: JourneyLine[] = []
   private arcs: ArcLine[] = []
-  private territories: TerritoryShape[] = []
   private key = ""
 
   constructor(parent: HTMLElement) {
     this.root = svg("svg", { class: "absolute inset-0 h-full w-full overflow-visible" })
     this.root.dataset.globeLines = ""
-    this.root.append(this.territoryGroup, this.journeyGroup, this.arcGroup)
+    this.root.append(this.journeyGroup, this.arcGroup)
     this.labels = document.createElement("div")
     this.labels.className = "absolute inset-0"
     // Under the place markers, which the view appends after this layer.
@@ -522,13 +450,11 @@ export class LineLayer {
 
     this.key = key
     this.clear()
-    this.territories = overlays.territories.map((t) => new TerritoryShape(t, this.labels))
     this.journeys = overlays.journeys.map((j) => new JourneyLine(j, this.labels))
     // Layer arcs first, so the selection's arcs are drawn over them.
     this.arcs = [...overlays.arcs]
       .sort((a, b) => Number(a.emphasis === "selected") - Number(b.emphasis === "selected"))
       .map((a) => new ArcLine(a, this.labels))
-    this.territoryGroup.append(...this.territories.map((t) => t.group))
     this.journeyGroup.append(...this.journeys.map((j) => j.group))
     this.arcGroup.append(...this.arcs.map((a) => a.group))
     this.refresh(heightAt)
@@ -542,15 +468,14 @@ export class LineLayer {
 
   /** Re-projects every line; returns the captions that compete for room. */
   place(projector: Projector): CaptionCandidate[] {
-    return [...this.territories, ...this.journeys, ...this.arcs].flatMap((line) => {
+    return [...this.journeys, ...this.arcs].flatMap((line) => {
       const caption = line.place(projector)
       return caption === null ? [] : [caption]
     })
   }
 
   private clear(): void {
-    for (const line of [...this.territories, ...this.journeys, ...this.arcs]) line.dispose()
-    this.territories = []
+    for (const line of [...this.journeys, ...this.arcs]) line.dispose()
     this.journeys = []
     this.arcs = []
   }

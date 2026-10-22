@@ -394,7 +394,6 @@ describe("the evidence grammar", () => {
     const overlays = view.setOverlays.mock.calls.at(-1)?.[0] as {
       journeys: { id: string; stops: unknown[]; vessel: unknown; selected: boolean }[]
       arcs: ReturnType<typeof arcFor>[]
-      territories: unknown[]
     }
 
     expect(scene.journeys.length).toBeGreaterThan(0)
@@ -414,7 +413,8 @@ describe("the evidence grammar", () => {
     )
     expect(scene.arcs.length).toBeGreaterThan(0)
     expect(overlays.arcs).toEqual(scene.arcs.map(arcFor))
-    expect(overlays.territories).toEqual([])
+    // Territory is drawn on the markers, never as a line or an area.
+    expect(Object.keys(overlays).sort()).toEqual(["arcs", "journeys"])
     expect(view.setDioramas).toHaveBeenLastCalledWith([
       {
         id: "akimeya",

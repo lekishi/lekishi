@@ -1,4 +1,5 @@
-import type { Chapter, GeoPoint, HistoricalEvent, Place, Relationship } from "./domain"
+import type { Chapter, GeoPoint, HistoricalEvent, Place, Relationship, Territory } from "./domain"
+import { windowLabel } from "./labels"
 import type { AtlasState, LayerId } from "./state"
 import { overlapsWindow } from "./time"
 
@@ -21,7 +22,12 @@ import { overlapsWindow } from "./time"
  *   stands for the actor (a state at its court), named there and stated on the
  *   map as schematic. A relationship whose ends have no such place, or whose
  *   ends meet at one place, is not drawn; the card still lists it.
- * - Neither served chapter publishes a territory snapshot, so there are none.
+ * - A territory is a published control snapshot (rfd/0002/TERRITORIES.adoc):
+ *   the places a source records a controller holding in a closed range of
+ *   years. The map tints those places' markers in the controller's colour and
+ *   marks its seat; nothing is filled and no line joins them, because no source
+ *   draws a border. A snapshot is shown only while the playhead is inside its
+ *   own range, never carried forward or interpolated between two.
  *
  * Nothing here is evidence. Every definition names published record ids, and
  * `overlays.test.ts` fails if one stops resolving, so a retitled or removed
@@ -152,13 +158,35 @@ export type SceneArc = {
   readonly emphasis: "selected" | "layer"
 }
 
-/** A dated control snapshot. Neither served chapter has one. */
+/**
+ * How many controller tints the map has (RFD 5's `control-*` tokens). A chapter
+ * with more controllers than tints reuses them in order; the legend names each
+ * controller beside its tint, so a reused tint is never the only cue.
+ */
+export const CONTROL_TINTS = 8
+
+/** A place a snapshot holds, as the map marks it. */
+export type SceneTerritoryPlace = {
+  readonly placeId: string
+  readonly label: string
+  readonly role: "seat" | "held"
+  /** Null for a place the sources name without a site: named on the card, not drawn. */
+  readonly position: GeoPoint | null
+}
+
+/** A dated control snapshot at the playhead. */
 export type SceneTerritory = {
   readonly id: string
+  readonly controllerId: string
+  /** The controller's name, as the legend and the marker's title give it. */
   readonly label: string
-  /** The snapshot's date, always shown on the map; snapshots are never interpolated. */
+  /** The snapshot's own range, always shown; snapshots are never interpolated. */
   readonly dateLabel: string
-  readonly rings: readonly (readonly GeoPoint[])[]
+  /** The controller's tint, from 0 to `CONTROL_TINTS - 1`. */
+  readonly tint: number
+  /** The snapshot carries a dispute, so its marks are drawn disputed. */
+  readonly disputed: boolean
+  readonly places: readonly SceneTerritoryPlace[]
 }
 
 export type SceneDiorama = {
@@ -325,6 +353,65 @@ export function sceneArcs(state: AtlasState, chapter: Chapter): SceneArc[] {
   })
 }
 
+/**
+ * Each controller's tint: controllers in the order the chapter's snapshots
+ * first name them, so a controller keeps its colour as the playhead moves.
+ */
+export function controlTints(chapter: Chapter): ReadonlyMap<string, number> {
+  const tints = new Map<string, number>()
+
+  for (const territory of chapter.territories) {
+    if (!tints.has(territory.controllerId)) {
+      tints.set(territory.controllerId, tints.size % CONTROL_TINTS)
+    }
+  }
+
+  return tints
+}
+
+/** The snapshots whose own range holds the playhead year. */
+export function territoriesAt(chapter: Chapter, playhead: number): Territory[] {
+  const year = Math.round(playhead)
+
+  return chapter.territories.filter(
+    (territory) => territory.span.startYear <= year && year <= territory.span.endYear,
+  )
+}
+
+/**
+ * The snapshots to draw: with the territory orb on, every snapshot whose range
+ * holds the playhead. Outside every range the map shows no control, because a
+ * gap between snapshots is a gap in the evidence.
+ */
+export function sceneTerritories(state: AtlasState, chapter: Chapter): SceneTerritory[] {
+  if (!state.layers.territory) {
+    return []
+  }
+
+  const places = placeById(chapter)
+  const actors = new Map(chapter.actors.map((actor) => [actor.id, actor.label]))
+  const tints = controlTints(chapter)
+
+  return territoriesAt(chapter, state.playhead).map((territory) => ({
+    id: territory.id,
+    controllerId: territory.controllerId,
+    label: actors.get(territory.controllerId) ?? territory.controllerId,
+    dateLabel: windowLabel({ start: territory.span.startYear, end: territory.span.endYear }),
+    tint: tints.get(territory.controllerId) ?? 0,
+    disputed: territory.dispute !== null,
+    places: territory.places.map((held) => {
+      const place = places.get(held.placeId)
+
+      return {
+        placeId: held.placeId,
+        label: place?.label ?? held.placeId,
+        role: held.role,
+        position: place?.position ?? null,
+      }
+    }),
+  }))
+}
+
 export function sceneDioramas(chapter: Chapter): SceneDiorama[] {
   const places = placeById(chapter)
 
@@ -378,5 +465,5 @@ export function layerOptions(chapter: Chapter): LayerOption[] {
     .filter((family) => drawable.has(family))
     .map((family) => ({ id: family, available: true }))
 
-  return [...fixed, ...extra, { id: "territory", available: false }]
+  return [...fixed, ...extra, { id: "territory", available: chapter.territories.length > 0 }]
 }

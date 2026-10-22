@@ -52,10 +52,13 @@ it is; it brings `cien-zhuan`, `xiyu-ji` and `wikidata` with it.
   The catalogue entry gives Chinnock's dates as 1842–1911; a second source
   should confirm the death date before the translation is called public domain
   worldwide.
-- Arrian dates by Athenian archons, months and Olympiads. Every year BCE is
-  Chinnock's conversion in his headings and notes, cited as his interpretation
-  with Arrian's passage supporting; many stages are dated only to the window
-  between two of his anchors.
+- Arrian dates by Athenian archons, months and Olympiads. Six events he dates
+  by archon and month (Tyre, Issus, Thapsacus, Gaugamela, Darius's death and
+  the Hydaspes) are `attested`, as Qin's regnal years are, with Chinnock's finer
+  conversion as a supporting interpretation. Every other year is the standard
+  chronology as Chinnock states it in his headings and notes, cited as
+  `conventional` with both Arrian's passage and Chinnock's statement; many
+  stages are dated only to the window between two of his anchors.
 - Chinnock dates Gaugamela to September 331 BCE in one note and the eclipse
   eleven days before it to 20 September in another, so the event keeps the year
   and records both.

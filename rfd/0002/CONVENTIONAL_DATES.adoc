@@ -1,14 +1,15 @@
 = A conventional basis for standard date conversions
-:state: proposed for owner review; adopting a basis was decided by the owner on 2026-10-22, the shape and the rule below are not yet accepted and nothing is built
+:state: decided; the owner chose a basis and accepted the shape and rule below on 2026-10-22, and it is built in contract v0
 :toc:
 :toclevels: 2
 
 On 2026-10-22 the owner chose to add a claim basis for dates that are standard
 conversions rather than one scholar's argument. The question came from the
 Greece and Persia chapters (link:GREECE_PERSIA_FEASIBILITY.adoc[feasibility
-note]). This document proposes the contract change and the rule for when to use
-it. Nothing here is built until the owner accepts it. After that, the year
-conversions in the three chapters are re-cited.
+note]). This document records the contract change and the rule for when to use
+it. The owner accepted both on 2026-10-22 ("conventional looks fine to me, go
+ahead"). They are built in contract v0, and the three chapters' year
+conversions are re-cited.
 
 == The problem
 
@@ -37,7 +38,7 @@ claims attributed to Grote and 37 to Chinnock. That has three costs:
 The atlas does not show a claim's basis to readers today. The distinction matters
 first for review and for the evidence display that later RFDs will add.
 
-== Proposed: three cases, one test
+== Decided: three cases, one test
 
 The test for a date claim is: *would a standard reference work give the same
 year, without argument?*
@@ -74,20 +75,19 @@ When in doubt between two rows, take the lower row. A date that is wrongly
 labelled `interpretation` costs nothing but noise. A date wrongly labelled
 `conventional` hides a dispute.
 
-== Proposed: the contract change
+== Decided: the contract change
 
-`conventional` joins the claim-basis vocabulary in contract *v1*, beside the
-journey kind. Under v0's rule, extending a vocabulary means a new contract
-version. v1 is already open, and v0 documents stay valid v1 documents. It
-lands on the v1 that draft PR #53 lays out. The claim schema change goes in
-`historical/v1/schema`, and the vectors go in `historical/v1/vectors`.
+`conventional` joins the claim-basis vocabulary in contract *v0*. The atlas is
+not live, so the owner amended v0's rule on 2026-10-22: until launch, extending
+a vocabulary amends v0 in place instead of opening a new version
+(link:CONTRACTS.adoc[contract v0]). The claim schema change goes in
+`historical/v0/schema`, and the vectors go in `historical/v0/vectors/claims.json`.
 
 A `conventional` claim:
 
 . names its conversion in a new field, `convention`. The field is free text of
-  up to 200 characters, such as "Herodotean campaign seasons, standard
-  chronology" or "Xenophon's stages from the battle of Cunaxa, standard
-  chronology";
+  up to 200 characters, such as "Herodotus's campaign seasons on the standard
+  chronology of the Persian Wars";
 . cites at least two sources: the passage that places the event (the input) and
   a reference work that states the year (the output);
 . asserts only a time pointer (`/time` or a dated sub-field). Place
@@ -96,7 +96,7 @@ A `conventional` claim:
   record that disputes the same pointer may not carry a `conventional` claim on
   it: if the year is disputed, it is not conventional.
 
-Each rule becomes a v1 vector, with these codes:
+Each rule becomes a vector, with these codes:
 
 * `conventional_missing_convention`
 * `conventional_single_citation`
@@ -108,24 +108,35 @@ maps the basis through unchanged and rejects a missing `convention`.
 
 [source,yaml]
 ----
-# historical/events/xerxes/thermopylae-480.yaml, re-cited
+# historical/events/xerxes/thermopylae-480.yaml, as re-cited
 date:
   value: 480 BCE
   mode: window
+  calendar: julian
   as_written: these battles at sea and the battles on land at Thermopylai took place on the same days
   cite:
     - id: thermopylae-480-time
-      says: >-
-        Herodotus puts the fighting at Thermopylae on the same days as the sea fights at
-        Artemision; the standard chronology, as Grote gives it, dates both to 480 BCE.
+      says:
+        Grote dates the occupation of the pass to about the latter part of June 480 BCE; the battle
+        followed after Xerxes waited four days (VII.210).
       basis: conventional
-      convention: Herodotean campaign seasons, standard chronology
+      convention: Herodotus's campaign seasons on the standard chronology of the Persian Wars
       sources:
         - source: herodotus
           at: VIII.15
-          quote: these battles at sea and the battles on land at Thermopylai took place on the same days
         - source: grote-history-of-greece
           at: vol. V, ch. XL
+          quote:
+            the land-force under the Spartan king Leonidas, the naval force under the Spartan commander
+            Eurybiadês, apparently about the latter part of the month of June.
+    - id: thermopylae-480-text
+      says: Herodotus synchronizes the fighting at Thermopylae with the sea fights at Artemision.
+      source: herodotus
+      at: VIII.15
+      quote:
+        Now it so happened that these battles at sea and the battles on land at Thermopylai took place
+        on the same days
+      role: supporting
 ----
 
 *Display.* Nothing changes now. When the atlas shows evidence on a card:
@@ -134,46 +145,52 @@ date:
 * an interpretation names its scholar ("dated by Grote");
 * a dispute keeps its own marker.
 
-== What it costs and what moves
+== What it cost and what moved
 
-* Contract v1 gains:
+* Contract v0 gains:
 ** the basis;
 ** the `convention` field in the claim schema;
-** four vectors;
+** eight vectors for the four new codes;
 ** the matching checks in the reference semantics (`documents.ts`).
 * The authoring compiler gains one basis and one check.
 * The three Greek chapters' date claims are re-cited:
-** the seven archon-dated events in Arrian become `attested`, with the archon
-   and month in `as_written`;
-** most Grote and Chinnock conversions become `conventional`;
-** editorial reckonings, such as the Athos canal, and any year that reference
-   works disagree on, stay `interpretation`.
+** the six events Arrian dates by archon and month (Tyre, Issus, Thapsacus,
+   Gaugamela, Darius's death and the Hydaspes) are `attested`, with the archon
+   and month in `as_written` and Chinnock's finer conversion as a supporting
+   interpretation;
+** Alexander's death is `conventional`, not attested: Arrian dates it by
+   Olympiad and archon only, and the archon year of Hegesias spans 324 and
+   323 BCE, so the year needs the standard chronology;
+** the other 87 Grote and Chinnock conversions are `conventional`, citing the
+   passage and the reference;
+** the editorial count for the Athos canal stays `interpretation`.
 * The Qin and Tang chapters do not change, so no approval reopens.
-* The other pre-100 CE chapter threads can use the basis once v1 lands. Until
-  then they keep citing such dates as `interpretation`.
+* The other pre-100 CE chapter threads can use the basis as soon as it merges.
 
 Pros: a reader and a reviewer can tell a routine date from a real dispute, and a
 regnal year and an archon year are treated alike.
 
 Cons:
 
-* A contract change, with four vectors to maintain.
+* A contract change, with eight vectors to maintain.
 * A judgement call at the edge between `conventional` and `interpretation`. The
   test and the rule to take the lower row are meant to keep that edge
   conservative.
 
 [[open]]
-== Open for the owner
+== Decided with it, and still open
 
-* *`convention` or `attributed_to`.* A new field says what the conversion is.
-  Reusing `attributed_to` avoids a field, but it names a person, and a
-  convention has no single author. The proposal is a new field.
+* *`convention` or `attributed_to`.* Decided as proposed: a new field says what
+  the conversion is. Reusing `attributed_to` would name a person, and a
+  convention has no single author.
 * *Calendars for archon and Olympiad years.* v0's calendar vocabulary (`julian`,
   `gregorian`, `islamic`, `chinese_lunisolar`, `regnal`, `unknown`) has no value
   for eponymous years (Athenian archons, Roman consuls, Assyrian limmu) or for
   Olympiads. The Arrian records now say `julian`, which describes the conversion
-  rather than the source. The proposal is to add `eponymous` and `olympiad` to v1
-  with the same change.
+  rather than the source. Still open: the proposal is to add `eponymous` and
+  `olympiad` to v0's calendar vocabulary, which is not built yet because the
+  Long Count calendar is being added to the same list.
 * *Place identifications.* Identifying an ancient name with a site by a standard
-  gazetteer (Pleiades, Barrington) is the same kind of step. The proposal leaves
-  it out until a chapter needs it, so the first use of the basis stays narrow.
+  gazetteer (Pleiades, Barrington) is the same kind of step. Left out as
+  proposed, until a chapter needs it, so the first use of the basis stays
+  narrow.

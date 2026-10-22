@@ -61,10 +61,12 @@ with other region chapters (see <<shared-ids>>).
   domain in the United States. Chinnock's death date is not yet confirmed, so
   the Arrian translation's worldwide status is open; it must be settled before
   release.
-* *Grote*, _History of Greece_: cited only as `interpretation`, for turning
-  Herodotus's seasons and Xenophon's halts into years BCE.
-* *Chinnock's headings and notes*: cited only as `interpretation`, for turning
-  Arrian's Athenian archons, months and Olympiads into years BCE.
+* *Grote*, _History of Greece_: cited as the reference that states the year
+  for a `conventional` date, for turning Herodotus's seasons and Xenophon's
+  halts into years BCE.
+* *Chinnock's headings and notes*: cited in the same way for Arrian, and as a
+  supporting `interpretation` where he converts an archon and month more
+  finely than the year.
 * *Pleiades*: one dataset source whose citations pin a place id and the daily
   dump of 2026-10-21. The register asks for numbered releases; before release
   the citations should be re-pinned to the current numbered release. The
@@ -77,10 +79,11 @@ The source register now has one row for the Project Gutenberg translations.
 
 None of the three narratives gives years. Herodotus names one archon (Calliades,
 VIII.51); Xenophon gives distances in stages and parasangs and halts in days;
-Arrian dates some events by archon and month. Every year BCE in these chapters
-is therefore a modern conversion, cited as the interpretation of a named scholar
-(Grote or Chinnock), with the ancient passage as a supporting claim. The one
-exception is the start of the Athos canal, which Grote does not date: about 483
+Arrian dates some events by archon and month. Since 2026-10-22 the dates follow
+link:CONVENTIONAL_DATES.adoc[the conventional basis]: the six events Arrian
+dates by archon and month are `attested`, with the archon and month in
+`as_written`; every other year is `conventional`, citing the ancient passage and
+Grote's or Chinnock's statement of the year. The one exception is the start of the Athos canal, which Grote does not date: about 483
 BCE is an editorial count of Herodotus's "about three years" back from Grote's
 date for the march, cited as such.
 
@@ -138,8 +141,7 @@ window.
 [[proposals]]
 == Proposals for the owner
 
-Nothing below is implemented. The second was decided in principle on
-2026-10-22; the others need a decision.
+The second is decided and built (2026-10-22); the others need a decision.
 
 . *Vocabulary.* Five records use `other` because the vocabulary lacks a type:
   a canal (the Athos canal), a battlefield (Kunaxa), an army as an actor (the
@@ -151,9 +153,9 @@ Nothing below is implemented. The second was decided in principle on
   season into a year BCE is standard, but `interpretation` attributed to one
   scholar makes it look contested. A distinct basis such as `conventional`
   would say "a standard conversion" and let the reader see where real disputes
-  are. The owner chose to add one on 2026-10-22; its shape and the rule for
-  when to use it are proposed in link:CONVENTIONAL_DATES.adoc[a conventional
-  basis for standard date conversions].
+  are. The owner chose to add one on 2026-10-22 and accepted
+  link:CONVENTIONAL_DATES.adoc[its shape and rule] the same day; it is built in
+  contract v0 and these chapters use it.
 . *Dates between anchors.* A date mode that names its two anchoring claims and
   the source's sequence or day count would let the engine order and interpolate
   stages instead of showing a multi-year window.

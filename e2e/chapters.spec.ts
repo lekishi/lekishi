@@ -17,7 +17,14 @@ import {
   sheet,
   sheetHandle,
 } from "./workspace"
-import { TANG_DECISION, QIN_DECISION, approved, decisionElement } from "./approvals"
+import {
+  TANG_DECISION,
+  QIN_DECISION,
+  approved,
+  decisionElement,
+  servedChapters,
+  sortedAttribute,
+} from "./approvals"
 
 /**
  * Browser checks for the chapter routes and the screens around the atlas.
@@ -615,8 +622,15 @@ test("switches chapters and offers to continue where the reader was", async ({ p
   const switcher = page.locator("dialog#chapter-switcher")
 
   // Every chapter, on the time ribbon and in the list, the open one marked.
-  await expect(switcher.getByTestId("time-ribbon").getByRole("link")).toHaveCount(2)
-  await expect(switcher.locator("ul > li")).toHaveCount(2)
+  const served = (await servedChapters(page.request)).map((id) => `/chapters/${id}`)
+
+  await expect
+    .poll(() => sortedAttribute(switcher.getByTestId("time-ribbon").getByRole("link"), "href"))
+    .toEqual(served)
+  await expect(switcher.locator("ul > li")).toHaveCount(served.length)
+  await expect
+    .poll(() => sortedAttribute(switcher.locator("ul > li > div > a"), "href"))
+    .toEqual(served)
   await expect(switcher.locator('a[aria-current="page"]')).toHaveAttribute("href", TANG)
 
   // The chapter the reader left offers to continue at that position.
@@ -1008,9 +1022,11 @@ test("presents both chapters from the root page as peer entries", async ({ page 
 
   await page.goto("/")
 
+  // Every served chapter has a card, drafts included when the build serves them.
+  const served = await servedChapters(page.request)
   const cards = page.locator("[data-chapter-id]")
 
-  await expect(cards).toHaveCount(2)
+  await expect.poll(() => sortedAttribute(cards, "data-chapter-id")).toEqual(served)
 
   const tang = page.locator('[data-chapter-id="tang-mission-750-754"]')
   const qin = page.locator('[data-chapter-id="qin-conquest-han-233-226"]')
@@ -1054,7 +1070,7 @@ test("presents both chapters from the root page as peer entries", async ({ page 
   expect(mainText).not.toContain("lekishi-historical-contract")
 
   // Search is the page's primary action, ahead of the chapter entries; the time
-  // ribbon places both chapters on one line of time.
+  // ribbon places every chapter on one line of time.
   const order = await page.evaluate(() => {
     const search = document.querySelector('[data-testid="home-search"]')
     const chapter = document.querySelector("[data-chapter-id]")
@@ -1065,7 +1081,9 @@ test("presents both chapters from the root page as peer entries", async ({ page 
   })
 
   expect(order).toBe(true)
-  await expect(page.getByTestId("time-ribbon").getByRole("link")).toHaveCount(2)
+  await expect
+    .poll(() => sortedAttribute(page.getByTestId("time-ribbon").getByRole("link"), "href"))
+    .toEqual(served.map((id) => `/chapters/${id}`))
 
   // A first visit offers nothing to continue.
   await expect(page.getByTestId("home-continue")).toHaveCount(0)
@@ -1084,7 +1102,7 @@ test("presents both chapters from the root page as peer entries", async ({ page 
 
   for (const viewport of VIEWPORTS) {
     await page.setViewportSize(viewport)
-    await expect(cards).toHaveCount(2)
+    await expect(cards).toHaveCount(served.length)
     await expect(tang).toBeVisible()
     await expect(qin).toBeVisible()
     await expect(page.getByTestId("home-search")).toBeVisible()

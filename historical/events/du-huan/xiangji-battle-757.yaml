@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "On the 壬寅 day of the ninth month of 至德二載 (757) the restoring armies draw up north of 香積寺,
+  west of 長安, with 李嗣業 in the van. When the line gives way he strips to the waist and fights at
+  its head with a long blade, and the rebels are routed; 長安 is retaken the next day."
+types: [campaign]
+part_of: [restoring-army-757]
+date:
+  value: 757-09
+  calendar: chinese_lunisolar
+  as_written: 至德二載九月壬寅
+  cite:
+    - id: xiangji-battle-time
+      says: The mirror records the armies reaching the west of 長安 on the 壬寅 day and drawing up north of 香積寺, with 李嗣業 in the van.
+      source: zizhi-tongjian
+      at: 卷二二〇 唐紀三十六 至德二載九月壬寅（陳於香積寺北澧水之東）
+      quote: 庚子，諸軍俱發；壬寅，至長安城西，陳於香積寺北澧水之東。李嗣業為前軍，郭子儀為中軍，王思禮為後軍。
+    - id: xiangji-battle-annals
+      says: The annals record the battle with 安守忠 and 李歸仁 north-west of 香積寺 on the 壬寅 day and the rebels' rout.
+      role: supporting
+      source: jiu-tangshu
+      at: 卷十 肅宗紀 至德二載九月壬寅（戰於香積寺西北）
+      quote: 壬寅，與賊將安守忠、李歸仁等戰於香積寺西北，賊軍大敗，斬首六萬級
+places:
+  - place: xiangji-temple
+    role: site
+participants:
+  - actor: li-siye
+    role: leader
+    cite:
+      - id: xiangji-battle-li-siye
+        says: The mirror records 李嗣業 baring himself and fighting at the head of the line with a long blade.
+        source: zizhi-tongjian
+        at: 卷二二〇 唐紀三十六 至德二載九月壬寅（李嗣業曰：今日不以身餌賊）
+        quote: 乃肉袒，執長刀，立於陣前，大呼奮擊，當其刀者，人馬俱碎
+  - actor: li-chu
+    role: leader
+notes:
+  "The mirror puts the line north of the temple, the annals north-west of it; both are relative to
+  the temple, which the anchor marks. The month's first day is not given in the passage."

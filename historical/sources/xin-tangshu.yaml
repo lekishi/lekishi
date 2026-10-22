@@ -1,8 +1,10 @@
 # yaml-language-server: $schema=../schema/source.schema.json
 locator: chapter
 kind: primary
-title: 新唐書 卷二二〇 東夷 日本
-edition: Wikisource digital transcription (unproofread); locators re-checked against it on 2026-09-24
+title: 新唐書
+edition:
+  Wikisource digital transcription (unproofread); locators re-checked against it on 2026-09-24
+  (卷二二〇) and 2026-10-21 (卷一三五, 一三八, 二二一下)
 author: 歐陽修, 宋祁
 issued:
   year: 1060
@@ -11,6 +13,12 @@ language: lzh
 identifiers:
   - system: url
     value: https://zh.wikisource.org/wiki/新唐書/卷220
+  - system: url
+    value: https://zh.wikisource.org/wiki/新唐書/卷135
+  - system: url
+    value: https://zh.wikisource.org/wiki/新唐書/卷138
+  - system: url
+    value: https://zh.wikisource.org/wiki/新唐書/卷221下
 license:
   status: recorded
   license_id: public-domain
@@ -19,10 +27,12 @@ license:
   quotation_permitted: true
   reviewed_by: Lekishi editorial preparation
   reviewed_at: 2026-09-24T05:00:00Z
-  notes:
-    Text public domain. Used only for the 天寶十二載 notice of 朝衡's return to the Tang court and the
-    outline of his career.
+  notes: Text public domain. Records quote short passages of the foreign-peoples entries and two
+    biographies.
 notes:
-  Song-era history compiled in 1060, later than the events it reports. It reports 朝衡 (阿倍仲麻呂)
+  "Song-era history compiled in 1060, later than the events it reports. One source for the whole
+  work; each cite's locator names the 卷 and the entry. 卷二二〇 東夷 reports 朝衡 (阿倍仲麻呂)
   returning to the Tang court in 天寶十二載 and later holding office; it does not give a death year in
-  the passage checked.
+  the passage checked. 卷一三五 and 一三八 (高仙芝, 李嗣業) name the 石國 king 車鼻施, the 怛邏斯 battle
+  and the 白石嶺 plan; 卷二二一下 西域 reuses 經行記 (碎葉, 苫) without naming it, so where it repeats
+  經行記 it is cited as a supporting witness, not as independent evidence."

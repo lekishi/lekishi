@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  摩鄰, the land 經行記 says lies south-west of 秋薩羅國 across a great desert two thousand 里 wide,
+  whose people are black, with little grain, no grass or trees, horses fed on dried fish and people
+  eating dates, and grievous fevers. 通典 introduces the fragment with "又云" (it also says), so it
+  describes the land and does not say that 杜環 went there. Where it was is disputed in modern
+  scholarship (proposals range across North and East Africa), and the record asserts no position.
+types: [region]
+names:
+  - form: 摩鄰
+    lang: lzh
+    script: Hani
+    roman: Molin
+    scheme: pinyin
+    cite:
+      - id: molin-name
+        says:
+          經行記, quoted under 大秦, names 摩鄰國, south-west of 秋薩羅國 (the first graph is a private-use
+          character in the transcription) across a great desert, two thousand 里 on.
+        source: tongdian
+        at: 卷一九三 邊防九 大秦（又云：摩鄰國）
+        quote: 渡大磧行二千里至其國。其人黑，其俗獷，少米麥，無草木，馬食乾魚，人餐鶻莽。鶻莽，即波斯棗也。瘴癘特甚。
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      "No position. The fragment places 摩鄰 only relative to an unidentified 秋薩羅國, and the modern
+      identifications disagree; none is cited in this chapter, and the record chooses none."
+    cite:
+      - id: molin-unknown
+        says:
+          The fragment places 摩鄰 only by a desert crossing from 秋薩羅國, which is itself unidentified,
+          so the record carries unknown geometry.
+        source: tongdian
+        at: 卷一九三 邊防九 大秦（又云：摩鄰國）
+notes:
+  "The transcription prints the first graph of 秋薩羅 as a private-use character; modern compilations
+  read it 秋. The chapter quotes around it. The modern proposals for 摩鄰 are a candidate for a cited
+  dispute once the scholarship is read and its terms recorded."

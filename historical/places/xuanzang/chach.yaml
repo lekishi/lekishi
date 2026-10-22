@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 赭時 (石國), on the 葉河, where 玄奘 passed on the way to 颯秣建.
+types: [settlement]
+names:
+  - form: 赭時
+    lang: lzh
+    script: Hani
+    roman: Zheshi
+    scheme: pinyin
+    cite:
+      - id: chach-name
+        says: The biography records 玄奘 reaching the kingdom of 赭時.
+        source: cien-zhuan
+        at: 卷二（又西二百里，至赭時國）
+        quote: 又西二百里，至赭時國
+      - id: chach-xiyu
+        says: The 西域記 opens its account of the country with this sentence.
+        role: supporting
+        source: xiyu-ji
+        at: 卷第一 赭時國
+        quote: 赭時國。周千餘里。西臨葉河。
+  - form: 石國
+    lang: lzh
+    script: Hani
+    roman: Shiguo
+    scheme: pinyin
+    note: The Chinese name the biography gives.
+    claim: chach-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [69.2797, 41.3111]
+    notes:
+      Label anchor at Tashkent as recorded in Wikidata (Q269). It is not an asserted historical coordinate;
+      the identification of 赭時 with the modern place is the conventional modern reading, not a statement
+      of the cited sources.
+    cite:
+      - id: chach-anchor
+        says:
+          The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate
+          is asserted.
+        source: wikidata
+        at: Q269 (P625), revision 2539075591
+modern:
+  - form: 塔什干
+    lang: zh-Hant
+    script: Hani
+    note: Modern place recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q269
+    url: https://www.wikidata.org/wiki/Q269
+    license: CC0-1.0
+    note: The modern place used for the label anchor.

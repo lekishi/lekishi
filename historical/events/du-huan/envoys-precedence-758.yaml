@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "On the first day of the fifth month of 乾元元年 (758), envoys of 回紇 and of 黑衣大食 arrive with
+  tribute and dispute precedence at the palace gate; the emperor has them enter by the left and right
+  gates."
+types: [mission]
+date:
+  value: 758-05-01
+  calendar: chinese_lunisolar
+  as_written: 乾元元年五月壬申朔
+  cite:
+    - id: envoys-precedence-time
+      says: The annals record the 回紇 and 黑衣大食 envoys disputing precedence at the palace gate on 五月壬申朔.
+      source: jiu-tangshu
+      at: 卷十 肅宗紀 乾元元年五月壬申朔（回紇、黑衣大食各遣使朝貢）
+      quote: 五月壬申朔，回紇、黑衣大食各遣使朝貢，至閣門爭長，詔其使各從左右門入。
+places:
+  - place: changan
+    role: site
+    note: The court had returned to 長安 after its recapture in 757; the gate is named but not placed.
+participants:
+  - actor: abbasid-dynasty
+    role: guest
+  - actor: uighurs
+    role: guest
+  - actor: tang-dynasty
+    role: host
+notes: The annals do not say which envoy went in by which gate.

@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The Tang court marries 和義公主, a daughter of the imperial house, to the king of 拔汗那 (寧遠). The
+  comprehensive mirror enters it under the twelfth month of 天寶三載 (744); 經行記 says 天寶十年 (751).
+  The chapter publishes the mirror's date and keeps 經行記's as a conflicting account."
+types: [exchange]
+date:
+  value: 744-12
+  calendar: chinese_lunisolar
+  as_written: 天寶三載十二月癸卯（資治通鑑）; 大唐天寶十年，嫁和義公主於此（經行記）
+  cite:
+    - id: heyi-marriage-time
+      says: The mirror enters the marriage of 和義公主 to 寧遠奉化王 阿悉爛達干 under the 癸卯 day of the twelfth month of 天寶三載.
+      source: zizhi-tongjian
+      at: 卷二一五 唐紀三十一 天寶三載十二月癸卯（以宗女為和義公主）
+      quote: 癸卯，以宗女為和義公主，嫁寧遠奉化王阿悉爛達干。
+    - id: heyi-marriage-xin
+      says: The western-regions entry puts the renaming to 寧遠 and the marriage in 天寶三載.
+      role: supporting
+      source: xin-tangshu
+      at: 卷二二一下 西域下 寧遠（天寶三載，改其國號寧遠）
+      quote: 天寶三載，改其國號寧遠，帝以外家姓賜其王曰竇，又封宗室女為和義公主降之。
+    - id: heyi-marriage-jingxingji
+      says: 經行記 says 和義公主 was married into 拔汗那 in 天寶十年.
+      role: conflicting
+      source: tongdian
+      at: 卷一九二 邊防八 疏勒（杜環經行記云：拔汗那國）
+      quote: 大唐天寶十年，嫁和義公主於此。
+places:
+  - place: ferghana
+    role: context
+    note: The kingdom she was married into; no wedding site is named.
+participants:
+  - actor: heyi-princess
+    role: subject
+  - actor: ashilan-daqan
+    role: participant
+  - actor: tang-dynasty
+    role: participant
+  - actor: ferghana-state
+    role: participant
+notes:
+  "Two Song-era compilations agree on 天寶三載 and 經行記, the only eyewitness text, says 天寶十年. The
+  difference may be a transmission error or a later event (an arrival rather than the betrothal),
+  but no cited source says so; the chapter keeps both dates and resolves neither."
+dispute:
+  status: disputed
+  summary:
+    資治通鑑 and 新唐書 date the marriage to 天寶三載 (744); 經行記 says 天寶十年 (751). The chapter
+    publishes the month the mirror gives and keeps 經行記's year as a conflicting claim.

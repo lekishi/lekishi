@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: "The war of 751 between the Tang western command and 大食: 高仙芝's march west, the meeting at 怛邏斯 and the Tang defeat. The relationship asserts no wider state of war before or after it."
+types: [conflict]
+from: tang-dynasty
+to: dashi
+directionality: mutual
+date:
+  value: 751
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 天寶十載
+cite:
+  - id: tang-dashi-conflict-basis
+    says: The mirror records 高仙芝 attacking 大食 and meeting it at 恆羅斯城 in 天寶十載.
+    source: zizhi-tongjian
+    at: 卷二一六 唐紀三十二 天寶十載（仙芝聞之，將蕃、漢三萬衆撃大食）
+    quote: 仙芝聞之，將蕃、漢三萬衆撃大食，深入七百餘里，至恆羅斯城，與大食遇。
+notes: Within six years 大食 envoys and troops were at the Tang court's side; the chapter shows both relationships and joins them by no cause.

@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  香積寺, the temple south-west of 長安 north of which the restoring armies drew up on the 壬寅 day of
+  the ninth month of 至德二載 (757), with 李嗣業 commanding the van. The record's only placement is a
+  label anchor at the modern temple that carries the name.
+types: [religious_site]
+names:
+  - form: 香積寺
+    lang: lzh
+    script: Hani
+    roman: Xiangji Si
+    scheme: pinyin
+    cite:
+      - id: xiangji-temple-name
+        says: The mirror records the armies reaching the west of 長安 and drawing up north of 香積寺, east of the 澧水.
+        source: zizhi-tongjian
+        at: 卷二二〇 唐紀三十六 至德二載九月壬寅（陳於香積寺北澧水之東）
+        quote: 壬寅，至長安城西，陳於香積寺北澧水之東。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [108.88777777778, 34.125]
+    notes:
+      Label anchor at the modern 香積寺 in 長安區 (Wikidata Q2276797), which carries the name. It does
+      not place the battlefield, which the mirror gives only as north of the temple and east of the
+      river.
+    cite:
+      - id: xiangji-temple-anchor
+        says: The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical
+          coordinate is asserted.
+        source: wikidata
+        at: Q2276797 (P625), revision 2515919979
+modern:
+  - form: 香積寺
+    lang: zh-Hant
+    script: Hani
+    note: Modern temple recorded for orientation only, in traditional characters because the site fonts draw no simplified forms.

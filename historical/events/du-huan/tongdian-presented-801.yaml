@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "In 貞元十七年 (801) 杜佑, then in 淮南, sends a messenger to the court to present 通典, the
+  two-hundred-卷 institutional history whose 西戎 section preserves 經行記."
+types: [exchange]
+date:
+  value: 801
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 貞元十七年，自淮南使人詣闕獻之
+  cite:
+    - id: tongdian-presented-time
+      says: 杜佑's biography records him sending 通典 from 淮南 to the court in 貞元十七年.
+      source: jiu-tangshu
+      at: 卷一四七 杜佑傳（貞元十七年，自淮南使人詣闕獻之）
+      quote: 書成二百卷，號曰《通典》。貞元十七年，自淮南使人詣闕獻之
+places:
+  - place: changan
+    role: end
+    note: 詣闕, to the palace; the court was at 長安 in 801.
+participants:
+  - actor: du-you
+    role: leader
+  - actor: tang-dynasty
+    role: host
+notes:
+  "Coda node, forty years after the chapter's window: the event through which 經行記 reaches us. 淮南
+  is 杜佑's post, not a place record in this chapter."

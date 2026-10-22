@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: The raid of 大食 and 波斯 on 廣州 in 758, recorded as a conflict with the Tang prefecture.
+types: [conflict]
+from: dashi
+to: tang-dynasty
+date:
+  value: 758
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 乾元元年
+cite:
+  - id: dashi-bosi-guangzhou-basis
+    says: The mirror records 大食 and 波斯 surrounding 廣州, plundering its granaries and leaving by sea.
+    source: zizhi-tongjian
+    at: 卷二二〇 唐紀三十六 乾元元年九月癸巳（廣州奏）
+    quote: 大食、波斯圍州城，刺史韋利見逾城走，二國兵掠倉庫，焚廬舍，浮海而去。
+notes: 波斯 is the other party on the event; the relationship's endpoints are the two states the notice names first and the court it reported to.

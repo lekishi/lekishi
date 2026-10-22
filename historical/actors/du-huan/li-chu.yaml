@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: 廣平王 (李俶, the later 代宗), supreme commander of the army of 至德二載 (757) that brought 朔方, 安西, 回紇, 南蠻 and 大食 troops east and retook 長安.
+types: [person]
+names:
+  - form: 廣平王
+    lang: lzh
+    script: Hani
+    roman: Guangping Wang
+    scheme: pinyin
+    cite:
+      - id: li-chu-name
+        says: The annals record the supreme commander 廣平王 leading the 朔方, 安西, 回紇, 南蠻 and 大食 troops east and retaking the western capital.
+        source: jiu-tangshu
+        at: 卷十 肅宗紀 至德二載九月丁亥（元帥廣平王統朔方、安西、回紇、南蠻、大食之眾）
+        quote: 丁亥，元帥廣平王統朔方、安西、回紇、南蠻、大食之眾二十萬，東向討賊。
+  - form: 代宗
+    lang: lzh
+    script: Hani
+    note: His temple name as emperor; the 大食 entry says it was as 代宗, then commander, that he used 大食 troops.
+    cite:
+      - id: li-chu-daizong
+        says: The 大食 entry says 代宗, as supreme commander, used the kingdom's troops to retake the two capitals.
+        source: jiu-tangshu
+        at: 卷一九八 西戎 大食國（代宗時為元帥）
+        quote: 代宗時為元帥，亦用其國兵以收兩都。
+roles:
+  - role: official
+    note: 元帥 (supreme commander) in 757.
+notes: The personal name 俶 is in the mirror's notices; the record keeps the titles the cited passages use.

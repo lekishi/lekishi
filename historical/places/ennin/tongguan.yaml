@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 潼關, the pass that the diary calls the throat of the capital region, which 圓仁 crossed going east on 會昌五年五月廿二日 (845).
+types: [fortification, route_node]
+names:
+  - form: 潼關
+    lang: lzh
+    script: Hani
+    roman: Tongguan
+    scheme: pinyin
+    cite:
+      - id: tongguan-name
+        says: The diary records passing 潼關, 'the throat of the capital', on the 22nd.
+        source: nitto-guho-junrei-gyoki
+        at: 卷四 會昌五年五月廿二日
+        quote: 廿二日過潼關。是國城之咽喉也。
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [110.286, 34.606]
+    notes: Label anchor at the pass Wikidata records as 潼关 (Wikidata Q6757995). It is not an asserted historical coordinate.
+    cite:
+      - id: tongguan-anchor
+        says: The label anchor is placed at the coordinate Wikidata (CC0) records for the Tong Pass; no historical coordinate is asserted.
+        source: wikidata
+        at: Q6757995 (P625), revision 2515949131
+modern:
+  - form: 潼关
+    lang: zh-Hans
+    script: Hani
+    note: Modern name recorded for orientation only.
+external_ids:
+  - system: wikidata
+    id: Q6757995
+    url: https://www.wikidata.org/wiki/Q6757995
+    license: CC0-1.0
+    note: The item whose coordinate places the label anchor.

@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: Chinese crafts practised in the 大食 capital by named Chinese painters and weavers, as 經行記 records them at 亞俱羅. The relationship records the presence of the crafts and asserts no transfer of technique, and no paper-making.
+types: [contact]
+from: tang-dynasty
+to: dashi
+date:
+  value: 751..762
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 經行記不繫年（杜環在西：天寶十載至寶應初）
+cite:
+  - id: chinese-crafts-in-dashi-basis
+    says: 經行記 names Chinese craftsmen of 京兆 and 河東 painting and weaving at 亞俱羅.
+    source: tongdian
+    at: 卷一九三 邊防九 大食（綾絹機杼，金銀匠、畫匠、漢匠起作畫者）
+    quote: 綾絹機杼，金銀匠、畫匠、漢匠起作畫者，京兆人樊淑、劉泚，織絡者，河東人
+notes: The endpoints are the states the craftsmen came from and worked in; the people are on the event. That they were captives of 751 is a modern inference and is not asserted.

@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "李嗣業, commanding the 鎮西 and 北庭 armies against 安慶緒, is hit by a stray arrow attacking 鄴城 and
+  dies in the camp before 相州 on the 丙申 day of the first month of 乾元二年 (759); 荔非元禮 takes his
+  troops."
+types: [occurrence]
+date:
+  value: 759-01-28
+  calendar: chinese_lunisolar
+  as_written: 乾元二年正月丙申（正月己巳朔）
+  cite:
+    - id: li-siye-death-time
+      says: The mirror records 李嗣業 hit by a stray arrow attacking 鄴城 and dying on the 丙申 day.
+      source: zizhi-tongjian
+      at: 卷二二一 唐紀三十七 乾元二年正月丙申（李嗣業攻鄴城）
+      quote: 鎮西節度使李嗣業攻鄴城，為流矢所中，丙申，薨；兵馬使荔非元禮代將其眾。
+    - id: li-siye-death-annals
+      says: The annals record his death in the 相州 camp on the 丙申 day.
+      role: supporting
+      source: jiu-tangshu
+      at: 卷十 肅宗紀 乾元二年正月丙申（李嗣業卒於相州行營）
+      quote: 丙申，開府儀同三司、衛尉卿、懷州北庭行營節度使、虢國公李嗣業卒於相州行營。
+places:
+  - place: xiangzhou
+    role: site
+participants:
+  - actor: li-siye
+    role: subject
+notes:
+  "The day is the twenty-eighth, counted from the month's first day, 己巳, which the annals give. The
+  annals' 相州行營 and the mirror's 鄴城 name the same siege; the place has no position."

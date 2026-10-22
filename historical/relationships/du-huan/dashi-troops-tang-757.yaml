@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary: 大食 troops fighting for the Tang court against 安祿山's rebels in 757, in the army that retook 長安; the 大食 entry says they were used to retake both capitals.
+types: [alliance]
+from: dashi
+to: tang-dynasty
+date:
+  value: 757
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 至德二載
+cite:
+  - id: dashi-troops-tang-basis
+    says: The annals name 大食 troops in the army of the ninth month of 至德二載, and the 大食 entry says their troops were used to retake the two capitals.
+    sources:
+      - source: jiu-tangshu
+        at: 卷十 肅宗紀 至德二載九月丁亥（元帥廣平王統朔方、安西、回紇、南蠻、大食之眾）
+        quote: 元帥廣平王統朔方、安西、回紇、南蠻、大食之眾二十萬，東向討賊。
+      - source: jiu-tangshu
+        at: 卷一九八 西戎 大食國（代宗時為元帥，亦用其國兵以收兩都）
+        quote: 代宗時為元帥，亦用其國兵以收兩都。
+notes: Whether the caliph sent them or they were western soldiers in Tang service is not stated.

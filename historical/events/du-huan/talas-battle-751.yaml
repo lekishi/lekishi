@@ -1,0 +1,84 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "高仙芝 leads a Tang and allied army more than seven hundred 里 into the west and meets 大食 at 怛邏斯
+  (恆羅斯城). After a five-day standoff the 葛羅祿 contingent turns, 大食 and the 葛羅祿 attack together,
+  and the Tang army is routed; a few thousand survive. The mirror gives thirty thousand men, the
+  biographies twenty thousand. Ibn al-Athīr, writing in the thirteenth century, tells it as Ziyād b.
+  Ṣāliḥ's victory at the river of Ṭarāz in Dhū l-Ḥijja 133 (July 751) over a Chinese army of a
+  hundred thousand, with about fifty thousand killed and twenty thousand taken."
+types: [campaign]
+date:
+  value: 751
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 天寶十載（資治通鑑繫於夏四月後）; 天寶十年（經行記：即天寶十年高仙芝軍敗之地）; Dhū l-Ḥijja 133 (Ibn al-Athīr)
+  cite:
+    - id: talas-battle-time
+      says: The mirror records the battle at 恆羅斯城 among the notices of 天寶十載, after the fourth month.
+      source: zizhi-tongjian
+      at: 卷二一六 唐紀三十二 天寶十載（仙芝聞之，將蕃、漢三萬衆撃大食）
+      quote: 仙芝聞之，將蕃、漢三萬衆撃大食，深入七百餘里，至恆羅斯城，與大食遇。相持五日，葛羅祿部衆叛，與大食夾攻唐軍，仙芝大敗，士卒死亡略盡，所餘才數千人。
+    - id: talas-battle-jingxingji
+      says: 經行記 names 怛邏斯, at the western end of the 碎葉 valley, as the place where 高仙芝's army was defeated in 天寶十年.
+      role: supporting
+      source: tongdian
+      at: 卷一九三 邊防九 石國（又云：碎葉國……其川西頭有城，名曰怛邏斯）
+      quote: 其川西頭有城，名曰怛邏斯，石國人鎮，即天寶十年高仙芝軍敗之地。
+    - id: talas-battle-ibn-al-athir-time
+      says:
+        Ibn al-Athīr enters the battle under the year 133 and says it was fought in Dhū l-Ḥijja 133, a
+        month that began at the end of June 751 and ended at the end of July.
+      role: supporting
+      source: ibn-al-athir-kamil
+      at: vol. 5, p. 344, year 133 (the Ikhshīd of Farghāna and the king of al-Shāsh)
+    - id: talas-battle-numbers
+      says: 李嗣業's biography in 舊唐書 gives the army as twenty thousand and says those left after the night's fighting were no more than a few thousand.
+      role: conflicting
+      source: jiu-tangshu
+      at: 卷一〇九 李嗣業傳（仙芝懼，領兵二萬深入胡地）
+      quote: 仙芝懼，領兵二萬深入胡地，與大食戰，仙芝大敗。會夜，兩軍解，仙芝眾為大食所殺，存者不過數千。
+    - id: talas-battle-ibn-al-athir-numbers
+      says:
+        Ibn al-Athīr says the king of China sent a hundred thousand fighters, that the Muslims met them
+        at the river of Ṭarāz and killed about fifty thousand, took about twenty thousand captive, and
+        the rest fled to China.
+      role: conflicting
+      source: ibn-al-athir-kamil
+      at: vol. 5, p. 344, year 133 (the Ikhshīd of Farghāna and the king of al-Shāsh)
+places:
+  - place: talas
+    role: site
+participants:
+  - actor: gao-xianzhi
+    role: leader
+  - actor: li-siye
+    role: participant
+  - actor: tang-dynasty
+    role: participant
+  - actor: dashi
+    role: participant
+  - actor: ziyad-ibn-salih
+    role: leader
+    note: 大食's commander in Ibn al-Athīr's account; the Tang histories name none.
+    cite:
+      - id: talas-battle-ziyad
+        says: Ibn al-Athīr says Abū Muslim sent Ziyād b. Ṣāliḥ against the Chinese army, and the two met at the river of Ṭarāz.
+        source: ibn-al-athir-kamil
+        at: vol. 5, p. 344, year 133 (the Ikhshīd of Farghāna and the king of al-Shāsh)
+  - actor: karluks
+    role: participant
+notes:
+  "The mirror calls the city 恆羅斯城, 經行記 and 新唐書 怛邏斯 (城). The mirror's notice follows the
+  fourth-month entries but carries no day; the chapter publishes the year. Army sizes are told as
+  three myriads (the mirror) and two (both 李嗣業 biographies), and the chapter decides neither.
+  Ibn al-Athīr's account is the Arabic side: written in the thirteenth century and naming no earlier
+  source, it places the battle at the river of Ṭarāz (the 怛邏斯 river), dates it to Dhū l-Ḥijja 133,
+  which agrees with the Chinese year, and gives a hundred thousand for the Chinese army. It does not
+  mention the 葛羅祿 defection. Its month is not published, because the Chinese notices give only
+  the year. 杜環 is not named in any battle notice, so he is not a participant here."
+dispute:
+  status: disputed
+  summary:
+    The mirror gives the Tang army as thirty thousand men; the 李嗣業 biographies of 舊唐書 and
+    新唐書 give twenty thousand; Ibn al-Athīr gives the Chinese army as a hundred thousand, of whom
+    about fifty thousand were killed and twenty thousand captured. The chapter records all three.

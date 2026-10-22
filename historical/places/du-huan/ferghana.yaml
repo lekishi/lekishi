@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  拔汗那 (寧遠), the kingdom 經行記 places a thousand 里 south of 怛邏斯, east of 石國 and west of 疏勒,
+  with tens of walled towns. Its troops blocked the road of 高仙芝's retreat in 751, and a Tang
+  princess, 和義公主, was married to its king; the sources disagree on the year. The record's only
+  placement is a label anchor in the valley the name is usually given to.
+types: [region]
+names:
+  - form: 拔汗那
+    lang: lzh
+    script: Hani
+    roman: Bahanna
+    scheme: pinyin
+    cite:
+      - id: ferghana-name
+        says:
+          經行記, quoted under 疏勒, places 拔汗那國 a thousand 里 south of 怛邏斯, over two thousand 里 from 疏勒
+          and over a thousand 里 east of 石國, with tens of towns and tens of thousands of troops.
+        source: tongdian
+        at: 卷一九二 邊防八 疏勒（杜環經行記云：拔汗那國在怛邏斯南千里）
+        quote: 拔汗那國在怛邏斯南千里，東隔山，去疏勒二千餘里，西去石國千餘里。城有數十，兵有數萬。
+  - form: 寧遠
+    lang: lzh
+    script: Hani
+    note: The name the Tang court gave the kingdom in 天寶三載.
+    cite:
+      - id: ferghana-ningyuan
+        says: The western-regions entry records that 拔汗那 was renamed 寧遠 in 天寶三載.
+        source: xin-tangshu
+        at: 卷二二一下 西域下 寧遠（天寶三載，改其國號寧遠）
+        quote: 天寶三載，改其國號寧遠
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [71.757777777778, 40.900833333333]
+    notes: "Label anchor at the Ferghana valley's coordinate in Wikidata (Q486324). The usual
+      identification of 拔汗那 with the valley is not yet cited in this chapter, so the anchor is a
+      label position only: it asserts no capital, no extent and no historical coordinate."
+    cite:
+      - id: ferghana-anchor
+        says: The label anchor is placed at the valley's coordinate recorded in Wikidata (CC0); no
+          historical coordinate or identification is asserted.
+        source: wikidata
+        at: Q486324 (P625), revision 2517983247
+external_ids:
+  - system: wikidata
+    id: Q16836300
+    url: https://www.wikidata.org/wiki/Q16836300
+    license: CC0-1.0
+    note: The Wikidata item for the principality of Farghana, found on 2026-10-21; the anchor uses the valley's item.
+notes:
+  "The sources give two names: 拔汗那 in 經行記 and 寧遠 after the 天寶三載 renaming. Distances are 經行記's
+  own and are not used to place anything."

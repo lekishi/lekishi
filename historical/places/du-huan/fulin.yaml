@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  拂菻 (大秦), which 經行記 places several thousand 里 west of 苫國 beyond mountains, with a royal city
+  eighty 里 square, a million troops always holding off 大食, and a silent market on the western sea.
+  The passage reports what 杜環 was told as well as what he saw ("又聞"). The record's only placement
+  is a label anchor at Constantinople, the usual reading of 拂菻's royal city; that reading is not yet
+  cited here.
+types: [region]
+names:
+  - form: 拂菻
+    lang: lzh
+    script: Hani
+    roman: Fulin
+    scheme: pinyin
+    cite:
+      - id: fulin-name
+        says: 經行記, quoted under 大秦, places 拂菻國 west of 苫國 beyond mountains several thousand 里 across, and calls it 大秦 as well.
+        source: tongdian
+        at: 卷一九三 邊防九 大秦（杜環經行記云：拂菻國在苫國西）
+        quote: 拂菻國在苫國西，隔山數千里，亦曰大秦。
+  - form: 大秦
+    lang: lzh
+    script: Hani
+    claim: fulin-name
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [28.976018, 41.01224]
+    notes: "Label anchor at Constantinople's coordinate in Wikidata (Q16869). The reading of 拂菻's
+      eighty-里 royal city as Constantinople is usual but not yet cited in this chapter, and the one
+      cited reading disagrees: Hirth and Rockhill (1911, pp. 108–110) take 拂菻 for Syria. The anchor
+      therefore asserts no identification, extent or historical coordinate."
+    cite:
+      - id: fulin-anchor
+        says: The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical
+          coordinate or identification is asserted.
+        source: wikidata
+        at: Q16869 (P625), revision 2549478073
+notes:
+  "經行記's 拂菻 passage mixes description with hearsay: it ends with a women's kingdom further west,
+  'born of water', introduced by 又聞 (I also heard). The chapter publishes no event of 杜環 visiting
+  拂菻, because the fragment does not say he went there."

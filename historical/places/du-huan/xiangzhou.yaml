@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  相州 (鄴城), the city 安慶緒 held in 758–759, which nine Tang armies besieged and where 李嗣業 was
+  wounded and died in the first month of 乾元二年 (759). The annals call it 相州 and the mirror 鄴城.
+  The record asserts no position.
+types: [settlement]
+names:
+  - form: 相州
+    lang: lzh
+    script: Hani
+    roman: Xiangzhou
+    scheme: pinyin
+    cite:
+      - id: xiangzhou-name
+        says: The annals record the great campaign against 安慶緒 at 相州 in the ninth month of 乾元元年.
+        source: jiu-tangshu
+        at: 卷十 肅宗紀 乾元元年九月庚寅（大舉討安慶緒於相州）
+        quote: 庚寅，大舉討安慶緒於相州。
+  - form: 鄴城
+    lang: lzh
+    script: Hani
+    note: The mirror's name for the city in the 759 notice.
+    cite:
+      - id: xiangzhou-ye
+        says: The mirror records 李嗣業 being hit by a stray arrow while attacking 鄴城.
+        source: zizhi-tongjian
+        at: 卷二二一 唐紀三十七 乾元二年正月丙申（李嗣業攻鄴城）
+        quote: 鎮西節度使李嗣業攻鄴城，為流矢所中，丙申，薨
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      "No position. 鄴城 here is the city 安慶緒 held as 相州, not necessarily the ruins of the older
+      鄴, and the chapter does not yet cite a historical geography that places the Tang 相州 seat."
+    cite:
+      - id: xiangzhou-unknown
+        says: The cited notices name the city but do not place it, so the record carries unknown
+          geometry.
+        source: jiu-tangshu
+        at: 卷十 肅宗紀 乾元元年九月庚寅（大舉討安慶緒於相州）
+notes:
+  The 讀史方輿紀要 entry for 彰德府 is the natural next citation for the Tang 相州 seat; it was not read
+  for this chapter because the transcription was unreachable on 2026-10-21.

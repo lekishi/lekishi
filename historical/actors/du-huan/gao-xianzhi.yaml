@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  高仙芝, military governor of the 安西 four garrisons. He raided 石國 under a feigned peace in 天寶九載
+  (750), presented its king at court, led the army defeated by 大食 at 怛邏斯 in 751, and was executed
+  at 潼關 on imperial order in the twelfth month of 天寶十四載 (755).
+types: [person]
+names:
+  - form: 高仙芝
+    lang: lzh
+    script: Hani
+    roman: Gao Xianzhi
+    scheme: pinyin
+    cite:
+      - id: gao-xianzhi-name
+        says: The comprehensive mirror names 高仙芝, military governor of the 安西 four garrisons, feigning a peace with 石國 and attacking it.
+        source: zizhi-tongjian
+        at: 卷二一六 唐紀三十二 天寶九載十二月（安西四鎭節度使髙仙芝偽與石國約和）
+        quote: 安西四鎭節度使髙仙芝偽與石國約和，引兵襲之，虜其王及部衆以歸，悉殺其老弱。
+roles:
+  - role: official
+    note: 安西四鎭節度使 (the mirror) and 鎮西節度使 (杜佑's preface) in 750–751.
+    date:
+      value: 750..751
+      mode: duration
+      calendar: chinese_lunisolar
+      as_written: 安西四鎭節度使（天寶九載）; 鎮西節度使（西戎總序）
+    cite:
+      - id: gao-xianzhi-role
+        says: The mirror calls him military governor of the 安西 four garrisons in 天寶九載 and 十載; 杜佑's preface calls him 鎮西節度使.
+        sources:
+          - source: zizhi-tongjian
+            at: 卷二一六 唐紀三十二 天寶九載十二月（安西四鎭節度使髙仙芝）
+          - source: tongdian
+            at: 卷一九一 邊防七 西戎總序（族子環隨鎮西節度使高仙芝西征）
+external_ids:
+  - system: wikidata
+    id: Q708541
+    url: https://www.wikidata.org/wiki/Q708541
+    license: CC0-1.0
+    note: External identifier found on 2026-10-21.
+notes: The transcription of the mirror prints the surname with the variant graph 髙; the record uses 高.

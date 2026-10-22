@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "In the first month of 至德二載 (757) the emperor hears that troops from 安西 and 北庭 and from 拔汗那,
+  大食 and other western states have reached 涼州 and 鄯州, and moves to 保定."
+types: [campaign]
+date:
+  value: 757-01
+  calendar: chinese_lunisolar
+  as_written: 至德二載正月甲子（資治通鑑）
+  cite:
+    - id: western-troops-time
+      says: The mirror records the news of the western troops reaching 涼 and 鄯 among the notices of the first month of 至德二載.
+      source: zizhi-tongjian
+      at: 卷二一九 唐紀三十五 至德二載正月甲子（上聞安西、北庭及拔汗那、大食諸國兵至涼、鄯）
+      quote: 上聞安西、北庭及拔汗那、大食諸國兵至涼、鄯，甲子，幸保定。
+participants:
+  - actor: tang-dynasty
+    role: host
+  - actor: ferghana-state
+    role: participant
+  - actor: dashi
+    role: participant
+notes:
+  "The notice dates the emperor's move, not the troops' arrival. 涼州 and 鄯州 have no place records in
+  this chapter, so the event is unplaced. Whether the 大食 troops were sent by the caliph or were
+  western soldiers already in Tang service is not stated."

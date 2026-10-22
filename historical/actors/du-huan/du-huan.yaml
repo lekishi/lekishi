@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  杜環, kinsman (族子) of the historian 杜佑. 杜佑 records that he followed 高仙芝's western campaign,
+  reached 西海 in 天寶十載 (751), came back by merchant ship from 廣州 in 寶應初 (762), and wrote 經行記,
+  which survives only in the passages 杜佑 quotes in 通典. Nothing else about his life is in the
+  cited sources.
+types: [person]
+names:
+  - form: 杜環
+    lang: lzh
+    script: Hani
+    roman: Du Huan
+    scheme: pinyin
+    cite:
+      - id: du-huan-name
+        says: 杜佑's preface names his kinsman 環 as the author of 經行記, and the entries quote it as 杜環經行記.
+        sources:
+          - source: tongdian
+            at: 卷一九一 邊防七 西戎總序（族子環隨鎮西節度使高仙芝西征）
+            quote: 族子環隨鎮西節度使高仙芝西征，天寶十載至西海，寶應初，因賈商船舶自廣州而回，著經行記。
+          - source: tongdian
+            at: 卷一九三 邊防九 大食（杜環經行記云）
+roles:
+  - role: other
+    note:
+      "He 'followed' (隨) the campaign; the preface gives him no rank or office, and the chapter does
+      not call him a soldier or a captive."
+    date:
+      value: 751
+      mode: window
+      calendar: chinese_lunisolar
+      as_written: 天寶十載至西海
+    cite:
+      - id: du-huan-role
+        says: The preface says only that he followed 高仙芝's western campaign and reached 西海 in 天寶十載.
+        source: tongdian
+        at: 卷一九一 邊防七 西戎總序（族子環隨鎮西節度使高仙芝西征）
+external_ids:
+  - system: wikidata
+    id: Q5310056
+    url: https://www.wikidata.org/wiki/Q5310056
+    license: CC0-1.0
+    note: External identifier found on 2026-10-21.
+notes:
+  "That he was taken prisoner at 怛邏斯 in 751 and carried west is the usual modern reading of the
+  preface beside the battle notices. The preface does not say it, and the chapter does not assert
+  it: no event places 杜環 at the battle."

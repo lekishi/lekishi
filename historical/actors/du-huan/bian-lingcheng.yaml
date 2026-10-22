@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  邊令誠, the eunuch army supervisor (監門將軍) sent with 高仙芝 in 755, whose report brought the order
+  to execute 高仙芝 and 封常清 and who carried it out at 潼關.
+types: [person]
+names:
+  - form: 邊令誠
+    lang: lzh
+    script: Hani
+    roman: Bian Lingcheng
+    scheme: pinyin
+    cite:
+      - id: bian-lingcheng-name
+        says: The mirror names the eunuch 監門將軍 邊令誠 as the supervisor of 高仙芝's army.
+        source: zizhi-tongjian
+        at: 卷二一七 唐紀三十三 天寶十四載十二月丙戌（上遣宦者監門將軍邊令誠監其軍）
+        quote: 上遣宦者監門將軍邊令誠監其軍，屯於陝。
+roles:
+  - role: official
+    note: Army supervisor in 755.

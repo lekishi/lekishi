@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: 波斯, in the 758 notices the Persians who raided 廣州 with 大食. 經行記 says the kingdom of 波斯 had by then been destroyed by 大食 more than a century before; the actor is the people, not the fallen state.
+types: [community]
+names:
+  - form: 波斯
+    lang: lzh
+    script: Hani
+    roman: Bosi
+    scheme: pinyin
+    cite:
+      - id: bosi-name
+        says: The western-regions entry records 波斯 raiding 廣州 together with 大食 in 乾元元年.
+        source: jiu-tangshu
+        at: 卷一九八 西戎 波斯國（乾元元年，波斯與大食同寇廣州）
+        quote: 乾元元年，波斯與大食同寇廣州，劫倉庫，焚廬舍，浮海而去。
+      - id: bosi-fall
+        says: 經行記, quoted under 波斯, says that by the end of 天寶 more than a hundred years had passed since 大食 destroyed it.
+        role: supporting
+        source: tongdian
+        at: 卷一九三 邊防九 波斯（杜環記云）
+        quote: 自被大食滅，至天寶末已百餘年矣。

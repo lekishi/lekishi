@@ -1,0 +1,64 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "After his return 杜環 writes 經行記, an account of the lands its surviving fragments describe, from 拔汗那 and
+  碎葉 to 大食, 苫國, 拂菻 and 摩鄰, and of their peoples, crafts and three laws (大食, 大秦 and 尋尋). The
+  book is lost; it survives only where 杜佑 quotes it in 通典."
+types: [founding]
+date:
+  value: 762..801
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 寶應初……著經行記; 通典 貞元十七年獻
+  cite:
+    - id: jingxingji-composed-time
+      says: 杜佑's preface says 杜環 came back in 寶應初 and wrote 經行記; 通典, which quotes it, was presented in 貞元十七年 (801).
+      sources:
+        - source: tongdian
+          at: 卷一九一 邊防七 西戎總序（寶應初，因賈商船舶自廣州而回，著經行記）
+        - source: jiu-tangshu
+          at: 卷一四七 杜佑傳（貞元十七年，自淮南使人詣闕獻之）
+places:
+  - place: ferghana
+    role: context
+  - place: chach
+    role: context
+  - place: samarkand
+    role: context
+  - place: suyab
+    role: context
+  - place: talas
+    role: context
+  - place: merv
+    role: context
+  - place: kufa
+    role: context
+  - place: sham
+    role: context
+  - place: fulin
+    role: context
+  - place: molin
+    role: context
+  - place: sri-lanka
+    role: context
+participants:
+  - actor: du-huan
+    role: leader
+cites:
+  places:
+    - id: jingxingji-composed-places
+      says: 通典 quotes 經行記's entries for 拔汗那, 康國, 師子國, 拂菻, 摩鄰, 波斯, 石國, 碎葉, 大食 (亞俱羅), 末祿 and 苫國.
+      sources:
+        - source: tongdian
+          at: 卷一九二 邊防八 疏勒（杜環經行記云）
+        - source: tongdian
+          at: 卷一九三 邊防九 康居、師子國、大秦、波斯、石國、大食（杜環經行記云）
+  summary:
+    - id: jingxingji-composed-laws
+      says: 經行記 distinguishes three laws among the peoples on the overland road, 大食法, 大秦法 and 尋尋法.
+      source: tongdian
+      at: 卷一九三 邊防九 大秦（諸國陸行之所經也，胡則一種，法有數般）
+      quote: 諸國陸行之所經也，胡則一種，法有數般。有大食法，有大秦法，有尋尋法。
+notes: "The places are the lands the surviving fragments describe, as context: the book's order and
+  杜環's route are lost, so they are not stops and no line joins them. 杜佑 says he left out the
+  small states with nothing new to tell (其小國無異聞者，則不暇錄焉), so the fragments are a selection.
+  經行記 is not a founding in any institutional sense; the type marks the making of a work."

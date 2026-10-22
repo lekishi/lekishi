@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  呂禮 of 河東, one of the two Chinese weavers 經行記 names at 亞俱羅. The other weaver's given name is
+  a rare graph (阝 beside 睘) that the transcription prints as an image; the chapter does not
+  publish a record for him until the graph is checked against a critical edition.
+types: [person]
+names:
+  - form: 呂禮
+    lang: lzh
+    script: Hani
+    roman: Lü Li
+    scheme: pinyin
+    cite:
+      - id: lu-li-name
+        says: 經行記 names two weavers of 河東, the second of them 呂禮.
+        source: tongdian
+        at: 卷一九三 邊防九 大食（織絡者，河東人）
+roles:
+  - role: artisan
+    note: Weaver.
+notes: How he came to 亞俱羅 is not stated; the chapter does not call him a prisoner of 怛邏斯.

@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "In 至德初 (756–757), the entries say, 阿蒲恭拂's 大食 sends envoys with tribute to the Tang court,
+  which had fled 長安 before 安祿山's army. Later envoys come often in 寶應 and 大曆."
+types: [mission]
+date:
+  value: 756..757
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 至德初遣使朝貢（舊唐書）; 至德初，遣使者朝貢（新唐書）
+  cite:
+    - id: dashi-envoys-time
+      says: The western-regions entry records 阿蒲恭拂 sending envoys with tribute in 至德初.
+      source: jiu-tangshu
+      at: 卷一九八 西戎 大食國（阿蒲羅拔卒，立其弟阿蒲恭拂）
+      quote: 阿蒲羅拔卒，立其弟阿蒲恭拂。至德初遣使朝貢
+    - id: dashi-envoys-xin
+      says: The Song western-regions entry records the same envoys in 至德初.
+      role: supporting
+      source: xin-tangshu
+      at: 卷二二一下 西域下 大食（蒲羅死，弟阿蒲恭拂立）
+      quote: 蒲羅死，弟阿蒲恭拂立。至德初，遣使者朝貢。
+participants:
+  - actor: dashi
+    role: participant
+  - actor: abu-jafar
+    role: leader
+  - actor: tang-dynasty
+    role: host
+notes:
+  "至德 ran from the seventh month of 756 to 758; '初' is read as 756–757. The court was then at 靈武
+  and 鳳翔, not 長安, so the event names no place."

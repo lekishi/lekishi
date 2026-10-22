@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 廣州, where the governor 盧奐 received 鑒眞 at 大雲寺. The biography describes the river crowded with Brahman, Persian and Kunlun ships and stays there one spring.
+types: [region]
+names:
+  - form: 廣州
+    lang: lzh
+    script: Hani
+    roman: Guangzhou
+    scheme: pinyin
+    cite:
+      - id: guangzhou-name
+        says: The biography records the 端州 prefect escorting 鑒眞 to 廣州, where 盧奐 met him outside the city.
+        source: toseiden
+        at: 端州太守迎引送至廣州，盧都督率諸道俗出迎城外
+  - form: 廣府
+    lang: lzh
+    script: Hani
+    cite:
+      - id: guangzhou-name-alt
+        says: The biography also calls the city 廣府 in 盧奐's summons.
+        source: toseiden
+        at: 迎和上向廣府
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [113.26, 23.13]
+    notes: Label anchor at the modern city of 廣州 (Wikidata Q16572). It is not an asserted historical coordinate.
+    cite:
+      - id: guangzhou-anchor
+        says: The label anchor is placed at the coordinate recorded in Wikidata (CC0); no historical coordinate is asserted.
+        source: wikidata
+        at: Q16572 (P625), revision 2541717043

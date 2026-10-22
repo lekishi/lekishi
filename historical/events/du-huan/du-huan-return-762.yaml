@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "In 寶應初 (762) 杜環 comes back on merchant ships by way of 廣州, about eleven years after he went
+  west, and writes 經行記. The route of the voyage is not recorded."
+types: [journey]
+date:
+  value: 762
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 寶應初，因賈商船舶自廣州而回
+  cite:
+    - id: du-huan-return-time
+      says: 杜佑's preface records 杜環 coming back from 廣州 on merchant ships in 寶應初.
+      source: tongdian
+      at: 卷一九一 邊防七 西戎總序（寶應初，因賈商船舶自廣州而回）
+      quote: 寶應初，因賈商船舶自廣州而回，著經行記。
+places:
+  - place: guangzhou
+    role: site
+    note: The port he came back through; the preface does not say where he went from there.
+participants:
+  - actor: du-huan
+    role: participant
+notes:
+  "寶應 began in the fourth month of 762 and ended in 763; 寶應初 is read as 762. The preface names no
+  port of departure and no stop: a call at 師子國 is a common reading of 經行記's 師子國 entry, but the
+  fragment does not say he went there, so the chapter draws no voyage."

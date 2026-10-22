@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The 北庭 military governor 王正見 campaigns against 碎葉 in 天寶七年 (748); 經行記 says the walls were
+  broken and the quarters left deserted, though the 大雲寺 built where 交河公主 had lived still
+  stood when 杜環 passed."
+types: [campaign]
+date:
+  value: 748
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 天寶七年（經行記）; 天寶七載（新唐書）
+  cite:
+    - id: suyab-destruction-time
+      says: 經行記 records 王正見's campaign against 碎葉城 in 天寶七年 and the ruin of its walls and quarters.
+      source: tongdian
+      at: 卷一九三 邊防九 石國（又云：碎葉國）
+      quote: 又有碎葉城，天寶七年，北庭節度使王正見薄伐，城壁摧毀，邑居零落。昔交河公主所居止之處，建大雲寺，猶存。
+    - id: suyab-destruction-xin
+      says: The western-regions entry records the 天寶七載 destruction of 碎葉城 by 王正見.
+      role: supporting
+      source: xin-tangshu
+      at: 卷二二一下 西域下 石（有碎葉者）
+      quote: 西有碎葉城，天寶七載，北庭節度使王正見伐安西，毀之。
+places:
+  - place: suyab
+    role: site
+participants:
+  - actor: wang-zhengjian
+    role: leader
+notes:
+  "The 新唐書 entry follows 經行記 closely and reads 伐安西, which makes no sense of 碎葉 and is probably
+  a corruption; it is a supporting witness to the year, not independent evidence. 經行記's 'still
+  stood' is the only sign of when 杜環 saw the city, and it gives no date."

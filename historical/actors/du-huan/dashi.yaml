@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  大食, the Chinese sources' name for the Arab empire west of 波斯, which first sent envoys in 永徽
+  (650s). 經行記 describes it at 亞俱羅 under a king titled 暮門, having swallowed forty or fifty
+  states up to the western sea. It fought the Tang army at 怛邏斯 in 751, sent envoys and troops to
+  the Tang court in 756–758, and joined 波斯 in raiding 廣州 in 758. The sources split its ruling
+  house into 白衣 and 黑衣 大食, recorded as separate actors.
+types: [state]
+names:
+  - form: 大食
+    lang: lzh
+    script: Hani
+    roman: Dashi
+    scheme: pinyin
+    cite:
+      - id: dashi-name
+        says: 通典's entry for 大食 records its first envoys in 永徽 and places it west of 波斯.
+        source: tongdian
+        at: 卷一九三 邊防九 大食
+        quote: 大食，大唐永徽中，遣使朝貢云：其國在波斯之西。
+      - id: dashi-name-jingxingji
+        says: 經行記 says the 大食 king, titled 暮門, has his seat at 亞俱羅, and that 大食 has swallowed forty or fifty states.
+        role: supporting
+        source: tongdian
+        at: 卷一九三 邊防九 大食（杜環經行記云：一名亞俱羅）
+        quote: 今吞滅四五十國，皆為所役屬，多分其兵鎮守，其境盡於西海焉。
+notes:
+  "暮門 is 經行記's rendering of the ruler's title, not a personal name, and the chapter keeps it in
+  the text rather than as an actor. Which caliph 杜環 saw preach is not stated."

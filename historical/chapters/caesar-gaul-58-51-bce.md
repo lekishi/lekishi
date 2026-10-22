@@ -27,6 +27,7 @@ it is Caesar's report.
 | Source | Edition read | Terms | Use |
 |---|---|---|---|
 | Caesar, *De bello Gallico* I–VIII | The Latin Library transcription, read 2026-10-21 | Work public domain; the site states no terms and names no edition | Quoted in Latin, cited by book and chapter |
+| T. Rice Holmes, *Caesar's Conquest of Gaul* | London, 1899, Internet Archive scan, read from the page images 2026-10-22 (new `holmes-caesars-conquest-of-gaul` source) | Public domain | The reference chronology for the conventional book years, cited by chapter, page and margin year |
 | Pleiades | Daily dump of 2026-10-21 (shared `pleiades` source) | CC BY 3.0 | Every coordinate except Genava's, as an interpretation attributed to Pleiades |
 
 Every quotation was checked by script against the downloaded text on
@@ -42,6 +43,13 @@ Hirtius says Caesar wrote one book for each year and that the year after book
 VIII, the consulship of Paulus and Marcellus (50), had no great deeds in Gaul.
 Together these date every book, so each event is a one-year window with its
 consular or book year in `as_written`.
+
+Under `rfd/0002/CONVENTIONAL_DATES.adoc`, the five events in the consul-dated
+books (IV and V, and the Helvetii at Genava in book I) are attested: Caesar
+names the year himself. The other sixteen are conventional. Caesar places them
+in the year of their book, and the year is the count of one book a year from
+book I, which Holmes's narrative (1899) confirms in its margins. Each cites
+Caesar's passages and Holmes's page.
 
 Only one event has a day: the Helvetii set the fifth day before the Kalends of
 April for their gathering. That is a date in the pre-Julian Roman calendar,

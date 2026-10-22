@@ -9,16 +9,20 @@ date:
   calendar: julian
   as_written: "the year of book VI (one commentary a year, from 58 BCE)"
   cite:
-    id: second-rhine-crossing-53-year
-    says: "Hirtius writes that Caesar composed one commentary for each year, and book I is dated by
-      the consuls of 58 BCE, so each book is one year from 58 BCE."
-    sources:
-      - source: caesar-gallic-war
-        at: "1.6"
-        quote: "L. Pisone, A. Gabinio consulibus."
-      - source: caesar-gallic-war
-        at: "8.48"
-        quote: Scio Caesarem singulorum annorum singulos commentarios confecisse
+    - id: second-rhine-crossing-53-year
+      says: "Hirtius writes that Caesar composed one commentary for each year, and book I is dated by the consuls of 58 BCE, so each book is one year from 58 BCE. Holmes's narrative of the war puts it in 53 BCE."
+      basis: conventional
+      convention: One commentary a year from the consuls of book I (58 BCE), as Hirtius says, on the standard chronology of the Gallic War
+      sources:
+        - source: caesar-gallic-war
+          at: "1.6"
+          quote: "L. Pisone, A. Gabinio consulibus."
+        - source: caesar-gallic-war
+          at: "8.48"
+          quote: Scio Caesarem singulorum annorum singulos commentarios confecisse
+        - source: holmes-caesars-conquest-of-gaul
+          at: "ch. VI, p. 123 (margin: 53 B.C.)"
+          quote: "he again threw a bridge across the Rhine, a little above the site of the former one"
 places:
   - place: rhine
     role: site

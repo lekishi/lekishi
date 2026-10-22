@@ -22,6 +22,7 @@ const examplesDirectory = Documents.contractFile("examples")
 
 /** The vector files the contract ships, with the case count each one carries. */
 const VECTOR_FILES: Record<string, number> = {
+  claims: 8,
   documents: 42,
   geometry: 28,
   names: 18,
@@ -223,7 +224,7 @@ describe("the vector suite", () => {
 
     // The adversarial suite is the contract's regression surface: every vector
     // file is loaded here, and the total is pinned so a case cannot be dropped.
-    expect(total).toBe(187)
+    expect(total).toBe(195)
   })
 
   it("ships a schema for every document kind the contract has", () => {

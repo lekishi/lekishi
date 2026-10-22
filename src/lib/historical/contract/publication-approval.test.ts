@@ -183,7 +183,14 @@ story:
 `,
       },
     ]
-    const violations = contractViolations(compileAll(buildTree(added), { preview: true }))
+    // The previous case checks every real chapter; checking them again here only
+    // repeats that cost, so only the synthetic chapter is checked.
+    const discovered = compileAll(buildTree(added), { preview: true }).filter(
+      (bundle) => bundle.id === "example-contract-invalid",
+    )
+    const violations = contractViolations(discovered)
+
+    expect(discovered).toHaveLength(1)
 
     expect(violations.join("\n")).toContain("example-contract-invalid: unrecorded_source_license")
   })

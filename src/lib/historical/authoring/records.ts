@@ -36,10 +36,14 @@ export type CompiledRecord = {
   readonly dispute?: JsonObject
 }
 
-/** The author's spelling of a claim basis; `interpretation` is v0's `cited_interpretation`. */
+/**
+ * The author's spelling of a claim basis; `interpretation` is v0's
+ * `cited_interpretation`, and `conventional` is v1's.
+ */
 const BASES: Record<string, string> = {
   attested: "attested",
   interpretation: "cited_interpretation",
+  conventional: "conventional",
 }
 
 /** Fields that compile to a differently named v0 field (`types` is per kind). */
@@ -128,7 +132,7 @@ class Claims {
 
     if (basis === undefined) {
       throw new Error(
-        `${where}: basis is attested or interpretation, not ${String(entry["basis"])}`,
+        `${where}: basis is attested, interpretation or conventional, not ${String(entry["basis"])}`,
       )
     }
 
@@ -146,6 +150,10 @@ class Claims {
 
     if (entry["attributed_to"] !== undefined) {
       claim["attributed_to"] = entry["attributed_to"]
+    }
+
+    if (entry["convention"] !== undefined) {
+      claim["convention"] = entry["convention"]
     }
 
     // `where` starts with the top-level field the cite is written under.

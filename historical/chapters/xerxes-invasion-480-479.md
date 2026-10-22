@@ -47,8 +47,9 @@ Hannibal chapter's record, which this chapter reaches as it is.
   Every quotation was checked against that text, not yet against a printed
   edition. The Gutenberg text reads "five-and-thirty days" at VIII.115 where the
   Greek reads forty-five; the event's notes say so.
-- Herodotus gives no years. Every year and season is George Grote's reckoning,
-  cited as his interpretation with the Herodotus passage supporting. The one
+- Herodotus gives no years. Every year is the standard chronology as George
+  Grote states it, cited as `conventional` with both the Herodotus passage and
+  Grote's statement; the passage also stays as a supporting claim. The one
   exception is the start of the Athos works, about 483 BCE, which Grote does
   not date: it is an editorial count of Herodotus's "about three years" back
   from Grote's date for the march, and its claim says so.

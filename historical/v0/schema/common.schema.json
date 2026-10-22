@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/lekishi/lekishi/schema/v0/common.schema.json",
   "title": "Lekishi historical contract v0: shared definitions",
-  "description": "Shared definitions for the Lekishi historical interchange contract v0. Vocabulary lists are deliberately small and chapter-oriented; they are not a universal historical ontology. Unknown fields are rejected so presentation, renderer, and invented-precision state cannot enter the historical source of truth. Extending a vocabulary requires a new contract version.",
+  "description": "Shared definitions for the Lekishi historical interchange contract v0. Vocabulary lists are deliberately small and chapter-oriented; they are not a universal historical ontology. Unknown fields are rejected so presentation, renderer, and invented-precision state cannot enter the historical source of truth. Until the atlas launches, extending a vocabulary or adding a kind amends v0 in place; after launch, it requires a new contract version.",
   "$defs": {
     "contract": {
       "const": "lekishi-historical-contract/v0"
@@ -122,7 +122,7 @@
       }
     },
     "claim": {
-      "description": "An assertion with its evidentiary basis. attested records what a source reports; cited_interpretation is an interpretation advanced in cited scholarship and must name who advances it. asserts is a JSON Pointer into this revision's content (empty string for the whole content) naming the field the claim supports, so one source need not support every field.",
+      "description": "An assertion with its evidentiary basis. attested records what a source reports; cited_interpretation is an interpretation advanced in cited scholarship and must name who advances it; conventional is a date that standard reference chronologies agree on, derived from a source that gives a sequence rather than a calendar date, and names the conversion in convention. asserts is a JSON Pointer into this revision's content (empty string for the whole content) naming the field the claim supports, so one source need not support every field.",
       "type": "object",
       "required": ["claim_id", "statement", "asserts", "basis", "role", "citations"],
       "additionalProperties": false,
@@ -130,11 +130,18 @@
         "claim_id": {"$ref": "#/$defs/claim_id"},
         "statement": {"type": "string", "minLength": 1, "maxLength": 2000},
         "asserts": {"type": "string", "pattern": "^(|/.*)$", "maxLength": 200},
-        "basis": {"enum": ["attested", "cited_interpretation"]},
+        "basis": {"enum": ["attested", "cited_interpretation", "conventional"]},
         "role": {"enum": ["main", "supporting", "alternative", "conflicting"]},
         "attributed_to": {"type": ["string", "null"], "maxLength": 300},
+        "convention": {
+          "description": "For a conventional claim only: the conversion the date follows, for example \"Herodotean campaign seasons, standard chronology\".",
+          "type": ["string", "null"],
+          "maxLength": 200
+        },
         "citations": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/citation"}}
-      }
+      },
+      "if": {"not": {"properties": {"basis": {"const": "conventional"}}}},
+      "then": {"not": {"required": ["convention"]}}
     },
     "romanization": {
       "description": "A modern reading aid for a non-Latin name form. It is never evidence of historical pronunciation and never a substitute for the local-script form.",

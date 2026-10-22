@@ -194,6 +194,10 @@ export function codes(): string[] {
     "duplicate_claim_id",
     "claim_pointer_unresolved",
     "interpretation_missing_attribution",
+    "conventional_missing_convention",
+    "conventional_single_citation",
+    "conventional_outside_time",
+    "conventional_in_dispute",
     "claim_without_dispute",
     "multiple_main_claims_for_pointer",
     "unresolved_claim_reference",
@@ -470,9 +474,67 @@ function claimErrors(
       claimPath,
       "an alternative or conflicting claim requires a visible dispute",
     )
+
+    if (claim["basis"] === "conventional") {
+      errors.push(...conventionalErrors(claim, claims, content, claimPath))
+    }
   })
 
   return [...errors, ...claimReferenceErrors(content, claimIds, path)]
+}
+
+/**
+ * A conventional claim is a date that standard reference chronologies agree
+ * on, derived from a source that gives a sequence rather than a calendar date.
+ * It names its conversion, cites both the passage that places the event and a
+ * reference that states the year, asserts a time, and is never one side of a
+ * dispute: a year that is disputed is not conventional.
+ */
+function conventionalErrors(
+  claim: JsonObject,
+  claims: JsonValue[],
+  content: JsonObject,
+  claimPath: string,
+): Violation[] {
+  const errors: Violation[] = []
+  const asserted = pointerValue(content, claim["asserts"])
+  const challenged = claims.some(
+    (other) =>
+      isObject(other) &&
+      (other["role"] === "alternative" || other["role"] === "conflicting") &&
+      other["asserts"] === claim["asserts"],
+  )
+
+  flag(
+    errors,
+    blank(claim["convention"]),
+    "conventional_missing_convention",
+    claimPath,
+    "a conventional date must name the conversion it follows",
+  )
+  flag(
+    errors,
+    listOf(claim["citations"]).length < 2,
+    "conventional_single_citation",
+    claimPath,
+    "a conventional date cites the passage that places the event and a reference that states the year",
+  )
+  flag(
+    errors,
+    !(isObject(asserted) && Object.hasOwn(asserted, "calendar")),
+    "conventional_outside_time",
+    claimPath,
+    `a conventional claim asserts a time, not ${JSON.stringify(claim["asserts"])}`,
+  )
+  flag(
+    errors,
+    challenged,
+    "conventional_in_dispute",
+    claimPath,
+    "a disputed date is not conventional; cite each account as an interpretation",
+  )
+
+  return errors
 }
 
 function claimReferenceErrors(
@@ -1434,12 +1496,17 @@ function collectKeys(value: JsonValue, path: string): [string, string][] {
 }
 
 function pointerResolves(content: JsonObject, pointer: unknown): boolean {
+  return pointerValue(content, pointer) !== undefined
+}
+
+/** The value a JSON Pointer names in the content, or undefined when it names nothing. */
+function pointerValue(content: JsonObject, pointer: unknown): JsonValue | undefined {
   if (pointer === "") {
-    return true
+    return content
   }
 
   if (!isString(pointer)) {
-    return false
+    return undefined
   }
 
   let current: JsonValue = content
@@ -1461,10 +1528,10 @@ function pointerResolves(content: JsonObject, pointer: unknown): boolean {
       }
     }
 
-    return false
+    return undefined
   }
 
-  return true
+  return current
 }
 
 function duplicates(values: (JsonValue | undefined)[]): (JsonValue | undefined)[] {

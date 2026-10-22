@@ -98,7 +98,7 @@ rules below when updating project-specific guidance.
 - Vitest runs `src/**/*.test.ts`. DOM tests declare `// @vitest-environment jsdom`; everything else runs in Node.
 - Component tests mount the client Svelte build; `vite.config.ts` sets `resolve.conditions` to `["browser"]` while Vitest runs. Do not remove that without replacing it.
 - Never `sleep` to wait for a process or a render: await the microtask flush (see `mount.test.ts`), poll with `expect.poll`, or assert on the durable outcome.
-- The historical contract suite is the regression surface for historical meaning. Every code and caveat a vector expects must be documented by the reference semantics, and `examples.test.ts` pins the vector files and their case count (187). Adding a rule means adding vectors; changing a rule means a new contract version, not an edit that weakens an existing case.
+- The historical contract suite is the regression surface for historical meaning. Every code and caveat a vector expects must be documented by the reference semantics, and `examples.test.ts` pins the vector files and their case count. Adding a rule means adding vectors. Until the atlas launches, adding a kind or extending a vocabulary amends v0 in place (owner decision, 2026-10-22); after launch, changing a rule means a new contract version, not an edit that weakens an existing case.
 - Browser checks run against the built artifact by default (`pnpm e2e`), and against the development server with `LEKISHI_E2E_MODE=dev pnpm e2e`. Assert behavior and elements, not raw HTML or text that is expected to change.
 - Save screenshots or recordings for review under `.amp/in/artifacts/`; they are ignored by Git.
 

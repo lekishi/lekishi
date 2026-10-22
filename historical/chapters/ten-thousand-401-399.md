@@ -43,8 +43,9 @@ Thapsacus and Opis with the Alexander chapter.
 - Xenophon is read in Dakyns's translation (1890) on Project Gutenberg. Every
   quotation was checked against that text, not yet against a printed edition.
 - Xenophon gives distances in stages and parasangs and halts in days, but no
-  years. Every year and season is George Grote's reckoning, cited as his
-  interpretation with the Xenophon passage supporting. Most stages are dated
+  years. Every year is the standard chronology as George Grote states it,
+  cited as `conventional` with both the Xenophon passage and Grote's statement.
+  Most stages are dated
   only to the window between two of Grote's anchors (the start of the march in
   March or April 401 BCE, Kunaxa in September or October, the arrival at the
   sea, the junction with Thibron), so a stage reads as "somewhere in this

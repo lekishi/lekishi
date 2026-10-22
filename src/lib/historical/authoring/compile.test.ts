@@ -682,3 +682,61 @@ describe("the digest an approval pins", () => {
     expect(bundle.sets).toEqual([])
   })
 })
+
+describe("compiling a conventional date", () => {
+  const conventional = (cite: string) =>
+    EVENT.replace(
+      "  cite:\n    says: The chronicle dates the landing.\n    source: example-chronicle\n    at: 卷一\n",
+      cite,
+    )
+  const CITE = `  cite:
+    says: The chronicle places the landing after the crossing; the standard chronology dates it.
+    basis: conventional
+    convention: Example voyage seasons, standard chronology
+    sources:
+      - source: example-chronicle
+        at: 卷一
+      - source: example-chronicle
+        at: 卷二
+`
+
+  it("compiles the basis and its convention under contract v0", () => {
+    const bundle = compileChapter(
+      buildTree(files({ "events/example/deep/example-landing.yaml": conventional(CITE) })),
+      "example-chapter",
+      { preview: true },
+    )
+    const claims = record(bundle.documents, "lks:event:example-landing")["claims"] as JsonObject[]
+
+    expect(claims.find((claim) => claim["asserts"] === "/time")).toMatchObject({
+      basis: "conventional",
+      convention: "Example voyage seasons, standard chronology",
+    })
+    expect(
+      new Set([...bundle.documents, ...bundle.sets].map((document) => document["contract"])),
+    ).toEqual(new Set(["lekishi-historical-contract/v0"]))
+    expect(Publication.checkAll(bundle.documents, bundle.sets)).toEqual(
+      expect.objectContaining({ ok: true }),
+    )
+  })
+
+  it("needs a convention and two sources", () => {
+    for (const cite of [
+      CITE.replace("    convention: Example voyage seasons, standard chronology\n", ""),
+      "  cite:\n    says: The chronicle dates the landing.\n    basis: conventional\n    convention: Example voyage seasons\n    source: example-chronicle\n    at: 卷一\n",
+    ]) {
+      expect(() =>
+        buildTree(files({ "events/example/deep/example-landing.yaml": conventional(cite) })),
+      ).toThrow(/example-landing\.yaml/)
+    }
+  })
+
+  it("refuses a convention on any other basis", () => {
+    const cite =
+      "  cite:\n    says: The chronicle dates the landing.\n    convention: Example voyage seasons\n    source: example-chronicle\n    at: 卷一\n"
+
+    expect(() =>
+      buildTree(files({ "events/example/deep/example-landing.yaml": conventional(cite) })),
+    ).toThrow(/example-landing\.yaml/)
+  })
+})

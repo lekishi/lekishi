@@ -12,11 +12,16 @@ date:
   cite:
     - id: cyrus-expedition-401-time
       says: Grote dates the expedition and retreat from about April 401 BCE to June 399 BCE.
-      source: grote-history-of-greece
-      at: vol. IX, ch. LXXII
-      quote: occupying the two years intervening between about April 401 B.C. and June 399 B.C.
-      basis: interpretation
-      attributed_to: George Grote
+      basis: conventional
+      convention: Xenophon's stages and halts on the standard chronology of the Anabasis
+      sources:
+        - source: xenophon-anabasis
+          at: I.2
+        - source: xenophon-anabasis
+          at: VII.8
+        - source: grote-history-of-greece
+          at: vol. IX, ch. LXXII
+          quote: occupying the two years intervening between about April 401 B.C. and June 399 B.C.
 places:
   - place: sardis
     role: start

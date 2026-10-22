@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Maharbal, Hannibal's cavalry officer, who destroyed Centenius' horse after Trasimene and, in Livy,
+  urged a march on Rome after Cannae.
+types: [person]
+names:
+  - form: Μαάρβας
+    lang: grc
+    script: Grek
+    cite:
+      - id: maharbal-name-polybius
+        says: Polybius records Hannibal sending Μαάρβας with the spearmen and part of the cavalry
+          against Centenius.
+        source: polybius
+        at: "3.86.4"
+        quote: ἐξαποστέλλει Μαάρβαν ἔχοντα τοὺς λογχοφόρους καί τι μέρος τῶν ἱππέων
+  - form: Maharbal
+    lang: la
+    script: Latn
+    cite:
+      - id: maharbal-name-livy
+        says: Livy calls Maharbal the commander of the cavalry.
+        source: livy
+        at: "22.51.2"
+        quote: Maharbal praefectus equitum

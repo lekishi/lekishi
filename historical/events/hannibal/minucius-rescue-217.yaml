@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Minucius, given half the army, is lured into an ambush near Gerunium and is saved only when Fabius
+  brings up his legions. Minucius then leads his men to Fabius' tent, calls him father and submits
+  to his command.
+types: [occurrence]
+date:
+  value: "217 BCE"
+  calendar: regnal
+  as_written: after the equal command (Polybius 3.105; Livy 22.29)
+  cite:
+    - id: rescue-time
+      says: Polybius records Fabius leading out his forces in haste to help those in danger.
+      source: polybius
+      at: "3.105.5"
+      quote: ἐξῆγε τὰς δυνάμεις καὶ κατὰ σπουδὴν ἐβοήθει τοῖς κινδυνεύουσι
+places:
+  - place: gerunium
+    role: site
+participants:
+  - actor: m-minucius-rufus
+    role: leader
+  - actor: q-fabius-maximus
+    role: leader
+  - actor: hannibal
+    role: leader
+notes: Year only. The sources date by Roman consular year and by season; v0 has no Roman republican
+  calendar, so the date is the Julian year the consular year falls in, and no month or day is
+  asserted.
+cite:
+  - id: rescue-withdraw
+    says: Polybius records Hannibal's men breaking off the pursuit, alarmed by the fresh legions.
+    source: polybius
+    at: "3.105.7"
+    quote: οἱ δὲ περὶ τὸν Ἀννίβαν καταπλαγέντες τὴν ἀκεραιότητα καὶ σύνταξιν τῶν παραβεβοηθηκότων
+      στρατοπέδων ἀπέστησαν τοῦ διωγμοῦ καὶ τῆς μάχης
+  - id: rescue-lesson
+    says: Polybius says it was plain that Marcus' rashness had lost all and Fabius' caution saved it.
+    role: supporting
+    source: polybius
+    at: "3.105.8"
+    quote: διὰ μὲν τὴν Μάρκου τόλμαν ἀπόλωλε τὰ ὅλα, διὰ δὲ τὴν εὐλάβειαν τοῦ Φαβίου σέσωσται
+  - id: rescue-father
+    says: Livy has Minucius propose joining camps with Fabius and calling him father.
+    role: supporting
+    source: livy
+    at: "22.29.10"
+    quote: "castra cum Fabio iungamus: ad praetorium eius signa cum tulerimus, ubi ego eum parentem
+      appellavero"

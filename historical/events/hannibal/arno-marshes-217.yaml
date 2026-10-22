@@ -1,0 +1,64 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Hannibal leaves winter quarters by the shortest road into Etruria, through the flooded marshes of
+  the Arno. For four days and three nights the army marches through water; many pack animals die,
+  and Hannibal, riding the last elephant, loses the sight of one eye to an inflammation.
+types: [journey]
+date:
+  value: "217 BCE"
+  calendar: regnal
+  as_written: ἑξῆς ἡμέρας τέτταρας καὶ τρεῖς νύκτας; ex verna primum intemperie
+  cite:
+    - id: arno-time
+      says: Polybius records four days and three nights of marching through water.
+      source: polybius
+      at: "3.79.8"
+      quote: ὡς ἂν ἑξῆς ἡμέρας τέτταρας καὶ τρεῖς νύκτας συνεχῶς διʼ ὕδατος ποιούμενοι τὴν πορείαν
+    - id: arno-spring
+      says: Livy attributes Hannibal's eye disease to the changeable weather of early spring.
+      role: supporting
+      source: livy
+      at: "22.2.10"
+      quote: ipse Hannibal, aeger oculis ex verna primum intemperie variante calores frigoraque
+places:
+  - place: arnus
+    role: site
+    note: The marshes are not located; the river's label anchor stands in.
+  - place: arretium
+    role: end
+    note: Flaminius was camped before the town.
+participants:
+  - actor: hannibal
+    role: leader
+  - actor: mago-barca
+    role: participant
+    note: Commanded the rearguard, keeping the Celts from turning back.
+notes: Year only. The sources date by Roman consular year and by season; v0 has no Roman republican
+  calendar, so the date is the Julian year the consular year falls in, and no month or day is
+  asserted.
+cite:
+  - id: arno-eye
+    says:
+      Polybius records Hannibal saved with difficulty on the one surviving elephant, and losing the
+      sight of one eye.
+    source: polybius
+    at: "3.79.12"
+    quote: διʼ ἣν καὶ τέλος ἐστερήθη τῆς μιᾶς ὄψεως
+  - id: arno-livy-eye
+    says: Livy records Hannibal riding the only surviving elephant and losing one eye.
+    role: supporting
+    source: livy
+    at: "22.2.11"
+    quote: et quia medendi nec locus nec tempus erat, altero oculo capitur
+  - id: arno-mago
+    says: Polybius records Mago commanding the rearguard because of the Celts' softness.
+    role: supporting
+    source: polybius
+    at: "3.79.4"
+    quote: ἐπιμελητὴν δὲ τῆς οὐραγίας τὸν ἀδελφὸν ἀπέλιπε Μάγωνα
+  - id: arno-flaminius
+    says: Polybius records Hannibal finding Flaminius camped before Arretium in Etruria.
+    role: supporting
+    source: polybius
+    at: "3.80.1"
+    quote: καταλαβὼν ἐν Τυρρηνίᾳ τὸν Φλαμίνιον στρατοπεδεύοντα πρὸ τῆς τῶν Ἀρρητίνων πόλεως

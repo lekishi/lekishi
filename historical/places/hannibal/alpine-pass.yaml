@@ -1,0 +1,61 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The pass by which Hannibal crossed the Alps in 218 BCE. Polybius describes the climb, the nine
+  days to the summit and the view of Italy but names no pass; Livy reports two ancient
+  identifications and rejects both.
+types: [route_node, landform]
+names:
+  - form: τῶν Ἄλπεων ὑπερβολή
+    lang: grc
+    script: Grek
+    note: A descriptive phrase, not a place name.
+    cite:
+      - id: alpine-pass-name-polybius
+        says: Polybius calls it the crossing of the Alps, which took fifteen days.
+        source: polybius
+        at: "3.56.3"
+        quote: τὴν δὲ τῶν Ἄλπεων ὑπερβολὴν ἡμέραις δεκαπέντε
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: "No coordinate is asserted: neither source names the pass, and the modern identifications
+      (among them the Col de la Traversette, the Col du Clapier, Mont Cenis and the Little St
+      Bernard) are not adopted."
+    cite:
+      - id: alpine-pass-unlocated
+        says:
+          "Livy reports that the pass was disputed in antiquity: most believed the Poenine, Coelius
+          said the Cremonis iugum, and Livy rejects both because they lead to the Salassi, not the
+          Taurini."
+        source: livy
+        at: "21.38.6"
+        quote: eo magis miror ambigi, quanam Alpis transierit, et vulgo credere Poenino — atque inde
+          nomen ei iugo Alpium inditum — transgressum, Coelium per Cremonis iugum dicere transisse
+dispute:
+  status: disputed
+  summary:
+    The pass is unlocated and was already disputed in antiquity. Livy records the Poenine pass and
+    Coelius' Cremonis iugum and rejects both; Polybius names none. Modern proposals are many and are
+    not adopted.
+cite:
+  - id: alpine-pass-livy-rejects
+    says: Livy rejects both ancient candidates because those passes would have brought the army down
+      among the Salassi rather than the Taurini.
+    role: supporting
+    source: livy
+    at: "21.38.7"
+    quote: qui ambo saltus eum non in Taurinos sed per Salassos Montanos ad Libuos Gallos deduxissent.
+  - id: alpine-pass-poenine
+    says:
+      Livy reports the common belief that Hannibal crossed by the Poenine pass, which took its name
+      from him.
+    role: alternative
+    source: livy
+    at: "21.38.6"
+    quote: et vulgo credere Poenino — atque inde nomen ei iugo Alpium inditum — transgressum
+  - id: alpine-pass-cremonis
+    says: Livy reports Coelius saying Hannibal crossed by the Cremonis ridge.
+    role: alternative
+    source: livy
+    at: "21.38.6"
+    quote: Coelium per Cremonis iugum dicere transisse

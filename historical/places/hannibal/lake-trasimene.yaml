@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Lake Trasimene (Ταρσιμέννη λίμνη, Trasumennus lacus), on whose northern shore Flaminius' army was
+  destroyed in 217 BCE; the battlefield itself is not located.
+types: [landform]
+names:
+  - form: Trasumennus lacus
+    lang: la
+    script: Latn
+    cite:
+      - id: lake-trasimene-name-livy
+        says: Livy names the lake and the country between it and Cortona that Hannibal laid waste.
+        source: livy
+        at: "22.4.1"
+        quote: quod agri est inter Cortonam urbem Trasumennumque lacum omni clade belli pervastat
+  - form: Ταρσιμέννη λίμνη
+    lang: grc
+    script: Grek
+    cite:
+      - id: lake-trasimene-name-polybius
+        says:
+          Polybius records Hannibal marching with Cortona's hills on his left and the lake called
+          Ταρσιμέννη on his right.
+        source: polybius
+        at: "3.82.9"
+        quote: δεξιὰν δὲ τὴν Ταρσιμέννην καλουμένην λίμνην
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [12.1, 43.14]
+    notes: Label anchor at the lake as Wikidata records it. The battle was fought in a valley by the
+      northern shore that the sources describe but do not fix, so no battlefield is asserted.
+    cite:
+      - id: lake-trasimene-anchor
+        says:
+          The label anchor is placed at the coordinate the dataset records; no historical site is
+          asserted.
+        source: wikidata
+        at: Q188487 (P625), revision 2549962982
+modern:
+  - form: Lago Trasimeno
+    lang: it
+    script: Latn
+    note: Modern name of the lake.
+external_ids:
+  - system: wikidata
+    id: Q188487
+    license: CC0-1.0
+  - system: pleiades
+    id: "413347"
+    license: CC BY 3.0

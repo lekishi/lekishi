@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Gaius Terentius Varro, consul in 216 BCE, who held the command on the day of Cannae and escaped to
+  Venusia.
+types: [person]
+names:
+  - form: C. Terentius
+    lang: la
+    script: Latn
+    cite:
+      - id: c-terentius-varro-name-livy
+        says: Livy records C. Terentius elected as the only consul at first.
+        source: livy
+        at: "22.35.2"
+        quote: C. Terentius consul unus creatur
+  - form: Γάιος Τερέντιος
+    lang: grc
+    script: Grek
+    cite:
+      - id: c-terentius-varro-name-polybius
+        says: Polybius records Γάιος Τερέντιος escaping to Venusia.
+        source: polybius
+        at: "3.116.13"
+        quote: ἐν οἷς ἦν καὶ Γάιος Τερέντιος ὁ τῶν Ῥωμαίων στρατηγός
+roles:
+  - role: official
+    note: Consul.
+    date:
+      value: "216 BCE"
+      mode: duration
+      calendar: regnal
+      as_written: L. Aemilio Paullo C. Terentio Varrone consulibus
+    cite:
+      - id: c-terentius-varro-consul
+        says: Polybius records his election with Lucius Aemilius for the year of Cannae.
+        source: polybius
+        at: "3.106.1"
+        quote: εἵλοντο στρατηγοὺς οἱ Ῥωμαῖοι Λεύκιον Αἰμίλιον καὶ Γάιον Τερέντιον
+notes: The cognomen Varro is the conventional form; the cited passages give none.

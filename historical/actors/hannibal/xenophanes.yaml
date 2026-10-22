@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Xenophanes, son of Cleomachus, an Athenian, Philip V's envoy, who reached Hannibal's camp in 215
+  BCE and swore the alliance.
+types: [person]
+names:
+  - form: Ξενοφάνης
+    lang: grc
+    script: Grek
+    cite:
+      - id: xenophanes-name-polybius
+        says: Polybius' text of the oath names the envoy Ξενοφάνης son of Cleomachus, an Athenian.
+        source: polybius
+        at: "7.9.1"
+        quote: πρὸς Ξενοφάνη Κλεομάχου Ἀθηναῖον πρεσβευτήν
+  - form: Xenophanes
+    lang: la
+    script: Latn
+    cite:
+      - id: xenophanes-name-livy
+        says: Livy names Xenophanes as the head of the embassy.
+        source: livy
+        at: "23.33.6"
+        quote: ibi intrepide Xenophanes legationis princeps a Philippo rege se missum ait
+roles:
+  - role: envoy
+    date:
+      value: "215 BCE"
+      mode: window
+      calendar: regnal
+      as_written: Ξενοφάνης Κλεομάχου Ἀθηναῖος πρεσβευτής
+    cite:
+      - id: xenophanes-envoy
+        says: Polybius' text of the oath calls him the envoy Philip sent.
+        source: polybius
+        at: "7.9.1"
+        quote: πρὸς Ξενοφάνη Κλεομάχου Ἀθηναῖον πρεσβευτήν

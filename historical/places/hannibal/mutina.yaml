@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Mutina, the Roman settlement to which the land commissioners fled when the Boii rose in 218 BCE.
+types: [settlement]
+names:
+  - form: Mutina
+    lang: la
+    script: Latn
+    cite:
+      - id: mutina-name-livy
+        says: Livy records the three commissioners fleeing to Mutina.
+        source: livy
+        at: "21.25.3"
+        quote: diffisi Placentiae moenibus Mutinam confugerint
+  - form: Μοτίνη
+    lang: grc
+    script: Grek
+    cite:
+      - id: mutina-name-polybius
+        says: Polybius records the Boii besieging the fugitives in Μοτίνη, a Roman colony.
+        source: polybius
+        at: "3.40.8"
+        quote: εἰς Μοτίνην, ἀποικίαν ὑπάρχουσαν Ῥωμαίων, ἐπολιόρκουν
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [10.93333, 44.65]
+    notes:
+      An approximate placement at the ancient town under modern Modena, which Pleiades identifies as
+      Mutina.
+    cite:
+      - id: mutina-identification
+        says:
+          Pleiades locates the ancient place (Mutina) at the site whose modern coordinate Wikidata
+          records; the point is the Wikidata coordinate (CC0), an approximate placement of the
+          ancient town, not a surveyed site.
+        basis: interpretation
+        attributed_to: Pleiades
+        sources:
+          - source: pleiades
+            at: place 383715 (Mutina), reprLatLong, dump 2026-10-21
+          - source: wikidata
+            at: Q11786862 (P625), revision 2551078232
+modern:
+  - form: Modena
+    lang: it
+    script: Latn
+    note: Modern city on the site, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q11786862
+    license: CC0-1.0
+  - system: pleiades
+    id: "383715"
+    license: CC BY 3.0

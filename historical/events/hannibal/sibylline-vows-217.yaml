@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  On his first day in office Fabius persuades the senate that Flaminius erred by neglecting the
+  gods, and the Sibylline books are consulted. They prescribe renewed vows to Mars, great games for
+  Jupiter, temples to Venus Erycina and Mens, a supplication and lectisternium, and a 'sacred
+  spring' if the state survives five years.
+types: [council]
+date:
+  value: "217 BCE"
+  calendar: regnal
+  as_written: quo die magistratum iniit (Livy 22.9.7)
+  cite:
+    - id: sibylline-time
+      says:
+        Livy records Fabius convening the senate on the day he took office and having the Sibylline
+        books consulted.
+      source: livy
+      at: "22.9.7"
+      quote: Q. Fabius Maximus dictator iterum quo die magistratum iniit vocato senatu, ab diis orsus
+places:
+  - place: rome
+    role: site
+participants:
+  - actor: q-fabius-maximus
+    role: leader
+  - actor: roman-republic
+    role: participant
+notes:
+  Livy alone gives the decrees; the ver sacrum required a vote of the people (22.10.2). Year only.
+  The sources date by Roman consular year and by season; v0 has no Roman republican calendar, so the
+  date is the Julian year the consular year falls in, and no month or day is asserted.
+cite:
+  - id: sibylline-decrees
+    says: "Livy lists the vows the books prescribed: games for Jupiter, temples to Venus Erycina and
+      Mens, a supplication and lectisternium, and a sacred spring."
+    source: livy
+    at: "22.9.10"
+    quote: et Iovi ludos magnos et aedes Veneri Erycinae ac Menti vovendas esse, et supplicationem
+      lectisterniumque habendum, et ver sacrum vovendum
+  - id: sibylline-venus
+    says:
+      Livy records Fabius himself vowing the temple of Venus Erycina, as the books required of the
+      holder of the highest command.
+    role: supporting
+    source: livy
+    at: "22.10.10"
+    quote:
+      Veneri Erucinae aedem Q. Fabius Maximus dictator vovit, quia ita ex fatalibus libris editum
+      erat, ut is voveret, cuius maximum imperium in civitate esset

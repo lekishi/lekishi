@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At the Island, four days' march from the crossing, Hannibal finds two brothers of the Allobroges
+  at war over the kingship. He sides with the elder, Braneus, who in return supplies his army with
+  grain, new weapons, clothing and shoes, and escorts it to the foot of the Alps.
+types: [council]
+part_of: [hannibal-march-218]
+date:
+  value: "218 BCE"
+  calendar: regnal
+  as_written: quartis castris (Livy 21.31.4)
+  cite:
+    - id: insula-time
+      says: Livy records Hannibal reaching the Island at his fourth camp from the Rhône.
+      source: livy
+      at: "21.31.4"
+      quote: quartis castris ad Insulam pervenit
+places:
+  - place: insula
+    role: site
+participants:
+  - actor: hannibal
+    role: leader
+  - actor: braneus
+    role: participant
+    note: Named by Livy only.
+notes:
+  Polybius tells the same arbitration without naming the brothers. Year only. The sources date by
+  Roman consular year and by season; v0 has no Roman republican calendar, so the date is the Julian
+  year the consular year falls in, and no month or day is asserted.
+cite:
+  - id: insula-brothers
+    says:
+      Polybius records Hannibal finding two brothers disputing the kingship with armies facing each
+      other, and joining the elder.
+    source: polybius
+    at: "3.49.8"
+    quote: καταλαβὼν ἐν αὐτῇ δύʼ ἀδελφοὺς ὑπὲρ τῆς βασιλείας στασιάζοντας καὶ μετὰ στρατοπέδων
+      ἀντικαθημένους ἀλλήλοις
+  - id: insula-braneus
+    says: Livy names the elder brother Braneus and says Hannibal, made arbiter, restored him.
+    role: supporting
+    source: livy
+    at: "21.31.7"
+    quote: arbiter regni factus, quod ea senatus principumque sententia fuerat, imperium maiori restituit
+  - id: insula-supplies
+    says: Polybius records the victor supplying grain and renewing the army's weapons, clothing and
+      shoes.
+    role: supporting
+    source: polybius
+    at: "3.49.11"
+    quote:
+      οὐ γὰρ μόνον σίτῳ καὶ τοῖς ἄλλοις ἐπιτηδείοις ἀφθόνως ἐχορήγησε τὸ στρατόπεδον, ἀλλὰ καὶ τῶν
+      ὅπλων τὰ παλαιὰ καὶ τὰ πεπονηκότα πάντα διαλλάξας ἐκαινοποίησε πᾶσαν τὴν δύναμιν
+  - id: insula-escort
+    says:
+      Polybius records the chief escorting the army safely through the Allobroges' country to the
+      Alps.
+    role: supporting
+    source: polybius
+    at: "3.49.13"
+    quote: ἀσφαλῆ παρεσκεύασε τὴν δίοδον αὐτοῖς, ἕως ἤγγισαν τῇ τῶν Ἄλπεων ὑπερβολῇ

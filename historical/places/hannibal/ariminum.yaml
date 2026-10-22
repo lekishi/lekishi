@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Ariminum, the Roman colony on the Adriatic where Sempronius' army reassembled in 218 BCE and where
+  Flaminius entered his consulship in 217 BCE.
+types: [settlement, port]
+names:
+  - form: Ariminum
+    lang: la
+    script: Latn
+    cite:
+      - id: ariminum-name-livy
+        says: Livy records Sempronius sending his army by the Upper Sea to Ariminum.
+        source: livy
+        at: "21.51.6"
+        quote: exercitum extemplo in naves inpositum Ariminum mari supero misit
+  - form: Ἀρίμινον
+    lang: grc
+    script: Grek
+    cite:
+      - id: ariminum-name-polybius
+        says: Polybius records Tiberius binding his men by oath to assemble at Ἀρίμινον.
+        source: polybius
+        at: "3.61.10"
+        quote: τάξας ἡμέραν ἐν ᾗ δεήσει πάντας ἐν Ἀριμίνῳ γενέσθαι κοιταίους
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [12.5753, 44.0602]
+    notes:
+      An approximate placement at the ancient city under modern Rimini, which Pleiades identifies as
+      Ariminum.
+    cite:
+      - id: ariminum-identification
+        says:
+          Pleiades locates the ancient place (Ariminum) at the site whose modern coordinate Wikidata
+          records; the point is the Wikidata coordinate (CC0), an approximate placement of the
+          ancient town, not a surveyed site.
+        basis: interpretation
+        attributed_to: Pleiades
+        sources:
+          - source: pleiades
+            at: place 393379 (Ariminum), reprLatLong, dump 2026-10-21
+          - source: wikidata
+            at: Q105495122 (P625), revision 2516957780
+modern:
+  - form: Rimini
+    lang: it
+    script: Latn
+    note: Modern city on the site, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q105495122
+    license: CC0-1.0
+  - system: pleiades
+    id: "393379"
+    license: CC BY 3.0

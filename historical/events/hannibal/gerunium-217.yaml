@@ -1,0 +1,63 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Learning that the district of Luceria and Gerunium is rich in grain, Hannibal marches there to
+  winter, takes Gerunium, kills its people but keeps its houses and walls as granaries, and
+  fortifies his camp before the town.
+types: [campaign]
+date:
+  value: "217 BCE"
+  calendar: regnal
+  as_written: κρίνας ἐκεῖ ποιεῖσθαι τὴν παραχειμασίαν
+  cite:
+    - id: gerunium-time
+      says: Polybius records Hannibal choosing Gerunium for his winter quarters.
+      source: polybius
+      at: "3.100.2"
+      quote:
+        κρίνας ἐκεῖ ποιεῖσθαι τὴν παραχειμασίαν, προῆγε ποιούμενος τὴν πορείαν παρὰ τὸ Λίβυρνον ὄρος
+        ἐπὶ τοὺς προειρημένους τόπους
+places:
+  - place: gerunium
+    role: site
+  - place: luceria
+    role: context
+    note: Polybius sets Gerunium two hundred stades from Luceria.
+participants:
+  - actor: hannibal
+    role: leader
+notes:
+  Livy says Gerunium had been abandoned by its people because part of its wall had collapsed. Year
+  only. The sources date by Roman consular year and by season; v0 has no Roman republican calendar,
+  so the date is the Julian year the consular year falls in, and no month or day is asserted.
+dispute:
+  status: disputed
+  summary:
+    Polybius says Hannibal took Gerunium by siege and killed its inhabitants; Livy says he found it
+    deserted by its people because part of the wall had fallen. The record publishes Polybius and
+    keeps Livy as a conflicting claim.
+cite:
+  - id: gerunium-taken
+    says:
+      Polybius records Hannibal taking the town quickly, killing the inhabitants and keeping most
+      houses and the walls as granaries.
+    source: polybius
+    at: "3.100.4"
+    quote: ταχὺ δὲ γενόμενος κύριος τοὺς μὲν οἰκήτορας κατέφθειρε, τὰς δὲ πλείστας οἰκίας ἀκεραίους
+      διεφύλαξε καὶ τὰ τείχη
+  - id: gerunium-grain
+    says:
+      Polybius records Hannibal hearing from scouts that there was abundant grain about Luceria and
+      Gerunium.
+    role: supporting
+    source: polybius
+    at: "3.100.1"
+    quote: πυνθανόμενος παρὰ τῶν κατασκόπων πλεῖστον ὑπάρχειν σῖτον ἐν τῇ περὶ τὴν Λουκαρίαν καὶ τὸ
+      καλούμενον Γερούνιον χώρᾳ
+  - id: gerunium-deserted
+    says:
+      Livy records Hannibal reaching Gerunium, deserted by its people in fear because part of its
+      wall had collapsed.
+    role: conflicting
+    source: livy
+    at: "22.18.7"
+    quote: Gereonium pervenit, urbem metu, quia conlapsa ruinis pars moenium erat, ab suis desertam

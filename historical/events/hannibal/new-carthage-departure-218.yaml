@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  When his envoys return from the Celts with word that the Alpine crossing is hard but possible,
+  Hannibal draws his army out of winter quarters in early spring and sets out from New Carthage with
+  about 90,000 foot and 12,000 horse.
+types: [journey]
+part_of: [hannibal-march-218]
+date:
+  value: "218 BCE"
+  calendar: regnal
+  as_written: ὑπὸ τὴν ἐαρινὴν ὥραν
+  cite:
+    - id: departure-time
+      says:
+        Polybius records Hannibal assembling his forces from winter quarters in early spring once
+        the envoys had reported.
+      source: polybius
+      at: "3.34.6"
+      quote: συνῆγε τὰς δυνάμεις ἐκ τῆς παραχειμασίας ὑπὸ τὴν ἐαρινὴν ὥραν
+places:
+  - place: carthago-nova
+    role: start
+participants:
+  - actor: hannibal
+    role: leader
+notes:
+  Polybius gives about 90,000 foot and some 12,000 horse at the start; Livy gives the same figures
+  at the Ebro crossing. Year only. The sources date by Roman consular year and by season; v0 has no
+  Roman republican calendar, so the date is the Julian year the consular year falls in, and no month
+  or day is asserted.
+cite:
+  - id: departure-numbers
+    says:
+      Polybius records Hannibal advancing on the appointed day with about ninety thousand foot and
+      about twelve thousand horse.
+    source: polybius
+    at: "3.35.1"
+    quote:
+      παραγενομένης τῆς ταχθείσης ἡμέρας, προῆγε, πεζῶν μὲν ἔχων εἰς ἐννέα μυριάδας, ἱππεῖς δὲ περὶ
+      μυρίους καὶ δισχιλίους
+  - id: departure-alps-report
+    says:
+      Polybius records the envoys reporting that the Alpine crossing was laborious and hard but not
+      impossible.
+    role: supporting
+    source: polybius
+    at: "3.34.6"
+    quote: τήν τε τῶν Ἀλπεινῶν ὀρῶν ὑπερβολὴν ἐπίπονον μὲν καὶ δυσχερῆ λίαν, οὐ μὴν ἀδύνατον εἶναι
+      φασκόντων

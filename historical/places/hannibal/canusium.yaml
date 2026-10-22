@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Canusium, the Apulian town where survivors of Cannae gathered and the woman Busa fed and clothed
+  them.
+types: [settlement]
+names:
+  - form: Canusium
+    lang: la
+    script: Latn
+    cite:
+      - id: canusium-name-livy
+        says: Livy records the survivors who fled to Canusium.
+        source: livy
+        at: "22.52.7"
+        quote: eos, qui Canusium perfugerant
+  - form: Κανύσιον
+    lang: grc
+    script: Grek
+    cite:
+      - id: canusium-name-polybius
+        says: Polybius names the district about Κανύσιον that supplied the depot at Cannae.
+        source: polybius
+        at: "3.107.3"
+        quote: ἐκ τῶν περὶ Κανύσιον τόπων
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [16.066004, 41.2225]
+    notes:
+      An approximate placement at the ancient town under modern Canosa di Puglia, which Pleiades
+      identifies as Canusium.
+    cite:
+      - id: canusium-identification
+        says:
+          Pleiades locates the ancient place (Canusium) at the site whose modern coordinate Wikidata
+          records; the point is the Wikidata coordinate (CC0), an approximate placement of the
+          ancient town, not a surveyed site.
+        basis: interpretation
+        attributed_to: Pleiades
+        sources:
+          - source: pleiades
+            at: place 442525 (Canusium), reprLatLong, dump 2026-10-21
+          - source: wikidata
+            at: Q1033927 (P625), revision 2522091626
+modern:
+  - form: Canosa di Puglia
+    lang: it
+    script: Latn
+    note: Modern town on the site, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q1033927
+    license: CC0-1.0
+  - system: pleiades
+    id: "442525"
+    license: CC BY 3.0

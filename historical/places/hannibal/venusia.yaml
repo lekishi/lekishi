@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Venusia, the Latin colony where the consul Varro took refuge after Cannae and whose people
+  equipped the fugitives.
+types: [settlement]
+names:
+  - form: Venusia
+    lang: la
+    script: Latn
+    cite:
+      - id: venusia-name-livy
+        says: Livy records about four thousand five hundred fugitives reaching the consul at Venusia.
+        source: livy
+        at: "22.54.1"
+        quote: Venusiam ad consulem ad quattuor milia et quingenti pedites equitesque
+  - form: Οὐενουσία
+    lang: grc
+    script: Grek
+    cite:
+      - id: venusia-name-polybius
+        says: Polybius records a few, the consul Gaius Terentius among them, escaping to Οὐενουσία.
+        source: polybius
+        at: "3.116.13"
+        quote: ὀλίγοι δέ τινες εἰς Οὐενουσίαν διέφυγον
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [15.818321, 40.961051]
+    notes:
+      An approximate placement at the ancient town at modern Venosa, which Pleiades identifies as
+      Venusia.
+    cite:
+      - id: venusia-identification
+        says:
+          Pleiades locates the ancient place (Venusia) at the site whose modern coordinate Wikidata
+          records; the point is the Wikidata coordinate (CC0), an approximate placement of the
+          ancient town, not a surveyed site.
+        basis: interpretation
+        attributed_to: Pleiades
+        sources:
+          - source: pleiades
+            at: place 442847 (Venusia), reprLatLong, dump 2026-10-21
+          - source: wikidata
+            at: Q2513101 (P625), revision 2530930428
+modern:
+  - form: Venosa
+    lang: it
+    script: Latn
+    note: Modern town on the site, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q2513101
+    license: CC0-1.0
+  - system: pleiades
+    id: "442847"
+    license: CC BY 3.0

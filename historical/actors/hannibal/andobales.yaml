@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Andobales (Indibilis in Livy's later books), an Iberian ruler of the interior and a steady friend
+  of Carthage, captured by Gnaeus Scipio at Kissa in 218 BCE.
+types: [person]
+names:
+  - form: Ἀνδοβάλης
+    lang: grc
+    script: Grek
+    cite:
+      - id: andobales-name-polybius
+        says:
+          Polybius records Gnaeus Scipio taking alive the Carthaginian general Hanno and the Iberian
+          Ἀνδοβάλης.
+        source: polybius
+        at: "3.76.6"
+        quote: ζωγρίᾳ δὲ τόν τε τῶν Καρχηδονίων στρατηγὸν Ἄννωνα καὶ τὸν τῶν Ἰβήρων Ἀνδοβάλην ἔλαβε
+roles:
+  - role: ruler
+    date:
+      value: "218 BCE"
+      mode: window
+      calendar: regnal
+      as_written: τύραννος τῶν κατὰ τὴν μεσόγαιον τόπων
+    cite:
+      - id: andobales-ruler
+        says:
+          Polybius calls him the ruler (τύραννος) of the inland districts and always well disposed
+          to Carthage.
+        source: polybius
+        at: "3.76.7"
+        quote: τοῦτον δὲ συνέβαινε τύραννον μὲν εἶναι τῶν κατὰ τὴν μεσόγαιον τόπων

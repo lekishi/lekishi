@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Saguntum (Polybius' Ζάκανθα), the Iberian town about seven stades from the sea that Hannibal
+  besieged and took in 219 BCE.
+types: [settlement]
+names:
+  - form: Saguntum
+    lang: la
+    script: Latn
+    cite:
+      - id: saguntum-name-livy
+        says: Livy names Saguntum as the town taken in the eighth month of the siege.
+        source: livy
+        at: "21.15.3"
+        quote: octavo mense quam coeptum oppugnari, captum Saguntum quidam scripsere
+  - form: Ζάκανθα
+    lang: grc
+    script: Grek
+    cite:
+      - id: saguntum-name-polybius
+        says: Polybius names Ζάκανθα as the town Hannibal marched against from New Town.
+        source: polybius
+        at: "3.17.1"
+        quote: ποιούμενος τὴν πορείαν ἐπὶ τὴν Ζάκανθαν
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [-0.277758333, 39.677058333]
+    notes:
+      An approximate placement at the ancient town above modern Sagunto, which Pleiades identifies
+      as Saguntum/Arse.
+    cite:
+      - id: saguntum-identification
+        says: Pleiades locates the ancient place (Saguntum/Arse) at the site whose modern coordinate
+          Wikidata records; the point is the Wikidata coordinate (CC0), an approximate placement of
+          the ancient town, not a surveyed site.
+        basis: interpretation
+        attributed_to: Pleiades
+        sources:
+          - source: pleiades
+            at: place 266021 (Saguntum/Arse), reprLatLong, dump 2026-10-21
+          - source: wikidata
+            at: Q6389103 (P625), revision 2537362478
+modern:
+  - form: Sagunto
+    lang: es
+    script: Latn
+    note: Modern town at the foot of the ancient site, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q6389103
+    license: CC0-1.0
+  - system: pleiades
+    id: "266021"
+    license: CC BY 3.0
+cites:
+  summary:
+    - id: saguntum-distance
+      says: Polybius places the town on the seaward foot of the hills, about seven stades from the sea.
+      source: polybius
+      at: "3.17.2"
+      quote: ἀπέχει δὲ τῆς θαλάττης ὡς ἑπτὰ στάδια

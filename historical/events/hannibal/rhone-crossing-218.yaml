@@ -1,0 +1,67 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  About four days' march from the sea, Hannibal buys every boat from the river people and builds
+  dugouts in two days. On the third night he sends Hanno son of Bomilcar upstream to cross where an
+  island splits the river; on the fifth morning Hanno falls on the Gauls holding the far bank as the
+  main army crosses.
+types: [journey, campaign]
+part_of: [hannibal-march-218]
+date:
+  value: "218 BCE"
+  calendar: regnal
+  as_written: ἐπιγενομένης τῆς τρίτης νυκτὸς … τῆς πέμπτης νυκτὸς
+  cite:
+    - id: rhone-crossing-time
+      says:
+        Polybius records Hannibal attempting the crossing where the river runs in one stream, about
+        four days' march from the sea.
+      source: polybius
+      at: "3.42.1"
+      quote:
+        εὐθέως ἐνεχείρει ποιεῖσθαι τὴν διάβασιν κατὰ τὴν ἁπλῆν ῥύσιν, σχεδὸν ἡμερῶν τεττάρων ὁδὸν
+        ἀπέχων στρατοπέδῳ τῆς θαλάττης
+places:
+  - place: rhone-crossing
+    role: site
+    note: "Unlocated: Polybius gives a distance from the sea, not a place."
+participants:
+  - actor: hannibal
+    role: leader
+  - actor: hanno-son-of-bomilcar
+    role: leader
+    note: Led the flanking force upstream.
+notes:
+  Polybius tells the crossing in detail (3.42–43), including the boats and dugouts and the flank
+  march about two hundred stades upstream. The elephants' crossing on rafts follows at 3.46. Year
+  only. The sources date by Roman consular year and by season; v0 has no Roman republican calendar,
+  so the date is the Julian year the consular year falls in, and no month or day is asserted.
+cite:
+  - id: rhone-crossing-boats
+    says: Polybius records Hannibal buying all the dugouts and boats from the people along the river.
+    source: polybius
+    at: "3.42.2"
+    quote: ἐξηγόρασε παρʼ αὐτῶν τά τε μονόξυλα πλοῖα πάντα καὶ τοὺς λέμβους
+  - id: rhone-crossing-hanno
+    says: Polybius records Hanno son of Bomilcar sent on the third night with local guides.
+    role: supporting
+    source: polybius
+    at: "3.42.6"
+    quote: ἐπιγενομένης τῆς τρίτης νυκτὸς ἐξαποστέλλει μέρος τι τῆς δυνάμεως, συστήσας καθηγεμόνας
+      ἐγχωρίους, ἐπὶ δὲ πάντων Ἄννωνα τὸν Βοαμίλκου τοῦ βασιλέως
+  - id: rhone-crossing-island
+    says:
+      Polybius records the flanking force marching about two hundred stades upstream to where the
+      river splits round an island.
+    role: supporting
+    source: polybius
+    at: "3.42.7"
+    quote:
+      ποιησάμενοι τὴν πορείαν ἀντίοι τῷ ῥεύματι παρὰ τὸν ποταμὸν ἐπὶ διακόσια στάδια, παραγενόμενοι
+      πρός τινα τόπον, ἐν ᾧ συνέβαινε περί τι χωρίον νησίζον περισχίζεσθαι τὸν ποταμόν
+  - id: rhone-crossing-dawn
+    says: Polybius records the flanking force advancing at dawn of the fifth night against the
+      barbarians opposite.
+    role: supporting
+    source: polybius
+    at: "3.43.1"
+    quote: ἐπιγενομένης τῆς πέμπτης νυκτὸς οἱ μὲν προδιαβάντες ἐκ τοῦ πέραν ὑπὸ τὴν ἑωθινὴν προῆγον

@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: Philip V, king of Macedon, whose envoy Xenophanes swore an alliance with Hannibal in 215 BCE.
+types: [person]
+names:
+  - form: Philippus
+    lang: la
+    script: Latn
+    cite:
+      - id: philip-v-name-livy
+        says: Livy names Philip, king of the Macedonians, among the kings watching the war.
+        source: livy
+        at: "23.33.2"
+        quote: inter quos Philippus, Macedonum rex
+  - form: Φίλιππος
+    lang: grc
+    script: Grek
+    cite:
+      - id: philip-v-name-polybius
+        says: Polybius' text of the oath names king Φίλιππος son of Demetrius as the sender of the
+          envoy.
+        source: polybius
+        at: "7.9.1"
+        quote: ὃν ἀπέστειλε πρὸς ἡμᾶς Φίλιππος ὁ βασιλεὺς Δημητρίου
+roles:
+  - role: ruler
+    date:
+      value: "215 BCE"
+      mode: window
+      calendar: regnal
+      as_written: Φίλιππος ὁ βασιλεύς
+    cite:
+      - id: philip-v-ruler
+        says:
+          Polybius' text of the oath calls him king and speaks for him, the Macedonians and their
+          allies.
+        source: polybius
+        at: "7.9.1"
+        quote: Φίλιππος ὁ βασιλεὺς Δημητρίου ὑπὲρ αὑτοῦ καὶ Μακεδόνων καὶ τῶν συμμάχων

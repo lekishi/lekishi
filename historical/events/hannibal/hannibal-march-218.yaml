@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "Hannibal's march from New Carthage to the plains of the Po in 218 BCE: across the Ebro and the
+  Pyrenees, over the Rhône and up its valley, and over the Alps in fifteen days, five months in all."
+types: [journey, campaign]
+date:
+  value: "218 BCE"
+  mode: duration
+  calendar: regnal
+  as_written: ἐν πέντε μησὶ; ὑπὸ τὴν ἐαρινὴν ὥραν … τῆς Πλειάδος δύσιν
+  cite:
+    - id: march-time
+      says:
+        Polybius records that the whole march from New Town took five months and the crossing of the
+        Alps fifteen days.
+      source: polybius
+      at: "3.56.3"
+      quote:
+        τέλος δὲ τὴν μὲν πᾶσαν πορείαν ἐκ Καινῆς πόλεως ἐν πέντε μησὶ ποιησάμενος τὴν δὲ τῶν Ἄλπεων
+        ὑπερβολὴν ἡμέραις δεκαπέντε
+    - id: march-livy-time
+      says: Livy reports the same five months from New Carthage to Italy, from writers he cites.
+      role: supporting
+      source: livy
+      at: "21.15.3"
+      quote: quinto deinde mense, quam ab Carthagine profectus sit, in Italiam pervenisse
+places:
+  - place: carthago-nova
+    role: start
+  - place: padus
+    role: end
+    note: Polybius ends the march in the plains about the Po and the country of the Insubres.
+participants:
+  - actor: hannibal
+    role: leader
+notes: The journey's own stops are separate events with part_of this record. Most of them have no
+  asserted coordinate (the Rhône crossing, the Island, the pass), so a drawn route would break; the
+  chapter draws none. Which pass Hannibal used was already disputed in Livy's day and is not decided
+  here. Year only. The sources date by Roman consular year and by season; v0 has no Roman republican
+  calendar, so the date is the Julian year the consular year falls in, and no month or day is
+  asserted.

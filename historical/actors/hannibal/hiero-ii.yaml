@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Hiero II, king of Syracuse and Rome's long-standing ally, who sent grain, troops and a golden
+  Victory to Rome in the winter of 217–216 BCE.
+types: [person]
+names:
+  - form: Hiero
+    lang: la
+    script: Latn
+    cite:
+      - id: hiero-ii-name-livy
+        says: Livy names Hiero as king of the Syracusans.
+        source: livy
+        at: "21.49.3"
+        quote: ab Hierone rege Syracusanorum missae
+roles:
+  - role: ruler
+    note: King of Syracuse; the span is bounded by the chapter.
+    date:
+      value: "218 BCE..216 BCE"
+      mode: duration
+      calendar: regnal
+      as_written: Hiero rex Syracusanorum
+    cite:
+      - id: hiero-ii-ruler
+        says: Livy calls him king of the Syracusans in 218 BCE and reports his embassy as king.
+        source: livy
+        at: "21.49.3"
+        quote: ab Hierone rege Syracusanorum missae

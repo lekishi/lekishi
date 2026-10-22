@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Hannibal, son of Hamilcar, the Carthaginian commander in Iberia who took Saguntum in 219 BCE,
+  crossed the Alps in 218 BCE and defeated the Romans at the Trebia, Trasimene and Cannae.
+types: [person]
+names:
+  - form: Hannibal
+    lang: la
+    script: Latn
+    cite:
+      - id: hannibal-name-livy
+        says: Livy opens his third decade with the war the Carthaginians waged against Rome under
+          Hannibal's command.
+        source: livy
+        at: "21.1.1"
+        quote: quod Hannibale duce Carthaginienses cum populo Romano gessere
+  - form: Ἀννίβας
+    lang: grc
+    script: Grek
+    cite:
+      - id: hannibal-name-polybius
+        says: Polybius names him Ἀννίβας when he winters at New Town.
+        source: polybius
+        at: "3.33.5"
+        quote: Ἀννίβας δὲ παραχειμάζων ἐν Καινῇ πόλει
+roles:
+  - role: soldier
+    note: Commander of the Carthaginian forces; the span is bounded by this chapter, not by his career.
+    date:
+      value: "219 BCE..216 BCE"
+      mode: duration
+      calendar: regnal
+      as_written: ὁ στρατηγὸς Ἀννίβας
+    cite:
+      - id: hannibal-commander
+        says: Polybius calls Hannibal the Carthaginian general (στρατηγός) through the campaigns of
+          219–216 BCE.
+        source: polybius
+        at: "3.100.1"
+        quote: ὁ δὲ στρατηγὸς Ἀννίβας
+external_ids:
+  - system: wikidata
+    id: Q36456
+    license: CC0-1.0

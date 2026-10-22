@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Island (Νῆσος, Insula), the fertile, populous land between the Rhône and a river Polybius
+  calls the Ἰσάρας, where Hannibal settled a quarrel between two brothers of the Allobroges.
+types: [region]
+names:
+  - form: Insula
+    lang: la
+    script: Latn
+    cite:
+      - id: insula-name-livy
+        says: Livy records Hannibal reaching the Insula at his fourth camp, where the Isara and the
+          Rhodanus meet.
+        source: livy
+        at: "21.31.4"
+        quote: quartis castris ad Insulam pervenit
+  - form: Νῆσος
+    lang: grc
+    script: Grek
+    cite:
+      - id: insula-name-polybius
+        says:
+          Polybius records Hannibal reaching the land called the Island after four days' march from
+          the crossing.
+        source: polybius
+        at: "3.49.5"
+        quote: ἧκε πρὸς τὴν καλουμένην Νῆσον
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      No coordinate is asserted. Both sources describe a confluence, and the identification of the
+      second river (Isère or another) is a modern reading.
+    cite:
+      - id: insula-unlocated
+        says:
+          Polybius describes the Island as bounded by the Rhône and the Ἰσάρας where they meet, and
+          gives no other position.
+        source: polybius
+        at: "3.49.6"
+        quote: ᾗ μὲν γὰρ ὁ Ῥοδανός, ᾗ δʼ Ἰσάρας προσαγορευόμενος, ῥέοντες παρʼ ἑκατέραν τὴν πλευράν

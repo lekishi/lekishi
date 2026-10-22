@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Mago brings the news of Cannae to Carthage. Before the council he lists the generals and armies
+  Hannibal has defeated and has gold rings taken from Roman dead poured out in the forecourt, more
+  than three modii by some accounts, about one by the likelier report.
+types: [mission]
+date:
+  value: "216 BCE"
+  calendar: regnal
+  as_written: dum haec Romae atque in Italia geruntur (Livy 23.11.7)
+  cite:
+    - id: mago-time
+      says:
+        Livy records Mago reaching Carthage with the news of Cannae, delayed some days receiving the
+        surrender of Bruttian towns.
+      source: livy
+      at: "23.11.7"
+      quote:
+        nuntius victoriae ad Cannas Carthaginem venerat Mago Hamilcaris filius, non ex ipsa acie a
+        fratre missus, sed retentus aliquot dies in recipiendis civitatibus Bruttiorum
+places:
+  - place: carthage
+    role: site
+participants:
+  - actor: mago-barca
+    role: participant
+    note: Bearer of the news.
+  - actor: carthage-state
+    role: host
+notes: Year only. The sources date by Roman consular year and by season; v0 has no Roman republican
+  calendar, so the date is the Julian year the consular year falls in, and no month or day is
+  asserted.
+dispute:
+  status: disputed
+  summary:
+    Livy records that some writers measured the rings at more than three modii, while the report he
+    thinks nearer the truth gave no more than one. The record keeps both.
+cite:
+  - id: mago-rings-three
+    says:
+      Livy records the gold rings poured out in the forecourt of the council house, more than three
+      modii according to some writers.
+    source: livy
+    at: "23.12.1"
+    quote: effundi in vestibulo curiae iussit anulos aureos, qui tantus acervus fuit, ut metientibus
+      supra tris modios explesse sint quidam auctores
+  - id: mago-rings-one
+    says: Livy says the likelier report gave no more than one modius.
+    role: alternative
+    source: livy
+    at: "23.12.2"
+    quote: fama tenuit, quae propior vero est, haud plus fuisse modio
+  - id: mago-generals
+    says: Livy has Mago tell the council his brother had fought six commanders and six consular armies.
+    role: supporting
+    source: livy
+    at: "23.11.8"
+    quote:
+      cum sex imperatoribus eum, quorum quattuor consules, duo dictator ac magister equitum fuerint,
+      cum sex consularibus exercitibus acie conflixisse

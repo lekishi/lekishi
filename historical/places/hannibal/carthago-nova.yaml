@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Carthago Nova (Polybius' Καινὴ πόλις, New Town), the Carthaginian base in Iberia where Hannibal
+  wintered in 219–218 BCE and from which he set out for Italy in the spring of 218 BCE.
+types: [settlement, port]
+names:
+  - form: Carthago Nova
+    lang: la
+    script: Latn
+    cite:
+      - id: carthago-nova-name-livy
+        says: Livy names Carthago Nova as the winter quarters Hannibal withdrew to after taking
+          Saguntum.
+        source: livy
+        at: "21.15.3"
+        quote: inde Carthaginem Novam in hiberna Hannibalem concessisse
+  - form: Καινὴ πόλις
+    lang: grc
+    script: Grek
+    cite:
+      - id: carthago-nova-name-polybius
+        says: Polybius records Hannibal wintering in Καινὴ πόλις (New Town).
+        source: polybius
+        at: "3.33.5"
+        quote: Ἀννίβας δὲ παραχειμάζων ἐν Καινῇ πόλει
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [-0.983333, 37.6]
+    notes:
+      An approximate placement at modern Cartagena, which Pleiades identifies with the ancient town.
+      The harbour and walls of 218 BCE are not drawn.
+    cite:
+      - id: carthago-nova-identification
+        says: Pleiades locates the ancient place (Carthago Nova/Col. Urbs Iulia) at the site whose
+          modern coordinate Wikidata records; the point is the Wikidata coordinate (CC0), an
+          approximate placement of the ancient town, not a surveyed site.
+        basis: interpretation
+        attributed_to: Pleiades
+        sources:
+          - source: pleiades
+            at: place 265849 (Carthago Nova/Col. Urbs Iulia), reprLatLong, dump 2026-10-21
+          - source: wikidata
+            at: Q2727884 (P625), revision 2520060217
+modern:
+  - form: Cartagena
+    lang: es
+    script: Latn
+    note: Modern city on the site, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q2727884
+    license: CC0-1.0
+  - system: pleiades
+    id: "265849"
+    license: CC BY 3.0

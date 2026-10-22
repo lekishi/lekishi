@@ -1,0 +1,68 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: News that Hannibal is in Italy reaches Rome while the consul Ti. Sempronius is preparing at
+  Lilybaeum to besiege Carthage. Recalled, he sends his fleet home and has his soldiers swear to be
+  at Ariminum by a set day; Polybius says the infantry marched there in forty days.
+types: [journey]
+date:
+  value: "218 BCE"
+  calendar: regnal
+  as_written: τετταράκοντα συνεχῶς ἡμέρας
+  cite:
+    - id: sempronius-time
+      says: Polybius records Tiberius binding his infantry by oath to be at Ariminum on a set day.
+      source: polybius
+      at: "3.61.10"
+      quote: τὰς δὲ πεζικὰς δυνάμεις ἐξώρκισε διὰ τῶν χιλιάρχων, τάξας ἡμέραν ἐν ᾗ δεήσει πάντας ἐν
+        Ἀριμίνῳ γενέσθαι κοιταίους
+places:
+  - place: lilybaeum
+    role: start
+  - place: ariminum
+    role: end
+participants:
+  - actor: ti-sempronius-longus
+    role: leader
+  - actor: roman-republic
+    role: participant
+    note: The senate recalled him.
+notes:
+  "How the army reached Ariminum is disputed: Polybius says it marched forty days without a break
+  from Lilybaeum, Livy that it was shipped by the upper sea. From Ariminum Sempronius joined Scipio
+  on the Trebia. Year only. The sources date by Roman consular year and by season; v0 has no Roman
+  republican calendar, so the date is the Julian year the consular year falls in, and no month or
+  day is asserted."
+dispute:
+  status: disputed
+  summary:
+    Polybius has the infantry march overland from Lilybaeum to Ariminum in forty days; Livy has the
+    army put on ships and sent to Ariminum by sea while Sempronius followed along the coast. The
+    record publishes Polybius and keeps Livy's version as a conflicting claim.
+cite:
+  - id: sempronius-recall
+    says: Polybius records the Romans, astonished, sending to Tiberius at Lilybaeum to come home in
+      haste.
+    source: polybius
+    at: "3.61.9"
+    quote: διαταραχθέντες παραχρῆμα πρὸς τὸν Τεβέριον εἰς τὸ Λιλύβαιον ἐξαπέστελλον
+  - id: sempronius-forty-days
+    says: Polybius records the troops having marched forty days on end from Lilybaeum to Ariminum.
+    role: supporting
+    source: polybius
+    at: "3.68.14"
+    quote: ὡς ἂν ἐκ Λιλυβαίου τετταράκοντα συνεχῶς ἡμέρας πεπεζοπορηκότων εἰς Ἀρίμινον
+  - id: sempronius-livy-sea
+    says: Livy records the army being put on ships at once and sent by the upper sea to Ariminum.
+    role: conflicting
+    source: livy
+    at: "21.51.6"
+    quote: exercitum extemplo in naves inpositum Ariminum mari supero misit
+  - id: sempronius-join
+    says:
+      Livy records Sempronius reaching Ariminum along the coast and from there joining his colleague
+      on the Trebia.
+    role: supporting
+    source: livy
+    at: "21.51.7"
+    quote:
+      ipse conpositis Siciliae rebus decem navibus oram Italiae legens Ariminum pervenit. inde cum
+      exercitu suo profectus ad Trebiam flumen conlegae coniungitur

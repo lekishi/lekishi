@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The consul-elect C. Flaminius, at odds with the senate, orders the legions wintering at Placentia
+  to be at Ariminum by the Ides of March and enters his consulship there rather than in Rome, while
+  his colleague Cn. Servilius takes office in Rome.
+types: [occurrence]
+date:
+  value: "217 BCE"
+  calendar: regnal
+  as_written:
+    Cn. Servilius consul Romae idibus Martiis magistratum iniit; C. Flaminius Arimini consulatum
+    iniit
+  cite:
+    - id: flaminius-time
+      says: Livy records Flaminius ordering the army to be in camp at Ariminum on the Ides of March.
+      source: livy
+      at: "21.63.1"
+      quote:
+        edictum et litteras ad consulem misit, ut is exercitus idibus Martiis Arimini adesset in
+        castris
+    - id: flaminius-servilius
+      says: Livy records Cn. Servilius entering office at Rome on the Ides of March.
+      role: supporting
+      source: livy
+      at: "22.1.4"
+      quote: per idem tempus Cn. Servilius consul Romae idibus Martiis magistratum iniit
+places:
+  - place: ariminum
+    role: site
+participants:
+  - actor: c-flaminius
+    role: leader
+  - actor: cn-servilius-geminus
+    role: participant
+    note: Took office in Rome.
+notes:
+  The Ides of March is a date in the Roman civil calendar of 217 BCE, which was not aligned with the
+  seasons; the record keeps year precision. Livy uses Flaminius' entry into office at Ariminum to
+  argue the Trebia was fought in 218 BCE (21.15.6). Year only. The sources date by Roman consular
+  year and by season; v0 has no Roman republican calendar, so the date is the Julian year the
+  consular year falls in, and no month or day is asserted.
+cite:
+  - id: flaminius-province
+    says: Livy says Flaminius meant to enter his consulship in his province, mindful of old quarrels
+      with the senate.
+    source: livy
+    at: "21.63.2"
+    quote: hic in provincia consulatum inire consilium erat memori veterum certaminum cum patribus
+  - id: flaminius-trebia-year
+    says:
+      Livy argues the Trebia cannot fall in the year of Servilius and Flaminius because Flaminius
+      entered office at Ariminum.
+    role: supporting
+    source: livy
+    at: "21.15.6"
+    quote: nam excessisse pugna ad Trebiam in annum Cn. Servili et C. Flamini non potest, quia C.
+      Flaminius Arimini consulatum iniit

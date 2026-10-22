@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../schema/source.schema.json
+locator: section
+kind: primary
+title: Πολυβίου Ἱστορίαι (Polybius, Histories), books 3, 7 and 10
+edition:
+  Büttner-Wobst, Teubner (Leipzig, 1889–1904), read in the Perseus Digital Library TEI transcription
+  (canonical-greekLit, tlg0543.tlg001.perseus-grc2); locators are book.chapter.section and were
+  read against it on 2026-10-21; re-check against a critical edition before content freeze
+author: Πολύβιος (Polybius)
+issued:
+  year: 146
+  era: bce
+  endpoint_certainty: approximate
+language: grc
+identifiers:
+  - system: url
+    value: https://github.com/PerseusDL/canonical-greekLit/blob/master/data/tlg0543/tlg001/tlg0543.tlg001.perseus-grc2.xml
+  - system: other
+    value: urn:cts:greekLit:tlg0543.tlg001.perseus-grc2
+license:
+  status: recorded
+  license_id: public-domain
+  attribution_text: Polybius, Histories, ed. Büttner-Wobst (Teubner); Perseus Digital Library transcription
+  redistribution: permitted
+  quotation_permitted: true
+  reviewed_by: Lekishi editorial preparation
+  reviewed_at: 2026-10-21T15:30:00Z
+  notes:
+    The work and the Teubner edition are public domain. The Perseus transcription it was read in is
+    CC BY-SA 4.0 (the licence statement in the file's TEI header, read 2026-10-21); under the source
+    register's rule the chapter quotes the work, cites the edition, and notes the transcription.
+notes:
+  "Greek history of Rome's rise written by Polybius of Megalopolis from about 167 BCE onward; the issued
+  year is approximate. Book 3 is the earliest surviving continuous account of 219–216 BCE. Polybius
+  says he walked the Alpine route himself (3.48.12) and read Hannibal's bronze tablet at Lacinium
+  (3.33.18, 3.56.4), which he follows for troop numbers. He wrote two generations after the events
+  and was close to the Scipios; his account is evidence of what he reports, and where Livy differs
+  both accounts are kept. Book 7 preserves the text of Hannibal's oath with Philip V's envoys, and
+  book 10 gives Laelius' account of the Ticinus rescue."

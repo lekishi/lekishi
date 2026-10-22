@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  "The Po (Πάδος, Padus), the river of the Cisalpine plain: Hannibal came down from the Alps into
+  the plains round it in 218 BCE, and Rome had just founded Placentia and Cremona on either bank."
+types: [landform]
+names:
+  - form: Padus
+    lang: la
+    script: Latn
+    cite:
+      - id: padus-name-livy
+        says:
+          Livy records the Boii resenting the colonies Placentia and Cremona founded near the Padus
+          on Gallic land.
+        source: livy
+        at: "21.25.2"
+        quote:
+          quod nuper circa Padum Placentiam Cremonamque colonias in agrum Gallicum deductas aegre
+          patiebantur
+  - form: Πάδος
+    lang: grc
+    script: Grek
+    cite:
+      - id: padus-name-polybius
+        says:
+          Polybius records Hannibal descending into the plains about the Πάδος after crossing the
+          Alps.
+        source: polybius
+        at: "3.56.3"
+        quote: κατῆρε τολμηρῶς εἰς τὰ περὶ τὸν Πάδον πεδία
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [9.68594601999, 45.0085318471]
+    notes: Label anchor at the representative point Pleiades records for the river, in the middle Po
+      valley near Placentia. It marks the river, not a crossing or the army's arrival.
+    cite:
+      - id: padus-anchor
+        says:
+          The label anchor is placed at the coordinate the dataset records; no historical site is
+          asserted.
+        source: pleiades
+        at: place 393469 (Padus/Eridanus), reprLatLong, dump 2026-10-21
+modern:
+  - form: Po
+    lang: it
+    script: Latn
+    note: Modern name of the river.
+external_ids:
+  - system: wikidata
+    id: Q643
+    license: CC0-1.0
+  - system: pleiades
+    id: "393469"
+    license: CC BY 3.0

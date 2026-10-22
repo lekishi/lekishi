@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Falernian plain (Φάλερνος τόπος, ager Falernus) in northern Campania, which Hannibal ravaged
+  in 217 BCE and left by the ruse of the burning oxen.
+types: [region]
+names:
+  - form: ager Falernus
+    lang: la
+    script: Latn
+    cite:
+      - id: ager-falernus-name-livy
+        says: Livy speaks of the narrows by which Hannibal had entered the Falernian plain.
+        source: livy
+        at: "22.15.3"
+        quote: per easdem angustias, quibus intraverat Falernum agrum
+  - form: Φάλερνος τόπος
+    lang: grc
+    script: Grek
+    cite:
+      - id: ager-falernus-name-polybius
+        says: Polybius records Hannibal pushing into the plains about Capua and the district called
+          Φάλερνος.
+        source: polybius
+        at: "3.90.10"
+        quote: εἰς τὰ περὶ Καπύην πεδία, καὶ τούτων εἰς τὸν προσαγορευόμενον Φάλερνον τόπον
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [13.98414, 41.19449]
+    notes:
+      Region-level label anchor at the Barrington Atlas label position that Pleiades records for the
+      Falernus Ager. It asserts no boundary and no camp site.
+    cite:
+      - id: ager-falernus-anchor
+        says:
+          The label anchor is the representative point Pleiades records (a Barrington Atlas label
+          position) for the Falernus Ager; no historical site is asserted.
+        source: pleiades
+        at: place 432828 (Falernus Ager), reprLatLong, dump 2026-10-21
+external_ids:
+  - system: pleiades
+    id: "432828"
+    license: CC BY 3.0

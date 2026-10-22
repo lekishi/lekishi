@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Once his army has recovered, Hannibal invites the Taurini, at feud with the Insubres, to alliance;
+  when they refuse he storms their chief town in three days and kills those who opposed him, so that
+  the neighbouring peoples submit.
+types: [campaign]
+date:
+  value: "218 BCE"
+  calendar: regnal
+  as_written: μετὰ δὲ ταῦτα, προσανειληφυίας ἤδη τῆς δυνάμεως
+  cite:
+    - id: taurini-time
+      says:
+        Polybius records the siege after the army had recovered, the Taurini being at odds with the
+        Insubres.
+      source: polybius
+      at: "3.60.8"
+      quote: μετὰ δὲ ταῦτα, προσανειληφυίας ἤδη τῆς δυνάμεως, τῶν Ταυρίνων, οἳ τυγχάνουσι πρὸς τῇ
+        παρωρείᾳ κατοικοῦντες
+places:
+  - place: taurini-town
+    role: site
+participants:
+  - actor: hannibal
+    role: leader
+  - actor: taurini
+    role: subject
+notes: Year only. The sources date by Roman consular year and by season; v0 has no Roman republican
+  calendar, so the date is the Julian year the consular year falls in, and no month or day is
+  asserted.
+cite:
+  - id: taurini-siege
+    says: Polybius records Hannibal besieging their strongest town and taking it in three days.
+    source: polybius
+    at: "3.60.9"
+    quote: οὐχ ὑπακουόντων δὲ περιστρατοπεδεύσας τὴν βαρυτάτην πόλιν ἐν τρισὶν ἡμέραις ἐξεπολιόρκησεν
+  - id: taurini-livy
+    says:
+      Livy records that Hannibal had stormed the chief town of the Taurini before the consul reached
+      Placentia.
+    role: supporting
+    source: livy
+    at: "21.39.4"
+    quote: Taurinorumque unam urbem, caput gentis eius, quia volentes in amicitiam non veniebant, vi
+      expugnarat
+  - id: taurini-submit
+    says: Polybius records the neighbouring barbarians coming at once to submit.
+    role: supporting
+    source: polybius
+    at: "3.60.10"
+    quote: ὥστε πάντας ἐκ χειρὸς παραγίνεσθαι, διδόντας αὑτοὺς εἰς τὴν πίστιν

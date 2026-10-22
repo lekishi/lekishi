@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Gnaeus Servilius Geminus, consul in 217 BCE, posted at Ariminum, whose cavalry under Centenius was
+  destroyed after Trasimene; he fell at Cannae as proconsul.
+types: [person]
+names:
+  - form: Cn. Servilius
+    lang: la
+    script: Latn
+    cite:
+      - id: cn-servilius-geminus-name-livy
+        says: Livy records the consul Cn. Servilius entering office at Rome on the Ides of March.
+        source: livy
+        at: "22.1.4"
+        quote: per idem tempus Cn. Servilius consul Romae idibus Martiis magistratum iniit
+  - form: Γνάιος Σερουίλιος
+    lang: grc
+    script: Grek
+    cite:
+      - id: cn-servilius-geminus-name-polybius
+        says: Polybius names Γνάιος Σερουίλιος as the consul stationed about Ariminum.
+        source: polybius
+        at: "3.86.1"
+        quote: Γνάιος Σερουίλιος ὁ προκαθήμενος ὕπατος ἐπὶ τῶν κατʼ Ἀρίμινον τόπων
+roles:
+  - role: official
+    note: Consul.
+    date:
+      value: "217 BCE"
+      mode: duration
+      calendar: regnal
+      as_written: Cn. Servilio C. Flaminio consulibus
+    cite:
+      - id: cn-servilius-geminus-consul
+        says: Livy names the year 217 BCE as the year of Cn. Servilius and C. Flaminius.
+        source: livy
+        at: "21.15.6"
+        quote: in annum Cn. Servili et C. Flamini
+notes: The cognomen Geminus is the modern conventional form.

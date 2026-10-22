@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Varro reaches Venusia with about seventy horsemen; some 4,500 scattered foot and horse follow. The
+  Venusini lodge them with families and give each man clothing, money and arms, vying not to be
+  outdone by the woman of Canusium.
+types: [occurrence]
+date:
+  value: "216 BCE"
+  calendar: regnal
+  as_written: eo tempore, quo haec Canusii agebantur
+  cite:
+    - id: venusia-time
+      says:
+        Livy records some 4,500 scattered infantry and cavalry reaching the consul at Venusia at the
+        time of the events at Canusium.
+      source: livy
+      at: "22.54.1"
+      quote:
+        eo tempore, quo haec Canusii agebantur Venusiam ad consulem ad quattuor milia et quingenti
+        pedites equitesque, qui sparsi fuga per agros fuerant pervenere
+places:
+  - place: venusia
+    role: site
+participants:
+  - actor: c-terentius-varro
+    role: guest
+notes: Year only. The sources date by Roman consular year and by season; v0 has no Roman republican
+  calendar, so the date is the Julian year the consular year falls in, and no month or day is
+  asserted.
+cite:
+  - id: venusia-seventy
+    says: Polybius records seventy of the six thousand horse fleeing with Gaius to Venusia.
+    source: polybius
+    at: "3.117.2"
+    quote: τῶν μὲν γὰρ ἑξακισχιλίων ἱππέων ἑβδομήκοντα μὲν εἰς Οὐενουσίαν μετὰ Γαΐου διέφυγον
+  - id: venusia-gifts
+    says:
+      Livy records the Venusini giving each horseman a toga, tunic and twenty-five quadrigati and
+      each foot soldier ten, and arms.
+    role: supporting
+    source: livy
+    at: "22.54.2"
+    quote:
+      in singulos equites togas et tunicas et quadrigatos nummos quinos vicenos et pediti denos et
+      arma, quibus deerant, dederunt
+  - id: venusia-rivalry
+    says: Livy says the Venusini strove not to be outdone by the woman of Canusium.
+    role: supporting
+    source: livy
+    at: "22.54.3"
+    quote: certatumque, ne a muliere Canusina populus Uenusinus officiis vinceretur

@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Mago, Hannibal's younger brother, who led the ambush at the Trebia, held the centre with Hannibal
+  at Cannae, and reported the victory to the Carthaginian council in 216 BCE.
+types: [person]
+names:
+  - form: Μάγων
+    lang: grc
+    script: Grek
+    cite:
+      - id: mago-barca-name-polybius
+        says:
+          Polybius records Hannibal calling his brother Μάγων, young and eager, to lead the ambush
+          party.
+        source: polybius
+        at: "3.71.6"
+        quote: ἀνακαλεσάμενος Μάγωνα τὸν ἀδελφόν, ὄντα νέον μὲν ὁρμῆς δὲ πλήρη
+  - form: Mago Hamilcaris filius
+    lang: la
+    script: Latn
+    cite:
+      - id: mago-barca-name-livy
+        says: Livy names Mago, son of Hamilcar, as the bringer of the news of Cannae to Carthage.
+        source: livy
+        at: "23.11.7"
+        quote: nuntius victoriae ad Cannas Carthaginem venerat Mago Hamilcaris filius

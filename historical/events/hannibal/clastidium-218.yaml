@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The commander of the Roman garrison at Clastidium, Dasius of Brundisium, hands the town and its
+  grain store to Hannibal, for 400 gold pieces on Livy's account. Hannibal spares the garrison and
+  honours the traitor, to win others over.
+types: [occurrence]
+date:
+  value: "218 BCE"
+  calendar: regnal
+  as_written: κατὰ δὲ τοὺς αὐτοὺς καιροὺς (while Sempronius was arriving)
+  cite:
+    - id: clastidium-time
+      says: Polybius places the betrayal at the time Sempronius' army was gathering at Ariminum.
+      source: polybius
+      at: "3.69.1"
+      quote: κατὰ δὲ τοὺς αὐτοὺς καιροὺς Ἀννίβας πραξικοπήσας πόλιν Κλαστίδιον, ἐνδόντος αὐτῷ τοῦ
+        πεπιστευμένου παρὰ Ῥωμαίων, ἀνδρὸς Βρεντεσίνου, κατέσχε
+places:
+  - place: clastidium
+    role: site
+participants:
+  - actor: hannibal
+    role: leader
+  - actor: dasius
+    role: participant
+notes:
+  Polybius calls the traitor only a man of Brundisium; Livy names him Dasius and gives the price.
+  The grain fed the army at the Trebia. Year only. The sources date by Roman consular year and by
+  season; v0 has no Roman republican calendar, so the date is the Julian year the consular year
+  falls in, and no month or day is asserted.
+cite:
+  - id: clastidium-price
+    says:
+      Livy records Dasius of Brundisium, commander of the garrison, bribed with four hundred gold
+      pieces.
+    source: livy
+    at: "21.48.9"
+    quote: nec sane magno pretio, nummis aureis quadringentis, Dasio Brundisino praefecto praesidii
+      corrupto traditur Hannibali Clastidium
+  - id: clastidium-granary
+    says:
+      Livy says Clastidium served as the Carthaginians' granary while they lay on the Trebia, and
+      the garrison was spared.
+    role: supporting
+    source: livy
+    at: "21.48.10"
+    quote: id horreum fuit Poenis sedentibus ad Trebiam. in captivos ex tradito praesidio, ut fama
+      clementiae in principio rerum colligeretur, nihil saevitum est
+  - id: clastidium-honours
+    says: Polybius records Hannibal honouring the traitor lavishly to attract others in Roman service.
+    role: supporting
+    source: polybius
+    at: "3.69.4"
+    quote: τὸν δὲ προδότην ἐτίμησε μεγαλείως

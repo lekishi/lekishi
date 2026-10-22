@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Gnaeus Cornelius Scipio, Publius' brother and legate, who took the army on to Iberia in 218 BCE,
+  won at Kissa, and beat Hasdrubal's fleet at the Ebro in 217 BCE.
+types: [person]
+names:
+  - form: Cn. Cornelius Scipio
+    lang: la
+    script: Latn
+    cite:
+      - id: cn-cornelius-scipio-name-livy
+        says: Livy records Cn. Cornelius Scipio sent to Spain with fleet and army.
+        source: livy
+        at: "21.60.1"
+        quote: Cn. Cornelius Scipio in Hispaniam cum classe et exercitu missus
+  - form: Γνάιος Κορνήλιος
+    lang: grc
+    script: Grek
+    cite:
+      - id: cn-cornelius-scipio-name-polybius
+        says: Polybius names Γνάιος Κορνήλιος, left by his brother Publius in command of the naval
+          force.
+        source: polybius
+        at: "3.76.1"
+        quote: Γνάιος Κορνήλιος ὁ καταλειφθεὶς ὑπὸ τἀδελφοῦ Ποπλίου στρατηγὸς ἐπὶ τῆς ναυτικῆς δυνάμεως

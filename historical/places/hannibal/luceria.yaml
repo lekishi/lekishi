@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Luceria, the Apulian city whose district, with Gerunium's, held the grain Hannibal wintered on in
+  217–216 BCE.
+types: [settlement]
+names:
+  - form: Luceria
+    lang: la
+    script: Latn
+    cite:
+      - id: luceria-name-livy
+        says: Livy records Hannibal ravaging the country around Arpi and Luceria.
+        source: livy
+        at: "22.9.5"
+        quote: circaque Arpos et Luceriam proximam Apuliae regionem
+  - form: Λουκαρία
+    lang: grc
+    script: Grek
+    cite:
+      - id: luceria-name-polybius
+        says: Polybius names the district about Λουκαρία as rich in grain.
+        source: polybius
+        at: "3.100.1"
+        quote: ἐν τῇ περὶ τὴν Λουκαρίαν
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [15.335884, 41.50923]
+    notes:
+      An approximate placement at the ancient city under modern Lucera, which Pleiades identifies as
+      Luceria.
+    cite:
+      - id: luceria-identification
+        says:
+          Pleiades locates the ancient place (Luceria/Noukeria (Apoulon)) at the site whose modern
+          coordinate Wikidata records; the point is the Wikidata coordinate (CC0), an approximate
+          placement of the ancient town, not a surveyed site.
+        basis: interpretation
+        attributed_to: Pleiades
+        sources:
+          - source: pleiades
+            at: place 442640 (Luceria/Noukeria (Apoulon)), reprLatLong, dump 2026-10-21
+          - source: wikidata
+            at: Q127430624 (P625), revision 2516961028
+modern:
+  - form: Lucera
+    lang: it
+    script: Latn
+    note: Modern town on the site, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q127430624
+    license: CC0-1.0
+  - system: pleiades
+    id: "442640"
+    license: CC BY 3.0

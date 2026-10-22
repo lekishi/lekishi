@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Litana forest in the land of the Boii, where the consul-elect Lucius Postumius and his army
+  were destroyed in 216 BCE; it is unlocated.
+types: [landform, region]
+names:
+  - form: Litana silva
+    lang: la
+    script: Latn
+    cite:
+      - id: silva-litana-name-livy
+        says: Livy records a vast forest that the Gauls called Litana.
+        source: livy
+        at: "23.24.7"
+        quote: silva erat vasta — Litanam Galli vocabant —
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes: "No coordinate is asserted: Livy names the forest and gives no position beyond Gaul."
+    cite:
+      - id: silva-litana-unlocated
+        says: Livy names the forest and places it only on the road through Gallic territory.
+        source: livy
+        at: "23.24.7"
+        quote: qua exercitum traducturus erat
+external_ids:
+  - system: wikidata
+    id: Q79098801
+    license: CC0-1.0
+  - system: pleiades
+    id: "196750886"
+    license: CC BY 3.0

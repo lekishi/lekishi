@@ -1,0 +1,72 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Philip V of Macedon's envoy Xenophanes slips through the Roman lines to Hannibal's camp and makes
+  a treaty of alliance. Polybius preserves the Carthaginian oath; Livy gives different terms,
+  including a Macedonian invasion of Italy and the division of Italy and Greece.
+types: [council]
+date:
+  value: "215 BCE"
+  calendar: regnal
+  as_written: after Cannae (Livy 23.33)
+  cite:
+    - id: philip-time
+      says: Livy records Xenophanes reaching Hannibal's camp through the Roman posts and making a
+        treaty.
+      source: livy
+      at: "23.33.9"
+      quote:
+        Xenophanes per praesidia Romana in Campaniam, inde, qua proximum fuit, in castra Hannibalis
+        pervenit foedusque cum eo atque amicitiam iungit legibus his
+places:
+  - place: capua
+    role: context
+    note: Xenophanes went through Campania to the camp; the camp is not located.
+participants:
+  - actor: hannibal
+    role: leader
+  - actor: xenophanes
+    role: participant
+    note: Philip's envoy.
+  - actor: philip-v
+    role: participant
+notes:
+  "A coda: the treaty falls in 215 BCE, after the chapter's main window. Year only. The sources date
+  by Roman consular year and by season; v0 has no Roman republican calendar, so the date is the
+  Julian year the consular year falls in, and no month or day is asserted."
+dispute:
+  status: disputed
+  summary:
+    "The terms are disputed: Polybius gives the oath's text, a mutual defence alliance; Livy's terms
+    have Philip invade Italy with a fleet, Italy go to Carthage and Hannibal, and the two then make
+    war in Greece. The record keeps both."
+cite:
+  - id: philip-oath
+    says:
+      Polybius preserves the oath sworn by Hannibal the general and the Carthaginians with him to
+      Xenophanes son of Cleomachus, the Athenian envoy of King Philip.
+    source: polybius
+    at: "7.9.1"
+    quote: πρὸς Ξενοφάνη Κλεομάχου Ἀθηναῖον πρεσβευτήν, ὃν ἀπέστειλε πρὸς ἡμᾶς Φίλιππος ὁ βασιλεὺς
+      Δημητρίου
+  - id: philip-mutual
+    says: Polybius' text has each side protect the other and its allies.
+    role: supporting
+    source: polybius
+    at: "7.9.7"
+    quote:
+      ἔσται δὲ καὶ Φίλιππος ὁ βασιλεὺς καὶ Μακεδόνες καὶ τῶν ἄλλων Ἑλλήνων οἱ σύμμαχοι, σῳζόμενοι
+      καὶ φυλαττόμενοι ὑπὸ Καρχηδονίων
+  - id: philip-livy-terms
+    says: Livy's terms have Philip cross to Italy with the largest fleet he can and ravage the coast.
+    role: conflicting
+    source: livy
+    at: "23.33.10"
+    quote:
+      ut Philippus rex quam maxima classe — ducentas autem naves videbatur effecturus — in Italiam
+      traiceret et vastaret maritimam oram
+  - id: philip-livy-italy
+    says: Livy's terms give all Italy and Rome to Carthage and Hannibal once the war is won.
+    role: conflicting
+    source: livy
+    at: "23.33.11"
+    quote: ubi debellatum esset, Italia omnis cum ipsa urbe Roma Carthaginiensium atque Hannibalis esset

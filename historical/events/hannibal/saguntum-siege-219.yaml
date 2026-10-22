@@ -1,0 +1,72 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Hannibal besieges Saguntum, the wealthy town south of the Ebro allied to Rome, and takes it by
+  storm in the eighth month. He keeps the money for his plans, shares the captives among his troops
+  and sends the spoils to Carthage.
+types: [campaign]
+date:
+  value: "219 BCE"
+  mode: duration
+  calendar: regnal
+  as_written: ἐν ὀκτὼ μησὶ κατὰ κράτος εἷλε τὴν πόλιν; octavo mense quam coeptum oppugnari
+  cite:
+    - id: saguntum-siege-time
+      says: Polybius records that Hannibal took the town by storm in eight months.
+      source: polybius
+      at: "3.17.9"
+      quote: τέλος ἐν ὀκτὼ μησὶ κατὰ κράτος εἷλε τὴν πόλιν
+    - id: saguntum-siege-livy-month
+      says: Livy reports writers who say Saguntum fell in the eighth month of the siege, after which
+        Hannibal wintered at New Carthage.
+      role: supporting
+      source: livy
+      at: "21.15.3"
+      quote: octavo mense quam coeptum oppugnari, captum Saguntum quidam scripsere
+places:
+  - place: saguntum
+    role: site
+participants:
+  - actor: hannibal
+    role: leader
+  - actor: carthage-state
+    role: participant
+    note: Polybius records the spoils sent to the Carthaginians.
+notes: "The siege is dated by its consequence: Rome's embassy and the war of 218 BCE. Livy finds the
+  eight-month siege and five-month march impossible to square with the consuls of 218 BCE, and
+  suggests either that everything took less time or that Saguntum fell, rather than was first
+  attacked, at the start of that consular year. The record follows Polybius' 219 BCE and keeps
+  Livy's reckoning as a conflicting claim. Year only. The sources date by Roman consular year and by
+  season; v0 has no Roman republican calendar, so the date is the Julian year the consular year
+  falls in, and no month or day is asserted."
+dispute:
+  status: disputed
+  summary:
+    "The year of the fall is disputed in antiquity: Polybius' narrative puts the siege in 219 BCE,
+    while Livy argues that if the consuls of 218 BCE received the Saguntine envoys and fought at the
+    Ticinus and Trebia, Saguntum must have fallen early in 218 BCE or the stages were shorter. The
+    record publishes 219 BCE and keeps Livy's argument as a conflicting claim."
+cite:
+  - id: saguntum-siege-spoils
+    says: Polybius records that Hannibal kept the money for his own plans, distributed the captives
+      among his men by merit and sent the spoils to Carthage.
+    source: polybius
+    at: "3.17.10"
+    quote: τὴν δὲ κατασκευὴν παραχρῆμα πᾶσαν ἐξέπεμψε τοῖς Καρχηδονίοις
+  - id: saguntum-siege-livy-chronology
+    says:
+      Livy argues that either all the stages were shorter or Saguntum was taken, not first attacked,
+      at the start of the year of P. Cornelius and Ti. Sempronius (218 BCE).
+    role: conflicting
+    source: livy
+    at: "21.15.5"
+    quote: aut omnia breviora aliquanto fuere aut Saguntum principio anni, quo P. Cornelius Ti.
+      Sempronius consules fuerunt, non coeptum oppugnari est, sed captum
+cites:
+  places:
+    - id: saguntum-siege-place
+      says:
+        Livy describes Saguntum as by far the wealthiest town beyond the Ebro, about a mile from the
+        sea.
+      source: livy
+      at: "21.7.2"
+      quote: civitas ea longe opulentissima ultra Hiberum fuit, sita passus mille ferme a maria

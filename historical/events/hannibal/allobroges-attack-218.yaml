@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  After ten days' march along the river, as the army starts to climb into the Alps, chiefs of the
+  Allobroges seize the heights over the route and attack. Hannibal takes their positions by night
+  and captures their town, but the column loses many men and pack animals.
+types: [occurrence]
+part_of: [hannibal-march-218]
+date:
+  value: "218 BCE"
+  calendar: regnal
+  as_written: ἐν ἡμέραις δέκα … ἤρξατο τῆς πρὸς τὰς Ἄλπεις ἀναβολῆς
+  cite:
+    - id: allobroges-time
+      says:
+        Polybius records Hannibal beginning the ascent after ten days' march of about eight hundred
+        stades along the river.
+      source: polybius
+      at: "3.50.1"
+      quote:
+        Ἀννίβας δʼ ἐν ἡμέραις δέκα πορευθεὶς παρὰ τὸν ποταμὸν εἰς ὀκτακοσίους σταδίους ἤρξατο τῆς
+        πρὸς τὰς Ἄλπεις ἀναβολῆς
+places:
+  - place: alps
+    role: site
+    note: The ascent; the place is not named.
+participants:
+  - actor: hannibal
+    role: leader
+  - actor: allobroges
+    role: participant
+notes:
+  Polybius tells the attack in 3.50–51. Livy's parallel account (21.32–33) is not cited here. Year
+  only. The sources date by Roman consular year and by season; v0 has no Roman republican calendar,
+  so the date is the Julian year the consular year falls in, and no month or day is asserted.
+cite:
+  - id: allobroges-heights
+    says: Polybius records the Allobrogian chiefs occupying the points the army had to pass on the
+      ascent.
+    source: polybius
+    at: "3.50.3"
+    quote:
+      τότε συναθροίσαντες οἱ τῶν Ἀλλοβρίγων ἡγεμόνες ἱκανόν τι πλῆθος προκατελάβοντο τοὺς εὐκαίρους
+      τόπους
+  - id: allobroges-harm
+    says:
+      Polybius judges that had they hidden their plan they would have destroyed the army, and that
+      they harmed both it and themselves.
+    role: supporting
+    source: polybius
+    at: "3.50.4"
+    quote: νῦν δὲ καταφανεῖς γενόμενοι μεγάλα μὲν καὶ τοὺς περὶ Ἀννίβαν ἔβλαψαν, οὐκ ἐλάττω δʼ ἑαυτούς

@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  The Allobroges, the Gallic people of the Rhône valley whose chiefs attacked Hannibal's column at
+  the start of the Alpine climb in 218 BCE.
+types: [community]
+names:
+  - form: Allobroges
+    lang: la
+    script: Latn
+    cite:
+      - id: allobroges-name-livy
+        says:
+          Livy describes the Allobroges, who lived near the Island, as second to no Gallic people in
+          wealth or fame.
+        source: livy
+        at: "21.31.5"
+        quote: incolunt prope Allobroges, gens iam inde nulla Gallica gente opibus aut fama inferior
+  - form: Ἀλλόβριγες
+    lang: grc
+    script: Grek
+    cite:
+      - id: allobroges-name-polybius
+        says: Polybius speaks of the march through the Gauls called Ἀλλόβριγες.
+        source: polybius
+        at: "3.49.13"
+        quote: πρὸς τὴν διὰ τῶν Ἀλλοβρίγων καλουμένων Γαλατῶν πορείαν
+external_ids:
+  - system: wikidata
+    id: Q656308
+    license: CC0-1.0
+  - system: pleiades
+    id: "167634"
+    license: CC BY 3.0

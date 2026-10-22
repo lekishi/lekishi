@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Hasdrubal, Hannibal's brother, left in command in Iberia with a fleet and an army when Hannibal
+  marched for Italy in 218 BCE; beaten at sea by Gnaeus Scipio at the Ebro in 217 BCE.
+types: [person]
+names:
+  - form: Ἀσδρούβας
+    lang: grc
+    script: Grek
+    cite:
+      - id: hasdrubal-barca-name-polybius
+        says:
+          Polybius records Hannibal instructing his brother Ἀσδρούβας how to govern Iberia in his
+          absence.
+        source: polybius
+        at: "3.33.6"
+        quote: δεύτερον δʼ Ἀσδρούβᾳ τἀδελφῷ διέταξε
+  - form: Hasdrubal
+    lang: la
+    script: Latn
+    cite:
+      - id: hasdrubal-barca-name-livy
+        says: Livy calls Hasdrubal Hannibal's energetic brother.
+        source: livy
+        at: "21.22.1"
+        quote: Hasdrubali fratri, viro inpigro
+roles:
+  - role: soldier
+    date:
+      value: "218 BCE..217 BCE"
+      mode: duration
+      calendar: regnal
+      as_written: ὁ τεταγμένος ἐπὶ τῆς Ἰβηρίας στρατηγός
+    cite:
+      - id: hasdrubal-barca-command
+        says:
+          Polybius calls Hasdrubal the general appointed over Iberia when he takes the fleet to sea
+          in 217 BCE.
+        source: polybius
+        at: "3.95.2"
+        quote: Ἀσδρούβας ὁ τεταγμένος ἐπὶ τῆς Ἰβηρίας στρατηγὸς
+notes: The surname Barca belongs to the family; the id disambiguates him from the cavalry commander
+  Hasdrubal at Cannae, who is a separate record.

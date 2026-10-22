@@ -1,0 +1,43 @@
+# yaml-language-server: $schema=../schema/source.schema.json
+locator: section
+kind: primary
+title: Titi Livi Ab urbe condita (Livy, History of Rome)
+edition:
+  Weissenborn and Müller, Teubner (Leipzig, 1884–1911), read in the Perseus Digital Library TEI
+  transcription (canonical-latinLit, phi0914.phi001.perseus-lat2); locators are book.chapter.section
+  and were read against it on 2026-10-21; re-check against a critical edition before content freeze
+author: Titus Livius (Livy)
+issued:
+  year: 20
+  era: bce
+  endpoint_certainty: approximate
+language: la
+identifiers:
+  - system: url
+    value: https://github.com/PerseusDL/canonical-latinLit/blob/master/data/phi0914/phi001/phi0914.phi001.perseus-lat2.xml
+  - system: other
+    value: urn:cts:latinLit:phi0914.phi001.perseus-lat2
+license:
+  status: recorded
+  license_id: public-domain
+  attribution_text: Livy, Ab urbe condita, ed. Weissenborn and Müller (Teubner); Perseus Digital Library transcription
+  redistribution: permitted
+  quotation_permitted: true
+  reviewed_by: Lekishi editorial preparation
+  reviewed_at: 2026-10-21T15:30:00Z
+  notes:
+    The work and the Teubner edition are public domain. The Perseus transcription it was read in is
+    CC BY-SA 4.0; the file's TEI header states no licence, so the canonical-latinLit repository's
+    default applies, that all its contents are CC BY-SA 4.0 unless otherwise indicated (README,
+    https://github.com/PerseusDL/canonical-latinLit, read 2026-10-21). Under the source
+    register's rule the chapter quotes the work, cites the edition, and notes the transcription. The
+    transcription carries OCR corrections; quotations avoid passages where it is visibly corrupt.
+notes:
+  "Latin history of Rome from its founding, written under Augustus; the issued year is approximate.
+  Books 21–30, on the war with Hannibal, date from the 20s BCE, about two centuries after the
+  events. There Livy uses Polybius and the Roman annalists (he names Fabius Pictor, Cincius
+  Alimentus, and Coelius Antipater) and often reports where they disagree, which the chapters keep.
+  He dates by consular years and records Roman religious and political measures that Polybius
+  omits. Book I, on the kings, was written about seven centuries after the dates it gives, from
+  earlier annalists, and Livy says himself that the time before the founding is told in poets'
+  tales; a chapter citing it labels it as tradition."

@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  After Cannae Rome sends Q. Fabius Pictor, the future historian, to the oracle at Delphi to ask by
+  what prayers and offerings the gods might be appeased and what end there would be to the
+  disasters.
+types: [mission]
+date:
+  value: "216 BCE"
+  calendar: regnal
+  as_written: after Cannae (Livy 22.57)
+  cite:
+    - id: pictor-time
+      says: Livy records Fabius Pictor sent to the oracle at Delphi.
+      source: livy
+      at: "22.57.5"
+      quote: et Q. Fabius Pictor Delphos ad oraculum missus est sciscitatum, quibus precibus
+        suppliciisque deos possent placare, et quaenam futura finis tantis cladibus foret
+places:
+  - place: rome
+    role: start
+  - place: delphi
+    role: end
+participants:
+  - actor: q-fabius-pictor
+    role: participant
+    note: Envoy to the oracle.
+  - actor: roman-republic
+    role: participant
+notes:
+  Pictor later wrote the first Roman history in Greek, which Polybius and Livy both used. Year only.
+  The sources date by Roman consular year and by season; v0 has no Roman republican calendar, so the
+  date is the Julian year the consular year falls in, and no month or day is asserted.

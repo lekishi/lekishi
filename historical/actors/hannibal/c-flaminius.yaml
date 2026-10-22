@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Gaius Flaminius, consul in 217 BCE, who entered office at Ariminum rather than in Rome and was
+  killed with much of his army at Lake Trasimene.
+types: [person]
+names:
+  - form: C. Flaminius
+    lang: la
+    script: Latn
+    cite:
+      - id: c-flaminius-name-livy
+        says: Livy records that C. Flaminius entered his consulship at Ariminum.
+        source: livy
+        at: "21.15.6"
+        quote: quia C. Flaminius Arimini consulatum iniit
+  - form: Φλαμίνιος
+    lang: grc
+    script: Grek
+    cite:
+      - id: c-flaminius-name-polybius
+        says: Polybius records Hannibal finding Φλαμίνιος encamped before Arretium.
+        source: polybius
+        at: "3.80.1"
+        quote: καταλαβὼν ἐν Τυρρηνίᾳ τὸν Φλαμίνιον στρατοπεδεύοντα
+roles:
+  - role: official
+    note: Consul.
+    date:
+      value: "217 BCE"
+      mode: duration
+      calendar: regnal
+      as_written: Cn. Servilio C. Flaminio consulibus
+    cite:
+      - id: c-flaminius-consul
+        says: Livy names the year 217 BCE as the year of Cn. Servilius and C. Flaminius.
+        source: livy
+        at: "21.15.6"
+        quote: in annum Cn. Servili et C. Flamini

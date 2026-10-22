@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  "Carthage as a state: its council and citizens, who accepted war with Rome in 218 BCE and heard
+  Mago's report of Cannae in 216 BCE."
+types: [state]
+names:
+  - form: Carthaginienses
+    lang: la
+    script: Latn
+    cite:
+      - id: carthage-state-name-livy
+        says: Livy names the Carthaginians as the people who waged the war under Hannibal.
+        source: livy
+        at: "21.1.1"
+        quote: quod Hannibale duce Carthaginienses cum populo Romano gessere
+  - form: Καρχηδόνιοι
+    lang: grc
+    script: Grek
+    cite:
+      - id: carthage-state-name-polybius
+        says: Polybius speaks of the Carthaginians at home whose goodwill Hannibal courted.
+        source: polybius
+        at: "3.17.7"
+        quote: τὴν εὔνοιαν τῶν ἐν οἴκῳ Καρχηδονίων
+notes: "The state actor carries no roles: the role vocabulary is person-oriented. The city is the
+  separate place record carthage."

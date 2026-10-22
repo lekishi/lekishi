@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  On the ninth day Hannibal reaches the summit, camps there two days for stragglers, and, with snow
+  already gathering as the Pleiades set, shows his disheartened men the plains of the Po below and
+  where Rome lay.
+types: [occurrence]
+part_of: [hannibal-march-218]
+date:
+  value: "218 BCE"
+  calendar: regnal
+  as_written: ἐναταῖος … διὰ τὸ συνάπτειν τὴν τῆς Πλειάδος δύσιν
+  cite:
+    - id: summit-time
+      says: Polybius records Hannibal reaching the summit on the ninth day and camping there two days.
+      source: polybius
+      at: "3.53.9"
+      quote: ἐναταῖος δὲ διανύσας εἰς τὰς ὑπερβολὰς αὐτοῦ κατεστρατοπέδευσε καὶ δύʼ ἡμέρας προσέμεινε
+    - id: summit-pleiades
+      says: Polybius records the snow already gathering on the heights because the setting of the
+        Pleiades was near.
+      role: supporting
+      source: polybius
+      at: "3.54.1"
+      quote: τῆς δὲ χιόνος ἤδη περὶ τοὺς ἄκρους ἁθροιζομένης διὰ τὸ συνάπτειν τὴν τῆς Πλειάδος δύσιν
+places:
+  - place: alpine-pass
+    role: site
+    note: "Unlocated: which pass is disputed."
+participants:
+  - actor: hannibal
+    role: leader
+notes:
+  The setting of the Pleiades is a seasonal marker (late autumn), not a calendar date; the record
+  keeps year precision. Livy sets the speech on a promontory with a wide view. Year only. The
+  sources date by Roman consular year and by season; v0 has no Roman republican calendar, so the
+  date is the Julian year the consular year falls in, and no month or day is asserted.
+cite:
+  - id: summit-view
+    says: Both historians record Hannibal showing his men Italy and the plains about the Po from the
+      heights.
+    sources:
+      - source: polybius
+        at: "3.54.3"
+        quote: διόπερ ἐνδεικνύμενος αὐτοῖς τὰ περὶ τὸν Πάδον πεδία
+      - source: livy
+        at: "21.35.8"
+        quote: praegressus signa Hannibal in promunturio quodam, unde longe ac late prospectus erat,
+          consistere iussis militibus Italiam ostentat subiectosque Alpinis montibus Circumpadanos
+          campos
+  - id: summit-walls
+    says: Livy has Hannibal say they were crossing the walls not only of Italy but of Rome itself.
+    role: supporting
+    source: livy
+    at: "21.35.9"
+    quote: moeniaque eos tum transcendere non Italiae modo sed etiam urbis Romanae

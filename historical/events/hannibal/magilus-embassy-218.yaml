@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  After the crossing, chiefs led by Magilus, come from the plains of the Po, address Hannibal's army
+  through an interpreter, promising to guide it into Italy and to share in the war against Rome.
+types: [mission, council]
+date:
+  value: "218 BCE"
+  calendar: regnal
+  as_written: after the Rhône crossing (Polybius 3.44)
+  cite:
+    - id: magilus-time
+      says: Polybius records Hannibal assembling his forces after the crossing and bringing in the
+        chieftains about Magilus, who had come from the Po plains.
+      source: polybius
+      at: "3.44.5"
+      quote: εἰσήγαγε τοὺς βασιλίσκους τοὺς περὶ Μάγιλον — οὗτοι γὰρ ἧκον πρὸς αὐτὸν ἐκ τῶν περὶ τὸν
+        Πάδον πεδίων — καὶ διʼ ἑρμηνέως τὰ δεδογμένα παρʼ αὐτῶν διεσάφει τοῖς ὄχλοις
+places:
+  - place: rhone-crossing
+    role: site
+participants:
+  - actor: magilus
+    role: participant
+    note: Envoy of the Po Celts.
+  - actor: hannibal
+    role: host
+notes:
+  Polybius alone names Magilus. Year only. The sources date by Roman consular year and by season; v0
+  has no Roman republican calendar, so the date is the Julian year the consular year falls in, and
+  no month or day is asserted.
+cite:
+  - id: magilus-promise
+    says: Polybius records the chiefs promising to guide the army by a route short, safe and well
+      supplied.
+    source: polybius
+    at: "3.44.7"
+    quote:
+      ὅτι καθηγήσονται διὰ τόπων τοιούτων διʼ ὧν οὐδενὸς ἐπιδεόμενοι τῶν ἀναγκαίων συντόμως ἅμα καὶ
+      μετʼ ἀσφαλείας ποιήσονται τὴν εἰς Ἰταλίαν πορείαν

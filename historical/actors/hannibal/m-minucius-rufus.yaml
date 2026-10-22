@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  Marcus Minucius Rufus, Fabius' master of horse in 217 BCE, raised to an equal command by a vote of
+  the people and rescued by Fabius at Gerunium.
+types: [person]
+names:
+  - form: M. Minucius Rufus
+    lang: la
+    script: Latn
+    cite:
+      - id: m-minucius-rufus-name-livy
+        says: Livy records M. Minucius Rufus named master of horse.
+        source: livy
+        at: "22.8.6"
+        quote: magistrum equitum M. Minucium Rufum
+  - form: Μάρκος Μινύκιος
+    lang: grc
+    script: Grek
+    cite:
+      - id: m-minucius-rufus-name-polybius
+        says: Polybius records Μάρκος Μινύκιος appointed master of horse.
+        source: polybius
+        at: "3.87.9"
+        quote: ἅμα δὲ τῷ δικτάτορι κατέστησαν ἱππάρχην Μάρκον Μινύκιον
+roles:
+  - role: official
+    note: Master of horse, then co-dictator.
+    date:
+      value: "217 BCE"
+      mode: duration
+      calendar: regnal
+      as_written: M. Minucius magister equitum
+    cite:
+      - id: m-minucius-rufus-office
+        says: Polybius records his appointment as master of horse, the dictator's deputy.
+        source: polybius
+        at: "3.87.9"
+        quote: ἅμα δὲ τῷ δικτάτορι κατέστησαν ἱππάρχην Μάρκον Μινύκιον

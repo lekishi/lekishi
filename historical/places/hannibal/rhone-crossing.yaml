@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The place where Hannibal's army crossed the Rhône in 218 BCE. Polybius puts it about four days'
+  march from the sea, where the river runs in a single stream; neither source names it.
+types: [route_node]
+names:
+  - form: Ῥοδανοῦ διάβασις
+    lang: grc
+    script: Grek
+    note: A descriptive phrase, not a place name.
+    cite:
+      - id: rhone-crossing-name-polybius
+        says: Polybius calls Hannibal's goal beyond the Pyrenees the crossing of the Rhône.
+        source: polybius
+        at: "3.35.7"
+        quote: ἐπὶ τὴν τοῦ Ῥοδανοῦ καλουμένου ποταμοῦ διάβασιν
+at:
+  - interpretation: unknown
+    precision: unspecified
+    notes:
+      No coordinate is asserted. Polybius gives a distance from the sea, not a place, and modern
+      proposals differ.
+    cite:
+      - id: rhone-crossing-unlocated
+        says:
+          Polybius places the crossing about four days' march from the sea where the river flows in
+          one stream, and names no place.
+        source: polybius
+        at: "3.42.1"
+        quote:
+          ἐνεχείρει ποιεῖσθαι τὴν διάβασιν κατὰ τὴν ἁπλῆν ῥύσιν, σχεδὸν ἡμερῶν τεττάρων ὁδὸν ἀπέχων
+          στρατοπέδῳ τῆς θαλάττης
+notes:
+  The record exists so that the crossing is a stop of its own rather than a point on the river's
+  label anchor. Modern identifications are not adopted.

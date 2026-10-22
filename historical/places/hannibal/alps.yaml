@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: The Alps (Ἄλπεις, Alpes), the range Hannibal crossed in fifteen days in the autumn of 218 BCE.
+types: [landform, region]
+names:
+  - form: Alpes
+    lang: la
+    script: Latn
+    cite:
+      - id: alps-name-livy
+        says: Livy names the Alps when he discusses which way Hannibal crossed them.
+        source: livy
+        at: "21.38.6"
+        quote: eo magis miror ambigi, quanam Alpis transierit
+  - form: Ἄλπεις
+    lang: grc
+    script: Grek
+    cite:
+      - id: alps-name-polybius
+        says: Polybius names the Ἄλπεις beneath which lay the country of the Po.
+        source: polybius
+        at: "3.34.2"
+        quote: τῆς ὑπὸ τὰς Ἄλπεις καὶ περὶ τὸν Πάδον ποταμὸν χώρας
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [8.615, 46.578055555]
+    notes: Region-level label anchor for the range. It is not Hannibal's pass, which is unlocated.
+    cite:
+      - id: alps-anchor
+        says:
+          The label anchor is placed at the coordinate the dataset records; no historical site is
+          asserted.
+        source: wikidata
+        at: Q1286 (P625), revision 2556556035
+external_ids:
+  - system: wikidata
+    id: Q1286
+    license: CC0-1.0
+  - system: pleiades
+    id: "783"
+    license: CC BY 3.0

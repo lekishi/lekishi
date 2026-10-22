@@ -1,0 +1,49 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  The Trebia (Τρεβίας), the Po tributary west of Placentia beside which the battle of December 218
+  BCE was fought; the battlefield is not located.
+types: [landform]
+names:
+  - form: Trebia
+    lang: la
+    script: Latn
+    cite:
+      - id: trebia-name-livy
+        says: Livy names the Trebia as the river by which both consuls fought Hannibal.
+        source: livy
+        at: "21.15.4"
+        quote: ambo aliquanto post ad Trebiam, pugnaverint
+  - form: Τρεβίας
+    lang: grc
+    script: Grek
+    cite:
+      - id: trebia-name-polybius
+        says: Polybius records Publius marching toward the river Τρεβίας and the hills beside it.
+        source: polybius
+        at: "3.67.9"
+        quote: ἐποιεῖτο τὴν πορείαν ὡς ἐπὶ τὸν Τρεβίαν ποταμὸν
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [9.685166666, 45.072075]
+    notes: Label anchor at the river's confluence with the Po as Wikidata records it. Which bank and
+      which reach the battle was fought on is not settled by the sources.
+    cite:
+      - id: trebia-anchor
+        says:
+          The label anchor is placed at the coordinate the dataset records; no historical site is
+          asserted.
+        source: wikidata
+        at: Q732587 (P625), revision 2511174797
+modern:
+  - form: Trebbia
+    lang: it
+    script: Latn
+    note: Modern name of the river.
+external_ids:
+  - system: wikidata
+    id: Q732587
+    license: CC0-1.0
+  - system: pleiades
+    id: "383802"
+    license: CC BY 3.0

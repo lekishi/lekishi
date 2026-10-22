@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  Braneus of the Allobroges, restored to his kingship by Hannibal's arbitration at the Island,
+  supplied and escorted the army to the Alps. The relationship asserts no causation beyond what the
+  sources say.
+types: [alliance]
+from: braneus
+to: hannibal
+directionality: mutual
+date:
+  value: "218 BCE"
+  mode: window
+  calendar: regnal
+  as_written: quartis castris (Livy 21.31.4)
+cite:
+  - id: braneus-hannibal-basis
+    says: Livy records that for this service Hannibal was helped with provisions and every kind of
+      supply, above all clothing.
+    source: livy
+    at: "21.31.8"
+    quote: ob id meritum commeatu copiaque rerum omnium, maxime vestis, est adiutus

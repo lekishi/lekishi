@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Clastidium, the Roman grain depot south of the Po betrayed to Hannibal in 218 BCE.
+types: [settlement]
+names:
+  - form: Clastidium
+    lang: la
+    script: Latn
+    cite:
+      - id: clastidium-name-livy
+        says: Livy calls Clastidium a village where the Romans had stored much grain.
+        source: livy
+        at: "21.48.9"
+        quote: ad Clastidium vicum, quo magnum frumenti numerum congesserant Romani, mittit
+  - form: Κλαστίδιον
+    lang: grc
+    script: Grek
+    cite:
+      - id: clastidium-name-polybius
+        says: Polybius records Hannibal taking the town of Κλαστίδιον by betrayal.
+        source: polybius
+        at: "3.69.1"
+        quote: Ἀννίβας πραξικοπήσας πόλιν Κλαστίδιον
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [9.133, 45.017]
+    notes: An approximate placement at Casteggio, which Pleiades identifies with Clastidium.
+    cite:
+      - id: clastidium-identification
+        says: Pleiades locates the ancient place (Clastidium) at the site whose modern coordinate
+          Wikidata records; the point is the Wikidata coordinate (CC0), an approximate placement of
+          the ancient town, not a surveyed site.
+        basis: interpretation
+        attributed_to: Pleiades
+        sources:
+          - source: pleiades
+            at: place 383618 (Clastidium), reprLatLong, dump 2026-10-21
+          - source: wikidata
+            at: Q3481739 (P625), revision 2516926751
+modern:
+  - form: Casteggio
+    lang: it
+    script: Latn
+    note: Modern town on the site, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q3481739
+    license: CC0-1.0
+  - system: pleiades
+    id: "383618"
+    license: CC BY 3.0

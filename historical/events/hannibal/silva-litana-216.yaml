@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The consul-elect L. Postumius leads 25,000 men into the great forest the Gauls call Litana. The
+  Boii have cut the trees along the road to stand until pushed; they topple them onto the column and
+  kill the rest. Postumius dies fighting, and the Boii gild his skull as a sacred cup.
+types: [occurrence]
+date:
+  value: "216 BCE"
+  calendar: regnal
+  as_written: L. Postumium consulem designatum (Livy 23.24.6)
+  cite:
+    - id: litana-time
+      says:
+        Livy records the news of Postumius, consul-elect, and his army destroyed in Gaul, at the end
+        of the year.
+      source: livy
+      at: "23.24.6"
+      quote: nova clades nuntiata, aliam super aliam cumulante in eum annum fortuna, L. Postumium
+        consulem designatum in Gallia ipsum atque exercitum deletos
+places:
+  - place: silva-litana
+    role: site
+participants:
+  - actor: l-postumius-albinus
+    role: leader
+  - actor: boii
+    role: participant
+notes:
+  Livy alone names the forest and tells of the cut trees and the gilded skull. Polybius (3.118.6)
+  reports, a few days after Cannae, a Roman general sent to Gaul falling into a Celtic ambush and
+  being destroyed with his army, without naming him or the place; identifying that report with
+  Livy's Litana is editorial. Year only. The sources date by Roman consular year and by season; v0 has no
+  Roman republican calendar, so the date is the Julian year the consular year falls in, and no month
+  or day is asserted.
+cite:
+  - id: litana-trees
+    says: Livy records the Gauls cutting the trees so they stood until pushed.
+    source: livy
+    at: "23.24.7"
+    quote: eius silvae dextra laevaque circa viam Galli arbores ita inciderunt, ut inmotae starent,
+      momento levi inpulsae occiderent
+  - id: litana-death
+    says: Livy records Postumius dying as he fought to avoid capture.
+    role: supporting
+    source: livy
+    at: "23.24.11"
+    quote: ibi Postumius omni vi, ne caperetur, dimicans occubuit
+  - id: litana-skull
+    says: Livy records the Boii gilding his skull as a sacred vessel.
+    role: supporting
+    source: livy
+    at: "23.24.12"
+    quote: purgato inde capite, ut mos iis est, calvam auro caelavere, idque sacrum vas iis erat
+  - id: litana-polybius
+    says:
+      Polybius reports the general sent to Gaul falling into an ambush and being destroyed with his
+      force by the Celts, without naming him or the place; the identification with Livy's Litana is
+      editorial.
+    role: supporting
+    source: polybius
+    at: "3.118.6"
+    quote: τὸν εἰς τὴν Γαλατίαν στρατηγὸν ἀποσταλέντʼ εἰς ἐνέδραν ἐμπεσόντα παραδόξως ἄρδην ὑπὸ τῶν Κελτῶν διαφθαρῆναι μετὰ τῆς δυνάμεως

@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: After Trasimene Hannibal marches straight through Umbria to Spoletium, ravages its land and
+  attacks the colony, but is beaten off with heavy losses and turns away into Picenum.
+types: [occurrence]
+date:
+  value: "217 BCE"
+  calendar: regnal
+  as_written: after Trasimene (Livy 22.9)
+  cite:
+    - id: spoletium-time
+      says: Livy records Hannibal marching straight through Umbria to Spoletium.
+      source: livy
+      at: "22.9.1"
+      quote: Hannibal recto itinere per Umbriam usque ad Spoletium venit
+places:
+  - place: spoletium
+    role: site
+participants:
+  - actor: hannibal
+    role: leader
+notes:
+  Livy alone tells it; Polybius says only that Hannibal gave up approaching Rome and turned toward
+  the Adriatic (3.86.8). Year only. The sources date by Roman consular year and by season; v0 has no
+  Roman republican calendar, so the date is the Julian year the consular year falls in, and no month
+  or day is asserted.
+cite:
+  - id: spoletium-repulse
+    says: Livy records Hannibal beaten back with great slaughter and turning into the Picene country.
+    source: livy
+    at: "22.9.2"
+    quote: cum magna caede suorum repulsus
+  - id: spoletium-polybius
+    says:
+      Polybius records Hannibal deciding against approaching Rome and marching toward the Adriatic,
+      ravaging as he went.
+    role: supporting
+    source: polybius
+    at: "3.86.8"
+    quote: τὸ μὲν συνεγγίζειν τῇ Ῥώμῃ κατὰ τὸ παρὸν ἀπεδοκίμασεν, τὴν δὲ χώραν ἐπιπορευόμενος ἀδεῶς
+      ἐπόρθει, ποιούμενος τὴν πορείαν ὡς ἐπὶ τὸν Ἀδρίαν

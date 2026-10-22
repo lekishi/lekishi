@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Gerunium (Γερούνιον, Gereonium), the Apulian town about two hundred stades from Luceria that
+  Hannibal took and used as his winter granary in 217–216 BCE.
+types: [settlement]
+names:
+  - form: Gereonium
+    lang: la
+    script: Latn
+    cite:
+      - id: gerunium-name-livy
+        says:
+          Livy records Hannibal reaching Gereonium, a town its people had deserted because part of
+          its wall had fallen.
+        source: livy
+        at: "22.18.7"
+        quote: Gereonium pervenit, urbem metu, quia conlapsa ruinis pars moenium erat, ab suis desertam
+  - form: Γερούνιον
+    lang: grc
+    script: Grek
+    cite:
+      - id: gerunium-name-polybius
+        says:
+          Polybius records the grain gathered about Luceria and Γερούνιον, and Gerunium's fitness
+          for storing it.
+        source: polybius
+        at: "3.100.1"
+        quote: πλεῖστον ὑπάρχειν σῖτον ἐν τῇ περὶ τὴν Λουκαρίαν καὶ τὸ καλούμενον Γερούνιον χώρᾳ
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [14.8906, 41.7522]
+    notes: Label anchor at the ruins Wikidata records as Geronium. The Barrington Atlas marks the
+      identification with a query (Gereonium?), so no site is asserted.
+    cite:
+      - id: gerunium-anchor
+        says:
+          The label anchor is placed at the coordinate the dataset records; no historical site is
+          asserted.
+        source: wikidata
+        at: Q3761234 (P625), revision 2522183407
+external_ids:
+  - system: wikidata
+    id: Q3761234
+    license: CC0-1.0
+  - system: pleiades
+    id: "442599"
+    license: CC BY 3.0
+cites:
+  summary:
+    - id: gerunium-distance
+      says: Polybius places Gerunium two hundred stades from Luceria.
+      source: polybius
+      at: "3.100.3"
+      quote: ὃ τῆς Λουκαρίας ἀπέχει διακόσια στάδια

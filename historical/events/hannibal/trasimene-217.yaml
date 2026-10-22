@@ -1,0 +1,124 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Hannibal ravages the land between Cortona and Lake Trasimene to draw Flaminius after him, then
+  sets an ambush round a valley by the lake. On a morning of thick mist the Roman column enters it
+  and is attacked from all sides; Flaminius is killed by Celts and about 15,000 Romans fall in the
+  valley.
+types: [occurrence]
+date:
+  value: "217 BCE"
+  calendar: regnal
+  as_written: C. Flaminio consule (Livy 22.7)
+  cite:
+    - id: trasimene-time
+      says:
+        Polybius records Flaminius camping by the lake late in the day and leading his van into the
+        valley at dawn.
+      source: polybius
+      at: "3.83.7"
+      quote:
+        κατεστρατοπεδευκὼς δὲ τῇ προτεραίᾳ πρὸς αὐτῇ τῇ λίμνῃ τελέως ὀψὲ τῆς ὥρας, μετὰ ταῦτα τῆς
+        ἡμέρας ἐπιγενομένης εὐθέως ἐπὶ τὴν ἑωθινὴν ἦγε τὴν πρωτοπορείαν
+places:
+  - place: lake-trasimene
+    role: site
+    note: The lake is placed by a label anchor; which valley by the shore is not decided.
+participants:
+  - actor: hannibal
+    role: leader
+  - actor: c-flaminius
+    role: leader
+  - actor: maharbal
+    role: participant
+    note: Received the surrender of the 6,000 who broke out.
+notes:
+  "Livy follows Fabius Pictor, a contemporary, for the figures: 15,000 Romans killed in the battle
+  and 10,000 scattered in flight, and 2,500 of the enemy. Livy adds that an earthquake that ruined
+  parts of many Italian cities went unnoticed by the fighters. Year only. The sources date by Roman
+  consular year and by season; v0 has no Roman republican calendar, so the date is the Julian year
+  the consular year falls in, and no month or day is asserted. The two historians agree on the fate
+  of the 6,000 who surrendered to Maharbal: Polybius has Hannibal disown the promise of safety, keep
+  the Romans prisoner and release the allies without ransom; Livy has all of them put in chains, a
+  promise kept 'with Punic faith', and then the Latin allies released without ransom and the Romans
+  kept in chains."
+cite:
+  - id: trasimene-ravage
+    says:
+      Livy records Hannibal laying waste the land between Cortona and Lake Trasimene to provoke the
+      enemy.
+    source: livy
+    at: "22.4.1"
+    quote: Hannibal quod agri est inter Cortonam urbem Trasumennumque lacum omni clade belli pervastat
+  - id: trasimene-mist
+    says:
+      Polybius records the day being exceptionally misty when Hannibal gave the signal and attacked
+      from all sides.
+    role: supporting
+    source: polybius
+    at: "3.84.1"
+    quote: οὔσης δὲ τῆς ἡμέρας ὀμιχλώδους διαφερόντως
+  - id: trasimene-flaminius
+    says: Polybius records some Celts killing Flaminius in the confusion.
+    role: supporting
+    source: polybius
+    at: "3.84.6"
+    quote:
+      ἐν ᾧ καιρῷ καὶ τὸν Φλαμίνιον αὐτὸν δυσχρηστούμενον καὶ περικακοῦντα τοῖς ὅλοις προσπεσόντες
+      τινὲς τῶν Κελτῶν ἀπέκτειναν
+  - id: trasimene-dead
+    says: Both historians give about 15,000 Romans killed.
+    role: supporting
+    sources:
+      - source: polybius
+        at: "3.84.7"
+        quote: ἔπεσον οὖν τῶν Ῥωμαίων κατὰ τὸν αὐλῶνα σχεδὸν εἰς μυρίους καὶ πεντακισχιλίους
+      - source: livy
+        at: "22.7.1"
+        quote: quindecim milia Romanorum in acie caesa
+  - id: trasimene-pictor
+    says:
+      Livy says he followed Fabius, a contemporary of the war, above all other authorities for the
+      figures.
+    role: supporting
+    source: livy
+    at: "22.7.4"
+    quote: Fabium, aequalem temporibus huiusce belli, potissimum auctorem habui
+  - id: trasimene-earthquake
+    says: Livy records an earthquake that no one in the battle noticed.
+    role: supporting
+    source: livy
+    at: "22.5.8"
+    quote:
+      ut eum motum terrae, qui multarum urbium Italiae magnas partes prostravit avertitque cursu
+      rapidos amnis, mare fluminibus invexit, montes lapsu ingenti proruit, nemo pugnantium senserit
+  - id: trasimene-maharbal
+    says:
+      Polybius records Hannibal declaring that Maharbal had no authority to grant the surrendered
+      men their safety without his consent.
+    role: supporting
+    source: polybius
+    at: "3.85.2"
+    quote:
+      πρῶτον μὲν διεσάφησεν ὅτι Μαάρβας οὐκ εἴη κύριος ἄνευ τῆς αὑτοῦ γνώμης διδοὺς τὴν ἀσφάλειαν
+      τοῖς ὑποσπόνδοις
+  - id: trasimene-punic-faith
+    says: Livy says the promise was kept with Punic faith and all were thrown into chains.
+    role: supporting
+    source: livy
+    at: "22.6.12"
+    quote: quae Punica religione servata fides ab Hannibale est, atque in vincula omnes coniecti
+  - id: trasimene-allies
+    says:
+      Polybius records Hannibal releasing the Italian allies without ransom, saying he had come to
+      fight Rome for Italian freedom.
+    role: supporting
+    source: polybius
+    at: "3.85.4"
+    quote: ὅτι πάρεστι πολεμήσων οὐκ Ἰταλιώταις, ἀλλὰ Ῥωμαίοις ὑπὲρ τῆς Ἰταλιωτῶν ἐλευθερίας
+  - id: trasimene-latins-released
+    says: Livy records Hannibal then releasing without ransom the prisoners of the Latin name and
+      putting the Romans in chains.
+    role: supporting
+    source: livy
+    at: "22.7.5"
+    quote: captivorum qui Latii nominis essent sine pretio dimissis, Romanis in vincula datis

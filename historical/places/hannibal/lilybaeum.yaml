@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Lilybaeum, the Roman base at the western tip of Sicily where Tiberius Sempronius gathered an army
+  and fleet against Africa in 218 BCE.
+types: [settlement, port]
+names:
+  - form: Lilybaeum
+    lang: la
+    script: Latn
+    cite:
+      - id: lilybaeum-name-livy
+        says: Livy records Hiero warning the praetor to hold Lilybaeum with a strong garrison.
+        source: livy
+        at: "21.49.6"
+        quote: ut Lilybaeum firmo teneret praesidio
+  - form: Λιλύβαιον
+    lang: grc
+    script: Grek
+    cite:
+      - id: lilybaeum-name-polybius
+        says: Polybius records Tiberius making his preparations at Λιλύβαιον.
+        source: polybius
+        at: "3.41.3"
+        quote: τοιαύτας ἐποιεῖτο παρασκευὰς ἐν τῷ Λιλυβαίῳ
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [12.437452, 37.798405]
+    notes:
+      An approximate placement at the ancient town under modern Marsala, which Pleiades identifies
+      as Lilybaeum.
+    cite:
+      - id: lilybaeum-identification
+        says: Pleiades locates the ancient place (Lilybaeum) at the site whose modern coordinate
+          Wikidata records; the point is the Wikidata coordinate (CC0), an approximate placement of
+          the ancient town, not a surveyed site.
+        basis: interpretation
+        attributed_to: Pleiades
+        sources:
+          - source: pleiades
+            at: place 462281 (Lilybaeum), reprLatLong, dump 2026-10-21
+          - source: wikidata
+            at: Q2260811 (P625), revision 2522185066
+modern:
+  - form: Marsala
+    lang: it
+    script: Latn
+    note: Modern town on the site, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q2260811
+    license: CC0-1.0
+  - system: pleiades
+    id: "462281"
+    license: CC BY 3.0

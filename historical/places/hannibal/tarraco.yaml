@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Tarraco (Ταρράκων), the coastal town north of the Ebro where Gnaeus Scipio wintered in 218–217 BCE
+  and from which he sailed to beat Hasdrubal's fleet at the Ebro mouth in 217 BCE.
+types: [settlement, port]
+names:
+  - form: Tarraco
+    lang: la
+    script: Latn
+    cite:
+      - id: tarraco-name-livy
+        says: Livy records Gnaeus Scipio returning to Tarraco for the winter.
+        source: livy
+        at: "21.61.11"
+        quote: Tarraconem in hiberna reditum est
+  - form: Ταρράκων
+    lang: grc
+    script: Grek
+    cite:
+      - id: tarraco-name-polybius
+        says:
+          Polybius records Gnaeus putting to sea from Ταρράκων and reaching the Ebro on the second
+          day.
+        source: polybius
+        at: "3.95.5"
+        quote: κατῆρε δευτεραῖος ἐκ Ταρράκωνος εἰς τοὺς περὶ τὸν Ἴβηρα ποταμὸν τόπους
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [1.252777777, 41.1175]
+    notes:
+      An approximate placement at modern Tarragona, which Pleiades identifies with the ancient town.
+      The town of 217 BCE is not drawn.
+    cite:
+      - id: tarraco-identification
+        says: Pleiades locates the ancient place (Col. Tarraco) at the site whose modern coordinate
+          Wikidata records; the point is the Wikidata coordinate (CC0), an approximate placement of
+          the ancient town, not a surveyed site.
+        basis: interpretation
+        attributed_to: Pleiades
+        sources:
+          - source: pleiades
+            at: place 246349 (Col. Tarraco), reprLatLong, dump 2026-10-21
+          - source: wikidata
+            at: Q15088 (P625), revision 2527099724
+modern:
+  - form: Tarragona
+    lang: ca
+    script: Latn
+    note: Modern city on the site, recorded for orientation.
+external_ids:
+  - system: wikidata
+    id: Q15088
+    license: CC0-1.0
+  - system: pleiades
+    id: "246349"
+    license: CC BY 3.0

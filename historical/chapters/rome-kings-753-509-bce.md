@@ -49,7 +49,11 @@ reckonings and labels both:
   Priscus 615/614, Servius 577/576, Superbus 533/532, and the first consuls at
   the beginning of the 68th Olympiad, 508/507. The accession events use these.
 - Events inside a reign (the Janus shrine, Alba Longa, Ostia, the census,
-  Gabii) are dated to the whole reign as a window.
+  Gabii, the Sabine war and Tarquinius's move to Rome) are dated to the whole
+  reign as a window. The window joins Livy's reign to Dionysius's years, so
+  under `rfd/0002/CONVENTIONAL_DATES.adoc` it is an interpretation, attributed
+  to the editors' reckoning. Lucretia's death, placed in the year Dionysius
+  gives for the end of the kings, is the same.
 - Alternatives are kept as `alternative` claims: Dionysius 752/751, Fabius
   748/747, Cincius 729/728 and Timaeus 814/813 for the founding; Varro's 509
   for the first consuls; Romulus's first year for the seizure of the Sabine

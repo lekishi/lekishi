@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/territory.schema.json
+summary: "The places the sources record Qin holding after it took 遼東 and 代 and set up the 會稽 commandery in 222 BCE."
+controller: qin-state
+date:
+  value: "222 BCE"
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: "二十五年（得燕王喜……虜代王嘉……置會稽郡）"
+places:
+  - place: xianyang
+    role: seat
+  - place: yingchuan
+    gained: han-annexation-yingchuan
+  - place: handan
+    gained: handan-fall-228
+  - place: dongyang-zhao
+    gained: handan-fall-228
+  - place: ji-yan
+    gained: ji-fall-226
+  - place: daliang
+    gained: daliang-flood-225
+  - place: chen
+    gained: chu-campaign-224
+  - place: pingyu
+    gained: chu-campaign-224
+  - place: liaodong
+    gained: liaodong-fall-222
+  - place: dai
+    gained: dai-fall-222
+  - place: kuaiji-jun
+    gained: kuaiji-commandery-222
+cite:
+  - says: "The annals record 王賁 attacking 遼東 and capturing the king of Yan, turning back to capture the king of Dai, and 王翦 settling the Chu lands south of the 江 and setting up the 會稽 commandery, in 二十五年 (222 BCE)."
+    source: shiji
+    at: "卷六 秦始皇本紀 二十五年（攻燕遼東……置會稽郡）"
+    quote: "大興兵，使王賁將，攻燕遼東，得燕王喜。還攻代，虜代王嘉。王翦遂定荊江南地；降越君，置會稽郡。"
+notes: "The next change the annals record is the surrender of Qi in 221 BCE."

@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/territory.schema.json
+summary: "壽春 and 淮南, which the sources record Chu holding in its last two years, while 項燕 raised 昌平君 as king and resisted Qin south of the 淮."
+controller: chu-state
+date:
+  value: "224 BCE..223 BCE"
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: "二十三年（反秦於淮南）; 王負芻五年（虜楚王負芻）"
+places:
+  - place: shouchun
+    role: seat
+  - place: huainan
+    note: "Named and not drawn: the sources state no site for 淮南."
+    cite:
+      - says: "The annals record 項燕 making 昌平君 king of Jing and rising against Qin in 淮南."
+        source: shiji
+        at: "卷六 秦始皇本紀 二十三年（反秦於淮南）"
+        quote: "荊將項燕立昌平君為荊王，反秦於淮南。"
+cite:
+  - says: "The hereditary house of Chu records Qin breaking Chu and capturing king 負芻 in his fifth year (223 BCE)."
+    source: shiji-six-states
+    at: "卷四十 楚世家 王負芻五年（虜楚王負芻）"
+    quote: "五年，秦將王翦、蒙武遂破楚國，虜楚王負芻"
+  - says: "The annals record the king of Chu captured in their 二十三年 (224 BCE) notice, before 項燕 raised 昌平君."
+    role: conflicting
+    source: shiji
+    at: "卷六 秦始皇本紀 二十三年（虜荊王）"
+    quote: "取陳以南至平輿，虜荊王。"
+dispute:
+  status: disputed
+  summary: "The six-states table, the hereditary house of Chu and the comprehensive mirror date the capture of king 負芻 to 223 BCE; the annals put it in 224 BCE, after which 項燕 held 淮南 under 昌平君 until 223 BCE. The snapshot follows the 223 BCE reading for the end of Chu, as the event chu-king-captured does."
+notes: "No source names where the king was captured, so 壽春 is not said to have fallen in a given year; it is listed as the seat until the end of Chu."

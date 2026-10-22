@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/territory.schema.json
+summary: "大梁, Wei's capital, which the sources record Wei holding until 王賁 flooded it in 225 BCE."
+controller: wei-state
+date:
+  value: "229 BCE..226 BCE"
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: "二十二年（引河溝灌大梁）"
+places:
+  - place: daliang
+    role: seat
+cite:
+  - says: "The annals record 王賁 flooding 大梁 and the king of Wei, inside it, asking to surrender in 二十二年 (225 BCE)."
+    source: shiji
+    at: "卷六 秦始皇本紀 二十二年（引河溝灌大梁）"
+    quote: "王賁攻魏，引河溝灌大梁，大梁城壞，其王請降，盡取其地。"
+notes: "The window opens with the chapter in 229 BCE and ends the year before 大梁 passes to Qin. Wei held more than its capital; the snapshot lists only what the sources name."

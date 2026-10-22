@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/territory.schema.json
+summary: "The places the sources record Qin holding after Zhao's capital fell in 228 BCE: 咸陽, the 潁川 commandery, 邯鄲 and the Zhao land of 東陽."
+controller: qin-state
+date:
+  value: "228 BCE..227 BCE"
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: "十九年（盡定取趙地東陽，得趙王）"
+places:
+  - place: xianyang
+    role: seat
+  - place: yingchuan
+    gained: han-annexation-yingchuan
+  - place: handan
+    gained: handan-fall-228
+    cite:
+      - says: "The hereditary house of Zhao records 邯鄲 becoming Qin's in the tenth month of the king's eighth year."
+        source: shiji-six-states
+        at: "卷四十三 趙世家 幽繆王八年（邯鄲爲秦）"
+        quote: "八年十月，邯鄲爲秦。"
+  - place: dongyang-zhao
+    gained: handan-fall-228
+    note: "Named and not drawn: the sources state no site for the Zhao land of 東陽."
+cite:
+  - says: "The annals record 王翦 and 羌瘣 taking all the Zhao land of 東陽 and capturing the king of Zhao in 十九年 (228 BCE)."
+    source: shiji
+    at: "卷六 秦始皇本紀 十九年（盡定取趙地東陽）"
+    quote: "王翦、羌瘣盡定取趙地東陽，得趙王。"
+notes: "The window runs to the year before the next change the annals record (the fall of 薊 in 226 BCE). Where the sources disagree on the end of Zhao, the event handan-fall-228 carries the dispute; this snapshot follows the city's fall."

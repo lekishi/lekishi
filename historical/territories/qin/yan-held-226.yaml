@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/territory.schema.json
+summary: "遼東, where the king of Yan withdrew when 薊 fell in 226 BCE and ruled until Qin captured him in 222 BCE."
+controller: yan-state
+date:
+  value: "226 BCE..223 BCE"
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: "二十一年（燕王東收遼東而王之）; 二十五年（攻燕遼東，得燕王喜）"
+places:
+  - place: liaodong
+    role: seat
+cite:
+  - says: "The annals record the king of Yan withdrawing east to 遼東 and ruling there in 二十一年 (226 BCE)."
+    source: shiji
+    at: "卷六 秦始皇本紀 二十一年（燕王東收遼東而王之）"
+    quote: "燕王東收遼東而王之。"
+  - says: "The annals record 王賁 attacking 遼東 and capturing the king of Yan in 二十五年 (222 BCE)."
+    role: supporting
+    source: shiji
+    at: "卷六 秦始皇本紀 二十五年（攻燕遼東，得燕王喜）"
+    quote: "大興兵，使王賁將，攻燕遼東，得燕王喜。"
+notes: "遼東 was Yan's before the withdrawal, so no gaining record is named; the snapshot records it as the king's seat. The window ends the year before Qin takes it."

@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=../../schema/territory.schema.json
+summary: "The places the sources record Qin holding after its army entered 臨淄 and Qi surrendered in 221 BCE, the last of the six states."
+controller: qin-state
+date:
+  value: "221 BCE"
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: "二十六年（得齊王建）"
+places:
+  - place: xianyang
+    role: seat
+  - place: yingchuan
+    gained: han-annexation-yingchuan
+  - place: handan
+    gained: handan-fall-228
+  - place: dongyang-zhao
+    gained: handan-fall-228
+  - place: ji-yan
+    gained: ji-fall-226
+  - place: daliang
+    gained: daliang-flood-225
+  - place: chen
+    gained: chu-campaign-224
+  - place: pingyu
+    gained: chu-campaign-224
+  - place: liaodong
+    gained: liaodong-fall-222
+  - place: dai
+    gained: dai-fall-222
+  - place: kuaiji-jun
+    gained: kuaiji-commandery-222
+  - place: linzi
+    gained: linzi-fall-221
+    cite:
+      - says: "The hereditary house of Qi records Qin's army entering 臨淄 with no one daring to resist."
+        source: shiji-six-states
+        at: "卷四十六 田敬仲完世家 王建四十四年（秦兵卒入臨淄）"
+        quote: "五國已亡，秦兵卒入臨淄，民莫敢格者。"
+cite:
+  - says: "The annals record 王賁 attacking Qi from Yan in the south and capturing the king of Qi in 二十六年 (221 BCE)."
+    source: shiji
+    at: "卷六 秦始皇本紀 二十六年（得齊王建）"
+    quote: "秦使將軍王賁從燕南攻齊，得齊王建。"
+notes: "The last snapshot of the chapter's window. The 36 commanderies of the same or the next year are not listed: the annals name no seat for them."

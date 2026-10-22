@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/territory.schema.json
+summary: "邯鄲, Zhao's capital, which the sources record Zhao holding under Qin's siege in 229 BCE, the year before it fell."
+controller: zhao-state
+date:
+  value: "229 BCE"
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: "十八年（端和圍邯鄲城）"
+places:
+  - place: handan
+    role: seat
+cite:
+  - says: "The annals record Qin's three columns attacking Zhao and 楊端和 besieging 邯鄲 in 十八年 (229 BCE)."
+    source: shiji
+    at: "卷六 秦始皇本紀 十八年（端和圍邯鄲城）"
+    quote: "王翦將上地，下井陘，端和將河內，羌瘣伐趙，端和圍邯鄲城。"
+  - says: "The hereditary house of Zhao records 邯鄲 becoming Qin's only in the tenth month of the king's eighth year (228 BCE)."
+    role: supporting
+    source: shiji-six-states
+    at: "卷四十三 趙世家 幽繆王八年（邯鄲爲秦）"
+    quote: "八年十月，邯鄲爲秦。"
+notes: "One year, because the chapter opens in 230 BCE and 邯鄲 passes to Qin in 228 BCE; in the year a place changes hands, the gaining state's snapshot holds it. Zhao held far more than its capital; the snapshot lists only what the sources name."

@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/territory.schema.json
+summary: "The places the sources record Chu holding before Qin's 224 BCE campaign: its capital 壽春, and 陳 and 平輿, which Qin then took."
+controller: chu-state
+date:
+  value: "229 BCE..225 BCE"
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: "考烈王二十二年（楚東徙都壽春）; 二十三年（取陳以南至平輿）"
+places:
+  - place: shouchun
+    role: seat
+    cite:
+      - says: "The hereditary house of Chu records Chu moving its capital east to 壽春 in 考烈王's twenty-second year (241 BCE)."
+        source: shiji-six-states
+        at: "卷四十 楚世家 考烈王二十二年（楚東徙都壽春）"
+        quote: "楚東徙都壽春，命曰郢。"
+  - chen
+  - pingyu
+cite:
+  - says: "The annals record Qin taking the land from 陳 south to 平輿 from Chu in 二十三年 (224 BCE)."
+    source: shiji
+    at: "卷六 秦始皇本紀 二十三年（取陳以南至平輿）"
+    quote: "取陳以南至平輿，虜荊王。"
+notes: "The window opens with the chapter in 229 BCE and ends the year before 陳 and 平輿 pass to Qin. Qin's raid of 226 BCE took ten cities the sources do not name, so none is removed here. The annals' 226 BCE notice moves 昌平君 to a 郢 the chapter does not identify."

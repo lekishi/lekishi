@@ -78,7 +78,9 @@ labelled `interpretation` costs nothing but noise. A date wrongly labelled
 
 `conventional` joins the claim-basis vocabulary in contract *v1*, beside the
 journey kind. Under v0's rule, extending a vocabulary means a new contract
-version. v1 is already open, and v0 documents stay valid v1 documents.
+version. v1 is already open, and v0 documents stay valid v1 documents. It
+lands on the v1 that draft PR #53 lays out. The claim schema change goes in
+`historical/v1/schema`, and the vectors go in `historical/v1/vectors`.
 
 A `conventional` claim:
 

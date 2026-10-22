@@ -78,9 +78,10 @@ Proposed to the owner, not built:
 
 ## Shared ids
 
-`carthage` and `gades` are byte-for-byte copies of the Hannibal thread's files
-(PR #40), with the sources they cite (`livy`, `polybius`), so the branches merge
-cleanly. No record of this chapter reaches `gades` (Pliny's Gades is named in
+`carthage` and `gades` are the Hannibal chapter's records (PR #40), with the
+sources they cite (`livy`, `polybius`). The Carthaginian state is the Hannibal
+chapter's `carthage-state` too, with the account's opening line folded in as a
+supporting cite on its Greek name. No record of this chapter reaches `gades` (Pliny's Gades is named in
 his text, not placed), so it is carried only to keep the copy whole; the Hanno and Pliny name forms live in the events that cite them.
 `pliny-natural-history` is the merged record the Nile thread wrote for both
 chapters, copied byte for byte. `pleiades` is

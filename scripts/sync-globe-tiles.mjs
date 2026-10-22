@@ -14,6 +14,11 @@
  * leaves the tiles in place, so a dev-server start or a rebuild does not
  * repaint them. A changed builder repaints them all.
  *
+ * Cloudflare Pages cannot cache arbitrary paths. Its SvelteKit build cache does
+ * preserve `node_modules/.cache/imagetools`, so Pages builds keep a stamped copy
+ * there and restore it before applying the same freshness check. Other builds
+ * never read or write that bridge.
+ *
  * The builder needs Python 3 with numpy and Pillow. When the system Python
  * lacks them (system Pythons may refuse global installs), a private virtual
  * environment under `.cache/globe/venv` gets them from the package index. A
@@ -25,6 +30,7 @@
 import { spawnSync } from "node:child_process"
 import { createHash } from "node:crypto"
 import {
+  cpSync,
   existsSync,
   mkdirSync,
   readdirSync,
@@ -41,6 +47,11 @@ const builderDirectory = path.join(repoRoot, "scripts", "globe")
 const builder = path.join(builderDirectory, "build-tiles.py")
 const destination = path.join(repoRoot, "static", "globe")
 const cache = path.join(repoRoot, ".cache", "globe")
+// Pages has no custom cache-path setting, but its SvelteKit cache preserves
+// `node_modules/.cache/imagetools`. Keep our generated output in a namespaced
+// child so Git-connected builds can restore it without owning imagetools' data.
+const pagesCache = path.join(repoRoot, "node_modules", ".cache", "imagetools", "lekishi-globe")
+const pagesDestination = path.join(pagesCache, "tiles")
 
 // Retire the generated runtime in already-used checkouts before SvelteKit
 // copies static/. Otherwise the invariant rejects the obsolete worker scripts.
@@ -70,12 +81,41 @@ function inputsHash() {
 
 const stamp = inputsHash()
 const stampFile = path.join(cache, STAMP)
+const pagesStampFile = path.join(pagesCache, STAMP)
+
+function tilesAreCurrent(stampPath, tiles) {
+  return (
+    existsSync(stampPath) &&
+    readFileSync(stampPath, "utf8") === stamp &&
+    existsSync(path.join(tiles, "tileset.json"))
+  )
+}
+
+function cacheForPages() {
+  if (process.env.CF_PAGES !== "1" || tilesAreCurrent(pagesStampFile, pagesDestination)) return
+
+  rmSync(pagesCache, { recursive: true, force: true })
+  mkdirSync(pagesCache, { recursive: true })
+  cpSync(destination, pagesDestination, { recursive: true })
+  // Write the stamp last: an interrupted copy must never look restorable.
+  writeFileSync(pagesStampFile, stamp)
+  console.log("globe tiles saved in the Cloudflare Pages build cache")
+}
 
 if (
-  existsSync(stampFile) &&
-  readFileSync(stampFile, "utf8") === stamp &&
-  existsSync(path.join(destination, "tileset.json"))
+  process.env.CF_PAGES === "1" &&
+  !tilesAreCurrent(stampFile, destination) &&
+  tilesAreCurrent(pagesStampFile, pagesDestination)
 ) {
+  rmSync(destination, { recursive: true, force: true })
+  cpSync(pagesDestination, destination, { recursive: true })
+  mkdirSync(cache, { recursive: true })
+  writeFileSync(stampFile, stamp)
+  console.log("globe tiles restored from the Cloudflare Pages build cache")
+}
+
+if (tilesAreCurrent(stampFile, destination)) {
+  cacheForPages()
   console.log("globe tiles already built in static/globe")
   process.exit(0)
 }
@@ -126,3 +166,4 @@ if (!run(python, ["-I", builder])) {
 
 mkdirSync(cache, { recursive: true })
 writeFileSync(stampFile, stamp)
+cacheForPages()

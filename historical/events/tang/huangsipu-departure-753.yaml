@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The embassy's four ships leave 蘇州黃泗浦 together on 天寶十二載十一月十五日 (753); a pheasant flies before the
+  first ship, which drops anchor, and the ships set out the next day.
+types: [journey]
+part_of: [return-voyage-753]
+date:
+  value: 753-11-15
+  calendar: chinese_lunisolar
+  as_written: 十五日壬子，四舟同發
+  cite:
+    - id: huangsipu-departure-time
+      says:
+        The biography records the four ships leaving together on 天寶十二載十一月十五日, the first ship dropping
+        anchor after a pheasant flew before it, and the ships setting out on the 16th.
+      source: toseiden
+      at: 十五日壬子，四舟同發。有一雉飛第一舟前，仍下矴留。十六日發
+places:
+  - place: huangsipu
+    role: site
+notes:
+  The passage names the ships, not individuals, so no participants are recorded; who sailed on which
+  ship comes from the passages the journeys cite. The return voyage's own record carries the span from
+  this departure to 鑒眞's entry to 大宰府.
+cites:
+  places:
+    - id: huangsipu-departure-place
+      says:
+        The biography has 鑒眞 go down by boat to 蘇州黃泗浦, and next records the four ships leaving
+        together; it names no other place of departure.
+      source: toseiden
+      at: 訖，乘舟下至蘇州黃［泗浦］; 十五日壬子，四舟同發

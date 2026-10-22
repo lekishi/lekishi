@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=../../schema/journey.schema.json
+title: 吉備真備's return voyage, 753
+summary: >-
+  吉備真備's ship leaves 黃泗浦 with the embassy's other three, reaches 益久嶋 on 十二月七日 by the chronicle's
+  report, and after leaving the island drifts to 紀伊國牟漏埼.
+travellers:
+  - actor: kibi-no-makibi
+    role: leader
+stops:
+  - huangsipu-departure-753
+  - event: kibi-yaku-arrival-753
+    by: sea
+  - event: kibi-drift-753
+    by: sea
+    driven: true
+    cite:
+      id: kibi-ship-drifts-to-murozaki
+      says: After leaving 益久嶋, 吉備真備's ship drifted and reached 紀伊國牟漏埼.
+      source: shoku-nihongi
+      at: 卷第十九 天平勝寶六年正月癸丑
+      quote: 自是之後。自益久嶋進發。漂蕩着紀伊國牟漏埼。
+cite:
+  - id: kibi-voyage-sequence
+    says: >-
+      The chronicle's report records 吉備真備's ship reaching 益久嶋 on the previous year's 十二月七日 and,
+      after leaving the island, drifting to 紀伊國牟漏埼.
+    source: shoku-nihongi
+    at: 卷第十九 天平勝寶六年正月癸丑
+    quote: 入唐副使從四位上吉備朝臣眞備船。以去年十二月七日。來着益久嶋。自是之後。自益久嶋進發。漂蕩着紀伊國牟漏埼。
+  - id: kibi-voyage-departure
+    says: >-
+      The biography records 普照 boarding 吉備副使's ship on 十一月十三日 and the four ships leaving together on
+      the 15th.
+    source: toseiden
+    at: 十三日，普照師從越餘姚郡來，乘吉備副使舟。十五日壬子，四舟同發
+    role: supporting
+notes: >-
+  A separate journey from 鑒眞's, not a branch merged into it: the chronicle's 益久嶋 and the biography's
+  益救島 are one place record, but the sources do not say the two ships' calls there were one, so the
+  stops stay two events. The drift to 牟漏埼 is drawn as a drift, not a course.

@@ -1,0 +1,55 @@
+# yaml-language-server: $schema=../../schema/journey.schema.json
+title: 鑒眞's journey to Nara, 753–754
+summary: >-
+  鑒眞 leaves 龍興寺 in 揚州 and goes down by boat to 黃泗浦, sails with the returning embassy on the second
+  ship by 阿兒奈波島 and 益救島 to its landfall at 秋妻屋浦, and travels by 大宰府 and 難波 to 東大寺.
+travellers:
+  - actor: jianzhen
+    role: leader
+stops:
+  - longxing-departure-753
+  - event: huangsipu-departure-753
+    by: river
+    cite:
+      id: jianzhen-to-huangsipu-by-boat
+      says: After the ordinations at the river bank, 鑒眞 went down by boat to 蘇州黃泗浦.
+      source: toseiden
+      at: 訖，乘舟下至蘇州黃［泗浦］
+  - event: ajinawa-arrival-753
+    by: sea
+  - event: yaku-arrival-753
+    by: sea
+    toward: tane
+    cite:
+      id: jianzhen-second-ship-toward-tane
+      says: The second ship set out for 多禰島 on 十二月六日 and reached 益救島 on the 7th.
+      source: toseiden
+      at: 十二月六日南風起，第一舟着石不動，第二舟發向多禰去。七日，至益救島
+  - yaku-departure-753
+  - event: akimeya-landfall-753
+    by: sea
+  - dazaifu-entry-753
+  - naniwa-754
+  - todaiji-installation-754
+cite:
+  - id: jianzhen-to-nara-sequence
+    says: >-
+      The biography narrates 鑒眞's departure from 龍興寺, the four ships leaving together, the second
+      ship's course by 阿兒奈波島 and 益救島 to its landfall at 秋妻屋浦, and his entries to 大宰府, 難波 and the
+      capital, in this order.
+    source: toseiden
+    at: 天寶十二載十月［十］九日戌時 … 天平勝寶六年甲午 二月四日，入京
+  - id: jianzhen-aboard-otomo-ship
+    says: >-
+      The biography records 大伴古麻呂 secretly taking 鑒眞 and the monks aboard his own ship on 十一月十日,
+      and, after the second ship's landfall, 鑒眞 entering 大宰府; it does not say in so many words that
+      大伴古麻呂's ship was the second.
+    source: toseiden
+    at: 十一月十日丁未夜，大伴副使竊招和上及衆僧納己舟; 廿日乙酉午時，第二舟著薩摩國阿多郡秋妻屋浦。廿六日辛卯，延慶師引和上入［太］宰府
+    role: supporting
+notes: >-
+  Replaces the map's hand-written line for 鑒眞's voyage. The stops are the chapter's own events at
+  their own places; the line between them is schematic and asserts no path. The two stops at 益救島 are
+  the arrival and the departure, so the map draws one vertex there. 多禰島 is the leg's intended
+  destination and is named, never drawn. How he went from 秋妻屋浦 to 大宰府 and on is not stated, so
+  those legs carry no mode.

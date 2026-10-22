@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/journey.schema.json
+title: 藤原清河's return voyage, 753
+summary: >-
+  The ambassador 藤原清河's ship leaves 黃泗浦 with the embassy's other three and is driven by contrary
+  winds to 驩州 on Tang's southern frontier, where he alone escapes and stays in Tang.
+travellers:
+  - actor: fujiwara-no-kiyokawa
+    role: leader
+stops:
+  - huangsipu-departure-753
+  - event: kiyokawa-drift-753
+    by: sea
+    driven: true
+    cite:
+      id: kiyokawa-ship-driven-to-huanzhou
+      says: On the return, 藤原清河's ship was driven by contrary winds to 驩州 on Tang's southern frontier.
+      source: shoku-nihongi
+      at: 卷第卅五 寶龜十年二月乙亥
+      quote: 廻日遭逆風漂著唐國南邊驩州。
+cite:
+  - id: kiyokawa-voyage-sequence
+    says: >-
+      The chronicle's 779 notice records that 藤原清河 went to Tang as 大使 in 勝寶五年 and that on the return
+      his ship was driven to 驩州.
+    source: shoku-nihongi
+    at: 卷第卅五 寶龜十年二月乙亥
+    quote: 勝寳五年。爲大使入唐。廻日遭逆風漂著唐國南邊驩州。
+  - id: kiyokawa-voyage-departure
+    says: >-
+      The biography names 藤原清河 as the embassy's 大使, who said the embassy had its own four ships and
+      who assigned 鑒眞's party among them, and records the four ships leaving together on 十一月十五日.
+    source: toseiden
+    at: 日本國使大使特進藤原朝臣清河 … 弟子等自在載國信物舟四舶; 廿三日庚寅，大使處分; 十五日壬子，四舟同發
+    role: supporting
+notes: >-
+  No source says which of the four ships was his, so the first ship's stops at 阿兒奈波島 are not his.
+  驩州 is not located, so no leg is drawn: the journey is a list and a card.

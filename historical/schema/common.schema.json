@@ -29,22 +29,26 @@
       }
     },
     "claim": {
-      "description": "One claim about the field this cite is attached to. `says` is what the reader is told the source says. Give one source inline (source, at, quote) or several under `sources`. `basis: interpretation` is an interpretation advanced in cited scholarship and names who advances it in `attributed_to`.",
+      "description": "One claim about the field this cite is attached to. `says` is what the reader is told the source says. Give one source inline (source, at, quote) or several under `sources`. `basis: interpretation` is an interpretation advanced in cited scholarship and names who advances it in `attributed_to`. `basis: conventional` is a date that standard reference chronologies agree on, for a source that gives a sequence rather than a calendar date; it names the conversion in `convention` and cites the passage and a reference under `sources`.",
       "type": "object",
       "required": ["says"],
       "additionalProperties": false,
       "properties": {
         "id": { "$ref": "#/$defs/name" },
         "says": { "$ref": "#/$defs/text" },
-        "basis": { "enum": ["attested", "interpretation"] },
+        "basis": { "enum": ["attested", "interpretation", "conventional"] },
         "role": { "$ref": "../v0/schema/common.schema.json#/$defs/claim/properties/role" },
         "attributed_to": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "convention": { "type": "string", "minLength": 1, "maxLength": 200 },
         "source": { "$ref": "#/$defs/name" },
         "at": { "type": "string", "minLength": 1, "maxLength": 300 },
         "locator": { "$ref": "../v0/schema/common.schema.json#/$defs/locator/properties/kind" },
         "quote": { "type": "string", "maxLength": 600 },
         "sources": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/citation" } }
       },
+      "if": { "properties": { "basis": { "const": "conventional" } }, "required": ["basis"] },
+      "then": { "required": ["convention", "sources"] },
+      "else": { "not": { "required": ["convention"] } },
       "oneOf": [
         { "required": ["source", "at"], "not": { "required": ["sources"] } },
         {

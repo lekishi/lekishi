@@ -9,7 +9,7 @@
   "properties": {
     "contract": {"$ref": "common.schema.json#/$defs/contract"},
     "document": {"const": "record"},
-    "kind": {"enum": ["place", "actor", "event", "relationship", "territory", "story"]},
+    "kind": {"enum": ["place", "actor", "event", "relationship", "territory", "story", "journey"]},
     "record_id": {"$ref": "common.schema.json#/$defs/record_id"},
     "created_at": {"$ref": "common.schema.json#/$defs/timestamp"},
     "external_ids": {"type": "array", "maxItems": 30, "items": {"$ref": "common.schema.json#/$defs/external_id"}},
@@ -40,6 +40,10 @@
     {
       "if": {"properties": {"kind": {"const": "story"}}},
       "then": {"properties": {"revisions": {"items": {"properties": {"content": {"$ref": "kinds.schema.json#/$defs/story_content"}}}}}}
+    },
+    {
+      "if": {"properties": {"kind": {"const": "journey"}}},
+      "then": {"properties": {"revisions": {"items": {"properties": {"content": {"$ref": "kinds.schema.json#/$defs/journey_content"}}}}}}
     }
   ],
   "$defs": {

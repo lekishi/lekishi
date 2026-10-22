@@ -26,6 +26,7 @@ const VECTOR_FILES: Record<string, number> = {
   claims: 12,
   documents: 42,
   geometry: 28,
+  journeys: 21,
   names: 18,
   ordering: 18,
   publication: 23,
@@ -226,7 +227,7 @@ describe("the vector suite", () => {
 
     // The adversarial suite is the contract's regression surface: every vector
     // file is loaded here, and the total is pinned so a case cannot be dropped.
-    expect(total).toBe(220)
+    expect(total).toBe(241)
   })
 
   it("ships a schema for every document kind the contract has", () => {

@@ -83,14 +83,17 @@ notes say how it was converted.
   Ancient charcoal dates for Serpent Mound appear only in its dispute.
 - **Long Count dates** are written as Julian years with the Long Count in
   `as_written`, as the source reads them; neither stela's source names the
-  correlation it uses.
+  correlation it uses. Contract v1 will add a `mesoamerican_long_count`
+  calendar with a correlation field (decided 2026-10-22), and the two stelae
+  move to it then.
 - A span whose ends bound the event is `mode: window`; a span the event filled
   is `mode: duration`.
 
-The notation cannot yet mark a date as approximate or give a century
-precision, though contract v0 can store both. Every "about" date is therefore
-written as an exact year or range, and the record's notes say it is
-approximate. This is the first question for the owner in the feasibility note.
+- **"About" dates** carry `~` on each approximate endpoint (since 2026-10-22),
+  so "ca. 1200–400 BCE" is `~1200 BCE..~400 BCE`. The support does not move;
+  the endpoint is only described as approximate. Xihuatoxtla's "by 8,700 cal
+  BP" is a latest date the notation can now write as `before`, but the atlas
+  cannot yet draw an open-ended occurrence, so it stays a single year.
 
 ## Sources
 

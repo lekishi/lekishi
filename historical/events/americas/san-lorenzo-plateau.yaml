@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  San Lorenzo, the largest and most complex Early Formative site in Mexico, rises on a massive
+  artificially leveled plateau in 3450–2850 BP; basalt for its thrones and colossal heads is brought from
+  about 80 km away.
+types:
+  - process
+date:
+  value: 1501 BCE..901 BCE
+  mode: duration
+  calendar: julian
+  as_written: 3450-2850 BP
+  cite:
+    - id: san-lorenzo-time
+      says: The nomination dates San Lorenzo to 3450–2850 BP.
+      basis: interpretation
+      attributed_to: Poverty Point World Heritage nomination (2013)
+      source: poverty-point-nomination
+      at: PDF p. 134, 3.2 Comparative analysis (San Lorenzo)
+places:
+  - place: san-lorenzo-tenochtitlan
+    role: site
+participants:
+  - actor: olmec-culture
+    role: participant
+notes:
+  The basalt source is not named in the cited text, so no route or quarry is drawn. The source gives
+  the age in years before present (BP, counted back from 1950); the date converts it to civil years without
+  a year zero (N BP is N − 1949 BCE), keeps the source's own figures in as_written, and adds no precision
+  of its own.
+cites:
+  summary:
+    id: san-lorenzo-basalt
+    says:
+      The nomination states that the basalt blocks of San Lorenzo's altars or thrones and colossal
+      heads were transported about 80 km.
+    source: poverty-point-nomination
+    at: PDF p. 134, 3.2 Comparative analysis (San Lorenzo)

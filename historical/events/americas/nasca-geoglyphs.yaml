@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  People of Peru's coastal desert scrape lines and geoglyphs into the ground over about 450 km²
+  across a thousand years, 2450–1450 BP; most of them, including 70 figures of animals, plants and objects,
+  date to the Nasca phase of 2150–1450 BP.
+types:
+  - process
+date:
+  value: 501 BCE..500
+  mode: duration
+  calendar: julian
+  as_written: a 1,000-year period from 2450 to 1450 BP
+  cite:
+    - id: nasca-time
+      says:
+        The nomination dates the geoglyphs to a 1,000-year period from 2450 to 1450 BP, most of them
+        to the Nasca phase, 2150–1450 BP.
+      basis: interpretation
+      attributed_to: Poverty Point World Heritage nomination (2013)
+      source: poverty-point-nomination
+      at: PDF p. 130, 3.2 Comparative analysis (Nasca)
+places:
+  - place: nazca-lines
+    role: site
+    note: The geoglyphs cover about 450 km², which the record does not draw.
+notes:
+  The span runs past this chapter's end at 100 CE; it is included because it begins well before.
+  The source gives the age in years before present (BP, counted back from 1950); the date converts it
+  to civil years without a year zero (N BP is N − 1949 BCE), keeps the source's own figures in as_written,
+  and adds no precision of its own.

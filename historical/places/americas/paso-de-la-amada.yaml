@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Paso de la Amada, a site in the Soconusco region of Pacific coastal Chiapas, Mexico.
+types:
+  - settlement
+names:
+  - form: Paso de la Amada
+    lang: es
+    script: Latn
+    cite:
+      id: paso-de-la-amada-name
+      says: Hill, Blake and Clark place Paso de la Amada in the Soconusco region of Pacific coastal Chiapas.
+      source: hill-1998-paso-de-la-amada
+      at: abstract
+at:
+  - interpretation: approximate_point
+    precision: site
+    point:
+      - -92.49072222222222
+      - 14.876527777777778
+    notes: The coordinate marks the site; the ball court is not placed separately.
+    cite:
+      id: paso-de-la-amada-point
+      says:
+        The point is the site coordinate recorded in Wikidata (CC0) for Q2309062; it marks the archaeological
+        site as a whole and no feature within it.
+      basis: interpretation
+      attributed_to: Wikidata contributors
+      source: wikidata
+      at: Q2309062 (P625), revision 2549825276
+external_ids:
+  - system: wikidata
+    id: Q2309062

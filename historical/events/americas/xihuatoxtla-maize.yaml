@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Starch grains and phytoliths from the Xihuatoxtla shelter in the Central Balsas Valley of Guerrero
+  show maize present by 8,700 calendar years ago, with an early domesticated squash.
+types:
+  - occurrence
+date:
+  value: 6751 BCE
+  calendar: julian
+  as_written: by 8,700 calendrical years ago (cal. B.P.)
+  cite:
+    - id: xihuatoxtla-time
+      says: Piperno and colleagues report that maize was present at the shelter by 8,700 cal BP.
+      basis: interpretation
+      attributed_to: Piperno et al. 2009
+      source: piperno-2009-xihuatoxtla
+      at: abstract
+places:
+  - place: xihuatoxtla-shelter
+    role: site
+notes:
+  The source states a latest date ("by"), which the record notation cannot yet write as an open-ended
+  bound, so the date is written as that single year. The source gives the age in years before present
+  (BP, counted back from 1950); the date converts it to civil years without a year zero (N BP is N − 1949
+  BCE), keeps the source's own figures in as_written, and adds no precision of its own.

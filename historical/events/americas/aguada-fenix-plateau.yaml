@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  People at Aguada Fénix in Tabasco build an artificial plateau 1,400 m long and 10–15 m high with
+  nine radiating causeways between 1000 and 800 BC, the oldest and largest monumental construction known
+  in the Maya area.
+types:
+  - process
+date:
+  value: 1000 BCE..800 BCE
+  mode: window
+  calendar: julian
+  as_written: between 1000 and 800 BC
+  cite:
+    - id: aguada-fenix-time
+      says:
+        Inomata and colleagues date the construction to between 1000 and 800 BC by Bayesian analysis
+        of radiocarbon dates.
+      basis: interpretation
+      attributed_to: Inomata et al. 2020
+      source: inomata-2020-aguada-fenix
+      at: abstract
+places:
+  - place: aguada-fenix
+    role: site
+notes:
+  The excavators suggest the community lacked the marked social inequality of San Lorenzo and point
+  to communal work; the record carries that as the source's interpretation only.

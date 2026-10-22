@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Huaca Prieta, a Preceramic site on the north coast of Peru.
+types:
+  - other
+names:
+  - form: Huaca Prieta
+    lang: es
+    script: Latn
+    cite:
+      id: huaca-prieta-name
+      says:
+        Splitstoser and colleagues name Huaca Prieta as the Preceramic site on the north coast of Peru
+        where the dyed cotton was found.
+      source: splitstoser-2016-indigo
+      at: abstract
+at:
+  - interpretation: approximate_point
+    precision: site
+    point:
+      - -79.306955
+      - -7.92402
+    notes: The coordinate marks the mound site; the record places no excavation unit.
+    cite:
+      id: huaca-prieta-point
+      says:
+        The point is the site coordinate recorded in Wikidata (CC0) for Q1632701; it marks the archaeological
+        site as a whole and no feature within it.
+      basis: interpretation
+      attributed_to: Wikidata contributors
+      source: wikidata
+      at: Q1632701 (P625), revision 2559186009
+external_ids:
+  - system: wikidata
+    id: Q1632701
+notes: "The place type is other: the place is an archaeological mound site, and the contract's place
+  vocabulary has no type for an archaeological site or an earthwork."

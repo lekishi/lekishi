@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  In the Mirador-Calakmul Karst Basin of northern Guatemala, Preclassic Maya build hundreds of
+  settlements, from villages to cities, joined by 177 km of raised causeways, about 1000 B.C. to A.D.
+  150.
+types:
+  - process
+date:
+  value: 1000 BCE..150
+  mode: duration
+  calendar: julian
+  as_written: ca. 1000 B.C.–A.D. 150
+  cite:
+    - id: mirador-time
+      says:
+        Hansen and colleagues date the concentration of Preclassic sites in the basin to about 1000
+        B.C.–A.D. 150.
+      basis: interpretation
+      attributed_to: Hansen et al. 2022
+      source: hansen-2022-mirador
+      at: abstract
+places:
+  - place: el-mirador
+    role: context
+    note: El Mirador stands for the basin; the other sites and the causeways are not drawn.
+participants:
+  - actor: maya-civilization
+    role: participant
+notes: The span is approximate, which the record notation cannot yet mark.
+cites:
+  summary:
+    id: mirador-scale
+    says:
+      Hansen and colleagues count more than 775 settlements in the basin and 189 on the surrounding
+      ridge, condensed into 417 cities, towns and villages, with 177 km of elevated Preclassic causeways.
+    source: hansen-2022-mirador
+    at: abstract
+    quote:
+      More than 775 ancient Maya settlements are identified within the MCKB, and 189 more in the
+      surrounding karstic ridge, which we condensed into 417 ancient cities, towns, and villages of at
+      least six preliminary tiers based on surface area, volumetrics, and architectural configurations.

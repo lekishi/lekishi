@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  White Sands National Park in the Tularosa Basin of New Mexico, where human footprints were found
+  in trenches on the park's western playa.
+types:
+  - region
+names:
+  - form: White Sands National Park
+    lang: en
+    script: Latn
+    cite:
+      id: white-sands-name
+      says:
+        The park page reports the human footprints found by digging a trench in the gypsum soil on the
+        park's western playa.
+      source: nps-white-sands-footprints
+      at: Fossilized Footprints
+      quote: by digging a trench in the gypsum soil on the park’s western playa
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point:
+      - -106.171667
+      - 32.779722
+    notes:
+      Label anchor at the park's coordinate in Wikidata. The footprint trenches lie on the western
+      playa; the record asserts no trench location.
+    cite:
+      id: white-sands-anchor
+      says:
+        The label anchor is placed at the coordinate recorded in Wikidata (CC0) for Q1200164; no historical
+        coordinate is asserted.
+      source: wikidata
+      at: Q1200164 (P625), revision 2549098963
+external_ids:
+  - system: wikidata
+    id: Q1200164

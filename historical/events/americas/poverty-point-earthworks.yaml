@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "Hunter-fisher-gatherers of the Poverty Point culture build the Monumental Earthworks of Poverty
+  Point in northeastern Louisiana: four mounds, six concentric semi-elliptical ridges 1.14 km across,
+  a plaza with post circles, and borrow areas, dated 3,700–3,100 years ago."
+types:
+  - process
+date:
+  value: 1751 BCE..1151 BCE
+  mode: duration
+  calendar: julian
+  as_written: constructed 3,700-3,100 years ago
+  cite:
+    - id: poverty-point-time
+      says: The nomination dates the earthen monuments to 3,700–3,100 years ago (3700–3100 BP).
+      basis: interpretation
+      attributed_to: Poverty Point World Heritage nomination (2013)
+      source: poverty-point-nomination
+      at: PDF p. 11, 3.1.a Brief synthesis
+places:
+  - place: poverty-point
+    role: site
+participants:
+  - actor: poverty-point-culture
+    role: participant
+    note: The builders, whom the nomination calls hunter-fisher-gatherers.
+notes:
+  A fifth mound, Mound D, was added by a later culture and is not part of this event. The source
+  gives the age in years before present (BP, counted back from 1950); the date converts it to civil years
+  without a year zero (N BP is N − 1949 BCE), keeps the source's own figures in as_written, and adds no
+  precision of its own.
+dispute:
+  status: disputed
+  summary:
+    "The sources date the construction differently: the World Heritage nomination gives 3,700–3,100
+    years ago (3700–3100 BP), and the National Park Service's Spanish-language page gives 1650–700 BC.
+    The chapter shows the nomination's dating and keeps the park page's as a conflicting account."
+cite:
+  - id: poverty-point-time-park
+    says: The park's Spanish-language page states that the site was built between 1650 and 700 BC.
+    role: conflicting
+    source: nps-poverty-point-es
+    at: Resumen
+    quote:
+      Este lugar de más de 400 acres (160 ha), construido ente los años 1650 y 700 a.C., es único entre
+      los lugares arqueológicos

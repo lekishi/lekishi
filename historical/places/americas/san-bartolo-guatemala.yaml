@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  San Bartolo, a Maya site in Guatemala with the pyramid known as Las Pinturas and its painted
+  walls.
+types:
+  - other
+names:
+  - form: San Bartolo
+    lang: es
+    script: Latn
+    cite:
+      id: san-bartolo-guatemala-name
+      says:
+        Saturno, Stuart and Beltrán describe the ruins of San Bartolo, Guatemala, and the pyramidal
+        structure known as Las Pinturas.
+      source: saturno-2006-san-bartolo
+      at: abstract
+at:
+  - interpretation: approximate_point
+    precision: site
+    point:
+      - -89.40889
+      - 17.55167
+    notes: The coordinate marks the site; the Las Pinturas pyramid is not placed separately.
+    cite:
+      id: san-bartolo-guatemala-point
+      says:
+        The point is the site coordinate recorded in Wikidata (CC0) for Q795599; it marks the archaeological
+        site as a whole and no feature within it.
+      basis: interpretation
+      attributed_to: Wikidata contributors
+      source: wikidata
+      at: Q795599 (P625), revision 2558050248
+external_ids:
+  - system: wikidata
+    id: Q795599
+notes:
+  "The place type is other: the place is an archaeological site, and the contract's place vocabulary
+  has no type for an archaeological site or an earthwork."

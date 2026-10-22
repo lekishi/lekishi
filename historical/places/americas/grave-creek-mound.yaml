@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Grave Creek Mound in West Virginia, a large Adena earthen burial mound encircled by a moat.
+types:
+  - other
+names:
+  - form: Grave Creek Mound
+    lang: en
+    script: Latn
+    cite:
+      id: grave-creek-mound-name
+      says:
+        The nomination names Grave Creek Mound in West Virginia, encircled by a moat, as one of the
+        largest Adena constructions.
+      source: poverty-point-nomination
+      at: PDF p. 115, 3.2 Comparative analysis (Adena)
+at:
+  - interpretation: approximate_point
+    precision: site
+    point:
+      - -80.744444444444
+      - 39.916944444444
+    notes: The coordinate marks the mound.
+    cite:
+      id: grave-creek-mound-point
+      says:
+        The point is the site coordinate recorded in Wikidata (CC0) for Q5597781; it marks the archaeological
+        site as a whole and no feature within it.
+      basis: interpretation
+      attributed_to: Wikidata contributors
+      source: wikidata
+      at: Q5597781 (P625), revision 2402042865
+external_ids:
+  - system: wikidata
+    id: Q5597781
+notes:
+  "The place type is other: the place is an earthen burial mound, and the contract's place vocabulary
+  has no type for an archaeological site or an earthwork."

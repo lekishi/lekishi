@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Indian Knoll, the largest of the shell heaps hunter-gatherers raised in the Green River valley
+  of Kentucky, accumulates between about 5600 and 4600 BP.
+types:
+  - process
+date:
+  value: 3651 BCE..2651 BCE
+  mode: duration
+  calendar: julian
+  as_written: 5600-4600 BP
+  cite:
+    - id: indian-knoll-time
+      says: The nomination dates Indian Knoll to 5600–4600 BP.
+      basis: interpretation
+      attributed_to: Poverty Point World Heritage nomination (2013)
+      source: poverty-point-nomination
+      at: PDF p. 115, 3.2 Comparative analysis (Indian Knoll)
+places:
+  - place: indian-knoll
+    role: site
+notes:
+  Whether the shell heaps are deliberate monuments or accumulated occupation debris remains controversial,
+  as the cited nomination says; the record makes no claim either way. The source gives the age in years
+  before present (BP, counted back from 1950); the date converts it to civil years without a year zero
+  (N BP is N − 1949 BCE), keeps the source's own figures in as_written, and adds no precision of its own.

@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: The Olmec, the archaeological culture of the southern Gulf Coast of Mexico whose capitals,
+  in the INAH guide, were San Lorenzo Tenochtitlan, La Venta, Tres Zapotes and Laguna de los Cerros. The name is a modern one for an archaeological
+  culture, not the people's own name for themselves.
+types: [culture]
+names:
+  - form: Olmec
+    lang: en
+    script: Latn
+    cite:
+      id: olmec-name
+      says: The nomination describes Olmec communities growing along the southern Gulf Coast during
+        the Early Formative period and names San Lorenzo as the largest Early Formative site in Mexico.
+      source: poverty-point-nomination
+      at: PDF p. 134, 3.2 Comparative analysis (San Lorenzo)
+  - form: olmeca
+    lang: es
+    script: Latn
+    cite:
+      id: olmec-name-es
+      says:
+        The INAH guide names the Olmec culture and gives San Lorenzo Tenochtitlan, La Venta, Tres
+        Zapotes and Laguna de los Cerros as its capitals.
+      source: inah-tres-zapotes-guide
+      at: Breve reseña histórica
+external_ids:
+  - system: wikidata
+    id: Q135364
+notes: '"Olmec" is a name given by modern scholarship. The INAH guide notes that the word comes
+  from Nahuatl; the record keeps the term as an archaeological culture and asserts no polity, no
+  language and no ethnic identity.'

@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Chavín de Huántar, a monumental center in Peru with underground galleries.
+types:
+  - religious_site
+names:
+  - form: Chavín de Huántar
+    lang: es
+    script: Latn
+    cite:
+      id: chavin-de-huantar-name
+      says:
+        Rick and colleagues name Chavín de Huántar as a Middle-Late Formative monumental center with
+        underground galleries.
+      source: rick-2025-chavin
+      at: abstract
+at:
+  - interpretation: approximate_point
+    precision: site
+    point:
+      - -77.178452777778
+      - -9.592775
+    notes: The coordinate marks the monumental center as a whole.
+    cite:
+      id: chavin-de-huantar-point
+      says:
+        The point is the site coordinate recorded in Wikidata (CC0) for Q732554; it marks the archaeological
+        site as a whole and no feature within it.
+      basis: interpretation
+      attributed_to: Wikidata contributors
+      source: wikidata
+      at: Q732554 (P625), revision 2509134394
+external_ids:
+  - system: wikidata
+    id: Q732554

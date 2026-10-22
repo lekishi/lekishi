@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: Real Alto, a residential site with mounds and plazas in coastal Ecuador.
+types:
+  - settlement
+names:
+  - form: Real Alto
+    lang: es
+    script: Latn
+    cite:
+      id: real-alto-name
+      says:
+        The nomination names Real Alto in Ecuador as a residential site with mounds and a plaza and
+        lists it as having the oldest earthen mounds in South America.
+      source: poverty-point-nomination
+      at: PDF pp. 134–135, 3.2 Comparative analysis (Real Alto) and Table 3.7
+at:
+  - interpretation: approximate_point
+    precision: site
+    point:
+      - -80.65361111111112
+      - -2.365277777777778
+    notes: The coordinate marks the site as a whole.
+    cite:
+      id: real-alto-point
+      says:
+        The point is the site coordinate recorded in Wikidata (CC0) for Q122746372; it marks the archaeological
+        site as a whole and no feature within it.
+      basis: interpretation
+      attributed_to: Wikidata contributors
+      source: wikidata
+      at: Q122746372 (P625), revision 1979662251
+external_ids:
+  - system: wikidata
+    id: Q122746372

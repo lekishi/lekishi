@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Aguada Fénix, a site in Tabasco, Mexico, with an artificial plateau 1,400 m long and nine causeways
+  radiating from it.
+types:
+  - other
+names:
+  - form: Aguada Fénix
+    lang: es
+    script: Latn
+    cite:
+      id: aguada-fenix-name
+      says:
+        Inomata and colleagues describe the previously unknown site of Aguada Fénix in Tabasco, with
+        an artificial plateau 1,400 m long, 10 to 15 m high, and nine causeways.
+      source: inomata-2020-aguada-fenix
+      at: abstract
+at:
+  - interpretation: approximate_point
+    precision: site
+    point:
+      - -91.15
+      - 17.8
+    notes:
+      Wikidata records the coordinate to the minute only, so the point stands for the plateau within
+      about two kilometres.
+    cite:
+      id: aguada-fenix-point
+      says:
+        The point is the site coordinate recorded in Wikidata (CC0) for Q96059496; it marks the archaeological
+        site as a whole and no feature within it.
+      basis: interpretation
+      attributed_to: Wikidata contributors
+      source: wikidata
+      at: Q96059496 (P625), revision 2432120333
+external_ids:
+  - system: wikidata
+    id: Q96059496
+notes:
+  "The place type is other: the place is an artificial plateau and its causeways, and the contract's
+  place vocabulary has no type for an archaeological site or an earthwork."

@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  Caral, the Sacred City of Caral-Supe, a Late Archaic urban center 23 km inland in the Supe Valley
+  on the central coast of Peru.
+types:
+  - settlement
+names:
+  - form: Caral
+    lang: es
+    script: Latn
+    cite:
+      id: caral-name
+      says:
+        Shady Solis, Haas and Creamer place Caral 23 kilometers inland from the Pacific coast in the
+        Supe Valley and count it among 18 large preceramic sites in the valley.
+      source: shady-2001-caral
+      at: abstract
+  - form: Caral-Supe
+    lang: en
+    script: Latn
+    role: alternate
+    cite:
+      id: caral-supe-name
+      says: The nomination calls the site The Sacred City of Caral-Supe.
+      source: poverty-point-nomination
+      at: PDF p. 131, 3.2 Comparative analysis (Caral-Supe)
+at:
+  - interpretation: approximate_point
+    precision: site
+    point:
+      - -77.520277777778
+      - -10.893611111111
+    notes: The coordinate marks the 65-hectare central zone as a whole.
+    cite:
+      id: caral-point
+      says:
+        The point is the site coordinate recorded in Wikidata (CC0) for Q219279; it marks the archaeological
+        site as a whole and no feature within it.
+      basis: interpretation
+      attributed_to: Wikidata contributors
+      source: wikidata
+      at: Q219279 (P625), revision 2559222912
+external_ids:
+  - system: wikidata
+    id: Q219279

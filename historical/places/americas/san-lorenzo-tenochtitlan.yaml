@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary:
+  San Lorenzo Tenochtitlan, an Olmec center on an artificially leveled plateau in southern Veracruz,
+  Mexico.
+types:
+  - settlement
+names:
+  - form: San Lorenzo
+    lang: es
+    script: Latn
+    cite:
+      id: san-lorenzo-tenochtitlan-name
+      says:
+        The nomination describes San Lorenzo as a settlement atop a massive, artificially leveled plateau
+        and on terraced slopes below, the largest and most complex Early Formative site in Mexico.
+      source: poverty-point-nomination
+      at: PDF p. 134, 3.2 Comparative analysis (San Lorenzo)
+  - form: San Lorenzo Tenochtitlan
+    lang: es
+    script: Latn
+    role: alternate
+    cite:
+      id: san-lorenzo-tenochtitlan-name-alternate
+      says: The INAH guide names San Lorenzo Tenochtitlan among the Olmec capitals.
+      source: inah-tres-zapotes-guide
+      at: Breve reseña histórica
+at:
+  - interpretation: approximate_point
+    precision: site
+    point:
+      - -94.8
+      - 17.733333
+    notes: The coordinate marks the plateau site as a whole.
+    cite:
+      id: san-lorenzo-tenochtitlan-point
+      says:
+        The point is the site coordinate recorded in Wikidata (CC0) for Q772613; it marks the archaeological
+        site as a whole and no feature within it.
+      basis: interpretation
+      attributed_to: Wikidata contributors
+      source: wikidata
+      at: Q772613 (P625), revision 2445354248
+external_ids:
+  - system: wikidata
+    id: Q772613

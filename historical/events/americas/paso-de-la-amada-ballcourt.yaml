@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  An earthen ball court, the earliest known formal ballcourt in Mesoamerica, is built at Paso de la
+  Amada in the Soconusco region of Chiapas around 1650 BCE.
+types:
+  - founding
+date:
+  value: 1650 BCE
+  calendar: julian
+  as_written: built around 1650 BCE
+  cite:
+    - id: ballcourt-time
+      says:
+        Blomster and Salazar Chávez state that the earliest formal ballcourt was built around 1650 BCE
+        at Paso de la Amada.
+      basis: interpretation
+      attributed_to: Blomster and Salazar Chávez 2020
+      source: blomster-2020-etlatongo-ballcourt
+      at: Introduction, Ballgames and ballcourts in early Mesoamerica
+    - id: ballcourt-time-excavators
+      says:
+        Hill, Blake and Clark date the ball court to approximately 1400 BC in uncalibrated radiocarbon
+        years.
+      basis: interpretation
+      attributed_to: Hill, Blake and Clark 1998
+      role: supporting
+      source: hill-1998-paso-de-la-amada
+      at: abstract
+places:
+  - place: paso-de-la-amada
+    role: site
+notes:
+  "The excavators' 1400 BC is an uncalibrated radiocarbon age, not a calendar year, and the atlas
+  plots a date's year whatever its calendar, so the record takes its year from the calibrated
+  date that Blomster and Salazar Chávez give, and keeps the excavators' figure as a second citation.
+  The date is approximate and written as a single year because the record notation cannot yet mark
+  a date as approximate."
+cites:
+  summary:
+    id: ballcourt-earliest
+    says:
+      Blomster and Salazar Chávez describe the Paso de la Amada court as the earliest formal ballcourt;
+      the earliest highland court they report, at Etlatongo, dates to 1374 BCE.
+    source: blomster-2020-etlatongo-ballcourt
+    at: Introduction, Ballgames and ballcourts in early Mesoamerica; abstract

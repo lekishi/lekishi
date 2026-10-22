@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Lidar across the Olmec region and the western Maya lowlands reveals 478 formal rectangular and
+  square ceremonial complexes, probably built between 1,050 and 400 BC, after a template the authors trace
+  to San Lorenzo.
+types:
+  - process
+date:
+  value: 1050 BCE..400 BCE
+  mode: duration
+  calendar: julian
+  as_written: probably dating from 1,050 to 400 BC
+  cite:
+    - id: formal-complexes-time
+      says: Inomata and colleagues date the 478 complexes probably to 1,050–400 BC.
+      basis: interpretation
+      attributed_to: Inomata et al. 2021
+      source: inomata-2021-formal-complexes
+      at: abstract
+places:
+  - place: san-lorenzo-tenochtitlan
+    role: context
+    note:
+      The earlier center whose central rectangular space the authors propose as the template; the 478
+      complexes are not placed.
+notes:
+  The complexes are spread over a region the record does not draw; only the proposed template site
+  is placed.

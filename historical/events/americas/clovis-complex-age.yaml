@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Thirty-two radiocarbon ages from ten Clovis sites give the Clovis complex a maximum calibrated
+  range of about 13,050 to 12,750 cal BP, ending at the beginning of the Younger Dryas.
+types:
+  - process
+date:
+  value: 11101 BCE..10801 BCE
+  mode: duration
+  calendar: julian
+  as_written: ~13,050 to ~12,750 cal yr B.P.
+  cite:
+    - id: clovis-time
+      says:
+        Waters, Stafford and Carlson give Clovis a maximum calibrated age range of about 13,050 to 12,750
+        cal yr BP from 32 radiocarbon ages at ten sites.
+      basis: interpretation
+      attributed_to: Waters, Stafford and Carlson 2020
+      source: waters-2020-clovis
+      at: abstract
+participants:
+  - actor: clovis-complex
+    role: subject
+notes:
+  The ten dated sites are not named in the cited abstract, so the event has no place and is listed
+  without a map position. The source gives the age in years before present (BP, counted back from 1950);
+  the date converts it to civil years without a year zero (N BP is N − 1949 BCE), keeps the source's own
+  figures in as_written, and adds no precision of its own.

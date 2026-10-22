@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Monte Albán in the Valley of Oaxaca is founded in period I, about 500 BC, probably by households
+  from earlier villages in the valley.
+types:
+  - founding
+date:
+  value: 500 BCE
+  calendar: julian
+  as_written: period I (about 500 B.C.)
+  cite:
+    - id: monte-alban-time
+      says: Winter states that Monte Albán was founded in period I, about 500 B.C.
+      basis: interpretation
+      attributed_to: Winter 1974
+      source: winter-1974-monte-alban
+      at: abstract
+places:
+  - place: monte-alban
+    role: site
+notes:
+  The date is approximate and written as a single year because the record notation cannot yet mark
+  a date as approximate.

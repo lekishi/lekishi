@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The Cascajal block, a stone found at Jáltipan in the Olmec heartland of Veracruz and carved with
+  signs of an otherwise unknown writing system, which its publishers date to the early first millennium
+  BCE and call the oldest writing in the New World.
+types:
+  - occurrence
+date:
+  value: 1000 BCE..800 BCE
+  mode: window
+  calendar: julian
+  as_written: early first millennium before the common era; 1000 al 800 AC
+  cite:
+    - id: cascajal-time
+      says:
+        Rodríguez Martínez and colleagues place the block, by stylistic and other dating, in the early
+        first millennium BCE.
+      basis: interpretation
+      attributed_to: Rodríguez Martínez et al. 2006
+      source: rodriguez-2006-cascajal
+      at: abstract
+    - id: cascajal-time-guerrero
+      says: Guerrero reports that the block was dated to 1000–800 BC.
+      basis: interpretation
+      attributed_to: Guerrero Orozco 2010
+      role: supporting
+      source: guerrero-2010-olmec-writing
+      at: p. 1066
+places:
+  - place: jaltipan
+    role: context
+    note: The cited sources name the municipality, not a find spot.
+participants:
+  - actor: olmec-culture
+    role: other
+    note: The publishers assign the script to the Olmec civilization.
+notes:
+  The date rests on style and context, not on a dated inscription, and a disturbed find spot. The
+  record publishes the publishers' date as the main account and keeps the doubt beside it.
+dispute:
+  status: disputed
+  summary:
+    "The block's date and authenticity are contested: its publishers date it by style and other
+    evidence to the early first millennium BCE, while Ann Cyphers, as Guerrero reports, doubted its authenticity
+    because the circumstances of the find were suspicious and the pottery from the spot was not directly
+    associated with it."
+cite:
+  - id: cascajal-doubt
+    says:
+      Guerrero reports that Ann Cyphers doubted the block's authenticity because the find's circumstances
+      were suspicious and the pottery recovered there was not directly associated with it.
+    role: conflicting
+    source: guerrero-2010-olmec-writing
+    at: p. 1066

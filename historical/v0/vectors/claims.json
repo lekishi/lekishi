@@ -1,0 +1,772 @@
+{
+  "contract": "lekishi-historical-contract/v0",
+  "document": "test_vectors",
+  "area": "claims",
+  "description": "Claim-basis vectors: the conventional basis, for a date that standard reference chronologies agree on, derived from a source that gives a sequence rather than a calendar date. The vectors pin that it names its conversion, cites the passage and the reference, asserts a time, and is never one side of a dispute.",
+  "vectors": [
+    {
+      "id": "claims/a-conventional-date-is-valid",
+      "why": "A date the source gives only by its sequence, which standard chronologies agree on, names its conversion and cites the passage and the reference that states the year.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-a",
+            "kind": "primary"
+          },
+          {
+            "source_id": "lks:source:vector-b",
+            "kind": "scholarly"
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-battle",
+            "published": true,
+            "content": {
+              "summary": "A battle the source dates only by its sequence.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "on the same days as the sea fights",
+                "calendar": "julian",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 480,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 480,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-1",
+                "statement": "The source narrates the battle.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "VII.210"
+                    }
+                  }
+                ]
+              },
+              {
+                "claim_id": "lks:claim:vector-2",
+                "statement": "The source places the battle on the days of the sea fights; the standard chronology dates both to 480 BCE.",
+                "asserts": "/time",
+                "basis": "conventional",
+                "role": "main",
+                "convention": "Herodotean campaign seasons, standard chronology",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "VIII.15"
+                    }
+                  },
+                  {
+                    "source_id": "lks:source:vector-b",
+                    "locator": {
+                      "kind": "section",
+                      "value": "vol. V, ch. XL"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": true
+      }
+    },
+    {
+      "id": "claims/a-supporting-conventional-date-is-valid",
+      "why": "A conventional date may support a main claim on the same time, as a standard conversion beside the source's own statement.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-a",
+            "kind": "primary"
+          },
+          {
+            "source_id": "lks:source:vector-b",
+            "kind": "scholarly"
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-battle",
+            "published": true,
+            "content": {
+              "summary": "A battle the source dates only by its sequence.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "on the same days as the sea fights",
+                "calendar": "julian",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 480,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 480,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-1",
+                "statement": "The source narrates the battle.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "VII.210"
+                    }
+                  }
+                ]
+              },
+              {
+                "claim_id": "lks:claim:vector-2",
+                "statement": "The source places the battle on the days of the sea fights; the standard chronology dates both to 480 BCE.",
+                "asserts": "/time",
+                "basis": "conventional",
+                "role": "supporting",
+                "convention": "Herodotean campaign seasons, standard chronology",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "VIII.15"
+                    }
+                  },
+                  {
+                    "source_id": "lks:source:vector-b",
+                    "locator": {
+                      "kind": "section",
+                      "value": "vol. V, ch. XL"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": true
+      }
+    },
+    {
+      "id": "claims/a-conventional-date-names-its-conversion",
+      "why": "A conventional date says which conversion it follows, so a reviewer can check that it is standard.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-a",
+            "kind": "primary"
+          },
+          {
+            "source_id": "lks:source:vector-b",
+            "kind": "scholarly"
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-battle",
+            "published": true,
+            "content": {
+              "summary": "A battle the source dates only by its sequence.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "on the same days as the sea fights",
+                "calendar": "julian",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 480,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 480,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-1",
+                "statement": "The source narrates the battle.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "VII.210"
+                    }
+                  }
+                ]
+              },
+              {
+                "claim_id": "lks:claim:vector-2",
+                "statement": "The source places the battle on the days of the sea fights; the standard chronology dates both to 480 BCE.",
+                "asserts": "/time",
+                "basis": "conventional",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "VIII.15"
+                    }
+                  },
+                  {
+                    "source_id": "lks:source:vector-b",
+                    "locator": {
+                      "kind": "section",
+                      "value": "vol. V, ch. XL"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "codes": [
+          "conventional_missing_convention"
+        ]
+      }
+    },
+    {
+      "id": "claims/a-conventional-date-cites-its-passage-and-its-reference",
+      "why": "A conventional date rests on two things, the passage that places the event and a reference that states the year, so it cites both.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-a",
+            "kind": "primary"
+          },
+          {
+            "source_id": "lks:source:vector-b",
+            "kind": "scholarly"
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-battle",
+            "published": true,
+            "content": {
+              "summary": "A battle the source dates only by its sequence.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "on the same days as the sea fights",
+                "calendar": "julian",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 480,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 480,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-1",
+                "statement": "The source narrates the battle.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "VII.210"
+                    }
+                  }
+                ]
+              },
+              {
+                "claim_id": "lks:claim:vector-2",
+                "statement": "The source places the battle on the days of the sea fights; the standard chronology dates both to 480 BCE.",
+                "asserts": "/time",
+                "basis": "conventional",
+                "role": "main",
+                "convention": "Herodotean campaign seasons, standard chronology",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-b",
+                    "locator": {
+                      "kind": "section",
+                      "value": "vol. V, ch. XL"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "codes": [
+          "conventional_single_citation"
+        ]
+      }
+    },
+    {
+      "id": "claims/a-conventional-claim-asserts-a-time",
+      "why": "The basis is for dates only. A place identification or a summary is attested or an interpretation.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-a",
+            "kind": "primary"
+          },
+          {
+            "source_id": "lks:source:vector-b",
+            "kind": "scholarly"
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-battle",
+            "published": true,
+            "content": {
+              "summary": "A battle the source dates only by its sequence.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "on the same days as the sea fights",
+                "calendar": "julian",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 480,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 480,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-1",
+                "statement": "The source narrates the battle.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "VII.210"
+                    }
+                  }
+                ]
+              },
+              {
+                "claim_id": "lks:claim:vector-2",
+                "statement": "The source places the battle on the days of the sea fights; the standard chronology dates both to 480 BCE.",
+                "asserts": "",
+                "basis": "conventional",
+                "role": "supporting",
+                "convention": "Herodotean campaign seasons, standard chronology",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "VIII.15"
+                    }
+                  },
+                  {
+                    "source_id": "lks:source:vector-b",
+                    "locator": {
+                      "kind": "section",
+                      "value": "vol. V, ch. XL"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "codes": [
+          "conventional_outside_time"
+        ]
+      }
+    },
+    {
+      "id": "claims/a-disputed-date-is-not-conventional",
+      "why": "When another account gives a different year, the year is disputed, and each account is cited as an interpretation instead.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-a",
+            "kind": "primary"
+          },
+          {
+            "source_id": "lks:source:vector-b",
+            "kind": "scholarly"
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-battle",
+            "published": true,
+            "content": {
+              "summary": "A battle the source dates only by its sequence.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "on the same days as the sea fights",
+                "calendar": "julian",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 480,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 480,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-1",
+                "statement": "The source narrates the battle.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "VII.210"
+                    }
+                  }
+                ]
+              },
+              {
+                "claim_id": "lks:claim:vector-2",
+                "statement": "The source places the battle on the days of the sea fights; the standard chronology dates both to 480 BCE.",
+                "asserts": "/time",
+                "basis": "conventional",
+                "role": "main",
+                "convention": "Herodotean campaign seasons, standard chronology",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "VIII.15"
+                    }
+                  },
+                  {
+                    "source_id": "lks:source:vector-b",
+                    "locator": {
+                      "kind": "section",
+                      "value": "vol. V, ch. XL"
+                    }
+                  }
+                ]
+              },
+              {
+                "claim_id": "lks:claim:vector-3",
+                "statement": "A later chronologer puts the battle a year earlier.",
+                "asserts": "/time",
+                "basis": "cited_interpretation",
+                "attributed_to": "A later chronologer",
+                "role": "alternative",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-b",
+                    "locator": {
+                      "kind": "section",
+                      "value": "vol. V, note 3"
+                    }
+                  }
+                ]
+              }
+            ],
+            "dispute": {
+              "status": "disputed",
+              "summary": "Two chronologies give different years for the battle."
+            }
+          }
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "codes": [
+          "conventional_in_dispute"
+        ]
+      }
+    },
+    {
+      "id": "claims/a-conventional-date-is-never-an-alternative",
+      "why": "An alternative or conflicting account is one side of a dispute, which a conventional date by definition is not.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-a",
+            "kind": "primary"
+          },
+          {
+            "source_id": "lks:source:vector-b",
+            "kind": "scholarly"
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-battle",
+            "published": true,
+            "content": {
+              "summary": "A battle the source dates only by its sequence.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "on the same days as the sea fights",
+                "calendar": "julian",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 480,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 480,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-1",
+                "statement": "The source narrates the battle.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "VII.210"
+                    }
+                  }
+                ]
+              },
+              {
+                "claim_id": "lks:claim:vector-2",
+                "statement": "The source places the battle on the days of the sea fights; the standard chronology dates both to 480 BCE.",
+                "asserts": "/time",
+                "basis": "conventional",
+                "role": "alternative",
+                "convention": "Herodotean campaign seasons, standard chronology",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "VIII.15"
+                    }
+                  },
+                  {
+                    "source_id": "lks:source:vector-b",
+                    "locator": {
+                      "kind": "section",
+                      "value": "vol. V, ch. XL"
+                    }
+                  }
+                ]
+              }
+            ],
+            "dispute": {
+              "status": "disputed",
+              "summary": "Two chronologies give different years for the battle."
+            }
+          }
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "codes": [
+          "conventional_in_dispute"
+        ]
+      }
+    },
+    {
+      "id": "claims/only-a-conventional-claim-names-a-convention",
+      "why": "A convention belongs to a conventional date; on an attested or interpreted claim it would claim a standing the claim does not have.",
+      "op": "validate",
+      "input": {
+        "documents": [
+          {
+            "source_id": "lks:source:vector-a",
+            "kind": "primary"
+          },
+          {
+            "source_id": "lks:source:vector-b",
+            "kind": "scholarly"
+          },
+          {
+            "kind": "event",
+            "record_id": "lks:event:vector-battle",
+            "published": true,
+            "content": {
+              "summary": "A battle the source dates only by its sequence.",
+              "event_types": [
+                "occurrence"
+              ],
+              "time": {
+                "source_expression": "on the same days as the sea fights",
+                "calendar": "julian",
+                "precision": "year",
+                "mode": "occurrence_window",
+                "interval": {
+                  "bounds": "two_sided",
+                  "boundary": "inclusive",
+                  "start": {
+                    "year": 480,
+                    "era": "bce"
+                  },
+                  "end": {
+                    "year": 480,
+                    "era": "bce"
+                  }
+                }
+              }
+            },
+            "claims": [
+              {
+                "claim_id": "lks:claim:vector-1",
+                "statement": "The source narrates the battle.",
+                "asserts": "",
+                "basis": "attested",
+                "role": "main",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "VII.210"
+                    }
+                  }
+                ]
+              },
+              {
+                "claim_id": "lks:claim:vector-2",
+                "statement": "The source places the battle on the days of the sea fights; the standard chronology dates both to 480 BCE.",
+                "asserts": "/time",
+                "basis": "cited_interpretation",
+                "role": "main",
+                "convention": "Herodotean campaign seasons, standard chronology",
+                "citations": [
+                  {
+                    "source_id": "lks:source:vector-a",
+                    "locator": {
+                      "kind": "section",
+                      "value": "VIII.15"
+                    }
+                  },
+                  {
+                    "source_id": "lks:source:vector-b",
+                    "locator": {
+                      "kind": "section",
+                      "value": "vol. V, ch. XL"
+                    }
+                  }
+                ],
+                "attributed_to": "A modern chronologer"
+              }
+            ]
+          }
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "codes": [
+          "schema_violation"
+        ]
+      }
+    }
+  ]
+}

@@ -68,10 +68,11 @@ coordinate, rather than at a port the text does not name.
 
 ## Shared ids
 
-Three places use the ids other branches mint for the same place, so that the
-duplicate fails the build and is merged rather than living as two records:
-`bharukaccha` (Barygaza; the 玄奘 chapter), `ujjayini` (Ozene; the Ashoka
-chapter) and `lanka` (Taprobane; the Ashoka chapter). `pliny-natural-history` is the
+Barygaza is the 玄奘 chapter's `bharukaccha`, now on `main`, with the Periplus
+name and the Pleiades identification folded in. Two places use the ids the
+Ashoka chapter mints for the same place, so that the duplicate fails the build
+and is merged rather than living as two records: `ujjayini` (Ozene) and `lanka`
+(Taprobane). `pliny-natural-history` is the
 merged record the Nile thread wrote for both chapters, copied byte for byte.
 
 `rome` is the record the Stephen II chapter minted on `main`; this chapter

@@ -334,6 +334,70 @@ BCE is spelled out rather than written as astronomical years. EDTF writes
 233 BCE as `-0232`, which is the off-by-one the contract's `era` field exists
 to prevent. The atlas's internal year ordinals do not change.
 
+== Decided: approximate, coarse and open dates — 2026-10-22
+
+The early Americas chapter (`early-americas-to-100`, PR #41) found that most
+dates before the common era are approximate ("ca. 1000 BC"), coarse ("the
+first century BCE") or one-sided ("after about 3400 BP"). Contract v0 already
+stores all three: `endpoint_certainty`, `decade` and `century` precision, and
+`lower_only` and `upper_only` bounds (link:CONTRACTS.adoc[CONTRACTS], "Explicit
+endpoint semantics" and "Open-ended bounds"). The notation could write none of
+them, so authors wrote exact converted years and explained them in notes. The
+owner chose to extend the notation to v0's fields, with no contract change:
+
+[cols="1,2",options="header"]
+|===
+|Written |Means
+|`~1000 BCE`, `~1000 BCE..800 BCE` |`endpoint_certainty: approximate` on the marked endpoint. The support does not move: "about 1000 BCE" is still the year 1000 BCE, described as approximate.
+|`730s`, `730s BCE` |One decade at `decade` precision: 730–739, or 739–730 BCE
+|`8th century`, `1st century BCE` |One century at `century` precision: 701–800, or 100–1 BCE
+|`after 1451 BCE`, `before 300` |A `lower_only` or `upper_only` interval whose written year is its inclusive bound
+|===
+
+* A decade, a century and a one-sided date are spans, so like a range they need
+  `mode: window` or `mode: duration`. A range of several decades or centuries is
+  refused, because v0 holds those precisions to exactly one; write it in years,
+  with `~` on an approximate end.
+* `~` may mark any endpoint, coarse or not, and applies to both years of a
+  decade or century.
+* A story's `span` and a manifest's `window` stay plain two-sided year ranges:
+  the atlas opens on them, so they are never approximate or one-sided.
+* Existing dates compile exactly as before, so no approval goes stale from this
+  change.
+* The atlas still refuses an open-ended occurrence (`src/lib/atlas/projection.ts`),
+  so a chapter cannot publish an `after` or `before` date until the atlas
+  learns to draw one. The notation writes them so that records can hold what
+  the source says.
+
+Years before present are not a notation of their own. The owner preferred
+extending v0's fields to adding a `BP` form; a BP age is still converted to a
+civil year by the author, cited to a calibrated or calendar date where the
+source gives one, with the source's own figure in `as_written`.
+
+== Decided: a Mesoamerican Long Count calendar in contract v1 — 2026-10-22
+
+v0's `calendar` enum has no Long Count. The early Americas chapter therefore
+records Chiapa de Corzo Stela 2 and Tres Zapotes Stela C as `julian` years with
+the Long Count and Calendar Round in `as_written`. The owner chose to add the
+calendar in contract v1, with a correlation:
+
+* `calendar: mesoamerican_long_count` joins the enum in v1.
+* A time whose calendar is `mesoamerican_long_count` and which carries an
+  interval must also carry `correlation`: the Julian day number the source's
+  conversion uses for 0.0.0.0.0, written as an integer (for example `584283`,
+  the GMT correlation, or `584285`). The interval is the converted civil year,
+  as for every other calendar, so matching and playback do not change.
+* `correlation` is refused on any other calendar.
+* A source that gives a Long Count date without its correlation is recorded as
+  the source gives it: its interval is the source's own civil year, and the
+  record says that the correlation is not stated. The atlas never chooses a
+  correlation the source did not.
+* The record file writes it as `correlation:` in the date block, beside
+  `calendar:` and `as_written:`.
+
+This lands with contract v1. Until then the two stelae keep `julian` and their
+notes, and are moved to the new calendar in the same change that brings v1.
+
 == Proposed: journeys, territories, and media
 
 For journeys, this section is superseded by

@@ -4,12 +4,20 @@ types: [campaign]
 part_of:
   - megiddo-campaign
 date:
-  value: 1482 BCE..1457 BCE
+  value: 1457 BCE..1456 BCE
   mode: window
   calendar: regnal
   as_written: year 23, I Shemu 16
   cite:
+    - id: thutmose-at-yehem-shaw
+      says: On Shaw's chronology Thutmose III reigned 1479–1425 BCE, so his year 23 falls in
+        1457–1456 BCE.
+      basis: interpretation
+      attributed_to: Lekishi editorial reckoning on Ian Shaw's chronology
+      source: shaw-oxford-history-ancient-egypt
+      at: "chronology table: Eighteenth Dynasty"
     - id: yehem-date
+      role: supporting
       says: The annals date this to year 23, I Shemu 16.
       source: breasted-ancient-records
       at: "II, Annals of Thutmose III, first campaign: Year 23, I Shemu 16 (Yehem)"
@@ -28,9 +36,7 @@ cite:
     source: breasted-ancient-records
     at: "II, Annals of Thutmose III, first campaign: Year 23, I Shemu 16 (Yehem)"
     quote: Year 23, first month of the third season, on the sixteenth day, he arrived at the city of Yehem.
-notes:
-  The annals date by regnal year and the civil calendar, and the conversion to a BCE year depends
-  on which chronology of the Eighteenth Dynasty is used. The window spans the dates usually given for
-  year 23 of Thutmose III, from about 1482 BCE (a higher chronology) to about 1457 BCE (the lower one
-  most used today); Breasted's own 1906 table is within it. It is an editorial bound that a cited chronology
-  must replace before approval.
+notes: The annals date by regnal year and the civil calendar. The BCE years follow Shaw's chronology
+  (The Oxford History of Ancient Egypt, 2000), which puts the accession of Thutmose III in 1479 BCE,
+  so year 22 falls in 1458–1457 BCE and year 23 in 1457–1456 BCE. Breasted's own 1906 table follows
+  an older, higher chronology.

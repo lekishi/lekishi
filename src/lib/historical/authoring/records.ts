@@ -18,9 +18,15 @@ import { compileTime } from "./dates"
  * claim gets an id from its record and field.
  */
 
-export type RecordKind = "place" | "actor" | "event" | "relationship"
+export type RecordKind = "place" | "actor" | "event" | "relationship" | "territory"
 
-export const RECORD_KINDS: readonly RecordKind[] = ["place", "actor", "event", "relationship"]
+export const RECORD_KINDS: readonly RecordKind[] = [
+  "place",
+  "actor",
+  "event",
+  "relationship",
+  "territory",
+]
 
 /** What a record file may refer to outside itself. */
 export type Lookup = {
@@ -309,7 +315,9 @@ function fieldCites(claims: Claims, kind: RecordKind, data: JsonObject): void {
         ? `${kind}_types`
         : field === "date" && kind === "relationship"
           ? "validity"
-          : (RENAMED[field] ?? field)
+          : field === "controller"
+            ? "controller_id"
+            : (RENAMED[field] ?? field)
 
     claims.add(`/${compiled}`, cite, `cites.${field}`)
   }
@@ -442,6 +450,43 @@ function relationship(claims: Claims, data: JsonObject, lookup: Lookup): JsonObj
   return { ...content, ...copy(data, { notes: "editorial_notes" }) }
 }
 
+/**
+ * A dated control snapshot (rfd/0002/TERRITORIES.adoc). A held place is written
+ * as its short id, or as a mapping when it is the controller's seat, names how
+ * it was gained, or carries its own note or cite; without its own cite, an entry
+ * is supported by the snapshot's.
+ */
+function territory(claims: Claims, data: JsonObject, lookup: Lookup): JsonObject {
+  const content: JsonObject = {
+    summary: data["summary"] as string,
+    controller_id: lookup.record(String(data["controller"]), ["actor"], "controller"),
+    time: time(claims, data["date"], "/time", "date"),
+    places: list(data["places"]).map((written, index) => {
+      const where = `places[${index}]`
+      const entry: JsonObject = isObject(written) ? written : { place: written }
+
+      claims.add(`/places/${index}`, entry["cite"], where)
+
+      const compiled: JsonObject = {
+        place_id: lookup.record(String(entry["place"]), ["place"], where),
+        role: (entry["role"] as string | undefined) ?? "held",
+      }
+
+      if (entry["gained"] !== undefined) {
+        compiled["gained_record_id"] = lookup.record(
+          String(entry["gained"]),
+          ["event", "relationship"],
+          `${where}.gained`,
+        )
+      }
+
+      return { ...compiled, ...copy(entry, { note: "note" }) }
+    }),
+  }
+
+  return { ...content, ...copy(data, { notes: "editorial_notes" }) }
+}
+
 /** Compiles one record file. Errors name the field they concern. */
 export function compileRecord(
   kind: RecordKind,
@@ -460,7 +505,9 @@ export function compileRecord(
         ? actor(claims, data)
         : kind === "event"
           ? event(claims, data, lookup)
-          : relationship(claims, data, lookup)
+          : kind === "relationship"
+            ? relationship(claims, data, lookup)
+            : territory(claims, data, lookup)
 
   fieldCites(claims, kind, data)
 

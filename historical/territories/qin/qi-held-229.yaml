@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/territory.schema.json
+summary: "臨淄, Qi's capital, which the sources record Qi holding until Qin's army entered it in 221 BCE."
+controller: qi-state
+date:
+  value: "229 BCE..222 BCE"
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: "王建四十四年（秦兵卒入臨淄）"
+places:
+  - place: linzi
+    role: seat
+cite:
+  - says: "The hereditary house of Qi records Qin's army entering 臨淄 after the other five states had fallen, with no one daring to resist."
+    source: shiji-six-states
+    at: "卷四十六 田敬仲完世家 王建四十四年（秦兵卒入臨淄）"
+    quote: "五國已亡，秦兵卒入臨淄，民莫敢格者。"
+notes: "The window opens with the chapter in 229 BCE and ends the year before 臨淄 passes to Qin. Qi held more than its capital; the snapshot lists only what the sources name."

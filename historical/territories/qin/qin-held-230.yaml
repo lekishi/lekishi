@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/territory.schema.json
+summary: "The places the sources record Qin holding after it annexed Han in 230 BCE: its capital 咸陽 and Han's land, made the 潁川 commandery."
+controller: qin-state
+date:
+  value: "230 BCE..229 BCE"
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: "十七年（以其地為郡，命曰潁川）"
+places:
+  - place: xianyang
+    role: seat
+    cite:
+      - says: "The biography of 荊軻 records the king of Qin receiving the Yan envoys in the 咸陽 palace."
+        source: shiji-six-states
+        at: "卷八十六 刺客列傳（見燕使者咸陽宮）"
+        quote: "秦王聞之，大喜，乃朝服，設九賓，見燕使者咸陽宮。"
+  - place: yingchuan
+    gained: han-annexation-yingchuan
+cite:
+  - says: "The annals record Qin taking all Han's land in 十七年 (230 BCE) and making it the 潁川 commandery."
+    source: shiji
+    at: "卷六 秦始皇本紀 十七年（命曰潁川）"
+    quote: "內史騰攻韓，得韓王安，盡納其地，以其地為郡，命曰潁川。"
+notes: "The window runs to the year before the next change the annals record (the fall of 邯鄲 in 228 BCE); the annals record no loss of these places in between. Every Qin snapshot lists only places a source names as taken or held, never all of Qin."

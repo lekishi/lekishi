@@ -116,6 +116,21 @@
   --color-rel-institution: #c58fd1;
 
   /*
+   * Control: one tint per controller of a territory snapshot, assigned in the
+   * order a chapter's snapshots name them. A tint is drawn as a disc under a
+   * place's mark (a ringed disc for a seat), and the legend names the
+   * controller beside it; no area is ever filled with one.
+   */
+  --color-control-1: #e07b39;
+  --color-control-2: #6fa8dc;
+  --color-control-3: #93c47d;
+  --color-control-4: #d5a6e6;
+  --color-control-5: #e6cf62;
+  --color-control-6: #f08ea3;
+  --color-control-7: #a4a9f2;
+  --color-control-8: #c4d39b;
+
+  /*
    * Families. Every face is self-hosted from `/fonts/` and subset at build time
    * to the characters the site sets (`pnpm sync:fonts`, RFD 5 "Typography"),
    * so nothing is fetched from a font provider. A face carries only its own

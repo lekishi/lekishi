@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: "壽春, the last capital of Chu. The hereditary house of Chu records king 考烈王 moving the capital east to 壽春 in his twenty-second year (241 BCE) and naming it 郢, as Chu named its capitals. The record's label anchor sits at modern 壽縣, which the historical geography identifies with the place."
+types: [capital, settlement]
+names:
+  - form: "壽春"
+    lang: lzh
+    script: Hani
+    roman: Shouchun
+    scheme: pinyin
+    cite:
+      - says: "The hereditary house of Chu records Chu moving its capital east to 壽春 in 考烈王's twenty-second year (241 BCE), and naming it 郢."
+        source: shiji-six-states
+        at: "卷四十 楚世家 考烈王二十二年（楚東徙都壽春）"
+        quote: "楚東徙都壽春，命曰郢。"
+  - form: "郢"
+    lang: lzh
+    script: Hani
+    note: "The name Chu gave the city as its capital, as it named its earlier capitals; the chapter's other 郢 records are other cities."
+    claim: shouchun-names-0
+at:
+  - interpretation: display_anchor
+    precision: unspecified
+    point: [116.77938, 32.57822]
+    notes: "Label anchor at modern 壽縣, Wikidata Q1349884. It is not an asserted historical coordinate: the primary entry names the capital and states no site, and the anchor places no wall or palace."
+    cite:
+      - says: "The historical geography records that the place belonged to Chu in the Warring States period under the name 壽春, and that 考烈王 moved his capital there."
+        role: supporting
+        source: dushi-fangyu-jiyao-six-states
+        at: "卷二十一 南直三 鳳陽府 壽州"
+        quote: "戰國時屬楚，名曰壽春"
+      - says: "The label anchor is placed at the coordinate Wikidata (CC0) records for the modern place; no historical coordinate is asserted."
+        source: wikidata
+        at: "Q1349884 (P625), revision 2526581687"
+modern:
+  - form: "壽縣"
+    lang: zh-Hant
+    script: Hani
+    note: "Modern county recorded for orientation only."
+notes: "The record exists for the Chu territory snapshots of 229–223 BCE, which name 壽春 as Chu's seat. The historical geography's transcription runs its interlinear notes into the text, so only the clause before them is quoted."

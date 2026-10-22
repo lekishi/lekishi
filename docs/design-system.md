@@ -43,15 +43,16 @@ production-shaped build with the pages: `LEKISHI_DEV_PAGES=1 pnpm build`.
 All colours are tokens; use them as utilities (`bg-lacquer`, `text-ink-dim`,
 `border-frame`) or, outside markup, as custom properties (`var(--color-gold)`).
 
-| Role          | Tokens                                                                          | Use                                                             |
-| ------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| Surfaces      | `abyss`, `lacquer`, `lacquer-glass`, `lacquer-raised`                           | Page, solid chrome, chrome over the scene, hover and inputs.    |
-| Lines         | `frame`, `rule`                                                                 | The gold hairline around plates; dividers inside them.          |
-| Text          | `ink`, `ink-dim`, `ink-faint`                                                   | Primary, secondary, tertiary. All pass AA on lacquer.           |
-| Current       | `gold`, `gold-bright`, `on-gold`, `gold-tint`                                   | Selection, playhead, primary action, focus ring, selected rows. |
-| Errors        | `danger`                                                                        | The renderer failed. Never a historical state.                  |
-| Evidence      | `evidence-attested`, `-identified`, `-schematic`, `-overland`, `-reconstructed` | RFD 1's visual forms. Shared by the map and the interface.      |
-| Relationships | `rel-transmission`, `-diplomacy`, `-conflict`, `-trade`, `-institution`         | Relationship arcs and their legend.                             |
+| Role          | Tokens                                                                          | Use                                                               |
+| ------------- | ------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| Surfaces      | `abyss`, `lacquer`, `lacquer-glass`, `lacquer-raised`                           | Page, solid chrome, chrome over the scene, hover and inputs.      |
+| Lines         | `frame`, `rule`                                                                 | The gold hairline around plates; dividers inside them.            |
+| Text          | `ink`, `ink-dim`, `ink-faint`                                                   | Primary, secondary, tertiary. All pass AA on lacquer.             |
+| Current       | `gold`, `gold-bright`, `on-gold`, `gold-tint`                                   | Selection, playhead, primary action, focus ring, selected rows.   |
+| Errors        | `danger`                                                                        | The renderer failed. Never a historical state.                    |
+| Evidence      | `evidence-attested`, `-identified`, `-schematic`, `-overland`, `-reconstructed` | RFD 1's visual forms. Shared by the map and the interface.        |
+| Relationships | `rel-transmission`, `-diplomacy`, `-conflict`, `-trade`, `-institution`         | Relationship arcs and their legend.                               |
+| Control       | `control-1` to `control-8`                                                      | A territory controller's disc under a held place, and its legend. |
 
 Contrast is measured against `lacquer`, and `/dev/design` prints each figure from
 the stylesheet's own values. Keep body text at AA (4.5:1) or better. `ink-faint`

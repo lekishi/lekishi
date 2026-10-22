@@ -225,6 +225,7 @@ export const FIXTURE_CHAPTER: Chapter = {
       citations: [],
     },
   ],
+  territories: [],
   actors: [
     {
       id: "actor-fixture-envoy",

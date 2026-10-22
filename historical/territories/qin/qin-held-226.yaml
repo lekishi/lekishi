@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/territory.schema.json
+summary: "The places the sources record Qin holding after it took 薊, the Yan capital, in 226 BCE."
+controller: qin-state
+date:
+  value: "226 BCE"
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: "二十一年（取燕薊城）"
+places:
+  - place: xianyang
+    role: seat
+  - place: yingchuan
+    gained: han-annexation-yingchuan
+  - place: handan
+    gained: handan-fall-228
+  - place: dongyang-zhao
+    gained: handan-fall-228
+  - place: ji-yan
+    gained: ji-fall-226
+cite:
+  - says: "The annals record Qin breaking the crown prince's army and taking 薊 in 二十一年 (226 BCE), and the king of Yan withdrawing to 遼東."
+    source: shiji
+    at: "卷六 秦始皇本紀 二十一年（取燕薊城）"
+    quote: "乃益發卒詣王翦軍，遂破燕太子軍，取燕薊城，得太子丹之首。燕王東收遼東而王之。"
+notes: "The same notice records 新鄭, the former Han capital in the 潁川 commandery, revolting (新鄭反); the snapshot lists the commandery as the annals name it and does not decide how far the revolt reached. The next change the annals record is the flooding of 大梁 in 225 BCE."

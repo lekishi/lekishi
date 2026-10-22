@@ -120,7 +120,7 @@ const NON_LATIN_SCRIPTS = new Set([
   "Kawi",
 ])
 
-const EVIDENCE_KINDS = new Set(["place", "actor", "event", "relationship"])
+const EVIDENCE_KINDS = new Set(["place", "actor", "event", "relationship", "territory"])
 
 const ASSERTED_GEOMETRY = new Set([
   "approximate_point",
@@ -239,6 +239,8 @@ export function codes(): string[] {
     "relationship_self_reference",
     "causality_without_interpretation",
     "influence_without_interpretation",
+    "territory_time_unbounded",
+    "territory_place_repeated",
     "story_window_start_after_end",
     "story_first_step_not_start",
     "boundary_not_inclusive",
@@ -1219,6 +1221,10 @@ function kindErrors(
     return relationshipKindErrors(content, claimsById, path)
   }
 
+  if (context.kind === "territory") {
+    return territoryKindErrors(content, path)
+  }
+
   if (context.kind === "story") {
     return storyKindErrors(content, path)
   }
@@ -1294,6 +1300,38 @@ function relationshipKindErrors(
   return errors
 }
 
+/**
+ * A territory is a dated control snapshot (rfd/0002/TERRITORIES.adoc). Its date
+ * must be bounded at both ends, because "held from then on" is an inference no
+ * source states, and the atlas never carries a snapshot past its window. Each
+ * place appears once: a snapshot says a place was held, not how many times.
+ */
+function territoryKindErrors(content: JsonObject, path: string): Violation[] {
+  const normalized = normalize(content["time"])
+  const placeIds = listOf(content["places"]).map((entry) => objectOf(entry)["place_id"])
+  const errors: Violation[] = []
+
+  flag(
+    errors,
+    !normalized.ok || normalized.value.bounds !== "two_sided",
+    "territory_time_unbounded",
+    `${path}/time`,
+    "a control snapshot needs a date bounded at both ends; the atlas never carries one forward",
+  )
+
+  for (const repeated of duplicates(placeIds)) {
+    errors.push(
+      error(
+        "territory_place_repeated",
+        `${path}/places`,
+        `${String(repeated)} is listed more than once in one snapshot`,
+      ),
+    )
+  }
+
+  return errors
+}
+
 function storyKindErrors(content: JsonObject, path: string): Violation[] {
   const window = objectOf(content["window"])
   const steps = listOf(content["steps"])
@@ -1346,7 +1384,7 @@ function publishedEvidenceErrors(
     !cited,
     "published_record_without_citation",
     path,
-    "every published event, place, actor, and relationship needs a cited claim",
+    "every published event, place, actor, relationship, and territory needs a cited claim",
   )
 
   return errors

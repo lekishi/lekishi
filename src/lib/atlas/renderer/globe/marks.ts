@@ -14,7 +14,10 @@
  * - disputed: the mark is split, half filled;
  * - selected: gold-bright, larger, with a ring that pulses unless the reader
  *   asked for reduced motion; active (at the playhead): a little larger and
- *   brighter.
+ *   brighter;
+ * - held (a territory snapshot records a controller holding the place): a
+ *   disc in the controller's tint under the mark, ringed for its seat and
+ *   split when the holding is disputed. It is never a fill between places.
  *
  * The look is computed here as class lists and pixel sizes, without the DOM,
  * so the grammar is unit-tested; `view.ts` only applies it. Class names are
@@ -38,6 +41,12 @@ export type GlobeMarker = {
   /** The events at the place; more than one shows a count beside the mark. */
   readonly count: number
   readonly disputed: boolean
+  /** The controller holding the place in a drawn territory snapshot, or null. */
+  readonly control: {
+    readonly tint: number
+    readonly seat: boolean
+    readonly disputed: boolean
+  } | null
 }
 
 export type MarkerLook = {
@@ -60,6 +69,44 @@ export type MarkerLook = {
   readonly label: string
   /** The event count beside the mark, or null for one event. */
   readonly count: string | null
+  /** The controller's disc under the mark, or null when no snapshot holds the place. */
+  readonly control: string | null
+  /** The control disc's diameter, in pixels. */
+  readonly controlSize: number
+}
+
+// One whole literal per tint, so Tailwind's scanner generates each.
+const CONTROL_FILL = [
+  "bg-control-1/40 border-control-1",
+  "bg-control-2/40 border-control-2",
+  "bg-control-3/40 border-control-3",
+  "bg-control-4/40 border-control-4",
+  "bg-control-5/40 border-control-5",
+  "bg-control-6/40 border-control-6",
+  "bg-control-7/40 border-control-7",
+  "bg-control-8/40 border-control-8",
+]
+
+const CONTROL_SPLIT = [
+  "bg-[linear-gradient(90deg,var(--color-control-1)_50%,transparent_50%)] border-control-1",
+  "bg-[linear-gradient(90deg,var(--color-control-2)_50%,transparent_50%)] border-control-2",
+  "bg-[linear-gradient(90deg,var(--color-control-3)_50%,transparent_50%)] border-control-3",
+  "bg-[linear-gradient(90deg,var(--color-control-4)_50%,transparent_50%)] border-control-4",
+  "bg-[linear-gradient(90deg,var(--color-control-5)_50%,transparent_50%)] border-control-5",
+  "bg-[linear-gradient(90deg,var(--color-control-6)_50%,transparent_50%)] border-control-6",
+  "bg-[linear-gradient(90deg,var(--color-control-7)_50%,transparent_50%)] border-control-7",
+  "bg-[linear-gradient(90deg,var(--color-control-8)_50%,transparent_50%)] border-control-8",
+]
+
+function controlClasses(control: NonNullable<GlobeMarker["control"]>): string {
+  const tint = control.tint % CONTROL_FILL.length
+
+  return [
+    SHAPE,
+    "rounded-full",
+    control.seat ? "border-[3px] border-double" : "border",
+    control.disputed ? CONTROL_SPLIT[tint] : CONTROL_FILL[tint],
+  ].join(" ")
 }
 
 // A halo's diameter is its precision; a site keeps a small one for the rare
@@ -165,5 +212,7 @@ export function markerLook(marker: GlobeMarker): MarkerLook {
       marker.count > 1
         ? "absolute top-0 block -translate-y-1/2 rounded-full border border-frame bg-lacquer-glass px-1.5 font-interface text-caption tabular-nums text-ink"
         : null,
+    control: marker.control === null ? null : controlClasses(marker.control),
+    controlSize: Math.round(radius * 2 + (marker.control?.seat ? 14 : 10)),
   }
 }

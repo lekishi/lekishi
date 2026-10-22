@@ -163,6 +163,22 @@ function references(kind: RecordKind, content: JsonObject): string[] {
     found.push(String(content["from"]), String(content["to"]))
   }
 
+  // A snapshot reaches its controller, its places and how each was gained, so
+  // the chapter that includes it publishes everything its card names.
+  if (kind === "territory") {
+    found.push(String(content["controller_id"]))
+
+    for (const entry of isList(content["places"]) ? content["places"] : []) {
+      if (isObject(entry)) {
+        found.push(String(entry["place_id"]))
+
+        if (typeof entry["gained_record_id"] === "string") {
+          found.push(entry["gained_record_id"])
+        }
+      }
+    }
+  }
+
   return found
 }
 
@@ -514,7 +530,7 @@ export function compileChapter(
     (name, index) =>
       lookup.record(
         String(name),
-        ["place", "actor", "event", "relationship"],
+        ["place", "actor", "event", "relationship", "territory"],
         `${manifest.path}: include[${index}]`,
       ),
   )

@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=../../schema/territory.schema.json
+summary: "薊, Yan's capital, which the sources record Yan holding until Qin took it in 226 BCE."
+controller: yan-state
+date:
+  value: "229 BCE..227 BCE"
+  mode: duration
+  calendar: chinese_lunisolar
+  as_written: "燕王喜二十九年（秦拔我薊）"
+places:
+  - place: ji-yan
+    role: seat
+cite:
+  - says: "The six-states table records Qin taking 薊 from Yan, and the king moving to 遼東, in Yan's twenty-ninth year (226 BCE)."
+    source: shiji
+    at: "卷十五 六國年表 秦始皇二十一年（燕 二十九）"
+    quote: "二十九。秦拔我薊，得太子丹。王徙遼東。"
+notes: "The window opens with the chapter in 229 BCE and ends the year before 薊 passes to Qin. The embassy of 荊軻 left from Yan in this window; Yan held far more than its capital, and the snapshot lists only what the sources name."

@@ -1,4 +1,4 @@
-import type { Actor, Chapter, HistoricalEvent, Place, Relationship } from "./domain"
+import type { Actor, Chapter, HistoricalEvent, Place, Relationship, Territory } from "./domain"
 import { familyOf, type RelationshipFamily } from "./overlays"
 import { overlapsWindow } from "./time"
 import type { TimeWindow } from "./domain"
@@ -145,6 +145,43 @@ export function eventsAtPlace(chapter: Chapter, placeId: string): HistoricalEven
   return chapter.events
     .filter((event) => event.placeIds.includes(placeId))
     .sort((a, b) => a.occurrence.startYear - b.occurrence.startYear)
+}
+
+/** One snapshot that holds a place, as the place's card lists it. */
+export type ControlRow = {
+  readonly territory: Territory
+  readonly controllerLabel: string
+  readonly role: "seat" | "held"
+  /** The event or relationship by which the controller gained the place, or null. */
+  readonly gainedRecordId: string | null
+  readonly note: string | null
+}
+
+/**
+ * Every snapshot that records a controller holding the place, in date order.
+ * The card lists them all, not only the one at the playhead, so a reader sees
+ * the years the sources cover and, by their absence, the years they do not.
+ */
+export function controlOf(chapter: Chapter, placeId: string): ControlRow[] {
+  const actors = new Map(chapter.actors.map((actor) => [actor.id, actor.label]))
+
+  return chapter.territories
+    .flatMap((territory) =>
+      territory.places
+        .filter((held) => held.placeId === placeId)
+        .map((held) => ({
+          territory,
+          controllerLabel: actors.get(territory.controllerId) ?? territory.controllerId,
+          role: held.role,
+          gainedRecordId: held.gainedRecordId,
+          note: held.note,
+        })),
+    )
+    .sort(
+      (a, b) =>
+        a.territory.span.startYear - b.territory.span.startYear ||
+        a.territory.id.localeCompare(b.territory.id),
+    )
 }
 
 export type RelationshipRow = {

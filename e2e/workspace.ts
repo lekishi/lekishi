@@ -364,9 +364,12 @@ export async function foldLegend(page: Page): Promise<void> {
   await expect(toggle).toHaveAttribute("aria-expanded", "false")
 }
 
-/** The drawn mark of a place on the globe (the marker's second span; the first is the pulse). */
+/**
+ * The drawn mark of a place on the globe: the marker's third span, after the
+ * controller's disc and the pulse.
+ */
 export function placeMark(page: Page, placeId: string): Locator {
-  return page.locator(`[data-marker-id="${placeId}"] > span:nth-child(2)`)
+  return page.locator(`[data-marker-id="${placeId}"] > span:nth-child(3)`)
 }
 
 /**

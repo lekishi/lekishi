@@ -8,7 +8,7 @@ import {
   type CurrentPublished,
   type PublicationEvent,
 } from "./publication-order"
-import { cycle, orderingConsistent } from "./time"
+import { cycle, normalize, orderingConsistent } from "./time"
 import * as Timestamps from "./timestamps"
 import {
   isList,
@@ -48,7 +48,9 @@ const REFERENCE_FIELDS: [string, string | null][] = [
   ["place_id", "place"],
   ["actor_id", "actor"],
   ["event_id", "event"],
+  ["controller_id", "actor"],
   ["record_id", null],
+  ["gained_record_id", null],
   ["source_id", "source"],
   ["from", null],
   ["to", null],
@@ -101,6 +103,9 @@ export function codes(): string[] {
     "pinned_source_unknown",
     "pinned_source_hash_mismatch",
     "source_not_pinned",
+    "territory_gained_kind_mismatch",
+    "territory_gained_after_window",
+    "territory_overlap_without_dispute",
   ]
 }
 
@@ -124,6 +129,7 @@ export function checkAll(documents: JsonValue[], sets: JsonValue[]): Publication
   errors.push(...licenseErrors(records, sources, sets))
   errors.push(...orderingErrors(records, sets))
   errors.push(...partOfErrors(records, sets))
+  errors.push(...territoryErrors(records, sets))
 
   if (errors.length > 0) {
     return { ok: false, errors }
@@ -767,6 +773,115 @@ function partOfErrors(records: JsonValue[], sets: JsonValue[]): Violation[] {
   const found = cycle(edges)
 
   return found === null ? [] : [error("part_of_cycle", "/content/part_of", found.join(" -> "))]
+}
+
+/**
+ * The rules a territory snapshot obeys across records (rfd/0002/TERRITORIES.adoc),
+ * judged on published revisions like ordering. A place's `gained_record_id` names
+ * the event or relationship by which the controller came to hold it, so it cannot
+ * begin after the snapshot ends. Two controllers may hold one place in
+ * overlapping windows only when one of the snapshots carries a dispute: the map
+ * then shows both, marked disputed, rather than silently picking one.
+ */
+function territoryErrors(records: JsonValue[], sets: JsonValue[]): Violation[] {
+  const pairs = published(records, sets)
+  const byId = new Map(
+    pairs.map(([record, revision]) => [String(record["record_id"]), { record, revision }]),
+  )
+  const snapshots = pairs.filter(([record]) => record["kind"] === "territory")
+  const errors: Violation[] = []
+
+  for (const [record, revision] of snapshots) {
+    const window = span(getIn(revision, ["content", "time"]))
+
+    listOf(getIn(revision, ["content", "places"])).forEach((entryValue, index) => {
+      const gained = objectOf(entryValue)["gained_record_id"]
+      const target = isString(gained) ? byId.get(gained) : undefined
+      const path = `/revisions/${String(revision["revision_id"])}/content/places/${index}/gained_record_id`
+
+      if (target === undefined) {
+        return
+      }
+
+      const kind = target.record["kind"]
+
+      if (kind !== "event" && kind !== "relationship") {
+        errors.push(
+          error(
+            "territory_gained_kind_mismatch",
+            path,
+            `${String(gained)} is a ${String(kind)}, not an event or relationship`,
+          ),
+        )
+        return
+      }
+
+      const when = span(getIn(target.revision, ["content", kind === "event" ? "time" : "validity"]))
+
+      if (window !== null && when !== null && when.start > window.end) {
+        errors.push(
+          error(
+            "territory_gained_after_window",
+            path,
+            `${String(gained)} begins after ${String(record["record_id"])} ends`,
+          ),
+        )
+      }
+    })
+  }
+
+  snapshots.forEach(([a, aRevision], index) => {
+    for (const [b, bRevision] of snapshots.slice(index + 1)) {
+      const aController = getIn(aRevision, ["content", "controller_id"])
+      const bController = getIn(bRevision, ["content", "controller_id"])
+      const aWindow = span(getIn(aRevision, ["content", "time"]))
+      const bWindow = span(getIn(bRevision, ["content", "time"]))
+
+      if (
+        aController === bController ||
+        aWindow === null ||
+        bWindow === null ||
+        aWindow.start > bWindow.end ||
+        bWindow.start > aWindow.end ||
+        aRevision["dispute"] !== undefined ||
+        bRevision["dispute"] !== undefined
+      ) {
+        continue
+      }
+
+      const held = new Set(placeIds(aRevision))
+      const shared = placeIds(bRevision).filter((placeId) => held.has(placeId))
+
+      if (shared.length > 0) {
+        errors.push(
+          error(
+            "territory_overlap_without_dispute",
+            "/content/places",
+            `${String(a["record_id"])} and ${String(b["record_id"])} both hold ${shared.join(", ")} with no dispute on either`,
+          ),
+        )
+      }
+    }
+  })
+
+  return errors
+}
+
+function placeIds(revision: JsonObject): string[] {
+  return listOf(getIn(revision, ["content", "places"])).map((entry) =>
+    String(objectOf(entry)["place_id"]),
+  )
+}
+
+/** A time's astronomical year span, or null when it is undated or open-ended. */
+function span(time: JsonValue | undefined): { start: number; end: number } | null {
+  const normalized = normalize(time ?? null)
+
+  if (!normalized.ok || normalized.value.start === null || normalized.value.end === null) {
+    return null
+  }
+
+  return { start: normalized.value.start.astro, end: normalized.value.end.astro }
 }
 
 function published(records: JsonValue[], sets: JsonValue[]): [JsonObject, JsonObject][] {

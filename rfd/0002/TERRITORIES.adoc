@@ -1,5 +1,5 @@
 = Territories as control by place
-:state: Decided 2026-10-21 (control by place); the record shape below is proposed for the owner's review and not built
+:state: Decided 2026-10-21 (control by place); record shape accepted 2026-10-22 and built in contract v0
 :toc:
 :toclevels: 2
 
@@ -35,49 +35,47 @@ without inventing a boundary. The year-by-year table in
 link:QIN_UNIFICATION_FEASIBILITY.adoc[the six states' feasibility note] is the
 first content.
 
-The shape below is proposed for the owner's review. None of it is built until
-the owner accepts it.
+The owner accepted the shape below on 2026-10-22, and it is built: the kind
+amends contract v0 in place, because no published content depends on v0 yet
+(the owner's rule of 2026-10-22, in link:CONTRACTS.adoc[the contract record]),
+and the six states chapter publishes fifteen snapshots.
 
-== Proposed: the territory record
+== Decided: the territory record — 2026-10-22
 
 A territory record is a *dated control snapshot*: one controller, one date,
-and the places a source records it holding then. It is a new kind under
-contract *v1*, `historical/territories/<id>.yaml`, as the authoring format
-already reserves.
+and the places a source records it holding then. It is a record kind of its
+own, `historical/territories/<id>.yaml`, compiled to the v0 kind `territory`.
 
 [source,yaml]
 ----
-# historical/territories/qin-held-225.yaml
-title: Places Qin held after the fall of Wei, 225 BCE
-summary: >-
-  With 大梁 flooded and Wei's land taken, Qin held the old capitals of Han,
-  Zhao and Wei. Yan's king held out at 遼東, Dai at 代, and Chu and Qi
-  remained unconquered.
+# historical/territories/qin/qin-held-225.yaml (abridged)
+summary: "The places the sources record Qin holding after 王賁 flooded 大梁 and took all Wei's land in 225 BCE."
 controller: qin-state
 date:
-  value: 225 BCE
-  mode: window
+  value: "225 BCE"
+  mode: duration
   calendar: chinese_lunisolar
-  as_written: 二十二年（盡取其地）
+  as_written: "二十二年（盡取其地）"
 places:
   - place: xianyang
     role: seat
-    cite:
-      - says: The biography of 荊軻 records the king receiving the Yan envoys at 咸陽 in 227 BCE.
-        source: shiji-six-states
-        at: 卷八十六 刺客列傳（見燕使者咸陽宮）
-  - place: yingchuan        # gained 230 BCE: han-annexation-yingchuan
-  - place: handan           # gained 228 BCE: handan-fall-228
-  - place: ji-yan           # gained 226 BCE: ji-fall-226
+  - place: yingchuan
+    gained: han-annexation-yingchuan
+  - place: handan
+    gained: handan-fall-228
+  - place: ji-yan
+    gained: ji-fall-226
   - place: daliang
     gained: daliang-flood-225
 cite:
-  - says: >-
-      The annals record Qin taking all Wei's land in 二十二年, after Han in
-      十七年, 邯鄲 in 十九年 and 薊 in 二十一年.
+  - says: "The annals record 王賁 flooding 大梁, the king of Wei asking to surrender, and Qin taking all his land in 二十二年 (225 BCE)."
     source: shiji
-    at: 卷六 秦始皇本紀 十七年–二十二年
+    at: "卷六 秦始皇本紀 二十二年（引河溝灌大梁）"
+    quote: "王賁攻魏，引河溝灌大梁，大梁城壞，其王請降，盡取其地。"
 ----
+
+It compiles to v0 content with `controller_id`, `time`, and `places`, each
+place a `place_id`, a `role`, and an optional `gained_record_id` and `note`.
 
 *The record.*
 
@@ -87,6 +85,12 @@ cite:
 * `date` is the window the cited sources support, in the usual date grammar.
   It must be bounded: an open-ended snapshot is an error, because "from then
   on" is an inference no source states.
+* *The window* runs from the change its sources date to the year before the
+  next change they date, when they record no loss in between; a state's first
+  snapshot opens with the chapter's window. In the year a place changes hands,
+  the gaining controller's snapshot holds it and the losing controller's ends
+  the year before, so year-precision windows never make a transfer look like a
+  dispute.
 * `places` lists what the controller held in that window. Each entry is a
   place id, or an object with these fields:
 ** `role`: `seat` for a capital or administrative seat, or `held` (the
@@ -103,10 +107,13 @@ cite:
 
 *What is drawn.*
 
-* Within the snapshot's window, each listed place with an asserted coordinate,
-  or with a `display_anchor`, gets the controller's tint and a "held by" mark
-  on its existing marker. A `seat` gets a distinct mark. Nothing is filled,
-  and no hull or line joins the places.
+* With the territory orb on, each snapshot whose window holds the playhead
+  year is drawn. Each listed place with an asserted coordinate, or with a
+  `display_anchor`, gets a disc in the controller's tint under its marker
+  (the `control-*` tokens), a ringed disc for a `seat`, split for a disputed
+  holding. Nothing is filled, and no hull or line joins the places. The
+  legend names each drawn controller beside its tint with the snapshot's
+  years, and a place's card lists every snapshot that holds it.
 * A listed place with `unknown` geometry is named on the card and not drawn.
   東陽 and 淮南 are the cases.
 * Outside every snapshot's window, the atlas shows no control. It never
@@ -122,51 +129,61 @@ cite:
 by the chapter. A snapshot reached by an approved chapter is in that chapter's
 digest, like any other record.
 
-*Validation the compiler adds* (each becomes a v1 vector):
+*Validation* (each pinned by a vector in `historical/v0/vectors/territories.json`):
 
 . A controller that is not an actor, or a place or `gained` id that does not
-  exist.
-. No places, or one place listed twice in a snapshot.
-. An unbounded `date`.
-. A `gained` record dated after the snapshot's window ends.
+  exist or is of the wrong kind (`reference_kind_mismatch`,
+  `unresolved_reference`, `territory_gained_kind_mismatch`).
+. No places (`schema_violation`), or one place listed twice in a snapshot
+  (`territory_place_repeated`).
+. An unbounded `date` (`territory_time_unbounded`).
+. A `gained` record that begins after the snapshot's window ends
+  (`territory_gained_after_window`).
 . One place held by two controllers in overlapping windows with no `dispute`
-  on either snapshot.
+  on either snapshot (`territory_overlap_without_dispute`).
+. A published snapshot with no cited claim (`published_record_without_citation`).
 
 == First content: the six states, 230–221 BCE
 
-Once the shape is accepted, the six states chapter gets one snapshot per state
-at each change the sources date. The places come from that chapter's existing
-records, except 壽春, Chu's last seat, which needs a new place record.
+The six states chapter publishes fifteen snapshots, under
+`historical/territories/qin/`, listed in its manifest's `include`. The places
+are the chapter's own records, plus 壽春, Chu's last seat, added for them.
 
 [cols="1,3"]
 |===
-|Controller |Snapshots
+|Controller |Snapshots (BCE)
 
 |Qin
-|230 (Han's land as 潁川), 228 (adds 邯鄲), 226 (adds 薊), 225 (adds 大梁),
-224 (adds 陳 and 平輿), 222 (adds 遼東, 代 and 會稽), 221 (adds 臨淄)
+|230–229 (咸陽 as seat, 潁川), 228–227 (adds 邯鄲 and 東陽), 226 (adds 薊),
+225 (adds 大梁), 224–223 (adds 陳 and 平輿), 222 (adds 遼東, 代 and 會稽),
+221 (adds 臨淄)
 
 |Zhao
 |229 (邯鄲 as seat)
 
 |Dai
-|228–222 (代 as seat, with 上谷 where the sources place the joint camp)
+|228–223 (代 as seat)
 
 |Yan
-|229–226 (薊 as seat); 226–222 (遼東)
+|229–227 (薊 as seat); 226–223 (遼東 as seat)
 
 |Wei
-|229–225 (大梁 as seat)
+|229–226 (大梁 as seat)
 
 |Chu
-|229–223 (壽春 as seat, which needs a new place record; 陳 and 平輿 until 224)
+|229–225 (壽春 as seat, 陳, 平輿); 224–223 (壽春 as seat, 淮南)
 
 |Qi
-|229–221 (臨淄 as seat)
+|229–222 (臨淄 as seat)
 |===
 
-The 224 and 223 snapshots of Chu carry the dispute over the year of the king's
-capture, as the event `chu-king-captured` already does.
+Two departures from the proposal: 上谷 is not a Dai holding, because the
+sources place a joint camp there and a camp is not a holding; and each losing
+state's window ends the year before the gaining state's begins, by the
+transfer-year rule above. The 224–223 snapshot of Chu carries the dispute over
+the year of the king's capture, as the event `chu-king-captured` does; Qin's
+224–223 snapshot does not list 壽春, because no source names where the king
+was taken.
 
 == Borders: a later follow-up
 

@@ -12,6 +12,7 @@ const marker = (overrides: Partial<GlobeMarker> = {}): GlobeMarker => ({
   emphasis: "base",
   count: 1,
   disputed: false,
+  control: null,
   ...overrides,
 })
 
@@ -109,5 +110,23 @@ describe("place labels", () => {
         expect(look.labelOffset).toBeGreaterThanOrEqual(look.hitRadius)
       }
     }
+  })
+
+  it("puts a held place on a disc in its controller's tint, ringed for a seat", () => {
+    const held = markerLook(marker({ control: { tint: 1, seat: false, disputed: false } }))
+    const seat = markerLook(marker({ control: { tint: 1, seat: true, disputed: false } }))
+
+    expect(markerLook(marker()).control).toBeNull()
+    expect(classes(held.control)).toContain("bg-control-2/40")
+    expect(classes(held.control)).not.toContain("border-double")
+    expect(classes(seat.control)).toContain("border-double")
+    expect(seat.controlSize).toBeGreaterThan(held.controlSize)
+    expect(held.controlSize).toBeGreaterThan(held.size)
+  })
+
+  it("splits the disc when the holding is disputed, and reuses tints past the eighth", () => {
+    const disputed = markerLook(marker({ control: { tint: 9, seat: false, disputed: true } }))
+
+    expect(disputed.control).toContain("var(--color-control-2)_50%")
   })
 })

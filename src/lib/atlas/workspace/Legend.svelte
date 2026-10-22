@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Badge, Icon, focusRing, transition } from "$lib/ui"
-  import type { RelationshipFamily } from "../overlays"
+  import type { RelationshipFamily, SceneTerritory } from "../overlays"
   import HonestyPlate from "./HonestyPlate.svelte"
 
   /**
@@ -17,12 +17,15 @@
     marks,
     journeys,
     families,
+    territories = [],
     diorama,
     folded = false,
   }: {
     marks: { readonly attested: boolean; readonly identified: boolean; readonly anchor: boolean }
     journeys: boolean
     families: readonly RelationshipFamily[]
+    /** The territory snapshots the map is drawing at the playhead. */
+    territories?: readonly SceneTerritory[]
     diorama: string | null
     folded?: boolean
   } = $props()
@@ -40,6 +43,18 @@
     trade: "trade",
     institution: "institutional change",
   }
+
+  // One whole literal per tint, so Tailwind's scanner generates each.
+  const CONTROL_CLASS = [
+    "bg-control-1/40 border-control-1",
+    "bg-control-2/40 border-control-2",
+    "bg-control-3/40 border-control-3",
+    "bg-control-4/40 border-control-4",
+    "bg-control-5/40 border-control-5",
+    "bg-control-6/40 border-control-6",
+    "bg-control-7/40 border-control-7",
+    "bg-control-8/40 border-control-8",
+  ]
 
   const FAMILY_CLASS: Record<RelationshipFamily, string> = {
     transmission: "bg-rel-transmission",
@@ -89,7 +104,30 @@
           {/each}
         </ul>
       {/if}
-      <HonestyPlate lines={journeys || families.length > 0} anchors={marks.anchor} {diorama} />
+      {#if territories.length > 0}
+        <ul data-testid="legend-control" class="flex flex-col gap-1 text-caption text-ink-dim">
+          {#each territories as territory (territory.id)}
+            <li class="inline-flex items-center gap-1.5">
+              <span
+                aria-hidden="true"
+                class={[
+                  "h-3 w-3 rounded-full border",
+                  CONTROL_CLASS[territory.tint % CONTROL_CLASS.length],
+                ]}
+              ></span>
+              <span>held by <span class="font-serif text-ink">{territory.label}</span></span>
+              <span class="tabular-nums">{territory.dateLabel}</span>
+              {#if territory.disputed}<span class="text-ink-faint">· disputed</span>{/if}
+            </li>
+          {/each}
+        </ul>
+      {/if}
+      <HonestyPlate
+        lines={journeys || families.length > 0}
+        anchors={marks.anchor}
+        control={territories.length > 0}
+        {diorama}
+      />
       <p class="text-caption text-ink-faint">
         Elevation: Terrain Tiles (Mapzen and contributors) · Land cover: ESA WorldCover · Imagery:
         Natural Earth II ·

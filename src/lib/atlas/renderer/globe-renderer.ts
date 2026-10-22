@@ -1,4 +1,4 @@
-import type { SceneArc, SceneDiorama, SceneJourney, SceneTerritory } from "../overlays"
+import type { SceneArc, SceneDiorama, SceneJourney } from "../overlays"
 import type { AtlasScene, ScenePlace } from "../scene"
 import {
   createGlobeView,
@@ -6,7 +6,6 @@ import {
   type GlobeDiorama,
   type GlobeJourney,
   type GlobeMarker,
-  type GlobeTerritory,
   type GlobeView,
 } from "./globe/view"
 import type { AtlasRenderer, AtlasRendererCallbacks } from "./types"
@@ -56,7 +55,8 @@ export type GlobeRendererOptions = {
 /**
  * The marker a scene place draws: its form is the evidence (attested ring,
  * identified halo, display-anchor diamond), its fill the certainty, its size
- * the emphasis. The scene only carries places with a published position, so
+ * the emphasis, and a disc under it the controller of a drawn territory
+ * snapshot. The scene only carries places with a published position, so
  * no coordinate is invented for a list-only event.
  */
 export function markerFor(place: ScenePlace): GlobeMarker {
@@ -71,6 +71,10 @@ export function markerFor(place: ScenePlace): GlobeMarker {
     emphasis: place.selected ? "selected" : place.playback === "active" ? "active" : "base",
     count: place.eventCount,
     disputed: place.disputed,
+    control:
+      place.control === null
+        ? null
+        : { tint: place.control.tint, seat: place.control.seat, disputed: place.control.disputed },
   }
 }
 
@@ -95,10 +99,6 @@ export function arcFor(arc: SceneArc): GlobeArc {
     emphasis: arc.emphasis,
     caption: `${arc.fromLabel} ${arc.directed ? "→" : "–"} ${arc.toLabel}`,
   }
-}
-
-export function territoryFor(territory: SceneTerritory): GlobeTerritory {
-  return { id: territory.id, dateLabel: territory.dateLabel, rings: territory.rings }
 }
 
 export function dioramaFor(diorama: SceneDiorama): GlobeDiorama {
@@ -272,7 +272,6 @@ class GlobeAtlasRenderer implements AtlasRenderer {
     this.view.setOverlays({
       journeys: scene.journeys.map(journeyFor),
       arcs: scene.arcs.map(arcFor),
-      territories: scene.territories.map(territoryFor),
     })
     this.view.setDioramas(scene.dioramas.map(dioramaFor))
 

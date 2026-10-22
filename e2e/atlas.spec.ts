@@ -485,16 +485,15 @@ test("fetches the 秋妻屋浦 diorama from the artifact when the camera comes d
 
   // The diorama is fetched only when the camera is low over the place, never
   // with the chapter: zoom in over the landfall until it is.
-  // The first press point is checked to be the open globe; the zoom keeps the
-  // landfall near the pointer, so later steps follow the mark as it moves.
-  await markPoint(page, "lks:place:akimeya")
-  const mark = page.locator('[data-marker-id="lks:place:akimeya"] > span:nth-child(2)')
+  // The wheel zooms toward the ground under the pointer, so the point checked
+  // to be the open globe over the landfall is reused for every step. Reading
+  // the mark's box again each step cost seconds a step on a software renderer
+  // at this size and pushed the test past its budget on CI's standard runner.
+  // The fetch and legend checks below still require coming down near 秋妻屋浦.
+  const landfall = await markPoint(page, "lks:place:akimeya")
+  await page.mouse.move(landfall.x, landfall.y)
 
   await expect(async () => {
-    const box = await mark.boundingBox()
-    if (box !== null) {
-      await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2)
-    }
     await page.mouse.wheel(0, -800)
     expect(diorama).not.toBeNull()
   }).toPass({ timeout: 90_000 })

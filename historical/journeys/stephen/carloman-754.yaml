@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/journey.schema.json
+title: Carloman's journey from Monte Cassino to Francia, 754
+summary: >-
+  Carloman, Pepin's brother and a monk of Monte Cassino, comes from his monastery to Francia and is
+  left at Vienne with Queen Bertrada, where he falls ill.
+travellers:
+  - actor: carloman-mayor
+    role: leader
+# His death at Vienne and the return of his body to Monte Cassino (carloman-burial-755) are not
+# stops: the body's carrying is not the party's journey.
+stops:
+  - carloman-arrival-754
+  - carloman-vienne-754
+cite:
+  - id: carloman-journey-sequence
+    says: >-
+      The annals have Carloman, monk and brother of the king, come to Francia in 753, and in 755 record
+      that he stayed behind at Vienne with Queen Bertrada, ill.
+    source: annales-regni-francorum
+    at: "s.a. 753: similiter et Carlomannus, monachus et germanus supradicti Pippini regis, per iussionem abbatis sui in Franciam venit … s.a. 755: Carlomannus autem monachus Vienna civitate remansit"
+  - id: carloman-journey-from-monastery
+    says: The life has him sent from the monastery of St Benedict into Francia.
+    source: liber-pontificalis
+    at: Carolomannum fratrem benignissimi Pippini regis, a monasterio beati Benedicti … Franciae provinciam … direxit
+    role: supporting
+notes: >-
+  Who sent him is disputed on the arrival event; the journey does not choose. The first stop is his
+  departure from Monte Cassino, the arrival event's start place.

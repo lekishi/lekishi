@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/journey.schema.json
+title: The imperial envoys' voyage to Marseille, 754 or 755
+summary: >-
+  The emperor's envoys George and John the silentiary, received in Rome, go on by sea to Marseille
+  to find Pepin, and learn there that he has already entered Lombard territory.
+travellers:
+  - actor: george-protoasecretis
+    role: leader
+  - actor: john-the-silentiary
+    role: participant
+# Their meeting with Pepin "not far from Pavia" (george-meets-pepin-754) has only a context place,
+# so it is not a stop.
+stops:
+  - imperial-envoys-rome-754
+  - event: imperial-envoys-marseille-754
+    by: sea
+cite:
+  - id: imperial-envoys-sequence
+    says: >-
+      The life has the imperial envoys come to Rome and go from there by sea to Marseille, where they
+      learn the king has entered Lombard territory.
+    source: liber-pontificalis
+    at: coniunxerunt in hac Romana urbe imperiales missi … Et pergentes marino itinere quantotius Maxiliam advenerunt
+notes: The life states the sea leg ("marino itinere"); it is the only leg in the chapter with a stated mode.

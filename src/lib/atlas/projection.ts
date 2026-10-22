@@ -35,6 +35,8 @@ import type {
   Source,
   StoryOption,
   StoryStep,
+  Territory,
+  TerritoryPlace,
   TimeWindow,
 } from "./domain"
 
@@ -235,6 +237,14 @@ function storyReach(
         }
       }
 
+      if (entry.kind === "territory") {
+        add(reached, stringOrUndefined(entry.content["controller_id"]))
+
+        for (const held of listOf(entry.content["places"]).map(objectOf)) {
+          add(reached, stringOrUndefined(held["place_id"]))
+        }
+      }
+
       if (entry.kind === "relationship") {
         for (const end of ["from", "to"] as const) {
           const endId = stringOrUndefined(entry.content[end])
@@ -403,6 +413,12 @@ function projectView(
     .filter((entry): entry is Relationship => entry !== null)
     .sort((a, b) => a.id.localeCompare(b.id))
 
+  const territories = published
+    .filter((entry) => entry.kind === "territory")
+    .map((entry) => projectTerritory(entry, places, actors, sourceIds, errors))
+    .filter((entry): entry is Territory => entry !== null)
+    .sort((a, b) => a.id.localeCompare(b.id))
+
   eventGeometryErrors(published, errors)
 
   if (events.length === 0) {
@@ -446,6 +462,7 @@ function projectView(
       actors: [...actors.values()],
       events,
       relationships,
+      territories,
       sources,
       story: storySteps,
       publication,
@@ -1056,7 +1073,7 @@ function projectDispute(entry: PublishedRevision, errors: string[]): EventDisput
 function projectOccurrence(
   recordId: string,
   value: JsonValue | undefined,
-  what: "event" | "relationship",
+  what: "event" | "relationship" | "territory",
   errors: string[],
 ): Occurrence | null {
   const result = normalize(value)
@@ -1147,6 +1164,69 @@ function projectRelationship(
     directionality: stringOrUndefined(entry.content["directionality"]) ?? "directed",
     causal: entry.content["causality"] === "asserted",
     validity,
+    citations: projectCitations(entry, sourceIds, errors),
+  }
+}
+
+/**
+ * A published territory snapshot, with its controller and places resolved
+ * against the chapter's own actors and places. Its date is required and closed,
+ * as the contract requires; a held place the chapter does not publish is an
+ * error rather than a tint on nothing.
+ */
+function projectTerritory(
+  entry: PublishedRevision,
+  places: Map<string, Place>,
+  actors: Map<string, Actor>,
+  sourceIds: ReadonlySet<string>,
+  errors: string[],
+): Territory | null {
+  const summary = stringOrUndefined(entry.content["summary"])
+  const controllerId = stringOrUndefined(entry.content["controller_id"])
+  const span = projectOccurrence(entry.recordId, entry.content["time"], "territory", errors)
+  let resolved = true
+
+  if (summary === undefined) {
+    errors.push(`${entry.recordId} has no published summary`)
+    resolved = false
+  }
+
+  if (controllerId === undefined || !actors.has(controllerId)) {
+    errors.push(`${entry.recordId} names ${String(controllerId)}, which is not a published actor`)
+    resolved = false
+  }
+
+  const held = listOf(entry.content["places"]).flatMap((value): TerritoryPlace[] => {
+    const place = objectOf(value)
+    const placeId = stringOrUndefined(place["place_id"])
+
+    if (placeId === undefined || !places.has(placeId)) {
+      errors.push(`${entry.recordId} holds ${String(placeId)}, which is not a published place`)
+      resolved = false
+      return []
+    }
+
+    return [
+      {
+        placeId,
+        role: place["role"] === "seat" ? "seat" : "held",
+        gainedRecordId: stringOrUndefined(place["gained_record_id"]) ?? null,
+        note: stringOrUndefined(place["note"]) ?? null,
+      },
+    ]
+  })
+
+  if (!resolved || span === null) {
+    return null
+  }
+
+  return {
+    id: entry.recordId,
+    controllerId: controllerId as string,
+    summary: summary as string,
+    span,
+    places: held,
+    dispute: projectDispute(entry, errors),
     citations: projectCitations(entry, sourceIds, errors),
   }
 }

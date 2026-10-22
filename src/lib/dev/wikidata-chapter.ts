@@ -149,6 +149,7 @@ export function wikidataChapter(snapshot: WikidataSnapshot): Chapter {
     actors: [],
     events,
     relationships: [],
+    territories: [],
     sources: [
       {
         id: "wikidata",

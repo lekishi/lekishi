@@ -265,6 +265,37 @@ export type Relationship = {
   readonly citations: readonly EventCitation[]
 }
 
+/** One place a territory snapshot records its controller holding. */
+export type TerritoryPlace = {
+  readonly placeId: string
+  /** `seat` for a capital or administrative seat, `held` for any other place. */
+  readonly role: "seat" | "held"
+  /** The event or relationship by which the controller came to hold it, or null. */
+  readonly gainedRecordId: string | null
+  /** The record's note on this place, verbatim, or null. */
+  readonly note: string | null
+}
+
+/**
+ * A published territory: a dated control snapshot (rfd/0002/TERRITORIES.adoc).
+ * One controller, one closed year range, and the places a cited source records
+ * it holding then. It asserts no border and no area, and lists only places a
+ * source names, never everything the controller held; the atlas draws it only
+ * inside its own range and never carries it forward or interpolates.
+ */
+export type Territory = {
+  readonly id: string
+  readonly controllerId: string
+  /** The published summary, verbatim. */
+  readonly summary: string
+  /** The years the snapshot covers, with the source's own expression. */
+  readonly span: Occurrence
+  readonly places: readonly TerritoryPlace[]
+  /** The published dispute, or null when the record is undisputed. */
+  readonly dispute: EventDispute | null
+  readonly citations: readonly EventCitation[]
+}
+
 /** Publication facts the atlas states wherever the chapter's content appears. */
 export type ChapterPublication = {
   /** Every set that published a revision the atlas shows, newest first. */
@@ -315,6 +346,8 @@ export type Chapter = {
   readonly events: readonly HistoricalEvent[]
   /** Every published relationship, in record id order. */
   readonly relationships: readonly Relationship[]
+  /** Every published territory snapshot, in record id order. */
+  readonly territories: readonly Territory[]
   readonly sources: readonly Source[]
   /** This story's published steps, in the story's own presentation order. */
   readonly story: readonly StoryStep[]

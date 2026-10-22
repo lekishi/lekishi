@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 隱岐國, the island province where the ship bringing 戒融 home from 渤海 came ashore in 763.
+types: [region]
+names:
+  - form: 隱岐國
+    lang: ja
+    script: Hani
+    roman: Oki-no-kuni
+    scheme: hepburn
+    cite:
+      - id: oki-name
+        says: The entry records the ship reaching 隱岐國 after more than ten days adrift.
+        source: shoku-nihongi
+        at: 卷第廿四 天平寶字七年十月乙亥
+        quote: 漂流十餘日。着隱岐國。
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [133.314861, 36.208917]
+    notes:
+      A region-level placement standing for the whole island province of 隱岐國, the present-day 隠岐
+      islands. The point is the coordinate Wikidata records for the province; the entry does not say
+      which island the ship reached, and none is placed.
+    cite:
+      - id: oki-identification
+        says:
+          The reference work identifies 隠岐国 as the old province formed by the island group north of
+          the 島根 peninsula, the 島前 islands and 島後, now in Shimane Prefecture. The point is the
+          province's coordinate from Wikidata (CC0), placed to stand for the island group as a whole.
+        basis: interpretation
+        attributed_to: 小学館「日本大百科全書(ニッポニカ)」「隠岐国」
+        sources:
+          - source: nipponica-oki
+            at: 隠岐国
+          - source: wikidata
+            at: Q1063829 (P625), revision 2462678517

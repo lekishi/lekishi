@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 赤岸鎭 of 長溪縣 in 福州, the garrison south of which 葛野麻呂's ship came ashore in 804.
+types: [settlement]
+names:
+  - form: 赤岸鎭
+    lang: lzh
+    script: Hani
+    roman: Chi'an zhen
+    scheme: pinyin
+    cite:
+      - id: chian-zhen-name
+        says: 葛野麻呂's report says the ship reached the sea mouth south of 赤岸鎭 on the tenth of the eighth month.
+        source: nihon-koki
+        at: 卷第十二 延暦廿四年六月乙巳
+        quote: 八月十日到福州長溪縣赤岸鎭已南海口。
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [120.00186, 26.88351]
+    notes:
+      A region-level placement at the modern county of 霞浦, standing for the area of 赤岸, which lies in
+      that county. The point is the county's modern coordinate; neither the garrison's site nor the sea
+      mouth where the ship came ashore is placed.
+    cite:
+      - id: chian-zhen-identification
+        says:
+          A 2024 report identifies 赤岸鎭 with 赤岸村 of 松港街道 in 霞浦縣, established in the 1980s as the place the 804
+          ship came ashore. The point is the county's modern coordinate from Wikidata (CC0), placed to
+          stand for that area.
+        basis: interpretation
+        attributed_to: 福建日報 (2024)
+        sources:
+          - source: fujian-chian-kukai-2024
+            at: 渡海遇風赤岸登陸; 跨海交流經久不衰
+          - source: wikidata
+            at: Q241877 (P625), revision 2526609080
+modern:
+  - form: 霞浦縣
+    lang: zh
+    script: Hani
+    note: The modern county which holds 赤岸村; recorded as the
+      identification the placement rests on.

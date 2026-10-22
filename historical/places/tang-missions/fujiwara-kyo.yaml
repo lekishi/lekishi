@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 藤原宮, the court of 文武 where the 701 mission was appointed and given its sword.
+types: [capital]
+names:
+  - form: 藤原宮
+    lang: ja
+    script: Hani
+    roman: Fujiwara-no-miya
+    scheme: hepburn
+    cite:
+      - id: fujiwara-kyo-name
+        says: The chronicle records the palace grounds of 藤原宮 being fixed on 慶雲元年十一月壬寅.
+        source: shoku-nihongi
+        at: 卷第三 慶雲元年十一月壬寅
+        quote: 始定藤原宮地。
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [135.807222, 34.502222]
+    notes:
+      An approximate placement at the 藤原宮跡, the site of the palace at the centre of 藤原京, a Special
+      Historic Site. The point marks the palace site as a whole, about 925 m by 907 m, and places no
+      building; the appointment and the sword grant are not located within it.
+    cite:
+      - id: fujiwara-kyo-identification
+        says:
+          The 藤原宮跡 at 橿原市 is the site of 藤原宮, the palace of 持統, 文武 and 元明 at the centre of
+          藤原京 (694–710), now a Special Historic Site. The point is the coordinate Wikidata records on
+          its 藤原京 item (CC0), which lies within the palace site.
+        basis: interpretation
+        attributed_to: 橿原市 (文化財保存活用課)
+        sources:
+          - source: kashihara-fujiwara-palace
+            at: 藤原宮跡【特別史跡】
+          - source: wikidata
+            at: Q1196381 (P625), revision 2547948632
+modern:
+  - form: 藤原宮跡
+    lang: ja
+    script: Hani
+    note: The Special Historic Site in 橿原市; recorded as the identification the placement rests on.

@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 平安宮, the palace of 平安京, the court's seat for the court acts of the 801–839 missions.
+types: [capital]
+names:
+  - form: 平安宮
+    lang: ja
+    script: Hani
+    roman: Heian-kyū
+    scheme: hepburn
+    cite:
+      - id: heian-kyo-name
+        says: The eulogy at 桓武's funeral names 平安宮 as where the emperor reigned.
+        source: nihon-koki
+        at: 卷第十三 大同元年四月甲午朔
+        quote: 畏哉平安宮《爾》御坐《志》天皇
+at:
+  - interpretation: approximate_point
+    precision: locality
+    point: [135.742222, 35.013611]
+    notes:
+      An approximate placement at the 平安宮跡, the site of the 大内裏 of 平安京 around today's 千本丸太町,
+      whose remains lie buried under the city; parts of it are national Historic Sites. The point marks
+      the palace precinct as a whole and places no hall, the 大極殿 and the 内裏 included.
+    cite:
+      - id: heian-kyo-identification
+        says:
+          平安宮 is the 大内裏, the central precinct of 平安京, ten 町 by eight, holding the 大極殿, the 内裏
+          and the offices; its buried remains include the national Historic Sites 内裏内郭回廊跡 and
+          豊楽殿跡, and the 大極殿 area lay near 千本丸太町. The point is the coordinate Wikidata records
+          for the palace (CC0).
+        basis: interpretation
+        attributed_to: 京都市上京区役所
+        sources:
+          - source: kyoto-kamigyo-heian-palace
+            at: 平安宮址
+          - source: wikidata
+            at: Q304501 (P625), revision 2547881818
+modern:
+  - form: 京都市
+    lang: ja
+    script: Hani
+    note: Modern city recorded for orientation; the 平安宮跡 lies under its 上京区 and 中京区 around 千本丸太町.

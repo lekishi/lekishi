@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  平群廣成's ship, 115 people, is driven to 崑崙國. Bandits seize them; some are killed, more than ninety
+  die of fever, and 廣成 and three others survive to see the king of 崑崙, who keeps them in a poor place
+  on scant rations.
+types: [occurrence]
+date:
+  value: 734..735
+  mode: window
+  calendar: regnal
+  as_written: 廣成之船一百一十五人漂着崑崙國（天平十一年十一月辛夘 平郡廣成拜朝記事）
+  cite:
+    - id: mission-735-kunlun-time
+      says:
+        平郡廣成's report records the drift to 崑崙國 after the departure of 天平六年十月, without a date of its
+        own.
+      source: shoku-nihongi
+      at: 卷第十三 天平十一年十一月辛夘
+      quote: 廣成之船一百一十五人漂着崑崙國。有賊兵來圍遂被拘執。船人或被殺或迸散。自餘九十余人着瘴死亡。廣成等四人。僅免死得見崑崙王。
+places:
+  - place: kunlun
+    role: site
+participants:
+  - actor: heguri-no-hironari
+    role: leader
+notes:
+  A drift, not a chosen course. 崑崙國 is not identified in the report; scholarship commonly reads it
+  as 林邑 (Champa), but the record asserts no identification.

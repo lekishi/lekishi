@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The fourth ship comes to 甑嶋郡 in 薩摩. Its judge 海上三狩 and others had drifted to 耽羅 and been held
+  by the islanders; the secretary 韓國源 slipped the moorings and brought the rest home.
+types: [journey]
+date:
+  value: 778-11
+  calendar: regnal
+  as_written: 寶龜九年十一月壬子
+  cite:
+    - id: mission-778-fourth-time
+      says: The chronicle records the fourth ship's arrival on 寶龜九年十一月壬子.
+      source: shoku-nihongi
+      at: 卷第卅五 寶龜九年十一月壬子
+      quote: 壬子。遣唐第四船來泊薩摩國甑嶋郡。其判官海上眞人三狩等漂着耽羅嶋。被嶋人略留。但録事韓國連源等。陰謀解纜而去。
+places:
+  - place: tamna-island
+    role: waypoint
+    note: A drift; 三狩 is held there.
+  - place: koshikijima
+    role: end
+participants:
+  - actor: unakami-no-mikari
+    role: subject
+  - actor: tamna
+    role: host

@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "The embassy of 777–778 from 日本國 to 唐 under 小野石根, after 佐伯今毛人 stayed behind ill: received at
+  長安 in 778, and returned in four ships to four different shores, the first broken in two."
+types: [diplomacy]
+from: japan-state
+to: tang-dynasty
+date:
+  value: 775..779
+  mode: duration
+  calendar: regnal
+  as_written: 寶龜六年六月 爲遣唐大使; 寶龜十年七月 海上三狩來歸
+  cite:
+    - id: japan-tang-mission-777-time
+      says: The chronicle dates the appointment to 寶龜六年 and the last return to 寶龜十年.
+      source: shoku-nihongi
+      at: 卷第卅三 寶龜六年六月辛巳; 卷第卅五 寶龜十年七月丁丑
+notes: Directional, no causation asserted.
+cite:
+  - id: japan-tang-mission-777-basis
+    says: The chronicle records the embassy and the envoys' own reports of it.
+    source: shoku-nihongi
+    at: 卷第卅三 寶龜六年六月辛巳; 卷第卅五 寶龜九年十月乙未; 寶龜九年十一月乙夘

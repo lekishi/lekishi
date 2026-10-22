@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  唐高宗, Tang emperor, who received the 659 envoys and their 蝦夷 at 洛陽 according to 伊吉連博德書, which
+  calls him only 天子.
+types: [person]
+names:
+  - form: 高宗
+    lang: lzh
+    script: Hani
+    roman: Gaozong
+    scheme: pinyin
+    cite:
+      - id: tang-gaozong-name
+        says: The 新唐書 names 高宗 as the emperor who sent a sealed letter to 孝德's court.
+        source: xin-tangshu
+        at: 卷220 東夷 日本
+        quote: 高宗賜璽書
+roles:
+  - role: ruler

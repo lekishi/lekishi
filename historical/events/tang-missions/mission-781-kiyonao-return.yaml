@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 布勢清直 returns from 唐國 and gives back the 節刀.
+types: [journey]
+date:
+  value: 781-06
+  calendar: regnal
+  as_written: 天應元年六月辛亥
+  cite:
+    - id: mission-781-return-time
+      says: The chronicle records 清直's return on 天應元年六月辛亥.
+      source: shoku-nihongi
+      at: 卷第卅六 天應元年六月辛亥
+      quote: 辛亥。送唐客使從五位下布勢朝臣清直等自唐國至。進使節刀。
+places:
+  - place: heijo-palace
+    role: context
+    note:
+      The entry names no place. The court sat here in this reign, so the record names its seat as
+      context; it asserts no site for the act.
+participants:
+  - actor: fuse-no-kiyonao
+    role: leader

@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The envoys set out from 越州 on the road east, reach 檉岸山 on the 7th, and at cockcrow on the 8th
+  put out to sea on a south-west wind.
+types: [journey]
+date:
+  value: 661-04-08
+  calendar: chinese_lunisolar
+  as_written: 四月一日，從越州上路，東歸。七日，行到檉岸山明。以八日雞鳴之時，順西南風，放船大海。
+  cite:
+    - id: mission-661-departure-time
+      says: 伊吉連博德書 dates the departure from 越州 to the first of the fourth month and the sailing to the eighth.
+      source: nihon-shoki
+      at: 卷第廿六 齊明天皇七年五月 注 伊吉連博得書
+      quote: 以八日雞鳴之時，順西南風，放船大海。
+places:
+  - place: yuezhou
+    role: start
+    note: 檉岸山 is not identified; the record anchors the departure at 越州, from which they set out.
+participants:
+  - actor: tsumori-no-kisa
+    role: leader
+  - actor: iki-no-hakatoko
+    role: participant

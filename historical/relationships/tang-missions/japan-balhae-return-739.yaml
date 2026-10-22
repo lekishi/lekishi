@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "平群廣成, a Japanese envoy stranded in 唐, is sent home by way of 渤海 and crosses with the 渤海 embassy
+  of 大欽茂: the first time the chronicle routes a Tang mission's return through 渤海."
+types: [travel]
+from: heguri-no-hironari
+to: balhae
+date:
+  value: 738..739
+  mode: duration
+  calendar: regnal
+  as_written: 十年三月。從登州入海。五月到渤海界。
+  cite:
+    - id: japan-balhae-return-739-time
+      says: 平郡廣成's report dates the sailing to 渤海 to 天平十年.
+      source: shoku-nihongi
+      at: 卷第十三 天平十一年十一月辛夘
+notes:
+  "'The first time' is the chronicle's sequence as read for this record, not a source claim. The
+  759 envoy 高元度 goes out the same way."
+cite:
+  - id: japan-balhae-return-739-basis
+    says:
+      The report records the request to return by the 渤海 road, the meeting with 大欽茂's envoys and the
+      joint crossing.
+    source: shoku-nihongi
+    at: 卷第十三 天平十一年十一月辛夘
+    quote: 請取渤海路歸朝。天子許之。

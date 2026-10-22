@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The Tang court records an embassy from 日本 in 貞元二十年 that leaves behind the student 橘免勢 (橘逸勢) and
+  the monk 空海 to study.
+types: [mission]
+date:
+  value: "804"
+  calendar: chinese_lunisolar
+  as_written: 貞元二十年
+  cite:
+    - id: mission-804-tang-time
+      says: The 舊唐書 dates the embassy to 貞元二十年 and names the student and the monk who stayed.
+      source: jiu-tangshu
+      at: 卷199上 東夷 日本國
+      quote: 貞元二十年，遣使來朝，留學生橘免勢、學問僧空海。
+places:
+  - place: changan
+    role: context
+    note: The history names no place; the Tang court sat at 長安.
+participants:
+  - actor: kukai
+    role: participant
+    note: 學問僧空海.
+  - actor: tachibana-no-hayanari
+    role: participant
+    note: 留學生橘免勢.
+  - actor: tang-dynasty
+    role: host
+notes:
+  This is 藤原葛野麻呂's embassy, appointed in 801. His own report in 日本後紀 is told in the other
+  mission-804 and mission-805 events; this event is the Tang court's record of it.
+cites:
+  participants:
+    - id: mission-804-tang-stayers
+      says: The 舊唐書 names the student 橘免勢 and the monk 空海 as left behind by this embassy.
+      source: jiu-tangshu
+      at: 卷199上 東夷 日本國
+      quote: 留學生橘免勢、學問僧空海。

@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Students who had studied in 唐 (惠齊, 惠光, the physician 惠日 and 福因) return with the Silla envoy 智洗爾
+  and advise the court to recall the students still in 唐 and to keep up contact with a state whose laws
+  and institutions are complete. It is the chronicle's earliest call for regular missions to Tang.
+types: [exchange]
+date:
+  value: 623-07
+  calendar: regnal
+  as_written: 推古天皇卅一年秋七月
+  cite:
+    - id: mission-623-students-return-time
+      says: The chronicle records the students' return with the Silla envoy in the seventh month of 推古天皇卅一年.
+      source: nihon-shoki
+      at: 卷第廿二 推古天皇卅一年七月
+      quote: 大唐學問者僧惠齊、惠光，及醫惠日、福因等，並從智洗爾等來之。
+participants:
+  - actor: kusushi-no-enichi
+    role: participant
+    note: The physician 惠日, one of the returning students.
+  - actor: silla
+    role: host
+    note: The students travel with the Silla envoy 智洗爾.
+  - actor: japan-state
+    role: host
+notes:
+  The entry names no landing place or court site, so the event carries none. The advice is the students'
+  own report as the chronicle gives it; the record does not claim it caused the 630 mission.
+cites:
+  participants:
+    - id: mission-623-advice
+      says:
+        The returning students' advice is recorded as 惠日 and the others reporting that those remaining
+        in 唐 had completed their studies and that 大唐 was a state of complete laws that should always be
+        kept in contact.
+      source: nihon-shoki
+      at: 卷第廿二 推古天皇卅一年七月
+      quote: 惠日等共奏聞曰：「留于唐國學者，皆學以成業，應喚。且其大唐國者，法式備定之珎國也，常須達。」

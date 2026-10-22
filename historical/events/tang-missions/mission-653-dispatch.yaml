@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The court sends two ships to 大唐. On the first are the ambassador 吉士長丹, the vice-envoy 吉士駒 and
+  student monks including 道昭 and 定惠, 121 people in all. On the second are the ambassador 高田首根麻呂 and 120
+  people.
+types: [mission]
+date:
+  value: 653-05
+  calendar: regnal
+  as_written: 白雉四年夏五月辛亥朔壬戌
+  cite:
+    - id: mission-653-dispatch-time
+      says: The chronicle records the dispatch on 白雉四年五月壬戌.
+      source: nihon-shoki
+      at: 卷第廿五 白雉四年五月壬戌
+      quote: 四年，夏五月辛亥朔壬戌，發遣大唐大使小山上吉士長丹，副使小乙上吉士駒，
+places:
+  - place: naniwa
+    role: context
+    note:
+      The entry names no place. The court sat here in this reign, so the record names its seat as
+      context; it asserts no site for the act.
+participants:
+  - actor: kishi-no-nagani
+    role: leader
+    note: 大使 of the first ship.
+  - actor: dosho
+    role: participant
+    note: Listed among the student monks of the first ship.
+  - actor: japan-state
+    role: host
+notes:
+  The entry gives a sexagenary day (壬戌); v0 normalizes it to the month. The chronicle does not say
+  from which port the ships left. The second ship's loss is recorded in a later entry that the transcription
+  read for this record lacks, so it is not published here.
+cites:
+  summary:
+    - id: mission-653-ships
+      says: The entry records 121 people on the first ship, and a second ship under 大使高田首根麻呂 with 120 people.
+      source: nihon-shoki
+      at: 卷第廿五 白雉四年五月壬戌
+      quote: 并一百二十一人，俱乘一船。以室原首御田為送使。又大使大山下高田首根麻呂、
+  participants:
+    - id: mission-653-dosho
+      says: The entry lists 道昭 among the student monks.
+      source: nihon-shoki
+      at: 卷第廿五 白雉四年五月壬戌
+      quote: 知聰、道昭、定惠、

@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 耽羅, the island south of the peninsula where ships of 661 and 778 came ashore.
+types: [landform]
+names:
+  - form: 耽羅之嶋
+    lang: ja
+    script: Hani
+    roman: Tamna
+    scheme: hepburn
+    cite:
+      - id: tamna-island-name
+        says: 伊吉博德's account says the ship reached 耽羅之嶋 after nine days and eight nights.
+        source: nihon-shoki
+        at: 卷第廿六 齊明天皇七年五月 注 伊吉連博得書
+        quote: 九日八夜，僅到耽羅之嶋。
+  - form: 耽羅嶋
+    lang: ja
+    script: Hani
+    cite:
+      - id: tamna-island-name-1
+        says: The chronicle records 海上三狩's party drifting to 耽羅嶋 in 778.
+        source: shoku-nihongi
+        at: 卷第卅五 寶龜九年十一月壬子
+        quote: 其判官海上眞人三狩等漂着耽羅嶋。
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [126.55, 33.38]
+    notes:
+      A region-level placement standing for the whole island of 耽羅, the present-day 濟州島. The point is
+      the island's modern coordinate; neither account says where on the island the ships came ashore,
+      and no landing place is asserted.
+    cite:
+      - id: tamna-island-identification
+        says:
+          The reference work identifies 耽羅 as the old name of 済州島, the island south of the Korean
+          peninsula. The point is the island's modern coordinate from Wikidata (CC0), placed to stand for
+          the island as a whole.
+        basis: interpretation
+        attributed_to: 小学館「日本大百科全書(ニッポニカ)」「耽羅」 (坂元義種)
+        sources:
+          - source: nipponica-tamna
+            at: 耽羅
+          - source: wikidata
+            at: Q29151 (P625), revision 2556994090
+modern:
+  - form: 濟州島
+    lang: ko
+    script: Hani
+    note:
+      The island the reference work identifies as 耽羅; recorded as the identification the placement
+      rests on.

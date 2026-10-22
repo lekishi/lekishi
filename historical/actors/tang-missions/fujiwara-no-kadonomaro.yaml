@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  藤原朝臣葛野麻呂, ambassador of the 801–805 embassy, whose report of 805 gives the route to 長安 and back
+  day by day.
+types: [person]
+names:
+  - form: 藤原朝臣葛野麻呂
+    lang: ja
+    script: Hani
+    roman: Fujiwara no Kadonomaro
+    scheme: hepburn
+    cite:
+      - id: fujiwara-no-kadonomaro-name
+        says: The chronicle names 藤原朝臣葛野麻呂 as 遣唐大使.
+        source: nihon-koki
+        at: 卷第十逸文 延暦廿年 庚子
+        quote: 従四位下藤原朝臣葛野麻呂、為遣唐大使。
+roles:
+  - role: envoy
+    note: 大使, 801–805.

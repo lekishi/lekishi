@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  唐德宗, the Tang emperor who received the 804 envoys at the 麟德殿 and died during their stay in the
+  first month of 805.
+types: [person]
+names:
+  - form: 雍王□
+    lang: lzh
+    script: Hani
+    roman: Dezong
+    scheme: pinyin
+    cite:
+      - id: tang-dezong-name
+        says: 葛野麻呂's report records the death of the emperor, named by a damaged title (雍王□).
+        source: nihon-koki
+        at: 卷第十二 延暦廿四年六月乙巳 藤原葛野麻呂奏
+        quote: 廿三日天子雍王□崩
+  - form: 德宗
+    lang: lzh
+    script: Hani
+    claim: tang-dezong-name
+roles:
+  - role: ruler
+notes:
+  The report's damaged form is kept as the attested name; 德宗 is his temple name, added as an alternate
+  for search, not attested in the sources read.

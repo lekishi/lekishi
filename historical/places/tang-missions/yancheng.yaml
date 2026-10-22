@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 塩城縣 of 楚州, where the 702 mission came ashore in a country now called 大周.
+types: [region]
+names:
+  - form: 塩城縣
+    lang: lzh
+    script: Hani
+    roman: Yancheng xian
+    scheme: pinyin
+    cite:
+      - id: yancheng-name
+        says: 粟田眞人's account says the people they met named the place 塩城縣 of 楚州 in 大周.
+        source: shoku-nihongi
+        at: 卷第三 慶雲元年七月甲申朔
+        quote: 是大周楚州塩城縣界也。
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [120.156944, 33.35]
+    notes:
+      A region-level placement standing for the county at its seat, the city that is modern 鹽城. The
+      account says only that the party was within the county's bounds (界), so the point places no
+      shore or landing.
+    cite:
+      - id: yancheng-identification
+        says:
+          The modern city of 鹽城 in 江蘇省 is the place of the Han 鹽瀆縣, renamed 鹽城縣 early in the fifth
+          century. The point is the modern city's coordinate from
+          Wikidata (CC0), placed to stand for the county's seat.
+        basis: interpretation
+        attributed_to: 小学館 (日本大百科全書, 林和生)
+        sources:
+          - source: nipponica-yancheng
+            at: 塩城
+          - source: wikidata
+            at: Q57866 (P625), revision 2526612666
+modern:
+  - form: 鹽城市
+    lang: zh
+    script: Hani
+    note: The modern city that is the place of 鹽城縣; recorded as the identification the
+      placement rests on.

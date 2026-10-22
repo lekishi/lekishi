@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 對馬嶋, the island between 九州 and the peninsula, a landfall on the northern route.
+types: [landform]
+names:
+  - form: 對馬嶋
+    lang: ja
+    script: Hani
+    roman: Tsushima
+    scheme: hepburn
+    cite:
+      - id: tsushima-name
+        says: 葛野麻呂's report opens with the first ship putting in at 下縣郡 of 對馬嶋.
+        source: nihon-koki
+        at: 卷第十二 延暦廿四年六月乙巳
+        quote: 遣唐使第一船到泊對馬嶋下縣郡。
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [129.333333, 34.416667]
+    notes:
+      A region-level placement standing for the whole island of 對馬嶋, the present-day 對馬島. The point
+      is the island's modern coordinate; it places neither 下縣郡 nor any harbour the ships put in at.
+    cite:
+      - id: tsushima-identification
+        says:
+          The reference work identifies 対馬国 as the 西海道 island that is present-day 対馬市, made up of
+          the 上県 and 下県 districts. The point is the island's modern coordinate from Wikidata (CC0),
+          placed to stand for the island as a whole.
+        basis: interpretation
+        attributed_to: 山川出版社「山川 日本史小辞典 改訂新版」「対馬国」
+        sources:
+          - source: yamakawa-nihonshi-tsushima
+            at: 対馬国
+          - source: wikidata
+            at: Q52051 (P625), revision 2555315605

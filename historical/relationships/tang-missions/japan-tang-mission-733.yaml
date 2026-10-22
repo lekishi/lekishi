@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "The embassy of 多治比廣成 from 日本國 to 唐, 732–739: four ships out from 難波 in 733, scattered on leaving
+  蘇州 in 734; the ambassador home by 多祢嶋, the vice-envoy with Tang, Persian and Indian passengers in 736,
+  and 平群廣成 by 崑崙, 長安, 渤海 and 出羽 in 739."
+types: [diplomacy]
+from: japan-state
+to: tang-dynasty
+date:
+  value: 732..739
+  mode: duration
+  calendar: regnal
+  as_written: 天平四年八月 爲遣唐大使; 天平十一年十一月 平郡朝臣廣成拜朝
+  cite:
+    - id: japan-tang-mission-733-time
+      says: The chronicle dates the appointment to 天平四年 and 平郡廣成's audience to 天平十一年.
+      source: shoku-nihongi
+      at: 卷第十一 天平四年八月丁亥; 卷第十三 天平十一年十一月辛夘
+notes:
+  Directional, no causation asserted. The four ships' fates are separate events; the second and fourth
+  ships, beyond 名代's, are not traced here.
+cite:
+  - id: japan-tang-mission-733-basis
+    says: The chronicle records the embassy from appointment to the last return.
+    source: shoku-nihongi
+    at: 卷第十一 天平四年八月丁亥; 卷第十二 天平七年三月丙寅; 卷第十三 天平十一年十一月辛夘

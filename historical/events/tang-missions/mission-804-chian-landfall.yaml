@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  After 34 days tossed on the sea, the first ship reaches the sea mouth south of 赤岸鎮 in 長溪縣 of
+  福州, far south of the usual landfalls. The local magistrate meets them and warns that the road to the
+  prefecture is too rough, so they sail on to 福州.
+types: [journey]
+date:
+  value: 804-08-10
+  calendar: chinese_lunisolar
+  as_written: 八月十日到福州長溪縣赤岸鎭已南海口
+  cite:
+    - id: mission-804-chian-time
+      says: 葛野麻呂's report dates the landfall at 赤岸鎮 to the tenth of the eighth month.
+      source: nihon-koki
+      at: 卷第十二 延暦廿四年六月乙巳 藤原葛野麻呂奏
+      quote: 出入死生之間。掣曳波涛之上。都卅四箇日。八月十日到福州長溪縣赤岸鎭已南海口。
+places:
+  - place: chian-zhen
+    role: site
+participants:
+  - actor: fujiwara-no-kadonomaro
+    role: leader
+notes: The course was not chosen; the report gives 34 days 'between death and life'.

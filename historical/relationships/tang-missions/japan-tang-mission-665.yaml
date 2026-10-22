@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "Contacts of 665–670 after the Tang–Silla conquest of Paekche: the Tang envoy 劉德高 in 665 and
+  the Japanese escort sent back with him, the Tang garrison's envoy 法聰 in 667, and 河內鯨's embassy of
+  669, which the 新唐書 records congratulating Tang on Koguryŏ's fall in 670."
+types: [diplomacy]
+from: japan-state
+to: tang-dynasty
+directionality: mutual
+date:
+  value: 665..670
+  mode: duration
+  calendar: regnal
+  as_written: 天智天皇四年九月 唐國遣劉德高; 天智天皇八年 遣河內直鯨; 咸亨元年 遣使賀平高麗
+  cite:
+    - id: japan-tang-mission-665-time
+      says: The chronicle dates the contacts from 天智天皇四年 to 八年; the 新唐書 dates the congratulation to 咸亨元年.
+      sources:
+        - source: nihon-shoki
+          at: 卷第廿七 天智天皇四年九月壬辰; 天智天皇八年 是歲
+        - source: xin-tangshu
+          at: 卷220 東夷 日本（咸亨元年，遣使賀平高麗）
+notes:
+  "Mutual: envoys go both ways in these years, and the 667 envoy comes from the Tang garrison in
+  Paekche rather than the court. No causation is asserted."
+cite:
+  - id: japan-tang-mission-665-basis
+    says: The chronicle records the envoys of 665, 667 and 669.
+    source: nihon-shoki
+    at: 卷第廿七 天智天皇四年九月壬辰; 天智天皇六年十一月乙丑; 天智天皇八年 是歲

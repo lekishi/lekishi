@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The third ship loses its rudder; the sea pours in. The judge 丹■文雄 decides they will die of thirst
+  on board, and the crew break up the ship to make rafts. The monk 眞濟 is among the few who survive.
+types: [occurrence]
+date:
+  value: 836-07..836-08
+  mode: window
+  calendar: regnal
+  as_written: 承和三年八月丁巳 大宰府奏言
+  cite:
+    - id: mission-836-wreck-time
+      says: 大宰府's report of 承和三年八月丁巳 tells the wreck as 眞濟 described it.
+      source: shoku-nihon-koki
+      at: 卷第五 承和三年八月丁巳
+      quote: 柁折棚落。潮溢人溺。船頭已下百・餘人任波漂蕩。爰船頭判官丹■文雄議云。我等空渇死船上。不如壞船作筏。
+places:
+  - place: tsushima
+    role: end
+    note: Three men were found aboard the hulk off 對馬.
+  - place: matsura
+    role: end
+    note:
+      Survivors on rafts reached 肥前國; the entry of 八月辛丑 names the province only, and the record places
+      it at 松浦.
+participants:
+  - actor: japan-state
+    role: other
+notes:
+  The window runs from the sailing (7/2) to the report (八月丁巳). The judge's name is damaged in the
+  transcription. 'Placed at 松浦' is an editorial anchor for 肥前.

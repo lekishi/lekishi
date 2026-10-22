@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The Tang envoy 高表仁 escorts 三田耜 back. Their ships put in at 對馬 with the student monks 靈雲 and 旻,
+  勝鳥養, and Silla escorts.
+types: [journey]
+date:
+  value: 632-08
+  calendar: regnal
+  as_written: 舒明天皇四年秋八月
+  cite:
+    - id: mission-632-tsushima-arrival-time
+      says: The chronicle records 高表仁's arrival at 對馬 with 三田耜 in the eighth month of 舒明天皇四年.
+      source: nihon-shoki
+      at: 卷第廿三 舒明天皇四年八月
+      quote: 秋八月，大唐遣高表仁，送三田耜。共泊于對馬。
+places:
+  - place: tsushima
+    role: site
+participants:
+  - actor: gao-biaoren
+    role: leader
+    note: The Tang envoy.
+  - actor: inukami-no-mitasuki
+    role: participant
+    note: Escorted home.
+  - actor: silla
+    role: participant
+    note: Silla escorts travel with them.
+cites:
+  places:
+    - id: mission-632-tsushima-place
+      says:
+        The entry names 對馬 as where the ships put in, and lists the student monks 靈雲 and 旻, 勝鳥養 and
+        the Silla escorts with them.
+      source: nihon-shoki
+      at: 卷第廿三 舒明天皇四年八月
+      quote: 是時，學問僧靈雲、僧旻及勝鳥養，新羅送使等，從之。

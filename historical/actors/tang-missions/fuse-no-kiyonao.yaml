@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary: 布勢朝臣清直, 送唐客使 who escorted the Tang envoys home in 779 and returned in 781.
+types: [person]
+names:
+  - form: 布勢朝臣清直
+    lang: ja
+    script: Hani
+    roman: Fuse no Kiyonao
+    scheme: hepburn
+    cite:
+      - id: fuse-no-kiyonao-name
+        says: The chronicle names 布勢朝臣清直 as 送唐客使 on 寶龜九年十二月己丑.
+        source: shoku-nihongi
+        at: 卷第卅五 寶龜九年十二月己丑
+        quote: 以從五位下布勢朝臣清直爲送唐客使
+roles:
+  - role: envoy
+    note: 送唐客使, 778–781.

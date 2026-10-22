@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The envoys pay court and receive the 節刀, with the same charge given in 776: that they go because
+  this is an established exchange, and must keep the peace."
+types: [mission]
+date:
+  value: 836-04
+  calendar: regnal
+  as_written: 承和三年四月丁酉
+  cite:
+    - id: mission-836-sekito-time
+      says: The chronicle records the 節刀 on 承和三年四月丁酉.
+      source: shoku-nihon-koki
+      at: 卷第五 承和三年四月丁酉
+      quote: 丁酉。賜入唐使節刀。
+places:
+  - place: heian-kyo
+    role: context
+    note:
+      The entry names no place. The court sat here in this reign, so the record names its seat as
+      context; it asserts no site for the act.
+participants:
+  - actor: fujiwara-no-tsunetsugu
+    role: leader
+  - actor: ono-no-takamura
+    role: participant

@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "The embassy of 粟田眞人 from 日本國 to the Tang court, then styled 大周 under 則天武后: appointed in 701,
+  sailed in 702, banqueted at 長安, with returns in 704 and 707."
+types: [diplomacy]
+from: japan-state
+to: tang-dynasty
+date:
+  value: 701..707
+  mode: duration
+  calendar: regnal
+  as_written: 大寶元年正月 爲遣唐執節使; 慶雲四年三月 遣唐副使巨勢朝臣邑治等自唐國至
+  cite:
+    - id: japan-tang-mission-702-time
+      says: The chronicle dates the appointment to 大寶元年 and the vice-envoy's return to 慶雲四年.
+      source: shoku-nihongi
+      at: 卷第二 大寶元年正月丁酉; 卷第三 慶雲四年三月庚子
+notes:
+  Directional, no causation asserted. The Tang court of these years called itself 大周; the record
+  keeps the 唐 actor, as the chronicle's own question does.
+cite:
+  - id: japan-tang-mission-702-basis
+    says: The chronicle and the Tang histories record the embassy.
+    sources:
+      - source: shoku-nihongi
+        at: 卷第二 大寶元年正月丁酉; 卷第三 慶雲元年七月甲申朔
+      - source: jiu-tangshu
+        at: 卷199上 東夷 日本國（長安三年，其大臣朝臣真人來貢方物）

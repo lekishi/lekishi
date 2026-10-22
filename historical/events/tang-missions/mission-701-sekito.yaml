@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 粟田朝臣眞人 receives the 節刀, the sword of delegated authority.
+types: [mission]
+date:
+  value: 701-05
+  calendar: regnal
+  as_written: 大寶元年五月己夘
+  cite:
+    - id: mission-701-sekito-time
+      says: The chronicle records the 節刀 grant on 大寶元年五月己夘.
+      source: shoku-nihongi
+      at: 卷第二 大寶元年五月己夘
+      quote: 己夘。入唐使粟田朝臣眞人授節刀。
+places:
+  - place: fujiwara-kyo
+    role: context
+    note:
+      The entry names no place. The court sat here in this reign, so the record names its seat as
+      context; it asserts no site for the act.
+participants:
+  - actor: awata-no-mahito
+    role: leader

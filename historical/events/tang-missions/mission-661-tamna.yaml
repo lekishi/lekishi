@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "Lost at sea for nine days and eight nights, the ship reaches 耽羅. The envoys take the island's
+  prince 阿波伎 and eight others aboard to present to the court: the chronicle dates 耽羅's first embassy
+  to Japan from this."
+types: [occurrence]
+date:
+  value: 661-04
+  calendar: chinese_lunisolar
+  as_written: 九日八夜，僅到耽羅之嶋
+  cite:
+    - id: mission-661-tamna-time
+      says: 伊吉連博德書 records reaching 耽羅 after nine days and eight nights at sea.
+      source: nihon-shoki
+      at: 卷第廿六 齊明天皇七年五月 注 伊吉連博得書
+      quote: 海中迷途，漂蕩辛苦。九日八夜，僅到耽羅之嶋。便即招慰嶋人王子阿波伎等九人，同載客船，擬獻帝朝。
+places:
+  - place: tamna-island
+    role: site
+participants:
+  - actor: tsumori-no-kisa
+    role: leader
+  - actor: tamna
+    role: guest
+    note: Prince 阿波伎 and eight others.
+notes:
+  "The course was not chosen: the account says they lost their way (海中迷途). The arrival date is the
+  eighth plus nine days and eight nights, which the record keeps at month precision rather than computing."

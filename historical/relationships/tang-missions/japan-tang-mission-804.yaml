@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "The embassy of 藤原葛野麻呂 from 日本國 to 唐, 801–806: appointed in 801, broken by a storm off 難波 in
+  803, sailed from 松浦 in 804 with 空海 and 最澄, received in 長安 weeks before 德宗's death, and home in 805;
+  高階遠成 fetched 空海 and 橘逸勢 in 806."
+types: [diplomacy]
+from: japan-state
+to: tang-dynasty
+date:
+  value: 801..806
+  mode: duration
+  calendar: regnal
+  as_written: 延暦廿年 為遣唐大使; 元和元年 高階真人上言
+  cite:
+    - id: japan-tang-mission-804-time
+      says: The chronicle dates the appointment to 延暦廿年; the 舊唐書 dates 高階真人's petition to 元和元年.
+      source: nihon-koki
+      at: 卷第十逸文 延暦廿年 庚子
+notes: Directional, no causation asserted. 空海's and 最澄's own writings are not read for this story.
+cite:
+  - id: japan-tang-mission-804-basis
+    says: The chronicle records the embassy from appointment to return, with the ambassador's report.
+    source: nihon-koki
+    at: 卷第十逸文 延暦廿年 庚子; 卷第十二 延暦廿四年六月乙巳 藤原葛野麻呂奏

@@ -1,0 +1,75 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 博多大津, the harbour of 筑紫 that missions sailed from and returned to; 伊吉博德 calls it 筑紫大津之浦.
+types: [port]
+names:
+  - form: 筑紫大津之浦
+    lang: ja
+    script: Hani
+    roman: Tsukushi no Ōtsu no ura
+    scheme: hepburn
+    cite:
+      - id: hakata-name
+        says: 伊吉博德's account dates the departure from 筑紫大津之浦 to the eleventh day of the eighth month.
+        source: nihon-shoki
+        at: 卷第廿六 齊明天皇五年七月戊寅 注 伊吉連博德書
+        quote: 八月十一日，發自筑紫大津之浦。
+  - form: 博多大津
+    lang: ja
+    script: Hani
+    cite:
+      - id: hakata-name-1
+        says: The chronicle records the 776 ships pulling back to 博多大津.
+        source: shoku-nihongi
+        at: 卷第卅四 寶龜七年閏八月庚寅
+        quote: 乃引還於博多大津。
+  - form: 博多津
+    lang: ja
+    script: Hani
+    cite:
+      - id: hakata-name-2
+        says: The chronicle records a returning 新羅 ship reaching 博多津 in 筑前國.
+        source: shoku-nihon-koki
+        at: 卷第八 承和六年十月丁巳
+        quote: 皈着筑前國博多津。
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [130.385694, 33.5865]
+    notes:
+      A region-level placement standing for the harbour area of 博多 on 博多灣, in modern 福岡市. The
+      point is the coordinate of the 鴻臚館跡, the house near the harbour where missions made ready for
+      the crossing; it places no anchorage and no landing.
+    cite:
+      - id: hakata-identification
+        says:
+          博多津, which the 續日本紀 calls 博多大津, is the old name of the port of 博多 in 福岡市, and two
+          early-modern commentaries on the 659 passage take 伊吉博德's 筑紫大津 as the 娜大津 and as 博多津
+          of 那珂郡 in 筑前國. Whether it
+          is the same harbour as the earlier 那津 (娜大津), presumed at the mouth of the 那珂川, is an open
+          question. The point is the coordinate of the 鴻臚館跡 from Wikidata (CC0); the 鴻臚館, called
+          筑紫館 before the Heian period, is where the 遣唐使 made ready to go abroad, and excavation from
+          1987 confirmed its location.
+        basis: interpretation
+        attributed_to: 小学館 (デジタル大辞泉); 千田稔 (世界大百科事典); 福岡市 (文化財活用課); 日本書紀通證 and 書紀集解 (as quoted in 古事類苑)
+        sources:
+          - source: daijisen-hakata-no-tsu
+            at: 博多津
+          - source: sekai-daihyakka-nanotsu
+            at: 那津
+          - source: kojiruien
+            at: 地部 津 筑前國 博多津, p. 544 (日本書紀通證, 書紀集解)
+          - source: fukuoka-bunkazai-korokan
+            at: 鴻臚館跡
+          - source: wikidata
+            at: Q11675677 (P625), revision 2557596639
+modern:
+  - form: 福岡市
+    lang: ja
+    script: Hani
+    note: Modern city recorded for orientation; the 鴻臚館跡 lies in its 中央区, within the 福岡城跡.
+notes:
+  The record takes 伊吉博德's 筑紫大津之浦 and the chronicles' 博多大津 and 博多津 as one harbour, on the
+  early-modern commentaries 古事類苑 quotes (日本書紀通證 and 書紀集解); the chronicles themselves do not
+  say so. A modern reference work leaves open whether the 那津 (娜大津) is the same harbour as 博多大津,
+  so the identity is an interpretation, and the point stands for the 博多灣 harbour area rather than
+  either anchorage.

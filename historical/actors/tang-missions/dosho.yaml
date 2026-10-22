@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  道昭, a monk who went to 唐 with the 653 embassy and studied under 玄奘, returning with sutras; his
+  obituary of 700 is the source for his time in 唐.
+types: [person]
+names:
+  - form: 道昭
+    lang: ja
+    script: Hani
+    roman: Dōshō
+    scheme: hepburn
+    cite:
+      - id: dosho-name
+        says: The chronicle lists 道昭 among the student monks of the 653 embassy.
+        source: nihon-shoki
+        at: 卷第廿五 白雉四年五月壬戌
+        quote: 道昭
+  - form: 道照
+    lang: ja
+    script: Hani
+    claim: dosho-name
+roles:
+  - role: monk
+notes: 續日本紀 spells the name 道照 (卷第一 文武天皇四年三月己未).

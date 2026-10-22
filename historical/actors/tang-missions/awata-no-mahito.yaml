@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  粟田朝臣眞人, 執節使 of the 701–704 embassy, the first to call his country 日本國 to the Tang court in the
+  chronicle's telling; the Tang histories praise his learning and bearing.
+types: [person]
+names:
+  - form: 粟田朝臣眞人
+    lang: ja
+    script: Hani
+    roman: Awata no Mahito
+    scheme: hepburn
+    cite:
+      - id: awata-no-mahito-name
+        says: The chronicle names 粟田朝臣眞人 as 遣唐執節使 on 大寶元年正月丁酉.
+        source: shoku-nihongi
+        at: 卷第二 大寶元年正月丁酉
+        quote: 粟田朝臣眞人。爲遣唐執節使
+  - form: 朝臣真人
+    lang: lzh
+    script: Hani
+    claim: awata-no-mahito-name
+roles:
+  - role: envoy
+    note: 執節使, 701–704.
+notes: The Tang histories call him 朝臣真人, taking his title for his name.

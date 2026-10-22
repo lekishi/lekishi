@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  高表仁, prefect of 新州 and the Tang envoy who escorted 犬上三田耜 home in 632. The Japanese and Tang accounts
+  of his visit disagree.
+types: [person]
+names:
+  - form: 高表仁
+    lang: lzh
+    script: Hani
+    roman: Gao Biaoren
+    scheme: pinyin
+    cite:
+      - id: gao-biaoren-name
+        says: The chronicle and the 舊唐書 name 高表仁 as the Tang envoy.
+        source: nihon-shoki
+        at: 卷第廿三 舒明天皇四年八月
+        quote: 大唐遣高表仁，送三田耜
+  - form: 高仁表
+    lang: lzh
+    script: Hani
+    claim: gao-biaoren-name
+roles:
+  - role: envoy
+    note: Tang envoy, 632–633.
+notes: The 新唐書 writes 高仁表.

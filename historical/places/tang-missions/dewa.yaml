@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 出羽國, the province on the Japan Sea coast where 平群廣成 came ashore from 渤海 in 739.
+types: [region]
+names:
+  - form: 出羽國
+    lang: ja
+    script: Hani
+    roman: Dewa-no-kuni
+    scheme: hepburn
+    cite:
+      - id: dewa-name
+        says: 平群廣成's report says the party reached 出羽國 after crossing from 渤海.
+        source: shoku-nihongi
+        at: 卷第十三 天平十一年十一月辛夘
+        quote: 廣成等率遣衆。到著出羽國。
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [140.317222, 39.016389]
+    notes:
+      A region-level placement standing for the whole province of 出羽國, present-day Yamagata and most
+      of Akita. The point is the coordinate Wikidata records for the province; the report names no
+      shore, and no landing place is asserted.
+    cite:
+      - id: dewa-identification
+        says:
+          The reference work identifies 出羽國 with present-day Yamagata Prefecture and Akita Prefecture
+          except 鹿角市 and 小坂町, created in 712 and extended north by 733. The point is the province's
+          coordinate from Wikidata (CC0), placed to stand for the province as a whole.
+        basis: interpretation
+        attributed_to: 小学館「日本大百科全書(ニッポニカ)」「出羽国」
+        sources:
+          - source: nipponica-dewa
+            at: 出羽国
+          - source: wikidata
+            at: Q876032 (P625), revision 2462678914

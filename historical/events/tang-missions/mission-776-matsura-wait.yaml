@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The ships wait more than a month at 合蚕田浦 in 松浦郡 of 肥前 without a fair wind. With autumn come they
+  fall back to 博多大津 and ask to sail next summer; 今毛人 returns the 節刀 and is replaced as acting leader by
+  小野石根.
+types: [journey]
+date:
+  value: 776-08
+  calendar: regnal
+  as_written: 寶龜七年閏八月庚寅
+  cite:
+    - id: mission-776-wait-time
+      says: The chronicle records the envoys' report on 寶龜七年閏八月庚寅.
+      source: shoku-nihongi
+      at: 卷第卅四 寶龜七年閏八月庚寅
+      quote: 閏八月庚寅。先是。遣唐使船到肥前國松浦郡合蚕田浦。積月餘日。不得信風。既入秋節。弥違水候。乃引還於博多大津。
+places:
+  - place: matsura
+    role: waypoint
+    note: 合蚕田浦 in 松浦郡.
+  - place: hakata
+    role: end
+    note: 博多大津.
+participants:
+  - actor: saeki-no-imaemishi
+    role: leader
+notes:
+  v0 has no intercalary-month notation, so 閏八月 is normalized to the eighth month and kept in the
+  as-written expression. The replacement of the vice-envoys is recorded on 寶龜七年十二月丁酉.
+cites:
+  summary:
+    - id: mission-776-iwane
+      says: The chronicle records 小野朝臣石根 and 大神朝臣末足 made vice-envoys in place of 大伴益立.
+      source: shoku-nihongi
+      at: 卷第卅四 寶龜七年十二月丁酉
+      quote: 十二月丁酉。停遣唐副使大伴宿祢益立。以左中弁兼中衛中將鑄錢長官從五位上小野朝臣石根。備中守從五位下大神朝臣末足並爲副使。

@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The four ships sail from 大宰府's waters. The first and fourth are driven back to 肥前; the third
+  breaks up, and of more than a hundred aboard only a few on rafts and planks reach 肥前 and 對馬.
+types: [journey]
+date:
+  value: 836-07-02
+  calendar: regnal
+  as_written: 承和三年七月壬午 大宰府馳驛言。今月二日遣唐使四舶共進發畢。
+  cite:
+    - id: mission-836-sail-time
+      says: 大宰府's report of 承和三年七月壬午 says the four ships sailed on the second.
+      source: shoku-nihon-koki
+      at: 卷第五 承和三年七月壬午
+      quote: 大宰府馳驛言。今月二日遣唐使四舶共進發畢。
+places:
+  - place: dazaifu
+    role: context
+    note: The report comes from 大宰府 and names no harbour.
+participants:
+  - actor: fujiwara-no-tsunetsugu
+    role: leader
+cites:
+  summary:
+    - id: mission-836-driven-back
+      says: The court's reply of 承和三年七月甲申 records the first and fourth ships driven back to 肥前國.
+      source: shoku-nihon-koki
+      at: 卷第五 承和三年七月甲申
+      quote: 得今月六日九日二道飛驛奏状。具知漂苦廻着肥前國也。
+    - id: mission-836-third-tsushima
+      says: 大宰府 reports the third ship found off 對馬 with three men aboard.
+      role: supporting
+      source: shoku-nihon-koki
+      at: 卷第五 承和三年八月壬戌
+      quote: 遣唐第三舶漂着對馬嶋上縣郡南浦舶上唯有三人之状。

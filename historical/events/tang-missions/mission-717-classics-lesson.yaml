@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At the embassy's request the Tang court has the 四門助教 趙玄默 teach the classics at the 鴻臚寺. The envoys
+  pay him in broad cloth labelled as tax cloth of '白龜元年', and spend all their gifts on books before sailing
+  home.
+types: [exchange]
+date:
+  value: 713..718
+  mode: window
+  calendar: chinese_lunisolar
+  as_written: 開元初
+  cite:
+    - id: mission-717-classics-time
+      says: The 舊唐書 dates the embassy to the beginning of 開元.
+      source: jiu-tangshu
+      at: 卷199上 東夷 日本國
+      quote: 開元初，又遣使來朝，因請儒士授經。
+places:
+  - place: changan
+    role: site
+    note: The 鴻臚寺, the office for foreign envoys, was in 長安.
+participants:
+  - actor: tang-dynasty
+    role: host
+  - actor: japan-state
+    role: guest
+notes:
+  "'開元初' is not a date; the window is 開元元年 (713) to the embassy's return in 718. The record identifies
+  this embassy with 多治比縣守's by that fit and by the 白龜 label (靈龜 is the Japanese era name), but neither
+  history names the envoy."
+cites:
+  summary:
+    - id: mission-717-classics-books
+      says:
+        The 舊唐書 records the teacher, the payment in cloth labelled 白龜元年調布, the doubt it raised, and
+        the purchase of books.
+      source: jiu-tangshu
+      at: 卷199上 東夷 日本國
+      quote: |-
+        詔四門助教趙玄默就鴻臚寺教之，乃遺玄默闊幅布以爲束修之禮，題云「白龜元年調布」。
+        人亦疑其偽此題。
+        所得錫賚，盡市文籍，泛海而還。

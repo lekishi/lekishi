@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The envoys attend the New Year audience in the 含元殿; the next day the emperor falls ill, and on
+  1/23 he dies. On the 28th they stand in mourning dress at the 承天門 as the crown prince takes the throne,
+  and mourn for three days at their lodging.
+types: [occurrence]
+date:
+  value: 805-01-23
+  calendar: chinese_lunisolar
+  as_written: 廿三日天子雍王□崩。春秋六十四。
+  cite:
+    - id: mission-805-death-time
+      says:
+        葛野麻呂's report dates the emperor's death to the 23rd of the first month of 廿一年, the Tang year
+        貞元廿一年.
+      source: nihon-koki
+      at: 卷第十二 延暦廿四年六月乙巳 藤原葛野麻呂奏
+      quote: 廿一年正月元日於含元殿朝賀。二日天子不豫。廿三日天子雍王□崩。春秋六十四。
+places:
+  - place: changan
+    role: site
+participants:
+  - actor: tang-dezong
+    role: subject
+  - actor: fujiwara-no-kadonomaro
+    role: witness
+notes:
+  The report's 廿一年 is the Tang year 貞元廿一年, which it equates with 延暦廿四年. The emperor is 德宗; the report
+  names him only by a damaged title (雍王□).

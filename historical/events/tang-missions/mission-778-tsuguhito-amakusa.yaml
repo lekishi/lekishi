@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The bow of the first ship, with 大伴繼人 and 藤原清河's daughter 喜娘, washes up on 西仲嶋 in 天草郡 of 肥後. The
+  stern, with 津守國麻呂 and 56 people including Tang judges, reaches 甑嶋郡.
+types: [journey]
+date:
+  value: 778-11-13
+  calendar: chinese_lunisolar
+  as_written: 以十三日亥時漂着肥後國天草郡西仲嶋。
+  cite:
+    - id: mission-778-amakusa-time
+      says: 繼人's report dates the bow's landfall to the 亥 hour of the 13th of the eleventh month.
+      source: shoku-nihongi
+      at: 卷第卅五 寶龜九年十一月乙夘 大伴繼人奏
+      quote: 以十三日亥時漂着肥後國天草郡西仲嶋。臣之再生。叡造所救。
+places:
+  - place: amakusa
+    role: end
+    note: 繼人 names 西仲嶋 in 天草郡; the record places it at the district.
+  - place: koshikijima
+    role: end
+    note: The stern's landfall.
+participants:
+  - actor: otomo-no-tsuguhito
+    role: leader
+  - actor: kiso
+    role: participant
+    note: 藤原清河's daughter, coming to her father's country.
+notes: Two landfalls of one broken ship; a future journey record would split them.
+cites:
+  places:
+    - id: mission-778-split
+      says:
+        The court's summary of 寶龜九年十一月乙夘 records the stern reaching 甑嶋郡 and the bow, with 繼人 and 喜娘,
+        reaching 天草郡.
+      source: shoku-nihongi
+      at: 卷第卅五 寶龜九年十一月乙夘
+      quote: 又第一船海中中斷。舳艫各分。主神津守宿祢國麻呂。并唐判官等五十六人。乘其艫而着甑嶋郡。判官大伴宿祢繼人。并前入唐大使藤原朝臣河清之女喜娘等■一人。乘其舳而着肥後國天草郡。

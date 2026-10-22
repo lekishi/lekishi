@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 括州, the Tang prefecture five survivors of 石布's ship escaped to in 659.
+types: [region]
+names:
+  - form: 括州
+    lang: lzh
+    script: Hani
+    roman: Kuozhou
+    scheme: pinyin
+    cite:
+      - id: kuozhou-name
+        says: 伊吉博德's account says the five escaped in an islander's boat to 括州.
+        source: nihon-shoki
+        at: 卷第廿六 齊明天皇五年七月戊寅 注 伊吉連博德書
+        quote: 盜乘嶋人之船，逃到括州。
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [119.916667, 28.45]
+    notes:
+      A region-level placement standing for the prefecture at its seat, 括蒼縣, which lay at present-day 古城村
+      in 蓮都區 of modern 麗水. The point is the modern city's coordinate, not the seat's site, and
+      places nothing the five survivors reached. 括州 was renamed 處州 in 779.
+    cite:
+      - id: kuozhou-identification
+        says:
+          The prefecture set up in 589 had its seat at 括蒼縣, at the foot of the 括蒼 hills in present-day
+          古城村 of 蓮都區 in 麗水; the Tang re-established it as 括州 in 621 and renamed it 處州 in 779. The point is the modern city's coordinate from Wikidata (CC0), placed to stand for the
+          prefecture's seat.
+        basis: interpretation
+        attributed_to: 王巧榮 (潮新聞, 2023)
+        sources:
+          - source: tianmu-chuzhou-2023
+            at: 處州 and 括州, 589–779
+          - source: wikidata
+            at: Q58294 (P625), revision 2526612704
+modern:
+  - form: 麗水市
+    lang: zh
+    script: Hani
+    note: The modern city in whose 蓮都區 the article places the prefecture's seat; recorded as the
+      identification the placement rests on.

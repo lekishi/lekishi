@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The two ships of 石布 and 吉祥 set out from 難波三津之浦.
+types: [journey]
+date:
+  value: 659-07-03
+  calendar: chinese_lunisolar
+  as_written: 己未年七月三日
+  cite:
+    - id: mission-659-naniwa-time
+      says: 伊吉連博德書 dates the departure from 難波三津之浦 to the third day of the seventh month of 己未年.
+      source: nihon-shoki
+      at: 卷第廿六 齊明天皇五年七月戊寅 注 伊吉連博德書
+      quote: 以己未年七月三日，發自難波三津之浦。
+places:
+  - place: naniwa
+    role: start
+    note: 博德 names 難波三津之浦, a harbour of 難波.
+participants:
+  - actor: sakaibe-no-iwashiki
+    role: leader
+  - actor: tsumori-no-kisa
+    role: leader
+  - actor: iki-no-hakatoko
+    role: participant
+    note: The narrator, on 吉祥's ship.

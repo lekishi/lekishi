@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The embassy boards at 難波津 and sails two days later, but a violent storm breaks the ships. The
+  scholar 豊村家永 is lost, and the drowned cannot be counted. The envoys return the 節刀: the ships are too
+  damaged to cross."
+types: [occurrence]
+date:
+  value: "803"
+  calendar: regnal
+  as_written: 延暦廿二年 癸卯 遣唐大使葛野麻呂等言。今月十四日、於難波津頭、始乗船、十六日進発（逸文）
+  cite:
+    - id: mission-803-storm-time
+      says:
+        The ambassador's report, in the reconstructed volume for 延暦廿二年, says they boarded at 難波津 on
+        the 14th and sailed on the 16th.
+      source: nihon-koki
+      at: 卷第十一逸文 延暦廿二年 癸卯
+      quote: 癸卯。遣唐大使葛野麻呂等言。今月十四日、於難波津頭、始乗船、十六日進発、。云々。■暴雨疾風、沈石不禁。未初、風変打破舟、。云々。其明経請益大学助豊村家永、遂波没、不知所著。沈溺之徒、不可勝計、。云々。
+places:
+  - place: naniwa
+    role: start
+    note: The report names 難波津.
+participants:
+  - actor: fujiwara-no-kadonomaro
+    role: leader
+notes:
+  The report is excerpted (云々) in the reconstruction and names no place for the storm. The 節刀 is
+  returned on 辛未 of the same reconstructed year.
+cites:
+  summary:
+    - id: mission-803-sekito-returned
+      says: The chronicle records the 節刀 returned because the damaged ships could not cross.
+      source: nihon-koki
+      at: 卷第十一逸文 延暦廿二年 辛未
+      quote: 辛未。遣唐使奉還節刀。以船舶損壊、不得渡海也。

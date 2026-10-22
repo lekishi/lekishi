@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The court appoints 多治比眞人廣成 as 遣唐大使 and 中臣朝臣名代 as vice-envoy, and the next month orders four ships
+  built in 近江, 丹波, 播磨 and 備中.
+types: [mission]
+date:
+  value: 732-08
+  calendar: regnal
+  as_written: 天平四年八月丁亥
+  cite:
+    - id: mission-732-appointment-time
+      says: The chronicle records the appointment on 天平四年八月丁亥.
+      source: shoku-nihongi
+      at: 卷第十一 天平四年八月丁亥
+      quote: 丁亥。以從四位上多治比眞人廣成爲遣唐大使。從五位下中臣朝臣名代爲副使。
+places:
+  - place: heijo-palace
+    role: context
+    note:
+      The entry names no place. The court sat here in this reign, so the record names its seat as
+      context; it asserts no site for the act.
+participants:
+  - actor: tajihi-no-hironari
+    role: leader
+  - actor: nakatomi-no-nashiro
+    role: participant
+  - actor: japan-state
+    role: host
+cites:
+  summary:
+    - id: mission-732-ships
+      says: The chronicle records envoys sent to four provinces to build four ships for the embassy.
+      source: shoku-nihongi
+      at: 卷第十一 天平四年九月甲辰
+      quote: 甲辰。遣使于近江。丹波。播磨。備中等國。爲遣唐使造舶四艘。

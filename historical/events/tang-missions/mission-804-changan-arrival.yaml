@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Travelling day and night from 福州, the ambassador's party lodges at the 長樂驛 on 12/21 and on 12/23
+  rides into 長安 on 23 horses from the imperial stables, sent with wine and dried meat.
+types: [journey]
+date:
+  value: 804-12-23
+  calendar: chinese_lunisolar
+  as_written: 十二月廿一日到上都長樂驛宿。廿三日内使趙忠。將飛龍家細馬廿三匹迎來。
+  cite:
+    - id: mission-804-changan-time
+      says: 葛野麻呂's report dates the entry into 長安 to the 23rd of the twelfth month.
+      source: nihon-koki
+      at: 卷第十二 延暦廿四年六月乙巳 藤原葛野麻呂奏
+      quote: 十二月廿一日到上都長樂驛宿。廿三日内使趙忠。將飛龍家細馬廿三匹迎來。兼持酒脯宣慰。駕即入京城。
+places:
+  - place: changan
+    role: end
+participants:
+  - actor: fujiwara-no-kadonomaro
+    role: leader
+  - actor: tang-dynasty
+    role: host

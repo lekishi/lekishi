@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The ambassador 佐伯今毛人 takes his leave but stops at the 羅城門 pleading illness. Two months later
+  the court tells 小野石根 to go on without him and to explain the ambassador's absence if the Tang court
+  asks.
+types: [occurrence]
+date:
+  value: 777-04
+  calendar: regnal
+  as_written: 寶龜八年四月戊戌
+  cite:
+    - id: mission-777-imaemishi-time
+      says: The chronicle records 今毛人 stopping at the 羅城門 on 寶龜八年四月戊戌.
+      source: shoku-nihongi
+      at: 卷第卅四 寶龜八年四月戊戌
+      quote: 戊戌。遣唐大使佐伯宿祢今毛人等辞見。但大使今毛人到羅城門。稱病而留。
+places:
+  - place: heijo-palace
+    role: site
+    note: The 羅城門 is the main gate of 平城京.
+participants:
+  - actor: saeki-no-imaemishi
+    role: subject
+  - actor: ono-no-iwane
+    role: leader
+cites:
+  participants:
+    - id: mission-777-iwane-proceeds
+      says: The chronicle's order of 寶龜八年六月辛巳朔 tells 石根 to proceed, as the ambassador is too ill.
+      source: shoku-nihongi
+      at: 卷第卅四 寶龜八年六月辛巳朔
+      quote: 六月辛巳朔。勅遣唐副使從五位上小野朝臣石根。從五位下大神朝臣末足等。大使今毛人。身病弥重。不堪進途。

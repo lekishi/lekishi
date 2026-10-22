@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The second ship's judge 菅原清公 lands at 鹿嶋 in 松浦郡 of 肥前 and reports by post-horse.
+types: [journey]
+date:
+  value: 805-06
+  calendar: regnal
+  as_written: 延暦廿四年六月甲寅
+  cite:
+    - id: mission-805-kiyokimi-time
+      says: The chronicle records 清公's arrival on 延暦廿四年六月甲寅.
+      source: nihon-koki
+      at: 卷第十二 延暦廿四年六月甲寅
+      quote: 甲寅。遣唐使第二船判官正六位上菅原朝臣清公。來到肥前国松浦郡鹿嶋。
+places:
+  - place: kashima-hizen
+    role: end
+    note: The entry names 鹿嶋 in 松浦郡 of 肥前.
+participants:
+  - actor: sugawara-no-kiyokimi
+    role: leader

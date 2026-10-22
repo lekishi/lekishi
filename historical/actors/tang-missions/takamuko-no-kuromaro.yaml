@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  高向漢人玄理 (高向玄理), a student sent to China with the Sui mission of 608 who came home by way of Silla
+  in 640, later a court scholar, and 押使 of the 654 embassy; he died in 唐.
+types: [person]
+names:
+  - form: 高向漢人玄理
+    lang: ja
+    script: Hani
+    roman: Takamuko no Kuromaro
+    scheme: hepburn
+    cite:
+      - id: takamuko-no-kuromaro-name
+        says: The chronicle names 學生高向漢人玄理 returning from 大唐 in 640.
+        source: nihon-shoki
+        at: 卷第廿三 舒明天皇十二年十月乙亥
+        quote: 學生高向漢人玄理
+  - form: 高向史玄理
+    lang: ja
+    script: Hani
+    claim: takamuko-no-kuromaro-name
+  - form: 高向玄理
+    lang: ja
+    script: Hani
+    claim: takamuko-no-kuromaro-name
+roles:
+  - role: scholar
+    note: Student in China, 608–640.
+  - role: envoy
+    note: 押使 of the 654 embassy; died in 唐.
+notes: The reading Kuromaro for 玄理 is the conventional one; the roman form is an editorial reading aid.

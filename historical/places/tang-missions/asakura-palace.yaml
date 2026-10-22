@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 朝倉橘廣庭宮, 齊明's palace in 筑紫 during the campaign for 百濟, where 伊吉博德's party made its report on 661-05-23.
+types: [capital]
+names:
+  - form: 朝倉橘廣庭宮
+    lang: ja
+    script: Hani
+    roman: Asakura no Tachibana no Hironiwa-no-miya
+    scheme: hepburn
+    cite:
+      - id: asakura-palace-name
+        says: The chronicle records 齊明 moving to 朝倉橘廣庭宮 on 齊明天皇七年五月癸卯.
+        source: nihon-shoki
+        at: 卷第廿六 齊明天皇七年五月癸卯
+        quote: 天皇遷居于朝倉橘廣庭宮。
+  - form: 朝倉之朝
+    lang: ja
+    script: Hani
+    cite:
+      - id: asakura-palace-name-1
+        says: 伊吉博德's account says the party reported to the court at 朝倉.
+        source: nihon-shoki
+        at: 卷第廿六 齊明天皇七年五月 注 伊吉連博得書
+        quote: 五月二十三日，奉進朝倉之朝。
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [130.665528, 33.423417]
+    notes: A region-level placement standing for the 朝倉 area, not the palace. The palace's site is
+      disputed; three seasons of excavation at the traditional site at 須川 found no palace remains, and
+      the excavators could place it only within 朝倉郡. The point is the modern city of 朝倉's coordinate
+      and asserts no site.
+    cite:
+      - id: asakura-palace-identification
+        says:
+          The 1976 report on the third excavation at the traditional site at 大字須川 concludes that no
+          palace remains exist there, that the palace nevertheless lay within 朝倉郡, and that no evidence
+          allows a closer location. The point is the coordinate Wikidata records for 朝倉市 (CC0), the
+          city that since 2006 takes in the former 朝倉町 and 杷木町 of that 朝倉郡, placed to stand for the
+          area.
+        basis: interpretation
+        attributed_to: 九州歴史資料館
+        sources:
+          - source: kyuhaku-asakura-1976
+            at: pp. 12–13
+          - source: wikidata
+            at: Q720625 (P625), revision 2549821149
+modern:
+  - form: 朝倉市
+    lang: ja
+    script: Hani
+    note:
+      Modern city recorded for orientation; it holds the traditional site at 須川, where excavation
+      found no palace remains.
+notes: The palace site is disputed and not located; the point stands for the 朝倉 area at region
+  precision and places no palace.

@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The 新唐書 records an embassy of 咸亨元年 congratulating Tang on the conquest of Koguryŏ.
+types: [mission]
+date:
+  value: "670"
+  calendar: chinese_lunisolar
+  as_written: 咸亨元年
+  cite:
+    - id: mission-670-time
+      says: The 新唐書 dates the congratulatory embassy to 咸亨元年.
+      source: xin-tangshu
+      at: 卷220 東夷 日本
+      quote: 咸亨元年，遣使賀平高麗。
+places:
+  - place: changan
+    role: context
+    note: The history names no place; the Tang court sat at 長安.
+participants:
+  - actor: japan-state
+    role: guest
+  - actor: tang-dynasty
+    role: host
+notes:
+  "Commonly identified with 河內鯨's embassy of 669, but the record does not join them: neither source
+  names the other."

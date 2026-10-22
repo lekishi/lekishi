@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  Three days out from the 揚子江 mouth, the first ship is struck by a storm and breaks in two. The
+  vice-envoy 小野石根 and 37 others, and the Tang envoy 趙寳英 and 24 of his party, drown. 大伴繼人 and some forty
+  others cling to the bow for six days without food or water.
+types: [occurrence]
+date:
+  value: 778-11-08
+  calendar: chinese_lunisolar
+  as_written: 十一月五日。得信風。第一第二船同發入海。比及海中。八日初更。風急波高。
+  cite:
+    - id: mission-778-breaks-time
+      says: 繼人's report dates the storm to the first watch of the 8th of the eleventh month.
+      source: shoku-nihongi
+      at: 卷第卅五 寶龜九年十一月乙夘 大伴繼人奏
+      quote: 副使小野朝臣石根等卅八人。唐使趙寳英等廿五人。同時沒入。不得相救。
+participants:
+  - actor: ono-no-iwane
+    role: subject
+  - actor: zhao-baoying
+    role: subject
+  - actor: otomo-no-tsuguhito
+    role: participant
+notes:
+  The ship had left 揚子江口 on 9/3 and waited for wind at 常熟 (常耽縣 in the transcription) in 蘇州 before
+  sailing on 11/5. The storm is at sea and has no place. The report's figures (38 and 25) include the
+  named men.

@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  沈惟岳 and his men are feasted at 大宰府. Months later his own deputy 紀喬容 and 37 others accuse him
+  of corruption and ask for a new leader; the court refuses, since both were named by the Tang emperor's
+  commissioner and the prefect of 蘇州.
+types: [occurrence]
+date:
+  value: 762-05
+  calendar: regnal
+  as_written: 天平寶字六年五月丁酉
+  cite:
+    - id: mission-762-dispute-time
+      says: The chronicle records 大宰府's report of the complaint on 天平寶字六年五月丁酉.
+      source: shoku-nihongi
+      at: 卷第廿四 天平寶字六年五月丁酉
+      quote: 唐客副使紀喬容已下卅八人状云。大使沈惟岳。贓汚已露。不足率下。
+places:
+  - place: dazaifu
+    role: site
+participants:
+  - actor: shen-weiyue
+    role: subject
+cites:
+  summary:
+    - id: mission-762-feast
+      says: The chronicle records the feast for 沈惟岳 at 大宰府 on 天平寶字六年正月乙酉.
+      source: shoku-nihongi
+      at: 卷第廿四 天平寶字六年正月乙酉
+      quote: 乙酉。遣參議從四位上藤原惠美朝臣眞光。饗唐人沈惟岳等於大宰府。

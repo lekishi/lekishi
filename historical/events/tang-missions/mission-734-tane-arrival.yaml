@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The ambassador 多治比廣成's ship reaches 多祢嶋.
+types: [journey]
+date:
+  value: 734-11
+  calendar: regnal
+  as_written: 天平六年十一月丁丑
+  cite:
+    - id: mission-734-tane-time
+      says: The chronicle records the arrival at 多祢嶋 on 天平六年十一月丁丑.
+      source: shoku-nihongi
+      at: 卷第十一 天平六年十一月丁丑
+      quote: 十一月丁丑。入唐大使從四位上多治比眞人廣成等來著多祢嶋。
+places:
+  - place: tane
+    role: end
+participants:
+  - actor: tajihi-no-hironari
+    role: leader

@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The student monk 清安 and the student 高向漢人玄理 return from 大唐 by way of Silla, with Paekche and Silla
+  tribute envoys. 玄理 had left with the Sui mission of 608.
+types: [journey]
+date:
+  value: 640-10
+  calendar: regnal
+  as_written: 舒明天皇十二年冬十月乙丑朔乙亥
+  cite:
+    - id: mission-640-return-time
+      says: The chronicle records their return on 舒明天皇十二年十月乙亥.
+      source: nihon-shoki
+      at: 卷第廿三 舒明天皇十二年十月乙亥
+      quote: 冬十月乙丑朔乙亥，大唐學問僧清安、學生高向漢人玄理，傳新羅而至之。
+participants:
+  - actor: takamuko-no-kuromaro
+    role: leader
+    note: Returns as 學生高向漢人玄理.
+  - actor: silla
+    role: participant
+    note: They come by way of Silla.
+notes:
+  The entry names no landing place. 玄理's departure in 608 is recorded in 卷第廿二 (推古天皇十六年九月) among the
+  students sent with the Sui envoy; it belongs to the Sui missions and is outside this story.
+cites:
+  participants:
+    - id: mission-640-return-people
+      says: The entry names 學生高向漢人玄理 among those who came by way of Silla.
+      source: nihon-shoki
+      at: 卷第廿三 舒明天皇十二年十月乙亥

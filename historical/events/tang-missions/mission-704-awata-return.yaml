@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  粟田朝臣眞人 returns from 唐國. Later that year he is promoted to 從三位, and in 706 his ship, named 佐伯,
+  is itself given court rank.
+types: [journey]
+date:
+  value: 704-07-01
+  calendar: regnal
+  as_written: 慶雲元年秋七月甲申朔
+  cite:
+    - id: mission-704-return-time
+      says: The chronicle records 眞人's return on 慶雲元年七月甲申朔.
+      source: shoku-nihongi
+      at: 卷第三 慶雲元年七月甲申朔
+      quote: 秋七月甲申朔。正四位下粟田朝臣眞人自唐國至。
+places:
+  - place: fujiwara-kyo
+    role: context
+    note:
+      The entry names no place. The court sat here in this reign, so the record names its seat as
+      context; it asserts no site for the act.
+participants:
+  - actor: awata-no-mahito
+    role: leader
+cites:
+  summary:
+    - id: mission-704-ship-rank
+      says: The chronicle records the ship 佐伯 being given 從五位下 as the one 粟田眞人 sailed in.
+      source: shoku-nihongi
+      at: 卷第三 慶雲三年二月丙申
+      quote: 丙申。授船号佐伯從五位下。〈入唐執節使從三位粟田朝臣眞人之所乘者也。〉

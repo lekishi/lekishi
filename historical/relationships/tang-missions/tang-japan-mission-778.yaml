@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "The Tang court's own embassy to 日本國, 778–779: 趙寳英, drowned on the way, and 孫興進, received in
+  the capital in 779 and escorted home by 布勢清直, who returned in 781."
+types: [diplomacy]
+from: tang-dynasty
+to: japan-state
+date:
+  value: 778..781
+  mode: duration
+  calendar: regnal
+  as_written: 寶龜九年十月 唐客隨臣入朝; 天應元年六月 送唐客使自唐國至
+  cite:
+    - id: tang-japan-mission-778-time
+      says: The chronicle dates the Tang envoys' arrival to 寶龜九年 and their escort's return to 天應元年.
+      source: shoku-nihongi
+      at: 卷第卅五 寶龜九年十月乙未; 卷第卅六 天應元年六月辛亥
+notes: The opposite direction to the Japanese embassies; no causation asserted.
+cite:
+  - id: tang-japan-mission-778-basis
+    says: The chronicle records the Tang envoys from arrival to departure and the escort's return.
+    source: shoku-nihongi
+    at: 卷第卅五 寶龜十年五月癸夘; 寶龜十年五月丁夘; 卷第卅六 天應元年六月辛亥

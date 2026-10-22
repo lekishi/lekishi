@@ -1,0 +1,32 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The envoys' gifts are presented through the palace commissioner, and the emperor sends word that
+  they are 'extremely fine'. The next day the envoys are received in the 宣化殿 and then in the 麟德殿, all
+  their requests granted and a banquet given.
+types: [mission]
+date:
+  value: 804-12-25
+  calendar: chinese_lunisolar
+  as_written: 廿五日於宣化殿禮見。天子不衙。同日於麟徳殿對見。
+  cite:
+    - id: mission-804-audience-time
+      says: 葛野麻呂's report dates the audiences to the 25th.
+      source: nihon-koki
+      at: 卷第十二 延暦廿四年六月乙巳 藤原葛野麻呂奏
+      quote: 廿五日於宣化殿禮見。天子不衙。同日於麟徳殿對見。所請並允。即於内裏設宴。
+places:
+  - place: changan
+    role: site
+participants:
+  - actor: fujiwara-no-kadonomaro
+    role: guest
+  - actor: tang-dezong
+    role: host
+    note: The reigning emperor; the report says 天子.
+cites:
+  summary:
+    - id: mission-804-gifts
+      says: The report quotes the emperor's message that the gifts were extremely fine.
+      source: nihon-koki
+      at: 卷第十二 延暦廿四年六月乙巳 藤原葛野麻呂奏
+      quote: 卿等遠慕朝貢。所奉進物。極是精好。朕殊喜歡。

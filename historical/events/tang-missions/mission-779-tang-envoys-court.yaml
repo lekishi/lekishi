@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The Tang envoys 孫興進 and 秦怤期 enter the capital, met outside the gate by two hundred cavalry and
+  twenty 蝦夷, and present the Tang letter and gifts. The court asks after the emperor and grieves for those
+  lost at sea and held on 耽羅.
+types: [mission]
+date:
+  value: 779-05
+  calendar: regnal
+  as_written: 寶龜十年五月癸夘
+  cite:
+    - id: mission-779-court-time
+      says: The chronicle records the audience on 寶龜十年五月癸夘.
+      source: shoku-nihongi
+      at: 卷第卅五 寶龜十年五月癸夘
+      quote: 五月癸夘。唐使孫興進。秦■期等朝見。上唐朝書。并貢信物。
+places:
+  - place: heijo-palace
+    role: site
+participants:
+  - actor: sun-xingjin
+    role: guest
+  - actor: emishi
+    role: participant
+    note: Twenty 蝦夷 escort the Tang envoys into the capital.
+notes:
+  The second envoy's name is damaged in the transcription (秦■期); the record does not name him beyond
+  that.
+cites:
+  participants:
+    - id: mission-779-escort
+      says:
+        The chronicle records the Tang envoys entering the capital on 寶龜十年四月庚子, met by two hundred cavalry
+        and twenty 蝦夷.
+      source: shoku-nihongi
+      at: 卷第卅五 寶龜十年四月庚子
+      quote: 庚子。唐客入京。將軍等率騎兵二百。蝦夷廿人。迎接於京城門外三橋。

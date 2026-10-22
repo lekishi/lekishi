@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The Tang histories record that 日本 sent tribute again in 開成四年.
+types: [mission]
+date:
+  value: "839"
+  calendar: chinese_lunisolar
+  as_written: 開成四年
+  cite:
+    - id: mission-839-tribute-time
+      says: Both Tang histories record tribute from 日本 in 開成四年.
+      sources:
+        - source: jiu-tangshu
+          at: 卷199上 東夷 日本國
+          quote: 開成四年，又遣使朝貢。
+        - source: xin-tangshu
+          at: 卷220 東夷 日本
+          quote: 仁明直開成四年，復入貢。
+places:
+  - place: changan
+    role: context
+    note: The histories name no place; the Tang court sat at 長安.
+participants:
+  - actor: tang-dynasty
+    role: host
+  - actor: japan-state
+    role: guest
+notes:
+  The Tang year is that of the embassy's audience and departure; the envoys reached 長安 late in 開成三年
+  (838).

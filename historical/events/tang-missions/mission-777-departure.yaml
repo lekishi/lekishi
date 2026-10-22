@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: The four ships put to sea together, waiting on the wind.
+types: [journey]
+date:
+  value: 777-06-24
+  calendar: chinese_lunisolar
+  as_written: 去寳龜八年六月廿四日。候風入海。
+  cite:
+    - id: mission-777-departure-time
+      says:
+        小野滋野's report dates the sailing to the 24th of the sixth month of 寶龜八年, and 大伴繼人's report says
+        the four ships went out together that day.
+      sources:
+        - source: shoku-nihongi
+          at: 卷第卅五 寶龜九年十月乙未 小野滋野奏
+          quote: 去寳龜八年六月廿四日。候風入海。
+        - source: shoku-nihongi
+          at: 卷第卅五 寶龜九年十一月乙夘 大伴繼人奏
+          quote: 繼人等去年六月廿四日。四船同入海。
+participants:
+  - actor: ono-no-iwane
+    role: leader
+  - actor: ono-no-shigeno
+    role: participant
+  - actor: otomo-no-tsuguhito
+    role: participant
+notes: Neither report names the harbour of departure, so the event carries no place.

@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  "The missions of 759–762 to bring 藤原清河 home: 高元度 out through 渤海 in 759 and back from 蘇州 with
+  a Tang crew in 761, and the embassy to take that crew home, which never sailed."
+types: [diplomacy]
+from: japan-state
+to: tang-dynasty
+date:
+  value: 759..762
+  mode: duration
+  calendar: regnal
+  as_written: 天平寶字三年正月 爲迎入唐大使使; 天平寶字六年七月 不得渡海
+  cite:
+    - id: japan-tang-mission-759-time
+      says: The chronicle dates the appointment to 天平寶字三年 and the failure to cross to 天平寶字六年.
+      source: shoku-nihongi
+      at: 卷第廿二 天平寶字三年正月丁酉; 卷第廿四 天平寶字六年七月
+notes:
+  Directional, no causation asserted. 清河 never returned; his death in 唐 is reported in 779 and is
+  in the 750–754 embassy's coda.
+cite:
+  - id: japan-tang-mission-759-basis
+    says: The chronicle records the mission from appointment to the failed embassy of 762.
+    source: shoku-nihongi
+    at: 卷第廿二 天平寶字三年正月丁酉; 卷第廿三 天平寶字五年八月甲子; 卷第廿四 天平寶字六年七月

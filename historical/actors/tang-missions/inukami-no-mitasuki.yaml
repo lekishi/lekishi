@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  犬上君三田耜 (犬上御田鍬), envoy to Sui in 614 and leader of the first mission to Tang in 630, brought home
+  by the Tang envoy 高表仁 in 632.
+types: [person]
+names:
+  - form: 犬上君三田耜
+    lang: ja
+    script: Hani
+    roman: Inukami no Mitasuki
+    scheme: hepburn
+    cite:
+      - id: inukami-no-mitasuki-name
+        says: The chronicle names 犬上君三田耜 as the envoy sent to 大唐 on 舒明天皇二年八月丁酉.
+        source: nihon-shoki
+        at: 卷第廿三 舒明天皇二年八月丁酉
+        quote: 以大仁犬上君三田耜
+  - form: 犬上君御田鍬
+    lang: ja
+    script: Hani
+    claim: inukami-no-mitasuki-name
+roles:
+  - role: envoy
+    note: Envoy of 630; earlier envoy to Sui in 614 (推古天皇廿二年).
+    date:
+      value: 630..632
+      mode: duration
+      calendar: regnal
+      as_written: 舒明天皇二年八月 遣於大唐; 舒明天皇四年八月 大唐遣高表仁，送三田耜
+      cite:
+        - id: inukami-no-mitasuki-role-time
+          says: The chronicle dates his dispatch to 舒明天皇二年 and his return to 舒明天皇四年.
+          source: nihon-shoki
+          at: 卷第廿三 舒明天皇二年八月丁酉; 舒明天皇四年八月

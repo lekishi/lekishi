@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The envoys reach the 揚州大都督府. Because the post stations were ruined in the rebellion, the Tang
+  court first limits the party going to the capital to sixty, then on the road to twenty; the envoys get
+  it raised by 23.
+types: [journey]
+date:
+  value: 777-08-29
+  calendar: chinese_lunisolar
+  as_written: 八月廿九日。到揚州大都督府。
+  cite:
+    - id: mission-777-yangzhou-time
+      says: Both reports date the arrival at the 揚州大都督府 to the 29th of the eighth month.
+      sources:
+        - source: shoku-nihongi
+          at: 卷第卅五 寶龜九年十月乙未 小野滋野奏
+          quote: 八月廿九日。到揚州大都督府。即依式例安置供給。
+        - source: shoku-nihongi
+          at: 卷第卅五 寶龜九年十一月乙夘 大伴繼人奏
+          quote: 八月廿九日。到揚州大都督府。即節度使陳少遊且奏且放。
+places:
+  - place: yangzhou
+    role: site
+participants:
+  - actor: ono-no-iwane
+    role: leader
+  - actor: tang-dynasty
+    role: host
+cites:
+  summary:
+    - id: mission-777-limit
+      says: 滋野 reports the limit of sixty because of the rebellion, and the later limit of twenty.
+      source: shoku-nihongi
+      at: 卷第卅五 寶龜九年十月乙未 小野滋野奏
+      quote: 属祿山亂。常館彫弊。入京使人。仰限六十人。以來十月十五日。臣等八十五人發州入京。行百餘里。忽據中書門下牒。■節人數。限以廿人。臣等請。更加廿三人。

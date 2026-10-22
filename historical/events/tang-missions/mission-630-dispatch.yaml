@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The court sends 犬上君三田耜 and the physician 惠日 to 大唐: the first mission to the Tang court in the
+  Japanese chronicle."
+types: [mission]
+date:
+  value: 630-08
+  calendar: regnal
+  as_written: 舒明天皇二年秋八月癸巳朔丁酉
+  cite:
+    - id: mission-630-dispatch-time
+      says: The chronicle records the dispatch of 犬上君三田耜 and 藥師惠日 to 大唐 on 舒明天皇二年八月丁酉.
+      source: nihon-shoki
+      at: 卷第廿三 舒明天皇二年八月丁酉
+      quote: 秋八月癸巳朔丁酉，以大仁犬上君三田耜、大仁藥師惠日，遣於大唐。
+participants:
+  - actor: inukami-no-mitasuki
+    role: leader
+    note: Sent as envoy, rank 大仁.
+  - actor: kusushi-no-enichi
+    role: participant
+    note: Sent with him, rank 大仁.
+  - actor: japan-state
+    role: host
+notes:
+  "The entry gives a sexagenary day (丁酉); v0 normalizes it to the month. The entry names no place,
+  and the record names none: the court moved to 岡本宮 only in the tenth month of this year, so the
+  seat of 八月 is not the one the `asuka` record identifies."
+cites:
+  participants:
+    - id: mission-630-dispatch-envoys
+      says: The same entry names 犬上君三田耜 and 藥師惠日 as the envoys.
+      source: nihon-shoki
+      at: 卷第廿三 舒明天皇二年八月丁酉

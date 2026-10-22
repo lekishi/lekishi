@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  藥師惠日, a physician who studied in 唐, returned in 623 urging regular contact, and went again as
+  envoy in 630 and as vice-envoy in 654. His descendants record that he was sent to 唐 to learn medicine
+  and took 藥師 as his name.
+types: [person]
+names:
+  - form: 藥師惠日
+    lang: ja
+    script: Hani
+    roman: Kusushi no Enichi
+    scheme: hepburn
+    cite:
+      - id: kusushi-no-enichi-name
+        says: The chronicle names 藥師惠日 with 犬上君三田耜 as envoys to 大唐 in 630.
+        source: nihon-shoki
+        at: 卷第廿三 舒明天皇二年八月丁酉
+        quote: 大仁藥師惠日，遣於大唐
+  - form: 醫惠日
+    lang: ja
+    script: Hani
+    claim: kusushi-no-enichi-name
+roles:
+  - role: envoy
+    note: Envoy in 630; vice-envoy (副使) in 654.
+  - role: scholar
+    note: Physician; studied medicine in 唐.
+    cite:
+      - id: kusushi-no-enichi-medicine
+        says:
+          His descendants' petition of 758 records that 惠日 was sent to 大唐, learned medicine, and so took
+          the name 藥師.
+        source: shoku-nihongi
+        at: 卷第二十 天平寶字二年四月己巳
+        quote: 徳來五世孫惠日。小治田朝廷御世。被遣大唐。學得醫術。因号藥師。遂以爲姓。

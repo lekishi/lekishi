@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=../../schema/place.schema.json
+summary: 値賀嶋, the islands west of 肥前國松浦郡, the last Japanese landfall on the southern route.
+types: [landform]
+names:
+  - form: 値賀嶋
+    lang: ja
+    script: Hani
+    roman: Chika-no-shima
+    scheme: hepburn
+    cite:
+      - id: chika-name
+        says: The 大宰府 report says the second ship was driven to 値賀嶋.
+        source: shoku-nihon-koki
+        at: 卷第六 承和四年七月癸未
+        quote: 第二舶左右方便漂着値賀嶋。
+  - form: 値嘉嶋
+    lang: ja
+    script: Hani
+    cite:
+      - id: chika-name-1
+        says: The 836 edict asks for landing places on the shores of 値嘉嶋.
+        source: shoku-nihon-koki
+        at: 卷第五 承和三年七月甲申
+        quote: 宜値嘉嶋涯畔可着船處。
+at:
+  - interpretation: approximate_point
+    precision: region
+    point: [129.05, 32.9]
+    notes:
+      A region-level placement standing for the 値賀嶋 islands, centred on the present-day 五島列島. The
+      point is the island chain's modern coordinate; the cited work also counts 平戸島 with 値嘉 in 876,
+      and no island, harbour or landing place is asserted.
+    cite:
+      - id: chika-identification
+        says:
+          The reference work describes 値嘉島 as a historical place name centred on the present-day
+          五島列島, the 値嘉郷 of 肥前國松浦郡, with harbours the 遣唐使 ships called at. The point is the
+          island chain's modern coordinate from Wikidata (CC0), placed to stand for the islands as a
+          whole.
+        basis: interpretation
+        attributed_to: 平凡社「改訂新版 世界大百科事典」「値嘉島」 (井上辰雄)
+        sources:
+          - source: sekai-daihyakka-chika
+            at: 値嘉島
+          - source: wikidata
+            at: Q1333790 (P625), revision 2544236760
+modern:
+  - form: 五島列島
+    lang: ja
+    script: Hani
+    note: The island chain the reference work centres 値嘉島 on; recorded as the identification the
+      placement rests on.

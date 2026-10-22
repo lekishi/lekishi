@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary: 大宰府 reports that 多治比縣守 has come back.
+types: [journey]
+date:
+  value: 718-10
+  calendar: regnal
+  as_written: 養老二年十月庚辰
+  cite:
+    - id: mission-718-dazaifu-time
+      says: The chronicle records 大宰府's report on 養老二年十月庚辰.
+      source: shoku-nihongi
+      at: 卷第八 養老二年十月庚辰
+      quote: 庚辰。大宰府言。遣唐使從四位下多治比眞人縣守來歸。
+places:
+  - place: dazaifu
+    role: site
+    note: The report comes from 大宰府; the landfall is not named.
+participants:
+  - actor: tajihi-no-agatamori
+    role: leader

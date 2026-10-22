@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  The third ship, with 小野滋野, sails on 9/9, runs aground, is repaired, and reaches 橘浦 in 松浦郡 of
+  肥前 on 10/23, bringing Tang envoys who sailed on it because their own ship was not ready.
+types: [journey]
+date:
+  value: 778-10-23
+  calendar: chinese_lunisolar
+  as_written: 廿三日。到肥前國松浦郡橘浦。
+  cite:
+    - id: mission-778-third-time
+      says: 滋野's report dates the arrival at 橘浦 to the 23rd.
+      source: shoku-nihongi
+      at: 卷第卅五 寶龜九年十月乙未 小野滋野奏
+      quote: 九月九日。臣船得正南風。發船入海。行已三日。忽遭逆風。船著沙上。
+places:
+  - place: tachibana-ura
+    role: end
+    note: 滋野 names 橘浦 in 松浦郡 of 肥前.
+participants:
+  - actor: ono-no-shigeno
+    role: leader
+  - actor: sun-xingjin
+    role: participant
+    note: The Tang envoys who sailed on this ship.
+notes:
+  The report says the Tang envoys rode with 滋野 because the ship being built for them in 揚州 was not
+  finished; it does not name them, and the record's identification with 孫興進's party follows the court's
+  later reception of the 唐客.
+cites:
+  participants:
+    - id: mission-778-tang-aboard
+      says: 滋野 reports the Tang envoys sailing on his ship because their own could not be built in time.
+      source: shoku-nihongi
+      at: 卷第卅五 寶龜九年十月乙未 小野滋野奏
+      quote: 中使同欲進途。船難卒成。所由奏聞。便寄乘臣等船發遣。

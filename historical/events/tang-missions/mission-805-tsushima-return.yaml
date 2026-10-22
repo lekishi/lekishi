@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  "The ambassador's ship reaches 阿禮村 in 下縣郡 of 對馬. His report closes with news of 唐: the new emperor,
+  the revolt of a governor in 青州, and an envoy held at the Tibetan border while the capital fears 吐蕃,
+  five hundred 里 away."
+types: [journey]
+date:
+  value: 805-06-05
+  calendar: chinese_lunisolar
+  as_written: 六月五日臣船到對馬嶋下縣郡阿禮村。
+  cite:
+    - id: mission-805-tsushima-time
+      says: 葛野麻呂's report dates the arrival at 對馬 to the fifth of the sixth month.
+      source: nihon-koki
+      at: 卷第十二 延暦廿四年六月乙巳 藤原葛野麻呂奏
+      quote: 六月五日臣船到對馬嶋下縣郡阿禮村。
+places:
+  - place: tsushima
+    role: end
+participants:
+  - actor: fujiwara-no-kadonomaro
+    role: leader
+cites:
+  summary:
+    - id: mission-805-tibet
+      says: The report says 吐蕃 lies five hundred 里 from 長安 and the capital has no rest from its fear.
+      source: nihon-koki
+      at: 卷第十二 延暦廿四年六月乙巳 藤原葛野麻呂奏
+      quote: 今長安城。去吐蕃界五百里。内疑節度。外嫌吐蕃。京師騷動。

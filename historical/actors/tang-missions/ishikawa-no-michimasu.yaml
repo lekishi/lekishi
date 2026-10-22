@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=../../schema/actor.schema.json
+summary:
+  石川朝臣道益, vice-envoy of the 801 embassy, who fell ill on the road and died in 唐 before reaching
+  the capital.
+types: [person]
+names:
+  - form: 石川朝臣道益
+    lang: ja
+    script: Hani
+    roman: Ishikawa no Michimasu
+    scheme: hepburn
+    cite:
+      - id: ishikawa-no-michimasu-name
+        says: The chronicle names 石川道益 as vice-envoy.
+        source: nihon-koki
+        at: 卷第十逸文 延暦廿年 庚子
+        quote: 従五位下石川道益為副。
+roles:
+  - role: envoy
+    note: 副使; died in 唐.

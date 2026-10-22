@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=../../schema/relationship.schema.json
+summary:
+  The embassy of 多治比縣守 from 日本國 to 唐, 716–718, which took 阿倍仲麻呂, 吉備眞備 and 玄昉 to study, asked for
+  teachers of the classics and spent its gifts on books.
+types: [diplomacy]
+from: japan-state
+to: tang-dynasty
+date:
+  value: 716..719
+  mode: duration
+  calendar: regnal
+  as_written: 靈龜二年八月 爲遣唐押使; 養老三年正月 入唐使等拜見
+  cite:
+    - id: japan-tang-mission-717-time
+      says: The chronicle dates the appointment to 靈龜二年 and the envoys' audience in Tang robes to 養老三年正月.
+      source: shoku-nihongi
+      at: 卷第七 靈龜二年八月癸亥; 卷第八 養老三年正月己亥
+notes: Directional, no causation asserted.
+cite:
+  - id: japan-tang-mission-717-basis
+    says: The chronicle records the embassy from appointment to return.
+    source: shoku-nihongi
+    at: 卷第七 靈龜二年八月癸亥; 卷第八 養老二年十二月壬申

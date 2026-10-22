@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/event.schema.json
+summary:
+  At the farewell banquet, held in the Chinese manner, the emperor calls 葛野麻呂 to the foot of his
+  couch, pours him wine and sings him a song of safe return; 葛野麻呂 weeps, and so does the court.
+types: [mission]
+date:
+  value: "803"
+  calendar: regnal
+  as_written: 延暦廿二年 庚辰（逸文）
+  cite:
+    - id: mission-803-farewell-time
+      says:
+        The chronicle records the farewell on 庚辰 in the reconstructed volume for 延暦廿二年, without a month
+        in the transcription.
+      source: nihon-koki
+      at: 卷第十一逸文 延暦廿二年 庚辰
+      quote: 庚辰。遣唐大使葛野麻呂、副使石川道益賜餞。宴設之事、一依漢法。酒酣、上喚葛野麻呂於御床下、賜酒。
+places:
+  - place: heian-kyo
+    role: context
+    note:
+      The entry names no place. The court sat here in this reign, so the record names its seat as
+      context; it asserts no site for the act.
+participants:
+  - actor: fujiwara-no-kadonomaro
+    role: leader
+  - actor: ishikawa-no-michimasu
+    role: participant
+notes:
+  The transcription of the reconstructed volume gives no month headings, so the event is dated to
+  the year. The song is given in man'yōgana and not quoted here.
+cites:
+  summary:
+    - id: mission-803-tears
+      says: The entry records that 葛野麻呂 wept and that all the courtiers at the banquet wept too.
+      source: nihon-koki
+      at: 卷第十一逸文 延暦廿二年 庚辰
+      quote: 葛野麻呂涕涙如雨。侍宴群臣、無不流涕。

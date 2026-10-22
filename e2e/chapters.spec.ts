@@ -109,7 +109,7 @@ test("serves the Tang chapter as an ordinary chapter page", async ({ page, reque
   await closeAbout(page)
 
   await openExplore(page, "events")
-  await expect(page.getByTestId("atlas-event-item")).toHaveCount(24)
+  await expect(page.getByTestId("atlas-event-item")).toHaveCount(25)
 
   // A chapter's own year text: the CE window prints as years, never as BCE.
   const listText = await page.getByTestId("atlas-event-list").innerText()
@@ -203,7 +203,7 @@ test("replaces the workspace when the router moves between two chapters", async 
 
   await openChapter(page, TANG)
   await openExplore(page, "events")
-  await expect(page.getByTestId("atlas-event-item")).toHaveCount(24)
+  await expect(page.getByTestId("atlas-event-item")).toHaveCount(25)
 
   await openSwitcher(page)
 
@@ -457,8 +457,8 @@ test("opens the view a link names", async ({ page }) => {
   // A story step, counted from one as a reader counts it.
   await openChapter(page, `${TANG}?step=7`)
   await expect(cardTitle(page)).toHaveText("The envoys invite 鑒眞 at 延光寺, 753")
-  await expect(page.getByTestId("atlas-arrival")).toContainText("Story 7 of 37")
-  await expect(card(page)).toContainText("7 of 37")
+  await expect(page.getByTestId("atlas-arrival")).toContainText("Story 7 of 38")
+  await expect(card(page)).toContainText("7 of 38")
 
   // A place: its own card.
   await openChapter(page, `${TANG}?place=heijo-palace`)
@@ -517,7 +517,7 @@ test("says so when a link names a record the chapter does not have", async ({ pa
   await expect(page.getByTestId("atlas-arrival")).toHaveCount(0)
   await expect(playheadYear(page)).toHaveText("750")
   await openExplore(page, "events")
-  await expect(page.getByTestId("atlas-event-item")).toHaveCount(24)
+  await expect(page.getByTestId("atlas-event-item")).toHaveCount(25)
 
   expect(problems).toEqual([])
 })
@@ -667,7 +667,7 @@ test("explains the chapter once, in the About sheet", async ({ page }) => {
   await expect(about).toContainText("Self-reviewed by")
   // The coverage statement is the chapter's own, and the counts are the records'.
   await expect(about).toContainText("Primary mission window 750–754")
-  await expect(about).toContainText("24 + 5 coda")
+  await expect(about).toContainText("25 + 5 coda")
   await expect(about.getByRole("link", { name: "Full attribution" })).toHaveAttribute(
     "href",
     "/globe/ATTRIBUTION.txt",

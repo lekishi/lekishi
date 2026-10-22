@@ -758,8 +758,7 @@
                 name="秋妻屋浦"
                 lang="ja"
                 romanization="Akimeya no ura"
-                modern="坊津 (a modern scholarly proposal)"
-                modernLang="ja"
+                modern={[{ form: "坊津", lang: "ja" }]}
                 size="title"
               />
               <NameForm name="鑒眞" lang="lzh" romanization="Jianzhen" />

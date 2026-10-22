@@ -381,8 +381,7 @@ describe("NameForm", () => {
       name: "秋妻屋浦",
       lang: "ja",
       romanization: "Akimeya no ura",
-      modern: "坊津 (a proposed identification)",
-      modernLang: "ja",
+      modern: [{ form: "坊津", lang: "ja" }],
     })
     const [name, romanization] = target.querySelectorAll("[data-name-form] > span")
     expect(name.getAttribute("lang")).toBe("ja")
@@ -396,8 +395,34 @@ describe("NameForm", () => {
     flushSync()
     expect(toggle.getAttribute("aria-expanded")).toBe("true")
     expect(modern.hidden).toBe(false)
-    expect(modern.getAttribute("lang")).toBe("ja")
-    expect(modern.textContent).toBe("坊津 (a proposed identification)")
+    expect(modern.querySelector("[lang]")?.getAttribute("lang")).toBe("ja")
+    expect(modern.textContent).toBe("坊津")
+    expect(toggle.textContent).toBe("Today")
+  })
+
+  it("lists several modern names, each in its own language", () => {
+    render(NameForm, {
+      name: "Carthago",
+      lang: "la",
+      modern: [
+        { form: "قرطاج", lang: "ar" },
+        { form: "Carthage", lang: "fr" },
+      ],
+    })
+    const toggle = target.querySelector("button")!
+    expect(toggle.textContent).toBe("Modern names")
+    const modern = document.getElementById(toggle.getAttribute("aria-controls")!)!
+    const forms = [...modern.querySelectorAll("[lang]")]
+    expect(forms.map((form) => [form.getAttribute("lang"), form.getAttribute("dir")])).toEqual([
+      ["ar", "auto"],
+      ["fr", "auto"],
+    ])
+    expect(modern.textContent).toBe("قرطاج · Carthage")
+  })
+
+  it("shows no toggle without a modern name", () => {
+    render(NameForm, { name: "鑒眞", lang: "lzh", modern: [] })
+    expect(target.querySelector("button")).toBeNull()
   })
 })
 

@@ -2,7 +2,7 @@ import { loadBundle } from "virtual:lekishi-chapters"
 import type { JsonValue } from "../historical/contract/types"
 import type { Chapter } from "./domain"
 import { SERVED_CHAPTERS, servedChapter, type ServedChapter } from "./chapter-registry"
-import { projectChapter, type ChapterCoverage } from "./projection"
+import { projectStories, type ChapterCoverage } from "./projection"
 
 /**
  * The browser-safe chapter loader.
@@ -34,13 +34,21 @@ export async function loadChapterContent(
   chapter: string,
   coverage: ChapterCoverage,
 ): Promise<Chapter> {
+  return (await loadChapterStories(chapter, coverage))[0]
+}
+
+/** Loads a chapter and projects every one of its stories, the one it opens on first. */
+export async function loadChapterStories(
+  chapter: string,
+  coverage: ChapterCoverage,
+): Promise<Chapter[]> {
   const bundle = await loadBundle(chapter)
 
   if (bundle === undefined) {
     throw new Error(`${chapter} is not an approved chapter, so there is no content to load`)
   }
 
-  return projectChapterContent(chapter, bundle.documents, bundle.sets, coverage)
+  return projectChapterStories(chapter, bundle.documents, bundle.sets, coverage)
 }
 
 /**
@@ -56,7 +64,21 @@ export function projectChapterContent(
   sets: JsonValue[],
   coverage: ChapterCoverage,
 ): Chapter {
-  const projected = projectChapter(name, documents, sets, coverage)
+  return projectChapterStories(name, documents, sets, coverage)[0]
+}
+
+/**
+ * Projects every story of a chapter, the one it opens on first, or throws with
+ * every representability error. Every story is projected even when a caller
+ * shows one, so a story that cannot be shown fails the build too.
+ */
+export function projectChapterStories(
+  name: string,
+  documents: JsonValue[],
+  sets: JsonValue[],
+  coverage: ChapterCoverage,
+): Chapter[] {
+  const projected = projectStories(name, documents, sets, coverage)
 
   if (!projected.ok) {
     throw new Error(
@@ -67,7 +89,7 @@ export function projectChapterContent(
     )
   }
 
-  return projected.chapter
+  return projected.chapters
 }
 
 /**
@@ -77,6 +99,11 @@ export function projectChapterContent(
  * else before this is reached.
  */
 export async function loadServedChapter(id: string): Promise<Chapter> {
+  return (await loadServedStories(id))[0]
+}
+
+/** Every story of a chapter the site serves, the one it opens on first. */
+export async function loadServedStories(id: string): Promise<Chapter[]> {
   const served = servedChapter(id)
 
   if (served === undefined) {
@@ -85,5 +112,5 @@ export async function loadServedChapter(id: string): Promise<Chapter> {
     )
   }
 
-  return loadChapterContent(served.id, served.coverage)
+  return loadChapterStories(served.id, served.coverage)
 }

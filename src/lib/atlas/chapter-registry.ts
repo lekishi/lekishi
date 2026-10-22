@@ -15,7 +15,7 @@ import type { ChapterCoverage } from "./projection"
  * what a reader can open.
  *
  * The coverage window is content, not copy: it is the manifest's `window`, the
- * window the projection opens the chapter on.
+ * window the projection opens the chapter on, and each story's own window.
  */
 
 /** The Tang chapter: the 750–754 embassy of 藤原朝臣清河, with coda nodes outside it. */
@@ -38,7 +38,15 @@ export type ServedChapter = {
 
 export const SERVED_CHAPTERS: readonly ServedChapter[] = MANIFESTS.filter(
   (chapter) => chapter.served,
-).map((chapter) => ({ id: chapter.id, coverage: { defaultWindow: chapter.window } }))
+).map((chapter) => ({ id: chapter.id, coverage: coverageOf(chapter) }))
+
+/** A chapter's coverage model: the window it opens on and its stories' own. */
+export function coverageOf(chapter: ChapterEntry): ChapterCoverage {
+  return {
+    defaultWindow: chapter.window,
+    stories: chapter.stories.map(({ key, title, window }) => ({ key, title, window })),
+  }
+}
 
 /** The served entry for a chapter id, or undefined when the site does not serve it. */
 export function servedChapter(id: string): ServedChapter | undefined {

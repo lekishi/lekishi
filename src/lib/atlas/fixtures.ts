@@ -18,6 +18,14 @@ export const FIXTURE_CHAPTER: Chapter = {
   title: "Synthetic test chapter",
   summary: "Invented spans used to exercise the atlas behavior, not historical content.",
   defaultWindow: { start: 1200, end: 1250 },
+  storyKey: "synthetic-test-chapter",
+  stories: [
+    {
+      key: "synthetic-test-chapter",
+      title: "Synthetic test chapter",
+      window: { start: 1200, end: 1250 },
+    },
+  ],
   homeView: { lon: 128.5, lat: 32.5 },
   places: [
     {

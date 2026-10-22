@@ -1,7 +1,7 @@
 import { error } from "@sveltejs/kit"
 import type { Chapter } from "$lib/atlas/domain"
 import type { ChapterHeading } from "$lib/atlas/chapters"
-import { loadServedChapter } from "$lib/atlas/chapter-catalog"
+import { loadServedStories } from "$lib/atlas/chapter-catalog"
 import { SERVED_CHAPTERS, servedChapter } from "$lib/atlas/chapter-registry"
 import { memberDraft } from "$lib/server/drafts"
 
@@ -34,14 +34,19 @@ export async function load({
   params: { chapter: string }
   locals: App.Locals
 }): Promise<{
+  /** The chapter as the story it opens on shows it. */
   chapter: Chapter
+  /** Every story of the chapter, `chapter` first; the switcher moves between them. */
+  stories: Chapter[]
   /** A member's draft states its own heading; a served chapter's comes from its card. */
   heading: ChapterHeading | null
   /** Who can see a draft, for its banner. */
   scope: string | null
 }> {
   if (servedChapter(params.chapter) !== undefined) {
-    return { chapter: await loadServedChapter(params.chapter), heading: null, scope: null }
+    const stories = await loadServedStories(params.chapter)
+
+    return { chapter: stories[0], stories, heading: null, scope: null }
   }
 
   const draft = locals.user === null ? undefined : memberDraft(params.chapter)

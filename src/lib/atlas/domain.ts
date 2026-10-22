@@ -279,14 +279,36 @@ export type ChapterPublication = {
   readonly reviewNotes: string
 }
 
-/** A reviewed chapter, projected from the versioned contract's published revisions. */
+/**
+ * One of a chapter's stories, as the story switcher lists it
+ * (rfd/0002/CHAPTER_STORIES.adoc).
+ */
+export type StoryOption = {
+  /** The story record's id without `lks:story:`, which `?story=` carries. */
+  readonly key: string
+  readonly title: string
+  /** The window the story opens on. */
+  readonly window: TimeWindow
+}
+
+/**
+ * A reviewed chapter, projected from the versioned contract's published
+ * revisions, as one of its stories shows it. Most chapters have one story; a
+ * chapter with several is projected once per story, and each view holds that
+ * story's steps and what they reach, opening on the story's window.
+ */
 export type Chapter = {
   readonly id: string
-  /** The chapter's display title, taken from its published story summary. */
+  /** The chapter's display title, taken from the summary of the story it opens on. */
   readonly title: string
-  /** The published story summary, verbatim. */
+  /** This story's published summary, verbatim. */
   readonly summary: string
+  /** The window this story opens on. */
   readonly defaultWindow: TimeWindow
+  /** The story this view shows. */
+  readonly storyKey: string
+  /** Every story the chapter publishes, the one it opens on first. */
+  readonly stories: readonly StoryOption[]
   readonly homeView: GeoPoint
   readonly places: readonly Place[]
   readonly actors: readonly Actor[]
@@ -294,7 +316,7 @@ export type Chapter = {
   /** Every published relationship, in record id order. */
   readonly relationships: readonly Relationship[]
   readonly sources: readonly Source[]
-  /** The published story's steps, in the story's own presentation order. */
+  /** This story's published steps, in the story's own presentation order. */
   readonly story: readonly StoryStep[]
   readonly publication: ChapterPublication
   /**

@@ -11,6 +11,13 @@ declare module "virtual:lekishi-chapters" {
     readonly summary: string
     /** The window the chapter opens on, in astronomical year ordinals (233 BCE is -232). */
     readonly window: { readonly start: number; readonly end: number }
+    /** The chapter's stories, the one it opens on first; most chapters have one. */
+    readonly stories: readonly {
+      readonly key: string
+      readonly title: string
+      readonly window: { readonly start: number; readonly end: number }
+      readonly span: { readonly start: number; readonly end: number }
+    }[]
     /**
      * Whether the manifest's approval matches the content: `stale` when it
      * pins other content, `draft` when there is none. Only a build that serves

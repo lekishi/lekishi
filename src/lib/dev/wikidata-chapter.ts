@@ -136,6 +136,14 @@ export function wikidataChapter(snapshot: WikidataSnapshot): Chapter {
     title: "Wikidata before 100 CE",
     summary: `${events.length} unreviewed Wikidata items dated before 100 CE, for stress-testing the atlas.`,
     defaultWindow: { start: -499, end: 100 },
+    storyKey: WIKIDATA_CHAPTER_ID,
+    stories: [
+      {
+        key: WIKIDATA_CHAPTER_ID,
+        title: "Wikidata before 100 CE",
+        window: { start: -499, end: 100 },
+      },
+    ],
     homeView: { lon: 20, lat: 38 },
     places,
     actors: [],

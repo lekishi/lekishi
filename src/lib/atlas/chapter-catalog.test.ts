@@ -22,9 +22,23 @@ import { projectChapter } from "./projection"
  * fails instead of rendering nothing.
  */
 
-/** The windows the two manifests write, in astronomical ordinals (233 BCE is -232). */
-const TANG_COVERAGE = { defaultWindow: { start: 750, end: 754 } }
-const QIN_COVERAGE = { defaultWindow: { start: -232, end: -225 } }
+/** The windows the two manifests write, in astronomical ordinals (233 BCE is -232), and their stories. */
+const TANG_COVERAGE = {
+  defaultWindow: { start: 750, end: 754 },
+  stories: [
+    { key: TANG_CHAPTER, title: "The embassy to Tang China", window: { start: 750, end: 754 } },
+  ],
+}
+const QIN_COVERAGE = {
+  defaultWindow: { start: -232, end: -225 },
+  stories: [
+    {
+      key: QIN_CHAPTER,
+      title: "The end of the state of Han",
+      window: { start: -232, end: -225 },
+    },
+  ],
+}
 
 describe("the served chapter catalog", () => {
   it("loads the Tang chapter through the same path every chapter uses", async () => {

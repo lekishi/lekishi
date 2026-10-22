@@ -85,6 +85,71 @@ function kindOf(relative: string): FileKind | undefined {
   return kind
 }
 
+type ReadFile = { readonly data: JsonObject } | { readonly problems: readonly string[] }
+
+/**
+ * Parsed and schema-checked files by kind and text. Parsing and checking every
+ * file is most of what building a tree costs, and grows with every record, yet
+ * the trees a process builds share nearly all their files: the tests build the
+ * real tree with one file edited, and `pnpm approvals` builds the tree at each
+ * commit in a manifest's history. A file's result depends only on its kind and
+ * text, so each distinct file is read once. Cached data is frozen, so a caller
+ * that changed it would fail rather than alter every later tree.
+ */
+const readCache = new Map<string, ReadFile>()
+
+function readFile(kind: FileKind, text: string): ReadFile {
+  const key = `${kind}\n${text}`
+  const cached = readCache.get(key)
+
+  if (cached !== undefined) {
+    return cached
+  }
+
+  const read = parseFile(kind, text)
+  readCache.set(key, read)
+
+  return read
+}
+
+function parseFile(kind: FileKind, text: string): ReadFile {
+  let data: unknown
+
+  try {
+    data = parse(text)
+  } catch (error) {
+    return { problems: [(error as Error).message] }
+  }
+
+  if (!isObject(data)) {
+    return { problems: ["a record file is a YAML mapping"] }
+  }
+
+  const validation = validate(schemaFile(kind), data)
+
+  if (!validation.ok) {
+    return {
+      problems: validation.violations.map(
+        (violation) => `${violation.path || "/"} ${violation.keyword}: ${violation.detail}`,
+      ),
+    }
+  }
+
+  return { data: deepFreeze(data) }
+}
+
+function deepFreeze<T>(value: T): T {
+  if (typeof value === "object" && value !== null && !Object.isFrozen(value)) {
+    for (const child of Object.values(value)) {
+      deepFreeze(child)
+    }
+
+    Object.freeze(value)
+  }
+
+  return value
+}
+
 /** Collects the tree's files, failing with every problem at once. */
 export function buildTree(files: readonly TreeFile[]): AuthoringTree {
   const errors: string[] = []
@@ -106,31 +171,14 @@ export function buildTree(files: readonly TreeFile[]): AuthoringTree {
       continue
     }
 
-    let data: unknown
+    const read = readFile(kind, file.text)
 
-    try {
-      data = parse(file.text)
-    } catch (error) {
-      errors.push(`${file.path}: ${(error as Error).message}`)
+    if ("problems" in read) {
+      errors.push(...read.problems.map((problem) => `${file.path}: ${problem}`))
       continue
     }
 
-    if (!isObject(data)) {
-      errors.push(`${file.path}: a record file is a YAML mapping`)
-      continue
-    }
-
-    const validation = validate(schemaFile(kind), data)
-
-    if (!validation.ok) {
-      for (const violation of validation.violations) {
-        errors.push(
-          `${file.path}: ${violation.path || "/"} ${violation.keyword}: ${violation.detail}`,
-        )
-      }
-
-      continue
-    }
+    const data = read.data
 
     const folder = byKind.get(kind) ?? new Map<string, AuthoringFile>()
     const existing = folder.get(name)

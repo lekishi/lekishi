@@ -18,7 +18,7 @@ import { compileTime } from "./dates"
  * claim gets an id from its record and field.
  */
 
-export type RecordKind = "place" | "actor" | "event" | "relationship" | "territory"
+export type RecordKind = "place" | "actor" | "event" | "relationship" | "territory" | "journey"
 
 export const RECORD_KINDS: readonly RecordKind[] = [
   "place",
@@ -26,6 +26,7 @@ export const RECORD_KINDS: readonly RecordKind[] = [
   "event",
   "relationship",
   "territory",
+  "journey",
 ]
 
 /** What a record file may refer to outside itself. */
@@ -34,6 +35,8 @@ export type Lookup = {
   readonly record: (name: string, kinds: readonly string[], where: string) => string
   /** The locator kind a source declares for its citations. */
   readonly locator: (source: string, where: string) => string
+  /** The record file behind a full id, as written, for a journey reading its stops. */
+  readonly file: (id: string) => JsonObject
 }
 
 export type CompiledRecord = {
@@ -488,6 +491,176 @@ function territory(claims: Claims, data: JsonObject, lookup: Lookup): JsonObject
   return { ...content, ...copy(data, { notes: "editorial_notes" }) }
 }
 
+/** The roles by which an event puts its party at a place; `context` and `other` do not. */
+const STOP_ROLES = new Set(["site", "start", "end", "waypoint"])
+
+/** An event's places as its file names them, with full ids. */
+function eventPlaces(lookup: Lookup, eventId: string, where: string) {
+  return entries(lookup.file(eventId)["places"]).map((entry, index) => ({
+    id: lookup.record(String(entry["place"]), ["place"], `${where} (${eventId} places[${index}])`),
+    role: String(entry["role"]),
+  }))
+}
+
+/** A place's asserted coordinate: its approximate point, or null when it asserts none. */
+function placePoint(lookup: Lookup, placeId: string): JsonValue | null {
+  for (const entry of entries(lookup.file(placeId)["at"])) {
+    if (entry["interpretation"] === "approximate_point") {
+      return entry["point"] ?? (entry["geojson"] as JsonObject | undefined)?.["coordinates"] ?? null
+    }
+  }
+
+  return null
+}
+
+/** The stop's place: the one it names, or its event's only place that is not context. */
+function stopPlace(lookup: Lookup, stop: JsonObject, eventId: string, where: string): string {
+  const places = eventPlaces(lookup, eventId, where)
+
+  if (stop["place"] !== undefined) {
+    const placeId = lookup.record(String(stop["place"]), ["place"], `${where}.place`)
+    const roles = places.filter((place) => place.id === placeId).map((place) => place.role)
+
+    if (roles.length === 0) {
+      throw new Error(`${where}.place: ${placeId} is not one of ${eventId}'s places`)
+    }
+
+    if (!roles.some((role) => STOP_ROLES.has(role))) {
+      throw new Error(
+        `${where}.place: ${eventId} names ${placeId} only as ${roles.join(" and ")}, so it did not put the party there`,
+      )
+    }
+
+    return placeId
+  }
+
+  const candidates = [
+    ...new Set(places.filter((place) => STOP_ROLES.has(place.role)).map((place) => place.id)),
+  ]
+
+  if (candidates.length === 0) {
+    throw new Error(
+      `${where}: ${eventId} puts the party at no place (a context place is never a stop), so it cannot be a stop`,
+    )
+  }
+
+  if (candidates.length > 1) {
+    throw new Error(
+      `${where}: ${eventId} has several places (${candidates.join(", ")}); write which one with place:`,
+    )
+  }
+
+  return candidates[0]
+}
+
+/**
+ * A journey (RFD 2, "Decided: the journey record"): its travellers, and its
+ * stops, each at one of its event's own places with the leg arriving at it. A
+ * leg is drawn only between two places that assert a coordinate, as a schematic
+ * link the journey's cite supports; a stop at an unlocated place or a display
+ * anchor breaks the line, and the stop is still listed.
+ */
+function journey(claims: Claims, data: JsonObject, lookup: Lookup, sequence: string[]): JsonObject {
+  const travellers = entries(data["travellers"]).map((entry, index) => ({
+    actor_id: lookup.record(String(entry["actor"]), ["actor"], `travellers[${index}]`),
+    role: entry["role"] as string,
+    ...copy(entry, { note: "note" }),
+  }))
+  const stops = list(data["stops"]).map((value, index) => {
+    const stop: JsonObject = typeof value === "string" ? { event: value } : (value as JsonObject)
+    const where = `stops[${index}]`
+    const eventId = lookup.record(String(stop["event"]), ["event"], `${where}.event`)
+    const leg = ["by", "driven", "toward"].filter((key) => stop[key] !== undefined)
+
+    if (index === 0 && (leg.length > 0 || stop["cite"] !== undefined)) {
+      throw new Error(
+        `${where}: the first stop has no arriving leg, so it takes no ${leg.join(", ") || "cite"}`,
+      )
+    }
+
+    if (
+      (stop["driven"] !== undefined || stop["toward"] !== undefined) &&
+      stop["cite"] === undefined
+    ) {
+      throw new Error(`${where}: a drift or an intended destination needs a cite of its own`)
+    }
+
+    claims.add(`/stops/${index}`, stop["cite"], where)
+
+    const compiled: JsonObject = {
+      event_id: eventId,
+      place_id: stopPlace(lookup, stop, eventId, where),
+    }
+
+    if (stop["by"] !== undefined) {
+      compiled["mode"] = stop["by"]
+    }
+
+    if (stop["driven"] === true) {
+      compiled["driven"] = true
+    }
+
+    if (stop["toward"] !== undefined) {
+      compiled["toward_place_id"] = lookup.record(
+        String(stop["toward"]),
+        ["place"],
+        `${where}.toward`,
+      )
+    }
+
+    return compiled
+  })
+
+  stops.forEach((stop, index) => {
+    const previous = stops[index - 1]
+
+    if (previous === undefined || previous["place_id"] === stop["place_id"]) {
+      return
+    }
+
+    const from = placePoint(lookup, String(previous["place_id"]))
+    const to = placePoint(lookup, String(stop["place_id"]))
+
+    if (from === null || to === null || sequence.length === 0) {
+      return
+    }
+
+    const waypoint = (point: JsonValue, placeId: JsonValue, eventId: JsonValue) => ({
+      geojson: { type: "Point", coordinates: point },
+      place_id: placeId,
+      time: compileTime(lookup.file(String(eventId))["date"] as JsonObject),
+    })
+
+    stop["geometry"] = [
+      {
+        claim_id: sequence[0],
+        interpretation: "schematic_link",
+        geojson: { type: "LineString", coordinates: [from, to] },
+        precision: "region",
+        waypoints: [
+          waypoint(from, previous["place_id"], previous["event_id"]),
+          waypoint(to, stop["place_id"], stop["event_id"]),
+        ],
+        notes:
+          "Schematic: a straight line between the two stops' places, which asserts no path between them.",
+      },
+    ]
+  })
+
+  return {
+    title: data["title"] as string,
+    summary: data["summary"] as string,
+    travellers,
+    stops,
+    ...copy(data, { notes: "editorial_notes" }),
+  }
+}
+
+/** The ids of the main claims among a field's own, in written order. */
+function mainClaims(own: string[], cites: JsonObject[]): string[] {
+  return own.filter((_, index) => (cites[index]?.["role"] ?? "main") === "main")
+}
+
 /** Compiles one record file. Errors name the field they concern. */
 export function compileRecord(
   kind: RecordKind,
@@ -496,8 +669,7 @@ export function compileRecord(
   lookup: Lookup,
 ): CompiledRecord {
   const claims = new Claims(name, lookup)
-
-  claims.add("", data["cite"], "cite")
+  const own = claims.add("", data["cite"], "cite")
 
   const content =
     kind === "place"
@@ -506,9 +678,11 @@ export function compileRecord(
         ? actor(claims, data)
         : kind === "event"
           ? event(claims, data, lookup)
-          : kind === "relationship"
-            ? relationship(claims, data, lookup)
-            : territory(claims, data, lookup)
+          : kind === "journey"
+            ? journey(claims, data, lookup, mainClaims(own, entries(data["cite"])))
+            : kind === "relationship"
+              ? relationship(claims, data, lookup)
+              : territory(claims, data, lookup)
 
   fieldCites(claims, kind, data)
 

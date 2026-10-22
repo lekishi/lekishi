@@ -1,9 +1,6 @@
-# A contract v1 journey record. The owner decided on 2026-10-21 that journeys are their own kind
-# (RFD 2, "Decided: journeys are their own kind"); the record's shape is still proposed there
-# ("Proposed: the journey record").
-# A conforming case: one party's voyage, written to the proposed shape.
-# Not compiled yet: the compiler reads no historical/journeys/ folder until v1 lands, so this
-# file is test data for that work and changes no chapter's digest.
+# yaml-language-server: $schema=../schema/journey.schema.json
+# Journey record (RFD 2, "Decided: the journey record"). No chapter includes it yet,
+# so it changes no chapter's digest; the tests still compile it and check it against the contract.
 title: Hanno's voyage beyond the Pillars
 summary: >-
   Hanno's fleet sails from Carthage through the Pillars, founds Thymiaterium, a sanctuary at

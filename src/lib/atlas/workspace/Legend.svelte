@@ -16,6 +16,7 @@
   let {
     marks,
     journeys,
+    drift = false,
     families,
     territories = [],
     diorama,
@@ -28,6 +29,8 @@
       readonly tradition: boolean
     }
     journeys: boolean
+    /** A journey leg the party did not steer is drawn dotted, as a drift. */
+    drift?: boolean
     families: readonly RelationshipFamily[]
     /** The territory snapshots the map is drawing at the playhead. */
     territories?: readonly SceneTerritory[]
@@ -98,6 +101,7 @@
         {#if marks.anchor}<li><Badge kind="anchor" /></li>{/if}
         {#if marks.tradition}<li><Badge kind="tradition" text="tradition, dotted name" /></li>{/if}
         {#if journeys}<li><Badge kind="schematic" text="journey, schematic" /></li>{/if}
+        {#if drift}<li><Badge kind="schematic" text="drift, not a chosen course" /></li>{/if}
       </ul>
       {#if families.length > 0}
         <ul class="flex flex-wrap gap-x-3 gap-y-1 text-caption text-ink-dim">
@@ -129,7 +133,7 @@
         </ul>
       {/if}
       <HonestyPlate
-        lines={journeys || families.length > 0}
+        lines={journeys || drift || families.length > 0}
         anchors={marks.anchor}
         control={territories.length > 0}
         {diorama}

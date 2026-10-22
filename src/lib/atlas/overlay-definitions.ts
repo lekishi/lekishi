@@ -1,5 +1,5 @@
 import { QIN_CHAPTER, TANG_CHAPTER } from "./chapter-registry"
-import type { ChapterOverlays } from "./overlays"
+import { curatedJourney, type ChapterOverlays, type CuratedJourney } from "./overlays"
 
 /**
  * Where each chapter's overlays are defined (see `overlays.ts` for what a
@@ -15,7 +15,12 @@ import type { ChapterOverlays } from "./overlays"
  * table from browser code would put every chapter's id in a script.
  */
 
-const NO_OVERLAYS: ChapterOverlays = {
+/** A chapter's overlays as written here, with its hand-written journeys. */
+type CuratedOverlays = Omit<ChapterOverlays, "journeys"> & {
+  readonly journeys: readonly CuratedJourney[]
+}
+
+const NO_OVERLAYS: CuratedOverlays = {
   journeys: [],
   actorAnchors: {},
   endAnchors: {},
@@ -25,10 +30,12 @@ const NO_OVERLAYS: ChapterOverlays = {
 /**
  * The served chapters' overlays.
  *
- * Tang: 鑒眞's travel to Japan is a published relationship (`jianzhen-travel`,
- * 753–754), and its stops are the chapter's own events for him and for the
- * second ship he sailed on, at their published places. 大伴古麻呂's stops are
- * the events that name him as a participant. The two courts stand for the two
+ * Journeys with a published record are not written here: the
+ * projection draws them from the chapter's journey records, as the 753 return
+ * voyages are. What remains is curation in code, uncited and unapproved, until
+ * each journey is authored as a record (RFD 2, "Decided: the journey record").
+ *
+ * Tang: 大伴古麻呂's stops are the events that name him as a participant. The two courts stand for the two
  * states. The transmission to 東大寺 starts at 揚州, where the chapter's events
  * place 鑒眞 before the voyage.
  *
@@ -37,25 +44,9 @@ const NO_OVERLAYS: ChapterOverlays = {
  * the chapter publishes no place for Qin's capital, and the map says the ends
  * are schematic.
  */
-export const CHAPTER_OVERLAYS: Readonly<Record<string, ChapterOverlays>> = {
+export const CHAPTER_OVERLAYS: Readonly<Record<string, CuratedOverlays>> = {
   [TANG_CHAPTER]: {
     journeys: [
-      {
-        id: "jianzhen-voyage",
-        label: "鑒眞's voyage to Japan, 753–754",
-        relationshipId: "lks:relationship:jianzhen-travel",
-        stops: [
-          { eventId: "lks:event:longxing-departure-753", vessel: "party" },
-          { eventId: "lks:event:return-voyage-753", vessel: "ship" },
-          { eventId: "lks:event:ajinawa-arrival-753", vessel: "ship" },
-          { eventId: "lks:event:yaku-arrival-753", vessel: "ship" },
-          { eventId: "lks:event:yaku-departure-753", vessel: "ship" },
-          { eventId: "lks:event:akimeya-landfall-753", vessel: "ship" },
-          { eventId: "lks:event:dazaifu-entry-753", vessel: "party" },
-          { eventId: "lks:event:naniwa-754", vessel: "party" },
-          { eventId: "lks:event:todaiji-installation-754", vessel: "party" },
-        ],
-      },
       {
         id: "komaro-embassy",
         label: "大伴古麻呂's embassy, 752–754",
@@ -105,7 +96,9 @@ export const CHAPTER_OVERLAYS: Readonly<Record<string, ChapterOverlays>> = {
   },
 }
 
-/** A chapter's overlay definitions; a chapter without any draws places only. */
+/** A chapter's hand-written overlays; a chapter without any draws places only. */
 export function overlayDefinitions(chapterId: string): ChapterOverlays {
-  return CHAPTER_OVERLAYS[chapterId] ?? NO_OVERLAYS
+  const overlays = CHAPTER_OVERLAYS[chapterId] ?? NO_OVERLAYS
+
+  return { ...overlays, journeys: overlays.journeys.map(curatedJourney) }
 }

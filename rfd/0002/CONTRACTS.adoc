@@ -37,7 +37,7 @@ access), they should move into `lib/` unchanged in behavior.
 == Decision: stable identities, immutable revisions, one published revision
 
 * A record has a stable identity `lks:<kind>:<slug>` where `kind` is `place`,
-  `actor`, `event`, `relationship`, or `story`. The id carries its kind and never
+  `actor`, `event`, `relationship`, `story`, or `journey`. The id carries its kind and never
   changes with a rename, a corrected date, or a new revision.
 * A record document holds an ordered list of immutable revisions. Each revision
   carries `revision_id`, `created_at`, `author`, `change_explanation`, its
@@ -382,6 +382,27 @@ version is cut for it.
   names, never all the controller held. The atlas draws it inside its own
   window only, and never carries it forward or interpolates between snapshots
   (RFD 1).
+
+== Decision: a journey is one party's movement through dated events
+
+Added to v0 on 2026-10-22 (link:AUTHORING_FORMAT.adoc[the authoring format
+record], "Decided: the journey record"). A journey names its travellers and an
+ordered list of stops. A stop is an event at one of that event's own places,
+never a `context` place, and carries the leg that arrived at it: its mode
+(`sea`, `river`, or `land`), whether the party was `driven` off course, the
+place it set out `toward`, and at most one geometry entry. A journey has no date
+of its own; its span is its first and last stops'.
+
+* A journey has at least two stops, and the first stop carries no leg.
+* No stop is strictly earlier than the stop before it, under the partial
+  ordering above, so the check catches only what v0 can order.
+* A drift or an intended destination needs a claim of its own, and `toward`
+  never names the stop's own place.
+* A drawn leg is a route whose waypoints are the two stops' places and whose
+  line ends at their points, and it is drawn only when both places assert a
+  coordinate. An unlocated stop breaks the line rather than being guessed.
+
+`historical/v0/vectors/journeys.json` pins these rules.
 
 == Error codes as contract surface
 

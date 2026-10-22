@@ -1,6 +1,6 @@
-# Journey record in the shape RFD 2 proposes (AUTHORING_FORMAT.adoc, "Proposed: the journey record").
-# The kind was decided on 2026-10-21; the shape is not yet accepted, and the compiler does not read
-# historical/journeys/ until it is.
+# yaml-language-server: $schema=../../schema/journey.schema.json
+# Journey record (RFD 2, "Decided: the journey record"). No chapter includes it yet,
+# so it changes no chapter's digest; the tests still compile it and check it against the contract.
 title: 圓仁 from 揚州 to 赤山, 839
 summary: >-
   圓仁 goes north with the returning embassy by the canal to 楚州 and down the 淮 to the sea, goes

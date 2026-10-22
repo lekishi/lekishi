@@ -28,10 +28,19 @@ describe("the selection card's lists", () => {
     const connected = connectedEvents(tang, event("akimeya-landfall-753"))
 
     expect(connected.slice(0, 2).map((row) => [row.event.id, row.reason])).toEqual([
-      ["lks:event:yaku-departure-753", "previous stop · 鑒眞's voyage to Japan, 753–754"],
-      ["lks:event:dazaifu-entry-753", "next stop · 鑒眞's voyage to Japan, 753–754"],
+      ["lks:event:yaku-departure-753", "previous stop · 鑒眞's journey to Nara, 753–754"],
+      ["lks:event:dazaifu-entry-753", "next stop · 鑒眞's journey to Nara, 753–754"],
     ])
     expect(connected.length).toBeLessThanOrEqual(5)
+  })
+
+  it("names a leg's drift and the place it set out for, which the map never draws", () => {
+    expect(connectedEvents(tang, event("yaku-arrival-753"))[0]?.reason).toBe(
+      "previous stop · 鑒眞's journey to Nara, 753–754 · set out for 多禰島",
+    )
+    expect(
+      connectedEvents(tang, event("kibi-yaku-arrival-753")).map((row) => row.reason),
+    ).toContain("next stop · 吉備真備's return voyage, 753 · driven off course")
   })
 
   it("names the shared person when the link is a person", () => {

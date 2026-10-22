@@ -1,6 +1,6 @@
-# Proposed contract v1 journey record (RFD 2, "Proposed: the journey record", draft PR #26).
-# Not compiled yet: the compiler reads no historical/journeys/ folder until v1 lands, so this
-# file is test data for that work and changes no chapter's digest.
+# yaml-language-server: $schema=../schema/journey.schema.json
+# Journey record (RFD 2, "Decided: the journey record"). No chapter includes it yet,
+# so it changes no chapter's digest; the tests still compile it and check it against the contract.
 title: 張騫's first mission to the 月氏, 140s–126 BCE
 summary: >-
   張騫 leaves 長安 through 隴西, is caught and held at the 匈奴 court for more than ten years,

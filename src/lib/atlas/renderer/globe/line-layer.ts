@@ -3,11 +3,14 @@ import type { RelationshipFamily } from "../../overlays"
 import { toEcef, type Vec3 } from "./geo"
 import type { LabelBox } from "./labels"
 import {
+  DRIFT_DASH,
   JOURNEY_DASH,
   arcStyle,
   arrowheadPath,
   chevronPath,
   journeyLine,
+  legStyles,
+  styledRuns,
   CAPTION_FRACTIONS,
   offsetRun,
   pathData,
@@ -16,6 +19,7 @@ import {
   raisedArc,
   runLength,
   visibleRuns,
+  type LegStyle,
   type LineSample,
   type ScreenPoint,
 } from "./lines"
@@ -36,8 +40,10 @@ import {
 export type GlobeJourney = {
   readonly id: string
   readonly stops: readonly GeoPoint[]
+  /** The legs to draw, between consecutive stops; the line has a gap elsewhere. */
+  readonly legs: readonly { readonly from: number; readonly to: number; readonly drift: boolean }[]
   /** The stop the vessel or party is at, or null before the journey starts. */
-  readonly vessel: { readonly stop: number; readonly kind: "ship" | "party" } | null
+  readonly vessel: { readonly stop: number; readonly kind: "ship" | "party" | "marker" } | null
   readonly selected: boolean
 }
 
@@ -88,6 +94,7 @@ const ARC_CAPTION_HEIGHT = 20
 // stop, a figure with a staff for a party ashore. The lacquer stroke under
 // each keeps it legible over sea and terrain alike.
 const SHIP_GLYPH = `<svg viewBox="0 0 24 24" width="22" height="22" class="block overflow-visible"><title>Schematic ship</title><g class="fill-current stroke-lacquer" stroke-width="1.25" stroke-linejoin="round" paint-order="stroke"><path d="M2.5 15h19l-3 4.5h-13z"/><path d="M11 3.5h1.25v11.5H11z"/><path d="M12.5 4.5l6 9h-6z"/><path d="M10.5 6l-4.5 7.5h4.5z"/></g></svg>`
+const MARKER_GLYPH = `<svg viewBox="0 0 24 24" width="22" height="22" class="block overflow-visible"><title>Schematic traveller, mode not stated</title><circle cx="12" cy="12" r="4.5" class="fill-current stroke-lacquer" stroke-width="1.5"/></svg>`
 const PARTY_GLYPH = `<svg viewBox="0 0 24 24" width="22" height="22" class="block overflow-visible"><title>Schematic travelling party</title><g fill="none" stroke-linecap="round" stroke-linejoin="round"><g class="stroke-lacquer" stroke-width="4"><circle cx="10" cy="5" r="2"/><path d="M10 8.5v6.5l-3 5.5M10 15l3 5.5M10 10.5l-4 3M10 10.5l5-1.5M16 4v17"/></g><g class="stroke-current" stroke-width="1.8"><circle cx="10" cy="5" r="2"/><path d="M10 8.5v6.5l-3 5.5M10 15l3 5.5M10 10.5l-4 3M10 10.5l5-1.5M16 4v17"/></g></g></svg>`
 
 function svg<K extends keyof SVGElementTagNameMap>(
@@ -200,7 +207,10 @@ class JourneyLine {
   private readonly casing = svg("path", { class: CASING })
   private readonly rest = svg("path", { class: "fill-none stroke-evidence-schematic" })
   private readonly travelled = svg("path", { class: "fill-none stroke-evidence-schematic" })
+  private readonly driftRest = svg("path", { class: "fill-none stroke-evidence-schematic" })
+  private readonly driftTravelled = svg("path", { class: "fill-none stroke-evidence-schematic" })
   private readonly line: { samples: GeoPoint[]; stopSample: number[] }
+  private readonly styles: LegStyle[]
   private samples: Samples
   private readonly vessel: HTMLDivElement | null
   private readonly caption: Caption
@@ -211,6 +221,7 @@ class JourneyLine {
   ) {
     const selected = data.selected
     this.line = journeyLine(data.stops)
+    this.styles = legStyles(this.line.stopSample, data.legs, this.line.samples.length)
     this.samples = samplesFrom(this.line.samples.map((p) => ({ ...p, height: 0 })))
     this.casing.setAttribute("stroke-width", selected ? "5" : "4")
     this.casing.setAttribute("stroke-opacity", "0.35")
@@ -218,18 +229,22 @@ class JourneyLine {
 
     // The part already travelled (up to the vessel) reads stronger than the
     // part still ahead; a selected journey is stronger still.
-    for (const [path, opacity, width] of [
-      [this.rest, selected ? 0.7 : 0.45, selected ? 2 : 1.5],
-      [this.travelled, 1, selected ? 2.75 : 2],
+    // A drift is dotted rather than dashed, so it never reads as the line
+    // between dated stops.
+    for (const [path, dash, opacity, width] of [
+      [this.rest, JOURNEY_DASH, selected ? 0.7 : 0.45, selected ? 2 : 1.5],
+      [this.travelled, JOURNEY_DASH, 1, selected ? 2.75 : 2],
+      [this.driftRest, DRIFT_DASH, selected ? 0.7 : 0.45, selected ? 2 : 1.5],
+      [this.driftTravelled, DRIFT_DASH, 1, selected ? 2.75 : 2],
     ] as const) {
-      path.setAttribute("stroke-dasharray", JOURNEY_DASH)
+      path.setAttribute("stroke-dasharray", dash)
       path.setAttribute("stroke-opacity", String(opacity))
       path.setAttribute("stroke-width", String(width))
-      path.setAttribute("stroke-linecap", "butt")
+      path.setAttribute("stroke-linecap", dash === DRIFT_DASH ? "round" : "butt")
     }
 
     this.group.dataset.journeyId = data.id
-    this.group.append(this.casing, this.rest, this.travelled)
+    this.group.append(this.casing, this.rest, this.travelled, this.driftRest, this.driftTravelled)
 
     if (data.vessel === null) {
       this.vessel = null
@@ -241,7 +256,13 @@ class JourneyLine {
       // Sized by its attributes rather than a scale utility: the element is
       // placed with an inline transform, which a CSS scale would also scale.
       const size = selected ? "26" : "22"
-      this.vessel.innerHTML = (data.vessel.kind === "ship" ? SHIP_GLYPH : PARTY_GLYPH).replace(
+      const glyph =
+        data.vessel.kind === "ship"
+          ? SHIP_GLYPH
+          : data.vessel.kind === "party"
+            ? PARTY_GLYPH
+            : MARKER_GLYPH
+      this.vessel.innerHTML = glyph.replace(
         'width="22" height="22"',
         `width="${size}" height="${size}"`,
       )
@@ -267,10 +288,16 @@ class JourneyLine {
     const projected = project(this.samples, projector)
     const vessel = this.data.vessel
     const split = vessel === null ? 0 : (this.line.stopSample[vessel.stop] ?? 0)
-    const all = visibleRuns(projected)
+    const styles = this.styles
+    const last = projected.length - 1
+    const line = (style: LegStyle) => style === "line"
+    const drift = (style: LegStyle) => style === "drift"
+    const all = styledRuns(projected, styles, (style) => style !== "none")
     setPath(this.casing, pathData(all))
-    setPath(this.travelled, pathData(visibleRuns(projected.slice(0, split + 1))))
-    setPath(this.rest, pathData(visibleRuns(projected.slice(split))))
+    setPath(this.travelled, pathData(styledRuns(projected, styles, line, 0, split)))
+    setPath(this.rest, pathData(styledRuns(projected, styles, line, split, last)))
+    setPath(this.driftTravelled, pathData(styledRuns(projected, styles, drift, 0, split)))
+    setPath(this.driftRest, pathData(styledRuns(projected, styles, drift, split, last)))
 
     if (this.vessel !== null) {
       const at = projected[split] ?? null

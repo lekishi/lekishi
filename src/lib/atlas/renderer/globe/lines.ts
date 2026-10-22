@@ -431,3 +431,68 @@ export function arcStyle(family: RelationshipFamily, emphasis: "selected" | "lay
 
 /** The journey line's pattern: RFD 5's `evidence-schematic`, a long dash `8 6`. */
 export const JOURNEY_DASH = "8 6"
+
+/**
+ * A drifting leg's pattern: short dots, so a course the party did not choose
+ * never reads as the schematic line between dated stops.
+ */
+export const DRIFT_DASH = "1.5 5"
+
+/** How a segment of a journey line is drawn: not at all, as the schematic line, or as a drift. */
+export type LegStyle = "none" | "line" | "drift"
+
+/**
+ * The style of each segment of a journey line, where segment `k` joins sample
+ * `k - 1` to sample `k`. Only the record's drawn legs are styled; the rest of
+ * the line is a gap, so an unlocated stop breaks it.
+ */
+export function legStyles(
+  stopSample: readonly number[],
+  legs: readonly { readonly from: number; readonly to: number; readonly drift: boolean }[],
+  sampleCount: number,
+): LegStyle[] {
+  const styles: LegStyle[] = Array.from({ length: sampleCount }, () => "none")
+
+  for (const leg of legs) {
+    const start = stopSample[leg.from]
+    const end = stopSample[leg.to]
+
+    if (start === undefined || end === undefined) continue
+
+    for (let k = start + 1; k <= end; k += 1) styles[k] = leg.drift ? "drift" : "line"
+  }
+
+  return styles
+}
+
+/**
+ * The visible runs of the segments a style test accepts, among the segments
+ * ending at samples `from + 1` to `to`. A run breaks at a hidden sample and at
+ * a segment of another style.
+ */
+export function styledRuns(
+  points: readonly (ScreenPoint | null)[],
+  styles: readonly LegStyle[],
+  accept: (style: LegStyle) => boolean,
+  from = 0,
+  to = points.length - 1,
+): ScreenPoint[][] {
+  const runs: ScreenPoint[][] = []
+  let run: ScreenPoint[] = []
+
+  for (let k = from + 1; k <= to; k += 1) {
+    const a = points[k - 1]
+    const b = points[k]
+
+    if (a != null && b != null && accept(styles[k] ?? "none")) {
+      if (run.length === 0) run.push(a)
+      run.push(b)
+    } else {
+      if (run.length > 1) runs.push(run)
+      run = []
+    }
+  }
+
+  if (run.length > 1) runs.push(run)
+  return runs
+}

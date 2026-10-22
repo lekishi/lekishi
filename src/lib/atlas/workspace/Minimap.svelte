@@ -137,13 +137,16 @@
       <path {d} fill="none" class="stroke-rule" stroke-width="0.6" />
     {/each}
     {#each journeys as journey (journey.id)}
-      <path
-        d={path(journey.stops.map((stop) => stop.position))}
-        fill="none"
-        class="stroke-gold"
-        stroke-width="1"
-        stroke-dasharray="2 1.5"
-      />
+      {#each journey.legs as leg (`${leg.from}-${leg.to}`)}
+        <path
+          d={path([journey.stops[leg.from].position, journey.stops[leg.to].position])}
+          fill="none"
+          class="stroke-gold"
+          stroke-width="1"
+          stroke-dasharray={leg.drift ? "0.5 1.5" : "2 1.5"}
+          stroke-linecap={leg.drift ? "round" : "butt"}
+        />
+      {/each}
     {/each}
     {#each places as place (place.id)}
       {@const at = project(place.position)}

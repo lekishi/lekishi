@@ -1,6 +1,6 @@
-# Proposed journey record. The journey kind was decided on 2026-10-21 (RFD 2, "Decided: journeys are
-# their own kind"); the record shape ("Proposed: the journey record") is still proposed, and the
-# compiler does not read historical/journeys/ until the owner accepts it.
+# yaml-language-server: $schema=../../schema/journey.schema.json
+# Journey record (RFD 2, "Decided: the journey record"). No chapter includes it yet,
+# so it changes no chapter's digest; the tests still compile it and check it against the contract.
 title: Confucius's travels, as the 孔子世家 tells them, 498–484 BCE
 summary: >-
   From 魯 to 衛; by 匡 back to 衛; by 曹, 宋 and 鄭 to 陳; by 蒲 to 衛 again and back to 陳; to 蔡 and
@@ -34,7 +34,6 @@ cite:
       The 孔子世家 narrates the travels in this order, from the departure from 魯 to the return
       after fourteen years. The siege between 陳 and 蔡 and the rescue by 楚 have no place and are
       not stops; the leg from 葉 to 衛 passes through them.
-    sources:
-      - source: shiji-chunqiu
-        at: 卷四十七 孔子世家（孔子遂適衞 … 孔子之去魯凡十四歲而反乎魯）
-        quote: 孔子之去魯凡十四歲而反乎魯。
+    source: shiji-chunqiu
+    at: 卷四十七 孔子世家（孔子遂適衞 … 孔子之去魯凡十四歲而反乎魯）
+    quote: 孔子之去魯凡十四歲而反乎魯。

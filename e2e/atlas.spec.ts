@@ -53,7 +53,7 @@ const mode = process.env.LEKISHI_E2E_MODE ?? "static"
 const managedServer = process.env.LEKISHI_E2E_BASE_URL === undefined
 
 /** The launch chapter's in-window events: the primary 750–754 mission window. */
-const TANG_WINDOW_EVENTS = 24
+const TANG_WINDOW_EVENTS = 25
 
 /** Sends one raw request line and returns the status line and body. */
 function rawRequest(port: number, target: string): Promise<{ status: string; body: string }> {
@@ -973,7 +973,7 @@ test("keeps the coda nodes outside the primary window until it is widened", asyn
   await setWindow(page, TANG, 750, 779)
 
   await openExplore(page, "events")
-  await expect(page.getByTestId("atlas-event-item")).toHaveCount(29)
+  await expect(page.getByTestId("atlas-event-item")).toHaveCount(30)
   await expect(page.getByTestId("atlas-event-list").locator('[data-badge="coda"]')).toHaveCount(5)
 })
 

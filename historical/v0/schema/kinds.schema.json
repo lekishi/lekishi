@@ -207,6 +207,47 @@
         "coverage_note": {"type": "string", "maxLength": 2000},
         "editorial_notes": {"type": "string", "maxLength": 2000}
       }
+    },
+    "journey_content": {
+      "description": "One party's movement through an ordered list of stops (RFD 2, Decided: the journey record). A stop is an event at one of the event's own places; the journey adds who travelled, the order, and what each leg arriving at a stop was. A journey has no date of its own: its span is its first and last stops'.",
+      "type": "object",
+      "required": ["title", "summary", "travellers", "stops"],
+      "additionalProperties": false,
+      "properties": {
+        "title": {"type": "string", "minLength": 1, "maxLength": 300},
+        "summary": {"type": "string", "minLength": 1, "maxLength": 2000},
+        "travellers": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 50,
+          "items": {
+            "type": "object",
+            "required": ["actor_id", "role"],
+            "additionalProperties": false,
+            "properties": {
+              "actor_id": {"$ref": "common.schema.json#/$defs/record_id"},
+              "role": {"$ref": "#/$defs/event_content/properties/participants/items/properties/role"},
+              "note": {"type": "string", "maxLength": 500}
+            }
+          }
+        },
+        "stops": {"type": "array", "minItems": 1, "maxItems": 200, "items": {"$ref": "#/$defs/journey_stop"}},
+        "editorial_notes": {"type": "string", "maxLength": 2000}
+      }
+    },
+    "journey_stop": {
+      "description": "A stop and the leg arriving at it. Every leg field is optional, and an unstated field asserts nothing. geometry is present only when the leg may be drawn: both stops' places assert a coordinate.",
+      "type": "object",
+      "required": ["event_id", "place_id"],
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {"$ref": "common.schema.json#/$defs/record_id"},
+        "place_id": {"$ref": "common.schema.json#/$defs/record_id"},
+        "mode": {"enum": ["sea", "river", "land"]},
+        "driven": {"const": true},
+        "toward_place_id": {"$ref": "common.schema.json#/$defs/record_id"},
+        "geometry": {"type": "array", "minItems": 1, "maxItems": 1, "items": {"$ref": "common.schema.json#/$defs/geometry"}}
+      }
     }
   }
 }

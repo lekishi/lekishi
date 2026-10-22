@@ -8,7 +8,7 @@ import {
   type CurrentPublished,
   type PublicationEvent,
 } from "./publication-order"
-import { cycle, normalize, orderingConsistent } from "./time"
+import { cycle, normalize, orderingConsistent, relation } from "./time"
 import * as Timestamps from "./timestamps"
 import {
   isList,
@@ -21,7 +21,7 @@ import {
 } from "./types"
 
 /**
- * Publication semantics for the v0 contract: what is published, in what order,
+ * Publication semantics for the contract: what is published, in what order,
  * and with which evidence and reuse rights.
  *
  * A publication set is the atomic visibility unit. Related record revisions
@@ -51,6 +51,7 @@ const REFERENCE_FIELDS: [string, string | null][] = [
   ["controller_id", "actor"],
   ["record_id", null],
   ["gained_record_id", null],
+  ["toward_place_id", "place"],
   ["source_id", "source"],
   ["from", null],
   ["to", null],
@@ -106,6 +107,11 @@ export function codes(): string[] {
     "territory_gained_kind_mismatch",
     "territory_gained_after_window",
     "territory_overlap_without_dispute",
+    "journey_stop_place_not_event_place",
+    "journey_stop_at_context_place",
+    "journey_stop_out_of_order",
+    "journey_leg_through_unlocated_place",
+    "journey_leg_endpoints_mismatch",
   ]
 }
 
@@ -130,6 +136,7 @@ export function checkAll(documents: JsonValue[], sets: JsonValue[]): Publication
   errors.push(...orderingErrors(records, sets))
   errors.push(...partOfErrors(records, sets))
   errors.push(...territoryErrors(records, sets))
+  errors.push(...journeyErrors(records, sets))
 
   if (errors.length > 0) {
     return { ok: false, errors }
@@ -882,6 +889,135 @@ function span(time: JsonValue | undefined): { start: number; end: number } | nul
   }
 
   return { start: normalized.value.start.astro, end: normalized.value.end.astro }
+}
+
+/** The roles by which an event puts its party at a place; `context` and `other` do not. */
+const STOP_ROLES = new Set(["site", "start", "end", "waypoint"])
+
+/**
+ * The journey rules that span documents (RFD 2, "Decided: the journey record"):
+ * a stop is at one of its event's own places, never one named only as context;
+ * no stop is strictly earlier than the stop before it, as far as the contract
+ * orders dates (year granularity, so this catches only what v0 can order); and
+ * a drawn leg joins two places that assert a coordinate, ending at those points.
+ * A missing event or place is an `unresolved_reference`.
+ */
+function journeyErrors(records: JsonValue[], sets: JsonValue[]): Violation[] {
+  const pairs = published(records, sets)
+  const contentById = new Map(
+    pairs.map(([record, revision]) => [String(record["record_id"]), objectOf(revision["content"])]),
+  )
+
+  return pairs
+    .filter(([record]) => record["kind"] === "journey")
+    .flatMap(([record, revision]) => {
+      const base = `/revisions/${String(revision["revision_id"])}/content/stops`
+      const stops = listOf(getIn(revision, ["content", "stops"])).map(objectOf)
+
+      return stops.flatMap((stop, index) =>
+        journeyStopErrors(stop, stops[index - 1], contentById, `${base}/${index}`).map(
+          (violation) => ({
+            ...violation,
+            detail: `${String(record["record_id"])}: ${violation.detail}`,
+          }),
+        ),
+      )
+    })
+}
+
+function journeyStopErrors(
+  stop: JsonObject,
+  previous: JsonObject | undefined,
+  contentById: Map<string, JsonObject>,
+  path: string,
+): Violation[] {
+  const event = contentById.get(String(stop["event_id"]))
+  const errors: Violation[] = []
+
+  if (event !== undefined) {
+    const roles = listOf(event["places"])
+      .map(objectOf)
+      .filter((place) => place["place_id"] === stop["place_id"])
+      .map((place) => String(place["role"]))
+
+    flag(
+      errors,
+      roles.length === 0,
+      "journey_stop_place_not_event_place",
+      path,
+      `${String(stop["place_id"])} is not one of ${String(stop["event_id"])}'s places`,
+    )
+    flag(
+      errors,
+      roles.length > 0 && !roles.some((role) => STOP_ROLES.has(role)),
+      "journey_stop_at_context_place",
+      path,
+      `${String(stop["event_id"])} names ${String(stop["place_id"])} only as ${roles.join(" and ")}, so it did not put the party there`,
+    )
+  }
+
+  const before = previous === undefined ? undefined : contentById.get(String(previous["event_id"]))
+
+  if (event !== undefined && before !== undefined) {
+    const order = relation(event["time"], before["time"])
+
+    flag(
+      errors,
+      order.ok && order.value.relation === "before",
+      "journey_stop_out_of_order",
+      path,
+      `${String(stop["event_id"])} is earlier than the stop before it, ${String(previous?.["event_id"])}`,
+    )
+  }
+
+  for (const [index, legValue] of listOf(stop["geometry"]).entries()) {
+    errors.push(...legPlaceErrors(objectOf(legValue), contentById, `${path}/geometry/${index}`))
+  }
+
+  return errors
+}
+
+/** A drawn leg's waypoints must be located places, at the points those places assert. */
+function legPlaceErrors(
+  leg: JsonObject,
+  contentById: Map<string, JsonObject>,
+  path: string,
+): Violation[] {
+  return listOf(leg["waypoints"]).flatMap((waypointValue) => {
+    const waypoint = objectOf(waypointValue)
+    const place = contentById.get(String(waypoint["place_id"]))
+
+    if (place === undefined) {
+      return []
+    }
+
+    const points = listOf(place["geometry"])
+      .map(objectOf)
+      .filter((entry) => entry["interpretation"] === "approximate_point")
+      .map((entry) => getIn(entry, ["geojson", "coordinates"]))
+
+    if (points.length === 0) {
+      return [
+        error(
+          "journey_leg_through_unlocated_place",
+          path,
+          `${String(waypoint["place_id"])} asserts no coordinate, so no leg is drawn to it`,
+        ),
+      ]
+    }
+
+    const at = getIn(waypoint, ["geojson", "coordinates"])
+
+    return points.some((point) => JSON.stringify(point) === JSON.stringify(at))
+      ? []
+      : [
+          error(
+            "journey_leg_endpoints_mismatch",
+            path,
+            `the leg does not end at ${String(waypoint["place_id"])}'s point`,
+          ),
+        ]
+  })
 }
 
 function published(records: JsonValue[], sets: JsonValue[]): [JsonObject, JsonObject][] {

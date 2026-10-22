@@ -120,7 +120,7 @@ const NON_LATIN_SCRIPTS = new Set([
   "Kawi",
 ])
 
-const EVIDENCE_KINDS = new Set(["place", "actor", "event", "relationship", "territory"])
+const EVIDENCE_KINDS = new Set(["place", "actor", "event", "relationship", "territory", "journey"])
 
 const ASSERTED_GEOMETRY = new Set([
   "approximate_point",
@@ -245,6 +245,12 @@ export function codes(): string[] {
     "story_window_start_after_end",
     "story_first_step_not_start",
     "boundary_not_inclusive",
+    "journey_too_few_stops",
+    "journey_first_stop_has_leg",
+    "journey_toward_is_stop_place",
+    "journey_leg_without_citation",
+    "journey_leg_not_route",
+    "journey_leg_endpoints_mismatch",
     "other_type_without_note",
     "published_record_without_citation",
     "license_incomplete",
@@ -793,6 +799,7 @@ function geometryErrors(
   claimsById: Map<JsonValue, JsonObject>,
   path: string,
   contentBase: string,
+  alsoAccepted: string[] = [],
 ): Violation[] {
   if (geometryValue === null || geometryValue === undefined) {
     return []
@@ -816,7 +823,9 @@ function geometryErrors(
       entryPath,
       "geometry must reference a claim in this revision",
     )
-    errors.push(...geometryPointerErrors(claim, entryPath, entryPointer, contentBase))
+    errors.push(
+      ...geometryPointerErrors(claim, entryPath, [entryPointer, contentBase, ...alsoAccepted]),
+    )
     errors.push(...interpretationErrors(entry, claim, entryPath))
     errors.push(...geojsonErrors(entry["geojson"], `${entryPath}/geojson`))
     errors.push(...uncertaintyErrors(entry, entryPath))
@@ -830,16 +839,16 @@ function geometryErrors(
 function geometryPointerErrors(
   claim: JsonObject | undefined,
   entryPath: string,
-  entryPointer: string,
-  contentBase: string,
+  pointers: string[],
 ): Violation[] {
   if (claim === undefined) {
     return []
   }
 
   // asserts pointers are relative to the revision content, so a claim supports a
-  // geometry entry by asserting that entry, its list, or the whole content.
-  const accepted = [entryPointer, contentBase, ""]
+  // geometry entry by asserting that entry, its list, or the whole content (or,
+  // for a journey's leg, the stop the leg arrives at).
+  const accepted = [...pointers, ""]
   const errors: Violation[] = []
 
   flag(
@@ -1243,6 +1252,10 @@ function kindErrors(
     return storyKindErrors(content, path)
   }
 
+  if (context.kind === "journey") {
+    return journeyKindErrors(content, claimsById, path)
+  }
+
   return []
 }
 
@@ -1378,6 +1391,136 @@ function storyKindErrors(content: JsonObject, path: string): Violation[] {
   return errors
 }
 
+/**
+ * The rules one journey document can check alone (RFD 2, "Decided: the journey
+ * record"). The rules that need the stops' events and places (a stop's place is
+ * one of its event's, the stops are in order, a drawn leg's ends are located)
+ * span documents, so `publication.ts` checks them on the whole tree.
+ */
+function journeyKindErrors(
+  content: JsonObject,
+  claimsById: Map<JsonValue, JsonObject>,
+  path: string,
+): Violation[] {
+  const stops = listOf(content["stops"]).map(objectOf)
+  const asserted = [...claimsById.values()].map((claim) => String(claim["asserts"]))
+  const errors: Violation[] = []
+
+  flag(
+    errors,
+    stops.length < 2,
+    "journey_too_few_stops",
+    `${path}/stops`,
+    "a journey moves between at least two stops",
+  )
+
+  stops.forEach((stop, index) => {
+    const stopPath = `${path}/stops/${index}`
+    const pointer = `/stops/${index}`
+    const leg = ["mode", "driven", "toward_place_id", "geometry"].filter((key) => !isNil(stop[key]))
+    const cited = asserted.some((claim) => claim === pointer || claim.startsWith(`${pointer}/`))
+
+    flag(
+      errors,
+      index === 0 && leg.length > 0,
+      "journey_first_stop_has_leg",
+      stopPath,
+      `the first stop has no arriving leg, so it cannot carry ${leg.join(", ")}`,
+    )
+    flag(
+      errors,
+      !isNil(stop["toward_place_id"]) && stop["toward_place_id"] === stop["place_id"],
+      "journey_toward_is_stop_place",
+      stopPath,
+      "an intended destination is a place the leg did not reach, never the stop's own place",
+    )
+    flag(
+      errors,
+      (stop["driven"] === true || !isNil(stop["toward_place_id"])) && !cited,
+      "journey_leg_without_citation",
+      stopPath,
+      "a drift or an intended destination needs a claim of its own on the stop",
+    )
+
+    if (isList(stop["geometry"])) {
+      const geometryPath = `${stopPath}/geometry`
+
+      errors.push(
+        ...geometryErrors(stop["geometry"], claimsById, geometryPath, `${pointer}/geometry`, [
+          pointer,
+        ]),
+        ...legErrors(stop["geometry"], stops[index - 1], stop, geometryPath),
+      )
+    }
+  })
+
+  return errors
+}
+
+/**
+ * A drawn leg is a route between the two stops' places: its waypoints are those
+ * places, in order, and its line ends at their points.
+ */
+function legErrors(
+  geometry: JsonValue[],
+  previous: JsonObject | undefined,
+  stop: JsonObject,
+  path: string,
+): Violation[] {
+  return geometry.flatMap((entryValue, index) => {
+    const entry = objectOf(entryValue)
+    const entryPath = `${path}/${index}`
+    const interpretation = entry["interpretation"]
+
+    if (!(isString(interpretation) && ROUTE_GEOMETRY.has(interpretation))) {
+      return [error("journey_leg_not_route", entryPath, "a leg is a route between two stops")]
+    }
+
+    const waypoints = listOf(entry["waypoints"]).map(objectOf)
+    const line = lineEnds(entry["geojson"])
+    const ends =
+      waypoints.length === 2 &&
+      previous !== undefined &&
+      waypoints[0]["place_id"] === previous["place_id"] &&
+      waypoints[1]["place_id"] === stop["place_id"] &&
+      line !== null &&
+      deepEqual(getIn(waypoints[0], ["geojson", "coordinates"]), line[0]) &&
+      deepEqual(getIn(waypoints[1], ["geojson", "coordinates"]), line[1])
+    const errors: Violation[] = []
+
+    flag(
+      errors,
+      !ends,
+      "journey_leg_endpoints_mismatch",
+      entryPath,
+      "a leg's two waypoints are the previous stop's place and this stop's, and its line ends at their points",
+    )
+
+    return errors
+  })
+}
+
+/** The first and last positions of a line: a LineString's, or a MultiLineString's outer ends. */
+function lineEnds(geojson: JsonValue | undefined): [JsonValue, JsonValue] | null {
+  if (!isObject(geojson) || !isList(geojson["coordinates"])) {
+    return null
+  }
+
+  const coordinates = geojson["coordinates"]
+  const first = coordinates[0]
+  const last = coordinates[coordinates.length - 1]
+
+  if (geojson["type"] === "LineString" && coordinates.length > 0) {
+    return [first, last]
+  }
+
+  if (geojson["type"] === "MultiLineString" && isList(first) && isList(last)) {
+    return first.length > 0 && last.length > 0 ? [first[0], last[last.length - 1]] : null
+  }
+
+  return null
+}
+
 function publishedEvidenceErrors(
   kind: JsonValue | undefined,
   claims: JsonValue[],
@@ -1398,7 +1541,7 @@ function publishedEvidenceErrors(
     !cited,
     "published_record_without_citation",
     path,
-    "every published event, place, actor, relationship, and territory needs a cited claim",
+    "every published event, place, actor, relationship, territory, and journey needs a cited claim",
   )
 
   return errors

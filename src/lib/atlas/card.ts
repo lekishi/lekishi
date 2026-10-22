@@ -1,5 +1,5 @@
 import type { Actor, Chapter, HistoricalEvent, Place, Relationship, Territory } from "./domain"
-import { familyOf, type RelationshipFamily } from "./overlays"
+import { familyOf, type JourneyLeg, type RelationshipFamily } from "./overlays"
 import { overlapsWindow } from "./time"
 import type { TimeWindow } from "./domain"
 
@@ -67,6 +67,17 @@ export function connectedEvents(chapter: Chapter, event: HistoricalEvent): Conne
     }
   }
 
+  const places = new Map(chapter.places.map((place) => [place.id, place.label]))
+  // What the record says about a leg beyond its ends: a drift, or a place it
+  // set out for and did not reach, which the card names and the map never draws.
+  const legNote = (leg: JourneyLeg | null | undefined) =>
+    [
+      leg?.driven ? " · driven off course" : "",
+      leg?.towardPlaceId
+        ? ` · set out for ${places.get(leg.towardPlaceId) ?? "another place"}`
+        : "",
+    ].join("")
+
   for (const journey of chapter.overlays.journeys) {
     const index = journey.stops.findIndex((stop) => stop.eventId === event.id)
 
@@ -74,8 +85,14 @@ export function connectedEvents(chapter: Chapter, event: HistoricalEvent): Conne
       continue
     }
 
-    add(events.get(journey.stops[index - 1]?.eventId ?? ""), `previous stop · ${journey.label}`)
-    add(events.get(journey.stops[index + 1]?.eventId ?? ""), `next stop · ${journey.label}`)
+    add(
+      events.get(journey.stops[index - 1]?.eventId ?? ""),
+      `previous stop · ${journey.label}${legNote(journey.stops[index]?.leg)}`,
+    )
+    add(
+      events.get(journey.stops[index + 1]?.eventId ?? ""),
+      `next stop · ${journey.label}${legNote(journey.stops[index + 1]?.leg)}`,
+    )
   }
 
   const people = personIds(chapter)

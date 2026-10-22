@@ -56,12 +56,12 @@ describe("mountAtlas", () => {
     expect(root.childElementCount).toBe(1)
     expect(root.querySelectorAll('[data-testid="atlas-workspace"]')).toHaveLength(1)
     // The frame opens on the story; the workspace renders the chapter it was
-    // mounted with: its story steps, then its 24 in-window events.
+    // mounted with: its story steps, then its 25 in-window events.
     expect(root.querySelectorAll('[data-testid="atlas-story-step"]')).toHaveLength(
       TANG.story.length,
     )
     await openTab(root, "events")
-    expect(root.querySelectorAll('[data-testid="atlas-event-item"]')).toHaveLength(24)
+    expect(root.querySelectorAll('[data-testid="atlas-event-item"]')).toHaveLength(25)
     expect(root.querySelector("#atlas-chapter-switcher")?.textContent).toContain(TANG.title)
     expect(renderer.sync).toHaveBeenCalled()
 

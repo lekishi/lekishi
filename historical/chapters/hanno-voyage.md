@@ -20,9 +20,10 @@ this chapter honestly can draw any disputed geography.
   places, 4 actors, 2 relationships. The relationships join actors
   (Hanno with the Lixitae and with the Gorillai), and no actor has an
   anchor place, so the map draws no arc for them; they show on the cards.
-- A proposed v1 journey in
-  [`historical/journeys/hanno-voyage.yaml`](../journeys/hanno-voyage.yaml),
-  not compiled.
+- A journey record in
+  [`historical/journeys/hanno-voyage.yaml`](../journeys/hanno-voyage.yaml).
+  The chapter does not include it yet; the tests compile it and check it
+  against the contract.
 
 ## Sources and reuse
 

@@ -218,7 +218,7 @@ describe("projecting the reviewed Tang chapter", () => {
     expect(chapter.title).toBe("The 750–754 embassy of 藤原朝臣清河")
     expect(chapter.summary).toContain("coda nodes of 758, 759, 763, and 779")
     expect(chapter.places).toHaveLength(15)
-    expect(chapter.events).toHaveLength(29)
+    expect(chapter.events).toHaveLength(30)
     expect(chapter.events.filter((event) => event.coda)).toHaveLength(5)
     expect(chapter.defaultWindow).toEqual({ start: 750, end: 754 })
     expect(chapter.publication.independence).toBe("self_review")
@@ -332,8 +332,8 @@ describe("projecting the reviewed Tang chapter", () => {
     const placed = inWindow.filter((event) => event.placement.kind === "point")
     const unplaced = inWindow.filter((event) => event.placement.kind === "none")
 
-    expect(inWindow).toHaveLength(24)
-    expect(placed).toHaveLength(22)
+    expect(inWindow).toHaveLength(25)
+    expect(placed).toHaveLength(23)
     expect(unplaced).toHaveLength(2)
 
     // A court act whose entry names no place is placed at the court's seat, the

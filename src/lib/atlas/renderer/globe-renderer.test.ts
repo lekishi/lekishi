@@ -393,7 +393,13 @@ describe("the evidence grammar", () => {
     const scene = buildScene(state, tang)
     renderer.sync(scene)
     const overlays = view.setOverlays.mock.calls.at(-1)?.[0] as {
-      journeys: { id: string; stops: unknown[]; vessel: unknown; selected: boolean }[]
+      journeys: {
+        id: string
+        stops: unknown[]
+        legs: unknown[]
+        vessel: unknown
+        selected: boolean
+      }[]
       arcs: ReturnType<typeof arcFor>[]
     }
 
@@ -404,14 +410,16 @@ describe("the evidence grammar", () => {
 
     for (const [index, journey] of scene.journeys.entries()) {
       expect(overlays.journeys[index].stops).toEqual(journey.stops.map((stop) => stop.position))
+      expect(overlays.journeys[index].legs).toEqual(journey.legs)
       expect(overlays.journeys[index].vessel).toEqual(journey.vessel)
       expect(overlays.journeys[index].selected).toBe(journey.selected)
     }
 
     // The landfall is a stop of 鑒眞's voyage, so that journey is the selected one.
-    expect(overlays.journeys.find((journey) => journey.id === "jianzhen-voyage")?.selected).toBe(
-      true,
-    )
+    expect(
+      overlays.journeys.find((journey) => journey.id === "lks:journey:jianzhen-to-nara-753")
+        ?.selected,
+    ).toBe(true)
     expect(scene.arcs.length).toBeGreaterThan(0)
     expect(overlays.arcs).toEqual(scene.arcs.map(arcFor))
     // Territory is drawn on the markers, never as a line or an area.

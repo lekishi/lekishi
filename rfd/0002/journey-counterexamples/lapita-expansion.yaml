@@ -1,10 +1,8 @@
-# A contract v1 journey record. The owner decided on 2026-10-21 that journeys are their own kind
-# (RFD 2, "Decided: journeys are their own kind"); the record's shape is still proposed there
-# ("Proposed: the journey record").
+# A journey sketch written to the proposed journey shape (RFD 2, 2026-10-21).
 # A counterexample, not a conforming record: a population movement probes the proposal's
 # "one party's movement" definition rather than fitting it.
-# Not compiled yet: the compiler reads no historical/journeys/ folder until v1 lands, so this
-# file is test data for that work and changes no chapter's digest.
+# Kept here, outside historical/journeys/, because the compiler reads that folder and the decided
+# record (RFD 2, "Decided: the journey record") rejects this file. It records the finding.
 title: The Lapita expansion from the Bismarcks to Sāmoa
 summary: >-
   Lapita settlement moves out of the Bismarck Archipelago, across to the Santa Cruz Islands and
@@ -50,7 +48,7 @@ cite:
         at: 103–104
 notes: >-
   A test of the journey shape against a population movement rather than one party's voyage, and a
-  finding for the v1 review: no one travelled this route, and the stops are the first dated signals
+  finding for the journey review: no one travelled this route, and the stops are the first dated signals
   of settlement on each island group. The crossing's route is the one reconstructed_route case,
   drawn through the Reef–Santa Cruz group as the cited scholarship suggests; but its two ends
   (the Bismarcks and Vanuatu) are display anchors, so under the proposed drawing rules that leg

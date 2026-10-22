@@ -120,7 +120,9 @@ describe("a chapter with several stories", () => {
   })
 
   it("keeps the embassy's journeys and diorama in its own view", () => {
-    expect(embassy.overlays.journeys.map((journey) => journey.id)).toContain("jianzhen-voyage")
+    expect(embassy.overlays.journeys.map((journey) => journey.id)).toContain(
+      "lks:journey:jianzhen-to-nara-753",
+    )
     expect(embassy.overlays.dioramas.map((diorama) => diorama.id)).toEqual(["akimeya"])
     expect(crossings.overlays.journeys).toEqual([])
     expect(crossings.overlays.dioramas).toEqual([])

@@ -15,6 +15,7 @@ import {
   type JsonValue,
 } from "../historical/contract/types"
 import { overlayDefinitions } from "./overlay-definitions"
+import type { ChapterOverlays, JourneyDefinition, JourneyStop, Vessel } from "./overlays"
 import type {
   Actor,
   Chapter,
@@ -422,6 +423,12 @@ function projectView(
 
   eventGeometryErrors(published, errors)
 
+  const eventIds = new Set(events.map((event) => event.id))
+  const journeys = published
+    .filter((entry) => entry.kind === "journey")
+    .map((entry) => projectJourney(entry, eventIds, places, errors))
+    .filter((entry): entry is JourneyDefinition => entry !== null)
+
   if (events.length === 0) {
     errors.push("the chapter publishes no events, so the atlas would show an empty map")
   }
@@ -446,8 +453,7 @@ function projectView(
     return { ok: false, errors }
   }
 
-  const eventIds = new Set(events.map((event) => event.id))
-  const overlays = overlayDefinitions(name)
+  const overlays = withJourneys(overlayDefinitions(name), journeys)
 
   return {
     ok: true,
@@ -1251,6 +1257,72 @@ function projectTerritory(
     dispute: projectDispute(entry, errors),
     citations: projectCitations(entry, sourceIds, errors),
   }
+}
+
+/** The symbol a leg's mode puts at the stop it reaches; an unstated mode is a plain marker. */
+const VESSELS: Readonly<Record<string, Vessel>> = { sea: "ship", river: "ship", land: "party" }
+
+/**
+ * A published journey record as the map draws it. A leg is drawn only where
+ * the record compiled a schematic link for it; the atlas draws nothing else
+ * (a reconstructed route would need its path, and none is published yet), so
+ * any other leg geometry is refused rather than flattened into a straight line.
+ */
+function projectJourney(
+  entry: PublishedRevision,
+  eventIds: ReadonlySet<string>,
+  places: Map<string, Place>,
+  errors: string[],
+): JourneyDefinition | null {
+  const label = stringOrUndefined(entry.content["title"])
+  const stops: JourneyStop[] = []
+
+  for (const [index, value] of listOf(entry.content["stops"]).entries()) {
+    const stop = objectOf(value)
+    const eventId = String(stop["event_id"])
+    const placeId = String(stop["place_id"])
+    const geometry = listOf(stop["geometry"]).map(objectOf)
+    const toward = stringOrUndefined(stop["toward_place_id"]) ?? null
+
+    if (!eventIds.has(eventId) || !places.has(placeId)) {
+      errors.push(
+        `${entry.recordId} stops at ${eventId} at ${placeId}, which the chapter does not show`,
+      )
+      return null
+    }
+
+    if (geometry.some((leg) => leg["interpretation"] !== "schematic_link")) {
+      errors.push(
+        `${entry.recordId} has a leg the atlas cannot draw: only schematic links are drawn`,
+      )
+      return null
+    }
+
+    stops.push({
+      eventId,
+      placeId,
+      vessel: VESSELS[String(stop["mode"])] ?? "marker",
+      leg:
+        index === 0
+          ? null
+          : { drawn: geometry.length > 0, driven: stop["driven"] === true, towardPlaceId: toward },
+    })
+  }
+
+  if (label === undefined || stops.length < 2) {
+    errors.push(`${entry.recordId} has no published title or fewer than two stops`)
+    return null
+  }
+
+  return { id: entry.recordId, label, relationshipId: null, stops }
+}
+
+/** The chapter's overlays: its published journeys first, then its hand-written ones. */
+function withJourneys(
+  overlays: ChapterOverlays,
+  journeys: readonly JourneyDefinition[],
+): ChapterOverlays {
+  return { ...overlays, journeys: [...journeys, ...overlays.journeys] }
 }
 
 function relationshipEndpoint(

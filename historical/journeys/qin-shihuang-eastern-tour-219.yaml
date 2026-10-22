@@ -1,6 +1,6 @@
-# Proposed contract v1 journey record (RFD 2, "Proposed: the journey record", draft PR #26).
-# Not compiled yet: the compiler reads no historical/journeys/ folder until v1 lands, so this
-# file is test data for that work and changes no chapter's digest.
+# yaml-language-server: $schema=../schema/journey.schema.json
+# Journey record (RFD 2, "Decided: the journey record"). No chapter includes it yet,
+# so it changes no chapter's digest; the tests still compile it and check it against the contract.
 title: 秦始皇's eastern tour, 219 BCE
 summary: >-
   始皇 climbs 鄒嶧山 and 泰山, follows the 勃海 coast east to 成山 and 之罘, stays three months at 瑯邪,

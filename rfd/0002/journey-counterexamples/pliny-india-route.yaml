@@ -1,10 +1,8 @@
-# A contract v1 journey record. The owner decided on 2026-10-21 that journeys are their own kind
-# (RFD 2, "Decided: journeys are their own kind"); the record's shape is still proposed there
-# ("Proposed: the journey record").
+# A journey sketch written to the proposed journey shape (RFD 2, 2026-10-21).
 # A counterexample, not a conforming record: a recurring route with no travellers probes the
 # proposal's "one party's movement" definition rather than fitting it.
-# Not compiled yet: the compiler reads no historical/journeys/ folder until v1 lands, so this
-# file is test data for that work and changes no chapter's digest.
+# Kept here, outside historical/journeys/, because the compiler reads that folder and the decided
+# record (RFD 2, "Decided: the journey record") rejects this file. It records the finding.
 title: Pliny's route from Alexandria to Muziris
 summary: >-
   Up the Nile from Alexandria to Coptos in twelve days, across the desert by camel to Berenice in
@@ -37,7 +35,7 @@ cite:
     source: pliny-natural-history
     at: VI.26
 notes: >-
-  Findings for the v1 review. The route has no travellers: Pliny describes a route anyone took
+  Findings for the journey review. The route has no travellers: Pliny describes a route anyone took
   every year, not a party, and the proposal assumes travellers. One event is two stops (the Nile
   leg's start and end), each choosing its place with `place:`, which the proposal allows; whether
   one event may be two stops is the open question. by: river, land and sea all occur, so the playhead would

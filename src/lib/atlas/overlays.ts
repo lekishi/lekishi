@@ -7,16 +7,19 @@ import { overlapsWindow } from "./time"
  * What the map draws besides places: journeys through dated stops, relationship
  * arcs, territory snapshots and dioramas (RFD 1, "Show, then qualify").
  *
- * The contract publishes events, places and relationships, not lines. A line
- * on the map is therefore a presentation of published records. This module
- * says what each kind of line means and draws them; `overlay-definitions.ts`
- * defines each chapter's, in the open, so a reviewer can read exactly what the
- * map connects and why:
+ * A line on the map is a presentation of published records. This module says
+ * what each kind of line means and draws them:
  *
- * - A journey is a list of a chapter's own events in the order the story
- *   tells them, each at its published place. The map draws a dashed line
- *   through those stops, labelled "schematic, follows the dated stops"; the
- *   line connects attested places and is not an itinerary between them.
+ * - A journey is a published journey record (RFD 2, "Decided: the
+ *   journey record"): stops that are the chapter's own events at their own
+ *   places, and the leg arriving at each. The map draws a dashed line only
+ *   along the legs the record draws, between two places that assert a
+ *   coordinate, labelled "schematic, follows the dated stops"; the line is not
+ *   an itinerary. A stop at an unlocated place breaks the line, a drifting leg
+ *   is drawn as a drift, and an intended destination is named on the card,
+ *   never drawn. A few journeys are still hand-written in
+ *   `overlay-definitions.ts` until their records are authored; those connect
+ *   their placed stops in order.
  * - An arc is a published relationship drawn between two places. A place end is
  *   the record's own place. An actor end is drawn at a published place that
  *   stands for the actor (a state at its court), named there and stated on the
@@ -87,8 +90,34 @@ export function familyOf(relationship: Relationship): RelationshipFamily | null 
   return null
 }
 
-/** The symbol at a journey's current stop: a ship for a sea stop, a party ashore. */
-export type Vessel = "ship" | "party"
+/**
+ * The symbol at a journey's current stop, from the mode of the leg that
+ * reached it: a ship by sea or river, a party by land, and a plain marker when
+ * the record states no mode.
+ */
+export type Vessel = "ship" | "party" | "marker"
+
+/** The leg arriving at a stop. */
+export type JourneyLeg = {
+  /** The record draws it: both stops' places assert a coordinate. */
+  readonly drawn: boolean
+  /** The party did not choose the course; the map draws a drift. */
+  readonly driven: boolean
+  /** The place the leg set out for and did not reach, named on the card. */
+  readonly towardPlaceId: string | null
+}
+
+export type JourneyStop = {
+  readonly eventId: string
+  /**
+   * The stop's place, as the journey record gives it; null on a hand-written
+   * journey, which stops at its events' own placements.
+   */
+  readonly placeId: string | null
+  readonly vessel: Vessel
+  /** The leg arriving here; null on the first stop. */
+  readonly leg: JourneyLeg | null
+}
 
 export type JourneyDefinition = {
   readonly id: string
@@ -96,7 +125,30 @@ export type JourneyDefinition = {
   readonly label: string
   /** The published relationship the journey presents, when there is one. */
   readonly relationshipId: string | null
-  readonly stops: readonly { readonly eventId: string; readonly vessel: Vessel }[]
+  readonly stops: readonly JourneyStop[]
+}
+
+/**
+ * A hand-written journey, as `overlay-definitions.ts` writes it: events in
+ * order, each with its symbol. Every leg between its placed stops is drawn.
+ */
+export type CuratedJourney = {
+  readonly id: string
+  readonly label: string
+  readonly relationshipId: string | null
+  readonly stops: readonly { readonly eventId: string; readonly vessel: "ship" | "party" }[]
+}
+
+export function curatedJourney(journey: CuratedJourney): JourneyDefinition {
+  return {
+    ...journey,
+    stops: journey.stops.map((stop, index) => ({
+      eventId: stop.eventId,
+      placeId: null,
+      vessel: stop.vessel,
+      leg: index === 0 ? null : { drawn: true, driven: false, towardPlaceId: null },
+    })),
+  }
 }
 
 export type DioramaDefinition = {
@@ -129,10 +181,20 @@ export type SceneJourneyStop = {
   readonly reached: boolean
 }
 
+/** A drawn leg, between two of the scene journey's stops. */
+export type SceneLeg = {
+  readonly from: number
+  readonly to: number
+  readonly drift: boolean
+}
+
 export type SceneJourney = {
   readonly id: string
   readonly label: string
+  /** The stops the map can place; a stop at an unlocated place is listed on the card only. */
   readonly stops: readonly SceneJourneyStop[]
+  /** The legs to draw; a stop with no leg either side stands alone. */
+  readonly legs: readonly SceneLeg[]
   /**
    * The schematic vessel or party, at the selected stop when the reader
    * selected one, otherwise at the last stop the playhead has reached; null
@@ -220,32 +282,70 @@ export function selectionRecords(state: AtlasState, chapter: Chapter): ReadonlyS
   return new Set(state.selectedPlaceId === null ? [] : [state.selectedPlaceId])
 }
 
+/** Where the map shows a stop: its record's place, or a hand-written stop's event placement. */
+function stopPoint(
+  stop: JourneyStop,
+  event: HistoricalEvent,
+  places: Map<string, Place>,
+): { placeId: string; label: string; position: GeoPoint } | null {
+  if (stop.placeId === null) {
+    return event.placement.kind === "point" ? event.placement : null
+  }
+
+  const place = places.get(stop.placeId)
+
+  return place?.position
+    ? { placeId: place.id, label: place.label, position: place.position }
+    : null
+}
+
 export function sceneJourneys(state: AtlasState, chapter: Chapter): SceneJourney[] {
   const events = eventById(chapter)
+  const places = placeById(chapter)
   const playhead = Math.round(state.playhead)
 
   return chapter.overlays.journeys.flatMap((journey) => {
-    const stops = journey.stops.flatMap((stop) => {
-      const event = events.get(stop.eventId)
+    const stops: {
+      stop: SceneJourneyStop
+      vessel: Vessel
+      span: HistoricalEvent["occurrence"]
+      index: number
+    }[] = []
+    const legs: SceneLeg[] = []
 
-      if (event === undefined || event.placement.kind !== "point") {
-        return []
+    journey.stops.forEach((stop, index) => {
+      const event = events.get(stop.eventId)
+      const at = event === undefined ? null : stopPoint(stop, event, places)
+
+      if (event === undefined || at === null) {
+        return
       }
 
-      return [
-        {
-          stop: {
-            eventId: event.id,
-            placeId: event.placement.placeId,
-            label: event.placement.label,
-            position: event.placement.position,
-            year: event.occurrence.startYear,
-            reached: event.occurrence.startYear <= playhead,
-          },
-          vessel: stop.vessel,
-          span: event.occurrence,
+      const previous = stops.at(-1)
+
+      // A record draws a leg only between consecutive located stops; a
+      // hand-written journey joins each placed stop to the one before it.
+      if (
+        stop.leg?.drawn === true &&
+        previous !== undefined &&
+        (stop.placeId === null || previous.index === index - 1)
+      ) {
+        legs.push({ from: stops.length - 1, to: stops.length, drift: stop.leg.driven })
+      }
+
+      stops.push({
+        stop: {
+          eventId: event.id,
+          placeId: at.placeId,
+          label: at.label,
+          position: at.position,
+          year: event.occurrence.startYear,
+          reached: event.occurrence.startYear <= playhead,
         },
-      ]
+        vessel: stop.vessel,
+        span: event.occurrence,
+        index,
+      })
     })
 
     const selectedIndex = stops.findIndex(({ stop }) => stop.eventId === state.selectedEventId)
@@ -276,6 +376,7 @@ export function sceneJourneys(state: AtlasState, chapter: Chapter): SceneJourney
         id: journey.id,
         label: journey.label,
         stops: stops.map(({ stop }) => stop),
+        legs,
         vessel: vesselStop === undefined ? null : { stop: vesselIndex, kind: vesselStop.vessel },
         selected: selectedIndex !== -1,
       },

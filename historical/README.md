@@ -22,7 +22,7 @@ The TypeScript reference semantics that validate it live in
 historical/v0/
   schema/              JSON Schema (2020-12 subset) documents
     common.schema.json          shared definitions: ids, time, claims, geometry, names, review
-    kinds.schema.json           content per record kind: place, actor, event, relationship, story
+    kinds.schema.json           content per record kind: place, actor, event, relationship, territory, story, journey
     record.schema.json          the record envelope and its revisions
     source.schema.json          cited works, datasets, and media with reuse terms and a sealed source_hash
     publication-set.schema.json the atomic publication unit, including source pins
@@ -32,9 +32,9 @@ historical/v0/
     publication-sets/           one set publishing every example revision and pinning both sources
   vectors/             machine-readable boundary vectors with expected results
     time.json calendars.json claims.json ordering.json names.json geometry.json
-    documents.json publication.json
+    documents.json publication.json territories.json journeys.json
 historical/schema/     JSON Schema for the record files an author writes
-historical/places/ actors/ events/ relationships/
+historical/places/ actors/ events/ relationships/ territories/ journeys/
                        one YAML record per file, written once for every chapter;
                        the file name is the id, subfolders (tang/, qin/) are tidiness
 historical/sources/    one YAML file per cited work or dataset, with its reuse terms
@@ -46,9 +46,10 @@ historical/chapters/
 ```
 
 The contract version string is `lekishi-historical-contract/v0`. Every document
-carries it. Until the atlas launches, extending a vocabulary or a rule amends v0
-in place, because no published content depends on it yet (owner decision,
-2026-10-22); after launch it requires a new version.
+carries it. Until the atlas launches, adding a kind or extending a vocabulary or
+a rule amends v0 in place, because no published content depends on it yet (owner
+decision, 2026-10-22), as the journey kind did; after launch it requires a new
+version.
 
 ## Examples are synthetic, chapters are reviewed content
 
@@ -104,9 +105,9 @@ compiled set needs a row in it.
 pnpm test
 ```
 
-The suite validates the examples as one content tree, runs every vector (201
+The suite validates the examples as one content tree, runs every vector (241
 cases across `time`, `calendars`, `claims`, `ordering`, `names`, `geometry`,
-`documents`, and `publication`), checks that every code and caveat the vectors expect is
+`documents`, `publication`, `territories`, and `journeys`), checks that every code and caveat the vectors expect is
 documented by the reference semantics, and validates the compiled Tang chapter
 with its own coverage, coda, and exclusion checks. The Qin chapter has its own
 suite with scope, exclusion, uncertainty, dispute, and geometry checks. The

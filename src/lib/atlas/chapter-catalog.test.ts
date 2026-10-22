@@ -63,7 +63,7 @@ describe("the served chapter catalog", () => {
     expect(chapter).toEqual(projected.chapter)
     expect(chapter.id).toBe(TANG_CHAPTER)
     expect(chapter.defaultWindow).toEqual(TANG_COVERAGE.defaultWindow)
-    expect(chapter.events).toHaveLength(29)
+    expect(chapter.events).toHaveLength(30)
     expect(chapter.places).toHaveLength(15)
     expect(chapter.publication.independence).toBe("self_review")
   })

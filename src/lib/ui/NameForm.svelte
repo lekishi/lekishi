@@ -23,8 +23,7 @@
     name,
     lang,
     romanization,
-    modern,
-    modernLang,
+    modern = [],
     size = "title-sm",
     class: className,
   }: {
@@ -32,9 +31,11 @@
     /** BCP 47 tag of the name's script and language, such as `zh-Hant` or `ja`. */
     lang: string
     romanization?: string
-    /** The modern name, revealed on request. */
-    modern?: string
-    modernLang?: string
+    /**
+     * The modern names, revealed on request. Each carries its own `lang`, since
+     * a place's modern names are often in other scripts than its historical one.
+     */
+    modern?: readonly { form: string; lang?: string }[]
     size?: "display" | "title" | "title-sm" | "body" | "body-sm"
     class?: string
   } = $props()
@@ -58,7 +59,7 @@
   {#if romanization}
     <span class="text-caption text-ink-dim">{romanization}</span>
   {/if}
-  {#if modern}
+  {#if modern.length > 0}
     <span class="flex flex-col items-start text-caption text-ink-faint">
       <button
         type="button"
@@ -70,10 +71,13 @@
           // without moving the layout.
           "relative cursor-pointer rounded-control underline decoration-dotted underline-offset-2 after:absolute after:-inset-x-1 after:-inset-y-2 hover:text-ink-dim",
           focusRing,
-        ]}>{showModern ? "Today" : "Modern name"}</button
+        ]}>{showModern ? "Today" : modern.length > 1 ? "Modern names" : "Modern name"}</button
       >
-      <span id="{id}-modern" lang={modernLang} hidden={!showModern} class="text-ink-dim"
-        >{modern}</span
+      <span id="{id}-modern" hidden={!showModern} class="text-ink-dim"
+        >{#each modern as entry, index (index)}{index > 0 ? " · " : ""}<span
+            lang={entry.lang}
+            dir="auto">{entry.form}</span
+          >{/each}</span
       >
     </span>
   {/if}

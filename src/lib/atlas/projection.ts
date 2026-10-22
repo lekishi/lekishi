@@ -27,6 +27,7 @@ import type {
   GeoPoint,
   GeometryPrecision,
   HistoricalEvent,
+  ModernName,
   Occurrence,
   Place,
   PointPlacement,
@@ -628,6 +629,7 @@ function projectPlace(entry: PublishedRevision, errors: string[]): Place | null 
 
   const aliases = nameAliases(entry.content)
   const { romanization, lang } = primaryNameFacts(primary)
+  const modern = modernNames(entry.content)
 
   if (point !== null) {
     return {
@@ -636,6 +638,7 @@ function projectPlace(entry: PublishedRevision, errors: string[]): Place | null 
       aliases,
       romanization,
       lang,
+      modern,
       placement: point.placement,
       precision: point.precision,
       position: point.position,
@@ -655,6 +658,7 @@ function projectPlace(entry: PublishedRevision, errors: string[]): Place | null 
     aliases,
     romanization,
     lang,
+    modern,
     placement: "unknown",
     precision: "unspecified",
     position: null,
@@ -719,6 +723,21 @@ function projectActor(entry: PublishedRevision, errors: string[]): Actor | null 
     ...primaryNameFacts(primary),
     types,
   }
+}
+
+/**
+ * The record's modern equivalents, for the place card's "Modern name" toggle.
+ * They stay out of `nameAliases`: a modern name orients the reader, it is not a
+ * historical name form and never finds the place in search.
+ */
+function modernNames(content: JsonObject): ModernName[] {
+  return listOf(content["modern_equivalents"]).flatMap((value) => {
+    const entry = objectOf(value)
+    const form = stringOrUndefined(entry["form"])?.trim()
+    const lang = stringOrUndefined(entry["language"])
+
+    return form === undefined || form === "" || lang === undefined ? [] : [{ form, lang }]
+  })
 }
 
 /** The primary name's romanization and language tag, as the record publishes them. */

@@ -99,6 +99,7 @@ export function wikidataChapter(snapshot: WikidataSnapshot): Chapter {
       aliases: items.map((item) => item.label),
       romanization: null,
       lang: "en",
+      modern: [],
       placement: "approximate",
       precision: "locality",
       position: { lon: first.lon, lat: first.lat },

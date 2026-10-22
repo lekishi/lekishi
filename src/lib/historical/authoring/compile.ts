@@ -113,6 +113,15 @@ function yearWindow(window: JsonObject): YearWindow {
 
 function lookupFor(tree: AuthoringTree): Lookup {
   return {
+    file(id) {
+      const file = tree.records.get(id)
+
+      if (file === undefined) {
+        throw new Error(`no record is ${id}`)
+      }
+
+      return file.data
+    },
     record(name, kinds, where) {
       const [kind, short] = name.includes(":") ? name.split(":", 2) : [undefined, name]
       const candidates = (kind === undefined ? kinds : kinds.filter((allowed) => allowed === kind))
@@ -179,7 +188,38 @@ function references(kind: RecordKind, content: JsonObject): string[] {
     }
   }
 
+  // A journey brings its travellers and the places its legs set out for, but
+  // never its stops: a chapter that includes a journey must reach every stop's
+  // event itself, so the map never draws through an event the chapter does not
+  // publish (`stopsOutsideChapter`).
+  if (kind === "journey") {
+    for (const traveller of isList(content["travellers"]) ? content["travellers"] : []) {
+      found.push(String((traveller as JsonObject)["actor_id"]))
+    }
+
+    for (const stop of isList(content["stops"]) ? content["stops"] : []) {
+      if (isObject(stop) && typeof stop["toward_place_id"] === "string") {
+        found.push(stop["toward_place_id"])
+      }
+    }
+  }
+
   return found
+}
+
+/** The stops of a chapter's journeys whose events the chapter does not reach. */
+function stopsOutsideChapter(records: Map<string, JsonObject>): string[] {
+  return [...records.values()]
+    .filter((record) => record["kind"] === "journey")
+    .flatMap((record) => {
+      const [revision] = record["revisions"] as JsonObject[]
+      const stops = (revision["content"] as JsonObject)["stops"] as JsonObject[]
+
+      return stops
+        .map((stop) => String(stop["event_id"]))
+        .filter((eventId) => !records.has(eventId))
+        .map((eventId) => `${String(record["record_id"])} stops at ${eventId}`)
+    })
 }
 
 function cited(claims: JsonObject[]): string[] {
@@ -530,7 +570,7 @@ export function compileChapter(
     (name, index) =>
       lookup.record(
         String(name),
-        ["place", "actor", "event", "relationship", "territory"],
+        ["place", "actor", "event", "relationship", "territory", "journey"],
         `${manifest.path}: include[${index}]`,
       ),
   )
@@ -572,6 +612,14 @@ export function compileChapter(
     for (const source of cited(compiled.claims)) {
       sourceNames.add(source.slice("lks:source:".length))
     }
+  }
+
+  const outside = stopsOutsideChapter(records)
+
+  if (outside.length > 0) {
+    throw new Error(
+      `${manifest.path}: a journey the chapter includes stops at events the chapter does not reach, so the map would draw through them (${outside.join("; ")}); step through or include those events, or leave the journey out`,
+    )
   }
 
   const sourceFiles = [...sourceNames].sort().map((name) => {

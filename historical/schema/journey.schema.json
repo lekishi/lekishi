@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lekishi/lekishi/historical/schema/journey.schema.json",
+  "title": "Lekishi record file: journey",
+  "description": "historical/journeys/**/<id>.yaml (RFD 2, \"Decided: the journey record\"): one party's movement through an ordered list of stops. A stop is an event, at one of the event's own places; the journey's `cite` supports the order and the travellers, and a stop's `cite` supports its arriving leg. A leg set out for an unreached place (`toward`) or driven off course (`driven`) needs a stop cite of its own. A cited reconstructed route (`route`) is decided but not built yet; it arrives with the first journey that cites one.",
+  "type": "object",
+  "required": ["title", "summary", "travellers", "stops", "cite"],
+  "additionalProperties": false,
+  "properties": {
+    "title": { "$ref": "common.schema.json#/$defs/note" },
+    "summary": { "$ref": "common.schema.json#/$defs/text" },
+    "travellers": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 50,
+      "items": {
+        "type": "object",
+        "required": ["actor", "role"],
+        "additionalProperties": false,
+        "properties": {
+          "actor": { "$ref": "common.schema.json#/$defs/name" },
+          "role": {
+            "$ref": "../v0/schema/kinds.schema.json#/$defs/event_content/properties/participants/items/properties/role"
+          },
+          "note": { "$ref": "common.schema.json#/$defs/note" }
+        }
+      }
+    },
+    "stops": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 200,
+      "items": {
+        "anyOf": [
+          { "$ref": "common.schema.json#/$defs/name" },
+          {
+            "type": "object",
+            "required": ["event"],
+            "additionalProperties": false,
+            "properties": {
+              "event": { "$ref": "common.schema.json#/$defs/name" },
+              "place": { "$ref": "common.schema.json#/$defs/name" },
+              "by": { "enum": ["sea", "river", "land"] },
+              "driven": { "const": true },
+              "toward": { "$ref": "common.schema.json#/$defs/name" },
+              "cite": { "$ref": "common.schema.json#/$defs/cite" }
+            }
+          }
+        ]
+      }
+    },
+    "notes": { "$ref": "common.schema.json#/$defs/text" },
+    "cite": { "$ref": "common.schema.json#/$defs/cite" }
+  }
+}

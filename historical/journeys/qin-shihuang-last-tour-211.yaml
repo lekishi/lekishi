@@ -1,6 +1,6 @@
-# Proposed contract v1 journey record (RFD 2, "Proposed: the journey record", draft PR #26).
-# Not compiled yet: the compiler reads no historical/journeys/ folder until v1 lands, so this
-# file is test data for that work and changes no chapter's digest.
+# yaml-language-server: $schema=../schema/journey.schema.json
+# Journey record (RFD 2, "Decided: the journey record"). No chapter includes it yet,
+# so it changes no chapter's digest; the tests still compile it and check it against the contract.
 title: 秦始皇's last tour, 211–210 BCE
 summary: >-
   始皇 sets out from 咸陽 late in 211 BCE with 李斯 and 胡亥, reaches 雲夢, sails down the 江 to 錢唐,

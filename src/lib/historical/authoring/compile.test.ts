@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest"
 import * as Publication from "../contract/publication"
 import { isObject, type JsonObject } from "../contract/types"
 import { compileChapter, RECORD_FILES_ADOPTED_AT } from "./compile"
-import { buildTree, type TreeFile } from "./tree"
+import { buildTree, readFiles, readTree, type TreeFile } from "./tree"
 
 /**
  * The record-file compiler against a small synthetic tree.
@@ -902,4 +902,250 @@ cite:
       ),
     ).toThrow(/controller: no actor record is named example-harbour/)
   })
+})
+
+describe("compiling a journey", () => {
+  // Two located places and the anchored harbour: a leg is drawn between the
+  // located ones and the line breaks at the anchor.
+  const located = (name: string, point: string) => `
+summary: An example ${name}.
+types: [port]
+names:
+  - form: 例${name}
+    lang: lzh
+    script: Hani
+    cite:
+      says: The chronicle names the ${name}.
+      source: example-chronicle
+      at: 卷一
+at:
+  interpretation: approximate_point
+  precision: locality
+  point: ${point}
+  notes: Placed at the locality the chronicle names.
+  cite:
+    says: The chronicle places the ${name} in this locality.
+    source: example-chronicle
+    at: 卷一
+`
+  const stopEvent = (place: string, date: string, extra = "") => `
+summary: The envoy is at the ${place}.
+types: [journey]
+date:
+  value: ${date}
+  calendar: chinese_lunisolar
+  cite:
+    says: The chronicle dates the stop.
+    source: example-chronicle
+    at: 卷一
+places:
+  - place: ${place}
+    role: site
+${extra}`
+  const JOURNEY = `
+title: The envoy's example voyage
+summary: The envoy sails from the cape by the isle to the harbour.
+travellers:
+  - actor: example-envoy
+    role: leader
+stops:
+  - example-departure
+  - event: example-call
+    by: sea
+  - event: example-landing
+    by: sea
+    driven: true
+    toward: example-cape
+    cite:
+      says: The chronicle says the ship was driven to the harbour on its way back to the cape.
+      source: example-chronicle
+      at: 卷二
+cite:
+  id: example-voyage-sequence
+  says: The chronicle narrates the departure, the call and the landing in this order.
+  source: example-chronicle
+  at: 卷一至卷二
+`
+  const steps = (...names: string[]) =>
+    `${manifest("include: [example-voyage]").replace(
+      "    - example-landing: The envoy lands\n",
+      names.map((name) => `    - ${name}: A stop\n`).join(""),
+    )}`
+
+  function voyage(overrides: Record<string, string | null> = {}) {
+    return files({
+      "places/example-cape.yaml": located("cape", "[121.0, 31.0]"),
+      "places/example-isle.yaml": located("isle", "[130.5, 30.4]"),
+      "events/example-departure.yaml": stopEvent("example-cape", "753-11-15"),
+      "events/example-call.yaml": stopEvent("example-isle", "753-12-07"),
+      "journeys/example/example-voyage.yaml": JOURNEY,
+      "chapters/example-chapter.yaml": steps(
+        "example-departure",
+        "example-call",
+        "example-landing",
+      ),
+      ...overrides,
+    })
+  }
+
+  it("compiles stops at their events' places, and draws a leg only between located places", () => {
+    const bundle = compileChapter(buildTree(voyage()), "example-chapter", { preview: true })
+    const revision = record(bundle.documents, "lks:journey:example-voyage")
+    const stops = (revision["content"] as JsonObject)["stops"] as JsonObject[]
+
+    expect(stops.map((stop) => [stop["event_id"], stop["place_id"]])).toEqual([
+      ["lks:event:example-departure", "lks:place:example-cape"],
+      ["lks:event:example-call", "lks:place:example-isle"],
+      ["lks:event:example-landing", "lks:place:example-harbour"],
+    ])
+    expect(stops[1]).toMatchObject({
+      mode: "sea",
+      geometry: [
+        {
+          claim_id: "lks:claim:example-voyage-sequence",
+          interpretation: "schematic_link",
+          geojson: {
+            type: "LineString",
+            coordinates: [
+              [121.0, 31.0],
+              [130.5, 30.4],
+            ],
+          },
+          waypoints: [
+            { place_id: "lks:place:example-cape" },
+            { place_id: "lks:place:example-isle" },
+          ],
+        },
+      ],
+    })
+    // The harbour is a display anchor, so the line breaks there; the drift and
+    // the intended destination stay on the stop.
+    expect(stops[2]).toEqual({
+      event_id: "lks:event:example-landing",
+      place_id: "lks:place:example-harbour",
+      mode: "sea",
+      driven: true,
+      toward_place_id: "lks:place:example-cape",
+    })
+    expect(Publication.checkAll(bundle.documents, bundle.sets)).toEqual(
+      expect.objectContaining({ ok: true }),
+    )
+  })
+
+  it("names contract v0 throughout a bundle that publishes a journey", () => {
+    const bundle = compileChapter(buildTree(voyage()), "example-chapter", { preview: true })
+    const contracts = new Set(
+      [...bundle.documents, ...bundle.sets].map((document) => document["contract"]),
+    )
+
+    expect(contracts).toEqual(new Set(["lekishi-historical-contract/v0"]))
+  })
+
+  it("fails a chapter that includes a journey without reaching every stop", () => {
+    expect(() =>
+      compileChapter(
+        buildTree(
+          voyage({
+            "chapters/example-chapter.yaml": steps("example-departure", "example-landing"),
+          }),
+        ),
+        "example-chapter",
+      ),
+    ).toThrow(/lks:journey:example-voyage stops at lks:event:example-call/)
+  })
+
+  it("refuses a stop at a context place, and asks which place when an event has several", () => {
+    const context = voyage({
+      "events/example-call.yaml": stopEvent("example-isle", "753-12-07").replace(
+        "role: site",
+        "role: context",
+      ),
+    })
+    const several = voyage({
+      "events/example-call.yaml": stopEvent(
+        "example-isle",
+        "753-12-07",
+        "  - place: example-cape\n    role: waypoint\n",
+      ),
+    })
+
+    expect(() => compileChapter(buildTree(context), "example-chapter")).toThrow(
+      /puts the party at no place/,
+    )
+    expect(() => compileChapter(buildTree(several), "example-chapter")).toThrow(
+      /write which one with place:/,
+    )
+    expect(() =>
+      compileChapter(
+        buildTree(
+          voyage({
+            "events/example-call.yaml": stopEvent(
+              "example-isle",
+              "753-12-07",
+              "  - place: example-cape\n    role: waypoint\n",
+            ),
+            "journeys/example/example-voyage.yaml": JOURNEY.replace(
+              "  - event: example-call\n",
+              "  - event: example-call\n    place: example-isle\n",
+            ),
+          }),
+        ),
+        "example-chapter",
+      ),
+    ).not.toThrow()
+  })
+
+  it("needs a cite of its own for a drift or an intended destination", () => {
+    const uncited = JOURNEY.replace(
+      /    cite:\n      says: The chronicle says[^\n]*\n[^\n]*\n[^\n]*\n/,
+      "",
+    )
+
+    expect(() =>
+      compileChapter(
+        buildTree(voyage({ "journeys/example/example-voyage.yaml": uncited })),
+        "example-chapter",
+      ),
+    ).toThrow(/needs a cite of its own/)
+  })
+})
+
+describe("the journeys in the record tree", () => {
+  const tree = readTree()
+
+  // A journey no chapter includes yet is still checked: each compiles in a
+  // chapter of its own that steps through its stops, and that bundle must
+  // pass the contract, so a journey is valid before a chapter publishes it.
+  for (const [id, file] of tree.records) {
+    if (file.kind !== "journey") {
+      continue
+    }
+
+    it(`${file.path} compiles and passes the contract`, () => {
+      const stops = (file.data["stops"] as (string | JsonObject)[]).map((stop) =>
+        typeof stop === "string" ? stop : String(stop["event"]),
+      )
+      const chapter: TreeFile = {
+        path: "chapters/journey-check.yaml",
+        text: [
+          "title: Journey check",
+          "summary: Compiles one journey.",
+          "window: 1..2",
+          `include: [journey:${id.slice("lks:journey:".length)}]`,
+          "story:",
+          "  summary: Every stop of the journey.",
+          "  span: 1..2",
+          "  steps:",
+          ...[...new Set(stops)].map((stop) => `    - ${stop}: A stop`),
+        ].join("\n"),
+      }
+      const bundle = compileChapter(buildTree([...readFiles(), chapter]), "journey-check", {
+        preview: true,
+      })
+
+      expect(Publication.checkAll(bundle.documents, bundle.sets)).toEqual(
+        expect.objectContaining({ ok: true }),
+      )
+    })
+  }
 })

@@ -56,6 +56,7 @@ export const KIND_FOLDERS: Record<FileKind, string> = {
   event: "events",
   relationship: "relationships",
   territory: "territories",
+  journey: "journeys",
   source: "sources",
   chapter: "chapters",
 }

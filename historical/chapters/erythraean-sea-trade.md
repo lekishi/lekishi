@@ -69,10 +69,10 @@ coordinate, rather than at a port the text does not name.
 ## Shared ids
 
 Barygaza is the 玄奘 chapter's `bharukaccha`, now on `main`, with the Periplus
-name and the Pleiades identification folded in. Two places use the ids the
-Ashoka chapter mints for the same place, so that the duplicate fails the build
-and is merged rather than living as two records: `ujjayini` (Ozene) and `lanka`
-(Taprobane). `pliny-natural-history` is the
+name and the Pleiades identification folded in. Ozene and Taprobane are the
+Ashoka chapter's `ujjayini` and `lanka`, now on `main` (PR #39), with the
+Periplus names and the Pleiades identifications folded in; both keep that
+chapter's label anchors. `pliny-natural-history` is the
 merged record the Nile thread wrote for both chapters, copied byte for byte.
 
 `rome` is the record the Stephen II chapter minted on `main`; this chapter

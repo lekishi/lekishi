@@ -32,13 +32,14 @@ Records the manifest reaches:
 | ------------- | ------- | ------------------------------------------- |
 | Events        | 30      | `historical/events/xerxes/`                 |
 | Relationships | 5       | `historical/relationships/xerxes/`          |
-| Places        | 32      | `historical/places/greece-persia/`          |
+| Places        | 32      | `historical/places/greece-persia/`, and Delphi at `historical/places/hannibal/` |
 | Actors        | 15      | `historical/actors/greece-persia/`          |
-| Sources       | 3       | `herodotus`, `grote-history-of-greece`, `pleiades` |
+| Sources       | 5       | `herodotus`, `grote-history-of-greece`, `pleiades`, and `livy` and `wikidata` through Delphi |
 
 The places and actors are written once for the atlas: Sardis, Kelainai,
 Abydos, Elaius, Sestos and Thebes, the Persian Empire, Sparta and Thebes as
-states are shared with the Ten Thousand or Alexander chapters.
+states are shared with the Ten Thousand or Alexander chapters. Delphi is the
+Hannibal chapter's record, which this chapter reaches as it is.
 
 ## Evidence
 

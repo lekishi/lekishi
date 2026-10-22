@@ -18,9 +18,11 @@ groups rather than towns.
 - 10 events (the expansion, 9 dated settlements and phases), 9 places, 1 actor
   (the Lapita culture), and no relationships while the obsidian finds are held
   back (below).
-- A proposed v1 journey in
-  [`historical/journeys/lapita-expansion.yaml`](../journeys/lapita-expansion.yaml)
-  with the one `reconstructed_route` leg, not compiled.
+- A journey sketch in
+  [`rfd/0002/journey-counterexamples/lapita-expansion.yaml`](../../rfd/0002/journey-counterexamples/lapita-expansion.yaml)
+  with the one `reconstructed_route` leg. A population movement is not one
+  party's, and `route:` has no authoring support yet, so the decided journey
+  record rejects it, and it is not compiled.
 
 ## Sources and reuse
 

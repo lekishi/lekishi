@@ -20,9 +20,10 @@ in the same decades, gives the route from Alexandria to Muziris in days.
   Hippalus crossing, the destruction of Eudaemon Arabia, the freedman's drift
   and the Taprobane embassy), 27 places, 15 actors, 14 relationships (13
   trade, 1 diplomacy).
-- A proposed v1 journey in
-  [`historical/journeys/pliny-india-route.yaml`](../journeys/pliny-india-route.yaml),
-  not compiled.
+- A journey sketch in
+  [`rfd/0002/journey-counterexamples/pliny-india-route.yaml`](../../rfd/0002/journey-counterexamples/pliny-india-route.yaml).
+  It has no travellers, so the decided journey record rejects it, and it is not
+  compiled.
 
 ## Sources and reuse
 

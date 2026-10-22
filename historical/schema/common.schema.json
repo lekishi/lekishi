@@ -117,9 +117,16 @@
         "value": { "$ref": "#/$defs/date_value" },
         "mode": { "enum": ["instant", "window", "duration"] },
         "calendar": { "$ref": "../v0/schema/common.schema.json#/$defs/time/properties/calendar" },
+        "correlation": {
+          "description": "A mesoamerican_long_count date only: the Julian day number of 0.0.0.0.0 the source's conversion uses, such as 584283, or `not stated` when the source gives none.",
+          "anyOf": [{ "type": "integer", "minimum": 0 }, { "const": "not stated" }]
+        },
         "as_written": { "type": "string", "minLength": 1, "maxLength": 500 },
         "cite": { "$ref": "#/$defs/cite" }
-      }
+      },
+      "if": { "properties": { "calendar": { "const": "mesoamerican_long_count" } } },
+      "then": { "required": ["correlation"] },
+      "else": { "not": { "required": ["correlation"] } }
     },
     "local_name": {
       "description": "A name form. The first name is the primary one unless `role` says otherwise. `roman` is an editorial reading aid, never a claim about historical pronunciation. A name links to its own first main claim unless `claim` names another of the record's claims.",

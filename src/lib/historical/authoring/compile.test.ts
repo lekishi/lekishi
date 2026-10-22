@@ -424,6 +424,25 @@ describe("compiling a chapter", () => {
         .every((document) => document["publication"] === null),
     ).toBe(true)
   })
+
+  it("compiles a Long Count date with its correlation", () => {
+    const stela = EVENT.replace("753-12-20", "36 BCE").replace(
+      "calendar: chinese_lunisolar",
+      "calendar: mesoamerican_long_count\n  correlation: 584283",
+    )
+    const bundle = compileChapter(
+      buildTree(files({ "events/example/deep/example-landing.yaml": stela })),
+      "example-chapter",
+      { preview: true },
+    )
+
+    expect(record(bundle.documents, "lks:event:example-landing")["content"]).toMatchObject({
+      time: { calendar: "mesoamerican_long_count", correlation: 584283 },
+    })
+    expect(Publication.checkAll(bundle.documents, bundle.sets)).toEqual(
+      expect.objectContaining({ ok: true }),
+    )
+  })
 })
 
 describe("compiling a chapter with several stories", () => {

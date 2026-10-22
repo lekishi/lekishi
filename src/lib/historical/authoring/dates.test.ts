@@ -10,6 +10,27 @@ import { compileTime, compileWindow, formatRange, parseRange } from "./dates"
  */
 
 describe("the short date notation", () => {
+  it("carries a Long Count date's correlation, or null when the source states none", () => {
+    const stela = {
+      value: "36 BCE",
+      calendar: "mesoamerican_long_count",
+      as_written: "7.16.3.2.13",
+    }
+
+    expect(compileTime({ ...stela, correlation: 584283 })).toMatchObject({
+      calendar: "mesoamerican_long_count",
+      correlation: 584283,
+      interval: { start: { year: 36, era: "bce" } },
+    })
+    expect(compileTime({ ...stela, correlation: "not stated" })["correlation"]).toBeNull()
+    expect(() => compileTime(stela)).toThrow(/needs a correlation/)
+    expect(() => compileTime({ ...stela, correlation: "GMT" })).toThrow(/needs a correlation/)
+    expect(() => compileTime({ value: "36 BCE", calendar: "julian", correlation: 584283 })).toThrow(
+      /only a mesoamerican_long_count date has a correlation/,
+    )
+    expect(compileTime({ value: "36 BCE", calendar: "julian" })).not.toHaveProperty("correlation")
+  })
+
   it("writes day, month and year precision", () => {
     expect(compileTime({ value: "753-12-20", calendar: "chinese_lunisolar" })).toMatchObject({
       precision: "day",

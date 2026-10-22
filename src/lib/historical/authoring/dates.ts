@@ -37,6 +37,8 @@ const MODES: Record<string, string> = {
   duration: "duration",
 }
 
+const LONG_COUNT = "mesoamerican_long_count"
+
 const ENDPOINT = /^([1-9][0-9]*)(?:-([0-9]{2})(?:-([0-9]{2}))?)?(?: (BCE))?$/
 const DECADE = /^([1-9][0-9]*0)s(?: (BCE))?$/
 const CENTURY = /^([1-9][0-9]*)(st|nd|rd|th) century(?: (BCE))?$/
@@ -222,10 +224,11 @@ export function parseRange(value: unknown): {
 
 /**
  * A record file's date block (`value`, `calendar`, `as_written`, optional
- * `mode`) as the contract's `time` object. A single date defaults to `instant`;
- * a range, a decade, a century or a one-sided date must say whether it is one
- * occurrence somewhere inside it (`window`) or activity across it (`duration`),
- * because the two answer playback differently and neither is a safe default.
+ * `mode`, and `correlation` for a Long Count) as the contract's `time` object.
+ * A single date defaults to `instant`; a range, a decade, a century or a
+ * one-sided date must say whether it is one occurrence somewhere inside it
+ * (`window`) or activity across it (`duration`), because the two answer
+ * playback differently and neither is a safe default.
  */
 export function compileTime(block: JsonObject): JsonObject {
   const range = parseRange(block["value"])
@@ -246,6 +249,7 @@ export function compileTime(block: JsonObject): JsonObject {
   return {
     source_expression: block["as_written"] === undefined ? null : (block["as_written"] as string),
     calendar: block["calendar"] as string,
+    ...correlation(block),
     precision: range.precision,
     mode,
     interval: {
@@ -255,6 +259,36 @@ export function compileTime(block: JsonObject): JsonObject {
       end: range.end,
     },
   }
+}
+
+/**
+ * A Long Count date's `correlation` (RFD 2, "Decided: a Mesoamerican Long Count
+ * calendar"): the Julian day number of 0.0.0.0.0 the source's
+ * conversion uses, or `not stated`, which the contract records as null. No other
+ * calendar carries one.
+ */
+function correlation(block: JsonObject): JsonObject {
+  const written = block["correlation"]
+
+  if (block["calendar"] !== LONG_COUNT) {
+    if (written !== undefined) {
+      throw new Error(`only a ${LONG_COUNT} date has a correlation`)
+    }
+
+    return {}
+  }
+
+  if (written === "not stated") {
+    return { correlation: null }
+  }
+
+  if (typeof written !== "number" || !Number.isInteger(written) || written < 0) {
+    throw new Error(
+      `a ${LONG_COUNT} date needs a correlation: the Julian day number of 0.0.0.0.0 its source uses, such as 584283, or "not stated"`,
+    )
+  }
+
+  return { correlation: written }
 }
 
 /** A story span (`750..779`) as the story's inclusive `window`. */

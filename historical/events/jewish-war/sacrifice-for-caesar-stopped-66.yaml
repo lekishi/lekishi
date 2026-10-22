@@ -11,13 +11,17 @@ date:
   cite:
     - id: sacrifice-for-caesar-stopped-66-year
       says: "Meistermann's 1910 history of Jerusalem dates the revolt under Gessius Florus to 66."
-      basis: interpretation
-      attributed_to: B. Meistermann (1910)
-      source: catholic-encyclopedia
-      at: "Jerusalem (Before A.D. 71), by B. Meistermann (vol. 8, 1910), Herod Agrippa I to the
-        destruction"
-      quote: "Gessius Florus (66) surpassed the wickedness of his predecessors, and drove the people
-        to revolt against the Roman domination"
+      basis: conventional
+      convention: Josephus's order of the war on the standard chronology of Nero's and Vespasian's reigns
+      sources:
+        - source: josephus-jewish-war
+          at: "2.17.2"
+        - source: catholic-encyclopedia
+          at: "Jerusalem (Before A.D. 71), by B. Meistermann (vol. 8, 1910), Herod Agrippa I to the
+            destruction"
+          quote:
+            "Gessius Florus (66) surpassed the wickedness of his predecessors, and drove the people
+            to revolt against the Roman domination"
 places:
   - place: jerusalem
     role: site

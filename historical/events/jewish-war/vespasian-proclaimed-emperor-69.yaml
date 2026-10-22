@@ -11,12 +11,16 @@ date:
   cite:
     - id: vespasian-proclaimed-emperor-69-year
       says: "Hoeber's 1910 article on Josephus dates Vespasian's becoming emperor to 69."
-      basis: interpretation
-      attributed_to: K. Hoeber (1910)
-      source: catholic-encyclopedia
-      at: "Flavius Josephus, by K. Hoeber (vol. 8, 1910)"
-      quote: "it was only in the year 69, after he had actually become emperor, that he restored to
-        Josephus his liberty"
+      basis: conventional
+      convention: Josephus's order of the war on the standard chronology of Nero's and Vespasian's reigns
+      sources:
+        - source: josephus-jewish-war
+          at: "4.10.4"
+        - source: catholic-encyclopedia
+          at: "Flavius Josephus, by K. Hoeber (vol. 8, 1910)"
+          quote:
+            "it was only in the year 69, after he had actually become emperor, that he restored to
+            Josephus his liberty"
 places:
   - place: caesarea-maritima
     role: site

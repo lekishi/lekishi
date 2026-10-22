@@ -11,11 +11,14 @@ date:
   cite:
     - id: temple-burned-70-year
       says: "Whiston's note dates the seventeenth of Panemus, three weeks before, to A.D. 70."
-      basis: interpretation
-      attributed_to: W. Whiston (1737)
-      source: josephus-jewish-war
-      at: "6.2.1, Whiston's note 5"
-      quote: "the seventeenth of Panemuns. [Footnote Tamuz,] A.D. 70"
+      basis: conventional
+      convention: Josephus's order of the war on the standard chronology of Nero's and Vespasian's reigns
+      sources:
+        - source: josephus-jewish-war
+          at: "6.4.5"
+        - source: josephus-jewish-war
+          at: "6.2.1, Whiston's note 5"
+          quote: "the seventeenth of Panemuns. [Footnote Tamuz,] A.D. 70"
     - id: temple-burned-date
       says: "Josephus dates the burning to the tenth of Lous, the day the first temple was burned by
         the king of Babylon."

@@ -25,7 +25,7 @@ He is an actor in the chapter as well as its source, and the records say so.
 | Source | Edition read | Terms | Use |
 |---|---|---|---|
 | Josephus, *The Wars of the Jews* | Whiston's translation (1737) with his notes, Project Gutenberg eBook 2850, read 2026-10-21 (new `josephus-jewish-war` source) | Public domain | Quoted, cited by Whiston's book, chapter and section |
-| *Catholic Encyclopedia* vol. 8 (1910): B. Meistermann, "Jerusalem (Before A.D. 71)"; K. Hoeber, "Flavius Josephus" | New Advent transcription, read 2026-10-21 (the `catholic-encyclopedia` source added with Paul's journeys) | Work public domain; the website is noted, not copied | Years, quoted, as interpretations attributed to their authors |
+| *Catholic Encyclopedia* vol. 8 (1910): B. Meistermann, "Jerusalem (Before A.D. 71)"; K. Hoeber, "Flavius Josephus" | New Advent transcription, read 2026-10-21 (the `catholic-encyclopedia` source added with Paul's journeys) | Work public domain; the website is noted, not copied | Years, quoted, as the reference for conventional dates and as supporting interpretations |
 | Pleiades | Daily dump of 2026-10-21 (shared `pleiades` source) | CC BY 3.0 | Every coordinate, as an interpretation attributed to Pleiades |
 
 Every quotation was checked by script against the downloaded text on
@@ -39,11 +39,21 @@ the quotations need re-checking against the Greek before release.
 Josephus dates by Macedonian month and the regnal year of Nero, Agrippa or
 Vespasian ("the eighth day of the month Dius, in the twelfth year of the reign
 of Nero"); Whiston adds the Hebrew month in brackets. Each record keeps those
-words in `as_written` and as a supporting claim. The Julian year is a separate
-interpretation: Meistermann (1910) for 66 and 67, Whiston's note (1737) for 70,
-Hoeber (1910) for 69 and the end of the war in 73. Herodium and Machaerus,
-which Josephus does not date, take the window between the fall of Jerusalem and
-Masada.
+words in `as_written`. The years follow the three cases of
+`rfd/0002/CONVENTIONAL_DATES.adoc`:
+
+- *Attested* (4): the outbreak at Caesarea, Cestius's defeat, Jotapata and the
+  taking of Jerusalem, where Josephus names the regnal year himself. The
+  reference work's year (Meistermann, 1910, or Whiston's note, 1737) is a
+  supporting interpretation.
+- *Conventional* (10): events Josephus places by order alone, such as the
+  garrison massacre, Gamala, the burning of the Temple and Vespasian's
+  proclamation. Each cites the passage that places it and the reference work
+  that states the year, on the standard chronology of Nero's and Vespasian's
+  reigns.
+- *Interpretation* (2): Masada, which Josephus gives no year and for which 73
+  and 74 are both argued (Hoeber's 73 is used), and Herodium and Machaerus,
+  which take the window between the fall of Jerusalem and Masada.
 
 Meistermann also gives day-level Julian dates for the siege of Jerusalem (for
 example "8 Elul (1 August)"). They are not used: his conversions disagree with
@@ -78,8 +88,9 @@ territory is drawn.
 
 ## What it tests in the engine
 
-- Every event with two kinds of date claim: the source's own (month and
-  regnal year) as supporting, and a reference work's year as the main claim.
+- All three bases for a year in one chapter: regnal years attested by the
+  source, years placed by sequence as conventional, and a disputed year as an
+  interpretation.
 - A narrow theatre (Galilee, Judaea and the Dead Sea) with fortresses close
   together.
 - An author who appears as an actor in his own source.

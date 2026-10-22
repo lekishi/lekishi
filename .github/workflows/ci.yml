@@ -66,52 +66,12 @@ jobs:
       - name: Check generated brand assets
         run: pnpm brand:check
 
-  production:
-    # The build production runs, without drafts (RFD 2, "Decided: a missing
-    # approval never fails a build"). It leaves out every chapter whose approval
-    # does not match its content and still has to pass, and it lists what awaits
-    # the owner's approval in the job summary. Nothing here fails for a missing
-    # approval; only the owner approves, with `pnpm approvals`.
-    runs-on: ubuntu-24.04
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          package_json_file: package.json
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
-          cache-dependency-path: pnpm-lock.yaml
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: List the chapters and what awaits approval
-        run: pnpm approvals | tee -a "$GITHUB_STEP_SUMMARY"
-
-      - name: Build as production does
-        run: pnpm build
-
-      # The members' draft path through the built Pages worker (RFD 6): one
-      # approved chapter is made stale for this build only, and a member's
-      # session must open it while no session, a forged one or an expired one
-      # gets the same 404 as an unknown chapter. The tiles are already built, so
-      # only the app is rebuilt.
-      - name: Check the worker's drafts with a stale chapter
-        run: pnpm check:worker
-
   build:
     # Builds the static artifact once, with its build invariant, and hands it to
-    # every browser job. Painting the globe tiles is most of the time when the
-    # builder changes; the painter uses one process per CPU, and GitHub's
-    # standard runner for a public repository has four.
+    # every browser job. Once that draft artifact is safely uploaded, this job
+    # also builds and exercises the production-shaped worker with a stale
+    # chapter. Painting the globe tiles is most of the time when the builder
+    # changes; both builds reuse one generated set.
     runs-on: ubuntu-24.04
 
     steps:
@@ -162,7 +122,7 @@ jobs:
       # The artifact serves drafts, as a pull-request preview does, so the
       # browser checks run on content awaiting approval. Production (the
       # Cloudflare build of `main`) never sets this and leaves unapproved
-      # chapters out; the `production` job checks that build.
+      # chapters out; the worker check below exercises that build mode.
       - name: Build the static artifact
         run: pnpm build
         env:
@@ -175,6 +135,18 @@ jobs:
           path: build/
           if-no-files-found: error
           retention-days: 7
+
+      # A missing or stale approval does not fail production; it leaves that
+      # chapter out until the owner approves it. Keep the decision visible in
+      # the job summary without ever changing an approval here.
+      - name: List the chapters and what awaits approval
+        run: pnpm approvals | tee -a "$GITHUB_STEP_SUMMARY"
+
+      # Exercise the emitted Pages worker rather than only its unit-tested
+      # handlers. The check temporarily makes one approved chapter stale,
+      # rebuilds without public drafts, and verifies member-only access locally.
+      - name: Check the production worker with a stale chapter
+        run: pnpm check:worker
 
   e2e:
     # Runs the atlas browser checks against the artifact `build` produced, with

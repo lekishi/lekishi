@@ -453,11 +453,13 @@ for (const file of [
   "lekishi-serif.woff2",
   "lekishi-serif-tc.woff2",
   "lekishi-sans.woff2",
+  "lekishi-arabic.woff2",
   "lekishi-latin-fallback.woff2",
   "cinzel-OFL.txt",
   "notoserifjp-OFL.txt",
   "notoseriftc-OFL.txt",
   "notosansjp-OFL.txt",
+  "notonaskharabic-OFL.txt",
   "notoserif-OFL.txt",
   "coverage.json",
 ]) {

@@ -17,6 +17,8 @@ Which characters each face carries:
   TC fills the traditional forms Noto Serif JP does not draw).
 - "missing-from:*": any character no earlier face carries (Noto Serif fills
   the rare Latin letters, such as the ṭ of Tripiṭaka, the JP faces lack).
+- "arabic": the corpus's Arabic-script characters (Noto Naskh Arabic draws
+  modern Arabic names, such as قرطاج for Carthage).
 - "non-han": the corpus without Han ideographs. Interface text is Noto Sans
   JP; a Han character in it falls through the stack to the serif, so the
   ideographs ship once rather than twice.
@@ -38,13 +40,28 @@ from fontTools.ttLib import TTFont
 from fontTools.varLib import instancer
 
 # Layout features worth their bytes: kerning, ligatures, tabular figures for
-# dates, proportional CJK punctuation, and the defaults fontTools keeps.
-FEATURES = ["kern", "liga", "calt", "tnum", "palt", "locl", "ccmp", "mark", "mkmk"]
+# dates, proportional CJK punctuation, the defaults fontTools keeps, and the
+# joining forms without which Arabic letters are set unconnected.
+FEATURES = [
+    "kern", "liga", "calt", "tnum", "palt", "locl", "ccmp", "mark", "mkmk",
+    "isol", "init", "medi", "fina", "rlig", "curs",
+]
 
 
 def is_han(char: str) -> bool:
     return unicodedata.name(char, "").startswith("CJK UNIFIED IDEOGRAPH") or (
         "CJK COMPATIBILITY IDEOGRAPH" in unicodedata.name(char, "")
+    )
+
+
+def is_arabic(char: str) -> bool:
+    code = ord(char)
+    return (
+        0x0600 <= code <= 0x06FF
+        or 0x0750 <= code <= 0x077F
+        or 0x08A0 <= code <= 0x08FF
+        or 0xFB50 <= code <= 0xFDFF
+        or 0xFE70 <= code <= 0xFEFF
     )
 
 
@@ -77,6 +94,8 @@ def main() -> None:
             wanted = {char for char in corpus if not is_cjk(char)}
         elif rule == "all":
             wanted = set(corpus)
+        elif rule == "arabic":
+            wanted = {char for char in corpus if is_arabic(char)}
         elif rule == "non-han":
             wanted = {char for char in corpus if not is_han(char)}
         elif rule == "missing-from:*":

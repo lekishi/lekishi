@@ -70,8 +70,9 @@ words.
 Three families: **Cinzel** (`font-display`) for Latin display titles only,
 **Noto Serif JP** (`font-serif`) for historical names, quotations and narrative,
 and **Noto Sans JP** (`font-interface`) for interface text and numbers. Noto
-Serif TC draws the traditional Han forms the Japanese face lacks, and Noto Serif
-draws the Latin diacritics of romanizations (ṭ, ā).
+Serif TC draws the traditional Han forms the Japanese face lacks, Noto Naskh
+Arabic draws Arabic-script names (قرطاج), and Noto Serif draws the Latin
+diacritics of romanizations (ṭ, ā).
 
 The faces are self-hosted and subset at build time: `pnpm sync:fonts` fetches
 the files pinned by commit and sha256 in `scripts/fonts/sources.json` and cuts

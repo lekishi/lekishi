@@ -41,6 +41,13 @@
   font-display: swap;
 }
 @font-face {
+  font-family: "Noto Naskh Arabic";
+  src: url("/fonts/lekishi-arabic.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+}
+@font-face {
   font-family: "Noto Serif";
   src: url("/fonts/lekishi-latin-fallback.woff2") format("woff2");
   font-weight: 400 700;
@@ -113,17 +120,18 @@
    * to the characters the site sets (`pnpm sync:fonts`, RFD 5 "Typography"),
    * so nothing is fetched from a font provider. A face carries only its own
    * job: Cinzel the Latin display, Noto Serif JP the historical names and
-   * narrative (Noto Serif TC fills the forms JP lacks, Noto Serif the rare
-   * Latin letters), Noto Sans JP the interface without ideographs, which fall
+   * narrative (Noto Serif TC fills the forms JP lacks, Noto Naskh Arabic the
+   * Arabic script, Noto Serif the rare Latin letters), Noto Sans JP the interface without ideographs, which fall
    * through to the serif so they ship once.
    */
-  --font-display: "Cinzel", "Noto Serif JP", "Noto Serif TC", "Noto Serif", ui-serif, serif;
+  --font-display:
+    "Cinzel", "Noto Serif JP", "Noto Serif TC", "Noto Naskh Arabic", "Noto Serif", ui-serif, serif;
   --font-serif:
-    "Noto Serif JP", "Noto Serif TC", "Noto Serif", "Hiragino Mincho ProN", "Yu Mincho", ui-serif,
-    serif;
+    "Noto Serif JP", "Noto Serif TC", "Noto Naskh Arabic", "Noto Serif", "Hiragino Mincho ProN",
+    "Yu Mincho", ui-serif, serif;
   --font-interface:
-    "Noto Sans JP", "Noto Serif JP", "Noto Serif TC", "Noto Serif", ui-sans-serif, system-ui,
-    sans-serif;
+    "Noto Sans JP", "Noto Serif JP", "Noto Serif TC", "Noto Naskh Arabic", "Noto Serif",
+    ui-sans-serif, system-ui, sans-serif;
 
   /*
    * The type scale: seven steps and a floor. Nothing below 12 px except the

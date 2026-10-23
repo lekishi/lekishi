@@ -1167,7 +1167,7 @@ test("switches between the Tang chapter's stories, with the story in the address
   await openChapter(page, TANG)
   await openExplore(page, "story")
 
-  await expect(page.getByTestId("atlas-story-option")).toHaveCount(2)
+  await expect(page.getByTestId("atlas-story-option")).toHaveCount(3)
   await expect(option("tang-mission-750-754")).toHaveAttribute("aria-current", "true")
 
   await option(crossings).click()

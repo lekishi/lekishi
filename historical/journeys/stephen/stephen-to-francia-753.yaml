@@ -1,0 +1,38 @@
+# yaml-language-server: $schema=../../schema/journey.schema.json
+title: Stephen II's journey to the Franks, 753–754
+summary: >-
+  Pope Stephen II leaves Rome on 14 October 753, meets Aistulf at Pavia in vain, leaves Pavia on
+  15 November, crosses mons Iovis to Saint-Maurice, meets Pepin at Ponthion on 6 January 754, and is
+  sent to winter at Saint-Denis.
+travellers:
+  - actor: stephen-ii
+    role: leader
+# The Frankish envoys' escort (saint-maurice-escort-753) is a second event at Saint-Maurice, not a
+# second stop; Charles's meeting on the road (charles-meets-stephen-753) has no stated place.
+stops:
+  - rome-departure-753
+  - pavia-arrival-753
+  - pavia-departure-753
+  - great-st-bernard-crossing-753
+  - saint-maurice-arrival-753
+  - ponthion-meeting-754
+  - saint-denis-winter-754
+cite:
+  - id: stephen-to-francia-sequence
+    says: >-
+      The life narrates the pope's departure from Rome, his stay at Pavia, his departure from Pavia on
+      15 November, his entry into Francia, the meeting with Pepin at Ponthion, and his being sent to
+      winter at Saint-Denis, in this order.
+    source: liber-pontificalis
+    at: egressus est ab hac Romana urbe … XIIII die octobrii … XV die novembris … a civitate Papia movens … ad exhibernandum pergere rogavit
+  - id: stephen-to-francia-pass
+    says: >-
+      The continuations report the pope coming to Pepin after crossing mons Iovis, and the king having
+      him winter at Saint-Denis.
+    source: fredegar-continuations
+    at: CXIX
+    quote: jam monte Jovis transmeato, ad ejus properaret adventum
+    role: supporting
+notes: >-
+  No leg states how the pope travelled, so no leg has a mode. The legs are schematic: no route is
+  asserted between the named places.

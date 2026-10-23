@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=../../schema/journey.schema.json
+title: Stephen II's return to Rome with the Frankish army, 754 or 755
+summary: >-
+  Pope Stephen II leaves Francia with Pepin's army by Lyon and Vienne to the Maurienne, is with the
+  king at the siege of Pavia, and is brought back to Rome by Fulrad after the peace.
+travellers:
+  - actor: stephen-ii
+    role: leader
+  - actor: fulrad
+    role: participant
+    note: Escorts the pope from Pavia to Rome.
+# The battle at the clusae (susa-clusae-battle-754) is not a stop: no source puts the pope there.
+stops:
+  - saint-denis-winter-754
+  - lyon-march-754
+  - vienne-march-754
+  - maurienne-camp-754
+  - pavia-siege-754
+  - stephen-return-rome-754
+cite:
+  - id: stephen-return-sequence
+    says: >-
+      The continuations have the army set out with Pope Stephen by Lyon and Vienne to the Maurienne
+      and on to Pavia.
+    source: fredegar-continuations
+    at: CXX
+    quote: cum Stephano papa, et reliquae nationes, quae in suo regno commorabantur, et Francorum agmina ad partes Langobardiae cum omni multitudine per Lugdunum Galliae et Viennam pergentes, usque Mauriennam pervenerunt
+  - id: stephen-return-pavia
+    says: The life has the pope with the king at the walls of Pavia.
+    source: liber-pontificalis
+    at: sequipes etiam eius et antefatus beatissimus papa factus, usque ad muros civitatis Papiae utrique pervenerunt
+    role: supporting
+  - id: stephen-return-rome
+    says: The annals have the pope brought back to the holy see by Pepin's envoys, Fulrad and others.
+    source: annales-regni-francorum
+    at: "s.a. 755: Eodemque anno Stephanus papa reductus est ad sanctam sedem per missos domni regis Pippini, Folradum et reliquis, qui cum eo erant"
+    role: supporting
+notes: >-
+  The annals put the campaign and the return in 755 and the life's order in 754, so every stop after
+  Saint-Denis carries the window 754..755. The journey shares its stops from Lyon to Pavia with
+  Pepin's campaign (pepin-campaign-754); the two part at Pavia.

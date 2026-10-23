@@ -124,32 +124,20 @@ The stops are modelled for the proposed journey record: each stop is an event
 with exactly one `site`, `start`, `end` or `waypoint` place, and everything
 else is `context`. Two events are deliberately not stops because their place is
 not stated (`charles-meets-stephen-753`, and `george-meets-pepin-754`, "not far
-from Pavia"). Once the kind exists, these journeys follow from the records
-without new events:
+from Pavia"). The journey kind has since been built (#53), and six journeys
+follow from the records without new events, in `historical/journeys/stephen/`:
 
-[source,yaml]
-----
-# historical/journeys/stephen-to-francia-753.yaml (proposed, not written)
-travellers: [{ actor: stephen-ii, role: leader }]
-stops:
-  - rome-departure-753
-  - pavia-arrival-753
-  - pavia-departure-753
-  - great-st-bernard-crossing-753
-  - saint-maurice-arrival-753
-  - ponthion-meeting-754
-  - saint-denis-winter-754
-cite: [{ source: liber-pontificalis, at: XIIII die octobrii … ad exhibernandum }]
-
-# stephen-return-754: saint-denis-winter-754, lyon-march-754, vienne-march-754,
-#   maurienne-camp-754, pavia-siege-754, stephen-return-rome-754
-# imperial-envoys-754: imperial-envoys-rome-754, imperial-envoys-marseille-754
-#   (by: sea — "marino itinere" is stated), george-meets-pepin-754 (context: breaks)
-# pepin-campaign-756: chalon-march-756, geneva-march-756, maurienne-march-756,
-#   mont-cenis-crossing-756, susa-clusae-756, pavia-siege-756
-# carloman-754: carloman-arrival-754, carloman-vienne-754, carloman-burial-755
-#   (place: vienne, then place: monte-cassino)
-----
+* `stephen-to-francia-753`: Rome, Pavia (arrival and departure), mons Iovis,
+  Saint-Maurice, Ponthion, Saint-Denis.
+* `stephen-return-754`: Saint-Denis, Lyon, Vienne, the Maurienne, the siege of
+  Pavia, Rome.
+* `pepin-campaign-754`: Lyon, Vienne, the Maurienne, the clusae, the siege of
+  Pavia. It shares its stops from Lyon to Pavia with the pope's return.
+* `pepin-campaign-756`: Chalon, Janua (read as Geneva), the Maurienne, the
+  Mont Cenis, the clusae, the second siege of Pavia.
+* `imperial-envoys-754`: Rome to Marseille, the chapter's only leg with a
+  stated mode (`by: sea`, "marino itinere").
+* `carloman-754`: Monte Cassino to Vienne.
 
 What it exercises that the Tang voyage does not: a land journey whose every
 stop has an asserted point, so legs are drawn end to end; two journeys sharing
@@ -186,4 +174,3 @@ unstated.
   Volturno, Comacchio and Narni as places.
 . A specialist review of the identifications (Ponthion, Berny, Janua, the
   clusae) and of the 754/755 chronology.
-. The journey records above, once PR #26's kind is accepted and built.

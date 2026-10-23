@@ -13,12 +13,30 @@ names:
         source: toseiden
         at: 夜發，經三日乃到振州江口泊舟
 at:
-  - interpretation: unknown
-    precision: unspecified
-    notes: The chronicle does not name 振州; it says the ship drifted to 日南, which is not identified with 振州 here. No modern identification is sourced here, so no coordinates are asserted. The identification of the prefecture's seat is listed as open work.
+  - interpretation: approximate_point
+    precision: region
+    point: [109.172, 18.357]
+    notes:
+      A region-level placement at the modern district of 崖州 in 三亞, standing for the prefecture. The
+      historical geography identifies the Tang 振州 with the 崖州 of its own day, the Song having
+      renamed it, and places the Tang seat 寧遠 at that 崖州's seat; the modern district carries that
+      later 崖州's name. The point is the district's modern coordinate. Neither the seat's site nor the
+      river mouth where the ship anchored is placed.
     cite:
-      - id: zhenzhou-location
-        says: The biography names 振州 and its river mouth without locating them, and no identification is sourced here, so the record carries no coordinates.
-        source: toseiden
-        at: 乃到振州江口泊舟
-notes: The biography later calls the whole journey 大和上從南振州來至揚府. The chronicle's notice names the drift's end as 日南, which the landfall event keeps as an alternative claim without equating it with 振州.
+      - id: zhenzhou-identification
+        says:
+          The historical geography records that the Tang set up 振州 in 武德五年 and the Song renamed it
+          崖州, and that the 寧遠 county seat of its own 崖州 was the Tang seat of 振州. The point is the
+          coordinate Wikidata (CC0) records for the modern 崖州區, placed to stand for that area.
+        basis: interpretation
+        attributed_to: 顧祖禹, 讀史方輿紀要 (1692)
+        sources:
+          - source: dushi-fangyu-jiyao
+            at: 卷一百五 廣東六 瓊州府 崖州
+            quote: 唐武德五年置振州，天寶初曰延德郡，又改爲寧遠郡。乾元初復爲振州。宋改爲崖州
+          - source: dushi-fangyu-jiyao
+            at: 卷一百五 廣東六 瓊州府 崖州（寧遠廢縣）
+            quote: 今州治。隋置縣，屬崖州。唐爲振州治，宋改爲崖州治。
+          - source: wikidata
+            at: Q16259700 (P625), revision 2526608119
+notes: The biography later calls the whole journey 大和上從南振州來至揚府. The chronicle's notice names the drift's end as 日南, which the landfall event keeps as an alternative claim without equating it with 振州. The 崖州 of 鑒眞's own journey, further north, is a different prefecture (`yazhou`).

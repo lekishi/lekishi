@@ -13,11 +13,34 @@ names:
         source: toseiden
         at: 經四十餘日，至萬安州
 at:
-  - interpretation: unknown
-    precision: unspecified
-    notes: No modern identification is sourced here, so no coordinates are asserted. Wikidata records the prefecture (Q17164255) but no coordinate.
+  - interpretation: approximate_point
+    precision: region
+    point: [110.038, 18.5053]
+    notes:
+      A region-level placement at the modern county of 陵水, standing for the prefecture as it was in
+      748–749. The historical geography records that the prefecture's seat moved from 萬安縣 to 陵水 in
+      開元九年 (721) and returned to 萬安 early in 貞元 (from 785), so in 鑒眞's time the seat was at
+      陵水. The point is the county's modern coordinate; the seat's site is not placed, and the
+      biography does not say where in the prefecture 馮若芳 received the party.
     cite:
-      - id: wananzhou-location
-        says: The biography names 萬安州 without locating it, and no identification is sourced here, so the record carries no coordinates.
-        source: toseiden
-        at: 經四十餘日，至萬安州
+      - id: wananzhou-identification
+        says:
+          The historical geography records 萬安州 set up in 龍朔二年, its seat moved to 陵水 in 開元九年 and
+          moved back early in 貞元, and the 陵水縣 of its own day as the county that passed from 振州 to
+          萬安州 in 龍朔. The point is the coordinate Wikidata (CC0) records for the modern 陵水黎族自治縣,
+          placed to stand for that area.
+        basis: interpretation
+        attributed_to: 顧祖禹, 讀史方輿紀要 (1692)
+        sources:
+          - source: dushi-fangyu-jiyao
+            at: 卷一百五 廣東六 瓊州府 萬州（萬安廢縣）
+            quote: 龍朔中爲萬安州治。開元九年州徙治陵水，縣屬焉。至德二載改縣曰萬全，貞元初復爲州治
+          - source: dushi-fangyu-jiyao
+            at: 卷一百五 廣東六 瓊州府 萬州 陵水縣
+            quote: 本屬振州，龍朔中改屬萬安州。
+          - source: wikidata
+            at: Q944615 (P625), revision 2526615344
+notes:
+  The prefecture's seat before 721 and after 785, 萬安縣, is the seat of the 萬州 of the historical
+  geography's day (萬安廢縣，今州治), the area of the modern 萬寧. That is not where the seat stood in
+  748–749, so the record is not placed there.

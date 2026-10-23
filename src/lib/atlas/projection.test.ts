@@ -33,6 +33,11 @@ const COVERAGE = {
       title: "鑒眞's attempts to cross, 742–750",
       window: { start: 742, end: 750 },
     },
+    {
+      key: "ennin-diary-838-847",
+      title: "圓仁's diary, 838–847",
+      window: { start: 838, end: 847 },
+    },
   ],
 }
 
@@ -723,11 +728,26 @@ describe("the projection's source boundary", () => {
     const chapter = project()
     const tree = loadChapter(CHAPTER)
     const cited = new Set<string>()
+    // The records this story's view publishes: another story's records cite
+    // their own sources, which that story's view shows.
+    const inView = new Set<string>([
+      ...chapter.events.map((event) => event.id),
+      ...chapter.places.map((place) => place.id),
+      ...chapter.actors.map((actor) => actor.id),
+      ...chapter.relationships.map((relationship) => relationship.id),
+      ...chapter.territories.map((territory) => territory.id),
+      ...chapter.overlays.journeys.map((journey) => journey.id),
+      `lks:story:${chapter.storyKey}`,
+    ])
 
     // Every claim of every published revision, whatever kind of record it is on:
     // a place's identification cites its source just as an event's account does.
     for (const document of tree.documents) {
-      if (!isObject(document) || document["document"] !== "record") {
+      if (
+        !isObject(document) ||
+        document["document"] !== "record" ||
+        !inView.has(String(document["record_id"]))
+      ) {
         continue
       }
 

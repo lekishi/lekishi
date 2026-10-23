@@ -333,17 +333,15 @@ describe("pnpm approvals", { timeout: 30_000 }, () => {
   })
 
   it("reads an added story as one added block, with the first story still paired", () => {
-    // The chapter with its first story only, then with a fixture story added.
+    // The chapter's stories as they stand, then with a fixture story added.
     const withStories = (...added: JsonObject[]) =>
       edit(files(), MANIFEST, (text) => {
         const { story, stories, ...manifest } = parse(text) as JsonObject
-        const first = (stories as JsonObject[] | undefined)?.[0] ?? {
-          key: TANG,
-          title: "The embassy",
-          ...(story as JsonObject),
-        }
+        const written = (stories as JsonObject[] | undefined) ?? [
+          { key: TANG, title: "The embassy", ...(story as JsonObject) },
+        ]
 
-        return stringify({ ...manifest, stories: [first, ...added] })
+        return stringify({ ...manifest, stories: [...written, ...added] })
       })
     const beforeTree = buildTree(withStories())
     const before = compileChapter(beforeTree, TANG, { preview: true })

@@ -12,7 +12,7 @@ import { projectChapter, projectStories, type ChapterCoverage } from "./projecti
  *
  * The tree is the real one with the Tang manifest rewritten in memory into two
  * stories: the embassy as it stands, and a short second story through four of
- * 鑒眞's earlier attempts. The second story is a fixture for the projection, not
+ * 鑒眞's earlier attempts. The chapter's own later stories are left out. The second story is a fixture for the projection, not
  * the chapter's content, so its key contains `example-`.
  */
 
@@ -54,7 +54,14 @@ function compiled(edit: Edit = () => {}, include: string[] = []) {
       ...file,
       text: stringify({
         ...manifest,
-        include: [...((manifest["include"] as string[] | undefined) ?? []), ...include],
+        // 圓仁's journeys stop only at the third story's events, which this
+        // rewrite leaves out.
+        include: [
+          ...((manifest["include"] as string[] | undefined) ?? []).filter(
+            (name) => !name.startsWith("ennin-"),
+          ),
+          ...include,
+        ],
         stories: [{ ...opening, title: "The embassy" }, second],
       }),
     }
@@ -182,5 +189,42 @@ describe("a chapter with several stories", () => {
     expect(result.ok ? [] : result.errors).toEqual([
       "the chapter publishes 2 stories, but its index lists none, so the atlas cannot order them",
     ])
+  })
+})
+
+describe("the Tang chapter's own stories", () => {
+  const bundle = compileChapter(buildTree(readFiles()), TANG, { preview: true })
+  const [embassy, crossings, ennin] = ok(
+    projectStories(TANG, bundle.documents, bundle.sets, coverageOf(bundle)),
+  )
+  const journeys = (chapter: Chapter) => chapter.overlays.journeys.map((journey) => journey.id)
+
+  it("projects the three stories, 圓仁's on its own window", () => {
+    expect([embassy.storyKey, crossings.storyKey, ennin.storyKey]).toEqual([
+      TANG,
+      "jianzhen-crossings-742-753",
+      "ennin-diary-838-847",
+    ])
+    expect(ennin.defaultWindow).toEqual({ start: 838, end: 847 })
+    expect(ennin.events.map((event) => event.id)).toContain("lks:event:ennin-wutai-arrival-840")
+    expect(embassy.events.map((event) => event.id)).not.toContain(
+      "lks:event:ennin-wutai-arrival-840",
+    )
+  })
+
+  it("draws a journey only in the story that steps through all its stops", () => {
+    expect(journeys(ennin)).toEqual(
+      expect.arrayContaining([
+        "lks:journey:ennin-to-yangzhou-838",
+        "lks:journey:ennin-to-chishan-839",
+        "lks:journey:ennin-pilgrimage-840",
+        "lks:journey:ennin-expulsion-845",
+        "lks:journey:ennin-return-847",
+      ]),
+    )
+    expect(journeys(ennin)).not.toContain("lks:journey:jianzhen-to-nara-753")
+    expect(journeys(embassy)).toContain("lks:journey:jianzhen-to-nara-753")
+    expect(journeys(embassy).filter((id) => id.startsWith("lks:journey:ennin-"))).toEqual([])
+    expect(journeys(crossings).filter((id) => id.startsWith("lks:journey:"))).toEqual([])
   })
 })

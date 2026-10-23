@@ -426,7 +426,7 @@ describe("the Tang chapter fixture", () => {
     }
 
     expect(listChapters()).toContain(CHAPTER)
-    expect(Object.keys(result.currentPublished)).toHaveLength(144)
+    expect(Object.keys(result.currentPublished)).toHaveLength(314)
   })
 
   it("keeps the expected inventory and publishes each record once in the first set", () => {
@@ -441,15 +441,15 @@ describe("the Tang chapter fixture", () => {
     }
 
     expect(counts).toEqual({
-      place: 43,
-      actor: 24,
-      event: 63,
-      relationship: 9,
-      story: 2,
-      journey: 3,
+      place: 78,
+      actor: 40,
+      event: 165,
+      relationship: 20,
+      story: 3,
+      journey: 8,
     })
     expect(chapter.documents.filter((document) => document["document"] === "source")).toHaveLength(
-      18,
+      20,
     )
 
     const first = theSet(chapter)
@@ -457,9 +457,9 @@ describe("the Tang chapter fixture", () => {
       String(objectOf(member)["record_id"]),
     )
 
-    expect(memberIds).toHaveLength(144)
+    expect(memberIds).toHaveLength(314)
     expect(new Set(memberIds).size).toBe(memberIds.length)
-    expect(Publication.currentPublished(chapter.documents, chapter.sets).size).toBe(144)
+    expect(Publication.currentPublished(chapter.documents, chapter.sets).size).toBe(314)
   })
 
   it("publishes one revision per record in a single set", () => {
@@ -840,16 +840,30 @@ describe("the Tang chapter fixture", () => {
     // approximate locality-level placements; 驩州 keeps `unknown` geometry
     // because no source in the set identifies its site. The crossings' coastal
     // anchorages and the three Hainan prefectures stay `unknown` until a cited
-    // identification places them.
+    // identification places them, and so do the thirteen places of 圓仁's
+    // diary that no allowed gazetteer identifies.
     expect(unlocated.map((record) => record["record_id"]).sort()).toEqual([
+      "lks:place:bianzhou",
+      "lks:place:fenzhou",
+      "lks:place:gaoyi-island",
+      "lks:place:hezhong",
+      "lks:place:huangmao-island",
       "lks:place:huanzhou",
+      "lks:place:kashima-hizen",
       "lks:place:langgou-pu",
+      "lks:place:mizhou",
+      "lks:place:noko-island",
       "lks:place:sangshi-shan",
       "lks:place:santa-shan",
       "lks:place:shufeng-shan",
+      "lks:place:tachibana-ura",
+      "lks:place:tongzhou",
+      "lks:place:ukujima",
       "lks:place:wananzhou",
       "lks:place:xiayu-shan",
+      "lks:place:yan-island",
       "lks:place:yazhou",
+      "lks:place:zhenzhou",
       "lks:place:zhenzhou-hainan",
     ])
   })

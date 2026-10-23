@@ -32,6 +32,11 @@ const TANG_COVERAGE = {
       title: "鑒眞's attempts to cross, 742–750",
       window: { start: 742, end: 750 },
     },
+    {
+      key: "ennin-diary-838-847",
+      title: "圓仁's diary, 838–847",
+      window: { start: 838, end: 847 },
+    },
   ],
 }
 /**

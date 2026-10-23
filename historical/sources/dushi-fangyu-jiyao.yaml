@@ -1,8 +1,10 @@
 # yaml-language-server: $schema=../schema/source.schema.json
 locator: entry
 kind: reference
-title: 讀史方輿紀要 卷四十七 河南二 開封府、卷四十九 河南四 懷慶府 衛輝府 彰德府、卷五十一 河南六 南陽府 汝州、卷五十三 陝西二 西安府
-edition: Wikisource digital transcription (unproofread); locators re-checked against it on 2026-09-25
+title: 讀史方輿紀要
+edition:
+  Wikisource digital transcription (unproofread); locators re-checked against it on 2026-09-25
+  (卷四十七, 四十九, 五十一, 五十三) and 2026-10-23 (卷一百五)
 author: 顧祖禹
 issued:
   year: 1692
@@ -17,6 +19,8 @@ identifiers:
     value: https://zh.wikisource.org/wiki/讀史方輿紀要/卷五十一
   - system: url
     value: https://zh.wikisource.org/wiki/讀史方輿紀要/卷五十三
+  - system: url
+    value: https://zh.wikisource.org/wiki/讀史方輿紀要/卷一百五
 license:
   status: recorded
   license_id: public-domain
@@ -27,16 +31,21 @@ license:
   reviewed_at: 2026-09-25T20:00:00Z
   notes:
     "Text public domain (the work is dated 1692 and the Wikisource transcription of it is public
-    domain). The fixture cites this work only for administrative-geography identifications of places
-    the cited primary entries name but do not locate, and quotes short passages. It is a Qing-era
-    compilation: its identifications are modern-era scholarship relative to the 233–226 BCE events,
+    domain). Records cite this work only for administrative-geography identifications of places
+    the cited primary entries name but do not locate, and quote short passages. It is a Qing-era
+    compilation: its identifications are later scholarship relative to the events they place,
     not statements of the source period. The transcription is unproofread; it marks each gazetteer
     entry's notes with an annotate template that renders inline, and the quoted fragments are the
     entry text as it renders. One distance expression it carries (卷五十三 涇陽縣 雲陽城, 縣西北五三十里) is damaged,
-    so no distance is quoted or used."
+    so no distance is quoted or used. Distances in 卷一百五 are not used either: the one it gives for
+    舍城廢縣 (府東北二百六十里) does not fit the same 卷, which puts the sea ten 里 north of the prefectural
+    city and 文昌縣 only 百六十里 east of it, so the records rest only on its statements of which
+    county became which."
 notes: "A historical geography of China completed in 1692 by 顧祖禹, organized by the administrative
-  units of its own time. The fixture cites it for three things and nothing else: the Qin 潁川
-  commandery's seat (陽翟, the place of its own 禹州, 卷四十七); the Qin 雲陽 (a Qin county in the northwest
-  of 涇陽縣, 卷五十三); and the two regions the name 南陽 covers in its account (the 河內 南陽城 in the north of
-  修武縣, 卷四十九, and the Qin 南陽郡 whose seat was 宛, 卷五十一). It is cited as a reference work, never as
-  evidence that the 233–226 BCE events happened as it retells them."
+  units of its own time. One source for the whole work; each cite's locator names the 卷, the
+  prefecture and the entry. It is cited for identifications only: the Qin 潁川 commandery's seat
+  (陽翟, the place of its own 禹州, 卷四十七); the Qin 雲陽 (a Qin county in the northwest of 涇陽縣,
+  卷五十三); the two regions the name 南陽 covers in its account (the 河內 南陽城 in the north of 修武縣,
+  卷四十九, and the Qin 南陽郡 whose seat was 宛, 卷五十一); and the Tang prefectures of 海南 that 鑒眞
+  passed through in 748–749 (振州, 萬安州 and 崖州, 卷一百五 瓊州府). It is cited as a reference work,
+  never as evidence that the events it retells happened as it retells them."

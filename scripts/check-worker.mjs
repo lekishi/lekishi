@@ -26,7 +26,7 @@
  * Usage: node scripts/check-worker.mjs [--skip-build]
  */
 import { spawn } from "node:child_process"
-import { readdirSync, readFileSync, writeFileSync } from "node:fs"
+import { existsSync, readFileSync, writeFileSync } from "node:fs"
 import { createServer } from "node:net"
 import { constants } from "node:os"
 import path from "node:path"
@@ -46,11 +46,13 @@ const READY_MS = 120_000
  * `src/lib/atlas/overlay-definitions.ts` or the chapter's journey records: a
  * member's draft data must carry the chapter's own overlays, not the empty set
  * a chapter without definitions gets. The check uses the first approved
- * chapter listed here.
+ * chapter listed here. Tang comes first because no other chapter names it:
+ * qin-unification-230-221 names qin-conquest-han-233-226, so the build
+ * invariant fails when the Han chapter alone is stale.
  */
 const OVERLAY_MARKERS = {
-  "qin-conquest-han-233-226": "hanfei-embassy",
   "tang-mission-750-754": "lks:journey:jianzhen-to-nara-753",
+  "qin-conquest-han-233-226": "hanfei-embassy",
 }
 
 const failures = []
@@ -148,12 +150,10 @@ async function get(origin, pathname, session) {
 // --- the check -----------------------------------------------------------------
 
 async function main() {
-  // The first approved chapter with an overlay marker, in file order.
-  const manifest = readdirSync(chaptersDirectory)
-    .filter((file) => file.endsWith(".yaml") && path.basename(file, ".yaml") in OVERLAY_MARKERS)
-    .sort()
-    .map((file) => path.join(chaptersDirectory, file))
-    .find((file) => /^approval:/m.test(readFileSync(file, "utf8")))
+  // The first approved chapter with an overlay marker, in OVERLAY_MARKERS order.
+  const manifest = Object.keys(OVERLAY_MARKERS)
+    .map((chapter) => path.join(chaptersDirectory, `${chapter}.yaml`))
+    .find((file) => existsSync(file) && /^approval:/m.test(readFileSync(file, "utf8")))
   if (manifest === undefined)
     throw new Error("no approved chapter in OVERLAY_MARKERS to make stale")
 

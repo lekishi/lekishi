@@ -449,7 +449,7 @@ describe("the Tang chapter fixture", () => {
       journey: 8,
     })
     expect(chapter.documents.filter((document) => document["document"] === "source")).toHaveLength(
-      20,
+      21,
     )
 
     const first = theSet(chapter)
@@ -839,9 +839,10 @@ describe("the Tang chapter fixture", () => {
     // The two identifications the owner asked to chase are published as
     // approximate locality-level placements; 驩州 keeps `unknown` geometry
     // because no source in the set identifies its site. The crossings' coastal
-    // anchorages and the three Hainan prefectures stay `unknown` until a cited
-    // identification places them, and so do the thirteen places of 圓仁's
-    // diary that no allowed gazetteer identifies.
+    // anchorages stay `unknown` until a cited identification places them, and
+    // so do the thirteen places of 圓仁's diary that no allowed gazetteer
+    // identifies. The three Hainan prefectures are placed at region level from
+    // 讀史方輿紀要.
     expect(unlocated.map((record) => record["record_id"]).sort()).toEqual([
       "lks:place:bianzhou",
       "lks:place:fenzhou",
@@ -859,12 +860,9 @@ describe("the Tang chapter fixture", () => {
       "lks:place:tachibana-ura",
       "lks:place:tongzhou",
       "lks:place:ukujima",
-      "lks:place:wananzhou",
       "lks:place:xiayu-shan",
       "lks:place:yan-island",
-      "lks:place:yazhou",
       "lks:place:zhenzhou",
-      "lks:place:zhenzhou-hainan",
     ])
   })
 

@@ -13,11 +13,32 @@ names:
         source: toseiden
         at: 榮叡、普照師從海路經四十餘日，到崖州，州遊奕大使張雲出迎
 at:
-  - interpretation: unknown
-    precision: unspecified
-    notes: No modern identification is sourced here, so no coordinates are asserted. The modern 崖州區 is named after a later 崖州 and is not this prefecture.
+  - interpretation: approximate_point
+    precision: region
+    point: [110.384255, 19.984255]
+    notes:
+      A region-level placement at the modern district of 瓊山 in 海口, standing for the prefecture. The
+      historical geography records the Tang seat of 崖州 as 舍城 and says the Song merged 舍城 into 瓊山
+      county; the modern district carries 瓊山's name. The point is the district's modern coordinate.
+      Neither the seat's site nor 開元寺 is placed, and the distance the historical geography gives for
+      舍城 is not used (see its source record).
     cite:
-      - id: yazhou-location
-        says: The biography names 崖州 without locating it, and no identification is sourced here, so the record carries no coordinates.
-        source: toseiden
-        at: 到崖州，州遊奕大使張雲出迎
+      - id: yazhou-identification
+        says:
+          The historical geography records that 舍城 was the Tang seat of 崖州 and that the Song merged
+          the county into 瓊山. The point is the coordinate Wikidata (CC0) records for the modern 瓊山區,
+          placed to stand for that area.
+        basis: interpretation
+        attributed_to: 顧祖禹, 讀史方輿紀要 (1692)
+        sources:
+          - source: dushi-fangyu-jiyao
+            at: 卷一百五 廣東六 瓊州府 瓊山縣（舍城廢縣）
+            quote: 唐爲崖州治
+          - source: dushi-fangyu-jiyao
+            at: 卷一百五 廣東六 瓊州府 瓊山縣（舍城廢縣）
+            quote: 熙寧四年改置崖州，省縣入瓊山
+          - source: wikidata
+            at: Q1022262 (P625), revision 2551805828
+notes:
+  This is the Tang 崖州 in the north of the island. The modern 崖州區 in 三亞 is named after a later
+  崖州, the Song renaming of the Tang 振州 (`zhenzhou-hainan`), and is not this prefecture.

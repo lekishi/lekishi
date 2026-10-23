@@ -42,14 +42,15 @@ const REQUEST_MS = 15_000
 const READY_MS = 120_000
 
 /**
- * One journey id per chapter, from `src/lib/atlas/overlay-definitions.ts`: a
+ * One journey id per chapter the check can make stale, from
+ * `src/lib/atlas/overlay-definitions.ts` or the chapter's journey records: a
  * member's draft data must carry the chapter's own overlays, not the empty set
- * a chapter without definitions gets. A new first approved chapter needs its
- * entry here.
+ * a chapter without definitions gets. The check uses the first approved
+ * chapter listed here.
  */
 const OVERLAY_MARKERS = {
   "qin-conquest-han-233-226": "hanfei-embassy",
-  "tang-mission-750-754": "jianzhen-voyage",
+  "tang-mission-750-754": "lks:journey:jianzhen-to-nara-753",
 }
 
 const failures = []
@@ -147,13 +148,14 @@ async function get(origin, pathname, session) {
 // --- the check -----------------------------------------------------------------
 
 async function main() {
-  // The first approved chapter, in file order.
+  // The first approved chapter with an overlay marker, in file order.
   const manifest = readdirSync(chaptersDirectory)
-    .filter((file) => file.endsWith(".yaml"))
+    .filter((file) => file.endsWith(".yaml") && path.basename(file, ".yaml") in OVERLAY_MARKERS)
     .sort()
     .map((file) => path.join(chaptersDirectory, file))
     .find((file) => /^approval:/m.test(readFileSync(file, "utf8")))
-  if (manifest === undefined) throw new Error("no approved chapter to make stale")
+  if (manifest === undefined)
+    throw new Error("no approved chapter in OVERLAY_MARKERS to make stale")
 
   const id = path.basename(manifest, ".yaml")
   const original = readFileSync(manifest, "utf8")

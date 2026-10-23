@@ -269,6 +269,20 @@ function storyReach(
       listOf(record.content["steps"]).map((step) => stringOrUndefined(objectOf(step)["record_id"])),
     ),
   )
+  // A journey belongs to each story that steps through all of its stops, so a
+  // story never draws a journey through events it does not show.
+  for (const journey of published.filter((entry) => entry.kind === "journey")) {
+    const stops = listOf(journey.content["stops"]).map((stop) =>
+      stringOrUndefined(objectOf(stop)["event_id"]),
+    )
+
+    for (const reached of reach) {
+      if (stops.length > 0 && stops.every((id) => id !== undefined && reached.has(id))) {
+        reached.add(journey.recordId)
+      }
+    }
+  }
+
   const reachedByAny = new Set(reach.flatMap((reached) => [...reached]))
 
   extend(

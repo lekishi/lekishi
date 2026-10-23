@@ -100,8 +100,12 @@ type ReadFile = { readonly data: JsonObject } | { readonly problems: readonly st
  */
 const readCache = new Map<string, ReadFile>()
 
+function readKey(kind: FileKind, text: string): string {
+  return `${kind}\n${text}`
+}
+
 function readFile(kind: FileKind, text: string): ReadFile {
-  const key = `${kind}\n${text}`
+  const key = readKey(kind, text)
   const cached = readCache.get(key)
 
   if (cached !== undefined) {
@@ -112,6 +116,33 @@ function readFile(kind: FileKind, text: string): ReadFile {
   readCache.set(key, read)
 
   return read
+}
+
+/** A parsed and checked file, keyed as the read cache keys it. */
+export type ReadEntry = readonly [key: string, read: ReadFile]
+
+/**
+ * Parses and checks every file of the tree on disk, for another process to seed
+ * its cache with (`seedReadCache`). The test run reads the tree once this way
+ * and hands the result to each test worker, instead of every worker reading it.
+ */
+export function readEntries(root: string = historicalDirectory()): ReadEntry[] {
+  return readFiles(root).flatMap((file) => {
+    const kind = kindOf(file.path)
+
+    if (kind === undefined) {
+      return []
+    }
+
+    return [[readKey(kind, file.text), readFile(kind, file.text)] as const]
+  })
+}
+
+/** Seeds the read cache with entries another process parsed and checked. */
+export function seedReadCache(entries: readonly ReadEntry[]): void {
+  for (const [key, read] of entries) {
+    readCache.set(key, "data" in read ? { data: deepFreeze(read.data) } : read)
+  }
 }
 
 function parseFile(kind: FileKind, text: string): ReadFile {

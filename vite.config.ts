@@ -46,6 +46,10 @@ export default defineConfig(({ command }) => ({
     include: ["src/**/*.test.ts"],
     restoreMocks: true,
     unstubGlobals: true,
+    // The record tree is parsed and checked once per run and handed to every
+    // test worker, so no test pays for reading it.
+    globalSetup: ["src/test/historical-global-setup.ts"],
+    setupFiles: ["src/test/historical-setup.ts"],
     // Svelte's package resolves its server build outside a browser condition, and
     // Vitest imports dependencies through Node by default. Component tests mount
     // the same client build the bundle ships, so Svelte is processed by Vite

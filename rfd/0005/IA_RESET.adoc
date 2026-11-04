@@ -1,0 +1,227 @@
+= Two axes, one world: the information architecture reset
+:state: Proposed 2026-11-04, for the owner's judgement
+:toc:
+:toclevels: 2
+
+This note belongs to link:README.adoc[RFD 5]. It revises the
+link:README.adoc#_information_architecture_and_navigation[information
+architecture and navigation] section, which was drawn at two served chapters,
+now that 39 chapters are served. It records the owner's diagnosis of the
+2026-10-23 audit, the structure proposed in answer, and what that structure
+asks of the data, the basemap and the scene. The scene requirements it names
+are link:../0001/README.adoc[RFD 1]'s; this note does not change them, it
+makes them load-bearing.
+
+Two artifacts carry the evidence, private to the owner:
+
+* https://claude.ai/artifact/W6pm9RST4rodcNu7VjXN8a[The audit at 39 chapters]
+  (2026-10-23), walked locally on `main` at 27f5ac3 with screenshots at
+  1440, 820 and 390 px.
+* https://claude.ai/artifact/L8j7dDL6A6Pakc6uRemJfE[The IA reset mock]
+  (2026-11-04): four screens built from the 39 served chapters' own records.
+
+== The audit's verdict, 2026-10-23
+
+The chapter is the only unit of navigation. Home is a catalogue of 39 plates;
+the switcher is a list on a ribbon too crowded to read; search groups by
+chapter before match quality; a chapter's globe shows only its own places, so
+nothing on the site says that Alexander's Babylon is Hammurabi's Babylon or
+that 杜環 and the embassy of 750 were in 廣州 within a year of each other.
+Play is a four-years-per-second clock that opens no card and moves no camera.
+The region-scale map is the low-resolution imagery wash with no painted
+relief, no sea or river names and no label declutter, so the "map worth
+looking at" that RFD 4 Track 1 exits on is not yet on the screen.
+Qualification (the legend essay, placement notes, the "schematic" caption
+drawn on the water, the digest in About) outweighs the history.
+
+Ten defects were reproduced and are listed in <<defects>>.
+
+== The owner's diagnosis
+
+The owner accepted the audit's recommendations as a diagnosis on 2026-10-23
+and named the problems in their own words:
+
+. "No exploration on the atlas."
+. Chapters are valid but belong on a separate, better organised page, filterable
+  by region or culture. "If the globe is a way to explore horizontally in an
+  era, we need a way to showcase vertical timelines as well, and chapters
+  might be a good area to do so."
+. "IA is straight up bad. The point of this project is to aggregate historical
+  information to show their correlation and relationships, I don't get any of
+  those."
+. "Nothing makes it feel like civilization at all. No 3D animated figures,
+  terrain don't zoom, and obviously no buildings and such when zoomed in
+  most."
+. "Just sprinkling data points on the map is boring, and boring is not what
+  I'm trying to achieve here."
+
+These are the acceptance test for this note. A screen that does not show a
+correlation or a relationship, or that is boring, fails it.
+
+== Proposed structure: two axes
+
+The site has two axes and one world.
+
+Horizontal, the world at a moment::
+  The globe is the exploration surface. The reader holds a year; every chapter
+  alive at that year lights up where it happened, and the threads between
+  them are drawn from the places and peoples they share. Dragging the globe
+  explores space; dragging the playhead explores an era. Diving into a chapter
+  from here keeps the year, so the reader lands in the scene at the moment
+  they were looking at.
+Vertical, chapters as time::
+  The chapters page is one column per culture, time running down the page,
+  each chapter a bar at its window, filterable by region and by kind. This is
+  the vertical timeline the owner asked for. Hovering a bar lights the
+  chapters it shares places with across the other columns, so the correlation
+  is visible before anything is opened. The deep-time chapters (the early
+  Americas from 21051 BCE) keep their windows but the axis folds before 2400
+  BCE rather than stretching to them.
+Relationships connect the two::
+  A place has one page: its vertical timeline across every chapter that
+  touches it. A people has the same. From a chapter's card, "threads through
+  this chapter" lists the chapters it shares records with and what they share.
+  None of this needs new data (<<data>>).
+A chapter is a guided tour::
+  Inside a chapter, play is a story, not a clock. Each step flies the camera,
+  moves the date, opens the card, reads the source's own words, and holds. A
+  scrubber remains for the reader who wants a clock, with its speed scaled to
+  the window rather than fixed at four years a second.
+
+The mock shows each of these as a screen: the world at 753 with three chapters
+alive and the 杜環–embassy thread drawn through 廣州; the ten culture columns
+with their links; the Tang embassy as a 38-step tour on painted relief with
+the party moving between attested stops; and Roma across six chapters as one
+timeline.
+
+=== Pages
+
+[cols="1,1,3",options="header"]
+|===
+|Page |Route |Carries
+
+|The world |`/` |The globe with a year, the era strip, search, the chapters alive at the year with their threads. Replaces the plate catalogue.
+|Chapters |`/chapters` |The culture columns with region and kind filters, deep time folded. New.
+|A chapter |`/chapters/<chapter>` |The scene as today, with the tour as the default play and the "threads through this chapter" list on the card. The URL contract (`?event=`, `?place=`, `?step=`, `?story=`, `?from=&to=`) is unchanged.
+|A place |`/places/<place>` |The place's timeline across chapters. One prerendered page per place that two or more chapters share (88 today); a place in one chapter stays a card inside it.
+|A people |`/peoples/<actor>` |The same for a state or a people shared across chapters (41 today).
+|===
+
+Search stays one dialog reachable with `/`. It ranks by match quality first,
+then by chapter, and a place result opens the place page when the place is
+shared.
+
+[[data]]
+=== What the data already carries
+
+The audit's draft text said each chapter owned its own copy of every place.
+That was true of the search index and the chapter projection, not of the
+records. The world-first layout (RFD 2) has one record per place and per
+actor with a global id, and the chapter manifests point at them. Counting on
+`main` at 27f5ac3:
+
+[cols="3,1",options="header"]
+|===
+|Across the 39 served chapters |Count
+
+|Events |930
+|Places, one record each |683
+|Places referenced by two or more chapters |88
+|Actors referenced by two or more chapters |41
+|Chapter pairs linked by a shared place or actor |91
+|Story steps |1,065
+|===
+
+The relationships the owner wants are therefore already in the records. What
+is missing is a projection that keeps the ids across chapters instead of
+re-keying them per chapter, and the three pages above that read it. The
+compiler's one-file-per-chapter output stays; it gains one small index of
+shared records (ids, names, the chapters and years that touch each), which is
+what the mock's world and place screens are built from.
+
+Two things the data does not yet carry, and the pages should degrade without:
+a region or culture per chapter (the mock assigns the ten columns by hand from
+the manifests; a `region` field on the manifest, or on the sources' culture,
+settles it), and typed cross-chapter relationships beyond "shares a place or
+a people" (RFD 2's relationship records can express "succeeds", "cites",
+"is the same episode as" when an author wants to assert them).
+
+=== The basemap is already paid for
+
+The mock's ground is painted relief (hypsometric tint, hillshade, darkened
+coasts, an ice mask) generated with NumPy and Pillow from the Terrarium
+elevation tiles the build already caches for the globe: level 4 for the
+world, level 7 for the Tang region. Painting the world at 4096 × 2048 took
+seconds. This is RFD 1's "painted relief map" and RFD 3's basemap pipeline,
+and it shows that the "map worth looking at" is a build step away rather than
+a data purchase. The proposal is to ship it as the globe's base imagery and
+the 2D fallback at every scale, with sea and river names and label declutter
+on top, before any further chrome.
+
+=== The scene must feel like a civilization
+
+The owner's fourth and fifth points are RFD 1's approved hero, restated as
+requirements rather than polish. Listed here so that the IA work does not
+land on a scene that fails them:
+
+* Terrain that zooms: the globe's level-of-detail everywhere a chapter has
+  places, not only around 薩摩. Relief at region scale, the diorama mesh at
+  local scale.
+* Units on journeys: a party or vessel at the playhead's stop, moving between
+  attested stops with the tour, in the hero's register.
+* Settlements at attested sites: glyph buildings of a kind at local scale,
+  never a reconstruction, as RFD 1's visual grammar states.
+* Figures: the pennants' people present in the scene at the step's place,
+  animated in the diorama tier.
+
+These are the diorama, symbolic settlements, relief basemap and
+collision-free label items of link:../0001/IMPLEMENTATION.adoc[RFD 1's
+checklist]. This note asks that they be scheduled with the IA pages rather
+than after them, because the
+owner's judgement of the IA will be made on the scene it sits in.
+
+[[defects]]
+== Defects reproduced in the audit
+
+Fixes that do not wait on the structure above.
+
+[cols="2,3",options="header"]
+|===
+|Defect |Where
+
+|Antimeridian chapters open over Africa (Lapita) because the home view averages raw longitudes. |`boundingBoxCenter` in `src/lib/atlas/projection.ts`; use a unit-vector mean.
+|The time ribbon is illegible at 39 chapters with the 21051 BCE window. |Fold deep time as the chapters page does.
+|Home's globe centres on the mean of every chapter (the Persian Gulf) and labels overprint. |Replaced by the world page.
+|Every `?step=` link recentres a five-year window and the arrival plate says the window widened even when it did not. |Query handling in the workspace.
+|Latin names get one initial on the pennants ("C C P" for Vesuvius). |`medallion()` in `src/lib/atlas/card.ts`.
+|The place card's "Modern name" disclosure reads like a missing value. |Card copy.
+|Search ranks by chapter group before match quality ("Rome" finds Monte Albán first). |`SearchDialog` ranking.
+|No label declutter at any scale. |RFD 1's collision-free labels item.
+|Playback speed is fixed at four years a second whatever the window. |`YEARS_PER_SECOND` in `src/lib/atlas/state.ts`.
+|"schematic, follows the dated stops" is drawn as a label on the water. |Move to the legend key.
+|===
+
+== Alternatives weighed
+
+A single page with everything on the globe::
+  Chapters as the only vertical structure, with filters on the globe. Keeps
+  one surface but gives the owner no vertical timeline, and the ribbon already
+  fails at 39 chapters.
+Chapters page as a filtered catalogue::
+  The current plates with region chips. Organised, but still a list; it shows
+  no overlap between chapters and does not answer "what else was happening".
+Build the relationships into the records first::
+  Typed cross-chapter relationships before any page. The shared ids already
+  give the first 91 links for free; typed links can come as authors assert
+  them without blocking the pages.
+
+== What this note asks of the owner
+
+Judge the mock the way the hero was judged: against "does this show
+correlation and relationships" and "is this boring". Three choices are open:
+
+. Whether the world page replaces home, or home keeps a short list beside it.
+. Whether the scene requirements are scheduled with the IA pages (this note's
+  recommendation) or after them.
+. The region or culture assignment per chapter: the ten columns in the mock,
+  or a different grouping.

@@ -1,0 +1,48 @@
+# Lekishi project memory
+
+- Repo: lekishi/lekishi. Default cloud environment: env_01H2bWwsX4uoperV3KKT2vhV.
+- Default device for Remote Control: env_01LDudvd1uwQUgkowwamadHa (pass as environment_id to start_rc_session to skip the card).
+- Routine "Weekly Lekishi status" (trig_01C41s6uCNaX3Q82Dbb1hRv4) runs Mondays 16:45 UTC.
+- Darwin's preferences: jj over git; commit in small logical chunks. Proposed (not yet confirmed as project instructions): draft PRs, RFDs for design decisions.
+- Branch updates (Darwin, 2026-10-22): ALWAYS rebase PR branches onto main (or their base PR); never merge main or another PR into a branch ("stop merging and messing up the commits"). Fetch first and keep Darwin's own commits.
+- Contract versions (Darwin, 2026-10-22): NO contract v1. The project isn't live, so nothing is "sealed" unless Darwin agrees. Amend v0 in place for all additions: journeys (#53), Long Count (#52), `conventional` (#56) all being reworked into v0. Older notes saying "v1" are superseded.
+- Design system (RFD 5, PR #21, merged 2026-10-14): docs/design-system.md + tokens in src/app.css + $lib/ui primitives. Living page at /dev/design.
+- Convention: all non-prod pages live under the /dev route prefix; built in dev and on Cloudflare PR previews only, never in production.
+- Deep links use query params on the chapter URL (?event=, ?place=, ?step=, ?from=/?to=), not per-event paths. IA/navigation is part of RFD 5.
+- Data format (RFD 2, decided 2026-10-14): world-first layout. Records once under historical/{events,places,actors,relationships,sources}/ (ids = filenames, globally unique); chapters are manifests in historical/chapters/*.yaml pointing at records; schemas in historical/contract/v0/. Compiler emits one file per chapter to stay under Cloudflare's 20k file limit. Discussion: notes/data-format/discussion.md.
+- Verify visual changes on the deployed Cloudflare preview (Playwright reaches it), not only locally: [[verify-on-preview]].
+- Chapter selection (2026-10-21): Darwin picked all 5 candidates plus 3 deepening stories, one thread each, and a global survey of events up to 100 CE. Goal: as much data as possible to test data and engine work. Doc: https://claude.ai/artifact/LRQKGU2H9qoKtyYS62t2QV. [[chapter-selection]]
+- Tang chapter holds several stories: multi-story manifests built and merged (PR #27, 2026-10-22); Tang = embassy + 鑒眞's crossings + 圓仁's diary (PR #65 merged 2026-10-23), missions network still to add; approval stale until Darwin re-approves: [[tang-multi-story]].
+- Contract changes amend v0 in place until launch (Darwin, 2026-10-22); no v1 directory, #53/#52/#56 being reworked: [[contract-v0-amend-in-place]].
+- Journey records are in contract v0 with the map drawing them (PR #53 merged 2026-10-22; Tang approval stale until Darwin re-approves): [[journey-records]].
+- `conventional` date basis (Darwin approved 2026-10-22) in draft PR #56, moving into v0 and rebasing onto main. Rome (#30, stacked on #56) and Egypt (#29) threads re-cite with it.
+- Shared ids across region threads (who mints babylon, athens, pleiades source…): [[shared-record-ids]].
+- 玄奘 journey chapter (PR #32, merged 2026-10-22; still a draft manifest, no approval), ids and follow-ups: [[xuanzang-chapter]].
+- Parallel chapter threads share place ids across unmerged branches; second to merge folds its copy in: [[shared-records-parallel-threads]].
+- Cloud container tooling (jj binary, Wikidata 429 workarounds): [[cloud-env-tooling]].
+- Qin six-states draft chapter (PR #38, merged 2026-10-22): shared ids, separate-source convention, contract gotchas; territory kind in v0 plus 15 snapshots merged in PR #59: [[qin-six-states-records]].
+- Early Americas draft chapter (PR #41 merged 2026-10-22; PR #52 merged 2026-10-22 added ~/decade/century/after-before notation and the v0 Long Count calendar with correlation): [[early-americas-chapter]]
+- Voyages thread (PR #33, merged 2026-10-22): Hanno, Lapita and Periplus draft chapters; shared ids folded, the Pofatu licence conflict and proposed evidence states still open: [[voyage-chapters]].
+- Auth for drafts (RFD 6, draft PR #44, 2026-10-21): org members see drafts on production, previews stay open, builds never fail on approvals; gate choice pending: [[auth-drafts-rfd6]].
+- Draft chapter projection rules (coda captions, window, summary year): [[chapter-projection-window-rules]].
+- Ancient China chapters (PR #35): separate source records per chapter, traditional forms only (fonts), shared 春秋 ids, merges PR #38: [[ancient-china-authoring]].
+- Source records (Darwin, 2026-10-22, in the 杜環 thread): merge to one source record per work (e.g. 資治通鑑, 舊唐書, 新唐書) rather than per-chapter/juan copies, even though it reopens approvals. Supersedes the "separate source records per chapter" convention above.
+- Egypt and the Nile drafts (PR #29): BCE windows are editorial placeholders pending a cited chronology; Garstang cite-only until 2027: [[egypt-nile-chapters]].
+- Cloudflare Pages builds one at a time, so previews and production can lag hours on busy days: [[cloudflare-pages-queue]].
+- Evidence rules from Darwin's corrections (windows bounded by attested anchors, no participants from alternative accounts, narrow supporting cites): [[content-evidence-rules]].
+- Darwin's review fixes on the Aśoka draft (dates ± stated error, readings as interpretation, legend in summary, moved monuments as labels): [[chapter-review-feedback]].
+- Lessons from Darwin's review of the voyage drafts (stand-in places, trade typing, circa years, NC licences): [[draft-chapter-review-lessons]].
+- Known e2e failures (flaky 秋妻屋浦 diorama test on desktop-chromium; chapter-count tests vs. drafts, fixed by #49; camera-follow test red on main since 41d4b07, timeout fix in PR #55): [[e2e-known-failures]].
+- Whole-tree unit tests (approvals, projection-stories, publication-approval) timed out at vitest's 5 s on GitHub runners as chapters grew. Darwin (2026-10-22): don't raise test timeouts, fix the cause. #57 (merged 2026-10-22) reads each record file once per process; #67 (merged 2026-10-23) reads the tree once per vitest run via globalSetup + provide. On a new timeout, look for repeated parsing first.
+- Arabic font: Darwin chose to add Noto Naskh Arabic and restore قرطاج with Carthage (fr) as an alias (PR #51, 2026-10-22).
+
+- Hannibal 218–216 BCE draft chapter (PR #40, merged 2026-10-22): shared Rome/Massalia, Roman-date and Perseus conventions: [[hannibal-chapter]].
+- 杜環 / 經行記 draft chapter (PR #37, merged 2026-10-22): one source per work for the Tang histories (Tang and Qin approvals now STALE), Ibn al-Athīr, Hirth & Rockhill identifications: [[du-huan-chapter]].
+- 圓仁 diary records (PR #36, merged 2026-10-22): ids, shared places, open questions in [[ennin-diary-story]].
+- Don't raise test timeouts to get green; fix the slowness (PR #57 caches parsed records): [[no-timeout-bumps]].
+- Aśoka's edicts draft chapter (PR #39, merged 2026-10-22; draft, no approval), ids and gaps: [[ashoka-chapter]].
+- Tradition basis (Darwin chose per-claim `basis: tradition` 2026-10-22; built in contract v0 in PR #30, merged 2026-10-22 as 6711d63, kings re-cited, atlas badge + dotted place names; never put conventional on a pointer a tradition asserts): [[tradition-basis]].
+- Hainan prefectures 振州/萬安州/崖州 placed from 讀史方輿紀要 卷一百五 (PR #66, merged 2026-10-23); widened dushi-fangyu-jiyao makes 4 other chapters stale: [[hainan-prefectures]].
+- UI/UX audit at 39 chapters (2026-10-23): verdict, 10 bugs (antimeridian home view, ribbon, pennant initials, step-widening plate, search ranking…), recommendations and the questions Darwin was asked: [[ui-ux-audit-2026-10-23]].
+- Darwin's UX direction after the audit (2026-10-23): no exploration, chapters on their own organised page with vertical timelines, IA must show correlation and relationships, Civ-register scene, 'boring is not what I'm trying to achieve': [[ux-direction-2026-10-23]].
+- IA reset drafted 2026-11-04 (mock https://claude.ai/artifact/L8j7dDL6A6Pakc6uRemJfE, RFD record in draft PR #68, three choices open for Darwin; 88 places / 41 actors already shared by id): [[ia-reset-2026-11-04]]

@@ -1,0 +1,24 @@
+{
+  "v": 3,
+  "createdOnFiles": { "v": 1, "at": "2026-10-13T17:40:00Z" },
+  "title": "Lekishi IA and Navigation",
+  "launch": { "view": "canvas" },
+  "pages": [],
+  "boards": {
+    "Main.dc.html": { "x": 0, "y": 0, "w": 1840, "h": 1040, "title": "Site map and URL contract" },
+    "Paths.dc.html": { "x": 1920, "y": 0, "w": 1920, "h": 1040, "title": "Four ways in" },
+    "Home.dc.html": { "x": 0, "y": 1560, "w": 1440, "h": 1024, "title": "Home: search first, chapters in time" },
+    "Search.dc.html": { "x": 1520, "y": 1560, "w": 1440, "h": 900, "title": "Search from inside a chapter" },
+    "Switcher.dc.html": { "x": 3040, "y": 1560, "w": 1440, "h": 900, "title": "Chapter switcher in the date bar" },
+    "Arrival.dc.html": { "x": 0, "y": 3184, "w": 1440, "h": 900, "title": "Arriving at an event from a link or a result" },
+    "PhoneHome.dc.html": { "x": 1520, "y": 3184, "w": 390, "h": 844, "title": "Phone: home" },
+    "PhoneSearch.dc.html": { "x": 1990, "y": 3184, "w": 390, "h": 844, "title": "Phone: search" }
+  },
+  "order": ["Main.dc.html", "Paths.dc.html", "Home.dc.html", "Search.dc.html", "Switcher.dc.html", "Arrival.dc.html", "PhoneHome.dc.html", "PhoneSearch.dc.html"],
+  "notes": {
+    "row1": { "x": 0, "y": -300, "text": "How the site is organised, and the ways in", "kind": "title1", "maxW": 3840 },
+    "row2": { "x": 0, "y": 1260, "text": "Desktop: home, search from anywhere, switching chapter", "kind": "title1", "maxW": 4480 },
+    "row3": { "x": 0, "y": 2884, "text": "Arriving at an event, and the phone", "kind": "title1", "maxW": 2380 }
+  },
+  "designSystems": []
+}

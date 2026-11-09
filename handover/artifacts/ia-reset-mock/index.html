@@ -1,0 +1,589 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta charset="utf-8">
+<title>Lekishi IA reset</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Noto+Serif+JP:wght@400;600&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<style>
+  /* Layout: a fixed date bar on top, four screens behind tabs; each screen is the scene with chrome at its edges, as RFD 5 frames it. Dark first, in Lekishi's lacquer, ink and gold. */
+  :root {
+    --bg: #0b1114; --surface: #121a20; --glass: rgba(18, 26, 32, 0.86); --raised: #1a242b; --rule: #2a343b;
+    --frame: rgba(210, 169, 79, 0.35); --ink: #f3ead7; --ink-dim: #b9af9c; --ink-faint: #8f877a;
+    --gold: #d2a94f; --gold-bright: #e8c46a; --on-gold: #1a1408; --gold-tint: rgba(210, 169, 79, 0.14);
+    --lane-1: #5fb3a8; --lane-2: #c9a25a; --lane-3: #d58a7a; --lane-4: #9aa7d8; --lane-5: #8fbf72;
+    --display: "Cinzel", "Times New Roman", serif; --serif: "Noto Serif JP", "Noto Serif", Georgia, serif; --sans: "Noto Sans JP", "Helvetica Neue", Arial, sans-serif;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #efe8da; --surface: #faf5ea; --glass: rgba(250, 245, 234, 0.88); --raised: #e6ddc9; --rule: #cfc5ae;
+      --frame: rgba(140, 104, 30, 0.5); --ink: #1d1a14; --ink-dim: #4f4a3f; --ink-faint: #77705f;
+      --gold: #9a7420; --gold-bright: #7d5d14; --on-gold: #fff8e6; --gold-tint: rgba(154, 116, 32, 0.14);
+      --lane-1: #1f7a70; --lane-2: #8a6a22; --lane-3: #a2503f; --lane-4: #4d5aa0; --lane-5: #4e7d2f;
+      color-scheme: light;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #efe8da; --surface: #faf5ea; --glass: rgba(250, 245, 234, 0.88); --raised: #e6ddc9; --rule: #cfc5ae;
+    --frame: rgba(140, 104, 30, 0.5); --ink: #1d1a14; --ink-dim: #4f4a3f; --ink-faint: #77705f;
+    --gold: #9a7420; --gold-bright: #7d5d14; --on-gold: #fff8e6; --gold-tint: rgba(154, 116, 32, 0.14);
+    --lane-1: #1f7a70; --lane-2: #8a6a22; --lane-3: #a2503f; --lane-4: #4d5aa0; --lane-5: #4e7d2f;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 14px; line-height: 1.5;
+    padding-block: 0 3rem; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  a { color: var(--gold-bright); }
+  button { font: inherit; color: inherit; }
+  button:focus-visible, a:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
+  .wrap { max-width: 1240px; margin: 0 auto; min-width: 0; }
+  header.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); padding-block: 0.75rem 0.5rem; border-bottom: 1px solid var(--rule); }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 11; background: var(--bg); }
+  .bar .row { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .brand { font-family: var(--display); font-weight: 600; letter-spacing: 0.14em; font-size: 15px; color: var(--ink); display: flex; align-items: center; gap: 0.5rem; }
+  .brand .ja { font-family: var(--serif); letter-spacing: 0; color: var(--ink-dim); font-size: 13px; border-left: 1px solid var(--rule); padding-left: 0.5rem; }
+  nav.tabs { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+  nav.tabs a { text-decoration: none; color: var(--ink-dim); padding: 0.3rem 0.7rem; border-radius: 4px; border: 1px solid transparent; font-size: 13px; }
+  nav.tabs a[aria-current="page"] { color: var(--gold-bright); border-color: var(--frame); background: var(--gold-tint); }
+  .eyebrow { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+  h1 { font-family: var(--display); font-weight: 600; font-size: clamp(26px, 4vw, 38px); line-height: 1.1; margin: 0.4rem 0 0.6rem; text-wrap: balance; }
+  h2 { font-family: var(--display); font-weight: 500; font-size: 22px; margin: 0 0 0.5rem; }
+  h3 { font-family: var(--serif); font-weight: 600; font-size: 17px; margin: 0 0 0.4rem; }
+  p { max-width: 70ch; }
+  .intro { padding-block: 1.5rem 1rem; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.5rem; }
+  .intro p { margin: 0.3rem 0; color: var(--ink-dim); }
+  .intro .facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; align-content: start; }
+  .fact { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 0.6rem 0.8rem; }
+  .fact b { display: block; font-family: var(--display); font-size: 22px; color: var(--gold-bright); font-variant-numeric: tabular-nums; }
+  .fact span { font-size: 12px; color: var(--ink-faint); }
+  @media (max-width: 760px) { .intro { grid-template-columns: 1fr; } }
+  section.screen { display: none; padding-block: 1rem 2rem; }
+  section.screen.on { display: block; }
+  .screen-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+  .screen-head p { margin: 0; color: var(--ink-dim); max-width: 80ch; }
+  .note { font-size: 12px; color: var(--ink-faint); margin-top: 0.75rem; max-width: 90ch; }
+  .plate { background: var(--glass); border: 1px solid var(--frame); border-radius: 6px; backdrop-filter: blur(8px); }
+  .chip { display: inline-flex; align-items: center; gap: 0.35rem; border: 1px solid var(--rule); border-radius: 999px; padding: 0.15rem 0.65rem; font-size: 12px; color: var(--ink-dim); background: transparent; cursor: pointer; }
+  .chip[aria-pressed="true"] { border-color: var(--gold); color: var(--gold-bright); background: var(--gold-tint); }
+  .chip .dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+  .btn { display: inline-flex; align-items: center; gap: 0.4rem; border: 1px solid var(--frame); background: var(--raised); color: var(--ink); border-radius: 4px; padding: 0.4rem 0.8rem; cursor: pointer; font-size: 13px; }
+  .btn.gold { background: var(--gold); color: var(--on-gold); border-color: var(--gold); font-weight: 600; }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  kbd { border: 1px solid var(--rule); border-radius: 3px; padding: 0 0.3rem; font-size: 11px; color: var(--ink-faint); }
+
+  /* World */
+  .world { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 1rem; align-items: start; }
+  @media (max-width: 900px) { .world { grid-template-columns: 1fr; } }
+  .scene { position: relative; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+  .scene canvas { display: block; width: 100%; height: auto; }
+  .scene .marks { position: absolute; inset: 0; pointer-events: none; }
+  .scene .marks .m { position: absolute; transform: translate(-50%, -50%); pointer-events: auto; cursor: pointer; display: flex; align-items: center; gap: 0.3rem; }
+  .m .dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--gold-bright); background: var(--gold); box-shadow: 0 0 0 3px rgba(0,0,0,0.35); }
+  .m.dim .dot { width: 6px; height: 6px; background: transparent; border-color: rgba(243,234,215,0.55); box-shadow: none; }
+  .m .lbl { font-family: var(--serif); font-size: 12px; color: #fff; text-shadow: 0 0 3px #000, 0 0 6px #000; white-space: nowrap; }
+  .m.dim .lbl { display: none; }
+  .m.sel .dot { box-shadow: 0 0 0 4px rgba(232,196,106,0.45); }
+  .scene svg.arcs { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .scene .datebar { position: absolute; top: 10px; left: 10px; right: 10px; display: flex; align-items: center; gap: 0.75rem; padding: 0.4rem 0.75rem; font-size: 13px; }
+  .scene .datebar .year { font-family: var(--display); font-size: 22px; color: var(--gold-bright); font-variant-numeric: tabular-nums; }
+  .scene .datebar .search { flex: 1; min-width: 0; display: flex; align-items: center; gap: 0.5rem; color: var(--ink-faint); border: 1px solid var(--rule); border-radius: 4px; padding: 0.25rem 0.6rem; background: var(--surface); font-size: 12px; }
+  .scene .key { position: absolute; left: 10px; bottom: 10px; font-size: 11px; color: var(--ink-dim); display: flex; gap: 0.8rem; padding: 0.3rem 0.6rem; }
+  .scene .hint { position: absolute; right: 10px; bottom: 10px; font-size: 11px; color: var(--ink-faint); padding: 0.3rem 0.6rem; }
+  .side { display: flex; flex-direction: column; gap: 0.75rem; min-width: 0; }
+  .card { background: var(--surface); border: 1px solid var(--frame); border-radius: 6px; padding: 0.9rem 1rem; min-width: 0; }
+  .card .eyebrow { display: block; margin-bottom: 0.25rem; }
+  .card h3 { font-size: 18px; }
+  .card ul { list-style: none; margin: 0.4rem 0 0; padding: 0; display: grid; gap: 0.35rem; }
+  .card li { display: flex; gap: 0.5rem; align-items: baseline; font-size: 13px; }
+  .card li .win { color: var(--ink-faint); font-variant-numeric: tabular-nums; white-space: nowrap; margin-left: auto; font-size: 12px; }
+  .card li button { background: none; border: 0; padding: 0; text-align: left; cursor: pointer; font-family: var(--serif); color: var(--ink); }
+  .card li button:hover { color: var(--gold-bright); }
+  .lane-dot { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+  .via { color: var(--ink-faint); font-size: 12px; }
+  .strip { margin-top: 1rem; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 0.6rem 0.75rem 0.4rem; overflow: hidden; }
+  .strip .top { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--ink-faint); margin-bottom: 0.35rem; }
+  .strip .area { position: relative; height: 128px; }
+  .strip .lane { position: absolute; left: 0; right: 0; height: 18px; }
+  .strip .lane .ln { position: absolute; left: 0; font-size: 10px; color: var(--ink-faint); letter-spacing: 0.08em; text-transform: uppercase; top: 1px; pointer-events: none; }
+  .strip .bar { position: absolute; height: 10px; top: 4px; border-radius: 5px; opacity: 0.55; cursor: pointer; min-width: 4px; border: 1px solid transparent; }
+  .strip .bar.on { opacity: 1; border-color: #fff8; box-shadow: 0 0 0 2px rgba(232,196,106,0.35); }
+  .strip .ticks { position: absolute; left: 0; right: 0; bottom: 0; height: 16px; border-top: 1px solid var(--rule); }
+  .strip .ticks span { position: absolute; top: 2px; transform: translateX(-50%); font-size: 10px; color: var(--ink-faint); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .strip .deep { position: absolute; top: 0; bottom: 16px; left: 0; background: repeating-linear-gradient(90deg, transparent 0 6px, rgba(143,135,122,0.12) 6px 7px); border-right: 1px dashed var(--rule); }
+  .strip input[type=range] { width: 100%; margin: 0.25rem 0 0; accent-color: var(--gold); }
+  .strip .head { position: absolute; top: 0; bottom: 16px; width: 2px; background: var(--gold-bright); pointer-events: none; }
+
+  /* Chapters */
+  .filters { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; align-items: center; }
+  .filters .sep { width: 1px; height: 18px; background: var(--rule); margin: 0 0.3rem; }
+  .cols { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(150px, 1fr); gap: 0.6rem; overflow-x: auto; padding-bottom: 0.5rem; position: relative; }
+  .col { min-width: 0; }
+  .col h4 { position: sticky; top: 0; margin: 0 0 0.4rem; font-family: var(--serif); font-weight: 600; font-size: 13px; padding: 0.35rem 0.5rem; background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; display: flex; justify-content: space-between; gap: 0.4rem; z-index: 2; }
+  .col h4 span { color: var(--ink-faint); font-weight: 400; font-variant-numeric: tabular-nums; }
+  .col .track { position: relative; height: var(--trackH); border-left: 1px dashed var(--rule); }
+  .cbar { position: absolute; left: 6px; right: 0; border-left: 3px solid var(--lane); background: color-mix(in srgb, var(--lane) 16%, var(--surface)); border-radius: 0 4px 4px 0; padding: 0.3rem 0.45rem; min-height: 44px; overflow: hidden; cursor: pointer; transition: box-shadow 120ms; }
+  .cbar.off { opacity: 0.18; pointer-events: none; }
+  .cbar.link { box-shadow: 0 0 0 2px var(--gold); }
+  .cbar.hover { box-shadow: 0 0 0 2px var(--gold-bright); }
+  .cbar .t { font-family: var(--serif); font-size: 12px; line-height: 1.25; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .cbar .w { font-size: 10px; color: var(--ink-faint); font-variant-numeric: tabular-nums; display: flex; gap: 0.4rem; }
+  .cbar .k { color: var(--ink-dim); }
+  .axis { position: absolute; left: 0; top: 0; bottom: 0; width: 44px; pointer-events: none; }
+  .deepband { background: var(--raised); border: 1px solid var(--rule); border-radius: 6px; padding: 0.5rem 0.75rem; margin-bottom: 0.6rem; font-size: 12px; color: var(--ink-dim); display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+  .deepband b { color: var(--ink); font-family: var(--serif); }
+  .yearlabels { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(150px, 1fr); gap: 0.6rem; }
+  .cols-wrap { position: relative; display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 0.4rem; }
+  .yaxis { position: relative; height: var(--trackH); margin-top: 34px; }
+  .yaxis span { position: absolute; right: 4px; transform: translateY(-50%); font-size: 10px; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+  .tip { position: fixed; z-index: 20; pointer-events: none; background: var(--glass); border: 1px solid var(--frame); border-radius: 4px; padding: 0.4rem 0.6rem; font-size: 12px; max-width: 280px; display: none; }
+  .tip b { font-family: var(--serif); display: block; }
+
+  /* Tour */
+  .tour { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 1rem; align-items: start; }
+  @media (max-width: 900px) { .tour { grid-template-columns: 1fr; } }
+  .stage { position: relative; aspect-ratio: 16 / 10; max-width: 100%; overflow: hidden; background: #163f58; border: 1px solid var(--rule); border-radius: 6px; }
+  .stage .map { position: absolute; left: 0; top: 0; transform-origin: 0 0; transition: transform 1400ms cubic-bezier(.4,0,.2,1); will-change: transform; }
+  .stage .map img { display: block; max-width: none; }
+  .stage .map svg { position: absolute; left: 0; top: 0; overflow: visible; }
+  @media (prefers-reduced-motion: reduce) { .stage .map { transition: none; } }
+  .stage .date { position: absolute; top: 10px; left: 10px; right: 10px; display: flex; gap: 0.75rem; align-items: center; padding: 0.35rem 0.7rem; font-size: 13px; }
+  .stage .date .year { font-family: var(--display); font-size: 20px; color: var(--gold-bright); }
+  .stage .date .expr { font-family: var(--serif); color: var(--ink-dim); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .stage .date .pos { margin-left: auto; color: var(--ink-faint); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .stage .journal { position: absolute; left: 10px; top: 58px; width: min(300px, 70%); padding: 0.5rem 0.7rem; font-size: 12px; }
+  .journal .eyebrow { display: block; }
+  .journal .cur { font-family: var(--serif); font-size: 13px; color: var(--ink); margin: 0.2rem 0; }
+  .journal .nxt { color: var(--ink-faint); }
+  .journal .nxt b { color: var(--ink-dim); font-weight: 500; }
+  .stage .pennants { position: absolute; right: 10px; top: 58px; display: flex; gap: 0.4rem; }
+  .pen { display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 10px; color: #fff; text-shadow: 0 0 3px #000; }
+  .pen .flag { width: 30px; height: 36px; clip-path: polygon(0 0, 100% 0, 100% 78%, 50% 100%, 0 78%); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-size: 13px; color: #fff; }
+  .stage .dial { position: absolute; right: 10px; bottom: 10px; display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.6rem; }
+  .dial .ring { width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--rule); display: grid; place-items: center; position: relative; }
+  .dial .ring button { width: 34px; height: 34px; border-radius: 50%; border: 0; background: var(--gold); color: var(--on-gold); cursor: pointer; font-size: 14px; }
+  .dial .ring svg { position: absolute; inset: -2px; transform: rotate(-90deg); }
+  .dial .next { font-size: 11px; color: var(--ink-dim); max-width: 180px; }
+  .dial .next b { display: block; color: var(--ink); font-family: var(--serif); font-weight: 500; }
+  .stage .keyline { position: absolute; left: 10px; bottom: 10px; font-size: 11px; color: var(--ink-dim); padding: 0.3rem 0.6rem; display: flex; gap: 0.8rem; }
+  .stage .minimap { position: absolute; left: 10px; bottom: 40px; width: 110px; height: 66px; border: 1px solid var(--frame); border-radius: 4px; overflow: hidden; background: #163f58; }
+  .stage .minimap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .stage .minimap .fp { position: absolute; border: 1.5px solid var(--gold-bright); box-shadow: 0 0 0 1px #0008; }
+  .tcard .quote { font-family: var(--serif); border-left: 2px solid var(--gold); padding-left: 0.7rem; margin: 0.6rem 0; color: var(--ink); }
+  .tcard .quote small { display: block; color: var(--ink-faint); font-family: var(--sans); margin-top: 0.2rem; font-size: 11px; }
+  .tcard .kv { display: grid; grid-template-columns: 56px 1fr; gap: 0.25rem 0.5rem; font-size: 13px; margin-top: 0.5rem; }
+  .tcard .kv span:nth-child(odd) { color: var(--ink-faint); }
+  .tcard .disc { margin-top: 0.5rem; font-size: 12px; }
+  .tcard .disc summary { cursor: pointer; color: var(--ink-dim); }
+  .tcard .nav { display: flex; gap: 0.5rem; margin-top: 0.8rem; align-items: center; }
+  .tcard .nav .pos { margin-left: auto; color: var(--ink-faint); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .steps { margin-top: 0.75rem; font-size: 12px; color: var(--ink-dim); }
+  .steps summary { cursor: pointer; }
+  .steps ol { padding-left: 1.4rem; margin: 0.4rem 0 0; display: grid; gap: 0.15rem; max-height: 260px; overflow: auto; }
+  .steps li { cursor: pointer; font-family: var(--serif); }
+  .steps li.cur { color: var(--gold-bright); }
+  .mark { position: absolute; transform: translate(-50%, -50%); }
+
+  /* Place */
+  .place { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 1rem; }
+  @media (max-width: 800px) { .place { grid-template-columns: 1fr; } }
+  .plist { display: grid; gap: 0.4rem; }
+  .plist button { text-align: left; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 0.5rem 0.7rem; cursor: pointer; display: flex; justify-content: space-between; gap: 0.5rem; }
+  .plist button[aria-pressed="true"] { border-color: var(--gold); background: var(--gold-tint); }
+  .plist button b { font-family: var(--serif); font-weight: 600; }
+  .plist button span { color: var(--ink-faint); font-size: 12px; white-space: nowrap; }
+  .tl { position: relative; padding-left: 1.5rem; border-left: 2px solid var(--rule); display: grid; gap: 0.6rem; }
+  .tl .ev { position: relative; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 0.5rem 0.8rem; }
+  .tl .ev::before { content: ""; position: absolute; left: calc(-1.5rem - 6px); top: 14px; width: 10px; height: 10px; border-radius: 50%; background: var(--lane); border: 2px solid var(--bg); }
+  .tl .ev .y { font-variant-numeric: tabular-nums; color: var(--gold-bright); font-family: var(--display); font-size: 15px; }
+  .tl .ev .t { font-family: var(--serif); }
+  .tl .ev .c { font-size: 11px; color: var(--ink-faint); display: flex; gap: 0.4rem; align-items: center; margin-top: 0.15rem; }
+  .tl .gap { font-size: 11px; color: var(--ink-faint); padding-left: 0.2rem; }
+</style>
+
+<header class="bar">
+  <div class="wrap row">
+    <span class="brand">LEKISHI <span class="ja">歴史 · IA reset mock</span></span>
+    <nav class="tabs" aria-label="Screens">
+      <a href="#world" data-tab="world">World</a>
+      <a href="#chapters" data-tab="chapters">Chapters</a>
+      <a href="#tour" data-tab="tour">Chapter tour</a>
+      <a href="#place" data-tab="place">A place across chapters</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="intro">
+    <div>
+      <span class="eyebrow">Proposal · 2026-11-04</span>
+      <h1>Two axes, one world</h1>
+      <p>The globe explores sideways: pick a moment, see the whole world at it, dive. Chapters run downward: each is a curated thread through time, grouped by the culture whose sources tell it. Relationships are what connect the two, and the records already carry them.</p>
+      <p>Every number, name, window, place and link on these screens is from the 39 served chapters on <code>main</code>. The basemaps are painted from the elevation tiles already in the build cache. What is mocked is the interaction and the chrome, not the data.</p>
+    </div>
+    <div class="facts" id="facts"></div>
+  </div>
+
+  <section class="screen" id="s-world" aria-labelledby="h-world">
+    <div class="screen-head">
+      <div><h2 id="h-world">The world at a moment</h2><p>Drag the globe. Drag the playhead. The chapters alive at that year light up and the threads between them are drawn from the places they share. This replaces the card wall as the home page.</p></div>
+    </div>
+    <div class="world">
+      <div class="scene" id="scene">
+        <canvas id="globe" width="760" height="760" aria-label="The painted globe"></canvas>
+        <svg class="arcs" id="arcs"></svg>
+        <div class="marks" id="marks"></div>
+        <div class="datebar plate">
+          <span class="year" id="wyear">753</span>
+          <span class="search">⌕ Search people, places, events and years <kbd>/</kbd></span>
+          <span class="hint-k" style="font-size:11px;color:var(--ink-faint)">Try</span>
+          <button class="chip" data-jump="753,125,32">753</button>
+          <button class="chip" data-jump="-220,110,35">221 BCE</button>
+          <button class="chip" data-jump="-1300,35,30">Amarna</button>
+        </div>
+        <div class="key plate"><span>● alive at this year</span><span>○ within a century</span><span>— shares a place or a people</span></div>
+        <div class="hint plate" id="whint">drag to turn · click a mark</div>
+      </div>
+      <aside class="side">
+        <div class="card" id="wcard"></div>
+        <div class="card" id="wlinks"></div>
+      </aside>
+    </div>
+    <div class="strip" id="strip">
+      <div class="top"><span>Era strip · five lanes by region · deep time folded on the left</span><span id="stripYear"></span></div>
+      <div class="area" id="striparea"></div>
+      <input type="range" id="yearRange" min="0" max="1000" value="0" aria-label="Year">
+    </div>
+    <p class="note">What is new here: the home page is the atlas, not a catalogue. The era strip is non-linear (everything before 2400 BCE is folded into the hatched band) so the early Americas and Lapita do not flatten the other 37. Marks are declutered by priority. The arcs are real: 91 chapter pairs share at least one place or people record today, without any new data work.</p>
+  </section>
+
+  <section class="screen" id="s-chapters" aria-labelledby="h-chapters">
+    <div class="screen-head">
+      <div><h2 id="h-chapters">Chapters as vertical time</h2><p>One column per culture, time running down the page, each chapter a bar at its window. Filter by region or by kind. Hover a bar to see the chapters it shares places with, across the columns.</p></div>
+    </div>
+    <div class="filters" id="filters"></div>
+    <div class="deepband" id="deepband"></div>
+    <div class="cols-wrap">
+      <div class="yaxis" id="yaxis"></div>
+      <div class="cols" id="cols"></div>
+    </div>
+    <p class="note">This is the "chapters page" in Darwin's note of 10-23: valid, but on their own page and organised. A vertical timeline per culture is the shape; the same component later shows a place's or a person's timeline (see the last tab). Order is time, never file name.</p>
+  </section>
+
+  <section class="screen" id="s-tour" aria-labelledby="h-tour">
+    <div class="screen-head">
+      <div><h2 id="h-tour">A chapter as a guided tour</h2><p>The embassy of 750–754, step by step. Each step flies the camera, moves the date, opens the card and holds. Play advances a step every few seconds. The ground is painted relief from the same elevation the globe already ships.</p></div>
+    </div>
+    <div class="tour">
+      <div class="stage" id="stage">
+        <div class="map" id="map"><img id="regionimg" src="img/region.jpg" alt="Painted relief of the East China Sea, Korea and Japan"><svg id="overlay"></svg></div>
+        <div class="date plate"><span class="year" id="tyear">750</span><span class="expr" id="texpr"></span><span class="pos" id="tpos"></span></div>
+        <div class="journal plate"><span class="eyebrow">Journal</span><div class="cur" id="jcur"></div><div class="nxt" id="jnxt"></div></div>
+        <div class="pennants" id="pennants"></div>
+        <div class="minimap"><img src="img/world-2k.jpg" alt="" id="mmimg"><div class="fp" id="fp"></div></div>
+        <div class="keyline plate"><span>◉ attested site</span><span>◎ identified locality</span><span>- - schematic through dated stops</span></div>
+        <div class="dial plate">
+          <div class="next" id="tnext"></div>
+          <div class="ring"><svg viewBox="0 0 44 44" width="44" height="44"><circle cx="22" cy="22" r="20" fill="none" stroke="var(--gold-bright)" stroke-width="2" id="ringarc" stroke-dasharray="125.6" stroke-dashoffset="125.6"/></svg><button id="tplay" aria-label="Play the story">▶</button></div>
+        </div>
+      </div>
+      <aside class="side">
+        <div class="card tcard" id="tcard"></div>
+        <details class="steps"><summary>All 38 steps</summary><ol id="steplist"></ol></details>
+      </aside>
+    </div>
+    <p class="note">What is new here: play means story, not clock. The journal shows the step you are on and the one after it; the whole list is a disclosure. The qualifications (placement, dispute, precision) sit behind "Why this placement" rather than above the narrative. A ship or a party stands at the current stop. The diorama tier would replace this painted ground below region height, with the same chrome.</p>
+  </section>
+
+  <section class="screen" id="s-place" aria-labelledby="h-place">
+    <div class="screen-head">
+      <div><h2 id="h-place">A place across chapters</h2><p>The records already share one id for 88 places and 41 peoples across chapters. Nothing in the interface uses that yet. This is what a place page looks like when it does: one vertical timeline, every chapter's events at that place, in order.</p></div>
+    </div>
+    <div class="place">
+      <div class="plist" id="plist"></div>
+      <div><div class="tl" id="ptl"></div></div>
+    </div>
+    <p class="note">This is the correlation Darwin asked for on 10-23, drawn from data that exists. The same page works for a people (the Persian Empire appears in three chapters, 秦 in four). The search result for 長安 lands here instead of on three unrelated copies.</p>
+  </section>
+</main>
+<div class="tip" id="tip"></div>
+
+<script src="data.js" charset="utf-8"></script>
+<script>
+(() => {
+  const LK = window.LK;
+  const $ = (s) => document.querySelector(s);
+  const yr = (y) => y <= 0 ? `${1 - y} BCE` : `${y}`;
+  const win = (c) => `${yr(c.start)}–${yr(c.end)}`;
+  const LANES = [
+    { name: "East Asia", regions: ["China", "Japan & Wa"], color: "var(--lane-1)" },
+    { name: "Silk Road & India", regions: ["India & the Silk Road"], color: "var(--lane-2)" },
+    { name: "Near East & Egypt", regions: ["Mesopotamia & the Levant", "Egypt"], color: "var(--lane-3)" },
+    { name: "Mediterranean", regions: ["Greece & Persia", "Rome", "Carthage"], color: "var(--lane-4)" },
+    { name: "Americas & Oceania", regions: ["The Americas", "Oceania"], color: "var(--lane-5)" },
+  ];
+  const laneOf = (c) => LANES.findIndex((l) => l.regions.includes(c.region));
+  const byId = Object.fromEntries(LK.chapters.map((c) => [c.id, c]));
+  const linksOf = (id) => LK.links.filter((l) => l.a === id || l.b === id).map((l) => ({ other: l.a === id ? l.b : l.a, via: l.via }));
+
+  // Facts
+  const uniquePlaces = 683, shared = 88;
+  $("#facts").innerHTML = [
+    [LK.chapters.length, "chapters served"], [LK.chapters.reduce((s, c) => s + c.events, 0), "events"], [uniquePlaces, "places, one record each"],
+    [shared, "places in 2+ chapters"], [LK.links.length, "chapter pairs already linked"], [LK.chapters.reduce((s, c) => s + c.steps, 0), "story steps"],
+  ].map(([n, l]) => `<div class="fact"><b>${n}</b><span>${l}</span></div>`).join("");
+
+  // Tabs
+  const tabs = ["world", "chapters", "tour", "place"];
+  function show(tab) {
+    if (!tabs.includes(tab)) tab = "world";
+    tabs.forEach((t) => { document.getElementById("s-" + t).classList.toggle("on", t === tab); });
+    document.querySelectorAll("nav.tabs a").forEach((a) => a.setAttribute("aria-current", a.dataset.tab === tab ? "page" : "false"));
+    if (tab === "world") requestAnimationFrame(renderGlobe);
+    if (tab === "tour") requestAnimationFrame(() => goStep(step, true));
+  }
+  window.addEventListener("hashchange", () => show(location.hash.slice(1)));
+
+  // ---- Era scale: deep time folded ----
+  const DEEP0 = -21100, MAIN0 = -2400, END = 820, FOLD = 0.1;
+  function tx(y) {
+    if (y >= MAIN0) return FOLD + (1 - FOLD) * (y - MAIN0) / (END - MAIN0);
+    const a = Math.log(MAIN0 - y + 1), b = Math.log(MAIN0 - DEEP0 + 1);
+    return FOLD * (1 - a / b);
+  }
+  function fromT(t) {
+    if (t >= FOLD) return MAIN0 + (t - FOLD) / (1 - FOLD) * (END - MAIN0);
+    const b = Math.log(MAIN0 - DEEP0 + 1);
+    return MAIN0 - (Math.exp((1 - t / FOLD) * b) - 1);
+  }
+
+  // ---- World ----
+  let year = 753, lon0 = 110, lat0 = 25, selected = "tang-mission-750-754";
+  const canvas = $("#globe"), ctx = canvas.getContext("2d");
+  const SIZE = 760, R = 360, CX = SIZE / 2, CY = SIZE / 2;
+  let tex = null, texW = 0, texH = 0, dragging = false, last = null, lowRes = false;
+  const img = new Image(); img.src = "img/world-2k.jpg";
+  img.onload = () => { const c = document.createElement("canvas"); c.width = img.width; c.height = img.height; const g = c.getContext("2d"); g.drawImage(img, 0, 0); tex = g.getImageData(0, 0, c.width, c.height).data; texW = c.width; texH = c.height; renderGlobe(); };
+  const D2R = Math.PI / 180;
+  function project(lon, lat) {
+    const la = lat * D2R, lo = (lon - lon0) * D2R, p = lat0 * D2R;
+    const x = Math.cos(la) * Math.sin(lo), z = Math.cos(la) * Math.cos(lo), y = Math.sin(la);
+    const y2 = y * Math.cos(p) - z * Math.sin(p), z2 = y * Math.sin(p) + z * Math.cos(p);
+    return { x: CX + x * R, y: CY - y2 * R, vis: z2 > 0.02, z: z2 };
+  }
+  function renderGlobe() {
+    if (!tex || !document.getElementById("s-world").classList.contains("on")) return;
+    const stepPx = lowRes ? 2 : 1;
+    const out = ctx.createImageData(SIZE, SIZE), o = out.data;
+    const p = lat0 * D2R, cp = Math.cos(p), sp = Math.sin(p), l0 = lon0 * D2R;
+    for (let py = 0; py < SIZE; py += stepPx) {
+      const y = (CY - py) / R;
+      for (let px = 0; px < SIZE; px += stepPx) {
+        const x = (px - CX) / R; const rr = x * x + y * y; if (rr > 1) continue;
+        const z = Math.sqrt(1 - rr);
+        const yy = y * cp + z * sp, zz = -y * sp + z * cp;
+        const lat = Math.asin(yy), lon = Math.atan2(x, zz) + l0;
+        let u = (lon / (2 * Math.PI) + 0.5); u -= Math.floor(u);
+        const v = 0.5 - lat / Math.PI;
+        const ti = ((Math.min(texH - 1, (v * texH) | 0)) * texW + ((u * texW) | 0)) * 4;
+        // limb darkening
+        const sh = 0.72 + 0.28 * z;
+        for (let dy = 0; dy < stepPx; dy++) for (let dx = 0; dx < stepPx; dx++) {
+          const oi = ((py + dy) * SIZE + (px + dx)) * 4;
+          o[oi] = tex[ti] * sh; o[oi + 1] = tex[ti + 1] * sh; o[oi + 2] = tex[ti + 2] * sh; o[oi + 3] = 255;
+        }
+      }
+    }
+    ctx.putImageData(out, 0, 0);
+    // atmosphere rim
+    const g = ctx.createRadialGradient(CX, CY, R - 6, CX, CY, R + 14);
+    g.addColorStop(0, "rgba(120,190,230,0)"); g.addColorStop(0.5, "rgba(120,190,230,0.35)"); g.addColorStop(1, "rgba(120,190,230,0)");
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(CX, CY, R + 14, 0, Math.PI * 2); ctx.fill();
+    renderMarks();
+  }
+  const alive = (c, y) => c.start - 25 <= y && c.end + 25 >= y;
+  const near = (c, y) => c.start - 100 <= y && c.end + 100 >= y;
+  function renderMarks() {
+    const box = canvas.getBoundingClientRect(), k = box.width / SIZE;
+    const marks = $("#marks"); marks.innerHTML = "";
+    const svg = $("#arcs"); svg.setAttribute("viewBox", `0 0 ${SIZE} ${SIZE}`); svg.innerHTML = "";
+    const act = LK.chapters.filter((c) => alive(c, year)), nearby = LK.chapters.filter((c) => !alive(c, year) && near(c, year));
+    // arcs between alive chapters
+    const actIds = new Set(act.map((c) => c.id));
+    for (const l of LK.links) {
+      if (!actIds.has(l.a) || !actIds.has(l.b)) continue;
+      const a = byId[l.a], b = byId[l.b];
+      const pts = []; let d = "";
+      for (let i = 0; i <= 24; i++) {
+        const t = i / 24;
+        const la1 = a.lat * D2R, lo1 = a.lon * D2R, la2 = b.lat * D2R, lo2 = b.lon * D2R;
+        const v1 = [Math.cos(la1) * Math.cos(lo1), Math.cos(la1) * Math.sin(lo1), Math.sin(la1)], v2 = [Math.cos(la2) * Math.cos(lo2), Math.cos(la2) * Math.sin(lo2), Math.sin(la2)];
+        const om = Math.acos(Math.max(-1, Math.min(1, v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2]))) || 1e-6;
+        const s1 = Math.sin((1 - t) * om) / Math.sin(om), s2 = Math.sin(t * om) / Math.sin(om);
+        const v = [v1[0] * s1 + v2[0] * s2, v1[1] * s1 + v2[1] * s2, v1[2] * s1 + v2[2] * s2];
+        const lat = Math.asin(v[2]) / D2R, lon = Math.atan2(v[1], v[0]) / D2R;
+        const q = project(lon, lat);
+        if (q.vis) { d += (pts.length ? "L" : "M") + q.x.toFixed(1) + " " + q.y.toFixed(1); pts.push(q); } else { pts.length = 0; }
+      }
+      if (d) { const path = document.createElementNS("http://www.w3.org/2000/svg", "path"); path.setAttribute("d", d); path.setAttribute("fill", "none"); path.setAttribute("stroke", "rgba(232,196,106,0.85)"); path.setAttribute("stroke-width", "1.6"); path.setAttribute("stroke-dasharray", "4 3"); svg.appendChild(path); }
+    }
+    // declutter: alive first, by events desc; skip a label if within 26px of a placed label
+    const placed = [];
+    const put = (c, dim) => {
+      const q = project(c.lon, c.lat); if (!q.vis) return;
+      const el = document.createElement("div"); el.className = "m" + (dim ? " dim" : "") + (c.id === selected ? " sel" : "");
+      el.style.left = (q.x * k) + "px"; el.style.top = (q.y * k) + "px";
+      const collide = placed.some((p) => Math.hypot(p.x - q.x, p.y - q.y) < 34);
+      el.innerHTML = `<span class="dot"></span>${dim || collide ? "" : `<span class="lbl">${c.name}</span>`}`;
+      el.title = `${c.name} · ${win(c)}`;
+      el.addEventListener("click", () => { selected = c.id; renderWorldCards(); renderMarks(); });
+      marks.appendChild(el); if (!dim) placed.push(q);
+    };
+    act.sort((a, b) => b.events - a.events).forEach((c) => put(c, false));
+    nearby.forEach((c) => put(c, true));
+    $("#wyear").textContent = yr(year);
+    renderStrip();
+  }
+  function renderWorldCards() {
+    const act = LK.chapters.filter((c) => alive(c, year)).sort((a, b) => a.start - b.start);
+    const sel = byId[selected];
+    $("#wcard").innerHTML = `<span class="eyebrow">The world in ${yr(year)} · ${act.length} chapters alive</span>` +
+      `<ul>${act.map((c) => `<li><span class="lane-dot" style="background:${LANES[laneOf(c)].color}"></span><button data-id="${c.id}">${c.name}</button><span class="win">${win(c)}</span></li>`).join("") || "<li class='via'>Nothing is told at this year yet.</li>"}</ul>`;
+    $("#wcard").querySelectorAll("button").forEach((b) => b.addEventListener("click", () => { selected = b.dataset.id; renderWorldCards(); renderMarks(); }));
+    if (!sel) { $("#wlinks").innerHTML = ""; return; }
+    const ls = linksOf(sel.id).map((l) => ({ ...l, c: byId[l.other] })).sort((a, b) => Math.abs(a.c.start - sel.start) - Math.abs(b.c.start - sel.start));
+    $("#wlinks").innerHTML = `<span class="eyebrow">${sel.region} · ${sel.kind}</span><h3>${sel.name}</h3><div class="via">${win(sel)} · ${sel.events} events · ${sel.steps} steps${sel.stories > 1 ? ` · ${sel.stories} stories` : ""}</div>` +
+      `<p style="margin:0.6rem 0 0.2rem;font-size:12px;color:var(--ink-faint)">Threads through this chapter</p>` +
+      `<ul>${ls.slice(0, 8).map((l) => `<li><span class="lane-dot" style="background:${LANES[laneOf(l.c)].color}"></span><button data-id="${l.c.id}">${l.c.name}</button><span class="win">${win(l.c)}</span></li><li class="via" style="padding-left:1rem">via ${l.via.filter((v) => !v.startsWith("actor:")).slice(0, 4).join(", ")}${l.via.some((v) => v.startsWith("actor:")) ? (l.via.some((v) => !v.startsWith("actor:")) ? " and " : "") + "a shared people" : ""}</li>`).join("") || "<li class='via'>No shared place or people yet.</li>"}</ul>` +
+      `<div style="margin-top:0.7rem"><button class="btn gold" data-open="${sel.id}">Open the chapter →</button></div>`;
+    $("#wlinks").querySelectorAll("button[data-id]").forEach((b) => b.addEventListener("click", () => { selected = b.dataset.id; const c = byId[selected]; year = Math.round((c.start + c.end) / 2); lon0 = c.lon; lat0 = c.lat; $("#yearRange").value = Math.round(tx(year) * 1000); renderWorldCards(); renderGlobe(); }));
+    $("#wlinks").querySelector("button[data-open]")?.addEventListener("click", () => { location.hash = sel.id === "tang-mission-750-754" ? "tour" : "chapters"; });
+  }
+  // drag
+  const pos = (e) => (e.touches ? e.touches[0] : e);
+  canvas.addEventListener("pointerdown", (e) => { dragging = true; last = { x: e.clientX, y: e.clientY }; canvas.setPointerCapture(e.pointerId); lowRes = true; });
+  canvas.addEventListener("pointermove", (e) => { if (!dragging) return; const k = canvas.getBoundingClientRect().width / SIZE; lon0 -= (e.clientX - last.x) / k * 0.3; lat0 = Math.max(-80, Math.min(80, lat0 + (e.clientY - last.y) / k * 0.3)); last = { x: e.clientX, y: e.clientY }; renderGlobe(); });
+  canvas.addEventListener("pointerup", () => { dragging = false; lowRes = false; renderGlobe(); });
+  window.addEventListener("resize", () => renderMarks());
+  document.querySelectorAll("[data-jump]").forEach((b) => b.addEventListener("click", () => { const [y, lo, la] = b.dataset.jump.split(",").map(Number); year = y; lon0 = lo; lat0 = la; $("#yearRange").value = Math.round(tx(year) * 1000); renderWorldCards(); renderGlobe(); }));
+  // strip
+  const stripArea = $("#striparea");
+  function renderStrip() {
+    const w = stripArea.clientWidth; if (!w) return;
+    let html = `<div class="deep" style="width:${FOLD * 100}%"></div>`;
+    LANES.forEach((l, i) => {
+      html += `<div class="lane" style="top:${i * 20}px"><span class="ln">${l.name}</span>${LK.chapters.filter((c) => laneOf(c) === i).map((c) => { const x0 = tx(c.start) * 100, x1 = tx(c.end) * 100; return `<div class="bar${alive(c, year) ? " on" : ""}" data-id="${c.id}" style="left:${x0}%;width:${Math.max(0.6, x1 - x0)}%;background:${l.color}" title="${c.name} · ${win(c)}"></div>`; }).join("")}</div>`;
+    });
+    html += `<div class="ticks">${[-20000, -10000, -5000, -2000, -1500, -1000, -500, 1, 500].map((y) => `<span style="left:${tx(y) * 100}%">${yr(y)}</span>`).join("")}</div><div class="head" style="left:${tx(year) * 100}%"></div>`;
+    stripArea.innerHTML = html;
+    stripArea.querySelectorAll(".bar").forEach((b) => b.addEventListener("click", () => { const c = byId[b.dataset.id]; selected = c.id; year = Math.round((c.start + c.end) / 2); lon0 = c.lon; lat0 = c.lat; $("#yearRange").value = Math.round(tx(year) * 1000); renderWorldCards(); renderGlobe(); }));
+    $("#stripYear").textContent = yr(year);
+  }
+  $("#yearRange").value = Math.round(tx(year) * 1000);
+  $("#yearRange").addEventListener("input", (e) => { year = Math.round(fromT(e.target.value / 1000)); renderWorldCards(); renderMarks(); });
+
+  // ---- Chapters ----
+  const KINDS = [...new Set(LK.chapters.map((c) => c.kind))].sort();
+  const REGIONS = ["China", "Japan & Wa", "India & the Silk Road", "Mesopotamia & the Levant", "Egypt", "Greece & Persia", "Rome", "Carthage", "The Americas", "Oceania"];
+  const regionOn = new Set(REGIONS), kindOn = new Set(KINDS);
+  const PX = 0.5, T0 = -2400, T1 = 820, trackH = (T1 - T0) * PX;
+  const ty = (y) => (Math.max(T0, y) - T0) * PX;
+  function renderFilters() {
+    $("#filters").innerHTML = `<span class="via">Region</span>` + REGIONS.map((r) => `<button class="chip" data-r="${r}" aria-pressed="${regionOn.has(r)}"><span class="dot" style="color:${LANES[LANES.findIndex((l) => l.regions.includes(r))].color}"></span>${r}</button>`).join("") +
+      `<span class="sep"></span><span class="via">Kind</span>` + KINDS.map((k) => `<button class="chip" data-k="${k}" aria-pressed="${kindOn.has(k)}">${k}</button>`).join("");
+    $("#filters").querySelectorAll("[data-r]").forEach((b) => b.addEventListener("click", () => { const r = b.dataset.r; regionOn.has(r) ? regionOn.delete(r) : regionOn.add(r); renderFilters(); renderCols(); }));
+    $("#filters").querySelectorAll("[data-k]").forEach((b) => b.addEventListener("click", () => { const k = b.dataset.k; kindOn.has(k) ? kindOn.delete(k) : kindOn.add(k); renderFilters(); renderCols(); }));
+  }
+  function renderCols() {
+    const deep = LK.chapters.filter((c) => c.start < T0);
+    $("#deepband").innerHTML = `<span class="eyebrow">Before 2400 BCE</span>` + deep.map((c) => `<span><b>${c.name}</b> · ${win(c)} · ${c.events} events</span>`).join("") + `<span class="via">folded: the deep-time chapters keep their windows, the axis below does not stretch to them.</span>`;
+    const cols = $("#cols"); cols.style.setProperty("--trackH", trackH + "px");
+    cols.innerHTML = REGIONS.map((r) => {
+      const lane = LANES.findIndex((l) => l.regions.includes(r)), color = LANES[lane].color;
+      const items = LK.chapters.filter((c) => c.region === r).sort((a, b) => a.start - b.start);
+      // stagger overlapping bars
+      let lastEnd = -1e9, shift = 0;
+      const bars = items.map((c) => { const top = ty(c.start); if (top < lastEnd + 46) shift = (shift + 1) % 2; else shift = 0; const h = Math.max(44, (Math.min(T1, c.end) - Math.max(T0, c.start)) * PX); lastEnd = top + h; const off = regionOn.has(r) && kindOn.has(c.kind) ? "" : " off"; return `<div class="cbar${off}" data-id="${c.id}" style="--lane:${color};top:${top}px;min-height:${h}px;margin-left:${shift * 10}px"><div class="t">${c.name}</div><div class="w"><span>${win(c)}</span><span class="k">${c.kind}</span><span>${c.events} ev</span></div></div>`; }).join("");
+      return `<div class="col"><h4>${r} <span>${items.length}</span></h4><div class="track">${bars}</div></div>`;
+    }).join("");
+    $("#yaxis").style.setProperty("--trackH", trackH + "px");
+    $("#yaxis").innerHTML = [-2400, -2000, -1500, -1000, -500, 1, 500, 800].map((y) => `<span style="top:${ty(y)}px">${yr(y)}</span>`).join("");
+    const tip = $("#tip");
+    cols.querySelectorAll(".cbar").forEach((b) => {
+      b.addEventListener("mouseenter", (e) => { const c = byId[b.dataset.id]; const ls = linksOf(c.id); b.classList.add("hover"); ls.forEach((l) => cols.querySelector(`.cbar[data-id="${l.other}"]`)?.classList.add("link")); tip.style.display = "block"; tip.innerHTML = `<b>${c.name}</b>${win(c)} · ${c.kind} · ${c.events} events · ${c.steps} steps<br>${ls.length ? `Shares places with ${ls.length} chapters: ${ls.slice(0, 3).map((l) => byId[l.other].name).join("; ")}${ls.length > 3 ? "…" : ""}` : "Shares no place with another chapter yet."}`; });
+      b.addEventListener("mousemove", (e) => { tip.style.left = Math.min(window.innerWidth - 300, e.clientX + 14) + "px"; tip.style.top = (e.clientY + 14) + "px"; });
+      b.addEventListener("mouseleave", () => { cols.querySelectorAll(".cbar").forEach((x) => x.classList.remove("link", "hover")); tip.style.display = "none"; });
+      b.addEventListener("click", () => { const c = byId[b.dataset.id]; selected = c.id; year = Math.round((c.start + c.end) / 2); lon0 = c.lon; lat0 = c.lat; $("#yearRange").value = Math.round(tx(year) * 1000); renderWorldCards(); location.hash = "world"; });
+    });
+  }
+
+  // ---- Tour ----
+  const B = { lon0: 104.0625, lon1: 143.4375, lat0: 43.06888777416962, lat1: 19.31114335506464, w: 3584, h: 2162 };
+  const mx = (lon) => (lon - B.lon0) / (B.lon1 - B.lon0) * B.w;
+  const myy = (lat) => { const m = (la) => Math.log(Math.tan(Math.PI / 4 + la * Math.PI / 360)); return (m(B.lat0) - m(lat)) / (m(B.lat0) - m(B.lat1)) * B.h; };
+  const tour = LK.tour; let step = 0, playing = false, timer = null;
+  const stage = $("#stage"), map = $("#map"), overlay = $("#overlay");
+  const located = tour.map((s, i) => ({ ...s, i })).filter((s) => s.lon != null);
+  const PEOPLE = [["鑒眞", "Jianzhen", "#7a2e2e"], ["大伴", "Ōtomo", "#2e4a7a"], ["吉備", "Kibi", "#6b6b2e"], ["藤原", "Fujiwara", "#7a5a2e"], ["阿倍", "Abe", "#2e6b5a"]];
+  $("#pennants").innerHTML = PEOPLE.map(([k, r, c]) => `<div class="pen"><div class="flag" style="background:${c}">${k}</div>${r}</div>`).join("");
+  function drawOverlay() {
+    overlay.setAttribute("width", B.w); overlay.setAttribute("height", B.h); overlay.setAttribute("viewBox", `0 0 ${B.w} ${B.h}`);
+    let d = ""; const voyage = located.filter((s) => s.i >= 9 && s.i <= 20);
+    voyage.forEach((s, i) => { d += (i ? "L" : "M") + mx(s.lon).toFixed(0) + " " + myy(s.lat).toFixed(0); });
+    const places = LK.tourPlaces.map((p) => `<g transform="translate(${mx(p.lon).toFixed(0)} ${myy(p.lat).toFixed(0)})"><path d="M-9 4 l0 -8 l6 -5 l6 5 l0 8 z M-2 4 l0 -5 l4 0 l0 5" fill="#f3ead7" stroke="#2a1d0a" stroke-width="1.2"/><circle r="3" cy="7" fill="#d2a94f" stroke="#2a1d0a"/><text y="-12" text-anchor="middle" font-family="Noto Serif JP, serif" font-size="15" fill="#fff" stroke="#000" stroke-width="3" paint-order="stroke">${p.label}</text></g>`).join("");
+    overlay.innerHTML = `<path d="${d}" fill="none" stroke="#f3ead7" stroke-width="2.5" stroke-dasharray="10 8" opacity="0.9"/>` + places + `<g id="unit"></g>`;
+  }
+  function goStep(i, instant) {
+    step = Math.max(0, Math.min(tour.length - 1, i)); const s = tour[step];
+    const box = stage.getBoundingClientRect(); const W = box.width, H = box.height;
+    let cx, cy, scale;
+    if (s.lon != null) { cx = mx(s.lon); cy = myy(s.lat); scale = s.lat < 33 && s.lon > 128 ? 2.6 : 1.6; } else { cx = mx(126); cy = myy(32); scale = 0.42; }
+    scale = scale * (W / 900);
+    map.style.transition = instant ? "none" : ""; map.style.transform = `translate(${(W / 2 - cx * scale).toFixed(1)}px, ${(H / 2 - cy * scale).toFixed(1)}px) scale(${scale.toFixed(3)})`;
+    if (instant) requestAnimationFrame(() => { map.style.transition = ""; });
+    // unit
+    const u = $("#unit"); if (s.lon != null) { const sea = step >= 9 && step <= 20; u.innerHTML = `<g transform="translate(${mx(s.lon).toFixed(0)} ${myy(s.lat).toFixed(0)})">${sea ? `<path d="M-14 6 L14 6 L9 14 L-9 14 Z" fill="#6b4423" stroke="#2a1d0a" stroke-width="1.5"/><path d="M0 6 L0 -16 M0 -16 L12 -4 L0 -4 Z" fill="#f3ead7" stroke="#2a1d0a" stroke-width="1.5"/>` : `<circle r="7" fill="#d2a94f" stroke="#2a1d0a" stroke-width="1.5"/><circle r="3" fill="#2a1d0a"/>`}<circle r="20" fill="none" stroke="#e8c46a" stroke-width="2"><animate attributeName="r" values="12;24;12" dur="2.4s" repeatCount="indefinite"/></circle></g>`; } else u.innerHTML = "";
+    // chrome
+    $("#tyear").textContent = s.year != null ? yr(s.year) : "—"; $("#texpr").textContent = s.expr || ""; $("#tpos").textContent = `Story ${step + 1} / ${tour.length}`;
+    $("#jcur").textContent = `${step + 1} · ${s.caption}`; const n = tour[step + 1]; $("#jnxt").innerHTML = n ? `Next · <b>${n.caption}</b>` : "The end of the story";
+    $("#tnext").innerHTML = n ? `Next<b>${n.caption}</b>` : `<b>End of the story</b>`;
+    $("#ringarc").setAttribute("stroke-dashoffset", (125.6 * (1 - (step + 1) / tour.length)).toFixed(1));
+    const who = (s.who || []).map((w) => w.replace(/-/g, " "));
+    $("#tcard").innerHTML = `<span class="eyebrow">${s.kind === "summary" ? "Relationship" : "Event"}${s.year != null ? ` · ${yr(s.year)}` : ""}</span><h3>${s.title}</h3>` +
+      (s.note ? `<p style="font-family:var(--serif);margin:0.3rem 0">${s.note}</p>` : s.summary ? `<p style="font-family:var(--serif);margin:0.3rem 0">${s.summary}</p>` : "") +
+      (s.quote ? `<div class="quote">${s.quote}<small>${s.source || ""} · as written</small></div>` : "") +
+      `<div class="kv">${s.place ? `<span>Place</span><span lang="ja">${s.place}</span>` : ""}${s.expr ? `<span>Date</span><span lang="lzh">${s.expr}</span>` : ""}${who.length ? `<span>Who</span><span>${who.join(", ")}</span>` : ""}</div>` +
+      (s.place ? `<details class="disc"><summary>Why this placement, and how sure</summary><p style="margin:0.3rem 0;color:var(--ink-dim)">The record's placement note and its precision live here, behind one click, with the citation. The map shows the state as a mark; the words wait until asked.</p></details>` : "") +
+      `<div class="nav"><button class="btn" id="tprev" ${step === 0 ? "disabled" : ""}>‹ Previous</button><button class="btn gold" id="tnextb" ${step === tour.length - 1 ? "disabled" : ""}>Next in story ›</button><span class="pos">${step + 1} of ${tour.length}</span></div>`;
+    $("#tprev").addEventListener("click", () => goStep(step - 1)); $("#tnextb").addEventListener("click", () => goStep(step + 1));
+    $("#steplist").querySelectorAll("li").forEach((li, j) => li.classList.toggle("cur", j === step));
+    // minimap footprint
+    const fp = $("#fp"); const mm = $("#mmimg").getBoundingClientRect(); const lonSpan = (W / scale) / B.w * (B.lon1 - B.lon0), latSpan = (H / scale) / B.h * (B.lat0 - B.lat1);
+    const clon = s.lon != null ? s.lon : 126, clat = s.lon != null ? s.lat : 32;
+    fp.style.left = ((clon - lonSpan / 2 + 180) / 360 * 100) + "%"; fp.style.width = (lonSpan / 360 * 100) + "%"; fp.style.top = ((90 - (clat + latSpan / 2)) / 180 * 100) + "%"; fp.style.height = (latSpan / 180 * 100) + "%";
+  }
+  $("#steplist").innerHTML = tour.map((s, i) => `<li>${s.caption}</li>`).join("");
+  $("#steplist").querySelectorAll("li").forEach((li, i) => li.addEventListener("click", () => goStep(i)));
+  $("#tplay").addEventListener("click", () => { playing = !playing; $("#tplay").textContent = playing ? "❚❚" : "▶"; $("#tplay").setAttribute("aria-label", playing ? "Pause" : "Play the story"); clearInterval(timer); if (playing) timer = setInterval(() => { if (step >= tour.length - 1) { playing = false; $("#tplay").textContent = "▶"; clearInterval(timer); return; } goStep(step + 1); }, 4000); });
+  $("#regionimg").addEventListener("load", () => { drawOverlay(); goStep(0, true); });
+  if ($("#regionimg").complete) { drawOverlay(); goStep(0, true); }
+  window.addEventListener("resize", () => goStep(step, true));
+  window.addEventListener("keydown", (e) => { if (!document.getElementById("s-tour").classList.contains("on")) return; if (e.key === "ArrowRight") goStep(step + 1); if (e.key === "ArrowLeft") goStep(step - 1); });
+
+  // ---- Place ----
+  const PL = Object.entries(LK.places).map(([id, p]) => ({ id, ...p })).sort((a, b) => b.events.length - a.events.length);
+  let placeId = PL[0].id;
+  function renderPlace() {
+    $("#plist").innerHTML = PL.map((p) => `<button data-id="${p.id}" aria-pressed="${p.id === placeId}"><b lang="und">${p.label}</b><span>${p.chapters.length} chapters · ${p.events.length} events</span></button>`).join("");
+    $("#plist").querySelectorAll("button").forEach((b) => b.addEventListener("click", () => { placeId = b.dataset.id; renderPlace(); }));
+    const p = PL.find((x) => x.id === placeId); let html = `<div class="card" style="margin-bottom:0.8rem"><span class="eyebrow">Place · ${p.chapters.length} chapters</span><h3 style="font-size:22px">${p.label}</h3><div class="via">${p.events.length} events across ${p.chapters.map((c) => byId[c].name).join(" · ")}</div></div>`;
+    let prev = null; html += `<div class="tl">`;
+    for (const e of p.events) { const c = byId[e.chapter]; if (prev !== null && e.start - prev > 150) html += `<div class="gap">… ${e.start - prev} years …</div>`; prev = e.start; html += `<div class="ev" style="--lane:${LANES[laneOf(c)].color}"><span class="y">${yr(e.start)}${e.end !== e.start ? `–${yr(e.end)}` : ""}</span> <span class="t">${e.title}</span><div class="c"><span class="lane-dot" style="background:${LANES[laneOf(c)].color}"></span>${c.name}</div></div>`; }
+    $("#ptl").parentElement.innerHTML = html + `</div>`;
+  }
+
+  renderFilters(); renderCols(); renderPlace(); renderWorldCards();
+  show(location.hash.slice(1) || "world");
+  requestAnimationFrame(renderStrip);
+})();
+</script>
+
+</body></html>

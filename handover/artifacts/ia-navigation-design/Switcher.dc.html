@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Chapter switcher</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Noto+Sans+JP:wght@400;600&family=Noto+Serif+JP:wght@500;700&display=swap">
+<style>
+body{margin:0}
+a{color:#f1cf7a}a:hover{color:#ffe3a0}
+</style>
+</helmet>
+<div style="position: relative; width: 1440px; height: 900px; overflow: hidden; background: #0b1114; color: #f3ead7; font-family: 'Noto Sans JP', system-ui, sans-serif">
+<img src="/_blob/c94ffa3771e730a60a63dafb92fef132" alt="" aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 1440px; height: 900px; object-fit: cover">
+<div style="position: absolute; left: 0; top: 0; width: 1440px; height: 900px; background: rgba(5,9,12,.38)"></div>
+
+<div style="position: absolute; left: 16px; top: 16px; width: 1408px; height: 44px; box-sizing: border-box; padding: 0 8px 0 16px; display: flex; align-items: center; gap: 12px; border-radius: 6px; background: rgba(18,26,32,.9); border: 1px solid rgba(210,169,79,.35); font-size: 14px">
+<span style="font-family: Cinzel, serif; letter-spacing: .14em; color: #d2a94f">LEKISHI</span>
+<button type="button" aria-expanded="true" aria-haspopup="dialog" style="display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 10px; border-radius: 4px; border: 1px solid #d2a94f; background: rgba(210,169,79,.14); color: #f3ead7; font: 700 14px 'Noto Serif JP', serif">The embassy to Tang China<svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #f1cf7a; stroke-width: 2.6; stroke-linecap: round"><path d="M6 15l6-6 6 6"></path></svg></button>
+<span style="color: #b9af9c">753 · 天寶十二載十二月廿日</span>
+<span style="margin-left: auto; color: #b9af9c">Window <b style="color: #f1cf7a">750–754</b></span>
+<button type="button" style="display: inline-flex; align-items: center; gap: 8px; height: 30px; padding: 0 10px; border-radius: 4px; border: 1px solid #2a343b; background: transparent; color: #f3ead7; font: 13px 'Noto Sans JP', sans-serif"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #d2a94f; stroke-width: 2.4; stroke-linecap: round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>Search</button>
+<button type="button" style="height: 30px; padding: 0 10px; border: 0; background: transparent; color: #f3ead7; font: 13px 'Noto Sans JP', sans-serif; text-decoration: underline; text-underline-offset: 3px">About</button>
+</div>
+
+<div role="dialog" aria-label="Chapters" style="position: absolute; left: 96px; top: 68px; width: 620px; display: flex; flex-direction: column; gap: 18px; box-sizing: border-box; padding: 20px; border-radius: 8px; background: #121a20; border: 1px solid rgba(210,169,79,.45); box-shadow: 0 24px 60px rgba(0,0,0,.55)">
+<div style="display: flex; align-items: center; gap: 12px; height: 44px; box-sizing: border-box; padding: 0 14px; border-radius: 5px; border: 1px solid #2a343b; background: #0b1114">
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; fill: none; stroke: #d2a94f; stroke-width: 2.2; stroke-linecap: round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+<label for="chq" style="position: absolute; left: -9999px">Search every chapter</label>
+<input id="chq" type="search" placeholder="Search every chapter" style="flex: 1 1 auto; min-width: 0; height: 32px; border: 0; outline: 0; background: transparent; color: #f3ead7; font: 15px 'Noto Sans JP', sans-serif">
+<span style="padding: 0 6px; border-radius: 3px; border: 1px solid #2a343b; color: #b9af9c; font-size: 12px">/</span>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #8f877a">Chapters in time</div>
+<div style="position: relative; height: 52px">
+<div style="position: absolute; left: 0; right: 0; top: 16px; height: 2px; background: #2a343b"></div>
+<div style="position: absolute; left: 30px; top: 8px; width: 10px; height: 18px; border-radius: 3px; background: transparent; border: 2px solid #d2a94f; box-sizing: border-box"></div>
+<div style="position: absolute; left: 502px; top: 6px; width: 12px; height: 22px; border-radius: 3px; background: #f1cf7a; box-shadow: 0 0 0 4px rgba(241,207,122,.25)"></div>
+<span style="position: absolute; left: 0; top: 34px; font-size: 12px; color: #8f877a">300 BCE</span>
+<span style="position: absolute; left: 145px; top: 34px; font-size: 12px; color: #8f877a">1 CE</span>
+<span style="position: absolute; left: 290px; top: 34px; font-size: 12px; color: #8f877a">300</span>
+<span style="position: absolute; left: 436px; top: 34px; font-size: 12px; color: #8f877a">600</span>
+<span style="position: absolute; left: 552px; top: 34px; font-size: 12px; color: #8f877a">900</span>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<a href="#" aria-current="page" style="display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border-radius: 5px; background: rgba(210,169,79,.12); box-shadow: inset 0 0 0 1px #d2a94f; color: #f3ead7; text-decoration: none">
+<span style="display: flex; align-items: baseline; gap: 10px"><b style="font-family: 'Noto Serif JP', serif; font-size: 16px">The embassy to Tang China</b><span style="font-size: 12px; color: #d2a94f">750–754</span><span style="margin-left: auto; font-size: 12px; color: #f1cf7a">You are here</span></span>
+<span style="font-size: 13px; color: #b9af9c">Step 16 of 37 · The landfall at 秋妻屋浦</span>
+</a>
+<a href="#" style="display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border-radius: 5px; border: 1px solid #2a343b; color: #f3ead7; text-decoration: none">
+<span style="display: flex; align-items: baseline; gap: 10px"><b style="font-family: 'Noto Serif JP', serif; font-size: 16px">The end of the state of Han</b><span style="font-size: 12px; color: #d2a94f">233–226 BCE</span><span style="margin-left: auto; font-size: 12px; color: #8f877a">Not opened yet</span></span>
+<span style="font-size: 13px; color: #b9af9c">Opens at its story start · 9 steps · 4 places</span>
+</a>
+</div>
+
+<div style="display: flex; align-items: center; gap: 12px; padding-top: 14px; border-top: 1px solid #2a343b; font-size: 13px; color: #8f877a">
+<span>Your place in each chapter is kept on this device only.</span>
+<a href="#" style="margin-left: auto; color: #f1cf7a">All chapters on the home page</a>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

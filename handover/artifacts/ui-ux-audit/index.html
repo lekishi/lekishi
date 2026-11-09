@@ -1,0 +1,392 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Lekishi UI/UX audit</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Noto+Serif+JP:wght@400;600&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<style>
+  /* Layout: one reading column (68ch) with full-bleed figure strips; the palette is Lekishi's own lacquer, ink and gold, dark first. */
+  :root {
+    --bg: #0b1114;
+    --surface: #121a20;
+    --raised: #1a242b;
+    --rule: #2a343b;
+    --frame: rgba(210, 169, 79, 0.35);
+    --ink: #f3ead7;
+    --ink-dim: #b9af9c;
+    --ink-faint: #8f877a;
+    --gold: #d2a94f;
+    --gold-bright: #e8c46a;
+    --on-gold: #1a1408;
+    --danger: #e0705a;
+    --warn: #d2a94f;
+    --note: #7fb2b8;
+    --display: "Cinzel", "Times New Roman", serif;
+    --serif: "Noto Serif JP", "Noto Serif", Georgia, serif;
+    --sans: "Noto Sans JP", "Helvetica Neue", Arial, sans-serif;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f6f1e6; --surface: #fffaf0; --raised: #efe7d6; --rule: #d8cfbc;
+      --frame: rgba(140, 104, 30, 0.45); --ink: #1d1a14; --ink-dim: #4f4a3f; --ink-faint: #77705f;
+      --gold: #9a7420; --gold-bright: #7d5d14; --on-gold: #fff8e6; --danger: #b2452f; --warn: #9a7420; --note: #2f6f77;
+      color-scheme: light;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #f6f1e6; --surface: #fffaf0; --raised: #efe7d6; --rule: #d8cfbc;
+    --frame: rgba(140, 104, 30, 0.45); --ink: #1d1a14; --ink-dim: #4f4a3f; --ink-faint: #77705f;
+    --gold: #9a7420; --gold-bright: #7d5d14; --on-gold: #fff8e6; --danger: #b2452f; --warn: #9a7420; --note: #2f6f77;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--sans); font-size: 15px; line-height: 1.6;
+    padding-block: 0 4rem;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  a { color: var(--gold-bright); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
+  .wrap { max-width: 68ch; margin: 0 auto; min-width: 0; }
+  .wide { max-width: 1120px; margin: 0 auto; min-width: 0; }
+  header.masthead { padding-block: 3rem 2rem; border-bottom: 1px solid var(--rule); }
+  .eyebrow { font-family: var(--sans); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+  h1 { font-family: var(--display); font-weight: 600; font-size: clamp(30px, 4.5vw, 44px); line-height: 1.1; margin: 0.4rem 0 0.8rem; text-wrap: balance; }
+  h2 { font-family: var(--display); font-weight: 500; font-size: 26px; line-height: 1.2; margin: 3rem 0 0.75rem; text-wrap: balance; }
+  h3 { font-family: var(--serif); font-weight: 600; font-size: 19px; line-height: 1.3; margin: 2rem 0 0.5rem; text-wrap: balance; }
+  p, li { max-width: 68ch; }
+  p.lede { font-family: var(--serif); font-size: 18px; color: var(--ink-dim); line-height: 1.55; }
+  .meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; color: var(--ink-faint); font-size: 13px; margin-top: 1rem; }
+  .meta b { color: var(--ink-dim); font-weight: 500; }
+  .verdict { border-left: 3px solid var(--gold); padding: 0.25rem 0 0.25rem 1.25rem; margin: 1.5rem 0; }
+  .verdict p { font-family: var(--serif); font-size: 17px; }
+  .toc { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.5rem 1.5rem; padding: 0; list-style: none; margin: 1rem 0 0; }
+  .toc li { font-size: 14px; }
+  .toc a { text-decoration: none; color: var(--ink-dim); }
+  .toc a:hover { color: var(--gold-bright); }
+  .toc .n { font-variant-numeric: tabular-nums; color: var(--gold); margin-right: 0.4rem; }
+  figure { margin: 1.25rem 0 1.5rem; min-width: 0; }
+  figure img { display: block; width: 100%; max-width: 100%; height: auto; border: 1px solid var(--rule); border-radius: 6px; background: #000; }
+  figcaption { font-size: 13px; color: var(--ink-faint); margin-top: 0.5rem; max-width: 80ch; }
+  figcaption b { color: var(--ink-dim); font-weight: 500; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; }
+  .pair figure { margin: 0; }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; align-items: start; }
+  .trio figure { margin: 0; }
+  .phones { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; align-items: start; }
+  .phones figure { margin: 0; }
+  @media (max-width: 700px) { .pair, .trio { grid-template-columns: 1fr; } }
+  .finding { border-top: 1px solid var(--rule); padding-top: 1.25rem; margin-top: 1.5rem; }
+  .finding h3 { margin-top: 0; display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
+  .sev { font-family: var(--sans); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; padding: 0.1rem 0.5rem; border-radius: 4px; border: 1px solid currentColor; white-space: nowrap; }
+  .sev.block { color: var(--danger); }
+  .sev.major { color: var(--warn); }
+  .sev.minor { color: var(--note); }
+  .sev.bug { color: var(--danger); background: color-mix(in srgb, var(--danger) 12%, transparent); }
+  .rec { background: var(--surface); border: 1px solid var(--frame); border-radius: 6px; padding: 0.9rem 1.1rem; margin: 1rem 0 0; }
+  .rec .eyebrow { display: block; margin-bottom: 0.25rem; }
+  .rec p { margin: 0.25rem 0; }
+  .rec ul { margin: 0.25rem 0 0; padding-left: 1.2rem; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  .scroll { overflow-x: auto; margin: 1rem 0; }
+  th, td { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); font-weight: 700; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.9em; background: var(--raised); padding: 0.05rem 0.3rem; border-radius: 3px; }
+  .lzh { font-family: var(--serif); }
+  .q { counter-reset: q; list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: 0.9rem; }
+  .q li { counter-increment: q; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 0.9rem 1.1rem 0.9rem 3.2rem; position: relative; max-width: none; }
+  .q li::before { content: counter(q); position: absolute; left: 1.1rem; top: 0.85rem; font-family: var(--display); color: var(--gold); font-size: 18px; }
+  .q li b { font-family: var(--serif); font-weight: 600; display: block; margin-bottom: 0.2rem; }
+  .q li span { color: var(--ink-dim); font-size: 14px; }
+  .plan ol { padding-left: 1.3rem; }
+  .plan li { margin-bottom: 0.5rem; }
+  .small { font-size: 13px; color: var(--ink-faint); }
+  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+<header class="masthead">
+  <div class="wrap">
+    <span class="eyebrow">Lekishi · 2026-10-23</span>
+    <h1>What the atlas feels like with 39 chapters</h1>
+    <p class="lede">An opinionated walk through the site as it stands on <code>main</code>, compared with the hero Darwin approved on 2026-10-10, with the bugs it turned up and the questions that decide what to build next.</p>
+    <div class="meta">
+      <span><b>Build</b> local <code>vite dev</code> at 27f5ac3 (after #64 re-approved every chapter)</span>
+      <span><b>Walked with</b> Playwright, Chromium on a software GPU</span>
+      <span><b>Frames</b> 1440×900 · 820×1180 · 390×844</span>
+      <span><b>Content</b> 39 chapters, 1 with two stories, about 1,100 story steps</span>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="wrap">
+  <section id="verdict">
+    <h2>The verdict</h2>
+    <div class="verdict">
+      <p>Lekishi today is a careful viewer for one chapter at a time. It is not yet an atlas. Two chapters hid that; thirty-nine make it plain.</p>
+    </div>
+    <p>Everything the reader meets is organised around the <em>chapter</em>: the home page is a catalogue of chapters, the switcher is the same catalogue in a dialog, search groups by chapter, and once inside a chapter the globe shows only that chapter's places. There is no screen on which the reader sees the world at a time, no way to stand at 長安 and see who passed through it across six centuries, and no path from Hannibal to Rome under the kings except knowing both exist. The product's own tagline, "follow embassies, voyages and conquests across a globe", promises the second thing and delivers the first.</p>
+    <p>Inside a chapter the bones are good: the frame holds, the URL contract works, the card reads narrative first, the story walks. But the <em>map is not yet worth looking at</em>, which RFD 4 made the exit for Track 1. At region zoom it is a blurred green and tan wash with dashed straight lines, and the words that qualify it (the legend, the "schematic, follows the dated stops" caption printed on the globe, the "label anchor, no site asserted" badges, the placement notes) take more of the screen than the history does. "Show, then qualify" has drifted back toward "qualify".</p>
+    <p>The playback is a time-lapse, not a story. At four years a second the whole Tang window passes in a second and nothing happens on screen while it does: no card opens, no camera moves, no caption changes. The hero's "circular next-event dial" is there, but what it drives is empty.</p>
+    <p>None of this is a polish problem. It is a shape problem: the chapter is the only unit of navigation, and the globe is a backdrop rather than the thing you navigate. The second half of this page is the questions that decide which shape you actually want.</p>
+    <ul class="toc">
+      <li><a href="#hero"><span class="n">1</span>Against the hero</a></li>
+      <li><a href="#discovery"><span class="n">2</span>Finding a chapter</a></li>
+      <li><a href="#between"><span class="n">3</span>Moving between chapters</a></li>
+      <li><a href="#inside"><span class="n">4</span>Inside a chapter</a></li>
+      <li><a href="#globe"><span class="n">5</span>The globe</a></li>
+      <li><a href="#story"><span class="n">6</span>Story and playback</a></li>
+      <li><a href="#cards"><span class="n">7</span>Cards and evidence</a></li>
+      <li><a href="#mobile"><span class="n">8</span>Phone and tablet</a></li>
+      <li><a href="#bugs"><span class="n">9</span>Bugs found on the way</a></li>
+      <li><a href="#recs"><span class="n">10</span>What I would change</a></li>
+      <li><a href="#questions"><span class="n">11</span>Questions for Darwin</a></li>
+    </ul>
+  </section>
+</div>
+
+<div class="wide">
+  <section id="hero">
+    <div class="wrap">
+      <h2>1 · Against the hero</h2>
+      <p>RFD 1 says the hero is the acceptance bar and the served page is judged beside it. Here is that comparison for the three scales, at the same place and date.</p>
+    </div>
+    <div class="pair">
+      <figure><img src="img/hero-diorama.jpg" alt="The approved diorama hero: tilted 3D terrain of Satsuma with forest, fields, a ship and the landfall label"><figcaption><b>Hero, 2026-10-10.</b> The diorama at 秋妻屋浦: painted relief, symbolic forest and houses, the ship on the dashed path, a thin date bar in both calendars, pennants with the people's names.</figcaption></figure>
+      <figure><img src="img/tang-zoomed.jpg" alt="The served page zoomed to the same landfall: flat green terrain, a small ship glyph, dashed lines, large legend and card"><figcaption><b>Served, zoomed to the same landfall.</b> The terrain is a flat wash; no diorama appeared at any height I reached; the only landscape element is the ship glyph. The legend plate sits in the scene; the pennants are two-character stubs.</figcaption></figure>
+    </div>
+    <div class="pair">
+      <figure><img src="img/hero-region.jpg" alt="The approved region hero: painted relief map of the East China Sea with named seas, dated landfalls, an arc and a story ribbon"><figcaption><b>Hero, region.</b> Named seas, coast and rivers, dated stops along the voyage, one transmission arc, a story ribbon across the top, the two-row timeline below, and the card's image frame.</figcaption></figure>
+      <figure><img src="img/tang-open.jpg" alt="The served Tang chapter at its opening view: a far-out globe with small teal markers and dashed lines"><figcaption><b>Served, chapter opening view.</b> The globe opens far enough out that the whole chapter is a cluster of teal discs. There are no sea names, no dated stops, and the legend and its attribution are open by default in the scene.</figcaption></figure>
+    </div>
+    <div class="pair">
+      <figure><img src="img/hero-globe.jpg" alt="The approved globe hero: painted relief globe with two chapters named and a century scale at the bottom"><figcaption><b>Hero, globe.</b> Chapters named and counted on the globe, parchment outside their coverage, a century scale along the foot.</figcaption></figure>
+      <figure><img src="img/home-globe.jpg" alt="The served home globe: a disc of the globe with overlapping chapter labels and count badges"><figcaption><b>Served, home globe after 15 s.</b> It centres on the mean of all chapter home views (the Persian Gulf), so East Asia, the Americas and Oceania are off the limb, and the labels overprint each other.</figcaption></figure>
+    </div>
+    <div class="wrap">
+      <p>The chrome follows the hero's pattern faithfully (date bar, orbs, journal, pennants, dial, minimap). What is missing is everything that made the hero look like somewhere: the painted ground, the names on the water, the landscape symbols, the ship on its path. The frame is finished and the picture inside it is not.</p>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section id="discovery">
+    <h2>2 · Finding a chapter</h2>
+
+    <div class="finding">
+      <h3><span class="sev block">Blocking</span> The time ribbon is unreadable at 39 chapters</h3>
+      <figure><img src="img/home-ribbon.jpg" alt="The home time ribbon: dozens of chapter labels overprinted into one smear, tick labels running together"><figcaption>The home page ribbon. The early Americas chapter starts at 21051 BCE, so 38 chapters share the right 3 % of the line and every label lands on the same pixel. The century ticks collide into one string of digits. The same ribbon is in the chapter switcher and on the phone.</figcaption></figure>
+      <p>The ribbon was designed for two chapters ("a reader sees how far apart the two stories are"). It is linear, labels every chapter, and takes its span from the widest window. One chapter with a 21,000-year window makes it a smear, and even without it, 38 chapters between 2334 BCE and 779 CE would need lanes, grouping or zoom to read.</p>
+      <div class="rec"><span class="eyebrow">Recommendation</span>
+        <p>Replace it, don't tune it. The ribbon should become the primary way in: a horizontal era strip with lanes by region, bars for windows, labels only at the zoom where they fit, and a non-linear scale (log before 1000 BCE, or a separate "deep time" band for the Americas and Lapita). Hovering a bar should light its mark on the globe and vice versa. At 39 chapters this is a time atlas, not a decoration.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <h3><span class="sev major">Major</span> The chapter list is a 6,800 px wall in alphabetical order</h3>
+      <div class="pair">
+        <figure><img src="img/home-full.jpg" alt="The full home page at desktop width: a very tall two-column grid of identical chapter cards"><figcaption>The whole home page at 1440 px wide, 6,777 px tall. On the phone it is 14,830 px, about 18 screens of scrolling.</figcaption></figure>
+        <figure><img src="img/home-top.jpg" alt="The top of the home page before the globe loads: an empty dark circle beside the hero text"><figcaption>What a reader sees first. The globe is an empty disc until the search index and the renderer arrive; on the software GPU that took over ten seconds. Tablet and phone never get it.</figcaption></figure>
+      </div>
+      <p>Every card is the same card: a window, a Cinzel title, four lines of summary, a gold button. They are sorted by file name, so "The campaigns of Alexander" is followed by "The Amarna letters" and 班超, and the Tang embassy (the chapter the whole project was built around) is 31st. Nothing says where a chapter is on Earth, what kind of story it is (a voyage, a war, a diary, a survey), how long it is (6 steps or 107), or which chapters belong together (the four Tang stories, the three Qin chapters, the three Egypt chapters, the Greek pair). The three "principles" at the bottom and the footer's "Members sign in" are the only things that are not a card.</p>
+      <div class="rec"><span class="eyebrow">Recommendation</span>
+        <p>Home should be the world and the time, not the list. One screen: the globe (or a flat painted map on small screens) with the chapters as marks, the era strip under it, and a search field. The list moves below the fold and gets structure: grouped by region or era, each card with a tiny locator, its length in steps, its kind, and a hero image when one exists. Order by time, not by file name.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <h3><span class="sev major">Major</span> Search ranks a sentence match over a name match</h3>
+      <div class="pair">
+        <figure><img src="img/search-rome.jpg" alt="Search results for 'Rome': the first result is Monte Albán in the Early Americas, the Rome chapter is fourth"><figcaption>"Rome" returns Monte Albán first (the word appears in its description), then Nippur, then Tyre, and only fourth the chapter actually called Rome, with the place Roma under it.</figcaption></figure>
+        <figure><img src="img/search-changan.jpg" alt="Search results for 長安: the first result is 霸上, and 長安 appears once per chapter as separate places"><figcaption>"長安" returns 霸上 first (a text match) and then 長安 three times, once per chapter, as three unrelated places.</figcaption></figure>
+      </div>
+      <p>Results are grouped by chapter, the current chapter first, and within a chapter a name match beats a text match. Across chapters that order means the first hit on the screen is whichever chapter sorts first, not whichever record matches best. The second screenshot shows the deeper problem: the atlas has no idea that the 長安 of 張騫, 玄奘 and 杜環 is one city. Each chapter owns its own copy, so there is nothing to land on.</p>
+      <div class="rec"><span class="eyebrow">Recommendation</span>
+        <p>Rank globally: exact name and alias matches first across all chapters, then chapter titles, then text; group by chapter only after ranking. Longer term, give places and people an identity across chapters (same record id or a shared Wikidata item), so a search for 長安 lands on one place with its events from every chapter. That is also what makes section 3 possible.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="between">
+    <h2>3 · Moving between chapters</h2>
+    <div class="finding">
+      <h3><span class="sev major">Major</span> The only door between chapters is the catalogue</h3>
+      <div class="pair">
+        <figure><img src="img/switcher.jpg" alt="The chapter switcher dialog: the smeared ribbon on top and a long list of chapter rows"><figcaption>The switcher: the same ribbon, then all 39 chapters in the same alphabetical order, in a dialog that scrolls for four screens.</figcaption></figure>
+        <figure><img src="img/lapita.jpg" alt="The Lapita chapter opening on a view of Africa with no markers in sight"><figcaption>Opening "The Lapita expansion into Remote Oceania": the camera arrives over Africa and the Atlantic. Every place in the chapter is on the far side of the planet (see <a href="#bugs">bugs</a>).</figcaption></figure>
+      </div>
+      <p>From inside a chapter there is no "around this time", no "also at this place", no "next chapter in this thread", no neighbouring chapters shown faintly on the globe. The 杜環 chapter starts the year the Tang embassy ends and both touch 長安; the reader can only know that by reading both summaries. Stephen II's journey and the Tang embassy happen in the same year on opposite ends of Eurasia; the site never says so. The Qin trilogy and the Egypt trilogy are three disconnected cards each.</p>
+      <div class="rec"><span class="eyebrow">Recommendation</span>
+        <p>Make the globe the switcher. Inside a chapter, draw the other chapters' home marks dimmed at the current playhead's century; a click opens them. Add to the card and to the About sheet a "Near this" list: chapters within a few hundred km and a century of the selection. Let a place card list its events from every chapter. Then the switcher dialog becomes a fallback, not the route.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="inside">
+    <h2>4 · Inside a chapter</h2>
+    <div class="finding">
+      <h3><span class="sev major">Major</span> The window moves under the reader, and the plate tells them every time</h3>
+      <div class="pair">
+        <figure><img src="img/tang-step3.jpg" alt="Tang chapter at story step 3 with an arrival plate reading 'The window widened to 749–753 to include it'"><figcaption>Step 3 of 38 arrives with "The window widened to 749–753 to include it". The chapter's window is 750–754; the step's event is in 751.</figcaption></figure>
+        <figure><img src="img/tang-step12.jpg" alt="Tang chapter at story step 12 with the plate reading 'The window widened to 751–755'"><figcaption>Step 12 is in 753, inside the chapter window, and the plate still says the window widened, this time to 751–755. The date bar now reads "Window 751–755".</figcaption></figure>
+      </div>
+      <p>Every step link recentres a five-year window on the step, so the window label changes on each step, the strip's bottom row rescales, and the arrival plate announces a widening that the reader did not ask for and cannot see. RFD 1 decided on "a fixed exploration window with a moving playhead" for exactly this reason. The plate also covers the middle of the scene at the moment the camera lands, on every frame size.</p>
+      <div class="rec"><span class="eyebrow">Recommendation</span>
+        <p>Keep the chapter window fixed while walking the story; widen only for a deep link that is genuinely outside it (the codas). Show the plate only then, and move it to the date bar as a one-line notice rather than a plate over the scene.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <h3><span class="sev major">Major</span> The legend lives in the scene</h3>
+      <p>On desktop the legend is open by default, 288 px wide, with four badges, three sentences of honesty plate and the data attribution, and it sits in the scene's clear zone where the camera frames the selection. In every desktop screenshot on this page it occupies the bottom-left quarter of the map. The hero puts the same information in one 11 px line along the foot of the screen.</p>
+      <div class="rec"><span class="eyebrow">Recommendation</span>
+        <p>Fold the legend by default on desktop too, and make it a key, not an essay: the marks that are on screen, as glyphs with one word each, in one row at the foot of the scene. The attribution goes to the About sheet and the footer. The "what is real here" sentence belongs on the diorama, once, when it exists.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <h3><span class="sev minor">Minor</span> The left rail is a list, three ways</h3>
+      <p>Story, Events and Sources are three vertical lists in the same plate. The story list is the journal, which works. The events list is the story again in date order without the captions. The sources list is bibliographic metadata ("Wikisource digital transcription of the Taishō Tripiṭaka text (T.2089, 遊方記抄), unproofread; locators re-checked against it on 2026-09-24") that reads like a maintainer's note. The people pennants above the rail filter the events list, but the medallions are initials, so a reader of Vesuvius sees "C C P" and a reader of Hannibal sees "H Q M P M".</p>
+      <div class="pair">
+        <figure><img src="img/pennants.jpg" alt="Three round pennants labelled C, C and P"><figcaption>Vesuvius: C, C and P.</figcaption></figure>
+        <figure><img src="img/pennants-hannibal.jpg" alt="Five round pennants labelled H, Q, M, P and M"><figcaption>Hannibal: H, Q, M, P, M. The hero wrote the names under the pennants.</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="globe">
+    <h2>5 · The globe</h2>
+    <div class="finding">
+      <h3><span class="sev block">Blocking</span> At region scale there is nothing to look at</h3>
+      <div class="pair">
+        <figure><img src="img/xuanzang.jpg" alt="Xuanzang step 20: a beige blurred terrain with five hollow diamonds and names"><figcaption>玄奘 at 凌山: a beige blur, five hollow diamonds, no rivers, no mountains that read as mountains, no Tianshan, no Tarim. The card explains at length that the diamond asserts no site.</figcaption></figure>
+        <figure><img src="img/qin.jpg" alt="Qin step 10: a green and tan blurred terrain with hollow diamonds for 代, 薊, 易水, 中山, 井陘, 邯鄲"><figcaption>Qin at 中山: every place in the chapter is a "label anchor". The territory layer is on but draws nothing at this step. There is no Yellow River and no Taihang on a map whose story is about crossing them.</figcaption></figure>
+      </div>
+      <p>The high-resolution terrain exists only over Satsuma; everywhere else the globe serves the L5 global tiles, which look like a blurred satellite image at any region zoom. The painted relief from the hero (hypsometric tints, shaded relief, strong coastlines, rivers, muted sea with its name) was the thing that made the region screen read as a map. None of it shipped. Nothing is labelled except the chapter's own places, so a reader cannot orient: no seas, no modern coast names, no rivers, no mountain ranges.</p>
+      <div class="pair">
+        <figure><img src="img/alexander.jpg" alt="Alexander's campaigns at the opening view: thirty markers along the Near East with Greek labels overlapping"><figcaption>Alexander: 36 events, labels in Greek, several collisions, Babylon and Σοῦσα at the same pixel, "the city near the river Tanais" as a label.</figcaption></figure>
+        <figure><img src="img/stephen.jpg" alt="Stephen II step 30: Gaul with dashed straight lines between stops and the caption 'schematic, follows the dated stops' printed on the map"><figcaption>Stephen II: the journey is dashed straight chords between stops, and the caption "schematic, follows the dated stops" is printed on the globe along the line.</figcaption></figure>
+      </div>
+      <div class="rec"><span class="eyebrow">Recommendation</span>
+        <p>This is Track 1's exit and it is still open. In order: (1) a painted relief basemap at the region level everywhere, built once from the same open data as the Satsuma tiles; (2) a base label layer of seas, rivers and ranges with historical names where the records have them; (3) label declutter by priority (selected, then count), which the atlas mock already specified; (4) journeys as curved or coast-following schematic lines with the caption in the legend, not on the water. The diorama tier can come after.</p>
+      </div>
+    </div>
+
+    <div class="finding">
+      <h3><span class="sev major">Major</span> The opening view is often wrong for the chapter</h3>
+      <div class="pair">
+        <figure><img src="img/americas.jpg" alt="The early Americas chapter opening on the Pacific with Mesoamerican and Andean sites, date bar reading 21051 BCE"><figcaption>The early Americas opens at 21051 BCE with the playhead at the start of a 21,000-year window; the strip's ticks are 18407, 15763, 13119, and the first dot is "Footprints at White Sands". The globe shows a few sites and the Pacific.</figcaption></figure>
+        <figure><img src="img/tang-playing.jpg" alt="The Tang chapter after pressing play: date bar reads 754, the dial says 'The end of the window', the view has not changed"><figcaption>Tang after pressing play and waiting six seconds: the playhead is already at the end of the window. Nothing on screen moved or opened during the run.</figcaption></figure>
+      </div>
+      <p>The home view is the centre of the bounding box of the chapter's places and the camera height is whatever fits them, so chapters with far-flung places (Paul, Alexander, the Americas) open on a globe where the story is a cluster of discs, and chapters that cross the antimeridian open on the wrong side of the world. A chapter has no authored opening: no hero view, no first sentence, no place to start other than step 1 in the list.</p>
+    </div>
+  </section>
+
+  <section id="story">
+    <h2>6 · Story and playback</h2>
+    <div class="finding">
+      <h3><span class="sev block">Blocking</span> Play does nothing a reader can follow</h3>
+      <p>The dial's play button advances the playhead at four years a second. For Vesuvius (79–80) that is a quarter of a second; for Tang (750–754) about a second; for the early Americas, an hour and a half. While it runs, events light up on the strip and markers pulse on the globe, but no card opens, no caption appears, the camera does not move unless "Follow" is pressed, and the journal does not advance. The result is that the one control that looks like "tell me the story" produces a flicker and stops.</p>
+      <p>The story, meanwhile, is the numbered list in the left rail and the "Next in story" button at the foot of the card. That works, but it is a slide deck: a list of 38 captions and a next button. The hero's journal showed the current step and the next, with the rest folded; the hero's dial was "next event", not a speed control.</p>
+      <div class="rec"><span class="eyebrow">Recommendation</span>
+        <p>Split the two ideas. <b>Story mode</b> is a guided tour: each step opens its card, flies the camera, moves the playhead to the step's date and holds until the reader presses next (or an optional auto-advance of a few seconds a step). <b>Time mode</b> is the scrubber: drag the playhead and watch the window's events and territories appear, with the speed scaled to the window's length so every chapter takes about the same time to play through. The dial should drive story mode; the strip should drive time mode.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="cards">
+    <h2>7 · Cards and evidence</h2>
+    <div class="finding">
+      <h3><span class="sev major">Major</span> The qualification outweighs the claim</h3>
+      <div class="pair">
+        <figure><img src="img/vesuvius.jpg" alt="Vesuvius event card: a disputed-account box of ten lines above the Latin quotation"><figcaption>Vesuvius, "The elder Pliny dies": the card leads with the summary, then a ten-line box on how the day is counted and what Dio's translator wrote, before the Latin passage appears. The badge "disputed account" is right; the essay is not.</figcaption></figure>
+        <figure><img src="img/tang-place.jpg" alt="Place card for 秋妻屋浦 with 'Modern name' as an underlined label under the romanization"><figcaption>The place card. "Modern name" is a disclosure button styled as a link under the romanization; it reads as a missing value. The identification note is longer than the list of events here.</figcaption></figure>
+      </div>
+      <p>The card's order is right (narrative, quotation, place, date, people, connected, nearby, sources). What is wrong is the weight: every event with a label-anchor place carries a grey box of three or four lines about what the anchor is not; every uncertain span carries "One occurrence somewhere inside this span; the atlas does not treat the span as continuous activity"; every identified locality carries "identified, size is precision". A reader who opens six cards reads the same paragraph six times. RFD 1 asked for these to be states in the visual grammar with the text one click away.</p>
+      <figure><img src="img/tang-about.jpg" alt="The About sheet: review notes with a sha256 digest and a 'Published … in lks:set:' line"><figcaption>The About sheet prints the approval digest (<code>sha256:e9f49aa56f…</code>) and the internal set id to the reader. That is the editor's audit trail, not the reader's.</figcaption></figure>
+      <div class="rec"><span class="eyebrow">Recommendation</span>
+        <p>One badge per state, the note behind a disclosure ("Why this placement"), and the dispute box collapsed to its first line with the two readings as a two-row table. Drop the digest and set id from About; keep the decision line and the counts. Give the modern name a visible value and a label ("today: 坊津").</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="mobile">
+    <h2>8 · Phone and tablet</h2>
+    <div class="phones">
+      <figure><img src="img/phone-home.jpg" alt="Phone home page: hero text, search, then the smeared ribbon and the first card"><figcaption><b>Phone home.</b> No globe; the ribbon smear; then 39 cards, 14,830 px of them.</figcaption></figure>
+      <figure><img src="img/phone-tang-open.jpg" alt="Phone Tang chapter: the globe with markers, the orbs row, the legend bar and the peek sheet with the dial"><figcaption><b>Phone, chapter open.</b> The frame works: orbs, legend folded, sheet at peek with the dial. The sheet title repeats the chapter name that is not in the compact date bar.</figcaption></figure>
+      <figure><img src="img/phone-tang-step12.jpg" alt="Phone Tang at step 12: the arrival plate covers the top of the map, the sheet at half shows strip and card"><figcaption><b>Phone, a story step.</b> The arrival plate covers a third of the visible map; the sheet at half leaves about 200 px of globe.</figcaption></figure>
+      <figure><img src="img/phone-sheet-full.jpg" alt="Phone sheet at full: dial, strip, pennants, tabs and the journal"><figcaption><b>Phone, sheet at full.</b> This is the atlas without the globe, and it is usable: the journal, the pennants with real characters, the strip.</figcaption></figure>
+    </div>
+    <div class="pair" style="margin-top:1rem">
+      <figure><img src="img/tablet-tang-open.jpg" alt="Tablet Tang chapter: orbs in a column, the globe, strip and dial at the foot"><figcaption><b>Tablet, open.</b> The scene gets the whole screen and the journal is behind the list orb. Two "schematic, follows the dated stops" captions sit on the water.</figcaption></figure>
+      <figure><img src="img/tablet-tang-step3.jpg" alt="Tablet Tang at step 3: the arrival plate top left, the card down the right side covering half the width"><figcaption><b>Tablet, a story step.</b> The card takes 43 % of the width and the plate the rest of the top; the map is a strip down the left.</figcaption></figure>
+    </div>
+    <p>The phone frame is mechanically sound and the best-behaved of the three; the sheet's three detents do what RFD 5 said. What it lacks is the same as desktop: a map worth looking at under the sheet, and a story that moves. The handheld tier from the hero has not started, and on a 390 px screen the 3D globe at region zoom is a green blur behind a sheet. The tablet frame hides the journal entirely until a reader finds the list orb, which is the hero's weakest screen in practice.</p>
+  </section>
+
+  <section id="bugs">
+    <h2>9 · Bugs found on the way</h2>
+    <div class="scroll">
+    <table>
+      <thead><tr><th>Where</th><th>What</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Lapita chapter</td><td>Opens over Africa; no marker in view.</td><td><code>boundingBoxCenter</code> in <code>projection.ts</code> averages min and max longitude. Mussau is at 149° E and Mulifanua at 172° W, so the centre lands at about 11° W. Any chapter crossing the antimeridian will do this.</td></tr>
+        <tr><td>Home, switcher, phone</td><td>Time ribbon illegible.</td><td>Linear scale spanning 21051 BCE to 779 CE, one label per chapter, no collision handling.</td></tr>
+        <tr><td>Home globe</td><td>Centred on the Persian Gulf; labels overprint; empty disc for 10 s or more.</td><td>Centre is the mean of chapter home views; no declutter; loads after the search index and the renderer.</td></tr>
+        <tr><td>Every story step</td><td>"The window widened … to include it" on steps inside the chapter window.</td><td>Step links recentre a five-year window on the step and the arrival plate reports the change as a widening.</td></tr>
+        <tr><td>Pennants</td><td>Latin-script people render as single initials (C, C, P).</td><td><code>medallion()</code> in <code>card.ts</code> takes two characters for CJK and one otherwise.</td></tr>
+        <tr><td>Place card</td><td>"Modern name" reads as a missing value.</td><td>The disclosure button's label is the words "Modern name", styled as an underlined link.</td></tr>
+        <tr><td>Search</td><td>"Rome" ranks Monte Albán first.</td><td>Groups by chapter before ranking; chapters sort alphabetically.</td></tr>
+        <tr><td>Alexander, home globe</td><td>Labels collide (Babylon and Σοῦσα, Ἐκβάτανα and Ἀρβηλα).</td><td>No label declutter at any zoom.</td></tr>
+        <tr><td>Playback</td><td>Vesuvius plays in a quarter of a second; the Americas would take 88 minutes.</td><td><code>YEARS_PER_SECOND = 4</code> regardless of window length.</td></tr>
+        <tr><td>Legend</td><td>"schematic, follows the dated stops" drawn on the water, twice on tablet.</td><td>The caption is rendered as a map label per journey leg.</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="small">All of these were reproduced on the local build of <code>main</code>; none were checked on the deployed site, at Darwin's request.</p>
+  </section>
+
+  <section id="recs" class="plan">
+    <h2>10 · What I would change</h2>
+    <p>In the order I would do it, assuming the answers in section 11 point roughly where I think they do.</p>
+    <h3>Within a week</h3>
+    <ol>
+      <li>Fix the antimeridian centre, the pennant initials, the "Modern name" label, the step-widening plate, and search ranking.</li>
+      <li>Fold the legend on desktop and shrink it to a key; move the attribution out of the scene.</li>
+      <li>Scale playback speed to the window, and open the card and fly the camera when the playhead crosses an event.</li>
+      <li>Replace the ribbon with an era strip that can hold 39 bars: lanes, a deep-time band, labels on hover.</li>
+    </ol>
+    <h3>The next step that changes the product</h3>
+    <ol start="5">
+      <li><b>Home as the world.</b> The globe (flat painted map below 1024 px) with chapter marks, the era strip, search. The list below, grouped and ordered by time, with a locator and a kind per card.</li>
+      <li><b>Story mode.</b> A guided tour per chapter: step, card, camera, date, hold. The journal shows the current step and the next, not the whole list. This is what "play" should mean.</li>
+      <li><b>The map worth looking at.</b> Painted relief everywhere, base labels (seas, rivers, ranges), label declutter, journeys drawn as paths with the caption in the key. The Track 1 exit.</li>
+      <li><b>Qualify quietly.</b> One badge per state; notes behind a disclosure; the dispute as two rows; About without the digest.</li>
+    </ol>
+    <h3>After that</h3>
+    <ol start="9">
+      <li><b>Chapters that know each other.</b> Dimmed neighbour marks on the globe at the playhead's century; "near this" on the card; one place record across chapters so 長安 is one place.</li>
+      <li><b>The diorama and the handheld tier</b>, once the region map is right, because both inherit its ground.</li>
+    </ol>
+  </section>
+
+  <section id="questions">
+    <h2>11 · Questions for Darwin</h2>
+    <p>You said the experience is "not actually what I want in various ways". These are the forks where I cannot guess, and each one changes what gets built. Short answers are fine; "all of the above" is also an answer.</p>
+    <ul class="q">
+      <li><b>What is the unit the reader moves through?</b><span>Today it is the chapter. Is it the world at a moment (scrub time, watch the globe change, dive into whatever is there), a thread (follow 鑒眞 across chapters), a place (stand at 長安 and see six centuries), or the chapter as now? The home page and the globe are built differently for each.</span></li>
+      <li><b>Is "play" a story or a clock?</b><span>A narrated tour that opens cards and moves the camera step by step, or a time-lapse of the window where events light up? They need different controls and different speeds, and the dial can only mean one of them.</span></li>
+      <li><b>Does the hero still set the bar?</b><span>The diorama, the painted region map and the handheld tier were approved on 2026-10-10 and none have shipped. If they still define done, Track 1 is the next work and the chapters pause. If the bar has moved, I would rather know what it is now than keep comparing against the old one.</span></li>
+      <li><b>How loud should the qualification be?</b><span>The site currently puts every caveat in the reader's face: badges, grey boxes, legend sentences, captions on the water. Is one badge and a disclosure enough, or do you want the evidence state visible without a click for a scholarly reader?</span></li>
+      <li><b>Who is this for first?</b><span>A curious reader who wants to be shown something, or a scholar who wants to check something? The first wants a tour and a beautiful map; the second wants search, entities and sources. The site is currently built for the second and sold to the first.</span></li>
+      <li><b>Should chapters stay the authoring unit but stop being the reading unit?</b><span>Shared place and person records across chapters would let the site show one 長安, one 鑒眞 and a world view. That is a data decision (ids and approvals) before it is a UI one.</span></li>
+      <li><b>What does five minutes on the site look like when it is right?</b><span>If you can describe three things you would do in those five minutes, in order, I can build the home and the chapter around them instead of around the records.</span></li>
+    </ul>
+  </section>
+</div>
+</main>
+
+</body></html>

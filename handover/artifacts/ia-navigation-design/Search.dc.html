@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Search from inside a chapter</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Noto+Sans+JP:wght@400;600&family=Noto+Serif+JP:wght@500;700&display=swap">
+<style>
+body{margin:0}
+a{color:#f1cf7a}a:hover{color:#ffe3a0}
+mark{background:rgba(241,207,122,.22);color:#f1cf7a;border-radius:2px;padding:0 1px}
+</style>
+</helmet>
+<div style="position: relative; width: 1440px; height: 900px; overflow: hidden; background: #0b1114; color: #f3ead7; font-family: 'Noto Sans JP', system-ui, sans-serif">
+<img src="/_blob/c94ffa3771e730a60a63dafb92fef132" alt="" aria-hidden="true" style="position: absolute; left: 0; top: 0; width: 1440px; height: 900px; object-fit: cover">
+<div style="position: absolute; left: 0; top: 0; width: 1440px; height: 900px; background: rgba(5,9,12,.62)"></div>
+
+<div style="position: absolute; left: 16px; top: 16px; width: 1408px; height: 44px; box-sizing: border-box; padding: 0 16px; display: flex; align-items: center; gap: 16px; border-radius: 6px; background: rgba(18,26,32,.86); border: 1px solid rgba(210,169,79,.35); font-size: 14px">
+<span style="font-family: Cinzel, serif; letter-spacing: .14em; color: #d2a94f">LEKISHI</span>
+<span style="font-family: 'Noto Serif JP', serif; font-weight: 700">The embassy to Tang China</span>
+<span style="color: #b9af9c">753 · 天寶十二載十二月廿日</span>
+<button type="button" style="margin-left: auto; display: inline-flex; align-items: center; gap: 8px; height: 30px; padding: 0 10px; border-radius: 4px; border: 1px solid #d2a94f; background: rgba(210,169,79,.14); color: #f3ead7; font: 13px 'Noto Sans JP', sans-serif" aria-pressed="true"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #f1cf7a; stroke-width: 2.4; stroke-linecap: round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>Search<span style="padding: 0 5px; border-radius: 3px; border: 1px solid #2a343b; color: #b9af9c">/</span></button>
+</div>
+
+<div role="dialog" aria-label="Search" style="position: absolute; left: 200px; top: 96px; width: 1040px; height: 640px; display: flex; flex-direction: column; border-radius: 8px; background: #121a20; border: 1px solid rgba(210,169,79,.45); box-shadow: 0 24px 60px rgba(0,0,0,.55); overflow: hidden">
+<div style="display: flex; align-items: center; gap: 14px; height: 64px; box-sizing: border-box; padding: 0 20px; border-bottom: 1px solid #2a343b">
+<svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; fill: none; stroke: #d2a94f; stroke-width: 2; stroke-linecap: round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+<label for="q" style="position: absolute; left: -9999px">Search</label>
+<input id="q" type="search" value="han" style="flex: 1 1 auto; min-width: 0; height: 40px; border: 0; outline: 0; background: transparent; color: #f3ead7; font: 20px 'Noto Sans JP', sans-serif">
+<div style="display: flex; gap: 2px; padding: 3px; border-radius: 5px; background: #0b1114; border: 1px solid #2a343b">
+<button type="button" aria-pressed="true" style="height: 30px; padding: 0 12px; border: 0; border-radius: 3px; background: #d2a94f; color: #1a1409; font: 600 13px 'Noto Sans JP', sans-serif">All chapters</button>
+<button type="button" aria-pressed="false" style="height: 30px; padding: 0 12px; border: 0; border-radius: 3px; background: transparent; color: #b9af9c; font: 13px 'Noto Sans JP', sans-serif">This chapter</button>
+</div>
+<span style="padding: 2px 7px; border-radius: 3px; border: 1px solid #2a343b; color: #b9af9c; font-size: 12px">Esc</span>
+</div>
+
+<div style="flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) 380px">
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 12px; overflow: hidden; border-right: 1px solid #2a343b">
+<div style="display: flex; align-items: baseline; gap: 10px; padding: 4px 10px"><span style="font-family: 'Noto Serif JP', serif; font-weight: 700; font-size: 15px">The embassy to Tang China</span><span style="font-size: 12px; color: #d2a94f">750–754</span><span style="margin-left: auto; font-size: 12px; color: #8f877a">this chapter</span></div>
+<a href="#" style="display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 4px; color: #f3ead7; text-decoration: none; font-size: 14px"><span style="font-family: 'Noto Serif JP', serif; font-size: 16px">蓬萊宮含元殿</span><span style="color: #b9af9c">Penglai gong <mark>Han</mark>yuan dian</span><span style="margin-left: auto; font-size: 12px; color: #8f877a">place · 1 event</span></a>
+<div style="height: 1px; margin: 6px 10px; background: #2a343b"></div>
+<div style="display: flex; align-items: baseline; gap: 10px; padding: 4px 10px"><span style="font-family: 'Noto Serif JP', serif; font-weight: 700; font-size: 15px">The end of the state of Han</span><span style="font-size: 12px; color: #d2a94f">233–226 BCE</span><span style="margin-left: auto; font-size: 12px; color: #8f877a">another chapter</span></div>
+<div style="padding: 8px 10px 2px; font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #8f877a">People and states</div>
+<a href="#" style="display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 4px; color: #f3ead7; text-decoration: none; font-size: 14px"><span style="font-family: 'Noto Serif JP', serif; font-size: 16px">韓非</span><span style="color: #b9af9c"><mark>Han</mark> Fei</span><span style="margin-left: auto; font-size: 12px; color: #8f877a">person</span></a>
+<a href="#" style="display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 4px; color: #f3ead7; text-decoration: none; font-size: 14px"><span style="font-family: 'Noto Serif JP', serif; font-size: 16px">韓王安</span><span style="color: #b9af9c"><mark>Han</mark> Wang An</span><span style="margin-left: auto; font-size: 12px; color: #8f877a">person</span></a>
+<a href="#" style="display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 4px; color: #f3ead7; text-decoration: none; font-size: 14px"><span style="font-family: 'Noto Serif JP', serif; font-size: 16px">韓</span><span style="color: #b9af9c"><mark>Han</mark></span><span style="margin-left: auto; font-size: 12px; color: #8f877a">state</span></a>
+<div style="padding: 8px 10px 2px; font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #8f877a">Events</div>
+<a href="#" style="display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 4px; color: #f3ead7; text-decoration: none; font-size: 14px"><span>The <mark>Han</mark> king's submission and 韓非's embassy</span><span style="margin-left: auto; font-size: 12px; color: #8f877a; white-space: nowrap">233 BCE</span></a>
+<a href="#" aria-current="true" style="display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 4px; background: rgba(210,169,79,.14); box-shadow: inset 0 0 0 1px #d2a94f; color: #f3ead7; text-decoration: none; font-size: 14px"><span>韓非 is detained and dies at 雲陽</span><span style="display: inline-flex; align-items: center; gap: 4px; padding: 1px 7px; border-radius: 999px; border: 1px solid #c58fd1; color: #c58fd1; font-size: 11px; white-space: nowrap"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><circle cx="5" cy="5" r="4" fill="none" stroke="#c58fd1" stroke-width="1.4"></circle><path d="M5 1a4 4 0 0 1 0 8z" fill="#c58fd1"></path></svg>disputed</span><span style="margin-left: auto; font-size: 12px; color: #8f877a; white-space: nowrap">233 BCE</span></a>
+<a href="#" style="display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 4px; color: #f3ead7; text-decoration: none; font-size: 14px"><span><mark>Han</mark> cedes 南陽 and Qin receives it</span><span style="margin-left: auto; font-size: 12px; color: #8f877a; white-space: nowrap">231 BCE</span></a>
+<a href="#" style="display: flex; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 4px; color: #f3ead7; text-decoration: none; font-size: 14px"><span>內史騰 takes <mark>Han</mark> and makes the 潁川 commandery</span><span style="margin-left: auto; font-size: 12px; color: #8f877a; white-space: nowrap">230 BCE</span></a>
+<a href="#" style="display: flex; align-items: center; gap: 8px; padding: 8px 10px; font-size: 13px; color: #f1cf7a">Open The end of the state of <mark>Han</mark> at its start<svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true" style="fill: none; stroke: #f1cf7a; stroke-width: 2.4; stroke-linecap: round"><path d="M9 6l6 6-6 6"></path></svg></a>
+
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 12px; padding: 22px 24px; background: #0f161b">
+<div style="font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #b9af9c">Event · 233 BCE · year precision</div>
+<div style="font-family: 'Noto Serif JP', serif; font-weight: 700; font-size: 21px; line-height: 1.3">韓非 is detained and dies at 雲陽</div>
+<div style="display: inline-flex; align-self: flex-start; align-items: center; gap: 5px; padding: 2px 8px; border-radius: 999px; border: 1px solid #c58fd1; color: #c58fd1; font-size: 12px">disputed account</div>
+<p style="margin: 0; font-size: 14px; line-height: 22px; color: #b9af9c">韓非 is detained in Qin and dies at 雲陽. The annals and the comprehensive mirror date the death to 始皇帝十四年 (233 BCE); the hereditary house and the biography disagree on how he died.</p>
+<div style="display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 6px 10px; font-size: 13px"><span style="color: #8f877a">Place</span><span>雲陽 · Yunyang</span><span style="color: #8f877a">Story</span><span>Step 3 of 9</span></div>
+<div style="margin-top: auto; display: flex; flex-direction: column; gap: 6px; padding-top: 14px; border-top: 1px solid #2a343b; font-size: 13px; line-height: 19px; color: #b9af9c">
+<span><b style="color: #f3ead7">Enter</b> opens The end of the state of Han at this event.</span>
+<span>Back returns to the landfall at 秋妻屋浦.</span>
+</div>
+</div>
+</div>
+
+<div style="display: flex; align-items: center; gap: 18px; height: 40px; box-sizing: border-box; padding: 0 20px; border-top: 1px solid #2a343b; font-size: 12px; color: #8f877a">
+<span>↑ ↓ move</span><span>Enter open</span><span>Tab switch scope</span>
+<span style="margin-left: auto">Names in every script and romanization, story captions and places</span>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

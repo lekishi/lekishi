@@ -1,0 +1,830 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Lekishi System Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Noto+Sans+JP:wght@400;600&family=Noto+Serif+JP:wght@500;700&display=swap">
+<style>
+/* Layout: one dark lacquer page; sections stack; the frame demo is a fixed-width stage inside its own horizontal scroller. */
+:root {
+  color-scheme: dark;
+  /* surfaces */
+  --abyss: #0b1114;
+  --lacquer: #121a20;
+  --lacquer-glass: rgba(18, 26, 32, 0.86);
+  --lacquer-raised: #1a242b;
+  --frame: rgba(210, 169, 79, 0.35);
+  --rule: #2a343b;
+  /* ink */
+  --ink: #f3ead7;
+  --ink-dim: #b9af9c;
+  --ink-faint: #8f877a;
+  /* accent */
+  --gold: #d2a94f;
+  --gold-bright: #f1cf7a;
+  --on-gold: #1a1409;
+  --danger: #e8735a;
+  /* evidence and relationships */
+  --jade: #79c3b4;
+  --vermilion: #d9593e;
+  --sky: #7fb2e0;
+  --conflict: #c94f4f;
+  --trade: #c9a66b;
+  --plum: #c58fd1;
+  /* sea for the placeholder scene */
+  --sea-deep: #0f3d4a;
+  --sea: #1b6474;
+  --land: #6f8a4a;
+  --land-high: #a39466;
+  /* type */
+  --display: "Cinzel", "Trajan Pro", Georgia, serif;
+  --serif: "Noto Serif JP", "Noto Serif CJK JP", "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif;
+  --sans: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+  /* shape and motion */
+  --r-control: 4px;
+  --r-plate: 6px;
+  --fast: 120ms;
+  --base: 200ms;
+  --slow: 400ms;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+* { box-sizing: border-box; }
+html, body { background: var(--abyss); color: var(--ink); }
+body {
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.6;
+  padding-inline: 16px;
+  padding-block: 0 64px;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 72px; }
+a { color: var(--gold-bright); }
+:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { transition-duration: 0ms !important; animation: none !important; } }
+
+/* page header */
+.masthead { padding-block: 40px 8px; display: flex; flex-direction: column; gap: 14px; border-bottom: 1px solid var(--frame); padding-bottom: 28px; }
+.eyebrow, .label { font: 600 11px/14px var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-dim); }
+.masthead h1 { font: 600 clamp(28px, 5vw, 44px)/1.1 var(--display); letter-spacing: .08em; margin: 0; color: var(--gold); }
+.masthead p { margin: 0; max-width: 68ch; color: var(--ink-dim); }
+.masthead .note { font-size: 13px; color: var(--ink-faint); }
+
+section { display: flex; flex-direction: column; gap: 20px; }
+.sec-head { display: flex; flex-direction: column; gap: 6px; }
+.sec-head h2 { font: 700 22px/28px var(--serif); margin: 0; text-wrap: balance; }
+.sec-head p { margin: 0; color: var(--ink-dim); max-width: 70ch; font-size: 14px; }
+
+/* ---------- frame demo ---------- */
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.seg { display: inline-flex; border: 1px solid var(--frame); border-radius: var(--r-control); overflow: hidden; }
+.seg button { font: 600 12px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-dim); background: transparent; border: 0; padding: 9px 14px; cursor: pointer; transition: background var(--fast) var(--ease), color var(--fast) var(--ease); }
+.seg button + button { border-left: 1px solid var(--frame); }
+.seg button:hover { background: var(--lacquer-raised); color: var(--ink); }
+.seg button[aria-pressed="true"] { background: var(--gold); color: var(--on-gold); }
+.check { display: inline-flex; gap: 8px; align-items: center; font-size: 13px; color: var(--ink-dim); cursor: pointer; }
+.check input { accent-color: var(--gold); width: 16px; height: 16px; }
+.stage-scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: var(--r-plate); background: #070b0d; padding: 16px; }
+.stage { margin: 0 auto; transition: width var(--slow) var(--ease), height var(--slow) var(--ease); }
+.caption { font-size: 12px; color: var(--ink-faint); line-height: 16px; }
+
+.frame { container-type: inline-size; position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 4px; background: var(--sea-deep); font-size: 13px; }
+/* placeholder scene: deliberately abstract so nobody mistakes it for geography */
+.scene { position: absolute; inset: 0; background:
+  radial-gradient(60% 45% at 68% 30%, var(--land) 0 40%, transparent 41%),
+  radial-gradient(22% 30% at 58% 62%, var(--land) 0 45%, transparent 46%),
+  radial-gradient(30% 22% at 18% 45%, var(--land-high) 0 30%, var(--land) 31% 46%, transparent 47%),
+  radial-gradient(120% 90% at 50% 40%, var(--sea) 0%, var(--sea-deep) 70%);
+}
+.scene svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.scene-tag { position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); font: 600 10px/1 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: rgba(243,234,215,.35); white-space: nowrap; }
+
+.chrome { position: absolute; inset: 0; display: grid; padding: 10px; gap: 10px; pointer-events: none;
+  grid-template-columns: 272px 1fr 340px; grid-template-rows: auto 1fr auto;
+  grid-template-areas: "top top top" "left clear right" "bottom bottom bottom"; }
+.chrome > * { pointer-events: auto; min-width: 0; min-height: 0; }
+.plate { background: var(--lacquer-glass); border: 1px solid var(--frame); border-radius: var(--r-plate); backdrop-filter: blur(8px); box-shadow: 0 8px 24px rgba(0,0,0,.35); }
+.solid { background: var(--lacquer); }
+
+/* region markers (toggle) */
+.frame [data-region] { position: relative; }
+.show-regions .frame [data-region]::after { content: attr(data-region); position: absolute; top: -1px; right: -1px; font: 600 9px/1 var(--sans); letter-spacing: .12em; text-transform: uppercase; background: var(--gold); color: var(--on-gold); padding: 3px 5px; border-radius: 0 var(--r-plate) 0 4px; z-index: 5; }
+.show-regions .frame .clear { outline: 1px dashed rgba(241,207,122,.7); outline-offset: -1px; border-radius: 4px; }
+.clear { position: relative; grid-area: clear; pointer-events: none; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 6px; }
+.show-regions .clear::before { content: "clear zone · the camera frames the selection here"; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); font-size: 10px; letter-spacing: .08em; color: var(--gold-bright); white-space: nowrap; }
+
+/* date bar */
+.datebar { grid-area: top; display: flex; align-items: center; gap: 14px; padding: 8px 12px; }
+.brand { font: 600 15px/1 var(--display); letter-spacing: .14em; color: var(--gold); }
+.date { display: flex; align-items: baseline; gap: 10px; flex-wrap: nowrap; white-space: nowrap; overflow: hidden; }
+.date .y { font-weight: 600; color: var(--gold-bright); font-variant-numeric: tabular-nums; }
+.date .cal { font-family: var(--serif); color: var(--ink); font-size: 13px; }
+.date .sep { color: var(--ink-faint); }
+.datebar .meta { margin-left: auto; display: flex; gap: 14px; align-items: center; color: var(--ink-dim); font-size: 12px; white-space: nowrap; }
+.datebar .meta b { color: var(--gold-bright); font-weight: 600; font-variant-numeric: tabular-nums; }
+.linkbtn { background: none; border: 0; color: var(--ink); font: 600 12px/1 var(--sans); padding: 6px 8px; border-radius: var(--r-control); cursor: pointer; text-decoration: underline; text-decoration-color: var(--frame); text-underline-offset: 3px; transition: background var(--fast) var(--ease); }
+.linkbtn:hover { background: var(--lacquer-raised); }
+
+/* left rail */
+.left { grid-area: left; display: flex; flex-direction: column; gap: 10px; }
+.orbs { display: flex; gap: 8px; padding: 2px; }
+.orb { width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--frame); background: var(--lacquer-glass); color: var(--ink-dim); display: grid; place-items: center; cursor: pointer; transition: transform var(--fast) var(--ease), border-color var(--fast) var(--ease), background var(--fast) var(--ease), color var(--fast) var(--ease); flex: none; padding: 0; }
+.orb:hover { transform: translateY(-1px); border-color: var(--gold); color: var(--ink); }
+.orb[aria-pressed="true"] { border: 2px solid var(--gold); background: radial-gradient(circle at 50% 35%, #2b2414, var(--lacquer) 70%); color: var(--gold-bright); }
+.orb:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+.orb svg { width: 20px; height: 20px; }
+.journal { padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; flex: 1; min-height: 0; overflow: auto; }
+.journal ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.journal li button { width: 100%; text-align: left; display: grid; grid-template-columns: 44px 1fr; gap: 8px; align-items: baseline; padding: 6px 8px; border-radius: var(--r-control); border: 0; background: transparent; color: var(--ink-dim); font: 400 13px/1.45 var(--sans); cursor: pointer; transition: background var(--fast) var(--ease), color var(--fast) var(--ease); }
+.journal li button:hover { background: var(--lacquer-raised); color: var(--ink); }
+.journal li button[aria-current="true"] { background: rgba(210,169,79,.12); color: var(--ink); box-shadow: inset 2px 0 0 var(--gold); }
+.journal .d { font-variant-numeric: tabular-nums; color: var(--ink-faint); font-size: 12px; }
+.journal li button[aria-current="true"] .d { color: var(--gold-bright); }
+.minimap { height: 92px; flex: none; background:
+  radial-gradient(40% 50% at 70% 35%, var(--land) 0 50%, transparent 51%),
+  radial-gradient(18% 26% at 40% 60%, var(--land) 0 50%, transparent 51%),
+  var(--sea); position: relative; overflow: hidden; }
+.minimap i { position: absolute; left: 44%; top: 46%; width: 26px; height: 18px; border: 1.5px solid var(--gold-bright); border-radius: 2px; }
+.minimap span { position: absolute; left: 0; right: 0; bottom: 0; padding: 4px 8px; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; background: rgba(11,17,20,.8); color: var(--ink-dim); }
+
+/* right rail */
+.right { grid-area: right; display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+.pennants { display: flex; justify-content: flex-end; gap: 8px; }
+.pennant { width: 46px; display: flex; flex-direction: column; align-items: center; gap: 3px; background: none; border: 0; padding: 0; cursor: pointer; color: var(--ink-dim); }
+.pennant .flag { width: 38px; height: 44px; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%); display: grid; place-items: start center; padding-top: 6px; transition: transform var(--fast) var(--ease); }
+.pennant:hover .flag { transform: translateY(2px); }
+.pennant .med { width: 24px; height: 24px; border-radius: 50%; background: var(--lacquer); border: 1.5px solid var(--gold); display: grid; place-items: center; font: 700 12px/1 var(--serif); color: var(--ink); }
+.pennant small { font-size: 10px; line-height: 1.2; text-align: center; }
+.card { padding: 14px; display: flex; flex-direction: column; gap: 12px; overflow: auto; min-height: 0; flex: 1; }
+.card h3 { margin: 0; font: 700 20px/26px var(--serif); text-wrap: balance; }
+.card .roman { font-size: 12px; color: var(--ink-dim); margin-top: 2px; }
+.img-ph { aspect-ratio: 16 / 7; max-width: 100%; border-radius: var(--r-control); border: 1px solid var(--rule); background: repeating-linear-gradient(135deg, transparent 0 7px, rgba(210,169,79,.08) 7px 8px), var(--lacquer); display: flex; align-items: flex-end; padding: 6px 8px; font-size: 10px; letter-spacing: .1em; color: var(--ink-faint); text-transform: uppercase; }
+.quote { border-left: 2px solid var(--gold); padding: 2px 0 2px 10px; font: 500 14px/1.6 var(--serif); color: var(--ink); }
+.quote small { display: block; font: 400 12px/16px var(--sans); color: var(--ink-faint); margin-top: 4px; }
+dl.facts { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; margin: 0; font-size: 13px; }
+dl.facts dt { color: var(--ink-faint); }
+dl.facts dd { margin: 0; color: var(--ink); }
+
+/* bottom */
+.bottom { grid-area: bottom; display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: end; }
+.strip { padding: 8px 12px; display: flex; flex-direction: column; gap: 4px; }
+.strip .row { display: grid; grid-template-columns: 56px 1fr; align-items: center; gap: 8px; }
+.track { position: relative; height: 20px; }
+.track::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--rule); }
+.tick { position: absolute; top: 50%; width: 6px; height: 6px; margin: -3px 0 0 -3px; border-radius: 50%; background: var(--gold); }
+.tick.hollow { background: transparent; border: 1.5px solid var(--gold); }
+.brush { position: absolute; top: 2px; bottom: 2px; border: 1px solid var(--gold); background: rgba(210,169,79,.12); border-radius: 3px; }
+.playhead { position: absolute; top: -2px; bottom: -2px; width: 2px; background: var(--gold-bright); box-shadow: 0 0 0 3px rgba(241,207,122,.2); }
+.scale { display: flex; justify-content: space-between; font-size: 10px; color: var(--ink-faint); font-variant-numeric: tabular-nums; padding-left: 64px; }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; font-size: 11px; color: var(--ink-dim); padding: 6px 12px; }
+.legend svg { vertical-align: middle; margin-right: 4px; }
+.legend .attr { margin-left: auto; color: var(--ink-faint); }
+.dial { width: 104px; height: 104px; border-radius: 50%; position: relative; display: grid; place-items: center; flex: none; margin-top: -40px; }
+.dial svg.ring { position: absolute; inset: 0; }
+.dial .play { position: relative; z-index: 1; width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--gold); background: var(--lacquer); color: var(--gold-bright); display: grid; place-items: center; cursor: pointer; transition: transform var(--fast) var(--ease), background var(--fast) var(--ease); }
+.dial .play:hover { transform: scale(1.05); background: #1d1a12; }
+.dial .lbl { position: absolute; top: -18px; right: 0; left: 0; text-align: center; }
+.honesty { max-width: 440px; padding: 8px 12px; font-size: 11px; line-height: 1.5; color: var(--ink-dim); text-align: center; }
+.honesty b { color: var(--ink); font-weight: 600; }
+
+/* phone-only pieces hidden by default */
+.sheet, .orbbar { display: none; }
+
+/* tablet: rails narrow, journal behind the orbs */
+@container (max-width: 1000px) {
+  .chrome { grid-template-columns: 56px 1fr 300px; }
+  .orbs { flex-direction: column; }
+  .left .journal, .left .minimap { display: none; }
+  .datebar .cal.alt, .datebar .sep.alt { display: none; }
+  .legend .attr { display: none; }
+  .honesty { max-width: 300px; }
+  .pennant small { display: none; }
+}
+/* phone, 3D: top bar, scene, three-detent sheet */
+@container (max-width: 560px) {
+  .chrome { grid-template-columns: 1fr; grid-template-rows: auto auto 1fr auto; grid-template-areas: "top" "orbbar" "clear" "sheet"; padding: 8px; gap: 8px; }
+  .left, .right, .bottom { display: none; }
+  .datebar { gap: 8px; padding: 8px 10px; }
+  .datebar .brand { display: none; }
+  .datebar .meta .win { display: none; }
+  .date .cal.alt, .date .sep.alt { display: none; }
+  .orbbar { grid-area: orbbar; display: flex; justify-content: center; gap: 8px; pointer-events: auto; }
+  .orbbar .orb { width: 36px; height: 36px; }
+  .honesty { display: none; }
+  .sheet { grid-area: sheet; display: flex; flex-direction: column; border-radius: 10px 10px var(--r-plate) var(--r-plate); overflow: hidden; transition: height var(--base) var(--ease); }
+  .sheet[data-detent="peek"] { height: 136px; }
+  .sheet[data-detent="half"] { height: 340px; }
+  .sheet[data-detent="full"] { height: 560px; }
+  .grab { align-self: center; width: 40px; height: 4px; border-radius: 2px; background: var(--rule); margin: 8px 0 4px; border: 0; padding: 0; cursor: pointer; }
+  .peek { display: grid; grid-template-columns: 56px 1fr; gap: 12px; align-items: center; padding: 4px 12px 10px; }
+  .minidial { width: 52px; height: 52px; position: relative; display: grid; place-items: center; }
+  .minidial > svg { position: absolute; inset: 0; }
+  .minidial button { position: relative; z-index: 1; width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid var(--gold); background: var(--lacquer); color: var(--gold-bright); display: grid; place-items: center; padding: 0; cursor: pointer; }
+  .peek h4 { margin: 0; font: 700 15px/1.35 var(--serif); }
+  .peek p { margin: 0; font-size: 12px; color: var(--ink-dim); }
+  .sheet .more { padding: 0 12px 12px; display: flex; flex-direction: column; gap: 10px; overflow: auto; }
+  .detents { display: flex; gap: 6px; padding: 0 12px 10px; }
+}
+
+/* smallest phone: keep the year and the day, drop the regnal era */
+@container (max-width: 340px) {
+  .date .era, .date .era + .sep, .date .sep:not(.alt) { display: none; }
+}
+
+/* ---------- token grid ---------- */
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 12px; }
+.sw { border: 1px solid var(--rule); border-radius: var(--r-plate); overflow: hidden; background: var(--lacquer); display: flex; flex-direction: column; }
+.sw .chip { height: 56px; display: flex; align-items: flex-end; justify-content: flex-end; padding: 6px 8px; font: 600 12px/1 var(--sans); }
+.sw .info { padding: 8px 10px; display: flex; flex-direction: column; gap: 2px; font-size: 12px; line-height: 16px; }
+.sw .info b { font-weight: 600; color: var(--ink); font-size: 13px; }
+.sw .info code { font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; font-size: 11px; color: var(--ink-faint); }
+.sw .info span { color: var(--ink-dim); }
+.fix { color: var(--gold-bright); }
+.group-label { margin-top: 8px; }
+
+/* evidence table */
+.ev { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.ev-item { display: grid; grid-template-columns: 76px 1fr; gap: 12px; align-items: center; padding: 12px; background: var(--lacquer); border: 1px solid var(--rule); border-radius: var(--r-plate); }
+.ev-item .mark { height: 44px; display: grid; place-items: center; background: radial-gradient(circle, var(--sea) 0%, var(--sea-deep) 100%); border-radius: var(--r-control); }
+.ev-item .t { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.ev-item .t p { margin: 0; font-size: 12px; color: var(--ink-dim); line-height: 1.45; }
+
+/* badges */
+.badge { display: inline-flex; align-items: center; gap: 5px; font: 600 11px/1 var(--sans); letter-spacing: .04em; padding: 4px 7px 4px 6px; border-radius: var(--r-control); border: 1px solid currentColor; white-space: nowrap; width: fit-content; }
+.badge svg { width: 10px; height: 10px; flex: none; }
+.b-attested { color: var(--gold); }
+.b-identified { color: var(--jade); }
+.b-schematic { color: var(--gold); border-style: dashed; }
+.b-reconstructed { color: var(--ink-dim); border-style: dashed; }
+.b-possible { color: var(--ink-dim); border-style: dotted; }
+.b-disputed { color: var(--plum); }
+.b-outside { color: var(--ink-faint); }
+.b-transmission { color: var(--vermilion); }
+.b-diplomacy { color: var(--sky); }
+
+/* type specimen */
+.type { display: flex; flex-direction: column; border: 1px solid var(--rule); border-radius: var(--r-plate); background: var(--lacquer); }
+.type .r { display: grid; grid-template-columns: 170px 1fr; gap: 16px; padding: 14px 16px; align-items: baseline; }
+.type .r + .r { border-top: 1px solid var(--rule); }
+.type .meta { font-size: 12px; color: var(--ink-faint); line-height: 16px; }
+.type .meta b { color: var(--ink-dim); display: block; font-weight: 600; font-family: ui-monospace, Menlo, monospace; font-size: 12px; }
+.t-display { font: 600 32px/36px var(--display); letter-spacing: .06em; color: var(--gold); }
+.t-display .cjk { font: 700 30px/36px var(--serif); letter-spacing: .02em; color: var(--ink); margin-left: 12px; }
+.t-title { font: 700 22px/28px var(--serif); }
+.t-title-sm { font: 700 17px/24px var(--serif); }
+.t-body { font: 400 15px/24px var(--sans); max-width: 62ch; color: var(--ink); }
+.t-body-sm { font: 400 13px/20px var(--sans); color: var(--ink); }
+.t-caption { font: 400 12px/16px var(--sans); color: var(--ink-dim); }
+.floor { padding: 12px 16px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--ink-dim); }
+
+/* primitives */
+.prims { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
+.prim { background: var(--lacquer); border: 1px solid var(--rule); border-radius: var(--r-plate); padding: 16px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.prim h3 { margin: 0; font: 600 14px/20px var(--sans); color: var(--ink); display: flex; justify-content: space-between; gap: 8px; }
+.prim h3 small { font-weight: 400; color: var(--ink-faint); font-size: 12px; }
+.prim p { margin: 0; font-size: 12px; color: var(--ink-dim); line-height: 1.5; }
+.row-wrap { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.state-col { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+.state-col .caption { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+
+.btn { font: 600 13px/1 var(--sans); padding: 9px 14px; border-radius: var(--r-control); border: 1px solid transparent; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: background var(--fast) var(--ease), border-color var(--fast) var(--ease), color var(--fast) var(--ease), transform var(--fast) var(--ease); }
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: var(--gold); color: var(--on-gold); }
+.btn-primary:hover, .btn-primary.is-hover { background: var(--gold-bright); }
+.btn-primary:focus-visible, .btn-primary.is-focus { outline: 2px solid var(--ink); outline-offset: 2px; }
+.btn-secondary { background: transparent; color: var(--ink); border-color: var(--frame); }
+.btn-secondary:hover, .btn-secondary.is-hover { border-color: var(--gold); background: var(--lacquer-raised); }
+.btn-ghost { background: transparent; color: var(--ink-dim); }
+.btn-ghost:hover, .btn-ghost.is-hover { background: var(--lacquer-raised); color: var(--ink); }
+.btn-icon { padding: 8px; color: var(--ink-dim); background: transparent; border-color: var(--frame); }
+.btn-icon:hover, .btn-icon.is-hover { color: var(--ink); border-color: var(--gold); }
+.btn svg { width: 14px; height: 14px; }
+.is-focus { outline: 2px solid var(--gold-bright); outline-offset: 2px; }
+.btn:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+
+.tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--rule); }
+.tab { background: none; border: 0; color: var(--ink-dim); font: 600 13px/1 var(--sans); padding: 10px 10px 9px; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color var(--fast) var(--ease), border-color var(--fast) var(--ease); }
+.tab:hover { color: var(--ink); }
+.tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--gold); }
+.tab .n { color: var(--ink-faint); font-weight: 400; margin-left: 4px; font-variant-numeric: tabular-nums; }
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field .input { display: flex; align-items: center; gap: 8px; background: var(--lacquer-raised); border: 1px solid var(--rule); border-radius: var(--r-control); padding: 0 10px; transition: border-color var(--fast) var(--ease); }
+.field .input:focus-within { border-color: var(--gold); }
+.field input { flex: 1; min-width: 0; background: transparent; border: 0; color: var(--ink); font: 400 14px/1 var(--sans); padding: 10px 0; outline: none; }
+.field input::placeholder { color: var(--ink-faint); }
+.field svg { width: 14px; height: 14px; color: var(--ink-faint); flex: none; }
+.field .hint { font-size: 12px; color: var(--ink-faint); }
+
+.nameform { display: flex; flex-direction: column; gap: 2px; }
+.nameform .h { font: 700 22px/28px var(--serif); }
+.nameform .ro { font-size: 12px; color: var(--ink-dim); letter-spacing: .02em; }
+.nameform .mod { font-size: 12px; color: var(--ink-faint); }
+.dateline { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; font-variant-numeric: tabular-nums; }
+.dateline .y { font-weight: 600; color: var(--gold-bright); }
+.dateline .c { font-family: var(--serif); }
+.dateline .p { font-size: 12px; color: var(--ink-faint); }
+.cite { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-top: 1px solid var(--rule); font-size: 13px; }
+.cite:last-child { border-bottom: 1px solid var(--rule); }
+.cite .s { font-family: var(--serif); }
+.cite .terms { color: var(--ink-faint); font-size: 12px; white-space: nowrap; }
+.empty { border: 1px dashed var(--rule); border-radius: var(--r-plate); padding: 14px; display: flex; flex-direction: column; gap: 4px; }
+.empty b { font-size: 13px; font-weight: 600; }
+.empty span { font-size: 12px; color: var(--ink-dim); }
+.erow { width: 100%; text-align: left; background: transparent; border: 1px solid var(--rule); border-radius: var(--r-plate); padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; color: var(--ink); cursor: pointer; transition: border-color var(--fast) var(--ease), background var(--fast) var(--ease); font: inherit; }
+.erow:hover { border-color: var(--frame); background: var(--lacquer-raised); }
+.erow[aria-current="true"] { border-color: var(--gold); background: rgba(210,169,79,.08); }
+.erow .tt { font: 700 15px/1.35 var(--serif); }
+.erow .mm { font-size: 12px; color: var(--ink-dim); display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+
+/* scales */
+.scales { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.radii { display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap; }
+.radii div { display: flex; flex-direction: column; gap: 6px; align-items: center; font-size: 11px; color: var(--ink-dim); }
+.radii i { width: 64px; height: 44px; border: 1.5px solid var(--gold); background: var(--lacquer-raised); display: block; }
+.ladder { display: flex; flex-direction: column; gap: 4px; font-size: 12px; }
+.ladder div { display: grid; grid-template-columns: 40px 1fr; gap: 10px; padding: 4px 8px; border-radius: var(--r-control); background: var(--lacquer-raised); }
+.ladder b { color: var(--gold-bright); font-variant-numeric: tabular-nums; font-weight: 600; }
+.motion { display: flex; flex-direction: column; gap: 10px; }
+.mrow { display: grid; grid-template-columns: 110px 1fr; gap: 12px; align-items: center; font-size: 12px; color: var(--ink-dim); }
+.mtrack { position: relative; height: 22px; border-radius: 11px; background: var(--lacquer-raised); }
+.mtrack i { position: absolute; left: 3px; top: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--gold); transition-timing-function: var(--ease); transition-property: left; }
+.motion:hover .mtrack i, .motion:focus-within .mtrack i { left: calc(100% - 19px); }
+.space { display: flex; align-items: flex-end; gap: 10px; flex-wrap: wrap; }
+.space div { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; color: var(--ink-dim); font-variant-numeric: tabular-nums; }
+.space i { display: block; background: var(--gold); opacity: .8; width: 10px; }
+
+.questions { counter-reset: q; display: flex; flex-direction: column; gap: 10px; padding: 0; margin: 0; list-style: none; }
+.questions li { counter-increment: q; display: grid; grid-template-columns: 28px 1fr; gap: 10px; padding: 12px 14px; background: var(--lacquer); border: 1px solid var(--rule); border-radius: var(--r-plate); font-size: 14px; }
+.questions li::before { content: "✓"; width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--gold); display: grid; place-items: center; font: 600 12px/1 var(--sans); color: var(--gold-bright); }
+.questions li span { color: var(--ink-dim); display: block; font-size: 13px; margin-top: 2px; }
+
+@media (max-width: 640px) {
+  .type .r { grid-template-columns: 1fr; gap: 6px; }
+  .t-display { font-size: 26px; line-height: 32px; }
+  .t-display .cjk { display: block; margin: 4px 0 0; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-ship" viewBox="0 0 24 24"><path d="M4 15h16l-2.5 4.5h-11z M12 4v10 M12 5l6 7h-6 M12 6l-5 6h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-arc" viewBox="0 0 24 24"><path d="M4 18C6 8 18 8 20 18" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="4" cy="18" r="2" fill="currentColor"/><circle cx="20" cy="18" r="2" fill="currentColor"/></symbol>
+    <symbol id="i-envoy" viewBox="0 0 24 24"><circle cx="7" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 10.5h3M10.5 13.5h3" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-territory" viewBox="0 0 24 24"><path d="M5 6l7-2 7 3v11l-7 2-7-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M7 15l5-5M9 17l6-6M12 18l5-5" stroke="currentColor" stroke-width="1.1"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5h6a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4z M20 5h-6a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z" fill="currentColor"/></symbol>
+    <symbol id="i-step" viewBox="0 0 24 24"><path d="M6 5l9 7-9 7z M17 5v14" fill="currentColor" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-ring" viewBox="0 0 12 12"><circle cx="6" cy="6" r="4" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
+    <symbol id="i-halo" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" fill="currentColor" opacity=".35"/><circle cx="6" cy="6" r="2" fill="currentColor"/></symbol>
+    <symbol id="i-dash" viewBox="0 0 12 12"><path d="M0 6h4M7 6h5" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-hollow" viewBox="0 0 12 12"><circle cx="6" cy="6" r="4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="2 1.6"/></symbol>
+    <symbol id="i-split" viewBox="0 0 12 12"><path d="M6 1a5 5 0 0 0 0 10z" fill="currentColor"/><circle cx="6" cy="6" r="5" fill="none" stroke="currentColor" stroke-width="1.4"/></symbol>
+    <symbol id="i-out" viewBox="0 0 12 12"><circle cx="6" cy="6" r="4" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M2 10L10 2" stroke="currentColor" stroke-width="1.4"/></symbol>
+  </defs>
+</svg>
+
+<div class="wrap">
+  <header class="masthead">
+    <span class="eyebrow">RFD 5 · decisions recorded 2026-10-13 · for sign-off</span>
+    <h1>LEKISHI · SYSTEM SHEET</h1>
+    <p>The tokens, type, primitives and page frame proposed for every Lekishi surface, derived from the approved Tang hero. This page is the review copy; once approved it becomes the bar for the chrome, the way the hero is the bar for the map.</p>
+    <p class="note">Event names, dates and sources are sample content taken from the hero mock. The scene in the frame is a deliberately abstract placeholder, not geography.</p>
+  </header>
+
+  <!-- ===================== FRAME ===================== -->
+  <section id="frame">
+    <div class="sec-head">
+      <span class="label">Layout</span>
+      <h2>One frame for every scale</h2>
+      <p>Navigation on the left, the selection on the right, time along the bottom, the date across the top. The camera moves from globe to diorama without a cut, so the chrome never rearranges itself at a zoom threshold. Switch widths to see how the regions collapse.</p>
+    </div>
+    <div class="toolbar">
+      <div class="seg" role="group" aria-label="Frame width">
+        <button type="button" id="w-desktop" data-w="1148" data-h="700" aria-pressed="true">Desktop 1440</button>
+        <button type="button" id="w-tablet" data-w="820" data-h="634" aria-pressed="false">Tablet 820</button>
+        <button type="button" id="w-phone" data-w="390" data-h="760" aria-pressed="false">Phone 390</button>
+        <button type="button" id="w-small" data-w="320" data-h="640" aria-pressed="false">Phone 320</button>
+      </div>
+      <label class="check"><input type="checkbox" id="show-regions" checked> Show regions</label>
+    </div>
+    <div class="stage-scroll show-regions" id="stage-scroll">
+      <div class="stage" id="stage" style="width:1148px;height:700px">
+        <div class="frame">
+          <div class="scene" aria-hidden="true">
+            <svg viewBox="0 0 1000 600" preserveAspectRatio="none">
+              <path d="M180 470 C 300 430, 420 420, 520 380 S 640 300, 600 250 S 700 170, 820 150" fill="none" stroke="var(--gold)" stroke-width="2.4" stroke-dasharray="10 7" vector-effect="non-scaling-stroke"/>
+              <path d="M120 300 C 320 80, 640 60, 840 140" fill="none" stroke="var(--vermilion)" stroke-width="2" vector-effect="non-scaling-stroke"/>
+            </svg>
+            <span class="scene-tag">placeholder scene</span>
+          </div>
+          <div class="chrome">
+            <div class="datebar plate" data-region="top · DateBar">
+              <span class="brand">LEKISHI</span>
+              <div class="date">
+                <span class="y">753</span>
+                <span class="cal era">天寶十二載</span>
+                <span class="sep alt">·</span>
+                <span class="cal alt">天平勝寶五年</span>
+                <span class="sep">·</span>
+                <span class="cal">12月20日</span>
+              </div>
+              <div class="meta">
+                <span class="win">Window <b>750–754</b></span>
+                <span>Story <b>8/12</b></span>
+                <button type="button" class="linkbtn" id="about-btn">About</button>
+              </div>
+            </div>
+
+            <div class="orbbar" aria-label="Layers">
+              <button type="button" class="orb" aria-pressed="true" aria-label="Journeys"><svg><use href="#i-ship"/></svg></button>
+              <button type="button" class="orb" aria-pressed="true" aria-label="Transmission"><svg><use href="#i-arc"/></svg></button>
+              <button type="button" class="orb" aria-pressed="false" aria-label="Diplomacy"><svg><use href="#i-envoy"/></svg></button>
+              <button type="button" class="orb" aria-pressed="false" aria-label="Territory" disabled><svg><use href="#i-territory"/></svg></button>
+              <button type="button" class="orb" aria-pressed="false" aria-label="Sources"><svg><use href="#i-book"/></svg></button>
+            </div>
+
+            <div class="left" data-region="left rail">
+              <div class="orbs" role="group" aria-label="Layers">
+                <button type="button" class="orb" aria-pressed="true" aria-label="Journeys" title="Journeys"><svg><use href="#i-ship"/></svg></button>
+                <button type="button" class="orb" aria-pressed="true" aria-label="Transmission" title="Transmission"><svg><use href="#i-arc"/></svg></button>
+                <button type="button" class="orb" aria-pressed="false" aria-label="Diplomacy" title="Diplomacy"><svg><use href="#i-envoy"/></svg></button>
+                <button type="button" class="orb" aria-pressed="false" aria-label="Territory, no snapshots in this chapter" title="Territory (none in this chapter)" disabled><svg><use href="#i-territory"/></svg></button>
+                <button type="button" class="orb" aria-pressed="false" aria-label="Sources" title="Sources"><svg><use href="#i-book"/></svg></button>
+              </div>
+              <div class="journal plate">
+                <span class="label">Journal · 鑒眞の第六次渡航</span>
+                <ol>
+                  <li><button type="button"><span class="d">11·15</span><span>Four ships leave 黃泗浦</span></button></li>
+                  <li><button type="button"><span class="d">11·21</span><span>Three ships reach 阿兒奈波島</span></button></li>
+                  <li><button type="button"><span class="d">12·07</span><span>The ships reach 益救島</span></button></li>
+                  <li><button type="button" aria-current="true"><span class="d">12·20</span><span>The second ship lands at 秋妻屋浦</span></button></li>
+                  <li><button type="button"><span class="d">12·26</span><span>鑒眞 enters 大宰府</span></button></li>
+                  <li><button type="button"><span class="d">2·04</span><span>鑒眞 reaches 平城京</span></button></li>
+                </ol>
+              </div>
+              <div class="minimap plate" aria-hidden="true"><i></i><span>Satsuma · 薩摩</span></div>
+            </div>
+
+            <div class="clear">
+              <div class="honesty plate"><b>What is real here.</b> Terrain is open elevation, raised 2.2×. Forest and houses are symbols placed by terrain. The ship is schematic; its path is the dashed line.</div>
+            </div>
+
+            <div class="right" data-region="right rail">
+              <div class="pennants" role="group" aria-label="People in this story">
+                <button type="button" class="pennant"><span class="flag" style="background:#8f2a2a"><span class="med">鑒</span></span><small>Jianzhen</small></button>
+                <button type="button" class="pennant"><span class="flag" style="background:#2f4f7a"><span class="med">大</span></span><small>Ōtomo</small></button>
+                <button type="button" class="pennant"><span class="flag" style="background:#5a6a2a"><span class="med">吉</span></span><small>Kibi</small></button>
+                <button type="button" class="pennant"><span class="flag" style="background:#7a5a1a"><span class="med">藤</span></span><small>Fujiwara</small></button>
+              </div>
+              <article class="card plate" aria-label="Selected event">
+                <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start">
+                  <div>
+                    <span class="label">Event · day precision</span>
+                    <h3>第二舟、秋妻屋浦に着く</h3>
+                    <div class="roman">The second ship lands at Akimeya Bay</div>
+                  </div>
+                  <button type="button" class="btn btn-icon" aria-label="Close event"><svg><use href="#i-close"/></svg></button>
+                </div>
+                <div class="img-ph">東征伝絵巻 · image placeholder</div>
+                <div class="quote">廿日乙酉午時、第二舟著薩摩國阿多郡秋妻屋浦<small>唐大和上東征傳 · as written</small></div>
+                <dl class="facts">
+                  <dt>Place</dt><dd>秋妻屋浦 <span class="badge b-identified"><svg><use href="#i-halo"/></svg>identified locality</span></dd>
+                  <dt>Date</dt><dd>753 · 12th month, 20th</dd>
+                  <dt>Who</dt><dd>鑒眞 Jianzhen · 大伴古麻呂 Ōtomo no Komaro</dd>
+                </dl>
+              </article>
+            </div>
+
+            <div class="bottom" data-region="bottom · time">
+              <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
+                <div class="strip plate">
+                  <div class="row"><span class="label">Window</span>
+                    <div class="track">
+                      <span class="tick" style="left:12%"></span><span class="tick" style="left:31%"></span><span class="tick" style="left:52%"></span><span class="tick hollow" style="left:60%"></span>
+                      <span class="brush" style="left:70%;width:22%"></span>
+                      <span class="tick" style="left:73%"></span><span class="tick" style="left:76%"></span><span class="tick" style="left:79%"></span><span class="tick" style="left:84%"></span><span class="tick" style="left:89%"></span>
+                    </div>
+                  </div>
+                  <div class="row"><span class="label">Voyage</span>
+                    <div class="track">
+                      <span class="tick" style="left:6%"></span><span class="tick" style="left:16%"></span><span class="tick" style="left:34%"></span>
+                      <span class="playhead" style="left:58%"></span><span class="tick" style="left:58%"></span><span class="tick" style="left:66%"></span><span class="tick" style="left:93%"></span>
+                    </div>
+                  </div>
+                  <div class="scale"><span>753 · 11月</span><span>12月</span><span>754 · 正月</span><span>2月</span></div>
+                </div>
+                <div class="legend plate">
+                  <span><svg width="12" height="12" style="color:var(--gold)"><use href="#i-ring"/></svg>attested site</span>
+                  <span><svg width="12" height="12" style="color:var(--jade)"><use href="#i-halo"/></svg>identified locality</span>
+                  <span><svg width="22" height="8"><path d="M0 4h22" stroke="var(--gold)" stroke-width="2" stroke-dasharray="6 4"/></svg>schematic, through dated stops</span>
+                  <span><svg width="22" height="8"><path d="M0 6C6 0 16 0 22 6" stroke="var(--vermilion)" stroke-width="2" fill="none"/></svg>transmission</span>
+                  <span class="attr">Relief: open elevation · coast: Natural Earth · no provider</span>
+                </div>
+              </div>
+              <div class="dial">
+                <span class="label lbl">Next event</span>
+                <svg class="ring" viewBox="0 0 104 104" aria-hidden="true">
+                  <circle cx="52" cy="52" r="46" fill="var(--lacquer-glass)" stroke="var(--frame)" stroke-width="1"/>
+                  <circle cx="52" cy="52" r="40" fill="none" stroke="var(--rule)" stroke-width="5"/>
+                  <circle cx="52" cy="52" r="40" fill="none" stroke="var(--gold)" stroke-width="5" stroke-dasharray="251" stroke-dashoffset="105" transform="rotate(-90 52 52)" stroke-linecap="round"/>
+                </svg>
+                <button type="button" class="play" id="dial-play" aria-label="Play to the next event"><svg width="20" height="20"><use href="#i-play"/></svg></button>
+              </div>
+            </div>
+
+            <div class="sheet plate solid" id="sheet" data-detent="peek" data-region="bottom sheet">
+              <button type="button" class="grab" id="grab" aria-label="Expand the sheet"></button>
+              <div class="peek">
+                <div class="minidial">
+                  <svg viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="22" fill="none" stroke="var(--rule)" stroke-width="4"/><circle cx="26" cy="26" r="22" fill="none" stroke="var(--gold)" stroke-width="4" stroke-dasharray="138" stroke-dashoffset="58" transform="rotate(-90 26 26)" stroke-linecap="round"/></svg>
+                  <button type="button" aria-label="Play to the next event"><svg width="14" height="14"><use href="#i-play"/></svg></button>
+                </div>
+                <div>
+                  <h4>第二舟、秋妻屋浦に着く</h4>
+                  <p>The second ship lands at Akimeya Bay · 12·20</p>
+                </div>
+              </div>
+              <div class="detents" role="group" aria-label="Sheet height">
+                <button type="button" class="btn btn-ghost" data-detent="peek">Peek</button>
+                <button type="button" class="btn btn-ghost" data-detent="half">Half</button>
+                <button type="button" class="btn btn-ghost" data-detent="full">Full</button>
+              </div>
+              <div class="more">
+                <div class="img-ph">東征伝絵巻 · image placeholder</div>
+                <div class="quote">廿日乙酉午時、第二舟著薩摩國阿多郡秋妻屋浦<small>唐大和上東征傳 · as written</small></div>
+                <dl class="facts">
+                  <dt>Place</dt><dd>秋妻屋浦 <span class="badge b-identified"><svg><use href="#i-halo"/></svg>identified locality</span></dd>
+                  <dt>Date</dt><dd>753 · 12th month, 20th</dd>
+                  <dt>Who</dt><dd>鑒眞 · 大伴古麻呂</dd>
+                </dl>
+                <div class="field"><span class="label">Search the chapter</span><div class="input"><svg><use href="#i-search"/></svg><input id="phone-search" placeholder="A name, a place, a year"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="caption" id="frame-caption">Desktop, narrowed to fit this page. At 1440 px the left rail is 288 px and the right rail 384 px. The right rail stays empty until something is selected.</p>
+  </section>
+
+  <!-- ===================== COLOUR ===================== -->
+  <section id="colour">
+    <div class="sec-head">
+      <span class="label">Tokens · colour</span>
+      <h2>One material, one accent</h2>
+      <p>Lacquer for every surface, ink for text, gold only for what is current: the selection, the playhead, the primary action and focus. Contrast is measured against lacquer. Two of the hero's values are raised to pass WCAG AA.</p>
+    </div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:var(--abyss);color:var(--ink-dim)">—</div><div class="info"><b>abyss</b><code>#0b1114</code><span>Page, behind the scene</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--lacquer);color:var(--ink-dim)">—</div><div class="info"><b>lacquer</b><code>#121a20</code><span>Solid chrome, sheets</span></div></div>
+      <div class="sw"><div class="chip" style="background:linear-gradient(135deg,var(--sea),var(--land));"><span style="background:var(--lacquer-glass);padding:6px 8px;border-radius:4px;border:1px solid var(--frame);color:var(--ink)">86 %</span></div><div class="info"><b>lacquer-glass</b><code>#121a20 · 86 % · blur</code><span>Chrome over the scene</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--lacquer-raised);color:var(--ink-dim)">—</div><div class="info"><b>lacquer-raised</b><code>#1a242b</code><span>Hover, inputs</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--lacquer);box-shadow:inset 0 0 0 2px var(--frame)"></div><div class="info"><b>frame</b><code>gold · 35 %</code><span>Hairline around plates</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--lacquer);color:var(--ink)">14.7:1</div><div class="info"><b>ink</b><code>#f3ead7</code><span>Primary text</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--lacquer);color:var(--ink-dim)">8.1:1</div><div class="info"><b>ink-dim</b><code>#b9af9c</code><span>Secondary text</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--lacquer);color:var(--ink-faint)">4.95:1</div><div class="info"><b>ink-faint</b><code>#8f877a</code><span class="fix">Raised from #7f786b (4.0:1)</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--gold);color:var(--on-gold)">8.3:1</div><div class="info"><b>gold · on-gold</b><code>#d2a94f · #1a1409</code><span>Current, primary action</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--lacquer);color:var(--gold-bright)">11.7:1</div><div class="info"><b>gold-bright</b><code>#f1cf7a</code><span>Focus ring, playhead</span></div></div>
+      <div class="sw"><div class="chip" style="background:var(--lacquer);color:var(--danger)">5.9:1</div><div class="info"><b>danger</b><code>#e8735a</code><span>Errors only, never history</span></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== EVIDENCE ===================== -->
+  <section id="evidence">
+    <div class="sec-head">
+      <span class="label">Tokens · evidence grammar</span>
+      <h2>The mark on the map is the badge in the card</h2>
+      <p>RFD 1's evidence states each get one hue and one shape or pattern, shared by the globe and the interface. Possible, disputed and outside are states that modify any mark, not colours of their own.</p>
+    </div>
+    <div class="ev">
+      <div class="ev-item"><div class="mark"><svg width="22" height="22" style="color:var(--gold)"><use href="#i-ring"/></svg></div><div class="t"><span class="badge b-attested"><svg><use href="#i-ring"/></svg>attested site</span><p>Solid ring at the site, the name in its own script.</p></div></div>
+      <div class="ev-item"><div class="mark"><svg width="34" height="34" style="color:var(--jade)"><use href="#i-halo"/></svg></div><div class="t"><span class="badge b-identified"><svg><use href="#i-halo"/></svg>identified locality</span><p>Soft halo whose size is the stated precision.</p></div></div>
+      <div class="ev-item"><div class="mark"><svg width="60" height="10"><path d="M2 5h56" stroke="var(--gold)" stroke-width="2.4" stroke-dasharray="8 6"/></svg></div><div class="t"><span class="badge b-schematic"><svg><use href="#i-dash"/></svg>schematic journey</span><p>Long dash through the dated stops.</p></div></div>
+      <div class="ev-item"><div class="mark"><svg width="60" height="10"><path d="M2 5h56" stroke="var(--ink)" stroke-width="2.4" stroke-dasharray="2 4" stroke-linecap="round"/></svg></div><div class="t"><span class="badge b-reconstructed" style="color:var(--ink)"><svg><use href="#i-dash"/></svg>overland, dated stops</span><p>Dotted ink for the land legs.</p></div></div>
+      <div class="ev-item"><div class="mark"><svg width="60" height="10"><path d="M2 5h56" stroke="var(--ink-dim)" stroke-width="2.2" stroke-dasharray="10 4 2 4"/></svg></div><div class="t"><span class="badge b-reconstructed"><svg><use href="#i-dash"/></svg>reconstructed route</span><p>Dash-dot with its citation beside it.</p></div></div>
+      <div class="ev-item"><div class="mark"><svg width="56" height="36"><defs><pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0v5" stroke="var(--plum)" stroke-width="1.6"/></pattern></defs><rect x="4" y="4" width="48" height="28" fill="rgba(197,143,209,.12)" stroke="url(#hatch)" stroke-width="5"/></svg></div><div class="t"><span class="badge" style="color:var(--ink-dim)">dated snapshot</span><p>Hatched edge and a date label. No interpolation.</p></div></div>
+      <div class="ev-item"><div class="mark"><svg width="22" height="22" style="color:var(--gold);opacity:.55"><use href="#i-hollow"/></svg></div><div class="t"><span class="badge b-possible"><svg><use href="#i-hollow"/></svg>possible at the playhead</span><p>Hollow, broken outline, 55 % opacity.</p></div></div>
+      <div class="ev-item"><div class="mark"><svg width="22" height="22" style="color:var(--plum)"><use href="#i-split"/></svg></div><div class="t"><span class="badge b-disputed"><svg><use href="#i-split"/></svg>disputed account</span><p>Split marker and the word, never the hue alone.</p></div></div>
+      <div class="ev-item"><div class="mark"><svg width="22" height="22" style="color:var(--ink-faint)"><use href="#i-out"/></svg></div><div class="t"><span class="badge b-outside"><svg><use href="#i-out"/></svg>outside the window</span><p>Dimmed and struck, with the reason in words.</p></div></div>
+      <div class="ev-item"><div class="mark"><svg width="60" height="22"><path d="M4 18C16 2 44 2 56 18" stroke="var(--vermilion)" stroke-width="2.2" fill="none"/></svg></div><div class="t"><span class="badge b-transmission">transmission</span><p>Solid arc: learning, religion, texts.</p></div></div>
+      <div class="ev-item"><div class="mark"><svg width="60" height="22"><path d="M4 18C16 2 44 2 56 18" stroke="var(--sky)" stroke-width="1.4" fill="none"/><path d="M4 18C16 6 44 6 56 18" stroke="var(--sky)" stroke-width="1.4" fill="none" transform="translate(0,-3)"/></svg></div><div class="t"><span class="badge b-diplomacy">diplomacy</span><p>Double arc: embassy, alliance, agreement.</p></div></div>
+      <div class="ev-item"><div class="mark"><svg width="60" height="22"><path d="M4 18C16 2 44 2 56 18" stroke="var(--trade)" stroke-width="2" fill="none" stroke-dasharray="0 6" stroke-linecap="round" style="stroke-width:4"/></svg></div><div class="t"><span class="badge" style="color:var(--trade)">trade</span><p>Beaded arc. Conflict uses chevrons, institutions a dashed plum arc.</p></div></div>
+    </div>
+  </section>
+
+  <!-- ===================== TYPE ===================== -->
+  <section id="type">
+    <div class="sec-head">
+      <span class="label">Tokens · type</span>
+      <h2>Two scripts, seven steps, one floor</h2>
+      <p>Cinzel for Latin display, Noto Serif JP for historical names and narrative, Noto Sans JP for the interface. Self-hosted and subset to the glyphs the chapters use, so no font provider is contacted.</p>
+    </div>
+    <div class="type">
+      <div class="r"><div class="meta"><b>display</b>32 / 36 · Cinzel or serif</div><div class="t-display">AKIMEYA BAY<span class="cjk">秋妻屋浦</span></div></div>
+      <div class="r"><div class="meta"><b>title</b>22 / 28 · serif</div><div class="t-title">第二舟、秋妻屋浦に着く</div></div>
+      <div class="r"><div class="meta"><b>title-sm</b>17 / 24 · serif</div><div class="t-title-sm">鑒眞 enters 大宰府</div></div>
+      <div class="r"><div class="meta"><b>body</b>15 / 24 · sans</div><div class="t-body">After five failed crossings, 鑒眞 boards the second ship of the returning embassy at 黃泗浦. The ship reaches 阿兒奈波島 on the 21st and lands at 秋妻屋浦 in Satsuma on the 20th of the twelfth month.</div></div>
+      <div class="r"><div class="meta"><b>body-sm</b>13 / 20 · sans or serif<br>CJK minimum</div><div class="t-body-sm">753 · 12th month, 20th · 唐 and 日本 calendars kept</div></div>
+      <div class="r"><div class="meta"><b>caption</b>12 / 16 · sans</div><div class="t-caption">Akimeya · Bōnotsu · identified locality</div></div>
+      <div class="r"><div class="meta"><b>label</b>11 / 14 · caps · 0.16em</div><div class="label">Sources · Next event · Window</div></div>
+      <div class="floor">Nothing below 12 px. No CJK below 13 px. Labels are Latin only, never a sentence. Dates use tabular numerals.</div>
+    </div>
+  </section>
+
+  <!-- ===================== PRIMITIVES ===================== -->
+  <section id="primitives">
+    <div class="sec-head">
+      <span class="label">Components · $lib/ui</span>
+      <h2>Primitives, in their states</h2>
+      <p>Primitives know nothing about history. They take a tone or variant rather than class overrides, and they are the only place tokens are combined into a look. Hover and tab through them.</p>
+    </div>
+    <div class="prims">
+      <div class="prim">
+        <h3>Button <small>primary · secondary · ghost · icon</small></h3>
+        <div class="row-wrap">
+          <div class="state-col"><button type="button" class="btn btn-primary">Return to event's time</button><span class="caption">default</span></div>
+          <div class="state-col"><button type="button" class="btn btn-primary is-hover">Return</button><span class="caption">hover</span></div>
+          <div class="state-col"><button type="button" class="btn btn-primary is-focus" tabindex="-1">Return</button><span class="caption">focus</span></div>
+          <div class="state-col"><button type="button" class="btn btn-primary" disabled>Return</button><span class="caption">disabled</span></div>
+        </div>
+        <div class="row-wrap">
+          <button type="button" class="btn btn-secondary">Next in story</button>
+          <button type="button" class="btn btn-ghost">Resume following</button>
+          <button type="button" class="btn btn-icon" aria-label="Step to next event"><svg><use href="#i-step"/></svg></button>
+          <button type="button" class="btn btn-icon is-focus" tabindex="-1" aria-label="Close"><svg><use href="#i-close"/></svg></button>
+        </div>
+        <p>Primary is gold and appears at most once per surface. Focus is gold-bright; on a gold fill it is ink.</p>
+      </div>
+
+      <div class="prim">
+        <h3>Orb <small>off · on · disabled</small></h3>
+        <div class="row-wrap">
+          <div class="state-col"><button type="button" class="orb" aria-pressed="false" aria-label="Diplomacy"><svg><use href="#i-envoy"/></svg></button><span class="caption">off</span></div>
+          <div class="state-col"><button type="button" class="orb" aria-pressed="true" aria-label="Journeys"><svg><use href="#i-ship"/></svg></button><span class="caption">on</span></div>
+          <div class="state-col"><button type="button" class="orb" aria-pressed="false" aria-label="Territory" disabled><svg><use href="#i-territory"/></svg></button><span class="caption">none here</span></div>
+          <div class="state-col"><button type="button" class="orb" aria-pressed="false" aria-label="Sources"><svg><use href="#i-book"/></svg></button><span class="caption">click me</span></div>
+        </div>
+        <p>A layer toggle. On is a gold ring and a lit glyph, not colour alone; disabled says why in its label.</p>
+      </div>
+
+      <div class="prim">
+        <h3>Badge <small>one per evidence token</small></h3>
+        <div class="row-wrap">
+          <span class="badge b-attested"><svg><use href="#i-ring"/></svg>attested site</span>
+          <span class="badge b-identified"><svg><use href="#i-halo"/></svg>identified locality</span>
+          <span class="badge b-schematic"><svg><use href="#i-dash"/></svg>schematic</span>
+          <span class="badge b-possible"><svg><use href="#i-hollow"/></svg>possible</span>
+          <span class="badge b-disputed"><svg><use href="#i-split"/></svg>disputed</span>
+          <span class="badge b-outside"><svg><use href="#i-out"/></svg>outside the window</span>
+        </div>
+        <p>Glyph plus word, square-cornered. Replaces the four hand-written pills in today's event row.</p>
+      </div>
+
+      <div class="prim">
+        <h3>Event row <small>default · hover · current</small></h3>
+        <button type="button" class="erow"><span class="tt">鑒眞 enters 大宰府</span><span class="mm">大宰府 · 753 · 12·26 <span class="badge b-attested"><svg><use href="#i-ring"/></svg>attested site</span></span></button>
+        <button type="button" class="erow" aria-current="true"><span class="tt">第二舟、秋妻屋浦に着く</span><span class="mm">秋妻屋浦 · 753 · 12·20 <span class="badge b-possible"><svg><use href="#i-hollow"/></svg>possible</span></span></button>
+        <p>Short title in the serif; place, date and evidence on one line beneath. Caveats live in the card.</p>
+      </div>
+
+      <div class="prim">
+        <h3>Tabs and Field</h3>
+        <div class="tabs" role="tablist" aria-label="Explore">
+          <button type="button" class="tab" role="tab" aria-selected="true">Events<span class="n">24</span></button>
+          <button type="button" class="tab" role="tab" aria-selected="false">Story<span class="n">12</span></button>
+          <button type="button" class="tab" role="tab" aria-selected="false">Sources<span class="n">11</span></button>
+        </div>
+        <div class="field">
+          <label class="label" for="search-demo">Search the chapter</label>
+          <div class="input"><svg><use href="#i-search"/></svg><input id="search-demo" placeholder="A name, a place, a year"></div>
+          <span class="hint">Searches names in every script and romanization.</span>
+        </div>
+      </div>
+
+      <div class="prim">
+        <h3>NameForm and DateLine</h3>
+        <div class="nameform"><span class="h">平城京</span><span class="ro">Heijō-kyō</span><span class="mod">Modern: Nara, Japan</span></div>
+        <div class="dateline"><span class="y">753</span><span class="c">天寶十二載</span><span class="c">天平勝寶五年</span><span class="c">十二月廿日</span><span class="p">day precision</span></div>
+        <p>One place for RFD 2's naming policy and for dates in both calendars. Formatting stays in the contract's pure functions.</p>
+      </div>
+
+      <div class="prim">
+        <h3>CitationLine</h3>
+        <div>
+          <div class="cite"><span class="s">唐大和上東征傳 (779) · 淡海三船</span><span class="terms">public domain</span></div>
+          <div class="cite"><span class="s">續日本紀 (797)</span><span class="terms">public domain</span></div>
+        </div>
+        <p>Source, locator and terms on one line; it opens the quote.</p>
+      </div>
+
+      <div class="prim">
+        <h3>EmptyState <small>two kinds, never merged</small></h3>
+        <div class="empty"><b>Not yet covered</b><span>This chapter covers 750–754 around the East China Sea. Nothing here is a claim that nothing happened.</span></div>
+        <div class="empty"><b>No results with these filters</b><span>Widen the window or clear the search. Events outside the window still appear in search.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SHAPE ===================== -->
+  <section id="shape">
+    <div class="sec-head">
+      <span class="label">Tokens · shape, space, depth, motion</span>
+      <h2>Few values, each with a job</h2>
+      <p>Today's interface uses eight radii and six letter-spacings. The proposal clears Tailwind's defaults so an off-system value produces no CSS at all.</p>
+    </div>
+    <div class="scales">
+      <div class="prim">
+        <h3>Radius</h3>
+        <div class="radii">
+          <div><i style="border-radius:var(--r-control)"></i>control · 4</div>
+          <div><i style="border-radius:var(--r-plate)"></i>plate · 6</div>
+          <div><i style="border-radius:50%;width:44px"></i>full</div>
+        </div>
+      </div>
+      <div class="prim">
+        <h3>Space <small>4 px base</small></h3>
+        <div class="space">
+          <div><i style="height:4px"></i>1</div><div><i style="height:8px"></i>2</div><div><i style="height:12px"></i>3</div><div><i style="height:16px"></i>4</div><div><i style="height:24px"></i>6</div><div><i style="height:32px"></i>8</div><div><i style="height:48px"></i>12</div>
+        </div>
+      </div>
+      <div class="prim">
+        <h3>Z-order</h3>
+        <div class="ladder">
+          <div><b>40</b>alert</div><div><b>30</b>sheet</div><div><b>20</b>chrome</div><div><b>11</b>labels</div><div><b>10</b>markers</div><div><b>0</b>scene</div>
+        </div>
+      </div>
+      <div class="prim motion" tabindex="0">
+        <h3>Motion <small>hover to play</small></h3>
+        <div class="mrow">fast · 120 ms<div class="mtrack"><i style="transition-duration:120ms"></i></div></div>
+        <div class="mrow">base · 200 ms<div class="mtrack"><i style="transition-duration:200ms"></i></div></div>
+        <div class="mrow">slow · 400 ms<div class="mtrack"><i style="transition-duration:400ms"></i></div></div>
+        <p>Reduced motion: UI fades only, camera flights become cuts, playback still advances.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="questions">
+    <div class="sec-head">
+      <span class="label">Owner decisions · 2026-10-13</span>
+      <h2>Decided, and what is left</h2>
+      <p>Everything on this page now reflects these answers. Signing off this sheet is the last step before building starts.</p>
+    </div>
+    <ol class="questions">
+      <li><div>The hero's lacquer, ink and gold, and its three type families, are the foundation.<span>With the two AA corrections shown above.</span></div></li>
+      <li><div>One frame: navigation left, selection right, time bottom, date top.<span>The region mock's story ribbon across the top is dropped.</span></div></li>
+      <li><div>Fonts are self-hosted and subset to the glyphs the chapters use.<span>The CJK payload is measured against the three-second phone budget before it ships.</span></div></li>
+      <li><div>The /design reference is built in development and on pull-request previews only.<span>Each PR's preview shows its design changes; lekishi.pages.dev never carries the page.</span></div></li>
+    </ol>
+  </section>
+</div>
+
+<script>
+(() => {
+  const stage = document.getElementById("stage");
+  const caption = document.getElementById("frame-caption");
+  const captions = {
+    "w-desktop": "Desktop, narrowed to fit this page. At 1440 px the left rail is 288 px and the right rail 384 px. The right rail stays empty until something is selected.",
+    "w-tablet": "Tablet: the left rail collapses to the orbs and the journal opens from them; the card keeps the right side; strip and dial unchanged.",
+    "w-phone": "Phone, 3D: compact date bar, orbs under it, and a bottom sheet with peek, half and full detents. Replaced by the handheld tier when that ships.",
+    "w-small": "Phone at 320 px, the smallest width the browser checks cover: the same arrangement; the date bar drops the regnal era and keeps the year, the day, the story counter and About."
+  };
+  const segButtons = document.querySelectorAll(".seg button");
+  segButtons.forEach((b) => b.addEventListener("click", () => {
+    segButtons.forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+    stage.style.width = b.dataset.w + "px";
+    stage.style.height = b.dataset.h + "px";
+    caption.textContent = captions[b.id];
+  }));
+  document.getElementById("show-regions").addEventListener("change", (e) => {
+    document.getElementById("stage-scroll").classList.toggle("show-regions", e.target.checked);
+  });
+  document.querySelectorAll(".orb").forEach((o) => o.addEventListener("click", () => {
+    if (o.disabled) return;
+    o.setAttribute("aria-pressed", o.getAttribute("aria-pressed") === "true" ? "false" : "true");
+  }));
+  const journal = document.querySelectorAll(".journal li button");
+  journal.forEach((b) => b.addEventListener("click", () => {
+    journal.forEach((x) => x.removeAttribute("aria-current"));
+    b.setAttribute("aria-current", "true");
+  }));
+  document.querySelectorAll(".tab").forEach((t, _, all) => t.addEventListener("click", () => {
+    all.forEach((x) => x.setAttribute("aria-selected", String(x === t)));
+  }));
+  const sheet = document.getElementById("sheet");
+  document.querySelectorAll(".detents button").forEach((b) => b.addEventListener("click", () => { sheet.dataset.detent = b.dataset.detent; }));
+  document.getElementById("grab").addEventListener("click", () => {
+    const order = ["peek", "half", "full"];
+    sheet.dataset.detent = order[(order.indexOf(sheet.dataset.detent) + 1) % order.length];
+  });
+  const play = document.getElementById("dial-play");
+  play.addEventListener("click", () => {
+    const playing = play.getAttribute("aria-pressed") === "true";
+    play.setAttribute("aria-pressed", String(!playing));
+    play.innerHTML = playing ? '<svg width="20" height="20"><use href="#i-play"/></svg>' : '<svg width="20" height="20" viewBox="0 0 24 24"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor"/></svg>';
+  });
+})();
+</script>
+
+</body></html>

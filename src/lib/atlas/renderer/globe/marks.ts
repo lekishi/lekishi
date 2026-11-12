@@ -51,6 +51,13 @@ export type GlobeMarker = {
     readonly seat: boolean
     readonly disputed: boolean
   } | null
+  /** The `/dev/world` prototype's city banner (`ScenePlace.banner`), or null. */
+  readonly banner?: {
+    readonly tint: number
+    /** A player's story is at the place this turn: the banner is filled in its tint. */
+    readonly active: boolean
+    readonly unit: string | null
+  } | null
 }
 
 export type MarkerLook = {
@@ -77,6 +84,11 @@ export type MarkerLook = {
   readonly control: string | null
   /** The control disc's diameter, in pixels. */
   readonly controlSize: number
+  /** A unit's medal standing on the place (the prototype's banner), or null. */
+  readonly unit: string | null
+  readonly unitSize: number
+  /** The medal's gap above the point, in pixels; 0 centres it on the point. */
+  readonly unitOffset: number
 }
 
 // One whole literal per tint, so Tailwind's scanner generates each.
@@ -101,6 +113,128 @@ const CONTROL_SPLIT = [
   "bg-[linear-gradient(90deg,var(--color-control-7)_50%,transparent_50%)] border-control-7",
   "bg-[linear-gradient(90deg,var(--color-control-8)_50%,transparent_50%)] border-control-8",
 ]
+
+// The prototype's city banners, as a strategy game draws a city's: a plate
+// over the place in the player's tint, filled where its story is this turn and
+// lacquer edged in the tint where it was before. On it, left to right: the
+// event count in a chip (the game's population), the name, and the place's
+// evidence as a small mark in the evidence grammar's shapes, so a banner never
+// drops what the round marker said. A unit standing there wears its player's
+// emblem above the plate. Under the plate, a dot in the tint marks the point,
+// which stays when the name is decluttered away.
+const BANNER_FILL = [
+  "bg-control-1",
+  "bg-control-2",
+  "bg-control-3",
+  "bg-control-4",
+  "bg-control-5",
+  "bg-control-6",
+  "bg-control-7",
+  "bg-control-8",
+]
+const BANNER_EDGE = [
+  "border-control-1",
+  "border-control-2",
+  "border-control-3",
+  "border-control-4",
+  "border-control-5",
+  "border-control-6",
+  "border-control-7",
+  "border-control-8",
+]
+const BANNER_CHIP = [
+  "before:bg-control-1",
+  "before:bg-control-2",
+  "before:bg-control-3",
+  "before:bg-control-4",
+  "before:bg-control-5",
+  "before:bg-control-6",
+  "before:bg-control-7",
+  "before:bg-control-8",
+]
+const BANNER_PLATE =
+  "absolute flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-control border py-0.5 pr-2 pl-0.5 font-serif text-body-sm shadow-plate"
+// The count chip is the plate's ::before, reading the label's `data-count`.
+const BANNER_COUNT =
+  "before:grid before:h-5 before:min-w-5 before:place-items-center before:rounded-control before:px-1 before:font-interface before:text-caption before:font-semibold before:tabular-nums before:content-[attr(data-count)]"
+// The evidence mark is the plate's ::after, drawn in the text's colour.
+const BANNER_EVIDENCE: Record<MarkKind, string> = {
+  attested:
+    "after:size-2.5 after:shrink-0 after:rounded-full after:border-2 after:border-current after:bg-[radial-gradient(circle,currentColor_30%,transparent_36%)]",
+  identified:
+    "after:size-3 after:shrink-0 after:rounded-full after:bg-[radial-gradient(circle,currentColor_0%,transparent_72%)]",
+  anchor: "after:size-2 after:shrink-0 after:rotate-45 after:border-[1.5px] after:border-current",
+}
+const BANNER_EVIDENCE_HOLLOW: Record<MarkKind, string> = {
+  attested: "after:size-2.5 after:shrink-0 after:rounded-full after:border-2 after:border-current",
+  identified:
+    "after:size-3 after:shrink-0 after:rounded-full after:border after:border-dashed after:border-current",
+  anchor: "after:size-2 after:shrink-0 after:rotate-45 after:border-[1.5px] after:border-current",
+}
+const BANNER_EVIDENCE_SPLIT =
+  "after:bg-[linear-gradient(90deg,currentColor_50%,transparent_50%)] after:border after:border-current"
+const UNIT_SIZE = 26
+const PLATE_HEIGHT = 28
+
+function bannerLook(
+  marker: GlobeMarker,
+  banner: NonNullable<GlobeMarker["banner"]>,
+  base: MarkerLook,
+): MarkerLook {
+  const tint = banner.tint % BANNER_FILL.length
+  const selected = marker.emphasis === "selected"
+  const unit = banner.unit !== null
+  const labelOffset = 7
+  const possible = marker.tone === "possible"
+  return {
+    ...base,
+    // A possible place keeps full strength: its plate is dashed and its mark
+    // hollow instead, which a reader sees on a busy board where a fade is lost.
+    group: [
+      "absolute left-0 top-0 transition-opacity duration-(--motion-fast) ease-ui",
+      marker.emphasis === "active" ? "brightness-110" : "",
+    ].join(" "),
+    size: 6,
+    hitRadius: 8,
+    // A unit's banner wins room over its neighbours, so its emblem never
+    // stands over another place's name; then the selection, then this turn's.
+    priority: selected ? 4 : unit ? 3 : banner.active ? 1 : 0,
+    labelOffset,
+    labelHeight: PLATE_HEIGHT + (unit ? UNIT_SIZE - 6 : 0),
+    mark: [SHAPE, "rounded-full border-2 border-abyss", BANNER_FILL[tint]].join(" "),
+    core: null,
+    pulse: null,
+    control: null,
+    count: null,
+    label: [
+      BANNER_PLATE,
+      banner.active
+        ? ["font-semibold text-on-gold", BANNER_FILL[tint], "border-abyss"].join(" ")
+        : ["border-l-4 bg-lacquer text-ink", BANNER_EDGE[tint]].join(" "),
+      possible ? "border-[1.5px] border-dashed border-ink" : "",
+      selected ? "ring-2 ring-gold-bright ring-offset-1 ring-offset-abyss" : "",
+      marker.count > 0
+        ? [
+            BANNER_COUNT,
+            banner.active
+              ? "before:bg-abyss before:text-ink"
+              : `${BANNER_CHIP[tint]} before:text-on-gold`,
+          ].join(" ")
+        : "",
+      possible ? BANNER_EVIDENCE_HOLLOW[marker.mark] : BANNER_EVIDENCE[marker.mark],
+      marker.disputed ? BANNER_EVIDENCE_SPLIT : "",
+      marker.tradition ? "underline decoration-dotted decoration-2 underline-offset-4" : "",
+    ].join(" "),
+    unit: unit
+      ? [
+          "absolute left-0 grid -translate-x-1/2 place-items-center rounded-full border-2 border-gold font-serif text-body-sm font-semibold text-on-gold shadow-[0_0_0_2px_var(--color-abyss)]",
+          BANNER_FILL[tint],
+        ].join(" ")
+      : null,
+    unitSize: UNIT_SIZE,
+    unitOffset: labelOffset + PLATE_HEIGHT - 8,
+  }
+}
 
 function controlClasses(control: NonNullable<GlobeMarker["control"]>): string {
   const tint = control.tint % CONTROL_FILL.length
@@ -180,6 +314,11 @@ function markClasses(marker: GlobeMarker): string {
 }
 
 export function markerLook(marker: GlobeMarker): MarkerLook {
+  const look = baseLook(marker)
+  return marker.banner == null ? look : bannerLook(marker, marker.banner, look)
+}
+
+function baseLook(marker: GlobeMarker): MarkerLook {
   const size = sizeOf(marker)
   const selected = marker.emphasis === "selected"
   const active = marker.emphasis === "active"
@@ -221,5 +360,8 @@ export function markerLook(marker: GlobeMarker): MarkerLook {
         : null,
     control: marker.control === null ? null : controlClasses(marker.control),
     controlSize: Math.round(radius * 2 + (marker.control?.seat ? 14 : 10)),
+    unit: null,
+    unitSize: 0,
+    unitOffset: 0,
   }
 }

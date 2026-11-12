@@ -1,4 +1,5 @@
 import * as THREE from "three"
+import type { BoardLayer } from "./board"
 import { childrenBundlePath, ROOT_BUNDLE_PATH } from "./bundle"
 import { toEcef } from "./geo"
 import {
@@ -187,6 +188,8 @@ export type GlobeTilesOptions = {
   readonly memoryBudgetMB: number
   /** Called when tiles arrive, so the view knows to draw a frame. */
   readonly onChange: () => void
+  /** The strategy-map board, patched into every tile material (`/dev/world` only). */
+  readonly board?: BoardLayer
 }
 
 export class GlobeTiles {
@@ -629,6 +632,8 @@ export class GlobeTiles {
       texture.anisotropy = 4
       texture.minFilter = THREE.LinearMipmapLinearFilter
       texture.needsUpdate = true
+      // The board (`board.ts`) classifies its hexes from every tile's imagery.
+      this.options.board?.paint(tile.bounds, built.imagery, built.heights)
       tile.texture = texture
       tile.uv = [0, 0, 1, 1]
     }
@@ -644,6 +649,7 @@ export class GlobeTiles {
 
     if (material === undefined) {
       material = new THREE.MeshStandardMaterial({ map: texture, roughness: 0.95, metalness: 0 })
+      this.options.board?.patch(material)
       this.materials.set(texture.uuid, material)
     }
 

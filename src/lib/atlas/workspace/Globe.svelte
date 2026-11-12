@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte"
   import { handled } from "$lib/ui"
-  import { createGlobeAtlasRenderer } from "../renderer/globe-renderer"
+  import { createGlobeAtlasRenderer, type GlobeRendererOptions } from "../renderer/globe-renderer"
   import type { AtlasRenderer, CameraView } from "../renderer/types"
   import type { AtlasScene } from "../scene"
 
@@ -12,6 +12,7 @@
     onManualCameraInput,
     onViewChange,
     onError,
+    options = {},
   }: {
     scene: AtlasScene
     label: string
@@ -19,6 +20,8 @@
     onManualCameraInput: () => void
     onViewChange?: (view: CameraView) => void
     onError: (error: Error) => void
+    /** Renderer options fixed for this mount, such as `/dev/world`'s tilted camera. */
+    options?: GlobeRendererOptions
   } = $props()
 
   let container: HTMLDivElement
@@ -26,11 +29,11 @@
 
   onMount(() => {
     try {
-      const mounted = createGlobeAtlasRenderer(container, {
-        onSelectPlace,
-        onManualCameraInput,
-        onViewChange,
-      })
+      const mounted = createGlobeAtlasRenderer(
+        container,
+        { onSelectPlace, onManualCameraInput, onViewChange },
+        options,
+      )
       mounted.sync(scene)
       renderer = mounted
     } catch (error) {

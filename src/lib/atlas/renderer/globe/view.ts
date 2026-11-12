@@ -1,6 +1,8 @@
 import * as THREE from "three"
 import { GlobeControls, WGS84_ELLIPSOID } from "3d-tiles-renderer/three"
 import type { GeoPoint } from "../../domain"
+import type { SceneBoard } from "../../scene"
+import type { BoardLayer } from "./board"
 import { DioramaLayer, type GlobeDiorama } from "./diorama"
 import { principalOffset, ViewThrottle, type Insets } from "./framing"
 import {
@@ -58,10 +60,14 @@ export type GlobeCameraView = {
 export interface GlobeView {
   /** The WebGL canvas; the renderer listens to it for the reader's input. */
   readonly canvas: HTMLCanvasElement
-  /** Puts the camera straight above a point at once. */
-  setView(target: GeoPoint, rangeM: number): void
-  /** Flies the camera to straight above a point; input from the reader cancels it. */
-  flyTo(target: GeoPoint, rangeM: number, durationMs: number): void
+  /**
+   * Puts the camera over a point at once, looking down at `pitchDeg` below the
+   * horizon: -90 is straight down (the atlas), a shallower pitch tilts the view
+   * toward the horizon, looking north.
+   */
+  setView(target: GeoPoint, rangeM: number, pitchDeg?: number): void
+  /** Flies the camera to a point at `pitchDeg`; input from the reader cancels it. */
+  flyTo(target: GeoPoint, rangeM: number, durationMs: number, pitchDeg?: number): void
   setMarkers(markers: readonly GlobeMarker[]): void
   /** Journeys and relationship arcs, drawn under the markers. */
   setOverlays(overlays: GlobeOverlays): void
@@ -69,6 +75,8 @@ export interface GlobeView {
   setDioramas(dioramas: readonly GlobeDiorama[]): void
   /** The scene's edges the chrome covers, in CSS pixels; flights frame into the rest. */
   setSafeArea(insets: Insets): void
+  /** The strategy-map board, or null to hide it; ignored by a view made without one. */
+  setBoard(board: SceneBoard | null): void
   /** The marker (dot or label) under a client point, within `radiusPx` of its dot. */
   markerAt(clientX: number, clientY: number, radiusPx: number): string | null
   /** Matches the drawing buffer to the container's size. */
@@ -84,6 +92,12 @@ export type GlobeViewOptions = {
   readonly exaggeration?: number
   /** Where the camera looks, reported a few times a second at most and once when it settles. */
   readonly onViewChange?: (view: GlobeCameraView) => void
+  /**
+   * Makes the strategy-map board drawn into the terrain (`/dev/world` only).
+   * A factory the page passes in, so the board's code ships only with it and
+   * never in the atlas's chunks.
+   */
+  readonly board?: (onChange: () => void) => BoardLayer
 }
 
 const SPACE = "#020617"
@@ -102,6 +116,7 @@ type MarkerEntry = {
   readonly pulse: HTMLSpanElement
   readonly mark: HTMLSpanElement
   readonly core: HTMLSpanElement
+  readonly unit: HTMLSpanElement
   readonly count: HTMLSpanElement
   readonly label: HTMLSpanElement
   world: THREE.Vector3
@@ -127,6 +142,7 @@ class ThreeGlobeView implements GlobeView {
   private readonly camera = new THREE.PerspectiveCamera(FOV_DEG, 1, 1, 4e7)
   private readonly globe = new THREE.Group()
   private readonly controls: GlobeControls
+  private board: BoardLayer | null = null
   private readonly sun = new THREE.DirectionalLight("#fff1dc", 2.1)
   private readonly hemisphere = new THREE.HemisphereLight("#dcecff", "#6b5a3b", 0.6)
   private readonly atmosphere: THREE.Mesh<THREE.SphereGeometry, THREE.ShaderMaterial>
@@ -168,6 +184,11 @@ class ThreeGlobeView implements GlobeView {
     this.container = container
     this.exaggeration = options.exaggeration ?? 2.2
     this.onViewChange = options.onViewChange ?? null
+    this.board =
+      options.board?.(() => {
+        this.dirty = true
+        this.markersDirty = true
+      }) ?? null
     this.canvas = document.createElement("canvas")
     this.canvas.className = "block h-full w-full touch-none outline-none"
     this.overlay = document.createElement("div")
@@ -192,6 +213,7 @@ class ThreeGlobeView implements GlobeView {
     this.globe.name = "globe"
     this.scene.fog = this.fog
     this.scene.add(this.globe, this.sun, this.sun.target, this.hemisphere)
+    if (this.board !== null) this.globe.add(this.board.object)
     this.atmosphere = this.createAtmosphere()
     this.sky = this.createSky()
     this.scene.add(this.atmosphere, this.sky)
@@ -239,6 +261,7 @@ class ThreeGlobeView implements GlobeView {
         tileset,
         exaggeration: this.exaggeration,
         memoryBudgetMB: coarse ? 128 : 256,
+        board: this.board ?? undefined,
         onChange: () => {
           this.dirty = true
           this.markersDirty = true
@@ -360,27 +383,27 @@ class ThreeGlobeView implements GlobeView {
     return poseOf([p.x, p.y, p.z], [direction.x, direction.y, direction.z])
   }
 
-  setView(target: GeoPoint, rangeM: number): void {
+  setView(target: GeoPoint, rangeM: number, pitchDeg = -90): void {
     if (this.disposed) return
     this.flight = null
     this.driving = false
-    this.applyPose({ lon: target.lon, lat: target.lat, rangeM, headingDeg: 0, pitchDeg: -90 })
+    this.applyPose({ lon: target.lon, lat: target.lat, rangeM, headingDeg: 0, pitchDeg })
   }
 
-  flyTo(target: GeoPoint, rangeM: number, durationMs: number): void {
+  flyTo(target: GeoPoint, rangeM: number, durationMs: number, pitchDeg = -90): void {
     if (this.disposed) return
     const to: CameraPose = {
       lon: target.lon,
       lat: target.lat,
       rangeM,
       headingDeg: 0,
-      pitchDeg: -90,
+      pitchDeg,
     }
     const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false
 
     // Reduced motion: the camera arrives without the journey.
     if (reduced || durationMs <= 0) {
-      this.setView(target, rangeM)
+      this.setView(target, rangeM, pitchDeg)
       return
     }
 
@@ -428,6 +451,14 @@ class ThreeGlobeView implements GlobeView {
     this.dirty = true
   }
 
+  setBoard(board: SceneBoard | null): void {
+    if (this.disposed || this.board === null) return
+    if (this.board.set(board)) {
+      this.dirty = true
+      this.markersDirty = true
+    }
+  }
+
   setSafeArea(insets: Insets): void {
     if (this.disposed) return
     const current = this.safeArea
@@ -468,6 +499,7 @@ class ThreeGlobeView implements GlobeView {
     const pulse = part()
     const mark = part()
     const core = part()
+    const unit = part()
     const count = part()
     const label = part()
     this.overlay.append(root)
@@ -479,6 +511,7 @@ class ThreeGlobeView implements GlobeView {
       pulse,
       mark,
       core,
+      unit,
       count,
       label,
       world: new THREE.Vector3(),
@@ -510,6 +543,12 @@ class ThreeGlobeView implements GlobeView {
     sized(entry.core, look.core, Math.max(4, Math.round(look.size * 0.42)))
     sized(entry.pulse, look.pulse, look.size + 10)
     sized(entry.control, look.control, look.controlSize)
+    sized(entry.unit, look.unit, look.unitSize)
+    entry.unit.textContent = data.banner?.unit ?? ""
+    entry.unit.style.bottom = look.unitOffset > 0 ? `${look.unitOffset}px` : ""
+    // A banner shows the count on its plate (`marks.ts`); the atlas's labels carry none.
+    if ((data.banner ?? null) === null) delete entry.label.dataset.count
+    else entry.label.dataset.count = String(data.count)
 
     if (data.control === null) {
       delete entry.root.dataset.control
@@ -566,7 +605,9 @@ class ThreeGlobeView implements GlobeView {
 
     for (const entry of this.markers.values()) {
       if (this.markersDirty) {
-        const h = this.heightAt(entry.data.lon, entry.data.lat)
+        const h =
+          this.board?.heightAt(entry.data.lon, entry.data.lat) ??
+          this.heightAt(entry.data.lon, entry.data.lat)
         entry.world.set(...toEcef(entry.data.lon, entry.data.lat, h))
       }
 
@@ -815,6 +856,7 @@ class ThreeGlobeView implements GlobeView {
     if (this.disposed) return
     this.disposed = true
     cancelAnimationFrame(this.raf)
+    this.board?.dispose()
     this.abort.abort()
     this.canvas.removeEventListener("webglcontextrestored", this.restoreContext)
 

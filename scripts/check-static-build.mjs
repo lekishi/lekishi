@@ -674,6 +674,7 @@ const devPages = [
   { file: "dev.html", page: "index" },
   { file: "dev/design.html", page: "design" },
   { file: "dev/wikidata.html", page: "wikidata" },
+  { file: "dev/world.html", page: "world" },
 ]
 
 if (devPagesEnabled()) {

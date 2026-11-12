@@ -76,8 +76,14 @@ describe("the /dev prefix", () => {
   })
 
   it("lists every dev page, and every listed page has its gated route", () => {
+    // A page that shows chapter data loads it on the server (`+page.server.ts`),
+    // so the data is never a client chunk; the others load in `+page.ts`.
     for (const page of DEV_PAGES) {
-      expect(existsSync(path.join(routes, page.slug, "+page.ts")), page.slug).toBe(true)
+      const route = path.join(routes, page.slug)
+      const gated = ["+page.ts", "+page.server.ts"].some((file) =>
+        existsSync(path.join(route, file)),
+      )
+      expect(gated, page.slug).toBe(true)
     }
     const { target, done } = render(DevIndex)
     const links = [...target.querySelectorAll("a")].map((a) => a.getAttribute("href"))

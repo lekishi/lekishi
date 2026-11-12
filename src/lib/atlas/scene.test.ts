@@ -108,6 +108,47 @@ describe("buildScene", () => {
   })
 })
 
+describe("the campaign board", () => {
+  const harbor = { lon: 129.9, lat: 32.8 }
+  const bay = { lon: 122.1, lat: 24.9 }
+  const at = (place: { lon: number; lat: number }) => (point: { lon: number; lat: number }) =>
+    point.lon === place.lon && point.lat === place.lat
+  const boardAt = (year: number, window = chapter.defaultWindow) => {
+    const state = setPlayhead(setTimeWindow(initial, chapter, window), chapter, year)
+    const board = buildScene(state, chapter).board
+    if (board == null) throw new Error("the scene draws no board")
+    return board
+  }
+
+  it("lights a place at its event's year and remembers it, with its town, once it is over", () => {
+    expect(boardAt(1204).lit.some(at(harbor))).toBe(true)
+    expect(boardAt(1204).cities?.find(at(harbor))?.active).toBe(true)
+    expect(boardAt(1204).remembered.some(at(harbor))).toBe(false)
+
+    expect(boardAt(1210).lit.some(at(harbor))).toBe(false)
+    expect(boardAt(1210).remembered.some(at(harbor))).toBe(true)
+    expect(boardAt(1210).cities?.find(at(harbor))?.active).toBe(false)
+  })
+
+  it("stands no town for an uncertain crossing until its whole range has passed", () => {
+    // The crossing is dated only within 1218–1220: the hex is lit while it
+    // may be happening, but the story has reached the bay only by 1220.
+    expect(boardAt(1218).lit.some(at(bay))).toBe(true)
+    expect(boardAt(1218).cities?.some(at(bay))).toBe(false)
+    expect(boardAt(1219).cities?.some(at(bay))).toBe(false)
+    expect(boardAt(1220).cities?.some(at(bay))).toBe(true)
+  })
+
+  it("draws the window's events only, as the markers do", () => {
+    // The harbour's 1204 event is outside 1225–1250: no paper and no town for it.
+    const narrowed = boardAt(1240, { start: 1225, end: 1250 })
+
+    expect(narrowed.remembered.some(at(harbor))).toBe(false)
+    expect(narrowed.cities?.some(at(harbor))).toBe(false)
+    expect(boardAt(1240).remembered.some(at(harbor))).toBe(true)
+  })
+})
+
 describe("buildScene and the published dispute", () => {
   const dispute = {
     status: "disputed" as const,

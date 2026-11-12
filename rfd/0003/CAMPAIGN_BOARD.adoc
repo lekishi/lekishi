@@ -1,0 +1,111 @@
+:authors: Darwin D Wu <darwin67@users.noreply.github.com>
+:state: discussion
+:labels: rendering, globe, design
+:date: 2026-11-12
+
+= RFD 3 campaign board: the globe drawn as a strategy map
+
+== Provenance and scope
+
+On 2026-11-12 the owner judged the `/dev/world` prototype (the B1 "campaign
+map" direction) and asked that the atlas's globe be drawn the same way,
+replacing the close-up diorama of 秋妻屋浦, which still appeared when a reader
+opened a place from the prototype in its chapter: "I think we can just replace
+the whole earth visualization in the civilization style."
+
+This record covers the chapter atlas's globe only. The home page's globe of
+chapters (`ChapterGlobe.svelte`) is unchanged. No historical content,
+publication set, approval or contract version changed.
+
+== Decision
+
+* *The chapter globe is a campaign board.* The terrain is cut into hexes. A
+  hex is lit where an event stands at the playhead or a journey's vessel
+  stands, remembered where the story's events are over, and dark elsewhere.
+  Explored land is raised by its relief. The scene derives the board
+  (`buildScene` in `src/lib/atlas/scene.ts`); the renderer draws it
+  (`src/lib/atlas/renderer/globe/board.ts`).
+* *Towns, units and banners are symbols of the story's presence.* A town stands
+  on each place the window's story has reached by the playhead, a ship or a
+  travelling party at each journey's vessel, and each place is a city banner
+  carrying its event count and evidence mark. None claims a settlement's size,
+  a force's strength, or a territory; the legend says so. A banner takes a
+  controller's tint where a drawn snapshot records the place held, so the
+  legend's "held by" colours stay true, and the story's gold otherwise.
+* *The camera is tilted* 40° below the horizon, opening at 6,000 km and
+  following at 1,000 km, as a strategy map is seen. Home includes the chapter
+  between the rails; at 3,000 km, 平城宮 fell behind the detail panel after
+  returning from 益救島. The reader still turns and zooms freely.
+* *The diorama is removed.* Its renderer layer, its definition and its file
+  (`/dioramas/akimeya.json`) are gone, with the build invariant and browser
+  check that required them. This supersedes RFD 1's diorama register for the
+  region and local scales (link:../0001/README.adoc[RFD 1], "The Tang chapter's hero, approved 2026-10-10");
+  that record stays as written.
+* *RFD 4's RC1 cannot be met as written.* link:../0004/README.adoc[RFD 4]'s
+  RC1 asks that the served Tang chapter match its approved hero, "the
+  diorama's terrain, symbols, vessel, and chrome at region scale". The
+  diorama no longer exists, so RC1 needs the owner's amendment to name the
+  campaign board instead. This record does not edit RFD 4.
+
+== Measurements (2026-11-12, orb, software WebGL)
+
+Measured in the orb's headless Chromium, which renders WebGL in software
+(SwiftShader), on the Tang chapter at 1440×900, device scale 2. These are
+software-renderer measurements, not device performance acceptance; frame
+times on real devices remain unmeasured for this change.
+
+[cols="3,1"]
+|===
+|Forced redraw, the same tilted view without the board |493 ms
+|With the board, hexes classified per pixel in the tile shader (first cut) |1,041 ms
+|With the board, hexes classified once on the CPU into a per-hex texture |731 ms
+|A settled board, nothing to draw |0 ms (no frame drawn)
+|===
+
+The forced-redraw figures above are from the initial implementation thread,
+before the optimizations below. The recovered change reproduced the picking
+timeout in this orb. Against the built artifact, with the existing 120-second
+limits unchanged:
+
+[cols="3,1,1",options="header"]
+|===
+|Browser scenario |Recovered change |Optimized board
+|Click a place's mark, choose its events, return home and pick 平城宮
+|Timed out at 120 s |Passed, 1.3 min
+|Keep a selection readable outside the time window
+|Passed, 1.7 min |Passed, 21.4 s
+|Idle while a tile is pending, then redraw its arrival
+|Not present |Passed, 25.0 s
+|Restore an idle WebGL context
+|Not remeasured |Passed, 18.2 s
+|===
+
+* The tile shader first classified every pixel's hex from fourteen texture
+  reads; the board now classifies each hex once when its imagery arrives and
+  the shader reads one texel. Only tiles to level 3 are painted into the world
+  image, so zooming in never reclassifies a hex and moves its banner.
+* Tile-grid longitude and latitude are interpolated to the fragment shader,
+  removing two per-pixel inverse trigonometric operations. The board also
+  skips the imagery sample it would immediately paint over. Tile refinement,
+  resolution, lighting and the plain globe's imagery remain unchanged.
+* Pending requests no longer force identical WebGL redraws. Tile arrivals and
+  retries invalidate the view, as do camera, board and overlay changes. The
+  browser regression holds refinement requests, observes an idle globe, then
+  releases them and observes new draws; context restoration is checked too.
+* The board's reach texture (4 MB) is rewritten in place on each change; it
+  is rebuilt only when the derived board changes.
+* The board's code ships with every chapter page: about 40 KB of source, a
+  2048×1024 canvas for the world image, and two textures (reach and classes).
+* In the initial investigation, a settled page composited at about 15 frames a second
+  whether or not the board is on: the banners' and panels' shadows composite
+  in software. Removing them in the diagnostic held 60; that visual change
+  was not retained.
+
+== Known limits
+
+* The terrain is today's imagery and relief, not the land of the chapter's
+  period.
+* Banners can overlap where places cluster; hexes stretch near the poles and
+  meet at a seam at 180°.
+* On a phone the arrival plate can cover the arrived place's banner until it is
+  closed.

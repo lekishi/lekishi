@@ -20,7 +20,7 @@
     onManualCameraInput: () => void
     onViewChange?: (view: CameraView) => void
     onError: (error: Error) => void
-    /** Renderer options fixed for this mount, such as `/dev/world`'s tilted camera. */
+    /** Renderer options fixed for this mount, such as the atlas's campaign board. */
     options?: GlobeRendererOptions
   } = $props()
 

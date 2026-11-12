@@ -1,17 +1,17 @@
 <script lang="ts">
   /**
    * What the view in front of the reader is made of (RFD 1, "Honest
-   * rendering"): the terrain is real elevation, every line is schematic, an
+   * rendering"): the land is hex tiles classed from today's imagery and
+   * elevation, every line is schematic, an
    * anchor names an area without asserting a site, a tinted place is one a
-   * source records held, with no border between, and the close-up diorama is
-   * an illustration. The plate states only what is on screen, so a reader who
-   * zooms into the diorama is told it is a drawing at the moment it appears.
+   * source records held, with no border between, and the campaign board's
+   * hexes, towns and units mark where the story is, not who ruled or lived
+   * there. The plate states only what is on screen.
    */
   let {
     lines,
     anchors,
     control = false,
-    diorama,
   }: {
     /** A journey or an arc is drawn. */
     lines: boolean
@@ -19,13 +19,18 @@
     anchors: boolean
     /** A territory snapshot tints held places. */
     control?: boolean
-    /** The diorama in view, by its place's name, or null. */
-    diorama: string | null
   } = $props()
 </script>
 
 <ul data-testid="atlas-honesty" class="flex flex-col gap-0.5 text-caption text-ink-dim">
-  <li>Terrain is real elevation, exaggerated for legibility.</li>
+  <li>
+    The land is drawn as hex tiles classed from today's imagery and elevation, not the land of the
+    period.
+  </li>
+  <li>
+    Lit hexes, towns and units mark where the story is; they are not territories, and a town's size
+    claims nothing.
+  </li>
   {#if lines}
     <li>Lines are schematic: they join dated stops, not a surveyed route.</li>
   {/if}
@@ -34,14 +39,8 @@
   {/if}
   {#if control}
     <li>
-      A tinted place is one a source records held in that year; no border is drawn, and other places
-      may have been held too.
-    </li>
-  {/if}
-  {#if diorama}
-    <li class="text-gold-bright">
-      The close-up at <span lang="ja" class="font-serif">{diorama}</span> is an illustrated diorama, not
-      a survey.
+      A banner in a holder's colour, not the story's gold, is a place a source records held in that
+      year; no border is drawn, and other places may have been held too.
     </li>
   {/if}
 </ul>

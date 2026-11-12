@@ -1,14 +1,14 @@
-import type { SceneArc, SceneDiorama, SceneJourney } from "../overlays"
+import type { SceneArc, SceneJourney } from "../overlays"
 import type { AtlasScene, ScenePlace } from "../scene"
 import {
   createGlobeView,
   type GlobeArc,
-  type GlobeDiorama,
   type GlobeJourney,
   type GlobeMarker,
   type GlobeView,
   type GlobeViewOptions,
 } from "./globe/view"
+import { BoardLayer } from "./globe/board"
 import type { AtlasRenderer, AtlasRendererCallbacks } from "./types"
 
 /**
@@ -18,7 +18,7 @@ import type { AtlasRenderer, AtlasRendererCallbacks } from "./types"
  * record, `rfd/0003/RENDERER_SPIKE.adoc`), and it replaces the Cesium renderer
  * here without changing the boundary: the workspace hands over a scene of plain
  * data and receives place ids and camera input back. Three.js objects live only
- * in `./globe/`; this module turns the scene into markers, lines, dioramas and
+ * in `./globe/`; this module turns the scene into markers, lines, the board and
  * camera requests, and the reader's pointer and wheel input into callbacks.
  *
  * Flights frame into the scene's safe area (RFD 5, "Scene safe area"): the
@@ -52,16 +52,30 @@ export type GlobeRendererOptions = {
   /** Where the globe's tiles are served, ending in `/`. */
   tilesUrl?: string
   /**
-   * The camera's pitch below the horizon for the home view and every flight.
-   * The atlas looks straight down (-90); the `/dev/world` prototype tilts it
-   * toward the horizon to judge a strategy-map view of the same globe.
+   * The camera's pitch below the horizon for the home view and every flight:
+   * -90 looks straight down, a shallower pitch tilts the view toward the
+   * horizon, looking north.
    */
   pitchDeg?: number
   /**
-   * Makes the scene's strategy-map board (`/dev/world` only): the page passes
-   * `(onChange) => new BoardLayer(onChange)`, so the atlas never bundles it.
+   * Makes the scene's campaign board. Without it the globe draws no board,
+   * as the home page's globe of chapters does.
    */
   board?: GlobeViewOptions["board"]
+}
+
+/**
+ * The atlas's globe as a campaign board (`rfd/0003/CAMPAIGN_BOARD.adoc`):
+ * tilted toward the horizon like a strategy map, close enough that the hexes,
+ * towns and units read. The reader still turns and zooms it freely.
+ */
+export const CAMPAIGN_BOARD: GlobeRendererOptions = {
+  pitchDeg: -40,
+  // Home must show the chapter between the rails, not just the current stop.
+  // The closer follow view still lets its hexes and pieces read in detail.
+  homeHeightMeters: 6_000_000,
+  focusHeightMeters: 1_000_000,
+  board: (onChange) => new BoardLayer(onChange),
 }
 
 /**
@@ -113,15 +127,6 @@ export function arcFor(arc: SceneArc): GlobeArc {
     directed: arc.directed,
     emphasis: arc.emphasis,
     caption: `${arc.fromLabel} ${arc.directed ? "→" : "–"} ${arc.toLabel}`,
-  }
-}
-
-export function dioramaFor(diorama: SceneDiorama): GlobeDiorama {
-  return {
-    id: diorama.id,
-    url: diorama.url,
-    center: diorama.center,
-    showBelowMeters: diorama.showBelowMeters,
   }
 }
 
@@ -295,7 +300,6 @@ class GlobeAtlasRenderer implements AtlasRenderer {
       journeys: scene.journeys.map(journeyFor),
       arcs: scene.arcs.map(arcFor),
     })
-    this.view.setDioramas(scene.dioramas.map(dioramaFor))
     this.view.setBoard(scene.board ?? null)
 
     // Apply each camera request exactly once; the token is bumped by the state

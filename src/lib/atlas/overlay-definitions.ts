@@ -3,7 +3,7 @@ import { curatedJourney, type ChapterOverlays, type CuratedJourney } from "./ove
 
 /**
  * Where each chapter's overlays are defined (see `overlays.ts` for what a
- * journey, an arc anchor and a diorama mean).
+ * journey and an arc anchor mean).
  *
  * The definitions name a chapter's own records, so they are chapter content and
  * travel with it: the projection attaches them to the chapter, and the browser
@@ -24,7 +24,6 @@ const NO_OVERLAYS: CuratedOverlays = {
   journeys: [],
   actorAnchors: {},
   endAnchors: {},
-  dioramas: [],
 }
 
 /**
@@ -66,14 +65,6 @@ export const CHAPTER_OVERLAYS: Readonly<Record<string, CuratedOverlays>> = {
     endAnchors: {
       "lks:relationship:jianzhen-transmission": { from: "lks:place:yangzhou" },
     },
-    dioramas: [
-      {
-        id: "akimeya",
-        placeId: "lks:place:akimeya",
-        url: "/dioramas/akimeya.json",
-        showBelowMeters: 220_000,
-      },
-    ],
   },
   [QIN_CHAPTER]: {
     journeys: [
@@ -92,7 +83,6 @@ export const CHAPTER_OVERLAYS: Readonly<Record<string, CuratedOverlays>> = {
       "lks:actor:qin-state": "lks:place:yunyang",
     },
     endAnchors: {},
-    dioramas: [],
   },
 }
 

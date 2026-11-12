@@ -427,12 +427,11 @@ test("draws the globe from the artifact's own tiles, fonts and data, and nothing
   // the site.
   expect(foreignRequests).toEqual([])
 
-  // The tiles, their attribution and the dioramas are part of the artifact.
+  // The tiles and their attribution are part of the artifact.
   for (const entry of [
     "globe/tileset.json",
     "globe/b/root.bin",
     "globe/ATTRIBUTION.txt",
-    "dioramas/akimeya.json",
     "search-index.json",
   ]) {
     const response = await request.get(`/${entry}`)
@@ -459,15 +458,16 @@ test("draws the globe from the artifact's own tiles, fonts and data, and nothing
   )
 })
 
-test("fetches the 秋妻屋浦 diorama from the artifact when the camera comes down to it", async ({
+test("draws the chapter as a campaign board, each place a city banner", async ({
   page,
   hasTouch,
 }) => {
-  test.skip(hasTouch, "Desktop wheel zoom; the diorama is the same file at every size.")
-
+  // The board is the same at every size; the touch projects press marks in
+  // "selects events and places by tap on touch input".
+  test.skip(hasTouch, "Desktop pointer; the board is the same file and code at every size.")
+  const problems = collectProblems(page)
   const foreignRequests: string[] = []
   const origin = new URL(test.info().project.use.baseURL ?? "http://127.0.0.1").origin
-  let diorama: { url: string; status: number } | null = null
 
   page.context().on("request", (req) => {
     const url = req.url()
@@ -475,45 +475,25 @@ test("fetches the 秋妻屋浦 diorama from the artifact when the camera comes d
       foreignRequests.push(url)
     }
   })
-  page.on("response", (response) => {
-    if (response.url().includes("/dioramas/")) {
-      diorama = { url: response.url(), status: response.status() }
-    }
-  })
 
   // The flight to the landfall is a programmatic flight; reduced motion makes
-  // it land at once, so the wheel below zooms at a settled place.
+  // it land at once.
   await page.emulateMedia({ reducedMotion: "reduce" })
   await openChapter(page, `${TANG}?event=akimeya-landfall-753`)
   await expect(card(page)).toBeVisible()
   await foldLegend(page)
 
-  // The diorama is fetched only when the camera is low over the place, never
-  // with the chapter: zoom in over the landfall until it is.
-  // The wheel zooms toward the ground under the pointer, so the point checked
-  // to be the open globe over the landfall is reused for every step. Reading
-  // the mark's box again each step cost seconds a step on a software renderer
-  // at this size and pushed the test past its budget on CI's standard runner.
-  // The fetch and legend checks below still require coming down near 秋妻屋浦.
-  const landfall = await markPoint(page, "lks:place:akimeya")
-  await page.mouse.move(landfall.x, landfall.y)
+  // The landfall's place is a banner carrying its count, and its mark lies
+  // on the open globe, where a press on the canvas picks it.
+  await expect(page.locator('[data-marker-id="lks:place:akimeya"] [data-count]')).toHaveAttribute(
+    "data-count",
+    /^[1-9]\d*$/,
+  )
+  await markPoint(page, "lks:place:akimeya")
 
-  await expect(async () => {
-    await page.mouse.wheel(0, -800)
-    expect(diorama).not.toBeNull()
-  }).toPass({ timeout: 90_000 })
-
-  expect(diorama).toEqual({ url: expect.stringMatching(/\/dioramas\/akimeya\.json$/), status: 200 })
-  // The legend says what the close-up is once it is in view.
-  await page.getByTestId("atlas-legend").getByRole("button", { name: "Legend" }).click()
-  await expect(page.getByTestId("atlas-legend")).toContainText("秋妻屋浦")
-
-  // One press takes the reader from the harbour back to the whole chapter:
-  // the close-up leaves the legend and 平城宮 is on the open globe again.
-  await page.getByRole("button", { name: "Zoom out to the whole chapter" }).click()
-  await expect(page.getByTestId("atlas-legend")).not.toContainText("秋妻屋浦")
-  await markPoint(page, "lks:place:heijo-palace")
+  // The board's code and textures come from the artifact alone.
   expect(foreignRequests).toEqual([])
+  expect(problems).toEqual([])
 })
 
 test("amplifies only the Firefox/Linux Ctrl-wheel trackpad pinch", async ({ page }) => {
@@ -852,6 +832,37 @@ test("selects a place by clicking its mark on the globe", async ({ page, hasTouc
     "aria-current",
     "true",
   )
+})
+
+test("waits without redrawing for pending tiles, then draws their arrival", async ({ page }) => {
+  await countDraws(page)
+  let pending = 0
+  let release!: () => void
+  const arrived = new Promise<void>((resolve) => (release = resolve))
+  await page.route("**/globe/b/**", async (route) => {
+    if (!route.request().url().endsWith("/root.bin")) {
+      pending++
+      await arrived
+    }
+    await route.continue()
+  })
+
+  try {
+    await mountAtlas(page)
+    await expect.poll(() => pending).toBeGreaterThan(0)
+    // A slow connection leaves the loaded parent visible, not an identical
+    // WebGL redraw on every animation frame. The arrival must still wake it.
+    const before = await globeIdle(page)
+    release()
+    const canvas = page.locator("[data-testid='atlas-globe'] canvas")
+    await expect
+      .poll(async () => Number(await canvas.getAttribute("data-draws")))
+      .toBeGreaterThan(before)
+    await globeIdle(page)
+  } finally {
+    release()
+    await page.unrouteAll({ behavior: "wait" })
+  }
 })
 
 test("redraws a settled globe after WebGL context restoration without input", async ({ page }) => {

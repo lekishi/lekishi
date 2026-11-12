@@ -4,12 +4,13 @@ import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js
 import { BORDERED, GRID } from "./tile-mesh"
 
 /**
- * The strategy-map board for the `/dev/world` prototype (design review of
- * 2026-11-09, direction B1): the world as a game board of raised hex tiles,
- * and the sources' reach as fog of war. A hex is lit where a chapter alive
- * this turn has its story, drawn as an old paper map where a story has been,
- * and dark where no chapter the atlas holds has been. Each player's lit hexes
- * get an edge in its tint: where its story is, never a territory.
+ * The campaign board the atlas's globe is drawn as (`rfd/0003/CAMPAIGN_BOARD.adoc`;
+ * first the `/dev/world` prototype, direction B1 of the 2026-11-09 design
+ * review): the world as a game board of raised hex tiles, and the story's
+ * reach as fog of war. A hex is lit where a story is at the playhead, drawn
+ * as an old paper map where a story has been, and dark elsewhere. Each
+ * player's lit hexes get an edge in its tint: where its story is, never a
+ * territory.
  *
  * The grid lives in a flat plane over longitude and latitude (`x = lon · K`,
  * `y = lat`, pointy-top hexes of `HEX_SIZE` degrees), so the shaders and this
@@ -38,7 +39,12 @@ export const REMEMBERED_RADIUS = 3
 
 const TEX_W = 1440
 const TEX_H = 720
-const MAX_PLAYERS = 8
+/**
+ * The tints a player can wear: the eight controller tokens, then the
+ * design system's gold, which the atlas gives a chapter's own story so it is
+ * never mistaken for a controller's colour (`STORY_TINT` in `scene.ts`).
+ */
+const TINTS = 9
 /** The world image's size: about 0.18° a pixel, five pixels across a hex. */
 const WORLD_W = 2048
 const WORLD_H = 1024
@@ -46,6 +52,13 @@ const WORLD_H = 1024
 const RELIEF_W = 1024
 const RELIEF_H = 512
 const RELIEF_STEP_M = 32
+/**
+ * The finest tile level painted into the world image and elevation. A level-3
+ * tile's 256-pixel imagery (0.09° a pixel) and 65-sample heights (0.35°) are
+ * already as fine as the world image and elevation; a finer tile would only
+ * reclassify hexes, and move their banners, while the reader zooms.
+ */
+const PAINT_MAX_LEVEL = 3
 /** How long tile paint gathers before the world image is uploaded again. */
 const WORLD_UPLOAD_MS = 400
 
@@ -104,8 +117,13 @@ export type BoardCell = {
  * light one hex, the nearer place wins it. Also every explored hex, for the
  * prisms.
  */
-export function boardTexels(board: SceneBoard): { data: Uint8Array; cells: BoardCell[] } {
-  const data = new Uint8Array(TEX_W * TEX_H * 4)
+export function boardTexels(
+  board: SceneBoard,
+  data = new Uint8Array(TEX_W * TEX_H * 4),
+): { data: Uint8Array; cells: BoardCell[] } {
+  // The board's own texels are rewritten in place: a playing atlas changes
+  // the board every turn, and a fresh 4 MB array each time is garbage.
+  data.fill(0)
   const nearest = new Map<number, number>()
   const hexes = new Map<number, Axial>()
   const stamp = (
@@ -139,7 +157,7 @@ export function boardTexels(board: SceneBoard): { data: Uint8Array; cells: Board
       data[i * 4 + 3] = 255
       if (distance < (nearest.get(i) ?? Infinity)) {
         nearest.set(i, distance)
-        data[i * 4 + 1] = (point.player % MAX_PLAYERS) + 1
+        data[i * 4 + 1] = (point.player % TINTS) + 1
       }
     })
   }
@@ -321,7 +339,12 @@ function partyGeometry(): THREE.InstancedBufferGeometry {
   return piece(parts)
 }
 
-/** `boardBiome` in the shaders, for a mean linear colour: the class number. */
+/**
+ * A terrain class for a mean linear colour, by hue and lightness: blue for
+ * water (light near shore, dark in the deep), white for snow, green for grass
+ * (dark green for forest), yellow for plains, warm and light for desert, dull
+ * ground toward the poles for tundra.
+ */
 function biomeOf([lr, lg, lb]: readonly [number, number, number], lat: number): number {
   const [r, g, b] = [lr, lg, lb].map((v) => Math.max(0, v) ** (1 / 2.2))
   const l = 0.3 * r + 0.59 * g + 0.11 * b
@@ -344,8 +367,17 @@ export class BoardLayer {
   private readonly texels = new Uint8Array(TEX_W * TEX_H * 4)
   private readonly world: HTMLCanvasElement
   private readonly worldContext: CanvasRenderingContext2D
-  private readonly worldTexture: THREE.CanvasTexture
-  private readonly relief: THREE.DataTexture
+  /**
+   * Each hex's class, at its reach texel: red the terrain (0 ocean to 7 snow),
+   * green the relief (0 flat, 1 hills, 2 mountains). Classified once on the
+   * CPU when imagery arrives, so a frame reads one texel a hex instead of the
+   * fourteen samples a per-pixel classification took: a software renderer
+   * spent most of each frame on those.
+   */
+  private readonly classTexture: THREE.DataTexture
+  private readonly classes = new Uint8Array(TEX_W * TEX_H * 2)
+  /** The tiles painted since the last classification. */
+  private dirty: { w: number; s: number; e: number; n: number }[] = []
   /** The relief texture's samples, held typed. */
   private readonly reliefData = new Uint8Array(RELIEF_W * RELIEF_H)
   private readonly painted = new Map<
@@ -362,15 +394,14 @@ export class BoardLayer {
   }
   /** Hexes with a piece on them, by reach texel, so markers stand above it. */
   private pieceHexes = new Set<number>()
-  private worldPixels: Uint8ClampedArray | null = null
   private readonly uniforms: {
     readonly uBoard: { value: number }
     readonly uReach: { value: THREE.DataTexture }
-    readonly uWorld: { value: THREE.CanvasTexture }
-    readonly uRelief: { value: THREE.DataTexture }
+    readonly uClass: { value: THREE.DataTexture }
     readonly uTints: { value: THREE.Color[] }
   }
   private last: SceneBoard | null = null
+  private lastKey = ""
   private upload: ReturnType<typeof setTimeout> | null = null
 
   constructor(private readonly onChange: () => void = () => {}) {
@@ -385,30 +416,23 @@ export class BoardLayer {
     const context = this.world.getContext("2d", { willReadFrequently: true })
     if (context === null) throw new Error("The board needs a 2D canvas to classify its hexes")
     this.worldContext = context
-    this.worldTexture = new THREE.CanvasTexture(this.world)
-    this.worldTexture.colorSpace = THREE.SRGBColorSpace
-    this.worldTexture.generateMipmaps = false
-    this.worldTexture.minFilter = THREE.LinearFilter
-    this.worldTexture.flipY = false
-    // Elevation beside the imagery, so hills and mountains come from height
-    // rather than colour: one byte a sample, row 0 north.
-    this.relief = new THREE.DataTexture(this.reliefData, RELIEF_W, RELIEF_H, THREE.RedFormat)
-    this.relief.magFilter = THREE.LinearFilter
-    this.relief.minFilter = THREE.LinearFilter
-    this.relief.needsUpdate = true
+    this.classTexture = new THREE.DataTexture(this.classes, TEX_W, TEX_H, THREE.RGFormat)
+    this.classTexture.magFilter = THREE.NearestFilter
+    this.classTexture.minFilter = THREE.NearestFilter
+    this.classTexture.needsUpdate = true
 
     // The tints are the design system's controller tokens, resolved from the
     // stylesheet, so the board's edges and the legend use the same colours.
     const style = getComputedStyle(document.documentElement)
-    const tints = Array.from({ length: MAX_PLAYERS }, (_, i) => {
-      const value = style.getPropertyValue(`--color-control-${i + 1}`).trim()
+    const tints = Array.from({ length: TINTS }, (_, i) => {
+      const token = i < TINTS - 1 ? `--color-control-${i + 1}` : "--color-gold"
+      const value = style.getPropertyValue(token).trim()
       return new THREE.Color(value === "" ? "white" : value)
     })
     this.uniforms = {
       uBoard: { value: 0 },
       uReach: { value: this.texture },
-      uWorld: { value: this.worldTexture },
-      uRelief: { value: this.relief },
+      uClass: { value: this.classTexture },
       uTints: { value: tints },
     }
 
@@ -494,13 +518,17 @@ export class BoardLayer {
 
   /** Shows a board, or hides it with null; returns whether anything changed. */
   set(board: SceneBoard | null): boolean {
-    if (board === this.last) return false
+    // The atlas derives a new scene on every selection or hover change; the
+    // board is a few dozen points, so compare its content and rebuild the
+    // textures and instances only when the board itself changed.
+    const key = board === null ? "" : JSON.stringify(board)
+    if (board === this.last || key === this.lastKey) return false
     this.last = board
+    this.lastKey = key
     this.uniforms.uBoard.value = board === null ? 0 : 1
     this.object.visible = board !== null
     if (board !== null) {
-      const { data, cells } = boardTexels(board)
-      this.texels.set(data)
+      const { cells } = boardTexels(board, this.texels)
       this.texture.needsUpdate = true
       const instances = new Float32Array(cells.length * 4)
       cells.forEach((cell, i) => {
@@ -541,20 +569,31 @@ export class BoardLayer {
   /**
    * How high a place's marker stands with the board on: on its hex's tile,
    * and above the piece when one stands there, so the name reads over the
-   * city as a strategy game's city banner does. The tile's height is the
-   * shaders' reading (`boardClass`, `boardTop`), repeated here from the same
-   * world image and elevation.
+   * city as a strategy game's city banner does. The tile's height is read
+   * from the same classes the shaders draw (`boardTop`).
    */
   heightAt(lon: number, lat: number): number | null {
-    if (this.last === null || this.worldPixels === null) return null
+    if (this.last === null) return null
     const cell = hexOf(lon, lat)
     const i = texel(cell)
     if (i < 0) return null
     const state = this.texels[i * 4]
     const piece = this.pieceHexes.has(i) ? 62000 : 0
     if (state === 0) return piece
+    const biome = this.classes[i * 2]
+    const relief = this.classes[i * 2 + 1]
+    if (biome <= 1) return piece
+    return (relief === 2 ? 40000 : relief === 1 ? 22000 : 10000) + piece
+  }
+
+  /**
+   * A hex's class (the shaders' `boardClass`): the mean colour of seven
+   * samples across it picks the terrain, and the ground's height over the
+   * same samples, its mean and its highest, picks the relief. Unpainted
+   * ground reads as ocean, so nothing stands up before its imagery arrives.
+   */
+  private classify(pixels: Uint8ClampedArray, cell: Axial): [number, number] {
     const c = hexCenter(cell)
-    const pixels = this.worldPixels
     const relief = this.reliefData
     const toLinear = (v: number) => (v / 255) ** 2.2
     const inner = HEX_SIZE * 0.8660254
@@ -581,12 +620,35 @@ export class BoardLayer {
       mean += h
       top = Math.max(top, h)
     }
-    if (a < 3.5) return piece
+    if (a < 3.5) return [0, 0]
     const biome = biomeOf([r / 7, g / 7, b / 7], c.lat)
-    if (biome <= 1) return piece
+    if (biome <= 1) return [biome, 0]
+    // The elevation is read from coarse tiles, which average a range's peaks
+    // down, so the thresholds sit low: the Alps' hexes average about 1,500 m.
     mean /= 7
-    const tile = mean > 1300 || top > 2100 ? 40000 : mean > 450 || top > 900 ? 22000 : 10000
-    return tile + piece
+    return [biome, mean > 1300 || top > 2100 ? 2 : mean > 450 || top > 900 ? 1 : 0]
+  }
+
+  /** Classifies every hex whose centre lies in (or a hex beside) a painted tile. */
+  private classifyPainted(pixels: Uint8ClampedArray): void {
+    const step = HEX_SIZE * 1.5
+    const width = HEX_SIZE * Math.sqrt(3)
+    for (const { w, s, e, n } of this.dirty) {
+      for (let r = Math.floor(s / step) - 1; r <= Math.ceil(n / step) + 1; r++) {
+        const q0 = Math.floor((w * HEX_K) / width - r / 2) - 1
+        const q1 = Math.ceil((e * HEX_K) / width - r / 2) + 1
+        for (let q = q0; q <= q1; q++) {
+          const cell = { q, r }
+          const i = texel(cell)
+          if (i < 0) continue
+          const [biome, relief] = this.classify(pixels, cell)
+          this.classes[i * 2] = biome
+          this.classes[i * 2 + 1] = relief
+        }
+      }
+    }
+    this.dirty = []
+    this.classTexture.needsUpdate = true
   }
 
   /**
@@ -600,6 +662,7 @@ export class BoardLayer {
     imagery: CanvasImageSource,
     heights: Float32Array | null,
   ): void {
+    if (bounds.z > PAINT_MAX_LEVEL) return
     const key = `${bounds.z}/${bounds.w}/${bounds.s}`
     if (this.painted.has(key)) return
     for (const other of this.painted.values()) {
@@ -613,6 +676,7 @@ export class BoardLayer {
         return
     }
     this.painted.set(key, bounds)
+    this.dirty.push(bounds)
     const x = ((bounds.w + 180) / 360) * WORLD_W
     const y = ((90 - bounds.n) / 180) * WORLD_H
     const w = ((bounds.e - bounds.w) / 360) * WORLD_W
@@ -621,9 +685,7 @@ export class BoardLayer {
     if (heights !== null) this.paintRelief(bounds, heights)
     this.upload ??= setTimeout(() => {
       this.upload = null
-      this.worldTexture.needsUpdate = true
-      this.relief.needsUpdate = true
-      this.worldPixels = this.worldContext.getImageData(0, 0, WORLD_W, WORLD_H).data
+      this.classifyPainted(this.worldContext.getImageData(0, 0, WORLD_W, WORLD_H).data)
       this.onChange()
     }, WORLD_UPLOAD_MS)
   }
@@ -662,19 +724,21 @@ export class BoardLayer {
         .replace("#include <begin_vertex>", "#include <begin_vertex>\nboardFlatten(transformed);")
         .replace(
           "#include <project_vertex>",
-          "#include <project_vertex>\nvBoardWorld = (modelMatrix * vec4(transformed, 1.0)).xyz;",
+          "#include <project_vertex>\nvBoardPoint = vec2(boardLonLat.x * HEX_K, boardLonLat.y);",
         )
       shader.fragmentShader = shader.fragmentShader
         .replace("#include <common>", `#include <common>\n${TILE_FRAGMENT}`)
-        .replace("#include <map_fragment>", "#include <map_fragment>\nboardShade(diffuseColor);")
+        .replace(
+          "#include <map_fragment>",
+          "if (uBoard < 0.5) {\n#include <map_fragment>\n} else { boardShade(diffuseColor); }",
+        )
     }
   }
 
   dispose(): void {
     if (this.upload !== null) clearTimeout(this.upload)
     this.texture.dispose()
-    this.worldTexture.dispose()
-    this.relief.dispose()
+    this.classTexture.dispose()
     this.geometry.dispose()
     this.material.dispose()
     for (const m of Object.values(this.pieces)) m.geometry.dispose()
@@ -689,9 +753,8 @@ const f = (n: number) => n.toFixed(6)
 const BOARD_COMMON = /* glsl */ `
 uniform float uBoard;
 uniform sampler2D uReach;
-uniform sampler2D uWorld;
-uniform sampler2D uRelief;
-uniform vec3 uTints[${MAX_PLAYERS}];
+uniform sampler2D uClass;
+uniform vec3 uTints[${TINTS}];
 const float HEX_K = ${f(HEX_K)};
 const float HEX_S = ${f(HEX_SIZE)};
 const float HEX_INNER = ${f(HEX_SIZE * 0.8660254)};
@@ -705,61 +768,15 @@ vec4 boardCell(vec2 c) {
   return textureLod(uReach, (t + 0.5) / size, 0.0);
 }
 
-// The world image at a grid point; alpha is 0 where no tile has painted yet.
-vec4 boardTerrain(vec2 g) {
-  vec2 uv = vec2((g.x / HEX_K + 180.0) / 360.0, (90.0 - g.y) / 180.0);
-  return textureLod(uWorld, vec2(fract(uv.x), clamp(uv.y, 0.0, 1.0)), 0.0);
-}
-
-// The ground's height at a grid point, in metres.
-float boardRelief(vec2 g) {
-  vec2 uv = vec2((g.x / HEX_K + 180.0) / 360.0, (90.0 - g.y) / 180.0);
-  return textureLod(uRelief, vec2(fract(uv.x), clamp(uv.y, 0.0, 1.0)), 0.0).r * 255.0 * ${RELIEF_STEP_M}.0;
-}
-
-// The game's terrain classes: 0 ocean, 1 coast, 2 grassland, 3 plains,
-// 4 forest, 5 desert, 6 tundra, 7 snow. The imagery's colour picks the class
-// by hue and lightness: blue for water (light near shore, dark in the deep),
-// white for snow, green for grass (dark green for forest), yellow for plains,
-// warm and light for desert, dull ground toward the poles for tundra.
-int boardBiome(vec3 linear, float lat) {
-  vec3 c = pow(max(linear, vec3(0.0)), vec3(1.0 / 2.2));
-  float l = dot(c, vec3(0.3, 0.59, 0.11));
-  float hi = max(c.r, max(c.g, c.b));
-  float sat = hi - min(c.r, min(c.g, c.b));
-  if (c.b > c.r * 1.12 && c.b > c.g * 0.82) return l < 0.33 ? 0 : 1;
-  if (l > 0.8 && sat < 0.12) return 7;
-  if (abs(lat) > 58.0 && sat < 0.18) return 6;
-  if (c.r > c.g * 1.02 && l > 0.5) return 5;
-  if (c.g > c.r * 1.08) return l < 0.45 ? 4 : 2;
-  return 3;
-}
-
-// A hex's class: x its terrain, y its relief (0 flat, 0.5 hills, 1
-// mountains). One reading per hex: the mean colour of seven samples across
-// it picks the terrain; the ground's height over the same samples, its mean
-// and its highest, picks the relief. Unpainted ground reads as ocean, so
-// nothing stands up before its imagery has arrived.
+// A hex's class (\`BoardLayer.classify\`): x its terrain, 0 ocean, 1 coast,
+// 2 grassland, 3 plains, 4 forest, 5 desert, 6 tundra, 7 snow; y its relief,
+// 0 flat, 0.5 hills, 1 mountains.
 vec2 boardClass(vec2 c) {
-  vec4 sum = boardTerrain(c);
-  float mean = boardRelief(c);
-  float top = mean;
-  for (int i = 0; i < 6; i++) {
-    float a = radians(float(i) * 60.0 + 30.0);
-    vec2 g = c + vec2(cos(a), sin(a)) * HEX_INNER * 0.6;
-    sum += boardTerrain(g);
-    float h = boardRelief(g);
-    mean += h;
-    top = max(top, h);
-  }
-  mean /= 7.0;
-  if (sum.a < 3.5) return vec2(0.0);
-  int biome = boardBiome(sum.rgb / 7.0, c.y);
-  if (biome <= 1) return vec2(float(biome), 0.0);
-  // The elevation is read from coarse tiles, which average a range's peaks
-  // down, so the thresholds sit low: the Alps' hexes average about 1,500 m.
-  float relief = mean > 1300.0 || top > 2100.0 ? 1.0 : mean > 450.0 || top > 900.0 ? 0.5 : 0.0;
-  return vec2(float(biome), relief);
+  vec2 ll = vec2(c.x / HEX_K, c.y);
+  vec2 size = vec2(${TEX_W}.0, ${TEX_H}.0);
+  vec2 t = floor(vec2((ll.x + 180.0) / 360.0, (ll.y + 90.0) / 180.0) * size + 0.01);
+  vec2 k = textureLod(uClass, (t + 0.5) / size, 0.0).rg * 255.0;
+  return vec2(floor(k.x + 0.5), floor(k.y + 0.5) * 0.5);
 }
 
 // The painted colour of each class, from sRGB.
@@ -808,7 +825,7 @@ vec4 boardOwnerEdge(vec4 cell, vec2 c, vec3 e, float px) {
   int other = int(boardCell(c + e.xy * 2.0 * HEX_INNER).g * 255.0 + 0.5);
   if (other == owner) return vec4(0.0);
   vec3 tint = uTints[0];
-  for (int i = 1; i < ${MAX_PLAYERS}; i++) if (i == owner - 1) tint = uTints[i];
+  for (int i = 1; i < ${TINTS}; i++) if (i == owner - 1) tint = uTints[i];
   return vec4(tint, 1.0 - smoothstep(px * 1.6, px * 3.4, e.z));
 }
 
@@ -844,7 +861,8 @@ vec3 boardEcef(vec2 lonLat, float h) {
 // terrain's own relief stands through the prisms. A vertex below sea level is
 // a tile's skirt, which hides cracks between tiles, and keeps its depth.
 const TILE_VERTEX = /* glsl */ `
-varying vec3 vBoardWorld;
+attribute vec2 boardLonLat;
+varying vec2 vBoardPoint;
 ${BOARD_COMMON}
 void boardFlatten(inout vec3 p) {
   if (uBoard < 0.5) return;
@@ -863,12 +881,11 @@ void boardFlatten(inout vec3 p) {
 // prisms dark (it shows only in the seams between them, as the board's grid),
 // unexplored ground darker still.
 const TILE_FRAGMENT = /* glsl */ `
-varying vec3 vBoardWorld;
+varying vec2 vBoardPoint;
 ${BOARD_COMMON}
 void boardShade(inout vec4 diffuse) {
   if (uBoard < 0.5) return;
-  vec3 w = vBoardWorld;
-  vec2 hp = vec2(degrees(atan(w.y, w.x)) * HEX_K, degrees(atan(w.z, length(w.xy) * (1.0 - WGS84_E2))));
+  vec2 hp = vBoardPoint;
   vec2 c = boardHex(hp);
   vec4 cell = boardCell(c);
   vec3 e = boardEdge(hp - c);
@@ -1036,11 +1053,11 @@ const PIECE_FRAGMENT = /* glsl */ `
 varying float vPart;
 varying float vPlayer;
 varying float vPaper;
-uniform vec3 uTints[${MAX_PLAYERS}];
+uniform vec3 uTints[${TINTS}];
 void boardPieceShade(inout vec4 diffuse) {
   int part = int(vPart + 0.5);
   vec3 tint = uTints[0];
-  for (int i = 1; i < ${MAX_PLAYERS}; i++) if (i == int(vPlayer + 0.5)) tint = uTints[i];
+  for (int i = 1; i < ${TINTS}; i++) if (i == int(vPlayer + 0.5)) tint = uTints[i];
   vec3 col = pow(vec3(0.80, 0.74, 0.62), vec3(2.2));
   if (part == 1) col = tint * 0.85;
   else if (part == 2) col = pow(vec3(0.40, 0.26, 0.14), vec3(2.2));

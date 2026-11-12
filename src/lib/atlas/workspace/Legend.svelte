@@ -19,7 +19,6 @@
     drift = false,
     families,
     territories = [],
-    diorama,
     folded = false,
   }: {
     marks: {
@@ -34,7 +33,6 @@
     families: readonly RelationshipFamily[]
     /** The territory snapshots the map is drawing at the playhead. */
     territories?: readonly SceneTerritory[]
-    diorama: string | null
     folded?: boolean
   } = $props()
 
@@ -94,7 +92,12 @@
   </button>
 
   {#if open}
-    <div class="flex flex-col gap-2 border-t border-rule px-3 pt-2 pb-3">
+    <div
+      class={[
+        "flex flex-col gap-2 border-t border-rule px-3 pt-2 pb-3",
+        folded && "max-h-[30dvh] overflow-y-auto",
+      ]}
+    >
       <ul class="flex flex-wrap gap-1.5">
         {#if marks.attested}<li><Badge kind="attested" text="attested site" /></li>{/if}
         {#if marks.identified}<li><Badge kind="identified" text="identified locality" /></li>{/if}
@@ -114,6 +117,10 @@
           {/each}
         </ul>
       {/if}
+      <p class="inline-flex items-center gap-1.5 text-caption text-ink-dim">
+        <span aria-hidden="true" class="h-3 w-3 rounded-full border border-gold bg-gold"></span>
+        the story's places, filled where it is at the playhead
+      </p>
       {#if territories.length > 0}
         <ul data-testid="legend-control" class="flex flex-col gap-1 text-caption text-ink-dim">
           {#each territories as territory (territory.id)}
@@ -136,7 +143,6 @@
         lines={journeys || drift || families.length > 0}
         anchors={marks.anchor}
         control={territories.length > 0}
-        {diorama}
       />
       <p class="text-caption text-ink-faint">
         Elevation: Terrain Tiles (Mapzen and contributors) · Land cover: ESA WorldCover · Imagery:

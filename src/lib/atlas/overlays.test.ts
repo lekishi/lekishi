@@ -7,12 +7,18 @@ import {
   layerOptions,
   relationshipFamily,
   sceneArcs,
-  sceneDioramas,
   sceneJourneys,
   sceneTerritories,
 } from "./overlays"
 import { buildScene } from "./scene"
-import { createAtlasState, selectEvent, selectPlace, setLayer, setPlayhead } from "./state"
+import {
+  createAtlasState,
+  selectEvent,
+  selectPlace,
+  setLayer,
+  setPlayhead,
+  setTimeWindow,
+} from "./state"
 
 const chapters = new Map<string, Chapter>()
 
@@ -58,10 +64,6 @@ describe("the overlay definitions", () => {
         for (const place of Object.values(ends)) {
           expect(places.get(place)?.position, place).not.toBeNull()
         }
-      }
-
-      for (const diorama of overlays.dioramas) {
-        expect(places.get(diorama.placeId)?.position, diorama.placeId).not.toBeNull()
       }
     }
   })
@@ -113,6 +115,10 @@ describe("journeys", () => {
       stop: 8,
       kind: "marker",
     })
+
+    const scene = buildScene(setPlayhead(createAtlasState(tang), tang, 754), tang)
+    const todaiji = at754.find((journey) => journey.id === voyage?.id)!.stops[8].position
+    expect(scene.board?.units).not.toContainEqual(expect.objectContaining(todaiji))
   })
 
   it("draws a drift as a drift, and never draws a leg to an unlocated place", () => {
@@ -144,6 +150,23 @@ describe("journeys", () => {
 
     expect(voyage?.selected).toBe(true)
     expect(voyage?.vessel).toEqual({ stop: 5, kind: "ship" })
+  })
+
+  it("retains an excluded selected stop in the journey but not the campaign board", () => {
+    const tang = chapter(TANG_CHAPTER)
+    const selected = selectEvent(createAtlasState(tang), tang, "lks:event:yaku-arrival-753")
+    const inside = buildScene(selected, tang)
+    const journey = inside.journeys.find(
+      (journey) => journey.id === "lks:journey:jianzhen-to-nara-753",
+    )!
+    const yaku = journey.stops[journey.vessel!.stop].position
+    expect(inside.board?.units).toContainEqual(expect.objectContaining({ ...yaku, kind: "ship" }))
+
+    const outside = buildScene(setTimeWindow(selected, tang, { start: 754, end: 754 }), tang)
+    expect(outside.selectionOutsideWindow).toBe(true)
+    expect(outside.journeys.find((item) => item.id === journey.id)?.vessel).toEqual(journey.vessel)
+    expect(outside.board?.units).not.toContainEqual(expect.objectContaining(yaku))
+    expect(outside.board?.lit).not.toContainEqual(expect.objectContaining(yaku))
   })
 
   it("hides journeys with the layer off unless the selection is on one", () => {
@@ -247,21 +270,6 @@ describe("places first", () => {
     expect(scene.places.filter((place) => place.selected).map((place) => place.id)).toEqual([
       "lks:place:akimeya",
     ])
-  })
-
-  it("sets the diorama at 秋妻屋浦's published position", () => {
-    const tang = chapter(TANG_CHAPTER)
-
-    expect(sceneDioramas(tang)).toEqual([
-      {
-        id: "akimeya",
-        placeId: "lks:place:akimeya",
-        url: "/dioramas/akimeya.json",
-        center: { lon: 130.2269, lat: 31.2672 },
-        showBelowMeters: 220_000,
-      },
-    ])
-    expect(sceneDioramas(chapter(QIN_CHAPTER))).toEqual([])
   })
 })
 

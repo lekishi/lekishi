@@ -66,7 +66,6 @@ const fake = vi.hoisted(() => {
     readonly flyTo = vi.fn()
     readonly setMarkers = vi.fn()
     readonly setOverlays = vi.fn()
-    readonly setDioramas = vi.fn()
     readonly setSafeArea = vi.fn()
     readonly setBoard = vi.fn()
     readonly markerAt = vi.fn((): string | null => null)
@@ -387,7 +386,7 @@ describe("the evidence grammar", () => {
     expect(markers.some((marker) => marker.count > 1)).toBe(true)
   })
 
-  it("passes journeys, arcs and dioramas to the view, as plain data", () => {
+  it("passes journeys, arcs and the board to the view, as plain data", () => {
     const { renderer, view } = mount()
     let state = selectEvent(createAtlasState(tang), tang, "lks:event:akimeya-landfall-753")
     state = setLayer(state, "diplomacy", true)
@@ -425,14 +424,7 @@ describe("the evidence grammar", () => {
     expect(overlays.arcs).toEqual(scene.arcs.map(arcFor))
     // Territory is drawn on the markers, never as a line or an area.
     expect(Object.keys(overlays).sort()).toEqual(["arcs", "journeys"])
-    expect(view.setDioramas).toHaveBeenLastCalledWith([
-      {
-        id: "akimeya",
-        url: "/dioramas/akimeya.json",
-        center: scene.dioramas[0].center,
-        showBelowMeters: 220_000,
-      },
-    ])
+    expect(view.setBoard).toHaveBeenLastCalledWith(scene.board)
   })
 
   it("captions an arc with its ends in the arc's direction", () => {
@@ -531,7 +523,7 @@ describe("dispose", () => {
 
     expect(view.setMarkers).not.toHaveBeenCalled()
     expect(view.setOverlays).not.toHaveBeenCalled()
-    expect(view.setDioramas).not.toHaveBeenCalled()
+    expect(view.setBoard).not.toHaveBeenCalled()
     expect(view.setSafeArea).not.toHaveBeenCalled()
     expect(view.setView).not.toHaveBeenCalled()
   })

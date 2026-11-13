@@ -29,4 +29,10 @@ export const DEV_PAGES: readonly DevPage[] = [
     description:
       "Prototype: the globe tilted like a strategy map, every chapter alive in 750–762 drawn at once.",
   },
+  {
+    slug: "timeline",
+    title: "Regions in time",
+    description:
+      "Prototype: every chapter in its region's row, time left to right, so the same years line up.",
+  },
 ]

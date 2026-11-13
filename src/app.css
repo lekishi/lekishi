@@ -131,6 +131,24 @@
   --color-control-8: #c4d39b;
 
   /*
+   * Region: one hue per row of the regions-in-time timeline
+   * (`src/lib/historical/regions.ts`), so a chapter keeps its region's colour
+   * on its bar, its row's edge and every card that lists it. A region is a
+   * place on the map, not a state, and its hue never marks control.
+   */
+  --color-region-east-asia: #5fb3a8;
+  --color-region-central-asia: #c9a25a;
+  --color-region-south-asia: #d6b35e;
+  --color-region-iran-anatolia: #c58fd1;
+  --color-region-mesopotamia-levant: #d58a7a;
+  --color-region-mediterranean: #9aa7d8;
+  --color-region-western-europe: #7fb2e0;
+  --color-region-nile: #e0a370;
+  --color-region-north-west-africa: #b8a27a;
+  --color-region-americas: #8fbf72;
+  --color-region-remote-oceania: #6fc2c9;
+
+  /*
    * Families. Every face is self-hosted from `/fonts/` and subset at build time
    * to the characters the site sets (`pnpm sync:fonts`, RFD 5 "Typography"),
    * so nothing is fetched from a font provider. A face carries only its own

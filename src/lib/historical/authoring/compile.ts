@@ -1,5 +1,6 @@
 import { encode, revisionHash, sha256, sourceHash } from "../contract/canonical"
 import { isList, isObject, type JsonObject, type JsonValue } from "../contract/types"
+import type { RegionKey } from "../regions"
 import { compileWindow } from "./dates"
 import { compileRecord, type Lookup, type RecordKind } from "./records"
 import type { AuthoringFile, AuthoringTree } from "./tree"
@@ -83,6 +84,12 @@ export type ChapterBundle = {
   readonly summary: string
   /** The window the chapter opens on, in astronomical year ordinals (233 BCE is -232). */
   readonly window: YearWindow
+  /**
+   * Where the chapter takes place, the timeline's row (`regions.ts`). Null only
+   * for a manifest from before regions, which `pnpm approvals` reads from
+   * history; the tree the site builds from requires one.
+   */
+  readonly region: RegionKey | null
   /** The chapter's stories, the one it opens on first. */
   readonly stories: readonly ChapterStory[]
   /** The digest of the chapter's content closure as it stands. */
@@ -713,6 +720,8 @@ export function compileChapter(
     title,
     summary: String(manifest.data["summary"]),
     window: yearWindow(compileWindow(manifest.data["window"])),
+    // The schema's enum has checked the key against `REGIONS` already.
+    region: (manifest.data["region"] ?? null) as RegionKey | null,
     stories: chapterStories,
     digest,
     approval,

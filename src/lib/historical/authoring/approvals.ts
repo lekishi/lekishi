@@ -196,6 +196,8 @@ function cardView(manifest: JsonObject | undefined, file: string): View {
       title: manifest?.["title"] ?? null,
       summary: manifest?.["summary"] ?? null,
       window: manifest?.["window"] ?? null,
+      // The timeline's row; a manifest from before regions shows none.
+      region: manifest?.["region"] ?? null,
     },
   }
 }
@@ -382,7 +384,7 @@ export function findBaseline(history: History, bundle: ChapterBundle): Baseline 
 
     if (commit !== undefined) {
       try {
-        const tree = buildTree(history.files(commit))
+        const tree = buildTree(history.files(commit), { history: true })
         const manifest = tree.chapters.get(id)
 
         if (manifest !== undefined) {

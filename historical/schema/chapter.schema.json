@@ -4,13 +4,29 @@
   "title": "Lekishi chapter manifest",
   "description": "historical/chapters/<id>.yaml: what a chapter is called, the window it opens on, its story, or its stories, as ordered lists of event and relationship ids, and the owner's approval. The approval pins a digest of the manifest and every record and source it reaches; `pnpm approvals` shows what changed since the last approval and prints the digest. The owner writes the approval; no one else does.",
   "type": "object",
-  "required": ["title", "summary", "window"],
+  "required": ["title", "summary", "window", "region"],
   "oneOf": [{ "required": ["story"] }, { "required": ["stories"] }],
   "additionalProperties": false,
   "properties": {
     "title": { "type": "string", "minLength": 1, "maxLength": 200 },
     "summary": { "$ref": "common.schema.json#/$defs/text" },
     "window": { "$ref": "common.schema.json#/$defs/span_value" },
+    "region": {
+      "description": "Where the chapter takes place, for the timeline's row: a geographic region, not a state, so it keeps its meaning while kingdoms rise and fall inside it. A chapter that crosses regions names the one its story centres on. Names and continents are in src/lib/historical/regions.ts.",
+      "enum": [
+        "east-asia",
+        "central-asia",
+        "south-asia",
+        "iran-anatolia",
+        "mesopotamia-levant",
+        "mediterranean",
+        "western-europe",
+        "nile",
+        "north-west-africa",
+        "americas",
+        "remote-oceania"
+      ]
+    },
     "story": {
       "description": "The chapter's story, when it has one. A chapter with several writes `stories` instead.",
       "type": "object",

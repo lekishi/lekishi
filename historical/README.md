@@ -39,7 +39,7 @@ historical/places/ actors/ events/ relationships/ territories/ journeys/
                        the file name is the id, subfolders (tang/, qin/) are tidiness
 historical/sources/    one YAML file per cited work or dataset, with its reuse terms
 historical/chapters/
-  tang-mission-750-754.yaml      a chapter manifest: card text, window, stories, approval
+  tang-mission-750-754.yaml      a chapter manifest: card text, window, region, stories, approval
   tang-mission-750-754.md        the chapter's scope, evidence and review notes
   qin-conquest-han-233-226.yaml  the bounded Qin chapter
   qin-conquest-han-233-226.md

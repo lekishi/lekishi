@@ -3,7 +3,6 @@ import { GlobeControls, WGS84_ELLIPSOID } from "3d-tiles-renderer/three"
 import type { GeoPoint } from "../../domain"
 import type { SceneBoard } from "../../scene"
 import type { BoardLayer } from "./board"
-import { DioramaLayer, type GlobeDiorama } from "./diorama"
 import { principalOffset, ViewThrottle, type Insets } from "./framing"
 import {
   MEAN_RADIUS_M,
@@ -24,7 +23,6 @@ import { GlobeTiles, type Tileset } from "./tiles"
 
 export type { GlobeMarker } from "./marks"
 export type { GlobeOverlays, GlobeJourney, GlobeArc } from "./line-layer"
-export type { GlobeDiorama } from "./diorama"
 
 /**
  * The custom globe's Three.js view: the WebGL canvas, the camera and its
@@ -39,8 +37,8 @@ export type { GlobeDiorama } from "./diorama"
  * pixels at every altitude, and every colour is a design-system token the
  * browser resolves. None of it takes the pointer, so a drag that starts on a
  * label still turns the globe (`markerAt` hit-tests markers for a click).
- * The diorama's symbols are the one atlas layer drawn in WebGL, because they
- * stand on the terrain.
+ * The board (`board.ts`) is the one atlas layer drawn in WebGL, because its
+ * hexes, towns and units stand on the terrain.
  *
  * The camera frames into the clear zone the workspace's chrome leaves
  * (`setSafeArea`): the projection's principal point moves to the clear zone's
@@ -71,8 +69,6 @@ export interface GlobeView {
   setMarkers(markers: readonly GlobeMarker[]): void
   /** Journeys and relationship arcs, drawn under the markers. */
   setOverlays(overlays: GlobeOverlays): void
-  /** The scene's dioramas; each is fetched the first time the camera is low over it. */
-  setDioramas(dioramas: readonly GlobeDiorama[]): void
   /** The scene's edges the chrome covers, in CSS pixels; flights frame into the rest. */
   setSafeArea(insets: Insets): void
   /** The strategy-map board, or null to hide it; ignored by a view made without one. */
@@ -93,9 +89,8 @@ export type GlobeViewOptions = {
   /** Where the camera looks, reported a few times a second at most and once when it settles. */
   readonly onViewChange?: (view: GlobeCameraView) => void
   /**
-   * Makes the strategy-map board drawn into the terrain (`/dev/world` only).
-   * A factory the page passes in, so the board's code ships only with it and
-   * never in the atlas's chunks.
+   * Makes the campaign board drawn into the terrain (`board.ts`), or nothing
+   * for a plain globe such as the home page's.
    */
   readonly board?: (onChange: () => void) => BoardLayer
 }
@@ -153,7 +148,6 @@ class ThreeGlobeView implements GlobeView {
   private tiles: GlobeTiles | null = null
   private markers = new Map<string, MarkerEntry>()
   private readonly lines: LineLayer
-  private readonly dioramas: DioramaLayer
   private safeArea: Insets = { top: 0, right: 0, bottom: 0, left: 0 }
   private readonly viewThrottle = new ViewThrottle(VIEW_REPORT_MS)
   private readonly onViewChange: ((view: GlobeCameraView) => void) | null
@@ -217,16 +211,6 @@ class ThreeGlobeView implements GlobeView {
     this.atmosphere = this.createAtmosphere()
     this.sky = this.createSky()
     this.scene.add(this.atmosphere, this.sky)
-    this.dioramas = new DioramaLayer({
-      scene: this.scene,
-      exaggeration: this.exaggeration,
-      signal: this.abort.signal,
-      compile: (object) => this.renderer.compileAsync(object, this.camera, this.scene),
-      onReady: () => {
-        this.dirty = true
-      },
-    })
-
     this.controls = new GlobeControls(this.globe, this.camera, this.canvas)
     this.controls.setEllipsoid(WGS84_ELLIPSOID, this.globe)
     this.controls.enableDamping = true
@@ -443,12 +427,6 @@ class ThreeGlobeView implements GlobeView {
     if (this.lines.set(overlays, this.heightAt)) {
       this.dirty = true
     }
-  }
-
-  setDioramas(dioramas: readonly GlobeDiorama[]): void {
-    if (this.disposed) return
-    this.dioramas.set(dioramas)
-    this.dirty = true
   }
 
   setBoard(board: SceneBoard | null): void {
@@ -825,7 +803,6 @@ class ThreeGlobeView implements GlobeView {
     this.camera.updateMatrixWorld()
     const moved = !this.camera.matrixWorld.equals(this.lastCamera)
     const tiles = this.tiles
-    const loading = tiles !== null && !tiles.settled
 
     // Reported before the idle check: the camera coming to rest is a frame
     // with nothing to draw, and it is the report the minimap needs most.
@@ -833,15 +810,15 @@ class ThreeGlobeView implements GlobeView {
       this.onViewChange(this.cameraView())
     }
 
-    if (!moved && !this.dirty && !loading) return
+    // A pending tile request does not change the image. Its arrival (or retry)
+    // invalidates the view through onChange; drawing while it waits needlessly
+    // blocks software WebGL and the reader's input on the same frame.
+    if (!moved && !this.dirty) return
 
     this.lastCamera.copy(this.camera.matrixWorld)
     this.dirty = false
     this.updateAtmosphere()
     this.updateLight()
-    const p = this.camera.position
-    const under = fromEcef(p.x, p.y, p.z)
-    this.dioramas.update(under.height - this.heightAt(under.lon, under.lat), under)
     tiles?.update(this.camera, this.container.clientHeight || 1)
     this.renderer.render(this.scene, this.camera)
     this.placeOverlay()
@@ -872,7 +849,6 @@ class ThreeGlobeView implements GlobeView {
     this.atmosphere.material.dispose()
     this.sky.geometry.dispose()
     this.sky.material.dispose()
-    this.dioramas.dispose()
     this.lines.dispose()
     this.markers.clear()
     this.renderer.dispose()

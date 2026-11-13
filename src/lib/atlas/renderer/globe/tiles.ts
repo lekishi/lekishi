@@ -4,6 +4,7 @@ import { childrenBundlePath, ROOT_BUNDLE_PATH } from "./bundle"
 import { toEcef } from "./geo"
 import {
   BORDERED,
+  EDGE,
   GRID,
   LEVEL0_ERROR_M,
   TILE_INDEX,
@@ -188,7 +189,7 @@ export type GlobeTilesOptions = {
   readonly memoryBudgetMB: number
   /** Called when tiles arrive, so the view knows to draw a frame. */
   readonly onChange: () => void
-  /** The strategy-map board, patched into every tile material (`/dev/world` only). */
+  /** The campaign board, patched into every tile material; none for a plain globe. */
   readonly board?: BoardLayer
 }
 
@@ -662,6 +663,24 @@ export class GlobeTiles {
     geometry.setAttribute("position", new THREE.BufferAttribute(g.positions, 3))
     geometry.setAttribute("normal", new THREE.BufferAttribute(g.normals, 3, true))
     geometry.setAttribute("uv", new THREE.BufferAttribute(g.uvs, 2))
+    if (this.options.board) {
+      // Geographic coordinates already belong to the regular tile grid. Pass
+      // them through the rasterizer instead of recovering them from ECEF with
+      // two atan calls for every screen pixel. Skirts keep their edge's point.
+      const coordinates = new Float32Array((GRID * GRID + EDGE.length) * 2)
+      const { w, s, e, n } = tile.bounds
+      for (let r = 0; r < GRID; r++) {
+        for (let c = 0; c < GRID; c++) {
+          const i = r * GRID + c
+          coordinates[i * 2] = w + ((e - w) * c) / (GRID - 1)
+          coordinates[i * 2 + 1] = n - ((n - s) * r) / (GRID - 1)
+        }
+      }
+      EDGE.forEach((i, k) => {
+        coordinates.copyWithin((GRID * GRID + k) * 2, i * 2, i * 2 + 2)
+      })
+      geometry.setAttribute("boardLonLat", new THREE.BufferAttribute(coordinates, 2))
+    }
     geometry.setIndex(new THREE.BufferAttribute(TILE_INDEX.slice(), 1))
     geometry.boundingSphere = tile.sphere.clone()
     geometry.boundingSphere.center.sub(new THREE.Vector3(...g.center))
@@ -680,6 +699,7 @@ export class GlobeTiles {
       g.positions.byteLength +
       g.normals.byteLength +
       g.uvs.byteLength +
+      (geometry.getAttribute("boardLonLat")?.array.byteLength ?? 0) +
       TILE_INDEX.byteLength +
       (tile.virtual ? 0 : TEXTURE_BYTES)
   }

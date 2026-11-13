@@ -42,6 +42,7 @@
   import EventDial from "./EventDial.svelte"
   import ExploreList, { type ExploreTab } from "./ExploreList.svelte"
   import Globe from "./Globe.svelte"
+  import { CAMPAIGN_BOARD } from "../renderer/globe-renderer"
   import LayerOrbs from "./LayerOrbs.svelte"
   import Legend from "./Legend.svelte"
   import Minimap from "./Minimap.svelte"
@@ -236,17 +237,6 @@
   const families = $derived(
     RELATIONSHIP_FAMILIES.filter((family) => scene.arcs.some((arc) => arc.family === family)),
   )
-  const dioramaInView = $derived.by(() => {
-    if (view === null) return null
-    const camera = view
-    const shown = scene.dioramas.find(
-      (diorama) =>
-        camera.heightMeters < diorama.showBelowMeters &&
-        Math.abs(camera.center.lat - diorama.center.lat) < 1.5 &&
-        Math.abs(camera.center.lon - diorama.center.lon) < 1.5,
-    )
-    return shown ? (atlas.findPlace(chapter, shown.placeId)?.label ?? null) : null
-  })
   const storyPosition = $derived(
     atlasState.storyStep === null ? null : `${atlasState.storyStep + 1} of ${chapter.story.length}`,
   )
@@ -731,7 +721,6 @@
     drift={scene.journeys.some((journey) => journey.legs.some((leg) => leg.drift))}
     {families}
     territories={scene.territories}
-    diorama={dioramaInView}
     {folded}
   />
 {/snippet}
@@ -782,6 +771,7 @@
     onManualCameraInput={() => (atlasState = atlas.noteManualCameraInput(atlasState))}
     onViewChange={(next) => (view = next)}
     onError={(error) => (rendererError = error.message)}
+    options={CAMPAIGN_BOARD}
   />
 
   {#if rendererError}

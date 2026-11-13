@@ -246,10 +246,6 @@ export function worldTurn(
   const scoped = <T extends { readonly id: string }>(chapterId: string, items: readonly T[]) =>
     items.map((item) => ({ ...item, id: `${chapterId}/${item.id}` }))
 
-  const dioramas = new Map(
-    scenes.flatMap(({ scene }) => scene.dioramas).map((diorama) => [diorama.id, diorama]),
-  )
-
   // A chapter's events this turn: those whose own date range holds the year.
   // An event the source dates only as "751–762" holds every one of those
   // years, which is what the source says; nothing narrows it here.
@@ -409,7 +405,6 @@ export function worldTurn(
         : scenes.flatMap(({ chapter, scene }) => scoped(chapter.id, scene.journeys)),
     arcs: scenes.flatMap(({ chapter, scene }) => scoped(chapter.id, scene.arcs)),
     territories: scenes.flatMap(({ scene }) => scene.territories),
-    dioramas: [...dioramas.values()],
     selectedEventId: null,
     selectedPlaceId: null,
     selectionOutsideWindow: false,

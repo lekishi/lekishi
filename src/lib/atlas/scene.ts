@@ -7,12 +7,11 @@ import type {
   Occurrence,
 } from "./domain"
 import {
+  CONTROL_TINTS,
   sceneArcs,
-  sceneDioramas,
   sceneJourneys,
   sceneTerritories,
   type SceneArc,
-  type SceneDiorama,
   type SceneJourney,
   type SceneTerritory,
 } from "./overlays"
@@ -99,10 +98,10 @@ export type ScenePlace = {
     readonly disputed: boolean
   } | null
   /**
-   * The `/dev/world` prototype's city banner: the tint of the player (a
-   * chapter alive in the turn) whose story is at the place, whether its story
-   * is there this turn, and the glyph of a unit standing there. The atlas
-   * never sets it.
+   * The place's city banner on the campaign board: its tint (the controller's
+   * where a drawn snapshot holds the place, otherwise the story's), whether a
+   * story is there at the playhead, and the glyph of a unit standing there.
+   * `/dev/world` tints it by the chapter whose story is there.
    */
   readonly banner?: {
     readonly tint: number
@@ -128,9 +127,10 @@ export type SafeArea = {
 export const NO_INSETS: SafeArea = { top: 0, right: 0, bottom: 0, left: 0 }
 
 /**
- * The strategy-map board's reach (the `/dev/world` prototype only; the atlas
- * never sets it): the places chapters alive now name, each with the index of
- * its chapter among the turn's players, and the places earlier chapters named.
+ * The campaign board the globe is drawn as (the owner's decision of
+ * 2026-11-12, `rfd/0003/CAMPAIGN_BOARD.adoc`): the hexes lit where a story is
+ * at the playhead, each with its player's tint, and the places the story has
+ * already passed, drawn as remembered paper. Everywhere else is dark.
  */
 export type SceneBoard = {
   readonly lit: readonly { readonly lon: number; readonly lat: number; readonly player: number }[]
@@ -167,7 +167,6 @@ export type AtlasScene = {
   readonly journeys: readonly SceneJourney[]
   readonly arcs: readonly SceneArc[]
   readonly territories: readonly SceneTerritory[]
-  readonly dioramas: readonly SceneDiorama[]
   readonly selectedEventId: string | null
   readonly selectedPlaceId: string | null
   readonly selectionOutsideWindow: boolean
@@ -180,6 +179,65 @@ export type AtlasScene = {
   readonly safeArea: SafeArea
   /** The board to draw over the terrain, when the renderer was made with one. */
   readonly board?: SceneBoard | null
+}
+
+/**
+ * The board's tint for a chapter's own story: the design system's gold, one
+ * past the controllers' tints (`CONTROL_TINTS`), so no controller wears it. A
+ * place a drawn snapshot records held keeps its controller's tint instead, so
+ * the legend's "held by" colours stay true.
+ */
+export const STORY_TINT = CONTROL_TINTS
+
+/**
+ * The window at the playhead as the campaign board. The light follows the
+ * story, as a strategy game's fog follows its units: a hex is lit where an
+ * event stands (or may stand) at the playhead or a journey's vessel stands, a
+ * town stands wherever the window's story has reached by the playhead, and
+ * the hexes of the window's places whose events are over are remembered. Like
+ * the markers, the board draws the window's events only. An event the source
+ * dates only within a range reaches its place when the whole range has
+ * passed, never on the earliest year it might have happened. Towns and units
+ * are symbols of the story's presence, never a claim about a settlement's
+ * size or a force.
+ */
+function sceneBoard(
+  state: AtlasState,
+  events: readonly SceneEvent[],
+  places: readonly ScenePlace[],
+  journeys: readonly SceneJourney[],
+): SceneBoard {
+  const playhead = Math.round(state.playhead)
+  const at = (place: ScenePlace) => ({
+    lon: place.position.lon,
+    lat: place.position.lat,
+    player: STORY_TINT,
+  })
+  const lit = places.filter((place) => place.playback !== "inactive").map(at)
+  const reached = new Set<string>()
+  const remembered: GeoPoint[] = []
+  for (const { placement, occurrence } of events) {
+    if (placement.kind !== "point") continue
+    const arrives =
+      occurrence.mode === "occurrence_window" ? occurrence.endYear : occurrence.startYear
+    if (arrives <= playhead) reached.add(placement.placeId)
+    if (occurrence.endYear < playhead) remembered.push(placement.position)
+  }
+  const cities = places
+    .filter((place) => place.eventCount > 0 && reached.has(place.id))
+    .map((place) => ({ ...at(place), active: place.playback === "active" }))
+  const eventIds = new Set(events.map((event) => event.id))
+  const units = journeys.flatMap((journey) => {
+    // A selected journey can retain an excluded stop in its schematic overlay,
+    // but cannot light the board outside the window or invent an unstated mode.
+    if (journey.vessel === null || journey.vessel.kind === "marker") return []
+    const { position, eventId } = journey.stops[journey.vessel.stop]
+    if (!eventIds.has(eventId)) return []
+    const kind = journey.vessel.kind
+    lit.push({ lon: position.lon, lat: position.lat, player: STORY_TINT })
+    return [{ lon: position.lon, lat: position.lat, player: STORY_TINT, kind }]
+  })
+  return { lit, remembered, cities, units }
 }
 
 /** The map position of a placement, or null when the atlas must not draw one. */
@@ -307,6 +365,11 @@ function scenePlaces(
         disputed: here.some((event) => event.dispute !== null),
         tradition: here.some((event) => event.tradition),
         control: control.get(place.id) ?? null,
+        banner: {
+          tint: control.get(place.id)?.tint ?? STORY_TINT,
+          active: here.some((event) => event.playback === "active"),
+          unit: null,
+        },
       },
     ]
   })
@@ -347,6 +410,8 @@ export function buildScene(
   )
 
   const territories = sceneTerritories(state, chapter)
+  const places = scenePlaces(state, chapter, events, territories)
+  const journeys = sceneJourneys(state, chapter)
 
   return {
     chapterId: chapter.id,
@@ -355,11 +420,10 @@ export function buildScene(
     playhead: state.playhead,
     playing: state.playing,
     events,
-    places: scenePlaces(state, chapter, events, territories),
-    journeys: sceneJourneys(state, chapter),
+    places,
+    journeys,
     arcs: sceneArcs(state, chapter),
     territories,
-    dioramas: sceneDioramas(chapter),
     selectedEventId: state.selectedEventId,
     selectedPlaceId: state.selectedPlaceId,
     selectionOutsideWindow: selectionTimeStatus(state, chapter) === "outside-window",
@@ -371,6 +435,7 @@ export function buildScene(
     cameraTarget:
       state.cameraFocus === null ? null : focusTarget(chapter, state.cameraFocus.recordId),
     safeArea,
+    board: sceneBoard(state, events, places, journeys),
   }
 }
 

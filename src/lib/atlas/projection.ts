@@ -488,13 +488,12 @@ function projectView(
       story: storySteps,
       publication,
       // The overlays this story can draw: a journey with two of its stops in
-      // the story, and a diorama of one of its places.
+      // the story.
       overlays: {
         ...overlays,
         journeys: overlays.journeys.filter(
           (journey) => journey.stops.filter((stop) => eventIds.has(stop.eventId)).length >= 2,
         ),
-        dioramas: overlays.dioramas.filter((diorama) => places.has(diorama.placeId)),
       },
     },
   }

@@ -140,4 +140,20 @@ describe("place labels", () => {
 
     expect(disputed.control).toContain("var(--color-control-2)_50%")
   })
+
+  it("keeps the controller's disc under a city banner, and the story's banner in gold", () => {
+    const banner = { tint: 1, active: true, unit: null }
+    const held = markerLook(
+      marker({ control: { tint: 1, seat: true, disputed: true }, banner: { ...banner, tint: 1 } }),
+    )
+    const story = markerLook(marker({ banner: { ...banner, tint: 8 } }))
+
+    // A banner over a disputed seat still says so: the split disc, ringed.
+    expect(held.control).toContain("var(--color-control-2)_50%")
+    expect(classes(held.control)).toContain("border-double")
+    expect(held.controlSize).toBeGreaterThan(held.size)
+    // The story's own places wear the gold, which no controller wears.
+    expect(classes(story.label)).toContain("bg-gold")
+    expect(story.control).toBeNull()
+  })
 })

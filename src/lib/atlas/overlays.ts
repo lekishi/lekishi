@@ -5,7 +5,7 @@ import { overlapsWindow } from "./time"
 
 /**
  * What the map draws besides places: journeys through dated stops, relationship
- * arcs, territory snapshots and dioramas (RFD 1, "Show, then qualify").
+ * arcs and territory snapshots (RFD 1, "Show, then qualify").
  *
  * A line on the map is a presentation of published records. This module says
  * what each kind of line means and draws them:
@@ -151,23 +151,12 @@ export function curatedJourney(journey: CuratedJourney): JourneyDefinition {
   }
 }
 
-export type DioramaDefinition = {
-  readonly id: string
-  /** The place the diorama is set at; it is drawn only near that place. */
-  readonly placeId: string
-  /** The precomputed symbols, served from `static/`. */
-  readonly url: string
-  /** The camera height below which the symbols appear. */
-  readonly showBelowMeters: number
-}
-
 export type ChapterOverlays = {
   readonly journeys: readonly JourneyDefinition[]
   /** The published place an actor's arc ends at. */
   readonly actorAnchors: Readonly<Record<string, string>>
   /** Per relationship, a place for an end that is a person, where the record names one. */
   readonly endAnchors: Readonly<Record<string, { readonly from?: string; readonly to?: string }>>
-  readonly dioramas: readonly DioramaDefinition[]
 }
 
 /** One stop of a journey as the map draws it. */
@@ -249,14 +238,6 @@ export type SceneTerritory = {
   /** The snapshot carries a dispute, so its marks are drawn disputed. */
   readonly disputed: boolean
   readonly places: readonly SceneTerritoryPlace[]
-}
-
-export type SceneDiorama = {
-  readonly id: string
-  readonly placeId: string
-  readonly url: string
-  readonly center: GeoPoint
-  readonly showBelowMeters: number
 }
 
 function eventById(chapter: Chapter): Map<string, HistoricalEvent> {
@@ -511,26 +492,6 @@ export function sceneTerritories(state: AtlasState, chapter: Chapter): SceneTerr
       }
     }),
   }))
-}
-
-export function sceneDioramas(chapter: Chapter): SceneDiorama[] {
-  const places = placeById(chapter)
-
-  return chapter.overlays.dioramas.flatMap((diorama) => {
-    const position = places.get(diorama.placeId)?.position
-
-    return position
-      ? [
-          {
-            id: diorama.id,
-            placeId: diorama.placeId,
-            url: diorama.url,
-            center: position,
-            showBelowMeters: diorama.showBelowMeters,
-          },
-        ]
-      : []
-  })
 }
 
 /** An orb the chapter offers, and whether it has anything to draw. */

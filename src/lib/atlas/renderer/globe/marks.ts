@@ -51,7 +51,7 @@ export type GlobeMarker = {
     readonly seat: boolean
     readonly disputed: boolean
   } | null
-  /** The `/dev/world` prototype's city banner (`ScenePlace.banner`), or null. */
+  /** The place's city banner on the campaign board (`ScenePlace.banner`), or null. */
   readonly banner?: {
     readonly tint: number
     /** A player's story is at the place this turn: the banner is filled in its tint. */
@@ -84,7 +84,7 @@ export type MarkerLook = {
   readonly control: string | null
   /** The control disc's diameter, in pixels. */
   readonly controlSize: number
-  /** A unit's medal standing on the place (the prototype's banner), or null. */
+  /** A unit's medal standing on the place (a banner's), or null. */
   readonly unit: string | null
   readonly unitSize: number
   /** The medal's gap above the point, in pixels; 0 centres it on the point. */
@@ -114,7 +114,7 @@ const CONTROL_SPLIT = [
   "bg-[linear-gradient(90deg,var(--color-control-8)_50%,transparent_50%)] border-control-8",
 ]
 
-// The prototype's city banners, as a strategy game draws a city's: a plate
+// The campaign board's city banners, as a strategy game draws a city's: a plate
 // over the place in the player's tint, filled where its story is this turn and
 // lacquer edged in the tint where it was before. On it, left to right: the
 // event count in a chip (the game's population), the name, and the place's
@@ -131,6 +131,8 @@ const BANNER_FILL = [
   "bg-control-6",
   "bg-control-7",
   "bg-control-8",
+  // The chapter's own story (`STORY_TINT`), outside the controllers' palette.
+  "bg-gold",
 ]
 const BANNER_EDGE = [
   "border-control-1",
@@ -141,6 +143,7 @@ const BANNER_EDGE = [
   "border-control-6",
   "border-control-7",
   "border-control-8",
+  "border-gold",
 ]
 const BANNER_CHIP = [
   "before:bg-control-1",
@@ -151,6 +154,7 @@ const BANNER_CHIP = [
   "before:bg-control-6",
   "before:bg-control-7",
   "before:bg-control-8",
+  "before:bg-gold",
 ]
 const BANNER_PLATE =
   "absolute flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-control border py-0.5 pr-2 pl-0.5 font-serif text-body-sm shadow-plate"
@@ -204,7 +208,10 @@ function bannerLook(
     mark: [SHAPE, "rounded-full border-2 border-abyss", BANNER_FILL[tint]].join(" "),
     core: null,
     pulse: null,
-    control: null,
+    // The controller's disc stays under the banner's dot: it is the map's one
+    // cue that a source records the place held, a seat, or a disputed holding.
+    control: base.control,
+    controlSize: base.controlSize,
     count: null,
     label: [
       BANNER_PLATE,

@@ -19,6 +19,7 @@ const renderer = vi.hoisted(() => ({ sync: vi.fn(), dispose: vi.fn() }))
 
 vi.mock("./renderer/globe-renderer", () => ({
   createGlobeAtlasRenderer: () => renderer,
+  CAMPAIGN_BOARD: {},
 }))
 
 const TANG = await loadServedChapter(TANG_CHAPTER)

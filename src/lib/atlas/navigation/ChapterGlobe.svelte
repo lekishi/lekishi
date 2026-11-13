@@ -88,7 +88,6 @@
     journeys: [],
     arcs: [],
     territories: [],
-    dioramas: [],
     selectedEventId: null,
     selectedPlaceId: null,
     selectionOutsideWindow: false,

@@ -4,7 +4,7 @@
  * and what ships").
  *
  * - `virtual:lekishi-chapters` lists every manifest (id, title, summary, window,
- *   stories, approval state) and loads a served chapter's bundle lazily.
+ *   region, stories, approval state) and loads a served chapter's bundle lazily.
  * - `virtual:lekishi-chapters/<id>` is one chapter's v0 documents and set, which
  *   Vite emits as one chunk: content costs one deployed file per chapter however
  *   many records it has.
@@ -175,6 +175,7 @@ export function historicalChapters({ drafts = false } = {}) {
           title: bundle.title,
           summary: bundle.summary,
           window: bundle.window,
+          region: bundle.region,
           stories: bundle.stories,
           state: bundle.state,
           served: false,
@@ -200,6 +201,7 @@ export function historicalChapters({ drafts = false } = {}) {
           title: bundle.title,
           summary: bundle.summary,
           window: bundle.window,
+          region: bundle.region,
           stories: bundle.stories,
           state: bundle.state,
           served: served(bundle),

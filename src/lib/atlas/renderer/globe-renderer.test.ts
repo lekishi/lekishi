@@ -68,6 +68,7 @@ const fake = vi.hoisted(() => {
     readonly setOverlays = vi.fn()
     readonly setDioramas = vi.fn()
     readonly setSafeArea = vi.fn()
+    readonly setBoard = vi.fn()
     readonly markerAt = vi.fn((): string | null => null)
     readonly resize = vi.fn()
     readonly dispose = vi.fn()
@@ -263,7 +264,7 @@ describe("sync", () => {
     renderer.sync(scene)
 
     expect(view.setView).toHaveBeenCalledTimes(1)
-    expect(view.setView).toHaveBeenCalledWith({ lon: 128.5, lat: 32.5 }, 9_000_000)
+    expect(view.setView).toHaveBeenCalledWith({ lon: 128.5, lat: 32.5 }, 9_000_000, -90)
     // The map draws places, each once, however many events stand at it; a
     // list-only event stays in the scene and adds no marker, because the map
     // must not invent the position it does not have.
@@ -481,7 +482,7 @@ describe("framing", () => {
     renderer.sync(buildScene(returnHome(home), chapter))
 
     expect(view.flyTo).toHaveBeenCalledTimes(1)
-    expect(view.flyTo).toHaveBeenCalledWith(chapter.homeView, 9_000_000, 1_200)
+    expect(view.flyTo).toHaveBeenCalledWith(chapter.homeView, 9_000_000, 1_200, -90)
   })
 
   it("reports where the camera looks, and stops after disposal", () => {

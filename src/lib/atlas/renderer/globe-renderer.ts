@@ -7,6 +7,7 @@ import {
   type GlobeJourney,
   type GlobeMarker,
   type GlobeView,
+  type GlobeViewOptions,
 } from "./globe/view"
 import type { AtlasRenderer, AtlasRendererCallbacks } from "./types"
 
@@ -50,6 +51,17 @@ export type GlobeRendererOptions = {
   homeHeightMeters?: number
   /** Where the globe's tiles are served, ending in `/`. */
   tilesUrl?: string
+  /**
+   * The camera's pitch below the horizon for the home view and every flight.
+   * The atlas looks straight down (-90); the `/dev/world` prototype tilts it
+   * toward the horizon to judge a strategy-map view of the same globe.
+   */
+  pitchDeg?: number
+  /**
+   * Makes the scene's strategy-map board (`/dev/world` only): the page passes
+   * `(onChange) => new BoardLayer(onChange)`, so the atlas never bundles it.
+   */
+  board?: GlobeViewOptions["board"]
 }
 
 /**
@@ -76,6 +88,7 @@ export function markerFor(place: ScenePlace): GlobeMarker {
       place.control === null
         ? null
         : { tint: place.control.tint, seat: place.control.seat, disputed: place.control.disputed },
+    banner: place.banner ?? null,
   }
 }
 
@@ -116,7 +129,7 @@ class GlobeAtlasRenderer implements AtlasRenderer {
   private readonly view: GlobeView
   private readonly canvas: HTMLCanvasElement
   private readonly callbacks: AtlasRendererCallbacks
-  private readonly options: Required<Omit<GlobeRendererOptions, "tilesUrl">>
+  private readonly options: Required<Omit<GlobeRendererOptions, "tilesUrl" | "board">>
   private readonly resizeObserver: ResizeObserver | null
   private readonly amplifiedWheelEvents = new WeakSet<WheelEvent>()
   /** Where the current press started, while it may still be a drag. */
@@ -222,9 +235,11 @@ class GlobeAtlasRenderer implements AtlasRenderer {
     this.options = {
       focusHeightMeters: options.focusHeightMeters ?? FOCUS_HEIGHT_METERS,
       homeHeightMeters: options.homeHeightMeters ?? HOME_HEIGHT_METERS,
+      pitchDeg: options.pitchDeg ?? -90,
     }
     this.view = createGlobeView(container, {
       tilesUrl: options.tilesUrl ?? "/globe/",
+      board: options.board,
       onViewChange: (view) => {
         if (!this.disposed) this.callbacks.onViewChange?.(view)
       },
@@ -262,12 +277,17 @@ class GlobeAtlasRenderer implements AtlasRenderer {
     if (!this.homeApplied) {
       this.homeApplied = true
       this.lastHomeToken = scene.homeToken
-      this.view.setView(scene.homeView, this.options.homeHeightMeters)
+      this.view.setView(scene.homeView, this.options.homeHeightMeters, this.options.pitchDeg)
     } else if (scene.homeToken !== this.lastHomeToken) {
       // The reader asked for the chapter's opening view again: one flight per
       // request, never on the first sync (which already placed the camera).
       this.lastHomeToken = scene.homeToken
-      this.view.flyTo(scene.homeView, this.options.homeHeightMeters, FLIGHT_MS)
+      this.view.flyTo(
+        scene.homeView,
+        this.options.homeHeightMeters,
+        FLIGHT_MS,
+        this.options.pitchDeg,
+      )
     }
 
     this.view.setMarkers(scene.places.map(markerFor))
@@ -276,6 +296,7 @@ class GlobeAtlasRenderer implements AtlasRenderer {
       arcs: scene.arcs.map(arcFor),
     })
     this.view.setDioramas(scene.dioramas.map(dioramaFor))
+    this.view.setBoard(scene.board ?? null)
 
     // Apply each camera request exactly once; the token is bumped by the state
     // reducer whenever a new flight is wanted, including on resume.
@@ -285,7 +306,12 @@ class GlobeAtlasRenderer implements AtlasRenderer {
       scene.cameraFocus.token !== this.lastFocusToken
     ) {
       this.lastFocusToken = scene.cameraFocus.token
-      this.view.flyTo(scene.cameraTarget, this.options.focusHeightMeters, FLIGHT_MS)
+      this.view.flyTo(
+        scene.cameraTarget,
+        this.options.focusHeightMeters,
+        FLIGHT_MS,
+        this.options.pitchDeg,
+      )
     }
   }
 

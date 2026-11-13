@@ -98,6 +98,18 @@ export type ScenePlace = {
     readonly seat: boolean
     readonly disputed: boolean
   } | null
+  /**
+   * The `/dev/world` prototype's city banner: the tint of the player (a
+   * chapter alive in the turn) whose story is at the place, whether its story
+   * is there this turn, and the glyph of a unit standing there. The atlas
+   * never sets it.
+   */
+  readonly banner?: {
+    readonly tint: number
+    /** A player's story is at the place this turn: the banner is filled in its tint. */
+    readonly active: boolean
+    readonly unit: string | null
+  } | null
 }
 
 /**
@@ -114,6 +126,34 @@ export type SafeArea = {
 }
 
 export const NO_INSETS: SafeArea = { top: 0, right: 0, bottom: 0, left: 0 }
+
+/**
+ * The strategy-map board's reach (the `/dev/world` prototype only; the atlas
+ * never sets it): the places chapters alive now name, each with the index of
+ * its chapter among the turn's players, and the places earlier chapters named.
+ */
+export type SceneBoard = {
+  readonly lit: readonly { readonly lon: number; readonly lat: number; readonly player: number }[]
+  readonly remembered: readonly GeoPoint[]
+  /**
+   * The board's pieces: a city on each place a player's story has reached
+   * (larger where its story is this turn), and each player's unit, a ship or a
+   * travelling party, where it stands. Symbols of the story's presence, never
+   * a claim about a settlement's size or a force's strength.
+   */
+  readonly cities?: readonly {
+    readonly lon: number
+    readonly lat: number
+    readonly player: number
+    readonly active: boolean
+  }[]
+  readonly units?: readonly {
+    readonly lon: number
+    readonly lat: number
+    readonly player: number
+    readonly kind: "ship" | "party"
+  }[]
+}
 
 export type AtlasScene = {
   readonly chapterId: string
@@ -138,6 +178,8 @@ export type AtlasScene = {
   /** Where the focus request flies to, or null when there is no flight to make. */
   readonly cameraTarget: GeoPoint | null
   readonly safeArea: SafeArea
+  /** The board to draw over the terrain, when the renderer was made with one. */
+  readonly board?: SceneBoard | null
 }
 
 /** The map position of a placement, or null when the atlas must not draw one. */

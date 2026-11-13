@@ -23,4 +23,10 @@ export const DEV_PAGES: readonly DevPage[] = [
     description:
       "The atlas on about 700 unreviewed Wikidata items dated before 100 CE, for stress tests. Not content.",
   },
+  {
+    slug: "world",
+    title: "The world as a turn",
+    description:
+      "Prototype: the globe tilted like a strategy map, every chapter alive in 750–762 drawn at once.",
+  },
 ]

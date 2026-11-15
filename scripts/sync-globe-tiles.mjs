@@ -14,10 +14,11 @@
  * leaves the tiles in place, so a dev-server start or a rebuild does not
  * repaint them. A changed builder repaints them all.
  *
- * Cloudflare Pages cannot cache arbitrary paths. Its SvelteKit build cache does
- * preserve `node_modules/.cache/imagetools`, so Pages builds keep a stamped copy
- * there and restore it before applying the same freshness check. Other builds
- * never read or write that bridge.
+ * Cloudflare Pages cannot cache arbitrary paths. Its pnpm dependency cache
+ * preserves `~/.pnpm-store`, so Pages builds keep a stamped copy there and
+ * restore it before applying the same freshness check. This does not depend
+ * on Pages detecting SvelteKit for build-output caching. Other builds never
+ * read or write that bridge.
  *
  * The builder needs Python 3 with numpy and Pillow. When the system Python
  * lacks them (system Pythons may refuse global installs), a private virtual
@@ -39,6 +40,7 @@ import {
   statSync,
   writeFileSync,
 } from "node:fs"
+import { homedir } from "node:os"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 
@@ -47,10 +49,10 @@ const builderDirectory = path.join(repoRoot, "scripts", "globe")
 const builder = path.join(builderDirectory, "build-tiles.py")
 const destination = path.join(repoRoot, "static", "globe")
 const cache = path.join(repoRoot, ".cache", "globe")
-// Pages has no custom cache-path setting, but its SvelteKit cache preserves
-// `node_modules/.cache/imagetools`. Keep our generated output in a namespaced
-// child so Git-connected builds can restore it without owning imagetools' data.
-const pagesCache = path.join(repoRoot, "node_modules", ".cache", "imagetools", "lekishi-globe")
+// Pages' pnpm store lives under ~/.pnpm-store (v11/ with pnpm 12). Keep a
+// sibling namespace so pnpm owns its versioned store and Pages can cache both,
+// even when it reports framework build-output caching as unsupported.
+const pagesCache = path.join(homedir(), ".pnpm-store", "lekishi-globe")
 const pagesDestination = path.join(pagesCache, "tiles")
 
 // Retire the generated runtime in already-used checkouts before SvelteKit
@@ -99,7 +101,7 @@ function cacheForPages() {
   cpSync(destination, pagesDestination, { recursive: true })
   // Write the stamp last: an interrupted copy must never look restorable.
   writeFileSync(pagesStampFile, stamp)
-  console.log("globe tiles saved in the Cloudflare Pages build cache")
+  console.log("globe tiles prepared for the Cloudflare Pages dependency cache")
 }
 
 if (

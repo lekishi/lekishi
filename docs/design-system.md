@@ -53,6 +53,7 @@ All colours are tokens; use them as utilities (`bg-lacquer`, `text-ink-dim`,
 | Evidence      | `evidence-attested`, `-identified`, `-schematic`, `-overland`, `-reconstructed` | RFD 1's visual forms. Shared by the map and the interface.        |
 | Relationships | `rel-transmission`, `-diplomacy`, `-conflict`, `-trade`, `-institution`         | Relationship arcs and their legend.                               |
 | Control       | `control-1` to `control-8`                                                      | A territory controller's disc under a held place, and its legend. |
+| Region        | `region-<key>`, one per key in `$lib/historical/regions`                        | A timeline row's edge, its bars, and the cards that list them.    |
 
 Contrast is measured against `lacquer`, and `/dev/design` prints each figure from
 the stylesheet's own values. Keep body text at AA (4.5:1) or better. `ink-faint`

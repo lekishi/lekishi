@@ -874,6 +874,43 @@ lack of an approval at all.
 * An approval must still be well formed: dated, not before the record files
   existed or after today, and naming who approved it.
 
+== Decided: a chapter's region — 2026-11-13
+
+The owner asked on 2026-11-13 for every manifest to name where its chapter
+takes place, so the regions-in-time timeline (design review T1, prototyped at
+`/dev/timeline`) reads its rows from the content rather than from a list kept
+in the page.
+
+[source,yaml]
+----
+window: 483 BCE..479 BCE
+region: mediterranean
+----
+
+* *A required field from a closed list.* `region` is one of eleven keys in
+  `historical/schema/chapter.schema.json`. Their names, the continent each
+  belongs to and the order the timeline draws them in are in
+  `src/lib/historical/regions.ts`, and a test keeps the two lists equal. The
+  keys are the rows of the T1 mock the owner picked.
+* *Geographic, not political.* The owner noted that a split by continent alone
+  is too coarse for Eurasia, where many kingdoms and empires stand side by
+  side. A region is a part of a continent (East Asia, Central Asia & the
+  steppe, Mesopotamia & the Levant …) rather than a state, so it keeps its
+  meaning across three thousand years while states rise and fall inside it,
+  and no row has to be renamed or split when a dynasty changes.
+* *One region per chapter.* A chapter that crosses regions, such as
+  Alexander's campaigns or 杜環's journey, names the one its story centres on.
+  Its threads to other chapters, through shared places and people, show the
+  rest.
+* *Presentation, not evidence.* Like the title and window, the region is how
+  the site files the chapter; it claims nothing about the past, so it carries
+  no citation.
+* *Covered by the approval.* The region is part of the manifest, so it is part
+  of the digest an approval pins. Adding it makes every approval stale until
+  the owner approves the chapters again; until then production leaves them
+  out, as <<Decided: a missing approval never fails a build — 2026-10-21>>
+  says.
+
 == Alternatives
 
 Chapter folders with a shared catalog for places, actors, and sources only::

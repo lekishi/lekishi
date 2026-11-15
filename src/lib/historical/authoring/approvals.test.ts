@@ -143,6 +143,53 @@ describe("pnpm approvals", { timeout: 30_000 }, () => {
     expect(changes[0]?.fields.map((field) => field.field)).toEqual(["content.summary"])
   })
 
+  it("recovers an approval of a manifest written before regions, and shows the region added", () => {
+    // The approved commit's manifest names no region, as every manifest did
+    // before 2026-11-13; today's schema requires one, but history is read as
+    // it was written, so it compiles to the digest it was approved at.
+    const before = edit(files(), MANIFEST, (text) => text.replace(/^region: .*\n/m, ""))
+    const then = compileChapter(buildTree(before, { history: true }), TANG).digest
+    const now = approved(files(), then)
+    const bundle = compiled(now)
+    const baseline = findBaseline(
+      history(
+        { newer: now, approved: approved(before, then), "approved^": before },
+        { [`historical/${MANIFEST}`]: ["approved"] },
+      ),
+      bundle,
+    )
+
+    expect(() => buildTree(before)).toThrow(/required: region/)
+    expect(bundle.state).toBe("stale")
+    expect(baseline.kind).toBe("approval")
+
+    if (baseline.kind !== "approval") {
+      return
+    }
+
+    const changes = compareViews(baseline.views, chapterViews(buildTree(now), bundle))
+
+    expect(changes.map((change) => [change.label, change.status])).toEqual([
+      ["the chapter card", "changed"],
+    ])
+    expect(changes[0]?.fields.map((field) => field.field)).toEqual(["region"])
+  })
+
+  it("shows a region-only edit as a change to the chapter card", () => {
+    const now = edit(files(), MANIFEST, (text) =>
+      text.replace(/^region: .*$/m, "region: mediterranean"),
+    )
+    const bundle = compiled(now)
+    const changes = compareViews(
+      chapterViews(buildTree(files()), compiled(files())),
+      chapterViews(buildTree(now), bundle),
+    )
+
+    expect(bundle.digest).not.toBe(digest)
+    expect(changes.map((change) => change.label)).toEqual(["the chapter card"])
+    expect(changes[0]?.fields.map((field) => field.field)).toEqual(["region"])
+  })
+
   it("finds a removed approval in the manifest's history", () => {
     const bundle = compiled(files())
     const baseline = findBaseline(

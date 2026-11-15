@@ -175,6 +175,7 @@ date:
         text: `title: An invalid synthetic chapter
 summary: A synthetic chapter used only to exercise the all-chapter gate.
 window: 750
+region: east-asia
 story:
   summary: The invalid synthetic chapter.
   span: 750

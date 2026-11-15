@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url"
 import { parse } from "yaml"
 import { validate } from "../contract/json-schema"
 import { isObject, type JsonObject } from "../contract/types"
+import { REGIONS } from "../regions"
 import { RECORD_KINDS, type RecordKind } from "./records"
 
 /**
@@ -100,19 +101,19 @@ type ReadFile = { readonly data: JsonObject } | { readonly problems: readonly st
  */
 const readCache = new Map<string, ReadFile>()
 
-function readKey(kind: FileKind, text: string): string {
-  return `${kind}\n${text}`
+function readKey(kind: FileKind, text: string, history = false): string {
+  return `${kind}${history && kind === "chapter" ? " (history)" : ""}\n${text}`
 }
 
-function readFile(kind: FileKind, text: string): ReadFile {
-  const key = readKey(kind, text)
+function readFile(kind: FileKind, text: string, history = false): ReadFile {
+  const key = readKey(kind, text, history)
   const cached = readCache.get(key)
 
   if (cached !== undefined) {
     return cached
   }
 
-  const read = parseFile(kind, text)
+  const read = parseFile(kind, text, history)
   readCache.set(key, read)
 
   return read
@@ -145,7 +146,7 @@ export function seedReadCache(entries: readonly ReadEntry[]): void {
   }
 }
 
-function parseFile(kind: FileKind, text: string): ReadFile {
+function parseFile(kind: FileKind, text: string, history: boolean): ReadFile {
   let data: unknown
 
   try {
@@ -158,7 +159,14 @@ function parseFile(kind: FileKind, text: string): ReadFile {
     return { problems: ["a record file is a YAML mapping"] }
   }
 
-  const validation = validate(schemaFile(kind), data)
+  // A manifest from before 2026-11-13 names no region, which every manifest
+  // must now. Read from history, it is checked as though it named one, and
+  // kept exactly as written, so it compiles to the digest it was approved at.
+  const checked =
+    history && kind === "chapter" && !("region" in data)
+      ? { ...data, region: REGIONS[0].key }
+      : data
+  const validation = validate(schemaFile(kind), checked)
 
   if (!validation.ok) {
     return {
@@ -183,8 +191,18 @@ function deepFreeze<T>(value: T): T {
   return value
 }
 
-/** Collects the tree's files, failing with every problem at once. */
-export function buildTree(files: readonly TreeFile[]): AuthoringTree {
+/**
+ * Collects the tree's files, failing with every problem at once.
+ *
+ * `history` reads a tree an earlier commit held, for `pnpm approvals` to
+ * recover the content an approval pinned: it accepts what the format required
+ * then and does not require since (a manifest without `region`). Anything
+ * that builds what the site serves reads the tree strictly.
+ */
+export function buildTree(
+  files: readonly TreeFile[],
+  { history = false }: { history?: boolean } = {},
+): AuthoringTree {
   const errors: string[] = []
   const byKind = new Map<FileKind, Map<string, AuthoringFile>>()
 
@@ -204,7 +222,7 @@ export function buildTree(files: readonly TreeFile[]): AuthoringTree {
       continue
     }
 
-    const read = readFile(kind, file.text)
+    const read = readFile(kind, file.text, history)
 
     if ("problems" in read) {
       errors.push(...read.problems.map((problem) => `${file.path}: ${problem}`))

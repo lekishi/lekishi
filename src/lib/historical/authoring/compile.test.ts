@@ -116,6 +116,7 @@ function manifest(extra = ""): string {
 title: An example chapter
 summary: A chapter that exists only to test the compiler.
 window: 750..754
+region: east-asia
 story:
   summary: The example story.
   span: 750..779
@@ -385,6 +386,7 @@ describe("compiling a chapter", () => {
       "lks:source:example-chronicle",
     ])
     expect(bundle.window).toEqual({ start: 750, end: 754 })
+    expect(bundle.region).toBe("east-asia")
 
     const story = record(bundle.documents, "lks:story:example-chapter")
 
@@ -398,6 +400,18 @@ describe("compiling a chapter", () => {
         { record_id: "lks:event:example-landing", role: "start", caption: "The envoy lands" },
       ],
     })
+  })
+
+  it("refuses a region outside the vocabulary, and a manifest without one", () => {
+    const named = (region: string) =>
+      buildTree(
+        files({
+          "chapters/example-chapter.yaml": manifest().replace("region: east-asia", region),
+        }),
+      )
+
+    expect(() => named("region: china")).toThrow(/chapters\/example-chapter\.yaml/)
+    expect(() => named("")).toThrow(/region/)
   })
 
   it("generates revisions from content alone", () => {
@@ -450,6 +464,7 @@ describe("compiling a chapter with several stories", () => {
 title: An example chapter
 summary: A chapter that exists only to test the compiler.
 window: 750..754
+region: east-asia
 stories:
   - key: example-chapter
     title: The landing
@@ -557,7 +572,7 @@ stories:
   })
 
   it("refuses a manifest that writes both one story and several", () => {
-    expect(() => compiled(`${manifest()}\n${STORIES.split("\n").slice(4).join("\n")}`)).toThrow(
+    expect(() => compiled(`${manifest()}\n${STORIES.split("\n").slice(5).join("\n")}`)).toThrow(
       /chapters\/example-chapter.yaml: \/ oneOf/,
     )
   })
@@ -1131,6 +1146,7 @@ describe("the journeys in the record tree", () => {
           "title: Journey check",
           "summary: Compiles one journey.",
           "window: 1..2",
+          "region: east-asia",
           `include: [journey:${id.slice("lks:journey:".length)}]`,
           "story:",
           "  summary: Every stop of the journey.",

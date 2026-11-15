@@ -735,8 +735,9 @@
             {/each}
           {/each}
 
+          <!-- Threads stay behind chapter bars and labels, including same-row arches. -->
           <svg
-            class="pointer-events-none absolute top-0 left-0 z-(--z-markers) overflow-visible"
+            class="pointer-events-none absolute top-0 left-0 z-(--z-scene) overflow-visible"
             width={layout.width}
             height={layout.height}
             aria-hidden="true"

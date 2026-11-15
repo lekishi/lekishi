@@ -4,10 +4,6 @@
 allowBuilds:
   esbuild: true
   workerd: true
-# Keep the dependency graph in a single YAML document for Pages' framework
-# cache detection. The toolchain still selects pnpm via package.json in CI
-# and Pages; pnpm itself must not prepend its version as a boot document.
-pmOnFail: ignore
 # pnpm 12 gates a newly published package until it has been available for a
 # while. The two packages below are pinned in package.json and were newer than
 # that window when the lockfile was created, so they are excluded explicitly;

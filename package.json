@@ -11,7 +11,7 @@
     "sync:globe": "node scripts/sync-globe-tiles.mjs",
     "sync:fonts": "node scripts/sync-fonts.mjs",
     "dev": "node scripts/sync-globe-tiles.mjs && node scripts/sync-fonts.mjs && vite dev",
-    "build": "node scripts/check-chapter.mjs && node scripts/sync-globe-tiles.mjs && node scripts/sync-fonts.mjs && node scripts/build-app.mjs && node scripts/check-static-build.mjs && node spikes/renderer/globe/preview-build.mjs",
+    "build": "node scripts/check-chapter.mjs && node scripts/sync-globe-tiles.mjs && node scripts/sync-fonts.mjs && node scripts/build-app.mjs && node scripts/check-static-build.mjs",
     "preview": "node scripts/serve-static.mjs --directory build",
     "approvals": "node scripts/approvals.mjs",
     "check:worker": "node scripts/check-worker.mjs",

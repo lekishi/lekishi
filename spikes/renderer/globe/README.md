@@ -80,17 +80,15 @@ Query parameters:
 - `?quality=phone` to start in the lighter tier (half the trees, no shadows),
   for example `?bench=24&quality=phone` to bench a phone in both tiers.
 
-On any device, from the PR's Cloudflare Pages preview: preview builds (never
-`main`) run `preview-build.mjs` at the end of `pnpm build`, which generates the
-heights and imagery with `build-tiles.py` and copies the page in, so it
-is served at
+Cloudflare Pages no longer builds or serves this experiment. The preview
+packaging step was retired on 2026-11-15: in the
+[2026-11-13 preview build](https://dash.cloudflare.com/?to=/cc0422ff4283cbbdb5cd37be36454489/pages/view/lekishi/428e0a80-2ccb-4b65-862b-664fcb63993f),
+it ran from 10:04:00 to 10:08:05 UTC after the atlas's static invariant had
+already passed, adding about 4 minutes for a second, obsolete tileset. This
+supersedes the preview-device instructions in the historical renderer spike
+record; the local harness and its recorded evidence remain available.
 
-    https://<branch>.lekishi.pages.dev/spikes/renderer/globe/followup/
-    https://<branch>.lekishi.pages.dev/spikes/renderer/globe/followup/?bench=24
-
-`LEKISHI_SPIKE_PREVIEW=1 pnpm build` does the same locally.
-
-Real devices on the same network, without the preview:
+Real devices on the same network can still open the local harness:
 
     HOST=0.0.0.0 node spikes/renderer/serve.mjs              # listens on the LAN
     open http://<this machine's address>:4300/spikes/renderer/globe/followup/?bench=24

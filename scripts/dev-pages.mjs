@@ -8,9 +8,8 @@
  * One answer, read by the build wrapper (which removes their route directory
  * before a production build), the Vite config (which compiles their lazy code
  * in or out) and the build invariant (which checks the artifact agrees). It
- * mirrors the globe spike's preview gate in
- * `spikes/renderer/globe/preview-build.mjs`: a Cloudflare Pages build of any
- * branch but `main`, or an explicit opt-in.
+ * enables a Cloudflare Pages build of any branch but `main`, or an explicit
+ * opt-in, independently of the retired renderer spike.
  *
  * @param {{ command?: "serve" | "build"; env?: NodeJS.ProcessEnv }} [options]
  * @returns {boolean}

@@ -186,10 +186,10 @@ The site is deployed from the `main` branch at <https://lekishi.pages.dev>.
 only, and excludes every prerendered page by name, so a reader's request is a
 file and never a worker invocation.
 
-Preview builds (any branch but `main`) also run
-`spikes/renderer/globe/preview-build.mjs`, which adds the renderer spike's
-custom globe under `/spikes/` for testing on devices; it generates that page's
-tiles from open data during the build. Production builds skip it.
+Preview builds (any branch but `main`) include the `/dev` pages and draft
+chapters, but not the retired renderer spike under `/spikes/`. Both preview
+and production builds generate only the atlas's current globe tiles. To run
+the old experiment locally, see [the spike's instructions](spikes/renderer/globe/README.md).
 
 Cloudflare Pages resolves `/atlas` to `atlas.html` with its default clean-URL
 behavior. `_redirects` (at the repository root, where the adapter reads it)

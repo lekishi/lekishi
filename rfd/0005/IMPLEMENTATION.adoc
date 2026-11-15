@@ -55,6 +55,22 @@ so the two checklists do not double-count.
 - [x] Home: search first, chapters on the globe and the time ribbon, "Continue where you left off" from browser storage; the not-found page keeps search and the chapter list (2026-10-14, `page.test.ts`).
 - [ ] Browser checks: a linked event opens its card, Back after a search jump returns to the origin, and search is reachable by keyboard alone (RC4).
 
+== Information architecture reset (link:IA_RESET.adoc[the record])
+
+- [x] Audit at 39 chapters, walked locally on `main` at 27f5ac3 (2026-10-23, https://claude.ai/artifact/W6pm9RST4rodcNu7VjXN8a[the audit]).
+- [x] Owner's diagnosis recorded: no exploration, chapters on their own organised page with vertical time, relationships not visible, the scene not in the civilization register (2026-10-23).
+- [x] Mock screens from the served records: the world at a moment, chapters as culture columns, the Tang chapter as a guided tour on painted relief, a place across chapters (2026-11-04, https://claude.ai/artifact/L8j7dDL6A6Pakc6uRemJfE[the mock]).
+- [ ] Owner judges the mock and answers the record's three choices.
+- [ ] Shared-record index in the compiler: ids, names, chapters and years for the places and actors two or more chapters reference.
+- [ ] A `region` (culture) per chapter in the manifest or derived from its sources.
+- [ ] The world page at `/`: globe with a year, era strip, chapters alive at the year with their threads.
+- [ ] The chapters page at `/chapters`: culture columns, region and kind filters, deep time folded, cross-column links on hover.
+- [ ] Place and people pages for shared records; search opens them for a shared place.
+- [ ] "Threads through this chapter" on the chapter card.
+- [ ] Tour mode as the default play: camera, date, card and hold per step; scrubber speed scaled to the window.
+- [ ] Painted relief from the cached Terrarium tiles as the globe's base imagery and the 2D fallback at every scale (RFD 1's relief basemap item, RFD 3's pipeline).
+- [ ] The ten audit defects fixed (the record's table).
+
 == Atlas compositions (each also an RFD 1 item)
 
 - [x] `DateBar` and `AboutSheet` (2026-10-14).

@@ -15,7 +15,6 @@
   } from "$lib/ui"
   import {
     TURN_ERA,
-    glyphOf,
     worldTurn,
     type ChapterReach,
     type NamedPlaces,
@@ -38,7 +37,15 @@
     chapters,
     named,
     reach,
-  }: { chapters: Chapter[]; named: NamedPlaces; reach: ChapterReach[] } = $props()
+    banners,
+    defaultHome,
+  }: {
+    chapters: Chapter[]
+    named: NamedPlaces
+    reach: ChapterReach[]
+    banners: Readonly<Record<string, { glyph: string; icon: IconName }>>
+    defaultHome: string | null
+  } = $props()
 
   // A player's colour is its controller token, in the order the board's
   // shader reads them (`board.ts`); literal class names so Tailwind generates
@@ -54,17 +61,6 @@
     "bg-control-8",
   ]
 
-  // The unit each player moves; the glyph is the banner's (`glyphOf`).
-  const ICONS: Record<string, IconName> = {
-    "tang-mission-750-754": "ship",
-    "du-huan-751-762": "party",
-    "stephen-ii-journey-753-754": "party",
-  }
-  const banner = (id: string) => ({
-    glyph: glyphOf({ id, title: chapters.find((chapter) => chapter.id === id)?.title ?? "" }),
-    icon: ICONS[id] ?? ("list" as const),
-  })
-
   const PITCH = { tilted: -32, overhead: -90 } as const
   const HEIGHT = {
     tilted: { home: 1_500_000, focus: 800_000 },
@@ -75,7 +71,7 @@
   let year = $state(753)
   let pitch = $state<Pitch>("tilted")
   let focus = $state<{ target: GeoPoint; token: number } | null>(null)
-  let homeId = $state("tang-mission-750-754")
+  let homeId = $state<string | null>(null)
   let selectedEventId = $state<string | null>(null)
   let safeArea = $state({ top: 0, right: 0, bottom: 0, left: 0 })
   let ready = $state(false)
@@ -105,7 +101,8 @@
       safeArea,
       focus,
       named,
-      home: homeId,
+      banners,
+      home: homeId ?? defaultHome,
       reach: board ? reach : undefined,
       journeys,
       selectedPlaceId: shownPlaceId,
@@ -125,7 +122,7 @@
   // The followed player: the one the reader chose, or the first alive when
   // that chapter has ended (the Tang embassy after 754).
   const player = $derived(
-    turn.players.find((p) => p.chapterId === homeId) ?? turn.players.at(0) ?? null,
+    turn.players.find((p) => p.chapterId === (homeId ?? defaultHome)) ?? turn.players.at(0) ?? null,
   )
   // This turn's events across every player, as the notifications list them.
   const happenings = $derived(
@@ -169,7 +166,9 @@
     const url = new URL(window.location.href)
     url.searchParams.set("year", String(year))
     url.searchParams.set("pitch", pitch)
-    url.searchParams.set("chapter", homeId)
+    const chapter = homeId ?? defaultHome
+    if (chapter === null) url.searchParams.delete("chapter")
+    else url.searchParams.set("chapter", chapter)
     for (const [key, on] of [
       ["board", board],
       ["journeys", journeys],
@@ -246,7 +245,7 @@
       size,
       text,
     ]}
-    aria-hidden="true">{banner(id).glyph}</span
+    aria-hidden="true">{banners[id].glyph}</span
   >
 {/snippet}
 
@@ -488,7 +487,7 @@
       {@render medal(player.chapterId, "size-12 lg:size-14", "text-title lg:text-title")}
       <div class="flex min-w-0 flex-col">
         <p class="flex items-center gap-1.5 text-label font-semibold uppercase text-gold">
-          <Icon name={banner(player.chapterId).icon} size={14} />
+          <Icon name={banners[player.chapterId].icon} size={14} />
           <span class="truncate"
             >{player.unit.moving ? "Unit at" : "Last at"} {player.unit.label}</span
           >

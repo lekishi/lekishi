@@ -67,21 +67,6 @@ export function namedPlaces(stories: readonly (readonly Chapter[])[]): NamedPlac
   )
 }
 
-/**
- * Each player's banner glyph: a character from its own account, hand-picked
- * for the prototype's three chapters; any other chapter takes its title's
- * first character.
- */
-const GLYPHS: Readonly<Record<string, string>> = {
-  "tang-mission-750-754": "鑒",
-  "du-huan-751-762": "杜",
-  "stephen-ii-journey-753-754": "S",
-}
-
-export function glyphOf(chapter: Pick<Chapter, "id" | "title">): string {
-  return GLYPHS[chapter.id] ?? chapter.title.at(0) ?? "?"
-}
-
 export function aliveIn(chapter: Chapter, year: number): boolean {
   return chapter.defaultWindow.start <= year && year <= chapter.defaultWindow.end
 }
@@ -134,6 +119,8 @@ export type WorldTurn = {
 export type WorldTurnOptions = {
   /** Places named across all stories; without it, only each opening story's places count. */
   readonly named?: NamedPlaces
+  /** Banner glyphs for the served chapters, shared by the UI and the globe. */
+  readonly banners?: Readonly<Record<string, { readonly glyph: string }>>
   /** Every chapter's reach; with it, the turn's scene carries the board. */
   readonly reach?: readonly ChapterReach[]
   /** Leave the journeys out of the scene (the journeys lens off). */
@@ -307,7 +294,10 @@ export function worldTurn(
       banner: {
         tint,
         active: active.has(id) || standing >= 0,
-        unit: standing >= 0 ? glyphOf(alive[standing]) : null,
+        unit:
+          standing >= 0
+            ? (options.banners?.[alive[standing].id]?.glyph ?? alive[standing].title.at(0) ?? "?")
+            : null,
       },
     })
   }

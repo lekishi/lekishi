@@ -14,7 +14,7 @@
 
 <main aria-label="World campaign board">
   {#if data.chapters.length > 0}
-    <WorldTurn chapters={data.chapters} named={data.named} reach={data.reach} />
+    <WorldTurn {...data} />
   {:else}
     <div class="bg-abyss p-6 text-ink">
       <a href="/">Lekishi home</a>

@@ -1,6 +1,14 @@
 import type { Chapter } from "$lib/atlas/domain"
 import type { ChapterReach, NamedPlaces } from "$lib/dev/world-turn"
 
+// Editorial choices for the board. Only entries for served chapters are serialized.
+const BANNERS: Readonly<Record<string, { glyph: string; icon: "ship" | "party" }>> = {
+  "tang-mission-750-754": { glyph: "鑒", icon: "ship" },
+  "du-huan-751-762": { glyph: "杜", icon: "party" },
+  "stephen-ii-journey-753-754": { glyph: "S", icon: "party" },
+}
+const PREFERRED_HOME = "tang-mission-750-754"
+
 /**
  * The public campaign board uses only the build's served catalog.
  *
@@ -12,6 +20,8 @@ export async function load(): Promise<{
   chapters: Chapter[]
   named: NamedPlaces
   reach: ChapterReach[]
+  banners: Record<string, { glyph: string; icon: "ship" | "party" | "list" }>
+  defaultHome: string | null
 }> {
   const [{ SERVED_CHAPTERS }, { loadServedStories }, { TURN_ERA, namedPlaces }] = await Promise.all(
     [
@@ -42,5 +52,17 @@ export async function load(): Promise<{
     return { id: views[0].id, window: views[0].defaultWindow, places: [...seen.values()] }
   })
 
-  return { chapters: stories.map((views) => views[0]), named: namedPlaces(stories), reach }
+  const chapters = stories.map((views) => views[0])
+  return {
+    chapters,
+    named: namedPlaces(stories),
+    reach,
+    banners: Object.fromEntries(
+      chapters.map(({ id, title }) => [
+        id,
+        BANNERS[id] ?? { glyph: title.at(0) ?? "?", icon: "list" },
+      ]),
+    ),
+    defaultHome: chapters.some(({ id }) => id === PREFERRED_HOME) ? PREFERRED_HOME : null,
+  }
 }

@@ -174,7 +174,6 @@
   const chipHalfWidth = $derived(measure(yearLabel(guide), `600 12px ${sans}`) / 2 + 10)
 
   function showTickLabel(tickX: number, label: string) {
-    if (!phone) return true
     // Keep the tick mark, but don't print a clipped year or one under the read-year chip.
     const left = tickX + 5
     const right = left + Math.ceil(measure(label, `12px ${sans}`)) + 2

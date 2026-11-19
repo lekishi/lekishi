@@ -37,8 +37,11 @@ function isPosition(value: unknown): value is Position {
   return (
     typeof candidate.chapterId === "string" &&
     typeof candidate.search === "string" &&
+    (candidate.search === "" || candidate.search.startsWith("?")) &&
     typeof candidate.label === "string" &&
-    typeof candidate.at === "number"
+    typeof candidate.at === "number" &&
+    Number.isFinite(candidate.at) &&
+    candidate.at >= 0
   )
 }
 
@@ -90,6 +93,14 @@ export function chapterPosition(chapterId: string): Position | null {
 export function lastPosition(): Position | null {
   const stored = read()
   return stored.last === null ? null : (stored.chapters[stored.last] ?? null)
+}
+
+/** The last recorded position first (even if the device clock went backwards), then by timestamp. */
+export function recentPositions(): Position[] {
+  const { chapters, last } = read()
+  return Object.values(chapters).sort(
+    (a, b) => Number(b.chapterId === last) - Number(a.chapterId === last) || b.at - a.at,
+  )
 }
 
 /** Forgets every position. */

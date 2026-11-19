@@ -168,6 +168,22 @@
   // The year the guide stands on: the selected chapter's start, else the read year.
   const guide = $derived(selected !== null ? (byId.get(selected)?.window.start ?? year) : year)
   const guideLeft = $derived(Math.max(labelW, X(guide)))
+  const axisLeft = $derived(scrollLeft + labelW)
+  const axisRight = $derived(scrollLeft + clientWidth)
+  const chipLeft = $derived(Math.max(axisLeft + 40, Math.min(axisRight - 40, X(guide))))
+  const chipHalfWidth = $derived(measure(yearLabel(guide), `600 12px ${sans}`) / 2 + 10)
+
+  function showTickLabel(tickX: number, label: string) {
+    if (!phone) return true
+    // Keep the tick mark, but don't print a clipped year or one under the read-year chip.
+    const left = tickX + 5
+    const right = left + Math.ceil(measure(label, `12px ${sans}`)) + 2
+    return (
+      left >= axisLeft &&
+      right <= axisRight &&
+      (query.trim() !== "" || right <= chipLeft - chipHalfWidth || left >= chipLeft + chipHalfWidth)
+    )
+  }
 
   const paths = $derived.by(() => {
     const from = selected === null ? undefined : layout?.pos.get(selected)
@@ -502,7 +518,7 @@
       <Button href="/world" variant="ghost" size="sm" icon="globe">Open the world</Button>
     {/if}
     <div
-      class="flex gap-1.5 max-sm:order-3 max-sm:w-full max-sm:overflow-x-auto max-sm:[scrollbar-width:none]"
+      class="flex gap-1.5 max-sm:w-full max-sm:overflow-x-auto max-sm:[scrollbar-width:none]"
       role="group"
       aria-label="Jump to an era"
     >
@@ -522,7 +538,7 @@
         >
       {/each}
     </div>
-    <div class="ml-auto flex items-center gap-2">
+    <div class="ml-auto flex items-center gap-2 max-sm:ml-0">
       <!-- The address initializes the filter; don't accept input before then. -->
       <fieldset disabled={!ready} class="min-w-0">
         <Field
@@ -575,11 +591,13 @@
                   "pointer-events-none absolute top-0 h-7.5 border-l border-rule pt-1.5 pl-1 text-caption whitespace-nowrap tabular-nums",
                   tick.major ? "text-ink-dim" : "text-ink-faint",
                 ]}
-                style="left: {X(tick.year)}px">{tick.label}</span
+                style="left: {X(tick.year)}px"
               >
+                {#if showTickLabel(X(tick.year), tick.label)}{tick.label}{/if}
+              </span>
             {/each}
             <div
-              class="sticky left-0 flex h-7.5 cursor-default items-center border-r border-rule bg-abyss px-3"
+              class="sticky left-0 flex h-7.5 cursor-default items-center border-r border-rule bg-abyss px-3 max-sm:px-0"
               style="width: {labelW}px"
             >
               {#if !phone}<span class="text-label font-semibold uppercase text-gold">Region</span
@@ -588,10 +606,7 @@
             {#if query.trim() === ""}
               <span
                 class="pointer-events-none absolute top-1 -translate-x-1/2 rounded-control bg-gold px-2 py-0.5 text-caption font-semibold whitespace-nowrap text-on-gold tabular-nums shadow-plate"
-                style="left: {Math.max(
-                  scrollLeft + labelW + 40,
-                  Math.min(scrollLeft + clientWidth - 40, X(guide)),
-                )}px">{yearLabel(guide)}</span
+                style="left: {chipLeft}px">{yearLabel(guide)}</span
               >
             {/if}
           </div>

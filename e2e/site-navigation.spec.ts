@@ -12,6 +12,12 @@ test("the Time door separates chart filtering from site search", async ({ page }
     "page",
   )
 
+  const openingEra = (page.viewportSize()?.width ?? 1440) < 640 ? "800–200 BCE" : "All time"
+  await expect(page.getByRole("button", { name: openingEra, exact: true })).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  )
+
   const filter = page.getByRole("searchbox", { name: /Filter \d+ chapters/ })
   await filter.fill("753")
   await expect(page).toHaveURL(/\bq=753\b/)
@@ -43,4 +49,17 @@ test("Time opens World at the selected turn only when the board covers it", asyn
   await page.goto("/time?year=-1299")
   await expect(page.getByRole("slider", { name: "Year" })).toHaveAttribute("aria-valuenow", "-1299")
   await expect(page.getByRole("link", { name: "Open the world" })).toHaveAttribute("href", "/world")
+})
+
+test("About links to the three ways in and the full map attribution", async ({ page }) => {
+  await page.goto("/about")
+  const about = page.getByRole("main")
+  await expect(about.getByRole("link", { name: /^Time/ })).toHaveAttribute("href", "/time")
+  await expect(about.getByRole("link", { name: /^World/ })).toHaveAttribute("href", "/world")
+  await expect(about.getByRole("link", { name: /^Places/ })).toHaveAttribute("href", "/places")
+  await expect(about.getByRole("heading", { name: "On this device" })).toBeVisible()
+  await expect(about.getByRole("link", { name: "Full attribution" })).toHaveAttribute(
+    "href",
+    "/globe/ATTRIBUTION.txt",
+  )
 })

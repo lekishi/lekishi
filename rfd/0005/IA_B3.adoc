@@ -80,17 +80,27 @@ separate, as described in link:../0006/README.adoc[RFD 6].
 == Open decisions
 
 * *Home stills:* whether Continue and World carry still images.
-* *Place regions:* whether to adopt the nine sketched regions and boundaries
-  as drawn, and if so whether to store them as records or derive them. Chapter
-  manifest regions are unaffected.
-* *Places map:* the approved mock used a flat tile map. The implementation
-  uses the globe board, which foreshortens the ends of the visible band. The
-  choice is between the globe framed close and overhead (recommended by
-  design review) and a flat projection, which would require a second renderer.
 * *Workspace navigation:* design review recommends four doors on World above
   its own controls, with the phone dial clear of the bottom bar, and leaving
   chapter chrome as shipped. Alternatively, both workspaces keep their own
   chrome. The mock used shipped workspace captures and does not settle this.
+
+[[places-map-and-regions]]
+== Places keeps the overhead globe and derives its regions
+
+On 2026-11-19, after seeing comparisons at 1440, 820 and 390 px, the owner
+https://ampcode.com/threads/T-01a1f573-12e3-73fd-a5d8-26a4372ed81c#M-0350VBLfDKhPxCpMhdKQzg[decided]:
+"Keep the overhead globe and derive place regions from the tile boundaries."
+The globe foreshortens the edges; the alternative flat tile projection would
+need a second renderer.
+
+Classify each board hex by its centre against the nine polygons in
+`src/lib/places/region-boundaries.json`, first drawn in the B3 design review.
+Draw borders along edges where adjacent hexes differ. A positioned place
+inherits its hex's classification, so the rail and the map agree. Place
+records carry no region field. Home still groups chapters by their manifest
+regions: The Americas and Remote Oceania remain chapter regions, not drawn
+Places regions.
 
 [[captures]]
 == Design captures

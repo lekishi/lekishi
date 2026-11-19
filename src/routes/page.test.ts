@@ -1,164 +1,173 @@
 // @vitest-environment jsdom
-import { afterEach, describe, expect, it } from "vitest"
-import { mount, unmount } from "svelte"
-import { CHAPTERS, chapterPresentation } from "../lib/atlas/chapters"
-import { CHAPTER_MANIFESTS, QIN_CHAPTER } from "../lib/atlas/chapter-registry"
-import { windowLabel } from "../lib/atlas/labels"
-import { chapterRelease } from "../lib/atlas/release"
+import { afterEach, expect, test, vi } from "vitest"
+import { mount, tick, unmount } from "svelte"
+import type { HomeChapter } from "$lib/atlas/home"
+import { rememberPosition } from "$lib/atlas/memory"
 import Home from "./+page.svelte"
 
-/**
- * The root page's copy contract.
- *
- * The page presents the chapters as peers: each card carries the chapter's name,
- * its window, a story summary, an entry, and — in small print — its recorded
- * editorial decision. These tests pin that shape, and they pin what must not come
- * back: review-category labels, the contract and comparison-harness vocabulary
- * the page's readers do not share, and any wording that would make a chapter read
- * as released when its ledger row does not record an approval.
- * The cards are checked against the real chapter list, not a hand-written fixture.
- */
-
-const mounted: Array<{ destroy: () => Promise<void> }> = []
-
-function render(): HTMLElement {
-  const host = document.createElement("div")
-  document.body.append(host)
-
-  const component = mount(Home, { target: host })
-  mounted.push({
-    destroy: async () => {
-      await unmount(component)
-      host.remove()
-    },
-  })
-
-  return host
+function chapter(
+  id: string,
+  start: number,
+  count: number,
+  region: HomeChapter["region"] = "east-asia",
+): HomeChapter {
+  return {
+    id,
+    region,
+    window: { start, end: start + 1 },
+    href: `/chapters/${id}`,
+    name: `${id} chapter`,
+    summary: `${id} summary`,
+    status: "",
+    draft: false,
+    places: 2,
+    events: 5,
+    stories: [
+      { key: "opening", captions: Array.from({ length: count }, (_, i) => `Opening ${i + 1}`) },
+      { key: "other", captions: ["First", "Second", "Next caption"] },
+    ],
+  }
 }
 
-function cardFor(host: HTMLElement, id: string): HTMLElement {
-  const card = host.querySelector<HTMLElement>(`[data-chapter-id="${id}"]`)
+const chapters = [
+  chapter("a", 200, 2),
+  chapter("b", 100, 4),
+  chapter("c", 300, 8, "nile"),
+  chapter("d", 90, 6),
+  chapter("e", 80, 1),
+]
+let component: ReturnType<typeof mount> | undefined
 
-  if (card === null) {
-    throw new Error(`the root page has no card for ${id}`)
-  }
-
-  return card
+async function render() {
+  component = mount(Home, {
+    target: document.body,
+    props: {
+      params: {},
+      form: null,
+      data: {
+        chapters,
+        stills: { chapterId: "a", world: true },
+        world: { year: 753, start: 750, end: 762, players: [], turns: [] },
+      },
+    },
+  })
+  await tick()
 }
 
 afterEach(async () => {
-  for (const handle of mounted.splice(0, mounted.length)) {
-    await handle.destroy()
+  if (component) await unmount(component)
+  component = undefined
+  localStorage.clear()
+  document.cookie = "lekishi_member=; Max-Age=0"
+  vi.unstubAllGlobals()
+})
+
+test("starts with the three longest opening stories and lists every chapter by region and year", async () => {
+  localStorage.setItem("lekishi:positions:v1", "not JSON")
+  await render()
+  expect(
+    [...document.querySelectorAll('[data-testid="home-starters"] a')].map((a) =>
+      a.getAttribute("href"),
+    ),
+  ).toEqual(["/chapters/c", "/chapters/d", "/chapters/b"])
+  expect(
+    [...document.querySelectorAll("[data-chapter-id]")].map((item) =>
+      item.getAttribute("data-chapter-id"),
+    ),
+  ).toEqual(["e", "d", "b", "a", "c"])
+  expect(document.querySelector('main [data-variant="primary"]')?.getAttribute("href")).toBe(
+    "/world?year=750",
+  )
+  expect(document.querySelector('img[src="/home/world.jpg"][alt=""]')).not.toBeNull()
+  expect(document.querySelector('img[src="/home/tang-mission.jpg"]')).toBeNull()
+  expect(document.querySelector("main canvas, main input")).toBeNull()
+})
+
+test("resumes the actual named story and shows up to three other served chapters, newest first", async () => {
+  for (const [chapterId, at] of [
+    ["b", 3],
+    ["e", 1],
+    ["c", 4],
+    ["unavailable", 6],
+    ["d", 2],
+  ] as const) {
+    rememberPosition({ chapterId, search: "?place=here", label: "Place name", at })
   }
+  // A backwards device clock must not change which chapter was opened last.
+  rememberPosition({ chapterId: "a", search: "?story=other&step=2", label: "Second", at: 0 })
+  await render()
+  const resume = document.querySelector('[data-testid="home-continue"]')
+  expect(resume?.getAttribute("href")).toBe("/chapters/a?story=other&step=2")
+  expect(resume?.textContent).toContain("Resume at step 2")
+  expect(document.querySelector('img[src="/home/tang-mission.jpg"][alt=""]')).not.toBeNull()
+  expect(document.querySelector('[data-testid="home-resume"]')?.textContent).toContain(
+    "Next caption",
+  )
+  expect(document.querySelector('[role="progressbar"]')?.getAttribute("aria-valuemax")).toBe("3")
+  expect(
+    [...document.querySelectorAll('[data-testid="home-recent"] a')].map((link) =>
+      link.getAttribute("href"),
+    ),
+  ).toEqual(["/chapters/c?place=here", "/chapters/b?place=here", "/chapters/d?place=here"])
 })
 
-describe("the root page", () => {
-  it("presents every chapter as a peer card with a name, a window, a story, and an entry", () => {
-    const host = render()
-    const cards = [...host.querySelectorAll("[data-chapter-id]")]
-
-    expect(cards).toHaveLength(CHAPTERS.length)
-
-    for (const chapter of CHAPTERS) {
-      const card = cardFor(host, chapter.id)
-      const link = card.querySelector("a")
-
-      expect(card.querySelector("h3")?.textContent).toBe(chapter.name)
-      expect(card.textContent).toContain(windowLabel(chapter.window))
-      expect(card.textContent).toContain(chapter.summary)
-      // The link is an ordinary chapter entry; its accessible name says which
-      // chapter it opens, so two "Open the chapter" links stay distinguishable.
-      expect(link?.getAttribute("href")).toBe(chapter.href)
-      expect(link?.textContent).toContain("Open the chapter")
-      expect(link?.textContent).toContain(chapter.name)
-    }
-
-    // Peers, in a stable order: the launch chapter first, the second chapter
-    // next, both with the same structure.
-    expect(cards.map((card) => card.getAttribute("data-chapter-id"))).toEqual(
-      CHAPTERS.map((chapter) => chapter.id),
-    )
+test("an event position gets a plain Resume and no empty recent plate", async () => {
+  rememberPosition({
+    chapterId: "a",
+    search: "?step=1&event=arrival",
+    label: "Arrival",
+    at: Date.now(),
   })
-
-  it("keeps review categories and the project's own framing off the page", () => {
-    const host = render()
-    const text = host.textContent ?? ""
-
-    // The exact framings the owner rejected. Ordinary words a historical summary
-    // might need are deliberately not banned here: the page's prose is a copy
-    // question, and `chapters.test.ts` pins the cards' own vocabulary.
-    for (const marker of [
-      "Reviewed chapter",
-      "Comparison chapter",
-      "comparison fixture",
-      "comparison harness",
-      "map treatments",
-      "treatment comparison",
-      "lekishi-historical-contract",
-    ]) {
-      expect(text, `the page still says ${marker}`).not.toContain(marker)
-    }
-  })
-
-  it("keeps the approval line off an approved chapter's card", () => {
-    const host = render()
-
-    // The owner's decision of 2026-10-20: every chapter production serves is
-    // approved, so the card states no decision; the chapter's page and About
-    // sheet do. A chapter awaiting approval is served only as a draft.
-    const approved = CHAPTER_MANIFESTS.filter((entry) => entry.state === "approved")
-
-    for (const { id } of approved) {
-      const card = cardFor(host, id)
-
-      expect(card.textContent, id).not.toContain(String(chapterRelease(id)?.decision))
-      expect(card.textContent, id).not.toContain("Not independent or specialist review")
-      expect(card.querySelector("[data-chapter-draft]"), id).toBeNull()
-    }
-  })
-
-  it("leads with search, ahead of the chapter entries", () => {
-    const host = render()
-    const main = host.querySelector("main")
-    const search = host.querySelector('[data-testid="home-search"]')
-    const entries = [...(main?.querySelectorAll("a") ?? [])].filter((link) =>
-      link.textContent?.includes("Open the chapter"),
-    )
-
-    // Search is the page's first action (RFD 5, "Home"); the chapter entries
-    // follow it as peers, none of them set apart as the "real" chapter.
-    expect(search?.textContent).toContain("Search")
-    expect(entries).toHaveLength(CHAPTERS.length)
-    for (const entry of entries) {
-      expect(
-        search !== null &&
-          (search.compareDocumentPosition(entry) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0,
-      ).toBe(true)
-    }
-  })
-
-  it("offers to continue where the reader left off, from this device only", async () => {
-    localStorage.setItem(
-      "lekishi:positions:v1",
-      JSON.stringify({
-        last: QIN_CHAPTER,
-        chapters: {
-          [QIN_CHAPTER]: {
-            chapterId: QIN_CHAPTER,
-            search: "?event=hanfei-death-233",
-            label: "韓非 dies in Qin",
-            at: 1,
-          },
-        },
-      }),
-    )
-    const host = render()
-    await new Promise((resolve) => setTimeout(resolve, 0))
-
-    const resume = host.querySelector('[data-testid="home-continue"]')
-
-    expect(resume?.getAttribute("href")).toBe(`/chapters/${QIN_CHAPTER}?event=hanfei-death-233`)
-    expect(resume?.textContent).toContain("韓非 dies in Qin")
-    localStorage.clear()
-  })
+  await render()
+  expect(document.querySelector('[data-testid="home-continue"]')?.textContent?.trim()).toBe(
+    "Resume",
+  )
+  expect(document.querySelector('[data-testid="home-resume"]')?.textContent).toContain(
+    "Event · Arrival",
+  )
+  expect(document.querySelector('[role="progressbar"], [data-testid="home-recent"]')).toBeNull()
 })
+
+test.each([true, false])(
+  "only exposes a saved draft after an authorized response (authorized: %s)",
+  async (authorized) => {
+    const draft = { ...chapter("draft", 250, 3, "nile"), draft: true, status: "Not published." }
+    const { promise, resolve } = Promise.withResolvers<Response>()
+    vi.stubGlobal("fetch", () => promise)
+    document.cookie = "lekishi_member=1"
+    rememberPosition({
+      chapterId: "draft",
+      search: "?place=private",
+      label: "Private place",
+      at: 100,
+    })
+    await render()
+
+    const entry = () => document.querySelector('[data-region="nile"] [data-chapter-id="draft"]')
+    const resume = () => document.querySelector('[data-testid="home-continue"]')
+    expect(entry()).toBeNull()
+    expect(resume()).toBeNull()
+    expect(document.body.textContent).not.toContain("Private place")
+
+    resolve(authorized ? Response.json([draft]) : new Response(null, { status: 404 }))
+    await promise
+    await tick()
+    if (!authorized) {
+      expect(entry()).toBeNull()
+      expect(resume()).toBeNull()
+      expect(document.body.textContent).not.toContain("Private place")
+      return
+    }
+
+    await expect
+      .poll(() => entry()?.querySelector("[data-chapter-draft]")?.textContent)
+      .toBe("Draft")
+    expect(entry()?.textContent).toContain("Not published.")
+    expect(resume()?.getAttribute("href")).toBe("/chapters/draft?place=private")
+    expect(entry()?.querySelector("a")?.getAttribute("href")).toBe("/chapters/draft")
+    expect(document.querySelector("#time-heading")?.parentElement?.textContent).toContain(
+      "6 chapters by region",
+    )
+    expect(document.querySelector("footer form")?.getAttribute("method")).toBe("POST")
+  },
+)

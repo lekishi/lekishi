@@ -1,10 +1,12 @@
 import { DRAFT_CHAPTERS, loadDraftBundle } from "virtual:lekishi-drafts"
 import { projectChapterStories } from "$lib/atlas/chapter-catalog"
 import { coverageOf } from "$lib/atlas/chapter-registry"
-import type { ChapterCard, ChapterHeading } from "$lib/atlas/chapters"
+import type { ChapterHeading } from "$lib/atlas/chapters"
 import { chapterHref } from "$lib/atlas/chapters"
 import type { Chapter } from "$lib/atlas/domain"
+import type { HomeChapter } from "$lib/atlas/home"
 import { MEMBER_DRAFT_SCOPE, draftStatement } from "$lib/atlas/release"
+import { homeChapter } from "./home"
 
 /**
  * The drafts a production build leaves out of the public site, for signed-in
@@ -48,16 +50,26 @@ export function memberDraft(id: string): MemberDraft | undefined {
 }
 
 /** The home page's cards for the drafts, as a member sees them. */
-export function memberDraftCards(): ChapterCard[] {
-  return DRAFT_CHAPTERS.map((manifest) => ({
-    id: manifest.id,
-    name: manifest.title,
-    summary: manifest.summary,
-    window: manifest.window,
-    href: chapterHref(manifest.id),
-    status: draftStatement(manifest, MEMBER_DRAFT_SCOPE).status,
-    draft: true,
-  }))
+export function memberDraftCards(): HomeChapter[] {
+  return DRAFT_CHAPTERS.flatMap((manifest) => {
+    const draft = memberDraft(manifest.id)
+    if (draft === undefined) return []
+    return [
+      homeChapter(
+        {
+          id: manifest.id,
+          name: manifest.title,
+          summary: manifest.summary,
+          window: manifest.window,
+          href: chapterHref(manifest.id),
+          status: draft.heading.status,
+          draft: true,
+        },
+        manifest.region,
+        draft.stories,
+      ),
+    ]
+  })
 }
 
 /** Every draft, projected story by story, for the members' search index. */

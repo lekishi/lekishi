@@ -58,6 +58,8 @@ export type SearchIndex = {
   readonly version: 1
   readonly chapters: readonly SearchChapter[]
   readonly entries: readonly SearchEntry[]
+  /** Public shared-place destinations, kept distinct from chapter hits. */
+  readonly sharedPlaces?: readonly SearchEntry[]
 }
 
 /** A chapter's display name: its card's, or the one a caller supplies for a chapter without a card. */
@@ -323,6 +325,37 @@ const KIND_ORDER: Record<SearchKind, number> = {
   state: 3,
   event: 4,
   step: 5,
+}
+
+export function sharedPlaceEntries(index: SearchIndex): SearchEntry[] {
+  const places = Map.groupBy(
+    index.entries.filter((entry) => entry.kind === "place"),
+    (entry) => entry.id,
+  )
+  return [...places.values()].flatMap((entries) => {
+    const count = new Set(entries.map(({ chapterId }) => chapterId)).size
+    if (count < 2) return []
+    const first = entries[0]
+    return [
+      {
+        ...first,
+        chapterId: "",
+        detail: `${count} chapters reach it`,
+        names: [...new Set(entries.flatMap(({ names }) => names))],
+        href: `/places?place=${shortId(first.id)}`,
+        year: null,
+      },
+    ]
+  })
+}
+
+export function searchSharedPlaces(index: SearchIndex, query: string): SearchHit[] {
+  const needle = compact(query)
+  if (!needle) return []
+  return (index.sharedPlaces ?? []).flatMap((entry) => {
+    const name = entry.names.find((name) => compact(name).includes(needle))
+    return name === undefined ? [] : [{ entry, match: "name", matchedText: name }]
+  })
 }
 
 /**

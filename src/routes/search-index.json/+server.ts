@@ -1,7 +1,7 @@
 import { json } from "@sveltejs/kit"
 import { loadServedStories } from "$lib/atlas/chapter-catalog"
 import { SERVED_CHAPTERS } from "$lib/atlas/chapter-registry"
-import { buildSearchIndex } from "$lib/atlas/search-index"
+import { buildSearchIndex, sharedPlaceEntries } from "$lib/atlas/search-index"
 
 /**
  * The site's search index, prerendered to `/search-index.json` (RFD 5,
@@ -14,5 +14,6 @@ export const prerender = true
 export async function GET(): Promise<Response> {
   const chapters = await Promise.all(SERVED_CHAPTERS.map((served) => loadServedStories(served.id)))
 
-  return json(buildSearchIndex(chapters))
+  const index = buildSearchIndex(chapters)
+  return json({ ...index, sharedPlaces: sharedPlaceEntries(index) })
 }

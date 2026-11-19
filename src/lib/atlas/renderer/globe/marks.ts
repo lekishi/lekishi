@@ -37,6 +37,8 @@ export type GlobeMarker = {
   readonly lon: number
   readonly lat: number
   readonly label: string
+  readonly guideLabel?: boolean
+  readonly clusterSize?: number
   readonly mark: MarkKind
   readonly precision: MarkPrecision
   readonly tone: MarkerTone

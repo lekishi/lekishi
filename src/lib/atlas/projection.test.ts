@@ -256,6 +256,8 @@ describe("projecting the reviewed Tang chapter", () => {
     // The flattened chapter publishes one set, and the projection shows what it
     // names: 多禰島 is a context reference, so the separation stays unplaced.
     expect(chapter.publication.setIds).toEqual([String(objectOf(tree().sets[0])["set_id"])])
+    expect(original.placeIds).toEqual(["lks:place:tane"])
+    expect(original.occurrencePlaceIds).toEqual([])
     expect(original.placement).toEqual({
       kind: "none",
       placeId: "lks:place:tane",
@@ -359,6 +361,9 @@ describe("projecting the reviewed Tang chapter", () => {
       label: "驩州",
       reason: "no-position",
     })
+    expect(eventById(chapter, "lks:event:kiyokawa-drift-753").occurrencePlaceIds).toContain(
+      "lks:place:huanzhou",
+    )
     // The two identifications are approximate locality-level placements: the
     // events are on the map, and the basis says the position is an approximation.
     expect(eventById(chapter, "lks:event:kibi-drift-753").placement).toMatchObject({

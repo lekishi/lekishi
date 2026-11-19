@@ -90,6 +90,7 @@ export const FIXTURE_CHAPTER: Chapter = {
         position: { lon: 129.9, lat: 32.8 },
       },
       placeIds: ["place-north-harbor"],
+      occurrencePlaceIds: ["place-north-harbor"],
       occurrence: {
         startYear: 1204,
         endYear: 1204,
@@ -123,6 +124,7 @@ export const FIXTURE_CHAPTER: Chapter = {
         position: { lon: 122.1, lat: 24.9 },
       },
       placeIds: ["place-southern-bay"],
+      occurrencePlaceIds: ["place-southern-bay"],
       occurrence: {
         startYear: 1218,
         endYear: 1220,
@@ -149,6 +151,7 @@ export const FIXTURE_CHAPTER: Chapter = {
         position: { lon: 120.6, lat: 34.3 },
       },
       placeIds: ["place-inland-plain"],
+      occurrencePlaceIds: ["place-inland-plain"],
       occurrence: {
         startYear: 1228,
         endYear: 1236,
@@ -173,6 +176,7 @@ export const FIXTURE_CHAPTER: Chapter = {
         reason: "no-position",
       },
       placeIds: ["place-island-stop"],
+      occurrencePlaceIds: ["place-island-stop"],
       occurrence: {
         startYear: 1244,
         endYear: 1244,
@@ -199,6 +203,7 @@ export const FIXTURE_CHAPTER: Chapter = {
         position: { lon: 120.6, lat: 34.3 },
       },
       placeIds: ["place-inland-plain"],
+      occurrencePlaceIds: ["place-inland-plain"],
       occurrence: {
         startYear: 1249,
         endYear: 1251,

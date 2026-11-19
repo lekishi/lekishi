@@ -21,7 +21,7 @@ export function loadSearchIndex(): Promise<SearchIndex> {
         drafts === null
           ? index
           : {
-              version: index.version,
+              ...index,
               chapters: [...index.chapters, ...drafts.chapters],
               entries: [...index.entries, ...drafts.entries],
             },

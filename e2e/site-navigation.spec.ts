@@ -38,6 +38,22 @@ test("the Time door separates chart filtering from site search", async ({ page }
   await expect(search).toBeHidden()
 })
 
+test("phone search has a visible close button and returns focus to the trigger", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto("/time")
+  await expect(page.getByRole("searchbox", { name: /Filter \d+ chapters/ })).toBeEnabled()
+  const trigger = page.getByRole("banner").getByRole("button", { name: "Search", exact: true })
+  await trigger.click()
+  const search = page.getByRole("dialog", { name: "Search the atlas" })
+  const close = search.getByRole("button", { name: "Close search" })
+  await expect(close).toBeVisible()
+  await close.click()
+  await expect(search).toBeHidden()
+  await expect(trigger).toBeFocused()
+})
+
 test("Time opens World at the selected turn only when the board covers it", async ({ page }) => {
   await page.goto("/time?from=600&to=800&year=753")
   await page.getByRole("link", { name: "World in 753" }).click()

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Badge, Dialog, Icon, focusRing, transition } from "$lib/ui"
+  import { Badge, Button, Dialog, Icon, focusRing, transition } from "$lib/ui"
   import {
     entryYear,
     kindLabel,
@@ -145,7 +145,14 @@
         autocomplete="off"
         spellcheck="false"
         placeholder="A person, a place, an event or a year"
-        class="h-14 min-w-0 flex-1 bg-transparent font-serif text-title-sm text-ink placeholder:font-interface placeholder:text-body placeholder:text-ink-faint focus:outline-none"
+        class="h-14 min-w-0 flex-1 bg-transparent font-serif text-title-sm text-ink placeholder:font-interface placeholder:text-body placeholder:text-ink-faint focus:outline-none max-sm:[&::-webkit-search-cancel-button]:appearance-none"
+      />
+      <Button
+        variant="icon"
+        icon="close"
+        label="Close search"
+        class="size-11 sm:hidden"
+        onclick={onClose}
       />
       <kbd
         class="hidden rounded-control border border-rule px-1.5 py-0.5 text-caption text-ink-faint sm:inline"

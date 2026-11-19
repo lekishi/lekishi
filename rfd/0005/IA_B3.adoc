@@ -1,5 +1,5 @@
 = Four doors: the B3 information architecture
-:state: Decided 2026-11-19, except where marked open
+:state: Decided 2026-11-19, except where marked open or for the owner's review
 
 The owner chose B3: Home must be "immediately usable for people who already
 visited it before". Time, World and Places are three ways across the chapters:
@@ -83,6 +83,10 @@ separate, as described in link:../0006/README.adoc[RFD 6].
 * *Place regions:* whether to adopt the nine sketched regions and boundaries
   as drawn, and if so whether to store them as records or derive them. Chapter
   manifest regions are unaffected.
+* *Places map:* the approved mock used a flat tile map. The implementation
+  uses the globe board, which foreshortens the ends of the visible band. The
+  choice is between the globe framed close and overhead (recommended by
+  design review) and a flat projection, which would require a second renderer.
 * *Workspace navigation:* design review recommends four doors on World above
   its own controls, with the phone dial clear of the bottom bar, and leaving
   chapter chrome as shipped. Alternatively, both workspaces keep their own

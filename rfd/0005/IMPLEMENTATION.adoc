@@ -59,13 +59,13 @@ so the two checklists do not double-count.
 
 The current structure is link:IA_B3.adoc[B3]. Its checklist:
 
-- [x] Shared four-door navigation with global Search and public About links.
-- [x] Promote Regions in time to `/time` and the campaign board to `/world`.
-- [x] Public `/about`: ways in, reading the board, sources, storage and map attribution.
+- [x] Shared four-door navigation with global Search and public About links (2026-11-19, `e2e/site-navigation.spec.ts`).
+- [x] Promote Regions in time to `/time` and the campaign board to `/world` (2026-11-19, `e2e/site-navigation.spec.ts`).
+- [x] Public `/about`: ways in, reading the board, sources, storage and map attribution (2026-11-19, `e2e/site-navigation.spec.ts`).
 - [ ] Rebuild Home around Continue and Recently opened, with a first-visit path.
 - [ ] Build the Places index, map and event bar at `/places`.
 - [ ] Add the shared-place hit to the site search.
-- [ ] Owner decides the Home stills, place-region boundaries and workspace navigation.
+- [ ] Owner decides the Home stills, place-region boundaries, Places map projection and workspace navigation.
 
 The previous proposal's checklist retains its states (link:IA_RESET.adoc[the
 earlier record]); B3 supersedes its world-first Home, culture columns and

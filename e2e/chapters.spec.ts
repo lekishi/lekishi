@@ -528,7 +528,7 @@ test("searches every chapter from the search dialog", async ({ page }) => {
   // From the home page: `/` opens search, a name in the record's own script and
   // its romanization find the same person, and Enter opens the active result.
   await page.goto("/")
-  await expect(page.getByTestId("home-search")).toBeVisible()
+  await expect(page.getByRole("button", { name: "Search", exact: true })).toBeVisible()
 
   const dialog = page.locator("dialog#search-dialog")
   const input = page.locator("#search-dialog-input")
@@ -1023,7 +1023,7 @@ test("keeps the selected event's explanation reachable at every reviewed size", 
   }
 })
 
-test("presents both chapters from the root page as peer entries", async ({ page }) => {
+test("starts with three stories and lists every served chapter by region", async ({ page }) => {
   const problems = collectProblems(page)
 
   await page.goto("/")
@@ -1037,17 +1037,13 @@ test("presents both chapters from the root page as peer entries", async ({ page 
   const tang = page.locator('[data-chapter-id="tang-mission-750-754"]')
   const qin = page.locator('[data-chapter-id="qin-conquest-han-233-226"]')
 
-  // Each card is a chapter entry: a name, its window, a story summary, and an
-  // ordinary link to open it.
   await expect(tang).toContainText("The embassy to Tang China")
   await expect(tang).toContainText("750–754")
-  await expect(tang).toContainText("藤原朝臣清河")
-  await expect(tang.getByRole("link", { name: /Open the chapter/ })).toBeVisible()
+  await expect(tang.getByRole("link")).toHaveAttribute("href", TANG)
 
   await expect(qin).toContainText("The end of the state of Han")
   await expect(qin).toContainText("233 BCE–226 BCE")
-  await expect(qin).toContainText("韓非")
-  await expect(qin.getByRole("link", { name: /Open the chapter/ })).toBeVisible()
+  await expect(qin.getByRole("link")).toHaveAttribute("href", QIN)
 
   // An approved chapter's card states no decision (the owner's decision of
   // 2026-10-20); the chapter's page and About sheet state it. A draft's card
@@ -1075,35 +1071,35 @@ test("presents both chapters from the root page as peer entries", async ({ page 
   expect(mainText).not.toContain("treatment comparison")
   expect(mainText).not.toContain("lekishi-historical-contract")
 
-  // Search is the page's primary action, ahead of the chapter entries; the time
-  // ribbon places every chapter on one line of time.
-  const order = await page.evaluate(() => {
-    const search = document.querySelector('[data-testid="home-search"]')
-    const chapter = document.querySelector("[data-chapter-id]")
-
-    return search !== null && chapter !== null
-      ? Boolean(search.compareDocumentPosition(chapter) & Node.DOCUMENT_POSITION_FOLLOWING)
-      : null
-  })
-
-  expect(order).toBe(true)
-  await expect
-    .poll(() => sortedAttribute(page.getByTestId("time-ribbon").getByRole("link"), "href"))
-    .toEqual(served.map((id) => `/chapters/${id}`))
+  await expect(page.locator("main").getByRole("heading", { level: 2 })).toHaveText([
+    "Start with a chapter",
+    "World",
+    "Time",
+    "Chapters",
+  ])
+  await expect(page.getByTestId("home-starters").getByRole("link")).toHaveCount(3)
+  await expect(page.getByRole("link", { name: "Play from 750" })).toHaveAttribute(
+    "href",
+    "/world?year=750",
+  )
+  await expect(page.getByRole("link", { name: "Bronze Age" })).toHaveAttribute(
+    "href",
+    "/time?from=-2400&to=-1000",
+  )
+  await expect(page.locator("main input, main canvas")).toHaveCount(0)
 
   // A first visit offers nothing to continue.
   await expect(page.getByTestId("home-continue")).toHaveCount(0)
 
   // The Qin entry opens the Qin chapter, and that page names the chapter the
   // card named.
-  await qin.getByRole("link", { name: /Open the chapter/ }).click()
+  await qin.getByRole("link").click()
 
   await expect(page).toHaveURL(new RegExp(`${QIN}$`))
   await expect(page).toHaveTitle(/The end of the state of Han/)
   await expect(page.locator("#atlas-workspace canvas").first()).toBeVisible({ timeout: 30_000 })
 
-  // Discoverability holds at the reviewed sizes, with no horizontal overflow.
-  // The chapter globe is drawn only where it is seen: wide screens with WebGL.
+  // Discoverability holds at the reviewed sizes without a second globe.
   await page.goto("/")
 
   for (const viewport of VIEWPORTS) {
@@ -1111,13 +1107,8 @@ test("presents both chapters from the root page as peer entries", async ({ page 
     await expect(cards).toHaveCount(served.length)
     await expect(tang).toBeVisible()
     await expect(qin).toBeVisible()
-    await expect(page.getByTestId("home-search")).toBeVisible()
-
-    if (viewport.width >= 1024) {
-      await expect(page.getByTestId("chapter-globe")).toBeVisible()
-    } else {
-      await expect(page.getByTestId("chapter-globe")).toBeHidden()
-    }
+    await expect(page.getByRole("button", { name: "Search", exact: true })).toBeVisible()
+    await expect(page.locator("main canvas")).toHaveCount(0)
 
     const overflow = await page.evaluate(
       () => document.documentElement.scrollWidth - window.innerWidth,
@@ -1149,8 +1140,9 @@ test("offers to continue where the reader left off", async ({ page }) => {
     "href",
     new RegExp(`^${QIN}\\?event=han-nanyang-cession-231(&|$)`),
   )
-  await expect(resume).toContainText("Han cedes 南陽")
-  await expect(resume).toContainText("The end of the state of Han")
+  await expect(page.getByTestId("home-resume")).toContainText("Han cedes 南陽")
+  await expect(page.getByTestId("home-resume")).toContainText("The end of the state of Han")
+  await expect(page.getByTestId("home-recent")).toHaveCount(0)
 
   await resume.click()
   await expect(page).toHaveURL(new RegExp(`${QIN}\\?event=han-nanyang-cession-231(&|$)`))

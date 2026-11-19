@@ -1,4 +1,4 @@
-import type { ChapterCard } from "./chapters"
+import type { HomeChapter } from "./home"
 import type { SearchIndex } from "./search-index"
 
 /**
@@ -38,8 +38,8 @@ async function memberJson<T>(url: string): Promise<T | null> {
 }
 
 /** The drafts' cards for the home page, or none for anyone but a member. */
-export async function loadDraftCards(): Promise<ChapterCard[]> {
-  return (await memberJson<ChapterCard[]>("/drafts.json")) ?? []
+export async function loadDraftCards(): Promise<HomeChapter[]> {
+  return (await memberJson<HomeChapter[]>("/drafts.json")) ?? []
 }
 
 /** The drafts' search index, or null for anyone but a member. */

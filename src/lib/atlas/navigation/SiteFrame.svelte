@@ -23,6 +23,13 @@
   let open = $state(false)
   let query = $state("")
 
+  // A current door must not discard the workspace's shareable query.
+  function doorHref(href: string) {
+    // An empty reference resolves to the current document, including query
+    // updates made through SvelteKit's shallow routing.
+    return href === current && (href === "/time" || href === "/places") ? "" : href
+  }
+
   function search(text = "") {
     query = text
     open = true
@@ -59,7 +66,7 @@
   ]}
 >
   <header class="sticky top-0 z-(--z-chrome) shrink-0 border-b border-rule bg-lacquer">
-    <div class="mx-auto flex min-h-14 max-w-7xl items-center gap-3 px-4 sm:px-6 min-[800px]:gap-6">
+    <div class="flex min-h-14 items-center gap-3 px-4 sm:px-6 min-[800px]:gap-6">
       <a
         href="/"
         aria-label="Lekishi home"
@@ -129,7 +136,7 @@
   >
     {#each doors as { href, text, icon } (href)}
       <a
-        {href}
+        href={doorHref(href)}
         aria-current={current === href ? "page" : undefined}
         class={[
           "flex h-14 flex-col items-center justify-center gap-1 rounded-control text-caption hover:bg-lacquer-raised hover:text-ink",
@@ -147,7 +154,7 @@
 
 {#snippet desktopLink(href: string, text: string)}
   <a
-    {href}
+    href={doorHref(href)}
     aria-current={current === href ? "page" : undefined}
     class={[
       "inline-flex items-center border-b-2 px-3 text-body-sm hover:text-ink",

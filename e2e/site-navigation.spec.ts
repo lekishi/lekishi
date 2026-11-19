@@ -15,6 +15,10 @@ test("the Time door separates chart filtering from site search", async ({ page }
   const filter = page.getByRole("searchbox", { name: /Filter \d+ chapters/ })
   await filter.fill("753")
   await expect(page).toHaveURL(/\bq=753\b/)
+  await page.getByRole("link", { name: "Time", exact: true }).click()
+  await expect(page).toHaveURL(/\bq=753\b/)
+  await page.reload()
+  await expect(filter).toHaveValue("753")
   await filter.press("Escape")
   await expect(filter).toHaveValue("")
   await expect(page).not.toHaveURL(/\bq=/)
@@ -37,5 +41,6 @@ test("Time opens World at the selected turn only when the board covers it", asyn
   await expect(board.getByRole("link", { name: "Lekishi home" })).toHaveAttribute("href", "/")
 
   await page.goto("/time?year=-1299")
+  await expect(page.getByRole("slider", { name: "Year" })).toHaveAttribute("aria-valuenow", "-1299")
   await expect(page.getByRole("link", { name: "Open the world" })).toHaveAttribute("href", "/world")
 })

@@ -523,15 +523,18 @@
       {/each}
     </div>
     <div class="ml-auto flex items-center gap-2">
-      <Field
-        id="timeline-search"
-        label="Filter {chapters.length} chapters by name, place or year"
-        hideLabel
-        placeholder="Filter {chapters.length} chapters"
-        bind:value={query}
-        oninput={search}
-        class="w-72 max-lg:w-48 max-sm:w-36"
-      />
+      <!-- The address initializes the filter; don't accept input before then. -->
+      <fieldset disabled={!ready} class="min-w-0">
+        <Field
+          id="timeline-search"
+          label="Filter {chapters.length} chapters by name, place or year"
+          hideLabel
+          placeholder="Filter {chapters.length} chapters"
+          bind:value={query}
+          oninput={search}
+          class="w-72 max-lg:w-48 max-sm:w-44"
+        />
+      </fieldset>
       {@render zoomButton("−", "Zoom out", 1 / 1.6)}
       <span class="text-caption tabular-nums text-ink-dim max-xl:hidden"
         >≈ {(view.end - view.start).toLocaleString("en")} years in view</span

@@ -298,8 +298,8 @@
       aria-label="Lekishi home"
       class={["inline-flex h-11 shrink-0 items-center rounded-control", focusRing]}
     >
-      <Logo size={22} class="sm:hidden" />
-      <Logo size={22} wordmark="bilingual" class="hidden sm:inline-flex" />
+      <span class="flex sm:hidden"><Logo size={22} /></span>
+      <span class="hidden sm:flex"><Logo size={22} wordmark="bilingual" /></span>
     </a>
     <div class="flex items-center gap-1 md:border-l md:border-rule md:pl-4">
       <Button

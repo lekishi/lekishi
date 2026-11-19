@@ -54,7 +54,7 @@
 
 <div
   class={[
-    "flex flex-col bg-abyss font-interface text-ink pb-[calc(3.5rem+env(safe-area-inset-bottom))] min-[800px]:pb-0",
+    "flex flex-col bg-abyss font-interface text-ink pb-[calc(3.5rem+1px+env(safe-area-inset-bottom))] min-[800px]:pb-0",
     viewport ? "h-dvh" : "min-h-dvh",
   ]}
 >
@@ -66,8 +66,8 @@
         aria-current={current === "/" ? "page" : undefined}
         class={["inline-flex h-11 items-center rounded-control", focusRing]}
       >
-        <Logo size={22} wordmark="caps" class="sm:hidden" />
-        <Logo size={22} wordmark="bilingual" class="hidden sm:inline-flex" />
+        <span class="flex sm:hidden"><Logo size={22} wordmark="caps" /></span>
+        <span class="hidden sm:flex"><Logo size={22} wordmark="bilingual" /></span>
       </a>
       <nav aria-label="Primary" class="hidden self-stretch min-[800px]:flex">
         {#each doors.slice(1) as { href, text } (href)}

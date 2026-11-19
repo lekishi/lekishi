@@ -177,27 +177,37 @@ Import from `$lib/ui`:
 </Plate>
 ```
 
-| Primitive      | Use it for                                                                                                            |
-| -------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `Plate`        | Every chrome surface. `tone` glass or solid; a titled plate is a labelled region.                                     |
-| `SectionLabel` | The caps heading with an optional count.                                                                              |
-| `Button`       | `primary` (one per surface), `secondary`, `ghost`, `icon` (needs `label`). `href` makes a link; `busy` keeps focus.   |
-| `Orb`          | Layer toggles: `pressed` true, false or `"mixed"`.                                                                    |
-| `Badge`        | An evidence form or a state, as glyph plus word. Kinds in `BADGES`.                                                   |
-| `Tabs`         | A tablist with one panel; the panel is a snippet that receives the selected id.                                       |
-| `Field`        | Search or text input with label, hint and a clear action.                                                             |
-| `Sheet`        | Side panel, or bottom sheet with `peek`, `half`, `full` detents. Non-modal.                                           |
-| `Dialog`       | Modal: search, the chapter switcher, About. The native `<dialog>`; every close is reported through `onclose`.         |
-| `NameForm`     | A historical name, its romanization, and the modern name on request (`modern` never inside a button or link).         |
-| `DateLine`     | A date in both calendars with its precision. Takes formatted parts; formatting is RFD 2's.                            |
-| `CitationLine` | A source, its locator and reuse terms on one line; opens the quote.                                                   |
-| `EmptyState`   | `uncovered` ("not yet covered") or `filtered` ("no results with these filters"). Never mix them.                      |
-| `Icon`         | The glyph set.                                                                                                        |
-| `Logo`         | The mark, with `wordmark="bilingual"` (caps and 歴史) or `"caps"` beside it. Ink from the text colour; gold playhead. |
+| Primitive      | Use it for                                                                                                             |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `Plate`        | Every chrome surface. `tone` glass or solid; a titled plate is a labelled region.                                      |
+| `SectionLabel` | The caps heading with an optional count.                                                                               |
+| `Button`       | `primary` (one per surface), `secondary`, `ghost`, `icon` (needs `label`). `href` makes a link; `busy` keeps focus.    |
+| `Orb`          | Layer toggles: `pressed` true, false or `"mixed"`.                                                                     |
+| `Badge`        | An evidence form or a state, as glyph plus word. Kinds in `BADGES`.                                                    |
+| `Tabs`         | A tablist with one panel; the panel is a snippet that receives the selected id.                                        |
+| `Field`        | Search or text input with label, hint and a clear action.                                                              |
+| `Sheet`        | Side panel, or bottom sheet with `peek`, `half`, `full` detents. Non-modal.                                            |
+| `Dialog`       | Modal: search, the chapter switcher, chapter About sheet. Every native `<dialog>` close is reported through `onclose`. |
+| `NameForm`     | A historical name, its romanization, and the modern name on request (`modern` never inside a button or link).          |
+| `DateLine`     | A date in both calendars with its precision. Takes formatted parts; formatting is RFD 2's.                             |
+| `CitationLine` | A source, its locator and reuse terms on one line; opens the quote.                                                    |
+| `EmptyState`   | `uncovered` ("not yet covered") or `filtered` ("no results with these filters"). Never mix them.                       |
+| `Icon`         | The glyph set.                                                                                                         |
+| `Logo`         | The mark, with `wordmark="bilingual"` (caps and 歴史) or `"caps"` beside it. Ink from the text colour; gold playhead.  |
 
 Primitives know nothing about history or the atlas. Behaviour (what a click
 selects, what the playhead does) lives in the atlas compositions in
 `src/lib/atlas/workspace/`, which are built from these.
+
+## Site navigation
+
+[RFD 5's B3 decision](../rfd/0005/IA_B3.adoc) puts persistent navigation on Home,
+Time, Places and the public About page. Below 800 px, reserve space for the
+four-door bottom bar and the device inset; Search and About move into the
+header as icons. At wider widths, keep the logo as Home and place the other
+doors, the search trigger and About on one row. Gold marks the current page,
+alongside `aria-current="page"`. The World and chapter workspace controls are
+separate from this frame pending the workspace-navigation decision.
 
 ## Accessibility
 

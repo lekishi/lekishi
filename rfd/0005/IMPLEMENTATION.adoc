@@ -55,7 +55,11 @@ so the two checklists do not double-count.
 - [x] Home: search first, chapters on the globe and the time ribbon, "Continue where you left off" from browser storage; the not-found page keeps search and the chapter list (2026-10-14, `page.test.ts`).
 - [ ] Browser checks: a linked event opens its card, Back after a search jump returns to the origin, and search is reachable by keyboard alone (RC4).
 
-== Information architecture reset (link:IA_RESET.adoc[the record])
+== Information architecture reset
+
+The current structure is link:IA_B3.adoc[B3]. The earlier checklist below
+retains its states for link:IA_RESET.adoc[the previous proposal]; B3 supersedes
+its world-first Home, culture columns and standalone place and people pages.
 
 - [x] Audit at 39 chapters, walked locally on `main` at 27f5ac3 (2026-10-23, https://claude.ai/artifact/W6pm9RST4rodcNu7VjXN8a[the audit]).
 - [x] Owner's diagnosis recorded: no exploration, chapters on their own organised page with vertical time, relationships not visible, the scene not in the civilization register (2026-10-23).

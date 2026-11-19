@@ -1,0 +1,73 @@
+= Four doors: the B3 information architecture
+:state: Decided 2026-11-19, except where marked open
+
+Darwin chose B3: Home helps a reader pick up a chapter or find a way in;
+Time, World and Places are separate doors for comparing chapters. The
+link:https://t-03h8mpsjrwwalvozh5cx88sm7-p20610.onamp.dev/b.html[B3 mock]
+and link:https://ampcode.com/threads/T-01a1dddb-ca1e-7684-b67f-d1277e8b6edf[design discussion]
+record the layout and behaviour. The mock's CSS and development counts are
+not specifications: use the design tokens and count the served catalog.
+
+This decision supersedes the previous link:IA_RESET.adoc[IA reset]'s
+world-first Home, culture-column chapter page, and separate place and people
+pages. It supersedes the original search-first Home, globe and time ribbon in
+link:README.adoc[RFD 5]. Directions A and C, a globe-first Home, culture lanes
+and the tree of ages were declined. It does not redraw the chapter workspace
+or change the evidence grammar or in-chapter query contract.
+
+== What each door answers
+
+[cols="1,3",options="header"]
+|===
+|Door |Reader's task
+|Home `/` |Resume a chapter, or choose a first one. Continue and up to three other recent chapters precede the World and Time summaries, then the served chapters grouped by manifest region. The prerendered first visit starts with the three longest served opening stories by story-step count and one About link. No hero, live globe, Places block or second search box.
+|Time `/time` |Compare chapter bars by region and year in the existing Regions in time chart, promoted from `/dev/timeline`. `?from=&to=` sets a window; `?q=` filters the chart, distinct from site search. Open World at `?year=` only for a read year the board can show.
+|World `/world` |Explore the campaign board, one turn per year from 750 to 762, promoted from `/dev/world`. `?year=` opens a turn; the board and its existing query controls carry over.
+|Places `/places` |Trace a place shared by two or more served chapters. A shared index and tile-edge map share selection; the time bar starts at All time and steps between events without autoplay. The small-screen bar keeps the chapter name on its own truncated line, and map labels appear when zoom permits.
+|===
+
+About at `/about` takes the introduction off Home. It gives the tagline,
+three ways in, how to read the board, sources and uncertainty, what is kept
+on the device and map attribution. The full attribution remains at
+`/globe/ATTRIBUTION.txt`. The chapter's own About sheet remains in place.
+
+== Navigation is distinct from workspace controls
+
+Home, Time, Places and About share persistent chrome. From 800 px up, the
+logo links Home, followed by Time, World, Places, a search trigger with `/`,
+and About. Below 800 px, the logo, Search and About icons stay in the header;
+four named icon links sit in a safe-area-aware bottom bar. The current page
+uses `aria-current` and gold, with an underline in the wide text links.
+The standard 22 px logo keeps the bilingual lockup from 640 px up.
+
+The search trigger and `/` open the existing dialog, not a separate search
+route. Places adds one shared-place result per place without removing the
+per-chapter results. The active workspaces keep their own controls: until the
+open navigation decision below is made, World and chapters do not receive the
+new chrome and their logo links Home.
+
+== Addresses carry the view; memory is unchanged
+
+Places selection pushes `/places?place=<id>` and refocuses the map. Stepping
+through tellings replaces the current entry with `&event=<id>`. The design
+review specifies `&chapter=<id>` for an event ID shared by several tellings at
+that place; without a matching chapter the first telling in time-bar order
+opens. A stale place or event is reported. A single-chapter place URL can
+offer a link to that chapter without adding a selected row to the shared index.
+
+Continue and Recently opened read the existing `src/lib/atlas/memory.ts`
+store: one position per chapter, its query, short label and timestamp, plus
+the most recent chapter's ID. There is no new persistence or server sync.
+Blocked or empty storage leaves the first-visit choice. Member cookies are
+separate, as described in link:../0006/README.adoc[RFD 6].
+
+== Open decisions
+
+* *Place regions:* whether the sketched region names and boundaries become
+  record data or a derivation rule. Chapter manifest regions are unaffected.
+* *Workspace navigation:* whether World takes the four doors above its own
+  controls, with its phone dial clear of the bottom bar, and whether chapters
+  retain just their existing workspace chrome. B3 used shipped-page captures,
+  not a decision about fitting two sets of controls.
+
+See link:IMPLEMENTATION.adoc#_information_architecture_reset[the implementation checklist].

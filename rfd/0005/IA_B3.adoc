@@ -1,30 +1,38 @@
 = Four doors: the B3 information architecture
 :state: Decided 2026-11-19, except where marked open
 
-Darwin chose B3: Home helps a reader pick up a chapter or find a way in;
-Time, World and Places are separate doors for comparing chapters. The
-link:https://t-03h8mpsjrwwalvozh5cx88sm7-p20610.onamp.dev/b.html[B3 mock]
-and link:https://ampcode.com/threads/T-01a1dddb-ca1e-7684-b67f-d1277e8b6edf[design discussion]
-record the layout and behaviour. The mock's CSS and development counts are
-not specifications: use the design tokens and count the served catalog.
+The owner chose B3: Home must be "immediately usable for people who already
+visited it before". Time, World and Places are three ways across the chapters:
+by year, on the board and by place. The <<captures,design captures>> and
+https://ampcode.com/threads/T-01a1dddb-ca1e-7684-b67f-d1277e8b6edf[design discussion]
+show the layout and behaviour. Use the design tokens and count the served
+catalog, not the mock's CSS or its development counts.
 
 This decision supersedes the previous link:IA_RESET.adoc[IA reset]'s
-world-first Home, culture-column chapter page, and separate place and people
-pages. It supersedes the original search-first Home, globe and time ribbon in
-link:README.adoc[RFD 5]. Directions A and C, a globe-first Home, culture lanes
-and the tree of ages were declined. It does not redraw the chapter workspace
-or change the evidence grammar or in-chapter query contract.
+world-first Home, culture-column chapter page and individual place pages.
+B3 has no people page and makes no decision about a future one. It supersedes
+the search-first Home, globe and time ribbon in link:README.adoc[RFD 5]. The
+owner declined directions A and C, a globe-first Home, culture lanes, the tree
+of ages, and a hero, in-page search and Places block on Home. B3 does not redraw
+the chapter workspace or change the evidence grammar or chapter query contract.
 
 == What each door answers
 
 [cols="1,3",options="header"]
 |===
 |Door |Reader's task
-|Home `/` |Resume a chapter, or choose a first one. Continue and up to three other recent chapters precede the World and Time summaries, then the served chapters grouped by manifest region. The prerendered first visit starts with the three longest served opening stories by story-step count and one About link. No hero, live globe, Places block or second search box.
-|Time `/time` |Compare chapter bars by region and year in the existing Regions in time chart, promoted from `/dev/timeline`. `?from=&to=` sets a window; `?q=` filters the chart, distinct from site search. Open World at `?year=` only for a read year the board can show.
-|World `/world` |Explore the campaign board, one turn per year from 750 to 762, promoted from `/dev/world`. `?year=` opens a turn; the board and its existing query controls carry over.
-|Places `/places` |Trace a place shared by two or more served chapters. A shared index and tile-edge map share selection; the time bar starts at All time and steps between events without autoplay. The small-screen bar keeps the chapter name on its own truncated line, and map labels appear when zoom permits.
+|Home `/` |Resume a chapter, or choose a first one. Continue and up to three other recent chapters precede World and Time summaries, then served chapters grouped by manifest region. The prerendered first visit starts with the three served chapters with the most story steps and an About link.
+|Time `/time` |Compare chapter bars by region and year in Regions in time, promoted from `/dev/timeline`. `?from=&to=` sets a window. Open World at `?year=` only for a read year the board can show.
+|World `/world` |Explore the campaign board, today one turn per year from 750 to 762, promoted from `/dev/world`. `?year=` opens a turn; the board and its existing query controls carry over.
+|Places `/places` |Trace a place shared by two or more served chapters. Layout M1 puts the index beside the map on wide screens and below it on tablet and phone. M2 and M3 were declined.
 |===
+
+Places groups the index by map position, with each place listed once. A
+hex-tile map draws region borders along tile edges. Grouping by chapter label
+and drawing straight region lines were declined. Places without a position
+are listed in their own group and are not drawn. A place opens at All time.
+At a moment—one chapter's telling of a dated event at the place—only that
+chapter's reach lights up. The bar steps by event, not by year, without autoplay.
 
 About at `/about` takes the introduction off Home. It gives the tagline,
 three ways in, how to read the board, sources and uncertainty, what is kept
@@ -49,11 +57,8 @@ new chrome and their logo links Home.
 == Addresses carry the view; memory is unchanged
 
 Places selection pushes `/places?place=<id>` and refocuses the map. Stepping
-through tellings replaces the current entry with `&event=<id>`. The design
-review specifies `&chapter=<id>` for an event ID shared by several tellings at
-that place; without a matching chapter the first telling in time-bar order
-opens. A stale place or event is reported. A single-chapter place URL can
-offer a link to that chapter without adding a selected row to the shared index.
+through moments replaces the current entry with `&event=<id>`. A stale place
+or event is reported.
 
 Continue and Recently opened read the existing `src/lib/atlas/memory.ts`
 store: one position per chapter, its query, short label and timestamp, plus
@@ -61,13 +66,43 @@ the most recent chapter's ID. There is no new persistence or server sync.
 Blocked or empty storage leaves the first-visit choice. Member cookies are
 separate, as described in link:../0006/README.adoc[RFD 6].
 
+== Settled by the design review, for the owner's review
+
+* Home mounts no live scene. Still images are a separate choice below.
+* On Time, `?q=` filters the chart by chapter, place or year; it is not a
+  second site search. `/` opens the site dialog, and Escape clears the filter.
+* In Places, add `&chapter=<id>` only for an event ID shared by several
+  moments at that place. Without a matching chapter, open the first in bar
+  order. A single-chapter place URL offers a chapter link, not a selected row.
+* The phone time bar keeps the chapter name on its own truncated line, and
+  map labels appear when zoom permits.
+
 == Open decisions
 
-* *Place regions:* whether the sketched region names and boundaries become
-  record data or a derivation rule. Chapter manifest regions are unaffected.
-* *Workspace navigation:* whether World takes the four doors above its own
-  controls, with its phone dial clear of the bottom bar, and whether chapters
-  retain just their existing workspace chrome. B3 used shipped-page captures,
-  not a decision about fitting two sets of controls.
+* *Home stills:* whether Continue and World carry still images.
+* *Place regions:* whether to adopt the nine sketched regions and boundaries
+  as drawn, and if so whether to store them as records or derive them. Chapter
+  manifest regions are unaffected.
+* *Workspace navigation:* design review recommends four doors on World above
+  its own controls, with the phone dial clear of the bottom bar, and leaving
+  chapter chrome as shipped. Alternatively, both workspaces keep their own
+  chrome. The mock used shipped workspace captures and does not settle this.
+
+[[captures]]
+== Design captures
+
+The desktop and phone captures below preserve the mock, not the implementation.
+
+[cols="2,1,1",options="header"]
+|===
+|Screen |1440 px |390 px
+|Returning Home |link:b3/b3-home-1440.jpg[Desktop] |link:b3/b3-home-390.jpg[Phone]
+|First visit |link:b3/b3-home-first-visit-1440.jpg[Desktop] |link:b3/b3-home-first-visit-390.jpg[Phone]
+|Time |link:b3/b3-time-1440.jpg[Desktop] |link:b3/b3-time-390.jpg[Phone]
+|Places, All time |link:b3/b3-places-1440.jpg[Desktop] |link:b3/b3-places-390.jpg[Phone]
+|Places, one moment |link:b3/b3-places-moment-1440.jpg[Desktop] |link:b3/b3-places-moment-390.jpg[Phone]
+|Search |link:b3/b3-search-1440.jpg[Desktop] |link:b3/b3-search-390.jpg[Phone]
+|About |link:b3/b3-about-1440.jpg[Desktop] |link:b3/b3-about-390.jpg[Phone]
+|===
 
 See link:IMPLEMENTATION.adoc#_information_architecture_reset[the implementation checklist].

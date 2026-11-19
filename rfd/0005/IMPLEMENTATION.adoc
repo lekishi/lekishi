@@ -57,9 +57,19 @@ so the two checklists do not double-count.
 
 == Information architecture reset
 
-The current structure is link:IA_B3.adoc[B3]. The earlier checklist below
-retains its states for link:IA_RESET.adoc[the previous proposal]; B3 supersedes
-its world-first Home, culture columns and standalone place and people pages.
+The current structure is link:IA_B3.adoc[B3]. Its checklist:
+
+- [x] Shared four-door navigation with global Search and public About links.
+- [x] Promote Regions in time to `/time` and the campaign board to `/world`.
+- [x] Public `/about`: ways in, reading the board, sources, storage and map attribution.
+- [ ] Rebuild Home around Continue and Recently opened, with a first-visit path.
+- [ ] Build the Places index, map and event bar at `/places`.
+- [ ] Add the shared-place hit to the site search.
+- [ ] Owner decides the Home stills, place-region boundaries and workspace navigation.
+
+The previous proposal's checklist retains its states (link:IA_RESET.adoc[the
+earlier record]); B3 supersedes its world-first Home, culture columns and
+standalone place pages.
 
 - [x] Audit at 39 chapters, walked locally on `main` at 27f5ac3 (2026-10-23, https://claude.ai/artifact/W6pm9RST4rodcNu7VjXN8a[the audit]).
 - [x] Owner's diagnosis recorded: no exploration, chapters on their own organised page with vertical time, relationships not visible, the scene not in the civilization register (2026-10-23).

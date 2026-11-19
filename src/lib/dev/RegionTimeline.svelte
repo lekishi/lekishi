@@ -337,11 +337,11 @@
   }
 
   function onKey(event: KeyboardEvent): void {
-    const typing = (event.target as HTMLElement).closest("input") !== null
-    if (event.key === "/" && !typing) {
-      event.preventDefault()
-      document.getElementById("timeline-search")?.focus()
-    } else if (event.key === "Escape" && !typing) {
+    if (event.defaultPrevented || document.querySelector("dialog[open]")) return
+    const typing =
+      event.target instanceof HTMLElement &&
+      event.target.closest("input, textarea, select, [contenteditable]") !== null
+    if (event.key === "Escape" && !typing) {
       if (selected !== null) choose(null)
       else if (query !== "") search("")
     } else if (
@@ -487,23 +487,20 @@
   </button>
 {/snippet}
 
-<div
-  class="flex h-dvh flex-col overflow-hidden bg-abyss font-interface text-ink"
-  data-dev-page="timeline"
->
+<div class="flex h-full flex-col overflow-hidden bg-abyss font-interface text-ink">
   <header
     class="flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-rule bg-lacquer px-4 py-2.5 max-sm:gap-x-2.5 max-sm:px-3"
   >
-    <a
-      href="/dev"
-      class={[
-        "font-display text-title-sm font-semibold tracking-widest text-ink max-sm:hidden",
-        focusRing,
-      ]}>LEKISHI</a
-    >
     <h1 class="font-display text-title font-semibold tracking-wide max-sm:text-title-sm">
       Regions in time
     </h1>
+    {#if year >= TURN_ERA.start && year <= TURN_ERA.end}
+      <Button href="/world?year={year}" variant="ghost" size="sm" icon="globe"
+        >World in {year}</Button
+      >
+    {:else}
+      <Button href="/world" variant="ghost" size="sm" icon="globe">Open the world</Button>
+    {/if}
     <div
       class="flex gap-1.5 max-sm:order-3 max-sm:w-full max-sm:overflow-x-auto max-sm:[scrollbar-width:none]"
       role="group"
@@ -528,9 +525,9 @@
     <div class="ml-auto flex items-center gap-2">
       <Field
         id="timeline-search"
-        label="Search chapters, places and years"
+        label="Filter {chapters.length} chapters by name, place or year"
         hideLabel
-        placeholder="Search chapters, places, years  /"
+        placeholder="Filter {chapters.length} chapters"
         bind:value={query}
         oninput={search}
         class="w-72 max-lg:w-48 max-sm:w-36"
@@ -805,7 +802,7 @@
         </div>
         <div class="flex gap-2">
           {#if onWorld(c)}
-            <Button href="/dev/world?year={Math.max(TURN_ERA.start, c.window.start)}&chapter={c.id}"
+            <Button href="/world?year={Math.max(TURN_ERA.start, c.window.start)}&chapter={c.id}"
               >On the world</Button
             >
           {/if}

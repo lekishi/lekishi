@@ -1,25 +1,18 @@
 import type { Chapter } from "$lib/atlas/domain"
 import type { ChapterReach, NamedPlaces } from "$lib/dev/world-turn"
-import type { EntryGenerator } from "./$types"
 
 /**
- * The tilted-globe prototype at `/dev/world`, gated like every `/dev` page
- * (see `../design/+page.ts`).
+ * The public campaign board uses only the build's served catalog.
  *
  * The chapters load on the server, as the chapter route's do, so their data
  * reaches the browser as this page's `__data.json` and never as a client
- * chunk. Only the chapters alive in the prototype's turns load, which keeps
- * that file to a few chapters rather than all of them.
+ * chunk. The full chapters in that file are limited to the board's turns.
  */
-export const entries: EntryGenerator = () => (__DEV_PAGES__ ? [{ dev: "dev" }] : [])
-
 export async function load(): Promise<{
   chapters: Chapter[]
   named: NamedPlaces
   reach: ChapterReach[]
 }> {
-  if (!__DEV_PAGES__) return { chapters: [], named: {}, reach: [] }
-
   const [{ SERVED_CHAPTERS }, { loadServedStories }, { TURN_ERA, namedPlaces }] = await Promise.all(
     [
       import("$lib/atlas/chapter-registry"),

@@ -4,7 +4,15 @@
   import type { Chapter, GeoPoint, HistoricalEvent } from "$lib/atlas/domain"
   import { BoardLayer } from "$lib/atlas/renderer/globe/board"
   import Globe from "$lib/atlas/workspace/Globe.svelte"
-  import { Button, Icon, type IconName, focusRing, focusRingOnGold, transition } from "$lib/ui"
+  import {
+    Button,
+    Icon,
+    Logo,
+    type IconName,
+    focusRing,
+    focusRingOnGold,
+    transition,
+  } from "$lib/ui"
   import {
     TURN_ERA,
     glyphOf,
@@ -261,7 +269,7 @@
   >
 {/snippet}
 
-<div class="relative h-dvh overflow-hidden bg-abyss font-interface text-ink" data-dev-page="world">
+<div class="relative h-dvh overflow-hidden bg-abyss font-interface text-ink">
   {#if ready}
     {#key pitch}
       <Globe
@@ -286,12 +294,13 @@
     class="absolute inset-x-0 top-0 z-(--z-chrome) flex h-13 items-center gap-3 border-b border-frame bg-lacquer-glass px-2.5 backdrop-blur-sm md:h-14 md:gap-4 md:px-4"
   >
     <a
-      href="/dev"
-      class={[
-        "hidden font-display text-title-sm font-semibold tracking-widest text-ink md:block",
-        focusRing,
-      ]}>LEKISHI</a
+      href="/"
+      aria-label="Lekishi home"
+      class={["inline-flex h-11 shrink-0 items-center rounded-control", focusRing]}
     >
+      <Logo size={22} class="sm:hidden" />
+      <Logo size={22} wordmark="bilingual" class="hidden sm:inline-flex" />
+    </a>
     <div class="flex items-center gap-1 md:border-l md:border-rule md:pl-4">
       <Button
         variant="icon"

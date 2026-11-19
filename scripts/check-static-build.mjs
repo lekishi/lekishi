@@ -655,9 +655,13 @@ const devPages = [
   { file: "dev.html", page: "index" },
   { file: "dev/design.html", page: "design" },
   { file: "dev/wikidata.html", page: "wikidata" },
-  { file: "dev/world.html", page: "world" },
-  { file: "dev/timeline.html", page: "timeline" },
 ]
+
+for (const route of ["time", "world", "about", "places"]) {
+  if (!existsSync(path.join(buildDirectory, `${route}.html`))) {
+    fail(`the public /${route} page was not prerendered`)
+  }
+}
 
 if (devPagesEnabled()) {
   for (const { file, page } of devPages) {

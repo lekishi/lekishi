@@ -70,6 +70,10 @@ export type ScenePlace = {
   readonly id: string
   readonly label: string
   readonly position: GeoPoint
+  /** An index region label, not evidence for a place at this coordinate. */
+  readonly guideLabel?: boolean
+  /** Additional places represented by the same banner at overview scale. */
+  readonly clusterSize?: number
   readonly mark: PlaceMark
   /** For an identified place, how wide the halo is: a region's is wider than a locality's. */
   readonly precision: "site" | "locality" | "region" | "unspecified"
@@ -135,6 +139,11 @@ export const NO_INSETS: SafeArea = { top: 0, right: 0, bottom: 0, left: 0 }
 export type SceneBoard = {
   readonly lit: readonly { readonly lon: number; readonly lat: number; readonly player: number }[]
   readonly remembered: readonly GeoPoint[]
+  /** Geographic guide polygons classify board tiles, not historical holdings. */
+  readonly regions?: {
+    readonly polygons: readonly (readonly (readonly number[])[])[]
+    readonly strength: number
+  }
   /**
    * The board's pieces: a city on each place a player's story has reached
    * (larger where its story is this turn), and each player's unit, a ship or a
@@ -158,6 +167,7 @@ export type SceneBoard = {
 export type AtlasScene = {
   readonly chapterId: string
   readonly homeView: GeoPoint
+  readonly homeRangeMeters?: number
   readonly timeWindow: { readonly start: number; readonly end: number }
   readonly playhead: number
   readonly playing: boolean

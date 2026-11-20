@@ -10,6 +10,8 @@
     "step-back": "M18 6l-8 6 8 6zM6 6v12",
     "step-forward": "M6 6l8 6-8 6zM18 6v12",
     close: "M6 6l12 12M18 6L6 18",
+    plus: "M5 12h14M12 5v14",
+    minus: "M5 12h14",
     search: "M11 4a7 7 0 1 1 0 14 7 7 0 0 1 0-14zM16 16l4 4",
     "chevron-left": "M15 6l-6 6 6 6",
     "chevron-right": "M9 6l6 6-6 6",

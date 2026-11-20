@@ -4,6 +4,7 @@
     entryYear,
     kindLabel,
     searchIndex,
+    searchSharedPlaces,
     type SearchEntry,
     type SearchHit,
     type SearchIndex,
@@ -74,7 +75,14 @@
           scope: scope === "chapter" ? current : null,
         }),
   )
-  const hits = $derived(groups.flatMap((group) => group.hits))
+  const placeHits = $derived(
+    index !== null && scope === "all" ? searchSharedPlaces(index, query) : [],
+  )
+  const sections = $derived([
+    ...(placeHits.length > 0 ? [{ id: "", name: "Places", window: "", hits: placeHits }] : []),
+    ...groups.map(({ chapter, hits }) => ({ ...chapter, hits })),
+  ])
+  const hits = $derived(sections.flatMap((group) => group.hits))
   const activeHit: SearchHit | undefined = $derived(hits[Math.min(active, hits.length - 1)])
 
   $effect(() => {
@@ -222,21 +230,22 @@
               Names match in any published form: 鑒眞, Jianzhen and Ganjin find the same person.
             </p>
           </div>
-        {:else if groups.length === 0}
+        {:else if sections.length === 0}
           <p class="px-4 py-6 text-body-sm text-ink-dim" data-testid="search-empty">
             Nothing in the published records matches “{query}”.
           </p>
         {:else}
-          {#each groups as group (group.chapter.id)}
-            <section aria-label={group.chapter.name} class="pb-2">
+          {#each sections as group (group.id)}
+            <section aria-label={group.name} class="pb-2">
               <h3
                 class="sticky top-0 z-(--z-chrome) flex items-baseline gap-2 bg-lacquer px-4 py-1.5 text-label font-semibold uppercase text-ink-dim"
               >
-                <span class="truncate">{group.chapter.name}</span>
-                <span class="font-normal tracking-normal text-ink-faint tabular-nums"
-                  >{group.chapter.window}</span
+                <span class="truncate">{group.name}</span>
+                <span
+                  class="font-normal tracking-normal whitespace-nowrap text-ink-faint tabular-nums"
+                  >{group.window}</span
                 >
-                {#if group.chapter.id === current}
+                {#if group.id === current}
                   <span class="font-normal tracking-normal text-gold">· open</span>
                 {/if}
               </h3>
@@ -264,15 +273,19 @@
                     class="mt-0.5 {at === active ? 'text-gold-bright' : 'text-ink-faint'}"
                   />
                   <span class="min-w-0 flex-1">
-                    <span class="flex items-baseline gap-2">
+                    <span class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                       <span
                         class={[
-                          "min-w-0 truncate font-serif text-body",
+                          "min-w-0 max-w-full font-serif text-body wrap-anywhere",
                           at === active ? "text-gold-bright" : "text-ink",
                         ]}>{hit.entry.title}</span
                       >
-                      {#if hit.entry.disputed}<Badge kind="disputed" text="disputed" />{/if}
-                      {#if hit.entry.tradition}<Badge kind="tradition" />{/if}
+                      {#if hit.entry.disputed || hit.entry.tradition}
+                        <span class="flex max-w-full flex-wrap gap-1">
+                          {#if hit.entry.disputed}<Badge kind="disputed" text="disputed" />{/if}
+                          {#if hit.entry.tradition}<Badge kind="tradition" />{/if}
+                        </span>
+                      {/if}
                     </span>
                     <span class="block truncate text-caption text-ink-dim">
                       {kindLabel(hit.entry.kind)}{hit.entry.detail ? ` · ${hit.entry.detail}` : ""}

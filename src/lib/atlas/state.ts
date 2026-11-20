@@ -30,6 +30,8 @@ export type CameraFollow = "following" | "manual"
 export type CameraFocusRequest = {
   readonly recordId: string
   readonly token: number
+  /** An overview or zoom command can ask for a range instead of the default focus height. */
+  readonly rangeMeters?: number
 }
 
 /**

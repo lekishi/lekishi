@@ -1,7 +1,13 @@
 import { beforeAll, describe, expect, it } from "vitest"
 import { loadServedChapter } from "./chapter-catalog"
 import { QIN_CHAPTER, SERVED_CHAPTERS, TANG_CHAPTER } from "./chapter-registry"
-import { buildSearchIndex, searchIndex, type SearchIndex } from "./search-index"
+import {
+  buildSearchIndex,
+  searchIndex,
+  searchSharedPlaces,
+  sharedPlaceEntries,
+  type SearchIndex,
+} from "./search-index"
 
 let index: SearchIndex
 
@@ -76,6 +82,23 @@ describe("the search index", () => {
 
   it("matches nothing for an empty query", () => {
     expect(searchIndex(index, "  ")).toEqual([])
+  })
+
+  it("adds one Places result for a shared place without replacing its chapter results", () => {
+    const publicIndex = { ...index, sharedPlaces: sharedPlaceEntries(index) }
+    expect(searchSharedPlaces(publicIndex, "Dingxiang").map(({ entry }) => entry.href)).toEqual([
+      "/places?place=dingxiang",
+    ])
+    const chapters = searchIndex(publicIndex, "Dingxiang")
+      .flatMap(({ hits }) => hits)
+      .filter(({ entry }) => entry.kind === "place")
+    expect(chapters.map(({ entry }) => entry.href)).toEqual(
+      expect.arrayContaining([
+        "/chapters/zhang-qian-missions-140-115?place=dingxiang",
+        "/chapters/han-xiongnu-wars-133-119?place=dingxiang",
+      ]),
+    )
+    expect(searchSharedPlaces(publicIndex, "Tōdai-ji")).toEqual([])
   })
 })
 

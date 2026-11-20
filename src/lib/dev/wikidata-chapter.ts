@@ -121,6 +121,7 @@ export function wikidataChapter(snapshot: WikidataSnapshot): Chapter {
         position: { lon: item.lon, lat: item.lat },
       },
       placeIds: [placeId],
+      occurrencePlaceIds: [placeId],
       occurrence: occurrenceOf(item),
       note: item.classes.length > 0 ? item.classes.join(", ") : "No class on Wikidata.",
       dispute: null,

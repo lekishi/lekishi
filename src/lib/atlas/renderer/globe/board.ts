@@ -91,6 +91,25 @@ export function hexCenter({ q, r }: Axial): { lon: number; lat: number } {
   return { lon: (HEX_SIZE * Math.sqrt(3) * (q + r / 2)) / HEX_K, lat: HEX_SIZE * 1.5 * r }
 }
 
+/** The one-based guide polygon at a board tile's centre (0 means outside). */
+export function hexRegion(
+  cell: Axial,
+  polygons: readonly (readonly (readonly number[])[])[],
+): number {
+  const { lon, lat } = hexCenter(cell)
+  return (
+    polygons.findIndex((polygon) => {
+      let inside = false
+      for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
+        const [x, y] = polygon[i]
+        const [px, py] = polygon[j]
+        if (y > lat !== py > lat && lon < x + ((px - x) * (lat - y)) / (py - y)) inside = !inside
+      }
+      return inside
+    }) + 1
+  )
+}
+
 /** The texel a hex's centre samples, or -1 off the texture. */
 function texel(cell: Axial): number {
   const { lon, lat } = hexCenter(cell)
@@ -160,6 +179,23 @@ export function boardTexels(
         data[i * 4 + 1] = (point.player % TINTS) + 1
       }
     })
+  }
+
+  // Guide regions must be present on unlit tiles too. Store their ids in the
+  // unused blue channel; they never enter the reach/city instance list.
+  const polygons = board.regions?.polygons
+  if (polygons?.length) {
+    const vertices = polygons.flat()
+    const corners = vertices.map(([lon, lat]) => hexOf(lon, lat))
+    const q0 = Math.min(...corners.map(({ q }) => q)) - 1
+    const q1 = Math.max(...corners.map(({ q }) => q)) + 1
+    const r0 = Math.min(...corners.map(({ r }) => r)) - 1
+    const r1 = Math.max(...corners.map(({ r }) => r)) + 1
+    for (let r = r0; r <= r1; r++)
+      for (let q = q0; q <= q1; q++) {
+        const index = texel({ q, r })
+        if (index >= 0) data[index * 4 + 2] = hexRegion({ q, r }, polygons)
+      }
   }
 
   const cells = [...hexes].map(([i, cell]) => ({
@@ -396,6 +432,7 @@ export class BoardLayer {
   private pieceHexes = new Set<number>()
   private readonly uniforms: {
     readonly uBoard: { value: number }
+    readonly uRegionStrength: { value: number }
     readonly uReach: { value: THREE.DataTexture }
     readonly uClass: { value: THREE.DataTexture }
     readonly uTints: { value: THREE.Color[] }
@@ -403,6 +440,10 @@ export class BoardLayer {
   private last: SceneBoard | null = null
   private lastKey = ""
   private upload: ReturnType<typeof setTimeout> | null = null
+
+  get imageryReady(): boolean {
+    return this.painted.size > 0 && this.upload === null
+  }
 
   constructor(private readonly onChange: () => void = () => {}) {
     this.texture = new THREE.DataTexture(this.texels, TEX_W, TEX_H)
@@ -431,6 +472,7 @@ export class BoardLayer {
     })
     this.uniforms = {
       uBoard: { value: 0 },
+      uRegionStrength: { value: 0 },
       uReach: { value: this.texture },
       uClass: { value: this.classTexture },
       uTints: { value: tints },
@@ -526,6 +568,7 @@ export class BoardLayer {
     this.last = board
     this.lastKey = key
     this.uniforms.uBoard.value = board === null ? 0 : 1
+    this.uniforms.uRegionStrength.value = board?.regions?.strength ?? 0
     this.object.visible = board !== null
     if (board !== null) {
       const { cells } = boardTexels(board, this.texels)
@@ -752,6 +795,7 @@ const f = (n: number) => n.toFixed(6)
 // Mirrors `hexOf`, `hexCenter` and `texel` above.
 const BOARD_COMMON = /* glsl */ `
 uniform float uBoard;
+uniform float uRegionStrength;
 uniform sampler2D uReach;
 uniform sampler2D uClass;
 uniform vec3 uTints[${TINTS}];
@@ -829,6 +873,19 @@ vec4 boardOwnerEdge(vec4 cell, vec2 c, vec3 e, float px) {
   return vec4(tint, 1.0 - smoothstep(px * 1.6, px * 3.4, e.z));
 }
 
+// Tint whole tile faces; compare the nearest edge's neighbour so a guide
+// never crosses a tile, including where a region borders ungrouped ground.
+vec3 boardGuide(vec3 col, vec4 cell, vec2 c, vec3 edge, float px) {
+  if (uRegionStrength <= 0.0) return col;
+  float id = cell.b;
+  vec3 ink = vec3(0.33, 0.34, 0.23);
+  if (id > 0.0) col = mix(col, ink, 0.16 * uRegionStrength);
+  float other = boardCell(c + edge.xy * 2.0 * HEX_INNER).b;
+  if (id == other) return col;
+  float line = 1.0 - smoothstep(px * 0.55, px * 1.5, edge.z);
+  return mix(col, ink, line * uRegionStrength);
+}
+
 // The centre of the hex holding a grid point.
 vec2 boardHex(vec2 hp) {
   vec2 ax = vec2((0.57735027 * hp.x - hp.y / 3.0) / HEX_S, (2.0 / 3.0 * hp.y) / HEX_S);
@@ -903,7 +960,7 @@ void boardShade(inout vec4 diffuse) {
   float gridA = smoothstep(5.0, 16.0, cellPx) * (cell.r < 0.25 ? 0.10 : 0.32);
   col = mix(col, vec3(0.0), (1.0 - smoothstep(0.0, px * 1.3, e.z)) * gridA);
   vec4 edge = boardOwnerEdge(cell, c, e, px);
-  diffuse.rgb = mix(col, edge.rgb, edge.a);
+  diffuse.rgb = boardGuide(mix(col, edge.rgb, edge.a), cell, c, e, px);
 }
 `
 
@@ -1011,8 +1068,9 @@ void boardPrismShade(inout vec4 diffuse) {
 
   if (vClass.z < 0.75) col = boardPaper(col);
   if (vWall < 0.5) {
-    vec4 edge = boardOwnerEdge(boardCell(c), c, e, px);
-    col = mix(col, edge.rgb, edge.a);
+    vec4 cell = boardCell(c);
+    vec4 edge = boardOwnerEdge(cell, c, e, px);
+    col = boardGuide(mix(col, edge.rgb, edge.a), cell, c, e, px);
   }
   diffuse.rgb = col;
 }

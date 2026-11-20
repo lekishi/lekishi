@@ -79,3 +79,20 @@ test("About links to the three ways in and the full map attribution", async ({ p
     "/globe/ATTRIBUTION.txt",
   )
 })
+
+test("Places keeps both tellings of one event and replaces the address when stepping", async ({
+  page,
+}) => {
+  await page.goto("/places?place=dingxiang")
+  await expect(page.getByText("3 moments at 定襄, in 2 chapters")).toBeVisible()
+  await page.getByRole("button", { name: "First moment" }).click()
+  await expect(page).toHaveURL(/event=dingxiang-sorties-123&chapter=zhang-qian-missions-140-115$/)
+  await page.getByRole("button", { name: "Later moment" }).click()
+  const second = /event=dingxiang-sorties-123&chapter=han-xiongnu-wars-133-119$/
+  await expect(page).toHaveURL(second)
+  await page.getByRole("link", { name: "Open this moment in the chapter" }).click()
+  await expect(page).toHaveURL(/chapters\/han-xiongnu-wars-133-119\?event=dingxiang-sorties-123/)
+  await page.goBack()
+  await expect(page).toHaveURL(second)
+  await expect(page.getByText("· 2 of 3", { exact: true })).toBeVisible()
+})

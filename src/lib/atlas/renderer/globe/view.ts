@@ -114,6 +114,8 @@ type MarkerEntry = {
   readonly unit: HTMLSpanElement
   readonly count: HTMLSpanElement
   readonly label: HTMLSpanElement
+  readonly labelText: Text
+  readonly clusterCount: HTMLSpanElement
   world: THREE.Vector3
   labelWidth: number
   screen: { x: number; y: number } | null
@@ -480,6 +482,11 @@ class ThreeGlobeView implements GlobeView {
     const unit = part()
     const count = part()
     const label = part()
+    const labelText = document.createTextNode("")
+    const clusterCount = document.createElement("span")
+    clusterCount.hidden = true
+    clusterCount.className = "order-last font-interface text-caption tabular-nums"
+    label.append(labelText, clusterCount)
     this.overlay.append(root)
     const entry: MarkerEntry = {
       data,
@@ -492,6 +499,8 @@ class ThreeGlobeView implements GlobeView {
       unit,
       count,
       label,
+      labelText,
+      clusterCount,
       world: new THREE.Vector3(),
       labelWidth: 0,
       screen: null,
@@ -507,9 +516,13 @@ class ThreeGlobeView implements GlobeView {
     const hidden = entry.screen === null
     entry.data = data
     entry.look = look
-    entry.root.className = `${look.group} will-change-transform${hidden ? " hidden" : ""}`
+    const placeBanner = data.clusterSize !== undefined
+    const group = placeBanner ? "absolute" : `${look.group} will-change-transform`
+    entry.root.className = `${group}${hidden ? " hidden" : ""}`
     entry.root.dataset.mark = data.mark
-    entry.root.style.zIndex = String(look.priority + 1)
+    // The Places index draws every banner above every dot, not just its own.
+    entry.root.style.zIndex = placeBanner ? "" : String(look.priority + 1)
+    entry.label.style.zIndex = placeBanner ? String(look.priority + 2) : ""
 
     const sized = (element: HTMLElement, className: string | null, size: number) => {
       element.className = className ?? "hidden"
@@ -527,6 +540,12 @@ class ThreeGlobeView implements GlobeView {
     // A banner shows the count on its plate (`marks.ts`); the atlas's labels carry none.
     if ((data.banner ?? null) === null) delete entry.label.dataset.count
     else entry.label.dataset.count = String(data.count)
+    const cluster = data.clusterSize ? `+${data.clusterSize}` : ""
+    if (entry.clusterCount.textContent !== cluster) {
+      entry.clusterCount.textContent = cluster
+      entry.clusterCount.hidden = cluster === ""
+      entry.labelWidth = 0
+    }
 
     if (data.control === null) {
       delete entry.root.dataset.control
@@ -538,11 +557,15 @@ class ThreeGlobeView implements GlobeView {
     entry.count.style.left = `${Math.round(look.hitRadius + 3)}px`
     entry.count.textContent = data.count > 1 ? String(data.count) : ""
 
-    entry.label.className = look.label
+    entry.label.className = data.guideLabel
+      ? "absolute -translate-x-1/2 whitespace-nowrap rounded-control border bg-lacquer-glass px-2 py-1 text-label font-semibold uppercase text-ink"
+      : look.label
+    entry.label.style.borderColor = data.guideLabel ? `var(--color-region-${data.id.slice(7)})` : ""
+    if (data.guideLabel) entry.mark.className = "hidden"
     entry.label.style.bottom = `${look.labelOffset}px`
 
-    if (entry.label.textContent !== data.label || previous.emphasis !== data.emphasis) {
-      entry.label.textContent = data.label
+    if (entry.labelText.data !== data.label || previous.emphasis !== data.emphasis) {
+      entry.labelText.data = data.label
       entry.labelWidth = 0
     }
 
@@ -606,18 +629,44 @@ class ThreeGlobeView implements GlobeView {
       const y = ((1 - projected.y) / 2) * height
       entry.screen = { x, y }
       entry.root.classList.remove("hidden")
-      entry.root.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`
+      if (entry.data.clusterSize !== undefined) {
+        entry.root.style.left = `${x.toFixed(1)}px`
+        entry.root.style.top = `${y.toFixed(1)}px`
+      } else {
+        entry.root.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`
+      }
 
       if (entry.labelWidth === 0) entry.labelWidth = entry.label.offsetWidth
       const { labelHeight, labelOffset, priority } = entry.look
-      boxes.push({
+      if (
+        entry.data.guideLabel &&
+        (x - entry.labelWidth / 2 < this.safeArea.left + 4 ||
+          x + entry.labelWidth / 2 > width - this.safeArea.right - 4 ||
+          y - labelOffset - labelHeight < this.safeArea.top + 4 ||
+          y > height - this.safeArea.bottom - 4)
+      )
+        continue
+      const left =
+        entry.data.clusterSize === undefined
+          ? x - entry.labelWidth / 2
+          : Math.max(4, Math.min(width - entry.labelWidth - 4, x - entry.labelWidth / 2))
+      const preferred = {
         id: entry.data.id,
-        priority,
-        left: x - entry.labelWidth / 2,
+        priority: entry.data.guideLabel ? 2 : priority,
+        left,
         top: y - labelOffset - labelHeight,
         width: entry.labelWidth,
         height: labelHeight,
-      })
+      }
+      boxes.push(preferred)
+      if (entry.data.clusterSize !== undefined && entry.data.emphasis !== "selected") {
+        // A guide label can reserve space above a dot. Try the other side
+        // before dropping the place's banner.
+        const top = y + labelOffset
+        if (top + labelHeight <= height - this.safeArea.bottom - 4) {
+          boxes.push({ ...preferred, top })
+        }
+      }
     }
 
     // The lines' captions compete with place names for room and lose to them
@@ -651,7 +700,12 @@ class ThreeGlobeView implements GlobeView {
     const placed = placeLabelBoxes(boxes)
 
     for (const entry of this.markers.values()) {
-      const show = placed.has(entry.data.id)
+      const box = placed.get(entry.data.id)
+      if (box && entry.screen && entry.data.clusterSize !== undefined) {
+        entry.label.style.left = `${box.left - entry.screen.x + entry.labelWidth / 2}px`
+        entry.label.style.bottom = `${entry.screen.y - box.top - box.height}px`
+      }
+      const show = box !== undefined
 
       if (show !== entry.labelShown) {
         entry.labelShown = show
@@ -670,12 +724,25 @@ class ThreeGlobeView implements GlobeView {
     const rect = this.canvas.getBoundingClientRect()
     const x = clientX - rect.left
     const y = clientY - rect.top
+    const hitsLabel = (entry: MarkerEntry, pad: number) => {
+      if (entry.screen === null || !entry.labelShown) return false
+      const box = entry.label.getBoundingClientRect()
+      return (
+        clientX >= box.left - pad &&
+        clientX <= box.right + pad &&
+        clientY >= box.top - pad &&
+        clientY <= box.bottom + pad
+      )
+    }
+    for (const entry of this.markers.values()) {
+      if (entry.data.clusterSize !== undefined && hitsLabel(entry, 0)) return entry.data.id
+    }
     let nearest: string | null = null
     let nearestDistance = Infinity
     let nearestPriority = -1
 
     for (const entry of this.markers.values()) {
-      if (entry.screen === null) continue
+      if (entry.screen === null || entry.data.guideLabel) continue
       const distance = Math.hypot(entry.screen.x - x, entry.screen.y - y)
       const reach = radiusPx + entry.look.hitRadius
       const priority = entry.look.priority
@@ -695,17 +762,7 @@ class ThreeGlobeView implements GlobeView {
 
     // A shown label is as good a target as its dot.
     for (const entry of this.markers.values()) {
-      if (entry.screen === null || !entry.labelShown) continue
-      const box = entry.label.getBoundingClientRect()
-
-      if (
-        clientX >= box.left - 2 &&
-        clientX <= box.right + 2 &&
-        clientY >= box.top - 2 &&
-        clientY <= box.bottom + 2
-      ) {
-        return entry.data.id
-      }
+      if (hitsLabel(entry, 2)) return entry.data.id
     }
 
     return null
@@ -821,6 +878,12 @@ class ThreeGlobeView implements GlobeView {
     this.updateLight()
     tiles?.update(this.camera, this.container.clientHeight || 1)
     this.renderer.render(this.scene, this.camera)
+    if (this.board) {
+      this.canvas.toggleAttribute(
+        "data-board-ready",
+        !!tiles?.rootsReady && this.board.imageryReady,
+      )
+    }
     this.placeOverlay()
 
     if (!this.warmed && tiles?.rootsReady) {

@@ -1,5 +1,9 @@
 <script lang="ts">
   import SiteFrame from "$lib/atlas/navigation/SiteFrame.svelte"
+  import Places from "$lib/places/Places.svelte"
+  import type { PageProps } from "./$types"
+
+  let { data }: PageProps = $props()
 </script>
 
 <svelte:head>
@@ -11,8 +15,7 @@
 </svelte:head>
 
 <SiteFrame current="/places">
-  <main class="mx-auto max-w-6xl px-4 py-8 sm:px-8">
-    <h1 class="font-display text-display">Places</h1>
-    <p class="mt-3 text-body text-ink-dim">The shared-place index is not available yet.</p>
+  <main>
+    <Places catalogue={data.catalogue} />
   </main>
 </SiteFrame>

@@ -967,6 +967,7 @@ function projectEvent(
       .some((claim) => claim["role"] === "main" && claim["basis"] === "tradition"),
     coda: labelledCoda,
     placeIds: eventPlaces.placeIds,
+    occurrencePlaceIds: eventPlaces.occurrencePlaceIds,
     participants: projectParticipants(entry, actors, errors),
     citations: projectCitations(entry, sourceIds, errors),
   }
@@ -1409,7 +1410,7 @@ function projectEventPlaces(
   entry: PublishedRevision,
   places: Map<string, Place>,
   errors: string[],
-): { placement: EventPlacement; placeIds: string[] } {
+): { placement: EventPlacement; placeIds: string[]; occurrencePlaceIds: string[] } {
   const resolved = listOf(entry.content["places"]).flatMap((referenceValue) => {
     const reference = objectOf(referenceValue)
     const placeId = stringOrUndefined(reference["place_id"])
@@ -1438,6 +1439,17 @@ function projectEventPlaces(
   // A record may reference the same place twice (the schema does not forbid it);
   // the domain carries each place once, in the order it was first referenced.
   const placeIds = [...new Set(resolved.map((candidate) => candidate.place.id))]
+  const occurrencePlaceIds = [
+    ...new Set(
+      resolved
+        .filter(
+          ({ role }) =>
+            role === "site" || role === "start" || role === "end" || role === "waypoint",
+        )
+        .map(({ place }) => place.id),
+    ),
+  ]
+  const references = { placeIds, occurrencePlaceIds }
 
   if (placed !== undefined) {
     return {
@@ -1449,14 +1461,17 @@ function projectEventPlaces(
         precision: placed.place.precision,
         position: placed.position,
       },
-      placeIds,
+      ...references,
     }
   }
 
   const [first] = resolved
 
   if (first === undefined) {
-    return { placement: { kind: "none", placeId: null, label: null, reason: "no-place" }, placeIds }
+    return {
+      placement: { kind: "none", placeId: null, label: null, reason: "no-place" },
+      ...references,
+    }
   }
 
   return {
@@ -1468,7 +1483,7 @@ function projectEventPlaces(
         ? "context-only"
         : "no-position",
     },
-    placeIds,
+    ...references,
   }
 }
 

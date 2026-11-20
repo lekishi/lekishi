@@ -193,6 +193,8 @@ export type HistoricalEvent = {
    * places named them all.
    */
   readonly placeIds: readonly string[]
+  /** Places where the record puts the event: sites, starts, ends, and waypoints. */
+  readonly occurrencePlaceIds: readonly string[]
   /** The event's published participants, in the record's own order. */
   readonly participants: readonly EventParticipant[]
   /** The event's published citations, in the record's own claim order. */

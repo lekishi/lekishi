@@ -91,6 +91,8 @@ export function markerFor(place: ScenePlace): GlobeMarker {
     lon: place.position.lon,
     lat: place.position.lat,
     label: place.label,
+    guideLabel: place.guideLabel,
+    clusterSize: place.clusterSize,
     mark: place.mark,
     precision: place.precision,
     tone: place.tone,
@@ -282,14 +284,18 @@ class GlobeAtlasRenderer implements AtlasRenderer {
     if (!this.homeApplied) {
       this.homeApplied = true
       this.lastHomeToken = scene.homeToken
-      this.view.setView(scene.homeView, this.options.homeHeightMeters, this.options.pitchDeg)
+      this.view.setView(
+        scene.homeView,
+        scene.homeRangeMeters ?? this.options.homeHeightMeters,
+        this.options.pitchDeg,
+      )
     } else if (scene.homeToken !== this.lastHomeToken) {
       // The reader asked for the chapter's opening view again: one flight per
       // request, never on the first sync (which already placed the camera).
       this.lastHomeToken = scene.homeToken
       this.view.flyTo(
         scene.homeView,
-        this.options.homeHeightMeters,
+        scene.homeRangeMeters ?? this.options.homeHeightMeters,
         FLIGHT_MS,
         this.options.pitchDeg,
       )
@@ -312,7 +318,7 @@ class GlobeAtlasRenderer implements AtlasRenderer {
       this.lastFocusToken = scene.cameraFocus.token
       this.view.flyTo(
         scene.cameraTarget,
-        this.options.focusHeightMeters,
+        scene.cameraFocus.rangeMeters ?? this.options.focusHeightMeters,
         FLIGHT_MS,
         this.options.pitchDeg,
       )

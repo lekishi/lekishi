@@ -55,7 +55,22 @@ so the two checklists do not double-count.
 - [x] Home: search first, chapters on the globe and the time ribbon, "Continue where you left off" from browser storage; the not-found page keeps search and the chapter list (2026-10-14, `page.test.ts`).
 - [ ] Browser checks: a linked event opens its card, Back after a search jump returns to the origin, and search is reachable by keyboard alone (RC4).
 
-== Information architecture reset (link:IA_RESET.adoc[the record])
+== Information architecture reset
+
+The current structure is link:IA_B3.adoc[B3]. Its checklist:
+
+- [x] Shared four-door navigation with global Search and public About links (2026-11-19, `e2e/site-navigation.spec.ts`).
+- [x] Promote Regions in time to `/time` and the campaign board to `/world` (2026-11-19, `e2e/site-navigation.spec.ts`).
+- [x] Public `/about`: ways in, reading the board, sources, storage and map attribution (2026-11-19, `e2e/site-navigation.spec.ts`).
+- [ ] Rebuild Home around Continue and Recently opened, with a first-visit path.
+- [ ] Build the Places index, map and event bar at `/places`.
+- [ ] Add the shared-place hit to the site search.
+- [x] Owner keeps the overhead globe and derives Places regions from the board hexes (2026-11-19, link:IA_B3.adoc#places-map-and-regions[Places map and regions]).
+- [ ] Owner decides the Home stills and workspace navigation.
+
+The previous proposal's checklist retains its states (link:IA_RESET.adoc[the
+earlier record]); B3 supersedes its world-first Home, culture columns and
+standalone place pages.
 
 - [x] Audit at 39 chapters, walked locally on `main` at 27f5ac3 (2026-10-23, https://claude.ai/artifact/W6pm9RST4rodcNu7VjXN8a[the audit]).
 - [x] Owner's diagnosis recorded: no exploration, chapters on their own organised page with vertical time, relationships not visible, the scene not in the civilization register (2026-10-23).

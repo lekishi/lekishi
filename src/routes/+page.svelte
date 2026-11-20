@@ -6,9 +6,9 @@
   import { loadDraftCards, memberHinted, signInHref } from "$lib/atlas/members"
   import { lastPosition, type Position } from "$lib/atlas/memory"
   import ChapterGlobe from "$lib/atlas/navigation/ChapterGlobe.svelte"
-  import SearchDialog from "$lib/atlas/navigation/SearchDialog.svelte"
+  import SiteFrame from "$lib/atlas/navigation/SiteFrame.svelte"
   import TimeRibbon from "$lib/atlas/navigation/TimeRibbon.svelte"
-  import { Icon, Logo, focusRing, transition } from "$lib/ui"
+  import { Icon, focusRing, transition } from "$lib/ui"
 
   /**
    * The home page (RFD 5, "Home"): search first, the chapters on the globe and
@@ -43,8 +43,6 @@
     },
   ] as const
 
-  let searchOpen = $state(false)
-  let query = $state("")
   let resume = $state<Position | null>(null)
   // A signed-in member of the lekishi organization also sees the drafts the
   // published site leaves out (RFD 6), after the approved chapters.
@@ -59,22 +57,7 @@
   })
 
   const resumeChapter = $derived(resume ? chapterPresentation(resume.chapterId) : undefined)
-
-  function openSearch(text = "") {
-    query = text
-    searchOpen = true
-  }
-
-  function shortcut(event: KeyboardEvent) {
-    if (event.key !== "/" || event.metaKey || event.ctrlKey || event.altKey) return
-    const target = event.target as HTMLElement | null
-    if (target?.closest("input, textarea, select, [contenteditable='true'], dialog[open]")) return
-    event.preventDefault()
-    openSearch()
-  }
 </script>
-
-<svelte:window onkeydown={shortcut} />
 
 <svelte:head>
   <title>Lekishi · Historical atlas</title>
@@ -84,241 +67,208 @@
   />
 </svelte:head>
 
-<div class="flex min-h-dvh flex-col bg-abyss font-interface text-ink">
-  <header class="flex items-center justify-between gap-4 px-4 py-3 sm:px-8">
-    <a
-      href="/"
-      class={["flex items-center rounded-control text-ink no-underline", focusRing]}
-      aria-label="Lekishi home"
-    >
-      <!-- The caps with 歴史 do not fit beside the navigation on phones. -->
-      <span class="flex sm:hidden"><Logo size={22} wordmark="caps" /></span>
-      <span class="hidden sm:flex"><Logo size={22} wordmark="bilingual" /></span>
-    </a>
-    <nav aria-label="Primary" class="flex items-center gap-1">
-      <a
-        href="#chapters"
-        class={[
-          "rounded-control px-3 py-1.5 text-body-sm text-ink-dim no-underline hover:text-ink",
-          transition,
-          focusRing,
-        ]}>Chapters</a
-      >
-      <button
-        type="button"
-        onclick={() => openSearch()}
-        class={[
-          "inline-flex cursor-pointer items-center gap-1.5 rounded-control px-3 py-1.5 text-body-sm text-ink-dim hover:text-ink",
-          transition,
-          focusRing,
-        ]}
-      >
-        <Icon name="search" size={16} />Search
-      </button>
-    </nav>
-  </header>
-
-  <main class="flex flex-1 flex-col">
-    <!--
+<SiteFrame current="/">
+  {#snippet children(openSearch)}
+    <main class="flex flex-1 flex-col">
+      <!--
       `grid-cols-1` is a minmax(0, 1fr) track: without it the implicit column
       is sized to its widest unbreakable content, the search button's one-line
       placeholder, and the hero runs off a 320 px screen.
     -->
-    <section
-      class="relative mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-10 px-4 pt-10 pb-12 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,28rem)] lg:pt-16"
-    >
-      <div class="flex max-w-2xl flex-col gap-6">
-        <p class="text-label font-semibold uppercase text-gold">A historical atlas</p>
-        <h1 class="font-display text-display text-balance text-ink">
-          History, in the places it happened.
-        </h1>
-        <p class="max-w-xl font-serif text-body text-ink-dim">
-          Follow embassies, voyages and conquests across a globe drawn from real terrain, with every
-          date, dispute and source kept beside the story.
-        </p>
+      <section
+        class="relative mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-10 px-4 pt-10 pb-12 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,28rem)] lg:pt-16"
+      >
+        <div class="flex max-w-2xl flex-col gap-6">
+          <p class="text-label font-semibold uppercase text-gold">A historical atlas</p>
+          <h1 class="font-display text-display text-balance text-ink">
+            History, in the places it happened.
+          </h1>
+          <p class="max-w-xl font-serif text-body text-ink-dim">
+            Follow embassies, voyages and conquests across a globe drawn from real terrain, with
+            every date, dispute and source kept beside the story.
+          </p>
 
-        <button
-          type="button"
-          onclick={() => openSearch()}
-          data-testid="home-search"
-          class={[
-            "group flex h-14 w-full max-w-xl cursor-text items-center gap-3 rounded-plate border border-frame bg-lacquer px-4 text-left shadow-plate hover:border-gold",
-            transition,
-            focusRing,
-          ]}
-        >
-          <Icon name="search" size={20} class="text-gold" />
-          <span class="flex-1 truncate text-body text-ink-faint group-hover:text-ink-dim"
-            >Search people, places, events and years</span
-          >
-          <kbd
-            class="hidden rounded-control border border-rule px-1.5 py-0.5 text-caption text-ink-faint sm:inline"
-            >/</kbd
-          >
-        </button>
-        <div class="-mt-2 flex flex-wrap items-center gap-1.5">
-          <span class="mr-1 text-caption text-ink-faint">Try</span>
-          {#each SUGGESTIONS as suggestion (suggestion)}
-            <button
-              type="button"
-              onclick={() => openSearch(suggestion)}
-              class={[
-                "cursor-pointer rounded-full border border-rule px-3 py-0.5 font-serif text-body-sm text-ink-dim hover:border-gold hover:text-gold-bright",
-                transition,
-                focusRing,
-              ]}>{suggestion}</button
-            >
-          {/each}
-        </div>
-
-        {#if resume && resumeChapter}
-          <a
-            href="{resumeChapter.href}{resume.search}"
-            data-testid="home-continue"
+          <button
+            type="button"
+            onclick={() => openSearch()}
+            data-testid="home-search"
             class={[
-              "group flex max-w-xl items-center gap-3 rounded-plate border border-rule bg-lacquer-raised px-4 py-3 no-underline hover:border-gold",
+              "group flex h-14 w-full max-w-xl cursor-text items-center gap-3 rounded-plate border border-frame bg-lacquer px-4 text-left shadow-plate hover:border-gold",
               transition,
               focusRing,
             ]}
           >
-            <span class="min-w-0 flex-1">
-              <span class="block text-label font-semibold uppercase text-ink-dim"
-                >Continue where you left off</span
+            <Icon name="search" size={20} class="text-gold" />
+            <span class="flex-1 truncate text-body text-ink-faint group-hover:text-ink-dim"
+              >Search people, places, events and years</span
+            >
+            <kbd
+              class="hidden rounded-control border border-rule px-1.5 py-0.5 text-caption text-ink-faint sm:inline"
+              >/</kbd
+            >
+          </button>
+          <div class="-mt-2 flex flex-wrap items-center gap-1.5">
+            <span class="mr-1 text-caption text-ink-faint">Try</span>
+            {#each SUGGESTIONS as suggestion (suggestion)}
+              <button
+                type="button"
+                onclick={() => openSearch(suggestion)}
+                class={[
+                  "cursor-pointer rounded-full border border-rule px-3 py-0.5 font-serif text-body-sm text-ink-dim hover:border-gold hover:text-gold-bright",
+                  transition,
+                  focusRing,
+                ]}>{suggestion}</button
               >
-              <span
-                class="block truncate font-serif text-body text-ink group-hover:text-gold-bright"
-                >{resume.label}</span
-              >
-              <span class="block truncate text-caption text-ink-faint">{resumeChapter.name}</span>
-            </span>
-            <Icon name="arrow-right" size={18} class="text-gold" />
-          </a>
-        {/if}
-      </div>
+            {/each}
+          </div>
 
-      <div
-        aria-hidden="true"
-        class="relative hidden aspect-square w-full overflow-hidden rounded-full border border-frame bg-lacquer shadow-sheet lg:block"
+          {#if resume && resumeChapter}
+            <a
+              href="{resumeChapter.href}{resume.search}"
+              data-testid="home-continue"
+              class={[
+                "group flex max-w-xl items-center gap-3 rounded-plate border border-rule bg-lacquer-raised px-4 py-3 no-underline hover:border-gold",
+                transition,
+                focusRing,
+              ]}
+            >
+              <span class="min-w-0 flex-1">
+                <span class="block text-label font-semibold uppercase text-ink-dim"
+                  >Continue where you left off</span
+                >
+                <span
+                  class="block truncate font-serif text-body text-ink group-hover:text-gold-bright"
+                  >{resume.label}</span
+                >
+                <span class="block truncate text-caption text-ink-faint">{resumeChapter.name}</span>
+              </span>
+              <Icon name="arrow-right" size={18} class="text-gold" />
+            </a>
+          {/if}
+        </div>
+
+        <div
+          aria-hidden="true"
+          class="relative hidden aspect-square w-full overflow-hidden rounded-full border border-frame bg-lacquer shadow-sheet lg:block"
+        >
+          <ChapterGlobe onOpen={(href) => goto(href)} />
+        </div>
+      </section>
+
+      <section
+        id="chapters"
+        aria-labelledby="chapters-heading"
+        class="mx-auto flex w-full max-w-6xl scroll-mt-4 flex-col gap-5 px-4 pb-16 sm:px-8"
       >
-        <ChapterGlobe onOpen={(href) => goto(href)} />
-      </div>
-    </section>
-
-    <section
-      id="chapters"
-      aria-labelledby="chapters-heading"
-      class="mx-auto flex w-full max-w-6xl scroll-mt-4 flex-col gap-5 px-4 pb-16 sm:px-8"
-    >
-      <div class="flex items-baseline justify-between gap-4">
-        <h2 id="chapters-heading" class="font-display text-title text-ink">Chapters</h2>
-        <span class="text-caption text-ink-faint">{cards.length} chapters</span>
-      </div>
-      <div class="rounded-plate border border-rule bg-lacquer px-4 pt-3 pb-1 sm:px-6">
-        <TimeRibbon chapters={cards} />
-      </div>
-      <div class="grid gap-4 md:grid-cols-2">
-        {#each cards as chapter (chapter.id)}
-          <article
-            class="group flex flex-col rounded-plate border border-rule bg-lacquer p-5 shadow-plate transition-[border-color] duration-(--motion-fast) ease-ui hover:border-frame"
-            data-chapter-id={chapter.id}
-          >
-            <p class="flex items-center gap-2 text-label font-semibold uppercase text-gold">
-              <span class="tabular-nums">{windowLabel(chapter.window)}</span>
-              {#if chapter.draft}
-                <!--
+        <div class="flex items-baseline justify-between gap-4">
+          <h2 id="chapters-heading" class="font-display text-title text-ink">Chapters</h2>
+          <span class="text-caption text-ink-faint">{cards.length} chapters</span>
+        </div>
+        <div class="rounded-plate border border-rule bg-lacquer px-4 pt-3 pb-1 sm:px-6">
+          <TimeRibbon chapters={cards} />
+        </div>
+        <div class="grid gap-4 md:grid-cols-2">
+          {#each cards as chapter (chapter.id)}
+            <article
+              class="group flex flex-col rounded-plate border border-rule bg-lacquer p-5 shadow-plate transition-[border-color] duration-(--motion-fast) ease-ui hover:border-frame"
+              data-chapter-id={chapter.id}
+            >
+              <p class="flex items-center gap-2 text-label font-semibold uppercase text-gold">
+                <span class="tabular-nums">{windowLabel(chapter.window)}</span>
+                {#if chapter.draft}
+                  <!--
                   Development and pull-request previews serve drafts, and the
                   published site shows them to signed-in members.
                 -->
-                <span
-                  data-chapter-draft
-                  class="rounded-control border border-current px-1.5 text-danger"
+                  <span
+                    data-chapter-draft
+                    class="rounded-control border border-current px-1.5 text-danger"
+                  >
+                    Draft
+                  </span>
+                {/if}
+              </p>
+              <h3 class="mt-2 font-display text-title text-ink">{chapter.name}</h3>
+              <p class="mt-3 flex-1 font-serif text-body-sm text-ink-dim">{chapter.summary}</p>
+              <div class="mt-5">
+                <a
+                  href={chapter.href}
+                  class={[
+                    "inline-flex items-center gap-2 rounded-control bg-gold px-4 py-2 text-body-sm font-semibold text-on-gold no-underline hover:bg-gold-bright",
+                    transition,
+                    "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-bright",
+                  ]}
                 >
-                  Draft
-                </span>
-              {/if}
-            </p>
-            <h3 class="mt-2 font-display text-title text-ink">{chapter.name}</h3>
-            <p class="mt-3 flex-1 font-serif text-body-sm text-ink-dim">{chapter.summary}</p>
-            <div class="mt-5">
-              <a
-                href={chapter.href}
-                class={[
-                  "inline-flex items-center gap-2 rounded-control bg-gold px-4 py-2 text-body-sm font-semibold text-on-gold no-underline hover:bg-gold-bright",
-                  transition,
-                  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-bright",
-                ]}
-              >
-                Open the chapter<span class="sr-only">: {chapter.name}</span>
-                <Icon name="arrow-right" size={16} />
-              </a>
-            </div>
-            {#if chapter.status !== ""}
-              <!--
+                  Open the chapter<span class="sr-only">: {chapter.name}</span>
+                  <Icon name="arrow-right" size={16} />
+                </a>
+              </div>
+              {#if chapter.status !== ""}
+                <!--
                 Only a draft has a status line, after the entry; an approved
                 chapter's decision lives in its About sheet.
               -->
-              <p class="mt-3 text-caption text-ink-dim">{chapter.status}</p>
-            {/if}
-          </article>
-        {/each}
-      </div>
-    </section>
+                <p class="mt-3 text-caption text-ink-dim">{chapter.status}</p>
+              {/if}
+            </article>
+          {/each}
+        </div>
+      </section>
 
-    <section class="border-t border-rule bg-lacquer">
-      <div class="mx-auto grid w-full max-w-6xl gap-8 px-4 py-12 sm:grid-cols-3 sm:px-8">
-        {#each principles as principle (principle.title)}
-          <div>
-            <Icon name={principle.icon} size={20} class="text-gold" />
-            <h2 class="mt-3 font-serif text-title-sm text-ink">{principle.title}</h2>
-            <p class="mt-1 text-body-sm text-ink-dim">{principle.body}</p>
-          </div>
-        {/each}
-      </div>
-    </section>
-  </main>
+      <section class="border-t border-rule bg-lacquer">
+        <div class="mx-auto grid w-full max-w-6xl gap-8 px-4 py-12 sm:grid-cols-3 sm:px-8">
+          {#each principles as principle (principle.title)}
+            <div>
+              <Icon name={principle.icon} size={20} class="text-gold" />
+              <h2 class="mt-3 font-serif text-title-sm text-ink">{principle.title}</h2>
+              <p class="mt-1 text-body-sm text-ink-dim">{principle.body}</p>
+            </div>
+          {/each}
+        </div>
+      </section>
+    </main>
 
-  <footer
-    class="flex flex-wrap items-center justify-between gap-2 border-t border-rule px-4 py-4 text-caption text-ink-faint sm:px-8"
-  >
-    <div class="flex items-center gap-2">
-      <p>A static site: reading needs no account.</p>
-      {#if member}
-        <!-- A POST, so a link elsewhere cannot sign a member out. -->
-        <form method="POST" action="/auth/logout">
-          <button
-            type="submit"
+    <footer
+      class="flex flex-wrap items-center justify-between gap-2 border-t border-rule px-4 py-4 text-caption text-ink-faint sm:px-8"
+    >
+      <div class="flex items-center gap-2">
+        <p>A static site: reading needs no account.</p>
+        {#if member}
+          <!-- A POST, so a link elsewhere cannot sign a member out. -->
+          <form method="POST" action="/auth/logout">
+            <button
+              type="submit"
+              class={[
+                "cursor-pointer rounded-control text-ink-dim underline decoration-rule underline-offset-2 hover:text-ink",
+                transition,
+                focusRing,
+              ]}>Sign out</button
+            >
+          </form>
+        {:else}
+          <a
             class={[
-              "cursor-pointer rounded-control text-ink-dim underline decoration-rule underline-offset-2 hover:text-ink",
+              "rounded-control text-ink-dim underline decoration-rule underline-offset-2 hover:text-ink",
               transition,
               focusRing,
-            ]}>Sign out</button
+            ]}
+            href={signInHref("/")}
+            data-sveltekit-reload>Members sign in</a
           >
-        </form>
-      {:else}
+        {/if}
+      </div>
+      <p>
+        Elevation: Terrain Tiles (Mapzen and contributors) · Land cover: ESA WorldCover 2021 (CC BY
+        4.0) · Imagery from Natural Earth II ·
         <a
           class={[
             "rounded-control text-ink-dim underline decoration-rule underline-offset-2 hover:text-ink",
             transition,
             focusRing,
           ]}
-          href={signInHref("/")}
-          data-sveltekit-reload>Members sign in</a
+          href="/globe/ATTRIBUTION.txt">Full attribution</a
         >
-      {/if}
-    </div>
-    <p>
-      Elevation: Terrain Tiles (Mapzen and contributors) · Land cover: ESA WorldCover 2021 (CC BY
-      4.0) · Imagery from Natural Earth II ·
-      <a
-        class={[
-          "rounded-control text-ink-dim underline decoration-rule underline-offset-2 hover:text-ink",
-          transition,
-          focusRing,
-        ]}
-        href="/globe/ATTRIBUTION.txt">Full attribution</a
-      >
-    </p>
-  </footer>
-</div>
-
-<SearchDialog open={searchOpen} bind:query onClose={() => (searchOpen = false)} />
+      </p>
+    </footer>
+  {/snippet}
+</SiteFrame>

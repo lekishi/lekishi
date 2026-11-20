@@ -168,6 +168,21 @@
   // The year the guide stands on: the selected chapter's start, else the read year.
   const guide = $derived(selected !== null ? (byId.get(selected)?.window.start ?? year) : year)
   const guideLeft = $derived(Math.max(labelW, X(guide)))
+  const axisLeft = $derived(scrollLeft + labelW)
+  const axisRight = $derived(scrollLeft + clientWidth)
+  const chipLeft = $derived(Math.max(axisLeft + 40, Math.min(axisRight - 40, X(guide))))
+  const chipHalfWidth = $derived(measure(yearLabel(guide), `600 12px ${sans}`) / 2 + 10)
+
+  function showTickLabel(tickX: number, label: string) {
+    // Keep the tick mark, but don't print a clipped year or one under the read-year chip.
+    const left = tickX + 5
+    const right = left + Math.ceil(measure(label, `12px ${sans}`)) + 2
+    return (
+      left >= axisLeft &&
+      right <= axisRight &&
+      (query.trim() !== "" || right <= chipLeft - chipHalfWidth || left >= chipLeft + chipHalfWidth)
+    )
+  }
 
   const paths = $derived.by(() => {
     const from = selected === null ? undefined : layout?.pos.get(selected)
@@ -337,11 +352,11 @@
   }
 
   function onKey(event: KeyboardEvent): void {
-    const typing = (event.target as HTMLElement).closest("input") !== null
-    if (event.key === "/" && !typing) {
-      event.preventDefault()
-      document.getElementById("timeline-search")?.focus()
-    } else if (event.key === "Escape" && !typing) {
+    if (event.defaultPrevented || document.querySelector("dialog[open]")) return
+    const typing =
+      event.target instanceof HTMLElement &&
+      event.target.closest("input, textarea, select, [contenteditable]") !== null
+    if (event.key === "Escape" && !typing) {
       if (selected !== null) choose(null)
       else if (query !== "") search("")
     } else if (
@@ -487,25 +502,22 @@
   </button>
 {/snippet}
 
-<div
-  class="flex h-dvh flex-col overflow-hidden bg-abyss font-interface text-ink"
-  data-dev-page="timeline"
->
+<div class="flex h-full flex-col overflow-hidden bg-abyss font-interface text-ink">
   <header
     class="flex flex-wrap items-center gap-x-4 gap-y-2 border-b border-rule bg-lacquer px-4 py-2.5 max-sm:gap-x-2.5 max-sm:px-3"
   >
-    <a
-      href="/dev"
-      class={[
-        "font-display text-title-sm font-semibold tracking-widest text-ink max-sm:hidden",
-        focusRing,
-      ]}>LEKISHI</a
-    >
     <h1 class="font-display text-title font-semibold tracking-wide max-sm:text-title-sm">
       Regions in time
     </h1>
+    {#if year >= TURN_ERA.start && year <= TURN_ERA.end}
+      <Button href="/world?year={year}" variant="ghost" size="sm" icon="globe"
+        >World in {year}</Button
+      >
+    {:else}
+      <Button href="/world" variant="ghost" size="sm" icon="globe">Open the world</Button>
+    {/if}
     <div
-      class="flex gap-1.5 max-sm:order-3 max-sm:w-full max-sm:overflow-x-auto max-sm:[scrollbar-width:none]"
+      class="flex gap-1.5 max-sm:w-full max-sm:overflow-x-auto max-sm:[scrollbar-width:none]"
       role="group"
       aria-label="Jump to an era"
     >
@@ -525,16 +537,19 @@
         >
       {/each}
     </div>
-    <div class="ml-auto flex items-center gap-2">
-      <Field
-        id="timeline-search"
-        label="Search chapters, places and years"
-        hideLabel
-        placeholder="Search chapters, places, years  /"
-        bind:value={query}
-        oninput={search}
-        class="w-72 max-lg:w-48 max-sm:w-36"
-      />
+    <div class="ml-auto flex items-center gap-2 max-sm:ml-0">
+      <!-- The address initializes the filter; don't accept input before then. -->
+      <fieldset disabled={!ready} class="min-w-0">
+        <Field
+          id="timeline-search"
+          label="Filter {chapters.length} chapters by name, place or year"
+          hideLabel
+          placeholder="Filter {chapters.length} chapters"
+          bind:value={query}
+          oninput={search}
+          class="w-72 max-lg:w-48 max-sm:w-44"
+        />
+      </fieldset>
       {@render zoomButton("−", "Zoom out", 1 / 1.6)}
       <span class="text-caption tabular-nums text-ink-dim max-xl:hidden"
         >≈ {(view.end - view.start).toLocaleString("en")} years in view</span
@@ -575,11 +590,13 @@
                   "pointer-events-none absolute top-0 h-7.5 border-l border-rule pt-1.5 pl-1 text-caption whitespace-nowrap tabular-nums",
                   tick.major ? "text-ink-dim" : "text-ink-faint",
                 ]}
-                style="left: {X(tick.year)}px">{tick.label}</span
+                style="left: {X(tick.year)}px"
               >
+                {#if showTickLabel(X(tick.year), tick.label)}{tick.label}{/if}
+              </span>
             {/each}
             <div
-              class="sticky left-0 flex h-7.5 cursor-default items-center border-r border-rule bg-abyss px-3"
+              class="sticky left-0 flex h-7.5 cursor-default items-center border-r border-rule bg-abyss px-3 max-sm:px-0"
               style="width: {labelW}px"
             >
               {#if !phone}<span class="text-label font-semibold uppercase text-gold">Region</span
@@ -588,10 +605,7 @@
             {#if query.trim() === ""}
               <span
                 class="pointer-events-none absolute top-1 -translate-x-1/2 rounded-control bg-gold px-2 py-0.5 text-caption font-semibold whitespace-nowrap text-on-gold tabular-nums shadow-plate"
-                style="left: {Math.max(
-                  scrollLeft + labelW + 40,
-                  Math.min(scrollLeft + clientWidth - 40, X(guide)),
-                )}px">{yearLabel(guide)}</span
+                style="left: {chipLeft}px">{yearLabel(guide)}</span
               >
             {/if}
           </div>
@@ -805,7 +819,7 @@
         </div>
         <div class="flex gap-2">
           {#if onWorld(c)}
-            <Button href="/dev/world?year={Math.max(TURN_ERA.start, c.window.start)}&chapter={c.id}"
+            <Button href="/world?year={Math.max(TURN_ERA.start, c.window.start)}&chapter={c.id}"
               >On the world</Button
             >
           {/if}

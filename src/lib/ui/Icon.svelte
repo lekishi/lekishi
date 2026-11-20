@@ -48,6 +48,8 @@
     extent: "M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5M12 8.5a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7z",
     "arrow-right": "M5 12h14M13 6l6 6-6 6",
     calendar: "M4 7h16v13H4zM4 11h16M8 4v4M16 4v4",
+    timeline: "M4 6h10M9 12h11M4 18h10M4 4v4M20 10v4M4 16v4",
+    pin: "M19 10c0 5-7 11-7 11s-7-6-7-11a7 7 0 1 1 14 0zM12 8a2 2 0 1 0 0 4 2 2 0 0 0 0-4z",
   } as const
 
   export type IconName = keyof typeof ICONS

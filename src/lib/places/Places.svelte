@@ -23,7 +23,8 @@
   const globeOptions = { ...CAMPAIGN_BOARD, pitchDeg: -90 }
   // Position labels over open tiles rather than in the densest place clusters.
   const labelPositions: Partial<Record<string, GeoPoint>> = {
-    "western-europe": { lon: 9, lat: 50 },
+    "western-europe": { lon: 14, lat: 49 },
+    "north-west-africa": { lon: 12, lat: 27 },
     mediterranean: { lon: 21, lat: 41.5 },
     "mesopotamia-levant": { lon: 45, lat: 30.5 },
     "iran-anatolia": { lon: 59, lat: 26 },
@@ -42,20 +43,19 @@
   let flight = $state(0)
   let mapError = $state(false)
   let barHeight = $state(0)
-  let legendHeight = $state(0)
-  let timeBarOverlaysMap = $state(false)
   let wide = $state(false)
   let mapWidth = $state(0)
   let mapHeight = $state(0)
+  let controlsHeight = $state(0)
   let map: HTMLDivElement
   let rail: HTMLElement
+  let index: HTMLElement
 
   onMount(() => {
     const measure = () => {
       mapWidth = map.clientWidth
       mapHeight = map.clientHeight
-      timeBarOverlaysMap = window.matchMedia("(min-width: 48rem)").matches
-      wide = window.innerWidth >= 1024
+      wide = window.matchMedia("(min-width: 64rem)").matches
     }
     measure()
     const observer = new ResizeObserver(measure)
@@ -69,7 +69,9 @@
   )
   const homeView = $derived(overviewCenter(positions))
   const selected = $derived(shared.find((entry) => entry.id === selection) ?? null)
-  const inset = $derived((timeBarOverlaysMap && selected ? barHeight + 48 : 0) + (wide ? 72 : 0))
+  const inset = $derived(
+    wide ? controlsHeight + 20 + (selected ? barHeight : 0) : selected ? barHeight + 8 : 0,
+  )
   const homeRangeMeters = $derived(overviewRange(positions, homeView, mapWidth, mapHeight, inset))
   const current = $derived(selected?.moments[momentIndex] ?? null)
   const chapter = $derived(selected?.chapters.find(({ id }) => current?.chapterId === id))
@@ -121,7 +123,11 @@
   const height = $derived(camera?.heightMeters ?? homeRangeMeters)
   const clusters = $derived.by(() => {
     const radius = (height * 26) / Math.max(240, mapHeight)
-    const sorted = [...shared].sort((a, b) => b.chapters.length - a.chapters.length)
+    // A place outside the current telling's reach must not stand in for one in it.
+    const active = chapter
+      ? shared.filter((entry) => entry.chapters.some(({ id }) => id === chapter?.id))
+      : shared
+    const sorted = [...active].sort((a, b) => b.chapters.length - a.chapters.length)
     const groups: PlaceEntry[][] = []
     for (const entry of sorted) {
       const position = entry.place.position
@@ -138,7 +144,14 @@
       if (group) group.push(entry)
       else groups.push([entry])
     }
-    return groups
+    return chapter
+      ? [
+          ...groups,
+          ...shared
+            .filter((entry) => entry.place.position && !active.includes(entry))
+            .map((entry) => [entry]),
+        ]
+      : groups
   })
   const scene = $derived.by(() => {
     const base = placesScene(
@@ -152,7 +165,7 @@
         cameraFocus:
           target === null ? null : { token: flight, recordId: selection ?? "", rangeMeters },
         cameraTarget: target,
-        safeArea: { ...NO_INSETS, bottom: inset },
+        safeArea: { ...NO_INSETS, top: wide ? 0 : controlsHeight + 8, bottom: inset },
       },
     )
     const markers = base.places.map((place, index) => ({
@@ -187,13 +200,13 @@
     else flight++
   }
 
-  async function reveal(entry: PlaceEntry) {
+  async function reveal(entry: PlaceEntry, focusRow = false) {
     await tick()
     const row = document.getElementById(`places-row-${entry.id}`)
-    if (row && rail.scrollHeight > rail.clientHeight) {
-      const offset = row.getBoundingClientRect().top - rail.getBoundingClientRect().top
-      rail.scrollTo({ top: rail.scrollTop + offset })
-    }
+    if (!row || selection !== entry.id) return
+    const scroll = wide ? rail : index
+    scroll.scrollTop += row.getBoundingClientRect().top - scroll.getBoundingClientRect().top
+    if (focusRow) row.querySelector("button")?.focus({ preventScroll: true })
   }
 
   function applyAddress(url: URL) {
@@ -219,7 +232,10 @@
       filter = ""
       frameMoment(entry, entry.moments[momentIndex] ?? null)
       void reveal(entry)
-    } else focus(null)
+    } else {
+      focus(null)
+      if (!wide && index) index.scrollTop = 0
+    }
   }
 
   function pop() {
@@ -240,15 +256,14 @@
     missing = ""
     chapterLink = null
     clusterChoices = []
-    focus(entry.place.position)
-    if (fromMap) {
-      filter = ""
-      void reveal(entry)
-    }
+    frameMoment(entry, null)
+    if (fromMap) filter = ""
+    if (fromMap || !wide) void reveal(entry, fromMap)
   }
 
   function chooseMoment(moment: PlaceMoment | null) {
     if (selected === null) return
+    const fromIndex = index.contains(document.activeElement)
     if (moment?.chapterId !== current?.chapterId) frameMoment(selected, moment)
     const url = new URL(window.location.href)
     url.searchParams.delete("chapter")
@@ -265,10 +280,11 @@
     replaceState(url, {})
     missing = ""
     momentIndex = moment === null ? -1 : selected.moments.indexOf(moment)
+    if (!wide) void reveal(selected, fromIndex)
   }
 
   function frameMoment(entry: PlaceEntry, moment: PlaceMoment | null) {
-    if (!moment) return focus(entry.place.position)
+    if (!moment) return focus(entry.place.position, 2_250_000)
     const reach = catalogue.reach[moment.chapterId]
     const center = entry.place.position ?? reach[0]
     if (!center) return focus(null)
@@ -285,8 +301,9 @@
     focus(center, Math.min(13_000_000, radius * 2.8))
     await tick()
     const heading = document.getElementById(`places-region-${key}`)
-    if (heading && rail.scrollHeight > rail.clientHeight)
-      rail.scrollTop += heading.getBoundingClientRect().top - rail.getBoundingClientRect().top
+    const scroll = wide ? rail : index
+    if (heading)
+      scroll.scrollTop += heading.getBoundingClientRect().top - scroll.getBoundingClientRect().top
   }
 
   function selectMap(id: string | null) {
@@ -313,18 +330,29 @@
   {chapter
     ? `Lit hexes are where “${chapter.title}” reaches, never a territory.`
     : "Lit hexes are where the chapters reach. Region lines group the index; neither is a territory."}
-  <a class={["block underline", focusRing]} href="/globe/ATTRIBUTION.txt"
+  <a class={["flex min-h-6 w-fit items-center underline", focusRing]} href="/globe/ATTRIBUTION.txt"
     >Imagery and elevation attribution</a
   >
 {/snippet}
 
+{#snippet momentDetail(moment: PlaceMoment)}
+  {#if moment.tradition}<p class="text-caption text-ink-dim">Tradition</p>{/if}
+  {#if moment.dispute}<p class="text-caption text-ink-dim">{moment.dispute}</p>{/if}
+  <p class="font-serif text-body-sm">{moment.note}</p>
+  <Button variant="ghost" size="sm" href={moment.href}>Open this moment in the chapter</Button>
+{/snippet}
+
 <div
-  class="flex min-w-0 flex-col bg-abyss text-ink lg:grid lg:h-[calc(100dvh-4rem)] lg:grid-cols-[27.5rem_minmax(0,1fr)]"
+  class="flex h-full min-w-0 flex-col bg-abyss text-ink max-lg:[@media(max-height:34rem)]:h-auto max-[800px]:[@media(max-height:34rem)]:pb-[calc(3.5rem+1px+env(safe-area-inset-bottom))] lg:grid lg:grid-cols-[27.5rem_minmax(0,1fr)]"
 >
-  <section aria-label="Places map" class="relative min-w-0 lg:order-2">
+  <section aria-label="Places map" class="relative shrink-0 min-w-0 lg:order-2">
     <div
       bind:this={map}
-      class="relative isolate h-80 overflow-hidden bg-abyss md:h-[76vw] lg:h-full"
+      style:--map-chrome="{selected ? controlsHeight + barHeight + 96 : 0}px"
+      class={[
+        "relative isolate h-[max(var(--map-chrome),min(19rem,43dvh))] overflow-hidden bg-abyss md:h-[max(var(--map-chrome),min(76vw,53dvh))] lg:h-full",
+        !selected && "max-sm:[@media(max-height:43rem)]:h-[12.5rem]",
+      ]}
     >
       {#if mapWidth > 0 && mapHeight > 0}
         <Globe
@@ -345,7 +373,7 @@
       {#if clusterChoices.length}
         <ul
           aria-label="Places at this position"
-          class="absolute right-3 top-3 z-(--z-chrome) max-h-44 overflow-y-auto rounded-plate border border-frame bg-lacquer p-2"
+          class="absolute right-3 top-14 z-(--z-chrome) max-h-28 overflow-y-auto rounded-plate border border-frame bg-lacquer p-2 lg:top-3 lg:max-h-44"
         >
           {#each clusterChoices as entry (entry.id)}
             <li>
@@ -360,7 +388,8 @@
           The map could not load. The place index is still available.
         </p>{/if}
       <div
-        class="absolute inset-x-3 bottom-3 z-(--z-chrome) flex items-end justify-end gap-2 md:bottom-[calc(var(--time-bar)+1.25rem)] lg:justify-between"
+        bind:clientHeight={controlsHeight}
+        class="absolute right-3 top-2 z-(--z-chrome) flex items-end justify-end gap-2 lg:inset-x-3 lg:top-auto lg:bottom-[calc(var(--time-bar)+1.25rem)] lg:justify-between"
         style:--time-bar="{selected ? barHeight : 0}px"
       >
         <p
@@ -386,28 +415,32 @@
     {#if selected}
       <div
         bind:clientHeight={barHeight}
-        class="md:absolute md:inset-x-3 md:bottom-[calc(var(--legend-height)+0.75rem)] md:z-(--z-chrome)"
-        style:--legend-height="{legendHeight}px"
+        class="absolute inset-x-2 bottom-2 z-(--z-chrome) lg:inset-x-3 lg:bottom-3"
       >
         <TimeBar entry={selected} {current} choose={chooseMoment} />
       </div>
     {/if}
-    <p
-      bind:clientHeight={legendHeight}
-      class="border-b border-rule px-3 py-2 text-caption text-ink-dim lg:hidden"
-    >
-      {@render legend()}
-    </p>
   </section>
 
   <section
+    bind:this={index}
     aria-labelledby="places-title"
-    class="flex min-h-0 min-w-0 flex-col bg-lacquer lg:order-1 lg:border-r lg:border-frame"
+    class="min-h-0 min-w-0 flex-1 overflow-y-auto overscroll-contain bg-lacquer max-lg:[@media(max-height:34rem)]:h-48 max-lg:[@media(max-height:34rem)]:flex-none max-lg:[@media(max-height:34rem)]:overscroll-auto lg:order-1 lg:flex lg:flex-col lg:overflow-hidden lg:border-r lg:border-frame"
   >
-    <header class="flex flex-col gap-3 border-b border-rule p-4">
+    <div class="border-b border-rule px-3 py-1 text-caption text-ink-dim lg:hidden">
+      {@render legend()}
+    </div>
+    <header class="flex shrink-0 flex-col gap-2 border-b border-rule px-4 py-2 sm:gap-3 sm:p-4">
       <div>
-        <h1 id="places-title" class="font-display text-display font-semibold">Places</h1>
-        <p class="text-body-sm text-ink-dim">{shared.length} places two or more chapters reach</p>
+        <h1
+          id="places-title"
+          class="font-display text-display font-semibold max-sm:[@media(max-height:43rem)]:text-body"
+        >
+          Places
+        </h1>
+        <p class="text-body-sm text-ink-dim max-sm:[@media(max-height:43rem)]:sr-only">
+          {shared.length} places two or more chapters reach
+        </p>
       </div>
       <Field
         label="Filter places"
@@ -515,6 +548,11 @@
               </button>
               {#if on}
                 <div class="space-y-2 px-4 pb-3">
+                  {#if current}
+                    <div class="space-y-1 lg:hidden">
+                      {@render momentDetail(current)}
+                    </div>
+                  {/if}
                   {#if entry.place.placementNote}<p class="font-serif text-body-sm text-ink-dim">
                       {entry.place.placementNote}
                     </p>{/if}
@@ -561,16 +599,9 @@
                                 {windowLabel(moment)} · {moment.title}
                               </button>
                               {#if current === moment}
-                                {#if moment.tradition}<p class="text-caption text-ink-dim">
-                                    Tradition
-                                  </p>{/if}
-                                {#if moment.dispute}<p class="text-caption text-ink-dim">
-                                    {moment.dispute}
-                                  </p>{/if}
-                                <p class="font-serif text-body-sm">{moment.note}</p>
-                                <Button variant="ghost" size="sm" href={moment.href}
-                                  >Open this moment in the chapter</Button
-                                >
+                                <div class="hidden lg:block">
+                                  {@render momentDetail(moment)}
+                                </div>
                               {/if}
                             </li>
                           {/each}
@@ -587,5 +618,9 @@
         <p class="p-4 text-body-sm text-ink-dim">No shared place matches this filter.</p>
       {/each}
     </div>
+    {#if selected}
+      <!-- Let even the final selected row reach the top of the scrollport. -->
+      <div class="h-full lg:hidden" aria-hidden="true"></div>
+    {/if}
   </section>
 </div>

@@ -96,3 +96,50 @@ test("Places keeps both tellings of one event and replaces the address when step
   await expect(page).toHaveURL(second)
   await expect(page.getByText("· 2 of 3", { exact: true })).toBeVisible()
 })
+
+test("on a short phone Places keeps the map visible and reveals the selected row", async ({
+  page,
+}) => {
+  test.skip((page.viewportSize()?.width ?? 1440) >= 640, "phone layout")
+  await page.setViewportSize({ width: 320, height: 640 })
+  await page.goto("/places?place=rome&event=minucius-co-dictator-217")
+  const map = page.getByRole("region", { name: "Places map" })
+  const index = page.getByRole("region", { name: "Places", exact: true })
+  const row = index.locator("#places-row-rome > button")
+  const aligned = () =>
+    row.evaluate((element) => {
+      const index = element.closest("section")!
+      return Math.abs(element.getBoundingClientRect().top - index.getBoundingClientRect().top)
+    })
+
+  await expect(row).toHaveAttribute("aria-expanded", "true")
+  await expect.poll(aligned).toBeLessThan(2)
+  await expect(
+    index.getByRole("link", { name: "Open this moment in the chapter" }),
+  ).toBeInViewport()
+  const strip = map.getByLabel("Moments, not to scale")
+  expect(await strip.evaluate((element) => element.scrollWidth - element.clientWidth)).toBe(0)
+
+  const mapTop = (await map.boundingBox())!.y
+  await index.evaluate((element) => (element.scrollTop += 300))
+  await expect(row).not.toBeInViewport()
+  expect((await map.boundingBox())!.y).toBe(mapTop)
+
+  const later = map.getByRole("button", { name: "Later moment" })
+  await later.focus()
+  await later.press("Enter")
+  await expect(page).not.toHaveURL(/event=minucius-co-dictator-217$/)
+  await expect(later).toBeFocused()
+  await expect.poll(aligned).toBeLessThan(2)
+
+  const anotherRow = index.locator("#places-row-thebes > button")
+  await anotherRow.focus()
+  await anotherRow.press("ArrowRight")
+  await expect(row).toBeFocused()
+  await expect.poll(aligned).toBeLessThan(2)
+
+  await page.setViewportSize({ width: 568, height: 320 })
+  const closer = map.getByRole("button", { name: "Closer" })
+  await closer.click({ trial: true })
+  await later.click({ trial: true })
+})

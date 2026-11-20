@@ -54,7 +54,7 @@
 
 <svelte:window onkeydown={key} />
 
-<Plate tone="glass" class="flex flex-col gap-2">
+<Plate tone="glass" padded={false} class="flex flex-col gap-1 px-2 py-1.5 sm:gap-2 sm:px-4 sm:py-3">
   <div class="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2">
     <Button
       variant="icon"
@@ -80,14 +80,14 @@
         </p>
       {:else}
         <p class="font-semibold text-body-sm text-gold-bright">All time</p>
-        <p class="font-serif text-body-sm">
+        <p class="truncate font-serif text-body-sm">
           {entry.moments.length}
           {entry.moments.length === 1 ? "moment" : "moments"} at {entry.place.label}, in {new Set(
             entry.moments.map((moment) => moment.chapterId),
           ).size} chapters
         </p>
         {#if span}<p class="text-caption text-ink-dim">
-            {windowLabel(span)} · Step through the moments
+            {windowLabel(span)}<span class="hidden sm:inline"> · Step through the moments</span>
           </p>{/if}
       {/if}
     </div>
@@ -100,7 +100,7 @@
     />
   </div>
   {#if span}
-    <div class="flex min-w-0 items-center gap-2 text-caption text-ink-dim tabular-nums">
+    <div class="flex min-w-0 items-center gap-1 text-caption text-ink-dim tabular-nums sm:gap-2">
       <button
         type="button"
         aria-pressed={current === null}
@@ -113,15 +113,20 @@
       >
       <span class="shrink-0">{yearLabel(span.start)}</span>
       <div
-        class="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto py-1"
+        class="flex min-w-0 flex-1 items-center gap-px py-1 sm:gap-1 sm:overflow-x-auto"
         aria-label="Moments, not to scale"
       >
         {#each runs as run (run.moments[0])}
           {@const region = entry.chapters.find(
             (candidate) => candidate.id === run.moments[0].chapterId,
           )?.region}
-          {#if run.gap > 1}<span class="shrink-0">{run.gap} yr</span>{/if}
-          <div class="flex flex-1 items-center gap-px" style:color="var(--color-region-{region})">
+          {#if run.gap > 1}<span class="hidden shrink-0 sm:inline">{run.gap} yr</span>{/if}
+          <div
+            class="flex min-w-0 items-center gap-px sm:min-w-fit"
+            style:flex-grow={run.moments.length}
+            style:flex-basis="0"
+            style:color="var(--color-region-{region})"
+          >
             {#each run.moments as moment (`${moment.chapterId}/${moment.id}`)}
               {@const on = current === moment}
               <span

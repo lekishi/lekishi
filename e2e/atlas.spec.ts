@@ -227,7 +227,7 @@ test("serves the root page with navigation into the atlas", async ({ page }) => 
   await page.goto("/")
 
   await expect(page.getByRole("heading", { level: 1 })).toBeVisible()
-  await expect(page.locator(`main a[href="${TANG}"]`).first()).toBeVisible()
+  await expect(page.locator(`#chapters a[href="${TANG}"]`)).toBeVisible()
 
   // The root page is not the atlas: it must not mount the workspace.
   await expect(page.getByTestId("atlas-workspace")).toHaveCount(0)

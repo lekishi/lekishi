@@ -16,6 +16,7 @@ export function placesScene(
   const places = entries.flatMap(({ id, place, chapters }): ScenePlace[] => {
     if (place.position === null) return []
     const on = id === selected?.id
+    const reaching = chapterId === null || chapters.some((chapter) => chapter.id === chapterId)
     return [
       {
         id,
@@ -34,12 +35,8 @@ export function placesScene(
         disputed: false,
         tradition: false,
         control: null,
-        eventCount: chapters.length,
-        banner: {
-          tint: STORY_TINT,
-          active: chapterId !== null && chapters.some((chapter) => chapter.id === chapterId),
-          unit: null,
-        },
+        eventCount: reaching ? chapters.length : 0,
+        banner: reaching ? { tint: STORY_TINT, active: chapterId !== null, unit: null } : null,
       },
     ]
   })

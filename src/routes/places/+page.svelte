@@ -14,8 +14,8 @@
   />
 </svelte:head>
 
-<SiteFrame current="/places">
-  <main>
+<SiteFrame current="/places" viewport>
+  <main class="h-full">
     <Places catalogue={data.catalogue} />
   </main>
 </SiteFrame>

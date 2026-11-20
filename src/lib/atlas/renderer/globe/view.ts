@@ -636,6 +636,9 @@ class ThreeGlobeView implements GlobeView {
         entry.root.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`
       }
 
+      // An indexed place can remain a pickable mark without competing for a banner.
+      const indexed = entry.data.clusterSize !== undefined
+      if (indexed && entry.data.banner == null) continue
       if (entry.labelWidth === 0) entry.labelWidth = entry.label.offsetWidth
       const { labelHeight, labelOffset, priority } = entry.look
       if (
@@ -646,10 +649,12 @@ class ThreeGlobeView implements GlobeView {
           y > height - this.safeArea.bottom - 4)
       )
         continue
-      const left =
-        entry.data.clusterSize === undefined
-          ? x - entry.labelWidth / 2
-          : Math.max(4, Math.min(width - entry.labelWidth - 4, x - entry.labelWidth / 2))
+      const minLeft = this.safeArea.left + 4
+      const maxLeft = width - this.safeArea.right - entry.labelWidth - 4
+      if (indexed && maxLeft < minLeft) continue
+      const left = indexed
+        ? Math.max(minLeft, Math.min(maxLeft, x - entry.labelWidth / 2))
+        : x - entry.labelWidth / 2
       const preferred = {
         id: entry.data.id,
         priority: entry.data.guideLabel ? 2 : priority,
@@ -658,12 +663,14 @@ class ThreeGlobeView implements GlobeView {
         width: entry.labelWidth,
         height: labelHeight,
       }
-      boxes.push(preferred)
-      if (entry.data.clusterSize !== undefined && entry.data.emphasis !== "selected") {
+      const fitsVertically = (top: number) =>
+        top >= this.safeArea.top + 4 && top + labelHeight <= height - this.safeArea.bottom - 4
+      if (!indexed || fitsVertically(preferred.top)) boxes.push(preferred)
+      if (indexed) {
         // A guide label can reserve space above a dot. Try the other side
         // before dropping the place's banner.
         const top = y + labelOffset
-        if (top + labelHeight <= height - this.safeArea.bottom - 4) {
+        if (fitsVertically(top)) {
           boxes.push({ ...preferred, top })
         }
       }

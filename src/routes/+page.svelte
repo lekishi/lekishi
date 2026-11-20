@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { onMount } from "svelte"
+  import { onMount, tick } from "svelte"
   import { openedAgo, savedStop, type HomeChapter } from "$lib/atlas/home"
   import { windowLabel } from "$lib/atlas/labels"
   import { loadDraftCards, memberHinted, signInHref } from "$lib/atlas/members"
-  import { recentPositions, type Position } from "$lib/atlas/memory"
+  import { POSITIONS_KEY, recentPositions, type Position } from "$lib/atlas/memory"
   import HomeText from "$lib/atlas/navigation/HomeText.svelte"
   import HomeTime from "$lib/atlas/navigation/HomeTime.svelte"
   import SiteFrame from "$lib/atlas/navigation/SiteFrame.svelte"
@@ -20,6 +20,9 @@
   onMount(() => {
     now = Date.now()
     positions = recentPositions()
+    // Reveal the natural-height reading section only after the saved cards
+    // and the matching World action have been written to the DOM.
+    void tick().then(() => document.documentElement.removeAttribute("data-home-restoring"))
     member = memberHinted()
     if (member) void loadDraftCards().then((loaded) => (drafts = loaded))
   })
@@ -61,6 +64,20 @@
     name="description"
     content="Follow events across places and time in Lekishi, a historical atlas."
   />
+  <!-- On a direct visit this runs before the static starter cards can paint.
+       The shell and the no-JS page stay usable; a failed boot falls back to
+       the prerendered content. This probe never displays storage content. -->
+  {@html `<script>
+    try {
+      const raw = localStorage.getItem(${JSON.stringify(POSITIONS_KEY)});
+      const chapters = raw && JSON.parse(raw)?.chapters;
+      if (chapters && typeof chapters === "object" && Object.keys(chapters).length) {
+        const root = document.documentElement;
+        root.setAttribute("data-home-restoring", "");
+        setTimeout(() => root.removeAttribute("data-home-restoring"), 2000);
+      }
+    } catch {}
+  </script>`}
 </svelte:head>
 
 {#snippet dot(key: RegionKey)}
@@ -94,15 +111,11 @@
 
 <SiteFrame current="/">
   <main
+    data-home-content
     class="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-6 px-4 pt-4 pb-12 min-[800px]:gap-8 min-[800px]:px-8 min-[800px]:pt-6"
   >
     <h1 class="sr-only">Lekishi</h1>
-    <!-- The prerendered start state and the hydrated reader share one slot.
-         Reserve the taller phone layout without moving World during hydration. -->
-    <div
-      class="min-h-136 max-[359px]:min-h-144 min-[800px]:min-h-68 min-[1100px]:min-h-64"
-      data-testid="home-reading-slot"
-    >
+    <div data-testid="home-reading-slot">
       {#if resume}
         {@const chapter = resume.chapter}
         {@const stop = savedStop(chapter, resume.position)}
@@ -233,10 +246,7 @@
           </div>
         </section>
       {:else}
-        <section
-          aria-labelledby="start-heading"
-          class="flex min-w-0 flex-col gap-2 max-sm:min-h-136 max-[359px]:min-h-144"
-        >
+        <section aria-labelledby="start-heading" class="flex min-w-0 flex-col gap-2">
           <div class="flex min-h-8 flex-wrap items-baseline gap-x-3">
             <h2 id="start-heading" class="font-display text-title-sm">Start with a chapter</h2>
             <span class="hidden text-caption text-ink-dim min-[800px]:inline"
@@ -246,10 +256,7 @@
               >About Lekishi</Button
             >
           </div>
-          <div
-            class="grid grid-cols-1 gap-2 max-sm:flex-1 min-[800px]:grid-cols-3"
-            data-testid="home-starters"
-          >
+          <div class="grid grid-cols-1 gap-2 min-[800px]:grid-cols-3" data-testid="home-starters">
             {#each starters as chapter (chapter.id)}
               <a
                 href={chapter.href}
@@ -279,7 +286,9 @@
       {/if}
     </div>
 
-    <div class="grid grid-cols-1 gap-6 min-[1100px]:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+    <div
+      class="grid grid-cols-1 gap-6 min-[800px]:gap-8 min-[1100px]:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"
+    >
       <section class="flex min-w-0 flex-col gap-2" aria-labelledby="world-heading">
         <div class="flex flex-wrap items-baseline gap-x-2">
           <h2 id="world-heading" class="font-display text-title-sm">World</h2>
@@ -422,7 +431,7 @@
     </section>
   </main>
 
-  <footer class="border-t border-rule text-caption text-ink-dim">
+  <footer data-home-content class="border-t border-rule text-caption text-ink-dim">
     <div
       class="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-4 gap-y-2 px-4 py-4 min-[800px]:px-8"
     >

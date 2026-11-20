@@ -19,7 +19,7 @@ export type Position = {
   readonly at: number
 }
 
-const KEY = "lekishi:positions:v1"
+export const POSITIONS_KEY = "lekishi:positions:v1"
 
 type Stored = { readonly last: string | null; readonly chapters: Record<string, Position> }
 
@@ -37,8 +37,11 @@ function isPosition(value: unknown): value is Position {
   return (
     typeof candidate.chapterId === "string" &&
     typeof candidate.search === "string" &&
+    (candidate.search === "" || candidate.search.startsWith("?")) &&
     typeof candidate.label === "string" &&
-    typeof candidate.at === "number"
+    typeof candidate.at === "number" &&
+    Number.isFinite(candidate.at) &&
+    candidate.at >= 0
   )
 }
 
@@ -46,7 +49,7 @@ function read(): Stored {
   const empty: Stored = { last: null, chapters: {} }
 
   try {
-    const raw = storage()?.getItem(KEY)
+    const raw = storage()?.getItem(POSITIONS_KEY)
     if (!raw) return empty
     const parsed: unknown = JSON.parse(raw)
     if (typeof parsed !== "object" || parsed === null) return empty
@@ -70,7 +73,7 @@ export function rememberPosition(position: Position): void {
   try {
     const stored = read()
     storage()?.setItem(
-      KEY,
+      POSITIONS_KEY,
       JSON.stringify({
         last: position.chapterId,
         chapters: { ...stored.chapters, [position.chapterId]: position },
@@ -92,10 +95,18 @@ export function lastPosition(): Position | null {
   return stored.last === null ? null : (stored.chapters[stored.last] ?? null)
 }
 
+/** The last recorded position first (even if the device clock went backwards), then by timestamp. */
+export function recentPositions(): Position[] {
+  const { chapters, last } = read()
+  return Object.values(chapters).sort(
+    (a, b) => Number(b.chapterId === last) - Number(a.chapterId === last) || b.at - a.at,
+  )
+}
+
 /** Forgets every position. */
 export function forgetPositions(): void {
   try {
-    storage()?.removeItem(KEY)
+    storage()?.removeItem(POSITIONS_KEY)
   } catch {
     // Nothing to forget.
   }

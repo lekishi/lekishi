@@ -22,6 +22,8 @@ export type Continent = {
 export type Region = {
   readonly key: RegionKey
   readonly name: string
+  /** The label used in a compact chart when the full name would crowd the bars. */
+  readonly shortName?: string
   /** What the region covers, in a few words, for its row label. */
   readonly note: string
 }
@@ -48,13 +50,29 @@ export const CONTINENTS: readonly Continent[] = [
       {
         key: "central-asia",
         name: "Central Asia & the steppe",
+        shortName: "Central Asia",
         note: "the oases and the Silk Road",
       },
-      { key: "south-asia", name: "South Asia & the Indian Ocean", note: "India and its sea lanes" },
+      {
+        key: "south-asia",
+        name: "South Asia & the Indian Ocean",
+        shortName: "South Asia",
+        note: "India and its sea lanes",
+      },
       { key: "iran-anatolia", name: "Iran & Anatolia", note: "the Persian heartland westward" },
-      { key: "mesopotamia-levant", name: "Mesopotamia & the Levant", note: "the Fertile Crescent" },
+      {
+        key: "mesopotamia-levant",
+        name: "Mesopotamia & the Levant",
+        shortName: "Mesopotamia",
+        note: "the Fertile Crescent",
+      },
       { key: "mediterranean", name: "Mediterranean", note: "Greece, Italy, the islands" },
-      { key: "western-europe", name: "Western Europe", note: "Gaul, the Alps and the north" },
+      {
+        key: "western-europe",
+        name: "Western Europe",
+        shortName: "W. Europe",
+        note: "Gaul, the Alps and the north",
+      },
     ],
   },
   {
@@ -65,6 +83,7 @@ export const CONTINENTS: readonly Continent[] = [
       {
         key: "north-west-africa",
         name: "North & West Africa",
+        shortName: "N & W Africa",
         note: "Carthage to the Atlantic coast",
       },
     ],
@@ -72,12 +91,26 @@ export const CONTINENTS: readonly Continent[] = [
   {
     key: "americas",
     name: "The Americas",
-    regions: [{ key: "americas", name: "The Americas", note: "from the first peoples" }],
+    regions: [
+      {
+        key: "americas",
+        name: "The Americas",
+        shortName: "Americas",
+        note: "from the first peoples",
+      },
+    ],
   },
   {
     key: "oceania",
     name: "Oceania",
-    regions: [{ key: "remote-oceania", name: "Remote Oceania", note: "the Pacific islands" }],
+    regions: [
+      {
+        key: "remote-oceania",
+        name: "Remote Oceania",
+        shortName: "Oceania",
+        note: "the Pacific islands",
+      },
+    ],
   },
 ]
 

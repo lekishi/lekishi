@@ -1,274 +1,450 @@
 <script lang="ts">
-  import { onMount } from "svelte"
-  import { goto } from "$app/navigation"
-  import { CHAPTERS, chapterPresentation, type ChapterCard } from "$lib/atlas/chapters"
+  import { onMount, tick } from "svelte"
+  import { openedAgo, savedStop, type HomeChapter } from "$lib/atlas/home"
   import { windowLabel } from "$lib/atlas/labels"
   import { loadDraftCards, memberHinted, signInHref } from "$lib/atlas/members"
-  import { lastPosition, type Position } from "$lib/atlas/memory"
-  import ChapterGlobe from "$lib/atlas/navigation/ChapterGlobe.svelte"
+  import { POSITIONS_KEY, recentPositions, type Position } from "$lib/atlas/memory"
+  import HomeText from "$lib/atlas/navigation/HomeText.svelte"
+  import HomeTime from "$lib/atlas/navigation/HomeTime.svelte"
   import SiteFrame from "$lib/atlas/navigation/SiteFrame.svelte"
-  import TimeRibbon from "$lib/atlas/navigation/TimeRibbon.svelte"
-  import { Icon, focusRing, transition } from "$lib/ui"
+  import { REGIONS, regionOf, type RegionKey } from "$lib/historical/regions"
+  import { Button, Plate, focusRing, transition } from "$lib/ui"
+  import type { PageProps } from "./$types"
 
-  /**
-   * The home page (RFD 5, "Home"): search first, the chapters on the globe and
-   * on a line of time, and where the reader left off.
-   *
-   * The chapters are peers. Each card carries its name, window, story summary
-   * and an entry, and its recorded editorial decision in small print after the
-   * entry: metadata about the chapter, never its pitch. The cards come from
-   * `chapters.ts`, whose tests pin them against the chapter trees.
-   *
-   * Everything a reader needs is prerendered. The globe, the search index and
-   * "Continue" are additions the browser makes after the page has painted;
-   * without them the page is the same choice in text.
-   */
-  const SUGGESTIONS = ["鑒眞", "秋妻屋浦", "韓非", "新鄭", "754"]
-
-  const principles = [
-    {
-      icon: "globe",
-      title: "Real terrain, nothing rented",
-      body: "Elevation and imagery are built from open data and shipped with the site. No map service, account or token.",
-    },
-    {
-      icon: "calendar",
-      title: "Time as the sources state it",
-      body: "An uncertain date keeps its whole span. The date as the source writes it stays beside the year.",
-    },
-    {
-      icon: "sources",
-      title: "Every claim cited",
-      body: "Citations, disputes, and the places that cannot be located stay visible beside the record.",
-    },
-  ] as const
-
-  let resume = $state<Position | null>(null)
-  // A signed-in member of the lekishi organization also sees the drafts the
-  // published site leaves out (RFD 6), after the approved chapters.
-  let drafts = $state.raw<readonly ChapterCard[]>([])
+  let { data }: PageProps = $props()
+  let positions = $state.raw<Position[]>([])
+  let drafts = $state.raw<HomeChapter[]>([])
   let member = $state(false)
-  const cards = $derived([...CHAPTERS, ...drafts])
+  let now = $state(0)
 
   onMount(() => {
-    resume = lastPosition()
+    now = Date.now()
+    positions = recentPositions()
+    // Reveal the natural-height reading section only after the saved cards
+    // and the matching World action have been written to the DOM.
+    void tick().then(() => document.documentElement.removeAttribute("data-home-restoring"))
     member = memberHinted()
     if (member) void loadDraftCards().then((loaded) => (drafts = loaded))
   })
 
-  const resumeChapter = $derived(resume ? chapterPresentation(resume.chapterId) : undefined)
+  const cards = $derived([...data.chapters, ...drafts])
+  const byId = $derived(new Map(cards.map((chapter) => [chapter.id, chapter])))
+  const saved = $derived(
+    positions
+      .flatMap((position) => {
+        const chapter = byId.get(position.chapterId)
+        return chapter ? [{ chapter, position }] : []
+      })
+      .slice(0, 4),
+  )
+  const resume = $derived(saved[0])
+  const recent = $derived(saved.slice(1))
+  const steps = (chapter: HomeChapter) => chapter.stories[0]?.captions.length ?? 0
+  const starters = $derived(cards.toSorted((a, b) => steps(b) - steps(a)).slice(0, 3))
+  const groups = $derived(
+    REGIONS.map((region) => ({
+      ...region,
+      chapters: cards
+        .filter((chapter) => chapter.region === region.key)
+        .toSorted((a, b) => a.window.start - b.window.start),
+    })),
+  )
+  const peak = $derived(Math.max(1, ...data.world.turns.map(({ events }) => events)))
+  const regionColor = (key: RegionKey) => `var(--color-region-${key})`
+  const footerLink = [
+    "inline-flex min-h-8 items-center rounded-control text-ink-dim underline decoration-rule underline-offset-2 hover:text-ink",
+    transition,
+    focusRing,
+  ]
 </script>
 
 <svelte:head>
   <title>Lekishi · Historical atlas</title>
   <meta
     name="description"
-    content="Lekishi is a historical atlas: follow events across places and time on a globe, with the sources, the uncertainty, and the places it cannot locate kept visible."
+    content="Follow events across places and time in Lekishi, a historical atlas."
   />
+  <!-- On a direct visit this runs before the static starter cards can paint.
+       The shell and the no-JS page stay usable; a failed boot falls back to
+       the prerendered content. This probe never displays storage content. -->
+  {@html `<script>
+    try {
+      const raw = localStorage.getItem(${JSON.stringify(POSITIONS_KEY)});
+      const chapters = raw && JSON.parse(raw)?.chapters;
+      if (chapters && typeof chapters === "object" && Object.keys(chapters).length) {
+        const root = document.documentElement;
+        root.setAttribute("data-home-restoring", "");
+        setTimeout(() => root.removeAttribute("data-home-restoring"), 2000);
+      }
+    } catch {}
+  </script>`}
 </svelte:head>
 
-<SiteFrame current="/">
-  {#snippet children(openSearch)}
-    <main class="flex flex-1 flex-col">
-      <!--
-      `grid-cols-1` is a minmax(0, 1fr) track: without it the implicit column
-      is sized to its widest unbreakable content, the search button's one-line
-      placeholder, and the hero runs off a 320 px screen.
-    -->
-      <section
-        class="relative mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-10 px-4 pt-10 pb-12 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,28rem)] lg:pt-16"
-      >
-        <div class="flex max-w-2xl flex-col gap-6">
-          <p class="text-label font-semibold uppercase text-gold">A historical atlas</p>
-          <h1 class="font-display text-display text-balance text-ink">
-            History, in the places it happened.
-          </h1>
-          <p class="max-w-xl font-serif text-body text-ink-dim">
-            Follow embassies, voyages and conquests across a globe drawn from real terrain, with
-            every date, dispute and source kept beside the story.
-          </p>
+{#snippet dot(key: RegionKey)}
+  <span
+    class="inline-block size-2 shrink-0 rounded-full"
+    style:background={regionColor(key)}
+    aria-hidden="true"
+  ></span>
+{/snippet}
 
-          <button
-            type="button"
-            onclick={() => openSearch()}
-            data-testid="home-search"
+{#snippet draft(chapter: HomeChapter)}
+  {#if chapter.draft}
+    <span
+      data-chapter-draft
+      class="rounded-control border border-current px-1 font-interface text-caption text-danger"
+      title={chapter.status}>Draft</span
+    >
+  {/if}
+{/snippet}
+
+{#snippet meta(chapter: HomeChapter)}
+  <span class="flex flex-wrap items-center gap-x-2 gap-y-1 text-caption text-ink-dim">
+    {@render dot(chapter.region)}
+    <span
+      >{regionOf(chapter.region).name} ·
+      <span class="tabular-nums">{windowLabel(chapter.window)}</span></span
+    >
+    {@render draft(chapter)}
+  </span>
+{/snippet}
+
+<SiteFrame current="/">
+  <main
+    data-home-content
+    class="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-6 px-4 pt-4 pb-12 min-[800px]:gap-8 min-[800px]:px-8 min-[800px]:pt-6"
+  >
+    <h1 class="sr-only">Lekishi</h1>
+    <div data-testid="home-reading-slot">
+      {#if resume}
+        {@const chapter = resume.chapter}
+        {@const stop = savedStop(chapter, resume.position)}
+        {@const hasStill = chapter.id === data.stills.chapterId}
+        <section
+          class="flex min-w-0 flex-col gap-2"
+          aria-labelledby="continue-heading"
+          data-testid="home-resume"
+        >
+          <div class="flex min-h-8 flex-wrap items-baseline gap-x-3 gap-y-1">
+            <h2 id="continue-heading" class="font-display text-title-sm">Continue</h2>
+            <span class="text-caption text-ink-dim">kept on this device only</span>
+          </div>
+          <div
             class={[
-              "group flex h-14 w-full max-w-xl cursor-text items-center gap-3 rounded-plate border border-frame bg-lacquer px-4 text-left shadow-plate hover:border-gold",
-              transition,
-              focusRing,
+              "grid grid-cols-1 items-start gap-3",
+              recent.length > 0 && "min-[800px]:grid-cols-[7fr_5fr]",
             ]}
           >
-            <Icon name="search" size={20} class="text-gold" />
-            <span class="flex-1 truncate text-body text-ink-faint group-hover:text-ink-dim"
-              >Search people, places, events and years</span
-            >
-            <kbd
-              class="hidden rounded-control border border-rule px-1.5 py-0.5 text-caption text-ink-faint sm:inline"
-              >/</kbd
-            >
-          </button>
-          <div class="-mt-2 flex flex-wrap items-center gap-1.5">
-            <span class="mr-1 text-caption text-ink-faint">Try</span>
-            {#each SUGGESTIONS as suggestion (suggestion)}
-              <button
-                type="button"
-                onclick={() => openSearch(suggestion)}
+            <div style:--region={regionColor(chapter.region)}>
+              <Plate
+                tone="solid"
+                padded={false}
                 class={[
-                  "cursor-pointer rounded-full border border-rule px-3 py-0.5 font-serif text-body-sm text-ink-dim hover:border-gold hover:text-gold-bright",
+                  "overflow-hidden border-l-4 border-l-(--region)",
+                  hasStill && "grid min-[800px]:grid-cols-[minmax(0,30%)_minmax(0,1fr)]",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+              >
+                {#if hasStill}
+                  <!-- An opening view of this chapter, not a snapshot of the saved stop. -->
+                  <div class="relative h-20 min-[800px]:h-auto">
+                    <img
+                      src="/home/tang-mission.jpg"
+                      alt=""
+                      width="1040"
+                      height="500"
+                      class="absolute inset-0 size-full object-cover"
+                    />
+                  </div>
+                {/if}
+                <div class="flex min-w-0 max-w-xl flex-col gap-2 px-4 py-3">
+                  {@render meta(chapter)}
+                  <h3 class="line-clamp-2 font-serif text-title">
+                    <HomeText text={chapter.name} />
+                  </h3>
+                  <p class="line-clamp-1 text-body-sm text-ink-dim tabular-nums" title={stop.label}>
+                    <HomeText text={stop.label} />
+                  </p>
+                  {#if stop.step !== undefined}
+                    <div
+                      class="h-1 overflow-hidden rounded-control bg-rule"
+                      role="progressbar"
+                      aria-label="Story progress"
+                      aria-valuenow={stop.step}
+                      aria-valuemax={stop.total}
+                      aria-valuemin={0}
+                    >
+                      <div
+                        class="h-full bg-gold"
+                        style:width={`${(stop.step / stop.total) * 100}%`}
+                      ></div>
+                    </div>
+                  {/if}
+                  <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+                    <Button
+                      variant="primary"
+                      icon="arrow-right"
+                      href={`${chapter.href}${resume.position.search}`}
+                      data-testid="home-continue"
+                      class="tabular-nums"
+                    >
+                      {stop.step === undefined ? "Resume" : `Resume at step ${stop.step}`}
+                    </Button>
+                    <span class="text-caption text-ink-dim tabular-nums"
+                      >opened {openedAgo(resume.position.at, now)}</span
+                    >
+                  </div>
+                  {#if stop.next}
+                    <div class="flex items-baseline gap-2 border-t border-rule pt-2 text-ink-dim">
+                      <span class="text-label font-semibold uppercase">Next</span>
+                      <p class="line-clamp-1 text-body-sm" title={stop.next}>
+                        <HomeText text={stop.next} />
+                      </p>
+                    </div>
+                  {/if}
+                </div>
+              </Plate>
+            </div>
+            {#if recent.length > 0}
+              <Plate tone="solid" padded={false} class="px-2 pt-3 pb-1">
+                <h3 class="px-2 pb-2 text-label font-semibold uppercase text-ink-dim">
+                  Recently opened
+                </h3>
+                <ul data-testid="home-recent" class="divide-y divide-rule border-t border-rule">
+                  {#each recent as { chapter, position } (chapter.id)}
+                    <li>
+                      <a
+                        href={`${chapter.href}${position.search}`}
+                        class={[
+                          "grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-2 rounded-control px-2 py-2 no-underline hover:bg-lacquer-raised",
+                          transition,
+                          focusRing,
+                        ]}
+                      >
+                        {@render dot(chapter.region)}
+                        <span class="min-w-0">
+                          <span class="flex items-center gap-2"
+                            ><span class="block truncate font-serif text-body-sm"
+                              ><HomeText text={chapter.name} /></span
+                            >{@render draft(chapter)}</span
+                          >
+                          <span
+                            class="block truncate text-body-sm text-ink-dim"
+                            title={position.label}><HomeText text={position.label} /></span
+                          >
+                        </span>
+                        <span class="text-caption text-ink-dim tabular-nums"
+                          >{openedAgo(position.at, now)}</span
+                        >
+                      </a>
+                    </li>
+                  {/each}
+                </ul>
+              </Plate>
+            {/if}
+          </div>
+        </section>
+      {:else}
+        <section aria-labelledby="start-heading" class="flex min-w-0 flex-col gap-2">
+          <div class="flex min-h-8 flex-wrap items-baseline gap-x-3">
+            <h2 id="start-heading" class="font-display text-title-sm">Start with a chapter</h2>
+            <span class="hidden text-caption text-ink-dim min-[800px]:inline"
+              >the three longest stories</span
+            >
+            <Button href="/about" variant="ghost" icon="arrow-right" size="sm" class="ml-auto"
+              >About Lekishi</Button
+            >
+          </div>
+          <div class="grid grid-cols-1 gap-2 min-[800px]:grid-cols-3" data-testid="home-starters">
+            {#each starters as chapter (chapter.id)}
+              <a
+                href={chapter.href}
+                style:--region={regionColor(chapter.region)}
+                class={[
+                  "flex min-w-0 flex-col gap-1 rounded-plate border border-rule border-l-4 border-l-(--region) bg-lacquer px-3 py-3 no-underline shadow-sheet hover:bg-lacquer-raised",
                   transition,
                   focusRing,
-                ]}>{suggestion}</button
+                ]}
               >
+                {@render meta(chapter)}
+                <h3 class="line-clamp-2 font-serif text-title-sm">
+                  <HomeText text={chapter.name} />
+                </h3>
+                <div class="flex-1">
+                  <p class="line-clamp-3 font-serif text-body-sm text-ink-dim sm:line-clamp-2">
+                    <HomeText text={chapter.summary} />
+                  </p>
+                </div>
+                <span class="text-caption text-ink-dim tabular-nums"
+                  >{steps(chapter)} steps · {chapter.places} places · {chapter.events} events</span
+                >
+              </a>
             {/each}
           </div>
+        </section>
+      {/if}
+    </div>
 
-          {#if resume && resumeChapter}
-            <a
-              href="{resumeChapter.href}{resume.search}"
-              data-testid="home-continue"
-              class={[
-                "group flex max-w-xl items-center gap-3 rounded-plate border border-rule bg-lacquer-raised px-4 py-3 no-underline hover:border-gold",
-                transition,
-                focusRing,
-              ]}
-            >
-              <span class="min-w-0 flex-1">
-                <span class="block text-label font-semibold uppercase text-ink-dim"
-                  >Continue where you left off</span
-                >
-                <span
-                  class="block truncate font-serif text-body text-ink group-hover:text-gold-bright"
-                  >{resume.label}</span
-                >
-                <span class="block truncate text-caption text-ink-faint">{resumeChapter.name}</span>
-              </span>
-              <Icon name="arrow-right" size={18} class="text-gold" />
-            </a>
-          {/if}
-        </div>
-
-        <div
-          aria-hidden="true"
-          class="relative hidden aspect-square w-full overflow-hidden rounded-full border border-frame bg-lacquer shadow-sheet lg:block"
-        >
-          <ChapterGlobe onOpen={(href) => goto(href)} />
-        </div>
-      </section>
-
-      <section
-        id="chapters"
-        aria-labelledby="chapters-heading"
-        class="mx-auto flex w-full max-w-6xl scroll-mt-4 flex-col gap-5 px-4 pb-16 sm:px-8"
-      >
-        <div class="flex items-baseline justify-between gap-4">
-          <h2 id="chapters-heading" class="font-display text-title text-ink">Chapters</h2>
-          <span class="text-caption text-ink-faint">{cards.length} chapters</span>
-        </div>
-        <div class="rounded-plate border border-rule bg-lacquer px-4 pt-3 pb-1 sm:px-6">
-          <TimeRibbon chapters={cards} />
-        </div>
-        <div class="grid gap-4 md:grid-cols-2">
-          {#each cards as chapter (chapter.id)}
-            <article
-              class="group flex flex-col rounded-plate border border-rule bg-lacquer p-5 shadow-plate transition-[border-color] duration-(--motion-fast) ease-ui hover:border-frame"
-              data-chapter-id={chapter.id}
-            >
-              <p class="flex items-center gap-2 text-label font-semibold uppercase text-gold">
-                <span class="tabular-nums">{windowLabel(chapter.window)}</span>
-                {#if chapter.draft}
-                  <!--
-                  Development and pull-request previews serve drafts, and the
-                  published site shows them to signed-in members.
-                -->
-                  <span
-                    data-chapter-draft
-                    class="rounded-control border border-current px-1.5 text-danger"
-                  >
-                    Draft
-                  </span>
-                {/if}
-              </p>
-              <h3 class="mt-2 font-display text-title text-ink">{chapter.name}</h3>
-              <p class="mt-3 flex-1 font-serif text-body-sm text-ink-dim">{chapter.summary}</p>
-              <div class="mt-5">
-                <a
-                  href={chapter.href}
-                  class={[
-                    "inline-flex items-center gap-2 rounded-control bg-gold px-4 py-2 text-body-sm font-semibold text-on-gold no-underline hover:bg-gold-bright",
-                    transition,
-                    "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-bright",
-                  ]}
-                >
-                  Open the chapter<span class="sr-only">: {chapter.name}</span>
-                  <Icon name="arrow-right" size={16} />
-                </a>
-              </div>
-              {#if chapter.status !== ""}
-                <!--
-                Only a draft has a status line, after the entry; an approved
-                chapter's decision lives in its About sheet.
-              -->
-                <p class="mt-3 text-caption text-ink-dim">{chapter.status}</p>
-              {/if}
-            </article>
-          {/each}
-        </div>
-      </section>
-
-      <section class="border-t border-rule bg-lacquer">
-        <div class="mx-auto grid w-full max-w-6xl gap-8 px-4 py-12 sm:grid-cols-3 sm:px-8">
-          {#each principles as principle (principle.title)}
-            <div>
-              <Icon name={principle.icon} size={20} class="text-gold" />
-              <h2 class="mt-3 font-serif text-title-sm text-ink">{principle.title}</h2>
-              <p class="mt-1 text-body-sm text-ink-dim">{principle.body}</p>
-            </div>
-          {/each}
-        </div>
-      </section>
-    </main>
-
-    <footer
-      class="flex flex-wrap items-center justify-between gap-2 border-t border-rule px-4 py-4 text-caption text-ink-faint sm:px-8"
+    <div
+      class="grid grid-cols-1 gap-6 min-[800px]:gap-8 min-[1100px]:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"
     >
-      <div class="flex items-center gap-2">
-        <p>A static site: reading needs no account.</p>
-        {#if member}
-          <!-- A POST, so a link elsewhere cannot sign a member out. -->
-          <form method="POST" action="/auth/logout">
-            <button
-              type="submit"
-              class={[
-                "cursor-pointer rounded-control text-ink-dim underline decoration-rule underline-offset-2 hover:text-ink",
-                transition,
-                focusRing,
-              ]}>Sign out</button
-            >
-          </form>
-        {:else}
-          <a
-            class={[
-              "rounded-control text-ink-dim underline decoration-rule underline-offset-2 hover:text-ink",
-              transition,
-              focusRing,
-            ]}
-            href={signInHref("/")}
-            data-sveltekit-reload>Members sign in</a
+      <section class="flex min-w-0 flex-col gap-2" aria-labelledby="world-heading">
+        <div class="flex flex-wrap items-baseline gap-x-2">
+          <h2 id="world-heading" class="font-display text-title-sm">World</h2>
+          <span class="text-caption text-ink-dim">the board, one turn a year</span>
+          <Button href="/world" variant="ghost" icon="arrow-right" size="sm" class="ml-auto"
+            >Open the world</Button
           >
-        {/if}
+        </div>
+        <Plate tone="solid" class="relative isolate flex flex-1 flex-col gap-4 overflow-hidden">
+          {#if data.stills.world}
+            <img
+              src="/home/world.jpg"
+              alt=""
+              width="700"
+              height="310"
+              loading="lazy"
+              class="pointer-events-none absolute inset-0 -z-10 size-full object-cover opacity-40"
+            />
+          {/if}
+          <div class="flex flex-wrap items-start justify-between gap-2">
+            <div>
+              <p class="text-label font-semibold uppercase text-gold">Turn</p>
+              <p class="font-serif text-display text-gold-bright tabular-nums">{data.world.year}</p>
+            </div>
+            <Button
+              href={`/world?year=${data.world.start}`}
+              variant={resume ? "secondary" : "primary"}
+              icon="play"
+              class="tabular-nums">Play from {data.world.start}</Button
+            >
+          </div>
+          <div
+            class="flex flex-col gap-2 rounded-control border border-rule bg-lacquer p-2 min-[1100px]:mt-auto min-[1100px]:grow"
+          >
+            <div
+              role="img"
+              aria-label={`Events per turn: ${data.world.turns.map(({ year, events }) => `${year}, ${events}${year === data.world.year ? " (shown turn)" : ""}`).join("; ")}`}
+              class="flex h-16 max-h-40 min-h-16 items-end gap-1 min-[1100px]:grow"
+            >
+              {#each data.world.turns as turn (turn.year)}
+                <span
+                  title={`${turn.year}: ${turn.events} events`}
+                  class={[
+                    "relative min-h-0 flex-1 rounded-t-control",
+                    turn.year === data.world.year ? "bg-gold" : "bg-ink-faint",
+                  ]}
+                  style:height={`${(turn.events / peak) * 100}%`}
+                >
+                  {#if turn.year === data.world.year}<span
+                      class="absolute inset-x-0 -bottom-1 h-0.5 bg-gold"
+                    ></span>{/if}
+                </span>
+              {/each}
+            </div>
+            <div class="flex justify-between text-caption text-ink-dim tabular-nums">
+              <span>{data.world.start}</span><span>events per turn</span><span
+                >{data.world.end}</span
+              >
+            </div>
+            <ul class="flex flex-wrap gap-1" aria-label="Chapters alive this turn">
+              {#each data.world.players as id (id)}
+                {@const chapter = byId.get(id)}
+                {#if chapter}
+                  <li
+                    class="inline-flex items-center gap-2 rounded-control border border-rule px-2 py-1 text-body-sm text-ink-dim"
+                  >
+                    {@render dot(chapter.region)}
+                    <span><HomeText text={chapter.name} /></span>
+                    {@render draft(chapter)}
+                  </li>
+                {/if}
+              {/each}
+            </ul>
+          </div>
+        </Plate>
+      </section>
+
+      <section class="flex min-w-0 flex-col gap-2" aria-labelledby="time-heading">
+        <div class="flex flex-wrap items-baseline gap-x-2">
+          <h2 id="time-heading" class="font-display text-title-sm">Time</h2>
+          <span class="text-caption text-ink-dim tabular-nums"
+            >{cards.length} chapters by region</span
+          >
+          <Button href="/time" variant="ghost" icon="arrow-right" size="sm" class="ml-auto"
+            >Open the timeline</Button
+          >
+        </div>
+        <HomeTime href="/time" {groups} />
+      </section>
+    </div>
+
+    <section id="chapters" class="flex min-w-0 flex-col gap-2" aria-labelledby="chapters-heading">
+      <div class="flex items-baseline gap-3">
+        <h2 id="chapters-heading" class="font-display text-title-sm">Chapters</h2>
+        <span class="text-caption text-ink-dim tabular-nums">{cards.length}, by region</span>
       </div>
-      <p>
-        Elevation: Terrain Tiles (Mapzen and contributors) · Land cover: ESA WorldCover 2021 (CC BY
-        4.0) · Imagery from Natural Earth II ·
-        <a
-          class={[
-            "rounded-control text-ink-dim underline decoration-rule underline-offset-2 hover:text-ink",
-            transition,
-            focusRing,
-          ]}
-          href="/globe/ATTRIBUTION.txt">Full attribution</a
-        >
-      </p>
-    </footer>
-  {/snippet}
+      <div class="divide-y divide-rule border-y border-rule">
+        {#each groups as region (region.key)}
+          {#if region.chapters.length > 0}
+            <div
+              class="grid gap-2 py-3 min-[800px]:grid-cols-[minmax(0,15rem)_minmax(0,1fr)]"
+              data-region={region.key}
+            >
+              <h3 class="flex items-baseline gap-2 text-body-sm font-semibold">
+                {@render dot(region.key)}
+                <span>{region.name}</span><span
+                  class="text-caption font-normal text-ink-dim tabular-nums"
+                  >· {region.chapters.length}</span
+                >
+              </h3>
+              <ul class="flex flex-wrap gap-2">
+                {#each region.chapters as chapter (chapter.id)}
+                  <li class="min-w-0" data-chapter-id={chapter.id}>
+                    <a
+                      href={chapter.href}
+                      class={[
+                        "inline-flex min-h-8 max-w-full flex-wrap items-baseline gap-x-2 gap-y-1 rounded-control border border-rule px-2 py-1 no-underline hover:border-frame hover:bg-lacquer-raised",
+                        transition,
+                        focusRing,
+                      ]}
+                    >
+                      <span class="font-serif text-body-sm text-ink"
+                        ><HomeText text={chapter.name} /></span
+                      >
+                      <span class="text-caption text-ink-dim tabular-nums"
+                        >{windowLabel(chapter.window)}</span
+                      >
+                      {@render draft(chapter)}
+                      {#if chapter.draft && chapter.status}
+                        <span class="w-full text-caption text-ink-dim">{chapter.status}</span>
+                      {/if}
+                    </a>
+                  </li>
+                {/each}
+              </ul>
+            </div>
+          {/if}
+        {/each}
+      </div>
+    </section>
+  </main>
+
+  <footer data-home-content class="border-t border-rule text-caption text-ink-dim">
+    <div
+      class="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-4 gap-y-2 px-4 py-4 min-[800px]:px-8"
+    >
+      <p>Lekishi · a historical atlas</p>
+      <a href="/about" class={footerLink}>About</a>
+      <a href="/about#sources" class={footerLink}>Sources and attribution</a>
+      {#if member}
+        <form method="POST" action="/auth/logout">
+          <button type="submit" class={[footerLink, "cursor-pointer"]}>Sign out</button>
+        </form>
+      {:else}
+        <a href={signInHref("/")} class={footerLink} data-sveltekit-reload>Members sign in</a>
+      {/if}
+    </div>
+  </footer>
 </SiteFrame>

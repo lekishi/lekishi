@@ -11,6 +11,11 @@
 @source "./lib";
 @source "./routes";
 
+/* Home restores device-only reading positions before showing its reading cards. */
+[data-home-restoring] [data-home-content] {
+  visibility: hidden;
+}
+
 /*
  * The self-hosted faces (generated into static/fonts, never committed). Each
  * is a variable font cut to the weights the system uses; `swap` shows text in

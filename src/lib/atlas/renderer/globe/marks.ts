@@ -324,6 +324,15 @@ function markClasses(marker: GlobeMarker): string {
 
 export function markerLook(marker: GlobeMarker): MarkerLook {
   const look = baseLook(marker)
+  // The index keeps places outside the current chapter pickable, not lit.
+  if (marker.clusterSize !== undefined && marker.banner == null)
+    return {
+      ...look,
+      size: 6,
+      mark: `${SHAPE} rounded-full border border-ink-faint`,
+      core: null,
+      pulse: null,
+    }
   return marker.banner == null ? look : bannerLook(marker, marker.banner, look)
 }
 

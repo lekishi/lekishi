@@ -80,14 +80,14 @@
         </p>
       {:else}
         <p class="font-semibold text-body-sm text-gold-bright">All time</p>
-        <p class="font-serif text-body-sm">
+        <p class="truncate font-serif text-body-sm">
           {entry.moments.length}
           {entry.moments.length === 1 ? "moment" : "moments"} at {entry.place.label}, in {new Set(
             entry.moments.map((moment) => moment.chapterId),
           ).size} chapters
         </p>
         {#if span}<p class="text-caption text-ink-dim">
-            {windowLabel(span)} · Step through the moments
+            {windowLabel(span)}<span class="hidden sm:inline"> · Step through the moments</span>
           </p>{/if}
       {/if}
     </div>

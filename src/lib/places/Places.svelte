@@ -343,15 +343,15 @@
 {/snippet}
 
 <div
-  class="flex h-full min-w-0 flex-col bg-abyss text-ink lg:grid lg:grid-cols-[27.5rem_minmax(0,1fr)]"
+  class="flex h-full min-w-0 flex-col bg-abyss text-ink max-lg:[@media(max-height:34rem)]:h-auto max-[800px]:[@media(max-height:34rem)]:pb-[calc(3.5rem+1px+env(safe-area-inset-bottom))] lg:grid lg:grid-cols-[27.5rem_minmax(0,1fr)]"
 >
   <section aria-label="Places map" class="relative shrink-0 min-w-0 lg:order-2">
     <div
       bind:this={map}
-      style:--map-chrome="{selected ? controlsHeight + barHeight + 24 : 0}px"
+      style:--map-chrome="{selected ? controlsHeight + barHeight + 96 : 0}px"
       class={[
         "relative isolate h-[max(var(--map-chrome),min(19rem,43dvh))] overflow-hidden bg-abyss md:h-[max(var(--map-chrome),min(76vw,53dvh))] lg:h-full",
-        !selected && "max-sm:[@media(max-height:43rem)]:h-36",
+        !selected && "max-sm:[@media(max-height:43rem)]:h-[12.5rem]",
       ]}
     >
       {#if mapWidth > 0 && mapHeight > 0}
@@ -425,20 +425,22 @@
   <section
     bind:this={index}
     aria-labelledby="places-title"
-    class="min-h-0 min-w-0 flex-1 overflow-y-auto overscroll-contain bg-lacquer lg:order-1 lg:flex lg:flex-col lg:overflow-hidden lg:border-r lg:border-frame"
+    class="min-h-0 min-w-0 flex-1 overflow-y-auto overscroll-contain bg-lacquer max-lg:[@media(max-height:34rem)]:h-48 max-lg:[@media(max-height:34rem)]:flex-none max-lg:[@media(max-height:34rem)]:overscroll-auto lg:order-1 lg:flex lg:flex-col lg:overflow-hidden lg:border-r lg:border-frame"
   >
-    <div
-      class={[
-        "border-b border-rule px-3 py-2 text-caption text-ink-dim lg:hidden",
-        !selected && "max-sm:[@media(max-height:43rem)]:hidden",
-      ]}
-    >
+    <div class="border-b border-rule px-3 py-1 text-caption text-ink-dim lg:hidden">
       {@render legend()}
     </div>
     <header class="flex shrink-0 flex-col gap-2 border-b border-rule px-4 py-2 sm:gap-3 sm:p-4">
       <div>
-        <h1 id="places-title" class="font-display text-display font-semibold">Places</h1>
-        <p class="text-body-sm text-ink-dim">{shared.length} places two or more chapters reach</p>
+        <h1
+          id="places-title"
+          class="font-display text-display font-semibold max-sm:[@media(max-height:43rem)]:text-body"
+        >
+          Places
+        </h1>
+        <p class="text-body-sm text-ink-dim max-sm:[@media(max-height:43rem)]:sr-only">
+          {shared.length} places two or more chapters reach
+        </p>
       </div>
       <Field
         label="Filter places"
@@ -619,12 +621,6 @@
     {#if selected}
       <!-- Let even the final selected row reach the top of the scrollport. -->
       <div class="h-full lg:hidden" aria-hidden="true"></div>
-    {:else}
-      <div
-        class="hidden border-t border-rule px-3 py-2 text-caption text-ink-dim max-sm:[@media(max-height:43rem)]:block"
-      >
-        {@render legend()}
-      </div>
     {/if}
   </section>
 </div>

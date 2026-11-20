@@ -1120,6 +1120,44 @@ test("starts with three stories and lists every served chapter by region", async
   expect(problems).toEqual([])
 })
 
+test("Home restores Continue before showing the reading section and leaves a normal gap", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.addInitScript(() => {
+    const chapterId = "du-huan-751-762"
+    localStorage.setItem(
+      "lekishi:positions:v1",
+      JSON.stringify({
+        last: chapterId,
+        chapters: { [chapterId]: { chapterId, search: "?step=4", label: "Saved", at: Date.now() } },
+      }),
+    )
+    function watchFirstFrame() {
+      const slot = document.querySelector('[data-testid="home-reading-slot"]')
+      if (!slot || getComputedStyle(slot).visibility !== "visible") {
+        requestAnimationFrame(watchFirstFrame)
+        return
+      }
+      document.documentElement.dataset.firstReadingAction =
+        slot.querySelector('[data-testid="home-continue"]')?.getAttribute("href") ?? "starters"
+    }
+    requestAnimationFrame(watchFirstFrame)
+  })
+  await page.goto("/")
+  await expect(page.locator("html")).toHaveAttribute(
+    "data-first-reading-action",
+    "/chapters/du-huan-751-762?step=4",
+  )
+  await expect(page.getByTestId("home-recent")).toHaveCount(0)
+  const gap = await page.getByTestId("home-resume").evaluate((reading) => {
+    const world = document.getElementById("world-heading")?.closest("section")
+    if (!world) throw new Error("Missing World section")
+    return world.getBoundingClientRect().top - reading.getBoundingClientRect().bottom
+  })
+  expect(gap).toBe(24)
+})
+
 test("offers to continue where the reader left off", async ({ page }) => {
   // The position is kept on this device only, and the home page offers the
   // last one.
